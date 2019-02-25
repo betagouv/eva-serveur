@@ -1,5 +1,9 @@
 fr:
   activerecord:
+    models:
+      administrateur:
+        one: Administrateur
+        other: Administrateurs
     attributes:
       administrateur:
         created_at: Créé le

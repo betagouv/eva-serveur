@@ -1,0 +1,30 @@
+Documentation:
+  Enabled: false
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+    - 'script/**/*'
+    - 'support/**/*'
+    - 'tmp/**/*'
+    - 'test/**/*'
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - 'app/views/**/*'
+    - 'Guardfile'
+  ExcludedMethods:
+    - describe
+    - it
+    - resource
+    - register
+    - register_page
+    - route_param
+    - context
+    - show
+    - controller

@@ -5,11 +5,17 @@ require 'rails_helper'
 describe 'Admin - Administrateur', type: :feature do
   let(:administrateur) { create :administrateur, email: 'administrateur@exemple.fr' }
 
-  context "en tant qu'administrateur", focus: true do
+  context "en tant qu'administrateur" do
     before(:each) { se_connecter_comme_administrateur }
 
-    it 'je peux accèder au BO' do
-      expect(page).to have_content 'Dashboard'
+    it 'Ajouter un nouvel administrateur' do
+      visit new_admin_administrateur_path
+      expect do
+        fill_in :administrateur_email, with: 'jeanmarc@exemple?fr'
+        fill_in :administrateur_password, with: 'billyjoel'
+        fill_in :administrateur_password_confirmation, with: 'billyjoel'
+        click_on 'Créer un administrateur'
+      end.to change(Administrateur, :count)
     end
   end
 end

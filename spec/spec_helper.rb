@@ -38,6 +38,6 @@ RSpec.configure do |config|
     visit '/admin'
     fill_in 'administrateur_email'.to_sym, with: 'administrateur@exemple.fr'
     fill_in 'administrateur_password'.to_sym, with: 'password'
-    click_on 'Login'
+    click_on 'Se connecter'
   end
 end

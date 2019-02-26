@@ -32,8 +32,8 @@ describe 'Evenement API', type: :request do
         expect(Evenement.last.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
       end
 
-      it 'retourne une 200' do
-        expect(response).to have_http_status(200)
+      it 'retourne une 201' do
+        expect(response).to have_http_status(201)
       end
     end
 
@@ -41,7 +41,8 @@ describe 'Evenement API', type: :request do
       before { post '/api/evenements', params: payload_invalide }
 
       it 'retourne une 422' do
-        expect(response.body).to eq "[\"Description doit être rempli(e)\"]"
+        expect(response.body).to eq '["Description doit être rempli(e)"]'
+        expect(response).to have_http_status(422)
       end
     end
   end

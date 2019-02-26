@@ -6,14 +6,14 @@ module Api
       return '' if params['evenement'].blank?
 
       evenement_data = params['evenement']
-      @evenement = Evenement.create!(date: formate_date,
-                                     type_evenement: evenement_data['type_evenement'],
-                                     description: evenement_data['description'])
+      @evenement = Evenement.create(date: formate_date,
+                                    type_evenement: evenement_data['type_evenement'],
+                                    description: evenement_data['description'])
 
       if @evenement.save
         render json: @evenement, status: :created
       else
-        render json: @evenement.errors.full_messages
+        render json: @evenement.errors.full_messages, status: 422
       end
     end
 

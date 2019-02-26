@@ -7,7 +7,7 @@ describe 'Evenement API', type: :request do
     let(:payload) do
       {
         "evenement": {
-          "date": '2019-02-26T09:42:47.186Z',
+          "date": 1_551_111_089_238,
           "type_evenement": 'ouvertureContent',
           "description": 'coucou'
         }
@@ -19,6 +19,7 @@ describe 'Evenement API', type: :request do
 
       it 'Crée un événement' do
         expect(Evenement.count).to eq 1
+        expect(Evenement.last.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
       end
 
       it 'retourne une 200' do

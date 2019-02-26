@@ -3,11 +3,18 @@
 module Api
   class EvenementsController < ActionController::API
     def create
+      return '' if params['evenement'].blank?
+
       evenement_data = params['evenement']
       @evenement = Evenement.create!(date: formate_date,
                                      type_evenement: evenement_data['type_evenement'],
                                      description: evenement_data['description'])
-      render json: @evenement, status: :created
+
+      if @evenement.save
+        render json: @evenement, status: :created
+      else
+        render json: @evenement.errors.full_messages
+      end
     end
 
     private

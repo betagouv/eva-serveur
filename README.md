@@ -48,4 +48,7 @@ L'api est accessible au point `/api`
 }
 ```
 
+## Licence
+
+Ce logiciel et son code source sont distribués sous [licence AGPL](https://www.gnu.org/licenses/why-affero-gpl.fr.html).
 

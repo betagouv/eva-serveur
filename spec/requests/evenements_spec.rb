@@ -9,7 +9,9 @@ describe 'Evenement API', type: :request do
         "evenement": {
           "date": 1_551_111_089_238,
           "type_evenement": 'ouvertureContent',
-          "description": 'coucou'
+          "description": 'coucou',
+          "situation": 'inventaire',
+          "session_id": '07319b2485be9ac4850664cd47cede38'
         }
       }
     end

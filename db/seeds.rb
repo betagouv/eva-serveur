@@ -6,3 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 Administrateur.create!(email: 'administrateur@exemple.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+Evenement.create!(session_id: '1898098HJk8902', situation: 'inventaire', type_evenement: 'ouvertureContenant',
+                  description: JSON.parse(File.read("#{Rails.root}/spec/support/evenement/description.json")),
+                  date: 1551435437658) if Rails.env.development?

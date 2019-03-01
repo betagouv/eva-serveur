@@ -2,6 +2,14 @@
 
 Cette application sert de serveur et d'espace d'administration pour la startup [Compétences Pro](https://github.com/betagouv/competences-pro)
 
+## Adresse du serveur
+https://competences-pro-serveur.scalingo.io
+
+* Accès admin : https://competences-pro-serveur.scalingo.io/admin
+* Point d'API : https://competences-pro-serveur.scalingo.io/api
+
+## Environnement Technique
+
 * Ruby version
 2.5.3
 
@@ -18,13 +26,26 @@ RAS pour le moment
 `rake db:migrate` && `rake db:seed`
 
 * How to run the test suite
-`bundle exec rake spec`
+```
+bundle exec rake spec
+```
 
 * Services (job queues, cache servers, search engines, etc.)
 RAS pour le moment
 
 * Deployment instructions
-À définir
+Pour déployer manuellement sur Scalingo Staging, ajouter le remote `git`
+
+```
+git remote add scalingo git@scalingo.com:competences-pro-serveur.git
+```
+
+Puis lancer le déploiement avec `git` :
+
+```
+git push scalingo master
+```
+
 
 * Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))

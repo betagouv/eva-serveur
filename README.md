@@ -17,8 +17,8 @@ RAS pour le moment
 * Database initialization
 `rake db:migrate` && `rake db:seed`
 
-* How to run the test suite
-`bundle exec rake spec` ou tout simplement lancer `guard`
+* How to run the test suite and rubocop
+`guard`
 
 * Services (job queues, cache servers, search engines, etc.)
 RAS pour le moment

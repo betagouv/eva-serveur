@@ -1,0 +1,26 @@
+fr:
+  activerecord:
+    models:
+      administrateur:
+        one: Administrateur
+        other: Administrateurs
+    attributes:
+      administrateur:
+        created_at: Créé le
+        updated_at: Mis à jour le
+        email: Courriel
+        sign_in_count: Nombre de connexion
+        current_sign_in_at: Dernière connexion
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+  formtastic:
+    actions:
+      administrateur:
+        create: Créer un administrateur
+        update: Modifier
+  active_admin:
+    resources:
+      administrateur:
+        new_model: Créer un administrateur
+        edit_model: Modifier
+        delete_model: Supprimer

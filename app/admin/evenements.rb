@@ -12,6 +12,7 @@ ActiveAdmin.register Evenement do
     column :id
     column :session_id
     column :situation
+    column :type_evenement
     column :description
     column :date
     column :created_at

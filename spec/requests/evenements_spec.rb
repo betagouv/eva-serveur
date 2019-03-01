@@ -8,8 +8,8 @@ describe 'Evenement API', type: :request do
       {
         "evenement": {
           "date": 1_551_111_089_238,
-          "type_evenement": 'ouvertureContent',
-          "description": 'coucou',
+          "nom": 'ouvertureContenant',
+          "donnees": 'coucou',
           "situation": 'inventaire',
           "session_id": 'O8j78U2xcb2'
         }
@@ -20,10 +20,10 @@ describe 'Evenement API', type: :request do
       {
         "evenement": {
           "date": 1_551_111_089_238,
-          "type_evenement": 'ouvertureContent',
+          "nom": 'ouvertureContenant',
           "situation": 'inventaire',
           "session_id": 'O8j78U2xcb2',
-          "description": nil
+          "donnees": nil
         }
       }
     end
@@ -45,7 +45,7 @@ describe 'Evenement API', type: :request do
       before { post '/api/evenements', params: payload_invalide }
 
       it 'retourne une 422' do
-        expect(response.body).to eq '["Description doit être rempli(e)"]'
+        expect(response.body).to eq '["Donnees doit être rempli(e)"]'
         expect(response).to have_http_status(422)
       end
     end

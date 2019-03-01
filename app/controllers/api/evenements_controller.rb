@@ -3,7 +3,7 @@
 module Api
   class EvenementsController < ActionController::API
     def create
-      @evenement = Evenement.create(evenement_params)
+      @evenement = Evenement.new(evenement_params)
 
       if @evenement.save
         render json: @evenement, status: :created
@@ -15,7 +15,7 @@ module Api
     private
 
     def evenement_params
-      parametres = params.require(:evenement).permit(:date, :type_evenement, :description,
+      parametres = params.require(:evenement).permit(:date, :nom, :donnees,
                                                      :session_id, :situation)
       formate_date!(parametres)
     end

@@ -18,7 +18,7 @@ RAS pour le moment
 `rake db:migrate` && `rake db:seed`
 
 * How to run the test suite
-`bundle exec rake spec`
+`bundle exec rake spec` ou tout simplement lancer `guard`
 
 * Services (job queues, cache servers, search engines, etc.)
 RAS pour le moment
@@ -51,4 +51,3 @@ L'api est accessible au point `/api`
 ## Licence
 
 Ce logiciel et son code source sont distribués sous [licence AGPL](https://www.gnu.org/licenses/why-affero-gpl.fr.html).
-

@@ -11,7 +11,7 @@ describe 'Evenement API', type: :request do
           "type_evenement": 'ouvertureContent',
           "description": 'coucou',
           "situation": 'inventaire',
-          "session_id": '07319b2485be9ac4850664cd47cede38'
+          "session_id": 'O8j78U2xcb2'
         }
       }
     end
@@ -21,6 +21,8 @@ describe 'Evenement API', type: :request do
         "evenement": {
           "date": 1_551_111_089_238,
           "type_evenement": 'ouvertureContent',
+          "situation": 'inventaire',
+          "session_id": 'O8j78U2xcb2',
           "description": nil
         }
       }

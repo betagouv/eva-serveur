@@ -5,25 +5,25 @@ Cette application sert de serveur et d'espace d'administration pour la startup [
 * Ruby version
 2.5.3
 
-* System dependencies
+* Dépendance systeme
 PostgreSql
 
 * Configuration
 RAS pour le moment
 
-* Database creation
+* Création de la base
 `rake db:create`
 
-* Database initialization
+* Initialisation de la base
 `rake db:migrate` && `rake db:seed`
 
-* How to run the test suite and rubocop
-`guard`
+* Lancer les tests
+`bundle exec rspec` ou `guard`
 
 * Services (job queues, cache servers, search engines, etc.)
 RAS pour le moment
 
-* Deployment instructions
+* Instruction de déploiement
 À définir
 
 * Espace d'administration

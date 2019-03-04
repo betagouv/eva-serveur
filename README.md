@@ -61,7 +61,7 @@ L'api est accessible au point `/api`
 {
   "evenement": {
     "date": 1551111089238,
-    "type_evenement": "ouvertureContent",
+    "type_evenement": "ouvertureContenant",
     "description": "{'idContenu':'6','type':'ContenantUnitaire','forme':'caisse','quantite':1,'couleur':'gris','posX':52.4,'posY':25.9,'contenu':{'nom':'Terra Cola','image':'/assets/terracola.png?24jVUPB'},'largeur':16.3,'hauteur':9}"
   }
 }

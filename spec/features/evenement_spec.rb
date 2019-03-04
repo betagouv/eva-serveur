@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 describe 'Admin - Evenement', type: :feature do
-  let(:chemin) { "#{Rails.root}/spec/support/evenement/description.json" }
-  let(:description) { JSON.parse(File.read(chemin)) }
+  let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
+  let(:donnees) { JSON.parse(File.read(chemin)) }
   let!(:evenement) do
-    create :evenement, type_evenement: 'ouvertureContenant',
-                       description: description,
+    create :evenement, nom: 'ouvertureContenant',
+                       donnees: donnees,
                        situation: 'inventaire',
                        session_id: '1898098HJk8902'
   end
@@ -17,7 +17,7 @@ describe 'Admin - Evenement', type: :feature do
   it 'Affiche les événements' do
     visit admin_evenements_path
     expect(page).to have_content 'ouvertureContenant'
-    expect(page).to have_content description
+    expect(page).to have_content donnees
     expect(page).to have_content 'inventaire'
     expect(page).to have_content '1898098HJk8902'
   end

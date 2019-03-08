@@ -4,12 +4,15 @@ require 'rails_helper'
 
 describe 'Evenement API', type: :request do
   describe 'POST /evenements' do
+    let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
+    let(:donnees) { File.read(chemin).to_json }
+
     let(:payload_valide) do
       {
         "evenement": {
           "date": 1_551_111_089_238,
           "nom": 'ouvertureContenant',
-          "donnees": 'coucou',
+          "donnees": donnees,
           "situation": 'inventaire',
           "session_id": 'O8j78U2xcb2'
         }

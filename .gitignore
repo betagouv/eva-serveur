@@ -27,3 +27,6 @@
 /config/master.key
 
 .ruby-version
+
+# Ignore locally installed gems
+/vendor/ruby

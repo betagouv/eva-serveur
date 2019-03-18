@@ -10,6 +10,6 @@ return unless  Rails.env.development?
 
 Administrateur.create!(email: 'administrateur@exemple.com', password: 'password', password_confirmation: 'password')
 
-Evenement.create!(session_id: '1898098HJk8902', situation: 'inventaire', type_evenement: 'ouvertureContenant',
-                  description: JSON.parse(File.read("#{Rails.root}/spec/support/evenement/description.json")),
-                  date: 1551435437658)
+Evenement.create!(session_id: '1898098HJk8902', situation: 'inventaire', nom: 'ouvertureContenant',
+                  donnees: JSON.parse(File.read("#{Rails.root}/spec/support/evenement/donnees.json")),
+                  date: Time.now)

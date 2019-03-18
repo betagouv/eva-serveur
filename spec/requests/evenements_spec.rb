@@ -19,11 +19,11 @@ describe 'Evenement API', type: :request do
     let(:payload_invalide) do
       {
         "evenement": {
-          "date": 1_551_111_089_238,
+          "date": nil,
           "nom": 'ouvertureContenant',
           "situation": 'inventaire',
           "session_id": 'O8j78U2xcb2',
-          "donnees": nil
+          "donnees": donnees
         }
       }
     end
@@ -45,7 +45,7 @@ describe 'Evenement API', type: :request do
       before { post '/api/evenements', params: payload_invalide }
 
       it 'retourne une 422' do
-        expect(response.body).to eq '["Donnees doit être rempli(e)"]'
+        expect(response.body).to eq '["Date doit être rempli(e)"]'
         expect(response).to have_http_status(422)
       end
     end

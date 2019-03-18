@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Evenement API', type: :request do
   describe 'POST /evenements' do
     let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
-    let(:donnees) { File.read(chemin).to_json }
+    let(:donnees) { JSON.parse(File.read(chemin)) }
 
     let(:payload_valide) do
       {

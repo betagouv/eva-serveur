@@ -64,6 +64,10 @@ jobs:
           name: Database setup
           command: bin/rails db:create db:schema:load --trace
 
+      - run:
+          name: DB Seed
+          command: RAILS_ENV=development bin/rails db:create db:migrate db:seed --trace
+
       # Run rspec in parallel
       - run:
           name: Run rspec in parallel

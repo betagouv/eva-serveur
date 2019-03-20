@@ -2,14 +2,6 @@
 
 Cette application sert de serveur et d'espace d'administration pour la startup [Compétences Pro](https://github.com/betagouv/competences-pro)
 
-## Adresse du serveur
-https://competences-pro-serveur.scalingo.io
-
-* Accès admin : https://competences-pro-serveur.scalingo.io/admin
-* Point d'API : https://competences-pro-serveur.scalingo.io/api
-
-## Environnement Technique
-
 * Ruby version
 2.5.3
 
@@ -30,19 +22,6 @@ RAS pour le moment
 
 * Services (job queues, cache servers, search engines, etc.)
 RAS pour le moment
-
-* Instruction de déploiement
-Pour déployer manuellement sur Scalingo Staging, ajouter le remote `git`
-
-```
-git remote add scalingo git@scalingo.com:competences-pro-serveur.git
-```
-
-Puis lancer le déploiement avec `git` :
-
-```
-git push scalingo master
-```
 
 
 * Espace d'administration

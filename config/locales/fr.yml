@@ -217,3 +217,16 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
     pm: pm
+  active_admin:
+    resource:
+      index:
+        rapport: Rapport
+      show:
+        essai: Essai %{count}
+        reussite: Réussite
+        abandon: Abandon
+        en_cours: En cours
+        echec: Échec
+        temps: Temps
+        ouverture_contenant: Ouverture de contenant
+        etat: État

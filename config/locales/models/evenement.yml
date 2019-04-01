@@ -2,14 +2,14 @@ fr:
   activerecord:
     models:
       evenement:
-        one: Évenement
-        other: Évenements
+        one: Événement
+        other: Événements
     attributes:
       evenement:
         created_at: Créé le
         updated_at: Mis à jour le
         type_evenement: Type d'événement
-        description: Description
+        donnees: Données
   formtastic:
     actions:
       evenement:

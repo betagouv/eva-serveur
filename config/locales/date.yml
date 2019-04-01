@@ -1,0 +1,10 @@
+fr:
+  date:
+    formats: &formats
+      court: "%d/%m/%Y"
+      anglais: "%Y-%m-%d"
+      mois_et_annee: "%B %Y"
+  time:
+    formats:
+      <<: *formats
+      date_heure: "%d/%m/%Y à %Hh%M"

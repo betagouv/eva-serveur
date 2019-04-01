@@ -13,13 +13,20 @@ describe 'Admin - Evenement', type: :feature do
                        session_id: '1898098HJk8902'
   end
 
-  before(:each) { se_connecter_comme_administrateur }
+  before do
+    se_connecter_comme_administrateur
+    visit admin_evenements_path
+  end
 
   it 'Affiche les événements' do
-    visit admin_evenements_path
     expect(page).to have_content 'ouvertureContenant'
     expect(page).to have_content donnees['type']
     expect(page).to have_content 'inventaire'
     expect(page).to have_content '1898098HJk8902'
+  end
+
+  it "Empêche l'administrateur de créer/modifier un événement" do
+    expect(page).to_not have_content 'Créer'
+    expect(page).to_not have_content 'Modifier'
   end
 end

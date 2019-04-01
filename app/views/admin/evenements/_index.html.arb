@@ -1,0 +1,17 @@
+context.instance_eval do
+  selectable_column
+  column :session_id
+  column :situation
+  column :nom
+  column :donnees
+  column :date do |d|
+    l(d.date, format: :date_heure)
+  end
+  column :created_at do |c_a|
+    l(c_a.created_at, format: :date_heure)
+  end
+  column :updated_at do |u_a|
+    l(u_a.updated_at, format: :date_heure)
+  end
+  actions
+end

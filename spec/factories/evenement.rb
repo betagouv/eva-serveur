@@ -17,13 +17,13 @@ FactoryBot.define do
       nom { 'saisieInventaire' }
       donnees { {} }
 
-      factory :evenement_saisie_inventaire_ok do
+      trait :ok do
         donnees do
           { reussite: true }
         end
       end
 
-      factory :evenement_saisie_inventaire_echec do
+      trait :echec do
         donnees do
           { reussite: false }
         end

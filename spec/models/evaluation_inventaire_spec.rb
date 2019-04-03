@@ -23,7 +23,7 @@ describe EvaluationInventaire do
   it 'est en reussite' do
     evenements = [
       build(:evenement_demarrage),
-      build(:evenement_saisie_inventaire_ok)
+      build(:evenement_saisie_inventaire, :ok)
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation).to be_reussite
@@ -34,7 +34,7 @@ describe EvaluationInventaire do
   it 'est en echec' do
     evenements = [
       build(:evenement_demarrage),
-      build(:evenement_saisie_inventaire_echec)
+      build(:evenement_saisie_inventaire, :echec)
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation).to_not be_reussite
@@ -66,7 +66,7 @@ describe EvaluationInventaire do
   it 'retourne le temps total' do
     evenements = [
       build(:evenement_demarrage, date: 10.minutes.ago),
-      build(:evenement_saisie_inventaire_ok, date: 4.minutes.ago)
+      build(:evenement_saisie_inventaire, :ok, date: 4.minutes.ago)
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation.temps_total).to be_within(0.1).of(360)
@@ -84,10 +84,10 @@ describe EvaluationInventaire do
 
   it "retourne le nombre d'essai de validation" do
     evenements = [
-      build(:evenement_saisie_inventaire_echec),
-      build(:evenement_saisie_inventaire_echec),
-      build(:evenement_saisie_inventaire_echec),
-      build(:evenement_saisie_inventaire_ok)
+      build(:evenement_saisie_inventaire, :echec),
+      build(:evenement_saisie_inventaire, :echec),
+      build(:evenement_saisie_inventaire, :echec),
+      build(:evenement_saisie_inventaire, :ok)
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation.nombre_essais_validation).to eql(4)
@@ -99,8 +99,8 @@ describe EvaluationInventaire do
       build(:evenement_ouverture_contenant, date: 8.minutes.ago),
       build(:evenement_ouverture_contenant, date: 8.minutes.ago),
       build(:evenement_ouverture_contenant, date: 8.minutes.ago),
-      build(:evenement_saisie_inventaire_echec, date: 7.minutes.ago),
-      build(:evenement_saisie_inventaire_ok, date: 5.minutes.ago)
+      build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
+      build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago)
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation.essais.size).to eql(2)

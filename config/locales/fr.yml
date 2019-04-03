@@ -221,7 +221,9 @@ fr:
     resource:
       index:
         rapport: Rapport
-      show:
+  admin:
+    evaluations:
+      evaluation:
         essai: Essai %{count}
         reussite: Réussite
         abandon: Abandon

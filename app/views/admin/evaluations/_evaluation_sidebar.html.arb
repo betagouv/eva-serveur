@@ -1,0 +1,14 @@
+attributes_table_for resource do
+  row(t('admin.evaluations.evaluation.etat')) do |evaluation|
+    if evaluation.reussite?
+      status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'
+    elsif evaluation.abandon?
+      status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
+    else
+      status_tag t('admin.evaluations.evaluation.en_cours')
+    end
+  end
+  row(t('admin.evaluations.evaluation.temps')) { |evaluation| distance_of_time_in_words(evaluation.temps_total) }
+  row :nombre_ouverture_contenant
+  row :nombre_essais_validation
+end

@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Evenement, as: 'Evaluations' do
   config.sort_order = 'date_desc'
   actions :index, :show
@@ -32,4 +31,3 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
     render 'evaluation_sidebar', evaluation: resource
   end
 end
-# rubocop:enable Metrics/BlockLength

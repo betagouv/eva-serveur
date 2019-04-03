@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 FactoryBot.define do
   factory :evenement do
     nom { 'ouvertureContenant' }
@@ -42,4 +41,3 @@ FactoryBot.define do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

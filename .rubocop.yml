@@ -17,6 +17,7 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
     - 'app/views/**/*'
+    - 'spec/factories/*'
     - 'Guardfile'
   ExcludedMethods:
     - describe

@@ -9,25 +9,21 @@ describe 'Evenement API', type: :request do
 
     let(:payload_valide) do
       {
-        "evenement": {
-          "date": 1_551_111_089_238,
-          "nom": 'ouvertureContenant',
-          "donnees": donnees,
-          "situation": 'inventaire',
-          "session_id": 'O8j78U2xcb2'
-        }
+        "date": 1_551_111_089_238,
+        "nom": 'ouvertureContenant',
+        "donnees": donnees,
+        "situation": 'inventaire',
+        "session_id": 'O8j78U2xcb2'
       }
     end
 
     let(:payload_invalide) do
       {
-        "evenement": {
-          "date": nil,
-          "nom": 'ouvertureContenant',
-          "situation": 'inventaire',
-          "session_id": 'O8j78U2xcb2',
-          "donnees": donnees
-        }
+        "date": nil,
+        "nom": 'ouvertureContenant',
+        "situation": 'inventaire',
+        "session_id": 'O8j78U2xcb2',
+        "donnees": donnees
       }
     end
 

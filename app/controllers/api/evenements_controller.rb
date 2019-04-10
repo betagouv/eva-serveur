@@ -15,8 +15,7 @@ module Api
     private
 
     def evenement_params
-      parametres = params.require(:evenement).permit(:date, :nom, :session_id,
-                                                     :situation, donnees: {})
+      parametres = EvenementParams.from(params)
       formate_date!(parametres)
     end
 

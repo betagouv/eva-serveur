@@ -1,5 +1,6 @@
 context.instance_eval do
   selectable_column
+  column :utilisateur
   column :session_id
   column :situation
   column :nom

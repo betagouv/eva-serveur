@@ -16,6 +16,7 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
 
   index do
     column :situation
+    column :utilisateur
     column :session_id
     column :date
     column '' do |evenement|

@@ -221,6 +221,7 @@ fr:
     resource:
       index:
         rapport: Rapport
+        evenements: Évenements
   admin:
     evaluations:
       evaluation:

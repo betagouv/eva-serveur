@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EvaluationInventaire
+class EvaluationInventaire < EvaluationBase
   EVENEMENT = {
     OUVERTURE_CONTENANT: 'ouvertureContenant',
     SAISIE_INVENTAIRE: 'saisieInventaire',
@@ -23,40 +23,27 @@ class EvaluationInventaire
     end
 
     def nombre_ouverture_contenant
-      compte_nom_evenements(@evenements, EVENEMENT[:OUVERTURE_CONTENANT])
+      compte_nom_evenements(EVENEMENT[:OUVERTURE_CONTENANT])
     end
 
     def nombre_essais_validation
-      compte_nom_evenements(@evenements, EVENEMENT[:SAISIE_INVENTAIRE])
-    end
-
-    def compte_nom_evenements(evenements, nom)
-      evenements.reduce(0) do |nombre, evenement|
-        if evenement.nom == nom
-          nombre + 1
-        else
-          nombre
-        end
-      end
+      compte_nom_evenements(EVENEMENT[:SAISIE_INVENTAIRE])
     end
   end
+
   include Evaluation
 
-  class Essai
+  class Essai < EvaluationBase
     include Evaluation
 
     def initialize(evenements, date_depart_situation)
-      @evenements = evenements
+      super(evenements)
       @date_depart_situation = date_depart_situation
     end
 
     def temps_total
       @evenements.last.date - @date_depart_situation
     end
-  end
-
-  def initialize(evenements)
-    @evenements = evenements
   end
 
   def session_id

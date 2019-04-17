@@ -3,19 +3,17 @@
 FactoryBot.define do
   factory :evenement do
     nom { 'ouvertureContenant' }
-    donnees { JSON.parse(File.read("#{Rails.root}/spec/support/evenement/donnees.json")) }
+    donnees { {} }
     situation { 'inventaire' }
     session_id { '07319b2485be9ac4850664cd47cede38' }
     date { DateTime.now }
 
     factory :evenement_demarrage do
       nom { 'demarrage' }
-      donnees { {} }
     end
 
     factory :evenement_saisie_inventaire do
       nom { 'saisieInventaire' }
-      donnees { {} }
 
       trait :ok do
         donnees do
@@ -37,7 +35,18 @@ FactoryBot.define do
 
     factory :evenement_stop do
       nom { 'stop' }
-      donnees { {} }
+    end
+
+    factory :evenement_piece_bien_placee do
+      nom { 'pieceBienPlacee' }
+    end
+
+    factory :evenement_piece_mal_placee do
+      nom { 'pieceMalPlacee' }
+    end
+
+    factory :evenement_piece_ratee do
+      nom { 'pieceRatee' }
     end
   end
 end

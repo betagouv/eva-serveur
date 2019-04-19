@@ -1,9 +1,26 @@
 # frozen_string_literal: true
 
+panel t('.informations_specifiques') do
+  attributes_table_for resource do
+    row(t('admin.evaluations.evaluation.etat')) do |evaluation|
+      if evaluation.reussite?
+        status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'
+      elsif evaluation.abandon?
+        status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
+      else
+        status_tag t('admin.evaluations.evaluation.en_cours')
+      end
+    end
+    row t('.ouverture_contenant'), &:nombre_ouverture_contenant
+    row t('.nombre_essais_validation'),
+        &:nombre_essais_validation
+  end
+end
+
 panel t('.restitution_essais') do
   table_for evaluation.essais do
     nombre_essais = 0
-    column('') { |e| "Essai #{nombre_essais+= 1}" }
+    column('') { |_e| "Essai #{nombre_essais += 1}" }
     column t('admin.evaluations.evaluation.etat') do |essai|
       if essai.reussite?
         status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'

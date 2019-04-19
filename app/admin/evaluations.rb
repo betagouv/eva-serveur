@@ -47,7 +47,5 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
     render chemin_vue, evaluation: resource
   end
 
-  sidebar :info, only: :show do
-    render "#{chemin_vue}_sidebar", evaluation: resource
-  end
+  sidebar :informations_generales, only: :show
 end

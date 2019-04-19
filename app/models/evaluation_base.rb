@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EvaluationBase
+  delegate :session_id, :utilisateur, :situation, :date, to: :premier_evenement
+
   def initialize(evenements)
     @evenements = evenements
   end
@@ -9,7 +11,11 @@ class EvaluationBase
     @evenements.count { |e| e.nom == nom }
   end
 
-  def session_id
-    @evenements.first.session_id
+  def temps_total
+    @evenements.last.date - @evenements.first.date
+  end
+
+  def premier_evenement
+    @evenements.first
   end
 end

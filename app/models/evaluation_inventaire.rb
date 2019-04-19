@@ -40,10 +40,6 @@ class EvaluationInventaire < EvaluationBase
     compte_nom_evenements(EVENEMENT[:SAISIE_INVENTAIRE])
   end
 
-  def temps_total
-    @evenements.last.date - @evenements.first.date
-  end
-
   def essais
     essais = @evenements.chunk_while do |evenement_avant, _|
       evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]

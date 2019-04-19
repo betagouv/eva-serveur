@@ -235,3 +235,8 @@ fr:
         ouverture_contenant: Ouvertures de contenant
         essai: Essai %{count}
         nombre_essais_validation: "Nombre d'essais"
+      evaluation_controle:
+        restitution_controle: Restituation de situation contrôle
+        pieces_bien_placees: Pièces bien placées
+        pieces_mal_placees: Pièces mal placées
+        pieces_ratees: Pièces ratées

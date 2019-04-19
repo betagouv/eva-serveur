@@ -11,9 +11,9 @@ describe 'Admin - Evaluation', type: :feature do
     create :evenement_piece_mal_placee, situation: 'controle', session_id: 'session_controle'
 
     visit admin_evaluation_path('session_controle')
-    expect(page).to have_content('Pièces bien placées : 1')
-    expect(page).to have_content('Pièces mal placées : 2')
-    expect(page).to have_content('Pièces ratées : 0')
+    expect(page).to have_content('Pièces Bien Placées 1')
+    expect(page).to have_content('Pièces Mal Placées 2')
+    expect(page).to have_content('Pièces Ratées 0')
   end
 
   scenario 'rapport de la situation inventaire' do

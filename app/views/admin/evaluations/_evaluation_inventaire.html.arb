@@ -14,23 +14,23 @@ table do
     end
   end
   tr do
-    th t('.etat')
+    th t('admin.evaluations.evaluation.etat')
     evaluation.essais.each do |essai|
       td do
         if essai.reussite?
-          status_tag t('.reussite'), class: 'green'
+          status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'
         elsif essai.abandon?
-          status_tag t('.abandon'), class: 'red'
+          status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
         elsif essai.en_cours?
-          status_tag t('.en_cours')
+          status_tag t('admin.evaluations.evaluation.en_cours')
         else
-          status_tag t('.echec'), class: 'red'
+          status_tag t('admin.evaluations.evaluation.echec'), class: 'red'
         end
       end
     end
   end
   tr do
-    th t('.temps')
+    th t('admin.evaluations.evaluation.temps')
     evaluation.essais.each do |essai|
       td "+#{distance_of_time_in_words(essai.temps_total)}"
     end

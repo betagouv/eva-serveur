@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+h3 "Pièces bien placées : #{evaluation.nombre_bien_placees}"
+h3 "Pièces mal placées : #{evaluation.nombre_mal_placees}"
+h3 "Pièces ratées : #{evaluation.nombre_ratees}"

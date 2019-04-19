@@ -8,4 +8,8 @@ class EvaluationBase
   def compte_nom_evenements(nom)
     @evenements.count { |e| e.nom == nom }
   end
+
+  def session_id
+    @evenements.first.session_id
+  end
 end

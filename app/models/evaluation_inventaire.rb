@@ -46,10 +46,6 @@ class EvaluationInventaire < EvaluationBase
     end
   end
 
-  def session_id
-    @evenements.first.session_id
-  end
-
   def temps_total
     @evenements.last.date - @evenements.first.date
   end

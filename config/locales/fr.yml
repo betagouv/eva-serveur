@@ -225,11 +225,13 @@ fr:
   admin:
     evaluations:
       evaluation:
-        essai: Essai %{count}
+        en_cours: En cours
+        temps: Temps
+        etat: État
         reussite: Réussite
         abandon: Abandon
-        en_cours: En cours
         echec: Échec
-        temps: Temps
-        ouverture_contenant: Ouverture de contenant
-        etat: État
+      evaluation_inventaire:
+        ouverture_contenant: Ouvertures de contenant
+        essai: Essai %{count}
+        nombre_essais_validation: "Nombre d'essais"

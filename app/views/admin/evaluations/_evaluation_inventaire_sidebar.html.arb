@@ -13,6 +13,7 @@ attributes_table_for resource do
   row(t('admin.evaluations.evaluation.temps')) do |evaluation|
     distance_of_time_in_words(evaluation.temps_total)
   end
-  row :nombre_ouverture_contenant
-  row :nombre_essais_validation
+  row t('admin.evaluations.evaluation_inventaire.ouverture_contenant'), &:nombre_ouverture_contenant
+  row t('admin.evaluations.evaluation_inventaire.nombre_essais_validation'),
+      &:nombre_essais_validation
 end

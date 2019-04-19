@@ -5,14 +5,29 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
   actions :index, :show
 
   controller do
+    helper_method :chemin_vue
+
     def scoped_collection
       end_of_association_chain.where(nom: 'demarrage')
     end
 
     def find_resource
-      EvaluationInventaire.new(
-        Evenement.where(session_id: params[:id]).order(:date)
-      )
+      evenements = Evenement.where(session_id: params[:id]).order(:date)
+      situation = evenements.first.situation
+      instancie_evaluation situation, evenements
+    end
+
+    def instancie_evaluation(situation, evenements)
+      classe_evaluation = {
+        'inventaire' => EvaluationInventaire,
+        'controle' => EvaluationControle
+      }
+
+      classe_evaluation[situation].new(evenements)
+    end
+
+    def chemin_vue
+      resource.class.to_s.underscore
     end
   end
 
@@ -29,10 +44,10 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
   end
 
   show title: :session_id do
-    render 'evaluation', evaluation: resource
+    render chemin_vue, evaluation: resource
   end
 
   sidebar :info, only: :show do
-    render 'evaluation_sidebar', evaluation: resource
+    render "#{chemin_vue}_sidebar", evaluation: resource
   end
 end

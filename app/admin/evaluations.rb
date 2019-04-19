@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Evenement, as: 'Evaluations' do
   config.sort_order = 'date_desc'
   actions :index, :show
@@ -21,7 +23,8 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
     column :date
     column '' do |evenement|
       span link_to t('.rapport'), admin_evaluation_path(id: evenement.session_id)
-      span link_to t('.evenements'), admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+      span link_to t('.evenements'),
+                   admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
     end
   end
 

@@ -1,44 +1,23 @@
 # frozen_string_literal: true
 
-table do
-  thead do
-    tr do
-      th
-      evaluation.essais.each_with_index do |essai, index|
-        if essai.abandon? || essai.en_cours?
-          th
-        else
-          th t('.essai', count: index + 1)
-        end
+panel t('.restitution_essais') do
+  table_for evaluation.essais do
+    nombre_essais = 0
+    column('') { |e| "Essai #{nombre_essais+= 1}" }
+    column t('admin.evaluations.evaluation.etat') do |essai|
+      if essai.reussite?
+        status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'
+      elsif essai.abandon?
+        status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
+      elsif essai.en_cours?
+        status_tag t('admin.evaluations.evaluation.en_cours')
+      else
+        status_tag t('admin.evaluations.evaluation.echec'), class: 'red'
       end
     end
-  end
-  tr do
-    th t('admin.evaluations.evaluation.etat')
-    evaluation.essais.each do |essai|
-      td do
-        if essai.reussite?
-          status_tag t('admin.evaluations.evaluation.reussite'), class: 'green'
-        elsif essai.abandon?
-          status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
-        elsif essai.en_cours?
-          status_tag t('admin.evaluations.evaluation.en_cours')
-        else
-          status_tag t('admin.evaluations.evaluation.echec'), class: 'red'
-        end
-      end
+    column t('admin.evaluations.evaluation.temps') do |essai|
+      "+#{distance_of_time_in_words(essai.temps_total)}"
     end
-  end
-  tr do
-    th t('admin.evaluations.evaluation.temps')
-    evaluation.essais.each do |essai|
-      td "+#{distance_of_time_in_words(essai.temps_total)}"
-    end
-  end
-  tr do
-    th t('.ouverture_contenant')
-    evaluation.essais.each do |essai|
-      td essai.nombre_ouverture_contenant
-    end
+    column t('.ouverture_contenant'), &:nombre_ouverture_contenant
   end
 end

@@ -10,14 +10,7 @@ fr:
         updated_at: Mis à jour le
         type_evenement: Type d'événement
         donnees: Données
-  formtastic:
-    actions:
-      evenement:
-        create: Créer un évenement
-        update: Modifier
   active_admin:
     resources:
       evenement:
-        new_model: Créer un évenement
-        edit_model: Modifier
         delete_model: Supprimer

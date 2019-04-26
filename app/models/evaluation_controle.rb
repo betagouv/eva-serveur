@@ -18,4 +18,10 @@ class EvaluationControle < EvaluationBase
   def nombre_ratees
     compte_nom_evenements EVENEMENT[:PIECE_RATEE]
   end
+
+  def evenements_pieces
+    noms_evenements_pieces =
+      EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_RATEE).values
+    @evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
+  end
 end

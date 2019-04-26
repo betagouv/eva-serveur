@@ -36,4 +36,23 @@ describe EvaluationControle do
 
     it { expect(evaluation.nombre_ratees).to eq(1) }
   end
+
+  context 'filtrer les événements pièces' do
+    let(:evenements_pieces) do
+      [
+        build(:evenement_piece_bien_placee),
+        build(:evenement_piece_mal_placee),
+        build(:evenement_piece_ratee)
+      ]
+    end
+
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        *evenements_pieces
+      ]
+    end
+
+    it { expect(evaluation.evenements_pieces).to eq(evenements_pieces) }
+  end
 end

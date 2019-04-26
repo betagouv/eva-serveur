@@ -15,3 +15,22 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+
+.evenement {
+  display: inline-block;
+  width: 10px;
+  height: 30px;
+
+  &.piece-bien-placee {
+    background-color: green;
+  }
+
+  &.piece-mal-placee {
+    background-color: red;
+  }
+
+  &.piece-ratee {
+    background-color: gray;
+  }
+}

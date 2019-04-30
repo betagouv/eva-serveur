@@ -36,6 +36,7 @@ group :test do
   gem 'guard-rubocop'
   gem 'launchy'
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'shoulda-matchers', '~> 3.0'
 end
 

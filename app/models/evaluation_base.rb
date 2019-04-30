@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class EvaluationBase
+  EVENEMENT = {
+    STOP: 'stop'
+  }.freeze
+
   delegate :session_id, :utilisateur, :situation, :date, to: :premier_evenement
 
   def initialize(evenements)
@@ -17,5 +21,9 @@ class EvaluationBase
 
   def premier_evenement
     @evenements.first
+  end
+
+  def abandon?
+    @evenements.last.nom == EVENEMENT[:STOP]
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Competence
-  class ControleComparaisonTri
+  class ControleComparaisonTri < Base
     def initialize(evaluation_controle)
-      @evaluation = evaluation_controle
+      super(evaluation_controle)
       @evaluation_hors_4_premiers = evaluation_controle.shift(4)
     end
 

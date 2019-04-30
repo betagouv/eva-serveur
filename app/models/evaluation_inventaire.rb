@@ -3,8 +3,7 @@
 class EvaluationInventaire < EvaluationBase
   EVENEMENT = {
     OUVERTURE_CONTENANT: 'ouvertureContenant',
-    SAISIE_INVENTAIRE: 'saisieInventaire',
-    STOP: 'stop'
+    SAISIE_INVENTAIRE: 'saisieInventaire'
   }.freeze
 
   class Essai < EvaluationInventaire
@@ -24,12 +23,7 @@ class EvaluationInventaire < EvaluationBase
   end
 
   def en_cours?
-    @evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] &&
-      @evenements.last.nom != EVENEMENT[:STOP]
-  end
-
-  def abandon?
-    @evenements.last.nom == EVENEMENT[:STOP]
+    @evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] && !abandon?
   end
 
   def nombre_ouverture_contenant

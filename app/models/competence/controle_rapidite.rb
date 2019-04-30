@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 module Competence
-  class ControleRapidite
-    def initialize(evaluation_controle)
-      @evaluation = evaluation_controle
-    end
-
+  class ControleRapidite < Base
     def niveau
       nombre_erreur = @evaluation.nombre_ratees
       case nombre_erreur

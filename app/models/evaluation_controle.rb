@@ -30,4 +30,8 @@ class EvaluationControle < EvaluationBase
       EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_RATEE).values
     @evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
   end
+
+  def shift(nombre)
+    self.class.new(evenements_pieces[nombre..-1])
+  end
 end

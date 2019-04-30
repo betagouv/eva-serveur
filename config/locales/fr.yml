@@ -231,6 +231,7 @@ fr:
         reussite: Réussite
         abandon: Abandon
         echec: Échec
+        termine: Terminé
       evaluation_inventaire:
         ouverture_contenant: Ouvertures de contenant
         essai: Essai %{count}

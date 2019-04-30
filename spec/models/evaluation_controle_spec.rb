@@ -79,4 +79,26 @@ describe EvaluationControle do
 
     it { expect(evaluation.evenements_pieces).to eq(evenements_pieces) }
   end
+
+  context '#shift' do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        build(:evenement_piece_ratee),
+        build(:evenement_piece_mal_placee),
+        build(:evenement_piece_bien_placee)
+      ]
+    end
+
+    it 'retourne une instance EvaluationControle' do
+      expect(evaluation.shift(2)).to be_a(described_class)
+    end
+
+    it 'enlève les x premiers événements de pièces' do
+      evaluation.shift(2).evenements.tap do |evenements|
+        expect(evenements.count).to eql(1)
+        expect(evenements.first.nom).to eql(build(:evenement_piece_bien_placee).nom)
+      end
+    end
+  end
 end

@@ -5,6 +5,7 @@ class EvaluationBase
     STOP: 'stop'
   }.freeze
 
+  attr_reader :evenements
   delegate :session_id, :utilisateur, :situation, :date, to: :premier_evenement
 
   def initialize(evenements)

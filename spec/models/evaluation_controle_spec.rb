@@ -5,6 +5,30 @@ require 'rails_helper'
 describe EvaluationControle do
   let(:evaluation) { described_class.new(evenements) }
 
+  context 'avec toutes les pieces enregistrées' do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        *Array.new(60) do
+          build(:evenement_piece_bien_placee)
+        end
+      ]
+    end
+    it { expect(evaluation).to be_termine }
+  end
+
+  context 'avec pas toutes les pieces enregistrées' do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        *Array.new(4) do
+          build(:evenement_piece_bien_placee)
+        end
+      ]
+    end
+    it { expect(evaluation).to_not be_termine }
+  end
+
   context 'compter les pièces bien placées' do
     let(:evenements) do
       [

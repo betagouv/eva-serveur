@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
 class EvaluationControle < EvaluationBase
+  PIECES_TOTAL = 60
+
   EVENEMENT = {
     PIECE_BIEN_PLACEE: 'pieceBienPlacee',
     PIECE_MAL_PLACEE: 'pieceMalPlacee',
     PIECE_RATEE: 'pieceRatee'
   }.freeze
+
+  def termine?
+    evenements_pieces.count == PIECES_TOTAL
+  end
 
   def nombre_bien_placees
     compte_nom_evenements EVENEMENT[:PIECE_BIEN_PLACEE]

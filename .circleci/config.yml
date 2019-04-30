@@ -68,6 +68,10 @@ jobs:
           name: DB Seed
           command: RAILS_ENV=development bin/rails db:create db:migrate db:seed --trace
 
+      - run:
+          name: Rubocop
+          command: bundle exec rubocop
+
       # Run rspec in parallel
       - run:
           name: Run rspec in parallel

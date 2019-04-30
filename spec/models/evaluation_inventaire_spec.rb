@@ -29,6 +29,7 @@ describe EvaluationInventaire do
     ]
     evaluation = described_class.new(evenements)
     expect(evaluation).to be_reussite
+    expect(evaluation).to be_termine
     expect(evaluation).to_not be_abandon
     expect(evaluation).to_not be_en_cours
   end

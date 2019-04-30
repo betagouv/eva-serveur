@@ -21,6 +21,7 @@ class EvaluationInventaire < EvaluationBase
     @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE] &&
       @evenements.last.donnees['reussite']
   end
+  alias termine? reussite?
 
   def en_cours?
     @evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] && !abandon?

@@ -10,6 +10,7 @@ AllCops:
     - 'support/**/*'
     - 'tmp/**/*'
     - 'test/**/*'
+    - 'vendor/**/*'
 
 Metrics/LineLength:
   Max: 100

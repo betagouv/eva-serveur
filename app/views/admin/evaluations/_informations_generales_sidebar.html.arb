@@ -4,6 +4,15 @@ attributes_table_for resource do
   row :utilisateur
   row :situation
   row :date
+  row(t('admin.evaluations.evaluation.etat')) do |evaluation|
+    if evaluation.termine?
+      status_tag t('admin.evaluations.evaluation.termine'), class: 'green'
+    elsif evaluation.abandon?
+      status_tag t('admin.evaluations.evaluation.abandon'), class: 'red'
+    else
+      status_tag t('admin.evaluations.evaluation.en_cours')
+    end
+  end
   row(t('admin.evaluations.evaluation.temps')) do |evaluation|
     distance_of_time_in_words(evaluation.temps_total)
   end

@@ -31,11 +31,12 @@ L'api est accessible au point `/api`
 * Format du body :
 ```
 {
-  "evenement": {
-    "date": 1551111089238,
-    "type_evenement": "ouvertureContenant",
-    "description": "{'idContenu':'6','type':'ContenantUnitaire','forme':'caisse','quantite':1,'couleur':'gris','posX':52.4,'posY':25.9,'contenu':{'nom':'Terra Cola','image':'/assets/terracola.png?24jVUPB'},'largeur':16.3,'hauteur':9}"
-  }
+  "date": 1551111089238,
+  "nom": "ouvertureContenant",
+  "session_id": "baf2c86c-6c34-11e9-901c-c34362f7423a",
+  "situation": "inventaire",
+  "utilisateur": "Roger",
+  "donnees": {"idContenu": "6"}
 }
 ```
 

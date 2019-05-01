@@ -1,15 +1,12 @@
 # Compétences Pro Serveur
 
-Cette application sert de serveur et d'espace d'administration pour la startup [Compétences Pro](https://github.com/betagouv/competences-pro)
+Cette application sert de serveur et d'espace d'administration pour [Compétences Pro](https://github.com/betagouv/competences-pro)
 
 * Ruby version
-2.5.3
+2.6
 
-* Dépendance systeme
+* Base de données
 PostgreSql
-
-* Configuration
-RAS pour le moment
 
 * Création de la base
 `rake db:create`
@@ -19,10 +16,6 @@ RAS pour le moment
 
 * Lancer les tests
 `bundle exec rake spec` ou `guard`
-
-* Services (job queues, cache servers, search engines, etc.)
-RAS pour le moment
-
 
 * Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))

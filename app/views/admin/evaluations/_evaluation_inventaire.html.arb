@@ -36,5 +36,6 @@ panel t('.restitution_essais') do
       "+#{distance_of_time_in_words(essai.temps_total)}"
     end
     column t('.ouverture_contenant'), &:nombre_ouverture_contenant
+    column t('.nombre_erreurs'), &:nombre_erreurs
   end
 end

@@ -17,13 +17,13 @@ FactoryBot.define do
 
       trait :ok do
         donnees do
-          { reussite: true }
+          { reussite: true, reponses: {} }
         end
       end
 
       trait :echec do
         donnees do
-          { reussite: false }
+          { reussite: false, reponses: {} }
         end
       end
     end

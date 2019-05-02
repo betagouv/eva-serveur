@@ -236,6 +236,7 @@ fr:
         ouverture_contenant: Ouvertures de contenant
         essai: Essai %{count}
         nombre_essais_validation: "Nombre d'essais"
+        nombre_erreurs: "Nombre d'erreurs"
         restitution_essais: Détail des essais
         informations_specifiques: Informations spécifiques
       evaluation_controle:

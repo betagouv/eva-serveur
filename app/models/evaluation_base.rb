@@ -26,4 +26,8 @@ class EvaluationBase
   def abandon?
     @evenements.last.nom == EVENEMENT[:STOP]
   end
+
+  def termine?
+    raise NotImplementedError
+  end
 end

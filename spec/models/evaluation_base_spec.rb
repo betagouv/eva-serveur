@@ -16,4 +16,10 @@ describe EvaluationBase do
 
     it { expect(evaluation.abandon?).to be(true) }
   end
+
+  it 'envoie une exception not implemented pour la méthode termine?' do
+    expect do
+      described_class.new([]).termine?
+    end.to raise_error(NotImplementedError)
+  end
 end

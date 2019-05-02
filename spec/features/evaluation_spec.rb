@@ -17,7 +17,7 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   scenario 'rapport de la situation inventaire' do
-    create :evenement_saisie_inventaire, situation: 'inventaire', session_id: 'session_inventaire'
+    create :evenement_saisie_inventaire, :echec, session_id: 'session_inventaire'
     visit admin_evaluation_path('session_inventaire')
     expect(page).to have_content('Échec')
   end

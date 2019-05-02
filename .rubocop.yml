@@ -30,3 +30,7 @@ Metrics/BlockLength:
     - context
     - show
     - controller
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/models/evaluation/inventaire/rapidite_spec.rb'

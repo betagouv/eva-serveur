@@ -19,15 +19,15 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
 
     def instancie_evaluation(situation, evenements)
       classe_evaluation = {
-        'inventaire' => EvaluationInventaire,
-        'controle' => EvaluationControle
+        'inventaire' => Evaluation::Inventaire,
+        'controle' => Evaluation::Controle
       }
 
       classe_evaluation[situation].new(evenements)
     end
 
     def chemin_vue
-      resource.class.to_s.underscore
+      resource.class.to_s.underscore.tr('/', '_')
     end
   end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe EvaluationControle do
+describe Evaluation::Controle do
   let(:evenements) { [] }
   let(:evaluation) { described_class.new(evenements) }
 

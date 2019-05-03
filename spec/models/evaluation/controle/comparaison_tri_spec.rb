@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Competence::ControleComparaisonTri do
+describe Evaluation::Controle::ComparaisonTri do
   let(:evaluation) { double }
   let(:evaluation_hors_4_premiers) { double }
 

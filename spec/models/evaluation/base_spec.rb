@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe EvaluationBase do
+describe Evaluation::Base do
   let(:evaluation) { described_class.new(evenements) }
 
   context 'lorsque le dernier événement est stop' do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Competence::Base do
+describe Evaluation::Competence::Base do
   it 'niveau rennvoie une exception NotImplementedError' do
     expect do
       described_class.new(nil).niveau

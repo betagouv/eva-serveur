@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-describe EvaluationInventaire do
-  describe EvaluationInventaire::Essai do
+describe Evaluation::Inventaire do
+  describe Evaluation::Inventaire::Essai do
     it 'retourne le temps depuis le début de la situation' do
       evenements = [
         build(:evenement_ouverture_contenant, date: 2.minute.ago),

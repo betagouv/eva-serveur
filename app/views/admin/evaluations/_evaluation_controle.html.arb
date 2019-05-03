@@ -6,8 +6,8 @@ panel t('.restitution_controle') do
     row t('.pieces_mal_placees'), &:nombre_mal_placees
     row t('.pieces_ratees'), &:nombre_ratees
     row(t('.frise')) { render 'controle_frise_pieces', evaluation: evaluation }
-    row(t('.rapidite')) { Competence::ControleRapidite.new(evaluation).niveau }
-    row(t('.comparaison')) { Competence::ControleComparaisonTri.new(evaluation).niveau }
-    row(t('.attention')) { Competence::ControleAttentionConcentration.new(evaluation).niveau }
+    evaluation.competences.each do |competence, niveau|
+      row(t(".#{competence}")) { niveau }
+    end
   end
 end

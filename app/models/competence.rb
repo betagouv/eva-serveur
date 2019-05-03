@@ -6,4 +6,8 @@ module Competence
   NIVEAU_2 = 2
   NIVEAU_1 = 1
   NIVEAU_INDETERMINE = :indetermine
+
+  RAPIDITE = :rapidite
+  COMPARAISON_TRI = :comparaison_tri
+  ATTENTION_CONCENTRATION = :attention_concentration
 end

@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 describe EvaluationControle do
+  let(:evenements) { [] }
   let(:evaluation) { described_class.new(evenements) }
 
   context 'avec toutes les pieces enregistrées' do
@@ -80,7 +81,7 @@ describe EvaluationControle do
     it { expect(evaluation.evenements_pieces).to eq(evenements_pieces) }
   end
 
-  context '#shift' do
+  describe '#shift' do
     let(:evenements) do
       [
         build(:evenement_demarrage),
@@ -99,6 +100,14 @@ describe EvaluationControle do
         expect(evenements.count).to eql(1)
         expect(evenements.first.nom).to eql(build(:evenement_piece_bien_placee).nom)
       end
+    end
+  end
+
+  describe '#competences' do
+    it 'retourne les compétences évaluées' do
+      expect(evaluation.competences.keys).to match_array([Competence::RAPIDITE,
+                                                          Competence::COMPARAISON_TRI,
+                                                          Competence::ATTENTION_CONCENTRATION])
     end
   end
 end

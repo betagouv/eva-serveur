@@ -34,4 +34,14 @@ class EvaluationControle < EvaluationBase
   def shift(nombre)
     self.class.new(evenements_pieces[nombre..-1])
   end
+
+  def competences
+    {
+      Competence::RAPIDITE => Competence::ControleRapidite,
+      Competence::COMPARAISON_TRI => Competence::ControleComparaisonTri,
+      Competence::ATTENTION_CONCENTRATION => Competence::ControleAttentionConcentration
+    }.each_with_object({}) do |(competence, classe), resultat|
+      resultat[competence] = classe.new(self).niveau
+    end
+  end
 end

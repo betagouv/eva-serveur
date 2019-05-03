@@ -28,14 +28,15 @@ describe 'Evenement API', type: :request do
     end
 
     context 'Quand une requête est valide' do
-      before { post '/api/evenements', params: payload_valide }
 
       it 'Crée un événement' do
-        expect(Evenement.count).to eq 1
+        expect{ post '/api/evenements', params: payload_valide }
+          .to change{Evenement.count}.by(1)
         expect(Evenement.last.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
       end
 
       it 'retourne une 201' do
+        post '/api/evenements', params: payload_valide
         expect(response).to have_http_status(201)
       end
     end

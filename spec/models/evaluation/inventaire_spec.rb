@@ -158,4 +158,14 @@ describe Evaluation::Inventaire do
       expect(essai.temps_total).to within(0.1).of(300)
     end
   end
+
+  describe '#competences' do
+    it 'retourne les compétences évaluées' do
+      evenements = [
+        build(:evenement_demarrage)
+      ]
+      evaluation = described_class.new(evenements)
+      expect(evaluation.competences.keys).to match_array([Competence::ORGANISATION_METHODE])
+    end
+  end
 end

@@ -22,4 +22,8 @@ describe Evaluation::Base do
       described_class.new([]).termine?
     end.to raise_error(NotImplementedError)
   end
+
+  it 'renvoie par défaut une liste vide pour les compétences évaluées' do
+    expect(described_class.new([]).competences).to eql({})
+  end
 end

@@ -3,6 +3,7 @@
 module Evaluation
   class Base
     EVENEMENT = {
+      REJOUE_CONSIGNE: 'rejoueConsigne',
       STOP: 'stop'
     }.freeze
 
@@ -23,6 +24,10 @@ module Evaluation
 
     def premier_evenement
       evenements.first
+    end
+
+    def nombre_rejoue_consigne
+      compte_nom_evenements EVENEMENT[:REJOUE_CONSIGNE]
     end
 
     def abandon?

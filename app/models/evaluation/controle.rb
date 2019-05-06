@@ -49,6 +49,7 @@ module Evaluation
     def competences
       {
         ::Competence::PERSEVERANCE => Controle::Perseverance,
+        ::Competence::COMPREHENSION_CONSIGNE => Controle::ComprehensionConsigne,
         ::Competence::RAPIDITE => Controle::Rapidite,
         ::Competence::COMPARAISON_TRI => Controle::ComparaisonTri,
         ::Competence::ATTENTION_CONCENTRATION => Controle::AttentionConcentration

@@ -110,7 +110,8 @@ describe Evaluation::Controle do
 
   describe '#competences' do
     it 'retourne les compétences évaluées' do
-      expect(evaluation.competences.keys).to match_array([Competence::RAPIDITE,
+      expect(evaluation.competences.keys).to match_array([Competence::PERSEVERANCE,
+                                                          Competence::RAPIDITE,
                                                           Competence::COMPARAISON_TRI,
                                                           Competence::ATTENTION_CONCENTRATION])
     end

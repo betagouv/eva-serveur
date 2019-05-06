@@ -32,5 +32,9 @@ module Evaluation
     def termine?
       raise NotImplementedError
     end
+
+    def competences
+      {}
+    end
   end
 end

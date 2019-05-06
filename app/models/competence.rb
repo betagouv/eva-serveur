@@ -7,6 +7,7 @@ module Competence
   NIVEAU_1 = 1
   NIVEAU_INDETERMINE = :indetermine
 
+  PERSEVERANCE = :perseverance
   RAPIDITE = :rapidite
   COMPARAISON_TRI = :comparaison_tri
   ATTENTION_CONCENTRATION = :attention_concentration

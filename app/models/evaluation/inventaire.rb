@@ -57,7 +57,8 @@ module Evaluation
 
     def competences
       {
-        ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode
+        ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode,
+        ::Competence::RAPIDITE => Inventaire::Rapidite
       }.each_with_object({}) do |(competence, classe), resultat|
         resultat[competence] = classe.new(self).niveau
       end

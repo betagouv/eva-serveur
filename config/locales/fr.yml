@@ -245,6 +245,8 @@ fr:
         pieces_bien_placees: Pièces bien placées
         pieces_mal_placees: Pièces mal placées
         pieces_ratees: Pièces ratées
-        rapidite: Rapidité de traitement
-        comparaison_tri: Comparaison et tri
+      evaluation_competences:
         attention_concentration: Attention/Concentration
+        comparaison_tri: Comparaison et tri
+        rapidite: Rapidité de traitement
+        titre: Évaluation des compétences

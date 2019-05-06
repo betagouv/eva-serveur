@@ -12,6 +12,10 @@ FactoryBot.define do
       nom { 'demarrage' }
     end
 
+    factory :evenement_rejoue_consigne do
+      nom { 'rejoueConsigne' }
+    end
+
     factory :evenement_saisie_inventaire do
       nom { 'saisieInventaire' }
 

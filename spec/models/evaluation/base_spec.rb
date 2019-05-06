@@ -17,6 +17,15 @@ describe Evaluation::Base do
     it { expect(evaluation.abandon?).to be(true) }
   end
 
+  it 'renvoie le nombre de réécoute de la consigne' do
+    evenements = [
+      build(:evenement_demarrage),
+      build(:evenement_rejoue_consigne),
+      build(:evenement_rejoue_consigne)
+    ]
+    expect(described_class.new(evenements).nombre_rejoue_consigne).to eql(2)
+  end
+
   it 'envoie une exception not implemented pour la méthode termine?' do
     expect do
       described_class.new([]).termine?

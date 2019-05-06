@@ -34,3 +34,4 @@ Metrics/BlockLength:
 Metrics/AbcSize:
   Exclude:
     - 'spec/models/evaluation/inventaire/rapidite_spec.rb'
+    - 'spec/models/evaluation/controle/perseverance_spec.rb'

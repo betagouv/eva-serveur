@@ -45,6 +45,7 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
 
   show title: :session_id do
     render chemin_vue, evaluation: resource
+    render 'evaluation_competences', evaluation: resource
   end
 
   sidebar :informations_generales, only: :show

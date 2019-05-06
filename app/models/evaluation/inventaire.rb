@@ -54,5 +54,13 @@ module Evaluation
         Essai.new(evenements, date_depart)
       end
     end
+
+    def competences
+      {
+        ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode
+      }.each_with_object({}) do |(competence, classe), resultat|
+        resultat[competence] = classe.new(self).niveau
+      end
+    end
   end
 end

@@ -8,6 +8,7 @@ module Competence
   NIVEAU_INDETERMINE = :indetermine
 
   PERSEVERANCE = :perseverance
+  COMPREHENSION_CONSIGNE = :comprehension_consigne
   RAPIDITE = :rapidite
   COMPARAISON_TRI = :comparaison_tri
   ATTENTION_CONCENTRATION = :attention_concentration

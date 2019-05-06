@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe Evaluation::Controle do
-  let(:evenements) { [] }
   let(:evaluation) { described_class.new(evenements) }
 
   context 'avec toutes les pieces enregistrées' do
@@ -121,8 +120,11 @@ describe Evaluation::Controle do
   end
 
   describe '#competences' do
+    let(:evenements) { [build(:evenement_demarrage)] }
+
     it 'retourne les compétences évaluées' do
       expect(evaluation.competences.keys).to match_array([Competence::PERSEVERANCE,
+                                                          Competence::COMPREHENSION_CONSIGNE,
                                                           Competence::RAPIDITE,
                                                           Competence::COMPARAISON_TRI,
                                                           Competence::ATTENTION_CONCENTRATION])

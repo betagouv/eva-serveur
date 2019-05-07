@@ -82,12 +82,14 @@ describe Evaluation::Controle do
   end
 
   describe '#enleve_premiers_evenements_pieces' do
+    let(:demarrage) { build(:evenement_demarrage) }
+    let(:bien_placee) { build(:evenement_piece_bien_placee) }
     let(:evenements) do
       [
-        build(:evenement_demarrage),
+        demarrage,
         build(:evenement_piece_ratee),
         build(:evenement_piece_mal_placee),
-        build(:evenement_piece_bien_placee)
+        bien_placee
       ]
     end
 
@@ -95,14 +97,13 @@ describe Evaluation::Controle do
       expect(evaluation.enleve_premiers_evenements_pieces(2)).to be_a(described_class)
     end
 
-    it 'evenements est toujours un tableau vide' do
-      expect(evaluation.enleve_premiers_evenements_pieces(4).evenements).to eql([])
+    it 'enlève tout les événements de pièces' do
+      expect(evaluation.enleve_premiers_evenements_pieces(4).evenements).to eql([demarrage])
     end
 
     it 'enlève les x premiers événements de pièces' do
       evaluation.enleve_premiers_evenements_pieces(2).evenements.tap do |evenements|
-        expect(evenements.count).to eql(1)
-        expect(evenements.first.nom).to eql(build(:evenement_piece_bien_placee).nom)
+        expect(evenements).to eql([demarrage, bien_placee])
       end
     end
   end

@@ -26,14 +26,20 @@ module Evaluation
       compte_nom_evenements EVENEMENT[:PIECE_RATEE]
     end
 
+    def noms_evenements_pieces
+      EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_RATEE).values
+    end
+
     def evenements_pieces
-      noms_evenements_pieces =
-        EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_RATEE).values
       @evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
     end
 
     def enleve_premiers_evenements_pieces(nombre)
-      self.class.new(evenements_pieces[nombre..-1] || [])
+      compteur = 0
+      nouveaux_evenements = evenements.reject do |evenement|
+        noms_evenements_pieces.include?(evenement.nom) && (compteur += 1) <= nombre
+      end
+      self.class.new(nouveaux_evenements)
     end
 
     def competences

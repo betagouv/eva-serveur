@@ -81,7 +81,7 @@ describe Evaluation::Controle do
     it { expect(evaluation.evenements_pieces).to eq(evenements_pieces) }
   end
 
-  describe '#shift' do
+  describe '#enleve_premiers_evenements_pieces' do
     let(:evenements) do
       [
         build(:evenement_demarrage),
@@ -92,15 +92,15 @@ describe Evaluation::Controle do
     end
 
     it 'retourne une instance EvaluationControle' do
-      expect(evaluation.shift(2)).to be_a(described_class)
+      expect(evaluation.enleve_premiers_evenements_pieces(2)).to be_a(described_class)
     end
 
     it 'evenements est toujours un tableau vide' do
-      expect(evaluation.shift(4).evenements).to eql([])
+      expect(evaluation.enleve_premiers_evenements_pieces(4).evenements).to eql([])
     end
 
     it 'enlève les x premiers événements de pièces' do
-      evaluation.shift(2).evenements.tap do |evenements|
+      evaluation.enleve_premiers_evenements_pieces(2).evenements.tap do |evenements|
         expect(evenements.count).to eql(1)
         expect(evenements.first.nom).to eql(build(:evenement_piece_bien_placee).nom)
       end

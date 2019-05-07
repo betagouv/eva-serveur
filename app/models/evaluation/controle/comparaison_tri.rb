@@ -5,7 +5,7 @@ module Evaluation
     class ComparaisonTri < Evaluation::Competence::Base
       def initialize(evaluation_controle)
         super(evaluation_controle)
-        @evaluation_hors_4_premiers = evaluation_controle.shift(4)
+        @evaluation_hors_4_premiers = evaluation_controle.enleve_premiers_evenements_pieces(4)
       end
 
       def niveau

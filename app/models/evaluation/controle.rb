@@ -32,7 +32,7 @@ module Evaluation
       @evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
     end
 
-    def shift(nombre)
+    def enleve_premiers_evenements_pieces(nombre)
       self.class.new(evenements_pieces[nombre..-1] || [])
     end
 

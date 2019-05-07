@@ -33,7 +33,7 @@ module Evaluation
     end
 
     def shift(nombre)
-      self.class.new(evenements_pieces[nombre..-1])
+      self.class.new(evenements_pieces[nombre..-1] || [])
     end
 
     def competences

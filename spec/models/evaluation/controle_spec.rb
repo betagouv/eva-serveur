@@ -95,6 +95,10 @@ describe Evaluation::Controle do
       expect(evaluation.shift(2)).to be_a(described_class)
     end
 
+    it 'evenements est toujours un tableau vide' do
+      expect(evaluation.shift(4).evenements).to eql([])
+    end
+
     it 'enlève les x premiers événements de pièces' do
       evaluation.shift(2).evenements.tap do |evenements|
         expect(evenements.count).to eql(1)

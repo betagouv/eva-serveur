@@ -8,7 +8,8 @@ describe Evaluation::Controle::ComparaisonTri do
 
   before(:each) do
     allow(evaluation).to receive(:evenements).and_return([1, 2, 3, 4])
-    allow(evaluation).to receive(:shift).with(4).and_return(evaluation_hors_4_premiers)
+    allow(evaluation).to receive(:enleve_premiers_evenements_pieces)
+      .with(4).and_return(evaluation_hors_4_premiers)
   end
 
   context "lorsqu'il n'y a pas d'erreurs ou de ratées" do

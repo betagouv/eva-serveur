@@ -26,6 +26,10 @@ module Evaluation
       compte_nom_evenements EVENEMENT[:PIECE_NON_TRIEE]
     end
 
+    def nombre_loupees
+      nombre_mal_placees + nombre_non_triees
+    end
+
     def noms_evenements_pieces
       EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_NON_TRIEE).values
     end

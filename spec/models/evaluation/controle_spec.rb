@@ -62,6 +62,18 @@ describe Evaluation::Controle do
     it { expect(evaluation.nombre_non_triees).to eq(1) }
   end
 
+  context 'compter les pièces loupées' do
+    let(:evenements) do
+      [
+        build(:evenement_piece_mal_placee),
+        build(:evenement_piece_bien_placee),
+        build(:evenement_piece_non_triee)
+      ]
+    end
+
+    it { expect(evaluation.nombre_loupees).to eq(2) }
+  end
+
   context 'filtrer les événements pièces' do
     let(:evenements_pieces) do
       [

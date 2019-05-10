@@ -77,6 +77,7 @@ module Evaluation
       {
         ::Competence::COMPREHENSION_CONSIGNE => Inventaire::ComprehensionConsigne,
         ::Competence::VIGILANCE_CONTROLE => Inventaire::VigilanceControle,
+        ::Competence::PERSEVERANCE => Inventaire::Perseverance,
         ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode,
         ::Competence::RAPIDITE => Inventaire::Rapidite
       }.each_with_object({}) do |(competence, classe), resultat|

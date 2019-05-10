@@ -188,7 +188,8 @@ describe Evaluation::Inventaire do
         build(:evenement_demarrage)
       ]
       evaluation = described_class.new(evenements)
-      expect(evaluation.competences.keys).to match_array([Competence::COMPREHENSION_CONSIGNE,
+      expect(evaluation.competences.keys).to match_array([Competence::PERSEVERANCE,
+                                                          Competence::COMPREHENSION_CONSIGNE,
                                                           Competence::VIGILANCE_CONTROLE,
                                                           Competence::ORGANISATION_METHODE,
                                                           Competence::RAPIDITE])

@@ -52,6 +52,46 @@ describe Evaluation::Inventaire do
         expect(evaluation.nombre_erreurs).to be_nil
       end
     end
+
+    describe '#nombre_de_non_remplissage' do
+      it 'est 0 quand tout est rempli' do
+        evenements = [
+          build(:evenement_saisie_inventaire, :ok, donnees: {
+                  reussite: true,
+                  reponses: {
+                    '1': { quantite: 2, reussite: true },
+                    '2': { quantite: 1, reussite: true },
+                    '3': { quantite: 4, reussite: true }
+                  }
+                })
+        ]
+        evaluation = described_class.new(evenements, 5.minute.ago)
+        expect(evaluation.nombre_de_non_remplissage).to eq 0
+      end
+
+      it 'est 1 quand une quantité est manquante' do
+        evenements = [
+          build(:evenement_saisie_inventaire, :ok, donnees: {
+                  reussite: true,
+                  reponses: {
+                    '1': { quantite: '', reussite: true },
+                    '2': { quantite: 1, reussite: true },
+                    '3': { quantite: 4, reussite: true }
+                  }
+                })
+        ]
+        evaluation = described_class.new(evenements, 5.minute.ago)
+        expect(evaluation.nombre_de_non_remplissage).to eq 1
+      end
+
+      it "est à nil lorsque le dernier événement n'est pas une saisie d'inventaire" do
+        evenements = [
+          build(:evenement_ouverture_contenant)
+        ]
+        evaluation = described_class.new(evenements, 5.minute.ago)
+        expect(evaluation.nombre_de_non_remplissage).to be_nil
+      end
+    end
   end
 
   it 'session_id retourne le session_id' do

@@ -244,7 +244,7 @@ fr:
         frise: Frise chronologique
         pieces_bien_placees: Pièces bien placées
         pieces_mal_placees: Pièces mal placées
-        pieces_ratees: Pièces ratées
+        pieces_non_triees: Pièces non triées
       evaluation_competences:
         attention_concentration: Attention/Concentration
         comparaison_tri: Comparaison et tri

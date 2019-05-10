@@ -13,7 +13,7 @@ describe 'Admin - Evaluation', type: :feature do
     visit admin_evaluation_path('session_controle')
     expect(page).to have_content('Pièces Bien Placées 1')
     expect(page).to have_content('Pièces Mal Placées 2')
-    expect(page).to have_content('Pièces Ratées 0')
+    expect(page).to have_content('Pièces Non Triées 0')
   end
 
   scenario 'rapport de la situation inventaire' do

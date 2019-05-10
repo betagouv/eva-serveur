@@ -28,5 +28,6 @@ panel t('.restitution_essais') do
     end
     column t('.ouverture_contenant'), &:nombre_ouverture_contenant
     column t('.nombre_erreurs'), &:nombre_erreurs
+    column t('.nombre_de_non_remplissage'), &:nombre_de_non_remplissage
   end
 end

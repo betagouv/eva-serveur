@@ -18,11 +18,19 @@ module Evaluation
       end
 
       def nombre_erreurs
+        compte_reponse { |reponse| reponse['reussite'] }
+      end
+
+      def nombre_de_non_remplissage
+        compte_reponse { |reponse| reponse['quantite'].present? }
+      end
+
+      def compte_reponse
         return nil unless @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
 
-        @evenements.last.donnees['reponses'].inject(0) do |nombre_erreurs, (_id, reponse)|
-          nombre_erreurs += 1 unless reponse['reussite']
-          nombre_erreurs
+        @evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
+          compteur += 1 unless yield reponse
+          compteur
         end
       end
     end

@@ -13,8 +13,8 @@ describe Evaluation::Inventaire do
       expect(evaluation.temps_total).to be_within(0.1).of(240)
     end
 
-    describe '#nombre_erreurs' do
-      it 'est à 0 en cas de réussite' do
+    describe 'nombre_erreurs, nombre_de_non_remplissage, nombre_erreurs_sauf_de_non_remplissage' do
+      it 'en cas de réussite' do
         evenements = [
           build(:evenement_saisie_inventaire, :ok, donnees: {
                   reussite: true,
@@ -27,9 +27,11 @@ describe Evaluation::Inventaire do
         ]
         evaluation = described_class.new(evenements, 5.minute.ago)
         expect(evaluation.nombre_erreurs).to eql(0)
+        expect(evaluation.nombre_de_non_remplissage).to eql(0)
+        expect(evaluation.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
       end
 
-      it 'est à 2' do
+      it 'avec 2 erreurs' do
         evenements = [
           build(:evenement_saisie_inventaire, :echec, donnees: {
                   reussite: false,
@@ -42,54 +44,35 @@ describe Evaluation::Inventaire do
         ]
         evaluation = described_class.new(evenements, 5.minute.ago)
         expect(evaluation.nombre_erreurs).to eql(2)
+        expect(evaluation.nombre_de_non_remplissage).to eql(0)
+        expect(evaluation.nombre_erreurs_sauf_de_non_remplissage).to eql(2)
       end
 
-      it "est à nil lorsque le dernier événement n'est pas une saisie d'inventaire" do
+      it "avec le dernier événement qui n'est pas une saisie d'inventaire" do
         evenements = [
           build(:evenement_ouverture_contenant)
         ]
         evaluation = described_class.new(evenements, 5.minute.ago)
         expect(evaluation.nombre_erreurs).to be_nil
-      end
-    end
-
-    describe '#nombre_de_non_remplissage' do
-      it 'est 0 quand tout est rempli' do
-        evenements = [
-          build(:evenement_saisie_inventaire, :ok, donnees: {
-                  reussite: true,
-                  reponses: {
-                    '1': { quantite: 2, reussite: true },
-                    '2': { quantite: 1, reussite: true },
-                    '3': { quantite: 4, reussite: true }
-                  }
-                })
-        ]
-        evaluation = described_class.new(evenements, 5.minute.ago)
-        expect(evaluation.nombre_de_non_remplissage).to eq 0
-      end
-
-      it 'est 1 quand une quantité est manquante' do
-        evenements = [
-          build(:evenement_saisie_inventaire, :ok, donnees: {
-                  reussite: true,
-                  reponses: {
-                    '1': { quantite: '', reussite: true },
-                    '2': { quantite: 1, reussite: true },
-                    '3': { quantite: 4, reussite: true }
-                  }
-                })
-        ]
-        evaluation = described_class.new(evenements, 5.minute.ago)
-        expect(evaluation.nombre_de_non_remplissage).to eq 1
-      end
-
-      it "est à nil lorsque le dernier événement n'est pas une saisie d'inventaire" do
-        evenements = [
-          build(:evenement_ouverture_contenant)
-        ]
-        evaluation = described_class.new(evenements, 5.minute.ago)
         expect(evaluation.nombre_de_non_remplissage).to be_nil
+        expect(evaluation.nombre_erreurs_sauf_de_non_remplissage).to be_nil
+      end
+
+      it 'avec un non remplissage' do
+        evenements = [
+          build(:evenement_saisie_inventaire, :ok, donnees: {
+                  reussite: true,
+                  reponses: {
+                    '1': { quantite: '', reussite: false },
+                    '2': { quantite: 1, reussite: true },
+                    '3': { quantite: 4, reussite: true }
+                  }
+                })
+        ]
+        evaluation = described_class.new(evenements, 5.minute.ago)
+        expect(evaluation.nombre_erreurs).to eql(1)
+        expect(evaluation.nombre_de_non_remplissage).to eql(1)
+        expect(evaluation.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
       end
     end
   end

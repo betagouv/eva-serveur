@@ -25,8 +25,14 @@ module Evaluation
         compte_reponse { |reponse| reponse['quantite'].present? }
       end
 
+      def nombre_erreurs_sauf_de_non_remplissage
+        return nil unless dernier_evenement_est_une_saisie_inventaire?
+
+        nombre_erreurs - nombre_de_non_remplissage
+      end
+
       def compte_reponse
-        return nil unless @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
+        return nil unless dernier_evenement_est_une_saisie_inventaire?
 
         @evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
           compteur += 1 unless yield reponse
@@ -36,7 +42,7 @@ module Evaluation
     end
 
     def reussite?
-      @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE] &&
+      dernier_evenement_est_une_saisie_inventaire? &&
         @evenements.last.donnees['reussite']
     end
     alias termine? reussite?
@@ -51,6 +57,10 @@ module Evaluation
 
     def nombre_essais_validation
       compte_nom_evenements(EVENEMENT[:SAISIE_INVENTAIRE])
+    end
+
+    def dernier_evenement_est_une_saisie_inventaire?
+      @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
     end
 
     def essais

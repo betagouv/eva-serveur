@@ -4,7 +4,7 @@ module Evaluation
   class Controle
     class Rapidite < Evaluation::Competence::Base
       def niveau
-        nombre_erreur = @evaluation.nombre_ratees
+        nombre_erreur = @evaluation.nombre_non_triees
         case nombre_erreur
         when 0 then ::Competence::NIVEAU_4
         when 1 then ::Competence::NIVEAU_3

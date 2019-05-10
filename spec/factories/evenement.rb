@@ -45,7 +45,7 @@ FactoryBot.define do
       nom { 'pieceMalPlacee' }
     end
 
-    factory :evenement_piece_ratee do
+    factory :evenement_piece_non_triee do
       nom { 'pieceRatee' }
     end
   end

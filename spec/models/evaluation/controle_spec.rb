@@ -52,14 +52,14 @@ describe Evaluation::Controle do
     it { expect(evaluation.nombre_mal_placees).to eq(2) }
   end
 
-  context 'compter les pièces ratées' do
+  context 'compter les pièces non triées' do
     let(:evenements) do
       [
-        build(:evenement_piece_ratee)
+        build(:evenement_piece_non_triee)
       ]
     end
 
-    it { expect(evaluation.nombre_ratees).to eq(1) }
+    it { expect(evaluation.nombre_non_triees).to eq(1) }
   end
 
   context 'filtrer les événements pièces' do
@@ -67,7 +67,7 @@ describe Evaluation::Controle do
       [
         build(:evenement_piece_bien_placee),
         build(:evenement_piece_mal_placee),
-        build(:evenement_piece_ratee)
+        build(:evenement_piece_non_triee)
       ]
     end
 
@@ -87,7 +87,7 @@ describe Evaluation::Controle do
     let(:evenements) do
       [
         demarrage,
-        build(:evenement_piece_ratee),
+        build(:evenement_piece_non_triee),
         build(:evenement_piece_mal_placee),
         bien_placee
       ]

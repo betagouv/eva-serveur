@@ -7,7 +7,7 @@ module Evaluation
     EVENEMENT = {
       PIECE_BIEN_PLACEE: 'pieceBienPlacee',
       PIECE_MAL_PLACEE: 'pieceMalPlacee',
-      PIECE_RATEE: 'pieceRatee'
+      PIECE_NON_TRIEE: 'pieceRatee'
     }.freeze
 
     def termine?
@@ -22,12 +22,12 @@ module Evaluation
       compte_nom_evenements EVENEMENT[:PIECE_MAL_PLACEE]
     end
 
-    def nombre_ratees
-      compte_nom_evenements EVENEMENT[:PIECE_RATEE]
+    def nombre_non_triees
+      compte_nom_evenements EVENEMENT[:PIECE_NON_TRIEE]
     end
 
     def noms_evenements_pieces
-      EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_RATEE).values
+      EVENEMENT.slice(:PIECE_BIEN_PLACEE, :PIECE_MAL_PLACEE, :PIECE_NON_TRIEE).values
     end
 
     def evenements_pieces

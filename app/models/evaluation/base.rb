@@ -7,6 +7,13 @@ module Evaluation
       STOP: 'stop'
     }.freeze
 
+    CORRESPONDANCES_NIVEAUX = {
+      ::Competence::NIVEAU_4 => 100,
+      ::Competence::NIVEAU_3 => 75,
+      ::Competence::NIVEAU_2 => 50,
+      ::Competence::NIVEAU_1 => 25
+    }.freeze
+
     attr_reader :evenements
     delegate :session_id, :utilisateur, :situation, :date, to: :premier_evenement
 
@@ -40,6 +47,20 @@ module Evaluation
 
     def competences
       {}
+    end
+
+    def efficience
+      competences_utilisees = competences.except(
+        ::Competence::PERSEVERANCE,
+        ::Competence::COMPREHENSION_CONSIGNE
+      ).reject do |_competence, niveau|
+        niveau == ::Competence::NIVEAU_INDETERMINE
+      end
+      return nil if competences_utilisees.size.zero?
+
+      competences_utilisees.inject(0) do |memo, (_competence, niveau)|
+        memo + CORRESPONDANCES_NIVEAUX[niveau]
+      end / competences_utilisees.size
     end
   end
 end

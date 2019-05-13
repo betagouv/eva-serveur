@@ -1,6 +1,7 @@
 Documentation:
   Enabled: false
 AllCops:
+  TargetRubyVersion: 2.6
   Exclude:
     - 'bin/**/*'
     - 'db/**/*'

@@ -14,8 +14,8 @@ module Evaluation
       end
 
       def abandon_en_moins_de_11_pieces_avec_erreurs?
-        @evaluation.abandon? && nombre_pieces < 11 && @evaluation.nombre_loupees > 0 &&
-          @evaluation.nombre_rejoue_consigne > 0
+        @evaluation.abandon? && nombre_pieces < 11 && @evaluation.nombre_loupees.positive? &&
+          @evaluation.nombre_rejoue_consigne.positive?
       end
 
       def nombre_pieces

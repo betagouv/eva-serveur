@@ -189,6 +189,7 @@ describe Evaluation::Inventaire do
       ]
       evaluation = described_class.new(evenements)
       expect(evaluation.competences.keys).to match_array([Competence::COMPREHENSION_CONSIGNE,
+                                                          Competence::VIGILANCE_CONTROLE,
                                                           Competence::ORGANISATION_METHODE,
                                                           Competence::RAPIDITE])
     end

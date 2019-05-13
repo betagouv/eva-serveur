@@ -13,4 +13,5 @@ module Competence
   COMPARAISON_TRI = :comparaison_tri
   ATTENTION_CONCENTRATION = :attention_concentration
   ORGANISATION_METHODE = :organisation_methode
+  VIGILANCE_CONTROLE = :vigilance_controle
 end

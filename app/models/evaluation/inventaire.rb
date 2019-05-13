@@ -57,6 +57,7 @@ module Evaluation
 
     def competences
       {
+        ::Competence::COMPREHENSION_CONSIGNE => Inventaire::ComprehensionConsigne,
         ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode,
         ::Competence::RAPIDITE => Inventaire::Rapidite
       }.each_with_object({}) do |(competence, classe), resultat|

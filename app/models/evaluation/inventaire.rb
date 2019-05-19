@@ -14,7 +14,7 @@ module Evaluation
       end
 
       def temps_total
-        @evenements.last.date - @date_depart_situation
+        evenements.last.date - @date_depart_situation
       end
 
       def nombre_erreurs
@@ -34,7 +34,7 @@ module Evaluation
       def compte_reponse
         return nil unless dernier_evenement_est_une_saisie_inventaire?
 
-        @evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
+        evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
           compteur += 1 unless yield reponse
           compteur
         end
@@ -43,12 +43,12 @@ module Evaluation
 
     def reussite?
       dernier_evenement_est_une_saisie_inventaire? &&
-        @evenements.last.donnees['reussite']
+        evenements.last.donnees['reussite']
     end
     alias termine? reussite?
 
     def en_cours?
-      @evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] && !abandon?
+      evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] && !abandon?
     end
 
     def nombre_ouverture_contenant
@@ -60,14 +60,14 @@ module Evaluation
     end
 
     def dernier_evenement_est_une_saisie_inventaire?
-      @evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
+      evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
     end
 
     def essais
-      essais = @evenements.chunk_while do |evenement_avant, _|
+      essais = evenements.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end
-      date_depart = @evenements.first.date
+      date_depart = evenements.first.date
       essais.map do |evenements|
         Essai.new(evenements, date_depart)
       end

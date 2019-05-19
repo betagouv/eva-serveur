@@ -35,7 +35,7 @@ module Evaluation
     end
 
     def evenements_pieces
-      @evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
+      evenements.find_all { |e| noms_evenements_pieces.include?(e.nom) }
     end
 
     def enleve_premiers_evenements_pieces(nombre)

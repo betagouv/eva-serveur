@@ -10,3 +10,10 @@ panel 'Synthèse' do
     row(:efficience) { |e| en_pourcentage(e.efficience) }
   end
 end
+
+evaluation_globale.evaluations.each do |evaluation|
+  panel evaluation.situation do
+    render evaluation.situation, evaluation: evaluation
+    render 'admin/evaluations/evaluation_competences', evaluation: evaluation
+  end
+end

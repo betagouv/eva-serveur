@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+panel 'Résumé' do
+  ul do
+    li "Temps: #{distance_of_time_in_words(evaluation.temps_total)}"
+    li "Nombre de trop tard : #{evaluation.nombre_non_triees}"
+    li "Nombre d'erreurs : #{evaluation.nombre_mal_placees}"
+    li "Arrêt au .. / 60 : #{evaluation.nombre_pieces}"
+  end
+end

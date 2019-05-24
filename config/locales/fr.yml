@@ -216,6 +216,7 @@ fr:
       default: "%d %B %Y %Hh %Mmin %Ss"
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
+      evaluation: "%A %e %B %Y - %H:%M"
     pm: pm
   active_admin:
     resource:

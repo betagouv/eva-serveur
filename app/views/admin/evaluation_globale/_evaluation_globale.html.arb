@@ -1,13 +1,29 @@
 # frozen_string_literal: true
 
-panel 'Synthèse' do
-  h3 evaluation_globale.utilisateur
-  h4 l evaluation_globale.date
-  h2 "Efficience globale : #{en_pourcentage(evaluation_globale.efficience)}"
+div do
+  div class: :identite do
+    div strong evaluation_globale.utilisateur
+    div l evaluation_globale.date, format: :evaluation
+  end
 
-  attributes_table_for evaluation_globale.evaluations do
-    row :situation
-    row(:efficience) { |e| en_pourcentage(e.efficience) }
+  h2 class: 'text-center' do
+    span class: 'btn btn-primary btn-lg' do
+      "Efficience globale : #{en_pourcentage(evaluation_globale.efficience)}"
+    end
+  end
+
+  div class: :row do
+    evaluation_globale.evaluations.each do |evaluation|
+      div class: :col do
+        div t('.situation', situation: evaluation.situation.titleize)
+        div class: :progress do
+          efficience = evaluation.efficience
+          div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%", 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
+            "#{efficience}%"
+          end
+        end
+      end
+    end
   end
 end
 

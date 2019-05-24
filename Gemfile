@@ -10,6 +10,7 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'coffee-rails'
 gem 'devise'
 gem 'mini_racer', '~> 0.2.0'

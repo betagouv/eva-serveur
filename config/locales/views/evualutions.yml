@@ -1,0 +1,5 @@
+fr:
+  admin:
+    evaluation_globale:
+      evaluation_globale:
+        situation: 'Situation %{situation}'

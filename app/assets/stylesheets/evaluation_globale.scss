@@ -1,0 +1,10 @@
+@import "bootstrap";
+
+.admin_evaluation_globale {
+  font-size: 1.125rem;
+
+  .header, .title_bar { display: none; }
+  #active_admin_content {
+    border-top: none;
+  }
+}

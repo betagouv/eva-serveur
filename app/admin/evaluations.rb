@@ -4,6 +4,10 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
   config.sort_order = 'date_desc'
   actions :index, :show
 
+  batch_action :evaluation_globale_pour do |ids|
+    redirect_to admin_evaluation_globale_path(evaluation_ids: ids)
+  end
+
   controller do
     helper_method :chemin_vue
 
@@ -32,6 +36,7 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
   end
 
   index do
+    selectable_column
     column :situation
     column :utilisateur
     column :session_id

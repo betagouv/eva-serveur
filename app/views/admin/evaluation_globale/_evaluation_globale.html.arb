@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+panel 'Synthèse' do
+  h3 evaluation_globale.utilisateur
+  h4 l evaluation_globale.date
+  h2 "Efficience globale : #{en_pourcentage(evaluation_globale.efficience)}"
+
+  attributes_table_for evaluation_globale.evaluations do
+    row :situation
+    row(:efficience) { |e| en_pourcentage(e.efficience) }
+  end
+end

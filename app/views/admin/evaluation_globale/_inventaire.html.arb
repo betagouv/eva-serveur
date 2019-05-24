@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+panel 'Résumé' do
+  ul do
+    li "Temps: #{distance_of_time_in_words(evaluation.temps_total)}"
+    li "Nombre d'essais : #{evaluation.nombre_essais_validation}"
+    li "Efficience : #{en_pourcentage evaluation.efficience}"
+  end
+end

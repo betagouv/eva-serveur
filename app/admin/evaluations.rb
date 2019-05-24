@@ -16,18 +16,7 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
     end
 
     def find_resource
-      evenements = Evenement.where(session_id: params[:id]).order(:date)
-      situation = evenements.first.situation
-      instancie_evaluation situation, evenements
-    end
-
-    def instancie_evaluation(situation, evenements)
-      classe_evaluation = {
-        'inventaire' => Evaluation::Inventaire,
-        'controle' => Evaluation::Controle
-      }
-
-      classe_evaluation[situation].new(evenements)
+      FabriqueEvaluation.depuis_evenement_id params[:id]
     end
 
     def chemin_vue
@@ -42,7 +31,7 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
     column :session_id
     column :date
     column '' do |evenement|
-      span link_to t('.rapport'), admin_evaluation_path(id: evenement.session_id)
+      span link_to t('.rapport'), admin_evaluation_path(id: evenement)
       span link_to t('.evenements'),
                    admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
     end

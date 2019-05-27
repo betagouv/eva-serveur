@@ -10,11 +10,17 @@ $border-radius: .75rem;
 
 @mixin applique-theme($couleur) {
   .progress, .btn {
-    background-color: rgba($couleur, .2);
+    background: rgba($couleur, .2);
   }
   .progress-bar, .badge, .btn.active {
-    background-color: $couleur;
+    background: $couleur;
     border-color: $couleur;
+  }
+}
+
+@media screen {
+  #main_content {
+    padding-top: 2rem;
   }
 }
 
@@ -29,7 +35,7 @@ $border-radius: .75rem;
 
     .btn {
       border-radius: 1rem;
-      background-color: $couleur-fond-principale;
+      background: $couleur-fond-principale;
       border-color: $couleur-fond-principale;
       color: $couleur-texte;
       font-size: 1.5rem;
@@ -85,6 +91,7 @@ $border-radius: .75rem;
     color: white;
     border-radius: $border-radius;
     color-adjust: exact;
+    text-shadow: none;
   }
 
   .btn-group {

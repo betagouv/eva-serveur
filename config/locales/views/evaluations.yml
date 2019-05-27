@@ -66,6 +66,10 @@ fr:
         pieces_bien_placees: Pièces bien placées
         pieces_mal_placees: Pièces mal placées
         pieces_non_triees: Pièces non triées
+      evaluation_tri:
+        restitution_tri: Restitution de la situation tri
+        pieces_bien_placees: Pièces bien placées
+        pieces_mal_placees: Pièces mal placées
       evaluation_competences:
         attention_concentration: Attention/Concentration
         comparaison_tri: Comparaison et tri

@@ -35,6 +35,7 @@ $border-radius: .75rem;
       font-size: 1.5rem;
       font-weight: bold;
       padding: 1.125rem 1.5rem;
+      color-adjust: exact;
     }
 
   }
@@ -64,6 +65,7 @@ $border-radius: .75rem;
     box-shadow: inset 0px 0px 0px 1px #ffffff !important;
     padding: 1px;
     font-size: 0.875rem;
+    color-adjust: exact;
 
     .progress-bar {
       border-radius: $border-radius;
@@ -76,11 +78,13 @@ $border-radius: .75rem;
     font-size: 1rem;
     font-weight: normal;
     min-width: 3.75rem;
+    color-adjust: exact;
   }
 
   .btn {
     color: white;
     border-radius: $border-radius;
+    color-adjust: exact;
   }
 
   .btn-group {

@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
 div class: "row #{evaluation.situation}" do
-  evaluation.competences.each do |competence, niveau_evalue|
-    div class: 'col-4 mb-4 px-5' do
-      div t("admin.evaluations.evaluation_competences.#{competence}")
-      div class: 'btn-group' do
-        ::Competence::NIVEAUX.each do |niveau|
-          active = niveau == niveau_evalue ? 'active' : ''
-          button class: "btn #{active}" do
-            t(".#{niveau}")
-          end
-        end
-      end
+  evaluation.competences.each do |competence, niveau|
+    div class: rapport_colonne_class do
+      render 'evaluation_competence', competence: competence, niveau_evalue: niveau
     end
   end
 end

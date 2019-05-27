@@ -15,8 +15,8 @@ div class: :panel do
   div class: :row do
     evaluation_globale.evaluations.each do |evaluation|
       situation = evaluation.situation
-      div class: "col px-5 #{situation}" do
-        div t('.situation', situation: situation.titleize)
+      div class: "col px-5 mb-4 #{situation}" do
+        div t('.situation', situation: t(".#{situation}"))
         div class: :progress do
           efficience = evaluation.efficience
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%", 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
@@ -29,8 +29,8 @@ div class: :panel do
 end
 
 evaluation_globale.evaluations.each do |evaluation|
-  panel t('.situation', situation: evaluation.situation.titleize) do
+  panel t('.situation', situation: t(".#{evaluation.situation}")) do
     render evaluation.situation, evaluation: evaluation
-    render 'admin/evaluations/evaluation_competences', evaluation: evaluation
+    render 'evaluation_competences', evaluation: evaluation
   end
 end

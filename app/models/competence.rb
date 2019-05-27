@@ -7,6 +7,8 @@ module Competence
   NIVEAU_1 = 1
   NIVEAU_INDETERMINE = :indetermine
 
+  NIVEAUX = [NIVEAU_INDETERMINE, NIVEAU_1, NIVEAU_2, NIVEAU_3, NIVEAU_4].freeze
+
   PERSEVERANCE = :perseverance
   COMPREHENSION_CONSIGNE = :comprehension_consigne
   RAPIDITE = :rapidite

@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-div class: "row inventaire mb-3" do
-  div class: 'col px-5' do
+div class: "row inventaire mb-4" do
+  div class: 'col mb-4 px-5' do
     span 'Efficience'
     span class: "badge" do
       en_pourcentage evaluation.efficience
     end
   end
-  div class: 'col px-5' do
+  div class: 'col mb-4 px-5' do
     span 'Durée de passation'
     span class: "badge" do
       distance_of_time_in_words(evaluation.temps_total)
     end
   end
-  div class: 'col px-5' do
+  div class: 'col mb-4 px-5' do
     span "Nbre d'essais"
     span class: "badge" do
       evaluation.nombre_essais_validation

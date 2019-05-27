@@ -1,5 +1,13 @@
 fr:
   admin:
     evaluation_globale:
+      evaluation_competences:
+        indetermine: non obs.
+        1: 1
+        2: 2
+        3: 3
+        4: 4
       evaluation_globale:
         situation: 'Situation %{situation}'
+        inventaire: Stock
+        controle: Contrôle

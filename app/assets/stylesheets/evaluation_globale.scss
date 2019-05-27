@@ -96,6 +96,12 @@ $border-radius: .75rem;
     }
   }
 
+  .description-competence {
+    font-size: .75rem;
+    opacity: .5;
+
+  }
+
   .inventaire {
     @include applique-theme($couleur-inventaire);
   }

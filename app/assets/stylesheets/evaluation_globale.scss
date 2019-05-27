@@ -1,10 +1,84 @@
+$couleur-separateur: #afc5d0;
+$couleur-primaire-inventaire: #39c4d4;
+$couleur-primaire-controle: #e3b055;
+$couleur-fond-principale: #d8e8f7;
+$couleur-texte: #001c36;
+
+$border-radius: .75rem;
+
 @import "bootstrap";
 
 .admin_evaluation_globale {
-  font-size: 1.125rem;
+  color: $couleur-texte;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   .header, .title_bar { display: none; }
+
+  h2 {
+    margin: 2rem auto;
+
+    .btn {
+      border-radius: 1rem;
+      background-color: $couleur-fond-principale;
+      border-color: $couleur-fond-principale;
+      color: $couleur-texte;
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding: 1.125rem 1.5rem;
+    }
+
+  }
+
+h3 {
+  text-align: center;
+}
+
   #active_admin_content {
     border-top: none;
   }
+
+  .panel {
+    border-bottom: 1px $couleur-separateur solid;
+  }
+
+  .progress {
+    height: 1.25rem;
+    border-radius: $border-radius;
+    border: solid 1px #9ebcd5;
+    box-shadow: inset 0px 0px 0px 1px #ffffff !important;
+    padding: 1px;
+
+    .progress-bar {
+      border-radius: $border-radius;
+    }
+  }
+
+  .badge {
+    color: white;
+    border-radius: .5rem;
+    font-size: 1rem;
+    font-weight: normal;
+    min-width: 3.75rem;
+  }
+
+  .inventaire {
+    .progress {
+      background-color: rgba($couleur-primaire-inventaire, .2);
+    }
+    .progress-bar, .badge {
+      background-color: $couleur-primaire-inventaire;
+      border-color: $couleur-primaire-inventaire;
+    }
+  }
+
+  .controle {
+    .progress {
+      background-color: rgba($couleur-primaire-controle, .2);
+    }
+    .progress-bar, .badge {
+      background-color: $couleur-primaire-controle;
+      border-color: $couleur-primaire-controle;
+    }
+  }
+
 }

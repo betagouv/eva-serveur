@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
-div do
+div class: :panel do
   div class: :identite do
     div strong evaluation_globale.utilisateur
     div l evaluation_globale.date, format: :evaluation
   end
 
   h2 class: 'text-center' do
-    span class: 'btn btn-primary btn-lg' do
+    span class: 'btn btn-info btn-lg' do
       "Efficience globale : #{en_pourcentage(evaluation_globale.efficience)}"
     end
   end
 
   div class: :row do
     evaluation_globale.evaluations.each do |evaluation|
-      div class: :col do
-        div t('.situation', situation: evaluation.situation.titleize)
+      situation = evaluation.situation
+      div class: "col px-5 #{situation}" do
+        div t('.situation', situation: situation.titleize)
         div class: :progress do
           efficience = evaluation.efficience
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%", 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
@@ -28,7 +29,7 @@ div do
 end
 
 evaluation_globale.evaluations.each do |evaluation|
-  panel evaluation.situation do
+  panel t('.situation', situation: evaluation.situation.titleize) do
     render evaluation.situation, evaluation: evaluation
     render 'admin/evaluations/evaluation_competences', evaluation: evaluation
   end

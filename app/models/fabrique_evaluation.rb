@@ -5,7 +5,8 @@ class FabriqueEvaluation
     def instancie(situation, evenements)
       classe_evaluation = {
         'inventaire' => Evaluation::Inventaire,
-        'controle' => Evaluation::Controle
+        'controle' => Evaluation::Controle,
+        'tri' => Evaluation::Tri
       }
 
       classe_evaluation[situation].new(evenements)

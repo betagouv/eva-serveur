@@ -8,18 +8,19 @@ div class: :panel do
 
   h2 class: 'text-center' do
     span class: 'btn btn-info btn-lg' do
-      "Efficience globale : #{en_pourcentage(evaluation_globale.efficience)}"
+      t('.efficience_globale', efficience: en_pourcentage(evaluation_globale.efficience))
     end
   end
 
   div class: :row do
     evaluation_globale.evaluations.each do |evaluation|
       situation = evaluation.situation
-      div class: "col px-5 mb-4 #{situation}" do
+      div class: "#{rapport_colonne_class} #{situation}" do
         div t('.situation', situation: t(".#{situation}"))
         div class: :progress do
           efficience = evaluation.efficience
-          div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%", 'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
+          div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
+              'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
             "#{efficience}%"
           end
         end

@@ -1,28 +1,8 @@
 # frozen_string_literal: true
 
-div class: 'row controle mb-4' do
-  div class: 'col-4 px-5' do
-    span 'Efficience'
-    span class: "badge" do
-      en_pourcentage evaluation.efficience
-    end
-  end
-  div class: 'col-4 px-5' do
-    span 'Nombre de trop tard'
-    span class: "badge" do
-      evaluation.nombre_non_triees
-    end
-  end
-  div class: 'col-4 px-5' do
-    span "Nombre d'erreurs"
-    span class: "badge" do
-      evaluation.nombre_mal_placees
-    end
-  end
-  div class: 'col-4 px-5' do
-    span "Arrêt au .. / 60"
-    span class: "badge" do
-      evaluation.nombre_pieces
-    end
-  end
+div class: 'row controle' do
+  render 'badge', label: t('.efficience'), valeur: en_pourcentage(evaluation.efficience)
+  render 'badge', label: t('.nombre_trop_tard'), valeur: evaluation.nombre_non_triees
+  render 'badge', label: t('.nombre_erreurs'), valeur: evaluation.nombre_mal_placees
+  render 'badge', label: t('.arret_au'), valeur: evaluation.nombre_pieces
 end

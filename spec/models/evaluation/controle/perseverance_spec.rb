@@ -5,26 +5,26 @@ require 'rails_helper'
 describe Evaluation::Controle::Perseverance do
   let(:evaluation) { double }
 
-  it 'lorsque la situation a été terminé: niveau 4' do
-    expect(evaluation).to receive(:termine?).and_return(true)
-    expect(
-      described_class.new(evaluation).niveau
-    ).to eql(Competence::NIVEAU_4)
+  def pour(termine: nil, nombre_pieces: nil, nombre_bien_placees: nil)
+    allow(evaluation).to receive(:termine?).and_return(termine)
+    allow(evaluation).to receive(:nombre_bien_placees).and_return(nombre_bien_placees)
+    evenements_pieces = Array.new(nombre_pieces) if nombre_pieces
+    allow(evaluation).to receive(:evenements_pieces).and_return(evenements_pieces)
+    described_class.new(evaluation)
   end
 
-  def self.test_nombre_bien_placee_sur_nombre_pieces(niveau, nombre_pieces, nombre_bien_placees)
-    it "a abandonné après avoir bien trié #{nombre_bien_placees} biscuits
-        correctement sur #{nombre_pieces}: niveau #{niveau}" do
-      allow(evaluation).to receive(:termine?).and_return(false)
-      allow(evaluation).to receive(:nombre_bien_placees).and_return(nombre_bien_placees)
-      allow(evaluation).to receive(:evenements_pieces).and_return(Array.new(nombre_pieces))
-      expect(
-        described_class.new(evaluation).niveau
-      ).to eql(niveau)
-    end
-  end
+  it { expect(pour(termine: true)).to evalue_a(Competence::NIVEAU_4) }
+  it {
+    expect(pour(termine: false, nombre_pieces: 15, nombre_bien_placees: 8))
+      .to evalue_a(Competence::NIVEAU_1)
+  }
+  it {
+    expect(pour(termine: false, nombre_pieces: 14, nombre_bien_placees: 8))
+      .to evalue_a(Competence::NIVEAU_INDETERMINE)
+  }
 
-  test_nombre_bien_placee_sur_nombre_pieces(Competence::NIVEAU_1, 15, 8)
-  test_nombre_bien_placee_sur_nombre_pieces(Competence::NIVEAU_INDETERMINE, 14, 8)
-  test_nombre_bien_placee_sur_nombre_pieces(Competence::NIVEAU_INDETERMINE, 15, 7)
+  it {
+    expect(pour(termine: false, nombre_pieces: 15, nombre_bien_placees: 7))
+      .to evalue_a(Competence::NIVEAU_INDETERMINE)
+  }
 end

@@ -10,11 +10,11 @@ gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'coffee-rails'
 gem 'devise'
 gem 'mini_racer', '~> 0.2.0'
 gem 'pg', '~> 0.18'
 gem 'rack-cors', require: 'rack/cors'
-gem 'coffee-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

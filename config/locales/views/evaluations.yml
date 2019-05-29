@@ -3,19 +3,23 @@ fr:
     evaluation_globale:
       commun: &commun
         efficience: Efficience
+        nombre_erreurs: "Nombre d'erreurs"
+        duree: Durée de passation
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'
-        nombre_erreurs: "Nombre d'erreurs"
         arret_au: "Arrêt au .. / 60"
       inventaire:
         <<: *commun
-        duree: Durée de passation
         nombre_essais: Nbre d'essais
+      tri:
+        <<: *commun
+        reste_plateau: Reste plateau
       evaluation_globale:
         situation: 'Situation %{situation}'
         inventaire: Stock
         controle: Contrôle
+        tri: Tri
         efficience_globale: "Efficience globale : %{efficience}"
       evaluation_competence:
         indetermine: non obs.

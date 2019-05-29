@@ -1,6 +1,7 @@
 $couleur-separateur: #afc5d0;
 $couleur-inventaire: #39c4d4;
 $couleur-controle: #e3b055;
+$couleur-tri: #9b7cd1;
 $couleur-fond-principale: #d8e8f7;
 $couleur-texte: #001c36;
 
@@ -120,4 +121,7 @@ $border-radius: .75rem;
     @include applique-theme($couleur-controle);
   }
 
+  .tri {
+    @include applique-theme($couleur-tri);
+  }
 }

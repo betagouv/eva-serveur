@@ -20,5 +20,9 @@ module Evaluation
     def nombre_mal_placees
       compte_nom_evenements EVENEMENT[:PIECE_MAL_PLACEE]
     end
+
+    def nombre_non_triees
+      PIECES_TOTAL - nombre_bien_placees
+    end
   end
 end

@@ -28,6 +28,7 @@ describe Evaluation::Tri do
       ]
     end
     it { expect(evaluation).to_not be_termine }
+    it { expect(evaluation.nombre_non_triees).to eq(Evaluation::Tri::PIECES_TOTAL - 4) }
   end
 
   context 'compter les pièces bien placées' do

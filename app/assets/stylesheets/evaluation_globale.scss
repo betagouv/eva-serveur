@@ -6,8 +6,6 @@ $couleur-texte: #001c36;
 
 $border-radius: .75rem;
 
-@import "bootstrap";
-
 @mixin applique-theme($couleur) {
   .progress, .btn {
     background: rgba($couleur, .2);
@@ -18,13 +16,14 @@ $border-radius: .75rem;
   }
 }
 
-@media screen {
-  #main_content {
-    padding-top: 2rem;
-  }
-}
-
 .admin_evaluation_globale {
+  @media screen {
+    #main_content {
+      padding-top: 2rem;
+    }
+  }
+  @import "bootstrap_minimal";
+
   color: $couleur-texte;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 

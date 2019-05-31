@@ -29,7 +29,8 @@ module Evaluation
       {
         ::Competence::COMPARAISON_TRI => Tri::ComparaisonTri,
         ::Competence::RAPIDITE => Tri::Rapidite,
-        ::Competence::PERSEVERANCE => Tri::Perseverance
+        ::Competence::PERSEVERANCE => Tri::Perseverance,
+        ::Competence::COMPREHENSION_CONSIGNE => Tri::ComprehensionConsigne
       }.each_with_object({}) do |(competence, classe), resultat|
         resultat[competence] = classe.new(self).niveau
       end

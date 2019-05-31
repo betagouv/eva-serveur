@@ -59,7 +59,8 @@ describe Evaluation::Tri do
         build(:evenement_demarrage)
       ]
       evaluation = described_class.new(evenements)
-      expect(evaluation.competences.keys).to match_array([Competence::COMPARAISON_TRI])
+      expect(evaluation.competences.keys).to match_array([Competence::COMPARAISON_TRI,
+                                                          Competence::RAPIDITE])
     end
   end
 end

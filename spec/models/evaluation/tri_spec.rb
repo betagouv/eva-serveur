@@ -52,4 +52,14 @@ describe Evaluation::Tri do
 
     it { expect(evaluation.nombre_mal_placees).to eq(2) }
   end
+
+  describe '#competences' do
+    it 'retourne les compétences évaluées' do
+      evenements = [
+        build(:evenement_demarrage)
+      ]
+      evaluation = described_class.new(evenements)
+      expect(evaluation.competences.keys).to match_array([Competence::COMPARAISON_TRI])
+    end
+  end
 end

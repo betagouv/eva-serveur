@@ -24,5 +24,13 @@ module Evaluation
     def nombre_non_triees
       PIECES_TOTAL - nombre_bien_placees
     end
+
+    def competences
+      {
+        ::Competence::COMPARAISON_TRI => Tri::ComparaisonTri
+      }.each_with_object({}) do |(competence, classe), resultat|
+        resultat[competence] = classe.new(self).niveau
+      end
+    end
   end
 end

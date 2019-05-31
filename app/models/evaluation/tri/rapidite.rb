@@ -4,6 +4,8 @@ module Evaluation
   class Tri
     class Rapidite < Evaluation::Competence::Base
       def niveau
+        return ::Competence::NIVEAU_INDETERMINE unless @evaluation.termine?
+
         temps_total = @evaluation.temps_total
         case temps_total
         when 0..120 then ::Competence::NIVEAU_4

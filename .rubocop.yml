@@ -37,3 +37,4 @@ Metrics/AbcSize:
     - 'spec/models/evaluation/inventaire/rapidite_spec.rb'
     - 'spec/models/evaluation/controle/perseverance_spec.rb'
     - 'spec/models/evaluation/inventaire/perseverance_spec.rb'
+    - 'spec/models/evaluation/tri/perseverance_spec.rb'

@@ -4,8 +4,16 @@ ActiveAdmin.register Evenement, as: 'Evaluations' do
   config.sort_order = 'date_desc'
   actions :index, :show
 
-  batch_action :evaluation_globale_pour do |ids|
+  batch_action :evaluation_globale_pour, priority: 1 do |ids|
     redirect_to admin_evaluation_globale_path(evaluation_ids: ids)
+  end
+
+  batch_action :destroy, confirm: I18n.t('active_admin.evaluations.confirme_suppression') do |ids|
+    ids.each do |id|
+      FabriqueEvaluation.depuis_evenement_id(id).supprimer
+    end
+    redirect_to collection_path,
+                alert: I18n.t('active_admin.evaluations.supprimees', count: ids.size)
   end
 
   controller do

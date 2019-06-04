@@ -21,6 +21,10 @@ module Evaluation
       @evenements = evenements
     end
 
+    def supprimer
+      Evenement.where(id: evenements.pluck(:id)).delete_all
+    end
+
     def compte_nom_evenements(nom)
       evenements.count { |e| e.nom == nom }
     end

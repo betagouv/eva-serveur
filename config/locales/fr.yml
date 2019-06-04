@@ -223,3 +223,8 @@ fr:
       index:
         rapport: Rapport
         evenements: Évenements
+    evaluations:
+      confirme_suppression: Voulez vous vraiment supprimer ces évaluations ?
+      supprimees:
+        one: Évaluation supprimée
+        other: Évaluations supprimées

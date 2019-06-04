@@ -64,4 +64,23 @@ describe Evaluation::Base do
       expect(evaluation.efficience).to be_nil
     end
   end
+
+  describe '#supprimer' do
+    let(:evenements) do
+      [
+        create(:evenement_demarrage),
+        create(:evenement_stop)
+      ]
+    end
+
+    let(:where) { double }
+
+    it "supprime les événements de l'évaluation" do
+      expect(where).to receive(:delete_all)
+      expect(Evenement).to receive(:where)
+        .with(id: [evenements[0].id, evenements[1].id])
+        .and_return(where)
+      evaluation.supprimer
+    end
+  end
 end

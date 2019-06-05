@@ -51,15 +51,13 @@ module Evaluation
     end
 
     def competences
-      {
+      calcule_competences(
         ::Competence::PERSEVERANCE => Controle::Perseverance,
         ::Competence::COMPREHENSION_CONSIGNE => Controle::ComprehensionConsigne,
         ::Competence::RAPIDITE => Controle::Rapidite,
         ::Competence::COMPARAISON_TRI => Controle::ComparaisonTri,
         ::Competence::ATTENTION_CONCENTRATION => Controle::AttentionConcentration
-      }.each_with_object({}) do |(competence, classe), resultat|
-        resultat[competence] = classe.new(self).niveau
-      end
+      )
     end
   end
 end

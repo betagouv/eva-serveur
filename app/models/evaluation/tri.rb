@@ -26,14 +26,12 @@ module Evaluation
     end
 
     def competences
-      {
-        ::Competence::COMPARAISON_TRI => Tri::ComparaisonTri,
-        ::Competence::RAPIDITE => Tri::Rapidite,
+      calcule_competences(
         ::Competence::PERSEVERANCE => Tri::Perseverance,
-        ::Competence::COMPREHENSION_CONSIGNE => Tri::ComprehensionConsigne
-      }.each_with_object({}) do |(competence, classe), resultat|
-        resultat[competence] = classe.new(self).niveau
-      end
+        ::Competence::COMPREHENSION_CONSIGNE => Tri::ComprehensionConsigne,
+        ::Competence::RAPIDITE => Tri::Rapidite,
+        ::Competence::COMPARAISON_TRI => Tri::ComparaisonTri
+      )
     end
   end
 end

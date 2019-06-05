@@ -74,15 +74,13 @@ module Evaluation
     end
 
     def competences
-      {
-        ::Competence::COMPREHENSION_CONSIGNE => Inventaire::ComprehensionConsigne,
-        ::Competence::VIGILANCE_CONTROLE => Inventaire::VigilanceControle,
+      calcule_competences(
         ::Competence::PERSEVERANCE => Inventaire::Perseverance,
-        ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode,
-        ::Competence::RAPIDITE => Inventaire::Rapidite
-      }.each_with_object({}) do |(competence, classe), resultat|
-        resultat[competence] = classe.new(self).niveau
-      end
+        ::Competence::COMPREHENSION_CONSIGNE => Inventaire::ComprehensionConsigne,
+        ::Competence::RAPIDITE => Inventaire::Rapidite,
+        ::Competence::VIGILANCE_CONTROLE => Inventaire::VigilanceControle,
+        ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode
+      )
     end
   end
 end

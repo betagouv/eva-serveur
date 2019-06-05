@@ -123,11 +123,11 @@ describe Evaluation::Controle do
     let(:evenements) { [build(:evenement_demarrage)] }
 
     it 'retourne les compétences évaluées' do
-      expect(evaluation.competences.keys).to match_array([Competence::PERSEVERANCE,
-                                                          Competence::COMPREHENSION_CONSIGNE,
-                                                          Competence::RAPIDITE,
-                                                          Competence::COMPARAISON_TRI,
-                                                          Competence::ATTENTION_CONCENTRATION])
+      expect(evaluation.competences.keys).to eql([Competence::PERSEVERANCE,
+                                                  Competence::COMPREHENSION_CONSIGNE,
+                                                  Competence::RAPIDITE,
+                                                  Competence::COMPARAISON_TRI,
+                                                  Competence::ATTENTION_CONCENTRATION])
     end
   end
 end

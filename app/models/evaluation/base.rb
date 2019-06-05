@@ -53,6 +53,12 @@ module Evaluation
       {}
     end
 
+    def calcule_competences(competences)
+      competences.each_with_object({}) do |(competence, classe), resultat|
+        resultat[competence] = classe.new(self).niveau
+      end
+    end
+
     def efficience
       competences_utilisees = competences.except(
         ::Competence::PERSEVERANCE,

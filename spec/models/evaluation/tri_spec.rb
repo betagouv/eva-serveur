@@ -59,10 +59,10 @@ describe Evaluation::Tri do
         build(:evenement_demarrage)
       ]
       evaluation = described_class.new(evenements)
-      expect(evaluation.competences.keys).to match_array([Competence::COMPARAISON_TRI,
-                                                          Competence::RAPIDITE,
-                                                          Competence::PERSEVERANCE,
-                                                          Competence::COMPREHENSION_CONSIGNE])
+      expect(evaluation.competences.keys).to eql([Competence::PERSEVERANCE,
+                                                  Competence::COMPREHENSION_CONSIGNE,
+                                                  Competence::RAPIDITE,
+                                                  Competence::COMPARAISON_TRI])
     end
   end
 end

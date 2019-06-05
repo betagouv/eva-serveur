@@ -228,3 +228,6 @@ fr:
       supprimees:
         one: Évaluation supprimée
         other: Évaluations supprimées
+    batch_actions:
+      labels:
+        evaluation_globale_pour: Évaluation globale pour

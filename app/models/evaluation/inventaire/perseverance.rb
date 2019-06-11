@@ -27,7 +27,7 @@ module Evaluation
 
       def essai_avec_de_bonnes_reponses_en_moins_22_min
         @evaluation.nombre_essais_validation.positive? &&
-          @evaluation.essais.last.nombre_erreurs < 8 &&
+          @evaluation.essais_verifies.last.nombre_erreurs < 8 &&
           @evaluation.temps_total < 22.minutes.to_i
       end
     end

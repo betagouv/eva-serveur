@@ -159,26 +159,56 @@ describe Evaluation::Inventaire do
     expect(evaluation.nombre_essais_validation).to eql(4)
   end
 
-  it 'retourne les essais avec le nombre de click et le temps' do
-    evenements = [
-      build(:evenement_demarrage, date: 10.minutes.ago),
-      build(:evenement_ouverture_contenant, date: 8.minutes.ago),
-      build(:evenement_ouverture_contenant, date: 8.minutes.ago),
-      build(:evenement_ouverture_contenant, date: 8.minutes.ago),
-      build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
-      build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago)
-    ]
-    evaluation = described_class.new(evenements)
-    expect(evaluation.essais.size).to eql(2)
-    evaluation.essais.first.tap do |essai|
-      expect(essai).to_not be_reussite
-      expect(essai.nombre_ouverture_contenant).to eql(3)
-      expect(essai.temps_total).to within(0.1).of(180)
+  describe '#essais_verifies' do
+    it 'retourne les essais verifiés avec le nombre de click et le temps' do
+      evenements = [
+        build(:evenement_demarrage, date: 10.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
+        build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago)
+      ]
+      evaluation = described_class.new(evenements)
+      expect(evaluation.essais_verifies.size).to eql(2)
+      evaluation.essais_verifies.first.tap do |essai|
+        expect(essai).to_not be_reussite
+        expect(essai.nombre_ouverture_contenant).to eql(3)
+        expect(essai.temps_total).to within(0.1).of(180)
+      end
+      evaluation.essais_verifies.last.tap do |essai|
+        expect(essai).to be_reussite
+        expect(essai.nombre_ouverture_contenant).to eql(0)
+        expect(essai.temps_total).to within(0.1).of(300)
+      end
     end
-    evaluation.essais.last.tap do |essai|
-      expect(essai).to be_reussite
-      expect(essai.nombre_ouverture_contenant).to eql(0)
-      expect(essai.temps_total).to within(0.1).of(300)
+
+    it 'retourne seulement les essais vérifiés' do
+      evenements = [
+        build(:evenement_demarrage, date: 10.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 6.minutes.ago),
+        build(:evenement_saisie_inventaire, :echec, date: 5.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 4.minutes.ago)
+      ]
+      evaluation = described_class.new(evenements)
+      expect(evaluation.essais_verifies.size).to eql(2)
+    end
+  end
+
+  describe '#essais' do
+    it 'retourne tout les essais même non vérifié' do
+      evenements = [
+        build(:evenement_demarrage, date: 10.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 6.minutes.ago),
+        build(:evenement_saisie_inventaire, :echec, date: 5.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 4.minutes.ago)
+      ]
+      evaluation = described_class.new(evenements)
+      expect(evaluation.essais.size).to eql(3)
     end
   end
 

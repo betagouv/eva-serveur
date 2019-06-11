@@ -15,7 +15,8 @@ module Evaluation
       end
 
       def un_essai_avec_8_erreurs
-        @evaluation.nombre_essais_validation == 1 && @evaluation.essais.first.nombre_erreurs == 8
+        @evaluation.nombre_essais_validation == 1 &&
+          @evaluation.essais_verifies.first.nombre_erreurs == 8
       end
     end
   end

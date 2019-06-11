@@ -18,7 +18,7 @@ describe Evaluation::Inventaire::ComprehensionConsigne do
     expect(evaluation).to receive(:nombre_essais_validation).and_return(1)
     expect(evaluation).to receive(:reussite?).and_return(false)
     expect(evaluation).to receive(:abandon?).and_return(true)
-    expect(evaluation).to receive(:essais).and_return([essai])
+    expect(evaluation).to receive(:essais_verifies).and_return([essai])
     expect(
       described_class.new(evaluation).niveau
     ).to eql(Competence::NIVEAU_1)

@@ -35,7 +35,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it 'Réussite au 1er essai: niveau 4' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(1)
-    allow(evaluation).to receive(:essais).and_return([essai_reussite])
+    allow(evaluation).to receive(:essais_verifies).and_return([essai_reussite])
     expect(
       described_class.new(evaluation).niveau
     ).to eql(Competence::NIVEAU_4)
@@ -44,7 +44,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it 'Réussite au 2eme essai: lorsque le 1er essai comporte 7 non remplissage: niveau 4' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(2)
-    allow(evaluation).to receive(:essais).and_return([essai_de_prise_en_main, double])
+    allow(evaluation).to receive(:essais_verifies).and_return([essai_de_prise_en_main, double])
     expect(
       described_class.new(evaluation).niveau
     ).to eql(Competence::NIVEAU_4)
@@ -53,7 +53,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it 'Réussite avec des essais ne comprenant que des erreurs de non remplissage: niveau 3' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(9)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_que_erreurs_de_non_remplissage(7),
@@ -75,7 +75,7 @@ describe Evaluation::Inventaire::VigilanceControle do
       et autres essais avec des erreurs de non remplissage: niveau 3' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(6)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_que_erreurs_de_non_remplissage(7),
@@ -95,7 +95,7 @@ describe Evaluation::Inventaire::VigilanceControle do
       et autres essais avec des erreurs de non remplissage: niveau 2' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(6)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_que_erreurs_de_non_remplissage(7),
@@ -114,7 +114,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it 'Réussite au 5eme essai rectifié en 4 fois : niveau 2' do
     allow(evaluation).to receive(:reussite?).and_return(true)
     allow(evaluation).to receive(:nombre_essais_validation).and_return(5)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_erreurs(3),
@@ -131,7 +131,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it 'Abandon avec 2 essais et les mêmes erreurs aux essais: niveau 1' do
     allow(evaluation).to receive(:reussite?).and_return(false)
     allow(evaluation).to receive(:abandon?).and_return(true)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_erreurs(3),
@@ -146,7 +146,7 @@ describe Evaluation::Inventaire::VigilanceControle do
   it "Abandon avec 3 essais une correction d'erreur: niveau indéterminé" do
     allow(evaluation).to receive(:reussite?).and_return(false)
     allow(evaluation).to receive(:abandon?).and_return(true)
-    allow(evaluation).to receive(:essais).and_return(
+    allow(evaluation).to receive(:essais_verifies).and_return(
       [
         essai_de_prise_en_main,
         essai_avec_erreurs(3),

@@ -24,7 +24,8 @@ module Evaluation
       end
 
       def essais_sans_prise_en_main
-        premier_essai_prise_en_main? ? @evaluation.essais[1..] : @evaluation.essais
+        essais_verifies = @evaluation.essais_verifies
+        premier_essai_prise_en_main? ? essais_verifies[1..] : essais_verifies
       end
 
       def nombre_essais_sans_prise_en_main
@@ -32,7 +33,7 @@ module Evaluation
       end
 
       def premier_essai_prise_en_main?
-        premier_essai = @evaluation.essais.first
+        premier_essai = @evaluation.essais_verifies.first
         premier_essai.nombre_erreurs == 8 && premier_essai.nombre_de_non_remplissage == 7
       end
 

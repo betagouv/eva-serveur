@@ -10,7 +10,7 @@ describe Evaluation::Inventaire::Perseverance do
     expect(evaluation).to receive(:reussite?).and_return(reussite)
     essai = double
     allow(essai).to receive(:nombre_erreurs).and_return(erreurs)
-    allow(evaluation).to receive(:essais).and_return([essai])
+    allow(evaluation).to receive(:essais_verifies).and_return([essai])
     allow(evaluation).to receive(:nombre_essais_validation).and_return(nombre_essais)
     allow(evaluation).to receive(:temps_total).and_return(secondes)
     described_class.new(evaluation)

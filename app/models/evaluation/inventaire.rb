@@ -48,7 +48,7 @@ module Evaluation
     alias termine? reussite?
 
     def en_cours?
-      evenements.last.nom != EVENEMENT[:SAISIE_INVENTAIRE] && !abandon?
+      !dernier_evenement_est_une_saisie_inventaire? && !abandon?
     end
 
     def nombre_ouverture_contenant
@@ -63,12 +63,16 @@ module Evaluation
       evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
     end
 
+    def essais_verifies
+      dernier_evenement_est_une_saisie_inventaire? ? essais : essais[0...-1]
+    end
+
     def essais
-      essais = evenements.chunk_while do |evenement_avant, _|
+      evenements_par_essais = evenements.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end
       date_depart = evenements.first.date
-      essais.map do |evenements|
+      evenements_par_essais.map do |evenements|
         Essai.new(evenements, date_depart)
       end
     end

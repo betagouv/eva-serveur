@@ -16,6 +16,7 @@ gem 'devise'
 gem 'mini_racer', '~> 0.2.0'
 gem 'pg', '~> 0.18'
 gem 'rack-cors', require: 'rack/cors'
+gem 'rollbar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

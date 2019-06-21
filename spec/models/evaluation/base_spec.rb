@@ -50,18 +50,18 @@ describe Evaluation::Base do
       expect(evaluation.efficience).to eql(91)
     end
 
-    it 'ignore les compétences qui ont un niveau indéterminée' do
+    it 'retourne une efficience indéterminé si une compétences indéterminé' do
       expect(evaluation).to receive(:competences).and_return(
         ::Competence::RAPIDITE => Competence::NIVEAU_1,
         ::Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE,
         ::Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_2
       )
-      expect(evaluation.efficience).to eql(37)
+      expect(evaluation.efficience).to eql(::Competence::NIVEAU_INDETERMINE)
     end
 
-    it "retourne nil lorsque rien n'a été mesuré" do
+    it "retourne 0 lorsque rien n'a été mesuré" do
       expect(evaluation).to receive(:competences).and_return({})
-      expect(evaluation.efficience).to be_nil
+      expect(evaluation.efficience).to eql(0)
     end
   end
 

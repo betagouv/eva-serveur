@@ -63,14 +63,21 @@ module Evaluation
       competences_utilisees = competences.except(
         ::Competence::PERSEVERANCE,
         ::Competence::COMPREHENSION_CONSIGNE
-      ).reject do |_competence, niveau|
-        niveau == ::Competence::NIVEAU_INDETERMINE
-      end
-      return nil if competences_utilisees.size.zero?
+      )
+      return ::Competence::NIVEAU_INDETERMINE if competences_indeterminees?(competences_utilisees)
+      return 0 if competences_utilisees.size.zero?
 
       competences_utilisees.inject(0) do |memo, (_competence, niveau)|
         memo + CORRESPONDANCES_NIVEAUX[niveau]
       end / competences_utilisees.size
+    end
+
+    private
+
+    def competences_indeterminees?(competences)
+      competences.any? do |_competence, niveau|
+        niveau == ::Competence::NIVEAU_INDETERMINE
+      end
     end
   end
 end

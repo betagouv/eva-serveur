@@ -19,7 +19,7 @@ describe Evaluation::Globale do
   describe '#efficience est la moyenne des efficiences' do
     context "sans evaluation c'est incalculable" do
       let(:evaluations) { [] }
-      it { expect(evaluation_globale.efficience).to eq(nil) }
+      it { expect(evaluation_globale.efficience).to eq(0) }
     end
 
     context 'une evaluation: son efficience' do
@@ -32,9 +32,11 @@ describe Evaluation::Globale do
       it { expect(evaluation_globale.efficience).to eq(17.5) }
     end
 
-    context 'ignore les évaluations vides' do
-      let(:evaluations) { [double(efficience: 20), double(efficience: nil)] }
-      it { expect(evaluation_globale.efficience).to eq(20) }
+    context 'retourne une efficience indéterminée si une situation est indéterminé' do
+      let(:evaluations) do
+        [double(efficience: 20), double(efficience: ::Evaluation::Globale::NIVEAU_INDETERMINE)]
+      end
+      it { expect(evaluation_globale.efficience).to eq(::Evaluation::Globale::NIVEAU_INDETERMINE) }
     end
   end
 end

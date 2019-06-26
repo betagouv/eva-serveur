@@ -21,7 +21,7 @@ div class: :panel do
           efficience = evaluation.efficience
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
               'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
-            "#{efficience}%"
+            en_pourcentage(efficience).to_s
           end
         end
       end

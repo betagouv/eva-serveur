@@ -57,6 +57,7 @@ fr:
         abandon: Abandon
         echec: Échec
         termine: Terminé
+        indetermine: Indéterminée
       evaluation_inventaire:
         ouverture_contenant: Ouvertures de contenant
         essai: Essai %{count}

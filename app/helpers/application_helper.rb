@@ -2,6 +2,9 @@
 
 module ApplicationHelper
   def en_pourcentage(nombre)
+    indeterminee = I18n.t("admin.evaluations.evaluation.#{nombre}")
+    return indeterminee if nombre.is_a?(Symbol)
+
     number_to_percentage(nombre, precision: 0)
   end
 

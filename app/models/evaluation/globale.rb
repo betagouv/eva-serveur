@@ -4,6 +4,8 @@ module Evaluation
   class Globale
     attr_reader :evaluations
 
+    NIVEAU_INDETERMINE = :indetermine
+
     def initialize(evaluations:)
       @evaluations = evaluations
     end
@@ -17,9 +19,11 @@ module Evaluation
     end
 
     def efficience
-      return nil if evaluations.blank?
+      return 0 if evaluations.blank?
 
       efficiences = evaluations.collect(&:efficience).compact
+      return NIVEAU_INDETERMINE if efficiences.include?(NIVEAU_INDETERMINE)
+
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end
   end

@@ -8,7 +8,7 @@ div class: :panel do
 
   h2 class: 'text-center' do
     span class: 'btn btn-info btn-lg' do
-      t('.efficience_globale', efficience: en_pourcentage(evaluation_globale.efficience))
+      t('.efficience_globale', efficience: formate_efficience(evaluation_globale.efficience))
     end
   end
 
@@ -21,7 +21,7 @@ div class: :panel do
           efficience = evaluation.efficience
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
               'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
-            en_pourcentage(efficience).to_s
+            formate_efficience(efficience).to_s
           end
         end
       end

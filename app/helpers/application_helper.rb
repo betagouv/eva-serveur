@@ -7,6 +7,10 @@ module ApplicationHelper
     number_to_percentage(nombre, precision: 0)
   end
 
+  def progression_efficience(nombre)
+    nombre.is_a?(Symbol) ? 0 : nombre
+  end
+
   def rapport_colonne_class
     'col-4 px-5 mb-4'
   end

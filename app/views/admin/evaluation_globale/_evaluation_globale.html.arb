@@ -18,10 +18,10 @@ div class: :panel do
       div class: "#{rapport_colonne_class} #{situation}" do
         div t('.situation', situation: t(".#{situation}"))
         div class: :progress do
-          efficience = evaluation.efficience
+          efficience = progression_efficience(evaluation.efficience)
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
               'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
-            formate_efficience(efficience).to_s
+            formate_efficience(evaluation.efficience)
           end
         end
       end

@@ -5,6 +5,6 @@ panel t('.titre') do
     evaluation.competences.each do |competence, niveau|
       row(t(".#{competence}")) { niveau }
     end
-    row(t('.efficience')) { "#{evaluation.efficience}%" }
+    row(t('.efficience')) { en_pourcentage(evaluation.efficience) }
   end
 end

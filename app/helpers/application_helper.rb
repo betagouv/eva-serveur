@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def en_pourcentage(nombre)
-    indeterminee = I18n.t("admin.evaluations.evaluation.#{nombre}")
-    return indeterminee if nombre.is_a?(Symbol)
+  def formate_efficience(nombre)
+    return I18n.t("admin.evaluations.evaluation.#{nombre}") if nombre.is_a?(Symbol)
 
     number_to_percentage(nombre, precision: 0)
   end

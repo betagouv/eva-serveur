@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: 'row tri' do
-  render 'badge', label: t('.efficience'), valeur: en_pourcentage(evaluation.efficience)
+  render 'badge', label: t('.efficience'), valeur: formate_efficience(evaluation.efficience)
   render 'badge', label: t('.duree'), valeur: distance_of_time_in_words(evaluation.temps_total)
   render 'badge', label: t('.nombre_erreurs'), valeur: evaluation.nombre_mal_placees
   render 'badge', label: t('.reste_plateau'), valeur: evaluation.nombre_non_triees

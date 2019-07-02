@@ -11,6 +11,10 @@ module ApplicationHelper
     nombre.is_a?(Symbol) ? 0 : nombre
   end
 
+  def formate_duree(duree)
+    Time.at(duree).utc.strftime(duree < 1.hour ? '%M:%S' : '%H:%M:%S')
+  end
+
   def rapport_colonne_class
     'col-4 px-5 mb-4'
   end

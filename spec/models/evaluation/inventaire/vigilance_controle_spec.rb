@@ -128,6 +128,15 @@ describe Evaluation::Inventaire::VigilanceControle do
     ).to eql(Competence::NIVEAU_2)
   end
 
+  it 'Abandon sans essais' do
+    allow(evaluation).to receive(:reussite?).and_return(false)
+    allow(evaluation).to receive(:abandon?).and_return(true)
+    allow(evaluation).to receive(:essais_verifies).and_return([])
+    expect(
+      described_class.new(evaluation).niveau
+    ).to eql(Competence::NIVEAU_INDETERMINE)
+  end
+
   it 'Abandon avec 2 essais et les mêmes erreurs aux essais: niveau 1' do
     allow(evaluation).to receive(:reussite?).and_return(false)
     allow(evaluation).to receive(:abandon?).and_return(true)

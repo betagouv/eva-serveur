@@ -34,7 +34,7 @@ module Evaluation
 
       def premier_essai_prise_en_main?
         premier_essai = @evaluation.essais_verifies.first
-        premier_essai.nombre_erreurs == 8 && premier_essai.nombre_de_non_remplissage == 7
+        premier_essai&.nombre_erreurs == 8 && premier_essai&.nombre_de_non_remplissage == 7
       end
 
       def essais_avec_erreurs_sauf_non_remplissage

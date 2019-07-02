@@ -14,6 +14,6 @@ attributes_table_for resource do
     end
   end
   row(t('admin.evaluations.evaluation.temps')) do |evaluation|
-    distance_of_time_in_words(evaluation.temps_total)
+    formate_duree(evaluation.temps_total)
   end
 end

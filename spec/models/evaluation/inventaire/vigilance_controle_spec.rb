@@ -128,7 +128,7 @@ describe Evaluation::Inventaire::VigilanceControle do
     ).to eql(Competence::NIVEAU_2)
   end
 
-  it 'Abandon sans essais' do
+  it 'Abandon sans essai' do
     allow(evaluation).to receive(:reussite?).and_return(false)
     allow(evaluation).to receive(:abandon?).and_return(true)
     allow(evaluation).to receive(:essais_verifies).and_return([])

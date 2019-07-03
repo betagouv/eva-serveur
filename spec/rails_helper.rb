@@ -73,4 +73,4 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-require 'support/comparateur_niveau_evaluation.rb'
+require 'support/comparateur_niveau_restitution.rb'

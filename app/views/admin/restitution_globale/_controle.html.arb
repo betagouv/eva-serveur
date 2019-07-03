@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+div class: 'row controle' do
+  render 'badge', label: t('.efficience'), valeur: formate_efficience(restitution.efficience)
+  render 'badge', label: t('.nombre_trop_tard'), valeur: restitution.nombre_non_triees
+  render 'badge', label: t('.nombre_erreurs'), valeur: restitution.nombre_mal_placees
+  render 'badge', label: t('.arret_au'), valeur: restitution.nombre_pieces
+end

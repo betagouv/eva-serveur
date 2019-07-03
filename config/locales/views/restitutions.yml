@@ -1,0 +1,87 @@
+fr:
+  admin:
+    restitution_globale:
+      commun: &commun
+        efficience: Efficience
+        nombre_erreurs: "Nombre d'erreurs"
+        duree: Durée de passation
+      controle:
+        <<: *commun
+        nombre_trop_tard: 'Nombre de trop tard'
+        arret_au: "Arrêt au .. / 60"
+      inventaire:
+        <<: *commun
+        nombre_essais: Nbre d'essais
+      tri:
+        <<: *commun
+        reste_plateau: Reste plateau
+      restitution_globale:
+        situation: 'Situation %{situation}'
+        inventaire: Stock
+        controle: Contrôle
+        tri: Tri
+        efficience_globale: "Efficience globale : %{efficience}"
+      evaluation_competence:
+        indetermine: non obs.
+        1: 1
+        2: 2
+        3: 3
+        4: 4
+        comprehension_consigne:
+          titre: La consigne de l’exercice a été comprise
+          description: Analyse efficace des situations de travail proposées. Identification sensé de ce qui est demandé.
+        vigilance_controle:
+          titre: Vigilance et contrôle de la situation proposée
+          description: Souci d’efficacité et du résultat. Vérifie le déroulement de son travail et change sa méthode si besoin pour obtenir le résultat attendu. Perçoit ses erreurs et les rectifie.
+        perseverance:
+          titre: A persévéré dans la réalisation de la tâche
+          description: Fournir les efforts nécessaires pour réaliser et terminer le travail.
+        organisation_methode:
+          titre: Organisation et méthode pour aborder l’exercice
+          description: Capacité à anticiper la meilleure façon de réaliser correctement une tâche. Orientation correcte de son action vers le but fixé et avancement par étape.
+        rapidite:
+          titre: Rapidité de traitement de l’exercice proposé
+          description: Réalisation rapide des tâches demandées.
+        comparaison_tri:
+          titre: Comparaison et tri entre les objets proposés
+          description: Sait distinguer finement les objets entre eux (taille, couleur, forme). Capable de repérer une non-conformité simple par comparaison.
+        attention_concentration:
+          titre: Niveau de concentration pendant l’exercice
+          description: Capacité à faire bien du premier coup, et à être constant dans la tâche à réaliser.
+    restitutions:
+      evaluation:
+        en_cours: En cours
+        temps: Temps
+        etat: État
+        reussite: Réussite
+        abandon: Abandon
+        echec: Échec
+        termine: Terminé
+        indetermine: Indéterminée
+      restitution_inventaire:
+        ouverture_contenant: Ouvertures de contenant
+        essai: Essai %{count}
+        nombre_essais_validation: "Nombre d'essais"
+        nombre_erreurs: "Nombre d'erreurs"
+        restitution_essais: Détail des essais
+        informations_specifiques: Informations spécifiques
+      restitution_controle:
+        restitution_controle: Restitution de la situation contrôle
+        frise: Frise chronologique
+        pieces_bien_placees: Pièces bien placées
+        pieces_mal_placees: Pièces mal placées
+        pieces_non_triees: Pièces non triées
+      restitution_tri:
+        restitution_tri: Restitution de la situation tri
+        pieces_bien_placees: Pièces bien placées
+        pieces_mal_placees: Pièces mal placées
+      restitution_competences:
+        attention_concentration: Attention/Concentration
+        comparaison_tri: Comparaison et tri
+        comprehension_consigne: Compréhension de la consigne
+        efficience: Efficience
+        organisation_methode: Organisation et méthode
+        perseverance: Persévérance
+        rapidite: Rapidité de traitement
+        titre: Évaluation des compétences
+        vigilance_controle: Niveau de vigilance et de contrôle

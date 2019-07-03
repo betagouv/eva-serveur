@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def formate_efficience(nombre)
-    return I18n.t("admin.evaluations.evaluation.#{nombre}") if nombre.is_a?(Symbol)
+    return I18n.t("admin.restitutions.evaluation.#{nombre}") if nombre.is_a?(Symbol)
 
     number_to_percentage(nombre, precision: 0)
   end

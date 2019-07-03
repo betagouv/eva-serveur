@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+div class: :panel do
+  div class: :identite do
+    div strong restitution_globale.utilisateur
+    div l restitution_globale.date, format: :restitution
+  end
+
+  h2 class: 'text-center' do
+    span class: 'btn btn-info btn-lg' do
+      t('.efficience_globale', efficience: formate_efficience(restitution_globale.efficience))
+    end
+  end
+
+  div class: :row do
+    restitution_globale.restitutions.each do |restitution|
+      situation = restitution.situation
+      div class: "#{rapport_colonne_class} #{situation}" do
+        div t('.situation', situation: t(".#{situation}"))
+        div class: :progress do
+          efficience = progression_efficience(restitution.efficience)
+          div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
+              'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
+            formate_efficience(restitution.efficience)
+          end
+        end
+      end
+    end
+  end
+end
+
+restitution_globale.restitutions.each do |restitution|
+  panel t('.situation', situation: t(".#{restitution.situation}")) do
+    render restitution.situation, restitution: restitution
+    render 'restitution_competences', restitution: restitution
+  end
+end

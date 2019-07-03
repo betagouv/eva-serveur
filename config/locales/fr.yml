@@ -216,18 +216,18 @@ fr:
       default: "%d %B %Y %Hh %Mmin %Ss"
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
-      evaluation: "%A %e %B %Y - %H:%M"
+      restitution: "%A %e %B %Y - %H:%M"
     pm: pm
   active_admin:
     resource:
       index:
         rapport: Rapport
         evenements: Évenements
-    evaluations:
-      confirme_suppression: Voulez vous vraiment supprimer ces évaluations ?
+    restitutions:
+      confirme_suppression: Voulez vous vraiment supprimer ces restitutions ?
       supprimees:
-        one: Évaluation supprimée
-        other: Évaluations supprimées
+        one: Restitution supprimée
+        other: Restitutions supprimées
     batch_actions:
       labels:
-        evaluation_globale_pour: Évaluation globale pour
+        restitution_globale_pour: Restitution globale pour

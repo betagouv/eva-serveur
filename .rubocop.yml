@@ -34,8 +34,8 @@ Metrics/BlockLength:
 
 Metrics/AbcSize:
   Exclude:
-    - 'spec/models/evaluation/inventaire/rapidite_spec.rb'
-    - 'spec/models/evaluation/controle/perseverance_spec.rb'
-    - 'spec/models/evaluation/inventaire/perseverance_spec.rb'
-    - 'spec/models/evaluation/tri/perseverance_spec.rb'
-    - 'spec/models/evaluation/tri/comprehension_consigne_spec.rb'
+    - 'spec/models/restitution/inventaire/rapidite_spec.rb'
+    - 'spec/models/restitution/controle/perseverance_spec.rb'
+    - 'spec/models/restitution/inventaire/perseverance_spec.rb'
+    - 'spec/models/restitution/tri/perseverance_spec.rb'
+    - 'spec/models/restitution/tri/comprehension_consigne_spec.rb'

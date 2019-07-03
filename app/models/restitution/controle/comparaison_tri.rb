@@ -11,8 +11,8 @@ module Restitution
       def niveau
         return ::Competence::NIVEAU_INDETERMINE if @restitution.evenements.count < 4
 
-        nombre_erreur = @restitution_hors_4_premiers.nombre_mal_placees
-        case nombre_erreur
+        nombre_erreurs = @restitution_hors_4_premiers.nombre_mal_placees
+        case nombre_erreurs
         when 0 then ::Competence::NIVEAU_4
         when 1 then ::Competence::NIVEAU_3
         when 2 then ::Competence::NIVEAU_2

@@ -24,19 +24,41 @@ accessible à l'url `/admin`, un compte admin est créé avec l'execution du see
 
 L'api est accessible au point `/api`
 
-### Evenements
+### Évaluation
 
-* Path : `/api/evenements`
-* Méthod : `POST`
-* Format du body :
+**Requête**
+
+`POST /api/evaluations`
+
+```
+{
+  "nom": "Roger"
+}
+```
+
+**Réponse**
+
+```
+{
+  "id:": 1,
+  "nom": "Roger"
+}
+```
+
+### Événements
+
+`POST /api/evenements`
+
+Contenu:
+
 ```
 {
   "date": 1551111089238,
   "nom": "ouvertureContenant",
   "session_id": "baf2c86c-6c34-11e9-901c-c34362f7423a",
   "situation": "inventaire",
-  "utilisateur": "Roger",
-  "donnees": {"idContenu": "6"}
+  "donnees": {"idContenu": "6"},
+  "evaluation": "1",
 }
 ```
 

@@ -15,17 +15,7 @@ module Api
     private
 
     def evenement_params
-      parametres = EvenementParams.from(params)
-      formate_date!(parametres)
-    end
-
-    def formate_date!(params)
-      date = params['date']
-      return params if date.blank?
-
-      time_formate = Time.at(date.to_i / 1000.0)
-      params['date'] = DateTime.parse(time_formate.to_s)
-      params
+      EvenementParams.from(params)
     end
   end
 end

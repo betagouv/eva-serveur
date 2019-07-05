@@ -66,10 +66,11 @@ describe Restitution::Base do
   end
 
   describe '#supprimer' do
+    let(:situation) { create :situation_inventaire }
     let(:evenements) do
       [
-        create(:evenement_demarrage),
-        create(:evenement_stop)
+        create(:evenement_demarrage, situation: situation),
+        create(:evenement_stop, situation: situation)
       ]
     end
 

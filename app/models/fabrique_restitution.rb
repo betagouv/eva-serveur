@@ -9,7 +9,7 @@ class FabriqueRestitution
         'tri' => Restitution::Tri
       }
 
-      classe_restitution[situation].new(evenements)
+      classe_restitution[situation.nom_technique].new(evenements)
     end
 
     def depuis_evenement_id(id)

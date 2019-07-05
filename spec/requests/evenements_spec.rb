@@ -6,6 +6,7 @@ describe 'Evenement API', type: :request do
   describe 'POST /evenements' do
     let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
     let(:donnees) { JSON.parse(File.read(chemin)) }
+    let!(:situation_inventaire) { create :situation_inventaire, nom_technique: 'inventaire' }
 
     let(:payload_valide) do
       {
@@ -28,10 +29,12 @@ describe 'Evenement API', type: :request do
     end
 
     context 'Quand une requête est valide' do
-      it 'Crée un événement' do
+      it 'Crée un événement et le relie à sa situation' do
         expect { post '/api/evenements', params: payload_valide }
           .to change { Evenement.count }.by(1)
-        expect(Evenement.last.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
+        evenement = Evenement.last
+        expect(evenement.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
+        expect(evenement.situation).to eq situation_inventaire
       end
 
       it 'retourne une 201' do

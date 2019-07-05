@@ -6,10 +6,14 @@ describe 'Admin - Restitution', type: :feature do
   before { se_connecter_comme_administrateur }
 
   scenario 'rapport de la situation controle' do
-    evenement = create :evenement_piece_bien_placee, situation: 'controle',
+    situation_controle = create :situation_controle
+
+    evenement = create :evenement_piece_bien_placee, situation: situation_controle,
                                                      session_id: 'session_controle'
-    create :evenement_piece_mal_placee, situation: 'controle', session_id: 'session_controle'
-    create :evenement_piece_mal_placee, situation: 'controle', session_id: 'session_controle'
+    create :evenement_piece_mal_placee, situation: situation_controle,
+                                        session_id: 'session_controle'
+    create :evenement_piece_mal_placee, situation: situation_controle,
+                                        session_id: 'session_controle'
 
     visit admin_restitution_path(evenement)
     expect(page).to have_content('Pièces Bien Placées 1')
@@ -18,7 +22,9 @@ describe 'Admin - Restitution', type: :feature do
   end
 
   scenario 'rapport de la situation inventaire' do
-    evenement = create :evenement_saisie_inventaire, :echec, session_id: 'session_inventaire'
+    situation_inventaire = create :situation_inventaire
+    evenement = create :evenement_saisie_inventaire, :echec, session_id: 'session_inventaire',
+                                                             situation: situation_inventaire
     visit admin_restitution_path(evenement)
     expect(page).to have_content('Échec')
   end

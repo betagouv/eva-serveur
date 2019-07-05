@@ -6,7 +6,7 @@ describe 'Admin - Situation', type: :feature do
   before { se_connecter_comme_administrateur }
 
   describe 'index' do
-    let!(:tri) { create :situation, libelle: 'Situation Tri' }
+    let!(:tri) { create :situation_tri, libelle: 'Situation Tri' }
     before { visit admin_situations_path }
     it { expect(page).to have_content 'Situation Tri' }
   end

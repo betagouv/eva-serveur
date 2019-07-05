@@ -4,7 +4,7 @@ ActiveAdmin.register Evenement do
   actions :index, :show, :destroy
   permit_params :donnees, :session_id, :situation, :nom, :date
 
-  filter :situation, as: :select
+  filter :situation
   filter :session_id
   filter :date
 

@@ -7,6 +7,7 @@ describe 'Evenement API', type: :request do
     let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
     let(:donnees) { JSON.parse(File.read(chemin)) }
     let!(:situation_inventaire) { create :situation_inventaire, nom_technique: 'inventaire' }
+    let(:evaluation) { create :evaluation }
 
     let(:payload_valide) do
       {
@@ -14,7 +15,8 @@ describe 'Evenement API', type: :request do
         "nom": 'ouvertureContenant',
         "donnees": donnees,
         "situation": 'inventaire',
-        "session_id": 'O8j78U2xcb2'
+        "session_id": 'O8j78U2xcb2',
+        "evaluation_id": evaluation.id
       }
     end
 
@@ -24,7 +26,8 @@ describe 'Evenement API', type: :request do
         "nom": 'ouvertureContenant',
         "situation": 'inventaire',
         "session_id": 'O8j78U2xcb2',
-        "donnees": donnees
+        "donnees": donnees,
+        "evaluation_id": evaluation.id
       }
     end
 

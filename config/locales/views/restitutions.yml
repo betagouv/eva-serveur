@@ -17,9 +17,6 @@ fr:
         reste_plateau: Reste plateau
       restitution_globale:
         situation: 'Situation %{situation}'
-        inventaire: Stock
-        controle: Contrôle
-        tri: Tri
         efficience_globale: "Efficience globale : %{efficience}"
       evaluation_competence:
         indetermine: non obs.

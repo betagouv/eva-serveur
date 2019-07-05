@@ -32,6 +32,14 @@ describe Restitution::Base do
     end.to raise_error(NotImplementedError)
   end
 
+  it "envoie l'évaluation associée" do
+    evaluation = build(:evaluation)
+    evenements = [
+      build(:evenement_demarrage, evaluation: evaluation)
+    ]
+    expect(described_class.new(evenements).evaluation).to eql(evaluation)
+  end
+
   it 'renvoie par défaut une liste vide pour les compétences évaluées' do
     expect(described_class.new([]).competences).to eql({})
   end

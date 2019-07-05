@@ -21,6 +21,10 @@ module Restitution
       @evenements = evenements
     end
 
+    def evaluation
+      @evenements.first.evaluation
+    end
+
     def supprimer
       Evenement.where(id: evenements.pluck(:id)).delete_all
     end

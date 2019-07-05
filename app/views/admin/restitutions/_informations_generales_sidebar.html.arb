@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 attributes_table_for resource do
-  row :utilisateur
+  row :utilisateur do |restitution|
+    restitution.evaluation.nom
+  end
   row :situation
   row :date
   row(t('admin.restitutions.evaluation.etat')) do |restitution|

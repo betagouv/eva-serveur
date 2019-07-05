@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 2019_07_05_104222) do
     t.index ["reset_password_token"], name: "index_administrateurs_on_reset_password_token", unique: true
   end
 
+  create_table "evaluations", force: :cascade do |t|
+    t.string "nom"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "evenements", force: :cascade do |t|
     t.string "nom"
     t.jsonb "donnees", default: {}, null: false
@@ -49,7 +55,9 @@ ActiveRecord::Schema.define(version: 2019_07_05_104222) do
     t.datetime "updated_at", null: false
     t.string "session_id"
     t.string "utilisateur"
+    t.bigint "evaluation_id"
     t.bigint "situation_id"
+    t.index ["evaluation_id"], name: "index_evenements_on_evaluation_id"
     t.index ["situation_id"], name: "index_evenements_on_situation_id"
   end
 

@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe 'Admin - Administrateur', type: :feature do
-  let(:administrateur) { create :administrateur, email: 'administrateur@exemple.fr' }
-
   context "en tant qu'administrateur" do
     before(:each) { se_connecter_comme_administrateur }
 

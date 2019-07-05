@@ -1,0 +1,7 @@
+fr:
+  activerecord:
+    attributes:
+      situation:
+        created_at: Créée le
+        updated_at: Mise à jour le
+        libelle: Libellé

@@ -6,11 +6,13 @@ describe 'Admin - Evenement', type: :feature do
   let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
   let(:donnees) { JSON.parse(File.read(chemin)) }
   let(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
+  let(:evaluation) { create :evaluation }
 
   let!(:evenement) do
     create :evenement, nom: 'ouvertureContenant',
                        donnees: donnees,
                        situation: situation_inventaire,
+                       evaluation: evaluation,
                        session_id: '1898098HJk8902'
   end
 

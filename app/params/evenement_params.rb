@@ -8,7 +8,7 @@ class EvenementParams
         :nom,
         :session_id,
         :situation,
-        :utilisateur,
+        :evaluation_id,
         donnees: {}
       )
       formate!(permitted)

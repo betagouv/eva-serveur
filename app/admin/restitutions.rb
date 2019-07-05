@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evenement, as: 'Restitutions' do
+  menu false
   config.sort_order = 'date_desc'
   actions :index, :show
 
@@ -20,7 +21,7 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     helper_method :chemin_vue
 
     def scoped_collection
-      end_of_association_chain.where(nom: 'demarrage')
+      end_of_association_chain.where(nom: 'demarrage', evaluation_id: params[:evaluation_id])
     end
 
     def find_resource
@@ -35,7 +36,6 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
   index do
     selectable_column
     column :situation
-    column :utilisateur
     column :session_id
     column :date
     column '' do |evenement|

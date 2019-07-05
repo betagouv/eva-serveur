@@ -3,20 +3,27 @@
 require 'rails_helper'
 
 describe Restitution::Globale do
-  let(:restitution_globale) { Restitution::Globale.new restitutions: restitutions }
+  let(:restitution_globale) do
+    Restitution::Globale.new restitutions: restitutions,
+                             evaluation: evaluation
+  end
 
-  describe '#utilisateur retoure le nom de sa première restitution' do
-    let(:restitutions) { [double(utilisateur: 'Jean Bon')] }
+  describe "#utilisateur retoure le nom de l'évaluation" do
+    let(:restitutions) { [double] }
+    let(:evaluation) { double(nom: 'Jean Bon') }
     it { expect(restitution_globale.utilisateur).to eq('Jean Bon') }
   end
 
-  describe '#date retourne la date de sa première restitution' do
+  describe "#date retourne la date de l'évaluation" do
     let(:date) { 2.days.ago }
-    let(:restitutions) { [double(date: date)] }
+    let(:restitutions) { [double] }
+    let(:evaluation) { double(created_at: date) }
     it { expect(restitution_globale.date).to eq(date) }
   end
 
   describe '#efficience est la moyenne des efficiences' do
+    let(:evaluation) { double }
+
     context "sans restitution c'est incalculable" do
       let(:restitutions) { [] }
       it { expect(restitution_globale.efficience).to eq(0) }

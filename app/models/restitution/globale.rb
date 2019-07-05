@@ -2,20 +2,21 @@
 
 module Restitution
   class Globale
-    attr_reader :restitutions
+    attr_reader :restitutions, :evaluation
 
     NIVEAU_INDETERMINE = :indetermine
 
-    def initialize(restitutions:)
+    def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
+      @evaluation = evaluation
     end
 
     def utilisateur
-      restitutions.first.utilisateur
+      evaluation.nom
     end
 
     def date
-      restitutions.first.date
+      evaluation.created_at
     end
 
     def efficience

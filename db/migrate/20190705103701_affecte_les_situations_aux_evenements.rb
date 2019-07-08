@@ -6,7 +6,7 @@ class AffecteLesSituationsAuxEvenements < ActiveRecord::Migration[5.2]
         situation.libelle = nom_technique
       end
       evenement.situation = situation
-      evenement.save!(validate: false)
+      evenement.save(validate: false)
     end
   end
 end

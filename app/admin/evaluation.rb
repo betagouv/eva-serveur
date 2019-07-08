@@ -6,6 +6,7 @@ ActiveAdmin.register Evaluation do
   index do
     selectable_column
     column :nom
+    column :campagne
     column :created_at
     column '' do |evaluation|
       span link_to t('.restitution'),

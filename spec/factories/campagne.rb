@@ -2,5 +2,7 @@
 
 FactoryBot.define do
   factory :campagne do
+    libelle { 'Ma campagne' }
+    code { '123DB' }
   end
 end

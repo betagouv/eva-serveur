@@ -2,4 +2,5 @@
 
 class Evaluation < ApplicationRecord
   validates :nom, presence: true
+  belongs_to :campagne
 end

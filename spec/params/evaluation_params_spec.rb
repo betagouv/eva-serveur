@@ -12,7 +12,7 @@ describe EvaluationParams do
 
       evaluation_params = described_class.from(params)
       expect(evaluation_params.keys.sort).to eql(
-        %w[nom]
+        %w[campagne nom]
       )
     end
   end

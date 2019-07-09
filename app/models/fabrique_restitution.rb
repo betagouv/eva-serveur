@@ -6,7 +6,8 @@ class FabriqueRestitution
       classe_restitution = {
         'inventaire' => Restitution::Inventaire,
         'controle' => Restitution::Controle,
-        'tri' => Restitution::Tri
+        'tri' => Restitution::Tri,
+        'questions' => Restitution::Questions
       }
 
       classe_restitution[situation.nom_technique].new(evenements)

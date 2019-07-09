@@ -82,3 +82,7 @@ fr:
         rapidite: Rapidité de traitement
         titre: Évaluation des compétences
         vigilance_controle: Niveau de vigilance et de contrôle
+      restitution_questions:
+        restitution_questions: Restitution des questions
+        question: Question
+        reponse: Réponse

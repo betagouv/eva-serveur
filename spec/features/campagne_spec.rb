@@ -4,9 +4,10 @@ require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
   before { se_connecter_comme_administrateur }
+  let!(:campagne) { create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8' }
+  let!(:evaluation) { create :evaluation, campagne: campagne }
 
   describe 'index' do
-    let!(:campagne) { create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8' }
     before { visit admin_campagnes_path }
     it do
       expect(page).to have_content 'Amiens 18 juin'
@@ -22,5 +23,10 @@ describe 'Admin - Campagne', type: :feature do
     end
 
     it { expect { click_on 'Créer' }.to(change { Campagne.count }) }
+  end
+
+  describe 'show' do
+    before { visit admin_campagne_path campagne  }
+    it { expect(page).to have_content 'Roger' }
   end
 end

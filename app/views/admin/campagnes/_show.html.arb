@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+panel 'Détails de la campagne' do
+  attributes_table_for campagne do
+    row :id
+    row :libelle
+    row :code
+    row :created_at
+  end
+end
+
+panel 'Évaluations' do
+  table_for evaluations do
+    column :nom do |evaluation|
+      auto_link(evaluation)
+    end
+    column :created_at
+  end
+end

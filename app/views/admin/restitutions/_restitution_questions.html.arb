@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+panel t('.restitution_questions') do
+  table_for restitutions.reponses do
+    column t('.question') do |reponse|
+      reponse.donnees['question']
+    end
+    column t('.reponse') do |reponse|
+      simple_format(reponse.donnees['reponse'])
+    end
+  end
+end

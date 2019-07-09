@@ -51,5 +51,9 @@ FactoryBot.define do
     factory :evenement_piece_non_triee do
       nom { 'pieceRatee' }
     end
+
+    factory :evenement_reponse do
+      nom { 'reponse' }
+    end
   end
 end

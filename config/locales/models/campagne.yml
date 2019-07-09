@@ -1,19 +1,19 @@
 fr:
   activerecord:
     attributes:
-      situation:
+      campagne:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
   formtastic:
     actions:
-      situation:
+      campagne:
         create: Créer
         update: Enregistrer
   active_admin:
     resources:
-      situation:
+      campagne:
         delete_model: Supprimer
-        new_model: Créer une situation
+        new_model: Créer une campagne
         edit_model: Modifier
         delete_model: Supprimer

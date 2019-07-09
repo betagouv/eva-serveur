@@ -1,0 +1,15 @@
+fr:
+  activerecord:
+    models:
+      evaluation:
+        one: Évaluation
+        other: Évaluations
+    attributes:
+      evaluation:
+        created_at: Créée le
+        updated_at: Mise à jour le
+        libelle: Libellé
+  active_admin:
+    resources:
+      evaluation:
+        delete_model: Supprimer

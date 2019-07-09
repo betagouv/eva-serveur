@@ -18,7 +18,7 @@ fr:
       restitution_globale:
         situation: 'Situation %{situation}'
         efficience_globale: "Efficience globale : %{efficience}"
-      evaluation_competence:
+      restitution_competence:
         indetermine: non obs.
         1: 1
         2: 2

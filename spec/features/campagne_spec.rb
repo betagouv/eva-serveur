@@ -16,16 +16,22 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'création' do
+    let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
     before do
       visit new_admin_campagne_path
       fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
     end
 
     context 'génère un code si on en saisit pas' do
-      before { fill_in :campagne_code, with: '' }
+      before do
+        fill_in :campagne_code, with: ''
+        select 'Mon QCM'
+      end
+
       it do
         expect { click_on 'Créer' }.to(change { Campagne.count })
         expect(Campagne.last.code).to be_present
+        expect(page).to have_content 'Mon QCM'
       end
     end
 

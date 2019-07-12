@@ -2,6 +2,8 @@
 
 class Campagne < ApplicationRecord
   has_many :evaluations
+  belongs_to :questionnaire, optional: true
+
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true
   before_validation :genere_code_unique

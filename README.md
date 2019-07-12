@@ -14,6 +14,8 @@ PostgreSql
 * Initialisation de la base
 `rake db:migrate` && `rake db:seed`
 
+Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campagne avec l'interface d'administration décrite ci-dessous.
+
 * Lancer les tests
 `bundle exec rake spec` ou `guard`
 

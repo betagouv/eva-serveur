@@ -19,7 +19,6 @@ describe 'Admin - Campagne', type: :feature do
     before do
       visit new_admin_campagne_path
       fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
-      fill_in :campagne_code, with: 'EUROCK'
     end
 
     it { expect { click_on 'Créer' }.to(change { Campagne.count }) }

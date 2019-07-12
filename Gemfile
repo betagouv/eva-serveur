@@ -9,6 +9,7 @@ gem 'rails', '~> 5.2.2'
 gem 'puma', '~> 3.11'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
+gem 'activeadmin_addons'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'coffee-rails'

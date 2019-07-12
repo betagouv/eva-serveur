@@ -5,6 +5,7 @@ panel 'Détails de la campagne' do
     row :id
     row :libelle
     row :code
+    row :questionnaire
     row :created_at
   end
 end

@@ -10,6 +10,13 @@ fr:
       campagne:
         create: Créer
         update: Enregistrer
+    placeholders:
+      campagne:
+        libelle: "Ma campagne du 12 avril"
+        code: 1A2B3
+    hints:
+      campagne:
+        code: Laissez vide pour en générer un, ou choisissez vous-même
   active_admin:
     resources:
       campagne:

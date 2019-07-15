@@ -21,11 +21,25 @@ describe 'Admin - Campagne', type: :feature do
       fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
     end
 
-    it { expect { click_on 'Créer' }.to(change { Campagne.count }) }
+    context 'génère un code si on en saisit pas' do
+      before { fill_in :campagne_code, with: '' }
+      it do
+        expect { click_on 'Créer' }.to(change { Campagne.count })
+        expect(Campagne.last.code).to be_present
+      end
+    end
+
+    context 'conserve le code saisi si précisé' do
+      before { fill_in :campagne_code, with: 'EUROCKS' }
+      it do
+        expect { click_on 'Créer' }.to(change { Campagne.count })
+        expect(Campagne.last.code).to eq 'EUROCKS'
+      end
+    end
   end
 
   describe 'show' do
-    before { visit admin_campagne_path campagne  }
+    before { visit admin_campagne_path campagne }
     it { expect(page).to have_content 'Roger' }
   end
 end

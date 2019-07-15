@@ -2,6 +2,7 @@
 
 class Campagne < ApplicationRecord
   has_many :evaluations
+  has_many :situations_configurations
   belongs_to :questionnaire, optional: true
 
   validates :libelle, presence: true

@@ -11,6 +11,8 @@ gem 'puma', '~> 3.11'
 gem 'activeadmin'
 gem 'activeadmin_addons'
 gem 'activeadmin_json_editor'
+gem 'activeadmin_reorderable'
+gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'coffee-rails'

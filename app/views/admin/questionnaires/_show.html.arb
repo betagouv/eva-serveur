@@ -9,9 +9,7 @@ panel 'Détails du questionnaire' do
 end
 
 panel 'Questions' do
-  table_for questionnaire.questions do
-    column :intitule do |question|
-      link_to(question.display_name, admin_question_path(question))
-    end
+  reorderable_table_for questionnaire.questionnaires_questions do
+    column :question
   end
 end

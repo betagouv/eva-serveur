@@ -198,12 +198,10 @@ ActiveAdmin.setup do |config|
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
     config.register_stylesheet 'restitution_globale.css'
     config.register_stylesheet 'restitution_globale_print.css', media: :print
-    config.register_stylesheet 'active_admin/json_editor.css'
 
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
-  config.register_javascript 'active_admin/json_editor.js'
 
   # == CSV options
   #

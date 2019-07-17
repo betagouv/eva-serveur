@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Questionnaire < ApplicationRecord
-  validates :libelle, :questions, presence: true
+  validates :libelle, presence: true
 
   def display_name
     libelle

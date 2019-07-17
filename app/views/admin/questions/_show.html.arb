@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+panel 'Détails de la question' do
+  attributes_table_for question do
+    row :id
+    row :intitule
+    row :created_at
+  end
+end
+
+panel 'Choix' do
+  table_for question.choix do
+    column :intitule
+    column :type_choix
+    column :created_at
+  end
+end

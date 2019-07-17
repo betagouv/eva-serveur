@@ -1,0 +1,23 @@
+fr:
+  activerecord:
+    attributes:
+      choix:
+        created_at: Crée le
+        updated_at: Mis à jour le
+        intitule: Intitulé
+        type_choix: Bon/Mauvais/Abstention?
+  formtastic:
+    actions:
+      choix:
+        create: Créer
+        update: Enregistrer
+    hints:
+      choix:
+        code: Laissez vide pour en générer un, ou choisissez vous-même
+  active_admin:
+    resources:
+      choix:
+        delete_model: Supprimer
+        new_model: Créer un choix
+        edit_model: Modifier
+        delete_model: Supprimer

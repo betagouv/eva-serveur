@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_105148) do
+ActiveRecord::Schema.define(version: 2019_07_17_110228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 2019_07_17_105148) do
     t.datetime "updated_at", null: false
     t.bigint "questionnaire_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
+  end
+
+  create_table "choix", force: :cascade do |t|
+    t.string "intitule"
+    t.bigint "question_id"
+    t.integer "type_choix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_choix_on_question_id"
   end
 
   create_table "evaluations", force: :cascade do |t|
@@ -102,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_105148) do
   end
 
   add_foreign_key "campagnes", "questionnaires"
+  add_foreign_key "choix", "questions"
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "situations"
 end

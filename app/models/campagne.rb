@@ -9,6 +9,8 @@ class Campagne < ApplicationRecord
   validates :code, presence: true, uniqueness: true
   before_validation :genere_code_unique
 
+  accepts_nested_attributes_for :situations_configurations, allow_destroy: true
+
   def display_name
     libelle
   end

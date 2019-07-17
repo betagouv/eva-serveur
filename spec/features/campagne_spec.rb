@@ -45,7 +45,11 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'show' do
-    before { visit admin_campagne_path campagne }
+    let(:situation) { create :situation_inventaire }
+    before do
+      campagne.situations_configurations.create! situation: situation
+      visit admin_campagne_path campagne
+    end
     it { expect(page).to have_content 'Roger' }
   end
 end

@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Campagne do
-  permit_params :libelle, :code, :questionnaire_id
-
-  sidebar 'Configuration', only: %i[show edit] do
-    link_to 'Configuration', admin_campagne_situations_configurations_path(resource)
-  end
+  permit_params :libelle, :code, :questionnaire_id,
+                situations_configurations_attributes: %i[id situation_id _destroy]
 
   show do
-    render partial: 'show', locals: { evaluations: resource.evaluations }
+    render partial: 'show'
   end
 
   form do |f|
@@ -17,6 +14,10 @@ ActiveAdmin.register Campagne do
       f.input :libelle
       f.input :code
       f.input :questionnaire
+      f.has_many :situations_configurations, allow_destroy: true do |c|
+        c.input :id, as: :hidden
+        c.input :situation
+      end
     end
     f.actions
   end

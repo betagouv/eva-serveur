@@ -17,12 +17,11 @@ describe 'Admin - Questionnaire', type: :feature do
     before do
       visit new_admin_questionnaire_path
       fill_in :questionnaire_libelle, with: 'Evaluation Formation'
-      fill_in :questionnaire_questions, with: "[{q: 'question1'}]"
     end
 
     it do
       expect { click_on 'Créer' }.to(change { Questionnaire.count })
-      expect(page).to have_content "[{q: 'question1'}]"
+      expect(page).to have_content 'Evaluation Formation'
     end
   end
 end

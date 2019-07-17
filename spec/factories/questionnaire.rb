@@ -3,6 +3,5 @@
 FactoryBot.define do
   factory :questionnaire do
     libelle { 'Mon Questionnaire' }
-    questions { [{}] }
   end
 end

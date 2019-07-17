@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+panel 'Détails de la question' do
+  attributes_table_for question_redaction_note do
+    row :id
+    row :intitule
+    row :entete_reponse
+    row :expediteur
+    row :message
+    row :objet_reponse
+    row :created_at
+  end
+end

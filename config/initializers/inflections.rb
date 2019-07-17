@@ -12,6 +12,7 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'situation_configuration', 'situations_configurations'
+  inflect.irregular 'questionnaire_question', 'questionnaires_questions'
   inflect.irregular 'choix', 'choix'
 end
 

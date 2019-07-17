@@ -4,4 +4,7 @@ FactoryBot.define do
   factory :question do
     intitule { 'Ma Question' }
   end
+
+  factory :question_qcm do
+  end
 end

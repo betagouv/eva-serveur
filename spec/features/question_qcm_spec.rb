@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe 'Admin - Question', type: :feature do
+describe 'Admin - Question QCM', type: :feature do
   before { se_connecter_comme_administrateur }
-  let!(:question) { create :question, intitule: 'Comment ça va ?' }
+  let!(:question) { create :question_qcm, intitule: 'Comment ça va ?' }
 
   describe 'index' do
-    before { visit admin_questions_path }
+    before { visit admin_question_qcms_path }
     it do
       expect(page).to have_content 'Comment ça va ?'
     end
@@ -15,8 +15,8 @@ describe 'Admin - Question', type: :feature do
 
   describe 'création' do
     before do
-      visit new_admin_question_path
-      fill_in :question_intitule, with: '2 + 2 = ?'
+      visit new_admin_question_qcm_path
+      fill_in :question_qcm_intitule, with: '2 + 2 = ?'
     end
 
     it do

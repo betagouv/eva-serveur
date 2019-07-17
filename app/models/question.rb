@@ -2,9 +2,8 @@
 
 class Question < ApplicationRecord
   validates :intitule, presence: true
-  has_many :choix, -> { order(position: :asc) }
 
-  accepts_nested_attributes_for :choix, allow_destroy: true
+  validates :intitule, presence: true
 
   def display_name
     intitule

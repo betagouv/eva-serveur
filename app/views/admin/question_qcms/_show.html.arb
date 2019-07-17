@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 panel 'Détails de la question' do
-  attributes_table_for question do
+  attributes_table_for question_qcm do
     row :id
     row :intitule
+    row :description
     row :created_at
   end
 end
 
 panel 'Choix' do
-  reorderable_table_for question.choix do
+  reorderable_table_for question_qcm.choix do
     column :intitule
     column :type_choix
   end

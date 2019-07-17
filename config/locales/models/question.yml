@@ -5,18 +5,23 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         intitule: Intitulé
+      question_redaction_note:
+        entete_reponse: Entête réponse
+        expediteur: Expéditeur
+        objet_reponse: Objet réponse
   formtastic:
     actions:
-      question:
+      question: &question_actions
         create: Créer
         update: Enregistrer
-    hints:
-      question:
-        code: Laissez vide pour en générer un, ou choisissez vous-même
+      question_qcm: *question_actions
+      question_redaction_note: *question_actions
   active_admin:
     resources:
-      question:
+      question: &question_resources
         delete_model: Supprimer
         new_model: Créer une question
         edit_model: Modifier
         delete_model: Supprimer
+      question_qcm: *question_resources
+      question_redaction_note: *question_resources

@@ -99,6 +99,12 @@ ActiveRecord::Schema.define(version: 2019_07_19_092350) do
     t.string "intitule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+    t.string "description"
+    t.string "entete_reponse"
+    t.string "expediteur"
+    t.string "message"
+    t.string "objet_reponse"
   end
 
   create_table "situations", force: :cascade do |t|

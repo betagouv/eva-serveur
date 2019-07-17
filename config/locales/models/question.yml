@@ -1,0 +1,22 @@
+fr:
+  activerecord:
+    attributes:
+      question:
+        created_at: Créée le
+        updated_at: Mise à jour le
+        intitule: Intitulé
+  formtastic:
+    actions:
+      question:
+        create: Créer
+        update: Enregistrer
+    hints:
+      question:
+        code: Laissez vide pour en générer un, ou choisissez vous-même
+  active_admin:
+    resources:
+      question:
+        delete_model: Supprimer
+        new_model: Créer une question
+        edit_model: Modifier
+        delete_model: Supprimer

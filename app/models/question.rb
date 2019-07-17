@@ -5,4 +5,8 @@ class Question < ApplicationRecord
   has_many :choix
 
   accepts_nested_attributes_for :choix, allow_destroy: true
+
+  def display_name
+    intitule
+  end
 end

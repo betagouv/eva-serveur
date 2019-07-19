@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionRedactionNote do
+  menu parent: 'Questions'
+
   permit_params :intitule, :entete_reponse, :expediteur, :message, :objet_reponse
 
   form do |f|

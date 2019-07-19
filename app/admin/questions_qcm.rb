@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionQcm do
+  menu parent: 'Questions'
+
   permit_params :intitule, :description, choix_attributes: %i[id intitule type_choix _destroy]
 
   form do |f|

@@ -26,7 +26,7 @@ accessible à l'url `/admin`, un compte admin est créé avec l'execution du see
 
 L'api est accessible au point `/api`
 
-### Évaluation
+### Crée une évaluation
 
 **Requête**
 
@@ -34,7 +34,8 @@ L'api est accessible au point `/api`
 
 ```
 {
-  "nom": "Roger"
+  "nom": "Roger",
+  "code_campagne": "Mon code de campagne"
 }
 ```
 
@@ -47,7 +48,29 @@ L'api est accessible au point `/api`
 }
 ```
 
-### Événements
+### Récupére des informations sur l'évaluation
+
+**Requête**
+
+`GET /api/evaluations/:id`
+
+**Réponse**
+
+```
+{
+  "questions:": [
+    {
+      id: 1,
+      type: 'qcm',
+      intitule: 'Ma question',
+      description: 'Ma description',
+      choix: []
+    }
+  ]
+}
+```
+
+### Crée un événement
 
 `POST /api/evenements`
 
@@ -60,7 +83,7 @@ Contenu:
   "session_id": "baf2c86c-6c34-11e9-901c-c34362f7423a",
   "situation": "inventaire",
   "donnees": {"idContenu": "6"},
-  "evaluation": "1",
+  "evaluation_id": "1",
 }
 ```
 

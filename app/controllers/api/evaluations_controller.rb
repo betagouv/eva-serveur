@@ -2,6 +2,10 @@
 
 module Api
   class EvaluationsController < ActionController::API
+    rescue_from ActiveRecord::RecordNotFound do
+      render status: :not_found
+    end
+
     def create
       evaluation = Evaluation.new(EvaluationParams.from(params))
       if evaluation.save
@@ -9,6 +13,17 @@ module Api
       else
         render json: evaluation.errors, status: 422
       end
+    end
+
+    def show
+      evaluation = Evaluation.find(params[:id])
+
+      questions = evaluation.campagne.questionnaire
+                    &.questionnaires_questions
+                    &.joins(:question)
+                    &.map(&:question) || []
+
+      render json: { questions: questions }
     end
   end
 end

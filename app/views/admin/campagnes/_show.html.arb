@@ -12,7 +12,6 @@ end
 
 panel 'Configuration' do
   reorderable_table_for campagne.situations_configurations do
-    column :position
     column :situation
   end
 end

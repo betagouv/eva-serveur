@@ -9,4 +9,11 @@ RSpec.describe Choix, type: :model do
     should define_enum_for(:type_choix)
       .with_values(%i[bon mauvais abstention])
   end
+
+  describe '#as_json' do
+    it 'serialise les champs' do
+      json = subject.as_json
+      expect(json.keys).to match_array(%w[id intitule])
+    end
+  end
 end

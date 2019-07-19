@@ -5,4 +5,8 @@ class Choix < ApplicationRecord
   enum type_choix: %i[bon mauvais abstention]
 
   acts_as_list scope: :question_id
+
+  def as_json(_options = nil)
+    slice(:id, :intitule)
+  end
 end

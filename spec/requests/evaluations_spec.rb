@@ -23,4 +23,32 @@ describe 'Evaluation API', type: :request do
       end
     end
   end
+
+  describe 'GET /evaluations/:id' do
+    let(:question) { create :question_qcm, intitule: 'Ma question' }
+    let(:questionnaire) { create :questionnaire, questions: [question] }
+    let(:campagne) { create :campagne, questionnaire: questionnaire }
+    let(:evaluation) { create :evaluation, campagne: campagne }
+
+    it 'retourne les questions de la campagne' do
+      get "/api/evaluations/#{evaluation.id}"
+
+      expect(response).to be_ok
+      expect(JSON.parse(response.body)['questions'].size).to eql(1)
+    end
+
+    it "retourne des questions vide lorsque qu'il n'y a pas de questionnaire" do
+      campagne.update(questionnaire: nil)
+      get "/api/evaluations/#{evaluation.id}"
+
+      expect(response).to be_ok
+      expect(JSON.parse(response.body)['questions'].size).to eql(0)
+    end
+
+    it "retourne une 404 lorsqu'elle n'existe pas" do
+      get '/api/evaluations/404'
+
+      expect(response).to have_http_status(404)
+    end
+  end
 end

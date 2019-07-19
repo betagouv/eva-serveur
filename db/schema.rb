@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_085835) do
+ActiveRecord::Schema.define(version: 2019_07_19_092350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,5 +121,6 @@ ActiveRecord::Schema.define(version: 2019_07_19_085835) do
   add_foreign_key "choix", "questions"
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "situations"
+  add_foreign_key "questionnaires_questions", "questionnaires"
   add_foreign_key "questionnaires_questions", "questions"
 end

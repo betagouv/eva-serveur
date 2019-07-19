@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_092350) do
     t.integer "type_choix"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
     t.index ["question_id"], name: "index_choix_on_question_id"
   end
 
@@ -74,8 +75,8 @@ ActiveRecord::Schema.define(version: 2019_07_19_092350) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "session_id"
-    t.bigint "situation_id"
     t.bigint "evaluation_id"
+    t.bigint "situation_id"
     t.index ["evaluation_id"], name: "index_evenements_on_evaluation_id"
     t.index ["situation_id"], name: "index_evenements_on_situation_id"
   end

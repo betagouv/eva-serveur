@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Questionnaire < ApplicationRecord
-  has_many :questionnaires_questions, -> { order(position: :asc) }
+  has_many :questionnaires_questions, -> { order(position: :asc) }, dependent: :destroy
 
   validates :libelle, presence: true
 

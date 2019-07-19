@@ -1,5 +1,12 @@
 fr:
   activerecord:
+    models:
+      question_qcm:
+        one: Question QCM
+        other: Questions QCM
+      question_redaction_note:
+        one: Question Rédaction de note
+        other: Questions rédaction de notes
     attributes:
       question:
         created_at: Créée le
@@ -16,12 +23,3 @@ fr:
         update: Enregistrer
       question_qcm: *question_actions
       question_redaction_note: *question_actions
-  active_admin:
-    resources:
-      question: &question_resources
-        delete_model: Supprimer
-        new_model: Créer une question
-        edit_model: Modifier
-        delete_model: Supprimer
-      question_qcm: *question_resources
-      question_redaction_note: *question_resources

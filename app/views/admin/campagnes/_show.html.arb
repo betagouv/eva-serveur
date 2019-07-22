@@ -19,7 +19,8 @@ end
 panel 'Évaluations' do
   table_for campagne.evaluations do
     column :nom do |evaluation|
-      auto_link(evaluation)
+      link_to evaluation.nom,
+              admin_restitutions_path(evaluation_id: evaluation.id)
     end
     column :created_at
   end

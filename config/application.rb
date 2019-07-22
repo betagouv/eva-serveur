@@ -36,6 +36,10 @@ module CompetencesProServeur
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
 
+    Rails.application.routes.default_url_options = {
+      host: ENV['HOST_URL']
+    }
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

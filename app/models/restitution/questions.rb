@@ -7,7 +7,7 @@ module Restitution
     }.freeze
 
     def termine?
-      reponses.size == 2
+      reponses.size == campagne.questionnaire.questionnaires_questions.size
     end
 
     def reponses

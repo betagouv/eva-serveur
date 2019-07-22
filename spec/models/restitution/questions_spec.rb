@@ -3,8 +3,10 @@
 require 'rails_helper'
 
 describe Restitution::Questions do
-  let(:question1) { build :question_qcm, intitule: 'Ma question 1' }
-  let(:question2) { build :question_qcm, intitule: 'Ma question 2' }
+  let(:situation) { create :situation, libelle: 'Questions', nom_technique: 'questions' }
+  let(:evaluation) { create :evaluation, nom: 'Test' }
+  let(:question1) { create :question_qcm, intitule: 'Ma question 1' }
+  let(:question2) { create :question_qcm, intitule: 'Ma question 2' }
   let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
   let(:campagne) { build :campagne, questionnaire: questionnaire }
 
@@ -32,6 +34,30 @@ describe Restitution::Questions do
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution).to be_termine
+    end
+  end
+
+  describe '#questions_et_reponses' do
+    it "retourne aucune question et réponse si aucune n'a été répondu" do
+      evenements = [
+        build(:evenement_demarrage)
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.questions_et_reponses.size).to eq(0)
+    end
+
+    it 'retourne les questions et les réponses du questionnaire' do
+      evenements = [
+        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
+        create(:evenement_reponse,
+               evaluation: evaluation,
+               situation: situation,
+               donnees: { question: question1.id, reponse: 1 })
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.questions_et_reponses.size).to eq(1)
+      expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
+      expect(restitution.questions_et_reponses.first[:reponse]).to eql(1)
     end
   end
 

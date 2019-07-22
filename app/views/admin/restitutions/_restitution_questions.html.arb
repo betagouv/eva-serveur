@@ -1,12 +1,21 @@
 # frozen_string_literal: true
 
 panel t('.restitution_questions') do
-  table_for restitutions.reponses do
-    column t('.question') do |reponse|
-      reponse.donnees['question']
+  table_for restitutions.questions_et_reponses do
+    column t('.question') do |question_reponse|
+      auto_link(question_reponse[:question])
     end
-    column t('.reponse') do |reponse|
-      simple_format(reponse.donnees['reponse'])
+    column t('.reponse') do |question_reponse|
+      question = question_reponse[:question]
+      if question.is_a?(QuestionQcm)
+        question.choix.find(question_reponse[:reponse]).intitule
+      else
+        simple_format(question_reponse[:reponse])
+      end
+    end
+    column t('.correct') do |question_reponse|
+      question = question_reponse[:question]
+      question.choix.find(question_reponse[:reponse]).type_choix if question.is_a?(QuestionQcm)
     end
   end
 end

@@ -8,6 +8,9 @@ class QuestionQcm < Question
   def as_json(_options = nil)
     json = slice(:id, :intitule, :description, :choix)
     json['type'] = 'qcm'
+    if illustration.attached?
+      json['illustration'] = Rails.application.routes.url_helpers.url_for(illustration)
+    end
     json
   end
 end

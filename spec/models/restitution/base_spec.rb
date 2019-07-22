@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe Restitution::Base do
-  let(:restitution) { described_class.new(evenements) }
+  let(:campagne)    { build(:campagne) }
+  let(:restitution) { described_class.new(campagne, evenements) }
 
   context 'lorsque le dernier événement est stop' do
     let(:evenements) do
@@ -23,12 +24,12 @@ describe Restitution::Base do
       build(:evenement_rejoue_consigne),
       build(:evenement_rejoue_consigne)
     ]
-    expect(described_class.new(evenements).nombre_rejoue_consigne).to eql(2)
+    expect(described_class.new(campagne, evenements).nombre_rejoue_consigne).to eql(2)
   end
 
   it 'envoie une exception not implemented pour la méthode termine?' do
     expect do
-      described_class.new([]).termine?
+      described_class.new(campagne, []).termine?
     end.to raise_error(NotImplementedError)
   end
 
@@ -37,15 +38,15 @@ describe Restitution::Base do
     evenements = [
       build(:evenement_demarrage, evaluation: evaluation)
     ]
-    expect(described_class.new(evenements).evaluation).to eql(evaluation)
+    expect(described_class.new(campagne, evenements).evaluation).to eql(evaluation)
   end
 
   it 'renvoie par défaut une liste vide pour les compétences évaluées' do
-    expect(described_class.new([]).competences).to eql({})
+    expect(described_class.new(campagne, []).competences).to eql({})
   end
 
   describe '#efficience' do
-    let(:restitution) { described_class.new([]) }
+    let(:restitution) { described_class.new(campagne, []) }
 
     it "retourne l'efficience sans les compétences persévérance et compréhension consigne" do
       expect(restitution).to receive(:competences).and_return(

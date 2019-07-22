@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 describe Restitution::Questions do
+  let(:campagne) { build :campagne }
+
   describe '#termine?' do
     it "lorsque aucune questions n'a encore été répondu" do
       evenements = [build(:evenement_demarrage)]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution).to_not be_termine
     end
 
@@ -15,7 +17,7 @@ describe Restitution::Questions do
         build(:evenement_demarrage),
         build(:evenement_reponse, donnees: { question: :litteratie, reponse: 1 })
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution).to_not be_termine
     end
 
@@ -25,7 +27,7 @@ describe Restitution::Questions do
         build(:evenement_reponse, donnees: { question: :litteratie, reponse: 1 }),
         build(:evenement_reponse, donnees: { question: :numeratie, reponse: 2 })
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution).to be_termine
     end
   end
@@ -36,7 +38,7 @@ describe Restitution::Questions do
         build(:evenement_reponse),
         build(:evenement_reponse)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.reponses.size).to eql(2)
     end
 
@@ -45,7 +47,7 @@ describe Restitution::Questions do
         build(:evenement_demarrage),
         build(:evenement_reponse)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.reponses.size).to eql(1)
     end
   end

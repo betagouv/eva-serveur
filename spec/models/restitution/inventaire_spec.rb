@@ -3,13 +3,15 @@
 require 'rails_helper'
 
 describe Restitution::Inventaire do
+  let(:campagne) { build :campagne }
+
   describe Restitution::Inventaire::Essai do
     it 'retourne le temps depuis le début de la situation' do
       evenements = [
         build(:evenement_ouverture_contenant, date: 2.minute.ago),
         build(:evenement_ouverture_contenant, date: 1.minute.ago)
       ]
-      restitution = described_class.new(evenements, 5.minute.ago)
+      restitution = described_class.new(campagne, evenements, 5.minute.ago)
       expect(restitution.temps_total).to be_within(0.1).of(240)
     end
 
@@ -25,7 +27,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minute.ago)
         expect(restitution.nombre_erreurs).to eql(0)
         expect(restitution.nombre_de_non_remplissage).to eql(0)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
@@ -42,7 +44,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minute.ago)
         expect(restitution.nombre_erreurs).to eql(2)
         expect(restitution.nombre_de_non_remplissage).to eql(0)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(2)
@@ -52,7 +54,7 @@ describe Restitution::Inventaire do
         evenements = [
           build(:evenement_ouverture_contenant)
         ]
-        restitution = described_class.new(evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minute.ago)
         expect(restitution.nombre_erreurs).to be_nil
         expect(restitution.nombre_de_non_remplissage).to be_nil
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to be_nil
@@ -69,7 +71,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minute.ago)
         expect(restitution.nombre_erreurs).to eql(1)
         expect(restitution.nombre_de_non_remplissage).to eql(1)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
@@ -81,7 +83,7 @@ describe Restitution::Inventaire do
     evenements = [
       build(:evenement_demarrage, session_id: 'exemple')
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution.session_id).to eql('exemple')
   end
 
@@ -90,7 +92,7 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage),
       build(:evenement_saisie_inventaire, :ok)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution).to be_reussite
     expect(restitution).to be_termine
     expect(restitution).to_not be_abandon
@@ -102,7 +104,7 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage),
       build(:evenement_saisie_inventaire, :echec)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution).to_not be_reussite
     expect(restitution).to_not be_abandon
     expect(restitution).to_not be_en_cours
@@ -113,7 +115,7 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage),
       build(:evenement_stop)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution).to_not be_reussite
     expect(restitution).to be_abandon
     expect(restitution).to_not be_en_cours
@@ -123,7 +125,7 @@ describe Restitution::Inventaire do
     evenements = [
       build(:evenement_demarrage)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution).to_not be_reussite
     expect(restitution).to_not be_abandon
     expect(restitution).to be_en_cours
@@ -134,7 +136,7 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage, date: 10.minutes.ago),
       build(:evenement_saisie_inventaire, :ok, date: 4.minutes.ago)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution.temps_total).to be_within(0.1).of(360)
   end
 
@@ -144,7 +146,7 @@ describe Restitution::Inventaire do
       build(:evenement_ouverture_contenant),
       build(:evenement_ouverture_contenant)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution.nombre_ouverture_contenant).to eql(3)
   end
 
@@ -155,7 +157,7 @@ describe Restitution::Inventaire do
       build(:evenement_saisie_inventaire, :echec),
       build(:evenement_saisie_inventaire, :ok)
     ]
-    restitution = described_class.new(evenements)
+    restitution = described_class.new(campagne, evenements)
     expect(restitution.nombre_essais_validation).to eql(4)
   end
 
@@ -169,7 +171,7 @@ describe Restitution::Inventaire do
         build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
         build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.essais_verifies.size).to eql(2)
       restitution.essais_verifies.first.tap do |essai|
         expect(essai).to_not be_reussite
@@ -192,7 +194,7 @@ describe Restitution::Inventaire do
         build(:evenement_saisie_inventaire, :echec, date: 5.minutes.ago),
         build(:evenement_ouverture_contenant, date: 4.minutes.ago)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.essais_verifies.size).to eql(2)
     end
   end
@@ -207,7 +209,7 @@ describe Restitution::Inventaire do
         build(:evenement_saisie_inventaire, :echec, date: 5.minutes.ago),
         build(:evenement_ouverture_contenant, date: 4.minutes.ago)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.essais.size).to eql(3)
     end
   end
@@ -217,7 +219,7 @@ describe Restitution::Inventaire do
       evenements = [
         build(:evenement_demarrage)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.competences.keys).to eql([Competence::PERSEVERANCE,
                                                    Competence::COMPREHENSION_CONSIGNE,
                                                    Competence::RAPIDITE,

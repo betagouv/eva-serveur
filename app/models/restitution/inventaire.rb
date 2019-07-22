@@ -8,8 +8,8 @@ module Restitution
     }.freeze
 
     class Essai < Inventaire
-      def initialize(evenements, date_depart_situation)
-        super(evenements)
+      def initialize(campagne, evenements, date_depart_situation)
+        super(campagne, evenements)
         @date_depart_situation = date_depart_situation
       end
 
@@ -73,7 +73,7 @@ module Restitution
       end
       date_depart = evenements.first.date
       evenements_par_essais.map do |evenements|
-        Essai.new(evenements, date_depart)
+        Essai.new(campagne, evenements, date_depart)
       end
     end
 

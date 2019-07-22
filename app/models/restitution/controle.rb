@@ -47,7 +47,7 @@ module Restitution
       nouveaux_evenements = evenements.reject do |evenement|
         noms_evenements_pieces.include?(evenement.nom) && (compteur += 1) <= nombre
       end
-      self.class.new(nouveaux_evenements)
+      self.class.new(campagne, nouveaux_evenements)
     end
 
     def competences

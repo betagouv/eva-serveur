@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe Restitution::Controle do
-  let(:restitution) { described_class.new(evenements) }
+  let(:campagne) { build :campagne }
+  let(:restitution) { described_class.new(campagne, evenements) }
 
   context 'avec toutes les pieces enregistrées' do
     let(:evenements) do

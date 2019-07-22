@@ -5,6 +5,9 @@ panel 'Détails de la question' do
     row :id
     row :libelle
     row :intitule
+    row :illustration do |question|
+      image_tag url_for(question.illustration) if question.illustration.attached?
+    end
     row :entete_reponse
     row :expediteur
     row :message

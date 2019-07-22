@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionQcm do
   menu parent: 'Questions'
 
-  permit_params :libelle, :intitule, :description,
+  permit_params :libelle, :intitule, :description, :illustration,
                 choix_attributes: %i[id intitule type_choix _destroy]
 
   form do |f|
@@ -12,6 +12,7 @@ ActiveAdmin.register QuestionQcm do
       f.input :libelle
       f.input :intitule
       f.input :description
+      f.input :illustration, as: :file
       f.has_many :choix, allow_destroy: true do |c|
         c.input :id, as: :hidden
         c.input :intitule

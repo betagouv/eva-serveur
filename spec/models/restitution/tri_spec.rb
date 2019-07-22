@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe Restitution::Tri do
-  let(:restitution) { described_class.new(evenements) }
+  let(:campagne) { build :campagne }
+  let(:restitution) { described_class.new(campagne, evenements) }
 
   context 'avec toutes les pieces enregistrées' do
     let(:evenements) do
@@ -58,7 +59,7 @@ describe Restitution::Tri do
       evenements = [
         build(:evenement_demarrage)
       ]
-      restitution = described_class.new(evenements)
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.competences.keys).to eql([Competence::PERSEVERANCE,
                                                    Competence::COMPREHENSION_CONSIGNE,
                                                    Competence::RAPIDITE,

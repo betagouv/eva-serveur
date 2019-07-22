@@ -14,10 +14,11 @@ module Restitution
       ::Competence::NIVEAU_1 => 25
     }.freeze
 
-    attr_reader :evenements
+    attr_reader :campagne, :evenements
     delegate :session_id, :situation, :date, to: :premier_evenement
 
-    def initialize(evenements)
+    def initialize(campagne, evenements)
+      @campagne = campagne
       @evenements = evenements
     end
 

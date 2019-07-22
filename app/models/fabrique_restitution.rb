@@ -2,7 +2,7 @@
 
 class FabriqueRestitution
   class << self
-    def instancie(situation, evenements)
+    def instancie(situation, campagne, evenements)
       classe_restitution = {
         'inventaire' => Restitution::Inventaire,
         'controle' => Restitution::Controle,
@@ -10,13 +10,14 @@ class FabriqueRestitution
         'questions' => Restitution::Questions
       }
 
-      classe_restitution[situation.nom_technique].new(evenements)
+      classe_restitution[situation.nom_technique].new(campagne, evenements)
     end
 
     def depuis_evenement_id(id)
       evenement = Evenement.find id
+      campagne = evenement.evaluation.campagne
       evenements = Evenement.where(session_id: evenement.session_id).order(:date)
-      instancie evenement.situation, evenements
+      instancie evenement.situation, campagne, evenements
     end
   end
 end

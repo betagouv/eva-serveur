@@ -1,5 +1,13 @@
 fr:
   activerecord:
+    errors:
+      models:
+        evaluation:
+          attributes:
+            nom:
+              blank: doit être rempli
+            campagne:
+              required: code inexistant
     models:
       evaluation:
         one: Évaluation

@@ -16,7 +16,6 @@ class EvaluationParams
     def relie_campagne!(params)
       code_campagne = params.delete('code_campagne')
       campagne = Campagne.find_by code: code_campagne
-      campagne ||= Campagne.first
       params['campagne'] = campagne
     end
   end

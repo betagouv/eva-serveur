@@ -4,7 +4,6 @@ module Api
   class EvenementsController < ActionController::API
     def create
       @evenement = Evenement.new(evenement_params)
-
       if @evenement.save
         render json: @evenement, status: :created
       else

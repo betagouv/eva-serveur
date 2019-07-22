@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
-  validates :intitule, presence: true
+  has_one_attached :illustration
 
   validates :intitule, presence: true
   validates :libelle, presence: true

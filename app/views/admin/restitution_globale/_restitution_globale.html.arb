@@ -14,6 +14,8 @@ div class: :panel do
 
   div class: :row do
     restitution_globale.restitutions.each do |restitution|
+      next if restitution.efficience.nil?
+
       situation = restitution.situation
       div class: "#{rapport_colonne_class} #{situation.nom_technique}" do
         div t('.situation', situation: situation.libelle)
@@ -26,6 +28,7 @@ div class: :panel do
         end
       end
     end
+    nil
   end
 end
 

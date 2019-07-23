@@ -80,4 +80,11 @@ describe Restitution::Questions do
       expect(restitution.reponses.size).to eql(1)
     end
   end
+
+  describe '#efficience' do
+    it 'retourne nil' do
+      restitution = described_class.new(campagne, [])
+      expect(restitution.efficience).to be_nil
+    end
+  end
 end

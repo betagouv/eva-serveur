@@ -24,6 +24,10 @@ module Restitution
       evenements.find_all { |e| e.nom == EVENEMENT[:REPONSE] }
     end
 
+    def efficience
+      nil
+    end
+
     private
 
     def questions

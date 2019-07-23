@@ -12,6 +12,10 @@ fr:
       inventaire:
         <<: *commun
         nombre_essais: Nbre d'essais
+      questions:
+        abstention: Ne sait pas
+        bon: Correct
+        mauvais: Erreur
       tri:
         <<: *commun
         reste_plateau: Reste plateau

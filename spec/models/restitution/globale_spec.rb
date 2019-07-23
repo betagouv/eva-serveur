@@ -47,5 +47,23 @@ describe Restitution::Globale do
         expect(restitution_globale.efficience).to eq(::Restitution::Globale::NIVEAU_INDETERMINE)
       }
     end
+
+    context 'ignore les efficiences a nil' do
+      let(:restitutions) do
+        [double(efficience: 20), double(efficience: nil)]
+      end
+      it {
+        expect(restitution_globale.efficience).to eq(20)
+      }
+    end
+
+    context 'avec une seul efficience a nil, retourn indéterminée' do
+      let(:restitutions) do
+        [double(efficience: nil)]
+      end
+      it {
+        expect(restitution_globale.efficience).to eq(::Restitution::Globale::NIVEAU_INDETERMINE)
+      }
+    end
   end
 end

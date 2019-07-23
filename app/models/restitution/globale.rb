@@ -23,7 +23,7 @@ module Restitution
       return 0 if restitutions.blank?
 
       efficiences = restitutions.collect(&:efficience).compact
-      return NIVEAU_INDETERMINE if efficiences.include?(NIVEAU_INDETERMINE)
+      return NIVEAU_INDETERMINE if efficiences.include?(NIVEAU_INDETERMINE) || efficiences.blank?
 
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end

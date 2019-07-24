@@ -18,10 +18,7 @@ module Api
     def show
       evaluation = Evaluation.find(params[:id])
 
-      questions = evaluation.campagne.questionnaire
-                    &.questionnaires_questions
-                    &.joins(:question)
-                    &.map(&:question) || []
+      questions = evaluation.campagne.questionnaire&.questions || []
 
       render json: { questions: questions }
     end

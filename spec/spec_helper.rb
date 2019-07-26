@@ -34,10 +34,10 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   def se_connecter_comme_administrateur
-    Administrateur.create(email: 'administrateur@exemple.fr', password: 'password')
+    Compte.create(email: 'administrateur@exemple.fr', password: 'password', role: 'administrateur')
     visit '/admin'
-    fill_in 'administrateur_email'.to_sym, with: 'administrateur@exemple.fr'
-    fill_in 'administrateur_password'.to_sym, with: 'password'
+    fill_in :compte_email, with: 'administrateur@exemple.fr'
+    fill_in :compte_password, with: 'password'
     click_on 'Se connecter'
   end
 end

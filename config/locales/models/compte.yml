@@ -1,11 +1,11 @@
 fr:
   activerecord:
     models:
-      administrateur:
-        one: Administrateur
-        other: Administrateurs
+      compte:
+        one: Compte
+        other: Comptes
     attributes:
-      administrateur:
+      compte:
         created_at: Créé le
         updated_at: Mis à jour le
         email: Courriel
@@ -13,14 +13,15 @@ fr:
         current_sign_in_at: Dernière connexion
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
+        role: Rôle
   formtastic:
     actions:
-      administrateur:
-        create: Créer un administrateur
+      compte:
+        create: Créer un compte
         update: Modifier
   active_admin:
     resources:
-      administrateur:
-        new_model: Créer un administrateur
+      compte:
+        new_model: Créer un compte
         edit_model: Modifier
         delete_model: Supprimer

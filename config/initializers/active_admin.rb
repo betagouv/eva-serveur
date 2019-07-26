@@ -54,7 +54,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  config.authentication_method = :authenticate_administrateur!
+  config.authentication_method = :authenticate_compte!
 
   # == User Authorization
   #
@@ -86,7 +86,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_administrateur
+  config.current_user_method = :current_compte
 
   # == Logging Out
   #
@@ -98,7 +98,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_administrateur_session_path
+  config.logout_link_path = :destroy_compte_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..

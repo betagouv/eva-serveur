@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  actions :index, :show
-
   index do
-    selectable_column
     column :nom
     column :campagne
     column :created_at

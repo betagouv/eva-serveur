@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
 gem 'activeadmin_addons'
@@ -17,7 +17,7 @@ gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'coffee-rails'
 gem 'devise'
 gem 'mini_racer', '~> 0.2.0'
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
 

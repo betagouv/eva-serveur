@@ -3,6 +3,7 @@
 panel 'Détails de la question' do
   attributes_table_for question_redaction_note do
     row :id
+    row :libelle
     row :intitule
     row :entete_reponse
     row :expediteur

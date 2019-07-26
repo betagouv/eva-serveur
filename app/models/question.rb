@@ -4,8 +4,9 @@ class Question < ApplicationRecord
   validates :intitule, presence: true
 
   validates :intitule, presence: true
+  validates :libelle, presence: true
 
   def display_name
-    intitule
+    libelle
   end
 end

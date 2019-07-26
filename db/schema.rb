@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_092350) do
+ActiveRecord::Schema.define(version: 2019_07_26_101023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2019_07_19_092350) do
     t.string "expediteur"
     t.string "message"
     t.string "objet_reponse"
+    t.string "libelle"
   end
 
   create_table "situations", force: :cascade do |t|

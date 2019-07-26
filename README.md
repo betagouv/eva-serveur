@@ -66,6 +66,13 @@ L'api est accessible au point `/api`
       description: 'Ma description',
       choix: []
     }
+  ],
+  "situations": [
+    {
+      "id": 1,
+      "libelle": "Tri",
+      "nom_technique": "tri"
+    }
   ]
 }
 ```

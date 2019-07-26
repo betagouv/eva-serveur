@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Administrateur do
-  permit_params :email, :password, :password_confirmation
+ActiveAdmin.register Compte do
+  permit_params :email, :password, :password_confirmation, :role
 
   index do
     selectable_column
     id_column
     column :email
+    column :role
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -21,6 +22,7 @@ ActiveAdmin.register Administrateur do
   form do |f|
     f.inputs do
       f.input :email
+      f.input :role, as: :select, collection: %w[administrateur organisation]
       f.input :password
       f.input :password_confirmation
     end

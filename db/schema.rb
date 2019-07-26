@@ -49,19 +49,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_101023) do
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
-
-  create_table "administrateurs", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_administrateurs_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_administrateurs_on_reset_password_token", unique: true
-  end
-
   create_table "campagnes", force: :cascade do |t|
     t.string "libelle"
     t.string "code"
@@ -81,6 +68,19 @@ ActiveRecord::Schema.define(version: 2019_07_26_101023) do
     t.index ["question_id"], name: "index_choix_on_question_id"
   end
 
+  create_table "comptes", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "role"
+    t.index ["email"], name: "index_comptes_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_comptes_on_reset_password_token", unique: true
+  end
+
   create_table "evaluations", force: :cascade do |t|
     t.string "nom"
     t.datetime "created_at", null: false
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 2019_07_26_101023) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "session_id"
-    t.bigint "evaluation_id"
     t.bigint "situation_id"
+    t.bigint "evaluation_id"
     t.index ["evaluation_id"], name: "index_evenements_on_evaluation_id"
     t.index ["situation_id"], name: "index_evenements_on_situation_id"
   end

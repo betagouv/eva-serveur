@@ -8,4 +8,4 @@
 
 return unless  Rails.env.development?
 
-Administrateur.create!(email: 'administrateur@exemple.com', password: 'password', password_confirmation: 'password')
+Compte.create!(email: 'administrateur@exemple.com', role: 'administrateur', password: 'password', password_confirmation: 'password')

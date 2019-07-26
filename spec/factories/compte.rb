@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :administrateur do
+  factory :compte do
     email
     password { 'password' }
   end

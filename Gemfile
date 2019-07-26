@@ -15,6 +15,7 @@ gem 'activestorage-openstack'
 gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
+gem 'cancancan'
 gem 'coffee-rails'
 gem 'devise'
 gem 'mini_racer', '~> 0.2.0'

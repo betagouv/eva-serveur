@@ -7,4 +7,8 @@ class Situation < ApplicationRecord
   def display_name
     libelle
   end
+
+  def as_json(_options = nil)
+    slice(:id, :libelle, :nom_technique)
+  end
 end

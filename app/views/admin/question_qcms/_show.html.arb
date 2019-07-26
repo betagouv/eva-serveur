@@ -3,6 +3,7 @@
 panel 'Détails de la question' do
   attributes_table_for question_qcm do
     row :id
+    row :libelle
     row :intitule
     row :description
     row :created_at

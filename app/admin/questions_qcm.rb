@@ -3,11 +3,13 @@
 ActiveAdmin.register QuestionQcm do
   menu parent: 'Questions'
 
-  permit_params :intitule, :description, choix_attributes: %i[id intitule type_choix _destroy]
+  permit_params :libelle, :intitule, :description,
+                choix_attributes: %i[id intitule type_choix _destroy]
 
   form do |f|
     f.semantic_errors
     f.inputs do
+      f.input :libelle
       f.input :intitule
       f.input :description
       f.has_many :choix, allow_destroy: true do |c|
@@ -22,6 +24,7 @@ ActiveAdmin.register QuestionQcm do
   index do
     selectable_column
     column :id
+    column :libelle
     column :intitule
     column :description
     column :created_at

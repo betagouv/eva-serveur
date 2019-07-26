@@ -12,6 +12,7 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         intitule: Intitulé
+        libelle: Libellé
       question_redaction_note:
         entete_reponse: Entête réponse
         expediteur: Expéditeur

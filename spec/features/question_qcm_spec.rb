@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Question QCM', type: :feature do
   before { se_connecter_comme_administrateur }
-  let!(:question) { create :question_qcm, intitule: 'Comment ça va ?' }
+  let!(:question) { create :question_qcm, libelle: 'question', intitule: 'Comment ça va ?' }
 
   describe 'index' do
     before { visit admin_question_qcms_path }
@@ -16,6 +16,7 @@ describe 'Admin - Question QCM', type: :feature do
   describe 'création' do
     before do
       visit new_admin_question_qcm_path
+      fill_in :question_qcm_libelle, with: 'question'
       fill_in :question_qcm_intitule, with: '2 + 2 = ?'
     end
 

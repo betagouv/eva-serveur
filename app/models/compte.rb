@@ -6,4 +6,8 @@ class Compte < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
   validates :role, inclusion: { in: %w[administrateur organisation] }, presence: true
+
+  def administrateur?
+    role == 'administrateur'
+  end
 end

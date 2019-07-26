@@ -18,9 +18,10 @@ module Api
     def show
       evaluation = Evaluation.find(params[:id])
 
+      situations = evaluation.campagne.situations
       questions = evaluation.campagne.questionnaire&.questions || []
 
-      render json: { questions: questions }
+      render json: { questions: questions, situations: situations }
     end
   end
 end

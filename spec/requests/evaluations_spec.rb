@@ -50,5 +50,13 @@ describe 'Evaluation API', type: :request do
 
       expect(response).to have_http_status(404)
     end
+
+    it 'retourne les situations de la campagne' do
+      situation_inventaire = create :situation_inventaire, libelle: 'Inventaire'
+      campagne.situations << situation_inventaire
+      get "/api/evaluations/#{evaluation.id}"
+      expect(JSON.parse(response.body)['situations'].size).to eql(1)
+      expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')
+    end
   end
 end

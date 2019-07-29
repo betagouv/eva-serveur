@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Campagne do
-  permit_params :libelle, :code, :questionnaire_id,
+  permit_params :libelle, :code, :questionnaire_id, :compte, :compte_id,
                 situations_configurations_attributes: %i[id situation_id _destroy]
 
   show do
@@ -11,6 +11,12 @@ ActiveAdmin.register Campagne do
   form do |f|
     f.semantic_errors
     f.inputs do
+      if current_compte.administrateur?
+        f.input :compte
+      else
+        f.object.compte_id ||= current_compte.id
+        f.input :compte_id, as: :hidden
+      end
       f.input :libelle
       f.input :code
       f.input :questionnaire

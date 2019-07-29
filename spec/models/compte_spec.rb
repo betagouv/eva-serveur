@@ -15,6 +15,7 @@ describe Compte do
       it { is_expected.to be_able_to(:manage, :all) }
       it { is_expected.to_not be_able_to(%i[destroy create], Evaluation.new) }
       it { is_expected.to_not be_able_to(:create, Evenement.new) }
+      it { is_expected.to be_able_to(:manage, Campagne) }
     end
 
     context 'Compte organisation' do

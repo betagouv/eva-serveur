@@ -7,6 +7,10 @@ class Compte < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :role, inclusion: { in: %w[administrateur organisation] }, presence: true
 
+  def display_name
+    email
+  end
+
   def administrateur?
     role == 'administrateur'
   end

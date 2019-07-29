@@ -40,4 +40,12 @@ RSpec.configure do |config|
     fill_in :compte_password, with: 'password'
     click_on 'Se connecter'
   end
+
+  def se_connecter_comme_organisation
+    Compte.create(email: 'organisation@exemple.fr', password: 'password', role: 'organisation')
+    visit '/admin'
+    fill_in :compte_email, with: 'organisation@exemple.fr'
+    fill_in :compte_password, with: 'password'
+    click_on 'Se connecter'
+  end
 end

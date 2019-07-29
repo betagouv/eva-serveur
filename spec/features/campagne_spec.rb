@@ -3,20 +3,26 @@
 require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
-  before { se_connecter_comme_administrateur }
-  let!(:campagne) { create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8' }
+  before { se_connecter_comme_organisation }
+  let!(:ma_campagne) do
+    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: Compte.first
+  end
+  let!(:campagne) { create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN' }
   let!(:evaluation) { create :evaluation, campagne: campagne }
 
   describe 'index' do
     before { visit admin_campagnes_path }
+
     it do
       expect(page).to have_content 'Amiens 18 juin'
       expect(page).to have_content 'A5RC8'
+      expect(page).to_not have_content 'Rouen 30 mars'
     end
   end
 
   describe 'création' do
     let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
+
     before do
       visit new_admin_campagne_path
       fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
@@ -47,6 +53,7 @@ describe 'Admin - Campagne', type: :feature do
   describe 'show' do
     let(:situation) { create :situation_inventaire }
     before do
+      Compte.first.update(role: 'administrateur')
       campagne.situations_configurations.create! situation: situation
       visit admin_campagne_path campagne
     end

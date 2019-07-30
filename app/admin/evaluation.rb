@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
+  filter :campagne, collection: proc { evaluations_visibles(current_compte) }
+  filter :created_at
+
   index do
     column :nom
     column :campagne

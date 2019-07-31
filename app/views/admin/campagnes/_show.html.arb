@@ -6,6 +6,7 @@ panel 'Détails de la campagne' do
     row :libelle
     row :code
     row :questionnaire
+    row :compte if can?(:manage, Compte)
     row :created_at
   end
 end

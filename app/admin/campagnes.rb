@@ -4,6 +4,14 @@ ActiveAdmin.register Campagne do
   permit_params :libelle, :code, :questionnaire_id, :compte, :compte_id,
                 situations_configurations_attributes: %i[id situation_id _destroy]
 
+  index do
+    selectable_column
+    column :libelle
+    column :code
+    column :compte if can?(:manage, Compte)
+    actions
+  end
+
   show do
     render partial: 'show'
   end
@@ -11,12 +19,7 @@ ActiveAdmin.register Campagne do
   form do |f|
     f.semantic_errors
     f.inputs do
-      if current_compte.administrateur?
-        f.input :compte
-      else
-        f.object.compte_id ||= current_compte.id
-        f.input :compte_id, as: :hidden
-      end
+      f.input :compte if can?(:manage, Compte)
       f.input :libelle
       f.input :code
       f.input :questionnaire
@@ -26,5 +29,12 @@ ActiveAdmin.register Campagne do
       end
     end
     f.actions
+  end
+
+  controller do
+    def create
+      params[:campagne][:compte_id] ||= current_compte.id
+      create!
+    end
   end
 end

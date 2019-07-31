@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :compte do
+  factory :compte, aliases: [:compte_admin] do
     email
     password { 'password' }
     role { 'administrateur' }
+
+    factory :compte_organisation do
+      role { 'organisation' }
+    end
   end
 
   sequence :email do |n|

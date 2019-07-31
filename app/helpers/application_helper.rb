@@ -18,8 +18,4 @@ module ApplicationHelper
   def rapport_colonne_class
     'col-4 px-5 mb-4'
   end
-
-  def evaluations_visibles(compte)
-    compte.administrateur? ? Campagne.all : Campagne.where(compte: compte)
-  end
 end

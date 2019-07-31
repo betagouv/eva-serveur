@@ -19,6 +19,11 @@ describe 'Admin - Evaluation', type: :feature do
       visit admin_evaluations_path
       expect(page).to have_content 'Paris 2019'
       expect(page).to_not have_content 'Rouen 2019'
+
+      within('#filters_sidebar_section') do
+        expect(page).to have_content 'Paris 2019'
+        expect(page).to_not have_content 'Rouen 2019'
+      end
     end
   end
 end

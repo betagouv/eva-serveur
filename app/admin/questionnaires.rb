@@ -18,4 +18,14 @@ ActiveAdmin.register Questionnaire do
   show do
     render partial: 'show'
   end
+
+  controller do
+    def scoped_collection
+      if current_compte.administrateur?
+        Questionnaire.all
+      else
+        Campagne.includes(:questionnaire).where(compte: current_compte)
+      end
+    end
+  end
 end

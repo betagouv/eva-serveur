@@ -23,6 +23,8 @@ describe Compte do
       let(:compte) { build :compte, role: 'organisation' }
 
       it { is_expected.to_not be_able_to(:manage, Compte.new) }
+      it { is_expected.to_not be_able_to(%i[destroy create update], Situation.new) }
+      it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
     end
   end
 end

@@ -8,6 +8,8 @@ class Ability
     droit_campagne compte
     droit_evaluation compte
     droit_evenement compte
+    droit_situation compte
+    droit_question compte
     cannot :manage, Compte unless compte.administrateur?
   end
 
@@ -27,6 +29,16 @@ class Ability
   def droit_evenement(compte)
     cannot :read, Evenement unless compte.administrateur?
     can :read, Evenement, evaluation: { campagne: { compte_id: compte.id } }
+  end
+
+  def droit_situation(compte)
+    cannot :manage, Situation unless compte.administrateur?
+    can :read, Situation
+  end
+
+  def droit_question(compte)
+    cannot :manage, Question unless compte.administrateur?
+    can :read, Question
   end
 
   def droits_generiques

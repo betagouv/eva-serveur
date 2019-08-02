@@ -40,8 +40,10 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     column :date
     column '' do |evenement|
       span link_to t('.rapport'), admin_restitution_path(id: evenement)
-      span link_to t('.evenements'),
-                   admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+      if can? :manage, Compte
+        span link_to t('.evenements'),
+                     admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+      end
     end
   end
 

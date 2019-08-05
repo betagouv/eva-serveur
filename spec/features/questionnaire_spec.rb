@@ -5,11 +5,15 @@ require 'rails_helper'
 describe 'Admin - Questionnaire', type: :feature do
   before { se_connecter_comme_administrateur }
   let!(:questionnaire) { create :questionnaire, libelle: 'Numératie et Litératie' }
+  let!(:campagne) { create :campagne, questionnaire: questionnaire }
 
   describe 'index' do
     before { visit admin_questionnaires_path }
     it do
       expect(page).to have_content 'Numératie et Litératie'
+      within '.paginated_collection' do
+        expect(page).to_not have_content 'Supprimer'
+      end
     end
   end
 

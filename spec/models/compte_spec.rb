@@ -17,6 +17,7 @@ describe Compte do
       it { is_expected.to_not be_able_to(:create, Evenement.new) }
       it { is_expected.to be_able_to(:read, Evenement.new) }
       it { is_expected.to be_able_to(:manage, Campagne.new) }
+      it { is_expected.to be_able_to(:manage, Questionnaire.new) }
     end
 
     context 'Compte organisation' do
@@ -25,6 +26,8 @@ describe Compte do
       it { is_expected.to_not be_able_to(:manage, Compte.new) }
       it { is_expected.to_not be_able_to(%i[destroy create update], Situation.new) }
       it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
+      it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }
+      it { is_expected.to be_able_to(:read, Questionnaire.new) }
     end
   end
 end

@@ -10,6 +10,7 @@ class Ability
     droit_evenement compte
     droit_situation compte
     droit_question compte
+    droit_questionnaire compte
     cannot :manage, Compte unless compte.administrateur?
   end
 
@@ -34,6 +35,14 @@ class Ability
   def droit_situation(compte)
     cannot :manage, Situation unless compte.administrateur?
     can :read, Situation
+  end
+
+  def droit_questionnaire(compte)
+    cannot :manage, Questionnaire unless compte.administrateur?
+    can :read, Questionnaire
+    cannot :destroy, Questionnaire do |q|
+      Campagne.where(questionnaire: q).present?
+    end
   end
 
   def droit_question(compte)

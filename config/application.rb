@@ -37,7 +37,8 @@ module CompetencesProServeur
     config.middleware.use ActionDispatch::Session::CookieStore
 
     Rails.application.routes.default_url_options = {
-      host: ENV['HOTE_SERVEUR']
+      host: ENV['HOTE_SERVEUR'],
+      protocol: ENV['PROTOCOLE_SERVEUR']
     }
 
     config.middleware.insert_before 0, Rack::Cors do

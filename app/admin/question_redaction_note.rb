@@ -3,6 +3,8 @@
 ActiveAdmin.register QuestionRedactionNote do
   menu parent: 'Questions'
 
+  filter :libelle
+
   permit_params :libelle, :intitule, :illustration, :entete_reponse, :expediteur,
                 :message, :objet_reponse
 

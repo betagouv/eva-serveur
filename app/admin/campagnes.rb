@@ -4,6 +4,10 @@ ActiveAdmin.register Campagne do
   permit_params :libelle, :code, :questionnaire_id, :compte, :compte_id,
                 situations_configurations_attributes: %i[id situation_id _destroy]
 
+  filter :compte, if: proc { can? :manage, Compte }
+  filter :situations
+  filter :questionnaire
+
   index do
     selectable_column
     column :libelle

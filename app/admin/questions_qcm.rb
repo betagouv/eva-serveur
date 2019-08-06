@@ -3,6 +3,8 @@
 ActiveAdmin.register QuestionQcm do
   menu parent: 'Questions'
 
+  filter :intitule
+
   permit_params :libelle, :intitule, :description, :illustration,
                 choix_attributes: %i[id intitule type_choix _destroy]
 

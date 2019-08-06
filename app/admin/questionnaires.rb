@@ -3,6 +3,8 @@
 ActiveAdmin.register Questionnaire do
   permit_params :libelle, questionnaires_questions_attributes: %i[id question_id _destroy]
 
+  filter :questions
+
   form do |f|
     f.semantic_errors
     f.inputs do

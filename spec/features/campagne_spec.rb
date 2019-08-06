@@ -14,12 +14,33 @@ describe 'Admin - Campagne', type: :feature do
   let!(:evaluation) { create :evaluation, campagne: campagne }
 
   describe 'index' do
-    before { visit admin_campagnes_path }
+    context 'en organisation' do
+      before { visit admin_campagnes_path }
 
-    it do
-      expect(page).to have_content 'Amiens 18 juin'
-      expect(page).to have_content 'A5RC8'
-      expect(page).to_not have_content 'Rouen 30 mars'
+      it do
+        expect(page).to have_content 'Amiens 18 juin'
+        expect(page).to have_content 'A5RC8'
+        expect(page).to_not have_content 'Rouen 30 mars'
+      end
+
+      it 'ne permet pas de filtrer par compte' do
+        within '.panel_contents' do
+          expect(page).to_not have_content 'Compte'
+        end
+      end
+    end
+
+    context 'en administrateur' do
+      before do
+        compte_connecte.update(role: 'administrateur')
+        visit admin_campagnes_path
+      end
+
+      it 'permet de filtrer par compte' do
+        within '.panel_contents' do
+          expect(page).to have_content 'Compte'
+        end
+      end
     end
   end
 

@@ -24,8 +24,27 @@ module Restitution
       evenements.find_all { |e| e.nom == EVENEMENT[:REPONSE] }
     end
 
+    def nombre_questions_qcm
+      questions.select { |q| q.is_a?(QuestionQcm) }.count
+    end
+
     def efficience
-      nil
+      question_qcm_repondue = questions_et_reponses.select { |q| q[:question].is_a?(QuestionQcm) }
+      points_total = points_par_question(question_qcm_repondue).inject(:+)
+      (points_total / nombre_questions_qcm.to_f) * 100.0
+    end
+
+    def points_par_question(questions)
+      questions.map! do |a|
+        case a[:reponse]
+        when a[:question].choix.de_type('bon')
+          1
+        when a[:question].choix.de_type('abstention')
+          0.25
+        else
+          0
+        end
+      end
     end
 
     private

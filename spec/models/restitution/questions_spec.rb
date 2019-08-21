@@ -82,9 +82,83 @@ describe Restitution::Questions do
   end
 
   describe '#efficience' do
-    it 'retourne nil' do
-      restitution = described_class.new(campagne, [])
-      expect(restitution.efficience).to be_nil
+    let(:evenements) do
+      [
+        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
+        create(:evenement_reponse,
+               evaluation: evaluation,
+               situation: situation,
+               donnees: { question: question1.id, reponse: '1' })
+      ]
+    end
+
+    context 'retourne les points par question QCM' do
+      it 'retourne 0.25 si absention' do
+        create(:choix, intitule: 'abstention', type_choix: 'abstention',
+                       question_id: question1.id, id: 1)
+        create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
+                       question_id: question1.id, id: 2)
+        create(:choix, intitule: 'mauvaise réponse', type_choix: 'mauvais',
+                       question_id: question1.id, id: 3)
+
+        restitution = described_class.new(campagne, evenements)
+        questions_reponses = restitution.questions_et_reponses
+        expect(restitution.points_par_question(questions_reponses)).to eq [0.25]
+      end
+
+      it 'retourne 1 si bonne réponse' do
+        create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
+                       question_id: question1.id, id: 1)
+        create(:choix, intitule: 'abstention', type_choix: 'abstention',
+                       question_id: question1.id, id: 2)
+        create(:choix, intitule: 'mauvaise réponse', type_choix: 'mauvais',
+                       question_id: question1.id, id: 3)
+
+        restitution = described_class.new(campagne, evenements)
+        questions_reponses = restitution.questions_et_reponses
+        expect(restitution.points_par_question(questions_reponses)).to eq [1]
+      end
+
+      it 'retourne 0 si mauvaise réponse' do
+        create(:choix, intitule: 'mauvaise réponse', type_choix: 'mauvais',
+                       question_id: question1.id, id: 1)
+        create(:choix, intitule: 'abstention', type_choix: 'abstention',
+                       question_id: question1.id, id: 2)
+        create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
+                       question_id: question1.id, id: 3)
+
+        restitution = described_class.new(campagne, evenements)
+        questions_reponses = restitution.questions_et_reponses
+        expect(restitution.points_par_question(questions_reponses)).to eq [0]
+      end
+    end
+
+    context "calcule l'efficience" do
+      let(:evenement_reponse_2) do
+        create(:evenement_reponse,
+               evaluation: evaluation,
+               situation: situation,
+               donnees: { question: question2.id, reponse: '5' })
+      end
+
+      it do
+        evenements.push(evenement_reponse_2)
+        create(:choix, intitule: 'mauvaise réponse', type_choix: 'mauvais',
+                       question_id: question1.id, id: 1)
+        create(:choix, intitule: 'abstention', type_choix: 'abstention',
+                       question_id: question1.id, id: 2)
+        create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
+                       question_id: question1.id, id: 3)
+        create(:choix, intitule: 'abstention 2', type_choix: 'abstention',
+                       question_id: question2.id, id: 4)
+        create(:choix, intitule: 'bonne réponse 2', type_choix: 'bon',
+                       question_id: question2.id, id: 5)
+        create(:choix, intitule: 'mauvaise réponse 2', type_choix: 'mauvais',
+                       question_id: question2.id, id: 6)
+
+        restitution = described_class.new(campagne, evenements)
+        expect(restitution.efficience).to eq 50.0
+      end
     end
   end
 end

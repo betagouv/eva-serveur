@@ -3,7 +3,7 @@
 div class: 'row questions' do
   restitution.questions_et_reponses.each do |question_et_reponse|
     div class: 'col-4 px-5 mb-4' do
-      div question_et_reponse[:question].libelle
+      div strong question_et_reponse[:question].libelle
       if question_et_reponse[:question].is_a?(QuestionQcm)
         div class: 'btn-group my-2' do
           ::Choix.type_choix.each do |nom, _valeur|

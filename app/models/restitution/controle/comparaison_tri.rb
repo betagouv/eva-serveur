@@ -9,7 +9,7 @@ module Restitution
       end
 
       def niveau
-        return ::Competence::NIVEAU_INDETERMINE if @restitution.evenements.count < 4
+        return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
 
         nombre_erreurs = @restitution_hors_4_premiers.nombre_mal_placees
         case nombre_erreurs

@@ -45,8 +45,8 @@ describe Restitution::Inventaire::OrganisationMethode do
     end
   end
 
-  context 'en cas de non reussite' do
-    it 'a le niveau indetermine' do
+  context 'en cas de non réussite' do
+    it 'a le niveau indéterminé' do
       expect(restitution).to receive(:reussite?).and_return(false)
       expect(
         described_class.new(restitution).niveau

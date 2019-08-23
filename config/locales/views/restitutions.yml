@@ -21,6 +21,7 @@ fr:
         reste_plateau: Reste plateau
       restitution_globale:
         situation: 'Situation %{situation}'
+        calcul_prod: calcul de production
         efficience_globale: "Efficience globale : %{efficience}"
       restitution_competence:
         indetermine: non obs.

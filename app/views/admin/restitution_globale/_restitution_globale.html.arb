@@ -18,7 +18,8 @@ div class: :panel do
 
       situation = restitution.situation
       div class: "#{rapport_colonne_class} #{situation.nom_technique}" do
-        div t('.situation', situation: situation.libelle)
+        nom_situation = situation.questions? ? t('.calcul_prod') : situation.libelle
+        div t('.situation', situation: nom_situation)
         div class: :progress do
           efficience = progression_efficience(restitution.efficience)
           div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",

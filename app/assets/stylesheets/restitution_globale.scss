@@ -129,4 +129,18 @@ $border-radius: .75rem;
   .questions {
     @include applique-theme($couleur-questions);
   }
+
+  .reponse-communication-ecrite {
+    margin-top: 1.25rem;
+  }
+
+  span {
+    font-weight: bold;
+    +input {
+      border: 2px solid $couleur-questions;
+      border-radius: 0.75rem;
+      width: 3.25rem;
+      text-align: center;
+    }
+  }
 }

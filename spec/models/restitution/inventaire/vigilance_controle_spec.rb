@@ -6,8 +6,12 @@ describe Restitution::Inventaire::VigilanceControle do
   let(:restitution) { double }
   let(:essai_de_prise_en_main) do
     essai = double
-    allow(essai).to receive(:nombre_erreurs).and_return(8)
     allow(essai).to receive(:nombre_de_non_remplissage).and_return(7)
+    essai
+  end
+  let(:essai_de_prise_en_main_vide) do
+    essai = double
+    allow(essai).to receive(:nombre_de_non_remplissage).and_return(8)
     essai
   end
   let(:essai_reussite) do
@@ -41,10 +45,20 @@ describe Restitution::Inventaire::VigilanceControle do
     ).to eql(Competence::NIVEAU_4)
   end
 
-  it 'Réussite au 2eme essai: lorsque le 1er essai comporte 7 non remplissage: niveau 4' do
+  it 'Réussite au 2eme essai lorsque le 1er essai comporte 7 non remplissages: niveau 4' do
     allow(restitution).to receive(:reussite?).and_return(true)
     allow(restitution).to receive(:nombre_essais_validation).and_return(2)
     allow(restitution).to receive(:essais_verifies).and_return([essai_de_prise_en_main, double])
+    expect(
+      described_class.new(restitution).niveau
+    ).to eql(Competence::NIVEAU_4)
+  end
+
+  it 'Réussite au 2eme essai lorsque le 1er essai comporte 8 non remplissages: niveau 4' do
+    allow(restitution).to receive(:reussite?).and_return(true)
+    allow(restitution).to receive(:nombre_essais_validation).and_return(2)
+    allow(restitution).to receive(:essais_verifies)
+      .and_return([essai_de_prise_en_main_vide, double])
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_4)

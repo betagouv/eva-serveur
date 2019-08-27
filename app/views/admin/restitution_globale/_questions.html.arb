@@ -15,7 +15,10 @@ div class: 'row questions' do
           end
         end
       else
-        div simple_format(question_et_reponse[:reponse])
+        span 'Efficience'
+        input
+        span '%'
+        div simple_format(question_et_reponse[:reponse]), class: 'reponse-communication-ecrite'
       end
     end
   end

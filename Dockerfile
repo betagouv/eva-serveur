@@ -17,4 +17,4 @@ RUN bundle exec rails assets:precompile RAILS_ENV=${RAILS_ENV} SECRET_KEY_BASE=c
 
 EXPOSE 3000
 
-CMD ["bundle", "exec", "rails", "server"]
+CMD bash -c "rm -f tmp/pids/server.pid && bundle exec rails server"

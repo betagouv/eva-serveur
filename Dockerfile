@@ -5,9 +5,6 @@ ENV RAILS_ENV ${RAILS_ENV}
 
 WORKDIR /app/
 
-RUN echo "Europe/Paris" > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --without development test --deployment --jobs 4 --retry 3 --quiet
 

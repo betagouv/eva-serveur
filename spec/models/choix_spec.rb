@@ -13,7 +13,7 @@ RSpec.describe Choix, type: :model do
   describe '#as_json' do
     it 'serialise les champs' do
       json = subject.as_json
-      expect(json.keys).to match_array(%w[id intitule])
+      expect(json.keys).to match_array(%w[id intitule type_choix])
     end
   end
 end

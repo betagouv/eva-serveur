@@ -4,4 +4,6 @@ div class: 'row inventaire' do
   render 'badge', label: t('.efficience'), valeur: formate_efficience(restitution.efficience)
   render 'badge', label: t('.duree'), valeur: formate_duree(restitution.temps_total)
   render 'badge', label: t('.nombre_essais'), valeur: restitution.nombre_essais_validation
+  render 'badge', label: t('.nombre_ouverture_contenant'),
+                  valeur: restitution.nombre_ouverture_contenant
 end

@@ -12,6 +12,7 @@ fr:
       inventaire:
         <<: *commun
         nombre_essais: Nbre d'essais
+        nombre_ouverture_contenant: Nbre d'ouverture de contenants
       questions:
         abstention: Ne sait pas
         bon: Correct

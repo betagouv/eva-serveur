@@ -35,7 +35,7 @@ end
 restitution_globale.restitutions.each do |restitution|
   situation = restitution.situation
   panel t('.situation', situation: situation.libelle) do
-    render situation.nom_technique, restitution: restitution
-    render 'restitution_competences', restitution: restitution
+    render "admin/restitution_globale/#{situation.nom_technique}", restitution: restitution
+    render 'admin/restitution_globale/restitution_competences', restitution: restitution
   end
 end

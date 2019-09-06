@@ -18,4 +18,8 @@ module ApplicationHelper
   def rapport_colonne_class
     'col-4 px-5 mb-4'
   end
+
+  def chemin_badge
+    'admin/restitution_globale/badge'
+  end
 end

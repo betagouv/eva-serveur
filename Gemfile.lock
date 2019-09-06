@@ -337,6 +337,9 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    wicked_pdf (1.4.0)
+      activesupport
+    wkhtmltopdf-binary (0.12.3.1)
     xdan-datetimepicker-rails (2.5.4)
       jquery-rails
       rails (>= 3.2.16)
@@ -377,6 +380,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  wicked_pdf
+  wkhtmltopdf-binary (~> 0.12.3.1)
 
 BUNDLED WITH
    1.17.3

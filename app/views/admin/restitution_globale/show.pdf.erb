@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset='utf-8' />
-    <%= stylesheet_link_tag wicked_pdf_asset_base64 "pdf" -%>
+    <%= stylesheet_link_tag wicked_pdf_asset_base64 "restitution_globale/restitution_globale_pdf" -%>
   </head>
-  <%= render partial: "admin/restitution_globale/restitution_globale", locals: { restitution_globale: restitution_globale } %>
+   <div class="admin_restitution_globale">
+     <%= render partial: "admin/restitution_globale/restitution_globale", locals: { restitution_globale: restitution_globale } %>
+   </div>
 </html>

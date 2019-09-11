@@ -11,8 +11,4 @@ class Situation < ApplicationRecord
   def as_json(_options = nil)
     slice(:id, :libelle, :nom_technique)
   end
-
-  def questions?
-    libelle == 'Questions'
-  end
 end

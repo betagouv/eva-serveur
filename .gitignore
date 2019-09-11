@@ -31,3 +31,6 @@
 
 # Ignore locally installed gems
 /vendor/ruby
+
+# Erd
+erd.dot

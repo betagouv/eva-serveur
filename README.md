@@ -94,6 +94,15 @@ Contenu:
 }
 ```
 
+## Modèle de données
+
+![](docs/erd.png)
+
+
+Pour générer ce graphique:
+  1. `bundle exec rake erd filetype=dot orientation=vertical attributes=foreign_keys,content,timestamps`
+  2. `dot -Tpng erd.dot -o docs/erd.png`
+
 ## Licence
 
 Ce logiciel et son code source sont distribués sous [licence AGPL](https://www.gnu.org/licenses/why-affero-gpl.fr.html).

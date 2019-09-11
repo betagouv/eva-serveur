@@ -6,8 +6,6 @@ class Choix < ApplicationRecord
 
   acts_as_list scope: :question_id
 
-  scope :de_type, ->(type) { find_by(type_choix: type).id.to_s }
-
   def as_json(_options = nil)
     slice(:id, :intitule, :type_choix)
   end

@@ -88,7 +88,7 @@ describe Restitution::Questions do
         create(:evenement_reponse,
                evaluation: evaluation,
                situation: situation,
-               donnees: { question: question1.id, reponse: '1' })
+               donnees: { question: question1.id, reponse: 1 })
       ]
     end
 
@@ -138,7 +138,7 @@ describe Restitution::Questions do
         create(:evenement_reponse,
                evaluation: evaluation,
                situation: situation,
-               donnees: { question: question2.id, reponse: '5' })
+               donnees: { question: question2.id, reponse: 5 })
       end
 
       it do

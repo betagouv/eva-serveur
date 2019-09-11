@@ -36,10 +36,10 @@ module Restitution
 
     def points_par_question(questions)
       questions.map! do |a|
-        case a[:reponse]
-        when a[:question].choix.de_type('bon')
+        case a[:question].choix.find(a[:reponse]).type_choix
+        when 'bon'
           1
-        when a[:question].choix.de_type('abstention')
+        when 'abstention'
           0.25
         else
           0

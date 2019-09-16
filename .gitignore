@@ -34,3 +34,6 @@
 
 # Erd
 erd.dot
+
+# RVM / RBenv
+.env

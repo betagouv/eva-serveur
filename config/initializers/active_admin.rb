@@ -197,7 +197,6 @@ ActiveAdmin.setup do |config|
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
     config.register_stylesheet 'restitution_globale/restitution_globale.css'
-    config.register_stylesheet 'restitution_globale/restitution_globale_print.css', media: :print
 
   #
   # To load a javascript file:
@@ -252,6 +251,7 @@ ActiveAdmin.setup do |config|
   #     admin.download_links = proc { can?(:view_download_links) }
   #
   #   end
+  config.download_links = [:csv, :xml, :json, :pdf]
 
   # == Pagination
   #

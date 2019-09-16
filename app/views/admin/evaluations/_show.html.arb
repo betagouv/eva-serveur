@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 panel 'Restitutions' do
   table_for restitutions do
     column :situation

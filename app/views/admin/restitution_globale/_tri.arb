@@ -1,8 +1,0 @@
-# frozen_string_literal: true
-
-div class: 'row tri' do
-  render chemin_badge, label: t('.efficience'), valeur: formate_efficience(restitution.efficience)
-  render chemin_badge, label: t('.duree'), valeur: formate_duree(restitution.temps_total)
-  render chemin_badge, label: t('.nombre_erreurs'), valeur: restitution.nombre_mal_placees
-  render chemin_badge, label: t('.reste_plateau'), valeur: restitution.nombre_non_triees
-end

@@ -3,8 +3,7 @@
 div class: "row #{restitution.situation.nom_technique}" do
   restitution.competences.each do |competence, niveau|
     div class: rapport_colonne_class do
-      render 'admin/restitution_globale/restitution_competence', competence: competence,
-                                                                 niveau_evalue: niveau
+      render 'restitution_competence', competence: competence, niveau_evalue: niveau
     end
   end
 end

@@ -1,6 +1,6 @@
 fr:
   admin:
-    restitution_globale:
+    evaluations:
       commun: &commun
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"

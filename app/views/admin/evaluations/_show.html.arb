@@ -1,0 +1,17 @@
+panel 'Restitutions' do
+  table_for restitutions do
+    column :situation
+    column :session_id
+    column :date
+    column '' do |evenement|
+      span link_to t('.rapport'), admin_restitution_path(id: evenement)
+      if can? :manage, Compte
+        span link_to t('.evenements'),
+                     admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+      end
+    end
+  end
+end
+panel 'Restitution globale' do
+  render partial: 'restitution_globale'
+end

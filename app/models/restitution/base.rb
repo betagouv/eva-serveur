@@ -77,6 +77,10 @@ module Restitution
       end / competences_utilisees.size
     end
 
+    def to_param
+      @evenements.first.to_param
+    end
+
     private
 
     def competences_indeterminees?(competences)

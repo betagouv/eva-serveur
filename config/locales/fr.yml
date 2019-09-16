@@ -223,11 +223,6 @@ fr:
       index:
         rapport: Rapport
         evenements: Évenements
-    restitutions:
-      confirme_suppression: Voulez vous vraiment supprimer ces restitutions ?
-      supprimees:
-        one: Restitution supprimée
-        other: Restitutions supprimées
     batch_actions:
       labels:
         restitution_globale_pour: Restitution globale pour

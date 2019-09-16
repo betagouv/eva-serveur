@@ -2,27 +2,10 @@
 
 ActiveAdmin.register Evenement, as: 'Restitutions' do
   menu false
-  config.sort_order = 'date_desc'
-  actions :index, :show
-
-  batch_action :restitution_globale_pour, priority: 1 do |ids|
-    redirect_to admin_restitution_globale_path(restitution_ids: ids)
-  end
-
-  batch_action :destroy, confirm: I18n.t('active_admin.restitutions.confirme_suppression') do |ids|
-    ids.each do |id|
-      FabriqueRestitution.depuis_evenement_id(id).supprimer
-    end
-    redirect_to collection_path,
-                alert: I18n.t('active_admin.restitutions.supprimees', count: ids.size)
-  end
+  actions :show, :destroy
 
   controller do
     helper_method :chemin_vue
-
-    def scoped_collection
-      end_of_association_chain.where(nom: 'demarrage', evaluation_id: params[:evaluation_id])
-    end
 
     def find_resource
       FabriqueRestitution.depuis_evenement_id params[:id]
@@ -30,6 +13,12 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
 
     def chemin_vue
       resource.class.to_s.underscore.tr('/', '_')
+    end
+
+    def destroy
+      evaluation = resource.evaluation
+      resource.supprimer
+      redirect_to admin_evaluation_path(evaluation)
     end
   end
 

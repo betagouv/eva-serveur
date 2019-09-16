@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Restitution', type: :feature do
-  let(:evaluation) { create :evaluation }
+  let(:evaluation) { create :evaluation, nom: 'John Doe' }
 
   before { se_connecter_comme_administrateur }
 
@@ -33,5 +33,20 @@ describe 'Admin - Restitution', type: :feature do
                                                              evaluation: evaluation
     visit admin_restitution_path(evenement)
     expect(page).to have_content('Échec')
+  end
+
+  describe "suppression d'un évenement" do
+    let(:situation) { create :situation_inventaire }
+    let(:evenement) do
+      create :evenement_saisie_inventaire, :echec, evaluation: evaluation, situation: situation
+    end
+
+    before { visit admin_restitution_path(evenement) }
+    it do
+      expect do
+        click_on 'Supprimer'
+      end.to change { Evenement.count }.by(-1)
+      within('#main_content') { expect(page).to have_content 'John Doe' }
+    end
   end
 end

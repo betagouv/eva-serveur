@@ -15,8 +15,24 @@ ActiveAdmin.register Evaluation do
     actions
   end
 
+  action_item :pdf, only: :show do
+    link_to 'Export PDF', format: :pdf
+  end
+
+  show do
+    default_main_content
+    render partial: 'show'
+  end
+
   controller do
     helper_method :evaluations_visibles, :restitutions, :restitution_globale
+
+    def show
+      show! do |format|
+        format.html
+        format.pdf { render pdf: resource.nom }
+      end
+    end
 
     private
 
@@ -36,10 +52,5 @@ ActiveAdmin.register Evaluation do
       end
       Restitution::Globale.new restitutions: restitutions, evaluation: evaluation
     end
-  end
-
-  show do
-    default_main_content
-    render partial: 'show'
   end
 end

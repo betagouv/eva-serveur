@@ -11,8 +11,8 @@ ActiveAdmin.register Evaluation do
     actions
   end
 
-  action_item :pdf, only: :show do
-    link_to 'Export PDF', format: :pdf
+  action_item :pdf, only: :show, if: proc { restitution_globale.present? } do
+    link_to('Export PDF', { format: :pdf }, target: '_blank')
   end
 
   show do
@@ -42,6 +42,8 @@ ActiveAdmin.register Evaluation do
 
     def restitution_globale
       restitution_ids = restitutions.pluck(:id)
+      return if restitution_ids.blank?
+
       evaluation = Evenement.find(restitution_ids.first).evaluation
       restitutions = restitution_ids.map do |id|
         FabriqueRestitution.depuis_evenement_id id

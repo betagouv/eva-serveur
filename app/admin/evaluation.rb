@@ -8,10 +8,6 @@ ActiveAdmin.register Evaluation do
     column :nom
     column :campagne
     column :created_at
-    column '' do |evaluation|
-      span link_to t('.restitution'),
-                   admin_restitutions_path(evaluation_id: evaluation.id)
-    end
     actions
   end
 

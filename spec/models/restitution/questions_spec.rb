@@ -154,7 +154,7 @@ describe Restitution::Questions do
                        question_id: question2.id)
       end
 
-      it do
+      it 'pour une mauvaise et une bonne réponse' do
         restitution = described_class.new(
           campagne, [
             evenement_demarrage,
@@ -163,6 +163,15 @@ describe Restitution::Questions do
           ]
         )
         expect(restitution.efficience).to eq 50.0
+      end
+
+      it "lorsqu'il n'y a aucune réponses" do
+        restitution = described_class.new(
+          campagne, [
+            evenement_demarrage
+          ]
+        )
+        expect(restitution.efficience).to eq 0
       end
     end
   end

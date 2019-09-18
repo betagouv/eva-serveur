@@ -1,17 +1,24 @@
 # frozen_string_literal: true
 
 panel 'Restitutions' do
-  table_for restitutions do
-    column :situation
-    column :session_id
-    column :date
-    column '' do |evenement|
-      span link_to t('.rapport'), admin_restitution_path(id: evenement)
-      if can? :manage, Compte
-        span link_to t('.evenements'),
-                     admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+  form method: :get do
+    table_for restitutions do
+      column :ignorer do |evenement|
+        check_box_tag 'restitutions_ignorees[]', evenement.id,
+                      params[:restitutions_ignorees]&.include?(evenement.id.to_s)
+      end
+      column :situation
+      column :session_id
+      column :date
+      column '' do |evenement|
+        span link_to t('.rapport'), admin_restitution_path(id: evenement)
+        if can? :manage, Compte
+          span link_to t('.evenements'),
+                       admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+        end
       end
     end
+    div submit_tag 'Filtrer'
   end
 end
 if restitution_globale.present?

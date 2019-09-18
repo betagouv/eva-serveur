@@ -12,7 +12,8 @@ ActiveAdmin.register Evaluation do
   end
 
   action_item :pdf, only: :show, if: proc { restitution_globale.present? } do
-    link_to('Export PDF', { format: :pdf }, target: '_blank')
+    link_to('Export PDF', { restitutions_ignorees: params[:restitutions_ignorees], format: :pdf },
+            target: '_blank')
   end
 
   show do
@@ -41,7 +42,8 @@ ActiveAdmin.register Evaluation do
     end
 
     def restitution_globale
-      restitution_ids = restitutions.pluck(:id)
+      restitutions_ignorees = params[:restitutions_ignorees] || []
+      restitution_ids = restitutions.collect { |r| r.id.to_s } - restitutions_ignorees
       return if restitution_ids.blank?
 
       evaluation = Evenement.find(restitution_ids.first).evaluation

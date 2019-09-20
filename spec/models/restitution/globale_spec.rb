@@ -7,6 +7,7 @@ describe Restitution::Globale do
     Restitution::Globale.new restitutions: restitutions,
                              evaluation: evaluation
   end
+  let(:evaluation) { double }
 
   describe "#utilisateur retoure le nom de l'évaluation" do
     let(:restitutions) { [double] }
@@ -22,8 +23,6 @@ describe Restitution::Globale do
   end
 
   describe '#efficience est la moyenne des efficiences' do
-    let(:evaluation) { double }
-
     context "sans restitution c'est incalculable" do
       let(:restitutions) { [] }
       it { expect(restitution_globale.efficience).to eq(0) }
@@ -64,6 +63,55 @@ describe Restitution::Globale do
       it {
         expect(restitution_globale.efficience).to eq(::Restitution::Globale::NIVEAU_INDETERMINE)
       }
+    end
+  end
+
+  describe '#competences retournes les compétences consolidées par niveau' do
+    let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_4 } }
+    let(:niveau_rapidite) { { Competence::RAPIDITE => Competence::NIVEAU_4 } }
+
+    context 'aucune évaluation' do
+      let(:restitutions) { [] }
+      it { expect(restitution_globale.competences).to eq([]) }
+    end
+
+    context 'une évaluation, une compétences' do
+      let(:restitutions) { [double(competences: niveau_perseverance)] }
+      it { expect(restitution_globale.competences).to eq([niveau_perseverance]) }
+    end
+
+    context 'une évaluation, deux compétences' do
+      let(:restitutions) { [double(competences: niveau_perseverance.merge(niveau_rapidite))] }
+      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_rapidite]) }
+    end
+
+    context 'deux évaluation, deux compétences différentes' do
+      let(:restitution1) { double(competences: niveau_perseverance) }
+      let(:restitution2) { double(competences: niveau_rapidite) }
+      let(:restitutions) { [restitution1, restitution2] }
+      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_rapidite]) }
+    end
+
+    context 'retourne les niveaux les plus forts en premier' do
+      let(:niveau_faible) { { Competence::ORGANISATION_METHODE => Competence::NIVEAU_1 } }
+      let(:restitution1) { double(competences: niveau_faible) }
+      let(:restitution2) { double(competences: niveau_perseverance) }
+      let(:restitutions) { [restitution1, restitution2] }
+      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_faible]) }
+    end
+
+    context 'ignore les niveaux indéterminées' do
+      let(:niveau_indetermine) { { Competence::PERSEVERANCE => Competence::NIVEAU_INDETERMINE } }
+      let(:restitutions) { [double(competences: niveau_indetermine)] }
+      it { expect(restitution_globale.competences).to eq([]) }
+    end
+
+    context 'retire les doublons' do
+      let(:niveau_perseverance_3) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
+      let(:restitution1) { double(competences: niveau_perseverance) }
+      let(:restitution2) { double(competences: niveau_perseverance_3) }
+      let(:restitutions) { [restitution1, restitution2] }
+      it { expect(restitution_globale.competences).to eq([niveau_perseverance]) }
     end
   end
 end

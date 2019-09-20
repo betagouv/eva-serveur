@@ -22,6 +22,13 @@ panel 'Restitutions' do
   end
 end
 if restitution_globale.present?
+  panel 'Compétences Fortes' do
+    ul do
+      restitution_globale.competences.each do |niveau_competence|
+        li span "#{niveau_competence.keys.first}: #{niveau_competence.values.first}"
+      end
+    end
+  end
   panel 'Restitution globale' do
     render partial: 'restitution_globale'
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Restitutions' do
+panel t('.titre.restitutions') do
   form method: :get do
     table_for restitutions do
       column :ignorer do |evenement|
@@ -22,14 +22,15 @@ panel 'Restitutions' do
   end
 end
 if restitution_globale.present?
-  panel 'Compétences Fortes' do
+  panel t('.titre.competences_identifiees') do
     ul do
       restitution_globale.competences.each do |niveau_competence|
-        li span "#{niveau_competence.keys.first}: #{niveau_competence.values.first}"
+        li span t("admin.restitutions.restitution_competences.#{niveau_competence.keys.first}") +
+                ": #{niveau_competence.values.first}"
       end
     end
   end
-  panel 'Restitution globale' do
+  panel t('.titre.restitution_globale') do
     render partial: 'restitution_globale'
   end
 end

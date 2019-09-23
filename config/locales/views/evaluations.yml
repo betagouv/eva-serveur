@@ -50,6 +50,11 @@ fr:
         attention_concentration:
           titre: Niveau de concentration pendant l’exercice
           description: Capacité à faire bien du premier coup, et à être constant dans la tâche à réaliser.
+      show:
+        titre:
+          competences_identifiees: Compétences identifiées
+          restitution_globale: Restitution globale
+          restitutions: Restitutions
     restitutions:
       evaluation:
         en_cours: En cours

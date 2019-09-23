@@ -29,33 +29,25 @@ module Restitution
     end
 
     def competences
-      competences_non_triees = extraie_competences_depuis_restitutions
-      competences_triees = competences_non_triees.sort_by do |niveau_competence|
+      extraie_competences_depuis_restitutions.sort_by do |niveau_competence|
         -niveau_competence.values.first
       end
-      filtre_les_competences_en_double competences_triees
     end
 
     private
 
     def extraie_competences_depuis_restitutions
-      @restitutions.collect do |restitution|
-        restitution.competences.collect do |competence, niveau|
+      competences_max = @restitutions.each_with_object({}) do |restitution, memo|
+        restitution.competences.each do |competence, niveau|
           next if niveau == NIVEAU_INDETERMINE
 
-          { competence => niveau }
+          memo[competence] = niveau if (memo[competence] || 0) < niveau
         end
-      end.flatten.compact
-    end
-
-    def filtre_les_competences_en_double(niveaux_competences)
-      resultat = []
-      niveaux_competences.each do |niveau_competence|
-        next if resultat.any? { |nc| nc.keys == niveau_competence.keys }
-
-        resultat << niveau_competence
+        memo
       end
-      resultat
+      competences_max.each_with_object([]) do |(competence, niveau), memo|
+        memo << { competence => niveau }
+      end
     end
   end
 end

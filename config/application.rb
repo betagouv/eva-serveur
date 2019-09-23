@@ -35,6 +35,11 @@ module CompetencesProServeur
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
 
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+      g.orm :active_record, foreign_key_type: :uuid
+    end
+
     Rails.application.routes.default_url_options = {
       host: ENV['HOTE_SERVEUR'],
       protocol: ENV['PROTOCOLE_SERVEUR']

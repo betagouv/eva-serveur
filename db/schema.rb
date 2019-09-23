@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_084304) do
+ActiveRecord::Schema.define(version: 2019_09_23_210147) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -50,28 +51,28 @@ ActiveRecord::Schema.define(version: 2019_07_29_084304) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "campagnes", force: :cascade do |t|
+  create_table "campagnes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "questionnaire_id"
-    t.bigint "compte_id"
+    t.uuid "questionnaire_id"
+    t.uuid "compte_id"
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
   end
 
-  create_table "choix", force: :cascade do |t|
+  create_table "choix", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "intitule"
-    t.bigint "question_id"
     t.integer "type_choix"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position"
+    t.uuid "question_id"
     t.index ["question_id"], name: "index_choix_on_question_id"
   end
 
-  create_table "comptes", force: :cascade do |t|
+  create_table "comptes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -84,42 +85,44 @@ ActiveRecord::Schema.define(version: 2019_07_29_084304) do
     t.index ["reset_password_token"], name: "index_comptes_on_reset_password_token", unique: true
   end
 
-  create_table "evaluations", force: :cascade do |t|
+  create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "campagne_id"
+    t.uuid "campagne_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
 
-  create_table "evenements", force: :cascade do |t|
+  create_table "evenements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
-    t.jsonb "donnees", default: {}, null: false
+    t.jsonb "donnees", default: "{}", null: false
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "session_id"
-    t.bigint "evaluation_id"
-    t.bigint "situation_id"
+    t.uuid "evaluation_id"
+    t.uuid "situation_id"
     t.index ["evaluation_id"], name: "index_evenements_on_evaluation_id"
     t.index ["situation_id"], name: "index_evenements_on_situation_id"
   end
 
-  create_table "questionnaires", force: :cascade do |t|
+  create_table "questionnaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "questionnaires_questions", force: :cascade do |t|
-    t.bigint "questionnaire_id"
-    t.bigint "question_id"
+  create_table "questionnaires_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid "questionnaire_id"
+    t.uuid "question_id"
     t.index ["question_id"], name: "index_questionnaires_questions_on_question_id"
     t.index ["questionnaire_id"], name: "index_questionnaires_questions_on_questionnaire_id"
   end
 
-  create_table "questions", force: :cascade do |t|
+  create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "intitule"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -132,19 +135,19 @@ ActiveRecord::Schema.define(version: 2019_07_29_084304) do
     t.string "libelle"
   end
 
-  create_table "situations", force: :cascade do |t|
+  create_table "situations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.string "nom_technique"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "situations_configurations", force: :cascade do |t|
-    t.bigint "campagne_id"
-    t.bigint "situation_id"
+  create_table "situations_configurations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "campagne_id"
+    t.uuid "situation_id"
     t.index ["campagne_id"], name: "index_situations_configurations_on_campagne_id"
     t.index ["situation_id"], name: "index_situations_configurations_on_situation_id"
   end
@@ -154,7 +157,9 @@ ActiveRecord::Schema.define(version: 2019_07_29_084304) do
   add_foreign_key "campagnes", "questionnaires"
   add_foreign_key "choix", "questions"
   add_foreign_key "evaluations", "campagnes"
+  add_foreign_key "evenements", "evaluations"
   add_foreign_key "evenements", "situations"
   add_foreign_key "questionnaires_questions", "questionnaires"
   add_foreign_key "questionnaires_questions", "questions"
+  add_foreign_key "situations_configurations", "campagnes"
 end

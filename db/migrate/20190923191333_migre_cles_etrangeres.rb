@@ -1,7 +1,7 @@
 class MigreClesEtrangeres < ActiveRecord::Migration[5.2]
 def up
     id_to_uuid('campagnes', 'questionnaire', 'questionnaire')
-    id_to_uuid('campagnes', 'compte', 'questionnaire')
+    id_to_uuid('campagnes', 'compte', 'compte')
     id_to_uuid('choix', 'question', 'question')
     id_to_uuid('evaluations', 'campagne', 'campagne')
     id_to_uuid('evenements', 'evaluation', 'evaluation')

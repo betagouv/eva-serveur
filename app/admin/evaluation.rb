@@ -25,6 +25,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
+    include RestitutionGlobaleConcern
     helper_method :evaluations_visibles, :restitutions, :restitution_globale
 
     def show
@@ -42,21 +43,6 @@ ActiveAdmin.register Evaluation do
 
     def restitutions
       Evenement.where(nom: 'demarrage', evaluation_id: params[:id])
-    end
-
-    def restitutions_selectionnees_ids
-      params[:restitutions_selectionnees] ||= restitutions.collect { |r| r.id.to_s }
-      params[:restitutions_selectionnees]
-    end
-
-    def restitution_globale
-      return if restitutions_selectionnees_ids.blank?
-
-      evaluation = Evenement.find(restitutions_selectionnees_ids.first).evaluation
-      restitutions = restitutions_selectionnees_ids.map do |id|
-        FabriqueRestitution.depuis_evenement_id id
-      end
-      Restitution::Globale.new restitutions: restitutions, evaluation: evaluation
     end
   end
 end

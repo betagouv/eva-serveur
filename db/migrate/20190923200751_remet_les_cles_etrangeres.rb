@@ -9,5 +9,6 @@ class RemetLesClesEtrangeres < ActiveRecord::Migration[5.2]
     add_foreign_key 'questionnaires_questions', 'questionnaires'
     add_foreign_key 'questionnaires_questions', 'questions'
     add_foreign_key 'situations_configurations', 'campagnes'
+    add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   end
 end

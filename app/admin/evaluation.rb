@@ -3,6 +3,7 @@
 ActiveAdmin.register Evaluation do
   filter :campagne, collection: proc { evaluations_visibles }
   filter :created_at
+  config.sort_order = 'created_at_desc'
 
   index do
     column :nom

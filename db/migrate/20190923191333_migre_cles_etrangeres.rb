@@ -10,12 +10,13 @@ def up
     id_to_uuid('questionnaires_questions', 'question', 'question')
     id_to_uuid('situations_configurations', 'campagne', 'campagne')
     id_to_uuid('situations_configurations', 'situation', 'situation')
+    id_to_uuid('active_storage_attachments', 'blob', 'blob', klass: ActiveStorage::Attachment, relation_klass: ActiveStorage::Blob)
   end
 
-  def id_to_uuid(table_name, relation_name, relation_class)
+  def id_to_uuid(table_name, relation_name, relation_class, klass: nil, relation_klass: nil)
     table_name = table_name.to_sym
-    klass = table_name.to_s.classify.constantize
-    relation_klass = relation_class.to_s.classify.constantize
+    klass ||= table_name.to_s.classify.constantize
+    relation_klass ||= relation_class.to_s.classify.constantize
     foreign_key = "#{relation_name}_id".to_sym
     new_foreign_key = "#{relation_name}_uuid".to_sym
 

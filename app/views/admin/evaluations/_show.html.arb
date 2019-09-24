@@ -3,9 +3,9 @@
 panel t('.titre.restitutions') do
   form method: :get do
     table_for restitutions do
-      column :ignorer do |evenement|
-        check_box_tag 'restitutions_ignorees[]', evenement.id,
-                      params[:restitutions_ignorees]&.include?(evenement.id.to_s)
+      column :selection do |evenement|
+        check_box_tag 'restitutions_selectionnees[]', evenement.id,
+                      params[:restitutions_selectionnees]&.include?(evenement.id.to_s)
       end
       column :situation
       column :session_id

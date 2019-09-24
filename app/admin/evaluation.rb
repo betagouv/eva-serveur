@@ -12,7 +12,10 @@ ActiveAdmin.register Evaluation do
   end
 
   action_item :pdf, only: :show, if: proc { restitution_globale.present? } do
-    link_to('Export PDF', { restitutions_ignorees: params[:restitutions_ignorees], format: :pdf },
+    link_to('Export PDF', {
+              restitutions_selectionnees: params[:restitutions_selectionnees],
+              format: :pdf
+            },
             target: '_blank')
   end
 
@@ -41,13 +44,16 @@ ActiveAdmin.register Evaluation do
       Evenement.where(nom: 'demarrage', evaluation_id: params[:id])
     end
 
-    def restitution_globale
-      restitutions_ignorees = params[:restitutions_ignorees] || []
-      restitution_ids = restitutions.collect { |r| r.id.to_s } - restitutions_ignorees
-      return if restitution_ids.blank?
+    def restitutions_selectionnees_ids
+      params[:restitutions_selectionnees] ||= restitutions.collect { |r| r.id.to_s }
+      params[:restitutions_selectionnees]
+    end
 
-      evaluation = Evenement.find(restitution_ids.first).evaluation
-      restitutions = restitution_ids.map do |id|
+    def restitution_globale
+      return if restitutions_selectionnees_ids.blank?
+
+      evaluation = Evenement.find(restitutions_selectionnees_ids.first).evaluation
+      restitutions = restitutions_selectionnees_ids.map do |id|
         FabriqueRestitution.depuis_evenement_id id
       end
       Restitution::Globale.new restitutions: restitutions, evaluation: evaluation

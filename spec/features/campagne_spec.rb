@@ -4,14 +4,16 @@ require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
   let!(:compte_connecte) { se_connecter_comme_organisation }
+  let(:premier_compte) { Compte.order(created_at: :desc).last }
   let!(:ma_campagne) do
-    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: Compte.first
+    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: premier_compte
   end
   let(:compte_organisation) { create :compte_organisation, email: 'orga@eva.fr' }
   let!(:campagne) do
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: compte_organisation
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }
+  let(:derniere_campagne) { Campagne.order(created_at: :desc).first }
 
   describe 'index' do
     context 'en organisation' do
@@ -61,8 +63,8 @@ describe 'Admin - Campagne', type: :feature do
 
         it do
           expect { click_on 'Créer' }.to(change { Campagne.count })
-          expect(Campagne.last.code).to be_present
-          expect(Campagne.last.compte).to eq compte_connecte
+          expect(derniere_campagne.code).to be_present
+          expect(derniere_campagne.compte).to eq compte_connecte
           expect(page).to have_content 'Mon QCM'
         end
 
@@ -70,7 +72,7 @@ describe 'Admin - Campagne', type: :feature do
           before { fill_in :campagne_code, with: 'EUROCKS' }
           it do
             expect { click_on 'Créer' }.to(change { Campagne.count })
-            expect(Campagne.last.code).to eq 'EUROCKS'
+            expect(derniere_campagne.code).to eq 'EUROCKS'
           end
         end
       end
@@ -78,7 +80,7 @@ describe 'Admin - Campagne', type: :feature do
 
     context 'en administrateur' do
       before do
-        Compte.first.update(role: 'administrateur')
+        premier_compte.update(role: 'administrateur')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
         fill_in :campagne_code, with: ''
@@ -88,7 +90,7 @@ describe 'Admin - Campagne', type: :feature do
 
       it do
         expect { click_on 'Créer' }.to(change { Campagne.count })
-        expect(Campagne.last.compte).to eq compte_organisation
+        expect(derniere_campagne.compte).to eq compte_organisation
       end
     end
   end
@@ -96,7 +98,7 @@ describe 'Admin - Campagne', type: :feature do
   describe 'show' do
     let(:situation) { create :situation_inventaire }
     before do
-      Compte.first.update(role: 'administrateur')
+      premier_compte.update(role: 'administrateur')
       campagne.situations_configurations.create! situation: situation
       visit admin_campagne_path campagne
     end

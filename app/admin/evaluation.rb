@@ -25,7 +25,6 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    include RestitutionGlobaleConcern
     helper_method :evaluations_visibles, :restitutions, :restitution_globale
 
     def show
@@ -37,12 +36,16 @@ ActiveAdmin.register Evaluation do
 
     private
 
+    def restitutions
+      Evenement.where(nom: 'demarrage', evaluation_id: params[:id])
+    end
+
     def evaluations_visibles
       current_compte.administrateur? ? Campagne.all : Campagne.where(compte: current_compte)
     end
 
-    def restitutions
-      Evenement.where(nom: 'demarrage', evaluation_id: params[:id])
+    def restitution_globale
+      FabriqueRestitution.restitution_globale(resource.id, params[:restitutions_selectionnees])
     end
   end
 end

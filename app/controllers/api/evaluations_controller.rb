@@ -2,8 +2,6 @@
 
 module Api
   class EvaluationsController < ActionController::API
-    include RestitutionGlobaleConcern
-
     rescue_from ActiveRecord::RecordNotFound do
       render status: :not_found
     end
@@ -19,11 +17,10 @@ module Api
 
     def show
       evaluation = Evaluation.find(params[:id])
-
       situations = evaluation.campagne.situations
       questions = evaluation.campagne.questionnaire&.questions || []
-      competences = restitution_globale.blank? ? [] : restitution_globale.competences
-
+      competences = FabriqueRestitution.restitution_globale(evaluation.id, [])
+                                       &.competences || []
       render json: { questions: questions, situations: situations, competences: competences }
     end
   end

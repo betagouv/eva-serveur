@@ -53,10 +53,38 @@ describe 'Evaluation API', type: :request do
 
     it 'retourne les situations de la campagne' do
       situation_inventaire = create :situation_inventaire, libelle: 'Inventaire'
+
       campagne.situations << situation_inventaire
       get "/api/evaluations/#{evaluation.id}"
+
       expect(JSON.parse(response.body)['situations'].size).to eql(1)
       expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')
+    end
+
+    context 'Compétences fortes' do
+      let!(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
+      let!(:demarrage) do
+        create(:evenement_demarrage, evaluation: evaluation, situation: situation_inventaire)
+      end
+
+      it 'avec une évaluation avec des compétences identifiées' do
+        create(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
+                                                  evaluation: evaluation)
+
+        campagne.situations << situation_inventaire
+        get "/api/evaluations/#{evaluation.id}"
+
+        expect(JSON.parse(response.body)['competences'].size).to eql(4)
+        expect(JSON.parse(response.body)['competences'][0].keys).to eql(['comprehension_consigne'])
+        expect(JSON.parse(response.body)['competences'][0].values).to eql([4])
+      end
+
+      it 'avec une évaluation sans compétences identifiées' do
+        campagne.situations << situation_inventaire
+        get "/api/evaluations/#{evaluation.id}"
+
+        expect(JSON.parse(response.body)['competences']).to be_empty
+      end
     end
   end
 end

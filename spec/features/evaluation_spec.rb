@@ -9,7 +9,7 @@ describe 'Admin - Evaluation', type: :feature do
     let(:compte_rouen) { create :compte, role: 'organisation' }
     let(:campagne_rouen) { create :campagne, compte: compte_rouen, libelle: 'Rouen 2019' }
     let!(:evaluation) { create :evaluation, campagne: campagne_rouen }
-    let(:premier_compte) { Compte.order(created_at: :desc).last }
+    let(:premier_compte) { Compte.first }
     let(:ma_campagne) do
       create :campagne, compte: premier_compte, libelle: 'Paris 2019', code: 'paris2019'
     end

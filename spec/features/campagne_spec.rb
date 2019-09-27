@@ -13,7 +13,7 @@ describe 'Admin - Campagne', type: :feature do
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: compte_organisation
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }
-  let(:derniere_campagne) { Campagne.order(created_at: :desc).first }
+  let(:derniere_campagne) { Campagne.last }
 
   describe 'index' do
     context 'en organisation' do

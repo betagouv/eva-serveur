@@ -45,7 +45,7 @@ ActiveAdmin.register Evaluation do
     end
 
     def restitution_globale
-      FabriqueRestitution.restitution_globale(resource.id, params[:restitutions_selectionnees])
+      FabriqueRestitution.restitution_globale(resource, params[:restitutions_selectionnees])
     end
   end
 end

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class FabriqueRestitution
-  attr_reader :restitutions_selectionnees
-
   class << self
     def instancie(situation, campagne, evenements)
       classe_restitution = {
@@ -22,24 +20,16 @@ class FabriqueRestitution
       instancie evenement.situation, campagne, evenements
     end
 
-    def restitutions(evaluation_id)
-      Evenement.where(nom: 'demarrage', evaluation_id: evaluation_id)
+    def restitutions(evaluation)
+      Evenement.where(nom: 'demarrage', evaluation_id: evaluation)
     end
 
-    def restitutions_selectionnees_ids(evaluation_id)
-      restitutions_selectionnees ||= restitutions(evaluation_id).collect { |r| r.id.to_s }
-      restitutions_selectionnees
-    end
-
-    def restitution_globale(evaluation_id, restitutions_selectionnees)
-      @restitutions_selectionnees = restitutions_selectionnees
-      return if restitutions_selectionnees_ids(evaluation_id).blank?
-
-      evaluation = Evenement.find(restitutions_selectionnees_ids(evaluation_id).first).evaluation
-      restitutions = restitutions_selectionnees_ids(evaluation_id).map do |id|
+    def restitution_globale(evaluation, restitutions_selectionnees_ids = nil)
+      restitutions_selectionnees_ids ||= restitutions(evaluation).pluck(:id)
+      restitutions_situation_retenues = restitutions_selectionnees_ids.map do |id|
         depuis_evenement_id id
       end
-      Restitution::Globale.new restitutions: restitutions, evaluation: evaluation
+      Restitution::Globale.new restitutions: restitutions_situation_retenues, evaluation: evaluation
     end
   end
 end

@@ -9,9 +9,8 @@ describe 'Admin - Evaluation', type: :feature do
     let(:compte_rouen) { create :compte, role: 'organisation' }
     let(:campagne_rouen) { create :campagne, compte: compte_rouen, libelle: 'Rouen 2019' }
     let!(:evaluation) { create :evaluation, campagne: campagne_rouen }
-    let(:premier_compte) { Compte.first }
     let(:ma_campagne) do
-      create :campagne, compte: premier_compte, libelle: 'Paris 2019', code: 'paris2019'
+      create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'paris2019'
     end
 
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
@@ -30,7 +29,7 @@ describe 'Admin - Evaluation', type: :feature do
       end
     end
 
-    it 'Je ne vois que les évaluations liées à mes campagnes' do
+    it 'Trie les évaluations de la plus récentes à la plus vieille' do
       visit admin_evaluations_path
       within '.odd:first-of-type' do
         expect(page).to have_content 'Jean'

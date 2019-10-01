@@ -52,12 +52,14 @@ describe 'Evaluation API', type: :request do
     end
 
     it 'retourne les situations de la campagne' do
+      situation_controle = create :situation_controle
       situation_inventaire = create :situation_inventaire, libelle: 'Inventaire'
 
-      campagne.situations << situation_inventaire
+      campagne.situations_configurations.create situation: situation_controle, position: 2
+      campagne.situations_configurations.create situation: situation_inventaire, position: 1
       get "/api/evaluations/#{evaluation.id}"
 
-      expect(JSON.parse(response.body)['situations'].size).to eql(1)
+      expect(JSON.parse(response.body)['situations'].size).to eql(2)
       expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')
     end
 

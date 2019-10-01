@@ -6,6 +6,7 @@ class Campagne < ApplicationRecord
   has_many :situations, through: :situations_configurations
   belongs_to :questionnaire, optional: true
   belongs_to :compte
+  default_scope { order(created_at: :asc) }
 
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true

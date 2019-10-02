@@ -154,6 +154,13 @@ describe Restitution::Questions do
                        question_id: question2.id)
       end
 
+      let(:evenement_reponse_incomplet) do
+        create(:evenement_reponse,
+               evaluation: evaluation,
+               situation: situation,
+               donnees: { question: question2.id })
+      end
+
       it 'pour une mauvaise et une bonne réponse' do
         restitution = described_class.new(
           campagne, [
@@ -169,6 +176,16 @@ describe Restitution::Questions do
         restitution = described_class.new(
           campagne, [
             evenement_demarrage
+          ]
+        )
+        expect(restitution.efficience).to eq 0
+      end
+
+      it 'ignore les reponses incomplètes' do
+        restitution = described_class.new(
+          campagne, [
+            evenement_demarrage,
+            evenement_reponse_incomplet
           ]
         )
         expect(restitution.efficience).to eq 0

@@ -29,7 +29,9 @@ module Restitution
     end
 
     def efficience
-      question_qcm_repondue = questions_et_reponses.select { |q| q[:question].is_a?(QuestionQcm) }
+      question_qcm_repondue = questions_et_reponses.select do |q|
+        q[:question].is_a?(QuestionQcm) && q[:reponse].present?
+      end
       points_total = points_par_question(question_qcm_repondue).inject(0, :+)
       (points_total / nombre_questions_qcm.to_f) * 100.0
     end

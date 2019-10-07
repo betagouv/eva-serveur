@@ -52,7 +52,7 @@ fr:
           description: Capacité à faire bien du premier coup, et à être constant dans la tâche à réaliser.
       show:
         titre:
-          competences_identifiees: Compétences identifiées
+          competences_fortes: Compétences fortes
           restitution_globale: Restitution globale
           restitutions: Restitutions
     restitutions:

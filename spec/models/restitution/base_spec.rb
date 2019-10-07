@@ -94,4 +94,20 @@ describe Restitution::Base do
       restitution.supprimer
     end
   end
+
+  describe '#competences_mobilisees' do
+    context 'pour une restitution sans compétence mobilisée' do
+      class SansCompetenceMobilise < Restitution::Base; end
+
+      it { expect(SansCompetenceMobilise.new(nil, nil).competences_mobilisees).to eq [] }
+    end
+
+    context 'pour une restitution avec compétence mobilisée' do
+      class AvecCompetenceMobilise < Restitution::Base
+        COMPETENCES_MOBILISEES = [1].freeze
+      end
+
+      it { expect(AvecCompetenceMobilise.new(nil, nil).competences_mobilisees).to eq [1] }
+    end
+  end
 end

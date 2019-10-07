@@ -9,7 +9,11 @@ describe Restitution::Globale do
   end
   let(:evaluation) { double }
 
-  describe "#utilisateur retoure le nom de l'évaluation" do
+  def une_restitution(nom: nil, efficience: nil, competences_mobilisees: [Competence::PERSEVERANCE])
+    double(nom, efficience: efficience, competences_mobilisees: competences_mobilisees)
+  end
+
+  describe "#utilisateur retourne le nom de l'évaluation" do
     let(:restitutions) { [double] }
     let(:evaluation) { double(nom: 'Jean Bon') }
     it { expect(restitution_globale.utilisateur).to eq('Jean Bon') }
@@ -63,6 +67,59 @@ describe Restitution::Globale do
       it {
         expect(restitution_globale.efficience).to eq(::Restitution::Globale::NIVEAU_INDETERMINE)
       }
+    end
+  end
+
+  describe '#meilleure_restitution' do
+    context 'aucune restitution' do
+      let(:restitutions) { [] }
+      it { expect(restitution_globale.meilleure_restitution).to eq(nil) }
+    end
+
+    context 'avec une restitution efficiente' do
+      let(:restitution) { une_restitution(efficience: 20) }
+      let(:restitutions) { [restitution] }
+
+      it { expect(restitution_globale.meilleure_restitution).to eq(restitution) }
+    end
+
+    context 'avec une restitution sans efficience' do
+      let(:restitution) { une_restitution(efficience: Competence::NIVEAU_INDETERMINE) }
+      let(:restitutions) { [restitution] }
+
+      it { expect(restitution_globale.meilleure_restitution).to eq(nil) }
+    end
+
+    context 'avec des restitutions avec efficiences' do
+      let(:restitutions) do
+        [
+          une_restitution(nom: 'min', efficience: 20),
+          une_restitution(nom: 'max', efficience: 40)
+        ]
+      end
+
+      it { expect(restitution_globale.meilleure_restitution).to eq(restitutions.last) }
+    end
+
+    context 'avec une restitution sans compétences fortes' do
+      let(:restitutions) { [une_restitution(efficience: 40, competences_mobilisees: nil)] }
+
+      it { expect(restitution_globale.meilleure_restitution).to eq(nil) }
+    end
+  end
+
+  describe '#competences_fortes' do
+    context 'sans meilleure restitution' do
+      let(:restitutions) { [] }
+      it { expect(restitution_globale.competences_fortes). to eq [] }
+    end
+
+    context 'avec une meilleure restitution' do
+      let(:competences_mobilisees) { double }
+      let(:restitutions) do
+        [une_restitution(efficience: 20, competences_mobilisees: competences_mobilisees)]
+      end
+      it { expect(restitution_globale.competences_fortes).to eq competences_mobilisees }
     end
   end
 

@@ -10,6 +10,11 @@ module Restitution
       PIECE_NON_TRIEE: 'pieceRatee'
     }.freeze
 
+    COMPETENCES_MOBILISEES = [
+      ::Competence::COMPARAISON_TRI,
+      ::Competence::ATTENTION_CONCENTRATION
+    ].freeze
+
     def termine?
       evenements_pieces.count == PIECES_TOTAL
     end

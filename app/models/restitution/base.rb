@@ -81,6 +81,12 @@ module Restitution
       @evenements.first.to_param
     end
 
+    def competences_mobilisees
+      return [] unless self.class.const_defined?('COMPETENCES_MOBILISEES')
+
+      self.class.const_get('COMPETENCES_MOBILISEES')
+    end
+
     private
 
     def competences_indeterminees?(competences)

@@ -76,16 +76,15 @@ describe 'Evaluation API', type: :request do
         campagne.situations << situation_inventaire
         get "/api/evaluations/#{evaluation.id}"
 
-        expect(JSON.parse(response.body)['competences'].size).to eql(4)
-        expect(JSON.parse(response.body)['competences'][0].keys).to eql(['comprehension_consigne'])
-        expect(JSON.parse(response.body)['competences'][0].values).to eql([4])
+        expect(JSON.parse(response.body)['competences_fortes'])
+          .to eql(Restitution::Inventaire::COMPETENCES_MOBILISEES.map(&:to_s))
       end
 
       it 'avec une évaluation sans compétences identifiées' do
         campagne.situations << situation_inventaire
         get "/api/evaluations/#{evaluation.id}"
 
-        expect(JSON.parse(response.body)['competences']).to be_empty
+        expect(JSON.parse(response.body)['competences_fortes']).to be_empty
       end
     end
   end

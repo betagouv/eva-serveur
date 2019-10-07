@@ -34,6 +34,17 @@ module Restitution
       end
     end
 
+    def competences_fortes
+      meilleure_restitution&.competences_mobilisees || []
+    end
+
+    def meilleure_restitution
+      @restitutions.reject do |restitution|
+        restitution.competences_mobilisees.blank? ||
+          restitution.efficience == NIVEAU_INDETERMINE
+      end.max_by(&:efficience)
+    end
+
     private
 
     def extraie_competences_depuis_restitutions

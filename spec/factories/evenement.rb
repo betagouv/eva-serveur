@@ -55,5 +55,17 @@ FactoryBot.define do
     factory :evenement_reponse do
       nom { 'reponse' }
     end
+
+    factory :evenement_qualification_danger do
+      nom { 'qualificationDanger' }
+
+      trait :bon do
+        donnees { { reponse: 'bonne' } }
+      end
+
+      trait :mauvais do
+        donnees { { reponse: 'mauvaise' } }
+      end
+    end
   end
 end

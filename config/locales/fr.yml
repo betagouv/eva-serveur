@@ -221,6 +221,7 @@ fr:
   active_admin:
     resource:
       index:
+        nombre_participants: Nombre de participants
         rapport: Rapport
         evenements: Évenements
     batch_actions:

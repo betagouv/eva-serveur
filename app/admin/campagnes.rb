@@ -12,6 +12,9 @@ ActiveAdmin.register Campagne do
     selectable_column
     column :libelle
     column :code
+    column t('.nombre_participants') do |campagne|
+      nombre_participants campagne
+    end
     column :compte if can?(:manage, Compte)
     actions
   end
@@ -36,9 +39,15 @@ ActiveAdmin.register Campagne do
   end
 
   controller do
+    helper_method :nombre_participants
+
     def create
       params[:campagne][:compte_id] ||= current_compte.id
       create!
+    end
+
+    def nombre_participants(campagne)
+      Evaluation.where(campagne: campagne).count
     end
   end
 end

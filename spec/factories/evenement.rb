@@ -67,5 +67,9 @@ FactoryBot.define do
         donnees { { reponse: 'mauvaise' } }
       end
     end
+
+    factory :evenement_identification_danger do
+      nom { 'identificationDanger' }
+    end
   end
 end

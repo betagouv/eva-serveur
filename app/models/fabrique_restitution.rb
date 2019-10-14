@@ -7,7 +7,8 @@ class FabriqueRestitution
         'inventaire' => Restitution::Inventaire,
         'controle' => Restitution::Controle,
         'tri' => Restitution::Tri,
-        'questions' => Restitution::Questions
+        'questions' => Restitution::Questions,
+        'securite' => Restitution::Securite
       }
 
       classe_restitution[situation.nom_technique].new(campagne, evenements)

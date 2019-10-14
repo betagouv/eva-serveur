@@ -96,3 +96,6 @@ fr:
         restitution_questions: Restitution des questions
         question: Question
         reponse: Réponse
+      restitution_securite:
+        restitution_securite: Restitution de la situation sécurité
+        dangers_bien_qualifies: Dangers bien qualifiés

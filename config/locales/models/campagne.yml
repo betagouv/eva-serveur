@@ -5,6 +5,7 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
+        nombre_evaluations: Nombre d'évaluations
   formtastic:
     actions:
       campagne:

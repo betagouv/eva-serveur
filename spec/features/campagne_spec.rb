@@ -44,13 +44,16 @@ describe 'Admin - Campagne', type: :feature do
       end
     end
 
-    it 'affiche le nombre de participant à la campagne' do
-      visit admin_campagnes_path
-      within('#index_table_campagnes') do
-        expect(page).to have_content 'Nombre de participants'
-      end
-      within('td.col-nombre_de_participants') do
-        expect(page).to have_content '1'
+    context 'quelque soit le rôle' do
+      before { visit admin_campagnes_path }
+
+      it "affiche le nombre d'évaluation par campagne" do
+        within('#index_table_campagnes') do
+          expect(page).to have_content "Nombre d'évaluations"
+        end
+        within('td.col-nombre_evaluations') do
+          expect(page).to have_content '1'
+        end
       end
     end
   end

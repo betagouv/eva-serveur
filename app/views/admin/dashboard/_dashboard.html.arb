@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+panel t('.nombre_evaluations.titre') do
+  div class: 'compteurs' do
+    { hier: hier, aujourdhui: aujourdhui, total: total }.each do |clef, valeur|
+      div class: 'compteur' do
+        h1 valeur
+        span t(".nombre_evaluations.#{clef}")
+      end
+    end
+  end
+end

@@ -12,6 +12,7 @@ describe 'Admin - Campagne', type: :feature do
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: compte_organisation
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }
+  let!(:evaluation_organisation) { create :evaluation, campagne: ma_campagne }
 
   describe 'index' do
     context 'en organisation' do
@@ -40,6 +41,16 @@ describe 'Admin - Campagne', type: :feature do
         within '.panel_contents' do
           expect(page).to have_content 'Compte'
         end
+      end
+    end
+
+    it 'affiche le nombre de participant à la campagne' do
+      visit admin_campagnes_path
+      within('#index_table_campagnes') do
+        expect(page).to have_content 'Nombre de participants'
+      end
+      within('td.col-nombre_de_participants') do
+        expect(page).to have_content '1'
       end
     end
   end

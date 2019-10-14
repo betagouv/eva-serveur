@@ -2,6 +2,12 @@
 
 Cette application sert de serveur et d'espace d'administration pour [Compétences Pro](https://github.com/betagouv/competences-pro)
 
+Pour voir les autres projets de Compétences Pro:
+
+- [la partie cliente](https://github.com/betagouv/competences-pro)
+- [la partie orchestration](https://github.com/betagouv/competences-pro-orchestrateur)
+- [le site web](https://github.com/betagouv/competences-pro-www)
+
 * Ruby version
 2.6
 

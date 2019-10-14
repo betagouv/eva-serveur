@@ -1,0 +1,7 @@
+fr:
+  admin:
+    dashboard:
+      dashboard:
+        nombre_evaluations:
+          titre: Nombre d'évaluations
+          total: Total

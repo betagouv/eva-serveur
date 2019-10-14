@@ -17,7 +17,7 @@ panel 'Configuration' do
   end
 end
 
-panel 'Évaluations' do
+panel "Évaluations (#{campagne.nombre_evaluations})" do
   table_for campagne.evaluations do
     column :nom do |evaluation|
       link_to evaluation.nom,

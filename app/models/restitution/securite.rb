@@ -30,6 +30,12 @@ module Restitution
       end
     end
 
+    def nombre_retours_deja_qualifies
+      qualifications_par_danger.inject(0) do |memo, (_danger, qualifications)|
+        memo + qualifications.count - 1
+      end
+    end
+
     private
 
     def bonne_reponse?(evenement)

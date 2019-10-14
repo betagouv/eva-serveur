@@ -85,4 +85,21 @@ describe Restitution::Securite do
       it { expect(restitution.nombre_dangers_identifies).to eq 0 }
     end
   end
+
+  describe '#nombre_retours_deja_qualifies' do
+    context 'sans évenement' do
+      let(:evenements) { [] }
+      it { expect(restitution.nombre_retours_deja_qualifies).to eq 0 }
+    end
+
+    context 'deux qualifications du même danger' do
+      let(:evenements) do
+        [build(:evenement_qualification_danger,
+               donnees: { reponse: 'mauvais', danger: 'danger' }),
+         build(:evenement_qualification_danger,
+               donnees: { reponse: 'bonne', danger: 'danger' })]
+      end
+      it { expect(restitution.nombre_retours_deja_qualifies).to eq 1 }
+    end
+  end
 end

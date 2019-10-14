@@ -2,11 +2,13 @@
 
 module Restitution
   class Securite < Base
-    BONNE_REPONSE = 'bonne'
+    BONNE_QUALIFICATION = 'bonne'
+    IDENTIFICATION_POSITIVE = 'oui'
     DANGERS_TOTAL = 5
 
     EVENEMENT = {
-      QUALIFICATION_DANGER: 'qualificationDanger'
+      QUALIFICATION_DANGER: 'qualificationDanger',
+      IDENTIFICATION_DANGER: 'identificationDanger'
     }.freeze
 
     def termine?
@@ -20,10 +22,18 @@ module Restitution
       qualifications_finales.count { |e| bonne_reponse?(e) }
     end
 
+    def nombre_dangers_identifies
+      evenements.count do |e|
+        e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
+          e.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
+          e.donnees['danger'].present?
+      end
+    end
+
     private
 
     def bonne_reponse?(evenement)
-      evenement.donnees['reponse'] == BONNE_REPONSE
+      evenement.donnees['reponse'] == BONNE_QUALIFICATION
     end
 
     def qualifications_par_danger

@@ -12,7 +12,7 @@ panel 'Détails de la campagne' do
 end
 
 panel 'Configuration' do
-  reorderable_table_for campagne.situations_configurations do
+  reorderable_table_for campagne.situations_configurations.includes(:situation) do
     column :situation
   end
 end

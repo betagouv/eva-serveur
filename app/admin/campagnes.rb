@@ -8,6 +8,8 @@ ActiveAdmin.register Campagne do
   filter :situations
   filter :questionnaire
 
+  includes :compte
+
   index do
     selectable_column
     column :libelle

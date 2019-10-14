@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+panel t('.restitution_securite') do
+  attributes_table_for restitution do
+    row t('.dangers_bien_qualifies'), &:nombre_bien_qualifies
+  end
+end

@@ -8,7 +8,8 @@ module Restitution
 
     EVENEMENT = {
       QUALIFICATION_DANGER: 'qualificationDanger',
-      IDENTIFICATION_DANGER: 'identificationDanger'
+      IDENTIFICATION_DANGER: 'identificationDanger',
+      ACTIVATION_AIDE_1: 'activationAide'
     }.freeze
 
     def termine?
@@ -23,17 +24,22 @@ module Restitution
     end
 
     def nombre_dangers_identifies
-      evenements.count do |e|
-        e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
-          e.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
-          e.donnees['danger'].present?
-      end
+      dangers_identifies.count
     end
 
     def nombre_retours_deja_qualifies
       qualifications_par_danger.inject(0) do |memo, (_danger, qualifications)|
         memo + qualifications.count - 1
       end
+    end
+
+    def nombre_dangers_identifies_avant_aide_1
+      return nombre_dangers_identifies if timestamp_activation_aide.blank?
+
+      dangers_identifies_tries = dangers_identifies.partition do |danger|
+        danger.date < timestamp_activation_aide
+      end
+      dangers_identifies_tries.first.length
     end
 
     private
@@ -45,6 +51,22 @@ module Restitution
     def qualifications_par_danger
       qualifications_dangers = evenements.select { |e| e.nom == EVENEMENT[:QUALIFICATION_DANGER] }
       qualifications_dangers.group_by { |e| e.donnees['danger'] }
+    end
+
+    def dangers_identifies
+      evenements.select { |e| est_un_danger_identifie?(e) }
+    end
+
+    def est_un_danger_identifie?(evenement)
+      evenement.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
+        evenement.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
+        evenement.donnees['danger'].present?
+    end
+
+    def timestamp_activation_aide
+      evenements.select { |e| e.nom == EVENEMENT[:ACTIVATION_AIDE_1] }
+                .pluck(:date)
+                .join
     end
   end
 end

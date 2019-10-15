@@ -71,5 +71,9 @@ FactoryBot.define do
     factory :evenement_identification_danger do
       nom { 'identificationDanger' }
     end
+
+    factory :activation_aide do
+      nom { 'activationAide' }
+    end
   end
 end

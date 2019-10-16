@@ -144,4 +144,31 @@ describe Restitution::Securite do
       it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 1 }
     end
   end
+
+  describe '#nombre_retours_non_dangers_identifies' do
+    context 'sans évenement' do
+      let(:evenements) { [] }
+      it { expect(restitution.nombre_retours_non_dangers_identifies).to eq 0 }
+    end
+
+    context 'avec un retour sur une zone de non danger identifiée' do
+      let(:evenements) do
+        [build(:evenement_identification_danger,
+               donnees: { reponse: 'oui', zone: 'zone-voiture-rouge' }),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', zone: 'zone-voiture-rouge' })]
+      end
+      it { expect(restitution.nombre_retours_non_dangers_identifies).to eq 1 }
+    end
+
+    context 'avec des zones de non danger identifiées mais sans retour' do
+      let(:evenements) do
+        [build(:evenement_identification_danger,
+               donnees: { reponse: 'oui', zone: 'zone-voiture-rouge' }),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'oui', zone: 'zone-voiture-verte' })]
+      end
+      it { expect(restitution.nombre_retours_non_dangers_identifies).to eq 0 }
+    end
+  end
 end

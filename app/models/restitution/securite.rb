@@ -42,6 +42,12 @@ module Restitution
       dangers_identifies_tries.first.length
     end
 
+    def nombre_retours_non_dangers_identifies
+      identifications_par_non_danger.inject(0) do |memo, (_danger, identifications)|
+        memo + identifications.count - 1
+      end
+    end
+
     private
 
     def bonne_reponse?(evenement)
@@ -61,6 +67,16 @@ module Restitution
       evenement.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
         evenement.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
         evenement.donnees['danger'].present?
+    end
+
+    def est_un_non_danger_identifie?(evenement)
+      evenement.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
+        evenement.donnees['danger'].blank?
+    end
+
+    def identifications_par_non_danger
+      identifications_non_danger = evenements.select { |e| est_un_non_danger_identifie?(e) }
+      identifications_non_danger.group_by { |e| e.donnees['zone'] }
     end
 
     def timestamp_activation_aide

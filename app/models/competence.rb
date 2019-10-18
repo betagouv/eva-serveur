@@ -6,6 +6,8 @@ module Competence
   NIVEAU_2 = 2
   NIVEAU_1 = 1
   NIVEAU_INDETERMINE = :indetermine
+  APTE = :apte
+  APTE_AVEC_AIDE = :apte_avec_aide
 
   NIVEAUX = [NIVEAU_INDETERMINE, NIVEAU_1, NIVEAU_2, NIVEAU_3, NIVEAU_4].freeze
 

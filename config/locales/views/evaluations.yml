@@ -29,6 +29,9 @@ fr:
         2: 2
         3: 3
         4: 4
+        apte: Apte
+        apte_avec_aide: Apte avec aide
+
         comprehension_consigne:
           titre: La consigne de l’exercice a été comprise
           description: Analyse efficace des situations de travail proposées. Identification sensé de ce qui est demandé.
@@ -103,3 +106,4 @@ fr:
         retours_dangers_deja_qualifies: Retours sur les situations déjà qualifiées
         dangers_identifies_avant_aide_1: Dangers identifiés avant activation de l'aide N°1
         temps_identification_premier_danger: Temps premier danger identifié
+        attention_visuo_spatiale: Attention visuo-spatiale

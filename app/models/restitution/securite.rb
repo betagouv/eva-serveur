@@ -5,6 +5,7 @@ module Restitution
     BONNE_QUALIFICATION = 'bonne'
     IDENTIFICATION_POSITIVE = 'oui'
     DANGERS_TOTAL = 5
+    DANGER_VISUO_SPATIAL = 'signalisation'
 
     EVENEMENT = {
       QUALIFICATION_DANGER: 'qualificationDanger',
@@ -50,6 +51,17 @@ module Restitution
       premiere_identification_vrai_danger.date - demarrage.date
     end
 
+    def attention_visuo_spatiale
+      identification = dangers_identifies.find { |e| e.donnees['danger'] == DANGER_VISUO_SPATIAL }
+      return ::Competence::NIVEAU_INDETERMINE if identification.blank?
+
+      if activation_aide1.present? && activation_aide1.date < identification.date
+        return ::Competence::APTE_AVEC_AIDE
+      end
+
+      ::Competence::APTE
+    end
+
     private
 
     def bonne_reponse?(evenement)
@@ -88,6 +100,10 @@ module Restitution
         e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
           e.donnees['danger'].present?
       end
+    end
+
+    def activation_aide1
+      @activation_aide1 ||= premier_evemement(EVENEMENT[:ACTIVATION_AIDE_1])
     end
   end
 end

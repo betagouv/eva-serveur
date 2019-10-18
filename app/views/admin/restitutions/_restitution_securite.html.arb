@@ -9,5 +9,8 @@ panel t('.restitution_securite') do
     row t('.temps_identification_premier_danger') do |r|
       Time.at(r.temps_identification_premier_danger).strftime('%M:%S')
     end
+    row t('.attention_visuo_spatiale') do |restitution|
+      t(restitution.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')
+    end
   end
 end

@@ -144,4 +144,31 @@ describe Restitution::Securite do
       it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 1 }
     end
   end
+
+  describe '#temps_identification_premier_danger' do
+    context 'sans évenement' do
+      let(:evenements) { [] }
+      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+    end
+
+    context 'avec des dangers identifiés' do
+      let(:situation) { create :situation_securite }
+      let(:evenements) do
+        [build(:evenement_demarrage, situation: situation, date: 2.minutes.ago),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'danger' }, date: 1.minute.ago),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'oui', danger: 'danger' }, date: Date.current)]
+      end
+      it { expect(restitution.temps_identification_premier_danger).to eq '01:00' }
+    end
+
+    context 'sans danger identifié' do
+      let(:situation) { create :situation_securite }
+      let(:evenements) do
+        [build(:evenement_demarrage, situation: situation, date: 2.minutes.ago)]
+      end
+      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+    end
+  end
 end

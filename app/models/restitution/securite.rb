@@ -9,7 +9,8 @@ module Restitution
     EVENEMENT = {
       QUALIFICATION_DANGER: 'qualificationDanger',
       IDENTIFICATION_DANGER: 'identificationDanger',
-      ACTIVATION_AIDE_1: 'activationAide'
+      ACTIVATION_AIDE_1: 'activationAide',
+      DEMARRAGE: 'demarrage'
     }.freeze
 
     def termine?
@@ -42,6 +43,13 @@ module Restitution
       dangers_identifies_tries.first.length
     end
 
+    def temps_identification_premier_danger
+      return 0 if timestamp_premier_danger_identifie.blank?
+
+      delta_en_seconde = timestamp_premier_danger_identifie - timestamp_demarrage
+      Time.at(delta_en_seconde).strftime('%M:%S')
+    end
+
     private
 
     def bonne_reponse?(evenement)
@@ -66,7 +74,23 @@ module Restitution
     def timestamp_activation_aide
       evenements.select { |e| e.nom == EVENEMENT[:ACTIVATION_AIDE_1] }
                 .pluck(:date)
-                .join
+                .first
+    end
+
+    def timestamp_demarrage
+      evenements.select { |e| e.nom == EVENEMENT[:DEMARRAGE] }
+                .pluck(:date)
+                .first
+    end
+
+    def timestamp_premier_danger_identifie
+      danger_qualifies = evenements.select do |e|
+        e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
+          e.donnees['danger'].present?
+      end
+      return danger_qualifies if danger_qualifies.blank?
+
+      danger_qualifies.first.date
     end
   end
 end

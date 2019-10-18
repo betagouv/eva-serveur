@@ -16,5 +16,10 @@ FactoryBot.define do
       libelle { 'Tri' }
       nom_technique { 'tri' }
     end
+
+    factory :situation_securite do
+      libelle { 'Sécurite' }
+      nom_technique { 'securite' }
+    end
   end
 end

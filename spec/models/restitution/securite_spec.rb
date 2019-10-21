@@ -154,13 +154,13 @@ describe Restitution::Securite do
     context 'avec des dangers identifiés' do
       let(:situation) { create :situation_securite }
       let(:evenements) do
-        [build(:evenement_demarrage, situation: situation, date: 2.minutes.ago),
+        [build(:evenement_demarrage, situation: situation, date: Time.local(2019, 10, 9, 10, 0)),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'non', danger: 'danger' }, date: 1.minute.ago),
+               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: 'danger' }, date: Date.current)]
+               donnees: { reponse: 'oui', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 2))]
       end
-      it { expect(restitution.temps_identification_premier_danger).to eq '01:00' }
+      it { expect(restitution.temps_identification_premier_danger).to eq 60 }
     end
 
     context 'sans danger identifié' do

@@ -35,19 +35,19 @@ module Restitution
     end
 
     def nombre_dangers_identifies_avant_aide_1
-      return nombre_dangers_identifies if timestamp_pour(EVENEMENT[:ACTIVATION_AIDE_1]).blank?
+      activation_aide = premier_evemement EVENEMENT[:ACTIVATION_AIDE_1]
+      return nombre_dangers_identifies if activation_aide.blank?
 
       dangers_identifies_tries = dangers_identifies.partition do |danger|
-        danger.date < timestamp_pour(EVENEMENT[:ACTIVATION_AIDE_1])
+        danger.date < activation_aide.date
       end
       dangers_identifies_tries.first.length
     end
 
     def temps_identification_premier_danger
-      return 0 if timestamp_premier_danger_identifie.blank?
+      return 0 if premiere_identification_vrai_danger.blank?
 
-      delta_en_seconde = timestamp_premier_danger_identifie - timestamp_pour(EVENEMENT[:DEMARRAGE])
-      Time.at(delta_en_seconde).strftime('%M:%S')
+      premiere_identification_vrai_danger.date - demarrage.date
     end
 
     private
@@ -71,20 +71,23 @@ module Restitution
         evenement.donnees['danger'].present?
     end
 
-    def timestamp_pour(evenement)
-      evenements.select { |e| e.nom == evenement }
-                .pluck(:date)
-                .first
+    def premier_evemement(nom_evenement)
+      evenements_chronologiques.find { |e| e.nom == nom_evenement }
     end
 
-    def timestamp_premier_danger_identifie
-      dangers_identifies = evenements.select do |e|
+    def demarrage
+      @demarrage ||= premier_evemement EVENEMENT[:DEMARRAGE]
+    end
+
+    def evenements_chronologiques
+      @evenements_chronologiques ||= evenements.sort_by(&:date)
+    end
+
+    def premiere_identification_vrai_danger
+      @premiere_identification_vrai_danger ||= evenements_chronologiques.find do |e|
         e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
           e.donnees['danger'].present?
       end
-      return dangers_identifies if dangers_identifies.blank?
-
-      dangers_identifies.first.date
     end
   end
 end

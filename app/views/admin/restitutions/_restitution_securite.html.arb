@@ -9,8 +9,10 @@ panel t('.restitution_securite') do
     row t('.dangers_identifies_avant_aide_1'), &:nombre_dangers_identifies_avant_aide_1
     row t('.dangers_bien_qualifies'), &:nombre_bien_qualifies
     row t('.retours_dangers_deja_qualifies'), &:nombre_retours_deja_qualifies
-    row t('.temps_identification_premier_danger') do |r|
-      Time.at(r.temps_identification_premier_danger).strftime('%M:%S')
+    row t('.temps_identifications_dangers') do |r|
+      r.temps_identifications_dangers.collect do |temps|
+        Time.at(temps).strftime('%M:%S')
+      end.join(', ')
     end
     row t('.attention_visuo_spatiale') do |restitution|
       t(restitution.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')

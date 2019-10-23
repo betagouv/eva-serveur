@@ -36,11 +36,10 @@ module Restitution
     end
 
     def nombre_dangers_identifies_avant_aide_1
-      activation_aide = premier_evemement EVENEMENT[:ACTIVATION_AIDE_1]
-      return nombre_dangers_identifies if activation_aide.blank?
+      return nombre_dangers_identifies if activation_aide1.blank?
 
       dangers_identifies_tries = dangers_identifies.partition do |danger|
-        danger.date < activation_aide.date
+        danger.date < activation_aide1.date
       end
       dangers_identifies_tries.first.length
     end

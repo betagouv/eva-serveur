@@ -95,8 +95,12 @@ module Restitution
       @evenements_chronologiques ||= evenements.sort_by(&:date)
     end
 
+    def evenements_situation
+      @evenements_situation ||= evenements_chronologiques.select { |e| e.date >= demarrage.date }
+    end
+
     def premiere_identification_vrai_danger
-      @premiere_identification_vrai_danger ||= evenements_chronologiques.find do |e|
+      @premiere_identification_vrai_danger ||= evenements_situation.find do |e|
         e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
           e.donnees['danger'].present?
       end

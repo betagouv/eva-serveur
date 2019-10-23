@@ -19,6 +19,10 @@ module Restitution
       qualifications_par_danger.count == DANGERS_TOTAL
     end
 
+    def temps_entrainement
+      evenements_entrainement.last.date - evenements_entrainement.first.date
+    end
+
     def nombre_bien_qualifies
       qualifications_finales = qualifications_par_danger.map do |_danger, qualifications|
         qualifications.max_by(&:created_at)
@@ -110,6 +114,12 @@ module Restitution
 
     def evenements_situation
       @evenements_situation ||= evenements_chronologiques.select { |e| e.date >= demarrage.date }
+    end
+
+    def evenements_entrainement
+      @evenements_entrainement ||= evenements_chronologiques.take_while do |evenement|
+        evenement.nom != EVENEMENT[:DEMARRAGE]
+      end
     end
 
     def premiere_identification_vrai_danger

@@ -68,12 +68,14 @@ module Restitution
     end
 
     def qualifications_par_danger
-      qualifications_dangers = evenements.select { |e| e.nom == EVENEMENT[:QUALIFICATION_DANGER] }
+      qualifications_dangers = evenements_situation.select do |e|
+        e.nom == EVENEMENT[:QUALIFICATION_DANGER]
+      end
       qualifications_dangers.group_by { |e| e.donnees['danger'] }
     end
 
     def dangers_identifies
-      evenements.select { |e| est_un_danger_identifie?(e) }
+      evenements_situation.select { |e| est_un_danger_identifie?(e) }
     end
 
     def est_un_danger_identifie?(evenement)
@@ -82,12 +84,12 @@ module Restitution
         evenement.donnees['danger'].present?
     end
 
-    def premier_evemement(nom_evenement)
-      evenements_chronologiques.find { |e| e.nom == nom_evenement }
+    def premier_evenement_du_nom(evenements, nom_evenement)
+      evenements.find { |e| e.nom == nom_evenement }
     end
 
     def demarrage
-      @demarrage ||= premier_evemement EVENEMENT[:DEMARRAGE]
+      @demarrage ||= premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
     end
 
     def evenements_chronologiques
@@ -106,7 +108,10 @@ module Restitution
     end
 
     def activation_aide1
-      @activation_aide1 ||= premier_evemement(EVENEMENT[:ACTIVATION_AIDE_1])
+      @activation_aide1 ||= premier_evenement_du_nom(
+        evenements_situation,
+        EVENEMENT[:ACTIVATION_AIDE_1]
+      )
     end
   end
 end

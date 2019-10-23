@@ -146,13 +146,14 @@ describe Restitution::Securite do
   end
 
   describe '#temps_identification_premier_danger' do
+    let(:situation) { build :situation_securite }
+
     context 'sans évenement' do
       let(:evenements) { [] }
       it { expect(restitution.temps_identification_premier_danger).to eq 0 }
     end
 
     context 'avec des dangers identifiés' do
-      let(:situation) { create :situation_securite }
       let(:evenements) do
         [build(:evenement_demarrage, situation: situation, date: Time.local(2019, 10, 9, 10, 0)),
          build(:evenement_identification_danger,
@@ -164,9 +165,17 @@ describe Restitution::Securite do
     end
 
     context 'sans danger identifié' do
-      let(:situation) { create :situation_securite }
       let(:evenements) do
         [build(:evenement_demarrage, situation: situation, date: 2.minutes.ago)]
+      end
+      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+    end
+
+    context 'ignore le tutorial' do
+      let(:evenements) do
+        [build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 0)),
+         build(:evenement_demarrage, situation: situation, date: Time.local(2019, 10, 9, 10, 1))]
       end
       it { expect(restitution.temps_identification_premier_danger).to eq 0 }
     end

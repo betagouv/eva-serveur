@@ -7,6 +7,10 @@ FactoryBot.define do
     session_id { '07319b2485be9ac4850664cd47cede38' }
     date { DateTime.now }
 
+    factory :evenement_demarrage_entrainement do
+      nom { 'demarrageEntrainement' }
+    end
+
     factory :evenement_demarrage do
       nom { 'demarrage' }
     end

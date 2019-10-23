@@ -2,6 +2,9 @@
 
 panel t('.restitution_securite') do
   attributes_table_for restitution do
+    row t('.temps_entrainement') do |r|
+      Time.at(r.temps_entrainement).strftime('%M:%S')
+    end
     row t('.dangers_identifies'), &:nombre_dangers_identifies
     row t('.dangers_identifies_avant_aide_1'), &:nombre_dangers_identifies_avant_aide_1
     row t('.dangers_bien_qualifies'), &:nombre_bien_qualifies

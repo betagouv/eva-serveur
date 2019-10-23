@@ -44,12 +44,6 @@ module Restitution
       dangers_identifies_tries.first.length
     end
 
-    def temps_identification_premier_danger
-      return 0 if premiere_identification_vrai_danger.blank?
-
-      premiere_identification_vrai_danger.date - demarrage.date
-    end
-
     def attention_visuo_spatiale
       identification = dangers_identifies.find { |e| e.donnees['danger'] == DANGER_VISUO_SPATIAL }
       return ::Competence::NIVEAU_INDETERMINE if identification.blank?
@@ -70,6 +64,16 @@ module Restitution
         .inject(0) do |memo, (_danger, ouvertures)|
           memo + ouvertures.count - 1
         end
+    end
+
+    def temps_identifications_dangers
+      les_temps = []
+      evenements_pour_mesurer_temps_identifications.each_slice(2) do |e1, e2|
+        next if e2.blank?
+
+        les_temps << e2.date - e1.date
+      end
+      les_temps
     end
 
     private
@@ -95,18 +99,24 @@ module Restitution
         evenement.donnees['danger'].present?
     end
 
-    def premiere_identification_vrai_danger
-      @premiere_identification_vrai_danger ||= evenements_situation.find do |e|
-        e.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
-          e.donnees['danger'].present?
-      end
-    end
-
     def activation_aide1
       @activation_aide1 ||= premier_evenement_du_nom(
         evenements_situation,
         EVENEMENT[:ACTIVATION_AIDE_1]
       )
+    end
+
+    def evenements_pour_mesurer_temps_identifications
+      dernier_evenement_retenu = nil
+      evenements_situation.select do |e|
+        next if dernier_evenement_retenu&.nom == e.nom
+
+        selectionne = [AvecEntrainement::EVENEMENT[:DEMARRAGE],
+                       EVENEMENT[:QUALIFICATION_DANGER]].include?(e.nom) ||
+                      e.nom == EVENEMENT[:IDENTIFICATION_DANGER] && e.donnees['danger'].present?
+        dernier_evenement_retenu = e if selectionne
+        selectionne
+      end
     end
   end
 end

@@ -165,39 +165,65 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#temps_identification_premier_danger' do
-    let(:situation) { build :situation_securite }
-
-    context 'sans évenement' do
+  describe '#temps_identifications_dangers' do
+    context 'sans danger identifié' do
       let(:evenements) { [] }
-      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+      it { expect(restitution.temps_identifications_dangers).to eq [] }
     end
 
-    context 'avec des dangers identifiés' do
+    context 'un danger identifié' do
       let(:evenements) do
-        [build(:evenement_demarrage, situation: situation, date: Time.local(2019, 10, 9, 10, 0)),
+        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
+      end
+      it { expect(restitution.temps_identifications_dangers).to eq [60] }
+    end
+
+    context 'deux danger identifiés' do
+      let(:evenements) do
+        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
          build(:evenement_identification_danger,
                donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
+         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2)),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 2))]
+               donnees: { reponse: 'non', danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
-      it { expect(restitution.temps_identification_premier_danger).to eq 60 }
+      it { expect(restitution.temps_identifications_dangers).to eq [60, 120] }
     end
 
-    context 'sans danger identifié' do
+    context 'ignore les non dangers identifiés' do
       let(:evenements) do
-        [build(:evenement_demarrage, situation: situation, date: 2.minutes.ago)]
+        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non' }, date: Time.local(2019, 10, 9, 10, 1)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'oui', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 3))]
       end
-      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+      it { expect(restitution.temps_identifications_dangers).to eq [180] }
     end
 
-    context 'ignore le tutorial' do
+    context 'quand on ne finit pas par une identification' do
       let(:evenements) do
-        [build(:evenement_identification_danger,
-               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 0)),
-         build(:evenement_demarrage, situation: situation, date: Time.local(2019, 10, 9, 10, 1))]
+        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
+         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2))]
       end
-      it { expect(restitution.temps_identification_premier_danger).to eq 0 }
+      it { expect(restitution.temps_identifications_dangers).to eq [60] }
+    end
+
+    context 'ignore les requalifications' do
+      let(:evenements) do
+        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
+         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2)),
+         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 3)),
+         build(:evenement_identification_danger,
+               donnees: { reponse: 'non', danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 5))]
+      end
+      it { expect(restitution.temps_identifications_dangers).to eq [60, 180] }
     end
   end
 
@@ -217,7 +243,7 @@ describe Restitution::Securite do
       it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE }
     end
 
-    context "avec identification du danger après avoir activé l'aider" do
+    context "avec identification du danger après avoir activé l'aide" do
       let(:evenements) do
         [build(:evenement_demarrage, date: 3.minute.ago),
          build(:activation_aide, date: 2.minutes.ago),

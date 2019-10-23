@@ -101,6 +101,7 @@ fr:
         reponse: Réponse
       restitution_securite:
         restitution_securite: Restitution de la situation sécurité
+        temps_entrainement: Temps passé dans l'entrainement
         dangers_bien_qualifies: Dangers bien qualifiés
         dangers_identifies: Dangers identifiés
         retours_dangers_deja_qualifies: Retours sur les situations déjà qualifiées

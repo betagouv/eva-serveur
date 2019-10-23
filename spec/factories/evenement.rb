@@ -75,5 +75,9 @@ FactoryBot.define do
     factory :activation_aide do
       nom { 'activationAide' }
     end
+
+    factory :evenement_ouverture_zone do
+      nom { 'ouvertureZone' }
+    end
   end
 end

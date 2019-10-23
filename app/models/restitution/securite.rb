@@ -11,7 +11,8 @@ module Restitution
       QUALIFICATION_DANGER: 'qualificationDanger',
       IDENTIFICATION_DANGER: 'identificationDanger',
       ACTIVATION_AIDE_1: 'activationAide',
-      DEMARRAGE: 'demarrage'
+      DEMARRAGE: 'demarrage',
+      OUVERTURE_ZONE: 'ouvertureZone'
     }.freeze
 
     def termine?
@@ -59,6 +60,17 @@ module Restitution
       end
 
       ::Competence::APTE
+    end
+
+    def nombre_reouverture_zone_sans_danger
+      ouverture_zones_sans_dangers = evenements_situation.select do |e|
+        e.nom == EVENEMENT[:OUVERTURE_ZONE] && !e.donnees['danger']
+      end
+      ouverture_zones_sans_dangers
+        .group_by { |e| e.donnees['zone'] }
+        .inject(0) do |memo, (_danger, ouvertures)|
+          memo + ouvertures.count - 1
+        end
     end
 
     private

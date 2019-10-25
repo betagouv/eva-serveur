@@ -66,9 +66,9 @@ module Restitution
         end
     end
 
-    def temps_identifications_dangers
+    def temps_ouvertures_zones_dangers
       les_temps = []
-      evenements_pour_mesurer_temps_identifications.each_slice(2) do |e1, e2|
+      evenements_demarrage_ouvertures_et_qualifications.each_slice(2) do |e1, e2|
         next if e2.blank?
 
         les_temps << e2.date - e1.date
@@ -106,14 +106,14 @@ module Restitution
       )
     end
 
-    def evenements_pour_mesurer_temps_identifications
+    def evenements_demarrage_ouvertures_et_qualifications
       dernier_evenement_retenu = nil
       evenements_situation.select do |e|
         next if dernier_evenement_retenu&.nom == e.nom
 
         selectionne = [AvecEntrainement::EVENEMENT[:DEMARRAGE],
                        EVENEMENT[:QUALIFICATION_DANGER]].include?(e.nom) ||
-                      e.nom == EVENEMENT[:IDENTIFICATION_DANGER] && e.donnees['danger'].present?
+                      e.nom == EVENEMENT[:OUVERTURE_ZONE] && e.donnees['danger'].present?
         dernier_evenement_retenu = e if selectionne
         selectionne
       end

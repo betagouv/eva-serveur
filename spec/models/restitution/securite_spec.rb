@@ -165,10 +165,11 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#temps_ouvertures_zones_dangers' do
+  describe '#temps_ouvertures_zones_dangers et #temps_moyen_ouvertures_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
       it { expect(restitution.temps_ouvertures_zones_dangers).to eq [] }
+      it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq nil }
     end
 
     context 'une zone danger ouverte' do
@@ -178,6 +179,7 @@ describe Restitution::Securite do
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
       it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60] }
+      it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq 60 }
     end
 
     context 'deux zone danger ouverts' do
@@ -190,6 +192,7 @@ describe Restitution::Securite do
                donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
       it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60, 120] }
+      it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq 90 }
     end
 
     context 'ignore les zones non dangers ouverts' do

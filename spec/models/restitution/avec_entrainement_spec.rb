@@ -6,6 +6,17 @@ describe Restitution::AvecEntrainement do
   let(:campagne) { Campagne.new }
   let(:restitution) { Restitution::AvecEntrainement.new campagne, evenements }
 
+  describe '#evenements_situation' do
+    context "ignore les évenements d'entrainement même s'ils ont la même date" do
+      let(:demarrage) { build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)) }
+      let(:evenements) do
+        [build(:evenement_demarrage_entrainement, date: Time.local(2019, 10, 9, 10, 0)),
+         demarrage]
+      end
+      it { expect(restitution.evenements_situation).to eq [demarrage] }
+    end
+  end
+
   describe '#temps_entrainement' do
     context "lorsqu'il est terminé" do
       let(:evenements) do

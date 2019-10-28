@@ -76,6 +76,12 @@ module Restitution
       les_temps
     end
 
+    def temps_moyen_ouvertures_zones_dangers
+      return nil if temps_ouvertures_zones_dangers.empty?
+
+      temps_ouvertures_zones_dangers.sum / temps_ouvertures_zones_dangers.size
+    end
+
     private
 
     def bonne_reponse?(evenement)

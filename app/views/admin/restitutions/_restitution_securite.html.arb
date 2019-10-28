@@ -14,6 +14,10 @@ panel t('.restitution_securite') do
         Time.at(temps).strftime('%M:%S')
       end.join(', ')
     end
+    row t('.temps_moyen_ouvertures_zones_dangers') do |r|
+      temps = r.temps_moyen_ouvertures_zones_dangers
+      Time.at(temps).strftime('%M:%S') if temps.present?
+    end
     row t('.attention_visuo_spatiale') do |restitution|
       t(restitution.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')
     end

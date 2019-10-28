@@ -5,13 +5,14 @@ require 'rails_helper'
 describe 'Admin - Evaluation', type: :feature do
   before(:each) { se_connecter_comme_organisation }
 
+  let(:ma_campagne) do
+    create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'paris2019'
+  end
+
   context "en tant qu'organisation" do
     let(:compte_rouen) { create :compte, role: 'organisation' }
     let(:campagne_rouen) { create :campagne, compte: compte_rouen, libelle: 'Rouen 2019' }
     let!(:evaluation) { create :evaluation, campagne: campagne_rouen }
-    let(:ma_campagne) do
-      create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'paris2019'
-    end
 
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
     let!(:mon_evaluation2) do
@@ -34,6 +35,18 @@ describe 'Admin - Evaluation', type: :feature do
       within '.odd:first-of-type' do
         expect(page).to have_content 'Jean'
       end
+    end
+  end
+
+  describe 'suppression' do
+    let(:evaluation) { create :evaluation, campagne: ma_campagne }
+    let(:situation) { create :situation_tri }
+    let!(:evenement) { create :evenement, evaluation: evaluation, situation: situation }
+    before { visit admin_evaluation_path(evaluation) }
+
+    it do
+      expect { click_on 'Supprimer' }.to(change { Evaluation.count }
+                                     .and(change { Evenement.count }))
     end
   end
 end

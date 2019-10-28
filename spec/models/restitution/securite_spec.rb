@@ -304,7 +304,7 @@ describe Restitution::Securite do
          build(:evenement_identification_danger,
                donnees: { reponse: 'oui', danger: 'danger' },
                date: Time.local(2019, 10, 9, 10, 4)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 3)),
+         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 4)),
          build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 6)),
          build(:evenement_identification_danger)]
       end

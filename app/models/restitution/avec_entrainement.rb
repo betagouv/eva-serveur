@@ -10,8 +10,6 @@ module Restitution
       evenements_entrainement.last.date - evenements_entrainement.first.date
     end
 
-    protected
-
     def demarrage
       @demarrage ||= premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
     end
@@ -23,7 +21,7 @@ module Restitution
     end
 
     def evenements_situation
-      @evenements_situation ||= evenements.select { |e| e.date >= demarrage.date }
+      @evenements_situation ||= evenements - evenements_entrainement
     end
   end
 end

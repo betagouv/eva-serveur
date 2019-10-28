@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class Securite < Base
+  class Securite < AvecEntrainement
     BONNE_QUALIFICATION = 'bonne'
     IDENTIFICATION_POSITIVE = 'oui'
     DANGERS_TOTAL = 5
@@ -11,16 +11,11 @@ module Restitution
       QUALIFICATION_DANGER: 'qualificationDanger',
       IDENTIFICATION_DANGER: 'identificationDanger',
       ACTIVATION_AIDE_1: 'activationAide',
-      DEMARRAGE: 'demarrage',
       OUVERTURE_ZONE: 'ouvertureZone'
     }.freeze
 
     def termine?
       qualifications_par_danger.count == DANGERS_TOTAL
-    end
-
-    def temps_entrainement
-      evenements_entrainement.last.date - evenements_entrainement.first.date
     end
 
     def nombre_bien_qualifies
@@ -98,24 +93,6 @@ module Restitution
       evenement.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
         evenement.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
         evenement.donnees['danger'].present?
-    end
-
-    def premier_evenement_du_nom(evenements, nom_evenement)
-      evenements.find { |e| e.nom == nom_evenement }
-    end
-
-    def demarrage
-      @demarrage ||= premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
-    end
-
-    def evenements_situation
-      @evenements_situation ||= evenements.select { |e| e.date >= demarrage.date }
-    end
-
-    def evenements_entrainement
-      @evenements_entrainement ||= evenements.take_while do |evenement|
-        evenement.nom != EVENEMENT[:DEMARRAGE]
-      end
     end
 
     def premiere_identification_vrai_danger

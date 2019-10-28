@@ -108,16 +108,12 @@ module Restitution
       @demarrage ||= premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
     end
 
-    def evenements_chronologiques
-      @evenements_chronologiques ||= evenements.sort_by(&:date)
-    end
-
     def evenements_situation
-      @evenements_situation ||= evenements_chronologiques.select { |e| e.date >= demarrage.date }
+      @evenements_situation ||= evenements.select { |e| e.date >= demarrage.date }
     end
 
     def evenements_entrainement
-      @evenements_entrainement ||= evenements_chronologiques.take_while do |evenement|
+      @evenements_entrainement ||= evenements.take_while do |evenement|
         evenement.nom != EVENEMENT[:DEMARRAGE]
       end
     end

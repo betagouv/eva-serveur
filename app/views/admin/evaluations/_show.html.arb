@@ -22,13 +22,29 @@ panel t('.titre.restitutions') do
   end
 end
 if restitution_globale.present?
-  panel t('.titre.competences_meilleure_restitution') do
-    ul do
-      restitution_globale.competences_meilleure_restitution.each do |competence|
-        li t("admin.restitutions.restitution_competences.#{competence}")
+  columns do
+    column do
+      panel t('.titre.competences_identifiees') do
+        ol do
+          restitution_globale.competences.each do |niveau_competence|
+            li span t(niveau_competence.keys.first,
+                      scope: 'admin.restitutions.restitution_competences') +
+                    ": #{niveau_competence.values.first}"
+          end
+        end
+      end
+    end
+    column do
+      panel t('.titre.competences_meilleure_restitution') do
+        ul do
+          restitution_globale.competences_meilleure_restitution.each do |competence|
+            li t("admin.restitutions.restitution_competences.#{competence}")
+          end
+        end
       end
     end
   end
+
   panel t('.titre.restitution_globale') do
     render partial: 'restitution_globale'
   end

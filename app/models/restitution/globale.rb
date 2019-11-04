@@ -48,16 +48,20 @@ module Restitution
     private
 
     def extraie_competences_depuis_restitutions
-      competences_max = @restitutions.each_with_object({}) do |restitution, memo|
+      competences_max.each_with_object([]) do |(competence, niveau), memo|
+        memo << { competence => niveau }
+      end
+    end
+
+    def competences_max
+      @restitutions.each_with_object({}) do |restitution, memo|
         restitution.competences.each do |competence, niveau|
-          next if niveau == NIVEAU_INDETERMINE
+          next if niveau == NIVEAU_INDETERMINE ||
+                  Base::COMPETENCES_INUTILES_POUR_EFFICIENCE.include?(competence)
 
           memo[competence] = niveau if (memo[competence] || 0) < niveau
         end
         memo
-      end
-      competences_max.each_with_object([]) do |(competence, niveau), memo|
-        memo << { competence => niveau }
       end
     end
   end

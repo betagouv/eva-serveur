@@ -14,6 +14,11 @@ module Restitution
       ::Competence::NIVEAU_1 => 25
     }.freeze
 
+    COMPETENCES_INUTILES_POUR_EFFICIENCE = [
+      ::Competence::PERSEVERANCE,
+      ::Competence::COMPREHENSION_CONSIGNE
+    ].freeze
+
     attr_reader :campagne, :evenements
     delegate :session_id, :situation, :date, to: :premier_evenement
 
@@ -65,10 +70,7 @@ module Restitution
     end
 
     def efficience
-      competences_utilisees = competences.except(
-        ::Competence::PERSEVERANCE,
-        ::Competence::COMPREHENSION_CONSIGNE
-      )
+      competences_utilisees = competences.except(*COMPETENCES_INUTILES_POUR_EFFICIENCE)
       return ::Competence::NIVEAU_INDETERMINE if competences_indeterminees?(competences_utilisees)
       return 0 if competences_utilisees.size.zero?
 

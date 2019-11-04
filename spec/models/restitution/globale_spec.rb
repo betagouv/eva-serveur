@@ -9,7 +9,7 @@ describe Restitution::Globale do
   end
   let(:evaluation) { double }
 
-  def une_restitution(nom: nil, efficience: nil, competences_mobilisees: [Competence::PERSEVERANCE])
+  def une_restitution(nom: nil, efficience: nil, competences_mobilisees: [Competence::RAPIDITE])
     double(nom, efficience: efficience, competences_mobilisees: competences_mobilisees)
   end
 
@@ -126,7 +126,7 @@ describe Restitution::Globale do
   end
 
   describe '#competences_identifiees retournes les compétences consolidées par niveau' do
-    let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_4 } }
+    let(:niveau_comparaison) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_4 } }
     let(:niveau_rapidite) { { Competence::RAPIDITE => Competence::NIVEAU_4 } }
 
     context 'aucune évaluation' do
@@ -135,42 +135,48 @@ describe Restitution::Globale do
     end
 
     context 'une évaluation, une compétences' do
-      let(:restitutions) { [double(competences: niveau_perseverance)] }
-      it { expect(restitution_globale.competences).to eq([niveau_perseverance]) }
+      let(:restitutions) { [double(competences: niveau_comparaison)] }
+      it { expect(restitution_globale.competences).to eq([niveau_comparaison]) }
     end
 
     context 'une évaluation, deux compétences' do
-      let(:restitutions) { [double(competences: niveau_perseverance.merge(niveau_rapidite))] }
-      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_rapidite]) }
+      let(:restitutions) { [double(competences: niveau_comparaison.merge(niveau_rapidite))] }
+      it { expect(restitution_globale.competences).to eq([niveau_comparaison, niveau_rapidite]) }
     end
 
     context 'deux évaluation, deux compétences différentes' do
-      let(:restitution1) { double(competences: niveau_perseverance) }
+      let(:restitution1) { double(competences: niveau_comparaison) }
       let(:restitution2) { double(competences: niveau_rapidite) }
       let(:restitutions) { [restitution1, restitution2] }
-      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_rapidite]) }
+      it { expect(restitution_globale.competences).to eq([niveau_comparaison, niveau_rapidite]) }
     end
 
     context 'retourne les niveaux les plus forts en premier' do
       let(:niveau_faible) { { Competence::ORGANISATION_METHODE => Competence::NIVEAU_1 } }
       let(:restitution1) { double(competences: niveau_faible) }
-      let(:restitution2) { double(competences: niveau_perseverance) }
+      let(:restitution2) { double(competences: niveau_comparaison) }
       let(:restitutions) { [restitution1, restitution2] }
-      it { expect(restitution_globale.competences).to eq([niveau_perseverance, niveau_faible]) }
+      it { expect(restitution_globale.competences).to eq([niveau_comparaison, niveau_faible]) }
     end
 
     context 'ignore les niveaux indéterminées' do
-      let(:niveau_indetermine) { { Competence::PERSEVERANCE => Competence::NIVEAU_INDETERMINE } }
+      let(:niveau_indetermine) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE } }
       let(:restitutions) { [double(competences: niveau_indetermine)] }
       it { expect(restitution_globale.competences).to eq([]) }
     end
 
     context 'retire les doublons' do
-      let(:niveau_perseverance_3) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
-      let(:restitution1) { double(competences: niveau_perseverance) }
-      let(:restitution2) { double(competences: niveau_perseverance_3) }
+      let(:niveau_comparaison_3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
+      let(:restitution1) { double(competences: niveau_comparaison) }
+      let(:restitution2) { double(competences: niveau_comparaison_3) }
       let(:restitutions) { [restitution1, restitution2] }
-      it { expect(restitution_globale.competences).to eq([niveau_perseverance]) }
+      it { expect(restitution_globale.competences).to eq([niveau_comparaison]) }
+    end
+
+    context "ignore les compétences inutilisées dans l'efficience" do
+      let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
+      let(:restitutions) { [double(competences: niveau_perseverance)] }
+      it { expect(restitution_globale.competences).to eq([]) }
     end
   end
 end

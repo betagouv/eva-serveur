@@ -38,5 +38,27 @@ module Restitution
           restitution.efficience == NIVEAU_INDETERMINE
       end.max_by(&:efficience)
     end
+
+    def competences
+      extraie_competences_depuis_restitutions.sort_by do |niveau_competence|
+        -niveau_competence.values.first
+      end
+    end
+
+    private
+
+    def extraie_competences_depuis_restitutions
+      competences_max = @restitutions.each_with_object({}) do |restitution, memo|
+        restitution.competences.each do |competence, niveau|
+          next if niveau == NIVEAU_INDETERMINE
+
+          memo[competence] = niveau if (memo[competence] || 0) < niveau
+        end
+        memo
+      end
+      competences_max.each_with_object([]) do |(competence, niveau), memo|
+        memo << { competence => niveau }
+      end
+    end
   end
 end

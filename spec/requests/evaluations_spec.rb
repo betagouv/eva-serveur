@@ -69,22 +69,26 @@ describe 'Evaluation API', type: :request do
         create(:evenement_demarrage, evaluation: evaluation, situation: situation_inventaire)
       end
 
-      it 'avec une évaluation avec des compétences identifiées' do
-        create(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
-                                                  evaluation: evaluation)
+      before { campagne.situations << situation_inventaire }
 
-        campagne.situations << situation_inventaire
-        get "/api/evaluations/#{evaluation.id}"
+      context 'avec une évaluation avec des compétences identifiées' do
+        let!(:saisie) do
+          create(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
+                                                    evaluation: evaluation)
+        end
+        before { get "/api/evaluations/#{evaluation.id}" }
 
-        expect(JSON.parse(response.body)['competences_fortes'])
-          .to eql(Restitution::Inventaire::COMPETENCES_MOBILISEES.map(&:to_s))
+        it do
+          attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
+                       Competence::ORGANISATION_METHODE]
+          expect(JSON.parse(response.body)['competences_fortes']).to eql(attendues.map(&:to_s))
+        end
       end
 
-      it 'avec une évaluation sans compétences identifiées' do
-        campagne.situations << situation_inventaire
-        get "/api/evaluations/#{evaluation.id}"
+      context 'avec une évaluation sans compétences identifiées' do
+        before { get "/api/evaluations/#{evaluation.id}" }
 
-        expect(JSON.parse(response.body)['competences_fortes']).to be_empty
+        it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
       end
     end
   end

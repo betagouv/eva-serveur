@@ -26,7 +26,7 @@ if restitution_globale.present?
     column do
       panel t('.titre.competences_identifiees') do
         ol do
-          restitution_globale.competences.each do |niveau_competence|
+          restitution_globale.niveaux_competences.each do |niveau_competence|
             li span t(niveau_competence.keys.first,
                       scope: 'admin.restitutions.restitution_competences') +
                     ": #{niveau_competence.values.first}"

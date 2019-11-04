@@ -108,10 +108,10 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#competences_fortes' do
+  describe '#competences_meilleure_restitution' do
     context 'sans meilleure restitution' do
       let(:restitutions) { [] }
-      it { expect(restitution_globale.competences_fortes). to eq [] }
+      it { expect(restitution_globale.competences_meilleure_restitution). to eq [] }
     end
 
     context 'avec une meilleure restitution' do
@@ -119,7 +119,9 @@ describe Restitution::Globale do
       let(:restitutions) do
         [une_restitution(efficience: 20, competences_mobilisees: competences_mobilisees)]
       end
-      it { expect(restitution_globale.competences_fortes).to eq competences_mobilisees }
+      it do
+        expect(restitution_globale.competences_meilleure_restitution).to eq competences_mobilisees
+      end
     end
   end
 end

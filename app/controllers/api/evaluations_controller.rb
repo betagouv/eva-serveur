@@ -19,7 +19,8 @@ module Api
       evaluation = Evaluation.find(params[:id])
       situations = evaluation.campagne.situations
       questions = evaluation.campagne.questionnaire&.questions || []
-      competences = FabriqueRestitution.restitution_globale(evaluation).competences_fortes
+      competences = FabriqueRestitution.restitution_globale(evaluation)
+                                       .competences_meilleure_restitution
       render json: { questions: questions, situations: situations, competences_fortes: competences }
     end
   end

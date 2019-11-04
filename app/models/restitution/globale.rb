@@ -28,7 +28,7 @@ module Restitution
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end
 
-    def competences_fortes
+    def competences_meilleure_restitution
       meilleure_restitution&.competences_mobilisees || []
     end
 

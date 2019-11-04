@@ -22,9 +22,9 @@ panel t('.titre.restitutions') do
   end
 end
 if restitution_globale.present?
-  panel t('.titre.competences_fortes') do
+  panel t('.titre.competences_meilleure_restitution') do
     ul do
-      restitution_globale.competences_fortes.each do |competence|
+      restitution_globale.competences_meilleure_restitution.each do |competence|
         li t("admin.restitutions.restitution_competences.#{competence}")
       end
     end

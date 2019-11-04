@@ -45,6 +45,10 @@ module Restitution
       end
     end
 
+    def nom_competences
+      competences.collect { |niveau_competence| niveau_competence.keys.first }
+    end
+
     private
 
     def extraie_competences_depuis_restitutions

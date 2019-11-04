@@ -39,14 +39,14 @@ module Restitution
       end.max_by(&:efficience)
     end
 
-    def competences
+    def niveaux_competences
       extraie_competences_depuis_restitutions.sort_by do |niveau_competence|
         -niveau_competence.values.first
       end
     end
 
-    def nom_competences
-      competences.collect { |niveau_competence| niveau_competence.keys.first }
+    def competences
+      niveaux_competences.collect { |niveau_competence| niveau_competence.keys.first }
     end
 
     private

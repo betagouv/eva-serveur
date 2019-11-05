@@ -5,19 +5,27 @@
   .row {
     display: -webkit-box;
     width: 1000px;
-    .col-4{
+    .col-4, .col-6, .competences-identifiees {
       height: 100%;
       vertical-align: top;
       display: inline-block;
+    }
+    .col-4 {
       width: 330px;
       min-width: 300px;
-      .my-2 {
-        width: 330px;
-       }
+    }
+    .competences-identifiees {
+      width: 100%;
+      .col-6 { width: 500px; }
+      .description-competence {
+        margin-top: 1rem;
+        margin-right: 1rem;
+        width: 450px;
+      }
     }
   }
 
-  .panel:nth-of-type(3) {
+  .saut-de-page {
     page-break-after: always;
   }
 

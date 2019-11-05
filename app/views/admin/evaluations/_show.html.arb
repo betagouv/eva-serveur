@@ -46,6 +46,6 @@ if restitution_globale.present?
   end
 
   panel t('.titre.restitution_globale') do
-    render partial: 'restitution_globale'
+    render partial: 'restitution_globale', locals: { pdf: false }
   end
 end

@@ -1,18 +1,49 @@
 # frozen_string_literal: true
 
 div class: 'admin_restitution_globale' do
-  div class: :panel do
-    div class: :identite do
-      div strong restitution_globale.utilisateur
-      div l restitution_globale.date, format: :restitution
+  div class: :identite do
+    div class: 'date-restitution' do
+      l restitution_globale.date, format: :restitution
     end
+    div class: 'nom-evalue' do
+      strong restitution_globale.utilisateur
+    end
+  end
 
-    h2 class: 'text-center' do
-      span class: 'btn btn-info btn-lg' do
-        t('.efficience_globale', efficience: formate_efficience(restitution_globale.efficience))
+  h2 class: 'text-center' do
+    span t('.competences_fortes_titre')
+  end
+
+  div class: 'row saut-de-page' do
+    restitution_globale.niveaux_competences.each do |niveau_competence|
+      ul class: 'competences-identifiees col-12' do
+        div class: 'col-6' do
+          if pdf
+            span wicked_pdf_image_tag niveau_competence.keys.first
+          else
+            span image_tag niveau_competence.keys.first
+          end
+          span class: 'nom-competence' do
+            t(niveau_competence.keys.first,
+              scope: 'admin.restitutions.restitution_competences')
+          end
+        end
+
+        div class: 'description-competence col-6' do
+          div t(niveau_competence.keys.first,
+                scope: 'admin.restitutions.details_competences')
+        end
       end
     end
+  end
 
+  h2 class: 'text-center' do
+    span class: 'btn btn-info btn-lg' do
+      t('.efficience_globale', efficience: formate_efficience(restitution_globale.efficience))
+    end
+  end
+
+  panel 'Efficiences par situations' do
     div class: :row do
       restitution_globale.restitutions.each do |restitution|
         next if restitution.efficience.nil?

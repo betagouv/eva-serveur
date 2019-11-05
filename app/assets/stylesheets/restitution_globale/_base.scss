@@ -90,10 +90,13 @@
     }
   }
 
+  .nom-competence {
+    margin-left: 1rem;
+  }
+
   .description-competence {
     font-size: .75rem;
     opacity: .5;
-
   }
 
   .inventaire {
@@ -114,6 +117,13 @@
 
   .reponse-communication-ecrite {
     margin-top: 1.25rem;
+  }
+
+  .competences-identifiees {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0 0 1.5rem 0;
   }
 
   span {

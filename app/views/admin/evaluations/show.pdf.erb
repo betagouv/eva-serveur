@@ -5,6 +5,6 @@
     <%= stylesheet_link_tag wicked_pdf_asset_base64 "restitution_globale/restitution_globale_pdf" -%>
   </head>
    <div class="admin_restitution_globale">
-     <%= render partial: "admin/evaluations/restitution_globale", locals: { restitution_globale: restitution_globale } %>
+     <%= render partial: "admin/evaluations/restitution_globale", locals: { restitution_globale: restitution_globale, pdf: true } %>
    </div>
 </html>

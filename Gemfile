@@ -22,7 +22,7 @@ gem 'pg', '~> 1.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '~> 0.12.4'
+gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

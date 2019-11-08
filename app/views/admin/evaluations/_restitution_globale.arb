@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 div class: 'admin_restitution_globale' do
-  div class: :identite do
-    div class: 'date-restitution' do
-      l restitution_globale.date, format: :restitution
+  div class: 'en-tete' do
+    div class: 'eva-logo' do
+      span wicked_pdf_image_tag 'eva-logo.svg' if pdf
     end
-    div class: 'nom-evalue' do
-      strong restitution_globale.utilisateur
+    div class: 'identite' do
+      div class: 'date-restitution' do
+        l restitution_globale.date, format: :restitution
+      end
+      div class: 'nom-evalue' do
+        strong restitution_globale.utilisateur
+      end
     end
   end
 

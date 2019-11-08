@@ -2,6 +2,42 @@
 @import "base";
 
 .admin_restitution_globale {
+  .en-tete {
+    background-image: asset-data-url('vague.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 250px;
+    padding-top: 3.75rem;
+    padding-left: 5rem;
+    line-height: 50px;
+    margin-bottom: 5rem;
+  }
+
+  .eva-logo {
+    float: left;
+    width: 7.5rem;
+    height: 12.5rem;
+  }
+
+  .identite {
+    padding-top: 1rem;
+  }
+
+  .date-restitution {
+    color: #D6DAEC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.125rem;
+    line-height: 12px;
+  }
+
+  .nom-evalue {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.25rem;
+    color: #FBF9FA;
+  }
+
   .row {
     display: -webkit-box;
     width: 1000px;
@@ -11,16 +47,16 @@
       display: inline-block;
     }
     .col-4 {
-      width: 330px;
-      min-width: 300px;
+      width: 20.6rem;
+      min-width: 18.75rem;
     }
     .competences-identifiees {
       width: 100%;
-      .col-6 { width: 500px; }
+      .col-6 { width: 31.2rem; }
       .description-competence {
         margin-top: 1rem;
         margin-right: 1rem;
-        width: 450px;
+        width: 28.1rem;
       }
     }
   }

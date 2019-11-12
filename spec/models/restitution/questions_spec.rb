@@ -181,7 +181,16 @@ describe Restitution::Questions do
                        question_id: question2.id)
       end
 
-      it 'pour une mauvaise et une bonne réponse' do
+      it "ne calcule pas d'efficience lorsqu'il n'y a aucune réponses" do
+        restitution = described_class.new(
+          campagne, [
+            evenement_demarrage
+          ]
+        )
+        expect(restitution.efficience).to eq nil
+      end
+
+      it "ne calcule pas d'efficience lorsqu'il y a des réponses" do
         restitution = described_class.new(
           campagne, [
             evenement_demarrage,
@@ -189,16 +198,7 @@ describe Restitution::Questions do
             reponse_question_avec(question2, choix_question_2_bon)
           ]
         )
-        expect(restitution.efficience).to eq 50.0
-      end
-
-      it "lorsqu'il n'y a aucune réponses" do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage
-          ]
-        )
-        expect(restitution.efficience).to eq 0
+        expect(restitution.efficience).to eq nil
       end
     end
   end

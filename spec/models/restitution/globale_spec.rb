@@ -60,7 +60,7 @@ describe Restitution::Globale do
       }
     end
 
-    context 'avec une seul efficience a nil, retourn indéterminée' do
+    context 'avec une seule efficience a nil, retourne indéterminée' do
       let(:restitutions) do
         [double(efficience: nil)]
       end

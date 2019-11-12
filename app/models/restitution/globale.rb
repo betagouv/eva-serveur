@@ -5,6 +5,7 @@ module Restitution
     attr_reader :restitutions, :evaluation
 
     NIVEAU_INDETERMINE = :indetermine
+    RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -20,6 +21,7 @@ module Restitution
     end
 
     def efficience
+      restitutions.reject! { |restitution| restitution.class == RESTITUTION_SANS_EFFICIENCE }
       return 0 if restitutions.blank?
 
       efficiences = restitutions.collect(&:efficience).compact

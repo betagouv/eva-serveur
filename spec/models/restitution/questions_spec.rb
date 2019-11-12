@@ -133,41 +133,6 @@ describe Restitution::Questions do
              donnees: { question: question.id, reponse: choix.id })
     end
 
-    describe '#points_par_question' do
-      it 'retourne 0.25 si absention' do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage,
-            reponse_question_avec(question1, choix_question_1_abstention)
-          ]
-        )
-        questions_reponses = restitution.questions_et_reponses
-        expect(restitution.points_par_question(questions_reponses)).to eq [0.25]
-      end
-
-      it 'retourne 1 si bonne réponse' do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage,
-            reponse_question_avec(question1, choix_question_1_bon)
-          ]
-        )
-        questions_reponses = restitution.questions_et_reponses
-        expect(restitution.points_par_question(questions_reponses)).to eq [1]
-      end
-
-      it 'retourne 0 si mauvaise réponse' do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage,
-            reponse_question_avec(question1, choix_question_1_mauvais)
-          ]
-        )
-        questions_reponses = restitution.questions_et_reponses
-        expect(restitution.points_par_question(questions_reponses)).to eq [0]
-      end
-    end
-
     context '#efficience' do
       let(:evenement_reponse_2) do
         create(:evenement_reponse,

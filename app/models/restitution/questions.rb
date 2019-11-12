@@ -24,10 +24,6 @@ module Restitution
       evenements.find_all { |e| e.nom == EVENEMENT[:REPONSE] }
     end
 
-    def nombre_questions_qcm
-      questions.select { |q| q.is_a?(QuestionQcm) }.count
-    end
-
     def choix_repondu(question)
       question_et_reponse = questions_et_reponses.find do |question_reponse|
         question_reponse[:question].id == question.id
@@ -39,19 +35,6 @@ module Restitution
 
     def efficience
       nil
-    end
-
-    def points_par_question(questions)
-      questions.map! do |a|
-        case a[:question].choix.find(a[:reponse]).type_choix
-        when 'bon'
-          1
-        when 'abstention'
-          0.25
-        else
-          0
-        end
-      end
     end
 
     private

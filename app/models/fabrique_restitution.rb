@@ -25,8 +25,13 @@ class FabriqueRestitution
       Evenement.where(nom: 'demarrage', evaluation_id: evaluation)
     end
 
+    def initialise_selection(evaluation, restitutions_selectionnees_ids)
+      restitutions_selectionnees_ids || restitutions(evaluation).pluck(:id)
+    end
+
     def restitution_globale(evaluation, restitutions_selectionnees_ids = nil)
-      restitutions_selectionnees_ids ||= restitutions(evaluation).pluck(:id)
+      restitutions_selectionnees_ids =
+        initialise_selection(evaluation, restitutions_selectionnees_ids)
       restitutions_situation_retenues = restitutions_selectionnees_ids.map do |id|
         depuis_evenement_id id
       end

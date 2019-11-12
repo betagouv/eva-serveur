@@ -28,6 +28,7 @@ class Ability
   end
 
   def droit_evenement(compte)
+    cannot %i[update create], Evenement
     cannot :read, Evenement unless compte.administrateur?
     can :read, Evenement, evaluation: { campagne: { compte_id: compte.id } }
   end
@@ -52,7 +53,5 @@ class Ability
 
   def droits_generiques
     can :manage, :all
-    cannot %i[destroy create], Evaluation
-    cannot %i[update create], Evenement
   end
 end

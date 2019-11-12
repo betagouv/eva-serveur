@@ -5,7 +5,7 @@ panel t('.titre.restitutions') do
     table_for restitutions do
       column :selection do |evenement|
         check_box_tag 'restitutions_selectionnees[]', evenement.id,
-                      params[:restitutions_selectionnees]&.include?(evenement.id.to_s)
+                      params[:restitutions_selectionnees].include?(evenement.id.to_s)
       end
       column :situation
       column :session_id
@@ -18,7 +18,7 @@ panel t('.titre.restitutions') do
         end
       end
     end
-    div submit_tag 'Filtrer'
+    div submit_tag 'Valider la sélection'
   end
 end
 if restitution_globale.present?

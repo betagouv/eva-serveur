@@ -23,6 +23,9 @@ ActiveAdmin.register Evaluation do
 
   show do
     default_main_content
+    params[:restitutions_selectionnees] =
+      FabriqueRestitution.initialise_selection(params[:id],
+                                               params[:restitutions_selectionnees])
     render partial: 'show'
   end
 

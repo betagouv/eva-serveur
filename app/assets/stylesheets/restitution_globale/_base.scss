@@ -116,7 +116,7 @@
   }
 
   .reponse-communication-ecrite {
-    margin-top: 1.25rem;
+    margin-top: .5rem;
   }
 
   .competences-identifiees {
@@ -124,15 +124,5 @@
     display: flex;
     align-items: center;
     margin: 0 0 1.5rem 0;
-  }
-
-  span {
-    font-weight: bold;
-    +input {
-      border: 2px solid $couleur-questions;
-      border-radius: 0.75rem;
-      width: 3.25rem;
-      text-align: center;
-    }
   }
 }

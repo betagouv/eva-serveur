@@ -13,7 +13,7 @@ ActiveAdmin.register Evaluation do
     actions
   end
 
-  action_item :pdf, only: :show, if: proc { restitution_globale.present? } do
+  action_item :pdf, only: :show do
     link_to('Export PDF', {
               restitutions_selectionnees: params[:restitutions_selectionnees],
               format: :pdf

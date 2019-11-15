@@ -21,25 +21,12 @@ panel t('.titre.restitutions') do
     div submit_tag 'Valider la sélection'
   end
 end
-columns do
-  column do
-    panel t('.titre.competences_identifiees') do
-      ol do
-        restitution_globale.niveaux_competences.each do |niveau_competence|
-          li span t(niveau_competence.keys.first,
-                    scope: 'admin.restitutions.restitution_competences') +
-                  ": #{niveau_competence.values.first}"
-        end
-      end
-    end
-  end
-  column do
-    panel t('.titre.competences_meilleure_restitution') do
-      ul do
-        restitution_globale.competences_meilleure_restitution.each do |competence|
-          li t("admin.restitutions.restitution_competences.#{competence}")
-        end
-      end
+panel t('.titre.competences_identifiees') do
+  ol do
+    restitution_globale.niveaux_competences.each do |niveau_competence|
+      li span t(niveau_competence.keys.first,
+                scope: 'admin.restitutions.restitution_competences') +
+              ": #{niveau_competence.values.first}"
     end
   end
 end

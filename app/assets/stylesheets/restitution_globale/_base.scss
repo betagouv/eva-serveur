@@ -25,7 +25,6 @@
 
   h2 {
     margin: 2rem auto;
-
     .btn {
       border-radius: 1rem;
       background: $couleur-fond-principale;
@@ -99,6 +98,10 @@
     opacity: .5;
   }
 
+  .legende-titre {
+    font-size: 20px;
+  }
+
   .inventaire {
     @include applique-theme($couleur-inventaire);
   }
@@ -124,5 +127,9 @@
     display: flex;
     align-items: center;
     margin: 0 0 1.5rem 0;
+  }
+
+  a {
+    color: black;
   }
 }

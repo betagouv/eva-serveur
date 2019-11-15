@@ -25,23 +25,24 @@ div class: 'admin_restitution_globale' do
 
   div class: 'row saut-de-page' do
     restitution_globale.niveaux_competences.each do |niveau_competence|
+      competence = niveau_competence.keys.first
       ul class: 'competences-identifiees col-12' do
         div class: 'col-6' do
           if pdf
-            span wicked_pdf_image_tag niveau_competence.keys.first
+            span wicked_pdf_image_tag competence
           else
-            span image_tag niveau_competence.keys.first
+            span image_tag competence
           end
-          a href: "https://eva.beta.gouv.fr/competences/#{niveau_competence.keys.first}/", target: '_blank' do
+          a href: "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/", target: '_blank' do
             span class: 'nom-competence' do
-              t(niveau_competence.keys.first,
+              t(competence,
                 scope: 'admin.restitutions.restitution_competences')
             end
           end
         end
 
         div class: 'description-competence col-6' do
-          div t(niveau_competence.keys.first,
+          div t(competence,
                 scope: 'admin.restitutions.details_competences')
         end
       end

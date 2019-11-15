@@ -174,12 +174,15 @@ describe Restitution::Globale do
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
     end
 
-    context 'retire les doublons' do
+    context 'fait la moyenne des niveaux' do
       let(:niveau_comparaison_3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
       let(:restitution1) { double(competences: niveau_comparaison) }
       let(:restitution2) { double(competences: niveau_comparaison_3) }
       let(:restitutions) { [restitution1, restitution2] }
-      it { expect(restitution_globale.niveaux_competences).to eq([niveau_comparaison]) }
+      it do
+        resultat = { Competence::COMPARAISON_TRI => 3.5 }
+        expect(restitution_globale.niveaux_competences).to eq([resultat])
+      end
     end
 
     context "ignore les compétences inutilisées dans l'efficience" do

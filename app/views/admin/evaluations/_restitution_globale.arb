@@ -15,8 +15,12 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  h2 class: 'text-center' do
+  h2 class: 'text-center titre-classement-competences' do
     span t('.competences_fortes_titre')
+    br
+    span class: 'legende-titre' do
+      t('.legende_titre')
+    end
   end
 
   div class: 'row saut-de-page' do
@@ -28,9 +32,11 @@ div class: 'admin_restitution_globale' do
           else
             span image_tag niveau_competence.keys.first
           end
-          span class: 'nom-competence' do
-            t(niveau_competence.keys.first,
-              scope: 'admin.restitutions.restitution_competences')
+          a href: "https://eva.beta.gouv.fr/competences/#{niveau_competence.keys.first}/", target: '_blank' do
+            span class: 'nom-competence' do
+              t(niveau_competence.keys.first,
+                scope: 'admin.restitutions.restitution_competences')
+            end
           end
         end
 

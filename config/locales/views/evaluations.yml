@@ -23,7 +23,8 @@ fr:
       restitution_globale:
         situation: 'Situation %{situation}'
         efficience_globale: "Efficience globale : %{efficience}"
-        competences_fortes_titre: "Compétences les plus fortes"
+        competences_fortes_titre: "Classement de vos compétences eva"
+        legende_titre: "(de la plus forte à la moins forte)"
       restitution_competence:
         indetermine: non obs.
         1: 1
@@ -94,7 +95,7 @@ fr:
         efficience: Efficience
         organisation_methode: Organisation et méthode
         perseverance: Persévérance
-        rapidite: Rapidité de traitement
+        rapidite: Vitesse d'exécution
         titre: Évaluation des compétences
         vigilance_controle: Niveau de vigilance et de contrôle
       details_competences:

@@ -7,11 +7,6 @@ module Restitution
       SAISIE_INVENTAIRE: 'saisieInventaire'
     }.freeze
 
-    COMPETENCES_MOBILISEES = [
-      ::Competence::ORGANISATION_METHODE,
-      ::Competence::VIGILANCE_CONTROLE
-    ].freeze
-
     class Essai < Inventaire
       def initialize(campagne, evenements, date_depart_situation)
         super(campagne, evenements)

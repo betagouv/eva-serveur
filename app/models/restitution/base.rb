@@ -83,12 +83,6 @@ module Restitution
       @evenements.first.to_param
     end
 
-    def competences_mobilisees
-      return [] unless self.class.const_defined?('COMPETENCES_MOBILISEES')
-
-      self.class.const_get('COMPETENCES_MOBILISEES')
-    end
-
     def premier_evenement_du_nom(evenements, nom_evenement)
       evenements.find { |e| e.nom == nom_evenement }
     end

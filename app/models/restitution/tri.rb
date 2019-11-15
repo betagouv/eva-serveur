@@ -9,11 +9,6 @@ module Restitution
       PIECE_MAL_PLACEE: 'pieceMalPlacee'
     }.freeze
 
-    COMPETENCES_MOBILISEES = [
-      ::Competence::RAPIDITE,
-      ::Competence::COMPARAISON_TRI
-    ].freeze
-
     def termine?
       nombre_bien_placees == PIECES_TOTAL
     end

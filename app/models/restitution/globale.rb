@@ -28,17 +28,6 @@ module Restitution
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end
 
-    def competences_meilleure_restitution
-      meilleure_restitution&.competences_mobilisees || []
-    end
-
-    def meilleure_restitution
-      @restitutions.reject do |restitution|
-        restitution.competences_mobilisees.blank? ||
-          restitution.efficience == NIVEAU_INDETERMINE
-      end.max_by(&:efficience)
-    end
-
     def niveaux_competences
       extraie_competences_depuis_restitutions.sort_by do |niveau_competence|
         -niveau_competence.values.first

@@ -38,37 +38,30 @@ fr:
           nom: Compréhension de la consigne
           titre: La consigne de l’exercice a été comprise
           description: Analyse efficace des situations de travail proposées. Identification sensé de ce qui est demandé.
-          detail: Compréhension de la consigne
         vigilance_controle:
           nom: Niveau de vigilance et de contrôle
           titre: Vigilance et contrôle de la situation proposée
-          description: Souci d’efficacité et du résultat. Vérifie le déroulement de son travail et change sa méthode si besoin pour obtenir le résultat attendu. Perçoit ses erreurs et les rectifie.
-          detail: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
+          description: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
         perseverance:
           nom: Persévérance
           titre: A persévéré dans la réalisation de la tâche
           description: Fournir les efforts nécessaires pour réaliser et terminer le travail.
-          detail: Persévérance
         organisation_methode:
           nom: Organisation et méthode
           titre: Organisation et méthode pour aborder l’exercice
-          description: Capacité à anticiper la meilleure façon de réaliser correctement une tâche. Orientation correcte de son action vers le but fixé et avancement par étape.
-          detail: Sait décomposer la tâche en actions simples, à déterminer et planifier les étapes de réalisation, et à respecter son plan d’action.
+          description: Sait décomposer la tâche en actions simples, à déterminer et planifier les étapes de réalisation, et à respecter son plan d’action.
         rapidite:
           nom: Vitesse d'exécution
-          titre: Rapidité de traitement de l’exercice proposé
-          description: Réalisation rapide des tâches demandées.
-          detail: Parvient à mobiliser ses compétences afin de réaliser correctement les tâches demandées en un minimum de temps.
+          titre: Vitesse d'exécution de l’exercice proposé
+          description: Parvient à mobiliser ses compétences afin de réaliser correctement les tâches demandées en un minimum de temps.
         comparaison_tri:
           nom: Comparaison et tri
           titre: Comparaison et tri entre les objets proposés
-          description: Sait distinguer finement les objets entre eux (taille, couleur, forme). Capable de repérer une non-conformité simple par comparaison.
-          detail: Sait distinguer des objets entre eux sur la base de critères visuels (calibre, couleur, forme, disposition), les comparer à des modèles, et les classer. Parvient à détecter et localiser les défauts d’aspect des objets pour les trier.
+          description: Sait distinguer des objets entre eux sur la base de critères visuels (calibre, couleur, forme, disposition), les comparer à des modèles, et les classer. Parvient à détecter et localiser les défauts d’aspect des objets pour les trier.
         attention_concentration:
           nom: Attention/Concentration
           titre: Niveau de concentration pendant l’exercice
-          description: Capacité à faire bien du premier coup, et à être constant dans la tâche à réaliser.
-          detail: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
+          description: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
       show:
         titre:
           competences_identifiees: Compétences identifiées

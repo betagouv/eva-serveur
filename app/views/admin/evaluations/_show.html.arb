@@ -24,8 +24,8 @@ end
 panel t('.titre.competences_identifiees') do
   ol do
     restitution_globale.niveaux_competences.each do |niveau_competence|
-      li span t(niveau_competence.keys.first,
-                scope: 'admin.restitutions.restitution_competences') +
+      li span t("#{niveau_competence.keys.first}.nom",
+                scope: 'admin.evaluations.restitution_competence') +
               ": #{niveau_competence.values.first}"
     end
   end

@@ -34,14 +34,13 @@ div class: 'admin_restitution_globale' do
             span image_tag competence
           end
           span class: 'nom-competence' do
-            t(competence,
-              scope: 'admin.restitutions.restitution_competences')
+            t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence')
           end
         end
 
         div class: 'description-competence col-6' do
-          div t(competence,
-                scope: 'admin.restitutions.details_competences')
+          div t("#{competence}.detail",
+                scope: 'admin.evaluations.restitution_competence')
           url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
           a href: url_competence, target: '_blank' do
             url_competence

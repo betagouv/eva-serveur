@@ -39,7 +39,7 @@ div class: 'admin_restitution_globale' do
         end
 
         div class: 'description-competence col-6' do
-          div t("#{competence}.detail",
+          div t("#{competence}.description",
                 scope: 'admin.evaluations.restitution_competence')
           url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
           a href: url_competence, target: '_blank' do

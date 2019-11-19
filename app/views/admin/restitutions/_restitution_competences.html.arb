@@ -3,7 +3,8 @@
 panel t('.titre') do
   attributes_table_for restitution do
     restitution.competences.each do |competence, niveau|
-      row(t(".#{competence}")) { niveau }
+      row(t("#{competence}.nom",
+            scope: 'admin.evaluations.restitution_competence')) { niveau }
     end
     row(t('.efficience')) { formate_efficience(restitution.efficience) }
   end

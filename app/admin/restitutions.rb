@@ -22,20 +22,6 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     end
   end
 
-  index do
-    selectable_column
-    column :situation
-    column :session_id
-    column :date
-    column '' do |evenement|
-      span link_to t('.rapport'), admin_restitution_path(id: evenement)
-      if can? :manage, Compte
-        span link_to t('.evenements'),
-                     admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
-      end
-    end
-  end
-
   show title: :session_id do
     render chemin_vue, restitution: resource
     render 'restitution_competences', restitution: resource

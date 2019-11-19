@@ -20,7 +20,7 @@ describe 'Admin - Restitution', type: :feature do
                                         evaluation: evaluation,
                                         session_id: 'session_controle'
 
-    visit admin_restitution_path(evenement)
+    visit admin_restitution_path(evenement.session_id)
     expect(page).to have_content('Pièces Bien Placées 1')
     expect(page).to have_content('Pièces Mal Placées 2')
     expect(page).to have_content('Pièces Non Triées 0')
@@ -31,7 +31,7 @@ describe 'Admin - Restitution', type: :feature do
     evenement = create :evenement_saisie_inventaire, :echec, session_id: 'session_inventaire',
                                                              situation: situation_inventaire,
                                                              evaluation: evaluation
-    visit admin_restitution_path(evenement)
+    visit admin_restitution_path(evenement.session_id)
     expect(page).to have_content('Échec')
   end
 
@@ -41,7 +41,7 @@ describe 'Admin - Restitution', type: :feature do
       create :evenement_saisie_inventaire, :echec, evaluation: evaluation, situation: situation
     end
 
-    before { visit admin_restitution_path(evenement) }
+    before { visit admin_restitution_path(evenement.session_id) }
     it do
       expect do
         click_on 'Supprimer'

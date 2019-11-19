@@ -8,7 +8,7 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     helper_method :chemin_vue
 
     def find_resource
-      FabriqueRestitution.depuis_evenement_id params[:id]
+      FabriqueRestitution.depuis_session_id params[:id]
     end
 
     def chemin_vue

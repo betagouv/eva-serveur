@@ -15,7 +15,7 @@ ActiveAdmin.register Evaluation do
 
   action_item :pdf, only: :show do
     link_to('Export PDF', {
-              restitutions_selectionnees: params[:restitutions_selectionnees],
+              parties_selectionnees: params[:parties_selectionnees],
               format: :pdf
             },
             target: '_blank')
@@ -23,14 +23,14 @@ ActiveAdmin.register Evaluation do
 
   show do
     default_main_content
-    params[:restitutions_selectionnees] =
-      FabriqueRestitution.initialise_selection(params[:id],
-                                               params[:restitutions_selectionnees])
+    params[:parties_selectionnees] =
+      FabriqueRestitution.initialise_selection(resource,
+                                               params[:parties_selectionnees])
     render partial: 'show'
   end
 
   controller do
-    helper_method :evaluations_visibles, :restitutions, :restitution_globale
+    helper_method :evaluations_visibles, :restitution_globale
 
     def show
       show! do |format|
@@ -41,16 +41,12 @@ ActiveAdmin.register Evaluation do
 
     private
 
-    def restitutions
-      Evenement.where(nom: 'demarrage', evaluation_id: params[:id])
-    end
-
     def evaluations_visibles
       current_compte.administrateur? ? Campagne.all : Campagne.where(compte: current_compte)
     end
 
     def restitution_globale
-      FabriqueRestitution.restitution_globale(resource, params[:restitutions_selectionnees])
+      FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
     end
   end
 end

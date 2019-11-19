@@ -2,19 +2,18 @@
 
 panel t('.titre.restitutions') do
   form method: :get do
-    table_for restitutions do
-      column :selection do |evenement|
-        check_box_tag 'restitutions_selectionnees[]', evenement.id,
-                      params[:restitutions_selectionnees].include?(evenement.id.to_s)
+    table_for resource.parties do
+      column :selection do |partie|
+        check_box_tag 'parties_selectionnees[]', partie.session_id,
+                      params[:parties_selectionnees].include?(partie.session_id)
       end
       column :situation
-      column :session_id
       column :date
-      column '' do |evenement|
-        span link_to t('.rapport'), admin_restitution_path(id: evenement)
+      column '' do |partie|
+        span link_to t('.rapport'), admin_restitution_path(id: partie.session_id)
         if can? :manage, Compte
           span link_to t('.evenements'),
-                       admin_evenements_path(q: { 'session_id_equals' => evenement.session_id })
+                       admin_evenements_path(q: { 'session_id_equals' => partie.session_id })
         end
       end
     end

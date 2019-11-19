@@ -80,7 +80,7 @@ module Restitution
     end
 
     def to_param
-      @evenements.first.to_param
+      session_id
     end
 
     def premier_evenement_du_nom(evenements, nom_evenement)

@@ -14,28 +14,24 @@ class FabriqueRestitution
       classe_restitution[situation.nom_technique].new(campagne, evenements)
     end
 
-    def depuis_evenement_id(id)
-      evenement = Evenement.find id
-      campagne = evenement.evaluation.campagne
-      evenements = Evenement.where(session_id: evenement.session_id).order(:date)
-      instancie evenement.situation, campagne, evenements
+    def depuis_session_id(session_id)
+      evenements = Evenement.where(session_id: session_id).order(:date)
+      campagne = evenements.first.evaluation.campagne
+      situation = evenements.first.situation
+      instancie situation, campagne, evenements
     end
 
-    def restitutions(evaluation)
-      Evenement.where(nom: 'demarrage', evaluation_id: evaluation)
+    def initialise_selection(evaluation, parties_selectionnees_ids)
+      parties_selectionnees_ids || evaluation.parties.map(&:session_id)
     end
 
-    def initialise_selection(evaluation, restitutions_selectionnees_ids)
-      restitutions_selectionnees_ids || restitutions(evaluation).pluck(:id)
-    end
-
-    def restitution_globale(evaluation, restitutions_selectionnees_ids = nil)
-      restitutions_selectionnees_ids =
-        initialise_selection(evaluation, restitutions_selectionnees_ids)
-      restitutions_situation_retenues = restitutions_selectionnees_ids.map do |id|
-        depuis_evenement_id id
+    def restitution_globale(evaluation, parties_selectionnees_ids = nil)
+      parties_selectionnees_ids =
+        initialise_selection(evaluation, parties_selectionnees_ids)
+      parties_retenues = parties_selectionnees_ids.map do |id|
+        depuis_session_id id
       end
-      Restitution::Globale.new restitutions: restitutions_situation_retenues, evaluation: evaluation
+      Restitution::Globale.new restitutions: parties_retenues, evaluation: evaluation
     end
   end
 end

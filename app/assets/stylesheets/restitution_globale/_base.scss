@@ -95,7 +95,16 @@
 
   .description-competence {
     font-size: .75rem;
-    opacity: .5;
+    color: adjust-color($couleur-texte, $alpha: -0.5);
+    a {
+      text-decoration: none;
+      color: adjust-color($couleur-liens, $alpha: -0.5);
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: $couleur-liens;
+    }
   }
 
   .legende-titre {

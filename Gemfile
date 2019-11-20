@@ -45,6 +45,7 @@ group :test do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   gem 'launchy'
+  gem 'pdf-reader'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'shoulda-matchers'

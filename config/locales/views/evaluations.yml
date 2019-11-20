@@ -23,7 +23,7 @@ fr:
       restitution_globale:
         situation: 'Situation %{situation}'
         efficience_globale: "Efficience globale : %{efficience}"
-        competences_fortes_titre: "Classement de vos compétences eva"
+        competences_fortes_titre: "Classement de vos compétences"
         legende_titre: "(de la plus forte à la moins forte)"
       restitution_competence:
         indetermine: non obs.

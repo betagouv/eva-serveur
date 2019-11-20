@@ -43,7 +43,12 @@ div class: 'admin_restitution_globale' do
                 scope: 'admin.evaluations.restitution_competence')
           url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
           a href: url_competence, target: '_blank' do
-            url_competence
+            if pdf
+              t('.url_competence') + ' ' + url_competence
+            else
+              div t('.url_competence')
+              div url_competence
+            end
           end
         end
       end

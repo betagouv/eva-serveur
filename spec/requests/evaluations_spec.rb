@@ -76,12 +76,22 @@ describe 'Evaluation API', type: :request do
           create(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
                                                     evaluation: evaluation)
         end
+
         before { get "/api/evaluations/#{evaluation.id}" }
 
-        it do
+        it 'retourne les compétences triées par ordre de force décroissante' do
           attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
-                       Competence::ORGANISATION_METHODE]
-          expect(JSON.parse(response.body)['competences_fortes']).to eql(attendues.map(&:to_s))
+                       Competence::ORGANISATION_METHODE].map(&:to_s)
+          expect(JSON.parse(response.body)['competences_fortes'].pluck('id'))
+            .to eql(attendues)
+        end
+
+        it 'envoie aussi la descriptions des compétences' do
+          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
+          expect(premiere_competence['description'])
+            .to eql(I18n.t("#{Competence::RAPIDITE}.description",
+                           scope: 'admin.evaluations.restitution_competence'))
         end
       end
 

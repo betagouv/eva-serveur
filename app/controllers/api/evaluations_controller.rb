@@ -15,11 +15,25 @@ module Api
       end
     end
 
+    def map_descriptions(competences)
+      competences.map do |identifiant|
+        {
+          id: identifiant,
+          nom: I18n.t("#{identifiant}.nom",
+                      scope: 'admin.evaluations.restitution_competence'),
+          description: I18n.t("#{identifiant}.description",
+                              scope: 'admin.evaluations.restitution_competence')
+        }
+      end
+    end
+
     def show
       evaluation = Evaluation.find(params[:id])
       situations = evaluation.campagne.situations
       questions = evaluation.campagne.questionnaire&.questions || []
-      competences = FabriqueRestitution.restitution_globale(evaluation).competences
+      competences = map_descriptions(FabriqueRestitution
+        .restitution_globale(evaluation)
+        .competences)
       render json: { questions: questions, situations: situations, competences_fortes: competences }
     end
   end

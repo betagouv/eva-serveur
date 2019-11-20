@@ -29,7 +29,7 @@ div class: 'admin_restitution_globale' do
       ul class: 'competences-identifiees col-12' do
         div class: 'col-6' do
           if pdf
-            span wicked_pdf_image_tag competence
+            span wicked_pdf_image_tag competence.to_s
           else
             span image_tag competence
           end

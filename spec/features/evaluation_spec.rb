@@ -38,6 +38,36 @@ describe 'Admin - Evaluation', type: :feature do
     end
   end
 
+  describe '#show' do
+    let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
+    let(:situation) { build(:situation_inventaire) }
+    let(:evenement) { build(:evenement_demarrage, situation: situation) }
+    let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
+    let(:restitution_globale) do
+      double(Restitution::Globale,
+             date: DateTime.now,
+             utilisateur: 'Roger',
+             efficience: 5,
+             restitutions: [restitution])
+    end
+
+    it "affiche l'évaluation" do
+      visit admin_evaluation_path(mon_evaluation)
+      expect(page).to have_content 'Roger'
+    end
+
+    it "affiche l'évaluation en pdf" do
+      competences = [{ Competence::ORGANISATION_METHODE => Competence::NIVEAU_4 }]
+      expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
+      expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
+      visit admin_evaluation_path(mon_evaluation, format: :pdf)
+      path = page.save_page
+
+      reader = PDF::Reader.new(path)
+      expect(reader.page(1).text).to include('Roger')
+    end
+  end
+
   describe 'suppression' do
     let(:evaluation) { create :evaluation, campagne: ma_campagne }
     let(:situation) { create :situation_tri }

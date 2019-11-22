@@ -86,12 +86,18 @@ describe 'Evaluation API', type: :request do
             .to eql(attendues)
         end
 
-        it 'envoie aussi la descriptions des compétences' do
+        it 'envoie aussi le nom et la description des compétences' do
           premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
           expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
           expect(premiere_competence['description'])
             .to eql(I18n.t("#{Competence::RAPIDITE}.description",
                            scope: 'admin.evaluations.restitution_competence'))
+        end
+
+        it "envoie aussi l'URL du picto des compétences" do
+          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          expect(premiere_competence['picto'])
+            .to start_with('/assets/rapidite')
         end
       end
 

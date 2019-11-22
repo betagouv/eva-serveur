@@ -28,6 +28,15 @@ module Restitution
       questions.select { |q| q.is_a?(QuestionQcm) }.count
     end
 
+    def choix_repondu(question)
+      question_et_reponse = questions_et_reponses.find do |question_reponse|
+        question_reponse[:question].id == question.id
+      end
+      return unless question_et_reponse
+
+      question_et_reponse[:question].choix.find(question_et_reponse[:reponse])
+    end
+
     def efficience
       question_qcm_repondue = questions_et_reponses.select { |q| q[:question].is_a?(QuestionQcm) }
       points_total = points_par_question(question_qcm_repondue).inject(0, :+)

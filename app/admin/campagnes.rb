@@ -10,6 +10,10 @@ ActiveAdmin.register Campagne do
 
   includes :compte
 
+  action_item :stats, only: :show do
+    link_to 'Voir les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
+  end
+
   index do
     selectable_column
     column :libelle

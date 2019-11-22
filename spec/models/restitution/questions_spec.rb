@@ -61,6 +61,33 @@ describe Restitution::Questions do
     end
   end
 
+  describe '#choix_reponse' do
+    let!(:choix_question1) do
+      create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
+                     question_id: question1.id)
+    end
+
+    it 'retourne le choix répondu' do
+      evenements = [
+        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
+        create(:evenement_reponse,
+               evaluation: evaluation,
+               situation: situation,
+               donnees: { question: question1.id, reponse: choix_question1.id })
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.choix_repondu(question1)).to eql(choix_question1)
+    end
+
+    it "ne retourne rien si la question n'a pas été répondu" do
+      evenements = [
+        create(:evenement_demarrage, evaluation: evaluation, situation: situation)
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.choix_repondu(question1)).to be_nil
+    end
+  end
+
   describe '#reponses' do
     it 'retourne toutes les réponses' do
       evenements = [

@@ -40,6 +40,7 @@ module CompetencesProServeur
       g.orm :active_record, foreign_key_type: :uuid
     end
 
+    config.action_controller.asset_host = "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_SERVEUR']}"
     Rails.application.routes.default_url_options = {
       host: ENV['HOTE_SERVEUR'],
       protocol: ENV['PROTOCOLE_SERVEUR']

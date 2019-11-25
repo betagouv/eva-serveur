@@ -97,7 +97,7 @@ describe 'Evaluation API', type: :request do
         it "envoie aussi l'URL du picto des compétences" do
           premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
           expect(premiere_competence['picto'])
-            .to start_with('/assets/rapidite')
+            .to start_with('http://asset_host:port/assets/rapidite')
         end
       end
 

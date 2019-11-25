@@ -21,7 +21,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :restitution_globale
+    helper_method :restitution_globale, :parties
 
     def show
       show! do |format|
@@ -38,6 +38,10 @@ ActiveAdmin.register Evaluation do
 
     def restitution_globale
       FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+    end
+
+    def parties
+      Partie.where(evaluation_id: resource)
     end
   end
 end

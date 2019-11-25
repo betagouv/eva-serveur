@@ -7,10 +7,4 @@ class Evaluation < ApplicationRecord
   def display_name
     nom
   end
-
-  def parties
-    Evenement.where(evaluation: self).select(:session_id).distinct.map do |evenement|
-      Partie.new(session_id: evenement.session_id)
-    end
-  end
 end

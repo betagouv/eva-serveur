@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Evenement, as: 'Restitutions' do
+ActiveAdmin.register Partie, as: 'Restitutions' do
   menu false
   actions :show, :destroy
 
@@ -8,7 +8,7 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     helper_method :chemin_vue
 
     def find_resource
-      FabriqueRestitution.depuis_session_id params[:id]
+      FabriqueRestitution.depuis_partie params[:id]
     end
 
     def chemin_vue
@@ -22,7 +22,7 @@ ActiveAdmin.register Evenement, as: 'Restitutions' do
     end
   end
 
-  show title: :session_id do
+  show do
     render chemin_vue, restitution: resource
     render 'restitution_competences', restitution: resource
   end

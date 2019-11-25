@@ -13,6 +13,7 @@ Rails.application.configure do
   # preloads Rails for running tests, you may have to set it to true.
   config.eager_load = false
 
+  config.action_controller.asset_host = "http://asset_host:port"
   Rails.application.routes.default_url_options = {
     host: 'test'
   }

@@ -44,6 +44,15 @@ describe 'Evenement API', type: :request do
         post '/api/evenements', params: payload_valide
         expect(response).to have_http_status(201)
       end
+
+      it "relie l'évenement à sa partie" do
+        expect do
+          2.times { post '/api/evenements', params: payload_valide }
+        end.to change { Partie.count }.by 1
+        partie = Partie.last
+        expect(partie.evaluation).to eq evaluation
+        expect(partie.situation).to eq situation_inventaire
+      end
     end
 
     context 'Quand une requête est invalide' do

@@ -7,6 +7,7 @@ class CreateParties < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_reference :parties, :evaluation, foreign_key: true, type: :uuid
+    add_reference :parties, :evaluation, foreign_key: { on_delete: :cascade }, type: :uuid
+    add_reference :parties, :situation, foreign_key: { on_delete: :cascade }, type: :uuid
   end
 end

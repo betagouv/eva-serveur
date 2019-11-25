@@ -113,7 +113,9 @@ ActiveRecord::Schema.define(version: 2019_11_25_105749) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "evaluation_id"
+    t.uuid "situation_id"
     t.index ["evaluation_id"], name: "index_parties_on_evaluation_id"
+    t.index ["situation_id"], name: "index_parties_on_situation_id"
   end
 
   create_table "questionnaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -169,7 +171,8 @@ ActiveRecord::Schema.define(version: 2019_11_25_105749) do
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "evaluations", on_delete: :cascade
   add_foreign_key "evenements", "situations"
-  add_foreign_key "parties", "evaluations"
+  add_foreign_key "parties", "evaluations", on_delete: :cascade
+  add_foreign_key "parties", "situations", on_delete: :cascade
   add_foreign_key "questionnaires_questions", "questionnaires"
   add_foreign_key "questionnaires_questions", "questions"
   add_foreign_key "situations_configurations", "campagnes"

@@ -12,6 +12,8 @@ class Evenement < ApplicationRecord
   private
 
   def assure_la_presence_de_partie
-    build_partie if partie.blank?
+    return if partie.present?
+
+    build_partie(evaluation_id: evaluation_id, situation_id: situation_id)
   end
 end

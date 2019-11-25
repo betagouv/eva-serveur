@@ -5,8 +5,12 @@ require 'rails_helper'
 describe 'Admin - Campagne Stats', type: :feature do
   let(:compte_organisation) { create :compte_organisation, email: 'orga@eva.fr' }
   let!(:campagne) do
-    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: compte_organisation
+    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN',
+                      compte: compte_organisation, questionnaire: questionnaire
   end
+  let(:choix) { create :choix, type_choix: :bon, intitule: 'Test' }
+  let(:question) { create :question_qcm, libelle: 'Test', intitule: 'Test', choix: [choix] }
+  let(:questionnaire) { create :questionnaire, questions: [question] }
   let!(:evaluation) { create :evaluation, nom: 'Roger', campagne: campagne }
   let(:restitution_inventaire) do
     double(
@@ -35,6 +39,14 @@ describe 'Admin - Campagne Stats', type: :feature do
       nombre_mal_placees: 13
     )
   end
+  let(:restitution_bureau) do
+    double(
+      situation: Situation.new(nom_technique: 'questions'),
+      efficience: 14,
+      temps_total: 15,
+      choix_repondu: choix
+    )
+  end
 
   describe 'index' do
     before do
@@ -42,7 +54,8 @@ describe 'Admin - Campagne Stats', type: :feature do
                                    restitutions: [
                                      restitution_inventaire,
                                      restitution_controle,
-                                     restitution_tri
+                                     restitution_tri,
+                                     restitution_bureau
                                    ])
       expect(restitution_globale).to receive(:efficience).and_return(1)
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
@@ -53,7 +66,7 @@ describe 'Admin - Campagne Stats', type: :feature do
     it do
       expect(page).to have_content 'Roger'
       content = all(:css, 'tbody tr td').map(&:text)[2..]
-      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13])
+      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 bon])
     end
   end
 end

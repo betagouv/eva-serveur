@@ -15,7 +15,7 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
 
   column_question = proc do |question|
     proc do
-      column "bureau_#{question.libelle}".to_sym do |evaluation|
+      column "questions_#{question.libelle}".to_sym do |evaluation|
         restitution(evaluation, 'questions')&.choix_repondu(question)&.type_choix
       end
     end
@@ -39,6 +39,8 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
     instance_eval(&column_stats.call('tri', :temps_total))
     instance_eval(&column_stats.call('tri', :nombre_bien_placees))
     instance_eval(&column_stats.call('tri', :nombre_mal_placees))
+    instance_eval(&column_stats.call('questions', :efficience))
+    instance_eval(&column_stats.call('questions', :temps_total))
     collection.first.campagne.questionnaire&.questions&.each do |question|
       next unless question.is_a?(QuestionQcm)
 

@@ -67,5 +67,9 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
         restitution.situation.nom_technique == nom_situation
       end
     end
+
+    def csv_filename
+      "campagne_stats_#{collection.first.campagne.code}.csv"
+    end
   end
 end

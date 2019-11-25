@@ -10,7 +10,7 @@ class Evaluation < ApplicationRecord
 
   def parties
     Evenement.where(evaluation: self).select(:session_id).distinct.map do |evenement|
-      Partie.new(evenement.session_id)
+      Partie.new(session_id: evenement.session_id)
     end
   end
 end

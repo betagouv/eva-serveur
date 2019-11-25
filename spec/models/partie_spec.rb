@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 describe Partie do
-  let(:partie) { described_class.new 'session_id' }
+  let(:partie) { described_class.new session_id: 'session_id' }
+
+  it { should validate_presence_of(:session_id) }
 
   context 'peut récupérer la restitution' do
     let(:restitution) { double }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_125857) do
+ActiveRecord::Schema.define(version: 2019_11_25_105749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -107,6 +107,15 @@ ActiveRecord::Schema.define(version: 2019_10_28_125857) do
     t.index ["situation_id"], name: "index_evenements_on_situation_id"
   end
 
+  create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "session_id"
+    t.jsonb "metriques"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "evaluation_id"
+    t.index ["evaluation_id"], name: "index_parties_on_evaluation_id"
+  end
+
   create_table "questionnaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.datetime "created_at", null: false
@@ -160,6 +169,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_125857) do
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "evaluations", on_delete: :cascade
   add_foreign_key "evenements", "situations"
+  add_foreign_key "parties", "evaluations"
   add_foreign_key "questionnaires_questions", "questionnaires"
   add_foreign_key "questionnaires_questions", "questions"
   add_foreign_key "situations_configurations", "campagnes"

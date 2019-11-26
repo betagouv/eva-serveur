@@ -24,10 +24,17 @@ div class: 'admin_restitution_globale' do
   end
 
   div class: 'row saut-de-page' do
+    rang_competence = 0
+    valeur_competence_precedente = -1
     restitution_globale.niveaux_competences.each do |niveau_competence|
       competence = niveau_competence.keys.first
+      if valeur_competence_precedente != niveau_competence.values.first
+        rang_competence += 1
+        valeur_competence_precedente = niveau_competence.values.first
+      end
       ul class: 'competences-identifiees col-12' do
-        div class: 'col-6' do
+        div class: 'identification-competence col-6' do
+          div class: "jauge jauge-#{rang_competence}"
           if pdf
             span wicked_pdf_image_tag competence.to_s
           else

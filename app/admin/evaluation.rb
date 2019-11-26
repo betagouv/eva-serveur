@@ -1,17 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  filter :campagne, collection: proc { evaluations_visibles }
-  filter :created_at
-  config.sort_order = 'created_at_desc'
-  includes :campagne
-
-  index do
-    column :nom
-    column :campagne
-    column :created_at
-    actions
-  end
+  menu false
+  actions :show, :destroy
 
   action_item :pdf, only: :show do
     link_to('Export PDF', {
@@ -30,7 +21,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :evaluations_visibles, :restitution_globale
+    helper_method :restitution_globale
 
     def show
       show! do |format|
@@ -39,11 +30,11 @@ ActiveAdmin.register Evaluation do
       end
     end
 
-    private
-
-    def evaluations_visibles
-      current_compte.administrateur? ? Campagne.all : Campagne.where(compte: current_compte)
+    def destroy
+      destroy!(location: admin_campagne_path(resource.campagne))
     end
+
+    private
 
     def restitution_globale
       FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])

@@ -52,7 +52,15 @@
     }
     .competences-identifiees {
       width: 100%;
-      .col-6 { width: 31.2rem; }
+
+      .col-6 {
+        width: 31.2rem;
+      }
+
+      .identification-competence {
+        margin-top: 1rem;
+      }
+
       .description-competence {
         margin-top: 1rem;
         margin-right: 1rem;

@@ -5,4 +5,6 @@ class Partie < ApplicationRecord
   belongs_to :situation
 
   validates :session_id, presence: true
+
+  delegate :campagne, to: :evaluation
 end

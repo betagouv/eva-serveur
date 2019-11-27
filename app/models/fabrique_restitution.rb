@@ -17,7 +17,7 @@ class FabriqueRestitution
     def depuis_partie(partie_id)
       partie = Partie.find partie_id
       evenements = Evenement.where(session_id: partie.session_id).order(:date)
-      campagne = partie.evaluation.campagne
+      campagne = partie.campagne
       situation = partie.situation
       instancie situation, campagne, evenements
     end

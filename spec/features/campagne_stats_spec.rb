@@ -42,7 +42,6 @@ describe 'Admin - Campagne Stats', type: :feature do
   let(:restitution_bureau) do
     double(
       situation: Situation.new(nom_technique: 'questions'),
-      efficience: 14,
       temps_total: 15,
       choix_repondu: choix
     )
@@ -66,7 +65,7 @@ describe 'Admin - Campagne Stats', type: :feature do
     it do
       expect(page).to have_content 'Roger'
       content = all(:css, 'tbody tr td').map(&:text)[2..]
-      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 bon])
+      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 bon])
     end
   end
 end

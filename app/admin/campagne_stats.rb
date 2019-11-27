@@ -39,7 +39,6 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
     instance_eval(&column_stats.call('tri', :temps_total))
     instance_eval(&column_stats.call('tri', :nombre_bien_placees))
     instance_eval(&column_stats.call('tri', :nombre_mal_placees))
-    instance_eval(&column_stats.call('questions', :efficience))
     instance_eval(&column_stats.call('questions', :temps_total))
     collection.first.campagne.questionnaire&.questions&.each do |question|
       next unless question.is_a?(QuestionQcm)

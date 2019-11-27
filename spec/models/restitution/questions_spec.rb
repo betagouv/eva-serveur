@@ -109,62 +109,9 @@ describe Restitution::Questions do
   end
 
   describe '#efficience' do
-    let(:evenement_demarrage) do
-      create(:evenement_demarrage, evaluation: evaluation, situation: situation)
-    end
-
-    let(:choix_question_1_bon) do
-      create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
-                     question_id: question1.id)
-    end
-    let(:choix_question_1_mauvais) do
-      create(:choix, intitule: 'mauvaise réponse', type_choix: 'mauvais',
-                     question_id: question1.id)
-    end
-    let(:choix_question_1_abstention) do
-      create(:choix, intitule: 'abstention réponse', type_choix: 'abstention',
-                     question_id: question1.id)
-    end
-
-    def reponse_question_avec(question, choix)
-      create(:evenement_reponse,
-             evaluation: evaluation,
-             situation: situation,
-             donnees: { question: question.id, reponse: choix.id })
-    end
-
-    context '#efficience' do
-      let(:evenement_reponse_2) do
-        create(:evenement_reponse,
-               evaluation: evaluation,
-               situation: situation,
-               donnees: { question: question2.id, reponse: 5 })
-      end
-
-      let(:choix_question_2_bon) do
-        create(:choix, intitule: 'bonne réponse', type_choix: 'bon',
-                       question_id: question2.id)
-      end
-
-      it "ne calcule pas d'efficience lorsqu'il n'y a aucune réponses" do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage
-          ]
-        )
-        expect(restitution.efficience).to eq nil
-      end
-
-      it "ne calcule pas d'efficience lorsqu'il y a des réponses" do
-        restitution = described_class.new(
-          campagne, [
-            evenement_demarrage,
-            reponse_question_avec(question1, choix_question_1_mauvais),
-            reponse_question_avec(question2, choix_question_2_bon)
-          ]
-        )
-        expect(restitution.efficience).to eq nil
-      end
+    it 'retourne nil' do
+      restitution = described_class.new(campagne, [])
+      expect(restitution.efficience).to be_nil
     end
   end
 end

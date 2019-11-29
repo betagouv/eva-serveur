@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_115816) do
 
   create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_id"
-    t.jsonb "metriques"
+    t.jsonb "metriques", default: {}, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "evaluation_id"

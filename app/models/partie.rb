@@ -7,4 +7,5 @@ class Partie < ApplicationRecord
   validates :session_id, presence: true
 
   delegate :campagne, to: :evaluation
+  has_many :evenements, foreign_key: :session_id, primary_key: :session_id
 end

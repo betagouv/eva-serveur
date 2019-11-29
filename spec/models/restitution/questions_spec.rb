@@ -48,11 +48,11 @@ describe Restitution::Questions do
 
     it 'retourne les questions et les réponses du questionnaire' do
       evenements = [
-        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
-        create(:evenement_reponse,
-               evaluation: evaluation,
-               situation: situation,
-               donnees: { question: question1.id, reponse: 1 })
+        build(:evenement_demarrage, evaluation: evaluation, situation: situation),
+        build(:evenement_reponse,
+              evaluation: evaluation,
+              situation: situation,
+              donnees: { question: question1.id, reponse: 1 })
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution.questions_et_reponses.size).to eq(1)
@@ -69,11 +69,11 @@ describe Restitution::Questions do
 
     it 'retourne le choix répondu' do
       evenements = [
-        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
-        create(:evenement_reponse,
-               evaluation: evaluation,
-               situation: situation,
-               donnees: { question: question1.id, reponse: choix_question1.id })
+        build(:evenement_demarrage, evaluation: evaluation, situation: situation),
+        build(:evenement_reponse,
+              evaluation: evaluation,
+              situation: situation,
+              donnees: { question: question1.id, reponse: choix_question1.id })
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution.choix_repondu(question1)).to eql(choix_question1)
@@ -81,7 +81,7 @@ describe Restitution::Questions do
 
     it "ne retourne rien si la question n'a pas été répondu" do
       evenements = [
-        create(:evenement_demarrage, evaluation: evaluation, situation: situation)
+        build(:evenement_demarrage, evaluation: evaluation, situation: situation)
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution.choix_repondu(question1)).to be_nil

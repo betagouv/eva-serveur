@@ -42,7 +42,10 @@ describe 'Admin - Evaluation', type: :feature do
   describe 'suppression' do
     let(:evaluation) { create :evaluation, campagne: ma_campagne }
     let(:situation) { create :situation_tri }
-    let!(:evenement) { create :evenement, evaluation: evaluation, situation: situation }
+    let!(:partie) do
+      create :partie, situation: situation, evaluation: evaluation, evenements: [evenement]
+    end
+    let(:evenement) { build :evenement, evaluation: evaluation, situation: situation }
     before { visit admin_evaluation_path(evaluation) }
 
     it do

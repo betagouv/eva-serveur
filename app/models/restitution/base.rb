@@ -20,7 +20,7 @@ module Restitution
     ].freeze
 
     attr_reader :campagne, :evenements
-    delegate :session_id, :situation, :date, :partie, to: :premier_evenement
+    delegate :session_id, :situation, :date, to: :premier_evenement
 
     def initialize(campagne, evenements)
       @campagne = campagne
@@ -33,7 +33,10 @@ module Restitution
 
     def supprimer
       partie.destroy
-      Evenement.where(id: evenements.pluck(:id)).delete_all
+    end
+
+    def partie
+      @partie ||= Partie.find_by(session_id: premier_evenement.session_id)
     end
 
     def compte_nom_evenements(nom)

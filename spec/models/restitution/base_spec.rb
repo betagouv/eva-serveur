@@ -73,25 +73,4 @@ describe Restitution::Base do
       expect(restitution.efficience).to eql(0)
     end
   end
-
-  describe '#supprimer' do
-    let(:evaluation) { create(:evaluation) }
-    let(:situation) { create :situation_inventaire }
-    let(:evenements) do
-      [
-        create(:evenement_demarrage, evaluation: evaluation, situation: situation),
-        create(:evenement_abandon, evaluation: evaluation, situation: situation)
-      ]
-    end
-
-    let(:where) { double }
-
-    it "supprime les événements de l'évaluation" do
-      expect(where).to receive(:delete_all)
-      expect(Evenement).to receive(:where)
-        .with(id: [evenements[0].id, evenements[1].id])
-        .and_return(where)
-      restitution.supprimer
-    end
-  end
 end

@@ -8,7 +8,7 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
     helper_method :chemin_vue
 
     def find_resource
-      FabriqueRestitution.depuis_partie params[:id]
+      FabriqueRestitution.instancie params[:id]
     end
 
     def chemin_vue

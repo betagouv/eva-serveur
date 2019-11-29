@@ -64,17 +64,26 @@ describe 'Evaluation API', type: :request do
     end
 
     context 'Compétences fortes' do
+      let!(:partie) do
+        create :partie, evenements: [demarrage], evaluation: evaluation,
+                        situation: situation_inventaire
+      end
       let!(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
-      let!(:demarrage) do
-        create(:evenement_demarrage, evaluation: evaluation, situation: situation_inventaire)
+      let(:demarrage) do
+        build(:evenement_demarrage, evaluation: evaluation, situation: situation_inventaire)
       end
 
       before { campagne.situations << situation_inventaire }
 
       context 'avec une évaluation avec des compétences identifiées' do
         let!(:saisie) do
-          create(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
-                                                    evaluation: evaluation)
+          build(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
+                                                   evaluation: evaluation)
+        end
+
+        let!(:partie) do
+          create :partie, situation: situation_inventaire, evaluation: evaluation,
+                          evenements: [saisie]
         end
 
         before { get "/api/evaluations/#{evaluation.id}" }

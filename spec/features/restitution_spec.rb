@@ -4,44 +4,55 @@ require 'rails_helper'
 
 describe 'Admin - Restitution', type: :feature do
   let(:evaluation) { create :evaluation, nom: 'John Doe' }
+  let!(:partie) do
+    create :partie, situation: situation, evaluation: evaluation, evenements: evenements
+  end
 
   before { se_connecter_comme_administrateur }
 
-  scenario 'rapport de la situation controle' do
-    situation_controle = create :situation_controle
+  describe 'rapport de la situation controle' do
+    let(:situation) { create :situation_controle }
+    let(:evenements) do
+      [
+        build(:evenement_piece_bien_placee, situation: situation,
+                                            evaluation: evaluation,
+                                            session_id: 'session_controle'),
+        build(:evenement_piece_mal_placee, situation: situation,
+                                           evaluation: evaluation,
+                                           session_id: 'session_controle'),
+        build(:evenement_piece_mal_placee, situation: situation,
+                                           evaluation: evaluation,
+                                           session_id: 'session_controle')
+      ]
+    end
 
-    evenement = create :evenement_piece_bien_placee, situation: situation_controle,
-                                                     evaluation: evaluation,
-                                                     session_id: 'session_controle'
-    create :evenement_piece_mal_placee, situation: situation_controle,
-                                        evaluation: evaluation,
-                                        session_id: 'session_controle'
-    create :evenement_piece_mal_placee, situation: situation_controle,
-                                        evaluation: evaluation,
-                                        session_id: 'session_controle'
+    before { visit admin_restitution_path(partie) }
 
-    visit admin_restitution_path(evenement.partie)
-    expect(page).to have_content('Pièces Bien Placées 1')
-    expect(page).to have_content('Pièces Mal Placées 2')
-    expect(page).to have_content('Pièces Non Triées 0')
+    it do
+      expect(page).to have_content('Pièces Bien Placées 1')
+      expect(page).to have_content('Pièces Mal Placées 2')
+      expect(page).to have_content('Pièces Non Triées 0')
+    end
   end
 
-  scenario 'rapport de la situation inventaire' do
-    situation_inventaire = create :situation_inventaire
-    evenement = create :evenement_saisie_inventaire, :echec, session_id: 'session_inventaire',
-                                                             situation: situation_inventaire,
-                                                             evaluation: evaluation
-    visit admin_restitution_path(evenement.partie)
-    expect(page).to have_content('Échec')
+  describe 'rapport de la situation inventaire' do
+    let(:situation) { create :situation_inventaire }
+    let(:evenements) do
+      [build(:evenement_saisie_inventaire, :echec, session_id: 'session_inventaire',
+                                                   situation: situation,
+                                                   evaluation: evaluation)]
+    end
+    before { visit admin_restitution_path(partie) }
+    it { expect(page).to have_content('Échec') }
   end
 
   describe "suppression d'une partie" do
     let(:situation) { create :situation_inventaire }
-    let(:evenement) do
-      create :evenement_saisie_inventaire, :echec, evaluation: evaluation, situation: situation
+    let(:evenements) do
+      [build(:evenement_saisie_inventaire, :echec, evaluation: evaluation, situation: situation)]
     end
 
-    before { visit admin_restitution_path(evenement.partie) }
+    before { visit admin_restitution_path(partie) }
     it do
       expect do
         click_on 'Supprimer'

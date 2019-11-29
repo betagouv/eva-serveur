@@ -23,9 +23,9 @@ class EvenementParams
     end
 
     def relie_situation!(params)
-      nom_technique = params['situation']
+      nom_technique = params.delete 'situation'
       situation = Situation.find_by(nom_technique: nom_technique)
-      params['situation'] = situation
+      params['situation_id'] = situation.id
     end
 
     def formate_date!(params)

@@ -7,13 +7,20 @@ describe 'Admin - Evenement', type: :feature do
   let(:donnees) { JSON.parse(File.read(chemin)) }
   let(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
   let(:evaluation) { create :evaluation }
+  let!(:partie) do
+    create :partie,
+           situation: situation_inventaire,
+           evaluation: evaluation,
+           evenements: [evenement],
+           session_id: '1898098HJk8902'
+  end
 
-  let!(:evenement) do
-    create :evenement, nom: 'ouvertureContenant',
-                       donnees: donnees,
-                       situation: situation_inventaire,
-                       evaluation: evaluation,
-                       session_id: '1898098HJk8902'
+  let(:evenement) do
+    build :evenement, nom: 'ouvertureContenant',
+                      donnees: donnees,
+                      situation: situation_inventaire,
+                      evaluation: evaluation,
+                      session_id: '1898098HJk8902'
   end
 
   before do

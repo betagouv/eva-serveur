@@ -11,7 +11,7 @@ describe Restitution::Base do
       [
         build(:evenement_piece_bien_placee),
         build(:evenement_piece_mal_placee),
-        build(:evenement_stop)
+        build(:evenement_abandon)
       ]
     end
 
@@ -80,7 +80,7 @@ describe Restitution::Base do
     let(:evenements) do
       [
         create(:evenement_demarrage, evaluation: evaluation, situation: situation),
-        create(:evenement_stop, evaluation: evaluation, situation: situation)
+        create(:evenement_abandon, evaluation: evaluation, situation: situation)
       ]
     end
 

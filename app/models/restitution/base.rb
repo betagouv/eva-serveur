@@ -4,7 +4,7 @@ module Restitution
   class Base
     EVENEMENT = {
       REJOUE_CONSIGNE: 'rejoueConsigne',
-      STOP: 'stop'
+      ABANDON: 'abandon'
     }.freeze
 
     CORRESPONDANCES_NIVEAUX = {
@@ -53,7 +53,7 @@ module Restitution
     end
 
     def abandon?
-      evenements.last.nom == EVENEMENT[:STOP]
+      evenements.last.nom == EVENEMENT[:ABANDON]
     end
 
     def termine?

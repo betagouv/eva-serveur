@@ -113,7 +113,7 @@ describe Restitution::Inventaire do
   it 'est en abandon' do
     evenements = [
       build(:evenement_demarrage),
-      build(:evenement_stop)
+      build(:evenement_abandon)
     ]
     restitution = described_class.new(campagne, evenements)
     expect(restitution).to_not be_reussite

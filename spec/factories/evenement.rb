@@ -40,8 +40,8 @@ FactoryBot.define do
       donnees { { contenant: 1 } }
     end
 
-    factory :evenement_stop do
-      nom { 'stop' }
+    factory :evenement_abandon do
+      nom { 'abandon' }
     end
 
     factory :evenement_piece_bien_placee do

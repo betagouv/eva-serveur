@@ -10,7 +10,7 @@ module Restitution
     }.freeze
 
     def termine?
-      nombre_bien_placees == PIECES_TOTAL
+      super || nombre_bien_placees == PIECES_TOTAL
     end
 
     def nombre_bien_placees

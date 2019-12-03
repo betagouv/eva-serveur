@@ -41,11 +41,12 @@ module Restitution
       end
     end
 
-    def reussite?
-      dernier_evenement_est_une_saisie_inventaire? &&
+    def termine?
+      super || dernier_evenement_est_une_saisie_inventaire? &&
         evenements.last.donnees['reussite']
     end
-    alias termine? reussite?
+
+    alias reussite? termine?
 
     def en_cours?
       !dernier_evenement_est_une_saisie_inventaire? && !abandon?

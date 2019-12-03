@@ -35,6 +35,15 @@ describe Restitution::Questions do
       restitution = described_class.new(campagne, evenements)
       expect(restitution).to be_termine
     end
+
+    it "avec l'événement de fin de situation" do
+      evenements = [
+        build(:evenement_demarrage),
+        build(:evenement_fin_situation)
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution).to be_termine
+    end
   end
 
   describe '#questions_et_reponses' do

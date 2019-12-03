@@ -15,7 +15,7 @@ module Restitution
     }.freeze
 
     def termine?
-      qualifications_par_danger.count == DANGERS_TOTAL
+      super || qualifications_par_danger.count == DANGERS_TOTAL
     end
 
     def nombre_bien_qualifies

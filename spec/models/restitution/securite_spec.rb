@@ -8,7 +8,11 @@ describe Restitution::Securite do
 
   describe '#termine?' do
     context 'aucun danger qualifié' do
-      let(:evenements) { [] }
+      let(:evenements) do
+        [
+          build(:evenement_demarrage)
+        ]
+      end
       it { expect(restitution).to_not be_termine }
     end
 
@@ -20,6 +24,16 @@ describe Restitution::Securite do
             build(:evenement_qualification_danger, donnees: { danger: "danger-#{index}" })
           end
         ].flatten
+      end
+      it { expect(restitution).to be_termine }
+    end
+
+    context "avec l'événement de fin de situation" do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_fin_situation)
+        ]
       end
       it { expect(restitution).to be_termine }
     end

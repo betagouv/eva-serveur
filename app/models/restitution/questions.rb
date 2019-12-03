@@ -7,7 +7,7 @@ module Restitution
     }.freeze
 
     def termine?
-      reponses.size == questions.size
+      super || reponses.size == questions.size
     end
 
     def questions_et_reponses

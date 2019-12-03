@@ -99,6 +99,16 @@ describe Restitution::Inventaire do
     expect(restitution).to_not be_en_cours
   end
 
+  it 'est terminé avec un événement de fin de situation' do
+    evenements = [
+      build(:evenement_demarrage),
+      build(:evenement_fin_situation)
+    ]
+    restitution = described_class.new(campagne, evenements)
+    expect(restitution).to be_termine
+    expect(restitution).to be_reussite
+  end
+
   it 'est en echec' do
     evenements = [
       build(:evenement_demarrage),

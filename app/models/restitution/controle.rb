@@ -11,7 +11,7 @@ module Restitution
     }.freeze
 
     def termine?
-      evenements_pieces.count == PIECES_TOTAL
+      super || evenements_pieces.count == PIECES_TOTAL
     end
 
     def nombre_bien_placees

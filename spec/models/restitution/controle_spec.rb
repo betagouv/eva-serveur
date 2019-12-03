@@ -18,6 +18,16 @@ describe Restitution::Controle do
     it { expect(restitution).to be_termine }
   end
 
+  context "avec l'événement de fin de situation" do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        build(:evenement_fin_situation)
+      ]
+    end
+    it { expect(restitution).to be_termine }
+  end
+
   context 'avec pas toutes les pieces enregistrées' do
     let(:evenements) do
       [

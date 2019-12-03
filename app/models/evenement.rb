@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Evenement < ApplicationRecord
-  belongs_to :situation
-  belongs_to :evaluation
+  has_one :partie, foreign_key: :session_id, primary_key: :session_id
 
-  validates :nom, :date, :situation, :session_id, presence: true
+  validates :nom, :date, :session_id, presence: true
 end

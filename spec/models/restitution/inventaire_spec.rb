@@ -79,14 +79,6 @@ describe Restitution::Inventaire do
     end
   end
 
-  it 'session_id retourne le session_id' do
-    evenements = [
-      build(:evenement_demarrage, session_id: 'exemple')
-    ]
-    restitution = described_class.new(campagne, evenements)
-    expect(restitution.session_id).to eql('exemple')
-  end
-
   it 'est en reussite' do
     evenements = [
       build(:evenement_demarrage),

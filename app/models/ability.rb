@@ -28,7 +28,7 @@ class Ability
 
   def droit_evenement(compte)
     cannot %i[update create], Evenement
-    can :read, Evenement, evaluation: { campagne: { compte_id: compte.id } }
+    can :read, Evenement, partie: { evaluation: { campagne: { compte_id: compte.id } } }
   end
 
   def droit_restitution(compte)

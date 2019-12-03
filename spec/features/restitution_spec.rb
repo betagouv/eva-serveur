@@ -14,15 +14,9 @@ describe 'Admin - Restitution', type: :feature do
     let(:situation) { create :situation_controle }
     let(:evenements) do
       [
-        build(:evenement_piece_bien_placee, situation: situation,
-                                            evaluation: evaluation,
-                                            session_id: 'session_controle'),
-        build(:evenement_piece_mal_placee, situation: situation,
-                                           evaluation: evaluation,
-                                           session_id: 'session_controle'),
-        build(:evenement_piece_mal_placee, situation: situation,
-                                           evaluation: evaluation,
-                                           session_id: 'session_controle')
+        build(:evenement_piece_bien_placee, session_id: 'session_controle'),
+        build(:evenement_piece_mal_placee, session_id: 'session_controle'),
+        build(:evenement_piece_mal_placee, session_id: 'session_controle')
       ]
     end
 
@@ -38,9 +32,7 @@ describe 'Admin - Restitution', type: :feature do
   describe 'rapport de la situation inventaire' do
     let(:situation) { create :situation_inventaire }
     let(:evenements) do
-      [build(:evenement_saisie_inventaire, :echec, session_id: 'session_inventaire',
-                                                   situation: situation,
-                                                   evaluation: evaluation)]
+      [build(:evenement_saisie_inventaire, :echec, session_id: 'session_inventaire')]
     end
     before { visit admin_restitution_path(partie) }
     it { expect(page).to have_content('Échec') }
@@ -49,7 +41,7 @@ describe 'Admin - Restitution', type: :feature do
   describe "suppression d'une partie" do
     let(:situation) { create :situation_inventaire }
     let(:evenements) do
-      [build(:evenement_saisie_inventaire, :echec, evaluation: evaluation, situation: situation)]
+      [build(:evenement_saisie_inventaire, :echec)]
     end
 
     before { visit admin_restitution_path(partie) }

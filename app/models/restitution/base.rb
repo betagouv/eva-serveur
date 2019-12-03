@@ -3,6 +3,7 @@
 module Restitution
   class Base
     EVENEMENT = {
+      FIN_SITUATION: 'finSituation',
       REJOUE_CONSIGNE: 'rejoueConsigne',
       ABANDON: 'abandon'
     }.freeze
@@ -60,7 +61,7 @@ module Restitution
     end
 
     def termine?
-      raise NotImplementedError
+      evenements.last.nom == EVENEMENT[:FIN_SITUATION]
     end
 
     def competences

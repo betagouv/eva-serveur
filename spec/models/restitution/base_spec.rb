@@ -27,12 +27,6 @@ describe Restitution::Base do
     expect(described_class.new(campagne, evenements).nombre_rejoue_consigne).to eql(2)
   end
 
-  it 'envoie une exception not implemented pour la méthode termine?' do
-    expect do
-      described_class.new(campagne, []).termine?
-    end.to raise_error(NotImplementedError)
-  end
-
   it "envoie l'évaluation associée" do
     evaluation = build(:evaluation)
     evenements = [
@@ -43,6 +37,25 @@ describe Restitution::Base do
 
   it 'renvoie par défaut une liste vide pour les compétences évaluées' do
     expect(described_class.new(campagne, []).competences).to eql({})
+  end
+
+  describe '#termine?' do
+    it "retourne true lorsque l'événement de fin est trouvé" do
+      evaluation = build(:evaluation)
+      evenements = [
+        build(:evenement_demarrage, evaluation: evaluation),
+        build(:evenement_fin_situation, evaluation: evaluation)
+      ]
+      expect(described_class.new(campagne, evenements).termine?).to be true
+    end
+
+    it "retourne false lorsque l'événement de fin n'est pas trouvé" do
+      evaluation = build(:evaluation)
+      evenements = [
+        build(:evenement_demarrage, evaluation: evaluation)
+      ]
+      expect(described_class.new(campagne, evenements).termine?).to be false
+    end
   end
 
   describe '#efficience' do

@@ -19,6 +19,10 @@ FactoryBot.define do
       nom { 'rejoueConsigne' }
     end
 
+    factory :evenement_fin_situation do
+      nom { 'finSituation' }
+    end
+
     factory :evenement_saisie_inventaire do
       nom { 'saisieInventaire' }
 

@@ -5,6 +5,12 @@ require 'rails_helper'
 describe Restitution::Base do
   let(:campagne)    { build(:campagne) }
   let(:restitution) { described_class.new(campagne, evenements) }
+  let(:evaluation)  { create :evaluation }
+  let(:situation)   { create :situation_inventaire }
+  let!(:partie) do
+    create :partie, evaluation: evaluation, situation: situation,
+                    evenements: evenements
+  end
 
   context 'lorsque le dernier événement est stop' do
     let(:evenements) do
@@ -18,48 +24,61 @@ describe Restitution::Base do
     it { expect(restitution.abandon?).to be(true) }
   end
 
-  it 'renvoie le nombre de réécoute de la consigne' do
-    evenements = [
-      build(:evenement_demarrage),
-      build(:evenement_rejoue_consigne),
-      build(:evenement_rejoue_consigne)
-    ]
-    expect(described_class.new(campagne, evenements).nombre_rejoue_consigne).to eql(2)
+  context 'renvoie le nombre de réécoute de la consigne' do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        build(:evenement_rejoue_consigne),
+        build(:evenement_rejoue_consigne)
+      ]
+    end
+
+    it { expect(described_class.new(campagne, evenements).nombre_rejoue_consigne).to eql(2) }
   end
 
-  it "envoie l'évaluation associée" do
-    evaluation = build(:evaluation)
-    evenements = [
-      build(:evenement_demarrage, evaluation: evaluation)
-    ]
-    expect(described_class.new(campagne, evenements).evaluation).to eql(evaluation)
+  context "renvoie l'évaluation associée" do
+    let(:evenements) { [build(:evenement_demarrage)] }
+
+    it { expect(described_class.new(campagne, evenements).evaluation).to eql(evaluation) }
   end
 
-  it 'renvoie par défaut une liste vide pour les compétences évaluées' do
-    expect(described_class.new(campagne, []).competences).to eql({})
+  context 'renvoie le session_id' do
+    let(:evenements) { [build(:evenement_demarrage)] }
+
+    it { expect(restitution.session_id).to eql(partie.session_id) }
+  end
+
+  context 'renvoie par défaut une liste vide pour les compétences évaluées' do
+    let(:evenements) { [] }
+
+    it { expect(restitution.competences).to eql({}) }
   end
 
   describe '#termine?' do
-    it "retourne true lorsque l'événement de fin est trouvé" do
-      evaluation = build(:evaluation)
-      evenements = [
-        build(:evenement_demarrage, evaluation: evaluation),
-        build(:evenement_fin_situation, evaluation: evaluation)
-      ]
-      expect(described_class.new(campagne, evenements).termine?).to be true
+    context "retourne true lorsque l'événement de fin est trouvé" do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_fin_situation)
+        ]
+      end
+
+      it { expect(restitution.termine?).to be true }
     end
 
-    it "retourne false lorsque l'événement de fin n'est pas trouvé" do
-      evaluation = build(:evaluation)
-      evenements = [
-        build(:evenement_demarrage, evaluation: evaluation)
-      ]
-      expect(described_class.new(campagne, evenements).termine?).to be false
+    context "retourne false lorsque l'événement de fin n'est pas trouvé" do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage)
+        ]
+      end
+
+      it { expect(described_class.new(campagne, evenements).termine?).to be false }
     end
   end
 
   describe '#efficience' do
-    let(:restitution) { described_class.new(campagne, []) }
+    let(:evenements) { [] }
 
     it "retourne l'efficience sans les compétences persévérance et compréhension consigne" do
       expect(restitution).to receive(:competences).and_return(

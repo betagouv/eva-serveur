@@ -2,11 +2,8 @@
 
 ActiveAdmin.register Evenement do
   menu if: proc { can? :manage, Compte }
-  permit_params :donnees, :session_id, :situation, :nom, :date
   config.sort_order = 'created_at_desc'
-  includes :situation
 
-  filter :situation
   filter :session_id
   filter :date
 

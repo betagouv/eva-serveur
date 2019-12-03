@@ -18,8 +18,6 @@ describe 'Admin - Evenement', type: :feature do
   let(:evenement) do
     build :evenement, nom: 'ouvertureContenant',
                       donnees: donnees,
-                      situation: situation_inventaire,
-                      evaluation: evaluation,
                       session_id: '1898098HJk8902'
   end
 
@@ -31,7 +29,6 @@ describe 'Admin - Evenement', type: :feature do
   it 'Affiche les événements' do
     expect(page).to have_content 'ouvertureContenant'
     expect(page).to have_content donnees['type']
-    expect(page).to have_content 'Inventaire'
     expect(page).to have_content '1898098HJk8902'
   end
 

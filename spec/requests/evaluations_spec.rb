@@ -70,15 +70,14 @@ describe 'Evaluation API', type: :request do
       end
       let!(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
       let(:demarrage) do
-        build(:evenement_demarrage, evaluation: evaluation, situation: situation_inventaire)
+        build(:evenement_demarrage)
       end
 
       before { campagne.situations << situation_inventaire }
 
       context 'avec une évaluation avec des compétences identifiées' do
-        let!(:saisie) do
-          build(:evenement_saisie_inventaire, :ok, situation: situation_inventaire,
-                                                   evaluation: evaluation)
+        let(:saisie) do
+          build(:evenement_saisie_inventaire, :ok)
         end
 
         let!(:partie) do

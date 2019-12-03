@@ -21,15 +21,12 @@ module Restitution
     ].freeze
 
     attr_reader :campagne, :evenements
-    delegate :session_id, :situation, :date, to: :premier_evenement
+    delegate :evaluation, :session_id, :situation, :created_at, to: :partie
+    alias date created_at
 
     def initialize(campagne, evenements)
       @campagne = campagne
       @evenements = evenements
-    end
-
-    def evaluation
-      @evenements.first.evaluation
     end
 
     def supprimer

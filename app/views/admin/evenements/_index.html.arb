@@ -3,7 +3,6 @@
 context.instance_eval do
   selectable_column
   column :session_id
-  column :situation
   column :nom
   column :donnees
   column :date do |d|

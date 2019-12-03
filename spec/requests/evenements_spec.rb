@@ -32,12 +32,12 @@ describe 'Evenement API', type: :request do
     end
 
     context 'Quand une requête est valide' do
-      it 'Crée un événement et le relie à sa situation' do
+      it 'Crée un événement et une partie' do
         expect { post '/api/evenements', params: payload_valide }
           .to change { Evenement.count }.by(1)
+                                        .and change { Partie.count }.by(1)
         evenement = Evenement.last
         expect(evenement.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
-        expect(evenement.situation).to eq situation_inventaire
       end
 
       it 'retourne une 201' do

@@ -12,7 +12,10 @@ describe 'Admin - Evaluation', type: :feature do
   describe '#show' do
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
     let(:situation) { build(:situation_inventaire) }
-    let(:evenement) { build(:evenement_demarrage, situation: situation) }
+    let!(:partie) do
+      create :partie, situation: situation, evaluation: mon_evaluation, evenements: [evenement]
+    end
+    let(:evenement) { build(:evenement_demarrage) }
     let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
     let(:restitution_globale) do
       double(Restitution::Globale,
@@ -45,7 +48,7 @@ describe 'Admin - Evaluation', type: :feature do
     let!(:partie) do
       create :partie, situation: situation, evaluation: evaluation, evenements: [evenement]
     end
-    let(:evenement) { build :evenement, evaluation: evaluation, situation: situation }
+    let(:evenement) { build :evenement }
     before { visit admin_evaluation_path(evaluation) }
 
     it do

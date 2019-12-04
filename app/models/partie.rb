@@ -8,4 +8,12 @@ class Partie < ApplicationRecord
   validates :session_id, presence: true
 
   delegate :campagne, to: :evaluation
+
+  def restitution
+    FabriqueRestitution.instancie id
+  end
+
+  def persiste_restitution
+    restitution.persiste
+  end
 end

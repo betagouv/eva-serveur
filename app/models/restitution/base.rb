@@ -29,6 +29,8 @@ module Restitution
       @evenements = evenements
     end
 
+    def persiste; end
+
     def supprimer
       partie.destroy
     end

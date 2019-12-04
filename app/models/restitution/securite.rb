@@ -18,6 +18,19 @@ module Restitution
       super || qualifications_par_danger.count == DANGERS_TOTAL
     end
 
+    def persiste
+      metriques = %i[
+        nombre_reouverture_zone_sans_danger nombre_bien_qualifies
+        nombre_dangers_identifies nombre_retours_deja_qualifies
+        nombre_dangers_identifies_avant_aide_1 attention_visuo_spatiale
+        temps_ouvertures_zones_dangers temps_moyen_ouvertures_zones_dangers
+        temps_entrainement temps_total nombre_rejoue_consigne
+      ].each_with_object({}) do |methode, memo|
+        memo[methode] = public_send(methode)
+      end
+      partie.update(metriques: metriques)
+    end
+
     def nombre_bien_qualifies
       qualifications_finales = qualifications_par_danger.map do |_danger, qualifications|
         qualifications.max_by(&:created_at)

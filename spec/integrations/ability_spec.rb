@@ -37,13 +37,16 @@ describe Ability do
     let(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
     let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
     let(:situation)                 { create :situation_inventaire }
-    let(:partie_administrateur) do
+    let(:evenement_administrateur)  { build :evenement }
+    let!(:partie_administrateur) do
       create :partie, session_id: 'test1', evaluation: evaluation_administrateur,
-                      situation: situation
+                      situation: situation, evenements: [evenement_administrateur]
     end
-    let(:partie_organisation) do
+
+    let(:evenement_organisation) { build :evenement }
+    let!(:partie_organisation) do
       create :partie, session_id: 'test2', evaluation: evaluation_organisation,
-                      situation: situation
+                      situation: situation, evenements: [evenement_organisation]
     end
 
     it { is_expected.to_not be_able_to(:manage, :all) }
@@ -61,10 +64,10 @@ describe Ability do
     it { is_expected.to_not be_able_to(%i[create update], evaluation_organisation) }
     it { is_expected.to_not be_able_to(%i[read destroy], evaluation_administrateur) }
     it { is_expected.to_not be_able_to(:read, Evenement.new) }
-    it { is_expected.to_not be_able_to(:read, Evenement.new(partie: partie_administrateur)) }
+    it { is_expected.to_not be_able_to(:read, evenement_administrateur) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read destroy], evaluation_organisation) }
-    it { is_expected.to be_able_to(:read, Evenement.new(partie: partie_organisation)) }
+    it { is_expected.to be_able_to(:read, evenement_organisation) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:manage, Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }

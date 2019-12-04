@@ -317,4 +317,44 @@ describe Restitution::Securite do
       it { expect(restitution.nombre_reouverture_zone_sans_danger).to eq 1 }
     end
   end
+
+  describe '#persiste' do
+    context "persiste l'ensemble des données de sécurité" do
+      let(:situation) { create :situation_inventaire }
+      let(:evaluation) { create :evaluation, campagne: campagne }
+      let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
+      let(:evenements) do
+        [build(:evenement_demarrage),
+         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' }),
+         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
+      end
+
+      it do
+        expect(restitution).to receive(:nombre_reouverture_zone_sans_danger).and_return 1
+        expect(restitution).to receive(:nombre_bien_qualifies).and_return 2
+        expect(restitution).to receive(:nombre_dangers_identifies).and_return 3
+        expect(restitution).to receive(:nombre_retours_deja_qualifies).and_return 4
+        expect(restitution).to receive(:nombre_dangers_identifies_avant_aide_1).and_return 5
+        expect(restitution).to receive(:attention_visuo_spatiale).and_return Competence::APTE
+        expect(restitution).to receive(:temps_ouvertures_zones_dangers).and_return [1, 2]
+        expect(restitution).to receive(:temps_moyen_ouvertures_zones_dangers).and_return 7
+        expect(restitution).to receive(:temps_entrainement).and_return 8
+        expect(restitution).to receive(:temps_total).and_return 9
+        expect(restitution).to receive(:nombre_rejoue_consigne).and_return 10
+        restitution.persiste
+        partie.reload
+        expect(partie.metriques['nombre_reouverture_zone_sans_danger']).to eq 1
+        expect(partie.metriques['nombre_bien_qualifies']).to eq 2
+        expect(partie.metriques['nombre_dangers_identifies']).to eq 3
+        expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4
+        expect(partie.metriques['nombre_dangers_identifies_avant_aide_1']).to eql 5
+        expect(partie.metriques['attention_visuo_spatiale']).to eql 'apte'
+        expect(partie.metriques['temps_ouvertures_zones_dangers']).to eql [1, 2]
+        expect(partie.metriques['temps_moyen_ouvertures_zones_dangers']).to eql 7
+        expect(partie.metriques['temps_entrainement']).to eql 8
+        expect(partie.metriques['temps_total']).to eql 9
+        expect(partie.metriques['nombre_rejoue_consigne']).to eql 10
+      end
+    end
+  end
 end

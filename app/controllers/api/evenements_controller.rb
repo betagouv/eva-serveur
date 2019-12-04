@@ -3,11 +3,12 @@
 module Api
   class EvenementsController < ActionController::API
     def create
-      @evenement = partie.evenements.new(evenement_params)
-      if @evenement.save
-        render json: @evenement, status: :created
+      evenement = partie.evenements.new(evenement_params)
+
+      if CreeEvenementAction.new(partie, evenement).call
+        render json: evenement, status: :created
       else
-        render json: @evenement.errors.full_messages, status: 422
+        render json: evenement.errors.full_messages, status: 422
       end
     end
 

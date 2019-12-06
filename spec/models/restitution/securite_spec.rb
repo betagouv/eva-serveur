@@ -245,6 +245,7 @@ describe Restitution::Securite do
   end
 
   describe '#attention_visuo_spatiale' do
+    let(:danger_visuo_spatial) { EvenementSecuriteDecorator::DANGER_VISUO_SPATIAL }
     context 'sans évenement: indéterminé' do
       let(:evenements) { [] }
       it { expect(restitution.attention_visuo_spatiale).to eq Competence::NIVEAU_INDETERMINE }
@@ -254,7 +255,7 @@ describe Restitution::Securite do
       let(:evenements) do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: Restitution::Securite::DANGER_VISUO_SPATIAL })]
+               donnees: { reponse: 'oui', danger: danger_visuo_spatial })]
       end
 
       it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE }
@@ -265,7 +266,7 @@ describe Restitution::Securite do
         [build(:evenement_demarrage, date: 3.minute.ago),
          build(:activation_aide, date: 2.minutes.ago),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: Restitution::Securite::DANGER_VISUO_SPATIAL },
+               donnees: { reponse: 'oui', danger: danger_visuo_spatial },
                date: 1.minute.ago)]
       end
       it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE_AVEC_AIDE }
@@ -275,7 +276,7 @@ describe Restitution::Securite do
       let(:evenements) do
         [build(:evenement_demarrage, date: 3.minute.ago),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: Restitution::Securite::DANGER_VISUO_SPATIAL },
+               donnees: { reponse: 'oui', danger: danger_visuo_spatial },
                date: 2.minute.ago),
          build(:activation_aide, date: 1.minutes.ago)]
       end

@@ -2,17 +2,16 @@
 
 module Restitution
   class Securite < AvecEntrainement
-    BONNE_QUALIFICATION = 'bonne'
-    IDENTIFICATION_POSITIVE = 'oui'
     DANGERS_TOTAL = 5
-    DANGER_VISUO_SPATIAL = 'signalisation'
 
     EVENEMENT = {
-      QUALIFICATION_DANGER: 'qualificationDanger',
-      IDENTIFICATION_DANGER: 'identificationDanger',
-      ACTIVATION_AIDE_1: 'activationAide',
-      OUVERTURE_ZONE: 'ouvertureZone'
+      ACTIVATION_AIDE_1: 'activationAide'
     }.freeze
+
+    def initialize(campagne, evenements)
+      evenements = evenements.map { |e| EvenementSecuriteDecorator.new e }
+      super(campagne, evenements)
+    end
 
     def termine?
       super || qualifications_par_danger.count == DANGERS_TOTAL
@@ -32,10 +31,9 @@ module Restitution
     end
 
     def nombre_bien_qualifies
-      qualifications_finales = qualifications_par_danger.map do |_danger, qualifications|
+      qualifications_par_danger.map do |_danger, qualifications|
         qualifications.max_by(&:created_at)
-      end
-      qualifications_finales.count { |e| bonne_reponse?(e) }
+      end.count(&:bonne_reponse?)
     end
 
     def nombre_dangers_identifies
@@ -58,7 +56,7 @@ module Restitution
     end
 
     def attention_visuo_spatiale
-      identification = dangers_identifies.find { |e| e.donnees['danger'] == DANGER_VISUO_SPATIAL }
+      identification = dangers_identifies.find(&:danger_visuo_spatial?)
       return ::Competence::NIVEAU_INDETERMINE if identification.blank?
 
       if activation_aide1.present? && activation_aide1.date < identification.date
@@ -69,14 +67,11 @@ module Restitution
     end
 
     def nombre_reouverture_zone_sans_danger
-      ouverture_zones_sans_dangers = evenements_situation.select do |e|
-        e.nom == EVENEMENT[:OUVERTURE_ZONE] && !e.donnees['danger']
-      end
-      ouverture_zones_sans_dangers
-        .group_by { |e| e.donnees['zone'] }
-        .inject(0) do |memo, (_danger, ouvertures)|
-          memo + ouvertures.count - 1
-        end
+      evenements_situation.select(&:ouverture_zone_sans_danger?)
+                          .group_by { |e| e.donnees['zone'] }
+                          .inject(0) do |memo, (_danger, ouvertures)|
+                            memo + ouvertures.count - 1
+                          end
     end
 
     def temps_ouvertures_zones_dangers
@@ -97,25 +92,12 @@ module Restitution
 
     private
 
-    def bonne_reponse?(evenement)
-      evenement.donnees['reponse'] == BONNE_QUALIFICATION
-    end
-
     def qualifications_par_danger
-      qualifications_dangers = evenements_situation.select do |e|
-        e.nom == EVENEMENT[:QUALIFICATION_DANGER]
-      end
-      qualifications_dangers.group_by { |e| e.donnees['danger'] }
+      evenements_situation.select(&:qualification_danger?).group_by { |e| e.donnees['danger'] }
     end
 
     def dangers_identifies
-      evenements_situation.select { |e| est_un_danger_identifie?(e) }
-    end
-
-    def est_un_danger_identifie?(evenement)
-      evenement.nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
-        evenement.donnees['reponse'] == IDENTIFICATION_POSITIVE &&
-        evenement.donnees['danger'].present?
+      @dangers_identifies || evenements_situation.select(&:est_un_danger_identifie?)
     end
 
     def activation_aide1
@@ -130,9 +112,7 @@ module Restitution
       evenements_situation.select do |e|
         next if dernier_evenement_retenu&.nom == e.nom
 
-        selectionne = [AvecEntrainement::EVENEMENT[:DEMARRAGE],
-                       EVENEMENT[:QUALIFICATION_DANGER]].include?(e.nom) ||
-                      e.nom == EVENEMENT[:OUVERTURE_ZONE] && e.donnees['danger'].present?
+        selectionne = e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?
         dernier_evenement_retenu = e if selectionne
         selectionne
       end

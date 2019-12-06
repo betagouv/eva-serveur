@@ -23,7 +23,7 @@ fr:
       restitution_globale:
         situation: 'Situation %{situation}'
         efficience_globale: "Efficience globale : %{efficience}"
-        competences_fortes_titre: "Classement de vos compétences"
+        competences_fortes_titre: "Classement eva de vos compétences"
         legende_titre: "(de la plus forte à la moins forte)"
         url_competence: 'Détail et liste des métiers associés :'
       restitution_competence:

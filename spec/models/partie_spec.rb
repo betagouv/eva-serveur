@@ -10,6 +10,9 @@ describe Partie do
   it { should belong_to(:situation) }
 
   it do
-    should have_many(:evenements).with_primary_key(:session_id).with_foreign_key(:session_id)
+    should have_many(:evenements)
+      .order(:date)
+      .with_primary_key(:session_id)
+      .with_foreign_key(:session_id)
   end
 end

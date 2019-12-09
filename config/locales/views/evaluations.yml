@@ -103,6 +103,8 @@ fr:
         question: Question
         reponse: Réponse
       restitution_securite:
+        valeur_utilisateur: Valeur de l'évalué·e
+        moyenne: Moyenne des évalué·e·s
         restitution_securite: Restitution de la situation sécurité
         temps_entrainement: Temps passé dans l'entrainement
         dangers_bien_qualifies: Dangers bien qualifiés

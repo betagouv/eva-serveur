@@ -25,4 +25,14 @@ class Partie < ApplicationRecord
       .to_f
       .round(2)
   end
+
+  def moyenne_metriques
+    Partie.where
+          .not(metriques: {})
+          .first
+          &.metriques
+          &.each_with_object({}) do |(metrique, valeur), memo|
+      memo[metrique] = valeur.is_a?(Numeric) ? moyenne_metrique(metrique) : nil
+    end
+  end
 end

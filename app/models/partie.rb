@@ -16,4 +16,13 @@ class Partie < ApplicationRecord
   def persiste_restitution
     restitution.persiste
   end
+
+  def moyenne_metrique(metrique)
+    Partie
+      .where(situation: situation)
+      .where.not(metriques: {})
+      .average("(metriques ->> '#{metrique}')::numeric")
+      .to_f
+      .round(2)
+  end
 end

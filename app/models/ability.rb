@@ -18,7 +18,10 @@ class Ability
 
   def droit_campagne(compte)
     can :create, Campagne
-    can :manage, Campagne, compte_id: compte.id
+    can %i[create update read], Campagne, compte_id: compte.id
+    can :destroy, Campagne do |c|
+      c.evaluations.count.zero?
+    end
   end
 
   def droit_evaluation(compte)

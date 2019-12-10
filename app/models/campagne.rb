@@ -2,7 +2,7 @@
 
 class Campagne < ApplicationRecord
   has_many :evaluations, -> { order(created_at: :desc) }
-  has_many :situations_configurations, -> { order(position: :asc) }
+  has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
   has_many :situations, through: :situations_configurations
   belongs_to :questionnaire, optional: true
   belongs_to :compte

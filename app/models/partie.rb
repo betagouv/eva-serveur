@@ -18,21 +18,44 @@ class Partie < ApplicationRecord
   end
 
   def moyenne_metrique(metrique)
+    aggrege_metrique(:average, metrique)
+  end
+
+  def ecart_type_metrique(metrique)
+    aggrege_metrique(:stddev_pop, metrique)
+  end
+
+  def moyenne_metriques
+    collect_metriques do |metrique|
+      moyenne_metrique(metrique)
+    end
+  end
+
+  def ecart_type_metriques
+    collect_metriques do |metrique|
+      ecart_type_metrique(metrique)
+    end
+  end
+
+  private
+
+  def aggrege_metrique(fonction, metrique)
     Partie
       .where(situation: situation)
       .where.not(metriques: {})
-      .average("(metriques ->> '#{metrique}')::numeric")
+      .calculate(fonction, "(metriques ->> '#{metrique}')::numeric")
       .to_f
       .round(2)
   end
 
-  def moyenne_metriques
-    Partie.where
-          .not(metriques: {})
-          .first
-          &.metriques
-          &.each_with_object({}) do |(metrique, valeur), memo|
-      memo[metrique] = valeur.is_a?(Numeric) ? moyenne_metrique(metrique) : nil
+  def collect_metriques
+    Partie
+      .where(situation: situation)
+      .where.not(metriques: {})
+      .first
+      &.metriques
+      &.each_with_object({}) do |(metrique, valeur), memo|
+      memo[metrique] = valeur.is_a?(Numeric) ? yield(metrique) : nil
     end
   end
 end

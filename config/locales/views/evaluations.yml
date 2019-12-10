@@ -104,7 +104,8 @@ fr:
         reponse: Réponse
       restitution_securite:
         valeur_utilisateur: Valeur de l'évalué·e
-        moyenne: Moyenne des évalué·e·s
+        moyenne_glissante: Moyenne glissante
+        ecart_type_glissant: Écart type glissant
         restitution_securite: Restitution de la situation sécurité
         temps_entrainement: Temps passé dans l'entrainement
         dangers_bien_qualifies: Dangers bien qualifiés

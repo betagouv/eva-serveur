@@ -32,7 +32,7 @@ describe Ability do
 
   context 'Compte organisation' do
     let(:compte)                    { compte_organisation }
-    let(:campagne_organisation)     { create :campagne, compte: compte }
+    let!(:campagne_organisation)    { create :campagne, compte: compte }
     let(:campagne_administrateur)   { create :campagne, compte: compte_administrateur }
     let(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
     let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
@@ -47,6 +47,10 @@ describe Ability do
     let!(:partie_organisation) do
       create :partie, session_id: 'test2', evaluation: evaluation_organisation,
                       situation: situation, evenements: [evenement_organisation]
+    end
+
+    it 'avec une campagne qui a des évaluations' do
+      is_expected.to_not be_able_to(:destroy, campagne_organisation)
     end
 
     it { is_expected.to_not be_able_to(:manage, :all) }
@@ -69,7 +73,8 @@ describe Ability do
     it { is_expected.to be_able_to(%i[read destroy], evaluation_organisation) }
     it { is_expected.to be_able_to(:read, evenement_organisation) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
-    it { is_expected.to be_able_to(:manage, Campagne.new(compte: compte)) }
+    it { is_expected.to be_able_to(%i[create update read], Campagne.new(compte: compte)) }
+    it { is_expected.to be_able_to(:destroy, Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_organisation, nil)) }

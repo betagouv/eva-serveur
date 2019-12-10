@@ -103,6 +103,7 @@ fr:
         question: Question
         reponse: Réponse
       restitution_securite:
+        cote_z: Cote Z
         valeur_utilisateur: Valeur de l'évalué·e
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant

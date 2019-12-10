@@ -23,7 +23,10 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
   end
 
   show do
-    render chemin_vue, restitution: resource
+    render chemin_vue,
+           restitution: resource,
+           moyenne_glissante: OpenStruct.new(resource.partie.moyenne_metriques),
+           ecart_type_glissant: OpenStruct.new(resource.partie.ecart_type_metriques)
     render 'restitution_competences', restitution: resource
   end
 

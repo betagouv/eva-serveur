@@ -4,7 +4,8 @@ panel t('.restitution_securite') do
   attributes_table_for [
     [t('.valeur_utilisateur'), restitution],
     [t('.moyenne_glissante'), moyenne_glissante],
-    [t('.ecart_type_glissant'), ecart_type_glissant]
+    [t('.ecart_type_glissant'), ecart_type_glissant],
+    [t('.cote_z'), cote_z]
   ] do
     row do |(titre, _)|
       strong titre

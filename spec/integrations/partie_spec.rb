@@ -89,4 +89,21 @@ describe Partie do
       expect(partie1.ecart_type_metriques).to be_nil
     end
   end
+
+  context '#cote_z_metriques' do
+    context 'calcule le cote z' do
+      before { [partie1, partie2, partie3] }
+
+      it do
+        expect(partie1.cote_z_metriques).to eql('test_chaine' => nil,
+                                                'test_metrique' => 0.0,
+                                                'test_metrique_tableau' => nil)
+      end
+    end
+
+    it "lorsqu'il n'y a aucune partie enregistré" do
+      partie1.update(metriques: {})
+      expect(partie1.cote_z_metriques).to be_nil
+    end
+  end
 end

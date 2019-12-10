@@ -26,14 +26,22 @@ class Partie < ApplicationRecord
   end
 
   def moyenne_metriques
-    collect_metriques do |metrique|
+    @moyenne_metriques ||= collect_metriques do |metrique|
       moyenne_metrique(metrique)
     end
   end
 
   def ecart_type_metriques
-    collect_metriques do |metrique|
+    @ecart_type_metriques ||= collect_metriques do |metrique|
       ecart_type_metrique(metrique)
+    end
+  end
+
+  def cote_z_metriques
+    collect_metriques do |metrique|
+      (
+        (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
+      ).round(2)
     end
   end
 

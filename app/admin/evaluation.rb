@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  menu false
-  actions :show, :destroy
+  actions :index, :show, :destroy
+  belongs_to :campagne
+
+  filter :nom
+  filter :created_at
 
   action_item :pdf, only: :show do
     link_to('Export PDF', {
@@ -10,6 +13,13 @@ ActiveAdmin.register Evaluation do
               format: :pdf
             },
             target: '_blank')
+  end
+
+  index do
+    selectable_column
+    column :nom
+    column :created_at
+    actions
   end
 
   show do

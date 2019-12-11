@@ -16,13 +16,3 @@ panel 'Configuration' do
     column :situation
   end
 end
-
-panel "Évaluations (#{campagne.nombre_evaluations})" do
-  table_for campagne.evaluations do
-    column :nom do |evaluation|
-      link_to evaluation.nom,
-              admin_evaluation_path(evaluation)
-    end
-    column :created_at
-  end
-end

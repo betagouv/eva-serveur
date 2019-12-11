@@ -11,10 +11,6 @@ ActiveAdmin.register Campagne do
 
   includes :compte
 
-  action_item :stats, only: :show do
-    link_to 'Voir les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
-  end
-
   index do
     selectable_column
     column :libelle
@@ -41,6 +37,14 @@ ActiveAdmin.register Campagne do
       end
     end
     f.actions
+  end
+
+  sidebar 'Voir...', only: :show do
+    ul do
+      li link_to 'Les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
+      li link_to "#{resource.nombre_evaluations} évaluations",
+                 admin_campagne_evaluations_path(resource)
+    end
   end
 
   controller do

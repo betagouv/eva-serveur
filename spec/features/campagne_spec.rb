@@ -114,6 +114,6 @@ describe 'Admin - Campagne', type: :feature do
       campagne.situations_configurations.create! situation: situation
       visit admin_campagne_path campagne
     end
-    it { expect(page).to have_content 'Roger' }
+    it { expect(page).to have_content 'Inventaire' }
   end
 end

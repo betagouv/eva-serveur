@@ -34,7 +34,9 @@ panel t('.restitution_securite') do
       Time.at(temps).strftime('%M:%S') if temps.present?
     end
     row t('.attention_visuo_spatiale') do |_, r|
-      t(r.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')
+      if r.attention_visuo_spatiale.present?
+        t(r.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')
+      end
     end
     row t('.retours_zones_sans_danger') do |(_, r)|
       r.nombre_reouverture_zone_sans_danger

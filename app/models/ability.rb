@@ -60,6 +60,7 @@ class Ability
 
   def droits_generiques(compte)
     can :manage, :all if compte.administrateur?
+    cannot :destroy, Campagne
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
   end
 end

@@ -6,6 +6,10 @@ require 'cancan/matchers'
 describe Ability do
   let(:compte_administrateur) { create :compte, role: 'administrateur' }
   let(:compte_organisation) { create :compte, role: 'organisation' }
+  let!(:campagne_administrateur) { create :campagne, compte: compte_administrateur }
+  let!(:campagne_administrateur_sans_eval) { create :campagne, compte: compte_administrateur }
+
+  let!(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
 
   subject(:ability) { Ability.new(compte) }
 
@@ -28,13 +32,19 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to be_able_to(:manage, Question.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
+
+    it 'avec une campagne qui a des évaluations' do
+      is_expected.to_not be_able_to(:destroy, campagne_administrateur)
+    end
+
+    it "avec une campagne qui n'a pas d'évaluation" do
+      is_expected.to be_able_to(:destroy, campagne_administrateur_sans_eval)
+    end
   end
 
   context 'Compte organisation' do
     let(:compte)                    { compte_organisation }
     let!(:campagne_organisation)    { create :campagne, compte: compte }
-    let(:campagne_administrateur)   { create :campagne, compte: compte_administrateur }
-    let(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
     let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
     let(:situation)                 { create :situation_inventaire }
     let(:evenement_administrateur)  { build :evenement }

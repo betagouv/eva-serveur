@@ -26,7 +26,7 @@ describe 'Admin - Evaluation', type: :feature do
     end
 
     it "affiche l'évaluation" do
-      visit admin_evaluation_path(mon_evaluation)
+      visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation)
       expect(page).to have_content 'Roger'
     end
 
@@ -34,7 +34,7 @@ describe 'Admin - Evaluation', type: :feature do
       competences = [{ Competence::ORGANISATION_METHODE => Competence::NIVEAU_4 }]
       expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
-      visit admin_evaluation_path(mon_evaluation, format: :pdf)
+      visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
       path = page.save_page
 
       reader = PDF::Reader.new(path)
@@ -49,7 +49,7 @@ describe 'Admin - Evaluation', type: :feature do
       create :partie, situation: situation, evaluation: evaluation, evenements: [evenement]
     end
     let(:evenement) { build :evenement }
-    before { visit admin_evaluation_path(evaluation) }
+    before { visit admin_campagne_evaluation_path(ma_campagne, evaluation) }
 
     it do
       expect { click_on 'Supprimer' }.to(change { Evaluation.count }

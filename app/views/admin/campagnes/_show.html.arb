@@ -16,3 +16,17 @@ panel 'Configuration' do
     column :situation
   end
 end
+
+columns do
+  column do
+    panel 'Évaluations' do
+      link_to "Consulter les #{resource.nombre_evaluations} évaluations",
+              admin_campagne_evaluations_path(resource)
+    end
+  end
+  column do
+    panel 'Statistiques' do
+      link_to 'Consulter les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
+    end
+  end
+end

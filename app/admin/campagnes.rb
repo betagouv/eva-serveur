@@ -39,14 +39,6 @@ ActiveAdmin.register Campagne do
     f.actions
   end
 
-  sidebar 'Voir...', only: :show do
-    ul do
-      li link_to 'Les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
-      li link_to "#{resource.nombre_evaluations} évaluations",
-                 admin_campagne_evaluations_path(resource)
-    end
-  end
-
   controller do
     def create
       params[:campagne][:compte_id] ||= current_compte.id

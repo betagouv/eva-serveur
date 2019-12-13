@@ -101,6 +101,17 @@ describe Partie do
       end
     end
 
+    context "lorsque la partie courante n'est pas terminée" do
+      before { [partie1, partie2, partie3] }
+
+      it do
+        partie1.update(metriques: {})
+        expect(partie1.cote_z_metriques).to eql('test_chaine' => nil,
+                                                'test_metrique' => nil,
+                                                'test_metrique_tableau' => nil)
+      end
+    end
+
     it "lorsqu'il n'y a aucune partie enregistré" do
       partie1.update(metriques: {})
       expect(partie1.cote_z_metriques).to be_nil

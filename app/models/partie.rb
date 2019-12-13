@@ -39,15 +39,21 @@ class Partie < ApplicationRecord
 
   def cote_z_metriques
     collect_metriques do |metrique|
-      unless metriques[metrique].nil?
-        (
-          (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
-        ).round(2)
+      if ecart_type_metriques[metrique].zero?
+        0
+      elsif metriques[metrique].present?
+        cote_z_metrique(metrique)
       end
     end
   end
 
   private
+
+  def cote_z_metrique(metrique)
+    (
+      (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
+    ).round(2)
+  end
 
   def aggrege_metrique(fonction, metrique)
     Partie

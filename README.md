@@ -1,12 +1,12 @@
-# Compétences Pro Serveur
+# Serveur eva
 
-Cette application sert de serveur et d'espace d'administration pour [Compétences Pro](https://github.com/betagouv/competences-pro)
+Cette application sert de serveur et d'espace d'administration pour eva
 
-Pour voir les autres projets de Compétences Pro:
+Pour voir les autres projets de eva :
 
-- [la partie cliente](https://github.com/betagouv/competences-pro)
-- [la partie orchestration](https://github.com/betagouv/competences-pro-orchestrateur)
-- [le site web](https://github.com/betagouv/competences-pro-www)
+- [la partie cliente](https://github.com/betagouv/eva)
+- [la partie orchestration](https://github.com/betagouv/eva-orchestrateur)
+- [le site web](https://github.com/betagouv/eva-www)
 
 * Ruby version
 2.6

@@ -39,9 +39,11 @@ class Partie < ApplicationRecord
 
   def cote_z_metriques
     collect_metriques do |metrique|
-      (
-        (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
-      ).round(2)
+      unless metriques[metrique].nil?
+        (
+          (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
+        ).round(2)
+      end
     end
   end
 

@@ -4,6 +4,8 @@ ActiveAdmin.register Evaluation do
   actions :index, :show, :destroy
   belongs_to :campagne
 
+  config.sort_order = 'created_at_desc'
+
   filter :nom
   filter :created_at
 

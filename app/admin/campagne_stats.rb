@@ -5,6 +5,9 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
   config.sort_order = 'created_at_desc'
   includes :campagne
 
+  filter :nom
+  filter :created_at
+
   column_stats = proc do |situation, nom|
     proc do
       column "#{situation}_#{nom}".to_sym do |evaluation|

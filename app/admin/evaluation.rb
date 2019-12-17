@@ -17,7 +17,7 @@ ActiveAdmin.register Evaluation do
             target: '_blank')
   end
 
-  index do
+  index download_links: %i[csv pdf] do
     selectable_column
     column :nom
     column :created_at

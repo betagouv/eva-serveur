@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
   menu false
+  config.batch_actions = false
   config.sort_order = 'created_at_desc'
   includes :campagne
 

@@ -2,7 +2,8 @@
 
 ActiveAdmin.register Campagne do
   config.batch_actions = false
-  permit_params :libelle, :code, :questionnaire_id, :compte, :compte_id,
+  permit_params :libelle, :code, :questionnaire_id, :compte,
+                :compte_id, :affiche_competences_fortes,
                 situations_configurations_attributes: %i[id situation_id _destroy]
 
   filter :compte, if: proc { can? :manage, Compte }
@@ -30,6 +31,7 @@ ActiveAdmin.register Campagne do
       f.input :compte if can?(:manage, Compte)
       f.input :libelle
       f.input :code
+      f.input :affiche_competences_fortes
       f.input :questionnaire
       f.has_many :situations_configurations, allow_destroy: true do |c|
         c.input :id, as: :hidden

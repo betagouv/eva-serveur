@@ -85,27 +85,38 @@ describe 'Evaluation API', type: :request do
                           evenements: [saisie]
         end
 
-        before { get "/api/evaluations/#{evaluation.id}" }
+        context 'avec une campagne configurée sans compétences fortes' do
+          before do
+            campagne.update(affiche_competences_fortes: false)
+            get "/api/evaluations/#{evaluation.id}"
+          end
 
-        it 'retourne les compétences triées par ordre de force décroissante' do
-          attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
-                       Competence::ORGANISATION_METHODE].map(&:to_s)
-          expect(JSON.parse(response.body)['competences_fortes'].pluck('id'))
-            .to eql(attendues)
+          it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
         end
 
-        it 'envoie aussi le nom et la description des compétences' do
-          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
-          expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
-          expect(premiere_competence['description'])
-            .to eql(I18n.t("#{Competence::RAPIDITE}.description",
-                           scope: 'admin.evaluations.restitution_competence'))
-        end
+        context 'avec une campagne configurée avec compétences fortes' do
+          before { get "/api/evaluations/#{evaluation.id}" }
 
-        it "envoie aussi l'URL du picto des compétences" do
-          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
-          expect(premiere_competence['picto'])
-            .to start_with('http://asset_host:port/assets/rapidite')
+          it 'retourne les compétences triées par ordre de force décroissante' do
+            attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
+                         Competence::ORGANISATION_METHODE].map(&:to_s)
+            expect(JSON.parse(response.body)['competences_fortes'].pluck('id'))
+              .to eql(attendues)
+          end
+
+          it 'envoie aussi le nom et la description des compétences' do
+            premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+            expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
+            expect(premiere_competence['description'])
+              .to eql(I18n.t("#{Competence::RAPIDITE}.description",
+                             scope: 'admin.evaluations.restitution_competence'))
+          end
+
+          it "envoie aussi l'URL du picto des compétences" do
+            premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+            expect(premiere_competence['picto'])
+              .to start_with('http://asset_host:port/assets/rapidite')
+          end
         end
       end
 

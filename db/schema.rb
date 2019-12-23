@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_115816) do
+ActiveRecord::Schema.define(version: 2019_12_23_102653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_115816) do
     t.uuid "questionnaire_id"
     t.uuid "compte_id"
     t.integer "nombre_evaluations", default: 0
+    t.boolean "affiche_competences_fortes", default: true
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
   end

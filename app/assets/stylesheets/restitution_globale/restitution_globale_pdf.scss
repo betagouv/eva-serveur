@@ -41,6 +41,7 @@
   .row {
     display: -webkit-box;
     width: 1000px;
+    page-break-inside: avoid;
     .col-4, .col-6, .competences-identifiees {
       height: 100%;
       vertical-align: top;

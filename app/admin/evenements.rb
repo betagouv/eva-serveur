@@ -8,7 +8,9 @@ ActiveAdmin.register Evenement do
   filter :date
 
   colonnes_evenement = proc do
+    column(:campagne) { |e| Partie.find_by(session_id: e.session_id).evaluation.campagne.code }
     column(:situation) { |e| Partie.find_by(session_id: e.session_id).situation.libelle }
+    column(:nom_evalue) { |e| Partie.find_by(session_id: e.session_id).evaluation.nom }
     column :session_id
     column :nom
     column :donnees

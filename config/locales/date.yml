@@ -7,4 +7,4 @@ fr:
   time:
     formats:
       <<: *formats
-      date_heure: "%d/%m/%Y à %Hh%M"
+      date_heure: "%d/%m/%Y %H:%M:%S"

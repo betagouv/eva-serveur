@@ -109,11 +109,30 @@ describe 'Admin - Campagne', type: :feature do
 
   describe 'show' do
     let(:situation) { create :situation_inventaire }
+    let(:evaluation) { create :evaluation, campagne: campagne }
+
+    let!(:partie) do
+      create :partie,
+             situation: situation,
+             evaluation: evaluation,
+             evenements: [evenement]
+    end
+
+    let(:evenement) { build :evenement, nom: 'ouvertureContenant' }
+
     before do
       Compte.first.update(role: 'administrateur')
       campagne.situations_configurations.create! situation: situation
       visit admin_campagne_path campagne
     end
+
     it { expect(page).to have_content 'Inventaire' }
+
+    it 'télécharge les événements de la campagne' do
+      click_on 'Télécharger les événements'
+      expect(page.response_headers['Content-Type']).to eq 'text/csv; charset=utf-8'
+      expect(page).to have_content  "Nom de l'évalué·e"
+      expect(page).to have_content  'ouvertureContenant'
+    end
   end
 end

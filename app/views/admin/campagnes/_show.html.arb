@@ -18,16 +18,11 @@ panel 'Configuration' do
   end
 end
 
-columns do
-  column do
-    panel 'Évaluations' do
-      link_to "Consulter les #{resource.nombre_evaluations} évaluations",
-              admin_campagne_evaluations_path(resource)
-    end
-  end
-  column do
-    panel 'Statistiques' do
-      link_to 'Consulter les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
-    end
+panel 'Consulter' do
+  ul do
+    li link_to "les #{resource.nombre_evaluations} évaluations",
+               admin_campagne_evaluations_path(resource)
+    li link_to 'les stats', admin_campagne_stats_path(q: { campagne_id_eq: resource.id })
+    li link_to 'les événements', admin_campagne_evenements_path(resource)
   end
 end

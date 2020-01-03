@@ -35,5 +35,9 @@ ActiveAdmin.register Evenement do
                                           .select(:session_id)
       Evenement.where(session_id: sessions_ids_de_la_campagne)
     end
+
+    def csv_filename
+      "#{Time.current.to_formatted_s(:number)}-evenements-#{@campagne.code}.csv"
+    end
   end
 end

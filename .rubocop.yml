@@ -1,5 +1,3 @@
-Documentation:
-  Enabled: false
 AllCops:
   TargetRubyVersion: 2.6
   Exclude:
@@ -12,6 +10,9 @@ AllCops:
     - 'tmp/**/*'
     - 'test/**/*'
     - 'vendor/**/*'
+
+Style/Documentation:
+  Enabled: false
 
 Layout/LineLength:
   Max: 100

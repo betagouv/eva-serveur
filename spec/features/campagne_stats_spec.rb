@@ -59,7 +59,7 @@ describe 'Admin - Campagne Stats', type: :feature do
       expect(restitution_globale).to receive(:efficience).and_return(1)
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       connecte compte_organisation
-      visit admin_campagne_stats_path
+      visit admin_campagne_campagne_stats_path(campagne)
     end
 
     it do

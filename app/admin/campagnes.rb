@@ -12,11 +12,6 @@ ActiveAdmin.register Campagne do
 
   includes :compte
 
-  action_item :csv, only: :show do
-    link_to 'Télécharger les événements',
-            admin_evenements_path(q: { campagne: resource.code }, format: :csv)
-  end
-
   index do
     selectable_column
     column :libelle

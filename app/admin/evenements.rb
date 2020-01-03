@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evenement do
-  menu if: proc { can? :manage, Compte }
   config.sort_order = 'created_at_desc'
+  belongs_to :campagne
 
   filter :session_id
   filter :date
@@ -27,5 +27,14 @@ ActiveAdmin.register Evenement do
 
   csv do
     instance_eval(&colonnes_evenement)
+  end
+
+  controller do
+    def scoped_collection
+      campagne = parent
+      sessions_ids_de_la_campagne = Partie.where(evaluation: campagne.evaluations)
+                                          .select(:session_id)
+      Evenement.where(session_id: sessions_ids_de_la_campagne)
+    end
   end
 end

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
-  menu false
+  belongs_to :campagne
   config.batch_actions = false
   config.sort_order = 'created_at_desc'
-  includes :campagne
 
   filter :nom
   filter :created_at
@@ -71,6 +70,10 @@ ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
       restitution_globale(evaluation).restitutions.find do |restitution|
         restitution.situation.nom_technique == nom_situation
       end
+    end
+
+    def scoped_collection
+      Evaluation.where(campagne: params[:campagne_id])
     end
   end
 end

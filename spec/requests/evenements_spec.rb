@@ -59,7 +59,7 @@ describe 'Evenement API', type: :request do
       before { post '/api/evenements', params: payload_invalide }
 
       it 'retourne une 422' do
-        expect(response.body).to eq '["Date doit être rempli(e)"]'
+        expect(response.body).to eq '["Date client doit être rempli(e)"]'
         expect(response).to have_http_status(422)
       end
     end

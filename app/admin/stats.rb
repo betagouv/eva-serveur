@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Evaluation, as: 'Campagne Stats' do
+ActiveAdmin.register Evaluation, as: 'Stats' do
   belongs_to :campagne
   config.batch_actions = false
   config.sort_order = 'created_at_desc'

@@ -5,11 +5,8 @@ require 'rails_helper'
 describe CreeEvenementAction do
   let(:evaluation) { create :evaluation }
   let(:situation) { create :situation_securite }
-  let(:demarrage) { build :evenement_demarrage }
-  let(:partie) do
-    create :partie, situation: situation, evaluation: evaluation,
-                    evenements: [demarrage]
-  end
+  let!(:demarrage) { create :evenement_demarrage, partie: partie }
+  let(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   context "sauve l'évenement" do
     let(:evenement) { build :evenement_abandon }

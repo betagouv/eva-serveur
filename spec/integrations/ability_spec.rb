@@ -47,16 +47,16 @@ describe Ability do
     let!(:campagne_organisation)    { create :campagne, compte: compte }
     let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
     let(:situation)                 { create :situation_inventaire }
-    let(:evenement_administrateur)  { build :evenement }
+    let!(:evenement_administrateur) { create :evenement, partie: partie_administrateur }
     let!(:partie_administrateur) do
       create :partie, session_id: 'test1', evaluation: evaluation_administrateur,
-                      situation: situation, evenements: [evenement_administrateur]
+                      situation: situation
     end
 
-    let(:evenement_organisation) { build :evenement }
+    let!(:evenement_organisation) { create :evenement, partie: partie_organisation }
     let!(:partie_organisation) do
       create :partie, session_id: 'test2', evaluation: evaluation_organisation,
-                      situation: situation, evenements: [evenement_organisation]
+                      situation: situation
     end
 
     it 'avec une campagne qui a des évaluations' do

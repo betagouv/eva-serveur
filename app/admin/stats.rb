@@ -75,5 +75,9 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     def scoped_collection
       Evaluation.where(campagne: params[:campagne_id])
     end
+
+    def csv_filename
+      "#{Time.current.to_formatted_s(:number)}-stats-#{@campagne.code}.csv"
+    end
   end
 end

@@ -3,13 +3,14 @@
 ActiveAdmin.register Evenement do
   config.sort_order = 'created_at_desc'
   belongs_to :campagne
+  includes partie: [:situation, :evaluation]
 
   filter :session_id
   filter :date
 
   colonnes_evenement = proc do
-    column(:situation) { |e| Partie.find_by(session_id: e.session_id).situation.libelle }
-    column(:nom_evalue) { |e| Partie.find_by(session_id: e.session_id).evaluation.nom }
+    column(:situation) { |e| e.partie.situation.libelle }
+    column(:nom_evalue) { |e| e.partie.evaluation.nom }
     column :session_id
     column :nom
     column :donnees

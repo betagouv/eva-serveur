@@ -8,6 +8,10 @@ class Partie < ApplicationRecord
 
   delegate :campagne, to: :evaluation
 
+  def display_name
+    session_id
+  end
+
   def restitution
     FabriqueRestitution.instancie id
   end

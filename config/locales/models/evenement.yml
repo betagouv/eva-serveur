@@ -6,8 +6,9 @@ fr:
         other: Événements
     attributes:
       evenement:
-        nom_evalue: Nom de l'évalué·e
-        created_at: Créé le
+        evaluation: Nom de l'évalué·e
+        date: Date client
+        created_at: Date serveur
         updated_at: Mis à jour le
         type_evenement: Type d'événement
         donnees: Données

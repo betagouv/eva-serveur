@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evenement do
-  config.sort_order = 'created_at_desc'
+  config.sort_order = 'date_desc'
   belongs_to :campagne
-  includes partie: [:situation, :evaluation]
+  includes partie: %i[situation evaluation]
 
-  filter :session_id
+  filter :partie, collection: proc { Partie.pluck(:session_id) }
   filter :date
 
   colonnes_evenement = proc do
-    column(:situation) { |e| e.partie.situation.libelle }
-    column(:nom_evalue) { |e| e.partie.evaluation.nom }
-    column :session_id
+    column(:evaluation) { |e| e.evaluation.display_name }
+    column(:situation) { |e| e.situation.display_name }
+    column(:partie) { |e| e.partie.display_name }
     column :nom
     column :donnees
-    column(:date) { |d| l(d.date, format: :date_heure) }
-    column(:created_at) { |c_a| l(c_a.created_at, format: :date_heure) }
-    column(:updated_at) { |u_a| l(u_a.updated_at, format: :date_heure) }
+    column(:date) { |e| l(e.date, format: :date_heure) }
+    column(:created_at) { |e| l(e.created_at, format: :date_heure) }
   end
 
   index do

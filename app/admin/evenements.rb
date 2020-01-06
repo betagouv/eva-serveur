@@ -31,8 +31,8 @@ ActiveAdmin.register Evenement do
   controller do
     def scoped_collection
       campagne = parent
-      sessions_ids_de_la_campagne = Partie.where(evaluation: campagne.evaluations)
-                                          .select(:session_id)
+      sessions_ids_de_la_campagne = Partie.where(evaluations: { campagne: campagne })
+                                          .joins(:evaluation).select(:session_id)
       Evenement.where(session_id: sessions_ids_de_la_campagne)
     end
 

@@ -20,7 +20,7 @@ class Ability
     can :create, Campagne
     can %i[create update read], Campagne, compte_id: compte.id
     can :destroy, Campagne do |c|
-      c.evaluations.count.zero?
+      Evaluation.where(campagne: c).count.zero?
     end
   end
 

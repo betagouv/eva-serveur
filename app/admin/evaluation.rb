@@ -55,5 +55,9 @@ ActiveAdmin.register Evaluation do
     def parties
       Partie.where(evaluation_id: resource)
     end
+
+    def scoped_collection
+      Evaluation.where(campagne: params[:campagne_id])
+    end
   end
 end

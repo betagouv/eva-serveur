@@ -12,14 +12,13 @@ describe 'Admin - Evenement', type: :feature do
     create :partie,
            situation: situation,
            evaluation: evaluation,
-           evenements: [evenement],
            session_id: '1898098HJk8902'
   end
 
-  let(:evenement) do
-    build :evenement, nom: 'ouvertureContenant',
-                      donnees: donnees,
-                      session_id: '1898098HJk8902'
+  let!(:evenement) do
+    create :evenement, nom: 'ouvertureContenant',
+                       donnees: donnees,
+                       partie: partie
   end
 
   let(:autre_evaluation) { create :evaluation }

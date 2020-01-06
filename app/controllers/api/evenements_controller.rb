@@ -3,7 +3,7 @@
 module Api
   class EvenementsController < ActionController::API
     def create
-      evenement = partie.evenements.new(evenement_params)
+      evenement = Evenement.new evenement_params.merge(partie: partie)
 
       if CreeEvenementAction.new(partie, evenement).call
         render json: evenement, status: :created

@@ -12,7 +12,8 @@ class FabriqueRestitution
         'securite' => Restitution::Securite
       }
 
-      classe_restitution[partie.situation.nom_technique].new(partie.campagne, partie.evenements)
+      evenements = Evenement.where(partie: partie.session_id).order(:date)
+      classe_restitution[partie.situation.nom_technique].new(partie.campagne, evenements)
     end
 
     def initialise_selection(evaluation, parties_selectionnees_ids)

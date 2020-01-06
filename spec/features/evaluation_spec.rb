@@ -12,10 +12,8 @@ describe 'Admin - Evaluation', type: :feature do
   describe '#show' do
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
     let(:situation) { build(:situation_inventaire) }
-    let!(:partie) do
-      create :partie, situation: situation, evaluation: mon_evaluation, evenements: [evenement]
-    end
-    let(:evenement) { build(:evenement_demarrage) }
+    let!(:partie) { create :partie, situation: situation, evaluation: mon_evaluation }
+    let!(:evenement) { create :evenement_demarrage, partie: partie }
     let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
     let(:restitution_globale) do
       double(Restitution::Globale,
@@ -45,10 +43,8 @@ describe 'Admin - Evaluation', type: :feature do
   describe 'suppression' do
     let(:evaluation) { create :evaluation, campagne: ma_campagne }
     let(:situation) { create :situation_tri }
-    let!(:partie) do
-      create :partie, situation: situation, evaluation: evaluation, evenements: [evenement]
-    end
-    let(:evenement) { build :evenement }
+    let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
+    let!(:evenement) { create :evenement, partie: partie }
     before { visit admin_campagne_evaluation_path(ma_campagne, evaluation) }
 
     it do

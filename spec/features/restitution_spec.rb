@@ -4,19 +4,17 @@ require 'rails_helper'
 
 describe 'Admin - Restitution', type: :feature do
   let(:evaluation) { create :evaluation, nom: 'John Doe' }
-  let!(:partie) do
-    create :partie, situation: situation, evaluation: evaluation, evenements: evenements
-  end
+  let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   before { se_connecter_comme_administrateur }
 
   describe 'rapport de la situation controle' do
     let(:situation) { create :situation_controle }
-    let(:evenements) do
+    let!(:evenements) do
       [
-        build(:evenement_piece_bien_placee, session_id: 'session_controle'),
-        build(:evenement_piece_mal_placee, session_id: 'session_controle'),
-        build(:evenement_piece_mal_placee, session_id: 'session_controle')
+        create(:evenement_piece_bien_placee, partie: partie),
+        create(:evenement_piece_mal_placee, partie: partie),
+        create(:evenement_piece_mal_placee, partie: partie)
       ]
     end
 
@@ -31,8 +29,8 @@ describe 'Admin - Restitution', type: :feature do
 
   describe 'rapport de la situation inventaire' do
     let(:situation) { create :situation_inventaire }
-    let(:evenements) do
-      [build(:evenement_saisie_inventaire, :echec, session_id: 'session_inventaire')]
+    let!(:evenements) do
+      [create(:evenement_saisie_inventaire, :echec, partie: partie)]
     end
     before { visit admin_restitution_path(partie) }
     it { expect(page).to have_content('Échec') }
@@ -40,8 +38,8 @@ describe 'Admin - Restitution', type: :feature do
 
   describe "suppression d'une partie" do
     let(:situation) { create :situation_inventaire }
-    let(:evenements) do
-      [build(:evenement_saisie_inventaire, :echec)]
+    let!(:evenements) do
+      [create(:evenement_saisie_inventaire, :echec, partie: partie)]
     end
 
     before { visit admin_restitution_path(partie) }

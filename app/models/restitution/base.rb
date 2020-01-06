@@ -36,7 +36,7 @@ module Restitution
     end
 
     def partie
-      @partie ||= Partie.find_by(session_id: premier_evenement.session_id)
+      @partie ||= premier_evenement.partie
     end
 
     def compte_nom_evenements(nom)

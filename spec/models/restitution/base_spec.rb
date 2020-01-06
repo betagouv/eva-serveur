@@ -7,17 +7,14 @@ describe Restitution::Base do
   let(:restitution) { described_class.new(campagne, evenements) }
   let(:evaluation)  { create :evaluation }
   let(:situation)   { create :situation_inventaire }
-  let!(:partie) do
-    create :partie, evaluation: evaluation, situation: situation,
-                    evenements: evenements
-  end
+  let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
 
   context 'lorsque le dernier événement est stop' do
-    let(:evenements) do
+    let!(:evenements) do
       [
-        build(:evenement_piece_bien_placee),
-        build(:evenement_piece_mal_placee),
-        build(:evenement_abandon)
+        create(:evenement_piece_bien_placee, partie: partie),
+        create(:evenement_piece_mal_placee, partie: partie),
+        create(:evenement_abandon, partie: partie)
       ]
     end
 

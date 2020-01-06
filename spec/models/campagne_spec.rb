@@ -6,7 +6,6 @@ RSpec.describe Campagne, type: :model do
   it { should validate_presence_of :libelle }
   it { should validate_uniqueness_of :code }
   it { should belong_to(:questionnaire).optional }
-  it { should have_many(:evaluations).order(created_at: :desc) }
 
   describe 'validation du code' do
     context 'garde le code initial' do

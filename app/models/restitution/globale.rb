@@ -21,10 +21,12 @@ module Restitution
     end
 
     def efficience
-      restitutions.reject! { |restitution| restitution.class == RESTITUTION_SANS_EFFICIENCE }
-      return 0 if restitutions.blank?
+      restitutions_selectionnee = restitutions.reject do |restitution|
+        restitution.is_a? RESTITUTION_SANS_EFFICIENCE
+      end
+      return 0 if restitutions_selectionnee.blank?
 
-      efficiences = restitutions.collect(&:efficience).compact
+      efficiences = restitutions_selectionnee.collect(&:efficience).compact
       return NIVEAU_INDETERMINE if efficiences.include?(NIVEAU_INDETERMINE) || efficiences.blank?
 
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size

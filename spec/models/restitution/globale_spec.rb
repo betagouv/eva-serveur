@@ -51,6 +51,20 @@ describe Restitution::Globale do
       }
     end
 
+    context 'ignore les restitutions sans efficience' do
+      let(:questions) { Restitution::Questions.new(nil, nil) }
+      let(:restitutions) { [questions, double(efficience: 20)] }
+      it do
+        expect(questions).to_not receive(:efficience)
+        expect(restitution_globale.efficience).to eq(20)
+      end
+      it 'ne modifie pas le tableau de restitutions' do
+        expect(restitution_globale.restitutions.size).to eql(2)
+        restitution_globale.efficience
+        expect(restitution_globale.restitutions.size).to eql(2)
+      end
+    end
+
     context 'ignore les efficiences a nil' do
       let(:restitutions) do
         [double(efficience: 20), double(efficience: nil)]

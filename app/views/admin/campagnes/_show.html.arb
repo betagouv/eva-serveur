@@ -22,7 +22,9 @@ panel 'Consulter' do
   ul do
     li link_to "les #{resource.nombre_evaluations} évaluations",
                admin_campagne_evaluations_path(resource)
-    li link_to 'les stats', admin_campagne_stats_path(resource)
-    li link_to 'les événements', admin_campagne_evenements_path(resource)
+    if can?(:manage, resource)
+      li link_to 'les stats', admin_campagne_stats_path(resource)
+      li link_to 'les événements', admin_campagne_evenements_path(resource)
+    end
   end
 end

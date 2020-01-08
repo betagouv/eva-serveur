@@ -108,12 +108,22 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'show' do
-    let(:situation) { create :situation_inventaire }
-    before do
-      Compte.first.update(role: 'administrateur')
-      campagne.situations_configurations.create! situation: situation
-      visit admin_campagne_path campagne
+    context 'en admin' do
+      let(:situation) { create :situation_inventaire }
+      before do
+        Compte.first.update(role: 'administrateur')
+        campagne.situations_configurations.create! situation: situation
+        visit admin_campagne_path campagne
+      end
+      it { expect(page).to have_content 'Inventaire' }
     end
-    it { expect(page).to have_content 'Inventaire' }
+
+    context 'en organisation' do
+      before { visit admin_campagne_path(ma_campagne) }
+      it do
+        expect(page).to_not have_content 'les stats'
+        expect(page).to_not have_content 'les événements'
+      end
+    end
   end
 end

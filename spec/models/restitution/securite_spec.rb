@@ -108,10 +108,10 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#nombre_dangers_identifies' do
+  describe '#nombre_dangers_bien_identifies' do
     context 'sans évenement' do
       let(:evenements) { [] }
-      it { expect(restitution.nombre_dangers_identifies).to eq 0 }
+      it { expect(restitution.nombre_dangers_bien_identifies).to eq 0 }
     end
 
     context 'avec bonne identification' do
@@ -119,7 +119,7 @@ describe Restitution::Securite do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'oui', danger: 'danger' })]
       end
-      it { expect(restitution.nombre_dangers_identifies).to eq 1 }
+      it { expect(restitution.nombre_dangers_bien_identifies).to eq 1 }
     end
 
     context 'ignore les réponses négatives' do
@@ -127,7 +127,7 @@ describe Restitution::Securite do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'non' })]
       end
-      it { expect(restitution.nombre_dangers_identifies).to eq 0 }
+      it { expect(restitution.nombre_dangers_bien_identifies).to eq 0 }
     end
 
     context 'ignore les identifications de zone sans danger' do
@@ -135,7 +135,7 @@ describe Restitution::Securite do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'oui' })]
       end
-      it { expect(restitution.nombre_dangers_identifies).to eq 0 }
+      it { expect(restitution.nombre_dangers_bien_identifies).to eq 0 }
     end
   end
 
@@ -157,10 +157,10 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#nombre_dangers_identifies_avant_aide_1' do
+  describe '#nombre_dangers_bien_identifies_avant_aide_1' do
     context 'sans évenement' do
       let(:evenements) { [] }
-      it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 0 }
+      it { expect(restitution.nombre_dangers_bien_identifies_avant_aide_1).to eq 0 }
     end
 
     context "avec des dangers identifiés en ayant activé l'aide" do
@@ -177,7 +177,7 @@ describe Restitution::Securite do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
-      it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 2 }
+      it { expect(restitution.nombre_dangers_bien_identifies_avant_aide_1).to eq 2 }
     end
 
     context "avec des dangers identifiés aprés avoir activé l'aide" do
@@ -188,7 +188,7 @@ describe Restitution::Securite do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
-      it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 0 }
+      it { expect(restitution.nombre_dangers_bien_identifies_avant_aide_1).to eq 0 }
     end
 
     context "avec un danger identifié sans avoir activé l'aide" do
@@ -198,7 +198,7 @@ describe Restitution::Securite do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
-      it { expect(restitution.nombre_dangers_identifies_avant_aide_1).to eq 1 }
+      it { expect(restitution.nombre_dangers_bien_identifies_avant_aide_1).to eq 1 }
     end
   end
 
@@ -356,9 +356,9 @@ describe Restitution::Securite do
       it do
         expect(restitution).to receive(:nombre_reouverture_zone_sans_danger).and_return 1
         expect(restitution).to receive(:nombre_bien_qualifies).and_return 2
-        expect(restitution).to receive(:nombre_dangers_identifies).and_return 3
+        expect(restitution).to receive(:nombre_dangers_bien_identifies).and_return 3
         expect(restitution).to receive(:nombre_retours_deja_qualifies).and_return 4
-        expect(restitution).to receive(:nombre_dangers_identifies_avant_aide_1).and_return 5
+        expect(restitution).to receive(:nombre_dangers_bien_identifies_avant_aide_1).and_return 5
         expect(restitution).to receive(:attention_visuo_spatiale).and_return Competence::APTE
         expect(restitution).to receive(:temps_ouvertures_zones_dangers).and_return [1, 2]
         expect(restitution).to receive(:temps_moyen_ouvertures_zones_dangers).and_return 7
@@ -370,9 +370,9 @@ describe Restitution::Securite do
         partie.reload
         expect(partie.metriques['nombre_reouverture_zone_sans_danger']).to eq 1
         expect(partie.metriques['nombre_bien_qualifies']).to eq 2
-        expect(partie.metriques['nombre_dangers_identifies']).to eq 3
+        expect(partie.metriques['nombre_dangers_bien_identifies']).to eq 3
         expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4
-        expect(partie.metriques['nombre_dangers_identifies_avant_aide_1']).to eql 5
+        expect(partie.metriques['nombre_dangers_bien_identifies_avant_aide_1']).to eql 5
         expect(partie.metriques['attention_visuo_spatiale']).to eql 'apte'
         expect(partie.metriques['temps_ouvertures_zones_dangers']).to eql [1, 2]
         expect(partie.metriques['temps_moyen_ouvertures_zones_dangers']).to eql 7

@@ -20,8 +20,8 @@ module Restitution
     def persiste
       metriques = %i[
         nombre_reouverture_zone_sans_danger nombre_bien_qualifies
-        nombre_dangers_identifies nombre_retours_deja_qualifies
-        nombre_dangers_identifies_avant_aide_1 attention_visuo_spatiale
+        nombre_dangers_bien_identifies nombre_retours_deja_qualifies
+        nombre_dangers_bien_identifies_avant_aide_1 attention_visuo_spatiale
         temps_ouvertures_zones_dangers temps_moyen_ouvertures_zones_dangers
         temps_entrainement temps_total nombre_rejoue_consigne nombre_danger_mal_identifies
       ].each_with_object({}) do |methode, memo|
@@ -36,8 +36,8 @@ module Restitution
       end.count(&:bonne_reponse?)
     end
 
-    def nombre_dangers_identifies
-      dangers_identifies.count
+    def nombre_dangers_bien_identifies
+      dangers_bien_identifies.count
     end
 
     def nombre_danger_mal_identifies
@@ -50,17 +50,17 @@ module Restitution
       end
     end
 
-    def nombre_dangers_identifies_avant_aide_1
-      return nombre_dangers_identifies if activation_aide1.blank?
+    def nombre_dangers_bien_identifies_avant_aide_1
+      return nombre_dangers_bien_identifies if activation_aide1.blank?
 
-      dangers_identifies_tries = dangers_identifies.partition do |danger|
+      dangers_bien_identifies_tries = dangers_bien_identifies.partition do |danger|
         danger.date < activation_aide1.date
       end
-      dangers_identifies_tries.first.length
+      dangers_bien_identifies_tries.first.length
     end
 
     def attention_visuo_spatiale
-      identification = dangers_identifies.find(&:danger_visuo_spatial?)
+      identification = dangers_bien_identifies.find(&:danger_visuo_spatial?)
       return ::Competence::NIVEAU_INDETERMINE if identification.blank?
 
       if activation_aide1.present? && activation_aide1.date < identification.date
@@ -100,12 +100,12 @@ module Restitution
       evenements_situation.select(&:qualification_danger?).group_by { |e| e.donnees['danger'] }
     end
 
-    def dangers_identifies
-      @dangers_identifies || evenements_situation.select(&:est_un_danger_bien_identifie?)
+    def dangers_bien_identifies
+      @dangers_bien_identifies ||= evenements_situation.select(&:est_un_danger_bien_identifie?)
     end
 
     def dangers_mal_identifies
-      evenements_situation.select(&:est_un_danger_mal_identifie?)
+      @dangers_mal_identifies ||= evenements_situation.select(&:est_un_danger_mal_identifie?)
     end
 
     def activation_aide1

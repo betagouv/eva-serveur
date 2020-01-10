@@ -79,13 +79,11 @@ module Restitution
     end
 
     def temps_ouvertures_zones_dangers
-      les_temps = []
-      evenements_demarrage_ouvertures_et_qualifications.each_slice(2) do |e1, e2|
-        next if e2.blank?
+      temps_couples { |e| e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger? }
+    end
 
-        les_temps << e2.date - e1.date
-      end
-      les_temps
+    def temps_bonnes_qualifications_dangers
+      temps_couples { |e| e.ouverture_zone_danger? || e.bonne_qualification_danger? }
     end
 
     def temps_moyen_ouvertures_zones_dangers
@@ -115,15 +113,30 @@ module Restitution
       )
     end
 
-    def evenements_demarrage_ouvertures_et_qualifications
+    def temps_entre_couples(evenements)
+      les_temps = []
+      evenements.each_slice(2) do |e1, e2|
+        next if e2.blank?
+
+        les_temps << e2.date - e1.date
+      end
+      les_temps
+    end
+
+    def evenements_discontinus
       dernier_evenement_retenu = nil
       evenements_situation.select do |e|
         next if dernier_evenement_retenu&.nom == e.nom
 
-        selectionne = e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?
+        selectionne = yield e
         dernier_evenement_retenu = e if selectionne
         selectionne
       end
+    end
+
+    def temps_couples(&block)
+      evenements = evenements_discontinus &block
+      temps_entre_couples evenements
     end
   end
 end

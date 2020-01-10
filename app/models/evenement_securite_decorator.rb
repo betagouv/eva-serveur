@@ -47,6 +47,10 @@ class EvenementSecuriteDecorator < SimpleDelegator
     donnees['danger'] == DANGER_VISUO_SPATIAL
   end
 
+  def bonne_qualification_danger?
+    qualification_danger? && bonne_reponse?
+  end
+
   private
 
   def est_un_danger_identifie?(bonne_reponse:)

@@ -13,14 +13,14 @@ panel t('.restitution_securite') do
     row t('.temps_entrainement') do |(_, r)|
       Time.at(r.temps_entrainement).strftime('%M:%S') if r.temps_entrainement.present?
     end
-    row t('.dangers_identifies') do |(_, r)|
-      r.nombre_dangers_identifies
+    row t('.dangers_bien_identifies') do |(_, r)|
+      r.nombre_dangers_bien_identifies
     end
     row t('.dangers_mal_identifies') do |(_, r)|
       r.nombre_danger_mal_identifies
     end
-    row t('.dangers_identifies_avant_aide_1') do |(_, r)|
-      r.nombre_dangers_identifies_avant_aide_1
+    row t('.dangers_bien_identifies_avant_aide_1') do |(_, r)|
+      r.nombre_dangers_bien_identifies_avant_aide_1
     end
     row t('.dangers_bien_qualifies') do |(_, r)|
       r.nombre_bien_qualifies

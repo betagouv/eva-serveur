@@ -51,6 +51,29 @@ describe Restitution::Securite do
     end
   end
 
+  describe '#nombre_danger_mal_identifies' do
+    context 'sans évenement' do
+      let(:evenements) { [] }
+      it { expect(restitution.nombre_danger_mal_identifies).to eq 0 }
+    end
+
+    context 'avec une bonne identification' do
+      let(:evenements) do
+        [build(:evenement_demarrage),
+         build(:evenement_identification_danger, donnees: { reponse: 'oui', danger: 'danger' })]
+      end
+      it { expect(restitution.nombre_danger_mal_identifies).to eq 0 }
+    end
+
+    context 'avec une mauvaise identification' do
+      let(:evenements) do
+        [build(:evenement_demarrage),
+         build(:evenement_identification_danger, donnees: { reponse: 'non', danger: 'danger' })]
+      end
+      it { expect(restitution.nombre_danger_mal_identifies).to eq 1 }
+    end
+  end
+
   describe '#nombre_bien_qualifies' do
     context 'sans évenement' do
       let(:evenements) { [] }
@@ -342,6 +365,7 @@ describe Restitution::Securite do
         expect(restitution).to receive(:temps_entrainement).and_return 8
         expect(restitution).to receive(:temps_total).and_return 9
         expect(restitution).to receive(:nombre_rejoue_consigne).and_return 10
+        expect(restitution).to receive(:nombre_danger_mal_identifies).and_return 1
         restitution.persiste
         partie.reload
         expect(partie.metriques['nombre_reouverture_zone_sans_danger']).to eq 1
@@ -355,6 +379,7 @@ describe Restitution::Securite do
         expect(partie.metriques['temps_entrainement']).to eql 8
         expect(partie.metriques['temps_total']).to eql 9
         expect(partie.metriques['nombre_rejoue_consigne']).to eql 10
+        expect(partie.metriques['nombre_danger_mal_identifies']).to eql 1
       end
     end
   end

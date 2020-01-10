@@ -19,10 +19,12 @@ class EvenementSecuriteDecorator < SimpleDelegator
     donnees['reponse'] == BONNE_QUALIFICATION
   end
 
-  def est_un_danger_identifie?
-    nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
-      donnees['reponse'] == IDENTIFICATION_POSITIVE &&
-      donnees['danger'].present?
+  def est_un_danger_bien_identifie?
+    est_un_danger_identifie?(bonne_reponse: true)
+  end
+
+  def est_un_danger_mal_identifie?
+    est_un_danger_identifie?(bonne_reponse: false)
   end
 
   def ouverture_zone_sans_danger?
@@ -43,5 +45,14 @@ class EvenementSecuriteDecorator < SimpleDelegator
 
   def danger_visuo_spatial?
     donnees['danger'] == DANGER_VISUO_SPATIAL
+  end
+
+  private
+
+  def est_un_danger_identifie?(bonne_reponse:)
+    comparateur = bonne_reponse ? :== : :!=
+    nom == EVENEMENT[:IDENTIFICATION_DANGER] &&
+      donnees['reponse'].send(comparateur, IDENTIFICATION_POSITIVE) &&
+      donnees['danger'].present?
   end
 end

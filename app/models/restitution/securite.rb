@@ -23,7 +23,7 @@ module Restitution
         nombre_dangers_identifies nombre_retours_deja_qualifies
         nombre_dangers_identifies_avant_aide_1 attention_visuo_spatiale
         temps_ouvertures_zones_dangers temps_moyen_ouvertures_zones_dangers
-        temps_entrainement temps_total nombre_rejoue_consigne
+        temps_entrainement temps_total nombre_rejoue_consigne nombre_danger_mal_identifies
       ].each_with_object({}) do |methode, memo|
         memo[methode] = public_send(methode)
       end
@@ -38,6 +38,10 @@ module Restitution
 
     def nombre_dangers_identifies
       dangers_identifies.count
+    end
+
+    def nombre_danger_mal_identifies
+      dangers_mal_identifies.count
     end
 
     def nombre_retours_deja_qualifies
@@ -97,7 +101,11 @@ module Restitution
     end
 
     def dangers_identifies
-      @dangers_identifies || evenements_situation.select(&:est_un_danger_identifie?)
+      @dangers_identifies || evenements_situation.select(&:est_un_danger_bien_identifie?)
+    end
+
+    def dangers_mal_identifies
+      evenements_situation.select(&:est_un_danger_mal_identifie?)
     end
 
     def activation_aide1

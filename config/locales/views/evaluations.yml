@@ -113,6 +113,7 @@ fr:
         dangers_bien_identifies: Dangers bien identifiés
         retours_dangers_deja_qualifies: Retours sur les situations déjà qualifiées
         retours_zones_sans_danger: Retours sur les zones sans danger
+        temps_bonnes_qualifications_dangers: Temps entre chaque bonne qualification de danger
         dangers_mal_identifies: Dangers mal identifiés
         dangers_bien_identifies_avant_aide_1: Dangers bien identifiés avant activation de l'aide N°1
         temps_ouvertures_zones_dangers: Temps d'ouvertures de zones de danger

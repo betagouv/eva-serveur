@@ -112,19 +112,8 @@ module Restitution
       les_temps
     end
 
-    def evenements_discontinus
-      dernier_evenement_retenu = nil
-      evenements_situation.select do |e|
-        next if dernier_evenement_retenu&.nom == e.nom
-
-        next unless yield(e)
-
-        dernier_evenement_retenu = e
-      end
-    end
-
-    def temps_entre_evenements(&block)
-      evenements = evenements_discontinus(&block)
+    def temps_entre_evenements
+      evenements = evenements_situation.select { |e| yield e }
       temps_entre_couples evenements
     end
   end

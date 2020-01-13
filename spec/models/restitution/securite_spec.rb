@@ -252,19 +252,6 @@ describe Restitution::Securite do
       end
       it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60] }
     end
-
-    context 'ignore les requalifications' do
-      let(:evenements) do
-        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 3)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 5))]
-      end
-      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60, 180] }
-    end
   end
 
   describe '#temps_bonnes_qualifications_dangers' do
@@ -310,23 +297,6 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone, date: Time.local(2019, 10, 9, 10, 1))]
       end
       it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [] }
-    end
-
-    context 'ignore les requalifications' do
-      let(:evenements) do
-        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 1)),
-         build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 2)),
-         build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 3)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4)),
-         build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 7))]
-      end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [60, 180] }
     end
 
     context 'ignore les zones non dangers ouverts' do

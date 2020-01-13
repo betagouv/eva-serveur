@@ -11,7 +11,7 @@ panel t('.restitution_securite') do
       strong titre
     end
     row t('.temps_entrainement') do |(_, r)|
-      Time.at(r.temps_entrainement).strftime('%M:%S') if r.temps_entrainement.present?
+      formate_duree r.temps_entrainement
     end
     row t('.dangers_bien_identifies') do |(_, r)|
       r.nombre_dangers_bien_identifies
@@ -29,13 +29,10 @@ panel t('.restitution_securite') do
       r.nombre_retours_deja_qualifies
     end
     row t('.temps_ouvertures_zones_dangers') do |_, r|
-      r.temps_ouvertures_zones_dangers&.collect do |temps|
-        Time.at(temps).strftime('%M:%S')
-      end&.join(', ')
+      formate_durees r.temps_ouvertures_zones_dangers
     end
     row t('.temps_moyen_ouvertures_zones_dangers') do |_, r|
-      temps = r.temps_moyen_ouvertures_zones_dangers
-      Time.at(temps).strftime('%M:%S') if temps.present?
+      formate_duree r.temps_moyen_ouvertures_zones_dangers
     end
     row t('.attention_visuo_spatiale') do |_, r|
       if r.attention_visuo_spatiale.present?
@@ -46,7 +43,7 @@ panel t('.restitution_securite') do
       r.nombre_reouverture_zone_sans_danger
     end
     row t('.temps_bonnes_qualifications_dangers') do |(_, r)|
-      r.temps_bonnes_qualifications_dangers
+      formate_durees r.temps_bonnes_qualifications_dangers
     end
   end
 end

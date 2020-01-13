@@ -12,7 +12,13 @@ module ApplicationHelper
   end
 
   def formate_duree(duree)
+    return if duree.blank?
+
     Time.at(duree).utc.strftime(duree < 1.hour ? '%M:%S' : '%H:%M:%S')
+  end
+
+  def formate_durees(durees)
+    durees&.collect { |duree| formate_duree(duree) }
   end
 
   def rapport_colonne_class

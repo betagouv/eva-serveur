@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './metriques'
+
 module Restitution
   class Securite < AvecEntrainement
     DANGERS_TOTAL = 5
@@ -18,13 +20,7 @@ module Restitution
     end
 
     def persiste
-      metriques = %i[
-        nombre_reouverture_zone_sans_danger nombre_bien_qualifies
-        nombre_dangers_bien_identifies nombre_retours_deja_qualifies
-        nombre_dangers_bien_identifies_avant_aide_1 attention_visuo_spatiale
-        temps_ouvertures_zones_dangers temps_moyen_ouvertures_zones_dangers
-        temps_entrainement temps_total nombre_rejoue_consigne nombre_danger_mal_identifies
-      ].each_with_object({}) do |methode, memo|
+      metriques = Metriques::SECURITE.each_with_object({}) do |methode, memo|
         memo[methode] = public_send(methode)
       end
       partie.update(metriques: metriques)
@@ -53,10 +49,9 @@ module Restitution
     def nombre_dangers_bien_identifies_avant_aide_1
       return nombre_dangers_bien_identifies if activation_aide1.blank?
 
-      dangers_bien_identifies_tries = dangers_bien_identifies.partition do |danger|
+      dangers_bien_identifies.partition do |danger|
         danger.date < activation_aide1.date
-      end
-      dangers_bien_identifies_tries.first.length
+      end.first.length
     end
 
     def attention_visuo_spatiale
@@ -107,10 +102,8 @@ module Restitution
     end
 
     def activation_aide1
-      @activation_aide1 ||= premier_evenement_du_nom(
-        evenements_situation,
-        EVENEMENT[:ACTIVATION_AIDE_1]
-      )
+      @activation_aide1 ||= premier_evenement_du_nom(evenements_situation,
+                                                     EVENEMENT[:ACTIVATION_AIDE_1])
     end
 
     def temps_entre_couples(evenements)
@@ -135,7 +128,7 @@ module Restitution
     end
 
     def temps_couples(&block)
-      evenements = evenements_discontinus &block
+      evenements = evenements_discontinus(&block)
       temps_entre_couples evenements
     end
   end

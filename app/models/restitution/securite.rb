@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative './metriques'
-
 module Restitution
   class Securite < AvecEntrainement
     DANGERS_TOTAL = 5
@@ -37,7 +35,7 @@ module Restitution
     end
 
     def nombre_danger_mal_identifies
-      dangers_mal_identifies.count
+      evenements_situation.select(&:est_un_danger_mal_identifie?).count
     end
 
     def nombre_retours_deja_qualifies
@@ -74,11 +72,13 @@ module Restitution
     end
 
     def temps_ouvertures_zones_dangers
-      temps_couples { |e| e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger? }
+      temps_entre_evenements do |e|
+        e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?
+      end
     end
 
     def temps_bonnes_qualifications_dangers
-      temps_couples { |e| e.ouverture_zone_danger? || e.bonne_qualification_danger? }
+      temps_entre_evenements { |e| e.ouverture_zone_danger? || e.bonne_qualification_danger? }
     end
 
     def temps_moyen_ouvertures_zones_dangers
@@ -95,10 +95,6 @@ module Restitution
 
     def dangers_bien_identifies
       @dangers_bien_identifies ||= evenements_situation.select(&:est_un_danger_bien_identifie?)
-    end
-
-    def dangers_mal_identifies
-      @dangers_mal_identifies ||= evenements_situation.select(&:est_un_danger_mal_identifie?)
     end
 
     def activation_aide1
@@ -121,13 +117,13 @@ module Restitution
       evenements_situation.select do |e|
         next if dernier_evenement_retenu&.nom == e.nom
 
-        selectionne = yield e
-        dernier_evenement_retenu = e if selectionne
-        selectionne
+        next unless yield(e)
+
+        dernier_evenement_retenu = e
       end
     end
 
-    def temps_couples(&block)
+    def temps_entre_evenements(&block)
       evenements = evenements_discontinus(&block)
       temps_entre_couples evenements
     end

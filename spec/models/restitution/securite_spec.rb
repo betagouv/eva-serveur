@@ -202,10 +202,10 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#temps_recherche_zones_dangers et #temps_moyen_ouvertures_zones_dangers' do
+  describe '#temps_ouvertures_zones_dangers et #temps_moyen_ouvertures_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [] }
+      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [] }
       it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq nil }
     end
 
@@ -215,7 +215,7 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [60] }
+      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60] }
       it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq 60 }
     end
 
@@ -228,7 +228,7 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [60, 120] }
+      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60, 120] }
       it { expect(restitution.temps_moyen_ouvertures_zones_dangers).to eq 90 }
     end
 
@@ -240,7 +240,7 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 3))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [180] }
+      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [180] }
     end
 
     context 'quand on ne finit pas par une identification' do
@@ -250,7 +250,7 @@ describe Restitution::Securite do
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
          build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [60] }
+      it { expect(restitution.temps_ouvertures_zones_dangers).to eq [60] }
     end
   end
 
@@ -406,7 +406,7 @@ describe Restitution::Securite do
         expect(restitution).to receive(:nombre_retours_deja_qualifies).and_return 4
         expect(restitution).to receive(:nombre_dangers_bien_identifies_avant_aide_1).and_return 5
         expect(restitution).to receive(:attention_visuo_spatiale).and_return Competence::APTE
-        expect(restitution).to receive(:temps_recherche_zones_dangers).and_return [1, 2]
+        expect(restitution).to receive(:temps_ouvertures_zones_dangers).and_return [1, 2]
         expect(restitution).to receive(:temps_moyen_ouvertures_zones_dangers).and_return 7
         expect(restitution).to receive(:temps_entrainement).and_return 8
         expect(restitution).to receive(:temps_total).and_return 9
@@ -420,7 +420,7 @@ describe Restitution::Securite do
         expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4
         expect(partie.metriques['nombre_dangers_bien_identifies_avant_aide_1']).to eql 5
         expect(partie.metriques['attention_visuo_spatiale']).to eql 'apte'
-        expect(partie.metriques['temps_recherche_zones_dangers']).to eql [1, 2]
+        expect(partie.metriques['temps_ouvertures_zones_dangers']).to eql [1, 2]
         expect(partie.metriques['temps_moyen_ouvertures_zones_dangers']).to eql 7
         expect(partie.metriques['temps_entrainement']).to eql 8
         expect(partie.metriques['temps_total']).to eql 9

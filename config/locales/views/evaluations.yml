@@ -116,6 +116,6 @@ fr:
         temps_bonnes_qualifications_dangers: Temps dernière ouverture pour les bonnes qualifications
         dangers_mal_identifies: Dangers mal identifiés
         dangers_bien_identifies_avant_aide_1: Dangers bien identifiés avant activation de l'aide N°1
-        temps_ouvertures_zones_dangers: Temps d'ouvertures de zones de danger
+        temps_ouvertures_zones_dangers: Délai avant ouverture de zone de danger
         temps_moyen_ouvertures_zones_dangers: Temps moyen d'ouverture de zone de danger
         attention_visuo_spatiale: Attention visuo-spatiale

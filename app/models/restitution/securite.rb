@@ -71,7 +71,7 @@ module Restitution
                           end
     end
 
-    def temps_ouvertures_zones_dangers
+    def temps_recherche_zones_dangers
       temps_entre_evenements do |e|
         e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?
       end
@@ -82,9 +82,9 @@ module Restitution
     end
 
     def temps_moyen_ouvertures_zones_dangers
-      return nil if temps_ouvertures_zones_dangers.empty?
+      return nil if temps_recherche_zones_dangers.empty?
 
-      temps_ouvertures_zones_dangers.sum / temps_ouvertures_zones_dangers.size
+      temps_recherche_zones_dangers.sum / temps_recherche_zones_dangers.size
     end
 
     private

@@ -77,6 +77,26 @@ module Restitution
       end
     end
 
+    ZONES_DANGER = %w[bouche-egout casque escabeau camion signalisation].freeze
+
+    def temps_recherche_zones_dangers
+      temps = []
+      ZONES_DANGER.each do |danger|
+        date_evenement_precedent = nil
+        temp = nil
+        evenements_situation.each do |e|
+          if e.demarrage? || e.qualification_danger?
+            date_evenement_precedent = e.date
+          elsif e.donnees['danger'] == danger && e.ouverture_zone_danger?
+            temp = (e.date - date_evenement_precedent)
+            break
+          end
+        end
+        temps << temp
+      end
+      temps
+    end
+
     def temps_bonnes_qualifications_dangers
       Metriques::REGLES_SECURITE['temps_bonnes_qualifications_dangers']
         .new(evenements_situation)

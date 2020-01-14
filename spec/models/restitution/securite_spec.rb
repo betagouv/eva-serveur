@@ -257,18 +257,19 @@ describe Restitution::Securite do
   describe '#temps_bonnes_qualifications_dangers' do
     context 'sans évenement' do
       let(:evenements) { [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0))] }
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, nil, nil, nil, nil] }
     end
 
     context 'avec une bonne qualification' do
       let(:evenements) do
         [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
          build(:evenement_ouverture_zone,
-               donnees: { danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 1)),
+               donnees: { danger: 'casque' }, date: Time.local(2019, 10, 9, 10, 1)),
          build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 2))]
+               donnees: { reponse: 'bonne', danger: 'casque' },
+               date: Time.local(2019, 10, 9, 10, 2))]
       end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [60] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, 60, nil, nil, nil] }
     end
 
     context 'ignore les mauvaises qualifications' do
@@ -279,7 +280,7 @@ describe Restitution::Securite do
          build(:evenement_qualification_danger,
                donnees: { reponse: 'mauvais', danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 2))]
       end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, nil, nil, nil, nil] }
     end
 
     context 'ouverture sans qualification' do
@@ -288,7 +289,7 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, nil, nil, nil, nil] }
     end
 
     context 'ignore les événements hors ouverture et qualification' do
@@ -296,7 +297,7 @@ describe Restitution::Securite do
         [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
          build(:evenement_ouverture_zone, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, nil, nil, nil, nil] }
     end
 
     context 'ignore les zones non dangers ouverts' do
@@ -305,11 +306,12 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: {}, date: Time.local(2019, 10, 9, 10, 1)),
          build(:evenement_ouverture_zone,
-               donnees: { danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 2)),
+               donnees: { danger: 'casque' }, date: Time.local(2019, 10, 9, 10, 2)),
          build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'd1' }, date: Time.local(2019, 10, 9, 10, 3))]
+               donnees: { reponse: 'bonne', danger: 'casque' },
+               date: Time.local(2019, 10, 9, 10, 3))]
       end
-      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [60] }
+      it { expect(restitution.temps_bonnes_qualifications_dangers).to eq [nil, 60, nil, nil, nil] }
     end
   end
 

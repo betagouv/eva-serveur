@@ -8,8 +8,6 @@ module Restitution
       ACTIVATION_AIDE_1: 'activationAide'
     }.freeze
 
-    ZONES_DANGER = %w[bouche-egout casque escabeau camion signalisation].freeze
-
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementSecuriteDecorator.new e }
       super(campagne, evenements)
@@ -80,14 +78,9 @@ module Restitution
     end
 
     def temps_bonnes_qualifications_dangers
-      resultat = []
-      ZONES_DANGER.each do |danger|
-        resultat << temps_entre_evenements do |e|
-          filtre_evenement = e.ouverture_zone_danger? || e.bonne_qualification_danger?
-          e.donnees['danger'] == danger && filtre_evenement
-        end.last
-      end
-      resultat
+      Metriques::REGLES_SECURITE['temps_bonnes_qualifications_dangers']
+        .new
+        .calcule(evenements_situation)
     end
 
     def temps_moyen_ouvertures_zones_dangers
@@ -111,19 +104,9 @@ module Restitution
                                                      EVENEMENT[:ACTIVATION_AIDE_1])
     end
 
-    def temps_entre_couples(evenements)
-      les_temps = []
-      evenements.each_slice(2) do |e1, e2|
-        next if e2.blank?
-
-        les_temps << e2.date - e1.date
-      end
-      les_temps
-    end
-
     def temps_entre_evenements
       evenements = evenements_situation.select { |e| yield e }
-      temps_entre_couples evenements
+      Metriques.temps_entre_couples evenements
     end
   end
 end

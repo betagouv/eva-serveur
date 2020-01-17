@@ -9,7 +9,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
   describe '#temps_recherche_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [nil, nil, nil, nil, nil] }
+      it { expect(restitution.temps_recherche_zones_dangers).to eq({}) }
     end
 
     context 'une zone danger ouverte' do
@@ -18,7 +18,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'casque' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [nil, 60, nil, nil, nil] }
+      it { expect(restitution.temps_recherche_zones_dangers).to eq('casque' => 60) }
     end
 
     context 'deux zones danger ouverts' do
@@ -30,7 +30,14 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'camion' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [nil, 60, nil, 120, nil] }
+      it 'calcule les temps de recherhce' do
+        temps = restitution.temps_recherche_zones_dangers
+        expect(temps).to eq('casque' => 60, 'camion' => 120)
+      end
+      it 'retournes les zones par ordre alphabétique' do
+        temps = restitution.temps_recherche_zones_dangers
+        expect(temps.keys).to eq(%w[camion casque])
+      end
     end
 
     context 'quand on ne finit pas par une identification' do
@@ -41,7 +48,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2))]
       end
 
-      it { expect(restitution.temps_recherche_zones_dangers).to eq [nil, 60, nil, nil, nil] }
+      it { expect(restitution.temps_recherche_zones_dangers).to eq('casque' => 60) }
     end
   end
 end

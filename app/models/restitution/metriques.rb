@@ -2,15 +2,11 @@
 
 module Restitution
   class Metriques
-    def self.temps_entre_couples(evenements)
-      les_temps = []
-      evenements.each_slice(2) do |e1, e2|
-        next if e2.blank?
+    ZONES_DANGER_SECURITE = %w[bouche-egout casque escabeau camion signalisation].freeze
 
-        les_temps << e2.date - e1.date
-      end
-      les_temps
-    end
+    REGLES_SECURITE = {
+      'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers
+    }.freeze
 
     SECURITE = %i[
       nombre_reouverture_zone_sans_danger nombre_bien_qualifies
@@ -19,9 +15,5 @@ module Restitution
       temps_ouvertures_zones_dangers temps_moyen_ouvertures_zones_dangers
       temps_entrainement temps_total nombre_rejoue_consigne nombre_danger_mal_identifies
     ].freeze
-
-    REGLES_SECURITE = {
-      'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers
-    }.freeze
   end
 end

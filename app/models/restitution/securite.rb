@@ -106,7 +106,7 @@ module Restitution
 
     def temps_entre_evenements
       evenements = evenements_situation.select { |e| yield e }
-      Metriques.temps_entre_couples evenements
+      MetriquesHelper.temps_entre_couples evenements
     end
   end
 end

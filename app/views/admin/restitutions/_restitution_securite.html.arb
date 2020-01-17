@@ -49,5 +49,12 @@ panel t('.restitution_securite') do
         end
       end
     end
+    row t('.temps_recherche_zones_dangers') do |(_, r)|
+      ul do
+        r.temps_recherche_zones_dangers&.each do |danger, temps|
+          li "#{danger} : #{formate_duree(temps)}"
+        end
+      end
+    end
   end
 end

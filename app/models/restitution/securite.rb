@@ -79,8 +79,8 @@ module Restitution
 
     def temps_bonnes_qualifications_dangers
       Metriques::REGLES_SECURITE['temps_bonnes_qualifications_dangers']
-        .new
-        .calcule(evenements_situation)
+        .new(evenements_situation)
+        .calcule
     end
 
     def temps_moyen_ouvertures_zones_dangers
@@ -92,7 +92,7 @@ module Restitution
     private
 
     def qualifications_par_danger
-      evenements_situation.select(&:qualification_danger?).group_by { |e| e.donnees['danger'] }
+      SecuriteHelper.filtre_par_danger(evenements_situation, &:qualification_danger?)
     end
 
     def dangers_bien_identifies

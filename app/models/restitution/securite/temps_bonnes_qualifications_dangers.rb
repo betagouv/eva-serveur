@@ -3,18 +3,27 @@
 module Restitution
   class Securite
     class TempsBonnesQualificationsDangers
-      def calcule(evenements_situation)
-        evenements = evenements_situation.select do |e|
-          e.ouverture_zone_danger? || e.bonne_qualification_danger?
-        end
-        evenements_par_danger = evenements.group_by { |e| e.donnees['danger'] }
+      attr_reader :evenements_situation
 
-        temps_par_dangers = {}
+      def initialize(evenements_situation)
+        @evenements_situation = evenements_situation
+      end
+
+      def calcule
+        temps_par_danger = {}
         evenements_par_danger.each do |danger, les_evenements|
           temps = MetriquesHelper.temps_entre_couples les_evenements
-          temps_par_dangers[danger] = temps.last if temps.last.present?
+          temps_par_danger[danger] = temps.last if temps.last.present?
         end
-        temps_par_dangers
+        temps_par_danger
+      end
+
+      private
+
+      def evenements_par_danger
+        SecuriteHelper.filtre_par_danger(evenements_situation) do |e|
+          e.ouverture_zone_danger? || e.bonne_qualification_danger?
+        end
       end
     end
   end

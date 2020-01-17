@@ -5,16 +5,17 @@ module Restitution
     class TempsRechercheZonesDangers
       attr_reader :evenements_situation
 
-      ZONES_DANGER = %w[bouche-egout casque escabeau camion signalisation].freeze
+      ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
 
       def initialize(evenements_situation)
         @evenements_situation = evenements_situation
       end
 
       def calcule
-        durees = []
+        durees = {}
         ZONES_DANGER.each do |danger|
-          durees << duree_recherche(danger)
+          duree = duree_recherche(danger)
+          durees[danger] = duree if duree.present?
         end
         durees
       end

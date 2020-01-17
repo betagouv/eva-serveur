@@ -2,8 +2,6 @@
 
 module Restitution
   class Metriques
-    ZONES_DANGER_SECURITE = %w[bouche-egout casque escabeau camion signalisation].freeze
-
     REGLES_SECURITE = {
       'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers
     }.freeze

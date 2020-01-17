@@ -43,7 +43,11 @@ panel t('.restitution_securite') do
       r.nombre_reouverture_zone_sans_danger
     end
     row t('.temps_bonnes_qualifications_dangers') do |(_, r)|
-      formate_durees r.temps_bonnes_qualifications_dangers
+      ul do
+        r.temps_bonnes_qualifications_dangers&.each do |danger, temps|
+          li "#{danger} : #{formate_duree(temps)}"
+        end
+      end
     end
   end
 end

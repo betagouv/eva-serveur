@@ -47,6 +47,21 @@ describe 'Admin - Stats', type: :feature do
     )
   end
 
+  let(:restitutions_securite) do
+    double(
+      situation: Situation.new(nom_technique: 'securite'),
+      temps_total: 16,
+      nombre_dangers_bien_identifies: 17,
+      nombre_danger_mal_identifies: 18,
+      nombre_dangers_bien_identifies_avant_aide_1: 19,
+      nombre_bien_qualifies: 20,
+      nombre_retours_deja_qualifies: 21,
+      temps_moyen_ouvertures_zones_dangers: 22,
+      attention_visuo_spatiale: 'apte',
+      nombre_reouverture_zone_sans_danger: 23
+    )
+  end
+
   describe 'index' do
     before do
       restitution_globale = double(efficience: 1,
@@ -54,6 +69,7 @@ describe 'Admin - Stats', type: :feature do
                                      restitution_inventaire,
                                      restitution_controle,
                                      restitution_tri,
+                                     restitutions_securite,
                                      restitution_bureau
                                    ])
       expect(restitution_globale).to receive(:efficience).and_return(1)
@@ -65,7 +81,7 @@ describe 'Admin - Stats', type: :feature do
     it do
       expect(page).to have_content 'Roger'
       content = all(:css, 'tbody tr td').map(&:text)[2..]
-      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 bon])
+      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 19 20 21 22 apte 23 bon])
     end
   end
 end

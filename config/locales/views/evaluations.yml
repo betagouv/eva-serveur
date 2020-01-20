@@ -115,6 +115,7 @@ fr:
         retours_zones_sans_danger: Retours sur les zones sans danger
         temps_bonnes_qualifications_dangers: Temps dernière ouverture pour les bonnes qualifications
         temps_recherche_zones_dangers: Temps de recherche des zones de dangers
+        temps_total_ouverture_zones_dangers: Temps total d'ouverture des zones de dangers
         dangers_mal_identifies: Dangers mal identifiés
         dangers_bien_identifies_avant_aide_1: Dangers bien identifiés avant activation de l'aide N°1
         temps_ouvertures_zones_dangers: Délai avant ouverture de zone de danger

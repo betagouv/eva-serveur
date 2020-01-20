@@ -30,7 +30,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'camion' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
-      it 'calcule les temps de recherhce' do
+      it 'calcule les temps de recherche' do
         temps = restitution.temps_recherche_zones_dangers
         expect(temps).to eq('casque' => 60, 'camion' => 120)
       end

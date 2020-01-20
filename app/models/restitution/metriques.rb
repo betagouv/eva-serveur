@@ -4,7 +4,8 @@ module Restitution
   class Metriques
     REGLES_SECURITE = {
       'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers,
-      'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers
+      'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers,
+      'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers
     }.freeze
 
     SECURITE = %i[

@@ -89,6 +89,12 @@ module Restitution
         .calcule
     end
 
+    def temps_total_ouverture_zones_dangers
+      Metriques::REGLES_SECURITE['temps_total_ouverture_zones_dangers']
+        .new(evenements_situation)
+        .calcule
+    end
+
     def temps_moyen_ouvertures_zones_dangers
       return nil if temps_ouvertures_zones_dangers.empty?
 

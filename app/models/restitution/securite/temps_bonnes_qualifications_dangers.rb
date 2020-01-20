@@ -13,7 +13,7 @@ module Restitution
         temps_par_danger = {}
         evenements_par_danger.each do |danger, les_evenements|
           temps = MetriquesHelper.temps_entre_couples les_evenements
-          temps_par_danger[danger] = temps.last if temps.last.present?
+          temps_par_danger[danger] = temps.first if temps.first.present?
         end
         temps_par_danger
       end

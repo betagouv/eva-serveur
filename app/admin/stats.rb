@@ -24,6 +24,18 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     end
   end
 
+  column_stats_securite = proc do
+    instance_eval(&column_stats.call('securite', :temps_total))
+    instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies))
+    instance_eval(&column_stats.call('securite', :nombre_danger_mal_identifies))
+    instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies_avant_aide_1))
+    instance_eval(&column_stats.call('securite', :nombre_bien_qualifies))
+    instance_eval(&column_stats.call('securite', :nombre_retours_deja_qualifies))
+    instance_eval(&column_stats.call('securite', :temps_moyen_ouvertures_zones_dangers))
+    instance_eval(&column_stats.call('securite', :attention_visuo_spatiale))
+    instance_eval(&column_stats.call('securite', :nombre_reouverture_zone_sans_danger))
+  end
+
   columns_stats = proc do
     column :nom
     column :created_at
@@ -43,6 +55,7 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     instance_eval(&column_stats.call('tri', :nombre_bien_placees))
     instance_eval(&column_stats.call('tri', :nombre_mal_placees))
     instance_eval(&column_stats.call('questions', :temps_total))
+    instance_eval(&column_stats_securite)
     collection.first.campagne.questionnaire&.questions&.each do |question|
       next unless question.is_a?(QuestionQcm)
 

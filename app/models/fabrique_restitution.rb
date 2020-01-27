@@ -4,16 +4,9 @@ class FabriqueRestitution
   class << self
     def instancie(partie_id)
       partie = Partie.find partie_id
-      classe_restitution = {
-        'inventaire' => Restitution::Inventaire,
-        'controle' => Restitution::Controle,
-        'tri' => Restitution::Tri,
-        'questions' => Restitution::Questions,
-        'securite' => Restitution::Securite
-      }
-
       evenements = Evenement.where(partie: partie.session_id).order(:date)
-      classe_restitution[partie.situation.nom_technique].new(partie.campagne, evenements)
+      classe_restitution = "Restitution::#{partie.situation.nom_technique.camelize}".constantize
+      classe_restitution.new(partie.campagne, evenements)
     end
 
     def initialise_selection(evaluation, parties_selectionnees_ids)

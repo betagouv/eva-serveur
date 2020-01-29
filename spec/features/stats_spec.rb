@@ -56,7 +56,7 @@ describe 'Admin - Stats', type: :feature do
       nombre_dangers_bien_identifies_avant_aide_1: 19,
       nombre_bien_qualifies: 20,
       nombre_retours_deja_qualifies: 21,
-      temps_moyen_ouvertures_zones_dangers: 22,
+      delai_moyen_ouvertures_zones_dangers: 22,
       attention_visuo_spatiale: 'apte',
       nombre_reouverture_zone_sans_danger: 23
     )

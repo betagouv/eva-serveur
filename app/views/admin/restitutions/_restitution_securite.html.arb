@@ -28,11 +28,11 @@ panel t('.restitution_securite') do
     row t('.retours_dangers_deja_qualifies') do |(_, r)|
       r.nombre_retours_deja_qualifies
     end
-    row t('.temps_ouvertures_zones_dangers') do |_, r|
-      formate_durees r.temps_ouvertures_zones_dangers
+    row t('.delai_ouvertures_zones_dangers') do |_, r|
+      formate_durees r.delai_ouvertures_zones_dangers
     end
-    row t('.temps_moyen_ouvertures_zones_dangers') do |_, r|
-      formate_duree r.temps_moyen_ouvertures_zones_dangers
+    row t('.delai_moyen_ouvertures_zones_dangers') do |_, r|
+      formate_duree r.delai_moyen_ouvertures_zones_dangers
     end
     row t('.attention_visuo_spatiale') do |_, r|
       if r.attention_visuo_spatiale.present?

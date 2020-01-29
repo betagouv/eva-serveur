@@ -9,18 +9,14 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   filter :created_at
 
   column_stats = proc do |situation, metrique|
-    proc do
-      column "#{situation}_#{metrique}".to_sym do |evaluation|
-        restitution(evaluation, situation)&.send(metrique)
-      end
+    column "#{situation}_#{metrique}".to_sym do |evaluation|
+      restitution(evaluation, situation)&.send(metrique)
     end
   end
 
   column_question = proc do |question|
-    proc do
-      column "questions_#{question.libelle}".to_sym do |evaluation|
-        restitution(evaluation, 'questions')&.choix_repondu(question)&.type_choix
-      end
+    column "questions_#{question.libelle}".to_sym do |evaluation|
+      restitution(evaluation, 'questions')&.choix_repondu(question)&.type_choix
     end
   end
 
@@ -34,16 +30,16 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   end
 
   column_stats_securite = proc do
-    instance_eval(&column_stats.call('securite', :temps_entrainement))
-    instance_eval(&column_stats.call('securite', :temps_total))
-    instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies))
-    instance_eval(&column_stats.call('securite', :nombre_danger_mal_identifies))
-    instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies_avant_aide_1))
-    instance_eval(&column_stats.call('securite', :nombre_bien_qualifies))
-    instance_eval(&column_stats.call('securite', :nombre_retours_deja_qualifies))
-    instance_eval(&column_stats.call('securite', :delai_moyen_ouvertures_zones_dangers))
-    instance_eval(&column_stats.call('securite', :attention_visuo_spatiale))
-    instance_eval(&column_stats.call('securite', :nombre_reouverture_zone_sans_danger))
+    instance_exec('securite', :temps_entrainement, &column_stats)
+    instance_exec('securite', :temps_total, &column_stats)
+    instance_exec('securite', :nombre_dangers_bien_identifies, &column_stats)
+    instance_exec('securite', :nombre_danger_mal_identifies, &column_stats)
+    instance_exec('securite', :nombre_dangers_bien_identifies_avant_aide_1, &column_stats)
+    instance_exec('securite', :nombre_bien_qualifies, &column_stats)
+    instance_exec('securite', :nombre_retours_deja_qualifies, &column_stats)
+    instance_exec('securite', :delai_moyen_ouvertures_zones_dangers, &column_stats)
+    instance_exec('securite', :attention_visuo_spatiale, &column_stats)
+    instance_exec('securite', :nombre_reouverture_zone_sans_danger, &column_stats)
     instance_exec(:temps_bonnes_qualifications_dangers, &colonnes_stats_securite_par_danger)
     instance_exec(:temps_recherche_zones_dangers, &colonnes_stats_securite_par_danger)
     instance_exec(:temps_total_ouverture_zones_dangers, &colonnes_stats_securite_par_danger)
@@ -55,33 +51,33 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     column :efficience do |evaluation|
       restitution_globale(evaluation).efficience
     end
-    instance_eval(&column_stats.call('inventaire', :efficience))
-    instance_eval(&column_stats.call('inventaire', :temps_total))
-    instance_eval(&column_stats.call('inventaire', :nombre_ouverture_contenant))
-    instance_eval(&column_stats.call('inventaire', :nombre_essais_validation))
-    instance_eval(&column_stats.call('controle', :efficience))
-    instance_eval(&column_stats.call('controle', :nombre_bien_placees))
-    instance_eval(&column_stats.call('controle', :nombre_mal_placees))
-    instance_eval(&column_stats.call('controle', :nombre_non_triees))
-    instance_eval(&column_stats.call('tri', :efficience))
-    instance_eval(&column_stats.call('tri', :temps_total))
-    instance_eval(&column_stats.call('tri', :nombre_bien_placees))
-    instance_eval(&column_stats.call('tri', :nombre_mal_placees))
-    instance_eval(&column_stats.call('questions', :temps_total))
-    instance_eval(&column_stats_securite)
+    instance_exec('inventaire', :efficience, &column_stats)
+    instance_exec('inventaire', :temps_total, &column_stats)
+    instance_exec('inventaire', :nombre_ouverture_contenant, &column_stats)
+    instance_exec('inventaire', :nombre_essais_validation, &column_stats)
+    instance_exec('controle', :efficience, &column_stats)
+    instance_exec('controle', :nombre_bien_placees, &column_stats)
+    instance_exec('controle', :nombre_mal_placees, &column_stats)
+    instance_exec('controle', :nombre_non_triees, &column_stats)
+    instance_exec('tri', :efficience, &column_stats)
+    instance_exec('tri', :temps_total, &column_stats)
+    instance_exec('tri', :nombre_bien_placees, &column_stats)
+    instance_exec('tri', :nombre_mal_placees, &column_stats)
+    instance_exec('questions', :temps_total, &column_stats)
+    instance_exec(&column_stats_securite)
     collection.first.campagne.questionnaire&.questions&.each do |question|
       next unless question.is_a?(QuestionQcm)
 
-      instance_eval(&column_question.call(question))
+      instance_exec(question, &column_question)
     end
   end
 
   csv do
-    instance_eval(&columns_stats)
+    instance_exec(&columns_stats)
   end
 
   index do
-    instance_eval(&columns_stats)
+    instance_exec(&columns_stats)
   end
 
   controller do

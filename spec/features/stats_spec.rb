@@ -50,6 +50,7 @@ describe 'Admin - Stats', type: :feature do
   let(:restitutions_securite) do
     double(
       situation: Situation.new(nom_technique: 'securite'),
+      temps_entrainement: 'temps_entrainement',
       temps_total: 16,
       nombre_dangers_bien_identifies: 17,
       nombre_danger_mal_identifies: 18,
@@ -81,7 +82,8 @@ describe 'Admin - Stats', type: :feature do
     it do
       expect(page).to have_content 'Roger'
       content = all(:css, 'tbody tr td').map(&:text)[2..]
-      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 16 17 18 19 20 21 22 apte 23 bon])
+      expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 temps_entrainement
+                                16 17 18 19 20 21 22 apte 23 bon])
     end
   end
 end

@@ -20,7 +20,7 @@ describe Restitution::Securite do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          Array.new(Restitution::Securite::DANGERS_TOTAL) do |index|
+          Array.new(Restitution::Securite::ZONES_DANGER.count) do |index|
             build(:evenement_qualification_danger, donnees: { danger: "danger-#{index}" })
           end
         ].flatten
@@ -42,7 +42,7 @@ describe Restitution::Securite do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          Array.new(Restitution::Securite::DANGERS_TOTAL) do
+          Array.new(Restitution::Securite::ZONES_DANGER.count) do
             build(:evenement_qualification_danger, donnees: { danger: 'danger' })
           end
         ].flatten

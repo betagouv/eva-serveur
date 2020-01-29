@@ -8,13 +8,10 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   filter :nom
   filter :created_at
 
-  column_stats = proc do |situation, nom, cle|
+  column_stats = proc do |situation, metrique|
     proc do
-      nom_colomne = "#{situation}_#{nom}"
-      nom_colomne += "_#{cle}" if cle.present?
-      column nom_colomne.to_sym do |evaluation|
-        valeur = restitution(evaluation, situation)&.send(nom)
-        cle.present? ? valeur&.fetch(cle, nil) : valeur
+      column "#{situation}_#{metrique}".to_sym do |evaluation|
+        restitution(evaluation, situation)&.send(metrique)
       end
     end
   end
@@ -28,11 +25,12 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   end
 
   colonnes_stats_securite_par_danger = proc do |metrique|
-    instance_eval(&column_stats.call('securite', metrique, 'bouche-egout'))
-    instance_eval(&column_stats.call('securite', metrique, 'camion'))
-    instance_eval(&column_stats.call('securite', metrique, 'casque'))
-    instance_eval(&column_stats.call('securite', metrique, 'escabeau'))
-    instance_eval(&column_stats.call('securite', metrique, 'signalisation'))
+    situation = 'securite'
+    Restitution::Securite::ZONES_DANGER.each do |danger|
+      column "#{situation}_#{metrique}_#{danger}".to_sym do |evaluation|
+        restitution(evaluation, situation)&.send(metrique)&.fetch(danger, nil)
+      end
+    end
   end
 
   column_stats_securite = proc do

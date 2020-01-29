@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite < AvecEntrainement
-    DANGERS_TOTAL = 5
+    ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
 
     EVENEMENT = {
       ACTIVATION_AIDE_1: 'activationAide'
@@ -14,7 +14,7 @@ module Restitution
     end
 
     def termine?
-      super || qualifications_par_danger.count == DANGERS_TOTAL
+      super || qualifications_par_danger.count == ZONES_DANGER.count
     end
 
     def persiste

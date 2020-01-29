@@ -59,7 +59,16 @@ describe 'Admin - Stats', type: :feature do
       nombre_retours_deja_qualifies: 21,
       delai_moyen_ouvertures_zones_dangers: 22,
       attention_visuo_spatiale: 'apte',
-      nombre_reouverture_zone_sans_danger: 23
+      nombre_reouverture_zone_sans_danger: 23,
+      temps_bonnes_qualifications_dangers: { 'bouche-egout' => 'tbqd1', 'camion' => 'tbqd2',
+                                             'casque' => 'tbqd3', 'escabeau' => 'tbqd4',
+                                             'signalisation' => 'tbqd5' },
+      temps_recherche_zones_dangers: { 'bouche-egout' => 'trzd1', 'camion' => 'trzd2',
+                                       'casque' => 'trzd3', 'escabeau' => 'trzd4',
+                                       'signalisation' => 'trzd5' },
+      temps_total_ouverture_zones_dangers: { 'bouche-egout' => 'ttozd1', 'camion' => 'ttozd2',
+                                             'casque' => 'ttozd3', 'escabeau' => 'ttozd4',
+                                             'signalisation' => 'ttozd5' }
     )
   end
 
@@ -83,7 +92,11 @@ describe 'Admin - Stats', type: :feature do
       expect(page).to have_content 'Roger'
       content = all(:css, 'tbody tr td').map(&:text)[2..]
       expect(content).to eql(%w[1 2 3 4 5 6 7 8 9 10 11 12 13 15 temps_entrainement
-                                16 17 18 19 20 21 22 apte 23 bon])
+                                16 17 18 19 20 21 22 apte 23
+                                tbqd1 tbqd2 tbqd3 tbqd4 tbqd5
+                                trzd1 trzd2 trzd3 trzd4 trzd5
+                                ttozd1 ttozd2 ttozd3 ttozd4 ttozd5
+                                bon])
     end
   end
 end

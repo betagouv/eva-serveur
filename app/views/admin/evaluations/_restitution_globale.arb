@@ -92,7 +92,11 @@ div class: 'admin_restitution_globale' do
   restitution_globale.restitutions.each do |restitution|
     situation = restitution.situation
     panel t('.situation', situation: situation.libelle) do
-      render situation.nom_technique, restitution: restitution
+      begin
+        render situation.nom_technique, restitution: restitution
+      rescue ActionView::MissingTemplate
+        nil
+      end
       render 'restitution_competences', restitution: restitution
     end
   end

@@ -24,11 +24,15 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
   end
 
   show do
-    render chemin_vue,
-           restitution: resource,
-           moyenne_glissante: OpenStruct.new(resource.partie.moyenne_metriques),
-           ecart_type_glissant: OpenStruct.new(resource.partie.ecart_type_metriques),
-           cote_z: OpenStruct.new(resource.partie.cote_z_metriques)
+    begin
+      render chemin_vue,
+             restitution: resource,
+             moyenne_glissante: OpenStruct.new(resource.partie.moyenne_metriques),
+             ecart_type_glissant: OpenStruct.new(resource.partie.ecart_type_metriques),
+             cote_z: OpenStruct.new(resource.partie.cote_z_metriques)
+    rescue ActionView::MissingTemplate
+      nil
+    end
     render 'restitution_competences', restitution: resource
   end
 

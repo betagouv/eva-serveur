@@ -31,7 +31,7 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies_avant_aide_1))
     instance_eval(&column_stats.call('securite', :nombre_bien_qualifies))
     instance_eval(&column_stats.call('securite', :nombre_retours_deja_qualifies))
-    instance_eval(&column_stats.call('securite', :temps_moyen_ouvertures_zones_dangers))
+    instance_eval(&column_stats.call('securite', :delai_moyen_ouvertures_zones_dangers))
     instance_eval(&column_stats.call('securite', :attention_visuo_spatiale))
     instance_eval(&column_stats.call('securite', :nombre_reouverture_zone_sans_danger))
   end

@@ -8,10 +8,13 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   filter :nom
   filter :created_at
 
-  column_stats = proc do |situation, nom|
+  column_stats = proc do |situation, nom, cle|
     proc do
-      column "#{situation}_#{nom}".to_sym do |evaluation|
-        restitution(evaluation, situation)&.send(nom)
+      nom_colomne = "#{situation}_#{nom}"
+      nom_colomne += "_#{cle}" if cle.present?
+      column nom_colomne.to_sym do |evaluation|
+        valeur = restitution(evaluation, situation)&.send(nom)
+        cle.present? ? valeur&.fetch(cle, nil) : valeur
       end
     end
   end
@@ -22,6 +25,14 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
         restitution(evaluation, 'questions')&.choix_repondu(question)&.type_choix
       end
     end
+  end
+
+  colonnes_stats_securite_par_danger = proc do |metrique|
+    instance_eval(&column_stats.call('securite', metrique, 'bouche-egout'))
+    instance_eval(&column_stats.call('securite', metrique, 'camion'))
+    instance_eval(&column_stats.call('securite', metrique, 'casque'))
+    instance_eval(&column_stats.call('securite', metrique, 'escabeau'))
+    instance_eval(&column_stats.call('securite', metrique, 'signalisation'))
   end
 
   column_stats_securite = proc do
@@ -35,6 +46,9 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     instance_eval(&column_stats.call('securite', :delai_moyen_ouvertures_zones_dangers))
     instance_eval(&column_stats.call('securite', :attention_visuo_spatiale))
     instance_eval(&column_stats.call('securite', :nombre_reouverture_zone_sans_danger))
+    instance_exec(:temps_bonnes_qualifications_dangers, &colonnes_stats_securite_par_danger)
+    instance_exec(:temps_recherche_zones_dangers, &colonnes_stats_securite_par_danger)
+    instance_exec(:temps_total_ouverture_zones_dangers, &colonnes_stats_securite_par_danger)
   end
 
   columns_stats = proc do

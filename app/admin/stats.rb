@@ -25,6 +25,7 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
   end
 
   column_stats_securite = proc do
+    instance_eval(&column_stats.call('securite', :temps_entrainement))
     instance_eval(&column_stats.call('securite', :temps_total))
     instance_eval(&column_stats.call('securite', :nombre_dangers_bien_identifies))
     instance_eval(&column_stats.call('securite', :nombre_danger_mal_identifies))

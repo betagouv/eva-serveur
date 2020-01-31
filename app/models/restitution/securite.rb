@@ -18,7 +18,7 @@ module Restitution
     end
 
     def persiste
-      metriques = Metriques::SECURITE.each_with_object({}) do |methode, memo|
+      metriques = Metriques::SECURITE.keys.each_with_object({}) do |methode, memo|
         memo[methode] = public_send(methode)
       end
       partie.update(metriques: metriques)
@@ -78,19 +78,19 @@ module Restitution
     end
 
     def temps_recherche_zones_dangers
-      Metriques::REGLES_SECURITE['temps_recherche_zones_dangers']
+      Metriques::SECURITE['temps_recherche_zones_dangers']
         .new(evenements_situation)
         .calcule
     end
 
     def temps_bonnes_qualifications_dangers
-      Metriques::REGLES_SECURITE['temps_bonnes_qualifications_dangers']
+      Metriques::SECURITE['temps_bonnes_qualifications_dangers']
         .new(evenements_situation)
         .calcule
     end
 
     def temps_total_ouverture_zones_dangers
-      Metriques::REGLES_SECURITE['temps_total_ouverture_zones_dangers']
+      Metriques::SECURITE['temps_total_ouverture_zones_dangers']
         .new(evenements_situation)
         .calcule
     end

@@ -37,7 +37,7 @@ describe 'Evenement API', type: :request do
           .to change { Evenement.count }.by(1)
                                         .and change { Partie.count }.by(1)
         evenement = Evenement.last
-        expect(evenement.date).to eq DateTime.new(2019, 0o2, 25, 16, 11, 29)
+        expect(evenement.date.to_datetime).to eq Time.at(1_551_111_089, 238_000).to_datetime
       end
 
       it 'retourne une 201' do

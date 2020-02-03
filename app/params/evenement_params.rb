@@ -23,8 +23,7 @@ class EvenementParams
       date = params['date']
       return if date.blank?
 
-      time_formate = Time.at(date.to_i / 1000.0)
-      params['date'] = DateTime.parse(time_formate.to_s)
+      params['date'] = Time.strptime(date.to_s, '%Q')
     end
   end
 end

@@ -9,13 +9,14 @@ describe EvenementParams do
     it 'filtre les parametres' do
       params = ActionController::Parameters.new(
         nom: 'mon nom',
-        date: 'ma date',
+        date: 1_580_743_539_508,
         donnees: {},
         session_id: 'ma session id',
         autre_param: 'autre paramètre'
       )
 
       evenement_params = described_class.from(params)
+      expect(evenement_params[:date]).to eql(Time.at(1_580_743_539, 508, :millisecond))
       expect(evenement_params.keys.sort).to eql(
         %w[date donnees nom session_id]
       )

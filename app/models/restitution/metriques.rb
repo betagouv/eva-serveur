@@ -19,5 +19,9 @@ module Restitution
       'nombre_rejoue_consigne' => Securite,
       'nombre_danger_mal_identifies' => Securite
     }.freeze
+
+    MAINTENANCE = {
+      'nombre_erreurs' => Maintenance::NombreErreurs
+    }.freeze
   end
 end

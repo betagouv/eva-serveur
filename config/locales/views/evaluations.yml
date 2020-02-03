@@ -121,3 +121,6 @@ fr:
         delai_ouvertures_zones_dangers: Délai avant ouverture de zone de danger
         delai_moyen_ouvertures_zones_dangers: Délai moyen avant ouverture de zone de danger
         attention_visuo_spatiale: Attention visuo-spatiale
+      restitution_maintenance:
+        restitution_maintenance: Restitution de la situation maintenance
+        nombre_erreurs: "Nombre d'erreurs"

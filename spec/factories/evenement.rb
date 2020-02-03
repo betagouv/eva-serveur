@@ -87,5 +87,21 @@ FactoryBot.define do
     factory :evenement_ouverture_zone do
       nom { 'ouvertureZone' }
     end
+
+    factory :evenement_identification_mot do
+      nom { 'identificationMot' }
+
+      trait :bon do
+        donnees { { type: 'non-mot', reponse: 'pasfrancais' } }
+      end
+
+      trait :mauvais do
+        donnees { { type: 'non-mot', reponse: 'francais' } }
+      end
+
+      trait :non_reponse do
+        donnees { { type: 'non-mot' } }
+      end
+    end
   end
 end

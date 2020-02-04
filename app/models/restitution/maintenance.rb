@@ -2,8 +2,13 @@
 
 module Restitution
   class Maintenance < AvecEntrainement
-    def nombre_erreurs
-      Metriques::MAINTENANCE['nombre_erreurs']
+    def initialize(campagne, evenements)
+      evenements = evenements.map { |e| EvenementMaintenanceDecorator.new e }
+      super(campagne, evenements)
+    end
+
+    def metrique(nom)
+      Metriques::MAINTENANCE[nom]
         .new(evenements_situation)
         .calcule
     end

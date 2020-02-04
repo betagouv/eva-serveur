@@ -21,7 +21,8 @@ module Restitution
     }.freeze
 
     MAINTENANCE = {
-      'nombre_erreurs' => Maintenance::NombreErreurs
+      'nombre_erreurs' => Maintenance::NombreErreurs,
+      'nombre_non_reponses' => Maintenance::NombreNonReponses
     }.freeze
   end
 end

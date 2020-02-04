@@ -36,17 +36,3 @@
     background-color: gray;
   }
 }
-
-.compteurs {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .compteur {
-    display: flex;
-    flex:1;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-}

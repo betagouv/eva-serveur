@@ -3,8 +3,6 @@
 module Restitution
   class Securite
     class NombreDangersBienIdentifies
-      attr_reader :evenements_situation
-
       def initialize(evenements_situation)
         @evenements_situation = evenements_situation
       end

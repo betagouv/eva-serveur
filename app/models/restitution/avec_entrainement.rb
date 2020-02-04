@@ -11,7 +11,7 @@ module Restitution
     end
 
     def demarrage
-      @demarrage ||= premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
+      @demarrage ||= MetriquesHelper.premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
     end
 
     def evenements_entrainement

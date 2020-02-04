@@ -91,10 +91,6 @@ module Restitution
       "#{evaluation.nom} - #{situation.libelle}"
     end
 
-    def premier_evenement_du_nom(evenements, nom_evenement)
-      evenements.find { |e| e.nom == nom_evenement }
-    end
-
     private
 
     def competences_indeterminees?(competences)

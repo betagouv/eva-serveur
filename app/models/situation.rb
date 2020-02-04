@@ -3,6 +3,7 @@
 class Situation < ApplicationRecord
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true
+  belongs_to :questionnaire, optional: true
 
   def display_name
     libelle

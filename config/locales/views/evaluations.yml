@@ -124,3 +124,4 @@ fr:
       restitution_maintenance:
         restitution_maintenance: Restitution de la situation maintenance
         nombre_erreurs: "Nombre d'erreurs"
+        nombre_non_reponses: "Nombre de non réponses"

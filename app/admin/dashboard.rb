@@ -10,18 +10,11 @@ ActiveAdmin.register_page 'Dashboard' do
                   Campagne.where(compte: current_compte)
                 end
 
-    evaluations = Evaluation.where(campagne: campagnes)
-    debut_aujourdhui = Date.current.beginning_of_day
-    interval_hier = Date.yesterday.beginning_of_day..debut_aujourdhui
-    nombre_evaluations_total = evaluations.count
-    nombre_evaluations_hier = evaluations.where('created_at' => interval_hier).count
-    nombre_evaluations_aujourdhui = evaluations.where('created_at > ?', debut_aujourdhui).count
+    evaluations = Evaluation.where(campagne: campagnes).order(created_at: :desc).limit(10)
 
     render partial: 'dashboard',
            locals: {
-             total: nombre_evaluations_total,
-             hier: nombre_evaluations_hier,
-             aujourdhui: nombre_evaluations_aujourdhui
+             evaluations: evaluations
            }
   end
 end

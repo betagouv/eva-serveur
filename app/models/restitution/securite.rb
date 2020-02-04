@@ -4,10 +4,6 @@ module Restitution
   class Securite < AvecEntrainement
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
 
-    EVENEMENT = {
-      ACTIVATION_AIDE_1: 'activationAide'
-    }.freeze
-
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementSecuriteDecorator.new e }
       super(campagne, evenements)
@@ -31,9 +27,7 @@ module Restitution
     end
 
     def nombre_dangers_bien_identifies
-      Metriques::SECURITE['nombre_dangers_bien_identifies']
-        .new(evenements_situation)
-        .calcule
+      Metriques::SECURITE['nombre_dangers_bien_identifies'].new(evenements_situation).calcule
     end
 
     def nombre_danger_mal_identifies
@@ -47,11 +41,9 @@ module Restitution
     end
 
     def nombre_dangers_bien_identifies_avant_aide_1
-      return nombre_dangers_bien_identifies if activation_aide1.blank?
-
-      dangers_bien_identifies.partition do |danger|
-        danger.date < activation_aide1.date
-      end.first.length
+      Metriques::SECURITE['nombre_dangers_bien_identifies_avant_aide_1']
+        .new(evenements_situation)
+        .calcule
     end
 
     def attention_visuo_spatiale
@@ -80,21 +72,15 @@ module Restitution
     end
 
     def temps_recherche_zones_dangers
-      Metriques::SECURITE['temps_recherche_zones_dangers']
-        .new(evenements_situation)
-        .calcule
+      Metriques::SECURITE['temps_recherche_zones_dangers'].new(evenements_situation).calcule
     end
 
     def temps_bonnes_qualifications_dangers
-      Metriques::SECURITE['temps_bonnes_qualifications_dangers']
-        .new(evenements_situation)
-        .calcule
+      Metriques::SECURITE['temps_bonnes_qualifications_dangers'].new(evenements_situation).calcule
     end
 
     def temps_total_ouverture_zones_dangers
-      Metriques::SECURITE['temps_total_ouverture_zones_dangers']
-        .new(evenements_situation)
-        .calcule
+      Metriques::SECURITE['temps_total_ouverture_zones_dangers'].new(evenements_situation).calcule
     end
 
     def delai_moyen_ouvertures_zones_dangers
@@ -114,8 +100,8 @@ module Restitution
     end
 
     def activation_aide1
-      @activation_aide1 ||= premier_evenement_du_nom(evenements_situation,
-                                                     EVENEMENT[:ACTIVATION_AIDE_1])
+      @activation_aide1 ||= MetriquesHelper.premier_evenement_du_nom(evenements_situation,
+                                                                     EVENEMENT[:ACTIVATION_AIDE_1])
     end
 
     def temps_entre_evenements

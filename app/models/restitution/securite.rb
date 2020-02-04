@@ -47,14 +47,7 @@ module Restitution
     end
 
     def attention_visuo_spatiale
-      identification = dangers_bien_identifies.find(&:danger_visuo_spatial?)
-      return ::Competence::NIVEAU_INDETERMINE if identification.blank?
-
-      if activation_aide1.present? && activation_aide1.date < identification.date
-        return ::Competence::APTE_AVEC_AIDE
-      end
-
-      ::Competence::APTE
+      Metriques::SECURITE['attention_visuo_spatiale'].new(evenements_situation).calcule
     end
 
     def nombre_reouverture_zone_sans_danger
@@ -93,15 +86,6 @@ module Restitution
 
     def qualifications_par_danger
       SecuriteHelper.filtre_par_danger(evenements_situation, &:qualification_danger?)
-    end
-
-    def dangers_bien_identifies
-      @dangers_bien_identifies ||= evenements_situation.select(&:est_un_danger_bien_identifie?)
-    end
-
-    def activation_aide1
-      @activation_aide1 ||= MetriquesHelper.premier_evenement_du_nom(evenements_situation,
-                                                                     EVENEMENT[:ACTIVATION_AIDE_1])
     end
 
     def temps_entre_evenements

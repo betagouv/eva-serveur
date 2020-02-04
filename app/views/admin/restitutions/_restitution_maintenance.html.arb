@@ -2,6 +2,10 @@
 
 panel t('.restitution_maintenance') do
   attributes_table_for restitution do
-    row t('.nombre_erreurs'), &:nombre_erreurs
+    Restitution::Metriques::MAINTENANCE.keys.each do |metrique|
+      row t(".#{metrique}") do |r|
+        r.metrique(metrique.to_s)
+      end
+    end
   end
 end

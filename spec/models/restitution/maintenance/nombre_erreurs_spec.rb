@@ -6,14 +6,14 @@ describe Restitution::Maintenance::NombreErreurs do
   let(:campagne) { Campagne.new }
   let(:restitution) { Restitution::Maintenance.new campagne, evenements }
 
-  describe '#nombre_erreurs' do
+  describe '#metrique nombre_erreurs' do
     context "aucun événement d'identification" do
       let(:evenements) do
         [
           build(:evenement_demarrage)
         ]
       end
-      it { expect(restitution.nombre_erreurs).to eq 0 }
+      it { expect(restitution.metrique('nombre_erreurs')).to eq 0 }
     end
 
     context 'avec une bonne réponse' do
@@ -23,7 +23,7 @@ describe Restitution::Maintenance::NombreErreurs do
           build(:evenement_identification_mot, :bon)
         ]
       end
-      it { expect(restitution.nombre_erreurs).to eq 0 }
+      it { expect(restitution.metrique('nombre_erreurs')).to eq 0 }
     end
 
     context 'avec une non réponse' do
@@ -33,7 +33,7 @@ describe Restitution::Maintenance::NombreErreurs do
           build(:evenement_identification_mot, :non_reponse)
         ]
       end
-      it { expect(restitution.nombre_erreurs).to eq 0 }
+      it { expect(restitution.metrique('nombre_erreurs')).to eq 0 }
     end
 
     context 'avec une mauvaise réponse' do
@@ -43,7 +43,7 @@ describe Restitution::Maintenance::NombreErreurs do
           build(:evenement_identification_mot, :mauvais)
         ]
       end
-      it { expect(restitution.nombre_erreurs).to eq 1 }
+      it { expect(restitution.metrique('nombre_erreurs')).to eq 1 }
     end
   end
 end

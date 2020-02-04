@@ -20,6 +20,10 @@ module Restitution
         end
         les_temps
       end
+
+      def activation_aide1(evenements)
+        premier_evenement_du_nom(evenements, EVENEMENT[:ACTIVATION_AIDE_1])
+      end
     end
   end
 end

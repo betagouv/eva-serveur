@@ -10,10 +10,7 @@ module Restitution
       end
 
       def calcule
-        activation_aide1 = MetriquesHelper.premier_evenement_du_nom(
-          evenements_situation,
-          MetriquesHelper::EVENEMENT[:ACTIVATION_AIDE_1]
-        )
+        activation_aide1 = MetriquesHelper.activation_aide1(evenements_situation)
         dangers_bien_identifies = evenements_situation.select(&:est_un_danger_bien_identifie?)
         return dangers_bien_identifies.count if activation_aide1.blank?
 

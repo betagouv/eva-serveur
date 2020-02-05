@@ -10,6 +10,6 @@ class Situation < ApplicationRecord
   end
 
   def as_json(_options = nil)
-    slice(:id, :libelle, :nom_technique)
+    slice(:id, :libelle, :nom_technique, :questionnaire_id)
   end
 end

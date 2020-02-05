@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :comptes, ActiveAdmin::Devise.config
+  devise_config = ActiveAdmin::Devise.config
+  devise_config[:controllers][:omniauth_callbacks] = 'admin/omniauth_callbacks'
+  devise_for :comptes, devise_config
+
   ActiveAdmin.routes(self)
 
   get '/', to: redirect('/admin')

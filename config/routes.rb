@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :evaluations, only: [:create, :show]
+    resources :questionnaires, only: [:show]
     resources :evenements
   end
 end

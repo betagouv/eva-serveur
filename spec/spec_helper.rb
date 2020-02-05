@@ -48,4 +48,8 @@ RSpec.configure do |config|
     click_on 'Se connecter'
     compte
   end
+
+  def evenements_decores(evenements)
+    evenements.map { |e| EvenementMaintenanceDecorator.new e }
+  end
 end

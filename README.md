@@ -91,6 +91,26 @@ L'api est accessible au point `/api`
 }
 ```
 
+### Récupére des informations sur un questionnaire
+
+**Requête**
+
+`GET /api/questionnaires/:id`
+
+**Réponse**
+
+```
+[
+  {
+    id: 1,
+    type: 'qcm',
+    intitule: 'Ma question',
+    description: 'Ma description',
+    choix: []
+  }
+]
+```
+
 ### Crée un événement
 
 `POST /api/evenements`

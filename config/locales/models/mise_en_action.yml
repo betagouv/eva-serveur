@@ -6,7 +6,7 @@ fr:
         updated_at: Mise à jour le
         elements_decouverts: Est ce que la restitution vous a permis de découvrir des éléments sur le candidat ?
         precision_elements_decouverts: Lesquels ?
-        recommandations_candidat: L'entretien de restitution vous à t-il permis de faire des recommandations au candidat ?
+        recommandations_candidat: L'entretien de restitution vous a t-il permis de faire des recommandations au candidat ?
         type_recommandation: Si oui lesquelles ?
         types_recommandation:
           ateliers: Ateliers ou prestation

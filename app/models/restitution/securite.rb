@@ -20,18 +20,16 @@ module Restitution
       partie.update(metriques: metriques)
     end
 
-    def nombre_bien_qualifies
-      qualifications_par_danger.map do |_danger, qualifications|
-        qualifications.max_by(&:created_at)
-      end.count(&:bonne_reponse?)
-    end
-
     def nombre_dangers_bien_identifies
       Metriques::SECURITE['nombre_dangers_bien_identifies'].new(evenements_situation).calcule
     end
 
     def nombre_dangers_mal_identifies
       Metriques::SECURITE['nombre_dangers_mal_identifies'].new(evenements_situation).calcule
+    end
+
+    def nombre_bien_qualifies
+      Metriques::SECURITE['nombre_bien_qualifies'].new(evenements_situation).calcule
     end
 
     def nombre_retours_deja_qualifies

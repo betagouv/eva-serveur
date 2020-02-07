@@ -30,8 +30,8 @@ module Restitution
       Metriques::SECURITE['nombre_dangers_bien_identifies'].new(evenements_situation).calcule
     end
 
-    def nombre_danger_mal_identifies
-      evenements_situation.select(&:est_un_danger_mal_identifie?).count
+    def nombre_dangers_mal_identifies
+      Metriques::SECURITE['nombre_dangers_mal_identifies'].new(evenements_situation).calcule
     end
 
     def nombre_retours_deja_qualifies

@@ -53,7 +53,7 @@ describe 'Admin - Stats', type: :feature do
       temps_entrainement: 'temps_entrainement',
       temps_total: 16,
       nombre_dangers_bien_identifies: 17,
-      nombre_danger_mal_identifies: 18,
+      nombre_dangers_mal_identifies: 18,
       nombre_dangers_bien_identifies_avant_aide_1: 19,
       nombre_bien_qualifies: 20,
       nombre_retours_deja_qualifies: 21,

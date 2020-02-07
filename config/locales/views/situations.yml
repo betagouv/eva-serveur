@@ -1,0 +1,6 @@
+fr:
+  admin:
+    situations:
+      recalcul_metriques:
+        lien: Recalcule les métriques
+        fait: Métriques recalculées

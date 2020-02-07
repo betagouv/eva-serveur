@@ -33,7 +33,7 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     instance_exec('securite', :temps_entrainement, &column_stats)
     instance_exec('securite', :temps_total, &column_stats)
     instance_exec('securite', :nombre_dangers_bien_identifies, &column_stats)
-    instance_exec('securite', :nombre_danger_mal_identifies, &column_stats)
+    instance_exec('securite', :nombre_dangers_mal_identifies, &column_stats)
     instance_exec('securite', :nombre_dangers_bien_identifies_avant_aide_1, &column_stats)
     instance_exec('securite', :nombre_bien_qualifies, &column_stats)
     instance_exec('securite', :nombre_retours_deja_qualifies, &column_stats)

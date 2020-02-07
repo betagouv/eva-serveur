@@ -17,7 +17,7 @@ panel t('.restitution_securite') do
       r.nombre_dangers_bien_identifies
     end
     row t('.dangers_mal_identifies') do |(_, r)|
-      r.nombre_danger_mal_identifies
+      r.nombre_dangers_mal_identifies
     end
     row t('.dangers_bien_identifies_avant_aide_1') do |(_, r)|
       r.nombre_dangers_bien_identifies_avant_aide_1

@@ -5,6 +5,10 @@ ActiveAdmin.register MiseEnAction do
                 :type_recommandation, :precision_recommandation,
                 :elements_facilitation_recommandation
 
+  filter :elements_decouverts
+  filter :recommandations_candidat
+  filter :created_at
+
   form do |f|
     f.semantic_errors
     f.inputs do
@@ -16,5 +20,13 @@ ActiveAdmin.register MiseEnAction do
       f.input :elements_facilitation_recommandation, input_html: { rows: 5 }
     end
     f.actions
+  end
+
+  index do
+    selectable_column
+    column :elements_decouverts
+    column :recommandations_candidat
+    column :created_at
+    actions
   end
 end

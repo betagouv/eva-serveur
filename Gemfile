@@ -8,6 +8,7 @@ gem 'rails', '~> 6.0.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.0'
 # Reduces boot times through caching; required in config/boot.rb
+gem 'active_admin-humanized_enum'
 gem 'activeadmin'
 gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'

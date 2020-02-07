@@ -14,7 +14,7 @@ module Restitution
       'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers,
       'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers,
       'nombre_reouverture_zone_sans_danger' => Securite,
-      'nombre_bien_qualifies' => Securite,
+      'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
       'nombre_retours_deja_qualifies' => Securite,
       'delai_ouvertures_zones_dangers' => Securite,
       'delai_moyen_ouvertures_zones_dangers' => Securite,

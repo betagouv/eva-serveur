@@ -14,6 +14,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'situation_configuration', 'situations_configurations'
   inflect.irregular 'questionnaire_question', 'questionnaires_questions'
   inflect.irregular 'choix', 'choix'
+  inflect.irregular 'mise_en_action', 'mises_en_action'
+  inflect.irregular 'type_recommandation', 'types_recommandation'
 end
 
 # These inflection rules are supported but not enabled by default:

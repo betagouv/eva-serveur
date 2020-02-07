@@ -26,6 +26,7 @@ ActiveAdmin.register MiseEnAction do
     selectable_column
     column :elements_decouverts
     column :recommandations_candidat
+    column :type_recommandation
     column :created_at
     actions
   end

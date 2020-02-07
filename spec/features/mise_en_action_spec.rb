@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-describe 'Admin - Situation', type: :feature do
+describe 'Admin - Mise En Action', type: :feature do
   before { se_connecter_comme_administrateur }
 
   describe 'index' do
-    let!(:mise_en_action) { create :mise_en_action, precision_elements_decouverts: 'Très précis' }
+    let!(:mise_en_action) { create :mise_en_action, type_recommandation: :formation }
     before { visit admin_mises_en_action_path }
-    it { expect(page).to have_content 'Très précis' }
+    it { expect(page).to have_content MiseEnAction.humanized_type_recommandation(:formation) }
   end
 
   describe 'création' do

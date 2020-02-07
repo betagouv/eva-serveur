@@ -2,16 +2,16 @@
 
 module Restitution
   class Securite
-    class NombreDangersBienQualifies
+    class NombreRetoursDejaQualifies
       def initialize(evenements_situation)
         @evenements_situation = evenements_situation
       end
 
       def calcule
         qualifications_par_dangers = SecuriteHelper.qualifications_par_danger(@evenements_situation)
-        qualifications_par_dangers.map do |_danger, qualifications|
-          qualifications.max_by(&:created_at)
-        end.count(&:bonne_reponse?)
+        qualifications_par_dangers.inject(0) do |memo, (_danger, qualifications)|
+          memo + qualifications.count - 1
+        end
       end
     end
   end

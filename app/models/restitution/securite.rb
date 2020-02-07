@@ -10,7 +10,8 @@ module Restitution
     end
 
     def termine?
-      super || qualifications_par_danger.count == ZONES_DANGER.count
+      super ||
+        SecuriteHelper.qualifications_par_danger(evenements_situation).count == ZONES_DANGER.count
     end
 
     def persiste
@@ -33,9 +34,7 @@ module Restitution
     end
 
     def nombre_retours_deja_qualifies
-      qualifications_par_danger.inject(0) do |memo, (_danger, qualifications)|
-        memo + qualifications.count - 1
-      end
+      Metriques::SECURITE['nombre_retours_deja_qualifies'].new(evenements_situation).calcule
     end
 
     def nombre_dangers_bien_identifies_avant_aide_1
@@ -81,10 +80,6 @@ module Restitution
     end
 
     private
-
-    def qualifications_par_danger
-      SecuriteHelper.filtre_par_danger(evenements_situation, &:qualification_danger?)
-    end
 
     def temps_entre_evenements
       evenements = evenements_situation.select { |e| yield e }

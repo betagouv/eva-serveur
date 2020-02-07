@@ -7,6 +7,10 @@ module Restitution
         def filtre_par_danger(evenements, &block)
           evenements.select(&block).group_by { |e| e.donnees['danger'] }.sort.to_h
         end
+
+        def qualifications_par_danger(evenements)
+          filtre_par_danger(evenements, &:qualification_danger?)
+        end
       end
     end
   end

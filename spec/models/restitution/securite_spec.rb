@@ -51,24 +51,6 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#nombre_retours_deja_qualifies' do
-    context 'sans évenement' do
-      let(:evenements) { [] }
-      it { expect(restitution.nombre_retours_deja_qualifies).to eq 0 }
-    end
-
-    context 'deux qualifications du même danger' do
-      let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_qualification_danger,
-               donnees: { reponse: 'mauvais', danger: 'danger' }),
-         build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'danger' })]
-      end
-      it { expect(restitution.nombre_retours_deja_qualifies).to eq 1 }
-    end
-  end
-
   describe '#delai_ouvertures_zones_dangers et #delai_moyen_ouvertures_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }

@@ -5,7 +5,8 @@ class EvenementMaintenanceDecorator < SimpleDelegator
     NON_MOT: 'non-mot',
     REPONSE_NON_FRANCAIS: 'pasfrancais',
     REPONSE_FRANCAIS: 'francais',
-    IDENTIFICATION: 'identificationMot'
+    IDENTIFICATION: 'identificationMot',
+    APPARITION_MOT: 'apparitionMot'
   }.freeze
 
   def type_non_mot
@@ -24,7 +25,21 @@ class EvenementMaintenanceDecorator < SimpleDelegator
     donnees['reponse'] == EVENEMENT[:REPONSE_NON_FRANCAIS]
   end
 
+  def type_non_mot_correct
+    donnees['type'] == EVENEMENT[:NON_MOT] &&
+      reponse_non_francais
+  end
+
   def identification_mot
     nom == EVENEMENT[:IDENTIFICATION]
+  end
+
+  def apparition_non_mot
+    nom == EVENEMENT[:APPARITION_MOT] &&
+      type_non_mot
+  end
+
+  def apparition_ou_identification_non_mot
+    apparition_non_mot || type_non_mot
   end
 end

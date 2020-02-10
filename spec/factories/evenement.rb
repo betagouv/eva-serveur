@@ -88,6 +88,10 @@ FactoryBot.define do
       nom { 'ouvertureZone' }
     end
 
+    factory :evenement_apparition_mot do
+      nom { 'apparitionMot' }
+    end
+
     factory :evenement_identification_mot do
       nom { 'identificationMot' }
 

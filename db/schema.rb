@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_144201) do
+ActiveRecord::Schema.define(version: 2020_02_10_101012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(version: 2020_02_04_144201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "questionnaire_id"
+    t.uuid "questionnaire_entrainement_id"
+    t.index ["questionnaire_entrainement_id"], name: "index_situations_on_questionnaire_entrainement_id"
     t.index ["questionnaire_id"], name: "index_situations_on_questionnaire_id"
   end
 
@@ -175,5 +177,6 @@ ActiveRecord::Schema.define(version: 2020_02_04_144201) do
   add_foreign_key "questionnaires_questions", "questionnaires"
   add_foreign_key "questionnaires_questions", "questions"
   add_foreign_key "situations", "questionnaires"
+  add_foreign_key "situations", "questionnaires", column: "questionnaire_entrainement_id"
   add_foreign_key "situations_configurations", "campagnes"
 end

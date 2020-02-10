@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Situation do
-  permit_params :libelle, :nom_technique, :questionnaire_id
+  permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id
 end

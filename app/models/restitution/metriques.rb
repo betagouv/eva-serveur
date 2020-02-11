@@ -23,7 +23,8 @@ module Restitution
 
     MAINTENANCE = {
       'nombre_erreurs' => Maintenance::NombreErreurs,
-      'nombre_non_reponses' => Maintenance::NombreNonReponses
+      'nombre_non_reponses' => Maintenance::NombreNonReponses,
+      'temps_moyen_non_mots' => Maintenance::TempsMoyenNonMots
     }.freeze
   end
 end

@@ -125,3 +125,4 @@ fr:
         restitution_maintenance: Restitution de la situation maintenance
         nombre_erreurs: "Nombre d'erreurs"
         nombre_non_reponses: "Nombre de non réponses"
+        temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"

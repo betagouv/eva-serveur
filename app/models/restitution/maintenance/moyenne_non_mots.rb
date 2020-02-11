@@ -12,7 +12,7 @@ module Restitution
       def calcule
         return 0 if evenements_identifications.zero?
 
-        (recupere_non_mot_correct.to_f / evenements_identifications)
+        (recupere_non_mot_correct.to_f / evenements_identifications) * 100
       end
 
       private

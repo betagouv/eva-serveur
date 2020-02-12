@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite do
   let(:campagne) { Campagne.new }
-  let(:restitution) { Restitution::Securite.new campagne, evenements }
+  let(:restitution) { described_class.new campagne, evenements }
 
   describe '#termine?' do
     context 'aucun danger qualifié' do
@@ -140,7 +140,7 @@ describe Restitution::Securite do
 
   describe '#persiste' do
     context "persiste l'ensemble des données de sécurité" do
-      let(:situation) { create :situation_inventaire }
+      let(:situation) { create :situation_securite }
       let(:evaluation) { create :evaluation, campagne: campagne }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let(:evenements) do

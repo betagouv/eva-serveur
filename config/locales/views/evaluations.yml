@@ -103,10 +103,6 @@ fr:
         question: Question
         reponse: Réponse
       restitution_securite:
-        cote_z: Cote Z
-        valeur_utilisateur: Valeur de l'évalué·e
-        moyenne_glissante: Moyenne glissante
-        ecart_type_glissant: Écart type glissant
         restitution_securite: Restitution de la situation sécurité
         temps_entrainement: Temps passé dans l'entrainement
         dangers_bien_qualifies: Dangers bien qualifiés
@@ -126,3 +122,8 @@ fr:
         nombre_erreurs: "Nombre d'erreurs"
         nombre_non_reponses: "Nombre de non réponses"
         temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"
+      restitution_colonnes:
+        cote_z: Cote Z
+        valeur_utilisateur: Valeur de l'évalué·e
+        moyenne_glissante: Moyenne glissante
+        ecart_type_glissant: Écart type glissant

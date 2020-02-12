@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
 panel t('.restitution_maintenance') do
-  attributes_table_for restitution do
+  attributes_table_for [
+    [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), restitution],
+    [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyenne_glissante],
+    [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecart_type_glissant],
+    [t('admin.restitutions.restitution_colonnes.cote_z'), cote_z]
+  ] do
+    row do |(titre, _)|
+      strong titre
+    end
     Restitution::Metriques::MAINTENANCE.keys.each do |metrique|
-      row t(".#{metrique}") do |r|
-        r.metrique(metrique.to_s)
+      row t(".#{metrique}") do |(_, r)|
+        r.public_send(metrique)
       end
     end
   end

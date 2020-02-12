@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe Restitution::Maintenance::NombreErreurs do
-  let(:campagne) { Campagne.new }
   let(:metrique_nombre_erreurs) do
     described_class.new(evenements_decores(evenements)).calcule
   end

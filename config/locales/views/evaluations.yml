@@ -119,6 +119,7 @@ fr:
         attention_visuo_spatiale: Attention visuo-spatiale
       restitution_maintenance:
         restitution_maintenance: Restitution de la situation maintenance
+        nombre_bonnes_reponses_non_mot: "Nombre de bonnes réponses (non-mot)"
         nombre_erreurs: "Nombre d'erreurs"
         nombre_non_reponses: "Nombre de non réponses"
         temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"

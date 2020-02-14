@@ -122,6 +122,7 @@ fr:
         nombre_erreurs: "Nombre d'erreurs"
         nombre_non_reponses: "Nombre de non réponses"
         temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"
+        nombre_bonnes_reponses_mot_français: "Nombre de bonnes réponses (mot français)"
       restitution_colonnes:
         cote_z: Cote Z
         valeur_utilisateur: Valeur de l'évalué·e

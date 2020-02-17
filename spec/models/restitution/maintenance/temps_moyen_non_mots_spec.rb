@@ -14,7 +14,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
           build(:evenement_demarrage)
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq 0 }
+      it { expect(metrique_moyenne_non_mots).to eq nil }
     end
 
     context "avec un événement d'identification non-mot correct" do
@@ -40,7 +40,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq 0 }
+      it { expect(metrique_moyenne_non_mots).to eq nil }
     end
 
     context "avec un événement d'identification non-mot non réponse" do
@@ -53,7 +53,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq 0 }
+      it { expect(metrique_moyenne_non_mots).to eq nil }
     end
 
     context "avec deux événements d'identification non-mot correct et un incorrect" do

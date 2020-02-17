@@ -66,4 +66,8 @@ class EvenementMaintenanceDecorator < SimpleDelegator
   def mauvaise_identification
     identification_non_mot_incorrect || identification_mot_francais_incorrect
   end
+
+  def non_reponse
+    donnees['reponse'].nil? && identification_mot
+  end
 end

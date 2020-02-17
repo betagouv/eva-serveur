@@ -47,12 +47,8 @@ module Restitution
       Metriques::SECURITE['attention_visuo_spatiale'].new(evenements_situation).calcule
     end
 
-    def nombre_reouverture_zone_sans_danger
-      evenements_situation.select(&:ouverture_zone_sans_danger?)
-                          .group_by { |e| e.donnees['zone'] }
-                          .inject(0) do |memo, (_danger, ouvertures)|
-                            memo + ouvertures.count - 1
-                          end
+    def nombre_reouverture_zones_sans_danger
+      Metriques::SECURITE['nombre_reouverture_zones_sans_danger'].new(evenements_situation).calcule
     end
 
     def delai_ouvertures_zones_dangers

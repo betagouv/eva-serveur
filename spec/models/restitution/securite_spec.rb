@@ -103,41 +103,6 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#nombre_reouverture_zone_sans_danger' do
-    context 'sans réouverture' do
-      let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
-      end
-
-      it { expect(restitution.nombre_reouverture_zone_sans_danger).to eq 0 }
-    end
-
-    context 'avec une réouverture' do
-      let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone2' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
-      end
-
-      it { expect(restitution.nombre_reouverture_zone_sans_danger).to eq 1 }
-    end
-
-    context "avec une autre réouverture d'une zone avec danger" do
-      let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone2' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone3', danger: 'danger1' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone3', danger: 'danger1' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
-      end
-
-      it { expect(restitution.nombre_reouverture_zone_sans_danger).to eq 1 }
-    end
-  end
-
   describe '#persiste' do
     context "persiste l'ensemble des données de sécurité" do
       let(:situation) { create :situation_securite }
@@ -150,7 +115,7 @@ describe Restitution::Securite do
       end
 
       it do
-        expect(restitution).to receive(:nombre_reouverture_zone_sans_danger).and_return 1
+        expect(restitution).to receive(:nombre_reouverture_zones_sans_danger).and_return 1
         expect(restitution).to receive(:nombre_bien_qualifies).and_return 2
         expect(restitution).to receive(:nombre_dangers_bien_identifies).and_return 3
         expect(restitution).to receive(:nombre_retours_deja_qualifies).and_return 4
@@ -164,7 +129,7 @@ describe Restitution::Securite do
         expect(restitution).to receive(:nombre_dangers_mal_identifies).and_return 1
         restitution.persiste
         partie.reload
-        expect(partie.metriques['nombre_reouverture_zone_sans_danger']).to eq 1
+        expect(partie.metriques['nombre_reouverture_zones_sans_danger']).to eq 1
         expect(partie.metriques['nombre_bien_qualifies']).to eq 2
         expect(partie.metriques['nombre_dangers_bien_identifies']).to eq 3
         expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4

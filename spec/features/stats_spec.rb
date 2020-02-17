@@ -59,7 +59,7 @@ describe 'Admin - Stats', type: :feature do
       nombre_retours_deja_qualifies: 21,
       delai_moyen_ouvertures_zones_dangers: 22,
       attention_visuo_spatiale: 'apte',
-      nombre_reouverture_zone_sans_danger: 23,
+      nombre_reouverture_zones_sans_danger: 23,
       temps_bonnes_qualifications_dangers: { 'bouche-egout' => 'tbqd1', 'camion' => 'tbqd2',
                                              'casque' => 'tbqd3', 'escabeau' => 'tbqd4',
                                              'signalisation' => 'tbqd5' },

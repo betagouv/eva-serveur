@@ -13,7 +13,7 @@ module Restitution
       'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers,
       'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers,
       'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers,
-      'nombre_reouverture_zone_sans_danger' => Securite,
+      'nombre_reouverture_zones_sans_danger' => Securite::NombreReouvertureZonesSansDanger,
       'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
       'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies,
       'delai_ouvertures_zones_dangers' => Securite,

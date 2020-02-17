@@ -39,7 +39,7 @@ ActiveAdmin.register Evaluation, as: 'Stats' do
     instance_exec('securite', :nombre_retours_deja_qualifies, &column_stats)
     instance_exec('securite', :delai_moyen_ouvertures_zones_dangers, &column_stats)
     instance_exec('securite', :attention_visuo_spatiale, &column_stats)
-    instance_exec('securite', :nombre_reouverture_zone_sans_danger, &column_stats)
+    instance_exec('securite', :nombre_reouverture_zones_sans_danger, &column_stats)
     instance_exec(:temps_bonnes_qualifications_dangers, &colonnes_stats_securite_par_danger)
     instance_exec(:temps_recherche_zones_dangers, &colonnes_stats_securite_par_danger)
     instance_exec(:temps_total_ouverture_zones_dangers, &colonnes_stats_securite_par_danger)

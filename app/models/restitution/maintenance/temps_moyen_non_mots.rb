@@ -10,28 +10,32 @@ module Restitution
       end
 
       def calcule
-        return 0 if nombre_identification_non_mot_correcte.zero?
+        return 0 if nombre_identifications_non_mot_correct.zero?
 
-        temps = Restitution::MetriquesHelper.temps_entre_couples(recupere_couples)
-        (temps.sum / nombre_identification_non_mot_correcte).round(4)
+        temps = Restitution::MetriquesHelper.temps_entre_couples(
+          apparitions_et_identifications_non_mot_correctes
+        )
+        (temps.sum / nombre_identifications_non_mot_correct).round(4)
       end
 
       private
 
-      def recupere_couples
-        couples_correctes = []
-        apparition_identification_non_mot.each_slice(2) do |a|
-          couples_correctes << a if a.last.type_non_mot_correct
+      def apparitions_et_identifications_non_mot_correctes
+        evenements_retenus = []
+        apparitions_et_identifications_non_mot.each_slice(2) do |apparition, identification|
+          next unless identification.type_non_mot_correct
+
+          evenements_retenus << apparition << identification
         end
-        couples_correctes.flatten
+        evenements_retenus
       end
 
-      def apparition_identification_non_mot
+      def apparitions_et_identifications_non_mot
         evenements_situation.select(&:apparition_ou_identification_non_mot)
       end
 
-      def nombre_identification_non_mot_correcte
-        recupere_couples.count / 2
+      def nombre_identifications_non_mot_correct
+        evenements_situation.select(&:identification_non_mot_correcte).count
       end
     end
   end

@@ -14,7 +14,7 @@ class EvenementMaintenanceDecorator < SimpleDelegator
   end
 
   def type_mot_francais
-    donnees['type'] != EVENEMENT[:NON_MOT]
+    donnees['type'].present? && donnees['type'] != EVENEMENT[:NON_MOT]
   end
 
   def reponse_francais
@@ -25,9 +25,12 @@ class EvenementMaintenanceDecorator < SimpleDelegator
     donnees['reponse'] == EVENEMENT[:REPONSE_NON_FRANCAIS]
   end
 
-  def type_non_mot_correct
-    donnees['type'] == EVENEMENT[:NON_MOT] &&
-      reponse_non_francais
+  def identification_non_mot_correct
+    type_non_mot && reponse_non_francais
+  end
+
+  def identification_mot_francais_correct
+    type_mot_francais && reponse_francais
   end
 
   def identification_mot
@@ -39,8 +42,13 @@ class EvenementMaintenanceDecorator < SimpleDelegator
       type_non_mot
   end
 
+  def apparition_mot_francais
+    nom == EVENEMENT[:APPARITION_MOT] &&
+      type_mot_francais
+  end
+
   def apparition_ou_identification_non_mot
-    apparition_non_mot || type_non_mot
+    type_non_mot
   end
 
   def identification_non_mot_correcte

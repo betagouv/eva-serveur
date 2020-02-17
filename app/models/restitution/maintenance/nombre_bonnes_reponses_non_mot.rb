@@ -10,7 +10,7 @@ module Restitution
       end
 
       def calcule
-        evenements_situation.select(&:type_non_mot_correct).count
+        evenements_situation.select(&:identification_non_mot_correct).count
       end
     end
   end

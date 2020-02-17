@@ -42,4 +42,8 @@ class EvenementMaintenanceDecorator < SimpleDelegator
   def apparition_ou_identification_non_mot
     apparition_non_mot || type_non_mot
   end
+
+  def identification_non_mot_correcte
+    identification_mot && type_non_mot_correct
+  end
 end

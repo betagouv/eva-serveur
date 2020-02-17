@@ -95,11 +95,11 @@ FactoryBot.define do
     factory :evenement_identification_mot do
       nom { 'identificationMot' }
 
-      trait :bon do
+      trait :pas_français_bien_identifie do
         donnees { { type: 'non-mot', reponse: 'pasfrancais' } }
       end
 
-      trait :mauvais do
+      trait :pas_français_mal_identifie do
         donnees { { type: 'non-mot', reponse: 'francais' } }
       end
 

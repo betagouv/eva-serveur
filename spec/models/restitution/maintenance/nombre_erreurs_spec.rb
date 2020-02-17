@@ -21,7 +21,7 @@ describe Restitution::Maintenance::NombreErreurs do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_identification_mot, :bon)
+          build(:evenement_identification_mot, :pas_français_bien_identifie)
         ]
       end
       it { expect(metrique_nombre_erreurs).to eq 0 }
@@ -41,7 +41,7 @@ describe Restitution::Maintenance::NombreErreurs do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_identification_mot, :mauvais)
+          build(:evenement_identification_mot, :pas_français_mal_identifie)
         ]
       end
       it { expect(metrique_nombre_erreurs).to eq 1 }

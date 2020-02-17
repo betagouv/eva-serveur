@@ -29,8 +29,16 @@ class EvenementMaintenanceDecorator < SimpleDelegator
     type_non_mot && reponse_non_francais
   end
 
+  def identification_non_mot_incorrect
+    type_non_mot && reponse_francais
+  end
+
   def identification_mot_francais_correct
     type_mot_francais && reponse_francais
+  end
+
+  def identification_mot_francais_incorrect
+    type_mot_francais && reponse_non_francais
   end
 
   def identification_mot
@@ -53,5 +61,9 @@ class EvenementMaintenanceDecorator < SimpleDelegator
 
   def identification_non_mot_correcte
     identification_mot && type_non_mot_correct
+  end
+
+  def mauvaise_identification
+    identification_non_mot_incorrect || identification_mot_francais_incorrect
   end
 end

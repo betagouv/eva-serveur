@@ -15,7 +15,7 @@ module Restitution
         )
         return nil if temps.count.zero?
 
-        temps.sum / temps.count
+        (temps.sum / temps.count).round(4)
       end
 
       private

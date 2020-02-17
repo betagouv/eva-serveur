@@ -21,7 +21,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_identification_mot, :bon)
+          build(:evenement_identification_mot, :pas_français_bien_identifie)
         ]
       end
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 1 }
@@ -31,7 +31,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_identification_mot, :mauvais)
+          build(:evenement_identification_mot, :pas_français_mal_identifie)
         ]
       end
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 0 }

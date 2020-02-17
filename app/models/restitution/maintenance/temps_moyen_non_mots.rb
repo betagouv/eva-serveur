@@ -10,12 +10,12 @@ module Restitution
       end
 
       def calcule
-        return 0 if nombre_identifications_non_mot_correct.zero?
-
         temps = Restitution::MetriquesHelper.temps_entre_couples(
           apparitions_et_identifications_non_mot_correctes
         )
-        (temps.sum / nombre_identifications_non_mot_correct).round(4)
+        return nil if temps.count.zero?
+
+        (temps.sum / temps.count).round(4)
       end
 
       private
@@ -32,10 +32,6 @@ module Restitution
 
       def apparitions_et_identifications_non_mot
         evenements_situation.select(&:apparition_ou_identification_non_mot)
-      end
-
-      def nombre_identifications_non_mot_correct
-        evenements_situation.select(&:identification_non_mot_correcte).count
       end
     end
   end

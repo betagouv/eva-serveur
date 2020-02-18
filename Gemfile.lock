@@ -417,7 +417,6 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
-  tzinfo-data
   wicked_pdf
   wkhtmltopdf-binary (~> 0.12.3.1)
 

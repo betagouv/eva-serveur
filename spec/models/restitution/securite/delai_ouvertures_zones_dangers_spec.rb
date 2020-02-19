@@ -19,7 +19,7 @@ describe Restitution::Securite::DelaiOuverturesZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(metrique_delai_ouvertures_zones_dangers).to eq [60] }
+      it { expect(metrique_delai_ouvertures_zones_dangers).to eq [60.0] }
     end
 
     context 'deux zones danger ouverts' do
@@ -29,9 +29,9 @@ describe Restitution::Securite::DelaiOuverturesZonesDangers do
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
          build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2)),
          build(:evenement_ouverture_zone,
-               donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4))]
+               donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4, 1.5))]
       end
-      it { expect(metrique_delai_ouvertures_zones_dangers).to eq [60, 120] }
+      it { expect(metrique_delai_ouvertures_zones_dangers).to eq [60.0, 121.5] }
     end
 
     context 'ignore les zones non dangers ouverts' do

@@ -51,10 +51,9 @@ describe Restitution::Securite do
     end
   end
 
-  describe '#delai_ouvertures_zones_dangers et #delai_moyen_ouvertures_zones_dangers' do
+  describe '#delai_moyen_ouvertures_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
-      it { expect(restitution.delai_ouvertures_zones_dangers).to eq [] }
       it { expect(restitution.delai_moyen_ouvertures_zones_dangers).to eq nil }
     end
 
@@ -64,7 +63,6 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1))]
       end
-      it { expect(restitution.delai_ouvertures_zones_dangers).to eq [60] }
       it { expect(restitution.delai_moyen_ouvertures_zones_dangers).to eq 60 }
     end
 
@@ -77,29 +75,7 @@ describe Restitution::Securite do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'd2' }, date: Time.local(2019, 10, 9, 10, 4))]
       end
-      it { expect(restitution.delai_ouvertures_zones_dangers).to eq [60, 120] }
       it { expect(restitution.delai_moyen_ouvertures_zones_dangers).to eq 90 }
-    end
-
-    context 'ignore les zones non dangers ouverts' do
-      let(:evenements) do
-        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
-         build(:evenement_ouverture_zone,
-               donnees: {}, date: Time.local(2019, 10, 9, 10, 1)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 3))]
-      end
-      it { expect(restitution.delai_ouvertures_zones_dangers).to eq [180] }
-    end
-
-    context 'quand on ne finit pas par une identification' do
-      let(:evenements) do
-        [build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)),
-         build(:evenement_ouverture_zone,
-               donnees: { danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 1)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 2))]
-      end
-      it { expect(restitution.delai_ouvertures_zones_dangers).to eq [60] }
     end
   end
 

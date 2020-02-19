@@ -16,7 +16,7 @@ module Restitution
       'nombre_reouverture_zones_sans_danger' => Securite::NombreReouvertureZonesSansDanger,
       'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
       'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies,
-      'delai_ouvertures_zones_dangers' => Securite,
+      'delai_ouvertures_zones_dangers' => Securite::DelaiOuverturesZonesDangers,
       'delai_moyen_ouvertures_zones_dangers' => Securite,
       'nombre_rejoue_consigne' => Securite
     }.freeze

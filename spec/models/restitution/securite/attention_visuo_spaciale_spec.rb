@@ -2,15 +2,16 @@
 
 require 'rails_helper'
 
-describe Restitution::Securite::NombreDangersBienIdentifies do
-  let(:campagne) { Campagne.new }
-  let(:restitution) { Restitution::Securite.new campagne, evenements }
+describe Restitution::Securite::AttentionVisuoSpaciale do
+  let(:metrique_attention_visuo_spaciale) do
+    described_class.new(evenements_decores(evenements, :securite)).calcule
+  end
 
   describe '#attention_visuo_spatiale' do
     let(:danger_visuo_spatial) { EvenementSecuriteDecorator::DANGER_VISUO_SPATIAL }
     context 'sans évenement: indéterminé' do
       let(:evenements) { [] }
-      it { expect(restitution.attention_visuo_spatiale).to eq Competence::NIVEAU_INDETERMINE }
+      it { expect(metrique_attention_visuo_spaciale).to eq Competence::NIVEAU_INDETERMINE }
     end
 
     context "avec identification du danger sans avoir activé l'aide" do
@@ -20,7 +21,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
                donnees: { reponse: 'oui', danger: danger_visuo_spatial })]
       end
 
-      it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE }
+      it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE }
     end
 
     context "avec identification du danger après avoir activé l'aide" do
@@ -31,7 +32,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
                donnees: { reponse: 'oui', danger: danger_visuo_spatial },
                date: 1.minute.ago)]
       end
-      it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE_AVEC_AIDE }
+      it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE_AVEC_AIDE }
     end
 
     context "avec identification du danger avant avoir activé l'aide" do
@@ -42,7 +43,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
                date: 2.minute.ago),
          build(:activation_aide, date: 1.minutes.ago)]
       end
-      it { expect(restitution.attention_visuo_spatiale).to eq Competence::APTE }
+      it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE }
     end
   end
 end

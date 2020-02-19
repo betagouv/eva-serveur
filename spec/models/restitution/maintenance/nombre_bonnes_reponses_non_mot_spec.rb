@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
   let(:metrique_nombre_bonnes_reponses_non_mot) do
-    described_class.new(evenements_decores(evenements)).calcule
+    described_class.new(evenements_decores(evenements, :maintenance)).calcule
   end
 
   describe '#metrique metrique_nombre_bonnes_reponses_non_mot' do

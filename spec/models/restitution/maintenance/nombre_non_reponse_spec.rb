@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Maintenance::NombreNonReponses do
   let(:metrique_nombre_erreurs) do
-    described_class.new(evenements_decores(evenements)).calcule
+    described_class.new(evenements_decores(evenements, :maintenance)).calcule
   end
 
   describe '#metrique nombre_non_reponses' do

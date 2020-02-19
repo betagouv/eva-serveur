@@ -55,6 +55,10 @@ module Restitution
       Metriques::SECURITE['delai_ouvertures_zones_dangers'].new(evenements_situation).calcule
     end
 
+    def delai_moyen_ouvertures_zones_dangers
+      Metriques::SECURITE['delai_moyen_ouvertures_zones_dangers'].new(evenements_situation).calcule
+    end
+
     def temps_recherche_zones_dangers
       Metriques::SECURITE['temps_recherche_zones_dangers'].new(evenements_situation).calcule
     end
@@ -65,12 +69,6 @@ module Restitution
 
     def temps_total_ouverture_zones_dangers
       Metriques::SECURITE['temps_total_ouverture_zones_dangers'].new(evenements_situation).calcule
-    end
-
-    def delai_moyen_ouvertures_zones_dangers
-      return nil if delai_ouvertures_zones_dangers.empty?
-
-      delai_ouvertures_zones_dangers.sum / delai_ouvertures_zones_dangers.size
     end
   end
 end

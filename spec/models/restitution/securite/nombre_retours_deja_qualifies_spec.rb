@@ -3,13 +3,14 @@
 require 'rails_helper'
 
 describe Restitution::Securite::NombreRetoursDejaQualifies do
-  let(:campagne) { Campagne.new }
-  let(:restitution) { Restitution::Securite.new campagne, evenements }
+  let(:metrique_nombre_retours_deja_qualifies) do
+    described_class.new(evenements_decores(evenements, :securite)).calcule
+  end
 
   describe '#nombre_retours_deja_qualifies' do
     context 'sans évenement' do
       let(:evenements) { [] }
-      it { expect(restitution.nombre_retours_deja_qualifies).to eq 0 }
+      it { expect(metrique_nombre_retours_deja_qualifies).to eq 0 }
     end
 
     context 'deux qualifications de dangers différents' do
@@ -20,7 +21,7 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
          build(:evenement_qualification_danger,
                donnees: { reponse: 'bonne', danger: 'danger2' })]
       end
-      it { expect(restitution.nombre_retours_deja_qualifies).to eq 0 }
+      it { expect(metrique_nombre_retours_deja_qualifies).to eq 0 }
     end
 
     context 'deux qualifications du même danger' do
@@ -31,7 +32,7 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
          build(:evenement_qualification_danger,
                donnees: { reponse: 'bonne', danger: 'danger' })]
       end
-      it { expect(restitution.nombre_retours_deja_qualifies).to eq 1 }
+      it { expect(metrique_nombre_retours_deja_qualifies).to eq 1 }
     end
   end
 end

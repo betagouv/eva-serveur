@@ -3,17 +3,19 @@
 require 'rails_helper'
 
 describe Restitution::Securite::NombreReouvertureZonesSansDanger do
-  let(:campagne) { Campagne.new }
-  let(:restitution) { Restitution::Securite.new campagne, evenements }
+  let(:metrique_nombre_reouverture_zones_sans_danger) do
+    described_class.new(evenements_decores(evenements, :securite)).calcule
+  end
 
   describe '#nombre_reouverture_zones_sans_danger' do
     context 'sans réouverture' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
+        [
+          build(:evenement_demarrage),
+          build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })
+        ]
       end
-
-      it { expect(restitution.nombre_reouverture_zones_sans_danger).to eq 0 }
+      it { expect(metrique_nombre_reouverture_zones_sans_danger).to eq 0 }
     end
 
     context 'avec une réouverture' do
@@ -24,7 +26,7 @@ describe Restitution::Securite::NombreReouvertureZonesSansDanger do
          build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
       end
 
-      it { expect(restitution.nombre_reouverture_zones_sans_danger).to eq 1 }
+      it { expect(metrique_nombre_reouverture_zones_sans_danger).to eq 1 }
     end
 
     context "avec une autre réouverture d'une zone avec danger" do
@@ -37,7 +39,7 @@ describe Restitution::Securite::NombreReouvertureZonesSansDanger do
          build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
       end
 
-      it { expect(restitution.nombre_reouverture_zones_sans_danger).to eq 1 }
+      it { expect(metrique_nombre_reouverture_zones_sans_danger).to eq 1 }
     end
   end
 end

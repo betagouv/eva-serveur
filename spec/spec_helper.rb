@@ -49,7 +49,7 @@ RSpec.configure do |config|
     compte
   end
 
-  def evenements_decores(evenements)
-    evenements.map { |e| EvenementMaintenanceDecorator.new e }
+  def evenements_decores(evenements, scope)
+    evenements.map { |e| Evenement::DECORATORS[scope].new e }
   end
 end

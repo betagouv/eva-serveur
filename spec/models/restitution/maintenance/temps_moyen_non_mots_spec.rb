@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Maintenance::TempsMoyenNonMots do
   let(:metrique_moyenne_non_mots) do
-    described_class.new(evenements_decores(evenements)).calcule
+    described_class.new(evenements_decores(evenements, :maintenance)).calcule
   end
 
   describe '#metrique metrique_moyenne_non_mots' do

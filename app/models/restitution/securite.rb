@@ -52,9 +52,7 @@ module Restitution
     end
 
     def delai_ouvertures_zones_dangers
-      temps_entre_evenements do |e|
-        e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?
-      end
+      Metriques::SECURITE['delai_ouvertures_zones_dangers'].new(evenements_situation).calcule
     end
 
     def temps_recherche_zones_dangers
@@ -73,13 +71,6 @@ module Restitution
       return nil if delai_ouvertures_zones_dangers.empty?
 
       delai_ouvertures_zones_dangers.sum / delai_ouvertures_zones_dangers.size
-    end
-
-    private
-
-    def temps_entre_evenements
-      evenements = evenements_situation.select { |e| yield e }
-      MetriquesHelper.temps_entre_couples evenements
     end
   end
 end

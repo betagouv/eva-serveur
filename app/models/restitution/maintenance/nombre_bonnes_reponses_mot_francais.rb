@@ -10,7 +10,7 @@ module Restitution
       end
 
       def calcule
-        evenements_situation.select(&:identification_mot_francais_correct).count
+        evenements_situation.select(&:identification_mot_francais_correct?).count
       end
     end
   end

@@ -73,7 +73,6 @@ describe Restitution::Securite do
         expect(restitution).to receive(:delai_moyen_ouvertures_zones_dangers).and_return 7
         expect(restitution).to receive(:temps_entrainement).and_return 8
         expect(restitution).to receive(:temps_total).and_return 9
-        expect(restitution).to receive(:nombre_rejoue_consigne).and_return 10
         expect(restitution).to receive(:nombre_dangers_mal_identifies).and_return 1
         restitution.persiste
         partie.reload
@@ -87,7 +86,6 @@ describe Restitution::Securite do
         expect(partie.metriques['delai_moyen_ouvertures_zones_dangers']).to eql 7
         expect(partie.metriques['temps_entrainement']).to eql 8
         expect(partie.metriques['temps_total']).to eql 9
-        expect(partie.metriques['nombre_rejoue_consigne']).to eql 10
         expect(partie.metriques['nombre_dangers_mal_identifies']).to eql 1
       end
     end

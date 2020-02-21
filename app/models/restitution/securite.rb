@@ -6,7 +6,6 @@ module Restitution
     METRIQUES = {
       'temps_total' => 'parent',
       'temps_entrainement' => 'parent',
-      'nombre_rejoue_consigne' => 'parent',
       'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies,
       'nombre_dangers_bien_identifies_avant_aide_1' =>
                                           Securite::NombreDangersBienIdentifiesAvantAide1,

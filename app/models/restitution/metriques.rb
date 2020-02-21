@@ -17,8 +17,7 @@ module Restitution
       'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
       'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies,
       'delai_ouvertures_zones_dangers' => Securite::DelaiOuverturesZonesDangers,
-      'delai_moyen_ouvertures_zones_dangers' => Securite::DelaiMoyenOuverturesZonesDangers,
-      'nombre_rejoue_consigne' => Securite
+      'delai_moyen_ouvertures_zones_dangers' => Securite::DelaiMoyenOuverturesZonesDangers
     }.freeze
 
     MAINTENANCE = {

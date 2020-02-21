@@ -10,7 +10,7 @@ panel t('.restitution_maintenance') do
     row do |(titre, _)|
       strong titre
     end
-    Restitution::Metriques::MAINTENANCE.keys.each do |metrique|
+    Restitution::Maintenance::METRIQUES.keys.each do |metrique|
       row t(".#{metrique}") do |(_, r)|
         r.public_send(metrique)
       end

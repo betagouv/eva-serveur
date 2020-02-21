@@ -3,6 +3,24 @@
 module Restitution
   class Securite < AvecEntrainement
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
+    METRIQUES = {
+      'temps_total' => 'parent',
+      'temps_entrainement' => 'parent',
+      'nombre_rejoue_consigne' => 'parent',
+      'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies,
+      'nombre_dangers_bien_identifies_avant_aide_1' =>
+                                          Securite::NombreDangersBienIdentifiesAvantAide1,
+      'nombre_dangers_mal_identifies' => Securite::NombreDangersMalIdentifies,
+      'attention_visuo_spatiale' => Securite::AttentionVisuoSpaciale,
+      'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers,
+      'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers,
+      'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers,
+      'nombre_reouverture_zones_sans_danger' => Securite::NombreReouvertureZonesSansDanger,
+      'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
+      'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies,
+      'delai_ouvertures_zones_dangers' => Securite::DelaiOuverturesZonesDangers,
+      'delai_moyen_ouvertures_zones_dangers' => Securite::DelaiMoyenOuverturesZonesDangers
+    }.freeze
 
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementSecuriteDecorator.new e }
@@ -15,60 +33,23 @@ module Restitution
     end
 
     def persiste
-      metriques = Metriques::SECURITE.keys.each_with_object({}) do |methode, memo|
-        memo[methode] = public_send(methode)
+      metriques = METRIQUES.keys.each_with_object({}) do |nom_metrique, memo|
+        memo[nom_metrique] = public_send(nom_metrique)
       end
       partie.update(metriques: metriques)
     end
 
-    def nombre_dangers_bien_identifies
-      Metriques::SECURITE['nombre_dangers_bien_identifies'].new(evenements_situation).calcule
-    end
-
-    def nombre_dangers_mal_identifies
-      Metriques::SECURITE['nombre_dangers_mal_identifies'].new(evenements_situation).calcule
-    end
-
-    def nombre_bien_qualifies
-      Metriques::SECURITE['nombre_bien_qualifies'].new(evenements_situation).calcule
-    end
-
-    def nombre_retours_deja_qualifies
-      Metriques::SECURITE['nombre_retours_deja_qualifies'].new(evenements_situation).calcule
-    end
-
-    def nombre_dangers_bien_identifies_avant_aide_1
-      Metriques::SECURITE['nombre_dangers_bien_identifies_avant_aide_1']
-        .new(evenements_situation)
-        .calcule
-    end
-
-    def attention_visuo_spatiale
-      Metriques::SECURITE['attention_visuo_spatiale'].new(evenements_situation).calcule
-    end
-
-    def nombre_reouverture_zones_sans_danger
-      Metriques::SECURITE['nombre_reouverture_zones_sans_danger'].new(evenements_situation).calcule
-    end
-
-    def delai_ouvertures_zones_dangers
-      Metriques::SECURITE['delai_ouvertures_zones_dangers'].new(evenements_situation).calcule
-    end
-
-    def delai_moyen_ouvertures_zones_dangers
-      Metriques::SECURITE['delai_moyen_ouvertures_zones_dangers'].new(evenements_situation).calcule
-    end
-
-    def temps_recherche_zones_dangers
-      Metriques::SECURITE['temps_recherche_zones_dangers'].new(evenements_situation).calcule
-    end
-
-    def temps_bonnes_qualifications_dangers
-      Metriques::SECURITE['temps_bonnes_qualifications_dangers'].new(evenements_situation).calcule
-    end
-
-    def temps_total_ouverture_zones_dangers
-      Metriques::SECURITE['temps_total_ouverture_zones_dangers'].new(evenements_situation).calcule
+    METRIQUES.keys.each do |metrique|
+      define_method metrique do
+        clazz = METRIQUES[metrique]
+        if clazz == 'parent'
+          super()
+        else
+          clazz
+            .new(evenements_situation)
+            .calcule
+        end
+      end
     end
   end
 end

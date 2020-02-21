@@ -22,6 +22,7 @@ module Restitution
     }.freeze
 
     MAINTENANCE = {
+      'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais,
       'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot,
       'nombre_erreurs' => Maintenance::NombreErreurs,
       'nombre_non_reponses' => Maintenance::NombreNonReponses,

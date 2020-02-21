@@ -25,6 +25,7 @@ module Restitution
       'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot,
       'nombre_erreurs' => Maintenance::NombreErreurs,
       'nombre_non_reponses' => Maintenance::NombreNonReponses,
+      'temps_moyen_mots_français' => Maintenance::TempsMoyenMotsFrancais,
       'temps_moyen_non_mots' => Maintenance::TempsMoyenNonMots
     }.freeze
   end

@@ -123,7 +123,7 @@ fr:
         nombre_bonnes_reponses_non_mot: "Nombre de bonnes réponses (non-mot)"
         nombre_non_reponses: "Nombre de non réponses"
         temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"
-        temps_moyen_mots_français: "Temps moyen de réponse correcte mot français (en secondes)"
+        temps_moyen_mots_francais: "Temps moyen de réponse correcte mot français (en secondes)"
         nombre_bonnes_reponses_mot_français: "Nombre de bonnes réponses (mot français)"
       restitution_colonnes:
         cote_z: Cote Z

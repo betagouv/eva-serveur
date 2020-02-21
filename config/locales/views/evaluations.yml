@@ -121,7 +121,6 @@ fr:
         restitution_maintenance: Restitution de la situation maintenance
         nombre_bonnes_reponses_francais: "Nombre de bonnes réponses (mot français)"
         nombre_bonnes_reponses_non_mot: "Nombre de bonnes réponses (non-mot)"
-        nombre_erreurs: "Nombre d'erreurs"
         nombre_non_reponses: "Nombre de non réponses"
         temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"
         temps_moyen_mots_français: "Temps moyen de réponse correcte mot français (en secondes)"

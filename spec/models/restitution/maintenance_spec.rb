@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Maintenance do
   describe '#persiste' do
-    context "persiste l'ensemble des données de sécurité" do
+    context "persiste l'ensemble des données de maintenance" do
       let(:campagne) { Campagne.new }
       let(:restitution) { described_class.new campagne, evenements }
 
@@ -16,11 +16,9 @@ describe Restitution::Maintenance do
       end
 
       it do
-        expect(restitution).to receive(:nombre_erreurs).and_return 1
         expect(restitution).to receive(:nombre_non_reponses).and_return 2
         restitution.persiste
         partie.reload
-        expect(partie.metriques['nombre_erreurs']).to eq 1
         expect(partie.metriques['nombre_non_reponses']).to eq 2
       end
     end

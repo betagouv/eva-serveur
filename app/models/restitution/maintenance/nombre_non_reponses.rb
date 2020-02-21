@@ -10,7 +10,7 @@ module Restitution
       end
 
       def calcule
-        evenements_situation.select(&:non_reponse).count
+        evenements_situation.select(&:non_reponse?).count
       end
     end
   end

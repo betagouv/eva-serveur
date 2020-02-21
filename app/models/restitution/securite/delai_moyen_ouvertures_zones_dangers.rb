@@ -8,7 +8,7 @@ module Restitution
       end
 
       def calcule
-        delais = Metriques::SECURITE['delai_ouvertures_zones_dangers']
+        delais = Securite::METRIQUES['delai_ouvertures_zones_dangers']
                  .new(@evenements_situation)
                  .calcule
 

@@ -7,5 +7,6 @@ panel t('.titre') do
             scope: 'admin.evaluations.restitution_competence')) { niveau }
     end
     row(t('.efficience')) { formate_efficience(restitution.efficience) }
+    row :score
   end
 end

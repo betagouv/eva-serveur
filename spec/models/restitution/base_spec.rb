@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 describe Restitution::Base do
+  let(:evenements)  { [] }
   let(:campagne)    { build(:campagne) }
   let(:restitution) { described_class.new(campagne, evenements) }
   let(:evaluation)  { create :evaluation }
@@ -46,8 +47,6 @@ describe Restitution::Base do
   end
 
   context 'renvoie par défaut une liste vide pour les compétences évaluées' do
-    let(:evenements) { [] }
-
     it { expect(restitution.competences).to eql({}) }
   end
 
@@ -75,8 +74,6 @@ describe Restitution::Base do
   end
 
   describe '#efficience' do
-    let(:evenements) { [] }
-
     it "retourne l'efficience sans les compétences persévérance et compréhension consigne" do
       expect(restitution).to receive(:competences).and_return(
         ::Competence::PERSEVERANCE => Competence::NIVEAU_1,
@@ -100,6 +97,12 @@ describe Restitution::Base do
     it "retourne 0 lorsque rien n'a été mesuré" do
       expect(restitution).to receive(:competences).and_return({})
       expect(restitution.efficience).to eql(0)
+    end
+  end
+
+  describe '#score' do
+    it 'renvoie nil par défaut' do
+      expect(restitution.score).to eql(nil)
     end
   end
 end

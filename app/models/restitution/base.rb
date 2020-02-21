@@ -83,6 +83,8 @@ module Restitution
       end / competences_utilisees.size
     end
 
+    def score; end
+
     def to_param
       partie.id
     end

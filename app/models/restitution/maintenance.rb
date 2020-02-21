@@ -9,7 +9,7 @@ module Restitution
 
     Restitution::Metriques::MAINTENANCE.keys.each do |metrique|
       define_method metrique do
-        Metriques::MAINTENANCE[metrique]
+        Restitution::Metriques::MAINTENANCE[metrique]
           .new(evenements_situation)
           .calcule
       end

@@ -39,7 +39,7 @@ module Restitution
       def apparitions_et_reponses(evenements, filtre_reponse, &filtre_evenements)
         evenements_retenus = []
         evenements.select(&filtre_evenements).each_slice(2) do |apparition, reponse|
-          next unless reponse.send(filtre_reponse)
+          next unless reponse&.send(filtre_reponse)
 
           evenements_retenus << apparition << reponse
         end

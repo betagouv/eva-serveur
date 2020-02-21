@@ -43,6 +43,17 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
       it { expect(metrique_moyenne_non_mots).to eq nil }
     end
 
+    context "avec un événement d'identification sans identification" do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_apparition_mot, donnees: { type: 'non-mot', reponse: 'pasfrancais' },
+                                           date: Time.local(2019, 10, 9, 10, 1, 21, 250_000))
+        ]
+      end
+      it { expect(metrique_moyenne_non_mots).to eq nil }
+    end
+
     context "avec un événement d'identification non-mot non réponse" do
       let(:evenements) do
         [

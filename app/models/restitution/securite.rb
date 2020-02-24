@@ -40,14 +40,9 @@ module Restitution
 
     METRIQUES.keys.each do |metrique|
       define_method metrique do
-        clazz = METRIQUES[metrique]
-        if clazz == 'parent'
-          super()
-        else
-          clazz
-            .new(evenements_situation, evenements_entrainement)
-            .calcule
-        end
+        METRIQUES[metrique]
+          .new(evenements_situation, evenements_entrainement)
+          .calcule
       end
     end
   end

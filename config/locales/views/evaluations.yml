@@ -118,6 +118,8 @@ fr:
         delai_moyen_ouvertures_zones_dangers: Délai moyen avant ouverture de zone de danger
         attention_visuo_spatiale: Attention visuo-spatiale
       restitution_maintenance:
+        temps_total: Temps total passé dans la situation
+        temps_entrainement: Temps passé dans l'entrainement
         restitution_maintenance: Restitution de la situation maintenance
         nombre_bonnes_reponses_francais: "Nombre de bonnes réponses (mot français)"
         nombre_bonnes_reponses_non_mot: "Nombre de bonnes réponses (non-mot)"

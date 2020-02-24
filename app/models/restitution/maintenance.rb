@@ -3,6 +3,7 @@
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
+      'temps_total' => Base::TempsTotal,
       'temps_entrainement' => AvecEntrainement::TempsEntrainement,
       'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais,
       'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot,

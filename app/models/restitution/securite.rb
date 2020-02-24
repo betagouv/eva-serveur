@@ -4,7 +4,7 @@ module Restitution
   class Securite < AvecEntrainement
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
     METRIQUES = {
-      'temps_total' => 'parent',
+      'temps_total' => Base::TempsTotal,
       'temps_entrainement' => AvecEntrainement::TempsEntrainement,
       'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies,
       'nombre_dangers_bien_identifies_avant_aide_1' =>

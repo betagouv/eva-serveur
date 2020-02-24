@@ -43,6 +43,7 @@ module Restitution
       evenements.count { |e| e.nom == nom }
     end
 
+    # Deprecated: utiliser la regle Base::TempsTotal a la place
     def temps_total
       evenements.last.date - evenements.first.date
     end

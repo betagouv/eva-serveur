@@ -2,11 +2,7 @@
 
 module Restitution
   class Securite
-    class NombreRetoursDejaQualifies
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class NombreRetoursDejaQualifies < Restitution::Metriques::Base
       def calcule
         qualifications_par_dangers = SecuriteHelper.qualifications_par_danger(@evenements_situation)
         qualifications_par_dangers.inject(0) do |memo, (_danger, qualifications)|

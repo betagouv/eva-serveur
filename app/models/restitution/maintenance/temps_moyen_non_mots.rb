@@ -2,15 +2,9 @@
 
 module Restitution
   class Maintenance
-    class TempsMoyenNonMots
-      attr_reader :evenements_situation
-
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class TempsMoyenNonMots < Restitution::Metriques::Base
       def calcule
-        Restitution::MetriquesHelper.temps_action_moyen(evenements_situation,
+        Restitution::MetriquesHelper.temps_action_moyen(@evenements_situation,
                                                         :identification_non_mot_correct?,
                                                         &:type_non_mot?)
       end

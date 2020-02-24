@@ -2,11 +2,7 @@
 
 module Restitution
   class Securite
-    class DelaiOuverturesZonesDangers
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class DelaiOuverturesZonesDangers < Restitution::Metriques::Base
       def calcule
         evenements_selectionnes = @evenements_situation.select do |e|
           e.demarrage? || e.qualification_danger? || e.ouverture_zone_danger?

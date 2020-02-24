@@ -2,11 +2,7 @@
 
 module Restitution
   class AvecEntrainement
-    class TempsEntrainement
-      def initialize(_, evenements_entrainement)
-        @evenements_entrainement = evenements_entrainement
-      end
-
+    class TempsEntrainement < Restitution::Metriques::Base
       def calcule
         return nil if @evenements_entrainement.empty?
 

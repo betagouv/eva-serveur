@@ -25,13 +25,10 @@ module Restitution
         premier_evenement_du_nom(evenements, EVENEMENT[:ACTIVATION_AIDE_1])
       end
 
-      def temps_action_moyen(evenements, filtre_reponse, &filtre_evenements)
-        temps = temps_entre_couples(
+      def temps_action(evenements, filtre_reponse, &filtre_evenements)
+        temps_entre_couples(
           apparitions_et_reponses(evenements, filtre_reponse, &filtre_evenements)
         )
-        return nil if temps.count.zero?
-
-        (temps.sum / temps.count).round(4)
       end
 
       private

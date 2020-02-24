@@ -2,15 +2,9 @@
 
 module Restitution
   class Securite
-    class DelaiMoyenOuverturesZonesDangers < Restitution::Metriques::Base
-      def calcule
-        delais = Securite::METRIQUES['delai_ouvertures_zones_dangers']
-                 .new(@evenements_situation, @evenements_entrainement)
-                 .calcule
-
-        return nil if delais.empty?
-
-        delais.sum.fdiv(delais.size)
+    class DelaiMoyenOuverturesZonesDangers < Restitution::Metriques::Moyenne
+      def classe_metrique
+        Securite::METRIQUES['delai_ouvertures_zones_dangers']
       end
     end
   end

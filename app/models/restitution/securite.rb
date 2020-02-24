@@ -5,7 +5,7 @@ module Restitution
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
     METRIQUES = {
       'temps_total' => 'parent',
-      'temps_entrainement' => 'parent',
+      'temps_entrainement' => AvecEntrainement::TempsEntrainement,
       'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies,
       'nombre_dangers_bien_identifies_avant_aide_1' =>
                                           Securite::NombreDangersBienIdentifiesAvantAide1,
@@ -45,7 +45,7 @@ module Restitution
           super()
         else
           clazz
-            .new(evenements_situation)
+            .new(evenements_situation, evenements_entrainement)
             .calcule
         end
       end

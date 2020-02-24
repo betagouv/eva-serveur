@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::AttentionVisuoSpaciale do
   let(:metrique_attention_visuo_spaciale) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#attention_visuo_spatiale' do

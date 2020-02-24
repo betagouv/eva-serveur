@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::TempsBonnesQualificationsDangers do
   let(:metrique_temps_bonnes_qualifications_dangers) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#temps_bonnes_qualifications_dangers' do

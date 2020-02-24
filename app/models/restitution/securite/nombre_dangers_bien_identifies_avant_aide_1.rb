@@ -5,7 +5,7 @@ module Restitution
     class NombreDangersBienIdentifiesAvantAide1
       attr_reader :evenements_situation
 
-      def initialize(evenements)
+      def initialize(evenements, _)
         @evenements_situation = evenements
       end
 

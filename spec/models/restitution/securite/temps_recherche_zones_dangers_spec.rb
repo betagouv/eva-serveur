@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::TempsRechercheZonesDangers do
   let(:metrique_temps_recherche_zones_dangers) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#temps_recherche_zones_dangers' do

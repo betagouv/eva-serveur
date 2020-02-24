@@ -3,6 +3,7 @@
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
+      'temps_entrainement' => AvecEntrainement::TempsEntrainement,
       'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais,
       'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot,
       'nombre_non_reponses' => Maintenance::NombreNonReponses,
@@ -18,7 +19,7 @@ module Restitution
     METRIQUES.keys.each do |metrique|
       define_method metrique do
         METRIQUES[metrique]
-          .new(evenements_situation)
+          .new(evenements_situation, evenements_entrainement)
           .calcule
       end
     end

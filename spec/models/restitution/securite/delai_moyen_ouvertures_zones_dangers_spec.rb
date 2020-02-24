@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::DelaiMoyenOuverturesZonesDangers do
   let(:metrique_delai_moyen_ouvertures_zones_dangers) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#delai_moyen_ouvertures_zones_dangers' do

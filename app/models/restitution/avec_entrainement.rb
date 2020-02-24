@@ -6,10 +6,6 @@ module Restitution
       DEMARRAGE: 'demarrage'
     }.freeze
 
-    def temps_entrainement
-      evenements_entrainement.last.date - evenements_entrainement.first.date
-    end
-
     def demarrage
       @demarrage ||= MetriquesHelper.premier_evenement_du_nom(evenements, EVENEMENT[:DEMARRAGE])
     end

@@ -3,7 +3,7 @@
 module Restitution
   class Securite
     class NombreDangersMalIdentifies
-      def initialize(evenements_situation)
+      def initialize(evenements_situation, _)
         @evenements_situation = evenements_situation
       end
 

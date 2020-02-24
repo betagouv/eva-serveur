@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::NombreDangersBienQualifies do
   let(:metrique_nombre_bien_qualifies) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#nombre_bien_qualifies' do

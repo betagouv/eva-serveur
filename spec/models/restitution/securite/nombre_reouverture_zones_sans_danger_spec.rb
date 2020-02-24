@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::NombreReouvertureZonesSansDanger do
   let(:metrique_nombre_reouverture_zones_sans_danger) do
-    described_class.new(evenements_decores(evenements, :securite)).calcule
+    described_class.new(evenements_decores(evenements, :securite), []).calcule
   end
 
   describe '#nombre_reouverture_zones_sans_danger' do

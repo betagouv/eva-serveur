@@ -6,52 +6,17 @@ describe Restitution::AvecEntrainement do
   let(:campagne) { Campagne.new }
   let(:restitution) { Restitution::AvecEntrainement.new campagne, evenements }
 
-  describe '#evenements_situation' do
+  describe '#evenements_situation et #evenements_entrainement' do
     context "ignore les évenements d'entrainement même s'ils ont la même date" do
+      let(:demarrage_entrainement) do
+        build(:evenement_demarrage_entrainement,
+              date: Time.local(2019, 10, 9, 10, 0))
+      end
       let(:demarrage) { build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)) }
-      let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.local(2019, 10, 9, 10, 0)),
-         demarrage]
-      end
+      let(:evenements) { [demarrage_entrainement, demarrage] }
+
+      it { expect(restitution.evenements_entrainement).to eq [demarrage_entrainement] }
       it { expect(restitution.evenements_situation).to eq [demarrage] }
-    end
-  end
-
-  describe '#temps_entrainement' do
-    context "lorsqu'il est terminé" do
-      let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.local(2019, 10, 9, 10, 2)),
-         build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: 'danger' }, date: Time.local(2019, 10, 9, 10, 3)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 7))]
-      end
-
-      it { expect(restitution.temps_entrainement).to eq 5.minutes }
-    end
-
-    context "lorsqu'il n'est pas terminé" do
-      let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.local(2019, 10, 9, 10, 2)),
-         build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: 'danger' },
-               date: Time.local(2019, 10, 9, 10, 4))]
-      end
-
-      it { expect(restitution.temps_entrainement).to eq 2.minutes }
-    end
-
-    context 'ne prend pas en compte le temps de la situation' do
-      let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.local(2019, 10, 9, 10, 2)),
-         build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: 'danger' },
-               date: Time.local(2019, 10, 9, 10, 4)),
-         build(:evenement_qualification_danger, date: Time.local(2019, 10, 9, 10, 4)),
-         build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 6)),
-         build(:evenement_identification_danger)]
-      end
-
-      it { expect(restitution.temps_entrainement).to eq 2.minutes }
     end
   end
 end

@@ -2,13 +2,7 @@
 
 module Restitution
   class Securite
-    class TempsTotalOuvertureZonesDangers
-      attr_reader :evenements_situation
-
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class TempsTotalOuvertureZonesDangers < Restitution::Metriques::Base
       def calcule
         temps_par_danger = {}
         evenements_par_danger.each do |danger, les_evenements|
@@ -21,7 +15,7 @@ module Restitution
       private
 
       def evenements_par_danger
-        SecuriteHelper.filtre_par_danger(evenements_situation) do |e|
+        SecuriteHelper.filtre_par_danger(@evenements_situation) do |e|
           e.ouverture_zone_danger? || e.qualification_danger?
         end
       end

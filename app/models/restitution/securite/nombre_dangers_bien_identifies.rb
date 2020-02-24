@@ -2,11 +2,7 @@
 
 module Restitution
   class Securite
-    class NombreDangersBienIdentifies
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class NombreDangersBienIdentifies < Restitution::Metriques::Base
       def calcule
         @evenements_situation.select(&:est_un_danger_bien_identifie?).count
       end

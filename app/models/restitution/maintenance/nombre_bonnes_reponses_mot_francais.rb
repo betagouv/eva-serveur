@@ -2,15 +2,9 @@
 
 module Restitution
   class Maintenance
-    class NombreBonnesReponsesMotFrancais
-      attr_reader :evenements_situation
-
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class NombreBonnesReponsesMotFrancais < Restitution::Metriques::Base
       def calcule
-        evenements_situation.select(&:identification_mot_francais_correct?).count
+        @evenements_situation.select(&:identification_mot_francais_correct?).count
       end
     end
   end

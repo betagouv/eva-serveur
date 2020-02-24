@@ -2,15 +2,9 @@
 
 module Restitution
   class Maintenance
-    class NombreNonReponses
-      attr_reader :evenements_situation
-
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class NombreNonReponses < Restitution::Metriques::Base
       def calcule
-        evenements_situation.select(&:non_reponse?).count
+        @evenements_situation.select(&:non_reponse?).count
       end
     end
   end

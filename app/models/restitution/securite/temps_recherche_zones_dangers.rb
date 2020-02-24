@@ -2,13 +2,7 @@
 
 module Restitution
   class Securite
-    class TempsRechercheZonesDangers
-      attr_reader :evenements_situation
-
-      def initialize(evenements_situation, _)
-        @evenements_situation = evenements_situation
-      end
-
+    class TempsRechercheZonesDangers < Restitution::Metriques::Base
       def calcule
         durees = {}
         Securite::ZONES_DANGER.each do |danger|
@@ -22,7 +16,7 @@ module Restitution
 
       def duree_recherche(danger)
         date_evenement_precedent = nil
-        evenements_situation.each do |e|
+        @evenements_situation.each do |e|
           if e.demarrage? || e.qualification_danger?
             date_evenement_precedent = e.date
           elsif e.donnees['danger'] == danger && e.ouverture_zone_danger?

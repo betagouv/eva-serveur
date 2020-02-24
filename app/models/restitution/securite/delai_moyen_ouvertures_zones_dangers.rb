@@ -2,12 +2,7 @@
 
 module Restitution
   class Securite
-    class DelaiMoyenOuverturesZonesDangers
-      def initialize(evenements_situation, evenements_entrainement)
-        @evenements_situation = evenements_situation
-        @evenements_entrainement = evenements_entrainement
-      end
-
+    class DelaiMoyenOuverturesZonesDangers < Restitution::Metriques::Base
       def calcule
         delais = Securite::METRIQUES['delai_ouvertures_zones_dangers']
                  .new(@evenements_situation, @evenements_entrainement)

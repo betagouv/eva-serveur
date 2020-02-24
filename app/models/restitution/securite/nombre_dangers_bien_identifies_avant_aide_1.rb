@@ -2,16 +2,10 @@
 
 module Restitution
   class Securite
-    class NombreDangersBienIdentifiesAvantAide1
-      attr_reader :evenements_situation
-
-      def initialize(evenements, _)
-        @evenements_situation = evenements
-      end
-
+    class NombreDangersBienIdentifiesAvantAide1 < Restitution::Metriques::Base
       def calcule
-        activation_aide1 = MetriquesHelper.activation_aide1(evenements_situation)
-        dangers_bien_identifies = evenements_situation.select(&:est_un_danger_bien_identifie?)
+        activation_aide1 = MetriquesHelper.activation_aide1(@evenements_situation)
+        dangers_bien_identifies = @evenements_situation.select(&:est_un_danger_bien_identifie?)
         return dangers_bien_identifies.count if activation_aide1.blank?
 
         dangers_bien_identifies.partition do |danger|

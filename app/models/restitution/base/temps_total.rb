@@ -2,12 +2,7 @@
 
 module Restitution
   class Base
-    class TempsTotal
-      def initialize(evenements_situation, evenements_entrainement)
-        @evenements_situation = evenements_situation
-        @evenements_entrainement = evenements_entrainement
-      end
-
+    class TempsTotal < Restitution::Metriques::Base
       def calcule
         evenements = @evenements_entrainement + @evenements_situation
         return nil if evenements.empty?

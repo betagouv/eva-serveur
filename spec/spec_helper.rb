@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'capybara/rspec'
+require_relative '../app/decorators/evenement_maintenance'
+require_relative '../app/decorators/evenement_securite'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -33,6 +35,11 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
+  DECORATORS = {
+    maintenance: EvenementMaintenance,
+    securite: EvenementSecurite
+  }.freeze
+
   def se_connecter_comme_administrateur
     connecte create(:compte_admin, email: 'admin@exemple.fr', password: 'password')
   end
@@ -50,6 +57,6 @@ RSpec.configure do |config|
   end
 
   def evenements_decores(evenements, scope)
-    evenements.map { |e| Evenement::DECORATORS[scope].new e }
+    evenements.map { |e| DECORATORS[scope].new e }
   end
 end

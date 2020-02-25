@@ -10,56 +10,26 @@ panel t('.restitution_securite') do
     row do |(titre, _)|
       strong titre
     end
-    row t('.temps_entrainement') do |(_, r)|
-      formate_duree r.temps_entrainement
-    end
-    row t('.dangers_bien_identifies') do |(_, r)|
-      r.nombre_dangers_bien_identifies
-    end
-    row t('.dangers_mal_identifies') do |(_, r)|
-      r.nombre_dangers_mal_identifies
-    end
-    row t('.dangers_bien_identifies_avant_aide_1') do |(_, r)|
-      r.nombre_dangers_bien_identifies_avant_aide_1
-    end
-    row t('.dangers_bien_qualifies') do |(_, r)|
-      r.nombre_bien_qualifies
-    end
-    row t('.retours_dangers_deja_qualifies') do |(_, r)|
-      r.nombre_retours_deja_qualifies
-    end
-    row t('.delai_ouvertures_zones_dangers') do |_, r|
-      formate_durees r.delai_ouvertures_zones_dangers
-    end
-    row t('.delai_moyen_ouvertures_zones_dangers') do |_, r|
-      formate_duree r.delai_moyen_ouvertures_zones_dangers
-    end
-    row t('.attention_visuo_spatiale') do |_, r|
-      if r.attention_visuo_spatiale.present?
-        t(r.attention_visuo_spatiale, scope: 'admin.evaluations.restitution_competence')
-      end
-    end
-    row t('.retours_zones_sans_danger') do |(_, r)|
-      r.nombre_reouverture_zones_sans_danger
-    end
-    row t('.temps_bonnes_qualifications_dangers') do |(_, r)|
-      ul do
-        r.temps_bonnes_qualifications_dangers&.each do |danger, temps|
-          li "#{danger} : #{formate_duree(temps)}"
-        end
-      end
-    end
-    row t('.temps_recherche_zones_dangers') do |(_, r)|
-      ul do
-        r.temps_recherche_zones_dangers&.each do |danger, temps|
-          li "#{danger} : #{formate_duree(temps)}"
-        end
-      end
-    end
-    row t('.temps_total_ouverture_zones_dangers') do |(_, r)|
-      ul do
-        r.temps_total_ouverture_zones_dangers&.each do |danger, temps|
-          li "#{danger} : #{formate_duree(temps)}"
+    Restitution::Securite::METRIQUES.each do |nom_metrique, data|
+      row t(".#{nom_metrique}") do |(_, r)|
+        valeur = r.public_send(nom_metrique)
+        case data['type']
+        when :texte
+          t(valeur, scope: 'admin.evaluations.restitution_competence')
+        when :temps
+          formate_duree valeur
+        when :liste_temps
+          formate_durees valeur
+        when :map
+          ul do
+            valeur&.each do |danger, temps|
+              li "#{danger} : #{formate_duree(temps)}"
+            end
+          end
+        when :nombre
+          valeur
+        else
+          valeur
         end
       end
     end

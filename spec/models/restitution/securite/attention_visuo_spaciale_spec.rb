@@ -8,7 +8,7 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
   end
 
   describe '#attention_visuo_spatiale' do
-    let(:danger_visuo_spatial) { EvenementSecuriteDecorator::DANGER_VISUO_SPATIAL }
+    let(:danger_visuo_spatial) { EvenementSecurite::DANGER_VISUO_SPATIAL }
     context 'sans évenement: indéterminé' do
       let(:evenements) { [] }
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::NIVEAU_INDETERMINE }

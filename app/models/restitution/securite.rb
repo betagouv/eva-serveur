@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../decorators/evenement_securite'
+
 module Restitution
   class Securite < AvecEntrainement
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
@@ -22,7 +24,7 @@ module Restitution
     }.freeze
 
     def initialize(campagne, evenements)
-      evenements = evenements.map { |e| EvenementSecuriteDecorator.new e }
+      evenements = evenements.map { |e| EvenementSecurite.new e }
       super(campagne, evenements)
     end
 

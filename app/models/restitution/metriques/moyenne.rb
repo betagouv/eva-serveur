@@ -3,9 +3,12 @@
 module Restitution
   module Metriques
     class Moyenne < Restitution::Metriques::Base
-      def calcule
-        moyenne classe_metrique.new(@evenements_situation, @evenements_entrainement)
-                               .calcule
+      def initialize(metrique_a_moyenner)
+        @metrique_a_moyenner = metrique_a_moyenner
+      end
+
+      def calcule(evenements_situation, evenements_entrainement)
+        moyenne @metrique_a_moyenner.calcule(evenements_situation, evenements_entrainement)
       end
 
       private

@@ -3,13 +3,15 @@
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
-      'temps_total' => Base::TempsTotal,
-      'temps_entrainement' => AvecEntrainement::TempsEntrainement,
-      'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais,
-      'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot,
-      'nombre_non_reponses' => Maintenance::NombreNonReponses,
-      'temps_moyen_mots_francais' => Maintenance::TempsMoyenMotsFrancais,
-      'temps_moyen_non_mots' => Maintenance::TempsMoyenNonMots
+      'temps_total' => Base::TempsTotal.new,
+      'temps_entrainement' => AvecEntrainement::TempsEntrainement.new,
+      'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais.new,
+      'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot.new,
+      'nombre_non_reponses' => Maintenance::NombreNonReponses.new,
+      'temps_moyen_mots_francais' =>
+                       Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new),
+      'temps_moyen_non_mots' =>
+                       Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
     }.freeze
 
     def initialize(campagne, evenements)
@@ -20,8 +22,7 @@ module Restitution
     METRIQUES.keys.each do |metrique|
       define_method metrique do
         METRIQUES[metrique]
-          .new(evenements_situation, evenements_entrainement)
-          .calcule
+          .calcule(evenements_situation, evenements_entrainement)
       end
     end
 

@@ -3,10 +3,10 @@
 module Restitution
   class Securite
     class TempsRechercheZonesDangers < Restitution::Metriques::Base
-      def calcule
+      def calcule(evenements_situation, _)
         durees = {}
         Securite::ZONES_DANGER.each do |danger|
-          duree = duree_recherche(danger)
+          duree = duree_recherche(danger, evenements_situation)
           durees[danger] = duree if duree.present?
         end
         durees
@@ -14,9 +14,9 @@ module Restitution
 
       private
 
-      def duree_recherche(danger)
+      def duree_recherche(danger, evenements_situation)
         date_evenement_precedent = nil
-        @evenements_situation.each do |e|
+        evenements_situation.each do |e|
           if e.demarrage? || e.qualification_danger?
             date_evenement_precedent = e.date
           elsif e.donnees['danger'] == danger && e.ouverture_zone_danger?

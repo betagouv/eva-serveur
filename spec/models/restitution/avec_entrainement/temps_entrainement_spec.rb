@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::AvecEntrainement::TempsEntrainement do
   let(:metrique_temps_entrainement) do
-    described_class.new(nil, evenements).calcule
+    described_class.new.calcule([], evenements)
   end
 
   describe '#temps_entrainement' do

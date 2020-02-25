@@ -3,8 +3,8 @@
 module Restitution
   class Base
     class TempsTotal < Restitution::Metriques::Base
-      def calcule
-        evenements = @evenements_entrainement + @evenements_situation
+      def calcule(evenements_situation, evenements_entrainement)
+        evenements = evenements_entrainement + evenements_situation
         return nil if evenements.empty?
 
         evenements.last.date - evenements.first.date

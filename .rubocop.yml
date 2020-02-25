@@ -14,6 +14,9 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Style/AsciiComments:
+  AllowedChars: ['à', 'é', 'è', 'ë', 'ê', 'î', 'ï', 'ô', 'ù', 'ç', 'À', 'É', 'È', 'Ë', 'Ê', 'Î', 'Ï', 'Ô', 'Ù', 'Ç']
+
 Layout/LineLength:
   Max: 100
 

@@ -2,19 +2,19 @@
 
 require 'rails_helper'
 
-describe Restitution::Maintenance::TempsMoyenNonMots do
-  let(:metrique_moyenne_non_mots) do
-    described_class.new(evenements_decores(evenements, :maintenance), []).calcule
+describe Restitution::Maintenance::TempsNonMots do
+  let(:metrique_temps_non_mots) do
+    described_class.new.calcule(evenements_decores(evenements, :maintenance), [])
   end
 
-  describe '#metrique metrique_moyenne_non_mots' do
+  describe '#metrique metrique_temps_non_mots' do
     context "aucun événement d'identification" do
       let(:evenements) do
         [
           build(:evenement_demarrage)
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq nil }
+      it { expect(metrique_temps_non_mots).to eq [] }
     end
 
     context "avec un événement d'identification non-mot correct" do
@@ -27,7 +27,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 960_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq 0.01 }
+      it { expect(metrique_temps_non_mots).to eq [0.01] }
     end
 
     context "avec un événement d'identification non-mot incorrect" do
@@ -40,7 +40,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq nil }
+      it { expect(metrique_temps_non_mots).to eq [] }
     end
 
     context "avec un événement d'identification sans identification" do
@@ -51,7 +51,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                            date: Time.local(2019, 10, 9, 10, 1, 21, 250_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq nil }
+      it { expect(metrique_temps_non_mots).to eq [] }
     end
 
     context "avec un événement d'identification non-mot non réponse" do
@@ -64,7 +64,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
-      it { expect(metrique_moyenne_non_mots).to eq nil }
+      it { expect(metrique_temps_non_mots).to eq [] }
     end
 
     context "avec deux événements d'identification non-mot correct et un incorrect" do
@@ -86,7 +86,7 @@ describe Restitution::Maintenance::TempsMoyenNonMots do
         ]
       end
       it 'ne prend en compte que les idenfifications correctes' do
-        expect(metrique_moyenne_non_mots).to eq 0.935
+        expect(metrique_temps_non_mots).to eq [0.01, 1.86]
       end
     end
   end

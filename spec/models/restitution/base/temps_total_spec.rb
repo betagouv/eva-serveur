@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Base::TempsTotal do
   let(:metrique_temps_total) do
-    described_class.new(evenements_situation, evenements_entrainement).calcule
+    described_class.new.calcule(evenements_situation, evenements_entrainement)
   end
 
   describe '#temps_total' do

@@ -6,21 +6,22 @@ module Restitution
   class Securite < AvecEntrainement
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
     METRIQUES = {
-      'temps_total' => Base::TempsTotal,
-      'temps_entrainement' => AvecEntrainement::TempsEntrainement,
-      'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies,
+      'temps_total' => Base::TempsTotal.new,
+      'temps_entrainement' => AvecEntrainement::TempsEntrainement.new,
+      'nombre_dangers_bien_identifies' => Securite::NombreDangersBienIdentifies.new,
       'nombre_dangers_bien_identifies_avant_aide_1' =>
-                                          Securite::NombreDangersBienIdentifiesAvantAide1,
-      'nombre_dangers_mal_identifies' => Securite::NombreDangersMalIdentifies,
-      'attention_visuo_spatiale' => Securite::AttentionVisuoSpaciale,
-      'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers,
-      'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers,
-      'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers,
-      'nombre_reouverture_zones_sans_danger' => Securite::NombreReouvertureZonesSansDanger,
-      'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies,
-      'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies,
-      'delai_ouvertures_zones_dangers' => Securite::DelaiOuverturesZonesDangers,
-      'delai_moyen_ouvertures_zones_dangers' => Securite::DelaiMoyenOuverturesZonesDangers
+                                  Securite::NombreDangersBienIdentifiesAvantAide1.new,
+      'nombre_dangers_mal_identifies' => Securite::NombreDangersMalIdentifies.new,
+      'attention_visuo_spatiale' => Securite::AttentionVisuoSpaciale.new,
+      'temps_bonnes_qualifications_dangers' => Securite::TempsBonnesQualificationsDangers.new,
+      'temps_recherche_zones_dangers' => Securite::TempsRechercheZonesDangers.new,
+      'temps_total_ouverture_zones_dangers' => Securite::TempsTotalOuvertureZonesDangers.new,
+      'nombre_reouverture_zones_sans_danger' => Securite::NombreReouvertureZonesSansDanger.new,
+      'nombre_bien_qualifies' => Securite::NombreDangersBienQualifies.new,
+      'nombre_retours_deja_qualifies' => Securite::NombreRetoursDejaQualifies.new,
+      'delai_ouvertures_zones_dangers' => Securite::DelaiOuverturesZonesDangers.new,
+      'delai_moyen_ouvertures_zones_dangers' =>
+                                  Metriques::Moyenne.new(Securite::DelaiOuverturesZonesDangers.new)
     }.freeze
 
     def initialize(campagne, evenements)
@@ -43,8 +44,7 @@ module Restitution
     METRIQUES.keys.each do |metrique|
       define_method metrique do
         METRIQUES[metrique]
-          .new(evenements_situation, evenements_entrainement)
-          .calcule
+          .calcule(evenements_situation, evenements_entrainement)
       end
     end
   end

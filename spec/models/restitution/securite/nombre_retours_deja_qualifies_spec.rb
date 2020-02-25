@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Securite::NombreRetoursDejaQualifies do
   let(:metrique_nombre_retours_deja_qualifies) do
-    described_class.new(evenements_decores(evenements, :securite), []).calcule
+    described_class.new.calcule(evenements_decores(evenements, :securite), [])
   end
 
   describe '#nombre_retours_deja_qualifies' do

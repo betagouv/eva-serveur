@@ -39,11 +39,11 @@ module Restitution
       resultat = nil
 
       if temps_moyen_mots_francais.present?
-        resultat = temps_moyen_mots_francais * nombre_bonnes_reponses_francais
+        resultat = nombre_bonnes_reponses_francais / temps_moyen_mots_francais
       end
 
       if temps_moyen_non_mots.present?
-        resultat = nombre_bonnes_reponses_non_mot * temps_moyen_non_mots + (resultat || 0)
+        resultat = nombre_bonnes_reponses_non_mot / temps_moyen_non_mots + (resultat || 0)
       end
 
       resultat

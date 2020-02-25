@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EvenementMaintenanceDecorator < SimpleDelegator
+class EvenementMaintenance < SimpleDelegator
   EVENEMENT = {
     NON_MOT: 'non-mot',
     REPONSE_NON_FRANCAIS: 'pasfrancais',

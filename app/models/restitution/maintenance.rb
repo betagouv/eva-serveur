@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../decorators/evenement_maintenance'
+
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
@@ -13,7 +15,7 @@ module Restitution
     }.freeze
 
     def initialize(campagne, evenements)
-      evenements = evenements.map { |e| EvenementMaintenanceDecorator.new e }
+      evenements = evenements.map { |e| EvenementMaintenance.new e }
       super(campagne, evenements)
     end
 

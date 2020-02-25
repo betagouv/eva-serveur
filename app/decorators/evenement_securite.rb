@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EvenementSecuriteDecorator < SimpleDelegator
+class EvenementSecurite < SimpleDelegator
   BONNE_QUALIFICATION = 'bonne'
   IDENTIFICATION_POSITIVE = 'oui'
   DANGER_VISUO_SPATIAL = 'signalisation'

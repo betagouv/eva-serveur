@@ -32,7 +32,6 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to be_able_to(:manage, Question.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
-    it { is_expected.to be_able_to(:manage, MiseEnAction.new) }
 
     it 'avec une campagne qui a des évaluations' do
       is_expected.to_not be_able_to(:destroy, campagne_administrateur)
@@ -71,7 +70,6 @@ describe Ability do
                                 name: 'Dashboard',
                                 namespace_name: 'admin')
     end
-    it { is_expected.to_not be_able_to(:manage, MiseEnAction.new) }
     it { is_expected.to_not be_able_to(:manage, Compte.new) }
     it { is_expected.to_not be_able_to(%i[destroy create update], Situation.new) }
     it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }

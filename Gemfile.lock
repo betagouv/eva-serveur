@@ -38,14 +38,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_admin-humanized_enum (0.1.1)
-      active_record-humanized_enum
-      activeadmin (>= 1.0.0.pre1)
     active_material (1.4.2)
-    active_record-humanized_enum (0.1.2)
-      activesupport
-      i18n
-      railties
     activeadmin (2.6.1)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
@@ -384,7 +377,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_admin-humanized_enum
   activeadmin
   activeadmin_addons
   activeadmin_reorderable

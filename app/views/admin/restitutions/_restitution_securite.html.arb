@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel t('.restitution_securite') do
+panel t('.metriques_restitution') do
   attributes_table_for [
     [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), restitution],
     [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyenne_glissante],
@@ -10,7 +10,7 @@ panel t('.restitution_securite') do
     row do |(titre, _)|
       strong titre
     end
-    Restitution::Securite::METRIQUES.each do |nom_metrique, data|
+    resource.class::METRIQUES.each do |nom_metrique, data|
       row t(".#{nom_metrique}") do |(_, r)|
         valeur = r.public_send(nom_metrique)
         case data['type']

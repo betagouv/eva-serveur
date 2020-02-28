@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel t('.restitution_maintenance') do
+panel t('.metriques_restitution') do
   attributes_table_for [
     [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), restitution],
     [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyenne_glissante],
@@ -10,9 +10,27 @@ panel t('.restitution_maintenance') do
     row do |(titre, _)|
       strong titre
     end
-    Restitution::Maintenance::METRIQUES.keys.each do |metrique|
-      row t(".#{metrique}") do |(_, r)|
-        r.public_send(metrique)
+    resource.class::METRIQUES.each do |nom_metrique, data|
+      row t(".#{nom_metrique}") do |(_, r)|
+        valeur = r.public_send(nom_metrique)
+        case data['type']
+        when :texte
+          t(valeur, scope: 'admin.evaluations.restitution_competence')
+        when :temps
+          formate_duree valeur
+        when :liste_temps
+          formate_durees valeur
+        when :map
+          ul do
+            valeur&.each do |danger, temps|
+              li "#{danger} : #{formate_duree(temps)}"
+            end
+          end
+        when :nombre
+          valeur
+        else
+          valeur
+        end
       end
     end
   end

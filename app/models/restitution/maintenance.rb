@@ -5,15 +5,34 @@ require_relative '../../decorators/evenement_maintenance'
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
-      'temps_total' => Base::TempsTotal.new,
-      'temps_entrainement' => AvecEntrainement::TempsEntrainement.new,
-      'nombre_bonnes_reponses_francais' => Maintenance::NombreBonnesReponsesMotFrancais.new,
-      'nombre_bonnes_reponses_non_mot' => Maintenance::NombreBonnesReponsesNonMot.new,
-      'nombre_non_reponses' => Maintenance::NombreNonReponses.new,
-      'temps_moyen_mots_francais' =>
-                       Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new),
-      'temps_moyen_non_mots' =>
-                       Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
+      'temps_total' => {
+        'type' => :temps,
+        'instance' => Base::TempsTotal.new
+      },
+      'temps_entrainement' => {
+        'type' => :temps,
+        'instance' => AvecEntrainement::TempsEntrainement.new
+      },
+      'nombre_bonnes_reponses_francais' => {
+        'type' => :nombre,
+        'instance' => Maintenance::NombreBonnesReponsesMotFrancais.new
+      },
+      'nombre_bonnes_reponses_non_mot' => {
+        'type' => :nombre,
+        'instance' => Maintenance::NombreBonnesReponsesNonMot.new
+      },
+      'nombre_non_reponses' => {
+        'type' => :nombre,
+        'instance' => Maintenance::NombreNonReponses.new
+      },
+      'temps_moyen_mots_francais' => {
+        'type' => :temps,
+        'instance' => Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new)
+      },
+      'temps_moyen_non_mots' => {
+        'type' => :temps,
+        'instance' => Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
+      }
     }.freeze
 
     def initialize(campagne, evenements)
@@ -23,7 +42,7 @@ module Restitution
 
     METRIQUES.keys.each do |metrique|
       define_method metrique do
-        METRIQUES[metrique]
+        METRIQUES[metrique]['instance']
           .calcule(evenements_situation, evenements_entrainement)
       end
     end

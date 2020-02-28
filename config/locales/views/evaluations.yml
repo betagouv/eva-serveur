@@ -102,10 +102,11 @@ fr:
         restitution_questions: Restitution des questions
         question: Question
         reponse: Réponse
-      restitution_securite:
-        metriques_restitution: Restitution des métriques
+      restitution_metriques:
+        restitution_metriques: Restitution des métriques
         temps_total: Temps total passé dans la situation
         temps_entrainement: Temps passé dans l'entrainement
+
         nombre_bien_qualifies: Dangers bien qualifiés
         nombre_dangers_bien_identifies: Dangers bien identifiés
         nombre_retours_deja_qualifies: Retours sur les situations déjà qualifiées
@@ -118,16 +119,13 @@ fr:
         delai_ouvertures_zones_dangers: Délai avant ouverture de zone de danger
         delai_moyen_ouvertures_zones_dangers: Délai moyen avant ouverture de zone de danger
         attention_visuo_spatiale: Attention visuo-spatiale
-      restitution_maintenance:
-        metriques_restitution: Restitution des métriques
-        temps_total: Temps total passé dans la situation
-        temps_entrainement: Temps passé dans l'entrainement
-        nombre_bonnes_reponses_francais: "Nombre de bonnes réponses (mot français)"
-        nombre_bonnes_reponses_non_mot: "Nombre de bonnes réponses (non-mot)"
-        nombre_non_reponses: "Nombre de non réponses"
-        temps_moyen_non_mots: "Temps moyen de réponse correcte non-mots (en secondes)"
-        temps_moyen_mots_francais: "Temps moyen de réponse correcte mot français (en secondes)"
-        nombre_bonnes_reponses_mot_français: "Nombre de bonnes réponses (mot français)"
+
+        nombre_bonnes_reponses_francais: Nombre de bonnes réponses (mot français)
+        nombre_bonnes_reponses_non_mot: Nombre de bonnes réponses (non-mot)
+        nombre_non_reponses: Nombre de non réponses
+        temps_moyen_non_mots: Temps moyen de réponse correcte non-mots (en secondes)
+        temps_moyen_mots_francais: Temps moyen de réponse correcte mot français (en secondes)
+        nombre_bonnes_reponses_mot_français: Nombre de bonnes réponses (mot français)
       restitution_colonnes:
         cote_z: Cote Z
         valeur_utilisateur: Valeur de l'évalué·e

@@ -7,11 +7,11 @@ module Restitution
     ZONES_DANGER = %w[bouche-egout camion casque escabeau signalisation].freeze
     METRIQUES = {
       'temps_total' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => Base::TempsTotal.new
       },
       'temps_entrainement' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => AvecEntrainement::TempsEntrainement.new
       },
       'nombre_dangers_bien_identifies' => {
@@ -55,11 +55,11 @@ module Restitution
         'instance' => Securite::NombreRetoursDejaQualifies.new
       },
       'delai_ouvertures_zones_dangers' => {
-        'type' => :liste_temps,
+        'type' => :liste,
         'instance' => Securite::DelaiOuverturesZonesDangers.new
       },
       'delai_moyen_ouvertures_zones_dangers' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => Metriques::Moyenne.new(Securite::DelaiOuverturesZonesDangers.new)
       }
     }.freeze

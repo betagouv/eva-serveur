@@ -18,18 +18,12 @@ panel t('.restitution_metriques') do
         case data['type']
         when :texte
           t(valeur, scope: 'admin.evaluations.restitution_competence')
-        when :temps
-          formate_duree valeur
-        when :liste_temps
-          formate_durees valeur
         when :map
           ul do
-            valeur&.each do |danger, temps|
-              li "#{danger} : #{formate_duree(temps)}"
+            valeur&.each do |clef, val|
+              li "#{clef} : #{val}"
             end
           end
-        when :nombre
-          valeur
         else
           valeur
         end

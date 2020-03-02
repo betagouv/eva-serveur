@@ -41,18 +41,4 @@ describe ApplicationHelper do
       expect(helper.formate_duree('')).to eql(nil)
     end
   end
-
-  describe '#formate_durees' do
-    it 'formate chaque duree de la collection' do
-      expect(helper.formate_durees([60])).to eql(['01:00'])
-    end
-
-    it 'retourne nil si le paramètre est nil' do
-      expect(helper.formate_durees(nil)).to eql(nil)
-    end
-
-    it "formate chaque duree d'une collection qui contient des nil" do
-      expect(helper.formate_durees([nil, 60, nil])).to eql([nil, '01:00', nil])
-    end
-  end
 end

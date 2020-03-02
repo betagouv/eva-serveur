@@ -6,11 +6,11 @@ module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
       'temps_total' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => Base::TempsTotal.new
       },
       'temps_entrainement' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => AvecEntrainement::TempsEntrainement.new
       },
       'nombre_bonnes_reponses_francais' => {
@@ -26,11 +26,11 @@ module Restitution
         'instance' => Maintenance::NombreNonReponses.new
       },
       'temps_moyen_mots_francais' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new)
       },
       'temps_moyen_non_mots' => {
-        'type' => :temps,
+        'type' => :nombre,
         'instance' => Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
       }
     }.freeze

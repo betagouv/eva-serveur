@@ -45,6 +45,9 @@ class Ability
 
   def droit_situation
     can :read, Situation
+    cannot :destroy, Situation do |s|
+      SituationConfiguration.where(situation: s).count.positive?
+    end
   end
 
   def droit_questionnaire

@@ -10,6 +10,12 @@ describe Ability do
   let!(:campagne_administrateur_sans_eval) { create :campagne, compte: compte_administrateur }
 
   let!(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
+  let(:situation) { create :situation_inventaire }
+  let(:situation_configuration) do
+    create :situation_configuration,
+           campagne_id: campagne_administrateur,
+           situation: situation
+  end
 
   subject(:ability) { Ability.new(compte) }
 
@@ -39,6 +45,14 @@ describe Ability do
 
     it "avec une campagne qui n'a pas d'évaluation" do
       is_expected.to be_able_to(:destroy, campagne_administrateur_sans_eval)
+    end
+
+    it 'avec une situation utilisé dans des campagne' do
+      is_expected.to_not be_able_to(:destroy, situation_configuration.situation)
+    end
+
+    it 'avec une situation non utilisé dans des campagne' do
+      is_expected.to be_able_to(:destroy, situation)
     end
   end
 

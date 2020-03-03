@@ -48,24 +48,20 @@ module Restitution
     end
 
     def sous_score(nombre, nom_moyenne, metrique_des_temps)
+      return 0 if nombre.zero?
+
       temps_moyen_normalise = temps_moyen_normalise(nom_moyenne, metrique_des_temps)
 
-      return nombre / temps_moyen_normalise if temps_moyen_normalise.present?
+      nombre / temps_moyen_normalise
     end
 
     def score
-      sous_scores = [
-        sous_score(nombre_bonnes_reponses_francais,
-                   :temps_moyen_mots_francais,
-                   Maintenance::TempsMotsFrancais.new),
+      sous_score(nombre_bonnes_reponses_francais,
+                 :temps_moyen_mots_francais,
+                 Maintenance::TempsMotsFrancais.new) *
         sous_score(nombre_bonnes_reponses_non_mot,
                    :temps_moyen_non_mots,
                    Maintenance::TempsNonMots.new)
-      ].compact
-
-      return nil if sous_scores.empty?
-
-      sous_scores.sum
     end
   end
 end

@@ -71,6 +71,8 @@ module Restitution
 
       temps_moyen_normalise = temps_moyen_normalise(nom_moyenne, metrique_des_temps)
 
+      return 0 unless temps_moyen_normalise.present?
+
       nombre / temps_moyen_normalise
     end
 

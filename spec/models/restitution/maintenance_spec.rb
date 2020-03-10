@@ -42,6 +42,7 @@ describe Restitution::Maintenance do
 
     it { expect(score_pour(0, nil, 0, nil)).to eq(0) }
     it { expect(score_pour(2, 1.5, 0, nil)).to eq(0) }
+    it { expect(score_pour(2, nil, 0, nil)).to eq(0) }
     it { expect(score_pour(2, 1.5, 5, 3)).to eq((2 / 1.5) * (5 / 3)) }
   end
 

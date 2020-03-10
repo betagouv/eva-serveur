@@ -59,7 +59,7 @@ module Restitution
     end
 
     def score
-      score_vocabulaire
+      partie.cote_z_metriques['score_vocabulaire']
     end
   end
 end

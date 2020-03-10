@@ -41,7 +41,7 @@ class Partie < ApplicationRecord
   end
 
   def cote_z_metriques
-    collect_metriques do |metrique|
+    @cote_z_metriques ||= collect_metriques do |metrique|
       if ecart_type_metriques[metrique].zero?
         0
       elsif metriques[metrique].present?

@@ -8,7 +8,7 @@ module Api
       if CreeEvenementAction.new(partie, evenement).call
         render json: evenement, status: :created
       else
-        render json: evenement.errors.full_messages, status: 422
+        render json: evenement.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -19,15 +19,10 @@ module Api
     end
 
     def partie
+      situation = Situation.find_by(nom_technique: params[:situation])
       Partie.where(session_id: evenement_params[:session_id],
-                   situation_id: situation_id,
+                   situation_id: situation,
                    evaluation_id: params[:evaluation_id]).first_or_create!
-    end
-
-    def situation_id
-      nom_technique = params[:situation]
-      situation = Situation.find_by(nom_technique: nom_technique)
-      situation.id
     end
   end
 end

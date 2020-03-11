@@ -11,7 +11,7 @@ module Api
       if evaluation.save
         render json: evaluation, status: :created
       else
-        render json: evaluation.errors, status: 422
+        render json: evaluation.errors, status: :unprocessable_entity
       end
     end
 

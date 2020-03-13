@@ -26,5 +26,10 @@ FactoryBot.define do
       libelle { 'Maintenance' }
       nom_technique { 'maintenance' }
     end
+
+    factory :situation_livraison do
+      libelle { 'Livraison' }
+      nom_technique { 'livraison' }
+    end
   end
 end

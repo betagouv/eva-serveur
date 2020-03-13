@@ -53,7 +53,10 @@ class Ability
   def droit_questionnaire
     can :read, Questionnaire
     cannot :destroy, Questionnaire do |q|
-      Campagne.where(questionnaire: q).present?
+      Campagne.where(questionnaire: q).present? ||
+        Situation.where(questionnaire: q)
+                 .or(Situation.where(questionnaire_entrainement: q))
+                 .present?
     end
   end
 

@@ -35,7 +35,6 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Evenement.new) }
     it { is_expected.to be_able_to(:manage, Situation.new) }
     it { is_expected.to be_able_to(:manage, Campagne.new) }
-    it { is_expected.to be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to be_able_to(:manage, Question.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
 
@@ -53,6 +52,30 @@ describe Ability do
 
     it 'avec une situation non utilisé dans des campagne' do
       is_expected.to be_able_to(:destroy, situation)
+    end
+
+    describe 'Droits des questionnaires' do
+      let(:questionnaire) { create :questionnaire }
+
+      it { is_expected.to be_able_to(:manage, Questionnaire.new) }
+
+      context "quand une campagne l'utilise" do
+        let!(:campagne) { create :campagne, questionnaire: questionnaire }
+
+        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+      end
+
+      context "quand une situation l'utilise comme questionnaire principal" do
+        let!(:situation) { create :situation_livraison, questionnaire: questionnaire }
+
+        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+      end
+
+      context "quand une situation l'utilise comme questionnaire d'entrainement" do
+        let!(:situation) { create :situation_livraison, questionnaire_entrainement: questionnaire }
+
+        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+      end
     end
   end
 

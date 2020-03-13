@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_110444) do
+ActiveRecord::Schema.define(version: 2020_03_13_143848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_110444) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "campagnes", "comptes"
   add_foreign_key "campagnes", "questionnaires"
-  add_foreign_key "choix", "questions"
+  add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade

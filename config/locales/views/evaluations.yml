@@ -35,6 +35,8 @@ fr:
         apte: Apte
         apte_avec_aide: Apte avec aide
 
+        vocabulaire:
+          nom: Vocabulaire
         comprehension_consigne:
           nom: Compréhension de la consigne
           titre: La consigne de l’exercice a été comprise
@@ -78,6 +80,8 @@ fr:
         echec: Échec
         termine: Terminé
         indetermine: Indéterminée car abandon
+      restitution_competences_de_base:
+        titre: Évaluation des compétences de base
       restitution_competences:
         titre: Évaluation des compétences
         efficience: Efficience

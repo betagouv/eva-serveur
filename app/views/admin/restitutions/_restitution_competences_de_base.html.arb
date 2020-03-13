@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+panel t('.titre') do
+  return if resource.competences_de_base.empty?
+
+  attributes_table_for restitution do
+    restitution.competences_de_base.each do |competence, niveau|
+      row(t("#{competence}.nom",
+            scope: 'admin.evaluations.restitution_competence')) { niveau }
+    end
+  end
+end

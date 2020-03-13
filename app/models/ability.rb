@@ -62,6 +62,9 @@ class Ability
 
   def droit_question
     can :read, Question
+    cannot :destroy, Question do |q|
+      QuestionnaireQuestion.where(question: q).present?
+    end
   end
 
   def droits_generiques(compte)

@@ -64,6 +64,10 @@ module Restitution
       evenements.last.nom == EVENEMENT[:FIN_SITUATION]
     end
 
+    def competences_de_base
+      {}
+    end
+
     def competences
       {}
     end

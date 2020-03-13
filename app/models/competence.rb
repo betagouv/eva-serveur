@@ -18,4 +18,6 @@ module Competence
   ATTENTION_CONCENTRATION = :attention_concentration
   ORGANISATION_METHODE = :organisation_methode
   VIGILANCE_CONTROLE = :vigilance_controle
+
+  VOCABULAIRE = :vocabulaire
 end

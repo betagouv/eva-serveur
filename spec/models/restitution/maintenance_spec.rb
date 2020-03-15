@@ -30,20 +30,4 @@ describe Restitution::Maintenance do
       end
     end
   end
-
-  describe '#score' do
-    context 'avec une partie dont la cote z du score est -1' do
-      let(:partie) { double }
-      let(:evenements) do
-        [build(:evenement_demarrage)]
-      end
-
-      it do
-        expect(partie).to receive(:cote_z_metriques).and_return('score_vocabulaire' => -1)
-
-        expect(evenements.first).to receive(:partie).and_return(partie)
-        expect(restitution.score).to eq(-1)
-      end
-    end
-  end
 end

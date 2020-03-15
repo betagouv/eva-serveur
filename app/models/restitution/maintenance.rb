@@ -58,10 +58,6 @@ module Restitution
       partie.update(metriques: metriques)
     end
 
-    def score
-      partie.cote_z_metriques['score_vocabulaire']
-    end
-
     def competences_de_base
       calcule_competences(
         ::Competence::VOCABULAIRE => Maintenance::Vocabulaire

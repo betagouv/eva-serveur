@@ -4,9 +4,11 @@ require 'rails_helper'
 
 describe Restitution::Maintenance::Vocabulaire do
   let(:restitution) { double }
+  let(:partie) { double }
 
   def niveau_pour_score(score)
-    allow(restitution).to receive(:score).and_return(score)
+    expect(partie).to receive(:cote_z_metriques).and_return('score_vocabulaire' => score)
+    allow(restitution).to receive(:partie).and_return(partie)
 
     described_class.new(restitution)
   end

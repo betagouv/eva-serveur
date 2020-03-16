@@ -7,7 +7,11 @@ panel t('.titre') do
     restitution.competences_de_base.each do |competence, niveau|
       row(t("#{competence}.nom",
             scope: 'admin.evaluations.restitution_competence')) do
-        div '', class: "niveau-competence-base niveau-#{niveau}"
+        if niveau == ::Competence::NIVEAU_INDETERMINE
+          span 'Vide', class: :empty
+        else
+          div '', class: "niveau-competence-base niveau-#{niveau}"
+        end
       end
     end
   end

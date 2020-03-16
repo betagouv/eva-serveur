@@ -6,7 +6,9 @@ panel t('.titre') do
   attributes_table_for restitution do
     restitution.competences_de_base.each do |competence, niveau|
       row(t("#{competence}.nom",
-            scope: 'admin.evaluations.restitution_competence')) { niveau }
+            scope: 'admin.evaluations.restitution_competence')) do
+        div '', class: "niveau-competence-base niveau-#{niveau}"
+      end
     end
   end
 end

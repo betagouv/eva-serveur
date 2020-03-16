@@ -6,6 +6,12 @@ $couleur-questions: #398ad4;
 $couleur-fond-principale: #d8e8f7;
 $couleur-texte: #001c36;
 $couleur-liens: blue;
+$couleur-accent-erreur: #fd4c54;
+$couleur-warning: #fdaf54;
 $couleur-legere-accent-validation: #9adbd0;
 
 $border-radius: .75rem;
+
+$couleur-niveau-1: $couleur-legere-accent-validation;
+$couleur-niveau-2: $couleur-warning;
+$couleur-niveau-3: $couleur-accent-erreur;

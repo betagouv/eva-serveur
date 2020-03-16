@@ -12,6 +12,7 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 @import "activeadmin_reorderable";
+@import "restitution_globale/variables";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -35,4 +36,14 @@
   &.piece-ratee {
     background-color: gray;
   }
+}
+
+.niveau-competence-base {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+
+  &.niveau-1 { background-color: $couleur-niveau-1; }
+  &.niveau-2 { background-color: $couleur-niveau-2; }
+  &.niveau-3 { background-color: $couleur-niveau-3; }
 }

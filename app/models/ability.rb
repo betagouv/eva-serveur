@@ -12,6 +12,7 @@ class Ability
     droit_situation
     droit_question
     droit_questionnaire
+    droit_compte
   end
 
   private
@@ -64,6 +65,12 @@ class Ability
     can :read, Question
     cannot :destroy, Question do |q|
       QuestionnaireQuestion.where(question: q).present?
+    end
+  end
+
+  def droit_compte
+    cannot :destroy, Compte do |q|
+      Campagne.where(compte: q).present?
     end
   end
 

@@ -8,6 +8,7 @@ describe Ability do
   let(:compte_organisation) { create :compte, role: 'organisation' }
   let!(:campagne_administrateur) { create :campagne, compte: compte_administrateur }
   let!(:campagne_administrateur_sans_eval) { create :campagne, compte: compte_administrateur }
+  let!(:campagne_organisation) { create :campagne, compte: compte_organisation }
 
   let!(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
   let(:situation) { create :situation_inventaire }
@@ -43,6 +44,10 @@ describe Ability do
 
     it "avec une campagne qui n'a pas d'évaluation" do
       is_expected.to be_able_to(:destroy, campagne_administrateur_sans_eval)
+    end
+
+    it 'avec un compte qui est lié à une campagne' do
+      is_expected.to_not be_able_to(:destroy, compte_organisation)
     end
 
     it 'avec une situation utilisé dans des campagne' do

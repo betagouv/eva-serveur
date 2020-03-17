@@ -6,12 +6,15 @@ ActiveAdmin.register Evenement do
   includes partie: %i[situation evaluation]
 
   filter :partie, collection: proc { Partie.pluck(:session_id) }
+  filter :partie_situation_nom_technique, label: 'Situation',
+                                          as: :select,
+                                          collection: proc { Situation.pluck(:nom_technique) }
   filter :date
 
   colonnes_evenement = proc do
     column(:evaluation) { |e| e.evaluation.display_name }
     column(:situation) { |e| e.situation.display_name }
-    column(:partie) { |e| e.partie.display_name }
+    column(:partie) { |e| auto_link(e.partie) }
     column :nom
     column :donnees
     column(:date) { |e| l(e.date, format: :date_heure) }

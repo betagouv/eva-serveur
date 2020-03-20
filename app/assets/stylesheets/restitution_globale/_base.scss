@@ -173,4 +173,21 @@
   a {
     color: black;
   }
+
+  .label {
+    vertical-align: top;
+  }
+}
+
+
+.niveau-competence-base {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin: 0 5px;
+
+  &.niveau-1 { background-color: $couleur-niveau-1; }
+  &.niveau-2 { background-color: $couleur-niveau-2; }
+  &.niveau-3 { background-color: $couleur-niveau-3; }
 }

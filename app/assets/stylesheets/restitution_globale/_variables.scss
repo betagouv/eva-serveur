@@ -9,9 +9,11 @@ $couleur-liens: blue;
 $couleur-accent-erreur: #fd4c54;
 $couleur-warning: #fdaf54;
 $couleur-legere-accent-validation: #9adbd0;
+$bluegrey: #d6daec;
 
 $border-radius: .75rem;
 
+$couleur-niveau-indetermine: $bluegrey;
 $couleur-niveau-1: $couleur-legere-accent-validation;
 $couleur-niveau-2: $couleur-warning;
 $couleur-niveau-3: $couleur-accent-erreur;

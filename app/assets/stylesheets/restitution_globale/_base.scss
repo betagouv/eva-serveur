@@ -173,6 +173,7 @@
   display: inline-block;
   margin: 0 5px;
 
+  &.niveau-indetermine { border: 2px solid $couleur-niveau-indetermine; }
   &.niveau-1 { background-color: $couleur-niveau-1; }
   &.niveau-2 { background-color: $couleur-niveau-2; }
   &.niveau-3 { background-color: $couleur-niveau-3; }

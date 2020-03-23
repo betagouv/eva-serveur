@@ -6,8 +6,7 @@ div class: 'row' do
 
     div class: "competences-base #{rapport_colonne_class}" do
       span label, class: 'label'
-      valeur = niveau == ::Competence::NIVEAU_INDETERMINE ? 'indéterminé' : ''
-      span valeur, class: "niveau-competence-base niveau-#{niveau}"
+      span '', class: "niveau-competence-base niveau-#{niveau}"
     end
   end
 end

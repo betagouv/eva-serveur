@@ -62,27 +62,6 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  panel 'Efficiences par situations' do
-    div class: :row do
-      restitution_globale.restitutions.each do |restitution|
-        next if restitution.efficience.nil?
-
-        situation = restitution.situation
-        div class: "#{rapport_colonne_class} #{situation.nom_technique}" do
-          div t('.situation', situation: situation.libelle)
-          div class: :progress do
-            efficience = progression_efficience(restitution.efficience)
-            div class: 'progress-bar', role: 'progressbar', style: "width: #{efficience}%",
-                'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': efficience do
-              formate_efficience(restitution.efficience)
-            end
-          end
-        end
-      end
-      nil
-    end
-  end
-
   restitution_globale.restitutions.each do |restitution|
     situation = restitution.situation
     panel t('.situation', situation: situation.libelle) do

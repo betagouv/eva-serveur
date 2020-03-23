@@ -7,10 +7,6 @@ module ApplicationHelper
     number_to_percentage(nombre, precision: 0)
   end
 
-  def progression_efficience(nombre)
-    nombre.is_a?(Symbol) ? 0 : nombre
-  end
-
   def formate_duree(duree)
     return if duree.blank?
 

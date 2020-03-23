@@ -62,12 +62,6 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  h2 class: 'text-center' do
-    span class: 'btn btn-info btn-lg' do
-      t('.efficience_globale', efficience: formate_efficience(restitution_globale.efficience))
-    end
-  end
-
   panel 'Efficiences par situations' do
     div class: :row do
       restitution_globale.restitutions.each do |restitution|

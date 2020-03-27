@@ -32,3 +32,13 @@ local:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+
+openstack:
+  service: OpenStack
+  container: eva-preprod-stockage # Container name for your OpenStack provider
+  credentials:
+    openstack_auth_url: <%= ENV['OS_AUTH_URL'] %>
+    openstack_username: <%= ENV['OS_USERNAME'] %>
+    openstack_api_key: <%= ENV['OS_PASSWORD'] %>
+    openstack_region: <%= ENV['OS_REGION_NAME'] %>
+    openstack_temp_url_key: <%= ENV['OS_TEMP_URL_KEY'] %>

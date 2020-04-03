@@ -4,3 +4,5 @@ fr:
       dashboard:
         dernieres_evaluations:
           titre: Dernières évaluations
+        statistiques:
+          titre: Statistiques

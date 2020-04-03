@@ -12,3 +12,15 @@ panel t('.dernieres_evaluations.titre') do
     end
   end
 end
+
+if can?(:manage, Compte)
+  panel t('.statistiques.titre') do
+    text_node %(<iframe
+      src="http://metabase.eva.beta.gouv.fr/public/dashboard/f9549f07-b9a1-4fe7-8961-2a127bf27d22"
+      frameborder="0"
+      width="100%"
+      height="600"
+      allowtransparency
+    ></iframe>).html_safe
+  end
+end

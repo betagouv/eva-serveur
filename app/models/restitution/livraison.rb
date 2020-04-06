@@ -6,6 +6,12 @@ module Restitution
       REPONSE: 'reponse'
     }.freeze
 
+    METRIQUES = {
+      'nombre_bonnes_reponses' => {
+        'type' => :nombre
+      }
+    }.freeze
+
     def termine?
       super || reponses.size == questions.size
     end
@@ -26,6 +32,13 @@ module Restitution
 
     def efficience
       nil
+    end
+
+    def nombre_bonnes_reponses
+      questions_et_reponses.select do |question_et_reponse|
+        choix = question_et_reponse[:question].choix.find(question_et_reponse[:reponse])
+        choix.bon?
+      end.count
     end
 
     private

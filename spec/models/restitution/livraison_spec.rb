@@ -101,4 +101,57 @@ describe Restitution::Livraison do
       expect(restitution.efficience).to be_nil
     end
   end
+
+  describe '#nombre_bonnes_reponses' do
+    let(:question3) { create :question_qcm, intitule: 'Ma question 3' }
+
+    let(:bon_choix) do
+      create :choix, type_choix: :bon, question_id: question1.id, intitule: 'bon'
+    end
+
+    let(:mauvais_choix) do
+      create :choix, type_choix: :mauvais, question_id: question2.id, intitule: 'mauvais'
+    end
+
+    let(:abstention_choix) do
+      create :choix, type_choix: :abstention, question_id: question3.id, intitule: 'abstention'
+    end
+
+    context "pas d'événements réponse" do
+      it 'retourne nil' do
+        evenements = [
+          build(:evenement_demarrage)
+        ]
+
+        restitution = described_class.new(campagne, evenements)
+        expect(restitution.nombre_bonnes_reponses).to eq(0)
+      end
+    end
+
+    context 'avec une bonne réponse' do
+      it do
+        evenements = [
+          build(:evenement_demarrage),
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: bon_choix.id })
+        ]
+        restitution = described_class.new(campagne, evenements)
+        expect(restitution.nombre_bonnes_reponses).to eq(1)
+      end
+    end
+
+    context 'avec des réponses autre que bonnes' do
+      it do
+        evenements = [
+          build(:evenement_demarrage),
+          build(:evenement_reponse,
+                donnees: { question: question2.id, reponse: mauvais_choix.id }),
+          build(:evenement_reponse,
+                donnees: { question: question3.id, reponse: abstention_choix.id })
+        ]
+        restitution = described_class.new(campagne, evenements)
+        expect(restitution.nombre_bonnes_reponses).to eq(0)
+      end
+    end
+  end
 end

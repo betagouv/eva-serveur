@@ -13,6 +13,7 @@ fr:
         updated_at: Mise à jour le
         intitule: Intitulé
         libelle: Libellé
+        metacompetence: Méta-compétence
       question_redaction_note:
         entete_reponse: Entête réponse
         expediteur: Expéditeur

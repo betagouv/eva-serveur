@@ -5,7 +5,7 @@ ActiveAdmin.register QuestionQcm do
 
   filter :intitule
 
-  permit_params :libelle, :intitule, :description, :illustration,
+  permit_params :libelle, :intitule, :description, :illustration, :metacompetence,
                 choix_attributes: %i[id intitule type_choix _destroy]
 
   form do |f|
@@ -13,6 +13,7 @@ ActiveAdmin.register QuestionQcm do
     f.inputs do
       f.input :libelle
       f.input :intitule
+      f.input :metacompetence
       f.input :description
       f.input :illustration, as: :file
       f.has_many :choix, allow_destroy: true do |c|
@@ -29,6 +30,7 @@ ActiveAdmin.register QuestionQcm do
     column :id
     column :libelle
     column :intitule
+    column :metacompetence
     column :description
     column :created_at
     column :updated_at

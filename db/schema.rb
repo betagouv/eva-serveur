@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_143848) do
+ActiveRecord::Schema.define(version: 2020_04_07_152853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2020_03_13_143848) do
     t.string "message"
     t.string "objet_reponse"
     t.string "libelle"
+    t.integer "metacompetence"
   end
 
   create_table "situations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

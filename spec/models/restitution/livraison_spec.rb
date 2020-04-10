@@ -53,24 +53,39 @@ describe Restitution::Livraison do
   end
 
   describe '#questions_et_reponses' do
-    it "retourne aucune question et réponse si aucune n'a été répondu" do
-      evenements = [
-        build(:evenement_demarrage)
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution.questions_et_reponses.size).to eq(0)
+    let(:restitution) { described_class.new(campagne, evenements) }
+    context "retourne aucune question et réponse si aucune n'a été répondu" do
+      let(:evenements) { [build(:evenement_demarrage)] }
+      it { expect(restitution.questions_et_reponses).to eq([]) }
     end
 
-    it 'retourne les questions et les réponses du questionnaire' do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_reponse,
-              donnees: { question: question1.id, reponse: 1 })
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution.questions_et_reponses.size).to eq(1)
-      expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
-      expect(restitution.questions_et_reponses.first[:reponse]).to eql(1)
+    context 'retourne les questions et les réponses du questionnaire' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: 1 })
+        ]
+      end
+      it do
+        expect(restitution.questions_et_reponses.size).to eq(1)
+        expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
+        expect(restitution.questions_et_reponses.first[:reponse]).to eql(1)
+      end
+    end
+
+    context 'ignore les réponses aux questions qui ne sont pas une Question QCM' do
+      let(:question_redaction_note) { create :question_redaction_note }
+      let(:questionnaire) { create :questionnaire, questions: [question_redaction_note] }
+
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse,
+                donnees: { question: question_redaction_note.id, reponse: 'coucou' })
+        ]
+      end
+      it { expect(restitution.questions_et_reponses).to eq([]) }
     end
   end
 

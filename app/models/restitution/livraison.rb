@@ -17,7 +17,7 @@ module Restitution
     end
 
     def questions_et_reponses
-      questions_repondues
+      questions_qcm_repondues
         .map do |question|
         {
           question: question,
@@ -47,9 +47,9 @@ module Restitution
       situation.questionnaire.questions
     end
 
-    def questions_repondues
+    def questions_qcm_repondues
       questions_ids = reponses.collect { |r| r.donnees['question'] }
-      questions.where(id: questions_ids)
+      questions.where(id: questions_ids, type: 'QuestionQcm')
     end
 
     def trouve_reponse(question_id)

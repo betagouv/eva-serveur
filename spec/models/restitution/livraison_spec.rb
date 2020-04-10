@@ -4,7 +4,8 @@ require 'rails_helper'
 
 describe Restitution::Livraison do
   let(:evaluation) { create :evaluation, nom: 'Test' }
-  let(:question1)  { create :question_qcm, intitule: 'Ma question 1' }
+  let(:bon_choix_q1) { create :choix, :bon }
+  let(:question1)  { create :question_qcm, intitule: 'Ma question 1', choix: [bon_choix_q1] }
   let(:question2)  { create :question_qcm, intitule: 'Ma question 2' }
   let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
@@ -64,13 +65,13 @@ describe Restitution::Livraison do
         [
           build(:evenement_demarrage),
           build(:evenement_reponse,
-                donnees: { question: question1.id, reponse: 1 })
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
       it do
         expect(restitution.questions_et_reponses.size).to eq(1)
         expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
-        expect(restitution.questions_et_reponses.first[:reponse]).to eql(1)
+        expect(restitution.questions_et_reponses.first[:reponse]).to eql(bon_choix_q1)
       end
     end
 
@@ -120,10 +121,6 @@ describe Restitution::Livraison do
   describe '#nombre_bonnes_reponses' do
     let(:question3) { create :question_qcm, intitule: 'Ma question 3' }
 
-    let(:bon_choix) do
-      create :choix, type_choix: :bon, question_id: question1.id, intitule: 'bon'
-    end
-
     let(:mauvais_choix) do
       create :choix, type_choix: :mauvais, question_id: question2.id, intitule: 'mauvais'
     end
@@ -148,7 +145,7 @@ describe Restitution::Livraison do
         evenements = [
           build(:evenement_demarrage),
           build(:evenement_reponse,
-                donnees: { question: question1.id, reponse: bon_choix.id })
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
         restitution = described_class.new(campagne, evenements)
         expect(restitution.nombre_bonnes_reponses).to eq(1)

@@ -7,6 +7,11 @@ FactoryBot.define do
   end
 
   factory :question_qcm do
-    libelle { 'Question' }
+    libelle { 'Question QCM' }
+  end
+
+  factory :question_redaction_note do
+    libelle { 'Question Redaction Note' }
+    intitule { 'Ecrivez une note' }
   end
 end

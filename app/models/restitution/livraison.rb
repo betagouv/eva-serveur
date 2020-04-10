@@ -7,10 +7,25 @@ module Restitution
     }.freeze
 
     METRIQUES = {
-      'nombre_bonnes_reponses' => {
-        'type' => :nombre
+      'nombre_bonnes_reponses_numeratie' => {
+        'type' => :nombre,
+        'metacompetence' => 'numeratie'
+      },
+      'nombre_bonnes_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf'
+      },
+      'nombre_bonnes_reponses_syntaxe_orthographe' => {
+        'type' => :nombre,
+        'metacompetence' => 'syntaxe-orthographe'
       }
     }.freeze
+
+    METRIQUES.keys.each do |metrique|
+      define_method metrique do
+        nombre_bonnes_reponses METRIQUES[metrique]['metacompetence']
+      end
+    end
 
     def termine?
       super || reponses.size == questions.size
@@ -34,9 +49,10 @@ module Restitution
       nil
     end
 
-    def nombre_bonnes_reponses
-      questions_et_reponses.select do |question_et_reponse|
-        question_et_reponse[:reponse].bon?
+    def nombre_bonnes_reponses(metacompetence)
+      questions_et_reponses.select do |q_r|
+        q_r[:question].metacompetence == metacompetence &&
+          q_r[:reponse].bon?
       end.count
     end
 

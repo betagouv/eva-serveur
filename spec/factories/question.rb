@@ -8,6 +8,7 @@ FactoryBot.define do
 
   factory :question_qcm do
     libelle { 'Question QCM' }
+    intitule { 'Quel est le bon choix ?' }
   end
 
   factory :question_redaction_note do

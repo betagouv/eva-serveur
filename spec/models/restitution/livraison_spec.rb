@@ -16,47 +16,49 @@ describe Restitution::Livraison do
            questionnaire: questionnaire
   end
   let(:campagne) { build :campagne }
+  let(:restitution) { described_class.new(campagne, evenements) }
+  let(:evenements) { [build(:evenement_demarrage)] }
 
   describe '#termine?' do
-    it "lorsque aucune questions n'a encore été répondu" do
-      evenements = [build(:evenement_demarrage)]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution).to_not be_termine
+    context "lorsque aucune questions n'a encore été répondu" do
+      it { expect(restitution).to_not be_termine }
     end
 
-    it 'lorsque une des questions a été répondu' do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 })
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution).to_not be_termine
+    context 'lorsque une des questions a été répondu' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 })
+        ]
+      end
+      it { expect(restitution).to_not be_termine }
     end
 
-    it 'lorsque les 2 questions ont été répondu' do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 }),
-        build(:evenement_reponse, donnees: { question: question2.id, reponse: 2 })
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution).to be_termine
+    context 'lorsque les 2 questions ont été répondu' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 }),
+          build(:evenement_reponse, donnees: { question: question2.id, reponse: 2 })
+        ]
+      end
+      it { expect(restitution).to be_termine }
     end
 
-    it "avec l'événement de fin de situation" do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_fin_situation)
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution).to be_termine
+    context "avec l'événement de fin de situation" do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_fin_situation)
+        ]
+      end
+
+      it { expect(restitution).to be_termine }
     end
   end
 
   describe '#questions_et_reponses' do
-    let(:restitution) { described_class.new(campagne, evenements) }
     context "retourne aucune question et réponse si aucune n'a été répondu" do
-      let(:evenements) { [build(:evenement_demarrage)] }
       it { expect(restitution.questions_et_reponses).to eq([]) }
     end
 
@@ -91,29 +93,19 @@ describe Restitution::Livraison do
   end
 
   describe '#reponses' do
-    it 'retourne toutes les réponses' do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_reponse),
-        build(:evenement_reponse)
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution.reponses.size).to eql(2)
-    end
-
-    it 'retourne seulement les événements réponses' do
-      evenements = [
-        build(:evenement_demarrage),
-        build(:evenement_reponse)
-      ]
-      restitution = described_class.new(campagne, evenements)
-      expect(restitution.reponses.size).to eql(1)
+    context 'retourne uniquement les réponses' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse)
+        ]
+      end
+      it { expect(restitution.reponses.size).to eql(1) }
     end
   end
 
   describe '#efficience' do
     it 'retourne nil' do
-      restitution = described_class.new(campagne, [])
       expect(restitution.efficience).to be_nil
     end
   end
@@ -130,40 +122,32 @@ describe Restitution::Livraison do
     end
 
     context "pas d'événements réponse" do
-      it 'retourne nil' do
-        evenements = [
-          build(:evenement_demarrage)
-        ]
-
-        restitution = described_class.new(campagne, evenements)
-        expect(restitution.nombre_bonnes_reponses).to eq(0)
-      end
+      it { expect(restitution.nombre_bonnes_reponses).to eq(0) }
     end
 
     context 'avec une bonne réponse' do
-      it do
-        evenements = [
+      let(:evenements) do
+        [
           build(:evenement_demarrage),
           build(:evenement_reponse,
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
-        restitution = described_class.new(campagne, evenements)
-        expect(restitution.nombre_bonnes_reponses).to eq(1)
       end
+      it { expect(restitution.nombre_bonnes_reponses).to eq(1) }
     end
 
     context 'avec des réponses autre que bonnes' do
-      it do
-        evenements = [
+      let(:evenements) do
+        [
           build(:evenement_demarrage),
           build(:evenement_reponse,
                 donnees: { question: question2.id, reponse: mauvais_choix.id }),
           build(:evenement_reponse,
                 donnees: { question: question3.id, reponse: abstention_choix.id })
         ]
-        restitution = described_class.new(campagne, evenements)
-        expect(restitution.nombre_bonnes_reponses).to eq(0)
       end
+
+      it { expect(restitution.nombre_bonnes_reponses).to eq(0) }
     end
   end
 end

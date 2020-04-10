@@ -2,20 +2,18 @@
 
 div class: 'row questions' do
   restitution.questions_et_reponses.each do |question_et_reponse|
+    choix = question_et_reponse[:reponse]
+    question = question_et_reponse[:question]
+
     div class: 'col-4 px-5 mb-4' do
-      div strong question_et_reponse[:question].libelle
-      if question_et_reponse[:question].is_a?(QuestionQcm)
-        div class: 'btn-group my-2' do
-          %w[bon mauvais].each do |nom|
-            choix = question_et_reponse[:question].choix.find(question_et_reponse[:reponse])
-            active = nom == choix.type_choix ? 'active' : ''
-            button class: "btn #{active}" do
-              t(".#{nom}")
-            end
+      div strong question.libelle
+      div class: 'btn-group my-2' do
+        %w[bon mauvais].each do |nom|
+          active = nom == choix.type_choix ? 'active' : ''
+          button class: "btn #{active}" do
+            t(".#{nom}")
           end
         end
-      else
-        div simple_format(question_et_reponse[:reponse]), class: 'reponse-communication-ecrite'
       end
     end
   end

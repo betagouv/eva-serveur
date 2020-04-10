@@ -21,7 +21,7 @@ module Restitution
         .map do |question|
         {
           question: question,
-          reponse: trouve_reponse(question.id)
+          reponse: trouve_reponse(question)
         }
       end
     end
@@ -36,8 +36,7 @@ module Restitution
 
     def nombre_bonnes_reponses
       questions_et_reponses.select do |question_et_reponse|
-        choix = question_et_reponse[:question].choix.find(question_et_reponse[:reponse])
-        choix.bon?
+        question_et_reponse[:reponse].bon?
       end.count
     end
 
@@ -52,10 +51,11 @@ module Restitution
       questions.where(id: questions_ids, type: 'QuestionQcm')
     end
 
-    def trouve_reponse(question_id)
-      reponses.find do |evenement|
-        evenement.donnees['question'] == question_id
+    def trouve_reponse(question)
+      reponse_id = reponses.find do |evenement|
+        evenement.donnees['question'] == question.id
       end.donnees['reponse']
+      question.choix.find reponse_id
     end
   end
 end

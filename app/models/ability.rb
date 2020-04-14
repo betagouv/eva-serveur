@@ -13,6 +13,7 @@ class Ability
     droit_question
     droit_questionnaire
     droit_compte
+    droit_choix
   end
 
   private
@@ -71,6 +72,12 @@ class Ability
   def droit_compte
     cannot :destroy, Compte do |q|
       Campagne.where(compte: q).present?
+    end
+  end
+
+  def droit_choix
+    cannot :destroy, Choix do |c|
+      Evenement.where("donnees->>'reponse' = ?", c.id.to_s).present?
     end
   end
 

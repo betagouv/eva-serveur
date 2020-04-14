@@ -93,6 +93,19 @@ describe Ability do
         it { is_expected.to_not be_able_to(:destroy, question) }
       end
     end
+
+    describe 'Droits des choix' do
+      let!(:choix) { create :choix, :bon }
+
+      it { is_expected.to be_able_to(:destroy, choix) }
+
+      context 'avec un choix présent dans un événement réponse' do
+        let!(:partie) { create :partie }
+        let!(:evenement) { create :evenement_reponse, donnees: { reponse: choix.id } }
+
+        it { is_expected.to_not be_able_to(:destroy, choix) }
+      end
+    end
   end
 
   context 'Compte organisation' do

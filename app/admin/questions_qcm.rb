@@ -16,7 +16,7 @@ ActiveAdmin.register QuestionQcm do
       f.input :metacompetence
       f.input :description
       f.input :illustration, as: :file
-      f.has_many :choix, allow_destroy: true do |c|
+      f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
         c.input :id, as: :hidden
         c.input :intitule
         c.input :type_choix

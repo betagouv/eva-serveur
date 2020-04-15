@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../decorators/evenement_livraison'
+
 module Restitution
   class Livraison < AvecEntrainement
     EVENEMENT = {
@@ -9,21 +11,30 @@ module Restitution
     METRIQUES = {
       'nombre_bonnes_reponses_numeratie' => {
         'type' => :nombre,
-        'metacompetence' => 'numeratie'
+        'metacompetence' => 'numeratie',
+        'instance' => Livraison::NombreBonnesReponses.new
       },
       'nombre_bonnes_reponses_ccf' => {
         'type' => :nombre,
-        'metacompetence' => 'ccf'
+        'metacompetence' => 'ccf',
+        'instance' => Livraison::NombreBonnesReponses.new
       },
       'nombre_bonnes_reponses_syntaxe_orthographe' => {
         'type' => :nombre,
-        'metacompetence' => 'syntaxe-orthographe'
+        'metacompetence' => 'syntaxe-orthographe',
+        'instance' => Livraison::NombreBonnesReponses.new
       }
     }.freeze
 
+    def initialize(campagne, evenements)
+      evenements = evenements.map { |e| EvenementLivraison.new e }
+      super(campagne, evenements)
+    end
+
     METRIQUES.keys.each do |metrique|
       define_method metrique do
-        nombre_bonnes_reponses METRIQUES[metrique]['metacompetence']
+        METRIQUES[metrique]['instance']
+          .calcule(evenements_situation, METRIQUES[metrique]['metacompetence'])
       end
     end
 
@@ -47,13 +58,6 @@ module Restitution
 
     def efficience
       nil
-    end
-
-    def nombre_bonnes_reponses(metacompetence)
-      questions_et_reponses.select do |q_r|
-        q_r[:question].metacompetence == metacompetence &&
-          q_r[:reponse].bon?
-      end.count
     end
 
     private

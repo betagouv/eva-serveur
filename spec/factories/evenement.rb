@@ -107,5 +107,9 @@ FactoryBot.define do
         donnees { { type: 'non-mot' } }
       end
     end
+
+    factory :evenement_affichage_question_qcm do
+      nom { 'affichageQuestionQCM' }
+    end
   end
 end

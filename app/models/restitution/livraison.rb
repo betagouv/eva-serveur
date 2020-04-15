@@ -23,6 +23,21 @@ module Restitution
         'type' => :nombre,
         'metacompetence' => 'syntaxe-orthographe',
         'instance' => Livraison::NombreBonnesReponses.new
+      },
+      'temps_moyen_bonnes_reponses_numeratie' => {
+        'type' => :nombre,
+        'metacompetence' => 'numeratie',
+        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
+      },
+      'temps_moyen_bonnes_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf',
+        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
+      },
+      'temps_moyen_bonnes_reponses_syntaxe_orthographe' => {
+        'type' => :nombre,
+        'metacompetence' => 'syntaxe-orthographe',
+        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
       }
     }.freeze
 

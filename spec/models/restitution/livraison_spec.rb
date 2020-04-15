@@ -4,12 +4,12 @@ require 'rails_helper'
 
 describe Restitution::Livraison do
   let(:evaluation) { create :evaluation, nom: 'Test' }
-  let(:bon_choix_numeratie) { create :choix, :bon }
-  let(:question_numeratie) do
-    create :question_qcm, metacompetence: :numeratie, choix: [bon_choix_numeratie]
+  let(:bon_choix_q1) { create :choix, :bon }
+  let(:question1) do
+    create :question_qcm, metacompetence: :numeratie, choix: [bon_choix_q1]
   end
-  let(:question_ccf) { create :question_qcm, metacompetence: :ccf }
-  let(:questionnaire) { create :questionnaire, questions: [question_numeratie, question_ccf] }
+  let(:question2) { create :question_qcm }
+  let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
   let(:situation) do
     create :situation,
@@ -33,7 +33,7 @@ describe Restitution::Livraison do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_reponse, donnees: { question: question_numeratie.id, reponse: 1 })
+          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 })
         ]
       end
       it { expect(restitution).to_not be_termine }
@@ -43,8 +43,8 @@ describe Restitution::Livraison do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_reponse, donnees: { question: question_numeratie.id, reponse: 1 }),
-          build(:evenement_reponse, donnees: { question: question_ccf.id, reponse: 2 })
+          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 }),
+          build(:evenement_reponse, donnees: { question: question2.id, reponse: 2 })
         ]
       end
       it { expect(restitution).to be_termine }
@@ -71,13 +71,13 @@ describe Restitution::Livraison do
       let(:evenements_reponses) do
         [
           build(:evenement_reponse,
-                donnees: { question: question_numeratie.id, reponse: bon_choix_numeratie.id })
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
       it do
         expect(restitution.questions_et_reponses.size).to eq(1)
-        expect(restitution.questions_et_reponses.first[:question]).to eql(question_numeratie)
-        expect(restitution.questions_et_reponses.first[:reponse]).to eql(bon_choix_numeratie)
+        expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
+        expect(restitution.questions_et_reponses.first[:reponse]).to eql(bon_choix_q1)
       end
     end
 
@@ -110,52 +110,6 @@ describe Restitution::Livraison do
   describe '#efficience' do
     it 'retourne nil' do
       expect(restitution.efficience).to be_nil
-    end
-  end
-
-  describe '#nombre_bonnes_reponses' do
-    let(:question3) { create :question_qcm, intitule: 'Ma question 3' }
-
-    let(:mauvais_choix_ccf) do
-      create :choix, type_choix: :mauvais, question_id: question_ccf.id, intitule: 'mauvais'
-    end
-
-    let(:abstention_choix) do
-      create :choix, type_choix: :abstention, question_id: question3.id, intitule: 'abstention'
-    end
-
-    context "pas d'événements réponse" do
-      it { expect(restitution.nombre_bonnes_reponses('numeratie')).to eq(0) }
-    end
-
-    context 'avec une bonne réponse' do
-      let(:evenements_reponses) do
-        [build(:evenement_reponse,
-               donnees: { question: question_numeratie.id, reponse: bon_choix_numeratie.id })]
-      end
-      it { expect(restitution.nombre_bonnes_reponses('numeratie')).to eq(1) }
-    end
-
-    context 'avec des réponses autres que bonnes' do
-      let(:evenements_reponses) do
-        [
-          build(:evenement_reponse,
-                donnees: { question: question_ccf.id, reponse: mauvais_choix_ccf.id }),
-          build(:evenement_reponse,
-                donnees: { question: question3.id, reponse: abstention_choix.id })
-        ]
-      end
-
-      it { expect(restitution.nombre_bonnes_reponses('numeratie')).to eq(0) }
-    end
-
-    context 'ignore les bonnes réponses des autres metacompetences' do
-      let(:bon_choix_ccf) { create :choix, :bon, question_id: question_ccf.id }
-      let(:evenements_reponses) do
-        [build(:evenement_reponse,
-               donnees: { question: question_ccf.id, reponse: bon_choix_ccf.id })]
-      end
-      it { expect(restitution.nombre_bonnes_reponses('numeratie')).to eq(0) }
     end
   end
 end

@@ -134,9 +134,11 @@ fr:
         nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_bonnes_reponses_ccf: Nombre de bonnes réponses Ccf
         nombre_bonnes_reponses_syntaxe_orthographe: Nombre de bonnes réponses Syntaxe et Orthographe
+        nombre_bonnes_reponses_memorisation: Nombre de bonnes réponses Mémorisation
         temps_moyen_bonnes_reponses_numeratie: Temps moyen de bonnes réponses Numératie
         temps_moyen_bonnes_reponses_ccf: Temps moyen de bonnes réponses Ccf
         temps_moyen_bonnes_reponses_syntaxe_orthographe: Temps moyen de bonnes réponses Syntaxe et Orthographe
+        temps_moyen_bonnes_reponses_memorisation: Temps moyen de bonnes réponses Mémorisation
       restitution_colonnes:
         cote_z: Cote Z
         valeur_utilisateur: Valeur de l'évalué·e

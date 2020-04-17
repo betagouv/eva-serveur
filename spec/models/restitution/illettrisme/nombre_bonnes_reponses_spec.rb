@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::Livraison::NombreBonnesReponses do
+describe Restitution::Illettrisme::NombreBonnesReponses do
   let(:metrique_nombre_bonnes_reponses_numeratie) do
     described_class.new.calcule(evenements_decores(evenements, :livraison), 'numeratie')
   end

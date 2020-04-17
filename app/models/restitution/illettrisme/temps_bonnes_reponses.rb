@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class Livraison
+  module Illettrisme
     class TempsBonnesReponses < Restitution::Metriques::Base
       def calcule(evenements, metacompetence)
         Restitution::MetriquesHelper.temps_action(evenements, :bonne_reponse?) do |evenement|

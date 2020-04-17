@@ -8,32 +8,32 @@ module Restitution
       'nombre_bonnes_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Livraison::NombreBonnesReponses.new
+        'instance' => Illettrisme::NombreBonnesReponses.new
       },
       'nombre_bonnes_reponses_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Livraison::NombreBonnesReponses.new
+        'instance' => Illettrisme::NombreBonnesReponses.new
       },
       'nombre_bonnes_reponses_memorisation' => {
         'type' => :nombre,
         'metacompetence' => 'memorisation',
-        'instance' => Livraison::NombreBonnesReponses.new
+        'instance' => Illettrisme::NombreBonnesReponses.new
       },
       'temps_moyen_bonnes_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
       },
       'temps_moyen_bonnes_reponses_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
       },
       'temps_moyen_bonnes_reponses_memorisation' => {
         'type' => :nombre,
         'metacompetence' => 'memorisation',
-        'instance' => Metriques::Moyenne.new(Livraison::TempsBonnesReponses.new)
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
       }
     }.freeze
 

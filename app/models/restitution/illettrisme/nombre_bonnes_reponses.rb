@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class Livraison
+  module Illettrisme
     class NombreBonnesReponses < Restitution::Metriques::Base
       def calcule(evenements, metacompetence)
         evenements.select do |evenement|

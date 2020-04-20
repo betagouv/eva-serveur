@@ -71,6 +71,13 @@ module Restitution
       nil
     end
 
+    def persiste
+      metriques = METRIQUES.keys.each_with_object({}) do |nom_metrique, memo|
+        memo[nom_metrique] = public_send(nom_metrique)
+      end
+      partie.update(metriques: metriques)
+    end
+
     private
 
     def questions

@@ -29,7 +29,16 @@ module Restitution
       @evenements = evenements
     end
 
-    def persiste; end
+    def persiste
+      nom_restitution = self.class.name
+      return unless nom_restitution.constantize.const_defined?('METRIQUES')
+
+      dictionnaire_metriques = "#{nom_restitution}::METRIQUES".constantize
+      metriques = dictionnaire_metriques.keys.each_with_object({}) do |nom_metrique, memo|
+        memo[nom_metrique] = public_send(nom_metrique)
+      end
+      partie.update(metriques: metriques)
+    end
 
     def supprimer
       partie.destroy

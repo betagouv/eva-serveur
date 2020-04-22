@@ -53,10 +53,6 @@ module Restitution
       end
     end
 
-    def termine?
-      super || reponses.size == questions.size
-    end
-
     def questions_et_reponses
       questions_qcm_repondues
         .map do |question|

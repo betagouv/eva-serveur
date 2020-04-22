@@ -24,44 +24,6 @@ describe Restitution::Livraison do
   end
   let(:evenements_reponses) { [] }
 
-  describe '#termine?' do
-    context "lorsque aucune questions n'a encore été répondu" do
-      it { expect(restitution).to_not be_termine }
-    end
-
-    context 'lorsque une des questions a été répondu' do
-      let(:evenements) do
-        [
-          build(:evenement_demarrage),
-          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 })
-        ]
-      end
-      it { expect(restitution).to_not be_termine }
-    end
-
-    context 'lorsque les 2 questions ont été répondu' do
-      let(:evenements) do
-        [
-          build(:evenement_demarrage),
-          build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 }),
-          build(:evenement_reponse, donnees: { question: question2.id, reponse: 2 })
-        ]
-      end
-      it { expect(restitution).to be_termine }
-    end
-
-    context "avec l'événement de fin de situation" do
-      let(:evenements) do
-        [
-          build(:evenement_demarrage),
-          build(:evenement_fin_situation)
-        ]
-      end
-
-      it { expect(restitution).to be_termine }
-    end
-  end
-
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
       it { expect(restitution.questions_et_reponses).to eq([]) }

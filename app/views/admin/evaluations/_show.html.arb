@@ -23,15 +23,6 @@ panel t('.titre.restitutions') do
     div submit_tag 'Valider la sélection'
   end
 end
-panel t('.titre.competences_identifiees') do
-  ol do
-    restitution_globale.niveaux_competences.each do |niveau_competence|
-      li span t("#{niveau_competence.keys.first}.nom",
-                scope: 'admin.evaluations.restitution_competence') +
-              ": #{niveau_competence.values.first}"
-    end
-  end
-end
 
 panel t('.titre.restitution_globale') do
   render partial: 'restitution_globale', locals: { pdf: false }

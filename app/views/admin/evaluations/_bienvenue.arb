@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+div class: 'row questions' do
+  restitution.questions_et_reponses.each do |question_et_reponse|
+    div class: 'col-4 px-5 mb-4' do
+      div strong question_et_reponse[:question].libelle
+      reponse = if question_et_reponse[:question].is_a?(QuestionQcm)
+                  question_et_reponse[:question].choix.find(question_et_reponse[:reponse]).intitule
+                else
+                  question_et_reponse[:reponse]
+                end
+      div simple_format(reponse), class: 'reponse-communication-ecrite'
+    end
+  end
+end

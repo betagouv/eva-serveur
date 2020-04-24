@@ -65,7 +65,8 @@ class Ability
   def droit_question
     can :read, Question
     cannot :destroy, Question do |q|
-      QuestionnaireQuestion.where(question: q).present?
+      QuestionnaireQuestion.where(question: q).present? ||
+        Evenement.where("donnees->>'question' = ?", q.id.to_s).present?
     end
   end
 

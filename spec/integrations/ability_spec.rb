@@ -92,6 +92,12 @@ describe Ability do
 
         it { is_expected.to_not be_able_to(:destroy, question) }
       end
+
+      context 'quand il y a des événements réponses pour cette question' do
+        let!(:partie) { create :partie }
+        let!(:reponse) { create :evenement_reponse, donnees: { question: question.id } }
+        it { is_expected.to_not be_able_to(:destroy, question) }
+      end
     end
 
     describe 'Droits des choix' do

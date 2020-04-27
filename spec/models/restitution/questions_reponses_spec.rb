@@ -12,7 +12,7 @@ describe Restitution::QuestionsReponses do
 
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
-      let(:evenements) { [] }
+      let(:evenements) { [build(:evenement_demarrage)] }
       it { expect(restitution.questions_et_reponses).to eq([]) }
     end
 
@@ -41,6 +41,46 @@ describe Restitution::QuestionsReponses do
         ]
       end
       it { expect(restitution.questions_et_reponses.first[:reponse]).to eql('coucou') }
+    end
+  end
+
+  describe '#choix_reponse' do
+    context 'retourne le choix répondu' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
+        ]
+      end
+      it { expect(restitution.choix_repondu(question1)).to eql(bon_choix_q1) }
+    end
+
+    context "ne retourne rien si la question n'a pas été répondu" do
+      let(:evenements) { [] }
+      it { expect(restitution.choix_repondu(question1)).to be_nil }
+    end
+  end
+
+  describe '#reponses' do
+    context 'retourne toutes les réponses' do
+      let(:evenements) do
+        [
+          build(:evenement_reponse),
+          build(:evenement_reponse)
+        ]
+      end
+      it { expect(restitution.reponses.size).to eql(2) }
+    end
+
+    context 'retourne seulement les événements réponses' do
+      let(:evenements) do
+        [
+          build(:evenement_demarrage),
+          build(:evenement_reponse)
+        ]
+      end
+      it { expect(restitution.reponses.size).to eql(1) }
     end
   end
 end

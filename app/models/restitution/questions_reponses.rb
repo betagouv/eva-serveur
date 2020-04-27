@@ -16,7 +16,7 @@ module Restitution
         .map do |question|
         {
           question: question,
-          reponse: trouve_reponse(question)
+          reponse: choix_repondu(question)
         }
       end
     end
@@ -34,10 +34,13 @@ module Restitution
       questions.where(id: questions_ids)
     end
 
-    def trouve_reponse(question)
-      reponse = reponses.find do |evenement|
+    def choix_repondu(question)
+      evenement_reponse = reponses.find do |evenement|
         evenement.donnees['question'] == question.id
-      end.donnees['reponse']
+      end
+      return if evenement_reponse.blank?
+
+      reponse = evenement_reponse.donnees['reponse']
       question.is_a?(QuestionQcm) ? question.choix.find(reponse) : reponse
     end
   end

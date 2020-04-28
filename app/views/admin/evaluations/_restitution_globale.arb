@@ -64,7 +64,7 @@ div class: 'admin_restitution_globale' do
 
   restitution_globale.restitutions.each do |restitution|
     situation = restitution.situation
-    next if situation.nom_technique == 'bienvenue'
+    next if situation.nom_technique == Restitution::Bienvenue::NOM_TECHNIQUE
 
     panel t('.situation', situation: situation.libelle) do
       begin

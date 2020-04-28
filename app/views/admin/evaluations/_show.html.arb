@@ -24,8 +24,10 @@ panel t('.titre.restitutions') do
   end
 end
 
-panel 'Auto-positionnement' do
-  render partial: 'auto_positionnement', locals: { pdf: false }
+if auto_positionnement
+  panel t('.titre.auto_positionnement') do
+    render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
+  end
 end
 
 panel t('.titre.restitution_globale') do

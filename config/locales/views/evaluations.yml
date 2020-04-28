@@ -67,6 +67,7 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
+          auto_positionnement: Auto-positionnement
           restitutions: Restitutions
     restitutions:
       evaluation:

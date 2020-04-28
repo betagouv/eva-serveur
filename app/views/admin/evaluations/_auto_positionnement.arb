@@ -1,0 +1,8 @@
+# frozen_string_literal: true
+
+restitution_globale.restitutions.each do |restitution|
+  situation = restitution.situation
+  next if situation.nom_technique != 'bienvenue'
+
+  render situation.nom_technique, restitution: restitution
+end

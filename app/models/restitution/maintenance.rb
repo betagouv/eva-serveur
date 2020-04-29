@@ -51,13 +51,6 @@ module Restitution
       end
     end
 
-    def persiste
-      metriques = METRIQUES.keys.each_with_object({}) do |nom_metrique, memo|
-        memo[nom_metrique] = public_send(nom_metrique)
-      end
-      partie.update(metriques: metriques)
-    end
-
     def competences_de_base
       calcule_competences(
         ::Competence::VOCABULAIRE => Maintenance::Vocabulaire

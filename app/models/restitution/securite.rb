@@ -74,13 +74,6 @@ module Restitution
         SecuriteHelper.qualifications_par_danger(evenements_situation).count == ZONES_DANGER.count
     end
 
-    def persiste
-      metriques = METRIQUES.keys.each_with_object({}) do |nom_metrique, memo|
-        memo[nom_metrique] = public_send(nom_metrique)
-      end
-      partie.update(metriques: metriques)
-    end
-
     METRIQUES.keys.each do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']

@@ -66,8 +66,8 @@ fr:
           description: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
       show:
         titre:
-          competences_identifiees: Compétences identifiées
           restitution_globale: Restitution globale
+          auto_positionnement: Auto-positionnement
           restitutions: Restitutions
     restitutions:
       evaluation:

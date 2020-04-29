@@ -10,11 +10,25 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   describe '#show' do
+    # evaluation sans positionnement
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
     let(:situation) { build(:situation_inventaire) }
     let!(:partie) { create :partie, situation: situation, evaluation: mon_evaluation }
     let!(:evenement) { create :evenement_demarrage, partie: partie }
     let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
+
+    # evaluation avec positionnement
+    let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: ma_campagne }
+    let(:bienvenue) { build(:situation_bienvenue, questionnaire: questionnaire) }
+    let!(:partie_bienvenue) do
+      create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue, session_id: 'id'
+    end
+    let!(:evenement_bienvenue) { create :evenement_demarrage, partie: partie_bienvenue }
+    let(:questionnaire) { create :questionnaire, questions: [] }
+    let(:restitution_bienvenue) do
+      Restitution::Bienvenue.new(mon_evaluation_bienvenue, [evenement_bienvenue])
+    end
+
     let(:restitution_globale) do
       double(Restitution::Globale,
              date: DateTime.now,
@@ -23,8 +37,15 @@ describe 'Admin - Evaluation', type: :feature do
              restitutions: [restitution])
     end
 
-    it "affiche l'évaluation" do
+    it 'sans auto_positionnement' do
       visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation)
+      expect(page).to_not have_content 'Auto-positionnement'
+      expect(page).to have_content 'Roger'
+    end
+
+    it 'avec auto_positionnement' do
+      visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+      expect(page).to have_content 'Auto-positionnement'
       expect(page).to have_content 'Roger'
     end
 

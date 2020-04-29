@@ -33,7 +33,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :restitution_globale, :parties
+    helper_method :restitution_globale, :parties, :auto_positionnement
 
     def show
       show! do |format|
@@ -50,6 +50,12 @@ ActiveAdmin.register Evaluation do
 
     def restitution_globale
       FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+    end
+
+    def auto_positionnement
+      restitution_globale.restitutions.select do |restitution|
+        restitution.situation.nom_technique == Restitution::Bienvenue::NOM_TECHNIQUE
+      end.last
     end
 
     def parties

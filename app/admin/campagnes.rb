@@ -18,6 +18,7 @@ ActiveAdmin.register Campagne do
     column :code
     column :nombre_evaluations
     column :compte if can?(:manage, Compte)
+    column :created_at
     actions
   end
 

@@ -10,7 +10,7 @@
   }
 }
 
-.admin_restitution_globale {
+.admin_restitution_globale, .autopositionnement {
   @media screen {
     #main_content {
       padding-top: 2rem;
@@ -115,10 +115,6 @@
 
   .questions {
     @include applique-theme($couleur-questions);
-  }
-
-  .reponse-communication-ecrite {
-    margin-top: .5rem;
   }
 
   .competences-identifiees {

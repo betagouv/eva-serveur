@@ -143,6 +143,7 @@ describe Ability do
                                 namespace_name: 'admin')
     end
     it { is_expected.to_not be_able_to(:manage, Compte.new) }
+    it { is_expected.to_not be_able_to(:manage, Structure.new) }
     it { is_expected.to_not be_able_to(%i[destroy create update], Situation.new) }
     it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
     it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }

@@ -112,6 +112,16 @@ describe Ability do
         it { is_expected.to_not be_able_to(:destroy, choix) }
       end
     end
+
+    describe 'Droits des structures' do
+      let!(:structure) { create :structure }
+      it { is_expected.to be_able_to(:destroy, structure) }
+
+      context 'avec un compte rattaché' do
+        let!(:compte) { create :compte, structure: structure }
+        it { is_expected.to_not be_able_to(:destroy, structure) }
+      end
+    end
   end
 
   context 'Compte organisation' do

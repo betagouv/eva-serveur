@@ -1,0 +1,20 @@
+fr:
+  activerecord:
+    attributes:
+      structure:
+        created_at: Créée le
+        updated_at: Mise à jour le
+        nom: Nom
+        code_postal: Code Postal
+  formtastic:
+    actions:
+      structure:
+        create: Créer une structure
+        update: Modifier
+  active_admin:
+    resources:
+      structure:
+        delete_model: Supprimer
+        new_model: Créer une structure
+        edit_model: Modifier
+        delete_model: Supprimer

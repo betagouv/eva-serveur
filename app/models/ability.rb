@@ -4,19 +4,28 @@ class Ability
   include CanCan::Ability
 
   def initialize(compte)
+    droits_utilisateur compte
+    droits_applicatifs
+  end
+
+  private
+
+  def droits_utilisateur(compte)
     droits_generiques compte
     droit_campagne compte
     droit_evaluation compte
     droit_evenement compte
     droit_restitution compte
+  end
+
+  def droits_applicatifs
     droit_situation
     droit_question
     droit_questionnaire
     droit_compte
     droit_choix
+    droit_structure
   end
-
-  private
 
   def droit_campagne(compte)
     can :create, Campagne
@@ -79,6 +88,12 @@ class Ability
   def droit_choix
     cannot :destroy, Choix do |c|
       Evenement.where("donnees->>'reponse' = ?", c.id.to_s).present?
+    end
+  end
+
+  def droit_structure
+    cannot :destroy, Structure do |s|
+      Compte.where(structure: s).present?
     end
   end
 

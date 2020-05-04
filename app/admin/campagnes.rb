@@ -9,6 +9,7 @@ ActiveAdmin.register Campagne do
   filter :compte, if: proc { can? :manage, Compte }
   filter :situations
   filter :questionnaire
+  filter :created_at
 
   includes :compte
 

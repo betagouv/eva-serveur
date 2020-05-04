@@ -29,4 +29,15 @@ ActiveAdmin.register Compte do
     end
     f.actions
   end
+
+  controller do
+    def update_resource(object, attributes)
+      update_method = if attributes.first[:password].present?
+                        :update_attributes
+                      else
+                        :update_without_password
+                      end
+      object.send(update_method, *attributes)
+    end
+  end
 end

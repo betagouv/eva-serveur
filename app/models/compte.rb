@@ -8,6 +8,8 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: %w[administrateur organisation] }, presence: true
   default_scope { order(created_at: :asc) }
 
+  belongs_to :structure, optional: true
+
   def display_name
     email
   end

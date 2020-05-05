@@ -12,4 +12,8 @@ ActiveAdmin.register Structure do
     column :created_at
     actions
   end
+
+  filter :nom
+  filter :code_postal
+  filter :created_at
 end

@@ -74,3 +74,4 @@ Shoulda::Matchers.configure do |config|
 end
 
 require 'support/comparateur_niveau_restitution.rb'
+require 'support/shared_contexts/rake.rb'

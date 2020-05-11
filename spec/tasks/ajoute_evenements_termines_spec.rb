@@ -1,0 +1,51 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+describe 'ajoute_evenements_termines' do
+  include_context 'rake'
+
+  let!(:partie) { create :partie }
+
+  context "quand l'événement termine est présent" do
+    let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
+
+    it do
+      expect { subject.invoke }.to_not(change { Evenement.count })
+    end
+  end
+
+  context 'sans événement terminé' do
+    before do
+      allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+    end
+
+    let(:date_dernier_evenement) { 2.days.from_now.beginning_of_day }
+
+    context 'situation terminée' do
+      let(:restitution) { double(termine?: true) }
+
+      let!(:evenements) do
+        [create(:evenement_piece_bien_placee, partie: partie, date: date_dernier_evenement)]
+      end
+
+      it do
+        expect { subject.invoke }.to(change { Evenement.count })
+
+        evenement = Evenement.order(:created_at).last
+        expect(evenement.nom).to eq 'finSituation'
+        expect(evenement.date).to eq date_dernier_evenement
+      end
+    end
+
+    context 'situation non terminée' do
+      let(:restitution) { double(termine?: false) }
+
+      let!(:evenements) { [] }
+
+      it do
+        expect { subject.invoke }.to_not(change { Evenement.count })
+      end
+    end
+  end
+end

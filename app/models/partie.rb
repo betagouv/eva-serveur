@@ -12,14 +12,6 @@ class Partie < ApplicationRecord
     session_id
   end
 
-  def restitution
-    FabriqueRestitution.instancie id
-  end
-
-  def persiste_restitution
-    restitution.persiste
-  end
-
   def moyenne_metrique(metrique)
     aggrege_metrique(:average, metrique)
   end

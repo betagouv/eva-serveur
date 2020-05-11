@@ -23,8 +23,10 @@ ActiveAdmin.register Situation do
   member_action :recalcule_metriques, method: :post do
     Partie
       .where(situation: resource)
-      .where.not(metriques: {})
-      .find_each(&:persiste_restitution)
+      .find_each do |partie|
+        restitution = FabriqueRestitution.instancie partie.id
+        restitution.persiste if restitution.termine?
+      end
 
     redirect_to admin_situation_path(resource),
                 notice: I18n.t('admin.situations.recalcul_metriques.fait')

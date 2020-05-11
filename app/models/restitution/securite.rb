@@ -74,7 +74,7 @@ module Restitution
         SecuriteHelper.qualifications_par_danger(evenements_situation).count == ZONES_DANGER.count
     end
 
-    METRIQUES.keys.each do |metrique|
+    METRIQUES.each_key do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']
           .calcule(evenements_situation, evenements_entrainement)

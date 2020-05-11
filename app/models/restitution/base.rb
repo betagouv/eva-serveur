@@ -82,9 +82,7 @@ module Restitution
     end
 
     def calcule_competences(competences)
-      competences.each_with_object({}) do |(competence, classe), resultat|
-        resultat[competence] = classe.new(self).niveau
-      end
+      competences.transform_values { |classe| classe.new(self).niveau }
     end
 
     def efficience

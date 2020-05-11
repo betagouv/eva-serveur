@@ -44,7 +44,7 @@ module Restitution
       super(campagne, evenements)
     end
 
-    METRIQUES.keys.each do |metrique|
+    METRIQUES.each_key do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']
           .calcule(evenements_situation, evenements_entrainement)

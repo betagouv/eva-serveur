@@ -11,10 +11,13 @@ class CreeEvenementAction
   end
 
   def call
-    evenement.save.tap do |persiste|
-      next unless persiste
+    evenement.save.tap do |saved|
+      next unless saved
 
-      partie.persiste_restitution if evenement.nom == FIN_SITUATION
+      next unless evenement.nom == FIN_SITUATION
+
+      restitution = FabriqueRestitution.instancie partie.id
+      restitution.persiste
     end
   end
 end

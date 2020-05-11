@@ -30,11 +30,27 @@ describe 'Admin - Situation', type: :feature do
              metriques: { test: 'test' }
     end
 
-    before { visit admin_situation_path(tri) }
+    before do
+      allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+      visit admin_situation_path(tri)
+    end
 
-    it {
-      expect_any_instance_of(Partie).to receive(:persiste_restitution)
-      click_on 'Recalcule les métriques'
-    }
+    context 'persiste les restitutions terminées' do
+      let(:restitution) { double(termine?: true) }
+
+      it do
+        expect(restitution).to receive(:persiste)
+        click_on 'Recalcule les métriques'
+      end
+    end
+
+    context 'ignore les restitutions non terminees' do
+      let(:restitution) { double(termine?: false) }
+
+      it do
+        expect(restitution).to_not receive(:persiste)
+        click_on 'Recalcule les métriques'
+      end
+    end
   end
 end

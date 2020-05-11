@@ -9,7 +9,7 @@ ActiveAdmin.register Evaluation do
   filter :nom
   filter :created_at
 
-  action_item :pdf, only: :show do
+  action_item :pdf_restitution, only: :show do
     link_to('Export PDF', {
               parties_selectionnees: params[:parties_selectionnees],
               format: :pdf
@@ -17,7 +17,7 @@ ActiveAdmin.register Evaluation do
             target: '_blank')
   end
 
-  index download_links: %i[csv pdf] do
+  index download_links: -> { params[:action] == 'show' ? [:pdf] : [:csv] } do
     selectable_column
     column :nom
     column :created_at

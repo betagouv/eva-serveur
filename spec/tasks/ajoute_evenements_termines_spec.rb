@@ -5,25 +5,17 @@ require 'rails_helper'
 describe 'ajoute_evenements_termines' do
   include_context 'rake'
 
-  let!(:partie) { create :partie }
-
-  context "quand l'événement termine est présent" do
-    let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
-
-    it do
-      expect { subject.invoke }.to_not(change { Evenement.count })
-    end
+  before do
+    allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
   end
 
-  context 'sans événement terminé' do
-    before do
-      allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
-    end
+  let!(:partie) { create :partie }
 
-    let(:date_dernier_evenement) { 2.days.from_now.beginning_of_day }
+  context 'situation terminée' do
+    let(:restitution) { double(termine?: true) }
 
-    context 'situation terminée' do
-      let(:restitution) { double(termine?: true) }
+    context 'sans événement fin' do
+      let(:date_dernier_evenement) { 2.days.from_now.beginning_of_day }
 
       let!(:evenements) do
         [create(:evenement_piece_bien_placee, partie: partie, date: date_dernier_evenement)]
@@ -38,14 +30,35 @@ describe 'ajoute_evenements_termines' do
       end
     end
 
-    context 'situation non terminée' do
-      let(:restitution) { double(termine?: false) }
+    context 'avec événement fin' do
+      context "et c'est le dernier événement" do
+        let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
 
-      let!(:evenements) { [] }
-
-      it do
-        expect { subject.invoke }.to_not(change { Evenement.count })
+        it do
+          expect { subject.invoke }.to_not(change { Evenement.count })
+        end
       end
+
+      context "et ce n'est pas le dernier événement" do
+        let!(:evenements) do
+          [create(:evenement_fin_situation, partie: partie, date: 1.day.ago),
+           create(:evenement_piece_bien_placee, partie: partie, date: 1.day.from_now)]
+        end
+
+        it do
+          expect { subject.invoke }.to_not(change { Evenement.count })
+        end
+      end
+    end
+  end
+
+  context 'situation non terminée' do
+    let(:restitution) { double(termine?: false) }
+
+    let!(:evenements) { [] }
+
+    it do
+      expect { subject.invoke }.to_not(change { Evenement.count })
     end
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'ajoute_evenements_termines' do
+describe 'nettoyage:ajoute_evenements_termines' do
   include_context 'rake'
 
   before do

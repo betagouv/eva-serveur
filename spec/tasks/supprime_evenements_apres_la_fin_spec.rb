@@ -18,13 +18,14 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'avec événements après la fin' do
     let!(:evenements) do
-      [create(:evenement_fin_situation, partie: partie, date: 1.day.ago),
-       create(:evenement_piece_bien_placee, partie: partie, date: 1.day.from_now)]
+      [create(:evenement_fin_situation, partie: partie, date: 3.minute.ago),
+       create(:evenement_piece_bien_placee, partie: partie, date: 2.minute.ago),
+       create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago)]
     end
 
     it do
-      expect { subject.invoke }.to(change { Evenement.count }.by(-1))
-      expect(Evenement.first.nom).to eq 'finSituation'
+      expect { subject.invoke }.to(change { Evenement.count }.by(-2))
+      expect(Evenement.last.nom).to eq 'finSituation'
     end
   end
 
@@ -38,9 +39,9 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'regroupe par partie' do
     let(:autre_partie) { create :partie, situation: situation, session_id: SecureRandom.uuid }
-    let!(:evenement_fin) { create(:evenement_fin_situation, partie: partie, date: 1.day.ago) }
+    let!(:evenement_fin) { create(:evenement_fin_situation, partie: partie, date: 2.minute.ago) }
     let!(:evenement_recent_autre) do
-      create(:evenement_piece_bien_placee, partie: autre_partie, date: 1.day.from_now)
+      create(:evenement_piece_bien_placee, partie: autre_partie, date: 1.minute.ago)
     end
 
     it do

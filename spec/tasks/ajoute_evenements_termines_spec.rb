@@ -26,7 +26,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
 
         evenement = Evenement.order(:created_at).last
         expect(evenement.nom).to eq 'finSituation'
-        expect(evenement.date).to eq date_dernier_evenement
+        expect(evenement.date - date_dernier_evenement).to eq(0.001)
       end
     end
 

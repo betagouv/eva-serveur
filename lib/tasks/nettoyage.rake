@@ -11,7 +11,7 @@ namespace :nettoyage do
       next unless restitution.termine?
 
       dernier_evenement = evenements.order(:date).last
-      Evenement.create! partie: partie, nom: 'finSituation', date: dernier_evenement.date
+      Evenement.create! partie: partie, nom: 'finSituation', date: dernier_evenement.date + 0.001
     end
   end
 

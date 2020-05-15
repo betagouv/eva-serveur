@@ -7,6 +7,9 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   let(:situation) { create :situation_livraison }
   let!(:partie) { create :partie, situation: situation }
+  let(:logger) { RakeLogger.logger }
+
+  before { allow(logger).to receive :info }
 
   context 'sans événement après la fin' do
     let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
@@ -24,6 +27,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     end
 
     it do
+      expect(logger).to receive(:info).exactly(3).times
       expect { subject.invoke }.to(change { Evenement.count }.by(-2))
       expect(Evenement.last.nom).to eq 'finSituation'
     end

@@ -37,6 +37,7 @@ Metrics/BlockLength:
     - context
     - show
     - controller
+    - namespace
 
 Metrics/AbcSize:
   Exclude:

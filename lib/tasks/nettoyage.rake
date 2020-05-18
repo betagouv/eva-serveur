@@ -20,13 +20,15 @@ namespace :nettoyage do
     logger = RakeLogger.logger
     logger.info 'Evenements effacées:'
     Partie.find_each do |partie|
+      date_fin = nil
       evenements = Evenement.where(partie: partie).order(:date)
       evenements_jusqua_fin = evenements.take_while do |evenement|
-        evenement.nom != 'finSituation'
+        date_fin ||= evenement.date if evenement.nom == 'finSituation'
+
+        date_fin.nil? || evenement.date == date_fin
       end
 
       evenements_apres_fin = evenements - evenements_jusqua_fin
-      evenements_apres_fin = evenements_apres_fin.drop(1)
       evenements_apres_fin.each { |evenement| logger.info evenement }
       Evenement.where(id: evenements_apres_fin.collect(&:id)).destroy_all
     end

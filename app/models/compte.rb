@@ -10,6 +10,8 @@ class Compte < ApplicationRecord
 
   belongs_to :structure, optional: true
 
+  accepts_nested_attributes_for :structure
+
   def display_name
     email
   end

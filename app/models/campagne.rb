@@ -12,6 +12,7 @@ class Campagne < ApplicationRecord
   before_validation :genere_code_unique
 
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
+  accepts_nested_attributes_for :compte
 
   def display_name
     libelle

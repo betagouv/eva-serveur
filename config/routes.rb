@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get '/', to: redirect('/admin')
 
+  resource :nouvelle_structure, only: [:create, :show]
+
   namespace :api do
     resources :evaluations, only: [:create, :show]
     resources :questionnaires, only: [:show]

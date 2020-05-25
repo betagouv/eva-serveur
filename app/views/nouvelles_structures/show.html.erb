@@ -1,0 +1,16 @@
+<%= semantic_form_for @campagne, url: nouvelle_structure_path do |f| %>
+  <%= f.semantic_errors *f.object.errors.keys %>
+  <%= f.semantic_fields_for :compte do |compte| %>
+    <%= compte.semantic_fields_for :structure do |structure| %>
+      <%= structure.inputs :nom, :code_postal, name: 'Structure' %>
+      <%= compte.inputs name: 'Le premier compte utilisateur' do %>
+        <%= compte.input :email %>
+        <%= compte.input :password %>
+        <%= compte.input :password_confirmation %>
+        <%= compte.input :role, as: :hidden, input_html: {value: 'organisation'} %>
+      <% end %>
+      <%= f.inputs :libelle, :code, name: 'La première campagne' %>
+    <% end %>
+  <% end %>
+  <%= f.actions %>
+<% end %>

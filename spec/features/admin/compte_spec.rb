@@ -12,7 +12,7 @@ describe 'Admin - Compte', type: :feature do
       it do
         visit new_admin_compte_path
         expect do
-          fill_in :compte_email, with: 'jeanmarc@exemple?fr'
+          fill_in :compte_email, with: 'jeanmarc@exemple.fr'
           select 'administrateur'
           select 'Ma Super Structure'
           fill_in :compte_password, with: 'billyjoel'

@@ -5,7 +5,7 @@ class Compte < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
-  validates :role, inclusion: { in: %w[administrateur organisation] }, presence: true
+  validates :role, inclusion: { in: %w[administrateur organisation] }
   default_scope { order(created_at: :asc) }
 
   belongs_to :structure, optional: true

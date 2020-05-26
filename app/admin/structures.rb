@@ -3,6 +3,8 @@
 ActiveAdmin.register Structure do
   permit_params :nom, :code_postal
 
+  actions :all, except: [:new]
+
   index do
     column :nom
     column :code_postal
@@ -16,4 +18,8 @@ ActiveAdmin.register Structure do
   filter :nom
   filter :code_postal
   filter :created_at
+
+  action_item :nouvelle_structure, only: :index do
+    link_to I18n.t('admin.structure.nouvelle_structure'), nouvelle_structure_path
+  end
 end

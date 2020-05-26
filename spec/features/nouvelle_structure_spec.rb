@@ -15,7 +15,7 @@ describe 'Nouvelle Structure', type: :feature do
     fill_in :campagne_compte_attributes_structure_attributes_code_postal, with: '06000'
   end
 
-  it do
+  it 'créé stucture, compte et campagne' do
     expect do
       click_on 'Créer'
     end.to change(Structure, :count)
@@ -38,5 +38,18 @@ describe 'Nouvelle Structure', type: :feature do
     expect(compte.structure_id).to eq(structure.id)
 
     expect(current_path).to eq(admin_campagne_path(campagne))
+  end
+
+  it 'initialiser la campagne avec les situations par défaut si elles existes' do
+    bienvenue = create :situation_bienvenue
+    maintenance = create :situation_maintenance
+    objets_trouves = create :situation_objets_trouves
+
+    expect do
+      click_on 'Créer'
+    end.to change(Campagne, :count)
+
+    campagne = Campagne.last
+    expect(campagne.situations).to eq([bienvenue, maintenance, objets_trouves])
   end
 end

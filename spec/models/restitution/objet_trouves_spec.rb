@@ -9,7 +9,7 @@ describe Restitution::ObjetsTrouves do
 
   describe '#persiste' do
     context "persiste l'ensemble des données de la situation Objets Trouves" do
-      let(:situation) { create :situation_objet_trouves }
+      let(:situation) { create :situation_objets_trouves }
       let(:evaluation) { create :evaluation, campagne: campagne }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let(:evenements) do

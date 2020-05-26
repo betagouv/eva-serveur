@@ -8,7 +8,7 @@ class NouvellesStructuresController < ApplicationController
   end
 
   def create
-    @campagne = Campagne.new campagne_parametres
+    @campagne = Campagne.new campagne_parametres.merge(initialise_situations: true)
     if @campagne.save
       redirect_to admin_campagne_path(@campagne)
     else

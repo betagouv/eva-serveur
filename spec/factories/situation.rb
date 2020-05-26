@@ -32,7 +32,7 @@ FactoryBot.define do
       nom_technique { 'livraison' }
     end
 
-    factory :situation_objet_trouves do
+    factory :situation_objets_trouves do
       libelle { 'Objets Trouvés' }
       nom_technique { 'objets_trouves' }
     end

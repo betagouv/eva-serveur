@@ -8,7 +8,6 @@
         <%= compte.input :email %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation %>
-        <%= compte.input :role, as: :hidden, input_html: {value: 'organisation'} %>
       <% end %>
       <%= f.inputs :libelle, :code, name: 'La première campagne' %>
     <% end %>

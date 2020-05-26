@@ -139,6 +139,10 @@ fr:
         temps_moyen_bonnes_reponses_ccf: Temps moyen de bonnes réponses Ccf
         temps_moyen_bonnes_reponses_syntaxe_orthographe: Temps moyen de bonnes réponses Syntaxe et Orthographe
         temps_moyen_bonnes_reponses_memorisation: Temps moyen de bonnes réponses Mémorisation
+        score_numeratie: Score Numératie
+        score_ccf: Score Ccf
+        score_syntaxe_orthographe: Score Syntaxe et Orthographe
+        score_memorisation: Score Mémorisation
       restitution_colonnes:
         cote_z: Cote Z
         valeur_utilisateur: Valeur de l'évalué·e

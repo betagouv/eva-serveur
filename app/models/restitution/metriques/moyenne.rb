@@ -7,8 +7,8 @@ module Restitution
         @metrique_a_moyenner = metrique_a_moyenner
       end
 
-      def calcule(evenements_situation, evenements_entrainement)
-        moyenne @metrique_a_moyenner.calcule(evenements_situation, evenements_entrainement)
+      def calcule(premier_parametre, deuxieme_parametre)
+        moyenne @metrique_a_moyenner.calcule(premier_parametre, deuxieme_parametre)
       end
 
       private

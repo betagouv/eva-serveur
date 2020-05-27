@@ -58,11 +58,6 @@ describe Partie do
                                                  'test_metrique_tableau' => nil)
       end
     end
-
-    it "lorsqu'il n'y a aucune partie enregistré" do
-      partie1.update(metriques: {})
-      expect(partie1.moyenne_metriques).to be_nil
-    end
   end
 
   context '#ecart_type_metrique' do
@@ -83,11 +78,6 @@ describe Partie do
                                                     'test_metrique_tableau' => nil)
       end
     end
-
-    it "lorsqu'il n'y a aucune partie enregistré" do
-      partie1.update(metriques: {})
-      expect(partie1.ecart_type_metriques).to be_nil
-    end
   end
 
   context '#cote_z_metriques' do
@@ -106,9 +96,7 @@ describe Partie do
 
       it do
         partie1.update(metriques: {})
-        expect(partie1.cote_z_metriques).to eql('test_chaine' => nil,
-                                                'test_metrique' => nil,
-                                                'test_metrique_tableau' => nil)
+        expect(partie1.cote_z_metriques).to eql({})
       end
     end
 
@@ -118,11 +106,6 @@ describe Partie do
                                                 'test_metrique' => 0,
                                                 'test_metrique_tableau' => nil)
       end
-    end
-
-    it "lorsqu'il n'y a aucune partie enregistré" do
-      partie1.update(metriques: {})
-      expect(partie1.cote_z_metriques).to be_nil
     end
   end
 end

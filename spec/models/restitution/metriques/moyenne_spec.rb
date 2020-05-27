@@ -23,10 +23,5 @@ describe Restitution::Metriques::Moyenne do
       expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([1, 2])
       expect(metrique_moyenne.calcule([], [])).to eql(1.5)
     end
-
-    it 'arrondi à quatre chiffres après la virgule' do
-      expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([1, 1, 2])
-      expect(metrique_moyenne.calcule([], [])).to eql(1.3333)
-    end
   end
 end

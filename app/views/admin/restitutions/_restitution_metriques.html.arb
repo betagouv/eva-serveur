@@ -24,6 +24,8 @@ panel t('.restitution_metriques') do
               li "#{clef} : #{val}"
             end
           end
+        when :nombre
+          valeur&.round(2)
         else
           valeur
         end

@@ -47,7 +47,7 @@ class Partie < ApplicationRecord
   def cote_z_metrique(metrique)
     (
       (metriques[metrique] - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
-    ).round(2)
+    )
   end
 
   def aggrege_metrique(fonction, metrique)
@@ -56,7 +56,6 @@ class Partie < ApplicationRecord
       .where.not(metriques: {})
       .calculate(fonction, "(metriques ->> '#{metrique}')::numeric")
       .to_f
-      .round(2)
   end
 
   def collect_metriques_numeriques

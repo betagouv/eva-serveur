@@ -64,7 +64,7 @@ describe Partie do
     before { [partie1, partie2, partie3] }
 
     it "calcule l'écart type" do
-      expect(partie1.ecart_type_metrique(:test_metrique)).to eql(0.82)
+      expect(partie1.ecart_type_metrique(:test_metrique).round(2)).to eql(0.82)
     end
   end
 
@@ -74,7 +74,7 @@ describe Partie do
 
       it do
         expect(partie1.ecart_type_metriques).to eql('test_chaine' => nil,
-                                                    'test_metrique' => 0.82,
+                                                    'test_metrique' => 0.816496580927726,
                                                     'test_metrique_tableau' => nil)
       end
     end

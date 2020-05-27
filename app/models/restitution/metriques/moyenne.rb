@@ -16,7 +16,7 @@ module Restitution
       def moyenne(liste)
         return nil if liste.empty?
 
-        liste.sum.fdiv(liste.count).round(4)
+        liste.sum.fdiv(liste.count)
       end
     end
   end

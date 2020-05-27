@@ -21,6 +21,7 @@ module Restitution
     ].freeze
 
     attr_reader :campagne, :evenements
+
     delegate :evaluation, :session_id, :situation, :created_at, to: :partie
     alias date created_at
 

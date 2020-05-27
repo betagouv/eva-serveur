@@ -4,6 +4,7 @@ module Restitution
   class Tri
     class ComprehensionConsigne < Restitution::Competence::Base
       attr_reader :restitution
+
       delegate :termine?, to: :restitution
       delegate :nombre_bien_placees, :nombre_mal_placees, to: :restitution
       delegate :nombre_rejoue_consigne, to: :restitution

@@ -38,26 +38,17 @@ module Restitution
       'score_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Metriques::Divise.new(
-          Illettrisme::NombreBonnesReponses.new,
-          Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       },
       'score_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Metriques::Divise.new(
-          Illettrisme::NombreBonnesReponses.new,
-          Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       },
       'score_memorisation' => {
         'type' => :nombre,
         'metacompetence' => 'memorisation',
-        'instance' => Metriques::Divise.new(
-          Illettrisme::NombreBonnesReponses.new,
-          Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       }
 
     }.freeze

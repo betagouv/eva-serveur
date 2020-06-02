@@ -17,10 +17,10 @@ panel t('.restitution_essais') do
         status_tag t('admin.restitutions.evaluation.reussite'), class: 'green'
       elsif essai.abandon?
         status_tag t('admin.restitutions.evaluation.abandon'), class: 'red'
-      elsif essai.en_cours?
-        status_tag t('admin.restitutions.evaluation.en_cours')
-      else
+      elsif essai.verifie?
         status_tag t('admin.restitutions.evaluation.echec'), class: 'red'
+      else
+        status_tag t('admin.restitutions.evaluation.en_cours')
       end
     end
     column t('admin.restitutions.evaluation.temps') do |essai|

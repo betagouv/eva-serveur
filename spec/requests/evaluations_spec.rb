@@ -75,7 +75,7 @@ describe 'Evaluation API', type: :request do
 
       context 'avec une évaluation avec des compétences identifiées' do
         let!(:saisie) { create(:evenement_saisie_inventaire, :ok, partie: partie) }
-        let(:partie) { create :partie, situation: situation_inventaire, evaluation: evaluation }
+        let!(:fin) { create :evenement_fin_situation, partie: partie }
 
         context 'avec une campagne configurée sans compétences fortes' do
           before do

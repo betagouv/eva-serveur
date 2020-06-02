@@ -82,7 +82,8 @@ describe Restitution::Inventaire do
   it 'est en reussite' do
     evenements = [
       build(:evenement_demarrage),
-      build(:evenement_saisie_inventaire, :ok)
+      build(:evenement_saisie_inventaire, :ok),
+      build(:evenement_fin_situation)
     ]
     restitution = described_class.new(campagne, evenements)
     expect(restitution).to be_reussite
@@ -91,7 +92,7 @@ describe Restitution::Inventaire do
     expect(restitution).to_not be_en_cours
   end
 
-  it 'est terminé avec un événement de fin de situation' do
+  it 'est terminé' do
     evenements = [
       build(:evenement_demarrage),
       build(:evenement_fin_situation)
@@ -101,24 +102,13 @@ describe Restitution::Inventaire do
     expect(restitution).to be_reussite
   end
 
-  it 'est en echec' do
-    evenements = [
-      build(:evenement_demarrage),
-      build(:evenement_saisie_inventaire, :echec)
-    ]
-    restitution = described_class.new(campagne, evenements)
-    expect(restitution).to_not be_reussite
-    expect(restitution).to_not be_abandon
-    expect(restitution).to_not be_en_cours
-  end
-
   it 'est en abandon' do
     evenements = [
       build(:evenement_demarrage),
       build(:evenement_abandon)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution).to_not be_reussite
+    expect(restitution).to_not be_termine
     expect(restitution).to be_abandon
     expect(restitution).to_not be_en_cours
   end
@@ -128,7 +118,7 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution).to_not be_reussite
+    expect(restitution).to_not be_termine
     expect(restitution).to_not be_abandon
     expect(restitution).to be_en_cours
   end
@@ -171,17 +161,21 @@ describe Restitution::Inventaire do
         build(:evenement_ouverture_contenant, date: 8.minutes.ago),
         build(:evenement_ouverture_contenant, date: 8.minutes.ago),
         build(:evenement_saisie_inventaire, :echec, date: 7.minutes.ago),
-        build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago)
+        build(:evenement_saisie_inventaire, :ok, date: 5.minutes.ago),
+        build(:evenement_fin_situation)
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution.essais_verifies.size).to eql(2)
       restitution.essais_verifies.first.tap do |essai|
         expect(essai).to_not be_reussite
+        expect(essai).to_not be_abandon
+        expect(essai).to be_verifie
         expect(essai.nombre_ouverture_contenant).to eql(3)
         expect(essai.temps_total).to within(0.1).of(180)
       end
       restitution.essais_verifies.last.tap do |essai|
         expect(essai).to be_reussite
+        expect(essai).to be_verifie
         expect(essai.nombre_ouverture_contenant).to eql(0)
         expect(essai.temps_total).to within(0.1).of(300)
       end
@@ -213,6 +207,18 @@ describe Restitution::Inventaire do
       ]
       restitution = described_class.new(campagne, evenements)
       expect(restitution.essais.size).to eql(3)
+      expect(restitution.essais.last).to_not be_verifie
+    end
+
+    it "ne retourne pas d'essai pour l'événement de fin situation" do
+      evenements = [
+        build(:evenement_demarrage, date: 10.minutes.ago),
+        build(:evenement_ouverture_contenant, date: 8.minutes.ago),
+        build(:evenement_saisie_inventaire, :ok, date: 7.minutes.ago),
+        build(:evenement_fin_situation)
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.essais.size).to eql(1)
     end
   end
 

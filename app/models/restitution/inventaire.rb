@@ -4,7 +4,8 @@ module Restitution
   class Inventaire < Base
     EVENEMENT = {
       OUVERTURE_CONTENANT: 'ouvertureContenant',
-      SAISIE_INVENTAIRE: 'saisieInventaire'
+      SAISIE_INVENTAIRE: 'saisieInventaire',
+      FIN_SITUATION: 'finSituation'
     }.freeze
 
     class Essai < Inventaire
@@ -18,38 +19,41 @@ module Restitution
       end
 
       def nombre_erreurs
-        compte_reponse { |reponse| reponse['reussite'] }
+        compte_reponse { |reponse| !reponse['reussite'] }
       end
 
       def nombre_de_non_remplissage
-        compte_reponse { |reponse| reponse['quantite'].present? }
+        compte_reponse { |reponse| !reponse['quantite'].present? }
       end
 
       def nombre_erreurs_sauf_de_non_remplissage
-        return nil unless dernier_evenement_est_une_saisie_inventaire?
+        return nil if nombre_erreurs.nil?
 
         nombre_erreurs - nombre_de_non_remplissage
       end
 
+      def verifie?
+        evenements.last.donnees['reponses']
+      end
+
+      def reussite?
+        evenements.last.donnees['reussite']
+      end
+
       def compte_reponse
-        return nil unless dernier_evenement_est_une_saisie_inventaire?
+        return nil unless verifie?
 
         evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
-          compteur += 1 unless yield reponse
+          compteur += 1 if yield reponse
           compteur
         end
       end
     end
 
-    def termine?
-      super || dernier_evenement_est_une_saisie_inventaire? &&
-        evenements.last.donnees['reussite']
-    end
-
     alias reussite? termine?
 
     def en_cours?
-      !dernier_evenement_est_une_saisie_inventaire? && !abandon?
+      !(termine? || abandon?)
     end
 
     def nombre_ouverture_contenant
@@ -60,16 +64,13 @@ module Restitution
       compte_nom_evenements(EVENEMENT[:SAISIE_INVENTAIRE])
     end
 
-    def dernier_evenement_est_une_saisie_inventaire?
-      evenements.last.nom == EVENEMENT[:SAISIE_INVENTAIRE]
-    end
-
     def essais_verifies
-      dernier_evenement_est_une_saisie_inventaire? ? essais : essais[0...-1]
+      essais.last.verifie? ? essais : essais[0...-1]
     end
 
     def essais
-      evenements_par_essais = evenements.chunk_while do |evenement_avant, _|
+      evenements_sans_la_fin = evenements.to_a.delete_if { |e| e.nom == EVENEMENT[:FIN_SITUATION] }
+      evenements_par_essais = evenements_sans_la_fin.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end
       date_depart = evenements.first.date

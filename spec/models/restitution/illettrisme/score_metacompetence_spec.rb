@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Restitution::Illettrisme::ScoreMetacompetence do
-  describe '#calcule', focus: true do
+  describe '#calcule' do
     let(:evenements) { double }
     let(:metacompetence) { 'ccf' }
     let(:score) do

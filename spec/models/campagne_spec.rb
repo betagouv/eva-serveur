@@ -24,5 +24,44 @@ RSpec.describe Campagne, type: :model do
       end
       it { expect(campagne.code).to eq '12345' }
     end
+
+    context 'initialise la campagne' do
+      let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
+      before do
+        Campagne::SITUATIONS_PAR_DEFAUT.each do |nom_situation|
+          situation = Situation.new libelle: nom_situation, nom_technique: nom_situation
+          allow(Situation).to receive(:find_by).with(nom_technique: nom_situation)
+                                               .and_return(situation)
+        end
+      end
+
+      context "n'ajoute aucune situation quand ce n'est pas demandé" do
+        let(:campagne) do
+          Campagne.new libelle: 'ma campagne',
+                       code: 'moncode',
+                       compte: compte,
+                       initialise_situations: false
+        end
+        before { expect(campagne.valid?).to be(true) }
+        it do
+          campagne.save
+          expect(campagne.situations.count).to eq 0
+        end
+      end
+
+      context "ajoute les situations par defaut quand c'est demandé" do
+        let(:campagne) do
+          Campagne.new libelle: 'ma campagne',
+                       code: 'moncode',
+                       compte: compte,
+                       initialise_situations: true
+        end
+        before { expect(campagne.valid?).to be(true) }
+        it do
+          campagne.save
+          expect(campagne.situations.count).to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+        end
+      end
+    end
   end
 end

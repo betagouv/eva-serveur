@@ -35,13 +35,13 @@ describe Restitution::Base do
   end
 
   context "renvoie l'évaluation associée" do
-    let(:evenements) { [build(:evenement_demarrage)] }
+    let(:evenements) { [build(:evenement_demarrage, partie: partie)] }
 
     it { expect(described_class.new(campagne, evenements).evaluation).to eql(evaluation) }
   end
 
   context 'renvoie le session_id' do
-    let(:evenements) { [build(:evenement_demarrage)] }
+    let(:evenements) { [build(:evenement_demarrage, partie: partie)] }
 
     it { expect(restitution.session_id).to eql(partie.session_id) }
   end

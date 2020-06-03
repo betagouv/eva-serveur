@@ -57,9 +57,9 @@ describe Restitution::Securite do
       let(:evaluation) { create :evaluation, campagne: campagne }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' }),
-         build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })]
+        [build(:evenement_demarrage, partie: partie),
+         build(:evenement_ouverture_zone, partie: partie, donnees: { zone: 'zone1' }),
+         build(:evenement_ouverture_zone, partie: partie, donnees: { zone: 'zone1' })]
       end
 
       it do

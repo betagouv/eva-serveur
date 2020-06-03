@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :evenement do
     nom { 'ouvertureContenant' }
     donnees { {} }
-    session_id { '07319b2485be9ac4850664cd47cede38' }
+    partie
     date { DateTime.now }
 
     factory :evenement_demarrage_entrainement do

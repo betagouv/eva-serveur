@@ -9,7 +9,6 @@ describe Partie do
     create :partie,
            situation: situation,
            evaluation: evaluation,
-           session_id: '1',
            metriques: {
              test_metrique: 1,
              test_metrique_tableau: [1, 2],
@@ -20,7 +19,6 @@ describe Partie do
     create :partie,
            situation: situation,
            evaluation: evaluation,
-           session_id: '2',
            metriques: {
              test_metrique: 0,
              test_metrique_tableau: [2, 3],
@@ -32,7 +30,6 @@ describe Partie do
     create :partie,
            situation: situation,
            evaluation: evaluation,
-           session_id: '3',
            metriques: {
              test_metrique: 2,
              test_metrique_tableau: [2, 3],

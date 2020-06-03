@@ -21,7 +21,7 @@ describe 'Admin - Evaluation', type: :feature do
     let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: ma_campagne }
     let(:bienvenue) { build(:situation_bienvenue, questionnaire: questionnaire) }
     let!(:partie_bienvenue) do
-      create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue, session_id: 'id'
+      create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
     end
     let!(:evenement_bienvenue) { create :evenement_demarrage, partie: partie_bienvenue }
     let(:questionnaire) { create :questionnaire, questions: [] }

@@ -128,14 +128,12 @@ describe Ability do
     let(:situation)                 { create :situation_inventaire }
     let!(:evenement_administrateur) { create :evenement, partie: partie_administrateur }
     let!(:partie_administrateur) do
-      create :partie, session_id: 'test1', evaluation: evaluation_administrateur,
-                      situation: situation
+      create :partie, evaluation: evaluation_administrateur, situation: situation
     end
 
     let!(:evenement_organisation) { create :evenement, partie: partie_organisation }
     let!(:partie_organisation) do
-      create :partie, session_id: 'test2', evaluation: evaluation_organisation,
-                      situation: situation
+      create :partie, evaluation: evaluation_organisation, situation: situation
     end
 
     it 'avec une campagne qui a des évaluations' do

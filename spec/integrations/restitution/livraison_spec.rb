@@ -6,8 +6,8 @@ describe Restitution::Livraison, type: :integration do
   context 'Calcule le score de deux parties et attend deux résultats différents' do
     let(:situation) { create :situation_livraison }
 
-    let(:partie1) { create :partie, situation: situation, session_id: 'id1' }
-    let(:partie2) { create :partie, situation: situation, session_id: 'id2' }
+    let(:partie1) { create :partie, situation: situation }
+    let(:partie2) { create :partie, situation: situation }
     let(:restitution1) { FabriqueRestitution.instancie partie1.id }
     let(:restitution2) { FabriqueRestitution.instancie partie2.id }
 

@@ -42,7 +42,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
   end
 
   context 'regroupe par partie' do
-    let(:autre_partie) { create :partie, situation: situation, session_id: SecureRandom.uuid }
+    let(:autre_partie) { create :partie, situation: situation }
     let!(:evenement_fin) { create(:evenement_fin_situation, partie: partie, date: 2.minute.ago) }
     let!(:evenement_recent_autre) do
       create(:evenement_piece_bien_placee, partie: autre_partie, date: 1.minute.ago)

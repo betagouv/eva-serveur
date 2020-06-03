@@ -11,8 +11,7 @@ describe 'Admin - Evenement', type: :feature do
   let!(:partie) do
     create :partie,
            situation: situation,
-           evaluation: evaluation,
-           session_id: '1898098HJk8902'
+           evaluation: evaluation
   end
 
   let!(:evenement) do
@@ -23,9 +22,9 @@ describe 'Admin - Evenement', type: :feature do
 
   let(:autre_evaluation) { create :evaluation }
   let!(:autre_partie) do
-    create :partie, session_id: 'autre', situation: situation, evaluation: autre_evaluation
+    create :partie, situation: situation, evaluation: autre_evaluation
   end
-  let!(:evenement_hors_campagne) { create :evenement, nom: 'horsCampagne', session_id: 'autre' }
+  let!(:evenement_hors_campagne) { create :evenement, nom: 'horsCampagne', partie: autre_partie }
 
   before do
     se_connecter_comme_administrateur
@@ -35,7 +34,7 @@ describe 'Admin - Evenement', type: :feature do
   it 'Affiche les événements de la campagne' do
     expect(page).to have_content 'ouvertureContenant'
     expect(page).to have_content donnees['type']
-    expect(page).to have_content '1898098HJk8902'
+    expect(page).to have_content partie.session_id
     expect(page).to_not have_content 'horsCampagne'
   end
 

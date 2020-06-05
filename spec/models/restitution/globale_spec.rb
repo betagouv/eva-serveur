@@ -150,4 +150,43 @@ describe Restitution::Globale do
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
     end
   end
+
+  describe '#persiste' do
+    def verifie_enregistrement(metriques)
+      expect(evaluation).to receive(:update).with(metriques: metriques)
+    end
+
+    context 'pas de restitution' do
+      let(:restitutions) { [] }
+      it do
+        verifie_enregistrement({})
+        restitution_globale.persiste
+      end
+    end
+
+    context 'une restitution avec score' do
+      let(:restitutions) { [double(score_ccf: 12)] }
+      it do
+        verifie_enregistrement score_ccf: 12
+        restitution_globale.persiste
+      end
+    end
+
+    context 'fait la moyenne des scores de restitution' do
+      let(:restitutions) { [double(score_ccf: 30), double(score_ccf: 28)] }
+      it do
+        verifie_enregistrement score_ccf: 29
+        restitution_globale.persiste
+      end
+    end
+
+    context 'sépare les scores des compétences différentes' do
+      let(:restitutions) { [double(score_ccf: 3), double(score_numeratie: 7)] }
+
+      it do
+        verifie_enregistrement score_ccf: 3, score_numeratie: 7
+        restitution_globale.persiste
+      end
+    end
+  end
 end

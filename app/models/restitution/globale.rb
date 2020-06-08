@@ -80,10 +80,11 @@ module Restitution
     def valeurs_des_metriques
       METRIQUES_A_PERSISTER.each_with_object({}) do |metrique, memo|
         restitutions.each do |r|
-          next unless r.respond_to?(metrique)
+          cote_z = r.partie.cote_z_metriques[metrique.to_s]
+          next if cote_z.nil?
 
           memo[metrique] ||= []
-          memo[metrique] << r.send(metrique)
+          memo[metrique] << cote_z
         end
         memo
       end

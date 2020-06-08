@@ -165,26 +165,48 @@ describe Restitution::Globale do
     end
 
     context 'une restitution avec score' do
-      let(:restitutions) { [double(score_ccf: 12)] }
+      let(:partie) { double }
+      let(:restitutions) { [double(score_ccf: 12, partie: partie)] }
       it do
-        verifie_enregistrement score_ccf: 12
+        allow(partie).to receive(:cote_z_metriques).and_return({ 'score_ccf' => 1.1 })
+        verifie_enregistrement score_ccf: 1.1
         restitution_globale.persiste
       end
     end
 
     context 'fait la moyenne des scores de restitution' do
-      let(:restitutions) { [double(score_ccf: 30), double(score_ccf: 28)] }
+      let(:partie1) { double }
+      let(:partie2) { double }
+      let(:restitutions) do
+        [
+          double(score_ccf: 30, partie: partie1),
+          double(score_ccf: 28, partie: partie2)
+        ]
+      end
       it do
-        verifie_enregistrement score_ccf: 29
+        allow(partie1).to receive(:cote_z_metriques).and_return({ 'score_ccf' => 1.1 })
+        allow(partie2).to receive(:cote_z_metriques).and_return({ 'score_ccf' => 1.2 })
+        verifie_enregistrement score_ccf: 1.15
         restitution_globale.persiste
       end
     end
 
     context 'sépare les scores des compétences différentes' do
-      let(:restitutions) { [double(score_ccf: 3), double(score_numeratie: 7)] }
+      let(:partie1) { double }
+      let(:partie2) { double }
+      let(:restitutions) do
+        [
+          double(score_ccf: 30, score_memorisation: 10, partie: partie1),
+          double(score_numeratie: 28, partie: partie2)
+        ]
+      end
 
       it do
-        verifie_enregistrement score_ccf: 3, score_numeratie: 7
+        allow(partie1).to receive(:cote_z_metriques).times.and_return(
+          { 'score_ccf' => 1.1, 'score_memorisation' => 1.2 }
+        )
+        allow(partie2).to receive(:cote_z_metriques).and_return({ 'score_numeratie' => 1.3 })
+        verifie_enregistrement score_ccf: 1.1, score_memorisation: 1.2, score_numeratie: 1.3
         restitution_globale.persiste
       end
     end

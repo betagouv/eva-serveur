@@ -8,9 +8,13 @@ describe CreeEvenementAction do
   let!(:demarrage) { create :evenement_demarrage, partie: partie }
   let(:partie) { create :partie, situation: situation, evaluation: evaluation }
   let(:restitution) { double }
+  let(:restitution_globale) { double }
 
   before do
     allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+    allow(FabriqueRestitution).to receive(:restitution_globale)
+      .with(evaluation)
+      .and_return restitution_globale
   end
 
   context "sauve l'évenement" do
@@ -25,11 +29,13 @@ describe CreeEvenementAction do
     it 'ne persiste pas la restitution quand il ne se sauve pas' do
       expect(evenement_fin).to receive(:save).and_return(false)
       expect(restitution).to_not receive(:persiste)
+      expect(restitution_globale).to_not receive(:persiste)
       described_class.new(partie, evenement_fin).call
     end
 
     it 'persiste la restitution quand il se sauve' do
       expect(restitution).to receive(:persiste)
+      expect(restitution_globale).to receive(:persiste)
       described_class.new(partie, evenement_fin).call
     end
   end

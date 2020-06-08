@@ -18,6 +18,8 @@ class CreeEvenementAction
 
       restitution = FabriqueRestitution.instancie partie.id
       restitution.persiste
+      restitution_globale = FabriqueRestitution.restitution_globale partie.evaluation
+      restitution_globale.persiste
     end
   end
 end

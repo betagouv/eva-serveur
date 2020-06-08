@@ -7,7 +7,11 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    SCORES_A_PERSISTER = %i[score_ccf score_numeratie].freeze
+    METRIQUES_A_PERSISTER = %i[score_vocabulaire
+                               score_ccf
+                               score_numeratie
+                               score_syntaxe_orthographe
+                               score_memorisation].freeze
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -45,11 +49,11 @@ module Restitution
     end
 
     def persiste
-      scores_moyens_par_metacompetence = {}
-      scores_des_metacompetences.each do |metacompetence, scores|
-        scores_moyens_par_metacompetence[metacompetence] = scores.sum.fdiv(scores.count)
+      moyennes_par_metrique = {}
+      valeurs_des_metriques.each do |metrique, valeurs|
+        moyennes_par_metrique[metrique] = valeurs.sum.fdiv(valeurs.count)
       end
-      evaluation.update(metriques: scores_moyens_par_metacompetence)
+      evaluation.update(metriques: moyennes_par_metrique)
     end
 
     private
@@ -73,13 +77,13 @@ module Restitution
       end
     end
 
-    def scores_des_metacompetences
-      SCORES_A_PERSISTER.each_with_object({}) do |metrique_score, memo|
+    def valeurs_des_metriques
+      METRIQUES_A_PERSISTER.each_with_object({}) do |metrique, memo|
         restitutions.each do |r|
-          next unless r.respond_to?(metrique_score)
+          next unless r.respond_to?(metrique)
 
-          memo[metrique_score] ||= []
-          memo[metrique_score] << r.send(metrique_score)
+          memo[metrique] ||= []
+          memo[metrique] << r.send(metrique)
         end
         memo
       end

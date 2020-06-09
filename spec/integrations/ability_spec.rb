@@ -157,11 +157,11 @@ describe Ability do
     it { is_expected.to_not be_able_to(%i[read destroy], evaluation_administrateur) }
     it { is_expected.to_not be_able_to(:read, Evenement.new) }
     it { is_expected.to_not be_able_to(:read, evenement_administrateur) }
+    it { is_expected.to_not be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read destroy], evaluation_organisation) }
     it { is_expected.to be_able_to(:read, evenement_organisation) }
-    it { is_expected.to be_able_to(:create, Campagne.new) }
-    it { is_expected.to be_able_to(%i[create update read], Campagne.new(compte: compte)) }
+    it { is_expected.to be_able_to(%i[update read], Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:destroy, Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }

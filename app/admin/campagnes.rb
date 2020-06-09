@@ -42,11 +42,4 @@ ActiveAdmin.register Campagne do
     end
     f.actions
   end
-
-  controller do
-    def create
-      params[:campagne][:compte_id] ||= current_compte.id
-      create!
-    end
-  end
 end

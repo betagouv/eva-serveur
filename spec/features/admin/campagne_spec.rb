@@ -61,48 +61,34 @@ describe 'Admin - Campagne', type: :feature do
   describe 'création' do
     let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
 
-    context 'en organisation' do
-      before do
-        visit new_admin_campagne_path
-        fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
-      end
-
-      context 'génère un code si on en saisit pas' do
-        before do
-          fill_in :campagne_code, with: ''
-          select 'Mon QCM'
-        end
-
-        it do
-          expect { click_on 'Créer' }.to(change { Campagne.count })
-          expect(Campagne.last.code).to be_present
-          expect(Campagne.last.compte).to eq compte_connecte
-          expect(page).to have_content 'Mon QCM'
-        end
-
-        context 'conserve le code saisi si précisé' do
-          before { fill_in :campagne_code, with: 'EUROCKS' }
-          it do
-            expect { click_on 'Créer' }.to(change { Campagne.count })
-            expect(Campagne.last.code).to eq 'EUROCKS'
-          end
-        end
-      end
-    end
-
     context 'en administrateur' do
       before do
         Compte.first.update(role: 'administrateur')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
-        fill_in :campagne_code, with: ''
         select 'Mon QCM'
         select 'orga@eva.fr'
       end
 
-      it do
-        expect { click_on 'Créer' }.to(change { Campagne.count })
-        expect(Campagne.last.compte).to eq compte_organisation
+      context 'génère un code si on en saisit pas' do
+        before do
+          fill_in :campagne_code, with: ''
+        end
+
+        it do
+          expect { click_on 'Créer' }.to(change { Campagne.count })
+          expect(Campagne.last.code).to be_present
+          expect(Campagne.last.compte).to eq compte_organisation
+          expect(page).to have_content 'Mon QCM'
+        end
+      end
+
+      context 'conserve le code saisi si précisé' do
+        before { fill_in :campagne_code, with: 'EUROCKS' }
+        it do
+          expect { click_on 'Créer' }.to(change { Campagne.count })
+          expect(Campagne.last.code).to eq 'EUROCKS'
+        end
       end
     end
   end

@@ -9,10 +9,6 @@ describe Restitution::Globale do
   end
   let(:evaluation) { double }
 
-  def une_restitution(nom: nil, efficience: nil)
-    double(nom, efficience: efficience)
-  end
-
   describe "#utilisateur retourne le nom de l'évaluation" do
     let(:restitutions) { [double] }
     let(:evaluation) { double(nom: 'Jean Bon') }

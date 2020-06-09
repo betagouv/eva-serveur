@@ -34,6 +34,7 @@ describe CreeEvenementAction do
     end
 
     it 'persiste la restitution quand il se sauve' do
+      expect(restitution).to receive(:termine?).and_return(true)
       expect(restitution).to receive(:persiste)
       expect(restitution_globale).to receive(:persiste)
       described_class.new(partie, evenement_fin).call

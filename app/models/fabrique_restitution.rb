@@ -21,5 +21,13 @@ class FabriqueRestitution
       end
       Restitution::Globale.new restitutions: restitutions_retenues, evaluation: evaluation
     end
+
+    def persiste(partie)
+      restitution = instancie(partie.id)
+      return unless restitution.termine?
+
+      restitution.persiste
+      restitution_globale(partie.evaluation).persiste
+    end
   end
 end

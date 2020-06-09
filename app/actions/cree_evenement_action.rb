@@ -16,10 +16,7 @@ class CreeEvenementAction
 
       next unless evenement.nom == FIN_SITUATION
 
-      restitution = FabriqueRestitution.instancie partie.id
-      restitution.persiste
-      restitution_globale = FabriqueRestitution.restitution_globale partie.evaluation
-      restitution_globale.persiste
+      FabriqueRestitution.persiste(partie)
     end
   end
 end

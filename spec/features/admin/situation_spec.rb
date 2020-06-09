@@ -32,23 +32,30 @@ describe 'Admin - Situation', type: :feature do
 
     before do
       allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+      allow(FabriqueRestitution).to receive(:restitution_globale)
+        .with(evaluation)
+        .and_return restitution_globale
       visit admin_situation_path(tri)
     end
 
     context 'persiste les restitutions terminées' do
+      let(:restitution_globale) { double }
       let(:restitution) { double(termine?: true) }
 
       it do
         expect(restitution).to receive(:persiste)
+        expect(restitution_globale).to receive(:persiste)
         click_on 'Recalcule les métriques'
       end
     end
 
     context 'ignore les restitutions non terminees' do
+      let(:restitution_globale) { double }
       let(:restitution) { double(termine?: false) }
 
       it do
         expect(restitution).to_not receive(:persiste)
+        expect(restitution_globale).to_not receive(:persiste)
         click_on 'Recalcule les métriques'
       end
     end

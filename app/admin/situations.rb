@@ -24,8 +24,7 @@ ActiveAdmin.register Situation do
     Partie
       .where(situation: resource)
       .find_each do |partie|
-        restitution = FabriqueRestitution.instancie partie.id
-        restitution.persiste if restitution.termine?
+        FabriqueRestitution.persiste(partie)
       end
 
     redirect_to admin_situation_path(resource),

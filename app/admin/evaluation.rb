@@ -20,6 +20,8 @@ ActiveAdmin.register Evaluation do
   index download_links: -> { params[:action] == 'show' ? [:pdf] : [:csv] } do
     selectable_column
     column :nom
+    column :telephone
+    column :email
     column :created_at
     actions
   end

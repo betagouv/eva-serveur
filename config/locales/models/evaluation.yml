@@ -17,6 +17,9 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
+        telephone: Téléphone
+        nom: Nom
+        email: Email
   active_admin:
     resources:
       evaluation:

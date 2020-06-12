@@ -7,9 +7,19 @@ describe 'Evaluation API', type: :request do
     let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
     context 'Quand une requête est valide' do
-      let(:payload_valide_avec_campagne) { { nom: 'Roger', code_campagne: 'ETE19' } }
+      let(:payload_valide_avec_campagne) do
+        { nom: 'Roger', code_campagne: 'ETE19',
+          email: 'coucou@eva.fr', telephone: '01 02 03 04 05' }
+      end
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
-      it { expect(Evaluation.last.campagne).to eq campagne_ete19 }
+
+      it do
+        evaluation = Evaluation.last
+        expect(evaluation.campagne).to eq campagne_ete19
+        expect(evaluation.nom).to eq 'Roger'
+        expect(evaluation.email).to eq 'coucou@eva.fr'
+        expect(evaluation.telephone).to eq '01 02 03 04 05'
+      end
     end
 
     context 'Quand une requête est invalide' do

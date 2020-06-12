@@ -5,7 +5,9 @@ class EvaluationParams
     def from(params)
       permitted = params.permit(
         :nom,
-        :code_campagne
+        :code_campagne,
+        :email,
+        :telephone
       )
       relie_campagne!(permitted)
       permitted

@@ -2,6 +2,8 @@
 
 module Api
   class EvaluationsController < ActionController::API
+    before_action :trouve_evaluation, only: %i[show update]
+
     rescue_from ActiveRecord::RecordNotFound do
       render status: :not_found
     end
@@ -15,6 +17,32 @@ module Api
       end
     end
 
+    def update
+      if @evaluation.update EvaluationParams.from(params)
+        render json: @evaluation
+      else
+        render json: @evaluation.errors, status: :unprocessable_entity
+      end
+    end
+
+    def show
+      situations = @evaluation.campagne.situations
+      questions = @evaluation.campagne.questionnaire&.questions || []
+      competences = []
+      if @evaluation.campagne.affiche_competences_fortes
+        competences = map_descriptions(FabriqueRestitution
+                                        .restitution_globale(@evaluation)
+                                        .competences)
+      end
+      render json: { questions: questions, situations: situations, competences_fortes: competences }
+    end
+
+    private
+
+    def trouve_evaluation
+      @evaluation = Evaluation.find(params[:id])
+    end
+
     def map_descriptions(competences)
       competences.map do |identifiant|
         {
@@ -26,19 +54,6 @@ module Api
           picto: ActionController::Base.helpers.asset_url(identifiant)
         }
       end
-    end
-
-    def show
-      evaluation = Evaluation.find(params[:id])
-      situations = evaluation.campagne.situations
-      questions = evaluation.campagne.questionnaire&.questions || []
-      competences = []
-      if evaluation.campagne.affiche_competences_fortes
-        competences = map_descriptions(FabriqueRestitution
-                                        .restitution_globale(evaluation)
-                                        .competences)
-      end
-      render json: { questions: questions, situations: situations, competences_fortes: competences }
     end
   end
 end

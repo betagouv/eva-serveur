@@ -34,6 +34,27 @@ describe 'Evaluation API', type: :request do
     end
   end
 
+  describe 'PATCH /evaluations/:id' do
+    let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
+    before { patch "/api/evaluations/#{evaluation.id}", params: params }
+
+    context 'requête valide' do
+      let(:params) { { email: 'coucou-a-jour@eva.fr' } }
+      it do
+        expect(evaluation.reload.email).to eq 'coucou-a-jour@eva.fr'
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context 'requête invalide' do
+      let(:params) { { nom: '' } }
+      it do
+        expect(evaluation.reload.nom).to eq 'James'
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
+
   describe 'GET /evaluations/:id' do
     let(:question) { create :question_qcm, intitule: 'Ma question' }
     let(:questionnaire) { create :questionnaire, questions: [question] }

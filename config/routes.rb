@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resource :nouvelle_structure, only: [:create, :show]
 
   namespace :api do
-    resources :evaluations, only: [:create, :show]
+    resources :evaluations, only: [:create, :show, :update]
     resources :questionnaires, only: [:show]
     resources :evenements
   end

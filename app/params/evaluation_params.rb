@@ -16,6 +16,8 @@ class EvaluationParams
     private
 
     def relie_campagne!(params)
+      return if params['code_campagne'].blank?
+
       code_campagne = params.delete('code_campagne')
       campagne = Campagne.find_by code: code_campagne
       params['campagne'] = campagne

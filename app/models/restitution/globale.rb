@@ -7,6 +7,12 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
+    METRIQUES_ILLETRISME = %i[score_vocabulaire
+                              score_ccf
+                              score_numeratie
+                              score_syntaxe_orthographe
+                              score_memorisation].freeze
+
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
       @evaluation = evaluation
@@ -42,6 +48,14 @@ module Restitution
       niveaux_competences.collect { |niveau_competence| niveau_competence.keys.first }
     end
 
+    def scores
+      scores = {}
+      valeurs_des_metriques(standardiseurs).each do |metrique, valeurs|
+        scores[metrique] = valeurs.sum.fdiv(valeurs.count)
+      end
+      scores
+    end
+
     private
 
     def extraie_competences_depuis_restitutions
@@ -60,6 +74,32 @@ module Restitution
           memo[competence] << niveau
         end
         memo
+      end
+    end
+
+    def valeurs_des_metriques(standardiseurs)
+      METRIQUES_ILLETRISME.each_with_object({}) do |metrique, memo|
+        restitutions.each do |r|
+          cote_z = standardise(standardiseurs, r.partie, metrique)
+          next if cote_z.nil?
+
+          memo[metrique] ||= []
+          memo[metrique] << cote_z
+        end
+        memo
+      end
+    end
+
+    def standardise(standardiseurs, partie, metrique)
+      standardiseurs[partie.situation].standardise(metrique, partie.metriques[metrique.to_s])
+    end
+
+    def standardiseurs
+      @standardiseurs ||= restitutions.each_with_object({}) do |restitution, memo|
+        memo[restitution.partie.situation] ||= Restitution::Standardisateur.new(
+          METRIQUES_ILLETRISME,
+          proc { Partie.where(situation: restitution.partie.situation) }
+        )
       end
     end
   end

@@ -161,9 +161,9 @@ describe Restitution::Globale do
     end
 
     context 'une restitution avec score' do
-      let(:partie) { double }
+      let(:partie) { double(situation: :livraison) }
       let(:restitutions) { [double(score_ccf: 12, partie: partie)] }
-      it do
+      fit do
         allow(partie).to receive(:cote_z_metriques).and_return({ 'score_ccf' => 1.1 })
         verifie_enregistrement score_ccf: 1.1
         restitution_globale.persiste

@@ -50,7 +50,7 @@ module Restitution
 
     def persiste
       moyennes_par_metrique = {}
-      valeurs_des_metriques.each do |metrique, valeurs|
+      valeurs_des_metriques(echantillons).each do |metrique, valeurs|
         moyennes_par_metrique[metrique] = valeurs.sum.fdiv(valeurs.count)
       end
       evaluation.update(metriques: moyennes_par_metrique)
@@ -77,16 +77,29 @@ module Restitution
       end
     end
 
-    def valeurs_des_metriques
+    def valeurs_des_metriques(echantillons)
       METRIQUES_A_PERSISTER.each_with_object({}) do |metrique, memo|
         restitutions.each do |r|
-          cote_z = r.partie.cote_z_metriques[metrique.to_s]
+          cote_z = standardise(echantillons, r.partie, metrique)
           next if cote_z.nil?
 
           memo[metrique] ||= []
           memo[metrique] << cote_z
         end
         memo
+      end
+    end
+
+    def standardise(echantillons, partie, metrique)
+      echantillons[partie.situation].standardise(metrique, partie.metriques[metrique.to_s])
+    end
+
+    def echantillons
+      @echantillons ||= restitutions.each_with_object({}) do |restitution, memo|
+        memo[restitution.partie.situation] ||= Restitution::Echantillons.new(
+          METRIQUES_A_PERSISTER,
+          proc { Partie.where(situation: restitution.partie.situation) }
+        )
       end
     end
   end

@@ -52,6 +52,7 @@ describe 'Admin - Evaluation', type: :feature do
     it "affiche l'évaluation en pdf" do
       competences = [{ Competence::ORGANISATION_METHODE => Competence::NIVEAU_4 }]
       expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
+      allow(restitution_globale).to receive(:scores).and_return({})
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
       path = page.save_page

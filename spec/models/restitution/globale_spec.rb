@@ -9,10 +9,6 @@ describe Restitution::Globale do
   end
   let(:evaluation) { double }
 
-  def une_restitution(nom: nil, efficience: nil)
-    double(nom, efficience: efficience)
-  end
-
   describe "#utilisateur retourne le nom de l'évaluation" do
     let(:restitutions) { [double] }
     let(:evaluation) { double(nom: 'Jean Bon') }
@@ -148,6 +144,73 @@ describe Restitution::Globale do
       let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
       let(:restitutions) { [double(competences: niveau_perseverance)] }
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
+    end
+  end
+
+  describe '#calcul_scores_metriques' do
+    let(:standardisateur) { double }
+    before do
+      allow(restitution_globale).to receive(:standardiseurs)
+        .and_return(livraison: standardisateur)
+      allow(standardisateur).to receive(:standardise).and_return(nil)
+    end
+
+    context 'pas de restitution' do
+      let(:restitutions) { [] }
+      it do
+        expect(restitution_globale.scores).to eq({})
+      end
+    end
+
+    context 'une restitution avec un score' do
+      let(:partie) { double(situation: :livraison) }
+      let(:restitutions) { [double(partie: partie)] }
+      it do
+        allow(partie).to receive(:metriques).and_return({ 'score_ccf' => 110 })
+        allow(standardisateur).to receive(:standardise).with(:score_ccf, 110).and_return(1.1)
+        expect(restitution_globale.scores).to eq(score_ccf: 1.1)
+      end
+    end
+
+    context 'fait la moyenne des scores de restitution' do
+      let(:partie1) { double(situation: :livraison) }
+      let(:partie2) { double(situation: :livraison) }
+      let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
+      it do
+        allow(partie1).to receive(:metriques).and_return({ 'score_ccf' => 110 })
+        allow(partie2).to receive(:metriques).and_return({ 'score_ccf' => 120 })
+
+        allow(standardisateur).to receive(:standardise).with(:score_ccf, 110).and_return(1.1)
+        allow(standardisateur).to receive(:standardise).with(:score_ccf, 120).and_return(1.2)
+
+        expect(restitution_globale.scores).to eq(score_ccf: 1.15)
+      end
+    end
+
+    context 'sépare les scores des compétences différentes' do
+      let(:partie1) { double(situation: :livraison) }
+      let(:partie2) { double(situation: :livraison) }
+      let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
+
+      it do
+        allow(partie1).to receive(:metriques)
+          .and_return({ 'score_ccf' => 110, 'score_memorisation' => 120 })
+        allow(partie2).to receive(:metriques).and_return({ 'score_numeratie' => 130 })
+
+        allow(standardisateur).to receive(:standardise)
+          .with(:score_ccf, 110)
+          .and_return(1.1)
+        allow(standardisateur).to receive(:standardise)
+          .with(:score_memorisation, 120)
+          .and_return(1.2)
+        allow(standardisateur).to receive(:standardise)
+          .with(:score_numeratie, 130)
+          .and_return(1.3)
+
+        expect(restitution_globale.scores).to eq(score_ccf: 1.1,
+                                                 score_memorisation: 1.2,
+                                                 score_numeratie: 1.3)
+      end
     end
   end
 end

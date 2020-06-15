@@ -7,7 +7,8 @@ describe EvaluationParams do
     it 'filtre les parametres' do
       params = ActionController::Parameters.new(
         nom: 'mon nom',
-        autre_param: 'autre paramètre'
+        autre_param: 'autre paramètre',
+        code_campagne: 'une campagne'
       )
 
       evaluation_params = described_class.from(params)

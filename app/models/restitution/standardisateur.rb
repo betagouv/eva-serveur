@@ -28,7 +28,7 @@ module Restitution
     end
 
     def standardise(metrique, valeur)
-      return if valeur.nil?
+      return if valeur.nil? || ecart_type_metriques[metrique].nil?
 
       if ecart_type_metriques[metrique].zero?
         0

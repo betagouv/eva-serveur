@@ -50,9 +50,7 @@ describe Partie do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(partie1.moyenne_metriques).to eql('test_chaine' => nil,
-                                                 'test_metrique' => 1.0,
-                                                 'test_metrique_tableau' => nil)
+        expect(partie1.moyenne_metriques).to eql('test_metrique' => 1.0)
       end
     end
   end
@@ -70,15 +68,13 @@ describe Partie do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(partie1.ecart_type_metriques).to eql('test_chaine' => nil,
-                                                    'test_metrique' => 0.816496580927726,
-                                                    'test_metrique_tableau' => nil)
+        expect(partie1.ecart_type_metriques).to eql('test_metrique' => 0.816496580927726)
       end
     end
   end
 
   context '#cote_z_metriques' do
-    context 'calcule le cote z' do
+    context 'calcule le score standardisé (cote_z)' do
       before { [partie1, partie2, partie3] }
 
       it do

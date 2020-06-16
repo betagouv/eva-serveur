@@ -23,6 +23,7 @@ module Restitution
     attr_reader :campagne, :evenements
 
     delegate :evaluation, :session_id, :situation, :created_at, to: :partie
+    delegate :moyenne_metriques, :ecart_type_metriques, to: :standardisateur
     alias date created_at
 
     def initialize(campagne, evenements)
@@ -96,6 +97,12 @@ module Restitution
       end / competences_utilisees.size
     end
 
+    def cote_z_metriques
+      @cote_z_metriques ||= partie.metriques.each_with_object({}) do |(metrique, valeur), memo|
+        memo[metrique] = standardisateur.standardise(metrique, valeur)
+      end
+    end
+
     def score; end
 
     def to_param
@@ -112,6 +119,13 @@ module Restitution
       competences.any? do |_competence, niveau|
         niveau == ::Competence::NIVEAU_INDETERMINE
       end
+    end
+
+    def standardisateur
+      @standardisateur ||= Restitution::Standardisateur.new(
+        partie.metriques_numeriques,
+        proc { Partie.where(situation: partie.situation) }
+      )
     end
   end
 end

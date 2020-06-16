@@ -11,15 +11,32 @@ class Partie < ApplicationRecord
            :ecart_type_metrique,
            :moyenne_metriques,
            :ecart_type_metriques,
-           :cote_z_metriques,
-           to: :aggregateur_metrique
+           to: :standardisateur
 
   def display_name
     session_id
   end
 
-  def aggregateur_metrique
-    @aggregateur_metrique ||= Restitution::AggregateurMetrique
-                              .new(metriques, proc { Partie.where(situation: situation) })
+  def cote_z_metriques
+    @cote_z_metriques ||= metriques.each_with_object({}) do |(metrique, valeur), memo|
+      memo[metrique] = standardisateur.standardise(metrique, valeur)
+    end
+  end
+
+  private
+
+  def standardisateur
+    @standardisateur ||= Restitution::Standardisateur.new(
+      metriques_numeriques,
+      proc { Partie.where(situation: situation) }
+    )
+  end
+
+  def metriques_numeriques
+    metriques_numeriques = []
+    metriques.each do |(metrique, valeur)|
+      metriques_numeriques << metrique if valeur.is_a?(Numeric)
+    end
+    metriques_numeriques
   end
 end

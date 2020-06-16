@@ -14,5 +14,11 @@
     &:last-of-type {
       border-bottom: none;
     }
+
+    .scores {
+      .row {
+        margin-left: 0;
+      }
+    }
   }
 }

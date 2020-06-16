@@ -62,6 +62,18 @@ div class: 'admin_restitution_globale' do
     end
   end
 
+  if can?(:manage, Compte)
+    panel 'Scores non normalisés' do
+      div class: 'scores' do
+        attributes_table_for restitution_globale do
+          restitution_globale.scores.each do |nom_metrique, valeur|
+            row(nom_metrique) { valeur&.round(2) }
+          end
+        end
+      end
+    end
+  end
+
   restitution_globale.restitutions.each do |restitution|
     situation = restitution.situation
     next if situation.nom_technique == Restitution::Bienvenue::NOM_TECHNIQUE

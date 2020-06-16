@@ -7,8 +7,7 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    METRIQUES_ILLETRISME = %i[score_vocabulaire
-                              score_ccf
+    METRIQUES_ILLETRISME = %i[score_ccf
                               score_numeratie
                               score_syntaxe_orthographe
                               score_memorisation].freeze

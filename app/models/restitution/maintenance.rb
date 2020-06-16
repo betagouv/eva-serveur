@@ -33,7 +33,7 @@ module Restitution
         'type' => :nombre,
         'instance' => Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
       },
-      'score_vocabulaire' => {
+      'score_ccf' => {
         'type' => :nombre,
         'instance' => Maintenance::ScoreVocabulaire.new
       }

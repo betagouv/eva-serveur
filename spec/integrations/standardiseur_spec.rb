@@ -37,12 +37,11 @@ describe Partie do
            }
   end
 
-  context '#moyenne_metrique' do
-    before { [partie1, partie2, partie3] }
+  let(:restitution) { FabriqueRestitution.instancie(partie1.id) }
 
-    it 'calcule la moyenne' do
-      expect(partie1.moyenne_metrique(:test_metrique)).to eql(1.0)
-    end
+  before do
+    # pour que la restitution puisse retrouver la partie !
+    create(:evenement_demarrage, partie: partie1)
   end
 
   context '#moyenne_metriques' do
@@ -50,16 +49,8 @@ describe Partie do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(partie1.moyenne_metriques).to eql('test_metrique' => 1.0)
+        expect(restitution.moyenne_metriques).to eql('test_metrique' => 1.0)
       end
-    end
-  end
-
-  context '#ecart_type_metrique' do
-    before { [partie1, partie2, partie3] }
-
-    it "calcule l'écart type" do
-      expect(partie1.ecart_type_metrique(:test_metrique).round(2)).to eql(0.82)
     end
   end
 
@@ -68,7 +59,7 @@ describe Partie do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(partie1.ecart_type_metriques).to eql('test_metrique' => 0.816496580927726)
+        expect(restitution.ecart_type_metriques).to eql('test_metrique' => 0.816496580927726)
       end
     end
   end
@@ -78,9 +69,9 @@ describe Partie do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(partie1.cote_z_metriques).to eql('test_chaine' => nil,
-                                                'test_metrique' => 0.0,
-                                                'test_metrique_tableau' => nil)
+        expect(restitution.cote_z_metriques).to eql('test_chaine' => nil,
+                                                    'test_metrique' => 0.0,
+                                                    'test_metrique_tableau' => nil)
       end
     end
 
@@ -89,15 +80,15 @@ describe Partie do
 
       it do
         partie1.update(metriques: {})
-        expect(partie1.cote_z_metriques).to eql({})
+        expect(restitution.cote_z_metriques).to eql({})
       end
     end
 
     context "lorsque l'écart type est nul" do
       it do
-        expect(partie1.cote_z_metriques).to eql('test_chaine' => nil,
-                                                'test_metrique' => 0,
-                                                'test_metrique_tableau' => nil)
+        expect(restitution.cote_z_metriques).to eql('test_chaine' => nil,
+                                                    'test_metrique' => 0,
+                                                    'test_metrique_tableau' => nil)
       end
     end
   end

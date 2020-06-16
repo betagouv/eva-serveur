@@ -7,8 +7,7 @@ describe Restitution::Maintenance::Vocabulaire do
   let(:partie) { double }
 
   def niveau_pour_score(score)
-    expect(partie).to receive(:cote_z_metriques).and_return('score_ccf' => score)
-    allow(restitution).to receive(:partie).and_return(partie)
+    expect(restitution).to receive(:cote_z_metriques).and_return('score_ccf' => score)
 
     described_class.new(restitution)
   end

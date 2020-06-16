@@ -20,13 +20,9 @@ module Restitution
                      Maintenance::TempsNonMots.new)
       end
 
-      def partie
-        @evenements_situation.first.partie
-      end
-
       def temps_moyen_normalise(nom_moyenne, metrique_des_temps)
-        moyenne_glissante = partie.moyenne_metrique(nom_moyenne)
-        ecart_type_glissant = partie.ecart_type_metrique(nom_moyenne)
+        moyenne_glissante = standardisateur.moyenne_metriques[nom_moyenne]
+        ecart_type_glissant = standardisateur.ecart_type_metriques[nom_moyenne]
 
         metrique_des_temps_normalises = Metriques::TempsNormalises.new(metrique_des_temps,
                                                                        moyenne_glissante,
@@ -46,6 +42,13 @@ module Restitution
         return 0 unless temps_moyen_normalise.present?
 
         nombre / temps_moyen_normalise
+      end
+
+      def standardisateur
+        @standardisateur ||= Restitution::Standardisateur.new(
+          %i[temps_moyen_mots_francais temps_moyen_non_mots],
+          proc { Partie.where(situation: Situation.where(nom_technique: 'maintenance')) }
+        )
       end
     end
   end

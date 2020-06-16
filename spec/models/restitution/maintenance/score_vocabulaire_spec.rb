@@ -32,16 +32,16 @@ describe Restitution::Maintenance::ScoreVocabulaire do
 
   describe '#temps_moyen_normalise' do
     context 'calcule le temps moyen normalises pour les mots francais' do
-      let!(:partie) { double }
+      let!(:standardisateur) { double }
       let(:mock_metrique_temps) { double }
 
       it do
-        allow(partie).to receive(:moyenne_metrique)
-          .with(:temps_moyen_mots_francais).and_return(2.7)
-        allow(partie).to receive(:ecart_type_metrique)
-          .with(:temps_moyen_mots_francais).and_return(0.5)
+        allow(standardisateur).to receive(:moyenne_metriques)
+          .and_return(temps_moyen_mots_francais: 2.7)
+        allow(standardisateur).to receive(:ecart_type_metriques)
+          .and_return(temps_moyen_mots_francais: 0.5)
 
-        allow(metrique_score_ccf).to receive(:partie).and_return(partie)
+        allow(metrique_score_ccf).to receive(:standardisateur).and_return(standardisateur)
 
         expect(mock_metrique_temps).to receive(:calcule).and_return([2.7, 3.7, 3.8])
         temps_moyen_normalise = metrique_score_ccf

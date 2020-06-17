@@ -30,7 +30,7 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
       nil
     end
     render 'restitution_metriques',
-           restitution: resource,
+           metriques_partie: resource.partie.metriques,
            moyenne_glissante: OpenStruct.new(resource.moyenne_metriques),
            ecart_type_glissant: OpenStruct.new(resource.ecart_type_metriques),
            cote_z: OpenStruct.new(resource.cote_z_metriques)

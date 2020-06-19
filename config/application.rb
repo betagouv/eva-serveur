@@ -49,7 +49,7 @@ module EvaServeur
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: :post
+        resource '*', headers: :any, methods: [:post, :patch]
       end
     end
   end

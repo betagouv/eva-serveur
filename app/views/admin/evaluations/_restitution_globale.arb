@@ -1,5 +1,25 @@
 # frozen_string_literal: true
 
+if can?(:manage, Compte) && !pdf
+  panel 'Scores' do
+    attributes_table_for [
+      [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), restitution_globale.scores],
+      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), {}],
+      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), {}],
+      [t('admin.restitutions.restitution_colonnes.cote_z'), {}]
+    ] do
+      row do |(titre, _)|
+        strong titre
+      end
+      Restitution::Globale::METRIQUES_ILLETRISME.each do |nom_metrique|
+        row(nom_metrique) do |(_, valeur_colonne)|
+          valeur_colonne[nom_metrique]&.round(2)
+        end
+      end
+    end
+  end
+end
+
 div class: 'admin_restitution_globale' do
   div class: 'en-tete' do
     div class: 'eva-logo' do
@@ -56,18 +76,6 @@ div class: 'admin_restitution_globale' do
               div t('.url_competence')
               div url_competence
             end
-          end
-        end
-      end
-    end
-  end
-
-  if can?(:manage, Compte)
-    panel 'Scores non normalisés' do
-      div class: 'scores' do
-        attributes_table_for restitution_globale do
-          restitution_globale.scores.each do |nom_metrique, valeur|
-            row(nom_metrique) { valeur&.round(2) }
           end
         end
       end

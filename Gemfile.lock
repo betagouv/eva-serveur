@@ -50,6 +50,9 @@ GEM
       ransack (~> 2.1, >= 2.1.1)
       sassc-rails (~> 2.1)
       sprockets (>= 3.0, < 4.1)
+    activeadmin-xls (2.0.2)
+      activeadmin (>= 1.0.0)
+      spreadsheet (~> 1.0)
     activeadmin_addons (1.7.1)
       active_material
       railties
@@ -346,6 +349,7 @@ GEM
       rubocop (>= 0.68.1)
     ruby-graphviz (1.2.5)
       rexml
+    ruby-ole (1.2.12.2)
     ruby-progressbar (1.10.1)
     ruby-rc4 (0.1.5)
     ruby_dep (1.5.0)
@@ -367,6 +371,8 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.3.0)
       activesupport (>= 4.2.0)
+    spreadsheet (1.2.6)
+      ruby-ole (>= 1.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -405,6 +411,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  activeadmin-xls
   activeadmin_addons
   activeadmin_reorderable
   activestorage-openstack

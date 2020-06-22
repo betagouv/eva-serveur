@@ -251,7 +251,7 @@ ActiveAdmin.setup do |config|
   #     admin.download_links = proc { can?(:view_download_links) }
   #
   #   end
-  config.download_links = [:csv]
+  config.download_links = %i[csv xls]
 
   # == Pagination
   #

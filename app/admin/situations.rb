@@ -14,6 +14,16 @@ ActiveAdmin.register Situation do
     f.actions
   end
 
+  index do
+    column :libelle
+    column :nom_technique
+    column :questionnaire
+    column :questionnaire_entrainement
+    actions do |situation|
+      link_to 'Parties', admin_situation_parties_path(situation)
+    end
+  end
+
   action_item :lien_recalcule, only: :show, priority: 0 do
     link_to I18n.t('admin.situations.recalcul_metriques.lien'),
             recalcule_metriques_admin_situation_path(resource),

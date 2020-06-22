@@ -10,6 +10,7 @@ gem 'rails', '~> 6.0.0'
 gem 'puma', '~> 4.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
+gem 'activeadmin-xls'
 gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
 gem 'activestorage-openstack'

@@ -1,0 +1,6 @@
+fr:
+  active_admin:
+    scopes:
+      all: 'Tout'
+      terminees: 'Terminées'
+      non_terminees: 'Non terminées'

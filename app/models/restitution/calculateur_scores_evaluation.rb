@@ -30,7 +30,7 @@ module Restitution
     end
 
     def standardise(partie, metrique)
-      @standardisateurs[partie.situation].standardise(metrique, partie.metriques[metrique.to_s])
+      @standardisateurs[partie.situation]&.standardise(metrique, partie.metriques[metrique.to_s])
     end
   end
 end

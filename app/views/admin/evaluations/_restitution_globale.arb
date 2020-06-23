@@ -2,10 +2,12 @@
 
 if can?(:manage, Compte) && !pdf
   panel 'Scores' do
+    moyennes_glissantes = restitution_globale.moyennes_glissantes
+    ecarts_types_glissants = restitution_globale.ecarts_types_glissants
     attributes_table_for [
       [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), restitution_globale.scores],
-      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), {}],
-      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), {}],
+      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
       [t('admin.restitutions.restitution_colonnes.cote_z'), {}]
     ] do
       row do |(titre, _)|

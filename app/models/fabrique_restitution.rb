@@ -16,10 +16,10 @@ class FabriqueRestitution
     def restitution_globale(evaluation, parties_selectionnees_ids = nil)
       parties_selectionnees_ids =
         initialise_selection(evaluation, parties_selectionnees_ids)
-      parties_retenues = parties_selectionnees_ids.map do |id|
+      restitutions_retenues = parties_selectionnees_ids.map do |id|
         instancie id
       end
-      Restitution::Globale.new restitutions: parties_retenues, evaluation: evaluation
+      Restitution::Globale.new restitutions: restitutions_retenues, evaluation: evaluation
     end
   end
 end

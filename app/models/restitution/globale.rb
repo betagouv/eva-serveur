@@ -13,6 +13,7 @@ module Restitution
                               score_memorisation].freeze
 
     delegate :scores, to: :calculateur_scores_evaluation
+    delegate :moyennes_glissantes, :ecarts_types_glissants, to: :standardisateur_global
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -82,6 +83,26 @@ module Restitution
           METRIQUES_ILLETRISME,
           proc { Partie.where(situation: r.partie.situation) }
         )
+      end
+    end
+
+    def standardisateur_global
+      @standardisateur_global ||= Restitution::StandardisateurEchantillon.new(
+        METRIQUES_ILLETRISME,
+        scores_toutes_evaluations
+      )
+    end
+
+    def scores_toutes_evaluations
+      Evaluation.all.each_with_object({}) do |evaluation, scores|
+        Restitution::CalculateurScoresEvaluation.new(
+          Partie.where(evaluation: evaluation).where.not(metrique: {}),
+          standardisateurs,
+          METRIQUES_ILLETRISME
+        ).scores.each do |metrique, score|
+          scores[metrique] ||= []
+          scores[metrique] << score
+        end
       end
     end
   end

@@ -19,6 +19,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
 gem 'cancancan'
 gem 'coffee-rails'
+gem 'descriptive_statistics', '~> 2.4.0', require: 'descriptive_statistics/safe'
 gem 'devise'
 gem 'devise-i18n'
 gem 'mini_racer', '~> 0.2.0'

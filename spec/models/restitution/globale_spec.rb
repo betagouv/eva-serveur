@@ -150,7 +150,7 @@ describe Restitution::Globale do
   describe '#calcul_scores_metriques' do
     let(:standardisateur) { double }
     before do
-      allow(restitution_globale).to receive(:standardiseurs)
+      allow(restitution_globale).to receive(:standardisateurs)
         .and_return(livraison: standardisateur)
       allow(standardisateur).to receive(:standardise).and_return(nil)
     end

@@ -16,4 +16,11 @@ describe Restitution::StandardisateurEchantillon do
     it { expect(standardisateur.moyennes_glissantes).to eq(score_ccf: nil) }
     it { expect(standardisateur.ecarts_types_glissants).to eq(score_ccf: nil) }
   end
+
+  describe 'sait standardiser une valeur' do
+    standardisateur = Restitution::StandardisateurEchantillon
+                      .new %i[score_ccf], { score_ccf: [1, 2] }
+
+    it { expect(standardisateur.standardise(:score_ccf, 1)).to eq(-1.0) }
+  end
 end

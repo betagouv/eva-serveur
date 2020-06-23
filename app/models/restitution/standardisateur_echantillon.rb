@@ -20,13 +20,13 @@ module Restitution
     end
 
     def standardise(metrique, valeur)
-      return if valeur.nil? || ecart_type_metriques[metrique].nil?
+      return if valeur.nil? || ecarts_types_glissants[metrique].nil?
 
-      if ecart_type_metriques[metrique].zero?
+      if ecarts_types_glissants[metrique].zero?
         0
       else
         (
-          (valeur - moyenne_metriques[metrique]) / ecart_type_metriques[metrique]
+          (valeur - moyennes_glissantes[metrique]) / ecarts_types_glissants[metrique]
         )
       end
     end

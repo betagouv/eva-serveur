@@ -124,6 +124,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    descriptive_statistics (2.4.0)
     devise (4.7.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -423,6 +424,7 @@ DEPENDENCIES
   cancancan
   capybara
   coffee-rails
+  descriptive_statistics (~> 2.4.0)
   devise
   devise-i18n
   factory_bot_rails

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Partie do
+describe Restitution::Standardisateur do
   let(:situation)  { create :situation_securite }
   let(:evaluation) { create :evaluation }
   let(:partie1) do

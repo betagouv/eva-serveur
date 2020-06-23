@@ -29,9 +29,14 @@ module Restitution
     end
 
     def calculateur_scores_evaluation
-      Restitution::CalculateurScoresEvaluation.new(restitutions.map(&:partie),
-                                                   standardisateurs,
-                                                   METRIQUES_ILLETRISME)
+      @calculateur_scores_evaluation ||=
+        Restitution::CalculateurScoresEvaluation.new(restitutions.map(&:partie),
+                                                     METRIQUES_ILLETRISME,
+                                                     standardisateurs)
+    end
+
+    def cote_z_scores
+      calculateur_scores_evaluation.cote_z_scores(standardisateur_global)
     end
 
     def efficience
@@ -97,8 +102,8 @@ module Restitution
       Evaluation.all.each_with_object({}) do |evaluation, scores|
         Restitution::CalculateurScoresEvaluation.new(
           Partie.where(evaluation: evaluation).where.not(metrique: {}),
-          standardisateurs,
-          METRIQUES_ILLETRISME
+          METRIQUES_ILLETRISME,
+          standardisateurs
         ).scores.each do |metrique, score|
           scores[metrique] ||= []
           scores[metrique] << score

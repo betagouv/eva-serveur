@@ -2,15 +2,21 @@
 
 module Restitution
   class CalculateurScoresEvaluation
-    def initialize(parties, standardisateurs, metriques)
+    def initialize(parties, metriques, standardisateurs)
       @parties = parties
-      @standardisateurs = standardisateurs
       @metriques = metriques
+      @standardisateurs = standardisateurs
     end
 
     def scores
-      valeurs_des_metriques.transform_values do |valeurs|
+      @scores ||= valeurs_des_metriques.transform_values do |valeurs|
         valeurs.sum.fdiv(valeurs.count)
+      end
+    end
+
+    def cote_z_scores(standardisateur_evaluations)
+      @cote_z_scores ||= scores.each_with_object({}) do |(metrique, valeur), memo|
+        memo[metrique] = standardisateur_evaluations.standardise(metrique, valeur)
       end
     end
 

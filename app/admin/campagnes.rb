@@ -6,6 +6,8 @@ ActiveAdmin.register Campagne do
                 :compte_id, :affiche_competences_fortes,
                 situations_configurations_attributes: %i[id situation_id _destroy]
 
+  filter :libelle
+  filter :code
   filter :compte, if: proc { can? :manage, Compte }
   filter :situations
   filter :questionnaire

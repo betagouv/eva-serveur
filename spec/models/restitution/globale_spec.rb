@@ -149,9 +149,10 @@ describe Restitution::Globale do
 
   describe '#calcul_scores_metriques' do
     let(:standardisateur) { double }
+    let(:situation_id) { double }
     before do
       allow(restitution_globale).to receive(:standardisateurs)
-        .and_return(livraison: standardisateur)
+        .and_return({ situation_id => standardisateur })
       allow(standardisateur).to receive(:standardise).and_return(nil)
     end
 
@@ -163,7 +164,7 @@ describe Restitution::Globale do
     end
 
     context 'une restitution avec un score' do
-      let(:partie) { double(situation: :livraison) }
+      let(:partie) { double(situation_id: situation_id) }
       let(:restitutions) { [double(partie: partie)] }
       it do
         allow(partie).to receive(:metriques).and_return({ 'score_ccf' => 110 })
@@ -173,8 +174,8 @@ describe Restitution::Globale do
     end
 
     context 'fait la moyenne des scores de restitution' do
-      let(:partie1) { double(situation: :livraison) }
-      let(:partie2) { double(situation: :livraison) }
+      let(:partie1) { double(situation_id: situation_id) }
+      let(:partie2) { double(situation_id: situation_id) }
       let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
       it do
         allow(partie1).to receive(:metriques).and_return({ 'score_ccf' => 110 })
@@ -188,8 +189,8 @@ describe Restitution::Globale do
     end
 
     context 'sépare les scores des compétences différentes' do
-      let(:partie1) { double(situation: :livraison) }
-      let(:partie2) { double(situation: :livraison) }
+      let(:partie1) { double(situation_id: situation_id) }
+      let(:partie2) { double(situation_id: situation_id) }
       let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
 
       it do

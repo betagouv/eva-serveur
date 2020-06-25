@@ -84,7 +84,7 @@ module Restitution
 
     def standardisateurs
       @standardisateurs ||= restitutions.each_with_object({}) do |r, memo|
-        memo[r.partie.situation] ||= Restitution::Standardisateur.new(
+        memo[r.partie.situation_id] ||= Restitution::Standardisateur.new(
           METRIQUES_ILLETRISME,
           proc { Partie.where(situation: r.partie.situation) }
         )

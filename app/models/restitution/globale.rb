@@ -99,15 +99,22 @@ module Restitution
     end
 
     def scores_toutes_evaluations
-      Evaluation.all.each_with_object({}) do |evaluation, scores|
+      parties_par_evaluations.values.each_with_object({}) do |parties, scores|
         Restitution::CalculateurScoresEvaluation.new(
-          Partie.where(evaluation: evaluation).where.not(metrique: {}),
+          parties,
           METRIQUES_ILLETRISME,
           standardisateurs
         ).scores.each do |metrique, score|
           scores[metrique] ||= []
           scores[metrique] << score
         end
+      end
+    end
+
+    def parties_par_evaluations
+      Partie.where.not(metriques: {}).each_with_object({}) do |partie, map|
+        map[partie.evaluation_id] ||= []
+        map[partie.evaluation_id] << partie
       end
     end
   end

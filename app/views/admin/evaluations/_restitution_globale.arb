@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 if can?(:manage, Compte) && !pdf
-  panel 'Scores' do
+  panel 'Scores niveau 2' do
     scores_niveau2 = restitution_globale.scores_niveau2
     moyennes_glissantes = restitution_globale.moyennes_glissantes
     ecarts_types_glissants = restitution_globale.ecarts_types_glissants
@@ -16,6 +16,27 @@ if can?(:manage, Compte) && !pdf
         strong titre
       end
       Restitution::Globale::METRIQUES_ILLETRISME.each do |nom_metrique|
+        row(nom_metrique) do |(_, valeur_colonne)|
+          valeur_colonne[nom_metrique]&.round(2)
+        end
+      end
+    end
+  end
+  panel 'Scores niveau 1' do
+    scores_niveau1 = restitution_globale.scores_niveau1
+    moyennes_glissantes = {}
+    ecarts_types_glissants = {}
+    scores_niveau1_standardises = {}
+    attributes_table_for [
+      [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
+      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
+      [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
+    ] do
+      row do |(titre, _)|
+        strong titre
+      end
+      scores_niveau1.each_key do |nom_metrique|
         row(nom_metrique) do |(_, valeur_colonne)|
           valeur_colonne[nom_metrique]&.round(2)
         end

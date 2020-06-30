@@ -51,7 +51,8 @@ ActiveAdmin.register Evaluation do
     private
 
     def restitution_globale
-      FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+      @restitution_globale ||=
+        FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
     end
 
     def auto_positionnement

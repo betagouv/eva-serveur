@@ -63,18 +63,18 @@ describe Restitution::Globale do
 
   context "calcule la moyenne des scores pour l'ensemble des évaluations" do
     it "quand il n'y a aucune valeur" do
-      expect(restitution_evaluation1.scores[:score_numeratie]).to eql(nil)
+      expect(restitution_evaluation1.scores_niveau2[:score_numeratie]).to eql(nil)
       expect(restitution_evaluation1.moyennes_glissantes[:score_numeratie]).to eql(nil)
     end
 
     it "quand il n'y a qu'une seule valeur" do
-      expect(restitution_evaluation1.scores[:score_memorisation].round(2)).to eql(0.0)
+      expect(restitution_evaluation1.scores_niveau2[:score_memorisation].round(2)).to eql(0.0)
       expect(restitution_evaluation1.moyennes_glissantes[:score_memorisation].round(2)).to eql(0.0)
     end
 
     it 'quand il y a plusieurs valeurs' do
-      expect(restitution_evaluation1.scores[:score_ccf].round(2)).to eql(-0.30)
-      expect(restitution_evaluation2.scores[:score_ccf].round(2)).to eql(0.90)
+      expect(restitution_evaluation1.scores_niveau2[:score_ccf].round(2)).to eql(-0.30)
+      expect(restitution_evaluation2.scores_niveau2[:score_ccf].round(2)).to eql(0.90)
       expect(restitution_evaluation1.moyennes_glissantes[:score_ccf].round(2))
         .to eql(((-0.30 + 0.90) / 2).round(2))
     end

@@ -12,8 +12,8 @@ module Restitution
                               score_syntaxe_orthographe
                               score_memorisation].freeze
 
-    delegate :scores, to: :calculateur_scores_evaluation
-    delegate :moyennes_glissantes, :ecarts_types_glissants, to: :standardisateur_global
+    delegate :scores_niveau2, to: :calculateur_scores_evaluation
+    delegate :moyennes_glissantes, :ecarts_types_glissants, to: :standardisateur_niveau2
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -32,11 +32,11 @@ module Restitution
       @calculateur_scores_evaluation ||=
         Restitution::CalculateurScoresEvaluation.new(restitutions.map(&:partie),
                                                      METRIQUES_ILLETRISME,
-                                                     standardisateurs)
+                                                     standardisateurs_niveau3)
     end
 
-    def cote_z_scores
-      calculateur_scores_evaluation.cote_z_scores(standardisateur_global)
+    def scores_niveau2_standardises
+      calculateur_scores_evaluation.scores_niveau2_standardises(standardisateur_niveau2)
     end
 
     def efficience
@@ -82,8 +82,8 @@ module Restitution
       end
     end
 
-    def standardisateurs
-      @standardisateurs ||= restitutions.each_with_object({}) do |r, memo|
+    def standardisateurs_niveau3
+      @standardisateurs_niveau3 ||= restitutions.each_with_object({}) do |r, memo|
         memo[r.partie.situation_id] ||= Restitution::Standardisateur.new(
           METRIQUES_ILLETRISME,
           proc { Partie.where(situation: r.partie.situation) }
@@ -91,8 +91,8 @@ module Restitution
       end
     end
 
-    def standardisateur_global
-      @standardisateur_global ||= Restitution::StandardisateurEchantillon.new(
+    def standardisateur_niveau2
+      @standardisateur_niveau2 ||= Restitution::StandardisateurEchantillon.new(
         METRIQUES_ILLETRISME,
         scores_toutes_evaluations
       )
@@ -103,8 +103,8 @@ module Restitution
         Restitution::CalculateurScoresEvaluation.new(
           parties,
           METRIQUES_ILLETRISME,
-          standardisateurs
-        ).scores.each do |metrique, score|
+          standardisateurs_niveau3
+        ).scores_niveau2.each do |metrique, score|
           scores[metrique] ||= []
           scores[metrique] << score
         end

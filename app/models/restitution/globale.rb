@@ -39,6 +39,10 @@ module Restitution
       calculateur_scores_evaluation.scores_niveau2_standardises(standardisateur_niveau2)
     end
 
+    def scores_niveau1
+      calculateur_scores_evaluation.scores_niveau1(standardisateur_niveau2)
+    end
+
     def efficience
       restitutions_selectionnee = restitutions.reject do |restitution|
         restitution.is_a? RESTITUTION_SANS_EFFICIENCE

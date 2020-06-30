@@ -147,11 +147,11 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#calcul_scores_metriques' do
+  describe '#calcul_scores_niveau2_metriques' do
     let(:standardisateur) { double }
     let(:situation_id) { double }
     before do
-      allow(restitution_globale).to receive(:standardisateurs)
+      allow(restitution_globale).to receive(:standardisateurs_niveau3)
         .and_return({ situation_id => standardisateur })
       allow(standardisateur).to receive(:standardise).and_return(nil)
     end
@@ -159,7 +159,7 @@ describe Restitution::Globale do
     context 'pas de restitution' do
       let(:restitutions) { [] }
       it do
-        expect(restitution_globale.scores).to eq({})
+        expect(restitution_globale.scores_niveau2).to eq({})
       end
     end
 
@@ -169,11 +169,11 @@ describe Restitution::Globale do
       it do
         allow(partie).to receive(:metriques).and_return({ 'score_ccf' => 110 })
         allow(standardisateur).to receive(:standardise).with(:score_ccf, 110).and_return(1.1)
-        expect(restitution_globale.scores).to eq(score_ccf: 1.1)
+        expect(restitution_globale.scores_niveau2).to eq(score_ccf: 1.1)
       end
     end
 
-    context 'fait la moyenne des scores de restitution' do
+    context 'fait la moyenne des scores_niveau2 de restitution' do
       let(:partie1) { double(situation_id: situation_id) }
       let(:partie2) { double(situation_id: situation_id) }
       let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
@@ -184,11 +184,11 @@ describe Restitution::Globale do
         allow(standardisateur).to receive(:standardise).with(:score_ccf, 110).and_return(1.1)
         allow(standardisateur).to receive(:standardise).with(:score_ccf, 120).and_return(1.2)
 
-        expect(restitution_globale.scores).to eq(score_ccf: 1.15)
+        expect(restitution_globale.scores_niveau2).to eq(score_ccf: 1.15)
       end
     end
 
-    context 'sépare les scores des compétences différentes' do
+    context 'sépare les scores_niveau2 des compétences différentes' do
       let(:partie1) { double(situation_id: situation_id) }
       let(:partie2) { double(situation_id: situation_id) }
       let(:restitutions) { [double(partie: partie1), double(partie: partie2)] }
@@ -208,9 +208,9 @@ describe Restitution::Globale do
           .with(:score_numeratie, 130)
           .and_return(1.3)
 
-        expect(restitution_globale.scores).to eq(score_ccf: 1.1,
-                                                 score_memorisation: 1.2,
-                                                 score_numeratie: 1.3)
+        expect(restitution_globale.scores_niveau2).to eq(score_ccf: 1.1,
+                                                         score_memorisation: 1.2,
+                                                         score_numeratie: 1.3)
       end
     end
   end

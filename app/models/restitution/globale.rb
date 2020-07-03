@@ -8,8 +8,8 @@ module Restitution
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
     delegate :scores_niveau2,
-             :moyennes_glissantes,
-             :ecarts_types_glissants,
+             :niveau2_moyennes_glissantes,
+             :niveau2_ecarts_types_glissants,
              :scores_niveau2_standardises,
              to: :calculateur_scores_niveau2
     delegate :scores_niveau1,

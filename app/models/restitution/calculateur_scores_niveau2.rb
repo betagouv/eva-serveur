@@ -7,7 +7,10 @@ module Restitution
                               score_syntaxe_orthographe
                               score_memorisation].freeze
 
-    delegate :moyennes_glissantes, :ecarts_types_glissants, to: :standardisateur_niveau2
+    delegate :moyennes_glissantes,
+             :ecarts_types_glissants,
+             to: :standardisateur_niveau2,
+             prefix: :niveau2
 
     def initialize(parties, standardisateurs_niveau3 = nil)
       @parties = parties

@@ -3,8 +3,8 @@
 if can?(:manage, Compte) && !pdf
   panel 'Scores niveau 2' do
     scores_niveau2 = restitution_globale.scores_niveau2
-    moyennes_glissantes = restitution_globale.moyennes_glissantes
-    ecarts_types_glissants = restitution_globale.ecarts_types_glissants
+    moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
+    ecarts_types_glissants = restitution_globale.niveau2_ecarts_types_glissants
     scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises
     attributes_table_for [
       [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],

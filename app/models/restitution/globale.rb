@@ -7,16 +7,13 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    METRIQUES_ILLETRISME = %i[score_ccf
-                              score_numeratie
-                              score_syntaxe_orthographe
-                              score_memorisation].freeze
-
     delegate :scores_niveau2,
+             :moyennes_glissantes,
+             :ecarts_types_glissants,
              :scores_niveau2_standardises,
-             :scores_niveau1,
-             to: :calculateur_scores_evaluation
-    delegate :moyennes_glissantes, :ecarts_types_glissants, to: :standardisateur_niveau2
+             to: :calculateur_scores_niveau2
+    delegate :scores_niveau1,
+             to: :calculateur_scores_niveau1
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -31,9 +28,14 @@ module Restitution
       evaluation.created_at
     end
 
-    def calculateur_scores_evaluation
-      @calculateur_scores_evaluation ||=
-        calculateur(restitutions.map(&:partie), standardisateur_niveau2)
+    def calculateur_scores_niveau2
+      @calculateur_scores_niveau2 ||=
+        Restitution::CalculateurScoresNiveau2.new(restitutions.map(&:partie))
+    end
+
+    def calculateur_scores_niveau1
+      @calculateur_scores_niveau1 ||=
+        Restitution::CalculateurScoresNiveau1.new(calculateur_scores_niveau2)
     end
 
     def efficience
@@ -76,47 +78,6 @@ module Restitution
           memo[competence] << niveau
         end
         memo
-      end
-    end
-
-    def standardisateurs_niveau3
-      @standardisateurs_niveau3 ||= restitutions.each_with_object({}) do |r, memo|
-        memo[r.partie.situation_id] ||= Restitution::Standardisateur.new(
-          METRIQUES_ILLETRISME,
-          proc { Partie.where(situation: r.partie.situation) }
-        )
-      end
-    end
-
-    def standardisateur_niveau2
-      @standardisateur_niveau2 ||= Restitution::StandardisateurEchantillon.new(
-        METRIQUES_ILLETRISME,
-        scores_toutes_evaluations
-      )
-    end
-
-    def scores_toutes_evaluations
-      parties_par_evaluations.values.each_with_object({}) do |parties, scores|
-        calculateur(parties, nil).scores_niveau2.each do |metrique, score|
-          scores[metrique] ||= []
-          scores[metrique] << score
-        end
-      end
-    end
-
-    def calculateur(parties, standardisateurs_niveau2)
-      Restitution::CalculateurScoresEvaluation.new(
-        parties,
-        METRIQUES_ILLETRISME,
-        standardisateurs_niveau2,
-        standardisateurs_niveau3
-      )
-    end
-
-    def parties_par_evaluations
-      Partie.where.not(metriques: {}).each_with_object({}) do |partie, map|
-        map[partie.evaluation_id] ||= []
-        map[partie.evaluation_id] << partie
       end
     end
   end

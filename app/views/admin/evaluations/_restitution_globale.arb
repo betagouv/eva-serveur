@@ -15,7 +15,7 @@ if can?(:manage, Compte) && !pdf
       row do |(titre, _)|
         strong titre
       end
-      Restitution::Globale::METRIQUES_ILLETRISME.each do |nom_metrique|
+      Restitution::CalculateurScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
         row(nom_metrique) do |(_, valeur_colonne)|
           valeur_colonne[nom_metrique]&.round(2)
         end

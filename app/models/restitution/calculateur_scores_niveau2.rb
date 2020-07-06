@@ -12,13 +12,15 @@ module Restitution
              to: :standardisateur_niveau2,
              prefix: :niveau2
 
+    attr_writer :standardisateur_niveau2
+
     def initialize(parties, standardisateurs_niveau3 = nil)
       @parties = parties
       @standardisateurs_niveau3 = standardisateurs_niveau3
     end
 
     def scores_niveau2
-      @scores_niveau2 ||= scores_nivreau3_standardises.transform_values do |valeurs|
+      @scores_niveau2 ||= scores_niveau3_standardises.transform_values do |valeurs|
         DescriptiveStatistics.mean(valeurs)
       end
     end
@@ -30,9 +32,16 @@ module Restitution
         end
     end
 
+    def calculateurs_niveau2_pour_niveau1
+      calculateurs_niveau2.transform_values do |calculateur|
+        calculateur.standardisateur_niveau2 = standardisateur_niveau2
+        calculateur
+      end
+    end
+
     private
 
-    def scores_nivreau3_standardises
+    def scores_niveau3_standardises
       METRIQUES_ILLETRISME.each_with_object({}) do |metrique, memo|
         @parties.each do |partie|
           cote_z = standardise(partie, metrique)
@@ -68,22 +77,29 @@ module Restitution
     end
 
     def scores_toutes_evaluations
-      parties_par_evaluations.values.each_with_object({}) do |parties, scores|
-        Restitution::CalculateurScoresNiveau2.new(
-          parties,
-          standardisateurs_niveau3
-        ).scores_niveau2.each do |metrique, score|
+      calculateurs_niveau2.values.each_with_object({}) do |calculateur, scores|
+        calculateur.scores_niveau2.each do |metrique, score|
           scores[metrique] ||= []
           scores[metrique] << score
         end
       end
     end
 
-    def parties_par_evaluations
-      Partie.where.not(metriques: {}).each_with_object({}) do |partie, map|
-        map[partie.evaluation_id] ||= []
-        map[partie.evaluation_id] << partie
+    def calculateurs_niveau2
+      parties_par_evaluations.transform_values do |parties|
+        Restitution::CalculateurScoresNiveau2.new(
+          parties,
+          standardisateurs_niveau3
+        )
       end
+    end
+
+    def parties_par_evaluations
+      @parties_par_evaluations ||=
+        Partie.where.not(metriques: {}).each_with_object({}) do |partie, map|
+          map[partie.evaluation_id] ||= []
+          map[partie.evaluation_id] << partie
+        end
     end
   end
 end

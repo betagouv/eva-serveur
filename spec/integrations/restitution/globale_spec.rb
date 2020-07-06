@@ -80,4 +80,16 @@ describe Restitution::Globale do
         .to eql(((-0.30 + 0.90) / 2).round(2))
     end
   end
+
+  context 'calcule les scores de niveau 1 et leur moyenne' do
+    it do
+      expect(restitution_evaluation1.scores_niveau1[:litteratie].round(2))
+        .to eql(-0.5)
+      expect(restitution_evaluation1.scores_niveau1[:numeratie])
+        .to eql(nil)
+      expect(restitution_evaluation1.niveau1_moyennes_glissantes[:litteratie])
+        .to eql(0.25)
+      expect(restitution_evaluation1.niveau1_moyennes_glissantes[:numeratie]).to eql(0.0)
+    end
+  end
 end

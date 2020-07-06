@@ -13,6 +13,8 @@ module Restitution
              :scores_niveau2_standardises,
              to: :calculateur_scores_niveau2
     delegate :scores_niveau1,
+             :niveau1_moyennes_glissantes,
+             :niveau1_ecarts_types_glissants,
              to: :calculateur_scores_niveau1
 
     def initialize(restitutions:, evaluation:)

@@ -24,8 +24,8 @@ if can?(:manage, Compte) && !pdf
   end
   panel 'Scores niveau 1' do
     scores_niveau1 = restitution_globale.scores_niveau1
-    moyennes_glissantes = {}
-    ecarts_types_glissants = {}
+    moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
+    ecarts_types_glissants = restitution_globale.niveau1_ecarts_types_glissants
     scores_niveau1_standardises = {}
     attributes_table_for [
       [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],

@@ -9,19 +9,18 @@ module Restitution
              to: :standardisateur_niveau1,
              prefix: :niveau1
 
-    def initialize(calculateur_niveau2)
-      @calculateur_niveau2 = calculateur_niveau2
+    def initialize(scores_niveau2_standardises)
+      @scores_niveau2_standardises = scores_niveau2_standardises
     end
 
     def scores_niveau1
       scores_litteratie =
-        @calculateur_niveau2
-        .scores_niveau2_standardises.each_with_object([]) do |(metrique, score), memo|
+        @scores_niveau2_standardises.calcule.each_with_object([]) do |(metrique, score), memo|
           memo << score if METRIQUES_LITTERATIE.include?(metrique)
         end
       {
         litteratie: DescriptiveStatistics.mean(scores_litteratie.compact),
-        numeratie: @calculateur_niveau2.scores_niveau2_standardises[:score_numeratie]
+        numeratie: @scores_niveau2_standardises.calcule[:score_numeratie]
       }
     end
 
@@ -44,9 +43,9 @@ module Restitution
     end
 
     def calculateurs_evaluations
-      @calculateur_niveau2.calculateurs_niveau2_pour_niveau1
-                          .transform_values do |calculateur_niveau2|
-        CalculateurScoresNiveau1.new(calculateur_niveau2)
+      @scores_niveau2_standardises.scores_niveau2_standardises_par_evaluations
+                                  .transform_values do |scores_niveau2_standardises|
+        CalculateurScoresNiveau1.new(scores_niveau2_standardises)
       end
     end
   end

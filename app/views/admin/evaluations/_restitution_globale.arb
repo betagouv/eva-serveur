@@ -2,10 +2,10 @@
 
 if can?(:manage, Compte) && !pdf
   panel 'Scores niveau 2' do
-    scores_niveau2 = restitution_globale.scores_niveau2
+    scores_niveau2 = restitution_globale.scores_niveau2.calcule
     moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
     ecarts_types_glissants = restitution_globale.niveau2_ecarts_types_glissants
-    scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises
+    scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
     attributes_table_for [
       [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
       [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
@@ -15,7 +15,7 @@ if can?(:manage, Compte) && !pdf
       row do |(titre, _)|
         strong titre
       end
-      Restitution::CalculateurScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
+      Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
         row(nom_metrique) do |(_, valeur_colonne)|
           valeur_colonne[nom_metrique]&.round(2)
         end

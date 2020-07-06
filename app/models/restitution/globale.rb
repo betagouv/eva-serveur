@@ -7,11 +7,10 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    delegate :scores_niveau2,
-             :niveau2_moyennes_glissantes,
+    delegate :niveau2_moyennes_glissantes,
              :niveau2_ecarts_types_glissants,
              :scores_niveau2_standardises,
-             to: :calculateur_scores_niveau2
+             to: :scores_niveau2_standardises
     delegate :scores_niveau1,
              :niveau1_moyennes_glissantes,
              :niveau1_ecarts_types_glissants,
@@ -30,14 +29,19 @@ module Restitution
       evaluation.created_at
     end
 
-    def calculateur_scores_niveau2
-      @calculateur_scores_niveau2 ||=
-        Restitution::CalculateurScoresNiveau2.new(restitutions.map(&:partie))
+    def scores_niveau2
+      @scores_niveau2 ||=
+        Restitution::ScoresNiveau2.new(restitutions.map(&:partie))
+    end
+
+    def scores_niveau2_standardises
+      @scores_niveau2_standardises ||=
+        Restitution::ScoresNiveau2Standardises.new(scores_niveau2)
     end
 
     def calculateur_scores_niveau1
       @calculateur_scores_niveau1 ||=
-        Restitution::CalculateurScoresNiveau1.new(calculateur_scores_niveau2)
+        Restitution::CalculateurScoresNiveau1.new(scores_niveau2_standardises)
     end
 
     def efficience

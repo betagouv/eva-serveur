@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class CalculateurScoresNiveau1
+  class ScoresNiveau1
     METRIQUES_LITTERATIE = %i[score_ccf score_syntaxe_orthographe score_memorisation].freeze
 
     delegate :moyennes_glissantes,
@@ -13,7 +13,7 @@ module Restitution
       @scores_niveau2_standardises = scores_niveau2_standardises
     end
 
-    def scores_niveau1
+    def calcule
       scores_litteratie =
         @scores_niveau2_standardises.calcule.each_with_object([]) do |(metrique, score), memo|
           memo << score if METRIQUES_LITTERATIE.include?(metrique)
@@ -34,18 +34,18 @@ module Restitution
     end
 
     def scores_toutes_evaluations
-      calculateurs_evaluations.values.each_with_object({}) do |calculateur_evaluation, scores|
-        calculateur_evaluation.scores_niveau1.each do |metrique, score|
+      scores_niveau1_par_evaluations.values.each_with_object({}) do |scores_niveau1, scores|
+        scores_niveau1.calcule.each do |metrique, score|
           scores[metrique] ||= []
           scores[metrique] << score
         end
       end
     end
 
-    def calculateurs_evaluations
+    def scores_niveau1_par_evaluations
       @scores_niveau2_standardises.scores_niveau2_standardises_par_evaluations
                                   .transform_values do |scores_niveau2_standardises|
-        CalculateurScoresNiveau1.new(scores_niveau2_standardises)
+        ScoresNiveau1.new(scores_niveau2_standardises)
       end
     end
   end

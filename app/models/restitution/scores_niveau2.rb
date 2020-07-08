@@ -18,8 +18,8 @@ module Restitution
       end
     end
 
-    def scores_niveau2_par_evaluations
-      @scores_niveau2_par_evaluations ||=
+    def scores_par_evaluations
+      @scores_par_evaluations ||=
         parties_par_evaluations.transform_values do |parties|
           Restitution::ScoresNiveau2.new(parties, standardisateurs_niveau3)
         end

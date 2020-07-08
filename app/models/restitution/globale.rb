@@ -11,10 +11,9 @@ module Restitution
              :niveau2_ecarts_types_glissants,
              :scores_niveau2_standardises,
              to: :scores_niveau2_standardises
-    delegate :scores_niveau1,
-             :niveau1_moyennes_glissantes,
+    delegate :niveau1_moyennes_glissantes,
              :niveau1_ecarts_types_glissants,
-             to: :calculateur_scores_niveau1
+             to: :scores_niveau1
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -39,9 +38,9 @@ module Restitution
         Restitution::ScoresNiveau2Standardises.new(scores_niveau2)
     end
 
-    def calculateur_scores_niveau1
-      @calculateur_scores_niveau1 ||=
-        Restitution::CalculateurScoresNiveau1.new(scores_niveau2_standardises)
+    def scores_niveau1
+      @scores_niveau1 ||=
+        Restitution::ScoresNiveau1.new(scores_niveau2_standardises)
     end
 
     def efficience

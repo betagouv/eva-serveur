@@ -26,7 +26,7 @@ if can?(:manage, Compte) && !pdf
     scores_niveau1 = restitution_globale.scores_niveau1.calcule
     moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
     ecarts_types_glissants = restitution_globale.niveau1_ecarts_types_glissants
-    scores_niveau1_standardises = {}
+    scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
     attributes_table_for [
       [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
       [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],

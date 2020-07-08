@@ -7,13 +7,14 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    delegate :niveau2_moyennes_glissantes,
-             :niveau2_ecarts_types_glissants,
-             :scores_niveau2_standardises,
-             to: :scores_niveau2_standardises
-    delegate :niveau1_moyennes_glissantes,
-             :niveau1_ecarts_types_glissants,
-             to: :scores_niveau1
+    delegate :moyennes_glissantes,
+             :ecarts_types_glissants,
+             to: :scores_niveau2_standardises,
+             prefix: :niveau2
+    delegate :moyennes_glissantes,
+             :ecarts_types_glissants,
+             to: :scores_niveau1_standardises,
+             prefix: :niveau1
 
     def initialize(restitutions:, evaluation:)
       @restitutions = restitutions
@@ -29,18 +30,19 @@ module Restitution
     end
 
     def scores_niveau2
-      @scores_niveau2 ||=
-        Restitution::ScoresNiveau2.new(restitutions.map(&:partie))
+      @scores_niveau2 ||= Restitution::ScoresNiveau2.new(restitutions.map(&:partie))
     end
 
     def scores_niveau2_standardises
-      @scores_niveau2_standardises ||=
-        Restitution::ScoresNiveau2Standardises.new(scores_niveau2)
+      @scores_niveau2_standardises ||= Restitution::ScoresStandardises.new(scores_niveau2)
     end
 
     def scores_niveau1
-      @scores_niveau1 ||=
-        Restitution::ScoresNiveau1.new(scores_niveau2_standardises)
+      @scores_niveau1 ||= Restitution::ScoresNiveau1.new(scores_niveau2_standardises)
+    end
+
+    def scores_niveau1_standardises
+      @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
     def efficience

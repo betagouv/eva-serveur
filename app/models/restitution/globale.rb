@@ -45,6 +45,11 @@ module Restitution
       @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
+    def interpretations_illettrisme
+      @interpretations_illettrisme ||=
+        Illettrisme::InterpreteurScores.new(scores_niveau1_standardises.calcule).interpretations
+    end
+
     def efficience
       restitutions_selectionnee = restitutions.reject do |restitution|
         restitution.is_a? RESTITUTION_SANS_EFFICIENCE

@@ -16,4 +16,11 @@ module ApplicationHelper
   def rapport_colonne_class
     'col-4 px-5 mb-4'
   end
+
+  def md(contenu)
+    @markdown ||= Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML.new(no_links: true, hard_wrap: true)
+    )
+    @markdown.render(contenu).html_safe
+  end
 end

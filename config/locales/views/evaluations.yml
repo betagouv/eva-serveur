@@ -147,3 +147,46 @@ fr:
         valeur_utilisateur: Valeur de l'évalué·e
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant
+      niveaux_illettrisme:
+        litteratie_a1:
+          titre: Littératie A1
+          description: |
+            Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
+
+            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
+        litteratie_a2:
+          titre: Littératie A2
+          description: |
+            Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
+
+            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
+        litteratie_b1:
+          titre: Littératie B1
+          description: |
+            Votre score indique que vous maîtrisez tout à fait le français, bravo !
+
+            **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
+        numeratie_x1:
+          titre: Numératie X1
+          description: |
+            Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
+
+            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
+        numeratie_x2:
+          titre: Numératie X2
+          description: |
+            Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
+
+            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
+        numeratie_y1:
+          titre: Numératie Y1
+          description: |
+            Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
+
+            **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
+        socle_clea_atteint:
+          titre: Socle Cléa Atteint, soit Littératie B1 ET Numératie Y1
+          description: |
+            Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+
+            **Votre niveau correspond au minimum au socle de compétences de base du référentiel Cléa Certif’Pro, parlez en avec votre conseiller pour savoir si cette certification pourrait être utile à votre projet !**

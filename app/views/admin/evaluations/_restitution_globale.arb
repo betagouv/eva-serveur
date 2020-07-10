@@ -43,6 +43,16 @@ if can?(:manage, Compte) && !pdf
       end
     end
   end
+  panel 'Interprétations' do
+    restitution_globale.interpretations_illettrisme.each do |niveau|
+      scope = "admin.restitutions.niveaux_illettrisme.#{niveau}"
+      h3 t(:titre, scope: scope)
+      div do
+        md t(:description, scope: scope)
+      end
+      hr
+    end
+  end
 end
 
 div class: 'admin_restitution_globale' do

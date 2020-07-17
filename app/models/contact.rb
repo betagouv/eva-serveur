@@ -3,4 +3,8 @@
 class Contact < ApplicationRecord
   belongs_to :saisi_par, class_name: 'Compte', foreign_key: 'compte_id'
   delegate :structure, to: :saisi_par
+
+  def display_name
+    "#{nom} (#{email})"
+  end
 end

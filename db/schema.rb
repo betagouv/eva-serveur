@@ -89,6 +89,15 @@ ActiveRecord::Schema.define(version: 2020_07_20_142630) do
     t.index ["structure_id"], name: "index_comptes_on_structure_id"
   end
 
+  create_table "contacts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "nom"
+    t.string "email"
+    t.uuid "compte_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["compte_id"], name: "index_contacts_on_compte_id"
+  end
+
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.datetime "created_at", null: false
@@ -185,6 +194,7 @@ ActiveRecord::Schema.define(version: 2020_07_20_142630) do
   add_foreign_key "campagnes", "questionnaires"
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
+  add_foreign_key "contacts", "comptes"
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade

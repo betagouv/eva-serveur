@@ -2,7 +2,7 @@
 
 module Restitution
   module Illettrisme
-    class InterpreteurScores
+    class InterpreteurNiveau1
       PALIERS = {
         litteratie: %i[litteratie_a1 litteratie_a2 litteratie_b1],
         numeratie: %i[numeratie_x1 numeratie_x2 numeratie_y1]

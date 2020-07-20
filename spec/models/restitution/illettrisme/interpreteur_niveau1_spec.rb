@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-describe Restitution::Illettrisme::InterpreteurScores do
+describe Restitution::Illettrisme::InterpreteurNiveau1 do
   describe '#interprete' do
     let(:score_litteratie) { -Float::INFINITY }
     let(:score_numeratie) { -Float::INFINITY }
     let(:scores_standardises) { { litteratie: score_litteratie, numeratie: score_numeratie } }
-    let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
+    let(:subject) { Restitution::Illettrisme::InterpreteurNiveau1.new scores_standardises }
 
     context 'Socle Cléa Atteint' do
       let(:score_litteratie) { 0 }

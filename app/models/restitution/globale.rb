@@ -50,6 +50,11 @@ module Restitution
         Illettrisme::InterpreteurNiveau1.new(scores_niveau1_standardises.calcule).interpretations
     end
 
+    def interpretations_niveau2
+      @interpretations_niveau2 ||=
+        Illettrisme::InterpreteurNiveau2.new(scores_niveau2_standardises.calcule).interpretations
+    end
+
     def efficience
       restitutions_selectionnee = restitutions.reject do |restitution|
         restitution.is_a? RESTITUTION_SANS_EFFICIENCE

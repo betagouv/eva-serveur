@@ -147,6 +147,76 @@ fr:
         valeur_utilisateur: Valeur de l'évalué·e
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant
+      interpretations_niveau2:
+        ccf_niveau1:
+          titre: Connaissance et compréhension du français
+          description: |
+            Vous avez **des progrès à faire** en ce qui concerne la connaissance des mots français et leur compréhension.
+            Actuellement, il est possible que vous ayez des difficultés à comprendre vos interlocuteurs ou à lire des documents.
+            N’hésitez pas à vous former pour progresser sur ce point !
+        ccf_niveau2:
+          titre: Connaissance et compréhension du français
+          description: |
+            Vous avez une **assez bonne** connaissance et compréhension des mots français.
+            Vous comprenez certainement bien vos interlocuteurs et les documents écrits, mais vous pouvez passer à côté d’informations importantes.
+            N’hésitez pas à vous former pour progresser sur ce point !
+        ccf_niveau3:
+          titre: Connaissance et compréhension du français
+          description: |
+            Vous avez une **bonne** compréhension du français et pouvez comprendre sans problème les consignes de votre employeur, même les plus complexes.
+            Pas de besoin de formation pour cette compétence, bravo !
+        syntaxe_orthographe_niveau1:
+          titre: Grammaire et orthographe
+          description: |
+            Vous avez **des progrès à faire** en orthographe et grammaire.
+            Actuellement, il est possible que vos interlocuteurs aient des difficultés à vous comprendre.
+            N’hésitez pas à vous former pour progresser sur ce point !
+
+        syntaxe_orthographe_niveau2:
+          titre: Grammaire et orthographe
+          description: |
+            Vous avez un **assez bon niveau** en orthographe et grammaire, mais il vous est encore possible de progresser.
+            Vos écrits ont de bonnes chances d’être bien compris, mais on pourrait vous reprocher de ne pas être assez clair·e.
+            N’hésitez pas à vous former pour progresser sur cette compétence !
+
+        syntaxe_orthographe_niveau3:
+          titre: Grammaire et orthographe
+          description: |
+            Vous avez un **bon niveau** d’orthographe et grammaire.
+            Vous pouvez produire des écrits professionnels compréhensibles par tout le monde.
+            Pas de besoin de formation pour cette compétence !
+        memorisation_niveau1:
+          titre: Utilisation des informations à disposition
+          description: |
+            Vous avez **des progrès à faire** pour retenir et utiliser des informations qui vous ont été données.
+            Il est possible que vous rencontriez des difficultés dans votre activité professionnelle, mais vous pouvez progresser !
+
+        memorisation_niveau2:
+          titre: Utilisation des informations à disposition
+          description: |
+            Vous réussissez **assez bien** à retenir et utiliser des informations qui vous ont été données.
+            Vous avez de bonnes chances de retenir les informations pour ensuite les utiliser en contexte professionnel, mais vous pouvez encore vous améliorer.
+            N’hésitez pas à en parler à votre conseiller !
+
+        memorisation_niveau3:
+          titre: Utilisation des informations à disposition
+          description: |
+            Vous parvenez **très bien** à retenir et utiliser des informations qui vous ont été données.
+            Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
+
+        numeratie_niveau1:
+          titre: Numératie
+          description: |
+            Numératie stanine 1 (texte provisoire)
+        numeratie_niveau2:
+          titre: Numératie
+          description: |
+            Numératie stanine 2 (texte provisoire)
+        numeratie_niveau3:
+          titre: Numératie
+          description: |
+            Numératie stanine 3 (texte provisoire)
+
       niveaux_illettrisme:
         litteratie_a1:
           titre: Littératie A1

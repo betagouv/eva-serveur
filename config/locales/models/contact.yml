@@ -1,0 +1,5 @@
+fr:
+  formtastic:
+    actions:
+      contact:
+        create: Ajouter un contact

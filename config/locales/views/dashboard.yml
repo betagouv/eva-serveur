@@ -2,6 +2,10 @@ fr:
   admin:
     dashboard:
       dashboard:
+        contacts:
+          titre: Vos coordonnées de contacts
+          intro: Pour nous aider à améliorer le service, laissez-nous votre nom et adresse email et nous vous solliciterons pour un suivi personnalisé
+          deja_enregistres: "Les contacts que vous avez déjà enregistrés :"
         dernieres_evaluations:
           titre: Dernières évaluations
         statistiques:

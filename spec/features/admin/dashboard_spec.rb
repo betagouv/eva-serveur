@@ -19,9 +19,26 @@ describe 'Admin - Dashboard' do
       end
 
       before { visit admin_root_path }
+
       it do
         expect(page).to have_content 'Monsieur Plus (monsieur@plus.com)'
         expect(page).to_not have_content 'Monsieur Absent'
+      end
+    end
+
+    describe 'Ajouter un contact' do
+      before do
+        visit admin_root_path
+        fill_in :contact_nom, with: 'Nouveau Contact'
+        fill_in :contact_email, with: 'nouveau@email.com'
+      end
+
+      it do
+        expect { click_on 'Ajouter' }.to(change { Contact.count })
+        nouveau_contact = Contact.last
+        expect(nouveau_contact.nom).to eq 'Nouveau Contact'
+        expect(nouveau_contact.email).to eq 'nouveau@email.com'
+        expect(nouveau_contact.saisi_par).to eq compte_organisation
       end
     end
   end

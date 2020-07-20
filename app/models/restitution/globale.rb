@@ -47,7 +47,7 @@ module Restitution
 
     def interpretations_illettrisme
       @interpretations_illettrisme ||=
-        Illettrisme::InterpreteurScores.new(scores_niveau1_standardises.calcule).interpretations
+        Illettrisme::InterpreteurNiveau1.new(scores_niveau1_standardises.calcule).interpretations
     end
 
     def efficience

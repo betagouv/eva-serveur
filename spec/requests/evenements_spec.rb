@@ -15,6 +15,7 @@ describe 'Evenement API', type: :request do
         "nom": 'ouvertureContenant',
         "donnees": donnees,
         "situation": 'inventaire',
+        "position": 58,
         "session_id": 'O8j78U2xcb2',
         "evaluation_id": evaluation.id
       }
@@ -36,22 +37,20 @@ describe 'Evenement API', type: :request do
         expect { post '/api/evenements', params: payload_valide }
           .to change { Evenement.count }.by(1)
                                         .and change { Partie.count }.by(1)
+        expect(response).to have_http_status(201)
         evenement = Evenement.last
         expect(evenement.date.to_datetime).to eq Time.at(1_551_111_089, 238_000).to_datetime
-      end
+        expect(evenement.position).to eq 58
 
-      it 'retourne une 201' do
-        post '/api/evenements', params: payload_valide
-        expect(response).to have_http_status(201)
-      end
-
-      it "relie l'évenement à sa partie" do
-        expect do
-          2.times { post '/api/evenements', params: payload_valide }
-        end.to change { Partie.count }.by 1
         partie = Partie.last
         expect(partie.evaluation).to eq evaluation
         expect(partie.situation).to eq situation_inventaire
+      end
+
+      it 'crée une seule fois la partie' do
+        expect do
+          2.times { post '/api/evenements', params: payload_valide }
+        end.to change { Partie.count }.by 1
       end
     end
 

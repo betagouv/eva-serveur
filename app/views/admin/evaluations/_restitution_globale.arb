@@ -21,7 +21,24 @@ if can?(:manage, Compte) && !pdf
         end
       end
     end
+
+    h2 'Interprétations'
+    niveaux_affiches = if restitution_globale.interpretations_niveau2.present?
+                         restitution_globale.interpretations_niveau2
+                       else
+                         ['sans_resultat']
+                       end
+
+    niveaux_affiches.each do |niveau|
+      scope = "admin.restitutions.interpretations_niveau2.#{niveau}"
+      h3 t(:titre, scope: scope)
+      div do
+        md t(:description, scope: scope)
+      end
+      hr
+    end
   end
+
   panel 'Scores niveau 1' do
     scores_niveau1 = restitution_globale.scores_niveau1.calcule
     moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
@@ -42,8 +59,8 @@ if can?(:manage, Compte) && !pdf
         end
       end
     end
-  end
-  panel 'Interprétations' do
+
+    h2 'Interprétations'
     niveaux_affiches = if restitution_globale.interpretations_illettrisme.present?
                          restitution_globale.interpretations_illettrisme
                        else

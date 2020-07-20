@@ -17,10 +17,16 @@ columns do
   end
 
   column do
-    panel t('.contacts') do
-      ul do
-        contacts.each do |contact|
-          li contact.display_name
+    panel t('.contacts.titre') do
+      h4 t('.contacts.intro')
+      render 'admin/contacts/form'
+      if contacts.present?
+        hr
+        h4 t('.contacts.deja_enregistres')
+        ul do
+          contacts.each do |contact|
+            li contact.display_name
+          end
         end
       end
     end

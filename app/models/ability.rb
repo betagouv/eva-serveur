@@ -100,5 +100,6 @@ class Ability
     can :manage, :all if compte.administrateur?
     cannot :destroy, Campagne
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
+    can :create, Contact
   end
 end

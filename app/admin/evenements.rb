@@ -17,6 +17,7 @@ ActiveAdmin.register Evenement do
     column(:partie) { |e| auto_link(e.partie) }
     column :nom
     column :donnees
+    column :position
     column(:date) { |e| l(e.date, format: :date_heure) }
     column(:created_at) { |e| l(e.created_at, format: :date_heure) }
   end

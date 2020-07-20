@@ -7,6 +7,7 @@ class EvenementParams
         :date,
         :nom,
         :session_id,
+        :position,
         donnees: {}
       )
       formate!(permitted)

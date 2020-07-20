@@ -190,3 +190,13 @@ fr:
             Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 
             **Votre niveau correspond au minimum au socle de compétences de base du référentiel Cléa Certif’Pro, parlez en avec votre conseiller pour savoir si cette certification pourrait être utile à votre projet !**
+        sans_resultat:
+          titre: Pas de score
+          description: |
+            Votre score n'a pas pu être calculé. Les raisons peuvent être les suivantes :
+
+            - vous avez abandonné à un ou plusieurs mini-jeux,
+            - vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous-vous êtes par exemple absenté quelques minutes),
+            - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
+
+            Pour obtenir votre score à cette compétence, n'hésitez pas à repasser le parcours eva plus tard.

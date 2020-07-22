@@ -7,7 +7,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau2 do
 
   context 'pas de score à interpreter' do
     let(:scores_standardises) { {} }
-    it { expect(subject.interpretations).to eq [] }
+    it { expect(subject.interpretations).to include({ score_ccf: nil }) }
   end
 
   context 'score ccf < à -1' do

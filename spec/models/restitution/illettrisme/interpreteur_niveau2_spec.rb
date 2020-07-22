@@ -12,11 +12,11 @@ describe Restitution::Illettrisme::InterpreteurNiveau2 do
 
   context 'score ccf < à -1' do
     let(:scores_standardises) { { score_ccf: -1.01 } }
-    it { expect(subject.interpretations).to eq [:ccf_niveau1] }
+    it { expect(subject.interpretations).to include({ score_ccf: :niveau1 }) }
   end
 
   context '-1 < score ccf < à 0' do
     let(:scores_standardises) { { score_ccf: -1 } }
-    it { expect(subject.interpretations).to eq [:ccf_niveau2] }
+    it { expect(subject.interpretations).to include({ score_ccf: :niveau2 }) }
   end
 end

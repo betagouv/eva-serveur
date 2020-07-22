@@ -45,8 +45,8 @@ module Restitution
       @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
-    def interpretations_illettrisme
-      @interpretations_illettrisme ||=
+    def interpretations_niveau1
+      @interpretations_niveau1 ||=
         Illettrisme::InterpreteurNiveau1.new(scores_niveau1_standardises.calcule).interpretations
     end
 

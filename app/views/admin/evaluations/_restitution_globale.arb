@@ -23,13 +23,7 @@ if can?(:manage, Compte) && !pdf
     end
 
     h2 'Interprétations'
-    niveaux_affiches = if restitution_globale.interpretations_niveau2.present?
-                         restitution_globale.interpretations_niveau2
-                       else
-                         ['sans_resultat']
-                       end
-
-    niveaux_affiches.each do |competence_niveau|
+    restitution_globale.interpretations_niveau2.each do |competence_niveau|
       competence = competence_niveau.keys.first
       niveau = competence_niveau[competence]
       scope = "admin.restitutions.interpretations_niveau2.#{competence}"
@@ -67,13 +61,7 @@ if can?(:manage, Compte) && !pdf
     end
 
     h2 'Interprétations'
-    niveaux_affiches = if restitution_globale.interpretations_illettrisme.present?
-                         restitution_globale.interpretations_illettrisme
-                       else
-                         ['sans_resultat']
-                       end
-
-    niveaux_affiches.each do |competence_niveau|
+    restitution_globale.interpretations_niveau1.each do |competence_niveau|
       competence = competence_niveau.keys.first
       niveau = competence_niveau[competence]
       scope = "admin.restitutions.niveaux_illettrisme.#{competence}"

@@ -8,7 +8,7 @@ module Restitution
       end
 
       def interpretations
-        interpretations = self.class::PALIERS.keys.map { |score| interprete(score) }.compact
+        interpretations = self.class::PALIERS.keys.map { |score| { score => interprete(score) } }
         applique_exceptions!(interpretations)
 
         interpretations

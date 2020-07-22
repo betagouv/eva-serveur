@@ -29,11 +29,17 @@ if can?(:manage, Compte) && !pdf
                          ['sans_resultat']
                        end
 
-    niveaux_affiches.each do |niveau|
-      scope = "admin.restitutions.interpretations_niveau2.#{niveau}"
+    niveaux_affiches.each do |competence_niveau|
+      competence = competence_niveau.keys.first
+      niveau = competence_niveau[competence]
+      scope = "admin.restitutions.interpretations_niveau2.#{competence}"
       h3 t(:titre, scope: scope)
       div do
-        md t(:description, scope: scope)
+        if niveau.present?
+          md t(niveau, scope: scope)
+        else
+          md t('admin.restitutions.pas_de_score')
+        end
       end
       hr
     end
@@ -67,11 +73,17 @@ if can?(:manage, Compte) && !pdf
                          ['sans_resultat']
                        end
 
-    niveaux_affiches.each do |niveau|
-      scope = "admin.restitutions.niveaux_illettrisme.#{niveau}"
+    niveaux_affiches.each do |competence_niveau|
+      competence = competence_niveau.keys.first
+      niveau = competence_niveau[competence]
+      scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
       h3 t(:titre, scope: scope)
       div do
-        md t(:description, scope: scope)
+        if niveau.present?
+          md t(niveau, scope: scope)
+        else
+          md t('admin.restitutions.pas_de_score')
+        end
       end
       hr
     end

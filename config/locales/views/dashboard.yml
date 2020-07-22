@@ -3,8 +3,8 @@ fr:
     dashboard:
       dashboard:
         contacts:
-          titre: Vos coordonnées de contacts
-          intro: Pour nous aider à améliorer le service, laissez-nous votre nom et adresse email et nous vous solliciterons pour un suivi personnalisé
+          titre: Vos coordonnées
+          intro: Pour nous aider à améliorer le service, merci de nous laisser votre nom et adresse email et nous vous solliciterons pour un suivi personnalisé
           deja_enregistres: "Les contacts que vous avez déjà enregistrés :"
         dernieres_evaluations:
           titre: Dernières évaluations

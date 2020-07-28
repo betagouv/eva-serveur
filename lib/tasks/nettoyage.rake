@@ -73,7 +73,7 @@ namespace :nettoyage do
     }
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
-    puts "campagne;nom evalué·e;date creation de la partie;maintenance: score ccf;OT: score numeratie;OT: score ccf;OT: score mémorisation;livraison: score numeratie;livraison: score ccf;livraison: score syntax orthographe;inventaire: #{colonnes['inventaire'].join(";inventaire: ")};securite: #{(colonnes['securite'] + colonnes_z['securite']).join("; securite: ")};tri: #{colonnes['tri'].join(";tri: ")};controle: #{colonnes['controle'].join(";controle: ")};Bienvenue: toutes les colonnes"
+    puts "campagne;nom evalué·e;date creation de la partie;maintenance: score ccf;OT: score numeratie;OT: score ccf;OT: score mémorisation;livraison: score numeratie;livraison: score ccf;livraison: score syntax orthographe;inventaire: #{colonnes['inventaire'].join(";inventaire: ")};securite: #{colonnes['securite'].join("; securite: ")};securite: cote_z_#{colonnes_z['securite'].join("; securite: cote_z_")};tri: #{colonnes['tri'].join(";tri: ")};controle: #{colonnes['controle'].join(";controle: ")};Bienvenue: toutes les colonnes"
     evaluations.each do |e|
       situations = {
         'maintenance' => Array.new(1, 'vide'),

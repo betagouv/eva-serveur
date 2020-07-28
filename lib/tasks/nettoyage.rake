@@ -51,17 +51,39 @@ namespace :nettoyage do
   desc 'Extrait les données pour les psychologues'
   task extrait_stats: :environment do
     Rails.logger.level = :warn
-    puts "campagne;nom evalué·e;date creation de la partie;maintenance: score ccf;OT: score numeratie;OT: score ccf;OT: score mémorisation;livraison: score numeratie;livraison: score ccf;livraison: score syntax orthographe;Bienvenue: toutes les colonnes"
-    Evaluation.all.each do |e|
-      next if e.campagne&.libelle&.downcase&.include?('test') ||
-        e.campagne&.code&.downcase&.include?('test') ||
-        e.campagne&.code&.downcase&.include?('demo')
-
+    colonnes = {
+      'bienvenue' => [],
+      'maintenance' => [],
+      'livraison' => [],
+      'objets_trouves' => [],
+      'inventaire' => [ 'temps_total', 'nombre_ouverture_contenant', 'nombre_essais_validation' ],
+      'securite' => Restitution::Securite::METRIQUES.keys,
+      'tri' => [ 'temps_total', 'nombre_bien_placees', 'nombre_mal_placees' ],
+      'controle' => [ 'nombre_bien_placees', 'nombre_mal_placees', 'nombre_non_triees' ]
+    }
+    colonnes_z = {
+      'bienvenue' => [],
+      'maintenance' => ['score_ccf'],
+      'livraison' => ['score_numeratie', 'score_ccf', 'score_syntaxe_orthographe'],
+      'objets_trouves' => ['score_numeratie', 'score_ccf', 'score_memorisation'],
+      'inventaire' => [],
+      'securite' => (Restitution::Securite::METRIQUES.map { |nom, metrique| nom if metrique['type'] == :nombre }).compact,
+      'tri' => [],
+      'controle' => []
+    }
+    evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
+    puts "Nombre d'évaluation : #{evaluations.count}"
+    puts "campagne;nom evalué·e;date creation de la partie;maintenance: score ccf;OT: score numeratie;OT: score ccf;OT: score mémorisation;livraison: score numeratie;livraison: score ccf;livraison: score syntax orthographe;inventaire: #{colonnes['inventaire'].join(";inventaire: ")};securite: #{(colonnes['securite'] + colonnes_z['securite']).join("; securite: ")};tri: #{colonnes['tri'].join(";tri: ")};controle: #{colonnes['controle'].join(";controle: ")};Bienvenue: toutes les colonnes"
+    evaluations.each do |e|
       situations = {
-        'bienvenue' => [],
         'maintenance' => Array.new(1, 'vide'),
         'livraison' => Array.new(3, 'vide'),
-        'objets_trouves' => Array.new(3, 'vide')
+        'objets_trouves' => Array.new(3, 'vide'),
+        'inventaire' => Array.new(colonnes['inventaire'].count, 'vide'),
+        'securite' => Array.new(colonnes['securite'].count + colonnes_z['securite'].count, 'vide'),
+        'tri' => Array.new(colonnes['tri'].count, 'vide'),
+        'controle' => Array.new(colonnes['controle'].count, 'vide'),
+        'bienvenue' => []
       }
       Partie.where(evaluation: e).order(:created_at).each do |partie|
         restitution = FabriqueRestitution.instancie partie.id
@@ -76,24 +98,20 @@ namespace :nettoyage do
             situations[partie.situation.nom_technique] << question.libelle
             situations[partie.situation.nom_technique] << reponse.intitule
           end
-        when 'maintenance'
-          ['score_vocabulaire'].each do |metrique|
-            situations[partie.situation.nom_technique] << (partie.cote_z_metriques[metrique] || 'vide')
+        else
+          colonnes[partie.situation.nom_technique]&.each do |metrique|
+            valeur = partie.metriques[metrique]&.to_s || restitution.send(metrique)&.to_s
+            situations[partie.situation.nom_technique] << (valeur || 'vide')
           end
-        when 'livraison'
-          ['score_numeratie', 'score_ccf', 'score_syntaxe_orthographe'].each do |metrique|
-            situations[partie.situation.nom_technique] << (partie.cote_z_metriques[metrique] || 'vide')
-          end
-        when 'objets_trouves'
-          ['score_numeratie', 'score_ccf', 'score_memorisation'].each do |metrique|
-            situations[partie.situation.nom_technique] << (partie.cote_z_metriques[metrique] || 'vide')
+          colonnes_z[partie.situation.nom_technique]&.each do |metrique|
+            situations[partie.situation.nom_technique] << (restitution.cote_z_metriques[metrique] || 'vide')
           end
         end
       end
-      cellues = ['maintenance', 'objets_trouves', 'livraison', 'bienvenue'].map do |situation|
+      valeurs_des_parties = situations.keys.map do |situation|
         situations[situation].join('; ')
       end
-      puts "#{e.campagne&.libelle};#{e.nom};#{e.created_at};" + cellues.join('; ')
+      puts "#{e.campagne&.libelle};#{e.nom};#{e.created_at};" + valeurs_des_parties.join('; ')
     end
   end
 

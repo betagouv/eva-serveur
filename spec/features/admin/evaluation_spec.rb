@@ -53,6 +53,7 @@ describe 'Admin - Evaluation', type: :feature do
       competences = [{ Competence::ORGANISATION_METHODE => Competence::NIVEAU_4 }]
       expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
       allow(restitution_globale).to receive(:scores).and_return({})
+      allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
       path = page.save_page

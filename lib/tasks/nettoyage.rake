@@ -48,43 +48,41 @@ namespace :nettoyage do
     anonymise_structures
   end
 
+  def noms_colonnes(mes, colonnes, colonnes_z)
+    noms = ""
+    noms += "#{mes}: #{colonnes[mes].join("; #{mes}: ")};" unless colonnes[mes].empty?
+    noms += "#{mes}: cote_z_#{colonnes_z[mes].join("; #{mes}: cote_z_")};" unless colonnes_z[mes].empty?
+    noms
+  end
+
   desc 'Extrait les données pour les psychologues'
   task extrait_stats: :environment do
     Rails.logger.level = :warn
     colonnes = {
       'bienvenue' => [],
-      'maintenance' => [],
-      'livraison' => [],
-      'objets_trouves' => [],
-      'inventaire' => [ 'temps_total', 'nombre_ouverture_contenant', 'nombre_essais_validation' ],
-      'securite' => Restitution::Securite::METRIQUES.keys,
-      'tri' => [ 'temps_total', 'nombre_bien_placees', 'nombre_mal_placees' ],
-      'controle' => [ 'nombre_bien_placees', 'nombre_mal_placees', 'nombre_non_triees' ]
+      'maintenance' => Restitution::Maintenance::METRIQUES.keys,
+      'livraison' => Restitution::Livraison::METRIQUES.keys,
+      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys
     }
     colonnes_z = {
       'bienvenue' => [],
-      'maintenance' => ['score_ccf'],
-      'livraison' => ['score_numeratie', 'score_ccf', 'score_syntaxe_orthographe'],
-      'objets_trouves' => ['score_numeratie', 'score_ccf', 'score_memorisation'],
-      'inventaire' => [],
-      'securite' => (Restitution::Securite::METRIQUES.map { |nom, metrique| nom if metrique['type'] == :nombre }).compact,
-      'tri' => [],
-      'controle' => []
+      'maintenance' => Restitution::Maintenance::METRIQUES.keys,
+      'livraison' => Restitution::Livraison::METRIQUES.keys,
+      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys
     }
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
-    puts "campagne;nom evalué·e;date creation de la partie;maintenance: score ccf;OT: score numeratie;OT: score ccf;OT: score mémorisation;livraison: score numeratie;livraison: score ccf;livraison: score syntax orthographe;inventaire: #{colonnes['inventaire'].join(";inventaire: ")};securite: #{colonnes['securite'].join("; securite: ")};securite: cote_z_#{colonnes_z['securite'].join("; securite: cote_z_")};tri: #{colonnes['tri'].join(";tri: ")};controle: #{colonnes['controle'].join(";controle: ")};Bienvenue: toutes les colonnes"
+    entete_colonnes = "campagne;nom evalué·e;date creation de la partie;"
+    colonnes.keys.each do |mes|
+      entete_colonnes += noms_colonnes(mes, colonnes, colonnes_z)
+    end
+    puts entete_colonnes
     evaluations.each do |e|
-      situations = {
-        'maintenance' => Array.new(1, 'vide'),
-        'livraison' => Array.new(3, 'vide'),
-        'objets_trouves' => Array.new(3, 'vide'),
-        'inventaire' => Array.new(colonnes['inventaire'].count, 'vide'),
-        'securite' => Array.new(colonnes['securite'].count + colonnes_z['securite'].count, 'vide'),
-        'tri' => Array.new(colonnes['tri'].count, 'vide'),
-        'controle' => Array.new(colonnes['controle'].count, 'vide'),
-        'bienvenue' => []
-      }
+      situations = {}
+      colonnes.keys.each do |mes|
+        situations[mes] = Array.new(colonnes[mes].count + colonnes_z[mes].count, 'vide')
+      end
+
       Partie.where(evaluation: e).order(:created_at).each do |partie|
         restitution = FabriqueRestitution.instancie partie.id
         next unless restitution.termine?

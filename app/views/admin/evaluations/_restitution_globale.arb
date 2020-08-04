@@ -59,22 +59,6 @@ if can?(:manage, Compte) && !pdf
         end
       end
     end
-
-    h2 'Interprétations'
-    restitution_globale.interpretations_niveau1.each do |competence_niveau|
-      competence = competence_niveau.keys.first
-      niveau = competence_niveau[competence]
-      scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
-      h3 t(:titre, scope: scope)
-      div do
-        if niveau.present?
-          md t(niveau, scope: scope)
-        else
-          md t('admin.restitutions.pas_de_score')
-        end
-      end
-      hr
-    end
   end
 end
 
@@ -133,6 +117,43 @@ div class: 'admin_restitution_globale' do
             else
               div t('.url_competence')
               div url_competence
+            end
+          end
+        end
+      end
+    end
+  end
+
+  div class: 'saut-de-page' do
+    restitution_globale.interpretations_niveau1.each do |competence_niveau|
+      competence = competence_niveau.keys.first
+      niveau = competence_niveau[competence]
+      scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
+
+      div class: 'row' do
+        div class: 'col-1' do
+          if pdf
+            span wicked_pdf_image_tag competence.to_s
+          else
+            span image_tag competence
+          end
+        end
+        div class: 'col-11' do
+          h2 do
+            span t(:titre, scope: scope)
+            span ' : '
+            if competence == :socle_clea
+              span t('admin.restitutions.niveaux_illettrisme.socle_clea.niveau')
+            else
+              span t('admin.restitutions.niveaux_illettrisme.niveau', niveau: niveau&.upcase)
+            end
+          end
+
+          div do
+            if niveau.present?
+              md t(niveau, scope: scope)
+            else
+              md t('admin.restitutions.pas_de_score')
             end
           end
         end

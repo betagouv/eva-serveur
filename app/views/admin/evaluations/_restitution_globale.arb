@@ -63,19 +63,7 @@ if can?(:manage, Compte) && !pdf
 end
 
 div class: 'admin_restitution_globale' do
-  div class: 'en-tete' do
-    div class: 'eva-logo' do
-      span wicked_pdf_image_tag 'eva-logo.svg' if pdf
-    end
-    div class: 'identite' do
-      div class: 'date-restitution' do
-        l restitution_globale.date, format: :restitution
-      end
-      div class: 'nom-evalue' do
-        strong restitution_globale.utilisateur
-      end
-    end
-  end
+  render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
   h2 class: 'text-center titre-classement-competences' do
     span t('.competences_fortes_titre')
@@ -125,6 +113,8 @@ div class: 'admin_restitution_globale' do
   end
 
   div class: 'saut-de-page' do
+    render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+
     restitution_globale.interpretations_niveau1.each do |competence_niveau|
       competence = competence_niveau.keys.first
       niveau = competence_niveau[competence]

@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+div class: 'en-tete-page' do
+  div class: 'eva-logo' do
+    span wicked_pdf_image_tag 'eva-logo.svg'
+  end
+  div class: 'identite' do
+    div class: 'date-restitution' do
+      l restitution_globale.date, format: :restitution
+    end
+    div class: 'nom-evalue' do
+      strong restitution_globale.utilisateur
+    end
+  end
+end

@@ -1,5 +1,9 @@
 @import "variables";
 
+.en-tete-page {
+  display: none;
+}
+
 .admin_restitution_globale, .autopositionnement {
   @media screen {
     #main_content {

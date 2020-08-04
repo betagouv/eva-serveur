@@ -2,7 +2,8 @@
 @import "base";
 
 .admin_restitution_globale {
-  .en-tete {
+  .en-tete-page {
+    display: block;
     background-image: asset-data-url('vague.svg');
     background-size: 100%;
     background-repeat: no-repeat;

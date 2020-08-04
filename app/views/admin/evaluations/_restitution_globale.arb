@@ -142,15 +142,12 @@ div class: 'admin_restitution_globale' do
 
   restitution_globale.restitutions.each do |restitution|
     situation = restitution.situation
-    next if situation.nom_technique == Restitution::Bienvenue::NOM_TECHNIQUE
+    next unless %w[questions livraison].include?(situation.nom_technique)
 
     panel t('.situation', situation: situation.libelle) do
-      begin
-        render situation.nom_technique, restitution: restitution
-      rescue ActionView::MissingTemplate
-        nil
-      end
-      render 'restitution_competences', restitution: restitution
+      render situation.nom_technique, restitution: restitution
+    rescue ActionView::MissingTemplate
+      nil
     end
   end
 end

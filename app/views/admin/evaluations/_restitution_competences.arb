@@ -1,9 +1,0 @@
-# frozen_string_literal: true
-
-div class: "row #{restitution.situation.nom_technique}" do
-  restitution.competences.each do |competence, niveau|
-    div class: rapport_colonne_class do
-      render 'restitution_competence', competence: competence, niveau_evalue: niveau
-    end
-  end
-end

@@ -1,6 +1,0 @@
-# frozen_string_literal: true
-
-div class: rapport_colonne_class do
-  span label
-  span(class: 'badge') { valeur }
-end

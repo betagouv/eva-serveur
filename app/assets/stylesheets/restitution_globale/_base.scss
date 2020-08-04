@@ -4,7 +4,7 @@
   .btn {
     background: rgba($couleur, .2);
   }
-  .badge, .btn.active {
+  .btn.active {
     background: $couleur;
     border-color: $couleur;
   }
@@ -99,18 +99,6 @@
 
   .legende-titre {
     font-size: 20px;
-  }
-
-  .inventaire {
-    @include applique-theme($couleur-inventaire);
-  }
-
-  .controle {
-    @include applique-theme($couleur-controle);
-  }
-
-  .tri {
-    @include applique-theme($couleur-tri);
   }
 
   .questions {

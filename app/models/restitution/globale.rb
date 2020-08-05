@@ -29,6 +29,10 @@ module Restitution
       evaluation.created_at
     end
 
+    def structure
+      evaluation.campagne.compte.structure&.nom
+    end
+
     def scores_niveau2
       @scores_niveau2 ||= Restitution::ScoresNiveau2.new(restitutions.map(&:partie))
     end

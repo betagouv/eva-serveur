@@ -1,9 +1,5 @@
 @import "variables";
 
-.en-tete-page {
-  display: none;
-}
-
 .admin_restitution_globale, .autopositionnement {
   @media screen {
     #main_content {
@@ -92,6 +88,26 @@
           height: 3rem;
         }
       }
+    }
+  }
+
+  .synthese-illettrisme {
+    margin: 1rem 2rem;
+
+    .row {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      margin: 2rem auto 1rem auto;
+    }
+
+    &-illustration {
+      margin-right: 1rem;
+      margin-top: 1.5rem;
+    }
+    &-niveau {
+      font-size: 1rem;
     }
   }
 

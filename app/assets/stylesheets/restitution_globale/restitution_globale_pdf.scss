@@ -2,64 +2,75 @@
 @import "base";
 
 .admin_restitution_globale {
+  width: 1000px;
+
   .en-tete-page {
-    display: block;
     background-image: asset-data-url('vague.svg');
     background-size: 100%;
     background-repeat: no-repeat;
     height: 250px;
-    padding-top: 3.75rem;
-    padding-left: 5rem;
-    line-height: 50px;
-    margin-bottom: 5rem;
+    padding: 3.75rem 5rem 0 5rem;
+    margin-bottom: 4rem;
+
+    .row {
+      display: -webkit-box;
+    }
+
+    .eva-logo {
+      margin-right: 1.5rem;
+    }
+
+    .contexte {
+      text-align: right;
+    }
+
+    .structure, .date-restitution {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.125rem;
+    }
+
+    .structure {
+      color: #FBF9FA;
+    }
+
+    .date-restitution {
+      color: #D6DAEC;
+    }
+
+    .nom-evalue {
+      strong {
+        font-size: 2rem;
+        vertical-align: bottom;
+      }
+      color: #FBF9FA;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 2.25rem;
+    }
   }
 
-  .eva-logo {
-    float: left;
-    width: 7.5rem;
-    height: 12.5rem;
-  }
+  .synthese-illettrisme {
+    &-illustration {
+      margin-top: 0;
+      margin-right: 2rem;
 
-  .identite {
-    padding-top: 1rem;
-  }
-
-  .date-restitution {
-    color: #D6DAEC;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.125rem;
-    line-height: 12px;
-  }
-
-  .nom-evalue {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 2.25rem;
-    color: #FBF9FA;
+      img {
+        width: 5rem;
+      }
+    }
   }
 
   .row {
-    display: -webkit-box;
-    width: 1000px;
     page-break-inside: avoid;
-    .col-4, .col-6, .competences-identifiees {
-      height: 100%;
-      vertical-align: top;
+    .identification-competence, .description-competence, .competences-identifiees {
       display: inline-block;
-    }
-    .col-4 {
-      width: 20.6rem;
-      min-width: 18.75rem;
     }
     .competences-identifiees {
       width: 100%;
 
-      .col-6 {
-        width: 31.2rem;
-      }
-
       .identification-competence {
+        vertical-align: top;
         margin-top: 1rem;
       }
 

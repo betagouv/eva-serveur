@@ -1,15 +1,5 @@
 @import "variables";
 
-@mixin applique-theme($couleur) {
-  .btn {
-    background: rgba($couleur, .2);
-  }
-  .btn.active {
-    background: $couleur;
-    border-color: $couleur;
-  }
-}
-
 .admin_restitution_globale, .autopositionnement {
   @media screen {
     #main_content {
@@ -25,17 +15,6 @@
 
   h2 {
     margin: 2rem auto;
-    .btn {
-      border-radius: 1rem;
-      background: $couleur-fond-principale;
-      border-color: $couleur-fond-principale;
-      color: $couleur-texte;
-      font-size: 1.5rem;
-      font-weight: bold;
-      padding: 1.125rem 1.5rem;
-      color-adjust: exact;
-    }
-
   }
 
   h3 {
@@ -49,34 +28,6 @@
 
   .panel {
     background-color: white;
-  }
-
-  .badge {
-    color: white;
-    border-radius: .5rem;
-    font-size: 1rem;
-    font-weight: normal;
-    min-width: 3.75rem;
-    color-adjust: exact;
-  }
-
-  .btn {
-    color: white;
-    border-radius: $border-radius;
-    color-adjust: exact;
-    text-shadow: none;
-  }
-
-  .btn-group {
-    box-shadow: inset 0px 0px 0px 1px #ffffff !important;
-    border-radius: $border-radius;
-    padding: 1px;
-
-    .btn {
-      padding: 0rem 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1.125rem;
-    }
   }
 
   .nom-competence {
@@ -99,10 +50,6 @@
 
   .legende-titre {
     font-size: 20px;
-  }
-
-  .questions {
-    @include applique-theme($couleur-questions);
   }
 
   .competences-identifiees {

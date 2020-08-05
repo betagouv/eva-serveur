@@ -22,6 +22,23 @@ describe Restitution::Globale do
     it { expect(restitution_globale.date).to eq(date) }
   end
 
+  describe "#structure retourne le nom de la structure où a été passé l'évaluation" do
+    let(:restitutions) { [double] }
+    let(:structure) { double(nom: 'Mission locale modiale') }
+    let(:compte) { double(structure: structure) }
+    let(:campagne) { double(compte: compte) }
+    let(:evaluation) { double(campagne: campagne) }
+    it { expect(restitution_globale.structure).to eq('Mission locale modiale') }
+  end
+
+  describe "#structure s'il n'y a pas de structure pour le compte" do
+    let(:restitutions) { [double] }
+    let(:compte) { double(structure: nil) }
+    let(:campagne) { double(compte: compte) }
+    let(:evaluation) { double(campagne: campagne) }
+    it { expect(restitution_globale.structure).to eq(nil) }
+  end
+
   describe '#efficience est la moyenne des efficiences' do
     context "sans restitution c'est incalculable" do
       let(:restitutions) { [] }

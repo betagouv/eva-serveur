@@ -144,10 +144,6 @@ div class: 'admin_restitution_globale' do
     situation = restitution.situation
     next unless %w[questions livraison].include?(situation.nom_technique)
 
-    panel t('.situation', situation: situation.libelle) do
-      render situation.nom_technique, restitution: restitution
-    rescue ActionView::MissingTemplate
-      nil
-    end
+    render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
   end
 end

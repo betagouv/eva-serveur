@@ -14,6 +14,7 @@ fr:
         nombre_essais: Nbre d'essais
         nombre_ouverture_contenant: Nbre d'ouverture de contenants
       questions:
+        situation: 'Situation %{situation}'
         abstention: Ne sait pas
         bon: Correct
         mauvais: Erreur
@@ -21,7 +22,6 @@ fr:
         <<: *commun
         reste_plateau: Reste plateau
       restitution_globale:
-        situation: 'Situation %{situation}'
         competences_fortes_titre: "Classement eva de vos compétences"
         legende_titre: "(de la plus forte à la moins forte)"
         url_competence: 'Détail et liste des métiers associés :'
@@ -70,6 +70,7 @@ fr:
           auto_positionnement: Auto-positionnement
           restitutions: Restitutions
     restitutions:
+      reponse_expression_ecrite: "Reponse donnée à la question '%{question}' :"
       evaluation:
         en_cours: En cours
         temps: Temps

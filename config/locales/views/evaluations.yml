@@ -24,7 +24,7 @@ fr:
       restitution_globale:
         competences_fortes_titre: "Classement eva de vos compétences"
         legende_titre: "(de la plus forte à la moins forte)"
-        url_competence: 'Détail et liste des métiers associés :'
+        url_competence: 'Détail et liste des métiers associés :'
       restitution_competence:
         indetermine: non obs.
         1: 1
@@ -149,7 +149,7 @@ fr:
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant
       pas_de_score: |
-        Votre score n'a pas pu être calculé. Les raisons peuvent être les suivantes :
+        Votre score n'a pas pu être calculé. Les raisons peuvent être les suivantes :
 
         - vous avez abandonné à un ou plusieurs mini-jeux,
         - vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous-vous êtes par exemple absenté quelques minutes),
@@ -225,7 +225,7 @@ fr:
 
             **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
-          titre: Vos compétences en matématiques
+          titre: Vos compétences en mathématiques
           x1: |
             Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
 
@@ -239,7 +239,7 @@ fr:
 
             **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea:
-          titre: Vos compétences en français et matématiques
+          titre: Vos compétences en français et mathématiques
           niveau: Socle Cléa en cours d'acquisition
           atteint: |
             Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.

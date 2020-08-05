@@ -131,11 +131,13 @@ div class: 'admin_restitution_globale' do
         div class: 'col-11' do
           h2 do
             span t(:titre, scope: scope)
-            span ' : '
-            if competence == :socle_clea
-              span t('admin.restitutions.niveaux_illettrisme.socle_clea.niveau')
-            else
-              span t('admin.restitutions.niveaux_illettrisme.niveau', niveau: niveau&.upcase)
+            if niveau.present?
+              span ' : '
+              if competence == :socle_clea
+                span t('admin.restitutions.niveaux_illettrisme.socle_clea.niveau')
+              else
+                span t('admin.restitutions.niveaux_illettrisme.niveau', niveau: niveau&.upcase)
+              end
             end
           end
 

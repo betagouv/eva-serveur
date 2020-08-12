@@ -51,6 +51,18 @@
   }
 
   .synthese-illettrisme {
+    .row {
+      display: -webkit-box;
+    }
+
+    .col {
+      -webkit-box-flex: 1;
+    }
+
+    .col-auto {
+      -webkit-box-flex: 0;
+    }
+
     &-illustration {
       margin-top: 0;
       margin-right: 2rem;
@@ -63,22 +75,23 @@
 
   .row {
     page-break-inside: avoid;
-    .identification-competence, .description-competence, .competences-identifiees {
-      display: inline-block;
+  }
+
+  .identification-competence, .description-competence, .competences-identifiees {
+    display: inline-block;
+  }
+  .competences-identifiees {
+    width: 100%;
+
+    .identification-competence {
+      vertical-align: top;
+      margin-top: 1rem;
     }
-    .competences-identifiees {
-      width: 100%;
 
-      .identification-competence {
-        vertical-align: top;
-        margin-top: 1rem;
-      }
-
-      .description-competence {
-        margin-top: 1rem;
-        margin-right: 1rem;
-        width: 28.1rem;
-      }
+    .description-competence {
+      margin-top: 1rem;
+      margin-right: 1rem;
+      width: 28.1rem;
     }
   }
 

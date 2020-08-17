@@ -39,20 +39,17 @@
     }
 
     .nom-evalue {
-      strong {
-        font-size: 2rem;
-        vertical-align: bottom;
-      }
       color: #FBF9FA;
-      font-style: normal;
+      font-size: 2rem;
+      vertical-align: bottom;
       font-weight: bold;
-      font-size: 2.25rem;
     }
   }
 
   .synthese-illettrisme {
     .row {
       display: -webkit-box;
+      margin-bottom: 2rem;
     }
 
     .col {
@@ -64,7 +61,6 @@
     }
 
     &-illustration {
-      margin-top: 0;
       margin-right: 2rem;
 
       img {

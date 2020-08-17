@@ -13,14 +13,6 @@
 
   .header, .title_bar { display: none; }
 
-  h2 {
-    margin: 2rem auto;
-  }
-
-  h3 {
-    text-align: center;
-  }
-
   #active_admin_content {
     border-top: none;
     padding-top: 0;
@@ -94,18 +86,6 @@
   .synthese-illettrisme {
     margin: 1rem 2rem;
 
-    .row {
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      margin: 2rem auto 1rem auto;
-    }
-
-    &-illustration {
-      margin-right: 1rem;
-      margin-top: 1.5rem;
-    }
     &-niveau {
       font-size: 1rem;
     }

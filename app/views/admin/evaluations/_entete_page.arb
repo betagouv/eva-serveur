@@ -8,7 +8,7 @@ if pdf
           span wicked_pdf_image_tag 'eva-logo.svg'
         end
         span class: 'nom-evalue' do
-          strong restitution_globale.utilisateur
+          restitution_globale.utilisateur
         end
       end
       div class: 'col col-4 contexte' do

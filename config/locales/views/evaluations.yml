@@ -209,9 +209,10 @@ fr:
             Numératie stanine 3 (texte provisoire)
 
       niveaux_illettrisme:
+        titre: Vos compétences en français et mathématiques
         niveau: 'Niveau %{niveau}'
         litteratie:
-          titre: Vos compétences en français
+          titre: Français
           a1: |
             Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
 
@@ -225,7 +226,7 @@ fr:
 
             **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
-          titre: Vos compétences en mathématiques
+          titre: Mathématiques
           x1: |
             Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
 
@@ -239,8 +240,7 @@ fr:
 
             **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea:
-          titre: Vos compétences en français et mathématiques
-          niveau: Socle Cléa en cours d'acquisition
+          titre: Socle Cléa en cours d'acquisition
           atteint: |
             Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 

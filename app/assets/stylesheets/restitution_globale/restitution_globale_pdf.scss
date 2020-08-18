@@ -49,7 +49,6 @@
   .synthese-illettrisme {
     .row {
       display: -webkit-box;
-      margin-bottom: 2rem;
     }
 
     .col {
@@ -61,8 +60,6 @@
     }
 
     &-illustration {
-      margin-right: 2rem;
-
       img {
         width: 5rem;
       }
@@ -101,9 +98,6 @@
     .btn {
       font-size: 0.75rem;
     }
-  }
-  h3 {
-    margin: 2rem;
   }
 
   .panel {

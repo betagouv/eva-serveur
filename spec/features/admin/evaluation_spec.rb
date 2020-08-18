@@ -57,22 +57,22 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       it 'affiche le niveau litteratie et numératie' do
-        expect(restitution_globale).to receive(:interpretations_niveau1)
+        allow(restitution_globale).to receive(:interpretations_niveau1)
           .and_return([{ litteratie: :a1 }, { numeratie: :x1 }])
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-        expect(page).to have_content 'Niveau A1'
-        expect(page).to have_content 'Niveau X1'
+        expect(page).to have_xpath("//img[@alt='Niveau A1']")
+        expect(page).to have_xpath("//img[@alt='Niveau X1']")
       end
 
       it "affiche que le score n'a pas pu être calculé" do
-        expect(restitution_globale).to receive(:interpretations_niveau1)
+        allow(restitution_globale).to receive(:interpretations_niveau1)
           .and_return([{ litteratie: nil }])
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
         expect(page).to have_content "Votre score n'a pas pu être calculé"
       end
 
       it "Socle cléa en cours d'acquisition" do
-        expect(restitution_globale).to receive(:interpretations_niveau1)
+        allow(restitution_globale).to receive(:interpretations_niveau1)
           .and_return([{ socle_clea: :atteint }])
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
         expect(page).to have_content 'Socle Cléa'

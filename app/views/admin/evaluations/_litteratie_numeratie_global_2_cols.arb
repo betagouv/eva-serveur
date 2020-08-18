@@ -1,0 +1,30 @@
+# frozen_string_literal: true
+
+interpretations.each do |competence_niveau|
+  competence = competence_niveau.keys.first
+  niveau = competence_niveau[competence]
+  scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
+
+  div class: 'col mx-4' do
+    div class: 'synthese-illettrisme-illustration mb-4' do
+      if pdf
+        span wicked_pdf_image_tag competence.to_s
+        span wicked_pdf_image_tag "niveau#{niveau.upcase}" if niveau.present?
+      else
+        span image_tag competence
+        span image_tag "niveau#{niveau.upcase}", alt: "Niveau #{niveau.upcase}" if niveau.present?
+      end
+    end
+    h2 class: 'mb-3' do
+      div t(:titre, scope: scope)
+    end
+
+    div do
+      if niveau.present?
+        md t(niveau, scope: scope)
+      else
+        md t('admin.restitutions.pas_de_score')
+      end
+    end
+  end
+end

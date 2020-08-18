@@ -84,10 +84,13 @@
   }
 
   .synthese-illettrisme {
-    margin: 1rem 2rem;
-
     &-niveau {
       font-size: 1rem;
+    }
+    &-illustration {
+      img {
+        margin-right: 0.5rem;
+      }
     }
   }
 

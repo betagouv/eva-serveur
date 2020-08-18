@@ -55,6 +55,37 @@ namespace :nettoyage do
     noms
   end
 
+  desc 'Extrait les données pour calcule le taux de bonne réponses Livraison et Objets trouvés pour les psychologues'
+  task extrait_questions: :environment do
+    Rails.logger.level = :warn
+
+    puts "MES;meta-competence;question;succes"
+
+    # Objet trouves
+    sessions_ids_objets_trouves = Partie.joins(:situation).where(situations: {nom_technique: :objets_trouves }).select(:session_id)
+    evenements = Evenement.where(nom: :reponse)
+      .where("donnees ->> 'metacompetence' = 'numeratie'")
+      .where(session_id: sessions_ids_objets_trouves)
+    evenements.each do |evt|
+      puts "objets_trouves;#{evt.donnees['metacompetence']};#{evt.donnees['question']};#{evt.donnees['succes']}"
+    end
+
+    # Livraison
+    sessions_ids_livraison = Partie.joins(:situation).where(situations: {nom_technique: :livraison }).select(:session_id)
+    questions_numeratie = Question.where(metacompetence: 0).select(:id).map { |q| q.id }
+    evenements = Evenement.where(nom: :reponse)
+      .where("donnees ->> 'question' in ('#{questions_numeratie.join("','")}')")
+      .where(session_id: sessions_ids_livraison)
+    evenements.each do |evt|
+      question = Question.find(evt.donnees['question'])
+      metacompetence = question.metacompetence
+      question = question.libelle
+      reponse = Choix.find(evt.donnees['reponse'])
+      succes = reponse.type_choix == "bon"
+      puts "livraison;#{metacompetence};#{question};#{succes}"
+    end
+  end
+
   desc 'Extrait les données pour les psychologues'
   task extrait_stats: :environment do
     Rails.logger.level = :warn

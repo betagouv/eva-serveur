@@ -117,44 +117,20 @@ div class: 'admin_restitution_globale' do
   div class: 'saut-de-page' do
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: 'synthese-illettrisme mt-5' do
-      restitution_globale.interpretations_niveau1.each do |competence_niveau|
-        competence = competence_niveau.keys.first
-        niveau = competence_niveau[competence]
-        scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
+    div class: 'synthese-illettrisme mt-5 mx-4' do
+      h2 class: 'text-center mb-5' do
+        span t('admin.restitutions.niveaux_illettrisme.titre')
+      end
 
-        div class: 'row mb-4' do
-          div class: 'col col-auto' do
-            div class: 'synthese-illettrisme-illustration' do
-              if pdf
-                span wicked_pdf_image_tag competence.to_s
-              else
-                span image_tag competence
-              end
-            end
-          end
-          div class: 'col' do
-            h2 class: 'mb-3' do
-              div t(:titre, scope: scope)
-              if niveau.present?
-                div class: 'synthese-illettrisme-niveau' do
-                  if competence == :socle_clea
-                    span t('admin.restitutions.niveaux_illettrisme.socle_clea.niveau')
-                  else
-                    span t('admin.restitutions.niveaux_illettrisme.niveau', niveau: niveau.upcase)
-                  end
-                end
-              end
-            end
-
-            div do
-              if niveau.present?
-                md t(niveau, scope: scope)
-              else
-                md t('admin.restitutions.pas_de_score')
-              end
-            end
-          end
+      div class: 'row mb-4' do
+        if restitution_globale.interpretations_niveau1.size == 1
+          render 'litteratie_numeratie_global_1_col',
+                 interpretations: restitution_globale.interpretations_niveau1,
+                 pdf: pdf
+        else
+          render 'litteratie_numeratie_global_2_cols',
+                 interpretations: restitution_globale.interpretations_niveau1,
+                 pdf: pdf
         end
       end
     end

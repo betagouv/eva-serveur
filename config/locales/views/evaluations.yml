@@ -70,7 +70,7 @@ fr:
           auto_positionnement: Auto-positionnement
           restitutions: Restitutions
     restitutions:
-      reponse_expression_ecrite: "Reponse donnée à la question '%{question}' :"
+      reponse_expression_ecrite: "Votre réponse à la question '%{question}' :"
       evaluation:
         en_cours: En cours
         temps: Temps

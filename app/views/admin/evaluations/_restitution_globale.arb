@@ -21,22 +21,6 @@ if can?(:manage, Compte) && !pdf
         end
       end
     end
-
-    h2 'Interprétations'
-    restitution_globale.interpretations_niveau2.each do |competence_niveau|
-      competence = competence_niveau.keys.first
-      niveau = competence_niveau[competence]
-      scope = "admin.restitutions.interpretations_niveau2.#{competence}"
-      h3 t(:titre, scope: scope)
-      div do
-        if niveau.present?
-          md t(niveau, scope: scope)
-        else
-          md t('admin.restitutions.pas_de_score')
-        end
-      end
-      hr
-    end
   end
 
   panel 'Scores niveau 1' do
@@ -131,6 +115,26 @@ div class: 'admin_restitution_globale' do
           render 'litteratie_numeratie_global_2_cols',
                  interpretations: restitution_globale.interpretations_niveau1,
                  pdf: pdf
+        end
+      end
+
+      div class: 'row mb-4' do
+        div class: 'col mx-4' do
+          restitution_globale.interpretations_litteratie_niveau2.each do |competence_niveau|
+            competence = competence_niveau.keys.first
+            niveau = competence_niveau[competence]
+            scope = "admin.restitutions.interpretations_niveau2.#{competence}"
+            h3 t(:titre, scope: scope)
+            div do
+              if niveau.present?
+                md t(niveau, scope: scope)
+              else
+                md t('admin.restitutions.pas_de_score')
+              end
+            end
+          end
+        end
+        div class: 'col mx-4' do
         end
       end
     end

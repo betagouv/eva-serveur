@@ -51,12 +51,16 @@ module Restitution
 
     def interpretations_niveau1
       @interpretations_niveau1 ||=
-        Illettrisme::InterpreteurNiveau1.new(scores_niveau1_standardises.calcule).interpretations
+        Illettrisme::InterpreteurNiveau1
+        .new(scores_niveau1_standardises.calcule)
+        .interpretations(Restitution::Illettrisme::InterpreteurNiveau1::PALIERS)
     end
 
-    def interpretations_niveau2
-      @interpretations_niveau2 ||=
-        Illettrisme::InterpreteurNiveau2.new(scores_niveau2_standardises.calcule).interpretations
+    def interpretations_litteratie_niveau2
+      @interpretations_litteratie_niveau2 ||=
+        Illettrisme::InterpreteurNiveau2
+        .new(scores_niveau2_standardises.calcule)
+        .interpretations(Restitution::Illettrisme::InterpreteurNiveau2::PALIERS_LITTERATIE)
     end
 
     def efficience

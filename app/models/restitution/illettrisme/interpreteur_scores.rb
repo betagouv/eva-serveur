@@ -7,23 +7,25 @@ module Restitution
         @scores = scores
       end
 
-      def interpretations
-        interpretations = self.class::PALIERS.keys.map { |score| { score => interprete(score) } }
+      def interpretations(competences)
+        interpretations = competences.map do |competence, niveaux|
+          { competence => interprete(competence, niveaux) }
+        end
         applique_exceptions!(interpretations)
 
         interpretations
       end
 
-      def interprete(competence)
+      def interprete(competence, niveaux)
         score = @scores[competence]
         return if score.blank?
 
         if score < -1
-          self.class::PALIERS[competence][0]
+          niveaux[0]
         elsif score.negative?
-          self.class::PALIERS[competence][1]
+          niveaux[1]
         else
-          self.class::PALIERS[competence][2]
+          niveaux[2]
         end
       end
 

@@ -56,30 +56,51 @@ describe 'Admin - Evaluation', type: :feature do
         expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end
 
-      it 'affiche le niveau litteratie et numératie' do
-        allow(restitution_globale).to receive(:interpretations_niveau1)
-          .and_return([{ litteratie: :a1 }, { numeratie: :x1 }])
-        visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-        expect(page).to have_xpath("//img[@alt='Niveau A1']")
-        expect(page).to have_xpath("//img[@alt='Niveau X1']")
+      describe 'affiche le niveau global de litteratie et numératie' do
+        before do
+          allow(restitution_globale).to receive(:interpretations_litteratie_niveau2).and_return([])
+        end
+
+        it 'affiche deux niveaux different pour litteratie et numératie' do
+          allow(restitution_globale).to receive(:interpretations_niveau1)
+            .and_return([{ litteratie: :a1 }, { numeratie: :x1 }])
+          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+          expect(page).to have_xpath("//img[@alt='Niveau A1']")
+          expect(page).to have_xpath("//img[@alt='Niveau X1']")
+        end
+
+        it "affiche que le score n'a pas pu être calculé" do
+          allow(restitution_globale).to receive(:interpretations_niveau1)
+            .and_return([{ litteratie: nil }])
+          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+          expect(page).to have_content "Votre score n'a pas pu être calculé"
+        end
+
+        it "Socle cléa en cours d'acquisition" do
+          allow(restitution_globale).to receive(:interpretations_niveau1)
+            .and_return([{ socle_clea: :atteint }])
+          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+          expect(page).to have_content 'Socle Cléa'
+        end
       end
 
-      it "affiche que le score n'a pas pu être calculé" do
-        allow(restitution_globale).to receive(:interpretations_niveau1)
-          .and_return([{ litteratie: nil }])
-        visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-        expect(page).to have_content "Votre score n'a pas pu être calculé"
-      end
+      describe 'affiche le niveau des metacompétence' do
+        before do
+          allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
+        end
 
-      it "Socle cléa en cours d'acquisition" do
-        allow(restitution_globale).to receive(:interpretations_niveau1)
-          .and_return([{ socle_clea: :atteint }])
-        visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-        expect(page).to have_content 'Socle Cléa'
+        it 'de litteratie' do
+          allow(restitution_globale).to receive(:interpretations_litteratie_niveau2)
+            .and_return([{ score_ccf: :niveau1 }])
+          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+          expect(page).to have_content 'Connaissance et compréhension du français'
+          expect(page).to have_content 'des progrès à faire'
+        end
       end
 
       it "affiche l'évaluation en pdf" do
         allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
+        allow(restitution_globale).to receive(:interpretations_litteratie_niveau2).and_return([])
         allow(restitution_globale).to receive(:structure).and_return('Mission locale Paris')
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
         path = page.save_page

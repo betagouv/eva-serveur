@@ -2,19 +2,15 @@
 @import "base";
 
 .admin_restitution_globale {
-  width: 1000px;
+  width: 1100px;
 
   .en-tete-page {
     background-image: asset-data-url('vague.svg');
     background-size: 100%;
     background-repeat: no-repeat;
-    height: 250px;
+    height: 300px;
     padding: 3.75rem 5rem 0 5rem;
     margin-bottom: 4rem;
-
-    .row {
-      display: -webkit-box;
-    }
 
     .eva-logo {
       margin-right: 1.5rem;
@@ -47,17 +43,7 @@
   }
 
   .synthese-illettrisme {
-    .row {
-      display: -webkit-box;
-    }
-
-    .col {
-      -webkit-box-flex: 1;
-    }
-
-    .col-auto {
-      -webkit-box-flex: 0;
-    }
+    margin-bottom: 5rem;
 
     &-illustration {
       img {
@@ -68,6 +54,15 @@
 
   .row {
     page-break-inside: avoid;
+    display: -webkit-box;
+  }
+
+  .col {
+    -webkit-box-flex: 1;
+  }
+
+  .col-auto {
+    -webkit-box-flex: 0;
   }
 
   .identification-competence, .description-competence, .competences-identifiees {

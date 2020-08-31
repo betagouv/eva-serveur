@@ -9,7 +9,9 @@ restitution_globale.interpretations_niveau2(categorie).each do |competence_nivea
   competence = competence_niveau.keys.first
   niveau = competence_niveau[competence]
   scope = "admin.restitutions.interpretations_niveau2.#{competence}"
-  h3 t(:titre, scope: scope)
+  h3 class: 'mt-5 mb-3' do
+    t(:titre, scope: scope)
+  end
   div do
     if niveau.present?
       md t(niveau, scope: scope)

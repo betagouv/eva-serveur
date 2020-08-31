@@ -101,12 +101,12 @@ div class: 'admin_restitution_globale' do
   div class: 'saut-de-page' do
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: 'synthese-illettrisme mt-5 mx-4' do
+    div class: 'synthese-illettrisme' do
       h2 class: 'text-center mb-5' do
         span t('admin.restitutions.niveaux_illettrisme.titre')
       end
 
-      div class: 'row mb-4' do
+      div class: 'row' do
         if restitution_globale.interpretations_niveau1.size == 1
           render 'litteratie_numeratie_global_1_col',
                  interpretations: restitution_globale.interpretations_niveau1,
@@ -117,7 +117,9 @@ div class: 'admin_restitution_globale' do
                  pdf: pdf
         end
       end
+    end
 
+    div class: 'mx-4' do
       div class: 'row mb-4' do
         div class: 'col mx-4' do
           render 'metacompetences', categorie: :litteratie

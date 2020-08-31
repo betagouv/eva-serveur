@@ -9,6 +9,18 @@
   @import "bootstrap_minimal";
 
   color: $couleur-texte;
+
+  h2 {
+    color: $couleur-texte-sombre;
+    font-weight: bold;
+  }
+
+  h3 {
+    color: $couleur-principale;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   .header, .title_bar { display: none; }
@@ -28,7 +40,6 @@
 
   .description-competence {
     font-size: .75rem;
-    color: adjust-color($couleur-texte, $alpha: -0.5);
     a {
       text-decoration: none;
       color: adjust-color($couleur-liens, $alpha: -0.5);
@@ -41,7 +52,9 @@
   }
 
   .legende-titre {
-    font-size: 20px;
+    font-size: 1rem;
+    color: $couleur-texte;
+    font-weight: normal;
   }
 
   .competences-identifiees {
@@ -51,6 +64,7 @@
     margin: 0 0 1.5rem 0;
 
     .identification-competence {
+      color: $couleur-texte-sombre;
       .jauge {
         height: 100%;
         width: 40%;
@@ -84,6 +98,8 @@
   }
 
   .synthese-illettrisme {
+    margin: 3rem 1.5rem 2rem 1.5rem;
+
     &-niveau {
       font-size: 1rem;
     }

@@ -56,11 +56,15 @@ module Restitution
         .interpretations(Restitution::Illettrisme::InterpreteurNiveau1::PALIERS)
     end
 
-    def interpretations_litteratie_niveau2
-      @interpretations_litteratie_niveau2 ||=
-        Illettrisme::InterpreteurNiveau2
+    def interpretations_niveau2(categorie)
+      paliers = if categorie == :litteratie
+                  Restitution::Illettrisme::InterpreteurNiveau2::PALIERS_LITTERATIE
+                else
+                  Restitution::Illettrisme::InterpreteurNiveau2::PALIERS_NUMERATIE
+                end
+      Illettrisme::InterpreteurNiveau2
         .new(scores_niveau2_standardises.calcule)
-        .interpretations(Restitution::Illettrisme::InterpreteurNiveau2::PALIERS_LITTERATIE)
+        .interpretations(paliers)
     end
 
     def efficience

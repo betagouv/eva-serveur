@@ -120,21 +120,10 @@ div class: 'admin_restitution_globale' do
 
       div class: 'row mb-4' do
         div class: 'col mx-4' do
-          restitution_globale.interpretations_litteratie_niveau2.each do |competence_niveau|
-            competence = competence_niveau.keys.first
-            niveau = competence_niveau[competence]
-            scope = "admin.restitutions.interpretations_niveau2.#{competence}"
-            h3 t(:titre, scope: scope)
-            div do
-              if niveau.present?
-                md t(niveau, scope: scope)
-              else
-                md t('admin.restitutions.pas_de_score')
-              end
-            end
-          end
+          render 'metacompetences', categorie: :litteratie
         end
         div class: 'col mx-4' do
+          render 'metacompetences', categorie: :numeratie
         end
       end
     end

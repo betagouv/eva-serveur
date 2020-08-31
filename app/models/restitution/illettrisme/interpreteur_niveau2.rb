@@ -8,6 +8,10 @@ module Restitution
         score_syntaxe_orthographe: %i[niveau1 niveau2 niveau3],
         score_memorisation: %i[niveau1 niveau2 niveau3]
       }.freeze
+
+      PALIERS_NUMERATIE = {
+        score_numeratie: %i[niveau1 niveau2 niveau3]
+      }.freeze
     end
   end
 end

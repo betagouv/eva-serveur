@@ -7,12 +7,13 @@ interpretations.each do |competence_niveau|
 
   div class: 'col mx-4' do
     div class: 'synthese-illettrisme-illustration mb-4' do
+      code_niveau = t("#{niveau}.code", scope: scope)
       if pdf
         span wicked_pdf_image_tag competence.to_s
-        span wicked_pdf_image_tag "niveau#{niveau.upcase}" if niveau.present?
+        span wicked_pdf_image_tag "niveau#{code_niveau}" if niveau.present?
       else
         span image_tag competence
-        span image_tag "niveau#{niveau.upcase}", alt: "Niveau #{niveau.upcase}" if niveau.present?
+        span image_tag "niveau#{code_niveau}", alt: "Niveau #{code_niveau}" if niveau.present?
       end
     end
     h2 class: 'mb-3' do
@@ -21,7 +22,7 @@ interpretations.each do |competence_niveau|
 
     div do
       if niveau.present?
-        md t(niveau, scope: scope)
+        md t("#{niveau}.description", scope: scope)
       else
         md t('admin.restitutions.pas_de_score')
       end

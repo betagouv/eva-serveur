@@ -12,37 +12,37 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint' do
       let(:score_litteratie) { 0 }
       let(:score_numeratie) { 0 }
-      it { expect(subject.interpretations).to eq([{ socle_clea: :atteint }]) }
+      it { expect(subject.interpretations).to eq([{ socle_clea: :description }]) }
     end
 
     context 'litteratie < -1' do
       let(:score_litteratie) { -1.01 }
-      it { expect(subject.interpretations).to include({ litteratie: :a1 }) }
+      it { expect(subject.interpretations).to include({ litteratie: :palier1 }) }
     end
 
     context '-1 <= litteratie < 0' do
       let(:score_litteratie) { -1 }
-      it { expect(subject.interpretations).to include({ litteratie: :a2 }) }
+      it { expect(subject.interpretations).to include({ litteratie: :palier2 }) }
     end
 
     context 'litteratie >= 0' do
       let(:score_litteratie) { 0 }
-      it { expect(subject.interpretations).to include({ litteratie: :b1 }) }
+      it { expect(subject.interpretations).to include({ litteratie: :palier3 }) }
     end
 
     context 'numeratie < -1' do
       let(:score_numeratie) { -1.01 }
-      it { expect(subject.interpretations).to include({ numeratie: :x1 }) }
+      it { expect(subject.interpretations).to include({ numeratie: :palier1 }) }
     end
 
     context '-1 <= numeratie < 0' do
       let(:score_numeratie) { -1 }
-      it { expect(subject.interpretations).to include({ numeratie: :x2 }) }
+      it { expect(subject.interpretations).to include({ numeratie: :palier2 }) }
     end
 
     context 'numeratie >= 0' do
       let(:score_numeratie) { 0 }
-      it { expect(subject.interpretations).to include({ numeratie: :y1 }) }
+      it { expect(subject.interpretations).to include({ numeratie: :palier3 }) }
     end
 
     context 'pas de score' do

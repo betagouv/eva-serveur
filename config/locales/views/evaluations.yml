@@ -159,53 +159,53 @@ fr:
       interpretations_niveau2:
         score_ccf:
           titre: Connaissance et compréhension du français
-          niveau1: |
+          palier1: |
             Vous avez **des progrès à faire** en ce qui concerne la connaissance des mots français et leur compréhension.
             Actuellement, il est possible que vous ayez des difficultés à comprendre vos interlocuteurs ou à lire des documents.
             N’hésitez pas à vous former pour progresser sur ce point !
-          niveau2: |
+          palier2: |
             Vous avez une **assez bonne** connaissance et compréhension des mots français.
             Vous comprenez certainement bien vos interlocuteurs et les documents écrits, mais vous pouvez passer à côté d’informations importantes.
             N’hésitez pas à vous former pour progresser sur ce point !
-          niveau3: |
+          palier3: |
             Vous avez une **bonne** compréhension du français et pouvez comprendre sans problème les consignes de votre employeur, même les plus complexes.
             Pas de besoin de formation pour cette compétence, bravo !
 
         score_syntaxe_orthographe:
           titre: Grammaire et orthographe
-          niveau1: |
+          palier1: |
             Vous avez **des progrès à faire** en orthographe et grammaire.
             Actuellement, il est possible que vos interlocuteurs aient des difficultés à vous comprendre.
             N’hésitez pas à vous former pour progresser sur ce point !
-          niveau2: |
+          palier2: |
             Vous avez un **assez bon niveau** en orthographe et grammaire, mais il vous est encore possible de progresser.
             Vos écrits ont de bonnes chances d’être bien compris, mais on pourrait vous reprocher de ne pas être assez clair·e.
             N’hésitez pas à vous former pour progresser sur cette compétence !
-          niveau3: |
+          palier3: |
             Vous avez un **bon niveau** d’orthographe et grammaire.
             Vous pouvez produire des écrits professionnels compréhensibles par tout le monde.
             Pas de besoin de formation pour cette compétence !
 
         score_memorisation:
           titre: Utilisation des informations à disposition
-          niveau1: |
+          palier1: |
             Vous avez **des progrès à faire** pour retenir et utiliser des informations qui vous ont été données.
             Il est possible que vous rencontriez des difficultés dans votre activité professionnelle, mais vous pouvez progresser !
-          niveau2: |
+          palier2: |
             Vous réussissez **assez bien** à retenir et utiliser des informations qui vous ont été données.
             Vous avez de bonnes chances de retenir les informations pour ensuite les utiliser en contexte professionnel, mais vous pouvez encore vous améliorer.
             N’hésitez pas à en parler à votre conseiller !
-          niveau3: |
+          palier3: |
             Vous parvenez **très bien** à retenir et utiliser des informations qui vous ont été données.
             Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
 
         score_numeratie:
           titre: Numératie
-          niveau1: |
+          palier1: |
             Numératie stanine 1 (texte provisoire)
-          niveau2: |
+          palier2: |
             Numératie stanine 2 (texte provisoire)
-          niveau3: |
+          palier3: |
             Numératie stanine 3 (texte provisoire)
 
       niveaux_illettrisme:
@@ -213,35 +213,47 @@ fr:
         niveau: 'Niveau %{niveau}'
         litteratie:
           titre: Français
-          a1: |
-            Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
+          palier1:
+            code: 'A1'
+            description: |
+              Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
 
-            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
-          a2: |
-            Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
+              **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
+          palier2:
+            code: 'A2'
+            description: |
+              Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
-            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
-          b1: |
-            Votre score indique que vous maîtrisez tout à fait le français, bravo !
+              **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
+          palier3:
+            code: 'B1'
+            description:  |
+              Votre score indique que vous maîtrisez tout à fait le français, bravo !
 
-            **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
+              **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
           titre: Mathématiques
-          x1: |
-            Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
+          palier1:
+            code: 'X1'
+            description: |
+              Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
 
-            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
-          x2: |
-            Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
+              **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
+          palier2:
+            code: 'X2'
+            description: |
+              Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
-            **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
-          y1: |
-            Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
+              **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
+          palier3:
+            code: 'Y1'
+            description: |
+              Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
 
-            **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
+              **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea:
           titre: Socle Cléa en cours d'acquisition
-          atteint: |
-            Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+          description: |
+              Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 
-            **Vous avez atteint le niveau pour envisager la certification des compétences de base du référentiel Cléa Certif'Pro, parlez en avec votre conseiller pour savoir si cette certification pourrait être utile à votre projet !**
+              **Vous avez atteint le niveau pour envisager la certification des compétences de base du référentiel Cléa Certif'Pro, parlez en avec votre conseiller pour savoir si cette certification pourrait être utile à votre projet !**

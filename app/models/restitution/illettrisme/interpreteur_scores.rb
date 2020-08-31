@@ -8,21 +8,21 @@ module Restitution
       end
 
       def interpretations(competences)
-        competences.map do |competence, niveaux|
-          { competence => interprete(competence, niveaux) }
+        competences.map do |competence|
+          { competence => interprete(competence) }
         end
       end
 
-      def interprete(competence, niveaux)
+      def interprete(competence)
         score = @scores[competence]
         return if score.blank?
 
         if score < -1
-          niveaux[0]
+          :palier1
         elsif score.negative?
-          niveaux[1]
+          :palier2
         else
-          niveaux[2]
+          :palier3
         end
       end
     end

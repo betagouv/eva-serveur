@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-describe Restitution::Illettrisme::InterpreteurNiveau2 do
-  let(:subject) { Restitution::Illettrisme::InterpreteurNiveau2.new scores_standardises }
+describe Restitution::Illettrisme::InterpreteurScores do
+  let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
   let(:paliers) do
     { score_ccf: %i[palier1 palier2 palier3],
       score_memorisation: %i[palier1 palier2 palier3] }

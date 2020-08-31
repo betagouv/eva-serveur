@@ -8,12 +8,9 @@ module Restitution
       end
 
       def interpretations(competences)
-        interpretations = competences.map do |competence, niveaux|
+        competences.map do |competence, niveaux|
           { competence => interprete(competence, niveaux) }
         end
-        applique_exceptions!(interpretations)
-
-        interpretations
       end
 
       def interprete(competence, niveaux)
@@ -28,8 +25,6 @@ module Restitution
           niveaux[2]
         end
       end
-
-      def applique_exceptions!(interpretations); end
     end
   end
 end

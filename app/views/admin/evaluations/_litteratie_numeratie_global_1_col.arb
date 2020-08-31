@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-interpretations.each do |competence_niveau|
-  competence = competence_niveau.keys.first
-  niveau = competence_niveau[competence]
+interpretations.each do |competence_description|
+  competence = competence_description.keys.first
+  description = competence_description[competence]
   scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
 
   div class: 'col col-auto' do
@@ -20,8 +20,8 @@ interpretations.each do |competence_niveau|
     end
 
     div do
-      if niveau.present?
-        md t(niveau, scope: scope)
+      if description.present?
+        md t(description, scope: scope)
       else
         md t('admin.restitutions.pas_de_score')
       end

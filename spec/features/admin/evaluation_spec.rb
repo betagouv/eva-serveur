@@ -63,7 +63,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         it 'affiche deux niveaux different pour litteratie et numératie' do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return([{ litteratie: :a1 }, { numeratie: :x1 }])
+            .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
           expect(page).to have_xpath("//img[@alt='Niveau A1']")
           expect(page).to have_xpath("//img[@alt='Niveau X1']")
@@ -78,7 +78,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         it "Socle cléa en cours d'acquisition" do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return([{ socle_clea: :atteint }])
+            .and_return([{ socle_clea: :description }])
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
           expect(page).to have_content 'Socle Cléa'
         end
@@ -92,10 +92,10 @@ describe 'Admin - Evaluation', type: :feature do
         it 'de litteratie et numératie' do
           allow(restitution_globale).to receive(:interpretations_niveau2)
             .with(:litteratie)
-            .and_return([{ score_ccf: :niveau1 }])
+            .and_return([{ score_ccf: :palier1 }])
           allow(restitution_globale).to receive(:interpretations_niveau2)
             .with(:numeratie)
-            .and_return([{ score_numeratie: :niveau1 }])
+            .and_return([{ score_numeratie: :palier1 }])
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
 
           expect(page).to have_content 'Connaissance et compréhension du français'

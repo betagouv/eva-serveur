@@ -2,18 +2,10 @@
 
 div class: 'autopositionnement container' do
   div class: 'row row-cols-2' do
-    auto_positionnement.questions_et_reponses.each do |question_et_reponse|
-      reponse = question_et_reponse[:reponse]
-      question = question_et_reponse[:question]
-
+    auto_positionnement.questions_et_reponses.each do |question, reponse|
       div class: 'col' do
         div strong question.libelle
-        reponse = if question.is_a?(QuestionQcm)
-                    reponse.intitule
-                  else
-                    reponse
-                  end
-        div simple_format(reponse), class: 'my-2'
+        div simple_format(reponse.intitule), class: 'my-2'
       end
     end
   end

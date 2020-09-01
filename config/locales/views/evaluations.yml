@@ -200,13 +200,22 @@ fr:
             Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
 
         score_numeratie:
-          titre: Numératie
+          titre: Compétences mathématiques
           palier1: |
-            Numératie stanine 1 (texte provisoire)
+            Votre niveau de mathématique a été évalué sur la base des compétences suivantes :
+            - Manipulation des chiffres et des nombres
+            - Orientation visuo-spatiale
+            - Réalisation d’une suite de calculs mathématiques
           palier2: |
-            Numératie stanine 2 (texte provisoire)
+            Votre niveau de mathématique a été évalué sur la base des compétences suivantes :
+            - Manipulation des chiffres et des nombres
+            - Orientation visuo-spatiale
+            - Réalisation d’une suite de calculs mathématiques
           palier3: |
-            Numératie stanine 3 (texte provisoire)
+            Votre niveau de mathématique a été évalué sur la base des compétences suivantes :
+            - Manipulation des chiffres et des nombres
+            - Orientation visuo-spatiale
+            - Réalisation d’une suite de calculs mathématiques
 
       niveaux_illettrisme:
         titre: Vos compétences en français et mathématiques

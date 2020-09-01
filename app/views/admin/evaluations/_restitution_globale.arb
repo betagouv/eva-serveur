@@ -1,51 +1,5 @@
 # frozen_string_literal: true
 
-if can?(:manage, Compte) && !pdf
-  panel 'Scores niveau 2' do
-    scores_niveau2 = restitution_globale.scores_niveau2.calcule
-    moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
-    ecarts_types_glissants = restitution_globale.niveau2_ecarts_types_glissants
-    scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
-    attributes_table_for [
-      [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
-      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
-      [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
-    ] do
-      row do |(titre, _)|
-        strong titre
-      end
-      Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
-        row(nom_metrique) do |(_, valeur_colonne)|
-          valeur_colonne[nom_metrique]&.round(2)
-        end
-      end
-    end
-  end
-
-  panel 'Scores niveau 1' do
-    scores_niveau1 = restitution_globale.scores_niveau1.calcule
-    moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
-    ecarts_types_glissants = restitution_globale.niveau1_ecarts_types_glissants
-    scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
-    attributes_table_for [
-      [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
-      [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-      [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
-      [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
-    ] do
-      row do |(titre, _)|
-        strong titre
-      end
-      scores_niveau1.each_key do |nom_metrique|
-        row(nom_metrique) do |(_, valeur_colonne)|
-          valeur_colonne[nom_metrique]&.round(2)
-        end
-      end
-    end
-  end
-end
-
 div class: 'admin_restitution_globale' do
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
@@ -137,5 +91,53 @@ div class: 'admin_restitution_globale' do
     next unless %w[questions livraison].include?(situation.nom_technique)
 
     render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+  end
+end
+
+if can?(:manage, Compte) && !pdf
+  tabs do
+    tab 'Scores litteratie et numératie' do
+      scores_niveau1 = restitution_globale.scores_niveau1.calcule
+      moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
+      ecarts_types_glissants = restitution_globale.niveau1_ecarts_types_glissants
+      scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
+      attributes_table_for [
+        [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
+        [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+        [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
+        [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
+      ] do
+        row do |(titre, _)|
+          strong titre
+        end
+        scores_niveau1.each_key do |nom_metrique|
+          row(nom_metrique) do |(_, valeur_colonne)|
+            valeur_colonne[nom_metrique]&.round(2)
+          end
+        end
+      end
+    end
+
+    tab 'Scores meta-compétences' do
+      scores_niveau2 = restitution_globale.scores_niveau2.calcule
+      moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
+      ecarts_types_glissants = restitution_globale.niveau2_ecarts_types_glissants
+      scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
+      attributes_table_for [
+        [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
+        [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+        [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
+        [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
+      ] do
+        row do |(titre, _)|
+          strong titre
+        end
+        Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
+          row(nom_metrique) do |(_, valeur_colonne)|
+            valeur_colonne[nom_metrique]&.round(2)
+          end
+        end
+      end
+    end
   end
 end

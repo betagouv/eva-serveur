@@ -3,7 +3,9 @@
 columns do
   column do
     panel t('.contacts.titre') do
-      h4 t('.contacts.intro')
+      h4 class: 'mise-en-evidence' do
+        t('.contacts.intro')
+      end
       render 'admin/contacts/form'
       if contacts.present?
         hr

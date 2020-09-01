@@ -12,13 +12,7 @@ module Restitution
     end
 
     def questions_et_reponses
-      questions_repondues
-        .map do |question|
-        {
-          question: question,
-          reponse: choix_repondu(question)
-        }
-      end
+      questions_repondues.map { |question| [question, choix_repondu(question)] }
     end
 
     def reponses

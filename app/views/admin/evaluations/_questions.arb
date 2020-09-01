@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
-questions_redaction = restitution.questions_et_reponses.each.map do |q_et_r|
-  q_et_r if q_et_r[:question].is_a?(QuestionRedactionNote)
-end.compact
+questions_redaction = restitution.questions_et_reponses.select do |q, r|
+  [q, r] if q.is_a?(QuestionRedactionNote)
+end
 unless questions_redaction.empty?
   panel t('.situation', situation: situation_libelle) do
     div class: 'row' do
-      questions_redaction.each do |question_et_reponse|
-        question = question_et_reponse[:question]
-        reponse = question_et_reponse[:reponse]
-
+      questions_redaction.each do |question, reponse|
         div class: 'col-12 px-5 mb-4' do
           div strong t('admin.restitutions.reponse_expression_ecrite', question: question.libelle)
           div simple_format(reponse), class: 'my-2'

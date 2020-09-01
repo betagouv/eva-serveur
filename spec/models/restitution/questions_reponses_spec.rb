@@ -25,8 +25,8 @@ describe Restitution::QuestionsReponses do
       end
       it do
         expect(restitution.questions_et_reponses.size).to eq(1)
-        expect(restitution.questions_et_reponses.first[:question]).to eql(question1)
-        expect(restitution.questions_et_reponses.first[:reponse]).to eql(bon_choix_q1)
+        expect(restitution.questions_et_reponses.first[0]).to eql(question1)
+        expect(restitution.questions_et_reponses.first[1]).to eql(bon_choix_q1)
       end
     end
 
@@ -40,7 +40,7 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question_redaction_note.id, reponse: 'coucou' })
         ]
       end
-      it { expect(restitution.questions_et_reponses.first[:reponse]).to eql('coucou') }
+      it { expect(restitution.questions_et_reponses.first[1]).to eql('coucou') }
     end
   end
 

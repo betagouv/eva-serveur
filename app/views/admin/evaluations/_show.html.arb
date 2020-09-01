@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
-panel t('.titre.restitutions') do
+if auto_positionnement
+  panel t('.titre.auto_positionnement') do
+    render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
+  end
+end
+
+panel t('.titre.restitution_globale') do
+  render partial: 'restitution_globale', locals: { pdf: false }
+end
+
+panel t('.titre.parties') do
   form method: :get do
     table_for parties do
       column :selection do |partie|
@@ -22,14 +32,4 @@ panel t('.titre.restitutions') do
     end
     div submit_tag 'Valider la sélection'
   end
-end
-
-if auto_positionnement
-  panel t('.titre.auto_positionnement') do
-    render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
-  end
-end
-
-panel t('.titre.restitution_globale') do
-  render partial: 'restitution_globale', locals: { pdf: false }
 end

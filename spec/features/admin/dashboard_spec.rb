@@ -31,6 +31,7 @@ describe 'Admin - Dashboard' do
         visit admin_root_path
         fill_in :contact_nom, with: 'Nouveau Contact'
         fill_in :contact_email, with: 'nouveau@email.com'
+        fill_in :contact_telephone, with: '06 12 34 56 78'
       end
 
       it do
@@ -38,6 +39,7 @@ describe 'Admin - Dashboard' do
         nouveau_contact = Contact.last
         expect(nouveau_contact.nom).to eq 'Nouveau Contact'
         expect(nouveau_contact.email).to eq 'nouveau@email.com'
+        expect(nouveau_contact.telephone).to eq '06 12 34 56 78'
         expect(nouveau_contact.saisi_par).to eq compte_organisation
       end
     end

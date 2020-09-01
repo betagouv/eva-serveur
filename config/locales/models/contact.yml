@@ -1,4 +1,9 @@
 fr:
+  activerecord:
+    attributes:
+      contact:
+        created_at: Créé le
+        telephone: Téléphone
   formtastic:
     actions:
       contact:

@@ -101,7 +101,7 @@ describe 'Admin - Evaluation', type: :feature do
           expect(page).to have_content 'Connaissance et compréhension du français'
           expect(page).to have_content 'des progrès à faire'
 
-          expect(page).to have_content 'Numératie'
+          expect(page).to have_content 'Compétences mathématiques'
         end
       end
 

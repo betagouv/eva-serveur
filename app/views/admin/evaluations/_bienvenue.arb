@@ -3,6 +3,21 @@
 div class: 'autopositionnement container' do
   div class: 'row row-cols-2' do
     auto_positionnement.questions_et_reponses.each do |question, reponse|
+      next unless question.type_qcm == 'jauge'
+
+      div class: 'col' do
+        div strong question.libelle
+      end
+      div class: 'col' do
+        div reponse.position, class: 'my-2'
+      end
+    end
+  end
+  hr
+  div class: 'row row-cols-2' do
+    auto_positionnement.questions_et_reponses.each do |question, reponse|
+      next if question.type_qcm == 'jauge'
+
       div class: 'col' do
         div strong question.libelle
         div simple_format(reponse.intitule), class: 'my-2'

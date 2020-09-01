@@ -6,6 +6,7 @@ panel 'Détails de la question' do
     row :libelle
     row :intitule
     row :metacompetence
+    row :type_qcm
     row :description
     row :illustration do |question|
       image_tag url_for(question.illustration) if question.illustration.attached?

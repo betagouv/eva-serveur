@@ -68,7 +68,7 @@ fr:
         titre:
           restitution_globale: Restitution globale
           auto_positionnement: Auto-positionnement
-          restitutions: Restitutions
+          parties: Situations jouées
     restitutions:
       reponse_expression_ecrite: "Votre réponse à la question '%{question}' :"
       evaluation:

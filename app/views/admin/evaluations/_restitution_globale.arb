@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+marges_generales = 'mx-5'
 div class: 'admin_restitution_globale' do
   if auto_positionnement
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: 'mx-4' do
+    div class: marges_generales do
       div class: 'saut-de-page' do
         h2 class: 'text-center my-5' do
           t('.auto_positionnement')
@@ -18,46 +19,48 @@ div class: 'admin_restitution_globale' do
 
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-  h2 class: 'text-center my-5' do
-    span t('.competences_fortes_titre')
-    br
-    span class: 'legende-titre' do
-      t('.legende_titre')
-    end
-  end
-
-  div class: 'row saut-de-page' do
-    rang_competence = 0
-    valeur_competence_precedente = -1
-    restitution_globale.niveaux_competences.each do |niveau_competence|
-      competence = niveau_competence.keys.first
-      if valeur_competence_precedente != niveau_competence.values.first
-        rang_competence += 1
-        valeur_competence_precedente = niveau_competence.values.first
+  div class: marges_generales do
+    h2 class: 'text-center my-5' do
+      span t('.competences_fortes_titre')
+      br
+      span class: 'legende-titre' do
+        t('.legende_titre')
       end
-      ul class: 'competences-identifiees col-12' do
-        div class: 'identification-competence col-6' do
-          div class: "jauge jauge-#{rang_competence}"
-          if pdf
-            span wicked_pdf_image_tag competence.to_s
-          else
-            span image_tag competence
-          end
-          span class: 'nom-competence' do
-            t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence')
-          end
-        end
+    end
 
-        div class: 'description-competence col-6' do
-          div t("#{competence}.description",
-                scope: 'admin.evaluations.restitution_competence')
-          url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
-          a href: url_competence, target: '_blank' do
+    div class: 'row saut-de-page' do
+      rang_competence = 0
+      valeur_competence_precedente = -1
+      restitution_globale.niveaux_competences.each do |niveau_competence|
+        competence = niveau_competence.keys.first
+        if valeur_competence_precedente != niveau_competence.values.first
+          rang_competence += 1
+          valeur_competence_precedente = niveau_competence.values.first
+        end
+        ul class: 'competences-identifiees col-12' do
+          div class: 'identification-competence col-6' do
+            div class: "jauge jauge-#{rang_competence}"
             if pdf
-              t('.url_competence') + ' ' + url_competence
+              span wicked_pdf_image_tag competence.to_s
             else
-              div t('.url_competence')
-              div url_competence
+              span image_tag competence
+            end
+            span class: 'nom-competence' do
+              t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence')
+            end
+          end
+
+          div class: 'description-competence col-6' do
+            div t("#{competence}.description",
+                  scope: 'admin.evaluations.restitution_competence')
+            url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
+            a href: url_competence, target: '_blank' do
+              if pdf
+                t('.url_competence') + ' ' + url_competence
+              else
+                div t('.url_competence')
+                div url_competence
+              end
             end
           end
         end
@@ -70,7 +73,7 @@ div class: 'admin_restitution_globale' do
   div class: 'saut-de-page' do
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: 'mx-4' do
+    div class: marges_generales do
       div class: 'synthese-illettrisme' do
         h2 class: 'text-center mb-5' do
           span t('admin.restitutions.niveaux_illettrisme.titre')
@@ -101,11 +104,13 @@ div class: 'admin_restitution_globale' do
   end
 
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
-  restitution_globale.restitutions.each do |restitution|
-    situation = restitution.situation
-    next unless %w[questions livraison].include?(situation.nom_technique)
+  div class: marges_generales do
+    restitution_globale.restitutions.each do |restitution|
+      situation = restitution.situation
+      next unless %w[questions livraison].include?(situation.nom_technique)
 
-    render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+      render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+    end
   end
 end
 

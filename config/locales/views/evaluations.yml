@@ -21,8 +21,12 @@ fr:
       tri:
         <<: *commun
         reste_plateau: Reste plateau
+      autopositionnement:
+        titre: Auto-positionnement
+        appareils: Appareils
+        scolarite: Scolarité
+        sante: Santé
       restitution_globale:
-        auto_positionnement: Auto-positionnement
         competences_fortes_titre: "Vos compétences transversales"
         legende_titre: "Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers"
         url_competence: 'Détail et liste des métiers associés :'

@@ -11,8 +11,10 @@ module Restitution
       @questionnaire = questionnaire
     end
 
-    def questions_et_reponses
-      questions_repondues.map { |question| [question, choix_repondu(question)] }
+    def questions_et_reponses(type_qcm = nil)
+      questions_repondues
+        .map { |question| [question, choix_repondu(question)] }
+        .select { |q_et_r| type_qcm.nil? || q_et_r[0].type_qcm == type_qcm.to_s }
     end
 
     def reponses

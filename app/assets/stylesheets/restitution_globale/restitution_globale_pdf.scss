@@ -67,14 +67,23 @@
   }
 
   .autopositionnement {
-    .libelle-question {
-      margin-top: 1rem; // centrage par cohïncidence
+    .intitule-question {
+      margin-top: 1rem; // centrage par coïncidence
     }
 
     .puce {
-      margin-top: -13px;
-      width: 26px;
-      line-height: 26px;
+      margin-top: -14px;
+      width: 28px;
+      line-height: 28px;
+    }
+
+    .categorie {
+      font-size: 1.2rem;
+    }
+
+    .reponse {
+      margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
     }
   }
 

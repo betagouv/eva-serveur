@@ -42,7 +42,7 @@
   }
 
   .autopositionnement {
-    .libelle-question {
+    .intitule-question {
       display: flex;
       align-items: center;
     }
@@ -77,6 +77,16 @@
       background-repeat: no-repeat;
       text-align: center;
       color: $couleur-blanc;
+    }
+
+    .categorie {
+      font-size: 1rem;
+    }
+
+    .reponse {
+      color: $couleur-principale;
+      font-weight: 600;
+      margin-bottom: 1rem;
     }
   }
 

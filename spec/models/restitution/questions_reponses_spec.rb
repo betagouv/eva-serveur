@@ -5,10 +5,14 @@ require 'rails_helper'
 describe Restitution::QuestionsReponses do
   let(:restitution) { described_class.new(evenements, questionnaire) }
   let(:bon_choix_q1) { create :choix, :bon }
+  let(:bon_choix_qjauge) { create :choix, :bon }
   let(:question1) do
     create :question_qcm, choix: [bon_choix_q1]
   end
-  let(:questionnaire) { create :questionnaire, questions: [question1] }
+  let(:question_jauge) do
+    create :question_qcm, choix: [bon_choix_qjauge], type_qcm: :jauge
+  end
+  let(:questionnaire) { create :questionnaire, questions: [question1, question_jauge] }
 
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
@@ -41,6 +45,23 @@ describe Restitution::QuestionsReponses do
         ]
       end
       it { expect(restitution.questions_et_reponses.first[1]).to eql('coucou') }
+    end
+
+    context 'retourne seulement les questions de type jauge' do
+      let(:evenements) do
+        [
+          build(:evenement_reponse,
+                donnees: { question: question_jauge.id, reponse: bon_choix_qjauge.id }),
+
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
+        ]
+      end
+      it do
+        questions = restitution.questions_et_reponses(:jauge)
+        expect(questions.size).to eq(1)
+        expect(questions.first[0]).to eql(question_jauge)
+      end
     end
   end
 

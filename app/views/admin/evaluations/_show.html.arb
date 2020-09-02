@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-if auto_positionnement
-  panel t('.titre.auto_positionnement') do
-    render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
-  end
-end
-
 panel t('.titre.restitution_globale') do
   render partial: 'restitution_globale', locals: { pdf: false }
 end

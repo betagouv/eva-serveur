@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 div class: 'admin_restitution_globale' do
+  if auto_positionnement
+    render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+
+    div class: 'mx-4' do
+      div class: 'saut-de-page' do
+        h2 class: 'text-center my-5' do
+          t('.auto_positionnement')
+        end
+        render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
+      end
+    end
+  end
+
+  hr unless pdf
+
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
   h2 class: 'text-center my-5' do
@@ -55,30 +70,30 @@ div class: 'admin_restitution_globale' do
   div class: 'saut-de-page' do
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: 'synthese-illettrisme' do
-      h2 class: 'text-center mb-5' do
-        span t('admin.restitutions.niveaux_illettrisme.titre')
-      end
+    div class: 'mx-4' do
+      div class: 'synthese-illettrisme' do
+        h2 class: 'text-center mb-5' do
+          span t('admin.restitutions.niveaux_illettrisme.titre')
+        end
 
-      div class: 'row' do
-        if restitution_globale.interpretations_niveau1.size == 1
-          render 'litteratie_numeratie_synthese_unique',
-                 interpretations: restitution_globale.interpretations_niveau1,
-                 pdf: pdf
-        else
-          render 'litteratie_numeratie_syntheses_separees',
-                 interpretations: restitution_globale.interpretations_niveau1,
-                 pdf: pdf
+        div class: 'row' do
+          if restitution_globale.interpretations_niveau1.size == 1
+            render 'litteratie_numeratie_synthese_unique',
+                   interpretations: restitution_globale.interpretations_niveau1,
+                   pdf: pdf
+          else
+            render 'litteratie_numeratie_syntheses_separees',
+                   interpretations: restitution_globale.interpretations_niveau1,
+                   pdf: pdf
+          end
         end
       end
-    end
 
-    div class: 'mx-4' do
       div class: 'row mb-4' do
-        div class: 'col mx-4' do
+        div class: 'col' do
           render 'metacompetences', categorie: :litteratie
         end
-        div class: 'col mx-4' do
+        div class: 'col' do
           render 'metacompetences', categorie: :numeratie
         end
       end

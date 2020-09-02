@@ -7,10 +7,7 @@ div class: 'admin_restitution_globale' do
 
     div class: marges_generales do
       div class: 'saut-de-page' do
-        h2 class: 'text-center my-5' do
-          t('.auto_positionnement')
-        end
-        render partial: 'bienvenue', locals: { auto_positionnement: auto_positionnement }
+        render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
       end
     end
   end

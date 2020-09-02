@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+div class: 'autopositionnement' do
+  h2 class: 'text-center my-5' do
+    t('.titre')
+  end
+  auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
+    div class: 'row' do
+      div class: 'col intitule-question' do
+        div question.intitule
+      end
+      div class: 'col' do
+        div class: 'jauge' do
+          div strong reponse.position, class: "position-#{reponse.position} puce"
+        end
+      end
+    end
+  end
+  div class: 'mt-5' do
+    div class: 'row mt-3' do
+      questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
+      div class: 'col' do
+        render partial: 'categorie_autopositionnement', locals: {
+          categorie: t('.appareils'),
+          questions_reponses: questions_et_reponses_standard
+        }
+        render partial: 'categorie_autopositionnement', locals: {
+          categorie: t('.scolarite'),
+          questions_reponses: questions_et_reponses_standard
+        }
+      end
+      div class: 'col' do
+        render partial: 'categorie_autopositionnement', locals: {
+          categorie: t('.sante'),
+          questions_reponses: questions_et_reponses_standard
+        }
+      end
+    end
+  end
+end

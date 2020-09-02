@@ -62,11 +62,11 @@ div class: 'admin_restitution_globale' do
 
       div class: 'row' do
         if restitution_globale.interpretations_niveau1.size == 1
-          render 'litteratie_numeratie_global_1_col',
+          render 'litteratie_numeratie_synthese_unique',
                  interpretations: restitution_globale.interpretations_niveau1,
                  pdf: pdf
         else
-          render 'litteratie_numeratie_global_2_cols',
+          render 'litteratie_numeratie_syntheses_separees',
                  interpretations: restitution_globale.interpretations_niveau1,
                  pdf: pdf
         end

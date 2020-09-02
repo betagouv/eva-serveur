@@ -15,8 +15,8 @@ interpretations.each do |competence_description|
     end
   end
   div class: 'col' do
-    h3 class: 'mb-3' do
-      div t(:titre, scope: scope)
+    div class: 'mb-3 niveau-synthese' do
+      div t(:niveau, scope: scope)
     end
 
     div do

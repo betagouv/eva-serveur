@@ -1,6 +1,7 @@
 @import "variables";
 
-.admin_restitution_globale, .autopositionnement {
+.admin_restitution_globale {
+
   @media screen {
     #main_content {
       padding-top: 2rem;
@@ -38,6 +39,45 @@
 
   .panel {
     background-color: white;
+  }
+
+  .autopositionnement {
+    .libelle-question {
+      display: flex;
+      align-items: center;
+    }
+
+    .jauge {
+      position: relative;
+      background-image: asset-data-url('jauge.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      max-width: 420px;
+      height: 4rem;
+    }
+
+    .position-1 { left: -1%; }
+    .position-2 { left: 14%; }
+    .position-3 { left: 31%; }
+    .position-4 { left: 48%; }
+    .position-5 { left: 63%; }
+    .position-6 { left: 80%; }
+    .position-7 { left: 97%; }
+
+    .puce {
+      position: absolute;
+      top: 50%;
+      margin-top: -10px;
+      width: 20px;
+      line-height: 20px;
+      background-image: asset-data-url('puce_jauge.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-align: center;
+      color: $couleur-blanc;
+    }
   }
 
   .nom-competence {
@@ -79,21 +119,12 @@
         border-radius: 2rem;
       }
 
-      .jauge-1 {
-        width: 90%
-      }
-      .jauge-2 {
-        width: 80%
-      }
-      .jauge-3 {
-        width: 70%
-      }
-      .jauge-4 {
-        width: 60%
-      }
-      .jauge-5 {
-        width: 50%
-      }
+      .jauge-1 { width: 90% }
+      .jauge-2 { width: 80% }
+      .jauge-3 { width: 70% }
+      .jauge-4 { width: 60% }
+      .jauge-5 { width: 50% }
+
       span {
         position: relative;
         img {
@@ -104,7 +135,7 @@
   }
 
   .synthese-illettrisme {
-    margin: 3rem 1.5rem 2rem 1.5rem;
+    margin: 3rem 0 2rem;
 
     &-niveau {
       font-size: 1rem;

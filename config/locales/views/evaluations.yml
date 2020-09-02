@@ -22,6 +22,7 @@ fr:
         <<: *commun
         reste_plateau: Reste plateau
       restitution_globale:
+        auto_positionnement: Auto-positionnement
         competences_fortes_titre: "Vos compétences transversales"
         legende_titre: "Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers"
         url_competence: 'Détail et liste des métiers associés :'
@@ -67,7 +68,6 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
-          auto_positionnement: Auto-positionnement
           parties: Situations jouées
     restitutions:
       reponse_expression_ecrite: "Votre réponse à la question '%{question}' :"

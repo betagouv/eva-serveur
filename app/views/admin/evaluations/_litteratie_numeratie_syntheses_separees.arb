@@ -5,7 +5,7 @@ interpretations.each do |competence_niveau|
   niveau = competence_niveau[competence]
   scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
 
-  div class: 'col mx-4' do
+  div class: 'col' do
     div class: 'synthese-illettrisme-illustration mb-4' do
       code_niveau = t("#{niveau}.code", scope: scope)
       if pdf

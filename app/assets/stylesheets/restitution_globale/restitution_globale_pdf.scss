@@ -2,6 +2,7 @@
 @import "base";
 
 .admin_restitution_globale {
+  line-height: 1.1;
   width: 1100px;
 
   .en-tete-page {
@@ -65,9 +66,22 @@
     -webkit-box-flex: 0;
   }
 
+  .autopositionnement {
+    .libelle-question {
+      margin-top: 1rem; // centrage par cohïncidence
+    }
+
+    .puce {
+      margin-top: -13px;
+      width: 26px;
+      line-height: 26px;
+    }
+  }
+
   .identification-competence, .description-competence, .competences-identifiees {
     display: inline-block;
   }
+
   .competences-identifiees {
     width: 100%;
 

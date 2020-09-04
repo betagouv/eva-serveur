@@ -62,6 +62,22 @@ namespace :nettoyage do
       Evenement.where(id: evenements_apres_fin.collect(&:id)).destroy_all
     end
   end
+
+  desc 'Assure une date de fin correcte'
+  task date_evenements_fin: :environment do
+    Partie.find_each do |partie|
+      derniers_evenements = Evenement.order(:date).where(partie: partie).last(2)
+      next if derniers_evenements.count < 2 ||
+              derniers_evenements.first.date != derniers_evenements.last.date
+
+      fin = derniers_evenements.detect { |e| e.nom == 'finSituation' }
+
+      next if fin.blank?
+
+      fin.date += 0.001
+      fin.save!
+    end
+  end
 end
 
 class RakeLogger

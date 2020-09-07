@@ -5,6 +5,16 @@ require_relative '../../decorators/evenement_livraison'
 module Restitution
   class Livraison < AvecEntrainement
     METRIQUES = {
+      'nombre_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf',
+        'instance' => Illettrisme::NombreReponses.new
+      },
+      'nombre_reponses_syntaxe_orthographe' => {
+        'type' => :nombre,
+        'metacompetence' => 'syntaxe-orthographe',
+        'instance' => Illettrisme::NombreReponses.new
+      },
       'nombre_bonnes_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',

@@ -5,6 +5,11 @@ require_relative '../../decorators/evenement_objets_trouves'
 module Restitution
   class ObjetsTrouves < AvecEntrainement
     METRIQUES = {
+      'nombre_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf',
+        'instance' => Illettrisme::NombreReponses.new
+      },
       'nombre_bonnes_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',

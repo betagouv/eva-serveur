@@ -100,13 +100,17 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
-  div class: marges_generales do
-    restitution_globale.restitutions.each do |restitution|
-      situation = restitution.situation
-      next unless %w[questions livraison].include?(situation.nom_technique)
+  mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restitution|
+    %w[questions livraison].include?(restitution.situation.nom_technique)
+  end
+  unless mes_avec_redaction_de_notes.empty?
+    render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+    div class: marges_generales do
+      mes_avec_redaction_de_notes.each do |restitution|
+        situation = restitution.situation
 
-      render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+        render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+      end
     end
   end
 end

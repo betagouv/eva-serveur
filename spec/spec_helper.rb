@@ -4,6 +4,7 @@ require 'capybara/rspec'
 require_relative '../app/decorators/evenement_maintenance'
 require_relative '../app/decorators/evenement_securite'
 require_relative '../app/decorators/evenement_livraison'
+require_relative '../app/decorators/evenement_objets_trouves'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -39,7 +40,8 @@ RSpec.configure do |config|
   DECORATORS = {
     maintenance: EvenementMaintenance,
     securite: EvenementSecurite,
-    livraison: EvenementLivraison
+    livraison: EvenementLivraison,
+    objets_trouves: EvenementObjetsTrouves
   }.freeze
 
   def se_connecter_comme_administrateur

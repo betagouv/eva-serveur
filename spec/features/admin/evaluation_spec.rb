@@ -31,13 +31,13 @@ describe 'Admin - Evaluation', type: :feature do
 
     it 'sans auto_positionnement' do
       visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation)
-      expect(page).to_not have_content 'Auto-positionnement'
+      expect(page).to_not have_content 'auto-positionnement'
       expect(page).to have_content 'Roger'
     end
 
     it 'avec auto_positionnement' do
       visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-      expect(page).to have_content 'Auto-positionnement'
+      expect(page).to have_content 'auto-positionnement'
       expect(page).to have_content 'Roger'
     end
 

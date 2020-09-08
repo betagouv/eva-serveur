@@ -16,25 +16,23 @@ div class: 'autopositionnement' do
       end
     end
   end
-  div class: 'mt-5' do
-    div class: 'row mt-3' do
-      questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
-      div class: 'col' do
-        render partial: 'categorie_autopositionnement', locals: {
-          categorie: t('.appareils'),
-          questions_reponses: questions_et_reponses_standard
-        }
-        render partial: 'categorie_autopositionnement', locals: {
-          categorie: t('.scolarite'),
-          questions_reponses: questions_et_reponses_standard
-        }
-      end
-      div class: 'col' do
-        render partial: 'categorie_autopositionnement', locals: {
-          categorie: t('.sante'),
-          questions_reponses: questions_et_reponses_standard
-        }
-      end
+  div class: 'row question-standard' do
+    questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
+    div class: 'col' do
+      render partial: 'categorie_autopositionnement', locals: {
+        categorie: t('.appareils'),
+        questions_reponses: questions_et_reponses_standard
+      }
+      render partial: 'categorie_autopositionnement', locals: {
+        categorie: t('.scolarite'),
+        questions_reponses: questions_et_reponses_standard
+      }
+    end
+    div class: 'col' do
+      render partial: 'categorie_autopositionnement', locals: {
+        categorie: t('.sante'),
+        questions_reponses: questions_et_reponses_standard
+      }
     end
   end
 end

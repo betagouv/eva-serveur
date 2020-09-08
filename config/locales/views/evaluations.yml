@@ -22,7 +22,7 @@ fr:
         <<: *commun
         reste_plateau: Reste plateau
       autopositionnement:
-        titre: Auto-positionnement
+        titre: Questionnaire d'auto-positionnement
         appareils: Appareils
         scolarite: Scolarité
         sante: Santé

@@ -68,7 +68,11 @@
 
   .autopositionnement {
     .intitule-question {
-      margin-top: 1rem; // centrage par coïncidence
+      margin-top: 1.5rem; // centrage par coïncidence
+    }
+
+    .jauge {
+      height: 5rem;
     }
 
     .puce {
@@ -77,8 +81,13 @@
       line-height: 28px;
     }
 
+    .row.question-standard {
+      margin-top: 3rem;
+    }
+
     .categorie {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      margin: 2.5rem 0;
     }
 
     .reponse {

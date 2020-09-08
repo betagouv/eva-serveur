@@ -79,8 +79,13 @@
       color: $couleur-blanc;
     }
 
+    .row.question-standard {
+      margin-top: 2rem;
+    }
+
     .categorie {
       font-size: 1rem;
+      margin: 2rem 0;
     }
 
     .reponse {

@@ -163,4 +163,32 @@ describe Restitution::Globale do
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
     end
   end
+
+  describe '#interpretations_niveau1' do
+    let(:restitutions) { [] }
+    let(:interpretations) { restitution_globale.interpretations_niveau1 }
+
+    before do
+      allow(Restitution::Illettrisme::DetecteurIllettrisme)
+        .to receive(:new).with(restitutions).and_return(detecteur_illettrisme)
+    end
+
+    context "en cas d'illettrisme potentiel" do
+      let(:detecteur_illettrisme) { double(illettrisme_potentiel?: true) }
+
+      it { expect(interpretations).to eq ['illettrisme_potentiel'] }
+    end
+
+    context 'sans illettrisme potentiel' do
+      let(:detecteur_illettrisme) { double(illettrisme_potentiel?: false) }
+      let(:interpreteur_niveau1) { double(interpretations: [trop: :bon]) }
+
+      before do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+      end
+
+      it { expect(interpretations).to eq [trop: :bon] }
+    end
+  end
 end

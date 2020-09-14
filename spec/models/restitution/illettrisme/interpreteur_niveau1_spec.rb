@@ -12,7 +12,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint' do
       let(:score_litteratie) { 0 }
       let(:score_numeratie) { 0 }
-      it { expect(subject.interpretations).to eq([{ socle_clea: :description }]) }
+      it { expect(subject.interpretations).to eq(['socle_clea']) }
     end
 
     context 'litteratie < -1' do

@@ -72,20 +72,14 @@ div class: 'admin_restitution_globale' do
 
     div class: marges_generales do
       div class: 'synthese-illettrisme' do
-        h2 class: 'text-center mb-5' do
-          span t('admin.restitutions.niveaux_illettrisme.titre')
-        end
-
-        div class: 'row' do
-          if restitution_globale.interpretations_niveau1.size == 1
-            render 'litteratie_numeratie_synthese_unique',
-                   interpretations: restitution_globale.interpretations_niveau1,
-                   pdf: pdf
-          else
-            render 'litteratie_numeratie_syntheses_separees',
-                   interpretations: restitution_globale.interpretations_niveau1,
-                   pdf: pdf
-          end
+        if restitution_globale.interpretations_niveau1.size == 1
+          render 'litteratie_numeratie_synthese_unique',
+                 interpretation: restitution_globale.interpretations_niveau1[0],
+                 pdf: pdf
+        else
+          render 'litteratie_numeratie_syntheses_separees',
+                 interpretations: restitution_globale.interpretations_niveau1,
+                 pdf: pdf
         end
       end
 

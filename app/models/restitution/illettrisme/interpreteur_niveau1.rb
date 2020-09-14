@@ -15,7 +15,7 @@ module Restitution
 
       def applique_exceptions(interpretations)
         if interpretations == [{ litteratie: :palier3 }, { numeratie: :palier3 }]
-          return [{ socle_clea: :description }]
+          return ['socle_clea']
         end
 
         interpretations

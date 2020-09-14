@@ -71,16 +71,23 @@ describe 'Admin - Evaluation', type: :feature do
 
         it "affiche que le score n'a pas pu être calculé" do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return([{ litteratie: nil }])
+            .and_return([{ litteratie: nil }, { numeratie: nil }])
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
           expect(page).to have_content "Votre score n'a pas pu être calculé"
         end
 
         it "Socle cléa en cours d'acquisition" do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return([{ socle_clea: :description }])
+            .and_return(['socle_clea'])
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-          expect(page).to have_content 'Socle Cléa'
+          expect(page).to have_content 'Vous avez atteint le niveau'
+        end
+
+        it "Potentiellement en situation d'illettrisme" do
+          allow(restitution_globale).to receive(:interpretations_niveau1)
+            .and_return(['illettrisme_potentiel'])
+          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+          expect(page).to have_content 'importantes difficultés'
         end
       end
 

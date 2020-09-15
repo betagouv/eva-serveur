@@ -3,12 +3,14 @@
 module Restitution
   class MetriquesHelper
     EVENEMENT = {
-      ACTIVATION_AIDE_1: 'activationAide'
+      DEMARRAGE: 'demarrage',
+      ACTIVATION_AIDE_1: 'activationAide',
+      REPONSE: 'reponse'
     }.freeze
 
     class << self
       def premier_evenement_du_nom(evenements, nom_evenement)
-        evenements.find { |e| e.nom == nom_evenement }
+        evenements.find { |e| e.nom == EVENEMENT[nom_evenement] }
       end
 
       def temps_entre_couples(evenements)
@@ -22,7 +24,7 @@ module Restitution
       end
 
       def activation_aide1(evenements)
-        premier_evenement_du_nom(evenements, EVENEMENT[:ACTIVATION_AIDE_1])
+        premier_evenement_du_nom(evenements, :ACTIVATION_AIDE_1)
       end
 
       def temps_action(evenements, filtre_reponse, &filtre_evenements)

@@ -2,10 +2,6 @@
 
 module Restitution
   class QuestionsReponses
-    EVENEMENT = {
-      REPONSE: 'reponse'
-    }.freeze
-
     def initialize(evenements, questionnaire)
       @evenements = evenements
       @questionnaire = questionnaire
@@ -18,7 +14,7 @@ module Restitution
     end
 
     def reponses
-      @evenements.find_all { |e| e.nom == EVENEMENT[:REPONSE] }
+      @evenements.find_all { |e| e.nom == MetriquesHelper::EVENEMENT[:REPONSE] }
     end
 
     def questions

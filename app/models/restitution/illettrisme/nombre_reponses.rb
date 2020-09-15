@@ -6,7 +6,7 @@ module Restitution
       def calcule(evenements, metacompetence)
         evenements.select do |evenement|
           evenement.metacompetence == metacompetence &&
-            evenement.nom == 'reponse'
+            evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE]
         end.count
       end
     end

@@ -12,7 +12,7 @@ class EvenementSecurite < SimpleDelegator
   }.freeze
 
   def demarrage?
-    nom == Restitution::AvecEntrainement::EVENEMENT[:DEMARRAGE]
+    nom == Restitution::MetriquesHelper::EVENEMENT[:DEMARRAGE]
   end
 
   def bonne_reponse?

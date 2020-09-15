@@ -1,6 +1,35 @@
 # frozen_string_literal: true
 
 namespace :nettoyage do
+  desc "Recalculer les metriques d'une situation."
+  task recalcule_metriques: :environment do
+    arg_situation = 'SITUATION'
+    logger = RakeLogger.logger
+    unless ENV.key?(arg_situation)
+      logger.error "La variable d'environnement #{arg_situation} est marquante"
+      logger.info 'Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>'
+      exit
+    end
+
+    situation = Situation.find_by(nom_technique: ENV[arg_situation])
+    if situation.nil?
+      logger.error "Situation \"#{ENV[arg_situation]}\" non trouvé"
+      exit
+    end
+
+    nombre_partie = Partie.where(situation: situation).count
+    logger.info "Recalcule les #{nombre_partie} parties de la situation #{ENV['SITUATION']}…"
+    Partie
+      .where(situation: situation)
+      .find_each do |partie|
+        restitution = FabriqueRestitution.instancie partie.id
+        restitution.persiste if restitution.termine?
+        nombre_partie -= 1
+        logger.info "reste #{nombre_partie}"
+      end
+    logger.info "C'est fini"
+  end
+
   desc 'Ajoute les événements terminés'
   task ajoute_evenements_termines: :environment do
     Partie.find_each do |partie|

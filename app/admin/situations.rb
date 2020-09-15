@@ -23,22 +23,4 @@ ActiveAdmin.register Situation do
       link_to 'Parties', admin_situation_parties_path(situation)
     end
   end
-
-  action_item :lien_recalcule, only: :show, priority: 0 do
-    link_to I18n.t('admin.situations.recalcul_metriques.lien'),
-            recalcule_metriques_admin_situation_path(resource),
-            method: :post
-  end
-
-  member_action :recalcule_metriques, method: :post do
-    Partie
-      .where(situation: resource)
-      .find_each do |partie|
-        restitution = FabriqueRestitution.instancie partie.id
-        restitution.persiste if restitution.termine?
-      end
-
-    redirect_to admin_situation_path(resource),
-                notice: I18n.t('admin.situations.recalcul_metriques.fait')
-  end
 end

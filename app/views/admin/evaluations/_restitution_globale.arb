@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 marges_generales = 'mx-5'
+niveaux_competences = restitution_globale.niveaux_competences
+
 div class: 'admin_restitution_globale' do
   if auto_positionnement
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
@@ -17,18 +19,19 @@ div class: 'admin_restitution_globale' do
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
   div class: marges_generales do
-    h2 class: 'text-center my-5' do
-      span t('.competences_fortes_titre')
-      br
-      span class: 'legende-titre' do
+    div class: 'text-center my-5' do
+      h2 t('.competences_fortes_titre')
+      para class: 'legende-titre' do
         t('.legende_titre')
       end
     end
 
+    div md t('.competences_fortes_vides') if niveaux_competences.blank?
+
     div class: 'row saut-de-page' do
       rang_competence = 0
       valeur_competence_precedente = -1
-      restitution_globale.niveaux_competences.each do |niveau_competence|
+      niveaux_competences.each do |niveau_competence|
         competence = niveau_competence.keys.first
         if valeur_competence_precedente != niveau_competence.values.first
           rang_competence += 1

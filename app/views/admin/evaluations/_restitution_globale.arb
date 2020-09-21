@@ -26,19 +26,14 @@ div class: 'admin_restitution_globale' do
       end
     end
 
-    div md t('.competences_fortes_vides') if niveaux_competences.blank?
-
     div class: 'row saut-de-page' do
-      rang_competence = 0
-      valeur_competence_precedente = -1
-      niveaux_competences.each do |competence, niveau|
-        if valeur_competence_precedente != niveau
-          rang_competence += 1
-          valeur_competence_precedente = niveau
-        end
+      div md t('.competences_fortes_vides') if niveaux_competences.blank?
+
+      interpretations = restitution_globale.interpretations_competences_transversales
+      interpretations.each do |competence, interpretation|
         ul class: 'competences-identifiees col-12' do
           div class: 'identification-competence col-6' do
-            div class: "jauge jauge-#{rang_competence}"
+            div class: "jauge jauge-#{interpretation}"
             if pdf
               span wicked_pdf_image_tag competence.to_s
             else

@@ -31,11 +31,10 @@ div class: 'admin_restitution_globale' do
     div class: 'row saut-de-page' do
       rang_competence = 0
       valeur_competence_precedente = -1
-      niveaux_competences.each do |niveau_competence|
-        competence = niveau_competence.keys.first
-        if valeur_competence_precedente != niveau_competence.values.first
+      niveaux_competences.each do |competence, niveau|
+        if valeur_competence_precedente != niveau
           rang_competence += 1
-          valeur_competence_precedente = niveau_competence.values.first
+          valeur_competence_precedente = niveau
         end
         ul class: 'competences-identifiees col-12' do
           div class: 'identification-competence col-6' do
@@ -160,10 +159,10 @@ if can?(:manage, Compte) && !pdf
 
     tab 'Niveaux compétences transversales' do
       ol do
-        restitution_globale.niveaux_competences.each do |niveau_competence|
-          li span t("#{niveau_competence.keys.first}.nom",
+        niveaux_competences.each do |competence, niveau|
+          li span t("#{competence}.nom",
                     scope: 'admin.evaluations.restitution_competence') +
-                  ": #{niveau_competence.values.first}"
+                  ": #{niveau}"
         end
       end
     end

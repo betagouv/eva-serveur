@@ -53,6 +53,9 @@ describe 'Admin - Evaluation', type: :feature do
       before do
         competences = [[Competence::ORGANISATION_METHODE, Competence::NIVEAU_4]]
         expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
+        interpretations = [[Competence::ORGANISATION_METHODE, 4.0]]
+        expect(restitution_globale).to receive(:interpretations_competences_transversales)
+          .and_return(interpretations)
         expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end
 

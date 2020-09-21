@@ -81,6 +81,10 @@ module Restitution
       efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end
 
+    def interpretations_competences_transversales
+      CompetencesTransversales::Interpreteur.new(niveaux_competences).interpretations
+    end
+
     def niveaux_competences
       extraie_competences_depuis_restitutions.sort_by do |_, niveau|
         -niveau
@@ -95,7 +99,7 @@ module Restitution
 
     def extraie_competences_depuis_restitutions
       moyenne_competences.each_with_object([]) do |(competence, niveaux), memo|
-        memo << [competence, niveaux.sum.to_f / niveaux.size]
+        memo << [competence, niveaux.sum.fdiv(niveaux.size)]
       end
     end
 

@@ -82,20 +82,20 @@ module Restitution
     end
 
     def niveaux_competences
-      extraie_competences_depuis_restitutions.sort_by do |niveau_competence|
-        -niveau_competence.values.first
+      extraie_competences_depuis_restitutions.sort_by do |_, niveau|
+        -niveau
       end
     end
 
     def competences
-      niveaux_competences.collect { |niveau_competence| niveau_competence.keys.first }
+      niveaux_competences.collect { |competence, _| competence }
     end
 
     private
 
     def extraie_competences_depuis_restitutions
       moyenne_competences.each_with_object([]) do |(competence, niveaux), memo|
-        memo << { competence => niveaux.sum.to_f / niveaux.size }
+        memo << [competence, niveaux.sum.to_f / niveaux.size]
       end
     end
 

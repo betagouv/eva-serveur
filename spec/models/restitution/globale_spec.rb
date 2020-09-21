@@ -108,14 +108,20 @@ describe Restitution::Globale do
 
     context 'une évaluation, une compétences' do
       let(:restitutions) { [double(competences: niveau_comparaison)] }
-      it { expect(restitution_globale.niveaux_competences).to eq([niveau_comparaison]) }
+      it do
+        expect(restitution_globale.niveaux_competences)
+          .to eq([[Competence::COMPARAISON_TRI, 4.0]])
+      end
     end
 
     context 'une évaluation, deux compétences' do
       let(:restitutions) { [double(competences: niveau_comparaison.merge(niveau_rapidite))] }
       it do
         expect(restitution_globale.niveaux_competences)
-          .to eq([niveau_comparaison, niveau_rapidite])
+          .to eq([
+                   [Competence::COMPARAISON_TRI, 4.0],
+                   [Competence::RAPIDITE, 4.0]
+                 ])
       end
     end
 
@@ -125,7 +131,10 @@ describe Restitution::Globale do
       let(:restitutions) { [restitution1, restitution2] }
       it do
         expect(restitution_globale.niveaux_competences)
-          .to eq([niveau_comparaison, niveau_rapidite])
+          .to eq([
+                   [Competence::COMPARAISON_TRI, 4.0],
+                   [Competence::RAPIDITE, 4.0]
+                 ])
       end
     end
 
@@ -136,7 +145,10 @@ describe Restitution::Globale do
       let(:restitutions) { [restitution1, restitution2] }
       it do
         expect(restitution_globale.niveaux_competences)
-          .to eq([niveau_comparaison, niveau_faible])
+          .to eq([
+                   [Competence::COMPARAISON_TRI, 4.0],
+                   [Competence::ORGANISATION_METHODE, 1.0]
+                 ])
       end
     end
 
@@ -152,7 +164,7 @@ describe Restitution::Globale do
       let(:restitution2) { double(competences: niveau_comparaison_3) }
       let(:restitutions) { [restitution1, restitution2] }
       it do
-        resultat = { Competence::COMPARAISON_TRI => 3.5 }
+        resultat = [Competence::COMPARAISON_TRI, 3.5]
         expect(restitution_globale.niveaux_competences).to eq([resultat])
       end
     end

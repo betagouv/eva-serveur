@@ -51,7 +51,7 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       before do
-        competences = [{ Competence::ORGANISATION_METHODE => Competence::NIVEAU_4 }]
+        competences = [[Competence::ORGANISATION_METHODE, Competence::NIVEAU_4]]
         expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
         expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end

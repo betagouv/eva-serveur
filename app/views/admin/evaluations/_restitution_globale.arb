@@ -157,5 +157,15 @@ if can?(:manage, Compte) && !pdf
         end
       end
     end
+
+    tab 'Niveaux compétences transversales' do
+      ol do
+        restitution_globale.niveaux_competences.each do |niveau_competence|
+          li span t("#{niveau_competence.keys.first}.nom",
+                    scope: 'admin.evaluations.restitution_competence') +
+                  ": #{niveau_competence.values.first}"
+        end
+      end
+    end
   end
 end

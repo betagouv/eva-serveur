@@ -65,6 +65,9 @@ namespace :nettoyage do
 
   desc 'Assure une date de fin correcte'
   task date_evenements_fin: :environment do
+    logger = RakeLogger.logger
+    logger.info "Décale événements fin qui ont la mieme date que l'événement précédent..."
+
     Partie.find_each do |partie|
       derniers_evenements = Evenement.order(:date).where(partie: partie).last(2)
       next if derniers_evenements.count < 2 ||
@@ -75,6 +78,7 @@ namespace :nettoyage do
       next if fin.blank?
 
       fin.date += 0.001
+      logger.info "Nouvelle date pour l'événement ##{fin.id} : #{fin.date}"
       fin.save!
     end
   end

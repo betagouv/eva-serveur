@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe 'nettoyage:date_evenements_fin' do
   include_context 'rake'
+  let(:logger) { RakeLogger.logger }
 
   let(:situation) { create :situation_livraison }
   let!(:partie) { create :partie, situation: situation }
@@ -13,6 +14,7 @@ describe 'nettoyage:date_evenements_fin' do
   end
   let!(:evenements) { [evenement_precedent, evenement_fin] }
 
+  before { allow(logger).to receive :info }
   before { subject.invoke }
 
   context 'événement avec date unique' do

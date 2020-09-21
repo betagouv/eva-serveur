@@ -89,10 +89,6 @@
     }
   }
 
-  .nom-competence {
-    margin-left: 1rem;
-  }
-
   .description-competence {
     font-size: .75rem;
     a {
@@ -113,31 +109,26 @@
   }
 
   .competences-identifiees {
-    list-style: none;
-    display: flex;
-    align-items: center;
     margin: 0 0 1.5rem 0;
 
-    .identification-competence {
-      color: $couleur-texte-sombre;
-      .jauge {
-        height: 100%;
-        width: 40%;
-        background-color: $couleur-legere-accent-validation;
-        position: absolute;
-        border-radius: 2rem;
-      }
+    &.jauge-3 {
+      background: asset-data-url('jauge_niveau3.svg') no-repeat 50px 1px;
+    }
+    &.jauge-2 {
+      background: asset-data-url('jauge_niveau3.svg') no-repeat 50px 1px;
+    }
+    &.jauge-1 {
+      background: asset-data-url('jauge_niveau3.svg') no-repeat 50px 1px;
+    }
 
-      .jauge-3 { width: 90% }
-      .jauge-2 { width: 70% }
-      .jauge-1 { width: 50% }
+    .image-competence {
+      position: absolute;
+      top: 0;
+      left: 1.5rem;
+    }
 
-      span {
-        position: relative;
-        img {
-          height: 3rem;
-        }
-      }
+    .informations-competence {
+      padding: 1.5rem 0 0 6.5rem;
     }
   }
 

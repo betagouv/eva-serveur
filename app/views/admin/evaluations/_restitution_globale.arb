@@ -31,22 +31,23 @@ div class: 'admin_restitution_globale' do
 
       interpretations = restitution_globale.interpretations_competences_transversales
       interpretations.each do |competence, interpretation|
-        ul class: 'competences-identifiees col-12' do
-          div class: 'identification-competence col-6' do
-            div class: "jauge jauge-#{interpretation}"
-            if pdf
-              span wicked_pdf_image_tag competence.to_s
-            else
-              span image_tag competence
+        div class: "competences-identifiees jauge-#{interpretation} col-12" do
+          if pdf
+            span class: 'image-competence' do
+              wicked_pdf_image_tag competence.to_s
             end
-            span class: 'nom-competence' do
-              t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence')
+          else
+            span class: 'image-competence' do
+              image_tag competence
             end
           end
-
-          div class: 'description-competence col-6' do
-            div t("#{competence}.description",
-                  scope: 'admin.evaluations.restitution_competence')
+          div class: 'informations-competence' do
+            div class: 'nom-competence' do
+              t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence')
+            end
+            div class: 'description-competence' do
+              t("#{competence}.description", scope: 'admin.evaluations.restitution_competence')
+            end
             url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
             a href: url_competence, target: '_blank' do
               if pdf

@@ -8,13 +8,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
-   sodipodi:docname="jauge_niveau3.svg"
+   sodipodi:docname="jauge_niveau1.svg"
    id="svg12"
    version="1.1"
    fill="none"
-   viewBox="0 0 525 9"
-   height="9"
-   width="525">
+   viewBox="0 0 524.96051 9.1283484"
+   height="9.1283484"
+   width="524.96051">
   <metadata
      id="metadata18">
     <rdf:RDF>
@@ -31,15 +31,15 @@
   <sodipodi:namedview
      inkscape:current-layer="svg12"
      inkscape:window-maximized="0"
-     inkscape:window-y="1114"
-     inkscape:window-x="10"
-     inkscape:cy="40.508666"
-     inkscape:cx="34.698853"
-     inkscape:zoom="0.85356265"
+     inkscape:window-y="1103"
+     inkscape:window-x="79"
+     inkscape:cy="-13.783326"
+     inkscape:cx="159.5622"
+     inkscape:zoom="1.3711678"
      showgrid="false"
      id="namedview14"
-     inkscape:window-height="1011"
-     inkscape:window-width="1507"
+     inkscape:window-height="1075"
+     inkscape:window-width="1628"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -50,9 +50,20 @@
      bordercolor="#666666"
      pagecolor="#ffffff" />
   <path
-     style="stroke-width:1.49999"
      inkscape:connector-curvature="0"
      id="path10"
-     fill="#1E416A"
-     d="m 0,0 h 520.5 c 2.4855,0 4.5,2.014725 4.5,4.5 0,2.485275 -2.0145,4.5 -4.5,4.5 H 0 Z" />
+     stroke-width="0.75"
+     stroke="#1E416A"
+     d="M 0.81362568,0.56235445 H 520.46283 c 2.1738,0 3.93532,1.76294005 3.93532,3.93764545 0,2.1747054 -1.76152,3.9376457 -3.93532,3.9376457 H 0.81362568 Z" />
+  <g
+     transform="matrix(1.7260132,0,0,1.4802804,0,0.2466659)"
+     id="g87"
+     style="fill:none">
+    <path
+       inkscape:connector-curvature="0"
+       d="M 0.5,0.5 H 149 c 1.381,0 2.5,1.11929 2.5,2.5 0,1.38071 -1.119,2.5 -2.5,2.5 H 0.5 Z"
+       fill="#1E416A"
+       stroke="#1E416A"
+       id="path76" />
+  </g>
 </svg>

@@ -86,7 +86,6 @@
     }
 
     .categorie {
-      font-size: 1.3rem;
       margin: 2.5rem 0;
     }
 
@@ -96,23 +95,8 @@
     }
   }
 
-  .identification-competence, .description-competence, .competences-identifiees {
+  .competence-transversale {
     display: inline-block;
-  }
-
-  .competences-identifiees {
-    width: 100%;
-
-    .identification-competence {
-      vertical-align: top;
-      margin-top: 1rem;
-    }
-
-    .description-competence {
-      margin-top: 1rem;
-      margin-right: 1rem;
-      width: 28.1rem;
-    }
   }
 
   .saut-de-page {

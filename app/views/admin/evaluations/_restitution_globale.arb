@@ -49,7 +49,7 @@ div class: 'admin_restitution_globale' do
                        scope: 'admin.evaluations.restitution_competence')
               url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
               a href: url_competence, target: '_blank' do
-                t('.url_competence') + ' ' + url_competence
+                t('.url_competence', url: url_competence)
               end
             end
           end

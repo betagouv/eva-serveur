@@ -37,7 +37,7 @@ fr:
           - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
 
           Pour obtenir vos scores, n'hésitez pas à repasser le parcours eva plus tard.
-        url_competence: 'Détail et liste des métiers associés :'
+        url_competence: 'Détail et liste des métiers associés : %{url}'
       restitution_competence:
         indetermine: non obs.
         1: 1

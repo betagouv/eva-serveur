@@ -45,7 +45,8 @@ div class: 'admin_restitution_globale' do
             h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
                class: 'nom-competence'
             div class: 'description-competence' do
-              div t("#{competence}.description", scope: 'admin.evaluations.restitution_competence')
+              div md t("#{competence}.stanine#{interpretation}",
+                       scope: 'admin.evaluations.restitution_competence')
               url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
               a href: url_competence, target: '_blank' do
                 t('.url_competence') + ' ' + url_competence

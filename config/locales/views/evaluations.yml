@@ -56,7 +56,12 @@ fr:
         vigilance_controle:
           nom: Niveau de vigilance et de contrôle
           titre: Vigilance et contrôle de la situation proposée
-          description: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
+          stanine1: |
+            Vous avez **des progrès à faire** en vigilance et de contrôle. Cela signifie qu’en situation professionnelle, vous pouvez avoir des difficultés à faire attention à votre environnement, à déterminer quand et sur quoi vous devez vous concentrer. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
+          stanine2: |
+            Vous réussissez **assez bien** à faire preuve de vigilance et de contrôle. Vous êtes capable de faire attention à votre environnement, de savoir quand et sur quoi vous devez porter votre attention, et de rester concentré·e sur quelque chose. Pour autant, il peut être difficile pour vous de réagir vite face à un événement ou une anomalie. Vous pouvez donc vous améliorer, n’hésitez pas à en parler à votre conseiller·e !
+          stanine3: |
+            Vous parvenez **très bien** à faire preuve de vigilance et de contrôle. Vous êtes capable de faire attention à votre environnement, de savoir quand et sur quoi vous devez vous concentrer, de réagir vite face à un événement ou une anomalie. Vous pouvez donc vous adapter rapidement à de nombreux métiers des secteurs de l’Aide à la personne, de l’Entretien, du BTP, et de la Sécurité, bravo !
         perseverance:
           nom: Persévérance
           titre: A persévéré dans la réalisation de la tâche
@@ -64,19 +69,44 @@ fr:
         organisation_methode:
           nom: Organisation et méthode
           titre: Organisation et méthode pour aborder l’exercice
-          description: Sait décomposer la tâche en actions simples, à déterminer et planifier les étapes de réalisation, et à respecter son plan d’action.
+          stanine1: |
+            Vous avez **des progrès à faire** pour vous organiser et faire preuve de méthode. Cela signifie qu’en situation professionnelle, il peut être difficile pour vous de découper vos tâches en actions simples, déterminer et planifier les étapes de réalisation, et respecter votre plan d’action. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
+          stanine2: |
+            Vous réussissez **assez bien** à vous organiser et faire preuve de méthode. Cela signifie qu’en situation professionnelle, vous êtes capable de découper vos tâches en actions simples et de déterminer et planifier les étapes. Néanmoins, il peut être difficile pour vous de respecter votre plan. Vous pouvez donc vous améliorer, n’hésitez pas à en parler à votre conseiller·e !
+          stanine3: |
+            Vous parvenez **très bien** à vous organiser et faire preuve de méthode. Cela signifie qu’en situation professionnelle, vous êtes capable de découper vos tâches en actions simples, de déterminer et planifier les étapes, et de respecter votre plan. Vous pouvez donc vous adapter rapidement à de nombreux métiers des secteurs de l’Aide à la personne, du BTP, de la Logistique, ou du Secrétariat.
         rapidite:
           nom: Vitesse d'exécution
           titre: Vitesse d'exécution de l’exercice proposé
-          description: Parvient à mobiliser ses compétences afin de réaliser correctement les tâches demandées en un minimum de temps.
+          stanine1: |
+            Pour le moment, vous avez des **progrès à faire** en vitesse d'exécution.
+
+              - Soit il est difficile pour vous de travailler vite,
+              - Soit vous travaillez trop vite donc vous faites des erreurs. Or, il est important de réaliser vos tâches à la fois vite et bien.
+
+            N’hésitez pas à discuter avec votre conseiller·e pour trouver comment progresser sur ce point !
+          stanine2: |
+            Vous avez **de légers progrès à faire** en vitesse d'exécution. Même si vous êtes capable de travailler vite, vous pouvez avoir tendance à vous précipiter et donc à faire des erreurs. N’hésitez pas à discuter avec votre conseiller·e pour trouver comment progresser sur ce point !
+          stanine3: |
+            Vous avez **un bon niveau** en vitesse d'exécution, ce qui signifie que vous réalisez vos tâches au travail à la fois vite et bien. Vous savez utiliser vos compétences en un minimum de temps (sans vous précipiter). Vous pouvez donc vous adapter à de nombreux métiers du BTP, de l’Industrie et de l’Aide à la personne, bravo !
         comparaison_tri:
           nom: Comparaison et tri
           titre: Comparaison et tri entre les objets proposés
-          description: Sait distinguer des objets entre eux sur la base de critères visuels (calibre, couleur, forme, disposition), les comparer à des modèles, et les classer. Parvient à détecter et localiser les défauts d’aspect des objets pour les trier.
+          stanine1: |
+            Pour le moment, vous semblez avoir **des progrès à faire** en comparaison et tri. Il peut être difficile pour vous de différencier des objets entre eux, de les comparer, et de les classer. Il peut également être difficile pour vous de détecter des défauts sur les objets. N’hésitez pas à discuter avec votre conseiller·e pour trouver comment progresser sur ce point !
+          stanine2: |
+            Vous avez **de légers progrès à faire** en comparaison et tri. Si vous êtes capable de différencier des objets entre eux, il peut difficile pour vous de les comparer à des modèles, ou de les classer. N’hésitez pas à discuter avec votre conseiller·e pour trouver comment progresser sur ce point !
+          stanine3: |
+            Vous avez **un bon niveau** en comparaison et tri, ce qui signifie que vous êtes capable de différencier des objets entre eux, de les comparer, et de les classer. Vous êtes également capable de détecter les défauts des objets pour les trier. Vous pouvez donc vous adapter rapidement à de nombreux métiers de la Grande distribution et de l’Industrie, bravo !
         attention_concentration:
           nom: Attention/Concentration
           titre: Niveau de concentration pendant l’exercice
-          description: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
+          stanine1: |
+            Vous avez **des progrès à faire** pour rester attentif·ve et concentré·e en situation de travail, notamment sur une tâche difficile, ou de rester concentré·e sur plusieurs choses en même temps. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
+          stanine2: |
+            Vous réussissez **assez bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester focalisé·e sur une tâche, mais vous pouvez vous déconcentrer face à la difficulté et la distraction. Il peut aussi être difficile pour vous d'être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous améliorer, parlez-en à votre conseiller·e !
+          stanine3: |
+            Vous parvenez **très bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester concentré·e sur une tâche pendant longtemps malgré la difficulté et la distraction. Aussi, vous savez être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous adapter rapidement à de nombreux métiers du BTP, de l’Industrie, et de la Surveillance, bravo !
       show:
         titre:
           restitution_globale: Restitution globale

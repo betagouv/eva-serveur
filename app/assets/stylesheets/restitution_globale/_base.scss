@@ -102,7 +102,11 @@
 
     &.jauge {
       background: no-repeat 0 0;
+      @media (max-width:1050px) {
+        background-size: contain;
+      }
     }
+
 
     &.jauge-3 {
       background-image: asset-data-url('jauge_niveau3.svg');

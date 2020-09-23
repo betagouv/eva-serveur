@@ -31,7 +31,9 @@ div class: 'admin_restitution_globale' do
 
       interpretations = restitution_globale.interpretations_competences_transversales
       interpretations.each do |competence, interpretation|
-        div class: "competence-transversale jauge jauge-#{interpretation} col-12" do
+        div class: 'competence-transversale col-12' do
+          div class: 'jauge'
+          div class: "jauge remplissage remplissage-#{interpretation}"
           if pdf
             span class: 'image-competence' do
               wicked_pdf_image_tag competence.to_s

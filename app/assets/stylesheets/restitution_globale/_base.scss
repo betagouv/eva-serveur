@@ -100,22 +100,28 @@
     margin-bottom: 4rem;
     position: relative;
 
-    &.jauge {
-      background: no-repeat 0 0;
-      @media (max-width:1050px) {
-        background-size: contain;
+    .jauge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.6rem;
+      border: 1px solid $couleur-texte-sombre;
+      border-radius: 0 0.3rem 0.3rem 0;
+
+      &.remplissage {
+        background-color: $couleur-texte-sombre;
+
+        &-3 {
+          width: 100%;
+        }
+        &-2 {
+          width: 75%;
+        }
+        &-1 {
+          width: 50%;
+        }
       }
-    }
-
-
-    &.jauge-3 {
-      background-image: asset-data-url('jauge_niveau3.svg');
-    }
-    &.jauge-2 {
-      background-image: asset-data-url('jauge_niveau2.svg');
-    }
-    &.jauge-1 {
-      background-image: asset-data-url('jauge_niveau1.svg');
     }
 
     .image-competence {

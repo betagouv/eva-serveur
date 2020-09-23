@@ -269,12 +269,16 @@ fr:
           palier1:
             code: 'A1'
             description: |
+              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
+
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier2:
             code: 'A2'
             description: |
+              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
+
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
@@ -289,12 +293,16 @@ fr:
           palier1:
             code: 'X1'
             description: |
+              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
+
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
             code: 'X2'
             description: |
+              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
+
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
@@ -305,10 +313,14 @@ fr:
 
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea: |
+          ### Certification Cléa recommandée
+
           Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 
           **Vous avez atteint le niveau pour envisager la certification des compétences de base du référentiel Cléa Certif'Pro, parlez en avec votre conseiller pour savoir si cette certification pourrait être utile à votre projet !**
         illettrisme_potentiel: |
+          ### Formation fortement recommandée
+
           Votre score indique que vous rencontrez d’importantes difficultés en français et en mathématiques qui pourraient vous desservir dans vos futurs emplois et formations.
 
           **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier ces compétences !**

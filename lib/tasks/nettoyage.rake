@@ -49,17 +49,17 @@ namespace :nettoyage do
   end
 
   def noms_colonnes(mes, colonnes, colonnes_z)
-    noms = ""
+    noms = ''
     noms += "#{mes}: #{colonnes[mes].join("; #{mes}: ")};" unless colonnes[mes].empty?
     noms += "#{mes}: cote_z_#{colonnes_z[mes].join("; #{mes}: cote_z_")};" unless colonnes_z[mes].empty?
     noms
   end
 
-  desc 'Extrait les données pour calcule le taux de bonne réponses Livraison et Objets trouvés pour les psychologues'
+  desc 'Extrait les données pour le taux de bonne réponses Livraison et Objets trouvés pour les psychologues'
   task extrait_questions: :environment do
     Rails.logger.level = :warn
 
-    puts "MES;meta-competence;question;succes"
+    puts 'MES;meta-competence;question;succes'
 
     # Objet trouves
     sessions_ids_objets_trouves = Partie.joins(:situation).where(situations: {nom_technique: :objets_trouves }).select(:session_id)
@@ -71,9 +71,13 @@ namespace :nettoyage do
     end
 
     # Livraison
-    sessions_ids_livraison = Partie.joins(:situation).where(situations: {nom_technique: :livraison }).select(:session_id)
-    questions_numeratie = Question.where(metacompetence: 0).select(:id).map { |q| q.id }
-    evenements = Evenement.where(nom: :reponse)
+    sessions_ids_livraison = Partie
+      .joins(:situation)
+      .where(situations: { nom_technique: :livraison })
+      .select(:session_id)
+    questions_numeratie = Question.where(metacompetence: 0).select(:id).map(&:id)
+    evenements = Evenement
+      .where(nom: :reponse)
       .where("donnees ->> 'question' in ('#{questions_numeratie.join("','")}')")
       .where(session_id: sessions_ids_livraison)
     evenements.each do |evt|
@@ -81,7 +85,7 @@ namespace :nettoyage do
       metacompetence = question.metacompetence
       question = question.libelle
       reponse = Choix.find(evt.donnees['reponse'])
-      succes = reponse.type_choix == "bon"
+      succes = reponse.type_choix == 'bon'
       puts "livraison;#{metacompetence};#{question};#{succes}"
     end
   end
@@ -90,10 +94,10 @@ namespace :nettoyage do
   task extrait_stats: :environment do
     Rails.logger.level = :warn
     colonnes = {
-      'bienvenue' => [],
       'maintenance' => Restitution::Maintenance::METRIQUES.keys,
       'livraison' => Restitution::Livraison::METRIQUES.keys,
-      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys
+      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys,
+      'bienvenue' => []
     }
     colonnes_z = {
       'bienvenue' => [],
@@ -103,14 +107,14 @@ namespace :nettoyage do
     }
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
-    entete_colonnes = "campagne;nom evalué·e;date creation de la partie;"
-    colonnes.keys.each do |mes|
+    entete_colonnes = 'campagne;nom evalué·e;date creation de la partie;'
+    colonnes.each_key do |mes|
       entete_colonnes += noms_colonnes(mes, colonnes, colonnes_z)
     end
     puts entete_colonnes
     evaluations.each do |e|
       situations = {}
-      colonnes.keys.each do |mes|
+      colonnes.each_key do |mes|
         situations[mes] = Array.new(colonnes[mes].count + colonnes_z[mes].count, 'vide')
       end
 
@@ -121,11 +125,10 @@ namespace :nettoyage do
         situations[partie.situation.nom_technique] = []
         case partie.situation.nom_technique
         when 'bienvenue'
-          restitution.questions_et_reponses.each do |question_et_reponse|
-            reponse = question_et_reponse[:reponse]
-            question = question_et_reponse[:question]
+          restitution.questions_et_reponses.each do |question, reponse|
             situations[partie.situation.nom_technique] << question.libelle
-            situations[partie.situation.nom_technique] << reponse.intitule
+            reponse = question.type_qcm == :jauge.to_s ? reponse.position : reponse.intitule
+            situations[partie.situation.nom_technique] << reponse
           end
         else
           colonnes[partie.situation.nom_technique]&.each do |metrique|
@@ -137,6 +140,7 @@ namespace :nettoyage do
           end
         end
       end
+
       valeurs_des_parties = situations.keys.map do |situation|
         situations[situation].join('; ')
       end

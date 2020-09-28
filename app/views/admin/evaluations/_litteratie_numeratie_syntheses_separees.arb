@@ -14,11 +14,11 @@ div class: 'row' do
       div class: 'synthese-illettrisme-illustration mb-4' do
         code_niveau = t("#{niveau}.code", scope: scope)
         if pdf
-          span wicked_pdf_image_tag competence.to_s
-          span wicked_pdf_image_tag "niveau#{code_niveau}" if niveau.present?
+          span wicked_pdf_image_tag "#{competence}.svg"
+          span wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
         else
-          span image_tag competence
-          span image_tag "niveau#{code_niveau}", alt: "Niveau #{code_niveau}" if niveau.present?
+          span image_tag "#{competence}.svg"
+          span image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
         end
       end
       h2 class: 'mb-3' do

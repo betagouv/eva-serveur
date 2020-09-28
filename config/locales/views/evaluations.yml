@@ -56,6 +56,7 @@ fr:
         vigilance_controle:
           nom: Niveau de vigilance et de contrôle
           titre: Vigilance et contrôle de la situation proposée
+          description: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
           stanine1: |
             Vous avez **des progrès à faire** en vigilance et de contrôle. Cela signifie qu’en situation professionnelle, vous pouvez avoir des difficultés à faire attention à votre environnement, à déterminer quand et sur quoi vous devez vous concentrer. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
           stanine2: |
@@ -69,6 +70,7 @@ fr:
         organisation_methode:
           nom: Organisation et méthode
           titre: Organisation et méthode pour aborder l’exercice
+          description: Sait décomposer la tâche en actions simples, à déterminer et planifier les étapes de réalisation, et à respecter son plan d’action.
           stanine1: |
             Vous avez **des progrès à faire** pour vous organiser et faire preuve de méthode. Cela signifie qu’en situation professionnelle, il peut être difficile pour vous de découper vos tâches en actions simples, déterminer et planifier les étapes de réalisation, et respecter votre plan d’action. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
           stanine2: |
@@ -78,6 +80,7 @@ fr:
         rapidite:
           nom: Vitesse d'exécution
           titre: Vitesse d'exécution de l’exercice proposé
+          description: Parvient à mobiliser ses compétences afin de réaliser correctement les tâches demandées en un minimum de temps.
           stanine1: |
             Pour le moment, vous avez des **progrès à faire** en vitesse d'exécution.
 
@@ -92,6 +95,7 @@ fr:
         comparaison_tri:
           nom: Comparaison et tri
           titre: Comparaison et tri entre les objets proposés
+          description: Sait distinguer des objets entre eux sur la base de critères visuels (calibre, couleur, forme, disposition), les comparer à des modèles, et les classer. Parvient à détecter et localiser les défauts d’aspect des objets pour les trier.
           stanine1: |
             Pour le moment, vous semblez avoir **des progrès à faire** en comparaison et tri. Il peut être difficile pour vous de différencier des objets entre eux, de les comparer, et de les classer. Il peut également être difficile pour vous de détecter des défauts sur les objets. N’hésitez pas à discuter avec votre conseiller·e pour trouver comment progresser sur ce point !
           stanine2: |
@@ -101,6 +105,7 @@ fr:
         attention_concentration:
           nom: Attention/Concentration
           titre: Niveau de concentration pendant l’exercice
+          description: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
           stanine1: |
             Vous avez **des progrès à faire** pour rester attentif·ve et concentré·e en situation de travail, notamment sur une tâche difficile, ou de rester concentré·e sur plusieurs choses en même temps. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
           stanine2: |

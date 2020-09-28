@@ -6,9 +6,9 @@ div class: 'row' do
   div class: 'col col-auto' do
     div class: 'synthese-illettrisme-illustration mr-3' do
       if pdf
-        span wicked_pdf_image_tag 'francais_mathematique'
+        span wicked_pdf_image_tag 'francais_mathematique.svg'
       else
-        span image_tag 'francais_mathematique'
+        span image_tag 'francais_mathematique.svg'
       end
     end
   end

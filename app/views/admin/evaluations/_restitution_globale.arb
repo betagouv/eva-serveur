@@ -26,7 +26,7 @@ div class: 'admin_restitution_globale' do
       end
     end
 
-    div class: 'row saut-de-page mx-5' do
+    div class: "row saut-de-page #{marges_generales}" do
       div md t('.competences_fortes_vides') if niveaux_competences.blank?
 
       interpretations = restitution_globale.interpretations_competences_transversales

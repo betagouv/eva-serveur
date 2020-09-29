@@ -51,7 +51,7 @@ module Api
                       scope: 'admin.evaluations.restitution_competence'),
           description: I18n.t("#{identifiant}.description",
                               scope: 'admin.evaluations.restitution_competence'),
-          picto: ActionController::Base.helpers.asset_url(identifiant)
+          picto: ActionController::Base.helpers.asset_url("#{identifiant}.svg")
         }
       end
     end

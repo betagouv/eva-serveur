@@ -26,32 +26,34 @@ div class: 'admin_restitution_globale' do
       end
     end
 
-    div class: "row saut-de-page #{marges_generales}" do
-      div md t('.competences_fortes_vides') if niveaux_competences.blank?
+    div class: 'row saut-de-page' do
+      div class: 'col' do
+        div md t('.competences_fortes_vides') if niveaux_competences.blank?
 
-      interpretations = restitution_globale.interpretations_competences_transversales
-      interpretations.each do |competence, interpretation|
-        div class: 'competence-transversale col-12' do
-          div class: 'jauge'
-          div class: "jauge remplissage remplissage-#{interpretation}"
-          if pdf
-            span class: 'image-competence' do
-              wicked_pdf_image_tag "#{competence}.svg"
+        interpretations = restitution_globale.interpretations_competences_transversales
+        interpretations.each do |competence, interpretation|
+          div class: 'competence-transversale' do
+            div class: 'jauge'
+            div class: "jauge remplissage remplissage-#{interpretation}"
+            if pdf
+              span class: 'image-competence' do
+                wicked_pdf_image_tag "#{competence}.svg"
+              end
+            else
+              span class: 'image-competence' do
+                image_tag "#{competence}.svg"
+              end
             end
-          else
-            span class: 'image-competence' do
-              image_tag "#{competence}.svg"
-            end
-          end
-          div class: 'informations-competence' do
-            h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
-               class: 'nom-competence'
-            div class: 'description-competence' do
-              div md t("#{competence}.stanine#{interpretation}",
-                       scope: 'admin.evaluations.restitution_competence')
-              url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
-              a href: url_competence, target: '_blank' do
-                t('.url_competence', url: url_competence)
+            div class: 'informations-competence' do
+              h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
+                 class: 'nom-competence'
+              div class: 'description-competence' do
+                div md t("#{competence}.stanine#{interpretation}",
+                         scope: 'admin.evaluations.restitution_competence')
+                url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
+                a href: url_competence, target: '_blank' do
+                  t('.url_competence', url: url_competence)
+                end
               end
             end
           end

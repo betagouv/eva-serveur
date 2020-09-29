@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
 namespace :nettoyage do
+  desc 'Annonymise toutes les évaluations'
+  task annonymise: :environment do
+    logger = RakeLogger.logger
+    rng = RandomNameGenerator.new
+    Evaluation.all.each do |evaluation|
+      nouveau_nom = "#{rng.compose(2)} #{rng.compose(3).upcase}"
+      logger.info "#{evaluation.nom} est remplacé par #{nouveau_nom}"
+      evaluation.nom = nouveau_nom
+      evaluation.email = nil
+      evaluation.telephone = nil
+      evaluation.save
+    end
+  end
+
   desc "Recalculer les metriques d'une situation."
   task recalcule_metriques: :environment do
     arg_situation = 'SITUATION'

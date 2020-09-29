@@ -1,12 +1,10 @@
 @import "variables";
 
-.admin_restitution_globale {
+.panel_admin_restitution_globale {
+  background-color: white;
+}
 
-  @media screen {
-    #main_content {
-      padding-top: 2rem;
-    }
-  }
+.admin_restitution_globale {
   @import "bootstrap_minimal";
 
   color: $couleur-texte;

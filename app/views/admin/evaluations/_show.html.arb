@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel t('.titre.restitution_globale') do
+panel t('.titre.restitution_globale'), class: 'panel_admin_restitution_globale' do
   render partial: 'restitution_globale', locals: { pdf: false }
 end
 

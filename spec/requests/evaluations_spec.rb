@@ -133,6 +133,7 @@ describe 'Evaluation API', type: :request do
             expect(premiere_competence['description'])
               .to eql(I18n.t("#{Competence::RAPIDITE}.description",
                              scope: 'admin.evaluations.restitution_competence'))
+            expect(premiere_competence['description']).to_not start_with('translation missing')
           end
 
           it "envoie aussi l'URL du picto des compétences" do

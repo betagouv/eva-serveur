@@ -18,3 +18,46 @@ $couleur-niveau-2: $couleur-warning;
 $couleur-niveau-3: $couleur-accent-erreur;
 
 $grid-gutter-width: 3rem;
+
+/* quicksand-regular - latin-ext */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../quicksand-v21-latin-ext-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../quicksand-v21-latin-ext-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../quicksand-v21-latin-ext-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../quicksand-v21-latin-ext-regular.woff') format('woff'), /* Modern Browsers */
+       url('../quicksand-v21-latin-ext-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../quicksand-v21-latin-ext-regular.svg#Quicksand') format('svg'); /* Legacy iOS */
+}
+
+/* quicksand-600 - latin-ext */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/quicksand-v21-latin-ext-600.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../quicksand-v21-latin-ext-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../quicksand-v21-latin-ext-600.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../quicksand-v21-latin-ext-600.woff') format('woff'), /* Modern Browsers */
+       url('../quicksand-v21-latin-ext-600.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../quicksand-v21-latin-ext-600.svg#Quicksand') format('svg'); /* Legacy iOS */
+}
+
+/* quicksand-700 - latin-ext */
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../quicksand-v21-latin-ext-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('../quicksand-v21-latin-ext-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../quicksand-v21-latin-ext-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../quicksand-v21-latin-ext-700.woff') format('woff'), /* Modern Browsers */
+       url('../quicksand-v21-latin-ext-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../quicksand-v21-latin-ext-700.svg#Quicksand') format('svg'); /* Legacy iOS */
+}
+

@@ -17,5 +17,9 @@ WickedPdf.config = {
 
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
-  layout: 'pdf'
+  layout: 'pdf',
+  margin: { top:    0,
+            bottom: 0,
+            left:   0,
+            right:  0 }
 }

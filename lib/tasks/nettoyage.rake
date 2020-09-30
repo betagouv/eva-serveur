@@ -13,6 +13,13 @@ namespace :nettoyage do
       evaluation.telephone = nil
       evaluation.save
     end
+    Contact.delete_all
+    Compte.all.each do |compte|
+      if compte.role == 'organisation'
+        compte.email = "#{rng.compose(2)}@#{rng.compose(3)}.fr"
+        compte.save
+      end
+    end
   end
 
   desc "Recalculer les metriques d'une situation."

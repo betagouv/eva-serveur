@@ -118,13 +118,13 @@ describe 'Admin - Evaluation', type: :feature do
       it "affiche l'évaluation en pdf" do
         allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
         allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
-        allow(restitution_globale).to receive(:structure).and_return('Mission locale Paris')
+        allow(restitution_globale).to receive(:structure).and_return('structure')
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
         path = page.save_page
 
         reader = PDF::Reader.new(path)
         expect(reader.page(1).text).to include('Roger')
-        expect(reader.page(1).text).to include('Mission locale Paris')
+        expect(reader.page(1).text).to include('structure')
       end
     end
   end

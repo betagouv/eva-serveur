@@ -11,7 +11,7 @@ div class: 'autopositionnement' do
       end
       div class: 'col' do
         div class: 'jauge' do
-          div strong reponse.position, class: "position-#{reponse.position} puce"
+          div reponse.position, class: "position-#{reponse.position} puce"
         end
       end
     end

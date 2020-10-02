@@ -9,21 +9,21 @@
 
   color: $couleur-texte;
   font-size: 1rem;
+  font-family: $font-texte;
 
   h2 {
-    font-family: 'Quicksand';
+    font-family: $font-titre;
     color: $couleur-texte-sombre;
     font-weight: bold;
   }
 
   h3 {
-    font-family: 'Quicksand';
+    font-family: $font-titre;
     color: $couleur-principale;
     font-size: 1rem;
     font-weight: 600;
   }
 
-  font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   .header, .title_bar { display: none; }
 
@@ -73,7 +73,7 @@
       background-position: center;
       background-repeat: no-repeat;
       text-align: center;
-      font-family: 'Quicksand';
+      font-family: $font-titre;
       font-weight: 600;
       font-size: 1.1rem;
       color: $couleur-blanc;

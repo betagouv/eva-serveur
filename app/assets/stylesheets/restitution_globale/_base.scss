@@ -11,17 +11,19 @@
   font-size: 1rem;
 
   h2 {
+    font-family: 'Quicksand';
     color: $couleur-texte-sombre;
     font-weight: bold;
   }
 
   h3 {
+    font-family: 'Quicksand';
     color: $couleur-principale;
     font-size: 1rem;
     font-weight: 600;
   }
 
-  font-family: "Quicksand", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Work Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   .header, .title_bar { display: none; }
 
@@ -35,6 +37,8 @@
   }
 
   .autopositionnement {
+    color: $couleur-texte-sombre;
+
     .intitule-question {
       display: flex;
       align-items: center;
@@ -61,14 +65,17 @@
     .puce {
       position: absolute;
       top: 50%;
-      margin-top: -10px;
-      width: 20px;
-      line-height: 20px;
+      margin-top: -14px;
+      width: 28px;
+      line-height: 28px;
       background-image: asset-data-url('puce_jauge.svg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       text-align: center;
+      font-family: 'Quicksand';
+      font-weight: 600;
+      font-size: 1.1rem;
       color: $couleur-blanc;
     }
 

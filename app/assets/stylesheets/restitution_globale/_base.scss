@@ -24,6 +24,9 @@
     font-weight: 600;
   }
 
+  .marges-page {
+    margin : 0 3rem;
+  }
 
   .header, .title_bar { display: none; }
 
@@ -103,7 +106,7 @@
 
   .competence-transversale {
     margin-left: 1.7rem; // 1/2 largeur de image_competence
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     position: relative;
 
     .jauge {

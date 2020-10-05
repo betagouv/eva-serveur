@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-marges_generales = 'mx-5'
 niveaux_competences = restitution_globale.niveaux_competences
 
 div class: 'admin_restitution_globale' do
   if auto_positionnement
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: marges_generales do
+    div class: 'marges-page' do
       div class: 'saut-de-page' do
         render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
       end
@@ -18,7 +17,7 @@ div class: 'admin_restitution_globale' do
 
   render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-  div class: marges_generales do
+  div class: 'marges-page' do
     div class: 'text-center my-5' do
       h2 t('.competences_fortes_titre')
       para class: 'legende-titre' do
@@ -67,7 +66,7 @@ div class: 'admin_restitution_globale' do
   div class: 'saut-de-page' do
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
 
-    div class: marges_generales do
+    div class: 'marges-page' do
       div class: 'synthese-illettrisme' do
         if restitution_globale.interpretations_niveau1.size == 1
           render 'litteratie_numeratie_synthese_unique',
@@ -96,7 +95,7 @@ div class: 'admin_restitution_globale' do
   end
   unless mes_avec_redaction_de_notes.empty?
     render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
-    div class: marges_generales do
+    div class: 'marges-page' do
       mes_avec_redaction_de_notes.each do |restitution|
         situation = restitution.situation
 

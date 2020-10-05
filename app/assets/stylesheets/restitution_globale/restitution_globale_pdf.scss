@@ -53,6 +53,17 @@
     }
   }
 
+  .pied-page {
+    background-color: $couleur-texte-sombre;
+    color: $couleur-blanc;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 2.5rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
   .synthese-illettrisme {
     margin-bottom: 5rem;
 
@@ -104,7 +115,9 @@
     display: inline-block;
   }
 
-  .saut-de-page {
+  .page {
+    height: 1540px;
+    position: relative;
     page-break-after: always;
   }
 

@@ -3,22 +3,28 @@
 module Restitution
   module Illettrisme
     class InterpreteurNiveau1
-      def initialize(scores)
+      def initialize(scores, restitutions)
         @interpreteur_score = InterpreteurScores.new(scores)
+        @detecteur_illettrisme = DetecteurIllettrisme.new(restitutions)
+      end
+
+      def socle_clea?
+        interpretations == [{ litteratie: :palier3 }, { numeratie: :palier3 }]
+      end
+
+      def synthese
+        if @detecteur_illettrisme.illettrisme_potentiel?
+          'illettrisme_potentiel'
+        elsif socle_clea?
+          'socle_clea'
+        else
+          'ni_ni'
+        end
       end
 
       def interpretations
-        applique_exceptions(
-          @interpreteur_score.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1)
-        )
-      end
-
-      def applique_exceptions(interpretations)
-        if interpretations == [{ litteratie: :palier3 }, { numeratie: :palier3 }]
-          return ['socle_clea']
-        end
-
-        interpretations
+        @interpretations ||= @interpreteur_score
+                             .interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1)
       end
     end
   end

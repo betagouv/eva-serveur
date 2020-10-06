@@ -70,15 +70,12 @@ div class: 'admin_restitution_globale' do
 
     div class: 'marges-page' do
       div class: 'synthese-illettrisme' do
-        if restitution_globale.interpretations_niveau1.size == 1
-          render 'litteratie_numeratie_synthese_unique',
-                 interpretation: restitution_globale.interpretations_niveau1[0],
-                 pdf: pdf
-        else
-          render 'litteratie_numeratie_syntheses_separees',
-                 interpretations: restitution_globale.interpretations_niveau1,
-                 pdf: pdf
-        end
+        render 'litteratie_numeratie_synthese',
+               synthese: restitution_globale.synthese,
+               pdf: pdf
+        render 'litteratie_numeratie_niveau1',
+               interpretations: restitution_globale.interpretations_niveau1,
+               pdf: pdf
       end
 
       div class: 'row mb-4' do

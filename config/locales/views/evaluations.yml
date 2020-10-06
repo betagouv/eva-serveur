@@ -199,55 +199,35 @@ fr:
         ecart_type_glissant: Écart type glissant
       pas_de_score: |
         Votre score n'a pas pu être calculé. Les raisons peuvent être les suivantes :
-
         - vous avez abandonné à un ou plusieurs mini-jeux,
         - vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous vous êtes par exemple absenté·e quelques minutes),
         - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
-
-        Pour obtenir votre score à cette compétence, n'hésitez pas à repasser le parcours eva plus tard.
       interpretations_niveau2:
         score_ccf:
           titre: Connaissance et compréhension du français
           palier1: |
-            Vous avez **des progrès à faire** en ce qui concerne la connaissance des mots français et leur compréhension.
-            Actuellement, il est possible que vous ayez des difficultés à comprendre vos interlocuteurs ou à lire des documents.
-            N’hésitez pas à vous former pour progresser sur ce point !
+            Vous avez **des progrès à faire** en ce qui concerne la connaissance des mots français et leur compréhension. Actuellement, il est possible que vous ayez des difficultés à comprendre vos interlocuteurs ou à lire des documents. N’hésitez pas à vous former pour progresser sur ce point !
           palier2: |
             Vous avez une **assez bonne** connaissance et compréhension des mots français.
-            Vous comprenez certainement bien vos interlocuteurs et les documents écrits, mais vous pouvez passer à côté d’informations importantes.
-            N’hésitez pas à vous former pour progresser sur ce point !
+            Vous comprenez certainement bien vos interlocuteurs et les documents écrits, mais vous pouvez passer à côté d’informations importantes. N’hésitez pas à vous former pour progresser sur ce point !
           palier3: |
-            Vous avez une **bonne** compréhension du français et pouvez comprendre sans problème les consignes de votre employeur, même les plus complexes.
-            Pas de besoin de formation pour cette compétence, bravo !
-
+            Vous avez une **bonne** compréhension du français et pouvez comprendre sans problème les consignes de votre employeur, même les plus complexes. Pas de besoin de formation pour cette compétence, bravo !
         score_syntaxe_orthographe:
           titre: Grammaire et orthographe
           palier1: |
-            Vous avez **des progrès à faire** en orthographe et grammaire.
-            Actuellement, il est possible que vos interlocuteurs aient des difficultés à vous comprendre.
-            N’hésitez pas à vous former pour progresser sur ce point !
+            Vous avez **des progrès à faire** en orthographe et grammaire. Actuellement, il est possible que vos interlocuteurs aient des difficultés à vous comprendre. N’hésitez pas à vous former pour progresser sur ce point !
           palier2: |
-            Vous avez un **assez bon niveau** en orthographe et grammaire, mais il vous est encore possible de progresser.
-            Vos écrits ont de bonnes chances d’être bien compris, mais on pourrait vous reprocher de ne pas être assez clair·e.
-            N’hésitez pas à vous former pour progresser sur cette compétence !
+            Vous avez un **assez bon niveau** en orthographe et grammaire, mais il vous est encore possible de progresser. Vos écrits ont de bonnes chances d’être bien compris, mais on pourrait vous reprocher de ne pas être assez clair·e. N’hésitez pas à vous former pour progresser sur cette compétence !
           palier3: |
-            Vous avez un **bon niveau** d’orthographe et grammaire.
-            Vous pouvez produire des écrits professionnels compréhensibles par tout le monde.
-            Pas de besoin de formation pour cette compétence !
-
+            Vous avez un **bon niveau** d’orthographe et grammaire. Vous pouvez produire des écrits professionnels compréhensibles par tout le monde. Pas de besoin de formation pour cette compétence !
         score_memorisation:
           titre: Utilisation des informations à disposition
           palier1: |
-            Vous avez **des progrès à faire** pour retenir et utiliser des informations qui vous ont été données.
-            Il est possible que vous rencontriez des difficultés dans votre activité professionnelle, mais vous pouvez progresser !
+            Vous avez **des progrès à faire** pour retenir et utiliser des informations qui vous ont été données. Il est possible que vous rencontriez des difficultés dans votre activité professionnelle, mais vous pouvez progresser !
           palier2: |
-            Vous réussissez **assez bien** à retenir et utiliser des informations qui vous ont été données.
-            Vous avez de bonnes chances de retenir les informations pour ensuite les utiliser en contexte professionnel, mais vous pouvez encore vous améliorer.
-            N’hésitez pas à en parler à votre conseiller !
+            Vous réussissez **assez bien** à retenir et utiliser des informations qui vous ont été données. Vous avez de bonnes chances de retenir les informations pour ensuite les utiliser en contexte professionnel, mais vous pouvez encore vous améliorer. N’hésitez pas à en parler à votre conseiller !
           palier3: |
-            Vous parvenez **très bien** à retenir et utiliser des informations qui vous ont été données.
-            Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
-
+            Vous parvenez **très bien** à retenir et utiliser des informations qui vous ont été données. Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
         score_numeratie:
           titre: Compétences mathématiques
           palier1: |
@@ -274,16 +254,12 @@ fr:
           palier1:
             code: 'A1'
             description: |
-              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
-
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier2:
             code: 'A2'
             description: |
-              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
-
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
@@ -298,16 +274,12 @@ fr:
           palier1:
             code: 'X1'
             description: |
-              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
-
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
             code: 'X2'
             description: |
-              ### Vos compétences peuvent encore être améliorées. Une formation peut vous être proposée
-
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
 
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**

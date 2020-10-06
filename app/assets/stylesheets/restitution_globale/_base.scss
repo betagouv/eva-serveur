@@ -177,21 +177,35 @@
   }
 
   .synthese-illettrisme {
-    margin: 3rem 0 1rem;
+    color: $couleur-blanc;
+    border-radius: 2rem;
+    padding: 2rem 2rem;
+    margin: 0 5rem;
 
     h3 {
-      color: $couleur-warning;
+      color: $couleur-blanc;
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 1rem;
     }
 
-    &-niveau {
-      font-size: 1rem;
+    img {
+      height: 6rem;
     }
-    &-illustration {
-      img {
-        margin-top: 1rem;
+
+    &.illettrisme_potentiel {
+      background-color: $couleur-warning;
+    }
+
+    &.ni_ni {
+      background-color: $couleur-principale;
+    }
+
+    &.socle_clea {
+      color: $couleur-texte-sombre;
+      background-color: $couleur-legere-accent-validation;
+      h3 {
+        color: $couleur-texte-sombre;
       }
     }
   }
@@ -199,6 +213,7 @@
   .col-auto.badge {
     img {
       width: 5rem;
+      margin-bottom: 1rem;
     }
   }
 

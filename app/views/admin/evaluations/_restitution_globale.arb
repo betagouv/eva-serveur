@@ -69,16 +69,19 @@ div class: 'admin_restitution_globale' do
     render 'entete_page', restitution_globale: restitution_globale
 
     div class: 'marges-page' do
-      div class: 'synthese-illettrisme' do
-        render 'litteratie_numeratie_synthese',
-               synthese: restitution_globale.synthese,
-               pdf: pdf
-        render 'litteratie_numeratie_niveau1',
-               interpretations: restitution_globale.interpretations_niveau1,
-               pdf: pdf
+      h2 class: 'text-center my-3' do
+        span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
       end
 
-      div class: 'row mb-4' do
+      render 'litteratie_numeratie_synthese',
+             synthese: restitution_globale.synthese,
+             pdf: pdf
+
+      render 'litteratie_numeratie_niveau1',
+             interpretations: restitution_globale.interpretations_niveau1,
+             pdf: pdf
+
+      div class: 'row my-4' do
         div class: 'col-auto badge' do
           img # place holder
         end

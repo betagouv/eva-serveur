@@ -3,7 +3,7 @@
 div class: 'row' do
   scope = 'admin.restitutions.niveaux_illettrisme'
 
-  div class: 'col col-auto' do
+  div class: 'col col-auto badge' do
     div class: 'synthese-illettrisme-illustration mr-3' do
       if pdf
         span wicked_pdf_image_tag 'francais_mathematique.svg'

@@ -82,8 +82,14 @@ div class: 'admin_restitution_globale' do
       end
 
       div class: 'row mb-4' do
+        div class: 'col-auto badge' do
+          img # place holder
+        end
         div class: 'col' do
           render 'metacompetences', categorie: :litteratie
+        end
+        div class: 'col-auto badge' do
+          img # place holder
         end
         div class: 'col' do
           render 'metacompetences', categorie: :numeratie

@@ -190,8 +190,15 @@
     }
     &-illustration {
       img {
-        margin-right: 0.5rem;
+        margin-top: 1rem;
       }
+    }
+  }
+
+  .col-auto.badge {
+    padding-right: 0;
+    img {
+      width: 5rem;
     }
   }
 

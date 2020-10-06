@@ -5,7 +5,7 @@ niveaux_competences = restitution_globale.niveaux_competences
 div class: 'admin_restitution_globale' do
   if auto_positionnement
     div class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+      render 'entete_page', restitution_globale: restitution_globale
 
       div class: 'marges-page' do
         render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
@@ -13,12 +13,10 @@ div class: 'admin_restitution_globale' do
 
       render 'pied_page'
     end
-
-    hr unless pdf
   end
 
   div class: 'page' do
-    render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+    render 'entete_page', restitution_globale: restitution_globale
 
     div class: 'marges-page' do
       div class: 'text-center my-5' do
@@ -67,10 +65,8 @@ div class: 'admin_restitution_globale' do
     render 'pied_page'
   end
 
-  hr unless pdf
-
   div class: 'page' do
-    render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+    render 'entete_page', restitution_globale: restitution_globale
 
     div class: 'marges-page' do
       div class: 'synthese-illettrisme' do
@@ -103,9 +99,9 @@ div class: 'admin_restitution_globale' do
   end
   unless mes_avec_redaction_de_notes.empty?
     div class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale, pdf: pdf
+      render 'entete_page', restitution_globale: restitution_globale
 
-      div class: 'marges-page' do
+      div class: 'marges-page mt-4' do
         mes_avec_redaction_de_notes.each do |restitution|
           situation = restitution.situation
 
@@ -119,57 +115,59 @@ div class: 'admin_restitution_globale' do
 end
 
 if can?(:manage, Compte) && !pdf
-  tabs do
-    tab 'Scores litteratie et numératie' do
-      scores_niveau1 = restitution_globale.scores_niveau1.calcule
-      moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
-      ecarts_types_glissants = restitution_globale.niveau1_ecarts_types_glissants
-      scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
-      attributes_table_for [
-        [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
-        [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-        [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
-        [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
-      ] do
-        row do |(titre, _)|
-          strong titre
-        end
-        scores_niveau1.each_key do |nom_metrique|
-          row(nom_metrique) do |(_, valeur_colonne)|
-            valeur_colonne[nom_metrique]&.round(2)
+  div class: 'admin-scores' do
+    tabs do
+      tab 'Scores litteratie et numératie' do
+        scores_niveau1 = restitution_globale.scores_niveau1.calcule
+        moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
+        ecartstypes_glissants = restitution_globale.niveau1_ecarts_types_glissants
+        scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
+        attributes_table_for [
+          [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
+          [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+          [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecartstypes_glissants],
+          [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
+        ] do
+          row do |(titre, _)|
+            strong titre
+          end
+          scores_niveau1.each_key do |nom_metrique|
+            row(nom_metrique) do |(_, valeur_colonne)|
+              valeur_colonne[nom_metrique]&.round(2)
+            end
           end
         end
       end
-    end
 
-    tab 'Scores meta-compétences' do
-      scores_niveau2 = restitution_globale.scores_niveau2.calcule
-      moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
-      ecarts_types_glissants = restitution_globale.niveau2_ecarts_types_glissants
-      scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
-      attributes_table_for [
-        [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
-        [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-        [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecarts_types_glissants],
-        [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
-      ] do
-        row do |(titre, _)|
-          strong titre
-        end
-        Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
-          row(nom_metrique) do |(_, valeur_colonne)|
-            valeur_colonne[nom_metrique]&.round(2)
+      tab 'Scores meta-compétences' do
+        scores_niveau2 = restitution_globale.scores_niveau2.calcule
+        moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
+        ecartstypes_glissants = restitution_globale.niveau2_ecarts_types_glissants
+        scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
+        attributes_table_for [
+          [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
+          [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
+          [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecartstypes_glissants],
+          [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
+        ] do
+          row do |(titre, _)|
+            strong titre
+          end
+          Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
+            row(nom_metrique) do |(_, valeur_colonne)|
+              valeur_colonne[nom_metrique]&.round(2)
+            end
           end
         end
       end
-    end
 
-    tab 'Niveaux compétences transversales' do
-      ol do
-        niveaux_competences.each do |competence, niveau|
-          li span t("#{competence}.nom",
-                    scope: 'admin.evaluations.restitution_competence') +
-                  ": #{niveau}"
+      tab 'Niveaux compétences transversales' do
+        ol do
+          niveaux_competences.each do |competence, niveau|
+            li span t("#{competence}.nom",
+                      scope: 'admin.evaluations.restitution_competence') +
+                    ": #{niveau}"
+          end
         end
       end
     end

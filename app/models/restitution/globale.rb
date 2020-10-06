@@ -49,18 +49,18 @@ module Restitution
       @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
-    def interpretations_niveau1
-      @interpretations_niveau1 ||= if detecteur_illettrisme.illettrisme_potentiel?
-                                     ['illettrisme_potentiel']
-                                   else
-                                     Illettrisme::InterpreteurNiveau1.new(
-                                       scores_niveau1_standardises.calcule
-                                     ).interpretations
-                                   end
+    def synthese
+      interpreteur_niveau1.synthese
     end
 
-    def detecteur_illettrisme
-      Illettrisme::DetecteurIllettrisme.new(restitutions)
+    def interpretations_niveau1
+      interpreteur_niveau1.interpretations
+    end
+
+    def interpreteur_niveau1
+      @interpreteur_niveau1 ||= Illettrisme::InterpreteurNiveau1.new(
+        scores_niveau1_standardises.calcule, restitutions
+      )
     end
 
     def interpretations_niveau2(categorie)

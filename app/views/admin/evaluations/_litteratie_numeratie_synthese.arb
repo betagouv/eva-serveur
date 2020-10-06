@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+div class: 'row mb-3' do
+  scope = 'admin.restitutions.niveaux_illettrisme'
+
+  div class: 'col' do
+    h2 class: 'text-center mb-3' do
+      span t('titre', scope: scope)
+    end
+
+    div do
+      md t(synthese, scope: scope)
+    end
+  end
+end

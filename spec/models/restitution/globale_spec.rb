@@ -185,12 +185,6 @@ describe Restitution::Globale do
         .to receive(:new).with(restitutions).and_return(detecteur_illettrisme)
     end
 
-    context "en cas d'illettrisme potentiel" do
-      let(:detecteur_illettrisme) { double(illettrisme_potentiel?: true) }
-
-      it { expect(interpretations).to eq ['illettrisme_potentiel'] }
-    end
-
     context 'sans illettrisme potentiel' do
       let(:detecteur_illettrisme) { double(illettrisme_potentiel?: false) }
       let(:interpreteur_niveau1) { double(interpretations: [trop: :bon]) }

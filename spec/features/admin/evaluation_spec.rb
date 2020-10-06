@@ -57,6 +57,7 @@ describe 'Admin - Evaluation', type: :feature do
         allow(restitution_globale).to receive(:interpretations_competences_transversales)
           .and_return(interpretations)
         allow(restitution_globale).to receive(:structure).and_return('structure')
+        allow(restitution_globale).to receive(:synthese).and_return('synthese')
         allow(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end
 
@@ -82,16 +83,18 @@ describe 'Admin - Evaluation', type: :feature do
 
         it "Socle cléa en cours d'acquisition" do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return(['socle_clea'])
+            .and_return([{ litteratie: :palier3 }, { numeratie: :palier3 }])
+          allow(restitution_globale).to receive(:synthese).and_return('socle_clea')
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-          expect(page).to have_content 'Vous avez atteint le niveau'
+          expect(page).to have_content 'Certification Cléa indiquée'
         end
 
         it "Potentiellement en situation d'illettrisme" do
           allow(restitution_globale).to receive(:interpretations_niveau1)
-            .and_return(['illettrisme_potentiel'])
+            .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
+          allow(restitution_globale).to receive(:synthese).and_return('illettrisme_potentiel')
           visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
-          expect(page).to have_content 'importantes difficultés'
+          expect(page).to have_content 'Formation vivement recommandée'
         end
       end
 

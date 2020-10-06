@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
-if pdf
-  div class: 'en-tete-page' do
-    div class: 'row pt-2' do
-      div class: 'col col-8 identite' do
-        span class: 'eva-logo' do
-          span wicked_pdf_image_tag 'eva-logo.svg'
-        end
-        span class: 'nom-evalue' do
-          restitution_globale.utilisateur
-        end
+div class: 'en-tete-page' do
+  div class: 'row pt-2' do
+    div class: 'col col-8 identite' do
+      span class: 'eva-logo' do
+        span wicked_pdf_image_tag 'eva-logo.svg'
       end
-      div class: 'col col-4 contexte' do
-        div class: 'date-restitution pt-2' do
-          l restitution_globale.date, format: :restitution
-        end
-        div class: 'structure' do
-          span restitution_globale.structure
-        end
+      span class: 'nom-evalue' do
+        restitution_globale.utilisateur
+      end
+    end
+    div class: 'col col-4 contexte' do
+      div class: 'date-restitution pt-2' do
+        l restitution_globale.date, format: :restitution
+      end
+      div class: 'structure' do
+        span restitution_globale.structure
       end
     end
   end

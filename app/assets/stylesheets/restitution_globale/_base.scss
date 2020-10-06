@@ -11,6 +11,10 @@
   font-size: 1rem;
   font-family: $font-texte;
 
+  .en-tete-page, .pied-page {
+    display: none;
+  }
+
   h2 {
     font-family: $font-titre;
     color: $couleur-texte-sombre;

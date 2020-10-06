@@ -42,7 +42,7 @@
     }
 
     .date-restitution {
-      color: #D6DAEC;
+      color: $bluegrey;
     }
 
     .nom-evalue {
@@ -121,6 +121,7 @@
     height: 1540px;
     position: relative;
     page-break-after: always;
+    border-bottom: none;
   }
 
   .btn-group {

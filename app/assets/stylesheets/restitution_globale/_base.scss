@@ -4,6 +4,10 @@
   background-color: white;
 }
 
+.admin-scores {
+  margin-top: 1rem;
+}
+
 .admin_restitution_globale {
   @import "bootstrap_minimal";
 
@@ -13,6 +17,10 @@
 
   .en-tete-page, .pied-page {
     display: none;
+  }
+
+  .page {
+    border-bottom: thin solid $bluegrey;
   }
 
   h2 {

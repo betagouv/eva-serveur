@@ -52,11 +52,12 @@ describe 'Admin - Evaluation', type: :feature do
 
       before do
         competences = [[Competence::ORGANISATION_METHODE, Competence::NIVEAU_4]]
-        expect(restitution_globale).to receive(:niveaux_competences).and_return(competences)
+        allow(restitution_globale).to receive(:niveaux_competences).and_return(competences)
         interpretations = [[Competence::ORGANISATION_METHODE, 4.0]]
-        expect(restitution_globale).to receive(:interpretations_competences_transversales)
+        allow(restitution_globale).to receive(:interpretations_competences_transversales)
           .and_return(interpretations)
-        expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
+        allow(restitution_globale).to receive(:structure).and_return('structure')
+        allow(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
       end
 
       describe 'affiche le niveau global de litteratie et numératie' do
@@ -118,7 +119,6 @@ describe 'Admin - Evaluation', type: :feature do
       it "affiche l'évaluation en pdf" do
         allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
         allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
-        allow(restitution_globale).to receive(:structure).and_return('structure')
         visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
         path = page.save_page
 

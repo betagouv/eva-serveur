@@ -10,17 +10,19 @@ div class: 'row' do
     niveau = competence_niveau[competence]
     scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
 
-    div class: 'col' do
+    div class: 'col-auto badge' do
       div class: 'synthese-illettrisme-illustration mb-4' do
         code_niveau = t("#{niveau}.code", scope: scope)
         if pdf
-          span wicked_pdf_image_tag "#{competence}.svg"
-          span wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
+          div wicked_pdf_image_tag "#{competence}.svg"
+          div wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
         else
-          span image_tag "#{competence}.svg"
-          span image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
+          div image_tag "#{competence}.svg"
+          div image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
         end
       end
+    end
+    div class: 'col' do
       h2 class: 'mb-3' do
         div t(:titre, scope: scope)
       end

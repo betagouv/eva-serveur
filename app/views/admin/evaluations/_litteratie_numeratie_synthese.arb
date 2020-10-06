@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-div class: 'row mb-3' do
+div class: "row mb-4 synthese-illettrisme #{synthese}" do
   scope = 'admin.restitutions.niveaux_illettrisme'
-
+  div class: 'col-auto' do
+    if pdf
+      div wicked_pdf_image_tag 'punaise.svg'
+    else
+      div image_tag 'punaise.svg'
+    end
+  end
   div class: 'col' do
-    h2 class: 'text-center mb-3' do
-      span t('titre', scope: scope)
-    end
-
-    div do
-      md t(synthese, scope: scope)
-    end
+    md t(synthese, scope: scope)
   end
 end

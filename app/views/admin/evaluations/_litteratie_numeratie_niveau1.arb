@@ -7,15 +7,13 @@ div class: 'row' do
     scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
 
     div class: 'col-auto badge' do
-      div class: 'synthese-illettrisme-illustration mb-4' do
-        code_niveau = t("#{niveau}.code", scope: scope)
-        if pdf
-          div wicked_pdf_image_tag "#{competence}.svg"
-          div wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
-        else
-          div image_tag "#{competence}.svg"
-          div image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
-        end
+      code_niveau = t("#{niveau}.code", scope: scope)
+      if pdf
+        div wicked_pdf_image_tag "#{competence}.svg"
+        div wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
+      else
+        div image_tag "#{competence}.svg"
+        div image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
       end
     end
     div class: 'col' do

@@ -15,6 +15,7 @@
   }
 
   .en-tete-page {
+    display: block;
     background-image: asset-data-url('vague.svg');
     background-size: 100%;
     background-repeat: no-repeat;
@@ -54,6 +55,7 @@
   }
 
   .pied-page {
+    display: block;
     background-color: $couleur-texte-sombre;
     color: $couleur-blanc;
     text-align: center;

@@ -14,6 +14,14 @@
     margin : 0 5rem;
   }
 
+  .panel {
+    border-top: 1px $couleur-separateur solid;
+
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+
   .en-tete-page {
     display: block;
     background-image: asset-data-url('vague.svg');
@@ -56,14 +64,25 @@
 
   .pied-page {
     display: block;
-    background-color: $couleur-texte-sombre;
-    color: $couleur-blanc;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 2.5rem;
     position: absolute;
     bottom: 0;
     width: 100%;
+    background-color: $couleur-texte-sombre;
+
+    .contact {
+      width: 100%;
+      color: $couleur-blanc;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  .page {
+    height: 1540px;
+    position: relative;
+    page-break-after: always;
+    border-bottom: none;
   }
 
   .row {
@@ -107,26 +126,25 @@
     display: inline-block;
   }
 
-  .page {
-    height: 1540px;
-    position: relative;
-    page-break-after: always;
-    border-bottom: none;
-  }
+  .references_restitution_illettrisme {
+    background-color: $couleur-texte;
+    color: $couleur-blanc;
+    padding: 1rem 0;
 
-  .btn-group {
-    border: none;
-
-    .btn {
-      font-size: 0.75rem;
+    .icone {
+      height: 3rem;
     }
-  }
 
-  .panel {
-    border-top: 1px $couleur-separateur solid;
+    .ordre {
+      font-size: 0.8rem;
+    }
 
-    &:first-of-type {
-      border-top: none;
+    .badge-references {
+      height: 2rem;
+    }
+
+    .lien-references {
+      margin-top: 1rem;
     }
   }
 }

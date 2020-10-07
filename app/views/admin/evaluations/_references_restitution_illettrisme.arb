@@ -1,0 +1,40 @@
+# frozen_string_literal: true
+
+div class: 'references_restitution_illettrisme' do
+  scope = 'admin.restitutions.niveaux_illettrisme.references'
+  div class: 'row marges-page' do
+    div class: 'col-auto' do
+      div wicked_pdf_image_tag 'info.svg', class: 'icone'
+    end
+    div class: 'col' do
+      div md t('explications', scope: scope)
+      div class: 'row' do
+        div class: 'col-auto' do
+          div t('francais', scope: scope)
+          div t('ordre', scope: scope), class: 'ordre'
+        end
+        div class: 'col-auto' do
+          span wicked_pdf_image_tag 'niveaupreA1-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauA1-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauA2-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauB1-blanc.svg', class: 'badge-references'
+        end
+        div class: 'col'
+        div class: 'col-auto' do
+          div t('mathematiques', scope: scope)
+          div t('ordre', scope: scope), class: 'ordre'
+        end
+        div class: 'col-auto' do
+          span wicked_pdf_image_tag 'niveaupreX1-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauX1-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauX2-blanc.svg', class: 'badge-references'
+          span wicked_pdf_image_tag 'niveauY1-blanc.svg', class: 'badge-references'
+        end
+        div class: 'col'
+      end
+      div class: 'lien-references' do
+        md t('references', scope: scope)
+      end
+    end
+  end
+end

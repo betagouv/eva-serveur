@@ -97,7 +97,7 @@ div class: 'admin_restitution_globale' do
       end
     end
 
-    render 'pied_page'
+    render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
   end
 
   mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restitution|

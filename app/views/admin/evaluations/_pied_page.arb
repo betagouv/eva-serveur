@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
 div class: 'pied-page' do
-  'contact@eva.beta.gouv.fr'
+  render avant_pied_page if defined?(avant_pied_page)
+  div 'contact@eva.beta.gouv.fr', class: 'contact'
 end

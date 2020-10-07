@@ -298,3 +298,12 @@ fr:
 
           Votre score indique que vous rencontrez d’importantes difficultés en français tout comme en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
           Il est important que vous échangiez à ce sujet avec votre conseiller.
+        references:
+          ordre: '(par ordre croissant)'
+          francais: 'Français :'
+          mathematiques: 'Mathematiques :'
+          explications: |
+            Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
+          references: |
+            Le détail de l’utilisation de ces référentiels et conditions d’interprétation sont disponibles ici :
+            https://l.incubateur.net/eva-clea

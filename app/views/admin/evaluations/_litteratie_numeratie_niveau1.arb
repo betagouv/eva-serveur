@@ -21,7 +21,7 @@ div class: 'row' do
         div t(:titre, scope: scope)
       end
 
-      div do
+      div class: 'stanine-niveau-francais-mathematique' do
         if niveau.present?
           md t("#{niveau}.description", scope: scope)
         else

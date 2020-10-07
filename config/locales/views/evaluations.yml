@@ -255,19 +255,16 @@ fr:
             code: 'A1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
-
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier2:
             code: 'A2'
             description: |
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
-
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier3:
             code: 'B1'
             description:  |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
-
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
           titre: Mathématiques
@@ -275,19 +272,16 @@ fr:
             code: 'X1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
-
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
             code: 'X2'
             description: |
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
-
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier3:
             code: 'Y1'
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
-
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea: |
           ### Certification Cléa indiquée

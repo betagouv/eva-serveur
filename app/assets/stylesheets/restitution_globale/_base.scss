@@ -222,7 +222,10 @@
   }
 
   a {
-    color: black;
+    color: $couleur-texte;
+    &:hover {
+      color: $couleur-texte;
+    }
   }
 
   .label {

@@ -198,10 +198,8 @@ fr:
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant
       pas_de_score: |
-        Votre score n'a pas pu être calculé. Les raisons peuvent être les suivantes :
-        - vous avez abandonné à un ou plusieurs mini-jeux,
-        - vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous vous êtes par exemple absenté·e quelques minutes),
-        - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
+        Votre score n'a pu être calculé, les raisons peuvent être trouvées ici :
+        [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
       interpretations_niveau2:
         score_ccf:
           titre: Connaissance et compréhension du français

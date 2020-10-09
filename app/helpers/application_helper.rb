@@ -19,7 +19,7 @@ module ApplicationHelper
 
   def md(contenu)
     @markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(no_links: true, hard_wrap: true)
+      Redcarpet::Render::HTML.new(hard_wrap: true)
     )
     @markdown.render(contenu).html_safe
   end

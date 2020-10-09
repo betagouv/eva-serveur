@@ -4,7 +4,7 @@ div class: 'en-tete-page' do
   div class: 'row pt-2' do
     div class: 'col col-8 identite' do
       span class: 'eva-logo' do
-        span wicked_pdf_image_tag 'eva-logo.svg'
+        span svg_tag_base64 'eva-logo.svg'
       end
       span class: 'nom-evalue' do
         restitution_globale.utilisateur

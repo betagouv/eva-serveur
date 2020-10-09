@@ -23,4 +23,11 @@ module ApplicationHelper
     )
     @markdown.render(contenu).html_safe
   end
+
+  def svg_tag_base64(path, options = {})
+    raw = Rails.application.assets[path].to_s
+    encodage = Base64.strict_encode64 raw
+    image_src64 = "data:image/svg+xml;base64,#{encodage}"
+    image_tag image_src64, options
+  end
 end

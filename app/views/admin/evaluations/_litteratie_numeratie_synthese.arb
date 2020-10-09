@@ -4,7 +4,7 @@ div class: "row mb-4 synthese-illettrisme #{synthese}" do
   scope = 'admin.restitutions.niveaux_illettrisme'
   div class: 'col-auto' do
     if pdf
-      div wicked_pdf_image_tag 'punaise.svg'
+      div svg_tag_base64 'punaise.svg'
     else
       div image_tag 'punaise.svg'
     end

@@ -37,7 +37,7 @@ div class: 'admin_restitution_globale' do
               div class: "jauge remplissage remplissage-#{interpretation}"
               if pdf
                 span class: 'image-competence' do
-                  wicked_pdf_image_tag "#{competence}.svg"
+                  svg_tag_base64 "#{competence}.svg"
                 end
               else
                 span class: 'image-competence' do

@@ -9,8 +9,8 @@ div class: 'row' do
     div class: 'col-auto badge' do
       code_niveau = t("#{niveau}.code", scope: scope)
       if pdf
-        div wicked_pdf_image_tag "#{competence}.svg"
-        div wicked_pdf_image_tag "niveau#{code_niveau}.svg" if niveau.present?
+        div svg_tag_base64 "#{competence}.svg"
+        div svg_tag_base64 "niveau#{code_niveau}.svg" if niveau.present?
       else
         div image_tag "#{competence}.svg"
         div image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?

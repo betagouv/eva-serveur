@@ -125,26 +125,4 @@
   .competence-transversale {
     display: inline-block;
   }
-
-  .references_restitution_illettrisme {
-    background-color: $couleur-texte;
-    color: $couleur-blanc;
-    padding: 1rem 0;
-
-    .icone {
-      height: 3rem;
-    }
-
-    .ordre {
-      font-size: 0.8rem;
-    }
-
-    .badge-references {
-      height: 2rem;
-    }
-
-    .lien-references {
-      margin-top: 1rem;
-    }
-  }
 }

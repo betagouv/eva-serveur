@@ -97,6 +97,8 @@ div class: 'admin_restitution_globale' do
       end
     end
 
+    render 'references_restitution_illettrisme' unless pdf
+
     render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
   end
 

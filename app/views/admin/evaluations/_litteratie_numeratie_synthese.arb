@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: "row mb-4 synthese-illettrisme #{synthese}" do
+div class: "row synthese-illettrisme #{synthese}" do
   scope = 'admin.restitutions.niveaux_illettrisme'
   div class: 'col-auto' do
     if pdf

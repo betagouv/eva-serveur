@@ -26,9 +26,13 @@ div class: 'admin_restitution_globale' do
         end
       end
 
-      div class: 'row ' do
+      div class: 'row mb-5' do
         div class: 'col' do
-          div md t('.competences_fortes_vides') if niveaux_competences.blank?
+          if niveaux_competences.blank?
+            div class: 'competences-transversales-vides' do
+              md t('.competences_fortes_vides')
+            end
+          end
 
           interpretations = restitution_globale.interpretations_competences_transversales
           interpretations.each do |competence, interpretation|
@@ -69,7 +73,7 @@ div class: 'admin_restitution_globale' do
     render 'entete_page', restitution_globale: restitution_globale
 
     div class: 'marges-page' do
-      h2 class: 'text-center my-3' do
+      h2 class: 'text-center my-4' do
         span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
       end
 

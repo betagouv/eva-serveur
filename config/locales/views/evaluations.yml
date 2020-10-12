@@ -198,7 +198,7 @@ fr:
         moyenne_glissante: Moyenne glissante
         ecart_type_glissant: Écart type glissant
       pas_de_score: |
-        Votre score n'a pu être calculé, les raisons peuvent être trouvées ici :
+        Votre score n'a pas pu être calculé, les raisons peuvent être trouvées ici :
         [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
       interpretations_niveau2:
         score_ccf:

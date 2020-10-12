@@ -97,6 +97,7 @@
 
     .row.question-standard {
       margin-top: 2rem;
+      margin-bottom: 2rem;
     }
 
     .categorie {
@@ -117,10 +118,20 @@
     font-weight: normal;
   }
 
+  .competences-transversales-vides {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .competence-transversale {
     margin-left: 1.7rem; // 1/2 largeur de image_competence
     margin-bottom: 3rem;
     position: relative;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     .jauge {
       position: absolute;
@@ -180,7 +191,7 @@
     color: $couleur-blanc;
     border-radius: 2rem;
     padding: 2rem 2rem;
-    margin: 0 5rem;
+    margin: 2rem 5rem 3rem;
 
     h3 {
       color: $couleur-blanc;

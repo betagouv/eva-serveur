@@ -59,15 +59,23 @@ namespace :nettoyage do
   task extrait_questions: :environment do
     Rails.logger.level = :warn
 
-    puts 'MES;meta-competence;question;succes'
+    puts 'identifiant évaluation;MES;meta-competence;question;succes'
+
+    # Maintenance
+    sessions_ids_maintenance = Partie.joins(:situation).where(situations: {nom_technique: :maintenance }).select(:session_id)
+    evenements = Evenement.where(nom: :identificationMot)
+      .where(session_id: sessions_ids_maintenance)
+    evenements.each do |evt|
+      succes = (evt.donnees['reponse'] == 'pasfrancais') == (evt.donnees['type'] == "non-mot")
+      puts "#{evt.session_id};maintenance;vocabulaire;#{evt.donnees['mot']};#{succes}"
+    end
 
     # Objet trouves
     sessions_ids_objets_trouves = Partie.joins(:situation).where(situations: {nom_technique: :objets_trouves }).select(:session_id)
     evenements = Evenement.where(nom: :reponse)
-      .where("donnees ->> 'metacompetence' = 'numeratie'")
       .where(session_id: sessions_ids_objets_trouves)
     evenements.each do |evt|
-      puts "objets_trouves;#{evt.donnees['metacompetence']};#{evt.donnees['question']};#{evt.donnees['succes']}"
+      puts "#{evt.session_id};objets_trouves;#{evt.donnees['metacompetence']};#{evt.donnees['question']};#{evt.donnees['succes']}"
     end
 
     # Livraison
@@ -75,10 +83,8 @@ namespace :nettoyage do
       .joins(:situation)
       .where(situations: { nom_technique: :livraison })
       .select(:session_id)
-    questions_numeratie = Question.where(metacompetence: 0).select(:id).map(&:id)
     evenements = Evenement
       .where(nom: :reponse)
-      .where("donnees ->> 'question' in ('#{questions_numeratie.join("','")}')")
       .where(session_id: sessions_ids_livraison)
     evenements.each do |evt|
       question = Question.find(evt.donnees['question'])
@@ -86,7 +92,7 @@ namespace :nettoyage do
       question = question.libelle
       reponse = Choix.find(evt.donnees['reponse'])
       succes = reponse.type_choix == 'bon'
-      puts "livraison;#{metacompetence};#{question};#{succes}"
+      puts "#{evt.session_id};livraison;#{metacompetence};#{question};#{succes}"
     end
   end
 

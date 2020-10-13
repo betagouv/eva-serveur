@@ -249,6 +249,14 @@
     color: $couleur-blanc;
     padding: 1rem 0;
 
+    a {
+      text-decoration: none;
+      color: $couleur-blanc;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     .icone {
       height: 3rem;
     }

@@ -37,6 +37,15 @@
     font-weight: 600;
   }
 
+  a {
+    text-decoration: none;
+    color: $couleur-texte;
+    &:hover {
+      color: $couleur-texte;
+      text-decoration: underline;
+    }
+  }
+
   .marges-page {
     margin : 0 3rem;
   }
@@ -176,13 +185,7 @@
 
     .description-competence {
       a {
-        text-decoration: none;
-        color: adjust-color($couleur-liens, $alpha: -0.5);
-      }
-
-      a:hover {
-        text-decoration: underline;
-        color: $couleur-liens;
+        color: $couleur-principale;
       }
     }
   }
@@ -232,13 +235,6 @@
     }
   }
 
-  a {
-    color: $couleur-texte;
-    &:hover {
-      color: $couleur-texte;
-    }
-  }
-
   .label {
     vertical-align: top;
   }
@@ -250,11 +246,7 @@
     padding: 1rem 0;
 
     a {
-      text-decoration: none;
       color: $couleur-blanc;
-      &:hover {
-        text-decoration: underline;
-      }
     }
 
     .icone {

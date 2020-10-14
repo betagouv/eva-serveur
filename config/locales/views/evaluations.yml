@@ -58,7 +58,7 @@ fr:
           titre: Vigilance et contrôle de la situation proposée
           description: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
           stanine1: |
-            Vous avez **des progrès à faire** en vigilance et de contrôle. Cela signifie qu’en situation professionnelle, vous pouvez avoir des difficultés à faire attention à votre environnement, à déterminer quand et sur quoi vous devez vous concentrer. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
+            Vous avez **des progrès à faire** en vigilance et en contrôle. Cela signifie qu’en situation professionnelle, vous pouvez avoir des difficultés à faire attention à votre environnement, à déterminer quand et sur quoi vous devez vous concentrer. Mais vous pouvez progresser ! Parlez-en avec votre conseiller·e.
           stanine2: |
             Vous réussissez **assez bien** à faire preuve de vigilance et de contrôle. Vous êtes capable de faire attention à votre environnement, de savoir quand et sur quoi vous devez porter votre attention, et de rester concentré·e sur quelque chose. Pour autant, il peut être difficile pour vous de réagir vite face à un événement ou une anomalie. Vous pouvez donc vous améliorer, n’hésitez pas à en parler à votre conseiller·e !
           stanine3: |
@@ -299,9 +299,9 @@ fr:
         references:
           ordre: '(par ordre croissant)'
           francais: 'Français :'
-          mathematiques: 'Mathematiques :'
+          mathematiques: 'Mathématiques :'
           explications: |
             Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
           references: |
-            Le détail de l’utilisation de ces référentiels et conditions d’interprétation sont disponibles ici :
+            Le détail de l’utilisation de ces référentiels et les conditions d’interprétation sont disponibles ici :
             [https://l.incubateur.net/eva-clea](https://l.incubateur.net/eva-clea)

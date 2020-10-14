@@ -99,7 +99,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       it { expect(subject.synthese).to eq 'socle_clea' }
     end
 
-    context 'Besoins de formation en mathematiques' do
+    context 'Besoins de formation en mathématiques' do
       let(:illettrisme_potentiel) { false }
       let(:score_numeratie) { -1 }
       let(:score_litteratie) { 0 }
@@ -119,7 +119,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       it { expect(subject.synthese).to eq 'ni_ni' }
     end
 
-    context 'Besoins de formation en français et mathematiques' do
+    context 'Besoins de formation en français et mathématiques' do
       let(:illettrisme_potentiel) { false }
       let(:score_numeratie) { -1 }
       let(:score_litteratie) { -1 }

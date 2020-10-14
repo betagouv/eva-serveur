@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 namespace :nettoyage do
-  desc 'Annonymise toutes les évaluations'
-  task annonymise: :environment do
-    logger = RakeLogger.logger
-    rng = RandomNameGenerator.new
+  def anonymise_evaluations(rng, logger)
     Evaluation.all.each do |evaluation|
       nouveau_nom = "#{rng.compose(2)} #{rng.compose(3).upcase}"
       logger.info "#{evaluation.nom} est remplacé par #{nouveau_nom}"
@@ -13,13 +10,47 @@ namespace :nettoyage do
       evaluation.telephone = nil
       evaluation.save
     end
+  end
+
+  def anonymise_contacts_et_comptes(rng, logger)
     Contact.delete_all
     Compte.all.each do |compte|
-      if compte.role == 'organisation'
-        compte.email = "#{rng.compose(2)}@#{rng.compose(3)}.fr"
-        compte.save
-      end
+      next unless compte.role == 'organisation'
+
+      nouvel_email = "#{rng.compose(2)}@#{rng.compose(3)}.fr"
+      logger.info "#{compte.email} est remplacé par #{nouvel_email}"
+      compte.email = nouvel_email
+      compte.save
     end
+  end
+
+  def anonymise_structure(structure, nouveau_nom)
+    return if structure.nil?
+
+    structure.nom = nouveau_nom
+    structure.save
+  end
+
+  def anonymise_campagnes_et_structures(rng, logger)
+    type_structure = ['Mission ', 'ML ', 'Garantie Jeunes ', '',
+                      'Association ', 'Mission Locale Jeunes de ']
+    Campagne.all.each_with_index do |campagne, index|
+      nouveau_nom = "#{type_structure[index % type_structure.size]}#{rng.compose(3)}"
+      logger.info "#{campagne.libelle} est remplacé par #{nouveau_nom}"
+      campagne.libelle = nouveau_nom
+      campagne.save
+      anonymise_structure(campagne.compte.structure, nouveau_nom)
+    end
+  end
+
+  desc 'Anonymise la base de données en entier'
+  task anonymise: :environment do
+    logger = RakeLogger.logger
+    rng = RandomNameGenerator.new
+
+    anonymise_evaluations(rng, logger)
+    anonymise_contacts_et_comptes(rng, logger)
+    anonymise_campagnes_et_structures(rng, logger)
   end
 
   desc "Recalculer les metriques d'une situation."

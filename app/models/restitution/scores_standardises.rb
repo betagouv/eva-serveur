@@ -2,8 +2,8 @@
 
 module Restitution
   class ScoresStandardises
-    delegate :moyennes_glissantes,
-             :ecarts_types_glissants,
+    delegate :moyennes_metriques,
+             :ecarts_types_metriques,
              to: :standardisateur
 
     def initialize(scores, standardisateur = nil)

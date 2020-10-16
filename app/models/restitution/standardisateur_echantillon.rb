@@ -1,33 +1,21 @@
 # frozen_string_literal: true
 
 module Restitution
-  class StandardisateurEchantillon
+  class StandardisateurEchantillon < Standardisateur
     def initialize(metriques, scores_evaluations)
       @metriques = metriques
       @scores_evaluations = scores_evaluations
     end
 
-    def moyennes_glissantes
-      @moyennes_glissantes ||= @metriques.each_with_object({}) do |metrique, memo|
+    def moyennes_metriques
+      @moyennes_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
         memo[metrique] = moyenne_metrique(metrique)
       end
     end
 
-    def ecarts_types_glissants
-      @ecarts_types_glissants ||= @metriques.each_with_object({}) do |metrique, memo|
+    def ecarts_types_metriques
+      @ecarts_types_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
         memo[metrique] = ecart_type_metrique(metrique)
-      end
-    end
-
-    def standardise(metrique, valeur)
-      return if valeur.nil? || ecarts_types_glissants[metrique].nil?
-
-      if ecarts_types_glissants[metrique].zero?
-        0
-      else
-        (
-          (valeur - moyennes_glissantes[metrique]) / ecarts_types_glissants[metrique]
-        )
       end
     end
 

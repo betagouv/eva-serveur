@@ -31,8 +31,8 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
     end
     render 'restitution_metriques',
            metriques_partie: resource.partie.metriques,
-           moyenne_glissante: OpenStruct.new(resource.moyenne_metriques),
-           ecart_type_glissant: OpenStruct.new(resource.ecart_type_metriques),
+           moyenne_glissante: OpenStruct.new(resource.moyennes_metriques),
+           ecart_type_glissant: OpenStruct.new(resource.ecarts_types_metriques),
            cote_z: OpenStruct.new(resource.cote_z_metriques)
     render 'restitution_competences_de_base', restitution: resource
     render 'restitution_competences', restitution: resource

@@ -22,11 +22,11 @@ module Restitution
       new STANDARDS[situation]
     end
 
-    attr_reader :moyenne_metriques, :ecart_type_metriques
+    attr_reader :moyennes_metriques, :ecarts_types_metriques
 
     def initialize(standards)
-      @moyenne_metriques = standards&.transform_values { |references| references[:moyenne] }
-      @ecart_type_metriques = standards&.transform_values { |references| references[:ecart_type] }
+      @moyennes_metriques = standards&.transform_values { |references| references[:moyenne] }
+      @ecarts_types_metriques = standards&.transform_values { |references| references[:ecart_type] }
     end
   end
 end

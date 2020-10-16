@@ -7,12 +7,12 @@ module Restitution
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    delegate :moyennes_glissantes,
-             :ecarts_types_glissants,
+    delegate :moyennes_metriques,
+             :ecarts_types_metriques,
              to: :scores_niveau2_standardises,
              prefix: :niveau2
-    delegate :moyennes_glissantes,
-             :ecarts_types_glissants,
+    delegate :moyennes_metriques,
+             :ecarts_types_metriques,
              to: :scores_niveau1_standardises,
              prefix: :niveau1
 

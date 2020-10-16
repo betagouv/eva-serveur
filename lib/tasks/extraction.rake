@@ -114,6 +114,19 @@ namespace :extraction do
       puts "#{e.campagne&.libelle};#{e.nom};#{e.created_at};" + valeurs_des_parties.join('; ')
     end
   end
+
+  desc 'Extrait les données pour la bascule vers un algorithme figé'
+  task stats_niveau1: :environment do
+    evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
+    puts "Nombre d'évaluation : #{evaluations.count}"
+    entete_colonnes = 'campagne;nom evalué·e;date creation de la partie;litteratie_z;numeratie_z'
+    puts entete_colonnes
+    evaluations.each do |e|
+      rg = FabriqueRestitution.restitution_globale(e)
+      scores = rg.scores_niveau1_standardises.calcule
+      puts "#{e.campagne&.libelle};#{e.nom};#{e.created_at};#{scores.values.join('; ')}"
+    end
+  end
 end
 
 class RakeLogger

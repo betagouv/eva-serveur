@@ -7,14 +7,6 @@ module Restitution
       @collect_metriques = collect_metriques
     end
 
-    def moyenne_metrique(metrique)
-      aggrege_metrique(:average, metrique)
-    end
-
-    def ecart_type_metrique(metrique)
-      aggrege_metrique(:stddev_pop, metrique)
-    end
-
     def moyennes_metriques
       @moyennes_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
         memo[metrique] = moyenne_metrique(metrique)
@@ -28,6 +20,14 @@ module Restitution
     end
 
     private
+
+    def moyenne_metrique(metrique)
+      aggrege_metrique(:average, metrique)
+    end
+
+    def ecart_type_metrique(metrique)
+      aggrege_metrique(:stddev_pop, metrique)
+    end
 
     def aggrege_metrique(fonction, metrique)
       @collect_metriques

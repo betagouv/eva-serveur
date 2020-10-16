@@ -64,19 +64,19 @@ describe Restitution::Globale do
   context "calcule la moyenne des scores pour l'ensemble des évaluations" do
     it "quand il n'y a aucune valeur" do
       expect(restitution_evaluation1.scores_niveau2.calcule[:score_numeratie]).to eql(nil)
-      expect(restitution_evaluation1.niveau2_moyennes_glissantes[:score_numeratie]).to eql(nil)
+      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_numeratie]).to eql(nil)
     end
 
     it "quand il n'y a qu'une seule valeur (qui est pile sur la moyenne)" do
       expect(restitution_evaluation1.scores_niveau2.calcule[:score_memorisation]).to eql(0.0)
-      expect(restitution_evaluation1.niveau2_moyennes_glissantes[:score_memorisation].round(2))
+      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_memorisation].round(2))
         .to eql(0.0)
     end
 
     it 'quand il y a plusieurs valeurs' do
       expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2)).to eql(-0.44)
       expect(restitution_evaluation2.scores_niveau2.calcule[:score_ccf].round(2)).to eql(1.78)
-      expect(restitution_evaluation1.niveau2_moyennes_glissantes[:score_ccf].round(2))
+      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_ccf].round(2))
         .to eql(((-0.44 + 1.78) / 2).round(2))
     end
   end
@@ -87,9 +87,9 @@ describe Restitution::Globale do
         .to eql(-0.5)
       expect(restitution_evaluation1.scores_niveau1.calcule[:numeratie])
         .to eql(nil)
-      expect(restitution_evaluation1.niveau1_moyennes_glissantes[:litteratie])
+      expect(restitution_evaluation1.niveau1_moyennes_metriques[:litteratie])
         .to eql(0.25)
-      expect(restitution_evaluation1.niveau1_moyennes_glissantes[:numeratie]).to eql(0.0)
+      expect(restitution_evaluation1.niveau1_moyennes_metriques[:numeratie]).to eql(0.0)
     end
   end
 end

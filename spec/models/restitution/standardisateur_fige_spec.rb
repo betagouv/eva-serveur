@@ -11,9 +11,9 @@ describe Restitution::StandardisateurFige do
   end
   let(:subject) { described_class.new standards }
 
-  it { expect(subject.moyenne_metriques).to eq({ ccf: 12, syntaxe: 2 }) }
+  it { expect(subject.moyennes_metriques).to eq({ ccf: 12, syntaxe: 2 }) }
 
-  it { expect(subject.ecart_type_metriques).to eq({ ccf: 3, syntaxe: 0.5 }) }
+  it { expect(subject.ecarts_types_metriques).to eq({ ccf: 3, syntaxe: 0.5 }) }
 
   it { expect(subject.standardise(:ccf, 12 + 3)).to eq 1 }
 end

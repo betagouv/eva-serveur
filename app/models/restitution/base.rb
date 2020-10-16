@@ -23,7 +23,7 @@ module Restitution
     attr_reader :campagne, :evenements
 
     delegate :evaluation, :session_id, :situation, :created_at, to: :partie
-    delegate :moyenne_metriques, :ecart_type_metriques, to: :standardisateur
+    delegate :moyennes_metriques, :ecarts_types_metriques, to: :standardisateur
     alias date created_at
 
     def initialize(campagne, evenements)

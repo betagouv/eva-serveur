@@ -15,14 +15,14 @@ module Restitution
       aggrege_metrique(:stddev_pop, metrique)
     end
 
-    def moyenne_metriques
-      @moyenne_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
+    def moyennes_metriques
+      @moyennes_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
         memo[metrique] = moyenne_metrique(metrique)
       end
     end
 
-    def ecart_type_metriques
-      @ecart_type_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
+    def ecarts_types_metriques
+      @ecarts_types_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
         memo[metrique] = ecart_type_metrique(metrique)
       end
     end

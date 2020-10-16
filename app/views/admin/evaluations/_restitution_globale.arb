@@ -149,13 +149,13 @@ if can?(:manage, Compte) && !pdf
     tabs do
       tab 'Scores litteratie et numératie' do
         scores_niveau1 = restitution_globale.scores_niveau1.calcule
-        moyennes_glissantes = restitution_globale.niveau1_moyennes_glissantes
-        ecartstypes_glissants = restitution_globale.niveau1_ecarts_types_glissants
+        moyennes = restitution_globale.niveau1_moyennes_metriques
+        ecarts_types = restitution_globale.niveau1_ecarts_types_metriques
         scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
         attributes_table_for [
           [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
-          [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-          [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecartstypes_glissants],
+          [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
+          [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
           [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
         ] do
           row do |(titre, _)|
@@ -171,13 +171,13 @@ if can?(:manage, Compte) && !pdf
 
       tab 'Scores meta-compétences' do
         scores_niveau2 = restitution_globale.scores_niveau2.calcule
-        moyennes_glissantes = restitution_globale.niveau2_moyennes_glissantes
-        ecartstypes_glissants = restitution_globale.niveau2_ecarts_types_glissants
+        moyennes = restitution_globale.niveau2_moyennes_metriques
+        ecarts_types = restitution_globale.niveau2_ecarts_types_metriques
         scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
         attributes_table_for [
           [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
-          [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyennes_glissantes],
-          [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecartstypes_glissants],
+          [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
+          [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
           [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
         ] do
           row do |(titre, _)|

@@ -44,22 +44,22 @@ describe Restitution::Standardisateur do
     create(:evenement_demarrage, partie: partie1)
   end
 
-  context '#moyenne_metriques' do
-    context "calcule la moyenne pour l'ensemble des metriques" do
+  context '#moyennes_metriques' do
+    context "calcule les moyennes pour l'ensemble des metriques" do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(restitution.moyenne_metriques).to eql('test_metrique' => 1.0)
+        expect(restitution.moyennes_metriques).to eql('test_metrique' => 1.0)
       end
     end
   end
 
-  context '#ecart_type_metriques' do
-    context "calcule la moyenne pour l'ensemble des metriques" do
+  context '#ecarts_types_metriques' do
+    context "calcule les écarts types pour l'ensemble des metriques" do
       before { [partie1, partie2, partie3] }
 
       it do
-        expect(restitution.ecart_type_metriques).to eql('test_metrique' => 0.816496580927726)
+        expect(restitution.ecarts_types_metriques).to eql('test_metrique' => 0.816496580927726)
       end
     end
   end

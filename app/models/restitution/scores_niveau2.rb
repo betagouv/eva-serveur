@@ -48,10 +48,8 @@ module Restitution
     def standardisateurs_niveau3
       @standardisateurs_niveau3 ||=
         @parties.map(&:situation_id).uniq.each_with_object({}) do |situation_id, memo|
-          memo[situation_id] ||= Restitution::Standardisateur.new(
-            METRIQUES_ILLETRISME,
-            proc { Partie.where(situation_id: situation_id) }
-          )
+          nom_situation = Situation.find(situation_id).nom_technique
+          memo[situation_id] ||= StandardisateurFige.instancie_pour nom_situation.to_sym
         end
     end
 

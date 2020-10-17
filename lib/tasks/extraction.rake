@@ -10,50 +10,91 @@ namespace :extraction do
     noms
   end
 
+  def tout_evenements_par_session(situation)
+    sessions_ids = Partie.joins(:situation)
+                         .where(situations: { nom_technique: situation})
+                         .select(:session_id)
+    evenements = Evenement.where(nom: :affichageQuestionQCM)
+                          .or(Evenement.where(nom: :reponse))
+                          .or(Evenement.where(nom: :apparitionMot))
+                          .or(Evenement.where(nom: :identificationMot))
+                          .or(Evenement.where(nom: :finSituation))
+                          .where(session_id: sessions_ids)
+                          .order(:date)
+                          .each_with_object({}) do |evenement, map|
+      map[evenement.session_id] ||= []
+      map[evenement.session_id] << evenement
+    end
+  end
+
+  def affiche_reponses_maintenance
+    evenements = tout_evenements_par_session(:maintenance)
+    evenements.each_key do |session_id|
+      evenements_partie = evenements[session_id]
+      evenementFin = evenements_partie.pop
+      next unless evenementFin.nom == 'finSituation'
+
+      evenements_partie.each_slice(2) do |apparition, identification|
+        next if identification.nil?
+
+        reponse_pasfrancais = identification.donnees['reponse'] == 'pasfrancais'
+        type_non_mot = identification.donnees['type'] == 'non-mot'
+        succes = (reponse_pasfrancais == type_non_mot)
+        temps = identification.date - apparition.date
+        puts "#{apparition.session_id};maintenance;ccf;#{identification.donnees['mot']};#{succes};#{temps}"
+      end
+    end
+  end
+
+  def affiche_reponses_livraison
+    evenements = tout_evenements_par_session(:livraison)
+    evenements.each_key do |session_id|
+      evenements_partie = evenements[session_id]
+      evenementFin = evenements_partie.pop
+      next unless evenementFin.nom == 'finSituation'
+
+      evenements_partie.pop ## supprime la note de rédaction
+
+      evenements_partie.each_slice(2) do |affichage, reponse|
+        next if reponse.nil?
+        next if reponse.donnees['reponse'].blank?
+
+        question = Question.find(reponse.donnees['question'])
+        metacompetence = question.metacompetence
+        question = question.libelle
+        choix = Choix.find(reponse.donnees['reponse'])
+        succes = choix.type_choix == 'bon'
+        temps = reponse.date - affichage.date
+        puts "#{session_id};livraison;#{metacompetence};#{question};#{succes};#{temps}"
+      end
+    end
+  end
+
+  def affiche_reponses_objets_trouves
+    evenements = tout_evenements_par_session(:objets_trouves)
+    evenements.each_key do |session_id|
+      evenements_partie = evenements[session_id]
+      evenementFin = evenements_partie.pop
+      next unless evenementFin.nom == 'finSituation'
+
+      evenements_partie.each_slice(2) do |affichage, reponse|
+        next if reponse.nil?
+
+        valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
+        reponse = "#{reponse.donnees['succes']};#{reponse.date - affichage.date}"
+        puts "#{session_id};objets_trouves;#{valeurs};#{reponse}"
+      end
+    end
+  end
+
   desc 'Extrait les données des questions'
   task questions: :environment do
     Rails.logger.level = :warn
 
-    puts 'identifiant évaluation;MES;meta-competence;question;succes'
-
-    # Maintenance
-    sessions_ids_maintenance = Partie
-                               .joins(:situation)
-                               .where(situations: { nom_technique: :maintenance })
-                               .select(:session_id)
-    evenements = Evenement.where(nom: :identificationMot)
-                          .where(session_id: sessions_ids_maintenance)
-    evenements.each do |evt|
-      succes = (evt.donnees['reponse'] == 'pasfrancais') == (evt.donnees['type'] == 'non-mot')
-      puts "#{evt.session_id};maintenance;vocabulaire;#{evt.donnees['mot']};#{succes}"
-    end
-
-    # Objet trouves
-    sessions_ids_objets_trouves = Partie
-                                  .joins(:situation)
-                                  .where(situations: { nom_technique: :objets_trouves })
-                                  .select(:session_id)
-    evenements = Evenement.where(nom: :reponse)
-                          .where(session_id: sessions_ids_objets_trouves)
-    evenements.each do |e|
-      valeurs = "#{e.donnees['metacompetence']};#{e.donnees['question']};#{e.donnees['succes']}"
-      puts "#{evt.session_id};objets_trouves;#{valeurs}"
-    end
-
-    # Livraison
-    sessions_ids_livraison = Partie.joins(:situation)
-                                   .where(situations: { nom_technique: :livraison })
-                                   .select(:session_id)
-    evenements = Evenement.where(nom: :reponse)
-                          .where(session_id: sessions_ids_livraison)
-    evenements.each do |evt|
-      question = Question.find(evt.donnees['question'])
-      metacompetence = question.metacompetence
-      question = question.libelle
-      reponse = Choix.find(evt.donnees['reponse'])
-      succes = reponse.type_choix == 'bon'
-      puts "#{evt.session_id};livraison;#{metacompetence};#{question};#{succes}"
-    end
+    puts 'identifiant évaluation;MES;meta-competence;question;succes;temps de reponse'
+    affiche_reponses_maintenance
+    affiche_reponses_livraison
+    affiche_reponses_objets_trouves
   end
 
   desc 'Extrait les données pour les psychologues'

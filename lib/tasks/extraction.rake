@@ -10,80 +10,73 @@ namespace :extraction do
     noms
   end
 
+  def sessions_ids(situation)
+    Partie.joins(:situation)
+          .where(situations: { nom_technique: situation })
+          .select(:session_id)
+  end
+
   def tout_evenements_par_session(situation)
-    sessions_ids = Partie.joins(:situation)
-                         .where(situations: { nom_technique: situation})
-                         .select(:session_id)
-    evenements = Evenement.where(nom: :affichageQuestionQCM)
-                          .or(Evenement.where(nom: :reponse))
-                          .or(Evenement.where(nom: :apparitionMot))
-                          .or(Evenement.where(nom: :identificationMot))
-                          .or(Evenement.where(nom: :finSituation))
-                          .where(session_id: sessions_ids)
-                          .order(:date)
-                          .each_with_object({}) do |evenement, map|
+    Evenement.where(nom: :affichageQuestionQCM).or(Evenement.where(nom: :reponse))
+             .or(Evenement.where(nom: :apparitionMot))
+             .or(Evenement.where(nom: :identificationMot))
+             .or(Evenement.where(nom: :finSituation))
+             .where(session_id: sessions_ids(situation))
+             .order(:date)
+             .each_with_object({}) do |evenement, map|
       map[evenement.session_id] ||= []
       map[evenement.session_id] << evenement
     end
   end
 
-  def affiche_reponses_maintenance
-    evenements = tout_evenements_par_session(:maintenance)
+  def visite_reponses(situation)
+    evenements = tout_evenements_par_session(situation)
     evenements.each_key do |session_id|
       evenements_partie = evenements[session_id]
-      evenementFin = evenements_partie.pop
-      next unless evenementFin.nom == 'finSituation'
+      evenement_fin = evenements_partie.pop
+      next unless evenement_fin.nom == 'finSituation'
 
-      evenements_partie.each_slice(2) do |apparition, identification|
-        next if identification.nil?
-
-        reponse_pasfrancais = identification.donnees['reponse'] == 'pasfrancais'
-        type_non_mot = identification.donnees['type'] == 'non-mot'
-        succes = (reponse_pasfrancais == type_non_mot)
-        temps = identification.date - apparition.date
-        puts "#{apparition.session_id};maintenance;ccf;#{identification.donnees['mot']};#{succes};#{temps}"
+      evenements_partie.pop if situation == :livraison ## supprime la note de rédaction
+      evenements_partie.each_slice(2) do |affichage, reponse|
+        yield(affichage, reponse)
       end
+    end
+  end
+
+  def affiche_reponses_maintenance
+    visite_reponses(:maintenance) do |apparition, identification|
+      next if identification.nil?
+
+      reponse_pasfrancais = identification.donnees['reponse'] == 'pasfrancais'
+      type_non_mot = identification.donnees['type'] == 'non-mot'
+      succes = (reponse_pasfrancais == type_non_mot)
+      temps = identification.date - apparition.date
+      valeurs = "#{succes};#{temps}"
+      puts "#{apparition.session_id};maintenance;ccf;#{identification.donnees['mot']};#{valeurs}"
     end
   end
 
   def affiche_reponses_livraison
-    evenements = tout_evenements_par_session(:livraison)
-    evenements.each_key do |session_id|
-      evenements_partie = evenements[session_id]
-      evenementFin = evenements_partie.pop
-      next unless evenementFin.nom == 'finSituation'
+    visite_reponses(:livraison) do |affichage, reponse|
+      next if reponse.nil? || reponse.donnees['reponse'].blank?
 
-      evenements_partie.pop ## supprime la note de rédaction
-
-      evenements_partie.each_slice(2) do |affichage, reponse|
-        next if reponse.nil?
-        next if reponse.donnees['reponse'].blank?
-
-        question = Question.find(reponse.donnees['question'])
-        metacompetence = question.metacompetence
-        question = question.libelle
-        choix = Choix.find(reponse.donnees['reponse'])
-        succes = choix.type_choix == 'bon'
-        temps = reponse.date - affichage.date
-        puts "#{session_id};livraison;#{metacompetence};#{question};#{succes};#{temps}"
-      end
+      question = Question.find(reponse.donnees['question'])
+      metacompetence = question.metacompetence
+      question = question.libelle
+      choix = Choix.find(reponse.donnees['reponse'])
+      succes = choix.type_choix == 'bon'
+      temps = reponse.date - affichage.date
+      puts "#{reponse.session_id};livraison;#{metacompetence};#{question};#{succes};#{temps}"
     end
   end
 
   def affiche_reponses_objets_trouves
-    evenements = tout_evenements_par_session(:objets_trouves)
-    evenements.each_key do |session_id|
-      evenements_partie = evenements[session_id]
-      evenementFin = evenements_partie.pop
-      next unless evenementFin.nom == 'finSituation'
+    visite_reponses(:objets_trouves) do |affichage, reponse|
+      next if reponse.nil?
 
-      evenements_partie.each_slice(2) do |affichage, reponse|
-        next if reponse.nil?
-
-        valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
-        reponse = "#{reponse.donnees['succes']};#{reponse.date - affichage.date}"
-        puts "#{session_id};objets_trouves;#{valeurs};#{reponse}"
-      end
+      valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
+      donnees_reponse = "#{reponse.donnees['succes']};#{reponse.date - affichage.date}"
+      puts "#{reponse.session_id};objets_trouves;#{valeurs};#{donnees_reponse}"
     end
   end
 

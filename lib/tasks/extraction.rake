@@ -36,15 +36,16 @@ namespace :extraction do
       evenement_fin = evenements_partie.pop
       next unless evenement_fin.nom == 'finSituation'
 
+      identification = "#{evenements_partie.first.partie.evaluation_id};#{session_id}"
       evenements_partie.pop if situation == :livraison ## supprime la note de rédaction
       evenements_partie.each_slice(2) do |affichage, reponse|
-        yield(affichage, reponse)
+        yield(identification, affichage, reponse)
       end
     end
   end
 
   def affiche_reponses_maintenance
-    visite_reponses(:maintenance) do |apparition, identification|
+    visite_reponses(:maintenance) do |id_eval_partie, apparition, identification|
       next if identification.nil?
 
       reponse_pasfrancais = identification.donnees['reponse'] == 'pasfrancais'
@@ -52,12 +53,12 @@ namespace :extraction do
       succes = (reponse_pasfrancais == type_non_mot)
       temps = identification.date - apparition.date
       valeurs = "#{succes};#{temps}"
-      puts "#{apparition.session_id};maintenance;ccf;#{identification.donnees['mot']};#{valeurs}"
+      puts "#{id_eval_partie};maintenance;ccf;#{identification.donnees['mot']};#{valeurs}"
     end
   end
 
   def affiche_reponses_livraison
-    visite_reponses(:livraison) do |affichage, reponse|
+    visite_reponses(:livraison) do |identification, affichage, reponse|
       next if reponse.nil? || reponse.donnees['reponse'].blank?
 
       question = Question.find(reponse.donnees['question'])
@@ -66,17 +67,17 @@ namespace :extraction do
       choix = Choix.find(reponse.donnees['reponse'])
       succes = choix.type_choix == 'bon'
       temps = reponse.date - affichage.date
-      puts "#{reponse.session_id};livraison;#{metacompetence};#{question};#{succes};#{temps}"
+      puts "#{identification};livraison;#{metacompetence};#{question};#{succes};#{temps}"
     end
   end
 
   def affiche_reponses_objets_trouves
-    visite_reponses(:objets_trouves) do |affichage, reponse|
+    visite_reponses(:objets_trouves) do |identification, affichage, reponse|
       next if reponse.nil?
 
       valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
       donnees_reponse = "#{reponse.donnees['succes']};#{reponse.date - affichage.date}"
-      puts "#{reponse.session_id};objets_trouves;#{valeurs};#{donnees_reponse}"
+      puts "#{identification};objets_trouves;#{valeurs};#{donnees_reponse}"
     end
   end
 
@@ -84,7 +85,7 @@ namespace :extraction do
   task questions: :environment do
     Rails.logger.level = :warn
 
-    puts 'identifiant évaluation;MES;meta-competence;question;succes;temps de reponse'
+    puts 'évaluation;partie;MES;meta-competence;question;succes;temps de reponse'
     affiche_reponses_maintenance
     affiche_reponses_livraison
     affiche_reponses_objets_trouves

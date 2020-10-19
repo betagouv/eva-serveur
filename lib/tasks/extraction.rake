@@ -39,44 +39,40 @@ namespace :extraction do
       identification = "#{evenements_partie.first.partie.evaluation_id};#{session_id}"
       evenements_partie.pop if situation == :livraison ## supprime la note de rédaction
       evenements_partie.each_slice(2) do |affichage, reponse|
-        yield(identification, affichage, reponse)
+        next if reponse.nil?
+
+        yield(identification, reponse, reponse.date - affichage.date)
       end
     end
   end
 
   def affiche_reponses_maintenance
-    visite_reponses(:maintenance) do |id_eval_partie, apparition, identification|
-      next if identification.nil?
-
-      reponse_pasfrancais = identification.donnees['reponse'] == 'pasfrancais'
-      type_non_mot = identification.donnees['type'] == 'non-mot'
+    visite_reponses(:maintenance) do |identification, reponse, temps|
+      reponse_pasfrancais = reponse.donnees['reponse'] == 'pasfrancais'
+      type_non_mot = reponse.donnees['type'] == 'non-mot'
       succes = (reponse_pasfrancais == type_non_mot)
-      temps = identification.date - apparition.date
       valeurs = "#{succes};#{temps}"
-      puts "#{id_eval_partie};maintenance;ccf;#{identification.donnees['mot']};#{valeurs}"
+      puts "#{identification};maintenance;ccf;#{reponse.donnees['mot']};#{valeurs}"
     end
   end
 
   def affiche_reponses_livraison
-    visite_reponses(:livraison) do |identification, affichage, reponse|
-      next if reponse.nil? || reponse.donnees['reponse'].blank?
+    visite_reponses(:livraison) do |identification, reponse, temps|
+      next if reponse.donnees['reponse'].blank?
 
       question = Question.find(reponse.donnees['question'])
       metacompetence = question.metacompetence
       question = question.libelle
       choix = Choix.find(reponse.donnees['reponse'])
       succes = choix.type_choix == 'bon'
-      temps = reponse.date - affichage.date
       puts "#{identification};livraison;#{metacompetence};#{question};#{succes};#{temps}"
     end
   end
 
   def affiche_reponses_objets_trouves
-    visite_reponses(:objets_trouves) do |identification, affichage, reponse|
-      next if reponse.nil?
-
+    visite_reponses(:objets_trouves) do |identification, reponse, temps|
       valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
-      donnees_reponse = "#{reponse.donnees['succes']};#{reponse.date - affichage.date}"
+      donnees_reponse = "#{reponse.donnees['succes']};#{temps}"
       puts "#{identification};objets_trouves;#{valeurs};#{donnees_reponse}"
     end
   end

@@ -54,9 +54,19 @@ div class: 'admin_restitution_globale' do
                 div class: 'description-competence' do
                   div md t("#{competence}.stanine#{interpretation}",
                            scope: 'admin.evaluations.restitution_competence')
-                  url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
-                  a href: url_competence, target: '_blank' do
-                    t('.url_competence', url: url_competence)
+                  div class: 'lien-metier' do
+                    span class: 'image-lien' do
+                      if pdf
+                        svg_tag_base64 'lien.svg'
+                      else
+                        image_tag 'lien.svg'
+                      end
+                    end
+                    span t('.etiquette_lien_metiers'), class: 'align-middle'
+                    url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
+                    a href: url_competence, target: '_blank', class: 'align-middle' do
+                      url_competence
+                    end
                   end
                 end
               end

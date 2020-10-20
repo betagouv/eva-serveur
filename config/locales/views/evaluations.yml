@@ -117,7 +117,7 @@ fr:
           restitution_globale: Restitution globale
           parties: Situations jouées
     restitutions:
-      reponse_expression_ecrite: "Votre réponse à la question '%{question}' :"
+      reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       evaluation:
         en_cours: En cours
         temps: Temps

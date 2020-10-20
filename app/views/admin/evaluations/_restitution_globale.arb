@@ -37,8 +37,10 @@ div class: 'admin_restitution_globale' do
           interpretations = restitution_globale.interpretations_competences_transversales
           interpretations.each do |competence, interpretation|
             div class: 'competence-transversale' do
-              div class: 'jauge'
-              div class: "jauge remplissage remplissage-#{interpretation}"
+              div class: 'conteneur-jauge' do
+                div class: 'jauge'
+                div class: "jauge remplissage remplissage-#{interpretation}"
+              end
               span class: 'image-competence' do
                 if pdf
                   svg_tag_base64 "#{competence}.svg"

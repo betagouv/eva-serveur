@@ -155,7 +155,12 @@ namespace :extraction do
     evaluations.each do |e|
       rg = FabriqueRestitution.restitution_globale(e)
       scores = rg.scores_niveau1_standardises.calcule
-      puts "#{e.campagne&.libelle};#{e.nom};#{e.created_at};#{scores.values.join('; ')}"
+      colonnes = [
+        e.campagne&.libelle, e.nom, e.created_at,
+        scores.values.join(';'),
+        rg.interpreteur_niveau1.synthese
+      ]
+      puts colonnes.join(';')
     end
   end
 end

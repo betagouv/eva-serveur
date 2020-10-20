@@ -187,8 +187,19 @@
     }
 
     .description-competence {
-      a {
+      .lien-metier {
         color: $couleur-principale;
+
+        a {
+          color: $couleur-principale;
+          text-decoration: underline;
+        }
+
+        .image-lien {
+          img {
+            height: 1.5rem;
+          }
+        }
       }
     }
   }

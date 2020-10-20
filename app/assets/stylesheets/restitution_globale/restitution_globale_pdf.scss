@@ -14,14 +14,6 @@
     margin : 0 5rem;
   }
 
-  .panel {
-    border-top: 1px $couleur-separateur solid;
-
-    &:first-of-type {
-      border-top: none;
-    }
-  }
-
   .en-tete-page {
     display: block;
     background-image: asset-data-url('vague.svg');
@@ -128,5 +120,13 @@
 
   .synthese-illettrisme {
     margin: 0 5rem 1.5rem;
+  }
+
+  .titre-redaction {
+    font-size: 1.5rem;
+  }
+
+  .situation-redaction {
+    font-size: 1.3rem;
   }
 }

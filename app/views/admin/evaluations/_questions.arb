@@ -4,12 +4,20 @@ questions_redaction = restitution.questions_et_reponses.select do |q, r|
   [q, r] if q.is_a?(QuestionRedactionNote)
 end
 unless questions_redaction.empty?
-  panel t('.situation', situation: situation_libelle) do
-    div class: 'row' do
-      questions_redaction.each do |question, reponse|
-        div class: 'col-12 px-5 mb-4' do
-          div strong t('admin.restitutions.reponse_expression_ecrite', question: question.libelle)
-          div simple_format(reponse), class: 'my-2'
+  h3 t('.situation', situation: situation_libelle), class: 'situation-redaction mb-3'
+  div class: 'row' do
+    questions_redaction.each do |question, reponse|
+      div class: 'col-6 mb-4' do
+        h2 t('admin.restitutions.reponse_expression_ecrite', question: question.libelle),
+           class: 'titre-redaction'
+        div reponse, class: 'my-2 note-redaction' do
+          span class: 'image-redaction' do
+            if pdf
+              svg_tag_base64 'redaction.svg'
+            else
+              image_tag 'redaction.svg'
+            end
+          end
         end
       end
     end

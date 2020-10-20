@@ -57,10 +57,6 @@
     padding-top: 0;
   }
 
-  .panel {
-    background-color: white;
-  }
-
   .autopositionnement {
     color: $couleur-texte-sombre;
 
@@ -263,6 +259,30 @@
 
     .lien-references {
       margin-top: 1rem;
+    }
+  }
+
+  .note-redaction {
+    position: relative;
+    font-size: 1rem;
+    color: $couleur-principale;
+    padding: 2.2rem 2rem;
+    border: 1px solid $couleur-principale;
+    box-sizing: border-box;
+    border-radius: 1.8rem;
+  }
+
+  .titre-redaction {
+    font-size: 1.7rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .image-redaction {
+    position: absolute;
+    top: -1.3rem;
+    right: 1rem;
+    img {
+      height: 2.6rem;
     }
   }
 }

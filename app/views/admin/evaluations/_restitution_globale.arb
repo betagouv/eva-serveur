@@ -39,12 +39,10 @@ div class: 'admin_restitution_globale' do
             div class: 'competence-transversale' do
               div class: 'jauge'
               div class: "jauge remplissage remplissage-#{interpretation}"
-              if pdf
-                span class: 'image-competence' do
+              span class: 'image-competence' do
+                if pdf
                   svg_tag_base64 "#{competence}.svg"
-                end
-              else
-                span class: 'image-competence' do
+                else
                   image_tag "#{competence}.svg"
                 end
               end
@@ -113,11 +111,19 @@ div class: 'admin_restitution_globale' do
     div class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale
 
+      h2 class: 'text-center my-5' do
+        span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
+      end
+
       div class: 'marges-page mt-4' do
         mes_avec_redaction_de_notes.each do |restitution|
           situation = restitution.situation
 
-          render 'questions', { restitution: restitution, situation_libelle: situation.libelle }
+          render 'questions', {
+            restitution: restitution,
+            situation_libelle: situation.libelle,
+            pdf: pdf
+          }
         end
       end
 

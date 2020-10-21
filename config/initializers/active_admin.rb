@@ -200,6 +200,8 @@ ActiveAdmin.setup do |config|
 
   #
   # To load a javascript file:
+  config.register_javascript 'tarteaucitron.js'
+  config.register_javascript 'tarteaucitron-init.js'
   config.register_javascript 'hotjar.js'
 
   # == CSV options

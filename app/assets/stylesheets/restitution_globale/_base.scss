@@ -283,6 +283,7 @@
   .note-redaction {
     position: relative;
     font-size: 1rem;
+    font-style: italic;
     color: $couleur-principale;
     padding: 2.2rem 2rem;
     border: 1px solid $couleur-principale;
@@ -290,18 +291,53 @@
     border-radius: 1.8rem;
   }
 
+  .aide-redaction {
+    position: relative;
+    font-size: 1rem;
+    color: $couleur-texte;
+    padding: 2rem 2rem;
+    border: 1px solid $couleur-legere-accent-validation;
+    box-sizing: border-box;
+    border-radius: 1.8rem;
+
+    div p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
   .titre-redaction {
     font-size: 1.7rem;
-    margin-bottom: 2.5rem;
   }
 
   .image-redaction {
     position: absolute;
     top: -1.3rem;
-    right: 1rem;
+    right: -1rem;
     img {
       height: 2.6rem;
     }
+  }
+
+  .crochet-aide-redaction {
+    position: absolute;
+    top: 3rem;
+    left: -2.6rem;
+    img {
+      height: 1rem;
+    }
+  }
+
+  .patch-crochet {
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    background-color: white;
+    height: 2rem;
+    width: 1rem;
   }
 }
 

@@ -118,6 +118,18 @@ fr:
           parties: Situations jouées
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
+      aide_interpretation_expression_ecrite: |
+        Outils d’analyse pour la communication écrite
+
+        **La capacité à communiquer** à l'écrit de manière compréhensible : le texte est-il clair à la première lecture ?
+
+        **Le niveau de détail** : le jour, l'heure, les circonstances sont-ils détaillés ?
+
+        **Le niveau en orthographe et en syntaxe** : les mots sont-ils correctement écrits et placés dans le bon ordre ?
+
+        **Le niveau en conjugaison** : le temps utilisé est-il correct ?
+
+        **L'utilisation de la ponctuation** : les signes sont-ils correctement utilisés ?
       evaluation:
         en_cours: En cours
         temps: Temps

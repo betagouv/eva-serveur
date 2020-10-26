@@ -12,7 +12,7 @@ describe Restitution::Globale do
            evaluation: evaluation,
            metriques: {
              score_ccf: 0.28,
-             score_memorisation: 0.22
+             score_memorisation: 0.33
            }
   end
   let(:partie2) do
@@ -61,35 +61,63 @@ describe Restitution::Globale do
     create(:evenement_demarrage, partie: partie_sans_metrique)
   end
 
-  context "calcule la moyenne des scores pour l'ensemble des évaluations" do
-    it "quand il n'y a aucune valeur" do
-      expect(restitution_evaluation1.scores_niveau2.calcule[:score_numeratie]).to eql(nil)
-      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_numeratie]).to eql(nil)
+  describe 'calcul des scores' do
+    let(:score_ccf1) { (0.28 - 0.28) / 0.09 }
+    let(:score_ccf2) { (0 - 0.28) / 0.09 }
+    let(:score_ccf3) { (0.44 - 0.28) / 0.09 }
+
+    let(:score_ccf_niveau_2) { -0.44 } # moyenne des 3 scores
+    let(:score_memorisation_niveau_2) { 1.0 } # (0.33 - 0.22) / 0.11
+
+    let(:score_ccf_niveau_2_standardise) { -0.99 } # (score_ccf_niveau_2 - 0.16) / 0.61
+    let(:score_memorisation_niveau_2_standardise) { 0.83 } # (1 - 0.23) / 0.93
+
+    context 'de niveau 2' do
+      it do
+        expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2))
+          .to eql(score_ccf_niveau_2)
+      end
+
+      it do
+        expect(restitution_evaluation1.scores_niveau2_standardises.calcule[:score_ccf].round(2))
+          .to eql(score_ccf_niveau_2_standardise)
+      end
+
+      it do
+        expect(restitution_evaluation1.scores_niveau2_standardises
+          .calcule[:score_syntaxe_orthographe]).to eql(nil)
+      end
+
+      it do
+        expect(restitution_evaluation1.scores_niveau2
+          .calcule[:score_memorisation].round(2)).to eql(score_memorisation_niveau_2)
+      end
+
+      it do
+        expect(restitution_evaluation1.scores_niveau2_standardises
+          .calcule[:score_memorisation].round(2))
+          .to eql(score_memorisation_niveau_2_standardise)
+      end
     end
 
-    it "quand il n'y a qu'une seule valeur (qui est pile sur la moyenne)" do
-      expect(restitution_evaluation1.scores_niveau2.calcule[:score_memorisation]).to eql(0.0)
-      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_memorisation].round(2))
-        .to eql(0.0)
-    end
+    context 'de niveau 1' do
+      let(:score_litteratie) { -0.08 } # moyenne des scores standardisés niveau 2
+      let(:score_litteratie_standardise) { -0.4 } # (-0.08 - 0.11) / 0.48
 
-    it 'quand il y a plusieurs valeurs' do
-      expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2)).to eql(-0.44)
-      expect(restitution_evaluation2.scores_niveau2.calcule[:score_ccf].round(2)).to eql(1.78)
-      expect(restitution_evaluation1.niveau2_moyennes_metriques[:score_ccf].round(2))
-        .to eql(((-0.44 + 1.78) / 2).round(2))
-    end
-  end
+      it do
+        expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
+          .to eql(score_litteratie)
+      end
 
-  context 'calcule les scores de niveau 1 et leur moyenne' do
-    it do
-      expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
-        .to eql(-0.5)
-      expect(restitution_evaluation1.scores_niveau1.calcule[:numeratie])
-        .to eql(nil)
-      expect(restitution_evaluation1.niveau1_moyennes_metriques[:litteratie])
-        .to eql(0.25)
-      expect(restitution_evaluation1.niveau1_moyennes_metriques[:numeratie]).to eql(0.0)
+      it do
+        expect(restitution_evaluation1.scores_niveau1.calcule[:numeratie])
+          .to eql(nil)
+      end
+
+      it do
+        expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie].round(2))
+          .to eql(score_litteratie_standardise)
+      end
     end
   end
 end

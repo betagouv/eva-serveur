@@ -15,6 +15,13 @@ module Restitution
       },
       maintenance: {
         score_ccf: { moyenne: 425.04, ecart_type: 245.78 }
+      },
+      plus_haut_niveau: {
+        score_ccf: { moyenne: 0.16, ecart_type: 0.61 },
+        score_syntaxe_orthographe: { moyenne: 0.09, ecart_type: 0.83 },
+        score_memorisation: { moyenne: 0.23, ecart_type: 0.93 },
+        litteratie: { moyenne: 0.11, ecart_type: 0.48 },
+        numeratie: { moyenne: 0.16, ecart_type: 0.65 }
       }
     }.freeze
 

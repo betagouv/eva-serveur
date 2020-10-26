@@ -18,12 +18,6 @@ module Restitution
         end
     end
 
-    def scores_standardises_par_evaluations
-      @scores.scores_par_evaluations.transform_values do |scores|
-        ScoresStandardises.new(scores, standardisateur)
-      end
-    end
-
     private
 
     def standardisateur

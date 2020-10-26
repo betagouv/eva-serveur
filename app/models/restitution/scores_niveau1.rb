@@ -20,12 +20,5 @@ module Restitution
         numeratie: @scores_niveau2_standardises.calcule[:score_numeratie]
       }
     end
-
-    def scores_par_evaluations
-      @scores_niveau2_standardises.scores_standardises_par_evaluations
-                                  .transform_values do |scores_niveau2_standardises|
-        ScoresNiveau1.new(scores_niveau2_standardises)
-      end
-    end
   end
 end

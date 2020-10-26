@@ -18,13 +18,6 @@ module Restitution
       end
     end
 
-    def scores_par_evaluations
-      @scores_par_evaluations ||=
-        parties_par_evaluations.transform_values do |parties|
-          Restitution::ScoresNiveau2.new(parties, standardisateurs_niveau3)
-        end
-    end
-
     private
 
     def scores_niveau3_standardises
@@ -51,13 +44,6 @@ module Restitution
           nom_situation = Situation.find(situation_id).nom_technique
           memo[situation_id] ||= StandardisateurFige.instancie_pour nom_situation.to_sym
         end
-    end
-
-    def parties_par_evaluations
-      Partie.where.not(metriques: {}).each_with_object({}) do |partie, map|
-        map[partie.evaluation_id] ||= []
-        map[partie.evaluation_id] << partie
-      end
     end
   end
 end

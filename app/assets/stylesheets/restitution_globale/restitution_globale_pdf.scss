@@ -21,10 +21,10 @@
   .en-tete-page {
     display: block;
     background-image: asset-data-url('vague.svg');
-    background-size: 100%;
+    background-size: 100% 200px;
     background-repeat: no-repeat;
-    height: 233px;
-    padding: 3.75rem 5rem 0 5rem;
+    height: 200px;
+    padding: 2.25rem 5rem 0 5rem;
 
     .eva-logo {
       margin-right: 1.5rem;
@@ -42,7 +42,8 @@
 
     .structure {
       color: #FBF9FA;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      line-height: 1;
     }
 
     .date-restitution {

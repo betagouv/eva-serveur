@@ -19,6 +19,10 @@
     text-align: initial;
     text-shadow: initial;
 }
+
+/* Animation */
+#tarteaucitronRoot * {transition: border 300ms, background 300ms, opacity 200ms, box-shadow 400ms}
+
 /* HTML5 display-role reset for older browsers */
 #tarteaucitronRoot article, #tarteaucitronRoot aside, #tarteaucitronRoot details, #tarteaucitronRoot figcaption, #tarteaucitronRoot figure, #tarteaucitronRoot footer, #tarteaucitronRoot header, #tarteaucitronRoot hgroup, #tarteaucitronRoot menu, #tarteaucitronRoot nav, #tarteaucitronRoot section {
     display: block;
@@ -521,7 +525,8 @@ div#tarteaucitronServices {
 .tarteaucitronCTAButton,
 #tarteaucitron #tarteaucitronPrivacyUrl,
 #tarteaucitron #tarteaucitronPrivacyUrlDialog,
-#tarteaucitronRoot .tarteaucitronDeny {
+#tarteaucitronRoot .tarteaucitronDeny,
+#tarteaucitronRoot .tarteaucitronAllow {
     background: #008300;
     color: #fff;
     cursor: pointer;
@@ -611,6 +616,25 @@ div#tarteaucitronServices {
     width: 50px;
     height: 50px;
 }
+
+#tarteaucitronRoot .tarteaucitronCross::before {
+    content: '\2717';
+    display: inline-block;
+    color: white;
+}
+
+#tarteaucitronRoot .tarteaucitronCheck::before {
+    content: '\2713';
+    display: inline-block;
+    color: white;
+}
+
+#tarteaucitronRoot .tarteaucitronPlus::before {
+    content: '\271b';
+    display: inline-block;
+    color: white;
+}
+
 
 /***
  * Small alert

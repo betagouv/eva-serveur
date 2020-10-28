@@ -1279,6 +1279,7 @@ tarteaucitron.services.googlemaps = {
                     center: new google.maps.LatLng(parseFloat(document.getElementById(uniqIds[i]).getAttribute('latitude'), 10), parseFloat(document.getElementById(uniqIds[i]).getAttribute('longitude'), 10))
                 };
                 map = new google.maps.Map(document.getElementById(uniqIds[i]), mapOptions);
+		new google.maps.Marker({position:{lat:parseFloat(document.getElementById(uniqIds[i]).getAttribute('latitude'), 10),lng:parseFloat(document.getElementById(uniqIds[i]).getAttribute('longitude'), 10)},map:map});
             }
         };
     },
@@ -2456,7 +2457,7 @@ tarteaucitron.services.youtube = {
                 video_height = x.getAttribute("height"),
                 frame_height = 'height=',
                 video_frame,
-                params = 'theme=' + x.getAttribute("theme") + '&rel=' + x.getAttribute("rel") + '&controls=' + x.getAttribute("controls") + '&showinfo=' + x.getAttribute("showinfo") + '&autoplay=' + x.getAttribute("autoplay");
+                params = 'theme=' + x.getAttribute("theme") + '&rel=' + x.getAttribute("rel") + '&controls=' + x.getAttribute("controls") + '&showinfo=' + x.getAttribute("showinfo") + '&autoplay=' + x.getAttribute("autoplay") + '&mute=' + x.getAttribute("mute");
 
             if (video_id === undefined) {
                 return "";
@@ -2503,7 +2504,7 @@ tarteaucitron.services.youtubeplaylist = {
                 video_height = x.getAttribute("height"),
                 frame_height = 'height=',
                 video_frame,
-                params = 'theme=' + x.getAttribute("theme") + '&rel=' + x.getAttribute("rel") + '&controls=' + x.getAttribute("controls") + '&showinfo=' + x.getAttribute("showinfo") + '&autoplay=' + x.getAttribute("autoplay");
+                params = 'theme=' + x.getAttribute("theme") + '&rel=' + x.getAttribute("rel") + '&controls=' + x.getAttribute("controls") + '&showinfo=' + x.getAttribute("showinfo") + '&autoplay=' + x.getAttribute("autoplay") + '&mute=' + x.getAttribute("mute");
 
             if (playlist_id === undefined) {
                 return "";

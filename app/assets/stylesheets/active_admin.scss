@@ -15,6 +15,8 @@
 @import "fonts";
 @import "variables";
 
+@import "admin/header";
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
@@ -50,70 +52,4 @@
 .mise-en-evidence {
   font-size: 1.3rem;
   color: $couleur-principale;
-}
-
-/* HEADER */
-#header {
-	display: table;
-	height: 64px;
-	padding: 10px 30px;
-	text-shadow: none;
-	border-bottom: 0;
-	box-shadow: none;
-	box-sizing: border-box;
-	background-color: $couleur-texte-sombre;
-	background-image: none;
-	h1 {
-		width: 50px;
-		height: 43px;
-			margin: 0 103px 0 0;
-		text-indent: -9999px;
-		background: asset-data-url('eva-logo.svg') no-repeat center;
-		background-size: 50px 43px;
-	}
-	a,
-	a:link {
-		color: #fff;
-	}
-	ul.tabs >  li {
-		margin-right: 0;
-		&:hover > a,
-		&.current > a {
-			color: $couleur-principale;
-			background: #fff;
-		}
-		&.has_nested {
-			> a {
-				background: none;
-			}
-			&:hover > a {
-				border-top-right-radius: 10px;
-				border-top-left-radius: 10px;
-				border-bottom: 5px solid #fff;
-				background: none;
-				background-color: #fff;
-			}
-		}
-		ul {
-			background-color: #fff;
-			li {
-				a,
-				a:hover {
-					color: $couleur-principale;
-				}
-			}
-		}
-		> a {
-			padding: 6px 14px;
-			border-radius: 30px;
-		}
-	}
-	#tabs {
-		padding-left: 103px;
-	}
-	#utility_nav {
-		a:hover {
-			color: $couleur-principale;;
-		}
-	}
 }

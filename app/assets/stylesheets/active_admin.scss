@@ -22,6 +22,9 @@
 //
 //   .status_tag { background: #6090DB; }
 
+body {
+	font-family: $font-texte;
+}
 
 .evenement-piece {
   display: inline-block;

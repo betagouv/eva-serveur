@@ -1,95 +1,100 @@
 /* HEADER */
 #header {
-	display: table;
-	height: 64px;
-	padding: 0.6rem 1.9rem;
-	text-shadow: none;
-	border-bottom: 0;
-	box-shadow: none;
-	box-sizing: border-box;
-	background-color: $couleur-texte-sombre;
-	background-image: none;
-	h1 {
-		width: 50px;
-		height: 43px;
-		margin: 0 6.4rem 0 0;
-		text-indent: -9999px;
-		background: asset-data-url('eva-logo.svg') no-repeat center;
-		background-size: 50px 43px;
-	}
-	a,
-	a:link {
-		color: #fff;
-		font-size: 0.75rem;
-	}
-	ul.tabs >  li {
-		margin-right: 0;
-		margin-top: 0.12rem;
-		&:hover > a,
-		&.current > a {
-			color: $couleur-principale;
-			background: #fff;
-		}
-		&.has_nested {
-			> a {
-				background: none;
-			}
-			&:hover > a {
-				border-top-right-radius: 0.6rem;
-				border-top-left-radius: 0.6rem;
-				border-bottom: 0.3rem solid #fff;
-				background: none;
-				background-color: #fff;
-			}
-		}
-		ul {
-			background-color: #fff;
-			li {
-				a,
-				a:hover {
-					color: $couleur-principale;
-				}
-			}
-		}
-		> a {
-			padding: 0.38rem 0.87rem;
-			border-radius: 1.9rem;
-		}
-	}
-	#tabs {
-		padding-left: 6.4rem;
-		@media screen and (max-width: 1280px) {
-			padding-left: 1rem;
-		}
-	}
-	#utility_nav {
-		display: inline-block;
-		height: 28px;
-		padding: 0 1rem;
-		margin: 0.38rem 0;
-		border-radius: 1.9rem;
-		background-color: #fff;
-		a {
-			color: $couleur-texte-sombre;
-			&:hover {
-				color: $couleur-principale;
-			}
-		}
-		#current_user {
-			a {
-				margin-right: 3.1rem;
-				padding: 0.35rem 0 0.38rem;
-			}
-		}
-		#logout {
-			a {
-				width: 23px;
-				padding: 0.38rem 0;
-				display: inline-block;
-				color: transparent;
-				background: asset-data-url('deconnexion.svg') no-repeat center right;
-				background-size: 23px 15px;
-			}
-		}
-	}
+  display: table;
+  height: 64px;
+  padding: 0.6rem 1.9rem;
+  text-shadow: none;
+  border-bottom: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  background-color: $couleur-texte-sombre;
+  background-image: none;
+  h1 {
+    width: 50px;
+    height: 43px;
+    margin: 0 6.4rem 0 0;
+    text-indent: -9999px;
+    background: asset-data-url('eva-logo.svg') no-repeat center;
+    background-size: 50px 43px;
+  }
+  a,
+  a:link {
+    color: #fff;
+    font-size: 0.75rem;
+  }
+  ul.tabs > li {
+    margin-right: 0;
+    margin-top: 0.12rem;
+    &:hover > a,
+    &.current > a {
+      color: $couleur-principale;
+      background: #fff;
+    }
+    &.has_nested {
+      > a,
+      &.current > a {
+        padding-right: 0.87rem;
+        background: none;
+      }
+      &.current > a {
+        background-color: #fff;
+      }
+      &:hover > a {
+        border-top-right-radius: 0.6rem;
+        border-top-left-radius: 0.6rem;
+        border-bottom: 0.3rem solid #fff;
+        background: none;
+        background-color: #fff;
+      }
+    }
+    ul {
+      background-color: #fff;
+      li {
+        a,
+        a:hover {
+          color: $couleur-principale;
+        }
+      }
+    }
+    > a {
+      padding: 0.38rem 0.87rem;
+      border-radius: 1.9rem;
+    }
+  }
+  #tabs {
+    padding-left: 6.4rem;
+    @media screen and (max-width: 1280px) {
+      padding-left: 1rem;
+    }
+  }
+  #utility_nav {
+    display: inline-block;
+    height: 28px;
+    padding: 0 1rem;
+    margin: 0.38rem 0;
+    border-radius: 1.9rem;
+    background-color: #fff;
+    a {
+      color: $couleur-texte-sombre;
+      &:hover {
+        color: $couleur-principale;
+      }
+    }
+    #current_user {
+      a {
+        margin-right: 3.1rem;
+        padding: 0.35rem 0 0.38rem;
+      }
+    }
+    #logout {
+      a {
+        width: 23px;
+        padding: 0.38rem 0;
+        display: inline-block;
+        color: transparent;
+        background: asset-data-url('deconnexion.svg') no-repeat center right;
+        background-size: 23px 15px;
+      }
+    }
+  }
 }

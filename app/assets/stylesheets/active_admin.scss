@@ -9,14 +9,15 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import "active_admin/mixins";
-@import "active_admin/base";
-@import "activeadmin_reorderable";
-@import "fonts";
-@import "variables";
+@import 'active_admin/mixins';
+@import 'active_admin/base';
+@import 'activeadmin_reorderable';
+@import 'fonts';
+@import 'variables';
 
-@import "admin/header";
-@import "admin/breadcrumb";
+@import 'admin/header';
+@import 'admin/breadcrumb';
+@import 'admin/filtres';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -47,11 +48,11 @@ body {
 }
 
 .green {
-    background-color: green;
+  background-color: green;
 }
 
 .red {
-    background-color: red;
+  background-color: red;
 }
 
 .mise-en-evidence {

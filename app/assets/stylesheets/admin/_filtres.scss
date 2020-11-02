@@ -1,0 +1,40 @@
+.sidebar_section.panel {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
+  background-color: #fff;
+  > h3 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-family: $font-titre;
+    font-size: 1.12rem;
+    border: 0;
+    box-shadow: none;
+    color: $couleur-texte-sombre;
+    background: none;
+  }
+  .panel_contents {
+    padding: 0 1.5rem 1.5rem;
+  }
+  form.filter_form {
+    .filter_form_field {
+      &.select_and_search {
+        input[type='text'] {
+          width: 4.75rem;
+        }
+      }
+      &.filter_date_range {
+        input[type='text'] {
+          width: 6.62rem;
+        }
+      }
+    }
+    .input:not(.select_and_search) {
+      select {
+        width: 100%;
+      }
+    }
+    .buttons input[type='submit'] {
+      margin-right: 0.5rem;
+    }
+  }
+}

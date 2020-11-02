@@ -1,0 +1,31 @@
+#title_bar {
+  padding: 0.62rem 1.87rem;
+  text-shadow: none;
+  border: none;
+  background-image: none;
+  background-color: $couleur-principale;
+  #page_title {
+    font-size: 1.5rem;
+    color: #fff;
+  }
+  .breadcrumb {
+    a,
+    .breadcrumb_sep {
+      color: #fff;
+    }
+    .breadcrumb_sep {
+      margin: 0;
+    }
+  }
+  #titlebar_right {
+    .action_item a {
+      padding: 0.51rem 1.87rem;
+      font-size: 0.87rem;
+      font-weight: normal;
+      color: $couleur-principale;
+      border: none;
+      background-image: none;
+      background-color: #fff;
+    }
+  }
+}

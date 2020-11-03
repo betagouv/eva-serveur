@@ -102,7 +102,7 @@ describe Restitution::Globale do
 
     context 'de niveau 1' do
       let(:score_litteratie) { -0.08 } # moyenne des scores standardisés niveau 2
-      let(:score_litteratie_standardise) { -0.37 } # (-0.08 - 0.16) / 0.65
+      let(:score_litteratie_standardise) { -0.4 } # (-0.08 - 0.11) / 0.48
 
       it do
         expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))

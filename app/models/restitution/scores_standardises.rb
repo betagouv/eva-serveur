@@ -27,7 +27,19 @@ module Restitution
     private
 
     def standardisateur
-      @standardisateur ||= StandardisateurFige.instancie_pour :plus_haut_niveau
+      @standardisateur ||= Restitution::StandardisateurEchantillon.new(
+        @scores.calcule.keys,
+        scores_toutes_evaluations
+      )
+    end
+
+    def scores_toutes_evaluations
+      @scores.scores_par_evaluations.values.each_with_object({}) do |scores, memo|
+        scores.calcule.each do |nom, score|
+          memo[nom] ||= []
+          memo[nom] << score
+        end
+      end
     end
   end
 end

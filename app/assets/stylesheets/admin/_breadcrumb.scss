@@ -5,13 +5,14 @@
   background-image: none;
   background-color: $couleur-principale;
   #page_title {
+    font-family: $font-titre;
     font-size: 1.5rem;
     color: #fff;
   }
   .breadcrumb {
     a,
     .breadcrumb_sep {
-      color: #fff;
+      color: $bluegrey;
     }
     .breadcrumb_sep {
       margin: 0;
@@ -19,9 +20,11 @@
   }
   #titlebar_right {
     .action_item a {
+      margin: 0.2rem 0 0.2rem 1rem;
       padding: 0.51rem 1.87rem;
       font-size: 0.87rem;
       font-weight: normal;
+      font-family: $font-texte;
       color: $couleur-principale;
       border: none;
       background-image: none;

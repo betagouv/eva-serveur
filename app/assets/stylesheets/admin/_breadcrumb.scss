@@ -6,27 +6,36 @@
   box-shadow: none;
   background-color: unset;
 
-  #titlebar_left {
+  #titlebar_right, #titlebar_left {
     display: block;
+  }
+
+  #titlebar_left {
     padding: 0.62rem 1.87rem;
     background-color: $couleur-principale;
-  }
-  #page_title {
-    font-family: $font-titre;
-    font-size: 1.5rem;
-    color: #fff;
-  }
-  .breadcrumb {
-    a,
-    .breadcrumb_sep {
-      color: $bluegrey;
+    height: 4rem;
+    box-sizing: border-box;
+
+    #page_title {
+      font-family: $font-titre;
+      font-size: 1.5rem;
+      color: #fff;
     }
-    .breadcrumb_sep {
-      margin: 0;
+
+    .breadcrumb {
+      margin-bottom: 0.5rem;
+
+      a, .breadcrumb_sep {
+        color: $bluegrey;
+      }
+
+      .breadcrumb_sep {
+        margin: 0;
+      }
     }
   }
+
   #titlebar_right {
-    display: block;
     text-align: left;
     height: auto;
 

@@ -18,6 +18,7 @@
 @import 'admin/header';
 @import 'admin/breadcrumb';
 @import 'admin/filtres';
+@import 'admin/panels';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -56,6 +57,7 @@ body {
 }
 
 .mise-en-evidence {
+  margin-top: 0;
   font-size: 1.3rem;
   color: $couleur-principale;
 }

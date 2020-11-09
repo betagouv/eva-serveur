@@ -1,0 +1,4 @@
+fr:
+  active_admin:
+    sidebars:
+      filters: "Filtrer par :"

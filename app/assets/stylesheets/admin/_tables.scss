@@ -10,6 +10,7 @@ table.index_table {
       background: none;
       &:last-child {
         border-right: 0;
+        width: 1px;
       }
       &.sorted-asc,
       &.sorted-desc {
@@ -36,6 +37,39 @@ table.index_table {
         &:first-child {
           font-weight: 600;
           padding-left: 1.375rem;
+        }
+        &.col-actions {
+          padding: 0;
+          .table_actions {
+            display: flex;
+            align-content: stretch;
+            height: 100%;
+            overflow: hidden;
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            background-color: $bluegrey;
+            a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-right: 0;
+              padding: 0 0.5rem;
+              color: #fff;
+              background-color: $couleur-texte;
+              &.view_link {
+                background-color: $couleur-legere-accent-validation;
+                min-width: 3rem;
+              }
+              &.edit_link {
+                min-width: 3.5rem;
+                background-color: $couleur-principale;
+              }
+              &.delete_link {
+                min-width: 4.5rem;
+                background-color: $couleur-accent-erreur;
+              }
+            }
+          }
         }
       }
       &.even {

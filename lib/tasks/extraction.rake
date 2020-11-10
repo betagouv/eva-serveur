@@ -150,12 +150,13 @@ namespace :extraction do
   task stats_niveau1: :environment do
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
-    entete_colonnes = 'campagne;nom evalué·e;date creation de la partie;litteratie_z;numeratie_z'
+    entete_colonnes = 'id eva;campagne;nom evalué·e;date creation de la partie;litteratie_z;numeratie_z'
     puts entete_colonnes
     evaluations.each do |e|
       rg = FabriqueRestitution.restitution_globale(e)
       scores = rg.scores_niveau1_standardises.calcule
       colonnes = [
+        e.id,
         e.campagne&.libelle, e.nom, e.created_at,
         scores.values.join(';'),
         rg.interpreteur_niveau1.synthese

@@ -263,6 +263,11 @@ fr:
         niveau: 'Niveau %{niveau}'
         litteratie:
           titre: Français
+          palier0:
+            code: 'pre-A1'
+            description: |
+              Votre score indique qu’il vous est très difficile de lire et répondre à des questions en français, ou que cela vous demande un temps très important lorsque personne ne vous aide.
+              **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier1:
             code: 'A1'
             description: |
@@ -280,6 +285,11 @@ fr:
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
           titre: Mathématiques
+          palier0:
+            code: 'pre-X1'
+            description: |
+              Votre score indique que la majorité des opérations vous semblent très difficiles ou vous demande un temps très important lorsque personne ne vous aide.
+              **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier1:
             code: 'X1'
             description: |

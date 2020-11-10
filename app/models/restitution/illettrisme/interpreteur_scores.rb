@@ -9,21 +9,29 @@ module Restitution
 
       def interpretations(competences)
         competences.map do |competence|
-          { competence => interprete(competence) }
+          { competence => interprete(competence, @scores[competence]) }
         end
       end
 
-      def interprete(competence)
-        score = @scores[competence]
+      private
+
+      def interprete(competence, score)
         return if score.blank?
 
-        if score < -1
+        if illettrisme_potentiel(competence, score)
+          :palier0
+        elsif score < -1
           :palier1
         elsif score.negative?
           :palier2
         else
           :palier3
         end
+      end
+
+      def illettrisme_potentiel(competence, score)
+        competence == :litteratie && score <= -3.55 ||
+          competence == :numeratie && score <= -1.64
       end
     end
   end

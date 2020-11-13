@@ -32,11 +32,24 @@ table.index_table {
         line-height: 1.2;
         border-bottom: 0;
         vertical-align: middle;
+        border-top: 1px solid $bluegrey;
+        border-bottom: 1px solid $bluegrey;
         color: $couleur-texte-sombre;
-        a { color: $couleur-principale; }
         &:first-child {
           font-weight: 600;
           padding-left: 1.375rem;
+          border-left: 1px solid $bluegrey;
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+        }
+        &:last-child {
+          border-right: 1px solid $bluegrey;
+          border-top-right-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+
+        }
+        a {
+          color: $couleur-principale;
         }
         &.col-actions {
           padding: 0;

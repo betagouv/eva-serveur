@@ -40,6 +40,9 @@ table.index_table {
         }
         &.col-actions {
           padding: 0;
+          @-moz-document url-prefix() {
+            padding-right: 0.75rem;
+          }
           .table_actions {
             display: flex;
             align-content: stretch;

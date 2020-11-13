@@ -180,13 +180,7 @@ describe Restitution::Globale do
     let(:restitutions) { [] }
     let(:interpretations) { restitution_globale.interpretations_niveau1 }
 
-    before do
-      allow(Restitution::Illettrisme::DetecteurIllettrisme)
-        .to receive(:new).with(restitutions).and_return(detecteur_illettrisme)
-    end
-
     context 'sans illettrisme potentiel' do
-      let(:detecteur_illettrisme) { double(illettrisme_potentiel?: false) }
       let(:interpreteur_niveau1) { double(interpretations: [trop: :bon]) }
 
       before do

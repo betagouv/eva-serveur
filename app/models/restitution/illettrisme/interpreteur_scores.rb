@@ -3,6 +3,11 @@
 module Restitution
   module Illettrisme
     class InterpreteurScores
+      SEUILS_PALIER0 = {
+        litteratie: -3.55,
+        numeratie: -1.64
+      }.freeze
+
       def initialize(scores)
         @scores = scores
       end
@@ -18,7 +23,7 @@ module Restitution
       def interprete(competence, score)
         return if score.blank?
 
-        if illettrisme_potentiel(competence, score)
+        if palier0?(competence, score)
           :palier0
         elsif score < -1
           :palier1
@@ -29,9 +34,8 @@ module Restitution
         end
       end
 
-      def illettrisme_potentiel(competence, score)
-        competence == :litteratie && score <= -3.55 ||
-          competence == :numeratie && score <= -1.64
+      def palier0?(competence, score)
+        SEUILS_PALIER0.key?(competence) && score <= SEUILS_PALIER0[competence]
       end
     end
   end

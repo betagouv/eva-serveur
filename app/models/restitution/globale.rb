@@ -59,7 +59,7 @@ module Restitution
 
     def interpreteur_niveau1
       @interpreteur_niveau1 ||= Illettrisme::InterpreteurNiveau1.new(
-        scores_niveau1_standardises.calcule, restitutions
+        Illettrisme::InterpreteurScores.new(scores_niveau1_standardises.calcule)
       )
     end
 

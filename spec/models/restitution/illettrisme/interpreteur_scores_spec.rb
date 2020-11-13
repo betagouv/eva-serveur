@@ -16,7 +16,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
   end
 
   context 'competence < à -1' do
-    let(:scores_standardises) { { score_ccf: -1.01, score_memorisation: -3 } }
+    let(:scores_standardises) { { score_ccf: -1.01, score_memorisation: -4 } }
     it do
       expect(subject.interpretations(competences))
         .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])

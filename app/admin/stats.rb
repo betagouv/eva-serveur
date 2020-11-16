@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Evaluation, as: 'Stats' do
   belongs_to :campagne
-  config.batch_actions = false
   config.sort_order = 'created_at_desc'
 
   filter :nom

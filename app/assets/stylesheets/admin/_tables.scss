@@ -69,10 +69,11 @@ table.index_table {
               margin: 0.2rem;
               border-radius: 1rem;
               text-decoration: none;
+              background-color: $couleur-texte;
+              min-width: 3rem;
 
               &.view_link {
                 background-color: $couleur-legere-accent-validation;
-                min-width: 3rem;
               }
               &.edit_link {
                 background-color: $couleur-principale;

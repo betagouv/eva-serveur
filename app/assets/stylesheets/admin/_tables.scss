@@ -31,11 +31,6 @@ table.index_table {
       &.even {
         td {
           background: none;
-          &:last-child {
-            @supports not (-moz-appearance:none) {
-              background-color: $bluegrey;
-            }
-          }
         }
       }
 
@@ -58,51 +53,31 @@ table.index_table {
           border-right: 1px solid $bluegrey;
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
-          @supports not (-moz-appearance:none) {
-            background-color: $bluegrey;
-          }
         }
         a {
           color: $couleur-principale;
         }
         &.col-actions {
-          padding: 0;
           .table_actions {
             display: flex;
-            align-content: stretch;
-            height: 100%;
-            @supports not (-moz-appearance:none) {
-              border-top-right-radius: 0.4rem;
-              border-bottom-right-radius: 0.4rem;
-            }
-            overflow: hidden;
             a {
               display: flex;
               align-items: center;
               justify-content: center;
-              margin-right: 0;
-              padding: 0 0.5rem;
-              color: #fff;
-              background-color: $couleur-texte;
-              @supports (-moz-appearance:none) {
-                margin: 0.2rem;
-                border-radius: 1rem;
-                text-decoration:none;
+              padding: 0.25rem 0.5rem;
+              color: $couleur-blanc;
+              margin: 0.2rem;
+              border-radius: 1rem;
+              text-decoration: none;
 
-                &:last-child {
-                  margin-right: 0.7rem;
-                }
-              }
               &.view_link {
                 background-color: $couleur-legere-accent-validation;
                 min-width: 3rem;
               }
               &.edit_link {
-                min-width: 3.5rem;
                 background-color: $couleur-principale;
               }
               &.delete_link {
-                min-width: 4.5rem;
                 background-color: $couleur-accent-erreur;
               }
             }

@@ -27,6 +27,18 @@ table.index_table {
     tr {
       border-radius: 0.5rem;
       box-shadow: 0px 0px 0.5rem rgba(30, 65, 106, 0.5);
+
+      &.even {
+        td {
+          background: none;
+          &:last-child {
+            @supports not (-moz-appearance:none) {
+              background-color: $bluegrey;
+            }
+          }
+        }
+      }
+
       td {
         height: 1.875rem;
         line-height: 1.2;
@@ -46,24 +58,24 @@ table.index_table {
           border-right: 1px solid $bluegrey;
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
-
+          @supports not (-moz-appearance:none) {
+            background-color: $bluegrey;
+          }
         }
         a {
           color: $couleur-principale;
         }
         &.col-actions {
           padding: 0;
-          @-moz-document url-prefix() {
-            padding-right: 0.75rem;
-          }
           .table_actions {
             display: flex;
             align-content: stretch;
             height: 100%;
+            @supports not (-moz-appearance:none) {
+              border-top-right-radius: 0.4rem;
+              border-bottom-right-radius: 0.4rem;
+            }
             overflow: hidden;
-            border-top-right-radius: 0.5rem;
-            border-bottom-right-radius: 0.5rem;
-            background-color: $bluegrey;
             a {
               display: flex;
               align-items: center;
@@ -72,6 +84,15 @@ table.index_table {
               padding: 0 0.5rem;
               color: #fff;
               background-color: $couleur-texte;
+              @supports (-moz-appearance:none) {
+                margin: 0.2rem;
+                border-radius: 1rem;
+                text-decoration:none;
+
+                &:last-child {
+                  margin-right: 0.7rem;
+                }
+              }
               &.view_link {
                 background-color: $couleur-legere-accent-validation;
                 min-width: 3rem;
@@ -86,11 +107,6 @@ table.index_table {
               }
             }
           }
-        }
-      }
-      &.even {
-        td {
-          background: none;
         }
       }
     }

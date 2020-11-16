@@ -38,6 +38,12 @@ module Restitution
         'type' => :map,
         'instance' => Securite::TempsRechercheZonesDangers.new
       },
+      'temps_moyen_recherche_zones_dangers' => {
+        'type' => :nombre,
+        'instance' => Metriques::Moyenne.new(
+          Metriques::MapToList.new(Securite::TempsRechercheZonesDangers.new)
+        )
+      },
       'temps_total_ouverture_zones_dangers' => {
         'type' => :map,
         'instance' => Securite::TempsTotalOuvertureZonesDangers.new

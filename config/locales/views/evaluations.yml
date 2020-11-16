@@ -176,6 +176,7 @@ fr:
         nombre_reouverture_zones_sans_danger: Retours sur les zones sans danger
         temps_bonnes_qualifications_dangers: Temps ouverture de la première bonne qualification
         temps_recherche_zones_dangers: Temps de recherche des zones de dangers
+        temps_moyen_recherche_zones_dangers: Temps moyen de recherche des zones de dangers
         temps_total_ouverture_zones_dangers: Temps total d'ouverture des zones de dangers
         nombre_dangers_mal_identifies: Dangers mal identifiés
         nombre_dangers_bien_identifies_avant_aide_1: Dangers bien identifiés avant activation de l'aide N°1

@@ -86,5 +86,11 @@ module Restitution
           .calcule(evenements_situation, evenements_entrainement)
       end
     end
+
+    def competences
+      calcule_competences(
+        ::Competence::ATTENTION_CONCENTRATION => Securite::AttentionConcentration
+      )
+    end
   end
 end

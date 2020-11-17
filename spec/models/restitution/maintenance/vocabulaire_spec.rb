@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe Restitution::Maintenance::Vocabulaire do
   let(:restitution) { double }
-  let(:partie) { double }
 
   def niveau_pour_score(score)
     expect(restitution).to receive(:cote_z_metriques).and_return('score_ccf' => score)

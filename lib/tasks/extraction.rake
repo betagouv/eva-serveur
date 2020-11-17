@@ -94,13 +94,15 @@ namespace :extraction do
       'maintenance' => Restitution::Maintenance::METRIQUES.keys,
       'livraison' => Restitution::Livraison::METRIQUES.keys,
       'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys,
+      'securite' => Restitution::Securite::METRIQUES.keys,
       'bienvenue' => []
     }
     colonnes_z = {
       'bienvenue' => [],
       'maintenance' => Restitution::Maintenance::METRIQUES.keys,
       'livraison' => Restitution::Livraison::METRIQUES.keys,
-      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys
+      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys,
+      'securite' => Restitution::Securite::METRIQUES.keys
     }
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"

@@ -134,6 +134,11 @@ namespace :nettoyage do
       fin.save!
     end
   end
+
+  desc 'Supprime la situation controle de toutes les campagnes'
+  task supprime_controle_campagne: :environment do
+    SituationConfiguration.where(situation: Situation.where(nom_technique: 'controle')).destroy_all
+  end
 end
 
 class RakeLogger

@@ -20,7 +20,7 @@ ActiveAdmin.register Situation do
     column :questionnaire
     column :questionnaire_entrainement
     actions do |situation|
-      link_to 'Parties', admin_situation_parties_path(situation)
+      link_to 'Parties', admin_situation_parties_path(situation) if can?(:manage, Partie)
     end
   end
 end

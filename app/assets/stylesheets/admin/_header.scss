@@ -82,7 +82,8 @@
       }
     }
     #current_user {
-      a {
+      span, a {
+        color: $couleur-texte-sombre;
         margin-right: 3.1rem;
         padding: 0.38rem 0;
       }

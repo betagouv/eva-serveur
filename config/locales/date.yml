@@ -8,3 +8,4 @@ fr:
     formats:
       <<: *formats
       date_heure: "%d/%m/%Y %H:%M:%S"
+      restitution: "%e %B %Y, %H:%M"

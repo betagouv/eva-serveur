@@ -12,7 +12,7 @@ div class: 'en-tete-page' do
     end
     div class: 'col col-4 contexte' do
       div class: 'date-restitution pt-2' do
-        l restitution_globale.date, format: :restitution
+        l restitution_globale.date, format: :humain
       end
       div class: 'structure' do
         span restitution_globale.structure

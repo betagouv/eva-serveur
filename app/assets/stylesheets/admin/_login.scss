@@ -1,0 +1,9 @@
+body.logged_out #login {
+  form fieldset {
+    padding: 1rem;
+  }
+  a {
+    margin-top: -45px;
+    color: $couleur-principale;
+  }
+}

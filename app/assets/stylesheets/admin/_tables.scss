@@ -58,8 +58,15 @@ table.index_table {
           color: $couleur-principale;
         }
         &.col-actions {
+          background: image-url('roue-dentee.svg') right 1rem center no-repeat;
+          transition: background-image 0.3s;
+
           .table_actions {
+            opacity: 0;
+            transition: opacity 0.3s;
             display: flex;
+            justify-content: flex-end;
+
             a {
               display: flex;
               align-items: center;
@@ -82,6 +89,16 @@ table.index_table {
                 background-color: $couleur-accent-erreur;
               }
             }
+          }
+        }
+      }
+
+      &:hover {
+        .col-actions {
+          background-image: none;
+
+          .table_actions {
+            opacity: 1;
           }
         }
       }

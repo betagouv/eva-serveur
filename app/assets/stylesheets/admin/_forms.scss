@@ -1,0 +1,57 @@
+form {
+  fieldset {
+    &.inputs,
+    legend span {
+      border: 1px solid $bluegrey;
+      box-shadow: none;
+    }
+    &.inputs {
+      background-color: $couleur-blanc;
+    }
+    legend span {
+      font-family: $font-titre;
+      text-shadow: none;
+      color: $couleur-principale;
+      background: $bluegrey;
+    }
+  }
+}
+
+form fieldset ol > li,
+.sidebar_section form {
+  label {
+    text-transform: none;
+    font-weight: normal;
+    color: $couleur-texte;
+  }
+}
+
+form fieldset h3,
+form fieldset input[type="text"],
+form fieldset input[type="email"],
+.sidebar_section form.filter_form input[type="text"],
+form fieldset textarea,
+form fieldset ::placeholder,
+.sidebar_section form.filter_form ::placeholder,
+.select2-results__option,
+form fieldset > ol > li p.inline-hints {
+  color: $couleur-texte;
+}
+
+form fieldset input[type="text"],
+form fieldset input[type="email"],
+.sidebar_section form.filter_form input[type="text"],
+form fieldset text-area,
+.select2-results__option {
+  border-color: $bluegrey;
+}
+
+.select2-container--default .select2-selection--single {
+  border-color: $bluegrey;
+  .select2-selection__arrow b {
+    border-color: $couleur-principale transparent transparent transparent;
+  }
+  .select2-selection__rendered {
+    color: $couleur-texte;
+  }
+}

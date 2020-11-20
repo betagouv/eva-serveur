@@ -1,0 +1,37 @@
+
+form input[type="submit"],
+form.filter_form a.clear_filters_btn,
+form fieldset.actions li.cancel a,
+.has_many_container a.button {
+  font-family: $font-texte;
+  font-weight: normal;
+  text-shadow: none;
+  border: none;
+  background: none;
+}
+form input[type="submit"],
+.has_many_container a.button, {
+  padding: 0.44rem 0.94rem;
+  background-color: $couleur-principale;
+}
+form input[type="submit"]:not(.disabled),
+.has_many_container a.button:not(.disabled) {
+  &:hover {
+    background: none;
+    background-color: $couleur-principale;
+  }
+}
+form.filter_form a.clear_filters_btn,
+form fieldset.actions li.cancel a {
+  margin-right: 0;
+  border: 1px solid $couleur-principale;
+  color: $couleur-principale;
+  background-color: #fff;
+}
+form.filter_form a.clear_filters_btn:not(.disabled),
+form fieldset.actions li.cancel a:not(.disabled) {
+  &:hover {
+    background: none;
+    background-color: #fff;
+  }
+}

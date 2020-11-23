@@ -30,4 +30,9 @@ body.logged_out {
       color: $couleur-principale;
     }
   }
+  .flash {
+    text-shadow: none;
+    font-weight: 600;
+    color: $couleur-texte-sombre;
+  }
 }

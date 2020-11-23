@@ -5,8 +5,8 @@ require 'rails_helper'
 describe Restitution::StandardisateurFige do
   let(:standards) do
     {
-      ccf: { moyenne: 12, ecart_type: 3 },
-      syntaxe: { moyenne: 2, ecart_type: 0.5 }
+      ccf: { average: 12, stddev_pop: 3 },
+      syntaxe: { average: 2, stddev_pop: 0.5 }
     }
   end
   let(:subject) { described_class.new standards }

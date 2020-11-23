@@ -36,6 +36,14 @@ describe Restitution::Standardisateur do
              test_chaine: 'test2'
            }
   end
+  let(:partie4) do
+    create :partie,
+           situation: situation,
+           evaluation: evaluation,
+           metriques: {
+             temps_moyen_recherche_zones_dangers: 0
+           }
+  end
 
   let(:restitution) { FabriqueRestitution.instancie(partie1.id) }
 
@@ -50,6 +58,17 @@ describe Restitution::Standardisateur do
 
       it do
         expect(restitution.moyennes_metriques).to eql('test_metrique' => 1.0)
+      end
+    end
+
+    context 'retourne la moyennes figée si elle existe' do
+      let(:restitution) { FabriqueRestitution.instancie(partie4.id) }
+      before do
+        create(:evenement_demarrage, partie: partie4)
+      end
+
+      it do
+        expect(restitution.moyennes_metriques).to eq('temps_moyen_recherche_zones_dangers' => 17.83)
       end
     end
   end

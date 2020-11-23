@@ -16,4 +16,16 @@ describe Restitution::StandardisateurGlissant do
     it { expect(subject.moyennes_metriques).to eq('temps_moyen_recherche_zones_dangers' => 12) }
     it { expect(subject.ecarts_types_metriques).to eq('temps_moyen_recherche_zones_dangers' => 3) }
   end
+
+  context 'peut ne pas recevoir de standards figés' do
+    let(:subject) do
+      described_class.new(
+        ['temps_moyen_recherche_zones_dangers'],
+        proc { Partie.where(situation: Situation.where(nom_technique: 'securite')) }
+      )
+    end
+
+    it { expect(subject.moyennes_metriques).to eq('temps_moyen_recherche_zones_dangers' => 0) }
+    it { expect(subject.ecarts_types_metriques).to eq('temps_moyen_recherche_zones_dangers' => 0) }
+  end
 end

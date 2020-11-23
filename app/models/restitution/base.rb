@@ -124,7 +124,8 @@ module Restitution
     def standardisateur
       @standardisateur ||= Restitution::StandardisateurGlissant.new(
         partie.metriques_numeriques,
-        proc { Partie.where(situation: partie.situation) }
+        proc { Partie.where(situation: partie.situation) },
+        Restitution::StandardisateurFige::STANDARDS[partie.situation.nom_technique.to_sym]
       )
     end
   end

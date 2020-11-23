@@ -59,11 +59,10 @@ table.index_table {
         }
         &.col-actions {
           background: image-url('roue-dentee.svg') right 1rem center no-repeat;
-          transition: background-image 0.3s;
 
           .table_actions {
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.2s;
             display: flex;
             justify-content: flex-end;
 
@@ -73,11 +72,12 @@ table.index_table {
               justify-content: center;
               padding: 0.25rem 0.5rem;
               color: $couleur-blanc;
-              margin: 0.2rem;
-              border-radius: 1rem;
+              margin: 0;
               text-decoration: none;
               background-color: $couleur-texte;
               min-width: 3rem;
+              box-sizing: border-box;
+              font-size: .75rem;
 
               &.view_link {
                 background-color: $couleur-legere-accent-validation;
@@ -87,6 +87,14 @@ table.index_table {
               }
               &.delete_link {
                 background-color: $couleur-accent-erreur;
+              }
+              &:first-child {
+                border-top-left-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+              }
+              &:last-child {
+                border-top-right-radius: 0.25rem;
+                border-bottom-right-radius: 0.25rem;
               }
             }
           }

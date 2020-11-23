@@ -29,6 +29,9 @@ body.logged_out {
       margin-top: -1.375rem;
       color: $couleur-principale;
     }
+    br:last-child {
+      display: none;
+    }
   }
   .flash {
     text-shadow: none;

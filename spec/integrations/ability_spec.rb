@@ -12,11 +12,9 @@ describe Ability do
 
   let!(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
   let(:situation) { create :situation_inventaire }
-  let(:situation_configuration) do
-    create :situation_configuration,
-           campagne_id: campagne_administrateur,
-           situation: situation
-  end
+  let(:situation_non_utilisee) { create :situation_controle }
+
+  before { campagne_administrateur.situations << situation }
 
   subject(:ability) { Ability.new(compte) }
 
@@ -50,12 +48,12 @@ describe Ability do
       is_expected.to_not be_able_to(:destroy, compte_organisation)
     end
 
-    it 'avec une situation utilisé dans des campagne' do
-      is_expected.to_not be_able_to(:destroy, situation_configuration.situation)
+    it 'avec une situation utilisé dans une campagne' do
+      is_expected.to_not be_able_to(:destroy, campagne_administrateur.situations[0])
     end
 
     it 'avec une situation non utilisé dans des campagne' do
-      is_expected.to be_able_to(:destroy, situation)
+      is_expected.to be_able_to(:destroy, situation_non_utilisee)
     end
 
     describe 'Droits des questionnaires' do

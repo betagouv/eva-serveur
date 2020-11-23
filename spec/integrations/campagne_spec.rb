@@ -6,9 +6,8 @@ describe Campagne, type: :integration do
   context 'pour une campagne sans évaluation' do
     let(:campagne) { create :campagne }
     let(:situation) { create :situation_inventaire }
-    let!(:situations_configurations) do
-      create :situation_configuration, campagne_id: campagne.id, situation: situation
-    end
+
+    before { campagne.situations << situation }
 
     it 'supprime les dépendances' do
       expect do

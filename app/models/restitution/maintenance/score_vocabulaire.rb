@@ -21,12 +21,12 @@ module Restitution
       end
 
       def temps_moyen_normalise(nom_moyenne, metrique_des_temps)
-        moyenne_glissante = standardisateur.moyennes_metriques[nom_moyenne]
-        ecart_type_glissant = standardisateur.ecarts_types_metriques[nom_moyenne]
+        moyenne = standardisateur.moyennes_metriques[nom_moyenne]
+        ecart_type = standardisateur.ecarts_types_metriques[nom_moyenne]
 
         metrique_des_temps_normalises = Metriques::TempsNormalises.new(metrique_des_temps,
-                                                                       moyenne_glissante,
-                                                                       ecart_type_glissant)
+                                                                       moyenne,
+                                                                       ecart_type)
         Metriques::Moyenne
           .new(metrique_des_temps_normalises)
           .calcule(@evenements_situation, nil)

@@ -5,8 +5,8 @@ panel t('.restitution_metriques') do
 
   attributes_table_for [
     [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), metriques_partie],
-    [t('admin.restitutions.restitution_colonnes.moyenne_glissante'), moyenne_glissante],
-    [t('admin.restitutions.restitution_colonnes.ecart_type_glissant'), ecart_type_glissant],
+    [t('admin.restitutions.restitution_colonnes.moyenne'), moyenne],
+    [t('admin.restitutions.restitution_colonnes.ecart_type'), ecart_type],
     [t('admin.restitutions.restitution_colonnes.cote_z'), cote_z]
   ] do
     row do |(titre, _)|

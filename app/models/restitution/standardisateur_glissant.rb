@@ -2,9 +2,14 @@
 
 module Restitution
   class StandardisateurGlissant < Standardisateur
-    def initialize(metriques, collect_metriques)
+    STANDARDS = {
+      temps_moyen_recherche_zones_dangers: { average: 17.83, stddev_pop: 9.46 }
+    }.freeze
+
+    def initialize(metriques, collect_metriques, standards_figes = STANDARDS)
       @metriques = metriques
       @collect_metriques = collect_metriques
+      @standards_figes = standards_figes
     end
 
     def moyennes_metriques
@@ -30,6 +35,8 @@ module Restitution
     end
 
     def aggrege_metrique(fonction, metrique)
+      return @standards_figes[metrique.to_sym][fonction] if @standards_figes.key?(metrique.to_sym)
+
       @collect_metriques
         .call
         .where.not(metriques: {})

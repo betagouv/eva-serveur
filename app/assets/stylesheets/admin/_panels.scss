@@ -1,4 +1,6 @@
-.section, .panel {
+.section,
+.panel,
+body.logged_out #content_wrapper #active_admin_content {
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
   background-color: #fff;

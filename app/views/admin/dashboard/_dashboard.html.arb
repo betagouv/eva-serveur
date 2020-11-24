@@ -2,6 +2,30 @@
 
 columns do
   column do
+    panel t('.dernieres_evaluations.titre') do
+      ul do
+        evaluations.each do |evaluation|
+          li do
+            text_node link_to evaluation.nom,
+                              admin_campagne_evaluation_path(evaluation.campagne, evaluation)
+            text_node ' il y a '
+            text_node time_ago_in_words(evaluation.created_at)
+          end
+        end
+      end
+    end
+    if derniere_actualite.present?
+      panel t('.actualites.titre') do
+        status_tag derniere_actualite.categorie
+        div derniere_actualite.titre, class: 'actualite-dashboard'
+        div class: 'actualite-date' do
+          l derniere_actualite.created_at, format: :point
+        end
+      end
+    end
+  end
+
+  column do
     panel t('.contacts.titre') do
       h4 class: 'mise-en-evidence' do
         t('.contacts.intro')
@@ -13,21 +37,6 @@ columns do
         ul do
           contacts.each do |contact|
             li contact.display_name
-          end
-        end
-      end
-    end
-  end
-
-  column do
-    panel t('.dernieres_evaluations.titre') do
-      ul do
-        evaluations.each do |evaluation|
-          li do
-            text_node link_to evaluation.nom,
-                              admin_campagne_evaluation_path(evaluation.campagne, evaluation)
-            text_node ' il y a '
-            text_node time_ago_in_words(evaluation.created_at)
           end
         end
       end

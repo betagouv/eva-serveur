@@ -12,11 +12,13 @@ ActiveAdmin.register_page 'Dashboard' do
 
     evaluations = Evaluation.where(campagne: campagnes).order(created_at: :desc).limit(10)
     contacts = Contact.where(saisi_par: current_compte)
+    derniere_actualite = Actualite.order(created_at: :desc).first
 
     render partial: 'dashboard',
            locals: {
              evaluations: evaluations,
-             contacts: contacts
+             contacts: contacts,
+             derniere_actualite: derniere_actualite
            }
   end
 end

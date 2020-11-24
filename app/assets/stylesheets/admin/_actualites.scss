@@ -1,5 +1,10 @@
 .actualite {
-  &-contenu, &-date {
+  &-contenu {
+    font-size: 1rem;
+    color: $couleur-texte;
+  }
+
+  &-date {
     font-size: 1rem;
     color: $couleur-texte;
   }
@@ -8,5 +13,12 @@
     position: absolute;
     right: 1rem;
     top: 1rem;
+  }
+
+  &-dashboard {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 1rem 0 1.5rem;
+    color: $couleur-texte-sombre;
   }
 }

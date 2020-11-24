@@ -165,5 +165,6 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_organisation, nil)) }
     it { is_expected.to be_able_to(:create, Contact.new) }
+    it { is_expected.to be_able_to(:read, Actualite.new) }
   end
 end

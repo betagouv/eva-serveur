@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+panel actualite.titre do
+  status_tag actualite.categorie, class: 'actualite-categorie'
+  div class: 'actualite-contenu' do
+    md actualite.contenu
+  end
+  div class: 'actualite-date' do
+    l actualite.created_at, format: :point
+  end
+end

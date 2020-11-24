@@ -1,0 +1,22 @@
+  .status_tag {
+    background-color: transparent;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.9rem;
+    font-weight: normal;
+    text-transform: unset;
+    letter-spacing: unset;
+    font-size: 0.8rem;
+
+    &.assistance, &.red {
+      color: $couleur-accent-erreur;
+    }
+
+    &.blog {
+      color: $couleur-warning;
+    }
+
+    &.evolution, &.green {
+      color: $darkgreen;
+    }
+  }

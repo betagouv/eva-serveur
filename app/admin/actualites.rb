@@ -13,4 +13,8 @@ ActiveAdmin.register Actualite do
     column :created_at
     actions
   end
+
+  show do
+    render partial: 'show'
+  end
 end

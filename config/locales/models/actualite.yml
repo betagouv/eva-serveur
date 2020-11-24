@@ -19,3 +19,7 @@ fr:
         delete_model: Supprimer
         new_model: Ajouter une nouvelle actualité
         edit_model: Modifier
+    status_tag:
+      blog: Newsletter
+      assistance: Assistance
+      evolution: Mise à jour

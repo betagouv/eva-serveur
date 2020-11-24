@@ -24,6 +24,9 @@
 @import 'admin/buttons';
 @import 'admin/footer';
 @import 'admin/login';
+@import 'admin/status_tag';
+
+@import 'admin/actualites';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -51,14 +54,6 @@ body {
   &.piece-ratee {
     background-color: gray;
   }
-}
-
-.green {
-  background-color: green;
-}
-
-.red {
-  background-color: red;
 }
 
 .mise-en-evidence {

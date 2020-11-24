@@ -1,0 +1,12 @@
+.actualite {
+  &-contenu, &-date {
+    font-size: 1rem;
+    color: $couleur-texte;
+  }
+
+  &-categorie {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
+}

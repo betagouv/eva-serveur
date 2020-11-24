@@ -25,6 +25,7 @@ class Ability
     droit_compte
     droit_choix
     droit_structure
+    droit_actualite
   end
 
   def droit_campagne(compte)
@@ -94,6 +95,10 @@ class Ability
     cannot :destroy, Structure do |s|
       Compte.where(structure: s).present?
     end
+  end
+
+  def droit_actualite
+    can :read, Actualite
   end
 
   def droits_generiques(compte)

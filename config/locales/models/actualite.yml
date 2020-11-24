@@ -1,0 +1,21 @@
+fr:
+  activerecord:
+    attributes:
+      actualite:
+        created_at: Créée le
+        categorie: Catégorie
+    models:
+      actualite:
+        one: Actualité
+        other: Actualités
+  formtastic:
+    actions:
+      actualite:
+        create: Créer
+        update: Enregistrer
+  active_admin:
+    resources:
+      actualite:
+        delete_model: Supprimer
+        new_model: Ajouter une nouvelle actualité
+        edit_model: Modifier

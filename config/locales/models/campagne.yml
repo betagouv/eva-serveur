@@ -7,6 +7,10 @@ fr:
         libelle: Libellé
         affiche_competences_fortes: Afficher les compétences fortes ?
         nombre_evaluations: Nombre d'évaluations
+    models:
+      situation_configuration:
+        one: Situation
+        other: Situations
   formtastic:
     actions:
       campagne:
@@ -25,4 +29,3 @@ fr:
         delete_model: Supprimer
         new_model: Créer une campagne
         edit_model: Modifier
-        delete_model: Supprimer

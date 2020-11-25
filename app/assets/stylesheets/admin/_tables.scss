@@ -80,6 +80,7 @@ table.index_table {
               font-size: .75rem;
 
               &.view_link {
+                color: $couleur-texte-sombre;
                 background-color: $couleur-legere-accent-validation;
               }
               &.edit_link {

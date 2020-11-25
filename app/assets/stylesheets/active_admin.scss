@@ -44,15 +44,15 @@ body {
   height: 30px;
 
   &.piece-bien-placee {
-    background-color: green;
+    background-color: $darkgreen;
   }
 
   &.piece-mal-placee {
-    background-color: red;
+    background-color: $couleur-accent-erreur;
   }
 
   &.piece-ratee {
-    background-color: gray;
+    background-color: $bluegrey;
   }
 }
 

@@ -27,7 +27,6 @@ ActiveAdmin.register QuestionQcm do
   end
 
   index do
-    selectable_column
     column :id
     column :libelle
     column :intitule

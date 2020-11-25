@@ -6,7 +6,6 @@ ActiveAdmin.register Compte do
   includes :structure
 
   index do
-    selectable_column
     column :email
     column :role
     column :structure

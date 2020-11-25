@@ -23,7 +23,6 @@ ActiveAdmin.register Evenement do
   end
 
   index do
-    selectable_column
     instance_eval(&colonnes_evenement)
     actions
   end

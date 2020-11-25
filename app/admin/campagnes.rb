@@ -15,7 +15,6 @@ ActiveAdmin.register Campagne do
   includes :compte
 
   index do
-    selectable_column
     column :libelle
     column :code
     column :nombre_evaluations

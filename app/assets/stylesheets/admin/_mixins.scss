@@ -4,3 +4,36 @@
   box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
   background-color: #fff;
 }
+@mixin bouton() {
+  padding: 0.44rem 0.94rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 2.875rem;
+  color: $couleur-blanc;
+  background-color: $couleur-principale;
+}
+@mixin bouton-carte($background-color, $color:$couleur-blanc) {
+  background-color: $background-color;
+  display: inline-flex;
+  border-radius: 0.25rem;
+  color: $color;
+  background-color: $couleur-legere-accent-validation;
+  text-decoration: none;
+  min-width: 3rem;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  font-size: .75rem;
+  box-sizing: border-box;
+  line-height: 1rem;
+}
+@mixin titre-carte() {
+  margin: 0;
+  padding: 1rem 1.5rem 1.5rem;
+  font-family: $font-titre;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 0;
+  box-shadow: none;
+  color: $couleur-texte-sombre;
+  background: none;
+}

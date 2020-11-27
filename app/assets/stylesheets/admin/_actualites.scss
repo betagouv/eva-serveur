@@ -16,58 +16,75 @@
   }
 }
 
-.actualites-liste {
-  .columns {
-    display: flex;
+.actualites {
+  position: relative;
+
+  h3 {
+    @include titre-carte();
   }
 
-  .column:first-child {
-    display: flex;
-    margin-right: 20px !important;
+  > a {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    @include bouton()
+  }
+
+  &-liste {
+    .columns {
+      display: flex;
+    }
+
+    .column:first-child {
+      display: flex;
+      margin-right: 20px !important;
+      .actualite {
+        align-items: flex-start;
+        flex-direction: column;
+        flex: 1;
+        padding: 1rem;
+      }
+      .status_tag {
+        margin-bottom: 1rem;
+      }
+      .titre {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .action {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+      }
+    }
 
     .actualite {
-      flex: 1;
-      padding: 2rem;
-    }
-  }
+      @include carte;
+      padding: .75rem;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      font-size:0.875rem;
 
-  .actualite {
-    @include carte;
-    padding: .75rem;
-    margin-bottom: .5rem;
-    display: flex;
-    align-items: center;
-    font-size:0.875rem;
+      .status_tag {
+        margin-right: 3.25rem;
+      }
 
-    .status_tag {
-      margin-right: 3.25rem;
-    }
+      .titre {
+        margin: 0;
+        color: $couleur-texte-sombre;
+        flex: 1;
+        margin-right: .75rem;
+      }
 
-    .titre {
-      margin: 0;
-      color: $couleur-texte-sombre;
-      flex: 1;
-      margin-right: .75rem;
-    }
+      .date {
+        color: $couleur-texte;
+        margin-right: .75rem;
+      }
 
-    .date {
-      color: $couleur-texte;
-      margin-right: .75rem;
-    }
-
-    .action {
-      background-color: pink;
-      display: inline-flex;
-      border-radius: 0.25rem;
-      color: $couleur-texte-sombre;
-      background-color: $couleur-legere-accent-validation;
-      text-decoration: none;
-      min-width: 3rem;
-      justify-content: center;
-      padding: 0.25rem 0.5rem;
-      font-size: .75rem;
-      box-sizing: border-box;
-      line-height: 1rem;
+      .action {
+        @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+      }
     }
   }
 }

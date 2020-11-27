@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 div class: 'actualite' do
   status_tag actualite.categorie
   span actualite.titre, class: 'titre'

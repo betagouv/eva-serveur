@@ -7,6 +7,8 @@ ActiveAdmin.register Actualite do
   filter :contenu
   filter :created_at
 
+  config.sort_order = 'created_at_desc'
+
   index do
     column(:categorie) { |a| status_tag a.categorie }
     column :titre

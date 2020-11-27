@@ -1,0 +1,8 @@
+div class: 'actualite' do
+  status_tag actualite.categorie
+  span actualite.titre, class: 'titre'
+  span class: 'date' do
+    l actualite.created_at, format: :point
+  end
+  text_node link_to 'Lire', [:admin, actualite], class: 'action'
+end

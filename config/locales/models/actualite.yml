@@ -4,6 +4,10 @@ fr:
       actualite:
         created_at: Créée le
         categorie: Catégorie
+        categories:
+          blog: Newsletter
+          assistance: Assistance
+          evolution: Mise à jour
     models:
       actualite:
         one: Actualité

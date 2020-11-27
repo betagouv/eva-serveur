@@ -14,15 +14,6 @@ columns do
         end
       end
     end
-    if derniere_actualite.present?
-      panel t('.actualites.titre') do
-        status_tag derniere_actualite.categorie
-        div derniere_actualite.titre, class: 'actualite-dashboard'
-        div class: 'actualite-date' do
-          l derniere_actualite.created_at, format: :point
-        end
-      end
-    end
   end
 
   column do
@@ -43,6 +34,8 @@ columns do
     end
   end
 end
+
+render 'actualites', actualites: actualites if actualites.present?
 
 if can?(:manage, Compte)
   panel t('.statistiques.titre') do

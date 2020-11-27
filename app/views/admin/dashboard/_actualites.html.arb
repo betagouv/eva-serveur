@@ -1,0 +1,16 @@
+div class: 'actualites' do
+  h3 t('.titre')
+  text_node link_to 'Voir toutes les actualités', admin_actualites_path
+  div class: 'actualites-liste' do
+    columns do
+      column do
+        render 'actualite', actualite: actualites.first
+      end
+      column span: 2 do
+        actualites[1, 3].each do |actualite|
+          render 'actualite', actualite: actualite
+        end
+      end
+    end
+  end
+end

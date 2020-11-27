@@ -14,11 +14,60 @@
     right: 1rem;
     top: 1rem;
   }
+}
 
-  &-dashboard {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin: 1rem 0 1.5rem;
-    color: $couleur-texte-sombre;
+.actualites-liste {
+  .columns {
+    display: flex;
+  }
+
+  .column:first-child {
+    display: flex;
+    margin-right: 20px !important;
+
+    .actualite {
+      flex: 1;
+      padding: 2rem;
+    }
+  }
+
+  .actualite {
+    @include carte;
+    padding: .75rem;
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    font-size:0.875rem;
+
+    .status_tag {
+      margin-right: 3.25rem;
+    }
+
+    .titre {
+      margin: 0;
+      color: $couleur-texte-sombre;
+      flex: 1;
+      margin-right: .75rem;
+    }
+
+    .date {
+      color: $couleur-texte;
+      margin-right: .75rem;
+    }
+
+    .action {
+      background-color: pink;
+      display: inline-flex;
+      border-radius: 0.25rem;
+      color: $couleur-texte-sombre;
+      background-color: $couleur-legere-accent-validation;
+      text-decoration: none;
+      min-width: 3rem;
+      justify-content: center;
+      padding: 0.25rem 0.5rem;
+      font-size: .75rem;
+      box-sizing: border-box;
+      line-height: 1rem;
+    }
   }
 }

@@ -4,14 +4,7 @@ body.logged_out #content_wrapper #active_admin_content {
   @include carte;
   background-color: #fff;
   > h3 {
-    margin: 0;
-    padding: 1rem 1.5rem;
-    font-family: $font-titre;
-    font-size: 1.12rem;
-    border: 0;
-    box-shadow: none;
-    color: $couleur-texte-sombre;
-    background: none;
+    @include titre-carte();
   }
   .panel_contents {
     padding: 0 1.2rem 1.5rem;

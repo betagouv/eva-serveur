@@ -5,7 +5,7 @@ div class: 'actualites' do
   text_node link_to 'Voir toutes les actualités', admin_actualites_path
   div class: 'actualites-liste' do
     columns do
-      column do
+      column class: 'column derniere-actualite' do
         render 'actualite', actualite: actualites.first
       end
       column span: 2 do

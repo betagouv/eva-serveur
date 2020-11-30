@@ -35,26 +35,25 @@
       display: flex;
     }
 
-    .column:first-child {
+    .column.derniere-actualite {
       display: flex;
-      margin-right: 20px !important;
+
       .actualite {
         align-items: flex-start;
         flex-direction: column;
         flex: 1;
         padding: 1rem;
-      }
-      .status_tag {
-        margin-bottom: 1rem;
-      }
-      .titre {
-        font-size: 1.25rem;
-        font-weight: 600;
-      }
-      .action {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+
+        .titre {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 1rem 0 0.5rem;
+        }
+        .action {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+        }
       }
     }
 

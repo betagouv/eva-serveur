@@ -1,10 +1,11 @@
+
 fr:
   activerecord:
     attributes:
       actualite:
         created_at: Créée le
         categorie: Catégorie
-        categories:
+        categories: &traduction-categories
           blog: Newsletter
           assistance: Assistance
           evolution: Mise à jour
@@ -24,6 +25,4 @@ fr:
         new_model: Ajouter une nouvelle actualité
         edit_model: Modifier
     status_tag:
-      blog: Newsletter
-      assistance: Assistance
-      evolution: Mise à jour
+      <<: *traduction-categories

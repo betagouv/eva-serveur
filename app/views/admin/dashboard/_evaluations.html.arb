@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+div class: 'evaluations' do
+  h3 t('.titre')
+  div class: 'evaluations-liste' do
+    evaluations.each do |evaluation|
+      div class: 'evaluation' do
+        span class: 'nom' do
+          text_node evaluation.nom
+        end
+        span class: 'date' do
+          text_node ' il y a '
+          text_node time_ago_in_words(evaluation.created_at)
+        end
+        span class: 'action' do
+          link_to 'Voir', admin_campagne_evaluation_path(evaluation.campagne, evaluation)
+        end
+      end
+    end
+  end
+end

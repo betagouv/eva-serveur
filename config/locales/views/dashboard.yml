@@ -6,9 +6,9 @@ fr:
           titre: Vos coordonnées
           intro: "Pour que ce service puisse continuer à vous apporter son  aide, nous avons besoin de la vôtre. Merci de nous laisser vos coordonnées :"
           deja_enregistres: "Les contacts que vous avez déjà enregistrés :"
-        dernieres_evaluations:
-          titre: Dernières évaluations
         statistiques:
           titre: Statistiques
       actualites:
         titre: Les actualités sur eva
+      evaluations:
+        titre: Vos dernières évaluations

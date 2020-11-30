@@ -2,7 +2,6 @@
 .panel,
 body.logged_out #content_wrapper #active_admin_content {
   @include carte;
-  background-color: #fff;
   > h3 {
     @include titre-carte();
   }
@@ -21,9 +20,7 @@ body.logged_out #content_wrapper #active_admin_content {
 
     .panel_contents {
       padding-top: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
-      background-color: #fff;
+      @include carte;
     }
   }
 }

@@ -15,6 +15,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'questionnaire_question', 'questionnaires_questions'
   inflect.irregular 'choix', 'choix'
   inflect.irregular 'nouvelle_structure', 'nouvelles_structures'
+  inflect.irregular 'type_document', 'types_document'
 end
 
 # These inflection rules are supported but not enabled by default:

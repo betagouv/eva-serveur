@@ -1,27 +1,30 @@
 fr:
   activerecord:
     attributes:
-      actualite:
+      source_aide:
         created_at: Créée le
         categorie: Catégorie
         categories: &traduction-categories
-          blog: Newsletter
-          assistance: Assistance
-          evolution: Mise à jour
+          prise_en_main: Prise en main
+        type_document: Type de document
+        types_document:
+          video: Vidéo
+          pdf: PDF
+          repertoire: Répertoire
     models:
-      actualite:
-        one: Actualité
-        other: Actualités
+      source_aide:
+        one: Source d'aide
+        other: Sources d'aide
   formtastic:
     actions:
-      actualite:
+      source_aide:
         create: Créer
         update: Enregistrer
   active_admin:
     resources:
-      actualite:
+      source_aide:
         delete_model: Supprimer
-        new_model: Ajouter une nouvelle actualité
+        new_model: Ajouter une nouvelle source d'aide
         edit_model: Modifier
     status_tag:
       <<: *traduction-categories

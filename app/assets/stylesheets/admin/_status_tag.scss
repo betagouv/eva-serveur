@@ -8,6 +8,7 @@
     letter-spacing: unset;
     font-size: 0.8rem;
     white-space: nowrap;
+    color: $couleur-texte;
 
     &.assistance, &.red {
       color: $couleur-accent-erreur;

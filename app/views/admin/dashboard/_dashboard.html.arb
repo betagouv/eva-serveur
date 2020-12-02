@@ -6,25 +6,10 @@ columns do
   end
 
   column do
-    panel t('.contacts.titre') do
-      h4 class: 'mise-en-evidence' do
-        t('.contacts.intro')
-      end
-      render 'admin/contacts/form'
-      if contacts.present?
-        hr
-        h4 t('.contacts.deja_enregistres')
-        ul do
-          contacts.each do |contact|
-            li contact.display_name
-          end
-        end
-      end
-    end
+    render 'actualites', actualites: actualites if actualites.present?
+    render 'formulaire_contact', contacts: contacts
   end
 end
-
-render 'actualites', actualites: actualites if actualites.present?
 
 if can?(:manage, Compte)
   panel t('.statistiques.titre') do

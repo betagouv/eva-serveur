@@ -13,9 +13,11 @@
 
 .actualites {
   position: relative;
+  margin-bottom: 2rem;
 
   h3 {
     @include titre-carte();
+    padding-bottom: 3rem;
   }
 
   > a {
@@ -26,58 +28,51 @@
   }
 
   &-liste {
-    .columns {
-      display: flex;
-    }
-
-    .column.derniere-actualite {
-      display: flex;
-
-      .actualite {
-        align-items: flex-start;
-        flex-direction: column;
-        flex: 1;
-        padding: 1rem;
-
-        .titre {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin: 1rem 0 0.5rem;
-        }
-        .action {
-          position: absolute;
-          bottom: 1rem;
-          right: 1rem;
-        }
-      }
-    }
-
     .actualite {
       @include carte;
-      padding: .75rem;
-      margin-bottom: .5rem;
       display: flex;
-      align-items: center;
+      margin-bottom: .5rem;
       font-size:0.875rem;
+      align-items: center;
+      padding: 0 1rem;
+      min-height: 3.5rem;
+
+      .action {
+        @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+      }
 
       .status_tag {
         margin-right: 3.25rem;
       }
 
       .titre {
-        margin: 0;
         color: $couleur-texte-sombre;
         flex: 1;
-        margin-right: .75rem;
+        margin: 0 .75rem 0 0;
       }
 
       .date {
         color: $couleur-texte;
         margin-right: .75rem;
       }
+    }
 
-      .action {
-        @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+    .derniere-actualite {
+      .actualite {
+        min-height: auto;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem;
+        .titre {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 0.75rem 0 1.5rem;
+        }
+        .action {
+          position: absolute;
+          bottom: 1rem;
+          right: 1rem;
+        }
       }
     }
   }

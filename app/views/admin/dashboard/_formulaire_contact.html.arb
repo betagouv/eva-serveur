@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+panel t('.contacts.titre') do
+  h4 class: 'mise-en-evidence' do
+    t('.contacts.intro')
+  end
+  render 'admin/contacts/form'
+  if contacts.present?
+    hr
+    h4 t('.contacts.deja_enregistres')
+    ul do
+      contacts.each do |contact|
+        li contact.display_name
+      end
+    end
+  end
+end

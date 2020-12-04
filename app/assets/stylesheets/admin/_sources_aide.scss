@@ -1,0 +1,47 @@
+.sources_aide {
+  font-size: 0;
+
+  h3 {
+    @include titre-carte;
+  }
+
+  .source_aide {
+    @include carte;
+    display: inline-flex;
+    padding: 1.5rem;
+    color: $couleur-texte-sombre;
+    font-size: .875rem;
+    margin-bottom: 1.25rem;
+    width: calc(50% - 10px);
+    box-sizing: border-box;
+    text-decoration: none;
+
+    &:nth-child(even) {
+      margin-right: 10px;
+    }
+
+    &:nth-child(odd) {
+      margin-left: 10px;
+    }
+
+    .illustration {
+      margin-right: 1.5rem;
+    }
+
+    .titre {
+      font-weight: bold;
+      margin-bottom: .5rem;
+    }
+
+    .description {
+      font-style: italic;
+    }
+
+    .action {
+      @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+      position: absolute;
+      right: 1.5rem;
+      bottom: 1.5rem;
+    }
+  }
+}

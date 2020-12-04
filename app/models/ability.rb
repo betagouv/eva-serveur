@@ -26,6 +26,7 @@ class Ability
     droit_choix
     droit_structure
     droit_actualite
+    droit_page
   end
 
   def droit_campagne(compte)
@@ -99,6 +100,10 @@ class Ability
 
   def droit_actualite
     can :read, Actualite
+  end
+
+  def droit_page
+    can :read, ActiveAdmin::Page
   end
 
   def droits_generiques(compte)

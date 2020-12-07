@@ -24,7 +24,3 @@ SourceAide.find_or_create_by(titre: 'Exemples de restitution') do |source_aide|
   source_aide.categorie= :prise_en_main
   source_aide.type_document= :repertoire
 end
-
-# return unless  Rails.env.development?
-
-#Compte.create!(email: 'administrateur@exemple.com', role: 'administrateur', password: 'password', password_confirmation: 'password')

@@ -6,10 +6,12 @@ fr:
         categorie: Catégorie
         categories: &traduction-categories
           prise_en_main: Prise en main
+          animer_restituer: Annimer et restituer
         type_document: Type de document
         types_document:
           video: Vidéo
           pdf: PDF
+          web_doc: Document web
           repertoire: Répertoire
     models:
       source_aide:

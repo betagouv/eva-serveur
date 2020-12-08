@@ -6,8 +6,12 @@ fr:
           titre: Statistiques
       actualites:
         titre: Les actualités sur eva
+      actualite:
+        action: Lire
       evaluations:
         titre: Vos dernières évaluations
+        action: Voir
+        date: "il y a %{date}"
       formulaire_contact:
         contacts:
           titre: Vos coordonnées

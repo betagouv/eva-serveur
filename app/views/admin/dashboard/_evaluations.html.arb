@@ -9,11 +9,10 @@ div class: 'evaluations' do
           text_node evaluation.nom
         end
         span class: 'date' do
-          text_node ' il y a '
-          text_node time_ago_in_words(evaluation.created_at)
+          text_node t('.date', date: time_ago_in_words(evaluation.created_at))
         end
         span class: 'action' do
-          link_to 'Voir', admin_campagne_evaluation_path(evaluation.campagne, evaluation)
+          link_to t('.action'), admin_campagne_evaluation_path(evaluation.campagne, evaluation)
         end
       end
     end

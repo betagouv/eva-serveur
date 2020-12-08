@@ -6,6 +6,7 @@ describe Actualite do
   it { should validate_presence_of(:titre) }
   it { should validate_presence_of(:contenu) }
   it { should validate_presence_of(:categorie) }
+  it { is_expected.to have_one(:illustration_attachment) }
 
   context 'limite la taille du titre pour le tableau de bord' do
     it { should validate_length_of(:titre).is_at_most(60) }

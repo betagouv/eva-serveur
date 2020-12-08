@@ -1,16 +1,3 @@
-.actualite {
-  &-contenu,
-  &-date {
-    font-size: 1rem;
-    color: $couleur-texte;
-  }
-  &-categorie {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-  }
-}
-
 .actualites {
   position: relative;
   margin-bottom: 2rem;
@@ -26,54 +13,70 @@
     right: 0;
     @include bouton()
   }
+}
 
-  &-liste {
-    .actualite {
-      @include carte;
-      display: flex;
-      margin-bottom: .5rem;
-      font-size:0.875rem;
-      align-items: center;
-      padding: 0 1rem;
-      min-height: 3.5rem;
+.carte-actualite {
+  @include carte;
 
-      .action {
-        @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
-      }
+  &.complete {
+    max-width: 40rem;
+  }
 
-      .status_tag {
-        margin-right: 3.25rem;
-      }
+  .illustration {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 100%;
+    img {
+      width: 100%
+    }
+  }
 
-      .titre {
-        color: $couleur-texte-sombre;
-        flex: 1;
-        margin: 0 .75rem 0 0;
-      }
+  .texte {
+    display: flex;
+    margin-bottom: .5rem;
+    font-size:0.875rem;
+    align-items: center;
+    padding: 0 1rem;
+    min-height: 3.5rem;
 
-      .date {
-        color: $couleur-texte;
-        margin-right: .75rem;
-      }
+    .action {
+      @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
     }
 
-    .derniere-actualite {
-      .actualite {
-        min-height: auto;
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 1rem;
-        .titre {
-          font-size: 1.25rem;
-          font-weight: 600;
-          margin: 0.75rem 0 1.5rem;
-        }
-        .action {
-          position: absolute;
-          bottom: 1rem;
-          right: 1rem;
-        }
-      }
+    .status_tag {
+      margin-right: 3.25rem;
+    }
+
+    .titre {
+      color: $couleur-texte-sombre;
+      flex: 1;
+      margin: 0 .75rem 0 0;
+    }
+
+    .date {
+      color: $couleur-texte;
+      margin-right: .75rem;
+    }
+  }
+}
+
+.derniere-actualite, .complete {
+  .texte {
+    min-height: auto;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0.9rem 1.45rem 1.25rem;
+
+    .titre {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0.75rem 0 1.5rem;
+    }
+
+    .action {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
     }
   }
 }

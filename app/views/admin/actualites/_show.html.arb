@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
-panel actualite.titre do
-  status_tag actualite.categorie, class: 'actualite-categorie'
-  div class: 'actualite-contenu' do
-    md actualite.contenu
+div class: 'carte-actualite complete' do
+  div class: 'illustration' do
+    image_tag url_for(actualite.illustration) if actualite.illustration.attached?
   end
-  div class: 'actualite-date' do
-    l actualite.created_at, format: :point
+  div class: 'texte' do
+    status_tag actualite.categorie
+    span actualite.titre, class: 'titre'
+    div class: 'contenu' do
+      md actualite.contenu
+    end
+    span class: 'date' do
+      l actualite.created_at, format: :point
+    end
   end
 end

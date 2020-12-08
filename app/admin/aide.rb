@@ -5,6 +5,6 @@ ActiveAdmin.register_page 'Aide' do
 
   content do
     sources_aide = SourceAide.all
-    render 'aide', sources_aide: sources_aide
+    render 'aide', sources_aide: sources_aide, titre: 'prise_en_main'
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+h3 'Prendre en main', class: 'sources_aide_titre'
 div class: 'sources_aide' do
-  h3 'Prendre en main'
   sources_aide.each do |source_aide|
     a href: source_aide.url, target: '_blank', class: 'source_aide' do
       text_node image_tag "source-aide-#{source_aide.type_document}.svg", class: 'illustration'

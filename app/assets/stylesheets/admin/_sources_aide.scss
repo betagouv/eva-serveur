@@ -1,28 +1,21 @@
-.sources_aide {
-  font-size: 0;
 
-  h3 {
+
+.sources_aide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  &_titre {
     @include titre-carte;
   }
 
   .source_aide {
     @include carte;
-    display: inline-flex;
+    display: flex;
     padding: 1.5rem;
     color: $couleur-texte-sombre;
     font-size: .875rem;
-    margin-bottom: 1.25rem;
-    width: calc(50% - 10px);
-    box-sizing: border-box;
     text-decoration: none;
-
-    &:nth-child(even) {
-      margin-right: 10px;
-    }
-
-    &:nth-child(odd) {
-      margin-left: 10px;
-    }
 
     .illustration {
       margin-right: 1.5rem;

@@ -4,7 +4,8 @@ ActiveAdmin.register_page 'Aide' do
   menu priority: 99
 
   content do
-    sources_aide = SourceAide.all
-    render 'aide', sources_aide: sources_aide, titre: 'prise_en_main'
+    SourceAide.sources_par_categorie.each do |categorie, sources|
+      render 'aide', sources_aide: sources, titre: categorie
+    end
   end
 end

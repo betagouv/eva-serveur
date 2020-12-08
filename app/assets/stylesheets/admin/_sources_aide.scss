@@ -1,12 +1,12 @@
-
-
 .sources_aide {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
+  margin-bottom: 3rem;
 
   &_titre {
     @include titre-carte;
+    padding-top: 0;
   }
 
   .source_aide {

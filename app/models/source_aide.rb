@@ -9,4 +9,11 @@ class SourceAide < ApplicationRecord
   def display_name
     titre
   end
+
+  def self.sources_par_categorie
+    all.each_with_object({}) do |source, result|
+      result[source.categorie] ||= []
+      result[source.categorie] << source
+    end
+  end
 end

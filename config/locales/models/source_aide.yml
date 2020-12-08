@@ -6,7 +6,7 @@ fr:
         categorie: Catégorie
         categories: &traduction-categories
           prise_en_main: Prise en main
-          animer_restituer: Annimer et restituer
+          animer_restituer: Animer et restituer
         type_document: Type de document
         types_document:
           video: Vidéo

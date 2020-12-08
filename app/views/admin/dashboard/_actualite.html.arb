@@ -6,5 +6,5 @@ div class: 'actualite' do
   span class: 'date' do
     l actualite.created_at, format: :point
   end
-  text_node link_to 'Lire', [:admin, actualite], class: 'action'
+  text_node link_to t('.action'), [:admin, actualite], class: 'action'
 end

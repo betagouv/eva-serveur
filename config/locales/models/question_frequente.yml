@@ -1,0 +1,20 @@
+fr:
+  activerecord:
+    attributes:
+      aide/question_frequente:
+        created_at: Créée le
+    models:
+      aide/question_frequente:
+        one: Question Fréquente
+        other: Questions Fréquentes
+  formtastic:
+    actions:
+      aide/question_frequente:
+        create: Créer
+        update: Enregistrer
+  active_admin:
+    resources:
+      aide/question_frequente:
+        delete_model: Supprimer
+        new_model: Ajouter une nouvelle question
+        edit_model: Modifier

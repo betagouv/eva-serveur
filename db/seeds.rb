@@ -36,3 +36,15 @@ SourceAide.find_or_create_by(titre: 'Document d’interprétation des résultats
   source_aide.categorie= :animer_restituer
   source_aide.type_document= :web_doc
 end
+SourceAide.find_or_create_by(titre: "Fiche de présentation d'eva") do |source_aide|
+  source_aide.description= "Fichier PDF imprimable\n1 page"
+  source_aide.url= 'https://drive.google.com/file/d/1dzL55etvlvoaoW7NtSOaK-_Nhdf945C7/view'
+  source_aide.categorie= :presenter_eva
+  source_aide.type_document= :pdf
+end
+SourceAide.find_or_create_by(titre: 'Vidéo de démonstration') do |source_aide|
+  source_aide.description="Vidéo accessible sur Youtube\nDurée : 3mn46"
+  source_aide.url= 'https://youtu.be/wz8SftVc53k'
+  source_aide.categorie= :presenter_eva
+  source_aide.type_document= :video
+end

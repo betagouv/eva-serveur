@@ -48,3 +48,38 @@ SourceAide.find_or_create_by(titre: 'Vidéo de démonstration') do |source_aide|
   source_aide.categorie= :presenter_eva
   source_aide.type_document= :video
 end
+
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux aider les candidats pendant la passation ?') do |faq|
+  faq.reponse= %{La restitution obtenue au terme d’une passation sur l’outil eva peut être considérée valide uniquement si les condition suivantes sont respectées :
+
+la passation a été réalisée d’une traite, c’est à dire que toutes les mises en situation ont été passées à la suite les unes des autres en une seule fois, chaque mise en situation n’a été passée qu’une seule fois, chaque mise en situation a été réalisée dans son entièreté.
+
+Les réponses partielles peuvent être considérées comme des pistes de réflexion ouvrant au dialogue, mais en aucun cas comme une indication précise de niveau de compétence.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux modifier l’ordre des mises en situation dans le parcours ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Quel est le public auquel est destiné eva ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'À quel moment faire passer eva dans le parcours d’accompagnement ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-il possible de refaire le test plusieurs fois ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Comment faciliter la réalisation d’un exercice ? Niveau aide') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux passer à l’exercice suivant sans l’avoir terminé ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux réaliser des passations à distance ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que eva peut être passé sur des tablettes ou des téléphones portables ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Puis-je partager les restitutions complètes avec les candidats ?') do |faq|
+  faq.reponse= %{Réponse en cours d'écriture.}
+end

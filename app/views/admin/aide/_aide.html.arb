@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-h3 t(".#{titre}"), class: 'sources_aide_titre'
+h3 t(".#{titre}"), class: 'aide_titre'
 div class: 'sources_aide' do
   sources_aide.each do |source_aide|
     a href: source_aide.url, target: '_blank', class: 'source_aide' do

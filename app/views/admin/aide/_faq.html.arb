@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+h3 t('.titre'), class: 'aide_titre'
+div class: 'faq' do
+  h4 'Questions', class: 'titre_questions'
+  ul do
+    questions_frequentes.each do |question_frequente|
+      li question_frequente.question
+    end
+  end
+end

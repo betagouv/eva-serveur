@@ -1,0 +1,32 @@
+.faq {
+  @include carte();
+  width: 30%;
+  .titre_questions {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    text-transform: uppercase;
+    color: $couleur-blanc;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    background-color: $couleur-principale;
+  }
+  ul {
+    padding: 1.5rem;
+    list-style: none;
+    li {
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      line-height: 1.2;
+      cursor: pointer;
+      color: $couleur-texte;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &.active {
+        font-weight: bold;
+      }
+    }
+  }
+}

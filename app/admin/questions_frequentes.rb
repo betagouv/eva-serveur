@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Aide::QuestionFrequente do
+  menu parent: 'Accompagnement'
+
   permit_params :question, :reponse
 
   filter :question

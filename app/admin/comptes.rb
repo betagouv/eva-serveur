@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Compte do
+  menu parent: 'Terrain'
+
   permit_params :email, :password, :password_confirmation, :role, :structure_id
 
   includes :structure

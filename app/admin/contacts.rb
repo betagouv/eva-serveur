@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Contact do
+  menu parent: 'Terrain'
   actions :index, :create
+
   permit_params :telephone, :email, :nom, :compte_id
 
   index do

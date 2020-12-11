@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Situation do
+  menu parent: 'Parcours'
+
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id
 
   form do |f|

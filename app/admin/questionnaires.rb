@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Questionnaire do
+  menu parent: 'Parcours'
+
   permit_params :libelle, questionnaires_questions_attributes: %i[id question_id _destroy]
 
   filter :questions

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Structure do
-  permit_params :nom, :code_postal
-
+  menu parent: 'Terrain'
   actions :all, except: [:new]
+
+  permit_params :nom, :code_postal
 
   index do
     column :nom

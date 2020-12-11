@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Campagne do
+  menu priority: 3
+
   permit_params :libelle, :code, :questionnaire_id, :compte,
                 :compte_id, :affiche_competences_fortes,
                 situations_configurations_attributes: %i[id situation_id _destroy]

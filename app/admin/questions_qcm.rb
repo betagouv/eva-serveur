@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionQcm do
-  menu parent: 'Questions'
-
-  filter :intitule
+  menu parent: 'Parcours'
 
   permit_params :libelle, :intitule, :description, :illustration, :metacompetence, :type_qcm,
                 choix_attributes: %i[id intitule type_choix _destroy]
+
+  filter :intitule
 
   form do |f|
     f.semantic_errors

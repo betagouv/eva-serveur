@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Actualite do
+  menu priority: 2
+
   permit_params :titre, :contenu, :categorie, :illustration
 
   filter :titre

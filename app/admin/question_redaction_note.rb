@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionRedactionNote do
-  menu parent: 'Questions'
-
-  filter :libelle
+  menu parent: 'Parcours'
 
   permit_params :libelle, :intitule, :illustration, :entete_reponse, :expediteur,
                 :message, :objet_reponse
+
+  filter :libelle
 
   form do |f|
     f.semantic_errors

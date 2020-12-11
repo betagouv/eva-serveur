@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register SourceAide do
+  menu parent: 'Accompagnement'
+
   permit_params :titre, :description, :url, :categorie, :type_document
 
   config.filters = false

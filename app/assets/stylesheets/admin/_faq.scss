@@ -1,10 +1,33 @@
 .faq {
-  @include carte();
-  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  ul {
+    list-style: none;
+  }
+  .questions {
+    @include carte();
+    width: 30%;
+    ul {
+      padding: 1.5rem;
+      li {
+        margin-bottom: 1.5rem;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        cursor: pointer;
+        color: $couleur-texte;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &.active {
+          font-weight: bold;
+        }
+      }
+    }
+  }
   .titre_questions {
     margin: 0;
     padding: 1rem 1.5rem;
-    font-size: 1.2rem;
+    font-size: 1.125rem;
     line-height: 2rem;
     text-transform: uppercase;
     color: $couleur-blanc;
@@ -12,21 +35,27 @@
     border-top-left-radius: 0.5rem;
     background-color: $couleur-principale;
   }
-  ul {
-    padding: 1.5rem;
-    list-style: none;
-    li {
-      margin-bottom: 1.5rem;
-      font-size: 0.875rem;
-      line-height: 1.2;
-      cursor: pointer;
-      color: $couleur-texte;
-      &:last-child {
-        margin-bottom: 0;
-      }
-      &.active {
-        font-weight: bold;
-      }
+  .reponses {
+    width: 70%;
+    padding-left: 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 0.875rem;
+    color: $couleur-texte-sombre;
+  }
+  .reponse {
+    position: absolute;
+    opacity: 0;
+    transition: opacity .2s;
+    &.active {
+      opacity: 1;
     }
+  }
+  .titre_reponse {
+    margin: 1.25rem 0 2.5rem;
+    font-size: 1rem;
+    font-family: $font-titre;
+    font-weight: bold;
+    color: $couleur-principale;
   }
 }

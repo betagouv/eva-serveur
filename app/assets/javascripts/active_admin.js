@@ -2,3 +2,4 @@
 //= require activeadmin_addons/all
 //= require vendor/datepicker-fr
 //= require activeadmin_reorderable
+//= require faq

@@ -2,10 +2,24 @@
 
 h3 t('.titre'), class: 'aide_titre'
 div class: 'faq' do
-  h4 'Questions', class: 'titre_questions'
-  ul do
-    questions_frequentes.each do |question_frequente|
-      li question_frequente.question
+  div class: 'questions' do
+    h4 'Questions', class: 'titre_questions'
+    ul do
+      questions_frequentes.each do |question_frequente|
+        li 'data-id': question_frequente.id, class: 'question' do
+          question_frequente.question
+        end
+      end
+    end
+  end
+  div class: 'reponses' do
+    ul do
+      questions_frequentes.each do |question_frequente|
+        li 'data-id': question_frequente.id, class: 'reponse' do
+          h4 question_frequente.question, class: 'titre_reponse'
+          text_node md question_frequente.reponse
+        end
+      end
     end
   end
 end

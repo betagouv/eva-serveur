@@ -50,36 +50,45 @@ SourceAide.find_or_create_by(titre: 'Vidéo de démonstration') do |source_aide|
 end
 
 Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux aider les candidats pendant la passation ?') do |faq|
-  faq.reponse= %{La restitution obtenue au terme d’une passation sur l’outil eva peut être considérée valide uniquement si les condition suivantes sont respectées :
+  faq.reponse= %{Les passations d’eva doivent être accompagnées. Cela signifie qu’un encadrant.e doit être présent.e pour aider les candidats lorsqu’ils rencontrent des difficultés majeures dans le parcours. Cependant, il est préférable de limiter au maximum les interventions dans les exercices, car cela peut influencer les résultats, qui seront alors moins représentatifs du niveau réel des candidat.e.s.
 
-la passation a été réalisée d’une traite, c’est à dire que toutes les mises en situation ont été passées à la suite les unes des autres en une seule fois, chaque mise en situation n’a été passée qu’une seule fois, chaque mise en situation a été réalisée dans son entièreté.
+Les exercices les plus difficiles proposent un niveau d’aide (cf. question “existe t-il des niveaux d’aide sur les exercices ?”). Il est également possible de quitter un exercice sans l’avoir terminé si les candidat.e.s rencontrent encore des difficultés après avoir mobilisé le niveau d’aide (cf. question “peut-on passer un exercice sans l’avoir terminé”).
 
-Les réponses partielles peuvent être considérées comme des pistes de réflexion ouvrant au dialogue, mais en aucun cas comme une indication précise de niveau de compétence.}
+Dans le cas où vous utiliseriez eva pour un aspect majoritairement pédagogique (c’est à dire sans vous intéresser aux résultats sur les compétences), vous pouvez intervenir auprès des candidat.e.s les plus en difficultés pour les aider à terminer et gagner confiance en eux, tout en sachant que les résultats ne seront pas représentatifs de leurs compétences.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux modifier l’ordre des mises en situation dans le parcours ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Existe t-il des niveaux d’aide sur les exercices ?') do |faq|
+  faq.reponse= %{Pour les candidat.e.s en difficulté, certains exercices proposent un niveau d’aide. Par exemple, la situation inventaire et sécurité propose une aide située en bas de l’écran (bouton “j’ai besoin d’aide”). Ces niveaux d’aide ont deux fonctions. Premièrement, ils permettent aux candidats d’être évalués sur toutes les parties d’un exercice (de sorte qu’un échec dans une première partie n’entraîne pas forcément un échec dans une seconde partie). Deuxièmement, ils permettent de limiter les frustrations liées aux échecs en accompagnant les candidat.e.s jusqu’à la fin des exercices, dans l’optique de les mettre dans les meilleures dispositions pour les exercices suivants.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Quel est le public auquel est destiné eva ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Peut-on passer un exercice sans l’avoir terminé ?') do |faq|
+  faq.reponse= %{Pour disposer d’un maximum de données sur les candidat.e.s (et donc pour s’assurer de la fiabilité des résultats), il est préférable de terminer les exercices. Mais dans le cas où les candidat.e.s sont bloqués et ne peuvent pas poursuivre, ils peuvent quitter l’exercice et passer au suivant en cliquant sur le bouton "arrêter la situation” en bas à droite de l’écran.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'À quel moment faire passer eva dans le parcours d’accompagnement ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux modifier l’ordre des mises en situation dans le parcours ?') do |faq|
+  faq.reponse= %{Il n’est pas préférable de modifier l’ordre des exercices car les tests de fiabilité d’eva ont été réalisés sur la base du parcours type. En modifiant l’ordre des exercices, on risque de perdre en fiabilité dans la mesure des compétences.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Est-il possible de refaire le test plusieurs fois ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'A quel public s’adresse eva ?') do |faq|
+  faq.reponse= %{eva s’adresse à toutes les personnes éloignées de l’emploi. Si le public jeune représente la majorité des utilisateurs, eva s’adresse à toutes les personnes en insertion, chômeuses de longue durée, bénéficiaires du RSA...
+
+  eva permet de détecter les personnes potentiellement en situation d’illettrisme. Si la situation d’illettrisme d’une personne est déjà confirmée, alors le parcours eva n’est pas particulièrement indiqué.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Comment faciliter la réalisation d’un exercice ? Niveau aide') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'A quel moment dans le parcours d’accompagnement est-il indiqué de faire passer eva?') do |faq|
+  faq.reponse= %{eva est souvent mobilisé en entrée de parcours. C’est un outil polyvalent qui répond à un ensemble de cas d’usage, que ce soit lors d’accompagnement à l’orientation, à l’emploi ou en entrée de formation par exemple.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux passer à l’exercice suivant sans l’avoir terminé ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-il possible de refaire le test plusieurs fois ?') do |faq|
+  faq.reponse= %{Les résultats d’eva ne sont fiabilisés que pour une unique passation, lorsque le candidat.e découvre les mises en situation. Ainsi, pour limiter les biais et donc obtenir un diagnostic le plus juste possible, il est préférable d’utiliser eva qu’une seule fois. Par exemple, l’habituation aux mises en situation peut participer à l’amélioration des résultats à la deuxième passation.
+
+  Cependant, dans une visée plus pédagogique, notamment pour encourager les candidat.e.s dans leurs progrès, vous pourriez utiliser eva à nouveau.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux réaliser des passations à distance ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Peut-on découper la passation en plusieurs temps ?') do |faq|
+  faq.reponse= %{Aujourd’hui, eva ne permet pas de découper la passation en plusieurs temps, car les calculs de fiabilité ont été réalisés à partir de données de participants ayant passé le parcours complet d’une seule traite. Ainsi, en réalisant le parcours de façon “découpée”, nous pourrions perdre en fiabilité des mesures et donc diminuer la qualité des résultats. Si cela constitue un frein pour vous en tant qu’accompagnant.e, n’hésitez pas à nous écrire contact@eva.beta.gouv.fr et nous dire pourquoi.}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que eva peut être passé sur des tablettes ou des téléphones portables ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux réaliser des passations à distance ?') do |faq|
+  faq.reponse= %{Il est tout à fait possible de réaliser des sessions à distance. Nous avons même créé un petit guide pour vous accompagner dans l’utilisation d’eva à distance: Guide du distanciel}
 end
-Aide::QuestionFrequente.find_or_create_by(question: 'Puis-je partager les restitutions complètes avec les candidats ?') do |faq|
-  faq.reponse= %{Réponse en cours d'écriture.}
+Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce qu’eva peut être passé sur des tablettes ou des téléphones portables ?') do |faq|
+  faq.reponse= %{eva est compatible avec tous les types de matériel : ordinateur, tablettes ou téléphone portable. Cependant, certains exercices, comme l’inventaire, nécessitent de faire des manipulations assez précises. Plus l’écran est petit, plus la tâche peut être difficile. Quand cela est possible, il est préférable de privilégier l’usage d’un ordinateur.}
+end
+Aide::QuestionFrequente.find_or_create_by(question: 'Puis-je partager les restitutions complètes avec les candidats ?') do |faq|
+  faq.reponse= %{Il existe deux types de restitution. La restitution pour les candidat.e.s est délivrée en fin de parcours (bâtiment “résultats”), et présente les deux compétences transversales les plus fortes, afin de valoriser les potentialités des candidat.e.s.
+
+  L’accompagnant dispose quant à lui, en se connectant à l’interface d’administration, d’une restitution plus complète sur les compétences transversales mais également sur les compétences de base. Cette restitution est exportable en PDF et peut être tout à fait partagée avec les candidat.e.s, si cela s’y prête.}
 end

@@ -80,3 +80,54 @@
     }
   }
 }
+
+.actualite {
+  $grid-columns:      8;
+  $grid-gutter-width: 1.25rem;
+  $largeur-conteneur: 1220px;
+
+  @import "bootstrap";
+  @include make-container();
+  max-width: $largeur-conteneur;
+  font-size: .875rem;
+  color: $couleur-texte-sombre;
+
+  padding-top: 1.125rem;
+
+  .titre {
+    @include titre();
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .illustration {
+    img {
+      width: 100%;
+      @include carte;
+    }
+    margin-bottom: 2rem;
+  }
+
+  .contenu {
+    @include make-col(3, 5);
+    @include make-col-offset(1, 5);
+  }
+
+  .metadonnees {
+    @include carte;
+    padding: 1.5rem;
+    display: flex;
+
+    .donnee {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: flex-start;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-bottom: .5rem;
+    }
+  }
+}

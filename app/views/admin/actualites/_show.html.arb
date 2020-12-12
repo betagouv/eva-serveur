@@ -1,17 +1,38 @@
 # frozen_string_literal: true
 
-div class: 'carte-actualite complete' do
-  div class: 'illustration' do
-    image_tag url_for(actualite.illustration) if actualite.illustration.attached?
-  end
-  div class: 'texte' do
-    status_tag actualite.categorie
-    span actualite.titre, class: 'titre'
-    div class: 'contenu' do
-      md actualite.contenu
+div class: 'actualite' do
+  h1 actualite.titre, class: 'titre'
+
+  div class: 'row' do
+    div class: 'col-5' do
+      div class: 'illustration' do
+        image_tag url_for(actualite.illustration) if actualite.illustration.attached?
+      end
+
+      div class: 'row' do
+        div class: 'contenu' do
+          md actualite.contenu
+        end
+      end
     end
-    span class: 'date' do
-      l actualite.created_at, format: :point
+
+    div class: 'col-3' do
+      div class: 'metadonnees' do
+        div class: 'donnee' do
+          span 'Publié dans :', class: 'label'
+          status_tag actualite.categorie
+        end
+        div class: 'donnee' do
+          span 'Auteur :', class: 'label'
+          text_node 'Équipe eva'
+        end
+        div class: 'donnee' do
+          span 'Date :', class: 'label'
+          span class: 'date' do
+            l actualite.created_at, format: :point
+          end
+        end
+      end
     end
   end
 end

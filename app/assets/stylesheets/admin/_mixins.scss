@@ -25,14 +25,17 @@
   box-sizing: border-box;
   line-height: 1rem;
 }
-@mixin titre-carte() {
-  margin: 0;
-  padding: 1rem 1.5rem 1.5rem;
+@mixin titre() {
   font-family: $font-titre;
-  font-size: 1.5rem;
   font-weight: bold;
+  color: $couleur-texte-sombre;
+  margin: 0;
+}
+@mixin titre-carte() {
+  @include titre();
+  padding: 1rem 1.5rem 1.5rem;
+  font-size: 1.5rem;
   border: 0;
   box-shadow: none;
-  color: $couleur-texte-sombre;
   background: none;
 }

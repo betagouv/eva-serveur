@@ -14,10 +14,17 @@ namespace :extraction do
     Partie.joins(:situation)
           .where(situations: { nom_technique: situation })
           .select(:session_id)
+
+    # Partie.joins(:situation).joins(:evaluation)
+    #  .where(situations: { nom_technique: situation },
+    #         evaluations: {campagne_id: 'c6a094ff-b77e-49cb-9020-58a110933cda' }) ## Mayotte
+    #         #evaluations: {campagne_id: '7ee72648-45af-4470-8faf-f8a66e56da1d' }) ## Guyane
+    #  .select(:session_id)
   end
 
   def tout_evenements_par_session(situation)
-    Evenement.where(nom: :affichageQuestionQCM).or(Evenement.where(nom: :reponse))
+    Evenement.where(nom: :affichageQuestionQCM)
+             .or(Evenement.where(nom: :reponse))
              .or(Evenement.where(nom: :apparitionMot))
              .or(Evenement.where(nom: :identificationMot))
              .or(Evenement.where(nom: :finSituation))
@@ -61,11 +68,15 @@ namespace :extraction do
       next if reponse.donnees['reponse'].blank?
 
       question = Question.find(reponse.donnees['question'])
+
       metacompetence = question.metacompetence
-      question = question.libelle
-      choix = Choix.find(reponse.donnees['reponse'])
-      succes = choix.type_choix == 'bon'
-      puts "#{identification};livraison;#{metacompetence};#{question};#{succes};#{temps}"
+      libelle = question.libelle
+      intitule = question.intitule
+      if libelle != 'Communication écrite'
+        choix = Choix.find(reponse.donnees['reponse'])
+        succes = choix.type_choix == 'bon'
+      end
+      puts "#{identification};livraison;#{metacompetence};#{libelle};#{succes};#{temps};#{intitule}"
     end
   end
 
@@ -94,15 +105,13 @@ namespace :extraction do
       'maintenance' => Restitution::Maintenance::METRIQUES.keys,
       'livraison' => Restitution::Livraison::METRIQUES.keys,
       'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys,
-      'securite' => Restitution::Securite::METRIQUES.keys,
       'bienvenue' => []
     }
     colonnes_z = {
       'bienvenue' => [],
       'maintenance' => Restitution::Maintenance::METRIQUES.keys,
       'livraison' => Restitution::Livraison::METRIQUES.keys,
-      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys,
-      'securite' => Restitution::Securite::METRIQUES.keys
+      'objets_trouves' => Restitution::ObjetsTrouves::METRIQUES.keys
     }
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
@@ -151,17 +160,23 @@ namespace :extraction do
   desc 'Extrait les données pour la bascule vers un algorithme figé'
   task stats_niveau1: :environment do
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
+    # evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation }, campagnes: { id: 'c6a094ff-b77e-49cb-9020-58a110933cda'}) ## SMA mayotte
+    # evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation }, campagnes: { id: '7ee72648-45af-4470-8faf-f8a66e56da1d' }) ## SMA Guyane
     puts "Nombre d'évaluation : #{evaluations.count}"
-    entete_colonnes = 'id eva;campagne;nom evalué·e;date creation de la partie;litteratie_z;numeratie_z'
+    entete_colonnes = 'id eva;campagne;nom evalué·e;date creation de la partie;litteratie_z;numeratie_z;score_ccf;score_syntaxe_orthographe;score_memorisation;score_numeratie'
     puts entete_colonnes
     evaluations.each do |e|
       rg = FabriqueRestitution.restitution_globale(e)
       scores = rg.scores_niveau1_standardises.calcule
+      scores_metacompetence = rg.scores_niveau2_standardises.calcule
       colonnes = [
         e.id,
         e.campagne&.libelle, e.nom, e.created_at,
         scores.values.join(';'),
-        rg.interpreteur_niveau1.synthese
+        rg.interpreteur_niveau1.synthese,
+        %i[score_ccf score_syntaxe_orthographe score_memorisation score_numeratie].map do |score|
+          scores_metacompetence[score]
+        end.join(';')
       ]
       puts colonnes.join(';')
     end

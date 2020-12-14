@@ -22,4 +22,9 @@
       color: $darkgreen;
       border-color: $couleur-legere-accent-validation;
     }
+
+    &.no, &.yes {
+      background-color: transparent;
+      border-color: $couleur-texte
+    }
   }

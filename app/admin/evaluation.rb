@@ -26,7 +26,6 @@ ActiveAdmin.register Evaluation do
   end
 
   show do
-    default_main_content
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,
                                                params[:parties_selectionnees])
@@ -34,7 +33,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :restitution_globale, :parties, :auto_positionnement
+    helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques
 
     def show
       show! do |format|
@@ -48,6 +47,10 @@ ActiveAdmin.register Evaluation do
     end
 
     private
+
+    def statistiques
+      @statistiques ||= StatistiquesEvaluation.new(resource)
+    end
 
     def restitution_globale
       @restitution_globale ||=

@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+panel t('.titre.details') do
+  attributes_table_for resource do
+    row :nom
+    row :campagne
+    row :email
+    row :telephone
+    row(:debut) { statistiques.debut }
+    row(:fin) { statistiques.fin }
+    row(:temps_total) { formate_duree statistiques.temps_total }
+  end
+end
+
 panel t('.titre.restitution_globale'), class: 'panel_admin_restitution_globale' do
   render partial: 'restitution_globale', locals: { pdf: false }
 end

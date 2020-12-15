@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'actualite' do
+div class: 'actualite-complete' do
   h1 actualite.titre, class: 'titre'
 
   div class: 'row' do
@@ -30,6 +30,16 @@ div class: 'actualite' do
           span 'Date :', class: 'label'
           span class: 'date' do
             l actualite.created_at, format: :point
+          end
+        end
+      end
+
+      h3 t('.autres_actualites'), class: 'autres-actualites-titre'
+      div class: 'autres-actualites' do
+        autres_actualites.each do |actualite|
+          div class: 'actualite' do
+            status_tag actualite.categorie, class: 'categorie'
+            text_node link_to actualite.titre, [:admin, actualite], class: 'lien'
           end
         end
       end

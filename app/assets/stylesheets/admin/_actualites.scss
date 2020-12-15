@@ -81,7 +81,7 @@
   }
 }
 
-.actualite {
+.actualite-complete {
   $grid-columns:      8;
   $grid-gutter-width: 1.25rem;
   $largeur-conteneur: 1220px;
@@ -116,6 +116,7 @@
   .metadonnees {
     @include carte;
     padding: 1.5rem;
+    margin-bottom: 1.5rem;
     display: flex;
 
     .donnee {
@@ -128,6 +129,36 @@
     .label {
       font-weight: bold;
       margin-bottom: .5rem;
+    }
+  }
+
+  .autres-actualites {
+    display: flex;
+    flex-direction: column;
+
+    &-titre {
+      @include titre();
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .actualite {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .categorie {
+        margin-right: 1rem;
+      }
+
+      .lien {
+        color: $couleur-principale;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
     }
   }
 }

@@ -30,6 +30,6 @@ ActiveAdmin.register Actualite do
   end
 
   show do
-    render partial: 'show'
+    render partial: 'show', locals: { autres_actualites: actualite.recentes_sauf_moi(3) }
   end
 end

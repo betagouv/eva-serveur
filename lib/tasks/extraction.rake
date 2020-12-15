@@ -71,19 +71,20 @@ namespace :extraction do
 
       metacompetence = question.metacompetence
       libelle = question.libelle
-      intitule = question.intitule
+      question_reponse = [question.intitule]
       if libelle != 'Communication écrite'
         choix = Choix.find(reponse.donnees['reponse'])
         succes = choix.type_choix == 'bon'
+        question_reponse << "\"#{choix.intitule}\""
       end
-      puts "#{identification};livraison;#{metacompetence};#{libelle};#{succes};#{temps};#{intitule}"
+      puts "#{identification};livraison;#{metacompetence};#{libelle};#{succes};#{temps};#{question_reponse.join(';')}"
     end
   end
 
   def affiche_reponses_objets_trouves
     visite_reponses(:objets_trouves) do |identification, reponse, temps|
       valeurs = "#{reponse.donnees['metacompetence']};#{reponse.donnees['question']}"
-      donnees_reponse = "#{reponse.donnees['succes']};#{temps}"
+      donnees_reponse = "#{reponse.donnees['succes']};#{temps};#{reponse.donnees['reponse']}"
       puts "#{identification};objets_trouves;#{valeurs};#{donnees_reponse}"
     end
   end

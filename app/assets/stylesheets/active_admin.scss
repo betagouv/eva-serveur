@@ -16,17 +16,19 @@
 @import 'variables';
 
 @import 'admin/mixins';
-@import 'admin/header';
-@import 'admin/breadcrumb';
-@import 'admin/filtres';
-@import 'admin/panels';
-@import 'admin/tables';
-@import 'admin/forms';
-@import 'admin/buttons';
-@import 'admin/footer';
-@import 'admin/login';
-@import 'admin/status_tag';
 
+@import 'admin/layout/header';
+@import 'admin/layout/footer';
+@import 'admin/layout/breadcrumb';
+
+@import 'admin/composants/filtres';
+@import 'admin/composants/panels';
+@import 'admin/composants/tables';
+@import 'admin/composants/forms';
+@import 'admin/composants/buttons';
+@import 'admin/composants/status_tag';
+
+@import 'admin/login';
 @import 'admin/actualites';
 @import 'admin/evaluations';
 @import 'admin/sources_aide';

@@ -28,8 +28,8 @@ describe Ability do
                                 name: 'Dashboard',
                                 namespace_name: 'admin')
     end
-    it { is_expected.to be_able_to(%i[read destroy], Evaluation.new) }
-    it { is_expected.to_not be_able_to(%i[create update], Evaluation.new) }
+    it { is_expected.to be_able_to(%i[read destroy update], Evaluation.new) }
+    it { is_expected.to_not be_able_to(%i[create], Evaluation.new) }
     it { is_expected.to_not be_able_to(%i[create update], Evenement.new) }
     it { is_expected.to be_able_to(:read, Evenement.new) }
     it { is_expected.to be_able_to(:manage, Situation.new) }

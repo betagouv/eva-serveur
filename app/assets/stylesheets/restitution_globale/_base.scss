@@ -32,7 +32,7 @@
 
   h3 {
     font-family: $font-titre;
-    color: $couleur-principale;
+    color: $eva_main_blue;
     font-size: 1rem;
     font-weight: 600;
   }
@@ -106,7 +106,7 @@
     }
 
     .reponse {
-      color: $couleur-principale;
+      color: $eva_main_blue;
       font-weight: 600;
       margin-bottom: 1rem;
     }
@@ -183,10 +183,10 @@
 
     .description-competence {
       .lien-metier {
-        color: $couleur-principale;
+        color: $eva_main_blue;
 
         a {
-          color: $couleur-principale;
+          color: $eva_main_blue;
           text-decoration: underline;
         }
 
@@ -221,7 +221,7 @@
     }
 
     &.ni_ni {
-      background-color: $couleur-principale;
+      background-color: $eva_main_blue;
     }
 
     &.socle_clea {
@@ -234,7 +234,7 @@
   }
 
   .stanine-niveau-francais-mathematique {
-    color: $couleur-principale
+    color: $eva_main_blue
   }
 
   .col-auto.badge {
@@ -279,9 +279,9 @@
     position: relative;
     font-size: 1rem;
     font-style: italic;
-    color: $couleur-principale;
+    color: $eva_main_blue;
     padding: 2.2rem 2rem;
-    border: 1px solid $couleur-principale;
+    border: 1px solid $eva_main_blue;
     box-sizing: border-box;
     border-radius: 1.8rem;
   }

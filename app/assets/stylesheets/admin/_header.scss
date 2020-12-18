@@ -27,7 +27,7 @@
     margin-top: 0.12rem;
     &:hover > a,
     &.current > a {
-      color: $couleur-principale;
+      color: $eva_main_blue;
       background: #fff;
     }
     &.has_nested {
@@ -52,7 +52,7 @@
       li {
         a,
         a:hover {
-          color: $couleur-principale;
+          color: $eva_main_blue;
         }
       }
     }
@@ -78,7 +78,7 @@
     a {
       color: $couleur-texte-sombre;
       &:hover {
-        color: $couleur-principale;
+        color: $eva_main_blue;
       }
     }
     #current_user {

@@ -55,7 +55,7 @@ table.index_table {
           border-bottom-right-radius: 0.5rem;
         }
         a {
-          color: $couleur-principale;
+          color: $eva_main_blue;
         }
         &.col-actions {
           background: image-url('roue-dentee.svg') right 1rem center no-repeat;
@@ -84,7 +84,7 @@ table.index_table {
                 background-color: $couleur-legere-accent-validation;
               }
               &.edit_link {
-                background-color: $couleur-principale;
+                background-color: $eva_main_blue;
               }
               &.delete_link {
                 background-color: $couleur-accent-erreur;

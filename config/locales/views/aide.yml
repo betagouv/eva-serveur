@@ -1,6 +1,19 @@
 fr:
   admin:
     aide:
+      contact:
+        titre: Nous sommes là pour vous aider
+        description: "**Bienvenue sur l’aide eva !** Un problème ? Besoin d’aide pour présenter ou prendre en main
+        l’outil ? Vous trouverez toutes les ressources pour vous accompagner sur cette page.
+
+
+        Si toutefois vous n’avez pas trouvé la réponse à votre question, contactez-nous."
+        support:
+          titre: Support
+          description: "Pour bénéficier de support technique, signaler un bug, nous faire des suggestions, ou toute autre question, écrivez-nous sur :
+
+
+          [contact@eva.beta.gouv.fr](mailto:contact@eva.beta.gouv.fr)"
       aide:
         prise_en_main: Prendre en main
         animer_restituer: Animer une session, restituer les résultats

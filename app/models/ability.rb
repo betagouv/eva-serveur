@@ -37,7 +37,7 @@ class Ability
   end
 
   def droit_evaluation(compte)
-    cannot %i[create update], Evaluation
+    cannot %i[create], Evaluation
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
   end
 

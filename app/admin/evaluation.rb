@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  actions :index, :show, :destroy
   belongs_to :campagne
+  permit_params :campagne_id, :nom, :email, :telephone
 
   config.sort_order = 'created_at_desc'
 
@@ -44,6 +44,12 @@ ActiveAdmin.register Evaluation do
 
     def destroy
       destroy!(location: admin_campagne_path(resource.campagne))
+    end
+
+    def update
+      update! do |format|
+        format.html { redirect_to admin_campagne_evaluation_path(resource.campagne, resource) }
+      end
     end
 
     private

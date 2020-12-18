@@ -12,20 +12,20 @@ form fieldset.actions li.cancel a,
 form input[type="submit"],
 .has_many_container a.button, {
   padding: 0.44rem 0.94rem;
-  background-color: $couleur-principale;
+  background-color: $eva_main_blue;
 }
 form input[type="submit"]:not(.disabled),
 .has_many_container a.button:not(.disabled) {
   &:hover {
     background: none;
-    background-color: $couleur-principale;
+    background-color: $eva_main_blue;
   }
 }
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a {
   margin-right: 0;
-  border: 1px solid $couleur-principale;
-  color: $couleur-principale;
+  border: 1px solid $eva_main_blue;
+  color: $eva_main_blue;
   background-color: #fff;
 }
 form.filter_form a.clear_filters_btn:not(.disabled),

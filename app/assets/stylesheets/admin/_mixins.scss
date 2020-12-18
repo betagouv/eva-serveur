@@ -10,7 +10,7 @@
   text-decoration: none;
   border-radius: 2.875rem;
   color: $couleur-blanc;
-  background-color: $couleur-principale;
+  background-color: $eva_main_blue;
 }
 @mixin bouton-carte($background-color, $color:$couleur-blanc) {
   background-color: $background-color;

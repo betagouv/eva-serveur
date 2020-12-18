@@ -11,7 +11,7 @@ form {
     legend span {
       font-family: $font-titre;
       text-shadow: none;
-      color: $couleur-principale;
+      color: $eva_main_blue;
       background: $bluegrey;
     }
   }
@@ -49,7 +49,7 @@ form fieldset text-area,
 .select2-container--default .select2-selection--single {
   border-color: $bluegrey;
   .select2-selection__arrow b {
-    border-color: $couleur-principale transparent transparent transparent;
+    border-color: $eva_main_blue transparent transparent transparent;
   }
   .select2-selection__rendered {
     color: $couleur-texte;

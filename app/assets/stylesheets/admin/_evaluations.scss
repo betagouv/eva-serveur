@@ -1,55 +1,56 @@
-.evaluations h3 {
-  @include titre-carte;
-  padding-bottom: 3rem;
-}
-
-.evaluation {
-  @include carte;
-  padding: 0.7rem 1rem;
-  margin-bottom: .5rem;
-  display: flex;
-  align-items: center;
-  font-size:0.875rem;
-  box-sizing: border-box;
-  &:hover {
-    .action {
-      background-image: none;
-      a {
-        opacity: 1;
+.evaluations {
+  h3 {
+    @include titre-carte;
+    padding-bottom: 3rem;
+  }
+  .evaluation {
+    @include carte;
+    padding: 0.7rem 1rem;
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    font-size:0.875rem;
+    box-sizing: border-box;
+    &:hover {
+      .action {
+        background-image: none;
+        a {
+          opacity: 1;
+        }
       }
     }
-  }
-  .nom,
-  .date {
-    padding-right: 1rem;
-    font-size: 0.75rem;
-    color: $couleur-texte-sombre;
-  }
-  .nom {
-    font-weight: 600;
-    flex: 2;
-  }
-  .date {
-    flex: 1;
-  }
-  .action {
-    background: image-url('roue-dentee.svg') no-repeat right center;
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.25rem 0.5rem;
+    .nom,
+    .date {
+      padding-right: 1rem;
+      font-size: 0.75rem;
       color: $couleur-texte-sombre;
-      margin: 0;
-      text-decoration: none;
-      background-color: $couleur-texte;
-      min-width: 3rem;
-      box-sizing: border-box;
-      font-size: .75rem;
-      border-radius: 0.25rem;
-      background-color: $couleur-legere-accent-validation;
-      opacity: 0;
-      transition: opacity 0.2s;
+    }
+    .nom {
+      font-weight: 600;
+      flex: 2;
+    }
+    .date {
+      flex: 1;
+    }
+    .action {
+      background: image-url('roue-dentee.svg') no-repeat right center;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0.5rem;
+        color: $couleur-texte-sombre;
+        margin: 0;
+        text-decoration: none;
+        background-color: $couleur-texte;
+        min-width: 3rem;
+        box-sizing: border-box;
+        font-size: .75rem;
+        border-radius: 0.25rem;
+        background-color: $couleur-legere-accent-validation;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
     }
   }
 }

@@ -20,6 +20,9 @@ fr:
         telephone: Téléphone
         nom: Nom
         email: Email
+        debut: Début
+        fin: Fin
+        temps_total: Temps total
   active_admin:
     resources:
       evaluation:

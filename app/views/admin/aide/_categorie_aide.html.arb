@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+h3 t(".#{titre}"), class: 'aide_titre'
+div class: 'sources_aide' do
+  sources_aide.each do |source_aide|
+    a href: source_aide.url, target: '_blank', class: 'source_aide' do
+      text_node image_tag "source-aide-#{source_aide.type_document}.svg", class: 'illustration'
+      div class: 'details' do
+        div source_aide.titre, class: 'titre'
+        div md(source_aide.description), class: 'description'
+      end
+      span t('.action'), class: :action
+    end
+  end
+end

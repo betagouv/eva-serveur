@@ -1,8 +1,7 @@
 .aide__contact {
   @include carte;
-  width: 56.8rem;
   padding: 1rem 1.5rem;
-  margin: 0 auto 3.75rem;
+  margin-bottom: 3.75rem;
   position: relative;
   font-size: 0.875rem;
   color: $couleur-texte-sombre;

@@ -4,10 +4,8 @@ ActiveAdmin.register_page 'Aide' do
   menu priority: 99
 
   content do
-    render 'contact'
-    SourceAide.sources_par_categorie.each do |categorie, sources|
-      render 'aide', sources_aide: sources, titre: categorie
-    end
-    render 'faq', questions_frequentes: Aide::QuestionFrequente.all
+    render 'aide',
+           sources_par_categorie: SourceAide.sources_par_categorie,
+           questions_frequentes: Aide::QuestionFrequente.all
   end
 end

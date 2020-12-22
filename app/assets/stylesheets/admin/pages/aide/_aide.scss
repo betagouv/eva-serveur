@@ -1,0 +1,12 @@
+.contenu_aide {
+  position: relative;
+  margin: 0 auto;
+  width: 60rem;
+}
+
+.aide_titre {
+  @include titre-carte;
+  padding-top: 0;
+  padding-left: 0;
+}
+

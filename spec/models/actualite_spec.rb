@@ -9,7 +9,7 @@ describe Actualite do
   it { is_expected.to have_one(:illustration_attachment) }
 
   describe 'limite la taille du titre pour le tableau de bord' do
-    it { should validate_length_of(:titre).is_at_most(60) }
+    it { should validate_length_of(:titre).is_at_most(100) }
   end
 
   describe '#recentes_sauf_moi' do

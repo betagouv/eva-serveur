@@ -9,6 +9,9 @@ panel 'Détails de la campagne' do
     row :questionnaire
     row :compte if can?(:manage, Compte)
     row :created_at
+    row(:temps_min) { formate_duree statistiques.temps_min }
+    row(:temps_max) { formate_duree statistiques.temps_max }
+    row(:temps_moyen) { formate_duree statistiques.temps_moyen }
   end
 end
 

@@ -44,4 +44,14 @@ ActiveAdmin.register Campagne do
     end
     f.actions
   end
+
+  controller do
+    helper_method :statistiques
+
+    private
+
+    def statistiques
+      @statistiques ||= StatistiquesCampagne.new(resource)
+    end
+  end
 end

@@ -47,9 +47,7 @@ ActiveAdmin.register Evaluation do
     end
 
     def update
-      update! do |format|
-        format.html { redirect_to admin_campagne_evaluation_path(resource.campagne, resource) }
-      end
+      update!(location: admin_campagne_evaluation_path(params[:evaluation][:campagne_id], resource))
     end
 
     private

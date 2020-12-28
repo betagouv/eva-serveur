@@ -153,7 +153,7 @@ describe 'Admin - Evaluation', type: :feature do
     before(:each) { se_connecter_comme_administrateur }
 
     describe 'édition' do
-      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+      let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
       let!(:autre_campagne) { create :campagne, libelle: 'Autre campagne' }
 
       before do
@@ -161,15 +161,25 @@ describe 'Admin - Evaluation', type: :feature do
         fill_in :evaluation_nom, with: 'Nouveau Nom'
         fill_in :evaluation_telephone, with: 'Nouveau Téléphone'
         fill_in :evaluation_email, with: 'autre@email.com'
-        select 'Autre campagne'
-        click_on 'Modifier'
       end
 
-      it do
-        expect(evaluation.reload.nom).to eq 'Nouveau Nom'
-        expect(evaluation.telephone).to eq 'Nouveau Téléphone'
-        expect(evaluation.email).to eq 'autre@email.com'
-        expect(evaluation.campagne).to eq autre_campagne
+      context 'en changeant de campagne' do
+        it do
+          within('#evaluation_campagne_input') { select 'Autre campagne' }
+          click_on 'Modifier'
+          expect(evaluation.reload.nom).to eq 'Nouveau Nom'
+          expect(evaluation.telephone).to eq 'Nouveau Téléphone'
+          expect(evaluation.email).to eq 'autre@email.com'
+          expect(evaluation.campagne).to eq autre_campagne
+        end
+      end
+
+      context 'sans mettre de campagne' do
+        it do
+          within('#evaluation_campagne_input') { select '' }
+          click_on 'Modifier'
+          expect(evaluation.reload.nom).to eq 'Ancien nom'
+        end
       end
     end
   end

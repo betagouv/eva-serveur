@@ -12,6 +12,19 @@ panel 'Détails de la campagne' do
   end
 end
 
+panel 'Temps passation moyen' do
+  evaluations = Evaluation.where(campagne: resource)
+  temps_par_evaluation = evaluations.collect do |e|
+    StatistiquesEvaluation.new(e).temps_total
+  end
+  div temps_par_evaluation.count
+  div temps_par_evaluation.compact.count
+  div formate_duree(temps_par_evaluation.compact.max)
+  div temps_par_evaluation.collect{ |t| formate_duree t }.to_s
+  moyenne = DescriptiveStatistics.mean(temps_par_evaluation.compact)
+  div formate_duree moyenne
+end
+
 panel 'Configuration' do
   reorderable_table_for campagne.situations_configurations.includes(:situation) do
     column :situation

@@ -9,10 +9,10 @@
   font-size: 0.875rem;
   text-decoration: none;
   border-radius: 2.875rem;
-  color: $couleur-blanc;
+  color: $eva_light;
   background-color: $eva_main_blue;
 }
-@mixin bouton-carte($background-color, $color:$couleur-blanc) {
+@mixin bouton-carte($background-color, $color:$eva_light) {
   background-color: $background-color;
   display: inline-flex;
   border-radius: 0.25rem;

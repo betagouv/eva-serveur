@@ -9,7 +9,7 @@
     margin-bottom: 0;
   }
   a {
-    color: $couleur-blanc;
+    color: $eva_light;
   }
   .contact {
     &__description {
@@ -39,7 +39,7 @@
         @include titre;
         margin-left: 0.625rem;
         font-size: 1.125rem;
-        color: $couleur-blanc;
+        color: $eva_light;
       }
     }
     &__logo {

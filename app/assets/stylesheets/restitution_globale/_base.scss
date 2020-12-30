@@ -92,7 +92,7 @@
       font-family: $font-titre;
       font-weight: 600;
       font-size: 1.1rem;
-      color: $couleur-blanc;
+      color: $eva_light;
     }
 
     .row.question-standard {
@@ -200,13 +200,13 @@
   }
 
   .synthese-illettrisme {
-    color: $couleur-blanc;
+    color: $eva_light;
     border-radius: 2rem;
     padding: 2rem 2rem;
     margin: 2rem 5rem 3rem;
 
     h3 {
-      color: $couleur-blanc;
+      color: $eva_light;
       font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 1rem;
@@ -251,11 +251,11 @@
   .references_restitution_illettrisme {
     width: 100%;
     background-color: $couleur-texte;
-    color: $couleur-blanc;
+    color: $eva_light;
     padding: 1rem 0;
 
     a {
-      color: $couleur-blanc;
+      color: $eva_light;
     }
 
     .icone {

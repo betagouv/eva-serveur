@@ -8,18 +8,19 @@ class StatistiquesEvaluation
     calcule!
   end
 
-  def calcule!
-    return if evenements.blank?
-
-    @debut = evenements.first.date
-    @fin = evenements.last.date
-    @temps_total = fin - debut
-  end
-
   private
 
-  def evenements
-    @evenements ||= Evenement.joins(partie: :evaluation)
-                             .where('evaluations.id': @evaluation).order('date ASC')
+  def calcule!
+    @debut = @evaluation.created_at
+    return if dernier_evenement.blank?
+
+    @fin = dernier_evenement.date
+    @temps_total = @fin - @debut
+  end
+
+  def dernier_evenement
+    @dernier_evenement ||= Evenement.joins(partie: :evaluation)
+                                    .where('evaluations.id': @evaluation).order('date ASC')
+                                    .last
   end
 end

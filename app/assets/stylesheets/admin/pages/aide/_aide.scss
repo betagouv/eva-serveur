@@ -1,7 +1,10 @@
-.contenu_aide {
-  position: relative;
-  margin: 0 auto;
-  width: 60rem;
+.aide {
+  $grid-columns:      8;
+  $grid-gutter-width: 1.25rem;
+  $largeur-conteneur: 1220px;
+  @import "bootstrap";
+  @include make-container();
+  max-width: $largeur-conteneur;
 }
 
 .aide_titre {

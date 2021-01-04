@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-h3 t('.titre'), class: 'aide_titre'
+h3 t('.titre'), id: 'aide_contact', class: 'aide_titre'
 div class: 'aide__contact' do
   div class: 'contact__description' do
     md t('.description')

@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+div class: 'conteneur' do
+  div class: 'menu' do
+    h4 t('.titre')
+
+    ul do
+      li do
+        a href: '#aide_contact' do
+          text_node t('.aide_contact')
+        end
+      end
+      li do
+        a href: '#prise_en_main' do
+          text_node t('.prise_en_main')
+        end
+      end
+      li do
+        a href: '#animer_restituer' do
+          text_node t('.animer_restituer')
+        end
+      end
+      li do
+        a href: '#presenter_eva' do
+          text_node t('.presenter_eva')
+        end
+      end
+      li do
+        a href: '#foire_aux_questions' do
+          text_node t('.foire_aux_questions')
+        end
+      end
+    end
+  end
+
+  text_node image_tag 'avatar_pouce_leve.svg'
+end

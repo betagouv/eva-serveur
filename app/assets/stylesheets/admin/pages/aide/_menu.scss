@@ -1,0 +1,42 @@
+.menu_aide {
+  .conteneur {
+    position: sticky;
+    top: 1.875rem;
+    right: 0;
+  }
+
+  h4 {
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: $eva_main_blue;
+  }
+
+  ul {
+    position: relative;
+    z-index: 1;
+    padding: 0;
+    list-style: none;
+    li {
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+    }
+    a {
+      color: $couleur-texte;
+      text-decoration: none;
+      transition: color .2s, font-weight .2s;
+      &:hover {
+        font-weight: bold;
+        color: $couleur-texte-sombre;
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    position: absolute;
+    top: 7.5rem;
+    right: -4.4rem;
+  }
+}

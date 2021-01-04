@@ -1,6 +1,13 @@
 fr:
   admin:
     aide:
+      menu:
+        titre: 'Menu'
+        aide_contact: Aide & contact
+        prise_en_main: Prendre en main
+        animer_restituer: Animer, restituer
+        presenter_eva: Présenter l'outil
+        foire_aux_question: Foire aux questions
       contact:
         titre: Nous sommes là pour vous aider
         description: "**Bienvenue sur l’aide eva !** Un problème ? Besoin d’aide pour présenter ou prendre en main

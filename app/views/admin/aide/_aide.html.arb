@@ -1,14 +1,22 @@
 # frozen_string_literal: true
 
-div class: 'contenu_aide' do
-  render partial: 'contact'
-  sources_par_categorie.each do |categorie, sources|
-    render partial: 'categorie_aide', locals: {
-      sources_aide: sources,
-      titre: categorie
-    }
+div class: 'aide' do
+  div class: 'row' do
+    div class: 'contenu_aide col-6' do
+      render partial: 'contact'
+      sources_par_categorie.each do |categorie, sources|
+        render partial: 'categorie_aide', locals: {
+          sources_aide: sources,
+          titre: categorie
+        }
+      end
+      render partial: 'faq', locals: {
+        questions_frequentes: questions_frequentes
+      }
+    end
+
+    div class: 'menu_aide col-2' do
+      render partial: 'menu'
+    end
   end
-  render partial: 'faq', locals: {
-    questions_frequentes: questions_frequentes
-  }
 end

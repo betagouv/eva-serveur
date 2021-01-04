@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-h3 t('.titre'), class: 'aide_titre'
+h3 t('.titre'), id: 'foire_aux_questions', class: 'aide_titre'
 div class: 'faq' do
   div class: 'questions' do
     h4 'Questions', class: 'titre_questions'

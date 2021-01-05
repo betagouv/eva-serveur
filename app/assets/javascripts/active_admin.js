@@ -3,3 +3,4 @@
 //= require vendor/datepicker-fr
 //= require activeadmin_reorderable
 //= require faq
+//= require aide

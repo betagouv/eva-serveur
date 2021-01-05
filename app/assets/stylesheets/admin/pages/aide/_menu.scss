@@ -26,7 +26,12 @@
       color: $couleur-texte;
       text-decoration: none;
       transition: color .2s, font-weight .2s;
+
       &:hover {
+        color: $eva_main_blue;
+      }
+
+      &.active {
         font-weight: bold;
         color: $couleur-texte-sombre;
       }

@@ -10,7 +10,10 @@ module ApplicationHelper
   def formate_duree(duree)
     return if duree.blank?
 
-    Time.at(duree).utc.strftime(duree < 1.hour ? '%M:%S' : '%H:%M:%S')
+    duree = duree.to_i
+    heure_minutes_secondes = [duree / 3600, duree / 60 % 60, duree % 60]
+    heure_minutes_secondes.shift if heure_minutes_secondes[0].zero?
+    heure_minutes_secondes.map { |t| t.to_s.rjust(2, '0') }.join(':')
   end
 
   def rapport_colonne_class

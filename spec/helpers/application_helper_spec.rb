@@ -27,6 +27,15 @@ describe ApplicationHelper do
       expect(helper.formate_duree(3661)).to eql('01:01:01')
     end
 
+    it 'retourne une durée en heure, minutes et secondes pour une durée de plus de 24 heures' do
+      expect(helper.formate_duree(24 * 60 * 60 + 3661)).to eql('25:01:01')
+    end
+
+    it 'même si la durée est un décimal' do
+      expect(helper.formate_duree(88_928.781648)).to eql('24:42:08')
+      expect(helper.formate_duree(276.439082)).to eql('04:36')
+    end
+
     it 'retourne nil si le paramètre est vide' do
       expect(helper.formate_duree('')).to eql(nil)
     end

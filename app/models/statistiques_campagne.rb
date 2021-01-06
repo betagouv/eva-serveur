@@ -9,20 +9,12 @@ class StatistiquesCampagne
   end
 
   def calcule!
-    return if secondes_par_eval.empty?
+    durees = Statistiques::Helper.secondes_par_eval('evaluations.campagne_id': @campagne.id)
+    return if durees.empty?
 
-    @temps_min = secondes_par_eval.min
-    @temps_max = secondes_par_eval.max
-    @temps_moyen = DescriptiveStatistics.mean(secondes_par_eval)
-  end
-
-  def secondes_par_eval
-    @secondes_par_eval ||=
-      Evenement
-      .joins(partie: :evaluation)
-      .where('evaluations.campagne_id': @campagne.id)
-      .group('evaluations.id')
-      .pluck(Arel.sql('extract(epoch from (max(date) - evaluations.created_at)) as duree'))
+    @temps_min = durees.min
+    @temps_max = durees.max
+    @temps_moyen = DescriptiveStatistics.mean(durees)
   end
 
   def to_h

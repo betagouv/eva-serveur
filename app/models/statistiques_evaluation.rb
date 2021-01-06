@@ -5,22 +5,17 @@ class StatistiquesEvaluation
 
   def initialize(evaluation)
     @evaluation = evaluation
+    @debut = @evaluation.created_at
     calcule!
   end
 
   private
 
   def calcule!
-    @debut = @evaluation.created_at
-    return if dernier_evenement.blank?
+    durees = Statistiques::Helper.secondes_par_eval('evaluations.id': @evaluation)
+    return if durees.empty?
 
-    @fin = dernier_evenement.date
-    @temps_total = @fin - @debut
-  end
-
-  def dernier_evenement
-    @dernier_evenement ||= Evenement.joins(partie: :evaluation)
-                                    .where('evaluations.id': @evaluation).order('date ASC')
-                                    .last
+    @temps_total = durees[0]
+    @fin = @debut + @temps_total
   end
 end

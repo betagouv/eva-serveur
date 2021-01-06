@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const questions = document.querySelectorAll('.faq .question');
 
+  if (!questions.length) return
+
   document.querySelector('.faq .question').classList.add('active');
   document.querySelector('.faq .reponse').classList.add('active');
 

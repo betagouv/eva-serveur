@@ -10,19 +10,11 @@ div class: 'conteneur' do
           text_node t('.aide_contact')
         end
       end
-      li do
-        a href: '#prise_en_main' do
-          text_node t('.prise_en_main')
-        end
-      end
-      li do
-        a href: '#animer_restituer' do
-          text_node t('.animer_restituer')
-        end
-      end
-      li do
-        a href: '#presenter_eva' do
-          text_node t('.presenter_eva')
+      categories.each do |categorie|
+        li do
+          a href: "##{categorie}" do
+            text_node t(".#{categorie}")
+          end
         end
       end
       li do

@@ -5,6 +5,7 @@ ActiveAdmin.register_page 'Aide' do
 
   content do
     render 'aide',
+           categories: SourceAide.categories.keys,
            sources_par_categorie: SourceAide.sources_par_categorie,
            questions_frequentes: Aide::QuestionFrequente.all
   end

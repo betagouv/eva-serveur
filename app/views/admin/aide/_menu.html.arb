@@ -13,7 +13,7 @@ div class: 'conteneur' do
       categories.each do |categorie|
         li do
           a href: "##{categorie}" do
-            text_node t(".#{categorie}")
+            text_node t("activerecord.attributes.source_aide.categories.#{categorie}")
           end
         end
       end

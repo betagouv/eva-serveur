@@ -43,7 +43,7 @@ namespace :extraction do
       evenement_fin = evenements_partie.pop
       next unless evenement_fin.nom == 'finSituation'
 
-      identification = "#{evenements_partie.first.partie.evaluation_id};#{session_id}"
+      identification = "#{evenements_partie.first.partie.evaluation_id};#{session_id};#{evenements_partie.first.partie.evaluation.campagne.code}"
       evenements_partie.pop if situation == :livraison ## supprime la note de rédaction
       evenements_partie.each_slice(2) do |affichage, reponse|
         next if reponse.nil?
@@ -93,7 +93,7 @@ namespace :extraction do
   task questions: :environment do
     Rails.logger.level = :warn
 
-    puts 'évaluation;partie;MES;meta-competence;question;succes;temps de reponse'
+    puts 'évaluation;partie;campagne;MES;meta-competence;question;succes;temps de reponse'
     affiche_reponses_maintenance
     affiche_reponses_livraison
     affiche_reponses_objets_trouves

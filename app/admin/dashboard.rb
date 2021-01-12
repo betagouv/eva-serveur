@@ -21,4 +21,11 @@ ActiveAdmin.register_page 'Dashboard' do
              actualites: actualites
            }
   end
+
+  controller do
+    before_action do
+      annonce = AnnonceGenerale.order(created_at: :desc).where(afficher: true).first
+      flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe unless annonce.blank?
+    end
+  end
 end

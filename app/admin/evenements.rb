@@ -5,7 +5,6 @@ ActiveAdmin.register Evenement do
   belongs_to :campagne
   includes partie: %i[situation evaluation]
 
-  filter :partie, collection: proc { Partie.pluck(:session_id) }
   filter :partie_situation_nom_technique, label: 'Situation',
                                           as: :select,
                                           collection: proc { Situation.pluck(:nom_technique) }

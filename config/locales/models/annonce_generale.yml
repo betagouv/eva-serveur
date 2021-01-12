@@ -1,0 +1,20 @@
+fr:
+  activerecord:
+    attributes:
+      annonce_generale:
+        created_at: Créée le
+    models:
+      annonce_generale:
+        one: Annonce générale
+        other: Annonces générales
+  formtastic:
+    actions:
+      annonce_generale:
+        create: Créer
+        update: Enregistrer
+  active_admin:
+    resources:
+      annonce_generale:
+        delete_model: Supprimer
+        new_model: Ajouter une nouvelle annonce générale
+        edit_model: Modifier

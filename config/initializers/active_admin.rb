@@ -203,6 +203,7 @@ ActiveAdmin.setup do |config|
   config.register_javascript '/tarteaucitron/tarteaucitron.js'
   config.register_javascript 'tarteaucitron-init.js'
   config.register_javascript 'hotjar.js'
+  config.register_javascript 'matomo.js'
 
   # == CSV options
   #

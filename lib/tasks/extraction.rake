@@ -182,6 +182,15 @@ namespace :extraction do
       puts colonnes.join(';')
     end
   end
+
+  desc 'Extrait les temps de passations moyen des campagnes'
+  task temps_passation: :environment do
+    puts 'code campagne;temps_min;temps_max;temps_moyen'
+    Campagne.all.each do |campagne|
+      stats = StatistiquesCampagne.new(campagne).to_h
+      puts "#{campagne.code};#{stats.values.join(';')}"
+    end
+  end
 end
 
 class RakeLogger

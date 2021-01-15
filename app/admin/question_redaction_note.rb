@@ -23,15 +23,9 @@ ActiveAdmin.register QuestionRedactionNote do
   end
 
   index do
-    column :id
     column :libelle
     column :intitule
-    column :entete_reponse
-    column :expediteur
-    column :message
-    column :objet_reponse
     column :created_at
-    column :updated_at
     actions
   end
 

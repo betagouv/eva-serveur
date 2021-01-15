@@ -67,11 +67,8 @@
 .actualite-complete {
   $grid-columns:      8;
   $grid-gutter-width: 1.25rem;
-  $largeur-conteneur: 1220px;
 
   @import "../bootstrap_minimal";
-  @include make-container();
-  max-width: $largeur-conteneur;
   font-size: .875rem;
   color: $couleur-texte-sombre;
 

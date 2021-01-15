@@ -19,6 +19,12 @@ ActiveAdmin.register Questionnaire do
     f.actions
   end
 
+  index do
+    column :libelle
+    column :created_at
+    actions
+  end
+
   show do
     render partial: 'show'
   end

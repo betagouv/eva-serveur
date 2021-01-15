@@ -1,0 +1,27 @@
+body {
+  max-width: $container;
+  margin: 0 auto;
+  #wrapper {
+    position: relative;
+    @media screen and (max-width: $container-avec-depassement) {
+      overflow: hidden;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 100vw;
+    height: 64px;
+    position: absolute;
+    left: 0;
+  }
+  &::before {
+    top: 0;
+    background-color: $couleur-texte-sombre;
+  }
+  &::after {
+    top: 64px;
+    background-color: $eva_main_blue;
+  }
+}

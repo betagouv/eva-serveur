@@ -191,6 +191,15 @@ namespace :extraction do
       puts "#{campagne.code};#{stats.values.join(';')}"
     end
   end
+
+  desc 'Extrait les temps de passations des campagnes SMA'
+  task temps_passations_campagne: :environment do
+    puts 'code campagne;id_evaluation;temps_min;temps_max;temps_moyen'
+    Evaluation.where(campagne_id:'c6a094ff-b77e-49cb-9020-58a110933cda').each do |evaluation|
+      stats = StatistiquesEvaluation.new(evaluation)
+      puts "SMA Mayotte;#{evaluation.id};#{stats.temps_total}"
+    end
+  end
 end
 
 class RakeLogger

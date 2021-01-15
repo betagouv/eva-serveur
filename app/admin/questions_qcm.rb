@@ -27,14 +27,11 @@ ActiveAdmin.register QuestionQcm do
   end
 
   index do
-    column :id
     column :libelle
     column :intitule
     column :metacompetence
     column :type_qcm
-    column :description
     column :created_at
-    column :updated_at
     actions
   end
 

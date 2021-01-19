@@ -35,6 +35,7 @@ local:
 
 openstack:
   service: OpenStack
+  public: true # important ; to tell rails that this is a public container
   container: <%= ENV['OS_CONTAINER'] %> # Container name for your OpenStack provider
   credentials:
     openstack_auth_url: <%= ENV['OS_AUTH_URL'] %>

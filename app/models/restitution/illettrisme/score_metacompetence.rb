@@ -4,10 +4,13 @@ module Restitution
   module Illettrisme
     class ScoreMetacompetence < Restitution::Metriques::Base
       def calcule(evenements, metacompetence)
+        nombre_bonnes_reponses = nombre_bonnes_reponses(evenements, metacompetence)
+        return 0 if nombre_bonnes_reponses.zero?
+
         temps_moyen = temps_moyen_bonnes_reponses(evenements, metacompetence)
         return if temps_moyen.nil? || temps_moyen.zero?
 
-        nombre_bonnes_reponses(evenements, metacompetence).fdiv(temps_moyen)
+        nombre_bonnes_reponses.fdiv(temps_moyen)
       end
 
       private

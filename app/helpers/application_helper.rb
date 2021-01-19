@@ -33,4 +33,13 @@ module ApplicationHelper
     image_src64 = "data:image/svg+xml;base64,#{encodage}"
     image_tag image_src64, options
   end
+
+  def public_static_url_pour(resource)
+    if ENV.key?('HOTE_STOCKAGE')
+      blob = resource.blob
+      "http://#{ENV['HOTE_STOCKAGE']}/#{blob['key']}?filename=#{blob['filename']}"
+    else
+      Rails.application.routes.url_helpers.url_for(resource)
+    end
+  end
 end

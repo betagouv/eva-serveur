@@ -13,9 +13,8 @@ describe Restitution::Illettrisme::ScoreMetacompetence do
     context 'pas de bonnes réponses' do
       before do
         nombre_bonnes_reponse_est 0
-        temps_moyen_bonnes_reponses_est nil
       end
-      it { expect(score).to eq(nil) }
+      it { expect(score).to eq(0) }
     end
 
     context 'temps moyen à 0' do

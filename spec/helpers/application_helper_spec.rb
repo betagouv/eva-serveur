@@ -40,4 +40,34 @@ describe ApplicationHelper do
       expect(helper.formate_duree('')).to eql(nil)
     end
   end
+
+  describe '#public_static_url_pour' do
+    let(:resource) { double }
+
+    context "si la variable d'env est définie" do
+      before { ENV['HOTE_STOCKAGE'] = 'host' }
+
+      it "retourne l'url static, avec nom de fichier pour que l'app puis precharger la ressource" do
+        expect(resource).to receive(:blob)
+          .and_return({ 'key' => 'unique_blob_id', 'filename' => 'blob.jpg' })
+
+        expect(helper.public_static_url_pour(resource))
+          .to eql('http://host/unique_blob_id?filename=blob.jpg')
+      end
+    end
+
+    context "si la variable d'env n'est pas définie (developpement)" do
+      let(:routes) { double }
+      let(:url_helpers) { double }
+
+      before { ENV.delete('HOTE_STOCKAGE') }
+
+      it 'retourne une url rails' do
+        expect(Rails.application).to receive(:routes).and_return(routes)
+        expect(routes).to receive(:url_helpers).and_return(url_helpers)
+        expect(url_helpers).to receive(:url_for)
+        helper.public_static_url_pour(resource)
+      end
+    end
+  end
 end

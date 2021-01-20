@@ -1,8 +1,9 @@
 /* HEADER */
 #header {
-  display: table;
+  display: flex;
   height: 64px;
-  padding: 0.6rem 1.9rem;
+  padding: 0 1.9rem;
+  align-items: center;
   text-shadow: none;
   border-bottom: 0;
   box-shadow: none;
@@ -12,7 +13,7 @@
   h1 {
     width: 50px;
     height: 43px;
-    margin: 0 6.4rem 0 0;
+    margin: 0 4rem 0 0;
     text-indent: -9999px;
     background: asset-data-url('eva-logo.svg') no-repeat center;
     background-size: 50px 43px;
@@ -22,44 +23,54 @@
     color: #fff;
     font-size: 0.75rem;
   }
-  ul.tabs > li {
-    margin-right: 0;
-    margin-top: 0.12rem;
-    &:hover > a,
-    &.current > a {
-      color: $eva_main_blue;
-      background: #fff;
+  ul.tabs {
+    display: block;
+    height: auto;
+    &#tabs {
+      padding: 0;
     }
-    &.has_nested {
-      > a,
+    > li {
+      margin-right: 0;
+      margin-top: 0.12rem;
+      &:hover > a,
       &.current > a {
-        padding-right: 0.87rem;
-        background: none;
+        color: $eva_main_blue;
+        background: #fff;
       }
-      &.current > a {
+      > a {
+        padding: 0.38rem 0.87rem;
+        border-radius: 1.9rem;
+      }
+      &.has_nested {
+        > a,
+        &.current > a {
+          padding-right: 0.87rem;
+          background: none;
+        }
+        &.current > a {
+          background-color: #fff;
+        }
+        &:hover > a {
+          border-top-right-radius: 0.6rem;
+          border-top-left-radius: 0.6rem;
+          border-bottom: 0.3rem solid #fff;
+          background: none;
+          background-color: #fff;
+        }
+      }
+      ul {
         background-color: #fff;
-      }
-      &:hover > a {
-        border-top-right-radius: 0.6rem;
-        border-top-left-radius: 0.6rem;
-        border-bottom: 0.3rem solid #fff;
-        background: none;
-        background-color: #fff;
-      }
-    }
-    ul {
-      background-color: #fff;
-      li {
-        a,
-        a:hover {
-          color: $eva_main_blue;
+        li {
+          a,
+          a:hover {
+            color: $eva_main_blue;
+          }
         }
       }
     }
-    > a {
-      padding: 0.38rem 0.87rem;
-      border-radius: 1.9rem;
-    }
+  }
+  .header-item {
+    top: auto;
   }
   #tabs {
     padding-left: 6.4rem;
@@ -71,8 +82,6 @@
     display: inline-block;
     height: 31px;
     padding: 0 1rem;
-    margin: 0.38rem 0;
-    overflow: hidden;
     border-radius: 1.9rem;
     background-color: #fff;
     a {

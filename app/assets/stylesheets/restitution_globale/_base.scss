@@ -10,7 +10,7 @@
 
 .admin_restitution_globale {
   $grid-gutter-width: 2rem;
-  @import "bootstrap_minimal";
+  @import "../bootstrap_minimal";
 
   color: $couleur-texte;
   font-size: 1rem;

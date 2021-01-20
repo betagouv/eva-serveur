@@ -2,6 +2,7 @@
 
 div class: 'evaluations' do
   h3 t('.titre')
+  text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
   div class: 'evaluations-liste' do
     evaluations.each do |evaluation|
       div class: 'evaluation' do

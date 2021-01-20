@@ -25,3 +25,20 @@ body.logged_in .flash.flash_annonce_generale {
     color: $couleur-texte-sombre;
   }
 }
+
+.bloc-apercu {
+  position: relative;
+  margin-bottom: 2rem;
+
+  h3 {
+    @include titre-carte;
+    padding-bottom: 3rem;
+  }
+
+  > a {
+    position: absolute;
+    top: 0.75rem;
+    right: 0;
+    @include bouton()
+  }
+}

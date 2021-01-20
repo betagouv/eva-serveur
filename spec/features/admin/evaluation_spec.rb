@@ -31,13 +31,13 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       it 'sans auto_positionnement' do
-        visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation)
+        visit admin_evaluation_path(mon_evaluation)
         expect(page).to_not have_content 'auto-positionnement'
         expect(page).to have_content 'Roger'
       end
 
       it 'avec auto_positionnement' do
-        visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+        visit admin_evaluation_path(mon_evaluation_bienvenue)
         expect(page).to have_content 'auto-positionnement'
         expect(page).to have_content 'Roger'
       end
@@ -71,7 +71,7 @@ describe 'Admin - Evaluation', type: :feature do
           it 'affiche deux niveaux different pour litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau1)
               .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
-            visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_xpath("//img[@alt='Niveau A1']")
             expect(page).to have_xpath("//img[@alt='Niveau X1']")
           end
@@ -79,7 +79,7 @@ describe 'Admin - Evaluation', type: :feature do
           it "affiche que le score n'a pas pu être calculé" do
             allow(restitution_globale).to receive(:interpretations_niveau1)
               .and_return([{ litteratie: nil }, { numeratie: nil }])
-            visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content "Votre score n'a pas pu être calculé"
           end
 
@@ -87,7 +87,7 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1)
               .and_return([{ litteratie: :palier3 }, { numeratie: :palier3 }])
             allow(restitution_globale).to receive(:synthese).and_return('socle_clea')
-            visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content 'Certification Cléa indiquée'
           end
 
@@ -95,7 +95,7 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1)
               .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
             allow(restitution_globale).to receive(:synthese).and_return('illettrisme_potentiel')
-            visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content 'Formation vivement recommandée'
           end
         end
@@ -112,7 +112,7 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:numeratie)
               .and_return([{ score_numeratie: :palier1 }])
-            visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation_bienvenue)
 
             expect(page).to have_content 'Connaissance et compréhension du français'
             expect(page).to have_content 'des progrès à faire'
@@ -124,7 +124,7 @@ describe 'Admin - Evaluation', type: :feature do
         it "affiche l'évaluation en pdf" do
           allow(restitution_globale).to receive(:interpretations_niveau1).and_return([])
           allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
-          visit admin_campagne_evaluation_path(ma_campagne, mon_evaluation, format: :pdf)
+          visit admin_evaluation_path(mon_evaluation, format: :pdf)
           path = page.save_page
 
           reader = PDF::Reader.new(path)
@@ -139,7 +139,7 @@ describe 'Admin - Evaluation', type: :feature do
       let(:situation) { create :situation_tri }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let!(:evenement) { create :evenement, partie: partie }
-      before { visit admin_campagne_evaluation_path(ma_campagne, evaluation) }
+      before { visit admin_evaluation_path(evaluation) }
 
       it do
         expect { click_on 'Supprimer' }.to(change { Evaluation.count }
@@ -157,7 +157,7 @@ describe 'Admin - Evaluation', type: :feature do
       let!(:autre_campagne) { create :campagne, libelle: 'Autre campagne' }
 
       before do
-        visit edit_admin_campagne_evaluation_path(ma_campagne, evaluation)
+        visit edit_admin_evaluation_path(evaluation)
         fill_in :evaluation_nom, with: 'Nouveau Nom'
         fill_in :evaluation_telephone, with: 'Nouveau Téléphone'
         fill_in :evaluation_email, with: 'autre@email.com'

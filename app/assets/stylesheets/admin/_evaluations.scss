@@ -1,18 +1,4 @@
 .evaluations {
-  position: relative;
-
-  h3 {
-    @include titre-carte;
-    padding-bottom: 3rem;
-  }
-
-  > a {
-    position: absolute;
-    top: 0.75rem;
-    right: 0;
-    @include bouton()
-  }
-
   .evaluation {
     @include carte;
     padding: 0.7rem 1rem;

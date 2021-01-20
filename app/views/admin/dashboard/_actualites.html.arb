@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'actualites' do
+div class: 'actualites bloc-apercu' do
   h3 t('.titre')
   text_node link_to 'Voir toutes les actualités', admin_actualites_path
   div class: 'actualites-liste' do

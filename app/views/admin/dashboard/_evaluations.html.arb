@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'evaluations' do
+div class: 'evaluations bloc-apercu' do
   h3 t('.titre')
   text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
   div class: 'evaluations-liste' do

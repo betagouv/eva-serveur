@@ -17,9 +17,8 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
 
     def destroy
       evaluation = resource.evaluation
-      campagne = resource.campagne
       resource.supprimer
-      redirect_to admin_campagne_evaluation_path(campagne, evaluation)
+      redirect_to admin_evaluation_path(evaluation)
     end
   end
 

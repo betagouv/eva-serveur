@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  belongs_to :campagne
   permit_params :campagne_id, :nom, :email, :telephone
+  menu priority: 4
+
+  includes :campagne
 
   config.sort_order = 'created_at_desc'
 
   filter :nom
+  filter :campagne
   filter :created_at
 
   action_item :pdf_restitution, only: :show do
@@ -21,6 +24,7 @@ ActiveAdmin.register Evaluation do
     column :nom
     column :telephone
     column :email
+    column :campagne
     column :created_at
     actions
   end
@@ -46,10 +50,6 @@ ActiveAdmin.register Evaluation do
       destroy!(location: admin_campagne_path(resource.campagne))
     end
 
-    def update
-      update!(location: admin_campagne_evaluation_path(params[:evaluation][:campagne_id], resource))
-    end
-
     private
 
     def statistiques
@@ -69,10 +69,6 @@ ActiveAdmin.register Evaluation do
 
     def parties
       Partie.where(evaluation_id: resource).order(:created_at)
-    end
-
-    def scoped_collection
-      Evaluation.where(campagne: params[:campagne_id])
     end
   end
 end

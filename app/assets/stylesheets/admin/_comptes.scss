@@ -1,0 +1,54 @@
+.mon-compte {
+  $grid-columns:      8;
+  $grid-gutter-width: 0;
+  @import "../bootstrap_minimal";
+  
+  .titre {
+    @include titre;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .introduction {
+    @include carte;
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.5rem 2.8rem;
+    p {
+      font-size: 0.875rem;
+      color: $couleur-texte-sombre;
+      a {
+        text-decoration: underline;
+        color: $eva_main_blue;
+      }
+    }
+    img {
+      width: 268px;
+      height: 256px;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .panel {
+    padding: 1.5rem;
+    .compte {
+      padding: 0;
+    }
+  }
+
+  table {
+    margin-bottom: 0;
+    .row {
+      display: table-row;
+      th, td {
+        font-size: 0.875rem;
+        border: 0;
+        color: $couleur-texte-sombre;
+      }
+      th {
+        font-weight: normal;
+        text-transform: none;
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@ gem 'activeadmin'
 gem 'activeadmin-xls'
 gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
-gem 'activestorage-openstack', '>= 1.5.1'
+gem 'activestorage-openstack'
 gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'

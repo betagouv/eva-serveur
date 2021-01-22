@@ -11,7 +11,7 @@ class QuestionQcm < Question
     json = slice(:id, :intitule, :metacompetence, :type_qcm, :description, :choix)
     json['type'] = 'qcm'
     if illustration.attached?
-      json['illustration'] = ApplicationController.helpers.public_static_url_pour(illustration)
+      json['illustration'] = Rails.application.routes.url_helpers.url_for(illustration)
     end
     json
   end

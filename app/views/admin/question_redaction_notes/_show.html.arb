@@ -6,7 +6,7 @@ panel 'Détails de la question' do
     row :libelle
     row :intitule
     row :illustration do |question|
-      image_tag public_static_url_pour(question.illustration) if question.illustration.attached?
+      image_tag url_for(question.illustration) if question.illustration.attached?
     end
     row :entete_reponse
     row :expediteur

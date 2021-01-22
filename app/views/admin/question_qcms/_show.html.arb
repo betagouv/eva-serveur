@@ -9,7 +9,7 @@ panel 'Détails de la question' do
     row :type_qcm
     row :description
     row :illustration do |question|
-      image_tag public_static_url_pour(question.illustration) if question.illustration.attached?
+      image_tag url_for(question.illustration) if question.illustration.attached?
     end
     row :created_at
   end

@@ -41,4 +41,8 @@ ActiveAdmin.register Compte do
       object.send(update_method, *attributes)
     end
   end
+
+  show do
+    render 'show'
+  end
 end

@@ -1,0 +1,28 @@
+# frozen_string_literal: true
+
+div class: 'mon-compte row' do
+  div class: 'col-5' do
+    h1 t('.titre'), class: 'titre'
+
+    div class:'introduction' do
+      div class: 'introduction__texte' do
+        md t('.introduction')
+      end
+      
+      text_node image_tag 'avatar_salut.svg'
+    end
+
+    div class: 'panel' do
+      attributes_table_for compte do
+        row :email
+        row :created_at
+      end
+    end
+
+    div class: 'panel' do
+      attributes_table_for compte do
+        row :structure
+      end
+    end
+  end
+end

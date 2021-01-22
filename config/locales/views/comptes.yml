@@ -1,0 +1,13 @@
+fr:
+  admin:
+    comptes:
+      show:
+        titre: 'Bonjour,'
+        introduction: 'Ici vous pouvez gérer votre compte et
+
+        vos informations personnelles.
+
+
+        Si vous avez besoin d’aide,
+
+        rendez-vous [ici]()'

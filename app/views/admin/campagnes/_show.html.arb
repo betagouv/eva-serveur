@@ -2,16 +2,23 @@
 
 panel 'Détails de la campagne' do
   attributes_table_for campagne do
-    row :id
     row :libelle
     row :code
     row :affiche_competences_fortes
-    row :questionnaire
-    row :compte if can?(:manage, Compte)
-    row :created_at
-    row(:temps_min) { formate_duree statistiques.temps_min }
-    row(:temps_max) { formate_duree statistiques.temps_max }
-    row(:temps_moyen) { formate_duree statistiques.temps_moyen }
+  end
+end
+
+if can?(:manage, Compte)
+  panel 'Administration' do
+    attributes_table_for campagne do
+      row :id
+      row :questionnaire
+      row :compte
+      row :created_at
+      row(:temps_min) { formate_duree statistiques.temps_min }
+      row(:temps_max) { formate_duree statistiques.temps_max }
+      row(:temps_moyen) { formate_duree statistiques.temps_moyen }
+    end
   end
 end
 

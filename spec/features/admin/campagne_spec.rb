@@ -49,7 +49,7 @@ describe 'Admin - Campagne', type: :feature do
 
       it "affiche le nombre d'évaluation par campagne" do
         within('#index_table_campagnes') do
-          expect(page).to have_content "Nombre d'évaluations"
+          expect(page).to have_content 'Éval.'
         end
         within('td.col-nombre_evaluations') do
           expect(page).to have_content '1'

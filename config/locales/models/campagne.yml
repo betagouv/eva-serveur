@@ -6,7 +6,7 @@ fr:
         updated_at: Mise à jour le
         libelle: Libellé
         affiche_competences_fortes: Afficher les compétences fortes ?
-        nombre_evaluations: Nombre d'évaluations
+        nombre_evaluations: Éval.
     models:
       situation_configuration:
         one: Situation

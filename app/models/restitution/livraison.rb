@@ -62,6 +62,8 @@ module Restitution
       }
     }.freeze
 
+    delegate :questions_et_reponses, :questions_redaction, to: :questions_reponses
+
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementLivraison.new e }
       super(campagne, evenements)
@@ -74,9 +76,8 @@ module Restitution
       end
     end
 
-    def questions_et_reponses
-      qr = QuestionsReponses.new(evenements_situation, situation.questionnaire)
-      qr.questions_et_reponses
+    def questions_reponses
+      @questions_reponses ||= QuestionsReponses.new(evenements_situation, situation.questionnaire)
     end
 
     def efficience

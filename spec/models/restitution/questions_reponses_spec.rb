@@ -65,6 +65,26 @@ describe Restitution::QuestionsReponses do
     end
   end
 
+  describe 'questions_redaction' do
+    context 'renvoie les questions de rédactions et leur réponse' do
+      let(:question_redaction_note) { create :question_redaction_note }
+      let(:questionnaire) do
+        create :questionnaire, questions: [question_redaction_note, question1]
+      end
+
+      let(:evenements) do
+        [
+          build(:evenement_reponse,
+                donnees: { question: question_redaction_note.id, reponse: 'ton b' }),
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
+        ]
+      end
+      it { expect(restitution.questions_redaction.count).to eql(1) }
+      it { expect(restitution.questions_redaction.first[1]).to eql('ton b') }
+    end
+  end
+
   describe '#choix_reponse' do
     context 'retourne le choix répondu' do
       let(:evenements) do

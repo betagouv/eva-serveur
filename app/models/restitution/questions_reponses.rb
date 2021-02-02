@@ -13,6 +13,12 @@ module Restitution
         .select { |q_et_r| type_qcm.nil? || q_et_r[0].type_qcm == type_qcm.to_s }
     end
 
+    def questions_redaction
+      @questions_redaction ||= questions_et_reponses.select do |q, r|
+        [q, r] if q.is_a?(QuestionRedactionNote)
+      end
+    end
+
     def reponses
       @evenements.find_all { |e| e.nom == MetriquesHelper::EVENEMENT[:REPONSE] }
     end

@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
-questions_redaction = restitution.questions_et_reponses.select do |q, r|
-  [q, r] if q.is_a?(QuestionRedactionNote)
-end
-unless questions_redaction.empty?
+unless restitution.questions_redaction.empty?
   h3 t('.situation', situation: situation_libelle), class: 'situation-redaction mb-3'
-  questions_redaction.each do |question, reponse|
+  restitution.questions_redaction.each do |question, reponse|
     div class: 'row mb-3' do
       div class: 'col-6' do
         h2 t('admin.restitutions.reponse_expression_ecrite', question: question.libelle),

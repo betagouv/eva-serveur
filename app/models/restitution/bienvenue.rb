@@ -4,9 +4,12 @@ module Restitution
   class Bienvenue < Base
     NOM_TECHNIQUE = 'bienvenue'
 
+    def questions_reponses
+      @questions_reponses ||= QuestionsReponses.new(evenements, situation.questionnaire)
+    end
+
     def questions_et_reponses(type_qcm = nil)
-      qr = QuestionsReponses.new(evenements, situation.questionnaire)
-      qr.questions_et_reponses(type_qcm)
+      questions_reponses.questions_et_reponses(type_qcm)
     end
   end
 end

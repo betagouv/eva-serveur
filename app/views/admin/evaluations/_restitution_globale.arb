@@ -117,7 +117,8 @@ div class: 'admin_restitution_globale' do
   end
 
   mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restitution|
-    %w[questions livraison].include?(restitution.situation.nom_technique)
+    %w[questions livraison].include?(restitution.situation.nom_technique) &&
+      !restitution.questions_redaction.empty?
   end
   unless mes_avec_redaction_de_notes.empty?
     div class: 'page' do

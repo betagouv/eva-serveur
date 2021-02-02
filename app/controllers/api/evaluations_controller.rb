@@ -26,7 +26,7 @@ module Api
     end
 
     def show
-      situations = @evaluation.campagne.situations
+      situations = @evaluation.campagne.situations_configurees
       questions = @evaluation.campagne.questionnaire&.questions || []
       competences = []
       if @evaluation.campagne.affiche_competences_fortes

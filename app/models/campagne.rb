@@ -33,6 +33,14 @@ class Campagne < ApplicationRecord
     libelle
   end
 
+  def situations_configurees
+    questionnaires = situations_configurations.map(&:questionnaire)
+    situations.map.with_index do |situation, i|
+      situation.questionnaire = questionnaires[i] if questionnaires[i].present?
+      situation
+    end
+  end
+
   private
 
   def initialise_situations_par_defaut

@@ -41,6 +41,17 @@ class Campagne < ApplicationRecord
     end
   end
 
+  def questionnaire_situation(situation)
+    situation_configuration = situations_configurations.find do |sc|
+      sc.situation_id == situation.id
+    end
+    if situation_configuration.questionnaire.present?
+      situation_configuration.questionnaire
+    else
+      situation.questionnaire
+    end
+  end
+
   private
 
   def initialise_situations_par_defaut

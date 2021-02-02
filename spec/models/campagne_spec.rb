@@ -115,6 +115,16 @@ RSpec.describe Campagne, type: :model do
           expect(campagne.situations_configurees.first.questionnaire.libelle)
             .to eq 'autre questionnaire'
         end
+
+        it do
+          expect(campagne.questionnaire_situation(campagne.situations_configurees.first).libelle)
+            .to eq 'autre questionnaire'
+        end
+
+        it do
+          expect(campagne.questionnaire_situation(campagne.situations_configurees.last).libelle)
+            .to eq 'objets_trouves'
+        end
       end
     end
   end

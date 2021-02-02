@@ -24,17 +24,23 @@ RSpec.describe Campagne, type: :model do
       end
       it { expect(campagne.code).to eq '12345' }
     end
+  end
 
-    context 'initialise la campagne' do
-      let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
-      before do
-        Campagne::SITUATIONS_PAR_DEFAUT.each do |nom_situation|
-          situation = Situation.new libelle: nom_situation, nom_technique: nom_situation
-          allow(Situation).to receive(:find_by).with(nom_technique: nom_situation)
-                                               .and_return(situation)
-        end
+  context 'avec des situations' do
+    let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
+    before do
+      Campagne::SITUATIONS_PAR_DEFAUT.each do |nom_situation|
+        questionnaire = Questionnaire.new libelle: nom_situation
+        situation = Situation.new libelle: nom_situation, nom_technique: nom_situation
+        situation.questionnaire = questionnaire
+        allow(Situation)
+          .to receive(:find_by)
+          .with(nom_technique: nom_situation)
+          .and_return(situation)
       end
+    end
 
+    describe 'initialisation de la campagne' do
       context "n'ajoute aucune situation quand ce n'est pas demandé" do
         let(:campagne) do
           Campagne.new libelle: 'ma campagne',
@@ -60,6 +66,54 @@ RSpec.describe Campagne, type: :model do
         it do
           campagne.save
           expect(campagne.situations.count).to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+        end
+      end
+    end
+
+    describe '#situations_configurees' do
+      context 'sans surchage du questionnaire' do
+        let(:campagne) do
+          Campagne.new libelle: 'ma campagne',
+                       code: 'moncode',
+                       compte: compte,
+                       initialise_situations: true
+        end
+
+        before do
+          campagne.save
+        end
+
+        it do
+          expect(campagne.situations_configurees.length)
+            .to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+          campagne.situations_configurees.each do |situation|
+            expect(situation.questionnaire_id)
+              .to eq Situation.find(situation.id).questionnaire_id
+          end
+        end
+      end
+
+      context 'avec surchage du questionnaire' do
+        let(:campagne) do
+          Campagne.new libelle: 'ma campagne',
+                       code: 'moncode',
+                       compte: compte,
+                       initialise_situations: true
+        end
+
+        before do
+          campagne.save
+          autre_questionnaire = Questionnaire.new libelle: 'autre questionnaire'
+          premiere_configuration = campagne.situations_configurations.first
+          premiere_configuration.questionnaire = autre_questionnaire
+          premiere_configuration.save
+        end
+
+        it do
+          expect(campagne.situations_configurees.length)
+            .to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+          expect(campagne.situations_configurees.first.questionnaire.libelle)
+            .to eq 'autre questionnaire'
         end
       end
     end

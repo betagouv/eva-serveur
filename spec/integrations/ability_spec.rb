@@ -14,7 +14,7 @@ describe Ability do
   let(:situation) { create :situation_inventaire }
   let(:situation_non_utilisee) { create :situation_controle }
 
-  before { campagne_administrateur.situations << situation }
+  before { campagne_administrateur.situations_configurations.create situation: situation }
 
   subject(:ability) { Ability.new(compte) }
 

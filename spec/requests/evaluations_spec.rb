@@ -22,14 +22,38 @@ describe 'Evaluation API', type: :request do
       end
     end
 
-    context 'Quand une requête est invalide' do
+    context 'Quand le code campagne est inconnu' do
       let(:payload_invalide) { { nom: '', code_campagne: 'ETE190' } }
       before { post '/api/evaluations', params: payload_invalide }
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
         expect(json.keys).to eq %w[nom campagne]
-        expect(json.values).to eq [['doit être rempli'], ['code inexistant']]
+        expect(json.values).to eq [['doit être rempli'], ['code inconnu']]
+        expect(response).to have_http_status(422)
+      end
+    end
+
+    context 'Quand une requête est invalide' do
+      let(:payload_invalide) { { nom: '', code_campagne: '' } }
+      before { post '/api/evaluations', params: payload_invalide }
+
+      it 'retourne une 422' do
+        json = JSON.parse(response.body)
+        expect(json.keys).to eq %w[nom campagne]
+        expect(json.values).to eq [['doit être rempli'], ['doit être rempli']]
+        expect(response).to have_http_status(422)
+      end
+    end
+
+    context 'Quand une requête est vide' do
+      let(:payload_invalide) { {} }
+      before { post '/api/evaluations', params: payload_invalide }
+
+      it 'retourne une 422' do
+        json = JSON.parse(response.body)
+        expect(json.keys).to eq %w[nom campagne]
+        expect(json.values).to eq [['doit être rempli'], ['doit être rempli']]
         expect(response).to have_http_status(422)
       end
     end

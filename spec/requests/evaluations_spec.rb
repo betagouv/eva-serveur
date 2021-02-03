@@ -29,6 +29,7 @@ describe 'Evaluation API', type: :request do
       it 'retourne une 422' do
         json = JSON.parse(response.body)
         expect(json.keys).to eq %w[nom campagne]
+        expect(json.values).to eq [['doit être rempli'], ['code inexistant']]
         expect(response).to have_http_status(422)
       end
     end

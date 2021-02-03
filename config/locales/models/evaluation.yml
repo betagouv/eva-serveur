@@ -7,7 +7,7 @@ fr:
             nom:
               blank: doit être rempli
             campagne:
-              required: code inexistant
+              required: doit être rempli
     models:
       evaluation:
         one: Évaluation

@@ -13,7 +13,6 @@ class Campagne < ApplicationRecord
   ].freeze
 
   has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
-  has_many :situations, through: :situations_configurations
   belongs_to :questionnaire, optional: true
   belongs_to :compte
   default_scope { order(created_at: :asc) }
@@ -52,12 +51,16 @@ class Campagne < ApplicationRecord
     end
   end
 
+  def situations
+    @situations ||= situations_configurations.map(&:situation)
+  end
+
   private
 
   def initialise_situations_par_defaut
     SITUATIONS_PAR_DEFAUT.each do |nom_technique|
       situation = Situation.find_by nom_technique: nom_technique
-      situations << situation unless situation.nil?
+      situations_configurations.build situation: situation unless situation.nil?
     end
   end
 

@@ -7,7 +7,7 @@ describe Campagne, type: :integration do
     let(:campagne) { create :campagne }
     let(:situation) { create :situation_inventaire }
 
-    before { campagne.situations << situation }
+    before { campagne.situations_configurations.create situation: situation }
 
     it 'supprime les dépendances' do
       expect do

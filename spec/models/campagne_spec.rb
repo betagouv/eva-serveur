@@ -51,7 +51,7 @@ RSpec.describe Campagne, type: :model do
         before { expect(campagne.valid?).to be(true) }
         it do
           campagne.save
-          expect(campagne.situations.count).to eq 0
+          expect(campagne.situations_configurations.count).to eq 0
         end
       end
 
@@ -65,7 +65,8 @@ RSpec.describe Campagne, type: :model do
         before { expect(campagne.valid?).to be(true) }
         it do
           campagne.save
-          expect(campagne.situations.count).to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+          expect(campagne.situations_configurations.count)
+            .to eq Campagne::SITUATIONS_PAR_DEFAUT.length
         end
       end
     end

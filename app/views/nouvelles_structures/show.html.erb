@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "active_admin" %>
 <%= semantic_form_for @campagne, url: nouvelle_structure_path do |f| %>
-  <%= f.semantic_errors *f.object.errors.keys %>
+  <%= f.semantic_errors *f.object.errors.messages.keys %>
   <%= f.semantic_fields_for :compte do |compte| %>
     <%= compte.semantic_fields_for :structure do |structure| %>
       <%= structure.inputs :nom, :code_postal, name: 'Structure' %>

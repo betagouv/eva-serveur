@@ -32,25 +32,6 @@ class Campagne < ApplicationRecord
     libelle
   end
 
-  def situations_configurees
-    questionnaires = situations_configurations.map(&:questionnaire)
-    situations.map.with_index do |situation, i|
-      situation.questionnaire = questionnaires[i] if questionnaires[i].present?
-      situation
-    end
-  end
-
-  def questionnaire_situation(situation)
-    situation_configuration = situations_configurations.find do |sc|
-      sc.situation_id == situation.id
-    end
-    if situation_configuration.questionnaire.present?
-      situation_configuration.questionnaire
-    else
-      situation.questionnaire
-    end
-  end
-
   def situations
     @situations ||= situations_configurations.map(&:situation)
   end

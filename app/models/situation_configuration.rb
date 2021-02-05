@@ -10,7 +10,7 @@ class SituationConfiguration < ApplicationRecord
 
   validates :situation_id, uniqueness: { scope: :campagne_id }
 
-  def questionnaire_utile_id
-    questionnaire_id || situation.questionnaire_id
+  def questionnaire_utile
+    @questionnaire_utile ||= (questionnaire || situation.questionnaire)
   end
 end

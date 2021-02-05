@@ -83,15 +83,31 @@ describe 'Evaluation API', type: :request do
     end
 
     it 'retourne les situations de la campagne' do
+      questionnaire = create :questionnaire
+      questionnaire_entrainement = create :questionnaire
+      questionnaire_surcharge = create :questionnaire
       situation_controle = create :situation_controle
-      situation_inventaire = create :situation_inventaire, libelle: 'Inventaire'
+      situation_inventaire = create :situation_inventaire,
+                                    libelle: 'Inventaire',
+                                    questionnaire_entrainement: questionnaire_entrainement,
+                                    questionnaire: questionnaire
 
-      campagne.situations_configurations.create situation: situation_controle, position: 2
+      campagne.situations_configurations.create situation: situation_controle,
+                                                position: 2,
+                                                questionnaire: questionnaire_surcharge
       campagne.situations_configurations.create situation: situation_inventaire, position: 1
       get "/api/evaluations/#{evaluation.id}"
 
       expect(JSON.parse(response.body)['situations'].size).to eql(2)
       expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')
+      expect(JSON.parse(response.body)['situations'][0]['nom_technique']).to eql('inventaire')
+      expect(JSON.parse(response.body)['situations'][0]['id']).to eql(situation_inventaire.id)
+      expect(JSON.parse(response.body)['situations'][0]['questionnaire_entrainement_id'])
+        .to eql(questionnaire_entrainement.id)
+      expect(JSON.parse(response.body)['situations'][0]['questionnaire_id'])
+        .to eql(questionnaire.id)
+      expect(JSON.parse(response.body)['situations'][1]['questionnaire_id'])
+        .to eql(questionnaire_surcharge.id)
     end
 
     context 'Compétences fortes' do

@@ -5,7 +5,7 @@ module Api
     before_action :trouve_evaluation, only: %i[show update]
 
     rescue_from ActiveRecord::RecordNotFound do
-      render status: :not_found
+      head :not_found
     end
 
     def create
@@ -26,11 +26,11 @@ module Api
     end
 
     def show
-      @situations = @evaluation.campagne.situations_configurees
-      @questions = @evaluation.campagne.questionnaire&.questions || []
+      @campagne = @evaluation.campagne
+      @questions = @campagne.questionnaire&.questions || []
       @competences = []
 
-      return unless @evaluation.campagne.affiche_competences_fortes
+      return unless @campagne.affiche_competences_fortes?
 
       @competences = map_descriptions(FabriqueRestitution
                                       .restitution_globale(@evaluation)

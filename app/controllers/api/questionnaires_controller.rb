@@ -3,7 +3,7 @@
 module Api
   class QuestionnairesController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound do
-      render status: :not_found
+      head :not_found
     end
 
     def show

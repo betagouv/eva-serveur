@@ -32,6 +32,10 @@ class Campagne < ApplicationRecord
     libelle
   end
 
+  def questionnaire_pour(situation)
+    situations_configurations.find_by(situation: situation)&.questionnaire_utile
+  end
+
   private
 
   def initialise_situations_par_defaut

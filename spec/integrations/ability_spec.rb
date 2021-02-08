@@ -49,7 +49,7 @@ describe Ability do
     end
 
     it 'avec une situation utilisé dans une campagne' do
-      is_expected.to_not be_able_to(:destroy, campagne_administrateur.situations[0])
+      is_expected.to_not be_able_to(:destroy, situation)
     end
 
     it 'avec une situation non utilisé dans des campagne' do

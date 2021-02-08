@@ -50,6 +50,7 @@ describe 'Nouvelle Structure', type: :feature do
     end.to change(Campagne, :count)
 
     campagne = Campagne.last
-    expect(campagne.situations).to eq([bienvenue, maintenance, objets_trouves])
+    situations = campagne.situations_configurations.collect(&:situation)
+    expect(situations).to eq([bienvenue, maintenance, objets_trouves])
   end
 end

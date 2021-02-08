@@ -32,10 +32,6 @@ class Campagne < ApplicationRecord
     libelle
   end
 
-  def situations
-    @situations ||= situations_configurations.map(&:situation)
-  end
-
   private
 
   def initialise_situations_par_defaut

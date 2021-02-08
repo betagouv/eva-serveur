@@ -78,7 +78,7 @@ module Restitution
 
     def questions_reponses
       @questions_reponses ||= QuestionsReponses.new(evenements_situation,
-                                                    campagne.questionnaire_situation(situation))
+                                                    campagne.questionnaire_pour(situation))
     end
 
     def efficience

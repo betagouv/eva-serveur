@@ -71,4 +71,26 @@ RSpec.describe Campagne, type: :model do
       end
     end
   end
+
+  describe '#questionnaire_pour' do
+    let(:campagne) { Campagne.new }
+    let(:situation) { Situation.new }
+
+    def bouchonne_config_situation(situation_configuration)
+      allow(campagne.situations_configurations)
+        .to receive(:find_by).with(situation: situation).and_return situation_configuration
+    end
+
+    context 'sans configuration pour la situation' do
+      before { bouchonne_config_situation(nil) }
+      it { expect(campagne.questionnaire_pour(situation)).to be_nil }
+    end
+
+    context 'avec configuration pour la situation' do
+      let(:questionnaire) { double }
+      let(:situation_configuration) { double(questionnaire_utile: questionnaire) }
+      before { bouchonne_config_situation(situation_configuration) }
+      it { expect(campagne.questionnaire_pour(situation)).to eq questionnaire }
+    end
+  end
 end

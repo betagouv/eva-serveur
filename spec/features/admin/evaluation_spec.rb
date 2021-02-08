@@ -19,8 +19,10 @@ describe 'Admin - Evaluation', type: :feature do
       let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
 
       # evaluation avec positionnement
-      let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: ma_campagne }
-      let(:bienvenue) { build(:situation_bienvenue, questionnaire: questionnaire) }
+      let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
+      let(:campagne_bienvenue) { create :campagne, compte: Compte.first }
+      before { campagne_bienvenue.situations_configurations.create situation: bienvenue }
+      let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: campagne_bienvenue }
       let!(:partie_bienvenue) do
         create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
       end

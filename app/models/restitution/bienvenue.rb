@@ -5,7 +5,8 @@ module Restitution
     NOM_TECHNIQUE = 'bienvenue'
 
     def questions_reponses
-      @questions_reponses ||= QuestionsReponses.new(evenements, situation.questionnaire)
+      @questions_reponses ||= QuestionsReponses.new(evenements,
+                                                    campagne.questionnaire_pour(situation))
     end
 
     def questions_et_reponses(type_qcm = nil)

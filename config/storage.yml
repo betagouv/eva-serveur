@@ -36,6 +36,7 @@ local:
 openstack:
   service: OpenStack
   container: <%= ENV['OS_CONTAINER'] %> # Container name for your OpenStack provider
+  public: true
   credentials:
     openstack_auth_url: <%= ENV['OS_AUTH_URL'] %>
     openstack_username: <%= ENV['OS_USERNAME'] %>

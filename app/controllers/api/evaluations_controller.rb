@@ -9,20 +9,16 @@ module Api
     end
 
     def create
-      evaluation = Evaluation.new(generateur_params_eval.params)
+      evaluation = Evaluation.new(evaluation_params)
       if evaluation.save
         render json: evaluation, status: :created
       else
-        erreurs = evaluation.errors.messages
-        if generateur_params_eval.code_campagne_inconnu
-          erreurs['campagne'] = [I18n.t('admin.evaluations.code_campagne_inconnu')]
-        end
-        render json: erreurs, status: :unprocessable_entity
+        render json: evaluation.errors, status: :unprocessable_entity
       end
     end
 
     def update
-      if @evaluation.update generateur_params_eval.params
+      if @evaluation.update evaluation_params
         render json: @evaluation
       else
         render json: @evaluation.errors, status: :unprocessable_entity
@@ -43,8 +39,8 @@ module Api
 
     private
 
-    def generateur_params_eval
-      @generateur_params_eval ||= GenerateurParamsEvaluation.new(params)
+    def evaluation_params
+      params.permit(:nom, :code_campagne, :email, :telephone)
     end
 
     def trouve_evaluation

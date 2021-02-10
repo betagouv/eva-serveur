@@ -1,7 +1,6 @@
 fr:
   admin:
     evaluations:
-      code_campagne_inconnu: code inconnu
       commun: &commun
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"

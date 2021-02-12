@@ -57,6 +57,9 @@
           background: none;
           background-color: #fff;
         }
+        .menu_item > a:hover {
+          text-decoration: underline;
+        }
       }
       ul {
         background-color: #fff;

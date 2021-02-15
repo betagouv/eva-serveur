@@ -15,9 +15,9 @@ fr:
         libelle: Libellé
         metacompetence: Méta-compétence
       question_redaction_note:
-        entete_reponse: Entête réponse
-        expediteur: Expéditeur
-        objet_reponse: Objet réponse
+        message: Message (obsolète)
+        intitule_reponse: Intitulé réponse
+        reponse_placeholder: Réponse placeholder
   formtastic:
     actions:
       question: &question_actions

@@ -4,14 +4,14 @@ panel 'Détails de la question' do
   attributes_table_for question_qcm do
     row :id
     row :libelle
+    row :description
     row :intitule
     row :metacompetence
     row :type_qcm
-    row :description
+    row :created_at
     row :illustration do |question|
       image_tag url_for(question.illustration) if question.illustration.attached?
     end
-    row :created_at
   end
 end
 

@@ -3,8 +3,8 @@
 ActiveAdmin.register QuestionRedactionNote do
   menu parent: 'Parcours'
 
-  permit_params :libelle, :intitule, :illustration, :entete_reponse, :expediteur,
-                :message, :objet_reponse
+  permit_params :libelle, :intitule, :illustration, :message,
+                :intitule_reponse, :description, :reponse_placeholder
 
   filter :libelle
 
@@ -12,12 +12,12 @@ ActiveAdmin.register QuestionRedactionNote do
     f.semantic_errors
     f.inputs do
       f.input :libelle
+      f.input :description
       f.input :intitule
-      f.input :illustration, as: :file
-      f.input :entete_reponse
-      f.input :expediteur
+      f.input :intitule_reponse
+      f.input :reponse_placeholder
       f.input :message
-      f.input :objet_reponse
+      f.input :illustration, as: :file
     end
     f.actions
   end

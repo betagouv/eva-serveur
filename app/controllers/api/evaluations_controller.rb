@@ -28,12 +28,16 @@ module Api
     def show
       @campagne = @evaluation.campagne
       @questions = @campagne.questionnaire&.questions || []
+    end
+
+    def competences_fortes
       @competences = []
 
-      return unless @campagne.affiche_competences_fortes?
+      evaluation = Evaluation.find(params[:evaluation_id])
+      return unless evaluation.campagne.affiche_competences_fortes?
 
       @competences = map_descriptions(FabriqueRestitution
-                                      .restitution_globale(@evaluation)
+                                      .restitution_globale(evaluation)
                                       .competences)
     end
 

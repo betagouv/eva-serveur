@@ -135,7 +135,7 @@ describe 'Evaluation API', type: :request do
         .to eql(questionnaire_surcharge.id)
     end
 
-    context 'Compétences fortes' do
+    context 'compétences_fortes' do
       let!(:partie) do
         create :partie, evaluation: evaluation,
                         situation: situation_inventaire
@@ -152,14 +152,14 @@ describe 'Evaluation API', type: :request do
         context 'avec une campagne configurée sans compétences fortes' do
           before do
             campagne.update(affiche_competences_fortes: false)
-            get "/api/evaluations/#{evaluation.id}"
+            get "/api/evaluations/#{evaluation.id}/competences_fortes"
           end
 
           it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
         end
 
         context 'avec une campagne configurée avec compétences fortes' do
-          before { get "/api/evaluations/#{evaluation.id}" }
+          before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
 
           it 'retourne les compétences triées par ordre de force décroissante' do
             attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
@@ -186,7 +186,7 @@ describe 'Evaluation API', type: :request do
       end
 
       context 'avec une évaluation sans compétences identifiées' do
-        before { get "/api/evaluations/#{evaluation.id}" }
+        before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
 
         it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
       end

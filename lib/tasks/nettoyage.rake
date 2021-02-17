@@ -60,13 +60,13 @@ namespace :nettoyage do
     unless ENV.key?(arg_situation)
       logger.error "La variable d'environnement #{arg_situation} est marquante"
       logger.info 'Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>'
-      exit
+      next
     end
 
     situation = Situation.find_by(nom_technique: ENV[arg_situation])
     if situation.nil?
       logger.error "Situation \"#{ENV[arg_situation]}\" non trouvé"
-      exit
+      next
     end
 
     nombre_partie = Partie.where(situation: situation).count

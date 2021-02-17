@@ -45,15 +45,17 @@ describe 'nettoyage:recalcule_metriques' do
     it do
       ENV['SITUATION'] = 'inconnue'
       expect(logger).to receive(:error).with('Situation "inconnue" non trouvé')
+      expect(logger).to receive(:info).exactly(0).times # ne doit pas recevoir le message de fin
       subject.invoke
     end
   end
 
   context 'appellé sans situation' do
     it do
+      ENV['SITUATION'] = nil
       expect(logger).to receive(:error)
         .with("La variable d'environnement SITUATION est marquante")
-      expect(logger).to receive(:error)
+      expect(logger).to receive(:info)
         .with('Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>')
       subject.invoke
     end

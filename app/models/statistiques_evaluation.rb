@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class StatistiquesEvaluation
-  attr_reader :debut, :fin, :temps_total
+  attr_reader :temps_total
 
   def initialize(evaluation)
     @evaluation = evaluation
-    @debut = @evaluation.created_at
     calcule!
   end
 
@@ -16,6 +15,5 @@ class StatistiquesEvaluation
     return if durees.empty?
 
     @temps_total = durees[0]
-    @fin = @debut + @temps_total
   end
 end

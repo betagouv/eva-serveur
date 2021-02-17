@@ -23,8 +23,6 @@ describe StatistiquesEvaluation do
       it do
         statistiques = described_class.new(evaluation)
         expect(statistiques.temps_total).to eql(nil)
-        expect(statistiques.fin).to eql(nil)
-        expect(statistiques.debut).to eql(date_creation_evaluation)
       end
     end
   end

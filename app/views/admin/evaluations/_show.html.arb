@@ -6,9 +6,9 @@ panel t('.titre.details') do
     row :campagne
     row :email
     row :telephone
-    row(:debut) { statistiques.debut }
+    row :created_at
     if can?(:manage, Compte)
-      row(:fin) { statistiques.fin }
+      row :terminee_le
       row(:temps_total) { formate_duree statistiques.temps_total }
     end
   end

@@ -10,7 +10,7 @@ describe 'nettoyage:supprime_controle_campagne' do
 
     it do
       subject.invoke
-      expect(campagne.situations.count).to eql(0)
+      expect(campagne.situations_configurations.count).to eql(0)
     end
   end
 
@@ -20,14 +20,14 @@ describe 'nettoyage:supprime_controle_campagne' do
     let(:situation_inventaire) { create :situation_inventaire }
 
     before do
-      campagne.situations << situation_controle
-      campagne.situations << situation_inventaire
+      campagne.situations_configurations.create situation: situation_controle
+      campagne.situations_configurations.create situation: situation_inventaire
     end
 
     it do
       subject.invoke
-      expect(campagne.reload.situations.count).to eql(1)
-      expect(campagne.reload.situations[0].nom_technique).to eql('inventaire')
+      expect(campagne.reload.situations_configurations.count).to eql(1)
+      expect(campagne.reload.situations_configurations[0].nom_technique).to eql('inventaire')
     end
   end
 
@@ -35,11 +35,11 @@ describe 'nettoyage:supprime_controle_campagne' do
     let(:campagne) { create :campagne }
     let(:situation) { create :situation_inventaire }
 
-    before { campagne.situations << situation }
+    before { campagne.situations_configurations.create situation: situation }
 
     it do
       subject.invoke
-      expect(campagne.reload.situations.count).to eql(1)
+      expect(campagne.reload.situations_configurations.count).to eql(1)
     end
   end
 end

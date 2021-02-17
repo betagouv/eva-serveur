@@ -17,13 +17,12 @@ fr:
     attributes:
       evaluation:
         created_at: Créée le
+        terminee_le: Terminée le
         updated_at: Mise à jour le
         libelle: Libellé
         telephone: Téléphone
         nom: Nom
         email: Email
-        debut: Début
-        fin: Fin
         temps_total: Temps total
   active_admin:
     resources:

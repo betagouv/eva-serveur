@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :evaluations, only: [:create, :show, :update] do
-      get :competences_fortes
+      resource :fin, only: [:create], controller: 'evaluations/fins'
     end
     resources :questionnaires, only: [:show]
     resources :evenements

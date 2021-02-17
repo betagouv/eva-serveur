@@ -9,7 +9,7 @@ fr:
             campagne:
               required: doit être présente
             code_campagne:
-              inconnu: code inconnu
+              inconnu: Code inconnu
     models:
       evaluation:
         one: Évaluation

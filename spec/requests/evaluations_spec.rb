@@ -6,10 +6,9 @@ describe 'Evaluation API', type: :request do
   describe 'POST /evaluations' do
     let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
-    context 'Quand une requête est valide' do
+    context 'Création quand une requête est valide' do
       let(:payload_valide_avec_campagne) do
-        { nom: 'Roger', code_campagne: 'ETE19',
-          email: 'coucou@eva.fr', telephone: '01 02 03 04 05' }
+        { nom: 'Roger', code_campagne: 'ETE19' }
       end
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
 
@@ -17,8 +16,6 @@ describe 'Evaluation API', type: :request do
         evaluation = Evaluation.last
         expect(evaluation.campagne).to eq campagne_ete19
         expect(evaluation.nom).to eq 'Roger'
-        expect(evaluation.email).to eq 'coucou@eva.fr'
-        expect(evaluation.telephone).to eq '01 02 03 04 05'
       end
     end
 
@@ -63,16 +60,19 @@ describe 'Evaluation API', type: :request do
     let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
     before { patch "/api/evaluations/#{evaluation.id}", params: params }
 
-    context 'requête valide' do
-      let(:params) { { email: 'coucou-a-jour@eva.fr' } }
+    context 'Met à jour email et téléphone avec une requête valide' do
+      let(:params) { { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05' } }
+
       it do
         expect(evaluation.reload.email).to eq 'coucou-a-jour@eva.fr'
+        expect(evaluation.reload.telephone).to eq '01 02 03 04 05'
         expect(response).to have_http_status(200)
       end
     end
 
     context 'requête invalide' do
       let(:params) { { nom: '' } }
+
       it do
         expect(evaluation.reload.nom).to eq 'James'
         expect(response).to have_http_status(422)
@@ -133,63 +133,6 @@ describe 'Evaluation API', type: :request do
         .to eql(questionnaire.id)
       expect(JSON.parse(response.body)['situations'][1]['questionnaire_id'])
         .to eql(questionnaire_surcharge.id)
-    end
-
-    context 'compétences_fortes' do
-      let!(:partie) do
-        create :partie, evaluation: evaluation,
-                        situation: situation_inventaire
-      end
-      let!(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
-      let!(:demarrage) { create :evenement_demarrage, partie: partie }
-
-      before { campagne.situations_configurations.create situation: situation_inventaire }
-
-      context 'avec une évaluation avec des compétences identifiées' do
-        let!(:saisie) { create(:evenement_saisie_inventaire, :ok, partie: partie) }
-        let!(:fin) { create :evenement_fin_situation, partie: partie }
-
-        context 'avec une campagne configurée sans compétences fortes' do
-          before do
-            campagne.update(affiche_competences_fortes: false)
-            get "/api/evaluations/#{evaluation.id}/competences_fortes"
-          end
-
-          it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
-        end
-
-        context 'avec une campagne configurée avec compétences fortes' do
-          before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
-
-          it 'retourne les compétences triées par ordre de force décroissante' do
-            attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
-                         Competence::ORGANISATION_METHODE].map(&:to_s)
-            expect(JSON.parse(response.body)['competences_fortes'].pluck('id'))
-              .to eql(attendues)
-          end
-
-          it 'envoie aussi le nom et la description des compétences' do
-            premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
-            expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
-            expect(premiere_competence['description'])
-              .to eql(I18n.t("#{Competence::RAPIDITE}.description",
-                             scope: 'admin.evaluations.restitution_competence'))
-            expect(premiere_competence['description']).to_not start_with('translation missing')
-          end
-
-          it "envoie aussi l'URL du picto des compétences" do
-            premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
-            expect(premiere_competence['picto'])
-              .to start_with('http://asset_host:port/assets/rapidite')
-          end
-        end
-      end
-
-      context 'avec une évaluation sans compétences identifiées' do
-        before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
-
-        it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
-      end
     end
   end
 end

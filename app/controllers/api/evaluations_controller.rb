@@ -30,17 +30,6 @@ module Api
       @questions = @campagne.questionnaire&.questions || []
     end
 
-    def competences_fortes
-      @competences = []
-
-      evaluation = Evaluation.find(params[:evaluation_id])
-      return unless evaluation.campagne.affiche_competences_fortes?
-
-      @competences = map_descriptions(FabriqueRestitution
-                                      .restitution_globale(evaluation)
-                                      .competences)
-    end
-
     private
 
     def evaluation_params
@@ -49,19 +38,6 @@ module Api
 
     def trouve_evaluation
       @evaluation = Evaluation.find(params[:id])
-    end
-
-    def map_descriptions(competences)
-      competences.map do |identifiant|
-        {
-          id: identifiant,
-          nom: I18n.t("#{identifiant}.nom",
-                      scope: 'admin.evaluations.restitution_competence'),
-          description: I18n.t("#{identifiant}.description",
-                              scope: 'admin.evaluations.restitution_competence'),
-          picto: ActionController::Base.helpers.asset_url("#{identifiant}.svg")
-        }
-      end
     end
   end
 end

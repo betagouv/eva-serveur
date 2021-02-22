@@ -48,3 +48,40 @@ body.logged_in {
     @include bouton()
   }
 }
+
+.evaluations-premiere-visite {
+  @include carte;
+  padding-top: 1.375rem;
+  overflow: hidden;
+  text-align: center;
+  border: 2px solid $couleur-warning;
+  background-color: $eva_light;
+  .premiere-visite {
+    &-illustration {
+      font-size: 0;
+      h4 {
+        @include titre;
+        margin-bottom: 0.75rem;
+        font-size: 1.125rem;
+      }
+    }
+    &-action {
+      padding: 1.5rem 0;
+      background-color: #fff;
+      p,
+      .action {
+        color: $couleur-texte-sombre;
+      }
+      p {
+        font-size: 0.875rem;
+      }
+      .action {
+        @include bouton;
+        display: inline-block;
+        font-size: 0.75rem;
+        color: $couleur-texte-sombre;
+        background-color: $couleur-warning;
+      }
+    }
+  }
+}

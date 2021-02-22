@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionQcm do
-  menu parent: 'Parcours'
+  menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :intitule, :description, :illustration, :metacompetence, :type_qcm,
                 choix_attributes: %i[id intitule type_choix _destroy]

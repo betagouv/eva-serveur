@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Questionnaire do
-  menu parent: 'Parcours'
+  menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, questionnaires_questions_attributes: %i[id question_id _destroy]
 

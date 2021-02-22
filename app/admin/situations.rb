@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Situation do
-  menu parent: 'Parcours'
+  menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionRedactionNote do
-  menu parent: 'Parcours'
+  menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :intitule, :illustration, :message,
                 :intitule_reponse, :description, :reponse_placeholder

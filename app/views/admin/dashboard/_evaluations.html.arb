@@ -2,8 +2,8 @@
 
 div class: 'evaluations bloc-apercu' do
   h3 t('.titre')
-  text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
   if evaluations.present?
+    text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
     div class: 'evaluations-liste' do
       evaluations.each do |evaluation|
         div class: 'evaluation' do
@@ -22,12 +22,13 @@ div class: 'evaluations bloc-apercu' do
   else
     div class: 'evaluations-premiere-visite' do
       div class: 'premiere-visite-illustration' do
-        h4 'Oh non, vous n’avez pas encore d’évaluations à consulter !'
+        h4 t('.premiere-visite.titre')
         text_node image_tag 'avatar_bienvenue.png'
       end
       div class: 'premiere-visite-action' do
-        para 'Par où commencer ?!'
-        text_node link_to 'Première visite ?', '#', class: 'action'
+        text_node md t('.premiere-visite.description')
+        text_node link_to t('.premiere-visite.action'), 'https://drive.google.com/file/d/1bsNfv0viYwM9-uOSPdwVOi7yr_hRzI7C/view',
+                          target: '_blank', class: 'action'
       end
     end
   end

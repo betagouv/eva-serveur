@@ -12,6 +12,10 @@ fr:
         titre: Vos dernières évaluations
         action: Voir
         date: "il y a %{date}"
+        premiere-visite:
+          titre: Bienvenue dans votre espace conseiller !
+          description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
+          action: Consulter le guide de prise en main
       formulaire_contact:
         contacts:
           titre: Vos coordonnées

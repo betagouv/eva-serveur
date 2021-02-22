@@ -3,18 +3,31 @@
 div class: 'evaluations bloc-apercu' do
   h3 t('.titre')
   text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
-  div class: 'evaluations-liste' do
-    evaluations.each do |evaluation|
-      div class: 'evaluation' do
-        span class: 'nom' do
-          text_node evaluation.nom
+  if evaluations.present?
+    div class: 'evaluations-liste' do
+      evaluations.each do |evaluation|
+        div class: 'evaluation' do
+          span class: 'nom' do
+            text_node evaluation.nom
+          end
+          span class: 'date' do
+            text_node t('.date', date: time_ago_in_words(evaluation.created_at))
+          end
+          span class: 'action' do
+            link_to t('.action'), admin_evaluation_path(evaluation)
+          end
         end
-        span class: 'date' do
-          text_node t('.date', date: time_ago_in_words(evaluation.created_at))
-        end
-        span class: 'action' do
-          link_to t('.action'), admin_evaluation_path(evaluation)
-        end
+      end
+    end
+  else
+    div class: 'evaluations-premiere-visite' do
+      div class: 'premiere-visite-illustration' do
+        h4 'Oh non, vous n’avez pas encore d’évaluations à consulter !'
+        text_node image_tag 'avatar_bienvenue.png'
+      end
+      div class: 'premiere-visite-action' do
+        para 'Par où commencer ?!'
+        text_node link_to 'Première visite ?', '#', class: 'action'
       end
     end
   end

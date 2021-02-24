@@ -5,6 +5,7 @@ panel 'Détails de la campagne' do
     row :libelle
     row :code
     row :affiche_competences_fortes
+    row :compte
   end
 end
 
@@ -13,7 +14,6 @@ if can?(:manage, Compte)
     attributes_table_for campagne do
       row :id
       row :questionnaire
-      row :compte
       row :created_at
       row(:temps_min) { formate_duree statistiques.temps_min }
       row(:temps_max) { formate_duree statistiques.temps_max }

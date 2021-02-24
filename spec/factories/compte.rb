@@ -9,6 +9,7 @@ FactoryBot.define do
     factory :compte_organisation do
       role { 'organisation' }
     end
+    structure
   end
 
   sequence :email do |n|

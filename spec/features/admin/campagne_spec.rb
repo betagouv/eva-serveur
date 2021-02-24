@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Admin - Campagne', type: :feature do
   let!(:compte_connecte) { se_connecter_comme_organisation }
   let!(:ma_campagne) do
-    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: Compte.first
+    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
   end
   let(:compte_organisation) { create :compte_organisation, email: 'orga@eva.fr' }
   let!(:campagne) do

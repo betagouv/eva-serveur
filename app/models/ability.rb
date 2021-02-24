@@ -30,7 +30,7 @@ class Ability
   end
 
   def droit_campagne(compte)
-    can %i[update read], Campagne, compte_id: compte.id
+    can %i[update read], Campagne, comptes_de_meme_structure(compte)
     can :destroy, Campagne do |c|
       Evaluation.where(campagne: c).count.zero?
     end
@@ -38,21 +38,21 @@ class Ability
 
   def droit_evaluation(compte)
     cannot %i[create], Evaluation
-    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
+    can %i[read destroy], Evaluation, campagne: comptes_de_meme_structure(compte)
   end
 
   def droit_evenement(compte)
     cannot %i[update create], Evenement
 
-    @session_ids ||= Partie.where('campagnes.compte_id' => compte.id)
-                           .joins(evaluation: :campagne).pluck(:session_id)
+    @session_ids ||= Partie.where('comptes.structure_id' => compte.structure_id)
+                           .joins(evaluation: { campagne: :compte }).pluck(:session_id)
     can :read, Evenement, Evenement.where(session_id: @session_ids) do |e|
       @session_ids.include?(e.session_id)
     end
   end
 
   def droit_restitution(compte)
-    can :manage, Restitution::Base, campagne: { compte_id: compte.id }
+    can :manage, Restitution::Base, campagne: comptes_de_meme_structure(compte)
   end
 
   def droit_situation
@@ -111,5 +111,9 @@ class Ability
     cannot :destroy, Campagne
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
     can :create, Contact
+  end
+
+  def comptes_de_meme_structure(compte)
+    { compte: { structure_id: compte.structure_id } }
   end
 end

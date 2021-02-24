@@ -169,5 +169,20 @@ describe Ability do
     it { is_expected.to be_able_to(:create, Contact.new) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(1, 2, 3)) }
+
+    context 'peut consulter les campagnes de ma structure' do
+      let(:mon_collegue) { create :compte, structure: compte_organisation.structure }
+      let(:campagne_collegue) { create :campagne, compte: mon_collegue }
+      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
+      let!(:partie_collegue) do
+        create :partie, evaluation: evaluation_collegue, situation: situation
+      end
+      let(:evenement_collegue) { create :evenement, partie: partie_collegue }
+
+      it { is_expected.to be_able_to(:read, campagne_collegue) }
+      it { is_expected.to be_able_to(:read, evaluation_collegue) }
+      it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
+      it { is_expected.to be_able_to(:read, evenement_collegue) }
+    end
   end
 end

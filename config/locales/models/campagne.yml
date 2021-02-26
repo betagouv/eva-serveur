@@ -23,6 +23,8 @@ fr:
     hints:
       campagne:
         code: Laissez vide pour en générer un, ou choisissez vous-même
+        situation_configuration:
+          questionnaire: Laissez vide pour utiliser le questionnaire par défaut
   active_admin:
     resources:
       campagne:

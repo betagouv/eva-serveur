@@ -5,7 +5,7 @@ ActiveAdmin.register Campagne do
 
   permit_params :libelle, :code, :questionnaire_id, :compte,
                 :compte_id, :affiche_competences_fortes,
-                situations_configurations_attributes: %i[id situation_id _destroy]
+                situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle
   filter :code
@@ -40,6 +40,7 @@ ActiveAdmin.register Campagne do
       f.has_many :situations_configurations, allow_destroy: true do |c|
         c.input :id, as: :hidden
         c.input :situation
+        c.input :questionnaire
       end
     end
     f.actions

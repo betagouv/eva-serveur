@@ -29,6 +29,7 @@ RSpec.describe Campagne, type: :model do
   context 'avec des situations' do
     let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
     before do
+      allow(compte).to receive(:valid?).and_return true
       Campagne::SITUATIONS_PAR_DEFAUT.each do |nom_situation|
         questionnaire = Questionnaire.new libelle: nom_situation
         situation = Situation.new libelle: nom_situation, nom_technique: nom_situation

@@ -4,7 +4,7 @@ class Compte < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :registerable
   validates :role, inclusion: { in: %w[administrateur organisation] }
   default_scope { order(created_at: :asc) }
 

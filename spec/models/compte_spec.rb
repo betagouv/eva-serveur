@@ -4,5 +4,5 @@ require 'rails_helper'
 
 describe Compte do
   it { should validate_inclusion_of(:role).in_array(%w[administrateur organisation]) }
-  it { should belong_to(:structure).optional }
+  it { should belong_to(:structure) }
 end

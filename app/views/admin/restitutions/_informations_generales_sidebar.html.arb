@@ -15,9 +15,7 @@ attributes_table_for resource do
       status_tag t('admin.restitutions.evaluation.en_cours')
     end
   end
-  if can?(:manage, Compte)
-    row(t('admin.restitutions.evaluation.temps')) do |restitution|
-      formate_duree(restitution.temps_total)
-    end
+  row(t('admin.restitutions.evaluation.temps')) do |restitution|
+    formate_duree(restitution.temps_total)
   end
 end

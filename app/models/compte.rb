@@ -8,7 +8,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: %w[administrateur organisation] }
   default_scope { order(created_at: :asc) }
 
-  belongs_to :structure, optional: true
+  belongs_to :structure
 
   accepts_nested_attributes_for :structure
 

@@ -12,13 +12,14 @@ ActiveAdmin.register Compte do
     column :role
     column :structure
     column :created_at
+    column :access_locked?
     actions
   end
 
   filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
+  filter :structure
   filter :created_at
+  filter :locked_at
 
   form do |f|
     f.inputs do

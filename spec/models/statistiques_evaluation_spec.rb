@@ -7,7 +7,14 @@ describe StatistiquesEvaluation do
   let(:evaluation) { create :evaluation, nom: 'Test', created_at: date_creation_evaluation }
   let!(:partie) { create :partie, evaluation: evaluation }
 
-  describe '#calcule!' do
+  describe '#calcule_temps_total' do
+    context 'avec une date de fin' do
+      it do
+        evaluation.terminee_le = Time.local(2021, 1, 1, 8, 4)
+        expect(described_class.new(evaluation).temps_total).to eql(120.0)
+      end
+    end
+
     context 'avec des événements' do
       let!(:debut) do
         create :evenement_demarrage, partie: partie, created_at: Time.local(2021, 1, 1, 8, 3)

@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite
-    class NombreDangersBienQualifies < Restitution::Metriques::Base
+    class NombreDangersBienQualifies
       def calcule(evenements_situation, _)
         qualifications_par_dangers = SecuriteHelper.qualifications_par_danger(evenements_situation)
         qualifications_par_dangers.map do |_danger, qualifications|

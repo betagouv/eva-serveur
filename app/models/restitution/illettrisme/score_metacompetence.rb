@@ -2,7 +2,7 @@
 
 module Restitution
   module Illettrisme
-    class ScoreMetacompetence < Restitution::Metriques::Base
+    class ScoreMetacompetence
       def calcule(evenements, metacompetence)
         nombre_bonnes_reponses = nombre_bonnes_reponses(evenements, metacompetence)
         return 0 if nombre_bonnes_reponses.zero?

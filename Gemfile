@@ -10,9 +10,9 @@ gem 'rails', '~> 6.1.0'
 gem 'puma', '~> 4.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
-gem 'activeadmin-xls'
 gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
+gem 'activeadmin-xls'
 gem 'activestorage-openstack'
 gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -23,7 +23,7 @@ gem 'descriptive_statistics', '~> 2.4.0', require: 'descriptive_statistics/safe'
 gem 'devise'
 gem 'devise-i18n'
 gem 'jbuilder'
-gem 'mini_racer', '~> 0.2.0'
+gem 'mini_racer'
 gem 'pg', '~> 1.0'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n'
@@ -36,8 +36,8 @@ gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails'
   gem 'rspec_junit_formatter', '~> 0.4.1'
+  gem 'rspec-rails'
 end
 
 group :development do

@@ -36,6 +36,7 @@ module Restitution
     attr_reader :moyennes_metriques, :ecarts_types_metriques
 
     def initialize(standards)
+      super()
       @moyennes_metriques = standards&.transform_values { |references| references[:average] }
       @ecarts_types_metriques = standards&.transform_values { |references| references[:stddev_pop] }
     end

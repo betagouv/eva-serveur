@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite
-    class TempsTotalOuvertureZonesDangers < Restitution::Metriques::Base
+    class TempsTotalOuvertureZonesDangers
       def calcule(evenements_situation, _)
         temps_par_danger = {}
         evenements_par_danger = SecuriteHelper.filtre_par_danger(evenements_situation) do |e|

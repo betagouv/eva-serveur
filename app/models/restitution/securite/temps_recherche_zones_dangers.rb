@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite
-    class TempsRechercheZonesDangers < Restitution::Metriques::Base
+    class TempsRechercheZonesDangers
       def calcule(evenements_situation, _)
         durees = {}
         Securite::ZONES_DANGER.each do |danger|

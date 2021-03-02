@@ -2,7 +2,7 @@
 
 module Restitution
   class Maintenance
-    class TempsNonMots < Restitution::Metriques::Base
+    class TempsNonMots
       def calcule(evenements_situation, _)
         Restitution::MetriquesHelper.temps_action(evenements_situation,
                                                   :identification_non_mot_correct?,

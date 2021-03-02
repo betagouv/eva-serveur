@@ -2,7 +2,7 @@
 
 module Restitution
   class Maintenance
-    class ScoreVocabulaire < Restitution::Metriques::Base
+    class ScoreVocabulaire
       def initialize(metrique_nbr_mot_francais = Maintenance::NombreBonnesReponsesMotFrancais.new,
                      metrique_nbr_non_mot = Maintenance::NombreBonnesReponsesNonMot.new)
         @metrique_nbr_mot_francais = metrique_nbr_mot_francais

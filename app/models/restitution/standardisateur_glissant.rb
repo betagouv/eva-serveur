@@ -3,6 +3,7 @@
 module Restitution
   class StandardisateurGlissant < Standardisateur
     def initialize(metriques, collect_metriques, standards_figes = nil)
+      super()
       @metriques = metriques
       @collect_metriques = collect_metriques
       @standards_figes = standards_figes

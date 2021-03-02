@@ -143,6 +143,6 @@ end
 
 class RakeLogger
   def self.logger
-    @logger ||= Logger.new(STDOUT)
+    @logger ||= Logger.new($stdout)
   end
 end

@@ -4,7 +4,7 @@ module Restitution
   class MetriquesHelper
     EVENEMENT = {
       DEMARRAGE: 'demarrage',
-      ACTIVATION_AIDE_1: 'activationAide',
+      ACTIVATION_AIDE1: 'activationAide',
       REPONSE: 'reponse'
     }.freeze
 
@@ -24,7 +24,7 @@ module Restitution
       end
 
       def activation_aide1(evenements)
-        premier_evenement_du_nom(evenements, :ACTIVATION_AIDE_1)
+        premier_evenement_du_nom(evenements, :ACTIVATION_AIDE1)
       end
 
       def temps_action(evenements, filtre_reponse, &filtre_evenements)

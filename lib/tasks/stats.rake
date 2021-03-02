@@ -2,7 +2,7 @@
 
 namespace :stats do
   desc 'Extrait les données pour la bascule vers un algorithme figé'
-  task niveau1_et_2: :environment do
+  task niveau_1_et2: :environment do
     evaluations = Evaluation.joins(campagne: :compte).where(comptes: { role: :organisation })
     puts "Nombre d'évaluation : #{evaluations.count}"
     entete_colonnes = [

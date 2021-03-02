@@ -18,7 +18,7 @@ module Restitution
         'type' => :nombre,
         'instance' => Securite::NombreDangersBienIdentifies.new
       },
-      'nombre_dangers_bien_identifies_avant_aide_1' => {
+      'nombre_dangers_bien_identifies_avant_aide1' => {
         'type' => :nombre,
         'instance' => Securite::NombreDangersBienIdentifiesAvantAide1.new
       },

@@ -2,7 +2,7 @@
 
 module Restitution
   module Metriques
-    class MapToList < Restitution::Metriques::Base
+    class MapToList
       def initialize(metrique_a_moyenner)
         @metrique_a_moyenner = metrique_a_moyenner
       end

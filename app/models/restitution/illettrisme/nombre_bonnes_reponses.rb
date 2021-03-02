@@ -2,7 +2,7 @@
 
 module Restitution
   module Illettrisme
-    class NombreBonnesReponses < Restitution::Metriques::Base
+    class NombreBonnesReponses
       def calcule(evenements, metacompetence)
         evenements.select do |evenement|
           evenement.metacompetence == metacompetence &&

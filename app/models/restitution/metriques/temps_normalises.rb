@@ -2,7 +2,7 @@
 
 module Restitution
   module Metriques
-    class TempsNormalises < Restitution::Metriques::Base
+    class TempsNormalises
       def initialize(metriques_temps, moyenne, ecart_type)
         @metriques_temps = metriques_temps
         @moyenne = moyenne

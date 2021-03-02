@@ -2,7 +2,7 @@
 
 module Restitution
   class AvecEntrainement
-    class TempsEntrainement < Restitution::Metriques::Base
+    class TempsEntrainement
       def calcule(_, evenements_entrainement)
         return nil if evenements_entrainement.empty?
 

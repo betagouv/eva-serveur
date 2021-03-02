@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite
-    class NombreReouvertureZonesSansDanger < Restitution::Metriques::Base
+    class NombreReouvertureZonesSansDanger
       def calcule(evenements_situation, _)
         evenements_situation.select(&:ouverture_zone_sans_danger?)
                             .group_by { |e| e.donnees['zone'] }

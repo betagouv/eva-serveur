@@ -159,9 +159,9 @@ describe Restitution::Globale do
     end
 
     context 'fait la moyenne des niveaux' do
-      let(:niveau_comparaison_3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
+      let(:niveau_comparaison3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
       let(:restitution1) { double(competences: niveau_comparaison) }
-      let(:restitution2) { double(competences: niveau_comparaison_3) }
+      let(:restitution2) { double(competences: niveau_comparaison3) }
       let(:restitutions) { [restitution1, restitution2] }
       it do
         resultat = [Competence::COMPARAISON_TRI, 3.5]

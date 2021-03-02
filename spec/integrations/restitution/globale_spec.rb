@@ -62,20 +62,20 @@ describe Restitution::Globale do
   end
 
   describe 'calcul des scores' do
-    let(:score_ccf1) { (0.28 - 0.28) / 0.09 }
+    let(:score_ccf1) { 0 } # (0.28 - 0.28) / 0.09 }
     let(:score_ccf2) { (0 - 0.28) / 0.09 }
     let(:score_ccf3) { (0.44 - 0.28) / 0.09 }
 
-    let(:score_ccf_niveau_2) { -0.44 } # moyenne des 3 scores
-    let(:score_memorisation_niveau_2) { 1.0 } # (0.33 - 0.22) / 0.11
+    let(:score_ccf_niveau2) { -0.44 } # moyenne des 3 scores
+    let(:score_memorisation_niveau2) { 1.0 } # (0.33 - 0.22) / 0.11
 
-    let(:score_ccf_niveau_2_standardise) { -0.99 } # (score_ccf_niveau_2 - 0.16) / 0.61
+    let(:score_ccf_niveau_2_standardise) { -0.99 } # (score_ccf_niveau2 - 0.16) / 0.61
     let(:score_memorisation_niveau_2_standardise) { 0.83 } # (1 - 0.23) / 0.93
 
     context 'de niveau 2' do
       it do
         expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2))
-          .to eql(score_ccf_niveau_2)
+          .to eql(score_ccf_niveau2)
       end
 
       it do
@@ -90,7 +90,7 @@ describe Restitution::Globale do
 
       it do
         expect(restitution_evaluation1.scores_niveau2
-          .calcule[:score_memorisation].round(2)).to eql(score_memorisation_niveau_2)
+          .calcule[:score_memorisation].round(2)).to eql(score_memorisation_niveau2)
       end
 
       it do

@@ -2,7 +2,7 @@
 
 module Restitution
   class Maintenance
-    class TempsMotsFrancais < Restitution::Metriques::Base
+    class TempsMotsFrancais
       def calcule(evenements_situation, _)
         Restitution::MetriquesHelper.temps_action(evenements_situation,
                                                   :identification_mot_francais_correct?,

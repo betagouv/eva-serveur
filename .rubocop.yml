@@ -27,7 +27,7 @@ Metrics/BlockLength:
     - 'app/views/**/*'
     - 'spec/factories/*'
     - 'Guardfile'
-  ExcludedMethods:
+  IgnoredMethods:
     - describe
     - it
     - resource

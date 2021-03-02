@@ -2,7 +2,7 @@
 
 module Restitution
   class Securite
-    class AttentionVisuoSpaciale < Restitution::Metriques::Base
+    class AttentionVisuoSpaciale
       def calcule(evenements_situation, _)
         identification = evenements_situation
                          .select(&:est_un_danger_bien_identifie?)

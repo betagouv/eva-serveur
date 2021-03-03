@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Compte do
-  menu parent: 'Terrain'
-
   permit_params :email, :password, :password_confirmation, :role, :structure_id
 
   includes :structure
 
   index do
     column :email
-    column :role
-    column :structure
-    column :created_at
+    if can? :manage, Compte
+      column :role
+      column :structure
+      column :created_at
+    end
     actions
   end
 

@@ -33,4 +33,30 @@ describe 'Admin - Compte', type: :feature do
       end
     end
   end
+
+  context 'en conseiller' do
+    let(:ma_structure) { create :structure }
+    let(:autre_structure) { create :structure }
+    let(:conseiller_connecte) do
+      create :compte_organisation, structure: ma_structure, email: 'moi@structure'
+    end
+    let!(:collegue) do
+      create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
+    end
+    let!(:inconnu) do
+      create :compte_organisation, structure: autre_structure, email: 'inconnu@structure'
+    end
+
+    before(:each) { connecte conseiller_connecte }
+
+    describe 'je vois mes collègues' do
+      before { visit admin_comptes_path }
+
+      it do
+        expect(page).to have_content 'moi@structure'
+        expect(page).to have_content 'collegue@structure'
+        expect(page).to_not have_content 'inconnu@structure'
+      end
+    end
+  end
 end

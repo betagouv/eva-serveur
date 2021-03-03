@@ -16,13 +16,13 @@ class Ability
     droit_evaluation compte
     droit_evenement compte
     droit_restitution compte
+    droit_compte compte
   end
 
   def droits_applicatifs
     droit_situation
     droit_question
     droit_questionnaire
-    droit_compte
     droit_choix
     droit_structure
     droit_actualite
@@ -80,7 +80,8 @@ class Ability
     end
   end
 
-  def droit_compte
+  def droit_compte(compte)
+    can :read, Compte, structure_id: compte.structure_id
     cannot :destroy, Compte do |q|
       Campagne.where(compte: q).present?
     end

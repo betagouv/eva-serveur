@@ -23,8 +23,12 @@ ActiveAdmin.register Compte do
   form do |f|
     f.inputs do
       f.input :email
-      f.input :role, as: :select, collection: %w[administrateur organisation]
-      f.input :structure
+      if can? :manage, Compte
+        f.input :role, as: :select, collection: %w[administrateur organisation]
+        f.input :structure
+      else
+        f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
+      end
       f.input :password
       f.input :password_confirmation
     end

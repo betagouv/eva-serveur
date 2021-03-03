@@ -36,26 +36,45 @@ describe 'Admin - Compte', type: :feature do
 
   context 'en conseiller' do
     let(:ma_structure) { create :structure }
-    let(:autre_structure) { create :structure }
     let(:conseiller_connecte) do
       create :compte_organisation, structure: ma_structure, email: 'moi@structure'
-    end
-    let!(:collegue) do
-      create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
-    end
-    let!(:inconnu) do
-      create :compte_organisation, structure: autre_structure, email: 'inconnu@structure'
     end
 
     before(:each) { connecte conseiller_connecte }
 
     describe 'je vois mes collègues' do
+      let(:autre_structure) { create :structure }
+      let!(:inconnu) do
+        create :compte_organisation, structure: autre_structure, email: 'inconnu@structure'
+      end
+      let!(:collegue) do
+        create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
+      end
+
       before { visit admin_comptes_path }
 
       it do
         expect(page).to have_content 'moi@structure'
         expect(page).to have_content 'collegue@structure'
         expect(page).to_not have_content 'inconnu@structure'
+      end
+    end
+
+    describe 'ajouter un collegue' do
+      before { visit new_admin_compte_path }
+
+      it do
+        fill_in :compte_email, with: 'collegue@exemple.fr'
+        fill_in :compte_password, with: 'billyjoel'
+        fill_in :compte_password_confirmation, with: 'billyjoel'
+
+        expect do
+          click_on 'Créer un compte'
+        end.to change(Compte, :count)
+
+        compte_cree = Compte.last
+        expect(compte_cree.structure).to eq ma_structure
+        expect(compte_cree.role).to eq 'organisation'
       end
     end
   end

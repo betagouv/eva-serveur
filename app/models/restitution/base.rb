@@ -2,12 +2,6 @@
 
 module Restitution
   class Base
-    EVENEMENT = {
-      FIN_SITUATION: 'finSituation',
-      REJOUE_CONSIGNE: 'rejoueConsigne',
-      ABANDON: 'abandon'
-    }.freeze
-
     CORRESPONDANCES_NIVEAUX = {
       ::Competence::NIVEAU_4 => 100,
       ::Competence::NIVEAU_3 => 75,
@@ -24,6 +18,10 @@ module Restitution
 
     delegate :evaluation, :session_id, :situation, :created_at, to: :partie
     delegate :moyennes_metriques, :ecarts_types_metriques, to: :standardisateur
+    delegate :partie, :compte_nom_evenements, :temps_total,
+             :nombre_rejoue_consigne, :abandon?, :termine?,
+             to: :evenements_helper
+
     alias date created_at
 
     def initialize(campagne, evenements)
@@ -44,39 +42,6 @@ module Restitution
 
     def supprimer
       partie.destroy
-    end
-
-    def partie
-      @partie ||= premier_evenement.partie
-    end
-
-    def compte_nom_evenements(nom)
-      evenements.count { |e| e.nom == nom }
-    end
-
-    # Deprecated: utiliser la règle Base::TempsTotal à la place
-    def temps_total
-      dernier_evenement.date - premier_evenement.date
-    end
-
-    def premier_evenement
-      @premier_evenement ||= evenements.first
-    end
-
-    def dernier_evenement
-      @dernier_evenement ||= evenements.last
-    end
-
-    def nombre_rejoue_consigne
-      compte_nom_evenements EVENEMENT[:REJOUE_CONSIGNE]
-    end
-
-    def abandon?
-      dernier_evenement.nom == EVENEMENT[:ABANDON]
-    end
-
-    def termine?
-      dernier_evenement.nom == EVENEMENT[:FIN_SITUATION]
     end
 
     def competences_de_base
@@ -118,6 +83,10 @@ module Restitution
     end
 
     private
+
+    def evenements_helper
+      @evenements_helper ||= Base::EvenementsHelper.new(@evenements)
+    end
 
     def competences_indeterminees?(competences)
       competences.any? do |_competence, niveau|

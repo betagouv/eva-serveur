@@ -8,8 +8,8 @@ describe Restitution::Livraison, type: :integration do
 
     let(:partie1) { create :partie, situation: situation }
     let(:partie2) { create :partie, situation: situation }
-    let(:restitution1) { FabriqueRestitution.instancie partie1.id }
-    let(:restitution2) { FabriqueRestitution.instancie partie2.id }
+    let(:restitution1) { FabriqueRestitution.instancie partie1 }
+    let(:restitution2) { FabriqueRestitution.instancie partie2 }
 
     let(:bon_choix) { create :choix, :bon }
     let(:question_numeratie) do

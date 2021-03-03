@@ -56,11 +56,15 @@ module Restitution
 
     # Deprecated: utiliser la règle Base::TempsTotal à la place
     def temps_total
-      evenements.last.date - evenements.first.date
+      dernier_evenement.date - premier_evenement.date
     end
 
     def premier_evenement
-      evenements.first
+      @premier_evenement ||= evenements.first
+    end
+
+    def dernier_evenement
+      @dernier_evenement ||= evenements.last
     end
 
     def nombre_rejoue_consigne
@@ -68,11 +72,11 @@ module Restitution
     end
 
     def abandon?
-      evenements.last.nom == EVENEMENT[:ABANDON]
+      dernier_evenement.nom == EVENEMENT[:ABANDON]
     end
 
     def termine?
-      evenements.last.nom == EVENEMENT[:FIN_SITUATION]
+      dernier_evenement.nom == EVENEMENT[:FIN_SITUATION]
     end
 
     def competences_de_base

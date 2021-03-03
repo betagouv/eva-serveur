@@ -14,7 +14,7 @@ module Restitution
       end
 
       def partie
-        @partie ||= premier.partie
+        @partie ||= premier_evenement.partie
       end
 
       def compte_nom_evenements(nom)
@@ -23,7 +23,7 @@ module Restitution
 
       # Deprecated: utiliser la règle Base::TempsTotal à la place
       def temps_total
-        dernier.date - premier.date
+        dernier_evenement.date - premier_evenement.date
       end
 
       def nombre_rejoue_consigne
@@ -31,21 +31,19 @@ module Restitution
       end
 
       def abandon?
-        dernier.nom == EVENEMENT[:ABANDON]
+        dernier_evenement.nom == EVENEMENT[:ABANDON]
       end
 
       def termine?
-        dernier.nom == EVENEMENT[:FIN_SITUATION]
+        dernier_evenement.nom == EVENEMENT[:FIN_SITUATION]
       end
 
-      private
-
-      def premier
-        @premier ||= @evenements.first
+      def premier_evenement
+        @premier_evenement ||= @evenements.first
       end
 
-      def dernier
-        @dernier ||= @evenements.last
+      def dernier_evenement
+        @dernier_evenement ||= @evenements.last
       end
     end
   end

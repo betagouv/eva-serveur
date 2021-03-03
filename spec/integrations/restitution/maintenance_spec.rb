@@ -7,7 +7,7 @@ describe Restitution::Maintenance, type: :integration do
     let(:situation) { create :situation_maintenance }
 
     let(:partie1) { create :partie, situation: situation }
-    let(:restitution1) { FabriqueRestitution.instancie partie1.id }
+    let(:restitution1) { FabriqueRestitution.instancie partie1 }
 
     before do
       create(:evenement_demarrage,

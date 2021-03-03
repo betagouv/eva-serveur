@@ -29,7 +29,8 @@ module Restitution
 
     def questions_repondues
       questions_ids = reponses.collect { |r| r.donnees['question'] }
-      questions.where(id: questions_ids)
+      questions.where(id: questions_ids, type: 'QuestionQcm').includes(:choix) +
+        questions.where(id: questions_ids).where.not(type: 'QuestionQcm')
     end
 
     def choix_repondu(question)
@@ -39,7 +40,7 @@ module Restitution
       return if evenement_reponse.blank?
 
       reponse = evenement_reponse.donnees['reponse']
-      question.is_a?(QuestionQcm) ? question.choix.find(reponse) : reponse
+      question.is_a?(QuestionQcm) ? question.choix.detect { |c| c.id == reponse } : reponse
     end
   end
 end

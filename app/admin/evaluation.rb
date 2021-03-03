@@ -66,7 +66,7 @@ ActiveAdmin.register Evaluation do
     end
 
     def parties
-      Partie.where(evaluation_id: resource).order(:created_at)
+      Partie.where(evaluation_id: resource).includes(:situation).order(:created_at)
     end
   end
 end

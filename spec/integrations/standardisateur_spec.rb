@@ -45,7 +45,7 @@ describe Restitution::Standardisateur do
            }
   end
 
-  let(:restitution) { FabriqueRestitution.instancie(partie1.id) }
+  let(:restitution) { FabriqueRestitution.instancie(partie1) }
 
   before do
     # pour que la restitution puisse retrouver la partie !
@@ -62,7 +62,7 @@ describe Restitution::Standardisateur do
     end
 
     context 'retourne la moyennes figée si elle existe' do
-      let(:restitution) { FabriqueRestitution.instancie(partie4.id) }
+      let(:restitution) { FabriqueRestitution.instancie(partie4) }
       before do
         create(:evenement_demarrage, partie: partie4)
       end

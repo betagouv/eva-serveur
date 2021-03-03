@@ -15,7 +15,7 @@ module Restitution
       end
 
       def temps_total
-        evenements.last.date - @date_depart_situation
+        dernier_evenement.date - @date_depart_situation
       end
 
       def nombre_erreurs
@@ -33,17 +33,17 @@ module Restitution
       end
 
       def verifie?
-        evenements.last.donnees['reponses']
+        dernier_evenement.donnees['reponses']
       end
 
       def reussite?
-        evenements.last.donnees['reussite']
+        dernier_evenement.donnees['reussite']
       end
 
       def compte_reponse
         return nil unless verifie?
 
-        evenements.last.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
+        dernier_evenement.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
           compteur += 1 if yield reponse
           compteur
         end
@@ -73,7 +73,7 @@ module Restitution
       evenements_par_essais = evenements_sans_la_fin.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end
-      date_depart = evenements.first.date
+      date_depart = premier_evenement.date
       evenements_par_essais.map do |evenements|
         Essai.new(campagne, evenements, date_depart)
       end

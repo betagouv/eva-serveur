@@ -19,6 +19,7 @@ module Restitution
     delegate :evaluation, :session_id, :situation, :created_at, to: :partie
     delegate :moyennes_metriques, :ecarts_types_metriques, to: :standardisateur
     delegate :partie, :compte_nom_evenements, :temps_total,
+             :premier_evenement, :dernier_evenement,
              :nombre_rejoue_consigne, :abandon?, :termine?,
              to: :evenements_helper
 

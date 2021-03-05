@@ -24,6 +24,14 @@ body.logged_out {
           padding-bottom: 0;
         }
       }
+
+      li {
+        clear: both;
+      }
+
+      .inline-hints a {
+        float: none;
+      }
     }
     a {
       margin-top: -1.375rem;

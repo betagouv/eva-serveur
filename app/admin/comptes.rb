@@ -7,6 +7,7 @@ ActiveAdmin.register Compte do
 
   index do
     column :email
+    column :statut_validation
     if can? :manage, Compte
       column :role
       column :structure

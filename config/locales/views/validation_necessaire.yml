@@ -1,0 +1,12 @@
+fr:
+  admin:
+    validation_necessaire:
+      validation_necessaire:
+        titre: Votre accès n'est pas autorisé
+        description: |
+            Par mesure de précaution, une validation est nécessaire pour rejoindre une structure existante.
+
+            Votre accès pour rejoindre **%{structure}** est actuellement : **%{statut_validation}**.
+
+            Rapprochez-vous d'un collègue qui utilise eva afin qu'il autorise votre compte.
+

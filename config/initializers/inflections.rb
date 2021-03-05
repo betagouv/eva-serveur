@@ -17,6 +17,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'nouvelle_structure', 'nouvelles_structures'
   inflect.irregular 'type_document', 'types_document'
   inflect.irregular 'question_frequente', 'questions_frequentes'
+  inflect.irregular 'statut_validation', 'statuts_validation'
 end
 
 # These inflection rules are supported but not enabled by default:

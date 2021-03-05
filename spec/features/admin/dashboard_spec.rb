@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Admin - Dashboard' do
   context 'En organisation' do
     before { connecte compte_organisation }
-    let(:compte_organisation) { create :compte, role: 'organisation' }
+    let(:compte_organisation) { create :compte_organisation }
 
     describe 'Lister mes contacts' do
       let!(:contact_autre) do

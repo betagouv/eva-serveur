@@ -5,6 +5,7 @@ FactoryBot.define do
     email
     password { 'password' }
     role { 'administrateur' }
+    statut_validation { :acceptee }
 
     factory :compte_organisation do
       role { 'organisation' }

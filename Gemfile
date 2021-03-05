@@ -14,6 +14,7 @@ gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls'
 gem 'activestorage-openstack'
+gem 'active_admin-humanized_enum'
 gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'

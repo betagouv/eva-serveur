@@ -14,6 +14,11 @@ fr:
         password: Mot de passe
         password_confirmation: Confirmation du mot de passe
         role: Rôle
+        statut_validation: Accès
+        statuts_validation:
+          en_attente: En attente
+          acceptee: Autorisé
+          refusee: Refusé
   formtastic:
     actions:
       compte:

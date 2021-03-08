@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Compte do
-  permit_params :email, :password, :password_confirmation, :role, :structure_id
+  permit_params :email, :password, :password_confirmation, :role, :structure_id, :statut_validation
 
   includes :structure
 
@@ -29,6 +29,7 @@ ActiveAdmin.register Compte do
       else
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
       end
+      f.input :statut_validation, as: :radio
       f.input :password
       f.input :password_confirmation
     end

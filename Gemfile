@@ -11,10 +11,10 @@ gem 'puma', '~> 4.3'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin'
 gem 'activeadmin_addons'
+gem 'active_admin-humanized_enum'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls'
 gem 'activestorage-openstack'
-gem 'active_admin-humanized_enum'
 gem 'acts_as_list'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'

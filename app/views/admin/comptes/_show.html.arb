@@ -21,6 +21,7 @@ div class: 'mon-compte row' do
     div class: 'panel' do
       attributes_table_for compte do
         row :structure
+        row :statut_validation
       end
     end
   end

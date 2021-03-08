@@ -17,6 +17,12 @@ ActiveAdmin.register Compte do
   end
 
   filter :email
+  filter :statut_validation,
+         as: :select,
+         collection: Compte.statuts_validation.map { |v, id|
+                       [Compte.humanized_statut_validation(v), id]
+                     }
+
   filter :structure, if: proc { can? :manage, Compte }
   filter :created_at
 

@@ -39,6 +39,9 @@ describe 'Admin - Compte', type: :feature do
     let(:conseiller_connecte) do
       create :compte_organisation, structure: ma_structure, email: 'moi@structure'
     end
+    let!(:collegue) do
+      create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
+    end
 
     before(:each) { connecte conseiller_connecte }
 
@@ -46,9 +49,6 @@ describe 'Admin - Compte', type: :feature do
       let(:autre_structure) { create :structure }
       let!(:inconnu) do
         create :compte_organisation, structure: autre_structure, email: 'inconnu@structure'
-      end
-      let!(:collegue) do
-        create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
       end
 
       before { visit admin_comptes_path }
@@ -76,6 +76,16 @@ describe 'Admin - Compte', type: :feature do
         expect(compte_cree.structure).to eq ma_structure
         expect(compte_cree.role).to eq 'organisation'
       end
+    end
+
+    describe 'Refuser un collegue' do
+      before do
+        visit edit_admin_compte_path(collegue)
+        choose 'Refusé'
+        click_on 'Modifier'
+      end
+
+      it { expect(collegue.reload.validation_refusee?).to be true }
     end
   end
 end

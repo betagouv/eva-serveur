@@ -82,7 +82,7 @@ class Ability
 
   def droit_compte(compte)
     can :create, Compte
-    can :read, Compte, structure_id: compte.structure_id
+    can %i[read update], Compte, structure_id: compte.structure_id
     cannot :destroy, Compte do |q|
       Campagne.where(compte: q).present?
     end

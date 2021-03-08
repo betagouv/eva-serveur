@@ -185,6 +185,7 @@ describe Ability do
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
+      it { is_expected.to be_able_to(:update, mon_collegue) }
     end
   end
 end

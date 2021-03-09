@@ -108,10 +108,14 @@ ActiveRecord::Schema.define(version: 2021_03_05_120035) do
     t.datetime "updated_at", null: false
     t.string "role", default: "organisation"
     t.uuid "structure_id"
+    t.integer "failed_attempts"
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.integer "statut_validation", default: 0
     t.index ["email"], name: "index_comptes_on_email", unique: true
     t.index ["reset_password_token"], name: "index_comptes_on_reset_password_token", unique: true
     t.index ["structure_id"], name: "index_comptes_on_structure_id"
+    t.index ["unlock_token"], name: "index_comptes_on_unlock_token", unique: true
   end
 
   create_table "contacts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|

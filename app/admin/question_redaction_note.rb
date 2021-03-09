@@ -16,7 +16,6 @@ ActiveAdmin.register QuestionRedactionNote do
       f.input :intitule
       f.input :intitule_reponse
       f.input :reponse_placeholder
-      f.input :message
       f.input :illustration, as: :file
     end
     f.actions

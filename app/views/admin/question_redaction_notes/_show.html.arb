@@ -6,7 +6,6 @@ panel 'Détails de la question' do
     row :libelle
     row :description
     row :intitule
-    row :message
     row :intitule_reponse
     row :reponse_placeholder
     row :created_at

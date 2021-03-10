@@ -18,7 +18,7 @@ describe 'nettoyage:recalcule_metriques' do
   context 'appelé avec un nom de situation valide' do
     before do
       allow(logger).to receive :info
-      allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+      allow(FabriqueRestitution).to receive(:instancie).with(partie).and_return restitution
       ENV['SITUATION'] = 'tri'
     end
 

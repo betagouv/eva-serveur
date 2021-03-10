@@ -9,5 +9,6 @@ ActiveAdmin.register AnnonceGenerale do
     column :texte
     column :afficher
     column :created_at
+    actions
   end
 end

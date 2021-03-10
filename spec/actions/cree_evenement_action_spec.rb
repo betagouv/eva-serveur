@@ -10,7 +10,7 @@ describe CreeEvenementAction do
   let(:restitution) { double }
 
   before do
-    allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+    allow(FabriqueRestitution).to receive(:instancie).with(partie).and_return restitution
   end
 
   context "sauve l'évenement" do

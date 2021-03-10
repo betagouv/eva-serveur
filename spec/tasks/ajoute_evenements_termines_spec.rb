@@ -6,7 +6,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
   include_context 'rake'
 
   before do
-    allow(FabriqueRestitution).to receive(:instancie).with(partie.id).and_return restitution
+    allow(FabriqueRestitution).to receive(:instancie).with(partie).and_return restitution
   end
 
   let!(:partie) { create :partie }

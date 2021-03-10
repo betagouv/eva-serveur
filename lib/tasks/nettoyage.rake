@@ -74,7 +74,7 @@ namespace :nettoyage do
     Partie
       .where(situation: situation)
       .find_each do |partie|
-        restitution = FabriqueRestitution.instancie partie.id
+        restitution = FabriqueRestitution.instancie partie
         restitution.persiste if restitution.termine?
         nombre_partie -= 1
         logger.info "reste #{nombre_partie}"
@@ -88,7 +88,7 @@ namespace :nettoyage do
       evenements = Evenement.where(partie: partie)
       next if evenements.where(nom: 'finSituation').exists?
 
-      restitution = FabriqueRestitution.instancie partie.id
+      restitution = FabriqueRestitution.instancie partie
       next unless restitution.termine?
 
       dernier_evenement = evenements.order(:date).last

@@ -33,13 +33,10 @@ local:
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
 
-openstack:
-  service: OpenStack
-  container: <%= ENV['OS_CONTAINER'] %> # Container name for your OpenStack provider
+amazon:
+  service: S3
   public: true
-  credentials:
-    openstack_auth_url: <%= ENV['OS_AUTH_URL'] %>
-    openstack_username: <%= ENV['OS_USERNAME'] %>
-    openstack_api_key: <%= ENV['OS_PASSWORD'] %>
-    openstack_region: <%= ENV['OS_REGION_NAME'] %>
-    openstack_temp_url_key: <%= ENV['OS_TEMP_URL_KEY'] %>
+  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  region: eu-west-3
+  bucket: <%= ENV['AWS_BUCKET'] %>

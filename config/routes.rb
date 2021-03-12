@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :comptes, ActiveAdmin::Devise.config
+  devise_for :comptes, ActiveAdmin::Devise.config.deep_merge(controllers: {registrations: 'eva/devise/registrations'})
   get '/admin', to: redirect('/admin/dashboard')
 
   ActiveAdmin.routes(self)

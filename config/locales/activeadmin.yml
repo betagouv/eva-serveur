@@ -7,3 +7,7 @@ fr:
       index:
         rapport: Rapport
         evenements: Évenements
+    devise:
+      registrations:
+        new:
+          title: Rejoindre %{structure}

@@ -3,6 +3,8 @@
 FactoryBot.define do
   factory :compte, aliases: [:compte_admin] do
     email
+    nom { 'Nom' }
+    prenom { 'Prénom' }
     password { 'password' }
     role { 'administrateur' }
     statut_validation { :acceptee }

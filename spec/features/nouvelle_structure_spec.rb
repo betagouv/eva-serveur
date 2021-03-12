@@ -8,6 +8,8 @@ describe 'Nouvelle Structure', type: :feature do
     visit nouvelle_structure_path
     fill_in :campagne_libelle, with: 'Nice, pack demandeur'
     fill_in :campagne_code, with: 'packdemandeur_nice'
+    fill_in :campagne_compte_attributes_prenom, with: 'Jimmy'
+    fill_in :campagne_compte_attributes_nom, with: 'Endriques'
     fill_in :campagne_compte_attributes_email, with: 'jeanmarc@structure.fr'
     fill_in :campagne_compte_attributes_password, with: 'billyjoel'
     fill_in :campagne_compte_attributes_password_confirmation, with: 'billyjoel'

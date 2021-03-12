@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Compte do
-  permit_params :email, :password, :password_confirmation, :role, :structure_id, :statut_validation
+  permit_params :email, :password, :password_confirmation, :role, :structure_id,
+                :statut_validation, :prenom, :nom
 
   includes :structure
 
   index do
+    column :prenom
+    column :nom
     column :email
     column :statut_validation
     if can? :manage, Compte
@@ -28,6 +31,8 @@ ActiveAdmin.register Compte do
 
   form do |f|
     f.inputs do
+      f.input :prenom
+      f.input :nom
       f.input :email
       if can? :manage, Compte
         f.input :role, as: :select, collection: %w[administrateur organisation]

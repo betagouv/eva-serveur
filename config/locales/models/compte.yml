@@ -8,6 +8,8 @@ fr:
       compte:
         created_at: Créé le
         updated_at: Mis à jour le
+        prenom: Prénom
+        nom: Nom
         email: Courriel
         sign_in_count: Nombre de connexion
         current_sign_in_at: Dernière connexion

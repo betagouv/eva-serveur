@@ -6,6 +6,8 @@ describe 'Création de compte conseiller', type: :feature do
   before do
     create :structure, nom: 'Ma structure'
     visit new_compte_registration_path
+    fill_in :compte_prenom, with: 'Julia'
+    fill_in :compte_nom, with: 'Robert'
     fill_in :compte_email, with: 'monemail@eva.fr'
     fill_in :compte_password, with: 'Pass123'
     fill_in :compte_password_confirmation, with: 'Pass123'

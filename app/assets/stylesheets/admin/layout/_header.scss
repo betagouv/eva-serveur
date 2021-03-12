@@ -87,6 +87,7 @@
     padding: 0 1rem;
     border-radius: 1.9rem;
     background-color: #fff;
+    font-size: 0;
     a {
       color: $couleur-texte-sombre;
       &:hover {
@@ -95,8 +96,7 @@
     }
     #current_user {
       span, a {
-        color: $couleur-texte-sombre;
-        margin-right: 3.1rem;
+        margin-right: .6rem;
         padding: 0.38rem 0;
       }
     }

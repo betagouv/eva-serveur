@@ -12,6 +12,8 @@ describe 'Admin - Compte', type: :feature do
       it do
         visit new_admin_compte_path
         expect do
+          fill_in :compte_prenom, with: 'Jane'
+          fill_in :compte_nom, with: 'Doe'
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
           select 'administrateur'
           select 'Ma Super Structure'
@@ -64,6 +66,8 @@ describe 'Admin - Compte', type: :feature do
       before { visit new_admin_compte_path }
 
       it do
+        fill_in :compte_prenom, with: 'Peppa'
+        fill_in :compte_nom, with: 'Pig'
         fill_in :compte_email, with: 'collegue@exemple.fr'
         fill_in :compte_password, with: 'billyjoel'
         fill_in :compte_password_confirmation, with: 'billyjoel'

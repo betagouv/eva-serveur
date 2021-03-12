@@ -2,7 +2,7 @@ fr:
   admin:
     comptes:
       show:
-        titre: 'Bonjour,'
+        titre: 'Bonjour %{prenom} !'
         introduction: |
           Ici vous pouvez gérer votre compte et
           vos informations personnelles.

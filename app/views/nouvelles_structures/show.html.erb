@@ -5,6 +5,8 @@
     <%= compte.semantic_fields_for :structure do |structure| %>
       <%= structure.inputs :nom, :code_postal, name: 'Structure' %>
       <%= compte.inputs name: 'Le premier compte utilisateur' do %>
+        <%= compte.input :prenom %>
+        <%= compte.input :nom %>
         <%= compte.input :email %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation %>

@@ -2,7 +2,7 @@
 
 div class: 'mon-compte row' do
   div class: 'offset-1 col-4' do
-    h1 t('.titre'), class: 'titre'
+    h1 t('.titre', prenom: compte.prenom), class: 'titre'
 
     div class: 'introduction' do
       div class: 'introduction__texte' do
@@ -13,6 +13,8 @@ div class: 'mon-compte row' do
 
     div class: 'panel' do
       attributes_table_for compte do
+        row :prenom
+        row :nom
         row :email
         row :created_at
       end

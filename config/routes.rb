@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/', to: redirect('/admin/dashboard')
 
   resource :nouvelle_structure, only: [:create, :show]
+  resources :structures, only: :index
 
   namespace :api do
     resources :evaluations, only: [:create, :show, :update] do

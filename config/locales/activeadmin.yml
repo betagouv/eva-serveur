@@ -11,3 +11,4 @@ fr:
       registrations:
         new:
           title: Rejoindre %{structure}
+          nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>

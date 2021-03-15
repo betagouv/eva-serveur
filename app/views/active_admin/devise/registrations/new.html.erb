@@ -14,8 +14,9 @@
       f.input :password_confirmation
 
       if resource.structure.blank?
-        f.input :structure, hint: "Si vous ne trouvez pas votre structure, #{ link_to 'enregistrez-la ici', nouvelle_structure_path }".html_safe,
-                            collection: Hash[Structure.order(:code_postal).map{|s| ["#{s.code_postal} - #{s.nom}",s.id]}]
+        f.input :structure,
+                hint: t('.nouvelle_structure_html', lien: nouvelle_structure_path),
+                collection: Hash[Structure.order(:code_postal).map{|s| ["#{s.code_postal} - #{s.nom}",s.id]}]
       else
         f.input :structure_id, as: :hidden
       end

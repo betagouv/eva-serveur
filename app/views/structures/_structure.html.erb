@@ -1,5 +1,5 @@
 <div class='structure'>
   <h3><%= structure.nom %></h3>
-  <span>Code postal : <%= structure.code_postal %></span>
-  <%= link_to 'Rejoindre', new_compte_registration_path(structure_id: structure) %>
+  <span><%= t('.code_postal', code_postal: structure.code_postal) %></span>
+  <%= link_to t('.rejoindre_structure'), new_compte_registration_path(structure_id: structure) %>
 </div>

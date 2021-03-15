@@ -1,2 +1,12 @@
-<h2>Les structures qui correspondent à votre recherche</h2>
+<h2><%= t('.titre')%></h2>
+<p><%= t('.description')%></p>
+<h4><%= t('.label_champ_recherche')%></h4>
+<%= form_with method: :get do |f| %>
+  <%= f.text_field :code_postal %>
+  <%= f.submit 'chercher' %>
+<% end %>
+
 <%= render @structures %>
+
+<hr/>
+<p><%= t('.structure_introuvable_html', lien: nouvelle_structure_path) %></p>

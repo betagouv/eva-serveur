@@ -5,6 +5,6 @@ class StructuresController < ApplicationController
   helper ::ActiveAdmin::ViewHelpers
 
   def index
-    @structures = Structure.where(code_postal: params[:code_postal])
+    @structures = Structure.near(params[:code_postal])
   end
 end

@@ -5,7 +5,7 @@ class Structure < ApplicationRecord
 
   geocoded_by :code_postal
 
-  after_validation :geocode
+  after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
 
   def display_name
     nom

@@ -3,6 +3,18 @@
 require 'rails_helper'
 
 describe Structure, type: :model do
+  context 'avec un geocoder réel' do
+    before do
+      Geocoder.configure(lookup: :nominatim)
+    end
+
+    it 'geocode en france' do
+      structure = create :structure, code_postal: '06600'
+      expect(Geocoder.search([structure.latitude, structure.longitude])[0].country)
+        .to eql('France')
+    end
+  end
+
   context 'avec un geocoder de test' do
     before do
       Geocoder.configure(lookup: :test)
@@ -23,5 +35,7 @@ describe Structure, type: :model do
       expect(structure.latitude).to eql(40.7143528)
       expect(structure.longitude).to eql(-74.0059731)
     end
+
+    it { expect(Structure.geocoder_options[:params]).to include(countrycodes: 'fr') }
   end
 end

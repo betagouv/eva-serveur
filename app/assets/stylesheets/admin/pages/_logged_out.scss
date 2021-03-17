@@ -1,0 +1,32 @@
+body.logged_out {
+  background-color: $eva_light;
+
+  &::before {
+    content: '';
+    background: linear-gradient($eva_main_blue 50%, $couleur-texte-sombre 50%);
+    height: 100%;
+    width: 290px;
+    display: block;
+    position: fixed;
+    left: 50%;
+    margin-left: -145px;
+  }
+
+  #wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: image-url('vagues-verticales.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+  }
+
+  #content_wrapper {
+    margin: auto;
+  }
+
+  #footer {
+    display: none;
+  }
+}

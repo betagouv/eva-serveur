@@ -2,7 +2,6 @@ form {
   fieldset {
     &.inputs,
     legend span {
-      border: 1px solid $bluegrey;
       box-shadow: none;
     }
     &.inputs {
@@ -17,12 +16,23 @@ form {
   }
 }
 
+form fieldset > ol > li fieldset.inputs {
+  border: 1px solid $bluegrey;
+}
+
 form fieldset ol > li,
 .sidebar_section form {
   label {
+    font-size: .875rem;
     text-transform: none;
     font-weight: normal;
-    color: $couleur-texte;
+    color: $couleur-texte-sombre;
+    width: 30%;
+
+    abbr[title] {
+      text-decoration:none;
+      color: $couleur-texte-sombre;
+    }
   }
 }
 
@@ -54,4 +64,9 @@ form fieldset text-area,
   .select2-selection__rendered {
     color: $couleur-texte;
   }
+}
+
+form fieldset > ol > li.boolean label {
+  padding-left: 30%;
+  width: 70%;
 }

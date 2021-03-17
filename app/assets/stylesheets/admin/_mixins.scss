@@ -5,11 +5,13 @@
   background-color: #fff;
 }
 @mixin bouton() {
-  padding: 0.44rem 0.94rem;
+  padding: 0 0.94rem;
   font-size: 0.875rem;
   text-decoration: none;
   border-radius: 2.875rem;
+  line-height: 1.875rem;
   color: $eva_light;
+  border: 1px solid $eva_main_blue;
   background-color: $eva_main_blue;
 }
 @mixin bouton-carte($background-color, $color:$eva_light) {

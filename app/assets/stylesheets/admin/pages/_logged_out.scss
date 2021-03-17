@@ -1,9 +1,10 @@
 body.logged_out {
+  font-size: .75rem;
   background-color: $eva_light;
 
   &::before {
     content: '';
-    background: linear-gradient($eva_main_blue 50%, $couleur-texte-sombre 50%);
+    background: $couleur-texte-sombre image-url('vagues-verticales.svg') no-repeat top center;
     height: 100%;
     width: 290px;
     display: block;
@@ -13,20 +14,82 @@ body.logged_out {
   }
 
   #wrapper {
-    height: 100vh;
-    display: flex;
+    padding-top: 10rem;
     flex-direction: column;
-    background-image: image-url('vagues-verticales.svg');
-    background-repeat: no-repeat;
-    background-position: center;
     position: relative;
   }
 
   #content_wrapper {
     margin: auto;
+    width: 445px;
   }
 
-  #footer {
-    display: none;
+  h1 {
+    font-family: $font-titre;
+    color: $eva_light;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 auto 3rem;
+  }
+
+  #content_wrapper #active_admin_content {
+     padding: 2rem 1.5rem;
+  }
+  h2 {
+    padding: 0;
+    margin: 0 0 1.125rem;;
+    font-size: 1.125rem;
+    font-family: $font-titre;
+    text-shadow: none;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    box-shadow: none;
+    color: $couleur-texte-sombre;
+    background: none;
+  }
+  #login {
+    form fieldset {
+      &.actions {
+        li {
+          padding-bottom: 0;
+        }
+      }
+
+      li {
+        clear: both;
+      }
+
+      input[type=text],
+      input[type=email],
+      input[type=password] {
+        width: 60%;
+      }
+
+      .inline-hints a {
+        float: none;
+      }
+    }
+    a {
+      color: $eva_main_blue;
+      float: none;
+    }
+    br:last-child {
+      display: none;
+    }
+  }
+  .flash {
+    text-shadow: none;
+    font-weight: 600;
+    color: $couleur-texte-sombre;
+  }
+
+  form fieldset.buttons li, form fieldset.actions li {
+    float: right;
+  }
+
+  .liens-partages {
+    float: left;
+    margin-top: -2rem;
   }
 }

@@ -8,7 +8,7 @@ class NouvellesStructuresController < ApplicationController
   end
 
   def create
-    @campagne = Campagne.new campagne_parametres.merge(initialise_situations: true)
+    @campagne = Campagne.new campagne_parametres
     if @campagne.save
       redirect_to admin_campagne_path(@campagne)
     else
@@ -19,6 +19,8 @@ class NouvellesStructuresController < ApplicationController
   private
 
   def campagne_parametres
-    params.require(:campagne).permit!
+    parametres = params.require(:campagne).permit!.to_h
+    parametres.deep_merge(initialise_situations: true,
+                          compte_attributes: { statut_validation: :acceptee })
   end
 end

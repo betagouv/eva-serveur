@@ -38,6 +38,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     expect(campagne.compte_id).to eq(compte.id)
     expect(compte.structure_id).to eq(structure.id)
+    expect(compte.validation_acceptee?).to eq(true)
 
     expect(current_path).to eq(admin_campagne_path(campagne))
   end

@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe 'Structures', type: :feature do
   before do
-    Geocoder.configure(lookup: :test)
     Geocoder::Lookup::Test.add_stub(
       '75012', [
         {

@@ -3,27 +3,12 @@
 require 'rails_helper'
 
 describe Structure, type: :model do
-  context 'avec un geocoder réel' do
+  it { should validate_presence_of(:nom) }
+  it { should validate_presence_of(:code_postal) }
+
+  describe 'géolocalisation à la validation' do
+    let(:structure) { Structure.new code_postal: '75012' }
     before do
-      Geocoder.configure(lookup: :nominatim)
-    end
-
-    it 'geocode en france' do
-      structure = create :structure, code_postal: '06600'
-      expect(Geocoder.search([structure.latitude, structure.longitude])[0].country)
-        .to eql('France')
-    end
-  end
-
-  context 'avec un geocoder de test' do
-    before do
-      Geocoder.configure(lookup: :test)
-    end
-
-    it { should validate_presence_of(:nom) }
-    it { should validate_presence_of(:code_postal) }
-
-    it 'geocode à la création' do
       Geocoder::Lookup::Test.add_stub(
         '75012', [
           {
@@ -31,7 +16,10 @@ describe Structure, type: :model do
           }
         ]
       )
-      structure = create :structure, code_postal: '75012'
+      structure.valid?
+    end
+
+    it do
       expect(structure.latitude).to eql(40.7143528)
       expect(structure.longitude).to eql(-74.0059731)
     end

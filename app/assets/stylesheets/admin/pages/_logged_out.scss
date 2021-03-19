@@ -38,8 +38,30 @@ body.logged_out {
     margin: 0 auto 3rem;
   }
 
+  .flashes {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    .flash {
+      display: inline-block;
+      padding: .35rem 1rem;
+      position: relative;
+      top: 1.2rem;
+      font-weight: 400;
+      border-radius: 0.75rem;
+      color: $eva_light;
+      &_notice {
+        background-color: $darkgreen;
+      }
+      &_alert {
+        background-color: $couleur-accent-erreur;
+      }
+    }
+  }
+
   #content_wrapper #active_admin_content {
      padding: 2rem 1.5rem;
+     z-index: 1;
   }
   h2 {
     padding: 0;

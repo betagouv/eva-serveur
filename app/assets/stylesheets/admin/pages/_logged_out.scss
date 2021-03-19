@@ -1,3 +1,5 @@
+$largeur-colonne: 290px;
+
 body.logged_out {
   font-size: .75rem;
   background-color: $eva_light;
@@ -6,20 +8,23 @@ body.logged_out {
     content: '';
     background: $couleur-texte-sombre image-url('vagues-verticales.svg') no-repeat top center;
     height: 100%;
-    width: 290px;
     display: block;
     position: fixed;
+    width: $largeur-colonne;
     left: 50%;
-    margin-left: -145px;
+    margin-left: -$largeur-colonne/2;
   }
 
   #wrapper {
-    padding-top: 10rem;
     flex-direction: column;
+    display: flex;
+    min-height: 100vh;
     position: relative;
   }
 
   #content_wrapper {
+    padding-top: 10rem;
+    flex: 1 0 auto;
     margin: auto;
     width: 445px;
   }
@@ -92,5 +97,17 @@ body.logged_out {
   .liens-partages {
     float: left;
     margin-top: -2rem;
+  }
+
+  #footer {
+    box-sizing: border-box;
+    color: $eva_light;
+    padding: 1rem;
+    width: $largeur-colonne;
+    margin: auto;
+
+    a {
+      color: $eva_main_blue;
+    }
   }
 }

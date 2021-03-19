@@ -23,6 +23,7 @@ form fieldset > ol > li fieldset.inputs {
 form fieldset ol > li,
 .sidebar_section form {
   label {
+    line-height: 1.875rem;
     font-size: .875rem;
     text-transform: none;
     font-weight: normal;
@@ -69,4 +70,6 @@ form fieldset text-area,
 form fieldset > ol > li.boolean label {
   padding-left: 30%;
   width: 70%;
+  display: flex;
+  align-items: center;
 }

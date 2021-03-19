@@ -23,6 +23,7 @@ body.logged_out {
   }
 
   #content_wrapper {
+    position: relative;
     padding-top: 10rem;
     flex: 1 0 auto;
     margin: auto;
@@ -39,7 +40,11 @@ body.logged_out {
   }
 
   .flashes {
-    position: relative;
+    width: 100%;
+    position: absolute;
+    top: 12.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 2;
     text-align: center;
     .flash {

@@ -10,6 +10,7 @@ describe 'Nouvelle Structure', type: :feature do
     fill_in :campagne_code, with: 'packdemandeur_nice'
     fill_in :campagne_compte_attributes_prenom, with: 'Jimmy'
     fill_in :campagne_compte_attributes_nom, with: 'Endriques'
+    fill_in :campagne_compte_attributes_telephone, with: '02 03 04 05 06'
     fill_in :campagne_compte_attributes_email, with: 'jeanmarc@structure.fr'
     fill_in :campagne_compte_attributes_password, with: 'billyjoel'
     fill_in :campagne_compte_attributes_password_confirmation, with: 'billyjoel'
@@ -31,6 +32,7 @@ describe 'Nouvelle Structure', type: :feature do
     compte = Compte.last
     expect(compte.email).to eq('jeanmarc@structure.fr')
     expect(compte.role).to eq('organisation')
+    expect(compte.telephone).to eq('02 03 04 05 06')
 
     structure = Structure.order(:created_at).last
     expect(structure.nom).to eq('Mission Locale Nice')

@@ -11,6 +11,7 @@ fr:
         prenom: Prénom
         nom: Nom
         email: Courriel
+        telephone: Téléphone
         sign_in_count: Nombre de connexion
         current_sign_in_at: Dernière connexion
         password: Mot de passe

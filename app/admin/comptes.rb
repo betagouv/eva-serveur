@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Compte do
   permit_params :email, :password, :password_confirmation, :role, :structure_id,
-                :statut_validation, :prenom, :nom
+                :statut_validation, :prenom, :nom, :telephone
 
   includes :structure
 
@@ -10,6 +10,7 @@ ActiveAdmin.register Compte do
     column :prenom
     column :nom
     column :email
+    column :telephone
     column :statut_validation
     if can? :manage, Compte
       column :role
@@ -34,6 +35,7 @@ ActiveAdmin.register Compte do
       f.input :prenom
       f.input :nom
       f.input :email
+      f.input :telephone
       if can? :manage, Compte
         f.input :role, as: :select, collection: %w[administrateur organisation]
         f.input :structure

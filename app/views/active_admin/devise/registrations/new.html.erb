@@ -10,6 +10,7 @@
       resource.class.authentication_keys.each_with_index { |key, index|
         f.input key, label: t('active_admin.devise.'+key.to_s+'.title'), input_html: { autofocus: index.zero? }
       }
+      f.input :telephone
       f.input :password
       f.input :password_confirmation
 

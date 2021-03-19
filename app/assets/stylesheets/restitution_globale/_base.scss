@@ -26,7 +26,7 @@
 
   h2 {
     font-family: $font-titre;
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
     font-weight: bold;
   }
 
@@ -53,7 +53,7 @@
   .header, .title_bar { display: none; }
 
   .autopositionnement {
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
 
     .intitule-question {
       display: flex;
@@ -146,11 +146,11 @@
       left: 0;
       width: 100%;
       height: 0.6rem;
-      border: 1px solid $couleur-texte-sombre;
+      border: 1px solid $eva_dark;
       border-radius: 0 0.3rem 0.3rem 0;
 
       &.remplissage {
-        background-color: $couleur-texte-sombre;
+        background-color: $eva_dark;
 
         &-3 {
           width: 100%;
@@ -225,10 +225,10 @@
     }
 
     &.socle_clea {
-      color: $couleur-texte-sombre;
+      color: $eva_dark;
       background-color: $couleur-legere-accent-validation;
       h3 {
-        color: $couleur-texte-sombre;
+        color: $eva_dark;
       }
     }
   }

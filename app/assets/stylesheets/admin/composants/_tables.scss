@@ -41,7 +41,7 @@ table.index_table {
         vertical-align: middle;
         border-top: 1px solid $bluegrey;
         border-bottom: 1px solid $bluegrey;
-        color: $couleur-texte-sombre;
+        color: $eva_dark;
         background-color: #FFF;
         &:first-child {
           font-weight: 600;
@@ -93,7 +93,7 @@ table.index_table {
               font-size: .75rem;
 
               &.view_link {
-                color: $couleur-texte-sombre;
+                color: $eva_dark;
                 background-color: $couleur-legere-accent-validation;
               }
               &.edit_link {

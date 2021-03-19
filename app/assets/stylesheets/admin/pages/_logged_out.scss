@@ -6,7 +6,7 @@ body.logged_out {
 
   &::before {
     content: '';
-    background: $couleur-texte-sombre image-url('vagues-verticales.svg') no-repeat top center;
+    background: $eva_dark image-url('vagues-verticales.svg') no-repeat top center;
     height: 100%;
     display: block;
     position: fixed;
@@ -50,7 +50,7 @@ body.logged_out {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     box-shadow: none;
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
     background: none;
   }
   #login {
@@ -87,7 +87,7 @@ body.logged_out {
   .flash {
     text-shadow: none;
     font-weight: 600;
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
   }
 
   form fieldset.buttons li, form fieldset.actions li {

@@ -2,7 +2,7 @@
   $grid-columns:      8;
   $grid-gutter-width: 0;
   @import "../bootstrap_minimal";
-  
+
   .titre {
     @include titre;
     font-size: 1.5rem;
@@ -14,7 +14,7 @@
     padding: 1rem 1.5rem 2.8rem;
     p {
       font-size: 0.875rem;
-      color: $couleur-texte-sombre;
+      color: $eva_dark;
       a {
         text-decoration: underline;
         color: $eva_main_blue;
@@ -43,7 +43,7 @@
       th, td {
         font-size: 0.875rem;
         border: 0;
-        color: $couleur-texte-sombre;
+        color: $eva_dark;
       }
       th {
         font-weight: normal;

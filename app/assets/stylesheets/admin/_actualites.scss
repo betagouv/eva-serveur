@@ -23,7 +23,7 @@
     min-height: 3.5rem;
 
     .action {
-      @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+      @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
     }
 
     .status_tag {
@@ -31,7 +31,7 @@
     }
 
     .titre {
-      color: $couleur-texte-sombre;
+      color: $eva_dark;
       flex: 1;
       margin: 0 .75rem 0 0;
     }
@@ -70,7 +70,7 @@
 
   @import "../bootstrap_minimal";
   font-size: .875rem;
-  color: $couleur-texte-sombre;
+  color: $eva_dark;
 
   padding-top: 1.125rem;
 

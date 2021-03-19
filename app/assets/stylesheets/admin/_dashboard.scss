@@ -1,7 +1,7 @@
 body.logged_in {
   .flash.flash_annonce_generale {
     background-color: $couleur-warning;
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
     background-image: none;
     text-shadow: none;
     font-size: 0.8rem;
@@ -23,7 +23,7 @@ body.logged_in {
     }
 
     a {
-      color: $couleur-texte-sombre;
+      color: $eva_dark;
     }
   }
 
@@ -70,7 +70,7 @@ body.logged_in {
       background-color: #fff;
       p,
       .action {
-        color: $couleur-texte-sombre;
+        color: $eva_dark;
       }
       p {
         font-size: 0.875rem;
@@ -79,7 +79,7 @@ body.logged_in {
         @include bouton;
         display: inline-block;
         font-size: 0.75rem;
-        color: $couleur-texte-sombre;
+        color: $eva_dark;
         background-color: $couleur-warning;
       }
     }

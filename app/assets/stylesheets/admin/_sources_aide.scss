@@ -8,7 +8,7 @@
     @include carte;
     display: flex;
     padding: 1.5rem;
-    color: $couleur-texte-sombre;
+    color: $eva_dark;
     font-size: .875rem;
     text-decoration: none;
 
@@ -26,7 +26,7 @@
     }
 
     .action {
-      @include bouton-carte($couleur-legere-accent-validation, $couleur-texte-sombre);
+      @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
       position: absolute;
       right: 1.5rem;
       bottom: 1.5rem;

@@ -30,7 +30,7 @@
 @mixin titre() {
   font-family: $font-titre;
   font-weight: bold;
-  color: $couleur-texte-sombre;
+  color: $eva_dark;
   margin: 0;
 }
 @mixin titre-carte() {

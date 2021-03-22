@@ -11,3 +11,17 @@ fr:
   admin:
     structure:
       nouvelle_structure: Créer une nouvelle structure (avec compte et campagne)
+  nouvelles_structures:
+    show:
+      titre: Votre structure
+      structure:
+        titre: Informations
+      compte:
+        titre: Créer les accès de ma structure
+      campagne:
+        titre: Créer ma campagne
+      actions:
+        texte: |
+          **Veuillez vérifier les informations saisies avant de valider votre inscription.**
+
+          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)

@@ -30,6 +30,19 @@ body.logged_out {
     margin: auto;
     width: 445px;
     z-index: 2;
+    &.conteneur-elargi {
+      width: 640px;
+    }
+    &.conteneur-invisible {
+      #active_admin_content {
+        padding: 0;
+        box-shadow: none;
+        background: none;
+      }
+      form fieldset legend {
+        display: none;
+      }
+    }
   }
 
   h1 {
@@ -83,6 +96,49 @@ body.logged_out {
     color: $eva_dark;
     background: none;
   }
+
+  h3 {
+    @include titre-carte;
+    margin-bottom: 1.5rem;
+    padding: 0;
+  }
+
+  a {
+    color: $eva_main_blue;
+  }
+
+  form fieldset {
+    input[type=text],
+    input[type=email],
+    input[type=tel],
+    input[type=password] {
+      width: 70%;
+      border-radius: .5rem;
+    }
+  }
+
+  .campagne {
+    fieldset {
+      padding: 1.5rem;
+
+      label {
+        padding-right: 20px;
+        line-height: 1;
+      }
+
+      .inline-hints,
+      .inline-errors {
+        margin-left: 30%;
+      }
+
+      .action {
+        margin-top: 0.3rem;
+        text-align: center;
+        padding-bottom: 0;
+      }
+    }
+  }
+
   #login {
     form fieldset {
       &.actions {
@@ -93,13 +149,6 @@ body.logged_out {
 
       li {
         clear: both;
-      }
-
-      input[type=text],
-      input[type=email],
-      input[type=tel],
-      input[type=password] {
-        width: 60%;
       }
 
       .inline-hints a {
@@ -137,9 +186,5 @@ body.logged_out {
     margin: auto;
     position: relative;
     z-index: 2;
-
-    a {
-      color: $eva_main_blue;
-    }
   }
 }

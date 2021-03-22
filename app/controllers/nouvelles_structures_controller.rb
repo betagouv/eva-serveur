@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class NouvellesStructuresController < ApplicationController
+  layout 'active_admin_logged_out'
+  helper ::ActiveAdmin::ViewHelpers
+
   def show
     @campagne = Campagne.new
     compte = @campagne.build_compte

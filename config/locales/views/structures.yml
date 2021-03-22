@@ -1,13 +1,15 @@
 fr:
   structures:
     index:
-      titre: Vous souhaitez créer un compte eva.
-      description: Dans un premier temps, veuillez vérifier que votre structure n’est pas déjà enregistrée.
+      titre: Bienvenue !
+      description: |
+        **Vous souhaitez créer un compte conseiller eva.**
+        Dans un premier temps, vous devez retrouver votre structure.
       label_champ_recherche: 'Indiquez votre code postal ou votre ville :'
-      structure_introuvable_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
+      structure_introuvable: Structure introuvable ?
     structure:
-      code_postal: 'Code postal : %{code_postal}'
-      rejoindre_structure: Ceci est ma structure
+      code_postal: 'Code postal : '
+      rejoindre_structure: Rejoindre
   admin:
     structure:
       nouvelle_structure: Créer une nouvelle structure (avec compte et campagne)

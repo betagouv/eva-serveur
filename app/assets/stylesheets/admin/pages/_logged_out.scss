@@ -99,7 +99,7 @@ body.logged_out {
   }
 
   #content_wrapper #active_admin_content {
-     padding: 2rem 1.5rem;
+     padding: 1.5rem;
      z-index: 1;
   }
   h2 {
@@ -131,7 +131,6 @@ body.logged_out {
     input[type=tel],
     input[type=password] {
       width: 70%;
-      border-radius: .5rem;
     }
 
     &.actions {
@@ -163,6 +162,34 @@ body.logged_out {
       display: none;
     }
   }
+
+  .recherche-structure {
+    form {
+      display: flex;
+    }
+    form + .sous-panel {
+      margin-top: 1rem;
+    }
+    .label-champ-recherche {
+      font-size: .875rem;
+      margin-bottom: .5rem;
+      display: block;
+    }
+    .champ-recherche {
+      margin-right: .5rem;
+    }
+    .actions {
+      display: flex;
+    }
+
+    .creer-structure {
+      @include bouton;
+      margin: 1rem 0 0 auto;
+      background-color: $couleur-warning;
+      border: none;
+    }
+  }
+
   .flash {
     text-shadow: none;
     font-weight: 600;

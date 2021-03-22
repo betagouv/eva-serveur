@@ -10,6 +10,31 @@ body.logged_out #content_wrapper #active_admin_content {
   }
 }
 
+body.logged_out .sous-panel {
+  @include sous-carte;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+
+  .infos {
+    h4 {
+      @include titre-carte;
+      font-size: .875rem;
+      padding: 0.875rem 0.875rem 0.5rem;
+    }
+
+    .sous-infos {
+      padding: 0 0.875rem 0.875rem;
+      color: $couleur-texte;
+    }
+  }
+
+  a {
+    margin: 0.875rem 0.875rem 0 auto;
+    @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+  }
+}
+
 .admin_dashboard {
   .panel {
     box-shadow: unset;

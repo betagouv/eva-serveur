@@ -13,6 +13,7 @@
   color: $eva_light;
   border: 1px solid $eva_main_blue;
   background-color: $eva_main_blue;
+  box-shadow: none;
 }
 @mixin bouton-carte($background-color, $color:$eva_light) {
   background-color: $background-color;

@@ -34,6 +34,7 @@ body.logged_out {
 
   h1 {
     font-family: $font-titre;
+    width: $largeur-colonne;
     color: $eva_light;
     font-weight: bold;
     text-align: center;

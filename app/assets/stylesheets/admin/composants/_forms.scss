@@ -48,28 +48,29 @@ form fieldset ol > li,
   }
 }
 
-form fieldset h3,
-form fieldset input[type="text"],
-form fieldset input[type="email"],
-form fieldset input[type="password"],
-form fieldset input[type="tel"],
+form h3,
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
-form fieldset textarea,
-form fieldset ::placeholder,
+form textarea,
+form ::placeholder,
 .sidebar_section form.filter_form ::placeholder,
 .select2-results__option,
-form fieldset > ol > li p.inline-hints {
-  color: $couleur-texte;
+form > ol > li p.inline-hints {
+  color: $eva_dark;
 }
 
-form fieldset input[type="text"],
-form fieldset input[type="email"],
-form fieldset input[type="password"],
-form fieldset input[type="tel"],
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
-form fieldset text-area,
+form text-area,
 .select2-results__option {
   border-color: $bluegrey;
+  border-radius: .5rem;
 }
 
 .select2-container--default .select2-selection--single {

@@ -16,6 +16,12 @@ form {
   }
 }
 
+.libelle-long {
+  label {
+    line-height: 1;
+  }
+}
+
 form fieldset > ol > li fieldset.inputs {
   border: 1px solid $bluegrey;
 }
@@ -72,4 +78,8 @@ form fieldset > ol > li.boolean label {
   width: 70%;
   display: flex;
   align-items: center;
+}
+
+form fieldset > ol > li p.inline-errors {
+  margin-left: 30%;
 }

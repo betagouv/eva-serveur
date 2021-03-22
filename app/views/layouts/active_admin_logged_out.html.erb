@@ -31,7 +31,7 @@
 <body class="active_admin logged_out <%= controller.action_name %>">
 <div id="wrapper">
 
-  <div id="content_wrapper">
+  <div id="content_wrapper" class="<%= yield :classes_conteneur %>">
     <h1><%= yield :titre %></h1>
     <div class="flashes">
       <% flash_messages.each do |type, message| %>

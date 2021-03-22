@@ -1,10 +1,19 @@
-<%= stylesheet_link_tag "active_admin" %>
-<%= semantic_form_for @campagne, url: nouvelle_structure_path do |f| %>
-  <%= f.semantic_errors *f.object.errors.messages.keys %>
-  <%= f.semantic_fields_for :compte do |compte| %>
+<% content_for :titre do %>
+  <%= t('.titre') -%>
+<% end %>
+<% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
+
+<%= semantic_form_for @campagne, url: nouvelle_structure_path do |campagne| %>
+  <%= campagne.semantic_errors *campagne.object.errors.messages.keys %>
+  <%= campagne.semantic_fields_for :compte do |compte| %>
     <%= compte.semantic_fields_for :structure do |structure| %>
-      <%= structure.inputs :nom, :code_postal, name: 'Structure' %>
-      <%= compte.inputs name: 'Le premier compte utilisateur' do %>
+      <%= structure.inputs class: 'panel' do %>
+        <h3><%= t('.structure.titre') %></h3>
+        <%= structure.input :nom %>
+        <%= structure.input :code_postal %>
+      <% end %>
+      <%= compte.inputs class: 'panel' do %>
+        <h3><%= t('.compte.titre') %></h3>
         <%= compte.input :prenom %>
         <%= compte.input :nom %>
         <%= compte.input :email %>
@@ -12,8 +21,15 @@
         <%= compte.input :password %>
         <%= compte.input :password_confirmation %>
       <% end %>
-      <%= f.inputs :libelle, :code, name: 'La première campagne' %>
+      <%= campagne.inputs class: 'panel' do %>
+        <h3><%= t('.campagne.titre') %></h3>
+        <%= campagne.input :libelle %>
+        <%= campagne.input :code %>
+      <% end %>
     <% end %>
   <% end %>
-  <%= f.actions %>
+  <%= campagne.actions class: 'panel' do %>
+    <%= md t('.actions.texte') %>
+    <%= campagne.action :submit %>
+  <% end %>
 <% end %>

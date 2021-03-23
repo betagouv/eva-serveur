@@ -22,9 +22,15 @@ form {
   }
 }
 
-form fieldset > ol > li fieldset.inputs {
-  border: 1px solid $bluegrey;
+form fieldset > ol > li {
+  &.boolean label {
+    padding-left: 30%;
+    width: 90%;
+    display: flex;
+    align-items: center;
+  }
 }
+
 
 form fieldset ol > li,
 .sidebar_section form {

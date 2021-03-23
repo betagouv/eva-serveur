@@ -12,7 +12,7 @@
       }
       f.input :telephone
       f.input :password
-      f.input :password_confirmation
+      f.input :password_confirmation, wrapper_html: { class: 'libelle-long' }
 
       if resource.structure.blank?
         f.input :structure,

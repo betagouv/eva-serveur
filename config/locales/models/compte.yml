@@ -27,6 +27,12 @@ fr:
       compte:
         create: Créer un compte
         update: Modifier
+    placeholders:
+      compte:
+        prenom: Claude
+        nom: Dupond
+        email: claude.dupond@mastructure.fr
+        telephone: 01 23 45 67 89
   active_admin:
     resources:
       compte:

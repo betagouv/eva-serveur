@@ -4,13 +4,16 @@ fr:
       structure:
         created_at: Créée le
         updated_at: Mise à jour le
-        nom: Nom
+        nom: Nom de la structure
         code_postal: Code Postal
   formtastic:
     actions:
       structure:
         create: Créer une structure
         update: Modifier
+    placeholders:
+      structure:
+        nom: Mission Local de Caraces, Pôle Emploi de Marita
   active_admin:
     resources:
       structure:

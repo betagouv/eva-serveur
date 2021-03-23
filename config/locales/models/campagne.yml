@@ -5,6 +5,7 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
+        code: Code campagne
         affiche_competences_fortes: Afficher les compétences fortes ?
         nombre_evaluations: Éval.
     models:

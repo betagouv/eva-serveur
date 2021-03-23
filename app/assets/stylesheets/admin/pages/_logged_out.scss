@@ -115,6 +115,25 @@ body.logged_out {
       width: 70%;
       border-radius: .5rem;
     }
+
+    &.actions {
+      li {
+        padding-bottom: 0;
+      }
+    }
+
+    li {
+      clear: both;
+      padding: 10px 0;
+    }
+
+    .inline-hints a {
+      float: none;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
   }
 
   .campagne {
@@ -132,29 +151,13 @@ body.logged_out {
       }
 
       .action {
-        margin-top: 0.3rem;
         text-align: center;
-        padding-bottom: 0;
+        padding: 0;
       }
     }
   }
 
   #login {
-    form fieldset {
-      &.actions {
-        li {
-          padding-bottom: 0;
-        }
-      }
-
-      li {
-        clear: both;
-      }
-
-      .inline-hints a {
-        float: none;
-      }
-    }
     a {
       color: $eva_main_blue;
       float: none;

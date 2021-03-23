@@ -14,12 +14,13 @@
       <% end %>
       <%= compte.inputs class: 'panel' do %>
         <h3><%= t('.compte.titre') %></h3>
+        <%= md t('.compte.description') %>
         <%= compte.input :prenom %>
         <%= compte.input :nom %>
         <%= compte.input :email %>
-        <%= compte.input :telephone %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation %>
+        <%= compte.input :telephone %>
       <% end %>
       <%= campagne.inputs class: 'panel' do %>
         <h3><%= t('.campagne.titre') %></h3>
@@ -29,7 +30,7 @@
     <% end %>
   <% end %>
   <%= campagne.actions class: 'panel' do %>
-    <%= md t('.actions.texte') %>
-    <%= campagne.action :submit %>
+    <%= md t('.actions.validation') %>
+    <%= campagne.action :submit, label: t('.creer_structure')%>
   <% end %>
 <% end %>

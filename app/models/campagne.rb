@@ -19,7 +19,6 @@ class Campagne < ApplicationRecord
 
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true
-  before_validation :genere_code_unique
 
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
   accepts_nested_attributes_for :compte
@@ -42,15 +41,6 @@ class Campagne < ApplicationRecord
     SITUATIONS_PAR_DEFAUT.each do |nom_technique|
       situation = Situation.find_by nom_technique: nom_technique
       situations_configurations.build situation: situation unless situation.nil?
-    end
-  end
-
-  def genere_code_unique
-    return if self[:code].present?
-
-    loop do
-      self[:code] = SecureRandom.hex 3
-      break if Campagne.where(code: self[:code]).none?
     end
   end
 end

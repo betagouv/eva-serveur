@@ -17,11 +17,14 @@ fr:
       structure:
         titre: Informations
       compte:
-        titre: Créer les accès de ma structure
+        titre: Créer le premier accès à ma structure
+        description: |
+          **En tant que créateur de la structure, vous serez identifié comme le référent eva de celle-ci.**
+          Merci de renseigner les informations suivantes :
       campagne:
         titre: Créer ma campagne
       actions:
-        texte: |
+        validation: |
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**
-
-          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
+          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
+      creer_structure: Valider la création de ma structure

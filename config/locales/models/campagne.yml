@@ -18,11 +18,11 @@ fr:
         update: Enregistrer
     placeholders:
       campagne:
-        libelle: "Ma campagne du 12 avril"
-        code: 1A2B3
+        libelle: ML Caraces, PE Marita, Garantie Jeunes
+        code: milo21160, Capinsertion92270
     hints:
       campagne:
-        code: Laissez vide pour en générer un, ou choisissez vous-même
+        code: Le code campagne est le code qu'il faudra fournir aux bénéficiaires.
         situation_configuration:
           questionnaire: Laissez vide pour utiliser le questionnaire par défaut
   active_admin:

@@ -70,24 +70,13 @@ describe 'Admin - Campagne', type: :feature do
         select 'orga@eva.fr'
       end
 
-      context 'génère un code si on en saisit pas' do
-        before do
-          fill_in :campagne_code, with: ''
-        end
-
-        it do
-          expect { click_on 'Créer' }.to(change { Campagne.count })
-          expect(Campagne.last.code).to be_present
-          expect(Campagne.last.compte).to eq compte_organisation
-          expect(page).to have_content 'Mon QCM'
-        end
-      end
-
-      context 'conserve le code saisi si précisé' do
+      context 'crée la campagne avec le code donné, associé au compte courant' do
         before { fill_in :campagne_code, with: 'EUROCKS' }
         it do
           expect { click_on 'Créer' }.to(change { Campagne.count })
           expect(Campagne.last.code).to eq 'EUROCKS'
+          expect(Campagne.last.compte).to eq compte_organisation
+          expect(page).to have_content 'Mon QCM'
         end
       end
     end

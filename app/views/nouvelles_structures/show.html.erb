@@ -17,10 +17,10 @@
         <%= md t('.compte.description') %>
         <%= compte.input :prenom %>
         <%= compte.input :nom %>
+        <%= compte.input :telephone %>
         <%= compte.input :email %>
         <%= compte.input :password %>
-        <%= compte.input :password_confirmation, wrapper_html: { class: 'libelle-long' } %>
-        <%= compte.input :telephone %>
+        <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
       <% end %>
       <%= campagne.inputs class: 'panel' do %>
         <h3><%= t('.campagne.titre') %></h3>

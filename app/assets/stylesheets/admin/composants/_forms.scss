@@ -52,6 +52,8 @@ form fieldset ol > li,
 form fieldset h3,
 form fieldset input[type="text"],
 form fieldset input[type="email"],
+form fieldset input[type="password"],
+form fieldset input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
 form fieldset textarea,
 form fieldset ::placeholder,
@@ -63,6 +65,8 @@ form fieldset > ol > li p.inline-hints {
 
 form fieldset input[type="text"],
 form fieldset input[type="email"],
+form fieldset input[type="password"],
+form fieldset input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
 form fieldset text-area,
 .select2-results__option {

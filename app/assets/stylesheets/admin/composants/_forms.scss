@@ -80,6 +80,32 @@ form fieldset > ol > li.boolean label {
   align-items: center;
 }
 
+form fieldset > ol > li.error {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="time"],
+  textarea {
+    border: 1px solid $eva_red;
+  }
+}
+
 form fieldset > ol > li p.inline-errors {
   margin-left: 30%;
+  color: $eva_red;
+}
+
+#error_explanation {
+  .errors {
+    background: $eva_red;
+    border-radius: 4px;
+    color: $eva_light;
+    margin: 0 0 0.5rem;
+    padding: 10px 10px 10px 2rem;
+    list-style: square;
+  }
 }

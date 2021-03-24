@@ -52,5 +52,9 @@ module EvaServeur
         resource '*', headers: :any, methods: [:post, :patch]
       end
     end
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.available_locales = [:fr]
+    config.i18n.default_locale = :fr
   end
 end

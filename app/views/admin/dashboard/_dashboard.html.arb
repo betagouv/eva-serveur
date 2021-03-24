@@ -7,7 +7,6 @@ columns do
 
   column do
     render 'actualites', actualites: actualites if actualites.present?
-    render 'formulaire_contact', contacts: contacts
   end
 end
 

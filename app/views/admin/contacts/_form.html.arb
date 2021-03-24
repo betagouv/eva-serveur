@@ -1,6 +1,0 @@
-# frozen_string_literal: true
-
-active_admin_form_for [:admin, Contact.new] do |f|
-  f.inputs :nom, :email, :telephone
-  f.actions
-end

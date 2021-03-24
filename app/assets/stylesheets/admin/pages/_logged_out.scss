@@ -32,6 +32,24 @@ body.logged_out {
     z-index: 2;
     &.conteneur-elargi {
       width: 640px;
+
+      fieldset {
+        padding: 1.5rem;
+
+        label {
+          padding-right: 20px;
+        }
+
+        .inline-hints,
+        .inline-errors {
+          margin-left: 30%;
+        }
+
+        .action {
+          text-align: center;
+          padding: 0;
+        }
+      }
     }
     &.conteneur-invisible {
       #active_admin_content {
@@ -133,26 +151,6 @@ body.logged_out {
 
     p {
       margin-bottom: 1rem;
-    }
-  }
-
-  .campagne {
-    fieldset {
-      padding: 1.5rem;
-
-      label {
-        padding-right: 20px;
-      }
-
-      .inline-hints,
-      .inline-errors {
-        margin-left: 30%;
-      }
-
-      .action {
-        text-align: center;
-        padding: 0;
-      }
     }
   }
 

@@ -15,7 +15,9 @@ class FabriqueRestitution
     def restitution_globale(evaluation, parties_selectionnees_ids = nil)
       parties_selectionnees_ids =
         initialise_selection(evaluation, parties_selectionnees_ids)
-      parties = Partie.where(id: parties_selectionnees_ids)
+      situation_valides_ids = evaluation.campagne.situations_configurations.select(:situation_id)
+      parties = Partie.where(id: parties_selectionnees_ids,
+                             situation_id: situation_valides_ids)
                       .includes(:situation).includes(evaluation: :campagne)
       restitutions_retenues = parties.map do |partie|
         instancie partie

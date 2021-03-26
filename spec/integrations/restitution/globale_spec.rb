@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 describe Restitution::Globale do
+  let(:campagne) { create :campagne }
   let(:situation)  { create :situation_objets_trouves }
-  let(:evaluation) { create :evaluation }
-  let(:evaluation2) { create :evaluation }
+  let(:evaluation) { create :evaluation, campagne: campagne }
+  let(:evaluation2) { create :evaluation, campagne: campagne }
   let(:partie_moyenne) do
     create :partie,
            situation: situation,
@@ -53,6 +54,8 @@ describe Restitution::Globale do
   let(:restitution_evaluation2) { FabriqueRestitution.restitution_globale(evaluation2) }
 
   before do
+    campagne.situations_configurations.create situation: situation
+
     # pour que les restitutions puisse retrouver les parties !
     create(:evenement_demarrage, partie: partie_moyenne)
     create(:evenement_demarrage, partie: partie2)

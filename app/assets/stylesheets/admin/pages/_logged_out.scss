@@ -63,14 +63,22 @@ body.logged_out {
     }
   }
 
-  h1 {
-    font-family: $font-titre;
+  .groupe-titres {
     width: $largeur-colonne;
-    color: $eva_light;
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.5rem;
     margin: 0 auto 3rem;
+    font-family: $font-titre;
+    text-align: center;
+    h1 {
+      color: $eva_light;
+      font-size: 1.5rem;
+      font-weight: bold;
+      + h2 {
+        margin-top: 1rem;
+      }
+    }
+    h2 {
+      font-size: 1rem;
+    }
   }
 
   .flashes {
@@ -157,9 +165,6 @@ body.logged_out {
     a {
       color: $eva_main_blue;
       float: none;
-    }
-    br:last-child {
-      display: none;
     }
   }
 

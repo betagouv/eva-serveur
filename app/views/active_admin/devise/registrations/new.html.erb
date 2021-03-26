@@ -1,5 +1,12 @@
+<% content_for :titre do %>
+  <%= t('.title') -%>
+<% end %>
+<% content_for :sous_titre do %>
+  <%= resource.structure&.nom || active_admin_application.site_title(self) -%>
+<% end %>
+
 <div id="login">
-  <h2><%= title t('.title', structure: resource.structure&.nom || active_admin_application.site_title(self) ) %></h2>
+  <p><strong><%= t('.description') -%></strong></p>
 
   <% scope = Devise::Mapping.find_scope!(resource_name) %>
   <%= render partial: "active_admin/devise/shared/error_messages", resource: resource %>
@@ -8,11 +15,11 @@
       f.input :prenom
       f.input :nom
       resource.class.authentication_keys.each_with_index { |key, index|
-        f.input key, label: t('active_admin.devise.'+key.to_s+'.title'), input_html: { autofocus: index.zero? }
+        f.input key, label: t('active_admin.devise.'+key.to_s+'.title')
       }
       f.input :telephone
       f.input :password
-      f.input :password_confirmation, wrapper_html: { class: 'libelle-long' }
+      f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
 
       if resource.structure.blank?
         f.input :structure,
@@ -27,6 +34,7 @@
     end
   end
   %>
-
-  <%= render partial: "active_admin/devise/shared/links" %>
+  <div class='liens-partages'>
+    <%= render partial: "active_admin/devise/shared/links" %>
+  </div>
 </div>

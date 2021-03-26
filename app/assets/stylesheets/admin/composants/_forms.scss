@@ -55,11 +55,14 @@ form input[type="password"],
 form input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
 form textarea,
-form ::placeholder,
-.sidebar_section form.filter_form ::placeholder,
 .select2-results__option,
 form > ol > li p.inline-hints {
   color: $eva_dark;
+}
+
+.sidebar_section form.filter_form ::placeholder,
+form ::placeholder {
+  color: $couleur-texte;
 }
 
 form input[type="text"],

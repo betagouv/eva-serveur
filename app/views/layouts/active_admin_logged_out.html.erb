@@ -32,7 +32,12 @@
 <div id="wrapper">
 
   <div id="content_wrapper" class="<%= yield :classes_conteneur %>">
-    <h1><%= yield :titre %></h1>
+    <div class="groupe-titres">
+      <h1><%= yield :titre %></h1>
+      <% if content_for?(:sous_titre) %>
+        <h2><%= yield :sous_titre %></h2>
+      <% end %>
+    </div>
     <div class="flashes">
       <% flash_messages.each do |type, message| %>
         <%= content_tag :div, message, class: "flash flash_#{type}" %>

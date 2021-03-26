@@ -14,7 +14,7 @@ body.logged_out .sous-panel {
   @include sous-carte;
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: flex-start;
 
   .infos {
     h4 {

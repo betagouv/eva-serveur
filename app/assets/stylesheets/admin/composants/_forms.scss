@@ -29,22 +29,23 @@ form fieldset > ol > li {
     display: flex;
     align-items: center;
   }
+  label {
+    line-height: 1.875rem;
+    font-size: .875rem;
+    width: 30%;
+    abbr[title] {
+      text-decoration:none;
+      color: $couleur-accent-erreur;
+    }
+  }
 }
 
 form fieldset ol > li,
 .sidebar_section form {
   label {
-    line-height: 1.875rem;
-    font-size: .875rem;
     text-transform: none;
     font-weight: normal;
     color: $eva_dark;
-    width: 30%;
-
-    abbr[title] {
-      text-decoration:none;
-      color: $couleur-accent-erreur;
-    }
   }
 }
 
@@ -120,5 +121,12 @@ form fieldset > ol > li p.inline-errors {
     margin: 0 0 0.5rem;
     padding: 10px 10px 10px 2rem;
     list-style: square;
+  }
+}
+
+.select2-container {
+  height: 32px;
+  .select2-selection {
+    border-radius: .5rem;
   }
 }

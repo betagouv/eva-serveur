@@ -10,7 +10,7 @@ form fieldset.actions li.cancel a,
   background: none;
 }
 form input[type="submit"],
-.has_many_container a.button, {
+.has_many_container a.button {
   @include bouton;
 }
 form input[type="submit"]:not(.disabled),
@@ -23,7 +23,7 @@ form input[type="submit"]:not(.disabled),
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a {
   @include bouton;
-  font-size: revert;
+  font-size: .7rem;
   margin-right: 0;
   color: $eva_main_blue;
   background-color: #fff;

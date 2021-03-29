@@ -6,7 +6,8 @@ class Compte < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :registerable
   validates :role, inclusion: { in: %w[administrateur organisation] }
-  validates :statut_validation, :nom, :prenom, presence: true
+  validates :statut_validation, presence: true
+  validates_presence_of :nom, :prenom, on: :create
   default_scope { order(created_at: :asc) }
 
   enum statut_validation: %i[en_attente acceptee refusee], _prefix: :validation

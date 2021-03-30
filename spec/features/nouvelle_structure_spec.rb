@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe 'Nouvelle Structure', type: :feature do
   before do
-    se_connecter_comme_administrateur
     visit nouvelle_structure_path
     fill_in :campagne_libelle, with: 'Nice, pack demandeur'
     fill_in :campagne_code, with: 'packdemandeur_nice'
@@ -42,7 +41,7 @@ describe 'Nouvelle Structure', type: :feature do
     expect(compte.structure_id).to eq(structure.id)
     expect(compte.validation_acceptee?).to eq(true)
 
-    expect(current_path).to eq(admin_campagne_path(campagne))
+    expect(current_path).to eq(admin_dashboard_path)
   end
 
   it 'initialiser la campagne avec les situations par défaut si elles existes' do

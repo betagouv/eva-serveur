@@ -13,7 +13,9 @@ class NouvellesStructuresController < ApplicationController
   def create
     @campagne = Campagne.new campagne_parametres
     if @campagne.save
-      redirect_to admin_campagne_path(@campagne)
+      NouveauxComptesMailer.with(campagne: @campagne).email_nouveau_compte.deliver_now
+      sign_in @campagne.compte
+      redirect_to admin_dashboard_path
     else
       render :show
     end

@@ -20,7 +20,7 @@ describe 'Nouvelle Structure', type: :feature do
 
   it 'créé stucture, compte et campagne' do
     expect do
-      click_on 'Valider la création de ma structure'
+      click_on 'Valider la création de mon compte'
     end.to change(Structure, :count)
       .and change(Compte, :count)
       .and change(Campagne, :count)
@@ -51,7 +51,7 @@ describe 'Nouvelle Structure', type: :feature do
     objets_trouves = create :situation_objets_trouves
 
     expect do
-      click_on 'Valider la création de ma structure'
+      click_on 'Valider la création de mon compte'
     end.to change(Campagne, :count)
 
     campagne = Campagne.last

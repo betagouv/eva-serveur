@@ -7,14 +7,8 @@
   <%= campagne.semantic_errors *campagne.object.errors.messages.keys %>
   <%= campagne.semantic_fields_for :compte do |compte| %>
     <%= compte.semantic_fields_for :structure do |structure| %>
-      <%= structure.inputs class: 'panel' do %>
-        <h3><%= t('.structure.titre') %></h3>
-        <%= structure.input :nom %>
-        <%= structure.input :code_postal %>
-      <% end %>
       <%= compte.inputs class: 'panel' do %>
         <h3><%= t('.compte.titre') %></h3>
-        <%= md t('.compte.description') %>
         <%= compte.input :prenom %>
         <%= compte.input :nom %>
         <%= compte.input :telephone %>
@@ -22,8 +16,15 @@
         <%= compte.input :password %>
         <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
       <% end %>
+      <%= structure.inputs class: 'panel' do %>
+        <h3 class="avec-description"><%= t('.structure.titre') %></h3>
+        <p class="description"><%= t('.structure.description') %></p>
+        <%= structure.input :nom %>
+        <%= structure.input :code_postal %>
+      <% end %>
       <%= campagne.inputs class: 'panel' do %>
-        <h3><%= t('.campagne.titre') %></h3>
+        <h3 class="avec-description"><%= t('.campagne.titre') %></h3>
+        <p class="description"><%= t('.campagne.description').html_safe %></p>
         <%= campagne.input :libelle %>
         <%= campagne.input :code %>
       <% end %>

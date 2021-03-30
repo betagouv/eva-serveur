@@ -129,6 +129,10 @@ body.logged_out {
     padding: 0;
   }
 
+  h3.avec-description {
+    margin-bottom: .5rem;
+  }
+
   a {
     color: $eva_main_blue;
   }
@@ -158,6 +162,11 @@ body.logged_out {
 
     p {
       margin-bottom: 1rem;
+    }
+
+    .description {
+      font-size: 0.875rem;
+      font-style: italic;
     }
   }
 

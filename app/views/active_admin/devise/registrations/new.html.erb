@@ -2,7 +2,7 @@
   <%= t('.title') -%>
 <% end %>
 <% content_for :sous_titre do %>
-  <%= resource.structure&.nom || active_admin_application.site_title(self) -%>
+  <%= resource.structure.nom -%>
 <% end %>
 
 <div id="login">
@@ -20,14 +20,7 @@
       f.input :telephone
       f.input :password
       f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
-
-      if resource.structure.blank?
-        f.input :structure,
-                hint: t('.nouvelle_structure_html', lien: nouvelle_structure_path),
-                collection: Hash[Structure.order(:code_postal).map{|s| ["#{s.code_postal} - #{s.nom}",s.id]}]
-      else
-        f.input :structure_id, as: :hidden
-      end
+      f.input :structure_id, as: :hidden
     end
     f.actions do
       f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit') }

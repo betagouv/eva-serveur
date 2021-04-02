@@ -27,7 +27,7 @@ div class: 'evaluations bloc-apercu' do
       end
       div class: 'premiere-visite-action' do
         text_node md t('.premiere-visite.description')
-        text_node link_to t('.premiere-visite.action'), 'https://drive.google.com/file/d/1bsNfv0viYwM9-uOSPdwVOi7yr_hRzI7C/view',
+        text_node link_to t('.premiere-visite.action'), Eva.document_prise_en_main,
                           target: '_blank', class: 'action'
       end
     end

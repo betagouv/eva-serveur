@@ -33,8 +33,21 @@ body.logged_out {
     &.conteneur-elargi {
       width: 640px;
 
+      .panel {
+        padding: 1.5rem 1.5rem 1rem;
+      }
+
+      .description {
+        font-size: 0.875rem;
+        font-style: italic;
+      }
+
       fieldset {
-        padding: 1.5rem;
+        &.inputs {
+          margin-bottom: 0;
+          padding-top: 1rem;
+          background-color: #fff;
+        }
 
         label {
           padding-right: 20px;
@@ -45,6 +58,10 @@ body.logged_out {
           margin-left: 30%;
         }
 
+        &.actions {
+          margin-bottom: 0;
+        }
+        
         .action {
           text-align: center;
           padding: 0;
@@ -125,12 +142,11 @@ body.logged_out {
 
   h3 {
     @include titre-carte;
-    margin-bottom: 1.5rem;
-    padding: 0;
-  }
-
-  h3.avec-description {
     margin-bottom: .5rem;
+    padding: 0;
+    + .description {
+      margin-bottom: 0;
+    }
   }
 
   a {
@@ -162,11 +178,6 @@ body.logged_out {
 
     p {
       margin-bottom: 1rem;
-    }
-
-    .description {
-      font-size: 0.875rem;
-      font-style: italic;
     }
   }
 

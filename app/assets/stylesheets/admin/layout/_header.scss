@@ -27,7 +27,7 @@
     display: block;
     height: auto;
     &#tabs {
-      padding: 0;
+      padding: 0 5rem 0 0;
     }
     > li {
       margin-right: 0;
@@ -38,7 +38,7 @@
         background: #fff;
       }
       > a {
-        padding: 0.38rem 0.87rem;
+        padding: 0.52rem 0.87rem;
         border-radius: 1.9rem;
       }
       &.has_nested {
@@ -69,6 +69,20 @@
             color: $eva_main_blue;
           }
         }
+      }
+    }
+    #aide {
+      position: absolute;
+      top: 50%;
+      right: 1.25rem;
+      margin-top: -.52rem;
+      a {
+        padding-left: 2rem;
+        background: $eva_main_blue asset-data-url('icon_aide.svg') no-repeat 10px 8px;
+      }
+      a:hover,
+      &.current > a {
+        color: #fff;
       }
     }
   }

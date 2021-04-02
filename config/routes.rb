@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  get '/', to: redirect('/admin/dashboard')
+  root to: redirect('/admin/dashboard')
 
   resource :nouvelle_structure, only: [:create, :show]
   resources :structures, only: :index

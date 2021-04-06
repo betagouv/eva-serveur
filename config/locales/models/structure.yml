@@ -8,6 +8,7 @@ fr:
         code_postal: Code Postal
         type_structure:
           one: 'Type de structure'
+          non_communique: Non communiqué
           mission_locale: Mission locale
           pole_emploi: Pôle Emploi
           SIAE: SIAE

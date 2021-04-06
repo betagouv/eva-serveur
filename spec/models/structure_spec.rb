@@ -5,6 +5,14 @@ require 'rails_helper'
 describe Structure, type: :model do
   it { should validate_presence_of(:nom) }
   it { should validate_presence_of(:code_postal) }
+  it { should validate_presence_of(:type_structure) }
+  it do
+    types_structures = %w[
+      mission_locale pole_emploi SIAE centre_action_social CRIA
+      organisme_formation orientation_scolaire cap_emploi e2c autre
+    ]
+    should validate_inclusion_of(:type_structure).in_array(types_structures)
+  end
 
   describe 'géolocalisation à la validation' do
     let(:structure) { Structure.new code_postal: '75012' }

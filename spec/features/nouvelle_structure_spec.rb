@@ -14,6 +14,7 @@ describe 'Nouvelle Structure', type: :feature do
     fill_in :campagne_compte_attributes_password, with: 'billyjoel'
     fill_in :campagne_compte_attributes_password_confirmation, with: 'billyjoel'
     fill_in :campagne_compte_attributes_structure_attributes_nom, with: 'Mission Locale Nice'
+    select 'Mission locale'
     fill_in :campagne_compte_attributes_structure_attributes_code_postal, with: '06000'
   end
 
@@ -35,6 +36,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     structure = Structure.order(:created_at).last
     expect(structure.nom).to eq('Mission Locale Nice')
+    expect(structure.type_structure).to eq('mission_locale')
     expect(structure.code_postal).to eq('06000')
 
     expect(campagne.compte_id).to eq(compte.id)

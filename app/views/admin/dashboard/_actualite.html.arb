@@ -2,7 +2,7 @@
 
 div class: 'carte-actualite' do
   div class: 'illustration' do
-    image_tag url_for(actualite.illustration) if actualite.illustration.attached? && affiche_image
+    image_tag cdn_for(actualite.illustration) if actualite.illustration.attached? && affiche_image
   end
   div class: 'texte' do
     status_tag actualite.categorie

@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+panel 'Détails de la structure' do
+  attributes_table_for structure do
+    row :nom
+    row(:type_structure) do
+      traduction_type_structure(structure.type_structure)
+    end
+    row :code_postal
+    row :latitude
+    row :longitude
+    row :created_at
+    row :updated_at
+  end
+end

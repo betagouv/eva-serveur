@@ -23,10 +23,7 @@
         <p class="description"><%= t('.structure.description') %></p>
         <%= structure.inputs do %>
           <%= structure.input :nom %>
-          <% collection = Structure::TYPES_STRUCTURES.map do |type_structure|
-            [I18n.t("activerecord.attributes.structure.type_structure.#{type_structure}"), type_structure]
-          end %>
-          <%= structure.input :type_structure, as: :select, collection: collection  %>
+          <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
           <%= structure.input :code_postal %>
         <% end %>
       </div>

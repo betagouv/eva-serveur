@@ -5,7 +5,7 @@ class QuestionRedactionNote < Question
     json = slice(:id, :intitule, :intitule_reponse, :description, :reponse_placeholder)
     json['type'] = 'redaction_note'
     if illustration.attached?
-      json['illustration'] = Rails.application.routes.url_helpers.url_for(illustration)
+      json['illustration'] = ApplicationController.helpers.cdn_for(illustration)
     end
     json
   end

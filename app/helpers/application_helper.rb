@@ -33,4 +33,10 @@ module ApplicationHelper
     image_src64 = "data:image/svg+xml;base64,#{encodage}"
     image_tag image_src64, options
   end
+
+  def cdn_for(fichier)
+    return Rails.application.routes.url_helpers.url_for(fichier) unless Rails.env.production?
+
+    "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_STOCKAGE']}/#{fichier.key}"
+  end
 end

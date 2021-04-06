@@ -54,6 +54,7 @@ form input[type="text"],
 form input[type="email"],
 form input[type="password"],
 form input[type="tel"],
+form select,
 .sidebar_section form.filter_form input[type="text"],
 form textarea,
 .select2-results__option,
@@ -71,10 +72,23 @@ form input[type="email"],
 form input[type="password"],
 form input[type="tel"],
 .sidebar_section form.filter_form input[type="text"],
-form text-area,
+form textarea,
+form select,
 .select2-results__option {
   border-color: $bluegrey;
   border-radius: .5rem;
+
+  &:focus {
+    border: 1px solid $eva_main_blue;
+    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+  }
+}
+
+form select {
+  appearance: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .select2-container--default .select2-selection--single {

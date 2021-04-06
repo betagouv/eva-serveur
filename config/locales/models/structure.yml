@@ -6,6 +6,18 @@ fr:
         updated_at: Mise à jour le
         nom: Nom de la structure
         code_postal: Code Postal
+        type_structure:
+          one: 'Type de structure'
+          mission_locale: Mission locale
+          pole_emploi: Pôle Emploi
+          SIAE: SIAE
+          centre_action_social: Centre d'action social
+          CRIA: CRIA
+          organisme_formation: Organisme de formation
+          orientation_scolaire: Orientation scolaire
+          cap_emploi: Cap emploi
+          e2c: École de la 2e chance
+          autre: Autre
   formtastic:
     actions:
       structure:

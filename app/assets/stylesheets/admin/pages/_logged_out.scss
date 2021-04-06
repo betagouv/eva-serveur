@@ -61,7 +61,7 @@ body.logged_out {
         &.actions {
           margin-bottom: 0;
         }
-        
+
         .action {
           text-align: center;
           padding: 0;
@@ -157,8 +157,30 @@ body.logged_out {
     input[type=text],
     input[type=email],
     input[type=tel],
-    input[type=password] {
+    input[type=password],
+    select {
       width: 70%;
+    }
+
+
+    li.select {
+      position: relative;
+
+      &:after {
+        content: '';
+        color: $eva_main_blue;
+        right: 0.7rem;
+        top: 0.9rem;
+        position: absolute;
+        pointer-events: none;
+        background-image: asset-data-url('fleche_select.svg');
+        height: 1rem;
+        width: 1rem;
+      }
+    }
+
+    select {
+      padding: 8px 10px 7px;
     }
 
     &.actions {

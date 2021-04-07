@@ -42,6 +42,7 @@ describe 'Nouvelle Structure', type: :feature do
     expect(compte.validation_acceptee?).to eq(true)
 
     expect(current_path).to eq(admin_dashboard_path)
+    expect(page).to have_content 'Bienvenue ! Vous vous êtes bien enregistré(e).'
   end
 
   it 'initialiser la campagne avec les situations par défaut si elles existes' do

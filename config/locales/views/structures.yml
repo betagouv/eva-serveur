@@ -6,7 +6,7 @@ fr:
         **Vous souhaitez créer un compte conseiller eva.**
         Dans un premier temps merci de regarder si votre structure est déjà enregistrée.
       label_champ_recherche: 'Indiquez votre code postal ou votre ville :'
-      structure_introuvable: Ajouter ma structure
+      structure_non_referencee: Ajouter ma structure
     structure:
       code_postal: 'Code postal : '
       rejoindre_structure: Rejoindre

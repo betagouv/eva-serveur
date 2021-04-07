@@ -6,6 +6,7 @@ fr:
         **Vous souhaitez créer un compte conseiller eva.**
         Dans un premier temps, vous devez retrouver votre structure.
       label_champ_recherche: 'Indiquez votre code postal ou votre ville :'
+      aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
       structure_non_referencee: Structure non référencée ?
     structure:
       code_postal: 'Code postal : '

@@ -3,12 +3,10 @@
 active_admin_form_for [:admin, resource] do |f|
   f.semantic_errors
 
-  div class: 'panel' do
-    div class: 'panel_contenu' do
-      para { t('.explication_campagne') }
-      br
-      para { t('.explication_code') }
-    end
+  div do
+    para { t('.explication_campagne') }
+    br
+    para { t('.explication_code') }
   end
 
   f.inputs do

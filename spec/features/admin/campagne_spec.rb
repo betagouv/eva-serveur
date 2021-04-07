@@ -3,13 +3,14 @@
 require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
-  let!(:compte_connecte) { se_connecter_comme_organisation }
+  let(:compte_organisation) { create :compte_organisation }
+  let!(:compte_connecte) { connecte(compte_organisation) }
   let!(:ma_campagne) do
     create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
   end
-  let(:compte_organisation) { create :compte_organisation, email: 'orga@eva.fr' }
   let!(:campagne) do
-    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: compte_organisation
+    autre_compte_organisation = create :compte_organisation, email: 'orga@eva.fr'
+    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_organisation
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }
   let!(:evaluation_organisation) { create :evaluation, campagne: ma_campagne }
@@ -63,21 +64,39 @@ describe 'Admin - Campagne', type: :feature do
 
     context 'en administrateur' do
       before do
-        Compte.first.update(role: 'administrateur')
+        compte_organisation.update(role: 'administrateur')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
         select 'Mon QCM'
-        select 'orga@eva.fr'
       end
 
-      context 'crée la campagne avec le code donné, associé au compte courant' do
+      context 'crée la campagne, associé au compte courant et initialise les situations' do
+        let!(:situation) { create :situation_inventaire }
         before { fill_in :campagne_code, with: 'EUROCKS' }
         it do
           expect { click_on 'Créer' }.to(change { Campagne.count })
-          expect(Campagne.last.code).to eq 'EUROCKS'
-          expect(Campagne.last.compte).to eq compte_organisation
+          campagne = Campagne.order(:created_at).last
+          expect(campagne.code).to eq 'EUROCKS'
+          expect(campagne.compte).to eq compte_organisation
+          expect(page).to have_content situation.libelle
           expect(page).to have_content 'Mon QCM'
         end
+      end
+    end
+
+    context 'en organisation' do
+      before do
+        visit new_admin_campagne_path
+        fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
+        fill_in :campagne_code, with: 'BELFORT2021'
+      end
+
+      it do
+        expect { click_on 'Créer' }.to(change { Campagne.count })
+        campagne = Campagne.order(:created_at).last
+        expect(campagne.libelle).to eq 'Belfort, pack demandeur'
+        expect(campagne.code).to eq 'BELFORT2021'
+        expect(campagne.compte).to eq compte_organisation
       end
     end
   end
@@ -86,7 +105,7 @@ describe 'Admin - Campagne', type: :feature do
     context 'en admin' do
       let(:situation) { create :situation_inventaire }
       before do
-        Compte.first.update(role: 'administrateur')
+        compte_organisation.update(role: 'administrateur')
         campagne.situations_configurations.create! situation: situation
         visit admin_campagne_path campagne
       end

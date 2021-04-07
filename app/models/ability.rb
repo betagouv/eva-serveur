@@ -30,6 +30,7 @@ class Ability
   end
 
   def droit_campagne(compte)
+    can :create, Campagne
     can %i[update read], Campagne, comptes_de_meme_structure(compte)
     can :destroy, Campagne do |c|
       Evaluation.where(campagne: c).count.zero?

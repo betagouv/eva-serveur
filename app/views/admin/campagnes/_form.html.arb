@@ -13,13 +13,15 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :compte if can?(:manage, Compte)
     f.input :libelle
     f.input :code
-    f.input :affiche_competences_fortes if current_compte.administrateur?
-    f.input :questionnaire if current_compte.administrateur?
-    if can?(:manage, Situation)
-      f.has_many :situations_configurations, allow_destroy: true do |c|
-        c.input :id, as: :hidden
-        c.input :situation
-        c.input :questionnaire
+    unless f.object.new_record?
+      f.input :affiche_competences_fortes if current_compte.administrateur?
+      f.input :questionnaire if current_compte.administrateur?
+      if can?(:manage, Situation)
+        f.has_many :situations_configurations, allow_destroy: true do |c|
+          c.input :id, as: :hidden
+          c.input :situation
+          c.input :questionnaire
+        end
       end
     end
   end

@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors
+
+  div class: 'panel' do
+    div class: 'panel_contenu' do
+      para { t('.explication_campagne') }
+      br
+      para { t('.explication_code') }
+    end
+  end
+
+  f.inputs do
+    f.input :compte if can?(:manage, Compte)
+    f.input :libelle
+    f.input :code
+    f.input :affiche_competences_fortes if current_compte.administrateur?
+    f.input :questionnaire if current_compte.administrateur?
+    if can?(:manage, Situation)
+      f.has_many :situations_configurations, allow_destroy: true do |c|
+        c.input :id, as: :hidden
+        c.input :situation
+        c.input :questionnaire
+      end
+    end
+  end
+  f.actions
+end

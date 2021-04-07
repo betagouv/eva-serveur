@@ -1,0 +1,6 @@
+fr:
+  admin:
+    campagnes:
+      form:
+        explication_campagne: Une campagne eva, est un ensemble d’exercices formant un parcours d’évaluation. Pour regrouper vos passations eva, vous avez donc besoin de créer une “campagne”.
+        explication_code: Les bénéficiaires auront eux besoin du code campagne pour démarrer leur session.

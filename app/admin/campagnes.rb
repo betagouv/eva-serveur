@@ -4,7 +4,7 @@ ActiveAdmin.register Campagne do
   menu priority: 3
 
   permit_params :libelle, :code, :questionnaire_id, :compte,
-                :compte_id, :affiche_competences_fortes,
+                :compte_id, :affiche_competences_fortes, :initialise_situations,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle
@@ -29,30 +29,27 @@ ActiveAdmin.register Campagne do
     render partial: 'show'
   end
 
-  form do |f|
-    f.semantic_errors
-    f.inputs do
-      f.input :compte if can?(:manage, Compte)
-      f.input :libelle
-      f.input :code
-      f.input :affiche_competences_fortes
-      f.input :questionnaire
-      f.has_many :situations_configurations, allow_destroy: true do |c|
-        c.input :id, as: :hidden
-        c.input :situation
-        c.input :questionnaire
-      end
-    end
-    f.actions
-  end
+  form partial: 'form'
 
   controller do
     helper_method :statistiques
+
+    before_action :assigne_valeurs_par_defaut, only: %i[new create]
+
+    def create
+      params[:campagne][:initialise_situations] = true
+      create!
+    end
 
     private
 
     def statistiques
       @statistiques ||= StatistiquesCampagne.new(resource)
+    end
+
+    def assigne_valeurs_par_defaut
+      params[:campagne] ||= {}
+      params[:campagne][:compte_id] ||= current_compte.id
     end
   end
 end

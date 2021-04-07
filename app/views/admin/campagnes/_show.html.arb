@@ -23,9 +23,16 @@ if can?(:manage, Compte)
 end
 
 panel 'Configuration' do
-  reorderable_table_for campagne.situations_configurations.includes(:situation) do
-    column :situation
-    column :questionnaire, &:questionnaire_utile
+  if can? :update, Situation
+    reorderable_table_for campagne.situations_configurations do
+      column :situation
+      column :questionnaire, &:questionnaire_utile
+    end
+  else
+    table_for campagne.situations_configurations do
+      column :situation
+      column :questionnaire, &:questionnaire_utile
+    end
   end
 end
 

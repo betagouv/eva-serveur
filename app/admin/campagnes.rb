@@ -49,7 +49,7 @@ ActiveAdmin.register Campagne do
     private
 
     def find_resource
-      scoped_collection.includes(situations_configurations: [:situation, :questionnaire])
+      scoped_collection.includes(situations_configurations: %i[situation questionnaire])
                        .where(id: params[:id])
                        .first!
     end

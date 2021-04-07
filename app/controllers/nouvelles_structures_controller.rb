@@ -15,7 +15,7 @@ class NouvellesStructuresController < ApplicationController
     if @campagne.save
       NouveauxComptesMailer.with(campagne: @campagne).email_nouveau_compte.deliver_now
       sign_in @campagne.compte
-      redirect_to admin_dashboard_path
+      redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
     else
       render :show
     end

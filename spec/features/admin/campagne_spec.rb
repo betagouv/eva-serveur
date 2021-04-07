@@ -60,14 +60,11 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'création' do
-    let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
-
     context 'en administrateur' do
       before do
         compte_organisation.update(role: 'administrateur')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
-        select 'Mon QCM'
       end
 
       context 'crée la campagne, associé au compte courant et initialise les situations' do
@@ -79,7 +76,6 @@ describe 'Admin - Campagne', type: :feature do
           expect(campagne.code).to eq 'EUROCKS'
           expect(campagne.compte).to eq compte_organisation
           expect(page).to have_content situation.libelle
-          expect(page).to have_content 'Mon QCM'
         end
       end
     end
@@ -97,6 +93,32 @@ describe 'Admin - Campagne', type: :feature do
         expect(campagne.libelle).to eq 'Belfort, pack demandeur'
         expect(campagne.code).to eq 'BELFORT2021'
         expect(campagne.compte).to eq compte_organisation
+      end
+    end
+  end
+
+  describe 'modification' do
+    let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
+
+    context 'en administrateur' do
+      before do
+        compte_organisation.update(role: 'administrateur')
+        visit edit_admin_campagne_path(campagne)
+        select 'Mon QCM'
+      end
+
+      context 'modifie la campagne et ses situations' do
+        let!(:situation) { create :situation_inventaire }
+        before do
+          fill_in :campagne_code, with: 'EUROCKS'
+          click_on 'Enregistrer'
+        end
+
+        it do
+          campagne = Campagne.order(:created_at).last
+          expect(campagne.code).to eq 'EUROCKS'
+          expect(page).to have_content 'Mon QCM'
+        end
       end
     end
   end

@@ -41,10 +41,17 @@ ActiveAdmin.register Campagne do
       create!
     end
 
+    def show
+      @statistiques ||= StatistiquesCampagne.new(resource)
+      show!
+    end
+
     private
 
-    def statistiques
-      @statistiques ||= StatistiquesCampagne.new(resource)
+    def find_resource
+      scoped_collection.includes(situations_configurations: [:situation, :questionnaire])
+                       .where(id: params[:id])
+                       .first!
     end
 
     def assigne_valeurs_par_defaut

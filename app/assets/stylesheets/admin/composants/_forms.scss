@@ -86,6 +86,10 @@ form select,
 
 form select {
   appearance: none;
+  border-style: solid;
+  border-width: 1px;
+  height: 2rem;
+
   &:focus {
     outline: none;
   }

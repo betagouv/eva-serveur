@@ -225,10 +225,12 @@ body.logged_out {
     .champ-recherche {
       margin-right: .5rem;
     }
+    .aucun-resultat {
+      margin-top: 1rem;
+    }
     .actions {
       display: flex;
     }
-
     .creer-structure {
       @include bouton;
       margin: 1rem 0 0 auto;

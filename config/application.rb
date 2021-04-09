@@ -47,6 +47,8 @@ module EvaServeur
       protocol: ENV['PROTOCOLE_SERVEUR']
     }
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'

@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/cprodhomme/activeadmin-xls
+  revision: 78bdaf000b3c75ed9cfa58f5889761a573d8de15
+  specs:
+    activeadmin-xls (2.0.2)
+      activeadmin (>= 1.0.0)
+      spreadsheet (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,9 +65,6 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 5.2, < 6.2)
       ransack (~> 2.1, >= 2.1.1)
-    activeadmin-xls (2.0.2)
-      activeadmin (>= 1.0.0)
-      spreadsheet (~> 1.0)
     activeadmin_addons (1.7.1)
       active_material
       railties
@@ -429,7 +434,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin-humanized_enum
   activeadmin
-  activeadmin-xls
+  activeadmin-xls!
   activeadmin_addons
   activeadmin_reorderable
   acts_as_list

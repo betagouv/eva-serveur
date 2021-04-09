@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-describe CompteMailer, type: :mailer do
-  describe '#nouveau_compte' do
-    it 'envoie un email de confirmation de création de compte' do
-      structure = Structure.new nom: 'Ma Super Structure'
+describe StructureMailer, type: :mailer do
+  describe '#nouvelle_structure' do
+    it "envoie un email pour informer de la création d'une structure" do
+      id = SecureRandom.uuid
+      structure = Structure.new nom: 'Ma Super Structure', id: id
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
-      campagne = Campagne.new compte: compte, libelle: 'Paris 2019', code: 'paris2019'
 
-      email = CompteMailer.with(campagne: campagne).nouveau_compte
+      email = StructureMailer.with(compte: compte, structure: structure).nouvelle_structure
 
       assert_emails 1 do
         email.deliver_now
@@ -17,14 +17,13 @@ describe CompteMailer, type: :mailer do
 
       expect(email.from).to eql([Eva::EMAIL_CONTACT])
       expect(email.to).to eql(['debut@test.com'])
-      expect(email.subject).to eql('Votre accès eva à « Ma Super Structure »')
+      expect(email.subject).to eql('Création de « Ma Super Structure »')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Paule')
-      expect(email.body).to include('debut@test.com')
       expect(email.body).to include('Ma Super Structure')
       expect(email.body).to include('Besoin d&#39;aide')
       expect(email.body).to include(Eva::DOCUMENT_PRISE_EN_MAIN)
-      expect(email.body).to include('paris2019')
+      expect(email.body).to include("http://test.com/admin/sign_up?structure_id=#{id}")
     end
   end
 end

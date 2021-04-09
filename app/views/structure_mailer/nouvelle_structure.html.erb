@@ -1,8 +1,7 @@
 <%= md t('.corps',
          prenom: @compte.prenom,
          email: @compte.email,
-         structure: @compte.structure.nom,
-         code_campagne: @campagne.code,
-         url_connexion: root_url
+         structure: @structure.nom,
+         url_inscription: "#{root_url}admin/sign\\_up?structure\\_id=#{@structure.id}"
         ) %>
 <%= md t('layouts.mailer.aide_conseiller', document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN) %>

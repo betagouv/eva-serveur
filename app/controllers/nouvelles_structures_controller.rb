@@ -13,7 +13,7 @@ class NouvellesStructuresController < ApplicationController
   def create
     @campagne = Campagne.new campagne_parametres
     if @campagne.save
-      CompteMailer.with(campagne: @campagne).nouveau_compte.deliver_later
+      envoie_emails
       sign_in @campagne.compte
       redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
     else
@@ -27,5 +27,12 @@ class NouvellesStructuresController < ApplicationController
     parametres = params.require(:campagne).permit!.to_h
     parametres.deep_merge(initialise_situations: true,
                           compte_attributes: { statut_validation: :acceptee })
+  end
+
+  def envoie_emails
+    CompteMailer.with(campagne: @campagne).nouveau_compte.deliver_later
+    StructureMailer.with(compte: @campagne.compte, structure: @campagne.compte.structure)
+                   .nouvelle_structure
+                   .deliver_later
   end
 end

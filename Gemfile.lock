@@ -149,6 +149,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.8)
+    connection_pool (2.2.3)
     crass (1.0.6)
     descriptive_statistics (2.4.0)
     devise (4.7.3)
@@ -324,6 +325,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
+    redis (4.2.5)
     regexp_parser (2.1.1)
     require_all (1.5.0)
     responders (3.0.1)
@@ -392,6 +394,10 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spreadsheet (1.2.8)
       ruby-ole
     spring (2.1.1)
@@ -465,12 +471,14 @@ DEPENDENCIES
   rails-i18n
   random_name_generator
   redcarpet
+  redis
   rollbar
   rspec-rails
   rspec_junit_formatter (~> 0.4.1)
   rubocop
   rubocop-rspec
   shoulda-matchers
+  sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   tarteaucitron

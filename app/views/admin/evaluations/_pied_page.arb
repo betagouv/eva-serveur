@@ -2,5 +2,5 @@
 
 div class: 'pied-page' do
   render avant_pied_page if defined?(avant_pied_page)
-  div 'contact@eva.beta.gouv.fr', class: 'contact'
+  div Eva::EMAIL_CONTACT, class: 'contact'
 end

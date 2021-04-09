@@ -14,7 +14,7 @@ describe NouveauxComptesMailer, type: :mailer do
       email.deliver_now
     end
 
-    expect(email.from).to eql(['contact@eva.beta.gouv.fr'])
+    expect(email.from).to eql([Eva::EMAIL_CONTACT])
     expect(email.to).to eql(['debut@test.com'])
     expect(email.subject).to eql('Votre accès eva à « Ma Super Structure »')
     expect(email.multipart?).to be(false)

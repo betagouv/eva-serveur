@@ -11,7 +11,7 @@ div class: 'aide__contact' do
       h4 t('.support.titre')
     end
     div do
-      md t('.support.description')
+      md t('.support.description', email_contact: Eva::EMAIL_CONTACT)
     end
   end
 end

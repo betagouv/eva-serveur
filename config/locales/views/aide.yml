@@ -19,6 +19,6 @@ fr:
           description: "Pour bénéficier de support technique, signaler un bug, nous faire des suggestions, ou toute autre question, écrivez-nous sur :
 
 
-          [contact@eva.beta.gouv.fr](mailto:contact@eva.beta.gouv.fr)"
+          [%{email_contact}](mailto:%{email_contact})"
       faq:
         titre: Foire aux questions

@@ -39,7 +39,7 @@ fr:
         L'équipe eva
 
         --
-        [contact@eva.beta.gouv.fr](mailto:contact@eva.beta.gouv.fr)
+        [%{email_contact}](mailto:%{email_contact})
         Startup eva
         Direction interministérielle du numérique (DINUM) – beta.gouv.fr
         https://eva.beta.gouv.fr/

@@ -25,7 +25,7 @@ end
 panel 'Configuration' do
   para do
     span t('.demande_aide_pour_configuration_campagne')
-    span mail_to 'contact@eva.beta.gouv.fr'
+    span mail_to Eva::EMAIL_CONTACT
   end
   if can?(:manage, Compte)
     reorderable_table_for campagne.situations_configurations do

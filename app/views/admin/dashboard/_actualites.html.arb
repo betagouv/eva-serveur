@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 div class: 'actualites bloc-apercu' do
-  h3 t('.titre')
-  text_node link_to 'Voir toutes les actualités', admin_actualites_path
+  div class: 'bloc-apercu-header' do
+    h3 t('.titre')
+    text_node link_to 'Voir toutes les actualités', admin_actualites_path
+  end
+
   div class: 'actualites-liste' do
     div class: 'derniere-actualite' do
       render 'actualite', actualite: actualites.first, affiche_image: true

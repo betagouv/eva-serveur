@@ -21,6 +21,7 @@
 @import 'admin/layout/footer';
 @import 'admin/layout/breadcrumb';
 @import 'admin/layout/content';
+@import 'admin/layout/main_structure';
 
 @import 'admin/composants/filtres';
 @import 'admin/composants/panels';
@@ -40,6 +41,7 @@
 @import 'admin/pages/contacts';
 @import 'admin/pages/logged_out';
 @import 'admin/comptes';
+@import 'admin/pages/campagne';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

@@ -1,0 +1,30 @@
+.campagne {
+  $grid-columns:      8;
+  $grid-gutter-width: 0;
+  @import "../../bootstrap_minimal";
+
+  .titre {
+    @include titre;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    &--medium {
+      font-size: 1.25rem;
+    }
+  }
+
+  .description {
+    font-size: 0.875rem;
+    font-style: italic;
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  fieldset.inputs {
+    background-color: #fff;
+    input[type="text"],
+    .select2 {
+      width: 70% !important;
+    }
+  }
+}

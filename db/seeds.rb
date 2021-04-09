@@ -79,7 +79,7 @@ Aide::QuestionFrequente.find_or_create_by(question: 'Est-il possible de refaire 
   Cependant, dans une visée plus pédagogique, notamment pour encourager les candidat·es dans leurs progrès, vous pourriez utiliser eva à nouveau.}
 end
 Aide::QuestionFrequente.find_or_create_by(question: 'Peut-on découper la passation en plusieurs temps ?') do |faq|
-  faq.reponse= %{Aujourd’hui, eva ne permet pas de découper la passation en plusieurs temps, car les calculs de fiabilité ont été réalisés à partir de données de participants ayant passé le parcours complet d’une seule traite. Ainsi, en réalisant le parcours de façon « découpée », nous pourrions perdre en fiabilité des mesures et donc diminuer la qualité des résultats. Si cela constitue un frein pour vous en tant qu’accompagnant·e, n’hésitez pas à nous écrire [contact@eva.beta.gouv.fr](mailto:contact@eva.beta.gouv.fr) et nous dire pourquoi.}
+  faq.reponse= "Aujourd’hui, eva ne permet pas de découper la passation en plusieurs temps, car les calculs de fiabilité ont été réalisés à partir de données de participants ayant passé le parcours complet d’une seule traite. Ainsi, en réalisant le parcours de façon « découpée », nous pourrions perdre en fiabilité des mesures et donc diminuer la qualité des résultats. Si cela constitue un frein pour vous en tant qu’accompagnant·e, n’hésitez pas à nous écrire [#{Eva::EMAIL_CONTACT}](mailto:#{Eva::EMAIL_CONTACT}) et nous dire pourquoi."
 end
 Aide::QuestionFrequente.find_or_create_by(question: 'Est-ce que je peux réaliser des passations à distance ?') do |faq|
   faq.reponse= %{Il est tout à fait possible de réaliser des sessions à distance. Nous avons même créé un petit guide pour vous accompagner dans l’utilisation d’eva à distance : Guide du distanciel}

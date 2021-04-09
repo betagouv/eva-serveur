@@ -37,6 +37,7 @@ module ApplicationHelper
   def cdn_for(fichier)
     return Rails.application.routes.url_helpers.url_for(fichier) unless Rails.env.production?
 
-    "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_STOCKAGE']}/#{fichier.key}"
+    param = "filename=#{fichier.filename}"
+    "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_STOCKAGE']}/#{fichier.key}?#{param}"
   end
 end

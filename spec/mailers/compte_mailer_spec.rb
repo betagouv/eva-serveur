@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-describe NouveauxComptesMailer, type: :mailer do
+describe CompteMailer, type: :mailer do
   it 'envoie un email de confirmation de création de compte' do
     structure = Structure.new nom: 'Ma Super Structure'
     compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
     campagne = Campagne.new compte: compte, libelle: 'Paris 2019', code: 'paris2019'
 
-    email = NouveauxComptesMailer.with(campagne: campagne).email_nouveau_compte
+    email = CompteMailer.with(campagne: campagne).nouveau_compte
 
     assert_emails 1 do
       email.deliver_now

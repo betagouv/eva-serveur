@@ -1,6 +1,6 @@
 fr:
-  nouveaux_comptes_mailer:
-    email_nouveau_compte:
+  compte_mailer:
+    nouveau_compte:
       objet: Votre accès eva à « %{structure} »
       corps: |
         Bonjour %{prenom},

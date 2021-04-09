@@ -13,7 +13,7 @@ class NouvellesStructuresController < ApplicationController
   def create
     @campagne = Campagne.new campagne_parametres
     if @campagne.save
-      NouveauxComptesMailer.with(campagne: @campagne).email_nouveau_compte.deliver_later
+      CompteMailer.with(campagne: @campagne).nouveau_compte.deliver_later
       sign_in @campagne.compte
       redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
     else

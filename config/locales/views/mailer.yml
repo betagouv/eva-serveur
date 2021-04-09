@@ -1,0 +1,24 @@
+fr:
+  layouts:
+    mailer:
+      aide_conseiller: |
+        -
+
+        ##Besoin d'aide ?
+        Pensez à vous rendre dans l'onglet aide pour accéder aux
+        documentations utiles et à la rubrique Foire aux Questions !
+
+        Le pas à pas de prise en main de l'espace conseiller est [disponible ici](%{document_prise_en_main})
+
+        Pour toute question relative à votre compte, n'hésitez pas à nous
+        adresser votre demande à l'adresse [support@eva.beta.gouv.fr](mailto:support@eva.beta.gouv.fr)
+      signature: |
+        -
+
+        Merci et à très bientôt !
+
+        Bien cordialement,
+
+        L'équipe eva
+
+        <img src="https://eva.beta.gouv.fr/illustration_email/signature.png"/>

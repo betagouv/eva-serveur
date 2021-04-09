@@ -3,43 +3,22 @@ fr:
     nouveau_compte:
       objet: Votre accès eva à « %{structure} »
       corps: |
-        Bonjour %{prenom},
+        ### Bonjour %{prenom},
 
         Nous vous confirmons la création de votre compte pour l'utilisation
-        d'eva pour la structure « %{structure} ».
+        d'eva au sein de « %{structure} ».
 
         ##Accès à l'interface conseiller de votre structure :
 
-        - URL de connexion : **[%{url_connexion}](%{url_connexion})**
+        - URL de connexion : [%{url_connexion}](%{url_connexion})
 
         - Votre identifiant est votre adresse email : **%{email}**
 
-        - Mot de passe : c'est le mot de passe que vous avez choisi
-        précédement. Il est personnel, ne le communiquez pas à vos collègues.
+        - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
+          Il est personnel, ne le communiquez pas à vos collègues.
 
         ##Les informations à remettre aux bénéficiaires pour réaliser les parcours :
 
-        - URL de connexion au parcours : **https://app.eva.beta.gouv.fr/**
+        - URL de connexion au parcours : [https://app.eva.beta.gouv.fr/](https://app.eva.beta.gouv.fr/)
 
         - Code de campagne (à donner aux bénéficiaires) : **%{code_campagne}**
-
-        ##Besoin d'aide ?
-        Pensez à vous rendre dans l'onglet aide pour accéder aux
-        documentations utiles et à la rubrique Foire aux Questions !
-
-        Le pas à pas de prise en main de l'espace conseiller est [disponible ici](%{document_prise_en_main})
-
-        Pour toute question relative à votre compte, n'hésitez pas à nous
-        adresser votre demande à l'adresse [support@eva.beta.gouv.fr](mailto:support@eva.beta.gouv.fr)
-
-        Merci et à très bientôt !
-
-        Bien cordialement,
-
-        L'équipe eva
-
-        --
-        [%{email_contact}](mailto:%{email_contact})
-        Startup eva
-        Direction interministérielle du numérique (DINUM) – beta.gouv.fr
-        https://eva.beta.gouv.fr/

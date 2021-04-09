@@ -2,11 +2,14 @@
 .panel,
 body.logged_out #content_wrapper #active_admin_content {
   @include carte;
+  padding: 1.5rem;
+
   > h3 {
     @include titre-carte();
   }
-  .panel_contents {
-    padding: 0 1.2rem 1.5rem;
+
+  > div {
+    padding: 0;
   }
 }
 

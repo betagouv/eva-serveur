@@ -2,14 +2,12 @@
   $grid-columns:      8;
   $grid-gutter-width: 1.25rem;
   @import "../../../bootstrap_minimal";
-}
 
-.aide_titre {
-  @include titre-carte;
-  padding-top: 0;
-  padding-left: 0;
-}
+  .aide_titre {
+    @include titre-carte;
+  }
 
-.contenu_aide {
-  padding-bottom: 10vh;
+  .contenu_aide {
+    padding-bottom: 10vh;
+  }
 }

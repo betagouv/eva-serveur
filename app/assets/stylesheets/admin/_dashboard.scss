@@ -33,19 +33,23 @@ body.logged_in {
 }
 
 .bloc-apercu {
-  position: relative;
   margin-bottom: 2rem;
 
-  h3 {
-    @include titre-carte;
-    padding-bottom: 3rem;
-  }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
 
-  > a {
-    position: absolute;
-    top: 0.75rem;
-    right: 0;
-    @include bouton;
+    h3 {
+      @include titre-carte;
+      margin-bottom: 0;
+    }
+
+    > a {
+      @include bouton;
+      display: inline-block;
+    }
   }
 }
 

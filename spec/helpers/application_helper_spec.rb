@@ -40,4 +40,29 @@ describe ApplicationHelper do
       expect(helper.formate_duree('')).to eql(nil)
     end
   end
+
+  describe '#cdn_for(fichier)' do
+    let(:fichier) { double('fichier') }
+
+    before do
+      allow(ENV).to receive(:[]).with('PROTOCOLE_SERVEUR').and_return('https')
+      allow(ENV).to receive(:[]).with('HOTE_STOCKAGE').and_return('stockage.eva.beta.gouv.fr')
+
+      allow(fichier).to receive(:filename).and_return('fichier.jpg')
+      allow(fichier).to receive(:key).and_return('ma_cle')
+    end
+
+    context 'en environnement de production' do
+      before do
+        environnement = double('env')
+        allow(Rails).to receive(:env).and_return(environnement)
+        allow(environnement).to receive(:production?).and_return(true)
+      end
+
+      it 'retourne une url avec le nom du fichier pour y accéder' do
+        url = 'https://stockage.eva.beta.gouv.fr/ma_cle?filename=fichier.jpg'
+        expect(helper.cdn_for(fichier)).to eq url
+      end
+    end
+  end
 end

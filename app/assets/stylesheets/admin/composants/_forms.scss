@@ -1,5 +1,8 @@
 form {
   fieldset {
+    padding: 0;
+    margin-bottom: 0;
+
     &.inputs,
     legend span {
       box-shadow: none;
@@ -23,16 +26,25 @@ form {
 }
 
 form fieldset > ol > li {
+  padding: 0;
+  margin-bottom: 1rem;
+  display: flex;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   &.boolean label {
-    padding-left: 30%;
-    width: 90%;
+    padding-left: 33%;
     display: flex;
     align-items: center;
+    width: auto;
   }
   label {
     line-height: 1.875rem;
     font-size: .875rem;
-    width: 30%;
+    width: 33%;
+    padding-right: .75rem;
     abbr[title] {
       text-decoration:none;
       color: $couleur-accent-erreur;
@@ -105,13 +117,6 @@ form select {
   }
 }
 
-form fieldset > ol > li.boolean label {
-  padding-left: 30%;
-  width: 90%;
-  display: flex;
-  align-items: center;
-}
-
 form fieldset > ol > li.error {
   input[type="text"],
   input[type="password"],
@@ -124,6 +129,13 @@ form fieldset > ol > li.error {
   textarea {
     border: 1px solid $eva_red;
   }
+}
+form fieldset > ol > li fieldset {
+  flex: 1;
+}
+
+form fieldset > ol > li fieldset:not(.inputs) ol {
+  padding-left:33%;
 }
 
 form fieldset > ol > li p.inline-errors {

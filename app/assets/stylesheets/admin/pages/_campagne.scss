@@ -1,6 +1,8 @@
-.campagne {
+.admin_campagnes {
   $grid-columns:      8;
-  $grid-gutter-width: 0;
+  $grid-gutter-width: 1.25rem;
+  $largeur-colonne: 135px;
+  $largeur-goutiere: 20px;
   @import "../../bootstrap_minimal";
 
   .titre {
@@ -13,6 +15,7 @@
   }
 
   .description {
+    padding-right: $largeur-colonne + $largeur-goutiere;
     font-size: 0.875rem;
     font-style: italic;
     p:last-child {
@@ -24,7 +27,8 @@
     background-color: #fff;
     input[type="text"],
     .select2 {
-      width: 70% !important;
+      width: auto;
+      flex: 1;
     }
   }
 }

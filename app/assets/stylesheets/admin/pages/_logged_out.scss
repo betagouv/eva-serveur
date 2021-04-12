@@ -33,10 +33,6 @@ body.logged_out {
     &.conteneur-elargi {
       width: 640px;
 
-      .panel {
-        padding: 1.5rem 1.5rem 1rem;
-      }
-
       .description {
         font-size: 0.875rem;
         font-style: italic;
@@ -188,11 +184,6 @@ body.logged_out {
       }
     }
 
-    li {
-      clear: both;
-      padding: 10px 0;
-    }
-
     .inline-hints a {
       float: none;
     }
@@ -203,6 +194,17 @@ body.logged_out {
   }
 
   #login {
+    form fieldset {
+      input[type=text],
+      input[type=email],
+      input[type=password] {
+        width: auto;
+        flex: 1;
+      }
+      li {
+        padding: 0;
+      }
+    }
     a {
       color: $eva_main_blue;
       float: none;
@@ -210,6 +212,9 @@ body.logged_out {
   }
 
   .recherche-structure {
+    p:first-child {
+      margin-bottom: 2rem;
+    }
     form {
       display: flex;
     }
@@ -229,10 +234,10 @@ body.logged_out {
     }
     .actions {
       display: flex;
+      justify-content: flex-end;
     }
     .creer-structure {
       @include bouton;
-      margin: 1rem 0 0 auto;
       background-color: $couleur-warning;
       border: none;
     }

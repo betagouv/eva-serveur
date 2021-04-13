@@ -169,6 +169,7 @@ GEM
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
     ffi (1.14.2)
+    foreman (0.87.2)
     formatador (0.2.5)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
@@ -455,6 +456,7 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_bot_rails
+  foreman
   geocoder
   guard-rspec
   guard-rubocop

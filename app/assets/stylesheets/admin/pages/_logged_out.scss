@@ -100,20 +100,19 @@ body.logged_out {
 
   .flashes {
     width: 90%;
-    position: absolute;
-    top: 12.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: auto;
+    position: relative;
+    bottom: -10px;
     z-index: 2;
     text-align: center;
     .flash {
       display: inline-block;
-      padding: .35rem 1rem;
+      padding: .375rem 1rem;
       position: relative;
-      top: 1.2rem;
       font-weight: 400;
       border-radius: 0.75rem;
       color: $eva_light;
+      margin-bottom: 0;
       &_notice {
         background-color: $darkgreen;
       }

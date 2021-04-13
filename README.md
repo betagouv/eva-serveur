@@ -8,16 +8,17 @@ Pour voir les autres projets de eva :
 - [la partie orchestration](https://github.com/betagouv/eva-orchestrateur)
 - [le site web](https://github.com/betagouv/eva-www)
 
-* Ruby version
+* Ruby version  
 2.6
 
-* Base de données
+* Base de données et assimilé  
 PostgreSql
+Redis
 
-* Création de la base
+* Création de la base  
 `rake db:create`
 
-* Initialisation de la base
+* Initialisation de la base  
 `rake db:migrate` && `rake db:seed`
 
 Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campagne avec l'interface d'administration décrite ci-dessous.

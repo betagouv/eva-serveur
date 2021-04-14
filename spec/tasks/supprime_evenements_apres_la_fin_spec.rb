@@ -45,6 +45,19 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     end
   end
 
+  context 'utilise la position en priorité pour trier' do
+    let!(:evenement_fin) do
+      create(:evenement_fin_situation, partie: partie, date: 2.minute.ago, position: 2)
+    end
+    let!(:evenement_recent_autre) do
+      create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago, position: 1)
+    end
+
+    it do
+      expect { subject.invoke }.to_not(change { Evenement.count })
+    end
+  end
+
   context 'sans événement fin' do
     let!(:evenements) { [create(:evenement_piece_bien_placee, partie: partie)] }
 

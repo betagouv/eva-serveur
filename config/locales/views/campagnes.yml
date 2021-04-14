@@ -11,8 +11,8 @@ fr:
         demande_aide_pour_configuration_campagne: |
           Si vous souhaitez modifier le parcours de cette campagne, contactez-nous via le module de chat présent en bas à droite de cette page ou par email à [%{email_contact}](mailto:%{email_contact})
 
-          Voici ce que vous pouvez demander :
+          Par défaut, c'est le parcours complet qui est proposé mais vous pouvez, selon vos besoins et la situation de vos bénéficiaires utiliser :
 
-          * Vous pouvez demander un parcours avec seulement les 3 situations d'évaluation des compétences de base (Maintenance, Livraison et Objets trouvés)
-          * Dans le parcours complet, vous pouvez enlever selon vos besoins les situations « Bienvenue » et « Contrôle »
-          * La rédaction de texte peut être retiré de la situation « Livraison ».
+          * un parcours compétences de base : seulement les 3 situations Maintenance, Livraison et Objets trouvés
+          * un parcours sans les situations « Bienvenue » et « Contrôle »
+          * un parcours dans lequel la rédaction de texte n'est pas demandé.

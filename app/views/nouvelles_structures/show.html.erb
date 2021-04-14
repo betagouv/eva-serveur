@@ -29,7 +29,12 @@
       </div>
       <div class="panel">
         <h3><%= t('.campagne.titre') %></h3>
-        <p class="description"><%= t('.campagne.description').html_safe %></p>
+        <p class="description">
+          <%= t('admin.campagnes.form.explication_campagne').html_safe %>
+          <br/>
+          <br/>
+          <%= t('admin.campagnes.form.explication_code').html_safe %>
+        </p>
         <%= campagne.inputs do %>
           <%= campagne.input :libelle %>
           <%= campagne.input :code %>

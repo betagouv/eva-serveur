@@ -8,6 +8,13 @@ fr:
         code: Code
         affiche_competences_fortes: Afficher les compétences fortes ?
         nombre_evaluations: Éval.
+        modele_parcours:
+          complet:
+            titre: Parcours complet
+            duree_moyenne: 1 heure
+          competences_de_base:
+            titre: Parcours compétences de base
+            duree_moyenne: 30 minutes
     models:
       situation_configuration:
         one: Situation

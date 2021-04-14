@@ -3,5 +3,6 @@
 module ActiveAdmin
   module ViewsHelper
     include StructureHelper
+    include CampagneHelper
   end
 end

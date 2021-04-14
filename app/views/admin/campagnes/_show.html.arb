@@ -22,7 +22,7 @@ if can?(:manage, Compte)
   end
 end
 
-panel t('.titre_panel_parcours') do
+panel t('.titre_panel_parcours'), class: 'campagne-parcours' do
   div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
   if can?(:manage, Compte)
     reorderable_table_for campagne.situations_configurations do

@@ -1,16 +1,23 @@
 # frozen_string_literal: true
 
 class Campagne < ApplicationRecord
-  SITUATIONS_PAR_DEFAUT = %i[
-    bienvenue
-    maintenance
-    inventaire
-    livraison
-    tri
-    controle
-    securite
-    objets_trouves
-  ].freeze
+  PARCOURS = {
+    complet: %i[
+      bienvenue
+      maintenance
+      inventaire
+      livraison
+      tri
+      controle
+      securite
+      objets_trouves
+    ],
+    competences_de_base: %i[
+      maintenance
+      livraison
+      objets_trouves
+    ]
+  }.freeze
 
   has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
   belongs_to :questionnaire, optional: true
@@ -23,7 +30,7 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
   accepts_nested_attributes_for :compte
 
-  attr_accessor :initialise_situations
+  attr_accessor :initialise_situations, :modele_parcours
 
   before_create :initialise_situations_par_defaut, if: :initialise_situations
 
@@ -38,7 +45,8 @@ class Campagne < ApplicationRecord
   private
 
   def initialise_situations_par_defaut
-    SITUATIONS_PAR_DEFAUT.each do |nom_technique|
+    self.modele_parcours ||= :complet
+    PARCOURS[modele_parcours.to_sym].each do |nom_technique|
       situation = Situation.find_by nom_technique: nom_technique
       situations_configurations.build situation: situation unless situation.nil?
     end

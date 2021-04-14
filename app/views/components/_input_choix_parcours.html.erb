@@ -1,0 +1,19 @@
+<% base_chemin_traduction = 'activerecord.attributes.campagne.modele_parcours.' %>
+
+<div class="choix-parcours-item">
+  <h4 class='choix-parcours-titre'>
+    <%= t("#{base_chemin_traduction}#{modele_parcours}.titre") %>
+  </h4>
+
+  <p class="choix-parcours-intro-situations">Contient :</p>
+
+  <ul class="choix-parcours-situations">
+    <% Campagne::PARCOURS[modele_parcours.to_sym].each do |situation| %>
+      <li class='choix-parcours-situation'><%= t("activerecord.attributes.situation.libelle.#{situation}") %></li>
+    <% end %>
+  </ul>
+
+  <p class="choix-parcours-duree-moyenne">
+    Durée moyenne : <%= t("#{base_chemin_traduction}#{modele_parcours}.duree_moyenne")%>
+  </p>
+</div>

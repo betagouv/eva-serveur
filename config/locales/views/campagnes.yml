@@ -7,4 +7,11 @@ fr:
         explication_code: Les bénéficiaires auront eux besoin du code campagne pour démarrer leur session.
         titre_informations: Informations de la campagne
       show:
-        demande_aide_pour_configuration_campagne: "Si vous souhaitez apporter une modification à cette campagne, contactez-nous via le module de chat présent en bas à droite de la page ou par email à [%{email_contact}](mailto:%{email_contact})"
+        demande_aide_pour_configuration_campagne: |
+          Si vous souhaitez apporter une modification à cette campagne, contactez-nous via le module de chat présent en bas à droite de la page ou par email à [%{email_contact}](mailto:%{email_contact})
+
+          Voici ce que vous pouvez demander :
+
+          * la situation « Bienvenue » est optionnelle,
+          * « Livraison » peut être configurée sans l'exercice de rédaction
+          * un parcours avec seulement l'évaluation des compétences de base (Maintenance, Livraison et Objets trouvés)

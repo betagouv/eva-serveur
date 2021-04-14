@@ -14,5 +14,5 @@ fr:
           Par défaut, c'est le parcours complet qui est proposé mais vous pouvez, selon vos besoins et la situation de vos bénéficiaires utiliser :
 
           * un parcours compétences de base : seulement les 3 situations Maintenance, Livraison et Objets trouvés
-          * un parcours sans les situations « Bienvenue » et « Contrôle »
-          * un parcours dans lequel la rédaction de texte n'est pas demandé.
+          * un parcours sans les situations Bienvenue et/ou Contrôle
+          * un parcours sans le module de rédaction de texte « Communication écrite »

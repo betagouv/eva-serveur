@@ -24,10 +24,6 @@ fr:
         titre: Votre compte
       campagne:
         titre: Votre première campagne
-        description: |
-          Une campagne permet de regrouper vos passations. Vous pouvez ainsi par exemple les regrouper selon leurs objectifs, leurs publics cible ou les dispositifs mobilisés.
-          <br><br>
-          Le code est communiqué aux bénéficiaires pour démarrer le parcours. Nous vous conseillons de le choisir simple et personnalisé.
       actions:
         validation: |
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**

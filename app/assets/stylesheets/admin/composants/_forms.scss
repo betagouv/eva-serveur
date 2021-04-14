@@ -16,131 +16,144 @@ form {
       color: $eva_main_blue;
       background: $bluegrey;
     }
-  }
-}
 
-.libelle-long {
-  label {
-    line-height: 1;
-  }
-}
+    > ol > li {
+      padding: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
 
-form fieldset > ol > li {
-  padding: 0;
-  margin-bottom: 1rem;
-  display: flex;
+      &.has_many_container {
+        display: block;
+      }
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+      &:last-child {
+        margin-bottom: 0;
+      }
 
-  &.boolean label {
-    padding-left: 33%;
-    display: flex;
-    align-items: center;
-    width: auto;
-  }
-  label {
-    line-height: 1.875rem;
-    font-size: .875rem;
-    width: 33%;
-    padding-right: .75rem;
-    abbr[title] {
-      text-decoration:none;
-      color: $couleur-accent-erreur;
+      fieldset {
+        flex: 1;
+        &:not(.inputs) ol {
+          padding-left:33%;
+        }
+      }
+
+      label {
+        line-height: 1.875rem;
+        font-size: .875rem;
+        width: 33%;
+        padding-right: .75rem;
+        text-transform: none;
+        font-weight: normal;
+        color: $eva_dark;
+        abbr[title] {
+          text-decoration:none;
+          color: $couleur-accent-erreur;
+        }
+      }
+
+      &.boolean label {
+        padding-left: 33%;
+        display: flex;
+        align-items: center;
+        width: auto;
+      }
+
+      &.libelle-long {
+        label {
+          line-height: 1;
+        }
+      }
+
+      &.error {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="url"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        textarea {
+          border: 1px solid $eva_red;
+        }
+      }
+
+      p.inline-errors,
+      p.inline-hints {
+        margin-left: 33%;
+      }
+      p.inline-errors {
+        color: $eva_red;
+      }
+      p.inline-hints {
+        color: $eva_dark;
+        a {
+          float: none;
+        }
+      }
+    }
+    select {
+      appearance: none;
+      border-style: solid;
+      border-width: 1px;
+      height: 2rem;
+      position: relative;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    li.select {
+      position: relative;
+
+      &:after {
+        content: '';
+        color: $eva_main_blue;
+        right: 0.7rem;
+        top: 0.4rem;
+        position: absolute;
+        pointer-events: none;
+        background-image: asset-data-url('fleche_select.svg');
+        height: 1rem;
+        width: 1rem;
+      }
+
+      .select2-selection__arrow {
+        display: none;
+      }
+      .select2-selection__clear {
+        margin-right: .7rem;
+      }
+      .select2-selection {
+        height: 100%;
+      }
+    }
+    &.actions {
+      margin-top: 2rem;
+    }
+    p {
+      margin-bottom: 1rem;
     }
   }
-}
-
-form fieldset ol > li,
-.sidebar_section form {
-  label {
-    text-transform: none;
-    font-weight: normal;
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  input[type=password],
+  select,
+  textarea {
+    width: 67%;
     color: $eva_dark;
+    border-color: $bluegrey;
+    border-radius: .5rem;
+    &:focus {
+      border: 1px solid $eva_main_blue;
+      box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+    }
   }
-}
-
-form h3,
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="tel"],
-form select,
-.sidebar_section form.filter_form input[type="text"],
-form textarea,
-.select2-results__option,
-form > ol > li p.inline-hints {
-  color: $eva_dark;
-}
-
-.sidebar_section form.filter_form ::placeholder,
-form ::placeholder {
-  color: $couleur-texte;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="tel"],
-.sidebar_section form.filter_form input[type="text"],
-form textarea,
-form select,
-.select2-results__option {
-  border-color: $bluegrey;
-  border-radius: .5rem;
-
-  &:focus {
-    border: 1px solid $eva_main_blue;
-    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
-  }
-}
-
-form select {
-  appearance: none;
-  border-style: solid;
-  border-width: 1px;
-  height: 2rem;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.select2-container--default .select2-selection--single {
-  border-color: $bluegrey;
-  .select2-selection__arrow b {
-    border-color: $eva_main_blue transparent transparent transparent;
-  }
-  .select2-selection__rendered {
+  ::placeholder {
     color: $couleur-texte;
   }
-}
-
-form fieldset > ol > li.error {
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  input[type="number"],
-  input[type="url"],
-  input[type="tel"],
-  input[type="date"],
-  input[type="time"],
-  textarea {
-    border: 1px solid $eva_red;
-  }
-}
-form fieldset > ol > li fieldset {
-  flex: 1;
-}
-
-form fieldset > ol > li fieldset:not(.inputs) ol {
-  padding-left:33%;
-}
-
-form fieldset > ol > li p.inline-errors {
-  margin-left: 30%;
-  color: $eva_red;
 }
 
 #error_explanation {
@@ -154,9 +167,54 @@ form fieldset > ol > li p.inline-errors {
   }
 }
 
-.select2-container {
-  height: 32px;
-  .select2-selection {
-    border-radius: .5rem;
+/* FILTRES */
+.sidebar_section form {
+  label {
+    text-transform: none;
+    font-weight: normal;
+    color: $eva_dark;
+  }
+  &.filter_form {
+    input[type="text"] {
+      color: $eva_dark;
+      border-color: $bluegrey;
+      border-radius: .5rem;
+      &:focus {
+        border: 1px solid $eva_main_blue;
+        box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+      }
+    }
+    ::placeholder {
+      color: $couleur-texte;
+    }
+  }
+}
+
+/* SELECT2 */
+form:not(.filter_form) .select2-container {
+  width: 67% !important;
+}
+.select2 {
+  &-container {
+    height: 32px;
+    .select2-selection {
+      border-radius: .5rem;
+    }
+  }
+  &-results__option {
+    color: $eva_dark;
+    &:focus {
+      border: 1px solid $eva_main_blue;
+      box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+    }
+  }
+}
+.select2-container--default .select2-selection--single {
+  border-color: $bluegrey;
+  .select2-selection__arrow b {
+    border-color: $eva_main_blue transparent transparent transparent;
+  }
+  .select2-selection__rendered {
+    color: $couleur-texte;
   }
 }

@@ -1,35 +1,37 @@
 # frozen_string_literal: true
 
-div class: 'row' do
-  div class: 'offset-1 col-4' do
-    h1 t('.titre'), class: 'titre'
+div class: 'nouvelle-campagne' do
+  div class: 'row' do
+    div class: 'offset-1 col-4' do
+      h1 t('.titre'), class: 'titre'
 
-    div class: 'panel description' do
-      para { t('.explication_campagne') }
-      para { t('.explication_code') }
-    end
+      div class: 'panel description' do
+        para { t('.explication_campagne') }
+        para { t('.explication_code') }
+      end
 
-    active_admin_form_for [:admin, resource] do |f|
-      f.semantic_errors
-      div class: 'panel' do
-        h2 t('.titre_informations'), class: 'titre titre--medium'
-        f.inputs do
-          f.input :compte if can?(:manage, Compte)
-          f.input :libelle
-          f.input :code
-          f.input :affiche_competences_fortes if current_compte.administrateur?
-          f.input :questionnaire if current_compte.administrateur?
-          if can?(:manage, Situation)
-            f.has_many :situations_configurations, allow_destroy: true do |c|
-              c.input :id, as: :hidden
-              c.input :situation
-              c.input :questionnaire
+      active_admin_form_for [:admin, resource] do |f|
+        f.semantic_errors
+        div class: 'panel' do
+          h2 t('.titre_informations'), class: 'titre titre--medium'
+          f.inputs do
+            f.input :compte if can?(:manage, Compte)
+            f.input :libelle
+            f.input :code
+            f.input :affiche_competences_fortes if current_compte.administrateur?
+            f.input :questionnaire if current_compte.administrateur?
+            if can?(:manage, Situation)
+              f.has_many :situations_configurations, allow_destroy: true do |c|
+                c.input :id, as: :hidden
+                c.input :situation
+                c.input :questionnaire
+              end
             end
           end
         end
-      end
 
-      f.actions
+        f.actions
+      end
     end
   end
 end

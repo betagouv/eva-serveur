@@ -30,6 +30,7 @@ body.logged_out {
     margin: auto;
     width: 445px;
     z-index: 2;
+
     &.conteneur-elargi {
       width: 640px;
 
@@ -40,27 +41,7 @@ body.logged_out {
 
       fieldset {
         &.inputs {
-          margin-bottom: 0;
           padding-top: 1rem;
-          background-color: #fff;
-        }
-
-        label {
-          padding-right: 20px;
-        }
-
-        .inline-hints,
-        .inline-errors {
-          margin-left: 30%;
-        }
-
-        &.actions {
-          margin-bottom: 0;
-        }
-
-        .action {
-          text-align: center;
-          padding: 0;
         }
       }
     }
@@ -109,6 +90,7 @@ body.logged_out {
       border-radius: 0.75rem;
       color: $eva_light;
       margin-bottom: 0;
+      text-shadow: none;
       &_notice {
         background-color: $darkgreen;
       }
@@ -118,10 +100,6 @@ body.logged_out {
     }
   }
 
-  #content_wrapper #active_admin_content {
-     padding: 1.5rem;
-     z-index: 1;
-  }
   h2 {
     padding: 0;
     margin: 0 0 1.125rem;;
@@ -146,51 +124,6 @@ body.logged_out {
 
   a {
     color: $eva_main_blue;
-  }
-
-  form fieldset {
-    input[type=text],
-    input[type=email],
-    input[type=tel],
-    input[type=password],
-    select {
-      width: 70%;
-    }
-
-
-    li.select {
-      position: relative;
-
-      &:after {
-        content: '';
-        color: $eva_main_blue;
-        right: 0.7rem;
-        top: 0.9rem;
-        position: absolute;
-        pointer-events: none;
-        background-image: asset-data-url('fleche_select.svg');
-        height: 1rem;
-        width: 1rem;
-      }
-    }
-
-    select {
-      padding: 8px 10px 7px;
-    }
-
-    &.actions {
-      li {
-        padding-bottom: 0;
-      }
-    }
-
-    .inline-hints a {
-      float: none;
-    }
-
-    p {
-      margin-bottom: 1rem;
-    }
   }
 
   #login {
@@ -235,6 +168,7 @@ body.logged_out {
     .actions {
       display: flex;
       justify-content: flex-end;
+      margin-top: 2rem;
     }
     .creer-structure {
       @include bouton;
@@ -243,14 +177,15 @@ body.logged_out {
     }
   }
 
-  .flash {
-    text-shadow: none;
-    font-weight: 600;
-    color: $eva_dark;
-  }
+  form fieldset {
+    &.inputs {
+      background-color: #fff;
+    }
+    &.buttons li,
+    &.actions li {
+      float: right;
+    }
 
-  form fieldset.buttons li, form fieldset.actions li {
-    float: right;
   }
 
   .liens-partages {

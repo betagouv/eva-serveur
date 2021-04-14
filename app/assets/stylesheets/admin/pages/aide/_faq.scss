@@ -51,6 +51,9 @@
       opacity: 1;
       z-index: 1;
     }
+    a, a:visited {
+      color: $eva_main_blue;
+    }
   }
   .titre_reponse {
     margin: 1.25rem 0 2.5rem;

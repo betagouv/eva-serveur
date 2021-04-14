@@ -102,7 +102,7 @@ namespace :nettoyage do
     logger.info 'Evenements effacées:'
     Partie.find_each do |partie|
       date_fin = nil
-      evenements = Evenement.where(partie: partie).order(:date)
+      evenements = Evenement.where(partie: partie).order(:position, :date)
       evenements_jusqua_fin = evenements.take_while do |evenement|
         date_fin ||= evenement.date if evenement.nom == 'finSituation'
 

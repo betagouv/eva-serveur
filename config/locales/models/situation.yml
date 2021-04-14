@@ -4,7 +4,16 @@ fr:
       situation:
         created_at: Créée le
         updated_at: Mise à jour le
-        libelle: Libellé
+        libelle:
+          one: Libellé
+          bienvenue: Bienvenue
+          maintenance: Maintenance
+          inventaire: Inventaire
+          livraison: Livraison
+          tri: Tri
+          controle: Contrôle
+          securite: Sécurité
+          objets_trouves: Objets trouvés
   formtastic:
     actions:
       situation:

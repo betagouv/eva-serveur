@@ -11,7 +11,7 @@ RSpec.describe Campagne, type: :model do
     let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
     before do
       allow(compte).to receive(:valid?).and_return true
-      Campagne::SITUATIONS_PAR_DEFAUT.each do |nom_situation|
+      Campagne::PARCOURS[:complet].each do |nom_situation|
         questionnaire = Questionnaire.new libelle: nom_situation
         situation = Situation.new libelle: nom_situation, nom_technique: nom_situation
         situation.questionnaire = questionnaire
@@ -42,13 +42,14 @@ RSpec.describe Campagne, type: :model do
           Campagne.new libelle: 'ma campagne',
                        code: 'moncode',
                        compte: compte,
+                       modele_parcours: 'complet',
                        initialise_situations: true
         end
         before { expect(campagne.valid?).to be(true) }
         it do
           campagne.save
           expect(campagne.situations_configurations.count)
-            .to eq Campagne::SITUATIONS_PAR_DEFAUT.length
+            .to eq Campagne::PARCOURS[:complet].length
         end
       end
     end

@@ -30,6 +30,18 @@ div class: 'nouvelle-campagne' do
           end
         end
 
+        if resource.new_record?
+          div class: 'panel' do
+            h2 t('.titre_informations'), class: 'titre titre--medium'
+            f.inputs class: 'input-choix-parcours' do
+              f.input :modele_parcours, as: :radio,
+                                        collection: collection_modeles_parcours,
+                                        required: true,
+                                        label: false
+            end
+          end
+        end
+
         f.actions
       end
     end

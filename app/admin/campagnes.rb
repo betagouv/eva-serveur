@@ -4,7 +4,7 @@ ActiveAdmin.register Campagne do
   menu priority: 3
 
   permit_params :libelle, :code, :questionnaire_id, :compte,
-                :compte_id, :affiche_competences_fortes, :initialise_situations,
+                :compte_id, :affiche_competences_fortes, :initialise_situations, :modele_parcours,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle
@@ -57,6 +57,7 @@ ActiveAdmin.register Campagne do
     def assigne_valeurs_par_defaut
       params[:campagne] ||= {}
       params[:campagne][:compte_id] ||= current_compte.id
+      params[:campagne][:modele_parcours] ||= 'complet'
     end
   end
 end

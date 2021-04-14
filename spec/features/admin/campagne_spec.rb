@@ -60,6 +60,9 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'création' do
+    let!(:situation_inventaire) { create :situation_inventaire }
+    let!(:situation_maintenance) { create :situation_maintenance }
+
     context 'en administrateur' do
       before do
         compte_organisation.update(role: 'administrateur')
@@ -68,14 +71,17 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       context 'crée la campagne, associé au compte courant et initialise les situations' do
-        let!(:situation) { create :situation_inventaire }
-        before { fill_in :campagne_code, with: 'EUROCKS' }
+        before do
+          fill_in :campagne_code, with: 'EUROCKS'
+          click_on 'Créer'
+        end
         it do
-          expect { click_on 'Créer' }.to(change { Campagne.count })
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'EUROCKS'
           expect(campagne.compte).to eq compte_organisation
-          expect(page).to have_content situation.libelle
+          within('.campagne-parcours table') do
+            expect(page).to have_content situation_maintenance.libelle
+          end
         end
       end
     end
@@ -87,12 +93,35 @@ describe 'Admin - Campagne', type: :feature do
         fill_in :campagne_code, with: 'BELFORT2021'
       end
 
-      it do
-        expect { click_on 'Créer' }.to(change { Campagne.count })
-        campagne = Campagne.order(:created_at).last
-        expect(campagne.libelle).to eq 'Belfort, pack demandeur'
-        expect(campagne.code).to eq 'BELFORT2021'
-        expect(campagne.compte).to eq compte_organisation
+      context 'créer un parcours complet' do
+        before do
+          choose 'campagne_modele_parcours_complet'
+          click_on 'Créer'
+        end
+        it do
+          campagne = Campagne.order(:created_at).last
+          expect(campagne.libelle).to eq 'Belfort, pack demandeur'
+          expect(campagne.code).to eq 'BELFORT2021'
+          expect(campagne.compte).to eq compte_organisation
+          within('.campagne-parcours table') do
+            expect(page).to have_content situation_maintenance.libelle
+            expect(page).to have_content situation_inventaire.libelle
+          end
+        end
+      end
+
+      context 'créer un parcours compétences de base' do
+        before do
+          choose 'campagne_modele_parcours_competences_de_base'
+          click_on 'Créer'
+        end
+
+        it do
+          within('.campagne-parcours table') do
+            expect(page).to have_content situation_maintenance.libelle
+            expect(page).not_to have_content situation_inventaire.libelle
+          end
+        end
       end
     end
   end

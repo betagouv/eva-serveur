@@ -34,6 +34,7 @@ gem 'redcarpet'
 gem 'redis'
 gem 'rollbar'
 gem 'sidekiq'
+gem 'truemail'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 

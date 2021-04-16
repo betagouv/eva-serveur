@@ -10,6 +10,24 @@ describe 'Admin - Evaluation', type: :feature do
   context 'Organisation' do
     before(:each) { se_connecter_comme_organisation }
 
+    describe 'index' do
+      describe 'permet de filtrer uniquement avec mes campagnes' do
+        before do
+          create :campagne, compte: Compte.first, libelle: 'ma campagne'
+          create :campagne, libelle: 'autre campagne'
+
+          visit admin_evaluations_path
+        end
+
+        it do
+          within('div.sidebar') do
+            expect(page).not_to have_content('autre campagne')
+            expect(page).to have_content('ma campagne')
+          end
+        end
+      end
+    end
+
     describe '#show' do
       # evaluation sans positionnement
       let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }

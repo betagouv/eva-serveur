@@ -52,6 +52,7 @@ body {
   font-family: $font-texte;
   color: $eva_dark;
   background-color: $eva_light;
+  overflow-x: hidden;
 }
 
 * {

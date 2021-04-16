@@ -1,11 +1,8 @@
 body.logged_in {
-  max-width: $container;
-  margin: 0 auto;
   #wrapper {
+    max-width: $container;
+    margin: 0 auto;
     position: relative;
-    @media screen and (max-width: $container-avec-depassement) {
-      overflow: hidden;
-    }
   }
   &::before,
   &::after {

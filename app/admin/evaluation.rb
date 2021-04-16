@@ -9,7 +9,7 @@ ActiveAdmin.register Evaluation do
   config.sort_order = 'created_at_desc'
 
   filter :nom
-  filter :campagne
+  filter :campagne, collection: proc { Campagne.accessible_by(current_ability) }
   filter :created_at
 
   action_item :pdf_restitution, only: :show do

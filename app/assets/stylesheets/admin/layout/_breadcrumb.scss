@@ -11,7 +11,7 @@
   }
 
   #titlebar_left {
-    padding: 0.62rem 1.87rem;
+    padding: 0.62rem 0;
     background-color: transparent;
     height: 4rem;
     box-sizing: border-box;
@@ -40,7 +40,7 @@
     height: auto;
 
     .action_item a {
-      margin: 1rem 0 0 1rem;
+      margin: 1rem 1rem 0 0;
       padding: 0.51rem 1.87rem;
       font-size: 0.87rem;
       font-weight: normal;

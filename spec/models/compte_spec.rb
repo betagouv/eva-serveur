@@ -28,4 +28,30 @@ describe Compte do
     expect(described_class.new(prenom: 'Pepa', nom: 'Pig', email: 'pepa@france5.fr').display_name)
       .to eql('Pepa Pig - pepa@france5.fr')
   end
+
+  describe "validation DNS de l'email" do
+    let(:compte) { Compte.new email: 'email@example.com' }
+
+    before do
+      allow(compte).to receive(:email_changed?).and_return(true)
+      allow(Truemail).to receive(:valid?).and_return(true)
+    end
+
+    context "quand l'email est valide" do
+      before { compte.valid? }
+      it { expect(compte.errors[:email]).to be_blank }
+    end
+
+    context "quand l'email est invalide" do
+      before { allow(Truemail).to receive(:valid?).with('email@example.com').and_return(false) }
+      before { compte.valid? }
+      it { expect(compte.errors[:email]).to include(I18n.t('errors.messages.invalid')) }
+    end
+
+    context "quand l'email du compte n'est pas modifié" do
+      before { allow(compte).to receive(:email_changed?).and_return(false) }
+      before { compte.valid? }
+      it { expect(Truemail).not_to have_received(:valid?).with('email@example.com') }
+    end
+  end
 end

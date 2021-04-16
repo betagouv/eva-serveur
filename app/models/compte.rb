@@ -8,6 +8,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: %w[administrateur organisation] }
   validates :statut_validation, presence: true
   validates_presence_of :nom, :prenom, on: :create
+  validate :verifie_dns_email
   default_scope { order(created_at: :asc) }
 
   enum statut_validation: %i[en_attente acceptee refusee], _prefix: :validation
@@ -26,5 +27,14 @@ class Compte < ApplicationRecord
 
   def administrateur?
     role == 'administrateur'
+  end
+
+  private
+
+  def verifie_dns_email
+    return unless email_changed?
+    return if Truemail.valid?(email)
+
+    errors.add(:email, :invalid)
   end
 end

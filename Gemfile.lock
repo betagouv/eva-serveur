@@ -399,6 +399,8 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    simpleidn (0.2.1)
+      unf (~> 0.1.4)
     spreadsheet (1.2.8)
       ruby-ole
     spring (2.1.1)
@@ -416,9 +418,14 @@ GEM
       geoip
     thor (1.1.0)
     tilt (2.0.10)
+    truemail (2.3.4)
+      simpleidn (~> 0.2.1)
     ttfunk (1.7.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -484,6 +491,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tarteaucitron
+  truemail
   wicked_pdf
   wkhtmltopdf-binary (~> 0.12.3.1)
 

@@ -18,15 +18,15 @@ panel t('.titre.restitution_globale'), class: 'panel_admin_restitution_globale' 
   render partial: 'restitution_globale', locals: { pdf: false }
 end
 
-panel t('.titre.parties') do
-  form method: :get do
-    table_for parties do
-      column :selection do |partie|
-        check_box_tag 'parties_selectionnees[]', partie.id,
-                      params[:parties_selectionnees].include?(partie.id)
-      end
-      column :situation
-      if can? :manage, Compte
+if can?(:manage, Compte)
+  panel t('.titre.parties') do
+    form method: :get do
+      table_for parties do
+        column :selection do |partie|
+          check_box_tag 'parties_selectionnees[]', partie.id,
+                        params[:parties_selectionnees].include?(partie.id)
+        end
+        column :situation
         column :created_at
         column '' do |partie|
           span link_to t('.rapport'), admin_restitution_path(partie)
@@ -37,7 +37,7 @@ panel t('.titre.parties') do
                        )
         end
       end
+      div submit_tag 'Valider la sélection'
     end
-    div submit_tag 'Valider la sélection'
   end
 end

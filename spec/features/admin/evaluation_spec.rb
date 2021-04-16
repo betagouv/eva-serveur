@@ -62,6 +62,12 @@ describe 'Admin - Evaluation', type: :feature do
         expect(page).to have_content 'Roger'
       end
 
+      it "n'affiche pas les situations jouées" do
+        visit admin_evaluation_path(mon_evaluation)
+        expect(page).not_to have_content 'Selection Situation'
+        expect(page).not_to have_content 'Inventaire'
+      end
+
       describe 'en moquant restitution_globale :' do
         let(:restitution_globale) do
           double(Restitution::Globale,

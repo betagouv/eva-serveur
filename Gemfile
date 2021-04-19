@@ -41,17 +41,20 @@ gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'
   gem 'rspec-rails'
 end
 
 group :development do
   gem 'foreman'
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
   gem 'letter_opener'
-  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails-erd'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'tarteaucitron'
 end
@@ -59,8 +62,6 @@ end
 group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
-  gem 'guard-rspec', require: false
-  gem 'guard-rubocop'
   gem 'launchy'
   gem 'pdf-reader'
   gem 'rubocop', require: false

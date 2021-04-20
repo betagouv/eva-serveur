@@ -3,9 +3,12 @@
   border-radius: 0.5rem;
   background-color: #fff;
 }
+@mixin ombre {
+  box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
+}
 @mixin carte-avec-ombre {
   @include carte();
-  box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
+  @include ombre();
 }
 @mixin carte-avec-bordure {
   @include carte();

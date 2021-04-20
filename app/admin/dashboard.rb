@@ -16,8 +16,24 @@ ActiveAdmin.register_page 'Dashboard' do
 
   controller do
     before_action do
-      annonce = AnnonceGenerale.order(created_at: :desc).where(afficher: true).first
       flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe unless annonce.blank?
+      if comptes_en_attente?
+        lien = admin_comptes_url(q: { statut_validation_eq: 'en_attente' })
+        flash.now[:comptes_en_attente] =
+          "<span>#{t('.info_comptes_en_attente', lien: lien)}</span>".html_safe
+      end
+    end
+
+    private
+
+    def annonce
+      @annonce ||= AnnonceGenerale.order(created_at: :desc).find_by(afficher: true)
+    end
+
+    def comptes_en_attente?
+      @comptes_en_attente ||= Compte.where(statut_validation: :en_attente)
+                                    .where(structure_id: current_compte.structure_id)
+                                    .exists?
     end
   end
 end

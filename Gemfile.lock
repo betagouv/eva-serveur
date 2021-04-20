@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/cprodhomme/activeadmin-xls
-  revision: 78bdaf000b3c75ed9cfa58f5889761a573d8de15
+  revision: bcd58bdf9e95e8725cc828ce2477708681fafa8c
+  branch: dist
   specs:
-    activeadmin-xls (2.0.2)
+    activeadmin-xls (2.0.3)
       activeadmin (>= 1.0.0)
       spreadsheet (~> 1.0)
 

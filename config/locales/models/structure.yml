@@ -18,6 +18,7 @@ fr:
           orientation_scolaire: Orientation scolaire
           cap_emploi: Cap emploi
           e2c: École de la 2e chance
+          SMA: SMA
           autre: Autre
   formtastic:
     actions:

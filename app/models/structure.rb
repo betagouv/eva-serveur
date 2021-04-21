@@ -3,7 +3,7 @@
 class Structure < ApplicationRecord
   TYPES_STRUCTURES = %w[
     mission_locale pole_emploi SIAE centre_action_social CRIA
-    organisme_formation orientation_scolaire cap_emploi e2c autre
+    organisme_formation orientation_scolaire cap_emploi e2c SMA autre
   ].freeze
 
   validates :nom, :code_postal, :type_structure, presence: true

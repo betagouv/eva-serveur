@@ -15,29 +15,37 @@ div class: 'nouvelle-campagne' do
         div class: 'panel' do
           h2 t('.titre_informations'), class: 'titre titre--medium'
           f.inputs do
-            f.input :compte if can?(:manage, Compte)
             f.input :libelle
             f.input :code
-            f.input :affiche_competences_fortes if current_compte.administrateur?
-            f.input :questionnaire if current_compte.administrateur?
-            if can?(:manage, Situation)
-              f.has_many :situations_configurations, allow_destroy: true do |c|
-                c.input :id, as: :hidden
-                c.input :situation
-                c.input :questionnaire
-              end
-            end
           end
         end
 
         if resource.new_record?
           div class: 'panel' do
-            h2 t('.titre_informations'), class: 'titre titre--medium'
+            h2 t('.choix_parcours'), class: 'titre titre--medium'
             f.inputs class: 'input-choix-parcours' do
               f.input :modele_parcours, as: :radio,
                                         collection: collection_modeles_parcours(situations),
                                         required: true,
                                         label: false
+            end
+          end
+        end
+
+        if current_compte.administrateur?
+          div class: 'panel' do
+            h2 t('.configuration_avancee'), class: 'titre titre--medium'
+            f.inputs do
+              f.input :compte
+              f.input :affiche_competences_fortes
+              f.input :questionnaire
+              if resource.persisted?
+                f.has_many :situations_configurations, allow_destroy: true do |c|
+                  c.input :id, as: :hidden
+                  c.input :situation
+                  c.input :questionnaire
+                end
+              end
             end
           end
         end

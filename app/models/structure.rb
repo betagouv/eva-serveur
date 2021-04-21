@@ -2,7 +2,7 @@
 
 class Structure < ApplicationRecord
   TYPES_STRUCTURES = %w[
-    mission_locale pole_emploi SIAE centre_action_social CRIA
+    mission_locale pole_emploi SIAE service_insertion_collectivite CRIA
     organisme_formation orientation_scolaire cap_emploi e2c SMA autre
   ].freeze
 

@@ -8,8 +8,10 @@
   <p class="choix-parcours-intro-situations">Contient :</p>
 
   <ul class="choix-parcours-situations">
-    <% Campagne::PARCOURS[modele_parcours.to_sym].each do |situation| %>
-      <li class='choix-parcours-situation'><%= t("activerecord.attributes.situation.libelle.#{situation}") %></li>
+    <% Campagne::PARCOURS[modele_parcours.to_sym].each do |nom_technique| %>
+      <% situation = situations.find { |s| s.nom_technique == nom_technique.to_s } %>
+      <% next if situation.blank? %>
+      <li class='choix-parcours-situation'><%= situation.libelle %></li>
     <% end %>
   </ul>
 

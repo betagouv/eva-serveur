@@ -35,7 +35,7 @@ div class: 'nouvelle-campagne' do
             h2 t('.titre_informations'), class: 'titre titre--medium'
             f.inputs class: 'input-choix-parcours' do
               f.input :modele_parcours, as: :radio,
-                                        collection: collection_modeles_parcours,
+                                        collection: collection_modeles_parcours(situations),
                                         required: true,
                                         label: false
             end

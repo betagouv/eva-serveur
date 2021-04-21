@@ -35,6 +35,7 @@ ActiveAdmin.register Campagne do
     helper_method :statistiques
 
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
+    before_action :situations, only: %i[new create edit update]
 
     def create
       params[:campagne][:initialise_situations] = true
@@ -58,6 +59,10 @@ ActiveAdmin.register Campagne do
       params[:campagne] ||= {}
       params[:campagne][:compte_id] ||= current_compte.id
       params[:campagne][:modele_parcours] ||= 'complet'
+    end
+
+    def situations
+      @situations = Situation.all
     end
   end
 end

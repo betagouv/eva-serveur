@@ -1,6 +1,6 @@
 .evaluations {
   .evaluation {
-    @include carte;
+    @include carte-avec-ombre();
     padding: 0.7rem 1rem;
     margin-bottom: .5rem;
     display: flex;

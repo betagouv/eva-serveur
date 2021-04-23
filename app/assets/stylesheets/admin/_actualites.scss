@@ -1,5 +1,5 @@
 .carte-actualite {
-  @include carte;
+  @include carte-avec-ombre();
 
   &.complete {
     max-width: 40rem;
@@ -83,7 +83,7 @@
   .illustration {
     img {
       width: 100%;
-      @include carte;
+      @include carte-avec-ombre();
     }
     margin-bottom: 2rem;
   }
@@ -94,7 +94,7 @@
   }
 
   .metadonnees {
-    @include carte;
+    @include carte-avec-ombre();
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     display: flex;

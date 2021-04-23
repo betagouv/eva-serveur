@@ -23,7 +23,7 @@
     }
 
     input + .choix-parcours-item {
-      @include sous-carte();
+      @include carte-avec-bordure();
       height: 100%;
       min-height: 250px;
       padding: 1rem;

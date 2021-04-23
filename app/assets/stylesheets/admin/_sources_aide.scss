@@ -5,7 +5,7 @@
   margin-bottom: 3rem;
 
   .source_aide {
-    @include carte;
+    @include carte-avec-ombre();
     display: flex;
     padding: 1.5rem;
     color: $eva_dark;

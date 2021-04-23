@@ -1,7 +1,7 @@
 .section,
 .panel,
 body.logged_out #content_wrapper #active_admin_content {
-  @include carte;
+  @include carte-avec-ombre();
   padding: 1.5rem;
   margin-bottom: 1.5rem;
 
@@ -15,7 +15,7 @@ body.logged_out #content_wrapper #active_admin_content {
 }
 
 body.logged_out .sous-panel {
-  @include sous-carte;
+  @include carte-avec-bordure();
   margin: 0.5rem 0;
   display: flex;
   flex-direction: row;
@@ -50,7 +50,7 @@ body.logged_out .sous-panel {
 
     .panel_contents {
       padding-top: 1rem;
-      @include carte;
+      @include carte-avec-ombre();
     }
   }
 }

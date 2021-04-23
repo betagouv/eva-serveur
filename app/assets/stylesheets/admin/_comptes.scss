@@ -9,7 +9,7 @@
     margin-bottom: 1.5rem;
   }
   .introduction {
-    @include carte;
+    @include carte-avec-ombre();
     margin-bottom: 1.25rem;
     padding: 1rem 1.5rem 2.8rem;
     p {

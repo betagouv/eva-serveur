@@ -1,0 +1,27 @@
+fr:
+  activerecord:
+    models:
+      parcours_type:
+        one: Parcours type
+        other: Parcours type
+    attributes:
+      parcours_type:
+        libelle: Libellé
+        nom_technique: Nom technique
+        duree_moyenne: Durée moyenne
+        created_at: créé le
+        updated_at: Mis à jour le
+  formtastic:
+    actions:
+      parcours_type:
+        create: Créer
+        update: Modifier
+    placeholders:
+      parcours_type:
+        duree_moyenne: 1 heure
+  active_admin:
+    resources:
+      parcours_type:
+        new_model: Créer un parcours type
+        edit_model: Modifier
+        delete_model: Supprimer

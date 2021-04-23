@@ -36,5 +36,5 @@ fr:
     resources:
       campagne:
         delete_model: Supprimer
-        new_model: Créer une campagne
-        edit_model: Modifier
+        new_model: Nouvelle campagne
+        edit_model: Modification de la campagne

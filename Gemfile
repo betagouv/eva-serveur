@@ -13,8 +13,7 @@ gem 'activeadmin'
 gem 'activeadmin_addons'
 gem 'active_admin-humanized_enum'
 gem 'activeadmin_reorderable'
-# Utilisation d'un fork en attendant que le correctif soit mergé : https://github.com/thambley/activeadmin-xls/pull/21
-gem 'activeadmin-xls', git: 'https://github.com/cprodhomme/activeadmin-xls', branch: 'dist'
+gem 'activeadmin-xls'
 gem 'acts_as_list'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false

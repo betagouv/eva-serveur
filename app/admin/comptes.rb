@@ -43,13 +43,20 @@ ActiveAdmin.register Compte do
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
       end
       f.input :statut_validation, as: :radio
-      f.input :password
-      f.input :password_confirmation
+      if peut_modifier_mot_de_passe?
+        if resource.persisted?
+          h2 'Changer le mot de passe (laisser vide par défaut)', class: 'titre titre--medium'
+        end
+        f.input :password
+        f.input :password_confirmation
+      end
     end
     f.actions
   end
 
   controller do
+    helper_method :peut_modifier_mot_de_passe?
+
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
                         :update
@@ -57,6 +64,12 @@ ActiveAdmin.register Compte do
                         :update_without_password
                       end
       object.send(update_method, *attributes)
+    end
+
+    def peut_modifier_mot_de_passe?
+      resource.new_record? ||
+        resource == current_compte ||
+        can?(:manage, Compte)
     end
   end
 

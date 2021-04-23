@@ -91,5 +91,31 @@ describe 'Admin - Compte', type: :feature do
 
       it { expect(collegue.reload.validation_refusee?).to be true }
     end
+
+    describe 'modifier mes informations' do
+      before do
+        visit edit_admin_compte_path(conseiller_connecte)
+        fill_in :compte_prenom, with: 'Robert'
+        fill_in :compte_password, with: 'new_password'
+        fill_in :compte_password_confirmation, with: 'new_password'
+        click_on 'Modifier'
+      end
+
+      it do
+        conseiller_connecte.reload
+        expect(conseiller_connecte.prenom).to eq 'Robert'
+        fill_in :compte_email, with: 'new_password'
+        fill_in :compte_password, with: 'new_password'
+        click_on 'Se connecter'
+      end
+    end
+
+    describe "modifier le mot de passe d'un collègue" do
+      before do
+        visit edit_admin_compte_path(collegue)
+      end
+
+      it { expect(page).not_to have_content('Mot de passe') }
+    end
   end
 end

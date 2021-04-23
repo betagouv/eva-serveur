@@ -92,3 +92,28 @@ Aide::QuestionFrequente.find_or_create_by(question: 'Puis-je partager les restit
 
   Les accompagnant·es disposent quant à eux, en se connectant à l’interface d’administration, d’une restitution plus complète sur les compétences transversales mais également sur les compétences de base. Cette restitution est disponible en PDF et peut être tout à fait partagée avec les candidat·es, si cela s’y prête.}
 end
+
+situations_data = [
+  { libelle: 'Bienvenue', nom_technique: 'bienvenue' },
+  { libelle: 'Livraison', nom_technique: 'livraison' },
+  { libelle: 'Inventaire', nom_technique: 'inventaire' },
+  { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
+  { libelle: 'Contrôle', nom_technique: 'controle' },
+  { libelle: 'Sécurité', nom_technique: 'securite' },
+  { libelle: 'Tri', nom_technique: 'tri' },
+  { libelle: 'Bureau', nom_technique: 'questions' },
+  { libelle: 'Prévention', nom_technique: 'prevention' },
+  { libelle: 'Maintenance', nom_technique: 'Maintenance' }
+]
+situations_data.each do |situation_data|
+  Situation.find_or_create_by(nom_technique: situation_data[:nom_technique]) do |situation|
+    situation.libelle = situation_data[:libelle]
+  end
+end
+
+ParcoursType.find_or_create_by(nom_technique: 'complet') do |parcours_type|
+  parcours_type.libelle = 'Parcours complet'
+  parcours_type.duree_moyenne = '1 heure'
+  situations = Situation.where(nom_technique: situations_data.pluck(:nom_technique))
+  parcours_type.situations_configurations_attributes = situations.map { |situation| { situation_id: situation.id } }
+end

@@ -5,7 +5,7 @@
     list-style: none;
   }
   .questions {
-    @include carte();
+    @include carte-avec-ombre();
     width: 30%;
     ul {
       padding: 1.5rem;

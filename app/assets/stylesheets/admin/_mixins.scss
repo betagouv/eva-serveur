@@ -1,14 +1,14 @@
-@mixin carte-par-defaut {
+@mixin carte {
   position: relative;
   border-radius: 0.5rem;
   background-color: #fff;
 }
-@mixin carte {
-  @include carte-par-defaut();
+@mixin carte-avec-ombre {
+  @include carte();
   box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
 }
-@mixin sous-carte {
-  @include carte-par-defaut();
+@mixin carte-avec-bordure {
+  @include carte();
   border: 1px solid $bluegrey;
 }
 @mixin bouton() {

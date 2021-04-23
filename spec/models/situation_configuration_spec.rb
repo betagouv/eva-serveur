@@ -3,7 +3,10 @@
 require 'rails_helper'
 
 describe SituationConfiguration do
-  it { should validate_uniqueness_of(:situation_id).scoped_to(:campagne_id).case_insensitive }
+  it do
+    should validate_uniqueness_of(:situation_id).scoped_to(%i[campagne_id parcours_type_id])
+                                                .case_insensitive
+  end
 
   describe '#questionnaire_utile' do
     let(:situation_configuree) { described_class.new }

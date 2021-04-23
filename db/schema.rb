@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_21_134603) do
+ActiveRecord::Schema.define(version: 2021_04_23_141949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -150,6 +150,14 @@ ActiveRecord::Schema.define(version: 2021_04_21_134603) do
     t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 
+  create_table "parcours_type", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "libelle"
+    t.string "nom_technique"
+    t.string "duree_moyenne"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "parties", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_id"
     t.jsonb "metriques", default: {}, null: false
@@ -216,7 +224,9 @@ ActiveRecord::Schema.define(version: 2021_04_21_134603) do
     t.uuid "campagne_id"
     t.uuid "situation_id"
     t.uuid "questionnaire_id"
+    t.uuid "parcours_type_id"
     t.index ["campagne_id"], name: "index_situations_configurations_on_campagne_id"
+    t.index ["parcours_type_id"], name: "index_situations_configurations_on_parcours_type_id"
     t.index ["situation_id"], name: "index_situations_configurations_on_situation_id"
   end
 

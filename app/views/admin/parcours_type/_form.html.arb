@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+active_admin_form_for [:admin, resource] do |f|
+  f.inputs do
+    f.input :libelle
+    f.input :nom_technique
+    f.input :duree_moyenne
+    f.has_many :situations_configurations, allow_destroy: true do |c|
+      c.input :id, as: :hidden
+      c.input :situation
+      c.input :questionnaire
+    end
+  end
+  actions
+end

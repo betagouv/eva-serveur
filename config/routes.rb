@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
+  authenticate :compte, ->(o) { o.administrateur? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   root to: redirect('/admin/dashboard')
 
   resource :nouvelle_structure, only: [:create, :show]

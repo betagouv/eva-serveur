@@ -97,7 +97,6 @@ situations_data = [
   { libelle: 'Bienvenue', nom_technique: 'bienvenue' },
   { libelle: 'Livraison', nom_technique: 'livraison' },
   { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
-  { libelle: 'Contrôle', nom_technique: 'controle' },
   { libelle: 'Sécurité', nom_technique: 'securite' },
   { libelle: 'Tri', nom_technique: 'tri' },
   { libelle: 'Bureau', nom_technique: 'questions' },

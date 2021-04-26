@@ -11,15 +11,6 @@ panel 'Détails du parcours type' do
 end
 
 panel t('admin.campagnes.show.titre_panel_parcours'), class: 'campagne-parcours' do
-  if can?(:manage, Compte)
-    reorderable_table_for parcours_type.situations_configurations do
-      column :situation
-      column :questionnaire, &:questionnaire_utile
-    end
-  else
-    table_for parcours_type.situations_configurations do
-      column :situation
-      column :questionnaire, &:questionnaire_utile
-    end
-  end
+  render partial: 'admin/situations_configurations/liste_situations_configurations',
+         locals: { situations_configurations: parcours_type.situations_configurations }
 end

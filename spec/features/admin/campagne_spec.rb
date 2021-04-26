@@ -62,6 +62,12 @@ describe 'Admin - Campagne', type: :feature do
   describe 'création' do
     let!(:situation_inventaire) { create :situation_inventaire }
     let!(:situation_maintenance) { create :situation_maintenance }
+    let!(:parcours_type_complet) do
+      parcours = create :parcours_type, :complet
+      parcours.situations_configurations.create situation: situation_inventaire
+      parcours.situations_configurations.create situation: situation_maintenance
+      parcours
+    end
 
     context 'en administrateur' do
       before do
@@ -87,6 +93,11 @@ describe 'Admin - Campagne', type: :feature do
     end
 
     context 'en organisation' do
+      let!(:parcours_type_competences_de_base) do
+        parcours = create :parcours_type, nom_technique: :competences_de_base
+        parcours.situations_configurations.create situation: situation_maintenance
+        parcours
+      end
       before do
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
@@ -95,7 +106,7 @@ describe 'Admin - Campagne', type: :feature do
 
       context 'créer un parcours complet' do
         before do
-          choose 'campagne_modele_parcours_complet'
+          choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
         it do
@@ -112,7 +123,7 @@ describe 'Admin - Campagne', type: :feature do
 
       context 'créer un parcours compétences de base' do
         before do
-          choose 'campagne_modele_parcours_competences_de_base'
+          choose "campagne_parcours_type_id_#{parcours_type_competences_de_base.id}"
           click_on 'Créer'
         end
 

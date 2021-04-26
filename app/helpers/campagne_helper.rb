@@ -1,26 +1,17 @@
 # frozen_string_literal: true
 
 module CampagneHelper
-  def traduction_modele_parcours_campagne(modele_parcours)
-    I18n.t(
-      "activerecord.attributes.campagne.modele_parcours.#{modele_parcours}"
-    )
-  end
-
-  def collection_modeles_parcours(situations)
-    Campagne::PARCOURS.keys.map do |modele_parcours|
+  def collection_parcours_type(liste_parcours_type)
+    liste_parcours_type.map do |parcours_type|
       [
-        label_modele_parcours(modele_parcours, situations),
-        modele_parcours
+        label_parcours_type(parcours_type),
+        parcours_type.id
       ]
     end
   end
 
-  def label_modele_parcours(modele_parcours, situations)
+  def label_parcours_type(parcours_type)
     render partial: 'components/input_choix_parcours',
-           locals: {
-             modele_parcours: modele_parcours,
-             situations: situations
-           }
+           locals: { parcours_type: parcours_type }
   end
 end

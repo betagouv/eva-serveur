@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe 'Nouvelle Structure', type: :feature do
+  let!(:parcours_type_complet) { create :parcours_type, :complet }
+
   before do
     visit nouvelle_structure_path
     fill_in :campagne_libelle, with: 'Nice, pack demandeur'
@@ -51,6 +53,9 @@ describe 'Nouvelle Structure', type: :feature do
     bienvenue = create :situation_bienvenue
     maintenance = create :situation_maintenance
     objets_trouves = create :situation_objets_trouves
+    parcours_type_complet.situations_configurations.create situation: bienvenue
+    parcours_type_complet.situations_configurations.create situation: maintenance
+    parcours_type_complet.situations_configurations.create situation: objets_trouves
 
     expect do
       click_on 'Valider la création de mon compte'

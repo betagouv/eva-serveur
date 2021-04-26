@@ -1,20 +1,25 @@
+$eva_main_blue: #6E84FE;
+$eva_dark_green: #0C826D;
+$eva_green: #9ADBD0;
+$eva_dark_orange: #E4912F;
+$eva_orange: #FDAF54;
+$eva_red: #fd5c54;
+$eva_dark: #1E416A;
+$eva_dark_blue_grey: #7B83B0;
+$eva_bluegrey: #D6DAEC;
+$eva_light: #FBF9FA;
+
 $couleur-separateur: #afc5d0;
 $couleur-fond-principale: #d8e8f7;
-$eva_main_blue: #6E84FE;
-$eva_light: #FBF9FA;
-$couleur-texte: #7B83B0;
-$eva_dark: #1E416A;
-$couleur-liens: blue;
-$eva_red: #fd5c54;
+$couleur-texte: $eva_dark_blue_grey;
+$couleur-liens: $eva_main_blue;
 $couleur-accent-erreur: $eva_red;
-$couleur-warning: #fdaf54;
-$couleur-legere-accent-validation: #9ADBD0;
-$bluegrey: #D6DAEC;
-$darkgreen: #0C826D;
+$couleur-warning: $eva_orange;
+$couleur-legere-accent-validation: $eva_green;
 
 $border-radius: .75rem;
 
-$couleur-niveau-indetermine: $bluegrey;
+$couleur-niveau-indetermine: $eva_bluegrey;
 $couleur-niveau-1: $couleur-legere-accent-validation;
 $couleur-niveau-2: $couleur-warning;
 $couleur-niveau-3: $couleur-accent-erreur;

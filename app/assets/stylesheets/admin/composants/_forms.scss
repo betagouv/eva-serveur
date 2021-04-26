@@ -14,7 +14,7 @@ form {
       font-family: $font-titre;
       text-shadow: none;
       color: $eva_main_blue;
-      background: $bluegrey;
+      background: $eva_bluegrey;
     }
 
     > ol > li {
@@ -144,7 +144,7 @@ form {
   textarea {
     width: 67%;
     color: $eva_dark;
-    border-color: $bluegrey;
+    border-color: $eva_bluegrey;
     border-radius: .5rem;
     &:focus {
       border: 1px solid $eva_main_blue;
@@ -177,7 +177,7 @@ form {
   &.filter_form {
     input[type="text"] {
       color: $eva_dark;
-      border-color: $bluegrey;
+      border-color: $eva_bluegrey;
       border-radius: .5rem;
       &:focus {
         border: 1px solid $eva_main_blue;
@@ -210,7 +210,7 @@ form:not(.filter_form) .select2-container {
   }
 }
 .select2-container--default .select2-selection--single {
-  border-color: $bluegrey;
+  border-color: $eva_bluegrey;
   .select2-selection__arrow b {
     border-color: $eva_main_blue transparent transparent transparent;
   }

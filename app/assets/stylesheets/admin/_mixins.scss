@@ -12,7 +12,7 @@
 }
 @mixin carte-avec-bordure {
   @include carte();
-  border: 1px solid $bluegrey;
+  border: 1px solid $eva_bluegrey;
 }
 @mixin bouton() {
   padding: 0 0.94rem;

@@ -39,19 +39,19 @@ table.index_table {
         line-height: 1.2;
         border-bottom: 0;
         vertical-align: middle;
-        border-top: 1px solid $bluegrey;
-        border-bottom: 1px solid $bluegrey;
+        border-top: 1px solid $eva_bluegrey;
+        border-bottom: 1px solid $eva_bluegrey;
         color: $eva_dark;
         background-color: #FFF;
         &:first-child {
           font-weight: 600;
           padding-left: 1.375rem;
-          border-left: 1px solid $bluegrey;
+          border-left: 1px solid $eva_bluegrey;
           border-top-left-radius: 0.5rem;
           border-bottom-left-radius: 0.5rem;
         }
         &:last-child {
-          border-right: 1px solid $bluegrey;
+          border-right: 1px solid $eva_bluegrey;
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
         }

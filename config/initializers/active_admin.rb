@@ -196,7 +196,6 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_stylesheet.css'
   #
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():
-  config.register_stylesheet 'restitution_globale/restitution_globale.css'
 
   #
   # To load a javascript file:

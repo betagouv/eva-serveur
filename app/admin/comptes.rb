@@ -44,10 +44,7 @@ ActiveAdmin.register Compte do
       end
       f.input :statut_validation, as: :radio
       if peut_modifier_mot_de_passe?
-        if resource.persisted?
-          h2 'Changer le mot de passe (laisser vide par défaut)', class: 'titre titre--medium'
-        end
-        f.input :password
+        f.input :password, hint: resource.persisted? ? t('.aide_mot_de_passe') : ''
         f.input :password_confirmation
       end
     end

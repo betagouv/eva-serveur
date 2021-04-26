@@ -3,7 +3,7 @@ fr:
     dashboard:
       index:
         info_comptes_en_attente: |
-          Des demandes d'accès sont en attente de validation. Vous pouvez les confirmer <a href="%{lien}">dans la page "Comptes"</a>.
+          Des demandes d'accès sont en attente de validation. Vous pouvez les confirmer <a href="%{lien}">dans la page "Comptes"</a>
       dashboard:
         statistiques:
           titre: Statistiques

@@ -96,14 +96,14 @@ end
 situations_data = [
   { libelle: 'Bienvenue', nom_technique: 'bienvenue' },
   { libelle: 'Livraison', nom_technique: 'livraison' },
-  { libelle: 'Inventaire', nom_technique: 'inventaire' },
   { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
   { libelle: 'Contrôle', nom_technique: 'controle' },
   { libelle: 'Sécurité', nom_technique: 'securite' },
   { libelle: 'Tri', nom_technique: 'tri' },
   { libelle: 'Bureau', nom_technique: 'questions' },
   { libelle: 'Prévention', nom_technique: 'prevention' },
-  { libelle: 'Maintenance', nom_technique: 'Maintenance' }
+  { libelle: 'Maintenance', nom_technique: 'Maintenance' },
+  { libelle: 'Inventaire', nom_technique: 'inventaire' }
 ]
 situations_data.each do |situation_data|
   Situation.find_or_create_by(nom_technique: situation_data[:nom_technique]) do |situation|

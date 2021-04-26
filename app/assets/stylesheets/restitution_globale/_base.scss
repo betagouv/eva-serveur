@@ -1,17 +1,10 @@
 @import "variables";
 
-.panel_admin_restitution_globale {
-  background-color: white;
-}
-
 .admin-scores {
   margin-top: 1rem;
 }
 
 .admin_restitution_globale {
-  $grid-gutter-width: 2rem;
-  @import "../bootstrap_minimal";
-
   color: $couleur-texte;
   font-size: 1rem;
   font-family: $font-texte;

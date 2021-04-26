@@ -1,43 +1,15 @@
 # frozen_string_literal: true
 
-panel t('.titre.details') do
-  attributes_table_for resource do
-    row :nom
-    row :campagne
-    row :email
-    row :telephone
-    row :created_at
-    if can?(:manage, Compte)
-      row :terminee_le
-      row(:temps_total) { formate_duree statistiques.temps_total }
+div class: 'restitution-globale ' do
+  div class: 'row' do
+    div class: 'col-6' do
+      render 'details_evaluation'
+      render 'restitution_globale', pdf: false
+      render 'parties'
     end
-  end
-end
 
-panel t('.titre.restitution_globale'), class: 'panel_admin_restitution_globale' do
-  render partial: 'restitution_globale', locals: { pdf: false }
-end
-
-if can?(:manage, Compte)
-  panel t('.titre.parties') do
-    form method: :get do
-      table_for parties do
-        column :selection do |partie|
-          check_box_tag 'parties_selectionnees[]', partie.id,
-                        params[:parties_selectionnees].include?(partie.id)
-        end
-        column :situation
-        column :created_at
-        column '' do |partie|
-          span link_to t('.rapport'), admin_restitution_path(partie)
-          span link_to t('.evenements'),
-                       admin_campagne_evenements_path(
-                         resource.campagne,
-                         q: { 'session_id_equals' => partie.session_id }
-                       )
-        end
-      end
-      div submit_tag 'Valider la sélection'
+    div class: 'menu-transverse col-2' do
+      render partial: 'menu'
     end
   end
 end

@@ -4,10 +4,10 @@ niveaux_competences = restitution_globale.niveaux_competences
 
 div class: 'admin_restitution_globale' do
   if auto_positionnement
-    div class: 'page' do
+    div class: 'page panel' do
       render 'entete_page', restitution_globale: restitution_globale
 
-      div class: 'marges-page' do
+      div id: 'auto_positionnement', class: 'marges-page' do
         render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
       end
 
@@ -15,10 +15,10 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  div class: 'page' do
+  div class: 'page panel' do
     render 'entete_page', restitution_globale: restitution_globale
 
-    div class: 'marges-page' do
+    div id: 'competences_transversales', class: 'marges-page' do
       div class: 'text-center my-5' do
         h2 t('.competences_fortes_titre')
         para class: 'legende-titre' do
@@ -79,10 +79,10 @@ div class: 'admin_restitution_globale' do
     render 'pied_page'
   end
 
-  div class: 'page' do
+  div class: 'page panel' do
     render 'entete_page', restitution_globale: restitution_globale
 
-    div class: 'marges-page' do
+    div id: 'français_mathematiques', class: 'marges-page' do
       h2 class: 'text-center my-4' do
         span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
       end
@@ -121,14 +121,14 @@ div class: 'admin_restitution_globale' do
       !restitution.questions_redaction.empty?
   end
   unless mes_avec_redaction_de_notes.empty?
-    div class: 'page' do
+    div class: 'page panel' do
       render 'entete_page', restitution_globale: restitution_globale
 
       h2 class: 'text-center my-5' do
         span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
       end
 
-      div class: 'marges-page mt-4' do
+      div id: 'communication_ecrite', class: 'marges-page mt-4' do
         mes_avec_redaction_de_notes.each do |restitution|
           situation = restitution.situation
 
@@ -146,7 +146,7 @@ div class: 'admin_restitution_globale' do
 end
 
 if can?(:manage, Compte) && !pdf
-  div class: 'admin-scores' do
+  div class: 'admin-scores panel' do
     tabs do
       tab 'Scores litteratie et numératie' do
         scores_niveau1 = restitution_globale.scores_niveau1.calcule

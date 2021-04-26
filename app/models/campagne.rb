@@ -1,27 +1,10 @@
 # frozen_string_literal: true
 
 class Campagne < ApplicationRecord
-  PARCOURS = {
-    complet: %i[
-      bienvenue
-      maintenance
-      livraison
-      tri
-      controle
-      securite
-      objets_trouves
-      inventaire
-    ],
-    competences_de_base: %i[
-      maintenance
-      livraison
-      objets_trouves
-    ]
-  }.freeze
-
   has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
   belongs_to :questionnaire, optional: true
   belongs_to :compte
+  belongs_to :parcours_type, optional: true
   default_scope { order(created_at: :asc) }
 
   validates :libelle, presence: true
@@ -30,9 +13,7 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
   accepts_nested_attributes_for :compte
 
-  attr_accessor :initialise_situations, :modele_parcours
-
-  before_create :initialise_situations_par_defaut, if: :initialise_situations
+  before_create :initialise_situations_par_defaut, if: :parcours_type_id
 
   def display_name
     libelle
@@ -45,10 +26,8 @@ class Campagne < ApplicationRecord
   private
 
   def initialise_situations_par_defaut
-    self.modele_parcours ||= :complet
-    PARCOURS[modele_parcours.to_sym].each do |nom_technique|
-      situation = Situation.find_by nom_technique: nom_technique
-      situations_configurations.build situation: situation unless situation.nil?
+    parcours_type.situations_configurations.each do |situation_configuration|
+      situations_configurations.build situation_id: situation_configuration.situation_id
     end
   end
 end

@@ -25,7 +25,8 @@ class NouvellesStructuresController < ApplicationController
 
   def campagne_parametres
     parametres = params.require(:campagne).permit!.to_h
-    parametres.deep_merge(initialise_situations: true,
+    parcours_type = ParcoursType.par_defaut
+    parametres.deep_merge(parcours_type: parcours_type,
                           compte_attributes: { statut_validation: :acceptee })
   end
 

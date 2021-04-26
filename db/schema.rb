@@ -84,7 +84,9 @@ ActiveRecord::Schema.define(version: 2021_04_28_162641) do
     t.uuid "compte_id"
     t.integer "nombre_evaluations", default: 0
     t.boolean "affiche_competences_fortes", default: true
+    t.uuid "parcours_type_id"
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
+    t.index ["parcours_type_id"], name: "index_campagnes_on_parcours_type_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
   end
 

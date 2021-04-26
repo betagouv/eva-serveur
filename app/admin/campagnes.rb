@@ -4,7 +4,7 @@ ActiveAdmin.register Campagne do
   menu priority: 3
 
   permit_params :libelle, :code, :questionnaire_id, :compte,
-                :compte_id, :affiche_competences_fortes, :initialise_situations, :modele_parcours,
+                :compte_id, :affiche_competences_fortes, :parcours_type_id,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle
@@ -35,12 +35,7 @@ ActiveAdmin.register Campagne do
     helper_method :statistiques
 
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
-    before_action :situations, only: %i[new create edit update]
-
-    def create
-      params[:campagne][:initialise_situations] = true
-      create!
-    end
+    before_action :parcours_type, only: %i[new create edit update]
 
     def show
       @statistiques ||= StatistiquesCampagne.new(resource)
@@ -58,11 +53,11 @@ ActiveAdmin.register Campagne do
     def assigne_valeurs_par_defaut
       params[:campagne] ||= {}
       params[:campagne][:compte_id] ||= current_compte.id
-      params[:campagne][:modele_parcours] ||= 'complet'
+      params[:campagne][:parcours_type_id] ||= ParcoursType.par_defaut&.id
     end
 
-    def situations
-      @situations = Situation.all
+    def parcours_type
+      @parcours_type = ParcoursType.includes(situations_configurations: :situation).all
     end
   end
 end

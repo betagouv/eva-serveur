@@ -22,10 +22,10 @@ div class: 'nouvelle-campagne' do
           div class: 'panel' do
             h2 t('.choix_parcours'), class: 'titre titre--medium'
             f.inputs class: 'input-choix-parcours' do
-              f.input :modele_parcours, as: :radio,
-                                        collection: collection_modeles_parcours(situations),
-                                        required: true,
-                                        label: false
+              f.input :parcours_type_id, as: :radio,
+                                         collection: collection_parcours_type(parcours_type),
+                                         required: true,
+                                         label: false
             end
           end
         end

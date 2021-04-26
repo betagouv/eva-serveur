@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+if can?(:manage, Compte)
+  panel t('.titre') do
+    form method: :get do
+      table_for parties do
+        column :selection do |partie|
+          check_box_tag 'parties_selectionnees[]', partie.id,
+                        params[:parties_selectionnees].include?(partie.id)
+        end
+        column :situation
+        column :created_at
+        column '' do |partie|
+          span link_to t('.rapport'), admin_restitution_path(partie)
+          span link_to t('.evenements'),
+                       admin_campagne_evenements_path(
+                         resource.campagne,
+                         q: { 'session_id_equals' => partie.session_id }
+                       )
+        end
+      end
+      div submit_tag 'Valider la sélection'
+    end
+  end
+end

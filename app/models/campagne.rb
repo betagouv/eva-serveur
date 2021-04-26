@@ -5,12 +5,12 @@ class Campagne < ApplicationRecord
     complet: %i[
       bienvenue
       maintenance
-      inventaire
       livraison
       tri
       controle
       securite
       objets_trouves
+      inventaire
     ],
     competences_de_base: %i[
       maintenance

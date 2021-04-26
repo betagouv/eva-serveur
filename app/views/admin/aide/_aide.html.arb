@@ -15,7 +15,7 @@ div class: 'aide' do
       }
     end
 
-    div class: 'menu_aide col-2' do
+    div class: 'menu-transverse col-2' do
       render partial: 'menu', locals: { categories: categories }
     end
   end

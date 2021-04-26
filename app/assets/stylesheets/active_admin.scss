@@ -67,7 +67,7 @@ body {
   height: 30px;
 
   &.piece-bien-placee {
-    background-color: $darkgreen;
+    background-color: $eva_dark_green;
   }
 
   &.piece-mal-placee {
@@ -75,6 +75,6 @@ body {
   }
 
   &.piece-ratee {
-    background-color: $bluegrey;
+    background-color: $eva_bluegrey;
   }
 }

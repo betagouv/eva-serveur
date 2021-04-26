@@ -43,7 +43,7 @@ body.logged_in {
     &.flash_notice {
       @include reset-flash;
       background-color: $couleur-legere-accent-validation;
-      color: $darkgreen;
+      color: $eva_dark_green;
 
       &::before {
         background-image: asset-data-url('information_generale.svg');
@@ -90,7 +90,7 @@ body.logged_out {
       color: $eva_light;
       margin-bottom: 0;
       &_notice {
-        background-color: $darkgreen;
+        background-color: $eva_dark_green;
       }
       &_alert {
         background-color: $couleur-accent-erreur;

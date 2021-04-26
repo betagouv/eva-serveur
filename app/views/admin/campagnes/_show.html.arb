@@ -24,17 +24,8 @@ end
 
 panel t('.titre_panel_parcours'), class: 'campagne-parcours' do
   div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
-  if can?(:manage, Compte)
-    reorderable_table_for campagne.situations_configurations do
-      column :situation
-      column :questionnaire, &:questionnaire_utile
-    end
-  else
-    table_for campagne.situations_configurations do
-      column :situation
-      column :questionnaire, &:questionnaire_utile
-    end
-  end
+  render partial: 'admin/situations_configurations/liste_situations_configurations',
+         locals: { situations_configurations: campagne.situations_configurations }
 end
 
 panel 'Consulter' do

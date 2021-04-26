@@ -38,11 +38,8 @@ div class: 'nouvelle-campagne' do
               f.input :affiche_competences_fortes
               f.input :questionnaire
               if resource.persisted?
-                f.has_many :situations_configurations, allow_destroy: true do |c|
-                  c.input :id, as: :hidden
-                  c.input :situation
-                  c.input :questionnaire
-                end
+                render partial: 'admin/situations_configurations/input_situations_configurations',
+                       locals: { f: f }
               end
             end
           end

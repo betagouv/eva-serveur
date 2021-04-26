@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+if can?(:manage, Compte)
+  reorderable_table_for situations_configurations do
+    column :situation
+    column :questionnaire, &:questionnaire_utile
+  end
+else
+  table_for situations_configurations do
+    column :situation
+    column :questionnaire, &:questionnaire_utile
+  end
+end

@@ -45,6 +45,8 @@
 @import 'admin/comptes';
 @import 'admin/pages/campagne';
 
+@import 'restitution_globale/base';
+
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //

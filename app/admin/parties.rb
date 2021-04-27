@@ -34,7 +34,8 @@ ActiveAdmin.register Partie do
     helper_method :session_ids_des_evenements_fin
 
     def session_ids_des_evenements_fin
-      Evenement.where(nom: Restitution::Base::EVENEMENT[:FIN_SITUATION]).select(:session_id)
+      Evenement.where(nom: Restitution::Base::EvenementsHelper::EVENEMENT[:FIN_SITUATION])
+               .select(:session_id)
     end
 
     def scoped_collection

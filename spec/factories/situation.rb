@@ -2,6 +2,9 @@
 
 FactoryBot.define do
   factory :situation do
+    libelle { 'Situation demo' }
+    nom_technique { 'situation_demo' }
+
     factory :situation_inventaire do
       libelle { 'Inventaire' }
       nom_technique { 'inventaire' }

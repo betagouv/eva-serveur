@@ -13,6 +13,16 @@ class Structure < ApplicationRecord
 
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
 
+  scope :par_nombre_d_evaluations, lambda { |condition_nb_evaluations|
+    joins('INNER JOIN comptes ON structures.id = comptes.structure_id')
+      .joins('INNER JOIN campagnes ON comptes.id = campagnes.compte_id')
+      .group('structures.id')
+      .having("SUM(campagnes.nombre_evaluations) #{condition_nb_evaluations}")
+  }
+  scope :pas_vraiment_utilisatrices, -> { par_nombre_d_evaluations '= 0' }
+  scope :non_activees, -> { par_nombre_d_evaluations 'BETWEEN 1 AND 3' }
+  scope :actives, -> { par_nombre_d_evaluations '> 3' }
+
   def display_name
     nom
   end

@@ -13,6 +13,11 @@ ActiveAdmin.register Structure do
   filter :code_postal
   filter :created_at
 
+  scope :all
+  scope :pas_vraiment_utilisatrices
+  scope :non_activees
+  scope :actives
+
   action_item :nouvelle_structure, only: :index do
     link_to I18n.t('admin.structure.nouvelle_structure'), nouvelle_structure_path
   end

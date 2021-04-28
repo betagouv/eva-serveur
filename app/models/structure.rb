@@ -9,7 +9,13 @@ class Structure < ApplicationRecord
   validates :nom, :code_postal, :type_structure, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + ['non_communique']) }
 
-  geocoded_by :code_postal, params: { countrycodes: 'fr' }
+  geocoded_by :code_postal, state: :region, params: { countrycodes: 'fr' } do |obj, resultats|
+    if (resultat = resultats.first)
+      obj.region = resultat.state
+      obj.latitude = resultat.latitude
+      obj.longitude = resultat.longitude
+    end
+  end
 
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
 

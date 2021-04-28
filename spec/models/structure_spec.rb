@@ -20,7 +20,8 @@ describe Structure, type: :model do
       Geocoder::Lookup::Test.add_stub(
         '75012', [
           {
-            'coordinates' => [40.7143528, -74.0059731]
+            'coordinates' => [40.7143528, -74.0059731],
+            'state' => 'Île-de-France'
           }
         ]
       )
@@ -30,6 +31,7 @@ describe Structure, type: :model do
     it do
       expect(structure.latitude).to eql(40.7143528)
       expect(structure.longitude).to eql(-74.0059731)
+      expect(structure.region).to eql('Île-de-France')
     end
 
     it { expect(Structure.geocoder_options[:params]).to include(countrycodes: 'fr') }

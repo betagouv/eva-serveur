@@ -66,18 +66,18 @@ class Ability
   def droit_questionnaire
     can :read, Questionnaire
     cannot :destroy, Questionnaire do |q|
-      Campagne.where(questionnaire: q).present? ||
+      Campagne.where(questionnaire: q).exists? ||
         Situation.where(questionnaire: q)
                  .or(Situation.where(questionnaire_entrainement: q))
-                 .present?
+                 .exists?
     end
   end
 
   def droit_question
     can :read, Question
     cannot :destroy, Question do |q|
-      QuestionnaireQuestion.where(question: q).present? ||
-        Evenement.where("donnees->>'question' = ?", q.id.to_s).present?
+      QuestionnaireQuestion.where(question: q).exists? ||
+        Evenement.where("donnees->>'question' = ?", q.id.to_s).exists?
     end
   end
 
@@ -85,19 +85,19 @@ class Ability
     can :create, Compte
     can %i[read update], Compte, structure_id: compte.structure_id
     cannot :destroy, Compte do |q|
-      Campagne.where(compte: q).present?
+      Campagne.where(compte: q).exists?
     end
   end
 
   def droit_choix
     cannot :destroy, Choix do |c|
-      Evenement.where("donnees->>'reponse' = ?", c.id.to_s).present?
+      Evenement.where("donnees->>'reponse' = ?", c.id.to_s).exists?
     end
   end
 
   def droit_structure
     cannot :destroy, Structure do |s|
-      Compte.where(structure: s).present?
+      Compte.where(structure: s).exists?
     end
   end
 

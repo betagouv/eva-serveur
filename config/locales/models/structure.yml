@@ -6,6 +6,7 @@ fr:
         updated_at: Mise à jour le
         nom: Nom de la structure
         code_postal: Code Postal
+        region: Région
         type_structure:
           one: 'Type de structure'
           non_communique: Non communiqué

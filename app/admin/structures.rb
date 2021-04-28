@@ -11,6 +11,9 @@ ActiveAdmin.register Structure do
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures
   filter :code_postal
+  filter :region,
+         as: :select,
+         collection: proc { Structure.distinct.order(:region).pluck(:region) }
   filter :created_at
 
   scope :all

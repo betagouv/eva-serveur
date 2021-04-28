@@ -7,6 +7,7 @@ panel 'Détails de la structure' do
       traduction_type_structure(structure.type_structure)
     end
     row :code_postal
+    row :region
     row :latitude
     row :longitude
     row :created_at

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_141949) do
+ActiveRecord::Schema.define(version: 2021_04_28_162641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 2021_04_23_141949) do
     t.float "latitude"
     t.float "longitude"
     t.string "type_structure"
+    t.string "region"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
   end
 

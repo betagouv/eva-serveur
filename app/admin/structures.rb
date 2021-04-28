@@ -34,7 +34,9 @@ ActiveAdmin.register Structure do
     column :nombre_evaluations do |structure|
       Evaluation.joins(campagne: :compte).where('comptes.structure_id' => structure).count
     end
-    column :created_at
+    column :created_at do |structure|
+      l(structure.created_at, format: :court)
+    end
     actions
   end
 

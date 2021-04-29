@@ -16,6 +16,8 @@ fr:
     sidebars:
       filters: "Rechercher"
     scopes:
-      pas_vraiment_utilisatrices: Pas vraiment utilisatrices ☃️ 
-      non_activees: Non activées 🐤 
+      pas_vraiment_utilisatrices: Pas vraiment utilisatrices ☃️
+      non_activees: Non activées 🐤
       actives: Actives ❤️
+      inactives: Inactives 😴
+      abandonnistes : Abandonnistes 💔

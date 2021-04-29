@@ -12,6 +12,10 @@ class Evaluation < ApplicationRecord
     nom
   end
 
+  scope :de_la_structure, lambda { |structure|
+    joins(campagne: :compte).where('comptes.structure_id' => structure)
+  }
+
   private
 
   def trouve_campagne_depuis_code

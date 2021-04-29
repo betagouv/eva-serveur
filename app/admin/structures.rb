@@ -20,6 +20,8 @@ ActiveAdmin.register Structure do
   scope :pas_vraiment_utilisatrices
   scope :non_activees
   scope :actives
+  scope :inactives
+  scope :abandonnistes
 
   action_item :nouvelle_structure, only: :index do
     link_to I18n.t('admin.structure.nouvelle_structure'), nouvelle_structure_path
@@ -31,11 +33,16 @@ ActiveAdmin.register Structure do
       traduction_type_structure(structure.type_structure)
     end
     column :code_postal
-    column :nombre_evaluations do |structure|
-      Evaluation.joins(campagne: :compte).where('comptes.structure_id' => structure).count
-    end
     column :created_at do |structure|
       l(structure.created_at, format: :court)
+    end
+    column :nombre_evaluations do |structure|
+      Evaluation.de_la_structure(structure).count
+    end
+    column :derniere_evaluation do |structure|
+      derniere_evaluation = Evaluation.de_la_structure(structure).order(:created_at).last
+
+      l(derniere_evaluation.created_at, format: :court) if derniere_evaluation.present?
     end
     actions
   end

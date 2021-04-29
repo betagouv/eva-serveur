@@ -7,6 +7,8 @@ fr:
         nom: Nom de la structure
         code_postal: Code Postal
         region: Région
+        derniere_evaluation: Dernière évaluation
+        nombre_evaluations: Nombre d'évaluations
         type_structure:
           one: 'Type de structure'
           non_communique: Non communiqué

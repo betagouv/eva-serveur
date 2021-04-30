@@ -19,3 +19,9 @@ fr:
           titre: Bienvenue dans votre espace conseiller !
           description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
           action: Consulter le guide de prise en main
+      campagnes:
+        titre: Vos campagnes
+        action: Gérer mes campagnes
+        entete-libelle: Libellé
+        entete-code: Code campagne
+        entete-url: URL

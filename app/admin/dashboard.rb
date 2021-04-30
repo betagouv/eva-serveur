@@ -6,11 +6,13 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     evaluations = Evaluation.accessible_by(current_ability).order(created_at: :desc).limit(10)
     actualites = Actualite.order(created_at: :desc).first(4)
+    campagnes = Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
 
     render partial: 'dashboard',
            locals: {
              evaluations: evaluations,
-             actualites: actualites
+             actualites: actualites,
+             campagnes: campagnes
            }
   end
 

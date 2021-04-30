@@ -10,6 +10,10 @@ columns do
   end
 end
 
+columns do
+  render 'campagnes', campagnes: campagnes
+end
+
 if can?(:manage, Compte)
   panel t('.statistiques.titre') do
     text_node %(<iframe

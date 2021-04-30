@@ -19,6 +19,6 @@ fr:
 
         ##Les informations à remettre aux bénéficiaires pour réaliser les parcours :
 
-        - URL de connexion au parcours : [https://app.eva.beta.gouv.fr/](https://app.eva.beta.gouv.fr/)
+        - URL de connexion au parcours : [%{url_client}](%{url_client})
 
         - Code de campagne (à donner aux bénéficiaires) : **%{code_campagne}**

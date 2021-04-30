@@ -17,6 +17,52 @@
       display: inline-block;
     }
   }
+
+  .campagnes-liste {
+    color: $eva_dark_blue_grey;
+    .liste-entete {
+      display: flex;
+      padding: 0 1rem;
+      margin-bottom: .75rem;
+      font-size:0.875rem;
+      .entete {
+        &-libelle {
+          flex: 2;
+        }
+        &-code {
+          flex: 1;
+        }
+        &-url {
+          flex: 3;
+        }
+      }
+    }
+    .campagne {
+      @include carte-avec-ombre();
+      padding: 0.7rem 1rem;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+      font-size:0.875rem;
+      &-libelle {
+        flex: 2;
+        font-size: 1rem;
+        font-family: $font-titre;
+        font-weight: 600;
+        color: $eva_main_blue;
+      }
+      &-code {
+        flex: 1;
+      }
+      &-url {
+        flex: 3;
+        a {
+          color: $eva_dark_blue_grey;
+        }
+      }
+    }
+  }
 }
 
 .evaluations-premiere-visite {

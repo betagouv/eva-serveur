@@ -7,6 +7,7 @@ class Campagne < ApplicationRecord
       maintenance
       livraison
       tri
+      controle
       securite
       objets_trouves
       inventaire

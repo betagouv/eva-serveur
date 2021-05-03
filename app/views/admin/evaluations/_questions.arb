@@ -4,13 +4,20 @@ unless restitution.questions_redaction.empty?
   h3 t('.situation', situation: situation_libelle), class: 'situation-redaction mb-3'
   restitution.questions_redaction.each do |question, reponse|
     div class: 'row mb-3' do
-      div class: 'col-6' do
+      div class: 'col-4' do
         h2 t('admin.restitutions.reponse_expression_ecrite', question: question.libelle),
            class: 'titre-redaction'
       end
     end
-    div class: 'row' do
-      div class: 'col-6 mb-4' do
+    div class: 'row reponse-question' do
+      span class: 'crochet-aide-redaction' do
+        if pdf
+          svg_tag_base64 'crochet-aide-redaction.svg'
+        else
+          image_tag 'crochet-aide-redaction.svg'
+        end
+      end
+      div class: 'col-4 mb-4' do
         div reponse, class: 'my-2 note-redaction' do
           span class: 'image-redaction' do
             if pdf
@@ -21,22 +28,16 @@ unless restitution.questions_redaction.empty?
           end
         end
       end
-      div class: 'col-6 mb-4' do
-        div class: 'my-2 aide-redaction' do
-          span class: 'crochet-aide-redaction' do
-            if pdf
-              svg_tag_base64 'crochet-aide-redaction.svg'
-            else
-              image_tag 'crochet-aide-redaction.svg'
-            end
-          end
-          div class: 'patch-crochet'
-          div md t('admin.restitutions.aide_interpretation_expression_ecrite')
-          span class: 'image-redaction' do
-            if pdf
-              svg_tag_base64 'aide-redaction.svg'
-            else
-              image_tag 'aide-redaction.svg'
+      div class: 'col-4 mb-4' do
+        div class: 'aide-redaction-container' do
+          div class: 'my-2 aide-redaction' do
+            div md t('admin.restitutions.aide_interpretation_expression_ecrite')
+            span class: 'image-redaction' do
+              if pdf
+                svg_tag_base64 'aide-redaction.svg'
+              else
+                image_tag 'aide-redaction.svg'
+              end
             end
           end
         end

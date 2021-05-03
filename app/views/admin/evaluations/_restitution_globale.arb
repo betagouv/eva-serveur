@@ -82,7 +82,7 @@ div class: 'admin_restitution_globale' do
   div class: 'page panel' do
     render 'entete_page', restitution_globale: restitution_globale
 
-    div id: 'français_mathematiques', class: 'marges-page' do
+    div id: 'francais_mathematiques', class: 'marges-page' do
       h2 class: 'text-center my-4' do
         span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
       end

@@ -21,7 +21,7 @@ div class: 'conteneur' do
         end
       end
       li do
-        a href: '#français_mathematiques' do
+        a href: '#francais_mathematiques' do
           text_node 'Français et Mathématiques'
         end
       end

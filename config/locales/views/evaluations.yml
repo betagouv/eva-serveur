@@ -37,7 +37,7 @@ fr:
           - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
 
           Pour obtenir vos scores, n'hésitez pas à repasser le parcours eva plus tard.
-        etiquette_lien_metiers: 'Détail et métiers associés :'
+        etiquette_lien_metiers: 'Détail et métiers associés : '
       restitution_competence:
         indetermine: non obs.
         1: 1

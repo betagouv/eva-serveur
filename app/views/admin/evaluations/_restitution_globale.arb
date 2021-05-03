@@ -55,17 +55,17 @@ div class: 'admin_restitution_globale' do
                   div md t("#{competence}.stanine#{interpretation}",
                            scope: 'admin.evaluations.restitution_competence')
                   div class: 'lien-metier' do
-                    span class: 'image-lien' do
-                      if pdf
-                        svg_tag_base64 'lien.svg'
-                      else
-                        image_tag 'lien.svg'
-                      end
+                    if pdf
+                      text_node svg_tag_base64 'lien.svg', class: 'image-lien'
+                    else
+                      text_node image_tag 'lien.svg', class: 'image-lien'
                     end
-                    span t('.etiquette_lien_metiers'), class: 'align-middle'
-                    url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
-                    a href: url_competence, target: '_blank', class: 'align-middle' do
-                      url_competence
+                    span class: 'align-middle' do
+                      text_node t('.etiquette_lien_metiers')
+                      url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
+                      a href: url_competence, target: '_blank' do
+                        url_competence
+                      end
                     end
                   end
                 end

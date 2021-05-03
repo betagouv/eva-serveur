@@ -175,6 +175,8 @@
     }
 
     .description-competence {
+      font-size: .875rem;
+
       .lien-metier {
         color: $eva_main_blue;
 
@@ -268,6 +270,10 @@
     }
   }
 
+  .reponse-question {
+    position: relative;
+  }
+
   .note-redaction {
     position: relative;
     font-size: 1rem;
@@ -277,6 +283,12 @@
     border: 1px solid $eva_main_blue;
     box-sizing: border-box;
     border-radius: 1.8rem;
+  }
+
+  .aide-redaction-container {
+    background-color: white;
+    z-index: 2;
+    position: relative;
   }
 
   .aide-redaction {
@@ -313,19 +325,13 @@
   .crochet-aide-redaction {
     position: absolute;
     top: 3rem;
-    left: -2.6rem;
+    left: 48%; // Permet d'avoir une propriété left dans le cas où le calc suivant ne fonctionne pas
+    left: calc(50% - 1.2rem);
+    z-index: 1;
+
     img {
       height: 1rem;
     }
-  }
-
-  .patch-crochet {
-    position: absolute;
-    top: 3rem;
-    left: 0;
-    background-color: white;
-    height: 2rem;
-    width: 1rem;
   }
 }
 

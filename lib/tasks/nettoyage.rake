@@ -45,6 +45,8 @@ namespace :nettoyage do
 
   desc 'Anonymise la base de données en entier'
   task anonymise: :environment do
+    return if Rails.env.production?
+
     logger = RakeLogger.logger
     rng = RandomNameGenerator.new
 

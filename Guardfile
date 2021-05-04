@@ -46,6 +46,7 @@ group :red_green_refactor, halt_on_fail: true do
 
   guard :rubocop do
     watch(/.+\.rb$/)
+    watch(/.+\.rake$/)
     watch(%r{(?:.+/)?\.rubocop(?:_todo)?\.yml$}) { |m| File.dirname(m[0]) }
   end
 end

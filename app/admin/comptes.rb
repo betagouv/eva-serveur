@@ -37,7 +37,7 @@ ActiveAdmin.register Compte do
       f.input :email
       f.input :telephone
       if can? :manage, Compte
-        f.input :role, as: :select, collection: %w[administrateur organisation]
+        f.input :role, as: :select, collection: Compte::ROLES
         f.input :structure
       else
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }

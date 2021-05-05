@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  permit_params :campagne_id, :nom, :email, :telephone
+  permit_params :campagne_id, :nom, :email, :telephone, :terminee_le
   menu priority: 4
 
   includes :campagne
@@ -33,6 +33,8 @@ ActiveAdmin.register Evaluation do
                                                params[:parties_selectionnees])
     render partial: 'show'
   end
+
+  form partial: 'form'
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques

@@ -30,6 +30,7 @@ body.logged_in {
     }
 
     &.flash_annonce_generale,
+    &.flash_compte_generique,
     &.flash_comptes_en_attente {
       @include reset-flash;
       color: $eva_dark;

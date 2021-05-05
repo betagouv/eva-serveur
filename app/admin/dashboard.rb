@@ -24,6 +24,7 @@ ActiveAdmin.register_page 'Dashboard' do
         flash.now[:comptes_en_attente] =
           "<span>#{t('.info_comptes_en_attente', lien: lien)}</span>".html_safe
       end
+      message_incitation_compte_personnel
     end
 
     private
@@ -36,6 +37,14 @@ ActiveAdmin.register_page 'Dashboard' do
       @comptes_en_attente ||= Compte.where(statut_validation: :en_attente)
                                     .where(structure_id: current_compte.structure_id)
                                     .exists?
+    end
+
+    def message_incitation_compte_personnel
+      return unless current_compte.compte_generique?
+
+      lien = new_admin_compte_path(compte: { statut_validation: 'acceptee' })
+      flash.now[:compte_generique] =
+        "<span>#{t('.incitation_creation_compte_personnel', lien: lien)}</span>".html_safe
     end
   end
 end

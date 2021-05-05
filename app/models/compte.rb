@@ -30,6 +30,10 @@ class Compte < ApplicationRecord
     role == 'administrateur'
   end
 
+  def compte_generique?
+    role == 'compte_generique'
+  end
+
   private
 
   def verifie_dns_email

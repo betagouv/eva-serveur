@@ -28,7 +28,7 @@ div class: 'bloc-apercu' do
             text_node campagne.code
           end
           span class: 'campagne-url' do
-            a href: "#{URL_CLIENT}?code=#{campagne.code}" do
+            a href: CGI.escape("#{URL_CLIENT}?code=#{campagne.code}"), target: 'blank' do
               text_node "#{URL_CLIENT}?code=#{campagne.code}"
             end
           end

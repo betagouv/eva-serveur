@@ -3,7 +3,15 @@
 require 'rails_helper'
 
 describe Compte do
-  it { should validate_inclusion_of(:role).in_array(%w[administrateur organisation compte_generique]) }
+  it do
+    should define_enum_for(:role)
+      .with_values(
+        administrateur: 'administrateur',
+        organisation: 'organisation',
+        compte_generique: 'compte_generique'
+      )
+      .backed_by_column_of_type(:string)
+  end
   it { should belong_to(:structure) }
   it { should validate_presence_of :statut_validation }
   it { should validate_presence_of :nom }

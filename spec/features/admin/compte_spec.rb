@@ -15,7 +15,7 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_prenom, with: 'Jane'
           fill_in :compte_nom, with: 'Doe'
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
-          select 'administrateur'
+          select 'Administrateur'
           select 'Ma Super Structure'
           fill_in :compte_password, with: 'billyjoel'
           fill_in :compte_password_confirmation, with: 'billyjoel'

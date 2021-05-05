@@ -7,6 +7,7 @@ class Compte < ApplicationRecord
          :recoverable, :rememberable, :validatable, :registerable
   ROLES = %w[administrateur organisation compte_generique].freeze
   validates :role, inclusion: { in: ROLES }
+  enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
   validates_presence_of :nom, :prenom, on: :create
   validate :verifie_dns_email
@@ -24,14 +25,6 @@ class Compte < ApplicationRecord
 
   def nom_complet
     [prenom, nom].reject(&:blank?).join(' ')
-  end
-
-  def administrateur?
-    role == 'administrateur'
-  end
-
-  def compte_generique?
-    role == 'compte_generique'
   end
 
   private

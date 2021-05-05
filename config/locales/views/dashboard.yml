@@ -4,6 +4,8 @@ fr:
       index:
         info_comptes_en_attente: |
           Des demandes d'accès sont en attente de validation. Vous pouvez les confirmer <a href="%{lien}">dans la page "Comptes"</a>
+        incitation_creation_compte_personnel: |
+          Nous déconseillons de partager un accès, vous pouvez créer votre compte personnel <a href="%{lien}">ici</a>
       dashboard:
         statistiques:
           titre: Statistiques

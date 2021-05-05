@@ -9,8 +9,14 @@ FactoryBot.define do
     role { 'administrateur' }
     statut_validation { :acceptee }
 
+    factory :compte_administrateur do
+      role { 'administrateur' }
+    end
     factory :compte_organisation do
       role { 'organisation' }
+    end
+    factory :compte_generique do
+      role { 'compte_generique' }
     end
     structure
   end

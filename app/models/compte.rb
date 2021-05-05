@@ -5,7 +5,8 @@ class Compte < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :registerable
-  validates :role, inclusion: { in: %w[administrateur organisation] }
+  ROLES = %w[administrateur organisation compte_generique].freeze
+  validates :role, inclusion: { in: ROLES }
   validates :statut_validation, presence: true
   validates_presence_of :nom, :prenom, on: :create
   validate :verifie_dns_email

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Compte do
-  it { should validate_inclusion_of(:role).in_array(%w[administrateur organisation]) }
+  it { should validate_inclusion_of(:role).in_array(%w[administrateur organisation compte_generique]) }
   it { should belong_to(:structure) }
   it { should validate_presence_of :statut_validation }
   it { should validate_presence_of :nom }

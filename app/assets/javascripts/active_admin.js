@@ -4,3 +4,5 @@
 //= require activeadmin_reorderable
 //= require faq
 //= require aide
+
+jQuery.datetimepicker.setLocale('fr');

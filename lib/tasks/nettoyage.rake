@@ -12,12 +12,14 @@ namespace :nettoyage do
     end
   end
 
-  def anonymise_contacts_et_comptes(rng, logger)
-    Contact.delete_all
+  def anonymise_comptes(rng, logger)
     Compte.all.each do |compte|
       next if compte.superadmin?
 
-      nouvel_email = "#{rng.compose(2)}@#{rng.compose(3)}.fr"
+      compte.prenom = rng.compose(2)
+      compte.nom = rng.compose(2)
+      compte.telephone = nil
+      nouvel_email = "#{compte.prenom}.#{compte.nom}@eva.beta.gouv.fr"
       logger.info "#{compte.email} est remplacé par #{nouvel_email}"
       compte.email = nouvel_email
       compte.save
@@ -51,7 +53,8 @@ namespace :nettoyage do
     rng = RandomNameGenerator.new
 
     anonymise_evaluations(rng, logger)
-    anonymise_contacts_et_comptes(rng, logger)
+    Contact.delete_all
+    anonymise_comptes(rng, logger)
     anonymise_campagnes_et_structures(rng, logger)
   end
 

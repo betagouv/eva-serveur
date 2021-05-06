@@ -95,14 +95,12 @@ end
 
 situations_data = [
   { libelle: 'Bienvenue', nom_technique: 'bienvenue' },
+  { libelle: 'Maintenance', nom_technique: 'maintenance' },
   { libelle: 'Livraison', nom_technique: 'livraison' },
-  { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
+  { libelle: 'Tri', nom_technique: 'tri' },
   { libelle: 'Contrôle', nom_technique: 'controle' },
   { libelle: 'Sécurité', nom_technique: 'securite' },
-  { libelle: 'Tri', nom_technique: 'tri' },
-  { libelle: 'Bureau', nom_technique: 'questions' },
-  { libelle: 'Prévention', nom_technique: 'prevention' },
-  { libelle: 'Maintenance', nom_technique: 'Maintenance' },
+  { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
   { libelle: 'Inventaire', nom_technique: 'inventaire' }
 ]
 situations_data.each do |situation_data|
@@ -115,5 +113,7 @@ ParcoursType.find_or_create_by(nom_technique: 'complet') do |parcours_type|
   parcours_type.libelle = 'Parcours complet'
   parcours_type.duree_moyenne = '1 heure'
   situations = Situation.where(nom_technique: situations_data.pluck(:nom_technique))
-  parcours_type.situations_configurations_attributes = situations.map { |situation| { situation_id: situation.id } }
+  parcours_type.situations_configurations_attributes = situations.map.with_index do |situation, index|
+    { situation_id: situation.id, position: index }
+  end
 end

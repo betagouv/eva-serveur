@@ -5,7 +5,7 @@ class Compte < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :registerable
-  ROLES = %w[superadmin organisation compte_generique].freeze
+  ROLES = %w[superadmin admin organisation compte_generique].freeze
   validates :role, inclusion: { in: ROLES }
   enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true

@@ -19,6 +19,7 @@ fr:
         role: Rôle
         roles:
           superadmin: Superadmin
+          admin: Admin
           organisation: Organisation
           compte_generique: Compte générique
         statut_validation: Accès

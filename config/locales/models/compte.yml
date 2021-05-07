@@ -20,7 +20,7 @@ fr:
         roles:
           superadmin: Superadmin
           admin: Admin
-          organisation: Organisation
+          conseiller: Conseiller
           compte_generique: Compte générique
         statut_validation: Accès
         statuts_validation:

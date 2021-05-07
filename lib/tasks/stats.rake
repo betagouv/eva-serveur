@@ -37,7 +37,7 @@ namespace :stats do
   def recupere_evaluations
     Evaluation.includes(
       campagne: [:situations_configurations, { compte: :structure }]
-    ).where(comptes: { role: :organisation })
+    ).where.not(comptes: { role: :superadmin })
   end
 
   def sessions_ids(situation)

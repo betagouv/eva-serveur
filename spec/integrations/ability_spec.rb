@@ -5,10 +5,10 @@ require 'cancan/matchers'
 
 describe Ability do
   let(:compte_superadmin) { create :compte, role: 'superadmin' }
-  let(:compte_organisation) { create :compte, role: 'organisation' }
+  let(:compte_conseiller) { create :compte, role: 'conseiller' }
   let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
   let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
-  let!(:campagne_organisation) { create :campagne, compte: compte_organisation }
+  let!(:campagne_conseiller) { create :campagne, compte: compte_conseiller }
 
   let!(:evaluation_superadmin) { create :evaluation, campagne: campagne_superadmin }
   let(:situation) { create :situation_inventaire }
@@ -45,7 +45,7 @@ describe Ability do
     end
 
     it 'avec un compte qui est lié à une campagne' do
-      is_expected.to_not be_able_to(:destroy, compte_organisation)
+      is_expected.to_not be_able_to(:destroy, compte_conseiller)
     end
 
     it 'avec une situation utilisé dans une campagne' do
@@ -119,23 +119,23 @@ describe Ability do
     end
   end
 
-  context 'Compte organisation' do
-    let(:compte)                    { compte_organisation }
-    let!(:campagne_organisation)    { create :campagne, compte: compte }
-    let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
+  context 'Compte conseiller' do
+    let(:compte)                    { compte_conseiller }
+    let!(:campagne_conseiller)    { create :campagne, compte: compte }
+    let(:evaluation_conseiller)   { create :evaluation, campagne: campagne_conseiller }
     let(:situation)                 { create :situation_inventaire }
     let!(:evenement_superadmin) { create :evenement, partie: partie_superadmin }
     let!(:partie_superadmin) do
       create :partie, evaluation: evaluation_superadmin, situation: situation
     end
 
-    let!(:evenement_organisation) { create :evenement, partie: partie_organisation }
-    let!(:partie_organisation) do
-      create :partie, evaluation: evaluation_organisation, situation: situation
+    let!(:evenement_conseiller) { create :evenement, partie: partie_conseiller }
+    let!(:partie_conseiller) do
+      create :partie, evaluation: evaluation_conseiller, situation: situation
     end
 
     it 'avec une campagne qui a des évaluations' do
-      is_expected.to_not be_able_to(:destroy, campagne_organisation)
+      is_expected.to_not be_able_to(:destroy, campagne_conseiller)
     end
 
     it { is_expected.to_not be_able_to(:manage, :all) }
@@ -151,7 +151,7 @@ describe Ability do
     it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
     it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to_not be_able_to(:manage, Campagne.new) }
-    it { is_expected.to_not be_able_to(%i[create update], evaluation_organisation) }
+    it { is_expected.to_not be_able_to(%i[create update], evaluation_conseiller) }
     it { is_expected.to_not be_able_to(%i[read destroy], evaluation_superadmin) }
     it { is_expected.to_not be_able_to(:read, Evenement.new) }
     it { is_expected.to_not be_able_to(:read, evenement_superadmin) }
@@ -162,19 +162,19 @@ describe Ability do
     it { is_expected.to be_able_to(:update, compte) }
     it { is_expected.to_not be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
-    it { is_expected.to be_able_to(%i[read destroy], evaluation_organisation) }
-    it { is_expected.to be_able_to(:read, evenement_organisation) }
+    it { is_expected.to be_able_to(%i[read destroy], evaluation_conseiller) }
+    it { is_expected.to be_able_to(:read, evenement_conseiller) }
     it { is_expected.to be_able_to(%i[update read], Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:destroy, Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }
-    it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_organisation, nil)) }
+    it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }
     it { is_expected.to be_able_to(:create, Contact.new) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(1, 2, 3)) }
 
     context 'peut consulter les campagnes de ma structure' do
-      let(:mon_collegue) { create :compte, structure: compte_organisation.structure }
+      let(:mon_collegue) { create :compte, structure: compte_conseiller.structure }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
       let!(:partie_collegue) do

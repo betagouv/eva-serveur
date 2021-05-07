@@ -15,8 +15,8 @@ FactoryBot.define do
     factory :compte_admin do
       role { 'admin' }
     end
-    factory :compte_organisation do
-      role { 'organisation' }
+    factory :compte_conseiller do
+      role { 'conseiller' }
     end
     factory :compte_generique do
       role { 'compte_generique' }

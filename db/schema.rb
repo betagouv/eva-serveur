@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_131753) do
+ActiveRecord::Schema.define(version: 2021_05_07_141630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2021_05_07_131753) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role", default: "organisation"
+    t.string "role", default: "conseiller"
     t.uuid "structure_id"
     t.integer "statut_validation", default: 0
     t.string "nom"

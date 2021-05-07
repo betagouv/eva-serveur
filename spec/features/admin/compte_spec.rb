@@ -3,12 +3,22 @@
 require 'rails_helper'
 
 describe 'Admin - Compte', type: :feature do
+  let!(:ma_structure) { create :structure, nom: 'Ma structure' }
+  let!(:collegue) do
+    create :compte_conseiller, structure: ma_structure, email: 'collegue@structure'
+  end
+  let(:compte_connecte) do
+    create :compte, structure: ma_structure, email: 'moi@structure'
+  end
+
+  before { connecte(compte_connecte) }
+
   context 'en tant que superadmin' do
-    before(:each) { se_connecter_comme_superadmin }
+    let(:compte_connecte) do
+      create :compte_superadmin, structure: ma_structure, email: 'moi@structure'
+    end
 
     describe 'Ajouter un nouvel superadmin' do
-      let!(:structure) { create :structure, nom: 'Ma Super Structure' }
-
       it do
         visit new_admin_compte_path
         expect do
@@ -16,12 +26,14 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_nom, with: 'Doe'
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
           select 'Superadmin'
-          select 'Ma Super Structure'
+          options = ['', 'Superadmin', 'Admin', 'Conseiller', 'Compte générique']
+          expect(page).to have_select(:compte_role, options: options)
+          select 'Ma structure'
           fill_in :compte_password, with: 'billyjoel'
           fill_in :compte_password_confirmation, with: 'billyjoel'
           click_on 'Créer un compte'
         end.to change(Compte, :count)
-        expect(Compte.last.structure).to eq structure
+        expect(Compte.last.structure).to eq ma_structure
       end
     end
 
@@ -36,16 +48,29 @@ describe 'Admin - Compte', type: :feature do
     end
   end
 
-  context 'en conseiller' do
-    let(:ma_structure) { create :structure }
-    let(:conseiller_connecte) do
-      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
-    end
-    let!(:collegue) do
-      create :compte_conseiller, structure: ma_structure, email: 'collegue@structure'
+  context "en admin d'une structure" do
+    let(:compte_connecte) do
+      create :compte_admin, structure: ma_structure, email: 'moi@structure'
     end
 
-    before(:each) { connecte conseiller_connecte }
+    describe "modifier les informations d'un collègue" do
+      it do
+        visit edit_admin_compte_path(collegue)
+        select 'Admin'
+        options = ['', 'Admin', 'Conseiller', 'Compte générique']
+        expect(page).to have_select(:compte_role, options: options)
+
+        click_on 'Modifier'
+
+        expect(collegue.reload.role).to eq 'admin'
+      end
+    end
+  end
+
+  context 'en conseiller' do
+    let(:compte_connecte) do
+      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
+    end
 
     describe 'je vois mes collègues' do
       let(:autre_structure) { create :structure }
@@ -94,7 +119,7 @@ describe 'Admin - Compte', type: :feature do
 
     describe 'modifier mes informations' do
       before do
-        visit edit_admin_compte_path(conseiller_connecte)
+        visit edit_admin_compte_path(compte_connecte)
         fill_in :compte_prenom, with: 'Robert'
         fill_in :compte_password, with: 'new_password'
         fill_in :compte_password_confirmation, with: 'new_password'
@@ -102,8 +127,8 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it do
-        conseiller_connecte.reload
-        expect(conseiller_connecte.prenom).to eq 'Robert'
+        compte_connecte.reload
+        expect(compte_connecte.prenom).to eq 'Robert'
         fill_in :compte_email, with: 'new_password'
         fill_in :compte_password, with: 'new_password'
         click_on 'Se connecter'

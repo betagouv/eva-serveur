@@ -39,10 +39,10 @@ describe 'Admin - Compte', type: :feature do
   context 'en conseiller' do
     let(:ma_structure) { create :structure }
     let(:conseiller_connecte) do
-      create :compte_organisation, structure: ma_structure, email: 'moi@structure'
+      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
     end
     let!(:collegue) do
-      create :compte_organisation, structure: ma_structure, email: 'collegue@structure'
+      create :compte_conseiller, structure: ma_structure, email: 'collegue@structure'
     end
 
     before(:each) { connecte conseiller_connecte }
@@ -50,7 +50,7 @@ describe 'Admin - Compte', type: :feature do
     describe 'je vois mes collègues' do
       let(:autre_structure) { create :structure }
       let!(:inconnu) do
-        create :compte_organisation, structure: autre_structure, email: 'inconnu@structure'
+        create :compte_conseiller, structure: autre_structure, email: 'inconnu@structure'
       end
 
       before { visit admin_comptes_path }
@@ -78,7 +78,7 @@ describe 'Admin - Compte', type: :feature do
 
         compte_cree = Compte.last
         expect(compte_cree.structure).to eq ma_structure
-        expect(compte_cree.role).to eq 'organisation'
+        expect(compte_cree.role).to eq 'conseiller'
       end
     end
 

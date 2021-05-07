@@ -8,7 +8,7 @@ describe Compte do
       .with_values(
         superadmin: 'superadmin',
         admin: 'admin',
-        organisation: 'organisation',
+        conseiller: 'conseiller',
         compte_generique: 'compte_generique'
       )
       .backed_by_column_of_type(:string)

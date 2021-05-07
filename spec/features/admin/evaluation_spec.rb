@@ -8,7 +8,7 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   context 'Organisation' do
-    before(:each) { se_connecter_comme_organisation }
+    before(:each) { se_connecter_comme_conseiller }
 
     describe 'index' do
       describe 'permet de filtrer uniquement avec mes campagnes' do

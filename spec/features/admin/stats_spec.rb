@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 describe 'Admin - Stats', type: :feature do
-  let(:compte_organisation) { create :compte_organisation, email: 'orga@eva.fr' }
+  let(:compte_conseiller) { create :compte_conseiller, email: 'orga@eva.fr' }
   let!(:campagne) do
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN',
-                      compte: compte_organisation, questionnaire: questionnaire
+                      compte: compte_conseiller, questionnaire: questionnaire
   end
   let(:choix) { create :choix, type_choix: :bon, intitule: 'Test' }
   let(:question) { create :question_qcm, libelle: 'Test', intitule: 'Test', choix: [choix] }
@@ -84,7 +84,7 @@ describe 'Admin - Stats', type: :feature do
                                    ])
       expect(restitution_globale).to receive(:efficience).and_return(1)
       expect(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
-      connecte compte_organisation
+      connecte compte_conseiller
       visit admin_campagne_stats_path(campagne)
     end
 

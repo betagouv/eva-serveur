@@ -41,7 +41,7 @@ ActiveAdmin.register Partie do
     def scoped_collection
       Partie.where(situation_id: params[:situation_id])
             .joins(evaluation: { campagne: :compte })
-            .where(comptes: { role: :organisation })
+            .where.not(comptes: { role: :superadmin })
     end
   end
 end

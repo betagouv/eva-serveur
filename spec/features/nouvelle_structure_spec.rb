@@ -33,7 +33,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     compte = Compte.last
     expect(compte.email).to eq('jeanmarc@structure.fr')
-    expect(compte.role).to eq('organisation')
+    expect(compte.role).to eq('admin')
     expect(compte.telephone).to eq('02 03 04 05 06')
 
     structure = Structure.order(:created_at).last

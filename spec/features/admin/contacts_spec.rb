@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Contacts', type: :feature do
-  before(:each) { se_connecter_comme_administrateur }
+  before(:each) { se_connecter_comme_superadmin }
 
   describe 'lister les contacts' do
     let(:structure) { create :structure, nom: 'Ma structure' }

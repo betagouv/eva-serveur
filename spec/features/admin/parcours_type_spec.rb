@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Parcours type', type: :feature do
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
 
   describe 'index' do
     before do

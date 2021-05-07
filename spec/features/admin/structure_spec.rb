@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Structure', type: :feature do
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
 
   describe 'index' do
     let!(:structure) { create :structure, nom: 'Ma structure' }

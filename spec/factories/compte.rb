@@ -6,11 +6,11 @@ FactoryBot.define do
     nom { 'Nom' }
     prenom { 'Prénom' }
     password { 'password' }
-    role { 'administrateur' }
+    role { 'superadmin' }
     statut_validation { :acceptee }
 
-    factory :compte_administrateur do
-      role { 'administrateur' }
+    factory :compte_superadmin do
+      role { 'superadmin' }
     end
     factory :compte_organisation do
       role { 'organisation' }
@@ -22,6 +22,6 @@ FactoryBot.define do
   end
 
   sequence :email do |n|
-    "administrateur-#{n}@exemple.fr"
+    "superadmin-#{n}@exemple.fr"
   end
 end

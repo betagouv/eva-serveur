@@ -176,7 +176,7 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   context 'Admin' do
-    before(:each) { se_connecter_comme_administrateur }
+    before(:each) { se_connecter_comme_superadmin }
 
     describe 'édition' do
       let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }

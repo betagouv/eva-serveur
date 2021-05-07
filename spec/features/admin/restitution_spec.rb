@@ -6,7 +6,7 @@ describe 'Admin - Restitution', type: :feature do
   let(:evaluation) { create :evaluation, nom: 'John Doe' }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
 
   describe 'rapport de la situation controle' do
     let(:situation) { create :situation_controle }

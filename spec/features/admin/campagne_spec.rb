@@ -32,9 +32,9 @@ describe 'Admin - Campagne', type: :feature do
       end
     end
 
-    context 'en administrateur' do
+    context 'en superadmin' do
       before do
-        compte_connecte.update(role: 'administrateur')
+        compte_connecte.update(role: 'superadmin')
         visit admin_campagnes_path
       end
 
@@ -69,9 +69,9 @@ describe 'Admin - Campagne', type: :feature do
       parcours
     end
 
-    context 'en administrateur' do
+    context 'en superadmin' do
       before do
-        compte_organisation.update(role: 'administrateur')
+        compte_organisation.update(role: 'superadmin')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
       end
@@ -140,9 +140,9 @@ describe 'Admin - Campagne', type: :feature do
   describe 'modification' do
     let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
 
-    context 'en administrateur' do
+    context 'en superadmin' do
       before do
-        compte_organisation.update(role: 'administrateur')
+        compte_organisation.update(role: 'superadmin')
         visit edit_admin_campagne_path(campagne)
         select 'Mon QCM'
       end
@@ -167,7 +167,7 @@ describe 'Admin - Campagne', type: :feature do
     context 'en admin' do
       let(:situation) { create :situation_inventaire }
       before do
-        compte_organisation.update(role: 'administrateur')
+        compte_organisation.update(role: 'superadmin')
         campagne.situations_configurations.create! situation: situation
         visit admin_campagne_path campagne
       end

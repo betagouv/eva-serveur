@@ -15,6 +15,10 @@ class Campagne < ApplicationRecord
 
   before_create :initialise_situations, if: :parcours_type_id
 
+  scope :de_la_structure, lambda { |structure|
+    joins(:compte).where('comptes.structure_id' => structure)
+  }
+
   def display_name
     libelle
   end

@@ -23,16 +23,33 @@ if can?(:manage, Compte)
   end
 end
 
-h3 'Utilisateurs'
-table_for comptes, class: 'index_table' do
-  column(:nom_complet) do |compte|
-    compte.nom_complet.blank? ? 'Nom inconnu' : compte.nom_complet
+columns do
+  column do
+    h3 'Utilisateurs'
+    table_for comptes, class: 'index_table' do
+      column(:nom_complet) do |compte|
+        compte.nom_complet.blank? ? 'Nom inconnu' : compte.nom_complet
+      end
+      column :email
+      column :statut_validation
+      column :actions do |compte|
+        div class: 'table_actions' do
+          link_to t('.voir'), admin_compte_path(compte), class: 'view_link'
+        end
+      end
+    end
   end
-  column :email
-  column :statut_validation
-  column :actions do |compte|
-    div class: 'table_actions' do
-      link_to t('.voir'), admin_compte_path(compte), class: 'view_link'
+  column do
+    h3 'Campagnes'
+    table_for campagnes, class: 'index_table' do
+      column :libelle
+      column :code
+      column :nombre_evaluations
+      column :actions do |campagne|
+        div class: 'table_actions' do
+          link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'
+        end
+      end
     end
   end
 end

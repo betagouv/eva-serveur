@@ -54,10 +54,14 @@ ActiveAdmin.register Structure do
   form partial: 'form'
 
   controller do
-    before_action :trouve_comptes, only: :show
+    before_action :trouve_comptes, :trouve_campagnes, only: :show
 
     def trouve_comptes
       @comptes = Compte.where(structure: resource)
+    end
+
+    def trouve_campagnes
+      @campagnes = Campagne.de_la_structure(resource)
     end
   end
 end

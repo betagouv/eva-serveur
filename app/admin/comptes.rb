@@ -36,8 +36,10 @@ ActiveAdmin.register Compte do
       f.input :nom
       f.input :email
       f.input :telephone
+      if current_compte.superadmin? || current_compte.admin?
+        f.input :role, as: :select, collection: collection_roles
+      end
       if can? :manage, Compte
-        f.input :role, as: :select
         f.input :structure
       else
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
@@ -52,7 +54,7 @@ ActiveAdmin.register Compte do
   end
 
   controller do
-    helper_method :peut_modifier_mot_de_passe?
+    helper_method :peut_modifier_mot_de_passe?, :collection_roles
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
@@ -67,6 +69,15 @@ ActiveAdmin.register Compte do
       resource.new_record? ||
         resource == current_compte ||
         can?(:manage, Compte)
+    end
+
+    def collection_roles
+      roles = Compte.roles.to_h
+      roles.delete('superadmin') unless current_compte.superadmin?
+      roles.map do |k, v|
+        traduction = I18n.t(k, scope: %i[activerecord attributes compte roles])
+        [traduction, v]
+      end.to_h
     end
   end
 

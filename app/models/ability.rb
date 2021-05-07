@@ -82,11 +82,12 @@ class Ability
   end
 
   def droit_compte(compte)
-    can :create, Compte
-    can %i[read update], Compte, structure_id: compte.structure_id
-    cannot :destroy, Compte do |q|
-      Campagne.where(compte: q).exists?
-    end
+    can :read, Compte, structure_id: compte.structure_id
+    can :update, Compte, id: compte.id
+    can :create, Compte if compte.admin?
+    can :update, Compte, structure_id: compte.structure_id if compte.admin?
+    can :edit_role, Compte if compte.admin?
+    cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }
   end
 
   def droit_choix

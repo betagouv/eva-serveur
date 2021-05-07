@@ -36,9 +36,7 @@ ActiveAdmin.register Compte do
       f.input :nom
       f.input :email
       f.input :telephone
-      if current_compte.superadmin? || current_compte.admin?
-        f.input :role, as: :select, collection: collection_roles
-      end
+      f.input :role, as: :select, collection: collection_roles if can? :edit_role, Compte
       if can? :manage, Compte
         f.input :structure
       else

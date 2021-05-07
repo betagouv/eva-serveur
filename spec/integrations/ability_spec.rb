@@ -4,8 +4,9 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 describe Ability do
-  let(:compte_superadmin) { create :compte, role: 'superadmin' }
-  let(:compte_conseiller) { create :compte, role: 'conseiller' }
+  let(:compte_superadmin) { create :compte_superadmin }
+  let(:compte_admin) { create :compte_admin }
+  let(:compte_conseiller) { create :compte_conseiller }
   let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
   let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
   let!(:campagne_conseiller) { create :campagne, compte: compte_conseiller }
@@ -119,6 +120,19 @@ describe Ability do
     end
   end
 
+  context 'Compte admin' do
+    let(:compte) { compte_admin }
+
+    it { is_expected.to be_able_to(:create, Compte.new) }
+    context 'peut consulter les campagnes de ma structure' do
+      let(:mon_collegue) { create :compte, structure: compte.structure }
+
+      it { is_expected.to be_able_to(:read, mon_collegue) }
+      it { is_expected.to be_able_to(:update, mon_collegue) }
+      it { is_expected.to be_able_to(:edit_role, mon_collegue) }
+    end
+  end
+
   context 'Compte conseiller' do
     let(:compte)                    { compte_conseiller }
     let!(:campagne_conseiller)    { create :campagne, compte: compte }
@@ -158,7 +172,6 @@ describe Ability do
     it { is_expected.to_not be_able_to(:read, SourceAide.new) }
     it { is_expected.to_not be_able_to(:read, Aide::QuestionFrequente.new) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
-    it { is_expected.to be_able_to(:create, Compte.new) }
     it { is_expected.to be_able_to(:update, compte) }
     it { is_expected.to_not be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
@@ -187,7 +200,6 @@ describe Ability do
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
-      it { is_expected.to be_able_to(:update, mon_collegue) }
     end
   end
 end

@@ -65,27 +65,6 @@ describe 'Admin - Compte', type: :feature do
         expect(collegue.reload.role).to eq 'admin'
       end
     end
-  end
-
-  context 'en conseiller' do
-    let(:compte_connecte) do
-      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
-    end
-
-    describe 'je vois mes collègues' do
-      let(:autre_structure) { create :structure }
-      let!(:inconnu) do
-        create :compte_conseiller, structure: autre_structure, email: 'inconnu@structure'
-      end
-
-      before { visit admin_comptes_path }
-
-      it do
-        expect(page).to have_content 'moi@structure'
-        expect(page).to have_content 'collegue@structure'
-        expect(page).to_not have_content 'inconnu@structure'
-      end
-    end
 
     describe 'ajouter un collegue' do
       before { visit new_admin_compte_path }
@@ -117,6 +96,35 @@ describe 'Admin - Compte', type: :feature do
       it { expect(collegue.reload.validation_refusee?).to be true }
     end
 
+    describe "modifier le mot de passe d'un collègue" do
+      before do
+        visit edit_admin_compte_path(collegue)
+      end
+
+      it { expect(page).not_to have_content('Mot de passe') }
+    end
+  end
+
+  context 'en conseiller' do
+    let(:compte_connecte) do
+      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
+    end
+
+    describe 'je vois mes collègues' do
+      let(:autre_structure) { create :structure }
+      let!(:inconnu) do
+        create :compte_conseiller, structure: autre_structure, email: 'inconnu@structure'
+      end
+
+      before { visit admin_comptes_path }
+
+      it do
+        expect(page).to have_content 'moi@structure'
+        expect(page).to have_content 'collegue@structure'
+        expect(page).to_not have_content 'inconnu@structure'
+      end
+    end
+
     describe 'modifier mes informations' do
       before do
         visit edit_admin_compte_path(compte_connecte)
@@ -133,14 +141,6 @@ describe 'Admin - Compte', type: :feature do
         fill_in :compte_password, with: 'new_password'
         click_on 'Se connecter'
       end
-    end
-
-    describe "modifier le mot de passe d'un collègue" do
-      before do
-        visit edit_admin_compte_path(collegue)
-      end
-
-      it { expect(page).not_to have_content('Mot de passe') }
     end
   end
 end

@@ -1,5 +1,7 @@
 class AffecteRoleAdministrateurAuxComptesExistants < ActiveRecord::Migration[5.2]
-  def change
+  class Compte < ApplicationRecord; end
+
+  def up
     Compte.where(role: nil).update_all(role: 'administrateur')
   end
 end

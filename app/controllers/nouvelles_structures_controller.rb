@@ -27,7 +27,7 @@ class NouvellesStructuresController < ApplicationController
     parametres = params.require(:campagne).permit!.to_h
     parcours_type = ParcoursType.par_defaut
     parametres.deep_merge(parcours_type: parcours_type,
-                          compte_attributes: { statut_validation: :acceptee })
+                          compte_attributes: { statut_validation: :acceptee, role: 'admin' })
   end
 
   def envoie_emails

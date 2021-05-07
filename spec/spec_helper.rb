@@ -46,8 +46,8 @@ RSpec.configure do |config|
     objets_trouves: EvenementObjetsTrouves
   }.freeze
 
-  def se_connecter_comme_administrateur
-    connecte create(:compte_admin, email: 'admin@exemple.fr', password: 'password')
+  def se_connecter_comme_superadmin
+    connecte create(:compte_superadmin, email: 'superadmin@exemple.fr', password: 'password')
   end
 
   def se_connecter_comme_organisation

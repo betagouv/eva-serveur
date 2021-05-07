@@ -6,7 +6,7 @@ describe Compte do
   it do
     should define_enum_for(:role)
       .with_values(
-        administrateur: 'administrateur',
+        superadmin: 'superadmin',
         organisation: 'organisation',
         compte_generique: 'compte_generique'
       )

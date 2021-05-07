@@ -27,7 +27,7 @@ describe 'Admin - Evenement', type: :feature do
   let!(:evenement_hors_campagne) { create :evenement, nom: 'horsCampagne', partie: autre_partie }
 
   before do
-    se_connecter_comme_administrateur
+    se_connecter_comme_superadmin
     visit admin_campagne_evenements_path(campagne)
   end
 
@@ -38,7 +38,7 @@ describe 'Admin - Evenement', type: :feature do
     expect(page).to_not have_content 'horsCampagne'
   end
 
-  it "Empêche l'administrateur de créer/modifier un événement" do
+  it 'Empêche le superadmin de créer/modifier un événement' do
     expect(page).to_not have_content 'Créer'
     expect(page).to_not have_content 'Modifier'
   end

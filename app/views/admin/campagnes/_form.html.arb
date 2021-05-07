@@ -30,7 +30,7 @@ div class: 'nouvelle-campagne' do
           end
         end
 
-        if current_compte.administrateur?
+        if current_compte.superadmin?
           div class: 'panel' do
             h2 t('.configuration_avancee'), class: 'titre titre--medium'
             f.inputs do

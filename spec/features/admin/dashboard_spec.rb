@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Dashboard', type: :feature do
   let(:ma_structure) { create :structure }
-  let!(:compte) { create :compte_administrateur, structure: ma_structure }
+  let!(:compte) { create :compte_superadmin, structure: ma_structure }
   before { connecte(compte) }
 
   context 'quand il y a des comptes en attente pour ma structures' do

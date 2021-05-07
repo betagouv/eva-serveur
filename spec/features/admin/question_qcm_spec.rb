@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Question QCM', type: :feature do
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
   let!(:question) { create :question_qcm, libelle: 'question', intitule: 'Comment ça va ?' }
 
   describe 'index' do

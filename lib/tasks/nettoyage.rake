@@ -15,7 +15,7 @@ namespace :nettoyage do
   def anonymise_contacts_et_comptes(rng, logger)
     Contact.delete_all
     Compte.all.each do |compte|
-      next unless compte.role == 'organisation'
+      next if compte.superadmin?
 
       nouvel_email = "#{rng.compose(2)}@#{rng.compose(3)}.fr"
       logger.info "#{compte.email} est remplacé par #{nouvel_email}"

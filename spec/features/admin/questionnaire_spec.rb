@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Questionnaire', type: :feature do
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
   let!(:questionnaire) { create :questionnaire, libelle: 'Numératie et Litératie' }
 
   describe 'index' do

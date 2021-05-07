@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  authenticate :compte, ->(o) { o.administrateur? } do
+  authenticate :compte, ->(o) { o.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 

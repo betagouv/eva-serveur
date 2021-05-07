@@ -4,22 +4,22 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 describe Ability do
-  let(:compte_administrateur) { create :compte, role: 'administrateur' }
+  let(:compte_superadmin) { create :compte, role: 'superadmin' }
   let(:compte_organisation) { create :compte, role: 'organisation' }
-  let!(:campagne_administrateur) { create :campagne, compte: compte_administrateur }
-  let!(:campagne_administrateur_sans_eval) { create :campagne, compte: compte_administrateur }
+  let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
+  let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
   let!(:campagne_organisation) { create :campagne, compte: compte_organisation }
 
-  let!(:evaluation_administrateur) { create :evaluation, campagne: campagne_administrateur }
+  let!(:evaluation_superadmin) { create :evaluation, campagne: campagne_superadmin }
   let(:situation) { create :situation_inventaire }
   let(:situation_non_utilisee) { create :situation_controle }
 
-  before { campagne_administrateur.situations_configurations.create situation: situation }
+  before { campagne_superadmin.situations_configurations.create situation: situation }
 
   subject(:ability) { Ability.new(compte) }
 
-  context 'Compte administrateur' do
-    let(:compte) { compte_administrateur }
+  context 'Compte superadmin' do
+    let(:compte) { compte_superadmin }
 
     it { is_expected.to be_able_to(:manage, :all) }
     it do
@@ -37,11 +37,11 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
 
     it 'avec une campagne qui a des évaluations' do
-      is_expected.to_not be_able_to(:destroy, campagne_administrateur)
+      is_expected.to_not be_able_to(:destroy, campagne_superadmin)
     end
 
     it "avec une campagne qui n'a pas d'évaluation" do
-      is_expected.to be_able_to(:destroy, campagne_administrateur_sans_eval)
+      is_expected.to be_able_to(:destroy, campagne_superadmin_sans_eval)
     end
 
     it 'avec un compte qui est lié à une campagne' do
@@ -124,9 +124,9 @@ describe Ability do
     let!(:campagne_organisation)    { create :campagne, compte: compte }
     let(:evaluation_organisation)   { create :evaluation, campagne: campagne_organisation }
     let(:situation)                 { create :situation_inventaire }
-    let!(:evenement_administrateur) { create :evenement, partie: partie_administrateur }
-    let!(:partie_administrateur) do
-      create :partie, evaluation: evaluation_administrateur, situation: situation
+    let!(:evenement_superadmin) { create :evenement, partie: partie_superadmin }
+    let!(:partie_superadmin) do
+      create :partie, evaluation: evaluation_superadmin, situation: situation
     end
 
     let!(:evenement_organisation) { create :evenement, partie: partie_organisation }
@@ -152,9 +152,9 @@ describe Ability do
     it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to_not be_able_to(:manage, Campagne.new) }
     it { is_expected.to_not be_able_to(%i[create update], evaluation_organisation) }
-    it { is_expected.to_not be_able_to(%i[read destroy], evaluation_administrateur) }
+    it { is_expected.to_not be_able_to(%i[read destroy], evaluation_superadmin) }
     it { is_expected.to_not be_able_to(:read, Evenement.new) }
-    it { is_expected.to_not be_able_to(:read, evenement_administrateur) }
+    it { is_expected.to_not be_able_to(:read, evenement_superadmin) }
     it { is_expected.to_not be_able_to(:read, SourceAide.new) }
     it { is_expected.to_not be_able_to(:read, Aide::QuestionFrequente.new) }
     it { is_expected.to be_able_to(:create, Campagne.new) }

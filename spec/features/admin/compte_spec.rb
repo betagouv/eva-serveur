@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 describe 'Admin - Compte', type: :feature do
-  context "en tant qu'administrateur" do
-    before(:each) { se_connecter_comme_administrateur }
+  context 'en tant que superadmin' do
+    before(:each) { se_connecter_comme_superadmin }
 
-    describe 'Ajouter un nouvel administrateur' do
+    describe 'Ajouter un nouvel superadmin' do
       let!(:structure) { create :structure, nom: 'Ma Super Structure' }
 
       it do
@@ -15,7 +15,7 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_prenom, with: 'Jane'
           fill_in :compte_nom, with: 'Doe'
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
-          select 'Administrateur'
+          select 'Superadmin'
           select 'Ma Super Structure'
           fill_in :compte_password, with: 'billyjoel'
           fill_in :compte_password_confirmation, with: 'billyjoel'

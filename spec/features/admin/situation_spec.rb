@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Situation', type: :feature do
-  before { se_connecter_comme_administrateur }
+  before { se_connecter_comme_superadmin }
   let!(:tri) { create :situation_tri, libelle: 'Situation Tri' }
 
   describe 'index' do

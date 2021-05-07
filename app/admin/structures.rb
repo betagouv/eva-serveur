@@ -52,4 +52,12 @@ ActiveAdmin.register Structure do
   end
 
   form partial: 'form'
+
+  controller do
+    before_action :trouve_comptes, only: :show
+
+    def trouve_comptes
+      @comptes = Compte.where(structure: resource)
+    end
+  end
 end

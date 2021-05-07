@@ -1,16 +1,38 @@
 # frozen_string_literal: true
 
-panel 'Détails de la structure' do
+panel structure.nom do
   attributes_table_for structure do
+    row :code_postal
     row :nom
     row(:type_structure) do
       traduction_type_structure(structure.type_structure)
     end
-    row :code_postal
     row :region
-    row :latitude
-    row :longitude
     row :created_at
-    row :updated_at
+  end
+end
+
+if can?(:manage, Compte)
+  panel 'Administration' do
+    attributes_table_for structure do
+      row :id
+      row :latitude
+      row :longitude
+      row :updated_at
+    end
+  end
+end
+
+h3 'Utilisateurs'
+table_for comptes, class: 'index_table' do
+  column(:nom_complet) do |compte|
+    compte.nom_complet.blank? ? 'Nom inconnu' : compte.nom_complet
+  end
+  column :email
+  column :statut_validation
+  column :actions do |compte|
+    div class: 'table_actions' do
+      link_to t('.voir'), admin_compte_path(compte), class: 'view_link'
+    end
   end
 end

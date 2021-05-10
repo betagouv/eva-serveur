@@ -27,7 +27,7 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       it 'ne permet pas de filtrer par compte' do
-        within '.panel_contents' do
+        within '#filters_sidebar_section' do
           expect(page).to_not have_content 'Compte'
         end
       end
@@ -40,7 +40,7 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       it 'permet de filtrer par compte' do
-        within '.panel_contents' do
+        within '#filters_sidebar_section' do
           expect(page).to have_content 'Compte'
         end
       end

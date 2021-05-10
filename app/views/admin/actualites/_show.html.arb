@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 div class: 'actualite-complete' do
-  h1 actualite.titre, class: 'titre'
+  div class: 'row' do
+    div class: 'col-5' do
+      h1 actualite.titre, class: 'titre'
+    end
+  end
 
   div class: 'row' do
     div class: 'col-5' do

@@ -51,6 +51,8 @@ ActiveAdmin.register Structure do
     render partial: 'show', locals: { structure: resource }
   end
 
+  sidebar :aide_filtres, only: :index
+
   form partial: 'form'
 
   controller do

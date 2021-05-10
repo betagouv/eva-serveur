@@ -446,6 +446,7 @@ DEPENDENCIES
   activeadmin_addons
   activeadmin_reorderable
   acts_as_list
+  addressable
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3, >= 4.3.1)

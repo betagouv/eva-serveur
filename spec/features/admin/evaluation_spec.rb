@@ -193,7 +193,9 @@ describe 'Admin - Evaluation', type: :feature do
       before { visit admin_evaluation_path(evaluation) }
 
       it do
-        expect { click_on 'Supprimer' }.to(change { Evaluation.count }
+        expect do
+          within('#action_items_sidebar_section') { click_on 'Supprimer' }
+        end.to(change { Evaluation.count }
                                        .and(change { Evenement.count }))
         expect(page.current_url).to eql(admin_campagne_url(ma_campagne))
       end

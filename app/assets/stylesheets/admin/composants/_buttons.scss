@@ -35,3 +35,12 @@ form fieldset.actions li.cancel a:not(.disabled) {
     background-color: #fff;
   }
 }
+
+button,
+button:not(.disabled):hover {
+  text-shadow: none;
+  font-weight: normal;
+  box-shadow: none;
+  border: 0;
+  background-image: none;
+}

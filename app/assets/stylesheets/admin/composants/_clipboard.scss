@@ -1,0 +1,14 @@
+.input-copier-coller {
+  width: 1px;
+  height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.copier-coller {
+  @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+  cursor: pointer;
+  &:not(.disabled):hover {
+    background-color: $couleur-legere-accent-validation;
+  }
+}

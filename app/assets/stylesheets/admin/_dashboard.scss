@@ -57,6 +57,8 @@
       }
       &-url {
         flex: 3;
+        display: flex;
+        justify-content: space-between;
         a {
           color: $eva_dark_blue_grey;
         }

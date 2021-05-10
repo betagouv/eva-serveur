@@ -15,6 +15,7 @@ gem 'active_admin-humanized_enum'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls'
 gem 'acts_as_list'
+gem 'addressable'
 gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'

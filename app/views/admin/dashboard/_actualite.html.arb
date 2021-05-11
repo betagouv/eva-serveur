@@ -2,11 +2,13 @@
 
 div class: 'carte-actualite' do
   div class: 'illustration' do
-    image_tag cdn_for(actualite.illustration) if actualite.illustration.attached? && affiche_image
+    link_to [:admin, actualite] do
+      image_tag cdn_for(actualite.illustration) if actualite.illustration.attached? && affiche_image
+    end
   end
   div class: 'texte' do
     status_tag actualite.categorie
-    span actualite.titre, class: 'titre'
+    span link_to actualite.titre, [:admin, actualite], class: 'titre'
     span class: 'date' do
       l actualite.created_at, format: :point
     end

@@ -9,13 +9,18 @@
   box-sizing: border-box;
   background-color: transparent;
   background-image: none;
-  h1 {
-    width: 50px;
-    height: 43px;
+  #site_title {
     margin: 0 4rem 0 0;
-    text-indent: -9999px;
-    background: asset-data-url('eva-logo.svg') no-repeat center;
-    background-size: 50px 43px;
+    padding: 0;
+
+    a {
+      display: flex;
+    }
+  }
+  #site_title_image {
+    max-width: 50px;
+    max-height: 43px;
+    top: 0; // reset activeadmin style
   }
   a,
   a:link {

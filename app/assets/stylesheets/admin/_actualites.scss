@@ -31,10 +31,12 @@
     }
 
     .titre {
-      color: $eva_dark;
       flex: 1;
       margin: 0 .75rem 0 0;
-      text-decoration: none;
+      a {
+        color: $eva_dark;
+        text-decoration: none;
+      }
     }
 
     .date {

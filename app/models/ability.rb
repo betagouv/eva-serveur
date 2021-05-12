@@ -84,7 +84,7 @@ class Ability
   def droit_compte(compte)
     can :read, Compte, structure_id: compte.structure_id
     can :update, Compte, id: compte.id
-    can :create, Compte if compte.admin?
+    can :create, Compte if compte.admin? || compte.compte_generique?
     can :update, Compte, structure_id: compte.structure_id if compte.admin?
     can :edit_role, Compte if compte.admin?
     cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }

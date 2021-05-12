@@ -17,6 +17,7 @@ div class: 'mon-compte row' do
         row :nom
         row :email
         row :telephone
+        row :role
         row :created_at
       end
     end

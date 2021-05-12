@@ -6,6 +6,7 @@ require 'cancan/matchers'
 describe Ability do
   let(:compte_superadmin) { create :compte_superadmin }
   let(:compte_admin) { create :compte_admin }
+  let(:compte_generique) { create :compte_generique }
   let(:compte_conseiller) { create :compte_conseiller }
   let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
   let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
@@ -131,6 +132,12 @@ describe Ability do
       it { is_expected.to be_able_to(:update, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
     end
+  end
+
+  context 'Compte générique' do
+    let(:compte) { compte_generique }
+
+    it { is_expected.to be_able_to(:create, Compte.new) }
   end
 
   context 'Compte conseiller' do

@@ -57,7 +57,7 @@ describe 'Admin - Compte', type: :feature do
       it do
         visit edit_admin_compte_path(collegue)
         select 'Admin'
-        options = ['', 'Admin', 'Conseiller', 'Compte générique']
+        options = ['', 'Admin', 'Conseiller']
         expect(page).to have_select(:compte_role, options: options)
 
         click_on 'Modifier'

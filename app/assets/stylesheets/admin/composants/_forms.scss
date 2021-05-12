@@ -99,6 +99,8 @@ form {
       border-width: 1px;
       height: 2rem;
       position: relative;
+      padding-left: .5rem;
+      padding-right: 2rem;
 
       &:focus {
         outline: none;
@@ -215,6 +217,6 @@ form:not(.filter_form) .select2-container {
     border-color: $eva_main_blue transparent transparent transparent;
   }
   .select2-selection__rendered {
-    color: $couleur-texte;
+    color: $eva_dark;
   }
 }

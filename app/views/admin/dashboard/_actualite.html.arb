@@ -8,7 +8,7 @@ div class: 'carte-actualite' do
   end
   div class: 'texte' do
     status_tag actualite.categorie
-    span link_to actualite.titre, [:admin, actualite], class: 'titre'
+    span(class: 'titre') { link_to(actualite.titre, [:admin, actualite]) }
     span class: 'date' do
       l actualite.created_at, format: :point
     end

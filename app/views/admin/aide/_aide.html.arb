@@ -2,7 +2,7 @@
 
 div class: 'aide' do
   div class: 'row' do
-    div class: 'contenu_aide col-6' do
+    div class: 'contenu_aide col-8' do
       render partial: 'contact'
       sources_par_categorie.each do |categorie, sources|
         render partial: 'categorie_aide', locals: {
@@ -13,10 +13,6 @@ div class: 'aide' do
       render partial: 'faq', locals: {
         questions_frequentes: questions_frequentes
       }
-    end
-
-    div class: 'menu-transverse col-2' do
-      render partial: 'menu', locals: { categories: categories }
     end
   end
 end

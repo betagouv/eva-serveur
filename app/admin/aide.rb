@@ -9,4 +9,8 @@ ActiveAdmin.register_page 'Aide' do
            sources_par_categorie: SourceAide.sources_par_categorie,
            questions_frequentes: Aide::QuestionFrequente.all
   end
+
+  sidebar :menu, class: 'menu-sidebar' do
+    render partial: 'menu_sidebar', locals: { categories: SourceAide.categories.keys }
+  end
 end

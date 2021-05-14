@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+div class: 'menu menu-transverse' do
+  ul do
+    li do
+      a href: '#details_evaluation' do
+        text_node 'Détails de l\'évaluation'
+      end
+    end
+    li do
+      a href: '#auto_positionnement' do
+        text_node 'Auto-positionnement'
+      end
+    end
+    li do
+      a href: '#competences_transversales' do
+        text_node 'Vos compétences transversales'
+      end
+    end
+    li do
+      a href: '#francais_mathematiques' do
+        text_node 'Français et Mathématiques'
+      end
+    end
+    li do
+      a href: '#referentiels' do
+        text_node 'Référentiels utilisés'
+      end
+    end
+    li do
+      a href: '#communication_ecrite' do
+        text_node 'Communication écrite'
+      end
+    end
+  end
+end

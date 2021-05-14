@@ -34,6 +34,8 @@ ActiveAdmin.register Evaluation do
     render partial: 'show'
   end
 
+  sidebar :menu, only: :show
+
   form partial: 'form'
 
   controller do

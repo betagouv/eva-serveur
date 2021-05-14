@@ -2,14 +2,10 @@
 
 div class: 'restitution-globale ' do
   div class: 'row' do
-    div class: 'col-6' do
+    div class: 'col-8' do
       render 'details_evaluation'
       render 'restitution_globale', pdf: false
       render 'parties'
-    end
-
-    div class: 'menu-transverse col-2' do
-      render partial: 'menu'
     end
   end
 end

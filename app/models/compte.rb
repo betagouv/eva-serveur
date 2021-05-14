@@ -27,6 +27,12 @@ class Compte < ApplicationRecord
     [prenom, nom].reject(&:blank?).join(' ')
   end
 
+  def nombre_collegue
+    Compte.where(structure_id: structure_id)
+          .where.not(id: id)
+          .count
+  end
+
   private
 
   def verifie_dns_email

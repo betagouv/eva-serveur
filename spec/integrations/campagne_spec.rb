@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe Campagne, type: :integration do
+  ActiveJob::Base.queue_adapter = :test
+
   context 'pour une campagne sans évaluation' do
     let(:campagne) { create :campagne }
     let(:situation) { create :situation_inventaire }
@@ -14,6 +16,14 @@ describe Campagne, type: :integration do
         campagne.destroy
       end.to change { described_class.count }.by(-1)
                                              .and change { SituationConfiguration.count }.by(-1)
+    end
+  end
+
+  describe 'après création' do
+    it 'programme un mail de relance' do
+      expect do
+        create :campagne
+      end.to have_enqueued_job(RelanceUtilisateurPourCampagneJob)
     end
   end
 end

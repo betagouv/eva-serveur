@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CompteMailer < ApplicationMailer
-  helper :application
-
   def nouveau_compte
     @campagne = params[:campagne]
     @compte = @campagne.compte

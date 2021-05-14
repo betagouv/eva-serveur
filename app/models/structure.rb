@@ -52,4 +52,16 @@ class Structure < ApplicationRecord
   def display_name
     nom
   end
+
+  def cible_evaluation
+    case type_structure
+    when 'mission_locale', 'orientation_scolaire', 'e2c', 'SMA'
+      'jeunes'
+    when 'SIAE', 'cap_emploi' then "demandeurs d'emploi"
+    when 'service_insertion_collectivite' then 'usagers'
+    when 'organisme_formation' then 'stagiaires'
+    else
+      'bénéficiaires'
+    end
+  end
 end

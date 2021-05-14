@@ -1,0 +1,6 @@
+<%= md t('.intro', prenom: @compte.prenom,
+                   cible_evaluation: @cible_evaluation) %>
+<%= md t('.x_personnes_utilisent_eva', count: @nombre_collegue) %>
+<%= md t('.besoin_aide', cible_evaluation: @cible_evaluation,
+                         lien_rubrique_aide: admin_aide_url,
+                         lien_livestorm: Eva::LIEN_LIVESTORM) %>

@@ -14,6 +14,7 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :compte
 
   before_create :initialise_situations, if: :parcours_type_id
+  after_create :programme_email_relance
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)
@@ -33,5 +34,9 @@ class Campagne < ApplicationRecord
     parcours_type.situations_configurations.each do |situation_configuration|
       situations_configurations.build situation_id: situation_configuration.situation_id
     end
+  end
+
+  def programme_email_relance
+    RelanceUtilisateurPourCampagneJob.set(wait: 30.days).perform_later(campagne: self)
   end
 end

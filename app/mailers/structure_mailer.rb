@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class StructureMailer < ApplicationMailer
-  helper :application
-
   def nouvelle_structure
     @structure = params[:structure]
     @compte = params[:compte]

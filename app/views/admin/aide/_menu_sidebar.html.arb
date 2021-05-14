@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-div class: 'conteneur' do
+div class: 'menu-transverse' do
   div class: 'menu' do
-    h4 t('.titre')
-
     ul do
       li do
         a href: '#aide_contact' do

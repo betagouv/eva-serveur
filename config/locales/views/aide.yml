@@ -4,7 +4,6 @@ fr:
       categorie_aide:
         action: Voir
       menu:
-        titre: 'Menu'
         aide_contact: Aide & contact
         foire_aux_question: Foire aux questions
       contact:

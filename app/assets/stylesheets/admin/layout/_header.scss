@@ -100,32 +100,79 @@
     }
   }
   #utility_nav {
-    display: inline-block;
-    height: 31px;
-    padding: 0 1rem;
-    border-radius: 1.9rem;
-    background-color: #fff;
+    @import "../../bootstrap_minimal";
+    @include make-col(2, 8);
+
+    display: flex;
+    flex-direction: column;
+    height: 104px;
+    margin-top: 4rem;
+    padding: 0.875rem 1.5rem;
+    text-align: left;
     font-size: 0;
-    a {
-      color: $eva_dark;
-      &:hover {
-        color: $eva_main_blue;
+    border-radius: 1rem;
+    background-color: #fff;
+    li {
+      margin: 0;
+      display: block;
+      a {
+        width: 100%;
+        display: block;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $eva_dark;
+        &:hover {
+          color: $eva_main_blue;
+        }
       }
     }
-    #current_user {
-      span, a {
-        margin-right: .6rem;
-        padding: 0.38rem 0;
+    #utility {
+      &_nom {
+        padding-right: 1.75rem;
+        font-size: 0.875rem;
+      }
+      &_email,
+      &_structure_courante {
+        font-size: 0.75rem;
+        font-style: italic;
+      }
+      &_email {
+        a {
+          color: $eva_dark_blue_grey;
+          &:hover {
+            color: $eva_main_blue;
+          }
+        }
+      }
+      &_structure_courante {
+        display: flex;
+        flex-grow: 1;
+        align-items: flex-end;
+        &:before {
+          content: '';
+          display: block;
+          width: 22px;
+          height: 22px;
+          margin-right: 0.625rem;
+          background: asset-data-url('eva-logo-simple.svg') no-repeat center;
+        }
+        a {
+          color: $eva_main_blue;
+        }
       }
     }
     #logout {
+      position: absolute;
+      right: 0.875rem;
+      top: 0.875rem;
       a {
-        width: 1.8rem;
-        padding: 0.38rem 0;
-        display: inline-block;
-        color: transparent;
+        width: 28px;
+        display: block;
         background: asset-data-url('deconnexion.svg') no-repeat center right;
         background-size: contain;
+        color: transparent;
       }
     }
   }

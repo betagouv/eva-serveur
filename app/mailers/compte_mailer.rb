@@ -7,4 +7,16 @@ class CompteMailer < ApplicationMailer
     mail(to: @campagne.compte.email,
          subject: t('.objet', structure: @compte.structure.nom))
   end
+
+  def relance
+    @compte = params[:compte]
+    structure = @compte.structure
+    @cible_evaluation = structure.cible_evaluation
+    @effectif = structure.effectif
+
+    mail(
+      to: @compte.email,
+      subject: t('.objet', prenom: @compte.prenom)
+    )
+  end
 end

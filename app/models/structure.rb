@@ -53,6 +53,10 @@ class Structure < ApplicationRecord
     nom
   end
 
+  def effectif
+    Compte.where(structure: self).count
+  end
+
   def cible_evaluation
     case type_structure
     when 'mission_locale', 'orientation_scolaire', 'e2c', 'SMA'

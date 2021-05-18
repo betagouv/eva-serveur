@@ -28,5 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
       observer.observe(section);
       sections.push(el.hash);
     }
+    else {
+      el.parentNode.removeChild(el);
+    }
   });
 });

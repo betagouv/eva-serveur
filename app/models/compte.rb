@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Compte < ApplicationRecord
+  DELAI_RELANCE_NON_ACTIVATION = 30.days
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -19,18 +20,14 @@ class Compte < ApplicationRecord
 
   accepts_nested_attributes_for :structure
 
+  after_create :programme_email_relance
+
   def display_name
     [nom_complet, email].reject(&:blank?).join(' - ')
   end
 
   def nom_complet
     [prenom, nom].reject(&:blank?).join(' ')
-  end
-
-  def nombre_collegue
-    Compte.where(structure_id: structure_id)
-          .where.not(id: id)
-          .count
   end
 
   private
@@ -40,5 +37,11 @@ class Compte < ApplicationRecord
     return if Truemail.valid?(email)
 
     errors.add(:email, :invalid)
+  end
+
+  def programme_email_relance
+    RelanceUtilisateurPourNonActivationJob
+      .set(wait: DELAI_RELANCE_NON_ACTIVATION)
+      .perform_later(compte: self)
   end
 end

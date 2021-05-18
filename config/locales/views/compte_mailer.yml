@@ -22,3 +22,23 @@ fr:
         - URL de connexion au parcours : [%{url_client}](%{url_client})
 
         - Code de campagne (à donner aux bénéficiaires) : **%{code_campagne}**
+    relance:
+      objet: "%{prenom}, quelques conseils pour démarrer sur eva - Positionnement des compétences"
+      intro: |
+        ### Bonjour %{prenom},
+
+        Vous avez créé un compte il y a %{delai_relance} sur le service numérique eva.
+        Vous bénéficiez d'un accès nominatif et gratuit.
+
+        Eva permet de détecter l'illettrisme et de valoriser les %{cible_evaluation} que vous accompagnez en vous appuyant sur leurs compétences transversales.
+      x_personnes_utilisent_eva:
+        zero: ""
+        one: "Vous êtes la seule personne de votre structure à avoir créé son compte."
+        other: "Vous êtes %{count} collègues de votre structure à avoir créé un compte."
+      besoin_aide: |
+        ## Besoin d'aide ?
+
+        Pour accompagner les %{cible_evaluation} vers l’insertion professionnelle et vous servir d’eva, contacter notre équipe :
+        [support@eva.beta.gouv.fr](mailto:support@eva.beta.gouv.fr)
+
+        Vous pouvez aussi vous réinscrire à [une de nos présentations](%{lien_livestorm}) ou bien retrouver toutes les informations dans la [rubrique Aide](%{lien_rubrique_aide}).

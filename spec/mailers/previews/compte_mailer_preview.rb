@@ -8,4 +8,11 @@ class CompteMailerPreview < ActionMailer::Preview
     campagne = Campagne.new compte: compte, libelle: 'Paris 2019', code: 'paris2019'
     CompteMailer.with(campagne: campagne).nouveau_compte
   end
+
+  def relance
+    structure = Structure.new type_structure: 'mission_locale'
+    compte = Compte.new prenom: 'Lucas', structure: structure, email: 'lucas.dupont@example.com'
+
+    CompteMailer.with(compte: compte).relance
+  end
 end

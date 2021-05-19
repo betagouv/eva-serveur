@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Structure do
-  menu parent: 'Terrain'
+  menu parent: 'Terrain', if: proc { can?(:manage, Compte) }
   actions :all, except: [:new]
 
   permit_params :nom, :type_structure, :code_postal

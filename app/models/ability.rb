@@ -17,6 +17,7 @@ class Ability
     droit_evenement compte
     droit_restitution compte
     droit_compte compte
+    droit_structure compte
   end
 
   def droits_applicatifs
@@ -24,7 +25,6 @@ class Ability
     droit_question
     droit_questionnaire
     droit_choix
-    droit_structure
     droit_actualite
     droit_page
   end
@@ -96,10 +96,9 @@ class Ability
     end
   end
 
-  def droit_structure
-    cannot :destroy, Structure do |s|
-      Compte.where(structure: s).exists?
-    end
+  def droit_structure(compte)
+    can :read, Structure, id: compte.structure_id
+    cannot(:destroy, Structure) { |s| Compte.where(structure: s).exists? }
   end
 
   def droit_actualite

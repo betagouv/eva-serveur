@@ -6,16 +6,32 @@ fr:
         other: Comptes
     attributes:
       compte:
+        confirmation_sent_at: Date d'envoi de la confirmation
+        confirmation_token: Clé de confirmation du mot de passe
+        confirmed_at: Confirmé à
+        current_password: Mot de passe actuel
+        current_sign_in_at: Date de la dernière connexion
+        current_sign_in_ip: IP de la connexion actuelle
+        encrypted_password: Mot de passe chiffré
+        failed_attempts: Tentatives échouées
+        last_sign_in_at: Date de la connexion précédente
+        last_sign_in_ip: IP de la dernière connexion
+        locked_at: Verrouillé à
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+        remember_created_at: Mémorisé à
+        remember_me: Se souvenir de moi ?
+        reset_password_sent_at: Clé de réinitialisation créée à
+        reset_password_token: Clé de réinitialisation du mot de passe
+        sign_in_count: Nombre des connexions
+        unconfirmed_email: Email non confirmé
+        unlock_token: Clé de déverrouillage
         created_at: Créé le
         updated_at: Mis à jour le
         prenom: Prénom
         nom: Nom
         email: Email
         telephone: Téléphone
-        sign_in_count: Nombre de connexion
-        current_sign_in_at: Dernière connexion
-        password: Mot de passe
-        password_confirmation: Confirmation du mot de passe
         role: Rôle
         roles:
           superadmin: Superadmin

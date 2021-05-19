@@ -4,7 +4,7 @@ class Compte < ApplicationRecord
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
+  devise :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable, :registerable
   ROLES = %w[superadmin admin conseiller compte_generique].freeze
   validates :role, inclusion: { in: ROLES }

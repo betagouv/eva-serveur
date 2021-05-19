@@ -28,5 +28,17 @@ div class: 'mon-compte row' do
         row :statut_validation
       end
     end
+
+    if can?(:manage, Compte)
+      div class: 'panel' do
+        attributes_table_for compte do
+          row :sign_in_count
+          row :current_sign_in_at
+          row :last_sign_in_at
+          row :current_sign_in_ip
+          row :last_sign_in_ip
+        end
+      end
+    end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class EvenementsController < ActionController::API
+  class EvenementsController < Api::BaseController
     def create
       evenement = Evenement.new evenement_params.merge(partie: partie)
 

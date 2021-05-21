@@ -2,11 +2,7 @@
 
 module Api
   module Evaluations
-    class FinsController < ActionController::API
-      rescue_from ActiveRecord::RecordNotFound do
-        head :not_found
-      end
-
+    class FinsController < Api::BaseController
       def create
         @competences = []
 

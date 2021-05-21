@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 module Api
-  class CampagnesController < ActionController::API
+  class CampagnesController < Api::BaseController
     before_action :trouve_campagne
-
-    rescue_from ActiveRecord::RecordNotFound do
-      head :not_found
-    end
 
     def show
       @questions = @campagne.questionnaire&.questions || []

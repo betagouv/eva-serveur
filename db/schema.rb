@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_151935) do
+ActiveRecord::Schema.define(version: 2021_05_21_145152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_151935) do
     t.integer "nombre_evaluations", default: 0
     t.boolean "affiche_competences_fortes", default: true
     t.uuid "parcours_type_id"
+    t.datetime "anonymise_le"
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["parcours_type_id"], name: "index_campagnes_on_parcours_type_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
@@ -119,6 +120,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_151935) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.datetime "anonymise_le"
     t.index ["email"], name: "index_comptes_on_email", unique: true
     t.index ["reset_password_token"], name: "index_comptes_on_reset_password_token", unique: true
     t.index ["structure_id"], name: "index_comptes_on_structure_id"
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_151935) do
     t.string "email"
     t.string "telephone"
     t.datetime "terminee_le"
+    t.datetime "anonymise_le"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
 
@@ -256,6 +259,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_151935) do
     t.float "longitude"
     t.string "type_structure"
     t.string "region"
+    t.datetime "anonymise_le"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
   end
 

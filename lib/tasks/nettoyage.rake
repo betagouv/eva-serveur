@@ -1,51 +1,37 @@
 # frozen_string_literal: true
 
 namespace :nettoyage do
-  def anonymise_evaluations(rng, logger)
+  def anonymise_evaluations
+    puts "\n-- anonymise les évaluations --"
     Evaluation.find_each do |evaluation|
-      nouveau_nom = "#{rng.compose(2)} #{rng.compose(3).upcase}"
-      logger.info "#{evaluation.nom} est remplacé par #{nouveau_nom}"
-      evaluation.nom = nouveau_nom
-      evaluation.email = nil
-      evaluation.telephone = nil
-      evaluation.anonymise_le = Time.current
-      evaluation.save
+      print '.'
+      Anonymisation::Evaluation.new(evaluation).anonymise
     end
   end
 
-  def anonymise_comptes(rng, logger)
+  def anonymise_comptes
+    puts "\n-- anonymise les comptes --"
     Compte.find_each do |compte|
       next if compte.superadmin?
 
-      compte.prenom = rng.compose(2)
-      compte.nom = rng.compose(2)
-      compte.telephone = nil
-      nouvel_email = "#{compte.prenom}.#{compte.nom}@eva.beta.gouv.fr"
-      logger.info "#{compte.email} est remplacé par #{nouvel_email}"
-      compte.email = nouvel_email
-      compte.anonymise_le = Time.current
-      compte.save
+      print '.'
+      Anonymisation::Compte.new(compte).anonymise
     end
   end
 
-  def anonymise_structure(structure, nouveau_nom)
-    return if structure.nil?
-
-    structure.nom = nouveau_nom
-    structure.anonymise_le = Time.current
-    structure.save
+  def anonymise_structures
+    puts "\n-- anonymise les structures --"
+    Structure.find_each do |structure|
+      print '.'
+      Anonymisation::Structure.new(structure).anonymise
+    end
   end
 
-  def anonymise_campagnes_et_structures(rng, logger)
-    type_structure = ['Mission ', 'ML ', 'Garantie Jeunes ', '',
-                      'Association ', 'Mission Locale Jeunes de ']
-    Campagne.find_each.with_index do |campagne, index|
-      nouveau_nom = "#{type_structure[index % type_structure.size]}#{rng.compose(3)}"
-      logger.info "#{campagne.libelle} est remplacé par #{nouveau_nom}"
-      campagne.libelle = nouveau_nom
-      campagne.anonymise_le = Time.current
-      campagne.save
-      anonymise_structure(campagne.compte.structure, nouveau_nom)
+  def anonymise_campagnes
+    puts "\n-- anonymise les campagnes --"
+    Campagne.find_each do |campagne|
+      print '.'
+      Anonymisation::Campagne.new(campagne).anonymise
     end
   end
 
@@ -53,13 +39,11 @@ namespace :nettoyage do
   task anonymise: :environment do
     return if Rails.env.production?
 
-    logger = RakeLogger.logger
-    rng = RandomNameGenerator.new
-
-    anonymise_evaluations(rng, logger)
+    anonymise_evaluations
     Contact.delete_all
-    anonymise_comptes(rng, logger)
-    anonymise_campagnes_et_structures(rng, logger)
+    anonymise_comptes
+    anonymise_campagnes
+    anonymise_structures
   end
 
   desc "Recalculer les metriques d'une situation."

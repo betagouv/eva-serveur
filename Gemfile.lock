@@ -163,6 +163,7 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    ffaker (2.18.0)
     ffi (1.15.0)
     foreman (0.87.2)
     formatador (0.2.5)
@@ -313,7 +314,6 @@ GEM
       thor (~> 1.0)
     rainbow (3.0.0)
     rake (13.0.3)
-    random_name_generator (1.2.1)
     ransack (2.4.2)
       activerecord (>= 5.2.4)
       activesupport (>= 5.2.4)
@@ -461,6 +461,7 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_bot_rails
+  ffaker
   foreman
   geocoder
   guard-rspec
@@ -478,7 +479,6 @@ DEPENDENCIES
   rails (~> 6.1.0)
   rails-erd
   rails-i18n
-  random_name_generator
   redcarpet
   redis
   rollbar

@@ -8,6 +8,7 @@ namespace :nettoyage do
       evaluation.nom = nouveau_nom
       evaluation.email = nil
       evaluation.telephone = nil
+      evaluation.anonymise_le = Time.current
       evaluation.save
     end
   end
@@ -22,6 +23,7 @@ namespace :nettoyage do
       nouvel_email = "#{compte.prenom}.#{compte.nom}@eva.beta.gouv.fr"
       logger.info "#{compte.email} est remplacé par #{nouvel_email}"
       compte.email = nouvel_email
+      compte.anonymise_le = Time.current
       compte.save
     end
   end
@@ -30,6 +32,7 @@ namespace :nettoyage do
     return if structure.nil?
 
     structure.nom = nouveau_nom
+    structure.anonymise_le = Time.current
     structure.save
   end
 
@@ -40,6 +43,7 @@ namespace :nettoyage do
       nouveau_nom = "#{type_structure[index % type_structure.size]}#{rng.compose(3)}"
       logger.info "#{campagne.libelle} est remplacé par #{nouveau_nom}"
       campagne.libelle = nouveau_nom
+      campagne.anonymise_le = Time.current
       campagne.save
       anonymise_structure(campagne.compte.structure, nouveau_nom)
     end

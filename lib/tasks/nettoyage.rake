@@ -2,7 +2,7 @@
 
 namespace :nettoyage do
   def anonymise_evaluations(rng, logger)
-    Evaluation.all.each do |evaluation|
+    Evaluation.find_each do |evaluation|
       nouveau_nom = "#{rng.compose(2)} #{rng.compose(3).upcase}"
       logger.info "#{evaluation.nom} est remplacé par #{nouveau_nom}"
       evaluation.nom = nouveau_nom
@@ -13,7 +13,7 @@ namespace :nettoyage do
   end
 
   def anonymise_comptes(rng, logger)
-    Compte.all.each do |compte|
+    Compte.find_each do |compte|
       next if compte.superadmin?
 
       compte.prenom = rng.compose(2)
@@ -36,7 +36,7 @@ namespace :nettoyage do
   def anonymise_campagnes_et_structures(rng, logger)
     type_structure = ['Mission ', 'ML ', 'Garantie Jeunes ', '',
                       'Association ', 'Mission Locale Jeunes de ']
-    Campagne.all.each_with_index do |campagne, index|
+    Campagne.find_each.with_index do |campagne, index|
       nouveau_nom = "#{type_structure[index % type_structure.size]}#{rng.compose(3)}"
       logger.info "#{campagne.libelle} est remplacé par #{nouveau_nom}"
       campagne.libelle = nouveau_nom

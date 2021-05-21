@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 module Api
-  class EvaluationsController < ActionController::API
+  class EvaluationsController < Api::BaseController
     before_action :trouve_evaluation, only: %i[show update]
-
-    rescue_from ActiveRecord::RecordNotFound do
-      head :not_found
-    end
 
     def create
       evaluation = Evaluation.new(evaluation_params)

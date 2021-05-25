@@ -156,7 +156,10 @@ GEM
     devise-i18n (1.9.3)
       devise (>= 4.7.1)
     diff-lcs (1.4.4)
+    e2mmap (0.1.0)
     erubi (1.10.0)
+    et-orbi (1.2.4)
+      tzinfo
     execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
@@ -170,6 +173,9 @@ GEM
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.6.0)
+    fugit (1.4.4)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     geocoder (1.6.6)
     geoip (1.6.4)
     globalid (0.4.2)
@@ -272,6 +278,7 @@ GEM
     public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-cors (1.1.1)
@@ -373,6 +380,8 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.4)
+    rufus-scheduler (3.7.0)
+      fugit (~> 1.1, >= 1.1.6)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -394,6 +403,13 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-scheduler (3.0.1)
+      e2mmap
+      redis (>= 3, < 5)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 3)
+      thwait
+      tilt (>= 1.4.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
     spreadsheet (1.2.8)
@@ -414,6 +430,8 @@ GEM
     tarteaucitron (0.3.2)
       geoip
     thor (1.1.0)
+    thwait (0.2.0)
+      e2mmap
     tilt (2.0.10)
     truemail (2.3.4)
       simpleidn (~> 0.2.1)
@@ -488,6 +506,7 @@ DEPENDENCIES
   rubocop-rspec
   shoulda-matchers
   sidekiq
+  sidekiq-scheduler
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

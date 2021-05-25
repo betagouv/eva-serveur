@@ -80,7 +80,18 @@ L'api est accessible au point `/api`
       "libelle": "Tri",
       "nom_technique": "tri"
     }
-  ],
+  ]
+}
+```
+
+### Annonce la fin de l'évaluation
+
+`POST /api/evaluations/:id/fin`
+
+**Réponse**
+
+```
+{
   "competences_fortes": [
     {
       "id": "id_competence",

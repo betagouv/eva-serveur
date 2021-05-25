@@ -129,6 +129,36 @@ Contenu:
 }
 ```
 
+
+### Récupére des informations sur une campagne
+
+**Requête**
+
+`GET /api/campagnes/:code_campagne`
+
+**Réponse**
+
+```
+{
+  "questions:": [
+    {
+      id: 1,
+      type: 'qcm',
+      intitule: 'Ma question',
+      description: 'Ma description',
+      choix: []
+    }
+  ],
+  "situations": [
+    {
+      "id": 1,
+      "libelle": "Tri",
+      "nom_technique": "tri"
+    }
+  ]
+}
+```
+
 ## Modèle de données
 
 ![](docs/erd.png)

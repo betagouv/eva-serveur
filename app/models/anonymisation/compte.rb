@@ -7,7 +7,7 @@ module Anonymisation
         compte.prenom = FFaker::Name.first_name
         compte.nom = FFaker::Name.last_name
         compte.telephone = nil
-        compte.email = "#{compte.prenom}.#{compte.nom}@eva.beta.gouv.fr"
+        compte.email = "#{compte.prenom.parameterize}.#{compte.nom.parameterize}@eva.beta.gouv.fr"
       end
     end
   end

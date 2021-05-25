@@ -1,0 +1,6 @@
+:schedule:
+  anonymisations_evaluations_job:
+    cron: '0 1 * * *'
+    class: AnonymisationEvaluationsJob
+    description: Anonymise les évaluations de plus d'un an. (job exécuté chaque jour)
+    enabled: true

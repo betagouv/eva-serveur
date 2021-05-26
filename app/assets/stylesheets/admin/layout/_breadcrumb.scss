@@ -17,8 +17,16 @@
     box-sizing: border-box;
 
     #page_title {
+      @import "../../bootstrap_minimal";
+      @include make-col(6, 8);
+
+      padding-right: 1.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       font-family: $font-titre;
       font-size: 1.5rem;
+      line-height: 1.15;
       color: #fff;
     }
 

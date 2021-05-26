@@ -150,16 +150,17 @@
         display: flex;
         flex-grow: 1;
         align-items: flex-end;
-        &:before {
-          content: '';
-          display: block;
-          width: 22px;
-          height: 22px;
-          margin-right: 0.625rem;
-          background: asset-data-url('eva-logo-simple.svg') no-repeat center;
-        }
         a {
           color: $eva_main_blue;
+          &:before {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+            margin-right: 0.625rem;
+            background: asset-data-url('eva-logo-simple.svg') no-repeat center;
+          }
         }
       }
     }

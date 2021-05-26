@@ -16,6 +16,10 @@ class Evaluation < ApplicationRecord
     joins(campagne: :compte).where('comptes.structure_id' => structure)
   }
 
+  def anonyme?
+    anonymise_le.present?
+  end
+
   private
 
   def trouve_campagne_depuis_code

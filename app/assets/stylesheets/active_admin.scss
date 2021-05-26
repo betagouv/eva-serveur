@@ -83,3 +83,12 @@ body {
     background-color: $eva_bluegrey;
   }
 }
+
+.icone-anonyme {
+  position: relative;
+  top: .125em;
+  flex-shrink: 0;
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}

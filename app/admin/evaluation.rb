@@ -20,8 +20,12 @@ ActiveAdmin.register Evaluation do
             target: '_blank')
   end
 
-  index download_links: -> { params[:action] == 'show' ? [:pdf] : %i[csv xls] } do
-    column :nom
+  index download_links: lambda {
+                          params[:action] == 'show' ? [:pdf] : %i[csv xls]
+                        }, row_class: lambda { |elem|
+                                        'anonyme' if elem.anonyme?
+                                      } do
+    column(:nom) { |e| nom_pour_evaluation(e) }
     column :campagne
     column :created_at
     actions

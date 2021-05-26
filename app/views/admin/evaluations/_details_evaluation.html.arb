@@ -2,11 +2,12 @@
 
 panel t('.titre'), id: 'details_evaluation' do
   attributes_table_for resource do
-    row :nom
+    row(:nom) { nom_pour_evaluation(resource) }
     row :campagne
     row :email
     row :telephone
     row :created_at
+    row :anonymise_le if resource.anonyme?
     if can?(:manage, Compte)
       row :terminee_le
       row(:temps_total) { formate_duree statistiques.temps_total }

@@ -11,7 +11,7 @@ div class: 'evaluations bloc-apercu' do
       evaluations.each do |evaluation|
         div class: 'evaluation' do
           span class: 'nom' do
-            text_node evaluation.nom
+            text_node nom_pour_evaluation(evaluation)
           end
           span class: 'date' do
             text_node t('.date', date: time_ago_in_words(evaluation.created_at))

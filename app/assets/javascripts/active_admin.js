@@ -5,5 +5,6 @@
 //= require faq
 //= require aide
 //= require clipboard
+//= require flashes
 
 jQuery.datetimepicker.setLocale('fr');

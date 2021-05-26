@@ -121,6 +121,7 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
+        evaluation_anonyme: "Cette évaluation est anonyme : le nom de l'évalué·e est fictif et ses informations personnelles ont été supprimées."
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       aide_interpretation_expression_ecrite: |

@@ -56,6 +56,10 @@ ActiveAdmin.register Evaluation do
       destroy!(location: admin_campagne_path(resource.campagne))
     end
 
+    before_action only: :show do
+      flash.now[:evaluation_anonyme] = t('.evaluation_anonyme') if resource.anonyme?
+    end
+
     private
 
     def statistiques

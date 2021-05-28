@@ -17,13 +17,17 @@ fr:
         titre: Vos dernières évaluations
         action: Voir
         date: "il y a %{date}"
-        premiere-visite:
-          titre: Bienvenue dans votre espace conseiller !
-          description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
-          action: Consulter le guide de prise en main
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes
         entete-libelle: Libellé
         entete-code: Code campagne
         entete-url: URL
+      prise_en_main:
+        titre: Bienvenue dans votre espace conseiller !
+        guide_prise_en_main:
+          description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
+          action: Consulter le guide de prise en main
+        premiere_campagne:
+          description: Eva utilise le concept de "campagne" pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+          action: Créer ma première campagne

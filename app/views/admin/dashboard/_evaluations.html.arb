@@ -6,32 +6,18 @@ div class: 'evaluations bloc-apercu' do
     text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
   end
 
-  if evaluations.present?
-    div class: 'evaluations-liste' do
-      evaluations.each do |evaluation|
-        div class: 'evaluation' do
-          span class: 'nom' do
-            text_node nom_pour_evaluation(evaluation)
-          end
-          span class: 'date' do
-            text_node t('.date', date: time_ago_in_words(evaluation.created_at))
-          end
-          span class: 'action' do
-            link_to t('.action'), admin_evaluation_path(evaluation)
-          end
+  div class: 'evaluations-liste' do
+    evaluations.each do |evaluation|
+      div class: 'evaluation' do
+        span class: 'nom' do
+          text_node nom_pour_evaluation(evaluation)
         end
-      end
-    end
-  else
-    div class: 'evaluations-premiere-visite' do
-      div class: 'premiere-visite-illustration' do
-        h4 t('.premiere-visite.titre')
-        text_node image_tag 'avatar_bienvenue.png'
-      end
-      div class: 'premiere-visite-action' do
-        text_node md t('.premiere-visite.description')
-        text_node link_to t('.premiere-visite.action'), Eva::DOCUMENT_PRISE_EN_MAIN,
-                          target: '_blank', class: 'action'
+        span class: 'date' do
+          text_node t('.date', date: time_ago_in_words(evaluation.created_at))
+        end
+        span class: 'action' do
+          link_to t('.action'), admin_evaluation_path(evaluation)
+        end
       end
     end
   end

@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
-columns do
-  column do
-    render 'evaluations', evaluations: evaluations
+if evaluations.present?
+  columns do
+    column do
+      render 'evaluations', evaluations: evaluations
+    end
+    column do
+      render 'actualites', actualites: actualites if actualites.present?
+    end
   end
-
-  column do
-    render 'actualites', actualites: actualites if actualites.present?
-  end
+else
+  render 'prise_en_main', campagnes: campagnes
 end
 
-columns do
-  render 'campagnes', campagnes: campagnes
+if campagnes.present?
+  columns do
+    render 'campagnes', campagnes: campagnes
+  end
 end
 
 if can?(:manage, Compte)

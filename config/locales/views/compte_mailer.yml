@@ -16,12 +16,6 @@ fr:
 
         - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
           Il est personnel, ne le communiquez pas à vos collègues.
-
-        ##Les informations à remettre aux bénéficiaires pour réaliser les parcours :
-
-        - URL de connexion au parcours : [%{url_client}](%{url_client})
-
-        - Code de campagne (à donner aux bénéficiaires) : **%{code_campagne}**
     relance:
       objet: "%{prenom}, quelques conseils pour démarrer sur eva - Positionnement des compétences"
       intro: |

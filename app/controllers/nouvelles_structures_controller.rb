@@ -5,16 +5,15 @@ class NouvellesStructuresController < ApplicationController
   helper ::ActiveAdmin::ViewHelpers
 
   def show
-    @campagne = Campagne.new
-    compte = @campagne.build_compte
-    compte.build_structure
+    @compte = Compte.new
+    @compte.build_structure
   end
 
   def create
-    @campagne = Campagne.new campagne_parametres
-    if @campagne.save
+    @compte = Compte.new compte_parametres
+    if @compte.save
       envoie_emails
-      sign_in @campagne.compte
+      sign_in @compte
       redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
     else
       render :show
@@ -23,16 +22,14 @@ class NouvellesStructuresController < ApplicationController
 
   private
 
-  def campagne_parametres
-    parametres = params.require(:campagne).permit!.to_h
-    parcours_type = ParcoursType.par_defaut
-    parametres.deep_merge(parcours_type: parcours_type,
-                          compte_attributes: { statut_validation: :acceptee, role: 'admin' })
+  def compte_parametres
+    parametres = params.require(:compte).permit!.to_h
+    parametres.merge(statut_validation: :acceptee, role: 'admin')
   end
 
   def envoie_emails
-    CompteMailer.with(campagne: @campagne).nouveau_compte.deliver_later
-    StructureMailer.with(compte: @campagne.compte, structure: @campagne.compte.structure)
+    CompteMailer.with(compte: @compte).nouveau_compte.deliver_later
+    StructureMailer.with(compte: @compte, structure: @compte.structure)
                    .nouvelle_structure
                    .deliver_later
   end

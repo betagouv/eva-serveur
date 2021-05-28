@@ -6,37 +6,33 @@ div class: 'bloc-apercu' do
     text_node link_to t('.action'), admin_campagnes_path
   end
 
-  if campagnes.present?
-    div class: 'campagnes-liste' do
-      div class: 'liste-entete' do
-        span class: 'entete-libelle' do
-          text_node t('.entete-libelle')
-        end
-        span class: 'entete-code' do
-          text_node t('.entete-code')
-        end
-        span class: 'entete-url' do
-          text_node t('.entete-url')
-        end
+  div class: 'campagnes-liste' do
+    div class: 'liste-entete' do
+      span class: 'entete-libelle' do
+        text_node t('.entete-libelle')
       end
-      campagnes.each do |campagne|
-        div class: 'campagne' do
-          span class: 'campagne-libelle' do
-            text_node campagne.libelle
-          end
-          span class: 'campagne-code' do
-            text_node campagne.code
-          end
-          span class: 'campagne-url' do
-            url = Addressable::URI.escape("#{URL_CLIENT}?code=#{campagne.code}")
-            a url, href: url, target: 'blank'
-            input class: 'input-copier-coller', type: 'text', value: url
-            button "Copier l'URL", class: 'button copier-coller'
-          end
+      span class: 'entete-code' do
+        text_node t('.entete-code')
+      end
+      span class: 'entete-url' do
+        text_node t('.entete-url')
+      end
+    end
+    campagnes.each do |campagne|
+      div class: 'campagne' do
+        span class: 'campagne-libelle' do
+          text_node campagne.libelle
+        end
+        span class: 'campagne-code' do
+          text_node campagne.code
+        end
+        span class: 'campagne-url' do
+          url = Addressable::URI.escape("#{URL_CLIENT}?code=#{campagne.code}")
+          a url, href: url, target: 'blank'
+          input class: 'input-copier-coller', type: 'text', value: url
+          button "Copier l'URL", class: 'button copier-coller'
         end
       end
     end
-  else
-    text_node 'Aucune campagne'
   end
 end

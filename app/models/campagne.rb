@@ -11,7 +11,6 @@ class Campagne < ApplicationRecord
   validates :code, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
-  accepts_nested_attributes_for :compte
 
   before_create :initialise_situations, if: :parcours_type_id
 

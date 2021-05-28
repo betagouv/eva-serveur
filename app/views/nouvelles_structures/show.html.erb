@@ -3,49 +3,34 @@
 <% end %>
 <% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
 
-<%= semantic_form_for @campagne, url: nouvelle_structure_path do |campagne| %>
-  <%= campagne.semantic_errors *campagne.object.errors.messages.keys %>
-  <%= campagne.semantic_fields_for :compte do |compte| %>
-    <%= compte.semantic_fields_for :structure do |structure| %>
-      <div class="panel">
-        <h3><%= t('.compte.titre') %></h3>
-        <%= compte.inputs do %>
-          <%= compte.input :prenom %>
-          <%= compte.input :nom %>
-          <%= compte.input :telephone %>
-          <%= compte.input :email %>
-          <%= compte.input :password %>
-          <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <% end %>
-      </div>
-      <div class="panel">
-        <h3><%= t('.structure.titre') %></h3>
-        <p class="description"><%= t('.structure.description') %></p>
-        <%= structure.inputs do %>
-          <%= structure.input :nom %>
-          <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
-          <%= structure.input :code_postal %>
-        <% end %>
-      </div>
-      <div class="panel">
-        <h3><%= t('.campagne.titre') %></h3>
-        <p class="description">
-          <%= t('admin.campagnes.form.explication_campagne').html_safe %>
-          <br/>
-          <br/>
-          <%= t('admin.campagnes.form.explication_code').html_safe %>
-        </p>
-        <%= campagne.inputs do %>
-          <%= campagne.input :libelle %>
-          <%= campagne.input :code %>
-        <% end %>
-      </div>
-    <% end %>
+<%= semantic_form_for @compte, url: nouvelle_structure_path do |compte| %>
+  <%= compte.semantic_errors *compte.object.errors.messages.keys %>
+  <%= compte.semantic_fields_for :structure do |structure| %>
+    <div class="panel">
+      <h3><%= t('.compte.titre') %></h3>
+      <%= compte.inputs do %>
+        <%= compte.input :prenom %>
+        <%= compte.input :nom %>
+        <%= compte.input :telephone %>
+        <%= compte.input :email %>
+        <%= compte.input :password %>
+        <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
+      <% end %>
+    </div>
+    <div class="panel">
+      <h3><%= t('.structure.titre') %></h3>
+      <p class="description"><%= t('.structure.description') %></p>
+      <%= structure.inputs do %>
+        <%= structure.input :nom %>
+        <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
+        <%= structure.input :code_postal %>
+      <% end %>
+    </div>
   <% end %>
   <div class="panel">
     <%= md t('.actions.validation') %>
-    <%= campagne.actions do %>
-      <%= campagne.action :submit, label: t('.creer_structure')%>
+    <%= compte.actions do %>
+      <%= compte.action :submit, label: t('.creer_structure')%>
     <% end %>
   </div>
 <% end %>

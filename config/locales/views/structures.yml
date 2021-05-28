@@ -22,8 +22,6 @@ fr:
         description: Où travaillez vous ?
       compte:
         titre: Votre compte
-      campagne:
-        titre: Votre première campagne
       actions:
         validation: |
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**

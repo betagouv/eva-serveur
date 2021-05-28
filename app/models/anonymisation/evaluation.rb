@@ -4,7 +4,7 @@ module Anonymisation
   class Evaluation < Anonymisation::Base
     def anonymise
       super do |evaluation|
-        evaluation.nom = FFaker::Name.name
+        evaluation.nom = FFaker::NameFR.name
         evaluation.email = nil
         evaluation.telephone = nil
       end

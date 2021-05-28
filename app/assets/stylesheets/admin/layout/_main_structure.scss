@@ -1,8 +1,5 @@
 #active_admin_content {
   padding: 3rem 0;
-  display: flex;
-  align-items: stretch;
-
 
   #main_content_wrapper {
     #main_content {
@@ -15,7 +12,9 @@
   }
 }
 
-#active_admin_content {
-  margin: 0;
-  padding: 3rem 0;
+body.logged_in {
+  #active_admin_content {
+    display: flex;
+    align-items: stretch;
+  }
 }

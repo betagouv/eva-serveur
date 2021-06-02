@@ -36,6 +36,11 @@ ActiveAdmin.register Compte do
          if: proc { can? :manage, Compte }
   filter :created_at
 
+  filter :structure_type_structure_eq,
+         as: :select,
+         collection: ApplicationController.helpers.collection_types_structures,
+         label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure')
+
   form do |f|
     f.inputs do
       f.input :prenom

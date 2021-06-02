@@ -28,6 +28,12 @@ ActiveAdmin.register Compte do
                      }
 
   filter :structure, if: proc { can? :manage, Compte }
+  filter :role,
+         as: :select,
+         collection: Compte.roles.map { |v, id|
+                       [Compte.humanized_role(v), id]
+                     },
+         if: proc { can? :manage, Compte }
   filter :created_at
 
   form do |f|

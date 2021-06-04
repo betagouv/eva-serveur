@@ -43,11 +43,11 @@ class Structure < ApplicationRecord
 
   scope :non_activees, -> { par_nombre_d_evaluations 'BETWEEN 1 AND 3' }
   scope :activees, -> { par_nombre_d_evaluations '> 3' }
-  scope :actives, -> { activees.par_derniere_evaluation('> ?', 2.months.ago) }
+  scope :actives, -> { activees.par_derniere_evaluation('> ?', 2.months.ago).uniq!(:group) }
   scope :inactives, lambda {
-    activees.par_derniere_evaluation('BETWEEN ? AND ?', 6.months.ago, 2.months.ago)
+    activees.par_derniere_evaluation('BETWEEN ? AND ?', 6.months.ago, 2.months.ago).uniq!(:group)
   }
-  scope :abandonnistes, -> { activees.par_derniere_evaluation('< ?', 6.months.ago) }
+  scope :abandonnistes, -> { activees.par_derniere_evaluation('< ?', 6.months.ago).uniq!(:group) }
 
   def display_name
     nom

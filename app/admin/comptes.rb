@@ -25,10 +25,11 @@ ActiveAdmin.register Compte do
   filter :structure_type_structure_eq,
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures,
-         label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure')
+         label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure'),
+         if: proc { can? :manage, Compte }
 
   def filtrer_par_activation_structure(statut_activation)
-    scope statut_activation, if: proc { can? :manage, Compte } do |scope|
+    scope statut_activation, if: -> { can? :manage, Compte } do |scope|
       scope.where(structure: Structure.send(statut_activation))
     end
   end
@@ -74,6 +75,11 @@ ActiveAdmin.register Compte do
     end
     f.actions
   end
+
+  sidebar :aide_filtres,
+          partial: 'admin/structures/aide_filtres_sidebar',
+          only: :index,
+          if: -> { can? :manage, Compte }
 
   controller do
     helper_method :peut_modifier_mot_de_passe?, :collection_roles

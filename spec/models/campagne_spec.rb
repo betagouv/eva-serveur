@@ -28,16 +28,20 @@ describe Campagne, type: :model do
     describe 'initialisation de la campagne' do
       let(:campagne) do
         Campagne.new libelle: 'ma campagne',
-                     code: 'moncode',
+                     code: 'HeLLo',
                      compte: compte,
                      parcours_type: parcours_type
       end
-      before do
+
+      it 'passe le code en minuscule' do
+        campagne.save
+        expect(campagne.code).to eq 'hello'
+      end
+
+      it do
         allow(campagne)
           .to receive(:parcours_type).and_return parcours_type
         expect(campagne.valid?).to be(true)
-      end
-      it do
         campagne.save
         expect(campagne.situations_configurations.count).to eq 1
       end

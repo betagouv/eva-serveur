@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Campagne, type: :model do
   it { should validate_presence_of :libelle }
-  it { should validate_uniqueness_of :code }
+  it { should validate_uniqueness_of(:code).case_insensitive }
   it { should belong_to(:questionnaire).optional }
 
   context 'avec des situations' do

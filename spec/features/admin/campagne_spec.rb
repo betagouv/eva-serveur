@@ -6,11 +6,11 @@ describe 'Admin - Campagne', type: :feature do
   let(:compte_conseiller) { create :compte_conseiller }
   let!(:compte_connecte) { connecte(compte_conseiller) }
   let!(:ma_campagne) do
-    create :campagne, libelle: 'Amiens 18 juin', code: 'a5rc8', compte: compte_connecte
+    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
   end
   let!(:campagne) do
     autre_compte_conseiller = create :compte_conseiller, email: 'orga@eva.fr'
-    create :campagne, libelle: 'Rouen 30 mars', code: 'a5rouen', compte: autre_compte_conseiller
+    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }
   let!(:evaluation_conseiller) { create :evaluation, campagne: ma_campagne }
@@ -21,7 +21,7 @@ describe 'Admin - Campagne', type: :feature do
 
       it do
         expect(page).to have_content 'Amiens 18 juin'
-        expect(page).to have_content 'a5rc8'
+        expect(page).to have_content 'A5RC8'
         expect(page).to_not have_content 'Rouen 30 mars'
       end
 
@@ -78,13 +78,13 @@ describe 'Admin - Campagne', type: :feature do
 
       context 'crée la campagne, associé au compte courant et initialise les situations' do
         before do
-          fill_in :campagne_code, with: 'EUROCKS'
+          fill_in :campagne_code, with: 'eurocks'
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
         it do
           campagne = Campagne.order(:created_at).last
-          expect(campagne.code).to eq 'eurocks'
+          expect(campagne.code).to eq 'EUROCKS'
           expect(campagne.compte).to eq compte_conseiller
           within('.campagne-parcours table') do
             expect(page).to have_content situation_maintenance.libelle
@@ -113,7 +113,7 @@ describe 'Admin - Campagne', type: :feature do
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
-          expect(campagne.code).to eq 'belfort2021'
+          expect(campagne.code).to eq 'BELFORT2021'
           expect(campagne.compte).to eq compte_conseiller
           within('.campagne-parcours table') do
             expect(page).to have_content situation_maintenance.libelle

@@ -4,11 +4,11 @@ require 'rails_helper'
 
 describe 'Evaluation API', type: :request do
   describe 'POST /evaluations' do
-    let!(:campagne_ete19) { create :campagne, code: 'ete19' }
+    let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
     context 'Création quand une requête est valide' do
       let(:payload_valide_avec_campagne) do
-        { nom: 'Roger', code_campagne: 'ete19' }
+        { nom: 'Roger', code_campagne: 'ETE19' }
       end
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
 
@@ -20,7 +20,7 @@ describe 'Evaluation API', type: :request do
     end
 
     context 'Quand le code campagne est inconnu' do
-      let(:payload_invalide) { { nom: '', code_campagne: 'ete190' } }
+      let(:payload_invalide) { { nom: '', code_campagne: 'ETE190' } }
       before { post '/api/evaluations', params: payload_invalide }
 
       it 'retourne une 422' do

@@ -28,6 +28,12 @@ ActiveAdmin.register Compte do
          label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure'),
          if: proc { can? :manage, Compte }
 
+  filter :structure_region_eq,
+         as: :select,
+         collection: proc { Structure.distinct.order(:region).pluck(:region) },
+         label: I18n.t('region', scope: 'activerecord.attributes.structure'),
+         if: proc { can? :manage, Compte }
+
   def filtrer_par_activation_structure(statut_activation)
     scope statut_activation, if: -> { can? :manage, Compte } do |scope|
       scope.where(structure: Structure.send(statut_activation))

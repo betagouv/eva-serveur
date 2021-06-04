@@ -5,7 +5,6 @@ class Campagne < ApplicationRecord
   belongs_to :questionnaire, optional: true
   belongs_to :compte
   belongs_to :parcours_type, optional: true
-  default_scope { order(created_at: :asc) }
 
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true

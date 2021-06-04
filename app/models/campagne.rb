@@ -8,7 +8,7 @@ class Campagne < ApplicationRecord
 
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
-  validates :code, presence: true, uniqueness: true
+  validates :code, presence: true, uniqueness: { case_sensitive: false }
 
   auto_strip_attributes :libelle, :code, squish: true
 

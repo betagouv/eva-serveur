@@ -33,9 +33,9 @@ describe Campagne, type: :model do
                      parcours_type: parcours_type
       end
 
-      it 'passe le code en minuscule' do
+      it 'passe le code en majuscule' do
         campagne.save
-        expect(campagne.code).to eq 'hello'
+        expect(campagne.code).to eq 'HELLO'
       end
 
       it do

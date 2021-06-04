@@ -11,7 +11,7 @@ module Api
     private
 
     def trouve_campagne
-      @campagne = Campagne.find_by!(code: params[:code_campagne])
+      @campagne = Campagne.par_code(params[:code_campagne]).take!
     end
   end
 end

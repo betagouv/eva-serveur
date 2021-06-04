@@ -25,7 +25,7 @@ class Evaluation < ApplicationRecord
   def trouve_campagne_depuis_code
     return if code_campagne.blank?
 
-    self.campagne = Campagne.find_by code: code_campagne
+    self.campagne = Campagne.par_code(code_campagne).take
   end
 
   def code_campagne_connu

@@ -15,11 +15,12 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   before_create :initialise_situations, if: :parcours_type_id
-  before_create :passe_le_code_en_minuscule
+  before_create :passe_le_code_en_majuscule
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)
   }
+  scope :par_code, ->(code) { where code: code.upcase }
 
   def display_name
     libelle
@@ -27,6 +28,10 @@ class Campagne < ApplicationRecord
 
   def questionnaire_pour(situation)
     situations_configurations.find_by(situation: situation)&.questionnaire_utile
+  end
+
+  def self.par_code(code)
+    where code: code.upcase
   end
 
   private
@@ -37,7 +42,7 @@ class Campagne < ApplicationRecord
     end
   end
 
-  def passe_le_code_en_minuscule
-    code&.downcase!
+  def passe_le_code_en_majuscule
+    code&.upcase!
   end
 end

@@ -6,20 +6,6 @@ ActiveAdmin.register Compte do
 
   includes :structure
 
-  index do
-    column :prenom
-    column :nom
-    column :email
-    column :telephone
-    column :statut_validation
-    if can? :manage, Compte
-      column :role
-      column :structure
-      column :created_at
-    end
-    actions
-  end
-
   filter :email
   filter :statut_validation,
          as: :select,
@@ -40,6 +26,33 @@ ActiveAdmin.register Compte do
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures,
          label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure')
+
+  def filtrer_par_activation_structure(statut_activation)
+    scope statut_activation, if: proc { can? :manage, Compte } do |scope|
+      scope.where(structure: Structure.send(statut_activation))
+    end
+  end
+
+  filtrer_par_activation_structure(:all)
+  filtrer_par_activation_structure(:pas_vraiment_utilisatrices)
+  filtrer_par_activation_structure(:non_activees)
+  filtrer_par_activation_structure(:actives)
+  filtrer_par_activation_structure(:inactives)
+  filtrer_par_activation_structure(:abandonnistes)
+
+  index do
+    column :prenom
+    column :nom
+    column :email
+    column :telephone
+    column :statut_validation
+    if can? :manage, Compte
+      column :role
+      column :structure
+      column :created_at
+    end
+    actions
+  end
 
   form do |f|
     f.inputs do

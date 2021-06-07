@@ -6,6 +6,8 @@ ActiveAdmin.register Compte do
 
   includes :structure
 
+  config.sort_order = 'created_at_desc'
+
   filter :email
   filter :statut_validation,
          as: :select,

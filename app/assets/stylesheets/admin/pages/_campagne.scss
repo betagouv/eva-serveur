@@ -8,17 +8,20 @@
   .titre {
     @include titre;
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     &--medium {
       font-size: 1.25rem;
     }
   }
 
   .description {
-    padding-right: $largeur-colonne + $largeur-goutiere;
     font-size: 0.875rem;
     font-style: italic;
     line-height: 1rem;
+    &--secondaire {
+      margin-bottom: 1rem;
+      color: $eva_dark_blue_grey;
+    }
     p:last-child {
       margin-bottom: 0;
     }

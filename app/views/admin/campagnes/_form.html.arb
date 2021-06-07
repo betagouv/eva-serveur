@@ -12,6 +12,7 @@ div class: 'nouvelle-campagne' do
         f.semantic_errors
         div class: 'panel' do
           h2 t('.titre_informations'), class: 'titre titre--medium'
+          para t('.explication_informations_campagne'), class: 'description description--secondaire'
           f.inputs do
             f.input :libelle
             f.input :code
@@ -21,6 +22,7 @@ div class: 'nouvelle-campagne' do
         if resource.new_record?
           div class: 'panel' do
             h2 t('.choix_parcours'), class: 'titre titre--medium'
+            para t('.explication_choix_parcours'), class: 'description description--secondaire'
             f.inputs class: 'input-choix-parcours' do
               f.input :parcours_type_id, as: :radio,
                                          collection: collection_parcours_type(parcours_type),

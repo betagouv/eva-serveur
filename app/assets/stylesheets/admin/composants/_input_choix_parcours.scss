@@ -1,13 +1,25 @@
 .input-choix-parcours {
   /* reset style */
-  li.radio fieldset ol {
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  li.radio {
+    fieldset ol {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    &.error {
+      .choix-parcours-item {
+        border-color: $eva_red;
+      }
+    }
   }
   /* fin reset style */
 
   input { display: none; }
+
+  > ol > li {
+    display: flex;
+    flex-direction: column;
+  }
 
   .choices-group {
     display: flex;
@@ -41,28 +53,45 @@
       margin-bottom: .625rem;
     }
 
-    .choix-parcours-intro-situations, .choix-parcours-situation, .choix-parcours-duree-moyenne {
+    .choix-parcours-description, .choix-parcours-duree-moyenne {
       color: $couleur-texte;
       font-size: .75rem;
-      font-style: italic;
       line-height: .875rem;
       margin: 0;
     }
 
-    .choix-parcours-situations {
+    .choix-parcours-duree-moyenne {
+      font-style: italic;
+    }
+
+    .choix-parcours-description {
       flex: 1;
       margin-bottom: 1rem;
+      ul {
+        padding-left: 1.5em;
+        list-style-type: disc;
+      }
     }
 
     input:checked + div {
       border-color: $couleur-texte;
       background: $eva_main_blue;
 
-      &, h4, p, ul li {
+      .choix-parcours-titre {
+        color: $eva_dark
+      }
+
+      &, p, ul li {
         color: $eva_light;
       }
     }
 
+  }
+
+  .inline-errors {
+    width: 100%;
+    margin: 1rem auto;
+    text-align: center;
   }
 
 }

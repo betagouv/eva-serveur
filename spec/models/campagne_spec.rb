@@ -26,35 +26,20 @@ describe Campagne, type: :model do
     end
 
     describe 'initialisation de la campagne' do
-      context "n'ajoute aucune situation quand ce n'est pas demandé" do
-        let(:campagne) do
-          Campagne.new libelle: 'ma campagne',
-                       code: 'moncode',
-                       compte: compte
-        end
-        before { expect(campagne.valid?).to be(true) }
-        it do
-          campagne.save
-          expect(campagne.situations_configurations.count).to eq 0
-        end
+      let(:campagne) do
+        Campagne.new libelle: 'ma campagne',
+                     code: 'moncode',
+                     compte: compte,
+                     parcours_type: parcours_type
       end
-
-      context "ajoute les situations par defaut quand c'est demandé" do
-        let(:campagne) do
-          Campagne.new libelle: 'ma campagne',
-                       code: 'moncode',
-                       compte: compte,
-                       parcours_type: parcours_type
-        end
-        before do
-          allow(campagne)
-            .to receive(:parcours_type).and_return parcours_type
-          expect(campagne.valid?).to be(true)
-        end
-        it do
-          campagne.save
-          expect(campagne.situations_configurations.count).to eq 1
-        end
+      before do
+        allow(campagne)
+          .to receive(:parcours_type).and_return parcours_type
+        expect(campagne.valid?).to be(true)
+      end
+      it do
+        campagne.save
+        expect(campagne.situations_configurations.count).to eq 1
       end
     end
   end

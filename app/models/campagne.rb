@@ -6,6 +6,7 @@ class Campagne < ApplicationRecord
   belongs_to :compte
   belongs_to :parcours_type, optional: true
 
+  validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true
 

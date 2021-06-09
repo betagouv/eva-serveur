@@ -65,4 +65,14 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#md' do
+    context "quand il n'y a pas de contenu" do
+      let(:contenu) { nil }
+
+      it 'retourne une chaine vide' do
+        expect(helper.md(contenu)).to eq ''
+      end
+    end
+  end
 end

@@ -5,6 +5,7 @@ panel 'Détails du parcours type' do
     row :libelle
     row :nom_technique
     row :duree_moyenne
+    row(:description) { md(parcours_type.description) }
     row :created_at
     row :updated_at
   end

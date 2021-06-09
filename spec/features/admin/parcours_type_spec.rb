@@ -23,10 +23,12 @@ describe 'Admin - Parcours type', type: :feature do
       fill_in :parcours_type_libelle, with: 'Parcours complet'
       fill_in :parcours_type_nom_technique, with: 'complet'
       fill_in :parcours_type_duree_moyenne, with: '1 heure'
+      fill_in :parcours_type_description, with: 'Ma description'
     end
 
     it do
       expect { click_on 'Créer' }.to(change { ParcoursType.count })
+      expect(ParcoursType.last.description).to eq('Ma description')
     end
   end
 end

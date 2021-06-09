@@ -3,13 +3,9 @@
     <%= parcours_type.libelle %>
   </h4>
 
-  <p class="choix-parcours-intro-situations">Contient :</p>
-
-  <ul class="choix-parcours-situations">
-    <% parcours_type.situations_configurations.each do |situation_configuration| %>
-      <li class='choix-parcours-situation'><%= situation_configuration.libelle %></li>
-    <% end %>
-  </ul>
+  <div class="choix-parcours-situations">
+    <%= md(parcours_type.description) %>
+  </div>
 
   <p class="choix-parcours-duree-moyenne">
     Durée moyenne : <%= parcours_type.duree_moyenne %>

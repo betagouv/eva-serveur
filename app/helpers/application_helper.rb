@@ -21,6 +21,8 @@ module ApplicationHelper
   end
 
   def md(contenu)
+    return '' if contenu.nil?
+
     @markdown ||= Redcarpet::Markdown.new(
       Redcarpet::Render::HTML.new(hard_wrap: true)
     )

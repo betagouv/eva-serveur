@@ -12,8 +12,4 @@ class ParcoursType < ApplicationRecord
   def display_name
     libelle
   end
-
-  def self.par_defaut
-    find_by nom_technique: :complet
-  end
 end

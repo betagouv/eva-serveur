@@ -79,6 +79,7 @@ describe 'Admin - Campagne', type: :feature do
       context 'crée la campagne, associé au compte courant et initialise les situations' do
         before do
           fill_in :campagne_code, with: 'EUROCKS'
+          choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
         it do

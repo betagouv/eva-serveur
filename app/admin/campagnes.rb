@@ -55,7 +55,6 @@ ActiveAdmin.register Campagne do
     def assigne_valeurs_par_defaut
       params[:campagne] ||= {}
       params[:campagne][:compte_id] ||= current_compte.id
-      params[:campagne][:parcours_type_id] ||= ParcoursType.par_defaut&.id
     end
 
     def parcours_type

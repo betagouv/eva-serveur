@@ -12,6 +12,12 @@ fr:
       situation_configuration:
         one: Situation
         other: Situations
+    errors:
+      models:
+        campagne:
+          attributes:
+            parcours_type:
+              blank: 'Vous devez choisir un parcours.'
   formtastic:
     actions:
       campagne:

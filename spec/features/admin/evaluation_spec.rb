@@ -98,8 +98,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1)
               .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
             visit admin_evaluation_path(mon_evaluation_bienvenue)
-            expect(page).to have_xpath("//img[@alt='Niveau A1']")
-            expect(page).to have_xpath("//img[@alt='Niveau X1']")
+            expect(page).to have_xpath("//img[@alt='Profil 2']")
+            expect(page).to have_xpath("//img[@alt='Profil 2']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do
@@ -134,10 +134,10 @@ describe 'Admin - Evaluation', type: :feature do
           it 'de litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:litteratie)
-              .and_return([{ score_ccf: :palier1 }])
+              .and_return([{ score_ccf: :palier0 }])
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:numeratie)
-              .and_return([{ score_numeratie: :palier1 }])
+              .and_return([{ score_numeratie: :palier0 }])
             visit admin_evaluation_path(mon_evaluation_bienvenue)
 
             expect(page).to have_content 'Connaissance et compréhension du français'

@@ -10,11 +10,11 @@ div class: 'row' do
       profil = t("#{niveau}.profil", scope: scope)
       if pdf
         div svg_tag_base64 "#{competence}.svg"
-        div svg_tag_base64 "profil-#{profil.parameterize}.svg" if niveau.present?
+        div svg_tag_base64 "badges/profil-#{profil.parameterize}.svg" if niveau.present?
       else
         div image_tag "#{competence}.svg"
         if niveau.present?
-          div image_tag "profil-#{profil.parameterize}.svg", alt: "Profil #{profil}"
+          div image_tag "badges/profil-#{profil.parameterize}.svg", alt: "Profil #{profil}"
         end
       end
     end

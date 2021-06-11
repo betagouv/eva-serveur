@@ -222,42 +222,42 @@ fr:
       interpretations_niveau2:
         score_ccf:
           titre: Connaissance et compréhension du français
-          palier1: |
+          palier0: |
             Vous avez **des progrès à faire** en ce qui concerne la connaissance des mots français et leur compréhension. Actuellement, il est possible que vous ayez des difficultés à comprendre vos interlocuteurs ou à lire des documents. N’hésitez pas à vous former pour progresser sur ce point !
-          palier2: |
+          palier1: |
             Vous avez une **assez bonne** connaissance et compréhension des mots français.
             Vous comprenez certainement bien vos interlocuteurs et les documents écrits, mais vous pouvez passer à côté d’informations importantes. N’hésitez pas à vous former pour progresser sur ce point !
-          palier3: |
+          palier2: |
             Vous avez une **bonne** compréhension du français et pouvez comprendre sans problème les consignes de votre employeur, même les plus complexes. Pas de besoin de formation pour cette compétence, bravo !
         score_syntaxe_orthographe:
           titre: Grammaire et orthographe
-          palier1: |
+          palier0: |
             Vous avez **des progrès à faire** en orthographe et grammaire. Actuellement, il est possible que vos interlocuteurs aient des difficultés à vous comprendre. N’hésitez pas à vous former pour progresser sur ce point !
-          palier2: |
+          palier1: |
             Vous avez un **assez bon niveau** en orthographe et grammaire, mais il vous est encore possible de progresser. Vos écrits ont de bonnes chances d’être bien compris, mais on pourrait vous reprocher de ne pas être assez clair·e. N’hésitez pas à vous former pour progresser sur cette compétence !
-          palier3: |
+          palier2: |
             Vous avez un **bon niveau** d’orthographe et grammaire. Vous pouvez produire des écrits professionnels compréhensibles par tout le monde. Pas de besoin de formation pour cette compétence !
         score_memorisation:
           titre: Utilisation des informations à disposition
-          palier1: |
+          palier0: |
             Vous avez **des progrès à faire** pour retenir et utiliser des informations qui vous ont été données. Il est possible que vous rencontriez des difficultés dans votre activité professionnelle, mais vous pouvez progresser !
-          palier2: |
+          palier1: |
             Vous réussissez **assez bien** à retenir et utiliser des informations qui vous ont été données. Vous avez de bonnes chances de retenir les informations pour ensuite les utiliser en contexte professionnel, mais vous pouvez encore vous améliorer. N’hésitez pas à en parler à votre conseiller !
-          palier3: |
+          palier2: |
             Vous parvenez **très bien** à retenir et utiliser des informations qui vous ont été données. Vous êtes capable de retenir beaucoup d'informations et de les utiliser efficacement en contexte professionnel et personnel, bravo !
         score_numeratie:
           titre: Compétences mathématiques
+          palier0: |
+            Votre niveau en mathématiques a été évalué sur la base des compétences suivantes :
+            - Manipulation des chiffres et des nombres
+            - Orientation visuo-spatiale
+            - Réalisation d’une suite de calculs mathématiques
           palier1: |
             Votre niveau en mathématiques a été évalué sur la base des compétences suivantes :
             - Manipulation des chiffres et des nombres
             - Orientation visuo-spatiale
             - Réalisation d’une suite de calculs mathématiques
           palier2: |
-            Votre niveau en mathématiques a été évalué sur la base des compétences suivantes :
-            - Manipulation des chiffres et des nombres
-            - Orientation visuo-spatiale
-            - Réalisation d’une suite de calculs mathématiques
-          palier3: |
             Votre niveau en mathématiques a été évalué sur la base des compétences suivantes :
             - Manipulation des chiffres et des nombres
             - Orientation visuo-spatiale
@@ -269,47 +269,69 @@ fr:
         litteratie:
           titre: Français
           palier0:
-            code: 'pre-A1'
+            profil: '1'
             description: |
               Votre score indique qu’il vous est très difficile de lire et répondre à des questions en français, ou que cela vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier1:
-            code: 'A1'
+            profil: '2'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier2:
-            code: 'A2'
+            profil: '3'
             description: |
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier3:
-            code: 'B1'
+            profil: '4'
             description:  |
-              Votre score indique que vous maîtrisez tout à fait le français, bravo !
+              Votre score indique que votre maîtrise du français est suffisante pour vous adapter sans difficulté à un nouvel environnement professionnel.
+              **Nous vous conseillons de renforcer vos compétences en français de votre propre initiative ou en participant à une formation que votre conseiller.e sera à même de vous proposer.**
+          palier4:
+            profil: '4 plus'
+            description:  |
+              Votre score indique que vous maîtrisez tout à fait le français, bravo ! 
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
+          palier5:
+            profil: '4 plus plus'
+            description:  |
+              **Certification Cléa indiquée**
+              Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+              **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
         numeratie:
           titre: Mathématiques
           palier0:
-            code: 'pre-X1'
+            profil: '1'
             description: |
               Votre score indique que la majorité des opérations vous semblent très difficiles ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier1:
-            code: 'X1'
+            profil: '2'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
-            code: 'X2'
+            profil: '3'
             description: |
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier3:
-            code: 'Y1'
+            profil: '4'
             description: |
-              Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
+              Votre score indique que votre maîtrise des mathématiques est suffisante pour vous adapter sans difficulté à un nouvel environnement professionnel.
+              **Nous vous conseillons de renforcer vos compétences en mathématiques en vous exerçant dans la vie quotidienne ou en participant à une formation que votre conseiller sera à même de vous proposer.**
+          palier4:
+            profil: '4 plus'
+            description: |
+              Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo ! 
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
+          palier5:
+            profil: '4 plus plus'
+            description: |
+              **Certification Cléa indiquée**
+              Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+              **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
         socle_clea: |
           ### Certification Cléa indiquée
 

@@ -9,6 +9,8 @@ class Structure < ApplicationRecord
   validates :nom, :code_postal, :type_structure, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + ['non_communique']) }
 
+  auto_strip_attributes :nom, :code_postal, squish: true
+
   geocoded_by :code_postal, state: :region, params: { countrycodes: 'fr' } do |obj, resultats|
     if (resultat = resultats.first)
       obj.region = resultat.state

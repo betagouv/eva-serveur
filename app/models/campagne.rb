@@ -10,6 +10,8 @@ class Campagne < ApplicationRecord
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: true
 
+  auto_strip_attributes :libelle, :code, squish: true
+
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   before_create :initialise_situations, if: :parcours_type_id

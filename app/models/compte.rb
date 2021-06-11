@@ -13,6 +13,8 @@ class Compte < ApplicationRecord
   validates_presence_of :nom, :prenom, on: :create
   validate :verifie_dns_email
 
+  auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
+
   enum statut_validation: %i[en_attente acceptee refusee], _prefix: :validation
 
   belongs_to :structure

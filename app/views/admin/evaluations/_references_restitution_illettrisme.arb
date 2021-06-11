@@ -7,30 +7,16 @@ div id: 'referentiels', class: 'references_restitution_illettrisme' do
       div svg_tag_base64 'info.svg', class: 'icone'
     end
     div class: 'col' do
-      div md t('explications', scope: scope)
-      div class: 'row' do
-        div class: 'col-auto' do
-          div t('francais', scope: scope)
-          div t('ordre', scope: scope), class: 'ordre'
-        end
-        div class: 'col-auto' do
-          span svg_tag_base64 'niveaupreA1-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauA1-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauA2-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauB1-blanc.svg', class: 'badge-references'
-        end
-        div class: 'col'
-        div class: 'col-auto' do
-          div t('mathematiques', scope: scope)
-          div t('ordre', scope: scope), class: 'ordre'
-        end
-        div class: 'col-auto' do
-          span svg_tag_base64 'niveaupreX1-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauX1-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauX2-blanc.svg', class: 'badge-references'
-          span svg_tag_base64 'niveauY1-blanc.svg', class: 'badge-references'
-        end
-        div class: 'col'
+      div class: 'texte-explications' do
+        md t('explications', scope: scope)
+      end
+      div class: 'badges-referentiels' do
+        text_node svg_tag_base64 'profil-1-blanc.svg', class: 'badge-references'
+        text_node svg_tag_base64 'profil-2-blanc.svg', class: 'badge-references'
+        text_node svg_tag_base64 'profil-3-blanc.svg', class: 'badge-references'
+        text_node svg_tag_base64 'profil-4-blanc.svg', class: 'badge-references'
+        text_node svg_tag_base64 'profil-4-plus-blanc.svg', class: 'badge-references'
+        text_node svg_tag_base64 'profil-4-plus-plus-blanc.svg', class: 'badge-references'
       end
       div class: 'lien-references' do
         md t('references', scope: scope)

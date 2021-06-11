@@ -98,6 +98,8 @@ GEM
       activesupport (>= 3.0.0, < 6.2)
       ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
+    auto_strip_attributes (2.6.0)
+      activerecord (>= 4.0)
     autoprefixer-rails (10.2.4.0)
       execjs
     aws-eventstream (1.1.1)
@@ -468,6 +470,7 @@ DEPENDENCIES
   activeadmin_reorderable
   acts_as_list
   addressable
+  auto_strip_attributes (~> 2.6)
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.3, >= 4.3.1)

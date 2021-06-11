@@ -132,6 +132,32 @@ namespace :nettoyage do
   task supprime_controle_campagne: :environment do
     SituationConfiguration.where(situation: Situation.where(nom_technique: 'controle')).destroy_all
   end
+
+  def supprime_espace_inutile(objet, attributs)
+    changements = attributs.each_with_object({}) do |str, hsh|
+      hsh[str] = objet.send(str)&.squish
+    end
+    objet.update(changements)
+  end
+
+  desc 'Supprime les espaces inutiles pour les campagnes, comptes et structures'
+  task supprime_espaces_inutiles: :environment do
+    puts "\n-- campagnes --"
+    Campagne.find_each do |campagne|
+      supprime_espace_inutile(campagne, %i[libelle code])
+      print '.'
+    end
+    puts "\n-- comptes --"
+    Compte.find_each do |compte|
+      supprime_espace_inutile(compte, %i[email nom prenom telephone])
+      print '.'
+    end
+    puts "\n-- structures --"
+    Structure.find_each do |structure|
+      supprime_espace_inutile(structure, %i[nom code_postal])
+      print '.'
+    end
+  end
 end
 
 class RakeLogger

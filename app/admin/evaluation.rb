@@ -9,7 +9,13 @@ ActiveAdmin.register Evaluation do
   config.sort_order = 'created_at_desc'
 
   filter :nom
-  filter :campagne, collection: proc { Campagne.accessible_by(current_ability) }
+  filter :campagne_id,
+         as: :search_select_filter,
+         url: proc { admin_campagnes_path },
+         fields: %i[libelle code],
+         display_name: 'display_name',
+         minimum_input_length: 2,
+         order_by: 'libelle_asc'
   filter :created_at
 
   action_item :pdf_restitution, only: :show do

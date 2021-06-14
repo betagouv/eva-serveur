@@ -6,6 +6,11 @@ ActiveAdmin.register ParcoursType do
   permit_params :libelle, :nom_technique, :duree_moyenne, :description,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
+  filter :libelle
+  filter :nom_technique
+  filter :created_at
+  filter :description
+
   form partial: 'form'
 
   index do

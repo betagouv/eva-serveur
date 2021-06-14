@@ -11,7 +11,14 @@ ActiveAdmin.register Campagne do
 
   filter :libelle
   filter :code
-  filter :compte, if: proc { can? :manage, Compte }
+  filter :compte_id,
+         as: :search_select_filter,
+         url: proc { admin_comptes_path },
+         fields: %i[email nom prenom],
+         display_name: 'display_name',
+         minimum_input_length: 2,
+         order_by: 'email_asc',
+         if: proc { can? :manage, Compte }
   filter :situations
   filter :questionnaire
   filter :created_at

@@ -15,7 +15,14 @@ ActiveAdmin.register Compte do
                        [Compte.humanized_statut_validation(v), id]
                      }
 
-  filter :structure, if: proc { can? :manage, Compte }
+  filter :structure_id,
+         as: :search_select_filter,
+         url: proc { admin_structures_path },
+         fields: %i[nom code_postal],
+         display_name: 'display_name',
+         minimum_input_length: 2,
+         order_by: 'nom_asc',
+         if: proc { can? :manage, Compte }
   filter :role,
          as: :select,
          collection: Compte.roles.map { |v, id|

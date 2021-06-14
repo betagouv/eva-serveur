@@ -96,6 +96,21 @@ ActiveAdmin.register Compte do
           only: :index,
           if: -> { can? :manage, Compte }
 
+  csv do
+    column :prenom
+    column :nom
+    column :email
+    column :telephone
+    column :statut_validation
+    if can? :manage, Compte
+      column :role
+      column(:structure) { |c| c.structure.nom }
+      column(:type_structure) { |c| c.structure.type_structure }
+      column(:code_postal) { |c| c.structure.code_postal }
+      column(:region) { |c| c.structure.region }
+    end
+  end
+
   controller do
     helper_method :peut_modifier_mot_de_passe?, :collection_roles
 

@@ -65,7 +65,8 @@ ActiveAdmin.register Campagne do
     end
 
     def parcours_type
-      @parcours_type = ParcoursType.includes(situations_configurations: :situation).all
+      @parcours_type = ParcoursType.includes(situations_configurations: :situation)
+                                   .order(:created_at)
     end
   end
 end

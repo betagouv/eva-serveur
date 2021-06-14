@@ -40,10 +40,17 @@
       min-height: 250px;
       padding: 1rem;
       cursor: pointer;
-      transition: background-color,border-color,color .2s;
+      transition: background-color,border-color,box-shadow, color .2s;
       user-select: none;
       display: flex;
       flex-direction: column;
+      &:hover {
+        box-shadow: 0 0 0 2px $eva_main_blue;
+        border-color: transparent;
+        .choix-parcours-titre {
+          color: $eva_main_blue;
+        }
+      }
     }
 
     .choix-parcours-titre {
@@ -73,12 +80,12 @@
       }
     }
 
-    input:checked + div {
+    input:checked + .choix-parcours-item {
       border-color: $couleur-texte;
       background: $eva_main_blue;
 
       .choix-parcours-titre {
-        color: $eva_dark
+        color: $eva_dark;
       }
 
       &, p, ul li {

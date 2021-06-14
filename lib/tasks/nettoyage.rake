@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rake_logger'
+
 namespace :nettoyage do
   def anonymise_evaluations
     puts "\n-- anonymise les évaluations --"
@@ -171,11 +173,5 @@ namespace :nettoyage do
       supprime_espace_inutile(structure, %i[nom code_postal])
       print '.'
     end
-  end
-end
-
-class RakeLogger
-  def self.logger
-    @logger ||= Logger.new($stdout)
   end
 end

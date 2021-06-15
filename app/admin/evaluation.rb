@@ -27,7 +27,7 @@ ActiveAdmin.register Evaluation do
   end
 
   index download_links: lambda {
-                          params[:action] == 'show' ? [:pdf] : %i[csv xls]
+                          params[:action] == 'show' ? [:pdf] : %i[csv xls json]
                         }, row_class: lambda { |elem|
                                         'anonyme' if elem.anonyme?
                                       } do

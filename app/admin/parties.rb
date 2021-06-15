@@ -12,7 +12,13 @@ ActiveAdmin.register Partie do
   scope(:terminees) { |scope| scope.where(session_id: session_ids_des_evenements_fin) }
   scope(:non_terminees) { |scope| scope.where.not(session_id: session_ids_des_evenements_fin) }
 
-  filter :evaluation
+  filter :evaluation_id,
+         as: :search_select_filter,
+         url: proc { admin_evaluations_path },
+         fields: %i[nom email telephone],
+         display_name: 'nom',
+         minimum_input_length: 2,
+         order_by: 'nom_asc'
   filter :session
   filter :created_at
   filter :updated_at

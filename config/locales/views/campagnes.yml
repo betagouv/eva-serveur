@@ -8,7 +8,7 @@ fr:
         explication_informations_campagne: Le libellé est le nom utilisé pour designer la campagne dans votre espace conseiller. Le code campagne est le code saisi par les bénéficiaires pour être rattachés à votre compte.
         choix_parcours: Choix du parcours
         explication_choix_parcours: |
-          Une campagne eva est constituée de jeux sérieux appelés “mise en situation”. Les personnes évaluées vont parcourir plusieurs jeux. Veuillez choisir un parcours parmi les propositions suivantes en fonction des compétences que vous voulez évaluer :
+          Une campagne eva est constituée de jeux sérieux appelés « mise en situation ». Les personnes évaluées vont parcourir plusieurs jeux. Veuillez choisir un parcours parmi les propositions suivantes en fonction des compétences que vous souhaitez évaluer :
         configuration_avancee: Configuration avancée
       show:
         titre_panel_parcours: Parcours

@@ -8,8 +8,16 @@ describe Compte, type: :integration do
   describe 'après création' do
     it 'programme un mail de relance' do
       expect do
-        create :compte
+        create :compte_conseiller
       end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob)
+    end
+
+    context 'quand le compte est superadmin' do
+      it 'ne programme pas de mail de relance' do
+        expect do
+          create :compte_superadmin
+        end.not_to have_enqueued_job(RelanceUtilisateurPourNonActivationJob)
+      end
     end
   end
 end

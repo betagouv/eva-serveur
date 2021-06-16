@@ -41,6 +41,8 @@ class Compte < ApplicationRecord
   end
 
   def programme_email_relance
+    return if superadmin?
+
     RelanceUtilisateurPourNonActivationJob
       .set(wait: DELAI_RELANCE_NON_ACTIVATION)
       .perform_later(compte: self)

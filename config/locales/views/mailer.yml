@@ -11,7 +11,7 @@ fr:
         Le pas à pas de prise en main de l'espace conseiller est [disponible ici](%{document_prise_en_main})
 
         Pour toute question relative à votre compte, n'hésitez pas à nous
-        adresser votre demande à l'adresse [support@eva.beta.gouv.fr](mailto:support@eva.beta.gouv.fr)
+        adresser votre demande à l'adresse [%{email_support}](mailto:%{email_support})
       signature: |
         -
 

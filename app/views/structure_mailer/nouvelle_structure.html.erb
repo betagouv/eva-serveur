@@ -4,4 +4,6 @@
          structure: @structure.nom,
          url_inscription: "#{root_url}admin/sign\\_up?structure\\_id=#{@structure.id}"
         ) %>
-<%= md t('layouts.mailer.aide_conseiller', document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN) %>
+<%= md t('layouts.mailer.aide_conseiller',
+         document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN,
+         email_support: Eva::EMAIL_SUPPORT) %>

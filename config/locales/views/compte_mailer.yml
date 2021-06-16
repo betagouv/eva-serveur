@@ -33,6 +33,6 @@ fr:
         ## Besoin d'aide ?
 
         Pour accompagner les %{cible_evaluation} vers l’insertion professionnelle et vous servir d’eva, contacter notre équipe :
-        [support@eva.beta.gouv.fr](mailto:support@eva.beta.gouv.fr)
+        [%{email_support}](mailto:%{email_support})
 
         Vous pouvez aussi vous réinscrire à [une de nos présentations](%{lien_livestorm}) ou bien retrouver toutes les informations dans la [rubrique Aide](%{lien_rubrique_aide}).

@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 SourceAide.find_or_create_by(titre: 'Vidéo explicative pour les conseiller·ère·s') do |source_aide|
   source_aide.description="Vidéo accessible sur Youtube\nDurée : 5mn27"
   source_aide.url='https://youtu.be/WC9nICmMgbY'
@@ -116,4 +108,19 @@ ParcoursType.find_or_create_by(nom_technique: 'complet') do |parcours_type|
   parcours_type.situations_configurations_attributes = situations.map.with_index do |situation, index|
     { situation_id: situation.id, position: index }
   end
+end
+
+structure_eva = Structure.where('lower(nom) = ?', 'eva').first_or_create do |structure|
+  structure.nom = 'eva'
+  structure.code_postal = 75012
+  structure.type_structure = 'non_communique'
+end
+
+Compte.where(email: Eva::EMAIL_SUPPORT).first_or_create do |compte|
+  compte.prenom = 'eva'
+  compte.nom = 'Bot'
+  compte.role = 'superadmin'
+  compte.statut_validation = 'acceptee'
+  compte.structure = structure_eva
+  compte.password = SecureRandom.uuid
 end

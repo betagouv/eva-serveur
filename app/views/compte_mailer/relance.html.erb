@@ -4,4 +4,5 @@
 <%= md t('.x_personnes_utilisent_eva', count: @effectif) %>
 <%= md t('.besoin_aide', cible_evaluation: @cible_evaluation,
                          lien_rubrique_aide: admin_aide_url,
-                         lien_livestorm: Eva::LIEN_LIVESTORM) %>
+                         lien_livestorm: Eva::LIEN_LIVESTORM,
+                         email_support: Eva::EMAIL_SUPPORT) %>

@@ -46,6 +46,20 @@ namespace :nettoyage do
     anonymise_structures
   end
 
+  desc 'Assigne une illustration par défaut pour les questions'
+  task questions: :environment do
+    return if Rails.env.production?
+
+    Question.find_each do |question|
+      fichier_illustration = File.open(File.join(Rails.root, 'lib/assets/illustration.jpg'))
+      question.illustration.attach(
+        io: fichier_illustration,
+        filename: 'illustration.jpg',
+        content_type: 'image/jpg'
+      )
+    end
+  end
+
   desc "Recalculer les metriques d'une situation."
   task recalcule_metriques: :environment do
     arg_situation = 'SITUATION'

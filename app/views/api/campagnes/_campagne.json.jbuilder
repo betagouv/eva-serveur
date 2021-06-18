@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+json.libelle campagne.libelle
+json.code campagne.code
 json.questions questions
 json.situations campagne.situations_configurations,
                 partial: 'api/situations_configurations/situation_configuration',

@@ -6,7 +6,18 @@ describe 'Campagne API', type: :request do
   describe 'GET /campagnes/:code_campagne' do
     let(:question) { create :question_qcm, intitule: 'Ma question' }
     let(:questionnaire) { create :questionnaire, questions: [question] }
-    let!(:campagne) { create :campagne, questionnaire: questionnaire, code: 'ete 21' }
+    let!(:campagne) do
+      create :campagne, questionnaire: questionnaire, code: 'ete 21', libelle: 'Ma campagne ete 21'
+    end
+
+    it 'retourne les informations de la campagne' do
+      get '/api/campagnes/ete%2021'
+
+      expect(response).to be_ok
+      resultat = JSON.parse(response.body)
+      expect(resultat['libelle']).to eq('Ma campagne ete 21')
+      expect(resultat['code']).to eq('ETE 21')
+    end
 
     it 'retourne les questions de la campagne' do
       get '/api/campagnes/ete%2021'

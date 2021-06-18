@@ -5,8 +5,7 @@ class CompteMailerPreview < ActionMailer::Preview
   def nouveau_compte
     structure = Structure.new nom: 'Ma Super Structure'
     compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
-    campagne = Campagne.new compte: compte, libelle: 'Paris 2019', code: 'paris2019'
-    CompteMailer.with(campagne: campagne).nouveau_compte
+    CompteMailer.with(compte: compte).nouveau_compte
   end
 
   def relance

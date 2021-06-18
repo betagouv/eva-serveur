@@ -17,11 +17,12 @@
       a, a:visited {
         color: #6E84FE;
       }
-    </style
+    </style>
   </head>
 
   <body>
     <%= yield %>
     <%= md t('.signature') %>
+    <%= image_tag('signature.png', skip_pipeline: true) %>
   </body>
 </html>

@@ -17,6 +17,8 @@ class Compte < ApplicationRecord
 
   enum statut_validation: %i[en_attente acceptee refusee], _prefix: :validation
 
+  delegate :code_postal, to: :structure, prefix: true
+
   belongs_to :structure
 
   accepts_nested_attributes_for :structure

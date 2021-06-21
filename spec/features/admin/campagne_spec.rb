@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
-  let(:compte_conseiller) { create :compte_conseiller }
+  let(:structure_conseiller) { create :structure }
+  let(:compte_conseiller) { create :compte_conseiller, structure: structure_conseiller }
   let!(:compte_connecte) { connecte(compte_conseiller) }
   let!(:ma_campagne) do
     create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
@@ -77,14 +78,16 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       context 'crée la campagne, associé au compte courant et initialise les situations' do
+        let(:structure_conseiller) { create :structure, code_postal: '45312' }
+
         before do
-          fill_in :campagne_code, with: 'eurocks'
+          allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'CDI'
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
         it do
           campagne = Campagne.order(:created_at).last
-          expect(campagne.code).to eq 'EUROCKS'
+          expect(campagne.code).to eq 'CDI45312'
           expect(campagne.compte).to eq compte_conseiller
           within('.campagne-parcours table') do
             expect(page).to have_content situation_maintenance.libelle

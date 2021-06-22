@@ -52,7 +52,8 @@ namespace :stats do
       session_id: sessions_ids(situation)
     )
              .order(:date)
-             .find_each.with_object({}) do |evenement, map|
+             .each_with_object({}) do |evenement, map|
+      # attention, find_each ne fonctionne pas avec order
       map[evenement.session_id] ||= []
       map[evenement.session_id] << evenement
     end

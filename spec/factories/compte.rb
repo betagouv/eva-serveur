@@ -25,6 +25,6 @@ FactoryBot.define do
   end
 
   sequence :email do |n|
-    "superadmin-#{n}@exemple.fr"
+    "toto-#{n}@exemple.fr"
   end
 end

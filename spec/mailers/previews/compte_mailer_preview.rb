@@ -8,6 +8,19 @@ class CompteMailerPreview < ActionMailer::Preview
     CompteMailer.with(compte: compte).nouveau_compte
   end
 
+  def alerte_admin
+    structure = Structure.new nom: 'Ma Super Structure'
+    admin = Compte.new prenom: 'Admin',
+                       email: 'admin@test.com',
+                       structure: structure,
+                       role: 'admin'
+    compte = Compte.new prenom: 'Paule',
+                        nom: 'Delaporte',
+                        email: 'debut@test.com',
+                        structure: structure
+    CompteMailer.with(compte: compte, compte_admin: admin).alerte_admin
+  end
+
   def relance
     structure = Structure.new type_structure: 'mission_locale'
     compte = Compte.new prenom: 'Lucas', structure: structure, email: 'lucas.dupont@example.com'

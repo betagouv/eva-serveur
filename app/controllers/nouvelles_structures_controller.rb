@@ -28,7 +28,6 @@ class NouvellesStructuresController < ApplicationController
   end
 
   def envoie_emails
-    CompteMailer.with(compte: @compte).nouveau_compte.deliver_later
     StructureMailer.with(compte: @compte, structure: @compte.structure)
                    .nouvelle_structure
                    .deliver_later

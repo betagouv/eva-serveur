@@ -16,6 +16,27 @@ fr:
 
         - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
           Il est personnel, ne le communiquez pas à vos collègues.
+    alerte_admin:
+      objet: Validez l'accès eva à « %{structure} » de vos collègues
+      corps: |
+        ### Bonjour %{prenom_admin},
+
+        Votre collègues %{prenom} %{nom} souhaite utiliser eva pour ses
+        prochains accompagnements.
+
+        Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien
+        d'une personne de « %{structure} ».
+
+        Pour valider ce compte :
+          - cliquez sur le lien suivant,
+          - utilisez le bouton [modifier] de la ligne à valider,
+          - choisissez l'accès "authorisé" ou "refusé",
+          - et enfin, cliquer sur le bouton [modifier]
+
+        -> [Valider ce compte](%{url_validation})
+
+        Vous avez reçu ce message parce que vous avez actuellement le rôle
+        d’administrateur de cette structure.
     relance:
       objet: "%{prenom}, quelques ressources pour vous aider à réaliser vos premières évaluations"
       intro: |

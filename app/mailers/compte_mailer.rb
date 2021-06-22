@@ -7,6 +7,13 @@ class CompteMailer < ApplicationMailer
          subject: t('.objet', structure: @compte.structure.nom))
   end
 
+  def alerte_admin
+    @compte = params[:compte]
+    @compte_admin = params[:compte_admin]
+    mail(to: @compte_admin.email,
+         subject: t('.objet', structure: @compte.structure.nom))
+  end
+
   def relance
     @compte = params[:compte]
     structure = @compte.structure

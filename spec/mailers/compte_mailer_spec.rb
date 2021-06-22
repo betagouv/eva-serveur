@@ -26,6 +26,35 @@ describe CompteMailer, type: :mailer do
     end
   end
 
+  describe '#alerte_admin' do
+    it "envoie un email de demande de validation d'un nouveau compte à l'admin" do
+      structure = Structure.new nom: 'Ma Super Structure'
+      admin = Compte.new prenom: 'Admin',
+                         email: 'debut@test.com',
+                         role: :admin,
+                         structure: structure
+      compte = Compte.new prenom: 'Paule',
+                          nom: 'Delaporte',
+                          email: 'debut@test.com',
+                          structure: structure
+
+      email = CompteMailer.with(compte: compte, compte_admin: admin)
+                          .alerte_admin
+
+      assert_emails 1 do
+        email.deliver_now
+      end
+
+      expect(email.from).to eql([Eva::EMAIL_CONTACT])
+      expect(email.to).to eql(['debut@test.com'])
+      expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure » de vos collègues")
+      expect(email.multipart?).to be(false)
+      expect(email.body).to include('Admin')
+      expect(email.body).to include('Paule Delaporte')
+      expect(email.body).to include('Ma Super Structure')
+    end
+  end
+
   describe 'relance' do
     let(:structure) { Structure.new nom: 'Ma Super Structure' }
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }

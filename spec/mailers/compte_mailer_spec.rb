@@ -33,7 +33,7 @@ describe CompteMailer, type: :mailer do
 
     it 'renders the headers' do
       expect(mail.subject).to eq(
-        'Paule, quelques conseils pour démarrer sur eva - Positionnement des compétences'
+        'Paule, quelques ressources pour vous aider à réaliser vos premières évaluations'
       )
       expect(mail.to).to eq(['debut@test.com'])
       expect(mail.from).to eql([Eva::EMAIL_CONTACT])

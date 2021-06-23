@@ -17,22 +17,34 @@ fr:
         - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
           Il est personnel, ne le communiquez pas à vos collègues.
     relance:
-      objet: "%{prenom}, quelques conseils pour démarrer sur eva - Positionnement des compétences"
+      objet: "%{prenom}, quelques ressources pour vous aider à réaliser vos premières évaluations"
       intro: |
-        ### Bonjour %{prenom},
+        ## Bonjour %{prenom},
 
-        Vous avez créé un compte il y a %{delai_relance} sur le service numérique eva.
-        Vous bénéficiez d'un accès nominatif et gratuit.
+        Depuis %{delai_relance} vous avez un accès gratuit à eva.
 
-        Eva permet de détecter l'illettrisme et de valoriser les %{cible_evaluation} que vous accompagnez en vous appuyant sur leurs compétences transversales.
+        Eva est un outil d’évaluation ludique qui permet de détecter
+        l'illettrisme et de valoriser les %{cible_evaluation} que vous accompagnez
+        en vous appuyant sur leurs compétences transversales.
+
+        ### Vous souhaitez tester le parcours d'évaluation ?
+
+        Connectez vous à ce [lien](%{url_client_campagne_test})
       x_personnes_utilisent_eva:
         zero: ""
         one: "Vous êtes la seule personne de votre structure à avoir créé son compte."
         other: "Vous êtes %{count} collègues de votre structure à avoir créé un compte."
       besoin_aide: |
-        ## Besoin d'aide ?
+        ### Vous souhaitez découvrir ou redécouvrir eva ?
 
-        Pour accompagner les %{cible_evaluation} vers l’insertion professionnelle et vous servir d’eva, contacter notre équipe :
-        [%{email_support}](mailto:%{email_support})
+        Choisissez une date de participation à [une de nos présentations](%{lien_livestorm})
 
-        Vous pouvez aussi vous réinscrire à [une de nos présentations](%{lien_livestorm}) ou bien retrouver toutes les informations dans la [rubrique Aide](%{lien_rubrique_aide}).
+        ### Vous avez besoin de plus d'informations ?
+
+        Découvrez notre [rubrique Aide](%{lien_rubrique_aide}) depuis votre
+        espace professionnel
+
+        ### Vous rencontrez un problème de connexion ou d'utilisation ?<br>Vous avez des questions ou des remarques ?
+
+        Ecrivez à cette adresse [%{email_support}](mailto:%{email_support}) et
+        notre équipe vous répondra dans les plus brefs délais !

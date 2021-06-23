@@ -1,8 +1,8 @@
 <%= md t('.intro', prenom: @compte.prenom,
                    delai_relance: distance_of_time_in_words(Compte::DELAI_RELANCE_NON_ACTIVATION),
-                   cible_evaluation: @cible_evaluation) %>
+                   cible_evaluation: @cible_evaluation,
+                   url_client_campagne_test: Addressable::URI.escape("#{URL_CLIENT}?code=TEST")) %>
 <%= md t('.x_personnes_utilisent_eva', count: @effectif) %>
-<%= md t('.besoin_aide', cible_evaluation: @cible_evaluation,
-                         lien_rubrique_aide: admin_aide_url,
+<%= md t('.besoin_aide', lien_rubrique_aide: admin_aide_url,
                          lien_livestorm: Eva::LIEN_LIVESTORM,
                          email_support: Eva::EMAIL_SUPPORT) %>

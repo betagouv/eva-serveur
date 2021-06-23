@@ -1,40 +1,53 @@
 # frozen_string_literal: true
 
-panel 'Détails de la campagne' do
-  attributes_table_for campagne do
-    row :libelle
-    row :code
-    row :affiche_competences_fortes
-    row :compte
-  end
-end
+div class: 'row' do
+  div class: 'offset-1 col-4' do
+    h1 campagne.libelle
 
-if can?(:manage, Compte)
-  panel 'Administration' do
-    attributes_table_for campagne do
-      row :id
-      row :questionnaire
-      row :created_at
-      row(:temps_min) { formate_duree statistiques.temps_min }
-      row(:temps_max) { formate_duree statistiques.temps_max }
-      row(:temps_moyen) { formate_duree statistiques.temps_moyen }
+    panel 'Votre code campagne', class: 'campagne-code' do
+      div t('.explication_code')
+      attributes_table_for campagne do
+        row :code
+        row(:url) { lien_campagne(campagne) }
+      end
     end
-  end
-end
 
-panel t('.titre_panel_parcours'), class: 'campagne-parcours' do
-  div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
-  render partial: 'admin/situations_configurations/liste_situations_configurations',
-         locals: { situations_configurations: campagne.situations_configurations }
-end
+    panel 'Détails de la campagne' do
+      attributes_table_for campagne do
+        row :libelle
+        row :compte
+      end
+    end
 
-panel 'Consulter' do
-  ul do
-    li link_to "les #{resource.nombre_evaluations} évaluations",
-               admin_evaluations_path(q: { campagne_id_eq: resource })
-    if can?(:manage, resource)
-      li link_to 'les stats', admin_campagne_stats_path(resource)
-      li link_to 'les événements', admin_campagne_evenements_path(resource)
+    if can?(:manage, Compte)
+      panel 'Administration' do
+        attributes_table_for campagne do
+          row :id
+          row :questionnaire
+          row :affiche_competences_fortes
+          row :created_at
+          row(:temps_min) { formate_duree statistiques.temps_min }
+          row(:temps_max) { formate_duree statistiques.temps_max }
+          row(:temps_moyen) { formate_duree statistiques.temps_moyen }
+        end
+      end
+    end
+
+    panel t('.titre_panel_parcours'), class: 'campagne-parcours' do
+      div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
+      render partial: 'admin/situations_configurations/liste_situations_configurations',
+             locals: { situations_configurations: campagne.situations_configurations }
+    end
+
+    panel 'Consulter' do
+      ul do
+        li link_to "les #{resource.nombre_evaluations} évaluations",
+                   admin_evaluations_path(q: { campagne_id_eq: resource })
+        if can?(:manage, resource)
+          li link_to 'les stats', admin_campagne_stats_path(resource)
+          li link_to 'les événements', admin_campagne_evenements_path(resource)
+        end
+      end
     end
   end
 end

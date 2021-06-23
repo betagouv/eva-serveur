@@ -27,7 +27,7 @@ div class: 'bloc-apercu' do
           text_node campagne.code
         end
         span class: 'campagne-url' do
-          url = Addressable::URI.escape("#{URL_CLIENT}?code=#{campagne.code}")
+          url = url_campagne(campagne)
           a url, href: url, target: 'blank'
           input class: 'input-copier-coller', type: 'text', value: url
           button "Copier l'URL", class: 'button copier-coller'

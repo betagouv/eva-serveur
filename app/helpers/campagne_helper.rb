@@ -14,4 +14,13 @@ module CampagneHelper
     render partial: 'components/input_choix_parcours',
            locals: { parcours_type: parcours_type }
   end
+
+  def url_campagne(campagne)
+    Addressable::URI.escape("#{URL_CLIENT}?code=#{campagne.code}")
+  end
+
+  def lien_campagne(campagne)
+    url = url_campagne(campagne)
+    link_to url, url, target: '_blank'
+  end
 end

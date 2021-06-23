@@ -3,9 +3,8 @@ fr:
     campagnes:
       form:
         explication_campagne: Une campagne permet de regrouper vos passations. Vous pouvez ainsi par exemple les regrouper selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
-        explication_code: Le code est communiqué aux bénéficiaires pour démarrer le parcours. Nous vous conseillons de le choisir simple et personnalisé.
         titre_informations: Informations de la campagne
-        explication_informations_campagne: Le libellé est le nom utilisé pour designer la campagne dans votre espace conseiller. Le code campagne est le code saisi par les bénéficiaires pour être rattachés à votre compte.
+        explication_informations_campagne: Le libellé est le nom utilisé pour designer la campagne dans votre espace conseiller.
         choix_parcours: Choix du parcours
         explication_choix_parcours: |
           Une campagne eva est constituée de jeux sérieux appelés « mise en situation ». Les personnes évaluées vont parcourir plusieurs jeux. Veuillez choisir un parcours parmi les propositions suivantes en fonction des compétences que vous souhaitez évaluer :

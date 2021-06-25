@@ -21,9 +21,6 @@ class Compte < ApplicationRecord
 
   accepts_nested_attributes_for :structure
 
-  after_create :programme_email_relance
-  after_create :envoie_emails
-
   def display_name
     [nom_complet, email].reject(&:blank?).join(' - ')
   end
@@ -43,24 +40,5 @@ class Compte < ApplicationRecord
     return if Truemail.valid?(email)
 
     errors.add(:email, :invalid)
-  end
-
-  def envoie_emails
-    return if superadmin?
-
-    CompteMailer.with(compte: self).nouveau_compte.deliver_later
-    find_admins.each do |admin|
-      CompteMailer.with(compte: self, compte_admin: admin)
-                  .alerte_admin
-                  .deliver_later
-    end
-  end
-
-  def programme_email_relance
-    return if superadmin?
-
-    RelanceUtilisateurPourNonActivationJob
-      .set(wait: DELAI_RELANCE_NON_ACTIVATION)
-      .perform_later(compte: self)
   end
 end

@@ -2,13 +2,15 @@
 
 div class: 'mon-compte row' do
   div class: 'offset-1 col-4' do
-    h1 t('.titre', prenom: compte.prenom), class: 'titre'
+    if current_compte == compte
+      h1 t('.titre', prenom: compte.prenom), class: 'titre'
 
-    div class: 'introduction' do
-      div class: 'introduction__texte' do
-        md t('.introduction', lien_aide: admin_aide_path)
+      div class: 'introduction' do
+        div class: 'introduction__texte' do
+          md t('.introduction', lien_aide: admin_aide_path)
+        end
+        text_node image_tag 'avatar_salut.png'
       end
-      text_node image_tag 'avatar_salut.png'
     end
 
     div class: 'panel' do

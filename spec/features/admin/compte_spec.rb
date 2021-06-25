@@ -5,7 +5,8 @@ require 'rails_helper'
 describe 'Admin - Compte', type: :feature do
   let!(:ma_structure) { create :structure, nom: 'Ma structure' }
   let!(:collegue) do
-    create :compte_conseiller, structure: ma_structure, email: 'collegue@structure'
+    create :compte_conseiller, structure: ma_structure, email: 'collegue@structure',
+                               prenom: 'Collègue'
   end
   let(:compte_connecte) do
     create :compte, structure: ma_structure, email: 'moi@structure'
@@ -16,6 +17,26 @@ describe 'Admin - Compte', type: :feature do
   context 'en tant que superadmin' do
     let(:compte_connecte) do
       create :compte_superadmin, structure: ma_structure, email: 'moi@structure'
+    end
+
+    describe 'Je vois mes informations' do
+      it do
+        visit admin_compte_path(compte_connecte)
+
+        expect(page).to have_content 'Bonjour Prénom !'
+        expect(page).to have_content 'Ici vous pouvez gérer votre compte et ' \
+                                     'vos informations personnelles.'
+      end
+    end
+
+    describe 'Je vois les informations d\'un collègue' do
+      it do
+        visit admin_compte_path(collegue)
+
+        expect(page).not_to have_content 'Bonjour Collègue !'
+        expect(page).not_to have_content 'Ici vous pouvez gérer votre compte et ' \
+                                         'vos informations personnelles.'
+      end
     end
 
     describe 'Ajouter un nouvel superadmin' do

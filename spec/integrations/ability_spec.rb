@@ -132,6 +132,8 @@ describe Ability do
       it { is_expected.to be_able_to(:update, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
     end
+
+    it { is_expected.to be_able_to(:update, compte.structure) }
   end
 
   context 'Compte générique' do
@@ -178,6 +180,7 @@ describe Ability do
     it { is_expected.to_not be_able_to(:read, evenement_superadmin) }
     it { is_expected.to_not be_able_to(:read, SourceAide.new) }
     it { is_expected.to_not be_able_to(:read, Aide::QuestionFrequente.new) }
+    it { is_expected.to_not be_able_to(:update, compte.structure) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:update, compte) }
     it { is_expected.to_not be_able_to(:update, create(:compte)) }

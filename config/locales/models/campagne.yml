@@ -26,9 +26,9 @@ fr:
     placeholders:
       campagne:
         libelle: ML Caraces, PE Marita, Garantie Jeunes
-        code: milo21160, Capinsertion92270
     hints:
       campagne:
+        code: Laissez vide pour générer un code aléatoire
         situation_configuration:
           questionnaire: Laissez vide pour utiliser le questionnaire par défaut
   active_admin:

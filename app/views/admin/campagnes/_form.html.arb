@@ -35,6 +35,7 @@ div class: 'nouvelle-campagne' do
             h2 t('.configuration_avancee'), class: 'titre titre--medium'
             f.inputs do
               f.input :compte
+              f.input :code
               f.input :affiche_competences_fortes
               f.input :questionnaire
               if resource.persisted?

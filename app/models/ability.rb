@@ -98,6 +98,7 @@ class Ability
 
   def droit_structure(compte)
     can :read, Structure, id: compte.structure_id
+    can :update, Structure, id: compte.structure_id if compte.admin?
     cannot(:destroy, Structure) { |s| Compte.where(structure: s).exists? }
   end
 

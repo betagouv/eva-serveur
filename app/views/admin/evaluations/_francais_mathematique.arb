@@ -1,0 +1,26 @@
+# frozen_string_literal: true
+
+div id: 'francais_mathematiques', class: 'marges-page' do
+  render 'litteratie_numeratie_synthese',
+         synthese: restitution_globale.synthese,
+         pdf: pdf
+
+  render 'litteratie_numeratie_niveau1',
+         interpretations: restitution_globale.interpretations_niveau1,
+         pdf: pdf
+
+  div class: 'row my-4' do
+    div class: 'col-auto badge' do
+      img # place holder
+    end
+    div class: 'col' do
+      render 'metacompetences', categorie: :litteratie
+    end
+    div class: 'col-auto badge' do
+      img # place holder
+    end
+    div class: 'col' do
+      render 'metacompetences', categorie: :numeratie
+    end
+  end
+end

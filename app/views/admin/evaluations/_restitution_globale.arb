@@ -4,67 +4,76 @@ niveaux_competences = restitution_globale.niveaux_competences
 
 div class: 'admin_restitution_globale' do
   if auto_positionnement
-    div class: 'page panel' do
+    div id: 'auto_positionnement', class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale
 
-      div id: 'auto_positionnement', class: 'marges-page' do
-        render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
+      if pdf
+        h2 t('.autopositionnement_titre'), class: 'text-center my-5'
+      else
+        h2 t('.autopositionnement_titre')
       end
 
-      render 'pied_page'
+      div class: 'panel' do
+        div class: 'marges-page' do
+          render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
+        end
+
+        render 'pied_page'
+      end
     end
   end
 
-  div class: 'page panel' do
+  div id: 'competences_transversales', class: 'page' do
     render 'entete_page', restitution_globale: restitution_globale
 
-    div id: 'competences_transversales', class: 'marges-page' do
-      div class: 'text-center my-5' do
-        h2 t('.competences_fortes_titre')
-        para class: 'legende-titre' do
-          t('.legende_titre')
-        end
-      end
+    if pdf
+      h2 t('.competences_fortes_titre'), class: 'text-center my-5'
+    else
+      h2 t('.competences_fortes_titre')
+    end
 
-      div class: 'row mb-5' do
-        div class: 'col' do
-          if niveaux_competences.blank?
-            div class: 'competences-transversales-vides' do
-              md t('.competences_fortes_vides')
+    div class: 'panel' do
+      div class: 'marges-page' do
+        div class: 'row my-5' do
+          div class: 'col' do
+            if niveaux_competences.blank?
+              div class: 'competences-transversales-vides' do
+                md t('.competences_fortes_vides')
+              end
             end
-          end
 
-          interpretations = restitution_globale.interpretations_competences_transversales
-          interpretations.each do |competence, interpretation|
-            div class: 'competence-transversale' do
-              div class: 'conteneur-jauge' do
-                div class: 'jauge'
-                div class: "jauge remplissage remplissage-#{interpretation}"
-              end
-              span class: 'image-competence' do
-                if pdf
-                  svg_tag_base64 "#{competence}.svg"
-                else
-                  image_tag "#{competence}.svg"
+            interpretations = restitution_globale.interpretations_competences_transversales
+            interpretations.each do |competence, interpretation|
+              div class: 'competence-transversale' do
+                div class: 'conteneur-jauge' do
+                  div class: 'jauge'
+                  div class: "jauge remplissage remplissage-#{interpretation}"
                 end
-              end
-              div class: 'informations-competence' do
-                h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
-                   class: 'nom-competence'
-                div class: 'description-competence' do
-                  div md t("#{competence}.stanine#{interpretation}",
-                           scope: 'admin.evaluations.restitution_competence')
-                  div class: 'lien-metier' do
-                    if pdf
-                      text_node svg_tag_base64 'lien.svg', class: 'image-lien'
-                    else
-                      text_node image_tag 'lien.svg', class: 'image-lien'
-                    end
-                    span class: 'align-middle' do
-                      text_node t('.etiquette_lien_metiers')
-                      url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
-                      a href: url_competence, target: '_blank' do
-                        url_competence
+                span class: 'image-competence' do
+                  if pdf
+                    svg_tag_base64 "#{competence}.svg"
+                  else
+                    image_tag "#{competence}.svg"
+                  end
+                end
+                div class: 'informations-competence' do
+                  h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
+                     class: 'nom-competence'
+                  div class: 'description-competence' do
+                    div md t("#{competence}.stanine#{interpretation}",
+                             scope: 'admin.evaluations.restitution_competence')
+                    div class: 'lien-metier' do
+                      if pdf
+                        text_node svg_tag_base64 'lien.svg', class: 'image-lien'
+                      else
+                        text_node image_tag 'lien.svg', class: 'image-lien'
+                      end
+                      span class: 'align-middle' do
+                        text_node t('.etiquette_lien_metiers')
+                        url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"
+                        a href: url_competence, target: '_blank' do
+                          url_competence
+                        end
                       end
                     end
                   end
@@ -74,73 +83,42 @@ div class: 'admin_restitution_globale' do
           end
         end
       end
-    end
-
-    render 'pied_page'
-  end
-
-  div class: 'page panel' do
-    render 'entete_page', restitution_globale: restitution_globale
-
-    div id: 'francais_mathematiques', class: 'marges-page' do
-      h2 class: 'text-center my-4' do
-        span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
-      end
-
-      render 'litteratie_numeratie_synthese',
-             synthese: restitution_globale.synthese,
-             pdf: pdf
-
-      render 'litteratie_numeratie_niveau1',
-             interpretations: restitution_globale.interpretations_niveau1,
-             pdf: pdf
-
-      div class: 'row my-4' do
-        div class: 'col-auto badge' do
-          img # place holder
-        end
-        div class: 'col' do
-          render 'metacompetences', categorie: :litteratie
-        end
-        div class: 'col-auto badge' do
-          img # place holder
-        end
-        div class: 'col' do
-          render 'metacompetences', categorie: :numeratie
-        end
-      end
-    end
-
-    render 'references_restitution_illettrisme' unless pdf
-
-    render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
-  end
-
-  mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restitution|
-    %w[questions livraison].include?(restitution.situation.nom_technique) &&
-      !restitution.questions_redaction.empty?
-  end
-  unless mes_avec_redaction_de_notes.empty?
-    div class: 'page panel' do
-      render 'entete_page', restitution_globale: restitution_globale
-
-      h2 class: 'text-center my-5' do
-        span t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
-      end
-
-      div id: 'communication_ecrite', class: 'marges-page mt-4' do
-        mes_avec_redaction_de_notes.each do |restitution|
-          situation = restitution.situation
-
-          render 'questions', {
-            restitution: restitution,
-            situation_libelle: situation.libelle,
-            pdf: pdf
-          }
-        end
-      end
 
       render 'pied_page'
+    end
+  end
+
+  if pdf
+    div class: 'page' do
+      render 'entete_page', restitution_globale: restitution_globale
+
+      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme'), class: 'text-center my-5'
+
+      div class: 'panel' do
+        render 'francais_mathematique', pdf: pdf
+      end
+
+      render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
+    end
+
+    div class: 'page' do
+      render 'entete_page', restitution_globale: restitution_globale
+
+      render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+
+      render 'pied_page'
+    end
+  else
+    div id: 'francais_mathematiques', class: 'page' do
+      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
+
+      div class: 'panel' do
+        render 'francais_mathematique', pdf: pdf
+
+        render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+
+        render 'references_restitution_illettrisme'
+      end
     end
   end
 end

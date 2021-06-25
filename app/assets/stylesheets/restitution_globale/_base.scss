@@ -6,21 +6,19 @@
 
 .admin_restitution_globale {
   color: $couleur-texte;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-family: $font-texte;
 
   .en-tete-page, .pied-page {
     display: none;
   }
 
-  .page {
-    border-bottom: thin solid $eva_bluegrey;
-  }
-
   h2 {
     font-family: $font-titre;
     color: $eva_dark;
     font-weight: bold;
+    font-size: 1.5rem;
+    margin: 3rem 0 2rem;
   }
 
   h3 {
@@ -105,12 +103,6 @@
     }
   }
 
-  .legende-titre {
-    font-size: 1rem;
-    color: $couleur-texte;
-    font-weight: normal;
-  }
-
   .competences-transversales-vides {
     p:last-child {
       margin-bottom: 0;
@@ -171,6 +163,7 @@
     }
 
     .nom-competence {
+      margin: 0 0 0.75em;
       font-size: 1.3rem;
     }
 
@@ -313,6 +306,7 @@
   }
 
   .titre-redaction {
+    margin-top: 0;
     font-size: 1.7rem;
   }
 

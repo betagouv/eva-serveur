@@ -15,7 +15,7 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   before_create :initialise_situations, if: :parcours_type_id
-  before_create :passe_le_code_en_majuscule
+  before_save :passe_le_code_en_majuscule
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)

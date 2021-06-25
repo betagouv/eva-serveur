@@ -151,13 +151,13 @@ describe 'Admin - Campagne', type: :feature do
       context 'modifie la campagne et ses situations' do
         let!(:situation) { create :situation_inventaire }
         before do
-          fill_in :campagne_code, with: 'EUROCKS'
+          fill_in :campagne_code, with: 'forcelamajuscule'
           click_on 'Enregistrer'
         end
 
         it do
           campagne = Campagne.order(:created_at).last
-          expect(campagne.code).to eq 'EUROCKS'
+          expect(campagne.code).to eq 'FORCELAMAJUSCULE'
           expect(page).to have_content 'Mon QCM'
         end
       end

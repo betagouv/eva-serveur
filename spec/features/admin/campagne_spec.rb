@@ -75,19 +75,17 @@ describe 'Admin - Campagne', type: :feature do
         compte_conseiller.update(role: 'superadmin')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
+        fill_in :campagne_code, with: 'CODESUPERADMIN'
       end
 
       context 'crée la campagne, associé au compte courant et initialise les situations' do
-        let(:structure_conseiller) { create :structure, code_postal: '45312' }
-
         before do
-          allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'CDI'
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
         it do
           campagne = Campagne.order(:created_at).last
-          expect(campagne.code).to eq 'CDI45312'
+          expect(campagne.code).to eq 'CODESUPERADMIN'
           expect(campagne.compte).to eq compte_conseiller
           within('.campagne-parcours table') do
             expect(page).to have_content situation_maintenance.libelle
@@ -102,10 +100,12 @@ describe 'Admin - Campagne', type: :feature do
         parcours.situations_configurations.create situation: situation_maintenance
         parcours
       end
+      let(:structure_conseiller) { create :structure, code_postal: '45312' }
+
       before do
+        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'CDI'
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
-        fill_in :campagne_code, with: 'BELFORT2021'
       end
 
       context 'créer un parcours complet' do
@@ -116,7 +116,7 @@ describe 'Admin - Campagne', type: :feature do
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
-          expect(campagne.code).to eq 'BELFORT2021'
+          expect(campagne.code).to eq 'CDI45312'
           expect(campagne.compte).to eq compte_conseiller
           within('.campagne-parcours table') do
             expect(page).to have_content situation_maintenance.libelle

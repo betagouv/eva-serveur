@@ -31,7 +31,6 @@ body.logged_in {
 
     &.flash_annonce_generale,
     &.flash_compte_generique,
-    &.flash_comptes_en_attente,
     &.flash_evaluation_anonyme {
       @include reset-flash;
       color: $eva_dark;
@@ -52,6 +51,7 @@ body.logged_in {
       }
     }
 
+    &.flash_comptes_en_attente,
     &.flash_error {
       @include reset-flash;
       background-color: $eva_red;
@@ -60,6 +60,16 @@ body.logged_in {
       &::before {
         background-image: asset-data-url('flash_erreur.svg');
       }
+
+      a {
+        color: $eva_light;
+      }
+    }
+
+    &.flash_comptes_en_attente {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      font-size: 0.875rem;
     }
 
     &:first-child {

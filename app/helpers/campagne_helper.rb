@@ -15,12 +15,12 @@ module CampagneHelper
            locals: { parcours_type: parcours_type }
   end
 
-  def url_campagne(campagne)
-    Addressable::URI.escape("#{URL_CLIENT}?code=#{campagne.code}")
+  def url_campagne(code)
+    Addressable::URI.escape("#{URL_CLIENT}?code=#{code}")
   end
 
   def lien_campagne(campagne)
-    url = url_campagne(campagne)
+    url = url_campagne(campagne.code)
     link_to url, url, target: '_blank'
   end
 end

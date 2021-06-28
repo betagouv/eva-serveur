@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include CampagneHelper
+
   def formate_efficience(nombre)
     return I18n.t("admin.restitutions.evaluation.#{nombre}") if nombre.is_a?(Symbol)
 

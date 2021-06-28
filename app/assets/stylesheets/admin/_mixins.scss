@@ -41,6 +41,7 @@
 @mixin titre() {
   font-family: $font-titre;
   font-weight: bold;
+  text-shadow: none;
   color: $eva_dark;
   margin: 0;
 }

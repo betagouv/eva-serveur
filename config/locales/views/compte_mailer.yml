@@ -21,7 +21,7 @@ fr:
       corps: |
         ### Bonjour %{prenom_admin},
 
-        Votre collègues %{prenom} %{nom} souhaite utiliser eva pour ses
+        Votre collègue %{prenom} %{nom} souhaite utiliser eva pour ses
         prochains accompagnements.
 
         Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien
@@ -29,9 +29,8 @@ fr:
 
         Pour valider ce compte :
           - cliquez sur le lien suivant,
-          - utilisez le bouton [modifier] de la ligne à valider,
-          - choisissez l'accès "authorisé" ou "refusé",
-          - et enfin, cliquer sur le bouton [modifier]
+          - choisissez l'accès "autorisé" ou "refusé",
+          - et enfin, cliquez sur le bouton [modifier].
 
         -> [Valider ce compte](%{url_validation})
 

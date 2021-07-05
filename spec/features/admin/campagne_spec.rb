@@ -154,7 +154,7 @@ describe 'Admin - Campagne', type: :feature do
       context 'modifie la campagne et ses situations' do
         let!(:situation) { create :situation_inventaire }
         before do
-          fill_in :campagne_code, with: 'forcelamajuscule'
+          fill_in :campagne_code, with: 'FORCELAMAJUSCULE'
           click_on 'Enregistrer'
         end
 

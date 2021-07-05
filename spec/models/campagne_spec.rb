@@ -5,6 +5,9 @@ require 'rails_helper'
 describe Campagne, type: :model do
   it { should validate_presence_of :libelle }
   it { should validate_uniqueness_of(:code).case_insensitive }
+  it { should allow_value('ABCD1234').for(:code) }
+  it { should_not allow_value('ABC.123.').for(:code) }
+  it { should_not allow_value('abcd1234').for(:code) }
   it { should belong_to(:questionnaire).optional }
 
   context 'avec des situations' do
@@ -28,7 +31,7 @@ describe Campagne, type: :model do
     describe 'initialisation de la campagne' do
       let(:campagne) do
         Campagne.new libelle: 'ma campagne',
-                     code: 'HeLLo',
+                     code: 'HELLO',
                      compte: compte,
                      parcours_type: parcours_type
       end

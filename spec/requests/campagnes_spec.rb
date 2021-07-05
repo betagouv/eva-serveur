@@ -7,20 +7,20 @@ describe 'Campagne API', type: :request do
     let(:question) { create :question_qcm, intitule: 'Ma question' }
     let(:questionnaire) { create :questionnaire, questions: [question] }
     let!(:campagne) do
-      create :campagne, questionnaire: questionnaire, code: 'ete 21', libelle: 'Ma campagne ete 21'
+      create :campagne, questionnaire: questionnaire, code: 'ETE21', libelle: 'Ma campagne ete 21'
     end
 
     it 'retourne les informations de la campagne' do
-      get '/api/campagnes/ete%2021'
+      get '/api/campagnes/ete21'
 
       expect(response).to be_ok
       resultat = JSON.parse(response.body)
       expect(resultat['libelle']).to eq('Ma campagne ete 21')
-      expect(resultat['code']).to eq('ETE 21')
+      expect(resultat['code']).to eq('ETE21')
     end
 
     it 'retourne les questions de la campagne' do
-      get '/api/campagnes/ete%2021'
+      get '/api/campagnes/ete21'
 
       expect(response).to be_ok
       expect(JSON.parse(response.body)['questions'].size).to eql(1)
@@ -28,7 +28,7 @@ describe 'Campagne API', type: :request do
 
     it "retourne des questions vide lorsque qu'il n'y a pas de questionnaire" do
       campagne.update(questionnaire: nil)
-      get '/api/campagnes/ete%2021'
+      get '/api/campagnes/ete21'
 
       expect(response).to be_ok
       expect(JSON.parse(response.body)['questions'].size).to eql(0)
@@ -54,7 +54,7 @@ describe 'Campagne API', type: :request do
                                                 position: 2,
                                                 questionnaire: questionnaire_surcharge
       campagne.situations_configurations.create situation: situation_inventaire, position: 1
-      get '/api/campagnes/ete%2021'
+      get '/api/campagnes/ete21'
 
       expect(JSON.parse(response.body)['situations'].size).to eql(2)
       expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Evaluation', type: :feature do
   let(:ma_campagne) do
-    create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'paris2019'
+    create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'PARIS2019'
   end
 
   context 'Organisation' do

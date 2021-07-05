@@ -10,7 +10,8 @@ class Campagne < ApplicationRecord
 
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
-  validates :code, presence: true, uniqueness: { case_sensitive: false }
+  validates :code, presence: true, uniqueness: { case_sensitive: false },
+                   format: { with: /\A[A-Z0-9]+\z/, message: 'Majuscules et chiffres uniquement' }
 
   delegate :structure_code_postal, to: :compte
 

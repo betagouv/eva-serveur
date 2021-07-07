@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
 panel t('.titre') do
-  md t('.description', structure: current_compte.structure.display_name,
-                       statut_validation: current_compte.humanized_statut_validation)
+  md t('.description', telephone: support&.telephone, email: support&.email)
 end

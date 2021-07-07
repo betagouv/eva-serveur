@@ -2,11 +2,14 @@ fr:
   admin:
     validation_necessaire:
       validation_necessaire:
-        titre: Votre accès n'est pas autorisé
+        titre: Bienvenue sur eva !
         description: |
-            Par mesure de précaution, une validation est nécessaire pour rejoindre une structure existante.
+            Vous n'êtes qu'à deux clics d'utiliser eva.
 
-            Votre accès pour rejoindre **%{structure}** est actuellement : **%{statut_validation}**.
+            Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'eva pour votre structure.
+            Elle va bientôt vous permettre d'utiliser eva.
 
-            Rapprochez-vous d'un collègue qui utilise eva afin qu'il autorise votre compte.
+            Vous savez qui est-ce? N'hésitez pas à vous rapprocher d'elle.
+
+            Vous pensez que cette personne est momentanément absente, merci de contacter Véronique %{telephone} ou par mail [%{email}](mailto:%{email}).
 

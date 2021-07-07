@@ -115,3 +115,9 @@ Rails.application.configure do
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 end
+
+if ENV['EMAIL_RECIPIENTS'].present?
+  Mail.register_interceptor(
+    RecipientInterceptor.new(ENV['EMAIL_RECIPIENTS'], subject_prefix: '[recipient_interceptor]')
+  )
+end

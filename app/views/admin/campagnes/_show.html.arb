@@ -2,17 +2,36 @@
 
 div class: 'row' do
   div class: 'offset-1 col-4' do
-    h1 campagne.libelle
+    h1 campagne.libelle, class: 'titre'
 
-    panel 'Votre code campagne', class: 'campagne-code' do
-      div t('.explication_code')
+    h2 'Votre code campagne', class: 'sous-titre'
+
+    div class: 'panel campagne-code' do
+      div md t('.explication_code')
+
       attributes_table_for campagne do
-        row :code
+        row(:code) do
+          div class: 'code' do
+            campagne.code.each_char do |item|
+              couleur = item == item.to_i.to_s ? 'violet' : 'bleu'
+              span item, class: couleur
+            end
+            code = campagne.code
+            input class: 'input-copier-coller', type: 'text', value: code
+            button 'Copier le code', class: 'button copier-coller'
+          end
+        end
         row(:url) { lien_campagne(campagne) }
+
+        url = url_campagne(campagne.code)
+        input class: 'input-copier-coller', type: 'text', value: url
+        button "Copier l'URL", class: 'button copier-coller'
       end
     end
 
-    panel 'Détails de la campagne' do
+    h2 'Détails de la campagne', class: 'sous-titre'
+
+    div class: 'panel' do
       attributes_table_for campagne do
         row :libelle
         row :compte
@@ -20,7 +39,9 @@ div class: 'row' do
     end
 
     if can?(:manage, Compte)
-      panel 'Administration' do
+      h2 'Administration', class: 'sous-titre'
+
+      div class: 'panel' do
         attributes_table_for campagne do
           row :id
           row :questionnaire
@@ -33,13 +54,17 @@ div class: 'row' do
       end
     end
 
-    panel t('.titre_panel_parcours'), class: 'campagne-parcours' do
+    h2 t('.titre_panel_parcours'), class: 'sous-titre'
+
+    div class: 'panel campagne-parcours' do
       div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
       render partial: 'admin/situations_configurations/liste_situations_configurations',
              locals: { situations_configurations: situations_configurations }
     end
 
-    panel 'Consulter' do
+    h2 'Consulter', class: 'sous-titre'
+
+    div class: 'panel' do
       ul do
         li link_to "les #{resource.nombre_evaluations} évaluations",
                    admin_evaluations_path(q: { campagne_id_eq: resource })

@@ -24,7 +24,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier3 }, { numeratie: :palier3 }])
+          .and_return([{ litteratie: :palier5 }, { numeratie: :palier5 }])
       end
       it { expect(subject.socle_clea?).to eq(true) }
     end

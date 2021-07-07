@@ -7,13 +7,15 @@ div class: 'row' do
     scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
 
     div class: 'col-auto badge' do
-      code_niveau = t("#{niveau}.code", scope: scope)
+      profil = t("#{niveau}.profil", scope: scope)
       if pdf
         div svg_tag_base64 "#{competence}.svg"
-        div svg_tag_base64 "niveau#{code_niveau}.svg" if niveau.present?
+        div svg_tag_base64 "profil-#{profil.parameterize}.svg" if niveau.present?
       else
         div image_tag "#{competence}.svg"
-        div image_tag "niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}" if niveau.present?
+        if niveau.present?
+          div image_tag "profil-#{profil.parameterize}.svg", alt: "Profil #{profil}"
+        end
       end
     end
     div class: 'col' do

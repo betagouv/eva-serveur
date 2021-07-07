@@ -3,9 +3,13 @@
 module Restitution
   module Illettrisme
     class InterpreteurScores
-      SEUILS_PALIER0 = {
-        litteratie: -3.55,
-        numeratie: -1.64
+      PALIERS = {
+        litteratie: [-4.1, -3.18, -2.25, -1.33, -0.4],
+        numeratie: [-1.68, -1, -0.33, 0.35, 1.02],
+        score_ccf: [-1, 0],
+        score_syntaxe_orthographe: [-1, 0],
+        score_memorisation: [-1, 0],
+        score_numeratie: [-1, 0]
       }.freeze
 
       def initialize(scores)
@@ -23,19 +27,11 @@ module Restitution
       def interprete(competence, score)
         return if score.blank?
 
-        if palier0?(competence, score)
-          :palier0
-        elsif score < -1
-          :palier1
-        elsif score.negative?
-          :palier2
-        else
-          :palier3
+        PALIERS[competence].each_with_index do |palier, index|
+          return "palier#{index}".to_sym if score <= palier
         end
-      end
 
-      def palier0?(competence, score)
-        SEUILS_PALIER0.key?(competence) && score <= SEUILS_PALIER0[competence]
+        "palier#{PALIERS[competence].count}".to_sym
       end
     end
   end

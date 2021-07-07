@@ -20,7 +20,6 @@ class Campagne < ApplicationRecord
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   before_create :initialise_situations, if: :parcours_type_id
-  before_save :passe_le_code_en_majuscule
 
   before_validation :genere_code_unique
 
@@ -43,10 +42,6 @@ class Campagne < ApplicationRecord
     parcours_type.situations_configurations.each do |situation_configuration|
       situations_configurations.build situation_id: situation_configuration.situation_id
     end
-  end
-
-  def passe_le_code_en_majuscule
-    code&.upcase!
   end
 
   def genere_code_unique

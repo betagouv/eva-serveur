@@ -31,14 +31,9 @@ describe Campagne, type: :model do
     describe 'initialisation de la campagne' do
       let(:campagne) do
         Campagne.new libelle: 'ma campagne',
-                     code: 'HELLO',
+                     code: 'COD35012',
                      compte: compte,
                      parcours_type: parcours_type
-      end
-
-      it 'passe le code en majuscule' do
-        campagne.save
-        expect(campagne.code).to eq 'HELLO'
       end
 
       it do

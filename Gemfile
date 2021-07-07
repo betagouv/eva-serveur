@@ -29,8 +29,6 @@ gem 'ffaker'
 gem 'geocoder'
 gem 'jbuilder'
 gem 'kaminari-i18n'
-gem 'letter_opener'
-gem 'letter_opener_web', '~> 1.0'
 gem 'mini_racer'
 gem 'pg', '~> 1.0'
 gem 'rack-cors', require: 'rack/cors'
@@ -57,6 +55,7 @@ group :development do
   gem 'foreman'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
+  gem 'letter_opener'
   gem 'rails-erd'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

@@ -27,21 +27,21 @@
         border: 2px solid $eva_green;
         .row {
           &-code {
-            position: relative;
             font-size: 1.5rem;
             .code {
               display: flex;
               letter-spacing: 0.2rem;
-              .input-copier-coller,
-              .copier-coller {
-                bottom: 0.7rem;
-              }
             }
             .violet {
               color: $eva_main_blue;
             }
             td {
+              position: relative;
               font-weight: 600;
+            }
+            .input-copier-coller,
+            .copier-coller {
+              bottom: 0.7rem;
             }
           }
           &-url {

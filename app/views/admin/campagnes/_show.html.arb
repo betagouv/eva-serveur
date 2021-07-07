@@ -12,14 +12,16 @@ div class: 'row' do
       attributes_table_for campagne do
         row(:code) do
           div class: 'code' do
+            rendu_code = ''
             campagne.code.each_char do |item|
               couleur = item == item.to_i.to_s ? 'violet' : 'bleu'
-              span item, class: couleur
+              rendu_code << "<span class='#{couleur}'>#{item}</span>"
             end
-            code = campagne.code
-            input class: 'input-copier-coller', type: 'text', value: code
-            button 'Copier le code', class: 'button copier-coller'
+            text_node rendu_code.html_safe
           end
+          code = campagne.code
+          input class: 'input-copier-coller', type: 'text', value: code
+          button 'Copier le code', class: 'button copier-coller'
         end
         row(:url) { lien_campagne(campagne) }
 

@@ -332,6 +332,8 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    recipient_interceptor (0.3.0)
+      mail
     redcarpet (3.5.1)
     redis (4.2.5)
     regexp_parser (2.1.1)
@@ -503,6 +505,7 @@ DEPENDENCIES
   rails-erd
   rails-i18n
   rails-observers
+  recipient_interceptor
   redcarpet
   redis
   rollbar

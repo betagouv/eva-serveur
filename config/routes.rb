@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   authenticate :compte, ->(o) { o.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
   root to: redirect('/admin/dashboard')

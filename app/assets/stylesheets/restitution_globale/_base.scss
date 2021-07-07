@@ -277,16 +277,17 @@
       height: 3rem;
     }
 
-    .ordre {
-      font-size: 0.8rem;
+    .texte-explications p, .lien-references p {
+      margin: 0;
+    }
+
+    .texte-explications, .badges-referentiels {
+      margin-bottom: .625rem;
     }
 
     .badge-references {
       height: 2rem;
-    }
-
-    .lien-references {
-      margin-top: 1rem;
+      margin-right: .25rem;
     }
   }
 

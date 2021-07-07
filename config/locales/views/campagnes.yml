@@ -11,7 +11,9 @@ fr:
         configuration_avancee: Configuration avancée
       show:
         titre_panel_parcours: Parcours
-        explication_code: Afin de rattacher vos bénéficiaires à cette campagne, vous pouvez partager le code ou l’URL suivante.
+        explication_code: |
+          Afin de rattacher vos bénéficiaires à cette campagne,
+          vous pouvez partager le code ou l’URL suivante.
         demande_aide_pour_configuration_campagne: |
           Si vous souhaitez modifier le parcours de cette campagne, contactez-nous via le module de chat présent en bas à droite de cette page ou par email à [%{email_contact}](mailto:%{email_contact})
 

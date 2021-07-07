@@ -4,7 +4,7 @@
   background-color: #fff;
 }
 @mixin ombre {
-  box-shadow: 0 0 0.5rem rgba(30, 65, 106, 0.5);
+  box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
 }
 @mixin carte-avec-ombre {
   @include carte();

@@ -8,7 +8,7 @@ div class: 'admin_restitution_globale' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf
-        h2 t('.autopositionnement_titre'), class: 'text-center my-5'
+        h2 t('.autopositionnement_titre'), class: 'text-center mt-5 mb-4'
       else
         h2 t('.autopositionnement_titre')
       end
@@ -34,7 +34,7 @@ div class: 'admin_restitution_globale' do
 
     div class: 'panel' do
       div class: 'marges-page' do
-        div class: 'row my-5' do
+        div class: 'row' do
           div class: 'col' do
             if niveaux_competences.blank?
               div class: 'competences-transversales-vides' do
@@ -92,7 +92,7 @@ div class: 'admin_restitution_globale' do
     div class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale
 
-      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme'), class: 'text-center my-5'
+      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme'), class: 'text-center mt-5 mb-4'
 
       div class: 'panel' do
         render 'francais_mathematique', pdf: pdf
@@ -112,7 +112,7 @@ div class: 'admin_restitution_globale' do
     div id: 'francais_mathematiques', class: 'page' do
       h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
 
-      div class: 'panel' do
+      div class: 'panel panel--avec-references' do
         render 'francais_mathematique', pdf: pdf
 
         render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf

@@ -5,7 +5,7 @@ mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restit
     !restitution.questions_redaction.empty?
 end
 unless mes_avec_redaction_de_notes.empty?
-  div class: 'marges-page mt-4' do
+  div class: 'marges-page' do
     mes_avec_redaction_de_notes.each do |restitution|
       situation = restitution.situation
 

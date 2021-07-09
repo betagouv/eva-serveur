@@ -63,4 +63,49 @@ describe Compte do
       it { expect(Truemail).not_to have_received(:valid?).with('email@example.com') }
     end
   end
+
+  describe 'structure a un admin' do
+    let(:structure) { Structure.new }
+    let(:compte) { Compte.new role: 'admin' }
+
+    before do
+      allow(compte).to receive(:verifie_dns_email).and_return(true)
+    end
+
+    context 'quand il y a plusieurs admins dans la structure' do
+      before do
+        allow(compte).to receive(:autres_admins?).and_return(true)
+      end
+
+      it 'retire les droits à un admin' do
+        compte.role = 'conseiller'
+        compte.valid?
+        expect(compte.errors[:role]).to be_blank
+      end
+    end
+
+    context "quand il n'y a qu'un admin dans la structure" do
+      before do
+        allow(compte).to receive(:autres_admins?).and_return(false)
+      end
+
+      it 'ne peut pas retirer les droits de cet admin' do
+        compte.role = 'conseiller'
+        compte.valid?
+        expect(compte.errors[:role]).to include 'La structure doit avoir au moins un administrateur'
+      end
+    end
+
+    context "quand il n'y a pas d'admin dans la structure" do
+      before do
+        allow(compte).to receive(:autres_admins?).and_return(false)
+      end
+
+      it 'ajoute un admin' do
+        compte.role = 'admin'
+        compte.valid?
+        expect(compte.errors[:role]).to be_blank
+      end
+    end
+  end
 end

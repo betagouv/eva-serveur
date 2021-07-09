@@ -4,19 +4,20 @@ require 'rails_helper'
 
 describe 'Admin - Compte', type: :feature do
   let!(:ma_structure) { create :structure, nom: 'Ma structure' }
+  let!(:compte_superadmin) do
+    create :compte, structure: ma_structure, email: 'moi@structure'
+  end
+  let(:compte_connecte) { compte_superadmin }
   let!(:collegue) do
     create :compte_conseiller, structure: ma_structure, email: 'collegue@structure',
                                prenom: 'Collègue'
-  end
-  let(:compte_connecte) do
-    create :compte, structure: ma_structure, email: 'moi@structure'
   end
 
   before { connecte(compte_connecte) }
 
   context 'en tant que superadmin' do
     let(:compte_connecte) do
-      create :compte_superadmin, structure: ma_structure, email: 'moi@structure'
+      create :compte_superadmin, structure: ma_structure
     end
 
     describe 'Je vois mes informations' do
@@ -71,7 +72,7 @@ describe 'Admin - Compte', type: :feature do
 
   context "en admin d'une structure" do
     let(:compte_connecte) do
-      create :compte_admin, structure: ma_structure, email: 'moi@structure'
+      create :compte_admin, structure: ma_structure
     end
 
     describe "modifier les informations d'un collègue" do
@@ -128,11 +129,11 @@ describe 'Admin - Compte', type: :feature do
 
   context 'en conseiller' do
     let(:compte_connecte) do
-      create :compte_conseiller, structure: ma_structure, email: 'moi@structure'
+      create :compte_conseiller, structure: ma_structure, email: 'compte.conseiller@gmail.com'
     end
 
     describe 'je vois mes collègues' do
-      let(:autre_structure) { create :structure }
+      let(:autre_structure) { create :structure, :avec_admin }
       let!(:inconnu) do
         create :compte_conseiller, structure: autre_structure, email: 'inconnu@structure'
       end
@@ -140,7 +141,7 @@ describe 'Admin - Compte', type: :feature do
       before { visit admin_comptes_path }
 
       it do
-        expect(page).to have_content 'moi@structure'
+        expect(page).to have_content 'compte.conseiller@gmail.com'
         expect(page).to have_content 'collegue@structure'
         expect(page).to_not have_content 'inconnu@structure'
       end

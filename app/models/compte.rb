@@ -11,7 +11,7 @@ class Compte < ApplicationRecord
   enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
   validates_presence_of :nom, :prenom, on: :create
-  validate :verifie_dns_email
+  validate :verifie_dns_email, :structure_a_un_admin
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
@@ -42,5 +42,20 @@ class Compte < ApplicationRecord
     return if Truemail.valid?(email)
 
     errors.add(:email, :invalid)
+  end
+
+  def structure_a_un_admin
+    return if au_moins_admin?
+    return if autres_admins?
+
+    errors.add(:role, :structure_doit_avoir_un_admin)
+  end
+
+  def au_moins_admin?
+    %w[admin superadmin].include?(role)
+  end
+
+  def autres_admins?
+    find_admins.where.not(id: id).count >= 1
   end
 end

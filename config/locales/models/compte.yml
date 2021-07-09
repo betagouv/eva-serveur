@@ -43,6 +43,12 @@ fr:
           en_attente: En attente
           acceptee: Autorisé
           refusee: Refusé
+    errors:
+      models:
+        compte:
+          attributes:
+            role:
+              structure_doit_avoir_un_admin: 'La structure doit avoir au moins un administrateur'
   formtastic:
     actions:
       compte:

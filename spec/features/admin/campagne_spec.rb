@@ -4,13 +4,13 @@ require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
   let(:structure_conseiller) { create :structure }
-  let(:compte_conseiller) { create :compte_conseiller, structure: structure_conseiller }
+  let(:compte_conseiller) { create :compte_admin, structure: structure_conseiller }
   let!(:compte_connecte) { connecte(compte_conseiller) }
   let!(:ma_campagne) do
     create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
   end
   let!(:campagne) do
-    autre_compte_conseiller = create :compte_conseiller, email: 'orga@eva.fr'
+    autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller
   end
   let!(:evaluation) { create :evaluation, campagne: campagne }

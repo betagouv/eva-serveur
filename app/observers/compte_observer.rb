@@ -23,6 +23,6 @@ class CompteObserver < ActiveRecord::Observer
   def programme_email_relance(compte)
     RelanceUtilisateurPourNonActivationJob
       .set(wait: Compte::DELAI_RELANCE_NON_ACTIVATION)
-      .perform_later(compte: compte)
+      .perform_later(compte.id)
   end
 end

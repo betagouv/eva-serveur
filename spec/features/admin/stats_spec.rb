@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Stats', type: :feature do
-  let(:compte_conseiller) { create :compte_conseiller, email: 'orga@eva.fr' }
+  let(:compte_conseiller) { create :compte_admin, email: 'orga@eva.fr' }
   let!(:campagne) do
     create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN',
                       compte: compte_conseiller, questionnaire: questionnaire

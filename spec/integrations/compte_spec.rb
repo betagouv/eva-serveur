@@ -6,16 +6,18 @@ describe Compte, type: :integration do
   ActiveJob::Base.queue_adapter = :test
 
   describe 'après création' do
+    let!(:structure) { create :structure, :avec_admin }
+
     it 'programme un mail de relance' do
       expect do
-        create :compte_conseiller
+        create :compte_conseiller, structure: structure
       end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob)
     end
 
-    it 'programme un mail de bienvenue' do
+    it "programme un mail de bienvenue et un mail d'alerte" do
       expect do
-        create :compte_conseiller
-      end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+        create :compte_conseiller, structure: structure
+      end.to have_enqueued_job(ActionMailer::MailDeliveryJob).at_least(2)
     end
 
     context 'quand le compte est superadmin' do
@@ -35,10 +37,6 @@ describe Compte, type: :integration do
   describe '#find_admins' do
     let(:structure) { create :structure }
     let(:compte) { create :compte_conseiller, structure: structure }
-
-    it "ne trouve aucun admins d'un compte quand il n'y en a pas" do
-      expect(compte.find_admins.empty?).to eql(true)
-    end
 
     describe 'avec des admins' do
       let!(:compte_admin) { create :compte_admin, structure: structure }

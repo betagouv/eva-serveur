@@ -8,7 +8,7 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   context 'Organisation' do
-    before(:each) { se_connecter_comme_conseiller }
+    before(:each) { se_connecter_comme_admin }
 
     describe '#show' do
       # evaluation sans positionnement

@@ -12,5 +12,11 @@ FactoryBot.define do
     nom { 'Ma structure' }
     type_structure { 'mission_locale' }
     code_postal { '75012' }
+
+    trait :avec_admin do
+      after(:create) do |structure|
+        create(:compte_admin, structure: structure)
+      end
+    end
   end
 end

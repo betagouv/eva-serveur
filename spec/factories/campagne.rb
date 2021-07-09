@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :campagne do
     libelle { 'Ma campagne' }
     sequence(:code) { |n| "CODE#{n}" }
-    association :compte, factory: :compte_conseiller
+    association :compte, factory: :compte_admin
     parcours_type
   end
 end

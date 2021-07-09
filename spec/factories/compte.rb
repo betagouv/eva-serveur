@@ -8,6 +8,11 @@ FactoryBot.define do
     password { 'password' }
     role { 'superadmin' }
     statut_validation { :acceptee }
+    structure
+
+    trait :structure_avec_admin do
+      structure { create(:structure, :avec_admin) }
+    end
 
     factory :compte_superadmin do
       role { 'superadmin' }
@@ -21,7 +26,6 @@ FactoryBot.define do
     factory :compte_generique do
       role { 'compte_generique' }
     end
-    structure
   end
 
   sequence :email do |n|

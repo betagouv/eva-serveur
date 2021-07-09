@@ -6,8 +6,8 @@ require 'cancan/matchers'
 describe Ability do
   let(:compte_superadmin) { create :compte_superadmin }
   let(:compte_admin) { create :compte_admin }
-  let(:compte_generique) { create :compte_generique }
-  let(:compte_conseiller) { create :compte_conseiller }
+  let(:compte_generique) { create :compte_generique, :structure_avec_admin }
+  let(:compte_conseiller) { create :compte_conseiller, :structure_avec_admin }
   let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
   let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
   let!(:campagne_conseiller) { create :campagne, compte: compte_conseiller }

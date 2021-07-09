@@ -8,7 +8,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
   context "quand le compte n'a pas de campagne" do
     it "envoie un email pour relancer l'utilisateur" do
       expect do
-        RelanceUtilisateurPourNonActivationJob.perform_now(compte: compte)
+        RelanceUtilisateurPourNonActivationJob.perform_now(compte.id)
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
@@ -18,7 +18,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
 
     it "envoie un email pour relancer l'utilisateur" do
       expect do
-        RelanceUtilisateurPourNonActivationJob.perform_now(compte: compte)
+        RelanceUtilisateurPourNonActivationJob.perform_now(compte.id)
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
@@ -30,8 +30,12 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
 
     it 'ne fais rien' do
       expect do
-        RelanceUtilisateurPourNonActivationJob.perform_now(compte: compte)
+        RelanceUtilisateurPourNonActivationJob.perform_now(compte.id)
       end.to change { ActionMailer::Base.deliveries.count }.by(0)
     end
+  end
+
+  context 'quand le compte a été supprimé' do
+    it { RelanceUtilisateurPourNonActivationJob.perform_now(1) }
   end
 end

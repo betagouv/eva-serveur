@@ -9,6 +9,13 @@
   font-size: 0.875rem;
   font-family: $font-texte;
 
+  .panel {
+    padding: 3rem 0;
+    &--avec-references {
+      padding-bottom: 0;
+    }
+  }
+
   .en-tete-page, .pied-page {
     display: none;
   }
@@ -38,13 +45,20 @@
   }
 
   .marges-page {
-    margin : 0 3rem;
+    margin: 0 3rem;
   }
 
   .header, .title_bar { display: none; }
 
   .autopositionnement {
     color: $eva_dark;
+
+    > .row {
+      margin-bottom: 2rem;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     .intitule-question {
       display: flex;
@@ -58,7 +72,7 @@
       background-position: center;
       background-repeat: no-repeat;
       max-width: 420px;
-      height: 4rem;
+      height: 2rem;
     }
 
     .position-1 { left: -1%; }
@@ -88,18 +102,20 @@
 
     .row.question-standard {
       margin-top: 2rem;
-      margin-bottom: 2rem;
     }
 
     .categorie {
       font-size: 1.3rem;
-      margin: 2rem 0;
+      margin: 0 0 2rem 0;
     }
 
     .reponse {
       color: $eva_main_blue;
       font-weight: 600;
       margin-bottom: 1rem;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -194,7 +210,7 @@
     color: $eva_light;
     border-radius: 2rem;
     padding: 2rem 2rem;
-    margin: 2rem 5rem 3rem;
+    margin: 0 5rem 3rem;
 
     h3 {
       color: $eva_light;
@@ -205,6 +221,12 @@
 
     img {
       height: 6rem;
+    }
+
+    .col {
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
 
     &.illettrisme_potentiel {
@@ -244,6 +266,8 @@
     background-color: $couleur-texte;
     color: $eva_light;
     padding: 1rem 0;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 
     a {
       color: $eva_light;
@@ -266,13 +290,18 @@
     }
   }
 
+  .situation-redaction {
+    padding-top: 3rem;
+    border-top: 2px solid $eva_bluegrey;
+  }
+
   .reponse-question {
     position: relative;
+    font-size: 0.875rem;
   }
 
   .note-redaction {
     position: relative;
-    font-size: 1rem;
     font-style: italic;
     color: $eva_main_blue;
     padding: 2.2rem 2rem;
@@ -289,7 +318,6 @@
 
   .aide-redaction {
     position: relative;
-    font-size: 1rem;
     color: $couleur-texte;
     padding: 2rem 2rem;
     border: 1px solid $couleur-legere-accent-validation;
@@ -306,8 +334,8 @@
   }
 
   .titre-redaction {
-    margin-top: 0;
-    font-size: 1.7rem;
+    margin: 0;
+    font-size: 1.125rem;
   }
 
   .image-redaction {

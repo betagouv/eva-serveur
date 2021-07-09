@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div id: 'referentiels', class: 'references_restitution_illettrisme' do
+div class: 'references_restitution_illettrisme' do
   scope = 'admin.restitutions.niveaux_illettrisme.references'
   div class: 'row marges-page' do
     div class: 'col-auto' do

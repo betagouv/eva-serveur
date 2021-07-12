@@ -81,22 +81,37 @@ describe 'Admin - Evaluation', type: :feature do
 
           it 'affiche deux niveaux different pour litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau1)
-              .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
+              .and_return(
+                [
+                  { litteratie_cefr: :palier1 },
+                  { numeratie_cefr: :palier1 }
+                ]
+              )
             visit admin_evaluation_path(mon_evaluation_bienvenue)
-            expect(page).to have_xpath("//img[@alt='Profil 2']")
-            expect(page).to have_xpath("//img[@alt='Profil 2']")
+            expect(page).to have_xpath("//img[@alt='Niveau A1']")
+            expect(page).to have_xpath("//img[@alt='Niveau X1']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do
             allow(restitution_globale).to receive(:interpretations_niveau1)
-              .and_return([{ litteratie: nil }, { numeratie: nil }])
+              .and_return(
+                [
+                  { litteratie_cefr: nil },
+                  { numeratie_cefr: nil }
+                ]
+              )
             visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content "Votre score n'a pas pu être calculé"
           end
 
           it "Socle cléa en cours d'acquisition" do
             allow(restitution_globale).to receive(:interpretations_niveau1)
-              .and_return([{ litteratie: :palier3 }, { numeratie: :palier3 }])
+              .and_return(
+                [
+                  { litteratie_cefr: :palier3 },
+                  { numeratie_cefr: :palier3 }
+                ]
+              )
             allow(restitution_globale).to receive(:synthese).and_return('socle_clea')
             visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content 'Certification Cléa indiquée'
@@ -104,7 +119,12 @@ describe 'Admin - Evaluation', type: :feature do
 
           it "Potentiellement en situation d'illettrisme" do
             allow(restitution_globale).to receive(:interpretations_niveau1)
-              .and_return([{ litteratie: :palier1 }, { numeratie: :palier1 }])
+              .and_return(
+                [
+                  { litteratie_cefr: :palier1 },
+                  { numeratie_cefr: :palier1 }
+                ]
+              )
             allow(restitution_globale).to receive(:synthese).and_return('illettrisme_potentiel')
             visit admin_evaluation_path(mon_evaluation_bienvenue)
             expect(page).to have_content 'Formation vivement recommandée'
@@ -118,10 +138,10 @@ describe 'Admin - Evaluation', type: :feature do
 
           it 'de litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau2)
-              .with(:litteratie)
+              .with(:litteratie_cefr)
               .and_return([{ score_ccf: :palier0 }])
             allow(restitution_globale).to receive(:interpretations_niveau2)
-              .with(:numeratie)
+              .with(:numeratie_cefr)
               .and_return([{ score_numeratie: :palier0 }])
             visit admin_evaluation_path(mon_evaluation_bienvenue)
 

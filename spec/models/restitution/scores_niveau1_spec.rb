@@ -16,7 +16,12 @@ describe Restitution::ScoresNiveau1 do
                   score_syntaxe_orthographe: 3,
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
-      .to eq(litteratie: (2 + 3 + 4) / 3.0, numeratie: 1)
+      .to eq(
+        litteratie_cefr: (2 + 3 + 4) / 3.0,
+        numeratie_cefr: 1,
+        litteratie_anlci: (2 + 3 + 4) / 3.0,
+        numeratie_anlci: 1
+      )
   end
 
   it 'avec une metrique manquante' do
@@ -26,6 +31,11 @@ describe Restitution::ScoresNiveau1 do
                   score_syntaxe_orthographe: 3,
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
-      .to eq(litteratie: (3 + 4) / 2.0, numeratie: 1)
+      .to eq(
+        litteratie_cefr: (3 + 4) / 2.0,
+        numeratie_cefr: 1,
+        litteratie_anlci: (3 + 4) / 2.0,
+        numeratie_anlci: 1
+      )
   end
 end

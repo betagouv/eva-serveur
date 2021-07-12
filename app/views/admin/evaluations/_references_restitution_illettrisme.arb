@@ -7,16 +7,29 @@ div class: 'references_restitution_illettrisme' do
       div svg_tag_base64 'info.svg', class: 'icone'
     end
     div class: 'col' do
-      div class: 'texte-explications' do
-        md t('explications', scope: scope)
-      end
-      div class: 'badges-referentiels' do
-        text_node svg_tag_base64 'badges/profil-1-blanc.svg', class: 'badge-references'
-        text_node svg_tag_base64 'badges/profil-2-blanc.svg', class: 'badge-references'
-        text_node svg_tag_base64 'badges/profil-3-blanc.svg', class: 'badge-references'
-        text_node svg_tag_base64 'badges/profil-4-blanc.svg', class: 'badge-references'
-        text_node svg_tag_base64 'badges/profil-4-plus-blanc.svg', class: 'badge-references'
-        text_node svg_tag_base64 'badges/profil-4-plus-plus-blanc.svg', class: 'badge-references'
+      div md t('explications', scope: scope)
+      div class: 'row' do
+        div class: 'col-auto' do
+          div t('francais', scope: scope)
+          div t('ordre', scope: scope), class: 'ordre'
+        end
+        div class: 'col-auto' do
+          text_node svg_tag_base64 'badges/niveaupreA1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauA1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauA2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauB1-blanc.svg', class: 'badge-references'
+        end
+        div class: 'col-auto' do
+          div t('mathematiques', scope: scope)
+          div t('ordre', scope: scope), class: 'ordre'
+        end
+        div class: 'col-auto' do
+          text_node svg_tag_base64 'badges/niveaupreX1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauX1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauX2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/niveauY1-blanc.svg', class: 'badge-references'
+        end
+        div class: 'col'
       end
       div class: 'lien-references' do
         md t('references', scope: scope)

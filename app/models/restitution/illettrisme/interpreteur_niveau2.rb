@@ -8,7 +8,7 @@ module Restitution
       end
 
       def interpretations(categorie)
-        competences = if categorie == :litteratie
+        competences = if %i[litteratie_cefr litteratie_anlci].include?(categorie)
                         Restitution::ScoresNiveau1::METACOMPETENCES_LITTERATIE
                       else
                         Restitution::ScoresNiveau1::METACOMPETENCES_NUMERATIE

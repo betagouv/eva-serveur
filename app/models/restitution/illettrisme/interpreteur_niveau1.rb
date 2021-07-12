@@ -8,7 +8,7 @@ module Restitution
       end
 
       def socle_clea?
-        interpretations.all? { |score| score.values[0] == :palier5 }
+        interpretations.all? { |score| score.values[0] == :palier3 }
       end
 
       def illettrisme_potentiel?
@@ -27,7 +27,7 @@ module Restitution
 
       def interpretations
         @interpretations ||= @interpreteur_score
-                             .interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1)
+                             .interpretations(Restitution::ScoresNiveau1::METRIQUES_CEFR)
       end
     end
   end

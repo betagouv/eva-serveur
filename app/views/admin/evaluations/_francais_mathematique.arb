@@ -14,13 +14,13 @@ div id: 'francais_mathematiques', class: 'marges-page' do
       img # place holder
     end
     div class: 'col' do
-      render 'metacompetences', categorie: :litteratie
+      render 'metacompetences', categorie: :litteratie_cefr
     end
     div class: 'col-auto badge' do
       img # place holder
     end
     div class: 'col' do
-      render 'metacompetences', categorie: :numeratie
+      render 'metacompetences', categorie: :numeratie_cefr
     end
   end
 end

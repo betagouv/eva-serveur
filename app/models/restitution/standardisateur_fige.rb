@@ -24,8 +24,10 @@ module Restitution
         score_syntaxe_orthographe: { average: 0.09, stddev_pop: 0.83 },
         score_memorisation: { average: 0.23, stddev_pop: 0.93 },
         score_numeratie: { average: 0, stddev_pop: 1 },
-        litteratie: { average: 0.16, stddev_pop: 0.65 },
-        numeratie: { average: 0, stddev_pop: 1 }
+        litteratie_cefr: { average: 0.16, stddev_pop: 0.65 },
+        numeratie_cefr: { average: 0, stddev_pop: 1 },
+        litteratie_anlci: { average: 0.16, stddev_pop: 0.65 },
+        numeratie_anlci: { average: 0, stddev_pop: 1 }
       }
     }.freeze
 

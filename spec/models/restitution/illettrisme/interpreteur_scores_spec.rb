@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Restitution::Illettrisme::InterpreteurScores do
   let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
   let(:competences) { %i[score_ccf score_memorisation] }
-  let(:competences_niveau1) { %i[litteratie numeratie] }
+  let(:competences_niveau1) { %i[litteratie_cefr numeratie_cefr litteratie_anlci numeratie_anlci] }
 
   context 'pas de score à interpreter' do
     let(:scores_standardises) { {} }
@@ -40,18 +40,34 @@ describe Restitution::Illettrisme::InterpreteurScores do
   end
 
   context 'premiers paliers de literatie et numeratie' do
-    let(:scores_standardises) { { litteratie: -4.1, numeratie: -1.68 } }
+    let(:scores_standardises) do
+      {
+        litteratie_cefr: -4.1, numeratie_cefr: -1.68,
+        litteratie_anlci: -4.1, numeratie_anlci: -1.68
+      }
+    end
     it do
       expect(subject.interpretations(competences_niveau1))
-        .to eq([{ litteratie: :palier0 }, { numeratie: :palier0 }])
+        .to eq([
+                 { litteratie_cefr: :palier0 }, { numeratie_cefr: :palier0 },
+                 { litteratie_anlci: :palier0 }, { numeratie_anlci: :palier0 }
+               ])
     end
   end
 
-  context 'juste au dessus des premiers paliers de literatie et numeratie' do
-    let(:scores_standardises) { { litteratie: -4.09, numeratie: -1.67 } }
+  context 'juste au dessus des premiers paliers de litteratie et numeratie' do
+    let(:scores_standardises) do
+      {
+        litteratie_cefr: -3.54, numeratie_cefr: -1.63,
+        litteratie_anlci: -4.09, numeratie_anlci: -1.67
+      }
+    end
     it do
       expect(subject.interpretations(competences_niveau1))
-        .to eq([{ litteratie: :palier1 }, { numeratie: :palier1 }])
+        .to eq([
+                 { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier1 },
+                 { litteratie_anlci: :palier1 }, { numeratie_anlci: :palier1 }
+               ])
     end
   end
 end

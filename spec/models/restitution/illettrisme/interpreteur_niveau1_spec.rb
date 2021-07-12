@@ -9,11 +9,15 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
   end
 
   describe '#interpretations' do
-    let(:interpretations) { [{ litteratie: :palier1 }, { numeratie: :palier1 }] }
+    let(:interpretations) do
+      [
+        { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier1 }
+      ]
+    end
 
     before do
       allow(interpreteur_score).to receive(:interpretations)
-        .with(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1)
+        .with(Restitution::ScoresNiveau1::METRIQUES_CEFR)
         .and_return(interpretations)
     end
 
@@ -24,7 +28,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier5 }, { numeratie: :palier5 }])
+          .and_return([
+                        { litteratie_cefr: :palier3 }, { numeratie_cefr: :palier3 }
+                      ])
       end
       it { expect(subject.socle_clea?).to eq(true) }
     end
@@ -32,7 +38,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint non atteint, litteratie insufisante' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier2 }, { numeratie: :palier3 }])
+          .and_return([
+                        { litteratie_cefr: :palier2 }, { numeratie_cefr: :palier3 }
+                      ])
       end
       it { expect(subject.socle_clea?).to eq(false) }
     end
@@ -40,7 +48,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Socle Cléa Atteint non atteint, numeratie insufisante' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier3 }, { numeratie: :palier2 }])
+          .and_return([
+                        { litteratie_cefr: :palier3 }, { numeratie_cefr: :palier2 }
+                      ])
       end
       it { expect(subject.socle_clea?).to eq(false) }
     end
@@ -48,7 +58,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Illettrisme potentiel à cause de la litteratie' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier0 }, { numeratie: :palier1 }])
+          .and_return([
+                        { litteratie_cefr: :palier0 }, { numeratie_cefr: :palier1 }
+                      ])
       end
       it { expect(subject.illettrisme_potentiel?).to eq(true) }
     end
@@ -56,7 +68,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     context 'Illettrisme potentiel à cause de la numératie' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
-          .and_return([{ litteratie: :palier1 }, { numeratie: :palier0 }])
+          .and_return([
+                        { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier0 }
+                      ])
       end
       it { expect(subject.illettrisme_potentiel?).to eq(true) }
     end

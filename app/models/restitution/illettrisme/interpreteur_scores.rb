@@ -4,8 +4,10 @@ module Restitution
   module Illettrisme
     class InterpreteurScores
       PALIERS = {
-        litteratie: [-4.1, -3.18, -2.25, -1.33, -0.4],
-        numeratie: [-1.68, -1, -0.33, 0.35, 1.02],
+        litteratie_cefr: [-3.55, -1, 0],
+        numeratie_cefr: [-1.64, -1, 0],
+        litteratie_anlci: [-4.1, -3.18, -2.25, -1.33, -0.4],
+        numeratie_anlci: [-1.68, -1, -0.33, 0.35, 1.02],
         score_ccf: [-1, 0],
         score_syntaxe_orthographe: [-1, 0],
         score_memorisation: [-1, 0],

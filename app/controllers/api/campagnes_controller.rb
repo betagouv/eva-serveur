@@ -11,7 +11,9 @@ module Api
     private
 
     def trouve_campagne
-      @campagne = Campagne.par_code(params[:code_campagne]).take!
+      @campagne = Campagne.includes(
+        situations_configurations: [:questionnaire, { situation: :questionnaire }]
+      ).par_code(params[:code_campagne]).take!
     end
   end
 end

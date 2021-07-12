@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 describe 'Admin - Evaluation', type: :feature do
+  before { Bullet.enable = false }
+  after { Bullet.enable = true }
+
   let(:ma_campagne) do
     create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'PARIS2019'
   end

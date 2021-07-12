@@ -46,6 +46,7 @@ gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'

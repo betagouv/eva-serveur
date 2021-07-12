@@ -2,20 +2,24 @@
 
 module Api
   class EvaluationsController < Api::BaseController
-    before_action :trouve_evaluation, only: %i[show update]
+    before_action :trouve_evaluation, only: :show
 
     def create
       evaluation = Evaluation.new(evaluation_params)
       if evaluation.save
-        render json: evaluation, status: :created
+        render partial: 'evaluation',
+               locals: { evaluation: evaluation },
+               status: :created
       else
         render json: evaluation.errors, status: :unprocessable_entity
       end
     end
 
     def update
+      @evaluation = Evaluation.find(params[:id])
       if @evaluation.update evaluation_params
-        render json: @evaluation
+        render partial: 'evaluation',
+               locals: { evaluation: @evaluation }
       else
         render json: @evaluation.errors, status: :unprocessable_entity
       end
@@ -33,7 +37,11 @@ module Api
     end
 
     def trouve_evaluation
-      @evaluation = Evaluation.find(params[:id])
+      @evaluation = Evaluation.includes(
+        campagne: {
+          situations_configurations: [:questionnaire, { situation: :questionnaire }]
+        }
+      ).find(params[:id])
     end
   end
 end

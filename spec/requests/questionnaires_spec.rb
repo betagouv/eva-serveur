@@ -4,14 +4,15 @@ require 'rails_helper'
 
 describe 'Questionnaires API', type: :request do
   describe 'GET /questionnaires/:id' do
-    let(:question) { create :question_qcm, intitule: 'Ma question' }
-    let(:questionnaire) { create :questionnaire, questions: [question] }
+    let(:question1) { create :question_qcm, intitule: 'Ma question 1' }
+    let(:question2) { create :question_qcm, intitule: 'Ma question 2' }
+    let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
 
     it 'retourne les questions' do
       get "/api/questionnaires/#{questionnaire.id}"
 
       expect(response).to be_ok
-      expect(JSON.parse(response.body).size).to eql(1)
+      expect(JSON.parse(response.body).size).to eql(2)
     end
 
     it "retourne une 404 lorsque le questionnaire n'existe pas" do

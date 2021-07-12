@@ -3,7 +3,8 @@
 module Api
   class QuestionnairesController < Api::BaseController
     def show
-      questionnaire = Questionnaire.find(params[:id])
+      questionnaire = Questionnaire.includes(questions: %i[illustration_attachment choix])
+                                   .find(params[:id])
       render json: questionnaire.questions
     end
   end

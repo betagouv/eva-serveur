@@ -45,6 +45,7 @@ ActiveAdmin.register Campagne do
 
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
+    before_action :situations_configurations, only: %i[show]
 
     def show
       @statistiques ||= StatistiquesCampagne.new(resource)
@@ -54,8 +55,7 @@ ActiveAdmin.register Campagne do
     private
 
     def find_resource
-      scoped_collection.includes(situations_configurations: %i[situation questionnaire])
-                       .where(id: params[:id])
+      scoped_collection.where(id: params[:id])
                        .first!
     end
 
@@ -65,8 +65,13 @@ ActiveAdmin.register Campagne do
     end
 
     def parcours_type
-      @parcours_type = ParcoursType.includes(situations_configurations: :situation)
-                                   .order(:created_at)
+      @parcours_type = ParcoursType.order(:created_at)
+    end
+
+    def situations_configurations
+      @situations_configurations = resource
+                                   .situations_configurations
+                                   .includes([:questionnaire, { situation: :questionnaire }])
     end
   end
 end

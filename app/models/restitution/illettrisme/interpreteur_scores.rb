@@ -20,7 +20,7 @@ module Restitution
 
       def interpretations(competences)
         competences.map do |competence|
-          { competence => interprete(competence, @scores[competence]) }
+          { competence => interprete(competence, score_pour_competence(competence)) }
         end
       end
 
@@ -34,6 +34,11 @@ module Restitution
         end
 
         "palier#{PALIERS[competence].count}".to_sym
+      end
+
+      def score_pour_competence(competence)
+        competence = competence.to_s.gsub(/_cefr$|_anlci$/, '').to_sym
+        @scores[competence]
       end
     end
   end

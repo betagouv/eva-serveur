@@ -40,12 +40,8 @@ describe Restitution::Illettrisme::InterpreteurScores do
   end
 
   context 'premiers paliers de literatie et numeratie' do
-    let(:scores_standardises) do
-      {
-        litteratie_cefr: -4.1, numeratie_cefr: -1.68,
-        litteratie_anlci: -4.1, numeratie_anlci: -1.68
-      }
-    end
+    let(:scores_standardises) { { litteratie: -4.1, numeratie: -1.68 } }
+
     it do
       expect(subject.interpretations(competences_niveau1))
         .to eq([
@@ -56,12 +52,8 @@ describe Restitution::Illettrisme::InterpreteurScores do
   end
 
   context 'juste au dessus des premiers paliers de litteratie et numeratie' do
-    let(:scores_standardises) do
-      {
-        litteratie_cefr: -3.54, numeratie_cefr: -1.63,
-        litteratie_anlci: -4.09, numeratie_anlci: -1.67
-      }
-    end
+    let(:scores_standardises) { { litteratie: -3.54, numeratie: -1.63 } }
+
     it do
       expect(subject.interpretations(competences_niveau1))
         .to eq([

@@ -4,6 +4,7 @@ module Restitution
   class ScoresNiveau1
     METACOMPETENCES_LITTERATIE = %i[score_ccf score_syntaxe_orthographe score_memorisation].freeze
     METACOMPETENCES_NUMERATIE = %i[score_numeratie].freeze
+    METRIQUES_NIVEAU1 = %i[litteratie numeratie].freeze
     METRIQUES_CEFR = %i[litteratie_cefr numeratie_cefr].freeze
     METRIQUES_ANLCI = %i[litteratie_anlci numeratie_anlci].freeze
 
@@ -13,10 +14,8 @@ module Restitution
 
     def calcule
       {
-        litteratie_cefr: litteratie,
-        numeratie_cefr: numeratie,
-        litteratie_anlci: litteratie,
-        numeratie_anlci: numeratie
+        litteratie: litteratie,
+        numeratie: numeratie
       }
     end
 

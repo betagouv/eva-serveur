@@ -108,17 +108,17 @@ describe Restitution::Globale do
       let(:score_litteratie_standardise) { -0.37 } # (-0.08 - 0.16) / 0.65
 
       it do
-        expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie_cefr].round(2))
+        expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
           .to eql(score_litteratie)
       end
 
       it do
-        expect(restitution_evaluation1.scores_niveau1.calcule[:numeratie_cefr])
+        expect(restitution_evaluation1.scores_niveau1.calcule[:numeratie])
           .to eql(nil)
       end
 
       it do
-        expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie_cefr]
+        expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie]
                                                                   .round(2))
           .to eql(score_litteratie_standardise)
       end

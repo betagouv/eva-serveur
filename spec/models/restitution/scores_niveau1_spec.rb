@@ -17,10 +17,8 @@ describe Restitution::ScoresNiveau1 do
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
       .to eq(
-        litteratie_cefr: (2 + 3 + 4) / 3.0,
-        numeratie_cefr: 1,
-        litteratie_anlci: (2 + 3 + 4) / 3.0,
-        numeratie_anlci: 1
+        litteratie: (2 + 3 + 4) / 3.0,
+        numeratie: 1
       )
   end
 
@@ -32,10 +30,8 @@ describe Restitution::ScoresNiveau1 do
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
       .to eq(
-        litteratie_cefr: (3 + 4) / 2.0,
-        numeratie_cefr: 1,
-        litteratie_anlci: (3 + 4) / 2.0,
-        numeratie_anlci: 1
+        litteratie: (3 + 4) / 2.0,
+        numeratie: 1
       )
   end
 end

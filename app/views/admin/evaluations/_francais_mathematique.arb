@@ -6,7 +6,8 @@ div id: 'francais_mathematiques', class: 'marges-page' do
          pdf: pdf
 
   render 'litteratie_numeratie_niveau1',
-         interpretations: restitution_globale.interpretations_niveau1,
+         interpretations: restitution_globale.interpretations_niveau1_cefr,
+         type_metriques: 'cefr',
          pdf: pdf
 
   div class: 'row my-4' do

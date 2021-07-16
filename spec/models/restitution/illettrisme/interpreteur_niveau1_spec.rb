@@ -8,8 +8,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     Restitution::Illettrisme::InterpreteurNiveau1.new interpreteur_score
   end
 
-  describe '#interpretations' do
-    let(:interpretations) do
+  describe '#interpretations_cefr' do
+    let(:interpretations_cefr) do
       [
         { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier1 }
       ]
@@ -18,10 +18,26 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     before do
       allow(interpreteur_score).to receive(:interpretations)
         .with(Restitution::ScoresNiveau1::METRIQUES_CEFR)
-        .and_return(interpretations)
+        .and_return(interpretations_cefr)
     end
 
-    it { expect(subject.interpretations).to eq(interpretations) }
+    it { expect(subject.interpretations_cefr).to eq(interpretations_cefr) }
+  end
+
+  describe '#interpretations_anlci' do
+    let(:interpretations_anlci) do
+      [
+        { litteratie_anlci: :palier1 }, { numeratie_anlci: :palier1 }
+      ]
+    end
+
+    before do
+      allow(interpreteur_score).to receive(:interpretations)
+        .with(Restitution::ScoresNiveau1::METRIQUES_ANLCI)
+        .and_return(interpretations_anlci)
+    end
+
+    it { expect(subject.interpretations_anlci).to eq(interpretations_anlci) }
   end
 
   describe '#interprete' do

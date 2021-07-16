@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+div id: 'correspondance_anlci', class: 'page' do
+  if pdf
+    render 'entete_page', restitution_globale: restitution_globale
+
+    h2 t('titre', scope: 'admin.restitutions.anlci'), class: 'text-center mt-5 mb-4'
+  else
+    h2 t('titre', scope: 'admin.restitutions.anlci')
+  end
+
+  div class: 'panel panel--avec-references' do
+    div class: 'row no-gutters recommandation-anlci marges-page' do
+      div class: 'col-auto' do
+        image_tag 'logo_anlci.png', class: 'pr-5'
+      end
+      div class: 'col' do
+        md t('recommandation', scope: 'admin.restitutions.anlci')
+      end
+    end
+    div class: 'marges-page litteratie-numeratie-niveau1-anlci' do
+      render 'litteratie_numeratie_niveau1',
+             interpretations: restitution_globale.interpretations_niveau1_anlci,
+             type_metriques: 'anlci',
+             pdf: pdf
+    end
+
+    if pdf
+      render 'pied_page', avant_pied_page: 'references_restitution_anlci'
+    else
+      render 'references_restitution_anlci'
+    end
+  end
+end

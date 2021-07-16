@@ -1,38 +1,38 @@
 # frozen_string_literal: true
 
 div class: 'references_restitution_illettrisme' do
-  scope = 'admin.restitutions.niveaux_illettrisme.references'
+  scope = 'admin.restitutions.cefr.references'
   div class: 'row marges-page' do
-    div class: 'col-auto' do
-      div svg_tag_base64 'info.svg', class: 'icone'
+    div class: 'col' do
+      div class: 'row' do
+        div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }
+        div(class: 'col texte-explications') { md t('explications', scope: scope) }
+      end
     end
     div class: 'col' do
-      div md t('explications', scope: scope)
-      div class: 'row' do
+      div class: 'row pb-5' do
         div class: 'col-auto' do
           div t('francais', scope: scope)
           div t('ordre', scope: scope), class: 'ordre'
         end
-        div class: 'col-auto' do
-          text_node svg_tag_base64 'badges/niveaupreA1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauA1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauA2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauB1-blanc.svg', class: 'badge-references'
+        div class: 'col text-right' do
+          text_node svg_tag_base64 'badges/cefr/prea1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/a1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/a2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/b1-blanc.svg', class: 'badge-references'
         end
+      end
+      div class: 'row' do
         div class: 'col-auto' do
           div t('mathematiques', scope: scope)
           div t('ordre', scope: scope), class: 'ordre'
         end
-        div class: 'col-auto' do
-          text_node svg_tag_base64 'badges/niveaupreX1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauX1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauX2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/niveauY1-blanc.svg', class: 'badge-references'
+        div class: 'col text-right' do
+          text_node svg_tag_base64 'badges/cefr/prex1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/x1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/x2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/y1-blanc.svg', class: 'badge-references'
         end
-        div class: 'col'
-      end
-      div class: 'lien-references' do
-        md t('references', scope: scope)
       end
     end
   end

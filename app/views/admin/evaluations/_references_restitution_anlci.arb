@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+div class: 'references_restitution_illettrisme' do
+  scope = 'admin.restitutions.cefr.references'
+  div class: 'row marges-page' do
+    div class: 'col' do
+      div class: 'row' do
+        div class: 'col-auto col-icone-info' do
+          div svg_tag_base64 'info.svg', class: 'icone'
+        end
+        div class: 'col' do
+          div class: 'texte-explications' do
+            md t('explications', scope: scope)
+          end
+        end
+      end
+    end
+    div class: 'col badges-referentiels text-right' do
+      text_node svg_tag_base64 'badges/anlci/1-blanc.svg', class: 'badge-references'
+      text_node svg_tag_base64 'badges/anlci/2-blanc.svg', class: 'badge-references'
+      text_node svg_tag_base64 'badges/anlci/3-blanc.svg', class: 'badge-references'
+      text_node svg_tag_base64 'badges/anlci/4-blanc.svg', class: 'badge-references'
+      text_node svg_tag_base64 'badges/anlci/4-plus-blanc.svg', class: 'badge-references'
+      text_node svg_tag_base64 'badges/anlci/4-plus-plus-blanc.svg', class: 'badge-references'
+    end
+  end
+end

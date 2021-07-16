@@ -265,7 +265,7 @@
     width: 100%;
     background-color: $couleur-texte;
     color: $eva_light;
-    padding: 1rem 0;
+    padding: 3.125rem 0;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 
@@ -273,20 +273,28 @@
       color: $eva_light;
     }
 
+    .col-icone-info {
+      display: flex;
+      align-items: center;
+    }
+
     .icone {
-      height: 3rem;
+      height: 4rem;
     }
 
     .ordre {
-      font-size: 0.8rem;
+      font-size: 0.5rem;
+    }
+
+    .badges-referentiels {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
 
     .badge-references {
-      height: 2rem;
-    }
-
-    .lien-references {
-      margin-top: 1rem;
+      height: 3rem;
+      margin-right: .3125rem;
     }
   }
 
@@ -357,6 +365,24 @@
     img {
       height: 1rem;
     }
+  }
+
+  .texte-explications {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .recommandation-anlci {
+    font-size: .75rem;
+    color: $anlci_orange;
+    border-bottom: 1px solid $anlci_orange;
+    padding-bottom: 1.5rem;
+  }
+
+  .litteratie-numeratie-niveau1-anlci {
+    padding-top: 3.75rem;
+    padding-bottom: 4.375rem;
   }
 }
 

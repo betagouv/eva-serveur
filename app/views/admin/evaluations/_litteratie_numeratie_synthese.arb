@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: "row synthese-illettrisme #{synthese}" do
-  scope = 'admin.restitutions.niveaux_illettrisme'
+  scope = 'admin.restitutions.cefr'
   div class: 'col-auto' do
     if pdf
       div svg_tag_base64 'punaise.svg'

@@ -53,8 +53,12 @@ module Restitution
       interpreteur_niveau1.synthese
     end
 
-    def interpretations_niveau1
-      interpreteur_niveau1.interpretations
+    def interpretations_niveau1_cefr
+      interpreteur_niveau1.interpretations_cefr
+    end
+
+    def interpretations_niveau1_anlci
+      interpreteur_niveau1.interpretations_anlci
     end
 
     def interpreteur_niveau1

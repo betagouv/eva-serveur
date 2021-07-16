@@ -23,6 +23,11 @@ div class: 'menu menu-transverse' do
       end
     end
     li do
+      a href: '#correspondance_anlci' do
+        text_node "Correspondance avec l'ANLCI"
+      end
+    end
+    li do
       a href: '#referentiels' do
         text_node 'Référentiels utilisés'
       end

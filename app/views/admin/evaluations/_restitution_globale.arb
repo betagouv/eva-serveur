@@ -92,7 +92,7 @@ div class: 'admin_restitution_globale' do
     div class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale
 
-      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme'), class: 'text-center mt-5 mb-4'
+      h2 t('titre', scope: 'admin.restitutions.cefr'), class: 'text-center mt-5 mb-4'
 
       div class: 'panel' do
         render 'francais_mathematique', pdf: pdf
@@ -110,7 +110,7 @@ div class: 'admin_restitution_globale' do
     end
   else
     div id: 'francais_mathematiques', class: 'page' do
-      h2 t('titre', scope: 'admin.restitutions.niveaux_illettrisme')
+      h2 t('titre', scope: 'admin.restitutions.cefr')
 
       div class: 'panel panel--avec-references' do
         render 'francais_mathematique', pdf: pdf
@@ -121,6 +121,12 @@ div class: 'admin_restitution_globale' do
       end
     end
   end
+
+  render partial: 'correspondance_anlci',
+         locals: {
+           restitution_globale: restitution_globale,
+           pdf: pdf
+         }
 end
 
 if can?(:manage, Compte) && !pdf

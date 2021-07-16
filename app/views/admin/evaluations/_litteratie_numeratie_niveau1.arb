@@ -4,22 +4,25 @@ div class: 'row' do
   interpretations.each do |competence_niveau|
     competence = competence_niveau.keys.first
     niveau = competence_niveau[competence]
-    scope = "admin.restitutions.niveaux_illettrisme.#{competence}"
+    scope = "admin.restitutions.#{type_metriques}.#{competence}"
 
     div class: 'col-auto badge' do
-      code_niveau = t("#{niveau}.code", scope: scope)
+      niveau_profil = t("#{niveau}.profil", scope: scope)
       if pdf
         div svg_tag_base64 "#{competence}.svg"
-        div svg_tag_base64 "badges/niveau#{code_niveau}.svg" if niveau.present?
+        if niveau.present?
+          div svg_tag_base64 "badges/#{type_metriques}/#{niveau_profil.parameterize}.svg"
+        end
       else
         div image_tag "#{competence}.svg"
         if niveau.present?
-          div image_tag "badges/niveau#{code_niveau}.svg", alt: "Niveau #{code_niveau}"
+          div image_tag "badges/#{type_metriques}/#{niveau_profil.parameterize}.svg",
+                        alt: "Niveau #{niveau_profil}"
         end
       end
     end
     div class: 'col' do
-      h2 class: 'mb-3' do
+      h2 class: 'mb-3 mt-0' do
         div t(:titre, scope: scope)
       end
 

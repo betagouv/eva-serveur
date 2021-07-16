@@ -176,16 +176,32 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#interpretations_niveau1' do
+  describe '#interpretations_niveau1_cefr' do
     let(:restitutions) { [] }
-    let(:interpretations) { restitution_globale.interpretations_niveau1 }
+    let(:interpretations) { restitution_globale.interpretations_niveau1_cefr }
 
     context 'sans illettrisme potentiel' do
-      let(:interpreteur_niveau1) { double(interpretations: [trop: :bon]) }
+      let(:interpreteur_niveau1_cefr) { double(interpretations_cefr: [trop: :bon]) }
 
       before do
         allow(Restitution::Illettrisme::InterpreteurNiveau1)
-          .to receive(:new).and_return(interpreteur_niveau1)
+          .to receive(:new).and_return(interpreteur_niveau1_cefr)
+      end
+
+      it { expect(interpretations).to eq [trop: :bon] }
+    end
+  end
+
+  describe '#interpretations_niveau1_anlci' do
+    let(:restitutions) { [] }
+    let(:interpretations) { restitution_globale.interpretations_niveau1_anlci }
+
+    context 'sans illettrisme potentiel' do
+      let(:interpreteur_niveau1_anlci) { double(interpretations_anlci: [trop: :bon]) }
+
+      before do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1_anlci)
       end
 
       it { expect(interpretations).to eq [trop: :bon] }

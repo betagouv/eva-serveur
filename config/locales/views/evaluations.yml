@@ -263,53 +263,83 @@ fr:
             - Orientation visuo-spatiale
             - Réalisation d’une suite de calculs mathématiques
 
-      niveaux_illettrisme:
+      cefr:
         titre: Vos compétences en français et mathématiques
         niveau: 'Niveau %{niveau}'
         litteratie_cefr:
           titre: Français
           palier0:
-            code: 'pre-A1'
+            profil: 'pre-A1'
             description: |
               Votre score indique qu’il vous est très difficile de lire et répondre à des questions en français, ou que cela vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier1:
-            code: 'A1'
+            profil: 'A1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier2:
-            code: 'A2'
+            profil: 'A2'
             description: |
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           palier3:
-            code: 'B1'
+            profil: 'B1'
             description:  |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie_cefr:
           titre: Mathématiques
           palier0:
-            code: 'pre-X1'
+            profil: 'pre-X1'
             description: |
               Votre score indique que la majorité des opérations vous semblent très difficiles ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier1:
-            code: 'X1'
+            profil: 'X1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
-            code: 'X2'
+            profil: 'X2'
             description: |
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier3:
-            code: 'Y1'
+            profil: 'Y1'
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
+        socle_clea: |
+          ### Certification Cléa indiquée
+
+          Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+
+          **Nous vous conseillons d’échanger avec votre conseiller ou votre conseillère de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
+        ni_ni: |
+          ### Vos compétences peuvent encore être améliorées
+
+          Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
+        illettrisme_potentiel: |
+          ### Formation vivement recommandée
+
+          Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
+          Il est important que vous échangiez à ce sujet avec votre conseiller.
+        references:
+          ordre: '(par ordre croissant)'
+          francais: 'Français :'
+          mathematiques: 'Mathématiques :'
+          explications: |
+            Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
+
+            Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :
+            [https://l.incubateur.net/eva-clea](https://l.incubateur.net/eva-clea)
+      anlci:
+        titre: "Correspondance avec l’ANLCI"
+        recommandation: |
+          Nous recommandons **aux personnes évaluées en France** de se référer à la restitution basée sur les degrés d'éloignement de l'illettrisme de l'Agence Nationale de Lutte Contre l'Illettrisme (ANLCI).
+
+          *La correspondance entre eva et les profils ANLCI est faite sur la base de tests psychométriques menés dans le cadre d'une campagne d'évaluation conjointe sur un échantillon de 600 personnes.*
         litteratie_anlci:
           titre: Français
           palier0:
@@ -376,27 +406,3 @@ fr:
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
               **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
-        socle_clea: |
-          ### Certification Cléa indiquée
-
-          Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
-
-          **Nous vous conseillons d’échanger avec votre conseiller ou votre conseillère de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
-        ni_ni: |
-          ### Vos compétences peuvent encore être améliorées
-
-          Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
-        illettrisme_potentiel: |
-          ### Formation vivement recommandée
-
-          Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
-          Il est important que vous échangiez à ce sujet avec votre conseiller.
-        references:
-          ordre: '(par ordre croissant)'
-          francais: 'Français :'
-          mathematiques: 'Mathématiques :'
-          explications: |
-            Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
-          references: |
-            Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :
-            [https://l.incubateur.net/eva-clea](https://l.incubateur.net/eva-clea)

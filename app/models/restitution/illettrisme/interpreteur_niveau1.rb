@@ -8,11 +8,11 @@ module Restitution
       end
 
       def socle_clea?
-        interpretations.all? { |score| score.values[0] == :palier3 }
+        interpretations_cefr.all? { |score| score.values[0] == :palier3 }
       end
 
       def illettrisme_potentiel?
-        interpretations.any? { |score| score.values[0] == :palier0 }
+        interpretations_cefr.any? { |score| score.values[0] == :palier0 }
       end
 
       def synthese
@@ -25,9 +25,18 @@ module Restitution
         end
       end
 
-      def interpretations
-        @interpretations ||= @interpreteur_score
-                             .interpretations(Restitution::ScoresNiveau1::METRIQUES_CEFR)
+      def interpretations_cefr
+        @interpretations_cefr ||= score_pour_metriques(Restitution::ScoresNiveau1::METRIQUES_CEFR)
+      end
+
+      def interpretations_anlci
+        @interpretations_anlci ||= score_pour_metriques(Restitution::ScoresNiveau1::METRIQUES_ANLCI)
+      end
+
+      private
+
+      def score_pour_metriques(metriques)
+        @interpreteur_score.interpretations(metriques)
       end
     end
   end

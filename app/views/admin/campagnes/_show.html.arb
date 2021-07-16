@@ -20,14 +20,12 @@ div class: 'row' do
             text_node rendu_code.html_safe
           end
           code = campagne.code
-          input class: 'input-copier-coller', type: 'text', value: code
-          button 'Copier le code', class: 'button copier-coller'
+          button 'Copier le code', class: 'button copier-coller', 'data-clipboard-text': code
         end
         row(:url) { lien_campagne(campagne) }
 
         url = url_campagne(campagne.code)
-        input class: 'input-copier-coller', type: 'text', value: url
-        button "Copier l'URL", class: 'button copier-coller'
+        button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
       end
     end
 

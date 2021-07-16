@@ -9,3 +9,7 @@
 //= require flashes
 
 jQuery.datetimepicker.setLocale('fr');
+
+document.addEventListener('DOMContentLoaded', () => {
+  new ClipboardJS('.copier-coller');
+});

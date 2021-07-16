@@ -29,8 +29,7 @@ div class: 'bloc-apercu' do
         span class: 'campagne-url' do
           url = url_campagne(campagne.code)
           a url, href: url, target: 'blank'
-          input class: 'input-copier-coller', type: 'text', value: url
-          button "Copier l'URL", class: 'button copier-coller'
+          button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
         end
       end
     end

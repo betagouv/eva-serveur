@@ -44,6 +44,10 @@ gem 'truemail'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-clipboard'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'bullet'

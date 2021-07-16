@@ -38,6 +38,7 @@ class Compte < ApplicationRecord
   private
 
   def verifie_dns_email
+    return if email.blank?
     return unless email_changed?
     return if Truemail.valid?(email)
 

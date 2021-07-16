@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+json.id evaluation.id
 json.nom evaluation.nom
 json.campagne_id evaluation.campagne_id
 json.email evaluation.email

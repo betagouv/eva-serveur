@@ -16,6 +16,10 @@ describe 'Evaluation API', type: :request do
         evaluation = Evaluation.last
         expect(evaluation.campagne).to eq campagne_ete19
         expect(evaluation.nom).to eq 'Roger'
+
+        expect(response).to have_http_status(201)
+        reponse = JSON.parse(response.body)
+        expect(reponse['id']).to eq evaluation.id
       end
     end
 

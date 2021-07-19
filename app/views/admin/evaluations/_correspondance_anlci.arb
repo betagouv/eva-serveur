@@ -12,7 +12,11 @@ div id: 'correspondance_anlci', class: 'page' do
   div class: 'panel panel--avec-references' do
     div class: 'row no-gutters recommandation-anlci marges-page' do
       div class: 'col-auto' do
-        image_tag 'logo_anlci.png', class: 'pr-5'
+        if pdf
+          wicked_pdf_image_tag 'logo_anlci.png', class: 'pr-5'
+        else
+          image_tag 'logo_anlci.png', class: 'pr-5'
+        end
       end
       div class: 'col' do
         md t('recommandation', scope: 'admin.restitutions.anlci')

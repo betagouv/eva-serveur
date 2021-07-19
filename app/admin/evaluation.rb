@@ -49,7 +49,8 @@ ActiveAdmin.register Evaluation do
   form partial: 'form'
 
   controller do
-    helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques
+    helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
+                  :mes_avec_redaction_de_notes
 
     def show
       show! do |format|
@@ -75,6 +76,13 @@ ActiveAdmin.register Evaluation do
     def restitution_globale
       @restitution_globale ||=
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+    end
+
+    def mes_avec_redaction_de_notes
+      @mes_avec_redaction_de_notes ||= restitution_globale.restitutions.select do |restitution|
+        %w[questions livraison].include?(restitution.situation.nom_technique) &&
+          !restitution.questions_redaction.empty?
+      end
     end
 
     def auto_positionnement

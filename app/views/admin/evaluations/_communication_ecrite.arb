@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-mes_avec_redaction_de_notes = restitution_globale.restitutions.select do |restitution|
-  %w[questions livraison].include?(restitution.situation.nom_technique) &&
-    !restitution.questions_redaction.empty?
-end
-unless mes_avec_redaction_de_notes.empty?
+if mes_avec_redaction_de_notes.present?
   div class: 'marges-page' do
     mes_avec_redaction_de_notes.each do |restitution|
       situation = restitution.situation

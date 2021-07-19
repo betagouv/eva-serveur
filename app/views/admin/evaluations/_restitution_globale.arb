@@ -101,12 +101,14 @@ div class: 'admin_restitution_globale' do
       render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
     end
 
-    div class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale
+    if mes_avec_redaction_de_notes.present?
+      div class: 'page' do
+        render 'entete_page', restitution_globale: restitution_globale
 
-      render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+        render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
-      render 'pied_page'
+        render 'pied_page'
+      end
     end
   else
     div id: 'francais_mathematiques', class: 'page' do

@@ -212,4 +212,41 @@ describe Ability do
       it { is_expected.to be_able_to(:read, mon_collegue) }
     end
   end
+
+  context 'Compte en attente de validation' do
+    let!(:compte) { create :compte_conseiller, :structure_avec_admin, :en_attente }
+    let!(:ma_campagne) { create :campagne, compte: compte }
+    let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne }
+
+    let!(:autre_compte) { create :compte_conseiller, structure: compte.structure }
+    let!(:autre_campagne) { create :campagne, compte: autre_compte }
+    let!(:autre_evaluation) { create :evaluation, campagne: autre_campagne }
+
+    it 'peut créer une campagne' do
+      is_expected.to be_able_to(:create, Campagne.new)
+    end
+
+    it 'peut lire ses campagnes' do
+      is_expected.to be_able_to(:read, ma_campagne)
+    end
+
+    it 'peut consulter son compte' do
+      is_expected.to be_able_to(:read, compte)
+    end
+
+    it 'ne peut pas consulter ses collègues' do
+      is_expected.not_to be_able_to(:read, autre_compte)
+      is_expected.not_to be_able_to(:update, autre_compte)
+    end
+
+    it 'ne peut pas accéder aux campagnes de ses collègues' do
+      is_expected.to_not be_able_to(:read, autre_campagne)
+      is_expected.to_not be_able_to(:destroy, autre_campagne)
+    end
+
+    it 'ne peut pas accéder aux évaluations de ses collègues ni les supprimer' do
+      is_expected.to_not be_able_to(:read, autre_evaluation)
+      is_expected.to_not be_able_to(:destroy, autre_evaluation)
+    end
+  end
 end

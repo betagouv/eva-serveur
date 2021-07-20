@@ -31,7 +31,8 @@ class Ability
 
   def droit_campagne(compte)
     can :create, Campagne
-    can %i[update read], Campagne, comptes_de_meme_structure(compte)
+    can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
+    can %i[update read], Campagne, compte_id: compte.id
     can :destroy, Campagne do |c|
       Evaluation.where(campagne: c).count.zero?
     end
@@ -39,7 +40,11 @@ class Ability
 
   def droit_evaluation(compte)
     cannot %i[create], Evaluation
-    can %i[read destroy], Evaluation, campagne: comptes_de_meme_structure(compte)
+    if compte.validation_acceptee?
+      can %i[read destroy], Evaluation,
+          campagne: comptes_de_meme_structure(compte)
+    end
+    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
   end
 
   def droit_evenement(compte)
@@ -82,10 +87,11 @@ class Ability
   end
 
   def droit_compte(compte)
-    can :read, Compte, structure_id: compte.structure_id
-    can :update, Compte, id: compte.id
-    can :create, Compte if compte.admin? || compte.compte_generique?
+    can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
     can :update, Compte, structure_id: compte.structure_id if compte.admin?
+    can :read, compte
+    can :update, compte
+    can :create, Compte if compte.admin? || compte.compte_generique?
     can :edit_role, Compte if compte.admin?
     cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }
   end

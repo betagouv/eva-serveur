@@ -22,6 +22,9 @@ FactoryBot.define do
     end
     factory :compte_conseiller do
       role { 'conseiller' }
+      trait :en_attente do
+        statut_validation { :en_attente }
+      end
     end
     factory :compte_generique do
       role { 'compte_generique' }

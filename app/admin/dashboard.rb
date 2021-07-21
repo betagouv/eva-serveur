@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Dashboard' do
   controller do
     before_action do
       flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe unless annonce.blank?
-      if comptes_en_attente?
+      if comptes_en_attente? && current_compte.validation_acceptee?
         lien = admin_comptes_url(q: { statut_validation_eq: 'en_attente' })
         flash.now[:comptes_en_attente] =
           "<span>#{t('.info_comptes_en_attente', lien: lien)}</span>".html_safe

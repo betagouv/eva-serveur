@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-render 'admin/validation_necessaire/validation_necessaire' if current_compte.validation_en_attente?
+render 'validation_necessaire' if current_compte.validation_en_attente?
 
 if evaluations.present?
   columns do

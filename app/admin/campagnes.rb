@@ -23,8 +23,6 @@ ActiveAdmin.register Campagne do
   filter :questionnaire
   filter :created_at
 
-  includes :compte
-
   index do
     column :libelle
     column :code
@@ -53,6 +51,14 @@ ActiveAdmin.register Campagne do
     end
 
     private
+
+    def scoped_collection
+      if can?(:manage, Compte)
+        end_of_association_chain.includes(:compte)
+      else
+        end_of_association_chain
+      end
+    end
 
     def find_resource
       scoped_collection.where(id: params[:id])

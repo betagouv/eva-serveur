@@ -8,7 +8,6 @@ ActiveAdmin.register_page 'Validation nécessaire' do
   end
 
   controller do
-    skip_before_action :verifie_validation_necessaire
     before_action :recupere_support
 
     def recupere_support

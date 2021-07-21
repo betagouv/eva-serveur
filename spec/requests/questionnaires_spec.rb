@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe 'Questionnaires API', type: :request do
   describe 'GET /questionnaires/:id' do
-    let(:question1) { create :question_qcm, intitule: 'Ma question 1' }
-    let(:question2) { create :question_qcm, intitule: 'Ma question 2' }
+    let(:question1) { create :question_redaction_note, intitule: 'Ma question 1' }
+    let(:question2) { create :question_redaction_note, intitule: 'Ma question 2' }
     let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
 
     it 'retourne les questions' do

@@ -35,6 +35,10 @@ class Compte < ApplicationRecord
     Compte.where(structure: structure, role: %w[admin superadmin])
   end
 
+  def nouveau_compte?
+    sign_in_count <= 4
+  end
+
   private
 
   def verifie_dns_email

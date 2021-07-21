@@ -3,6 +3,7 @@
 render 'validation_necessaire' if current_compte.validation_en_attente?
 
 if evaluations.present?
+  render 'prise_en_main', campagnes: campagnes if current_compte.nouveau_compte?
   columns do
     column do
       render 'evaluations', evaluations: evaluations

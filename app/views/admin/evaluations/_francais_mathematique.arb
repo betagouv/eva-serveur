@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-div id: 'francais_mathematiques', class: 'marges-page' do
+div id: 'francais_mathematiques', class: 'francais-mathematiques marges-page' do
+  if !pdf && (restitution_globale.synthese == 'illettrisme_potentiel')
+    render 'demande_aide_illettrisme'
+  end
+
   render 'litteratie_numeratie_synthese',
          synthese: restitution_globale.synthese,
          pdf: pdf

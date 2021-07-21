@@ -1,4 +1,5 @@
 @import "variables";
+@import "../admin/mixins";
 
 .admin-scores {
   margin-top: 1rem;
@@ -25,7 +26,7 @@
     color: $eva_dark;
     font-weight: bold;
     font-size: 1.5rem;
-    margin: 3rem 0 2rem;
+    margin: 3rem 0 2.5rem;
   }
 
   h3 {
@@ -242,6 +243,50 @@
       background-color: $couleur-legere-accent-validation;
       h3 {
         color: $eva_dark;
+      }
+    }
+  }
+
+  .demande-aide {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    position: absolute;
+    top: -2rem;
+    right: 1.75rem;
+    border-radius: .5rem;
+    color: #fff;
+    background-color: $eva_dark;
+    &:after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      bottom: -16px;
+      left: -10px;
+      border-width: 0 26px 38px 32px;
+      border-color: transparent transparent $eva_dark transparent;
+      border-style: solid;
+      border-radius: 0.35rem;
+      transform: rotate(90deg);
+    }
+    .aide {
+      &-icone {
+        margin-right: 1rem;
+      }
+      &-description {
+        margin-right: 3.5rem;
+        line-height: 1.2;
+        p {
+          margin-bottom: 0;
+        }
+      }
+      &-cta {
+        .action {
+          @include bouton;
+          padding: 0.3rem 0.8rem;
+          border-radius: 0.25rem;
+        }
       }
     }
   }

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+render 'admin/validation_necessaire/validation_necessaire' if current_compte.validation_en_attente?
+
 if evaluations.present?
   columns do
     column do
@@ -20,7 +22,7 @@ if campagnes.present?
 end
 
 if can?(:manage, Compte)
-  panel t('.statistiques.titre') do
+  panel t('.statistiques.titre'), class: 'panel--transparent' do
     text_node %(<iframe
       src="https://metabase.eva.beta.gouv.fr/public/dashboard/f9549f07-b9a1-4fe7-8961-2a127bf27d22"
       frameborder="0"

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-panel t('.titre') do
+h3 t('.titre'), class: 'titre'
+
+div class: 'panel' do
   md t('.description', telephone: support&.telephone, email: support&.email)
 end

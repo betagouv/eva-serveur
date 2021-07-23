@@ -2,6 +2,7 @@
 
 ActiveAdmin.register DemandeAccompagnement do
   belongs_to :evaluation, optional: true
+  menu false
   permit_params :conseiller_nom, :conseiller_prenom, :conseiller_email,
                 :conseiller_telephone, :probleme_rencontre, :probleme_rencontre_custom,
                 :compte_id, :evaluation_id

@@ -21,3 +21,9 @@ fr:
     actions:
       demande_accompagnement:
         create: Envoyer
+  active_admin:
+    resources:
+      demande_accompagnement:
+        delete_model: Supprimer
+        new_model: Accompagnement illettrisme
+        edit_model: Modification de la demande

@@ -9,4 +9,5 @@ fr:
     formats:
       <<: *formats
       date_heure: "%d/%m/%Y %H:%M:%S"
+      date_heure_sans_secondes: "%d/%m/%Y à %H:%M"
       humain: "%e %B %Y, %H:%M"

@@ -34,6 +34,9 @@ form {
       fieldset {
         flex: 1;
         &:not(.inputs) ol {
+          padding-left: 0%;
+        }
+        &:not(.inputs) legend + ol {
           padding-left:33%;
         }
       }
@@ -153,6 +156,9 @@ form {
       box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
     }
   }
+  textarea {
+    border-radius: .25rem;
+  }
   ::placeholder {
     color: $couleur-texte;
   }
@@ -218,5 +224,14 @@ form:not(.filter_form) .select2-container {
   }
   .select2-selection__rendered {
     color: $eva_dark;
+  }
+}
+
+.textarea {
+  width: 100%;
+  resize: vertical;
+
+  &--small {
+    height: 3rem;
   }
 }

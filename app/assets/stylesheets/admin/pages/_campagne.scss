@@ -1,21 +1,27 @@
-.admin_campagnes {
+.admin_campagnes, .admin_demandes_accompagnement {
   $grid-columns:      8;
   $grid-gutter-width: 1.25rem;
   $largeur-colonne: 135px;
   $largeur-goutiere: 20px;
   @import "../../bootstrap_minimal";
 
+  .titre {
+    @include titre;
+    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
+    color: $eva_main_blue;
+    &--medium {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: $eva_dark;
+    }
+  }
+  .sous-titre {
+    @include titre;
+    margin-bottom: 1rem;
+  }
+
   &.show {
-    .titre {
-      @include titre;
-      margin-bottom: 1.5rem;
-      font-size: 2.25rem;
-      color: $eva_main_blue;
-    }
-    .sous-titre {
-      @include titre;
-      margin-bottom: 1rem;
-    }
     .panel {
       font-size: 0.875rem;
       > ul {
@@ -96,15 +102,6 @@
   }
 
   .nouvelle-campagne {
-    .titre {
-      @include titre;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      &--medium {
-        font-size: 1.25rem;
-      }
-    }
-
     .description {
       font-size: 0.875rem;
       font-style: italic;

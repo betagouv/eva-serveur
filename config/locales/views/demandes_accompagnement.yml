@@ -1,0 +1,11 @@
+fr:
+  admin:
+    demandes_accompagnement:
+      form:
+        titre: Formulaire de demande d’accompagnement
+        explication: Si vous rencontrez des difficultés à accompagner les bénéficiaires à qui l’outil a fortement recommandé une formation, veuillez compléter les informations de cette page et cliquer sur “Envoyer”
+        titre_informations: Vos informations personnelles
+        explication_informations_personnelles: Veuillez saisir des informations personnelles et non génériques afin de nous permettre de vous recontacter facilement.
+        titre_probleme_rencontre: Quel problème rencontrez-vous ?
+        titre_restitution: La restitution concernée
+        explication_restitution: Ces informations ne sont pas modifiables et nous permettront de mieux traiter ce dossier.

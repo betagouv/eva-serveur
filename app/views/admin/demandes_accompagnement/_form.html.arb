@@ -1,14 +1,57 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, evaluation, resource] do |f|
-  f.inputs do
-    f.input :conseiller_nom
-    f.input :conseiller_prenom
-    f.input :conseiller_email
-    f.input :conseiller_telephone
+div class: 'nouvelle-campagne' do
+  div class: 'row' do
+    div class: 'offset-1 col-4' do
+      h1 t('.titre'), class: 'titre'
+      div class: 'panel description' do
+        para { t('.explication') }
+      end
 
-    f.input :probleme_rencontre, as: :radio, collection: collection_problemes_rencontre
-    f.input :probleme_rencontre_custom, as: :text, label: false
+      active_admin_form_for [:admin, evaluation, resource] do |f|
+        h2 t('.titre_informations'), class: 'titre titre--medium'
+        div class: 'panel' do
+          para t('.explication_informations_personnelles'),
+               class: 'description description--secondaire'
+          f.inputs do
+            f.input :conseiller_nom
+            f.input :conseiller_prenom
+            f.input :conseiller_email
+            f.input :conseiller_telephone
+          end
+        end
+
+        h2 t('.titre_probleme_rencontre'), class: 'titre titre--medium'
+        div class: 'panel' do
+          f.inputs do
+            f.input :probleme_rencontre, as: :radio, collection: collection_problemes_rencontre,
+                                         label: false
+            f.input :probleme_rencontre_custom, as: :text, label: false,
+                                                input_html: { class: 'textarea textarea--small' }
+          end
+        end
+
+        h2 t('.titre_restitution'), class: 'titre titre--medium'
+        div class: 'panel' do
+          para t('.explication_restitution'), class: 'description description--secondaire'
+          div do
+            div do
+              span 'Bénéficiaire'
+              strong evaluation.nom
+            end
+            div do
+              span 'Date de l’évaluation'
+              strong l(evaluation.created_at, format: :date_heure_sans_secondes)
+            end
+            div do
+              span 'Référence de l’évaluation'
+              strong evaluation.id
+            end
+          end
+        end
+
+        actions
+      end
+    end
   end
-  actions
 end

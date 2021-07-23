@@ -45,6 +45,7 @@ class Ability # rubocop:disable Metrics/ClassLength
           campagne: comptes_de_meme_structure(compte)
     end
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
+    can :create, DemandeAccompagnement
   end
 
   def droit_evenement(compte)

@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+active_admin_form_for [:admin, evaluation, resource] do |f|
+  f.inputs do
+    f.input :conseiller_nom
+    f.input :conseiller_prenom
+    f.input :conseiller_email
+    f.input :conseiller_telephone
+
+    f.input :probleme_rencontre, as: :radio, collection: collection_problemes_rencontre
+    f.input :probleme_rencontre_custom, as: :text, label: false
+  end
+  actions
+end

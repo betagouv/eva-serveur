@@ -186,6 +186,7 @@ describe Ability do
     it { is_expected.to_not be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read destroy], evaluation_conseiller) }
+    it { is_expected.to be_able_to(:create, DemandeAccompagnement.new) }
     it { is_expected.to be_able_to(:read, evenement_conseiller) }
     it { is_expected.to be_able_to(%i[update read], Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:destroy, Campagne.new(compte: compte)) }

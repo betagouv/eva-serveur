@@ -1,0 +1,23 @@
+fr:
+  activerecord:
+    models:
+      demande_accompagnement:
+        one: Demande d'accompagnement
+        other: Demandes d'accompagnements
+    attributes:
+      demande_accompagnement:
+        created_at: Créée le
+        updated_at: Mise à jour le
+        conseiller_nom: Nom
+        conseiller_prenom: Prénom
+        conseiller_email: Email
+        conseiller_telephone: Téléphone
+        probleme_rencontre: Problème rencontré
+  formtastic:
+    labels:
+      demande_accompagnement:
+        new:
+          probleme_rencontre: Quel problème rencontrez-vous ?
+    actions:
+      demande_accompagnement:
+        create: Envoyer

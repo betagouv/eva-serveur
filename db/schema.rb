@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_134800) do
+ActiveRecord::Schema.define(version: 2021_07_23_083454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -134,6 +134,20 @@ ActiveRecord::Schema.define(version: 2021_06_09_134800) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "telephone"
     t.index ["compte_id"], name: "index_contacts_on_compte_id"
+  end
+
+  create_table "demandes_accompagnement", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "conseiller_nom"
+    t.string "conseiller_prenom"
+    t.string "conseiller_email"
+    t.string "conseiller_telephone"
+    t.uuid "compte_id", null: false
+    t.text "probleme_rencontre"
+    t.uuid "evaluation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["compte_id"], name: "index_demandes_accompagnement_on_compte_id"
+    t.index ["evaluation_id"], name: "index_demandes_accompagnement_on_evaluation_id"
   end
 
   create_table "evaluations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -271,6 +285,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_134800) do
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
   add_foreign_key "contacts", "comptes"
+  add_foreign_key "demandes_accompagnement", "comptes"
+  add_foreign_key "demandes_accompagnement", "evaluations"
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade

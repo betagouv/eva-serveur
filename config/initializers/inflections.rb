@@ -19,6 +19,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'question_frequente', 'questions_frequentes'
   inflect.irregular 'statut_validation', 'statuts_validation'
   inflect.irregular 'parcours_type', 'parcours_type'
+  inflect.irregular 'demande_accompagnement', 'demandes_accompagnement'
 end
 
 # These inflection rules are supported but not enabled by default:

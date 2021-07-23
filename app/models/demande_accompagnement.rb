@@ -7,6 +7,9 @@ class DemandeAccompagnement < ApplicationRecord
   validates :conseiller_nom, :conseiller_prenom, :conseiller_email,
             :conseiller_telephone, :probleme_rencontre, presence: true
 
+  auto_strip_attributes :conseiller_nom, :conseiller_prenom, :conseiller_email,
+                        :conseiller_telephone, :probleme_rencontre, squish: true
+
   PROBLEMES_RENCONTRE_COURANTS = [
     'Je ne sais pas où trouver une formation dans la zone géographique',
     "Il n'y a pas de place dans les organismes de formation avec lesquels je travaille",

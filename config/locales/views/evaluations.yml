@@ -270,7 +270,7 @@ fr:
       cefr:
         titre: Vos compétences en français et mathématiques
         niveau: 'Niveau %{niveau}'
-        litteratie_cefr:
+        litteratie:
           titre: Français
           palier0:
             profil: 'pre-A1'
@@ -292,7 +292,7 @@ fr:
             description:  |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
-        numeratie_cefr:
+        numeratie:
           titre: Mathématiques
           palier0:
             profil: 'pre-X1'
@@ -344,7 +344,7 @@ fr:
           Nous recommandons **aux personnes évaluées en France** de se référer à la restitution basée sur les degrés d'éloignement de l'illettrisme de l'Agence Nationale de Lutte Contre l'Illettrisme (ANLCI).
 
           *La correspondance entre eva et les profils ANLCI est faite sur la base de tests psychométriques menés dans le cadre d'une campagne d'évaluation conjointe sur un échantillon de 600 personnes.*
-        litteratie_anlci:
+        litteratie:
           titre: Français
           palier0:
             profil: '1'
@@ -377,7 +377,7 @@ fr:
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
               **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
-        numeratie_anlci:
+        numeratie:
           titre: Mathématiques
           palier0:
             profil: '1'

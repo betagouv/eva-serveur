@@ -4,41 +4,44 @@ module Restitution
   module Illettrisme
     class InterpreteurScores
       PALIERS = {
-        litteratie_cefr: [-3.55, -1, 0],
-        numeratie_cefr: [-1.64, -1, 0],
-        litteratie_anlci: [-4.1, -3.18, -2.25, -1.33, -0.4],
-        numeratie_anlci: [-1.68, -1, -0.33, 0.35, 1.02],
-        score_ccf: [-1, 0],
-        score_syntaxe_orthographe: [-1, 0],
-        score_memorisation: [-1, 0],
-        score_numeratie: [-1, 0]
+        CEFR: {
+          litteratie: [-3.55, -1, 0],
+          numeratie: [-1.64, -1, 0]
+        },
+        ANLCI: {
+          litteratie: [-4.1, -3.18, -2.25, -1.33, -0.4],
+          numeratie: [-1.68, -1, -0.33, 0.35, 1.02]
+        },
+        TOUT_REFERENTIEL: {
+          score_ccf: [-1, 0],
+          score_syntaxe_orthographe: [-1, 0],
+          score_memorisation: [-1, 0],
+          score_numeratie: [-1, 0]
+        }
       }.freeze
 
       def initialize(scores)
         @scores = scores
       end
 
-      def interpretations(competences)
+      def interpretations(competences, referentiel = :TOUT_REFERENTIEL)
         competences.map do |competence|
-          { competence => interprete(competence, score_pour_competence(competence)) }
+          { competence => interprete(competence,
+                                     referentiel,
+                                     @scores[competence]) }
         end
       end
 
       private
 
-      def interprete(competence, score)
+      def interprete(competence, referentiel, score)
         return if score.blank?
 
-        PALIERS[competence].each_with_index do |palier, index|
+        PALIERS[referentiel][competence].each_with_index do |palier, index|
           return "palier#{index}".to_sym if score <= palier
         end
 
-        "palier#{PALIERS[competence].count}".to_sym
-      end
-
-      def score_pour_competence(competence)
-        competence = competence.to_s.gsub(/_cefr$|_anlci$/, '').to_sym
-        @scores[competence]
+        "palier#{PALIERS[referentiel][competence].count}".to_sym
       end
     end
   end

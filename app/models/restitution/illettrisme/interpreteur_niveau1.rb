@@ -26,17 +26,20 @@ module Restitution
       end
 
       def interpretations_cefr
-        @interpretations_cefr ||= score_pour_metriques(Restitution::ScoresNiveau1::METRIQUES_CEFR)
+        @interpretations_cefr ||= interprete_score_pour(:CEFR)
       end
 
       def interpretations_anlci
-        @interpretations_anlci ||= score_pour_metriques(Restitution::ScoresNiveau1::METRIQUES_ANLCI)
+        @interpretations_anlci ||= interprete_score_pour(:ANLCI)
       end
 
       private
 
-      def score_pour_metriques(metriques)
-        @interpreteur_score.interpretations(metriques)
+      def interprete_score_pour(referentiel)
+        @interpreteur_score.interpretations(
+          Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
+          referentiel
+        )
       end
     end
   end

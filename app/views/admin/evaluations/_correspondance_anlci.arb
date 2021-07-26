@@ -25,7 +25,7 @@ div id: 'correspondance_anlci', class: 'page' do
     div class: 'marges-page litteratie-numeratie-niveau1-anlci' do
       render 'litteratie_numeratie_niveau1',
              interpretations: restitution_globale.interpretations_niveau1_anlci,
-             type_metriques: 'anlci',
+             referentiel: 'anlci',
              pdf: pdf
     end
 

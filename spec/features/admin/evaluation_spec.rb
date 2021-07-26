@@ -84,8 +84,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
               .and_return(
                 [
-                  { litteratie_cefr: :palier1 },
-                  { numeratie_cefr: :palier1 }
+                  { litteratie: :palier1 },
+                  { numeratie: :palier1 }
                 ]
               )
             visit admin_evaluation_path(mon_evaluation_bienvenue)
@@ -97,8 +97,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1_anlci)
               .and_return(
                 [
-                  { litteratie_anlci: :palier2 },
-                  { numeratie_anlci: :palier3 }
+                  { litteratie: :palier2 },
+                  { numeratie: :palier3 }
                 ]
               )
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr).and_return([])
@@ -112,8 +112,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
               .and_return(
                 [
-                  { litteratie_cefr: nil },
-                  { numeratie_cefr: nil }
+                  { litteratie: nil },
+                  { numeratie: nil }
                 ]
               )
             visit admin_evaluation_path(mon_evaluation_bienvenue)
@@ -125,8 +125,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
               .and_return(
                 [
-                  { litteratie_cefr: :palier3 },
-                  { numeratie_cefr: :palier3 }
+                  { litteratie: :palier3 },
+                  { numeratie: :palier3 }
                 ]
               )
             allow(restitution_globale).to receive(:synthese).and_return('socle_clea')
@@ -139,8 +139,8 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
               .and_return(
                 [
-                  { litteratie_cefr: :palier1 },
-                  { numeratie_cefr: :palier1 }
+                  { litteratie: :palier1 },
+                  { numeratie: :palier1 }
                 ]
               )
             allow(restitution_globale).to receive(:synthese).and_return('illettrisme_potentiel')
@@ -157,10 +157,10 @@ describe 'Admin - Evaluation', type: :feature do
 
           it 'de litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau2)
-              .with(:litteratie_cefr)
+              .with(:litteratie)
               .and_return([{ score_ccf: :palier0 }])
             allow(restitution_globale).to receive(:interpretations_niveau2)
-              .with(:numeratie_cefr)
+              .with(:numeratie)
               .and_return([{ score_numeratie: :palier0 }])
             visit admin_evaluation_path(mon_evaluation_bienvenue)
 

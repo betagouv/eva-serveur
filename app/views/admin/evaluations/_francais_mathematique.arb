@@ -11,7 +11,7 @@ div id: 'francais_mathematiques', class: 'francais-mathematiques marges-page' do
 
   render 'litteratie_numeratie_niveau1',
          interpretations: restitution_globale.interpretations_niveau1_cefr,
-         type_metriques: 'cefr',
+         referentiel: 'cefr',
          pdf: pdf
 
   div class: 'row my-4' do
@@ -19,13 +19,13 @@ div id: 'francais_mathematiques', class: 'francais-mathematiques marges-page' do
       img # place holder
     end
     div class: 'col' do
-      render 'metacompetences', categorie: :litteratie_cefr
+      render 'metacompetences', categorie: :litteratie
     end
     div class: 'col-auto badge' do
       img # place holder
     end
     div class: 'col' do
-      render 'metacompetences', categorie: :numeratie_cefr
+      render 'metacompetences', categorie: :numeratie
     end
   end
 end

@@ -4,62 +4,62 @@ require 'rails_helper'
 
 describe Restitution::Illettrisme::InterpreteurScores do
   let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
-  let(:competences) { %i[score_ccf score_memorisation] }
-  let(:competences_niveau1) { %i[litteratie_cefr numeratie_cefr litteratie_anlci numeratie_anlci] }
 
-  context 'pas de score à interpreter' do
-    let(:scores_standardises) { {} }
-    it do
-      expect(subject.interpretations(competences))
-        .to eq([{ score_ccf: nil }, { score_memorisation: nil }])
+  context 'pour des compétences de niveau 2' do
+    let(:competences) { %i[score_ccf score_memorisation] }
+
+    context 'pas de score à interpreter' do
+      let(:scores_standardises) { {} }
+      it do
+        expect(subject.interpretations(competences))
+          .to eq([{ score_ccf: nil }, { score_memorisation: nil }])
+      end
+    end
+
+    context 'competence <= à -1' do
+      let(:scores_standardises) { { score_ccf: -1, score_memorisation: -4 } }
+      it do
+        expect(subject.interpretations(competences))
+          .to eq([{ score_ccf: :palier0 }, { score_memorisation: :palier0 }])
+      end
+    end
+
+    context '-1 < competence <= à 0' do
+      let(:scores_standardises) { { score_ccf: -0.99, score_memorisation: 0 } }
+      it do
+        expect(subject.interpretations(competences))
+          .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])
+      end
+    end
+
+    context 'competence > à 0' do
+      let(:scores_standardises) { { score_ccf: 0.1 } }
+      it do
+        expect(subject.interpretations(competences))
+          .to eq([{ score_ccf: :palier2 }, { score_memorisation: nil }])
+      end
     end
   end
 
-  context 'competence <= à -1' do
-    let(:scores_standardises) { { score_ccf: -1, score_memorisation: -4 } }
-    it do
-      expect(subject.interpretations(competences))
-        .to eq([{ score_ccf: :palier0 }, { score_memorisation: :palier0 }])
+  context 'pour les compétences de niveau 1' do
+    context 'sait interpreter les competences dans le référenciel CEFR' do
+      let(:scores_standardises) { { litteratie: -3.55, numeratie: -1.64 } }
+
+      it do
+        expect(subject.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
+                                       :CEFR))
+          .to eq([{ litteratie: :palier0 }, { numeratie: :palier0 }])
+      end
     end
-  end
 
-  context '-1 < competence <= à 0' do
-    let(:scores_standardises) { { score_ccf: -0.99, score_memorisation: 0 } }
-    it do
-      expect(subject.interpretations(competences))
-        .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])
-    end
-  end
+    context 'sait interpreter les competences dans le référenciel ANLCI' do
+      let(:scores_standardises) { { litteratie: -0.39, numeratie: 1.03 } }
 
-  context 'competence > à 0' do
-    let(:scores_standardises) { { score_ccf: 0.1 } }
-    it do
-      expect(subject.interpretations(competences))
-        .to eq([{ score_ccf: :palier2 }, { score_memorisation: nil }])
-    end
-  end
-
-  context 'premiers paliers de literatie et numeratie' do
-    let(:scores_standardises) { { litteratie: -4.1, numeratie: -1.68 } }
-
-    it do
-      expect(subject.interpretations(competences_niveau1))
-        .to eq([
-                 { litteratie_cefr: :palier0 }, { numeratie_cefr: :palier0 },
-                 { litteratie_anlci: :palier0 }, { numeratie_anlci: :palier0 }
-               ])
-    end
-  end
-
-  context 'juste au dessus des premiers paliers de litteratie et numeratie' do
-    let(:scores_standardises) { { litteratie: -3.54, numeratie: -1.63 } }
-
-    it do
-      expect(subject.interpretations(competences_niveau1))
-        .to eq([
-                 { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier1 },
-                 { litteratie_anlci: :palier1 }, { numeratie_anlci: :palier1 }
-               ])
+      it do
+        expect(subject.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
+                                       :ANLCI))
+          .to eq([{ litteratie: :palier5 }, { numeratie: :palier5 }])
+      end
     end
   end
 end

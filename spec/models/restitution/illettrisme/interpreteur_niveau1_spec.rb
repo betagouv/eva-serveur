@@ -11,13 +11,13 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
   describe '#interpretations_cefr' do
     let(:interpretations_cefr) do
       [
-        { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier1 }
+        { litteratie: :palier1 }, { numeratie: :palier1 }
       ]
     end
 
     before do
       allow(interpreteur_score).to receive(:interpretations)
-        .with(Restitution::ScoresNiveau1::METRIQUES_CEFR)
+        .with(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1, :CEFR)
         .and_return(interpretations_cefr)
     end
 
@@ -27,13 +27,13 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
   describe '#interpretations_anlci' do
     let(:interpretations_anlci) do
       [
-        { litteratie_anlci: :palier1 }, { numeratie_anlci: :palier1 }
+        { litteratie: :palier1 }, { numeratie: :palier1 }
       ]
     end
 
     before do
       allow(interpreteur_score).to receive(:interpretations)
-        .with(Restitution::ScoresNiveau1::METRIQUES_ANLCI)
+        .with(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1, :ANLCI)
         .and_return(interpretations_anlci)
     end
 

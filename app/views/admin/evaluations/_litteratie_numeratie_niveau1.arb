@@ -4,19 +4,19 @@ div class: 'row' do
   interpretations.each do |competence_niveau|
     competence = competence_niveau.keys.first
     niveau = competence_niveau[competence]
-    scope = "admin.restitutions.#{type_metriques}.#{competence}"
+    scope = "admin.restitutions.#{referentiel}.#{competence}"
 
     div class: 'col-auto badge' do
       niveau_profil = t("#{niveau}.profil", scope: scope)
       if pdf
-        div svg_tag_base64 "#{competence}.svg"
+        div svg_tag_base64 "#{competence}_#{referentiel}.svg"
         if niveau.present?
-          div svg_tag_base64 "badges/#{type_metriques}/#{niveau_profil.parameterize}.svg"
+          div svg_tag_base64 "badges/#{referentiel}/#{niveau_profil.parameterize}.svg"
         end
       else
-        div image_tag "#{competence}.svg"
+        div image_tag "#{competence}_#{referentiel}.svg"
         if niveau.present?
-          div image_tag "badges/#{type_metriques}/#{niveau_profil.parameterize}.svg",
+          div image_tag "badges/#{referentiel}/#{niveau_profil.parameterize}.svg",
                         alt: "Niveau #{niveau_profil}"
         end
       end

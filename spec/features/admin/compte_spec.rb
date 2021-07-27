@@ -30,6 +30,24 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
+    describe 'Je peux voir le champ Accès dans le formulaire' do
+      it 'apparaît pour mon compte' do
+        visit edit_admin_compte_path(compte_connecte)
+
+        expect(page).to have_content 'Accès'
+        expect(page).to have_content 'Autorisé'
+        expect(page).to have_content 'Refusé'
+      end
+
+      it 'apparaît pour un autre compte' do
+        visit edit_admin_compte_path(collegue)
+
+        expect(page).to have_content 'Accès'
+        expect(page).to have_content 'Autorisé'
+        expect(page).to have_content 'Refusé'
+      end
+    end
+
     describe 'Je vois les informations d\'un collègue' do
       it do
         visit admin_compte_path(collegue)
@@ -81,6 +99,7 @@ describe 'Admin - Compte', type: :feature do
         select 'Admin'
         options = ['', 'Admin', 'Conseiller']
         expect(page).to have_select(:compte_role, options: options)
+        expect(page).to have_content 'Accès'
 
         click_on 'Modifier'
 
@@ -158,6 +177,7 @@ describe 'Admin - Compte', type: :feature do
 
       it do
         compte_connecte.reload
+        expect(page).not_to have_content 'Accès'
         expect(compte_connecte.prenom).to eq 'Robert'
         fill_in :compte_email, with: 'new_password'
         fill_in :compte_password, with: 'new_password'

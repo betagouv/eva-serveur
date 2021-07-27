@@ -12,6 +12,10 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validates_presence_of :nom, :prenom, on: :create
   validate :verifie_dns_email, :structure_a_un_admin
+  validates :role, inclusion: { in: %w[conseiller compte_generique],
+                                message: 'Ce compte ne peut pas avoir le rôle %<value>s en étant' \
+                                         ' refusé. Uniquement conseiller ou compte générique' },
+                   if: :compte_refuse?
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
@@ -37,6 +41,10 @@ class Compte < ApplicationRecord
 
   def nouveau_compte?
     sign_in_count <= 4
+  end
+
+  def compte_refuse?
+    validation_refusee?
   end
 
   private

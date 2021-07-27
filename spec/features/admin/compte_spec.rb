@@ -48,6 +48,30 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
+    describe 'Refuser un collègue conseiller' do
+      before do
+        visit edit_admin_compte_path(collegue)
+        choose 'Refusé'
+        click_on 'Modifier'
+      end
+
+      it { expect(collegue.reload.validation_refusee?).to be true }
+    end
+
+    describe 'Refuser un admin' do
+      before do
+        visit edit_admin_compte_path(collegue)
+        select 'Admin'
+        choose 'Refusé'
+        click_on 'Modifier'
+      end
+
+      it 'ne permet pas de refuser un admin' do
+        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant' \
+                                         ' refusé. Uniquement conseiller ou compte générique')
+      end
+    end
+
     describe 'Je vois les informations d\'un collègue' do
       it do
         visit admin_compte_path(collegue)
@@ -127,7 +151,7 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
-    describe 'Refuser un collegue' do
+    describe 'Refuser un collègue conseiller' do
       before do
         visit edit_admin_compte_path(collegue)
         choose 'Refusé'
@@ -135,6 +159,20 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it { expect(collegue.reload.validation_refusee?).to be true }
+    end
+
+    describe 'Refuser un admin' do
+      before do
+        visit edit_admin_compte_path(collegue)
+        select 'Admin'
+        choose 'Refusé'
+        click_on 'Modifier'
+      end
+
+      it 'ne permet pas de refuser un admin' do
+        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant' \
+                                         ' refusé. Uniquement conseiller ou compte générique')
+      end
     end
 
     describe "modifier le mot de passe d'un collègue" do
@@ -182,6 +220,17 @@ describe 'Admin - Compte', type: :feature do
         fill_in :compte_email, with: 'new_password'
         fill_in :compte_password, with: 'new_password'
         click_on 'Se connecter'
+      end
+    end
+
+    describe 'mise à jour du statut de validation' do
+      it 'ne voit pas les champs Statut et Rôle' do
+        visit edit_admin_compte_path(compte_connecte)
+
+        expect(page).not_to have_content('Accès')
+        expect(page).not_to have_content('Autorisé')
+        expect(page).not_to have_content('Refusé')
+        expect(page).not_to have_content('Conseiller')
       end
     end
   end

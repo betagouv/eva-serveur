@@ -82,7 +82,7 @@ ActiveAdmin.register Compte do
       else
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
       end
-      f.input :statut_validation, as: :radio
+      f.input :statut_validation, as: :radio if current_compte.admin? || current_compte.superadmin?
       if peut_modifier_mot_de_passe?
         f.input :password, hint: resource.persisted? ? t('.aide_mot_de_passe') : ''
         f.input :password_confirmation

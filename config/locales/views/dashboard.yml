@@ -41,4 +41,4 @@ fr:
 
             Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
 
-            Vous pensez que cette personne est momentanément absente, merci de contacter Véronique %{telephone} ou par mail [%{email}](mailto:%{email}).
+            Vous pensez que cette personne est momentanément absente, merci de contacter %{prenom} au %{telephone} ou par mail [%{email}](mailto:%{email}).

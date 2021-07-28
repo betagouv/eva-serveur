@@ -7,15 +7,31 @@ describe 'Dashboard', type: :feature do
   let!(:compte) { create :compte_superadmin, structure: ma_structure }
   before { connecte(compte) }
 
-  context 'quand il y a des comptes en attente pour ma structures' do
+  context 'quand il y a des comptes en attente pour ma structure' do
     before { create :compte, statut_validation: :en_attente, structure: ma_structure }
-    it "affiche un message d'alerte" do
-      visit admin_path
-      expect(page).to have_content("Des demandes d'accès sont en attente de validation.")
+
+    describe 'je suis admin' do
+      let!(:compte) { create :compte_admin, structure: ma_structure }
+
+      it "affiche un message d'alerte" do
+        visit admin_path
+        expect(page).to have_content("Des demandes d'accès sont en attente de validation.")
+      end
+    end
+
+    describe 'je suis conseiller' do
+      let!(:compte) do
+        create :compte_conseiller, structure: ma_structure
+      end
+
+      it "n'affiche pas un message d'alerte" do
+        visit admin_path
+        expect(page).not_to have_content("Des demandes d'accès sont en attente de validation.")
+      end
     end
   end
 
-  context "quand il n'y a pas de compte en attente pour ma structures" do
+  context "quand il n'y a pas de compte en attente pour ma structure" do
     it "n'affiche pas de message d'alerte" do
       visit admin_path
       expect(page).not_to have_content("Des demandes d'accès sont en attente de validation.")

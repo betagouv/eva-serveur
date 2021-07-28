@@ -7,6 +7,7 @@ class Compte < ApplicationRecord
   devise :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable, :registerable
   ROLES = %w[superadmin admin conseiller compte_generique].freeze
+  ADMIN_ROLES = %w[superadmin admin].freeze
   validates :role, inclusion: { in: ROLES }
   enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
@@ -36,7 +37,7 @@ class Compte < ApplicationRecord
   end
 
   def find_admins
-    Compte.where(structure: structure, role: %w[admin superadmin])
+    Compte.where(structure: structure, role: ADMIN_ROLES)
   end
 
   def nouveau_compte?
@@ -45,6 +46,10 @@ class Compte < ApplicationRecord
 
   def compte_refuse?
     validation_refusee?
+  end
+
+  def au_moins_admin?
+    ADMIN_ROLES.include?(role)
   end
 
   private
@@ -62,10 +67,6 @@ class Compte < ApplicationRecord
     return if autres_admins?
 
     errors.add(:role, :structure_doit_avoir_un_admin)
-  end
-
-  def au_moins_admin?
-    %w[admin superadmin].include?(role)
   end
 
   def autres_admins?

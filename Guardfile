@@ -38,6 +38,7 @@ group :red_green_refactor, halt_on_fail: true do
 
     # Turnip features and steps
     watch(%r{^spec/jobs/(.+)_spec\.rb$})
+    watch(%r{^spec/features/(.+)_spec\.rb$})
     watch(%r{^spec/acceptance/(.+)\.feature$})
     watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) do |m|
       Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance'

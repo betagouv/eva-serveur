@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+div class: 'autres-actualites' do
+  autres_actualites.each do |actualite|
+    div class: 'actualite' do
+      status_tag actualite.categorie, class: 'categorie'
+      text_node link_to actualite.titre, [:admin, actualite], class: 'lien'
+    end
+  end
+end

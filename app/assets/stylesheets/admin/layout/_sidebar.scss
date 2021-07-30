@@ -1,0 +1,13 @@
+.panel {
+  &.annule-panel {
+    @include annule-carte;
+
+    h3 {
+      display: none;
+    }
+  }
+
+  &.annule-carte {
+    @include annule-carte;
+  }
+}

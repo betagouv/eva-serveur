@@ -90,7 +90,14 @@ ActiveAdmin.register Compte do
         f.input :password_confirmation
       end
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      if resource.new_record?
+        f.cancel_link({ action: 'index' })
+      else
+        f.cancel_link({ action: 'show' })
+      end
+    end
   end
 
   sidebar :aide_filtres,

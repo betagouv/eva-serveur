@@ -182,6 +182,22 @@ describe 'Admin - Compte', type: :feature do
 
       it { expect(page).not_to have_content('Mot de passe') }
     end
+
+    describe 'lorsque je clique sur le bouton annuler du formulaire' do
+      it 'annule une création de compte' do
+        visit new_admin_compte_path
+        click_on 'Annuler'
+
+        expect(current_path).to eq(admin_comptes_path)
+      end
+
+      it 'annule une modification' do
+        visit edit_admin_compte_path(compte_connecte)
+        click_on 'Annuler'
+
+        expect(current_path).to eq(admin_compte_path(compte_connecte))
+      end
+    end
   end
 
   context 'en conseiller' do

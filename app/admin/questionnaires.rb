@@ -16,7 +16,10 @@ ActiveAdmin.register Questionnaire do
         c.input :question
       end
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f)
+    end
   end
 
   index do

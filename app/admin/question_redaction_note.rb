@@ -18,7 +18,10 @@ ActiveAdmin.register QuestionRedactionNote do
       f.input :reponse_placeholder
       f.input :illustration, as: :file
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f)
+    end
   end
 
   index do

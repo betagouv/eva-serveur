@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :active_admin_devise_controller?
+  helper_method :annulation_formulaire
 
   def current_ability
     @current_ability ||= Ability.new(current_compte)
@@ -24,5 +25,13 @@ class ApplicationController < ActionController::Base
 
   def active_admin_devise_controller?
     is_a? ActiveAdmin::Devise::Controller
+  end
+
+  def annulation_formulaire(form)
+    if resource.new_record?
+      form.cancel_link({ action: 'index' })
+    else
+      form.cancel_link({ action: 'show' })
+    end
   end
 end

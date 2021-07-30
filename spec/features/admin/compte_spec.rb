@@ -31,12 +31,12 @@ describe 'Admin - Compte', type: :feature do
     end
 
     describe 'Je peux voir le champ Accès dans le formulaire' do
-      it 'apparaît pour mon compte' do
+      it "n'apparaît pas pour mon compte" do
         visit edit_admin_compte_path(compte_connecte)
 
-        expect(page).to have_content 'Accès'
-        expect(page).to have_content 'Autorisé'
-        expect(page).to have_content 'Refusé'
+        expect(page).not_to have_content 'Accès'
+        expect(page).not_to have_content 'Autorisé'
+        expect(page).not_to have_content 'Refusé'
       end
 
       it 'apparaît pour un autre compte' do

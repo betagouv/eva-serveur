@@ -1,3 +1,15 @@
+.admin_actualites.show {
+  #active_admin_content {
+    #main_content_wrapper #main_content {
+          margin-right: 465px;
+    }
+    #sidebar {
+      width: 445px;
+      margin-left: -445px;
+    }
+  }
+}
+
 .carte-actualite {
   @include carte-avec-ombre();
 
@@ -68,14 +80,8 @@
 }
 
 .actualite-complete {
-  $grid-columns:      8;
-  $grid-gutter-width: 1.25rem;
-
   @import "../bootstrap_minimal";
-  font-size: .875rem;
   color: $eva_dark;
-
-  padding-top: 1.125rem;
 
   .titre {
     @include titre();
@@ -106,7 +112,15 @@
       color: $eva_main_blue;
     }
   }
+}
 
+.actualite-complete,
+.details-actualite,
+.autres-actualites {
+  font-size: .875rem;
+}
+
+.details-actualite {
   .metadonnees {
     @include carte-avec-ombre();
     padding: 1.5rem;
@@ -125,33 +139,24 @@
       margin-bottom: .5rem;
     }
   }
+}
 
-  .autres-actualites {
+.autres-actualites {
+  .actualite {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
 
-    &-titre {
-      @include titre();
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+    .categorie {
+      margin-right: 1rem;
     }
 
-    .actualite {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
+    .lien {
+      color: $eva_main_blue;
+      text-decoration: underline;
 
-      .categorie {
-        margin-right: 1rem;
-      }
-
-      .lien {
-        color: $eva_main_blue;
-        text-decoration: underline;
-
-        &:hover {
-          text-decoration: none;
-        }
+      &:hover {
+        text-decoration: none;
       }
     }
   }

@@ -30,6 +30,13 @@ ActiveAdmin.register Actualite do
   end
 
   show do
-    render partial: 'show', locals: { autres_actualites: actualite.recentes_sauf_moi(3) }
+    render partial: 'show'
+  end
+
+  sidebar :details_actualite, class: 'details-actualite annule-panel', only: :show
+
+  sidebar :autres_actualites, class: 'autres-actualites annule-carte', only: :show do
+    render partial: 'autres_actualites_sidebar',
+           locals: { autres_actualites: actualite.recentes_sauf_moi(3) }
   end
 end

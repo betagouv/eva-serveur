@@ -1,52 +1,15 @@
 # frozen_string_literal: true
 
 div class: 'actualite-complete' do
-  div class: 'row' do
-    div class: 'col-5' do
-      h1 actualite.titre, class: 'titre'
-    end
+  h1 actualite.titre, class: 'titre'
+
+  div class: 'illustration' do
+    image_tag cdn_for(actualite.illustration) if actualite.illustration.attached?
   end
 
   div class: 'row' do
-    div class: 'col-5' do
-      div class: 'illustration' do
-        image_tag cdn_for(actualite.illustration) if actualite.illustration.attached?
-      end
-
-      div class: 'row' do
-        div class: 'contenu' do
-          md actualite.contenu
-        end
-      end
-    end
-
-    div class: 'col-3' do
-      div class: 'metadonnees' do
-        div class: 'donnee' do
-          span 'Publié dans :', class: 'label'
-          status_tag actualite.categorie
-        end
-        div class: 'donnee' do
-          span 'Auteur :', class: 'label'
-          text_node 'Équipe eva'
-        end
-        div class: 'donnee' do
-          span 'Date :', class: 'label'
-          span class: 'date' do
-            l actualite.created_at, format: :point
-          end
-        end
-      end
-
-      h3 t('.autres_actualites'), class: 'autres-actualites-titre'
-      div class: 'autres-actualites' do
-        autres_actualites.each do |actualite|
-          div class: 'actualite' do
-            status_tag actualite.categorie, class: 'categorie'
-            text_node link_to actualite.titre, [:admin, actualite], class: 'lien'
-          end
-        end
-      end
+    div class: 'contenu' do
+      md actualite.contenu
     end
   end
 end

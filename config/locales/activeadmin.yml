@@ -14,7 +14,8 @@ fr:
           description: Merci de renseigner vos informations.
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
     sidebars:
-      filters: "Rechercher"
+      filters: Rechercher
+      autres_actualites: Les autres actualités sur eva
     scopes:
       pas_vraiment_utilisatrices: Pas vraiment utilisatrices ☃️
       non_activees: Non activées 🐤

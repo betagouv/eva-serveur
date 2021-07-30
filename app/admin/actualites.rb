@@ -19,7 +19,10 @@ ActiveAdmin.register Actualite do
       f.input :contenu
       f.input :categorie
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f)
+    end
   end
 
   index do

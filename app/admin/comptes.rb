@@ -92,11 +92,7 @@ ActiveAdmin.register Compte do
     end
     f.actions do
       f.action :submit
-      if resource.new_record?
-        f.cancel_link({ action: 'index' })
-      else
-        f.cancel_link({ action: 'show' })
-      end
+      annulation_formulaire(f)
     end
   end
 

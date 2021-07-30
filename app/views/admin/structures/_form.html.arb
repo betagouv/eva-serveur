@@ -6,5 +6,8 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :type_structure, as: :select, collection: collection_types_structures
     f.input :code_postal
   end
-  actions
+  f.actions do
+    f.action :submit
+    annulation_formulaire(f)
+  end
 end

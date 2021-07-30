@@ -13,7 +13,10 @@ ActiveAdmin.register Situation do
       f.input :questionnaire
       f.input :questionnaire_entrainement
     end
-    f.actions
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f)
+    end
   end
 
   index do

@@ -6,11 +6,8 @@
   box-shadow: none;
   background-color: unset;
 
-  #titlebar_right, #titlebar_left {
-    display: block;
-  }
-
   #titlebar_left {
+    display: block;
     padding: 0.62rem 0;
     background-color: transparent;
     height: 4rem;
@@ -44,20 +41,6 @@
   }
 
   #titlebar_right {
-    text-align: left;
-    height: auto;
-
-    .action_item a {
-      margin: 1rem 1rem 0 0;
-      padding: 0.51rem 1.87rem;
-      font-size: 0.87rem;
-      font-weight: normal;
-      font-family: $font-texte;
-      color: $eva_light;
-      background-color: $eva_main_blue;
-      border: none;
-      background-image: none;
-      text-shadow: none;
-    }
+    display: none;
   }
 }

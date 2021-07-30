@@ -248,5 +248,9 @@ describe Ability do
       is_expected.to_not be_able_to(:read, autre_evaluation)
       is_expected.to_not be_able_to(:destroy, autre_evaluation)
     end
+
+    it 'ne peut pas consulter la page de la structure' do
+      is_expected.to_not be_able_to(:read, compte.structure)
+    end
   end
 end

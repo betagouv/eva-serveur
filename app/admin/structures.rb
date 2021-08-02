@@ -17,6 +17,7 @@ ActiveAdmin.register Structure do
   filter :created_at
 
   scope :all
+  scope :sans_campagne
   scope :pas_vraiment_utilisatrices
   scope :non_activees
   scope :actives

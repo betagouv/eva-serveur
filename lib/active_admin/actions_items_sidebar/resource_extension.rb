@@ -10,7 +10,8 @@ module ActiveAdmin
 
       def actions_items_sidebar_section
         displayable = -> { active_admin_config.action_items_for(params[:action], self).any? }
-        ActiveAdmin::SidebarSection.new :action_items, if: displayable, class: 'annule-panel' do
+        ActiveAdmin::SidebarSection.new :action_items, if: displayable,
+                                                       class: 'action-items-sidebar' do
           insert_tag view_factory.action_items,
                      active_admin_config.action_items_for(params[:action], self)
         end

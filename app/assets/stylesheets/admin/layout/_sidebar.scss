@@ -1,13 +1,24 @@
-.panel {
-  &.annule-panel {
-    @include annule-carte;
+.sidebar_section.panel {
+  &.action-items-sidebar {
+    @include annule-panel;
+    margin-bottom: 2rem;
+  }
 
-    h3 {
-      display: none;
-    }
+  &.annule-panel {
+    @include annule-panel;
   }
 
   &.annule-carte {
     @include annule-carte;
+  }
+
+  .action_items {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+
+    a {
+      @include bouton-carte($eva_main_blue);
+    }
   }
 }

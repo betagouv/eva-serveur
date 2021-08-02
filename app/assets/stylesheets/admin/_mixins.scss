@@ -8,6 +8,13 @@
   background: none;
   padding: 0;
 }
+@mixin annule-panel {
+  @include annule-carte;
+
+  h3 {
+    display: none;
+  }
+}
 @mixin ombre {
   box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
 }

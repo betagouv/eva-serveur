@@ -17,6 +17,7 @@ fr:
       filters: Rechercher
       autres_actualites: Les autres actualités sur eva
     scopes:
+      sans_campagne: Sans campagne 🙈
       pas_vraiment_utilisatrices: Pas vraiment utilisatrices ☃️
       non_activees: Non activées 🐤
       actives: Actives ❤️

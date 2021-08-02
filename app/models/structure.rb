@@ -43,6 +43,10 @@ class Structure < ApplicationRecord
     where.not(id: ids)
   }
 
+  scope :sans_campagne, lambda {
+    ids = Campagne.joins(:compte).select('structure_id')
+    where.not(id: ids)
+  }
   scope :non_activees, -> { par_nombre_d_evaluations 'BETWEEN 1 AND 3' }
   scope :activees, -> { par_nombre_d_evaluations '> 3' }
   scope :actives, -> { activees.par_derniere_evaluation('> ?', 2.months.ago).uniq!(:group) }

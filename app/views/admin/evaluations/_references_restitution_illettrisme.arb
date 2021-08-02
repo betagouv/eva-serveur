@@ -3,37 +3,37 @@
 div class: 'references_restitution_illettrisme' do
   scope = 'admin.restitutions.cefr.references'
   div class: 'row marges-page' do
+    div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }
     div class: 'col' do
-      div class: 'row' do
-        div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }
-        div(class: 'col texte-explications') { md t('explications', scope: scope) }
+      div class: 'col' do
+        div class: 'row' do
+          div(class: 'col texte-explications') { md t('explications-cefr', scope: scope) }
+        end
       end
-    end
-    div class: 'col' do
-      div class: 'row pb-5' do
+      div class: 'row pl-2 pb-3 pt-3 align-items-center' do
         div class: 'col-auto' do
           div t('francais', scope: scope)
           div t('ordre', scope: scope), class: 'ordre'
         end
-        div class: 'col text-right' do
+        div class: 'col' do
           text_node svg_tag_base64 'badges/cefr/prea1-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/a1-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/a2-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/b1-blanc.svg', class: 'badge-references'
         end
-      end
-      div class: 'row' do
+
         div class: 'col-auto' do
           div t('mathematiques', scope: scope)
           div t('ordre', scope: scope), class: 'ordre'
         end
-        div class: 'col text-right' do
+        div class: 'col' do
           text_node svg_tag_base64 'badges/cefr/prex1-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/x1-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/x2-blanc.svg', class: 'badge-references'
           text_node svg_tag_base64 'badges/cefr/y1-blanc.svg', class: 'badge-references'
         end
       end
+      div(class: 'col texte-explications') { md t('explications-lien', scope: scope) }
     end
   end
 end

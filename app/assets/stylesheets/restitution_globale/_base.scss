@@ -310,7 +310,7 @@
     width: 100%;
     background-color: $couleur-texte;
     color: $eva_light;
-    padding: 3.125rem 0;
+    padding: 1.5rem 0;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 
@@ -320,11 +320,10 @@
 
     .col-icone-info {
       display: flex;
-      align-items: center;
     }
 
     .icone {
-      height: 4rem;
+      height: 3.5rem;
     }
 
     .ordre {
@@ -334,12 +333,13 @@
     .badges-referentiels {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      margin: 1rem 0;
+      padding-left: 0;
     }
 
     .badge-references {
-      height: 3rem;
-      margin-right: .3125rem;
+      height: 2.5rem;
+      margin-right: 0.4rem;
     }
   }
 

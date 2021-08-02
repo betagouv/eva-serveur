@@ -333,9 +333,11 @@ fr:
           ordre: '(par ordre croissant)'
           francais: 'Français :'
           mathematiques: 'Mathématiques :'
-          explications: |
+          explications-cefr: |
             Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
-
+          explications-anlci: |
+            Les restitutions eva sont basées sur les référentiels de l'Agence Nationale de Lutte Contre l'Illettrisme d'évaluation du français et des mathématiques.
+          explications-lien: |
             Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :
             [https://eva.beta.gouv.fr/en-savoir-plus-sur-les-referentiels-devaluation/](https://eva.beta.gouv.fr/en-savoir-plus-sur-les-referentiels-devaluation/)
       anlci:

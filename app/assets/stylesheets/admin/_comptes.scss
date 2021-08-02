@@ -1,6 +1,6 @@
 .mon-compte {
-  $grid-columns:      8;
-  $grid-gutter-width: 0;
+  $grid-columns:      6;
+  $grid-gutter-width: 1.25rem;
   @import "../bootstrap_minimal";
 
   .titre {

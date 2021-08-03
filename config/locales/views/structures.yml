@@ -13,7 +13,7 @@ fr:
       rejoindre_structure: Rejoindre
   admin:
     structure:
-      nouvelle_structure: Créer une nouvelle structure (avec compte et campagne)
+      nouvelle_structure: Créer une nouvelle structure (avec compte)
   nouvelles_structures:
     show:
       titre: Rejoindre eva

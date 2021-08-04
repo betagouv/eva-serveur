@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  permit_params :campagne_id, :nom, :email, :telephone, :terminee_le
+  permit_params :campagne_id, :nom, :email, :telephone
   menu priority: 4
 
   includes :campagne
@@ -50,7 +50,7 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes
+                  :mes_avec_redaction_de_notes, :campagnes_accessibles
 
     def show
       show! do |format|
@@ -93,6 +93,10 @@ ActiveAdmin.register Evaluation do
 
     def parties
       Partie.where(evaluation_id: resource).includes(:situation).order(:created_at)
+    end
+
+    def campagnes_accessibles
+      @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
     end
   end
 end

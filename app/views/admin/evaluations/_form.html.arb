@@ -2,11 +2,10 @@
 
 active_admin_form_for [:admin, resource] do |f|
   f.inputs do
-    f.input :campagne, collection: Campagne.accessible_by(current_ability)
+    f.input :campagne, collection: campagnes_accessibles
     f.input :nom
     f.input :email
     f.input :telephone
-    f.input :terminee_le, as: :date_time_picker
   end
   actions
 end

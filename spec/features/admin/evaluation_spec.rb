@@ -223,7 +223,7 @@ describe 'Admin - Evaluation', type: :feature do
           expect(evaluation.reload.nom).to eq 'Nouveau Nom'
           expect(evaluation.telephone).to eq 'Nouveau Téléphone'
           expect(evaluation.email).to eq 'autre@email.com'
-          expect(evaluation.campagne).to eq autre_campagne
+          expect(evaluation.campagne.libelle).to eq 'Autre campagne'
         end
       end
 

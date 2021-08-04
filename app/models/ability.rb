@@ -45,7 +45,7 @@ class Ability # rubocop:disable Metrics/ClassLength
           campagne: comptes_de_meme_structure(compte)
     end
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
-    can %i[update], Evaluation, campagne: comptes_de_meme_structure(compte) if compte.admin?
+    can :update, Evaluation, campagne: comptes_de_meme_structure(compte) if compte.admin?
   end
 
   def droit_evenement(compte)

@@ -64,6 +64,13 @@ describe Compte do
     end
   end
 
+  describe '#au_moins_admin?' do
+    it { expect(Compte.new(role: 'superadmin').au_moins_admin?).to eql(true) }
+    it { expect(Compte.new(role: 'admin').au_moins_admin?).to eql(true) }
+    it { expect(Compte.new(role: 'compte_generique').au_moins_admin?).to eql(true) }
+    it { expect(Compte.new(role: 'conseiller').au_moins_admin?).to eql(false) }
+  end
+
   describe 'structure a un admin' do
     let(:structure) { Structure.new }
     let(:compte) { Compte.new role: 'admin' }

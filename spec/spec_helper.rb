@@ -55,7 +55,8 @@ RSpec.configure do |config|
   end
 
   def se_connecter_comme_conseiller
-    connecte create(:compte_conseiller, email: 'conseiller@exemple.fr', password: 'password')
+    structure = create(:structure, :avec_admin)
+    connecte create(:compte_conseiller, email: 'conseiller@exemple.fr', password: 'password', structure: structure )
   end
 
   def connecte(compte)

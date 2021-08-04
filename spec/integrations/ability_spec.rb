@@ -125,7 +125,7 @@ describe Ability do
     let(:compte) { compte_admin }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
-    context 'peut consulter les campagnes de ma structure' do
+    context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, structure: compte.structure }
 
       it { is_expected.to be_able_to(:read, mon_collegue) }
@@ -134,6 +134,13 @@ describe Ability do
     end
 
     it { is_expected.to be_able_to(:update, compte.structure) }
+
+    context 'peut gérer les évaluations de ma structure' do
+      let(:ma_campagne) { create :campagne, compte: compte }
+      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+
+      it { is_expected.to be_able_to(:update, evaluation) }
+    end
   end
 
   context 'Compte générique' do
@@ -174,7 +181,8 @@ describe Ability do
     it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
     it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }
     it { is_expected.to_not be_able_to(:manage, Campagne.new) }
-    it { is_expected.to_not be_able_to(%i[create update], evaluation_conseiller) }
+    it { is_expected.to_not be_able_to(:create, evaluation_conseiller) }
+    it { is_expected.to_not be_able_to(:update, evaluation_conseiller) }
     it { is_expected.to_not be_able_to(%i[read destroy], evaluation_superadmin) }
     it { is_expected.to_not be_able_to(:read, Evenement.new) }
     it { is_expected.to_not be_able_to(:read, evenement_superadmin) }

@@ -5,6 +5,7 @@ module Anonymisation
     def anonymise
       super do |campagne|
         campagne.libelle = FFaker::Product.product_name
+        campagne.code = nil
       end
     end
   end

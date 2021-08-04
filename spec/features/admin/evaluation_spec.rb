@@ -202,7 +202,7 @@ describe 'Admin - Evaluation', type: :feature do
     end
   end
 
-  context 'Admin' do
+  context 'Superadmin' do
     before(:each) { se_connecter_comme_superadmin }
 
     describe 'édition' do
@@ -233,6 +233,45 @@ describe 'Admin - Evaluation', type: :feature do
           click_on 'Modifier'
           expect(evaluation.reload.nom).to eq 'Ancien nom'
         end
+      end
+    end
+  end
+
+  context 'Admin' do
+    describe 'Edition' do
+      let(:structure) { create :structure }
+      let(:mon_compte) { create :compte_admin, structure: structure }
+      let!(:ma_campagne) do
+        create :campagne, compte: mon_compte, libelle: 'Ma campagne'
+      end
+      let(:mon_evaluation) { create :evaluation, campagne: ma_campagne }
+      let(:autre_compte) { create :compte_admin, structure: structure }
+      let!(:autre_campagne) do
+        create :campagne, compte: autre_compte, libelle: 'Autre campagne'
+      end
+      let(:autre_evaluation) do
+        create :evaluation, campagne: autre_campagne
+      end
+      let(:autre_structure) { create :structure }
+      let(:compte_autre_structure) { create :compte_admin, structure: autre_structure }
+      let!(:campagne_autre_structure) do
+        create :campagne, compte: compte_autre_structure,
+                          libelle: 'Campagne autre structure'
+      end
+      let(:evaluation_autre_structure) do
+        create :evaluation, campagne: campagne_autre_structure
+      end
+
+      before { connecte(mon_compte) }
+
+      it "me permet de modifier la campagne parmi celles auxquelles j'ai accès" do
+        visit edit_admin_evaluation_path(mon_evaluation)
+        within('#evaluation_campagne_input') do
+          expect(page).not_to have_content('Campagne autre structure')
+          select 'Autre campagne'
+        end
+        click_on 'Modifier'
+        expect(mon_evaluation.reload.campagne.libelle).to eq 'Autre campagne'
       end
     end
   end

@@ -2,7 +2,7 @@
 
 active_admin_form_for [:admin, resource] do |f|
   f.inputs do
-    f.input :campagne
+    f.input :campagne, collection: Campagne.accessible_by(current_ability)
     f.input :nom
     f.input :email
     f.input :telephone

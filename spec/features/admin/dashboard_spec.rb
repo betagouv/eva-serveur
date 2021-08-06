@@ -93,6 +93,12 @@ describe 'Dashboard', type: :feature do
                                            'cibles ou les dispositifs mobilisés.')
         end
       end
+
+      context 'cache le message de validation en attente' do
+        before { compte.validation_en_attente! }
+        before { visit admin_path }
+        it { expect(page).not_to have_content("Elle va bientôt vous permettre d'utiliser eva") }
+      end
     end
 
     context 'lorsque je me suis connecté plus de 4 fois' do
@@ -136,6 +142,25 @@ describe 'Dashboard', type: :feature do
           expect(page).not_to have_content('Eva utilise le concept de "campagne" pour regrouper ' \
                                            'les passations selon leurs objectifs, leurs publics ' \
                                            'cibles ou les dispositifs mobilisés.')
+        end
+
+        context 'affiche le message de validation en attente' do
+          let!(:compte_support) do
+            create :compte,
+                   nom: 'Ma structure',
+                   prenom: 'Véronique',
+                   telephone: '06 01 02 03 04',
+                   email: Eva::EMAIL_SUPPORT
+          end
+
+          before { compte.validation_en_attente! }
+          before { visit admin_path }
+          it do
+            expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
+            infos_support =
+              'contacter Véronique au 06 01 02 03 04 ou par mail à support@eva.beta.gouv.fr'
+            expect(page).to have_content infos_support
+          end
         end
       end
     end

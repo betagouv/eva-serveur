@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-render 'validation_necessaire' if current_compte.validation_en_attente?
+if current_compte.nouveau_compte? || evaluations.blank?
+  render 'prise_en_main', campagnes: campagnes
+elsif current_compte.validation_en_attente?
+  render 'validation_necessaire'
+end
 
 if evaluations.present?
-  render 'prise_en_main', campagnes: campagnes if current_compte.nouveau_compte?
   columns do
     column do
       render 'evaluations', evaluations: evaluations
@@ -12,8 +15,6 @@ if evaluations.present?
       render 'actualites', actualites: actualites if actualites.present?
     end
   end
-else
-  render 'prise_en_main', campagnes: campagnes
 end
 
 if campagnes.present?

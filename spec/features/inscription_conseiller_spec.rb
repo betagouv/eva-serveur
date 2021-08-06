@@ -4,13 +4,6 @@ require 'rails_helper'
 
 describe 'Création de compte conseiller', type: :feature do
   let!(:structure) { create :structure, :avec_admin, nom: 'Ma structure' }
-  let!(:compte_support) do
-    create :compte,
-           nom: 'Ma structure',
-           prenom: 'Véronique',
-           telephone: '06 01 02 03 04',
-           email: Eva::EMAIL_SUPPORT
-  end
 
   context 'sans structure précisée' do
     before do
@@ -38,10 +31,6 @@ describe 'Création de compte conseiller', type: :feature do
       nouveau_compte = Compte.find_by email: 'monemail@eva.fr'
       expect(nouveau_compte.validation_en_attente?).to be true
       expect(nouveau_compte.structure).to eq structure
-
-      infos_support =
-        'Vous pouvez contacter Véronique au 06 01 02 03 04 ou par mail à support@eva.beta.gouv.fr'
-      expect(page).to have_content infos_support
     end
   end
 end

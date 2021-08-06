@@ -6,12 +6,14 @@ describe 'Admin - Evaluation', type: :feature do
   before { Bullet.enable = false }
   after { Bullet.enable = true }
 
+  let(:mon_compte) { create :compte, role: role }
   let(:ma_campagne) do
-    create :campagne, compte: Compte.first, libelle: 'Paris 2019', code: 'PARIS2019'
+    create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019'
   end
 
   context 'Organisation' do
-    before(:each) { se_connecter_comme_admin }
+    let(:role) { 'admin' }
+    before(:each) { connecte(mon_compte) }
 
     describe '#show' do
       # evaluation sans positionnement
@@ -202,12 +204,14 @@ describe 'Admin - Evaluation', type: :feature do
     end
   end
 
-  context 'Superadmin' do
-    before(:each) { se_connecter_comme_superadmin }
+  describe 'Edition' do
+    let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
+    let!(:campagne_autre_structure) { create :campagne, libelle: 'Campagne autre structure' }
 
-    describe 'édition' do
-      let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
-      let!(:autre_campagne) { create :campagne, libelle: 'Autre campagne' }
+    before { connecte(mon_compte) }
+
+    context 'Superadmin' do
+      let(:role) { 'superadmin' }
 
       before do
         visit edit_admin_evaluation_path(evaluation)
@@ -218,12 +222,12 @@ describe 'Admin - Evaluation', type: :feature do
 
       context 'en changeant de campagne' do
         it do
-          within('#evaluation_campagne_input') { select 'Autre campagne' }
+          within('#evaluation_campagne_input') { select 'Campagne autre structure' }
           click_on 'Modifier'
           expect(evaluation.reload.nom).to eq 'Nouveau Nom'
           expect(evaluation.telephone).to eq 'Nouveau Téléphone'
           expect(evaluation.email).to eq 'autre@email.com'
-          expect(evaluation.campagne.libelle).to eq 'Autre campagne'
+          expect(evaluation.campagne.libelle).to eq 'Campagne autre structure'
         end
       end
 
@@ -235,43 +239,23 @@ describe 'Admin - Evaluation', type: :feature do
         end
       end
     end
-  end
 
-  context 'Admin' do
-    describe 'Edition' do
-      let(:structure) { create :structure }
-      let(:mon_compte) { create :compte_admin, structure: structure }
-      let!(:ma_campagne) do
-        create :campagne, compte: mon_compte, libelle: 'Ma campagne'
-      end
-      let(:mon_evaluation) { create :evaluation, campagne: ma_campagne }
-      let(:autre_compte) { create :compte_admin, structure: structure }
-      let!(:autre_campagne) do
-        create :campagne, compte: autre_compte, libelle: 'Autre campagne'
-      end
-      let(:autre_evaluation) do
-        create :evaluation, campagne: autre_campagne
-      end
-      let(:autre_structure) { create :structure }
-      let(:compte_autre_structure) { create :compte_admin, structure: autre_structure }
-      let!(:campagne_autre_structure) do
-        create :campagne, compte: compte_autre_structure,
-                          libelle: 'Campagne autre structure'
-      end
-      let(:evaluation_autre_structure) do
-        create :evaluation, campagne: campagne_autre_structure
+    context 'Admin' do
+      let(:role) { 'admin' }
+      let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
+      let!(:campagne_meme_structure) do
+        create :campagne, compte: mon_collegue, libelle: 'Campagne même structure'
       end
 
-      before { connecte(mon_compte) }
+      before { visit edit_admin_evaluation_path(evaluation) }
 
       it "me permet de modifier la campagne parmi celles auxquelles j'ai accès" do
-        visit edit_admin_evaluation_path(mon_evaluation)
         within('#evaluation_campagne_input') do
           expect(page).not_to have_content('Campagne autre structure')
-          select 'Autre campagne'
+          select 'Campagne même structure'
         end
         click_on 'Modifier'
-        expect(mon_evaluation.reload.campagne.libelle).to eq 'Autre campagne'
+        expect(evaluation.reload.campagne.libelle).to eq 'Campagne même structure'
       end
     end
   end

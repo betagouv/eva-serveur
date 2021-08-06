@@ -56,7 +56,7 @@ class Structure < ApplicationRecord
   scope :abandonnistes, -> { activees.par_derniere_evaluation('< ?', 6.months.ago).uniq!(:group) }
 
   def display_name
-    nom
+    "#{nom} - #{code_postal}"
   end
 
   def effectif

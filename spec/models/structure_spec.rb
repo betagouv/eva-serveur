@@ -14,6 +14,11 @@ describe Structure, type: :model do
     should validate_inclusion_of(:type_structure).in_array(types_structures)
   end
 
+  it do
+    expect(described_class.new(nom: 'eva', code_postal: '75012')
+                          .display_name).to eql('eva - 75012')
+  end
+
   describe 'géolocalisation à la validation' do
     let(:structure) { Structure.new code_postal: '75012' }
     before do

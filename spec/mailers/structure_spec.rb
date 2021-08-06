@@ -6,7 +6,7 @@ describe StructureMailer, type: :mailer do
   describe '#nouvelle_structure' do
     it "envoie un email pour informer de la création d'une structure" do
       id = SecureRandom.uuid
-      structure = Structure.new nom: 'Ma Super Structure', id: id
+      structure = Structure.new nom: 'Ma Super Structure', id: id, code_postal: '75012'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
       email = StructureMailer.with(compte: compte, structure: structure).nouvelle_structure
@@ -17,10 +17,10 @@ describe StructureMailer, type: :mailer do
 
       expect(email.from).to eql([Eva::EMAIL_CONTACT])
       expect(email.to).to eql(['debut@test.com'])
-      expect(email.subject).to eql('Création de « Ma Super Structure »')
+      expect(email.subject).to eql('Création de « Ma Super Structure - 75012 »')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Paule')
-      expect(email.body).to include('Ma Super Structure')
+      expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Besoin d&#39;aide')
       expect(email.body).to include(Eva::DOCUMENT_PRISE_EN_MAIN)
       expect(email.body).to include("http://test.com/admin/sign_up?structure_id=#{id}")

@@ -1,7 +1,7 @@
 <%= md t('.corps',
          prenom: @compte.prenom,
          email: @compte.email,
-         structure: @structure.nom,
+         structure: @structure.display_name,
          url_inscription: "#{root_url}admin/sign\\_up?structure\\_id=#{@structure.id}"
         ) %>
 <%= md t('layouts.mailer.aide_conseiller',

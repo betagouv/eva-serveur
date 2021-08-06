@@ -5,7 +5,7 @@ require 'rails_helper'
 describe CompteMailer, type: :mailer do
   describe '#nouveau_compte' do
     it 'envoie un email de confirmation de création de compte' do
-      structure = Structure.new nom: 'Ma Super Structure'
+      structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
       email = CompteMailer.with(compte: compte).nouveau_compte
@@ -16,11 +16,11 @@ describe CompteMailer, type: :mailer do
 
       expect(email.from).to eql([Eva::EMAIL_CONTACT])
       expect(email.to).to eql(['debut@test.com'])
-      expect(email.subject).to eql('Votre accès eva à « Ma Super Structure »')
+      expect(email.subject).to eql('Votre accès eva à « Ma Super Structure - 75012 »')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Paule')
       expect(email.body).to include('debut@test.com')
-      expect(email.body).to include('Ma Super Structure')
+      expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Besoin d&#39;aide')
       expect(email.body).to include(Eva::DOCUMENT_PRISE_EN_MAIN)
     end
@@ -28,7 +28,7 @@ describe CompteMailer, type: :mailer do
 
   describe '#alerte_admin' do
     it "envoie un email de demande de validation d'un nouveau compte à l'admin" do
-      structure = Structure.new nom: 'Ma Super Structure'
+      structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
       admin = Compte.new prenom: 'Admin',
                          email: 'debut@test.com',
                          role: :admin,
@@ -47,16 +47,17 @@ describe CompteMailer, type: :mailer do
 
       expect(email.from).to eql([Eva::EMAIL_CONTACT])
       expect(email.to).to eql(['debut@test.com'])
-      expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure » de vos collègues")
+      expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure - 75012 »"\
+                                   ' de vos collègues')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')
-      expect(email.body).to include('Ma Super Structure')
+      expect(email.body).to include('Ma Super Structure - 75012')
     end
   end
 
   describe 'relance' do
-    let(:structure) { Structure.new nom: 'Ma Super Structure' }
+    let(:structure) { Structure.new nom: 'Ma Super Structure', code_postal: '75012' }
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }
     let(:mail) { CompteMailer.with(compte: compte).relance }
 

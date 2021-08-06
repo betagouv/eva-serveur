@@ -50,15 +50,6 @@ RSpec.configure do |config|
     connecte create(:compte_superadmin, email: 'superadmin@exemple.fr', password: 'password')
   end
 
-  def se_connecter_comme_admin
-    connecte create(:compte_admin, email: 'admin@exemple.fr', password: 'password')
-  end
-
-  def se_connecter_comme_conseiller
-    structure = create(:structure, :avec_admin)
-    connecte create(:compte_conseiller, email: 'conseiller@exemple.fr', password: 'password', structure: structure )
-  end
-
   def connecte(compte)
     visit '/admin'
     fill_in :compte_email, with: compte.email

@@ -2,6 +2,6 @@
          prenom_admin: @compte_admin.prenom,
          prenom: @compte.prenom,
          nom: @compte.nom,
-         structure: @compte.structure.nom,
+         structure: @compte.structure.display_name,
          url_validation: "#{root_url}admin/comptes/#{@compte.id}/edit"
         ) %>

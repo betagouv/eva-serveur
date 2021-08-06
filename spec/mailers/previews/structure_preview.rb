@@ -4,7 +4,7 @@
 class StructurePreview < ActionMailer::Preview
   def nouvelle_structure
     id = SecureRandom.uuid
-    structure = Structure.new nom: 'Ma Super Structure', id: id
+    structure = Structure.new nom: 'Ma Super Structure', id: id, code_postal: '75012'
     compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
     StructureMailer.with(structure: structure, compte: compte).nouvelle_structure

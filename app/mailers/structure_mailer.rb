@@ -6,6 +6,6 @@ class StructureMailer < ApplicationMailer
     @compte = params[:compte]
 
     mail(to: @compte.email,
-         subject: t('.objet', structure: @structure.nom))
+         subject: t('.objet', structure: @structure.display_name))
   end
 end

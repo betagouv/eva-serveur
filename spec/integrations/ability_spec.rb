@@ -147,6 +147,8 @@ describe Ability do
     let(:compte) { compte_generique }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
+    it { is_expected.to be_able_to(:edit_role, Compte.new) }
+    it { is_expected.not_to be_able_to(:edit_role, compte) }
   end
 
   context 'Compte conseiller' do

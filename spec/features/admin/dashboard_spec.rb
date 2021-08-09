@@ -50,62 +50,11 @@ describe 'Dashboard', type: :feature do
   end
 
   describe 'Encart de bienvenue' do
-    context 'lorsque je me suis connecté 4 fois ou moins' do
-      let(:compte) { create :compte_admin, sign_in_count: 3 }
-
-      context "je n'ai pas encore créé de campagne" do
-        it "affiche l'encart concernant les campagnes" do
-          visit admin_path
-          expect(page).to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).to have_content('Eva utilise le concept de "campagne" pour regrouper les ' \
-                                       'passations selon leurs objectifs, leurs publics cibles ' \
-                                       'ou les dispositifs mobilisés.')
-          expect(page).not_to have_content('Organisez votre première session puis retrouvez ici ' \
-                                           'vos dernières évaluations.')
-        end
-      end
-
-      context "j'ai déjà créé une campagne mais pas d'évaluation" do
-        let!(:campagne) { create :campagne, compte: compte }
-
-        it "affiche l'encart concernant les évaluations" do
-          visit admin_path
-          expect(page).to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).to have_content('Organisez votre première session puis retrouvez ici vos ' \
-                                       'dernières évaluations.')
-          expect(page).not_to have_content('Eva utilise le concept de "campagne" pour regrouper ' \
-                                           'les passations selon leurs objectifs, leurs publics ' \
-                                           'cibles ou les dispositifs mobilisés.')
-        end
-      end
-
-      context "j'ai déjà créé une campagne et j'ai des évaluations" do
-        let!(:campagne) { create :campagne, compte: compte }
-        let!(:evaluation) { create :evaluation, campagne: campagne }
-
-        it "affiche l'encart concernant les évaluations" do
-          visit admin_path
-          expect(page).to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).to have_content('Organisez votre première session puis retrouvez ici vos ' \
-                                       'dernières évaluations.')
-          expect(page).not_to have_content('Eva utilise le concept de "campagne" pour regrouper ' \
-                                           'les passations selon leurs objectifs, leurs publics ' \
-                                           'cibles ou les dispositifs mobilisés.')
-        end
-      end
-
-      context 'cache le message de validation en attente' do
-        before { compte.validation_en_attente! }
-        before { visit admin_path }
-        it { expect(page).not_to have_content("Elle va bientôt vous permettre d'utiliser eva") }
-      end
-    end
-
     context 'lorsque je me suis connecté plus de 4 fois' do
       let(:compte) { create :compte_admin, sign_in_count: 5 }
 
       context "je n'ai pas encore créé de campagne" do
-        it "affiche l'encart concernant les campagnes" do
+        it "affiche l'encart" do
           visit admin_path
           expect(page).to have_content('Bienvenue dans votre espace conseiller !')
           expect(page).to have_content('Eva utilise le concept de "campagne" pour regrouper les ' \
@@ -116,23 +65,9 @@ describe 'Dashboard', type: :feature do
         end
       end
 
-      context "j'ai déjà créé une campagne mais pas d'évaluation" do
-        let!(:campagne) { create :campagne, compte: compte }
-
-        it "affiche l'encart concernant les évaluations" do
-          visit admin_path
-          expect(page).to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).to have_content('Organisez votre première session puis retrouvez ici vos ' \
-                                       'dernières évaluations.')
-          expect(page).not_to have_content('Eva utilise le concept de "campagne" pour regrouper ' \
-                                           'les passations selon leurs objectifs, leurs publics ' \
-                                           'cibles ou les dispositifs mobilisés.')
-        end
-      end
-
       context "j'ai déjà créé une campagne et j'ai des évaluations" do
         let!(:campagne) { create :campagne, compte: compte }
-        let!(:evaluation) { create :evaluation, campagne: campagne }
+        let!(:evaluation) { create_list :evaluation, 2, campagne: campagne }
 
         it "n'affiche pas d'encart " do
           visit admin_path

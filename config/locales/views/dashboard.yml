@@ -30,6 +30,9 @@ fr:
             description: Eva utilise le concept de "campagne" pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
             action: Créer ma première campagne
           "1":
+            description: Testez votre campagne en effectuant le parcours
+            action: Testez votre campagne
+          "2":
             description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
             action: Consulter le guide de prise en main
       validation_necessaire:

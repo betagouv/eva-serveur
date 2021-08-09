@@ -6,10 +6,15 @@ class Structure < ApplicationRecord
     organisme_formation orientation_scolaire cap_emploi e2c SMA autre
   ].freeze
 
-  validates :nom, :code_postal, :type_structure, presence: true
-  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + ['non_communique']) }
+  TYPE_NON_COMMUNIQUE = 'non_communique'
 
-  auto_strip_attributes :nom, :code_postal, squish: true
+  validates :nom, :code_postal, :type_structure, presence: true
+  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [TYPE_NON_COMMUNIQUE]) }
+  validates :code_postal, numericality: { only_integer: true }, length: { is: 5 },
+                          unless: proc { |s| s.code_postal == TYPE_NON_COMMUNIQUE }
+
+  auto_strip_attributes :nom, squish: true
+  auto_strip_attributes :code_postal, delete_whitespaces: true
 
   geocoded_by :code_postal, state: :region, params: { countrycodes: 'fr' } do |obj, resultats|
     if (resultat = resultats.first)

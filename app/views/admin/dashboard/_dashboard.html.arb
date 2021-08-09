@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-if !prise_en_main.terminee?
-  render partial: "admin/dashboard/prise_en_main/etape_#{prise_en_main.numero_etape}"
+if prise_en_main.en_cours?
+  render partial: "admin/dashboard/prise_en_main/etape_#{prise_en_main.numero_etape}",
+         locals: { campagne: campagnes.first }
 elsif current_compte.validation_en_attente?
   render 'validation_necessaire'
 end

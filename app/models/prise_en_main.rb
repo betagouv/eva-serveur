@@ -8,10 +8,17 @@ class PriseEnMain
   end
 
   def numero_etape
-    @nombre_campagnes.zero? ? 0 : 1
+    return 0 if @nombre_campagnes.zero?
+    return 1 if @nombre_evaluations.zero?
+
+    2
   end
 
   def terminee?
-    !@compte.nouveau_compte? && @nombre_evaluations.positive?
+    !@compte.nouveau_compte? && @nombre_evaluations > 1
+  end
+
+  def en_cours?
+    !terminee?
   end
 end

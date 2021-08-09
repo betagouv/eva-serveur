@@ -8,6 +8,12 @@ fr:
         rapport: Rapport
         evenements: Évenements
     devise:
+      login:
+        title: |
+          Connexion
+          espace conseiller
+        subtitle: |
+          Si vous souhaitez passer votre évaluation, demandez votre code campagne à votre conseiller et rendez-vous [ici](%{lien})
       registrations:
         new:
           title: Rejoindre la structure

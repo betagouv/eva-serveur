@@ -25,12 +25,13 @@ fr:
         entete-url: URL
       prise_en_main:
         titre: Bienvenue dans votre espace conseiller !
-        guide_prise_en_main:
-          description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
-          action: Consulter le guide de prise en main
-        premiere_campagne:
-          description: Eva utilise le concept de "campagne" pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
-          action: Créer ma première campagne
+        etapes:
+          "0":
+            description: Eva utilise le concept de "campagne" pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+            action: Créer ma première campagne
+          "1":
+            description: Organisez votre première session puis retrouvez ici vos dernières évaluations.
+            action: Consulter le guide de prise en main
       validation_necessaire:
         titre: Bienvenue sur eva !
         description: |

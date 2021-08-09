@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+etape_courante = campagnes.present? ? 1 : 0
+
+etapes = [
+  {
+    lien: new_admin_campagne_path
+  },
+  {
+    lien: Eva::DOCUMENT_PRISE_EN_MAIN,
+    options_lien: { target: '_blank' }
+  }
+]
+
 div class: 'prise-en-main' do
   div class: 'row' do
     div class: 'col-4 offset-2' do
@@ -9,15 +21,10 @@ div class: 'prise-en-main' do
           text_node image_tag 'avatar_bienvenue.png'
         end
         div class: 'premiere-visite-action' do
-          if campagnes.present?
-            text_node md t('.guide_prise_en_main.description')
-            text_node link_to t('.guide_prise_en_main.action'), Eva::DOCUMENT_PRISE_EN_MAIN,
-                              target: '_blank', class: 'action'
-          else
-            text_node md t('.premiere_campagne.description')
-            text_node link_to t('.premiere_campagne.action'), new_admin_campagne_path,
-                              class: 'action'
-          end
+          etape = etapes[etape_courante]
+          options = { class: 'action' }.merge(etape[:options_lien] || {})
+          text_node md t(".etapes.#{etape_courante}.description")
+          text_node link_to(t(".etapes.#{etape_courante}.action"), etape[:lien], options)
         end
       end
     end

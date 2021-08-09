@@ -89,11 +89,14 @@ class Ability # rubocop:disable Metrics/ClassLength
 
   def droit_compte(compte)
     can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
-    can :update, Compte, structure_id: compte.structure_id if compte.admin?
     can :read, compte
     can :update, compte
-    can :create, Compte if compte.admin? || compte.compte_generique?
-    can :edit_role, Compte if compte.admin?
+    if compte.admin? || compte.compte_generique?
+      can :create, Compte
+      can :update, Compte, structure_id: compte.structure_id
+      can :edit_role, Compte
+    end
+    cannot :edit_role, compte if compte.compte_generique?
     cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }
   end
 

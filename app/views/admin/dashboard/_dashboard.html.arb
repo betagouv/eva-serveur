@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-if current_compte.nouveau_compte? || evaluations.blank?
-  render 'prise_en_main', campagnes: campagnes
+if !prise_en_main.terminee?
+  render partial: "admin/dashboard/prise_en_main/etape_#{prise_en_main.numero_etape}"
 elsif current_compte.validation_en_attente?
   render 'validation_necessaire'
 end

@@ -6,10 +6,6 @@ ActiveAdmin.register_page 'Dashboard' do
   menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
   content title: proc { I18n.t('active_admin.dashboard') } do
-    evaluations = Evaluation.accessible_by(current_ability).order(created_at: :desc).limit(10)
-    actualites = Actualite.order(created_at: :desc).first(4)
-    campagnes = Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
-
     render partial: 'dashboard',
            locals: {
              evaluations: evaluations,
@@ -28,7 +24,8 @@ ActiveAdmin.register_page 'Dashboard' do
       end
       message_incitation_compte_personnel
     end
-    before_action :recupere_support
+    before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
+                  :recupere_campagnes, :recupere_prise_en_main
 
     private
 
@@ -52,6 +49,26 @@ ActiveAdmin.register_page 'Dashboard' do
 
     def recupere_support
       @support = Compte.find_by(email: Eva::EMAIL_SUPPORT)
+    end
+
+    def recupere_evaluations
+      @evaluations = Evaluation.accessible_by(current_ability).order(created_at: :desc).limit(10)
+    end
+
+    def recupere_actualites
+      @actualites = Actualite.order(created_at: :desc).first(4)
+    end
+
+    def recupere_campagnes
+      @campagnes = Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
+    end
+
+    def recupere_prise_en_main
+      @prise_en_main = PriseEnMain.new(
+        compte: current_compte,
+        nombre_campagnes: @campagnes.size,
+        nombre_evaluations: @evaluations.size
+      )
     end
   end
 end

@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+render partial: 'admin/dashboard/prise_en_main/base', locals: {
+  numero_etape: 1,
+  lien_action: Eva::DOCUMENT_PRISE_EN_MAIN,
+  options_lien: { target: '_blank' }
+}

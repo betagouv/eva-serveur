@@ -34,7 +34,7 @@ describe Anonymisation::Structure, type: :integration do
       Anonymisation::Structure.new(structure).anonymise
 
       structure.reload
-      expect(structure.code_postal).to eql('Non communiqué')
+      expect(structure.code_postal).to eql('non_communique')
     end
   end
 end

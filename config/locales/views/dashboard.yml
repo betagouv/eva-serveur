@@ -46,3 +46,10 @@ fr:
             Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
 
             Vous pensez que cette personne est momentanément absente ? Vous pouvez contacter %{prenom} au %{telephone} ou par mail à [%{email}](mailto:%{email}).
+      validation_refusee:
+        titre: Votre compte est refusé.
+        description: |
+          Votre compte a été refusé. Vous ne pouvez donc pas utiliser la plateforme.
+
+          Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter par mail à [%{email}](mailto:%{email}).
+

@@ -263,4 +263,25 @@ describe Ability do
       is_expected.to_not be_able_to(:read, compte.structure)
     end
   end
+
+  context 'Compte refusé' do
+    let!(:compte) { create :compte_conseiller, :structure_avec_admin, :refusee }
+
+    it 'peut consulter et modifier son compte' do
+      is_expected.to be_able_to(:read, compte)
+      is_expected.to be_able_to(:update, compte)
+    end
+
+    it 'ne peut pas consulter les Campagnes' do
+      is_expected.not_to be_able_to(:read, Campagne)
+    end
+
+    it 'ne peut pas consulter les Actualités' do
+      is_expected.not_to be_able_to(:read, Actualite)
+    end
+
+    it 'ne peut pas consulter les Evaluations' do
+      is_expected.not_to be_able_to(:read, Evaluation)
+    end
+  end
 end

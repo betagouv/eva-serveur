@@ -31,6 +31,17 @@ describe 'Dashboard', type: :feature do
     end
   end
 
+  context 'quand mon compte est refusé' do
+    let!(:compte) do
+      create :compte_conseiller, statut_validation: :refusee, structure: ma_structure
+    end
+
+    it "affiche l'encart" do
+      visit admin_path
+      expect(page).to have_content('Votre compte est refusé.')
+    end
+  end
+
   context "quand il n'y a pas de compte en attente pour ma structure" do
     it "n'affiche pas de message d'alerte" do
       visit admin_path

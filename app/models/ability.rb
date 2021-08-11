@@ -4,6 +4,9 @@ class Ability # rubocop:disable Metrics/ClassLength
   include CanCan::Ability
 
   def initialize(compte)
+    droits_comptes_refuses compte
+    return if compte.validation_refusee?
+
     droits_utilisateur compte
     droits_applicatifs
   end
@@ -91,11 +94,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
     can :read, compte
     can :update, compte
-    if compte.admin? || compte.compte_generique?
-      can :create, Compte
-      can :update, Compte, structure_id: compte.structure_id
-      can :edit_role, Compte
-    end
+    comptes_generiques_ou_comptes_admin(compte)
     cannot :edit_role, compte if compte.compte_generique?
     cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }
   end
@@ -127,7 +126,20 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :create, Contact
   end
 
+  def droits_comptes_refuses(compte)
+    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
+    can %i[update read], compte
+  end
+
   def comptes_de_meme_structure(compte)
     { compte: { structure_id: compte.structure_id } }
+  end
+
+  def comptes_generiques_ou_comptes_admin(compte)
+    return unless compte.admin? || compte.compte_generique?
+
+    can :create, Compte
+    can :update, Compte, structure_id: compte.structure_id
+    can :edit_role, Compte
   end
 end

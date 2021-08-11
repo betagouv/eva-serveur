@@ -61,14 +61,8 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],
-    port: ENV['SMTP_PORT'].to_i,
-    user_name: ENV['SMTP_USER_NAME'],
-    password: ENV['SMTP_PASSWORD'],
-    authentication: ENV['SMTP_AUTHENTICATION'],
-    tls: ENV['SMTP_TLS'].present?
-  }
+  config.action_mailer.delivery_method = :mailjet_api
+
   config.action_mailer.default_options = { from: ENV['EMAIL_DEFAULT_FROM'] }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

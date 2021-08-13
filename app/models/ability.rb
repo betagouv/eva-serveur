@@ -43,12 +43,13 @@ class Ability # rubocop:disable Metrics/ClassLength
 
   def droit_evaluation(compte)
     cannot %i[create], Evaluation
-    if compte.validation_acceptee?
-      can %i[read destroy], Evaluation,
-          campagne: comptes_de_meme_structure(compte)
-    end
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
-    can :update, Evaluation, campagne: comptes_de_meme_structure(compte) if compte.admin?
+    return unless compte.validation_acceptee?
+
+    can :read, Evaluation, campagne: comptes_de_meme_structure(compte)
+    return unless compte.admin?
+
+    can %i[update destroy], Evaluation, campagne: comptes_de_meme_structure(compte)
   end
 
   def droit_evenement(compte)

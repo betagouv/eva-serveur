@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'importeur_telephone'
 
-describe ImporteurTelephone, :focus do
+describe ImporteurTelephone do
   let(:logger) { RakeLogger.logger }
 
   context 'le compte existe' do

@@ -13,6 +13,15 @@ GIT
       railties (>= 5.2, < 6.2)
       ransack (~> 2.1, >= 2.1.1)
 
+GIT
+  remote: https://github.com/shanser/activeadmin-xls
+  revision: d67442370530e36b3d82e40e6bb779dd47c151c5
+  branch: autoload
+  specs:
+    activeadmin-xls (2.0.3)
+      activeadmin (>= 1.0.0)
+      spreadsheet (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -64,9 +73,6 @@ GEM
       activesupport
       i18n
       railties
-    activeadmin-xls (2.0.3)
-      activeadmin (>= 1.0.0)
-      spreadsheet (~> 1.0)
     activeadmin_addons (1.7.1)
       active_material
       railties
@@ -447,7 +453,7 @@ GEM
       tilt (>= 1.4.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
-    spreadsheet (1.2.8)
+    spreadsheet (1.2.9)
       ruby-ole
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
@@ -499,7 +505,7 @@ PLATFORMS
 DEPENDENCIES
   active_admin-humanized_enum
   activeadmin!
-  activeadmin-xls
+  activeadmin-xls!
   activeadmin_addons
   activeadmin_reorderable
   acts_as_list

@@ -14,7 +14,8 @@ gem 'activeadmin', git: 'https://github.com/shanser/activeadmin',
 gem 'activeadmin_addons'
 gem 'active_admin-humanized_enum'
 gem 'activeadmin_reorderable'
-gem 'activeadmin-xls'
+gem 'activeadmin-xls', git: 'https://github.com/shanser/activeadmin-xls',
+                       branch: 'autoload'
 gem 'acts_as_list'
 gem 'addressable'
 gem 'auto_strip_attributes', '~> 2.6'

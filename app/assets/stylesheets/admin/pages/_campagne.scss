@@ -104,6 +104,44 @@
             font-style: italic
           }
         }
+        padding: 0;
+        div:first-child {
+          padding: 1.5rem
+        }
+        p {
+          margin: 0;
+        }
+        .info_parcours_campagne {
+          background-color: $eva_main_blue;
+          padding: 1.5rem;
+          color: white;
+          border-bottom-right-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+          h3 {
+            color: white;
+          }
+        }
+      }
+      &-auto_positionnement, &-expression_ecrite {
+        .inclus {
+          .title {
+            font-weight: 600;
+          }
+          .commentaire {
+            font-style: italic;
+            color: $eva_green;
+          }
+        }
+        .non_inclus {
+          .title {
+            font-weight: 600;
+            color: $eva_dark_blue_grey;
+          }
+          .commentaire {
+            font-style: italic;
+            color: $eva_red;
+          }
+        }
       }
     }
     .attributes_table {

@@ -120,6 +120,20 @@ describe 'Admin - Campagne', type: :feature do
           end
         end
       end
+
+      context 'créer un parcours compétences de base' do
+        before do
+          choose "campagne_parcours_type_id_#{parcours_type_competences_de_base.id}"
+          click_on 'Créer'
+        end
+
+        it do
+          within('.campagne-parcours') do
+            expect(campagne.parcours_type.libelle).to have_content 'Parcours type #'
+            expect(page).to have_content campagne.parcours_type.description
+          end
+        end
+      end
     end
   end
 
@@ -143,28 +157,7 @@ describe 'Admin - Campagne', type: :feature do
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'UNC0D3'
-          expect(page).to have_content 'Mon QCM'
         end
-      end
-    end
-  end
-
-  describe 'show' do
-    context 'en admin' do
-      let(:situation) { create :situation_inventaire }
-      before do
-        compte_conseiller.update(role: 'superadmin')
-        campagne.situations_configurations.create! situation: situation
-        visit admin_campagne_path campagne
-      end
-      it { expect(page).to have_content 'Inventaire' }
-    end
-
-    context 'en conseiller' do
-      before { visit admin_campagne_path(ma_campagne) }
-      it do
-        expect(page).to_not have_content 'les stats'
-        expect(page).to_not have_content 'les événements'
       end
     end
   end

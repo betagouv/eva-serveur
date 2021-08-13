@@ -13,6 +13,10 @@ fr:
         explication_code: |
           Afin de rattacher vos bénéficiaires à cette campagne,
           vous pouvez partager le code ou l’URL suivante.
+        titre_panel_parcours: Parcours choisi
+        explication_code: |
+          Afin de rattacher vos bénéficiaires à cette campagne,
+          vous pouvez partager le code ou l’URL suivante.
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       parcours:
         titre_panel_parcours: Parcours choisi
@@ -23,6 +27,10 @@ fr:
           titre: Parcours personnalisé
           description: |
             Votre parcours a été personnalisé selon vos besoins spécifiques.
+        auto_positionnement: Questionnaire d’auto-positionnement
+        expression_ecrite: Exercice d’expression écrite
+        true: Inclus
+        false: Non inclus
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

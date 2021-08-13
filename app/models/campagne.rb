@@ -35,6 +35,14 @@ class Campagne < ApplicationRecord
     situations_configurations.find_by(situation: situation)&.questionnaire_utile
   end
 
+  def auto_positionnement_inclus?
+    parcours_type.present? && parcours_type.nom_technique == 'complet'
+  end
+
+  def expression_ecrite_incluse?
+    parcours_type.present? && parcours_type.nom_technique == 'complet'
+  end
+
   private
 
   def initialise_situations

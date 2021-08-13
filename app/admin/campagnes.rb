@@ -45,6 +45,11 @@ ActiveAdmin.register Campagne do
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
 
+    def create
+      create!
+      flash[:notice] = I18n.t('admin.campagnes.show.nouvelle_campagne')
+    end
+
     def show
       @statistiques ||= StatistiquesCampagne.new(resource)
       show!

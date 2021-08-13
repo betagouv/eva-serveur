@@ -4,7 +4,7 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :email, :telephone
   menu priority: 4
 
-  includes :campagne
+  includes campagne: :compte
 
   config.sort_order = 'created_at_desc'
 

@@ -11,7 +11,8 @@ RSpec.describe QuestionQcm, type: :model do
     it 'serialise les champs' do
       json = subject.as_json
       expect(json.keys)
-        .to match_array(%w[choix description id intitule type metacompetence type_qcm])
+        .to match_array(%w[choix description id intitule type metacompetence
+                           type_qcm])
       expect(json['type']).to eql('qcm')
     end
 

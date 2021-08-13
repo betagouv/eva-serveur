@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionRedactionNote do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :intitule, :illustration, :message,
+  permit_params :libelle, :intitule, :message,
                 :intitule_reponse, :description, :reponse_placeholder
 
   filter :libelle
@@ -16,7 +16,6 @@ ActiveAdmin.register QuestionRedactionNote do
       f.input :intitule
       f.input :intitule_reponse
       f.input :reponse_placeholder
-      f.input :illustration, as: :file
     end
     f.actions do
       f.action :submit

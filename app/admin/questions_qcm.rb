@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionQcm do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :intitule, :description, :illustration, :metacompetence, :type_qcm,
+  permit_params :libelle, :intitule, :description, :metacompetence, :type_qcm,
                 choix_attributes: %i[id intitule type_choix _destroy]
 
   filter :intitule
@@ -16,7 +16,6 @@ ActiveAdmin.register QuestionQcm do
       f.input :metacompetence
       f.input :type_qcm
       f.input :description
-      f.input :illustration, as: :file
       f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
         c.input :id, as: :hidden
         c.input :intitule

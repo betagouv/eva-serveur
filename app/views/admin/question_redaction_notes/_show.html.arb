@@ -9,8 +9,5 @@ panel 'Détails de la question' do
     row :intitule_reponse
     row :reponse_placeholder
     row :created_at
-    row :illustration do |question|
-      image_tag cdn_for(question.illustration) if question.illustration.attached?
-    end
   end
 end

@@ -14,6 +14,7 @@ fr:
         intitule: Intitulé
         libelle: Libellé
         metacompetence: Méta-compétence
+        type_qcm: Type QCM
       question_redaction_note:
         intitule_reponse: Intitulé réponse
         reponse_placeholder: Réponse placeholder

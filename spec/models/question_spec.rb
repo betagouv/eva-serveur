@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  it { is_expected.to validate_presence_of :intitule }
-
-  it { is_expected.to have_one(:illustration_attachment) }
+  it { should validate_presence_of :intitule }
+  it { should have_one(:illustration_attachment) }
 end

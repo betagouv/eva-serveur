@@ -127,10 +127,13 @@ describe Ability do
     it { is_expected.to be_able_to(:create, Compte.new) }
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, structure: compte.structure }
+      let(:campagne_collegue) { create :campagne, compte: mon_collegue }
+      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
 
       it { is_expected.to be_able_to(:read, mon_collegue) }
       it { is_expected.to be_able_to(:update, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
+      it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
     end
 
     it { is_expected.to be_able_to(:update, compte.structure) }
@@ -217,6 +220,7 @@ describe Ability do
 
       it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue) }
+      it { is_expected.to_not be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }

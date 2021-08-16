@@ -23,6 +23,12 @@ ActiveAdmin.register Campagne do
   filter :questionnaire
   filter :created_at
 
+  action_item :voir_evaluations, only: :show do
+    link_to I18n.t('admin.campagnes.action_items.voir_evaluations',
+                   nombre_evaluations: resource.nombre_evaluations),
+            admin_evaluations_path(q: { campagne_id_eq: resource })
+  end
+
   index do
     column :libelle
     column :code

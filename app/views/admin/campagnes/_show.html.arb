@@ -62,13 +62,11 @@ div class: 'row' do
              locals: { situations_configurations: situations_configurations }
     end
 
-    h2 'Consulter', class: 'sous-titre'
+    if can?(:manage, resource)
+      h2 'Consulter', class: 'sous-titre'
 
-    div class: 'panel' do
-      ul do
-        li link_to "les #{resource.nombre_evaluations} évaluations",
-                   admin_evaluations_path(q: { campagne_id_eq: resource })
-        if can?(:manage, resource)
+      div class: 'panel' do
+        ul do
           li link_to 'les stats', admin_campagne_stats_path(resource)
           li link_to 'les événements', admin_campagne_evenements_path(resource)
         end

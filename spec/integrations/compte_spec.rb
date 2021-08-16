@@ -6,30 +6,50 @@ describe Compte, type: :integration do
   ActiveJob::Base.queue_adapter = :test
 
   describe 'après création' do
-    let!(:structure) { create :structure, :avec_admin }
+    context 'quand le compte est en attente de validation' do
+      let!(:structure) { create :structure, :avec_admin }
 
-    it 'programme un mail de relance' do
-      expect do
-        create :compte_conseiller, structure: structure
-      end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob)
-    end
-
-    it "programme un mail de bienvenue et un mail d'alerte" do
-      expect do
-        create :compte_conseiller, structure: structure
-      end.to have_enqueued_job(ActionMailer::MailDeliveryJob).at_least(2)
+      it "programme un mail de relance, un mail de bienvenue et un mail d'alerte aux admins" do
+        expect { create :compte_conseiller, structure: structure, statut_validation: :en_attente }
+          .to have_enqueued_mail(
+            CompteMailer,
+            :nouveau_compte
+          ).exactly(1)
+          .and have_enqueued_mail(
+            CompteMailer,
+            :alerte_admin
+          ).exactly(1)
+          .and have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
+      end
     end
 
     context 'quand le compte est superadmin' do
-      it 'ne programme pas de mail de relance pour éviter le pb dans le seed par exemple' do
-        expect do
-          create :compte_superadmin
-        end.not_to have_enqueued_job(RelanceUtilisateurPourNonActivationJob)
+      it 'ne programme pas de mail' do
+        expect { create :compte_superadmin }
+          .to have_enqueued_mail(
+            CompteMailer,
+            :nouveau_compte
+          ).exactly(0)
+          .and have_enqueued_mail(
+            CompteMailer,
+            :alerte_admin
+          ).exactly(0)
+          .and have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(0)
       end
-      it 'ne programme pas de mail de bienvenue' do
-        expect do
-          create :compte_superadmin
-        end.not_to have_enqueued_job(ActionMailer::MailDeliveryJob)
+    end
+
+    context "quand le compte n'est pas en attente" do
+      it 'programme un mail de relance et un mail de bienvenue' do
+        expect { create :compte_admin, statut_validation: :acceptee }
+          .to have_enqueued_mail(
+            CompteMailer,
+            :nouveau_compte
+          ).exactly(1)
+          .and have_enqueued_mail(
+            CompteMailer,
+            :alerte_admin
+          ).exactly(0)
+          .and have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
       end
     end
   end

@@ -23,3 +23,5 @@ fr:
           * un parcours sans les situations Bienvenue et/ou Contrôle
           * un parcours sans le module de rédaction de texte « Communication écrite »
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
+      action_items:
+        voir_evaluations: Consulter les %{nombre_evaluations} évaluations

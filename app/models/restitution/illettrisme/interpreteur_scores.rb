@@ -5,7 +5,7 @@ module Restitution
     class InterpreteurScores
       PALIERS = {
         CEFR: {
-          litteratie: [-3.55, -1, 0],
+          litteratie: [-3.55, -1.33, -0.4],
           numeratie: [-1.64, -1, 0]
         },
         ANLCI: {

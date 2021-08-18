@@ -56,15 +56,17 @@ describe 'Campagne API', type: :request do
       campagne.situations_configurations.create situation: situation_inventaire, position: 1
       get '/api/campagnes/ete21'
 
-      expect(JSON.parse(response.body)['situations'].size).to eql(2)
-      expect(JSON.parse(response.body)['situations'][0]['libelle']).to eql('Inventaire')
-      expect(JSON.parse(response.body)['situations'][0]['nom_technique']).to eql('inventaire')
-      expect(JSON.parse(response.body)['situations'][0]['id']).to eql(situation_inventaire.id)
-      expect(JSON.parse(response.body)['situations'][0]['questionnaire_entrainement_id'])
+      reponse_json = JSON.parse(response.body)
+
+      expect(reponse_json['situations'].size).to eql(2)
+      expect(reponse_json['situations'][0]['libelle']).to eql('Inventaire')
+      expect(reponse_json['situations'][0]['nom_technique']).to eql('inventaire')
+      expect(reponse_json['situations'][0]['id']).to eql(situation_inventaire.id)
+      expect(reponse_json['situations'][0]['questionnaire_entrainement_id'])
         .to eql(questionnaire_entrainement.id)
-      expect(JSON.parse(response.body)['situations'][0]['questionnaire_id'])
+      expect(reponse_json['situations'][0]['questionnaire_id'])
         .to eql(questionnaire.id)
-      expect(JSON.parse(response.body)['situations'][1]['questionnaire_id'])
+      expect(reponse_json['situations'][1]['questionnaire_id'])
         .to eql(questionnaire_surcharge.id)
     end
   end

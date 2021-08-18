@@ -39,7 +39,8 @@ module Api
     def trouve_evaluation
       @evaluation = Evaluation.includes(
         campagne: {
-          situations_configurations: [:questionnaire, { situation: :questionnaire }]
+          situations_configurations: [:questionnaire,
+                                      { situation: %i[questionnaire questionnaire_entrainement] }]
         }
       ).find(params[:id])
     end

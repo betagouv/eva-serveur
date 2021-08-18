@@ -24,4 +24,7 @@ fr:
           * un parcours sans le module de rédaction de texte « Communication écrite »
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       action_items:
-        voir_evaluations: Consulter les %{nombre_evaluations} évaluations
+        voir_evaluations:
+          zero: Aucune évaluation
+          one: Consulter 1 évaluation
+          other: Consulter %{count} évaluations

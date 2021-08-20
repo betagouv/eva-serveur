@@ -13,6 +13,7 @@ fr:
         updated_at: Mise à jour le
         intitule: Intitulé
         libelle: Libellé
+        nom_technique: Nom technique
         metacompetence: Méta-compétence
         type_qcm: Type QCM
       question_redaction_note:

@@ -3,7 +3,7 @@
 class Question < ApplicationRecord
   has_one_attached :illustration
 
-  validates :intitule, :libelle, presence: true
+  validates :intitule, :libelle, :nom_technique, presence: true
 
   def display_name
     libelle

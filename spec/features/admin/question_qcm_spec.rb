@@ -16,7 +16,8 @@ describe 'Admin - Question QCM', type: :feature do
   describe 'création' do
     before do
       visit new_admin_question_qcm_path
-      fill_in :question_qcm_libelle, with: 'question'
+      fill_in :question_qcm_libelle, with: 'Question'
+      fill_in :question_qcm_nom_technique, with: 'question'
       fill_in :question_qcm_intitule, with: '2 + 2 = ?'
     end
 

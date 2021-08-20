@@ -2,7 +2,8 @@
 
 class QuestionRedactionNote < Question
   def as_json(_options = nil)
-    json = slice(:id, :intitule, :intitule_reponse, :description, :reponse_placeholder)
+    json = slice(:id, :intitule, :nom_technique, :intitule_reponse, :description,
+                 :reponse_placeholder)
     json['type'] = 'redaction_note'
     if illustration.attached?
       json['illustration'] = ApplicationController.helpers.cdn_for(illustration)

@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionRedactionNote do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :intitule, :message,
+  permit_params :libelle, :nom_technique, :intitule, :message,
                 :intitule_reponse, :description, :reponse_placeholder
 
   filter :libelle
@@ -12,6 +12,7 @@ ActiveAdmin.register QuestionRedactionNote do
     f.semantic_errors
     f.inputs do
       f.input :libelle
+      f.input :nom_technique
       f.input :description
       f.input :intitule
       f.input :intitule_reponse

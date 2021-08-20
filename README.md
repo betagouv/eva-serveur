@@ -39,7 +39,7 @@ L'api est accessible au point `/api`
 
 `POST /api/evaluations`
 
-```
+```json
 {
   "nom": "Roger",
   "code_campagne": "Mon code de campagne"
@@ -48,7 +48,7 @@ L'api est accessible au point `/api`
 
 **Réponse**
 
-```
+```json
 {
   "id:": 1,
   "nom": "Roger"
@@ -61,24 +61,31 @@ L'api est accessible au point `/api`
 
 `GET /api/evaluations/:id`
 
+:warning: Cette API est dépréciée : on utilise maintenance le GET d'une campagne.
+
 **Réponse**
 
-```
+```json
 {
-  "questions:": [
-    {
-      id: 1,
-      type: 'qcm',
-      intitule: 'Ma question',
-      description: 'Ma description',
-      choix: []
-    }
-  ],
+  "libelle": "Ma campagne",
+  "code": "FRT61000",
+  "questions:": [],
   "situations": [
     {
       "id": 1,
       "libelle": "Tri",
-      "nom_technique": "tri"
+      "nom_technique": "tri",
+      "questions:": [
+        {
+          "id": 1,
+          "type": "qcm",
+          "intitule": "Ma question",
+          "nom_technique": "ma-question",
+          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
+          "description": "Ma description",
+          "choix": []
+        }
+      ]
     }
   ]
 }
@@ -90,7 +97,7 @@ L'api est accessible au point `/api`
 
 **Réponse**
 
-```
+```json
 {
   "competences_fortes": [
     {
@@ -111,14 +118,14 @@ L'api est accessible au point `/api`
 
 **Réponse**
 
-```
+```json
 [
   {
-    id: 1,
-    type: 'qcm',
-    intitule: 'Ma question',
-    description: 'Ma description',
-    choix: []
+    "id": 1,
+    "type": "qcm",
+    "intitule": "Ma question",
+    "description": "Ma description",
+    "choix": []
   }
 ]
 ```
@@ -129,7 +136,7 @@ L'api est accessible au point `/api`
 
 Contenu:
 
-```
+```json
 {
   "date": 1551111089238,
   "nom": "ouvertureContenant",
@@ -149,22 +156,27 @@ Contenu:
 
 **Réponse**
 
-```
+```json
 {
-  "questions:": [
-    {
-      id: 1,
-      type: 'qcm',
-      intitule: 'Ma question',
-      description: 'Ma description',
-      choix: []
-    }
-  ],
+  "libelle": "Ma campagne",
+  "code": "FRT61000",
+  "questions:": [],
   "situations": [
     {
       "id": 1,
       "libelle": "Tri",
-      "nom_technique": "tri"
+      "nom_technique": "tri",
+      "questions:": [
+        {
+          "id": 1,
+          "type": "qcm",
+          "intitule": "Ma question",
+          "nom_technique": "ma-question",
+          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
+          "description": "Ma description",
+          "choix": []
+        }
+      ]
     }
   ]
 }

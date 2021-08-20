@@ -51,15 +51,29 @@ div class: 'row' do
           row(:temps_max) { formate_duree statistiques.temps_max }
           row(:temps_moyen) { formate_duree statistiques.temps_moyen }
         end
+
+        hr
+
+        render partial: 'admin/situations_configurations/liste_situations_configurations',
+               locals: { situations_configurations: situations_configurations }
       end
+
     end
 
     h2 t('.titre_panel_parcours'), class: 'sous-titre'
-
-    div class: 'panel campagne-parcours' do
-      div { md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT) }
-      render partial: 'admin/situations_configurations/liste_situations_configurations',
-             locals: { situations_configurations: situations_configurations }
+    div class: 'campagne-parcours' do
+      div class: 'campagne-parcours-intro' do
+        md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT)
+      end
+      div class: 'campagne-parcours-info' do
+        h4 campagne.parcours_type.libelle
+        div class: 'campagne-parcours-info-description' do
+          md campagne.parcours_type.description
+        end
+        para class: 'campagne-parcours-info-duree-moyenne' do
+          "Durée moyenne : #{campagne.parcours_type.duree_moyenne}"
+        end
+      end
     end
 
     if can?(:manage, resource)

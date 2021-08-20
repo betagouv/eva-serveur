@@ -78,7 +78,7 @@ describe 'Admin - Campagne', type: :feature do
         fill_in :campagne_code, with: 'CODESUPERADMIN'
       end
 
-      context 'crée la campagne, associé au compte courant et initialise les situations' do
+      context 'crée la campagne, associé au compte courant' do
         before do
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
@@ -87,9 +87,6 @@ describe 'Admin - Campagne', type: :feature do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'CODESUPERADMIN'
           expect(campagne.compte).to eq compte_conseiller
-          within('.campagne-parcours table') do
-            expect(page).to have_content situation_maintenance.libelle
-          end
         end
       end
     end
@@ -108,7 +105,7 @@ describe 'Admin - Campagne', type: :feature do
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
       end
 
-      context 'créer un parcours complet' do
+      context 'choisir son parcours' do
         before do
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
@@ -118,23 +115,8 @@ describe 'Admin - Campagne', type: :feature do
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
           expect(campagne.code).to eq 'CDI45312'
           expect(campagne.compte).to eq compte_conseiller
-          within('.campagne-parcours table') do
-            expect(page).to have_content situation_maintenance.libelle
-            expect(page).to have_content situation_inventaire.libelle
-          end
-        end
-      end
-
-      context 'créer un parcours compétences de base' do
-        before do
-          choose "campagne_parcours_type_id_#{parcours_type_competences_de_base.id}"
-          click_on 'Créer'
-        end
-
-        it do
-          within('.campagne-parcours table') do
-            expect(page).to have_content situation_maintenance.libelle
-            expect(page).not_to have_content situation_inventaire.libelle
+          within('.campagne-parcours') do
+            expect(page).to have_content parcours_type_complet.libelle
           end
         end
       end

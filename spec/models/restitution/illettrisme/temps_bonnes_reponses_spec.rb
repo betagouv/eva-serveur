@@ -25,10 +25,10 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_numeratie.id },
-                                                   date: Time.local(2019, 10, 9, 10, 1, 21)),
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
           build(:evenement_reponse, donnees: { question: question_numeratie.id,
                                                reponse: bon_choix.id },
-                                    date: Time.local(2019, 10, 9, 10, 1, 22))
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
       it { expect(temps_bonnes_reponses_numeratie).to eq([1]) }
@@ -38,10 +38,10 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_numeratie.id },
-                                                   date: Time.local(2019, 10, 9, 10, 1, 21)),
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
           build(:evenement_reponse, donnees: { question: question_numeratie.id,
                                                reponse: mauvais_choix.id },
-                                    date: Time.local(2019, 10, 9, 10, 1, 22))
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
@@ -55,10 +55,10 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_ccf.id },
-                                                   date: Time.local(2019, 10, 9, 10, 1, 21)),
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
           build(:evenement_reponse, donnees: { question: question_ccf.id,
                                                reponse: bon_choix_ccf.id },
-                                    date: Time.local(2019, 10, 9, 10, 1, 22))
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
@@ -68,7 +68,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_numeratie.id },
-                                                   date: Time.local(2019, 10, 9, 10, 1, 21))
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21))
         ]
       end
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }

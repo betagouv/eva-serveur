@@ -23,7 +23,7 @@ module Restitution
       end
 
       def nombre_de_non_remplissage
-        compte_reponse { |reponse| !reponse['quantite'].present? }
+        compte_reponse { |reponse| reponse['quantite'].blank? }
       end
 
       def nombre_erreurs_sauf_de_non_remplissage

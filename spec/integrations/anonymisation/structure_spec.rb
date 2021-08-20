@@ -27,7 +27,8 @@ describe Anonymisation::Structure, type: :integration do
     end
 
     before do
-      structure.update_attribute :code_postal, nil
+      structure.code_postal = nil
+      structure.save(validate: false)
     end
 
     it 'anonymise une structure' do

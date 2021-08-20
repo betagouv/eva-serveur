@@ -19,15 +19,15 @@ describe Restitution::Livraison, type: :integration do
     before do
       create(:evenement_demarrage,
              partie: partie1,
-             date: Time.local(2019, 10, 9, 10, 1, 20))
+             date: Time.zone.local(2019, 10, 9, 10, 1, 20))
       create(:evenement_affichage_question_qcm,
              partie: partie1,
              donnees: { question: question_numeratie.id },
-             date: Time.local(2019, 10, 9, 10, 1, 21))
+             date: Time.zone.local(2019, 10, 9, 10, 1, 21))
       create(:evenement_reponse,
              partie: partie1,
              donnees: { question: question_numeratie.id, reponse: bon_choix.id },
-             date: Time.local(2019, 10, 9, 10, 1, 22))
+             date: Time.zone.local(2019, 10, 9, 10, 1, 22))
     end
 
     it do

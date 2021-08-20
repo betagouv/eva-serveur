@@ -53,7 +53,7 @@ namespace :nettoyage do
     return if Rails.env.production?
 
     Question.find_each do |question|
-      fichier_illustration = File.open(File.join(Rails.root, 'lib/assets/illustration.jpg'))
+      fichier_illustration = File.open(Rails.root.join('lib/assets/illustration.jpg'))
       question.illustration.attach(
         io: fichier_illustration,
         filename: 'illustration.jpg',
@@ -95,7 +95,7 @@ namespace :nettoyage do
   task ajoute_evenements_termines: :environment do
     Partie.find_each do |partie|
       evenements = Evenement.where(partie: partie)
-      next if evenements.where(nom: 'finSituation').exists?
+      next if evenements.exists?(nom: 'finSituation')
 
       restitution = FabriqueRestitution.instancie partie
       next unless restitution.termine?
@@ -150,8 +150,8 @@ namespace :nettoyage do
   end
 
   def supprime_espace_inutile(objet, attributs)
-    changements = attributs.each_with_object({}) do |str, hsh|
-      hsh[str] = objet.send(str)&.squish
+    changements = attributs.index_with do |str|
+      objet.send(str)&.squish
     end
     objet.update(changements)
   end

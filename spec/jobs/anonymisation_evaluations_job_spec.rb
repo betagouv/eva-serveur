@@ -5,7 +5,7 @@ require 'rails_helper'
 describe AnonymisationEvaluationsJob, type: :job do
   it "anonymise les évaluations de plus d'un an" do
     ancienne_evaluation = create :evaluation, created_at: 2.years.ago
-    evaluation_recente = create :evaluation, created_at: 11.month.ago
+    evaluation_recente = create :evaluation, created_at: 11.months.ago
     evaluation_deja_anonymise = create :evaluation, anonymise_le: 1.month.ago,
                                                     created_at: 2.years.ago,
                                                     nom: 'deja anonymise'

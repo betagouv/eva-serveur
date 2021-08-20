@@ -10,9 +10,9 @@ describe Restitution::AvecEntrainement do
     context "ignore les évenements d'entrainement même s'ils ont la même date" do
       let(:demarrage_entrainement) do
         build(:evenement_demarrage_entrainement,
-              date: Time.local(2019, 10, 9, 10, 0))
+              date: Time.zone.local(2019, 10, 9, 10, 0))
       end
-      let(:demarrage) { build(:evenement_demarrage, date: Time.local(2019, 10, 9, 10, 0)) }
+      let(:demarrage) { build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0)) }
       let(:evenements) { [demarrage_entrainement, demarrage] }
 
       it { expect(restitution.evenements_entrainement).to eq [demarrage_entrainement] }

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Evenement API', type: :request do
   describe 'POST /evenements' do
-    let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
+    let(:chemin) { Rails.root.join('spec/support/evenement/donnees.json') }
     let(:donnees) { JSON.parse(File.read(chemin)) }
     let!(:situation_inventaire) { create :situation_inventaire, nom_technique: 'inventaire' }
     let(:evaluation) { create :evaluation }
@@ -39,7 +39,7 @@ describe 'Evenement API', type: :request do
                                         .and change { Partie.count }.by(1)
         expect(response).to have_http_status(201)
         evenement = Evenement.last
-        expect(evenement.date.to_datetime).to eq Time.at(1_551_111_089, 238_000).to_datetime
+        expect(evenement.date.to_datetime).to eq Time.zone.at(1_551_111_089, 238_000).to_datetime
         expect(evenement.position).to eq 58
 
         partie = Partie.last

@@ -49,9 +49,7 @@ module Restitution
       @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
-    def synthese
-      interpreteur_niveau1.synthese
-    end
+    delegate :synthese, to: :interpreteur_niveau1
 
     def interpretations_niveau1_cefr
       interpreteur_niveau1.interpretations_cefr

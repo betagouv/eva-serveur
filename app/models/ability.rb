@@ -76,7 +76,7 @@ class Ability # rubocop:disable Metrics/ClassLength
   def droit_questionnaire
     can :read, Questionnaire
     cannot :destroy, Questionnaire do |q|
-      Campagne.where(questionnaire: q).exists? ||
+      Campagne.exists?(questionnaire: q) ||
         Situation.where(questionnaire: q)
                  .or(Situation.where(questionnaire_entrainement: q))
                  .exists?
@@ -86,8 +86,8 @@ class Ability # rubocop:disable Metrics/ClassLength
   def droit_question
     can :read, Question
     cannot :destroy, Question do |q|
-      QuestionnaireQuestion.where(question: q).exists? ||
-        Evenement.where("donnees->>'question' = ?", q.id.to_s).exists?
+      QuestionnaireQuestion.exists?(question: q) ||
+        Evenement.exists?(["donnees->>'question' = ?", q.id.to_s])
     end
   end
 
@@ -97,19 +97,19 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :update, compte
     comptes_generiques_ou_comptes_admin(compte)
     cannot :edit_role, compte if compte.compte_generique?
-    cannot(:destroy, Compte) { |c| Campagne.where(compte: c).exists? }
+    cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }
   end
 
   def droit_choix
     cannot :destroy, Choix do |c|
-      Evenement.where("donnees->>'reponse' = ?", c.id.to_s).exists?
+      Evenement.exists?(["donnees->>'reponse' = ?", c.id.to_s])
     end
   end
 
   def droit_structure(compte)
     can :read, Structure, id: compte.structure_id if compte.validation_acceptee?
     can :update, Structure, id: compte.structure_id if compte.admin?
-    cannot(:destroy, Structure) { |s| Compte.where(structure: s).exists? }
+    cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
   end
 
   def droit_actualite

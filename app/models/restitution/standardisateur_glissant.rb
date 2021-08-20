@@ -10,14 +10,14 @@ module Restitution
     end
 
     def moyennes_metriques
-      @moyennes_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
-        memo[metrique] = moyenne_metrique(metrique)
+      @moyennes_metriques ||= @metriques.index_with do |metrique|
+        moyenne_metrique(metrique)
       end
     end
 
     def ecarts_types_metriques
-      @ecarts_types_metriques ||= @metriques.each_with_object({}) do |metrique, memo|
-        memo[metrique] = ecart_type_metrique(metrique)
+      @ecarts_types_metriques ||= @metriques.index_with do |metrique|
+        ecart_type_metrique(metrique)
       end
     end
 

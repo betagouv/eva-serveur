@@ -8,7 +8,7 @@ RSpec.describe QuestionRedactionNote, type: :model do
 
     it 'serialise les champs' do
       json = subject.as_json
-      expect(json.keys).to match_array(%w[id description intitule type
+      expect(json.keys).to match_array(%w[id description intitule nom_technique type
                                           intitule_reponse reponse_placeholder])
       expect(json['type']).to eql('redaction_note')
     end

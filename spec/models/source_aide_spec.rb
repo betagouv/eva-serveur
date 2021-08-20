@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe SourceAide, type: :model do
-  it { should validate_presence_of(:titre) }
-  it { should validate_presence_of(:description) }
-  it { should validate_presence_of(:url) }
-  it { should validate_presence_of(:categorie) }
-  it { should validate_presence_of(:type_document) }
+  it { is_expected.to validate_presence_of(:titre) }
+  it { is_expected.to validate_presence_of(:description) }
+  it { is_expected.to validate_presence_of(:url) }
+  it { is_expected.to validate_presence_of(:categorie) }
+  it { is_expected.to validate_presence_of(:type_document) }
 
   describe 'retourne les sources par catégories' do
     let!(:source1) { create :source_aide, categorie: 'prise_en_main' }

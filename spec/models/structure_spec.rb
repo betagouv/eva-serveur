@@ -3,18 +3,18 @@
 require 'rails_helper'
 
 describe Structure, type: :model do
-  it { should validate_presence_of(:nom) }
-  it { should validate_presence_of(:code_postal) }
-  it { should validate_presence_of(:type_structure) }
-  it { should validate_numericality_of(:code_postal) }
-  it { should validate_length_of(:code_postal).is_equal_to(5) }
+  it { is_expected.to validate_presence_of(:nom) }
+  it { is_expected.to validate_presence_of(:code_postal) }
+  it { is_expected.to validate_presence_of(:type_structure) }
+  it { is_expected.to validate_numericality_of(:code_postal) }
+  it { is_expected.to validate_length_of(:code_postal).is_equal_to(5) }
 
   it do
     types_structures = %w[
       mission_locale pole_emploi SIAE service_insertion_collectivite CRIA
       organisme_formation orientation_scolaire cap_emploi e2c SMA autre
     ]
-    should validate_inclusion_of(:type_structure).in_array(types_structures)
+    is_expected.to validate_inclusion_of(:type_structure).in_array(types_structures)
   end
 
   it do

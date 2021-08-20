@@ -3,6 +3,6 @@
 require 'rails_helper'
 
 describe Evaluation do
-  it { should validate_presence_of :nom }
-  it { should belong_to :campagne }
+  it { is_expected.to validate_presence_of :nom }
+  it { is_expected.to belong_to :campagne }
 end

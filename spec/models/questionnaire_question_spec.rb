@@ -8,6 +8,9 @@ describe QuestionnaireQuestion do
 
     subject { described_class.new(question: question) }
 
-    it { should validate_uniqueness_of(:question_id).scoped_to(:questionnaire_id).case_insensitive }
+    it do
+      is_expected
+        .to validate_uniqueness_of(:question_id).scoped_to(:questionnaire_id).case_insensitive
+    end
   end
 end

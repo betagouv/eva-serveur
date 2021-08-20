@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionQcm, type: :model do
-  it { should have_many(:choix).order(position: :asc).with_foreign_key(:question_id) }
+  it { is_expected.to have_many(:choix).order(position: :asc).with_foreign_key(:question_id) }
 
   describe '#as_json' do
     let(:file) { StringIO.new('test') }

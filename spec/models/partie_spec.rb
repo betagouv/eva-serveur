@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Partie do
-  it { should validate_presence_of(:session_id) }
-  it { should belong_to(:evaluation) }
-  it { should belong_to(:situation) }
+  it { is_expected.to validate_presence_of(:session_id) }
+  it { is_expected.to belong_to(:evaluation) }
+  it { is_expected.to belong_to(:situation) }
 end

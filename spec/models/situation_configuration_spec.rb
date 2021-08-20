@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe SituationConfiguration do
   it do
-    should validate_uniqueness_of(:situation_id).scoped_to(%i[campagne_id parcours_type_id])
-                                                .case_insensitive
+    is_expected.to validate_uniqueness_of(:situation_id).scoped_to(%i[campagne_id parcours_type_id])
+                                                        .case_insensitive
   end
 
   describe '#questionnaire_utile' do

@@ -12,11 +12,11 @@ describe Restitution::Maintenance, type: :integration do
     before do
       create(:evenement_demarrage,
              partie: partie1,
-             date: Time.local(2019, 10, 9, 10, 1, 20))
+             date: Time.zone.local(2019, 10, 9, 10, 1, 20))
       create(:evenement_apparition_mot,
              partie: partie1,
              donnees: { 'mot' => 'revu', 'type' => 'neutre' },
-             date: Time.local(2019, 10, 9, 10, 1, 21))
+             date: Time.zone.local(2019, 10, 9, 10, 1, 21))
     end
 
     it do

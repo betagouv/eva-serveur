@@ -26,7 +26,7 @@ end
 h3 'Utilisateurs'
 table_for comptes, class: 'index_table' do
   column(:nom_complet) do |compte|
-    compte.nom_complet.blank? ? 'Nom inconnu' : compte.nom_complet
+    compte.nom_complet.presence || 'Nom inconnu'
   end
   column :email
   column :statut_validation

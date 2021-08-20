@@ -12,7 +12,7 @@ ActiveAdmin.register SourceAide do
     column :titre
     column :description
     column :url do |a|
-      link_to a.url, a.url, target: '_blank'
+      link_to a.url, a.url, target: '_blank', rel: 'noopener'
     end
     actions
   end

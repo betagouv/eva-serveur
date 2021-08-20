@@ -39,7 +39,7 @@ module Restitution
         return 0 if nombre.zero?
 
         temps_moyen_normalise = temps_moyen_normalise(nom_moyenne, metrique_des_temps)
-        return 0 unless temps_moyen_normalise.present?
+        return 0 if temps_moyen_normalise.blank?
 
         nombre / temps_moyen_normalise
       end

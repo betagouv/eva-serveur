@@ -16,7 +16,7 @@ describe EvenementParams do
       )
 
       evenement_params = described_class.from(params)
-      expect(evenement_params[:date]).to eql(Time.at(1_580_743_539, 508, :millisecond))
+      expect(evenement_params[:date]).to eql(Time.zone.at(1_580_743_539, 508, :millisecond))
       expect(evenement_params.keys.sort).to eql(
         %w[date donnees nom session_id]
       )

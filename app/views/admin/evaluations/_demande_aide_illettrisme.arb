@@ -9,6 +9,6 @@ div class: 'demande-aide' do
   end
   div class: 'aide-cta' do
     text_node link_to t('.aide_cta'), Eva::LIEN_DEMANDE_ACCOMPAGNEMENT_ILLETTRISME,
-                      target: '_blank', class: 'action'
+                      target: '_blank', class: 'action', rel: 'noopener'
   end
 end

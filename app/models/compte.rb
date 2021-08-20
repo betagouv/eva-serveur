@@ -11,7 +11,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: ROLES }
   enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
-  validates_presence_of :nom, :prenom, on: :create
+  validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
   validates :role, inclusion: { in: %w[conseiller compte_generique],
                                 message: 'Ce compte ne peut pas avoir le rôle %<value>s en étant' \
@@ -20,7 +20,7 @@ class Compte < ApplicationRecord
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
-  enum statut_validation: %i[en_attente acceptee refusee], _prefix: :validation
+  enum statut_validation: { en_attente: 0, acceptee: 1, refusee: 2 }, _prefix: :validation
 
   delegate :code_postal, to: :structure, prefix: true
 

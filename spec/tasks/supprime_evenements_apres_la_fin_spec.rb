@@ -21,8 +21,8 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'avec événements après la fin' do
     let!(:evenements) do
-      [create(:evenement_fin_situation, partie: partie, date: 3.minute.ago),
-       create(:evenement_piece_bien_placee, partie: partie, date: 2.minute.ago),
+      [create(:evenement_fin_situation, partie: partie, date: 3.minutes.ago),
+       create(:evenement_piece_bien_placee, partie: partie, date: 2.minutes.ago),
        create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago)]
     end
 
@@ -47,7 +47,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'utilise la position en priorité pour trier' do
     let!(:evenement_fin) do
-      create(:evenement_fin_situation, partie: partie, date: 2.minute.ago, position: 2)
+      create(:evenement_fin_situation, partie: partie, date: 2.minutes.ago, position: 2)
     end
     let!(:evenement_recent_autre) do
       create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago, position: 1)
@@ -68,7 +68,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'regroupe par partie' do
     let(:autre_partie) { create :partie, situation: situation }
-    let!(:evenement_fin) { create(:evenement_fin_situation, partie: partie, date: 2.minute.ago) }
+    let!(:evenement_fin) { create(:evenement_fin_situation, partie: partie, date: 2.minutes.ago) }
     let!(:evenement_recent_autre) do
       create(:evenement_piece_bien_placee, partie: autre_partie, date: 1.minute.ago)
     end

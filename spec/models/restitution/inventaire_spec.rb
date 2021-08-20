@@ -8,10 +8,10 @@ describe Restitution::Inventaire do
   describe Restitution::Inventaire::Essai do
     it 'retourne le temps depuis le début de la situation' do
       evenements = [
-        build(:evenement_ouverture_contenant, date: 2.minute.ago),
+        build(:evenement_ouverture_contenant, date: 2.minutes.ago),
         build(:evenement_ouverture_contenant, date: 1.minute.ago)
       ]
-      restitution = described_class.new(campagne, evenements, 5.minute.ago)
+      restitution = described_class.new(campagne, evenements, 5.minutes.ago)
       expect(restitution.temps_total).to be_within(0.1).of(240)
     end
 
@@ -27,7 +27,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(campagne, evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minutes.ago)
         expect(restitution.nombre_erreurs).to eql(0)
         expect(restitution.nombre_de_non_remplissage).to eql(0)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
@@ -44,7 +44,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(campagne, evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minutes.ago)
         expect(restitution.nombre_erreurs).to eql(2)
         expect(restitution.nombre_de_non_remplissage).to eql(0)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(2)
@@ -54,7 +54,7 @@ describe Restitution::Inventaire do
         evenements = [
           build(:evenement_ouverture_contenant)
         ]
-        restitution = described_class.new(campagne, evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minutes.ago)
         expect(restitution.nombre_erreurs).to be_nil
         expect(restitution.nombre_de_non_remplissage).to be_nil
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to be_nil
@@ -71,7 +71,7 @@ describe Restitution::Inventaire do
                   }
                 })
         ]
-        restitution = described_class.new(campagne, evenements, 5.minute.ago)
+        restitution = described_class.new(campagne, evenements, 5.minutes.ago)
         expect(restitution.nombre_erreurs).to eql(1)
         expect(restitution.nombre_de_non_remplissage).to eql(1)
         expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)

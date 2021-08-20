@@ -23,7 +23,7 @@ ActiveAdmin.register Evaluation do
               parties_selectionnees: params[:parties_selectionnees],
               format: :pdf
             },
-            target: '_blank')
+            target: '_blank', rel: 'noopener')
   end
 
   index download_links: lambda {

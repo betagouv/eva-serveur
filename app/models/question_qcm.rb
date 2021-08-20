@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionQcm < Question
-  enum metacompetence: %i[numeratie ccf syntaxe-orthographe]
-  enum type_qcm: %i[standard jauge]
+  enum metacompetence: { numeratie: 0, ccf: 1, "syntaxe-orthographe": 2 }
+  enum type_qcm: { standard: 0, jauge: 1 }
   has_many :choix, -> { order(position: :asc) }, foreign_key: :question_id
 
   accepts_nested_attributes_for :choix, allow_destroy: true

@@ -21,6 +21,6 @@ module CampagneHelper
 
   def lien_campagne(campagne)
     url = url_campagne(campagne.code)
-    link_to url, url, target: '_blank'
+    link_to url, url, target: '_blank', rel: 'noopener'
   end
 end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Evenement', type: :feature do
-  let(:chemin) { "#{Rails.root}/spec/support/evenement/donnees.json" }
+  let(:chemin) { Rails.root.join('spec/support/evenement/donnees.json') }
   let(:donnees) { JSON.parse(File.read(chemin)) }
   let(:situation) { create :situation_inventaire, libelle: 'Inventaire' }
   let(:campagne) { create :campagne }

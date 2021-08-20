@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Compte do
   it do
-    should define_enum_for(:role)
+    is_expected.to define_enum_for(:role)
       .with_values(
         superadmin: 'superadmin',
         admin: 'admin',
@@ -13,12 +13,12 @@ describe Compte do
       )
       .backed_by_column_of_type(:string)
   end
-  it { should belong_to(:structure) }
-  it { should validate_presence_of :statut_validation }
-  it { should validate_presence_of :nom }
-  it { should validate_presence_of :prenom }
+  it { is_expected.to belong_to(:structure) }
+  it { is_expected.to validate_presence_of :statut_validation }
+  it { is_expected.to validate_presence_of :nom }
+  it { is_expected.to validate_presence_of :prenom }
   it do
-    should define_enum_for(:statut_validation)
+    is_expected.to define_enum_for(:statut_validation)
       .with_values(%i[en_attente acceptee refusee])
       .with_prefix(:validation)
   end

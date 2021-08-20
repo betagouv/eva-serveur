@@ -62,8 +62,37 @@
         }
       }
       &-parcours {
-        th {
-          background-color: $eva_light;
+        @include carte-avec-ombre;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        font-size: .875rem;
+
+        p:last-child {
+          margin-bottom: 0;
+        }
+
+        &-intro {
+          padding: 1.5rem;
+          font-style: italic;
+        }
+        &-info {
+          background-color: $eva_main_blue;
+          padding: 1.5rem;
+          color: white;
+          h4 {
+            margin: 0;
+            color: white;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-family: $font-titre;
+          }
+          &-description {
+            margin-bottom: 1rem;
+          }
+          &-duree-moyenne {
+            font-style: italic
+          }
         }
       }
     }

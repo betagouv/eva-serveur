@@ -61,7 +61,7 @@ L'api est accessible au point `/api`
 
 `GET /api/evaluations/:id`
 
-:warning: Cette API est dépréciée : on utilise maintenance le GET d'une campagne.
+:warning: Cette API est dépréciée : on utilise maintenant le GET d'une campagne.
 
 **Réponse**
 

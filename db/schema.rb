@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_101415) do
+ActiveRecord::Schema.define(version: 2021_08_23_153437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_101415) do
     t.boolean "affiche_competences_fortes", default: true
     t.uuid "parcours_type_id"
     t.datetime "anonymise_le"
+    t.index ["code"], name: "index_campagnes_on_code", unique: true
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["parcours_type_id"], name: "index_campagnes_on_parcours_type_id"
     t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
@@ -225,6 +226,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_101415) do
     t.datetime "updated_at", null: false
     t.uuid "questionnaire_id"
     t.uuid "questionnaire_entrainement_id"
+    t.index ["nom_technique"], name: "index_situations_on_nom_technique", unique: true
     t.index ["questionnaire_entrainement_id"], name: "index_situations_on_questionnaire_entrainement_id"
     t.index ["questionnaire_id"], name: "index_situations_on_questionnaire_id"
   end

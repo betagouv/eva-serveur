@@ -10,14 +10,15 @@ fr:
           Une campagne eva est constituée de jeux sérieux appelés « mise en situation ». Les personnes évaluées vont parcourir plusieurs jeux. Veuillez choisir un parcours parmi les propositions suivantes en fonction des compétences que vous souhaitez évaluer :
         configuration_avancee: Configuration avancée
       show:
-        titre_panel_parcours: Parcours choisi
         explication_code: |
           Afin de rattacher vos bénéficiaires à cette campagne,
           vous pouvez partager le code ou l’URL suivante.
+        nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
+      parcours:
+        titre_panel_parcours: Parcours choisi
         demande_aide_pour_configuration_campagne: |
           Retrouvez ci-dessous le contenu du parcours choisi.
           Il est possible de personnaliser une partie du parcours. Si vous souhaitez le modifier, contactez-nous via le module de chat présent en bas à droite de cette page ou par email à [%{email_contact}](mailto:%{email_contact})
-        nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

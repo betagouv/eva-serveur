@@ -45,12 +45,15 @@
       align-items: center;
       position: relative;
       font-size:0.875rem;
+      &-libelle,
+      &-code {
+        text-decoration: none;
+      }
       &-libelle {
         flex: 2;
         font-size: 1rem;
         font-family: $font-titre;
         font-weight: 600;
-        color: $eva_main_blue;
       }
       &-code {
         flex: 1;
@@ -59,9 +62,7 @@
         flex: 3;
         display: flex;
         justify-content: space-between;
-        a {
-          color: $eva_dark_blue_grey;
-        }
+        color: $eva_dark_blue_grey;
       }
     }
   }

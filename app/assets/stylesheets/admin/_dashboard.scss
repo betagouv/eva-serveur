@@ -63,6 +63,12 @@
         display: flex;
         justify-content: space-between;
         color: $eva_dark_blue_grey;
+        a:first-child {
+          flex: 1;
+        }
+      }
+      .bouton-jouer {
+        @include bouton-carte($eva_main_blue);
       }
     }
   }

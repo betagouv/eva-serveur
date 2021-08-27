@@ -26,6 +26,7 @@ div class: 'bloc-apercu' do
         span class: 'campagne-url' do
           a url, href: url, target: 'blank'
           button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
+          text_node link_to 'Jouer', url, class: 'bouton-jouer', target: 'blank'
         end
       end
     end

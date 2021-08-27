@@ -19,6 +19,10 @@ fr:
         demande_aide_pour_configuration_campagne: |
           Retrouvez ci-dessous le contenu du parcours choisi.
           Il est possible de personnaliser une partie du parcours. Si vous souhaitez le modifier, contactez-nous via le module de chat présent en bas à droite de cette page ou par email à [%{email_contact}](mailto:%{email_contact})
+        parcours_personnalise:
+          titre: Parcours personnalisé
+          description: |
+            Votre parcours a été personnalisé selon vos besoins spécifiques.
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

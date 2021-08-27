@@ -19,15 +19,11 @@ div class: 'bloc-apercu' do
       end
     end
     campagnes.each do |campagne|
+      url = url_campagne(campagne.code)
       div class: 'campagne' do
-        span class: 'campagne-libelle' do
-          text_node campagne.libelle
-        end
-        span class: 'campagne-code' do
-          text_node campagne.code
-        end
+        text_node link_to campagne.libelle, admin_campagne_path(campagne), class: 'campagne-libelle'
+        text_node link_to campagne.code, admin_campagne_path(campagne), class: 'campagne-code'
         span class: 'campagne-url' do
-          url = url_campagne(campagne.code)
           a url, href: url, target: 'blank'
           button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
         end

@@ -23,6 +23,9 @@
       }
     }
     .campagne {
+      table {
+        margin-bottom: 1rem;
+      }
       &-code {
         border: 2px solid $eva_green;
         .row {
@@ -44,6 +47,7 @@
             }
           }
           &-url {
+            position: relative;
             th {
               text-transform: uppercase;
             }
@@ -59,6 +63,12 @@
           position: absolute;
           right: 0;
           bottom: 0.4rem;
+        }
+        .conteneur-action {
+          padding-left: 8.5rem;
+        }
+        .bouton-jouer {
+          @include bouton-carte($eva_main_blue);
         }
       }
       &-parcours {

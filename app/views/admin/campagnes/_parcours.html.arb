@@ -24,13 +24,13 @@ div class: 'campagne-parcours' do
 end
 
 div class: 'panel campagne-auto_positionnement' do
-  if campagne.auto_positionnement_inclus?
+  if auto_positionnement_inclus
     div class: 'row inclus' do
       div class: 'col title' do
         t('.auto_positionnement')
       end
       div class: 'col text-right commentaire' do
-        t(".#{campagne.auto_positionnement_inclus?}")
+        t(".option.#{auto_positionnement_inclus}")
       end
     end
   else
@@ -39,20 +39,20 @@ div class: 'panel campagne-auto_positionnement' do
         t('.auto_positionnement')
       end
       div class: 'col text-right commentaire' do
-        t(".#{campagne.auto_positionnement_inclus?}")
+        t(".option.#{auto_positionnement_inclus}")
       end
     end
   end
 end
 
 div class: 'panel campagne-expression_ecrite' do
-  if campagne.expression_ecrite_incluse?
+  if expression_ecrite_incluse
     div class: 'row inclus' do
       div class: 'col title' do
         t('.expression_ecrite')
       end
       div class: 'col text-right commentaire' do
-        t(".#{campagne.expression_ecrite_incluse?}")
+        t(".option.#{expression_ecrite_incluse}")
       end
     end
   else
@@ -61,7 +61,7 @@ div class: 'panel campagne-expression_ecrite' do
         t('.expression_ecrite')
       end
       div class: 'col text-right commentaire' do
-        t(".#{campagne.expression_ecrite_incluse?}")
+        t(".option.#{expression_ecrite_incluse}")
       end
     end
   end

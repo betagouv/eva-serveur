@@ -5,6 +5,7 @@ class Questionnaire < ApplicationRecord
   has_many :questions, through: :questionnaires_questions
 
   validates :libelle, presence: true
+  validates :nom_technique, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :questionnaires_questions, allow_destroy: true
 

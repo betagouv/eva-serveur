@@ -6,4 +6,6 @@ RSpec.describe Questionnaire, type: :model do
   it { is_expected.to have_many(:questionnaires_questions).dependent(:destroy) }
 
   it { is_expected.to validate_presence_of :libelle }
+  it { is_expected.to validate_presence_of :nom_technique }
+  it { is_expected.to validate_uniqueness_of :nom_technique }
 end

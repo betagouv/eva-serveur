@@ -6,4 +6,6 @@ module Eva
   EMAIL_SUPPORT = 'support@eva.beta.gouv.fr'
   LIEN_LIVESTORM = 'https://app.livestorm.co/eva-diagnostic-cptc/presentation-et-demonstration-eva-session?type=detailed'
   LIEN_DEMANDE_ACCOMPAGNEMENT_ILLETTRISME = 'https://evabetagouv.typeform.com/to/oWr4IPEq'
+  QUESTIONNAIRE_AUTO_POSITIONNEMENT = 'autopositionnement'
+  QUESTIONNAIRE_EXPRESSION_ECRITE = 'livraison_expression_ecrite'
 end

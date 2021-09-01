@@ -29,8 +29,9 @@ fr:
             Votre parcours a été personnalisé selon vos besoins spécifiques.
         auto_positionnement: Questionnaire d’auto-positionnement
         expression_ecrite: Exercice d’expression écrite
-        true: Inclus
-        false: Non inclus
+        option:
+          true: Inclus
+          false: Non inclus
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

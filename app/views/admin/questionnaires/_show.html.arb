@@ -4,6 +4,7 @@ panel 'Détails du questionnaire' do
   attributes_table_for questionnaire do
     row :id
     row :libelle
+    row :nom_technique
     row :created_at
   end
 end

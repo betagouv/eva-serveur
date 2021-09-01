@@ -13,4 +13,26 @@ class SituationConfiguration < ApplicationRecord
   def questionnaire_utile
     @questionnaire_utile ||= (questionnaire || situation.questionnaire)
   end
+
+  class << self
+    def auto_positionnement_inclus?(situations_configurations)
+      situations_configurations.any? do |sc|
+        if sc.questionnaire.present?
+          sc.questionnaire.nom_technique == Eva::QUESTIONNAIRE_AUTO_POSITIONNEMENT
+        else
+          false
+        end
+      end
+    end
+
+    def expression_ecrite_incluse?(situations_configurations)
+      situations_configurations.any? do |sc|
+        if sc.questionnaire.present?
+          sc.questionnaire.nom_technique == Eva::QUESTIONNAIRE_EXPRESSION_ECRITE
+        else
+          false
+        end
+      end
+    end
+  end
 end

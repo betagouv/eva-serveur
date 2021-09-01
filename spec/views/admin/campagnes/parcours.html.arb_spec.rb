@@ -4,6 +4,8 @@ require 'rails_helper'
 
 describe 'admin/campagnes/_parcours.html.arb' do
   before { assign(:campagne, Campagne.new(parcours_type: parcours_type)) }
+  before { assign(:auto_positionnement_inclus, true) }
+  before { assign(:expression_ecrite_incluse, true) }
   before { render }
 
   context 'sans parcours type' do

@@ -50,6 +50,8 @@ ActiveAdmin.register Campagne do
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
+    before_action :auto_positionnement_inclus, only: %i[show]
+    before_action :expression_ecrite_incluse, only: %i[show]
 
     def create
       create!
@@ -86,9 +88,24 @@ ActiveAdmin.register Campagne do
     end
 
     def situations_configurations
+      includes_options = if current_compte.superadmin?
+                           [:questionnaire, { situation: :questionnaire }]
+                         else
+                           [:questionnaire]
+                         end
       @situations_configurations = resource
                                    .situations_configurations
-                                   .includes([:questionnaire, { situation: :questionnaire }])
+                                   .includes(includes_options)
+    end
+
+    def auto_positionnement_inclus
+      @auto_positionnement_inclus = SituationConfiguration
+                                    .auto_positionnement_inclus?(situations_configurations)
+    end
+
+    def expression_ecrite_incluse
+      @expression_ecrite_incluse = SituationConfiguration
+                                   .expression_ecrite_incluse?(situations_configurations)
     end
   end
 end

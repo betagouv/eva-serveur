@@ -3,7 +3,8 @@
 ActiveAdmin.register Questionnaire do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, questionnaires_questions_attributes: %i[id question_id _destroy]
+  permit_params :libelle, :nom_technique,
+                questionnaires_questions_attributes: %i[id question_id _destroy]
 
   filter :questions
 
@@ -11,6 +12,7 @@ ActiveAdmin.register Questionnaire do
     f.semantic_errors
     f.inputs do
       f.input :libelle
+      f.input :nom_technique
       f.has_many :questionnaires_questions, allow_destroy: true do |c|
         c.input :id, as: :hidden
         c.input :question
@@ -24,6 +26,7 @@ ActiveAdmin.register Questionnaire do
 
   index do
     column :libelle
+    column :nom_technique
     column :created_at
     actions
   end

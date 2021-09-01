@@ -22,10 +22,16 @@ div class: 'row' do
           code = campagne.code
           button 'Copier le code', class: 'button copier-coller', 'data-clipboard-text': code
         end
-        row(:url) { lien_campagne(campagne) }
+        row(:url) do
+          text_node lien_campagne(campagne)
+          url = url_campagne(campagne.code)
+          button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
+        end
 
-        url = url_campagne(campagne.code)
-        button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
+        div class: 'conteneur-action' do
+          link_to 'Démarrer une évaluation', url_campagne(campagne.code), target: '_blank',
+                                                                          class: 'bouton-jouer'
+        end
       end
     end
 

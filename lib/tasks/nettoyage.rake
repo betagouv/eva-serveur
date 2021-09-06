@@ -174,4 +174,17 @@ namespace :nettoyage do
       print '.'
     end
   end
+
+  desc 'Supprime les illustrations des questions'
+  task supprime_illustrations_questions: :environment do
+    ActiveStorage::Blob.where(service_name: 'openstack').find_each do |blob|
+      ActiveStorage::Attachment.where(blob_id: blob.id).destroy_all
+      blob.destroy
+    end
+
+    Question.find_each do |question|
+      question.illustration.purge
+      print '.'
+    end
+  end
 end

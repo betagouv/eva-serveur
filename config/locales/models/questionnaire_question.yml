@@ -1,0 +1,16 @@
+fr:
+  activerecord:
+    models:
+      questionnaire_question:
+        one: Question du questionnaire
+        other: Questions du questionnaire
+    attributes:
+      questionnaire_question:
+        created_at: Créé le
+        updated_at: Mis à jour le
+  formtastic:
+    actions:
+      questionnaire_question:
+        new_record: 'Ajouter'
+        create: Créer
+        update: Enregistrer

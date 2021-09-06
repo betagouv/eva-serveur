@@ -5,6 +5,7 @@ class SituationConfiguration < ApplicationRecord
   belongs_to :questionnaire, optional: true
 
   delegate :libelle, :nom_technique, :questionnaire_entrainement_id, to: :situation
+  delegate :nom_technique, to: :questionnaire_utile, prefix: :questionnaire
 
   acts_as_list scope: %i[campagne_id parcours_type_id]
 
@@ -15,23 +16,11 @@ class SituationConfiguration < ApplicationRecord
   end
 
   class << self
-    def auto_positionnement_inclus?(situations_configurations)
+    def questionnaire_inclus?(situations_configurations, questionnaire)
       situations_configurations.any? do |sc|
-        if sc.questionnaire.present?
-          sc.questionnaire.nom_technique == Eva::QUESTIONNAIRE_AUTO_POSITIONNEMENT
-        else
-          false
-        end
-      end
-    end
+        next if sc.questionnaire_utile.blank?
 
-    def expression_ecrite_incluse?(situations_configurations)
-      situations_configurations.any? do |sc|
-        if sc.questionnaire.present?
-          sc.questionnaire.nom_technique == Eva::QUESTIONNAIRE_EXPRESSION_ECRITE
-        else
-          false
-        end
+        sc.questionnaire_nom_technique == questionnaire
       end
     end
   end

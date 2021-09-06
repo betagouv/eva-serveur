@@ -34,4 +34,10 @@ ActiveAdmin.register Questionnaire do
   show do
     render partial: 'show'
   end
+
+  controller do
+    def find_resource
+      scoped_collection.where(id: params[:id]).includes(questionnaires_questions: :question).first!
+    end
+  end
 end

@@ -120,20 +120,6 @@ describe 'Admin - Campagne', type: :feature do
           end
         end
       end
-
-      context 'créer un parcours compétences de base' do
-        before do
-          choose "campagne_parcours_type_id_#{parcours_type_competences_de_base.id}"
-          click_on 'Créer'
-        end
-
-        it do
-          within('.campagne-parcours') do
-            expect(campagne.parcours_type.libelle).to have_content 'Parcours type #'
-            expect(page).to have_content campagne.parcours_type.description
-          end
-        end
-      end
     end
   end
 

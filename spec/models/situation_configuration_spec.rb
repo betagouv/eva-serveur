@@ -26,42 +26,37 @@ describe SituationConfiguration do
     end
   end
 
-  describe '#auto_positionnement_inclus?' do
-    context 'pas inclus' do
-      let(:questionnaire) { double(nom_technique: 'autre_chose') }
-      let(:situations_configurations) { [double(questionnaire: questionnaire)] }
+  describe '#questionnaire_inclus?' do
+    let(:situation_configuration) { SituationConfiguration.new }
+    before do
+      allow(situation_configuration).to receive(:questionnaire_utile).and_return questionnaire_utile
+    end
+
+    context 'quand pas inclus' do
+      let(:questionnaire_utile) { double(nom_technique: 'autre_chose') }
+
       it do
-        expect(SituationConfiguration.auto_positionnement_inclus?(situations_configurations))
+        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
+                                                            'quelque_chose'))
           .to eq(false)
       end
     end
 
-    context 'inclus' do
-      let(:questionnaire) { double(nom_technique: Eva::QUESTIONNAIRE_AUTO_POSITIONNEMENT) }
-      let(:situations_configurations) { [double(questionnaire: questionnaire)] }
+    context 'quand inclus' do
+      let(:questionnaire_utile) { double(nom_technique: 'quelque_chose') }
       it do
-        expect(SituationConfiguration.auto_positionnement_inclus?(situations_configurations))
+        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
+                                                            'quelque_chose'))
           .to eq(true)
       end
     end
-  end
 
-  describe '#expression_ecrite_incluse?' do
-    context 'pas incluse' do
-      let(:questionnaire) { double(nom_technique: 'autre_chose') }
-      let(:situations_configurations) { [double(questionnaire: questionnaire)] }
+    context 'quand pas de questionnaire utile' do
+      let(:questionnaire_utile) { nil }
       it do
-        expect(SituationConfiguration.expression_ecrite_incluse?(situations_configurations))
+        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
+                                                            'quelque_chose'))
           .to eq(false)
-      end
-    end
-
-    context 'incluse' do
-      let(:questionnaire) { double(nom_technique: Eva::QUESTIONNAIRE_EXPRESSION_ECRITE) }
-      let(:situations_configurations) { [double(questionnaire: questionnaire)] }
-      it do
-        expect(SituationConfiguration.expression_ecrite_incluse?(situations_configurations))
-          .to eq(true)
       end
     end
   end

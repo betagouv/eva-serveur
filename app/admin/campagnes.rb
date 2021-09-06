@@ -88,24 +88,21 @@ ActiveAdmin.register Campagne do
     end
 
     def situations_configurations
-      includes_options = if current_compte.superadmin?
-                           [:questionnaire, { situation: :questionnaire }]
-                         else
-                           [:questionnaire]
-                         end
-      @situations_configurations = resource
-                                   .situations_configurations
-                                   .includes(includes_options)
+      @situations_configurations ||= resource
+                                     .situations_configurations
+                                     .includes([:questionnaire, { situation: :questionnaire }])
     end
 
     def auto_positionnement_inclus
-      @auto_positionnement_inclus = SituationConfiguration
-                                    .auto_positionnement_inclus?(situations_configurations)
+      @auto_positionnement_inclus ||= SituationConfiguration
+                                      .questionnaire_inclus?(situations_configurations,
+                                                             Eva::QUESTIONNAIRE_AUTO_POSITIONNEMENT)
     end
 
     def expression_ecrite_incluse
-      @expression_ecrite_incluse = SituationConfiguration
-                                   .expression_ecrite_incluse?(situations_configurations)
+      @expression_ecrite_incluse ||= SituationConfiguration
+                                     .questionnaire_inclus?(situations_configurations,
+                                                            Eva::QUESTIONNAIRE_EXPRESSION_ECRITE)
     end
   end
 end

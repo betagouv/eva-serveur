@@ -66,16 +66,5 @@ div class: 'row' do
     end
 
     render 'parcours'
-
-    if can?(:manage, resource)
-      h2 'Consulter', class: 'sous-titre'
-
-      div class: 'panel' do
-        ul do
-          li link_to 'les stats', admin_campagne_stats_path(resource)
-          li link_to 'les événements', admin_campagne_evenements_path(resource)
-        end
-      end
-    end
   end
 end

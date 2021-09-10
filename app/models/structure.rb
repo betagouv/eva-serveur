@@ -27,10 +27,11 @@ class Structure < ApplicationRecord
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
 
   scope :joins_evaluations_et_groupe, lambda {
-    joins('INNER JOIN comptes ON structures.id = comptes.structure_id')
-      .joins('INNER JOIN campagnes ON comptes.id = campagnes.compte_id')
-      .joins('INNER JOIN evaluations ON campagnes.id = evaluations.campagne_id')
+    joins('LEFT OUTER JOIN comptes ON structures.id = comptes.structure_id')
+      .joins('LEFT OUTER JOIN campagnes ON comptes.id = campagnes.compte_id')
+      .joins('LEFT OUTER JOIN evaluations ON campagnes.id = evaluations.campagne_id')
       .group('structures.id')
+      .uniq!(:group)
   }
   scope :par_nombre_d_evaluations, lambda { |condition_nb_evaluations|
     joins_evaluations_et_groupe
@@ -59,6 +60,13 @@ class Structure < ApplicationRecord
     activees.par_derniere_evaluation('BETWEEN ? AND ?', 6.months.ago, 2.months.ago).uniq!(:group)
   }
   scope :abandonnistes, -> { activees.par_derniere_evaluation('< ?', 6.months.ago).uniq!(:group) }
+
+  scope :avec_nombre_evaluations_et_date_derniere_evaluation, lambda {
+    joins_evaluations_et_groupe
+      .select('structures.*,
+              COUNT(evaluations.id) AS nombre_evaluations,
+              MAX(evaluations.created_at) AS date_derniere_evaluation')
+  }
 
   def display_name
     "#{nom} - #{code_postal}"

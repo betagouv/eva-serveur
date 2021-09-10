@@ -37,14 +37,8 @@ ActiveAdmin.register Structure do
     column :created_at do |structure|
       l(structure.created_at, format: :court)
     end
-    column :nombre_evaluations do |structure|
-      Evaluation.de_la_structure(structure).count
-    end
-    column :derniere_evaluation do |structure|
-      derniere_evaluation = Evaluation.de_la_structure(structure).order(:created_at).last
-
-      l(derniere_evaluation.created_at, format: :court) if derniere_evaluation.present?
-    end
+    column :nombre_evaluations, sortable: :nombre_evaluations
+    column :date_derniere_evaluation, sortable: :date_derniere_evaluation
     actions
   end
 
@@ -66,6 +60,10 @@ ActiveAdmin.register Structure do
 
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)
+    end
+
+    def scoped_collection
+      end_of_association_chain.avec_nombre_evaluations_et_date_derniere_evaluation
     end
   end
 end

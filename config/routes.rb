@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :campagnes, only: :show, param: :code_campagne
-    resources :evaluations, only: [:create, :show, :update] do
+    resources :evaluations, only: [:create, :update] do
       resource :fin, only: [:create], controller: 'evaluations/fins'
     end
     resources :questionnaires, only: [:show]

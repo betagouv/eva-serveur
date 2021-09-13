@@ -2,8 +2,6 @@
 
 module Api
   class EvaluationsController < Api::BaseController
-    before_action :trouve_evaluation, only: :show
-
     def create
       evaluation = Evaluation.new(evaluation_params)
       if evaluation.save
@@ -25,24 +23,10 @@ module Api
       end
     end
 
-    def show
-      @campagne = @evaluation.campagne
-      @questions = @campagne.questionnaire&.questions || []
-    end
-
     private
 
     def evaluation_params
       params.permit(:nom, :code_campagne, :email, :telephone)
-    end
-
-    def trouve_evaluation
-      @evaluation = Evaluation.includes(
-        campagne: {
-          situations_configurations: [:questionnaire,
-                                      { situation: %i[questionnaire questionnaire_entrainement] }]
-        }
-      ).find(params[:id])
     end
   end
 end

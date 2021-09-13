@@ -55,55 +55,6 @@ L'api est accessible au point `/api`
 }
 ```
 
-### Récupére des informations sur l'évaluation
-
-**Requête**
-
-`GET /api/evaluations/:id`
-
-:warning: Cette API est dépréciée : on utilise maintenant le GET d'une campagne.
-
-**Réponse**
-
-```json
-{
-  "libelle": "Ma campagne",
-  "code": "FRT61000",
-  "questions:": [],
-  "situations": [
-    {
-      "id": "569cdc17-554d-4227-acfe-1d5d3a4afdbc",
-      "libelle": "Tri",
-      "nom_technique": "tri",
-      "questionnaire_id": "f958d99d-4adb-455b-8d85-c7e89ab7025c",
-      "questions:": [
-        {
-          "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
-          "type": "qcm",
-          "intitule": "Ma question",
-          "nom_technique": "ma-question",
-          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
-          "description": "Ma description",
-          "choix": []
-        }
-      ],
-      "questionnaire_entrainement_id": "f958d99d-4adb-455b-8d85-c7e89ab7025c",
-      "questions_entrainement": [
-        {
-          "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
-          "type": "qcm",
-          "intitule": "Ma question",
-          "nom_technique": "ma-question",
-          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
-          "description": "Ma description",
-          "choix": []
-        }
-      ]
-    }
-  ]
-}
-```
-
 ### Annonce la fin de l'évaluation
 
 `POST /api/evaluations/:id/fin`

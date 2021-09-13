@@ -5,6 +5,32 @@
   margin-top: 1rem;
 }
 
+.details-evaluation {
+  $grid-columns: 8;
+  @import "../bootstrap_minimal";
+  font-size: 0.875rem;
+
+  .titre,
+  .sous-titre {
+    @include titre-carte;
+  }
+  .sous-titre {
+    margin-bottom: .875rem;
+    font-size: 2.25rem;
+    color: $eva_main_blue;
+  }
+
+  .row {
+    margin-bottom: 1.5rem;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .col:last-child {
+      font-weight: 500;
+    }
+  }
+}
+
 .admin_restitution_globale {
   color: $couleur-texte;
   font-size: 0.875rem;

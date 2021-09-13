@@ -1,16 +1,68 @@
 # frozen_string_literal: true
 
-panel t('.titre'), id: 'details_evaluation' do
-  attributes_table_for resource do
-    row(:nom) { nom_pour_evaluation(resource) }
-    row :campagne
-    row :email
-    row :telephone
-    row :created_at
-    row :anonymise_le if resource.anonyme?
-    if can?(:manage, Compte)
-      row :terminee_le
-      row(:temps_total) { formate_duree statistiques.temps_total }
+div id: 'details_evaluation', class: 'row details-evaluation' do
+  div class: 'col col-6 mx-auto' do
+    h2 nom_pour_evaluation(resource), class: 'sous-titre'
+    h3 t('.titre'), class: 'titre'
+    div class: 'panel' do
+      div class: 'row' do
+        div class: 'col col-2' do
+          span 'Campagne'
+        end
+        div class: 'col col-6' do
+          span resource.campagne.display_name
+        end
+      end
+      if resource.email
+        div class: 'row' do
+          div class: 'col col-2' do
+            span 'Email'
+          end
+          div class: 'col col-6' do
+            span resource.email
+          end
+        end
+      end
+      div class: 'row' do
+        div class: 'col col-2' do
+          span 'Date'
+        end
+        div class: 'col col-6' do
+          span l(resource.created_at, format: :humain)
+        end
+      end
+      if statistiques.temps_total
+        div class: 'row' do
+          div class: 'col col-2' do
+            span 'Temps total'
+          end
+          div class: 'col col-6' do
+            span { formate_duree statistiques.temps_total }
+          end
+        end
+      end
+      if can?(:manage, Compte)
+        if resource.anonyme?
+          div class: 'row' do
+            div class: 'col col-2' do
+              span 'Anonymisée le'
+            end
+            div class: 'col col-6' do
+              span l(resource.anonymise_le, format: :humain)
+            end
+          end
+        end
+        if resource.terminee_le
+          div class: 'row' do
+            div class: 'col col-2' do
+              span 'Terminée le'
+            end
+            div class: 'col col-6' do
+              span l(resource.terminee_le, format: :humain)
+            end
+          end
+        end
+      end
     end
   end
 end

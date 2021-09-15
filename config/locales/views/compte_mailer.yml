@@ -44,9 +44,9 @@ fr:
         l'illettrisme et de valoriser les %{cible_evaluation} que vous accompagnez
         en vous appuyant sur leurs compétences transversales.
 
-        ### Vous souhaitez tester le parcours d'évaluation ?
+        ### Vous souhaitez essayer eva ? Découvrir les jeux, les réaliser puis visualiser les résultats ?
 
-        Connectez vous à ce [lien](%{url_client_campagne_test})
+        Connectez vous à votre compte [ici](%{url_connexion}) et créez votre campagne test.
       x_personnes_utilisent_eva:
         zero: ""
         one: "Vous êtes la seule personne de votre structure à avoir créé son compte."

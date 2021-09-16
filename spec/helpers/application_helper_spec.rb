@@ -28,7 +28,7 @@ describe ApplicationHelper do
     end
 
     it 'retourne une durée en heure, minutes et secondes pour une durée de plus de 24 heures' do
-      expect(helper.formate_duree(24 * 60 * 60 + 3661)).to eql('25:01:01')
+      expect(helper.formate_duree((24 * 60 * 60) + 3661)).to eql('25:01:01')
     end
 
     it 'même si la durée est un décimal' do

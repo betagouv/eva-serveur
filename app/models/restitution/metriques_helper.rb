@@ -18,7 +18,7 @@ module Restitution
         evenements.each_slice(2) do |e1, e2|
           next if e2.blank?
 
-          les_temps << e2.date - e1.date
+          les_temps << (e2.date - e1.date)
         end
         les_temps
       end

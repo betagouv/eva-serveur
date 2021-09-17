@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       resources :campagnes, only: :show, param: :code_campagne
       resources :evaluations, only: [:create, :update] do
         resource :fin, only: [:create], controller: 'evaluations/fins'
+        resource :collections_evenements, only: [:create],
+          controller: 'evaluations/collections_evenements'
       end
       resources :questionnaires, only: [:show]
       resources :evenements

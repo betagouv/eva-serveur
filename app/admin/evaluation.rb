@@ -18,14 +18,6 @@ ActiveAdmin.register Evaluation do
          order_by: 'libelle_asc'
   filter :created_at
 
-  action_item :pdf_restitution, only: :show do
-    link_to('Export PDF', {
-              parties_selectionnees: params[:parties_selectionnees],
-              format: :pdf
-            },
-            target: '_blank', rel: 'noopener')
-  end
-
   index download_links: lambda {
                           params[:action] == 'show' ? [:pdf] : %i[csv xls json]
                         }, row_class: lambda { |elem|

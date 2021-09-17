@@ -5,7 +5,7 @@
   margin-top: 1rem;
 }
 
-.details-evaluation {
+.carte-evaluation {
   $grid-columns: 8;
   @import "../bootstrap_minimal";
   font-size: 0.875rem;
@@ -19,14 +19,41 @@
     font-size: 2.25rem;
     color: $eva_main_blue;
   }
+  .panel {
+    padding: 0;
+  }
+  .conteneur-carte {
+    display: flex;
+    .details-carte {
+      padding: 2rem 1.25rem;
+      flex-grow: 2;
+    }
+    .pdf-carte {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.25rem;
+      text-align: center;
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      background-color: $eva_dark;
+      .bouton {
+        @include bouton;
+        padding: 0.5rem 1.5rem;
+      }
+    }
+  }
 
   .row {
     margin-bottom: 1.5rem;
     &:last-child {
       margin-bottom: 0;
     }
-    .col:last-child {
-      font-weight: 500;
+    .col {
+      padding-right: 0;
+      &:last-child {
+        font-weight: 500;
+      }
     }
   }
 }

@@ -30,7 +30,8 @@ fr:
         update: Modifier
     placeholders:
       structure:
-        nom: Mission Local de Caraces, Pôle Emploi de Marita
+        nom: Mission Locale de Caraces, Pôle Emploi de Marita
+        code_postal: Indiquer le code postal de votre structure
   active_admin:
     resources:
       structure:

@@ -2,7 +2,7 @@
          prenom: @compte.prenom,
          email: @compte.email,
          structure: @structure.display_name,
-         url_inscription: "#{root_url}admin/sign\\_up?structure\\_id=#{@structure.id}"
+         url_inscription: new_compte_registration_url(structure_id: @structure.id)
         ) %>
 <%= md t('layouts.mailer.aide_conseiller',
          document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN,

@@ -5,6 +5,7 @@ module Api
     class CollectionsEvenementsController < Api::BaseController
       def create
         @evaluation = Evaluation.find(params[:evaluation_id])
+        @parties = cree_parties
         Evenement.create(evenements_params)
         render json: {}, status: :created
       end
@@ -13,8 +14,17 @@ module Api
 
       def evenements_params
         params[:evenements].map do |evenement|
-          EvenementParams.from(evenement).merge(partie: partie(evenement))
+          partie = @parties[evenement[:situation]]
+          EvenementParams.from(evenement).merge(partie: partie)
         end
+      end
+
+      def cree_parties
+        params[:evenements]
+          .group_by { |evenement| evenement[:situation] }
+          .transform_values do |evenements|
+            partie(evenements.first)
+          end
       end
 
       def partie(evenement)

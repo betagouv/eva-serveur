@@ -5,9 +5,14 @@ module Api
     class CollectionsEvenementsController < Api::BaseController
       def create
         @evaluation = Evaluation.find(params[:evaluation_id])
-        @parties = cree_parties
-        Evenement.create(evenements_params)
+        ActiveRecord::Base.transaction do
+          @parties = cree_parties
+          Evenement.create!(evenements_params)
+        end
+
         render json: {}, status: :created
+      rescue ActiveRecord::RecordInvalid => e
+        render json: e.full_message, status: :unprocessable_entity
       end
 
       private

@@ -12,6 +12,13 @@ module Api
       end
     end
 
+    def self.cree_partie(session_id, nom_technique_situation, evaluation_id)
+      situation = Situation.find_by(nom_technique: nom_technique_situation)
+      Partie.where(session_id: session_id,
+                   situation: situation,
+                   evaluation_id: evaluation_id).first_or_create!
+    end
+
     private
 
     def evenement_params
@@ -19,10 +26,9 @@ module Api
     end
 
     def partie
-      situation = Situation.find_by(nom_technique: params[:situation])
-      Partie.where(session_id: evenement_params[:session_id],
-                   situation_id: situation,
-                   evaluation_id: params[:evaluation_id]).first_or_create!
+      @partie ||= self.class.cree_partie(
+        params[:session_id], params[:situation], params[:evaluation_id]
+      )
     end
   end
 end

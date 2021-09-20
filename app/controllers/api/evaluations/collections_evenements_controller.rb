@@ -28,10 +28,9 @@ module Api
       end
 
       def partie(evenement)
-        situation = Situation.find_by(nom_technique: evenement[:situation])
-        Partie.where(session_id: evenement[:session_id],
-                     situation_id: situation,
-                     evaluation_id: @evaluation.id).first_or_create!
+        EvenementsController.cree_partie(evenement[:session_id],
+                                         evenement[:situation],
+                                         params[:evaluation_id])
       end
     end
   end

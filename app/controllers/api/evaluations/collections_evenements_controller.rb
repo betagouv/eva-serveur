@@ -4,7 +4,6 @@ module Api
   module Evaluations
     class CollectionsEvenementsController < Api::BaseController
       def create
-        @evaluation = Evaluation.find(params[:evaluation_id])
         ActiveRecord::Base.transaction do
           @parties = cree_parties
           Evenement.create!(evenements_params)

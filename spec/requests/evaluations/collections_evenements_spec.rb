@@ -4,14 +4,6 @@ require 'rails_helper'
 
 describe 'API Collections Evenements', type: :request do
   describe 'POST /evaluations/:id/collections_evenements' do
-    context 'avec une évaluation inexistante' do
-      before { post '/api/evaluations/id_inconnu/collections_evenements' }
-
-      it do
-        expect(response).to have_http_status(404)
-      end
-    end
-
     context 'avec une évaluation existante' do
       let!(:situation_inventaire) { create :situation_inventaire }
       let!(:situation_livraison) { create :situation_livraison }

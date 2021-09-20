@@ -60,6 +60,34 @@ describe 'API Collections Evenements', type: :request do
           .by(2)
         expect(response).to have_http_status(201)
       end
+
+      context "quand les paramètres d'un évènement sont invalide" do
+        let(:donnees_evenements) do
+          {
+            evenements: [
+              {
+                date: nil,
+                donnees: {},
+                nom: 'demarrageEntrainement',
+                position: 0,
+                session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
+                situation: situation_livraison.nom_technique
+              }
+            ]
+          }
+        end
+
+        it do
+          expect do
+            post "/api/evaluations/#{evaluation.id}/collections_evenements",
+                 params: donnees_evenements
+          end.to change(Evenement, :count)
+            .by(0)
+            .and change(Partie, :count)
+            .by(0)
+          expect(response).to have_http_status(422)
+        end
+      end
     end
   end
 end

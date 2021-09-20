@@ -434,7 +434,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    select2-rails (4.0.13)
     shellany (0.0.1)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
@@ -551,7 +550,6 @@ DEPENDENCIES
   rspec_junit_formatter (~> 0.4.1)
   rubocop
   rubocop-rspec
-  select2-rails
   shoulda-matchers
   sidekiq
   sidekiq-scheduler

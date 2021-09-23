@@ -111,6 +111,31 @@ Contenu:
 }
 ```
 
+### Crée une collection d'événements
+
+`POST /api/evaluations/:evaluation_id/collections_evenements`
+
+Contenu:
+
+```json
+{
+  "evenements": [
+    {
+      "date":1632317532817,
+      "session_id":"54af3010-315c-4755-b268-08c4bf520f64",
+      "situation":"bienvenue",
+      "nom":"reponse",
+      "donnees": { 
+        "question":"f728be21-6f19-4901-ba07-0ac26ad702d7",
+        "reponse":"5f5ce41c-a2f0-4512-b266-39a4945dbeba"
+      },
+      "evaluation_id":"b80e3b14-737e-4712-a2ff-3f22f5bdcd4d",
+      "position": 2
+    },
+    // ...
+  ]
+}
+```
 
 ### Récupére des informations sur une campagne
 

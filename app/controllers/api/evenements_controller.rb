@@ -3,12 +3,10 @@
 module Api
   class EvenementsController < Api::BaseController
     def create
-      evenement = Evenement.new evenement_params.merge(partie: partie)
-
-      if CreeEvenementAction.new(partie, evenement).call
-        render json: evenement, status: :created
+      if cree_evenement
+        render json: @evenement, status: :created
       else
-        render json: evenement.errors.full_messages, status: :unprocessable_entity
+        render json: @evenement.errors.full_messages, status: :unprocessable_entity
       end
     end
 
@@ -20,6 +18,16 @@ module Api
     end
 
     private
+
+    def cree_evenement
+      resultat = false
+      ActiveRecord::Base.transaction do
+        @evenement = Evenement.new evenement_params.merge(partie: partie)
+        resultat = CreeEvenementAction.new(partie, @evenement).call
+        raise ActiveRecord::Rollback unless resultat
+      end
+      resultat
+    end
 
     def evenement_params
       @evenement_params ||= EvenementParams.from(params)

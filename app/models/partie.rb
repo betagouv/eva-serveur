@@ -4,7 +4,7 @@ class Partie < ApplicationRecord
   belongs_to :evaluation
   belongs_to :situation
 
-  validates :session_id, presence: true
+  validates :session_id, presence: true, uniqueness: true
 
   delegate :campagne, to: :evaluation
 

@@ -44,7 +44,6 @@ module EvaServeur
 
     config.action_controller.asset_host = "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_SERVEUR']}"
     config.action_mailer.asset_host = "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_SERVEUR']}"
-    config.action_mailer.default_url_options = { host: ENV['HOTE_SERVEUR'] }
     Rails.application.routes.default_url_options = {
       host: ENV['HOTE_SERVEUR'],
       protocol: ENV['PROTOCOLE_SERVEUR']

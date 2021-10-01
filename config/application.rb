@@ -64,5 +64,10 @@ module EvaServeur
     config.i18n.default_locale = :fr
 
     ::ActionView::Base.field_error_proc = Formtastic::Helpers::FormHelper.formtastic_field_error_proc
+
+    config.to_prepare do
+      Devise::Mailer.helper :application
+      Devise::Mailer.layout "mailer"
+    end
   end
 end

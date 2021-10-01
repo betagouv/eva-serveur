@@ -9,6 +9,7 @@ module Anonymisation
         compte.telephone = nil
         prefix_email = "#{compte.prenom.parameterize}.#{compte.nom.parameterize}.#{rand(999)}"
         compte.email = "#{prefix_email}@eva.beta.gouv.fr"
+        compte.skip_reconfirmation!
       end
     end
   end

@@ -26,8 +26,10 @@ describe 'Création de compte conseiller', type: :feature do
     end
 
     it do
-      expect { click_on "S'inscrire" }.to change(Compte, :count).by 1
-
+      expect do
+        click_on "S'inscrire"
+      end.to change(Compte, :count).by(1)
+                                   .and(change(Devise.mailer.deliveries, :count).by(1))
       nouveau_compte = Compte.find_by email: 'monemail@eva.fr'
       expect(nouveau_compte.validation_en_attente?).to be true
       expect(nouveau_compte.structure).to eq structure

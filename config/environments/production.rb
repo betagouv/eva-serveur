@@ -63,8 +63,6 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :mailjet_api
 
-  config.action_mailer.default_options = { from: ENV['EMAIL_DEFAULT_FROM'] }
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true

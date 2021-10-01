@@ -102,12 +102,12 @@ describe 'Admin - Compte', type: :feature do
     end
 
     describe 'mettre à jour sans mot de passe' do
-      let!(:compte) { create :compte, email: 'debut@test.com' }
+      let!(:compte) { create :compte, prenom: 'John' }
       it do
         visit edit_admin_compte_path(compte)
-        fill_in :compte_email, with: 'fin@test.com'
+        fill_in :compte_prenom, with: 'David'
         click_on 'Modifier'
-        expect(compte.reload.email).to eq 'fin@test.com'
+        expect(compte.reload.prenom).to eq 'David'
       end
     end
   end

@@ -9,7 +9,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
     it "envoie un email pour relancer l'utilisateur" do
       expect do
         RelanceUtilisateurPourNonActivationJob.perform_now(compte.id)
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end.to change { ActionMailer::Base.deliveries.count }.by(2)
     end
   end
 
@@ -19,7 +19,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
     it "envoie un email pour relancer l'utilisateur" do
       expect do
         RelanceUtilisateurPourNonActivationJob.perform_now(compte.id)
-      end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end.to change { ActionMailer::Base.deliveries.count }.by(2)
     end
   end
 

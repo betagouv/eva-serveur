@@ -5,7 +5,7 @@ class Compte < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :trackable,
-         :recoverable, :rememberable, :validatable, :registerable
+         :recoverable, :rememberable, :validatable, :registerable, :confirmable
   ROLES = %w[superadmin admin conseiller compte_generique].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   validates :role, inclusion: { in: ROLES }

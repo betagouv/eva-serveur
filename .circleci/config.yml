@@ -32,7 +32,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle check || bundle install --without development production
+          command: bundle check || bundle install --without production
 
       # Store bundle cache
       - save_cache:

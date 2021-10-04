@@ -65,11 +65,16 @@ describe 'Evaluation API', type: :request do
     before { patch "/api/evaluations/#{evaluation.id}", params: params }
 
     context 'Met à jour email et téléphone avec une requête valide' do
-      let(:params) { { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05' } }
+      let(:date) { Time.new(2021, 10, 4) }
+      let(:params) do
+        { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05', terminee_le: date.iso8601 }
+      end
 
       it do
-        expect(evaluation.reload.email).to eq 'coucou-a-jour@eva.fr'
-        expect(evaluation.reload.telephone).to eq '01 02 03 04 05'
+        evaluation.reload
+        expect(evaluation.email).to eq 'coucou-a-jour@eva.fr'
+        expect(evaluation.telephone).to eq '01 02 03 04 05'
+        expect(evaluation.terminee_le).to eq date
         expect(response).to have_http_status(200)
       end
     end

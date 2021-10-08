@@ -4,3 +4,8 @@
     class: AnonymisationEvaluationsJob
     description: Anonymise les évaluations de plus d'un an. (job exécuté chaque jour)
     enabled: true
+  relance_utilisateur_pour_confirmation_email_job:
+    cron: '0 10 * * 1' # Tous les lundis à 10h00
+    class: RelanceUtilisateurPourConfirmationEmailJob
+    description: Renvoie l'email de confirmation aux utilisateurs qui ne l'ont pas encore fait (job exécuté 1 fois par semaine)
+    enabled: true

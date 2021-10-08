@@ -12,9 +12,10 @@ module Api
 
     def self.cree_partie(session_id, nom_technique_situation, evaluation_id)
       situation = Situation.find_by(nom_technique: nom_technique_situation)
-      Partie.where(session_id: session_id,
-                   situation: situation,
-                   evaluation_id: evaluation_id).first_or_create!
+      partie = Partie.where(session_id: session_id,
+                            situation: situation,
+                            evaluation_id: evaluation_id).first_or_create
+      partie.persisted? ? partie : nil
     end
 
     private

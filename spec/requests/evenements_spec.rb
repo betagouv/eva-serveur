@@ -34,9 +34,8 @@ describe 'Evenement API', type: :request do
 
     context 'Quand une requête est valide' do
       it 'Crée un événement et une partie' do
-        expect { post '/api/evenements', params: payload_valide }
-          .to change { Evenement.count }.by(1)
-                                        .and change { Partie.count }.by(1)
+        post '/api/evenements', params: payload_valide
+
         expect(response).to have_http_status(201)
         evenement = Evenement.last
         expect(evenement.date.to_datetime).to eq Time.zone.at(1_551_111_089, 238_000).to_datetime
@@ -45,12 +44,6 @@ describe 'Evenement API', type: :request do
         partie = Partie.last
         expect(partie.evaluation).to eq evaluation
         expect(partie.situation).to eq situation_inventaire
-      end
-
-      it 'crée une seule fois la partie' do
-        expect do
-          2.times { post '/api/evenements', params: payload_valide }
-        end.to change { Partie.count }.by 1
       end
     end
 

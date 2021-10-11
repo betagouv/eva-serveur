@@ -36,8 +36,8 @@ describe CompteMailer, type: :mailer do
       compte = Compte.new prenom: 'Paule',
                           nom: 'Delaporte',
                           email: 'debut@test.com',
-                          structure: structure
-
+                          structure: structure,
+                          id: SecureRandom.uuid
       email = CompteMailer.with(compte: compte, compte_admin: admin)
                           .alerte_admin
 
@@ -53,6 +53,7 @@ describe CompteMailer, type: :mailer do
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')
       expect(email.body).to include('Ma Super Structure - 75012')
+      expect(email.body).to include(edit_admin_compte_url(compte))
     end
   end
 

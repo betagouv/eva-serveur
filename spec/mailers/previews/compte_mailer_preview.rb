@@ -10,14 +10,12 @@ class CompteMailerPreview < ActionMailer::Preview
 
   def alerte_admin
     structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
-    admin = Compte.new prenom: 'Admin',
-                       email: 'admin@test.com',
-                       structure: structure,
-                       role: 'admin'
+    admin = Compte.new prenom: 'Admin', email: 'admin@test.com', structure: structure, role: 'admin'
     compte = Compte.new prenom: 'Paule',
                         nom: 'Delaporte',
                         email: 'debut@test.com',
-                        structure: structure
+                        structure: structure,
+                        id: SecureRandom.uuid
     CompteMailer.with(compte: compte, compte_admin: admin).alerte_admin
   end
 

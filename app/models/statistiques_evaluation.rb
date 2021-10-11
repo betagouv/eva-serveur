@@ -11,7 +11,7 @@ class StatistiquesEvaluation
   private
 
   def calcule_temps_total
-    return @evaluation.terminee_le - @evaluation.created_at if @evaluation.terminee_le.present?
+    return @evaluation.terminee_le - @evaluation.debutee_le if @evaluation.terminee_le.present?
 
     durees = Statistiques::Helper.secondes_par_eval('evaluations.id': @evaluation)
     return durees[0] unless durees.empty?

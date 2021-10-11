@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe StatistiquesCampagne do
   let(:campagne) { create :campagne }
-  let(:date_creation_evaluation) { Time.zone.local(2021, 1, 1, 8, 2) }
+  let(:date_debut_evaluation) { Time.zone.local(2021, 1, 1, 8, 2) }
   let(:maintenance) { create :situation_maintenance }
 
   describe '#calcule!' do
@@ -19,11 +19,11 @@ describe StatistiquesCampagne do
 
     context 'Avec des évaluations' do
       let!(:evaluation1) do
-        create :evaluation, campagne: campagne, created_at: date_creation_evaluation
+        create :evaluation, campagne: campagne, debutee_le: date_debut_evaluation
       end
       let(:partie1) { create :partie, situation: maintenance, evaluation: evaluation1 }
       let(:evaluation2) do
-        create :evaluation, campagne: campagne, created_at: date_creation_evaluation
+        create :evaluation, campagne: campagne, debutee_le: date_debut_evaluation
       end
       let(:partie2) { create :partie, situation: maintenance, evaluation: evaluation2 }
 

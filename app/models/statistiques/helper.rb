@@ -14,7 +14,7 @@ module Statistiques
       private
 
       def sql_duree_evaluation
-        'extract(epoch from (max(evenements.created_at) - evaluations.created_at)) as duree'
+        'extract(epoch from (max(evenements.created_at) - evaluations.debutee_le)) as duree'
       end
     end
   end

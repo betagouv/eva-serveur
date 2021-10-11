@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 describe StatistiquesEvaluation do
-  let(:date_creation_evaluation) { Time.zone.local(2021, 1, 1, 8, 2) }
-  let(:evaluation) { create :evaluation, nom: 'Test', created_at: date_creation_evaluation }
+  let(:date_debut_evaluation) { Time.zone.local(2021, 1, 1, 8, 2) }
+  let(:evaluation) { create :evaluation, nom: 'Test', debutee_le: date_debut_evaluation }
   let!(:partie) { create :partie, evaluation: evaluation }
 
   describe '#calcule_temps_total' do

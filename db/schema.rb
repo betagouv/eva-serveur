@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_130227) do
+ActiveRecord::Schema.define(version: 2021_10_11_153431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_09_28_130227) do
     t.string "telephone"
     t.datetime "terminee_le"
     t.datetime "anonymise_le"
+    t.datetime "debutee_le"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
 

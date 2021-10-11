@@ -7,8 +7,9 @@ describe 'Evaluation API', type: :request do
     let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
     context 'Création quand une requête est valide' do
+      let(:date) { Time.new(2021, 10, 4) }
       let(:payload_valide_avec_campagne) do
-        { nom: 'Roger', code_campagne: 'ETE19' }
+        { nom: 'Roger', code_campagne: 'ETE19', debutee_le: date.iso8601 }
       end
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
 
@@ -16,6 +17,7 @@ describe 'Evaluation API', type: :request do
         evaluation = Evaluation.last
         expect(evaluation.campagne).to eq campagne_ete19
         expect(evaluation.nom).to eq 'Roger'
+        expect(evaluation.debutee_le).to eq date
 
         expect(response).to have_http_status(201)
         reponse = JSON.parse(response.body)

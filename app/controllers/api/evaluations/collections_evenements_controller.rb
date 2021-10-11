@@ -4,37 +4,24 @@ module Api
   module Evaluations
     class CollectionsEvenementsController < Api::BaseController
       def create
-        ActiveRecord::Base.transaction do
-          @parties = cree_parties
-          Evenement.create!(evenements_params)
-        end
+        @evenements = cree_evenements
 
-        render json: {}, status: :created
-      rescue ActiveRecord::RecordInvalid => e
-        render json: e.full_message, status: :unprocessable_entity
+        if @evenements.all?(&:persisted?)
+          render json: {}, status: :created
+        else
+          render json: {}, status: :unprocessable_entity
+        end
       end
 
       private
 
-      def evenements_params
-        params[:evenements].map do |evenement|
-          partie = @parties[evenement[:situation]]
-          EvenementParams.from(evenement).merge(partie: partie)
+      def cree_evenements
+        evenements = []
+        params[:evenements].each do |parametres|
+          parametres.merge!(evaluation_id: params[:evaluation_id])
+          evenements << FabriqueEvenement.new(parametres).call
         end
-      end
-
-      def cree_parties
-        params[:evenements]
-          .group_by { |evenement| evenement[:situation] }
-          .transform_values do |evenements|
-            partie(evenements.first)
-          end
-      end
-
-      def partie(evenement)
-        EvenementsController.cree_partie(evenement[:session_id],
-                                         evenement[:situation],
-                                         params[:evaluation_id])
+        evenements
       end
     end
   end

@@ -31,8 +31,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom campagne code_campagne]
-        expect(json.values).to eq [['doit être rempli'], ['doit être présente'], ['Code inconnu']]
+        expect(json.keys).to eq %w[nom debutee_le campagne code_campagne]
+        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
+                                   ['doit être présente'], ['Code inconnu']]
         expect(response).to have_http_status(422)
       end
     end
@@ -43,8 +44,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom campagne]
-        expect(json.values).to eq [['doit être rempli'], ['doit être présente']]
+        expect(json.keys).to eq %w[nom debutee_le campagne]
+        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
+                                   ['doit être présente']]
         expect(response).to have_http_status(422)
       end
     end
@@ -55,8 +57,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom campagne]
-        expect(json.values).to eq [['doit être rempli'], ['doit être présente']]
+        expect(json.keys).to eq %w[nom debutee_le campagne]
+        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
+                                   ['doit être présente']]
         expect(response).to have_http_status(422)
       end
     end

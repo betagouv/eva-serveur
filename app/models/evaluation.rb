@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Evaluation < ApplicationRecord
-  validates :nom, presence: true
+  validates :nom, :debutee_le, presence: true
   belongs_to :campagne, counter_cache: :nombre_evaluations
   attr_accessor :code_campagne
 

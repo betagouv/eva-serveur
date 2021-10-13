@@ -101,6 +101,66 @@ body.logged_out {
     color: $eva_main_blue;
   }
 
+  .active_admin_header {
+    background-color: $eva_dark;
+    height: 4rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    display: flex;
+    align-items: center;
+    p {
+      font-family: $font-titre;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $eva_light;
+      padding-left: 1.5rem;
+      margin: 0;
+    }
+  }
+
+  .active_admin_connexion {
+    @include carte-avec-ombre();
+    background-color: $eva_green;
+    height: 4rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    p {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    a {
+      @include bouton-carte($eva_dark);
+      height: 2rem;
+      border-radius: 2.875rem;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+  }
+
+  .evaluations_header {
+    background-color: $eva_main_blue;
+    height: 4rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    display: flex;
+    align-items: center;
+    p {
+      font-family: $font-titre;
+      font-size: 1rem;
+      font-weight: 700;
+      color: $eva_light;
+      padding-left: 1.5rem;
+      margin: 0;
+    }
+  }
+
+  .evaluations_content {
+    font-style: italic;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+
   #login {
     form fieldset {
       input[type=text],

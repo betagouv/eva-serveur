@@ -16,8 +16,13 @@ fr:
         title: |
           Connexion
           espace conseiller
-        subtitle: |
-          Si vous souhaitez passer votre évaluation, demandez votre code campagne à votre conseiller et rendez-vous [ici](%{lien})
+        header_title: Je souhaite accéder à l'espace Pro
+        inscription: Je souhaite créer mon espace Pro
+        evaluations:
+          header_title: Je souhaite passer eva
+          content: |
+            Votre conseiller vous a normalement communiqué un code campagne. Celui-ci va vous permettre de passer eva.
+            Saisissez votre code campagne ci-dessous et lancez eva.
       registrations:
         new:
           title: Rejoindre la structure

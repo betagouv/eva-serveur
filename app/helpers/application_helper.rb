@@ -12,10 +12,11 @@ module ApplicationHelper
   def formate_duree(duree)
     return if duree.blank?
 
-    duree = duree.to_i
+    signe = duree.negative? ? '-' : ''
+    duree = duree.to_i.abs
     heure_minutes_secondes = [duree / 3600, duree / 60 % 60, duree % 60]
     heure_minutes_secondes.shift if heure_minutes_secondes[0].zero?
-    heure_minutes_secondes.map { |t| t.to_s.rjust(2, '0') }.join(':')
+    "#{signe}#{heure_minutes_secondes.map { |t| t.to_s.rjust(2, '0') }.join(':')}"
   end
 
   def rapport_colonne_class

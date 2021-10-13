@@ -39,6 +39,10 @@ describe ApplicationHelper do
     it 'retourne nil si le paramètre est vide' do
       expect(helper.formate_duree('')).to eql(nil)
     end
+
+    it 'retourne une durée negative' do
+      expect(helper.formate_duree(-8.300185)).to eql('-00:08')
+    end
   end
 
   describe '#cdn_for(fichier)' do

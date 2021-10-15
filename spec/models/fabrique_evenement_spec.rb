@@ -94,11 +94,11 @@ describe FabriqueEvenement do
         )
       end
 
-      it 'ne crée rien' do
+      it 'la partie est quand même créée' do
         expect do
           FabriqueEvenement.new(parametres_invalide).call
         end.to change(Partie, :count)
-          .by(0)
+          .by(1)
           .and change(Evenement, :count)
           .by(0)
       end

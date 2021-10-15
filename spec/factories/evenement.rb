@@ -5,6 +5,7 @@ FactoryBot.define do
     nom { 'ouvertureContenant' }
     donnees { {} }
     partie
+    sequence(:position)
     date { DateTime.now }
 
     factory :evenement_demarrage_entrainement do

@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Api::EvenementsController, type: :controller do
   describe 'POST create' do
     context "quand la création de l'évènement échoue" do
-      it 'ne crée pas de partie' do
+      it 'renvoie une erreur unprocessable_entity' do
         evaluation = create :evaluation
         create :situation_inventaire
         params = {
@@ -18,12 +18,8 @@ describe Api::EvenementsController, type: :controller do
           evaluation_id: evaluation.id
         }
 
-        expect do
-          post :create, params: params
-        end.to change(Partie, :count)
-          .by(0)
-          .and change(Evenement, :count)
-          .by(0)
+        post :create, params: params
+        expect(response).to have_http_status(422)
       end
     end
   end

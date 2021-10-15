@@ -1,22 +1,24 @@
-<% content_for :titre do %>
-  <%= t('.titre') -%>
-<% end %>
-
-<div class="recherche-structure">
-
-  <%= md t('.description')%>
-  <div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
-  <%= form_with method: :get do |f| %>
-    <%= f.text_field :code_postal, class: 'champ-recherche', value: params[:code_postal] %>
-    <%= f.submit 'chercher' %>
+<div id="active_admin_content">
+  <% content_for :titre do %>
+    <%= t('.titre') -%>
   <% end %>
 
-  <% if params[:code_postal] %>
-    <%= render(@structures) || content_tag(:p, t('.aucun_resultat'), class: 'aucun-resultat') %>
+  <div class="recherche-structure">
 
-    <div class="actions">
-    <%= link_to t('.structure_non_referencee'), nouvelle_structure_path, class: 'creer-structure' %>
-    </div>
-  <% end %>
+    <%= md t('.description')%>
+    <div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
+    <%= form_with method: :get do |f| %>
+      <%= f.text_field :code_postal, class: 'champ-recherche', value: params[:code_postal] %>
+      <%= f.submit 'chercher' %>
+    <% end %>
 
+    <% if params[:code_postal] %>
+      <%= render(@structures) || content_tag(:p, t('.aucun_resultat'), class: 'aucun-resultat') %>
+
+      <div class="actions">
+      <%= link_to t('.structure_non_referencee'), nouvelle_structure_path, class: 'creer-structure' %>
+      </div>
+    <% end %>
+
+  </div>
 </div>

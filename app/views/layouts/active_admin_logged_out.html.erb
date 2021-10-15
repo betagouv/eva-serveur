@@ -41,27 +41,7 @@
       <% end %>
     </div>
 
-    <div class="active_admin_header">
-       <%= md t('active_admin.devise.login.header_title') -%>
-    </div>
-    <div id="active_admin_content">
-      <%= yield %>
-    </div>
-
-    <div class="active_admin_connexion">
-      <%= md t('active_admin.devise.login.inscription') -%>
-      <%= link_to t('active_admin.devise.links.sign_up'), structures_path %>
-    </div>
-
-
-    <div class="evaluations_header">
-       <%= md t('active_admin.devise.login.evaluations.header_title') -%>
-    </div>
-    <div id="active_admin_content" class="evaluations_content">
-      <%= md t('active_admin.devise.login.evaluations.content') -%>
-
-      <!-- Ajouter le formulaire pour lancer l'évaluation ici -->
-    </div>
+    <%= yield %>
 
   </div>
   <div id="footer">

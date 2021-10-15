@@ -1,33 +1,35 @@
-<% content_for :titre do %>
-  <%= t('.title') -%>
-<% end %>
-<% content_for :sous_titre do %>
-  <%= resource.structure.nom -%>
-<% end %>
+<div id="active_admin_content">
+  <% content_for :titre do %>
+    <%= t('.title') -%>
+  <% end %>
+  <% content_for :sous_titre do %>
+    <%= resource.structure.nom -%>
+  <% end %>
 
-<div id="login">
-  <p><strong><%= t('.description') -%></strong></p>
+  <div id="login">
+    <p><strong><%= t('.description') -%></strong></p>
 
-  <% scope = Devise::Mapping.find_scope!(resource_name) %>
-  <%= render partial: "active_admin/devise/shared/error_messages", resource: resource %>
-  <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_registration_path"), html: { id: "registration_new" }) do |f|
-    f.inputs do
-      f.input :prenom
-      f.input :nom
-      resource.class.authentication_keys.each_with_index { |key, index|
-        f.input key, label: t('active_admin.devise.'+key.to_s+'.title')
-      }
-      f.input :telephone
-      f.input :password
-      f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
-      f.input :structure_id, as: :hidden
+    <% scope = Devise::Mapping.find_scope!(resource_name) %>
+    <%= render partial: "active_admin/devise/shared/error_messages", resource: resource %>
+    <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_registration_path"), html: { id: "registration_new" }) do |f|
+      f.inputs do
+        f.input :prenom
+        f.input :nom
+        resource.class.authentication_keys.each_with_index { |key, index|
+          f.input key, label: t('active_admin.devise.'+key.to_s+'.title')
+        }
+        f.input :telephone
+        f.input :password
+        f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
+        f.input :structure_id, as: :hidden
+      end
+      f.actions do
+        f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit') }
+      end
     end
-    f.actions do
-      f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit') }
-    end
-  end
-  %>
-  <div class='liens-partages'>
-    <%= render partial: "active_admin/devise/shared/links" %>
+    %>
+    <div class='liens-partages'>
+      <%= render partial: "active_admin/devise/shared/links" %>
+    </div>
   </div>
 </div>

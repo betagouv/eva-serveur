@@ -55,110 +55,133 @@ body.logged_out {
         display: none;
       }
     }
-  }
 
-  .groupe-titres {
-    width: $largeur-colonne;
-    margin: 0 auto 3rem;
-    font-family: $font-titre;
-    text-align: center;
-    h1 {
-      color: $eva_light;
-      font-size: 1.5rem;
-      font-weight: bold;
-      + h2 {
-        margin-top: 1rem;
+
+    .groupe-titres {
+      width: $largeur-colonne;
+      margin: 0 auto 3rem;
+      font-family: $font-titre;
+      text-align: center;
+      h1 {
+        color: $eva_light;
+        font-size: 1.5rem;
+        font-weight: bold;
+        + h2 {
+          margin-top: 1rem;
+        }
+      }
+      h2 {
+        font-size: 1rem;
       }
     }
+
     h2 {
-      font-size: 1rem;
-    }
-  }
-
-  h2 {
-    padding: 0;
-    margin: 0 0 1.125rem;;
-    font-size: 1.125rem;
-    font-family: $font-titre;
-    text-shadow: none;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    box-shadow: none;
-    color: $eva_dark;
-    background: none;
-  }
-
-  h3 {
-    @include titre-carte;
-    margin-bottom: .5rem;
-    padding: 0;
-    + .description {
-      margin-bottom: 0;
-    }
-  }
-
-  a {
-    color: $eva_main_blue;
-  }
-
-  .active_admin_header {
-    background-color: $eva_dark;
-    height: 4rem;
-    border-radius: 0.5rem 0.5rem 0 0;
-    display: flex;
-    align-items: center;
-    p {
+      padding: 0;
+      margin: 0 0 1.125rem;;
+      font-size: 1.125rem;
       font-family: $font-titre;
-      font-size: 1rem;
-      font-weight: 700;
-      color: $eva_light;
-      padding-left: 1.5rem;
-      margin: 0;
+      text-shadow: none;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      box-shadow: none;
+      color: $eva_dark;
+      background: none;
     }
-  }
 
-  .active_admin_connexion {
-    @include carte-avec-ombre();
-    background-color: $eva_green;
-    height: 4rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    p {
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin: 0;
+    h3 {
+      @include titre-carte;
+      margin-bottom: .5rem;
+      padding: 0;
+      + .description {
+        margin-bottom: 0;
+      }
     }
 
     a {
-      @include bouton-carte($eva_dark);
-      height: 2rem;
-      border-radius: 2.875rem;
+      color: $eva_main_blue;
+    }
+
+    .panels-login {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      grid-template-rows: 1fr;
+      justify-content: center;
+      .panel {
+        width: 445px;
+        padding: 0;
+        margin-bottom: 0;
+        .panel-content {
+          padding: 1.5rem;
+        }
+        .panel-header {
+          height: 4rem;
+          border-radius: 0.5rem 0.5rem 0 0;
+          display: flex;
+          align-items: center;
+          p {
+            font-family: $font-titre;
+            font-size: 1rem;
+            font-weight: 700;
+            color: $eva_light;
+            padding-left: 1.5rem;
+            margin: 0;
+          }
+        }
+      }
+      .panel--connexion {
+        .panel-header {
+          background-color: $eva_dark;
+        }
+        .panel-content {
+          form .actions input[type=submit] {
+            margin-right: 0;
+          }
+        }
+      }
+      .panel--evaluation {
+        input[type=submit] {
+          margin-top: 2rem;
+          float: right;
+        }
+        .panel-header {
+          background-color: $eva_main_blue;
+        }
+        .panel-content {
+          p {
+            font-style: italic;
+            font-size: 0.875rem;
+            line-height: 1rem;
+          }
+          form {
+            margin-top: 2rem;
+          }
+        }
+      }
+    }
+    .panel-espace-pro {
+      @include carte-avec-ombre();
+      background-color: $eva_green;
+      height: 4rem;
+      display: flex;
+      justify-content: space-around;
       align-items: center;
-      font-size: 0.875rem;
-    }
-  }
+      p {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin: 0;
+      }
 
-  .evaluations_header {
-    background-color: $eva_main_blue;
-    height: 4rem;
-    border-radius: 0.5rem 0.5rem 0 0;
-    display: flex;
-    align-items: center;
-    p {
-      font-family: $font-titre;
-      font-size: 1rem;
-      font-weight: 700;
-      color: $eva_light;
-      padding-left: 1.5rem;
-      margin: 0;
+      a {
+        @include bouton-carte($eva_dark);
+        height: 2rem;
+        border-radius: 2.875rem;
+        align-items: center;
+        font-size: 0.875rem;
+        padding: 0 0.94rem;
+        color: #fff;
+      }
     }
-  }
-
-  .evaluations_content {
-    font-style: italic;
-    font-size: 0.875rem;
-    line-height: 1rem;
   }
 
   #login {
@@ -220,11 +243,6 @@ body.logged_out {
     &.actions li {
       float: right;
     }
-
-  }
-
-  .liens-partages {
-    margin-top: -2rem;
   }
 
   #footer {
@@ -235,5 +253,8 @@ body.logged_out {
     margin: auto;
     position: relative;
     z-index: 2;
+    a {
+      color: $eva_main_blue;
+    }
   }
 }

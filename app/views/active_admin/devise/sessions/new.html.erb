@@ -4,25 +4,59 @@
 <% content_for :sous_titre do %>
   <%= md t('active_admin.devise.login.subtitle', lien: URL_CLIENT) -%>
 <% end %>
+<div class="panels-login">
+  <div class="panel panel--connexion">
+    <div class="panel-header">
+       <%= md t('active_admin.devise.login.header_title') -%>
+    </div>
 
-<div id="login">
+    <div class="panel-content">
 
-  <% scope = Devise::Mapping.find_scope!(resource_name) %>
-  <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
-    f.inputs do
-      resource.class.authentication_keys.each_with_index { |key, index|
-        f.input key, label: t("active_admin.devise.#{key}.title"), input_html: { autofocus: index.zero? }
-      }
-      f.input :password, label: t('active_admin.devise.password.title')
-      f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
-    end
-    f.actions do
-      f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.login.submit') }
-    end
-  end
-  %>
+      <% scope = Devise::Mapping.find_scope!(resource_name) %>
+      <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
+        f.inputs do
+          resource.class.authentication_keys.each_with_index { |key, index|
+            f.input key, label: t("active_admin.devise.#{key}.title"), input_html: { autofocus: index.zero? }
+          }
+          f.input :password, label: t('active_admin.devise.password.title')
+          f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
+        end
+        f.actions do
+          f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.login.submit') }
+        end
+      end
+      %>
 
-  <div class='liens-partages'>
-    <%= render partial: "active_admin/devise/shared/links" %>
+      <div class='liens-partages'>
+        <%= render partial: "active_admin/devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel--evaluation">
+    <div class="panel-header">
+       <%= md t('active_admin.devise.login.evaluations.header_title') -%>
+    </div>
+    <div class="panel-content">
+      <%= md t('active_admin.devise.login.evaluations.content') -%>
+
+      <form method='GET' action="<%= URL_CLIENT %>">
+        <fieldset class='inputs'>
+          <ol>
+            <li class='input'>
+              <label class='label'>
+                <%= t('active_admin.devise.login.evaluations.campagne') %>
+              </label>
+              <input name="code" placeholder="DEMO" type="text">
+            </li>
+          </ol>
+        </fieldset>
+        <input type="submit" value="<%= t('active_admin.devise.login.evaluations.bouton') %>">
+      </form>
+    </div>
+  </div>
+  <div class="panel-espace-pro">
+    <%= md t('active_admin.devise.login.inscription') -%>
+    <%= link_to t('active_admin.devise.links.sign_up'), structures_path %>
   </div>
 </div>

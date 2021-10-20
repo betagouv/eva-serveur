@@ -23,8 +23,23 @@ if can?(:manage, Compte)
   end
 end
 
-h3 'Utilisateurs'
-table_for comptes, class: 'index_table' do
+h3 'Mes collègues'
+h4 'En attente'
+table_for comptes.validation_en_attente, class: 'index_table' do
+  column(:nom_complet) do |compte|
+    compte.nom_complet.presence || 'Nom inconnu'
+  end
+  column :email
+  column :actions do |compte|
+    form do |f|
+      f.button "autoriser"
+      f.button "refuser"
+    end
+  end
+end
+
+h4 'Autre'
+table_for comptes.not_validation_en_attente, class: 'index_table' do
   column(:nom_complet) do |compte|
     compte.nom_complet.presence || 'Nom inconnu'
   end

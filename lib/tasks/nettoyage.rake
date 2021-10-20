@@ -33,6 +33,7 @@ namespace :nettoyage do
     puts "\n-- anonymise les campagnes --"
     Campagne.find_each do |campagne|
       print '.'
+      campagne.code = campagne.code.gsub(/[ -É]/, '')
       Anonymisation::Campagne.new(campagne).anonymise
     end
   end

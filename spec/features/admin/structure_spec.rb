@@ -20,6 +20,20 @@ describe 'Admin - Structure', type: :feature do
       expect(page).to have_content 'Ma structure'
       expect(page).to have_content 'Mission locale'
     end
+
+    it "autorise un compte" do
+      compte = create :compte, structure: structure, statut_validation: :en_attente
+      visit admin_structure_path(structure)
+      click_on 'autoriser'
+      expect(compte.reload.validation_acceptee?).to eq true
+    end
+
+    it "refuse un compte" do
+      compte = create :compte, structure: structure, statut_validation: :en_attente
+      visit admin_structure_path(structure)
+      click_on 'refuser'
+      expect(compte.reload.validation_refusee?).to eq true
+    end
   end
 
   describe 'modification' do

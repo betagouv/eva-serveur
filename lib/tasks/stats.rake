@@ -136,4 +136,90 @@ namespace :stats do
     affiche_reponses_livraison
     affiche_reponses_objets_trouves
   end
+
+  def noms_colonnes(mes, colonnes, colonnes_z)
+    noms = ''
+    noms += "#{mes}: #{colonnes[mes].join("; #{mes}: ")};" unless colonnes[mes].empty?
+    unless colonnes_z[mes].empty?
+      noms += "#{mes}: cote_z_#{colonnes_z[mes].join("; #{mes}: cote_z_")};"
+    end
+    noms
+  end
+
+  def print_entete_colonnes(colonnes, colonnes_z)
+    entete_colonnes = 'evaluation;date creation;'
+    colonnes.each_key do |mes|
+      entete_colonnes += noms_colonnes(mes, colonnes, colonnes_z)
+    end
+    puts entete_colonnes
+  end
+
+  def lit_valeurs_colonne(valeurs, colonnes)
+    colonnes&.each do |colonne|
+      valeurs << (yield(colonne) || 'vide')
+    end
+  end
+
+  def lit_valeurs_colonnes(partie, restitution, colonnes, colonnes_z)
+    valeurs = []
+    lit_valeurs_colonne(valeurs, colonnes) do |colonne|
+      partie.metriques[colonne]&.to_s || restitution.send(colonne)&.to_s
+    end
+    lit_valeurs_colonne(valeurs, colonnes_z) do |colonne|
+      restitution.cote_z_metriques[colonne]
+    end
+    valeurs
+  end
+
+  def visite_parties(evaluation, situations)
+    Partie.where(evaluation: evaluation).order(:created_at).each do |partie|
+      situation = partie.situation.nom_technique
+      next unless situations.include?(situation)
+
+      restitution = FabriqueRestitution.instancie partie
+      next unless restitution.termine?
+
+      yield(situation, partie, restitution)
+    end
+  end
+
+  def collecte_donnees(evaluation, colonnes, colonnes_z)
+    situations = {}
+    colonnes.each_key do |mes|
+      situations[mes] = Array.new(colonnes[mes].count + colonnes_z[mes].count, 'vide')
+    end
+
+    visite_parties(evaluation, colonnes.keys) do |situation, partie, restitution|
+      situations[situation] =
+        lit_valeurs_colonnes(partie, restitution,
+                             colonnes[situation], colonnes_z[situation])
+    end
+    situations
+  end
+
+  desc 'Extrait les données de tri, inventaire et securité'
+  task competences_transversales: :environment do
+    Rails.logger.level = :warn
+    colonnes = {
+      'tri' => %i[nombre_bien_placees nombre_mal_placees],
+      'inventaire' => %i[nombre_ouverture_contenant nombre_essais_validation],
+      'securite' => Restitution::Securite::METRIQUES.keys
+    }
+    colonnes_z = {
+      'tri' => [],
+      'inventaire' => [],
+      'securite' => Restitution::Securite::METRIQUES.keys
+    }
+    evaluations = recupere_evaluations
+    puts "Nombre d'évaluation : #{evaluations.count}"
+    print_entete_colonnes(colonnes, colonnes_z)
+    evaluations.each do |e|
+      situations = collecte_donnees(e, colonnes, colonnes_z)
+
+      valeurs_des_parties = situations.keys.map do |situation|
+        situations[situation].join('; ')
+      end
+      puts "#{e.id};#{e.created_at};" + valeurs_des_parties.join('; ')
+    end
+  end
 end

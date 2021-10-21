@@ -203,11 +203,13 @@ namespace :stats do
     colonnes = {
       'tri' => %i[nombre_bien_placees nombre_mal_placees],
       'inventaire' => %i[nombre_ouverture_contenant nombre_essais_validation],
+      'controle' => %i[nombre_bien_placees nombre_mal_placees nombre_non_triees],
       'securite' => Restitution::Securite::METRIQUES.keys
     }
     colonnes_z = {
       'tri' => [],
       'inventaire' => [],
+      'controle' => [],
       'securite' => Restitution::Securite::METRIQUES.keys
     }
     evaluations = recupere_evaluations

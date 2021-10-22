@@ -12,8 +12,13 @@ describe 'Admin - Structure', type: :feature do
     it { expect(page).to have_content 'Ma structure' }
   end
 
-  describe 'show' do
-    let!(:structure) { create :structure, nom: 'Ma structure', type_structure: 'mission_locale' }
+  fdescribe 'show' do
+    let!(:structure) do
+      create :structure, :avec_admin, nom: 'Ma structure', type_structure: 'mission_locale'
+    end
+    let!(:compte) do
+      create :compte, structure: structure, statut_validation: :en_attente, role: :conseiller
+    end
     before { visit admin_structure_path(structure) }
 
     it do
@@ -21,17 +26,13 @@ describe 'Admin - Structure', type: :feature do
       expect(page).to have_content 'Mission locale'
     end
 
-    it "autorise un compte" do
-      compte = create :compte, structure: structure, statut_validation: :en_attente
-      visit admin_structure_path(structure)
-      click_on 'autoriser'
+    it 'autorise un compte' do
+      click_on 'Autoriser'
       expect(compte.reload.validation_acceptee?).to eq true
     end
 
-    it "refuse un compte" do
-      compte = create :compte, structure: structure, statut_validation: :en_attente
-      visit admin_structure_path(structure)
-      click_on 'refuser'
+    it 'refuse un compte' do
+      click_on 'Refuser'
       expect(compte.reload.validation_refusee?).to eq true
     end
   end

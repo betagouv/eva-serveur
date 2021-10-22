@@ -25,15 +25,17 @@ end
 
 h3 'Mes collègues'
 h4 'En attente'
-table_for comptes.validation_en_attente, class: 'index_table' do
+table_for comptes.validation_en_attente, class: 'index_table hide_inventory' do
   column(:nom_complet) do |compte|
     compte.nom_complet.presence || 'Nom inconnu'
   end
   column :email
   column :actions do |compte|
-    form do |f|
-      f.button "autoriser"
-      f.button "refuser"
+    div do
+      link_to 'Autoriser', autoriser_admin_compte_path(compte), method: :patch
+    end
+    div do
+      link_to 'Refuser', refuser_admin_compte_path(compte), method: :patch
     end
   end
 end

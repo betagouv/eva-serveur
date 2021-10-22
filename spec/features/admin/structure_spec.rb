@@ -12,7 +12,7 @@ describe 'Admin - Structure', type: :feature do
     it { expect(page).to have_content 'Ma structure' }
   end
 
-  fdescribe 'show' do
+  describe 'show' do
     let!(:structure) do
       create :structure, :avec_admin, nom: 'Ma structure', type_structure: 'mission_locale'
     end

@@ -101,6 +101,14 @@ table.index_table {
                 color: $eva_dark;
                 background-color: $couleur-legere-accent-validation;
               }
+              &.autoriser_link {
+                color: $eva_light;
+                background-color: $couleur-liens;
+              }
+              &.refuser_link {
+                color: $eva_light;
+                background-color: $couleur-warning;
+              }
               &.edit_link {
                 background-color: $eva_main_blue;
               }
@@ -116,6 +124,10 @@ table.index_table {
                 border-bottom-right-radius: 0.25rem;
               }
             }
+          }
+
+          .actions_visibles {
+            opacity:1;
           }
         }
       }
@@ -146,4 +158,8 @@ table.index_table {
 
 .attributes_table table th {
   text-shadow: none;
+}
+
+.hide_inventory thead {    
+  display:none; 
 }

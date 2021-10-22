@@ -148,4 +148,14 @@ ActiveAdmin.register Compte do
   show do
     render 'show'
   end
+
+  member_action :autoriser, method: :patch do
+    resource.validation_acceptee!
+    redirect_to request.referer
+  end
+
+  member_action :refuser, method: :patch do
+    resource.validation_refusee!
+    redirect_to request.referer
+  end
 end

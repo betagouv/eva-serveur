@@ -24,11 +24,7 @@ if can?(:manage, Compte)
 end
 
 h3 'Mes collègues'
-<<<<<<< Updated upstream
-h4 'En attente'
-=======
 h4 'En attente', class: 'sous-titre' unless comptes.validation_en_attente.count.zero?
->>>>>>> Stashed changes
 table_for comptes.validation_en_attente,
           class: 'index_table hide_inventory' do
   column(:nom_complet) do |compte|

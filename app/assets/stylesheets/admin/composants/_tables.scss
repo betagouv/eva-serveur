@@ -102,11 +102,9 @@ table.index_table {
                 background-color: $couleur-legere-accent-validation;
               }
               &.autoriser_link {
-                color: $eva_light;
                 background-color: $couleur-liens;
               }
               &.refuser_link {
-                color: $eva_light;
                 background-color: $couleur-warning;
               }
               &.edit_link {

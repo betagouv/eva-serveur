@@ -2,10 +2,3 @@ h3 {
   @include titre-carte;
   margin-bottom: 1rem;
 }
-
-h4 {
-  @include titre-carte;
-  font-size: 14px;
-  margin-bottom: 0.5rem;
-  padding-left: 1.5rem;
-}

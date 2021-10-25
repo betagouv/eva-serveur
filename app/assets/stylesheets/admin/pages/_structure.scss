@@ -1,0 +1,11 @@
+.admin_structures {
+    &.show {
+        .sous-titre {
+            @include titre-carte;
+            font-size: 14px;
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
+            padding-left: 1.5rem;
+          }
+    }
+}

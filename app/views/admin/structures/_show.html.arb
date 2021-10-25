@@ -33,12 +33,15 @@ table_for comptes.validation_en_attente,
   column :email
   column :actions do |compte|
     div class: 'table_actions actions_visibles' do
-      (link_to 'Autoriser', autoriser_admin_compte_path(compte),
-               method: :patch,
-               class: 'autoriser_link') +
-        (link_to 'Refuser', refuser_admin_compte_path(compte),
-                 method: :patch,
-                 class: 'refuser_link')
+      text_node link_to 'Autoriser', autoriser_admin_compte_path(compte),
+                        method: :patch,
+                        class: 'autoriser_link'
+
+      unless compte.admin? || compte.superadmin?
+        text_node link_to 'Refuser', refuser_admin_compte_path(compte),
+                          method: :patch,
+                          class: 'refuser_link'
+      end
     end
   end
 end

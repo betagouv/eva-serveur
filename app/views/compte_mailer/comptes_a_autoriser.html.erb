@@ -1,0 +1,9 @@
+<%= md t('.intro', prenom_admin: @compte_admin.prenom,
+                   structure: @compte_admin.structure.display_name) %>
+<ul>
+<% @comptes.each do |compte| %>
+    <li><%= md t('.nom_prenom_compte', prenom_compte: compte.prenom, nom_compte: compte.nom) %></li>
+<% end %>
+</ul>
+<%= md t('.contenu', lien_autorisation: admin_comptes_url(statu_validation: 'en_attente'),
+                     email_support: Eva::EMAIL_SUPPORT) %>

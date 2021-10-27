@@ -25,4 +25,17 @@ class CompteMailerPreview < ActionMailer::Preview
 
     CompteMailer.with(compte: compte).relance
   end
+
+  def comptes_a_autoriser
+    structure = Structure.new nom: 'Ma structure', code_postal: '92100',
+                              type_structure: 'mission_locale'
+    compte_admin = Compte.new prenom: 'Admin', structure: structure, role: 'admin'
+    compte1 = Compte.new prenom: 'Jean', nom: 'Bon', email: 'compte_1@gmail.com',
+                         structure: structure
+    compte2 = Compte.new prenom: 'Jackie', nom: 'Chan', email: 'compte_2@gmail.com',
+                         structure: structure
+
+    CompteMailer.with(comptes: [compte1, compte2], compte_admin: compte_admin)
+                .comptes_a_autoriser
+  end
 end

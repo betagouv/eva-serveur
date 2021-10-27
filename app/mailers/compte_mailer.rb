@@ -25,4 +25,13 @@ class CompteMailer < ApplicationMailer
       subject: t('.objet', prenom: @compte.prenom)
     )
   end
+
+  def comptes_a_autoriser
+    @comptes = params[:comptes]
+    @compte_admin = params[:compte_admin]
+    mail(
+      to: @compte_admin.email,
+      subject: t('.objet')
+    )
+  end
 end

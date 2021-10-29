@@ -23,7 +23,6 @@ describe 'Admin - Structure', type: :feature do
 
     it do
       expect(page).to have_content 'Ma structure'
-      expect(page).to have_content 'Mission locale'
     end
 
     it 'autorise un compte' do

@@ -4,3 +4,8 @@
     class: AnonymisationEvaluationsJob
     description: Anonymise les évaluations de plus d'un an. (job exécuté chaque jour)
     enabled: true
+  notification_admin_job:
+    cron: '0 9 * * 1'
+    class: NotificationAdminComptesEnAttenteJob
+    description: Notifie à l'administrateur toutes les semaines des comptes en attentes 
+    enabled: true

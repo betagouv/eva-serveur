@@ -7,5 +7,34 @@
       margin-top: 2rem;
       padding-left: 1.5rem;
     }
+
+    .panel {
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    .attributes_table {
+      table {
+        th,
+        td {
+          border: 0;
+        }
+        td {
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
+        th {
+          vertical-align: bottom;
+          font-family: $font-texte;
+          font-weight: normal;
+          font-size: 0.875rem;
+          text-transform: none;
+          color: $eva_dark;
+        }
+        a {
+          color: $eva_dark;
+        }
+      }
+    }
   }
 }

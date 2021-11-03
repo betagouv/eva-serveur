@@ -24,7 +24,7 @@ if can?(:manage, Compte)
 end
 
 h3 'Mes collègues'
-h4 'En attente', class: 'sous-titre' unless comptes.validation_en_attente.count.zero?
+h4 'En attente', class: 'sous-titre' unless comptes.validation_en_attente.size.zero?
 table_for comptes.validation_en_attente,
           class: 'index_table hide_inventory' do
   column(:nom_complet) do |compte|
@@ -56,6 +56,22 @@ table_for comptes.not_validation_en_attente, class: 'index_table' do
   column :actions do |compte|
     div class: 'table_actions' do
       link_to t('.voir'), admin_compte_path(compte), class: 'view_link'
+    end
+  end
+end
+
+h4 'Refusés', class: 'sous-titre' unless comptes.validation_refusee.size.zero?
+table_for comptes.validation_refusee,
+          class: 'index_table hide_inventory' do
+  column(:nom_complet) do |compte|
+    compte.nom_complet.presence || 'Nom inconnu'
+  end
+  column :email
+  column :actions do |compte|
+    div class: 'table_actions actions_visibles' do
+      text_node link_to 'Autoriser', autoriser_admin_compte_path(compte),
+                        method: :patch,
+                        class: 'autoriser_link'
     end
   end
 end

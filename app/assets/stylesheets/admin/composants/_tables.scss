@@ -84,7 +84,7 @@ table.index_table {
             padding: 0 0 0 1rem;
 
             a {
-              height: 2rem;
+              height: 1.5rem;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -97,20 +97,25 @@ table.index_table {
               box-sizing: border-box;
               font-size: .75rem;
 
-              &.view_link {
+              &.view-link, &.refuser-link {
                 color: $eva_dark;
+              }
+              &.autoriser-link, &.refuser-link {
+                width: 4rem;
+              }
+              &.view-link {
                 background-color: $couleur-legere-accent-validation;
               }
-              &.autoriser_link {
+              &.autoriser-link {
                 background-color: $couleur-liens;
               }
-              &.refuser_link {
+              &.refuser-link {
                 background-color: $couleur-warning;
               }
-              &.edit_link {
+              &.edit-link {
                 background-color: $eva_main_blue;
               }
-              &.delete_link {
+              &.delete-link {
                 background-color: $couleur-accent-erreur;
               }
               &:first-child {

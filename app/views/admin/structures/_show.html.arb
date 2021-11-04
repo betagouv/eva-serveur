@@ -32,7 +32,7 @@ table_for campagnes, class: 'index_table' do
   column :nombre_evaluations
   column :actions do |campagne|
     div class: 'table_actions' do
-      link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'
+      link_to t('.voir'), admin_campagne_path(campagne), class: 'view-link'
     end
   end
 end

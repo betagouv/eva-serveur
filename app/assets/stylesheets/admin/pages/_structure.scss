@@ -11,26 +11,34 @@
     .panel {
       font-size: 0.875rem;
       margin-bottom: 2rem;
-    }
-
-    .attributes_table {
-      table {
+      width: 37.5rem;
+      .attributes_table {
         th,
         td {
           border: 0;
+          font-size: 0.875rem;
         }
         td {
           font-weight: 500;
-          font-size: 0.875rem;
         }
         th {
           vertical-align: bottom;
           font-family: $font-texte;
           font-weight: normal;
-          font-size: 0.875rem;
           text-transform: none;
           color: $eva_dark;
         }
+      }
+    }
+    
+    .index_table {
+      width: 37.5rem;
+      .information-principale {
+        width: 13.313rem;
+      }
+      .information-secondaire {
+        font-style: italic;
+        color: $eva_dark_blue_grey;
       }
     }
   }

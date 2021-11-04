@@ -3,11 +3,11 @@
 h4 title, class: 'sous-titre' unless comptes.size.zero?
 table_for comptes,
           class: 'index_table hide_inventory' do
-  column(:nom_complet) do |compte|
+  column :nom_complet, class: 'information-principale' do |compte|
     compte.nom_complet.presence || 'Nom inconnu'
   end
-  column :email
-  column :actions do |compte|
+  column :email, class: 'information-secondaire'
+  column :actions, class: 'col-actions roue-dentee-invisible' do |compte|
     yield(compte)
   end
 end

@@ -69,6 +69,10 @@ table.index_table {
           background: image-url('roue-dentee.svg') right 1rem center no-repeat;
           background-color: #FFF;
 
+          &.roue-dentee-invisible {
+            background: #FFF;
+          }
+
           .table_actions {
             opacity: 0;
             transition: opacity 0.2s;

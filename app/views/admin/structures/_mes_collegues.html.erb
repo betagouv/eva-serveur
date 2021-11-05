@@ -1,0 +1,25 @@
+<h3>Mes collègues</h3>
+
+<%= render 'table_validation', comptes: @comptes.validation_en_attente, title: 'En attente' do |compte| %>
+  <div class='table_actions actions_visibles'>
+    <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
+                             method: :patch,
+                             class: 'autoriser_link' %>
+    <%= 
+      unless compte.admin? || compte.superadmin?
+        link_to 'Refuser', refuser_admin_compte_path(compte),
+                          method: :patch,
+                          class: 'refuser_link'
+      end
+    %>
+  </div> 
+<% end %>
+
+<%= render 'table_validation', comptes: @comptes.validation_refusee, title: 'Refusée' do |compte| %>
+  <div class='table_actions actions_visibles'>
+    <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
+                             method: :patch,
+                             class: 'autoriser_link' %>
+  </div> 
+<% end %>
+

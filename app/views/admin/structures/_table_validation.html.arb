@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+h4 title, class: 'sous-titre' unless comptes.size.zero?
+table_for comptes,
+          class: 'index_table hide_inventory' do
+  column(:nom_complet) do |compte|
+    compte.nom_complet.presence || 'Nom inconnu'
+  end
+  column :email
+  column :actions do |compte|
+    yield(compte)
+  end
+end

@@ -1,0 +1,9 @@
+<% unless comptes.size.zero? %>
+  <h4 class='sous-titre'><%= title %></h4>
+
+  <% comptes.each do |compte| %>
+    <%= render 'card_validation', compte: compte do %>
+      <%= yield(compte) %>
+    <% end %>
+  <% end %>
+<% end %>

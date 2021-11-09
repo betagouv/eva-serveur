@@ -1,0 +1,11 @@
+<div class='card-validation'>
+  <div class='information-principale'>
+    <%= compte.nom_complet.presence || 'Nom inconnu' %>
+  </div>
+  <div class='information-secondaire'>
+    <%= compte.email %>
+  </div>
+  <div class='actions'>
+    <%= yield %>
+  </div>
+</div>

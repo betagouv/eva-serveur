@@ -1,38 +1,44 @@
 # frozen_string_literal: true
 
-div class: 'panel' do
-  attributes_table_for structure do
-    row :nom
-    row :type_structure do
-      traduction_type_structure(structure.type_structure)
+div class: 'row' do
+  div class: 'col-4' do
+    div class: 'panel' do
+      attributes_table_for structure do
+        row :nom
+        row :type_structure do
+          traduction_type_structure(structure.type_structure)
+        end
+        row :code_postal
+        row :region
+        row :created_at
+      end
     end
-    row :code_postal
-    row :region
-    row :created_at
-  end
-end
 
-if can?(:manage, Compte)
-  panel 'Administration' do
-    attributes_table_for structure do
-      row :id
-      row :latitude
-      row :longitude
-      row :updated_at
+    if can?(:manage, Compte)
+      panel 'Administration' do
+        attributes_table_for structure do
+          row :id
+          row :latitude
+          row :longitude
+          row :updated_at
+        end
+      end
     end
-  end
-end
 
-render 'mes_collegues'
+    render 'mes_collegues'
 
-h3 'Campagnes'
-table_for campagnes, class: 'index_table' do
-  column :libelle
-  column :code
-  column :nombre_evaluations
-  column :actions do |campagne|
-    div class: 'table_actions' do
-      link_to t('.voir'), admin_campagne_path(campagne), class: 'view-link'
+    h3 'Campagnes'
+    table_for campagnes, class: 'index_table' do
+      column :libelle
+      column :code
+      column :nombre_evaluations
+      column :actions do |campagne|
+        div class: 'table_actions' do
+          link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'
+        end
+      end
     end
+
+    active_admin_comments_for(resource)
   end
 end

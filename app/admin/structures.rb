@@ -44,7 +44,6 @@ ActiveAdmin.register Structure do
 
   show do
     render partial: 'show', locals: { structure: resource }
-    active_admin_comments
   end
 
   sidebar :aide_filtres, only: :index

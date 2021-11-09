@@ -1,38 +1,32 @@
-<h3>Mes collègues</h3>
+<div class='mes-collegues'>
+  <h3>Mes collègues</h3>
 
-<%= render 'table_validation', comptes: @comptes_en_attente, title: 'En attente' do |compte| %>
-  <div class='table_actions actions_visibles'>
+  <%= render 'cards_validation', comptes: @comptes_en_attente, title: 'En attente' do |compte| %>
     <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
-                             method: :patch,
-                             class: 'autoriser-link' %>
+                              method: :patch,
+                              class: 'action lien-autoriser' %>
     <%= 
       unless compte.admin? || compte.superadmin?
         link_to 'Refuser', refuser_admin_compte_path(compte),
                           method: :patch,
-                          class: 'refuser-link'
+                          class: 'action lien-refuser'
       end
     %>
-  </div> 
-<% end %>
+  <% end %>
 
-<%= render 'table_validation', comptes: @comptes_acceptes, title: 'Autorisés' do |compte| %>
-  <div class='table_actions actions_visibles'>
+  <%= render 'cards_validation', comptes: @comptes_acceptes, title: 'Autorisés' do |compte| %>
     <%= 
       unless compte.admin? || compte.superadmin?
         link_to 'Révoquer', refuser_admin_compte_path(compte),
                           method: :patch,
-                          class: 'refuser-link'
+                          class: 'action lien-refuser'
       end
     %>
-  </div> 
-<% end %>
+  <% end %>
 
-<%= render 'table_validation', comptes: @comptes_refuses, title: 'Refusés' do |compte| %>
-  <div class='table_actions actions_visibles'>
+  <%= render 'cards_validation', comptes: @comptes_refuses, title: 'Refusés' do |compte| %>
     <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
-                             method: :patch,
-                             class: 'autoriser-link' %>
-  </div> 
-<% end %>
-
-
+                              method: :patch,
+                              class: 'action lien-autoriser' %>
+  <% end %>
+</div>

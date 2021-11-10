@@ -14,8 +14,8 @@
 @import 'activeadmin_reorderable';
 @import 'fonts';
 @import 'variables';
-
 @import 'admin/mixins';
+@import "bootstrap_minimal";
 
 @import 'admin/layout/header';
 @import 'admin/layout/footer';
@@ -33,6 +33,7 @@
 @import 'admin/composants/input_choix_parcours';
 @import 'admin/composants/flash_messages';
 @import 'admin/composants/menu_transverse';
+@import 'admin/composants/modal';
 @import 'admin/composants/clipboard';
 @import 'admin/composants/card_validation';
 

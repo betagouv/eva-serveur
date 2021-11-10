@@ -1,0 +1,62 @@
+.modal.show .modal-dialog {
+  transform: translateY(-50%);
+  margin-top: 50vh;
+
+  .modal-content {
+    padding: 1rem;
+    font-size: 0.875rem;
+    background-color: $eva_red;
+    color: $eva_light;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 0.5rem;
+  
+    &::before {
+      background-image: asset-data-url('flash_erreur.svg');
+      content: '';
+      height: 4rem;
+      background-repeat: no-repeat;
+      background-size: cover;
+      flex: 0 0 4rem;
+    }
+
+    .modal-body {
+      padding: 0rem;
+      padding-left: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: end;
+      margin-top: 2rem;
+  
+      .bouton-redirection, 
+      .bouton-fermer {
+        text-decoration: none;
+<<<<<<< Updated upstream
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        font-weight: normal;
+        font-size: 0.75rem;
+=======
+        border-radius: .5rem;
+        padding: .5rem;
+        font-size: .75rem;
+        cursor: pointer;
+>>>>>>> Stashed changes
+      }
+      .bouton-redirection {
+        background-color: $eva_light;
+        color: $eva_red;
+      }
+      .bouton-fermer {
+        border: 1px solid;
+        background-color: $eva_red;
+        color: $eva_light;
+        border-color: $eva_light;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+

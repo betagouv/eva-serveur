@@ -2,12 +2,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <%= t('.info_comptes_en_attente').html_safe %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        <%= md t('.info_comptes_en_attente') %>
+        <div class='actions'>
+          <button type="button" class="bouton-fermer" data-dismiss="modal">Plus Tard</button>
+          <%= link_to 'Aller sur la page Comptes', admin_comptes_path(q: { statut_validation_eq: 'en_attente' }), class:"bouton-redirection" %>
+        </div>
+      </div>  
     </div>
   </div>
 </div>

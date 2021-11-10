@@ -1,9 +1,10 @@
 fr:
   admin:
     dashboard:
-      index:
+      modal_validation_comptes_en_attente:
         info_comptes_en_attente: |
-          <strong>Des demandes d'accès sont en attente de validation.</strong> Vous pouvez les confirmer <strong><a href="%{lien}">dans la page "Comptes"</a></strong>.
+          **Des demandes d'accès sont en attente de validation.** Vous pouvez les confirmer **dans la page "Comptes"**.
+      index:
         incitation_creation_compte_personnel: |
           Nous déconseillons de partager un accès, vous pouvez créer votre compte personnel <a href="%{lien}">ici</a>
       dashboard:

@@ -51,7 +51,6 @@ body.logged_in {
       }
     }
 
-    &.flash_comptes_en_attente,
     &.flash_error {
       @include reset-flash;
       background-color: $eva_red;
@@ -64,12 +63,6 @@ body.logged_in {
       a {
         color: $eva_light;
       }
-    }
-
-    &.flash_comptes_en_attente {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-      font-size: 0.875rem;
     }
 
     &:first-child {

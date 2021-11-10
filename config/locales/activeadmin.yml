@@ -14,8 +14,7 @@ fr:
     devise:
       login:
         title: |
-          Connexion
-          espace conseiller
+          Espace Pro
         header_title: Je souhaite accéder à l'espace Pro
         inscription: Je souhaite créer mon espace Pro
         evaluations:

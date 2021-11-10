@@ -527,6 +527,7 @@ DEPENDENCIES
   guard-rubocop
   inline_svg
   jbuilder
+  jquery-rails
   kaminari-i18n
   launchy
   letter_opener

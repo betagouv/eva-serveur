@@ -36,3 +36,5 @@ if can?(:manage, Compte)
                               allowtransparency: true)
   end
 end
+
+render 'modal_validation_comptes_en_attente'

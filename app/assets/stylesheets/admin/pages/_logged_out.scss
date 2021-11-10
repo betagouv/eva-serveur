@@ -235,13 +235,18 @@ body.logged_out {
     }
   }
 
-  form fieldset {
-    &.inputs {
+  form {
+    .inputs {
       background-color: #fff;
     }
-    &.buttons li,
-    &.actions li {
+    .buttons li,
+    .actions li {
       float: right;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 

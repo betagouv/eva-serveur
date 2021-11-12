@@ -37,4 +37,6 @@ if can?(:manage, Compte)
   end
 end
 
-render 'modal_validation_comptes_en_attente'
+if current_compte.au_moins_admin? && comptes_en_attente.present?
+  render 'modal_validation_comptes_en_attente'
+end

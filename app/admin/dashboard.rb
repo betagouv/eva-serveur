@@ -17,25 +17,16 @@ ActiveAdmin.register_page 'Dashboard' do
   controller do
     before_action do
       flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe if annonce.present?
-      if comptes_en_attente? && current_compte.au_moins_admin?
-        lien = admin_comptes_path(q: { statut_validation_eq: 'en_attente' })
-        flash.now[:comptes_en_attente] =
-          "<span>#{t('.info_comptes_en_attente', lien: lien)}</span>".html_safe
-      end
       message_incitation_compte_personnel
     end
+
     before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
-                  :recupere_campagnes, :recupere_prise_en_main
+                  :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente
 
     private
 
     def annonce
       @annonce ||= AnnonceGenerale.order(created_at: :desc).find_by(afficher: true)
-    end
-
-    def comptes_en_attente?
-      @comptes_en_attente ||= Compte.where(statut_validation: :en_attente)
-                                    .exists?(structure_id: current_compte.structure_id)
     end
 
     def message_incitation_compte_personnel
@@ -69,6 +60,11 @@ ActiveAdmin.register_page 'Dashboard' do
         nombre_campagnes: @campagnes.size,
         nombre_evaluations: @evaluations.size
       )
+    end
+
+    def comptes_en_attente
+      @comptes_en_attente = Compte.where(statut_validation: :en_attente)
+                                  .exists?(structure_id: current_compte.structure_id)
     end
   end
 end

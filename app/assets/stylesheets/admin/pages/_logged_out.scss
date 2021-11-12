@@ -129,21 +129,15 @@ body.logged_out {
           }
         }
       }
+      form .actions input[type=submit] {
+        margin-right: 0;
+      }
       .panel--connexion {
         .panel-header {
           background-color: $eva_dark;
         }
-        .panel-content {
-          form .actions input[type=submit] {
-            margin-right: 0;
-          }
-        }
       }
       .panel--evaluation {
-        input[type=submit] {
-          margin-top: 2rem;
-          float: right;
-        }
         .panel-header {
           background-color: $eva_main_blue;
         }
@@ -152,9 +146,14 @@ body.logged_out {
             font-style: italic;
             font-size: 0.875rem;
             line-height: 1rem;
+            margin-bottom: 2rem;
           }
           form {
             margin-top: 2rem;
+          }
+          .actions {
+            display: flex;
+            justify-content: end;
           }
         }
       }
@@ -235,13 +234,19 @@ body.logged_out {
     }
   }
 
-  form fieldset {
-    &.inputs {
+  form {
+    .inputs {
       background-color: #fff;
+      margin-bottom: 1rem;
     }
-    &.buttons li,
-    &.actions li {
+    .buttons li,
+    .actions li {
       float: right;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
     }
   }
 

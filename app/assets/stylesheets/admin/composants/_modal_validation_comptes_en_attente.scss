@@ -33,17 +33,10 @@
       .bouton-redirection, 
       .bouton-fermer {
         text-decoration: none;
-<<<<<<< Updated upstream
-        border-radius: 0.5rem;
-        padding: 0.5rem;
-        font-weight: normal;
-        font-size: 0.75rem;
-=======
         border-radius: .5rem;
         padding: .5rem;
         font-size: .75rem;
         cursor: pointer;
->>>>>>> Stashed changes
       }
       .bouton-redirection {
         background-color: $eva_light;
@@ -59,4 +52,3 @@
     }
   }
 }
-

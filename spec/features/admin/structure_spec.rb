@@ -21,18 +21,27 @@ describe 'Admin - Structure', type: :feature do
     end
     before { visit admin_structure_path(structure) }
 
-    it do
-      expect(page).to have_content 'Ma structure'
+    describe 'Ma structure' do
+      it do
+        expect(page).to have_content structure.nom
+      end
+
+      it do
+        expect(page).to have_content 'Ici vous pouvez gérer votre structure '
+        'et vos collègues ayant accès à eva.'
+      end
     end
 
-    it 'autorise un compte' do
-      click_on 'Autoriser'
-      expect(compte.reload.validation_acceptee?).to eq true
-    end
+    describe 'Mes collègues' do
+      it 'autorise un compte' do
+        click_on 'Autoriser'
+        expect(compte.reload.validation_acceptee?).to eq true
+      end
 
-    it 'refuse un compte' do
-      click_on 'Refuser'
-      expect(compte.reload.validation_refusee?).to eq true
+      it 'refuse un compte' do
+        click_on 'Refuser'
+        expect(compte.reload.validation_refusee?).to eq true
+      end
     end
   end
 

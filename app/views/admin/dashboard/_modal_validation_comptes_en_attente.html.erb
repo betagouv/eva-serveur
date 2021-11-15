@@ -1,11 +1,11 @@
-<div class="modal" id="validation-comptes-en-attente" tabindex="-1" role="dialog">
+<div class="modal modal-danger" id="validation-comptes-en-attente" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <%= md t('.info_comptes_en_attente') %>
         <div class='actions'>
-          <button type="button" class="bouton-fermer" data-dismiss="modal">Plus Tard</button>
-          <%= link_to 'Aller sur la page Comptes', admin_comptes_path(q: { statut_validation_eq: 'en_attente' }), class:"bouton-redirection" %>
+          <a class="bouton bouton-outline-light" data-dismiss="modal">Plus tard</a>
+          <%= link_to 'Aller sur la page de ma structure', admin_structure_path(current_compte.structure, anchor: "mes-collegues"), class: "bouton bouton-light" %>
         </div>
       </div>  
     </div>

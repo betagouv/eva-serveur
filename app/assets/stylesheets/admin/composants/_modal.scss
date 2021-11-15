@@ -1,0 +1,52 @@
+.modal {
+  &.show .modal-dialog {
+    transform: translateY(-50%);
+    margin-top: 50vh;
+  
+    .modal-content {
+      padding: 1rem;
+      font-size: 0.875rem;
+      align-items: center;
+      flex-direction: row;
+      border-radius: 0.5rem;
+  
+      .modal-body {
+        padding: 0rem;
+        padding-left: 1rem;
+      }
+  
+      .actions {
+        display: flex;
+        justify-content: end;
+        margin-top: 2rem;
+  
+        .bouton {
+          margin-right: 0.5rem;
+  
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  
+  &.modal-danger {
+    .modal-content {
+      background-color: $eva_red;
+      color: $eva_light;
+
+      &::before {
+        background-image: asset-data-url('flash_erreur.svg');
+        content: '';
+        height: 4rem;
+        background-repeat: no-repeat;
+        background-size: cover;
+        flex: 0 0 4rem;
+      }
+    }
+    .bouton-light {
+      color: $eva_red;
+    }
+  }
+}

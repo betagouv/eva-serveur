@@ -28,7 +28,8 @@ describe CompteMailer, type: :mailer do
 
   describe '#alerte_admin' do
     it "envoie un email de demande de validation d'un nouveau compte à l'admin" do
-      structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
+      structure = Structure.new id: SecureRandom.uuid, nom: 'Ma Super Structure',
+                                code_postal: '75012'
       admin = Compte.new prenom: 'Admin',
                          email: 'debut@test.com',
                          role: :admin,
@@ -53,7 +54,7 @@ describe CompteMailer, type: :mailer do
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')
       expect(email.body).to include('Ma Super Structure - 75012')
-      expect(email.body).to include(edit_admin_compte_url(compte))
+      expect(email.body).to include(admin_structure_url(compte.structure))
     end
   end
 

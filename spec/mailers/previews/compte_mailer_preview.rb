@@ -9,7 +9,7 @@ class CompteMailerPreview < ActionMailer::Preview
   end
 
   def alerte_admin
-    structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
+    structure = Structure.new id: SecureRandom.uuid, nom: 'Ma Super Structure', code_postal: '75012'
     admin = Compte.new prenom: 'Admin', email: 'admin@test.com', structure: structure, role: 'admin'
     compte = Compte.new prenom: 'Paule',
                         nom: 'Delaporte',
@@ -27,7 +27,7 @@ class CompteMailerPreview < ActionMailer::Preview
   end
 
   def comptes_a_autoriser
-    structure = Structure.new nom: 'Ma structure', code_postal: '92100',
+    structure = Structure.new id: SecureRandom.uuid, nom: 'Ma structure', code_postal: '92100',
                               type_structure: 'mission_locale'
     compte_admin = Compte.new prenom: 'Admin', structure: structure, role: 'admin'
     compte1 = Compte.new prenom: 'Jean', nom: 'Bon', email: 'compte_1@gmail.com',

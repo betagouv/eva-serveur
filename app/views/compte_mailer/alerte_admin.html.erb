@@ -3,5 +3,5 @@
          prenom: @compte.prenom,
          nom: @compte.nom,
          structure: @compte.structure.display_name,
-         url_validation: edit_admin_compte_url(@compte)
+         url_validation: admin_structure_url(@compte.structure, anchor: 'mes-collegues')
         ) %>

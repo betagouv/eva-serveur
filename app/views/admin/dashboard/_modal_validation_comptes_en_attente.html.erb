@@ -2,7 +2,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <%= md t('.info_comptes_en_attente') %>
+        <div class='message'>
+          <%= md t('.info_comptes_en_attente') %>
+        </div>
         <div class='actions'>
           <a class="bouton bouton-outline-light" data-dismiss="modal">Plus tard</a>
           <%= link_to 'Aller sur la page de ma structure', admin_structure_path(current_compte.structure, anchor: "mes-collegues"), class: "bouton bouton-light" %>

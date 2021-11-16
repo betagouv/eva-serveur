@@ -132,6 +132,8 @@ describe Ability do
 
       it { is_expected.to be_able_to(:read, mon_collegue) }
       it { is_expected.to be_able_to(:update, mon_collegue) }
+      it { is_expected.to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.to be_able_to(:refuser, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
     end

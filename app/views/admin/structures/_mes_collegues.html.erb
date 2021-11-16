@@ -6,7 +6,7 @@
                               method: :patch,
                               class: 'action lien-autoriser' %>
     <%= 
-      unless compte.admin? || compte.superadmin?
+      unless compte.au_moins_admin?
         link_to 'Refuser', refuser_admin_compte_path(compte),
                           method: :patch,
                           class: 'action lien-refuser'
@@ -16,8 +16,8 @@
 
   <%= render 'cards_validation', comptes: @comptes_acceptes, title: 'Autorisés' do |compte| %>
     <%= 
-      unless compte.admin? || compte.superadmin?
-        link_to 'Révoquer', refuser_admin_compte_path(compte),
+      unless compte.au_moins_admin?
+        link_to 'Refuser', refuser_admin_compte_path(compte),
                           method: :patch,
                           class: 'action lien-refuser'
       end

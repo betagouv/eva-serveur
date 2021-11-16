@@ -96,6 +96,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     comptes_generiques_ou_comptes_admin(compte)
     cannot :edit_role, compte if compte.compte_generique?
     cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }
+    can %i[autoriser refuser], Compte if compte.admin?
   end
 
   def droit_choix

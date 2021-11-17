@@ -126,16 +126,20 @@ describe Ability do
 
     it { is_expected.to be_able_to(:create, Compte.new) }
     context 'peut gérer mes collègues' do
-      let(:mon_collegue) { create :compte, structure: compte.structure }
+      let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
 
       it { is_expected.to be_able_to(:read, mon_collegue) }
       it { is_expected.to be_able_to(:update, mon_collegue) }
-      it { is_expected.to be_able_to(:autoriser, mon_collegue) }
-      it { is_expected.to be_able_to(:refuser, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
+      it { is_expected.to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.to be_able_to(:refuser, mon_collegue) }
+      context 'quand un compte est admin' do
+        before { mon_collegue.update(role: :admin) }
+        it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
+      end
     end
 
     it { is_expected.to be_able_to(:update, compte.structure) }
@@ -152,8 +156,13 @@ describe Ability do
     let(:compte) { compte_generique }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
-    it { is_expected.to be_able_to(:edit_role, Compte.new) }
     it { is_expected.not_to be_able_to(:edit_role, compte) }
+
+    context 'pour une compte de la structure' do
+      let(:mon_collegue) { create :compte, structure: compte.structure }
+
+      it { is_expected.to be_able_to(:edit_role, mon_collegue) }
+    end
   end
 
   context 'Compte conseiller' do
@@ -226,6 +235,33 @@ describe Ability do
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
+    end
+
+    context 'pour un compte en attente' do
+      let(:mon_collegue) do
+        create :compte_conseiller, :en_attente, structure: compte_conseiller.structure
+      end
+
+      it { is_expected.to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.to be_able_to(:refuser, mon_collegue) }
+    end
+
+    context 'pour un compte refusé' do
+      let(:mon_collegue) do
+        create :compte_conseiller, :refusee, structure: compte_conseiller.structure
+      end
+
+      it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
+    end
+
+    context 'pour un compte accepté' do
+      let(:mon_collegue) do
+        create :compte_conseiller, :acceptee, structure: compte_conseiller.structure
+      end
+
+      it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
     end
   end
 

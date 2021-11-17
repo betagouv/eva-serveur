@@ -94,9 +94,8 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :read, compte
     can :update, compte
     comptes_generiques_ou_comptes_admin(compte)
-    cannot :edit_role, compte if compte.compte_generique?
+    droits_validation_comptes(compte)
     cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }
-    can %i[autoriser refuser], Compte if compte.admin?
   end
 
   def droit_choix
@@ -140,6 +139,16 @@ class Ability # rubocop:disable Metrics/ClassLength
 
     can :create, Compte
     can :update, Compte, structure_id: compte.structure_id
-    can :edit_role, Compte
+    can :edit_role, Compte, structure_id: compte.structure_id
+    cannot :edit_role, compte if compte.compte_generique?
+  end
+
+  def droits_validation_comptes(compte)
+    if compte.validation_acceptee?
+      can(%i[autoriser refuser], Compte, structure_id: compte.structure_id,
+                                         statut_validation: :en_attente)
+    end
+    can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
+    cannot :refuser, Compte, &:au_moins_admin?
   end
 end

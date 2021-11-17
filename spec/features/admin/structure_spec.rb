@@ -37,7 +37,9 @@ describe 'Admin - Structure', type: :feature do
       end
 
       it 'refuse un compte' do
-        click_on 'Refuser'
+        within('#mes-collegues-en-attente') do
+          click_on 'Refuser'
+        end
         expect(compte.reload.validation_refusee?).to eq true
       end
     end

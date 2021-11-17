@@ -22,9 +22,7 @@ describe 'Admin - Structure', type: :feature do
     before { visit admin_structure_path(structure) }
 
     describe 'Ma structure' do
-      it do
-        expect(page).to have_content structure.nom
-      end
+      it { expect(page).to have_content structure.nom }
 
       it do
         expect(page).to have_content 'Ici vous pouvez gérer votre structure '

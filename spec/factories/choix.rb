@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :choix do
+    nom_technique { 'nom_technique_choix' }
+
     trait :bon do
       type_choix { :bon }
       intitule { 'bon choix' }

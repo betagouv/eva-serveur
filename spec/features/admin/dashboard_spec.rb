@@ -11,8 +11,6 @@ describe 'Dashboard', type: :feature do
     before { create :compte, statut_validation: :en_attente, structure: ma_structure }
 
     describe 'je suis admin' do
-      let!(:compte) { create :compte_admin, structure: ma_structure }
-
       it "affiche un message d'alerte" do
         visit admin_path
         expect(page).to have_content("Des demandes d'accès sont en attente de validation.")

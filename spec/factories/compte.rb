@@ -25,6 +25,12 @@ FactoryBot.define do
       trait :en_attente do
         statut_validation { :en_attente }
       end
+      trait :acceptee do
+        statut_validation { :acceptee }
+      end
+      trait :refusee do
+        statut_validation { :refusee }
+      end
     end
     factory :compte_generique do
       role { 'compte_generique' }

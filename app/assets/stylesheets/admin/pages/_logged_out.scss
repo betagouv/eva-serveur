@@ -153,7 +153,7 @@ body.logged_out {
           }
           .actions {
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
           }
         }
       }
@@ -246,7 +246,7 @@ body.logged_out {
     .actions {
       display: flex;
       justify-content: space-between;
-      align-items: end;
+      align-items: flex-end;
     }
   }
 

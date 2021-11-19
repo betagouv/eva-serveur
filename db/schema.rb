@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 2021_11_17_114526) do
     t.string "session_id"
     t.integer "position"
     t.index ["position"], name: "index_evenements_on_position"
+    t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
     t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 

@@ -224,7 +224,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
-    i18n (1.8.10)
+    i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.13.0)
       actionpack (>= 5.2, < 6.2)
@@ -313,7 +313,7 @@ GEM
     puma (4.3.9)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -426,6 +426,8 @@ GEM
     ruby2_keywords (0.0.5)
     rufus-scheduler (3.8.0)
       fugit (~> 1.1, >= 1.1.6)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -461,9 +463,9 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.2.2)
-      actionpack (>= 4.0)
-      activesupport (>= 4.0)
+    sprockets-rails (3.4.1)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     tarteaucitron (0.3.2)
       geoip
@@ -494,7 +496,7 @@ GEM
       rails (>= 3.2.16)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.4.2)
+    zeitwerk (2.5.1)
 
 PLATFORMS
   ruby
@@ -551,6 +553,7 @@ DEPENDENCIES
   rspec_junit_formatter (~> 0.4.1)
   rubocop
   rubocop-rspec
+  sass-rails (>= 6)
   shoulda-matchers
   sidekiq
   sidekiq-scheduler

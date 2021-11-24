@@ -2,15 +2,6 @@
 
 div class: 'row' do
   div class: 'col-4' do
-    h3 structure.nom
-
-    div class: 'panel introduction' do
-      div class: 'introduction--consigne' do
-        t('.introduction', lien: admin_aide_path).html_safe
-      end
-      div image_tag 'bienvenue.svg', class: 'introduction--image'
-    end
-
     div class: 'panel' do
       attributes_table_for structure do
         row :nom

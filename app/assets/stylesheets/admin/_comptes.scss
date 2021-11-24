@@ -8,32 +8,10 @@
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  .introduction {
-    @include carte-avec-ombre();
-    margin-bottom: 1.25rem;
-    padding: 1rem 1.5rem 2.8rem;
-    p {
-      font-size: 0.875rem;
-      color: $eva_dark;
-      a {
-        text-decoration: underline;
-        color: $eva_main_blue;
-      }
-    }
-    img {
-      width: 268px;
-      height: 256px;
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-  }
 
-  .panel {
-    padding: 1.5rem;
-    .compte {
-      padding: 0;
-    }
+  .introduction-image{
+    width: 16.75rem;
+    right: 0;
   }
 
   table {

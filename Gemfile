@@ -8,6 +8,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails', '~> 6.1.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
+
+gem 'sass-rails', '>= 6'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'activeadmin', git: 'https://github.com/shanser/activeadmin',
                    branch: '7084-renders-action-items-only-when-authorized'

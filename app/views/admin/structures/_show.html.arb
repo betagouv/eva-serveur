@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 div class: 'row' do
-  div class: 'offset-1 col-4' do
-    h2 structure.nom, class: 'titre-entete-page'
+  div class: 'col-4' do
+    h3 structure.nom
 
-    render './components/panel_introduction',
-           text: t('.introduction', lien_aide: admin_aide_path), image: 'bienvenue.svg'
+    div class: 'panel introduction' do
+      div class: 'introduction--consigne' do
+        t('.introduction', lien: admin_aide_path).html_safe
+      end
+      div image_tag 'bienvenue.svg', class: 'introduction--image'
+    end
 
     div class: 'panel' do
       attributes_table_for structure do

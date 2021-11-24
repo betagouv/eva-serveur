@@ -15,10 +15,13 @@ fr:
   admin:
     structures:
       show:
-        introduction: Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.<br><br>Si vous avez besoin d'aide, rendez-vous <a href="%{lien}">ici</a>
+        introduction:  |
+          Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.
+        
+          Si vous avez besoin d'aide, 
+          rendez-vous [ici](%{lien_aide})
     structure:
       nouvelle_structure: Créer une nouvelle structure (avec compte)
-
   nouvelles_structures:
     show:
       titre: Rejoindre eva

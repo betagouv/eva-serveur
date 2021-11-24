@@ -9,7 +9,7 @@
   padding: 0;
 }
 @mixin annule-panel {
-  @include annule-carte;
+  @include annule-carte();
 
   h3 {
     display: none;

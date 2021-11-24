@@ -1,15 +1,15 @@
 .sidebar_section.panel {
   &.action-items-sidebar {
-    @include annule-panel;
+    @include annule-panel();
     margin-bottom: 2rem;
   }
 
   &.annule-panel {
-    @include annule-panel;
+    @include annule-panel();
   }
 
   &.annule-carte {
-    @include annule-carte;
+    @include annule-carte();
   }
 
   .action_items {

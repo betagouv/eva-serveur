@@ -5,8 +5,9 @@ div class: 'mon-compte row' do
     if current_compte == compte
       h2 t('.titre', prenom: compte.prenom), class: 'titre-entete-page'
 
-      render './components/panel_introduction',
-             text: t('.introduction', lien_aide: admin_aide_path), image: 'avatar_salut.png'
+      render 'components/panel_introduction',
+             text: t('.introduction', lien_aide: admin_aide_path),
+             image: 'avatar_salut.png'
     end
 
     div class: 'panel' do

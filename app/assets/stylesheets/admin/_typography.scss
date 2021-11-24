@@ -1,11 +1,11 @@
 h3 {
-  @include titre-carte;
+  @include titre-carte();
   margin-bottom: 1rem;
 }
 
 h2 {
   &.titre-entete-page {
-    @include titre-carte;
+    @include titre-carte();
     margin-bottom: 1.5rem;
   }
 }

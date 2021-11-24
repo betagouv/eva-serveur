@@ -4,7 +4,7 @@
   @import "../../../bootstrap_minimal";
 
   .aide_titre {
-    @include titre-carte;
+    @include titre-carte();
   }
 
   .contenu_aide {

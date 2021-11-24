@@ -29,7 +29,7 @@ body.logged_out {
 
     .infos {
       h4 {
-        @include titre-carte;
+        @include titre-carte();
         font-size: .875rem;
         padding: 0.875rem 0.875rem 0.5rem;
       }

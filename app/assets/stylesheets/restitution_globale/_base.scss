@@ -12,7 +12,7 @@
 
   .titre,
   .sous-titre {
-    @include titre-carte;
+    @include titre-carte();
   }
   .sous-titre {
     margin-bottom: .875rem;
@@ -38,7 +38,7 @@
       border-bottom-right-radius: 0.5rem;
       background-color: $eva_dark;
       .bouton {
-        @include bouton;
+        @include bouton();
         padding: 0.5rem 1.5rem;
       }
     }
@@ -336,7 +336,7 @@
       }
       &-cta {
         .action {
-          @include bouton;
+          @include bouton();
           padding: 0.3rem 0.8rem;
           border-radius: 0.25rem;
         }

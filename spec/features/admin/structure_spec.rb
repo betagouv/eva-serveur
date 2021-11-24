@@ -25,8 +25,8 @@ describe 'Admin - Structure', type: :feature do
       it { expect(page).to have_content structure.nom }
 
       it do
-        expect(page).to have_content 'Ici vous pouvez gérer votre structure '
-        'et vos collègues ayant accès à eva.'
+        message = 'Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.'
+        expect(page).to have_content message
       end
     end
 

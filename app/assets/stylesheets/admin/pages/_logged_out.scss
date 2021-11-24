@@ -89,7 +89,7 @@ body.logged_out {
     }
 
     h3 {
-      @include titre-carte;
+      @include titre-carte();
       margin-bottom: .5rem;
       padding: 0;
       + .description {
@@ -228,7 +228,7 @@ body.logged_out {
       margin-top: 2rem;
     }
     .creer-structure {
-      @include bouton;
+      @include bouton();
       background-color: $couleur-warning;
       border: none;
     }

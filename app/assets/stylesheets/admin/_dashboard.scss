@@ -8,12 +8,12 @@
     margin-bottom: 2.5rem;
 
     h3 {
-      @include titre-carte;
+      @include titre-carte();
       margin-bottom: 0;
     }
 
     > a {
-      @include bouton;
+      @include bouton();
       display: inline-block;
     }
   }
@@ -90,7 +90,7 @@
       &-illustration {
         font-size: 0;
         h4 {
-          @include titre;
+          @include titre();
           margin-bottom: 0.75rem;
           font-size: 1.125rem;
         }
@@ -106,7 +106,7 @@
           font-size: 0.875rem;
         }
         .action {
-          @include bouton;
+          @include bouton();
           display: inline-block;
           font-size: 0.75rem;
           color: $eva_dark;

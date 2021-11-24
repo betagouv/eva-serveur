@@ -11,11 +11,10 @@ fr:
     structure:
       code_postal: 'Code postal : '
       rejoindre_structure: Rejoindre
-   
   admin:
     structures:
       show:
-        introduction:  |
+        introduction: |
           Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.
         
           Si vous avez besoin d'aide, 

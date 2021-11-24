@@ -3,10 +3,14 @@
 div class: 'mon-compte row' do
   div class: 'offset-1 col-4' do
     if current_compte == compte
-      h2 t('.titre', prenom: compte.prenom), class: 'titre-entete-page'
+      h1 t('.titre', prenom: compte.prenom), class: 'titre'
 
-      render './components/panel_introduction',
-             text: t('.introduction', lien_aide: admin_aide_path), image: 'avatar_salut.png'
+      div class: 'introduction' do
+        div class: 'introduction__texte' do
+          md t('.introduction', lien_aide: admin_aide_path)
+        end
+        text_node image_tag 'avatar_salut.png'
+      end
     end
 
     div class: 'panel' do

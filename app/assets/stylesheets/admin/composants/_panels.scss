@@ -59,30 +59,3 @@ body.logged_out {
     }
   }
 }
-
-.panel {
-  &.panel-introduction {
-    padding: 1rem 1.5rem;
-    display: flex;
-    line-height: 1.2;
-    min-height: 8.75rem;
-
-    .introduction-image {
-      position: absolute;
-      bottom: 0;
-    }
-
-    .introduction-consigne {
-      max-width: 16.5rem;
-      font-size: 0.875rem;
-
-      a {
-        color: $eva_main_blue;
-      }
-
-      p:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}

@@ -36,8 +36,25 @@
           color: $eva_dark;
         }
       }
-    }
 
+      &.introduction {
+        padding-top: 1rem;
+        padding-bottom: 2.75rem;
+        display: flex;
+        position: relative;
+
+        .introduction--image {
+          width: 12rem;
+          position: absolute;
+          bottom: 0;
+          right: 1.438rem;
+        }
+        
+        .introduction--consigne {
+          max-width: 16.5rem;
+        }
+      }   
+    }
     .mes-collegues {
       margin-bottom: 2rem;
     }

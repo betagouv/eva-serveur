@@ -63,8 +63,10 @@ ActiveAdmin.register_page 'Dashboard' do
     end
 
     def comptes_en_attente
-      @comptes_en_attente = Compte.where(statut_validation: :en_attente)
-                                  .exists?(structure_id: current_compte.structure_id)
+      @comptes_en_attente = Compte.where(
+        statut_validation: :en_attente,
+        structure_id: current_compte.structure_id
+      )
     end
   end
 end

@@ -17,15 +17,14 @@
     }
 
     .attributes_table {
-      th, td {
+      th,
+      td {
         border: 0;
         font-size: 0.875rem;
       }
-
       td {
         font-weight: 500;
       }
-
       th {
         vertical-align: bottom;
         font-family: $font-texte;

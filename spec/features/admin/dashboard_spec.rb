@@ -8,24 +8,11 @@ describe 'Dashboard', type: :feature do
   before { connecte(compte) }
 
   context 'quand il y a des comptes en attente pour ma structure' do
-    before { create :compte, statut_validation: :en_attente, structure: ma_structure }
+    before { create :compte_conseiller, statut_validation: :en_attente, structure: ma_structure }
 
-    describe 'je suis admin' do
-      it "affiche un message d'alerte" do
-        visit admin_path
-        expect(page).to have_content("Des demandes d'accès sont en attente de validation.")
-      end
-    end
-
-    describe 'je suis conseiller' do
-      let!(:compte) do
-        create :compte_conseiller, structure: ma_structure
-      end
-
-      it "n'affiche pas un message d'alerte" do
-        visit admin_path
-        expect(page).not_to have_content("Des demandes d'accès sont en attente de validation.")
-      end
+    it "affiche un message d'alerte" do
+      visit admin_path
+      expect(page).to have_content("Des demandes d'accès sont en attente de validation.")
     end
   end
 

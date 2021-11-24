@@ -37,6 +37,6 @@ if can?(:manage, Compte)
   end
 end
 
-if comptes_en_attente.present? && can?(%i[autoriser refuser], comptes_en_attente)
+if comptes_en_attente.present? && can?(:autoriser, Compte)
   render 'modal_validation_comptes_en_attente'
 end

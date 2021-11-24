@@ -4,8 +4,9 @@ div class: 'row' do
   div class: 'offset-1 col-4' do
     h2 structure.nom, class: 'titre-entete-page'
 
-    render './components/panel_introduction',
-           text: t('.introduction', lien_aide: admin_aide_path), image: 'bienvenue.png'
+    render 'components/panel_introduction',
+           text: t('.introduction', lien_aide: admin_aide_path),
+           image: 'bienvenue.png'
 
     div class: 'panel' do
       attributes_table_for structure do

@@ -22,8 +22,10 @@
       color: $eva_dark;
     }
     .nom {
-      font-weight: 600;
       flex: 2;
+      font-family: $font-titre;
+      font-weight: bold;
+      color: $couleur-liens;
     }
     .date {
       flex: 1;

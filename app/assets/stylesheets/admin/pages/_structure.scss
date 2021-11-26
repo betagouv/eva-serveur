@@ -4,45 +4,63 @@
   @import "../../bootstrap_minimal";
 
   &.show {
-    .sous-titre {
-      @include titre-carte;
-      display: flex;
-      align-items: center;
-      height: 2rem;
-      font-size: 14px;
-      font-weight: 600;
+    .bloc-structure-infos {
+      .panel {
+        .introduction-image {
+          width: 12rem;
+          right: 1.5rem;
+        }
+
+        .attributes_table {
+          th, td {
+            border: 0;
+            font-size: 0.875rem;
+          }
+    
+          td {
+            font-weight: 500;
+          }
+    
+          th {
+            vertical-align: bottom;
+            font-family: $font-texte;
+            font-weight: normal;
+            text-transform: none;
+            color: $eva_dark;
+          }
+        }
+      }
+    }
+
+    .liste-collegues {
       margin-top: 2rem;
-      margin-bottom: 0.5rem;
-      padding: 0 1.5rem;
+      .sous-titre {
+        font-family: $font-texte;
+        color: $eva_dark;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        height: 2rem;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 0 1.5rem;
+      }
+
+      .card-validation {
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .bloc-mes-campagnes {
+      table {
+        margin-top: 2rem;
+      }
     }
 
     h3 {
       margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .attributes_table {
-      th, td {
-        border: 0;
-        font-size: 0.875rem;
-      }
-
-      td {
-        font-weight: 500;
-      }
-
-      th {
-        vertical-align: bottom;
-        font-family: $font-texte;
-        font-weight: normal;
-        text-transform: none;
-        color: $eva_dark;
-      }
-    }
-
-    .introduction-image {
-      width: 12rem;
-      right: 1.5rem;
     }
   }
 }

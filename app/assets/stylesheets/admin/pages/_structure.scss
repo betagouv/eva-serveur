@@ -3,6 +3,12 @@
   $grid-gutter-width: 1.25rem;
   @import "../../bootstrap_minimal";
 
+  .without_sidebar {
+    .structure {
+      @include make-col(3);
+    }
+  }
+
   &.show {
     .bloc-structure-infos {
       .panel {

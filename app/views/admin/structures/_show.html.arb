@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: 'row' do
-  div class: 'offset-1 col-4' do
+  div class: 'structure offset-1 col-4' do
     div class: 'bloc-structure-infos' do
       h2 structure.nom, class: 'titre-entete-page'
 

@@ -15,6 +15,16 @@ describe 'Création de compte conseiller', type: :feature do
     end
   end
 
+  context "avec un id de structure incorrecte dans l'url" do
+    before do
+      visit new_compte_registration_path(structure_id: 'random')
+    end
+
+    it "redirige l'utilisateur vers la page pour trouver une structure" do
+      expect(page).to have_current_path(structures_path)
+    end
+  end
+
   context "structure précisée dans l'url" do
     before do
       visit new_compte_registration_path(structure_id: structure.id)

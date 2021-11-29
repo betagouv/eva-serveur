@@ -4,10 +4,11 @@ module Eva
   module Devise
     class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
       def new
-        return redirect_to structures_path if params[:structure_id].blank?
+        structure = Structure.find_by id: params[:structure_id]
+        return redirect_to structures_path unless structure
 
         super do |resource|
-          resource.structure = Structure.find_by id: params[:structure_id]
+          resource.structure = structure
         end
       end
     end

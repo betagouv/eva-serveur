@@ -52,7 +52,7 @@ fr:
         comprehension_consigne:
           nom: Compréhension de la consigne
           titre: La consigne de l’exercice a été comprise
-          description: Analyse efficace des situations de travail proposées. Identification sensé de ce qui est demandé.
+          description: Analyse efficace des situations de travail proposées. Identification correcte de ce qui est demandé.
         vigilance_controle:
           nom: Niveau de vigilance et de contrôle
           titre: Vigilance et contrôle de la situation proposée
@@ -297,7 +297,7 @@ fr:
           palier0:
             profil: 'pre-X1'
             description: |
-              Votre score indique que la majorité des opérations vous semblent très difficiles ou vous demande un temps très important lorsque personne ne vous aide.
+              Votre score indique que la majorité des opérations vous semble très difficile ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier1:
             profil: 'X1'
@@ -384,12 +384,12 @@ fr:
           palier0:
             profil: '1'
             description: |
-              Votre score indique que la majorité des opérations vous semblent très difficiles ou vous demande un temps très important lorsque personne ne vous aide.
+              Votre score indique que la majorité des opérations vous semble très difficile ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier1:
             profil: '2'
             description: |
-              Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
+              Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           palier2:
             profil: '3'

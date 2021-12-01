@@ -15,7 +15,6 @@ jQuery.datetimepicker.setLocale('fr');
 document.addEventListener('DOMContentLoaded', () => {
   $('#validation-comptes-en-attente').modal({
     show: true,
-    backdrop: false
   });
   new ClipboardJS('.copier-coller');
 });

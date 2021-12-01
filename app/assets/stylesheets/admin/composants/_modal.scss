@@ -53,3 +53,10 @@
     }
   }
 }
+
+.modal-backdrop {
+  background-color: rgb(255,255,255);
+  &.show {
+    opacity: 0.9;
+  }
+}

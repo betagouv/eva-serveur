@@ -132,6 +132,7 @@ GEM
     aws-sigv4 (1.4.0)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
+    bindex (0.8.1)
     bootsnap (1.8.1)
       msgpack (~> 1.0)
     bootstrap (4.6.0)
@@ -485,6 +486,11 @@ GEM
     uniform_notifier (1.14.2)
     warden (1.2.9)
       rack (>= 2.0.9)
+    web-console (4.1.0)
+      actionview (>= 6.0.0)
+      activemodel (>= 6.0.0)
+      bindex (>= 0.4.0)
+      railties (>= 6.0.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -562,6 +568,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   tarteaucitron
   truemail
+  web-console
   wicked_pdf
   wkhtmltopdf-binary (~> 0.12.3.1)
 

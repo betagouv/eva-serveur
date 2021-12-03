@@ -48,6 +48,7 @@ gem 'rollbar'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'truemail'
+gem 'web-console', group: :development
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
 

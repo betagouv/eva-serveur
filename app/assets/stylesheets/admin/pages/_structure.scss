@@ -10,11 +10,17 @@
   }
 
   &.show {
+    $largeur_image_entete: 12rem;
+    $position_image_entete: 1.5rem;
     .bloc-structure-infos {
+      .titre-entete-page {
+        overflow-wrap: break-word;
+        max-width: calc(100% - #{$largeur_image_entete + $position_image_entete});
+      }
       .panel {
         .introduction-image {
-          width: 12rem;
-          right: 1.5rem;
+          width: $largeur_image_entete;
+          right: $position_image_entete;
         }
 
         .attributes_table {

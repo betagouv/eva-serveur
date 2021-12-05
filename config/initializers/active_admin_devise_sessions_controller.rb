@@ -17,6 +17,7 @@ private
 
   def check_compte_confirmation
     compte = Compte.find_by_email(params[:compte][:email])
-    redirect_to new_compte_confirmation_path unless compte && compte.active_for_authentication?
+    return flash.now[:alert] if compte.blank?
+    redirect_to new_compte_confirmation_path unless compte.active_for_authentication?
   end
 end

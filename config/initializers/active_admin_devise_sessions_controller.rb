@@ -4,7 +4,7 @@ class ActiveAdmin::Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if !resource.confirmed?
-      set_flash_message! :notice, :"signed_in_but_#{resource.inactive_message}"
+      set_flash_message! :alert, :"signed_in_but_#{resource.inactive_message}"
     else
       set_flash_message!(:notice, :signed_in)
     end

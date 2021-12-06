@@ -40,7 +40,7 @@
       color: $eva_light;
 
       &::before {
-        background-image: asset-data-url('flash_erreur.svg');
+        background-image: asset-data-url('icones/error.svg');
         content: '';
         height: 4rem;
         background-repeat: no-repeat;

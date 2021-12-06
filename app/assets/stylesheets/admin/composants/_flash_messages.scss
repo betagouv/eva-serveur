@@ -3,6 +3,21 @@
   background-image: none;
 }
 
+@mixin flash-alert() {
+  color: $eva-dark;
+  background-color: $eva-orange;
+}
+
+@mixin flash-success() {
+  color: $eva_dark_green;
+  background-color: $eva-green;
+}
+
+@mixin flash-error() {
+  background-color: $eva_red;
+  color: $eva_light;
+}
+
 body.logged_in, body.logged_out {
   .flash {
     font-size: 0.75rem;
@@ -36,39 +51,40 @@ body.logged_in {
       color: $eva_dark;
     }
 
-    &.flash_annonce_generale,
-    &.flash_compte_generique,
-    &.flash_evaluation_anonyme {
-      @include reset-flash;
-      color: $eva_dark;
-      background-color: $couleur-warning;
-
-      &::before {
-        background-image: asset-data-url('annonce_generale.svg');
+    &.flash {
+      &_annonce_generale,
+      &_compte_generique,
+      &_evaluation_anonyme,
+      &_alert {
+        @include reset-flash;
+        @include flash-alert;
+  
+        &::before {
+          background-image: asset-data-url('icones/alert.svg');
+        }
       }
-    }
-
-    &.flash_notice {
-      @include reset-flash;
-      background-color: $couleur-legere-accent-validation;
-      color: $eva_dark_green;
-
-      &::before {
-        background-image: asset-data-url('information_generale.svg');
+  
+      &_notice,
+      &_success {
+        @include reset-flash;
+        @include flash-success;
+  
+        &::before {
+          background-image: asset-data-url('icones/notice.svg');
+        }
       }
-    }
-
-    &.flash_error {
-      @include reset-flash;
-      background-color: $eva_red;
-      color: $eva_light;
-
-      &::before {
-        background-image: asset-data-url('flash_erreur.svg');
-      }
-
-      a {
-        color: $eva_light;
+  
+      &_error {
+        @include reset-flash;
+        @include flash-error;
+  
+        &::before {
+          background-image: asset-data-url('icones/error.svg');
+        }
+  
+        a {
+          color: $eva_light;
+        }
       }
     }
 
@@ -97,7 +113,7 @@ body.logged_out {
         background-color: $eva_dark_green;
       }
       &_alert {
-        background-color: $couleur-accent-erreur;
+        @include flash-error;
       }
     }
   }

@@ -1,8 +1,3 @@
-@mixin reset-flash() {
-  border: none;
-  background-image: none;
-}
-
 @mixin flash-alert() {
   color: $eva-dark;
   background-color: $eva-orange;
@@ -18,12 +13,10 @@
   color: $eva_light;
 }
 
-body.logged_in, body.logged_out {
-  .flash {
-    font-size: 0.75rem;
-    font-weight: normal;
-    text-shadow: none;
-  }
+.flash {
+  font-size: 0.75rem;
+  font-weight: normal;
+  text-shadow: none;
 }
 
 body.logged_in {
@@ -31,12 +24,17 @@ body.logged_in {
     display: flex;
     flex-direction: column-reverse;
   }
+
   .flash {
     @include ombre();
     display: flex;
     align-items: center;
     padding: .5rem 1.25rem;
     line-height: 1.5;
+
+    &:first-child {
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
 
     &::before {
       content: '';
@@ -51,45 +49,36 @@ body.logged_in {
       color: $eva_dark;
     }
 
-    &.flash {
-      &_annonce_generale,
-      &_compte_generique,
-      &_evaluation_anonyme,
-      &_alert {
-        @include reset-flash;
-        @include flash-alert;
-  
-        &::before {
-          background-image: asset-data-url('icones/alert.svg');
-        }
-      }
-  
-      &_notice,
-      &_success {
-        @include reset-flash;
-        @include flash-success;
-  
-        &::before {
-          background-image: asset-data-url('icones/notice.svg');
-        }
-      }
-  
-      &_error {
-        @include reset-flash;
-        @include flash-error;
-  
-        &::before {
-          background-image: asset-data-url('icones/error.svg');
-        }
-  
-        a {
-          color: $eva_light;
-        }
+    &_annonce_generale,
+    &_compte_generique,
+    &_evaluation_anonyme,
+    &_alert {
+      @include flash-alert;
+
+      &::before {
+        background-image: asset-data-url('icones/alert.svg');
       }
     }
 
-    &:first-child {
-      border-radius: 0 0 0.5rem 0.5rem;
+    &_notice,
+    &_success {
+      @include flash-success;
+
+      &::before {
+        background-image: asset-data-url('icones/notice.svg');
+      }
+    }
+
+    &_error {
+      @include flash-error;
+
+      &::before {
+        background-image: asset-data-url('icones/error.svg');
+      }
+
+      a {
+        color: $eva_light;
+      }
     }
   }
 }
@@ -102,19 +91,19 @@ body.logged_out {
     bottom: -10px;
     z-index: 2;
     text-align: center;
-    .flash {
-      display: inline-block;
-      padding: .375rem 1rem;
-      position: relative;
-      border-radius: 0.75rem;
-      color: $eva_light;
-      margin-bottom: 0;
-      &_notice {
-        background-color: $eva_dark_green;
-      }
-      &_alert {
-        @include flash-error;
-      }
+  }
+  .flash {
+    display: inline-block;
+    padding: .375rem 1rem;
+    position: relative;
+    border-radius: 0.75rem;
+    color: $eva_light;
+    margin-bottom: 0;
+    &_notice {
+      background-color: $eva_dark_green;
+    }
+    &_alert {
+      @include flash-error;
     }
   }
 }

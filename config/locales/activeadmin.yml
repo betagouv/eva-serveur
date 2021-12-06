@@ -2,7 +2,7 @@ fr:
   devise:
     sessions:
       compte:
-        signed_in_but_unconfirmed: Votre adresse email n'a pas été confirmée. Veuillez suivre le lien de confirmation qui vous a été envoyé par mail pour éviter la désactivation prochaine de votre compte.
+        signed_in_but_unconfirmed: Votre adresse email n'a pas été confirmée. Veuillez suivre le lien de confirmation qui vous a été envoyé par email.
   active_admin:
     footer: |
       Ce site est créé avec ❤️ par <a href='https://beta.gouv.fr/startups/eva.html' target='_blank'>l'équipe</a> eva.

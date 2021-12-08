@@ -6,9 +6,7 @@ describe 'Session', type: :feature do
   describe 'Connexion' do
     context "Quand le compte n'existe pas" do
       before do
-        visit new_compte_session_path
-        fill_in 'Email', with: 'invalid@email.com'
-        click_on 'Se connecter'
+        connecte_email email: 'invalid@email.com'
       end
       it "Renvoie un message d'erreur" do
         expect(page).to have_content('Email ou mot de passe incorrect')
@@ -26,6 +24,17 @@ describe 'Session', type: :feature do
         it 'redirige vers la page de confirmation' do
           connecte(compte_non_confirme)
           expect(page).to have_current_path(new_compte_confirmation_path)
+        end
+
+        context 'si je mets des espaces à la fin de mon email' do
+          before do
+            connecte_email email: "#{compte_non_confirme.email}     ",
+                           password: compte_non_confirme.password
+          end
+
+          it do
+            expect(page).to have_current_path(new_compte_confirmation_path)
+          end
         end
       end
 

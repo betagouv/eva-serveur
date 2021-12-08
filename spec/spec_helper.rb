@@ -51,11 +51,15 @@ RSpec.configure do |config|
   end
 
   def connecte(compte)
-    visit '/admin'
-    fill_in :compte_email, with: compte.email
-    fill_in :compte_password, with: compte.password
-    click_on 'Se connecter'
+    connecte_email email: compte.email, password: compte.password
     compte
+  end
+
+  def connecte_email(email:, password: nil)
+    visit new_compte_session_path
+    fill_in :compte_email, with: email
+    fill_in :compte_password, with: password
+    click_on 'Se connecter'
   end
 
   def evenements_decores(evenements, scope)

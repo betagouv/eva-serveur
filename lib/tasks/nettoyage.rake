@@ -54,7 +54,7 @@ namespace :nettoyage do
     arg_situation = 'SITUATION'
     logger = RakeLogger.logger
     unless ENV.key?(arg_situation)
-      logger.error "La variable d'environnement #{arg_situation} est marquante"
+      logger.error "La variable d'environnement #{arg_situation} est manquante"
       logger.info 'Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>'
       next
     end

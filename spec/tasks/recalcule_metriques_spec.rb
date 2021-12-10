@@ -54,7 +54,7 @@ describe 'nettoyage:recalcule_metriques' do
     it do
       ENV['SITUATION'] = nil
       expect(logger).to receive(:error)
-        .with("La variable d'environnement SITUATION est marquante")
+        .with("La variable d'environnement SITUATION est manquante")
       expect(logger).to receive(:info)
         .with('Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>')
       subject.invoke

@@ -53,9 +53,6 @@ div class: 'row' do
           row :questionnaire
           row :affiche_competences_fortes
           row :created_at
-          row(:temps_min) { formate_duree statistiques.temps_min }
-          row(:temps_max) { formate_duree statistiques.temps_max }
-          row(:temps_moyen) { formate_duree statistiques.temps_moyen }
         end
 
         hr

@@ -45,8 +45,6 @@ ActiveAdmin.register Campagne do
   form partial: 'form'
 
   controller do
-    helper_method :statistiques
-
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
@@ -59,7 +57,6 @@ ActiveAdmin.register Campagne do
     end
 
     def show
-      @statistiques ||= StatistiquesCampagne.new(resource)
       show!
     end
 

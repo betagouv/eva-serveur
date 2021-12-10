@@ -224,4 +224,23 @@ namespace :stats do
       puts "#{e.id};#{e.created_at};" + valeurs_des_parties.join('; ')
     end
   end
+
+  desc "calcule les temps max, min et moyens des évaluations d'une campagne"
+  task temps_moyens_campagne: :environment do
+    arg_campagne = 'CAMPAGNE'
+    logger = RakeLogger.logger
+    unless ENV.key?(arg_campagne)
+      logger.error "La variable d'environnement #{arg_campagne} est manquante"
+      logger.info 'Usage : rake stats:temps_moyens_campagne CAMPAGNE=id_campagne'
+      next
+    end
+    campagne = Campagne.find(ENV[arg_campagne])
+    statistiques = StatistiquesCampagne.new(campagne)
+    helper = Class.new.extend(ApplicationHelper)
+    min = helper.formate_duree statistiques.temps_min
+    max = helper.formate_duree statistiques.temps_max
+    moyenne = helper.formate_duree statistiques.temps_moyen
+    puts 'id_campagne;temps_min;temps_max;temps_moyen'
+    puts "#{ENV[arg_campagne]};#{min};#{max};#{moyenne}"
+  end
 end

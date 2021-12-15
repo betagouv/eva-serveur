@@ -59,7 +59,7 @@ describe 'Fin Evaluation API', type: :request do
         it 'retourne les compétences triées par ordre de force décroissante' do
           attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
                        Competence::ORGANISATION_METHODE].map(&:to_s)
-          expect(JSON.parse(response.body)['competences_fortes'].pluck('id'))
+          expect(JSON.parse(response.body)['competences_fortes'].pluck('nom_technique'))
             .to eql(attendues)
         end
 

@@ -20,7 +20,7 @@ module Api
       def map_descriptions(competences)
         competences.map do |identifiant|
           {
-            id: identifiant,
+            nom_technique: identifiant,
             nom: I18n.t("#{identifiant}.nom",
                         scope: 'admin.evaluations.restitution_competence'),
             description: I18n.t("#{identifiant}.description",

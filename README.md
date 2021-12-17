@@ -103,7 +103,7 @@ L'api est accessible au point `/api`
 {
   "competences_fortes": [
     {
-      "id": "id_competence",
+      "nom_technique": "id_competence",
       "nom": "nom_competence",
       "description": "Description de la compétence.",
       "picto": "http://host/assets/competence.svg"

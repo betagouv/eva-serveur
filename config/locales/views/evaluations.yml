@@ -54,7 +54,7 @@ fr:
           titre: La consigne de l’exercice a été comprise
           description: Analyse efficace des situations de travail proposées. Identification correcte de ce qui est demandé.
         vigilance_controle:
-          nom: Niveau de vigilance et de contrôle
+          nom: Vigilance et contrôle
           titre: Vigilance et contrôle de la situation proposée
           description: Parvient à déterminer quand et sur quoi il convient de porter son attention pour mener une tâche à bien.
           stanine1: |
@@ -103,7 +103,7 @@ fr:
           stanine3: |
             Vous avez **un bon niveau** en comparaison et tri, ce qui signifie que vous êtes capable de différencier des objets entre eux, de les comparer, et de les classer. Vous êtes également capable de détecter les défauts des objets pour les trier. Vous pouvez donc vous adapter rapidement à de nombreux métiers de la Grande distribution et de l’Industrie, bravo !
         attention_concentration:
-          nom: Attention/Concentration
+          nom: Attention et concentration
           titre: Niveau de concentration pendant l’exercice
           description: A la capacité à rester focalisé·e sur un objet ou une tâche pendant une période de temps, et ce malgré la présence de distracteurs ou de difficultés.
           stanine1: |

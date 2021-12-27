@@ -1,0 +1,38 @@
+# frozen_string_literal: true
+
+div class: 'actualites' do
+  actualites.each do |actualite|
+    div class: 'actualite' do
+      div class: 'conteneur' do
+        if actualite.illustration.attached?
+          div class: 'illustration' do
+            image_tag cdn_for(actualite.illustration)
+          end
+        end
+        div class: 'contenu' do
+          status_tag actualite.categorie, class: 'categorie'
+          h3 actualite.titre, class: 'titre'
+          span class: 'date' do
+            l actualite.created_at, format: :point
+          end
+          if can?(:manage, Compte)
+            span class: 'action action-multiple' do
+              text_node link_to t('.action.lire'), admin_actualite_path(actualite),
+                                class: 'lien lien-lire'
+              text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite),
+                                class: 'lien lien-modifier'
+              text_node link_to t('.action.supprimer'), admin_actualite_path(actualite),
+                                method: :delete,
+                                data: { confirm: t('.action.supprimer-confirmation') },
+                                class: 'lien lien-supprimer'
+            end
+          else
+            span class: 'action' do
+              link_to t('.action.lire'), admin_actualite_path(actualite), class: 'lien lien-lire'
+            end
+          end
+        end
+      end
+    end
+  end
+end

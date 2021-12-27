@@ -1,15 +1,3 @@
-.admin_actualites.show {
-  #active_admin_content {
-    #main_content_wrapper #main_content {
-          margin-right: 465px;
-    }
-    #sidebar {
-      width: 445px;
-      margin-left: -445px;
-    }
-  }
-}
-
 .carte-actualite {
   @include carte-avec-ombre();
 

@@ -1,0 +1,84 @@
+.admin_actualites {
+  &.index {
+    .actualites {
+      columns: 3 auto;
+      column-gap: 1.25rem;
+    }
+    .actualite {
+      padding: 0.625rem 0;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+      break-inside: avoid;
+
+      .conteneur {
+        @include carte-avec-ombre;
+        overflow: hidden;
+      }
+      .illustration {
+        height: 145px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .contenu {
+        padding: 1rem;
+        position: relative;
+      }
+      .categorie {
+        display: inline-block;
+        margin-bottom: 1rem;
+      }
+      .titre {
+        margin-bottom: 1.75rem;
+        font-size: 1rem;
+      }
+      .date {
+        font-size: 0.875rem;
+        color: $eva_dark_blue_grey;
+      }
+      .action {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+      }
+      .action-multiple {
+        background: image-url('roue-dentee.svg') no-repeat right center;
+        .lien {
+          opacity: 0;
+          transition: opacity 0.2s;
+          border-radius: 0;
+          &:first-child {
+            border-top-left-radius: 0.25rem;
+            border-bottom-left-radius: 0.25rem;
+          }
+          &:last-child {
+            border-top-right-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+          }
+        }
+      }
+      &:hover {
+        .action-multiple {
+          background-image: none;
+          .lien {
+            opacity: 1;
+
+          }
+        }
+      }
+      .lien {
+        &-lire {
+          @include bouton-carte($eva_green, $eva_dark);
+        }
+        &-modifier {
+          @include bouton-carte($eva_main_blue, $eva_light);
+        }
+        &-supprimer {
+          @include bouton-carte($eva_red, $eva_light);
+        }
+      }
+    }
+  }
+}

@@ -26,10 +26,7 @@ ActiveAdmin.register Actualite do
   end
 
   index do
-    column(:categorie) { |a| status_tag a.categorie }
-    column :titre
-    column :created_at
-    actions
+    render partial: 'actualites', locals: { actualites: actualites }
   end
 
   show do

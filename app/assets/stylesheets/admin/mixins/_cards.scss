@@ -1,0 +1,18 @@
+@mixin carte {
+  position: relative;
+  border-radius: 0.5rem;
+  background-color: #fff;
+}
+@mixin annule-carte {
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}
+@mixin carte-avec-ombre {
+  @include carte();
+  @include ombre();
+}
+@mixin carte-avec-bordure {
+  @include carte();
+  border: 1px solid $eva_bluegrey;
+}

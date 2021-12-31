@@ -1,0 +1,24 @@
+@mixin bouton() {
+  padding: 0 0.94rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border-radius: 2.875rem;
+  line-height: 1.875rem;
+  color: $eva_light;
+  border: 1px solid $eva_main_blue;
+  background-color: $eva_main_blue;
+  box-shadow: none;
+}
+@mixin bouton-carte($background-color, $color:$eva_light) {
+  background-color: $background-color;
+  display: inline-flex;
+  border-radius: 0.25rem;
+  color: $color;
+  text-decoration: none;
+  min-width: 3rem;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  font-size: .75rem;
+  box-sizing: border-box;
+  line-height: 1rem;
+}

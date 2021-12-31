@@ -15,7 +15,7 @@ div class: 'actualites' do
           span class: 'date' do
             l actualite.created_at, format: :point
           end
-          if can?(:manage, Compte)
+          if can?(:manage, Actualite)
             span class: 'action action-multiple' do
               text_node link_to t('.action.lire'), admin_actualite_path(actualite),
                                 class: 'lien lien-lire'

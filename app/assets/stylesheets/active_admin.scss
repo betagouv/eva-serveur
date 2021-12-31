@@ -10,13 +10,15 @@
 
 // Active Admin's got SASS!
 @import 'active_admin/mixins';
-@import 'admin/base';
 @import 'activeadmin_reorderable';
-@import 'fonts';
-@import 'variables';
+@import 'admin/base';
+@import 'admin/fonts';
+@import 'admin/variables';
 @import 'admin/mixins';
+@import 'admin/typography';
 @import "bootstrap_minimal";
 
+// LAYOUT
 @import 'admin/layout/header';
 @import 'admin/layout/footer';
 @import 'admin/layout/breadcrumb';
@@ -24,6 +26,7 @@
 @import 'admin/layout/main_structure';
 @import 'admin/layout/sidebar';
 
+// COMPOSANTS
 @import 'admin/composants/filtres';
 @import 'admin/composants/panels';
 @import 'admin/composants/tables';
@@ -37,10 +40,11 @@
 @import 'admin/composants/clipboard';
 @import 'admin/composants/card_validation';
 
-@import 'admin/dashboard';
-@import 'admin/actualites';
-@import 'admin/evaluations';
-@import 'admin/sources_aide';
+//PAGES
+@import 'admin/pages/dashboard/actualites';
+@import 'admin/pages/dashboard/dashboard';
+@import 'admin/pages/evaluations';
+@import 'admin/pages/aide/sources_aide';
 @import 'admin/pages/aide/aide';
 @import 'admin/pages/aide/faq';
 @import 'admin/pages/aide/contact';
@@ -48,13 +52,11 @@
 @import 'admin/pages/logged_out';
 @import 'admin/pages/actualites';
 @import 'admin/pages/actualite';
-@import 'admin/comptes';
+@import 'admin/pages/comptes';
 @import 'admin/pages/campagne';
 @import 'admin/pages/structure';
-@import 'admin/pages/restitution_globale';
-@import 'admin/typography';
-
-@import 'restitution_globale/base';
+@import 'admin/pages/restitution_globale/restitution_globale';
+@import 'admin/pages/restitution_globale/base';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

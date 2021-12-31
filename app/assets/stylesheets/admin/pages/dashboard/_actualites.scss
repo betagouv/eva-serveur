@@ -1,0 +1,68 @@
+.carte-actualite {
+  @include carte-avec-ombre();
+
+  &.complete {
+    max-width: 40rem;
+  }
+
+  .illustration {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 100%;
+    img {
+      width: 100%
+    }
+  }
+
+  .texte {
+    display: flex;
+    margin-bottom: .5rem;
+    font-size:0.875rem;
+    align-items: center;
+    padding: 0 1rem;
+    min-height: 3.5rem;
+
+    .action {
+      @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+    }
+
+    .status_tag {
+      margin-right: 1rem;
+    }
+
+    .titre {
+      flex: 1;
+      margin: 0 .75rem 0 0;
+      a {
+        color: $eva_dark;
+        text-decoration: none;
+      }
+    }
+
+    .date {
+      color: $couleur-texte;
+      margin-right: .75rem;
+    }
+  }
+}
+
+.derniere-actualite {
+  .texte {
+    min-height: auto;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0.9rem 1.45rem 1.25rem;
+
+    .titre {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0.75rem 0 1.5rem;
+    }
+
+    .action {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
+}

@@ -9,5 +9,88 @@
         margin-left: -445px;
       }
     }
+
+    .actualite-complete {
+      @import "../../bootstrap_minimal";
+      color: $eva_dark;
+    
+      .titre {
+        @include titre();
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+      }
+    
+      .illustration {
+        img {
+          width: 100%;
+          @include carte-avec-ombre();
+        }
+        margin-bottom: 2rem;
+      }
+    
+      .contenu {
+        @include make-col(3, 5);
+        @include make-col-offset(1, 5);
+        padding: 0 .625rem;
+    
+        img, iframe, blockquote {
+          width: calc(100% + 2.5rem);
+          border-radius: .5rem;
+          margin: 0 -1.25rem;
+        }
+    
+        a {
+          color: $eva_main_blue;
+        }
+      }
+    }
+    
+    .actualite-complete,
+    .details-actualite,
+    .autres-actualites {
+      font-size: .875rem;
+    }
+
+    .details-actualite {
+      .metadonnees {
+        @include carte-avec-ombre();
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+
+        .donnee {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          align-items: flex-start;
+        }
+
+        .label {
+          font-weight: bold;
+          margin-bottom: .5rem;
+        }
+      }
+    }
+
+    .autres-actualites {
+      .actualite {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    
+        .categorie {
+          margin-right: 1rem;
+        }
+    
+        .lien {
+          color: $eva_main_blue;
+          text-decoration: underline;
+    
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
   }
 }

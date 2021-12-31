@@ -1,0 +1,14 @@
+@mixin titre() {
+  font-family: $font-titre;
+  font-weight: bold;
+  text-shadow: none;
+  color: $eva_dark;
+  margin: 0;
+}
+@mixin titre-carte() {
+  @include annule-carte();
+  @include titre();
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border: 0;
+}

@@ -1,5 +1,5 @@
-@import "variables";
-@import "../admin/mixins";
+@import "admin/variables";
+@import "admin/mixins";
 
 .admin-scores {
   margin-top: 1rem;
@@ -7,7 +7,7 @@
 
 .carte-evaluation {
   $grid-columns: 8;
-  @import "../bootstrap_minimal";
+  @import "../../../bootstrap_minimal";
   font-size: 0.875rem;
 
   .titre,

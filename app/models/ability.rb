@@ -21,6 +21,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     droit_restitution compte
     droit_compte compte
     droit_structure compte
+    droit_actualite compte
   end
 
   def droits_applicatifs
@@ -28,7 +29,6 @@ class Ability # rubocop:disable Metrics/ClassLength
     droit_question
     droit_questionnaire
     droit_choix
-    droit_actualite
     droit_page
   end
 
@@ -110,8 +110,9 @@ class Ability # rubocop:disable Metrics/ClassLength
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
   end
 
-  def droit_actualite
+  def droit_actualite(compte)
     can :read, Actualite
+    can :manage, Actualite if compte.au_moins_admin?
   end
 
   def droit_page

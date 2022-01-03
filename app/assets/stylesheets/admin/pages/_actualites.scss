@@ -33,6 +33,10 @@
       .titre {
         margin-bottom: 1.75rem;
         font-size: 1rem;
+        a {
+          text-decoration: none;
+          color: $eva_dark;
+        }
       }
       .date {
         font-size: 0.875rem;

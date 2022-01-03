@@ -6,12 +6,16 @@ div class: 'actualites' do
       div class: 'conteneur' do
         if actualite.illustration.attached?
           div class: 'illustration' do
-            image_tag cdn_for(actualite.illustration)
+            link_to admin_actualite_path(actualite) do
+              image_tag cdn_for(actualite.illustration)
+            end
           end
         end
         div class: 'contenu' do
           status_tag actualite.categorie, class: 'categorie'
-          h3 actualite.titre, class: 'titre'
+          h3 class: 'titre' do
+            link_to actualite.titre, admin_actualite_path(actualite)
+          end
           span class: 'date' do
             l actualite.created_at, format: :point
           end

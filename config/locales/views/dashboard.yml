@@ -6,7 +6,8 @@ fr:
           **Des demandes d'accès sont en attente de validation.** Vous pouvez les confirmer **dans la page de votre structure**.
       index:
         incitation_creation_compte_personnel: |
-          Nous déconseillons de partager un accès, vous pouvez créer votre compte personnel <a href="%{lien}">ici</a>
+          Pour des questions relatives au RGPD ainsi que pour plus de fluidité, les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.</br>
+          <strong>Nous vous demandons de bien vouloir <a href="%{lien}">créer votre compte en suivant ce lien</a>.</strong> Rassurez-vous, votre compte sera bien rattaché à votre structure.
       dashboard:
         statistiques:
           titre: Statistiques

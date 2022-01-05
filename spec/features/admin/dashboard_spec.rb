@@ -40,7 +40,8 @@ describe 'Dashboard', type: :feature do
     it "affiche un message d'incitation à créer un compte personnel" do
       visit admin_path
       expect(page).to have_content(
-        'Nous déconseillons de partager un accès, vous pouvez créer votre compte personnel ici'
+        'Pour des questions relatives au RGPD ainsi que pour plus de fluidité, ' \
+        'les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.'
       )
     end
   end

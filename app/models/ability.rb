@@ -112,7 +112,7 @@ class Ability # rubocop:disable Metrics/ClassLength
 
   def droit_actualite(compte)
     can :read, Actualite
-    can :manage, Actualite if compte.au_moins_admin?
+    can :manage, Actualite if compte.superadmin?
   end
 
   def droit_page

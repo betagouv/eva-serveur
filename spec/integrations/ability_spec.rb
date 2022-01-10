@@ -37,6 +37,7 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Situation.new) }
     it { is_expected.to be_able_to(:manage, Campagne.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
+    it { is_expected.to be_able_to(:manage, Actualite) }
 
     it 'avec une campagne qui a des évaluations' do
       is_expected.to_not be_able_to(:destroy, campagne_superadmin)

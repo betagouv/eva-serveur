@@ -3,8 +3,6 @@
 json.id evaluation.id
 json.nom evaluation.nom
 json.campagne_id evaluation.campagne_id
-json.email evaluation.email
-json.telephone evaluation.telephone
 json.debutee_le evaluation.debutee_le
 json.terminee_le evaluation.terminee_le
 json.anonymise_le evaluation.anonymise_le

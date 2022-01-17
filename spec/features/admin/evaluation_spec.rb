@@ -216,8 +216,6 @@ describe 'Admin - Evaluation', type: :feature do
       before do
         visit edit_admin_evaluation_path(evaluation)
         fill_in :evaluation_nom, with: 'Nouveau Nom'
-        fill_in :evaluation_telephone, with: 'Nouveau Téléphone'
-        fill_in :evaluation_email, with: 'autre@email.com'
       end
 
       context 'en changeant de campagne' do
@@ -225,8 +223,6 @@ describe 'Admin - Evaluation', type: :feature do
           within('#evaluation_campagne_input') { select 'Campagne autre structure' }
           click_on 'Modifier'
           expect(evaluation.reload.nom).to eq 'Nouveau Nom'
-          expect(evaluation.telephone).to eq 'Nouveau Téléphone'
-          expect(evaluation.email).to eq 'autre@email.com'
           expect(evaluation.campagne.libelle).to eq 'Campagne autre structure'
         end
       end

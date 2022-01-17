@@ -77,8 +77,6 @@ describe 'Evaluation API', type: :request do
 
       it do
         evaluation.reload
-        expect(evaluation.email).to eq 'coucou-a-jour@eva.fr'
-        expect(evaluation.telephone).to eq '01 02 03 04 05'
         expect(evaluation.terminee_le).to eq date
         expect(response).to have_http_status(200)
       end

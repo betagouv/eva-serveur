@@ -26,7 +26,7 @@ module Api
     private
 
     def evaluation_params
-      params.permit(:nom, :code_campagne, :email, :telephone, :terminee_le, :debutee_le)
+      params.permit(:nom, :code_campagne, :terminee_le, :debutee_le)
     end
   end
 end

@@ -42,6 +42,29 @@ ActiveAdmin.register Structure do
     actions
   end
 
+  csv do
+    column :nom
+    column :code_postal
+    column :region
+    column :type_structure do |structure|
+      traduction_type_structure(structure.type_structure)
+    end
+    column :nombre_evaluations
+    column :date_derniere_evaluation
+  end
+
+  xls do
+    whitelist
+    column :nom
+    column :code_postal
+    column :region
+    column :type_structure do |structure|
+      traduction_type_structure(structure.type_structure)
+    end
+    column :nombre_evaluations
+    column :date_derniere_evaluation
+  end
+
   show do
     render partial: 'show', locals: { structure: resource }
   end

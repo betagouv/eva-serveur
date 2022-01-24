@@ -43,7 +43,6 @@ namespace :nettoyage do
     return if Rails.env.production?
 
     anonymise_evaluations
-    Contact.delete_all
     anonymise_comptes
     anonymise_campagnes
     anonymise_structures

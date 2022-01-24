@@ -123,7 +123,6 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :manage, :all if compte.superadmin?
     cannot :destroy, Campagne
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
-    can :create, Contact
   end
 
   def droits_comptes_refuses(compte)

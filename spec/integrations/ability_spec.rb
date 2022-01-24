@@ -217,7 +217,6 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }
-    it { is_expected.to be_able_to(:create, Contact.new) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(1, 2, 3)) }
 

@@ -94,7 +94,8 @@ situations_data = [
   { libelle: 'Sécurité', nom_technique: 'securite' },
   { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
   { libelle: 'Inventaire', nom_technique: 'inventaire' },
-  { libelle: 'Plan de la ville', nom_technique: 'plan_de_la_ville' }
+  { libelle: 'Plan de la ville', nom_technique: 'plan_de_la_ville' },
+  { libelle: 'Café de la place', nom_technique: 'cafe_de_la_place' }
 ]
 situations_data.each do |situation_data|
   Situation.find_or_create_by(nom_technique: situation_data[:nom_technique]) do |situation|

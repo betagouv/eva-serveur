@@ -25,6 +25,7 @@ fr:
             Saisissez votre code campagne ci-dessous et lancez eva.
           campagne: Code campagne
           bouton: Lancer eva
+          code_invalide: "Le code saisi n'est pas correct. Saisissez-le à nouveau, ou demandez de l'aide à la personne qui vous accompagne."
       registrations:
         new:
           title: Rejoindre la structure

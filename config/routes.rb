@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   scope '(pro)' do
-    devise_for :comptes, ActiveAdmin::Devise.config.deep_merge(controllers: {registrations: 'eva/devise/registrations'})
+    active_admin_devise_config = ActiveAdmin::Devise.config.deep_merge(
+      controllers: {
+        registrations: 'eva/devise/registrations',
+        sessions: 'eva/devise/sessions'
+      }
+    )
+    devise_for :comptes, active_admin_devise_config
+    devise_scope :compte do
+      post '/admin/login/connexion_espace_jeu', to: 'eva/devise/sessions#connexion_espace_jeu', as: 'connexion_espace_jeu'
+    end
     get '/admin', to: redirect('/pro/admin/dashboard')
 
     ActiveAdmin.routes(self)

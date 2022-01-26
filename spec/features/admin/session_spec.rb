@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Session', type: :feature do
-  describe 'Connexion' do
+  describe 'Connexion Espace Pro' do
     context "Quand le compte n'existe pas" do
       before do
         connecte_email email: 'invalid@email.com'
@@ -55,6 +55,20 @@ describe 'Session', type: :feature do
       it 'me connecte à mon espace pro' do
         connecte(compte_confirme)
         expect(page).to have_current_path(admin_dashboard_path)
+      end
+    end
+  end
+
+  describe 'Connexion Espace Jeu' do
+    context 'Quand le code de campagne est invalide' do
+      before do
+        visit new_compte_session_path
+        fill_in :code, with: 'invalide'
+        click_on 'Lancer eva'
+      end
+
+      it "Renvoie un message d'erreur" do
+        expect(page).to have_content(I18n.t('active_admin.devise.login.evaluations.code_invalide'))
       end
     end
   end

@@ -37,22 +37,27 @@
        <%= md t('active_admin.devise.login.evaluations.header_title') -%>
     </div>
     <div class="panel-content">
-      <%= md t('active_admin.devise.login.evaluations.content') -%>
+      <div class="panel-description">
+        <%= md t('active_admin.devise.login.evaluations.content') -%>
+      </div>
 
-      <form method='GET' action="<%= URL_CLIENT %>">
+      <%= form_with url: connexion_espace_jeu_path do |form| %>
         <fieldset class='inputs'>
           <ol>
             <li class='input'>
-              <label class='label'>
-                <%= t('active_admin.devise.login.evaluations.campagne') %>
-              </label>
-              <input name="code" placeholder="DEMO" type="text">
+              <%= form.label :code, t('active_admin.devise.login.evaluations.campagne') %>
+              <% code = params[:code] %>
+              <%= form.text_field :code, placeholder: 'DEMO', value: code %>
+              <% if params[:code_erreur] %>
+                <p class="inline-errors"><%= params[:code_erreur] %></p>
+              <% end %>
             </li>
           </ol>
         </fieldset>
         <div class="actions">
-          <input type="submit" value="<%= t('active_admin.devise.login.evaluations.bouton') %>">
+          <%= form.submit t('active_admin.devise.login.evaluations.bouton') %>
         </div>
+      <% end %>
       </form>
     </div>
   </div>

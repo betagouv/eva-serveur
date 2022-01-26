@@ -138,10 +138,10 @@ ActiveAdmin.register Compte do
       roles = Compte.roles.to_h
       roles.delete('superadmin') unless current_compte.superadmin?
       roles.delete('compte_generique') unless current_compte.superadmin?
-      roles.map do |k, v|
+      roles.to_h do |k, v|
         traduction = I18n.t(k, scope: %i[activerecord attributes compte roles])
         [traduction, v]
-      end.to_h
+      end
     end
   end
 

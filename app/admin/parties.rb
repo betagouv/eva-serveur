@@ -19,7 +19,7 @@ ActiveAdmin.register Partie do
          display_name: 'nom',
          minimum_input_length: 2,
          order_by: 'nom_asc'
-  filter :session
+  filter :session_id
   filter :created_at
   filter :updated_at
 
@@ -46,8 +46,6 @@ ActiveAdmin.register Partie do
 
     def scoped_collection
       Partie.where(situation_id: params[:situation_id])
-            .joins(evaluation: { campagne: :compte })
-            .where.not(comptes: { role: :superadmin })
     end
   end
 end

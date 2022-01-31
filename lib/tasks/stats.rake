@@ -201,9 +201,9 @@ namespace :stats do
   task competences_transversales: :environment do
     Rails.logger.level = :warn
     colonnes = {
-      'tri' => %i[nombre_bien_placees nombre_mal_placees],
-      'inventaire' => %i[nombre_ouverture_contenant nombre_essais_validation],
-      'controle' => %i[nombre_bien_placees nombre_mal_placees nombre_non_triees],
+      'tri' => %i[nombre_bien_placees nombre_mal_placees temps_total],
+      'inventaire' => %i[nombre_ouverture_contenant nombre_essais_validation temps_total],
+      'controle' => %i[nombre_bien_placees nombre_mal_placees nombre_non_triees temps_total],
       'securite' => Restitution::Securite::METRIQUES.keys
     }
     colonnes_z = {

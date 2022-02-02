@@ -11,7 +11,7 @@ describe 'Admin - Evaluation', type: :feature do
     create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019'
   end
 
-  context 'Organisation' do
+  context 'Rôle admin' do
     let(:role) { 'admin' }
     before(:each) { connecte(mon_compte) }
 

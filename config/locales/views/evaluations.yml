@@ -316,6 +316,10 @@ fr:
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
+        niveau_global:
+          socle_clea: supérieur
+          ni_ni: intermédiaire
+          illettrisme_potentiel: illettrisme potentiel
         socle_clea: |
           ### Certification Cléa indiquée
 

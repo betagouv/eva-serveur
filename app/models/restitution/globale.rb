@@ -71,6 +71,16 @@ module Restitution
         .interpretations(categorie)
     end
 
+    def calcule_resultats
+      {
+        synthese_competences_de_base: interpreteur_niveau1.synthese,
+        niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],
+        niveau_cnef: interpreteur_niveau1.interpretations_cefr[:numeratie],
+        niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
+        niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie]
+      }
+    end
+
     def efficience
       restitutions_selectionnee = restitutions.reject do |restitution|
         restitution.is_a? RESTITUTION_SANS_EFFICIENCE

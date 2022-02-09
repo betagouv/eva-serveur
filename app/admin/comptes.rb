@@ -97,7 +97,7 @@ ActiveAdmin.register Compte do
   end
 
   sidebar :aide_filtres,
-          partial: 'admin/structures/aide_filtres_sidebar',
+          partial: 'admin/structures_locales/aide_filtres_sidebar',
           only: :index,
           if: -> { can? :manage, Compte }
 

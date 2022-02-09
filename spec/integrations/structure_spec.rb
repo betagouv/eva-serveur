@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Structure, type: :integration do
   describe 'scopes' do
     describe '.sans_campagne' do
-      let!(:structure) { create :structure }
+      let!(:structure) { create :structure_locale }
       context 'sans aucune campagne' do
         it { expect(Structure.sans_campagne.count).to eq 1 }
       end
@@ -20,8 +20,8 @@ describe Structure, type: :integration do
     end
 
     describe '.pas_vraiment_utilisatrices' do
-      let!(:structure_pas_utilisatrice) { create :structure }
-      let!(:structure_utilisatrice) { create :structure }
+      let!(:structure_pas_utilisatrice) { create :structure_locale }
+      let!(:structure_utilisatrice) { create :structure_locale }
 
       before { cree_evaluations_pour_structure(structure_utilisatrice) }
 
@@ -30,8 +30,8 @@ describe Structure, type: :integration do
     end
 
     describe '.non_activees' do
-      let!(:structure_non_activee) { create :structure }
-      let!(:structure_activee) { create :structure }
+      let!(:structure_non_activee) { create :structure_locale }
+      let!(:structure_activee) { create :structure_locale }
 
       before do
         cree_evaluations_pour_structure structure_non_activee, nombre_evaluations: 3
@@ -43,7 +43,7 @@ describe Structure, type: :integration do
     end
 
     describe '.activees' do
-      let!(:structure_activee) { create :structure }
+      let!(:structure_activee) { create :structure_locale }
 
       before do
         cree_evaluations_pour_structure structure_activee, nombre_evaluations: 4
@@ -53,8 +53,8 @@ describe Structure, type: :integration do
     end
 
     describe '.inactives' do
-      let!(:structure_activee) { create :structure }
-      let!(:structure_inactivee) { create :structure }
+      let!(:structure_activee) { create :structure_locale }
+      let!(:structure_inactivee) { create :structure_locale }
 
       before do
         cree_evaluations_pour_structure(
@@ -74,7 +74,7 @@ describe Structure, type: :integration do
     end
 
     describe '.abandonnistes' do
-      let!(:structure_abandonnee) { create :structure }
+      let!(:structure_abandonnee) { create :structure_locale }
 
       before do
         cree_evaluations_pour_structure(
@@ -89,7 +89,7 @@ describe Structure, type: :integration do
 
     describe '.avec_nombre_evaluations_et_date_derniere_evaluation' do
       let(:date_creation) { Time.new(2021, 8, 24) }
-      let!(:structure_sans_evaluation) { create :structure }
+      let!(:structure_sans_evaluation) { create :structure_locale }
       let!(:structure_avec_evaluation) do
         structure = create :structure
         cree_evaluations_pour_structure(

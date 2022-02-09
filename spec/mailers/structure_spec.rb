@@ -6,7 +6,7 @@ describe StructureMailer, type: :mailer do
   describe '#nouvelle_structure' do
     it "envoie un email pour informer de la création d'une structure" do
       id = SecureRandom.uuid
-      structure = Structure.new nom: 'Ma Super Structure', id: id, code_postal: '75012'
+      structure = StructureLocale.new nom: 'Ma Super Structure', id: id, code_postal: '75012'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
       email = StructureMailer.with(compte: compte, structure: structure).nouvelle_structure

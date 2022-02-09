@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe NotificationAdminComptesEnAttenteJob, type: :job do
   context "quand l'admin a toujours des comptes en attente de validation" do
-    let!(:structure) { create :structure }
+    let!(:structure) { create :structure_locale }
     let!(:compte) { create :compte_admin, structure: structure }
     let!(:compte) { create :compte, statut_validation: :en_attente, structure: structure }
 

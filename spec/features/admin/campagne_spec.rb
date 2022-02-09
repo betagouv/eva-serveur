@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
-  let(:structure_conseiller) { create :structure }
+  let(:structure_conseiller) { create :structure_locale }
   let(:compte_conseiller) { create :compte_admin, structure: structure_conseiller }
   let!(:compte_connecte) { connecte(compte_conseiller) }
   let!(:ma_campagne) do
@@ -97,7 +97,7 @@ describe 'Admin - Campagne', type: :feature do
         parcours.situations_configurations.create situation: situation_maintenance
         parcours
       end
-      let(:structure_conseiller) { create :structure, code_postal: '45312' }
+      let(:structure_conseiller) { create :structure_locale, code_postal: '45312' }
 
       before do
         allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'CDI'

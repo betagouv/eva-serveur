@@ -7,7 +7,10 @@
         </div>
         <div class='actions'>
           <a class="bouton bouton-outline-light" data-dismiss="modal">Plus tard</a>
-          <%= link_to 'Voir les demandes', admin_structure_path(current_compte.structure, anchor: "bloc-mes-collegues"), class: "bouton bouton-light" %>
+          <% structure = current_compte.structure %>
+          <%= link_to 'Voir les demandes',
+                      send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-mes-collegues"), 
+                      class: "bouton bouton-light" %>
         </div>
       </div>  
     </div>

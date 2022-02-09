@@ -112,7 +112,7 @@ describe Ability do
     end
 
     describe 'Droits des structures' do
-      let!(:structure) { create :structure }
+      let!(:structure) { create :structure_locale }
       it { is_expected.to be_able_to(:destroy, structure) }
 
       context 'avec un compte rattaché' do

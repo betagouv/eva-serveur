@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Compte', type: :feature do
-  let!(:ma_structure) { create :structure, nom: 'Ma structure' }
+  let!(:ma_structure) { create :structure_locale, nom: 'Ma structure' }
   let!(:compte_superadmin) do
     create :compte, structure: ma_structure, email: 'moi@structure'
   end
@@ -14,6 +14,12 @@ describe 'Admin - Compte', type: :feature do
   end
 
   before { connecte(compte_connecte) }
+
+  describe 'index' do
+    before { visit admin_comptes_path }
+
+    it { expect(page).to have_content 'moi@structure' }
+  end
 
   context 'en tant que superadmin' do
     let(:compte_connecte) do
@@ -206,7 +212,7 @@ describe 'Admin - Compte', type: :feature do
     end
 
     describe 'je vois mes collègues' do
-      let(:autre_structure) { create :structure, :avec_admin }
+      let(:autre_structure) { create :structure_locale, :avec_admin }
       let!(:inconnu) do
         create :compte_conseiller, structure: autre_structure, email: 'inconnu@structure'
       end

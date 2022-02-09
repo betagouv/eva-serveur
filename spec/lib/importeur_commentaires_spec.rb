@@ -8,7 +8,7 @@ describe ImporteurCommentaires do
   let(:logger) { RakeLogger.logger }
 
   context 'commentaire sur un compte existant' do
-    let(:structure) { create :structure }
+    let(:structure) { create :structure_locale }
     let!(:compte) { create :compte, email: 'mon-conseiller@milo.fr', structure: structure }
     let(:ligne) { { utilisation_eva: 'Mon utilisation', mail: 'mon-conseiller@milo.fr' } }
 

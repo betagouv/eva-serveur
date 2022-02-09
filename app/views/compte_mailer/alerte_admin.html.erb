@@ -1,7 +1,8 @@
+<% structure = @compte.structure %>
 <%= md t('.corps',
          prenom_admin: @compte_admin.prenom,
          prenom: @compte.prenom,
          nom: @compte.nom,
-         structure: @compte.structure.display_name,
-         url_validation: admin_structure_url(@compte.structure, anchor: 'bloc-mes-collegues')
+         structure: structure.display_name,
+         url_validation: send("admin_#{structure.type.underscore}_url", structure, anchor: "bloc-mes-collegues"), 
         ) %>

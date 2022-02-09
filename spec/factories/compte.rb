@@ -8,7 +8,7 @@ FactoryBot.define do
     password { 'password' }
     role { 'superadmin' }
     statut_validation { :acceptee }
-    structure
+    structure factory: :structure_locale
 
     trait :structure_avec_admin do
       structure { create(:structure, :avec_admin) }

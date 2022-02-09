@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_114210) do
+ActiveRecord::Schema.define(version: 2022_02_16_173642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -263,7 +263,11 @@ ActiveRecord::Schema.define(version: 2022_01_24_114210) do
     t.string "type_structure"
     t.string "region"
     t.datetime "anonymise_le"
+    t.uuid "structure_referente_id"
+    t.string "type"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
+    t.index ["structure_referente_id"], name: "index_structures_on_structure_referente_id"
+    t.index ["type"], name: "index_structures_on_type"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

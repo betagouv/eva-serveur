@@ -13,7 +13,8 @@
     <% end %>
 
     <% if params[:code_postal] %>
-      <%= render(@structures) || content_tag(:p, t('.aucun_resultat'), class: 'aucun-resultat') %>
+      <%= render(partial: 'structure', collection: @structures) ||
+        content_tag(:p, t('.aucun_resultat'), class: 'aucun-resultat') %>
 
       <div class="actions">
       <%= link_to t('.structure_non_referencee'), nouvelle_structure_path, class: 'creer-structure' %>

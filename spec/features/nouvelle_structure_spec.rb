@@ -21,7 +21,7 @@ describe 'Nouvelle Structure', type: :feature do
   it 'créé stucture et compte' do
     expect do
       click_on 'Valider la création de mon compte'
-    end.to change(Structure, :count)
+    end.to change(StructureLocale, :count)
       .and change(Compte, :count)
 
     compte = Compte.last

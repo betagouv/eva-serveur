@@ -8,6 +8,8 @@ fr:
         code_postal: Code Postal
         region: Région
         date_derniere_evaluation: Dernière évaluation
+        structure_referente: Structure référente
+        structures_dependantes: Structures dépendantes
         nombre_evaluations: Nombre d'évaluations
         type_structure:
           one: 'Type de structure'
@@ -25,17 +27,25 @@ fr:
           autre: Autre
   formtastic:
     actions:
-      structure:
+      structure: &actions_structure
         create: Créer une structure
         update: Modifier
+      structure_administrative:
+        <<: *actions_structure
+      structure_locale:
+        <<: *actions_structure
     placeholders:
       structure:
         nom: Mission Locale de Caraces, Pôle Emploi de Marita
         code_postal: Indiquer le code postal de votre structure
   active_admin:
     resources:
-      structure:
+      structure: &active_admin_structure
         delete_model: Supprimer
         new_model: Créer une structure
         edit_model: Modifier
         delete_model: Supprimer
+      structure_administrative:
+        <<: *active_admin_structure
+      structure_locale:
+        <<: *active_admin_structure

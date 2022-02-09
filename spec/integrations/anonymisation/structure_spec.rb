@@ -5,9 +5,9 @@ require 'rails_helper'
 describe Anonymisation::Structure, type: :integration do
   context 'avec une structure complete' do
     let(:structure) do
-      create :structure, anonymise_le: nil,
-                         code_postal: '45300',
-                         nom: 'Mission locale Pithiviers'
+      create :structure_locale, anonymise_le: nil,
+                                code_postal: '45300',
+                                nom: 'Mission locale Pithiviers'
     end
 
     it 'anonymise une structure' do
@@ -22,8 +22,8 @@ describe Anonymisation::Structure, type: :integration do
 
   context 'avec une structure sans code postal' do
     let(:structure) do
-      create :structure, anonymise_le: nil,
-                         nom: 'Mission locale Pithiviers'
+      create :structure_locale, anonymise_le: nil,
+                                nom: 'Mission locale Pithiviers'
     end
 
     before do

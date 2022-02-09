@@ -8,7 +8,7 @@ module StructureHelper
   end
 
   def collection_types_structures
-    Structure::TYPES_STRUCTURES.map do |type_structure|
+    StructureLocale::TYPES_STRUCTURES.map do |type_structure|
       [traduction_type_structure(type_structure), type_structure]
     end
   end

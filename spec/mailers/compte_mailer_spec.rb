@@ -5,7 +5,7 @@ require 'rails_helper'
 describe CompteMailer, type: :mailer do
   describe '#nouveau_compte' do
     it 'envoie un email de confirmation de création de compte' do
-      structure = Structure.new nom: 'Ma Super Structure', code_postal: '75012'
+      structure = StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
       email = CompteMailer.with(compte: compte).nouveau_compte
@@ -28,8 +28,8 @@ describe CompteMailer, type: :mailer do
 
   describe '#alerte_admin' do
     it "envoie un email de demande de validation d'un nouveau compte à l'admin" do
-      structure = Structure.new id: SecureRandom.uuid, nom: 'Ma Super Structure',
-                                code_postal: '75012'
+      structure = StructureLocale.new id: SecureRandom.uuid, nom: 'Ma Super Structure',
+                                      code_postal: '75012'
       admin = Compte.new prenom: 'Admin',
                          email: 'debut@test.com',
                          role: :admin,
@@ -54,12 +54,12 @@ describe CompteMailer, type: :mailer do
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')
       expect(email.body).to include('Ma Super Structure - 75012')
-      expect(email.body).to include(admin_structure_url(compte.structure))
+      expect(email.body).to include(admin_structure_locale_url(compte.structure))
     end
   end
 
   describe 'relance' do
-    let(:structure) { Structure.new nom: 'Ma Super Structure', code_postal: '75012' }
+    let(:structure) { StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012' }
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }
     let(:mail) { CompteMailer.with(compte: compte).relance }
 

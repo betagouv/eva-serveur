@@ -7,6 +7,7 @@ Geocoder::Lookup::Test.set_default_stub(
     }
   ]
 )
+
 FactoryBot.define do
   factory :structure do
     nom { 'Ma structure' }
@@ -18,5 +19,8 @@ FactoryBot.define do
         create(:compte_admin, structure: structure)
       end
     end
+
+    factory :structure_locale, class: StructureLocale
+    factory :structure_administrative, class: StructureAdministrative
   end
 end

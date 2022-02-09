@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Création de compte conseiller', type: :feature do
-  let!(:structure) { create :structure, :avec_admin, nom: 'Ma structure' }
+  let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
 
   context 'sans structure précisée' do
     before do

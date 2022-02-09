@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Dashboard', type: :feature do
-  let!(:ma_structure) { create :structure, :avec_admin }
+  let!(:ma_structure) { create :structure_locale, :avec_admin }
   let!(:compte) { create :compte_superadmin, structure: ma_structure }
   before { connecte(compte) }
 

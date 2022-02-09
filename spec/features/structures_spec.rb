@@ -28,9 +28,13 @@ describe 'Structures', type: :feature do
   end
 
   describe "#index liste les structures proche d'un code postal" do
-    let!(:structure_paris12) { create :structure, nom: 'MILO Paris 12eme', code_postal: '75012' }
-    let!(:structure_paris13) { create :structure, nom: 'MILO Paris 13eme', code_postal: '75013' }
-    let!(:structure_lyon) { create :structure, nom: 'MILO Lyon', code_postal: '69000' }
+    let!(:structure_paris12) do
+      create :structure_locale, nom: 'MILO Paris 12eme', code_postal: '75012'
+    end
+    let!(:structure_paris13) do
+      create :structure_locale, nom: 'MILO Paris 13eme', code_postal: '75013'
+    end
+    let!(:structure_lyon) { create :structure_locale, nom: 'MILO Lyon', code_postal: '69000' }
 
     it do
       visit structures_path

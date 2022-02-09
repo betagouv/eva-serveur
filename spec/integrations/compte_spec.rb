@@ -7,7 +7,7 @@ describe Compte, type: :integration do
 
   describe 'après création' do
     context 'quand le compte est en attente de validation' do
-      let!(:structure) { create :structure, :avec_admin }
+      let!(:structure) { create :structure_locale, :avec_admin }
 
       it "programme un mail de relance, un mail de bienvenue et un mail d'alerte aux admins" do
         expect { create :compte_conseiller, structure: structure, statut_validation: :en_attente }
@@ -52,10 +52,28 @@ describe Compte, type: :integration do
           .and have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
       end
     end
+
+    context "quand le compte fait partie d'une structure locale" do
+      let(:structure) { create :structure_locale }
+
+      it 'programme un mail de relance' do
+        expect { create :compte_admin, statut_validation: :acceptee, structure: structure }
+          .to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
+      end
+    end
+
+    context "quand le compte fait partie d'une structure administrative" do
+      let(:structure) { create :structure_administrative }
+
+      it 'programme un mail de relance' do
+        expect { create :compte_admin, statut_validation: :acceptee, structure: structure }
+          .not_to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
+      end
+    end
   end
 
   describe '#find_admins' do
-    let(:structure) { create :structure }
+    let(:structure) { create :structure_locale }
     let(:compte) { create :compte_conseiller, structure: structure }
 
     describe 'avec des admins' do

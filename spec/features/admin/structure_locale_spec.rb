@@ -2,24 +2,24 @@
 
 require 'rails_helper'
 
-describe 'Admin - Structure', type: :feature do
+describe 'Admin - Structure locale', type: :feature do
   before { se_connecter_comme_superadmin }
 
   describe 'index' do
-    let!(:structure) { create :structure, nom: 'Ma structure' }
-    before { visit admin_structures_path }
+    let!(:structure) { create :structure_locale, nom: 'Ma structure' }
+    before { visit admin_structures_locales_path }
 
     it { expect(page).to have_content 'Ma structure' }
   end
 
   describe 'show' do
     let!(:structure) do
-      create :structure, :avec_admin, nom: 'Ma structure', type_structure: 'mission_locale'
+      create :structure_locale, :avec_admin, nom: 'Ma structure', type_structure: 'mission_locale'
     end
     let!(:compte) do
       create :compte, structure: structure, statut_validation: :en_attente, role: :conseiller
     end
-    before { visit admin_structure_path(structure) }
+    before { visit admin_structure_locale_path(structure) }
 
     describe 'Ma structure' do
       it { expect(page).to have_content structure.nom }
@@ -45,11 +45,11 @@ describe 'Admin - Structure', type: :feature do
 
   describe 'modification' do
     before do
-      structure = create :structure
-      visit edit_admin_structure_path(structure)
-      fill_in :structure_nom, with: 'Captive'
+      structure = create :structure_locale
+      visit edit_admin_structure_locale_path(structure)
+      fill_in :structure_locale_nom, with: 'Captive'
       select 'Mission locale'
-      fill_in :structure_code_postal, with: '92100'
+      fill_in :structure_locale_code_postal, with: '92100'
       click_on 'Modifier'
     end
 

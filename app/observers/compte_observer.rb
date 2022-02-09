@@ -17,6 +17,8 @@ class CompteObserver < ActiveRecord::Observer
   end
 
   def programme_email_relance(compte)
+    return unless compte.structure.instance_of?(StructureLocale)
+
     RelanceUtilisateurPourNonActivationJob
       .set(wait: Compte::DELAI_RELANCE_NON_ACTIVATION)
       .perform_later(compte.id)

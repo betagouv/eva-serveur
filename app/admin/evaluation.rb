@@ -35,11 +35,26 @@ ActiveAdmin.register Evaluation do
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
     column('Date') { |evaluation| l(evaluation.created_at, format: :court) }
     column :nom
-    column('Niveau global') { |evaluation| retourne_niveau_global(evaluation) }
-    column('Niveau cefr') { |evaluation| retourne_niveau_cefr(evaluation, :litteratie) }
-    column('Niveau cnef') { |evaluation| retourne_niveau_cefr(evaluation, :numeratie) }
-    column('ANLCI Littératie') { |evaluation| retourne_niveau_anlci(evaluation, :litteratie) }
-    column('ANLCI Numératie') { |evaluation| retourne_niveau_anlci(evaluation, :numeratie) }
+    column('Niveau global') do |evaluation|
+      restitution = restitutions_globales[evaluation.id]
+      niveau_global(restitution)
+    end
+    column('Niveau cefr') do |evaluation|
+      restitution = restitutions_globales[evaluation.id]
+      niveau_cefr(restitution, :litteratie)
+    end
+    column('Niveau cnef') do |evaluation|
+      restitution = restitutions_globales[evaluation.id]
+      niveau_cefr(restitution, :numeratie)
+    end
+    column('ANLCI Littératie') do |evaluation|
+      restitution = restitutions_globales[evaluation.id]
+      niveau_anlci(restitution, :litteratie)
+    end
+    column('ANLCI Numératie') do |evaluation|
+      restitution = restitutions_globales[evaluation.id]
+      niveau_anlci(restitution, :numeratie)
+    end
   end
 
   show do
@@ -55,8 +70,8 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :retourne_niveau_global,
-                  :retourne_niveau_cefr, :retourne_niveau_anlci
+                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :niveau_global,
+                  :niveau_cefr, :niveau_anlci, :restitutions_globales
 
     def show
       show! do |format|
@@ -106,33 +121,35 @@ ActiveAdmin.register Evaluation do
     end
 
     def restitutions_globales
-      @restitutions_globales ||= {}
+      @restitutions_globales ||= fabrique_restitutions_globales
     end
 
-    def fabrique_restitution_globale(evaluation)
-      unless restitutions_globales.key?(evaluation.id)
-        restitution = FabriqueRestitution.restitution_globale(evaluation)
-        restitutions_globales[evaluation.id] = {
-          synthese: restitution.synthese,
-          interpretations_niveau1_cefr: restitution.interpretations_niveau1_cefr,
-          interpretations_niveau1_anlci: restitution.interpretations_niveau1_anlci
-        }
+    def fabrique_restitutions_globales
+      restitutions = {}
+      @evaluations.each do |e|
+        restitution = FabriqueRestitution.restitution_globale(e)
+        restitutions[e.id] = restitution
       end
-      restitutions_globales[evaluation.id]
+      restitutions
     end
 
-    def retourne_niveau_global(evaluation)
-      synthese = fabrique_restitution_globale(evaluation)[:synthese]
-      t("admin.restitutions.cefr.niveau_global.#{synthese}")
+    def niveau_global(restitution)
+      return if restitution.blank?
+
+      t("admin.restitutions.cefr.niveau_global.#{restitution.synthese}")
     end
 
-    def retourne_niveau_cefr(evaluation, competence)
-      interpretations = fabrique_restitution_globale(evaluation)[:interpretations_niveau1_cefr]
+    def niveau_cefr(restitution, competence)
+      return if restitution.blank?
+
+      interpretations = restitution.interpretations_niveau1_cefr
       traduction_niveau(interpretations, competence, 'cefr')
     end
 
-    def retourne_niveau_anlci(evaluation, competence)
-      interpretations = fabrique_restitution_globale(evaluation)[:interpretations_niveau1_anlci]
+    def niveau_anlci(restitution, competence)
+      return if restitution.blank?
+
+      interpretations = restitution.interpretations_niveau1_anlci
       traduction_niveau(interpretations, competence, 'anlci')
     end
 

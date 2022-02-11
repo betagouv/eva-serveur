@@ -21,7 +21,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         .and_return(interpretations_cefr)
     end
 
-    it { expect(subject.interpretations_cefr).to eq({ litteratie: 'A1', numeratie: 'X1' }) }
+    it { expect(subject.interpretations_cefr).to eq({ litteratie: :A1, numeratie: :X1 }) }
   end
 
   describe '#interpretations_anlci' do
@@ -37,7 +37,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         .and_return(interpretations_anlci)
     end
 
-    it { expect(subject.interpretations_anlci).to eq({ litteratie: '2', numeratie: '3' }) }
+    it do
+      expect(subject.interpretations_anlci).to eq({ litteratie: :profil2, numeratie: :profil3 })
+    end
   end
 
   describe '#interprete' do

@@ -3,16 +3,52 @@
 module Restitution
   module Illettrisme
     class InterpreteurNiveau1
+      CORRESPONDANCES_PALIERS = {
+        CEFR: {
+          litteratie: {
+            palier0: 'pre-A1',
+            palier1: 'A1',
+            palier2: 'A2',
+            palier3: 'B1'
+          },
+          numeratie: {
+            palier0: 'pre-X1',
+            palier1: 'X1',
+            palier2: 'X2',
+            palier3: 'Y1'
+          }
+        },
+        ANLCI: {
+          litteratie: {
+            palier0: '1',
+            palier1: '2',
+            palier2: '3',
+            palier3: '4',
+            palier4: '4 plus',
+            palier5: '4 plus plus'
+          },
+          numeratie: {
+            palier0: '1',
+            palier1: '2',
+            palier2: '3',
+            palier3: '4',
+            palier4: '4 plus',
+            palier5: '4 plus plus'
+          }
+        }
+      }.freeze
+
       def initialize(interpreteur_score)
         @interpreteur_score = interpreteur_score
       end
 
       def socle_clea?
-        interpretations_cefr.all? { |score| score.values[0] == :palier3 }
+        interpretations_cefr[:litteratie] == 'B1' and interpretations_cefr[:numeratie] == 'Y1'
       end
 
       def illettrisme_potentiel?
-        interpretations_cefr.any? { |score| score.values[0] == :palier0 }
+        interpretations_cefr[:litteratie] == 'pre-A1' or
+          interpretations_cefr[:numeratie] == 'pre-X1'
       end
 
       def synthese
@@ -36,10 +72,15 @@ module Restitution
       private
 
       def interprete_score_pour(referentiel)
-        @interpreteur_score.interpretations(
+        interpretations = @interpreteur_score.interpretations(
           Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
           referentiel
         )
+        interpretations.each_with_object({}) do |interpretation, traductions|
+          metrique = interpretation.keys.first
+          palier = interpretation.values.first
+          traductions[metrique] = CORRESPONDANCES_PALIERS[referentiel][metrique][palier]
+        end
       end
     end
   end

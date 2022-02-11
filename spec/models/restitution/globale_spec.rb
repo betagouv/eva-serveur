@@ -207,4 +207,28 @@ describe Restitution::Globale do
       it { expect(interpretations).to eq [trop: :bon] }
     end
   end
+
+  describe '#calcule_resultats' do
+    let(:restitutions) { [] }
+    let(:interpreteur_niveau1) do
+      double(
+        synthese: 'illetrisme_potentiel',
+        interpretations_cefr: { litteratie: 'pre-A1', numeratie: 'X1' }
+      )
+    end
+
+    it do
+      allow(Restitution::Illettrisme::InterpreteurNiveau1)
+        .to receive(:new).and_return(interpreteur_niveau1)
+      expect(restitution_globale.calcule_resultats)
+        .to eq(
+          {
+            synthese_competences_de_base: 'illetrisme_potentiel',
+            niveau_cefr: 'pre-A1',
+            niveau_cnef: 'X1'
+          }
+        )
+    end
+  end
+>>>>>>> 37489854... Refactoring structure de données interpreteur niveau 1
 end

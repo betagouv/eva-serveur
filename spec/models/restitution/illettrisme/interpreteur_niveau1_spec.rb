@@ -21,13 +21,13 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         .and_return(interpretations_cefr)
     end
 
-    it { expect(subject.interpretations_cefr).to eq(interpretations_cefr) }
+    it { expect(subject.interpretations_cefr).to eq({ litteratie: 'A1', numeratie: 'X1' }) }
   end
 
   describe '#interpretations_anlci' do
     let(:interpretations_anlci) do
       [
-        { litteratie: :palier1 }, { numeratie: :palier1 }
+        { litteratie: :palier1 }, { numeratie: :palier2 }
       ]
     end
 
@@ -37,7 +37,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         .and_return(interpretations_anlci)
     end
 
-    it { expect(subject.interpretations_anlci).to eq(interpretations_anlci) }
+    it { expect(subject.interpretations_anlci).to eq({ litteratie: '2', numeratie: '3' }) }
   end
 
   describe '#interprete' do
@@ -45,7 +45,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
-                        { litteratie_cefr: :palier3 }, { numeratie_cefr: :palier3 }
+                        { litteratie: :palier3 }, { numeratie: :palier3 }
                       ])
       end
       it { expect(subject.socle_clea?).to eq(true) }
@@ -55,7 +55,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
-                        { litteratie_cefr: :palier2 }, { numeratie_cefr: :palier3 }
+                        { litteratie: :palier2 }, { numeratie: :palier3 }
                       ])
       end
       it { expect(subject.socle_clea?).to eq(false) }
@@ -65,7 +65,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
-                        { litteratie_cefr: :palier3 }, { numeratie_cefr: :palier2 }
+                        { litteratie: :palier3 }, { numeratie: :palier2 }
                       ])
       end
       it { expect(subject.socle_clea?).to eq(false) }
@@ -75,7 +75,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
-                        { litteratie_cefr: :palier0 }, { numeratie_cefr: :palier1 }
+                        { litteratie: :palier0 }, { numeratie: :palier1 }
                       ])
       end
       it { expect(subject.illettrisme_potentiel?).to eq(true) }
@@ -85,7 +85,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
-                        { litteratie_cefr: :palier1 }, { numeratie_cefr: :palier0 }
+                        { litteratie: :palier1 }, { numeratie: :palier0 }
                       ])
       end
       it { expect(subject.illettrisme_potentiel?).to eq(true) }

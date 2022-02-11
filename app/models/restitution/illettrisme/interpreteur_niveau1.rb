@@ -6,34 +6,34 @@ module Restitution
       CORRESPONDANCES_PALIERS = {
         CEFR: {
           litteratie: {
-            palier0: 'pre-A1',
-            palier1: 'A1',
-            palier2: 'A2',
-            palier3: 'B1'
+            palier0: :pre_A1,
+            palier1: :A1,
+            palier2: :A2,
+            palier3: :B1
           },
           numeratie: {
-            palier0: 'pre-X1',
-            palier1: 'X1',
-            palier2: 'X2',
-            palier3: 'Y1'
+            palier0: :pre_X1,
+            palier1: :X1,
+            palier2: :X2,
+            palier3: :Y1
           }
         },
         ANLCI: {
           litteratie: {
-            palier0: '1',
-            palier1: '2',
-            palier2: '3',
-            palier3: '4',
-            palier4: '4 plus',
-            palier5: '4 plus plus'
+            palier0: :profil1,
+            palier1: :profil2,
+            palier2: :profil3,
+            palier3: :profil4,
+            palier4: :profil4_plus,
+            palier5: :profil4_plus_plus
           },
           numeratie: {
-            palier0: '1',
-            palier1: '2',
-            palier2: '3',
-            palier3: '4',
-            palier4: '4 plus',
-            palier5: '4 plus plus'
+            palier0: :profil1,
+            palier1: :profil2,
+            palier2: :profil3,
+            palier3: :profil4,
+            palier4: :profil4_plus,
+            palier5: :profil4_plus_plus
           }
         }
       }.freeze
@@ -43,12 +43,11 @@ module Restitution
       end
 
       def socle_clea?
-        interpretations_cefr[:litteratie] == 'B1' and interpretations_cefr[:numeratie] == 'Y1'
+        interpretations_cefr[:litteratie] == :B1 and interpretations_cefr[:numeratie] == :Y1
       end
 
       def illettrisme_potentiel?
-        interpretations_cefr[:litteratie] == 'pre-A1' or
-          interpretations_cefr[:numeratie] == 'pre-X1'
+        interpretations_cefr[:litteratie] == :pre_A1 or interpretations_cefr[:numeratie] == :pre_X1
       end
 
       def synthese

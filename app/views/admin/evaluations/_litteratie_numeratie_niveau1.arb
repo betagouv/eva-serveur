@@ -6,17 +6,14 @@ div class: 'row' do
     scope = "admin.restitutions.#{referentiel}.#{competence}"
 
     div class: 'col-auto badge' do
-      niveau_profil = t("#{niveau}.profil", scope: scope)
       if pdf
         div svg_tag_base64 "#{competence}_#{referentiel}.svg"
-        if niveau.present?
-          div svg_tag_base64 "badges/#{referentiel}/#{niveau_profil.parameterize}.svg"
-        end
+        div svg_tag_base64 "badges/#{referentiel}/#{niveau}.svg" if niveau.present?
       else
         div image_tag "#{competence}_#{referentiel}.svg"
         if niveau.present?
-          div image_tag "badges/#{referentiel}/#{niveau_profil.parameterize}.svg",
-                        alt: "Niveau #{niveau_profil}"
+          div image_tag "badges/#{referentiel}/#{niveau}.svg",
+                        alt: "Niveau #{niveau}"
         end
       end
     end

@@ -16,10 +16,10 @@ div class: 'references_restitution_illettrisme' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/prea1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/a1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/a2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/b1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/pre_A1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/A1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/A2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/B1-blanc.svg', class: 'badge-references'
         end
 
         div class: 'col-auto' do
@@ -27,10 +27,10 @@ div class: 'references_restitution_illettrisme' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/prex1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/x1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/x2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/y1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/pre_X1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/X1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/X2-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/Y1-blanc.svg', class: 'badge-references'
         end
       end
       div(class: 'col texte-explications') { md t('explications-lien', scope: scope) }

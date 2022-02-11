@@ -95,8 +95,8 @@ describe 'Admin - Evaluation', type: :feature do
               .and_return({ litteratie: :profil3, numeratie: :profil4 })
             allow(restitution_globale).to receive(:interpretations_niveau1_cefr).and_return([])
             visit admin_evaluation_path(mon_evaluation_bienvenue)
-            expect(page).to have_xpath("//img[@alt='Niveau 3']")
-            expect(page).to have_xpath("//img[@alt='Niveau 4']")
+            expect(page).to have_xpath("//img[@alt='Niveau profil3']")
+            expect(page).to have_xpath("//img[@alt='Niveau profil4']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do

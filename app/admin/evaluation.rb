@@ -142,22 +142,13 @@ ActiveAdmin.register Evaluation do
     def niveau_cefr(restitution, competence)
       return if restitution.blank?
 
-      interpretations = restitution.interpretations_niveau1_cefr
-      traduction_niveau(interpretations, competence, 'cefr')
+      restitution.interpretations_niveau1_cefr[competence].to_s
     end
 
     def niveau_anlci(restitution, competence)
       return if restitution.blank?
 
-      interpretations = restitution.interpretations_niveau1_anlci
-      traduction_niveau(interpretations, competence, 'anlci')
-    end
-
-    def traduction_niveau(interpretations, competence, referenciel)
-      competence_et_niveau = interpretations.find { |element| element.keys.first == competence }
-      niveau = competence_et_niveau[competence]
-      scope = "admin.restitutions.#{referenciel}.#{competence}"
-      t("#{niveau}.profil", scope: scope) unless niveau.blank?
+      restitution.interpretations_niveau1_anlci[competence].to_s
     end
   end
 end

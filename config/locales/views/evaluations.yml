@@ -275,44 +275,36 @@ fr:
         litteratie:
           titre: Français
           pre_A1:
-            profil: 'pre-A1'
             description: |
               Votre score indique qu’il vous est très difficile de lire et répondre à des questions en français, ou que cela vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           A1:
-            profil: 'A1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           A2:
-            profil: 'A2'
             description: |
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           B1:
-            profil: 'B1'
             description:  |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
           titre: Mathématiques
           pre_X1:
-            profil: 'pre-X1'
             description: |
               Votre score indique que la majorité des opérations vous semble très difficile ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           X1:
-            profil: 'X1'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formation ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           X2:
-            profil: 'X2'
             description: |
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           Y1:
-            profil: 'Y1'
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
@@ -355,32 +347,26 @@ fr:
         litteratie:
           titre: Français
           profil1:
-            profil: '1'
             description: |
               Votre score indique qu’il vous est très difficile de lire et répondre à des questions en français, ou que cela vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           profil2:
-            profil: '2'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en français. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           profil3:
-            profil: '3'
             description: |
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           profil4:
-            profil: '4'
             description:  |
               Votre score indique que votre maîtrise du français est suffisante pour vous adapter sans difficulté à un nouvel environnement professionnel.
               **Nous vous conseillons de renforcer vos compétences en français de votre propre initiative ou en participant à une formation que votre conseiller.e sera à même de vous proposer.**
           profil4_plus:
-            profil: '4 plus'
             description:  |
               Votre score indique que vous maîtrisez tout à fait le français, bravo ! 
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
           profil4_plus_plus:
-            profil: '4 plus plus'
             description:  |
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
@@ -388,32 +374,26 @@ fr:
         numeratie:
           titre: Mathématiques
           profil1:
-            profil: '1'
             description: |
               Votre score indique que la majorité des opérations vous semble très difficile ou vous demande un temps très important lorsque personne ne vous aide.
               **Nous vous conseillons vivement de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           profil2:
-            profil: '2'
             description: |
               Votre score indique que vous rencontrez de légères difficultés en mathématiques. Cela pourrait diminuer vos chances d’accéder à certaines formations ou à certains emplois.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           profil3:
-            profil: '3'
             description: |
               Votre score indique que votre maîtrise des mathématiques est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en mathématiques !**
           profil4:
-            profil: '4'
             description: |
               Votre score indique que votre maîtrise des mathématiques est suffisante pour vous adapter sans difficulté à un nouvel environnement professionnel.
               **Nous vous conseillons de renforcer vos compétences en mathématiques en vous exerçant dans la vie quotidienne ou en participant à une formation que votre conseiller sera à même de vous proposer.**
           profil4_plus:
-            profil: '4 plus'
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo ! 
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
           profil4_plus_plus:
-            profil: '4 plus plus'
             description: |
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.

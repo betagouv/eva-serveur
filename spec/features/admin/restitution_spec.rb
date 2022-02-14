@@ -36,6 +36,31 @@ describe 'Admin - Restitution', type: :feature do
     it { expect(page).to have_content('Échec') }
   end
 
+  describe 'rapport de la situation livraison' do
+    let(:situation) { create :situation_livraison }
+    let(:bon_choix) { create :choix, :bon }
+    let(:question_numeratie) do
+      create :question_qcm, metacompetence: :numeratie, choix: [bon_choix]
+    end
+    let!(:evenements) do
+      [
+        create(:evenement_demarrage,
+               partie: partie,
+               date: Time.zone.local(2019, 10, 9, 10, 1, 20)),
+        create(:evenement_affichage_question_qcm,
+               partie: partie,
+               donnees: { question: question_numeratie.id },
+               date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
+        create(:evenement_reponse,
+               partie: partie,
+               donnees: { question: question_numeratie.id, reponse: bon_choix.id },
+               date: Time.zone.local(2019, 10, 9, 10, 1, 22))
+      ]
+    end
+    before { visit admin_restitution_path(partie) }
+    it { expect(page).to have_content('Nombre De Bonnes Réponses Numératie') }
+  end
+
   describe "suppression d'une partie" do
     let(:situation) { create :situation_inventaire }
     let!(:evenements) do

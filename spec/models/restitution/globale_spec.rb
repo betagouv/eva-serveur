@@ -208,7 +208,7 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#calcule_resultats' do
+  describe '#interpretations' do
     let(:restitutions) { [] }
     let(:interpreteur_niveau1) do
       double(
@@ -221,7 +221,7 @@ describe Restitution::Globale do
     it do
       allow(Restitution::Illettrisme::InterpreteurNiveau1)
         .to receive(:new).and_return(interpreteur_niveau1)
-      expect(restitution_globale.calcule_resultats)
+      expect(restitution_globale.interpretations)
         .to eq(
           {
             synthese_competences_de_base: 'illetrisme_potentiel',

@@ -3,7 +3,7 @@ jobs:
   build:
     parallelism: 1
     docker:
-      - image: circleci/ruby:2.7.3-node
+      - image: circleci/ruby:2.7.4-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -27,8 +27,7 @@ jobs:
       # Restore bundle cache
       - restore_cache:
           keys:
-            - rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-v2-
+            - rails-bundle-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Bundle Install
@@ -36,7 +35,7 @@ jobs:
 
       # Store bundle cache
       - save_cache:
-          key: rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+          key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 

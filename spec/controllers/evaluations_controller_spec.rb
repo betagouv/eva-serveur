@@ -8,6 +8,7 @@ describe Admin::EvaluationsController do
   describe 'xls' do
     before do
       sign_in compte
+      31.times { create :evaluation }
       get :index, format: :xls
     end
 

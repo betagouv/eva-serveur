@@ -71,7 +71,7 @@ module Restitution
         .interpretations(categorie)
     end
 
-    def calcule_resultats
+    def interpretations
       {
         synthese_competences_de_base: interpreteur_niveau1.synthese,
         niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],

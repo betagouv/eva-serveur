@@ -36,20 +36,19 @@ ActiveAdmin.register Evaluation do
     column('Date') { |evaluation| l(evaluation.created_at, format: :court) }
     column :nom
     column('Niveau global') do |evaluation|
-      niveau = toutes_interpretations[evaluation.id][:synthese_competences_de_base]
-      t("admin.restitutions.cefr.niveau_global.#{niveau}")
+      traduction_niveau(toutes_interpretations[evaluation.id], :synthese_competences_de_base)
     end
     column('Niveau cefr') do |evaluation|
-      toutes_interpretations[evaluation.id][:niveau_cefr].to_s
+      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_cefr)
     end
     column('Niveau cnef') do |evaluation|
-      toutes_interpretations[evaluation.id][:niveau_cnef].to_s
+      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_cnef)
     end
     column('ANLCI Littératie') do |evaluation|
-      toutes_interpretations[evaluation.id][:niveau_anlci_litteratie].to_s
+      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_anlci_litteratie)
     end
     column('ANLCI Numératie') do |evaluation|
-      toutes_interpretations[evaluation.id][:niveau_anlci_numeratie].to_s
+      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_anlci_numeratie)
     end
   end
 
@@ -66,7 +65,8 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :toutes_interpretations
+                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :toutes_interpretations,
+                  :traduction_niveau
 
     def show
       show! do |format|
@@ -92,6 +92,12 @@ ActiveAdmin.register Evaluation do
     def restitution_globale
       @restitution_globale ||=
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+    end
+
+    def traduction_niveau(interpretations, interpretation)
+      scope = 'activerecord.attributes.evaluation.interpretations'
+      niveau = interpretations[interpretation]
+      t("#{interpretation}.#{niveau}", scope: scope) unless niveau.blank?
     end
 
     def mes_avec_redaction_de_notes

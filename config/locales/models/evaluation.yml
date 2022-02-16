@@ -24,6 +24,35 @@ fr:
         nom: Nom
         email: Email
         temps_total: Temps total
+        interpretations:
+          synthese_competences_de_base:
+            socle_clea: supérieur
+            ni_ni: intermédiaire
+            illettrisme_potentiel: illettrisme potentiel
+          niveau_cnef:
+            pre_X1: pré-X1
+            X1: X1
+            X2: X2
+            Y1: Y1+
+          niveau_cefr:
+            pre_A1: pré-A1
+            A1: A1
+            A2: A2
+            B1: B1+
+          niveau_anlci_litteratie:
+            profil1: Profil 1
+            profil2: Profil 2
+            profil3: Profil 3
+            profil4: Profil 4
+            profil4_plus: Profil 4+
+            profil4_plus_plus: Profil 4++
+          niveau_anlci_numeratie:
+            profil1: Profil 1
+            profil2: Profil 2
+            profil3: Profil 3
+            profil4: Profil 4
+            profil4_plus: Profil 4+
+            profil4_plus_plus: Profil 4++
   active_admin:
     resources:
       evaluation:

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Structure < ApplicationRecord
-  belongs_to :structure_referente, optional: true, class_name: 'Structure'
+  belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
 
   validates :nom, presence: true
 

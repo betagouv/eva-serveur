@@ -4,7 +4,9 @@ require 'rails_helper'
 
 describe Structure, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
-  it { is_expected.to belong_to(:structure_referente).class_name('Structure').optional }
+  it do
+    is_expected.to belong_to(:structure_referente).class_name('StructureAdministrative').optional
+  end
 
   describe 'géolocalisation à la validation' do
     let(:structure) { Structure.new code_postal: '75012' }

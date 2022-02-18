@@ -5,8 +5,8 @@ fr:
         created_at: Créée le
     models:
       aide/question_frequente:
-        one: Question Fréquente
-        other: Questions Fréquentes
+        one: Question fréquente
+        other: Questions fréquentes
   formtastic:
     actions:
       aide/question_frequente:

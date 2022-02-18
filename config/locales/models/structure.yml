@@ -1,5 +1,12 @@
 fr:
   activerecord:
+    models:
+      structure_administrative:
+        one: Structure administrative
+        other: Structures administratives
+      structure_locale:
+        one: Structure locale
+        other: Structures locales
     attributes:
       structure:
         created_at: Créée le

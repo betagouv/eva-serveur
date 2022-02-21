@@ -23,6 +23,29 @@ div class: 'row' do
         end
       end
 
+      div class: 'panel' do
+        div do
+          structures = if structure.instance_of?(StructureLocale)
+                         structure
+                       else
+                         structures_dependantes
+                       end
+          bar_chart Evaluation.joins(campagne: { compte: :structure })
+                              .where(
+                                campagnes: {
+                                  comptes: {
+                                    structure_id: structures
+                                  }
+                                }
+                              )
+                              .where('evaluations.created_at > ?', 90.days.ago)
+                              .group('structures.nom')
+                              .group_by_month(:created_at, format: '%b %Y')
+                              .count,
+                    xtitle: "Nombre d'évaluations"
+        end
+      end
+
       if can?(:manage, Compte)
         panel 'Administration' do
           attributes_table_for structure do

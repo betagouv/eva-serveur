@@ -10,6 +10,9 @@
 //= require aide
 //= require clipboard
 
+//= require chartkick
+//= require Chart.bundle
+
 jQuery.datetimepicker.setLocale('fr');
 
 document.addEventListener('DOMContentLoaded', () => {

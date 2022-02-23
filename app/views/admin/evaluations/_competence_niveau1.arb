@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+competence = competence.to_s
 scope = "admin.restitutions.#{referentiel}.#{competence}"
 
 div class: 'col-auto badge' do

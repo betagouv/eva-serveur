@@ -51,13 +51,10 @@ module Restitution
       end
 
       def synthese
-        if illettrisme_potentiel?
-          'illettrisme_potentiel'
-        elsif socle_clea?
-          'socle_clea'
-        else
-          'ni_ni'
-        end
+        return 'illettrisme_potentiel' if illettrisme_potentiel?
+        return 'socle_clea' if socle_clea?
+
+        'ni_ni'
       end
 
       def interpretations_cefr

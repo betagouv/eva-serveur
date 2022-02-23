@@ -81,6 +81,10 @@ module Restitution
       }
     end
 
+    def persiste
+      @evaluation.update interpretations.merge(terminee_le: DateTime.now)
+    end
+
     def efficience
       restitutions_selectionnee = restitutions.reject do |restitution|
         restitution.is_a? RESTITUTION_SANS_EFFICIENCE
@@ -98,9 +102,7 @@ module Restitution
     end
 
     def niveaux_competences
-      extraie_competences_depuis_restitutions.sort_by do |_, niveau|
-        -niveau
-      end
+      extraie_competences_depuis_restitutions.sort_by { |_, niveau| -niveau }
     end
 
     def competences

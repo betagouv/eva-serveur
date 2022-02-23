@@ -1,12 +1,23 @@
 # frozen_string_literal: true
 
 class Evaluation < ApplicationRecord
+  SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni].freeze
+  NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
+  NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
+  NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
+
   validates :nom, :debutee_le, presence: true
   belongs_to :campagne, counter_cache: :nombre_evaluations
   attr_accessor :code_campagne
 
   before_validation :trouve_campagne_depuis_code
   validate :code_campagne_connu
+
+  enum synthese_competences_de_base: SYNTHESES.zip(SYNTHESES).to_h
+  enum niveau_cefr: NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, _prefix: true
+  enum niveau_cnef: NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, _prefix: true
+  enum niveau_anlci_litteratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
+  enum niveau_anlci_numeratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
 
   def display_name
     nom

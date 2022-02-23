@@ -126,7 +126,12 @@ ActiveAdmin.register Evaluation do
     end
 
     def fabrique_restitutions_globales
-      find_collection(except: :pagination).each_with_object({}) do |e, restitutions|
+      evaluations = find_collection(except: :pagination)
+      if evaluations.size > 200
+        raise "Impossible d'exporter plus de 200 evaluations en une seule fois"
+      end
+
+      evaluations.each_with_object({}) do |e, restitutions|
         restitution = FabriqueRestitution.restitution_globale(e)
         restitutions[e.id] = restitution.interpretations
       end

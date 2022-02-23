@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_16_173642) do
+ActiveRecord::Schema.define(version: 2022_02_23_140125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -143,6 +143,11 @@ ActiveRecord::Schema.define(version: 2022_02_16_173642) do
     t.datetime "terminee_le"
     t.datetime "anonymise_le"
     t.datetime "debutee_le"
+    t.string "synthese_competences_de_base"
+    t.string "niveau_cefr"
+    t.string "niveau_cnef"
+    t.string "niveau_anlci_litteratie"
+    t.string "niveau_anlci_numeratie"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
 

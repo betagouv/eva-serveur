@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-if restitution_globale.interpretations_niveau1_cefr.size == 1
-  h2 class: 'mb-3' do
-    div t(:titre, scope: "admin.restitutions.cefr.#{categorie}")
-  end
-end
 restitution_globale.interpretations_niveau2(categorie).each do |competence_niveau|
   competence = competence_niveau.keys.first
   niveau = competence_niveau[competence]

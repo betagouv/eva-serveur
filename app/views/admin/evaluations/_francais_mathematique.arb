@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
 div id: 'francais_mathematiques', class: 'francais-mathematiques marges-page' do
-  if !pdf && (restitution_globale.synthese == 'illettrisme_potentiel')
-    render 'demande_aide_illettrisme'
-  end
+  render 'demande_aide_illettrisme' if !pdf && resource.illettrisme_potentiel?
 
   render 'litteratie_numeratie_synthese',
-         synthese: restitution_globale.synthese,
+         synthese: resource.synthese_competences_de_base,
          pdf: pdf
 
   render 'litteratie_numeratie_niveau1',
-         interpretations: restitution_globale.interpretations_niveau1_cefr,
+         niveau_litteratie: resource.niveau_cefr,
+         niveau_numeratie: resource.niveau_cnef,
          referentiel: 'cefr',
          pdf: pdf
 

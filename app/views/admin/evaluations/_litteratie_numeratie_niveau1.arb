@@ -1,34 +1,14 @@
 # frozen_string_literal: true
 
 div class: 'row' do
-  interpretations.each do |competence, niveau|
-    competence = competence.to_s
-    scope = "admin.restitutions.#{referentiel}.#{competence}"
-
-    div class: 'col-auto badge' do
-      if pdf
-        div svg_tag_base64 "#{competence}_#{referentiel}.svg"
-        div svg_tag_base64 "badges/#{referentiel}/#{niveau}.svg" if niveau.present?
-      else
-        div image_tag "#{competence}_#{referentiel}.svg"
-        if niveau.present?
-          div image_tag "badges/#{referentiel}/#{niveau}.svg",
-                        alt: "Niveau #{niveau}"
-        end
-      end
-    end
-    div class: 'col' do
-      h2 class: 'mb-3 mt-0' do
-        div t(:titre, scope: scope)
-      end
-
-      div class: 'stanine-niveau-francais-mathematique' do
-        if niveau.present?
-          md t("#{niveau}.description", scope: scope)
-        else
-          md t('admin.restitutions.pas_de_score')
-        end
-      end
-    end
-  end
+  render 'competence_niveau1',
+         competence: 'litteratie',
+         niveau: niveau_litteratie,
+         referentiel: referentiel,
+         pdf: pdf
+  render 'competence_niveau1',
+         competence: 'numeratie',
+         niveau: niveau_numeratie,
+         referentiel: referentiel,
+         pdf: pdf
 end

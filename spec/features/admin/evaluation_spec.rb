@@ -17,7 +17,12 @@ describe 'Admin - Evaluation', type: :feature do
 
     describe '#show' do
       # evaluation sans positionnement
-      let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne, created_at: 3.days.ago }
+      let!(:mon_evaluation) do
+        create :evaluation,
+               campagne: ma_campagne,
+               created_at: 3.days.ago,
+               synthese_competences_de_base: :ni_ni
+      end
       let(:situation) { build(:situation_inventaire) }
       let!(:partie) { create :partie, situation: situation, evaluation: mon_evaluation }
       let!(:evenement) { create :evenement_demarrage, partie: partie }
@@ -71,7 +76,6 @@ describe 'Admin - Evaluation', type: :feature do
           allow(restitution_globale).to receive(:interpretations_competences_transversales)
             .and_return(interpretations)
           allow(restitution_globale).to receive(:structure).and_return('structure')
-          allow(restitution_globale).to receive(:synthese).and_return('synthese')
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
         end
@@ -82,56 +86,40 @@ describe 'Admin - Evaluation', type: :feature do
           end
 
           it 'affiche deux niveaux différents pour litteratie et numératie CEFR' do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
-              .and_return({ litteratie: :A1, numeratie: :X1 })
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            mon_evaluation.update(niveau_cefr: :A1, niveau_cnef: :X1)
+            visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_xpath("//img[@alt='Niveau A1']")
             expect(page).to have_xpath("//img[@alt='Niveau X1']")
           end
 
           it 'affiche deux niveaux différents pour litteratie et numératie ANLCI' do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci)
-              .and_return({ litteratie: :profil3, numeratie: :profil4 })
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr).and_return([])
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            mon_evaluation.update(niveau_anlci_litteratie: :profil3,
+                                  niveau_anlci_numeratie: :profil4)
+            visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_xpath("//img[@alt='Niveau profil3']")
             expect(page).to have_xpath("//img[@alt='Niveau profil4']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
-              .and_return({ litteratie: nil, numeratie: nil })
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            mon_evaluation.update(niveau_cefr: nil, niveau_cnef: nil)
+            visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_content "Votre score n'a pas pu être calculé"
           end
 
           it "Socle cléa en cours d'acquisition" do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
-              .and_return({ litteratie: :B1, numeratie: :Y1 })
-            allow(restitution_globale).to receive(:synthese).and_return('socle_clea')
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            mon_evaluation.update(synthese_competences_de_base: :socle_clea)
+            visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_content 'Certification Cléa indiquée'
           end
 
           it "Potentiellement en situation d'illettrisme" do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr)
-              .and_return({ litteratie: :A1, numeratie: :X1 })
-            allow(restitution_globale).to receive(:synthese).and_return('illettrisme_potentiel')
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            mon_evaluation.update(synthese_competences_de_base: :illettrisme_potentiel)
+            visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_content 'Formation vivement recommandée'
           end
         end
 
         describe 'affiche le niveau des metacompétences' do
-          before do
-            allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-            allow(restitution_globale).to receive(:interpretations_niveau1_cefr).and_return([])
-          end
-
           it 'de litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:litteratie)
@@ -149,8 +137,6 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it "affiche l'évaluation en pdf" do
-          allow(restitution_globale).to receive(:interpretations_niveau1_anlci).and_return([])
-          allow(restitution_globale).to receive(:interpretations_niveau1_cefr).and_return([])
           allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
           visit admin_evaluation_path(mon_evaluation, format: :pdf)
           path = page.save_page

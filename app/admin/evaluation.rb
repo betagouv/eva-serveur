@@ -36,19 +36,19 @@ ActiveAdmin.register Evaluation do
     column('Date') { |evaluation| l(evaluation.created_at, format: :court) }
     column :nom
     column('Niveau global') do |evaluation|
-      traduction_niveau(toutes_interpretations[evaluation.id], :synthese_competences_de_base)
+      traduction_niveau(evaluation, :synthese_competences_de_base)
     end
     column('Niveau cefr') do |evaluation|
-      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_cefr)
+      traduction_niveau(evaluation, :niveau_cefr)
     end
     column('Niveau cnef') do |evaluation|
-      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_cnef)
+      traduction_niveau(evaluation, :niveau_cnef)
     end
     column('ANLCI Littératie') do |evaluation|
-      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_anlci_litteratie)
+      traduction_niveau(evaluation, :niveau_anlci_litteratie)
     end
     column('ANLCI Numératie') do |evaluation|
-      traduction_niveau(toutes_interpretations[evaluation.id], :niveau_anlci_numeratie)
+      traduction_niveau(evaluation, :niveau_anlci_numeratie)
     end
   end
 
@@ -65,7 +65,7 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :toutes_interpretations,
+                  :mes_avec_redaction_de_notes, :campagnes_accessibles,
                   :traduction_niveau
 
     def show
@@ -94,9 +94,9 @@ ActiveAdmin.register Evaluation do
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
     end
 
-    def traduction_niveau(interpretations, interpretation)
+    def traduction_niveau(evaluation, interpretation)
       scope = 'activerecord.attributes.evaluation.interpretations'
-      niveau = interpretations[interpretation]
+      niveau = evaluation.send(interpretation)
       t("#{interpretation}.#{niveau}", scope: scope) unless niveau.blank?
     end
 
@@ -119,22 +119,6 @@ ActiveAdmin.register Evaluation do
 
     def campagnes_accessibles
       @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
-    end
-
-    def toutes_interpretations
-      @toutes_interpretations ||= fabrique_restitutions_globales
-    end
-
-    def fabrique_restitutions_globales
-      evaluations = find_collection(except: :pagination)
-      if evaluations.size > 200
-        raise "Impossible d'exporter plus de 200 evaluations en une seule fois"
-      end
-
-      evaluations.each_with_object({}) do |e, restitutions|
-        restitution = FabriqueRestitution.restitution_globale(e)
-        restitutions[e.id] = restitution.interpretations
-      end
     end
   end
 end

@@ -8,6 +8,7 @@ class Compte < ApplicationRecord
          :recoverable, :rememberable, :validatable, :registerable, :confirmable
   ROLES = %w[superadmin admin conseiller compte_generique].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
+  include Comptes::EnvoieEmails
   validates :role, inclusion: { in: ROLES }
   enum role: ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true

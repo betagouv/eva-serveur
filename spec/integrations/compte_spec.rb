@@ -21,6 +21,15 @@ describe Compte, type: :integration do
           ).exactly(1)
           .and have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
       end
+
+      it "ne programme pas d'email si c'est une modification du compte" do
+        compte = create :compte_conseiller, structure: structure, statut_validation: :en_attente
+        expect { compte.update(statut_validation: :acceptee) }
+          .to have_enqueued_mail(
+            CompteMailer,
+            :nouveau_compte
+          ).exactly(0)
+      end
     end
 
     context 'quand le compte est superadmin' do

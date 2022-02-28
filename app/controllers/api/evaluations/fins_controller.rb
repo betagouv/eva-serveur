@@ -10,7 +10,7 @@ module Api
 
         restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
 
-        restitution_globale.persiste
+        restitution_globale.termine_evaluation!
 
         return unless evaluation.campagne.affiche_competences_fortes?
 

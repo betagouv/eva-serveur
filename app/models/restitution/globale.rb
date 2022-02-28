@@ -2,23 +2,28 @@
 
 module Restitution
   class Globale
-    attr_reader :restitutions, :evaluation
+    attr_reader :evaluation, :restitutions
 
     NIVEAU_INDETERMINE = :indetermine
     RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
-    delegate :moyennes_metriques,
-             :ecarts_types_metriques,
-             to: :scores_niveau2_standardises,
-             prefix: :niveau2
-    delegate :moyennes_metriques,
-             :ecarts_types_metriques,
-             to: :scores_niveau1_standardises,
-             prefix: :niveau1
+    delegate :moyennes_metriques, :ecarts_types_metriques,
+             to: :scores_niveau2_standardises, prefix: :niveau2
+    delegate :moyennes_metriques, :ecarts_types_metriques,
+             to: :scores_niveau1_standardises, prefix: :niveau1
 
-    def initialize(restitutions:, evaluation:)
-      @restitutions = restitutions
+    def initialize(evaluation:, restitutions:)
       @evaluation = evaluation
+      @restitutions = restitutions
+    end
+
+    def persiste
+      @evaluation.update interpretations
+    end
+
+    def termine_evaluation!
+      persiste
+      @evaluation.update terminee_le: DateTime.now
     end
 
     def utilisateur
@@ -79,10 +84,6 @@ module Restitution
         niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
         niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie]
       }
-    end
-
-    def persiste
-      @evaluation.update interpretations.merge(terminee_le: DateTime.now)
     end
 
     def efficience

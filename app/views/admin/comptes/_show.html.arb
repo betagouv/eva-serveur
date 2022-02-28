@@ -36,6 +36,8 @@ div class: 'mon-compte row' do
           row :last_sign_in_at
           row :current_sign_in_ip
           row :last_sign_in_ip
+          row :confirmed_at
+          row :confirmation_sent_at
         end
       end
     end

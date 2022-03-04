@@ -23,12 +23,14 @@
 
   .choices-group {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 
   .choice {
-    width: 48%;
-    margin-bottom: 0;
+    width: 50%;
+    margin-bottom: 0.875rem;
+    padding: 0 0.44rem;
 
     label {
       padding: 0;

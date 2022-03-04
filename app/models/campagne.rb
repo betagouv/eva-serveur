@@ -39,7 +39,8 @@ class Campagne < ApplicationRecord
 
   def initialise_situations
     parcours_type.situations_configurations.each do |situation_configuration|
-      situations_configurations.build situation_id: situation_configuration.situation_id
+      situations_configurations.build situation_id: situation_configuration.situation_id,
+                                      questionnaire_id: situation_configuration.questionnaire_id
     end
   end
 

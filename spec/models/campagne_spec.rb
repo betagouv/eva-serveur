@@ -15,7 +15,11 @@ describe Campagne, type: :model do
     let(:situations) do
       [:bienvenue]
     end
-    let(:situation_configuration) { SituationConfiguration.new }
+    let(:situation_configuration) do
+      SituationConfiguration.new situation: situation, questionnaire: questionnaire
+    end
+    let!(:situation) { create :situation }
+    let!(:questionnaire) { create :questionnaire }
     let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
     before do
       allow(compte).to receive(:valid?).and_return true
@@ -42,6 +46,8 @@ describe Campagne, type: :model do
         expect(campagne.valid?).to be(true)
         campagne.save
         expect(campagne.situations_configurations.count).to eq 1
+        expect(campagne.situations_configurations.first.questionnaire_id).to eq questionnaire.id
+        expect(campagne.situations_configurations.first.situation_id).to eq situation.id
       end
     end
   end

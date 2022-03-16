@@ -18,6 +18,12 @@ ActiveAdmin.register Evaluation do
          order_by: 'libelle_asc'
   filter :created_at
 
+  action_item :recalcule, only: :show, if: proc { can?(:manage, Compte) } do
+    restitution_globale = FabriqueRestitution.restitution_globale(resource)
+    restitution_globale.persiste
+    link_to 'Recalcule', resource_path
+  end
+
   index download_links: lambda {
                           params[:action] == 'show' ? [:pdf] : %i[csv xls json]
                         }, row_class: lambda { |elem|

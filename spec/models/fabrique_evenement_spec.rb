@@ -31,10 +31,9 @@ describe FabriqueEvenement do
     end
 
     it 'assigne les métriques à la partie' do
-      FabriqueEvenement.new(parametres).call
-
-      partie = Partie.order(:created_at).last
-      expect(partie.metriques).not_to eq({})
+      expect do
+        FabriqueEvenement.new(parametres).call
+      end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
     end
 
     it "retourne l'évènement" do

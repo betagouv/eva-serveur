@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+describe PersisteMetriquesPartieJob, type: :job do
+  let(:partie) { double }
+  let(:restitution) { double }
+
+  it "persiste les événéments d'une partie" do
+    expect(FabriqueRestitution).to receive(:instancie).with(partie).and_return restitution
+    expect(restitution).to receive(:persiste)
+    PersisteMetriquesPartieJob.perform_now(partie)
+  end
+end

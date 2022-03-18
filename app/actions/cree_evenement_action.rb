@@ -14,10 +14,7 @@ class CreeEvenementAction
     evenement.save.tap do |saved|
       next unless saved
 
-      next unless evenement.nom == FIN_SITUATION
-
-      restitution = FabriqueRestitution.instancie partie
-      restitution.persiste
+      PersisteMetriquesPartieJob.perform_later(partie) if evenement.nom == FIN_SITUATION
     end
   end
 end

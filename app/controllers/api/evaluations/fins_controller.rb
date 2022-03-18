@@ -7,13 +7,11 @@ module Api
         @competences = []
 
         evaluation = Evaluation.find(params[:evaluation_id])
-
-        restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
-
-        restitution_globale.termine_evaluation!
+        evaluation.update terminee_le: DateTime.now
 
         return unless evaluation.campagne.affiche_competences_fortes?
 
+        restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
         @competences = map_descriptions(restitution_globale.competences)
       end
 

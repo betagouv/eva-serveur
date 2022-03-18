@@ -21,11 +21,6 @@ module Restitution
       @evaluation.update interpretations
     end
 
-    def termine_evaluation!
-      persiste
-      @evaluation.update terminee_le: DateTime.now
-    end
-
     def utilisateur
       evaluation.nom
     end

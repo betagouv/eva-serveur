@@ -23,7 +23,9 @@ div class: 'admin_restitution_globale' do
     end
   end
 
-  render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
+  if campagne_avec_competences_transversales?
+    render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
+  end
 
   if pdf
     div class: 'page' do

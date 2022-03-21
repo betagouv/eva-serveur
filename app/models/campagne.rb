@@ -3,6 +3,8 @@
 require 'generateur_aleatoire'
 
 class Campagne < ApplicationRecord
+  SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
+
   has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
   belongs_to :questionnaire, optional: true
   belongs_to :compte
@@ -33,6 +35,12 @@ class Campagne < ApplicationRecord
 
   def questionnaire_pour(situation)
     situations_configurations.find_by(situation: situation)&.questionnaire_utile
+  end
+
+  def avec_competences_transversales?
+    situations_configurations.any? do |configuration|
+      SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES.include?(configuration.situation.nom_technique)
+    end
   end
 
   private

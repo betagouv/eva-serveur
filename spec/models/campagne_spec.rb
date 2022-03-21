@@ -12,9 +12,7 @@ describe Campagne, type: :model do
 
   context 'avec des situations' do
     let(:parcours_type) { ParcoursType.new id: SecureRandom.uuid }
-    let(:situations) do
-      [:bienvenue]
-    end
+    let(:situations) { [:bienvenue] }
     let(:situation_configuration) do
       SituationConfiguration.new situation: situation, questionnaire: questionnaire
     end
@@ -71,6 +69,36 @@ describe Campagne, type: :model do
       let(:situation_configuration) { double(questionnaire_utile: questionnaire) }
       before { bouchonne_config_situation(situation_configuration) }
       it { expect(campagne.questionnaire_pour(situation)).to eq questionnaire }
+    end
+  end
+
+  describe '#avec_competences_transversales?' do
+    let(:campagne) { Campagne.new }
+    let(:maintenance) { create :situation, nom_technique: :maintenance }
+
+    context 'sans situation' do
+      it { expect(campagne.avec_competences_transversales?).to be false }
+    end
+
+    context 'sans situation de compétences transversale' do
+      before do
+        campagne.situations_configurations
+                .push SituationConfiguration.new situation: maintenance
+      end
+
+      it { expect(campagne.avec_competences_transversales?).to be false }
+    end
+
+    context 'avec une situation de compétences transversale' do
+      let!(:tri) { create :situation, nom_technique: :tri }
+
+      before do
+        campagne.situations_configurations
+                .push SituationConfiguration.new situation: maintenance
+        campagne.situations_configurations.push SituationConfiguration.new situation: tri
+      end
+
+      it { expect(campagne.avec_competences_transversales?).to be true }
     end
   end
 end

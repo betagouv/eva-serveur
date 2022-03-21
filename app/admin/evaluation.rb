@@ -66,7 +66,7 @@ ActiveAdmin.register Evaluation do
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
                   :mes_avec_redaction_de_notes, :campagnes_accessibles,
-                  :traduction_niveau
+                  :traduction_niveau, :campagne_avec_competences_transversales?
 
     def show
       show! do |format|
@@ -105,6 +105,10 @@ ActiveAdmin.register Evaluation do
         %w[questions livraison].include?(restitution.situation.nom_technique) &&
           !restitution.questions_redaction.empty?
       end
+    end
+
+    def campagne_avec_competences_transversales?
+      @evaluation.campagne.avec_competences_transversales?
     end
 
     def auto_positionnement

@@ -43,6 +43,23 @@ describe 'Admin - Structure locale', type: :feature do
     end
   end
 
+  describe 'create' do
+    before do
+      visit new_admin_structure_locale_path
+      fill_in :structure_locale_nom, with: 'Captive'
+      select 'Mission locale'
+      fill_in :structure_locale_code_postal, with: '92100'
+      click_on 'Créer une structure'
+    end
+
+    it do
+      structure = Structure.order(:created_at).last
+      expect(structure.nom).to eq 'Captive'
+      expect(structure.type_structure).to eq 'mission_locale'
+      expect(structure.code_postal).to eq '92100'
+    end
+  end
+
   describe 'modification' do
     before do
       structure = create :structure_locale

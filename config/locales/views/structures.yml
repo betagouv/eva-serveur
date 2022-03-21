@@ -19,8 +19,6 @@ fr:
         
           Si vous avez besoin d'aide, 
           rendez-vous [ici](%{lien_aide})
-    structure:
-      nouvelle_structure: Créer une nouvelle structure (avec compte)
   nouvelles_structures:
     show:
       titre: Rejoindre eva

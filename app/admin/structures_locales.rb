@@ -2,7 +2,7 @@
 
 ActiveAdmin.register StructureLocale do
   menu parent: 'Terrain', if: proc { can?(:manage, Compte) }
-  actions :all, except: [:new]
+  actions :all
 
   permit_params :nom, :type_structure, :code_postal, :structure_referente_id
 
@@ -23,10 +23,6 @@ ActiveAdmin.register StructureLocale do
   scope :actives
   scope :inactives
   scope :abandonnistes
-
-  action_item :nouvelle_structure, only: :index do
-    link_to I18n.t('admin.structure.nouvelle_structure'), nouvelle_structure_path
-  end
 
   index do
     column :nom

@@ -7,4 +7,10 @@ class StructuresController < ApplicationController
   def index
     @structures = StructureLocale.near("#{params[:code_postal]}, FRANCE")
   end
+
+  def show
+    structure = Structure.find params[:id]
+    redirect_to send("admin_#{structure.type.underscore}_url", structure),
+                status: :moved_permanently
+  end
 end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get '/admin', to: redirect('/pro/admin/dashboard')
 
     ActiveAdmin.routes(self)
+    get '/admin/structures/:id', to: 'structures#show'
 
     authenticate :compte, ->(o) { o.superadmin? } do
       mount Sidekiq::Web => '/sidekiq'

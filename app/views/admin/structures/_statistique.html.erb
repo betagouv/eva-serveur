@@ -1,0 +1,15 @@
+<div class="panel">
+  <% evaluations = Evaluation.joins(campagne: { compte: :structure })
+                              .where(
+                                campagnes: {
+                                  comptes: {
+                                    structure_id: structures
+                                  }
+                                }
+                              )
+                              .where('evaluations.created_at > ?', 90.days.ago)
+                              .group('structures.nom')
+                              .group_by_month(:created_at, format: '%b %Y')
+                              .count %>
+  <%= bar_chart evaluations, xtitle: "Nombre d'évaluations" %>
+</div>

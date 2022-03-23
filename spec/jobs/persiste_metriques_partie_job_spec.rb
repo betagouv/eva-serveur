@@ -7,7 +7,7 @@ describe PersisteMetriquesPartieJob, type: :job do
   let(:partie) { create :partie, evaluation: evaluation }
   let(:restitution) { double }
 
-  it "persiste les événéments d'une partie" do
+  it "persiste les métriques d'une partie" do
     expect(FabriqueRestitution).to receive(:instancie).with(partie).and_return restitution
     expect(restitution).to receive(:persiste)
     expect { PersisteMetriquesPartieJob.perform_now(partie) }

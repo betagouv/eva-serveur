@@ -6,7 +6,7 @@ describe PersisteRestitutionJob, type: :job do
   let(:evaluation) { create :evaluation }
   let(:restitution) { double }
 
-  it "persiste les événéments d'une partie" do
+  it "persiste la restitution des compétences de base d'une partie" do
     expect(FabriqueRestitution).to receive(:restitution_globale)
       .with(evaluation)
       .and_return restitution

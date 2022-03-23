@@ -13,5 +13,9 @@
                               .group('structures.nom')
                               .group_by_month(:created_at, format: '%b %Y')
                               .count %>
-  <%= bar_chart evaluations, xtitle: "Nombre d'évaluations" %>
+  <% if evaluations.present? %>
+    <%= bar_chart evaluations, xtitle: "Nombre d'évaluations" %>
+  <% else %>
+    Pas d'évaluation à afficher pour le moment
+  <% end %>
 </div>

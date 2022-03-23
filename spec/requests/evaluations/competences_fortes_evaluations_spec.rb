@@ -1,0 +1,74 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+describe 'Fin Evaluation API', type: :request do
+  describe 'POST /evaluations/:id/competences_fortes' do
+    let(:question) { create :question_qcm, intitule: 'Ma question' }
+    let(:questionnaire) { create :questionnaire, questions: [question] }
+    let(:campagne) { create :campagne, questionnaire: questionnaire }
+    let(:evaluation) { create :evaluation, campagne: campagne }
+
+    let!(:partie) do
+      create :partie, evaluation: evaluation, situation: situation_inventaire
+    end
+    let!(:situation_inventaire) { create :situation_inventaire, libelle: 'Inventaire' }
+    let!(:demarrage) { create :evenement_demarrage, partie: partie }
+
+    before { campagne.situations_configurations.create situation: situation_inventaire }
+
+    context 'une évaluation inexistante' do
+      before { get '/api/evaluations/id_inconnu/competences_fortes' }
+
+      it do
+        expect(response).to have_http_status(404)
+      end
+    end
+
+    context 'retourne aucune compétences avec une évaluation sans compétences identifiées' do
+      before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
+
+      it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
+    end
+
+    context 'avec une évaluation avec des compétences identifiées' do
+      let!(:saisie) { create(:evenement_saisie_inventaire, :ok, partie: partie) }
+      let!(:fin) { create :evenement_fin_situation, partie: partie }
+
+      context 'avec une campagne configurée sans compétences fortes' do
+        before do
+          campagne.update(affiche_competences_fortes: false)
+          get "/api/evaluations/#{evaluation.id}/competences_fortes"
+        end
+
+        it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
+      end
+
+      context 'avec une campagne configurée avec compétences fortes' do
+        before { get "/api/evaluations/#{evaluation.id}/competences_fortes" }
+
+        it 'retourne les compétences triées par ordre de force décroissante' do
+          attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
+                       Competence::ORGANISATION_METHODE].map(&:to_s)
+          expect(JSON.parse(response.body)['competences_fortes'].pluck('nom_technique'))
+            .to eql(attendues)
+        end
+
+        it 'envoie aussi le nom et la description des compétences' do
+          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
+          expect(premiere_competence['description'])
+            .to eql(I18n.t("#{Competence::RAPIDITE}.description",
+                           scope: 'admin.evaluations.restitution_competence'))
+          expect(premiere_competence['description']).to_not start_with('translation missing')
+        end
+
+        it "envoie aussi l'URL du picto des compétences" do
+          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          expect(premiere_competence['picto'])
+            .to start_with('http://asset_host:port/assets/rapidite')
+        end
+      end
+    end
+  end
+end

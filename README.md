@@ -112,6 +112,23 @@ L'api est accessible au point `/api`
 }
 ```
 
+`GET /api/evaluations/:id/competences_fortes`
+
+**Réponse**
+
+```json
+{
+  "competences_fortes": [
+    {
+      "nom_technique": "id_competence",
+      "nom": "nom_competence",
+      "description": "Description de la compétence.",
+      "picto": "http://host/assets/competence.svg"
+    }
+  ]
+}
+```
+
 ### Récupére des informations sur un questionnaire
 
 **Requête**

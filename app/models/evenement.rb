@@ -5,4 +5,5 @@ class Evenement < ApplicationRecord
   validates_uniqueness_of :position, scope: :session_id
   belongs_to :partie, foreign_key: :session_id, primary_key: :session_id
   delegate :situation, :evaluation, to: :partie
+  include Evenements::PersisteMetriques
 end

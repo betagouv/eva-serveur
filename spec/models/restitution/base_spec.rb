@@ -31,19 +31,23 @@ describe Restitution::Base do
       ]
     end
 
-    it { expect(described_class.new(campagne, evenements).nombre_rejoue_consigne).to eql(2) }
+    it { expect(restitution.nombre_rejoue_consigne).to eql(2) }
   end
 
-  context "renvoie l'évaluation associée" do
+  context "avec une liste d'au moins un événement" do
     let(:evenements) { [build(:evenement_demarrage, partie: partie)] }
 
-    it { expect(described_class.new(campagne, evenements).evaluation).to eql(evaluation) }
-  end
+    it "renvoie l'évaluation associée" do
+      expect(restitution.evaluation).to eql(evaluation)
+    end
 
-  context 'renvoie le session_id' do
-    let(:evenements) { [build(:evenement_demarrage, partie: partie)] }
+    it 'renvoie le session_id' do
+      expect(restitution.session_id).to eql(partie.session_id)
+    end
 
-    it { expect(restitution.session_id).to eql(partie.session_id) }
+    it 'renvoie la partie' do
+      expect(restitution.partie).to eql(partie)
+    end
   end
 
   context 'renvoie par défaut une liste vide pour les compétences évaluées' do
@@ -63,11 +67,7 @@ describe Restitution::Base do
     end
 
     context "retourne false lorsque l'événement de fin n'est pas trouvé" do
-      let(:evenements) do
-        [
-          build(:evenement_demarrage)
-        ]
-      end
+      let(:evenements) { [build(:evenement_demarrage)] }
 
       it { expect(described_class.new(campagne, evenements).termine?).to be false }
     end

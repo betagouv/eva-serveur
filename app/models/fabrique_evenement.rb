@@ -10,7 +10,7 @@ class FabriqueEvenement
   def call
     partie = recupere_partie
     evenement = Evenement.new EvenementParams.from(parametres).merge(partie: partie)
-    CreeEvenementAction.new(partie, evenement).call
+    evenement.save
     evenement
   end
 

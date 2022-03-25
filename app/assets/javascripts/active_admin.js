@@ -22,3 +22,5 @@ document.addEventListener('DOMContentLoaded', () => {
   new ClipboardJS('.copier-coller');
 });
 
+Chart.defaults.font.family = 'Work Sans';
+Chart.defaults.font.size = 14;

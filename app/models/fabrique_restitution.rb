@@ -19,9 +19,9 @@ class FabriqueRestitution
       parties = Partie.where(id: parties_selectionnees_ids,
                              situation_id: situation_valides_ids)
                       .includes(:situation).includes(evaluation: :campagne)
-      restitutions_retenues = parties.map do |partie|
-        instancie partie
-      end
+      restitutions_retenues = parties
+                              .map { |partie| instancie partie }
+                              .reject { |restitution| restitution.evenements.empty? }
       Restitution::Globale.new restitutions: restitutions_retenues, evaluation: evaluation
     end
   end

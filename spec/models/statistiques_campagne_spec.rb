@@ -39,7 +39,7 @@ describe StatistiquesCampagne do
       context 'avec une évaluation avec des événements' do
         let!(:fin1) do
           create :evenement_fin_situation, partie: partie1,
-                                           created_at: Time.zone.local(2021, 1, 1, 8, 4)
+                                           date: Time.zone.local(2021, 1, 1, 8, 4)
         end
 
         it do
@@ -57,11 +57,11 @@ describe StatistiquesCampagne do
       context 'avec deux évaluations avec des événements' do
         let!(:fin1) do
           create :evenement_fin_situation, partie: partie1,
-                                           created_at: Time.zone.local(2021, 1, 1, 8, 4)
+                                           date: Time.zone.local(2021, 1, 1, 8, 4)
         end
         let!(:fin2) do
           create :evenement_fin_situation, partie: partie2,
-                                           created_at: Time.zone.local(2021, 1, 1, 8, 6)
+                                           date: Time.zone.local(2021, 1, 1, 8, 6)
         end
 
         it do

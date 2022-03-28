@@ -1,18 +1,11 @@
 <h3>Statistiques</h3>
 <p class="font-italic">Nombre d'évaluations effectuées par structure sur les 3 derniers mois glissants.</p>
 <div class="panel">
-  <% evaluations = Evaluation.joins(campagne: { compte: :structure })
-                              .where(
-                                campagnes: {
-                                  comptes: {
-                                    structure_id: structures
-                                  }
-                                }
-                              )
-                              .where('evaluations.created_at > ?', 90.days.ago)
-                              .group('structures.nom')
-                              .group_by_month(:created_at, format: '%B')
-                              .count %>
+  <% evaluations = Evaluation.pour_les_structures(structures)
+                             .des_3_derniers_mois
+                             .group('structures.nom')
+                             .group_by_month(:created_at, format: '%B')
+                             .count %>
   <% if evaluations.present? %>
     <%= column_chart evaluations, legend: "bottom" %>
   <% else %>

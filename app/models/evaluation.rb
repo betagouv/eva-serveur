@@ -19,6 +19,21 @@ class Evaluation < ApplicationRecord
   enum niveau_anlci_litteratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
   enum niveau_anlci_numeratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
 
+  scope :des_3_derniers_mois, lambda {
+    il_y_a_3_mois = (Date.current - 2.month).beginning_of_month
+    where('evaluations.created_at > ?', il_y_a_3_mois)
+  }
+  scope :pour_les_structures, lambda { |structures|
+    joins(campagne: { compte: :structure })
+      .where(
+        campagnes: {
+          comptes: {
+            structure_id: structures
+          }
+        }
+      )
+  }
+
   def display_name
     nom
   end

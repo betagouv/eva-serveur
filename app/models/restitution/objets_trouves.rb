@@ -10,50 +10,36 @@ module Restitution
         'metacompetence' => 'ccf',
         'instance' => Illettrisme::NombreReponses.new
       },
-      'nombre_bonnes_reponses_numeratie' => {
+      'nombre_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Illettrisme::NombreBonnesReponses.new
+        'instance' => Illettrisme::NombreReponses.new
       },
-      'nombre_bonnes_reponses_ccf' => {
-        'type' => :nombre,
-        'metacompetence' => 'ccf',
-        'instance' => Illettrisme::NombreBonnesReponses.new
-      },
-      'nombre_bonnes_reponses_memorisation' => {
+      'nombre_reponses_memorisation' => {
         'type' => :nombre,
         'metacompetence' => 'memorisation',
-        'instance' => Illettrisme::NombreBonnesReponses.new
-      },
-      'temps_moyen_bonnes_reponses_numeratie' => {
-        'type' => :nombre,
-        'metacompetence' => 'numeratie',
-        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
-      },
-      'temps_moyen_bonnes_reponses_ccf' => {
-        'type' => :nombre,
-        'metacompetence' => 'ccf',
-        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
-      },
-      'temps_moyen_bonnes_reponses_memorisation' => {
-        'type' => :nombre,
-        'metacompetence' => 'memorisation',
-        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
+        'instance' => Illettrisme::NombreReponses.new
       },
       'score_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       },
       'score_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       },
       'score_memorisation' => {
         'type' => :nombre,
         'metacompetence' => 'memorisation',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       }
 
     }.freeze

@@ -9,9 +9,9 @@ module Restitution
         # score_ccf: { average: 0.71, stddev_pop: 0.23 }
       },
       objets_trouves: {
-        score_numeratie: { average: 0.09, stddev_pop: 0.04 },
-        score_ccf: { average: 0.28, stddev_pop: 0.09 },
-        score_memorisation: { average: 0.22, stddev_pop: 0.11 }
+        # score_numeratie: { average: 0.09, stddev_pop: 0.04 },
+        # score_ccf: { average: 0.28, stddev_pop: 0.09 },
+        # score_memorisation: { average: 0.22, stddev_pop: 0.11 }
       },
       maintenance: {
         score_ccf: { average: 425.04, stddev_pop: 245.78 }

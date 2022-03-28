@@ -29,7 +29,7 @@ module Restitution
           next if e2.blank?
 
           les_temps << {
-            question: e1.question.nom_technique,
+            question: e1.question_nom_technique,
             succes: e2.bonne_reponse?,
             temps: (e2.date - e1.date)
           }
@@ -43,7 +43,7 @@ module Restitution
 
       def temps_questions(evenements, &filtre_evenements)
         temps_chaque_question(
-          apparitions_et_reponses(evenements, :bonne_ou_mauvaise_reponse?, &filtre_evenements)
+          apparitions_et_reponses(evenements, :present?, &filtre_evenements)
         )
       end
 

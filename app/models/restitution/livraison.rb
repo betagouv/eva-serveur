@@ -53,7 +53,9 @@ module Restitution
       'score_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       },
       'score_syntaxe_orthographe' => {
         'type' => :nombre,

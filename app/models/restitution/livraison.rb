@@ -48,7 +48,9 @@ module Restitution
       'score_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       },
       'score_ccf' => {
         'type' => :nombre,
@@ -60,7 +62,9 @@ module Restitution
       'score_syntaxe_orthographe' => {
         'type' => :nombre,
         'metacompetence' => 'syntaxe-orthographe',
-        'instance' => Illettrisme::ScoreMetacompetence.new
+        'instance' => Metriques::Somme.new(
+          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
+        )
       }
     }.freeze
 

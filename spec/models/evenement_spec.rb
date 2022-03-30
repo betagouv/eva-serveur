@@ -13,4 +13,16 @@ describe Evenement, type: :model do
       .with_primary_key(:session_id)
       .with_foreign_key(:session_id)
   end
+
+  describe '#fin_situation?' do
+    it "retourne true quand le nom de l'évènement est 'finSituation'" do
+      evenement = Evenement.new nom: 'finSituation'
+      expect(evenement.fin_situation?).to eq true
+    end
+
+    it "retourne false quand le nom de l'évènement n'est pas 'finSituation'" do
+      evenement = Evenement.new nom: 'autre'
+      expect(evenement.fin_situation?).to eq false
+    end
+  end
 end

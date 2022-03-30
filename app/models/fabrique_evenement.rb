@@ -11,6 +11,7 @@ class FabriqueEvenement
     partie = recupere_partie
     evenement = Evenement.new EvenementParams.from(parametres).merge(partie: partie)
     evenement.save
+    PersisteMetriquesPartieJob.perform_later(partie) if evenement.fin_situation?
     evenement
   end
 

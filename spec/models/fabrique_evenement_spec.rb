@@ -3,16 +3,19 @@
 require 'rails_helper'
 
 describe FabriqueEvenement do
+  ActiveJob::Base.queue_adapter = :test
+
   let!(:situation_livraison) { create :situation_livraison }
 
   let(:chemin) { Rails.root.join('spec/support/evenement/donnees.json') }
   let(:donnees) { JSON.parse(File.read(chemin)) }
   let(:evaluation) { create :evaluation }
+  let(:nom_evenement) { 'finSituation' }
   let(:parametres) do
     ActionController::Parameters.new(
       date: 1_631_891_703_815,
       donnees: {},
-      nom: 'finSituation',
+      nom: nom_evenement,
       position: 0,
       session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
       situation: situation_livraison.nom_technique,
@@ -30,14 +33,26 @@ describe FabriqueEvenement do
         .by(1)
     end
 
-    it 'assigne les métriques à la partie' do
-      expect do
-        FabriqueEvenement.new(parametres).call
-      end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
-    end
-
     it "retourne l'évènement" do
       expect(FabriqueEvenement.new(parametres).call).to be_an_instance_of Evenement
+    end
+
+    context "quand l'évènement est une fin de situation" do
+      let(:nom_evenement) { 'finSituation' }
+      it 'programme un job pour assigner les métriques à la partie' do
+        expect do
+          FabriqueEvenement.new(parametres).call
+        end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
+      end
+    end
+
+    context "Quand l'évènement n'est pas une fin de situation" do
+      let(:nom_evenement) { 'autre' }
+      it 'ne programme pas de job pour assigner les métriques à la partie' do
+        expect do
+          FabriqueEvenement.new(parametres).call
+        end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(0)
+      end
     end
 
     context 'quand une partie est déjà existante' do

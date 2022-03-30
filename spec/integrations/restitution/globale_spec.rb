@@ -96,7 +96,7 @@ describe Restitution::Globale do
     context 'de niveau 1' do
       it do
         expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
-          .to eql(-2.33)
+          .to eql(-3.41)
       end
 
       it do
@@ -107,7 +107,7 @@ describe Restitution::Globale do
       it do
         expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie]
                                                                   .round(2))
-          .to eql(-3.83)
+          .to eql(-5.49)
       end
     end
   end

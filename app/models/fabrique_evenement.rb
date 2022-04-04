@@ -9,10 +9,12 @@ class FabriqueEvenement
 
   def call
     partie = recupere_partie
-    evenement = Evenement.new EvenementParams.from(parametres).merge(partie: partie)
-    evenement.save
-    PersisteMetriquesPartieJob.perform_later(partie) if evenement.fin_situation?
-    evenement
+    param = EvenementParams.from(parametres).merge(partie: partie)
+    Evenement.new(param).tap do |evenement|
+      next unless evenement.save
+
+      PersisteMetriquesPartieJob.perform_later(partie) if evenement.fin_situation?
+    end
   end
 
   private

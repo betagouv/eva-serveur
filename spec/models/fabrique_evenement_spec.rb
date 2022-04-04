@@ -4,7 +4,6 @@ require 'rails_helper'
 
 describe FabriqueEvenement do
   ActiveJob::Base.queue_adapter = :test
-
   let!(:situation_livraison) { create :situation_livraison }
 
   let(:chemin) { Rails.root.join('spec/support/evenement/donnees.json') }
@@ -100,7 +99,7 @@ describe FabriqueEvenement do
       let(:parametres_invalide) do
         ActionController::Parameters.new(
           date: nil,
-          nom: 'ouvertureContenant',
+          nom: 'finSituation',
           situation: 'livraison',
           session_id: 'O8j78U2xcb2',
           donnees: donnees,
@@ -115,6 +114,12 @@ describe FabriqueEvenement do
           .by(1)
           .and change(Evenement, :count)
           .by(0)
+      end
+
+      it 'ne persiste pas les métriques de la partie' do
+        expect do
+          FabriqueEvenement.new(parametres_invalide).call
+        end.not_to have_enqueued_job(PersisteMetriquesPartieJob)
       end
 
       it "retourne une instance d'évènement" do

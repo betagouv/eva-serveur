@@ -97,6 +97,7 @@ describe 'Admin - Campagne', type: :feature do
         parcours.situations_configurations.create situation: situation_maintenance
         parcours
       end
+      let!(:situation_plan_de_la_ville) { create :situation_plan_de_la_ville }
       let(:structure_conseiller) { create :structure_locale, code_postal: '45312' }
 
       before do
@@ -119,6 +120,15 @@ describe 'Admin - Campagne', type: :feature do
             expect(page).to have_content parcours_type_complet.libelle
           end
         end
+      end
+
+      it 'sélectionne des modules de parcours optionnels' do
+        choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
+        check 'campagne_situations_optionnelles_plan_de_la_ville'
+        click_on 'Créer'
+
+        campagne = Campagne.order(:created_at).last
+        expect(Campagne.avec_situation(situation_plan_de_la_ville).first).to eq campagne
       end
     end
   end

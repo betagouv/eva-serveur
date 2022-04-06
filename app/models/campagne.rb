@@ -23,6 +23,7 @@ class Campagne < ApplicationRecord
 
   before_validation :genere_code_unique
   before_create :initialise_situations, if: :parcours_type_id
+  attr_accessor :situations_optionnelles
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)
@@ -54,6 +55,18 @@ class Campagne < ApplicationRecord
     parcours_type.situations_configurations.each do |situation_configuration|
       situations_configurations.build situation_id: situation_configuration.situation_id,
                                       questionnaire_id: situation_configuration.questionnaire_id
+    end
+    initialise_situations_optionnelles
+  end
+
+  def initialise_situations_optionnelles
+    return if situations_optionnelles.blank?
+
+    situations_optionnelles.reject(&:blank?).each do |situation_optionnelle|
+      situation = Situation.find_by nom_technique: situation_optionnelle
+      next if situation.blank?
+
+      situations_configurations.build situation_id: situation.id
     end
   end
 

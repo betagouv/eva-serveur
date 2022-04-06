@@ -30,6 +30,13 @@ div class: 'nouvelle-campagne' do
           end
         end
 
+        div class: 'panel' do
+          h2 t('.personnalisation'), class: 'titre titre--medium'
+          f.inputs do
+            f.input :situations_optionnelles, as: :check_boxes, collection: ['plan_de_la_ville']
+          end
+        end
+
         if current_compte.superadmin?
           div class: 'panel' do
             h2 t('.configuration_avancee'), class: 'titre titre--medium'

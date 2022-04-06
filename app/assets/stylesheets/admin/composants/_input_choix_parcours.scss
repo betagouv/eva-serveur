@@ -1,4 +1,4 @@
-.input-choix-parcours {
+.input-choix {
   /* reset style */
   li.radio {
     fieldset ol {
@@ -7,7 +7,7 @@
       width: 100%;
     }
     &.error {
-      .choix-parcours-item {
+      .choix-item {
         border-color: $eva_red;
       }
     }
@@ -27,6 +27,17 @@
     justify-content: space-between;
   }
 
+  .choix-item {
+    height: 100%;
+    padding: 1rem;
+    @include carte-avec-bordure();
+    cursor: pointer;
+    transition: background-color,border-color,box-shadow, color .2s;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+  }
+
   .choice {
     width: 50%;
     margin-bottom: 0.875rem;
@@ -36,26 +47,17 @@
       padding: 0;
     }
 
-    input + .choix-parcours-item {
-      @include carte-avec-bordure();
-      height: 100%;
-      min-height: 250px;
-      padding: 1rem;
-      cursor: pointer;
-      transition: background-color,border-color,box-shadow, color .2s;
-      user-select: none;
-      display: flex;
-      flex-direction: column;
+    input + .choix-item {
       &:hover {
         box-shadow: 0 0 0 2px $eva_main_blue;
         border-color: transparent;
-        .choix-parcours-titre {
+        .choix-titre {
           color: $eva_main_blue;
         }
       }
     }
 
-    .choix-parcours-titre {
+    .choix-titre {
       @include titre();
       font-size: .875rem;
       color: $couleur-texte;
@@ -73,6 +75,14 @@
       font-style: italic;
     }
 
+    .choix-situation-optionnelle-duree-moyenne, .choix-situation-optionnelle-description {
+      color: $couleur-texte;
+      font-size: .75rem;
+      line-height: .875rem;
+      font-weight: normal;
+      font-style: italic;
+    }
+
     .choix-parcours-description {
       flex: 1;
       margin-bottom: 1rem;
@@ -82,15 +92,15 @@
       }
     }
 
-    input:checked + .choix-parcours-item {
+    input:checked + .choix-item {
       border-color: $couleur-texte;
       background: $eva_main_blue;
 
-      .choix-parcours-titre {
+      .choix-titre {
         color: $eva_dark;
       }
 
-      &, p, ul li {
+      &, div, span, p, ul li {
         color: $eva_light;
       }
     }
@@ -103,4 +113,52 @@
     text-align: center;
   }
 
+}
+
+.input-choix-parcours {
+  input + .choix-item {
+    min-height: 250px;
+  }
+}
+
+.input-choix-situation-optionnelle {
+  .choices-group, .choice {
+    width: 100%;
+    padding: 0;
+  }
+
+  input + .choix-item {
+    min-height: 125px;
+  }
+
+  .checkbox-situation-optionnelle-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .choix-item {
+    padding-right: 2.75rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  input:checked + .choix-item .checkbox-situation-optionnelle img {
+    display: inline;
+  }
+}
+
+.checkbox-situation-optionnelle {
+  height: 1rem;
+  width: 1rem;
+  background: $eva_light;
+
+  border: 1px solid  $eva_bluegrey;
+  box-sizing: border-box;
+  border-radius: 4px;
+  line-height: 12px;
+  text-align: center;
+
+  img {
+    display: none;
+  }
 }

@@ -10,9 +10,19 @@ module CampagneHelper
     end
   end
 
+  def collection_situations_optionnelles
+    [
+      [label_situation_optionnelle, 'plan_de_la_ville']
+    ]
+  end
+
   def label_parcours_type(parcours_type)
     render partial: 'components/input_choix_parcours',
            locals: { parcours_type: parcours_type }
+  end
+
+  def label_situation_optionnelle
+    render partial: 'components/input_situation_optionnelle'
   end
 
   def url_campagne(code)

@@ -21,7 +21,7 @@ div class: 'nouvelle-campagne' do
           div class: 'panel' do
             h2 t('.choix_parcours'), class: 'titre titre--medium'
             para t('.explication_choix_parcours'), class: 'description description--secondaire'
-            f.inputs class: 'input-choix-parcours' do
+            f.inputs class: 'input-choix' do
               f.input :parcours_type, as: :radio,
                                       collection: collection_parcours_type(parcours_type),
                                       required: true,
@@ -32,8 +32,11 @@ div class: 'nouvelle-campagne' do
 
         div class: 'panel' do
           h2 t('.personnalisation'), class: 'titre titre--medium'
-          f.inputs do
-            f.input :situations_optionnelles, as: :check_boxes, collection: ['plan_de_la_ville']
+          para t('.explication_personnalisation'), class: 'description description--secondaire'
+          f.inputs class: 'input-choix input-choix-situation-optionnelle' do
+            f.input :situations_optionnelles, as: :check_boxes,
+                                              collection: collection_situations_optionnelles,
+                                              label: false
           end
         end
 

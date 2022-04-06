@@ -28,6 +28,11 @@ class Campagne < ApplicationRecord
     joins(:compte).where('comptes.structure_id' => structure)
   }
   scope :par_code, ->(code) { where code: code.upcase }
+  scope :avec_situation, lambda { |situation|
+    joins(:situations_configurations).where(situations_configurations: {
+                                              situation_id: situation&.id
+                                            })
+  }
 
   def display_name
     libelle

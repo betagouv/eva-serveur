@@ -44,5 +44,10 @@ FactoryBot.define do
       libelle { 'Bienvenue' }
       nom_technique { 'bienvenue' }
     end
+
+    factory :situation_plan_de_la_ville do
+      libelle { 'Plan de la ville' }
+      nom_technique { 'plan_de_la_ville' }
+    end
   end
 end

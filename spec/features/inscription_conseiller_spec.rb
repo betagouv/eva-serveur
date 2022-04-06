@@ -45,4 +45,24 @@ describe 'Création de compte conseiller', type: :feature do
       expect(nouveau_compte.structure).to eq structure
     end
   end
+
+  context 'structure sans admin' do
+    let!(:structure_sans_admin) { create :structure_locale, nom: 'Ma structure' }
+
+    before do
+      visit new_compte_registration_path(structure_id: structure_sans_admin.id)
+      fill_in :compte_prenom, with: 'Julia'
+      fill_in :compte_nom, with: 'Robert'
+      fill_in :compte_email, with: 'monemail@eva.fr'
+      fill_in :compte_password, with: 'Pass123'
+      fill_in :compte_password_confirmation, with: 'Pass123'
+    end
+
+    it 'donne le role admin' do
+      click_on "S'inscrire"
+      nouveau_compte = Compte.find_by email: 'monemail@eva.fr'
+      expect(nouveau_compte.validation_en_attente?).to be false
+      expect(nouveau_compte.role).to eq 'admin'
+    end
+  end
 end

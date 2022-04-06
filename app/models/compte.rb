@@ -53,6 +53,13 @@ class Compte < ApplicationRecord
     ADMIN_ROLES.include?(role)
   end
 
+  def assigne_role_admin_si_pas_d_admin
+    return if autres_admins?
+
+    self.role = :admin
+    self.statut_validation = :acceptee
+  end
+
   private
 
   def verifie_dns_email

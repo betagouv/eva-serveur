@@ -71,7 +71,7 @@ describe Compte do
     it { expect(Compte.new(role: 'conseiller').au_moins_admin?).to eql(false) }
   end
 
-  describe 'structure a un admin' do
+  describe "verifie la présence d'un admin" do
     let(:structure) { Structure.new }
     let(:compte) { Compte.new role: 'admin' }
 
@@ -79,7 +79,7 @@ describe Compte do
       allow(compte).to receive(:verifie_dns_email).and_return(true)
     end
 
-    context 'quand il y a plusieurs admins dans la structure' do
+    context 'quand il y a un autre admins dans la structure' do
       before do
         allow(compte).to receive(:autres_admins?).and_return(true)
       end
@@ -112,6 +112,35 @@ describe Compte do
         compte.role = 'admin'
         compte.valid?
         expect(compte.errors[:role]).to be_blank
+      end
+    end
+  end
+
+  describe '#assigne_role_admin_si_pas_d_admin' do
+    let(:structure) { Structure.new }
+    let(:compte) { Compte.new role: 'conseiller' }
+
+    context 'quand il y a un autre admins dans la structure' do
+      before do
+        allow(compte).to receive(:autres_admins?).and_return(true)
+      end
+
+      it "n'assigne pas le role admin" do
+        compte.assigne_role_admin_si_pas_d_admin
+        expect(compte.role).to eq 'conseiller'
+        expect(compte.statut_validation).to eq 'en_attente'
+      end
+    end
+
+    context "quand il n'y a pas d'admin dans la structure" do
+      before do
+        allow(compte).to receive(:autres_admins?).and_return(false)
+      end
+
+      it 'assigne le role admin' do
+        compte.assigne_role_admin_si_pas_d_admin
+        expect(compte.role).to eq 'admin'
+        expect(compte.statut_validation).to eq 'acceptee'
       end
     end
   end

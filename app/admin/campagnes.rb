@@ -105,10 +105,10 @@ ActiveAdmin.register Campagne do
     end
 
     def plan_de_la_ville_inclus
-      premiere_situation = SituationConfiguration.where(campagne_id: resource.id)
-                                                 .order(:position)
-                                                 .first&.situation&.nom_technique
-      @plan_de_la_ville_inclus = premiere_situation == 'plan_de_la_ville'
+      @plan_de_la_ville_inclus = SituationConfiguration.where(campagne_id: resource.id).each do |sc|
+        next if sc.situation.nom_technique != 'plan_de_la_ville'
+        true
+      end
     end
   end
 end

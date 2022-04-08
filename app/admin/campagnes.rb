@@ -51,6 +51,7 @@ ActiveAdmin.register Campagne do
     before_action :situations_configurations, only: %i[show]
     before_action :auto_positionnement_inclus, only: %i[show]
     before_action :expression_ecrite_incluse, only: %i[show]
+    before_action :plan_de_la_ville_inclus, only: %i[show]
 
     def create
       create!
@@ -101,6 +102,13 @@ ActiveAdmin.register Campagne do
       @expression_ecrite_incluse ||= SituationConfiguration
                                      .questionnaire_inclus?(situations_configurations,
                                                             Eva::QUESTIONNAIRE_EXPRESSION_ECRITE)
+    end
+
+    def plan_de_la_ville_inclus
+      premiere_situation = SituationConfiguration.where(campagne_id: resource.id)
+                                                 .order(:position)
+                                                 .first&.situation&.nom_technique
+      @plan_de_la_ville_inclus = premiere_situation == 'plan_de_la_ville'
     end
   end
 end

@@ -66,7 +66,7 @@ class Campagne < ApplicationRecord
       situation = Situation.find_by nom_technique: situation_optionnelle
       next if situation.blank?
 
-      situations_configurations.build situation_id: situation.id
+      situations_configurations.build situation_id: situation.id, position: 1
     end
   end
 

@@ -32,6 +32,7 @@ fr:
             Votre parcours a été personnalisé selon vos besoins spécifiques.
         auto_positionnement: Questionnaire d’auto-positionnement
         expression_ecrite: Exercice d’expression écrite
+        plan_de_la_ville: Plan de la ville
         option:
           true: Inclus
           false: Non inclus

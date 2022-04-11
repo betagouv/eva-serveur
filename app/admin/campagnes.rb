@@ -105,9 +105,8 @@ ActiveAdmin.register Campagne do
     end
 
     def plan_de_la_ville_inclus
-      @plan_de_la_ville_inclus = SituationConfiguration.where(campagne_id: resource.id).each do |sc|
-        next if sc.situation.nom_technique != 'plan_de_la_ville'
-        true
+      @plan_de_la_ville_inclus = situations_configurations.any? do |sc|
+        sc.situation.nom_technique == 'plan_de_la_ville'
       end
     end
   end

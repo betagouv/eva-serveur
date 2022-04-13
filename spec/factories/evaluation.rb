@@ -4,6 +4,10 @@ FactoryBot.define do
   factory :evaluation do
     nom { 'Roger' }
     campagne
-    debutee_le { Time.current }
+    debutee_le { 1.hour.ago }
+
+    trait :terminee do
+      terminee_le { Time.current }
+    end
   end
 end

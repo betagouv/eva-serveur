@@ -6,16 +6,17 @@ describe 'Admin - Evaluation', type: :feature do
   before { Bullet.enable = false }
   after { Bullet.enable = true }
 
+  let(:role) { 'admin' }
   let(:mon_compte) { create :compte, role: role }
   let(:ma_campagne) do
     create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019'
   end
 
-  context 'Rôle admin' do
-    let(:role) { 'admin' }
+  describe '#show' do
     before(:each) { connecte(mon_compte) }
 
-    describe '#show' do
+    context 'Rôle admin' do
+      let(:role) { 'admin' }
       # evaluation sans positionnement
       let!(:mon_evaluation) do
         create :evaluation,
@@ -145,6 +146,36 @@ describe 'Admin - Evaluation', type: :feature do
           expect(reader.page(1).text).to include('Roger')
           expect(reader.page(1).text).to include('structure')
         end
+      end
+    end
+
+    context "quand l'evaluation est terminée" do
+      let(:evaluation_terminee) do
+        create :evaluation,
+               :terminee,
+               campagne: ma_campagne
+      end
+
+      context 'Rôle admin' do
+        let(:role) { 'admin' }
+        before do
+          mon_compte.update role: role
+          visit admin_evaluation_path evaluation_terminee
+        end
+
+        it { expect(page).not_to have_content 'Terminée le' }
+        it { expect(page).not_to have_content 'Temps total' }
+      end
+
+      context 'Rôle superadmin' do
+        let(:role) { 'superadmin' }
+        before do
+          mon_compte.update role: role
+          visit admin_evaluation_path evaluation_terminee
+        end
+
+        it { expect(page).to have_content 'Terminée le' }
+        it { expect(page).to have_content 'Temps total' }
       end
     end
 

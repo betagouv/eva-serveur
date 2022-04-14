@@ -42,7 +42,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
     end
   end
 
-  describe '#interprete' do
+  describe '#socle_clea?' do
     context 'Socle Cléa Atteint' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
@@ -72,8 +72,22 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       end
       it { expect(subject.socle_clea?).to eq(false) }
     end
+  end
 
-    context 'Illettrisme potentiel à cause de la litteratie' do
+  describe '#illettrisme_potentiel?' do
+    context "pas d'illettrisme potentiel" do
+      before do
+        allow(interpreteur_score).to receive(:interpretations)
+          .and_return([
+                        { litteratie: :palier1 }, { numeratie: :palier1 }
+                      ])
+      end
+      it do
+        expect(subject.illettrisme_potentiel?).to eq(false)
+      end
+    end
+
+    context 'à cause de la litteratie' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
@@ -83,7 +97,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       it { expect(subject.illettrisme_potentiel?).to eq(true) }
     end
 
-    context 'Illettrisme potentiel à cause de la numératie' do
+    context 'à cause de la numératie' do
       before do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([
@@ -91,6 +105,34 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                       ])
       end
       it { expect(subject.illettrisme_potentiel?).to eq(true) }
+    end
+  end
+
+  describe '#evaluation_vide?' do
+    context 'litteratie est présente' do
+      before do
+        allow(interpreteur_score).to receive(:interpretations)
+          .and_return([{ litteratie: :palier1 }, { numeratie: nil }])
+      end
+
+      it { expect(subject.evaluation_vide?).to eq(false) }
+    end
+
+    context 'numératie est présente' do
+      before do
+        allow(interpreteur_score).to receive(:interpretations)
+          .and_return([{ litteratie: nil }, { numeratie: :palier1 }])
+      end
+
+      it { expect(subject.evaluation_vide?).to eq(false) }
+    end
+
+    context 'evaluation vide' do
+      before do
+        allow(interpreteur_score).to receive(:interpretations)
+          .and_return([{ litteratie: nil }, { numeratie: nil }])
+      end
+      it { expect(subject.evaluation_vide?).to eq(true) }
     end
   end
 
@@ -114,9 +156,20 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
       before do
         allow(subject).to receive(:illettrisme_potentiel?).and_return(false)
         allow(subject).to receive(:socle_clea?).and_return(false)
+        allow(subject).to receive(:evaluation_vide?).and_return(false)
       end
 
       it { expect(subject.synthese).to eq 'ni_ni' }
+    end
+
+    context 'sans score' do
+      before do
+        allow(subject).to receive(:illettrisme_potentiel?).and_return(false)
+        allow(subject).to receive(:socle_clea?).and_return(false)
+        allow(subject).to receive(:evaluation_vide?).and_return(true)
+      end
+
+      it { expect(subject.synthese).to eq nil }
     end
   end
 end

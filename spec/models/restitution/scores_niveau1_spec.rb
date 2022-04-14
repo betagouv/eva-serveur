@@ -34,4 +34,17 @@ describe Restitution::ScoresNiveau1 do
         numeratie: 1
       )
   end
+
+  it 'avec toutes les metriques manquantes' do
+    allow(scores_niveau2).to receive(:calcule)
+      .and_return(score_numeratie: nil,
+                  score_ccf: nil,
+                  score_syntaxe_orthographe: nil,
+                  score_memorisation: nil)
+    expect(scores_niveau1.calcule)
+      .to eq(
+        litteratie: nil,
+        numeratie: nil
+      )
+  end
 end

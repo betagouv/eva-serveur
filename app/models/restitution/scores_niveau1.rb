@@ -41,7 +41,7 @@ module Restitution
         sommes_scores += score * poids
         poids_total += poids
       end
-      sommes_scores.fdiv(poids_total)
+      sommes_scores.fdiv(poids_total) unless poids_total.zero?
     end
   end
 end

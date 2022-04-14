@@ -50,9 +50,14 @@ module Restitution
         interpretations_cefr[:litteratie] == :pre_A1 or interpretations_cefr[:numeratie] == :pre_X1
       end
 
+      def evaluation_vide?
+        interpretations_cefr[:litteratie].blank? and interpretations_cefr[:numeratie].blank?
+      end
+
       def synthese
         return 'illettrisme_potentiel' if illettrisme_potentiel?
         return 'socle_clea' if socle_clea?
+        return if evaluation_vide?
 
         'ni_ni'
       end

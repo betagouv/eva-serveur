@@ -17,6 +17,7 @@ describe Restitution::QuestionsReponses do
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
       let(:evenements) { [build(:evenement_demarrage)] }
+
       it { expect(restitution.questions_et_reponses).to eq([]) }
     end
 
@@ -27,6 +28,7 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
+
       it do
         expect(restitution.questions_et_reponses.size).to eq(1)
         expect(restitution.questions_et_reponses.first[0]).to eql(question1)
@@ -44,6 +46,7 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question_redaction_note.id, reponse: 'coucou' })
         ]
       end
+
       it { expect(restitution.questions_et_reponses.first[1]).to eql('coucou') }
     end
 
@@ -57,6 +60,7 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
+
       it do
         questions = restitution.questions_et_reponses(:jauge)
         expect(questions.size).to eq(1)
@@ -80,7 +84,8 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
-      it { expect(restitution.questions_redaction.count).to eql(1) }
+
+      it { expect(restitution.questions_redaction.count).to be(1) }
       it { expect(restitution.questions_redaction.first[1]).to eql('ton b') }
     end
   end
@@ -94,11 +99,13 @@ describe Restitution::QuestionsReponses do
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
       end
+
       it { expect(restitution.choix_repondu(question1)).to eql(bon_choix_q1) }
     end
 
     context "ne retourne rien si la question n'a pas été répondu" do
       let(:evenements) { [] }
+
       it { expect(restitution.choix_repondu(question1)).to be_nil }
     end
   end
@@ -111,7 +118,8 @@ describe Restitution::QuestionsReponses do
           build(:evenement_reponse)
         ]
       end
-      it { expect(restitution.reponses.size).to eql(2) }
+
+      it { expect(restitution.reponses.size).to be(2) }
     end
 
     context 'retourne seulement les événements réponses' do
@@ -121,7 +129,8 @@ describe Restitution::QuestionsReponses do
           build(:evenement_reponse)
         ]
       end
-      it { expect(restitution.reponses.size).to eql(1) }
+
+      it { expect(restitution.reponses.size).to be(1) }
     end
   end
 end

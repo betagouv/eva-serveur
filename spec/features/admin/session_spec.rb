@@ -8,6 +8,7 @@ describe 'Session', type: :feature do
       before do
         connecte_email email: 'invalid@email.com'
       end
+
       it "Renvoie un message d'erreur" do
         expect(page).to have_content('Email ou mot de passe incorrect')
       end
@@ -51,7 +52,8 @@ describe 'Session', type: :feature do
     end
 
     context 'Quand mon compte est confirmé et existe' do
-      let!(:compte_confirme) { create :compte, confirmed_at: Time.now }
+      let!(:compte_confirme) { create :compte, confirmed_at: Time.zone.now }
+
       it 'me connecte à mon espace pro' do
         connecte(compte_confirme)
         expect(page).to have_current_path(admin_dashboard_path)

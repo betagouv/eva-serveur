@@ -10,6 +10,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
   describe '#temps_bonnes_qualifications_dangers' do
     context 'sans évenement' do
       let(:evenements) { [build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0))] }
+
       it { expect(temps_bonnes_qualifications_dangers).to eq({}) }
     end
 
@@ -22,6 +23,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'casque' },
                date: Time.zone.local(2019, 10, 9, 10, 2))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq('casque' => 60) }
     end
 
@@ -39,6 +41,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'camion' },
                date: Time.zone.local(2019, 10, 9, 10, 5))]
       end
+
       it do
         temps = temps_bonnes_qualifications_dangers
         expect(temps).to eq('casque' => 60, 'camion' => 120)
@@ -59,6 +62,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'casque' },
                date: Time.zone.local(2019, 10, 9, 10, 5))]
       end
+
       it do
         temps = temps_bonnes_qualifications_dangers
         expect(temps).to eq('casque' => 60)
@@ -74,6 +78,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'mauvais', danger: 'd1' },
                date: Time.zone.local(2019, 10, 9, 10, 2))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq({}) }
     end
 
@@ -91,6 +96,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'd1' },
                date: Time.zone.local(2019, 10, 9, 10, 5))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq('d1' => 120) }
     end
 
@@ -108,6 +114,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'mauvais', danger: 'd1' },
                date: Time.zone.local(2019, 10, 9, 10, 5))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq('d1' => 60) }
     end
 
@@ -117,6 +124,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'danger' }, date: Time.zone.local(2019, 10, 9, 10, 1))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq({}) }
     end
 
@@ -125,6 +133,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
         [build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0)),
          build(:evenement_ouverture_zone, date: Time.zone.local(2019, 10, 9, 10, 1))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq({}) }
     end
 
@@ -139,6 +148,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'casque' },
                date: Time.zone.local(2019, 10, 9, 10, 3))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq('casque' => 60) }
     end
 
@@ -156,6 +166,7 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
                donnees: { reponse: 'bonne', danger: 'd1' },
                date: Time.zone.local(2019, 10, 9, 10, 4))]
       end
+
       it { expect(temps_bonnes_qualifications_dangers).to eq('d1' => 120) }
     end
   end

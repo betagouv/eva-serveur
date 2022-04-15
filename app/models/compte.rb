@@ -30,11 +30,11 @@ class Compte < ApplicationRecord
   accepts_nested_attributes_for :structure
 
   def display_name
-    [nom_complet, email].reject(&:blank?).join(' - ')
+    [nom_complet, email].compact_blank.join(' - ')
   end
 
   def nom_complet
-    [prenom, nom].reject(&:blank?).join(' ')
+    [prenom, nom].compact_blank.join(' ')
   end
 
   def find_admins

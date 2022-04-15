@@ -13,6 +13,7 @@ RSpec.describe SourceAide, type: :model do
     let!(:source1) { create :source_aide, categorie: 'prise_en_main' }
     let!(:source2) { create :source_aide, categorie: 'prise_en_main' }
     let!(:source3) { create :source_aide, categorie: 'animer_restituer' }
+
     it do
       expect(SourceAide.sources_par_categorie).to eql(
         {

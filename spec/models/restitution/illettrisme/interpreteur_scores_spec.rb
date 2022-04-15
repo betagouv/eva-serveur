@@ -10,6 +10,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'sans score à interpreter' do
       let(:scores_standardises) { {} }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: nil }])
@@ -18,6 +19,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'au palier 0' do
       let(:scores_standardises) { { score_ccf: -1.41 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier0 }])
@@ -26,6 +28,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'juste au dessus du palier 0' do
       let(:scores_standardises) { { score_ccf: -1.4 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier1 }])
@@ -34,6 +37,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'juste en dessous du palier 2' do
       let(:scores_standardises) { { score_ccf: -0.26 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier1 }])
@@ -42,6 +46,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'au palier 2' do
       let(:scores_standardises) { { score_ccf: -0.25 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier2 }])

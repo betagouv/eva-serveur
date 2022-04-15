@@ -23,7 +23,7 @@ describe 'Campagne API', type: :request do
       get '/api/campagnes/ete21'
 
       expect(response).to be_ok
-      expect(JSON.parse(response.body)['questions'].size).to eql(1)
+      expect(JSON.parse(response.body)['questions'].size).to be(1)
     end
 
     it "retourne des questions vide lorsque qu'il n'y a pas de questionnaire" do
@@ -31,13 +31,13 @@ describe 'Campagne API', type: :request do
       get '/api/campagnes/ete21'
 
       expect(response).to be_ok
-      expect(JSON.parse(response.body)['questions'].size).to eql(0)
+      expect(JSON.parse(response.body)['questions'].size).to be(0)
     end
 
     it "retourne une 404 lorsqu'elle n'existe pas" do
       get '/api/campagnes/404'
 
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(:not_found)
     end
 
     context 'quand la campagne a des situations' do
@@ -74,7 +74,7 @@ describe 'Campagne API', type: :request do
 
         reponse_json = JSON.parse(response.body)
 
-        expect(reponse_json['situations'].size).to eql(3)
+        expect(reponse_json['situations'].size).to be(3)
         premiere_situation = reponse_json['situations'][0]
         expect(premiere_situation['libelle']).to eql('Livraison')
         expect(premiere_situation['nom_technique']).to eql('livraison')

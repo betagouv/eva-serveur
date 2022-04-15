@@ -10,6 +10,7 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
   describe '#nombre_retours_deja_qualifies' do
     context 'sans évenement' do
       let(:evenements) { [] }
+
       it { expect(metrique_nombre_retours_deja_qualifies).to eq 0 }
     end
 
@@ -21,6 +22,7 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
          build(:evenement_qualification_danger,
                donnees: { reponse: 'bonne', danger: 'danger2' })]
       end
+
       it { expect(metrique_nombre_retours_deja_qualifies).to eq 0 }
     end
 
@@ -32,6 +34,7 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
          build(:evenement_qualification_danger,
                donnees: { reponse: 'bonne', danger: 'danger' })]
       end
+
       it { expect(metrique_nombre_retours_deja_qualifies).to eq 1 }
     end
   end

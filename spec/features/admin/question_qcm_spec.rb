@@ -4,10 +4,12 @@ require 'rails_helper'
 
 describe 'Admin - Question QCM', type: :feature do
   before { se_connecter_comme_superadmin }
+
   let!(:question) { create :question_qcm, libelle: 'question', intitule: 'Comment ça va ?' }
 
   describe 'index' do
     before { visit admin_question_qcms_path }
+
     it do
       expect(page).to have_content 'Comment ça va ?'
     end

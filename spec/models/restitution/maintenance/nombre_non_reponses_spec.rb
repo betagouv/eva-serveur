@@ -14,6 +14,7 @@ describe Restitution::Maintenance::NombreNonReponses do
           build(:evenement_demarrage)
         ]
       end
+
       it { expect(metrique_nombre_erreurs).to eq 0 }
     end
 
@@ -24,6 +25,7 @@ describe Restitution::Maintenance::NombreNonReponses do
           build(:evenement_identification_mot, :non_reponse)
         ]
       end
+
       it { expect(metrique_nombre_erreurs).to eq 1 }
     end
 
@@ -34,6 +36,7 @@ describe Restitution::Maintenance::NombreNonReponses do
           build(:evenement_identification_mot, :pas_français_mal_identifie)
         ]
       end
+
       it { expect(metrique_nombre_erreurs).to eq 0 }
     end
   end

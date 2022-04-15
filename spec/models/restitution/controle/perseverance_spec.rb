@@ -14,10 +14,12 @@ describe Restitution::Controle::Perseverance do
   end
 
   it { expect(pour(termine: true)).to evalue_a(Competence::NIVEAU_4) }
+
   it {
     expect(pour(termine: false, nombre_pieces: 15, nombre_bien_placees: 8))
       .to evalue_a(Competence::NIVEAU_1)
   }
+
   it {
     expect(pour(termine: false, nombre_pieces: 14, nombre_bien_placees: 8))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Evaluation', type: :feature do
   before { Bullet.enable = false }
+
   after { Bullet.enable = true }
 
   let(:role) { 'admin' }
@@ -13,10 +14,19 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   describe '#show' do
-    before(:each) { connecte(mon_compte) }
+    before { connecte(mon_compte) }
 
     context 'Rôle admin' do
       let(:role) { 'admin' }
+      let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: campagne_bienvenue }
+      let!(:partie_bienvenue) do
+        create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
+      end
+      let!(:evenement_bienvenue) { create :evenement_demarrage, partie: partie_bienvenue }
+      let(:questionnaire) { create :questionnaire, questions: [] }
+      let(:restitution_bienvenue) do
+        Restitution::Bienvenue.new(mon_evaluation_bienvenue, [evenement_bienvenue])
+      end
       # evaluation sans positionnement
       let!(:mon_evaluation) do
         create :evaluation,
@@ -32,20 +42,12 @@ describe 'Admin - Evaluation', type: :feature do
       # evaluation avec positionnement
       let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
       let(:campagne_bienvenue) { create :campagne, compte: Compte.first }
+
       before { campagne_bienvenue.situations_configurations.create situation: bienvenue }
-      let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: campagne_bienvenue }
-      let!(:partie_bienvenue) do
-        create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
-      end
-      let!(:evenement_bienvenue) { create :evenement_demarrage, partie: partie_bienvenue }
-      let(:questionnaire) { create :questionnaire, questions: [] }
-      let(:restitution_bienvenue) do
-        Restitution::Bienvenue.new(mon_evaluation_bienvenue, [evenement_bienvenue])
-      end
 
       it 'sans auto_positionnement' do
         visit admin_evaluation_path(mon_evaluation)
-        expect(page).to_not have_content 'auto-positionnement'
+        expect(page).not_to have_content 'auto-positionnement'
         expect(page).to have_content 'Roger'
       end
 
@@ -158,6 +160,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       context 'Rôle admin' do
         let(:role) { 'admin' }
+
         before do
           mon_compte.update role: role
           visit admin_evaluation_path evaluation_terminee
@@ -169,6 +172,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       context 'Rôle superadmin' do
         let(:role) { 'superadmin' }
+
         before do
           mon_compte.update role: role
           visit admin_evaluation_path evaluation_terminee
@@ -184,6 +188,7 @@ describe 'Admin - Evaluation', type: :feature do
       let(:situation) { create :situation_tri }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let!(:evenement) { create :evenement, partie: partie }
+
       before { visit admin_evaluation_path(evaluation) }
 
       it do

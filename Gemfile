@@ -64,6 +64,10 @@ group :development, :test do
   gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'
   gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-packaging', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development do
@@ -84,7 +88,5 @@ group :test do
   gem 'factory_bot_rails'
   gem 'launchy'
   gem 'pdf-reader'
-  gem 'rubocop', require: false
-  gem 'rubocop-rspec', require: false
   gem 'shoulda-matchers'
 end

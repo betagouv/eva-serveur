@@ -1,5 +1,9 @@
+require:
+  - rubocop-packaging
+  - rubocop-rails
+
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 2.7
   NewCops: enable
   Exclude:
     - 'bin/**/*'
@@ -46,3 +50,14 @@ Metrics/AbcSize:
     - 'spec/models/restitution/inventaire/perseverance_spec.rb'
     - 'spec/models/restitution/tri/perseverance_spec.rb'
     - 'spec/models/restitution/tri/comprehension_consigne_spec.rb'
+
+# Désactiver temporairement
+Rails/OutputSafety:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/Delegate:
+  Exclude:
+    - 'app/decorators/evenement_livraison.rb'
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false

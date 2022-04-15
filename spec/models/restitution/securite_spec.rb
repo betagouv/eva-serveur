@@ -13,7 +13,8 @@ describe Restitution::Securite do
           build(:evenement_demarrage)
         ]
       end
-      it { expect(restitution).to_not be_termine }
+
+      it { expect(restitution).not_to be_termine }
     end
 
     context 'tous les dangers qualifiés' do
@@ -25,6 +26,7 @@ describe Restitution::Securite do
           end
         ].flatten
       end
+
       it { expect(restitution).to be_termine }
     end
 
@@ -35,6 +37,7 @@ describe Restitution::Securite do
           build(:evenement_fin_situation)
         ]
       end
+
       it { expect(restitution).to be_termine }
     end
 
@@ -47,7 +50,8 @@ describe Restitution::Securite do
           end
         ].flatten
       end
-      it { expect(restitution).to_not be_termine }
+
+      it { expect(restitution).not_to be_termine }
     end
   end
 
@@ -80,13 +84,13 @@ describe Restitution::Securite do
         expect(partie.metriques['nombre_bien_qualifies']).to eq 2
         expect(partie.metriques['nombre_dangers_bien_identifies']).to eq 3
         expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4
-        expect(partie.metriques['nombre_dangers_bien_identifies_avant_aide1']).to eql 5
+        expect(partie.metriques['nombre_dangers_bien_identifies_avant_aide1']).to be 5
         expect(partie.metriques['attention_visuo_spatiale']).to eql 'apte'
         expect(partie.metriques['delai_ouvertures_zones_dangers']).to eql [1, 2]
-        expect(partie.metriques['delai_moyen_ouvertures_zones_dangers']).to eql 7
-        expect(partie.metriques['temps_entrainement']).to eql 8
-        expect(partie.metriques['temps_total']).to eql 9
-        expect(partie.metriques['nombre_dangers_mal_identifies']).to eql 1
+        expect(partie.metriques['delai_moyen_ouvertures_zones_dangers']).to be 7
+        expect(partie.metriques['temps_entrainement']).to be 8
+        expect(partie.metriques['temps_total']).to be 9
+        expect(partie.metriques['nombre_dangers_mal_identifies']).to be 1
       end
     end
   end

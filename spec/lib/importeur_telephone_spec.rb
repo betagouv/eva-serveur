@@ -12,6 +12,7 @@ describe ImporteurTelephone do
 
     context 'pas de téléphone enregistré' do
       let(:telephone) { nil }
+
       it do
         expect(logger).to receive(:info)
           .with('Importe : conseiller@eva.fr,01-02-03-04-05')
@@ -34,6 +35,7 @@ describe ImporteurTelephone do
 
   context "le compte n'existe pas" do
     let(:ligne) { { mail: 'inconnu@eva.fr', telephone: '02 03 04 05 06' } }
+
     it do
       expect(logger).to receive(:warn)
         .with('Téléphone ignoré pour le compte inconnu : inconnu@eva.fr - 02 03 04 05 06')

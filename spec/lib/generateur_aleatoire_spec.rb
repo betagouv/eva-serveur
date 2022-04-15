@@ -12,7 +12,7 @@ describe GenerateurAleatoire do
     it 'génère des résultats différents à chaque appel' do
       generation1 = GenerateurAleatoire.majuscules 10
       generation2 = GenerateurAleatoire.majuscules 10
-      expect(generation1).to_not eq generation2
+      expect(generation1).not_to eq generation2
     end
 
     it 'contient uniquement des lettres majuscules' do

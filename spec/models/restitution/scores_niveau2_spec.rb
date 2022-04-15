@@ -33,6 +33,7 @@ describe Restitution::ScoresNiveau2 do
   context "fait la moyenne des scores_niveau3 d'une liste de partie" do
     let(:partie1) { double(situation_id: situation_id) }
     let(:partie2) { double(situation_id: situation_id) }
+
     it do
       scores = Restitution::ScoresNiveau2.new([partie1, partie2],
                                               { situation_id => standardisateur })

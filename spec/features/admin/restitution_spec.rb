@@ -32,7 +32,9 @@ describe 'Admin - Restitution', type: :feature do
     let!(:evenements) do
       [create(:evenement_saisie_inventaire, :echec, partie: partie)]
     end
+
     before { visit admin_restitution_path(partie) }
+
     it { expect(page).to have_content('Échec') }
   end
 
@@ -57,7 +59,9 @@ describe 'Admin - Restitution', type: :feature do
                date: Time.zone.local(2019, 10, 9, 10, 1, 22))
       ]
     end
+
     before { visit admin_restitution_path(partie) }
+
     it { expect(page).to have_content('Nombre De Réponses Numératie') }
   end
 
@@ -68,6 +72,7 @@ describe 'Admin - Restitution', type: :feature do
     end
 
     before { visit admin_restitution_path(partie) }
+
     it do
       expect do
         within('#action_items_sidebar_section') { click_on 'Supprimer' }

@@ -37,7 +37,7 @@ describe ApplicationHelper do
     end
 
     it 'retourne nil si le paramètre est vide' do
-      expect(helper.formate_duree('')).to eql(nil)
+      expect(helper.formate_duree('')).to be_nil
     end
 
     it 'retourne une durée negative' do

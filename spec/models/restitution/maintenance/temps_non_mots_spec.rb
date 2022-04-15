@@ -14,6 +14,7 @@ describe Restitution::Maintenance::TempsNonMots do
           build(:evenement_demarrage)
         ]
       end
+
       it { expect(metrique_temps_non_mots).to eq [] }
     end
 
@@ -27,6 +28,7 @@ describe Restitution::Maintenance::TempsNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 960_000))
         ]
       end
+
       it { expect(metrique_temps_non_mots).to eq [0.01] }
     end
 
@@ -40,6 +42,7 @@ describe Restitution::Maintenance::TempsNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
+
       it { expect(metrique_temps_non_mots).to eq [] }
     end
 
@@ -51,6 +54,7 @@ describe Restitution::Maintenance::TempsNonMots do
                                            date: Time.local(2019, 10, 9, 10, 1, 21, 250_000))
         ]
       end
+
       it { expect(metrique_temps_non_mots).to eq [] }
     end
 
@@ -64,6 +68,7 @@ describe Restitution::Maintenance::TempsNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
+
       it { expect(metrique_temps_non_mots).to eq [] }
     end
 
@@ -85,6 +90,7 @@ describe Restitution::Maintenance::TempsNonMots do
                                                date: Time.local(2019, 10, 9, 10, 1, 23, 960_000))
         ]
       end
+
       it 'ne prend en compte que les idenfifications correctes' do
         expect(metrique_temps_non_mots).to eq [0.01, 1.86]
       end

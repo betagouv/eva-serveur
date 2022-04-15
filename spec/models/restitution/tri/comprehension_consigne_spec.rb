@@ -22,18 +22,22 @@ describe Restitution::Tri::ComprehensionConsigne do
     expect(pour(termine: false, jouees: 7, erreurs: 1, relectures: 1))
       .to evalue_a(Competence::NIVEAU_1)
   end
+
   it do
     expect(pour(termine: false, jouees: 7, erreurs: 1, relectures: 2))
       .to evalue_a(Competence::NIVEAU_1)
   end
+
   it do
     expect(pour(termine: false, jouees: 7, erreurs: 0, relectures: 1))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)
   end
+
   it do
     expect(pour(termine: false, jouees: 7, erreurs: 1, relectures: 0))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)
   end
+
   it do
     expect(pour(termine: false, jouees: 8, erreurs: 1, relectures: 1))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)

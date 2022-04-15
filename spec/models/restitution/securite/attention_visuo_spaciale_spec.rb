@@ -9,8 +9,10 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
 
   describe '#attention_visuo_spatiale' do
     let(:danger_visuo_spatial) { EvenementSecurite::DANGER_VISUO_SPATIAL }
+
     context 'sans évenement: indéterminé' do
       let(:evenements) { [] }
+
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::NIVEAU_INDETERMINE }
     end
 
@@ -32,6 +34,7 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
                donnees: { reponse: 'oui', danger: danger_visuo_spatial },
                date: 1.minute.ago)]
       end
+
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE_AVEC_AIDE }
     end
 
@@ -43,6 +46,7 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
                date: 2.minutes.ago),
          build(:activation_aide, date: 1.minute.ago)]
       end
+
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE }
     end
   end

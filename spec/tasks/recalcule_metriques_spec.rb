@@ -35,7 +35,7 @@ describe 'nettoyage:recalcule_metriques' do
       let(:restitution) { double(termine?: false) }
 
       it do
-        expect(restitution).to_not receive(:persiste)
+        expect(restitution).not_to receive(:persiste)
         subject.invoke
       end
     end

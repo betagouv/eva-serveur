@@ -20,7 +20,7 @@ FactoryBot.define do
       end
     end
 
-    factory :structure_locale, class: StructureLocale
-    factory :structure_administrative, class: StructureAdministrative
+    factory :structure_locale, class: StructureLocale.to_s
+    factory :structure_administrative, class: StructureAdministrative.to_s
   end
 end

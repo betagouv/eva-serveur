@@ -25,6 +25,7 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
         [build(:evenement_reponse,
                donnees: { question: question_numeratie.id, reponse: bon_choix_numeratie.id })]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_numeratie).to eq(1) }
     end
 
@@ -43,6 +44,7 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
                 donnees: { question: question_numeratie.id, reponse: choix_abstention.id })
         ]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_numeratie).to eq(0) }
     end
 
@@ -53,6 +55,7 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
         [build(:evenement_reponse,
                donnees: { question: question_ccf.id, reponse: bon_choix_ccf.id })]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_numeratie).to eq(0) }
     end
   end

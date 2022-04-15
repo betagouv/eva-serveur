@@ -16,7 +16,7 @@ describe StructuresController, type: :controller do
         structure = create :structure_locale
 
         get :show, params: { id: structure.id }
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to(admin_structure_locale_url(structure))
       end
     end
@@ -26,7 +26,7 @@ describe StructuresController, type: :controller do
         structure = create :structure_administrative
 
         get :show, params: { id: structure.id }
-        expect(response).to have_http_status(301)
+        expect(response).to have_http_status(:moved_permanently)
         expect(response).to redirect_to(admin_structure_administrative_url(structure))
       end
     end

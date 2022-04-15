@@ -14,7 +14,7 @@ describe Restitution::Questions do
     it "lorsque aucune questions n'a encore été répondu" do
       evenements = [build(:evenement_demarrage)]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution).to_not be_termine
+      expect(restitution).not_to be_termine
     end
 
     it 'lorsque une des questions a été répondu' do
@@ -23,7 +23,7 @@ describe Restitution::Questions do
         build(:evenement_reponse, donnees: { question: question1.id, reponse: 1 })
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution).to_not be_termine
+      expect(restitution).not_to be_termine
     end
 
     it 'lorsque les 2 questions ont été répondu' do

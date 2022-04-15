@@ -11,6 +11,7 @@ describe 'Admin - Parcours type', type: :feature do
       create :parcours_type, libelle: 'Parcours type #2'
       visit admin_parcours_type_index_path
     end
+
     it do
       expect(page).to have_content 'Parcours type #1'
       expect(page).to have_content 'Parcours type #2'

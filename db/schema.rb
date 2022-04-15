@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_140125) do
+ActiveRecord::Schema.define(version: 2022_04_20_084145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -159,8 +159,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_140125) do
     t.datetime "updated_at", null: false
     t.string "session_id"
     t.integer "position"
+    t.index ["position", "session_id"], name: "index_evenements_on_position_and_session_id", unique: true
     t.index ["position"], name: "index_evenements_on_position"
-    t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
     t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_140125) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nom_technique"
+    t.index ["nom_technique"], name: "index_questionnaires_on_nom_technique", unique: true
   end
 
   create_table "questionnaires_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -15,6 +15,7 @@ describe 'nettoyage:date_evenements_fin' do
   let!(:evenements) { [evenement_precedent, evenement_fin] }
 
   before { allow(logger).to receive :info }
+
   before { subject.invoke }
 
   context 'événement avec date unique' do

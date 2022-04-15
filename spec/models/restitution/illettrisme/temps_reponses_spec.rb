@@ -31,6 +31,7 @@ describe Restitution::Illettrisme::TempsReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
+
       it do
         expect(temps_reponses_numeratie)
           .to eq([{ question: 'question-qcm', succes: true, temps: 1.0 }])
@@ -68,6 +69,7 @@ describe Restitution::Illettrisme::TempsReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
+
       it { expect(temps_reponses_numeratie).to eq([]) }
     end
 
@@ -78,6 +80,7 @@ describe Restitution::Illettrisme::TempsReponses do
                                                    date: Time.zone.local(2019, 10, 9, 10, 1, 21))
         ]
       end
+
       it { expect(temps_reponses_numeratie).to eq([]) }
     end
   end

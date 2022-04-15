@@ -10,6 +10,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
   describe '#temps_recherche_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
+
       it { expect(metrique_temps_recherche_zones_dangers).to eq({}) }
     end
 
@@ -19,6 +20,7 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'casque' }, date: Time.zone.local(2019, 10, 9, 10, 1))]
       end
+
       it { expect(metrique_temps_recherche_zones_dangers).to eq('casque' => 60) }
     end
 
@@ -31,10 +33,12 @@ describe Restitution::Securite::TempsRechercheZonesDangers do
          build(:evenement_ouverture_zone,
                donnees: { danger: 'camion' }, date: Time.zone.local(2019, 10, 9, 10, 4))]
       end
+
       it 'calcule les temps de recherche' do
         temps = metrique_temps_recherche_zones_dangers
         expect(temps).to eq('casque' => 60, 'camion' => 120)
       end
+
       it 'retournes les zones par ordre alphabétique' do
         temps = metrique_temps_recherche_zones_dangers
         expect(temps.keys).to eq(%w[camion casque])

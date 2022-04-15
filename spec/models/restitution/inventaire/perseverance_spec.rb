@@ -26,10 +26,12 @@ describe Restitution::Inventaire::Perseverance do
     expect(pour(reussite: false, nombre_essais: 2, minutes: 21, erreurs: 7))
       .to evalue_a(Competence::NIVEAU_1)
   }
+
   it {
     expect(pour(reussite: false, nombre_essais: 2, minutes: 21, erreurs: 8))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)
   }
+
   it {
     expect(pour(reussite: false, nombre_essais: 2, minutes: 22, erreurs: 7))
       .to evalue_a(Competence::NIVEAU_INDETERMINE)

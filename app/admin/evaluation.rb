@@ -97,7 +97,7 @@ ActiveAdmin.register Evaluation do
     def traduction_niveau(evaluation, interpretation)
       scope = 'activerecord.attributes.evaluation.interpretations'
       niveau = evaluation.send(interpretation)
-      t("#{interpretation}.#{niveau}", scope: scope) unless niveau.blank?
+      t("#{interpretation}.#{niveau}", scope: scope) if niveau.present?
     end
 
     def mes_avec_redaction_de_notes

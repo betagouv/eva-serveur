@@ -4,6 +4,8 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 describe Ability do
+  subject(:ability) { Ability.new(compte) }
+
   let(:compte_superadmin) { create :compte_superadmin }
   let(:compte_admin) { create :compte_admin }
   let(:compte_generique) { create :compte_generique, :structure_avec_admin }
@@ -18,21 +20,21 @@ describe Ability do
 
   before { campagne_superadmin.situations_configurations.create situation: situation }
 
-  subject(:ability) { Ability.new(compte) }
-
   context 'Compte superadmin' do
     let(:compte) { compte_superadmin }
 
     it { is_expected.to be_able_to(:manage, :all) }
+
     it do
-      is_expected.to be_able_to(:read,
-                                ActiveAdmin::Page,
-                                name: 'Dashboard',
-                                namespace_name: 'admin')
+      expect(subject).to be_able_to(:read,
+                                    ActiveAdmin::Page,
+                                    name: 'Dashboard',
+                                    namespace_name: 'admin')
     end
+
     it { is_expected.to be_able_to(%i[read destroy update], Evaluation.new) }
-    it { is_expected.to_not be_able_to(%i[create], Evaluation.new) }
-    it { is_expected.to_not be_able_to(%i[create update], Evenement.new) }
+    it { is_expected.not_to be_able_to(%i[create], Evaluation.new) }
+    it { is_expected.not_to be_able_to(%i[create update], Evenement.new) }
     it { is_expected.to be_able_to(:read, Evenement.new) }
     it { is_expected.to be_able_to(:manage, Situation.new) }
     it { is_expected.to be_able_to(:manage, Campagne.new) }
@@ -40,23 +42,23 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Actualite) }
 
     it 'avec une campagne qui a des évaluations' do
-      is_expected.to_not be_able_to(:destroy, campagne_superadmin)
+      expect(subject).not_to be_able_to(:destroy, campagne_superadmin)
     end
 
     it "avec une campagne qui n'a pas d'évaluation" do
-      is_expected.to be_able_to(:destroy, campagne_superadmin_sans_eval)
+      expect(subject).to be_able_to(:destroy, campagne_superadmin_sans_eval)
     end
 
     it 'avec un compte qui est lié à une campagne' do
-      is_expected.to_not be_able_to(:destroy, compte_conseiller)
+      expect(subject).not_to be_able_to(:destroy, compte_conseiller)
     end
 
     it 'avec une situation utilisé dans une campagne' do
-      is_expected.to_not be_able_to(:destroy, situation)
+      expect(subject).not_to be_able_to(:destroy, situation)
     end
 
     it 'avec une situation non utilisé dans des campagne' do
-      is_expected.to be_able_to(:destroy, situation_non_utilisee)
+      expect(subject).to be_able_to(:destroy, situation_non_utilisee)
     end
 
     describe 'Droits des questionnaires' do
@@ -67,19 +69,19 @@ describe Ability do
       context "quand une campagne l'utilise" do
         let!(:campagne) { create :campagne, questionnaire: questionnaire }
 
-        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+        it { is_expected.not_to be_able_to(:destroy, questionnaire) }
       end
 
       context "quand une situation l'utilise comme questionnaire principal" do
         let!(:situation) { create :situation_livraison, questionnaire: questionnaire }
 
-        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+        it { is_expected.not_to be_able_to(:destroy, questionnaire) }
       end
 
       context "quand une situation l'utilise comme questionnaire d'entrainement" do
         let!(:situation) { create :situation_livraison, questionnaire_entrainement: questionnaire }
 
-        it { is_expected.to_not be_able_to(:destroy, questionnaire) }
+        it { is_expected.not_to be_able_to(:destroy, questionnaire) }
       end
     end
 
@@ -91,12 +93,13 @@ describe Ability do
       context "quand un questionnaire l'utilise" do
         let!(:questionnaire) { create :questionnaire, questions: [question] }
 
-        it { is_expected.to_not be_able_to(:destroy, question) }
+        it { is_expected.not_to be_able_to(:destroy, question) }
       end
 
       context 'quand il y a des événements réponses pour cette question' do
         before { create :evenement_reponse, donnees: { question: question.id } }
-        it { is_expected.to_not be_able_to(:destroy, question) }
+
+        it { is_expected.not_to be_able_to(:destroy, question) }
       end
     end
 
@@ -107,17 +110,20 @@ describe Ability do
 
       context 'avec un choix présent dans un événement réponse' do
         before { create :evenement_reponse, donnees: { reponse: choix.id } }
-        it { is_expected.to_not be_able_to(:destroy, choix) }
+
+        it { is_expected.not_to be_able_to(:destroy, choix) }
       end
     end
 
     describe 'Droits des structures' do
       let!(:structure) { create :structure_locale }
+
       it { is_expected.to be_able_to(:destroy, structure) }
 
       context 'avec un compte rattaché' do
         let!(:compte) { create :compte, structure: structure }
-        it { is_expected.to_not be_able_to(:destroy, structure) }
+
+        it { is_expected.not_to be_able_to(:destroy, structure) }
       end
     end
   end
@@ -126,6 +132,7 @@ describe Ability do
     let(:compte) { compte_admin }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
+
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
@@ -137,8 +144,10 @@ describe Ability do
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
+
       context 'quand un compte est admin' do
         before { mon_collegue.update(role: :admin) }
+
         it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
       end
     end
@@ -182,33 +191,35 @@ describe Ability do
     end
 
     it 'avec une campagne qui a des évaluations' do
-      is_expected.to_not be_able_to(:destroy, campagne_conseiller)
+      expect(subject).not_to be_able_to(:destroy, campagne_conseiller)
     end
 
-    it { is_expected.to_not be_able_to(:manage, :all) }
+    it { is_expected.not_to be_able_to(:manage, :all) }
+
     it do
-      is_expected.to be_able_to(:read,
-                                ActiveAdmin::Page,
-                                name: 'Dashboard',
-                                namespace_name: 'admin')
+      expect(subject).to be_able_to(:read,
+                                    ActiveAdmin::Page,
+                                    name: 'Dashboard',
+                                    namespace_name: 'admin')
     end
-    it { is_expected.to_not be_able_to(:manage, Compte.new) }
-    it { is_expected.to_not be_able_to(:manage, Structure.new) }
-    it { is_expected.to_not be_able_to(%i[destroy create update], Situation.new) }
-    it { is_expected.to_not be_able_to(%i[destroy create update], Question.new) }
-    it { is_expected.to_not be_able_to(:manage, Questionnaire.new) }
-    it { is_expected.to_not be_able_to(:manage, Campagne.new) }
-    it { is_expected.to_not be_able_to(:create, evaluation_conseiller) }
-    it { is_expected.to_not be_able_to(:update, evaluation_conseiller) }
-    it { is_expected.to_not be_able_to(%i[read destroy], evaluation_superadmin) }
-    it { is_expected.to_not be_able_to(:read, Evenement.new) }
-    it { is_expected.to_not be_able_to(:read, evenement_superadmin) }
-    it { is_expected.to_not be_able_to(:read, SourceAide.new) }
-    it { is_expected.to_not be_able_to(:read, Aide::QuestionFrequente.new) }
-    it { is_expected.to_not be_able_to(:update, compte.structure) }
+
+    it { is_expected.not_to be_able_to(:manage, Compte.new) }
+    it { is_expected.not_to be_able_to(:manage, Structure.new) }
+    it { is_expected.not_to be_able_to(%i[destroy create update], Situation.new) }
+    it { is_expected.not_to be_able_to(%i[destroy create update], Question.new) }
+    it { is_expected.not_to be_able_to(:manage, Questionnaire.new) }
+    it { is_expected.not_to be_able_to(:manage, Campagne.new) }
+    it { is_expected.not_to be_able_to(:create, evaluation_conseiller) }
+    it { is_expected.not_to be_able_to(:update, evaluation_conseiller) }
+    it { is_expected.not_to be_able_to(%i[read destroy], evaluation_superadmin) }
+    it { is_expected.not_to be_able_to(:read, Evenement.new) }
+    it { is_expected.not_to be_able_to(:read, evenement_superadmin) }
+    it { is_expected.not_to be_able_to(:read, SourceAide.new) }
+    it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente.new) }
+    it { is_expected.not_to be_able_to(:update, compte.structure) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:update, compte) }
-    it { is_expected.to_not be_able_to(:update, create(:compte)) }
+    it { is_expected.not_to be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read destroy], evaluation_conseiller) }
     it { is_expected.to be_able_to(:read, evenement_conseiller) }
@@ -231,7 +242,7 @@ describe Ability do
 
       it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue) }
-      it { is_expected.to_not be_able_to(:destroy, evaluation_collegue) }
+      it { is_expected.not_to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
@@ -275,34 +286,34 @@ describe Ability do
     let!(:autre_evaluation) { create :evaluation, campagne: autre_campagne }
 
     it 'peut créer une campagne' do
-      is_expected.to be_able_to(:create, Campagne.new)
+      expect(subject).to be_able_to(:create, Campagne.new)
     end
 
     it 'peut lire ses campagnes' do
-      is_expected.to be_able_to(:read, ma_campagne)
+      expect(subject).to be_able_to(:read, ma_campagne)
     end
 
     it 'peut consulter son compte' do
-      is_expected.to be_able_to(:read, compte)
+      expect(subject).to be_able_to(:read, compte)
     end
 
     it 'ne peut pas consulter ses collègues' do
-      is_expected.not_to be_able_to(:read, autre_compte)
-      is_expected.not_to be_able_to(:update, autre_compte)
+      expect(subject).not_to be_able_to(:read, autre_compte)
+      expect(subject).not_to be_able_to(:update, autre_compte)
     end
 
     it 'ne peut pas accéder aux campagnes de ses collègues' do
-      is_expected.to_not be_able_to(:read, autre_campagne)
-      is_expected.to_not be_able_to(:destroy, autre_campagne)
+      expect(subject).not_to be_able_to(:read, autre_campagne)
+      expect(subject).not_to be_able_to(:destroy, autre_campagne)
     end
 
     it 'ne peut pas accéder aux évaluations de ses collègues ni les supprimer' do
-      is_expected.to_not be_able_to(:read, autre_evaluation)
-      is_expected.to_not be_able_to(:destroy, autre_evaluation)
+      expect(subject).not_to be_able_to(:read, autre_evaluation)
+      expect(subject).not_to be_able_to(:destroy, autre_evaluation)
     end
 
     it 'ne peut pas consulter la page de la structure' do
-      is_expected.to_not be_able_to(:read, compte.structure)
+      expect(subject).not_to be_able_to(:read, compte.structure)
     end
   end
 
@@ -310,20 +321,20 @@ describe Ability do
     let!(:compte) { create :compte_conseiller, :structure_avec_admin, :refusee }
 
     it 'peut consulter et modifier son compte' do
-      is_expected.to be_able_to(:read, compte)
-      is_expected.to be_able_to(:update, compte)
+      expect(subject).to be_able_to(:read, compte)
+      expect(subject).to be_able_to(:update, compte)
     end
 
     it 'ne peut pas consulter les Campagnes' do
-      is_expected.not_to be_able_to(:read, Campagne)
+      expect(subject).not_to be_able_to(:read, Campagne)
     end
 
     it 'ne peut pas consulter les Actualités' do
-      is_expected.not_to be_able_to(:read, Actualite)
+      expect(subject).not_to be_able_to(:read, Actualite)
     end
 
     it 'ne peut pas consulter les Evaluations' do
-      is_expected.not_to be_able_to(:read, Evaluation)
+      expect(subject).not_to be_able_to(:read, Evaluation)
     end
   end
 end

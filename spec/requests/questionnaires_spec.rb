@@ -12,13 +12,13 @@ describe 'Questionnaires API', type: :request do
       get "/api/questionnaires/#{questionnaire.id}"
 
       expect(response).to be_ok
-      expect(JSON.parse(response.body).size).to eql(2)
+      expect(JSON.parse(response.body).size).to be(2)
     end
 
     it "retourne une 404 lorsque le questionnaire n'existe pas" do
       get '/api/questionnaires/404'
 
-      expect(response).to have_http_status(404)
+      expect(response).to have_http_status(:not_found)
     end
   end
 end

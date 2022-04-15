@@ -4,10 +4,12 @@ require 'rails_helper'
 
 describe 'Admin - Situation', type: :feature do
   before { se_connecter_comme_superadmin }
+
   let!(:tri) { create :situation_tri, libelle: 'Situation Tri' }
 
   describe 'index' do
     before { visit admin_situations_path }
+
     it { expect(page).to have_content 'Situation Tri' }
   end
 

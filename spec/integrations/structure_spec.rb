@@ -6,6 +6,7 @@ describe Structure, type: :integration do
   describe 'scopes' do
     describe '.sans_campagne' do
       let!(:structure) { create :structure_locale }
+
       context 'sans aucune campagne' do
         it { expect(Structure.sans_campagne.count).to eq 1 }
       end
@@ -15,6 +16,7 @@ describe Structure, type: :integration do
           compte = create :compte, structure: structure
           create :campagne, compte: compte
         end
+
         it { expect(Structure.sans_campagne.count).to eq 0 }
       end
     end
@@ -60,7 +62,7 @@ describe Structure, type: :integration do
         cree_evaluations_pour_structure(
           structure_activee,
           nombre_evaluations: 4,
-          created_at: 2.month.ago + 1.day
+          created_at: 2.months.ago + 1.day
         )
         cree_evaluations_pour_structure(
           structure_inactivee,
@@ -88,7 +90,7 @@ describe Structure, type: :integration do
     end
 
     describe '.avec_nombre_evaluations_et_date_derniere_evaluation' do
-      let(:date_creation) { Time.new(2021, 8, 24) }
+      let(:date_creation) { Time.zone.local(2021, 8, 24) }
       let!(:structure_sans_evaluation) { create :structure_locale }
       let!(:structure_avec_evaluation) do
         structure = create :structure

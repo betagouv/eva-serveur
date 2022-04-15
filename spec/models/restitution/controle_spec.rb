@@ -15,6 +15,7 @@ describe Restitution::Controle do
         end
       ]
     end
+
     it { expect(restitution).to be_termine }
   end
 
@@ -25,6 +26,7 @@ describe Restitution::Controle do
         build(:evenement_fin_situation)
       ]
     end
+
     it { expect(restitution).to be_termine }
   end
 
@@ -37,7 +39,8 @@ describe Restitution::Controle do
         end
       ]
     end
-    it { expect(restitution).to_not be_termine }
+
+    it { expect(restitution).not_to be_termine }
   end
 
   context 'compter les pièces bien placées' do

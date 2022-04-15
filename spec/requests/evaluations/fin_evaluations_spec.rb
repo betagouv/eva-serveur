@@ -21,8 +21,8 @@ describe 'Fin Evaluation API', type: :request do
       before { post "/api/evaluations/#{evaluation.id}/fin" }
 
       it do
-        expect(evaluation.reload.terminee_le).to_not eql(nil)
-        expect(response).to have_http_status(200)
+        expect(evaluation.reload.terminee_le).not_to eql(nil)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -30,7 +30,7 @@ describe 'Fin Evaluation API', type: :request do
       before { post '/api/evaluations/id_inconnu/fin' }
 
       it do
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -69,7 +69,7 @@ describe 'Fin Evaluation API', type: :request do
           expect(premiere_competence['description'])
             .to eql(I18n.t("#{Competence::RAPIDITE}.description",
                            scope: 'admin.evaluations.restitution_competence'))
-          expect(premiere_competence['description']).to_not start_with('translation missing')
+          expect(premiere_competence['description']).not_to start_with('translation missing')
         end
 
         it "envoie aussi l'URL du picto des compétences" do

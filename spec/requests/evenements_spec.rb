@@ -36,7 +36,7 @@ describe 'Evenement API', type: :request do
       it 'Crée un événement et une partie' do
         post '/api/evenements', params: payload_valide
 
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
         evenement = Evenement.last
         expect(evenement.date.to_datetime).to eq Time.zone.at(1_551_111_089, 238_000).to_datetime
         expect(evenement.position).to eq 58
@@ -52,7 +52,7 @@ describe 'Evenement API', type: :request do
 
       it 'retourne une 422' do
         expect(response.body).to eq '["Date client doit être rempli(e)"]'
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

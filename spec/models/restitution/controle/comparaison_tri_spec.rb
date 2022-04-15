@@ -6,7 +6,7 @@ describe Restitution::Controle::ComparaisonTri do
   let(:restitution) { double }
   let(:restitution_hors_4_premiers) { double }
 
-  before(:each) do
+  before do
     allow(restitution).to receive(:abandon?).and_return(false)
     allow(restitution).to receive(:evenements).and_return([1, 2, 3, 4])
     allow(restitution).to receive(:enleve_premiers_evenements_pieces)

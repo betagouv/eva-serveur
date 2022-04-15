@@ -14,6 +14,7 @@ describe Restitution::Maintenance::TempsMotsFrancais do
           build(:evenement_demarrage)
         ]
       end
+
       it { expect(metrique_temps_mots_francais).to eq [] }
     end
 
@@ -31,6 +32,7 @@ describe Restitution::Maintenance::TempsMotsFrancais do
                                                date: Time.local(2019, 10, 9, 10, 1, 22, 970_000))
         ]
       end
+
       it { expect(metrique_temps_mots_francais).to eq [0.01, 0.02] }
     end
 
@@ -44,6 +46,7 @@ describe Restitution::Maintenance::TempsMotsFrancais do
                                                date: Time.local(2019, 10, 9, 10, 1, 21, 960_000))
         ]
       end
+
       it { expect(metrique_temps_mots_francais).to eq [] }
     end
   end

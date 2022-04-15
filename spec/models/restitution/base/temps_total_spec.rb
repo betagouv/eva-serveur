@@ -12,7 +12,7 @@ describe Restitution::Base::TempsTotal do
       let(:evenements_entrainement) { [] }
       let(:evenements_situation) { [] }
 
-      it { expect(metrique_temps_total).to eq nil }
+      it { expect(metrique_temps_total).to be_nil }
     end
 
     context 'sans entrainement' do

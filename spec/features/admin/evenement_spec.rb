@@ -35,11 +35,11 @@ describe 'Admin - Evenement', type: :feature do
     expect(page).to have_content 'ouvertureContenant'
     expect(page).to have_content donnees['type']
     expect(page).to have_content partie.session_id
-    expect(page).to_not have_content 'horsCampagne'
+    expect(page).not_to have_content 'horsCampagne'
   end
 
   it 'Empêche le superadmin de créer/modifier un événement' do
-    expect(page).to_not have_content 'Créer'
-    expect(page).to_not have_content 'Modifier'
+    expect(page).not_to have_content 'Créer'
+    expect(page).not_to have_content 'Modifier'
   end
 end

@@ -8,8 +8,9 @@ describe Evenement, type: :model do
   it { is_expected.to validate_presence_of :date }
   it { is_expected.to validate_presence_of :session_id }
   it { is_expected.to allow_value(nil).for :donnees }
+
   it do
-    is_expected.to belong_to(:partie)
+    expect(subject).to belong_to(:partie)
       .with_primary_key(:session_id)
       .with_foreign_key(:session_id)
   end
@@ -17,12 +18,12 @@ describe Evenement, type: :model do
   describe '#fin_situation?' do
     it "retourne true quand le nom de l'évènement est 'finSituation'" do
       evenement = Evenement.new nom: 'finSituation'
-      expect(evenement.fin_situation?).to eq true
+      expect(evenement.fin_situation?).to be true
     end
 
     it "retourne false quand le nom de l'évènement n'est pas 'finSituation'" do
       evenement = Evenement.new nom: 'autre'
-      expect(evenement.fin_situation?).to eq false
+      expect(evenement.fin_situation?).to be false
     end
   end
 end

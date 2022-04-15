@@ -13,7 +13,7 @@ describe StructureLocale, type: :model do
       mission_locale pole_emploi SIAE service_insertion_collectivite CRIA
       organisme_formation orientation_scolaire cap_emploi e2c SMA autre
     ]
-    is_expected.to validate_inclusion_of(:type_structure).in_array(types_structures)
+    expect(subject).to validate_inclusion_of(:type_structure).in_array(types_structures)
   end
 
   it "Le code postal ne peut pas comporter d'espaces" do

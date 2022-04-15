@@ -23,12 +23,12 @@ describe 'Admin - Campagne', type: :feature do
       it do
         expect(page).to have_content 'Amiens 18 juin'
         expect(page).to have_content 'A5RC8'
-        expect(page).to_not have_content 'Rouen 30 mars'
+        expect(page).not_to have_content 'Rouen 30 mars'
       end
 
       it 'ne permet pas de filtrer par compte' do
         within '#filters_sidebar_section' do
-          expect(page).to_not have_content 'Compte'
+          expect(page).not_to have_content 'Compte'
         end
       end
     end
@@ -83,6 +83,7 @@ describe 'Admin - Campagne', type: :feature do
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
+
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'CODESUPERADMIN'
@@ -111,6 +112,7 @@ describe 'Admin - Campagne', type: :feature do
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
         end
+
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
@@ -145,6 +147,7 @@ describe 'Admin - Campagne', type: :feature do
 
       context 'modifie la campagne et ses situations' do
         let!(:situation) { create :situation_inventaire }
+
         before do
           fill_in :campagne_code, with: 'UNC0D3'
           click_on 'Enregistrer'

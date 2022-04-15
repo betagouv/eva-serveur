@@ -4,10 +4,12 @@ require 'rails_helper'
 
 describe 'Admin - Questionnaire', type: :feature do
   before { se_connecter_comme_superadmin }
+
   let!(:questionnaire) { create :questionnaire, libelle: 'Numératie et Litératie' }
 
   describe 'index' do
     before { visit admin_questionnaires_path }
+
     it { expect(page).to have_content 'Numératie et Litératie' }
   end
 

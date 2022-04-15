@@ -23,6 +23,7 @@ describe Restitution::Illettrisme::NombreReponses do
           [build(:evenement_reponse,
                  donnees: { question: question_ccf.id, reponse: choix_ccf.id })]
         end
+
         it { expect(metrique_nombre_reponses_ccf).to eq(1) }
       end
 
@@ -35,6 +36,7 @@ describe Restitution::Illettrisme::NombreReponses do
                   donnees: { question: question_ccf.id, metacompetence: :ccf })
           ]
         end
+
         it { expect(metrique_nombre_reponses_ccf).to eq(0) }
       end
 
@@ -45,6 +47,7 @@ describe Restitution::Illettrisme::NombreReponses do
           [build(:evenement_reponse,
                  donnees: { question: question_numeratie.id, reponse: choix_numeratie.id })]
         end
+
         it { expect(metrique_nombre_reponses_ccf).to eq(0) }
       end
     end
@@ -65,6 +68,7 @@ describe Restitution::Illettrisme::NombreReponses do
         let(:evenements) do
           [build(:evenement_reponse, donnees: { reponse: '5', metacompetence: :ccf })]
         end
+
         it { expect(metrique_nombre_reponses_ccf).to eq(1) }
       end
 
@@ -75,6 +79,7 @@ describe Restitution::Illettrisme::NombreReponses do
            build(:evenement_affichage_question_qcm,
                  donnees: { question: :fin1, metacompetence: :ccf })]
         end
+
         it { expect(metrique_nombre_reponses_ccf).to eq(0) }
       end
     end

@@ -7,10 +7,11 @@ describe 'Evaluation API', type: :request do
     let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
     context 'Création quand une requête est valide' do
-      let(:date) { Time.new(2021, 10, 4) }
+      let(:date) { Time.zone.local(2021, 10, 4) }
       let(:payload_valide_avec_campagne) do
         { nom: 'Roger', code_campagne: 'ETE19', debutee_le: date.iso8601 }
       end
+
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
 
       it do
@@ -19,7 +20,7 @@ describe 'Evaluation API', type: :request do
         expect(evaluation.nom).to eq 'Roger'
         expect(evaluation.debutee_le).to eq date
 
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
         reponse = JSON.parse(response.body)
         expect(reponse['id']).to eq evaluation.id
       end
@@ -27,6 +28,7 @@ describe 'Evaluation API', type: :request do
 
     context 'Quand le code campagne est inconnu' do
       let(:payload_invalide) { { nom: '', code_campagne: 'ETE190' } }
+
       before { post '/api/evaluations', params: payload_invalide }
 
       it 'retourne une 422' do
@@ -34,12 +36,13 @@ describe 'Evaluation API', type: :request do
         expect(json.keys).to eq %w[nom debutee_le campagne code_campagne]
         expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
                                    ['doit être présente'], ['Code inconnu']]
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
     context 'Quand une requête est invalide' do
       let(:payload_invalide) { { nom: '', code_campagne: '' } }
+
       before { post '/api/evaluations', params: payload_invalide }
 
       it 'retourne une 422' do
@@ -47,12 +50,13 @@ describe 'Evaluation API', type: :request do
         expect(json.keys).to eq %w[nom debutee_le campagne]
         expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
                                    ['doit être présente']]
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
     context 'Quand une requête est vide' do
       let(:payload_invalide) { {} }
+
       before { post '/api/evaluations', params: payload_invalide }
 
       it 'retourne une 422' do
@@ -60,17 +64,18 @@ describe 'Evaluation API', type: :request do
         expect(json.keys).to eq %w[nom debutee_le campagne]
         expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
                                    ['doit être présente']]
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe 'PATCH /evaluations/:id' do
     let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
+
     before { patch "/api/evaluations/#{evaluation.id}", params: params }
 
     context 'Met à jour email et téléphone avec une requête valide' do
-      let(:date) { Time.new(2021, 10, 4) }
+      let(:date) { Time.zone.local(2021, 10, 4) }
       let(:params) do
         { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05', terminee_le: date.iso8601 }
       end
@@ -78,7 +83,7 @@ describe 'Evaluation API', type: :request do
       it do
         evaluation.reload
         expect(evaluation.terminee_le).to eq date
-        expect(response).to have_http_status(200)
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -87,7 +92,7 @@ describe 'Evaluation API', type: :request do
 
       it do
         expect(evaluation.reload.nom).to eq 'James'
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

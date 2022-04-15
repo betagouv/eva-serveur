@@ -18,6 +18,8 @@ fr:
           attributes:
             parcours_type:
               blank: 'Vous devez choisir un parcours.'
+            code:
+              invalid: Majuscules et chiffres uniquement
   formtastic:
     actions:
       campagne:

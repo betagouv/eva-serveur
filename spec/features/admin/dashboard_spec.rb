@@ -5,6 +5,7 @@ require 'rails_helper'
 describe 'Dashboard', type: :feature do
   let!(:ma_structure) { create :structure_locale, :avec_admin }
   let!(:compte) { create :compte_superadmin, structure: ma_structure }
+
   before { connecte(compte) }
 
   context 'quand il y a des comptes en attente pour ma structure' do
@@ -66,7 +67,7 @@ describe 'Dashboard', type: :feature do
         let!(:campagne) { create :campagne, compte: compte }
         let!(:evaluation) { create_list :evaluation, 2, campagne: campagne }
 
-        it "n'affiche pas d'encart " do
+        it "n'affiche pas d'encart" do
           visit admin_path
           expect(page).not_to have_content('Bienvenue dans votre espace conseiller !')
           expect(page).not_to have_content('Organisez votre première session puis retrouvez ici ' \
@@ -86,7 +87,9 @@ describe 'Dashboard', type: :feature do
           end
 
           before { compte.validation_en_attente! }
+
           before { visit admin_path }
+
           it do
             expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
             infos_support =

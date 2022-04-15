@@ -16,6 +16,7 @@ describe Restitution::Tri do
         end
       ]
     end
+
     it { expect(restitution).to be_termine }
   end
 
@@ -26,6 +27,7 @@ describe Restitution::Tri do
         build(:evenement_fin_situation)
       ]
     end
+
     it { expect(restitution).to be_termine }
   end
 
@@ -38,7 +40,8 @@ describe Restitution::Tri do
         end
       ]
     end
-    it { expect(restitution).to_not be_termine }
+
+    it { expect(restitution).not_to be_termine }
     it { expect(restitution.nombre_non_triees).to eq(Restitution::Tri::PIECES_TOTAL - 4) }
   end
 

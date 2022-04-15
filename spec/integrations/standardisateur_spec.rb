@@ -52,7 +52,7 @@ describe Restitution::Standardisateur do
     create(:evenement_demarrage, partie: partie1)
   end
 
-  context '#moyennes_metriques' do
+  describe '#moyennes_metriques' do
     context "calcule les moyennes pour l'ensemble des metriques" do
       before { [partie1, partie2, partie3] }
 
@@ -63,6 +63,7 @@ describe Restitution::Standardisateur do
 
     context 'retourne la moyennes figée si elle existe' do
       let(:restitution) { FabriqueRestitution.instancie(partie4) }
+
       before do
         create(:evenement_demarrage, partie: partie4)
       end
@@ -73,7 +74,7 @@ describe Restitution::Standardisateur do
     end
   end
 
-  context '#ecarts_types_metriques' do
+  describe '#ecarts_types_metriques' do
     context "calcule les écarts types pour l'ensemble des metriques" do
       before { [partie1, partie2, partie3] }
 
@@ -83,7 +84,7 @@ describe Restitution::Standardisateur do
     end
   end
 
-  context '#cote_z_metriques' do
+  describe '#cote_z_metriques' do
     context 'calcule le score standardisé (cote_z)' do
       before { [partie1, partie2, partie3] }
 

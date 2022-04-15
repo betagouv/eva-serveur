@@ -40,28 +40,31 @@ describe PriseEnMain do
     context 'quand le compte est nouveau' do
       before { allow(compte).to receive(:nouveau_compte?).and_return(true) }
 
-      it { expect(prise_en_main.terminee?).to eq false }
+      it { expect(prise_en_main.terminee?).to be false }
     end
 
     context "quand il n'y a pas d'évaluation" do
       let(:nombre_evaluations) { 0 }
+
       before { allow(compte).to receive(:nouveau_compte?).and_return(false) }
 
-      it { expect(prise_en_main.terminee?).to eq false }
+      it { expect(prise_en_main.terminee?).to be false }
     end
 
     context 'quand il y a une évaluation' do
       let(:nombre_evaluations) { 1 }
+
       before { allow(compte).to receive(:nouveau_compte?).and_return(false) }
 
-      it { expect(prise_en_main.terminee?).to eq false }
+      it { expect(prise_en_main.terminee?).to be false }
     end
 
     context "quand le compte n'est pas nouveau et qu'il y a deux évaluations" do
       let(:nombre_evaluations) { 2 }
+
       before { allow(compte).to receive(:nouveau_compte?).and_return(false) }
 
-      it { expect(prise_en_main.terminee?).to eq true }
+      it { expect(prise_en_main.terminee?).to be true }
     end
   end
 end

@@ -19,7 +19,7 @@ describe Api::EvenementsController, type: :controller do
         }
 
         post :create, params: params
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

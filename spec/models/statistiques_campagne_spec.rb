@@ -11,9 +11,9 @@ describe StatistiquesCampagne do
     context 'Sans evaluation' do
       it do
         statistiques = described_class.new(campagne)
-        expect(statistiques.temps_min).to eql(nil)
-        expect(statistiques.temps_max).to eql(nil)
-        expect(statistiques.temps_moyen).to eql(nil)
+        expect(statistiques.temps_min).to be_nil
+        expect(statistiques.temps_max).to be_nil
+        expect(statistiques.temps_moyen).to be_nil
       end
     end
 
@@ -30,9 +30,9 @@ describe StatistiquesCampagne do
       context 'sans événements' do
         it do
           statistiques = described_class.new(campagne)
-          expect(statistiques.temps_min).to eql(nil)
-          expect(statistiques.temps_max).to eql(nil)
-          expect(statistiques.temps_moyen).to eql(nil)
+          expect(statistiques.temps_min).to be_nil
+          expect(statistiques.temps_max).to be_nil
+          expect(statistiques.temps_moyen).to be_nil
         end
       end
 

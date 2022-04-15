@@ -28,24 +28,28 @@ describe ImporteurCommentaires do
 
     context 'importe les notes' do
       let(:ligne) { { notes: 'Mes notes', mail: 'mon-conseiller@milo.fr' } }
+
       before { ImporteurCommentaires.importe(ligne, evabot) }
+
       it { expect(ActiveAdmin::Comment.last.body).to eq 'notes : Mes notes' }
     end
 
     context 'ignore les lignes sans aucun commentaire' do
       let(:ligne) { { notes: ' ', utilisation_eva: '', mail: 'mon-conseiller@milo.fr' } }
+
       it do
         expect(logger).to receive(:info).exactly(0).times
         expect { ImporteurCommentaires.importe(ligne, evabot) }
-          .to_not(change { ActiveAdmin::Comment.count })
+          .not_to(change { ActiveAdmin::Comment.count })
       end
     end
 
     context 'ne duplique pas les commentaires pour permettre de réimporter si besoin' do
       before { ImporteurCommentaires.importe(ligne, evabot) }
+
       it do
         expect { ImporteurCommentaires.importe(ligne, evabot) }
-          .to_not(change { ActiveAdmin::Comment.count })
+          .not_to(change { ActiveAdmin::Comment.count })
       end
     end
   end
@@ -57,7 +61,7 @@ describe ImporteurCommentaires do
       expect(logger).to receive(:warn)
         .with('Commentaire ignoré pour le compte inconnu : inconnu@milo.fr,Mon usage,une note')
       expect { ImporteurCommentaires.importe(ligne, evabot) }
-        .to_not(change { ActiveAdmin::Comment.count })
+        .not_to(change { ActiveAdmin::Comment.count })
     end
   end
 end

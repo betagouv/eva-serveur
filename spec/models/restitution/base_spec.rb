@@ -31,7 +31,7 @@ describe Restitution::Base do
       ]
     end
 
-    it { expect(restitution.nombre_rejoue_consigne).to eql(2) }
+    it { expect(restitution.nombre_rejoue_consigne).to be(2) }
   end
 
   context "avec une liste d'au moins un événement" do
@@ -82,7 +82,7 @@ describe Restitution::Base do
         ::Competence::COMPARAISON_TRI => Competence::NIVEAU_4,
         ::Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_4
       )
-      expect(restitution.efficience).to eql(91)
+      expect(restitution.efficience).to be(91)
     end
 
     it 'retourne une efficience indéterminé si une compétences indéterminé' do
@@ -96,13 +96,13 @@ describe Restitution::Base do
 
     it "retourne 0 lorsque rien n'a été mesuré" do
       expect(restitution).to receive(:competences).and_return({})
-      expect(restitution.efficience).to eql(0)
+      expect(restitution.efficience).to be(0)
     end
   end
 
   describe '#score' do
     it 'renvoie nil par défaut' do
-      expect(restitution.score).to eql(nil)
+      expect(restitution.score).to be_nil
     end
   end
 end

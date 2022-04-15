@@ -10,6 +10,7 @@ describe Restitution::Securite::TempsTotalOuvertureZonesDangers do
   describe '#temps_total_ouverture_zones_dangers' do
     context 'sans zone danger ouverte' do
       let(:evenements) { [] }
+
       it { expect(metrique_temps_total_ouverture_zones_dangers).to eq({}) }
     end
 
@@ -22,6 +23,7 @@ describe Restitution::Securite::TempsTotalOuvertureZonesDangers do
                donnees: { danger: 'casque' },
                date: Time.zone.local(2019, 10, 9, 10, 2))]
       end
+
       it { expect(metrique_temps_total_ouverture_zones_dangers).to eq('casque' => 60) }
     end
 
@@ -37,10 +39,12 @@ describe Restitution::Securite::TempsTotalOuvertureZonesDangers do
          build(:evenement_qualification_danger,
                donnees: { danger: 'camion' }, date: Time.zone.local(2019, 10, 9, 10, 6))]
       end
+
       it 'calcule les temps de chaque zone' do
         temps = metrique_temps_total_ouverture_zones_dangers
         expect(temps).to eq('casque' => 60, 'camion' => 120)
       end
+
       it 'retournes les zones par ordre alphabétique' do
         temps = metrique_temps_total_ouverture_zones_dangers
         expect(temps.keys).to eq(%w[camion casque])

@@ -14,6 +14,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
           build(:evenement_demarrage)
         ]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 0 }
     end
 
@@ -24,6 +25,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
           build(:evenement_identification_mot, :pas_français_bien_identifie)
         ]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 1 }
     end
 
@@ -34,6 +36,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
           build(:evenement_identification_mot, :pas_français_mal_identifie)
         ]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 0 }
     end
 
@@ -44,6 +47,7 @@ describe Restitution::Maintenance::NombreBonnesReponsesNonMot do
           build(:evenement_identification_mot, donnees: { type: 'neutre', reponse: 'francais' })
         ]
       end
+
       it { expect(metrique_nombre_bonnes_reponses_non_mot).to eq 0 }
     end
   end

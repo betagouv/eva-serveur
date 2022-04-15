@@ -9,7 +9,7 @@ describe ParcoursType, type: :model do
   it { is_expected.to validate_uniqueness_of :nom_technique }
 
   it do
-    is_expected
+    expect(subject)
       .to have_many(:situations_configurations).order(position: :asc).dependent(:destroy)
   end
 end

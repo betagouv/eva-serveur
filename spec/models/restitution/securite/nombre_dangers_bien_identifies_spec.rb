@@ -10,6 +10,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
   describe '#nombre_dangers_bien_identifies' do
     context 'sans évenement' do
       let(:evenements) { [] }
+
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 0 }
     end
 
@@ -18,6 +19,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'oui', danger: 'danger' })]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 1 }
     end
 
@@ -26,6 +28,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'non' })]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 0 }
     end
 
@@ -34,6 +37,7 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
         [build(:evenement_demarrage),
          build(:evenement_identification_danger, donnees: { reponse: 'oui' })]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 0 }
     end
   end

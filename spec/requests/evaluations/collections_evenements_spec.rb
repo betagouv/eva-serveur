@@ -44,7 +44,7 @@ describe 'API Collections Evenements', type: :request do
       it do
         post '/api/evaluations/evaluation_inconnue/collections_evenements',
              params: donnees_evenements
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
@@ -54,7 +54,7 @@ describe 'API Collections Evenements', type: :request do
       it do
         post "/api/evaluations/#{evaluation.id}/collections_evenements",
              params: donnees_evenements
-        expect(response).to have_http_status(201)
+        expect(response).to have_http_status(:created)
       end
     end
   end

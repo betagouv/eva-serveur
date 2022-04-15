@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Structure administrative', type: :feature do
   before { se_connecter_comme_superadmin }
+
   let!(:structure) { create :structure_administrative, :avec_admin, nom: 'Ma structure' }
 
   describe 'index' do
@@ -16,6 +17,7 @@ describe 'Admin - Structure administrative', type: :feature do
     let!(:compte) do
       create :compte, structure: structure, statut_validation: :en_attente, role: :conseiller
     end
+
     before { visit admin_structure_administrative_path(structure) }
 
     describe 'Ma structure' do
@@ -30,12 +32,12 @@ describe 'Admin - Structure administrative', type: :feature do
     describe 'Mes collègues' do
       it 'autorise un compte' do
         click_on 'Autoriser'
-        expect(compte.reload.validation_acceptee?).to eq true
+        expect(compte.reload.validation_acceptee?).to be true
       end
 
       it 'refuse un compte' do
         click_on 'Refuser'
-        expect(compte.reload.validation_refusee?).to eq true
+        expect(compte.reload.validation_refusee?).to be true
       end
     end
   end

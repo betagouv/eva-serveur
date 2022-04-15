@@ -28,9 +28,9 @@ describe Restitution::Inventaire do
                 })
         ]
         restitution = described_class.new(campagne, evenements, 5.minutes.ago)
-        expect(restitution.nombre_erreurs).to eql(0)
-        expect(restitution.nombre_de_non_remplissage).to eql(0)
-        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
+        expect(restitution.nombre_erreurs).to be(0)
+        expect(restitution.nombre_de_non_remplissage).to be(0)
+        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to be(0)
       end
 
       it 'avec 2 erreurs' do
@@ -45,9 +45,9 @@ describe Restitution::Inventaire do
                 })
         ]
         restitution = described_class.new(campagne, evenements, 5.minutes.ago)
-        expect(restitution.nombre_erreurs).to eql(2)
-        expect(restitution.nombre_de_non_remplissage).to eql(0)
-        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(2)
+        expect(restitution.nombre_erreurs).to be(2)
+        expect(restitution.nombre_de_non_remplissage).to be(0)
+        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to be(2)
       end
 
       it "avec le dernier événement qui n'est pas une saisie d'inventaire" do
@@ -72,9 +72,9 @@ describe Restitution::Inventaire do
                 })
         ]
         restitution = described_class.new(campagne, evenements, 5.minutes.ago)
-        expect(restitution.nombre_erreurs).to eql(1)
-        expect(restitution.nombre_de_non_remplissage).to eql(1)
-        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to eql(0)
+        expect(restitution.nombre_erreurs).to be(1)
+        expect(restitution.nombre_de_non_remplissage).to be(1)
+        expect(restitution.nombre_erreurs_sauf_de_non_remplissage).to be(0)
       end
     end
   end
@@ -88,8 +88,8 @@ describe Restitution::Inventaire do
     restitution = described_class.new(campagne, evenements)
     expect(restitution).to be_reussite
     expect(restitution).to be_termine
-    expect(restitution).to_not be_abandon
-    expect(restitution).to_not be_en_cours
+    expect(restitution).not_to be_abandon
+    expect(restitution).not_to be_en_cours
   end
 
   it 'est terminé' do
@@ -108,9 +108,9 @@ describe Restitution::Inventaire do
       build(:evenement_abandon)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution).to_not be_termine
+    expect(restitution).not_to be_termine
     expect(restitution).to be_abandon
-    expect(restitution).to_not be_en_cours
+    expect(restitution).not_to be_en_cours
   end
 
   it 'est en cours' do
@@ -118,8 +118,8 @@ describe Restitution::Inventaire do
       build(:evenement_demarrage)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution).to_not be_termine
-    expect(restitution).to_not be_abandon
+    expect(restitution).not_to be_termine
+    expect(restitution).not_to be_abandon
     expect(restitution).to be_en_cours
   end
 
@@ -139,7 +139,7 @@ describe Restitution::Inventaire do
       build(:evenement_ouverture_contenant)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution.nombre_ouverture_contenant).to eql(3)
+    expect(restitution.nombre_ouverture_contenant).to be(3)
   end
 
   it "retourne le nombre d'essai de validation" do
@@ -150,7 +150,7 @@ describe Restitution::Inventaire do
       build(:evenement_saisie_inventaire, :ok)
     ]
     restitution = described_class.new(campagne, evenements)
-    expect(restitution.nombre_essais_validation).to eql(4)
+    expect(restitution.nombre_essais_validation).to be(4)
   end
 
   describe '#essais_verifies' do
@@ -165,18 +165,18 @@ describe Restitution::Inventaire do
         build(:evenement_fin_situation)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.essais_verifies.size).to eql(2)
+      expect(restitution.essais_verifies.size).to be(2)
       restitution.essais_verifies.first.tap do |essai|
-        expect(essai).to_not be_reussite
-        expect(essai).to_not be_abandon
+        expect(essai).not_to be_reussite
+        expect(essai).not_to be_abandon
         expect(essai).to be_verifie
-        expect(essai.nombre_ouverture_contenant).to eql(3)
+        expect(essai.nombre_ouverture_contenant).to be(3)
         expect(essai.temps_total).to within(0.1).of(180)
       end
       restitution.essais_verifies.last.tap do |essai|
         expect(essai).to be_reussite
         expect(essai).to be_verifie
-        expect(essai.nombre_ouverture_contenant).to eql(0)
+        expect(essai.nombre_ouverture_contenant).to be(0)
         expect(essai.temps_total).to within(0.1).of(300)
       end
     end
@@ -191,7 +191,7 @@ describe Restitution::Inventaire do
         build(:evenement_ouverture_contenant, date: 4.minutes.ago)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.essais_verifies.size).to eql(2)
+      expect(restitution.essais_verifies.size).to be(2)
     end
   end
 
@@ -206,8 +206,8 @@ describe Restitution::Inventaire do
         build(:evenement_ouverture_contenant, date: 4.minutes.ago)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.essais.size).to eql(3)
-      expect(restitution.essais.last).to_not be_verifie
+      expect(restitution.essais.size).to be(3)
+      expect(restitution.essais.last).not_to be_verifie
     end
 
     it "ne retourne pas d'essai pour l'événement de fin situation" do
@@ -218,7 +218,7 @@ describe Restitution::Inventaire do
         build(:evenement_fin_situation)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.essais.size).to eql(1)
+      expect(restitution.essais.size).to be(1)
     end
   end
 

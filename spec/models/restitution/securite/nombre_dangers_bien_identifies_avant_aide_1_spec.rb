@@ -10,6 +10,7 @@ describe Restitution::Securite::NombreDangersBienIdentifiesAvantAide1 do
   describe '#nombre_dangers_bien_identifies_avant_aide1' do
     context 'sans évenement' do
       let(:evenements) { [] }
+
       it { expect(metrique_nombre_dangers_bien_identifies_avant_aide1).to eq 0 }
     end
 
@@ -27,6 +28,7 @@ describe Restitution::Securite::NombreDangersBienIdentifiesAvantAide1 do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies_avant_aide1).to eq 2 }
     end
 
@@ -38,6 +40,7 @@ describe Restitution::Securite::NombreDangersBienIdentifiesAvantAide1 do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies_avant_aide1).to eq 0 }
     end
 
@@ -48,6 +51,7 @@ describe Restitution::Securite::NombreDangersBienIdentifiesAvantAide1 do
                donnees: { reponse: 'oui', danger: 'danger' },
                date: 2.minutes.from_now)]
       end
+
       it { expect(metrique_nombre_dangers_bien_identifies_avant_aide1).to eq 1 }
     end
   end

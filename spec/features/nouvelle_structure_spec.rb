@@ -36,9 +36,9 @@ describe 'Nouvelle Structure', type: :feature do
       expect(structure.code_postal).to eq('06000')
 
       expect(compte.structure_id).to eq(structure.id)
-      expect(compte.validation_acceptee?).to eq(true)
+      expect(compte.validation_acceptee?).to be(true)
 
-      expect(current_path).to eq(admin_dashboard_path)
+      expect(page).to have_current_path(admin_dashboard_path, ignore_query: true)
       expect(page).to have_content 'Bienvenue ! Vous vous êtes bien enregistré(e).'
     end
   end

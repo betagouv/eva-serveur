@@ -93,7 +93,7 @@ describe Compte, type: :integration do
       let!(:autre_admin) { create :compte_admin, structure: autre_structure }
 
       it "trouve les admins d'un compte" do
-        expect(compte.find_admins.count).to eql(3)
+        expect(compte.find_admins.count).to be(3)
       end
     end
   end

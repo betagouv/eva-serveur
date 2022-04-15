@@ -19,6 +19,7 @@ describe Campagne, type: :model do
     let!(:situation) { create :situation }
     let!(:questionnaire) { create :questionnaire }
     let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
+
     before do
       allow(compte).to receive(:valid?).and_return true
       situations.each do |nom_situation|
@@ -61,13 +62,16 @@ describe Campagne, type: :model do
 
     context 'sans configuration pour la situation' do
       before { bouchonne_config_situation(nil) }
+
       it { expect(campagne.questionnaire_pour(situation)).to be_nil }
     end
 
     context 'avec configuration pour la situation' do
       let(:questionnaire) { double }
       let(:situation_configuration) { double(questionnaire_utile: questionnaire) }
+
       before { bouchonne_config_situation(situation_configuration) }
+
       it { expect(campagne.questionnaire_pour(situation)).to eq questionnaire }
     end
   end

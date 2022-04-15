@@ -34,7 +34,7 @@ describe Restitution::Livraison, type: :integration do
     end
 
     it do
-      expect(restitution1.score_numeratie).to_not eq(restitution2.score_numeratie)
+      expect(restitution1.score_numeratie).not_to eq(restitution2.score_numeratie)
     end
   end
 end

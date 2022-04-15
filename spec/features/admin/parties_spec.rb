@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Parties', type: :feature do
   before { se_connecter_comme_superadmin }
+
   let!(:situation) { create :situation }
   let!(:autre_situation) { create :situation_inventaire }
 

@@ -173,32 +173,4 @@ namespace :nettoyage do
       print '.'
     end
   end
-
-  desc 'supprime les doublons'
-  task supprime_doublons_evenements: :environment do
-    logger = RakeLogger.logger
-
-    evenements_en_double = Evenement.find_by_sql('select "session_id", "position"
-from (select
-        "session_id", "position",
-        count(*) "evenementsParGroup"
-    from evenements
-    WHERE "evenements"."position" IS not NULL
-    group by "session_id", "position"
-    ) as "evenements_groupes"
-where "evenementsParGroup" > 1')
-
-    nombre_evenements = evenements_en_double.size
-    logger.info "Nombre d'événements en double : #{nombre_evenements}"
-
-    evenements_en_double.each do |evenement|
-      doubles = Evenement.where(session_id: evenement.session_id,
-                                position: evenement.position)
-      first_id = doubles.first.id
-      doubles.where.not(id: first_id).destroy_all
-
-      nombre_evenements -= 1
-      logger.info "Il reste #{nombre_evenements} événements en double"
-    end
-  end
 end

@@ -30,7 +30,8 @@ div class: 'row' do
 
         div class: 'conteneur-action' do
           link_to 'Démarrer une évaluation', url_campagne(campagne.code), target: '_blank',
-                                                                          class: 'bouton-jouer'
+                                                                          class: 'bouton-jouer',
+                                                                          rel: 'noopener'
         end
       end
     end

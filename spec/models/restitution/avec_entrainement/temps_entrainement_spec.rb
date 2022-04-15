@@ -11,7 +11,7 @@ describe Restitution::AvecEntrainement::TempsEntrainement do
     context 'sans entrainement' do
       let(:evenements) { [] }
 
-      it { expect(metrique_temps_entrainement).to eq nil }
+      it { expect(metrique_temps_entrainement).to be_nil }
     end
 
     context 'avec un seul événement' do

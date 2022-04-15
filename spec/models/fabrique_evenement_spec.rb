@@ -38,6 +38,7 @@ describe FabriqueEvenement do
 
     context "quand l'évènement est une fin de situation" do
       let(:nom_evenement) { 'finSituation' }
+
       it 'programme un job pour assigner les métriques à la partie' do
         expect do
           FabriqueEvenement.new(parametres).call
@@ -47,6 +48,7 @@ describe FabriqueEvenement do
 
     context "Quand l'évènement n'est pas une fin de situation" do
       let(:nom_evenement) { 'autre' }
+
       it 'ne programme pas de job pour assigner les métriques à la partie' do
         expect do
           FabriqueEvenement.new(parametres).call

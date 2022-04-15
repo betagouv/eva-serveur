@@ -109,6 +109,7 @@ describe 'Admin - Compte', type: :feature do
 
     describe 'mettre à jour sans mot de passe' do
       let!(:compte) { create :compte, prenom: 'John' }
+
       it do
         visit edit_admin_compte_path(compte)
         fill_in :compte_prenom, with: 'David'
@@ -194,14 +195,14 @@ describe 'Admin - Compte', type: :feature do
         visit new_admin_compte_path
         click_on 'Annuler'
 
-        expect(current_path).to eq(admin_comptes_path)
+        expect(page).to have_current_path(admin_comptes_path, ignore_query: true)
       end
 
       it 'annule une modification' do
         visit edit_admin_compte_path(compte_connecte)
         click_on 'Annuler'
 
-        expect(current_path).to eq(admin_compte_path(compte_connecte))
+        expect(page).to have_current_path(admin_compte_path(compte_connecte), ignore_query: true)
       end
     end
   end
@@ -222,7 +223,7 @@ describe 'Admin - Compte', type: :feature do
       it do
         expect(page).to have_content 'compte.conseiller@gmail.com'
         expect(page).to have_content 'collegue@structure'
-        expect(page).to_not have_content 'inconnu@structure'
+        expect(page).not_to have_content 'inconnu@structure'
       end
     end
 

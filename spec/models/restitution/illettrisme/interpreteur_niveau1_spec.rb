@@ -50,7 +50,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier3 }, { numeratie: :palier3 }
                       ])
       end
-      it { expect(subject.socle_clea?).to eq(true) }
+
+      it { expect(subject.socle_clea?).to be(true) }
     end
 
     context 'Socle Cléa Atteint non atteint, litteratie insufisante' do
@@ -60,7 +61,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier2 }, { numeratie: :palier3 }
                       ])
       end
-      it { expect(subject.socle_clea?).to eq(false) }
+
+      it { expect(subject.socle_clea?).to be(false) }
     end
 
     context 'Socle Cléa Atteint non atteint, numeratie insufisante' do
@@ -70,7 +72,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier3 }, { numeratie: :palier2 }
                       ])
       end
-      it { expect(subject.socle_clea?).to eq(false) }
+
+      it { expect(subject.socle_clea?).to be(false) }
     end
   end
 
@@ -82,8 +85,9 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier1 }, { numeratie: :palier1 }
                       ])
       end
+
       it do
-        expect(subject.illettrisme_potentiel?).to eq(false)
+        expect(subject.illettrisme_potentiel?).to be(false)
       end
     end
 
@@ -94,7 +98,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier0 }, { numeratie: :palier1 }
                       ])
       end
-      it { expect(subject.illettrisme_potentiel?).to eq(true) }
+
+      it { expect(subject.illettrisme_potentiel?).to be(true) }
     end
 
     context 'à cause de la numératie' do
@@ -104,7 +109,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
                         { litteratie: :palier1 }, { numeratie: :palier0 }
                       ])
       end
-      it { expect(subject.illettrisme_potentiel?).to eq(true) }
+
+      it { expect(subject.illettrisme_potentiel?).to be(true) }
     end
   end
 
@@ -115,7 +121,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
           .and_return([{ litteratie: :palier1 }, { numeratie: nil }])
       end
 
-      it { expect(subject.evaluation_vide?).to eq(false) }
+      it { expect(subject.evaluation_vide?).to be(false) }
     end
 
     context 'numératie est présente' do
@@ -124,7 +130,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
           .and_return([{ litteratie: nil }, { numeratie: :palier1 }])
       end
 
-      it { expect(subject.evaluation_vide?).to eq(false) }
+      it { expect(subject.evaluation_vide?).to be(false) }
     end
 
     context 'evaluation vide' do
@@ -132,7 +138,8 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         allow(interpreteur_score).to receive(:interpretations)
           .and_return([{ litteratie: nil }, { numeratie: nil }])
       end
-      it { expect(subject.evaluation_vide?).to eq(true) }
+
+      it { expect(subject.evaluation_vide?).to be(true) }
     end
   end
 
@@ -169,7 +176,7 @@ describe Restitution::Illettrisme::InterpreteurNiveau1 do
         allow(subject).to receive(:evaluation_vide?).and_return(true)
       end
 
-      it { expect(subject.synthese).to eq nil }
+      it { expect(subject.synthese).to be_nil }
     end
   end
 end

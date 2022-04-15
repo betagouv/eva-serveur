@@ -11,7 +11,7 @@ describe StatistiquesEvaluation do
     context 'avec une date de fin' do
       it do
         evaluation.terminee_le = Time.zone.local(2021, 1, 1, 8, 4)
-        expect(described_class.new(evaluation).temps_total).to eql(120.0)
+        expect(described_class.new(evaluation).temps_total).to be(120.0)
       end
     end
 
@@ -24,13 +24,13 @@ describe StatistiquesEvaluation do
                                          date: Time.zone.local(2021, 1, 1, 8, 4)
       end
 
-      it { expect(described_class.new(evaluation).temps_total).to eql(120.0) }
+      it { expect(described_class.new(evaluation).temps_total).to be(120.0) }
     end
 
     context 'sans événements' do
       it do
         statistiques = described_class.new(evaluation)
-        expect(statistiques.temps_total).to eql(nil)
+        expect(statistiques.temps_total).to be_nil
       end
     end
   end

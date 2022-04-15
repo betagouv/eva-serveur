@@ -15,6 +15,7 @@ describe Restitution::Securite::NombreReouvertureZonesSansDanger do
           build(:evenement_ouverture_zone, donnees: { zone: 'zone1' })
         ]
       end
+
       it { expect(metrique_nombre_reouverture_zones_sans_danger).to eq 0 }
     end
 

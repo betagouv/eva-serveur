@@ -10,7 +10,7 @@ describe 'nettoyage:supprime_controle_campagne' do
 
     it do
       subject.invoke
-      expect(campagne.situations_configurations.count).to eql(0)
+      expect(campagne.situations_configurations.count).to be(0)
     end
   end
 
@@ -26,7 +26,7 @@ describe 'nettoyage:supprime_controle_campagne' do
 
     it do
       subject.invoke
-      expect(campagne.reload.situations_configurations.count).to eql(1)
+      expect(campagne.reload.situations_configurations.count).to be(1)
       expect(campagne.reload.situations_configurations[0].nom_technique).to eql('inventaire')
     end
   end
@@ -39,7 +39,7 @@ describe 'nettoyage:supprime_controle_campagne' do
 
     it do
       subject.invoke
-      expect(campagne.reload.situations_configurations.count).to eql(1)
+      expect(campagne.reload.situations_configurations.count).to be(1)
     end
   end
 end

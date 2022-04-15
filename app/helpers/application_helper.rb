@@ -26,10 +26,10 @@ module ApplicationHelper
   def md(contenu)
     return '' if contenu.nil?
 
-    @markdown ||= Redcarpet::Markdown.new(
+    markdown ||= Redcarpet::Markdown.new(
       Redcarpet::Render::HTML.new(hard_wrap: true)
     )
-    @markdown.render(contenu).html_safe
+    markdown.render(contenu).html_safe
   end
 
   def svg_tag_base64(path, options = {})

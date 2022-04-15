@@ -5,7 +5,9 @@ require 'generateur_aleatoire'
 class Campagne < ApplicationRecord
   SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
 
-  has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
+  has_many :situations_configurations, lambda {
+                                         order(position: :asc)
+                                       }, dependent: :destroy
   belongs_to :questionnaire, optional: true
   belongs_to :compte
   belongs_to :parcours_type, optional: true
@@ -13,7 +15,7 @@ class Campagne < ApplicationRecord
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: { case_sensitive: false },
-                   format: { with: /\A[A-Z0-9]+\z/, message: 'Majuscules et chiffres uniquement' }
+                   format: { with: /\A[A-Z0-9]+\z/ }
 
   delegate :structure_code_postal, to: :compte
 
@@ -62,7 +64,7 @@ class Campagne < ApplicationRecord
   def initialise_situations_optionnelles
     return if situations_optionnelles.blank?
 
-    situations_optionnelles.reject(&:blank?).each do |situation_optionnelle|
+    situations_optionnelles.compact_blank.each do |situation_optionnelle|
       situation = Situation.find_by nom_technique: situation_optionnelle
       next if situation.blank?
 

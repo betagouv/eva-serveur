@@ -3,13 +3,12 @@
 require 'rake_logger'
 
 namespace :evaluations do
-  desc 'calcule les restitutions pour les évaluations sans donnée'
+  desc "calcule les restitutions pour l'ensemble des évaluations"
   task calcule_restitution: :environment do
-    evaluations = Evaluation.where.not(terminee_le: nil)
     logger = RakeLogger.logger
-    nombre_eval = evaluations.count
+    nombre_eval = Evaluation.count
     logger.info "Nombre d'évaluation : #{nombre_eval}"
-    evaluations.find_each do |evaluation|
+    Evaluation.find_each do |evaluation|
       restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
       restitution_globale.persiste
       nombre_eval -= 1

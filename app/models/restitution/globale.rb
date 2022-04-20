@@ -33,6 +33,17 @@ module Restitution
       evaluation.campagne.compte.structure&.nom
     end
 
+    def terminee?
+      situation_ids = SituationConfiguration.where(campagne_id: evaluation.campagne_id)
+                                            .pluck(:situation_id)
+
+      situation_ids.all? do |situation_id|
+        restitutions.select do |restitution|
+          restitution.situation.id == situation_id
+        end.any?(&:termine?)
+      end
+    end
+
     def scores_niveau2
       @scores_niveau2 ||= Restitution::ScoresNiveau2.new(restitutions.map(&:partie))
     end

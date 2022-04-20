@@ -18,7 +18,7 @@ module Restitution
     end
 
     def persiste
-      @evaluation.update interpretations
+      @evaluation.update interpretations.merge(terminee: terminee?)
     end
 
     def utilisateur

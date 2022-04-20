@@ -304,4 +304,19 @@ describe Restitution::Globale do
       it { expect(restitution_globale.terminee?).to eq false }
     end
   end
+
+  describe '#persiste' do
+    let(:restitutions) { [] }
+    let(:interpretations) { { synthese_competences_de_base: 'illetrisme_potentiel' } }
+
+    before do
+      allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
+      allow(restitution_globale).to receive(:terminee?).and_return(true)
+    end
+
+    it do
+      expect(evaluation).to receive(:update).with(interpretations.merge(terminee: true))
+      restitution_globale.persiste
+    end
+  end
 end

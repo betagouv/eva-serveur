@@ -5,7 +5,6 @@ module Restitution
     attr_reader :evaluation, :restitutions
 
     NIVEAU_INDETERMINE = :indetermine
-    RESTITUTION_SANS_EFFICIENCE = Restitution::Questions
 
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau2_standardises, prefix: :niveau2
@@ -90,18 +89,6 @@ module Restitution
         niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
         niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie]
       }
-    end
-
-    def efficience
-      restitutions_selectionnee = restitutions.reject do |restitution|
-        restitution.is_a? RESTITUTION_SANS_EFFICIENCE
-      end
-      return 0 if restitutions_selectionnee.blank?
-
-      efficiences = restitutions_selectionnee.collect(&:efficience).compact
-      return NIVEAU_INDETERMINE if efficiences.include?(NIVEAU_INDETERMINE) || efficiences.blank?
-
-      efficiences.inject(0.0) { |somme, efficience| somme + efficience } / efficiences.size
     end
 
     def interpretations_competences_transversales

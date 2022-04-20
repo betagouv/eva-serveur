@@ -35,6 +35,7 @@ ActiveAdmin.register Evaluation do
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
     column('Date') { |evaluation| l(evaluation.created_at, format: :court) }
     column :nom
+    column('passation completée') { |evaluation| t(evaluation.terminee, scope: 'boolean.oui_non') }
     column('Niveau global') do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)
     end

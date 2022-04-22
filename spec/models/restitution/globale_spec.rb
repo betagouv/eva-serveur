@@ -249,7 +249,7 @@ describe Restitution::Globale do
     end
 
     it do
-      expect(evaluation).to receive(:update).with(interpretations.merge(terminee: true))
+      expect(evaluation).to receive(:update).with(interpretations.merge(complete: true))
       restitution_globale.persiste
     end
   end

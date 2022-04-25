@@ -65,15 +65,25 @@ describe Restitution::Globale do
   end
 
   describe 'calcul des scores' do
+    let(:score_ccf1) { 0 } # (0.28 - 0.28) / 0.09 }
+    let(:score_ccf2) { (0 - 0.28) / 0.09 }
+    let(:score_ccf3) { (0.44 - 0.28) / 0.09 }
+
+    let(:score_ccf_niveau2) { -0.44 } # moyenne des 3 scores
+    let(:score_memorisation_niveau2) { 1.0 } # (0.33 - 0.22) / 0.11
+
+    let(:score_ccf_niveau_2_standardise) { -0.99 } # (score_ccf_niveau2 - 0.16) / 0.61
+    let(:score_memorisation_niveau_2_standardise) { 0.83 } # (1 - 0.23) / 0.93
+
     context 'de niveau 2' do
       it do
         expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2))
-          .to eql(-2.36)
+          .to eql(score_ccf_niveau2)
       end
 
       it do
         expect(restitution_evaluation1.scores_niveau2_standardises.calcule[:score_ccf].round(2))
-          .to eql(-4.13)
+          .to eql(score_ccf_niveau_2_standardise)
       end
 
       it do
@@ -83,20 +93,23 @@ describe Restitution::Globale do
 
       it do
         expect(restitution_evaluation1.scores_niveau2
-          .calcule[:score_memorisation].round(2)).to be(-0.26)
+          .calcule[:score_memorisation].round(2)).to eql(score_memorisation_niveau2)
       end
 
       it do
         expect(restitution_evaluation1.scores_niveau2_standardises
           .calcule[:score_memorisation].round(2))
-          .to eql(-0.53)
+          .to eql(score_memorisation_niveau_2_standardise)
       end
     end
 
     context 'de niveau 1' do
+      let(:score_litteratie) { -0.08 } # moyenne des scores standardisés niveau 2
+      let(:score_litteratie_standardise) { -0.37 } # (-0.08 - 0.16) / 0.65
+
       it do
         expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
-          .to eql(-2.33)
+          .to eql(score_litteratie)
       end
 
       it do
@@ -107,7 +120,7 @@ describe Restitution::Globale do
       it do
         expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie]
                                                                   .round(2))
-          .to eql(-3.83)
+          .to eql(score_litteratie_standardise)
       end
     end
   end

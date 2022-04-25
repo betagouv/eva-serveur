@@ -73,7 +73,7 @@ describe Restitution::Globale do
 
       it do
         expect(restitution_evaluation1.scores_niveau2_standardises.calcule[:score_ccf].round(2))
-          .to be(-1.13)
+          .to eql(-4.12)
       end
 
       it do
@@ -89,14 +89,14 @@ describe Restitution::Globale do
       it do
         expect(restitution_evaluation1.scores_niveau2_standardises
           .calcule[:score_memorisation].round(2))
-          .to be(-0.26)
+          .to eql(-0.52)
       end
     end
 
     context 'de niveau 1' do
       it do
         expect(restitution_evaluation1.scores_niveau1.calcule[:litteratie].round(2))
-          .to be(-0.95)
+          .to eql(-3.4)
       end
 
       it do
@@ -107,7 +107,7 @@ describe Restitution::Globale do
       it do
         expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie]
                                                                   .round(2))
-          .to be(-0.94)
+          .to eql(-5.47)
       end
     end
   end

@@ -20,12 +20,12 @@ module Restitution
         temps_moyen_recherche_zones_dangers: { average: 17.83, stddev_pop: 9.46 }
       },
       plus_haut_niveau: {
-        score_ccf: { average: 0.03, stddev_pop: 2.11 },
-        score_syntaxe_orthographe: { average: 0.0, stddev_pop: 1.0 },
-        score_memorisation: { average: 0.0, stddev_pop: 1.0 },
-        score_numeratie: { average: -0.02, stddev_pop: 0.91 },
-        litteratie: { average: 0.01, stddev_pop: 1.03 },
-        numeratie: { average: 0.0, stddev_pop: 0.96 }
+        score_ccf: { average: 0.16, stddev_pop: 0.61 },
+        score_syntaxe_orthographe: { average: 0.09, stddev_pop: 0.83 },
+        score_memorisation: { average: 0.23, stddev_pop: 0.93 },
+        score_numeratie: { average: 0, stddev_pop: 1 },
+        litteratie: { average: 0.16, stddev_pop: 0.65 },
+        numeratie: { average: 0, stddev_pop: 1 }
       }
     }.freeze
 

@@ -2,12 +2,7 @@
 
 module Restitution
   class ScoresNiveau1
-    POIDS_METACOMPETENCES_LITTERATIE = {
-      score_ccf: 1,
-      score_syntaxe_orthographe: 1,
-      score_memorisation: 0.25
-    }.freeze
-    METACOMPETENCES_LITTERATIE = POIDS_METACOMPETENCES_LITTERATIE.keys
+    METACOMPETENCES_LITTERATIE = %i[score_ccf score_syntaxe_orthographe score_memorisation].freeze
     METACOMPETENCES_NUMERATIE = %i[score_numeratie].freeze
     METRIQUES_NIVEAU1 = %i[litteratie numeratie].freeze
 
@@ -31,17 +26,11 @@ module Restitution
     end
 
     def calcule_litteratie
-      poids_total = 0
-      sommes_scores = 0
-      @scores_niveau2_standardises.calcule.each do |(metrique, score)|
-        next unless POIDS_METACOMPETENCES_LITTERATIE.keys.include?(metrique) &&
-                    score.present?
-
-        poids = POIDS_METACOMPETENCES_LITTERATIE[metrique]
-        sommes_scores += score * poids
-        poids_total += poids
-      end
-      sommes_scores.fdiv(poids_total) unless poids_total.zero?
+      scores_litteratie =
+        @scores_niveau2_standardises.calcule.each_with_object([]) do |(metrique, score), memo|
+          memo << score if METACOMPETENCES_LITTERATIE.include?(metrique)
+        end
+      DescriptiveStatistics.mean(scores_litteratie.compact)
     end
   end
 end

@@ -6,50 +6,38 @@ describe Restitution::Illettrisme::InterpreteurScores do
   let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
 
   context 'pour des compétences de niveau 2' do
-    let(:competences) { %i[score_ccf] }
+    let(:competences) { %i[score_ccf score_memorisation] }
 
-    context 'sans score à interpreter' do
+    context 'pas de score à interpreter' do
       let(:scores_standardises) { {} }
 
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: nil }])
+          .to eq([{ score_ccf: nil }, { score_memorisation: nil }])
       end
     end
 
-    context 'au palier 0' do
-      let(:scores_standardises) { { score_ccf: -1.41 } }
-
+    context 'competence <= à -1' do
+      let(:scores_standardises) { { score_ccf: -1, score_memorisation: -4 } }
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier0 }])
+          .to eq([{ score_ccf: :palier0 }, { score_memorisation: :palier0 }])
       end
     end
 
-    context 'juste au dessus du palier 0' do
-      let(:scores_standardises) { { score_ccf: -1.4 } }
-
+    context '-1 < competence <= à 0' do
+      let(:scores_standardises) { { score_ccf: -0.99, score_memorisation: 0 } }
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier1 }])
+          .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])
       end
     end
 
-    context 'juste en dessous du palier 2' do
-      let(:scores_standardises) { { score_ccf: -0.26 } }
-
+    context 'competence > à 0' do
+      let(:scores_standardises) { { score_ccf: 0.1 } }
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier1 }])
-      end
-    end
-
-    context 'au palier 2' do
-      let(:scores_standardises) { { score_ccf: -0.25 } }
-
-      it do
-        expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier2 }])
+          .to eq([{ score_ccf: :palier2 }, { score_memorisation: nil }])
       end
     end
   end

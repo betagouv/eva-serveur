@@ -11,9 +11,9 @@ module CampagneHelper
   end
 
   def collection_situations_optionnelles
-    [
-      [label_situation_optionnelle, 'plan_de_la_ville']
-    ]
+    Situation::OPTIONNELLES.map do |situation|
+      [label_situation_optionnelle(situation), situation]
+    end
   end
 
   def label_parcours_type(parcours_type)
@@ -21,8 +21,9 @@ module CampagneHelper
            locals: { parcours_type: parcours_type }
   end
 
-  def label_situation_optionnelle
-    render partial: 'components/input_situation_optionnelle'
+  def label_situation_optionnelle(situation)
+    render partial: 'components/input_situation_optionnelle',
+           locals: { situation: situation }
   end
 
   def url_campagne(code)

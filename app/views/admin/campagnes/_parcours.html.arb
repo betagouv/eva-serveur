@@ -23,6 +23,28 @@ div class: 'campagne-parcours' do
   end
 end
 
+div class: 'panel campagne-plan_de_la_ville' do
+  if plan_de_la_ville_inclus
+    div class: 'row inclus' do
+      div class: 'col title' do
+        t('.plan_de_la_ville')
+      end
+      div class: 'col text-right commentaire' do
+        t(".option.#{plan_de_la_ville_inclus}")
+      end
+    end
+  else
+    div class: 'row non_inclus' do
+      div class: 'col title' do
+        t('.plan_de_la_ville')
+      end
+      div class: 'col text-right commentaire' do
+        t(".option.#{plan_de_la_ville_inclus}")
+      end
+    end
+  end
+end
+
 div class: 'panel campagne-auto_positionnement' do
   if auto_positionnement_inclus
     div class: 'row inclus' do
@@ -62,28 +84,6 @@ div class: 'panel campagne-expression_ecrite' do
       end
       div class: 'col text-right commentaire' do
         t(".option.#{expression_ecrite_incluse}")
-      end
-    end
-  end
-end
-
-div class: 'panel campagne-plan_de_la_ville' do
-  if plan_de_la_ville_inclus
-    div class: 'row inclus' do
-      div class: 'col title' do
-        t('.plan_de_la_ville')
-      end
-      div class: 'col text-right commentaire' do
-        t(".option.#{plan_de_la_ville_inclus}")
-      end
-    end
-  else
-    div class: 'row non_inclus' do
-      div class: 'col title' do
-        'Plan de la ville'
-      end
-      div class: 'col text-right commentaire' do
-        t(".option.#{plan_de_la_ville_inclus}")
       end
     end
   end

@@ -30,9 +30,9 @@ fr:
           titre: Parcours personnalisé
           description: |
             Votre parcours a été personnalisé selon vos besoins spécifiques.
-        auto_positionnement: Questionnaire d’auto-positionnement
+        plan_de_la_ville: Situation Plan de la ville
+        auto_positionnement: Situation Bienvenue
         expression_ecrite: Exercice d’expression écrite
-        plan_de_la_ville: Plan de la ville
         option:
           true: Inclus
           false: Non inclus

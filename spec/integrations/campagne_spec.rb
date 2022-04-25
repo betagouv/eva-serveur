@@ -45,7 +45,7 @@ describe Campagne, type: :integration do
     context 'quand il y a des situations optionnelles' do
       let!(:situation_plan_de_la_ville) { create :situation_plan_de_la_ville }
       let!(:situation_bienvenue) { create :situation_bienvenue }
-      let(:situations_optionnelles) { %w[plan_de_la_ville bienvenue] }
+      let(:situations_optionnelles) { Situation::OPTIONNELLES }
 
       it "crée la campagne dans l'ordre des situations optionnelles" do
         expect do

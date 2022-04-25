@@ -2,6 +2,7 @@
 
 module ApplicationHelper
   include CampagneHelper
+  include MarkdownHelper
 
   def formate_efficience(nombre)
     return I18n.t("admin.restitutions.evaluation.#{nombre}") if nombre.is_a?(Symbol)
@@ -21,15 +22,6 @@ module ApplicationHelper
 
   def rapport_colonne_class
     'col-4 px-5 mb-4'
-  end
-
-  def md(contenu)
-    return '' if contenu.nil?
-
-    markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(hard_wrap: true)
-    )
-    markdown.render(contenu).html_safe
   end
 
   def svg_tag_base64(path, options = {})

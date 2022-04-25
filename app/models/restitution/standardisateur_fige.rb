@@ -4,9 +4,9 @@ module Restitution
   class StandardisateurFige < Standardisateur
     STANDARDS = {
       livraison: {
-        # score_syntaxe_orthographe: { average: 0.49, stddev_pop: 0.24 },
-        # score_numeratie: { average: 0.09, stddev_pop: 0.04 },
-        # score_ccf: { average: 0.71, stddev_pop: 0.23 }
+        score_syntaxe_orthographe: { average: 0.49, stddev_pop: 0.24 },
+        score_numeratie: { average: 0.09, stddev_pop: 0.04 },
+        score_ccf: { average: 0.71, stddev_pop: 0.23 }
       },
       objets_trouves: {
         score_numeratie: { average: 0.09, stddev_pop: 0.04 },

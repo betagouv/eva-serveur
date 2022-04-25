@@ -17,7 +17,7 @@ describe Restitution::ScoresNiveau1 do
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
       .to eq(
-        litteratie: (2 + 3 + (4 * 0.25)) / 2.25,
+        litteratie: (2 + 3 + 4) / 3.0,
         numeratie: 1
       )
   end
@@ -30,7 +30,7 @@ describe Restitution::ScoresNiveau1 do
                   score_memorisation: 4)
     expect(scores_niveau1.calcule)
       .to eq(
-        litteratie: (3 + (4 * 0.25)) / 1.25,
+        litteratie: (3 + 4) / 2.0,
         numeratie: 1
       )
   end

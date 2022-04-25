@@ -10,7 +10,7 @@ module Restitution
       'syntaxe_et_orthographe_3' => [22, 60],
       'syntaxe_et_orthographe_2' => [11, 24],
       'syntaxe_et_orthographe_1' => [15, 35],
-      'multiplication_niveau2' => [55, 138],
+      'numeratie_multiplication_niveau2' => [55, 138],
       'numeratie_multiplication' => [40, 115],
       'numeratie_division' => [44, 115],
       'connaissance_et_comprehension_9' => [11, 23],
@@ -21,20 +21,7 @@ module Restitution
       'connaissance_et_comprehension_4' => [13, 28],
       'connaissance_et_comprehension_3' => [18, 37],
       'connaissance_et_comprehension_2' => [12, 29],
-      'connaissance_et_comprehension_1' => [26, 69],
-      'agenda' => [19, 40],
-      'deverrouillage' => [40, 89],
-      'fin1' => [16, 34],
-      'fin2' => [22, 51],
-      'fin3' => [8, 15],
-      'heure-bureau-mickael' => [24, 49],
-      'nombre-tours-de-manege' => [60, 148],
-      'notes' => [13, 25],
-      'ou-retrouver-dounia' => [28, 62],
-      'photo' => [16, 32],
-      'quel-bureau' => [36, 76],
-      'quelle-salle-reserver' => [54, 118],
-      'rappels' => [13, 22]
+      'connaissance_et_comprehension_1' => [26, 69]
     }.freeze
 
     class ScoreQuestion
@@ -46,8 +33,7 @@ module Restitution
         @metrique_temps_questions.calcule(evenements, metacompetence).map do |temps_question|
           succes = temps_question[:succes]
           temps = temps_question[:temps]
-          seuils = recupere_seuils(temps_question[:question])
-
+          seuils = TABLEAU_SEUILS[temps_question[:question]]
           if succes
             score_succes(temps, seuils)
           else
@@ -76,13 +62,6 @@ module Restitution
         else
           -1
         end
-      end
-
-      def recupere_seuils(nom_question)
-        seuils = TABLEAU_SEUILS[nom_question]
-        raise nom_question if seuils.blank?
-
-        seuils
       end
     end
   end

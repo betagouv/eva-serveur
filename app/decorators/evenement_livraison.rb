@@ -9,8 +9,8 @@ class EvenementLivraison < SimpleDelegator
     @question ||= Question.find_by id: donnees['question']
   end
 
-  def question_nom_technique
-    question.nom_technique
+  def bonne_ou_mauvaise_reponse?
+    choix
   end
 
   def bonne_reponse?

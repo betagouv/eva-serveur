@@ -4,14 +4,14 @@ module Restitution
   class StandardisateurFige < Standardisateur
     STANDARDS = {
       livraison: {
-        score_syntaxe_orthographe: { average: 10.77, stddev_pop: 7.78 },
-        score_numeratie: { average: 5.49, stddev_pop: 3.79 },
-        score_ccf: { average: 18.33, stddev_pop: 7.42 }
+        score_syntaxe_orthographe: { average: 10.81, stddev_pop: 7.78 },
+        score_numeratie: { average: 5.5, stddev_pop: 3.8 },
+        score_ccf: { average: 18.4, stddev_pop: 7.41 }
       },
       objets_trouves: {
-        score_numeratie: { average: 6.35, stddev_pop: 5.22 },
-        score_ccf: { average: 9.97, stddev_pop: 4.14 },
-        score_memorisation: { average: 1.19, stddev_pop: 3.34 }
+        score_numeratie: { average: 6.38, stddev_pop: 5.22 },
+        score_ccf: { average: 10.0, stddev_pop: 4.14 },
+        score_memorisation: { average: 1.21, stddev_pop: 3.35 }
       },
       maintenance: {
         score_ccf: { average: 425.04, stddev_pop: 245.78 }

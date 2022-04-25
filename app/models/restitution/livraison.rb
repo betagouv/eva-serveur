@@ -15,31 +15,50 @@ module Restitution
         'metacompetence' => 'syntaxe-orthographe',
         'instance' => Illettrisme::NombreReponses.new
       },
-      'nombre_reponses_numeratie' => {
+      'nombre_bonnes_reponses_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Illettrisme::NombreReponses.new
+        'instance' => Illettrisme::NombreBonnesReponses.new
+      },
+      'nombre_bonnes_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf',
+        'instance' => Illettrisme::NombreBonnesReponses.new
+      },
+      'nombre_bonnes_reponses_syntaxe_orthographe' => {
+        'type' => :nombre,
+        'metacompetence' => 'syntaxe-orthographe',
+        'instance' => Illettrisme::NombreBonnesReponses.new
+      },
+      'temps_moyen_bonnes_reponses_numeratie' => {
+        'type' => :nombre,
+        'metacompetence' => 'numeratie',
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
+      },
+      'temps_moyen_bonnes_reponses_ccf' => {
+        'type' => :nombre,
+        'metacompetence' => 'ccf',
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
+      },
+      'temps_moyen_bonnes_reponses_syntaxe_orthographe' => {
+        'type' => :nombre,
+        'metacompetence' => 'syntaxe-orthographe',
+        'instance' => Metriques::Moyenne.new(Illettrisme::TempsBonnesReponses.new)
       },
       'score_numeratie' => {
         'type' => :nombre,
         'metacompetence' => 'numeratie',
-        'instance' => Metriques::Somme.new(
-          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       },
       'score_ccf' => {
         'type' => :nombre,
         'metacompetence' => 'ccf',
-        'instance' => Metriques::Somme.new(
-          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       },
       'score_syntaxe_orthographe' => {
         'type' => :nombre,
         'metacompetence' => 'syntaxe-orthographe',
-        'instance' => Metriques::Somme.new(
-          Illettrisme::ScoreQuestion.new(Illettrisme::TempsReponses.new)
-        )
+        'instance' => Illettrisme::ScoreMetacompetence.new
       }
     }.freeze
 

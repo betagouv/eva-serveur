@@ -9,7 +9,7 @@
           <a class="bouton bouton-outline-light" data-dismiss="modal">Plus tard</a>
           <% structure = current_compte.structure %>
           <%= link_to 'Voir les demandes',
-                      send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-mes-collegues"), 
+                      send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-membres"),
                       class: "bouton bouton-light" %>
         </div>
       </div>  

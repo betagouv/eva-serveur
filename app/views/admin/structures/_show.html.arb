@@ -49,7 +49,7 @@ div class: 'row' do
       end
     end
 
-    render 'admin/structures/mes_collegues'
+    render 'admin/structures/membres'
 
     div class: 'bloc-mes-campagnes' do
       h3 'Campagnes'

@@ -48,23 +48,39 @@
       }
     }
 
-    .liste-collegues {
-      margin-top: 2rem;
-      .sous-titre {
-        font-family: $font-texte;
-        color: $eva_dark;
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.5rem;
-        height: 2rem;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 0 1.5rem;
+    #bloc-membres {
+      .panel-invitation {
+        background: $eva_dark;
+        margin-bottom: 1rem;
+
+        .container-instructions {
+          display: flex;
+        }
+          &-message, &-lien {
+            font-size: 0.875rem;
+            color: $eva_light;
+          }
+          &-message {
+            width: 100%;
+
+            p {
+              margin-bottom: 1rem;
+            }
+          }
       }
 
-      .card-validation {
-        &:last-child {
-          margin-bottom: 0;
+      .liste-membres {
+        margin-bottom: 2rem;
+        .sous-titre {
+          font-family: $font-texte;
+          color: $eva_dark;
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.5rem;
+          height: 2rem;
+          font-size: 14px;
+          font-weight: 600;
+          padding: 0 1.5rem;
         }
       }
     }

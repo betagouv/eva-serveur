@@ -160,8 +160,8 @@ ActiveRecord::Schema.define(version: 2022_04_20_151925) do
     t.datetime "updated_at", null: false
     t.string "session_id"
     t.integer "position"
-    t.index ["position", "session_id"], name: "index_evenements_on_position_and_session_id", unique: true
     t.index ["position"], name: "index_evenements_on_position"
+    t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
     t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 

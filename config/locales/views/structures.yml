@@ -19,6 +19,11 @@ fr:
         
           Si vous avez besoin d'aide, 
           rendez-vous [ici](%{lien_aide})
+      membres:
+        titre: Membres de la structure
+        invitation:  |
+          Pour inviter une personne à rejoindre cette structure,
+          vous pouvez lui envoyer le lien suivant :
   nouvelles_structures:
     show:
       titre: Rejoindre eva

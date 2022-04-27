@@ -10,6 +10,10 @@ div class: "row synthese-illettrisme #{synthese}" do
     end
   end
   div class: 'col' do
-    md t(synthese, scope: scope)
+    if synthese.present?
+      md t(synthese, scope: scope)
+    else
+      md t('score_non_calcule', scope: scope)
+    end
   end
 end

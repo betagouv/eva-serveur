@@ -332,6 +332,15 @@
         color: $eva_dark;
       }
     }
+
+    &:not(.illettrisme_potentiel, .socle_clea, .ni_ni) {
+      background-color: $eva_dark;
+
+      a {
+        text-decoration: underline;
+        color: $eva_light;
+      }
+    }
   }
 
   .demande-aide {

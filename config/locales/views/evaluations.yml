@@ -323,6 +323,11 @@ fr:
 
           Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
           Il est important que vous échangiez à ce sujet avec votre conseiller.
+        score_non_calcule: |
+          ### Votre score n'a pas pu être calculé.
+
+          Les raisons peuvent être trouvées ici :
+          [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
         references:
           ordre: '(par ordre croissant)'
           francais: 'Français :'

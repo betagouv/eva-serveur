@@ -46,4 +46,26 @@ describe 'Structures', type: :feature do
       expect(page).not_to have_content 'MILO Lyon'
     end
   end
+
+  describe '#show' do
+    let!(:compte) { create :compte_admin }
+
+    before { connecte(compte) }
+
+    context "lorsqu'il n'y a pas de campagnes associées à la structure" do
+      it "affiche un message qui explique qu'il n'y a pas de campagne pour le moment" do
+        visit admin_structure_locale_path(compte.structure_id)
+        expect(page).to have_content 'Pas de campagne à afficher pour le moment.'
+      end
+    end
+
+    context "lorsqu'il y a des campagnes associées à la structure" do
+      let!(:campagne) { create :campagne, compte: compte }
+
+      it 'affiche les campagnes' do
+        visit admin_structure_locale_path(compte.structure_id)
+        expect(page).to have_content campagne.libelle
+      end
+    end
+  end
 end

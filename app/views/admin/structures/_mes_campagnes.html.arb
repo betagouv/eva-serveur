@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+div class: 'bloc-mes-campagnes' do
+  h3 'Campagnes'
+  if campagnes.present?
+    table_for campagnes, class: 'index_table' do
+      column :libelle
+      column :code
+      column :nombre_evaluations
+      column :actions do |campagne|
+        div class: 'table_actions' do
+          link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'
+        end
+      end
+    end
+  else
+    div 'Pas de campagne à afficher pour le moment. Pour créer une campagne, rendez-vous sur ',
+        class: 'panel' do
+      span do
+        link_to 'cette page.', new_admin_campagne_path
+      end
+    end
+  end
+end

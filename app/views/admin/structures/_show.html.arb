@@ -51,19 +51,8 @@ div class: 'row' do
 
     render 'admin/structures/membres'
 
-    div class: 'bloc-mes-campagnes' do
-      h3 'Campagnes'
-      table_for campagnes, class: 'index_table' do
-        column :libelle
-        column :code
-        column :nombre_evaluations
-        column :actions do |campagne|
-          div class: 'table_actions' do
-            link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'
-          end
-        end
-      end
-    end
+    render partial: 'admin/structures/mes_campagnes',
+           locals: { campagnes: campagnes }
 
     active_admin_comments_for(resource)
   end

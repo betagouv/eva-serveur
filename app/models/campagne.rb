@@ -54,11 +54,11 @@ class Campagne < ApplicationRecord
   private
 
   def initialise_situations
+    initialise_situations_optionnelles
     parcours_type.situations_configurations.each do |situation_configuration|
       situations_configurations.build situation_id: situation_configuration.situation_id,
                                       questionnaire_id: situation_configuration.questionnaire_id
     end
-    initialise_situations_optionnelles
   end
 
   def initialise_situations_optionnelles
@@ -68,7 +68,7 @@ class Campagne < ApplicationRecord
       situation = Situation.find_by nom_technique: situation_optionnelle
       next if situation.blank?
 
-      situations_configurations.build situation_id: situation.id, position: 1
+      situations_configurations.build situation_id: situation.id
     end
   end
 

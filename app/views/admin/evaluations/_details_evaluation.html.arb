@@ -1,70 +1,85 @@
 # frozen_string_literal: true
 
 div id: 'details_evaluation', class: 'row carte-evaluation' do
+  scope = 'admin.evaluations.details_evaluation'
   div class: 'col col-6 mx-auto' do
     h2 nom_pour_evaluation(resource), class: 'sous-titre'
     h3 t('.titre'), class: 'titre'
     div class: 'panel conteneur-carte' do
-      div class: 'details-carte' do
-        div class: 'row' do
-          div class: 'col col-2' do
-            span 'Campagne'
-          end
-          div class: 'col col-6' do
-            span resource.campagne.display_name
-          end
-        end
-        div class: 'row' do
-          div class: 'col col-2' do
-            span Evaluation.human_attribute_name('debutee_le')
-          end
-          div class: 'col col-6' do
-            span l(resource.debutee_le, format: :humain)
-          end
-        end
-        if can?(:manage, Compte)
-          if statistiques.temps_total
-            div class: 'row' do
-              div class: 'col col-2' do
-                span Evaluation.human_attribute_name('temps_total')
-              end
-              div class: 'col col-6' do
-                span { formate_duree statistiques.temps_total }
-              end
-            end
-          end
-          if resource.terminee_le
-            div class: 'row' do
-              div class: 'col col-2' do
-                span Evaluation.human_attribute_name('terminee_le')
-              end
-              div class: 'col col-6' do
-                span l(resource.terminee_le, format: :humain)
-              end
-            end
-          end
-        end
-        if can?(:manage, Compte) && resource.anonyme?
+      div class: 'carte-informations' do
+        div class: 'carte-informations-details' do
           div class: 'row' do
             div class: 'col col-2' do
-              span Evaluation.human_attribute_name('anonymisee_le')
+              span 'Campagne'
             end
             div class: 'col col-6' do
-              span l(resource.anonymise_le, format: :humain)
+              span resource.campagne.display_name
             end
+          end
+          div class: 'row' do
+            div class: 'col col-2' do
+              span Evaluation.human_attribute_name('debutee_le')
+            end
+            div class: 'col col-6' do
+              span l(resource.debutee_le, format: :humain)
+            end
+          end
+          if can?(:manage, Compte)
+            if statistiques.temps_total
+              div class: 'row' do
+                div class: 'col col-2' do
+                  span Evaluation.human_attribute_name('temps_total')
+                end
+                div class: 'col col-6' do
+                  span { formate_duree statistiques.temps_total }
+                end
+              end
+            end
+            if resource.terminee_le
+              div class: 'row' do
+                div class: 'col col-2' do
+                  span Evaluation.human_attribute_name('terminee_le')
+                end
+                div class: 'col col-6' do
+                  span l(resource.terminee_le, format: :humain)
+                end
+              end
+            end
+          end
+          if can?(:manage, Compte) && resource.anonyme?
+            div class: 'row' do
+              div class: 'col col-2' do
+                span Evaluation.human_attribute_name('anonymisee_le')
+              end
+              div class: 'col col-6' do
+                span l(resource.anonymise_le, format: :humain)
+              end
+            end
+          end
+        end
+        div class: 'carte-informations-pdf' do
+          div class: 'pdf-image' do
+            inline_svg_tag('source-aide-pdf.svg')
+          end
+          div class: 'pdf-bouton' do
+            link_to('Exporter', {
+                      parties_selectionnees: params[:parties_selectionnees],
+                      format: :pdf
+                    },
+                    class: 'bouton', target: '_blank', rel: 'noopener')
           end
         end
       end
-      div class: 'pdf-carte' do
-        div class: 'pdf-image' do
-          inline_svg_tag('source-aide-pdf.svg')
-        end
-        div class: 'pdf-bouton' do
-          link_to('Exporter', {
-                    parties_selectionnees: params[:parties_selectionnees],
-                    format: :pdf
-                  },
-                  class: 'bouton', target: '_blank', rel: 'noopener')
+      unless resource.complete
+        div class: 'carte-message-alerte container' do
+          div class: 'row evaluation_incomplete' do
+            div(class: 'col col-2 col-icone-info') do
+              svg_tag_base64 'attention_icone.svg', class: 'icone'
+            end
+            div class: 'col-6' do
+              md t('evaluation_incomplete', scope: scope)
+            end
+          end
         end
       end
     end

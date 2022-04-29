@@ -1,15 +1,14 @@
 <div class="choix-item">
-  <div>
+  <div class='choix-situation-optionnelle'>
     <h4 class='choix-titre'>
-      Plan de la ville ·
+      <%= t(".#{situation}.nom") %> ·
       <span class="choix-situation-optionnelle-duree-moyenne">
-        Durée moyenne : 5mn
+        Durée moyenne : <%= t(".#{situation}.duree_moyenne") %>
       </span>
     </h4>
-    
 
     <div class="choix-situation-optionnelle-description">
-      Ce module permet d’évaluer la capacité du candidat à utiliser l’outil informatique (ordinateur ou tablette). Les exercices évaluent la maîtrise de la souris, du clavier ou du tactile.
+      <%= t(".#{situation}.description") %>
     </div>
   </div>
   <div class="checkbox-situation-optionnelle-container">

@@ -23,19 +23,30 @@
     padding: 0;
   }
   .conteneur-carte {
-    display: flex;
-    .details-carte {
+    margin: 0;
+    .carte-informations {
+      display: flex;
+      position: relative;
+      box-shadow: 0px 2px 8px rgba(30, 65, 106, 0.25);
+    }
+    .carte-message-alerte {
+      width: 100%;
+    }
+    .carte-informations-details {
       padding: 2rem 1.25rem;
       flex-grow: 2;
+      min-height: 15rem;
     }
-    .pdf-carte {
+    .carte-informations-pdf {
+      position: absolute;
+      right: 0;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 1.25rem;
       text-align: center;
       border-top-right-radius: 0.5rem;
-      border-bottom-right-radius: 0.5rem;
       background-color: $eva_dark;
       .bouton {
         @include bouton;
@@ -54,6 +65,29 @@
       &:last-child {
         font-weight: 500;
       }
+    }
+  }
+
+  .evaluation_incomplete {
+    background-color: $eva_orange;
+    color: $eva_dark;
+    padding: 1rem 0;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    line-height: 1rem;
+    p:first-child {
+      margin-bottom: 0.5rem;
+      font-family: $font-titre;
+    }
+
+    .col-icone-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .icone {
+      height: 5rem;
+      margin-bottom: 1rem;
     }
   }
 }

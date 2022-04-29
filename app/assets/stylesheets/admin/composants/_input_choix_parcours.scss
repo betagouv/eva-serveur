@@ -57,38 +57,44 @@
       }
     }
 
-    .choix-titre {
-      @include titre();
-      font-size: .875rem;
-      color: $couleur-texte;
-      margin-bottom: .625rem;
-    }
+    .choix {
+      &-situation-optionnelle {
+        padding-right: 3.25rem;
 
-    .choix-parcours-description, .choix-parcours-duree-moyenne {
-      color: $couleur-texte;
-      font-size: .75rem;
-      line-height: .875rem;
-      margin: 0;
-    }
+        &-duree-moyenne, &-description {
+          color: $couleur-texte;
+          font-size: .75rem;
+          line-height: .875rem;
+          font-weight: normal;
+          font-style: italic;
+        }
+      }
 
-    .choix-parcours-duree-moyenne {
-      font-style: italic;
-    }
+      &-titre {
+        @include titre();
+        font-size: .875rem;
+        color: $couleur-texte;
+        margin-bottom: .625rem;
+      }
 
-    .choix-situation-optionnelle-duree-moyenne, .choix-situation-optionnelle-description {
-      color: $couleur-texte;
-      font-size: .75rem;
-      line-height: .875rem;
-      font-weight: normal;
-      font-style: italic;
-    }
+      &-parcours-description, &-parcours-duree-moyenne {
+        color: $couleur-texte;
+        font-size: .75rem;
+        line-height: .875rem;
+        margin: 0;
+      }
 
-    .choix-parcours-description {
-      flex: 1;
-      margin-bottom: 1rem;
-      ul {
-        padding-left: 1.5em;
-        list-style-type: disc;
+      &-parcours-duree-moyenne {
+        font-style: italic;
+      }
+
+      &-parcours-description {
+        flex: 1;
+        margin-bottom: 1rem;
+        ul {
+          padding-left: 1.5em;
+          list-style-type: disc;
+        }
       }
     }
 

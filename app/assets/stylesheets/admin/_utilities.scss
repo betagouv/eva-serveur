@@ -1,3 +1,9 @@
 .bg-orange {
   background-color: $eva_orange;  
 }
+
+.supprime-espace-derniere-balise {
+  *:last-child{
+    margin-bottom: 0px;
+  }
+}

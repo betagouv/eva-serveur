@@ -30,3 +30,8 @@ $grid-gutter-width: 3rem;
 
 $font-titre: 'Quicksand';
 $font-texte: 'Work Sans';
+
+$theme-colors: (
+  "primary": $eva_main_blue,
+  "warning": $eva_dark_orange
+);

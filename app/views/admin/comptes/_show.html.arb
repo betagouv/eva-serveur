@@ -10,14 +10,38 @@ div class: 'mon-compte row' do
              image: 'avatar_salut.png'
     end
 
-    div class: 'panel' do
-      attributes_table_for compte do
-        row :prenom
-        row :nom
-        row :email
-        row :telephone
-        row :role
-        row :created_at
+    div class: 'card' do
+      if compte.unconfirmed_email.present?
+        div class: 'card-header bg-orange' do
+          para 'Une demande de modification d’email a été effectuée.
+  La modification ne sera effective qu’une fois l’email confirmé. '
+          div class: 'd-flex justify-content-between' do
+            div do
+              div 'Un email de confirmation a été envoyé à :'
+              span compte.unconfirmed_email, class: 'font-weight-bold'
+            end
+            div do
+              link_to 'Renvoyer l’email de<br> confirmation'.html_safe,
+                      new_confirmation_path(compte), class: 'bouton bouton-principal text-center'
+            end
+          end
+        end
+      end
+      div class: 'card-body' do
+        attributes_table_for compte do
+          row :prenom
+          row :nom
+          row(:email) do |c|
+            if compte.unconfirmed_email.present?
+              span(c.email, class: 'text-warning')
+            else
+              c.email
+            end
+          end
+          row :telephone
+          row :role
+          row :created_at
+        end
       end
     end
 

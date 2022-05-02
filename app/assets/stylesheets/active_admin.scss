@@ -16,6 +16,7 @@
 @import 'admin/variables';
 @import 'admin/mixins';
 @import 'admin/typography';
+@import 'admin/utilities';
 @import "bootstrap_minimal";
 
 // LAYOUT
@@ -38,6 +39,7 @@
 @import 'admin/composants/menu_transverse';
 @import 'admin/composants/modal';
 @import 'admin/composants/clipboard';
+@import 'admin/composants/card';
 @import 'admin/composants/card_validation';
 
 //PAGES

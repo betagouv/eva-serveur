@@ -69,4 +69,8 @@ button:not(.disabled):hover {
     color: $eva_light;
     border-color: $eva_light;
   }
+
+  &.bouton-principal {
+    @include bouton-carte($eva_main_blue);
+  }
 }

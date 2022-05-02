@@ -257,4 +257,18 @@ describe 'Admin - Compte', type: :feature do
       end
     end
   end
+
+  describe '#show' do
+    context "quand le compte a fait une demande pour changer d'email" do
+      before do
+        compte_connecte.update unconfirmed_email: 'nouvel-email@exemple.fr'
+        visit admin_compte_path(compte_connecte)
+      end
+
+      it { expect(page).to have_content(/nouvel-email@exemple.fr/) }
+      it do
+        expect(page).to have_content(/Une demande de modification d’email a été effectuée./)
+      end
+    end
+  end
 end

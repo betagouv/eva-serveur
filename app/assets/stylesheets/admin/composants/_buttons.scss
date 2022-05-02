@@ -73,4 +73,9 @@ button:not(.disabled):hover {
   &.bouton-principal {
     @include bouton-carte($eva_main_blue);
   }
+
+  &.bouton-arrondi {
+    @include bouton;
+    padding: 0.5rem 1.5rem;
+  }
 }

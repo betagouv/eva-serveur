@@ -43,5 +43,52 @@ describe FabriqueRestitution do
         expect(restitutions.map(&:partie)).to eq [partie]
       end
     end
+
+    context 'quand une situation a été jouée 2 fois' do
+      let(:situation_controle) { create :situation_controle }
+
+      let!(:partie1) { create :partie, evaluation: evaluation, situation: situation_controle }
+      let!(:partie2) { create :partie, evaluation: evaluation, situation: situation_controle }
+
+      before do
+        campagne.situations_configurations.create situation: situation_controle
+      end
+
+      context 'quand les 2 parties sont terminée' do
+        before do
+          create(:evenement_fin_situation, partie: partie1)
+          create(:evenement_fin_situation, partie: partie2)
+        end
+
+        it 'utilise la première partie pour la restitution globale' do
+          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          expect(restitutions[1].partie).to eq partie1
+        end
+      end
+
+      context 'quand une des parties est terminée' do
+        before do
+          create(:evenement_demarrage, partie: partie1)
+          create(:evenement_fin_situation, partie: partie2)
+        end
+
+        it 'utilise cette partie pour la restitution globale' do
+          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          expect(restitutions[1].partie).to eq partie2
+        end
+      end
+
+      context "quand aucune des parties n'est terminée" do
+        before do
+          create(:evenement_demarrage, partie: partie1)
+          create(:evenement_demarrage, partie: partie2)
+        end
+
+        it 'utilise la première partie pour la restitution globale' do
+          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          expect(restitutions[1].partie).to eq partie1
+        end
+      end
+    end
   end
 end

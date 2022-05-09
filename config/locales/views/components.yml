@@ -11,3 +11,8 @@ fr:
         duree_moyenne: 6mn
         description: |
           Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences et de récolter des informations personnelles qui peuvent avoir impacté les résultats à la passation (troubles dys, problèmes de lecture sur les appareils numériques, troubles de la concentration, de l'audition, de la vue etc.).
+      livraison:
+        nom: Exercice d’expression écrite
+        duree_moyenne: 6mn
+        description: |
+          Ce module permet de demander aux bénéficiaires de rédiger un court texte afin de se faire une idée de leur niveau en expression écrite.

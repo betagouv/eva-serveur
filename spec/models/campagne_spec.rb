@@ -10,47 +10,6 @@ describe Campagne, type: :model do
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
   it { is_expected.to belong_to(:questionnaire).optional }
 
-  context 'avec des situations' do
-    let(:parcours_type) { ParcoursType.new id: SecureRandom.uuid }
-    let(:situations) { [:bienvenue] }
-    let(:situation_configuration) do
-      SituationConfiguration.new situation: situation, questionnaire: questionnaire
-    end
-    let!(:situation) { create :situation }
-    let!(:questionnaire) { create :questionnaire }
-    let(:compte) { Compte.new email: 'accompagnant@email.com', password: 'secret' }
-
-    before do
-      allow(compte).to receive(:valid?).and_return true
-      situations.each do |nom_situation|
-        questionnaire = Questionnaire.new libelle: nom_situation
-        situation = Situation.new libelle: nom_situation, nom_technique: nom_situation
-        situation.questionnaire = questionnaire
-        allow(parcours_type)
-          .to receive(:situations_configurations).and_return [situation_configuration]
-      end
-    end
-
-    describe 'initialisation de la campagne' do
-      let(:campagne) do
-        Campagne.new libelle: 'ma campagne',
-                     code: 'COD35012',
-                     compte: compte,
-                     parcours_type: parcours_type
-      end
-
-      it do
-        allow(campagne)
-          .to receive(:parcours_type).and_return parcours_type
-        expect(campagne.valid?).to be(true)
-        campagne.save
-        expect(campagne.situations_configurations.count).to eq 1
-        expect(campagne.situations_configurations.first.questionnaire_id).to eq questionnaire.id
-        expect(campagne.situations_configurations.first.situation_id).to eq situation.id
-      end
-    end
-  end
-
   describe '#questionnaire_pour' do
     let(:campagne) { Campagne.new }
     let(:situation) { Situation.new }

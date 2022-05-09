@@ -7,6 +7,7 @@ FactoryBot.define do
     partie
     sequence(:position)
     date { DateTime.now }
+    session_id { partie.session_id }
 
     factory :evenement_demarrage_entrainement do
       nom { 'demarrageEntrainement' }

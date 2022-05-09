@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Situation < ApplicationRecord
-  OPTIONNELLES = %w[plan_de_la_ville bienvenue livraison].freeze
+  OPTIONNELLES = %w[plan_de_la_ville bienvenue].freeze
 
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true

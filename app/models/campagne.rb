@@ -55,11 +55,9 @@ class Campagne < ApplicationRecord
 
   def initialise_situations
     initialise_situations_optionnelles
-
-    parcours_type.situations_configurations
-                 .includes(:situation)
-                 .find_each do |situation_configuration|
-      construit_situation_configuration(situation_configuration)
+    parcours_type.situations_configurations.each do |situation_configuration|
+      situations_configurations.build situation_id: situation_configuration.situation_id,
+                                      questionnaire_id: situation_configuration.questionnaire_id
     end
   end
 
@@ -69,7 +67,6 @@ class Campagne < ApplicationRecord
     situations_optionnelles.compact_blank.each do |situation_optionnelle|
       situation = Situation.find_by nom_technique: situation_optionnelle
       next if situation.blank?
-      next if situation.nom_technique == 'livraison'
 
       situations_configurations.build situation_id: situation.id
     end
@@ -83,23 +80,5 @@ class Campagne < ApplicationRecord
       self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
       break if Campagne.where(code: self[:code]).none?
     end
-  end
-
-  def construit_situation_configuration(situation_configuration)
-    livraison_sans_redaction = situation_configuration.est_livraison_sans_redaction?
-    if inclus_expression_ecrite? && livraison_sans_redaction
-      situation_livraison = Situation.find_by(nom_technique: 'livraison')
-      situations_configurations.build situation_id: situation_livraison.id,
-                                      questionnaire_id: situation_livraison.questionnaire_id
-    else
-      situations_configurations.build situation_id: situation_configuration.situation_id,
-                                      questionnaire_id: situation_configuration.questionnaire_id
-    end
-  end
-
-  def inclus_expression_ecrite?
-    return false if situations_optionnelles.nil?
-
-    situations_optionnelles.include? 'livraison'
   end
 end

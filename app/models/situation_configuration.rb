@@ -16,7 +16,7 @@ class SituationConfiguration < ApplicationRecord
   end
 
   def est_livraison_sans_redaction?
-    nom_technique == 'livraison_sans_redaction'
+    questionnaire&.nom_technique == Questionnaire::LIVRAISON_SANS_REDACTION
   end
 
   class << self

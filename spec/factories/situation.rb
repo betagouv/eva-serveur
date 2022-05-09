@@ -35,6 +35,11 @@ FactoryBot.define do
       nom_technique { 'livraison' }
     end
 
+    factory :situation_livraison_sans_redaction do
+      libelle { 'Livraison sans rédaction' }
+      nom_technique { 'livraison_sans_redaction' }
+    end
+
     factory :situation_objets_trouves do
       libelle { 'Objets Trouvés' }
       nom_technique { 'objets_trouves' }

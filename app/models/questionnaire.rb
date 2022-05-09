@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Questionnaire < ApplicationRecord
+  LIVRAISON_SANS_REDACTION = 'livraison_sans_redaction'
+  LIVRAISON_AVEC_REDACTION = 'livraison_expression_ecrite'
+
   has_many :questionnaires_questions, lambda {
                                         order(position: :asc)
                                       }, dependent: :destroy
@@ -13,5 +16,9 @@ class Questionnaire < ApplicationRecord
 
   def display_name
     libelle
+  end
+
+  def self.livraison_avec_redaction
+    find_by(nom_technique: LIVRAISON_AVEC_REDACTION)
   end
 end

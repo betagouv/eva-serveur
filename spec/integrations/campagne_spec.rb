@@ -19,10 +19,13 @@ describe Campagne, type: :integration do
 
   describe "création d'une campagne avec des situations" do
     # parcours type
-    let!(:situation_livraison_sans_redaction) { create :situation_livraison_sans_redaction }
+    let!(:situation_livraison) { create :situation_livraison }
+    let!(:questionnaire_sans_livraison) { create :questionnaire, :livraison_sans_redaction }
+    let!(:questionnaire_avec_livraison) { create :questionnaire, :livraison_avec_redaction }
     let!(:parcours_type) do
       parcours = create :parcours_type
-      parcours.situations_configurations.create situation: situation_livraison_sans_redaction
+      parcours.situations_configurations.create situation: situation_livraison,
+                                                questionnaire: questionnaire_sans_livraison
       parcours
     end
 
@@ -39,7 +42,7 @@ describe Campagne, type: :integration do
 
       campagne.reload
       situations_configurations = campagne.situations_configurations.includes(:situation)
-      expect(situations_configurations[0].situation).to eq situation_livraison_sans_redaction
+      expect(situations_configurations[0].situation).to eq situation_livraison
     end
 
     context 'quand il y a des situations optionnelles' do
@@ -56,22 +59,23 @@ describe Campagne, type: :integration do
         situations_configurations = campagne.situations_configurations.includes(:situation)
         expect(situations_configurations[0].situation).to eq situation_plan_de_la_ville
         expect(situations_configurations[1].situation).to eq situation_bienvenue
-        expect(situations_configurations[2].situation).to eq situation_livraison_sans_redaction
+        expect(situations_configurations[2].situation).to eq situation_livraison
       end
     end
 
     context "pour la selection du module d'expression écrite" do
-      let!(:situation_livraison) { create :situation_livraison }
       let(:situations_optionnelles) { Situation::OPTIONNELLES }
 
-      it 'remplace la situation livraison sans rédaction avec la situation livraison' do
+      it 'utilise le questionnaire livraison avec redaction' do
         expect do
           campagne
         end.to change { described_class.count }.by(1)
 
         campagne.reload
-        situations_configurations = campagne.situations_configurations.includes(:situation)
+        situations_configurations = campagne.situations_configurations
         expect(situations_configurations[0].situation).to eq situation_livraison
+        questionnaire = situations_configurations[0].questionnaire
+        expect(questionnaire.nom_technique).to eq Questionnaire::LIVRAISON_AVEC_REDACTION
         expect(situations_configurations.count).to eq 1
       end
     end

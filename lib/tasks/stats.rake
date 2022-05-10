@@ -234,13 +234,13 @@ namespace :stats do
       logger.info 'Usage : rake stats:temps_moyens_campagne CAMPAGNE=id_campagne'
       next
     end
-    campagne = Campagne.find(ENV[arg_campagne])
+    campagne = Campagne.find(ENV.fetch(arg_campagne))
     statistiques = StatistiquesCampagne.new(campagne)
     helper = Class.new.extend(ApplicationHelper)
     min = helper.formate_duree statistiques.temps_min
     max = helper.formate_duree statistiques.temps_max
     moyenne = helper.formate_duree statistiques.temps_moyen
     puts 'id_campagne;temps_min;temps_max;temps_moyen'
-    puts "#{ENV[arg_campagne]};#{min};#{max};#{moyenne}"
+    puts "#{ENV.fetch(arg_campagne)};#{min};#{max};#{moyenne}"
   end
 end

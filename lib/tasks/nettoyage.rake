@@ -58,14 +58,14 @@ namespace :nettoyage do
       next
     end
 
-    situation = Situation.find_by(nom_technique: ENV[arg_situation])
+    situation = Situation.find_by(nom_technique: ENV.fetch(arg_situation))
     if situation.nil?
-      logger.error "Situation \"#{ENV[arg_situation]}\" non trouvé"
+      logger.error "Situation \"#{ENV.fetch(arg_situation)}\" non trouvé"
       next
     end
 
     nombre_partie = Partie.where(situation: situation).count
-    logger.info "Recalcule les #{nombre_partie} parties de la situation #{ENV['SITUATION']}…"
+    logger.info "Recalcule les #{nombre_partie} parties de la situation #{ENV.fetch('SITUATION')}…"
     Partie
       .where(situation: situation)
       .find_each do |partie|

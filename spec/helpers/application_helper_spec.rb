@@ -49,8 +49,8 @@ describe ApplicationHelper do
     let(:fichier) { double('fichier') }
 
     before do
-      allow(ENV).to receive(:[]).with('PROTOCOLE_SERVEUR').and_return('https')
-      allow(ENV).to receive(:[]).with('HOTE_STOCKAGE').and_return('stockage.eva.beta.gouv.fr')
+      allow(ENV).to receive(:fetch).with('PROTOCOLE_SERVEUR').and_return('https')
+      allow(ENV).to receive(:fetch).with('HOTE_STOCKAGE').and_return('stockage.eva.beta.gouv.fr')
 
       allow(fichier).to receive(:filename).and_return('fichier.jpg')
       allow(fichier).to receive(:key).and_return('ma_cle')

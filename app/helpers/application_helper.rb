@@ -35,6 +35,6 @@ module ApplicationHelper
     return Rails.application.routes.url_helpers.url_for(fichier) unless Rails.env.production?
 
     param = "filename=#{fichier.filename}"
-    "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_STOCKAGE']}/#{fichier.key}?#{param}"
+    "#{ENV.fetch('PROTOCOLE_SERVEUR')}://#{ENV.fetch('HOTE_STOCKAGE')}/#{fichier.key}?#{param}"
   end
 end

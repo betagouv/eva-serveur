@@ -15,6 +15,12 @@ class SituationConfiguration < ApplicationRecord
     @questionnaire_utile ||= (questionnaire || situation.questionnaire)
   end
 
+  def est_livraison_sans_redaction?
+    return false if situation.questionnaire.nil?
+
+    situation.questionnaire.nom_technique == 'livraison_sans_redaction'
+  end
+
   class << self
     def questionnaire_inclus?(situations_configurations, questionnaire)
       situations_configurations.any? do |sc|

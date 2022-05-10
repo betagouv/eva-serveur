@@ -55,9 +55,11 @@ class Campagne < ApplicationRecord
 
   def initialise_situations
     initialise_situations_optionnelles
-    parcours_type.situations_configurations.each do |situation_configuration|
-      situations_configurations.build situation_id: situation_configuration.situation_id,
-                                      questionnaire_id: situation_configuration.questionnaire_id
+
+    parcours_type.situations_configurations
+                 .each do |configuration|
+      situations_configurations.build situation_id: configuration.situation_id,
+                                      questionnaire_id: retourne_questionnaire(configuration)
     end
   end
 
@@ -80,5 +82,19 @@ class Campagne < ApplicationRecord
       self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
       break if Campagne.where(code: self[:code]).none?
     end
+  end
+
+  def retourne_questionnaire(configuration)
+    if inclus_expression_ecrite? && configuration.est_livraison_sans_redaction?
+      Questionnaire.find_by(nom_technique: 'livraison_expression_ecrite').id
+    else
+      configuration.questionnaire_id
+    end
+  end
+
+  def inclus_expression_ecrite?
+    return false if situations_optionnelles.nil?
+
+    situations_optionnelles.include? 'livraison_expression_ecrite'
   end
 end

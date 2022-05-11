@@ -10,7 +10,7 @@ module CampagneHelper
     end
   end
 
-  def collection_situations_optionnelles
+  def collection_options_personnalisation
     Situation::OPTIONNELLES.map do |situation|
       [label_situation_optionnelle(situation), situation]
     end

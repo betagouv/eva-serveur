@@ -126,7 +126,7 @@ describe 'Admin - Campagne', type: :feature do
 
       it 'sélectionne des modules de parcours optionnels' do
         choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
-        check 'campagne_situations_optionnelles_plan_de_la_ville'
+        check 'campagne_options_personnalisation_plan_de_la_ville'
         click_on 'Créer'
 
         campagne = Campagne.order(:created_at).last

@@ -25,7 +25,7 @@ class Campagne < ApplicationRecord
 
   before_validation :genere_code_unique
   before_create :initialise_situations, if: :parcours_type_id
-  attr_accessor :situations_optionnelles
+  attr_accessor :options_personnalisation
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)
@@ -64,9 +64,9 @@ class Campagne < ApplicationRecord
   end
 
   def initialise_situations_optionnelles
-    return if situations_optionnelles.blank?
+    return if options_personnalisation.blank?
 
-    situations_optionnelles.compact_blank.each do |situation_optionnelle|
+    options_personnalisation.compact_blank.each do |situation_optionnelle|
       situation = Situation.find_by nom_technique: situation_optionnelle
       next if situation.blank?
       next if situation.nom_technique == 'livraison'
@@ -98,8 +98,8 @@ class Campagne < ApplicationRecord
   end
 
   def inclus_expression_ecrite?
-    return false if situations_optionnelles.nil?
+    return false if options_personnalisation.nil?
 
-    situations_optionnelles.include? 'livraison'
+    options_personnalisation.include? 'livraison'
   end
 end

@@ -29,9 +29,9 @@ describe Campagne, type: :integration do
       parcours
     end
 
-    let(:situations_optionnelles) { nil }
+    let(:options_personnalisation) { nil }
     let(:campagne) do
-      create :campagne, situations_optionnelles: situations_optionnelles,
+      create :campagne, options_personnalisation: options_personnalisation,
                         parcours_type: parcours_type
     end
 
@@ -48,7 +48,7 @@ describe Campagne, type: :integration do
     context 'quand il y a des situations optionnelles' do
       let!(:situation_plan_de_la_ville) { create :situation_plan_de_la_ville }
       let!(:situation_bienvenue) { create :situation_bienvenue }
-      let(:situations_optionnelles) { %w[plan_de_la_ville bienvenue] }
+      let(:options_personnalisation) { %w[plan_de_la_ville bienvenue] }
 
       it "crée la campagne dans l'ordre des situations optionnelles" do
         expect do
@@ -64,7 +64,7 @@ describe Campagne, type: :integration do
     end
 
     context "pour la selection du module d'expression écrite" do
-      let(:situations_optionnelles) { Situation::OPTIONNELLES }
+      let(:options_personnalisation) { Situation::OPTIONNELLES }
 
       it 'utilise le questionnaire livraison avec redaction' do
         expect do

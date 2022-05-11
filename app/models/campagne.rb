@@ -58,7 +58,7 @@ class Campagne < ApplicationRecord
     initialise_situations_optionnelles
 
     parcours_type.situations_configurations
-                 .includes(:questionnaire)
+                 .includes(situation: :questionnaire)
                  .find_each do |situation_configuration|
       construit_situation_configuration(situation_configuration)
     end
@@ -87,15 +87,14 @@ class Campagne < ApplicationRecord
   end
 
   def construit_situation_configuration(situation_configuration)
-    livraison_sans_redaction = situation_configuration.est_livraison_sans_redaction?
-    if inclus_expression_ecrite? && livraison_sans_redaction
-      questionnaire_livraison_avec_redaction = Questionnaire.livraison_avec_redaction
-      situations_configurations.build situation_id: situation_configuration.situation_id,
-                                      questionnaire_id: questionnaire_livraison_avec_redaction.id
-    else
-      situations_configurations.build situation_id: situation_configuration.situation_id,
-                                      questionnaire_id: situation_configuration.questionnaire_id
-    end
+    livraison_sans_redaction = situation_configuration.livraison_sans_redaction?
+    questionnaire_id = if inclus_expression_ecrite? && livraison_sans_redaction
+                         Questionnaire.livraison_avec_redaction.id
+                       else
+                         situation_configuration.questionnaire_id
+                       end
+    situations_configurations.build situation_id: situation_configuration.situation_id,
+                                    questionnaire_id: questionnaire_id
   end
 
   def inclus_expression_ecrite?

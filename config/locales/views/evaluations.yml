@@ -28,7 +28,6 @@ fr:
       restitution_globale:
         autopositionnement_titre: Questionnaire d'auto-positionnement
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
-        etiquette_lien_metiers: 'Détail et métiers associés : '
       competences_transversales:
         competences_fortes_titre: 'Vos compétences transversales'
         competences_fortes_vides: |
@@ -39,6 +38,7 @@ fr:
           - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
 
           Pour obtenir vos scores, n'hésitez pas à repasser le parcours eva plus tard.
+        etiquette_lien_metiers: "Détail et métiers associés : "
       restitution_competence:
         indetermine: non obs.
         1: 1

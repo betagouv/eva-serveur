@@ -58,7 +58,7 @@
     }
 
     .choix {
-      &-situation-optionnelle {
+      &-option-personnalisation {
         padding-right: 3.25rem;
 
         &-duree-moyenne, &-description {
@@ -127,7 +127,7 @@
   }
 }
 
-.input-choix-situation-optionnelle {
+.input-choix-option-personnalisation {
   .choices-group, .choice {
     width: 100%;
     padding: 0;
@@ -137,7 +137,7 @@
     min-height: 125px;
   }
 
-  .checkbox-situation-optionnelle-container {
+  .checkbox-option-personnalisation-container {
     display: flex;
     align-items: center;
   }
@@ -148,12 +148,12 @@
     flex-direction: row;
   }
 
-  input:checked + .choix-item .checkbox-situation-optionnelle img {
+  input:checked + .choix-item .checkbox-option-personnalisation img {
     display: inline;
   }
 }
 
-.checkbox-situation-optionnelle {
+.checkbox-option-personnalisation {
   height: 1rem;
   width: 1rem;
   background: $eva_light;

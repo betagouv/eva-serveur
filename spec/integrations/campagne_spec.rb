@@ -64,7 +64,7 @@ describe Campagne, type: :integration do
     end
 
     context "pour la selection du module d'expression écrite" do
-      let(:options_personnalisation) { Situation::OPTIONNELLES }
+      let(:options_personnalisation) { Campagne::PERSONNALISATION }
 
       it 'utilise le questionnaire livraison avec redaction' do
         expect do

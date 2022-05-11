@@ -11,8 +11,8 @@ module CampagneHelper
   end
 
   def collection_options_personnalisation
-    Situation::OPTIONNELLES.map do |situation|
-      [label_situation_optionnelle(situation), situation]
+    Campagne::PERSONNALISATION.map do |situation|
+      [label_option_personnalisation(situation), situation]
     end
   end
 
@@ -21,8 +21,8 @@ module CampagneHelper
            locals: { parcours_type: parcours_type }
   end
 
-  def label_situation_optionnelle(situation)
-    render partial: 'components/input_situation_optionnelle',
+  def label_option_personnalisation(situation)
+    render partial: 'components/input_option_personnalisation',
            locals: { situation: situation }
   end
 

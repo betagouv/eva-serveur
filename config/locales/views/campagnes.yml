@@ -31,7 +31,7 @@ fr:
           titre: Parcours personnalisé
           description: |
             Votre parcours a été personnalisé selon vos besoins spécifiques.
-      situation_optionnelle:
+      option_personnalisation:
         plan_de_la_ville: Situation Plan de la ville
         bienvenue: Situation Bienvenue
         expression_ecrite: Exercice d’expression écrite

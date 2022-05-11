@@ -37,5 +37,5 @@ end
     inclus: expression_ecrite_incluse
   }
 ].each do |situation_data|
-  render partial: 'situation_optionnelle', locals: situation_data
+  render partial: 'option_personnalisation', locals: situation_data
 end

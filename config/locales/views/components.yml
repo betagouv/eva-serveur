@@ -1,6 +1,6 @@
 fr:
   components:
-    input_situation_optionnelle:
+    input_option_personnalisation:
       plan_de_la_ville:
         nom: Situation Plan de la ville
         duree_moyenne: 5mn

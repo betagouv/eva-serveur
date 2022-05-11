@@ -6,6 +6,7 @@ class SituationConfiguration < ApplicationRecord
 
   delegate :libelle, :nom_technique, :questionnaire_entrainement_id, to: :situation
   delegate :nom_technique, to: :questionnaire_utile, prefix: :questionnaire
+  delegate :livraison_sans_redaction?, to: :situation, allow_nil: true
 
   acts_as_list scope: %i[campagne_id parcours_type_id]
 
@@ -13,10 +14,6 @@ class SituationConfiguration < ApplicationRecord
 
   def questionnaire_utile
     @questionnaire_utile ||= (questionnaire || situation.questionnaire)
-  end
-
-  def est_livraison_sans_redaction?
-    questionnaire&.nom_technique == Questionnaire::LIVRAISON_SANS_REDACTION
   end
 
   class << self

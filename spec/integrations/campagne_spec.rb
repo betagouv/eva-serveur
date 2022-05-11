@@ -19,13 +19,14 @@ describe Campagne, type: :integration do
 
   describe "création d'une campagne avec des situations" do
     # parcours type
-    let!(:situation_livraison) { create :situation_livraison }
     let!(:questionnaire_sans_livraison) { create :questionnaire, :livraison_sans_redaction }
     let!(:questionnaire_avec_livraison) { create :questionnaire, :livraison_avec_redaction }
+    let!(:situation_livraison) do
+      create :situation_livraison, questionnaire: questionnaire_sans_livraison
+    end
     let!(:parcours_type) do
       parcours = create :parcours_type
-      parcours.situations_configurations.create situation: situation_livraison,
-                                                questionnaire: questionnaire_sans_livraison
+      parcours.situations_configurations.create situation: situation_livraison
       parcours
     end
 

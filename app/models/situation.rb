@@ -6,6 +6,8 @@ class Situation < ApplicationRecord
   belongs_to :questionnaire, optional: true
   belongs_to :questionnaire_entrainement, optional: true, class_name: 'Questionnaire'
 
+  delegate :livraison_sans_redaction?, to: :questionnaire, allow_nil: true
+
   def display_name
     libelle
   end

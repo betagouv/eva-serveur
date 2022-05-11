@@ -21,4 +21,8 @@ class Questionnaire < ApplicationRecord
   def self.livraison_avec_redaction
     find_by(nom_technique: LIVRAISON_AVEC_REDACTION)
   end
+
+  def livraison_sans_redaction?
+    nom_technique == Questionnaire::LIVRAISON_SANS_REDACTION
+  end
 end

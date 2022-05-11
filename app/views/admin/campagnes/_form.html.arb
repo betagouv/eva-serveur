@@ -33,8 +33,8 @@ div class: 'nouvelle-campagne' do
               para t('.explication_personnalisation'), class: 'description description--secondaire'
               f.inputs class: 'input-choix input-choix-option-personnalisation' do
                 f.input :options_personnalisation, as: :check_boxes,
-                                                  collection: collection_options_personnalisation,
-                                                  label: false
+                                                   collection: collection_options_personnalisation,
+                                                   label: false
               end
             end
           end

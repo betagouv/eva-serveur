@@ -55,7 +55,7 @@ ActiveAdmin.register Campagne do
 
     def create
       create!
-      flash[:notice] = I18n.t('admin.campagnes.show.nouvelle_campagne')
+      flash[:notice] = I18n.t('admin.campagnes.show.nouvelle_campagne') if resource.save
     end
 
     def show

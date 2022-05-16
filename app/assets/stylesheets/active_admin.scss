@@ -1,19 +1,11 @@
 @import 'activeadmin_addons/all';
-// SASS variable overrides must be declared before loading up Active Admin's styles.
-//
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-//
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
 
 // Active Admin's got SASS!
+@import 'admin/variables';
 @import 'active_admin/mixins';
 @import 'activeadmin_reorderable';
 @import 'admin/base';
 @import 'admin/fonts';
-@import 'admin/variables';
 @import 'admin/mixins';
 @import 'admin/typography';
 @import 'admin/utilities';

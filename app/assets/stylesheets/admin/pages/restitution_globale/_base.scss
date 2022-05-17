@@ -5,7 +5,7 @@
   margin-top: 1rem;
 }
 
-.carte-evaluation {
+#details_evaluation {
   $grid-columns: 8;
   @import "../../../bootstrap_minimal";
   font-size: 0.875rem;
@@ -19,49 +19,36 @@
     font-size: 2.25rem;
     color: $eva_main_blue;
   }
-  .carte-informations {
-    display: flex;
-    position: relative;
-  }
-  .carte-informations-details {
-    padding: 2rem 1.25rem;
-    flex-grow: 2;
-    min-height: 15rem;
-  }
-  .carte-informations-pdf {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1.25rem;
-    text-align: center;
-    background-color: $eva_dark;
-  }
 
-  .row {
-    margin-bottom: 1.5rem;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    .col {
-      padding-right: 0;
-      &:last-child {
-        font-weight: 500;
+  .card-informations {
+    $grid-columns: 3;
+    @import "../../../bootstrap_minimal";
+    padding: 24px 0px;
+
+    .row {
+      margin-bottom: 1.5rem;
+      .col:last-child {
+          font-weight: 500;
       }
     }
   }
 
-  .evaluation_incomplete {
+  .card {
+    &-pdf {
+      padding: 1.25rem;
+      text-align: center;
+      background-color: $eva_dark;
+    }
+    &-footer {
+      padding: 1rem 0rem;
+    }
+  }
+
+  .evaluation-incomplete {
     line-height: 1rem;
     p:first-child {
       margin-bottom: 0.5rem;
       font-family: $font-titre;
-    }
-
-    .icone {
-      height: 5rem;
     }
   }
 }

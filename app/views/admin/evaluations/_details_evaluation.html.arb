@@ -1,36 +1,36 @@
 # frozen_string_literal: true
 
-div id: 'details_evaluation', class: 'row carte-evaluation' do
+div id: 'details_evaluation', class: 'row' do
   scope = 'admin.evaluations.details_evaluation'
   div class: 'col col-6 mx-auto' do
     h2 nom_pour_evaluation(resource), class: 'sous-titre'
     h3 t('.titre'), class: 'titre'
     div class: 'card' do
-      div class: 'card-body carte-informations p-0' do
-        div class: 'carte-informations-details' do
+      div class: 'row m-0' do
+        div class: 'col col-6 card-informations' do
           div class: 'row' do
-            div class: 'col col-2' do
+            div class: 'col-1' do
               span 'Campagne'
             end
-            div class: 'col col-6' do
+            div class: 'col col-2' do
               span resource.campagne.display_name
             end
           end
           div class: 'row' do
-            div class: 'col col-2' do
+            div class: 'col col-1' do
               span Evaluation.human_attribute_name('debutee_le')
             end
-            div class: 'col col-6' do
+            div class: 'col col-2' do
               span l(resource.debutee_le, format: :humain)
             end
           end
           if can?(:manage, Compte)
             if statistiques.temps_total
               div class: 'row' do
-                div class: 'col col-2' do
+                div class: 'col col-1' do
                   span Evaluation.human_attribute_name('temps_total')
                 end
-                div class: 'col col-6' do
+                div class: 'col col-2' do
                   span { formate_duree statistiques.temps_total }
                 end
               end
@@ -57,7 +57,7 @@ div id: 'details_evaluation', class: 'row carte-evaluation' do
             end
           end
         end
-        div class: 'carte-informations-pdf' do
+        div class: 'col-2 card-pdf' do
           div class: 'pdf-image' do
             inline_svg_tag('source-aide-pdf.svg')
           end
@@ -71,10 +71,10 @@ div id: 'details_evaluation', class: 'row carte-evaluation' do
         end
       end
       unless resource.complete
-        div class: 'card-footer bg-orange container' do
-          div class: 'row evaluation_incomplete' do
-            div(class: 'col col-2 d-flex align-items-center justify-content-center') do
-              svg_tag_base64 'attention_icone.svg', class: 'icone'
+        div class: 'row m-0' do
+          div class: 'card-footer bg-orange container evaluation-incomplete d-flex' do
+            div(class: 'col-2 d-flex align-items-center justify-content-center') do
+              svg_tag_base64 'attention_icone.svg'
             end
             div class: 'col-6 supprime-espace-derniere-balise' do
               md t('evaluation_incomplete', scope: scope)

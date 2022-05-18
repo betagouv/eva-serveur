@@ -27,10 +27,10 @@ module Restitution
 
     def competences
       calcule_competences(
-        ::Competence::PERSEVERANCE => Tri::Perseverance,
-        ::Competence::COMPREHENSION_CONSIGNE => Tri::ComprehensionConsigne,
-        ::Competence::RAPIDITE => Tri::Rapidite,
-        ::Competence::COMPARAISON_TRI => Tri::ComparaisonTri
+        ::Competence::PERSEVERANCE => Restitution::Tri::Perseverance,
+        ::Competence::COMPREHENSION_CONSIGNE => Restitution::Tri::ComprehensionConsigne,
+        ::Competence::RAPIDITE => Restitution::Tri::Rapidite,
+        ::Competence::COMPARAISON_TRI => Restitution::Tri::ComparaisonTri
       )
     end
   end

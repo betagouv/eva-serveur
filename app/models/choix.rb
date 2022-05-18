@@ -2,7 +2,7 @@
 
 class Choix < ApplicationRecord
   validates :intitule, :type_choix, :nom_technique, presence: true
-  enum type_choix: { bon: 0, mauvais: 1, abstention: 2 }
+  enum :type_choix, { bon: 0, mauvais: 1, abstention: 2 }
 
   acts_as_list scope: :question_id
 

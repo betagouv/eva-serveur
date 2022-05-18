@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-ruby '2.7.4'
+ruby '3.0.3'
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 7.0.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 
@@ -14,7 +14,6 @@ gem 'sass-rails', '>= 6'
 gem 'activeadmin', git: 'https://github.com/shanser/activeadmin',
                    branch: '7084-renders-action-items-only-when-authorized'
 gem 'activeadmin_addons'
-gem 'active_admin-humanized_enum'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls', git: 'https://github.com/shanser/activeadmin-xls',
                        branch: 'autoload'
@@ -47,6 +46,7 @@ gem 'redis'
 gem 'rollbar'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'sprockets-rails'
 gem 'truemail'
 gem 'web-console', group: :development
 gem 'wicked_pdf'
@@ -62,7 +62,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '6.0.0.rc1'
   gem 'rubocop', require: false
   gem 'rubocop-packaging', require: false
   gem 'rubocop-rails', require: false
@@ -76,9 +76,8 @@ group :development do
   gem 'letter_opener'
   gem 'rails-erd'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 3.0'
   gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'tarteaucitron'
 end
 

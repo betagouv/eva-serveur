@@ -13,11 +13,11 @@ class Evaluation < ApplicationRecord
   before_validation :trouve_campagne_depuis_code
   validate :code_campagne_connu
 
-  enum synthese_competences_de_base: SYNTHESES.zip(SYNTHESES).to_h
-  enum niveau_cefr: NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, _prefix: true
-  enum niveau_cnef: NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, _prefix: true
-  enum niveau_anlci_litteratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
-  enum niveau_anlci_numeratie: NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, _prefix: true
+  enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
+  enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true
+  enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true
+  enum :niveau_anlci_litteratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
+  enum :niveau_anlci_numeratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
 
   scope :des_3_derniers_mois, lambda {
     il_y_a_3_mois = (Date.current - 2.months).beginning_of_month

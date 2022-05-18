@@ -2,7 +2,7 @@
 
 class Actualite < ApplicationRecord
   has_one_attached :illustration
-  enum categorie: { blog: 0, assistance: 1, evolution: 2 }
+  enum :categorie, { blog: 0, assistance: 1, evolution: 2 }
 
   validates :titre, :contenu, :categorie, presence: true
   validates :titre, length: { maximum: 100 }

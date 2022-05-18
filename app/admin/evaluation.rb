@@ -33,9 +33,11 @@ ActiveAdmin.register Evaluation do
     whitelist
     column('Structure') { |evaluation| evaluation.campagne.compte.structure.nom }
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
-    column('Date') { |evaluation| l(evaluation.created_at, format: :court) }
+    column('Date') { |evaluation| I18n.l(evaluation.created_at, format: :court) }
     column :nom
-    column('passation complète') { |evaluation| t(evaluation.complete, scope: 'boolean.oui_non') }
+    column('passation complète') do |evaluation|
+      I18n.t(evaluation.complete, scope: 'boolean.oui_non')
+    end
     column('Niveau global') do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)
     end

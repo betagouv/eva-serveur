@@ -14,7 +14,7 @@ ActiveAdmin.register Compte do
   filter :statut_validation,
          as: :select,
          collection: Compte.statuts_validation.map { |v, id|
-                       [Compte.humanized_statut_validation(v), id]
+                       [Compte.human_enum_name(:statut_validation, v), id]
                      }
 
   filter :structure_id,
@@ -28,7 +28,7 @@ ActiveAdmin.register Compte do
   filter :role,
          as: :select,
          collection: Compte.roles.map { |v, id|
-                       [Compte.humanized_role(v), id]
+                       [Compte.human_enum_name(:role, v), id]
                      },
          if: proc { can? :manage, Compte }
   filter :created_at
@@ -63,9 +63,13 @@ ActiveAdmin.register Compte do
     column :nom
     column :email
     column :telephone
-    column :statut_validation
+    column :statut_validation do |compte|
+      Compte.human_enum_name(:role, compte.statut_validation)
+    end
     if can? :manage, Compte
-      column :role
+      column :role do |compte|
+        Compte.human_enum_name(:role, compte.role)
+      end
       column :structure
       column :created_at
     end
@@ -140,8 +144,8 @@ ActiveAdmin.register Compte do
       roles = Compte.roles.to_h
       roles.delete('superadmin') unless current_compte.superadmin?
       roles.delete('compte_generique') unless current_compte.superadmin?
-      roles.to_h do |k, v|
-        traduction = I18n.t(k, scope: %i[activerecord attributes compte roles])
+      roles.to_h do |_k, v|
+        traduction = Compte.human_enum_name(:role, v)
         [traduction, v]
       end
     end

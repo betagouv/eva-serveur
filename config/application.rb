@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 module EvaServeur
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 7.0
     config.time_zone = 'Paris'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -57,6 +57,7 @@ module EvaServeur
     end
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    Rails.autoloaders.main.ignore(Rails.root.join('app/controllers/active_admin/**/*'))
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
 

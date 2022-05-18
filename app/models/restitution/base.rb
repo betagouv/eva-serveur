@@ -86,7 +86,7 @@ module Restitution
     private
 
     def evenements_helper
-      @evenements_helper ||= Base::EvenementsHelper.new(@evenements)
+      @evenements_helper ||= Restitution::Base::EvenementsHelper.new(@evenements)
     end
 
     def competences_indeterminees?(competences)

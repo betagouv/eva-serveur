@@ -8,6 +8,10 @@ module Restitution
       REPONSE: 'reponse'
     }.freeze
 
+    QUESTION = {
+      LODI: 'LOdi'
+    }.freeze
+
     class << self
       def premier_evenement_du_nom(evenements, nom_evenement)
         evenements.find { |e| e.nom == EVENEMENT[nom_evenement] }

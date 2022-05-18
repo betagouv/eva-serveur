@@ -11,8 +11,13 @@ describe Restitution::CafeDeLaPlace do
     described_class.new(campagne,
                         [
                           build(:evenement_demarrage, partie: partie),
-                          build(:evenement_reponse, partie: partie),
-                          build(:evenement_reponse, donnees: { succes: true }, partie: partie)
+                          build(:evenement_reponse, partie: partie,
+                                                    donnees: { question: 'question' }),
+                          build(:evenement_reponse,
+                                donnees: { succes: true,
+                                           question: Restitution::MetriquesHelper::QUESTION[:LODI],
+                                           score: 1 },
+                                partie: partie)
                         ])
   end
 
@@ -29,6 +34,7 @@ describe Restitution::CafeDeLaPlace do
         partie.reload
         expect(partie.metriques['nombre_reponses']).to eq 2
         expect(partie.metriques['score']).to eq 1
+        expect(partie.metriques['score_orientation']).to eq 1
       end
     end
   end

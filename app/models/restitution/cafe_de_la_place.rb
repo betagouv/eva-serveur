@@ -10,6 +10,10 @@ module Restitution
       'score' => {
         'type' => :nombre,
         'instance' => Illettrisme::NombreBonnesReponses.new
+      },
+      'score_orientation' => {
+        'type' => :nombre,
+        'instance' => Illettrisme::ScoreOrientation.new
       }
     }.freeze
 

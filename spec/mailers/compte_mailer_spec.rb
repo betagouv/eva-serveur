@@ -14,7 +14,7 @@ describe CompteMailer, type: :mailer do
         email.deliver_now
       end
 
-      expect(email.from).to eql([Eva::EMAIL_CONTACT])
+      expect(email.from).to eql([Eva::EMAIL_NE_PAS_REPONDRE])
       expect(email.to).to eql(['debut@test.com'])
       expect(email.subject).to eql('Votre accès eva à « Ma Super Structure - 75012 »')
       expect(email.multipart?).to be(false)

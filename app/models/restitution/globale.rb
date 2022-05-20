@@ -41,7 +41,7 @@ module Restitution
           restitution.situation.id == situation_id
         end.any?(&:termine?)
       end
-      terminee ? 'complete' : 'incomplete'
+      terminee ? :complete : :incomplete
     end
 
     def scores_niveau2

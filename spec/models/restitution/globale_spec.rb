@@ -201,7 +201,7 @@ describe Restitution::Globale do
     context "quand des situations n'ont pas été complétée" do
       let(:restitutions) { [] }
 
-      it { expect(restitution_globale.complete?).to eq 'incomplete' }
+      it { expect(restitution_globale.complete?).to eq :incomplete }
     end
 
     context 'quand toutes les situations de la campagne ont été complétées' do
@@ -212,7 +212,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.complete?).to eq 'complete' }
+      it { expect(restitution_globale.complete?).to eq :complete }
     end
 
     context "quand l'une des situations n'est pas terminée" do
@@ -223,7 +223,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.complete?).to eq 'incomplete' }
+      it { expect(restitution_globale.complete?).to eq :incomplete }
     end
 
     context "quand une même situation n'est pas terminée" do
@@ -235,7 +235,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.complete?).to eq 'incomplete' }
+      it { expect(restitution_globale.complete?).to eq :incomplete }
     end
   end
 
@@ -245,11 +245,11 @@ describe Restitution::Globale do
 
     before do
       allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
-      allow(restitution_globale).to receive(:complete?).and_return('complete')
+      allow(restitution_globale).to receive(:complete?).and_return(:complete)
     end
 
     it do
-      expect(evaluation).to receive(:update).with(interpretations.merge(complete: 'complete'))
+      expect(evaluation).to receive(:update).with(interpretations.merge(completude: :complete))
       restitution_globale.persiste
     end
   end

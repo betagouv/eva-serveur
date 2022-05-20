@@ -5,6 +5,10 @@ class Evaluation < ApplicationRecord
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
   NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
+  NIVEAUX_COMPLETUDE = %w[incomplete
+                          competences_de_base_completes
+                          competences_transversalles_completes
+                          complete].freeze
 
   validates :nom, :debutee_le, presence: true
   belongs_to :campagne, counter_cache: :nombre_evaluations
@@ -18,6 +22,7 @@ class Evaluation < ApplicationRecord
   enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true
   enum :niveau_anlci_litteratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
   enum :niveau_anlci_numeratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
+  enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
 
   scope :des_3_derniers_mois, lambda {
     il_y_a_3_mois = (Date.current - 2.months).beginning_of_month

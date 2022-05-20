@@ -115,11 +115,22 @@ fr:
             Vous parvenez **très bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester concentré·e sur une tâche pendant longtemps malgré la difficulté et la distraction. Aussi, vous savez être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous adapter rapidement à de nombreux métiers du BTP, de l’Industrie, et de la Surveillance, bravo !
       details_evaluation:
         titre: Détails de l'évaluation
-        evaluation_incomplete: |
-          **Attention**
+        evaluation_competences_de_base_incomplete: |
+          **Évaluation des compétences de base incomplète**
 
-          Pour cette évaluation, tous les modules **n'ont pas été complétés** lors de la passation.
-          Dans la restitution ci-dessous, **certains résultats peuvent donc manquer** et leur fiabilité peut être diminuée.
+          Tous les modules permettant **d’évaluer <u>les compétences de base</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
+
+          **Néanmoins, les résultats de l’évaluation des compétences transversales sont bien complets et fiables.**
+        evaluation_competences_transversales_incomplete: |
+          **Évaluation des compétences transversales incomplète**
+
+          Certains modules permettant **d’évaluer <u>les compétences transversales</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
+
+          **Néanmoins, les résultats de l’évaluation des compétences de base sont bien complets et fiables.**
+        evaluation_incomplete: |
+          **Évaluation incomplète**
+
+          Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
       demande_aide_illettrisme:
         aide_description: |
           Besoin d'aide pour trouver une formation (ou une<br> solution d'accompagnement) adaptée ?

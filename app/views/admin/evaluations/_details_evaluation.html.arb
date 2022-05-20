@@ -70,14 +70,20 @@ div id: 'details_evaluation', class: 'row' do
           end
         end
       end
-      if resource.incomplete?
+      unless resource.complete?
         div class: 'row m-0' do
           div class: 'card-footer bg-orange container evaluation-incomplete d-flex' do
             div(class: 'col-2 d-flex align-items-center justify-content-center') do
               svg_tag_base64 'attention_icone.svg'
             end
             div class: 'col-6 supprime-espace-derniere-balise' do
-              md t('evaluation_incomplete', scope: scope)
+              if resource.competences_de_base_incompletes?
+                md t('evaluation_competences_de_base_incomplete', scope: scope)
+              elsif resource.competences_transversalles_incompletes?
+                md t('evaluation_competences_transversales_incomplete', scope: scope)
+              else
+                md t('evaluation_incomplete', scope: scope)
+              end
             end
           end
         end

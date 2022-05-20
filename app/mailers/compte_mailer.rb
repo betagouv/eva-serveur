@@ -3,8 +3,7 @@
 class CompteMailer < ApplicationMailer
   def nouveau_compte
     @compte = params[:compte]
-    mail(from: Eva::EMAIL_NE_PAS_REPONDRE,
-         to: @compte.email,
+    mail(to: @compte.email,
          subject: t('.objet', structure: @compte.structure.display_name))
   end
 

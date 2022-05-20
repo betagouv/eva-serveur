@@ -188,7 +188,7 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#terminee?' do
+  describe '#complete?' do
     let(:evaluation) { double(campagne_id: SecureRandom.uuid) }
     let(:situation1) { Situation.new id: SecureRandom.uuid }
     let(:situation2) { Situation.new id: SecureRandom.uuid }
@@ -201,7 +201,7 @@ describe Restitution::Globale do
     context "quand des situations n'ont pas été complétée" do
       let(:restitutions) { [] }
 
-      it { expect(restitution_globale.terminee?).to eq false }
+      it { expect(restitution_globale.complete?).to eq false }
     end
 
     context 'quand toutes les situations de la campagne ont été complétées' do
@@ -212,7 +212,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.terminee?).to eq true }
+      it { expect(restitution_globale.complete?).to eq true }
     end
 
     context "quand l'une des situations n'est pas terminée" do
@@ -223,7 +223,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.terminee?).to eq false }
+      it { expect(restitution_globale.complete?).to eq false }
     end
 
     context "quand une même situation n'est pas terminée" do
@@ -235,7 +235,7 @@ describe Restitution::Globale do
         ]
       end
 
-      it { expect(restitution_globale.terminee?).to eq false }
+      it { expect(restitution_globale.complete?).to eq false }
     end
   end
 
@@ -245,7 +245,7 @@ describe Restitution::Globale do
 
     before do
       allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
-      allow(restitution_globale).to receive(:terminee?).and_return(true)
+      allow(restitution_globale).to receive(:complete?).and_return(true)
     end
 
     it do

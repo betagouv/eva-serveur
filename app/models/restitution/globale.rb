@@ -17,7 +17,7 @@ module Restitution
     end
 
     def persiste
-      @evaluation.update interpretations.merge(complete: terminee?)
+      @evaluation.update interpretations.merge(complete: complete?)
     end
 
     def utilisateur
@@ -32,7 +32,7 @@ module Restitution
       evaluation.campagne.compte.structure&.nom
     end
 
-    def terminee?
+    def complete?
       situation_ids = SituationConfiguration.where(campagne_id: evaluation.campagne_id)
                                             .pluck(:situation_id)
 

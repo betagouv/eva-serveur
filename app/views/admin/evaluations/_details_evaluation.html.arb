@@ -70,7 +70,7 @@ div id: 'details_evaluation', class: 'row' do
           end
         end
       end
-      unless resource.complete
+      if resource.incomplete?
         div class: 'row m-0' do
           div class: 'card-footer bg-orange container evaluation-incomplete d-flex' do
             div(class: 'col-2 d-flex align-items-center justify-content-center') do

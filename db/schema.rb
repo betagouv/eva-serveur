@@ -148,7 +148,7 @@ ActiveRecord::Schema[6.1].define(version: 2022_04_20_151925) do
     t.string "niveau_cnef"
     t.string "niveau_anlci_litteratie"
     t.string "niveau_anlci_numeratie"
-    t.boolean "complete", default: false, null: false
+    t.string "complete", default: "incomplete", null: false
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
 

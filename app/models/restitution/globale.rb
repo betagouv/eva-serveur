@@ -36,11 +36,12 @@ module Restitution
       situation_ids = SituationConfiguration.where(campagne_id: evaluation.campagne_id)
                                             .pluck(:situation_id)
 
-      situation_ids.all? do |situation_id|
+      terminee = situation_ids.all? do |situation_id|
         restitutions.select do |restitution|
           restitution.situation.id == situation_id
         end.any?(&:termine?)
       end
+      terminee ? 'complete' : 'incomplete'
     end
 
     def scores_niveau2

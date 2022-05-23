@@ -7,8 +7,10 @@ class Evaluation < ApplicationRecord
   NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
   NIVEAUX_COMPLETUDE = %w[incomplete
                           competences_de_base_incompletes
-                          competences_transversalles_incompletes
+                          competences_transversales_incompletes
                           complete].freeze
+  SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
+  SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
 
   validates :nom, :debutee_le, presence: true
   belongs_to :campagne, counter_cache: :nombre_evaluations

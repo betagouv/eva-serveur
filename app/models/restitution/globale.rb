@@ -17,7 +17,8 @@ module Restitution
     end
 
     def persiste
-      @evaluation.update interpretations.merge(completude: complete?)
+      restitution_complete = Restitution::CompletudeHelper.new(evaluation, restitutions).complete?
+      @evaluation.update interpretations.merge(completude: restitution_complete)
     end
 
     def utilisateur
@@ -30,18 +31,6 @@ module Restitution
 
     def structure
       evaluation.campagne.compte.structure&.nom
-    end
-
-    def complete?
-      situation_ids = SituationConfiguration.where(campagne_id: evaluation.campagne_id)
-                                            .pluck(:situation_id)
-
-      terminee = situation_ids.all? do |situation_id|
-        restitutions.select do |restitution|
-          restitution.situation.id == situation_id
-        end.any?(&:termine?)
-      end
-      terminee ? :complete : :incomplete
     end
 
     def scores_niveau2

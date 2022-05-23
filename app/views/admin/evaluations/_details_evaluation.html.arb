@@ -79,7 +79,7 @@ div id: 'details_evaluation', class: 'row' do
             div class: 'col-6 supprime-espace-derniere-balise' do
               if resource.competences_de_base_incompletes?
                 md t('evaluation_competences_de_base_incomplete', scope: scope)
-              elsif resource.competences_transversalles_incompletes?
+              elsif resource.competences_transversales_incompletes?
                 md t('evaluation_competences_transversales_incomplete', scope: scope)
               else
                 md t('evaluation_incomplete', scope: scope)

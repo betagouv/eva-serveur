@@ -188,64 +188,15 @@ describe Restitution::Globale do
     end
   end
 
-  describe '#complete?' do
-    let(:evaluation) { double(campagne_id: SecureRandom.uuid) }
-    let(:situation1) { Situation.new id: SecureRandom.uuid }
-    let(:situation2) { Situation.new id: SecureRandom.uuid }
-    before do
-      allow(SituationConfiguration)
-        .to receive(:where).with(campagne_id: evaluation.campagne_id)
-                           .and_return(double(pluck: [situation1.id, situation2.id]))
-    end
-
-    context "quand des situations n'ont pas été complétée" do
-      let(:restitutions) { [] }
-
-      it { expect(restitution_globale.complete?).to eq :incomplete }
-    end
-
-    context 'quand toutes les situations de la campagne ont été complétées' do
-      let(:restitutions) do
-        [
-          double(situation: situation1, termine?: true),
-          double(situation: situation2, termine?: true)
-        ]
-      end
-
-      it { expect(restitution_globale.complete?).to eq :complete }
-    end
-
-    context "quand l'une des situations n'est pas terminée" do
-      let(:restitutions) do
-        [
-          double(situation: situation1, termine?: true),
-          double(situation: situation2, termine?: false)
-        ]
-      end
-
-      it { expect(restitution_globale.complete?).to eq :incomplete }
-    end
-
-    context "quand une même situation n'est pas terminée" do
-      let(:restitutions) do
-        [
-          double(situation: situation1, termine?: false),
-          double(situation: situation1, termine?: false),
-          double(situation: situation2, termine?: true)
-        ]
-      end
-
-      it { expect(restitution_globale.complete?).to eq :incomplete }
-    end
-  end
-
   describe '#persiste' do
     let(:restitutions) { [] }
     let(:interpretations) { { synthese_competences_de_base: 'illetrisme_potentiel' } }
+    let(:helper) { double }
 
     before do
       allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
-      allow(restitution_globale).to receive(:complete?).and_return(:complete)
+      allow(helper).to receive(:complete?).and_return(:complete)
+      allow(Restitution::CompletudeHelper).to receive(:new).and_return(helper)
     end
 
     it do

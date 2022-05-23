@@ -26,6 +26,10 @@ fr:
         nom: Nom
         email: Email
         temps_total: Temps total
+        complete: Complète
+        incomplete: Incomplète
+        competences_transversales_incompletes: Évaluation des compétences transversales incomplète
+        competences_de_base_incompletes: Évaluation des compétences de base incomplète
         interpretations:
           synthese_competences_de_base:
             socle_clea: supérieur

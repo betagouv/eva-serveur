@@ -17,7 +17,7 @@ module Restitution
     end
 
     def persiste
-      restitution_complete = Restitution::CompletudeHelper.new(evaluation, restitutions).complete?
+      restitution_complete = Restitution::Completude.new(evaluation, restitutions).calcule
       @evaluation.update interpretations.merge(completude: restitution_complete)
     end
 

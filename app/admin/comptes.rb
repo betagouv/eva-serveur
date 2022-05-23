@@ -64,7 +64,7 @@ ActiveAdmin.register Compte do
     column :email
     column :telephone
     column :statut_validation do |compte|
-      Compte.human_enum_name(:role, compte.statut_validation)
+      Compte.human_enum_name(:statut_validation, compte.statut_validation)
     end
     if can? :manage, Compte
       column :role do |compte|

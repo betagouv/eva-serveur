@@ -590,6 +590,7 @@ DEPENDENCIES
   sprockets-rails
   tarteaucitron
   truemail
+  tzinfo-data
   web-console
   wicked_pdf
   wkhtmltopdf-binary (~> 0.12.3.1)

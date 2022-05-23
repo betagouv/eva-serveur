@@ -36,7 +36,7 @@ ActiveAdmin.register Evaluation do
     column('Date') { |evaluation| I18n.l(evaluation.created_at, format: :court) }
     column :nom
     column('passation complète') do |evaluation|
-      I18n.t(evaluation.complete, scope: 'boolean.oui_non')
+      I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')
     end
     column('Niveau global') do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)

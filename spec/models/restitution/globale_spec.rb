@@ -191,12 +191,12 @@ describe Restitution::Globale do
   describe '#persiste' do
     let(:restitutions) { [] }
     let(:interpretations) { { synthese_competences_de_base: 'illetrisme_potentiel' } }
-    let(:helper) { double }
+    let(:completude) { double }
 
     before do
       allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
-      allow(helper).to receive(:complete?).and_return(:complete)
-      allow(Restitution::CompletudeHelper).to receive(:new).and_return(helper)
+      allow(completude).to receive(:calcule).and_return(:complete)
+      allow(Restitution::Completude).to receive(:new).and_return(completude)
     end
 
     it do

@@ -38,6 +38,9 @@
       padding: 1.25rem;
       text-align: center;
       background-color: $eva_dark;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     &-footer {
       padding: 1rem 0rem;

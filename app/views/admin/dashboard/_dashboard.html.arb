@@ -26,17 +26,6 @@ if campagnes.present?
   end
 end
 
-if can?(:manage, Compte)
-  panel t('.statistiques.titre'), class: 'panel--transparent' do
-    text_node tag.iframe(nil, src: 'https://metabase.eva.beta.gouv.fr/public/dashboard/f9549f07-b9a1-4fe7-8961-2a127bf27d22',
-                              frameborder: 0,
-                              loading: 'lazy',
-                              width: '100%',
-                              height: 600,
-                              allowtransparency: true)
-  end
-end
-
 if comptes_en_attente.present? && can?(:autoriser, Compte)
   render 'modal_validation_comptes_en_attente'
 end

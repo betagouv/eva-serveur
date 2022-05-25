@@ -24,5 +24,12 @@ class SituationConfiguration < ApplicationRecord
         sc.questionnaire_nom_technique == questionnaire
       end
     end
+
+    def ids_situations(id_campagne, noms_techniques)
+      SituationConfiguration.joins(:situation)
+                            .where(campagne_id: id_campagne)
+                            .where(situations: { nom_technique: noms_techniques })
+                            .pluck(:situation_id)
+    end
   end
 end

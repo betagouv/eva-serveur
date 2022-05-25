@@ -15,13 +15,6 @@ module Restitution
       :complete
     end
 
-    def ids_situations(id_campagne, noms_techniques)
-      SituationConfiguration.joins(:situation)
-                            .where(campagne_id: id_campagne)
-                            .where(situations: { nom_technique: noms_techniques })
-                            .pluck(:situation_id)
-    end
-
     private
 
     def incomplete?
@@ -31,13 +24,17 @@ module Restitution
     end
 
     def ids_situations_ct
-      @ids_situations_ct ||= ids_situations(@evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_TRANSVERSALES)
+      @ids_situations_ct ||= SituationConfiguration.ids_situations(
+        @evaluation.campagne_id,
+        Evaluation::SITUATION_COMPETENCES_TRANSVERSALES
+      )
     end
 
     def ids_situations_cdb
-      @ids_situations_cdb ||= ids_situations(@evaluation.campagne_id,
-                                             Evaluation::SITUATION_COMPETENCES_BASE)
+      @ids_situations_cdb ||= SituationConfiguration.ids_situations(
+        @evaluation.campagne_id,
+        Evaluation::SITUATION_COMPETENCES_BASE
+      )
     end
 
     def competence_transversale?

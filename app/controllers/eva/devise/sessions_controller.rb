@@ -37,6 +37,8 @@ module Eva
       end
 
       def check_compte_confirmation
+        return unless params.key?(:compte)
+
         compte = Compte.find_by email: params[:compte][:email].strip
         return if compte.blank?
 

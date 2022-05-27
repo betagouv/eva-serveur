@@ -14,6 +14,6 @@ class EvenementEvacob < SimpleDelegator
   end
 
   def score_reponse
-    donnees['score']
+    donnees['score'] || 0
   end
 end

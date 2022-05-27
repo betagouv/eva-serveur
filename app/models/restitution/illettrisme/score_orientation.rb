@@ -4,16 +4,15 @@ module Restitution
   module Illettrisme
     class ScoreOrientation
       def calcule(evenements, _)
-        evenements_reponses_lodi_avec_score(evenements).sum(&:score_reponse)
+        evenements_reponses_lodi(evenements).sum(&:score_reponse)
       end
 
       private
 
-      def evenements_reponses_lodi_avec_score(evenements)
+      def evenements_reponses_lodi(evenements)
         evenements.select do |evenement|
           evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE] &&
-            evenement.parcours?(:orientation) &&
-            evenement.score_reponse
+            evenement.parcours?(:orientation)
         end
       end
     end

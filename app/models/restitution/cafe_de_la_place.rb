@@ -3,14 +3,6 @@
 module Restitution
   class CafeDeLaPlace < Base
     METRIQUES = {
-      'nombre_reponses' => {
-        'type' => :nombre,
-        'instance' => Illettrisme::NombreReponses.new
-      },
-      'score' => {
-        'type' => :nombre,
-        'instance' => Illettrisme::NombreBonnesReponses.new
-      },
       'score_orientation' => {
         'type' => :nombre,
         'instance' => Illettrisme::ScoreOrientation.new
@@ -25,7 +17,7 @@ module Restitution
     METRIQUES.each_key do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']
-          .calcule(evenements, 'toutes')
+          .calcule(evenements, 'métacompétences non définies')
       end
     end
 

@@ -11,21 +11,27 @@ describe Restitution::Illettrisme::ScoreOrientation do
   end
 
   describe 'metrique score_orientation' do
-    let(:question_lodi) { Restitution::MetriquesHelper::QUESTION[:LODI] }
+    let(:question_lodi1) { 'LOdi1' }
+    let(:question_lodi2) { 'LOdi2' }
 
-    context 'avec une réponse avec score' do
+    context "somme les scores des réponses des questions d'orientation" do
       let(:evenements_reponses) do
-        [build(:evenement_reponse,
-               donnees: { question: question_lodi, score: 1 })]
+        [
+          build(:evenement_affichage_question_qcm, donnees: { question: question_lodi1 }),
+          build(:evenement_reponse, donnees: { question: question_lodi1, score: 1 }),
+          build(:evenement_affichage_question_qcm, donnees: { question: question_lodi2 }),
+          build(:evenement_reponse, donnees: { question: question_lodi2, score: 2.5 }),
+          build(:evenement_reponse, donnees: { question: 'autre_question', score: 100 }),
+          build(:evenement, donnees: { score: 100 })
+        ]
       end
 
-      it { expect(metrique_score_reponse_orientation).to eq(1) }
+      it { expect(metrique_score_reponse_orientation).to eq(3.5) }
     end
 
     context 'avec une réponse sans score' do
       let(:evenements_reponses) do
-        [build(:evenement_reponse,
-               donnees: { question: 'LOdi2' })]
+        [build(:evenement_reponse, donnees: { question: question_lodi1 })]
       end
 
       it { expect(metrique_score_reponse_orientation).to eq(0) }

@@ -15,7 +15,7 @@ describe Restitution::CafeDeLaPlace do
                                                     donnees: { question: 'question' }),
                           build(:evenement_reponse,
                                 donnees: { succes: true,
-                                           question: Restitution::MetriquesHelper::QUESTION[:LODI],
+                                           question: 'LOdi1',
                                            score: 1 },
                                 partie: partie)
                         ])

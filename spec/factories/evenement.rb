@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :evenement do
-    nom { 'ouvertureContenant' }
+    nom { 'nom_evenement' }
     donnees { {} }
     partie
     sequence(:position)

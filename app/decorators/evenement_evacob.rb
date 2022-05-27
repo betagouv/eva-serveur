@@ -5,10 +5,6 @@ class EvenementEvacob < SimpleDelegator
     orientation: 'LOdi'
   }.freeze
 
-  def metacompetence
-    'toutes'
-  end
-
   def bonne_reponse?
     donnees['succes']
   end

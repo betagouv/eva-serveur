@@ -32,8 +32,6 @@ describe Restitution::CafeDeLaPlace do
       it do
         restitution.persiste
         partie.reload
-        expect(partie.metriques['nombre_reponses']).to eq 2
-        expect(partie.metriques['score']).to eq 1
         expect(partie.metriques['score_orientation']).to eq 1
       end
     end

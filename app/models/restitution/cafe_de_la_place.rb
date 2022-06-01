@@ -30,5 +30,11 @@ module Restitution
     def efficience
       nil
     end
+
+    def competences
+      calcule_competences(
+        ::Competence::LECTURE_BAS => CafeDeLaPlace::LectureBas
+      )
+    end
   end
 end

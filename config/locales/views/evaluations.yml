@@ -218,6 +218,7 @@ fr:
         temps_moyen_mots_francais: Temps moyen de réponse correcte mot français (en secondes)
         nombre_bonnes_reponses_mot_français: Nombre de bonnes réponses (mot français)
         score_orientation: 'Score Orientation'
+        score_lecture: 'Score Lecture'
 
         nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_reponses: Nombre de réponses

@@ -2,19 +2,19 @@
 
 require 'rails_helper'
 
-describe Restitution::Illettrisme::ScoreOrientation do
-  let(:metrique_score_reponse_orientation) do
-    described_class.new.calcule(evenements_decores(evenements, :evacob), 'toutes')
-  end
+describe Restitution::Illettrisme::ScoreModule do
   let(:evenements) do
     [build(:evenement_demarrage)] + evenements_reponses
   end
 
   describe 'metrique score_orientation' do
+    let(:metrique_score_reponse_orientation) do
+      described_class.new.calcule(evenements_decores(evenements, :evacob), :orientation)
+    end
     let(:question_lodi1) { 'LOdi1' }
     let(:question_lodi2) { 'LOdi2' }
 
-    context "somme les scores des réponses des questions d'orientation" do
+    context 'somme les scores des réponses' do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_lodi1 }),

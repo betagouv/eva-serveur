@@ -5,7 +5,13 @@ module Restitution
     METRIQUES = {
       'score_orientation' => {
         'type' => :nombre,
-        'instance' => Illettrisme::ScoreOrientation.new
+        'module' => :orientation,
+        'instance' => Illettrisme::ScoreModule.new
+      },
+      'score_lecture' => {
+        'type' => :nombre,
+        'module' => :lecture_complet,
+        'instance' => Illettrisme::ScoreModule.new
       }
     }.freeze
 
@@ -17,7 +23,7 @@ module Restitution
     METRIQUES.each_key do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']
-          .calcule(evenements, 'métacompétences non définies')
+          .calcule(evenements, METRIQUES[metrique]['module'])
       end
     end
 

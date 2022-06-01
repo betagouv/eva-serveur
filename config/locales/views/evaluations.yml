@@ -48,6 +48,8 @@ fr:
         apte: Apte
         apte_avec_aide: Apte avec aide
 
+        lecture_bas:
+          nom: Lecture bas
         vocabulaire:
           nom: Vocabulaire
         comprehension_consigne:

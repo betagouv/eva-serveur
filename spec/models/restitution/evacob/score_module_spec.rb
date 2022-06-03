@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::Illettrisme::ScoreModule do
+describe Restitution::Evacob::ScoreModule do
   let(:evenements) do
     [build(:evenement_demarrage)] + evenements_reponses
   end

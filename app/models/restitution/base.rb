@@ -11,7 +11,8 @@ module Restitution
 
     COMPETENCES_INUTILES_POUR_EFFICIENCE = [
       ::Competence::PERSEVERANCE,
-      ::Competence::COMPREHENSION_CONSIGNE
+      ::Competence::COMPREHENSION_CONSIGNE,
+      ::Competence::LECTURE_BAS
     ].freeze
 
     attr_reader :campagne, :evenements

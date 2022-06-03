@@ -15,6 +15,13 @@ describe Restitution::CafeDeLaPlace::LectureBas do
       allow(restitution).to receive(:abandon?).and_return(false)
     end
 
+    it "n'a pas de score de lecture" do
+      expect(partie).to receive(:metriques).and_return({})
+      expect(
+        described_class.new(restitution).niveau
+      ).to eql(Competence::NIVEAU_INDETERMINE)
+    end
+
     it 'a le niveau 1' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 6 })
       expect(described_class.new(restitution).niveau).to eql(:profil1)

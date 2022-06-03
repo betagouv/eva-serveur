@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::CafeDeLaPlace::LectureBas, focus: true do
+describe Restitution::CafeDeLaPlace::LectureBas do
   let(:restitution) { double }
   let(:partie) { double }
 

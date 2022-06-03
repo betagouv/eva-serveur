@@ -6,16 +6,14 @@ class EvenementEvacob < SimpleDelegator
     lecture_complet: 'AL'
   }.freeze
 
-  NUMEROS_QUESTION_LECTURE_ORIENTATION = [2, 4, 6].freeze
+  NUMEROS_QUESTION_LECTURE_ORIENTATION = [2, 4, 5].freeze
 
   def bonne_reponse?
     donnees['succes']
   end
 
   def module?(nom_module)
-    if nom_module == :lecture_complet && module?(:orientation)
-      return NUMEROS_QUESTION_LECTURE_ORIENTATION.include?(numero_question)
-    end
+    return question_lecture_orientation? if nom_module == :lecture_complet && module?(:orientation)
 
     donnees['question'].start_with?(PREFIX_QUESTIONS[nom_module])
   end
@@ -26,7 +24,8 @@ class EvenementEvacob < SimpleDelegator
 
   private
 
-  def numero_question
-    donnees['question'].scan(/\d+/).first.to_i
+  def question_lecture_orientation?
+    numero_question = donnees['question'].scan(/\d+/).first.to_i
+    NUMEROS_QUESTION_LECTURE_ORIENTATION.include?(numero_question)
   end
 end

@@ -20,7 +20,7 @@ describe EvenementEvacob do
       expect(evenement('ALrd14').module?(:lecture_complet)).to be true
       expect(evenement('LOdi2').module?(:lecture_complet)).to be true
       expect(evenement('LOdi4').module?(:lecture_complet)).to be true
-      expect(evenement('LOdi6').module?(:lecture_complet)).to be true
+      expect(evenement('LOdi5').module?(:lecture_complet)).to be true
       expect(evenement('LOdi1').module?(:lecture_complet)).to be false
       expect(evenement('LOdi3').module?(:lecture_complet)).to be false
     end

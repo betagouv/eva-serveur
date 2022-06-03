@@ -13,6 +13,12 @@ module Restitution
         evenements.find { |e| e.nom == EVENEMENT[nom_evenement] }
       end
 
+      def filtre_evenements_reponses(evenements)
+        evenements.select do |evenement|
+          evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE] && yield(evenement)
+        end
+      end
+
       def temps_entre_couples(evenements)
         les_temps = []
         evenements.each_slice(2) do |e1, e2|

@@ -14,6 +14,8 @@ module Restitution
         return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
 
         score = @restitution.partie.metriques['score_lecture']
+        return ::Competence::NIVEAU_INDETERMINE if score.blank?
+
         SEUILS.each do |niveau, seuil|
           return niveau if score >= seuil
         end

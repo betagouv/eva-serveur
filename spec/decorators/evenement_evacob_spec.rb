@@ -14,15 +14,18 @@ describe EvenementEvacob do
       expect(evenement('LOdi1').module?(:orientation)).to be true
       expect(evenement('ALrd1').module?(:orientation)).to be false
     end
+  end
 
-    it "retourn vrai s'il est du module lecture_complet" do
-      expect(evenement('ALrd1').module?(:lecture_complet)).to be true
-      expect(evenement('ALrd14').module?(:lecture_complet)).to be true
-      expect(evenement('LOdi2').module?(:lecture_complet)).to be true
-      expect(evenement('LOdi4').module?(:lecture_complet)).to be true
-      expect(evenement('LOdi5').module?(:lecture_complet)).to be true
-      expect(evenement('LOdi1').module?(:lecture_complet)).to be false
-      expect(evenement('LOdi3').module?(:lecture_complet)).to be false
+  describe '#metacompetence?' do
+    def evenement(metacompetence)
+      described_class.new Evenement.new nom: 'reponse', donnees: {
+        metacompetence: metacompetence
+      }
+    end
+
+    it "retourn vrai si c'est la metacompetence demandée" do
+      expect(evenement('lecture').metacompetence?('lecture')).to be true
+      expect(evenement('comprehention').metacompetence?('lecture')).to be false
     end
   end
 end

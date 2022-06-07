@@ -1,5 +1,9 @@
 .bg-orange {
-  background-color: $eva_orange;  
+  background-color: $eva_orange;
+}
+
+.bord-rouge {
+  border: 2px solid $eva_red;
 }
 
 .supprime-espace-derniere-balise {

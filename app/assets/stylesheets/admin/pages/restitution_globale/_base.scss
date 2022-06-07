@@ -47,11 +47,22 @@
     }
   }
 
-  .evaluation-incomplete {
+  .message-alerte {
     line-height: 1rem;
+    p {
+      margin-bottom: 1rem;
+    }
+
     p:first-child {
       margin-bottom: 0.5rem;
       font-family: $font-titre;
+    }
+  }
+  .message-alerte--illettrisme {
+    border-radius: 0px 0px 8px 8px;
+    p:first-child {
+      margin-bottom: 1rem;
+      color: $eva_red;
     }
   }
 }

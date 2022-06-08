@@ -17,6 +17,7 @@ class Campagne < ApplicationRecord
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: { case_sensitive: false },
                    format: { with: /\A[A-Z0-9]+\z/ }
+  validates_associated :situations_configurations
 
   delegate :structure_code_postal, to: :compte
 

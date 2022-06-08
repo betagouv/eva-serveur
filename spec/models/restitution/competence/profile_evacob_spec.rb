@@ -2,9 +2,10 @@
 
 require 'rails_helper'
 
-describe Restitution::CafeDeLaPlace::LectureBas do
+describe Restitution::Competence::ProfileEvacob do
   let(:restitution) { double }
   let(:partie) { double }
+  let(:competence_lecture_bas) { described_class.new(restitution, 'score_lecture') }
 
   before do
     allow(restitution).to receive(:partie).and_return(partie)
@@ -18,38 +19,38 @@ describe Restitution::CafeDeLaPlace::LectureBas do
     it "n'a pas de score de lecture" do
       expect(partie).to receive(:metriques).and_return({})
       expect(
-        described_class.new(restitution).niveau
+        competence_lecture_bas.niveau
       ).to eql(Competence::NIVEAU_INDETERMINE)
     end
 
     it 'a le niveau 1' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 6 })
-      expect(described_class.new(restitution).niveau).to eql(:profil1)
+      expect(competence_lecture_bas.niveau).to eql(:profil1)
     end
 
     it 'a le niveau 2 bas' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 7 })
-      expect(described_class.new(restitution).niveau).to eql(:profil2)
+      expect(competence_lecture_bas.niveau).to eql(:profil2)
     end
 
     it 'a le niveau 2 haut' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 10 })
-      expect(described_class.new(restitution).niveau).to eql(:profil2)
+      expect(competence_lecture_bas.niveau).to eql(:profil2)
     end
 
     it 'a le niveau 3 bas' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 11 })
-      expect(described_class.new(restitution).niveau).to eql(:profil3)
+      expect(competence_lecture_bas.niveau).to eql(:profil3)
     end
 
     it 'a le niveau 3 haut' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 14 })
-      expect(described_class.new(restitution).niveau).to eql(:profil3)
+      expect(competence_lecture_bas.niveau).to eql(:profil3)
     end
 
     it 'a le niveau 4' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 15 })
-      expect(described_class.new(restitution).niveau).to eql(:profil4)
+      expect(competence_lecture_bas.niveau).to eql(:profil4)
     end
   end
 
@@ -57,7 +58,7 @@ describe Restitution::CafeDeLaPlace::LectureBas do
     it 'a le niveau indéfini' do
       expect(restitution).to receive(:abandon?).and_return(true)
       expect(
-        described_class.new(restitution).niveau
+        competence_lecture_bas.niveau
       ).to eql(Competence::NIVEAU_INDETERMINE)
     end
   end

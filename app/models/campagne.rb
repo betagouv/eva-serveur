@@ -57,9 +57,11 @@ class Campagne < ApplicationRecord
   def initialise_situations
     initialise_situations_optionnelles
 
+    # rubocop:disable Rails/FindEach
     parcours_type.situations_configurations
                  .includes(situation: :questionnaire)
-                 .find_each do |situation_configuration|
+                 .each do |situation_configuration|
+      # rubocop:enable Rails/FindEach
       construit_situation_configuration(situation_configuration)
     end
   end

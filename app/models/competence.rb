@@ -30,4 +30,5 @@ module Competence
 
   LECTURE_BAS = :lecture_bas
   COMPREHENSION = :comprehension
+  PRODUCTION = :production
 end

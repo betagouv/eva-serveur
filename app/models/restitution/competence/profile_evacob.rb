@@ -15,6 +15,12 @@ module Restitution
           ::Competence::PROFIL_3 => 7,
           ::Competence::PROFIL_2 => 5,
           ::Competence::PROFIL_1 => 0
+        },
+        'score_production' => {
+          ::Competence::PROFIL_4 => 18,
+          ::Competence::PROFIL_3 => 14,
+          ::Competence::PROFIL_2 => 9,
+          ::Competence::PROFIL_1 => 0
         }
       }.freeze
 

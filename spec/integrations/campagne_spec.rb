@@ -24,7 +24,7 @@ describe Campagne, type: :integration do
     let!(:situation_livraison) do
       create :situation_livraison, questionnaire: questionnaire_sans_livraison
     end
-    let!(:parcours_type) do
+    let(:parcours_type) do
       parcours = create :parcours_type
       parcours.situations_configurations.create situation: situation_livraison
       parcours
@@ -44,6 +44,25 @@ describe Campagne, type: :integration do
       campagne.reload
       situations_configurations = campagne.situations_configurations.includes(:situation)
       expect(situations_configurations[0].situation).to eq situation_livraison
+    end
+
+    context 'quand le parcours type a plusieurs situations' do
+      let(:situation_maintenance) { create :situation_maintenance }
+
+      let(:parcours_type) do
+        parcours = create :parcours_type
+        parcours.situations_configurations.create situation: situation_maintenance, position: 1
+        parcours.situations_configurations.create situation: situation_livraison, position: 2
+        parcours
+      end
+
+      it "crée la campagne avec les situations du parcours type dans l'ordre donné" do
+        campagne.reload
+
+        situations_configurations = campagne.situations_configurations.includes(:situation)
+        expect(situations_configurations[0].situation).to eq situation_maintenance
+        expect(situations_configurations[1].situation).to eq situation_livraison
+      end
     end
 
     context 'quand il y a des situations optionnelles' do

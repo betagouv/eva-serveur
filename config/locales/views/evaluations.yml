@@ -50,6 +50,8 @@ fr:
 
         lecture_bas:
           nom: Lecture bas
+        coprehention:
+          nom: Compréhention
         vocabulaire:
           nom: Vocabulaire
         comprehension_consigne:
@@ -221,6 +223,7 @@ fr:
         nombre_bonnes_reponses_mot_français: Nombre de bonnes réponses (mot français)
         score_orientation: 'Score Orientation'
         score_lecture: 'Score Lecture'
+        score_comprehention: 'Score Compréhention'
 
         nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_reponses: Nombre de réponses

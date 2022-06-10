@@ -25,7 +25,7 @@ describe EvenementEvacob do
 
     it "retourn vrai si c'est la metacompetence demandée" do
       expect(evenement('lecture').metacompetence?('lecture')).to be true
-      expect(evenement('comprehention').metacompetence?('lecture')).to be false
+      expect(evenement('comprehension').metacompetence?('lecture')).to be false
     end
   end
 end

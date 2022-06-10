@@ -10,7 +10,7 @@ module Restitution
           ::Competence::PROFIL_2 => 7,
           ::Competence::PROFIL_1 => 0
         },
-        'score_comprehention' => {
+        'score_comprehension' => {
           ::Competence::PROFIL_4 => 9,
           ::Competence::PROFIL_3 => 7,
           ::Competence::PROFIL_2 => 5,

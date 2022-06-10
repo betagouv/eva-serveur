@@ -13,7 +13,7 @@ module Restitution
       ::Competence::PERSEVERANCE,
       ::Competence::COMPREHENSION_CONSIGNE,
       ::Competence::LECTURE_BAS,
-      ::Competence::COMPREHENTION
+      ::Competence::COMPREHENSION
     ].freeze
 
     attr_reader :campagne, :evenements

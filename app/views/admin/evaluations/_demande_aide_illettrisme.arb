@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'demande-aide' do
+div class: 'demande-aide bord-rouge' do
   div class: 'aide-icone' do
     text_node image_tag 'demande_aide.png'
   end

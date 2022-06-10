@@ -308,44 +308,38 @@
   }
 
   .demande-aide {
-    display: flex;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
     position: absolute;
     top: -2rem;
-    right: 1.75rem;
+    left: 13.188rem;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: .75rem 1.5rem;
+    border: 2px solid $eva_red;
     border-radius: .5rem;
-    color: #fff;
-    background-color: $eva_dark;
-    &:after {
-      content: "";
-      width: 0;
-      height: 0;
-      position: absolute;
-      bottom: -16px;
-      left: -10px;
-      border-width: 0 26px 38px 32px;
-      border-color: transparent transparent $eva_dark transparent;
-      border-style: solid;
-      border-radius: 0.35rem;
-      transform: rotate(90deg);
-    }
+    background-color: $eva_light;
+    min-width: 32.25rem;
     .aide {
-      &-icone {
-        margin-right: 1rem;
-      }
       &-description {
-        margin-right: 3.5rem;
-        line-height: 1.2;
-        p {
-          margin-bottom: 0;
-        }
+        line-height: .875rem;
+        max-width: 16.25rem;
+        font-weight: 600;
+        font-size: .75rem;
+        color: $eva_dark;
       }
+
+      &-icone {
+        display: flex;
+        align-items: center;
+      }
+
       &-cta {
         .action {
           @include bouton;
-          padding: 0.3rem 0.8rem;
-          border-radius: 0.25rem;
+          white-space: nowrap;
+          padding: .25rem .75rem;
+          border-radius: .25rem;
+          font-size: 0.75rem;
         }
       }
     }

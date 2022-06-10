@@ -29,5 +29,5 @@ module Competence
   VOCABULAIRE = :vocabulaire
 
   LECTURE_BAS = :lecture_bas
-  COMPREHENTION = :coprehention
+  COMPREHENSION = :comprehension
 end

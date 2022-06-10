@@ -13,9 +13,9 @@ module Restitution
         'parametre' => 'lecture',
         'instance' => Evacob::ScoreMetacompetence.new
       },
-      'score_comprehention' => {
+      'score_comprehension' => {
         'type' => :nombre,
-        'parametre' => 'comprehention',
+        'parametre' => 'comprehension',
         'instance' => Evacob::ScoreMetacompetence.new
       }
     }.freeze
@@ -39,7 +39,7 @@ module Restitution
     def competences
       {
         ::Competence::LECTURE_BAS => Competence::ProfileEvacob.new(self, 'score_lecture'),
-        ::Competence::COMPREHENTION => Competence::ProfileEvacob.new(self, 'score_comprehention')
+        ::Competence::COMPREHENSION => Competence::ProfileEvacob.new(self, 'score_comprehension')
       }.transform_values(&:niveau)
     end
   end

@@ -137,8 +137,8 @@ fr:
           Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
       demande_aide_illettrisme:
         aide_description: |
-          Besoin d'aide pour trouver une formation (ou une<br> solution d'accompagnement) adaptée ?
-        aide_cta: Cliquez ici
+          Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible?
+        aide_cta: Signaler une difficulté
       parties:
         titre: Situations jouées
         rapport: Rapport

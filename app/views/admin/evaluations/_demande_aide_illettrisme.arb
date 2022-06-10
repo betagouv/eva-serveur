@@ -4,9 +4,7 @@ div class: 'demande-aide' do
   div class: 'aide-icone' do
     text_node image_tag 'demande_aide.png'
   end
-  div class: 'aide-description' do
-    md t('.aide_description')
-  end
+  span t('.aide_description'), class: 'aide-description'
   div class: 'aide-cta' do
     text_node link_to t('.aide_cta'), Eva::LIEN_DEMANDE_ACCOMPAGNEMENT_ILLETTRISME,
                       target: '_blank', class: 'action', rel: 'noopener'

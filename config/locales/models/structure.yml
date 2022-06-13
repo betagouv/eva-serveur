@@ -42,9 +42,13 @@ fr:
       structure_locale:
         <<: *actions_structure
     placeholders:
-      structure:
-        nom: Mission Locale de Caraces, Pôle Emploi de Marita
-        code_postal: Indiquer le code postal de votre structure
+      structure: &placeholders_structure
+        nom: Mission locale de Montpellier
+        code_postal: '34000'
+      structure_administrative:
+        <<: *placeholders_structure
+      structure_locale:
+        <<: *placeholders_structure
   active_admin:
     resources:
       structure: &active_admin_structure

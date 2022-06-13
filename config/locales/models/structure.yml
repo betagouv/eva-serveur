@@ -11,7 +11,7 @@ fr:
       structure:
         created_at: Créée le
         updated_at: Mise à jour le
-        nom: Nom
+        nom: Nom de structure
         code_postal: Code Postal
         region: Région
         date_derniere_evaluation: Dernière évaluation

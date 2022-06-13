@@ -21,9 +21,9 @@
       <h3><%= t('.structure.titre') %></h3>
       <p class="description"><%= t('.structure.description') %></p>
       <%= structure.inputs do %>
-        <%= structure.input :nom %>
+        <%= structure.input :nom, placeholder: t('.placeholders.structure.nom') %>
         <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
-        <%= structure.input :code_postal %>
+        <%= structure.input :code_postal, placeholder: t('.placeholders.structure.code_postal') %>
       <% end %>
     </div>
   <% end %>

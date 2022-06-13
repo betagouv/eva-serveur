@@ -30,6 +30,10 @@ fr:
       structure:
         titre: Votre structure
         description: Où travaillez vous ?
+      placeholders:
+        structure:
+          nom: Mission locale de Montpellier
+          code_postal: '34000'
       compte:
         titre: Votre compte
       actions:

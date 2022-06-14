@@ -21,9 +21,25 @@ describe Restitution::CafeDeLaPlace do
                         ])
   end
 
-  describe '#efficience' do
-    it 'retourne nil' do
-      expect(restitution.efficience).to be_nil
+  describe '#parcours_bas' do
+    it 'quand le profil lecture_bas est le plus petit' do
+      expect(restitution).to receive(:competences)
+        .and_return({
+                      lecture_bas: :profil1,
+                      comprehension: :profil2,
+                      production: :profil3
+                    })
+      expect(restitution.parcours_bas).to equal(:profil1)
+    end
+
+    it 'quand le profil comprehension est le plus petit' do
+      expect(restitution).to receive(:competences)
+        .and_return({
+                      lecture_bas: :profil3,
+                      comprehension: :profil2,
+                      production: :profil4
+                    })
+      expect(restitution.parcours_bas).to equal(:profil2)
     end
   end
 

@@ -11,10 +11,7 @@ module Restitution
 
     COMPETENCES_INUTILES_POUR_EFFICIENCE = [
       ::Competence::PERSEVERANCE,
-      ::Competence::COMPREHENSION_CONSIGNE,
-      ::Competence::LECTURE_BAS,
-      ::Competence::COMPREHENSION,
-      ::Competence::PRODUCTION
+      ::Competence::COMPREHENSION_CONSIGNE
     ].freeze
 
     attr_reader :campagne, :evenements
@@ -54,6 +51,12 @@ module Restitution
 
     def competences
       {}
+    end
+
+    def synthese
+      {
+        efficience: efficience
+      }
     end
 
     def calcule_competences(competences)

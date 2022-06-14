@@ -16,6 +16,7 @@ module Competence
   PROFIL_2 = :profil2
   PROFIL_1 = :profil1
 
+  PROFILS = [PROFIL_1, PROFIL_2, PROFIL_3, PROFIL_4, PROFIL_4_PLUS, PROFIL_4_PLUS_PLUS].freeze
   NIVEAUX = [NIVEAU_INDETERMINE, NIVEAU_1, NIVEAU_2, NIVEAU_3, NIVEAU_4].freeze
 
   PERSEVERANCE = :perseverance
@@ -26,9 +27,13 @@ module Competence
   ORGANISATION_METHODE = :organisation_methode
   VIGILANCE_CONTROLE = :vigilance_controle
 
-  VOCABULAIRE = :vocabulaire
+  COMPETENCES_TRANSVERSALES = [
+    RAPIDITE,
+    COMPARAISON_TRI,
+    ATTENTION_CONCENTRATION,
+    ORGANISATION_METHODE,
+    VIGILANCE_CONTROLE
+  ].freeze
 
-  LECTURE_BAS = :lecture_bas
-  COMPREHENSION = :comprehension
-  PRODUCTION = :production
+  VOCABULAIRE = :vocabulaire
 end

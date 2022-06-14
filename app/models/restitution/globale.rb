@@ -105,7 +105,7 @@ module Restitution
       @restitutions.each_with_object({}) do |restitution, memo|
         restitution.competences.each do |competence, niveau|
           next if niveau == NIVEAU_INDETERMINE ||
-                  Base::COMPETENCES_INUTILES_POUR_EFFICIENCE.include?(competence)
+                  ::Competence::COMPETENCES_TRANSVERSALES.exclude?(competence)
 
           memo[competence] ||= []
           memo[competence] << niveau

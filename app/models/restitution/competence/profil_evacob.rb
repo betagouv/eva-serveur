@@ -2,7 +2,7 @@
 
 module Restitution
   module Competence
-    class ProfileEvacob < Restitution::Competence::Base
+    class ProfilEvacob < Restitution::Competence::Base
       SEUILS = {
         'score_lecture' => {
           ::Competence::PROFIL_4 => 15,

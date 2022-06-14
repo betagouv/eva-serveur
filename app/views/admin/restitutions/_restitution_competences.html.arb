@@ -6,6 +6,9 @@ panel t('.titre') do
       row(t("#{competence}.nom",
             scope: 'admin.evaluations.restitution_competence')) { niveau }
     end
-    row(t('.efficience')) { formate_efficience(restitution.efficience) }
+    restitution.synthese.each do |metrique, niveau|
+      row(t("#{metrique}.nom",
+            scope: 'admin.evaluations.restitution_competence')) { niveau }
+    end
   end
 end

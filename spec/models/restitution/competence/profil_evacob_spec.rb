@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::Competence::ProfileEvacob do
+describe Restitution::Competence::ProfilEvacob do
   let(:restitution) { double }
   let(:partie) { double }
   let(:competence_lecture_bas) { described_class.new(restitution, 'score_lecture') }

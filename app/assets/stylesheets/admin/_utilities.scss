@@ -5,6 +5,9 @@
 .bord-rouge {
   border: 2px solid $eva_red;
 }
+.bord-orange {
+  border: 2px solid $eva_dark_orange;
+}
 
 .supprime-espace-derniere-balise {
   *:last-child{

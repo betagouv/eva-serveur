@@ -48,6 +48,10 @@ fr:
         apte: Apte
         apte_avec_aide: Apte avec aide
 
+        parcours_bas:
+          nom: Profil parcours bas
+        efficience:
+          nom: Efficience
         lecture_bas:
           nom: Lecture bas
         comprehension:
@@ -185,7 +189,6 @@ fr:
         titre: Évaluation des compétences de base
       restitution_competences:
         titre: Évaluation des compétences
-        efficience: Efficience
       restitution_inventaire:
         ouverture_contenant: Ouvertures de contenant
         essai: Essai %{count}

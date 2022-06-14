@@ -37,15 +37,24 @@ module Restitution
       end
     end
 
-    def efficience
-      nil
+    def parcours_bas
+      position_minimum = competences.values.map do |profil|
+        ::Competence::PROFILS.index(profil)
+      end.min
+      ::Competence::PROFILS[position_minimum]
+    end
+
+    def synthese
+      {
+        parcours_bas: parcours_bas
+      }
     end
 
     def competences
-      {
-        ::Competence::LECTURE_BAS => Competence::ProfileEvacob.new(self, 'score_lecture'),
-        ::Competence::COMPREHENSION => Competence::ProfileEvacob.new(self, 'score_comprehension'),
-        ::Competence::PRODUCTION => Competence::ProfileEvacob.new(self, 'score_production')
+      @competences ||= {
+        lecture_bas: Competence::ProfilEvacob.new(self, 'score_lecture'),
+        comprehension: Competence::ProfilEvacob.new(self, 'score_comprehension'),
+        production: Competence::ProfilEvacob.new(self, 'score_production')
       }.transform_values(&:niveau)
     end
   end

@@ -21,6 +21,12 @@ div class: 'menu menu-transverse' do
       a href: '#francais_mathematiques' do
         text_node 'Français et Mathématiques'
       end
+      if resource.illettrisme_potentiel?
+        div class: 'tag-aide bord-orange' do
+          text_node image_tag('demande_aide.png', class: 'tag-aide-icone')
+          span 'Formation recommandée'
+        end
+      end
     end
     li do
       a href: '#correspondance_anlci' do

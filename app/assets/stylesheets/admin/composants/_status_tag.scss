@@ -1,30 +1,48 @@
-  .status_tag {
-    background-color: transparent;
-    border: 1px solid;
-    border-radius: 0.5rem;
-    padding: 0.25rem 0.9rem;
-    font-weight: normal;
-    text-transform: unset;
-    letter-spacing: unset;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    color: $couleur-texte;
+.status_tag {
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.9rem;
+  font-weight: normal;
+  text-transform: unset;
+  letter-spacing: unset;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  color: $couleur-texte;
 
-    &.assistance, &.red {
-      color: $couleur-accent-erreur;
-    }
-
-    &.blog {
-      color: $couleur-warning;
-    }
-
-    &.evolution, &.green {
-      color: $eva_dark_green;
-      border-color: $couleur-legere-accent-validation;
-    }
-
-    &.no, &.yes {
-      background-color: transparent;
-      border-color: $couleur-texte
-    }
+  &.assistance, &.red {
+    color: $couleur-accent-erreur;
   }
+
+  &.blog {
+    color: $couleur-warning;
+  }
+
+  &.evolution, &.green {
+    color: $eva_dark_green;
+    border-color: $couleur-legere-accent-validation;
+  }
+
+  &.no, &.yes {
+    background-color: transparent;
+    border-color: $couleur-texte
+  }
+}
+
+.tag-aide {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid $eva_orange;
+  border-radius: 0.25rem;
+  color: $eva_dark_orange;
+  line-height: 1rem;
+  font-weight: 500;
+  font-size: .875rem;
+
+  &-icone {
+    margin-right: 0.5rem;
+    width: 13px;
+  }
+}
+

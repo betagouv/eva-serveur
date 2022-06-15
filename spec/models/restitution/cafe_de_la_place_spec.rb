@@ -45,11 +45,11 @@ describe Restitution::CafeDeLaPlace do
     it "quand un profil n'est pas définit" do
       expect(restitution).to receive(:competences)
         .and_return({
-                      lecture_bas: nil,
+                      lecture_bas: ::Competence::NIVEAU_INDETERMINE,
                       comprehension: :profil2,
                       production: :profil4
                     })
-      expect(restitution.parcours_bas).to equal(nil)
+      expect(restitution.parcours_bas).to equal(::Competence::NIVEAU_INDETERMINE)
     end
   end
 

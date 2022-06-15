@@ -97,10 +97,6 @@ body.logged_out {
       }
     }
 
-    a {
-      color: $eva_main_blue;
-    }
-
     .panels-login {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -229,6 +225,7 @@ body.logged_out {
     }
     .creer-structure {
       @include bouton;
+      color: $eva_dark;
       background-color: $couleur-warning;
       border: none;
     }

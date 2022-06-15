@@ -13,7 +13,7 @@ div id: 'details_evaluation', class: 'row' do
               span 'Campagne'
             end
             div class: 'col col-2' do
-              span resource.campagne.display_name
+              auto_link resource.campagne
             end
           end
           div class: 'row' do

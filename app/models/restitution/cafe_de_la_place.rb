@@ -38,7 +38,10 @@ module Restitution
     end
 
     def parcours_bas
-      position_minimum = competences.values.map do |profil|
+      profils = competences.values
+      return if profils.include?(nil)
+
+      position_minimum = profils.map do |profil|
         ::Competence::PROFILS.index(profil)
       end.min
       ::Competence::PROFILS[position_minimum]

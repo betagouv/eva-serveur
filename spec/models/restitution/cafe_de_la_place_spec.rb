@@ -41,6 +41,16 @@ describe Restitution::CafeDeLaPlace do
                     })
       expect(restitution.parcours_bas).to equal(:profil2)
     end
+
+    it "quand un profil n'est pas définit" do
+      expect(restitution).to receive(:competences)
+        .and_return({
+                      lecture_bas: nil,
+                      comprehension: :profil2,
+                      production: :profil4
+                    })
+      expect(restitution.parcours_bas).to equal(nil)
+    end
   end
 
   describe '#persiste' do

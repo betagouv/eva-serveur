@@ -53,10 +53,13 @@ form {
       }
 
       &.boolean label {
-        padding-left: 33%;
         display: flex;
         align-items: center;
         width: 100%;
+      }
+
+      &.boolean label, .liens-partages {
+        padding-left: 33%;
       }
 
       &.libelle-long {

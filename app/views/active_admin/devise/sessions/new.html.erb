@@ -4,65 +4,76 @@
 <% content_for :sous_titre do %>
   <%= md t('active_admin.devise.login.subtitle', lien: URL_CLIENT) -%>
 <% end %>
+
 <div class="panels-login">
-  <div class="panel panel--connexion">
-    <div class="panel-header">
-       <%= md t('active_admin.devise.login.header_title') -%>
-    </div>
-
-    <div class="panel-content">
-
-      <% scope = Devise::Mapping.find_scope!(resource_name) %>
-      <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
-        f.inputs do
-          resource.class.authentication_keys.each_with_index { |key, index|
-            f.input key, label: t("active_admin.devise.#{key}.title"), input_html: { autofocus: index.zero? && !params.key?(:code_erreur) }
-          }
-          f.input :password, label: t('active_admin.devise.password.title')
-          f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
-        end
-        div class: 'actions' do
-          div class: 'liens-partages' do
-            render partial: "active_admin/devise/shared/links"
-          end
-          f.submit t('active_admin.devise.login.submit')
-        end
-      end
-      %>
-    </div>
-  </div>
-
-  <div class="panel panel--evaluation">
-    <div class="panel-header">
-       <%= md t('active_admin.devise.login.evaluations.header_title') -%>
-    </div>
-    <div class="panel-content">
-      <div class="panel-description">
-        <%= md t('active_admin.devise.login.evaluations.content') -%>
+  <div class="colonne-1">
+    <div class="panel panel--connexion">
+      <div class="panel-header">
+        <%= md t('active_admin.devise.login.header_title') -%>
       </div>
 
-      <%= form_with url: connexion_espace_jeu_path do |form| %>
-        <fieldset class='inputs'>
-          <ol>
-            <li class='input'>
-              <%= form.label :code, t('active_admin.devise.login.evaluations.campagne') %>
-              <% code = params[:code] %>
-              <%= form.text_field :code, placeholder: 'DEMO', value: code %>
-              <% if params[:code_erreur] %>
-                <p class="inline-errors"><%= params[:code_erreur] %></p>
-              <% end %>
-            </li>
-          </ol>
-        </fieldset>
-        <div class="actions">
-          <%= form.submit t('active_admin.devise.login.evaluations.bouton') %>
+      <div class="panel-content">
+        <div class="espace-connexion">
+          <h4 class="espace-connexion-titre"><%= t('active_admin.devise.login.connexion') %></h4>
+          <% scope = Devise::Mapping.find_scope!(resource_name) %>
+          <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
+            f.inputs do
+              resource.class.authentication_keys.each_with_index { |key, index|
+                f.input key, label: t("active_admin.devise.#{key}.title"), input_html: { autofocus: index.zero? && !params.key?(:code_erreur) }
+              }
+              f.input :password, label: t('active_admin.devise.password.title')
+              li class:'m-0' do
+                div class: 'liens-partages' do
+                  render partial: "active_admin/devise/shared/links"
+                end
+              end
+              f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
+            end
+            div class: 'bouton-action actions' do
+              f.submit t('active_admin.devise.login.submit')
+            end
+          end
+          %>
         </div>
-      <% end %>
-      </form>
+        <div class="espace-inscription">
+          <h4><%= t('active_admin.devise.login.inscription.content') -%></h4>
+          <div class='bouton-action'>
+            <%= link_to t('active_admin.devise.login.inscription.action'), structures_path, class:'actions' %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="panel-espace-pro">
-    <%= md t('active_admin.devise.login.inscription') -%>
-    <%= link_to t('active_admin.devise.links.sign_up'), structures_path %>
+
+  <div class="colonne-2">
+    <div class="panel panel--evaluation">
+      <div class="panel-header">
+        <%= md t('active_admin.devise.login.evaluations.header_title') -%>
+      </div>
+      <div class="panel-content">
+        <div class="panel-description">
+          <%= md t('active_admin.devise.login.evaluations.content') -%>
+        </div>
+
+        <%= form_with url: connexion_espace_jeu_path do |form| %>
+          <fieldset class='inputs'>
+            <ol>
+              <li class='input'>
+                <%= form.label :code, t('active_admin.devise.login.evaluations.campagne') %>
+                <% code = params[:code] %>
+                <%= form.text_field :code, placeholder: 'DEMO', value: code %>
+                <% if params[:code_erreur] %>
+                  <p class="inline-errors"><%= params[:code_erreur] %></p>
+                <% end %>
+              </li>
+            </ol>
+          </fieldset>
+          <div class="bouton-action actions">
+            <%= form.submit t('active_admin.devise.login.evaluations.bouton') %>
+          </div>
+        <% end %>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

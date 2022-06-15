@@ -132,6 +132,9 @@ body.logged_out {
         .panel-header {
           background-color: $eva_dark;
         }
+        .actions {
+          min-width: 7.5rem;
+        }
       }
       .panel--evaluation {
         .panel-header {
@@ -147,25 +150,23 @@ body.logged_out {
           form {
             margin-top: 2rem;
           }
-          .actions {
+        }
+      }
+      .panel {
+        &--evaluation, &--connexion {
+          .bouton-action {
             display: flex;
             justify-content: flex-end;
           }
         }
       }
     }
-    .panel-espace-pro {
-      @include carte-avec-ombre();
-      background-color: $eva_green;
-      height: 4rem;
+    .espace-inscription {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      p {
-        font-size: 0.875rem;
-        font-weight: 500;
-        margin: 0;
-      }
+      padding-top: 1rem;
+      border-top: 1px solid $eva_bluegrey;
 
       a {
         @include bouton-carte($eva_dark);
@@ -175,6 +176,14 @@ body.logged_out {
         font-size: 0.875rem;
         padding: 0 0.94rem;
         color: #fff;
+      }
+    }
+
+    .espace-connexion {
+      margin-bottom: 1rem;
+
+      &-titre {
+        margin-bottom: 1rem;
       }
     }
   }

@@ -15,8 +15,11 @@ fr:
       login:
         title: |
           Espace Pro
-        header_title: Je souhaite accéder à l'espace Pro
-        inscription: Je souhaite créer mon espace Pro
+        header_title: Je suis conseiller
+        connexion: J'ai déjà un compte
+        inscription:
+          content: Je n'ai pas encore de compte
+          action: S'inscrire
         evaluations:
           header_title: Je souhaite passer eva
           content: |

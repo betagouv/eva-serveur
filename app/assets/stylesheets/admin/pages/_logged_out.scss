@@ -125,8 +125,13 @@ body.logged_out {
           }
         }
       }
-      form .actions input[type=submit] {
-        margin-right: 0;
+      form {
+        .actions input[type=submit] {
+          margin-right: 0;
+        }
+        label abbr {
+          display: none
+        }
       }
       .panel--connexion {
         .panel-header {

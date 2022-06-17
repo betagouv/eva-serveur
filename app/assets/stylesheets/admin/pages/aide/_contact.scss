@@ -36,7 +36,6 @@
     &__titre {
       margin-bottom: 1.6rem;
       h4 {
-        @include titre;
         margin-left: 0.625rem;
         font-size: 1.125rem;
         color: $eva_light;

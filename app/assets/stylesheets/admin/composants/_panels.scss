@@ -25,13 +25,8 @@ body.logged_out {
 
     .infos {
       max-width: 16.25rem;
-      h4 {
-        @include titre-carte;
-        font-size: .875rem;
-        margin-bottom: .75rem;
-      }
-
       .sous-infos {
+        margin-top: .75rem;
         color: $couleur-texte;
         font-size: .75rem;
       }

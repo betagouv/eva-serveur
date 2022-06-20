@@ -1,5 +1,11 @@
 fr:
   activerecord:
+    errors:
+      models:
+        structure:
+          attributes:
+            nom:
+              taken: Cette structure existe
     models:
       structure_administrative:
         one: Structure administrative

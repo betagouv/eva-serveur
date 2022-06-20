@@ -3,7 +3,7 @@
 class Structure < ApplicationRecord
   belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
 
-  validates :nom, presence: true
+  validates :nom, presence: true, uniqueness: true
 
   auto_strip_attributes :nom, squish: true
 

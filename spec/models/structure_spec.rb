@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe Structure, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
+  it { is_expected.to validate_uniqueness_of(:nom) }
 
   it do
     expect(subject).to belong_to(:structure_referente).class_name('StructureAdministrative')

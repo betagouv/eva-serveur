@@ -47,7 +47,7 @@ describe 'Création de compte conseiller', type: :feature do
   end
 
   context 'structure sans admin' do
-    let!(:structure_sans_admin) { create :structure_locale, nom: 'Ma structure' }
+    let!(:structure_sans_admin) { create :structure_locale, nom: 'Ma structure sans admin' }
 
     before do
       visit new_compte_registration_path(structure_id: structure_sans_admin.id)

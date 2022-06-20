@@ -1,6 +1,9 @@
 <% content_for :titre do %>
   <%= t('.titre') -%>
 <% end %>
+<% content_for :sous_titre do %>
+  <%= @compte.structure.nom -%>
+<% end %>
 <% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
 
 <%= semantic_form_for @compte, url: nouvelle_structure_path do |compte| %>

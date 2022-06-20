@@ -34,6 +34,7 @@ fr:
           title: Rejoindre la structure
           description: Merci de renseigner vos informations.
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
+          bouton_retour: Rechercher ma structure
     sidebars:
       filters: Rechercher
       autres_actualites: Les autres actualités sur eva

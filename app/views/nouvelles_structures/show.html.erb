@@ -6,11 +6,11 @@
 <% end %>
 <% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
 
-<%= link_to t('.bouton_retour'), request.referrer, class: 'bouton bouton-retour' %>
 <%= semantic_form_for @compte, url: nouvelle_structure_path do |compte| %>
   <%= compte.semantic_errors *compte.object.errors.messages.keys %>
   <%= compte.semantic_fields_for :structure do |structure| %>
     <div class="panel">
+      <%= link_to t('.bouton_retour'), "javascript:history.back()", class: 'bouton bouton-retour' %>
       <h3><%= t('.compte.titre') %></h3>
       <%= compte.inputs do %>
         <%= compte.input :prenom %>

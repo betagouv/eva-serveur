@@ -78,4 +78,18 @@ button:not(.disabled):hover {
     @include bouton;
     padding: 0.5rem 1.5rem;
   }
+
+  &.bouton-retour {
+    align-items: center;
+    display: flex;
+    border: none;
+    color: $eva_dark;
+    padding: 0;
+    line-height: 10px;
+
+    &::before {
+      content: asset-data-url('icones/fleche_gauche.svg');
+      margin-right: .5rem;
+    }
+  }
 }

@@ -10,7 +10,7 @@ Geocoder::Lookup::Test.set_default_stub(
 
 FactoryBot.define do
   factory :structure do
-    nom { 'Ma structure' }
+    sequence(:nom) { |n| "structure #{n}" }
     type_structure { 'mission_locale' }
     code_postal { '75012' }
 

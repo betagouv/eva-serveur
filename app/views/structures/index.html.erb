@@ -9,7 +9,7 @@
     <%= md t('.description')%>
     <div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
     <%= form_with method: :get do |f| %>
-      <%= f.text_field :code_postal, class: 'champ-recherche', value: params[:code_postal] %>
+      <%= f.search_field :code_postal, value: params[:code_postal], class: 'champ-recherche' %>
       <%= f.submit 'chercher' %>
     <% end %>
 

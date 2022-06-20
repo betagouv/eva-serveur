@@ -1,15 +1,13 @@
 .index {
   .bouton-retour {
     position: absolute;
-    left: -128px;
-    top: 258px;
+    left: -8rem;
   }
 }
 
-.show {
+.show, .new, .create {
   .bouton-retour {
     position: absolute;
-    left: -197px;
-    top: 258px;
+    left: -12.313rem;
   }
 }

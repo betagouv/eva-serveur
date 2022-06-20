@@ -5,7 +5,7 @@
   <% content_for :sous_titre do %>
     <%= resource.structure.nom -%>
   <% end %>
-
+  <%= link_to t('.bouton_retour'), "javascript:history.back()", class: 'bouton bouton-retour' %>
   <div id="login">
     <p><strong><%= t('.description') -%></strong></p>
 

@@ -39,7 +39,7 @@ ActiveAdmin.register Evenement do
     end
 
     def csv_filename
-      "#{Time.current.to_formatted_s(:number)}-evenements-#{@campagne.code}.csv"
+      "#{Time.current.to_fs(:number)}-evenements-#{@campagne.code}.csv"
     end
   end
 end

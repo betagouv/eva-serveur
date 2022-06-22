@@ -195,9 +195,9 @@ body.logged_out {
 
   #login {
     form fieldset {
-      input[type=text],
-      input[type=email],
-      input[type=password] {
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
         width: auto;
         flex: 1;
       }

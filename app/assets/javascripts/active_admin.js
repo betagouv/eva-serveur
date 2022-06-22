@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     autoFocus: true,
     minLength: 2,
-    delay: 200
-  })
+    delay: 100
+  });
 });
 
 Chart.defaults.font.family = 'Work Sans';

@@ -1,3 +1,23 @@
+@mixin base-input {
+  color: $eva_dark;
+  border-radius: .5rem;
+  border: 1px solid $eva_bluegrey;
+  padding: 0.5rem;
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &:focus {
+    border-color: $eva_main_blue;
+    @include ombre();
+  }
+
+  &::placeholder {
+    color: $couleur-texte;
+  }
+}
+
 form {
   fieldset {
     padding: 0;
@@ -79,7 +99,7 @@ form {
         input[type="time"],
         input[type="search"],
         textarea {
-          border: 1px solid $eva_red;
+          border-color: $eva_red;
         }
       }
 
@@ -99,16 +119,10 @@ form {
     }
     select {
       appearance: none;
-      border-style: solid;
-      border-width: 1px;
       height: 2rem;
       position: relative;
       padding-left: .5rem;
       padding-right: 2rem;
-
-      &:focus {
-        outline: none;
-      }
     }
     li.select {
       position: relative;
@@ -142,30 +156,20 @@ form {
       margin-bottom: 1rem;
     }
   }
+
   input[type="text"],
-  input[type="email"],
-  input[type="tel"],
   input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="time"],
   input[type="search"],
   select,
   textarea {
+    @include base-input();
     width: 67%;
-    color: $eva_dark;
-    border-radius: .5rem;
-    border: 1px solid $eva_bluegrey;
-    padding: 0.5rem;
-
-    &:focus-visible {
-      outline: none;
-    }
-
-    &:focus {
-      border-color: $eva_main_blue;
-      @include ombre();
-    }
-  }
-  ::placeholder {
-    color: $couleur-texte;
   }
 }
 

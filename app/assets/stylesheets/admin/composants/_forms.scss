@@ -142,19 +142,25 @@ form {
       margin-bottom: 1rem;
     }
   }
-  input[type=text],
-  input[type=email],
-  input[type=tel],
-  input[type=password],
-  input[type=search],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
   select,
   textarea {
     width: 67%;
     color: $eva_dark;
-    border-color: $eva_bluegrey;
     border-radius: .5rem;
+    border: 1px solid $eva_bluegrey;
+    padding: 0.5rem;
+
+    &:focus-visible {
+      outline: none;
+    }
+
     &:focus {
-      border: 1px solid $eva_main_blue;
+      border-color: $eva_main_blue;
       @include ombre();
     }
   }

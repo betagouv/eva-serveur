@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_20_103206) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_22_141727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -272,7 +272,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_20_103206) do
     t.uuid "structure_referente_id"
     t.string "type"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
-    t.index ["nom"], name: "index_structures_on_nom", unique: true
+    t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true
     t.index ["structure_referente_id"], name: "index_structures_on_structure_referente_id"
     t.index ["type"], name: "index_structures_on_type"
   end

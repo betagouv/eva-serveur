@@ -3,7 +3,8 @@
 class Structure < ApplicationRecord
   belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
 
-  validates :nom, presence: true, uniqueness: true
+  validates :nom, presence: true
+  validates :nom, uniqueness: { case_sensitive: false, scope: :code_postal }
 
   auto_strip_attributes :nom, squish: true
 

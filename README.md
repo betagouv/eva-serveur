@@ -29,6 +29,15 @@ Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campa
 * Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
 
+* Variables d'environnement
+```
+PROTOCOLE_SERVEUR=http
+HOTE_SERVEUR=localhost:3000
+URL_CLIENT=http://localhost:7700/jeu
+EMAIL_DEFAULT_FROM=eva@beta.gouv.fr
+```
+Sans ces variables, le projet ne se lancera pas correctement en local.
+
 ## API
 
 L'api est accessible au point `/api`

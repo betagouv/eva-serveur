@@ -5,9 +5,10 @@ fr:
       description: |
         **Vous souhaitez créer un compte conseiller eva.**
         Dans un premier temps merci de regarder si votre structure est déjà enregistrée.
-      label_champ_recherche: 'Indiquez votre code postal ou votre ville :'
+      label_champ_recherche: Entrez la localisation de la structure
       aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
       structure_non_referencee: Vous ne trouvez pas votre structure ?
+      place_holder_recherche: Adresse, Code postal, Ville…
       bouton_retour: Se connecter
     structure:
       code_postal: 'Code postal : '
@@ -17,8 +18,8 @@ fr:
       show:
         introduction: |
           Ici vous pouvez gérer votre structure et vos collègues ayant accès à eva.
-        
-          Si vous avez besoin d'aide, 
+
+          Si vous avez besoin d'aide,
           rendez-vous [ici](%{lien_aide})
       membres:
         titre: Membres de la structure

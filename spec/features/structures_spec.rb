@@ -37,10 +37,7 @@ describe 'Structures', type: :feature do
     let!(:structure_lyon) { create :structure_locale, nom: 'MILO Lyon', code_postal: '69000' }
 
     it do
-      visit structures_path
-      expect(page).not_to have_content 'MILO Paris 12eme'
-      fill_in :code_postal, with: '75012'
-      click_on 'chercher'
+      visit structures_path(code_postal: '75012')
       expect(page).to have_content 'MILO Paris 12eme'
       expect(page).to have_content 'MILO Paris 13eme'
       expect(page).not_to have_content 'MILO Lyon'

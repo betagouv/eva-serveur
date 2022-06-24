@@ -10,7 +10,8 @@
     <div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
     <%= form_with method: :get do |f| %>
       <%= f.search_field :code_postal, placeholder: t('.place_holder_recherche'), value: params[:code_postal], class: 'champ-recherche' %>
-      <%= f.submit 'chercher' %>
+      <%= f.submit 'chercher', id: 'bouton-chercher',
+        disabled: !params[:code_postal] || params[:code_postal].length == 0 %>
     <% end %>
 
     <% if params[:code_postal] %>

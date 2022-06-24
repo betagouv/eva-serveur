@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.content.push(noResult);
       }
     },
+    select: function( event, ui ) {
+      const disabled = ui.item.value == '';
+      $('#bouton-chercher').prop("disabled", disabled);
+    },
     autoFocus: false,
     minLength: 2,
     delay: 100

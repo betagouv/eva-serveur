@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     source: function (request, response) {
       $.ajax({
         url: "https://api-adresse.data.gouv.fr/search/",
-        data: { q: request.term },
+        data: { q: request.term, limit: 6 },
         dataType: "json",
         success: function (data) {
           response($.map(data.features, function (item) {

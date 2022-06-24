@@ -171,6 +171,14 @@ form {
     @include base-input();
     width: 67%;
   }
+
+  input[type="search"] {
+    background-image: image-url('punaise-recherche.svg');
+    background-repeat: no-repeat;
+    background-size: 2rem 1.5rem;
+    background-position: left center;
+    padding-left: 1.9rem;
+  }
 }
 
 #error_explanation {

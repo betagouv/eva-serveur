@@ -1,0 +1,10 @@
+<% erreurs = erreurs_generales(resource.errors, champs_affiches) %>
+<% if erreurs.any? %>
+  <div id="error_explanation">
+    <ul class="errors">
+      <% erreurs.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

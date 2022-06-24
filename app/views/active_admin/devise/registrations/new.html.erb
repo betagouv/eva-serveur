@@ -10,7 +10,7 @@
     <p><strong><%= t('.description') -%></strong></p>
 
     <% scope = Devise::Mapping.find_scope!(resource_name) %>
-    <%= render partial: "active_admin/devise/shared/error_messages", resource: resource %>
+    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:prenom, :nom, :email, :telephone, :password, :password_confirmation] } %>
     <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_registration_path"), html: { id: "registration_new" }) do |f|
       f.inputs do
         f.input :prenom

@@ -150,7 +150,11 @@ form {
       }
     }
     &.actions {
-      margin-top: 2rem;
+      margin-top: 1rem;
+
+      ol {
+        width: 100%;
+      }
     }
     p {
       margin-bottom: 1rem;
@@ -183,6 +187,11 @@ form {
     background-color: $eva_bluegrey;
     border-color: $eva_bluegrey;
   }
+}
+
+form .buttons input[type=submit], form .buttons input[type=button], form .buttons button, form .actions input[type=submit], form .actions input[type=button], form .actions button {
+  margin-right: 0;
+  margin-left: 10px;
 }
 
 #error_explanation {

@@ -22,6 +22,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     droit_compte compte
     droit_structure compte
     droit_actualite compte
+    droits_cmr if compte.charge_mission_regionale?
   end
 
   def droits_applicatifs
@@ -150,5 +151,10 @@ class Ability # rubocop:disable Metrics/ClassLength
     end
     can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
     cannot :refuser, Compte, &:au_moins_admin?
+  end
+
+  def droits_cmr
+    can :read, :all
+    cannot(%i[update create destroy], :all)
   end
 end

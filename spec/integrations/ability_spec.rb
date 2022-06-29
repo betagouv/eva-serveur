@@ -7,6 +7,9 @@ describe Ability do
   subject(:ability) { Ability.new(compte) }
 
   let(:compte_superadmin) { create :compte_superadmin }
+  let(:compte_charge_mission_regionale) do
+    create :compte_charge_mission_regionale, :structure_avec_admin
+  end
   let(:compte_admin) { create :compte_admin }
   let(:compte_generique) { create :compte_generique, :structure_avec_admin }
   let(:compte_conseiller) { create :compte_conseiller, :structure_avec_admin }
@@ -126,6 +129,31 @@ describe Ability do
         it { is_expected.not_to be_able_to(:destroy, structure) }
       end
     end
+  end
+
+  context 'Compte CMR' do
+    let(:compte) { compte_charge_mission_regionale }
+
+    it { is_expected.to be_able_to(:read, :all) }
+
+    it do
+      expect(subject).to be_able_to(:read,
+                                    ActiveAdmin::Page,
+                                    name: 'Dashboard',
+                                    namespace_name: 'admin')
+    end
+
+    it { is_expected.to be_able_to(%i[read], Evaluation.new) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Evaluation.new) }
+    it { is_expected.to be_able_to(:read, Evenement.new) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Evenement.new) }
+    it { is_expected.to be_able_to(:read, Situation.new) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Situation.new) }
+    it { is_expected.to be_able_to(:read, Campagne.new) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Campagne.new) }
+    it { is_expected.to be_able_to(:read, Restitution::Base.new(nil, nil)) }
+    it { is_expected.to be_able_to(:read, Actualite) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
   end
 
   context 'Compte admin' do

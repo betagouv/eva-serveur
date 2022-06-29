@@ -17,6 +17,9 @@ FactoryBot.define do
     factory :compte_superadmin do
       role { 'superadmin' }
     end
+    factory :compte_charge_mission_regionale do
+      role { 'charge_mission_regionale' }
+    end
     factory :compte_admin do
       role { 'admin' }
     end

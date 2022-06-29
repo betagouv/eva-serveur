@@ -35,6 +35,7 @@ fr:
         role: Rôle
         roles:
           superadmin: Superadmin
+          charge_mission_regionale: Chargé de Mission Régionale
           admin: Admin
           conseiller: Conseiller
           compte_generique: Compte générique

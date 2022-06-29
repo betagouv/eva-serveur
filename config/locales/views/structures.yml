@@ -8,7 +8,7 @@ fr:
       label_champ_recherche: Entrez la localisation de la structure
       aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
       structure_non_referencee: Vous ne trouvez pas votre structure ?
-      place_holder_recherche: Adresse, Code postal, Ville…
+      placeholder_recherche: Code postal ou ville
       bouton_retour: Se connecter
     structure:
       code_postal: 'Code postal : '

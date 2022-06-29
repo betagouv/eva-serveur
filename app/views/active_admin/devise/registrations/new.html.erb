@@ -1,3 +1,5 @@
+<% content_for :classes_conteneur do 'conteneur-elargi' end %>
+
 <div id="active_admin_content">
   <% content_for :titre do %>
     <%= t('.title') -%>
@@ -7,7 +9,8 @@
   <% end %>
   <%= link_to t('.bouton_retour'), "javascript:history.back()", class: 'bouton bouton-retour' %>
   <div id="login">
-    <p><strong><%= t('.description') -%></strong></p>
+    <h3><%= t('.description') -%></h3>
+    <p>Nous vous enverrons un email vous mettant en relation avec votre structure afin que celle-ci vous communique les accès.</p>
 
     <% scope = Devise::Mapping.find_scope!(resource_name) %>
     <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:prenom, :nom, :email, :telephone, :password, :password_confirmation] } %>

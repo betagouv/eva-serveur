@@ -227,6 +227,7 @@ body.logged_out {
       display: block;
     }
     .champ-recherche {
+      flex-grow: 1;
       margin-right: .5rem;
     }
     .aucun-resultat {

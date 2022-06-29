@@ -50,6 +50,8 @@ fr:
           attributes:
             role:
               structure_doit_avoir_un_admin: 'La structure doit avoir au moins un administrateur'
+              inclusion: |
+                Ce compte ne peut pas avoir le rôle %<value>s en étant refusé. Uniquement conseiller ou compte générique
   formtastic:
     actions:
       compte:

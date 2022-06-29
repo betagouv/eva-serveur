@@ -73,8 +73,8 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it 'ne permet pas de refuser un admin' do
-        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant' \
-                                     ' refusé. Uniquement conseiller ou compte générique')
+        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant ' \
+                                     'refusé. Uniquement conseiller ou compte générique')
       end
     end
 
@@ -178,8 +178,8 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it 'ne permet pas de refuser un admin' do
-        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant' \
-                                     ' refusé. Uniquement conseiller ou compte générique')
+        expect(page).to have_content('Ce compte ne peut pas avoir le rôle admin en étant ' \
+                                     'refusé. Uniquement conseiller ou compte générique')
       end
     end
 

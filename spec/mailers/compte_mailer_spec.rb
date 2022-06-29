@@ -48,8 +48,8 @@ describe CompteMailer, type: :mailer do
 
       expect(email.from).to eql([Eva::EMAIL_CONTACT])
       expect(email.to).to eql(['debut@test.com'])
-      expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure - 75012 »"\
-                                   ' de vos collègues')
+      expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure - 75012 » " \
+                                   'de vos collègues')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')

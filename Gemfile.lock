@@ -119,7 +119,7 @@ GEM
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.600.0)
+    aws-partitions (1.601.0)
     aws-sdk-core (3.131.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -147,7 +147,7 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.1.3)
-    cancancan (3.3.0)
+    cancancan (3.4.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -180,7 +180,7 @@ GEM
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
     diff-lcs (1.5.0)
-    digest (3.0.0)
+    digest (3.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.10.0)
@@ -252,6 +252,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    json (2.6.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -330,7 +331,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pg (1.4.0)
+    pg (1.4.1)
     popper_js (1.16.0)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -343,8 +344,8 @@ GEM
     rack (2.2.3.1)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-test (1.1.0)
-      rack (>= 1.0, < 3)
+    rack-test (2.0.2)
+      rack (>= 1.3)
     rails (7.0.3)
       actioncable (= 7.0.3)
       actionmailbox (= 7.0.3)
@@ -391,7 +392,7 @@ GEM
     recipient_interceptor (0.3.1)
       mail
     redcarpet (3.5.1)
-    redis (4.6.0)
+    redis (4.7.0)
     regexp_parser (2.5.0)
     require_all (3.0.0)
     responders (3.0.1)
@@ -403,7 +404,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rollbar (3.3.0)
+    rollbar (3.3.1)
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -427,7 +428,8 @@ GEM
     rspec-support (3.11.0)
     rspec_junit_formatter (0.4.1)
       rspec-core (>= 2, < 4, != 2.12.0)
-    rubocop (1.30.1)
+    rubocop (1.31.1)
+      json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
@@ -440,7 +442,7 @@ GEM
       parser (>= 3.1.1.0)
     rubocop-packaging (0.5.1)
       rubocop (>= 0.89, < 2.0)
-    rubocop-rails (2.15.0)
+    rubocop-rails (2.15.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -471,7 +473,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-scheduler (4.0.1)
+    sidekiq-scheduler (4.0.2)
       redis (>= 4.2.0)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 4)
@@ -504,7 +506,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
-    unicode-display_width (2.1.0)
+    unicode-display_width (2.2.0)
     uniform_notifier (1.16.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -549,7 +551,7 @@ DEPENDENCIES
   descriptive_statistics (~> 2.4.0)
   devise
   devise-i18n
-  digest (~> 3.0.0)
+  digest
   factory_bot_rails
   ffaker
   foreman

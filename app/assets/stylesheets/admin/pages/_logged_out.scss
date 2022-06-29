@@ -1,26 +1,5 @@
 $largeur-colonne: 290px;
 
-// JQuery autocomplete :
-.ui-autocomplete.ui-menu {
-  width: 266px;
-  border-radius: 0 0 0.5rem 0.5rem;
-  font-family: $font-texte;
-  color: $eva_dark;
-  background-color: $eva_light;
-  overflow: hidden;
-  padding: 0.3rem 0;
-  .ui-menu-item {
-    line-height: 1.1rem;
-    .ui-menu-item-wrapper {
-      margin-left: 1rem;
-    }
-    .ui-state-active {
-      background-color: $eva_main_blue;
-      border: none;
-    }
-  }
-}
-
 body.logged_out {
   font-size: .875rem;
   background-color: $eva_light;

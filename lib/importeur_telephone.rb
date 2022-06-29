@@ -21,8 +21,8 @@ class ImporteurTelephone
                                "#{ligne[:mail]} - #{ligne[:telephone]}"
         return false
       elsif compte.telephone.present?
-        RakeLogger.logger.warn "#{compte.email}: téléphone #{compte.telephone} déjà présent;" \
-                               " #{ligne[:telephone]} ignoré"
+        RakeLogger.logger.warn "#{compte.email}: téléphone #{compte.telephone} déjà présent; " \
+                               "#{ligne[:telephone]} ignoré"
         return false
       end
 

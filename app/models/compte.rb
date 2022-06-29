@@ -14,9 +14,7 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
-  validates :role, inclusion: { in: %w[conseiller compte_generique],
-                                message: 'Ce compte ne peut pas avoir le rôle %<value>s en étant' \
-                                         ' refusé. Uniquement conseiller ou compte générique' },
+  validates :role, inclusion: { in: %w[conseiller compte_generique] },
                    if: :compte_refuse?
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true

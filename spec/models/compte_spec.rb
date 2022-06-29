@@ -7,6 +7,7 @@ describe Compte do
     expect(subject).to define_enum_for(:role)
       .with_values(
         superadmin: 'superadmin',
+        charge_mission_regionale: 'charge_mission_regionale',
         admin: 'admin',
         conseiller: 'conseiller',
         compte_generique: 'compte_generique'

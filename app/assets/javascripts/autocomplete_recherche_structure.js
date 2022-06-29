@@ -3,11 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     source: function (request, response) {
       $.ajax({
         url: "https://api-adresse.data.gouv.fr/search/",
-        data: { q: request.term, limit: 6 },
+        data: { q: request.term, limit: 6, type: 'municipality', autocomplete: 1 },
         dataType: "json",
         success: function (data) {
           response($.map(data.features, function (item) {
-            return { label: item.properties.label, value: item.properties.label };
+            const label = `${item.properties.city} (${item.properties.postcode})`;
+            return { label: label, value: label };
           }))
         },
         error: function () {

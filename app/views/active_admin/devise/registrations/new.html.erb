@@ -16,6 +16,7 @@
     <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:prenom, :nom, :email, :telephone, :password, :password_confirmation] } %>
     <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_registration_path"), html: { id: "registration_new" }) do |f|
       f.inputs do
+        f.input :structure_id, as: :hidden
         f.input :prenom
         f.input :nom
         resource.class.authentication_keys.each_with_index { |key, index|
@@ -24,15 +25,11 @@
         f.input :telephone
         f.input :password
         f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
-        f.input :structure_id, as: :hidden
       end
       f.actions do
-        f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit') }
+        f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' } }
       end
     end
     %>
-    <div class='liens-partages'>
-      <%= render partial: "active_admin/devise/shared/links" %>
-    </div>
   </div>
 </div>

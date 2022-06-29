@@ -34,7 +34,7 @@
   <div class="panel">
     <%= md t('.actions.validation') %>
     <%= compte.actions do %>
-      <%= compte.action :submit, label: t('.creer_structure')%>
+      <%= compte.action :submit, label: t('.creer_structure'), wrapper_html: { class: 'd-flex justify-content-end' } %>
     <% end %>
   </div>
 <% end %>

@@ -9,19 +9,28 @@
     <%= md t('.description')%>
     <div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
     <%= form_with method: :get do |f| %>
-      <%= f.search_field :code_postal, placeholder: t('.placeholder_recherche'), value: params[:code_postal], class: 'champ-recherche' %>
+      <%= f.search_field :ville_ou_code_postal, placeholder: t('.placeholder_recherche'), value: params[:ville_ou_code_postal], class: 'champ-recherche' %>
+      <%= f.hidden_field :code_postal, value: params[:code_postal] %>
       <%= f.submit 'Chercher', id: 'bouton-chercher',
-        disabled: !params[:code_postal] || params[:code_postal].length == 0 %>
+        disabled: !params[:ville_ou_code_postal] || params[:ville_ou_code_postal].length == 0 %>
     <% end %>
 
-    <% if params[:code_postal] %>
-      <%= render(partial: 'structure', collection: @structures) ||
-        content_tag(:p, t('.aucun_resultat'), class: 'aucun-resultat') %>
+    <% if @structures_code_postal.present? %>
+      <p class="description-liste-structures mt-4"><%= @structures_code_postal.size %> résultat(s) pour <%= params[:code_postal] %></p>
+      <%= render(partial: 'structure', collection: @structures_code_postal) %>
 
-      <div class="actions">
-      <%= link_to t('.structure_non_referencee'), nouvelle_structure_path, class: 'creer-structure' %>
-      </div>
+      <%= render partial: 'bouton_ajouter_une_structure' %>
     <% end %>
 
+    <% unless @structures.nil? %>
+      <% if @structures.empty? && @structures_code_postal.empty? %>
+        <p class="mt-4"><%= t('.aucun_resultat') %></p>
+        <%= render partial: 'bouton_ajouter_une_structure' %>
+      <% elsif @structures.present? %>
+        <p class="description-liste-structures mt-4">Structures à proximité</p>
+        <%= render(partial: 'structure', collection: @structures) %>
+        <%= render partial: 'bouton_ajouter_une_structure' %>
+      <% end %>
+    <% end %>
   </div>
 </div>

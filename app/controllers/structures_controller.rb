@@ -5,7 +5,11 @@ class StructuresController < ApplicationController
   helper ::ActiveAdmin::ViewHelpers
 
   def index
-    @structures = StructureLocale.near("#{params[:code_postal]}, FRANCE")
+    return if params[:ville_ou_code_postal].blank?
+
+    @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
+    @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
+                                 .where.not(id: @structures_code_postal)
   end
 
   def show

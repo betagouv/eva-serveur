@@ -13,6 +13,25 @@ describe 'Admin - Evaluation', type: :feature do
     create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019'
   end
 
+  describe '#index' do
+    before do
+      connecte(mon_compte)
+      visit admin_evaluations_path
+    end
+
+    it "n'affiche pas les statistiques" do
+      expect(page).not_to have_content('Statistiques')
+    end
+
+    context 'en tant que superadmin' do
+      let(:role) { 'superadmin' }
+
+      it 'affiche les statistiques' do
+        expect(page).to have_content('Statistiques')
+      end
+    end
+  end
+
   describe '#show' do
     before { connecte(mon_compte) }
 

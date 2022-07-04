@@ -29,6 +29,20 @@ ActiveAdmin.register Evaluation do
     actions
   end
 
+  sidebar :statistiques, only: :index, if: proc { can?(:manage, Compte) } do
+    ul do
+      collection_complete = collection.except(:limit, :offset, :order)
+      evaluations_par_synthese = collection_complete.select(:synthese_competences_de_base)
+                                                    .group(:synthese_competences_de_base)
+                                                    .count
+      evaluations_par_synthese.delete(nil)
+
+      div do
+        pie_chart evaluations_par_synthese
+      end
+    end
+  end
+
   xls do
     whitelist
     column('Structure') { |evaluation| evaluation.campagne.compte.structure.nom }

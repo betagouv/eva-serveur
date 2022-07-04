@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   $( ".champ-recherche" ).autocomplete({
     source: function (request, response) {
+      $('#code_postal').val('');
       $.ajax({
         url: "https://api-adresse.data.gouv.fr/search/",
         data: { q: request.term, limit: 6, type: 'municipality', autocomplete: 1 },
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         success: function (data) {
           response($.map(data.features, function (item) {
             const label = `${item.properties.city} (${item.properties.postcode})`;
-            return { label: label, value: label };
+            return { label: label, value: label, code_postal: item.properties.postcode };
           }))
         },
         error: function () {
@@ -27,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
     select: function( event, ui ) {
+      $('#code_postal').val(ui.item.code_postal);
+
       const disabled = ui.item.value == '';
       $('#bouton-chercher').prop("disabled", disabled);
     },

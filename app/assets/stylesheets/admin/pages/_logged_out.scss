@@ -232,8 +232,9 @@ body.logged_out {
       flex-grow: 1;
       margin-right: .5rem;
     }
-    .aucun-resultat {
-      margin-top: 1rem;
+    .description-liste-structures {
+      margin-bottom: 1rem;
+      color: $eva_main_blue;
     }
     .actions {
       display: flex;

@@ -4,40 +4,28 @@ require 'rails_helper'
 
 describe 'Structures', type: :feature do
   before do
-    Geocoder::Lookup::Test.add_stub(
-      '75012', [
-        {
-          'coordinates' => [40.7143528, -74.0059731]
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub(
-      '75013', [
-        {
-          'coordinates' => [40.7143529, -74.0059730]
-        }
-      ]
-    )
-    Geocoder::Lookup::Test.add_stub(
-      '69000', [
-        {
-          'coordinates' => [50.7143528, 74.0059731]
-        }
-      ]
-    )
+    paris12 = { 'coordinates' => [40.7143528, -74.0059731] }
+    Geocoder::Lookup::Test.add_stub('75012, FRANCE', [paris12])
+    Geocoder::Lookup::Test.add_stub('75012', [paris12])
+
+    paris13 = { 'coordinates' => [40.7143529, -74.0059730] }
+    Geocoder::Lookup::Test.add_stub('75013, FRANCE', [paris13])
+    Geocoder::Lookup::Test.add_stub('75013', [paris13])
+
+    lyon = { 'coordinates' => [45.7632404, 4.8338496] }
+    Geocoder::Lookup::Test.add_stub('69000, FRANCE', [lyon])
+    Geocoder::Lookup::Test.add_stub('69000', [lyon])
   end
 
   describe "#index liste les structures proche d'un code postal" do
-    let!(:structure_paris12) do
+    before do
       create :structure_locale, nom: 'MILO Paris 12eme', code_postal: '75012'
-    end
-    let!(:structure_paris13) do
       create :structure_locale, nom: 'MILO Paris 13eme', code_postal: '75013'
+      create :structure_locale, nom: 'MILO Lyon', code_postal: '69000'
     end
-    let!(:structure_lyon) { create :structure_locale, nom: 'MILO Lyon', code_postal: '69000' }
 
     it do
-      visit structures_path(code_postal: '75012')
+      visit structures_path(ville_ou_code_postal: 'Paris (75012)', code_postal: '75012')
       expect(page).to have_content 'MILO Paris 12eme'
       expect(page).to have_content 'MILO Paris 13eme'
       expect(page).not_to have_content 'MILO Lyon'

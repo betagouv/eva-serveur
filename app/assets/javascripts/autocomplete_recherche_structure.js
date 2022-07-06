@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   $( ".champ-recherche" ).autocomplete({
     source: function (request, response) {
-      $('#code_postal').val('');
+      $('#bouton-chercher').prop("disabled", true);
       $.ajax({
         url: "https://api-adresse.data.gouv.fr/search/",
         data: { q: request.term, limit: 6, type: 'municipality', autocomplete: 1 },

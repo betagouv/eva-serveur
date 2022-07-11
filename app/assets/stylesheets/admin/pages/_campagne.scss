@@ -3,7 +3,7 @@
   $grid-gutter-width: 1.25rem;
   $largeur-colonne: 135px;
   $largeur-goutiere: 20px;
-  @import "../../bootstrap_minimal";
+  @import "../../bootstrap_grid";
 
   &.show {
     .titre {

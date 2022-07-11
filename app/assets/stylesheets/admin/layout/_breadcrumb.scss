@@ -14,7 +14,7 @@
     box-sizing: border-box;
 
     #page_title {
-      @import "../../bootstrap_minimal";
+      @import "../../bootstrap_grid";
       @include make-col(6, 8);
 
       padding-right: 1.25rem;

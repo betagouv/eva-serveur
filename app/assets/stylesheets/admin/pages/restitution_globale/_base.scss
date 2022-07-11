@@ -8,7 +8,7 @@
 #details_evaluation {
   $grid-columns: 8;
   $grid-gutter-width: 0;
-  @import "../../../bootstrap_minimal";
+  @import "../../../bootstrap_grid";
   font-size: 0.875rem;
 
   .titre,
@@ -24,7 +24,7 @@
   .card-informations {
     $grid-columns: 3;
     $grid-gutter-width: 0;
-    @import "../../../bootstrap_minimal";
+    @import "../../../bootstrap_grid";
     // utilisation de la propriété important pour forcer l'import bootstrap à ne pas écraser cette ligne
     padding: 1.5rem !important;
 

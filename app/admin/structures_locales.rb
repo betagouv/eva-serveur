@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register StructureLocale do
-  menu parent: 'Terrain', if: proc { can?(:manage, Compte) }
+  menu parent: 'Terrain', if: proc { current_compte.anlci? }
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :structure_referente_id

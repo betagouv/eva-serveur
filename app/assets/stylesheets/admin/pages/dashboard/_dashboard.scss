@@ -76,6 +76,9 @@
 }
 
 .prise-en-main {
+  $grid-columns:      8;
+  @import "../../../bootstrap_grid";
+
   .evaluations-premiere-visite {
     @include carte-avec-ombre();
     padding-top: 1.375rem;

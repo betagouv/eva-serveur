@@ -6,7 +6,7 @@ options = { class: 'action' }.merge(options_lien)
 
 div class: 'prise-en-main' do
   div class: 'row' do
-    div class: 'col-4 offset-2' do
+    div class: 'col-6 offset-3' do
       div class: 'evaluations-premiere-visite' do
         div class: 'premiere-visite-illustration' do
           h4 t('titre', scope: scope)

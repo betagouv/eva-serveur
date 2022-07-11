@@ -1,2 +1,20 @@
 @import "bootstrap/mixins";
 @import "bootstrap/grid";
+
+// reset Bootstrap pour ActiveAdmin
+tr.row {
+  display: revert;
+  flex-wrap: revert;
+  margin-left: revert;
+  margin-right: revert;
+}
+
+td.col, th.col {
+  flex-basis: revert;
+  flex-grow: revert;
+  max-width: revert;
+  position: revert;
+  width: revert;
+  padding-right: revert;
+  padding-left: revert;
+}

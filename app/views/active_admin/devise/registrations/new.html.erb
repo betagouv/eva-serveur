@@ -7,7 +7,12 @@
   <% content_for :sous_titre do %>
     <%= resource.structure&.nom -%>
   <% end %>
-  <%= link_to t('.bouton_retour'), "javascript:history.back()", class: 'bouton bouton-retour' %>
+  <%= link_to t('.bouton_retour'),
+              structures_path(
+                code_postal: params[:code_postal],
+                ville_ou_code_postal: params[:ville_ou_code_postal]
+              ),
+              class: 'bouton bouton-retour' %>
   <div id="login">
     <h3><%= t('.description') -%></h3>
     <p>Nous vous enverrons un email vous mettant en relation avec votre structure afin que celle-ci vous communique les accès.</p>

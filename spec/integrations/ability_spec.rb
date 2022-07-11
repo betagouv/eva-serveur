@@ -154,6 +154,9 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Restitution::Base.new(nil, nil)) }
     it { is_expected.to be_able_to(:read, Actualite) }
     it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
+    it { is_expected.not_to be_able_to(:read, AnnonceGenerale) }
+    it { is_expected.not_to be_able_to(:read, SourceAide) }
+    it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente) }
   end
 
   context 'Compte admin' do

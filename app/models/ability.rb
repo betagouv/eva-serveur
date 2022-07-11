@@ -156,5 +156,8 @@ class Ability # rubocop:disable Metrics/ClassLength
   def droits_cmr
     can :read, :all
     cannot(%i[update create destroy], :all)
+    cannot(:read, AnnonceGenerale)
+    cannot(:read, SourceAide)
+    cannot(:read, Aide::QuestionFrequente)
   end
 end

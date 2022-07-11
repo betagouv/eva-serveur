@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register StructureAdministrative do
-  menu parent: 'Terrain', if: proc { can?(:manage, Compte) }
+  menu parent: 'Terrain', if: proc { current_compte.anlci? }
 
   permit_params :nom, :structure_referente_id
 

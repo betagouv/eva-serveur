@@ -8,6 +8,7 @@ class Compte < ApplicationRecord
          :recoverable, :rememberable, :validatable, :registerable, :confirmable
   ROLES = %w[superadmin charge_mission_regionale admin conseiller compte_generique].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
+  ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
   include Comptes::EnvoieEmails
   validates :role, inclusion: { in: ROLES }
   enum :role, ROLES.zip(ROLES).to_h
@@ -45,6 +46,10 @@ class Compte < ApplicationRecord
 
   def compte_refuse?
     validation_refusee?
+  end
+
+  def anlci?
+    ANLCI_ROLES.include?(role)
   end
 
   def au_moins_admin?

@@ -100,7 +100,7 @@
     }
   }
   #utility_nav {
-    @import "../../bootstrap_grid";
+    @import "../../bootstrap_minimal";
     @include make-col(2, 8);
 
     display: flex;

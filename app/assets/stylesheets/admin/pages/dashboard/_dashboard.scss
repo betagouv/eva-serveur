@@ -77,7 +77,7 @@
 
 .prise-en-main {
   $grid-columns:      8;
-  @import "../../../bootstrap_grid";
+  @import "../../../bootstrap_minimal";
 
   .evaluations-premiere-visite {
     @include carte-avec-ombre();

@@ -1,7 +1,7 @@
 .admin_structures, .admin_structures_locales, .admin_structures_administratives {
   $grid-columns:      6;
   $grid-gutter-width: 1.25rem;
-  @import "../../bootstrap_grid";
+  @import "../../bootstrap_minimal";
 
   .without_sidebar {
     .structure {

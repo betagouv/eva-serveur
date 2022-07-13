@@ -37,7 +37,7 @@ ActiveAdmin.register StructureAdministrative do
     end
 
     def trouve_structures_dependantes
-      return unless can?(:manage, Compte)
+      return unless current_compte.anlci?
 
       @structures_dependantes = Structure.where(structure_referente: resource)
     end

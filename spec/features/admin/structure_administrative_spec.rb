@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 describe 'Admin - Structure administrative', type: :feature do
-  before { se_connecter_comme_superadmin }
+  let(:compte_courant) { create(:compte_superadmin) }
+  before { connecte(compte_courant) }
 
   let!(:structure) { create :structure_administrative, :avec_admin, nom: 'Ma structure' }
 
@@ -39,6 +40,12 @@ describe 'Admin - Structure administrative', type: :feature do
         click_on 'Refuser'
         expect(compte.reload.validation_refusee?).to be true
       end
+    end
+
+    context 'en tant que Chargé de mission régionale' do
+      let(:compte_courant) { create(:compte_charge_mission_regionale, structure: structure) }
+
+      it { expect(page).to have_content structure.nom }
     end
   end
 

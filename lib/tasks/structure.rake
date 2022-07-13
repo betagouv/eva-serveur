@@ -3,12 +3,11 @@
 namespace :structure do
   desc 'Assigne les régions pour les structures sans région'
   task assigne_region: :environment do
-    Structure.where(region: nil).find_each do |structure|
-      resultats = Geocoder.search("#{structure.code_postal} FRANCE")
-      if (resultat = resultats.first)
-        structure.update(region: resultat.state)
-        puts "assigne région #{resultat.state} pour #{structure.nom}"
-      end
+    structures = Structure.where(region: nil).where.not(code_postal: nil)
+    structures.find_each do |structure|
+      structure.geocode
+      structure.save
+      puts "assigne région \"#{structure.region}\" pour #{structure.nom}"
     end
   end
 end

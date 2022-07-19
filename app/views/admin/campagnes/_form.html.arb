@@ -3,6 +3,7 @@
 div class: 'nouvelle-campagne' do
   div class: 'row' do
     div class: 'offset-1 col-4' do
+      h1 t('.titre')
       div class: 'panel description' do
         para { t('.explication_campagne') }
       end

@@ -3,7 +3,7 @@
 div id: 'details_evaluation', class: 'row' do
   scope = 'admin.evaluations.details_evaluation'
   div class: 'col col-6 mx-auto' do
-    h2 nom_pour_evaluation(resource), class: 'sous-titre'
+    h1 nom_pour_evaluation(resource)
     h3 t('.titre'), class: 'titre'
     div class: 'card' do
       div class: 'row m-0' do

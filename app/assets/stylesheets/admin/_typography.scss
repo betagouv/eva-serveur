@@ -1,3 +1,10 @@
+h1 {
+  @include titre;
+  font-size: 2.25rem;
+  color: $eva_main_blue;
+  margin-bottom: 2rem;
+}
+
 h2 {
   &.titre-entete-page {
     @include titre-carte;

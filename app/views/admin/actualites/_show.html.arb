@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: 'actualite-complete' do
-  h1 actualite.titre, class: 'titre'
+  h1 actualite.titre
 
   div class: 'illustration' do
     image_tag cdn_for(actualite.illustration) if actualite.illustration.attached?

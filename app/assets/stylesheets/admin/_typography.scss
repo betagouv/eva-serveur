@@ -6,10 +6,9 @@ h1 {
 }
 
 h2 {
-  &.titre-entete-page {
-    @include titre-carte;
-    margin-bottom: 1.5rem;
-  }
+  @include titre;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 h3 {

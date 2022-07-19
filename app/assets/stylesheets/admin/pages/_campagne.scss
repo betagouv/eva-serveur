@@ -12,10 +12,6 @@
       font-size: 2.25rem;
       color: $eva_main_blue;
     }
-    .sous-titre {
-      @include titre;
-      margin-bottom: 1rem;
-    }
     .panel {
       font-size: 0.875rem;
       > ul {
@@ -170,15 +166,6 @@
   }
 
   .nouvelle-campagne {
-    .titre {
-      @include titre;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-      &--medium {
-        font-size: 1.25rem;
-      }
-    }
-
     .description {
       font-size: 0.875rem;
       font-style: italic;

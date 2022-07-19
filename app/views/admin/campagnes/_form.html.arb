@@ -10,7 +10,7 @@ div class: 'nouvelle-campagne' do
 
       active_admin_form_for [:admin, resource] do |f|
         f.semantic_errors
-        h3 t('.titre_libelle'), class: 'titre titre--medium'
+        h2 t('.titre_libelle')
         div class: 'panel' do
           para t('.explication_informations_campagne'), class: 'description description--secondaire'
           f.inputs do
@@ -19,9 +19,9 @@ div class: 'nouvelle-campagne' do
         end
 
         if resource.new_record?
-          h2 t('.parcours'), class: 'titre titre--medium'
+          h2 t('.parcours')
           div class: 'panel' do
-            h2 t('.choix_parcours'), class: 'titre titre--medium'
+            h2 t('.choix_parcours')
             para t('.explication_choix_parcours'), class: 'description description--secondaire'
             f.inputs class: 'input-choix' do
               f.input :parcours_type, as: :radio,
@@ -30,7 +30,7 @@ div class: 'nouvelle-campagne' do
                                       label: false
             end
             if resource.new_record?
-              h2 t('.personnalisation'), class: 'titre titre--medium'
+              h2 t('.personnalisation')
               para t('.explication_personnalisation'), class: 'description description--secondaire'
               f.inputs class: 'input-choix input-choix-option-personnalisation' do
                 f.input :options_personnalisation, as: :check_boxes,
@@ -43,7 +43,7 @@ div class: 'nouvelle-campagne' do
 
         if current_compte.superadmin?
           div class: 'panel' do
-            h2 t('.configuration_avancee'), class: 'titre titre--medium'
+            h2 t('.configuration_avancee')
             f.inputs do
               f.input :compte
               f.input :code

@@ -2,9 +2,10 @@ fr:
   admin:
     campagnes:
       form:
+        titre: Nouvelle Campagne
         explication_campagne: Une campagne permet de regrouper vos passations. Vous pouvez ainsi par exemple les regrouper selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
-        titre_informations: Informations de la campagne
-        explication_informations_campagne: Le libellé est le nom utilisé pour designer la campagne dans votre espace conseiller.
+        titre_libelle: Libellé de la campagne
+        explication_informations_campagne: Le libellé est le nom utilisé pour désigner la campagne dans votre espace conseiller.
         parcours: Parcours
         choix_parcours: Choix du parcours
         explication_choix_parcours: |

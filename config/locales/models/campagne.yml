@@ -4,7 +4,7 @@ fr:
       campagne:
         created_at: Créée le
         updated_at: Mise à jour le
-        libelle: Nom
+        libelle: Libellé
         code: Code
         affiche_competences_fortes: Afficher les compétences fortes ?
         nombre_evaluations: Éval.

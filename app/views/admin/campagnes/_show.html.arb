@@ -4,7 +4,7 @@ div class: 'row' do
   div class: 'offset-1 col-4' do
     h1 campagne.libelle
 
-    h2 'Votre code campagne', class: 'sous-titre'
+    h2 'Votre code campagne'
 
     div class: 'panel campagne-code' do
       div md t('.explication_code')
@@ -36,7 +36,7 @@ div class: 'row' do
       end
     end
 
-    h2 'Détails de la campagne', class: 'sous-titre'
+    h2 'Détails de la campagne'
 
     div class: 'panel' do
       attributes_table_for campagne do
@@ -46,7 +46,7 @@ div class: 'row' do
     end
 
     if can?(:manage, Compte)
-      h2 'Administration', class: 'sous-titre'
+      h2 'Administration'
 
       div class: 'panel' do
         attributes_table_for campagne do

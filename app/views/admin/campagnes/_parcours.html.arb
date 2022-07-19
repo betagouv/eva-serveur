@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-h2 t('.titre_panel_parcours'), class: 'sous-titre'
+h2 t('.titre_panel_parcours')
 div class: 'campagne-parcours' do
   div class: 'campagne-parcours-intro' do
     md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT)

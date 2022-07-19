@@ -6,12 +6,6 @@
   @import "../../bootstrap_grid";
 
   &.show {
-    .titre {
-      @include titre;
-      margin-bottom: 1.5rem;
-      font-size: 2.25rem;
-      color: $eva_main_blue;
-    }
     .panel {
       font-size: 0.875rem;
       > ul {

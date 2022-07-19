@@ -10,8 +10,8 @@ div class: 'nouvelle-campagne' do
 
       active_admin_form_for [:admin, resource] do |f|
         f.semantic_errors
+        h3 t('.titre_libelle'), class: 'titre titre--medium'
         div class: 'panel' do
-          h2 t('.titre_informations'), class: 'titre titre--medium'
           para t('.explication_informations_campagne'), class: 'description description--secondaire'
           f.inputs do
             f.input :libelle

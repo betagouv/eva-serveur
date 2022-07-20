@@ -3,7 +3,7 @@
 div class: 'row' do
   div class: 'structure offset-1 col-4' do
     div class: 'bloc-structure-infos' do
-      h2 structure.nom, class:'titre-entete-page'
+      h2 structure.nom, class: 'titre-entete-page'
 
       render 'components/panel_introduction',
              text: t('.introduction', lien_aide: admin_aide_path),

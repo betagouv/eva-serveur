@@ -14,6 +14,7 @@ fr:
         explication_personnalisation: |
           Certains modules du parcours sont optionnels. Vous pouvez choisir de les intégrer ou non au parcours. Pour les intégrer, cochez la case correspondant à chaque module.
         configuration_avancee: Configuration avancée
+        action: 'Créer la campagne'
       show:
         explication_code: |
           Afin de rattacher vos bénéficiaires à cette campagne,

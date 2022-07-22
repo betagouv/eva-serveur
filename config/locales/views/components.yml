@@ -5,7 +5,7 @@ fr:
         nom: Situation Plan de la ville
         duree_moyenne: 5mn
         description: |
-          Ce module permet d’expliquer aux utilisateurs les manipulations informatiques de base nécessaires à l’utilisation d’EVA sur ordinateur ou sur tablette (par exemple : clic, saisie de texte, glisser-déposer) et de les mettre en pratique en amont du test. Ainsi, les personnes les moins à l'aise avec l'informatique peuvent se familiariser avec les manipulations informatiques qu'elles auront à réaliser dans la suite de la passation.
+          Ce module permet d’évaluer la capacité du candidat à utiliser l’outil informatique. Les exercices évaluent l’utilisation d’une interface de site internet, d’une souris ou d’un clavier.
       bienvenue:
         nom: Situation Bienvenue
         duree_moyenne: 6mn

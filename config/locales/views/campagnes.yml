@@ -3,7 +3,10 @@ fr:
     campagnes:
       form:
         titre: Nouvelle Campagne
-        explication_campagne: Une campagne permet de regrouper vos passations. Vous pouvez ainsi par exemple les regrouper selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+        explication_campagne:  |
+          **Une campagne eva, est un ensemble d’exercices formant un parcours d’évaluation.** Vous pouvez ainsi par exemple regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+
+          Les bénéficiaires auront besoin du code campagne généré pour démarrer leur session.
         titre_libelle: Libellé de la campagne
         explication_informations_campagne: Le libellé est le nom utilisé pour désigner la campagne dans votre espace conseiller.
         parcours: Parcours

@@ -222,7 +222,16 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
       menu.add id: 'utility_nom', label: proc{ current_compte.nom_complet }, url: proc{ admin_compte_path(current_compte) }, priority: 0
-      menu.add id: 'utility_email', label: proc{ current_compte.email }, url: proc{ admin_compte_path(current_compte) }, priority: 1
+      menu.add id: 'utility_email--non-confirme',
+               label: proc{ current_compte.email.truncate(30) },
+               url: proc{ admin_compte_path(current_compte) },
+               priority: 1,
+               if: proc { current_compte.email_non_confirme? }
+      menu.add id: 'utility_email',
+               label: proc{ current_compte.email.truncate(30) },
+               url: proc{ admin_compte_path(current_compte) },
+               priority: 1,
+               if: proc { !current_compte.email_non_confirme? }
       menu.add id: 'utility_structure_courante',
                label: proc{ current_compte.structure.display_name },
                url: proc{

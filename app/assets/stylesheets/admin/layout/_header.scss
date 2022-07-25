@@ -122,6 +122,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         color: $eva_dark;
+        background-color: transparent;
         &:hover {
           color: $eva_main_blue;
         }
@@ -131,6 +132,7 @@
       &_nom {
         padding-right: 1.75rem;
         font-size: 0.875rem;
+        margin-bottom: .25rem;
       }
       &_email,
       &_structure_courante {
@@ -143,6 +145,28 @@
           &:hover {
             color: $eva_main_blue;
           }
+        }
+      }
+      &_email--non-confirme a {
+        background-color: $eva_red;
+        border-radius: 4px;
+        padding: 2px 4px;
+        margin-right: 2.875rem;
+        color: $eva_light;
+        display: inline-flex;
+        width: auto;
+        overflow: initial;
+
+        &:after {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          width: 18px;
+          height: 18px;
+          position: absolute;
+          right: -20px;
+          top: calc(50% - 9px);
+          background: asset-data-url('icones/notice_rouge.svg') no-repeat center;
         }
       }
       &_structure_courante {

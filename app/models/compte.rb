@@ -63,6 +63,10 @@ class Compte < ApplicationRecord
     self.statut_validation = :acceptee
   end
 
+  def email_non_confirme?
+    !confirmed? || unconfirmed_email.present?
+  end
+
   private
 
   def verifie_dns_email

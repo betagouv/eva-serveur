@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+render 'card_confirmation_email' if current_compte.email_non_confirme?
+
 if current_compte.validation_refusee?
   render 'validation_refusee'
 elsif prise_en_main.en_cours?

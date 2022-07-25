@@ -100,4 +100,41 @@ describe 'Dashboard', type: :feature do
       end
     end
   end
+
+  describe "Confirmation d'email" do
+    context "quand mon compte n'a jamais été confirmé" do
+      before { create :compte_conseiller, confirmed_at: nil, structure: ma_structure }
+
+      it "affiche un message d'alerte" do
+        visit admin_path
+        expect(compte.confirmed?).to be false
+        expect(compte.unconfirmed_email).to be nil
+        expect(page).to have_content('Confirmez votre adresse email')
+      end
+    end
+
+    context "quand une demande de modification d'email est en cours" do
+      let!(:compte) do
+        create :compte_conseiller, confirmed_at: Date.current - 1.day, structure: ma_structure,
+                                   unconfirmed_email: 'nouveau@mail.com'
+      end
+
+      it "affiche un message d'alerte" do
+        visit admin_path
+        expect(compte.confirmed?).to be true
+        expect(page).to have_content('Confirmez votre adresse email')
+      end
+    end
+
+    context 'quand mon compte est confirmé' do
+      let!(:compte) do
+        create :compte_conseiller, confirmed_at: Date.current - 1.day, structure: ma_structure
+      end
+
+      it "n'affiche pas de message d'alerte" do
+        visit admin_path
+        expect(page).not_to have_content('Confirmez votre adresse email')
+      end
+    end
+  end
 end

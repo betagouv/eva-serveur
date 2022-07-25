@@ -126,25 +126,25 @@ fr:
       details_evaluation:
         titre: Détails de l'évaluation
         evaluation_competences_de_base_incomplete: |
-          **Évaluation des compétences de base incomplète**
+          #### Évaluation des compétences de base incomplète
 
           Tous les modules permettant **d’évaluer <u>les compétences de base</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
 
           **Néanmoins, les résultats de l’évaluation des compétences transversales sont bien complets et fiables.**
         evaluation_competences_transversales_incomplete: |
-          **Évaluation des compétences transversales incomplète**
+          #### Évaluation des compétences transversales incomplète
 
           Certains modules permettant **d’évaluer <u>les compétences transversales</u> n’ont pas été complétés**. La fiabilité des résultats peut donc être diminuée.
 
           **Néanmoins, les résultats de l’évaluation des compétences de base sont bien complets et fiables.**
         evaluation_incomplete: |
-          **Évaluation incomplète**
+          #### Évaluation incomplète
 
           Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
         illetrisme_potentiel:
           action: Signaler une difficulté
           message: |
-            **Cette personne semble avoir besoin de consolider ses compétences de base.**
+            #### Cette personne semble avoir besoin de consolider ses compétences de base.
 
             **Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?**
             Aidez-nous à alerter les pouvoirs publics en signalant ici les difficultés que vous rencontrez.

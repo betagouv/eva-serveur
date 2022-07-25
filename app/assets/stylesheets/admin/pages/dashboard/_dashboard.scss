@@ -1,115 +1,126 @@
-.bloc-apercu {
-  margin-bottom: 2rem;
+.admin_dashboard {
+  .bloc-apercu {
+    margin-bottom: 2rem;
 
-  &-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-
-    h3 {
-      @include titre-carte;
-      margin-bottom: 0;
-    }
-
-    > a {
-      @include bouton;
-      display: inline-block;
-    }
-  }
-
-  .campagnes-liste {
-    color: $eva_dark_blue_grey;
-    .liste-entete {
+    &-header {
       display: flex;
-      padding: 0 1rem;
-      margin-bottom: .75rem;
-      font-size:0.875rem;
-      .entete {
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+  
+      h3 {
+        @include titre-carte;
+        margin-bottom: 0;
+      }
+  
+      > a {
+        @include bouton;
+        display: inline-block;
+      }
+    }
+
+    .campagnes-liste {
+      color: $eva_dark_blue_grey;
+      .liste-entete {
+        display: flex;
+        padding: 0 1rem;
+        margin-bottom: .75rem;
+        font-size:0.875rem;
+        .entete {
+          &-libelle {
+            flex: 2;
+          }
+          &-code {
+            flex: 1;
+          }
+          &-url {
+            flex: 3;
+          }
+        }
+      }
+      .campagne {
+        @include carte-avec-ombre();
+        padding: 0.7rem 1rem;
+        margin-bottom: .5rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+        font-size:0.875rem;
+        &-libelle,
+        &-code {
+          text-decoration: none;
+        }
         &-libelle {
           flex: 2;
+          font-size: 1rem;
+          font-family: $font-titre;
+          font-weight: bold;
+          color: $couleur-liens;
         }
         &-code {
           flex: 1;
         }
         &-url {
           flex: 3;
+          display: flex;
+          justify-content: space-between;
+          color: $eva_dark_blue_grey;
+          a:first-child {
+            flex: 1;
+          }
         }
-      }
-    }
-    .campagne {
-      @include carte-avec-ombre();
-      padding: 0.7rem 1rem;
-      margin-bottom: .5rem;
-      display: flex;
-      align-items: center;
-      position: relative;
-      font-size:0.875rem;
-      &-libelle,
-      &-code {
-        text-decoration: none;
-      }
-      &-libelle {
-        flex: 2;
-        font-size: 1rem;
-        font-family: $font-titre;
-        font-weight: bold;
-        color: $couleur-liens;
-      }
-      &-code {
-        flex: 1;
-      }
-      &-url {
-        flex: 3;
-        display: flex;
-        justify-content: space-between;
-        color: $eva_dark_blue_grey;
-        a:first-child {
-          flex: 1;
+        .bouton-jouer {
+          @include bouton-carte($eva_main_blue);
         }
-      }
-      .bouton-jouer {
-        @include bouton-carte($eva_main_blue);
       }
     }
   }
-}
 
-.prise-en-main {
-  .evaluations-premiere-visite {
-    @include carte-avec-ombre();
-    padding-top: 1.375rem;
-    overflow: hidden;
-    text-align: center;
-    border: 2px solid $couleur-warning;
-    background-color: $eva_light;
-    margin-bottom: 2.5rem;
-    .premiere-visite {
-      &-illustration {
-        font-size: 0;
-        h4 {
-          margin-bottom: 0.75rem;
+  .prise-en-main {
+    .evaluations-premiere-visite {
+      @include carte-avec-ombre();
+      padding-top: 1.375rem;
+      overflow: hidden;
+      text-align: center;
+      border: 2px solid $couleur-warning;
+      background-color: $eva_light;
+      margin-bottom: 2.5rem;
+      .premiere-visite {
+        &-illustration {
+          font-size: 0;
+          h4 {
+            margin-bottom: 0.75rem;
+          }
+        }
+        &-action {
+          padding: 1.5rem;
+          background-color: #fff;
+          p,
+          .action {
+            color: $eva_dark;
+          }
+          p {
+            font-size: 0.875rem;
+          }
+          .action {
+            @include bouton;
+            display: inline-block;
+            font-size: 0.75rem;
+            color: $eva_dark;
+            border: 0;
+            background-color: $couleur-warning;
+          }
         }
       }
-      &-action {
-        padding: 1.5rem;
-        background-color: #fff;
-        p,
-        .action {
-          color: $eva_dark;
-        }
-        p {
-          font-size: 0.875rem;
-        }
-        .action {
-          @include bouton;
-          display: inline-block;
-          font-size: 0.75rem;
-          color: $eva_dark;
-          border: 0;
-          background-color: $couleur-warning;
-        }
-      }
+    }
+  }
+
+  .card__banner--alert {
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+
+    .bouton-principal {
+      max-width: 10.5rem;
     }
   }
 }

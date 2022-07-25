@@ -50,23 +50,21 @@
     }
   }
 
-  .message-alerte {
-    line-height: 1rem;
-    padding: 1rem 1.5rem;
-
-    p:first-child {
-      font-family: $font-titre;
-      font-size: 16px;
+  .card__banner {
+    padding: 1rem;
+    &--alert {
+      box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
     }
 
     &--illettrisme {
-      border-radius: 0px 0px 8px 8px;
-      p:first-child {
+      border-radius: 0 0 8px 8px;
+      border: 2px solid $eva_red;
+      h4 {
         color: $eva_red;
       }
     }
 
-    &-icone {
+    &__icone {
       margin-left: -1.5rem;
     }
   }

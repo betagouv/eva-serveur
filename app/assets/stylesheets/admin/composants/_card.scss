@@ -6,17 +6,17 @@
   font-size: 0.875rem;
   @include ombre();
 
-  .card-header {
-    padding: 0.75rem;
-    box-shadow: inset 0px -20px 8px -20px rgba(30, 65, 106, 0.25);
-  }
-
   .card-body {
     padding: 1.5rem;
   }
 
-  .card-footer {
-    padding: 0.75rem;
-    box-shadow: inset -8px 8px 8px -8px rgba(30, 65, 106, 0.25);
+  .card__banner {
+    line-height: 1rem;
+      &.card__banner--alert {
+      background-color: $eva-orange;
+    }
+    h4 {
+      margin-bottom: 1rem;
+    }
   }
 }

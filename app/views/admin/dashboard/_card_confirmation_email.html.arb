@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+div class: 'row m-0' do
+  div class: 'offset-1 col-10' do
+    div class: 'card mb-5' do
+      div class: 'card__banner card__banner--alert w-100 d-flex' do
+        div(class: 'd-flex') do
+          svg_tag_base64 'icones/icone-enveloppe'
+        end
+        div do
+          h4 t('.titre')
+          text_node md "#{t('.description.instructions')}<u>#{current_compte.email_a_confirmer}</u>"
+          div class: 'd-flex justify-content-between align-items-center' do
+            div t('.description.email_non_recu'), class: 'font-weight-bold'
+            div do
+              link_to t('.description.action'), new_confirmation_path(current_compte),
+                      class: 'bouton bouton-principal text-center'
+            end
+          end
+        end
+      end
+    end
+  end
+end

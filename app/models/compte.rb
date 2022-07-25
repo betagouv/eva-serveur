@@ -67,6 +67,12 @@ class Compte < ApplicationRecord
     !confirmed? || unconfirmed_email.present?
   end
 
+  def email_a_confirmer
+    return if confirmed? && unconfirmed_email.blank?
+
+    unconfirmed_email.presence || email
+  end
+
   private
 
   def verifie_dns_email

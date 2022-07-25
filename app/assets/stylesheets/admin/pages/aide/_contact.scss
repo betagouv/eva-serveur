@@ -32,12 +32,12 @@
     &__titre h4 {
       display: inline-block;
       vertical-align: bottom;
+      font-size: .875rem;
     }
     &__titre {
       margin-bottom: 1.6rem;
       h4 {
         margin-left: 0.625rem;
-        font-size: 1.125rem;
         color: $eva_light;
       }
     }

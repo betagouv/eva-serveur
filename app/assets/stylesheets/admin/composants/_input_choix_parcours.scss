@@ -53,6 +53,7 @@
         border-color: transparent;
         .choix-titre {
           color: $eva_main_blue;
+          font-size: .875rem;
         }
       }
     }
@@ -104,6 +105,7 @@
 
       .choix-titre {
         color: $eva_dark;
+        font-size: .875rem;
       }
 
       &, div, span, p, ul li {

@@ -27,6 +27,7 @@ div class: 'mon-compte row' do
           end
         end
       end
+      render 'components/banner_confirmation_email' unless compte.confirmed?
       div class: 'card-body' do
         attributes_table_for compte do
           row :prenom

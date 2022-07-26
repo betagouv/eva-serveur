@@ -30,5 +30,10 @@
 
   .card__banner--alert {
     padding: 0.75rem;
+    gap: 1.25rem;
+    .banner__icone {
+      width: 7.75rem;
+      margin: .75rem;
+    }
   }
 }

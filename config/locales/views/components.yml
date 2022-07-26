@@ -16,3 +16,10 @@ fr:
         duree_moyenne: 6mn
         description: |
           Cette option du module Livraison demande aux bénéficiaires de rédiger un court texte afin de se faire une idée de leur niveau en expression écrite.
+    banner_confirmation_email:
+      titre: Confirmez votre adresse email
+      description:
+        instructions: 'Consultez votre boîte de réception, nous vous avons envoyé les instructions de confirmation à l’adresse suivante : '
+        email_non_recu: |
+          Vous n’avez pas reçu notre email ?
+        action: Renvoyer les instructions de confirmation

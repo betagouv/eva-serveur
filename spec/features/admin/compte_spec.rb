@@ -271,5 +271,16 @@ describe 'Admin - Compte', type: :feature do
         expect(page).to have_content(/Une demande de modification d’email a été effectuée./)
       end
     end
+
+    context "quand mon compte n'a jamais été confirmé" do
+      before do
+        compte_connecte.update confirmed_at: nil
+        visit admin_compte_path(compte_connecte)
+      end
+
+      it do
+        expect(page).to have_content(/Confirmez votre adresse email/)
+      end
+    end
   end
 end

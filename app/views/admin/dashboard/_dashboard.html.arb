@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
-render 'card_confirmation_email' if current_compte.email_non_confirme?
+if current_compte.email_non_confirme?
+  div class: 'row m-0' do
+    div class: 'offset-1 col-10' do
+      div class: 'card mb-5' do
+        render 'components/banner_confirmation_email'
+      end
+    end
+  end
+end
 
 if current_compte.validation_refusee?
   render 'validation_refusee'

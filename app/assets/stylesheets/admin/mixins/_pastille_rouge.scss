@@ -1,0 +1,20 @@
+@mixin pastille_rouge {
+  background-color: $eva_red;
+  border-radius: 4px;
+  padding: 2px 4px;
+  margin-right: 2.875rem;
+  color: $eva_light;
+  display: inline-flex;
+  width: auto;
+  overflow: initial;
+  font-style: italic;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    background: asset-data-url('icones/notice_rouge.svg') no-repeat center;
+  }
+}

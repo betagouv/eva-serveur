@@ -35,8 +35,8 @@ div class: 'mon-compte row' do
           row :prenom
           row :nom
           row(:email) do
-            if compte.unconfirmed_email.present?
-              span(compte.email, class: 'text-warning')
+            if compte.email_non_confirme?
+              span(compte.email, class: 'email-non-confirme')
             else
               compte.email
             end

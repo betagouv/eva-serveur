@@ -36,4 +36,13 @@
       margin: .75rem;
     }
   }
+
+  .email-non-confirme {
+    @include pastille_rouge;
+    &:after {
+      right: -21px;
+      width: 21px;
+      height: 21px;
+    }
+  }  
 }

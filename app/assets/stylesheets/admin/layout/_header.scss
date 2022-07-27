@@ -148,25 +148,11 @@
         }
       }
       &_email--non-confirme a {
-        background-color: $eva_red;
-        border-radius: 4px;
-        padding: 2px 4px;
-        margin-right: 2.875rem;
-        color: $eva_light;
-        display: inline-flex;
-        width: auto;
-        overflow: initial;
-
+        @include pastille_rouge;
         &:after {
-          content: '';
-          display: inline-block;
-          vertical-align: middle;
+          right: -20px;
           width: 18px;
           height: 18px;
-          position: absolute;
-          right: -20px;
-          top: calc(50% - 9px);
-          background: asset-data-url('icones/notice_rouge.svg') no-repeat center;
         }
       }
       &_structure_courante {

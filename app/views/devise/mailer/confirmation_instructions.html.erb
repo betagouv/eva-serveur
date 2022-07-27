@@ -1,0 +1,18 @@
+<% url_confirmation = confirmation_url(@resource, confirmation_token: @token) %>
+
+<div style="font-size: 14px;">
+  <p>Bonjour <%= @resource.prenom %>,</p>
+
+  <p>Vous avez créé un compte sur eva et nous vous en remercions.</p>
+
+  <p style="font-weight: 600;">Pour des raisons de sécurité, nous avons besoin que vous confirmiez votre adresse email en cliquant sur le bouton ci-dessous : </p>
+
+  <div class="text-center" style="margin: 2rem 0;">
+    <%= link_to 'Je confirme mon adresse email', url_confirmation, class: 'bouton' %>
+  </div>
+
+  <p style="font-size: 12px;">
+    Si vous rencontrez un problème, copiez et coller le lien suivant dans votre navigateur : <br>
+    <span class="lien"><%= url_confirmation %></span>
+  </p>  
+</div>

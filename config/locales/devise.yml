@@ -1,0 +1,5 @@
+fr:
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmez votre adresse email"

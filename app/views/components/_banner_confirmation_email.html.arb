@@ -2,7 +2,7 @@
 
 div class: 'card__banner card__banner--alert w-100 d-flex' do
   div(class: 'd-flex') do
-    svg_tag_base64 'icones/icone-enveloppe', class: 'banner__icone'
+    svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
   end
   div do
     h4 t('.titre')

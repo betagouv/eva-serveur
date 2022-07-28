@@ -24,8 +24,10 @@ module ApplicationHelper
     'col-4 px-5 mb-4'
   end
 
-  def svg_tag_base64(path, options = {})
-    raw = Rails.application.assets_manifest.find_sources(path).first
+  def svg_tag_base64(path_with_extension, options = {})
+    ## Ne pas oublier de rajouter l'extension au path sinon ça ne build pas en production
+
+    raw = Rails.application.assets_manifest.find_sources(path_with_extension).first
     encodage = Base64.strict_encode64 raw
     image_src64 = "data:image/svg+xml;base64,#{encodage}"
     image_tag image_src64, options

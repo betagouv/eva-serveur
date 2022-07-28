@@ -272,14 +272,19 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
-    context "quand mon compte n'a jamais été confirmé" do
-      before do
-        compte_connecte.update confirmed_at: nil
-        visit admin_compte_path(compte_connecte)
+    describe "pour un compte connecté qui n'a jamais été confirmé" do
+      before { compte_connecte.update confirmed_at: nil }
+
+      context 'quand je suis sur la show de mon compte' do
+        before { visit admin_compte_path(compte_connecte) }
+
+        it { expect(page).to have_content(/Confirmez votre adresse email/) }
       end
 
-      it do
-        expect(page).to have_content(/Confirmez votre adresse email/)
+      context "quand je suis sur la show d'un autre compte" do
+        before { visit admin_compte_path(collegue) }
+
+        it { expect(page).to_not have_content(/Confirmez votre adresse email/) }
       end
     end
   end

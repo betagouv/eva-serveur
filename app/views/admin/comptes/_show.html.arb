@@ -27,7 +27,9 @@ div class: 'mon-compte row' do
           end
         end
       end
-      render 'components/banner_confirmation_email' unless compte.confirmed?
+      if current_compte == compte && !compte.confirmed?
+        render 'components/banner_confirmation_email'
+      end
       div class: 'card-body' do
         attributes_table_for compte do
           row :prenom

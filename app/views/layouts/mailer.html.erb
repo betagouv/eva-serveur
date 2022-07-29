@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
     <style>
-      body {
+      .corp-message {
         font-family: 'Work Sans', sans-serif;
         color: #1E416A;
         font-weight: 400;
@@ -19,7 +19,7 @@
         color: #6E84FE;
       }
       a, a:visited, .lien {
-        color: #6E84FE;
+        color: #6E84FE !important;
         text-decoration: none;
       }
       .text-center {
@@ -28,7 +28,7 @@
       .bouton, .bouton:visited {
         display: inline-block;
         background: #6E84FE;
-        color: white;
+        color: white !important;
         text-decoration: none;
         border-radius: 2.875rem;
         font-size: 14px;
@@ -38,7 +38,7 @@
     </style>
   </head>
 
-  <body>
+  <body class='corp-message'>
     <%= yield %>
     <%= md t('.signature') %>
     <%= image_tag('signature.png') %>

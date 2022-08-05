@@ -1,5 +1,7 @@
 fr:
   devise:
+    failure:
+      already_authenticated: ""
     sessions:
       compte:
         signed_in_but_unconfirmed: ""

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  permit_params :campagne_id, :nom
+  permit_params :campagne_id, :nom, :beneficiaire_id
   menu priority: 4
 
   includes campagne: :compte
@@ -82,7 +82,7 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes, :campagnes_accessibles,
+                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :beneficiaires_accessibles,
                   :traduction_niveau, :campagne_avec_competences_transversales?
 
     def show
@@ -140,6 +140,10 @@ ActiveAdmin.register Evaluation do
 
     def campagnes_accessibles
       @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
+    end
+
+    def beneficiaires_accessibles
+      @beneficiaires_accessibles ||= Beneficiaire.accessible_by(current_ability)
     end
   end
 end

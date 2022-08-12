@@ -50,6 +50,8 @@ fr:
 
         parcours_bas:
           nom: Profil parcours bas
+        parcours_haut:
+          nom: Profil parcours haut
         efficience:
           nom: Efficience
         lecture_bas:

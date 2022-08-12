@@ -62,14 +62,20 @@ module Restitution
       return ::Competence::NIVEAU_INDETERMINE if profils.include?(::Competence::NIVEAU_INDETERMINE)
 
       position_minimum = profils.map do |profil|
-        ::Competence::PROFILS.index(profil)
+        ::Competence::PROFILS_BAS.index(profil)
       end.min
-      ::Competence::PROFILS[position_minimum]
+      ::Competence::PROFILS_BAS[position_minimum]
+    end
+
+    def parcours_haut
+      score_total = scores_parcours_haut.values.sum
+      Competence::ProfilEvacob.new(self, 'score_parcours_haut', score_total).niveau
     end
 
     def synthese
       {
-        parcours_bas: parcours_bas
+        parcours_bas: parcours_bas,
+        parcours_haut: parcours_haut
       }
     end
 
@@ -79,6 +85,15 @@ module Restitution
         comprehension: Competence::ProfilEvacob.new(self, 'score_comprehension'),
         production: Competence::ProfilEvacob.new(self, 'score_production')
       }.transform_values(&:niveau)
+    end
+
+    def scores_parcours_haut
+      @scores_parcours_haut ||= {
+        hpar: partie.metriques['score_hpar'],
+        hgac: partie.metriques['score_hgac'],
+        hcvf: partie.metriques['score_hcvf'],
+        hpfb: partie.metriques['score_hpfb']
+      }
     end
   end
 end

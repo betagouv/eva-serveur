@@ -15,8 +15,12 @@ module Competence
   PROFIL_3 = :profil3
   PROFIL_2 = :profil2
   PROFIL_1 = :profil1
+  PROFIL_ABERRANT = 'profil aberrant'
+  PROFIL_4H = 'profil 4H'
+  PROFIL_4H_PLUS = 'profil 4H+'
+  PROFIL_4H_PLUS_PLUS = 'profil 4H++'
 
-  PROFILS = [PROFIL_1, PROFIL_2, PROFIL_3, PROFIL_4, PROFIL_4_PLUS, PROFIL_4_PLUS_PLUS].freeze
+  PROFILS_BAS = [PROFIL_1, PROFIL_2, PROFIL_3, PROFIL_4, PROFIL_4_PLUS, PROFIL_4_PLUS_PLUS].freeze
   NIVEAUX = [NIVEAU_INDETERMINE, NIVEAU_1, NIVEAU_2, NIVEAU_3, NIVEAU_4].freeze
 
   PERSEVERANCE = :perseverance

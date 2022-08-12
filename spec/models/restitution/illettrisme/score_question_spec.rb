@@ -16,37 +16,37 @@ describe Restitution::Illettrisme::ScoreQuestion do
 
     it 'la question Syntaxe et orthographe 1 répondu avec succès suffisament rapidement' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: true, temps: 15.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: true, temps: 10.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [3]
     end
 
     it 'la question Syntaxe et orthographe 2 répondu avec succès suffisament rapidement' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_2', succes: true, temps: 11.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_2', succes: true, temps: 9.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [3]
     end
 
     it 'la question Syntaxe et orthographe 1 répondu avec echec trop rapidement' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 15.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 10.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [-2]
     end
 
     it 'la question Syntaxe et orthographe 1 répondu avec echec mais très lentements' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 36.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 16.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [0]
     end
 
     it 'la question Syntaxe et orthographe 1 répondu avec echec au dessus du premier seuil' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 16.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 11.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [-1]
     end
 
     it 'la question Syntaxe et orthographe 1 répondu avec echec en dessous du second seuil' do
       expect(mock_metriques_temps_questions).to receive(:calcule)
-        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 35.0 }])
+        .and_return([{ question: 'syntaxe_et_orthographe_1', succes: false, temps: 15.0 }])
       expect(metrique_score_question.calcule([], [])).to eq [-1]
     end
   end

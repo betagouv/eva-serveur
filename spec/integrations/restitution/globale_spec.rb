@@ -28,12 +28,12 @@ describe Restitution::Globale do
     context 'de niveau 2' do
       it do
         expect(restitution_evaluation1.scores_niveau2.calcule[:score_ccf].round(2))
-          .to be(-2.35)
+          .to be(-2.34)
       end
 
       it do
         expect(restitution_evaluation1.scores_niveau2_standardises.calcule[:score_ccf].round(2))
-          .to be(-1.13)
+          .to be(-1.12)
       end
 
       it do
@@ -67,7 +67,7 @@ describe Restitution::Globale do
       it do
         expect(restitution_evaluation1.scores_niveau1_standardises.calcule[:litteratie]
                                                                   .round(2))
-          .to be(-0.94)
+          .to be(-0.93)
       end
     end
   end

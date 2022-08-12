@@ -27,7 +27,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
     end
 
     context 'juste au dessus du palier 0' do
-      let(:scores_standardises) { { score_ccf: -1.4 } }
+      let(:scores_standardises) { { score_ccf: -0.09 } }
 
       it do
         expect(subject.interpretations(competences))
@@ -36,7 +36,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
     end
 
     context 'juste en dessous du palier 2' do
-      let(:scores_standardises) { { score_ccf: -0.26 } }
+      let(:scores_standardises) { { score_ccf: 0.0 } }
 
       it do
         expect(subject.interpretations(competences))
@@ -45,7 +45,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
     end
 
     context 'au palier 2' do
-      let(:scores_standardises) { { score_ccf: -0.25 } }
+      let(:scores_standardises) { { score_ccf: 0.01 } }
 
       it do
         expect(subject.interpretations(competences))
@@ -66,7 +66,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
     end
 
     context 'sait interpreter les competences dans le référenciel ANLCI' do
-      let(:scores_standardises) { { litteratie: -0.39, numeratie: 1.03 } }
+      let(:scores_standardises) { { litteratie: 0.01, numeratie: 1.01 } }
 
       it do
         expect(subject.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,

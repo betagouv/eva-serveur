@@ -5,18 +5,18 @@ module Restitution
     class InterpreteurScores
       PALIERS = {
         CEFR: {
-          litteratie: [-1.7, -1.2, -0.55],
-          numeratie: [-1.28, -0.71, 0.1]
+          litteratie: [-1.5, -1, 0],
+          numeratie: [-1, -0.5, 0]
         },
         ANLCI: {
-          litteratie: [-2.3, -1.7, -1.2, -0.98, -0.55],
-          numeratie: [-1.28, -0.71, -0.3, 0.04, 0.1]
+          litteratie: [-2, -1.5, -1, -0.5, 0],
+          numeratie: [-1, -0.5, 0, 0.5, 1]
         },
         TOUT_REFERENTIEL: {
-          score_ccf: [-1.41, -0.26],
-          score_syntaxe_orthographe: [-1.31, -0.08],
-          score_memorisation: [-0.71, -0.31],
-          score_numeratie: [-1.28, 0.1]
+          score_ccf: [-1, 0],
+          score_syntaxe_orthographe: [-1, 0],
+          score_memorisation: [-1, 0],
+          score_numeratie: [-1, 0]
         }
       }.freeze
 

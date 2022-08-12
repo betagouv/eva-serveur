@@ -22,6 +22,26 @@ module Restitution
         'type' => :nombre,
         'parametre' => 'production',
         'instance' => Evacob::ScoreMetacompetence.new
+      },
+      'score_hpar' => {
+        'type' => :nombre,
+        'parametre' => :hpar,
+        'instance' => Evacob::ScoreModule.new
+      },
+      'score_hgac' => {
+        'type' => :nombre,
+        'parametre' => :hgac,
+        'instance' => Evacob::ScoreModule.new
+      },
+      'score_hcvf' => {
+        'type' => :nombre,
+        'parametre' => :hcvf,
+        'instance' => Evacob::ScoreModule.new
+      },
+      'score_hpfb' => {
+        'type' => :nombre,
+        'parametre' => :hpfb,
+        'instance' => Evacob::ScoreModule.new
       }
     }.freeze
 

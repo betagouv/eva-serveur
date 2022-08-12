@@ -239,6 +239,10 @@ fr:
         score_lecture: 'Score lecture'
         score_comprehension: 'Score compréhension'
         score_production: 'Score production de texte'
+        score_hpar: 'Score hpar'
+        score_hgac: 'Score hgac'
+        score_hcvf: 'Score hcvf'
+        score_hpfb: 'Score hpfb'
 
         nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_reponses: Nombre de réponses

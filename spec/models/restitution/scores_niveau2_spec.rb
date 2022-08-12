@@ -30,7 +30,7 @@ describe Restitution::ScoresNiveau2 do
     end
   end
 
-  context "fait la moyenne des scores_niveau2 d'une liste de partie" do
+  context "fait la moyenne des scores_niveau3 d'une liste de partie" do
     let(:partie1) { double(situation_id: situation_id) }
     let(:partie2) { double(situation_id: situation_id) }
 

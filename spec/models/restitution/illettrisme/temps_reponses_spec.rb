@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-describe Restitution::Illettrisme::TempsBonnesReponses do
-  let(:temps_bonnes_reponses_numeratie) do
+describe Restitution::Illettrisme::TempsReponses do
+  let(:temps_reponses_numeratie) do
     described_class.new.calcule(evenements_decores(evenements, :livraison), 'numeratie')
   end
   let(:evenements) do
@@ -18,7 +18,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
 
   describe 'metrique temps de bonnes réponses' do
     context 'sans événement réponse' do
-      it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
+      it { expect(temps_reponses_numeratie).to eq([]) }
     end
 
     context 'une bonne réponse' do
@@ -31,7 +31,11 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
-      it { expect(temps_bonnes_reponses_numeratie).to eq([1]) }
+
+      it do
+        expect(temps_reponses_numeratie)
+          .to eq([{ question: 'question-qcm', succes: true, temps: 1.0 }])
+      end
     end
 
     context 'une mauvaise réponse' do
@@ -44,7 +48,11 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
-      it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
+
+      it do
+        expect(temps_reponses_numeratie)
+          .to eq([{ question: 'question-qcm', succes: false, temps: 1.0 }])
+      end
     end
 
     context 'ignore les autres compétences' do
@@ -61,7 +69,8 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
-      it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
+
+      it { expect(temps_reponses_numeratie).to eq([]) }
     end
 
     context 'ignore les questions sans réponses' do
@@ -71,7 +80,8 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                                    date: Time.zone.local(2019, 10, 9, 10, 1, 21))
         ]
       end
-      it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
+
+      it { expect(temps_reponses_numeratie).to eq([]) }
     end
   end
 end

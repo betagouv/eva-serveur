@@ -61,7 +61,8 @@ describe 'Admin - Restitution', type: :feature do
     end
 
     before { visit admin_restitution_path(partie) }
-    it { expect(page).to have_content('Nombre De Bonnes Réponses Numératie') }
+
+    it { expect(page).to have_content('Nombre De Réponses Numératie') }
   end
 
   describe "suppression d'une partie" do

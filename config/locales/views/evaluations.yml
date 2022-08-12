@@ -252,17 +252,11 @@ fr:
         score_hcvf: 'Score hcvf'
         score_hpfb: 'Score hpfb'
 
-        nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_reponses: Nombre de réponses
         nombre_reponses_ccf: Nombre de réponses CCF
-        nombre_bonnes_reponses_ccf: Nombre de bonnes réponses CCF
+        nombre_reponses_numeratie: Nombre de réponses Numératie
+        nombre_reponses_memorisation: Nombre de réponses Mémorisation
         nombre_reponses_syntaxe_orthographe: Nombre de réponses Syntaxe et Orthographe
-        nombre_bonnes_reponses_syntaxe_orthographe: Nombre de bonnes réponses Syntaxe et Orthographe
-        nombre_bonnes_reponses_memorisation: Nombre de bonnes réponses Mémorisation
-        temps_moyen_bonnes_reponses_numeratie: Temps moyen de bonnes réponses Numératie
-        temps_moyen_bonnes_reponses_ccf: Temps moyen de bonnes réponses CCF
-        temps_moyen_bonnes_reponses_syntaxe_orthographe: Temps moyen de bonnes réponses Syntaxe et Orthographe
-        temps_moyen_bonnes_reponses_memorisation: Temps moyen de bonnes réponses Mémorisation
         score: Score
         score_numeratie: Score Numératie
         score_ccf: Score CCF

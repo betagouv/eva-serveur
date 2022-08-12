@@ -2,9 +2,9 @@
 
 module Restitution
   module Illettrisme
-    class TempsBonnesReponses
+    class TempsReponses
       def calcule(evenements, metacompetence)
-        Restitution::MetriquesHelper.temps_action(evenements, :bonne_reponse?) do |evenement|
+        Restitution::MetriquesHelper.temps_questions(evenements) do |evenement|
           evenement.metacompetence == metacompetence
         end
       end

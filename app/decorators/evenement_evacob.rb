@@ -2,7 +2,11 @@
 
 class EvenementEvacob < SimpleDelegator
   PREFIX_QUESTIONS = {
-    orientation: 'LO'
+    orientation: 'LO',
+    hpar: 'HPar',
+    hgac: 'HGac',
+    hcvf: 'HCvf',
+    hpfb: 'HPfb'
   }.freeze
 
   def bonne_reponse?

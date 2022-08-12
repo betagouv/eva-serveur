@@ -14,6 +14,7 @@ class Evaluation < ApplicationRecord
 
   validates :nom, :debutee_le, presence: true
   belongs_to :campagne, counter_cache: :nombre_evaluations
+  belongs_to :beneficiaire, optional: true
   attr_accessor :code_campagne
 
   before_validation :trouve_campagne_depuis_code

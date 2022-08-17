@@ -8,6 +8,16 @@ div id: 'details_evaluation', class: 'row' do
     div class: 'card' do
       div class: 'row m-0' do
         div class: 'col col-6 card-informations' do
+        if can?(:manage, Beneficiaire)
+          div class: 'row' do
+            div class: 'col-1' do
+              span 'Bénéficiaire'
+            end
+            div class: 'col col-2' do
+              auto_link resource.beneficiaire
+            end
+          end
+        end
           div class: 'row' do
             div class: 'col-1' do
               span 'Campagne'

@@ -18,6 +18,7 @@ class Evaluation < ApplicationRecord
   attr_accessor :code_campagne
 
   before_validation :trouve_campagne_depuis_code
+  after_save :beneficiaire_create_or_update_nom!
   validate :code_campagne_connu
 
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
@@ -48,6 +49,14 @@ class Evaluation < ApplicationRecord
 
   def anonyme?
     anonymise_le.present?
+  end
+
+  def beneficiaire_create_or_update_nom!
+    if beneficiaire.present?
+      beneficiaire.update(nom: nom)
+    else
+      create_beneficiaire!(nom: nom)
+    end
   end
 
   private

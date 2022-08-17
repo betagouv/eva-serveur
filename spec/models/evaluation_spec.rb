@@ -8,7 +8,7 @@ describe Evaluation do
   it { is_expected.to belong_to :campagne }
   it { is_expected.to have_one :condition_passation }
 
-  describe "verifie la génération du bénéficiaire" do
+  describe 'verifie la génération du bénéficiaire' do
     let!(:evaluation) { create :evaluation, nom: 'NOM' }
 
     context "quand nous n'avons pas de bénéficiaire" do
@@ -18,7 +18,7 @@ describe Evaluation do
       end
     end
 
-    context "quand nous avons déjà un bénéficiaire" do
+    context 'quand nous avons déjà un bénéficiaire' do
       it 'mets à jour le nom du bénéficiaire' do
         evaluation.beneficiaire_create_or_update_nom!
         evaluation.nom = 'nouveau NOM'

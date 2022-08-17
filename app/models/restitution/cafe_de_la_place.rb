@@ -68,8 +68,10 @@ module Restitution
     end
 
     def parcours_haut
-      score_total = scores_parcours_haut.values.sum
-      Competence::ProfilEvacob.new(self, 'score_parcours_haut', score_total).niveau
+      scores = scores_parcours_haut.values
+      return ::Competence::NIVEAU_INDETERMINE if scores.include?(nil)
+
+      Competence::ProfilEvacob.new(self, 'score_parcours_haut', scores.sum).niveau
     end
 
     def synthese

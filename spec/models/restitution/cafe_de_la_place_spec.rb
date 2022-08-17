@@ -47,7 +47,7 @@ describe Restitution::CafeDeLaPlace do
       expect(restitution.parcours_bas).to equal(:profil2)
     end
 
-    it "quand un profil n'est pas définit" do
+    it "quand un profil n'est pas défini" do
       expect(restitution).to receive(:competences)
         .and_return({
                       lecture_bas: ::Competence::NIVEAU_INDETERMINE,
@@ -88,6 +88,14 @@ describe Restitution::CafeDeLaPlace do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: 9, hgac: 9, hcvf: 9, hpfb: 9 })
         expect(restitution.parcours_haut).to equal(::Competence::PROFIL_4H_PLUS_PLUS)
+      end
+    end
+
+    context "quand un des scores n'est pas défini" do
+      it 'retourne le profil indeterminé' do
+        expect(restitution).to receive(:scores_parcours_haut)
+          .and_return({ hpar: nil, hgac: 9, hcvf: 5, hpfb: 2 })
+        expect(restitution.parcours_haut).to equal(::Competence::NIVEAU_INDETERMINE)
       end
     end
   end

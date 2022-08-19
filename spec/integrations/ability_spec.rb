@@ -177,6 +177,7 @@ describe Ability do
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
+      it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
       context 'quand un compte est admin' do
         before { mon_collegue.update(role: :admin) }
@@ -263,6 +264,7 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(1, 2, 3)) }
+    it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
     context 'peut consulter les campagnes de ma structure' do
       let(:mon_collegue) { create :compte, structure: compte_conseiller.structure }

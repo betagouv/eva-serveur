@@ -12,17 +12,17 @@ describe Evaluation do
 
     context "quand nous n'avons pas de bénéficiaire" do
       it 'génére un bénéficiaire du même nom' do
-        evaluation.beneficiaire_create_or_update_nom!
+        evaluation.ajout_du_beneficiaire_avec_nom!
         expect(evaluation.beneficiaire.nom).to eq('NOM')
       end
     end
 
     context 'quand nous avons déjà un bénéficiaire' do
-      it 'mets à jour le nom du bénéficiaire' do
-        evaluation.beneficiaire_create_or_update_nom!
+      it 'ne change pas le nom du bénéficiaire' do
+        evaluation.ajout_du_beneficiaire_avec_nom!
         evaluation.nom = 'nouveau NOM'
-        evaluation.beneficiaire_create_or_update_nom!
-        expect(evaluation.beneficiaire.nom).to eq('nouveau NOM')
+        evaluation.ajout_du_beneficiaire_avec_nom!
+        expect(evaluation.beneficiaire.nom).to eq('NOM')
       end
     end
   end

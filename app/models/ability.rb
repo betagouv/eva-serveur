@@ -157,6 +157,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :read, :all
     cannot(%i[update create destroy], :all)
     cannot(:read, AnnonceGenerale)
+    cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
     cannot(:read, Aide::QuestionFrequente)
   end

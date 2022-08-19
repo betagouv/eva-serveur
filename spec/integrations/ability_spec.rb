@@ -43,6 +43,7 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Campagne.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
     it { is_expected.to be_able_to(:manage, Actualite) }
+    it { is_expected.to be_able_to(:manage, Beneficiaire) }
 
     it 'avec une campagne qui a des évaluations' do
       expect(subject).not_to be_able_to(:destroy, campagne_superadmin)
@@ -157,6 +158,7 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, AnnonceGenerale) }
     it { is_expected.not_to be_able_to(:read, SourceAide) }
     it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente) }
+    it { is_expected.not_to be_able_to(:read, Beneficiaire) }
   end
 
   context 'Compte admin' do

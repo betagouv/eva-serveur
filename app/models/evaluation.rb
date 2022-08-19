@@ -52,9 +52,7 @@ class Evaluation < ApplicationRecord
   end
 
   def ajout_du_beneficiaire_avec_nom!
-    if beneficiaire.blank? && nom.present?
-      create_beneficiaire!(nom: nom)
-    end
+    create_beneficiaire!(nom: nom) if beneficiaire.blank? && nom.present?
   end
 
   private

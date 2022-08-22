@@ -26,7 +26,10 @@ module Api
     private
 
     def evaluation_params
-      params.permit(:nom, :code_campagne, :terminee_le, :debutee_le)
+      params.permit(:nom, :code_campagne, :terminee_le, :debutee_le,
+                    condition_passation_attributes: %i[materiel_utilise modele_materiel
+                                                       nom_navigateur version_navigateur
+                                                       resolution_ecran])
     end
   end
 end

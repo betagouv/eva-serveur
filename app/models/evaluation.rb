@@ -20,6 +20,7 @@ class Evaluation < ApplicationRecord
   before_validation :trouve_campagne_depuis_code
   validate :code_campagne_connu
   has_one :condition_passation, dependent: :destroy
+  accepts_nested_attributes_for :condition_passation
 
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
   enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true

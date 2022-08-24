@@ -9,7 +9,10 @@ describe 'Evaluation API', type: :request do
     context 'Création quand une requête est valide' do
       let(:date) { Time.zone.local(2021, 10, 4) }
       let(:payload_valide_avec_campagne) do
-        { nom: 'Roger', code_campagne: 'ETE19', debutee_le: date.iso8601 }
+        { nom: 'Roger',
+          code_campagne: 'ETE19',
+          debutee_le: date.iso8601,
+          condition_passation_attributes: { materiel_utilise: 'desktop' } }
       end
 
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
@@ -23,6 +26,10 @@ describe 'Evaluation API', type: :request do
         expect(response).to have_http_status(:created)
         reponse = JSON.parse(response.body)
         expect(reponse['id']).to eq evaluation.id
+      end
+
+      it do
+        expect(ConditionPassation.count).to eq 1
       end
     end
 

@@ -55,5 +55,45 @@ describe Structure, type: :model do
         expect(structure.region).to eql('Nouvelle-Calédonie')
       end
     end
+
+    describe 'si ma structure a un code postal commençant par 20' do
+      let(:structure) { Structure.new code_postal: '20090' }
+
+      before do
+        Geocoder::Lookup::Test.add_stub(
+          '20090', [
+            {
+              'state' => '',
+              'coordinates' => [41.9333, 8.7507]
+            }
+          ]
+        )
+        structure.valid?
+      end
+
+      it 'lui attribue la région Corse' do
+        expect(structure.region).to eql('Corse')
+      end
+    end
+
+    describe 'si ma structure a un code postal commençant par 21' do
+      let(:structure) { Structure.new code_postal: '20114' }
+
+      before do
+        Geocoder::Lookup::Test.add_stub(
+          '20114', [
+            {
+              'state' => '',
+              'coordinates' => [41.5188, 9.1264]
+            }
+          ]
+        )
+        structure.valid?
+      end
+
+      it 'lui attribue la région Corse' do
+        expect(structure.region).to eql('Corse')
+      end
+    end
   end
 end

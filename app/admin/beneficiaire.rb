@@ -7,6 +7,10 @@ ActiveAdmin.register Beneficiaire do
 
   permit_params :nom
 
+  show do
+    render partial: 'show'
+  end
+
   index do
     column :nom
     column :created_at

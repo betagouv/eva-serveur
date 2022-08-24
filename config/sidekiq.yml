@@ -1,8 +1,8 @@
 :schedule:
   anonymisations_evaluations_job:
     cron: '0 1 * * *'
-    class: AnonymisationEvaluationsJob
-    description: Anonymise les évaluations de plus d'un an. (job exécuté chaque jour)
+    class: AnonymisationBeneficiairesJob
+    description: Anonymise les bénéficiaires qui ont des évaluations de plus d'un an. (job exécuté chaque jour)
     enabled: true
   notification_admin_job:
     cron: '0 9 * * 1'

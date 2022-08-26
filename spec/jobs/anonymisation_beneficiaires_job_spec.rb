@@ -32,7 +32,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
   end
 
   it "n'anonymise pas les bénéficiaires déjà annonymisé" do
-    date_anonymisation = 12.days.ago
+    date_anonymisation = 12.days.ago.beginning_of_minute
     beneficiaire = create :beneficiaire, nom: 'nom', anonymise_le: date_anonymisation
     ancienne_evaluation = create :evaluation, created_at: 2.years.ago, beneficiaire: beneficiaire,
                                               anonymise_le: date_anonymisation

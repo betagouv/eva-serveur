@@ -17,7 +17,7 @@ if beneficiaire.evaluations.present?
                         download_links: false) do
     table_for collection, sortable: true, class: 'index_table' do
       column 'Date', :created_at, sortable: :created_at
-      column :campagne, sortable: :created_at
+      column :campagne
       column :actions do |evaluation|
         div class: 'table_actions' do
           text_node link_to(t('.voir'), admin_evaluation_path(evaluation), class: 'view_link')

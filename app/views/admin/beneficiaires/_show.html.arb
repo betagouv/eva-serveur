@@ -9,23 +9,20 @@ div class: 'row' do
   end
 end
 
-div class: 'campagnes-liste' do
-  if beneficiaire.evaluations.present?
-    order_param = (params[:order] || 'created_at_desc').gsub('_asc', ' asc').gsub(
-      '_desc', ' desc'
-    )
-    paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
-                         download_links: false) do
-      table_for collection, sortable: true, class: 'index_table' do
-        column :nom, sortable: :nom
-        column :created_at, sortable: :created_at
-
-        column :actions do |evaluation|
-          div class: 'table_actions' do
-            text_node link_to(t('.voir'), admin_evaluation_path(evaluation), class: 'view_link')
-            text_node link_to(t('.modifier'), edit_admin_evaluation_path(evaluation),
-                              class: 'edit_link')
-          end
+if beneficiaire.evaluations.present?
+  order_param = (params[:order] || 'created_at_desc').gsub('_asc', ' asc').gsub(
+    '_desc', ' desc'
+  )
+  paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
+                        download_links: false) do
+    table_for collection, sortable: true, class: 'index_table' do
+      column 'Date', :created_at, sortable: :created_at
+      column :campagne, sortable: :created_at
+      column :actions do |evaluation|
+        div class: 'table_actions' do
+          text_node link_to(t('.voir'), admin_evaluation_path(evaluation), class: 'view_link')
+          text_node link_to(t('.modifier'), edit_admin_evaluation_path(evaluation),
+                            class: 'edit_link')
         end
       end
     end

@@ -19,7 +19,6 @@ class Evaluation < ApplicationRecord
   attr_accessor :code_campagne
 
   before_validation :trouve_campagne_depuis_code
-  after_save :ajout_du_beneficiaire_avec_nom!
   validate :code_campagne_connu
   has_one :condition_passation, dependent: :destroy
   accepts_nested_attributes_for :condition_passation
@@ -52,10 +51,6 @@ class Evaluation < ApplicationRecord
 
   def anonyme?
     anonymise_le.present?
-  end
-
-  def ajout_du_beneficiaire_avec_nom!
-    create_beneficiaire!(nom: nom) if beneficiaire.blank? && nom.present?
   end
 
   private

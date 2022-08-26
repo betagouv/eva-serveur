@@ -17,6 +17,7 @@ class AnonymisationBeneficiairesJob < ApplicationJob
   def beneficiaire_avec_evaluations_de_plus_1_an
     Beneficiaire
       .select('beneficiaires.*, MAX(evaluations.created_at) AS derniere_evaluation_date')
+      .where(anonymise_le: nil)
       .joins(:evaluations).group('beneficiaires.id').having(
         'MAX(evaluations.created_at) < ?', 1.year.ago
       )

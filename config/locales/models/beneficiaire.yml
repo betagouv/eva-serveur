@@ -1,0 +1,21 @@
+fr:
+  activerecord:
+    attributes:
+      beneficiaire:
+        created_at: Créé le
+        updated_at: Mis à jour le
+    models:
+      beneficiaire:
+        one: Bénéficiaire
+        other: Bénéficiaires
+  formtastic:
+    actions:
+      beneficiaire:
+        create: Créer
+        update: Enregistrer
+  active_admin:
+    resources:
+      beneficiaire:
+        delete_model: Supprimer
+        new_model: Nouveau bénéficiaire
+        edit_model: Modification du bénéficiaire

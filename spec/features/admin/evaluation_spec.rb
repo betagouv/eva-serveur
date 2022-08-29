@@ -237,7 +237,7 @@ describe 'Admin - Evaluation', type: :feature do
       context 'en changeant de campagne' do
         it do
           within('#evaluation_campagne_input') { select 'Campagne autre structure' }
-          click_on 'Modifier'
+          click_on 'Enregistrer'
           expect(evaluation.reload.nom).to eq 'Nouveau Nom'
           expect(evaluation.campagne.libelle).to eq 'Campagne autre structure'
         end
@@ -246,7 +246,7 @@ describe 'Admin - Evaluation', type: :feature do
       context 'sans mettre de campagne' do
         it do
           within('#evaluation_campagne_input') { select '' }
-          click_on 'Modifier'
+          click_on 'Enregistrer'
           expect(evaluation.reload.nom).to eq 'Ancien nom'
         end
       end
@@ -266,7 +266,7 @@ describe 'Admin - Evaluation', type: :feature do
           expect(page).not_to have_content('Campagne autre structure')
           select 'Campagne même structure'
         end
-        click_on 'Modifier'
+        click_on 'Enregistrer'
         expect(evaluation.reload.campagne.libelle).to eq 'Campagne même structure'
       end
     end

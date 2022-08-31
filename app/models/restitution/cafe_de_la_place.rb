@@ -74,10 +74,17 @@ module Restitution
       Competence::ProfilEvacob.new(self, 'score_parcours_haut', scores.sum).niveau
     end
 
+    def niveau_anlci_litteratie
+      return parcours_haut if parcours_haut != ::Competence::NIVEAU_INDETERMINE
+
+      parcours_bas
+    end
+
     def synthese
       {
         parcours_bas: parcours_bas,
-        parcours_haut: parcours_haut
+        parcours_haut: parcours_haut,
+        niveau_anlci_litteratie: niveau_anlci_litteratie
       }
     end
 

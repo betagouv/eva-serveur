@@ -21,5 +21,5 @@ fr:
       description:
         instructions: 'Consultez votre boîte de réception, nous vous avons envoyé les instructions de confirmation à l’adresse suivante : '
         email_non_recu: |
-          Vous n’avez pas reçu notre email ?
+          **Vous n’avez pas reçu notre email ?**
         action: Renvoyer les instructions de confirmation

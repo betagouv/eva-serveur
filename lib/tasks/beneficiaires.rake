@@ -22,7 +22,8 @@ namespace :beneficiaires do
   task supprimer_les_beneficiaires_sans_evaluations: :environment do
     logger = RakeLogger.logger
 
-    beneficiaire_avec_evaluation_ids = Evaluation.where.not(beneficiaire_id: nil).pluck(:beneficiaire_id)
+    beneficiaire_avec_evaluation_ids = Evaluation.where.not(beneficiaire_id: nil)
+                                                 .pluck(:beneficiaire_id)
 
     beneficiaires_sans_evaluation = Beneficiaire.where.not(id: beneficiaire_avec_evaluation_ids)
     total = beneficiaires_sans_evaluation.count

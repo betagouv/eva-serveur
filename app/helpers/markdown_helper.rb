@@ -13,6 +13,10 @@ module MarkdownHelper
     markdown ||= Redcarpet::Markdown.new(
       Redcarpet::Render::HTML.new(hard_wrap: true)
     )
-    markdown.render(contenu).html_safe
+    customise_rendu_gras(markdown.render(contenu)).html_safe
+  end
+
+  def customise_rendu_gras(html)
+    html.gsub('<strong>', '<strong class="fw-semi-bold">')
   end
 end

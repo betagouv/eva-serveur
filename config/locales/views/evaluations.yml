@@ -53,7 +53,7 @@ fr:
         parcours_haut:
           nom: Profil parcours haut
         niveau_anlci_litteratie:
-          Niveau ANLCI littératie
+          nom: Niveau ANLCI littératie
         efficience:
           nom: Efficience
         lecture_bas:

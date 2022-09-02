@@ -4,8 +4,10 @@ module Restitution
   module Evacob
     class ScoreModule
       def calcule(evenements, nom_module)
-        MetriquesHelper.filtre_evenements_reponses(evenements) { |e| e.module?(nom_module) }
-                       .sum(&:score_reponse)
+        evenements_filtres = MetriquesHelper.filtre_evenements_reponses(evenements) do |e|
+          e.module?(nom_module)
+        end
+        evenements_filtres.sum(&:score_reponse) if evenements_filtres.present?
       end
     end
   end

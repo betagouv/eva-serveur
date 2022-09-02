@@ -13,8 +13,9 @@ describe Restitution::Evacob::ScoreModule do
     end
     let(:question_lodi1) { 'LOdi1' }
     let(:question_lodi2) { 'LOdi2' }
+    let(:question_hpar1) { 'HPar1' }
 
-    context 'somme les scores des réponses' do
+    context 'somme les scores des réponses du module' do
       let(:evenements_reponses) do
         [
           build(:evenement_affichage_question_qcm, donnees: { question: question_lodi1 }),
@@ -29,12 +30,27 @@ describe Restitution::Evacob::ScoreModule do
       it { expect(metrique_score_reponse_orientation).to eq(3.5) }
     end
 
-    context 'avec une réponse sans score' do
+    context 'avec une réponse du module sans score' do
       let(:evenements_reponses) do
         [build(:evenement_reponse, donnees: { question: question_lodi1 })]
       end
 
       it { expect(metrique_score_reponse_orientation).to eq(0) }
+    end
+
+    context 'sans réponse du module orientation' do
+      let(:reponse_parcours_haut) do
+        build(:evenement_reponse, donnees: { question: question_hpar1 })
+      end
+      let(:evenements_reponses) { [reponse_parcours_haut] }
+
+      it { expect(metrique_score_reponse_orientation).to eq(nil) }
+    end
+
+    context 'sans réponse' do
+      let(:evenements_reponses) { [] }
+
+      it { expect(metrique_score_reponse_orientation).to eq(nil) }
     end
   end
 end

@@ -16,3 +16,7 @@
   @include carte();
   border: 1px solid $eva_bluegrey;
 }
+@mixin carte-grise {
+  @include carte();
+  background: $eva_bluegrey;
+}

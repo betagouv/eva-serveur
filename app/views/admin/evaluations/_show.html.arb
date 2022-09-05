@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'restitution-globale ' do
+div class: 'evaluation' do
   div class: 'row' do
     div class: 'col-8' do
       render 'details_evaluation'

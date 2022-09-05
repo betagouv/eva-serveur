@@ -1,11 +1,7 @@
 @import "admin/variables";
 @import "admin/mixins";
 
-.admin-scores {
-  margin-top: 1rem;
-}
-
-#details_evaluation {
+#evaluation__details {
   $grid-columns: 8;
   $grid-gutter-width: 0;
   @import "../../../bootstrap_grid";
@@ -70,7 +66,7 @@
   }
 }
 
-.admin_restitution_globale {
+.evaluation__restitution-globale {
   color: $couleur-texte;
   font-size: 0.875rem;
   font-family: $font-texte;
@@ -95,10 +91,8 @@
   }
 
   h3 {
-    font-family: $font-titre;
     color: $eva_main_blue;
     font-size: 1rem;
-    font-weight: 600;
   }
 
   a {
@@ -496,6 +490,36 @@
     padding-top: 3.75rem;
     padding-bottom: 4.375rem;
   }
+
+  .panel-parcours {
+    padding: 1.5rem 3rem;
+    h4 {
+      font-size: 0.875rem
+    }
+    h3 {
+      color: $eva_dark;
+      margin-bottom: .5rem;
+    }
+    &__carte {
+      @include carte-grise();
+      padding: 1rem;
+      line-height: 13px;
+      color: $eva-dark;
+      > * {
+        margin-bottom: .5rem;
+      }
+      strong {
+        font-weight: 600;
+      }
+    }
+    .carte__duree {
+      font-style: italic;
+    }
+  }
+}
+
+.admin-scores {
+  margin-top: 1rem;
 }
 
 .niveau-competence-base {

@@ -22,6 +22,7 @@ describe 'Evaluation API', type: :request do
         expect(evaluation.campagne).to eq campagne_ete19
         expect(evaluation.nom).to eq 'Roger'
         expect(evaluation.debutee_le).to eq date
+        expect(evaluation.beneficiaire.nom).to eq 'Roger'
 
         expect(response).to have_http_status(:created)
         reponse = JSON.parse(response.body)
@@ -68,9 +69,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom debutee_le campagne]
+        expect(json.keys).to eq %w[nom debutee_le campagne beneficiaire]
         expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
-                                   ['doit être présente']]
+                                   ['doit être présente'], ['doit exister']]
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

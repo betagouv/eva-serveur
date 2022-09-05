@@ -3,8 +3,13 @@
 div class: 'menu menu-transverse' do
   ul do
     li do
-      a href: '#details_evaluation' do
+      a href: '#evaluation__details' do
         text_node 'Détails de l\'évaluation'
+      end
+    end
+    li do
+      a href: '#evaluation__deroulement' do
+        text_node 'Déroulement de la passation'
       end
     end
     li do

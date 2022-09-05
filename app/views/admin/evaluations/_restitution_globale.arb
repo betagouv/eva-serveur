@@ -2,7 +2,9 @@
 
 niveaux_competences = restitution_globale.niveaux_competences
 
-div class: 'admin_restitution_globale' do
+div class: 'evaluation__restitution-globale' do
+  render 'deroulement_passation' if resource.campagne.parcours_type.present?
+
   if auto_positionnement
     div id: 'auto_positionnement', class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale

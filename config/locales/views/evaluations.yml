@@ -25,6 +25,10 @@ fr:
         appareils: Appareils
         scolarite: Scolarité
         sante: Santé
+      deroulement_passation:
+        titre: Déroulement de la passation
+        parcours:
+          titre: Parcours sélectionné
       restitution_globale:
         autopositionnement_titre: Questionnaire d'auto-positionnement
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'

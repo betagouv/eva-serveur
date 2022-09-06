@@ -1,71 +1,6 @@
 @import "admin/variables";
 @import "admin/mixins";
 
-#evaluation__details {
-  $grid-columns: 8;
-  $grid-gutter-width: 0;
-  @import "../../../bootstrap_grid";
-  font-size: 0.875rem;
-
-  .titre,
-  .sous-titre {
-    @include titre-carte;
-  }
-  .sous-titre {
-    margin-bottom: .875rem;
-    font-size: 2.25rem;
-    color: $eva_main_blue;
-  }
-
-  .card-informations {
-    $grid-columns: 3;
-    $grid-gutter-width: 0;
-    @import "../../../bootstrap_grid";
-    // utilisation de la propriété important pour forcer l'import bootstrap à ne pas écraser cette ligne
-    padding: 1.5rem !important;
-
-    .row {
-      margin-bottom: 1.5rem;
-      .col:last-child {
-        font-weight: 500;
-      }
-    }
-  }
-
-  .card {
-    &-pdf {
-      padding: 1.25rem;
-      text-align: center;
-      background-color: $eva_dark;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    &-footer {
-      padding: 1rem 0rem;
-    }
-  }
-
-  .card__banner {
-    padding: 1rem;
-    &--alert {
-      box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
-    }
-
-    &--illettrisme {
-      border-radius: 0 0 8px 8px;
-      border: 2px solid $eva_red;
-      h4 {
-        color: $eva_red;
-      }
-    }
-
-    &__icone {
-      margin-left: -1.5rem;
-    }
-  }
-}
-
 .evaluation__restitution-globale {
   color: $couleur-texte;
   font-size: 0.875rem;
@@ -518,7 +453,7 @@
   }
 }
 
-.admin-scores {
+.evaluation__scores {
   margin-top: 1rem;
 }
 

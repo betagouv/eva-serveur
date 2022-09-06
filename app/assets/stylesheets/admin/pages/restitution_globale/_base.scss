@@ -505,7 +505,7 @@
       padding: 1rem;
       line-height: 13px;
       color: $eva-dark;
-      > * {
+      > *:not(:last-child) {
         margin-bottom: .5rem;
       }
       strong {

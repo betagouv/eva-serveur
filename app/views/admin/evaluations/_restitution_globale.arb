@@ -3,7 +3,7 @@
 niveaux_competences = restitution_globale.niveaux_competences
 
 div class: 'evaluation__restitution-globale' do
-  render 'deroulement_passation' if resource.campagne.parcours_type.present?
+  render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
   if auto_positionnement
     div id: 'auto_positionnement', class: 'page' do

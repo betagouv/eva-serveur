@@ -73,7 +73,7 @@ div class: 'evaluation__restitution-globale' do
 end
 
 if can?(:manage, Compte) && !pdf
-  div class: 'admin-scores panel' do
+  div class: 'evaluation__scores panel' do
     tabs do
       tab 'Scores litteratie et numératie' do
         scores_niveau1 = restitution_globale.scores_niveau1.calcule

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_24_164520) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_140441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -167,7 +167,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_164520) do
     t.string "niveau_anlci_litteratie"
     t.string "niveau_anlci_numeratie"
     t.string "completude", default: "incomplete", null: false
-    t.uuid "beneficiaire_id"
+    t.uuid "beneficiaire_id", null: false
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
   end
@@ -305,7 +305,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_24_164520) do
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
   add_foreign_key "conditions_passation", "evaluations", on_delete: :cascade
-  add_foreign_key "evaluations", "beneficiaires"
+  add_foreign_key "evaluations", "beneficiaires", on_delete: :cascade
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade

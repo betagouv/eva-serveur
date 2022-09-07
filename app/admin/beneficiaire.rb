@@ -7,12 +7,16 @@ ActiveAdmin.register Beneficiaire do
 
   permit_params :nom
 
+  before_action only: :show do
+    flash.now[:beneficiaire_anonyme] = t('.beneficiaire_anonyme') if resource.anonyme?
+  end
+
   show do
     render partial: 'show'
   end
 
   index do
-    column :nom
+    column(:nom) { |beneficiaire| nom_pour_beneficiaire(beneficiaire) }
     column :created_at
     actions
   end

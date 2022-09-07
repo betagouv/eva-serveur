@@ -52,6 +52,7 @@ body.logged_in {
     &_annonce_generale,
     &_compte_generique,
     &_evaluation_anonyme,
+    &_beneficiaire_anonyme,
     &_alert {
       @include flash-alert;
 

@@ -29,5 +29,13 @@ describe MarkdownHelper do
         expect(helper.md(contenu)).to match(html)
       end
     end
+
+    context 'quand le contenu contient une balise <style>' do
+      let(:contenu) { "<style type=\"text/javascript\">alert('toto');</script>" }
+
+      it "n'interprete pas la balise <style>" do
+        expect(helper.md(contenu)).to eq("<p>alert(&#39;toto&#39;);</script></p>\n")
+      end
+    end
   end
 end

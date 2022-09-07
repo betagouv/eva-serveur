@@ -11,9 +11,10 @@ module MarkdownHelper
 
   def interprete_markdown_en_html(contenu)
     markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(hard_wrap: true)
+      Redcarpet::Render::HTML.new(hard_wrap: true, no_styles: true)
     )
-    customise_rendu_gras(markdown.render(contenu)).html_safe
+    html = markdown.render(contenu).html_safe
+    customise_rendu_gras(html).html_safe
   end
 
   def customise_rendu_gras(html)

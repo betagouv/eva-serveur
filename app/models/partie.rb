@@ -4,6 +4,8 @@ class Partie < ApplicationRecord
   belongs_to :evaluation
   belongs_to :situation
 
+  has_many :evenements, foreign_key: :session_id, primary_key: :session_id, dependent: :destroy
+
   validates :session_id, presence: true, uniqueness: true
 
   delegate :campagne, to: :evaluation

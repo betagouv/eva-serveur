@@ -21,6 +21,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'parcours_type', 'parcours_type'
   inflect.irregular 'structure_locale', 'structures_locales'
   inflect.irregular 'structure_administrative', 'structures_administratives'
+  inflect.irregular 'partie', 'parties'
 end
 
 # These inflection rules are supported but not enabled by default:

@@ -33,6 +33,12 @@ Rails.application.routes.draw do
       end
       resources :questionnaires, only: [:show]
       resources :evenements
+
+      namespace :admin do
+        resources :evaluations do
+          resource :reponse, only: [:show], defaults: { format: 'xls' }
+        end
+      end
     end
   end
 end

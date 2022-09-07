@@ -591,6 +591,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   sidekiq-scheduler
+  spreadsheet
   spring (~> 3.0)
   spring-commands-rspec
   sprockets-rails

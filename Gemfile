@@ -48,6 +48,7 @@ gem 'redis'
 gem 'rollbar'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'spreadsheet'
 gem 'sprockets-rails'
 gem 'truemail'
 gem 'web-console', group: :development

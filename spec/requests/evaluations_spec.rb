@@ -8,11 +8,20 @@ describe 'Evaluation API', type: :request do
 
     context 'Création quand une requête est valide' do
       let(:date) { Time.zone.local(2021, 10, 4) }
+      let(:unUserAgent) do
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0'
+      end
       let(:payload_valide_avec_campagne) do
-        { nom: 'Roger',
+        {
+          nom: 'Roger',
           code_campagne: 'ETE19',
           debutee_le: date.iso8601,
-          condition_passation_attributes: { materiel_utilise: 'desktop' } }
+          conditions_passation_attributes: {
+            user_agent: unUserAgent,
+            hauteur_fenetre_navigation: 10,
+            largeur_fenetre_navigation: 20
+          }
+        }
       end
 
       before { post '/api/evaluations', params: payload_valide_avec_campagne }
@@ -30,7 +39,14 @@ describe 'Evaluation API', type: :request do
       end
 
       it do
-        expect(ConditionPassation.count).to eq 1
+        expect(ConditionsPassation.count).to eq 1
+        expect(ConditionsPassation.last.user_agent).to eq unUserAgent
+        expect(ConditionsPassation.last.materiel_utilise).to eq 'desktop'
+        expect(ConditionsPassation.last.modele_materiel).to eq nil
+        expect(ConditionsPassation.last.nom_navigateur).to eq 'Firefox'
+        expect(ConditionsPassation.last.version_navigateur).to eq '104.0'
+        expect(ConditionsPassation.last.hauteur_fenetre_navigation).to eq 10
+        expect(ConditionsPassation.last.largeur_fenetre_navigation).to eq 20
       end
     end
 

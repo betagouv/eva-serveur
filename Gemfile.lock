@@ -171,6 +171,7 @@ GEM
     connection_pool (2.2.5)
     crass (1.0.6)
     descriptive_statistics (2.4.0)
+    device_detector (1.0.7)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -549,6 +550,7 @@ DEPENDENCIES
   chartkick
   coffee-rails
   descriptive_statistics (~> 2.4.0)
+  device_detector
   devise
   devise-i18n
   digest (~> 3.0.0)

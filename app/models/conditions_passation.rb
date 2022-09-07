@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class ConditionPassation < ApplicationRecord
+class ConditionsPassation < ApplicationRecord
   belongs_to :evaluation
 end

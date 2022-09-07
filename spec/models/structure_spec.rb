@@ -95,5 +95,26 @@ describe Structure, type: :model do
         expect(structure.region).to eql('Corse')
       end
     end
+
+    context 'quand ma structure a déjà une région' do
+      let(:structure) { Structure.new code_postal: '20114', region: 'Corse' }
+
+      before do
+        structure.code_postal = '61000'
+        Geocoder::Lookup::Test.add_stub(
+          '61000', [
+            {
+              'state' => 'Normandie',
+              'coordinates' => [48.4310232, 0.0922579]
+            }
+          ]
+        )
+        structure.valid?
+      end
+
+      it 'lui attribue la nouvelle région' do
+        expect(structure.region).to eql('Normandie')
+      end
+    end
   end
 end

@@ -55,17 +55,17 @@ div id: 'evaluation__details', class: 'row' do
                 end
               end
             end
-            if resource.condition_passation
-              condition_passation = resource.condition_passation
+            if resource.conditions_passation
+              cp = resource.conditions_passation
               div class: 'row' do
                 div class: 'col-1' do
                   span 'Materiel Utilisé'
                 end
                 div class: 'col col-2' do
-                  span condition_passation.materiel_utilise
-                  span ' | '
-                  span condition_passation.nom_navigateur
-                  div condition_passation.resolution_ecran
+                  span "#{cp.materiel_utilise} | #{cp.nom_navigateur} #{cp.version_navigateur}"
+                  div do
+                    "#{cp.largeur_fenetre_navigation}x#{cp.hauteur_fenetre_navigation}"
+                  end
                 end
               end
             end

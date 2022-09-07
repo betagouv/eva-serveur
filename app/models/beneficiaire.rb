@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Beneficiaire < ApplicationRecord
-  has_many :evaluations, dependent: :nullify
+  has_many :evaluations, dependent: :destroy
   validates :nom, presence: true
 
   def anonyme?

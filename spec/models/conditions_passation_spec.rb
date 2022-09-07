@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe ConditionPassation, type: :model do
+RSpec.describe ConditionsPassation, type: :model do
   it { is_expected.to belong_to(:evaluation) }
 end

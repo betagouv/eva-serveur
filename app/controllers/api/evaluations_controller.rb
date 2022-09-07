@@ -4,6 +4,7 @@ module Api
   class EvaluationsController < Api::BaseController
     def create
       evaluation = Evaluation.new(evaluation_params)
+      initialise_conditions_passation(evaluation.conditions_passation)
       if evaluation.save
         render partial: 'evaluation',
                locals: { evaluation: evaluation },
@@ -25,12 +26,21 @@ module Api
 
     private
 
+    def initialise_conditions_passation(conditions_passation)
+      return unless conditions_passation
+
+      client = DeviceDetector.new(conditions_passation.user_agent)
+      conditions_passation.materiel_utilise = client.device_type
+      conditions_passation.modele_materiel = client.device_name
+      conditions_passation.nom_navigateur = client.name
+      conditions_passation.version_navigateur = client.full_version
+    end
+
     def evaluation_params
       permit_params = params
                       .permit(:nom, :code_campagne, :terminee_le, :debutee_le,
-                              condition_passation_attributes: %i[materiel_utilise modele_materiel
-                                                                 nom_navigateur version_navigateur
-                                                                 resolution_ecran])
+                              conditions_passation_attributes:
+                              %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation])
       permit_params[:beneficiaire_attributes] = { nom: permit_params[:nom] } if permit_params[:nom]
       permit_params
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_140441) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_09_132500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -139,16 +139,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_140441) do
     t.index ["structure_id"], name: "index_comptes_on_structure_id"
   end
 
-  create_table "conditions_passation", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "materiel_utilise"
-    t.string "modele_materiel"
-    t.string "nom_navigateur"
-    t.string "version_navigateur"
-    t.string "resolution_ecran"
+  create_table "conditions_passations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "evaluation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["evaluation_id"], name: "index_conditions_passation_on_evaluation_id"
+    t.string "version_navigateur"
+    t.string "nom_navigateur"
+    t.string "modele_materiel"
+    t.string "materiel_utilise"
+    t.string "user_agent"
+    t.integer "hauteur_fenetre_navigation"
+    t.integer "largeur_fenetre_navigation"
+    t.index ["evaluation_id"], name: "index_conditions_passations_on_evaluation_id"
   end
 
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -304,7 +306,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_140441) do
   add_foreign_key "campagnes", "questionnaires"
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
-  add_foreign_key "conditions_passation", "evaluations", on_delete: :cascade
+  add_foreign_key "conditions_passations", "evaluations", on_delete: :cascade
   add_foreign_key "evaluations", "beneficiaires", on_delete: :cascade
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade

@@ -81,9 +81,10 @@ ActiveAdmin.register Evaluation do
   form partial: 'form'
 
   controller do
-    helper_method :restitution_globale, :parties, :auto_positionnement, :statistiques,
-                  :mes_avec_redaction_de_notes, :campagnes_accessibles, :beneficiaires_accessibles,
-                  :traduction_niveau, :campagne_avec_competences_transversales?
+    helper_method :restitution_globale, :parties, :auto_positionnement, :cafe_de_la_place,
+                  :statistiques, :mes_avec_redaction_de_notes, :campagnes_accessibles,
+                  :beneficiaires_accessibles, :traduction_niveau,
+                  :campagne_avec_competences_transversales?
 
     def show
       show! do |format|
@@ -129,9 +130,17 @@ ActiveAdmin.register Evaluation do
     end
 
     def auto_positionnement
-      restitution_globale.restitutions.select do |restitution|
-        restitution.situation.nom_technique == Restitution::Bienvenue::NOM_TECHNIQUE
-      end.last
+      selectionne_derniere_restitution(Restitution::Bienvenue::NOM_TECHNIQUE)
+    end
+
+    def cafe_de_la_place
+      selectionne_derniere_restitution(Restitution::CafeDeLaPlace::NOM_TECHNIQUE)
+    end
+
+    def selectionne_derniere_restitution(nom)
+      restitution_globale.restitutions.reverse.find do |restitution|
+        restitution.situation.nom_technique == nom
+      end
     end
 
     def parties

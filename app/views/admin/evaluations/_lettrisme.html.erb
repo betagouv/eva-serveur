@@ -1,0 +1,25 @@
+<% if cafe_de_la_place 
+    profil = cafe_de_la_place.niveau_anlci_litteratie
+%>
+<div id="lettrisme" class="page">
+  <h2>Communiquer en français - Lettrisme </h2>
+  <div class="panel">
+    <div class="synthese-lettrisme synthese-lettrisme_<%= profil %>">
+      <div class="synthese-lettrisme-content">
+        <div>
+          <% unless profil.to_s.in?(['indetermine', 'profil_aberrant']) %>
+            <h2>Profil</h2>
+          <% end %>
+          <%= image_tag "icone_profil/icone_#{profil}.svg" %>
+        </div>
+        <div>
+          <h2><%= t(".litteratie.#{profil}.titre") %></h2>
+          <p>
+            <%= md t(".litteratie.#{profil}.description") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

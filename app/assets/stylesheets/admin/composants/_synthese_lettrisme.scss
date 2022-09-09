@@ -1,0 +1,49 @@
+.synthese-lettrisme {
+  color: $eva_light;
+  border-radius: 1.75rem;
+
+  margin-left: 8rem;
+  margin-right: 8rem;
+
+  .synthese-lettrisme-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 2em;
+    gap: 2rem;
+  }
+
+  h2 {
+    color: $eva_light;
+  }
+
+  p {
+    font-family: $font-texte;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+
+  &_indetermine,
+  &_profil_aberrant {
+    background-color: $eva_dark;
+  }
+
+  &_profil1,
+  &_profil2 {
+    background: $eva_orange;
+  }
+
+  &_profil3,
+  &_profil4 {
+    background: $eva_main_blue;
+  }
+
+  &_profil4h,
+  &_profil4h_plus,
+  &_profil4h_plus_plus {
+    background: $eva_green;
+    color: $eva_dark;
+  }
+}

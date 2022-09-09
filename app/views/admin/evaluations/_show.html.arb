@@ -6,6 +6,7 @@ div class: 'evaluation' do
       render 'details_evaluation'
       render 'restitution_globale', pdf: false
       render 'parties'
+      render 'lettrisme'
     end
   end
 end

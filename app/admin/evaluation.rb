@@ -23,7 +23,7 @@ ActiveAdmin.register Evaluation do
                         }, row_class: lambda { |elem|
                                         'anonyme' if elem.anonyme?
                                       } do
-    column(:nom) { |e| nom_pour_evaluation(e) }
+    column(:nom) { |e| nom_pour_ressource(e) }
     column :campagne
     column :created_at
     actions

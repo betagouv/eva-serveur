@@ -16,7 +16,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index do
-    column(:nom) { |beneficiaire| nom_pour_beneficiaire(beneficiaire) }
+    column(:nom) { |beneficiaire| nom_pour_ressource(beneficiaire) }
     column :created_at
     actions
   end

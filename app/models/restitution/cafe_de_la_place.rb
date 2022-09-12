@@ -3,6 +3,7 @@
 module Restitution
   class CafeDeLaPlace < Base
     NOM_TECHNIQUE = 'cafe_de_la_place'
+    LETTRISME_SOUS_COMPETENCES = %w[lecture comprehension_ecrite production_ecrite].freeze
 
     METRIQUES = {
       'score_orientation' => {

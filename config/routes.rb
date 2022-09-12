@@ -23,6 +23,11 @@ Rails.application.routes.draw do
 
     resource :nouvelle_structure, only: [:create, :show]
     resources :structures, only: :index
+    resources :evaluation do
+      namespace :cafe_de_la_place do
+        resource :reponse, only: [:show], defaults: { format: 'xls' }
+      end
+    end
 
     namespace :api do
       resources :campagnes, only: :show, param: :code_campagne
@@ -33,12 +38,6 @@ Rails.application.routes.draw do
       end
       resources :questionnaires, only: [:show]
       resources :evenements
-
-      namespace :admin do
-        resources :evaluations do
-          resource :reponse, only: [:show], defaults: { format: 'xls' }
-        end
-      end
     end
   end
 end

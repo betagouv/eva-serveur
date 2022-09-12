@@ -29,47 +29,51 @@ div class: 'evaluation__restitution-globale' do
     render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
   end
 
-  if pdf
-    div class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale
-
-      h2 t('titre', scope: 'admin.restitutions.cefr'), class: 'text-center mt-5 mb-4'
-
-      div class: 'panel' do
-        render 'francais_mathematique', pdf: pdf
-      end
-
-      render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
-    end
-
-    if mes_avec_redaction_de_notes.present?
+  if resource.campagne.avec_reperage_illesttrime?
+    if pdf
       div class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
 
-        render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+        h2 t('titre', scope: 'admin.restitutions.cefr'), class: 'text-center mt-5 mb-4'
 
-        render 'pied_page'
+        div class: 'panel' do
+          render 'francais_mathematique', pdf: pdf
+        end
+
+        render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
       end
-    end
-  else
-    div id: 'francais_mathematiques', class: 'page' do
-      h2 t('titre', scope: 'admin.restitutions.cefr')
 
-      div class: 'panel panel--avec-references' do
-        render 'francais_mathematique', pdf: pdf
+      if mes_avec_redaction_de_notes.present?
+        div class: 'page' do
+          render 'entete_page', restitution_globale: restitution_globale
 
-        render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+          render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
-        render 'references_restitution_illettrisme'
+          render 'pied_page'
+        end
+      end
+    else
+      div id: 'francais_mathematiques', class: 'page' do
+        h2 t('titre', scope: 'admin.restitutions.cefr')
+
+        div class: 'panel panel--avec-references' do
+          render 'francais_mathematique', pdf: pdf
+
+          render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+
+          render 'references_restitution_illettrisme'
+        end
       end
     end
   end
 
-  render partial: 'correspondance_anlci',
-         locals: {
-           restitution_globale: restitution_globale,
-           pdf: pdf
-         }
+  if resource.campagne.avec_reperage_illesttrime?
+    render partial: 'correspondance_anlci',
+           locals: {
+             restitution_globale: restitution_globale,
+             pdf: pdf
+           }
+  end
 end
 
 if can?(:manage, Compte) && !pdf

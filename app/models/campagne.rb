@@ -4,6 +4,7 @@ require 'generateur_aleatoire'
 
 class Campagne < ApplicationRecord
   SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
+  SITUATIONS_AVEC_REPERAGE_ILLETTRISME = %w[maintenance livraison objets_trouves].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
 
   has_many :situations_configurations, lambda {
@@ -50,6 +51,12 @@ class Campagne < ApplicationRecord
   def avec_competences_transversales?
     situations_configurations.any? do |configuration|
       SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES.include?(configuration.situation.nom_technique)
+    end
+  end
+
+  def avec_reperage_illesttrime?
+    situations_configurations.any? do |configuration|
+      SITUATIONS_AVEC_REPERAGE_ILLETTRISME.include?(configuration.situation.nom_technique)
     end
   end
 

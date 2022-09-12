@@ -10,5 +10,31 @@ FactoryBot.define do
       libelle { 'Parcours complet' }
       nom_technique { 'complet' }
     end
+
+    trait :evacob do
+      libelle { 'Evacob' }
+      nom_technique { 'evacob' }
+
+      before(:create) do |parcours_type|
+        situation = create(:situation_cafe_de_la_place)
+        parcours_type.situations_configurations_attributes = [{ situation: situation }]
+      end
+    end
+
+    trait :competences_de_base do
+      libelle { 'Parcours compétences de base' }
+      nom_technique { 'competences_de_base' }
+
+      before(:create) do |parcours_type|
+        maintenance = create(:situation_maintenance)
+        livraison = create(:situation_livraison)
+        objets_trouves = create(:situation_objets_trouves)
+        parcours_type.situations_configurations_attributes = [
+          { situation: maintenance },
+          { situation: livraison },
+          { situation: objets_trouves }
+        ]
+      end
+    end
   end
 end

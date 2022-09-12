@@ -9,8 +9,10 @@ describe 'Admin - Evaluation', type: :feature do
 
   let(:role) { 'admin' }
   let(:mon_compte) { create :compte, role: role }
+  let(:parcours_type) { create :parcours_type, :competences_de_base }
   let(:ma_campagne) do
-    create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019'
+    create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019',
+                      parcours_type: parcours_type
   end
 
   describe '#index' do
@@ -60,7 +62,9 @@ describe 'Admin - Evaluation', type: :feature do
 
       # evaluation avec positionnement
       let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
-      let(:campagne_bienvenue) { create :campagne, compte: Compte.first }
+      let(:campagne_bienvenue) do
+        create :campagne, compte: Compte.first, parcours_type: parcours_type
+      end
 
       before { campagne_bienvenue.situations_configurations.create situation: bienvenue }
 
@@ -200,6 +204,19 @@ describe 'Admin - Evaluation', type: :feature do
         it { expect(page).to have_content 'Terminée le' }
         it { expect(page).to have_content 'Temps total' }
       end
+    end
+
+    context "quand l'évaluation est pour un parcours Evacob" do
+      let(:evacob) { create :parcours_type, :evacob }
+      let(:campagne_evacob) { create :campagne, parcours_type: evacob, compte: mon_compte }
+      let(:evaluation) { create :evaluation, campagne: campagne_evacob }
+
+      before do
+        visit admin_evaluation_path(evaluation)
+      end
+
+      it { expect(page).not_to have_content 'Vos compétences en français et mathématiques' }
+      it { expect(page).not_to have_content 'Correspondance avec l’ANLCI' }
     end
 
     describe 'suppression' do

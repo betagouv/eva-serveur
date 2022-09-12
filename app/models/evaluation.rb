@@ -5,6 +5,7 @@ class Evaluation < ApplicationRecord
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
   NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
+  NIVEAUX_BAS = %w[profil1 profil2 profil3 profil4].freeze
   NIVEAUX_COMPLETUDE = %w[incomplete
                           competences_de_base_incompletes
                           competences_transversales_incompletes

@@ -1,5 +1,14 @@
+#lettrisme .panel {
+  padding: 1.5rem 3rem;
+  p {
+    line-height: 1rem;
+    font-size: 0.875rem;
+  }
+}
+
 .synthese-lettrisme {
   border-radius: 1.75rem;
+  margin-bottom: 2rem;
 
   margin-left: 8rem;
   margin-right: 8rem;
@@ -58,5 +67,18 @@
   &_profil_4h_plus_plus {
     background: $eva_green;
     color: $eva_dark;
+  }
+}
+
+.sous-competences__container {
+  display: flex;
+  gap: 1.5rem;
+  padding: 10px 0px;
+  margin-bottom: 2rem;
+  img {
+    height: 4rem;
+  }
+  h2, p {
+    margin-bottom: 0;
   }
 }

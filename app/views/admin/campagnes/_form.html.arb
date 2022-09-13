@@ -23,19 +23,23 @@ div class: 'nouvelle-campagne' do
           div class: 'panel' do
             h2 t('.choix_parcours')
             para t('.explication_choix_parcours'), class: 'description description--secondaire'
-            f.inputs class: 'input-choix' do
+            f.inputs class: 'input-choix input-choix-option-parcours_type' do
               f.input :parcours_type, as: :radio,
                                       collection: collection_parcours_type(parcours_type),
                                       required: true,
                                       label: false
             end
             if resource.new_record?
-              h2 t('.personnalisation')
-              para t('.explication_personnalisation'), class: 'description description--secondaire'
-              f.inputs class: 'input-choix input-choix-option-personnalisation' do
-                f.input :options_personnalisation, as: :check_boxes,
-                                                   collection: collection_options_personnalisation,
-                                                   label: false
+              div id: 'zone-de-personnalisation', class: 'hidden' do
+                h2 t('.personnalisation')
+                para t('.explication_personnalisation'),
+                     class: 'description description--secondaire'
+                f.inputs class: 'input-choix input-choix-option-personnalisation' do
+                  f.input :options_personnalisation,
+                          as: :check_boxes,
+                          collection: collection_options_personnalisation,
+                          label: false
+                end
               end
             end
           end

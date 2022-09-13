@@ -4,26 +4,26 @@
 <div id="lettrisme" class="page">
   <h2>Communiquer en français - Lettrisme </h2>
   <div class="panel">
-    <div class="synthese-lettrisme synthese-lettrisme_<%= profil %>">
-      <div class="synthese-lettrisme-content">
+    <div class="lettrisme-synthese lettrisme-synthese--<%= profil %>">
+      <div class="lettrisme-synthese__contenu">
         <div>
           <% unless profil.to_s.in?(['indetermine', 'profil_aberrant']) %>
-            <h2>Profil</h2>
+            <h2 class="icone__header">Profil</h2>
           <% end %>
           <%= image_tag "icone_profil/icone_#{profil}.svg" %>
         </div>
         <div>
-          <h2><%= t(".litteratie.#{profil}.titre") %></h2>
-          <p>
-            <%= md t(".litteratie.#{profil}.description") %>
-          </p>
+          <%= md t(".litteratie.#{profil}.titre") %>
+          <%= md t(".litteratie.#{profil}.description") %>
         </div>
       </div>
     </div>
-    <% if cafe_de_la_place.profil_bas? %>
-      <% collection_sous_competences.each do |competence| %>
-        <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
-      <% end %>
+    <% if niveau_bas?(profil) %>
+      <div class="lettrisme-sous-competences">
+        <% cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
+          <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

@@ -3,7 +3,6 @@
 module Restitution
   class CafeDeLaPlace < Base
     NOM_TECHNIQUE = 'cafe_de_la_place'
-    LETTRISME_SOUS_COMPETENCES = %w[lecture comprehension_ecrite production_ecrite].freeze
 
     METRIQUES = {
       'score_orientation' => {
@@ -61,7 +60,7 @@ module Restitution
     end
 
     def parcours_bas
-      profils = competences.values
+      profils = competences_lettrisme.values
       return ::Competence::NIVEAU_INDETERMINE if profils.include?(::Competence::NIVEAU_INDETERMINE)
 
       position_minimum = profils.map do |profil|
@@ -83,10 +82,6 @@ module Restitution
       parcours_bas
     end
 
-    def profil_bas?
-      ::Competence::PROFILS_BAS.include?(niveau_anlci_litteratie)
-    end
-
     def synthese
       {
         parcours_bas: parcours_bas,
@@ -95,11 +90,11 @@ module Restitution
       }
     end
 
-    def competences
-      @competences ||= {
-        lecture_bas: Competence::ProfilEvacob.new(self, 'score_lecture'),
-        comprehension: Competence::ProfilEvacob.new(self, 'score_comprehension'),
-        production: Competence::ProfilEvacob.new(self, 'score_production')
+    def competences_lettrisme
+      @competences_lettrisme ||= {
+        lecture: Competence::ProfilEvacob.new(self, 'score_lecture'),
+        comprehension_ecrite: Competence::ProfilEvacob.new(self, 'score_comprehension'),
+        production_ecrite: Competence::ProfilEvacob.new(self, 'score_production')
       }.transform_values(&:niveau)
     end
 

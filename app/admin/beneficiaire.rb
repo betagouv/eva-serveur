@@ -11,6 +11,14 @@ ActiveAdmin.register Beneficiaire do
     flash.now[:beneficiaire_anonyme] = t('.beneficiaire_anonyme') if resource.anonyme?
   end
 
+  form do |f|
+    f.semantic_errors
+    f.inputs do
+      f.input :nom
+    end
+    f.actions
+  end
+
   show do
     render partial: 'show'
   end

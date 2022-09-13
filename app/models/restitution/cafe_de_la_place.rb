@@ -83,6 +83,10 @@ module Restitution
       parcours_bas
     end
 
+    def profil_bas?
+      ::Competence::PROFILS_BAS.include?(niveau_anlci_litteratie)
+    end
+
     def synthese
       {
         parcours_bas: parcours_bas,

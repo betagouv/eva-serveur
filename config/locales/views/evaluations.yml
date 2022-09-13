@@ -60,11 +60,11 @@ fr:
           nom: Niveau ANLCI littératie
         efficience:
           nom: Efficience
-        lecture_bas:
+        lecture:
           nom: Lecture bas
-        comprehension:
+        comprehension_ecrite:
           nom: Compréhension
-        production:
+        production_ecrite:
           nom: Production de texte
         vocabulaire:
           nom: Vocabulaire

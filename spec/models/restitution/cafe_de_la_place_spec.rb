@@ -27,32 +27,32 @@ describe Restitution::CafeDeLaPlace do
   end
 
   describe '#parcours_bas' do
-    it 'quand le profil lecture_bas est le plus petit' do
-      expect(restitution).to receive(:competences)
+    it 'quand le profil lecture est le plus petit' do
+      expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture_bas: :profil1,
-                      comprehension: :profil2,
-                      production: :profil3
+                      lecture: :profil1,
+                      comprehension_ecrite: :profil2,
+                      production_ecrite: :profil3
                     })
       expect(restitution.parcours_bas).to equal(:profil1)
     end
 
     it 'quand le profil comprehension est le plus petit' do
-      expect(restitution).to receive(:competences)
+      expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture_bas: :profil3,
-                      comprehension: :profil2,
-                      production: :profil4
+                      lecture: :profil3,
+                      comprehension_ecrite: :profil2,
+                      production_ecrite: :profil4
                     })
       expect(restitution.parcours_bas).to equal(:profil2)
     end
 
     it "quand un profil n'est pas défini" do
-      expect(restitution).to receive(:competences)
+      expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture_bas: ::Competence::NIVEAU_INDETERMINE,
-                      comprehension: :profil2,
-                      production: :profil4
+                      lecture: ::Competence::NIVEAU_INDETERMINE,
+                      comprehension_ecrite: :profil2,
+                      production_ecrite: :profil4
                     })
       expect(restitution.parcours_bas).to equal(::Competence::NIVEAU_INDETERMINE)
     end

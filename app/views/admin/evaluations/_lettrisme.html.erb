@@ -1,4 +1,4 @@
-<% if cafe_de_la_place 
+<% if cafe_de_la_place
     profil = cafe_de_la_place.niveau_anlci_litteratie
 %>
 <div id="lettrisme" class="page">
@@ -20,8 +20,10 @@
         </div>
       </div>
     </div>
-    <% collection_sous_competences.each do |competence| %>
-      <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
+    <% if cafe_de_la_place.profil_bas? %>
+      <% collection_sous_competences.each do |competence| %>
+        <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
+      <% end %>
     <% end %>
   </div>
 </div>

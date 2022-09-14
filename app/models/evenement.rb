@@ -8,6 +8,8 @@ class Evenement < ApplicationRecord
   belongs_to :partie, foreign_key: :session_id, primary_key: :session_id
   delegate :situation, :evaluation, to: :partie
 
+  scope :reponses, -> { where(nom: 'reponse') }
+
   def fin_situation?
     nom == 'finSituation'
   end

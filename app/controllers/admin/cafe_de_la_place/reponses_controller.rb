@@ -16,9 +16,9 @@ module Admin
 
       def nom_du_fichier(partie)
         code_de_campagne = partie.evaluation.campagne.code.parameterize
-        nom_de_partie = partie.evaluation.nom.parameterize.first(15)
+        nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)
         date = DateTime.current.strftime('%Y%m%d')
-        "#{date}-#{nom_de_partie}-#{code_de_campagne}.xls"
+        "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
       end
     end
   end

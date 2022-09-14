@@ -19,7 +19,7 @@ describe Admin::CafeDeLaPlace::ReponsesController do
     expect(response).to be_success
   end
 
-  it 'genere le nom du fichier en fonction de la partie' do
+  it "genere le nom du fichier en fonction de l'évaluation" do
     code_de_campagne = partie.evaluation.campagne.code.parameterize
     nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)
     date = DateTime.current.strftime('%Y%m%d')

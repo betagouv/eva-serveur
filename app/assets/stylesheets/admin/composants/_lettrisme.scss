@@ -86,7 +86,6 @@
   .telechargement_des_reponses:hover {
     background-color: $eva_light;
     border: 2px solid $eva_main_blue;
-    box-sizing: border-box;
 
     span {
       color: $eva_main_blue;
@@ -107,7 +106,7 @@
     gap: 2rem;
     justify-content: space-between;
     background: $eva_main_blue;
-    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+    box-shadow: 0rem 0rem 0.5rem rgba(30, 65, 106, 0.25);
     border-radius: 0rem 0rem 0.5rem 0.5rem;
 
     span {

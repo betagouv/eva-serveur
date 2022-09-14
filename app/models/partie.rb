@@ -19,8 +19,4 @@ class Partie < ApplicationRecord
     end
     metriques_numeriques
   end
-
-  def evenements
-    Evenement.where(session_id: session_id)
-  end
 end

@@ -4,13 +4,21 @@ module Admin
   module CafeDeLaPlace
     class ReponsesController < Api::BaseController
       def show
-        partie_id = params[:partie_id]
-        partie = Partie.find(partie_id)
+        partie = Partie.find(params[:partie_id])
         redirect_to root_path unless Ability.new(current_compte).can?(:read, partie.evaluation)
-        export_cafe_de_la_place = ::Restitution::ExportCafeDeLaPlace.new(partie: partie)
-        send_data export_cafe_de_la_place.to_xls,
+        export = ::Restitution::ExportCafeDeLaPlace.new(partie: partie)
+        send_data export.to_xls,
                   content_type: 'application/vnd.ms-excel',
-                  filename: "#{DateTime.current.strftime('%Y%m%d')}-#{partie.evaluation.nom.parameterize}-#{partie.evaluation.campagne.code.parameterize}.xls"
+                  filename: nom_du_fichier(partie)
+      end
+
+      private
+
+      def nom_du_fichier(partie)
+        campagne_code = partie.evaluation.campagne.code.parameterize
+        nom_de_partie = partie.evaluation.nom.parameterize
+        date = DateTime.current.strftime('%Y%m%d')
+        "#{date}-#{nom_de_partie}-#{campagne_code}.xls"
       end
     end
   end

@@ -15,10 +15,17 @@ module Admin
       private
 
       def nom_du_fichier(partie)
+<<<<<<< HEAD
         campagne_code = partie.evaluation.campagne.code.parameterize
         nom_de_partie = partie.evaluation.nom.parameterize
         date = DateTime.current.strftime('%Y%m%d')
         "#{date}-#{nom_de_partie}-#{campagne_code}.xls"
+=======
+        code_de_campagne = partie.evaluation.campagne.code.parameterize
+        nom_de_partie = partie.evaluation.nom.parameterize.first(15)
+        date = DateTime.current.strftime('%Y%m%d')
+        "#{date}-#{nom_de_partie}-#{code_de_campagne}.xls"
+>>>>>>> db9184f7 (enlever le .evenements)
       end
     end
   end

@@ -5,8 +5,8 @@ div class: 'evaluation' do
     div class: 'col-8' do
       render 'details_evaluation'
       render 'restitution_globale', pdf: false
-      render 'parties'
       render 'lettrisme'
+      render 'parties'
     end
   end
 end

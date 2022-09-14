@@ -76,7 +76,7 @@ div class: 'evaluation__restitution-globale' do
   end
 end
 
-if can?(:manage, Compte) && !pdf
+if can?(:manage, Compte) && resource.campagne.avec_reperage_illesttrime? && !pdf
   div class: 'evaluation__scores panel' do
     tabs do
       tab 'Scores litteratie et numératie' do

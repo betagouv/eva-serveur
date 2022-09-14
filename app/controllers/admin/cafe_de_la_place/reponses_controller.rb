@@ -10,7 +10,7 @@ module Admin
         export_cafe_de_la_place = ::Restitution::ExportCafeDeLaPlace.new(partie: partie)
         send_data export_cafe_de_la_place.to_xls,
                   content_type: 'application/vnd.ms-excel',
-                  filename: "#{partie_id}-#{DateTime.current.strftime('%Y%m%d')}.xls"
+                  filename: "#{DateTime.current.strftime('%Y%m%d')}-#{partie.evaluation.nom.parameterize}-#{partie.evaluation.campagne.code.parameterize}.xls"
       end
     end
   end

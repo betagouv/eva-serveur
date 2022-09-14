@@ -17,7 +17,7 @@ describe Admin::CafeDeLaPlace::ReponsesController do
 
     expect(response.header['Content-Type']).to include 'excel'
     expect(response).to have_http_status(:success)
-end
+  end
 
   it "genere le nom du fichier en fonction de l'évaluation" do
     code_de_campagne = partie.evaluation.campagne.code.parameterize

@@ -76,6 +76,8 @@ div class: 'evaluation__restitution-globale' do
   end
 end
 
+render 'lettrisme' unless pdf
+
 if can?(:manage, Compte) && resource.campagne.avec_reperage_illettrisme? && !pdf
   div class: 'evaluation__scores panel' do
     tabs do

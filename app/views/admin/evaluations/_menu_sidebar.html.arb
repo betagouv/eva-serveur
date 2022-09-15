@@ -39,6 +39,11 @@ div class: 'menu menu-transverse' do
       end
     end
     li do
+      a href: '#lettrisme' do
+        text_node 'Lettrisme'
+      end
+    end
+    li do
       a href: '#referentiels' do
         text_node 'Référentiels utilisés'
       end

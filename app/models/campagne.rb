@@ -54,7 +54,7 @@ class Campagne < ApplicationRecord
     end
   end
 
-  def avec_reperage_illesttrime?
+  def avec_reperage_illettrisme?
     situations_configurations.any? do |configuration|
       SITUATIONS_AVEC_REPERAGE_ILLETTRISME.include?(configuration.situation.nom_technique)
     end

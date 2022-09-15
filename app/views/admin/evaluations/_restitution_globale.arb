@@ -29,7 +29,7 @@ div class: 'evaluation__restitution-globale' do
     render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
   end
 
-  if resource.campagne.avec_reperage_illesttrime?
+  if resource.campagne.avec_reperage_illettrisme?
     if pdf
       div class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
@@ -67,7 +67,7 @@ div class: 'evaluation__restitution-globale' do
     end
   end
 
-  if resource.campagne.avec_reperage_illesttrime?
+  if resource.campagne.avec_reperage_illettrisme?
     render partial: 'correspondance_anlci',
            locals: {
              restitution_globale: restitution_globale,
@@ -76,7 +76,7 @@ div class: 'evaluation__restitution-globale' do
   end
 end
 
-if can?(:manage, Compte) && resource.campagne.avec_reperage_illesttrime? && !pdf
+if can?(:manage, Compte) && resource.campagne.avec_reperage_illettrisme? && !pdf
   div class: 'evaluation__scores panel' do
     tabs do
       tab 'Scores litteratie et numératie' do

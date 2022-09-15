@@ -1,8 +1,6 @@
 fr:
   admin:
     evaluations:
-      details_evaluation:
-        titre: Detail
       lettrisme:
         telechargement_des_reponses: 'Télécharger le détail des réponses'
         litteratie:

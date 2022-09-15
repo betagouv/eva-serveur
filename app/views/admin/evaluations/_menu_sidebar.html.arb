@@ -43,15 +43,5 @@ div class: 'menu menu-transverse' do
         text_node 'Lettrisme'
       end
     end
-    li do
-      a href: '#referentiels' do
-        text_node 'Référentiels utilisés'
-      end
-    end
-    li do
-      a href: '#communication_ecrite' do
-        text_node 'Communication écrite'
-      end
-    end
   end
 end

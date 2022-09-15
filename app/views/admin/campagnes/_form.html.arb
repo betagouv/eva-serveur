@@ -30,7 +30,8 @@ div class: 'nouvelle-campagne' do
                                       label: false
             end
             if resource.new_record?
-              div id: 'zone-de-personnalisation', class: 'hidden' do
+              div id: 'zone-de-personnalisation',
+                  class: f.object.parcours_type_id.present? ? '' : 'hidden' do
                 h2 t('.personnalisation')
                 para t('.explication_personnalisation'),
                      class: 'description description--secondaire'

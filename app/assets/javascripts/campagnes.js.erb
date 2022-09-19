@@ -9,7 +9,7 @@ $(document).ready(function () {
       switch (evenement.target.id) {
       <% ParcoursType.all.each do |parcours_type| %>
         case "campagne_parcours_type_id_<%= parcours_type.id%>":
-        <% if parcours_type.situations_configurations.map(&:nom_technique).include?('livraison')  %>
+        <% if parcours_type.option_redaction?  %>
           block_option_personnalisation_livraison.show();
         <% else %>
           block_option_personnalisation_livraison.hide();

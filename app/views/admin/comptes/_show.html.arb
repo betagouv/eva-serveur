@@ -22,7 +22,8 @@ div class: 'mon-compte row' do
             end
             div do
               link_to 'Renvoyer l’email de<br> confirmation'.html_safe,
-                      new_confirmation_path(compte), class: 'bouton bouton-principal text-center'
+                      new_confirmation_path(compte, email: compte.email),
+                      class: 'bouton bouton-principal text-center'
             end
           end
         end

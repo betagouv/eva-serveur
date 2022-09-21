@@ -10,7 +10,8 @@ div class: 'card__banner card__banner--alert w-100 d-flex' do
     div class: 'd-flex justify-content-between align-items-center' do
       div md t('.description.email_non_recu')
       div do
-        link_to t('.description.action'), new_confirmation_path(current_compte),
+        link_to t('.description.action'),
+                new_confirmation_path(current_compte, email: current_compte),
                 class: 'bouton bouton-principal text-center'
       end
     end

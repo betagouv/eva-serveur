@@ -11,8 +11,17 @@ fr:
             [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)"
           profil_aberrant:
             titre: |
-              ##Profil “Aberrant”
-            description: Votre score n’a pas pu être calculé
+              ##Votre score n’a pas pu être calculé
+            description: |
+              Les raisons peuvent être les suivantes :
+
+              *	vous avez abandonné à un ou plusieurs mini-jeux,
+
+              *	vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous vous êtes par exemple absenté quelques minutes),
+
+              * des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple),
+
+              *	vous n’avez pas encore terminé le parcours.
           profil1:
             titre: |
               ##Formation vivement recommandée

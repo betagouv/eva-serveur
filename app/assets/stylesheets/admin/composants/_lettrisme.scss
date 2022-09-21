@@ -1,6 +1,7 @@
 .lettrisme-synthese {
   border-radius: 1.75rem;
   margin-bottom: 2rem;
+  width: 100%;
   max-width: 40.75rem;
 
   &__contenu {
@@ -16,7 +17,10 @@
   &--indetermine,
   &--profil_aberrant {
     background-color: $eva_dark;
-    color: $eva_light;
+
+    &, a {
+      color: $eva_light;
+    }
 
     h2 {
       color: $eva_light;
@@ -26,7 +30,10 @@
   &--profil1,
   &--profil2 {
     background: $eva_orange;
-    color: $eva_dark;
+
+    &, a {
+      color: $eva_dark;
+    }
 
     h2 {
       color: $eva_dark;
@@ -36,7 +43,10 @@
   &--profil3,
   &--profil4 {
     background: $eva_main_blue;
-    color: $eva_light;
+
+    &, a {
+      color: $eva_light;
+    }
 
     h2 {
       color: $eva_light;
@@ -47,7 +57,10 @@
   &--profil_4h_plus,
   &--profil_4h_plus_plus {
     background: $eva_green;
-    color: $eva_dark;
+
+    &, a {
+      color: $eva_dark;
+    }
   }
 }
 

@@ -11,7 +11,8 @@ div class: 'mon-compte row' do
     end
 
     div class: 'card' do
-      if compte.unconfirmed_email.present?
+      if compte.unconfirmed_email.present? ||
+         (compte.email_non_confirme? && current_compte.superadmin?)
         div class: 'card__banner card__banner--alert' do
           para 'Une demande de modification d’email a été effectuée.
   La modification ne sera effective qu’une fois l’email confirmé. '
@@ -36,7 +37,7 @@ div class: 'mon-compte row' do
           row :prenom
           row :nom
           row(:email) do
-            if compte.email_non_confirme?
+            if compte.email_non_confirme? && current_compte.superadmin?
               span(compte.email, class: 'email-non-confirme')
             else
               compte.email

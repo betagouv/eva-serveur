@@ -9,14 +9,14 @@ module MarkdownHelper
 
   private
 
-  def interprete_markdown_en_html(contenu)
-    markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(hard_wrap: true)
-    )
-    customise_rendu_gras(markdown.render(contenu)).html_safe
+  class EvaMarkdownRender < Redcarpet::Render::HTML
+    def double_emphasis(quote)
+      %(<strong class="fw-semi-bold">#{quote}</strong>)
+    end
   end
 
-  def customise_rendu_gras(html)
-    html.gsub('<strong>', '<strong class="fw-semi-bold">')
+  def interprete_markdown_en_html(contenu)
+    markdown ||= Redcarpet::Markdown.new(EvaMarkdownRender, hard_wrap: true)
+    markdown.render(contenu).html_safe
   end
 end

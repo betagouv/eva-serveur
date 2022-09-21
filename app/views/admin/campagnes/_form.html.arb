@@ -63,8 +63,8 @@ div class: 'nouvelle-campagne' do
         end
 
         f.actions do
-          f.action :submit, label: t('.action')
           annulation_formulaire(f)
+          f.action :submit, label: t('.action')
         end
       end
     end

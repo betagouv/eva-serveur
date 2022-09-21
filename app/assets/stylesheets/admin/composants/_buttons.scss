@@ -16,7 +16,6 @@ form input[type="submit"]:not(.disabled),
 .has_many_container a.button:not(.disabled) {
   &:hover {
     background: none;
-    background-color: $eva_main_blue;
   }
 }
 form.filter_form a.clear_filters_btn,
@@ -31,7 +30,6 @@ form.filter_form a.clear_filters_btn:not(.disabled),
 form fieldset.actions li.cancel a:not(.disabled) {
   &:hover {
     background: none;
-    background-color: #fff;
   }
 }
 

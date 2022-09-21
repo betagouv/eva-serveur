@@ -185,4 +185,34 @@
       }
     }
   }
+
+//ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
+
+  form fieldset.actions {
+    margin-top: 2rem;
+    ol {
+      display: flex;
+      justify-content: space-between;
+    }
+    li {
+      height: 2rem;
+      li > :only-child  {
+        padding: 0 1.5rem;
+      }
+    }
+    li.cancel a {
+      @include bouton;
+      font-size: .875rem;
+      margin-right: 0;
+      color: $eva_dark;
+      background-color: $eva_bluegrey;
+      border: none;
+      &:hover {
+        color: $eva_dark;
+      }
+    }
+    input {
+      margin-right: 0;
+    }
+  }
 }

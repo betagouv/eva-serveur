@@ -6,6 +6,8 @@ class ParcoursType < ApplicationRecord
   validates :libelle, :duree_moyenne, presence: true
   validates :nom_technique, presence: true, uniqueness: true
 
+  belongs_to :parcours_type_categorie, optional: true
+
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy

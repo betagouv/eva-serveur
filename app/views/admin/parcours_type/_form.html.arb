@@ -6,6 +6,7 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :duree_moyenne
     f.input :description, as: :text
+    f.input :parcours_type_categorie
     render partial: 'admin/situations_configurations/input_situations_configurations',
            locals: { f: f }
   end

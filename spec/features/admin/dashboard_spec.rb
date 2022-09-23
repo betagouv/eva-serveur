@@ -103,13 +103,23 @@ describe 'Dashboard', type: :feature do
 
   describe "Confirmation d'email" do
     context "quand mon compte n'a jamais été confirmé" do
-      before { create :compte_conseiller, confirmed_at: nil, structure: ma_structure }
+      before do
+        create :compte_conseiller, confirmed_at: nil, structure: ma_structure
+        visit admin_path
+      end
 
       it "affiche un message d'alerte" do
-        visit admin_path
         expect(compte.confirmed?).to be false
         expect(compte.unconfirmed_email).to be nil
         expect(page).to have_content('Confirmez votre adresse email')
+      end
+
+      it "redirige vers la page de renvoi des instructions avec l'email pré-rempli" do
+        click_on 'Renvoyer les instructions de confirmation'
+
+        expect(page).to have_current_path(
+          new_compte_confirmation_path(email: compte.email_a_confirmer)
+        )
       end
     end
 

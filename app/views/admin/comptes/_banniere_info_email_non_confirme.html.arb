@@ -3,10 +3,10 @@
 div class: 'card__banner card__banner--alert' do
   div class: 'd-flex justify-content-between' do
     div do
-      div "L'email de ce compte n'a pas été confirmé"
+      div t('.email_non_confirme')
     end
     div do
-      link_to 'Renvoyer l’email de<br> confirmation'.html_safe,
+      link_to t('admin.comptes.renvoyer'),
               new_confirmation_path(compte, email: compte.email_a_confirmer),
               class: 'bouton bouton-principal text-center'
     end

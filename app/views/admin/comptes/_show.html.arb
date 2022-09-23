@@ -11,23 +11,10 @@ div class: 'mon-compte row' do
     end
 
     div class: 'card' do
-      if compte.unconfirmed_email.present? ||
-         (compte.email_non_confirme? && current_compte.superadmin?)
-        div class: 'card__banner card__banner--alert' do
-          para 'Une demande de modification d’email a été effectuée.
-  La modification ne sera effective qu’une fois l’email confirmé. '
-          div class: 'd-flex justify-content-between' do
-            div do
-              div 'Un email de confirmation a été envoyé à :'
-              span compte.unconfirmed_email, class: 'font-weight-bold'
-            end
-            div do
-              link_to 'Renvoyer l’email de<br> confirmation'.html_safe,
-                      new_confirmation_path(compte, email: compte.email),
-                      class: 'bouton bouton-principal text-center'
-            end
-          end
-        end
+      if compte.unconfirmed_email.present?
+        render 'banniere_demande_modification_email'
+      elsif compte.email_non_confirme? && current_compte.superadmin?
+        render 'banniere_info_email_non_confirme'
       end
       if current_compte == compte && !compte.confirmed?
         render 'components/banner_confirmation_email'

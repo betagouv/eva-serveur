@@ -195,14 +195,13 @@
       justify-content: space-between;
     }
     li {
-      height: 2rem;
-      li > :only-child  {
-        padding: 0 1.5rem;
-      }
+      margin-bottom: 0;
     }
-    li.cancel a {
+    .bouton--annuler a {
       @include bouton;
+      min-width: 6.563rem;
       font-size: .875rem;
+      text-align: center;
       margin-right: 0;
       color: $eva_dark;
       background-color: $eva_bluegrey;
@@ -212,6 +211,7 @@
         border-color: $eva_bluegrey;
       }
     }
+
     input {
       margin-right: 0;
     }

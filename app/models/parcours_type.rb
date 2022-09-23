@@ -14,4 +14,8 @@ class ParcoursType < ApplicationRecord
   def display_name
     libelle
   end
+
+  def option_redaction?
+    situations_configurations.map(&:nom_technique).include?('livraison')
+  end
 end

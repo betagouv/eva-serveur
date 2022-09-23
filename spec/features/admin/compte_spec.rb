@@ -260,7 +260,7 @@ describe 'Admin - Compte', type: :feature do
   end
 
   describe '#show' do
-    context "quand le compte a fait une demande pour changer d'email" do
+    context "quand le compte connecté a fait une demande pour changer d'email" do
       before do
         compte_connecte.update unconfirmed_email: 'nouvel-email@exemple.fr'
         visit admin_compte_path(compte_connecte)
@@ -268,7 +268,7 @@ describe 'Admin - Compte', type: :feature do
 
       it { expect(page).to have_content(/nouvel-email@exemple.fr/) }
       it do
-        expect(page).to have_content(/Une demande de modification d’email a été effectuée./)
+        expect(page).to have_content(/Consultez votre boîte de réception,/)
       end
     end
 
@@ -293,6 +293,15 @@ describe 'Admin - Compte', type: :feature do
         before { visit admin_compte_path(collegue) }
 
         it { expect(page).to_not have_content(/Confirmez votre adresse email/) }
+      end
+
+      context "quand l'email du compte d'un collègue a été modifié" do
+        before do
+          collegue.update(unconfirmed_email: 'new_email@test.com')
+          visit admin_compte_path(collegue)
+        end
+
+        it { expect(page).to have_content(/Une demande de modification d’email a été effectuée./) }
       end
     end
 

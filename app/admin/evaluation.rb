@@ -18,7 +18,7 @@ ActiveAdmin.register Evaluation do
          order_by: 'libelle_asc'
   filter :created_at
 
-  scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all
+  scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
   scope proc {
           I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel')
         }, :illettrisme_potentiel

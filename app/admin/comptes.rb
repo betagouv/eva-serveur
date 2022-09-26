@@ -45,13 +45,14 @@ ActiveAdmin.register Compte do
          label: I18n.t('region', scope: 'activerecord.attributes.structure'),
          if: proc { can? :manage, Compte }
 
-  def filtrer_par_activation_structure(statut_activation)
-    scope statut_activation, if: -> { can? :manage, Compte } do |scope|
+  def filtrer_par_activation_structure(statut_activation, options = {})
+    options.merge!({ if: -> { can? :manage, Compte } })
+    scope statut_activation, options do |scope|
       scope.where(structure: Structure.send(statut_activation))
     end
   end
 
-  filtrer_par_activation_structure(:all)
+  filtrer_par_activation_structure(:all, default: true)
   filtrer_par_activation_structure(:pas_vraiment_utilisatrices)
   filtrer_par_activation_structure(:non_activees)
   filtrer_par_activation_structure(:actives)

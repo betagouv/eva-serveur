@@ -279,12 +279,35 @@ describe 'Admin - Compte', type: :feature do
         before { visit admin_compte_path(compte_connecte) }
 
         it { expect(page).to have_content(/Confirmez votre adresse email/) }
+
+        it 'redirige vers la page de renvoi des instructions avec mon adresse email pré-rempli' do
+          click_on 'Renvoyer les instructions de confirmation'
+
+          expect(page).to have_current_path(
+            new_compte_confirmation_path(email: compte_connecte.email_a_confirmer)
+          )
+        end
       end
 
       context "quand je suis sur la show d'un autre compte" do
         before { visit admin_compte_path(collegue) }
 
         it { expect(page).to_not have_content(/Confirmez votre adresse email/) }
+      end
+    end
+
+    describe "quand le compte connecté visite la page compte d'un collègue non confirmé" do
+      before do
+        collegue.update confirmed_at: nil
+        visit admin_compte_path(collegue)
+      end
+
+      it "redirige vers la page de renvoi des instructions avec l'adresse email pré-rempli" do
+        click_on 'Renvoyer l’email de confirmation'
+
+        expect(page).to have_current_path(
+          new_compte_confirmation_path(email: collegue.email_a_confirmer)
+        )
       end
     end
   end

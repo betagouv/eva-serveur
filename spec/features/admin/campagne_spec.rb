@@ -150,7 +150,7 @@ describe 'Admin - Campagne', type: :feature do
 
         before do
           fill_in :campagne_code, with: 'UNC0D3'
-          click_on 'Créer la campagne'
+          click_on 'Modifier la campagne'
         end
 
         it do

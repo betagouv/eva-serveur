@@ -23,8 +23,8 @@ fr:
   formtastic:
     actions:
       campagne:
-        create: Créer
-        update: Enregistrer
+        create: Créer la campagne
+        update: Modifier la campagne
     placeholders:
       campagne:
         libelle: ML Caraces, PE Marita, Garantie Jeunes

@@ -2,7 +2,6 @@ fr:
   admin:
     campagnes:
       form:
-        titre: Nouvelle Campagne
         explication_campagne:  |
           **Une campagne eva, est un ensemble d’exercices formant un parcours d’évaluation.** Vous pouvez ainsi par exemple regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
 
@@ -17,7 +16,6 @@ fr:
         explication_personnalisation: |
           Certains modules du parcours sont optionnels. Vous pouvez choisir de les intégrer ou non au parcours. Pour les intégrer, cochez la case correspondant à chaque module.
         configuration_avancee: Configuration avancée
-        action: 'Créer la campagne'
       show:
         explication_code: |
           Afin de rattacher vos bénéficiaires à cette campagne,

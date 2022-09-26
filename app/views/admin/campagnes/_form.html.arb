@@ -3,7 +3,8 @@
 div class: 'nouvelle-campagne' do
   div class: 'row' do
     div class: 'offset-1 col-4' do
-      h1 t('.titre')
+      titre = resource.new_record? ? 'new' : 'edit'
+      h1 t("active_admin.resources.campagne.#{titre}_model")
       div class: 'panel description' do
         md t('.explication_campagne')
       end
@@ -64,7 +65,7 @@ div class: 'nouvelle-campagne' do
 
         f.actions do
           annulation_formulaire(f)
-          f.action :submit, label: t('.action')
+          f.action :submit
         end
       end
     end

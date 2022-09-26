@@ -2,6 +2,7 @@
 
 class ParcoursType < ApplicationRecord
   self.implicit_order_column = 'created_at'
+  CATEGORIES = %w[pre_positionnement evaluation_avancee].freeze
 
   validates :libelle, :duree_moyenne, presence: true
   validates :nom_technique, presence: true, uniqueness: true
@@ -10,6 +11,8 @@ class ParcoursType < ApplicationRecord
                                          order(position: :asc)
                                        }, dependent: :destroy
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
+
+  enum :categorie, CATEGORIES.zip(CATEGORIES).to_h
 
   def display_name
     libelle

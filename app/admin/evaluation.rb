@@ -86,9 +86,9 @@ ActiveAdmin.register Evaluation do
   form partial: 'form'
 
   controller do
-    helper_method :restitution_globale, :parties, :auto_positionnement, :cafe_de_la_place,
-                  :statistiques, :mes_avec_redaction_de_notes, :campagnes_accessibles,
-                  :beneficiaires_accessibles, :traduction_niveau,
+    helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
+                  :cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
+                  :campagnes_accessibles, :beneficiaires_accessibles, :traduction_niveau,
                   :campagne_avec_competences_transversales?
 
     def show
@@ -134,12 +134,16 @@ ActiveAdmin.register Evaluation do
       @evaluation.campagne.avec_competences_transversales?
     end
 
+    def prise_en_main?
+      selectionne_derniere_restitution(Situation::PLAN_DE_LA_VILLE)&.termine?
+    end
+
     def auto_positionnement
-      selectionne_derniere_restitution(Restitution::Bienvenue::NOM_TECHNIQUE)
+      selectionne_derniere_restitution(Situation::BIENVENUE)
     end
 
     def cafe_de_la_place
-      selectionne_derniere_restitution(Restitution::CafeDeLaPlace::NOM_TECHNIQUE)
+      selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end
 
     def selectionne_derniere_restitution(nom)

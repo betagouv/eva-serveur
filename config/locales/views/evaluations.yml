@@ -5,6 +5,10 @@ fr:
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"
         duree: Durée de passation
+      autopositionnement:
+        appareils: Appareils
+        scolarite: Scolarité
+        sante: Santé
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'
@@ -13,6 +17,14 @@ fr:
         <<: *commun
         nombre_essais: Nbre d'essais
         nombre_ouverture_contenant: Nbre d'ouverture de contenants
+      prise_en_main:
+        titre: Maîtrise des fondamentaux de l’informatique
+        description: "Manipulations informatiques maîtrisées : clic souris, saisie au clavier, sélection d’une option de réponse dans un QCM, utilisation des flèches du clavier (ou des boutons sur tablette), glisser-déposer."
+        clause_non_responsabilite: |
+          *Ce module ne constitue pas une évaluation de la maîtrise des compétences numériques de base mais permet de vérifier que les manipulations indispensables pour utiliser eva dans de bonnes conditions sont maîtrisées.*
+
+          *Pour un premier diagnostic des compétences numériques de base, rendez-vous sur :  
+          [https://pix.fr/abc-diag/](https://pix.fr/abc-diag/)*
       questions:
         situation: 'Situation %{situation}'
         abstention: Ne sait pas
@@ -21,16 +33,13 @@ fr:
       tri:
         <<: *commun
         reste_plateau: Reste plateau
-      autopositionnement:
-        appareils: Appareils
-        scolarite: Scolarité
-        sante: Santé
       deroulement_passation:
         titre: Déroulement de la passation
         parcours:
           titre: Parcours sélectionné
       restitution_globale:
         autopositionnement_titre: Questionnaire d'auto-positionnement
+        prise_en_main_titre: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
       competences_transversales:
         competences_fortes_titre: 'Vos compétences transversales'

@@ -2,8 +2,6 @@
 
 module Restitution
   class CafeDeLaPlace < Base
-    NOM_TECHNIQUE = 'cafe_de_la_place'
-
     METRIQUES = {
       'score_orientation' => {
         'type' => :nombre,

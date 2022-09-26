@@ -5,6 +5,24 @@ niveaux_competences = restitution_globale.niveaux_competences
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
+  if prise_en_main? && !pdf
+    div id: 'competence-numerique', class: 'page' do
+      render 'entete_page', restitution_globale: restitution_globale
+
+      if pdf
+        h2 t('.prise_en_main_titre'), class: 'text-center mt-5 mb-4'
+      else
+        h2 t('.prise_en_main_titre')
+      end
+
+      div class: 'panel' do
+        render partial: 'prise_en_main'
+
+        render 'pied_page'
+      end
+    end
+  end
+
   if auto_positionnement
     div id: 'auto_positionnement', class: 'page' do
       render 'entete_page', restitution_globale: restitution_globale

@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+div class: 'prise-en-main row' do
+  div image_tag('souris.svg'), class: 'col-auto'
+  div class: 'col' do
+    h3 t('.titre'), class: 'titre'
+    div t('.description'), class: 'description'
+    div md(t('.clause_non_responsabilite')), class: 'clause-non-responsabilite'
+  end
+end

@@ -1,0 +1,70 @@
+@mixin reset-ul() {
+  ul,
+  ul li,
+  ul ul li {
+     margin:0;
+     padding: 0;
+     text-indent: 0;
+     list-style-type: none;
+  }
+}
+
+.table_tools {
+  margin-bottom: 0.5rem;
+}
+
+.scopes {
+  @include reset-ul();
+
+  border: 1px solid $eva_bluegrey;
+  border-radius: 1rem;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 700;
+  font-size: .75rem;
+  line-height: 1rem;
+  color: $eva_dark;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .scope-default-group {
+    display: flex;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      height: 2rem;
+      width: 2.5rem;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: asset-data-url('icones/union.svg');
+      background-size: 1rem;
+      background-color: $eva_main_blue;
+      border-radius: 1rem 0 0 1rem;
+    }
+  }
+
+  .scope a {
+    display: block;
+    padding: 0.5rem 1rem;
+    gap: .625rem;
+  }
+
+  .scope.selected a {
+    background-color: $eva_main_blue;
+    color: $eva_light;
+    border-radius: 1rem;
+
+    &:first-child {
+      border-radius: 0 1rem 1rem 0;
+    }
+  }
+}

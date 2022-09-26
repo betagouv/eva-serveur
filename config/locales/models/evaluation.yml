@@ -60,6 +60,10 @@ fr:
             profil4: Profil 4
             profil4_plus: Profil 4+
             profil4_plus_plus: Profil 4++
+    scopes:
+      evaluation:
+        all: 'Toutes les évaluations'
+        illettrisme_potentiel: Illettrisme potentiel
   formtastic:
     actions:
       evaluation:

@@ -37,18 +37,75 @@ describe 'Admin - Evaluation', type: :feature do
   describe '#show' do
     before { connecte(mon_compte) }
 
-    context 'Rôle admin' do
-      let(:role) { 'admin' }
+    context 'situation plan de la ville' do
+      let!(:mon_evaluation_plan_de_la_ville) { create :evaluation, campagne: campagne }
+      let!(:partie) do
+        create :partie, situation: plan_de_la_ville, evaluation: mon_evaluation_plan_de_la_ville
+      end
+
+      # evaluation avec positionnement
+      let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
+      let(:plan_de_la_ville) { create(:situation_plan_de_la_ville) }
+      let(:campagne) do
+        create :campagne, compte: Compte.first, parcours_type: parcours_type
+      end
+
+      before do
+        campagne.situations_configurations.create situation: plan_de_la_ville
+      end
+
+      context 'quand elle est terminée' do
+        before do
+          create :evenement_demarrage, partie: partie
+          create :evenement_fin_situation, partie: partie
+          visit admin_evaluation_path(mon_evaluation_plan_de_la_ville)
+        end
+
+        it 'affiche une restitution' do
+          expect(page).to have_content 'Compétences numériques'
+        end
+      end
+
+      context "quand elle n'est pas terminée" do
+        before do
+          create :evenement_demarrage, partie: partie
+        end
+
+        it "n'affiche pas de restitution si la situation n'est par terminée" do
+          visit admin_evaluation_path(mon_evaluation_plan_de_la_ville)
+          expect(page).not_to have_content 'Compétences numériques'
+        end
+      end
+    end
+
+    context 'situation bienvenue' do
       let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: campagne_bienvenue }
       let!(:partie_bienvenue) do
         create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
       end
       let!(:evenement_bienvenue) { create :evenement_demarrage, partie: partie_bienvenue }
       let(:questionnaire) { create :questionnaire, questions: [] }
-      let(:restitution_bienvenue) do
-        Restitution::Bienvenue.new(mon_evaluation_bienvenue, [evenement_bienvenue])
+
+      # evaluation avec positionnement
+      let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
+      let(:plan_de_la_ville) { create(:situation_plan_de_la_ville) }
+      let(:campagne_bienvenue) do
+        create :campagne, compte: Compte.first, parcours_type: parcours_type
       end
-      # evaluation sans positionnement
+
+      before do
+        campagne_bienvenue.situations_configurations.create situation: bienvenue
+      end
+
+      it 'restitution avec auto_positionnement' do
+        visit admin_evaluation_path(mon_evaluation_bienvenue)
+        expect(page).to have_content 'auto-positionnement'
+        expect(page).to have_content 'Roger'
+      end
+    end
+
+    context 'Rôle admin' do
+      let(:role) { 'admin' }
       let!(:mon_evaluation) do
         create :evaluation,
                campagne: ma_campagne,
@@ -60,30 +117,21 @@ describe 'Admin - Evaluation', type: :feature do
       let!(:evenement) { create :evenement_demarrage, partie: partie }
       let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
 
-      # evaluation avec positionnement
-      let(:bienvenue) { create(:situation_bienvenue, questionnaire: questionnaire) }
-      let(:campagne_bienvenue) do
-        create :campagne, compte: Compte.first, parcours_type: parcours_type
+      it "n'affiche pas les situations jouées" do
+        visit admin_evaluation_path(mon_evaluation)
+        expect(page).not_to have_content 'Selection Situation'
+        expect(page).not_to have_content 'Inventaire'
       end
 
-      before { campagne_bienvenue.situations_configurations.create situation: bienvenue }
-
-      it 'sans auto_positionnement' do
+      it 'restitution sans auto_positionnement' do
         visit admin_evaluation_path(mon_evaluation)
         expect(page).not_to have_content 'auto-positionnement'
         expect(page).to have_content 'Roger'
       end
 
-      it 'avec auto_positionnement' do
-        visit admin_evaluation_path(mon_evaluation_bienvenue)
-        expect(page).to have_content 'auto-positionnement'
-        expect(page).to have_content 'Roger'
-      end
-
-      it "n'affiche pas les situations jouées" do
+      it 'restitution sans plan de la ville' do
         visit admin_evaluation_path(mon_evaluation)
-        expect(page).not_to have_content 'Selection Situation'
-        expect(page).not_to have_content 'Inventaire'
+        expect(page).not_to have_content 'Compétences numériques'
       end
 
       describe 'en moquant restitution_globale :' do
@@ -153,7 +201,7 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:numeratie)
               .and_return([{ score_numeratie: :palier0 }])
-            visit admin_evaluation_path(mon_evaluation_bienvenue)
+            visit admin_evaluation_path(mon_evaluation)
 
             expect(page).to have_content 'Connaissance et compréhension du français'
             expect(page).to have_content 'des progrès à faire'

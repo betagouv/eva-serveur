@@ -2,8 +2,6 @@
 
 module Restitution
   class Bienvenue < Base
-    NOM_TECHNIQUE = 'bienvenue'
-
     def questions_reponses
       @questions_reponses ||= QuestionsReponses.new(evenements,
                                                     campagne.questionnaire_pour(situation))

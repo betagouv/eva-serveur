@@ -8,6 +8,10 @@ class Situation < ApplicationRecord
 
   delegate :livraison_sans_redaction?, to: :questionnaire, allow_nil: true
 
+  BIENVENUE = 'bienvenue'
+  CAFE_DE_LA_PLACE = 'cafe_de_la_place'
+  PLAN_DE_LA_VILLE = 'plan_de_la_ville'
+
   def display_name
     libelle
   end

@@ -9,6 +9,10 @@ fr:
         libelle: Libellé
         nom_technique: Nom technique
         duree_moyenne: Durée moyenne
+        categorie: Catégorie
+        categories:
+          pre_positionnement: Pré-positionnement
+          evaluation_avancee: Évaluation avancée
         created_at: créé le
         updated_at: Mis à jour le
   formtastic:

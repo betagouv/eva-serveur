@@ -3,7 +3,7 @@
 ActiveAdmin.register ParcoursType do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :duree_moyenne, :description,
+  permit_params :libelle, :nom_technique, :duree_moyenne, :description, :categorie,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle

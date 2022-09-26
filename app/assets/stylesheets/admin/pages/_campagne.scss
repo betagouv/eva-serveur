@@ -200,12 +200,11 @@
     .bouton--annuler a {
       @include bouton;
       min-width: 6.563rem;
-      font-size: .875rem;
       text-align: center;
       margin-right: 0;
       color: $eva_dark;
       background-color: $eva_bluegrey;
-      border: none;
+      border-color: $eva_bluegrey;
       &:hover {
         color: $eva_dark;
         border-color: $eva_bluegrey;

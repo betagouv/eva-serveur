@@ -1,0 +1,10 @@
+.ellipse {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.ellipse__105 {
+    background: $eva_orange;
+  }
+}

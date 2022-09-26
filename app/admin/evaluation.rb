@@ -20,7 +20,7 @@ ActiveAdmin.register Evaluation do
 
   scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
   scope proc {
-          I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel')
+          raw I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel.html')
         }, :illettrisme_potentiel
 
   index download_links: lambda {

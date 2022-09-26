@@ -53,9 +53,9 @@
   }
 
   .scope a {
-    display: block;
+    display: inline-flex;
     padding: 0.5rem 1rem;
-    gap: .625rem;
+    gap: .375rem;
   }
 
   .scope.selected a {

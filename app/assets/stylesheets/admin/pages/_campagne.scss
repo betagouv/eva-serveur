@@ -163,13 +163,21 @@
   }
 
   .nouvelle-campagne {
+    .titre-categorie {
+      font-size: 1.25rem;
+      line-height: 1.625rem;
+      margin-bottom: 0.5rem;
+      margin-top: 2rem;
+    }
+
     .description {
       font-size: 0.869rem;
       font-style: italic;
       line-height: 1rem;
       padding: 1.31rem 1.5rem;
       &--secondaire {
-        margin-bottom: 1rem;
+        padding: 0;
+        margin-bottom: .5rem;
         color: $eva_dark_blue_grey;
       }
       p:last-child {

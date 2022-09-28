@@ -39,9 +39,12 @@
   }
 
   .choice {
-    width: 50%;
-    margin-bottom: 0.875rem;
-    padding: 0 0.44rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     label {
       padding: 0;

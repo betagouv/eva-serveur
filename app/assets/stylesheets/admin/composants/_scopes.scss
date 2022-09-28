@@ -37,7 +37,10 @@
 
   .scope-default-group {
     display: flex;
+  }
 
+  .scope:first-child {
+    display: flex;
     &::before {
       content: '';
       display: inline-block;

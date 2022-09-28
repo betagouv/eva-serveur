@@ -3,6 +3,10 @@ class AddTermineLeToEvaluations < ActiveRecord::Migration[6.1]
     belongs_to :partie, foreign_key: :session_id, primary_key: :session_id
   end
 
+  class Evaluation < ApplicationRecord
+    default_scope {}
+  end
+
   class Partie < ApplicationRecord
     belongs_to :evaluation
     belongs_to :situation

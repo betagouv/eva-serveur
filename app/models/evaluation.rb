@@ -23,6 +23,8 @@ class Evaluation < ApplicationRecord
   has_one :conditions_passation, dependent: :destroy
   accepts_nested_attributes_for :conditions_passation
 
+  acts_as_paranoid
+
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
   enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true
   enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true

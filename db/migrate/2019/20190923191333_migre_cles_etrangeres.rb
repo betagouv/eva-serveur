@@ -1,5 +1,5 @@
 class MigreClesEtrangeres < ActiveRecord::Migration[5.2]
-def up
+  def up
     id_to_uuid('campagnes', 'questionnaire', 'questionnaire')
     id_to_uuid('campagnes', 'compte', 'compte')
     id_to_uuid('choix', 'question', 'question')
@@ -22,7 +22,7 @@ def up
 
     add_column table_name, new_foreign_key, :uuid
 
-    klass.where.not(foreign_key => nil).each do |record|
+    klass.unscoped.where.not(foreign_key => nil).each do |record|
       if associated_record = relation_klass.find_by(id: record.send(foreign_key))
         record.update_column(new_foreign_key, associated_record.uuid)
       end

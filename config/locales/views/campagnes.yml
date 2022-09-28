@@ -11,10 +11,15 @@ fr:
 
 
         titre_libelle: Libellé de la campagne
-        parcours: Parcours
-        choix_parcours: Choix du parcours
-        explication_choix_parcours: |
-          Une campagne eva est constituée de jeux sérieux appelés « mise en situation ». Les personnes évaluées vont parcourir plusieurs jeux. Veuillez choisir un parcours parmi les propositions suivantes en fonction des compétences que vous souhaitez évaluer :
+        choix_programme: Choix du programme
+        explication_choix_programme: |
+          Eva propose plusieurs « parcours » d’évaluation, constitués de jeux sérieux ou d’exercices pour évaluer les compétences. Veuillez choisir un ou plusieurs parcours parmi les propositions suivantes en fonction du type d’évaluation que vous souhaitez proposer et des compétences à évaluer.
+        pre_positionnement: Pré-positionnement
+        explication_pre_positionnement: |
+          Des parcours ludiques et rapides pour une première évaluation et une valorisation des compétences maîtrisées. À proposer en début de parcours d’accompagnement.
+        evaluation_avancee: Évaluation avancée
+        explication_evaluation_avancee: |
+          Des parcours adaptatifs pour un bilan complet de la maîtrise des compétences de base. À proposer lors du positionnement ou en début de formation.
         personnalisation: Personnalisation
         explication_personnalisation: |
           Certains modules du parcours sont optionnels. Vous pouvez choisir de les intégrer ou non au parcours. Pour les intégrer, cochez la case correspondant à chaque module.

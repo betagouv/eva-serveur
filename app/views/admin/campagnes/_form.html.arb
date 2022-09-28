@@ -33,14 +33,16 @@ div class: 'nouvelle-campagne' do
                                       label: false
             end
 
-            h2 t('.evaluation_avancee'), class: 'titre-categorie'
-            para t('.explication_evaluation_avancee'), class: 'description description--secondaire'
-            f.inputs class: 'input-choix input-choix-option-parcours_type' do
-              collection = collection_parcours_type(parcours_type.evaluation_avancee)
-              f.input :parcours_type, as: :radio,
-                                      collection: collection,
-                                      required: true,
-                                      label: false
+            if parcours_type.evaluation_avancee.present?
+              h2 t('.evaluation_avancee'), class: 'titre-categorie'
+              para t('.explication_evaluation_avancee'), class: 'description description--secondaire'
+              f.inputs class: 'input-choix input-choix-option-parcours_type' do
+                collection = collection_parcours_type(parcours_type.evaluation_avancee)
+                f.input :parcours_type, as: :radio,
+                                        collection: collection,
+                                        required: true,
+                                        label: false
+              end
             end
           end
           if resource.new_record?

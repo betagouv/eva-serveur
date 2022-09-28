@@ -62,9 +62,9 @@
     background-color: $eva_main_blue;
     color: $eva_light;
     border-radius: 1rem;
+  }
 
-    &:first-child {
-      border-radius: 0 1rem 1rem 0;
-    }
+  .scope:first-child.selected a {
+    border-radius: 0 1rem 1rem 0;
   }
 }

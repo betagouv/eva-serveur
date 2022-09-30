@@ -25,7 +25,8 @@ div class: 'nouvelle-campagne' do
             para t('.explication_choix_programme'), class: 'description description--secondaire m-0'
 
             h2 t('.pre_positionnement'), class: 'titre-categorie'
-            para t('.explication_pre_positionnement'), class: 'description description--secondaire'
+            para t('.explication_pre_positionnement'),
+                 class: 'description description--secondaire m-0'
             f.inputs class: 'input-choix input-choix-option-parcours_type' do
               collection = collection_parcours_type(parcours_type.pre_positionnement)
               f.input :parcours_type, as: :radio,
@@ -36,7 +37,8 @@ div class: 'nouvelle-campagne' do
 
             if parcours_type.evaluation_avancee.present?
               h2 t('.evaluation_avancee'), class: 'titre-categorie'
-              para t('.explication_evaluation_avancee'), class: 'description description--secondaire'
+              para t('.explication_evaluation_avancee'),
+                   class: 'description description--secondaire m-0'
               f.inputs class: 'input-choix input-choix-option-parcours_type' do
                 collection = collection_parcours_type(parcours_type.evaluation_avancee)
                 f.input :parcours_type, as: :radio,

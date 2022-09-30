@@ -14,7 +14,6 @@
 
 //= require chartkick
 //= require Chart.bundle
-//= require campagnes
 
 jQuery.datetimepicker.setLocale('fr');
 

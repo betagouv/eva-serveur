@@ -8,7 +8,7 @@ $(document).ready(function () {
       }, 300);
       const block_option_personnalisation_livraison = $("#campagne_options_personnalisation_livraison").parent();
       switch (evenement.target.id) {
-      <% ParcoursType.all.each do |parcours_type| %>
+      <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
         case "campagne_parcours_type_id_<%= parcours_type.id%>":
         <% if parcours_type.option_redaction?  %>
           block_option_personnalisation_livraison.show();

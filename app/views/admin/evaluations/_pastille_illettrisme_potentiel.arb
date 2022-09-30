@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+
+span class: 'ellipse ellipse__105'
+text_node etiquette if defined? etiquette

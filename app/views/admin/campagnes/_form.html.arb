@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+render 'form_script'
 div class: 'nouvelle-campagne' do
   div class: 'row' do
     div class: 'offset-1 col-4' do

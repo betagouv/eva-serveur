@@ -86,16 +86,16 @@ Aide::QuestionFrequente.find_or_create_by(question: 'Puis-je partager les restit
 end
 
 situations_data = [
+  { libelle: 'Plan de la ville', nom_technique: 'plan_de_la_ville' },
   { libelle: 'Bienvenue', nom_technique: 'bienvenue' },
+  { libelle: 'Café de la place', nom_technique: 'cafe_de_la_place' },
   { libelle: 'Maintenance', nom_technique: 'maintenance' },
   { libelle: 'Livraison', nom_technique: 'livraison' },
   { libelle: 'Tri', nom_technique: 'tri' },
   { libelle: 'Contrôle', nom_technique: 'controle' },
   { libelle: 'Sécurité', nom_technique: 'securite' },
   { libelle: 'Objets trouvés', nom_technique: 'objets_trouves' },
-  { libelle: 'Inventaire', nom_technique: 'inventaire' },
-  { libelle: 'Plan de la ville', nom_technique: 'plan_de_la_ville' },
-  { libelle: 'Café de la place', nom_technique: 'cafe_de_la_place' }
+  { libelle: 'Inventaire', nom_technique: 'inventaire' }
 ]
 situations_data.each do |situation_data|
   Situation.find_or_create_by(nom_technique: situation_data[:nom_technique]) do |situation|
@@ -105,8 +105,36 @@ end
 
 ParcoursType.find_or_create_by(nom_technique: 'complet') do |parcours_type|
   parcours_type.libelle = 'Parcours complet'
-  parcours_type.duree_moyenne = '1 heure'
-  situations = Situation.where(nom_technique: situations_data.pluck(:nom_technique))
+  parcours_type.duree_moyenne = '55 minutes'
+  parcours_type.categorie = 'pre_positionnement'
+  parcours_type.description = %{Ce parcours permet d'évaluer à la fois :
+
+- **les compétences de base** *(littératie et numératie)*
+- **les compétences transversales** *(vitesse d’exécution, attention et concentration, vigilance et contrôle, comparaison et tri, organisation et méthode, compréhension de la consigne, détection et qualification des dangers).*}
+  situations = Situation.where(nom_technique: [
+    'maintenance',
+    'livraison',
+    'tri',
+    'controle',
+    'securite',
+    'objets_trouves',
+    'inventaire'
+  ])
+  parcours_type.situations_configurations_attributes = situations.map.with_index do |situation, index|
+    { situation_id: situation.id, position: index }
+  end
+end
+
+ParcoursType.find_or_create_by(nom_technique: 'competences_de_base') do |parcours_type|
+  parcours_type.libelle = 'Parcours compétences de base'
+  parcours_type.duree_moyenne = '25 minutes'
+  parcours_type.categorie = 'pre_positionnement'
+  parcours_type.description = %{Ce parcours permet d'évaluer uniquement **les compétences de base** *(littératie et numératie)*.}
+  situations = Situation.where(nom_technique: [
+    'maintenance',
+    'livraison',
+    'objets_trouves'
+  ])
   parcours_type.situations_configurations_attributes = situations.map.with_index do |situation, index|
     { situation_id: situation.id, position: index }
   end
@@ -115,7 +143,8 @@ end
 structure_eva = Structure.where('lower(nom) = ?', 'eva').first_or_create do |structure|
   structure.nom = 'eva'
   structure.code_postal = 75012
-  structure.type_structure = 'non_communique'
+  structure.type_structure = 'autre'
+  structure.type = 'StructureLocale'
 end
 
 Compte.where(email: Eva::EMAIL_SUPPORT).first_or_create do |compte|

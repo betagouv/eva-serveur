@@ -1,0 +1,11 @@
+{
+  "env": {
+    "HOTE_SERVEUR": {
+      "generator": "template",
+      "template" : "%APP%.osc-fr1.scalingo.io"
+    }
+  },
+  "scripts": {
+    "first-deploy": "bin/reviewappdeploy.sh"
+  }
+}

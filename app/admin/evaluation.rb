@@ -20,7 +20,10 @@ ActiveAdmin.register Evaluation do
 
   scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
   scope proc {
-          raw I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel.html')
+          render partial: 'pastille_illettrisme_potentiel',
+                 locals: {
+                   etiquette: I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel')
+                 }
         }, :illettrisme_potentiel
 
   index download_links: lambda {
@@ -29,6 +32,13 @@ ActiveAdmin.register Evaluation do
                                         'anonyme' if elem.anonyme?
                                       } do
     column(:nom) { |e| nom_pour_ressource(e) }
+
+    if params[:scope] != 'illettrisme_potentiel'
+      column do |evaluation|
+        render partial: 'pastille_illettrisme_potentiel' if evaluation.illettrisme_potentiel?
+      end
+    end
+
     column :campagne
     column :created_at
     actions

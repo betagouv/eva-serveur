@@ -63,8 +63,7 @@ fr:
     scopes:
       evaluation:
         all: 'Toutes les évaluations'
-        illettrisme_potentiel:
-          html: "<span class='ellipse ellipse__105'></span> Illettrisme potentiel"
+        illettrisme_potentiel: "Illettrisme potentiel"
   formtastic:
     actions:
       evaluation:

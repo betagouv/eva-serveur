@@ -1,0 +1,10 @@
+{
+  "env": {
+    "HOTE_SERVEUR": {
+      "generator": "url"
+    }
+  },
+  "scripts": {
+    "first-deploy": "bin/reviewappdeploy.sh"
+  }
+}

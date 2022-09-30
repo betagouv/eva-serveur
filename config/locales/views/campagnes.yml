@@ -7,7 +7,6 @@ fr:
 
           Les bénéficiaires auront besoin du code campagne généré pour démarrer leur session.
         titre_libelle: Libellé de la campagne
-        explication_informations_campagne: Le libellé est le nom utilisé pour désigner la campagne dans votre espace conseiller.
         parcours: Parcours
         choix_parcours: Choix du parcours
         explication_choix_parcours: |

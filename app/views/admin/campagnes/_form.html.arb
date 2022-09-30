@@ -13,7 +13,6 @@ div class: 'nouvelle-campagne' do
         f.semantic_errors
         h2 t('.titre_libelle')
         div class: 'panel' do
-          para t('.explication_informations_campagne'), class: 'description description--secondaire'
           f.inputs do
             f.input :libelle
           end

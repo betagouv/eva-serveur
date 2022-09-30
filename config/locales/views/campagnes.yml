@@ -3,9 +3,13 @@ fr:
     campagnes:
       form:
         explication_campagne:  |
-          **Une campagne eva, est un ensemble d’exercices formant un parcours d’évaluation.** Vous pouvez ainsi par exemple regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+          **Une campagne eva est une sélection d'exercices, de jeux, de questionnaires, formant un programme d'évaluation commun à plusieurs personnes.**
 
-          Les bénéficiaires auront besoin du code campagne généré pour démarrer leur session.
+          Au sein d'une campagne, sont ainsi regroupées plusieurs évaluations en fonction du type de programme, du public cible, du dispositif d'accompagnement, etc. (ex. : "Pré-positionnement 2022" ; "CEJ Sept. 2022" ; "Services civiques 1er trimestre").
+
+          Les bénéficiaires auront besoin du code campagne généré automatiquement pour démarrer leur évaluation.
+
+
         titre_libelle: Libellé de la campagne
         parcours: Parcours
         choix_parcours: Choix du parcours

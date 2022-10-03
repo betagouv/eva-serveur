@@ -2,7 +2,7 @@
 
 div class: 'card__banner card__banner--alert' do
   div class: 'd-flex justify-content-between' do
-    div do
+    div class: 'align-self-center' do
       div t('.email_non_confirme')
     end
     div do

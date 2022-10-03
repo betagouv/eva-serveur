@@ -16,7 +16,7 @@ ActiveAdmin.register StructureLocale do
          collection: proc { Structure.distinct.order(:region).pluck(:region) }
   filter :created_at
 
-  scope :all
+  scope :all, default: true
   scope :sans_campagne
   scope :pas_vraiment_utilisatrices
   scope :non_activees

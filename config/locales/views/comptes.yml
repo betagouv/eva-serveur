@@ -5,7 +5,7 @@ fr:
         Renvoyer l’email de
         confirmation
       banniere_info_email_non_confirme:
-        email_non_confirme: L'email de ce compte n'a pas été confirmé
+        email_non_confirme: L'email de ce compte n'a pas été confirmé.
       banniere_demande_modification_email:
         email_envoye_a: 'Un email de confirmation a été envoyé à :'
         demande_effectuee: |

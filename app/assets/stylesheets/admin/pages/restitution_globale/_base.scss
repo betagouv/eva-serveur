@@ -38,11 +38,14 @@
 
   #competence-numerique {
     .panel {
-      padding: 2rem 3rem;
+      padding: 2rem 0rem;
     }
   }
 
   .prise-en-main {
+    img {
+      padding-right: 0.75rem;
+    }
 
     .titre {
       font-weight: 700;

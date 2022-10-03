@@ -16,7 +16,9 @@ div class: 'evaluation__restitution-globale' do
       end
 
       div class: 'panel' do
-        render partial: 'prise_en_main'
+        div class: 'marges-page' do
+          render partial: 'prise_en_main'
+        end
 
         render 'pied_page'
       end

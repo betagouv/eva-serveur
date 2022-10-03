@@ -20,6 +20,18 @@ namespace :reviewapp do
     end
   end
 
+  desc 'init db'
+  task initdb: :environment do
+    contenu = File.read('db/evaluations_tests.sql')
+    requettes = contenu.split(/;$/)
+    requettes.pop ## retire la dernière requette qui est vide
+    ActiveRecord::Base.transaction do
+      requettes.each do |requette|
+        ActiveRecord::Base.connection.execute(requette)
+      end
+    end
+  end
+
   desc 'initialise les données pour les applications de revues'
   task seed: :environment do
     ParcoursType.find_or_create_by(nom_technique: 'litteratie_evacob') do |parcours_type|

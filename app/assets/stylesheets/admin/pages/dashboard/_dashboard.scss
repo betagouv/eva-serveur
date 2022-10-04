@@ -1,18 +1,30 @@
 .admin_dashboard {
   .bloc-apercu {
-    margin-bottom: 2rem;
+    &-wrapper {
+      margin-bottom: 1.5rem;
+
+      .evaluation-legende {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0rem 0.5rem;
+        gap: 1rem;
+        height: 2rem;
+        font-size: 0.875rem;
+      }
+    }
 
     &-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
-  
+      margin-bottom: 1.875rem;
+
       h3 {
         @include titre-carte;
         margin-bottom: 0;
       }
-  
+
       > a {
         @include bouton;
         display: inline-block;
@@ -24,8 +36,8 @@
       .liste-entete {
         display: flex;
         padding: 0 1rem;
-        margin-bottom: .75rem;
-        font-size:0.875rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
         .entete {
           &-libelle {
             flex: 2;
@@ -41,11 +53,11 @@
       .campagne {
         @include carte-avec-ombre();
         padding: 0.7rem 1rem;
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
         position: relative;
-        font-size:0.875rem;
+        font-size: 0.875rem;
         &-libelle,
         &-code {
           text-decoration: none;

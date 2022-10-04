@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 div class: 'evaluations bloc-apercu' do
-  div class: 'bloc-apercu-header' do
-    h3 t('.titre')
-    text_node link_to 'Voir toutes les évaluations', admin_evaluations_path
+  div class: 'bloc-apercu-wrapper' do
+    div class: 'bloc-apercu-header' do
+      h3 t('.titre')
+      text_node link_to t('.voir_tout'), admin_evaluations_path
+    end
+
+    div class: 'evaluation-legende' do
+      render partial: 'admin/evaluations/pastille_illettrisme_potentiel', locals: {
+        etiquette: t('.legende_info')
+      }
+    end
   end
 
   div class: 'evaluations-liste' do

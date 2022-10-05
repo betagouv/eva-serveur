@@ -13,7 +13,7 @@ fr:
         titre_libelle: Libellé de la campagne
         choix_programme: Choix du programme
         explication_choix_programme: |
-          Eva propose plusieurs « parcours » d’évaluation, constitués de jeux sérieux ou d’exercices pour évaluer les compétences. Veuillez choisir un ou plusieurs parcours parmi les propositions suivantes en fonction du type d’évaluation que vous souhaitez proposer et des compétences à évaluer.
+          Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
         pre_positionnement: Pré-positionnement
         explication_pre_positionnement: |
           Des parcours ludiques et rapides pour une première évaluation et une valorisation des compétences maîtrisées. À proposer en début de parcours d’accompagnement.

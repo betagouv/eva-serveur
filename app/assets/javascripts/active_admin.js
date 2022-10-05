@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     show: true,
   });
   new ClipboardJS('.copier-coller');
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 Chart.defaults.font.family = 'Work Sans';
 Chart.defaults.font.size = 14;
+

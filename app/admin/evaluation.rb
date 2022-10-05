@@ -35,7 +35,10 @@ ActiveAdmin.register Evaluation do
 
     if params[:scope] != 'illettrisme_potentiel'
       column do |evaluation|
-        render partial: 'pastille_illettrisme_potentiel' if evaluation.illettrisme_potentiel?
+        if evaluation.illettrisme_potentiel?
+          render partial: 'pastille_illettrisme_potentiel',
+                 locals: { avec_tooltip: true }
+        end
       end
     end
 

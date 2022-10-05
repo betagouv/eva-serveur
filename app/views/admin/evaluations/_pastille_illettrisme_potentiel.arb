@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-span class: 'ellipse ellipse__105'
+options = { class: 'ellipse ellipse__105' }
+options_tooltip = { 'data-toggle': 'tooltip', 'data-placement': 'right',
+                    title: 'Illettrisme potentiel' }
+options.merge!(options_tooltip) if defined? avec_tooltip
+span options
 text_node etiquette if defined? etiquette

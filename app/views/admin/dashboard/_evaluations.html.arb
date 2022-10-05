@@ -14,7 +14,8 @@ div class: 'evaluations bloc-apercu' do
         end
         span class: 'pastille' do
           if evaluation.illettrisme_potentiel?
-            render partial: 'admin/evaluations/pastille_illettrisme_potentiel'
+            render partial: 'admin/evaluations/pastille_illettrisme_potentiel',
+                   locals: { avec_tooltip: true }
           end
         end
         span class: 'date' do

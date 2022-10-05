@@ -34,7 +34,7 @@ ActiveAdmin.register Evaluation do
     column(:nom) { |e| nom_pour_ressource(e) }
 
     if params[:scope] != 'illettrisme_potentiel'
-      column do |evaluation|
+      column('Illettrisme potentiel') do |evaluation|
         if evaluation.illettrisme_potentiel?
           render partial: 'pastille_illettrisme_potentiel',
                  locals: { avec_tooltip: true }

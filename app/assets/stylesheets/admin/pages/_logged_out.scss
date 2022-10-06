@@ -282,4 +282,14 @@ body.logged_out {
     position: absolute;
     left: -8.5rem;
   }
+  .mot-de-passe-instruction {
+    &--consigne {
+      font-weight: 600;
+    }
+    margin-bottom: 1.5rem;
+    p {
+      margin-bottom: 1rem;
+      padding-right: 1.5rem;
+    }
+  }
 }

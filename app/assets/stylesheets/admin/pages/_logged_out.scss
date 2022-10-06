@@ -278,4 +278,8 @@ body.logged_out {
       color: $eva_main_blue;
     }
   }
+  #active_admin_content > .bouton-retour {
+    position: absolute;
+    left: -8.5rem;
+  }
 }

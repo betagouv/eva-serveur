@@ -22,6 +22,8 @@ class Evaluation < ApplicationRecord
   validate :code_campagne_connu
   has_one :conditions_passation, dependent: :destroy
   accepts_nested_attributes_for :conditions_passation
+  has_one :donnee_sociodemographique, dependent: :destroy
+  accepts_nested_attributes_for :donnee_sociodemographique
 
   acts_as_paranoid
 

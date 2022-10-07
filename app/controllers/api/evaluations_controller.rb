@@ -40,7 +40,9 @@ module Api
       permit_params = params
                       .permit(:nom, :code_campagne, :terminee_le, :debutee_le,
                               conditions_passation_attributes:
-                              %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation])
+                              %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
+                              donnee_sociodemographique_attributes:
+                              %i[age genre dernier_niveau_etude derniere_situation])
       permit_params[:beneficiaire_attributes] = { nom: permit_params[:nom] } if permit_params[:nom]
       permit_params
     end

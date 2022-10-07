@@ -20,11 +20,20 @@ describe 'Evaluation API', type: :request do
             user_agent: unUserAgent,
             hauteur_fenetre_navigation: 10,
             largeur_fenetre_navigation: 20
+          },
+          donnee_sociodemographique_attributes: {
+            age: 18,
+            genre: 'Homme',
+            dernier_niveau_etude: 'Niveau Collège',
+            derniere_situation: 'Scolarisation'
           }
         }
       end
 
-      before { post '/api/evaluations', params: payload_valide_avec_campagne }
+      before do
+        post '/api/evaluations', params: payload_valide_avec_campagne
+        @donnee_sociodemographique = DonneeSociodemographique.last
+      end
 
       it do
         evaluation = Evaluation.last
@@ -48,6 +57,11 @@ describe 'Evaluation API', type: :request do
         expect(ConditionsPassation.last.hauteur_fenetre_navigation).to eq 10
         expect(ConditionsPassation.last.largeur_fenetre_navigation).to eq 20
       end
+
+      it { expect(@donnee_sociodemographique.age).to eq 18 }
+      it { expect(@donnee_sociodemographique.genre).to eq 'Homme' }
+      it { expect(@donnee_sociodemographique.dernier_niveau_etude).to eq 'Niveau Collège' }
+      it { expect(@donnee_sociodemographique.derniere_situation).to eq 'Scolarisation' }
     end
 
     context 'Quand le code campagne est inconnu' do

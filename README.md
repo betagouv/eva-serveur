@@ -86,6 +86,10 @@ L'api est accessible au point `/api`
   "email":"Roger@structure.fr",
   "telephone":"06",
   "terminee_le":"2021-10-03T22:15:24+02:00"
+  "age":"23",
+  "genre":"Femme",
+  "dernier_niveau_etude":"Niveau Collège",
+  "derniere_situation":"Alternance"
 }
 ```
 
@@ -102,6 +106,10 @@ L'api est accessible au point `/api`
   "telephone": "06",
   "terminee_le": "2021-10-06T16:13:24.000+02:00",
   "updated_at": "2021-10-08T09:16:38.943+02:00"
+  "age":"23",
+  "genre":"Femme",
+  "dernier_niveau_etude":"Niveau Collège",
+  "derniere_situation":"Alternance"
 }
 ```
 

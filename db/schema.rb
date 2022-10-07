@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_132551) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_121422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -151,6 +151,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_132551) do
     t.integer "hauteur_fenetre_navigation"
     t.integer "largeur_fenetre_navigation"
     t.index ["evaluation_id"], name: "index_conditions_passations_on_evaluation_id"
+  end
+
+  create_table "donnees_sociodemographiques", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "age"
+    t.string "genre"
+    t.string "dernier_niveau_etude"
+    t.string "derniere_situation"
+    t.uuid "evaluation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id"
   end
 
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -310,6 +321,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_132551) do
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
   add_foreign_key "conditions_passations", "evaluations", on_delete: :cascade
+  add_foreign_key "donnees_sociodemographiques", "evaluations", on_delete: :cascade
   add_foreign_key "evaluations", "beneficiaires", on_delete: :cascade
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade

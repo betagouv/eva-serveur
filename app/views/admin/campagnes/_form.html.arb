@@ -50,15 +50,17 @@ div class: 'nouvelle-campagne' do
           end
           if resource.new_record?
             div id: 'zone-de-personnalisation',
-                class: f.object.parcours_type_id.present? ? 'panel' : 'panel hidden' do
+                class: f.object.parcours_type_id.present? ? '' : 'hidden' do
               h2 t('.personnalisation')
-              para t('.explication_personnalisation'),
-                   class: 'description description--secondaire'
-              f.inputs class: 'input-choix input-choix-option-personnalisation' do
-                f.input :options_personnalisation,
-                        as: :check_boxes,
-                        collection: collection_options_personnalisation,
-                        label: false
+              div class: 'panel' do
+                para t('.explication_personnalisation'),
+                     class: 'description description--secondaire'
+                f.inputs class: 'input-choix input-choix-option-personnalisation' do
+                  f.input :options_personnalisation,
+                          as: :check_boxes,
+                          collection: collection_options_personnalisation,
+                          label: false
+                end
               end
             end
           end

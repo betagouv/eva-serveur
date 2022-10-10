@@ -22,7 +22,7 @@
     color: $eva_dark;
     font-weight: bold;
     font-size: 1.5rem;
-    margin: 3rem 0 2.5rem;
+    margin: 3rem 0 1rem;
   }
 
   h3 {
@@ -475,6 +475,10 @@
     .carte__duree {
       font-style: italic;
     }
+  }
+
+  .titre-avec-aide-illettrisme {
+    margin-bottom: 3rem;
   }
 }
 

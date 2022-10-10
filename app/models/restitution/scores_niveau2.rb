@@ -2,7 +2,7 @@
 
 module Restitution
   class ScoresNiveau2
-    METRIQUES_ILLETRISME = %i[score_ccf
+    METRIQUES_ILLETTRISME = %i[score_ccf
                               score_numeratie
                               score_syntaxe_orthographe
                               score_memorisation].freeze
@@ -21,7 +21,7 @@ module Restitution
     private
 
     def scores_niveau3_standardises
-      METRIQUES_ILLETRISME.each_with_object({}) do |metrique, memo|
+      METRIQUES_ILLETTRISME.each_with_object({}) do |metrique, memo|
         @parties.each do |partie|
           cote_z = standardise(partie, metrique)
           next if cote_z.nil?

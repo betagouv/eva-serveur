@@ -129,9 +129,9 @@ div id: 'evaluation__details', class: 'row' do
               svg_tag_base64 'formation_icone.svg', class: 'banner__icone'
             end
             div class: 'col-6' do
-              div md t('illetrisme_potentiel.message', scope: scope)
+              div md t('illettrisme_potentiel.message', scope: scope)
               div class: 'd-flex justify-content-end' do
-                link_to t('illetrisme_potentiel.action', scope: scope),
+                link_to t('illettrisme_potentiel.action', scope: scope),
                         Eva::LIEN_DEMANDE_ACCOMPAGNEMENT_ILLETTRISME,
                         target: '_blank',
                         class: 'bouton bouton-principal',

@@ -22,7 +22,7 @@ fr:
           Des parcours adaptatifs pour un bilan complet de la maîtrise des compétences de base. À proposer lors du positionnement ou en début de formation.
         personnalisation: Personnalisation
         explication_personnalisation: |
-          Certains modules du parcours sont optionnels. Vous pouvez choisir de les intégrer ou non au parcours. Pour les intégrer, cochez la case correspondant à chaque module.
+          Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
         configuration_avancee: Configuration avancée
       show:
         explication_code: |

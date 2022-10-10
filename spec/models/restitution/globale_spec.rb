@@ -166,7 +166,7 @@ describe Restitution::Globale do
     let(:restitutions) { [] }
     let(:interpreteur_niveau1) do
       double(
-        synthese: 'illetrisme_potentiel',
+        synthese: 'illettrisme_potentiel',
         interpretations_cefr: { litteratie: :pre_A1, numeratie: :X1 },
         interpretations_anlci: { litteratie: :profil1, numeratie: :profil2 }
       )
@@ -178,7 +178,7 @@ describe Restitution::Globale do
       expect(restitution_globale.interpretations)
         .to eq(
           {
-            synthese_competences_de_base: 'illetrisme_potentiel',
+            synthese_competences_de_base: 'illettrisme_potentiel',
             niveau_cefr: :pre_A1,
             niveau_cnef: :X1,
             niveau_anlci_litteratie: :profil1,
@@ -190,7 +190,7 @@ describe Restitution::Globale do
 
   describe '#persiste' do
     let(:restitutions) { [] }
-    let(:interpretations) { { synthese_competences_de_base: 'illetrisme_potentiel' } }
+    let(:interpretations) { { synthese_competences_de_base: 'illettrisme_potentiel' } }
     let(:completude) { double }
 
     before do

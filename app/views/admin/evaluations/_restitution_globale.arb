@@ -138,7 +138,7 @@ if can?(:manage, Compte) && resource.campagne.avec_reperage_illettrisme? && !pdf
           row do |(titre, _)|
             strong titre
           end
-          Restitution::ScoresNiveau2::METRIQUES_ILLETRISME.each do |nom_metrique|
+          Restitution::ScoresNiveau2::METRIQUES_ILLETTRISME.each do |nom_metrique|
             row(nom_metrique) do |(_, valeur_colonne)|
               valeur_colonne[nom_metrique]&.round(2)
             end

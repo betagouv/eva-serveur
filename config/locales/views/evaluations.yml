@@ -159,7 +159,7 @@ fr:
           #### Évaluation incomplète
 
           Certains modules **n’ont pas été complétés lors de cette passation**. La fiabilité des résultats peut donc être diminuée.
-        illetrisme_potentiel:
+        illettrisme_potentiel:
           action: Signaler une difficulté
           message: |
             #### Cette personne semble avoir besoin de consolider ses compétences de base.

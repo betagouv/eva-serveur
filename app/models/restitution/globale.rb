@@ -10,6 +10,7 @@ module Restitution
              to: :scores_niveau2_standardises, prefix: :niveau2
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau1_standardises, prefix: :niveau1
+    delegate :synthese, to: :synthetiseur
 
     def initialize(evaluation:, restitutions:)
       @evaluation = evaluation
@@ -49,8 +50,6 @@ module Restitution
       @scores_niveau1_standardises ||= Restitution::ScoresStandardises.new(scores_niveau1)
     end
 
-    delegate :synthese, to: :interpreteur_niveau1
-
     def interpretations_niveau1_cefr
       interpreteur_niveau1.interpretations_cefr
     end
@@ -65,6 +64,10 @@ module Restitution
       )
     end
 
+    def synthetiseur
+      @synthetiseur ||= Illettrisme::Synthetiseur.new(interpreteur_niveau1, cafe_de_la_place)
+    end
+
     def interpretations_niveau2(categorie)
       Illettrisme::InterpreteurNiveau2
         .new(scores_niveau2_standardises.calcule)
@@ -73,7 +76,7 @@ module Restitution
 
     def interpretations
       {
-        synthese_competences_de_base: interpreteur_niveau1.synthese,
+        synthese_competences_de_base: synthese,
         niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],
         niveau_cnef: interpreteur_niveau1.interpretations_cefr[:numeratie],
         niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
@@ -94,6 +97,12 @@ module Restitution
     end
 
     private
+
+    def cafe_de_la_place
+      restitutions.reverse.find do |restitution|
+        restitution.situation.nom_technique == Situation::CAFE_DE_LA_PLACE
+      end
+    end
 
     def extraie_competences_depuis_restitutions
       moyenne_competences.each_with_object([]) do |(competence, niveaux), memo|

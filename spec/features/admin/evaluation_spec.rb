@@ -150,6 +150,7 @@ describe 'Admin - Evaluation', type: :feature do
           allow(restitution_globale).to receive(:interpretations_competences_transversales)
             .and_return(interpretations)
           allow(restitution_globale).to receive(:structure).and_return('structure')
+          allow(restitution_globale).to receive(:synthese)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
         end

@@ -164,27 +164,82 @@ describe Restitution::Globale do
 
   describe '#interpretations' do
     let(:restitutions) { [] }
-    let(:interpreteur_niveau1) do
-      double(
-        synthese: 'illettrisme_potentiel',
-        interpretations_cefr: { litteratie: :pre_A1, numeratie: :X1 },
-        interpretations_anlci: { litteratie: :profil1, numeratie: :profil2 }
-      )
+    context 'pre-positionnement' do
+      let(:interpreteur_niveau1) do
+        double(
+          synthese: 'illettrisme_potentiel',
+          interpretations_cefr: { litteratie: :pre_A1, numeratie: :X1 },
+          interpretations_anlci: { litteratie: :profil1, numeratie: :profil2 }
+        )
+      end
+
+      before do
+        allow(restitution_globale).to receive(:cafe_de_la_place).and_return(nil)
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'illettrisme_potentiel',
+              niveau_cefr: :pre_A1,
+              niveau_cnef: :X1,
+              niveau_anlci_litteratie: :profil1,
+              niveau_anlci_numeratie: :profil2
+            }
+          )
+      end
     end
 
-    it do
-      allow(Restitution::Illettrisme::InterpreteurNiveau1)
-        .to receive(:new).and_return(interpreteur_niveau1)
-      expect(restitution_globale.interpretations)
-        .to eq(
-          {
-            synthese_competences_de_base: 'illettrisme_potentiel',
-            niveau_cefr: :pre_A1,
-            niveau_cnef: :X1,
-            niveau_anlci_litteratie: :profil1,
-            niveau_anlci_numeratie: :profil2
-          }
+    context 'evaluation avancée' do
+      let(:interpreteur_niveau1) do
+        double(
+          synthese: nil,
+          interpretations_cefr: { litteratie: nil, numeratie: nil },
+          interpretations_anlci: { litteratie: nil, numeratie: nil }
         )
+      end
+      let(:cafe_de_la_place) { double }
+
+      before do
+        allow(restitution_globale).to receive(:cafe_de_la_place).and_return(cafe_de_la_place)
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        allow(cafe_de_la_place)
+          .to receive(:synthese).and_return({ niveau_litteratie: :profil2 })
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'illettrisme_potentiel',
+              niveau_cefr: nil,
+              niveau_cnef: nil,
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil
+            }
+          )
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        allow(cafe_de_la_place)
+          .to receive(:synthese).and_return({ niveau_litteratie: :profil3 })
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'ni_ni',
+              niveau_cefr: nil,
+              niveau_cnef: nil,
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil
+            }
+          )
+      end
     end
   end
 

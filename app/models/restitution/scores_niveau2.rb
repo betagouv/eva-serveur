@@ -3,9 +3,9 @@
 module Restitution
   class ScoresNiveau2
     METRIQUES_ILLETTRISME = %i[score_ccf
-                              score_numeratie
-                              score_syntaxe_orthographe
-                              score_memorisation].freeze
+                               score_numeratie
+                               score_syntaxe_orthographe
+                               score_memorisation].freeze
 
     def initialize(parties, standardisateurs_niveau3 = nil)
       @parties = parties

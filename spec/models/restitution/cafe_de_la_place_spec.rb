@@ -100,14 +100,14 @@ describe Restitution::CafeDeLaPlace do
     end
   end
 
-  describe '#niveau_anlci_litteratie' do
+  describe '#niveau_litteratie' do
     context 'quand un parcours haut est profil 4H++' do
       before do
         allow(restitution).to receive(:parcours_haut).and_return ::Competence::PROFIL_4H_PLUS_PLUS
       end
 
       it 'retourne le profil 4H++' do
-        expect(restitution.niveau_anlci_litteratie).to equal(::Competence::PROFIL_4H_PLUS_PLUS)
+        expect(restitution.niveau_litteratie).to equal(::Competence::PROFIL_4H_PLUS_PLUS)
       end
     end
 
@@ -118,7 +118,7 @@ describe Restitution::CafeDeLaPlace do
       end
 
       it 'retourne le profil du parcours bas' do
-        expect(restitution.niveau_anlci_litteratie).to equal(::Competence::PROFIL_3)
+        expect(restitution.niveau_litteratie).to equal(::Competence::PROFIL_3)
       end
     end
   end

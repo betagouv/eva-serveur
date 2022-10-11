@@ -42,26 +42,6 @@ module Restitution
         @interpreteur_score = interpreteur_score
       end
 
-      def socle_clea?
-        interpretations_cefr[:litteratie] == :B1 and interpretations_cefr[:numeratie] == :Y1
-      end
-
-      def illettrisme_potentiel?
-        interpretations_cefr[:litteratie] == :pre_A1 or interpretations_cefr[:numeratie] == :pre_X1
-      end
-
-      def evaluation_vide?
-        interpretations_cefr[:litteratie].blank? and interpretations_cefr[:numeratie].blank?
-      end
-
-      def synthese
-        return 'illettrisme_potentiel' if illettrisme_potentiel?
-        return 'socle_clea' if socle_clea?
-        return if evaluation_vide?
-
-        'ni_ni'
-      end
-
       def interpretations_cefr
         @interpretations_cefr ||= interprete_score_pour(:CEFR)
       end

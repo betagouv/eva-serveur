@@ -38,6 +38,8 @@ fr:
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
           bouton_retour: Rechercher ma structure
       passwords:
+        new:
+          bouton_retour: Se connecter
         edit:
           bouton_retour: Se connecter
           consigne: Saisissez et confirmez votre nouveau mot de passe ci-dessous.

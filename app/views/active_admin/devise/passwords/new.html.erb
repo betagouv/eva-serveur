@@ -5,6 +5,12 @@
 
   <div id="login">
     <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      if params[:token_invalide]
+        para para t('active_admin.devise.reset_password.token_invalide')
+        br
+        para t('active_admin.devise.reset_password.saisir_a_nouveau')
+        br
+      end
       f.inputs do
         f.input :email
       end

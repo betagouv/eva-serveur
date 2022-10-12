@@ -8,7 +8,6 @@
       <p class='mot-de-passe-instruction--consigne'><%= t('.consigne') %></p>
       <p><%= t('.caracteristique')%></p>
     </div>
-    <%= render partial: "active_admin/devise/shared/error_messages", resource: resource %>
     <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
       f.inputs do
         f.input :password

@@ -5,16 +5,16 @@
   }
 }
 
-.show, .new, .create {
-  .bouton-retour {
-    position: absolute;
-    left: -12.313rem;
-  }
-}
-
-.edit {
+.new, .edit, .show, .create, .update {
   .bouton-retour {
     position: absolute;
     left: -8.5rem;
+  }
+
+  .conteneur-elargi {
+    .bouton-retour {
+      position: absolute;
+      left: -12.313rem;
+    }
   }
 }

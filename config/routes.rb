@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     active_admin_devise_config = ActiveAdmin::Devise.config.deep_merge(
       controllers: {
         registrations: 'eva/devise/registrations',
-        sessions: 'eva/devise/sessions'
+        sessions: 'eva/devise/sessions',
+        passwords: 'eva/devise/passwords'
       }
     )
     devise_for :comptes, active_admin_devise_config

@@ -7,6 +7,9 @@ class Campagne < ApplicationRecord
   SITUATIONS_AVEC_REPERAGE_ILLETTRISME = %w[maintenance livraison objets_trouves].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
 
+  acts_as_paranoid
+
+  has_many :evaluations, dependent: :destroy
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy

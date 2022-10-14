@@ -24,9 +24,12 @@ class Compte < ApplicationRecord
 
   delegate :code_postal, to: :structure, prefix: true
 
+  has_many :campagnes, dependent: :destroy
   belongs_to :structure
 
   accepts_nested_attributes_for :structure
+
+  acts_as_paranoid
 
   def display_name
     [nom_complet, email].compact_blank.join(' - ')

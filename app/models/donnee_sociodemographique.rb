@@ -15,4 +15,13 @@ class DonneeSociodemographique < ApplicationRecord
   validates :genre, inclusion: { in: GENRES, allow_blank: true }
   validates :dernier_niveau_etude, inclusion: { in: NIVEAUX_ETUDES, allow_blank: true }
   validates :derniere_situation, inclusion: { in: SITUATIONS, allow_blank: true }
+
+  def to_s
+    [
+      age,
+      genre,
+      dernier_niveau_etude,
+      derniere_situation
+    ].compact.join(' | ')
+  end
 end

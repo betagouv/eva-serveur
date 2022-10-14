@@ -95,9 +95,15 @@ div class: 'evaluation__restitution-globale' do
              pdf: pdf
            }
   end
-end
 
-render 'lettrisme' unless pdf
+  unless pdf
+    render partial: 'lettrisme',
+           locals: {
+             synthese: restitution_globale.synthese,
+             pdf: false
+           }
+  end
+end
 
 if can?(:manage, Compte) && resource.campagne.avec_reperage_illettrisme? && !pdf
   div class: 'evaluation__scores panel' do

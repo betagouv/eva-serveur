@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 div class: "row synthese-illettrisme #{synthese}" do
-  scope = 'admin.restitutions.cefr'
   div class: 'col-auto' do
+    icone = 'icone_profil/icone_indetermine.svg' if synthese.blank?
     if pdf
-      div svg_tag_base64 'punaise.svg'
+      div svg_tag_base64 icone
     else
-      div image_tag 'punaise.svg'
+      div image_tag icone
     end
   end
   div class: 'col' do
     if synthese.present?
-      md t(synthese, scope: scope)
+      md t(description, scope: scope)
     else
-      md t('score_non_calcule', scope: scope)
+      md t('admin.restitutions.score_non_calcule')
     end
   end
 end

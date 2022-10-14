@@ -1,83 +1,15 @@
-.lettrisme-synthese {
-  border-radius: 1.75rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 40.75rem;
-
-  h2 {
-    line-height: 1.875rem;
-  }
-
-  &__contenu {
+.evaluation__restitution-globale {
+  .sous-competence__container {
     display: flex;
-    padding: 2rem;
-    gap: 2rem;
-
-    .icone__header {
-      margin-bottom: 0.5rem;
+    gap: 1.5rem;
+    padding: 10px 0px;
+    margin-bottom: 2rem;
+    img {
+      height: 4rem;
     }
-  }
-
-  &--indetermine,
-  &--profil_aberrant {
-    background-color: $eva_dark;
-
-    &, a {
-      color: $eva_light;
-    }
-
     h2 {
-      color: $eva_light;
+      margin: 0;
     }
-  }
-
-  &--profil1,
-  &--profil2 {
-    background: $eva_orange;
-
-    &, a {
-      color: $eva_dark;
-    }
-
-    h2 {
-      color: $eva_dark;
-    }
-  }
-
-  &--profil3,
-  &--profil4 {
-    background: $eva_main_blue;
-
-    &, a {
-      color: $eva_light;
-    }
-
-    h2 {
-      color: $eva_light;
-    }
-  }
-
-  &--profil_4h,
-  &--profil_4h_plus,
-  &--profil_4h_plus_plus {
-    background: $eva_green;
-
-    &, a {
-      color: $eva_dark;
-    }
-  }
-}
-
-.sous-competence__container {
-  display: flex;
-  gap: 1.5rem;
-  padding: 10px 0px;
-  margin-bottom: 2rem;
-  img {
-    height: 4rem;
-  }
-  h2 {
-    margin-bottom: 0;
   }
 }
 
@@ -88,9 +20,6 @@
     margin-bottom: 0px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 1.5rem 3rem;
     p {
       line-height: 1rem;
@@ -103,7 +32,7 @@
     background-color: $eva_light;
     border: 2px solid $eva_main_blue;
 
-    span {
+    h3 {
       color: $eva_main_blue;
     }
 
@@ -126,13 +55,10 @@
     box-shadow: 0rem 0rem 0.5rem rgba(30, 65, 106, 0.25);
     border-radius: 0rem 0rem 0.5rem 0.5rem;
 
-    span {
-      font-family: "Quicksand";
-      font-style: normal;
-      font-weight: 700;
-      font-size: 1rem;
+    h3 {
       text-decoration-line: underline;
       color: $eva_light;
+      margin: 0;
     }
   }
 }

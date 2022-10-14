@@ -80,6 +80,16 @@ div id: 'evaluation__details', class: 'row' do
               end
             end
           end
+          if can?(:manage, Compte) && current_compte.superadmin?
+            div class: 'row' do
+              div class: 'col-1' do
+                span t('.donnees_sociodemographiques')
+              end
+              div class: 'col col-2' do
+                auto_link resource.donnee_sociodemographique
+              end
+            end
+          end
         end
         div class: 'col-2 card-pdf' do
           div class: 'pdf-image' do

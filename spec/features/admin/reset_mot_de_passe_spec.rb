@@ -19,7 +19,7 @@ describe 'Reset mot de passe', type: :feature do
       compte.update(reset_password_token: hashed_token, reset_password_sent_at: Time.now.utc)
       visit edit_compte_password_path(compte, reset_password_token: raw_token)
 
-      click_on 'Changer mon mot de passe'
+      click_on 'Valider mon nouveau mot de passe'
     end
 
     it { expect(page.has_css?('#error_explanation')).to eq false }

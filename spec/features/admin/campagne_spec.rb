@@ -162,22 +162,17 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'suppression' do
-    context 'en superadmin' do
-      before do
-        compte_conseiller.update(role: 'superadmin')
-        evaluation.destroy
+    before { evaluation.destroy }
+
+    context 'quand je supprime une campagne avec des évaluations associées' do
+      before { campagne.destroy }
+
+      it 'soft_delete la campagne' do
+        expect(campagne.deleted_at).not_to be nil
       end
 
-      context 'quand je supprime une campagne avec des évaluations associées soft_deleted' do
-        it 'soft_delete la campagne' do
-          campagne.destroy
-          expect(campagne.deleted_at).not_to be nil
-        end
-
-        it 'garde les évaluations soft_deleted associées en mémoire' do
-          campagne.destroy
-          expect(evaluation.campagne_id).to eq campagne.id
-        end
+      it 'garde les évaluations soft_deleted associées en mémoire' do
+        expect(evaluation.campagne_id).to eq campagne.id
       end
     end
   end

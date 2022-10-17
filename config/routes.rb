@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :structures, only: :index
 
     namespace :admin do
+      resources :controle_syntheses_restitutions, only: :index
       resources :parties do
         namespace :cafe_de_la_place do
           resource :reponses, only: [:show], defaults: { format: 'xls' }

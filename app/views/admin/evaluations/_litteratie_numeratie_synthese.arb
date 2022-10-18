@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
-div class: "row synthese-illettrisme #{synthese}" do
-  div class: 'col-auto' do
-    icone = 'icone_profil/icone_indetermine.svg' if synthese.blank?
-    if pdf
-      div svg_tag_base64 icone
-    else
-      div image_tag icone
+div class: "synthese-illettrisme #{synthese}" do
+  div class: 'row' do
+    div class: 'col-auto' do
+      icone = 'icone_profil/icone_indetermine.svg' if synthese.blank?
+      if pdf
+        div svg_tag_base64 icone
+      else
+        div image_tag icone
+      end
     end
-  end
-  div class: 'col' do
-    if synthese.present?
-      md t(description, scope: scope)
-    else
-      md t('admin.restitutions.score_non_calcule')
+    div class: 'col' do
+      if synthese.present?
+        md t(description, scope: scope)
+      else
+        md t('admin.restitutions.score_non_calcule')
+      end
     end
   end
 end

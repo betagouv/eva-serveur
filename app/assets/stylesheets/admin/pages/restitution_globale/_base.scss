@@ -17,6 +17,11 @@
     display: none;
   }
 
+  a {
+    color: $couleur-texte;
+    text-decoration: underline;
+  }
+
   h2 {
     font-family: $font-titre;
     color: $eva_dark;
@@ -315,7 +320,11 @@
   }
 
   .stanine-niveau-francais-mathematique {
-    color: $eva_main_blue
+    color: $eva_main_blue;
+
+    a {
+      color: $eva_main_blue;
+    }
   }
 
   .col-auto.badge {

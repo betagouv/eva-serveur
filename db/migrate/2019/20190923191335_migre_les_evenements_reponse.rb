@@ -1,4 +1,6 @@
 class MigreLesEvenementsReponse < ActiveRecord::Migration[6.0]
+  class Evenement < ApplicationRecord; end
+
   def change
     Evenement.where(nom: 'reponse').find_each do |evenement|
       anciennes_donnees = evenement.donnees

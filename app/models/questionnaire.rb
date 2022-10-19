@@ -14,6 +14,8 @@ class Questionnaire < ApplicationRecord
 
   accepts_nested_attributes_for :questionnaires_questions, allow_destroy: true
 
+  acts_as_paranoid
+
   def display_name
     libelle
   end

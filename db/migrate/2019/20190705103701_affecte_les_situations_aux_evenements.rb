@@ -1,4 +1,8 @@
 class AffecteLesSituationsAuxEvenements < ActiveRecord::Migration[5.2]
+  class Evenement < ApplicationRecord
+    belongs_to :situation
+  end
+
   def change
     Evenement.find_each do |evenement|
       nom_technique = evenement['situation']

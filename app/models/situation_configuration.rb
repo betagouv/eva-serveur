@@ -12,6 +12,8 @@ class SituationConfiguration < ApplicationRecord
 
   validates :situation_id, uniqueness: { scope: %i[campagne_id parcours_type_id] }
 
+  acts_as_paranoid
+
   def questionnaire_utile
     @questionnaire_utile ||= (questionnaire || situation.questionnaire)
   end

@@ -12,6 +12,8 @@ class Situation < ApplicationRecord
   CAFE_DE_LA_PLACE = 'cafe_de_la_place'
   PLAN_DE_LA_VILLE = 'plan_de_la_ville'
 
+  acts_as_paranoid
+
   def display_name
     libelle
   end

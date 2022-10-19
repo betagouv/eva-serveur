@@ -16,6 +16,8 @@ class DonneeSociodemographique < ApplicationRecord
   validates :dernier_niveau_etude, inclusion: { in: NIVEAUX_ETUDES, allow_blank: true }
   validates :derniere_situation, inclusion: { in: SITUATIONS, allow_blank: true }
 
+  acts_as_paranoid
+
   def to_s
     [
       age,

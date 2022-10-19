@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_19_131722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -79,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "anonymise_le"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_beneficiaires_on_deleted_at"
   end
 
   create_table "campagnes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -154,6 +156,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.string "user_agent"
     t.integer "hauteur_fenetre_navigation"
     t.integer "largeur_fenetre_navigation"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_conditions_passations_on_deleted_at"
     t.index ["evaluation_id"], name: "index_conditions_passations_on_evaluation_id"
   end
 
@@ -165,6 +169,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.uuid "evaluation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_donnees_sociodemographiques_on_deleted_at"
     t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id"
   end
 
@@ -199,6 +205,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "updated_at", null: false
     t.string "session_id"
     t.integer "position"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_evenements_on_deleted_at"
     t.index ["position"], name: "index_evenements_on_position"
     t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
     t.index ["session_id"], name: "index_evenements_on_session_id"
@@ -212,6 +220,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
     t.string "categorie"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_parcours_type_on_deleted_at"
   end
 
   create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -221,6 +231,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "updated_at", precision: 6, null: false
     t.uuid "evaluation_id"
     t.uuid "situation_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_parties_on_deleted_at"
     t.index ["evaluation_id"], name: "index_parties_on_evaluation_id"
     t.index ["session_id"], name: "index_parties_on_session_id", unique: true
     t.index ["situation_id"], name: "index_parties_on_situation_id"
@@ -231,6 +243,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nom_technique"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_questionnaires_on_deleted_at"
     t.index ["nom_technique"], name: "index_questionnaires_on_nom_technique", unique: true
   end
 
@@ -240,6 +254,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "updated_at", precision: nil
     t.uuid "questionnaire_id"
     t.uuid "question_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_questionnaires_questions_on_deleted_at"
     t.index ["question_id"], name: "index_questionnaires_questions_on_question_id"
     t.index ["questionnaire_id"], name: "index_questionnaires_questions_on_questionnaire_id"
   end
@@ -256,6 +272,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.integer "metacompetence"
     t.integer "type_qcm", default: 0
     t.string "nom_technique"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_questions_on_deleted_at"
   end
 
   create_table "questions_frequentes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -272,6 +290,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.datetime "updated_at", null: false
     t.uuid "questionnaire_id"
     t.uuid "questionnaire_entrainement_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_situations_on_deleted_at"
     t.index ["nom_technique"], name: "index_situations_on_nom_technique", unique: true
     t.index ["questionnaire_entrainement_id"], name: "index_situations_on_questionnaire_entrainement_id"
     t.index ["questionnaire_id"], name: "index_situations_on_questionnaire_id"
@@ -285,7 +305,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_144755) do
     t.uuid "situation_id"
     t.uuid "questionnaire_id"
     t.uuid "parcours_type_id"
+    t.datetime "deleted_at"
     t.index ["campagne_id"], name: "index_situations_configurations_on_campagne_id"
+    t.index ["deleted_at"], name: "index_situations_configurations_on_deleted_at"
     t.index ["parcours_type_id"], name: "index_situations_configurations_on_parcours_type_id"
     t.index ["situation_id"], name: "index_situations_configurations_on_situation_id"
   end

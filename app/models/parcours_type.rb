@@ -14,6 +14,8 @@ class ParcoursType < ApplicationRecord
 
   enum :categorie, CATEGORIES.zip(CATEGORIES).to_h
 
+  acts_as_paranoid
+
   def display_name
     libelle
   end

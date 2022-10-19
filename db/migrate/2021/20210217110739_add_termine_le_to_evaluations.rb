@@ -12,6 +12,8 @@ class AddTermineLeToEvaluations < ActiveRecord::Migration[6.1]
     belongs_to :situation
   end
 
+  class Situation < ApplicationRecord; end
+
   def change
     add_column :evaluations, :terminee_le, :datetime
     Evenement

@@ -1,4 +1,7 @@
 class CreePartiesPourAnciennesEvaluations < ActiveRecord::Migration[6.0]
+  class Evenement < ApplicationRecord; end
+  class Partie < ApplicationRecord; end
+
   def change
     Evenement.where(nom: 'demarrage').find_each do |evenement|
       Partie.where(evaluation_id: evenement.evaluation_id,

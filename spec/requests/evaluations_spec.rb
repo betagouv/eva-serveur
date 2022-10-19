@@ -71,9 +71,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom debutee_le campagne code_campagne]
-        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
-                                   ['doit être présente'], ['Code inconnu']]
+        expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le nom]
+        expect(json.values.sort).to eq [['Code inconnu'], ['doit être présente'],
+                                        ['doit être rempli'], ['doit être rempli(e)']]
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -85,9 +85,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom debutee_le campagne]
-        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
-                                   ['doit être présente']]
+        expect(json.keys.sort).to eq %w[campagne debutee_le nom]
+        expect(json.values.sort).to eq [['doit être présente'], ['doit être rempli'],
+                                        ['doit être rempli(e)']]
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -99,9 +99,9 @@ describe 'Evaluation API', type: :request do
 
       it 'retourne une 422' do
         json = JSON.parse(response.body)
-        expect(json.keys).to eq %w[nom debutee_le campagne beneficiaire]
-        expect(json.values).to eq [['doit être rempli'], ['doit être rempli(e)'],
-                                   ['doit être présente'], ['doit exister']]
+        expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
+        expect(json.values.sort).to eq [['doit exister'], ['doit être présente'],
+                                        ['doit être rempli'], ['doit être rempli(e)']]
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end

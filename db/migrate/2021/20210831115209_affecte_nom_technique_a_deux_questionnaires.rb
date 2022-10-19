@@ -1,4 +1,6 @@
 class AffecteNomTechniqueADeuxQuestionnaires < ActiveRecord::Migration[6.1]
+  class Questionnaire < ApplicationRecord; end
+
   def up
     Questionnaire.find_by(libelle: 'Autopositionnement')
                  &.update(nom_technique: 'autopositionnement')

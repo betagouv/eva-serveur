@@ -1,4 +1,7 @@
 class DefinisSituationInventaireEnFinDeParcours < ActiveRecord::Migration[6.1]
+  class Situation < ApplicationRecord; end
+  class SituationConfiguration < ApplicationRecord; end
+
   def up
     situation_inventaire = Situation.find_by(nom_technique: 'inventaire')
     return if situation_inventaire.blank?

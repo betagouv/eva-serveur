@@ -1,0 +1,24 @@
+<% statistique = StatistiquesStructure.new(resource) %>
+
+<h3>Statistiques</h3>
+<p class="statistiques__description"><%= t('.description.nombre_evaluations') %></p>
+<div class="panel">
+  <% evaluations = statistique.nombre_evaluations_des_3_derniers_mois %>
+  <% if evaluations.present? %>
+    <%= column_chart evaluations, legend: "bottom" %>
+  <% else %>
+    Pas d'évaluation à afficher pour le moment
+  <% end %>
+</div>
+
+<% if current_compte.anlci? %>
+  <p class="statistiques__description"><%= t('.description.repartition_evaluations') %></p>
+  <div class="panel">
+    <% evaluations = statistique.repartition_evaluations %>
+    <% if evaluations.present? %>
+      <%= pie_chart evaluations %>
+    <% else %>
+      Pas de diagnostic à afficher pour le moment
+    <% end %>
+  </div>
+<% end %>

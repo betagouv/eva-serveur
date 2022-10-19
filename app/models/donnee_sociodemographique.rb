@@ -5,7 +5,7 @@ class DonneeSociodemographique < ApplicationRecord
 
   GENRES = ['Homme', 'Femme', 'Autre genre'].freeze
   enum :genre, GENRES.zip(GENRES).to_h
-  NIVEAUX_ETUDES = ['Niveau Collège', 'Niveau CFG / DNB (BEPC)', 'Niveau CAP/ BEP', 'Niveau Bac',
+  NIVEAUX_ETUDES = ['Niveau Collège', 'Niveau CFG / DNB (BEPC)', 'Niveau CAP / BEP', 'Niveau Bac',
                     'Niveau Bac +2', 'Supérieur Bac +2'].freeze
   enum :dernier_niveau_etude, NIVEAUX_ETUDES.zip(NIVEAUX_ETUDES).to_h
   SITUATIONS = ['Scolarisation', 'Formation professionnelle', 'Alternance', 'Emploi',

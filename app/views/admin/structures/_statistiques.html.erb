@@ -16,7 +16,7 @@
   <div class="panel">
     <% evaluations = statistique.repartition_evaluations %>
     <% if evaluations.present? %>
-      <%= pie_chart evaluations %>
+      <%= pie_chart evaluations, legend: "top" %>
     <% else %>
       Pas de diagnostic à afficher pour le moment
     <% end %>

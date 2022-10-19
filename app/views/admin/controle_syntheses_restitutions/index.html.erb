@@ -23,39 +23,41 @@
 </head>
 
 <body style="position: absolute; left: 2rem;">
-<div class="row" style="width: 910px;">
-  <div class="col" style="padding: 0">
-    <div class="evaluation__restitution-globale">
-      <h2>Synthèses de pré-positionnement</h2>
-      <% @syntheses_pre_positionnement.each do |synthese| -%>
-        <div class="panel">
-          <div id="francais_mathematiques" class="francais-mathematiques marges-page">
-            <div id="lettrisme" class="page">
-              <%= render 'admin/evaluations/litteratie_numeratie_synthese',
-                synthese: synthese,
-                scope: "admin.restitutions.cefr",
-                description: synthese,
-                icone: "punaise-#{synthese}.svg",
-                pdf: false %>
-            </div>
-          </div>
-        </div>
-      <% end -%>
-
-      <h2>Synthèses d'évaluation avancée</h2>
-      <% @syntheses_avancees.each do |donnees| -%>
-          <div id="lettrisme" class="page">
+  <div class="evaluation">
+    <div class="row" style="width: 958px;">
+      <div class="col">
+        <div class="evaluation__restitution-globale">
+          <h2>Synthèses de pré-positionnement</h2>
+          <% @syntheses_pre_positionnement.each do |synthese| -%>
             <div class="panel">
-            <%= render 'admin/evaluations/litteratie_numeratie_synthese',
-              synthese: donnees[1],
-              scope: "admin.evaluations.lettrisme.litteratie",
-              description: "#{donnees[0]}.description",
-              icone: "icone_profil/icone_#{donnees[0]}.svg",
-              pdf: false %>
+              <div id="francais_mathematiques" class="francais-mathematiques marges-page">
+                <div id="lettrisme" class="page">
+                  <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                    synthese: synthese,
+                    scope: "admin.restitutions.cefr",
+                    description: synthese,
+                    icone: "punaise-#{synthese}.svg",
+                    pdf: false %>
+                </div>
+              </div>
             </div>
+          <% end -%>
+
+          <h2>Synthèses d'évaluation avancée</h2>
+          <% @syntheses_avancees.each do |donnees| -%>
+              <div id="lettrisme" class="page">
+                <div class="panel">
+                <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                  synthese: donnees[1],
+                  scope: "admin.evaluations.lettrisme.litteratie",
+                  description: "#{donnees[0]}.description",
+                  icone: "icone_profil/icone_#{donnees[0]}.svg",
+                  pdf: false %>
+                </div>
+            </div>
+          <% end -%>
         </div>
-      <% end -%>
+      </div>
     </div>
   </div>
-</div>
 </body>

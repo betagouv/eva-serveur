@@ -2,7 +2,6 @@
 
 class Structure < ApplicationRecord
   belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
-  has_many :comptes, dependent: :destroy
 
   acts_as_paranoid
 

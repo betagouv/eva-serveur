@@ -21,6 +21,10 @@ fr:
 
           Si vous avez besoin d'aide,
           rendez-vous [ici](%{lien_aide})
+      statistiques:
+        description:
+          nombre_evaluations: Nombre d'évaluations effectuées par structure sur les 3 derniers mois glissants.
+          repartition_evaluations: Répartition des niveaux d'illettrisme
       membres:
         titre: Membres de la structure
         invitation:  |

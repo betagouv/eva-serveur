@@ -22,6 +22,15 @@ class StatistiquesStructure
     evaluations
   end
 
+  def repartition_evaluations
+    evaluations = Evaluation.pour_les_structures(structures)
+                            .select(:synthese_competences_de_base)
+                            .group(:synthese_competences_de_base)
+                            .count
+    evaluations.delete(nil)
+    evaluations
+  end
+
   private
 
   def regroupe_nombre_evaluations_par_structures_enfants(evaluations)

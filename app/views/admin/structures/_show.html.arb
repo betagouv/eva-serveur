@@ -23,7 +23,7 @@ div class: 'row' do
         end
       end
 
-      render partial: 'admin/structures/statistique'
+      render partial: 'admin/structures/statistiques'
 
       if can?(:manage, Compte)
         panel 'Administration' do

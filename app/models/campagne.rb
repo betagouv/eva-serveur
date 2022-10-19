@@ -9,7 +9,6 @@ class Campagne < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :evaluations, dependent: :destroy
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy

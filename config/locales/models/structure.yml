@@ -27,17 +27,20 @@ fr:
         type_structure:
           one: 'Type de structure'
           non_communique: Non communiqué
-          mission_locale: Mission locale
-          pole_emploi: Pôle Emploi
-          SIAE: SIAE
-          service_insertion_collectivite: Service d'insertion collectivité
+          AFPA: AFPA
+          apprentissage: Apprentissage (CFA, CMA, lycée, etc.)
+          autre: Autre
+          cap_emploi: Cap emploi
           CRIA: CRIA
+          e2c: École de la 2e chance
+          GRETA: GRETA
+          mission_locale: Mission locale
           organisme_formation: Organisme de formation
           orientation_scolaire: Orientation scolaire
-          cap_emploi: Cap emploi
-          e2c: École de la 2e chance
+          pole_emploi: Pôle Emploi
+          service_insertion_collectivite: Service d'insertion collectivité
+          SIAE: SIAE
           SMA: SMA
-          autre: Autre
   formtastic:
     actions:
       structure: &actions_structure

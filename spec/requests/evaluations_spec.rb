@@ -23,9 +23,9 @@ describe 'Evaluation API', type: :request do
           },
           donnee_sociodemographique_attributes: {
             age: 18,
-            genre: 'Homme',
-            dernier_niveau_etude: 'Niveau Collège',
-            derniere_situation: 'Scolarisation'
+            genre: 'homme',
+            dernier_niveau_etude: 'college',
+            derniere_situation: 'scolarisation'
           }
         }
       end
@@ -59,9 +59,9 @@ describe 'Evaluation API', type: :request do
       end
 
       it { expect(@donnee_sociodemographique.age).to eq 18 }
-      it { expect(@donnee_sociodemographique.genre).to eq 'Homme' }
-      it { expect(@donnee_sociodemographique.dernier_niveau_etude).to eq 'Niveau Collège' }
-      it { expect(@donnee_sociodemographique.derniere_situation).to eq 'Scolarisation' }
+      it { expect(@donnee_sociodemographique.genre).to eq 'homme' }
+      it { expect(@donnee_sociodemographique.dernier_niveau_etude).to eq 'college' }
+      it { expect(@donnee_sociodemographique.derniere_situation).to eq 'scolarisation' }
     end
 
     context 'Quand le code campagne est inconnu' do

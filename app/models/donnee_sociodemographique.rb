@@ -3,13 +3,13 @@
 class DonneeSociodemographique < ApplicationRecord
   belongs_to :evaluation
 
-  GENRES = ['Homme', 'Femme', 'Autre genre'].freeze
+  GENRES = %w[homme femme autre].freeze
   enum :genre, GENRES.zip(GENRES).to_h
-  NIVEAUX_ETUDES = ['Niveau Collège', 'Niveau CFG / DNB (BEPC)', 'Niveau CAP / BEP', 'Niveau Bac',
-                    'Niveau Bac +2', 'Supérieur Bac +2'].freeze
+  NIVEAUX_ETUDES = %w[college cfg_dnb_bepc cap_bep bac
+                      bac_plus2 superieur_bac_plus2].freeze
   enum :dernier_niveau_etude, NIVEAUX_ETUDES.zip(NIVEAUX_ETUDES).to_h
-  SITUATIONS = ['Scolarisation', 'Formation professionnelle', 'Alternance', 'Emploi',
-                'Sans emploi'].freeze
+  SITUATIONS = %w[scolarisation formation_professionnelle alternance emploi
+                  sans_emploi].freeze
   enum :derniere_situation, SITUATIONS.zip(SITUATIONS).to_h
 
   validates :genre, inclusion: { in: GENRES, allow_blank: true }

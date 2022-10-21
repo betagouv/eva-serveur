@@ -3,8 +3,20 @@
 class StructureLocale < Structure
   TYPE_NON_COMMUNIQUE = 'non_communique'
   TYPES_STRUCTURES = %w[
-    mission_locale pole_emploi SIAE service_insertion_collectivite CRIA
-    organisme_formation orientation_scolaire cap_emploi e2c SMA autre
+    mission_locale
+    pole_emploi
+    AFPA
+    GRETA
+    apprentissage
+    organisme_formation
+    SIAE
+    service_insertion_collectivite
+    CRIA
+    orientation_scolaire
+    cap_emploi
+    e2c
+    SMA
+    autre
   ].freeze
 
   validates :code_postal, :type_structure, presence: true

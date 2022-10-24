@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-div class: 'card__banner card__banner--alert w-100 d-flex' do
-  div(class: 'd-flex') do
-    svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
-  end
+div class: 'card__banner card__banner--alert w-100 d-flex align-items-center' do
+  div svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
   div do
     h4 t('.titre')
     text_node md "#{t('.description.instructions')}<u>#{current_compte.email_a_confirmer}</u>"
-    div class: 'd-flex justify-content-between align-items-center' do
+    div class: 'd-flex justify-content-between align-items-center banner__action' do
       div md t('.description.email_non_recu')
       div do
         link_to t('.description.action'),

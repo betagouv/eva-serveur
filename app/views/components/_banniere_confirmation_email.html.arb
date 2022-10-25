@@ -1,0 +1,46 @@
+# frozen_string_literal: true
+
+div class: 'card__banner card__banner--alert w-100 d-flex align-items-center' do
+  case demande
+  when :nouvelle_inscription
+    div svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
+    div do
+      h4 t(".#{demande}.titre")
+      text_node md "#{t(".#{demande}.instructions")}<u>#{current_compte.email_a_confirmer}</u>"
+      div class: 'd-flex justify-content-between align-items-center banner__action' do
+        div md t(".#{demande}.email_non_recu")
+        div do
+          link_to t('.renvoyer_instructions'),
+                  new_confirmation_path(current_compte, email: current_compte.email_a_confirmer),
+                  class: 'bouton bouton-principal text-center'
+        end
+      end
+    end
+  when :modification_email
+    div class: 'w-100' do
+      text_node md t(".#{demande}.demande_effectuee")
+      div class: 'd-flex justify-content-between' do
+        div do
+          div t(".#{demande}.email_envoye_a")
+          span compte.unconfirmed_email, class: 'font-weight-bold'
+        end
+        div do
+          link_to t('.renvoyer_email'),
+                  new_confirmation_path(compte, email: compte.email_a_confirmer),
+                  class: 'bouton bouton-principal text-center'
+        end
+      end
+    end
+  when :confirmation_autre_compte
+    div class: 'd-flex justify-content-between w-100' do
+      div class: 'align-self-center' do
+        div t(".#{demande}.email_non_confirme")
+      end
+      div do
+        link_to t('.renvoyer_email'),
+                new_confirmation_path(compte, email: compte.email_a_confirmer),
+                class: 'bouton bouton-principal text-center'
+      end
+    end
+  end
+end

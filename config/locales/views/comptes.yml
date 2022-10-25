@@ -1,16 +1,6 @@
 fr:
   admin:
     comptes:
-      renvoyer: |
-        Renvoyer l’email de
-        confirmation
-      banniere_info_email_non_confirme:
-        email_non_confirme: L'email de ce compte n'a pas été confirmé.
-      banniere_demande_modification_email:
-        email_envoye_a: 'Un email de confirmation a été envoyé à :'
-        demande_effectuee: |
-            Une demande de modification d’email a été effectuée.
-            La modification ne sera effective qu’une fois l’email confirmé.
       show:
         titre: 'Bonjour %{prenom} !'
         introduction: |

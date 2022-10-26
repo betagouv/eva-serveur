@@ -15,6 +15,9 @@
         }
       }
     }
+    span {
+      align-self: center;
+    }
     .nom,
     .date {
       padding-right: 1rem;
@@ -30,7 +33,10 @@
       flex: 2;
       font-family: $font-titre;
       font-weight: bold;
-      color: $couleur-liens;
+      max-width: 10.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .date {
       flex: 1;

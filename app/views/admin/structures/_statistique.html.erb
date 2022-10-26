@@ -1,11 +1,7 @@
 <h3>Statistiques</h3>
 <p class="statistiques-description">Nombre d'évaluations effectuées par structure sur les 3 derniers mois glissants.</p>
 <div class="panel">
-  <% evaluations = Evaluation.pour_les_structures(structures)
-                             .des_3_derniers_mois
-                             .group('structures.nom')
-                             .group_by_month(:created_at, format: '%B')
-                             .count %>
+  <% evaluations = StatistiquesStructure.new(resource).nombre_evaluations_des_3_derniers_mois %>
   <% if evaluations.present? %>
     <%= column_chart evaluations, legend: "bottom" %>
   <% else %>

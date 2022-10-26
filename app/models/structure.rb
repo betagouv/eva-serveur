@@ -70,4 +70,20 @@ class Structure < ApplicationRecord
   def effectif
     Compte.where(structure: self).count
   end
+
+  def structures_dependantes
+    structures = self
+    structures_dependantes_ids = []
+
+    while (enfants = Structure.structures_enfants(structures)).present?
+      structures_dependantes_ids << enfants.map(&:id)
+      structures = enfants
+    end
+
+    Structure.where(id: structures_dependantes_ids.flatten)
+  end
+
+  def self.structures_enfants(structures)
+    Structure.where(structure_referente_id: structures)
+  end
 end

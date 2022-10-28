@@ -60,6 +60,10 @@ fr:
             profil4: Profil 4
             profil4_plus: Profil 4+
             profil4_plus_plus: Profil 4++
+        statuts:
+          a_suivre: À suivre
+          suivi_en_cours: Suivi en cours
+          suivi_effectue: Suivi effectué
     scopes:
       evaluation:
         all: 'Toutes les évaluations'

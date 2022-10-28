@@ -252,6 +252,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         it { expect(page).to have_content 'Terminée le' }
         it { expect(page).to have_content 'Temps total' }
+        it { expect(page).to have_content 'Statut' }
       end
     end
 

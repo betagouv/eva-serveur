@@ -9,7 +9,7 @@ class StatistiquesStructure
 
   # Nombre d'évaluations pour chaque structure enfants des 3 derniers mois
   #
-  # @return [Hash] { ['Paris', 'octobre'] => 1 })
+  # @return [Hash] { ['Paris', 'octobre'] => 1 }
   def nombre_evaluations_des_3_derniers_mois
     evaluations = Evaluation.pour_les_structures(structures)
                             .des_3_derniers_mois
@@ -31,7 +31,36 @@ class StatistiquesStructure
     evaluations
   end
 
+  # Pourcentage de données sociodémographiques par genre pour un niveau donné
+  #
+  # @return [Hash] { homme: 45, femme: 45, autre: 10 }
+  def correlation_entre_niveau_illettrisme_et_genre(niveau)
+    evaluations_par_genre = evaluations_par_genre(niveau)
+    return if evaluations_par_genre.empty?
+
+    evaluations_par_genre = transforme_valeurs_en_pourcentage(evaluations_par_genre)
+    DonneeSociodemographique::GENRES.each { |genre| evaluations_par_genre[genre] ||= 0 }
+    evaluations_par_genre
+  end
+
   private
+
+  def evaluations_par_genre(niveau)
+    DonneeSociodemographique.joins(:evaluation)
+                            .merge(Evaluation.pour_les_structures(structures))
+                            .where(evaluations: {
+                                     synthese_competences_de_base: niveau
+                                   })
+                            .group(:genre)
+                            .count
+  end
+
+  def transforme_valeurs_en_pourcentage(hash)
+    total_valeurs = hash.values.sum
+    hash.update(hash) do |_cle, valeur|
+      (valeur.to_f / total_valeurs * 100)
+    end
+  end
 
   def regroupe_nombre_evaluations_par_structures_enfants(evaluations)
     statistique = {}

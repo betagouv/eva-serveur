@@ -35,6 +35,7 @@ class Evaluation < ApplicationRecord
   enum :niveau_anlci_litteratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
   enum :niveau_anlci_numeratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
+  enum :statut, %i[a_suivre suivi_en_cours suivi_effectue]
 
   scope :des_3_derniers_mois, lambda {
     il_y_a_3_mois = (Date.current - 2.months).beginning_of_month

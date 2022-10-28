@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  permit_params :campagne_id, :nom, :beneficiaire_id
+  permit_params :campagne_id, :nom, :beneficiaire_id, :statut
   menu priority: 4
 
   includes campagne: :compte

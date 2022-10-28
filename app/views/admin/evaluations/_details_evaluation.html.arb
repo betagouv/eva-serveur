@@ -89,6 +89,14 @@ div id: 'evaluation__details', class: 'row' do
                 auto_link resource.donnee_sociodemographique
               end
             end
+            div class: 'row' do
+              div class: 'col-1' do
+                span Evaluation.human_attribute_name('statut')
+              end
+              div class: 'col col-2' do
+                span Evaluation.human_enum_name(:statut, resource.statut)
+              end
+            end
           end
         end
         div class: 'col-2 card-pdf' do

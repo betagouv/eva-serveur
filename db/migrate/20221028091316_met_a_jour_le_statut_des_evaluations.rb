@@ -5,7 +5,7 @@ class MetAJourLeStatutDesEvaluations < ActiveRecord::Migration[7.0]
 
   def up
     Evaluation.where('created_at >= ?', 1.month.ago).update_all(statut: :a_suivre)
-    Evaluation.where('created_at BETWEEN ? AND ?', 1.month.ago, 6.month.ago).update_all(statut: :suivi_en_cours)
+    Evaluation.where('created_at BETWEEN ? AND ?', 6.month.ago, 1.month.ago).update_all(statut: :suivi_en_cours)
     Evaluation.where('created_at < ?', 6.month.ago).update_all(statut: :suivi_effectue)
   end
 

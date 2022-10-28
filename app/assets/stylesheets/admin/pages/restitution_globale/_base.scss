@@ -282,9 +282,15 @@
     }
   }
 
+  $decalage: 2rem;
+
+  .francais_mathematiques__espacement {
+    padding-top: $decalage;
+  }
+
   .demande-aide {
     position: absolute;
-    top: -2rem;
+    top: -$decalage;
     left: 13.188rem;
     display: flex;
     justify-content:space-between;
@@ -486,10 +492,6 @@
     .carte__duree {
       font-style: italic;
     }
-  }
-
-  .titre-avec-aide-illettrisme {
-    margin-bottom: 3rem;
   }
 }
 

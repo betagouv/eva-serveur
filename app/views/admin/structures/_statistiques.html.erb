@@ -21,4 +21,29 @@
       Pas de diagnostic à afficher pour le moment
     <% end %>
   </div>
+
+  <p class="statistiques__description"><%= t('.description.correlation_donnees_illettrisme') %></p>
+  <div class="panel">
+    <% Evaluation::SYNTHESES.each do |synthese|
+      donnees_par_synthese = statistique.correlation_entre_niveau_illettrisme_et_genre(synthese) %>
+      <% if donnees_par_synthese.present? %>
+        <div>
+          <h3><%= synthese.to_s %> :</h3>
+          <ul style="list-style-type: none">
+            <% DonneeSociodemographique::GENRES.each do |genre| %>
+              <li>
+                <%= genre %> :
+                <%= formate_efficience(donnees_par_synthese[genre]) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <div>
+          <h3><%= synthese.to_s %> :</h3>
+          <p>Pas de données sociodémographiques</p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>

@@ -17,7 +17,6 @@ ActiveAdmin.register Evaluation do
          minimum_input_length: 2,
          order_by: 'libelle_asc'
   filter :created_at
-  filter :statut, as: :select, if: proc { current_compte.superadmin? }
 
   scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
   scope proc {

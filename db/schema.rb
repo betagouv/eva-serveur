@@ -198,6 +198,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_165243) do
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
     t.index ["deleted_at"], name: "index_evaluations_on_deleted_at"
     t.index ["statut"], name: "index_evaluations_on_statut"
+    t.index ["synthese_competences_de_base"], name: "index_evaluations_on_synthese_competences_de_base"
   end
 
   create_table "evenements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

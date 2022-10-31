@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_28_091316) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_165243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -172,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_28_091316) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_donnees_sociodemographiques_on_deleted_at"
     t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id"
+    t.index ["genre"], name: "index_donnees_sociodemographiques_on_genre"
   end
 
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

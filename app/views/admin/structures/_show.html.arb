@@ -23,13 +23,7 @@ div class: 'row' do
         end
       end
 
-      structures = if structure.instance_of?(StructureLocale)
-                     structure
-                   else
-                     structures_dependantes
-                   end
-      render partial: 'admin/structures/statistique',
-             locals: { structures: structures }
+      render partial: 'admin/structures/statistique'
 
       if can?(:manage, Compte)
         panel 'Administration' do

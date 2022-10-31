@@ -47,6 +47,12 @@ describe 'Admin - Structure administrative', type: :feature do
 
       it { expect(page).to have_content structure.nom }
     end
+
+    context "en tant qu'admin" do
+      let(:compte_courant) { create(:compte_admin, structure: structure) }
+
+      it { expect(page).to have_content structure.nom }
+    end
   end
 
   describe 'création' do

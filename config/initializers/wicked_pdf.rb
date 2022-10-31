@@ -23,8 +23,7 @@ WickedPdf.config = {
             left:   0,
             right:  0 },
   page_size: 'A4',
-  # show_as_html: true,
-  dpi: '75',
-  zoom: 1.0417,
+  show_as_html: true,
+  dpi: 96,
   disable_smart_shrinking: true
 }

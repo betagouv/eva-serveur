@@ -5,7 +5,7 @@
 <div class="panel">
   <% evaluations = statistique.nombre_evaluations_des_3_derniers_mois %>
   <% if evaluations.present? %>
-    <%= column_chart evaluations, legend: "bottom" %>
+    <%= column_chart evaluations, legend: 'bottom' %>
   <% else %>
     Pas d'évaluation à afficher pour le moment
   <% end %>
@@ -16,7 +16,14 @@
   <div class="panel">
     <% evaluations = statistique.repartition_evaluations %>
     <% if evaluations.present? %>
-      <%= pie_chart evaluations, legend: "top" %>
+      <%= pie_chart evaluations, library: {
+        plugins: {
+          legend: {
+            position: 'right',
+            align: 'start',
+          }
+        }
+      } %>
     <% else %>
       Pas de diagnostic à afficher pour le moment
     <% end %>

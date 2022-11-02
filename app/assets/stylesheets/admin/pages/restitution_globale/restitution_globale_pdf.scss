@@ -5,10 +5,18 @@ $grid-gutter-width: 1.25rem;
 @import "../../../admin/composants/lettrisme";
 @import "fonts_faces_pdf";
 
+// Les deux dimensions suivantes ont été calculées proportionnellement à la taille A4
+// en gardant un DPI constant entre la hauteur et la largeur.
+// Les DPI actuels sont de 133x133 dpi de manière arbitraire.
+// La page sera ajustée à la génération du PDF pour remplir toute la page
+// (Paramètre "smart shrinking", de wkhtmltopdf, actif par défaut).
+$largeur-page: 1100px;
+$hauteur-page: 1557px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
+
 .evaluation__restitution-globale {
   line-height: 1.3;
   font-size: 1rem;
-  width: 1100px;
+  width: $largeur-page;
 
   .panel {
     padding-top: 0;
@@ -84,7 +92,7 @@ $grid-gutter-width: 1.25rem;
   }
 
   .page {
-    height: 1555px;
+    height: $hauteur-page;
     position: relative;
     page-break-after: always;
     border-bottom: none;

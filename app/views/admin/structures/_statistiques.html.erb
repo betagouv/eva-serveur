@@ -24,8 +24,10 @@
 
   <p class="statistiques__description"><%= t('.description.correlation_donnees_illettrisme') %></p>
   <div class="panel">
-    <% Evaluation::SYNTHESES.each do |synthese|
-      donnees_par_synthese = statistique.correlation_entre_niveau_illettrisme_et_genre(synthese) %>
+    <% Evaluation::SYNTHESES.each do |synthese| %>
+      <% next if synthese == 'aberrant' %>
+      <% donnees_par_synthese = statistique.correlation_entre_niveau_illettrisme_et_genre(synthese) %>
+
       <% if donnees_par_synthese.present? %>
         <div>
           <h3><%= synthese.to_s %> :</h3>

@@ -23,12 +23,11 @@ class StatistiquesStructure
   end
 
   def repartition_evaluations
-    evaluations = Evaluation.pour_les_structures(structures)
-                            .select(:synthese_competences_de_base)
-                            .group(:synthese_competences_de_base)
-                            .count
-    evaluations.delete(nil)
-    evaluations
+    Evaluation.pour_les_structures(structures)
+              .where.not(synthese_competences_de_base: [nil, :aberrant])
+              .select(:synthese_competences_de_base)
+              .group(:synthese_competences_de_base)
+              .count
   end
 
   # Pourcentage de données sociodémographiques par genre pour un niveau donné
@@ -46,11 +45,10 @@ class StatistiquesStructure
   private
 
   def evaluations_par_genre(niveau)
-    DonneeSociodemographique.joins(:evaluation)
-                            .merge(Evaluation.pour_les_structures(structures))
-                            .where(evaluations: {
-                                     synthese_competences_de_base: niveau
-                                   })
+    DonneeSociodemographique.where(
+      evaluation_id: Evaluation.pour_les_structures(structures)
+                .where(synthese_competences_de_base: niveau).select(:id)
+    )
                             .group(:genre)
                             .count
   end

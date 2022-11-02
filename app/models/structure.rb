@@ -3,7 +3,12 @@
 class Structure < ApplicationRecord
   belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
 
+  REGEX_UUID = /\A[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i.freeze
+  has_ancestry(primary_key_format: REGEX_UUID)
   acts_as_paranoid
+
+  # À supprimer une fois la transition vers ancestry terminée
+  alias_attribute :parent_id, :structure_referente_id
 
   validates :nom, presence: true
   validates :nom, uniqueness: { case_sensitive: false, scope: :code_postal }

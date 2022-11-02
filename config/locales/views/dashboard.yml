@@ -34,7 +34,7 @@ fr:
             description: Étape 2/3 - Testez votre campagne en effectuant le parcours
             action: Tester votre campagne
           "2":
-            description: Étape 3/3 - Bravo, vous pouvez maintenant utiliser eva ! Rappelez vous qu'eva est un service public numérique accompagné, adapté pour un public post bac avec des compétences numériques minimales.
+            description: Étape 3/3 - Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
             action: Consulter le guide de prise en main
       validation_necessaire:
         titre: Bienvenue sur eva !

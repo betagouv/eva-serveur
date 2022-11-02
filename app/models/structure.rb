@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 class Structure < ApplicationRecord
-  belongs_to :structure_referente, optional: true, class_name: 'StructureAdministrative'
-
   REGEX_UUID = /\A[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/i.freeze
   has_ancestry(primary_key_format: REGEX_UUID)
   acts_as_paranoid
 
-  # À supprimer une fois la transition vers ancestry terminée
-  alias_attribute :parent_id, :structure_referente_id
-
+  alias structure_referente parent
+  alias structure_referente= parent=
   validates :nom, presence: true
   validates :nom, uniqueness: { case_sensitive: false, scope: :code_postal }
 
@@ -74,21 +71,5 @@ class Structure < ApplicationRecord
 
   def effectif
     Compte.where(structure: self).count
-  end
-
-  def structures_dependantes
-    structures = self
-    structures_dependantes_ids = []
-
-    while (enfants = Structure.structures_enfants(structures)).present?
-      structures_dependantes_ids << enfants.map(&:id)
-      structures = enfants
-    end
-
-    Structure.where(id: structures_dependantes_ids.flatten)
-  end
-
-  def self.structures_enfants(structures)
-    Structure.where(structure_referente_id: structures)
   end
 end

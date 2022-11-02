@@ -70,9 +70,7 @@ class StatistiquesStructure
     statistique = {}
 
     evaluations.each do |key, nombre_evaluations|
-      structures_enfants_avec_dependance.find do |enfant, structures_dependantes|
-        next if structure_trouvee(enfant, structures_dependantes, key).blank?
-
+      structures_enfants_avec_dependance.find do |enfant, _value|
         key[0] = enfant&.nom
         statistique[key] ||= 0
         statistique[key] += nombre_evaluations
@@ -81,16 +79,12 @@ class StatistiquesStructure
     statistique
   end
 
-  def structure_trouvee(enfant, structures_dependantes, key)
-    enfant.id == key[0] ? enfant : structures_dependantes.find { |s| s.id == key[0] }
-  end
-
   def structures_enfants_avec_dependance
     @structures_enfants_avec_dependance ||= begin
-      enfants = Structure.structures_enfants(@structure)
+      enfants = @structure.children
       resultat = {}
       enfants.each do |enfant|
-        resultat[enfant] = enfant.structures_dependantes
+        resultat[enfant] = enfant.children
       end
       resultat
     end
@@ -102,7 +96,7 @@ class StatistiquesStructure
 
   def structures_dependantes
     @structures_dependantes ||= if structure.instance_of?(StructureAdministrative)
-                                  structure.structures_dependantes
+                                  structure.descendants
                                 else
                                   []
                                 end
@@ -110,11 +104,11 @@ class StatistiquesStructure
 
   def a_des_petits_enfants?
     @a_des_petits_enfants ||= structures_dependantes.any? do |s|
-      s.structure_referente_id != structure.id
+      s.parent_id != structure.id
     end
   end
 
   def groupe_par
-    a_des_petits_enfants? ? 'structures.structure_referente_id' : 'structures.nom'
+    a_des_petits_enfants? ? 'structures.ancestry' : 'structures.nom'
   end
 end

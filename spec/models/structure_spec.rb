@@ -6,11 +6,6 @@ describe Structure, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to validate_uniqueness_of(:nom).scoped_to(:code_postal).case_insensitive }
 
-  it do
-    expect(subject).to belong_to(:structure_referente).class_name('StructureAdministrative')
-                                                      .optional
-  end
-
   describe 'REGEX_UUID' do
     it { expect('uuid invalide').not_to match(Structure::REGEX_UUID) }
     it { expect(SecureRandom.uuid).to match(Structure::REGEX_UUID) }
@@ -119,59 +114,6 @@ describe Structure, type: :model do
 
       it 'lui attribue la nouvelle région' do
         expect(structure.region).to eql('Normandie')
-      end
-    end
-  end
-
-  describe '.structures_dependantes' do
-    let!(:structure) { create :structure_administrative, :avec_admin, nom: 'Ile de France' }
-
-    context "quand la structure administrative n'a pas de structure dépendante" do
-      it 'retourne un array vide' do
-        expect(structure.structures_dependantes).to eq []
-      end
-    end
-
-    context 'quand la structure administrative a une structure dépendante' do
-      let!(:structure_dependante) { create :structure_locale, structure_referente: structure }
-
-      it 'retourne un array avec la structure dépendante' do
-        expect(structure.structures_dependantes.first).to eq structure_dependante
-      end
-    end
-
-    context 'quand la structure administrative a deux niveaux de dépendance' do
-      let!(:structure_dependante) do
-        create :structure_administrative, :avec_admin, nom: 'Paris', structure_referente: structure
-      end
-      let!(:structure_dependante_niveau2) do
-        create :structure_locale, structure_referente: structure_dependante,
-                                  nom: '19e arrondissement'
-      end
-
-      it 'retourne un array avec toutes les structures dépendantes liées à la structures mères' do
-        expect(structure.structures_dependantes.length).to eq 2
-      end
-    end
-
-    context 'quand la structure administrative a X niveaux de dépendance' do
-      let!(:france) do
-        create :structure_administrative, :avec_admin, nom: 'France'
-      end
-      let!(:paris) do
-        create :structure_administrative, :avec_admin, nom: 'Paris', structure_referente: structure
-      end
-      let!(:structure_dependante_niveau2) do
-        create :structure_locale, structure_referente: paris,
-                                  nom: '19e arrondissement'
-      end
-
-      before do
-        structure.update structure_referente: france
-      end
-
-      it 'retourne un array avec toutes les structures dépendantes liées à la structures mères' do
-        expect(france.structures_dependantes.length).to eq 3
       end
     end
   end

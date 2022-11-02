@@ -22,6 +22,9 @@ class StatistiquesStructure
     evaluations
   end
 
+  # Répartition du nombre d'évaluations par niveau d'illettrime
+  #
+  # @return [Hash] { "illettrisme_potentiel" => 65, "ni_ni" => 45, "socle_clea" => 10 }
   def repartition_evaluations
     Evaluation.pour_les_structures(structures)
               .where.not(synthese_competences_de_base: [nil, :aberrant])
@@ -32,7 +35,7 @@ class StatistiquesStructure
 
   # Pourcentage de données sociodémographiques par genre pour un niveau donné
   #
-  # @return [Hash] { homme: 45, femme: 45, autre: 10 }
+  # @return [Hash] { "homme" => 45, "femme" => 45, "autre" => 10 }
   def correlation_entre_niveau_illettrisme_et_genre(niveau)
     evaluations_par_genre = evaluations_par_genre(niveau)
     return if evaluations_par_genre.empty?

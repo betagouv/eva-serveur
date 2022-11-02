@@ -71,6 +71,55 @@ describe StatistiquesStructure do
     end
   end
 
+  describe '#repartition_evaluations' do
+    let(:structure) { create :structure }
+    let(:compte) { create :compte, structure: structure }
+    let(:campagne) { create :campagne, compte: compte }
+
+    let(:resultat) { StatistiquesStructure.new(structure).repartition_evaluations }
+
+    context "quand l'évaluation appartient à la structure" do
+      before do
+        create :evaluation, campagne: campagne, synthese_competences_de_base: :ni_ni
+      end
+
+      it 'est prise en compte dans le calcul' do
+        expect(resultat).to eq({ 'ni_ni' => 1 })
+      end
+    end
+
+    context "quand l'évaluation n'appartient pas à la structure" do
+      let(:autre_campagne) { create :campagne }
+      before do
+        create :evaluation, campagne: autre_campagne, synthese_competences_de_base: :ni_ni
+      end
+
+      it "n'est pas prise en compte dans le calcul" do
+        expect(resultat).to eq({})
+      end
+    end
+
+    context "quand l'évaluation n'a pas de synthèse compétence de base" do
+      before do
+        create :evaluation, campagne: campagne, synthese_competences_de_base: nil
+      end
+
+      it "n'est pas prise en compte dans le calcul" do
+        expect(resultat).to eq({})
+      end
+    end
+
+    context "quand l'évaluation a une synthèse compétence de base : aberrant" do
+      before do
+        create :evaluation, campagne: campagne, synthese_competences_de_base: :aberrant
+      end
+
+      it "n'est pas prise en compte dans le calcul" do
+        expect(resultat).to eq({})
+      end
+    end
+  end
+
   describe '#correlation_entre_niveau_illettrisme_et_genre' do
     let(:structure) { create :structure }
     let(:compte) { create :compte, structure: structure }

@@ -16,5 +16,16 @@ Chartkick.options = {
   dataset: {
     borderWidth: 0
   },
-  library: { animation: { easing: 'easeOutQuart' } }
+  library: {
+    animation: {
+      easing: 'easeOutQuart'
+    },
+    plugins: {
+      legend: {
+        labels: {
+          usePointStyle: true
+        }
+      }
+    }
+  }
 }

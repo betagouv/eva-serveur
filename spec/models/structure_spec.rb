@@ -11,6 +11,11 @@ describe Structure, type: :model do
                                                       .optional
   end
 
+  describe 'REGEX_UUID' do
+    it { expect('uuid invalide').not_to match(Structure::REGEX_UUID) }
+    it { expect(SecureRandom.uuid).to match(Structure::REGEX_UUID) }
+  end
+
   describe 'géolocalisation à la validation' do
     describe "pour n'importe quel code postal" do
       let(:structure) { Structure.new code_postal: '75012' }

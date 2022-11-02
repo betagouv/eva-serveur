@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_165243) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_02_151638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -339,6 +339,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_165243) do
     t.uuid "structure_referente_id"
     t.string "type"
     t.datetime "deleted_at"
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
     t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true

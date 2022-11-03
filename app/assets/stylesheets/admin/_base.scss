@@ -35,11 +35,3 @@
 @import "active_admin/structure/footer";
 @import "active_admin/structure/main_structure";
 @import "active_admin/structure/title_bar";
-
-body {
-  @include sans-family;
-  line-height: 1.5;
-  font-size: 72%;
-  background: $body-background-color;
-  color: $text-color;
-}

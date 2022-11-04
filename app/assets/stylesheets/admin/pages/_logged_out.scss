@@ -151,7 +151,6 @@ body.logged_out {
           .panel-description {
             font-style: italic;
             font-size: 0.875rem;
-            line-height: 1rem;
             margin-bottom: 2rem;
           }
           form {
@@ -280,7 +279,6 @@ body.logged_out {
   }
 
   .mot-de-passe-instruction {
-    line-height: 1rem;
     &--consigne {
       font-weight: 600;
     }
@@ -288,7 +286,6 @@ body.logged_out {
     p {
       margin-bottom: 1rem;
       padding-right: 1.5rem;
-      line-height: 1rem;
     }
   }
 }

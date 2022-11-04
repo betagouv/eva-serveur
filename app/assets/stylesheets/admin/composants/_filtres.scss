@@ -4,7 +4,7 @@
       &.select_and_search,
       &.filter_date_range {
         input[type='text'] {
-          width: 7.25rem;
+          width: 7.188rem;
         }
       }
     }
@@ -12,6 +12,9 @@
       select {
         width: 100%;
       }
+    }
+    .select2-selection {
+      height: 100%;
     }
   }
 }

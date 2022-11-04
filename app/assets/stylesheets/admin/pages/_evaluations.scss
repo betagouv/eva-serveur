@@ -20,8 +20,8 @@
     }
     .nom,
     .date {
+      @include texte-xs;
       padding-right: 1rem;
-      font-size: 0.75rem;
       color: $eva_dark;
     }
     .pastille {

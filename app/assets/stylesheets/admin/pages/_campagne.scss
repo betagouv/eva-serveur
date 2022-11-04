@@ -27,6 +27,7 @@
             .code {
               display: flex;
               letter-spacing: 0.2rem;
+              line-height: 1.75rem;
             }
             .violet {
               color: $eva_main_blue;
@@ -173,7 +174,6 @@
     .description {
       font-size: 0.869rem;
       font-style: italic;
-      line-height: 1rem;
       padding: 1.31rem 1.5rem;
       &--secondaire {
         padding: 0;

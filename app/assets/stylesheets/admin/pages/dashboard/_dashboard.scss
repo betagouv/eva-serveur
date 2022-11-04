@@ -117,7 +117,8 @@
           .action {
             @include bouton;
             display: inline-block;
-            font-size: 0.75rem;
+            @include texte-xs;
+            padding: 0.438rem 0.75rem;
             color: $eva_dark;
             border: 0;
             background-color: $couleur-warning;

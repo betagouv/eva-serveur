@@ -14,7 +14,7 @@
 }
 
 .flash {
-  font-size: 0.75rem;
+  @include texte-xs;
   font-weight: normal;
   text-shadow: none;
 }

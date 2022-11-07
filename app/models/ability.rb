@@ -86,7 +86,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     can :read, Question
     cannot :destroy, Question do |q|
       QuestionnaireQuestion.exists?(question: q) ||
-        Evenement.exists?(["donnees->>'question' = ?", q.id.to_s])
+        (q.created_at && q.created_at < 1.month.ago)
     end
   end
 
@@ -101,7 +101,7 @@ class Ability # rubocop:disable Metrics/ClassLength
 
   def droit_choix
     cannot :destroy, Choix do |c|
-      Evenement.exists?(["donnees->>'reponse' = ?", c.id.to_s])
+      c.created_at < 1.month.ago
     end
   end
 

@@ -500,6 +500,7 @@ GEM
       geoip
     thor (1.2.1)
     tilt (2.0.11)
+    timecop (0.9.5)
     timeout (0.3.0)
     truemail (2.7.4)
       simpleidn (~> 0.2.1)
@@ -601,6 +602,7 @@ DEPENDENCIES
   spring-commands-rspec
   sprockets-rails
   tarteaucitron
+  timecop
   truemail
   tzinfo-data
   web-console

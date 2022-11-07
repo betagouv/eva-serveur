@@ -95,6 +95,7 @@ group :test do
   gem 'launchy'
   gem 'pdf-reader'
   gem 'shoulda-matchers'
+  gem 'timecop'
 end
 
 group :production do

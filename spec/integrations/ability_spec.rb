@@ -100,8 +100,12 @@ describe Ability do
         it { is_expected.not_to be_able_to(:destroy, question) }
       end
 
-      context 'quand il y a des événements réponses pour cette question' do
-        before { create :evenement_reponse, donnees: { question: question.id } }
+      context 'quand la question existe depuis plus un mois' do
+        # cette question est peut-être utilisé dans un événement
+        # mais faire la requette sur la table evenements coute trop cher
+        let(:question) do
+          Timecop.freeze(1.month.ago) { create(:question) }
+        end
 
         it { is_expected.not_to be_able_to(:destroy, question) }
       end
@@ -112,8 +116,12 @@ describe Ability do
 
       it { is_expected.to be_able_to(:destroy, choix) }
 
-      context 'avec un choix présent dans un événement réponse' do
-        before { create :evenement_reponse, donnees: { reponse: choix.id } }
+      context "avec un choix qui existe depuis plus d'un mois" do
+        # ce choix  est peut-être utilisé dans un événement comme réponse
+        # mais faire la requette sur la table evenements coute trop cher
+        let!(:choix) do
+          Timecop.freeze(1.month.ago) { create :choix, :bon }
+        end
 
         it { is_expected.not_to be_able_to(:destroy, choix) }
       end

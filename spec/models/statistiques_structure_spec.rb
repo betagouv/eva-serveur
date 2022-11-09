@@ -79,12 +79,30 @@ describe StatistiquesStructure do
     let(:resultat) { StatistiquesStructure.new(structure).repartition_evaluations }
 
     context "quand l'évaluation appartient à la structure" do
+      let(:synthese) { :ni_ni }
       before do
-        create :evaluation, campagne: campagne, synthese_competences_de_base: :ni_ni
+        create :evaluation, campagne: campagne, synthese_competences_de_base: synthese
       end
 
-      it 'est prise en compte dans le calcul' do
-        expect(resultat).to eq({ 'ni_ni' => 1 })
+      context 'avec une synthexe ni_ni' do
+        let(:synthese) { :ni_ni }
+        it 'est prise en compte dans le calcul' do
+          expect(resultat).to eq({ 'Niveau Intermédiaire' => 1 })
+        end
+      end
+
+      context 'avec une synthexe ni_ni' do
+        let(:synthese) { :socle_clea }
+        it 'est prise en compte dans le calcul' do
+          expect(resultat).to eq({ 'Pas de difficultés repérées' => 1 })
+        end
+      end
+
+      context 'avec une synthexe illettrisme_potentiel' do
+        let(:synthese) { :illettrisme_potentiel }
+        it 'est prise en compte dans le calcul' do
+          expect(resultat).to eq({ 'Illettrisme potentiel' => 1 })
+        end
       end
     end
 

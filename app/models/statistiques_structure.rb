@@ -26,11 +26,14 @@ class StatistiquesStructure
   #
   # @return [Hash] { "illettrisme_potentiel" => 65, "ni_ni" => 45, "socle_clea" => 10 }
   def repartition_evaluations
-    Evaluation.pour_les_structures(structures)
-              .where.not(synthese_competences_de_base: [nil, :aberrant])
-              .select(:synthese_competences_de_base)
-              .group(:synthese_competences_de_base)
-              .count
+    repartition = Evaluation.pour_les_structures(structures)
+                            .where.not(synthese_competences_de_base: [nil, :aberrant])
+                            .select(:synthese_competences_de_base)
+                            .group(:synthese_competences_de_base)
+                            .count
+    repartition.transform_keys do |key|
+      I18n.t("statistiques_structure.#{key}")
+    end
   end
 
   # Pourcentage de données sociodémographiques par genre pour un niveau donné

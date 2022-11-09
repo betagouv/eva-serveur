@@ -93,6 +93,10 @@ ActiveAdmin.register Evaluation do
     end
   end
 
+  member_action :mise_en_action, method: :put do
+    resource.update(mise_en_action_effectuee: params[:mise_en_action_effectuee])
+  end
+
   show do
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,

@@ -164,10 +164,9 @@ fr:
           message: |
             #### Cette personne semble avoir besoin de consolider ses compétences de base.
 
-            **Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?**
-            Aidez-nous à alerter les pouvoirs publics en signalant ici les difficultés que vous rencontrez.
+            D'après nos enquêtes, seulement **25% des personnes en illettrisme potentiel réussissent à entrer en formation.**
 
-            Merci pour votre contribution.
+            **Avez-vous été en mesure d’orienter cette personne vers une solution d’accompagnement adaptée ?**
       demande_aide_illettrisme:
         aide_description: |
           Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?

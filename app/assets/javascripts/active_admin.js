@@ -11,6 +11,7 @@
 //= require aide
 //= require autocomplete_recherche_structure
 //= require clipboard
+//= require evaluation
 
 //= require chartkick
 //= require Chart.bundle

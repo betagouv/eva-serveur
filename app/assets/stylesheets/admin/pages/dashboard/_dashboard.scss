@@ -26,7 +26,7 @@
       }
 
       > a {
-        @include bouton;
+        @include bouton-arrondi;
         display: inline-block;
       }
     }
@@ -115,7 +115,7 @@
             font-size: 0.875rem;
           }
           .action {
-            @include bouton;
+            @include bouton-arrondi;
             display: inline-block;
             @include texte-xs;
             padding: 0.438rem 0.75rem;

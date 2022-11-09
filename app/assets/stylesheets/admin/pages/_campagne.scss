@@ -207,7 +207,7 @@
       margin-bottom: 0;
     }
     .bouton--annuler a {
-      @include bouton;
+      @include bouton-arrondi;
       min-width: 6.563rem;
       text-align: center;
       margin-right: 0;

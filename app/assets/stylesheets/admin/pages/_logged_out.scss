@@ -242,7 +242,7 @@ body.logged_out {
       margin-top: 2rem;
     }
     .creer-structure {
-      @include bouton;
+      @include bouton-arrondi;
       color: $eva_dark;
       background-color: $couleur-warning;
       border: none;

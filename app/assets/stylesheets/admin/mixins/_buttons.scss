@@ -1,13 +1,19 @@
+// bouton carré
 @mixin bouton() {
+  &, &:link, &:visited {
+    text-decoration: none;
+  }
+  cursor: pointer;
+  box-shadow: none;
+
   padding: 0 1rem;
   font-size: 0.875rem;
-  text-decoration: none;
-  border-radius: 2.875rem;
   line-height: 1.875rem;
+
+  border-radius: .5rem;
   color: $eva_light;
   border: 1px solid $eva_main_blue;
   background-color: $eva_main_blue;
-  box-shadow: none;
   &:hover {
     background-color: #fff;
     border: 1px solid $eva_main_blue;
@@ -15,6 +21,12 @@
     box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
   }
 }
+
+@mixin bouton-arrondi() {
+  @include bouton();
+  border-radius: 2.875rem;
+}
+
 @mixin bouton-carte($background-color, $color:$eva_light) {
   background-color: $background-color;
   display: inline-flex;
@@ -28,3 +40,4 @@
   box-sizing: border-box;
   line-height: 1rem;
 }
+

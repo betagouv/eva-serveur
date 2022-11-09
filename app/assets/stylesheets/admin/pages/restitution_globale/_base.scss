@@ -309,10 +309,9 @@
 
       &-cta {
         .action {
-          @include bouton-arrondi;
+          @include bouton;
           white-space: nowrap;
           padding: .25rem .75rem;
-          border-radius: .25rem;
         }
       }
     }

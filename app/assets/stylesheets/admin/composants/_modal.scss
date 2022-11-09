@@ -24,8 +24,7 @@
         justify-content: flex-end;
   
         .bouton {
-          @include texte-xs;
-          margin-right: 0.5rem;
+          margin-right: .5rem;
   
           &:last-child {
             margin-right: 0;

@@ -11,24 +11,24 @@
   <% end %>
 </div>
 
-<% if current_compte.anlci? %>
-  <p class="statistiques__description"><%= t('.description.repartition_evaluations') %></p>
-  <div class="panel">
-    <% evaluations = statistique.repartition_evaluations %>
-    <% if evaluations.present? %>
-      <%= pie_chart evaluations, library: {
-        plugins: {
-          legend: {
-            position: 'right',
-            align: 'start',
-          }
+<p class="statistiques__description"><%= t('.description.repartition_evaluations') %></p>
+<div class="panel">
+  <% evaluations = statistique.repartition_evaluations %>
+  <% if evaluations.present? %>
+    <%= pie_chart evaluations, library: {
+      plugins: {
+        legend: {
+          position: 'right',
+          align: 'start',
         }
-      } %>
-    <% else %>
-      Pas de diagnostic à afficher pour le moment
-    <% end %>
-  </div>
+      }
+    } %>
+  <% else %>
+    Pas de diagnostic à afficher pour le moment
+  <% end %>
+</div>
 
+<% if current_compte.anlci? %>
   <p class="statistiques__description"><%= t('.description.correlation_donnees_illettrisme') %></p>
   <div class="panel">
     <% Evaluation::SYNTHESES.each do |synthese| %>

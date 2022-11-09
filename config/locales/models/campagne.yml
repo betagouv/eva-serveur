@@ -21,6 +21,8 @@ fr:
             code:
               invalid: Majuscules et chiffres uniquement
   formtastic:
+    labels:
+      libelle: Libellé
     actions:
       campagne:
         create: Créer la campagne

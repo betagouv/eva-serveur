@@ -193,7 +193,12 @@
         flex: 1;
       }
     }
-  }
+
+    .libelle-suite {
+      width: 30%;
+      margin-top: -1rem;
+    }
+}
 
 //ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
 

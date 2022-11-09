@@ -3,23 +3,25 @@ fr:
     campagnes:
       form:
         explication_campagne:  |
-          **Une campagne eva est une sélection d'exercices, de jeux, de questionnaires, formant un programme d'évaluation commun à plusieurs personnes.**
+          **Une campagne eva est une sélection d'activités, de jeux, de questionnaires, formant un programme d'évaluation commun à plusieurs personnes.**
 
-          Au sein d'une campagne, sont ainsi regroupées plusieurs évaluations en fonction du type de programme, du public cible, du dispositif d'accompagnement, etc. (ex. : "Pré-positionnement 2022" ; "CEJ Sept. 2022" ; "Services civiques 1er trimestre").
+          Au sein d'une campagne, plusieurs évaluations peuvent être regroupées par type de programme, par public cible, par dispositif d'accompagnement, etc.<br>(ex. : "Pré-positionnement 2022" ; "CEJ Sept. 2023" ; "Services civiques 1er trimestre").
 
           Les bénéficiaires auront besoin du code campagne généré automatiquement pour démarrer leur évaluation.
 
 
         titre_libelle: Libellé de la campagne
+        libelle_suite: CEJ (parcours complet), Promo 16-18 janvier 2022
         choix_programme: Choix du programme
         explication_choix_programme: |
-          Eva propose plusieurs « parcours » d’évaluation, constitués de jeux sérieux ou d’exercices pour évaluer les compétences. Veuillez choisir un ou plusieurs parcours parmi les propositions suivantes en fonction du type d’évaluation que vous souhaitez proposer et des compétences à évaluer.
+          Des parcours ludiques et rapides pour disposer d’une vue d’ensemble et valoriser les compétences maîtrisées. À proposer en début de parcours d’accompagnement.<br>N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
+
         pre_positionnement: Pré-positionnement
         explication_pre_positionnement: |
-          Des parcours ludiques et rapides pour une première évaluation et une valorisation des compétences maîtrisées. À proposer en début de parcours d’accompagnement.
-        evaluation_avancee: Évaluation avancée
+          Des parcours adaptatifs pour un bilan approfondi de la maîtrise des compétences de base.<br>À proposer lors du positionnement ou en début de formation.<br>N. B. : la restitution propose un détail des items réussis ou échoués.
+        evaluation_avancee: Positionnement (parcours Evacob)
         explication_evaluation_avancee: |
-          Des parcours adaptatifs pour un bilan complet de la maîtrise des compétences de base. À proposer lors du positionnement ou en début de formation.
+          Des parcours adaptatifs pour un bilan approfondi de la maîtrise des compétences de base.<br>À proposer lors du positionnement ou en début de formation.<br>N. B. : la restitution propose un détail des items réussis ou échoués.
         personnalisation: Personnalisation
         explication_personnalisation: |
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.

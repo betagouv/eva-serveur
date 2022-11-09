@@ -24,6 +24,7 @@ form fieldset.actions li.cancel a {
   font-size: .7rem;
   margin-right: 0;
   color: $eva_main_blue;
+  border-color: $eva_main_blue;
   background-color: #fff;
 }
 form.filter_form a.clear_filters_btn:not(.disabled),
@@ -38,26 +39,15 @@ button:not(.disabled):hover {
   text-shadow: none;
   font-weight: normal;
   box-shadow: none;
-  border: 0;
   background-image: none;
   background-color: none;
 }
 
-@mixin bouton-base() {
-  &, &:link, &:visited {
-    text-decoration: none;
-  }
-  border-radius: .5rem;
-  border: 1px solid transparent;
-  padding: .5rem;
-  font-size: .75rem;
-  cursor: pointer;
-}
-
 .bouton {
-  @include bouton-base();
+  @include bouton();
 
   &.bouton-light {
+    border-color: $eva_light;
     background-color: $eva_light;
     color: $eva_dark_blue_grey;
   }
@@ -69,12 +59,11 @@ button:not(.disabled):hover {
   }
 
   &.bouton-principal {
-    @include bouton-carte($eva_main_blue);
+    @include bouton();
   }
 
   &.bouton-arrondi {
-    @include bouton-arrondi;
-    padding: 0.5rem 1.5rem;
+    @include bouton-arrondi();
   }
 
   &.bouton-retour {

@@ -2,6 +2,6 @@
   @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
   cursor: pointer;
   &:not(.disabled):hover {
-    background-color: $couleur-legere-accent-validation;
+    background-color: #fff;
   }
 }

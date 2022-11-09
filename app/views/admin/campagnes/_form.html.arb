@@ -16,6 +16,7 @@ div class: 'nouvelle-campagne' do
         div class: 'panel' do
           f.inputs do
             f.input :libelle
+            para t('.libelle_suite'), class: 'libelle-suite'
           end
         end
 

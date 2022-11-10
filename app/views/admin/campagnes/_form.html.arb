@@ -16,18 +16,20 @@ div class: 'nouvelle-campagne' do
         div class: 'panel' do
           f.inputs do
             f.input :libelle
-            para t('.libelle_suite'), class: 'libelle-suite'
           end
         end
 
         if resource.new_record?
           h2 t('.choix_programme')
           div class: 'panel' do
-            para t('.explication_choix_programme'), class: 'description description--secondaire m-0'
+            div class: 'description description--secondaire m-0' do
+              md t('.explication_choix_programme')
+            end
 
             h2 t('.pre_positionnement'), class: 'titre-categorie'
-            para t('.explication_pre_positionnement'),
-                 class: 'description description--secondaire m-0'
+            div class: 'description description--secondaire m-0' do
+              md t('.explication_pre_positionnement')
+            end
             f.inputs class: 'input-choix input-choix-option-parcours_type' do
               collection = collection_parcours_type(parcours_type.pre_positionnement)
               f.input :parcours_type, as: :radio,
@@ -38,8 +40,9 @@ div class: 'nouvelle-campagne' do
 
             if parcours_type.evaluation_avancee.present?
               h2 t('.evaluation_avancee'), class: 'titre-categorie'
-              para t('.explication_evaluation_avancee'),
-                   class: 'description description--secondaire m-0'
+              div class: 'description description--secondaire m-0' do
+                md t('.explication_evaluation_avancee')
+              end
               f.inputs class: 'input-choix input-choix-option-parcours_type' do
                 collection = collection_parcours_type(parcours_type.evaluation_avancee)
                 f.input :parcours_type, as: :radio,

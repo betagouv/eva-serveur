@@ -29,7 +29,7 @@ fr:
         update: Modifier la campagne
     placeholders:
       campagne:
-        libelle: ML Caraces, PE Marita, Garantie Jeunes
+        libelle: CEJ (parcours complet), Promo 16-18 janvier 2022
     hints:
       campagne:
         code: Laissez vide pour générer un code aléatoire

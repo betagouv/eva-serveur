@@ -2,20 +2,20 @@ fr:
   components:
     input_option_personnalisation:
       plan_de_la_ville:
-        nom: Situation Plan de la ville
+        nom: Plan de la ville - Prise en main
         duree_moyenne: 5mn
         description: |
-          Ce module permet d’évaluer la capacité du candidat à utiliser l’outil informatique. Les exercices évaluent l’utilisation d’une interface de site internet, d’une souris ou d’un clavier.
+          Ce module permet, en amont des évaluations, de vérifier la capacité des bénéficiaires à utiliser l’outil informatique (ordinateur ou tablette), en particulier la manipulation du clavier, de la souris et de l’écran tactile.
       bienvenue:
-        nom: Situation Bienvenue
+        nom: Bienvenue - Auto-positionnement
         duree_moyenne: 6mn
         description: |
-          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences et de récolter des informations personnelles qui peuvent avoir impacté les résultats à la passation (troubles dys, problèmes de lecture sur les appareils numériques, troubles de la concentration, de l'audition, de la vue etc.).
+          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences, et de récolter des informations personnelles qui peuvent impacter les résultats de l’évaluation (troubles visuels ou auditifs, troubles dys, etc.)
       livraison:
-        nom: Exercice d’expression écrite
+        nom: Production écrite
         duree_moyenne: 6mn
         description: |
-          Cette option du module Livraison demande aux bénéficiaires de rédiger un court texte afin de se faire une idée de leur niveau en expression écrite.
+          Ce module propose aux bénéficiaires de décrire brièvement à l’écrit une scène quotidienne afin de permettre aux accompagnants d’évaluer leur niveau en expression écrite.
     banniere_confirmation_email:
       renvoyer_email: |
           Renvoyer l’email de confirmation

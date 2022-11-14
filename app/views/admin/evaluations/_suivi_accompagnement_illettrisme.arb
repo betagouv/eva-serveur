@@ -2,10 +2,10 @@
 
 div class: 'row m-0' do
   div class: 'container card__banner card__banner--illettrisme d-flex' do
-    div(class: 'col-2 d-flex align-items-center justify-content-center') do
-      svg_tag_base64 'formation_icone.svg', class: 'banner__icone'
+    div(class: 'd-flex align-items-center justify-content-center') do
+      svg_tag_base64 'formation_icone.svg', class: 'card__banner__icone'
     end
-    div class: 'col-6' do
+    div do
       div md t('illettrisme_potentiel.message', scope: scope)
       div class: 'd-flex justify-content-center text-primary', 'data-reponse': nil do
         class_cache = resource.mise_en_action_effectuee == true ? '' : 'hidden'

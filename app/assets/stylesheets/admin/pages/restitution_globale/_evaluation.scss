@@ -50,7 +50,7 @@
   }
 
   .card__banner {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     &--alert {
       box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
     }
@@ -68,7 +68,7 @@
     }
 
     &__icone {
-      margin-left: -1.5rem;
+      margin-right: 1.5rem;
     }
   }
 }

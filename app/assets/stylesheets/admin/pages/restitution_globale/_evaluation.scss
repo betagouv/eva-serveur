@@ -10,6 +10,10 @@
   @import "../../../bootstrap_grid";
   font-size: 0.875rem;
 
+  .card {
+    max-width: 37.5rem;
+  }
+
   .titre,
   .sous-titre {
     @include titre-carte;
@@ -58,8 +62,21 @@
     &--illettrisme {
       border-radius: 0 0 8px 8px;
       border: 2px solid $eva_red;
-      h4 {
+      h5 {
         color: $eva_red;
+      }
+      .card__banner__icone {
+        fill: $eva_red;
+      }
+
+      &-avec-reponse {
+        border: 2px solid $eva_main_blue;
+        h5 {
+          color: $eva_dark;
+        }
+        .card__banner__icone {
+          fill: $eva_bluegrey;
+        }
       }
 
       .actions {

@@ -162,7 +162,7 @@ fr:
         illettrisme_potentiel:
           action: Signaler une difficulté
           message: |
-            #### Cette personne semble avoir besoin de consolider ses compétences de base.
+            ##### Cette personne semble avoir besoin de consolider ses compétences de base.
 
             D'après nos enquêtes, seulement **25% des personnes en illettrisme potentiel réussissent à entrer en formation.**
 

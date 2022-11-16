@@ -19,39 +19,54 @@ div class: 'nouvelle-campagne' do
           end
         end
 
+        h2 'Programme'
+        div class: 'panel' do
+          f.inputs class: 'input-choix-type-programme' do
+            f.input :types_programme,
+                    as: :radio,
+                    collection: collection_types_programme,
+                    label: false
+          end
+        end
+
         if resource.new_record?
-          h2 t('.choix_programme')
-          div class: 'panel' do
-            div class: 'description description--secondaire m-0' do
-              md t('.explication_choix_programme')
-            end
-
-            h2 t('.pre_positionnement'), class: 'titre-categorie'
-            div class: 'description description--secondaire m-0' do
-              md t('.explication_pre_positionnement')
-            end
-            f.inputs class: 'input-choix input-choix-option-parcours_type' do
-              collection = collection_parcours_type(parcours_type.pre_positionnement)
-              f.input :parcours_type, as: :radio,
-                                      collection: collection,
-                                      required: true,
-                                      label: false
-            end
-
-            if parcours_type.evaluation_avancee.present?
-              h2 t('.evaluation_avancee'), class: 'titre-categorie'
+          div id: 'zone-choix-programme', class: f.object.parcours_type_id.present? ? '' : 'hidden' do
+            h2 t('.choix_programme')
+            div class: 'panel' do
               div class: 'description description--secondaire m-0' do
-                md t('.explication_evaluation_avancee')
+                md t('.explication_choix_programme')
               end
-              f.inputs class: 'input-choix input-choix-option-parcours_type' do
-                collection = collection_parcours_type(parcours_type.evaluation_avancee)
-                f.input :parcours_type, as: :radio,
-                                        collection: collection,
-                                        required: true,
-                                        label: false
+
+              div class: 'pre-positionnement hidden' do
+                h2 t('.pre_positionnement'), class: 'titre-categorie'
+                div class: 'description description--secondaire m-0' do
+                  md t('.explication_pre_positionnement')
+                end
+                f.inputs class: 'input-choix input-choix-option-parcours_type' do
+                  collection = collection_parcours_type(parcours_type.pre_positionnement)
+                  f.input :parcours_type, as: :radio,
+                                          collection: collection,
+                                          required: true,
+                                          label: false
+                end
+              end
+
+              div class: 'evaluation-avancee hidden' do
+                h2 t('.evaluation_avancee'), class: 'titre-categorie'
+                div class: 'description description--secondaire m-0' do
+                  md t('.explication_evaluation_avancee')
+                end
+                f.inputs class: 'input-choix input-choix-option-parcours_type' do
+                  collection = collection_parcours_type(parcours_type.evaluation_avancee)
+                  f.input :parcours_type, as: :radio,
+                                          collection: collection,
+                                          required: true,
+                                          label: false
+                end
               end
             end
           end
+
           if resource.new_record?
             div id: 'zone-de-personnalisation',
                 class: f.object.parcours_type_id.present? ? '' : 'hidden' do

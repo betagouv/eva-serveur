@@ -8,9 +8,13 @@ ActiveAdmin.register Partie do
 
   config.sort_order = 'created_at_desc'
 
-  scope :all, default: true
-  scope(:terminees) { |scope| scope.where(session_id: session_ids_des_evenements_fin) }
-  scope(:non_terminees) { |scope| scope.where.not(session_id: session_ids_des_evenements_fin) }
+  scope :all, default: true, show_count: false
+  scope(:terminees, show_count: false) do |scope|
+    scope.where(session_id: session_ids_des_evenements_fin)
+  end
+  scope(:non_terminees, show_count: false) do |scope|
+    scope.where.not(session_id: session_ids_des_evenements_fin)
+  end
 
   filter :evaluation_id,
          as: :search_select_filter,
@@ -23,7 +27,7 @@ ActiveAdmin.register Partie do
   filter :created_at
   filter :updated_at
 
-  index do
+  index pagination_total: false do
     column :evaluation
     column :metriques
     column :created_at

@@ -5,6 +5,8 @@ ActiveAdmin.register Situation do
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id
 
+  includes :questionnaire, :questionnaire_entrainement
+
   form do |f|
     f.semantic_errors
     inputs do

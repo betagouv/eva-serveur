@@ -1,24 +1,51 @@
 <script>
-$(document).ready(function () {
-  $(".input-choix-option-parcours_type").click(function (evenement) {
-    if (evenement.target.id) {
-      $("#zone-de-personnalisation").show();
+function affichePrePositionnement() {
+  $('.evaluation-avancee').hide();
+  $('.pre-positionnement').show();
+}
+
+function afficheEvaluationAvancee() {
+  $('.pre-positionnement').hide();
+  $('.evaluation-avancee').show();
+}
+
+function reinitialiseSelection() {
+  $(".input-choix-option-personnalisation input").prop("checked", false );
+}
+
+function selectionne(choix, zoneAAfficher ) {
+  $(`.${choix}`).click(function (e) {
+    if (e.target.id) {
+      $(`#${zoneAAfficher}`).show();
       $('html, body').animate({
-        scrollTop: $("#zone-de-personnalisation").offset().top
+        scrollTop: $(`#${zoneAAfficher}`).offset().top
       }, 300);
-      const block_option_personnalisation_livraison = $("#campagne_options_personnalisation_livraison").parent();
-      switch (evenement.target.id) {
-      <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
-        case "campagne_parcours_type_id_<%= parcours_type.id%>":
-        <% if parcours_type.option_redaction?  %>
-          block_option_personnalisation_livraison.show();
-        <% else %>
-          block_option_personnalisation_livraison.hide();
-        <% end %>
+      const option_livraison = $("#campagne_options_personnalisation_livraison").parent();
+      switch (e.target.id) {
+        case "campagne_types_programme_evaluation_avancee":
+          reinitialiseSelection()
+          afficheEvaluationAvancee()
           break;
-      <% end %>
+        case "campagne_types_programme_pre_positionnement":
+          reinitialiseSelection()
+          affichePrePositionnement()
+          break;
+        <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
+        case "campagne_parcours_type_id_<%= parcours_type.id%>":
+          <% if parcours_type.option_redaction?  %>
+            option_livraison.show();
+          <% else %>
+            option_livraison.hide();
+          <% end %>
+            break;
+        <% end %>
       }
     }
-  });
+  })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  selectionne('input-choix-type-programme', 'zone-choix-parcours')
+  selectionne('input-choix-option-parcours-type', 'zone-de-personnalisation')
 });
 </script>

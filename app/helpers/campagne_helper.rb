@@ -16,6 +16,12 @@ module CampagneHelper
     end
   end
 
+  def collection_types_programme
+    Campagne::TYPES_PROGRAMME.map do |type_programme|
+      [label_type_programme(type_programme), type_programme]
+    end
+  end
+
   def label_parcours_type(parcours_type)
     render partial: 'components/input_choix_parcours',
            locals: { parcours_type: parcours_type }

@@ -6,6 +6,7 @@ class Campagne < ApplicationRecord
   SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
   SITUATIONS_AVEC_REPERAGE_ILLETTRISME = %w[maintenance livraison objets_trouves].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
+  TYPES_PROGRAMME = %i[pre_positionnement evaluation_avancee].freeze
 
   acts_as_paranoid
 
@@ -30,7 +31,7 @@ class Campagne < ApplicationRecord
 
   before_validation :genere_code_unique
   before_create :initialise_situations, if: :parcours_type_id
-  attr_accessor :options_personnalisation
+  attr_accessor :options_personnalisation, :types_programme
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)

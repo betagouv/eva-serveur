@@ -55,7 +55,7 @@ class Ability # rubocop:disable Metrics/ClassLength
     cannot %i[update create], Evenement
 
     @session_ids ||= Partie.where('comptes.structure_id' => compte.structure_id)
-                           .joins(evaluation: { campagne: :compte }).pluck(:session_id)
+                           .joins(evaluation: { campagne: :compte }).select(:session_id)
     can :read, Evenement, Evenement.where(session_id: @session_ids) do |e|
       @session_ids.include?(e.session_id)
     end

@@ -1,0 +1,114 @@
+.input-choix {
+  /* reset style */
+  li.radio {
+    fieldset ol {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    &.error {
+      .choix-item {
+        border-color: $eva_red;
+      }
+    }
+  }
+  /* fin reset style */
+
+  input { display: none; }
+
+  > ol > li {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .choices-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .choice {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+
+    label {
+      padding: 0;
+    }
+
+    input + .choix-item {
+      &:hover {
+        box-shadow: 0 0 0 2px $eva_main_blue;
+        border-color: transparent;
+      }
+    }
+    input:not(:checked) + .choix-item {
+      &:hover {
+        .choix-item__titre {
+          color: $eva_main_blue;
+        }
+      }
+    }
+  }
+
+  .choix-item {
+    height: 100%;
+    padding: 1rem;
+    @include carte-avec-bordure();
+    cursor: pointer;
+    transition: background-color,border-color,box-shadow, color .2s;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+
+    &__titre {
+      @include titre();
+      font-size: .875rem;
+      line-height: 1.125rem;
+      color: $couleur-texte;
+      margin-bottom: .625rem;
+    }
+    &__duree, &__description {
+      @include texte-xs();
+      color: $couleur-texte;
+      font-weight: normal;
+      margin: 0;
+    }
+    &__duree {
+      font-style: italic;
+    }
+  }
+
+  input:checked + .choix-item {
+    border-color: $couleur-texte;
+    background: $eva_main_blue;
+
+    .choix-item__titre {
+      color: $eva_light;
+      font-size: .875rem;
+    }
+
+    .choix-item__icone {
+      .icone-loupe {
+        path, rect {
+          fill: $eva_light;
+        }
+      }
+      .icone-pin {
+        path {
+          stroke: $eva_light;
+        }
+      }
+    }
+
+    &, div, span, p, ul li {
+      color: $eva_light;
+    }
+  }
+
+  .inline-errors {
+    width: 100%;
+    margin: 1rem auto;
+    text-align: center;
+  }
+}

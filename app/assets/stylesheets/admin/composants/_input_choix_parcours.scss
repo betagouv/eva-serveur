@@ -1,134 +1,3 @@
-.input-choix {
-  /* reset style */
-  li.radio {
-    fieldset ol {
-      padding: 0;
-      margin: 0;
-      width: 100%;
-    }
-    &.error {
-      .choix-item {
-        border-color: $eva_red;
-      }
-    }
-  }
-  /* fin reset style */
-
-  input { display: none; }
-
-  > ol > li {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .choices-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .choix-item {
-    height: 100%;
-    padding: 1rem;
-    @include carte-avec-bordure();
-    cursor: pointer;
-    transition: background-color,border-color,box-shadow, color .2s;
-    user-select: none;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .choice {
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-
-    label {
-      padding: 0;
-    }
-
-    input + .choix-item {
-      &:hover {
-        box-shadow: 0 0 0 2px $eva_main_blue;
-        border-color: transparent;
-        .choix-titre {
-          color: $eva_main_blue;
-          font-size: .875rem;
-        }
-      }
-    }
-
-    .choix {
-      &-option-personnalisation {
-        padding-right: 3.25rem;
-
-        &-duree-moyenne, &-description {
-          color: $couleur-texte;
-          font-size: .75rem;
-          line-height: .875rem;
-          font-weight: normal;
-          font-style: italic;
-        }
-      }
-
-      &-titre {
-        @include titre();
-        font-size: .875rem;
-        color: $couleur-texte;
-        margin-bottom: .625rem;
-      }
-
-      &-parcours-description, &-parcours-duree-moyenne {
-        color: $couleur-texte;
-        font-size: .75rem;
-        line-height: .875rem;
-        margin: 0;
-      }
-
-      &-parcours-duree-moyenne {
-        font-style: italic;
-      }
-
-      &-parcours-description {
-        flex: 1;
-        margin-bottom: 1rem;
-        ul {
-          padding-left: 1.5em;
-          list-style-type: disc;
-        }
-      }
-    }
-
-    input:checked + .choix-item {
-      border-color: $couleur-texte;
-      background: $eva_main_blue;
-
-      .choix-titre {
-        color: $eva_dark;
-        font-size: .875rem;
-      }
-
-      &, div, span, p, ul li {
-        color: $eva_light;
-      }
-    }
-
-  }
-
-  .inline-errors {
-    width: 100%;
-    margin: 1rem auto;
-    text-align: center;
-  }
-
-}
-
-.input-choix-parcours {
-  input + .choix-item {
-    min-height: 250px;
-  }
-}
-
 .input-choix-option-personnalisation {
   .choices-group, .choice {
     width: 100%;
@@ -148,6 +17,9 @@
     padding-right: 2.75rem;
     display: flex;
     flex-direction: row;
+    &__container {
+      padding-right: 3.25rem;
+    }
   }
 
   input:checked + .choix-item .checkbox-option-personnalisation img {
@@ -168,5 +40,17 @@
 
   img {
     display: none;
+  }
+}
+
+.input-choix-parcours {
+  .choix-item__description {
+    flex: 1;
+    margin-bottom: 1rem;
+
+    ul {
+      padding-left: 1.5em;
+      list-style-type: disc;
+    }
   }
 }

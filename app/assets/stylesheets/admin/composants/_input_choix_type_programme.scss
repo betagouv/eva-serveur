@@ -1,0 +1,13 @@
+.input-choix-type-programme {
+  .choices-group {
+    flex-wrap: nowrap;
+    gap: .5rem;
+    .choix-item {
+      align-items: center;
+      gap: .5rem;
+    }
+    .choix-item__description {
+      text-align: center;
+    }
+  }
+}

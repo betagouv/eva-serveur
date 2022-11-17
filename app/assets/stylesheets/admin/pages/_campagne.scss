@@ -164,25 +164,20 @@
   }
 
   .nouvelle-campagne {
-    .titre-categorie {
-      font-size: 1.25rem;
-      line-height: 1.625rem;
-      margin-bottom: 0.5rem;
-      margin-top: 2rem;
+    h3 {
+      @include h3();
+      margin-bottom: 1rem;
     }
 
-    .description {
-      font-size: 0.869rem;
+    .panel__description {
       font-style: italic;
-      padding: 1.31rem 1.5rem;
-      &--secondaire {
-        padding: 0;
-        margin-bottom: .5rem;
-        color: $eva_dark_blue_grey;
-      }
       p:last-child {
         margin-bottom: 0;
       }
+    }
+    .description--secondaire {
+      margin-bottom: 1rem;
+      color: $eva_dark_blue_grey;
     }
 
     fieldset.inputs {

@@ -32,6 +32,11 @@ module CampagneHelper
            locals: { situation: situation }
   end
 
+  def label_type_programme(programme)
+    render partial: 'components/input_type_programme',
+           locals: { programme: programme }
+  end
+
   def url_campagne(code)
     Addressable::URI.escape("#{URL_CLIENT}?code=#{code}")
   end

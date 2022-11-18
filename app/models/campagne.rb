@@ -16,6 +16,7 @@ class Campagne < ApplicationRecord
   belongs_to :compte
   belongs_to :parcours_type, optional: true
 
+  validates :type_programme, presence: true, on: :create
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
   validates :code, presence: true, uniqueness: { case_sensitive: false },
@@ -30,7 +31,7 @@ class Campagne < ApplicationRecord
 
   before_validation :genere_code_unique
   before_create :initialise_situations, if: :parcours_type_id
-  attr_accessor :options_personnalisation, :types_programme
+  attr_accessor :options_personnalisation, :type_programme
 
   scope :de_la_structure, lambda { |structure|
     joins(:compte).where('comptes.structure_id' => structure)

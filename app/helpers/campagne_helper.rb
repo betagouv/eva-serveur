@@ -17,7 +17,7 @@ module CampagneHelper
   end
 
   def collection_types_programme
-    Campagne::TYPES_PROGRAMME.map do |type_programme|
+    ParcoursType::TYPES_DE_PROGRAMME.map do |type_programme|
       [label_type_programme(type_programme), type_programme]
     end
   end

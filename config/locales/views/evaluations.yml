@@ -172,7 +172,7 @@ fr:
           Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?
         aide_cta: Signaler une difficulté
       parties:
-        titre: Situations jouées
+        titre: Administration
         rapport: Rapport
         evenements: Événements
       show:
@@ -425,7 +425,7 @@ fr:
               **Nous vous conseillons de renforcer vos compétences en français de votre propre initiative ou en participant à une formation que votre conseiller.e sera à même de vous proposer.**
           profil4_plus:
             description:  |
-              Votre score indique que vous maîtrisez tout à fait le français, bravo ! 
+              Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
           profil4_plus_plus:
             description:  |
@@ -452,7 +452,7 @@ fr:
               **Nous vous conseillons de renforcer vos compétences en mathématiques en vous exerçant dans la vie quotidienne ou en participant à une formation que votre conseiller sera à même de vous proposer.**
           profil4_plus:
             description: |
-              Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo ! 
+              Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
           profil4_plus_plus:
             description: |

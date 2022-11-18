@@ -2,6 +2,8 @@
 
 if can?(:manage, Compte)
   panel t('.titre') do
+    render 'informations_complementaires'
+    hr
     form method: :get do
       table_for parties do
         column :selection do |partie|

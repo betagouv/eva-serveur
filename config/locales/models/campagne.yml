@@ -17,7 +17,9 @@ fr:
         campagne:
           attributes:
             parcours_type:
-              blank: 'Vous devez choisir un parcours.'
+              blank: 'Vous devez choisir un programme.'
+            type_programme:
+              blank: 'Vous devez choisir un type de programme.'
             code:
               invalid: Majuscules et chiffres uniquement
   formtastic:

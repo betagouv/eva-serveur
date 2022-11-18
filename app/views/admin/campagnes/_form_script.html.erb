@@ -4,48 +4,55 @@ function affichePrePositionnement() {
   $('.pre-positionnement').show();
 }
 
-function afficheEvaluationAvancee() {
+function affichePositionnement() {
   $('.pre-positionnement').hide();
   $('.positionnement').show();
 }
 
-function reinitialiseSelection() {
+function reinitialiseSelection(inputClass) {
   $(".input-choix-option-personnalisation input").prop("checked", false );
+  if (inputClass == 'input-choix-type-programme') {
+    $(".input-choix-option-parcours-type input").prop("checked", false );
+    $('#zone-de-personnalisation').hide();
+  }
 }
 
-function selectionne(choix, zoneAAfficher ) {
+function afficheZone(choix_selection, zoneAAfficher) {
+  $(`#${zoneAAfficher}`).show();
+  const option_livraison = $("#campagne_options_personnalisation_livraison").parent();
+  switch (choix_selection) {
+    case "campagne_type_programme_positionnement":
+      affichePositionnement()
+      break;
+    case "campagne_type_programme_pre_positionnement":
+      affichePrePositionnement()
+      break;
+    <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
+    case "campagne_parcours_type_id_<%= parcours_type.id%>":
+      <% if parcours_type.option_redaction? %>
+        option_livraison.show();
+      <% else %>
+        option_livraison.hide();
+      <% end %>
+        break;
+    <% end %>
+  }
+}
+
+function enregistreSelectionListener(choix, zoneAAfficher ) {
   $(`.${choix}`).click(function (e) {
     if (e.target.id) {
-      $(`#${zoneAAfficher}`).show();
+      reinitialiseSelection(choix);
+      afficheZone(e.target.id, zoneAAfficher)
       $('html, body').animate({
         scrollTop: $(`#${zoneAAfficher}`).offset().top
       }, 300);
-      const option_livraison = $("#campagne_options_personnalisation_livraison").parent();
-      switch (e.target.id) {
-        case "campagne_types_programme_positionnement":
-          reinitialiseSelection()
-          afficheEvaluationAvancee()
-          break;
-        case "campagne_types_programme_pre_positionnement":
-          reinitialiseSelection()
-          affichePrePositionnement()
-          break;
-        <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
-        case "campagne_parcours_type_id_<%= parcours_type.id%>":
-          <% if parcours_type.option_redaction?  %>
-            option_livraison.show();
-          <% else %>
-            option_livraison.hide();
-          <% end %>
-            break;
-        <% end %>
-      }
     }
   })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  selectionne('input-choix-type-programme', 'zone-choix-parcours')
-  selectionne('input-choix-option-parcours-type', 'zone-de-personnalisation')
+  enregistreSelectionListener('input-choix-type-programme', 'zone-choix-parcours')
+  enregistreSelectionListener('input-choix-option-parcours-type', 'zone-de-personnalisation')
 });
 </script>

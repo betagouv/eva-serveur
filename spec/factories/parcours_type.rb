@@ -5,18 +5,18 @@ FactoryBot.define do
     sequence(:libelle) { |n| "Parcours type ##{n}" }
     sequence(:nom_technique) { |n| "parcours_type_#{n}" }
     duree_moyenne { '1 heure' }
-    categorie { :pre_positionnement }
+    type_de_programme { :pre_positionnement }
 
     trait :complet do
       libelle { 'Parcours complet' }
       nom_technique { 'complet' }
-      categorie { :pre_positionnement }
+      type_de_programme { :pre_positionnement }
     end
 
     trait :evacob do
       libelle { 'Evacob' }
       nom_technique { 'evacob' }
-      categorie { :positionnement }
+      type_de_programme { :positionnement }
 
       before(:create) do |parcours_type|
         situation = create(:situation_cafe_de_la_place)
@@ -27,7 +27,7 @@ FactoryBot.define do
     trait :competences_de_base do
       libelle { 'Parcours compétences de base' }
       nom_technique { 'competences_de_base' }
-      categorie { :pre_positionnement }
+      type_de_programme { :pre_positionnement }
 
       before(:create) do |parcours_type|
         maintenance = create(:situation_maintenance)

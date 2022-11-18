@@ -9,8 +9,8 @@ fr:
         libelle: Libellé
         nom_technique: Nom technique
         duree_moyenne: Durée moyenne
-        categorie: Catégorie
-        categories:
+        type_de_programme: Type de programme
+        types_de_programme:
           pre_positionnement: Pré-positionnement
           positionnement: Positionnement
         created_at: créé le

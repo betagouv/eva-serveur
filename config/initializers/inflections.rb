@@ -23,6 +23,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'structure_administrative', 'structures_administratives'
   inflect.irregular 'partie', 'parties'
   inflect.irregular 'donnee_sociodemographique', 'donnees_sociodemographiques'
+  inflect.irregular 'type_de_programme', 'types_de_programme'
 end
 
 # These inflection rules are supported but not enabled by default:

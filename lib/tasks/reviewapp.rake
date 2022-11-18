@@ -34,10 +34,10 @@ namespace :reviewapp do
 
   desc 'initialise les données pour les applications de revues'
   task seed: :environment do
-    ParcoursType.update(categorie: 'pre_positionnement')
+    ParcoursType.update(type_de_programme: 'pre_positionnement')
     ParcoursType
       .find('fa096bb3-5488-402a-838a-521a244c02ca')
-      .update(categorie: 'positionnement')
+      .update(type_de_programme: 'positionnement')
 
     structure_eva = Structure.where(nom: 'eva').first
     cree_les_comptes structure_eva

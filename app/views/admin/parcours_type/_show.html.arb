@@ -5,9 +5,9 @@ panel 'Détails du parcours type' do
     row :libelle
     row :nom_technique
     row :duree_moyenne
-    row(:categorie) do
-      scope = 'activerecord.attributes.parcours_type.categories.'
-      parcours_type.categorie ? t("#{scope}#{parcours_type.categorie}") : nil
+    row(:type_de_programme) do
+      scope = 'activerecord.attributes.parcours_type.types_de_programme'
+      parcours_type.type_de_programme ? t(parcours_type.type_de_programme, scope: scope) : nil
     end
     row(:description) { md(parcours_type.description) }
     row :created_at

@@ -4,7 +4,7 @@ module Admin
   class ControleSynthesesRestitutionsController < ApplicationController
     def index
       @syntheses_pre_positionnement = syntheses_pre_positionnement
-      @syntheses_avancees = syntheses_avancees
+      @syntheses_positionnement = syntheses_positionnement
     end
 
     def syntheses_pre_positionnement
@@ -16,7 +16,7 @@ module Admin
       ]
     end
 
-    def syntheses_avancees
+    def syntheses_positionnement
       [[::Competence::NIVEAU_INDETERMINE, nil],
        [::Competence::PROFIL_ABERRANT, 'aberrant'],
        [::Competence::PROFIL_1, 'illettrisme_potentiel'],

@@ -53,9 +53,9 @@ div class: 'nouvelle-campagne' do
                 end
               end
 
-              div class: 'evaluation-avancee' do
+              div class: 'positionnement' do
                 f.inputs class: 'input-choix input-choix-option-parcours-type' do
-                  collection = collection_parcours_type(parcours_type.evaluation_avancee)
+                  collection = collection_parcours_type(parcours_type.positionnement)
                   f.input :parcours_type, as: :radio,
                                           collection: collection,
                                           required: true,

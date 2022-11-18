@@ -16,7 +16,7 @@ FactoryBot.define do
     trait :evacob do
       libelle { 'Evacob' }
       nom_technique { 'evacob' }
-      categorie { :evaluation_avancee }
+      categorie { :positionnement }
 
       before(:create) do |parcours_type|
         situation = create(:situation_cafe_de_la_place)

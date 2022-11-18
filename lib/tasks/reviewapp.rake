@@ -37,7 +37,7 @@ namespace :reviewapp do
     ParcoursType.update(categorie: 'pre_positionnement')
     ParcoursType
       .find('fa096bb3-5488-402a-838a-521a244c02ca')
-      .update(categorie: 'evaluation_avancee')
+      .update(categorie: 'positionnement')
 
     structure_eva = Structure.where(nom: 'eva').first
     cree_les_comptes structure_eva

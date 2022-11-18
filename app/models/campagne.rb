@@ -6,7 +6,7 @@ class Campagne < ApplicationRecord
   SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
   SITUATIONS_AVEC_REPERAGE_ILLETTRISME = %w[maintenance livraison objets_trouves].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
-  TYPES_PROGRAMME = %i[pre_positionnement evaluation_avancee].freeze
+  TYPES_PROGRAMME = %i[pre_positionnement positionnement].freeze
 
   acts_as_paranoid
 

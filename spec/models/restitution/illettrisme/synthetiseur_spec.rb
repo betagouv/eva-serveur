@@ -157,13 +157,13 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation avancées' do
-    let(:interpreteur_evaluation_avancee) { double }
+    let(:interpreteur_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_evaluation_avancee
+      Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_positionnement
     end
     describe '#synthese' do
       def synthese(profil)
-        allow(interpreteur_evaluation_avancee).to receive(:synthese).and_return(
+        allow(interpreteur_positionnement).to receive(:synthese).and_return(
           {
             niveau_litteratie: profil
           }

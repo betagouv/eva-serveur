@@ -13,7 +13,7 @@ fr:
         choix_parcours: Choix du programme
         choix_type_programme: Choix du type de programme
         explication_choix_programme: |
-          Eva propose plusieurs parcours d'évaluation, constitués de jeux sérieux ou d’activités pour évaluer les compétences. Veuillez choisir un ou plusieurs parcours parmi les propositions suivantes en fonction du type d’évaluation que vous souhaitez proposer et des compétences à tester.
+          Eva propose plusieurs parcours d'évaluation, constitués de jeux sérieux ou d’activités pour évaluer les compétences. Veuillez choisir un parcours parmi les propositions suivantes en fonction du type d’évaluation que vous souhaitez proposer et des compétences à tester.
         personnalisation: Personnalisation
         explication_personnalisation: |
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.

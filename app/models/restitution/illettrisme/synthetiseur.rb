@@ -5,11 +5,11 @@ module Restitution
     class Synthetiseur
       attr_reader :algo
 
-      def initialize(interpreteur_pre_positionement, interpreteur_evaluation_avancee)
-        @algo = if interpreteur_evaluation_avancee.present?
-                  SynthetiseurEvaluationAvancee.new(interpreteur_evaluation_avancee)
+      def initialize(interpreteur_pre_positionnement, interpreteur_positionnement)
+        @algo = if interpreteur_positionnement.present?
+                  SynthetiseurPositionnement.new(interpreteur_positionnement)
                 else
-                  SynthetiseurPrePositionnement.new(interpreteur_pre_positionement)
+                  SynthetiseurPrePositionnement.new(interpreteur_pre_positionnement)
                 end
       end
 
@@ -23,8 +23,8 @@ module Restitution
       end
 
       class SynthetiseurPrePositionnement
-        def initialize(interpreteur_pre_positionement)
-          @interpreteur = interpreteur_pre_positionement
+        def initialize(interpreteur_pre_positionnement)
+          @interpreteur = interpreteur_pre_positionnement
         end
 
         def socle_clea?
@@ -47,25 +47,25 @@ module Restitution
         end
       end
 
-      class SynthetiseurEvaluationAvancee
-        def initialize(interpreteur_evaluation_avancee)
-          @niveau_avance = interpreteur_evaluation_avancee.synthese[:niveau_litteratie]
+      class SynthetiseurPositionnement
+        def initialize(interpreteur_positionnement)
+          @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
         end
 
         def socle_clea?
-          @niveau_avance.in?(%i[profil4 profil_4h profil_4h_plus profil_4h_plus_plus])
+          @niveau_positionnement.in?(%i[profil4 profil_4h profil_4h_plus profil_4h_plus_plus])
         end
 
         def illettrisme_potentiel?
-          @niveau_avance.in?(%i[profil1 profil2])
+          @niveau_positionnement.in?(%i[profil1 profil2])
         end
 
         def aberrant?
-          @niveau_avance == :profil_aberrant
+          @niveau_positionnement == :profil_aberrant
         end
 
         def indeterminee?
-          @niveau_avance == :indetermine
+          @niveau_positionnement == :indetermine
         end
       end
     end

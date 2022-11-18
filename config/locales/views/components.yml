@@ -25,7 +25,7 @@ fr:
             À proposer en début de parcours d’accompagnement.
 
             N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
-        evaluation_avancee:
+        positionnement:
           libelle: Positionnement
           icone: loupe
           description: |

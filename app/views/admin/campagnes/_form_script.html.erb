@@ -1,12 +1,12 @@
 <script>
 function affichePrePositionnement() {
-  $('.evaluation-avancee').hide();
+  $('.positionnement').hide();
   $('.pre-positionnement').show();
 }
 
 function afficheEvaluationAvancee() {
   $('.pre-positionnement').hide();
-  $('.evaluation-avancee').show();
+  $('.positionnement').show();
 }
 
 function reinitialiseSelection() {
@@ -22,7 +22,7 @@ function selectionne(choix, zoneAAfficher ) {
       }, 300);
       const option_livraison = $("#campagne_options_personnalisation_livraison").parent();
       switch (e.target.id) {
-        case "campagne_types_programme_evaluation_avancee":
+        case "campagne_types_programme_positionnement":
           reinitialiseSelection()
           afficheEvaluationAvancee()
           break;

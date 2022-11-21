@@ -1,0 +1,21 @@
+.lien-retour {
+  @include texte-xs();
+
+  align-items: center;
+  display: flex;
+  border: none;
+  padding: 0;
+  padding-right: 1rem;
+
+  &, &:link, &:visited {
+    color: $eva_dark;
+    text-decoration: none;
+  }
+
+  &::before {
+    content: asset-data-url('icones/fleche_gauche.svg');
+    margin-right: .5rem;
+    // fix alignement vertical
+    line-height: 0px;
+  }
+}

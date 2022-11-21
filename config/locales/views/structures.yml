@@ -9,7 +9,7 @@ fr:
       aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
       structure_non_referencee: Vous ne trouvez pas votre structure ?
       placeholder_recherche: Code postal ou ville
-      bouton_retour: Se connecter
+      lien_retour: Se connecter
     structure:
       code_postal: 'Code postal : '
       rejoindre_structure: Rejoindre
@@ -48,4 +48,4 @@ fr:
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
       creer_structure: Valider la création de mon compte
-      bouton_retour: Rechercher ma structure
+      lien_retour: Rechercher ma structure

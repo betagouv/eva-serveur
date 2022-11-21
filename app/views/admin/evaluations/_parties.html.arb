@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 if can?(:manage, Compte)
-  panel t('.titre') do
+  panel t('.titre'), class: 'evaluation__administration' do
     render 'informations_complementaires'
     hr
     form method: :get do

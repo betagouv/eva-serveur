@@ -97,31 +97,22 @@ div class: 'evaluation__restitution-globale' do
   end
 
   if cafe_de_la_place
-    if pdf
-      div class: 'page page-lettrisme' do
-        render 'entete_page', restitution_globale: restitution_globale
+    div id: 'lettrisme', class: 'page page-lettrisme' do
+      render 'entete_page', restitution_globale: restitution_globale
 
-        div class: 'marges-page' do
-          h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: 'text-center mt-5 mb-4'
-
-          render partial: 'lettrisme',
-                 locals: {
-                   synthese: restitution_globale.synthese,
-                   pdf: pdf
-                 }
-        end
-
-        render 'pied_page'
+      if pdf
+        h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: 'text-center mt-5 mb-4'
+      else
+        h2 t('titre', scope: 'admin.restitutions.lettrisme'),
+           class: titre_avec_aide_illettrisme.to_s
       end
-    else
-      h2 t('titre', scope: 'admin.restitutions.lettrisme'),
-         class: titre_avec_aide_illettrisme.to_s, id: 'lettrisme'
 
       render partial: 'lettrisme',
              locals: {
                synthese: restitution_globale.synthese,
                pdf: pdf
              }
+      render 'pied_page'
     end
   end
 end

@@ -1,7 +1,7 @@
 .evaluation__restitution-globale {
   .sous-competence__container {
     padding: 10px 0px;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
     img {
       height: 4rem;
     }
@@ -11,15 +11,14 @@
   }
 }
 
-.carte-lettrisme {
-  margin-bottom: 1.5rem;
+#lettrisme {
   color: $eva-dark;
 
   .panel {
     margin-bottom: 0px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 3rem 3rem 1rem;
+    padding: 2rem 0;
     p {
       font-size: 0.875rem;
       margin-bottom: 0;

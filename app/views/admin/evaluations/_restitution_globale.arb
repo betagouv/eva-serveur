@@ -114,7 +114,8 @@ div class: 'evaluation__restitution-globale' do
         render 'pied_page'
       end
     else
-      h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: titre_avec_aide_illettrisme.to_s
+      h2 t('titre', scope: 'admin.restitutions.lettrisme'),
+         class: titre_avec_aide_illettrisme.to_s, id: 'lettrisme'
 
       render partial: 'lettrisme',
              locals: {

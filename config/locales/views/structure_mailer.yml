@@ -11,3 +11,19 @@ fr:
         Pour cela faites leur suivre ce message ou envoyez leur le lien d'inscription suivant :
 
         [%{url_inscription}](%{url_inscription})
+    relance_creation_campagne:
+      objet: Eva - Et si vous testiez les compétences avec des jeux ?
+      corps: |
+        ### Bonjour %{prenom},
+
+        Il y a quelques jours, vous avez rejoint la communauté des utilisateurs d'eva avec la structure %{structure}.
+
+        Nous sommes heureux de vous compter parmi ceux qui oeuvrent  pour favoriser l'insertion professionnelle tout en valorisant les compétences.
+
+        Votre prochaine étape consiste désormais à créer une première campagne.
+
+        Celle-ci vous permettra de sélectionner les activités et les jeux les plus pertinents pour votre public.
+
+        Cela ne prend que quelques secondes, puis vous pourrez tester par vous-même le programme que vous aurez choisi.
+      ps: |
+        PS : Si vous avez besoin d'aide, répondez directement à ce courriel et notre équipe reviendra vers vous très rapidement.

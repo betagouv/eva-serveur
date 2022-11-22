@@ -24,6 +24,7 @@ class Structure < ApplicationRecord
   end
 
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
+  after_create :programme_email_relance
 
   scope :joins_evaluations_et_groupe, lambda {
     joins('LEFT OUTER JOIN comptes ON structures.id = comptes.structure_id')
@@ -71,5 +72,11 @@ class Structure < ApplicationRecord
 
   def effectif
     Compte.where(structure: self).count
+  end
+
+  def programme_email_relance
+    RelanceStructureSansCampagneJob
+      .set(wait: 7.days)
+      .perform_later(id)
   end
 end

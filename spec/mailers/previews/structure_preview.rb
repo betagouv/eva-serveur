@@ -9,4 +9,12 @@ class StructurePreview < ActionMailer::Preview
 
     StructureMailer.with(structure: structure, compte: compte).nouvelle_structure
   end
+
+  def relance_creation_campagne
+    structure = StructureLocale.new id: SecureRandom.uuid, nom: 'Ma structure',
+                                    code_postal: '92100', type_structure: 'mission_locale'
+    compte_admin = Compte.new prenom: 'Jean', nom: 'Bon', email: 'compte_1@gmail.com',
+                              structure: structure, role: 'admin'
+    StructureMailer.with(compte_admin: compte_admin).relance_creation_campagne
+  end
 end

@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe Structure, type: :model do
+  ActiveJob::Base.queue_adapter = :test
+
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to validate_uniqueness_of(:nom).scoped_to(:code_postal).case_insensitive }
 
@@ -115,6 +117,13 @@ describe Structure, type: :model do
       it 'lui attribue la nouvelle région' do
         expect(structure.region).to eql('Normandie')
       end
+    end
+  end
+
+  describe 'à la création' do
+    it 'programme un mail de relance' do
+      expect { create :structure, :avec_admin }
+        .to have_enqueued_job(RelanceStructureSansCampagneJob).exactly(1)
     end
   end
 end

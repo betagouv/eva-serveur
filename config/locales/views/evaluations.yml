@@ -65,6 +65,8 @@ fr:
           nom: Profil parcours bas
         parcours_haut:
           nom: Profil parcours haut
+        niveau_litteratie:
+          nom: Profil de lettrisme
         niveau_anlci_litteratie:
           nom: Niveau ANLCI littératie
         efficience:

@@ -47,6 +47,7 @@ ActiveAdmin.register StructureLocale do
     end
     column :nombre_evaluations
     column :date_derniere_evaluation
+    column 'Date de création', &:created_at
   end
 
   xls do
@@ -59,6 +60,7 @@ ActiveAdmin.register StructureLocale do
     end
     column :nombre_evaluations
     column :date_derniere_evaluation
+    column 'Date de création', &:created_at
   end
 
   show do

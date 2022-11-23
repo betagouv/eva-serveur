@@ -43,27 +43,17 @@ div class: 'nouvelle-campagne' do
                 md t('.explication_choix_programme')
               end
 
-              pre_positionnement_cache = 'hidden' if f.object.type_programme == :positionnement.to_s
-
-              div class: "pre-positionnement #{pre_positionnement_cache}" do
-                f.inputs class: 'input-choix input-choix-option-parcours-type' do
-                  collection = collection_parcours_type(parcours_type.pre_positionnement)
-                  f.input :parcours_type, as: :radio,
-                                          collection: collection,
-                                          required: true,
-                                          label: false
-                end
-              end
-
-              positionnement_cache = 'hidden' if f.object.type_programme == :pre_positionnement.to_s
-
-              div class: "positionnement #{positionnement_cache}" do
-                f.inputs class: 'input-choix input-choix-option-parcours-type' do
-                  collection = collection_parcours_type(parcours_type.positionnement)
-                  f.input :parcours_type, as: :radio,
-                                          collection: collection,
-                                          required: true,
-                                          label: false
+              %w[pre_positionnement positionnement].each do |type_programme|
+                classes_type_programme = type_programme.gsub('_', '-')
+                classes_type_programme += ' hidden' if f.object.type_programme != type_programme
+                div class: classes_type_programme do
+                  f.inputs class: 'input-choix input-choix-option-parcours-type' do
+                    collection = collection_parcours_type(parcours_type.send(type_programme))
+                    f.input :parcours_type, as: :radio,
+                                            collection: collection,
+                                            required: true,
+                                            label: false
+                  end
                 end
               end
             end

@@ -58,7 +58,8 @@ div class: 'evaluation__restitution-globale' do
         h2 t('titre', scope: 'admin.restitutions.cefr'), class: 'text-center mt-5 mb-4'
 
         div class: 'panel' do
-          render 'francais_mathematique', pdf: pdf
+          render 'francais_mathematique', pdf: pdf,
+                                          synthese: restitution_globale.synthese_pre_positionnement
         end
 
         render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
@@ -78,7 +79,8 @@ div class: 'evaluation__restitution-globale' do
         h2 t('titre', scope: 'admin.restitutions.cefr'), class: titre_avec_aide_illettrisme.to_s
 
         div class: 'panel panel--avec-references' do
-          render 'francais_mathematique', pdf: pdf
+          render 'francais_mathematique', pdf: pdf,
+                                          synthese: restitution_globale.synthese_pre_positionnement
 
           render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
@@ -96,7 +98,7 @@ div class: 'evaluation__restitution-globale' do
            }
   end
 
-  if cafe_de_la_place
+  if restitution_globale.synthese_positionnement.present?
     div id: 'lettrisme', class: 'page page-lettrisme' do
       render 'entete_page', restitution_globale: restitution_globale
 

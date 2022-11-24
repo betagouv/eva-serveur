@@ -2,7 +2,7 @@
 
 module Restitution
   class Globale
-    attr_reader :evaluation, :restitutions
+    attr_reader :evaluation, :restitutions, :synthese_positionnement, :synthese_pre_positionnement
 
     NIVEAU_INDETERMINE = :indetermine
 
@@ -10,7 +10,7 @@ module Restitution
              to: :scores_niveau2_standardises, prefix: :niveau2
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau1_standardises, prefix: :niveau1
-    delegate :synthese, to: :synthetiseur
+    delegate :synthese, :synthese_positionnement, :synthese_pre_positionnement, to: :synthetiseur
 
     def initialize(evaluation:, restitutions:)
       @evaluation = evaluation

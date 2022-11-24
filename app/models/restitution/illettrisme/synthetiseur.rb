@@ -3,21 +3,34 @@
 module Restitution
   module Illettrisme
     class Synthetiseur
-      attr_reader :algo
-
       def initialize(interpreteur_pre_positionnement, interpreteur_positionnement)
-        @algo = if interpreteur_positionnement.present?
-                  SynthetiseurPositionnement.new(interpreteur_positionnement)
-                else
-                  SynthetiseurPrePositionnement.new(interpreteur_pre_positionnement)
-                end
+        @algo_pre_positionnement =
+          if interpreteur_pre_positionnement.present?
+            SynthetiseurPrePositionnement.new(interpreteur_pre_positionnement)
+          end
+        @algo_positionnement =
+          if interpreteur_positionnement.present?
+            SynthetiseurPositionnement.new(interpreteur_positionnement)
+          end
       end
 
       def synthese
+        synthese_positionnement.presence || synthese_pre_positionnement
+      end
+
+      def synthese_positionnement
+        Synthetiseur.calcule_synthese(@algo_positionnement)
+      end
+
+      def synthese_pre_positionnement
+        Synthetiseur.calcule_synthese(@algo_pre_positionnement)
+      end
+
+      def self.calcule_synthese(algo)
+        return if algo.blank? || algo.indetermine?
         return 'illettrisme_potentiel' if algo.illettrisme_potentiel?
         return 'socle_clea' if algo.socle_clea?
         return 'aberrant' if algo.aberrant?
-        return if algo.indeterminee?
 
         'ni_ni'
       end
@@ -41,7 +54,7 @@ module Restitution
           false
         end
 
-        def indeterminee?
+        def indetermine?
           @interpreteur.interpretations_cefr[:litteratie].blank? and
             @interpreteur.interpretations_cefr[:numeratie].blank?
         end
@@ -64,7 +77,7 @@ module Restitution
           @niveau_positionnement == :profil_aberrant
         end
 
-        def indeterminee?
+        def indetermine?
           @niveau_positionnement == :indetermine
         end
       end

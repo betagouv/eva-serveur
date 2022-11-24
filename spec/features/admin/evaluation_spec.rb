@@ -151,6 +151,8 @@ describe 'Admin - Evaluation', type: :feature do
             .and_return(interpretations)
           allow(restitution_globale).to receive(:structure).and_return('structure')
           allow(restitution_globale).to receive(:synthese)
+          allow(restitution_globale).to receive(:synthese_pre_positionnement)
+          allow(restitution_globale).to receive(:synthese_positionnement)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
         end
@@ -182,13 +184,15 @@ describe 'Admin - Evaluation', type: :feature do
           end
 
           it "Socle cléa en cours d'acquisition" do
-            mon_evaluation.update(synthese_competences_de_base: :socle_clea)
+            allow(restitution_globale).to receive(:synthese_pre_positionnement)
+              .and_return('socle_clea')
             visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_content 'Certification Cléa indiquée'
           end
 
           it "Potentiellement en situation d'illettrisme" do
-            mon_evaluation.update(synthese_competences_de_base: :illettrisme_potentiel)
+            allow(restitution_globale).to receive(:synthese_pre_positionnement)
+              .and_return('illettrisme_potentiel')
             visit admin_evaluation_path(mon_evaluation)
             expect(page).to have_content 'Formation vivement recommandée'
           end

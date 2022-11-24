@@ -3,48 +3,49 @@
 require 'rails_helper'
 
 describe Restitution::Illettrisme::Synthetiseur do
-  describe '#synthese' do
-    let(:sujet) do
-      Restitution::Illettrisme::Synthetiseur.new nil, nil
-    end
+  describe '#calcule_synthese' do
     let(:algo) { double }
 
-    before { allow(sujet).to receive(:algo).and_return(algo) }
-
     context 'quand la restitution détecte un illettrisme potentiel' do
-      before { allow(algo).to receive(:illettrisme_potentiel?).and_return(true) }
+      before do
+        allow(algo).to receive(:indetermine?).and_return(false)
+        allow(algo).to receive(:illettrisme_potentiel?).and_return(true)
+      end
 
-      it { expect(sujet.synthese).to eq 'illettrisme_potentiel' }
+      it { expect(described_class.calcule_synthese(algo)).to eq 'illettrisme_potentiel' }
     end
 
     context "quand la restitution détecte un socle cléa en cours d'aquisition" do
       before do
+        allow(algo).to receive(:indetermine?).and_return(false)
         allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
         allow(algo).to receive(:socle_clea?).and_return(true)
       end
 
-      it { expect(sujet.synthese).to eq 'socle_clea' }
+      it { expect(described_class.calcule_synthese(algo)).to eq 'socle_clea' }
     end
 
     context 'quand la restitution détecte un niveau intermédiaire' do
       before do
+        allow(algo).to receive(:indetermine?).and_return(false)
         allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
         allow(algo).to receive(:socle_clea?).and_return(false)
         allow(algo).to receive(:aberrant?).and_return(false)
-        allow(algo).to receive(:indeterminee?).and_return(false)
+        allow(algo).to receive(:indetermine?).and_return(false)
       end
 
-      it { expect(sujet.synthese).to eq 'ni_ni' }
+      it { expect(described_class.calcule_synthese(algo)).to eq 'ni_ni' }
     end
 
     context 'quand la restitution détecte un niveau aberrant' do
       before do
+        allow(algo).to receive(:indetermine?).and_return(false)
         allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
         allow(algo).to receive(:socle_clea?).and_return(false)
         allow(algo).to receive(:aberrant?).and_return(true)
       end
 
-      it { expect(sujet.synthese).to eq 'aberrant' }
+      it { expect(described_class.calcule_synthese(algo)).to eq 'aberrant' }
     end
 
     context "quand la restitution n'a pas de score" do
@@ -52,14 +53,22 @@ describe Restitution::Illettrisme::Synthetiseur do
         allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
         allow(algo).to receive(:socle_clea?).and_return(false)
         allow(algo).to receive(:aberrant?).and_return(false)
-        allow(algo).to receive(:indeterminee?).and_return(true)
+        allow(algo).to receive(:indetermine?).and_return(true)
       end
 
-      it { expect(sujet.synthese).to be_nil }
+      it { expect(described_class.calcule_synthese(algo)).to eq nil }
+    end
+
+    context 'quand la restitution détecte un niveau indetermine' do
+      before do
+        allow(algo).to receive(:indetermine?).and_return(true)
+      end
+
+      it { expect(described_class.calcule_synthese(algo)).to eq nil }
     end
   end
 
-  describe 'pre prositionnement' do
+  describe 'Evaluation pre prositionnement' do
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
       Restitution::Illettrisme::Synthetiseur::SynthetiseurPrePositionnement
@@ -126,14 +135,14 @@ describe Restitution::Illettrisme::Synthetiseur do
       end
     end
 
-    describe '#indeterminee?' do
+    describe '#indetermine?' do
       context 'litteratie est présente' do
         before do
           allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
             .and_return({ litteratie: :A1, numeratie: nil })
         end
 
-        it { expect(subject.indeterminee?).to be(false) }
+        it { expect(subject.indetermine?).to be(false) }
       end
 
       context 'numératie est présente' do
@@ -142,7 +151,7 @@ describe Restitution::Illettrisme::Synthetiseur do
             .and_return({ litteratie: nil, numeratie: :X1 })
         end
 
-        it { expect(subject.indeterminee?).to be(false) }
+        it { expect(subject.indetermine?).to be(false) }
       end
 
       context 'evaluation vide' do
@@ -151,16 +160,17 @@ describe Restitution::Illettrisme::Synthetiseur do
             .and_return({ litteratie: nil, numeratie: nil })
         end
 
-        it { expect(subject.indeterminee?).to be(true) }
+        it { expect(subject.indetermine?).to be(true) }
       end
     end
   end
 
-  describe 'Evaluation avancées' do
+  describe 'Evaluation positionnement' do
     let(:interpreteur_positionnement) { double }
     let(:subject) do
       Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_positionnement
     end
+
     describe '#synthese' do
       def synthese(profil)
         allow(interpreteur_positionnement).to receive(:synthese).and_return(
@@ -177,8 +187,34 @@ describe Restitution::Illettrisme::Synthetiseur do
       it { expect(synthese(:profil4)).to eq 'socle_clea' }
       it { expect(synthese(:profil_4h_plus_plus)).to eq 'socle_clea' }
       it { expect(synthese(:profil_aberrant)).to eq 'aberrant' }
-      it do
-        expect(synthese(:indetermine)).to eq nil
+      it { expect(synthese(:indetermine)).to eq nil }
+    end
+  end
+
+  describe '#synthese' do
+    let(:interpreteur_positionnement) { double }
+    let(:interpreteur_pre_positionnement) { double }
+    let(:subject) do
+      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement,
+                                                 interpreteur_positionnement
+    end
+
+    context 'quand il y a un positionnement et un pré-positionnement' do
+      before do
+        allow(interpreteur_positionnement).to receive(:synthese).and_return(
+          {
+            niveau_litteratie: :profil_aberrant
+          }
+        )
+        allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr).and_return(
+          {
+            litteratie: nil, numeratie: nil
+          }
+        )
+      end
+
+      it 'retourne la synthèse positionnement' do
+        expect(subject.synthese).to eq 'aberrant'
       end
     end
   end

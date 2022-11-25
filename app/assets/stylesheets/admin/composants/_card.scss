@@ -11,11 +11,32 @@
   }
 
   .card__banner {
-      &.card__banner--alert {
+    &.card__banner--alert {
       background-color: $eva-orange;
     }
     h4 {
       margin-bottom: 1rem;
+    }
+    &--green {
+      h4 {
+        margin-bottom: 2rem;
+      }
+      p {
+        margin-bottom: 0.5rem;
+      }
+      background-color: $eva-green;
+      &__button {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: 1rem;
+      }
+      .banner__icone {
+        position: absolute;
+        bottom: 0;
+      }
+    }
+    &__texte {
+      padding: 1.5rem 1.5rem 1.5rem 0.5rem;
     }
     .banner__action {
       p {

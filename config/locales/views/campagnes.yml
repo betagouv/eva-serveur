@@ -18,6 +18,18 @@ fr:
         explication_personnalisation: |
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
         configuration_avancee: Configuration avancée
+      votre_code_campagne:
+        explication_code: |
+          Afin de rattacher vos bénéficiaires à cette campagne,
+          vous pouvez partager le code ou l’URL suivante.
+      banniere_test_campagne:
+        testez_votre_campagne: |
+          #### Testez votre campagne !
+
+          Tout est prêt pour évaluer les compétences que vous avez sélectionnées.
+
+          **Pourquoi ne pas la tester afin d’accompagner au mieux votre public ?**
+        bouton: Tester cette campagne
       show:
         intro: |
           Retrouvez ici toutes les informations de votre campagne : le code et le lien à transmettre aux bénéficiaires, le programme choisi ainsi que toutes les évaluations réalisées avec celle-ci.
@@ -25,9 +37,6 @@ fr:
           Afin de rattacher vos bénéficiaires à cette campagne,
           vous pouvez partager le code ou l’URL suivante.
         titre_panel_parcours: Parcours choisi
-        explication_code: |
-          Afin de rattacher vos bénéficiaires à cette campagne,
-          vous pouvez partager le code ou l’URL suivante.
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       parcours:
         titre_panel_parcours: Parcours choisi

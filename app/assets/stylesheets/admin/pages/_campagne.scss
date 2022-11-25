@@ -21,12 +21,16 @@
         margin-bottom: 0;
       }
     }
+    .card-informations {
+      padding: 1.5rem;
+    }
     .campagne {
       table {
         margin-bottom: 1rem;
       }
       &-code {
         border: 2px solid $eva_green;
+        border-bottom: none;
         .row {
           &-code {
             font-size: 1.5rem;
@@ -53,6 +57,9 @@
             }
             td {
               padding-right: 6rem;
+              a {
+                padding-right: 2rem;
+              }
             }
           }
         }

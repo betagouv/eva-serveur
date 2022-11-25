@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+div class: 'panel campagne-situations' do
+  div class: 'row' do
+    div class: 'col title' do
+      span situation_configuration.situation.libelle
+    end
+    div class: 'col text-right commentaire' do
+      if situation_configuration.situation.nom_technique == 'livraison'
+        t(".options.#{situation_configuration.questionnaire_utile&.nom_technique}")
+      end
+    end
+  end
+end

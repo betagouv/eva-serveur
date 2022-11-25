@@ -113,28 +113,16 @@
           }
         }
       }
-      &-option-personnalisation {
+      &-situations {
         padding-top: 1.125rem;
         padding-bottom: 1.125rem;
         margin-bottom: .5rem;
-        .inclus {
-          .title {
-            font-weight: 600;
-          }
-          .commentaire {
-            font-style: italic;
-            color: $eva_green;
-          }
+        .title {
+          font-weight: 600;
         }
-        .non_inclus {
-          .title {
-            font-weight: 600;
-            color: $eva_dark_blue_grey;
-          }
-          .commentaire {
-            font-style: italic;
-            color: $eva_red;
-          }
+        .commentaire {
+          font-style: italic;
+          color: $eva_green;
         }
       }
     }

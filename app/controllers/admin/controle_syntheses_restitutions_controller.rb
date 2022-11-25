@@ -2,9 +2,23 @@
 
 module Admin
   class ControleSynthesesRestitutionsController < ApplicationController
+    SOUS_COMPETENCES = [['lecture', ::Competence::PROFIL_1],
+                        ['lecture', ::Competence::PROFIL_2],
+                        ['lecture', ::Competence::PROFIL_3],
+                        ['lecture', ::Competence::PROFIL_4],
+                        ['comprehension_ecrite', ::Competence::PROFIL_1],
+                        ['comprehension_ecrite', ::Competence::PROFIL_2],
+                        ['comprehension_ecrite', ::Competence::PROFIL_3],
+                        ['comprehension_ecrite', ::Competence::PROFIL_4],
+                        ['production_ecrite', ::Competence::PROFIL_1],
+                        ['production_ecrite', ::Competence::PROFIL_2],
+                        ['production_ecrite', ::Competence::PROFIL_3],
+                        ['production_ecrite', ::Competence::PROFIL_4]].freeze
+
     def index
       @syntheses_pre_positionnement = syntheses_pre_positionnement
       @syntheses_positionnement = syntheses_positionnement
+      @sous_competences_positionnement = SOUS_COMPETENCES
     end
 
     def syntheses_pre_positionnement

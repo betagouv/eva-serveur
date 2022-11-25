@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 niveaux_competences = restitution_globale.niveaux_competences
-titre_avec_aide_illettrisme = 'titre-avec-aide-illettrisme' if resource.illettrisme_potentiel?
+titre_avec_aide_illettrisme = 'titre--avec-aide-illettrisme' if resource.illettrisme_potentiel?
 
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf

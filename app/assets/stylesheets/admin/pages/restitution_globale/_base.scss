@@ -30,6 +30,10 @@
     margin: 3rem 0 1rem;
   }
 
+  .titre--avec-aide-illettrisme {
+    margin-bottom: 3rem;
+  }
+
   h3 {
     color: $eva_main_blue;
     font-size: 1rem;
@@ -485,10 +489,6 @@
     .carte__duree {
       font-style: italic;
     }
-  }
-
-  .titre-avec-aide-illettrisme {
-    margin-bottom: 3rem;
   }
 }
 

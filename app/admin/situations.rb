@@ -3,7 +3,8 @@
 ActiveAdmin.register Situation do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id
+  permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
+                :description
 
   includes :questionnaire, :questionnaire_entrainement
 
@@ -12,6 +13,7 @@ ActiveAdmin.register Situation do
     inputs do
       f.input :libelle
       f.input :nom_technique
+      f.input :description, as: :text
       f.input :questionnaire
       f.input :questionnaire_entrainement
     end

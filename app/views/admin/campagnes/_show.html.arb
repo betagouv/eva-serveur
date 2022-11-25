@@ -45,6 +45,8 @@ div class: 'row' do
       end
     end
 
+    render 'parcours'
+
     if can?(:manage, Compte)
       h2 'Administration'
 
@@ -62,7 +64,5 @@ div class: 'row' do
                locals: { situations_configurations: situations_configurations }
       end
     end
-
-    render 'parcours'
   end
 end

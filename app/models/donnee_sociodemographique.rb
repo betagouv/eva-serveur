@@ -12,10 +12,6 @@ class DonneeSociodemographique < ApplicationRecord
                   sans_emploi].freeze
   enum :derniere_situation, SITUATIONS.zip(SITUATIONS).to_h
 
-  validates :genre, inclusion: { in: GENRES, allow_blank: true }
-  validates :dernier_niveau_etude, inclusion: { in: NIVEAUX_ETUDES, allow_blank: true }
-  validates :derniere_situation, inclusion: { in: SITUATIONS, allow_blank: true }
-
   acts_as_paranoid
 
   def to_s

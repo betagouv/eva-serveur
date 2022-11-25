@@ -5,38 +5,7 @@ div class: 'row' do
     div class: 'panel font-italic' do
       t('.intro')
     end
-
-    h2 'Votre code campagne'
-
-    div class: 'panel campagne-code' do
-      div md t('.explication_code')
-
-      attributes_table_for campagne do
-        row(:code) do
-          div class: 'code' do
-            rendu_code = []
-            campagne.code.each_char do |item|
-              couleur = item == item.to_i.to_s ? 'violet' : 'bleu'
-              rendu_code << tag.span(item, class: couleur)
-            end
-            text_node safe_join(rendu_code)
-          end
-          code = campagne.code
-          button 'Copier le code', class: 'button copier-coller', 'data-clipboard-text': code
-        end
-        row(:url) do
-          text_node lien_campagne(campagne)
-          url = url_campagne(campagne.code)
-          button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
-        end
-
-        div class: 'conteneur-action' do
-          link_to 'Démarrer une évaluation', url_campagne(campagne.code), target: '_blank',
-                                                                          class: 'bouton-jouer',
-                                                                          rel: 'noopener'
-        end
-      end
-    end
+    render 'votre_code_campagne'
 
     h2 'Détails de la campagne'
 

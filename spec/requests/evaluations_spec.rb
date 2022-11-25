@@ -110,6 +110,26 @@ describe 'Evaluation API', type: :request do
   describe 'PATCH /evaluations/:id' do
     let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
 
+    context 'Quand une requête est invalide pour un enum de données sociodémographiques' do
+      let(:params) do
+        {
+          donnee_sociodemographique_attributes: {
+            dernier_niveau_etude: 'invalide'
+          }
+        }
+      end
+
+      it 'retourne une 500 (comportement par défaut des enums Rails)' do
+        expect do
+          patch "/api/evaluations/#{evaluation.id}", params: params
+        end.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe 'PATCH /evaluations/:id' do
+    let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
+
     before { patch "/api/evaluations/#{evaluation.id}", params: params }
 
     context 'Met à jour email et téléphone avec une requête valide' do

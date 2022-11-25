@@ -23,19 +23,7 @@ div class: 'campagne-parcours' do
   end
 end
 
-[
-  {
-    nom: 'plan_de_la_ville',
-    inclus: plan_de_la_ville_inclus
-  },
-  {
-    nom: 'bienvenue',
-    inclus: bienvenue_inclus
-  },
-  {
-    nom: 'expression_ecrite',
-    inclus: expression_ecrite_incluse
-  }
-].each do |situation_data|
-  render partial: 'option_personnalisation', locals: situation_data
+situations_configurations.each do |situation_configuration|
+  render partial: 'admin/situations_configurations/show',
+         locals: { situation_configuration: situation_configuration }
 end

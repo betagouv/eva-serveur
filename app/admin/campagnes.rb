@@ -49,9 +49,6 @@ ActiveAdmin.register Campagne do
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
-    before_action :bienvenue_inclus, only: %i[show]
-    before_action :expression_ecrite_incluse, only: %i[show]
-    before_action :plan_de_la_ville_inclus, only: %i[show]
 
     def create
       create!
@@ -90,24 +87,6 @@ ActiveAdmin.register Campagne do
       @situations_configurations ||= resource
                                      .situations_configurations
                                      .includes([:questionnaire, { situation: :questionnaire }])
-    end
-
-    def bienvenue_inclus
-      @bienvenue_inclus ||= SituationConfiguration
-                            .questionnaire_inclus?(situations_configurations,
-                                                   Eva::QUESTIONNAIRE_AUTO_POSITIONNEMENT)
-    end
-
-    def expression_ecrite_incluse
-      @expression_ecrite_incluse ||= SituationConfiguration
-                                     .questionnaire_inclus?(situations_configurations,
-                                                            Eva::QUESTIONNAIRE_EXPRESSION_ECRITE)
-    end
-
-    def plan_de_la_ville_inclus
-      @plan_de_la_ville_inclus = situations_configurations.any? do |sc|
-        sc.situation.nom_technique == 'plan_de_la_ville'
-      end
     end
   end
 end

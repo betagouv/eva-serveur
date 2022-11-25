@@ -32,42 +32,4 @@ describe SituationConfiguration do
       it { expect(situation_configuree.questionnaire_utile).to eq questionnaire_surcharge }
     end
   end
-
-  describe '#questionnaire_inclus?' do
-    let(:situation_configuration) { SituationConfiguration.new }
-
-    before do
-      allow(situation_configuration).to receive(:questionnaire_utile).and_return questionnaire_utile
-    end
-
-    context 'quand pas inclus' do
-      let(:questionnaire_utile) { double(nom_technique: 'autre_chose') }
-
-      it do
-        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
-                                                            'quelque_chose'))
-          .to be(false)
-      end
-    end
-
-    context 'quand inclus' do
-      let(:questionnaire_utile) { double(nom_technique: 'quelque_chose') }
-
-      it do
-        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
-                                                            'quelque_chose'))
-          .to be(true)
-      end
-    end
-
-    context 'quand pas de questionnaire utile' do
-      let(:questionnaire_utile) { nil }
-
-      it do
-        expect(SituationConfiguration.questionnaire_inclus?([situation_configuration],
-                                                            'quelque_chose'))
-          .to be(false)
-      end
-    end
-  end
 end

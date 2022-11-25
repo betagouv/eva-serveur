@@ -5,15 +5,20 @@ require 'rails_helper'
 describe 'admin/campagnes/_parcours.html.arb' do
   before { assign(:campagne, Campagne.new(parcours_type: parcours_type)) }
 
-  before { assign(:plan_de_la_ville_inclus, true) }
-  before { assign(:bienvenue_inclus, true) }
-  before { assign(:expression_ecrite_incluse, true) }
+  let(:parcours_type) { nil }
+  let(:maintenance) do
+    create :situation,
+           nom_technique: :maintenance,
+           libelle: 'Maintenance'
+  end
+  let(:situation_configuration_maintenance) { SituationConfiguration.new(situation: maintenance) }
+  before { assign(:situations_configurations, [situation_configuration_maintenance]) }
 
   before { render }
 
-  context 'sans parcours type' do
-    let(:parcours_type) { nil }
+  it { expect(rendered).to match(/Maintenance/) }
 
+  context 'sans parcours type' do
     it { expect(rendered).to match(/Parcours personnalisé/) }
   end
 

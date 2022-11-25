@@ -1,0 +1,8 @@
+fr:
+  admin:
+    situations_configurations:
+      show:
+        options:
+          livraison_expression_ecrite: Avec exercice de rédaction
+          livraison_sans_redaction: Sans exercice de rédaction
+

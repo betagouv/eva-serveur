@@ -110,9 +110,11 @@ describe 'Admin - Campagne', type: :feature do
 
       context 'choisir son parcours' do
         before do
+          Bullet.enable = false
           choose "campagne_type_programme_#{parcours_type_complet.type_de_programme}"
           choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
           click_on 'Créer'
+          Bullet.enable = true
         end
 
         it do
@@ -127,10 +129,12 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       it 'sélectionne des modules de parcours optionnels' do
+        Bullet.enable = false
         choose "campagne_type_programme_#{parcours_type_complet.type_de_programme}"
         choose "campagne_parcours_type_id_#{parcours_type_complet.id}"
         check 'campagne_options_personnalisation_plan_de_la_ville'
         click_on 'Créer'
+        Bullet.enable = true
 
         campagne = Campagne.order(:created_at).last
         expect(Campagne.avec_situation(situation_plan_de_la_ville).first).to eq campagne

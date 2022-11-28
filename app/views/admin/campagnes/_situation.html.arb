@@ -10,7 +10,7 @@ div class: 'campagne-situation d-flex align-items-center' do
   end
   div class: 'text-right commentaire' do
     if situation_configuration.situation.nom_technique == 'livraison'
-      t(".options.#{situation_configuration.questionnaire_utile&.nom_technique}")
+      render 'components/tag', image_path: '', contenu: '+ Exercice de rédaction', couleur: 'vert'
     end
   end
 end

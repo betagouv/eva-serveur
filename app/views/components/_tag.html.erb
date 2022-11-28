@@ -1,0 +1,6 @@
+<div class="tag tag--<%= couleur %>">
+  <% if image_path.present? %>
+    <%= image_tag("#{image_path}.png", class: 'tag__icone') %>
+  <% end %>
+  <span><%= contenu %></span>
+</div>

@@ -1,4 +1,4 @@
-<% profil = cafe_de_la_place.niveau_litteratie %>
+<% profil = restitution_cafe_de_la_place ? restitution_cafe_de_la_place.niveau_litteratie : 'indetermine' %>
 
 <div class="panel panel-lettrisme">
   <div class='marges-page'>
@@ -11,15 +11,15 @@
       pdf: pdf %>
     <% if niveau_bas?(profil) %>
       <div class="lettrisme-sous-competences">
-        <% cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
+        <% restitution_cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
           <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
         <% end %>
       </div>
     <% end %>
   </div>
 </div>
-<% if !pdf %>
-  <a href="<%= admin_partie_cafe_de_la_place_reponses_path(cafe_de_la_place.partie.id) %>" class="telechargement_des_reponses">
+<% if !pdf && restitution_cafe_de_la_place %>
+  <a href="<%= admin_partie_cafe_de_la_place_reponses_path(restitution_cafe_de_la_place.partie.id) %>" class="telechargement_des_reponses">
   <h3>
     <%= t('.telechargement_des_reponses')%>
   </h3>

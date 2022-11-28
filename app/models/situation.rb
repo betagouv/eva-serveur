@@ -3,6 +3,8 @@
 class Situation < ApplicationRecord
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true
+
+  has_one_attached :illustration
   belongs_to :questionnaire, optional: true
   belongs_to :questionnaire_entrainement, optional: true, class_name: 'Questionnaire'
 

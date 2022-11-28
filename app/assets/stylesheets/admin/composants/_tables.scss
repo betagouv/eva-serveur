@@ -125,6 +125,9 @@ table.index_table {
         &.col-nombre_evaluations {
           padding-left: 5rem;
         }
+        &.col-illustration {
+          line-height: 0;
+        }
       }
 
       &:hover {

@@ -13,6 +13,12 @@ describe 'Admin - Situation', type: :feature do
     it { expect(page).to have_content 'Situation Tri' }
   end
 
+  describe '#show' do
+    before { visit admin_situation_path(tri) }
+
+    it { expect(page).to have_content 'Situation Tri' }
+  end
+
   describe 'création' do
     before do
       visit new_admin_situation_path

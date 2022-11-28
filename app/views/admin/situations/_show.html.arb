@@ -1,0 +1,17 @@
+# frozen_string_literal: true
+
+panel 'Détails de la situation' do
+  attributes_table_for situation do
+    row :libelle
+    row :nom_technique
+    row :illustation do
+      situation_illustration(situation)
+    end
+    row :description
+    row :questionnaire
+    row :questionnaire_entrainement
+    row :created_at
+    row :updated_at
+    row :deleted_at
+  end
+end

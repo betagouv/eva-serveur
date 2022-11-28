@@ -3,8 +3,9 @@
 require 'generateur_aleatoire'
 
 class Campagne < ApplicationRecord
-  SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
-  SITUATIONS_AVEC_REPERAGE_ILLETTRISME = %w[maintenance livraison objets_trouves].freeze
+  SITUATIONS_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
+  SITUATIONS_PRE_POSITIONNEMENT = %w[maintenance livraison objets_trouves].freeze
+  SITUATIONS_POSITIONNEMENT = %w[cafe_de_la_place].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
 
   acts_as_paranoid
@@ -52,18 +53,24 @@ class Campagne < ApplicationRecord
   end
 
   def avec_competences_transversales?
-    situations_configurations.any? do |configuration|
-      SITUATIONS_AVEC_COMPETENCES_TRANSVERSALES.include?(configuration.situation.nom_technique)
-    end
+    configuration_inclus?(SITUATIONS_COMPETENCES_TRANSVERSALES)
   end
 
-  def avec_reperage_illettrisme?
-    situations_configurations.any? do |configuration|
-      SITUATIONS_AVEC_REPERAGE_ILLETTRISME.include?(configuration.situation.nom_technique)
-    end
+  def avec_positionnement?
+    configuration_inclus?(SITUATIONS_POSITIONNEMENT)
+  end
+
+  def avec_pre_positionnement?
+    configuration_inclus?(SITUATIONS_PRE_POSITIONNEMENT)
   end
 
   private
+
+  def configuration_inclus?(situations)
+    situations_configurations.any? do |configuration|
+      situations.include?(configuration.situation.nom_technique)
+    end
+  end
 
   def initialise_situations
     initialise_situations_optionnelles

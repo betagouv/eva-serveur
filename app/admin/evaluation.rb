@@ -110,9 +110,9 @@ ActiveAdmin.register Evaluation do
 
   controller do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
-                  :cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
+                  :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_accessibles, :traduction_niveau,
-                  :campagne_avec_competences_transversales?
+                  :campagne_avec_competences_transversales?, :campagne_avec_positionnement?
 
     def show
       show! do |format|
@@ -157,6 +157,10 @@ ActiveAdmin.register Evaluation do
       @evaluation.campagne.avec_competences_transversales?
     end
 
+    def campagne_avec_positionnement?
+      @evaluation.campagne.avec_positionnement?
+    end
+
     def prise_en_main?
       selectionne_derniere_restitution(Situation::PLAN_DE_LA_VILLE)&.termine?
     end
@@ -165,7 +169,7 @@ ActiveAdmin.register Evaluation do
       selectionne_derniere_restitution(Situation::BIENVENUE)
     end
 
-    def cafe_de_la_place
+    def restitution_cafe_de_la_place
       selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end
 

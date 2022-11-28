@@ -19,6 +19,8 @@ fr:
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
         configuration_avancee: Configuration avancée
       show:
+        intro: |
+          Retrouvez ici toutes les informations de votre campagne : le code et le lien à transmettre aux bénéficiaires, le programme choisi ainsi que toutes les évaluations réalisées avec celle-ci.
         explication_code: |
           Afin de rattacher vos bénéficiaires à cette campagne,
           vous pouvez partager le code ou l’URL suivante.

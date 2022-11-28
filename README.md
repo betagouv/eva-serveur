@@ -11,9 +11,6 @@ Anciens dépôts que nous n'utilisons plus aujourd'hui :
 - [la partie orchestration](https://github.com/betagouv/eva-orchestrateur)
 - [le site web](https://github.com/betagouv/eva-www)
 
-* Ruby version  
-2.6
-
 * Base de données et assimilé  
 PostgreSql
 Redis

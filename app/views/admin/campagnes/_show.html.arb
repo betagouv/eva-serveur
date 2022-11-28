@@ -2,7 +2,9 @@
 
 div class: 'row' do
   div class: 'offset-1 col-4' do
-    h1 campagne.libelle
+    div class: 'panel font-italic' do
+      t('.intro')
+    end
 
     h2 'Votre code campagne'
 

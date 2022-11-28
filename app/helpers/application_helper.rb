@@ -3,6 +3,7 @@
 module ApplicationHelper
   include CampagneHelper
   include MarkdownHelper
+  include SituationHelper
 
   def formate_efficience(nombre)
     return I18n.t("admin.restitutions.evaluation.#{nombre}") if nombre.is_a?(Symbol)

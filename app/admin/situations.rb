@@ -4,15 +4,16 @@ ActiveAdmin.register Situation do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
-                :description
+                :description, :illustration
 
-  includes :questionnaire, :questionnaire_entrainement
+  includes :questionnaire, :questionnaire_entrainement, illustration_attachment: :blob
 
   form do |f|
     f.semantic_errors
     inputs do
       f.input :libelle
       f.input :nom_technique
+      f.input :illustration, as: :file
       f.input :description, as: :text
       f.input :questionnaire
       f.input :questionnaire_entrainement
@@ -24,6 +25,9 @@ ActiveAdmin.register Situation do
   end
 
   index do
+    column :illustration do |situation|
+      situation_illustration(situation)
+    end
     column :libelle
     column :nom_technique
     column :questionnaire
@@ -31,5 +35,9 @@ ActiveAdmin.register Situation do
     actions do |situation|
       link_to 'Parties', admin_situation_parties_path(situation) if can?(:manage, Partie)
     end
+  end
+
+  show do
+    render 'show'
   end
 end

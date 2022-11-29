@@ -1,0 +1,60 @@
+@mixin tag() {
+  @include texte();
+  padding: .25rem .5rem;
+  text-align: center;
+  align-items: center;
+  display: inline-flex;
+  background-color: transparent;
+  border: 1px solid $eva_dark_blue_grey;;
+  border-radius: .25rem;
+  font-weight: 500;
+  color: $couleur-texte;
+
+  .tag__icone {
+    margin-right: .25rem;
+    width: 13px;
+  }
+
+  &.red {
+    @include tag-couleur($couleur-accent-erreur, $couleur-accent-erreur)
+  }
+
+  &.green {
+    @include tag-couleur($eva_dark_green, $eva_green)
+  }
+
+}
+
+@mixin tag-couleur($color, $border-color) {
+  color: $color;
+  border-color: $border-color;
+}
+
+.status_tag {
+  @include tag();
+  font-weight: normal;
+  text-transform: unset;
+  letter-spacing: unset;
+  white-space: nowrap;
+}
+
+.tag-categorie {
+  @include tag();
+  &.assistance {
+    @include tag-couleur($couleur-accent-erreur, $couleur-accent-erreur)
+  }
+
+  &.blog, &.orange {
+    @include tag-couleur($eva_dark_orange, $couleur-warning)
+  }
+
+  &.evolution {
+    @include tag-couleur($eva_dark_green, $eva_green)
+  }
+
+  &.no, &.yes {
+    border-color: $couleur-texte
+  }
+}
+
+

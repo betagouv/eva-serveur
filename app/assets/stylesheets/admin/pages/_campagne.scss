@@ -96,7 +96,11 @@
           }
         }
         .situation__texte {
-          h5 { margin-bottom: 0.5rem; }
+          h5 { 
+            margin-bottom: 0;
+            margin-right: .5rem;
+            align-self: center;
+          }
           p {
             font-style: italic;
             margin-bottom: 0;

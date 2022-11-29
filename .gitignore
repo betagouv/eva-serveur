@@ -40,3 +40,8 @@ erd.dot
 
 # fichier de Redis
 dump.rdb
+
+# Ignore storybook
+**/*.stories.json
+
+node_modules/

@@ -26,6 +26,17 @@ Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campa
 * Lancer les tests
 `bundle exec rake spec` ou `guard`
 
+* Lancer storybook en développement  
+
+Générer le fichier de description des composants :  
+`bundle exec rake view_component_storybook:write_stories_json`
+
+Puis démarrer storybook (votre serveur rails doit être démarré) :  
+```
+npm install
+npm run storybook
+```
+
 * Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
 

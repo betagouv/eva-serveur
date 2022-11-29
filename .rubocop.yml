@@ -61,3 +61,7 @@ Rails/Delegate:
     - 'app/decorators/evenement_livraison.rb'
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'

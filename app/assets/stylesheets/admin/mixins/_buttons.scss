@@ -2,7 +2,9 @@
 @mixin bouton() {
   &, &:link, &:visited {
     text-decoration: none;
+    color: $eva_light;
   }
+  display: inline-block;
   cursor: pointer;
   box-shadow: none;
   padding: .25rem .5rem;
@@ -11,7 +13,6 @@
   text-align: center;
 
   border-radius: 0.25rem;
-  color: $eva_light;
   border: 1px solid transparent;
   background-color: $eva_main_blue;
   &:hover {
@@ -34,7 +35,9 @@
   @include bouton();
 
   background-color: $background-color;
-  color: $color;
+  &, &:link, &:visited {
+    color: $color;
+  }
 
   // style bizarre
   display: inline-flex;

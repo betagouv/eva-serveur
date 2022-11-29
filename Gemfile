@@ -54,6 +54,8 @@ gem 'sidekiq-scheduler'
 gem 'spreadsheet'
 gem 'sprockets-rails'
 gem 'truemail'
+gem 'view_component'
+gem 'view_component_storybook'
 gem 'web-console', group: :development
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'

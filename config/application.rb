@@ -12,6 +12,8 @@ require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require 'view_component'
+require 'view_component/storybook'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -60,6 +62,8 @@ module EvaServeur
     Rails.autoloaders.main.ignore(Rails.root.join('app/controllers/active_admin/**/*'))
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
+
+    config.view_component_storybook.stories_path = Rails.root.join("spec/components/stories")
 
     ::ActionView::Base.field_error_proc = Formtastic::Helpers::FormHelper.formtastic_field_error_proc
 

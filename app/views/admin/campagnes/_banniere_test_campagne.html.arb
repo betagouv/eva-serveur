@@ -9,7 +9,7 @@ div class: 'card__banner card__banner--green d-flex justify-content-between' do
       md t('.testez_votre_campagne')
     end
     div class: 'card__banner--green__button' do
-      link_to t('.bouton'), url_campagne(campagne.code), class: 'bouton bouton-principal'
+      render(BoutonComponent.new(t('.bouton'), url_campagne(campagne.code)))
     end
   end
 end

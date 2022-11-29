@@ -9,7 +9,7 @@ ActiveAdmin.register SourceAide do
 
   index do
     column(:categorie) do |a|
-      render 'components/tag', image_path: '', contenu: t(".categories.#{a.categorie}"), classes: ''
+      render 'components/tag', contenu: t(".categories.#{a.categorie}")
     end
     column :titre
     column :description

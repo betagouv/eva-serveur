@@ -1,3 +1,6 @@
+<% classes ||= '' %>
+<% image_path ||= nil %>
+
 <div class="tag-categorie <%= classes %>">
   <% if image_path.present? %>
     <%= image_tag("#{image_path}.png", class: 'tag__icone') %>

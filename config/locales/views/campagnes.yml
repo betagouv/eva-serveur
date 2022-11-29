@@ -40,10 +40,6 @@ fr:
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       programme:
         titre: Programme
-      situation:
-        options:
-          livraison_expression_ecrite: Avec exercice de rédaction
-          livraison_sans_redaction: Sans exercice de rédaction
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

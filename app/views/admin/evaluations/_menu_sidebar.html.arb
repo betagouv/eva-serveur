@@ -26,7 +26,9 @@ div class: 'menu menu-transverse' do
       a href: '#francais_mathematiques' do
         text_node 'Français et Mathématiques'
         if resource.illettrisme_potentiel?
-          render 'components/tag', image_path: 'demande_aide', contenu: 'Formation recommandée', couleur: 'orange'
+          render 'components/tag', image_path: 'demande_aide',
+                                   contenu: 'Formation recommandée',
+                                   classes: 'orange'
         end
       end
     end
@@ -39,7 +41,9 @@ div class: 'menu menu-transverse' do
       a href: '#lettrisme' do
         text_node 'Lettrisme'
         if resource.illettrisme_potentiel?
-          render 'components/tag', image_path: 'demande_aide', contenu: 'Formation recommandée', couleur: 'orange'
+          render 'components/tag', image_path: 'demande_aide',
+                                   contenu: 'Formation recommandée',
+                                   classes: 'orange'
         end
       end
     end

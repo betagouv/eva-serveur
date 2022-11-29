@@ -7,7 +7,8 @@ div class: 'carte-actualite' do
     end
   end
   div class: 'texte' do
-    status_tag actualite.categorie
+    render 'components/tag', image_path: '', contenu: t(".categories.#{actualite.categorie}"),
+                             classes: actualite.categorie
     span(class: 'titre') { link_to(actualite.titre, [:admin, actualite]) }
     span class: 'date' do
       l actualite.created_at, format: :point

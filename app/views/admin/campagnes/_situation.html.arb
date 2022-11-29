@@ -10,7 +10,7 @@ div class: 'campagne-situation d-flex align-items-center' do
   end
   div class: 'text-right commentaire' do
     if situation_configuration.situation.nom_technique == 'livraison'
-      render 'components/tag', image_path: '', contenu: '+ Exercice de rédaction', couleur: 'vert'
+      render 'components/tag', image_path: '', contenu: '+ Exercice de rédaction', classes: 'green'
     end
   end
 end

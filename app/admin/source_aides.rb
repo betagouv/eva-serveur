@@ -8,7 +8,9 @@ ActiveAdmin.register SourceAide do
   config.filters = false
 
   index do
-    column(:categorie) { |a| status_tag a.categorie }
+    column(:categorie) do |a|
+      render 'components/tag', image_path: '', contenu: t(".categories.#{a.categorie}"), classes: ''
+    end
     column :titre
     column :description
     column :url do |a|

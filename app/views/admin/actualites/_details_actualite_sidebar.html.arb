@@ -3,7 +3,8 @@
 div class: 'metadonnees' do
   div class: 'donnee' do
     span 'Publié dans :', class: 'label'
-    status_tag actualite.categorie
+    render 'components/tag', image_path: '', contenu: t(".categories.#{actualite.categorie}"),
+                             classes: actualite.categorie
   end
   div class: 'donnee' do
     span 'Auteur :', class: 'label'

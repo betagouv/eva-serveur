@@ -90,6 +90,15 @@
       .actions {
         gap: .25rem;
       }
+
+      &-asterisque {
+        margin-top: 1rem;
+        @include texte-xs();
+
+        a {
+          color: $eva_dark;
+        }
+      }
     }
 
     &__icone {

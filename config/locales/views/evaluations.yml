@@ -168,7 +168,7 @@ fr:
 
             D'après nos enquêtes, seulement **25% des personnes en illettrisme potentiel réussissent à entrer en formation.**
 
-            **Avez-vous été en mesure d’orienter cette personne vers une solution d’accompagnement adaptée ?**
+            **Avez-vous été en mesure d’orienter cette personne vers une solution d’accompagnement adaptée* ?**
       demande_aide_illettrisme:
         aide_description: |
           Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?

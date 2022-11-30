@@ -86,7 +86,9 @@ ActiveAdmin.register Campagne do
     def situations_configurations
       @situations_configurations ||= resource
                                      .situations_configurations
-                                     .includes([:questionnaire, { situation: :questionnaire }])
+                                     .includes([:questionnaire,
+                                                { situation: %i[questionnaire
+                                                                illustration_attachment] }])
     end
   end
 end

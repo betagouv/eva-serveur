@@ -18,7 +18,7 @@ div id: 'card-grise' do
     end
 
     situations_configurations.each do |situation_configuration|
-      render partial: 'admin/situations_configurations/show',
+      render partial: 'situation',
              locals: { situation_configuration: situation_configuration }
     end
   end

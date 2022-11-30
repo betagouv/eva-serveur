@@ -49,3 +49,9 @@ fr:
             La modification ne sera effective qu’une fois l’email confirmé.
       confirmation_autre_compte:
         email_non_confirme: L'email de ce compte n'a pas été confirmé.
+    card_parcours_type:
+      parcours_personnalise:
+        libelle: |
+          Parcours personnalisé
+        description: |
+          *Votre parcours a été personnalisé selon vos besoins spécifiques.*

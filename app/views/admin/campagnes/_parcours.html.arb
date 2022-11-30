@@ -2,9 +2,6 @@
 
 h2 t('.titre_panel_parcours')
 div class: 'campagne-parcours' do
-  div class: 'campagne-parcours-intro' do
-    md t('.demande_aide_pour_configuration_campagne', email_contact: Eva::EMAIL_CONTACT)
-  end
   div class: 'campagne-parcours-info' do
     if campagne.parcours_type.present?
       h4 campagne.parcours_type.libelle

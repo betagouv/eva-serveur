@@ -122,7 +122,7 @@ describe 'Admin - Campagne', type: :feature do
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
           expect(campagne.code).to eq 'CDI45312'
           expect(campagne.compte).to eq compte_conseiller
-          within('.campagne-parcours') do
+          within('.panel-programme') do
             expect(page).to have_content parcours_type_complet.libelle
           end
         end

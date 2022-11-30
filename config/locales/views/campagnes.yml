@@ -38,12 +38,12 @@ fr:
           vous pouvez partager le code ou l’URL suivante.
         titre_panel_parcours: Parcours choisi
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
-      parcours:
-        titre_panel_parcours: Programme
+      programme:
+        titre: Programme
         parcours_personnalise:
           titre: Parcours personnalisé
           description: |
-            Votre parcours a été personnalisé selon vos besoins spécifiques.
+            *Votre parcours a été personnalisé selon vos besoins spécifiques.*
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

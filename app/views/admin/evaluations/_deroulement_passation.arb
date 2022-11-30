@@ -2,17 +2,8 @@
 
 div id: 'evaluation__deroulement' do
   h2 t('.titre')
-  div id: 'card-grise' do
-    div class: 'panel panel-parcours' do
-      h3 t('.parcours.titre')
-      div class: 'panel__carte' do
-        h4 resource.campagne.parcours_type.libelle
-        text_node md(resource.campagne.parcours_type.description)
-        div class: 'carte__duree' do
-          text_node 'Durée moyenne : '
-          text_node resource.campagne.parcours_type.duree_moyenne
-        end
-      end
-    end
+  div class: 'panel panel-parcours' do
+    h3 t('.parcours.titre')
+    render 'components/card_parcours_type', parcours_type: resource.campagne.parcours_type
   end
 end

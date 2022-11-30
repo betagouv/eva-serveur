@@ -1,8 +1,8 @@
-#card-grise {
-  .panel__carte {
+#card-parcours-type {
+  .carte {
     @include carte-grise();
+    @include texte-xs();
     padding: 1rem;
-    line-height: 13px;
     color: $eva-dark;
 
     >*:not(:last-child) {
@@ -13,8 +13,8 @@
       font-size: 0.875rem
     }
 
-    p {
-      font-style: italic;
+    p:last-child {
+      margin-bottom: 0;
     }
   }
 

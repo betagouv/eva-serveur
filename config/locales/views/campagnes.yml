@@ -40,10 +40,6 @@ fr:
         nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
       programme:
         titre: Programme
-        parcours_personnalise:
-          titre: Parcours personnalisé
-          description: |
-            *Votre parcours a été personnalisé selon vos besoins spécifiques.*
       situation:
         options:
           livraison_expression_ecrite: Avec exercice de rédaction

@@ -78,16 +78,29 @@
           @include bouton-carte($eva_main_blue);
         }
       }
-      &-situations {
-        padding-top: 1.125rem;
-        padding-bottom: 1.125rem;
-        margin-bottom: .5rem;
-        .title {
-          font-weight: 600;
-        }
+      &-situation {
+        margin-top: 1.5rem;
+        gap: 1rem;
         .commentaire {
           font-style: italic;
           color: $eva_green;
+        }
+        .situation__image {
+          width: 8rem;
+          img {
+            width: 8rem;
+            height: 4rem;
+            border: 0.25rem solid $eva_main_blue;
+            border-radius: 2.813rem;
+            object-fit: cover;
+          }
+        }
+        .situation__texte {
+          h5 { margin-bottom: 0.5rem; }
+          p {
+            font-style: italic;
+            margin-bottom: 0;
+          }
         }
       }
     }

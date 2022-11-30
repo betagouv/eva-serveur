@@ -44,6 +44,10 @@ fr:
           titre: Parcours personnalisé
           description: |
             *Votre parcours a été personnalisé selon vos besoins spécifiques.*
+      situation:
+        options:
+          livraison_expression_ecrite: Avec exercice de rédaction
+          livraison_sans_redaction: Sans exercice de rédaction
       action_items:
         voir_evaluations:
           zero: Aucune évaluation

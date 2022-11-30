@@ -21,7 +21,7 @@ ActiveAdmin.register Campagne do
          order_by: 'email_asc',
          if: proc { can? :manage, Compte }
   filter :situations
-  filter :questionnaire
+  filter :questionnaire, if: proc { current_compte.anlci? }
   filter :created_at
 
   action_item :voir_evaluations, only: :show do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'admin/campagnes/_parcours.html.arb' do
+describe 'admin/campagnes/_programme.html.arb' do
   before { assign(:campagne, Campagne.new(parcours_type: parcours_type)) }
 
   let(:parcours_type) { nil }

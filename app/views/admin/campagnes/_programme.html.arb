@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+h2 t('.titre')
+div id: 'card-grise' do
+  div class: 'panel panel-programme' do
+    div class: 'panel__carte' do
+      if campagne.parcours_type.present?
+        h4 campagne.parcours_type.libelle
+        text_node md(campagne.parcours_type.description)
+        div class: 'carte__duree' do
+          text_node 'Durée moyenne : '
+          text_node campagne.parcours_type.duree_moyenne
+        end
+      else
+        h4 t('.parcours_personnalise.titre')
+        md t('.parcours_personnalise.description')
+      end
+    end
+
+    situations_configurations.each do |situation_configuration|
+      render partial: 'admin/situations_configurations/show',
+             locals: { situation_configuration: situation_configuration }
+    end
+  end
+end

@@ -16,7 +16,7 @@ div class: 'row' do
       end
     end
 
-    render 'parcours'
+    render 'programme'
 
     if can?(:manage, Compte)
       h2 'Administration'

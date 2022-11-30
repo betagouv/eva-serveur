@@ -78,50 +78,6 @@
           @include bouton-carte($eva_main_blue);
         }
       }
-      &-parcours {
-        @include carte-avec-ombre;
-        margin-bottom: .5rem;
-        overflow: hidden;
-        font-size: .875rem;
-
-        p:last-child {
-          margin-bottom: 0;
-        }
-
-        &-info {
-          background-color: $eva_main_blue;
-          padding: 1.5rem;
-          color: white;
-          h4 {
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
-          }
-          &-description {
-            margin-bottom: 1rem;
-          }
-          &-duree-moyenne {
-            font-style: italic
-          }
-        }
-        padding: 0;
-        div:first-child {
-          padding: 1.5rem
-        }
-        p {
-          margin: 0;
-        }
-        .info_parcours_campagne {
-          background-color: $eva_main_blue;
-          padding: 1.5rem;
-          color: white;
-          border-bottom-right-radius: 0.5rem;
-          border-bottom-left-radius: 0.5rem;
-          h3 {
-            color: white;
-          }
-        }
-      }
       &-situations {
         padding-top: 1.125rem;
         padding-bottom: 1.125rem;

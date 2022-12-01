@@ -1,29 +1,17 @@
 # frozen_string_literal: true
 
-class Ability # rubocop:disable Metrics/ClassLength
+class Ability < AbilityUtilisateur
   include CanCan::Ability
 
   def initialize(compte)
     droits_comptes_refuses compte
     return if compte.validation_refusee?
 
-    droits_utilisateur compte
+    super
     droits_applicatifs
   end
 
   private
-
-  def droits_utilisateur(compte)
-    droits_generiques compte
-    droit_campagne compte
-    droit_evaluation compte
-    droit_evenement compte
-    droit_restitution compte
-    droit_compte compte
-    droit_structure compte
-    droit_actualite compte
-    droits_cmr if compte.charge_mission_regionale?
-  end
 
   def droits_applicatifs
     droit_situation
@@ -31,38 +19,6 @@ class Ability # rubocop:disable Metrics/ClassLength
     droit_questionnaire
     droit_choix
     droit_page
-  end
-
-  def droit_campagne(compte)
-    can :create, Campagne
-    can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
-    can %i[update read], Campagne, compte_id: compte.id
-    can :destroy, Campagne, nombre_evaluations: 0
-  end
-
-  def droit_evaluation(compte)
-    cannot %i[create], Evaluation
-    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
-    return unless compte.validation_acceptee?
-
-    can %i[read mise_en_action], Evaluation, campagne: comptes_de_meme_structure(compte)
-    return unless compte.admin?
-
-    can %i[update destroy], Evaluation, campagne: comptes_de_meme_structure(compte)
-  end
-
-  def droit_evenement(compte)
-    cannot %i[update create], Evenement
-
-    @session_ids ||= Partie.where('comptes.structure_id' => compte.structure_id)
-                           .joins(evaluation: { campagne: :compte }).pluck(:session_id)
-    can :read, Evenement, Evenement.where(session_id: @session_ids) do |e|
-      @session_ids.include?(e.session_id)
-    end
-  end
-
-  def droit_restitution(compte)
-    can :manage, Restitution::Base, campagne: comptes_de_meme_structure(compte)
   end
 
   def droit_situation
@@ -90,75 +46,18 @@ class Ability # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def droit_compte(compte)
-    can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
-    can :read, compte
-    can :update, compte
-    comptes_generiques_ou_comptes_admin(compte)
-    droits_validation_comptes(compte)
-    cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }
-  end
-
   def droit_choix
     cannot :destroy, Choix do |c|
       c.created_at < 1.month.ago
     end
   end
 
-  def droit_structure(compte)
-    can :read, Structure, id: compte.structure_id if compte.validation_acceptee?
-    can :update, Structure, id: compte.structure_id if compte.admin?
-    cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
-  end
-
-  def droit_actualite(compte)
-    can :read, Actualite
-    can :manage, Actualite if compte.superadmin?
-  end
-
   def droit_page
     can :read, ActiveAdmin::Page
-  end
-
-  def droits_generiques(compte)
-    can :manage, :all if compte.superadmin?
-    cannot :destroy, Campagne
-    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
   end
 
   def droits_comptes_refuses(compte)
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
     can %i[update read], compte
-  end
-
-  def comptes_de_meme_structure(compte)
-    { compte: { structure_id: compte.structure_id } }
-  end
-
-  def comptes_generiques_ou_comptes_admin(compte)
-    return unless compte.admin? || compte.compte_generique?
-
-    can :create, Compte
-    can :update, Compte, structure_id: compte.structure_id
-    can :edit_role, Compte, structure_id: compte.structure_id
-    cannot :edit_role, compte if compte.compte_generique?
-  end
-
-  def droits_validation_comptes(compte)
-    if compte.validation_acceptee?
-      can(%i[autoriser refuser], Compte, structure_id: compte.structure_id,
-                                         statut_validation: :en_attente)
-    end
-    can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
-    cannot :refuser, Compte, &:au_moins_admin?
-  end
-
-  def droits_cmr
-    can :read, :all
-    cannot(%i[update create destroy], :all)
-    cannot(:read, AnnonceGenerale)
-    cannot(:read, Beneficiaire)
-    cannot(:read, SourceAide)
-    cannot(:read, Aide::QuestionFrequente)
   end
 end

@@ -18,6 +18,9 @@
       margin-bottom: 1rem;
     }
     &--green {
+      $banner-padding: 1.5rem;
+      padding: $banner-padding;
+      gap: 2rem;
       h4 {
         margin-bottom: 2rem;
       }
@@ -31,12 +34,8 @@
         margin-top: 1rem;
       }
       .banner__icone {
-        position: absolute;
-        bottom: 0;
+        margin-bottom: -$banner-padding;
       }
-    }
-    &__texte {
-      padding: 1.5rem 1.5rem 1.5rem 0.5rem;
     }
     .banner__action {
       p {

@@ -4,7 +4,10 @@ questionnaire = situation_configuration.questionnaire_utile&.nom_technique
 
 div class: 'campagne-situation d-flex align-items-center' do
   div class: 'situation__image' do
-    situation_illustration(situation_configuration.situation)
+    if situation_configuration.situation.illustration.attached?
+      image_tag situation_configuration.situation.illustration,
+                style: "border: 0.25rem solid #{color}"
+    end
   end
   div class: 'situation__texte' do
     div class: 'd-flex mb-2' do

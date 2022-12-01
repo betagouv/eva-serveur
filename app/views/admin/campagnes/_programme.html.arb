@@ -5,8 +5,9 @@ h2 t('.titre')
 div class: 'panel panel-programme' do
   render 'components/card_parcours_type', parcours_type: campagne.parcours_type
 
-  situations_configurations.each do |situation_configuration|
+  situations_configurations.each_with_index do |situation_configuration, i|
     render partial: 'situation',
-           locals: { situation_configuration: situation_configuration }
+           locals: { situation_configuration: situation_configuration,
+                     color: Situation::COULEURS_BORDURES[i] }
   end
 end

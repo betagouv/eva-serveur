@@ -5,7 +5,8 @@ module Restitution
     EVENEMENT = {
       OUVERTURE_CONTENANT: 'ouvertureContenant',
       SAISIE_INVENTAIRE: 'saisieInventaire',
-      FIN_SITUATION: 'finSituation'
+      FIN_SITUATION: 'finSituation',
+      DEMARRAGE: 'demarrage'
     }.freeze
 
     class Essai < Inventaire
@@ -87,6 +88,13 @@ module Restitution
         ::Competence::VIGILANCE_CONTROLE => Inventaire::VigilanceControle,
         ::Competence::ORGANISATION_METHODE => Inventaire::OrganisationMethode
       )
+    end
+
+    def version?(version)
+      evenement_demarrage = evenements.find { |e| e.nom == EVENEMENT[:DEMARRAGE] }
+      return if evenement_demarrage.donnees['version'].blank?
+
+      evenement_demarrage.donnees['version'] == version
     end
   end
 end

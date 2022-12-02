@@ -235,4 +235,29 @@ describe Restitution::Inventaire do
                                                    Competence::ORGANISATION_METHODE])
     end
   end
+
+  describe '#version?' do
+    context "si il y a un numéro de version dans l'évènement démarrage" do
+      before do
+        evenements = [
+          build(:evenement_demarrage, donnees: { version: '2' })
+        ]
+        @restitution = described_class.new(campagne, evenements)
+      end
+
+      it { expect(@restitution.version?('2')).to be true }
+      it { expect(@restitution.version?('1')).to be false }
+    end
+
+    context "si il n'y a pas de numéro de version" do
+      before do
+        evenements = [
+          build(:evenement_demarrage, donnees: {})
+        ]
+        @restitution = described_class.new(campagne, evenements)
+      end
+
+      it { expect(@restitution.version?(2)).to be nil }
+    end
+  end
 end

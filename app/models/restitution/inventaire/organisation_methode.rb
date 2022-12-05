@@ -3,8 +3,6 @@
 module Restitution
   class Inventaire
     class OrganisationMethode < Restitution::Competence::Base
-      VERSION_2 = '2'
-
       def niveau
         return ::Competence::NIVEAU_INDETERMINE unless @restitution.reussite?
 

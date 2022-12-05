@@ -8,6 +8,7 @@ module Restitution
       FIN_SITUATION: 'finSituation',
       DEMARRAGE: 'demarrage'
     }.freeze
+    VERSION_2 = '2'
 
     class Essai < Inventaire
       def initialize(campagne, evenements, date_depart_situation)

@@ -2,7 +2,7 @@
 
 if current_compte.email_non_confirme?
   div class: 'row m-0' do
-    div class: 'offset-1 col-10' do
+    div class: 'offset-1 col-6' do
       div class: 'card mb-5' do
         render 'components/banniere_confirmation_email', demande: :nouvelle_inscription
       end
@@ -25,8 +25,15 @@ if evaluations.present?
       render 'evaluations', evaluations: evaluations
     end
     column do
-      render 'actualites', actualites: actualites if actualites.present?
+      ## rubocop nécessite un élèment à l'intérieur de la colonne
+      div
     end
+  end
+end
+
+if actualites.present?
+  columns do
+    render 'actualites', actualites: actualites
   end
 end
 

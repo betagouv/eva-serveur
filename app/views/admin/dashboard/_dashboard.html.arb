@@ -2,7 +2,7 @@
 
 if current_compte.email_non_confirme?
   div class: 'row m-0' do
-    div class: 'offset-1 col-10' do
+    div class: 'offset-1 col-6' do
       div class: 'card mb-5' do
         render 'components/banniere_confirmation_email', demande: :nouvelle_inscription
       end
@@ -20,12 +20,23 @@ elsif current_compte.validation_en_attente?
 end
 
 if evaluations.present?
-  columns do
-    column do
-      render 'evaluations', evaluations: evaluations
+  div class: 'section-evaluations' do
+    columns do
+      column do
+        render 'evaluations', evaluations: evaluations
+      end
+      column do
+        ## rubocop nécessite un élèment à l'intérieur de la colonne
+        div
+      end
     end
-    column do
-      render 'actualites', actualites: actualites if actualites.present?
+  end
+end
+
+if actualites.present?
+  div class: 'section-actualites' do
+    columns do
+      render 'actualites', actualites: actualites
     end
   end
 end

@@ -5,29 +5,15 @@
     max-width: 40rem;
   }
 
-  .illustration {
-    border-radius: 0.5rem;
-    overflow: hidden;
-    width: 100%;
-    img {
-      width: 100%
-    }
-  }
-
   .texte {
     display: flex;
-    margin-bottom: .5rem;
     font-size:0.875rem;
     align-items: center;
     padding: 0 1rem;
-    min-height: 3.5rem;
+    min-height: 3rem;
 
     .action {
       @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
-    }
-
-    .tag-categorie {
-      margin-right: 1rem;
     }
 
     .titre {
@@ -47,23 +33,49 @@
 }
 
 .derniere-actualite {
+  .carte-actualite {
+    height: 17rem;
+  }
+
+  .illustration {
+    border-top-right-radius: .5rem;
+    border-top-left-radius: .5rem;
+    overflow: hidden;
+    width: 100%;
+    height: 8rem;
+    img {
+      width: 100%
+    }
+  }
+
   .texte {
-    min-height: auto;
+    min-height: 9rem;
     align-items: flex-start;
     flex-direction: column;
-    padding: 0.9rem 1.45rem 1.25rem;
+    padding: 0.625rem 1rem 1.25rem;
 
     .titre {
       font-size: 1.25rem;
       line-height: 1.5rem;
       font-weight: 600;
-      margin: 0.75rem 0 1.5rem;
+      margin-top: 1rem;
     }
 
-    .action {
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
+    .footer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
     }
+  }
+}
+
+.liste-actualites {
+  .carte-actualite {
+    margin-bottom: .5rem;
+  }
+  .entete {
+    min-width: 5.625rem;
+    margin-right: 1rem;
   }
 }

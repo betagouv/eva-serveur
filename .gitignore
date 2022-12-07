@@ -37,3 +37,6 @@ erd.dot
 
 # RVM / RBenv
 .env
+
+# fichier de Redis
+dump.rdb

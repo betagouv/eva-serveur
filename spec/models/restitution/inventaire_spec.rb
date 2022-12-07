@@ -171,13 +171,13 @@ describe Restitution::Inventaire do
         expect(essai).not_to be_abandon
         expect(essai).to be_verifie
         expect(essai.nombre_ouverture_contenant).to be(3)
-        expect(essai.temps_total).to within(0.1).of(180)
+        expect(essai.temps_total).to within(0.2).of(180)
       end
       restitution.essais_verifies.last.tap do |essai|
         expect(essai).to be_reussite
         expect(essai).to be_verifie
         expect(essai.nombre_ouverture_contenant).to be(0)
-        expect(essai.temps_total).to within(0.1).of(300)
+        expect(essai.temps_total).to within(0.2).of(300)
       end
     end
 

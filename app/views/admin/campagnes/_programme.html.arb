@@ -8,6 +8,6 @@ div class: 'panel panel-programme' do
   situations_configurations.each_with_index do |situation_configuration, i|
     render partial: 'situation',
            locals: { situation_configuration: situation_configuration,
-                     color: Situation::COULEURS_BORDURES[i] }
+                     couleur: Situation::COULEURS_BORDURES[i] }
   end
 end

@@ -85,17 +85,8 @@
           font-style: italic;
           color: $eva_green;
         }
-        .situation__image {
-          width: 8rem;
-          img {
-            width: 8rem;
-            height: 4rem;
-            object-fit: cover;
-            border-radius: 2.813rem;
-          }
-        }
         .situation__texte {
-          h5 { 
+          h5 {
             margin-bottom: 0;
             margin-right: .5rem;
             align-self: center;

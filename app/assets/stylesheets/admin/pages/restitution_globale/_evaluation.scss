@@ -69,12 +69,12 @@
 
     &--illettrisme {
       border-radius: 0 0 8px 8px;
-      border: 2px solid $eva_red;
+      border: 2px solid $eva_orange;
       h5 {
-        color: $eva_red;
+        color: $eva_orange;
       }
       .card__banner__icone {
-        fill: $eva_red;
+        fill: $eva_orange;
       }
 
       &-avec-reponse {

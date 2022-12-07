@@ -28,10 +28,7 @@
           <%= render(BoutonComponent.new('Non', '#', class: 'reponse-mise-en-action', 'data-evaluation-id': resource.id, 'data-reponse': false)) %>
         </div>
       </div>
-      <div class="font-italic card__banner--illettrisme-asterisque">
-        * Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :<br>
-        <a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
-      </div>
+      <%= render 'components/asterisque_solutions_illettrisme' %>
     </div>
   </div>
 </div>

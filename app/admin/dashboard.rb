@@ -47,7 +47,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
     def recupere_actualites
       @actualites = Actualite.order(created_at: :desc)
-                             .includes(illustration_attachment: :blob).first(4)
+                             .includes(illustration_attachment: :blob).first(6)
     end
 
     def recupere_campagnes

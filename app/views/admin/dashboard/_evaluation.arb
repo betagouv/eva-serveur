@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+div class: 'col d-flex p-0' do
+  span class: 'nom' do
+    text_node nom_pour_ressource(evaluation)
+  end
+  span class: 'pastille' do
+    if evaluation.illettrisme_potentiel?
+      render partial: 'admin/evaluations/pastille_illettrisme_potentiel',
+             locals: { avec_tooltip: true }
+    end
+  end
+end
+div class: 'col d-flex p-0' do
+  span class: 'date' do
+    text_node t('.date', date: time_ago_in_words(evaluation.created_at))
+  end
+  span class: 'action' do
+    link_to t('.action'), admin_evaluation_path(evaluation)
+  end
+end

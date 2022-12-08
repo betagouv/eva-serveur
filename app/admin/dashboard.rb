@@ -21,7 +21,8 @@ ActiveAdmin.register_page 'Dashboard' do
     end
 
     before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
-                  :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente
+                  :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente,
+                  :recupere_evaluations_sans_mise_en_action
 
     private
 
@@ -43,6 +44,13 @@ ActiveAdmin.register_page 'Dashboard' do
 
     def recupere_evaluations
       @evaluations = Evaluation.accessible_by(current_ability).order(created_at: :desc).limit(10)
+    end
+
+    def recupere_evaluations_sans_mise_en_action
+      @evaluations_sans_mise_en_action = Evaluation.accessible_by(current_ability)
+                                                   .where(mise_en_action_effectuee: nil)
+                                                   .illettrisme_potentiel
+                                                   .order(created_at: :desc)
     end
 
     def recupere_actualites

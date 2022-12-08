@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+div class: 'evaluations-liste' do
+  evaluations.each do |evaluation|
+    div class: 'evaluation' do
+      div class: 'row w-100 no-gutters' do
+        render partial_evaluation, evaluation: evaluation
+      end
+    end
+  end
+end

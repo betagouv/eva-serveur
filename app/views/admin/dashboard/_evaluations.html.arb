@@ -14,31 +14,5 @@ div class: 'evaluations bloc-apercu' do
     end
   end
 
-  div class: 'evaluations-liste' do
-    evaluations.each do |evaluation|
-      div class: 'evaluation' do
-        div class: 'row w-100 no-gutters' do
-          div class: 'col d-flex' do
-            span class: 'nom' do
-              text_node nom_pour_ressource(evaluation)
-            end
-            span class: 'pastille' do
-              if evaluation.illettrisme_potentiel?
-                render partial: 'admin/evaluations/pastille_illettrisme_potentiel',
-                       locals: { avec_tooltip: true }
-              end
-            end
-          end
-          div class: 'col d-flex' do
-            span class: 'date' do
-              text_node t('.date', date: time_ago_in_words(evaluation.created_at))
-            end
-            span class: 'action' do
-              link_to t('.action'), admin_evaluation_path(evaluation)
-            end
-          end
-        end
-      end
-    end
-  end
+  render 'liste_evaluations', evaluations: evaluations, partial_evaluation: 'evaluation'
 end

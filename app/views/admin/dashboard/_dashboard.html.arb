@@ -26,8 +26,9 @@ if evaluations.present?
         render 'evaluations', evaluations: evaluations
       end
       column do
-        ## rubocop nécessite un élèment à l'intérieur de la colonne
-        div
+        if evaluations_sans_mise_en_action.present?
+          render 'evaluations_sans_mise_en_action', evaluations: evaluations_sans_mise_en_action
+        end
       end
     end
   end

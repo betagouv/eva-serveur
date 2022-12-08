@@ -27,6 +27,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.875rem;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
 
       h3 {
         @include titre-carte;
@@ -96,6 +98,10 @@
     }
   }
 
+  .evaluation {
+    min-height: 48px;
+  }
+
   .prise-en-main {
     .evaluations-premiere-visite {
       @include carte-avec-ombre();
@@ -139,5 +145,17 @@
   .card__banner--alert {
     padding: 1.5rem 2rem;
     gap: 2rem;
+  }
+
+  .evaluations-sans-mise-en-action {
+    box-shadow: none;
+
+    .bloc-apercu-header {
+      box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+    }
+
+    &, .evaluation {
+      background-color: transparent;
+    }
   }
 }

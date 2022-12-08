@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+span class: 'nom' do
+  text_node nom_pour_ressource(evaluation)
+end

@@ -14,10 +14,13 @@ fr:
         action: Lire
       evaluations:
         titre: Vos dernières évaluations
-        action: Voir
         voir_tout: 'Voir toutes les évaluations'
-        date: "il y a %{date}"
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
+      evaluation:
+        date: "il y a %{date}"
+      evaluations_sans_mise_en_action:
+        titre: Diagnostics d’illettrisme potentiel
+        voir_tout: "Voir tout (%{nombre_evaluations})"
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

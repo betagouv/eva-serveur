@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+div class: 'evaluations panel p-0 border border-orange' do
+  div class: 'bloc-apercu-header bg-orange p-3' do
+    h3 t('.titre')
+    text_node link_to "Voir tout (#{evaluations.count})", admin_evaluations_path
+  end
+  div class: 'p-3' do
+    render 'liste_evaluations', evaluations: evaluations.limit(6),
+                                evaluations_sans_mise_en_action: true
+  end
+end

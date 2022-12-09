@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '3.0.4'
+ruby '3.0.5'
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -40,7 +40,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'kaminari-i18n'
 gem 'mailjet'
-gem 'mini_racer', '~> 0.4.0'
+gem 'mini_racer', '~> 0.6.3'
 gem 'paranoia'
 gem 'pg', '~> 1.0'
 gem 'rack-cors', require: 'rack/cors'

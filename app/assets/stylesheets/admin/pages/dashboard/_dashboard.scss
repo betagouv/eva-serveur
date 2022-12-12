@@ -9,7 +9,7 @@
 
   .bloc-apercu {
     &-wrapper {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
 
       .evaluation-legende {
         display: flex;
@@ -27,8 +27,6 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.875rem;
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
 
       h3 {
         @include titre-carte;
@@ -156,6 +154,21 @@
 
     &, .evaluation {
       background-color: transparent;
+      .question {
+        margin: 3.438rem 0;
+      }
+      .asterisque {
+        margin: 1rem;
+        a { color: $eva_dark; }
+      }
+      .bloc-apercu-header {
+        border-radius: .5rem .5rem 0 0;
+      }
+    }
+  }
+  .evaluations {
+    .bloc-apercu-header {
+      margin-bottom: .875rem;
     }
   }
 }

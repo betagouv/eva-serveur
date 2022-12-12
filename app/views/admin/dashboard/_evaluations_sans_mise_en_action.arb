@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
-div class: 'evaluations evaluations-sans-mise-en-action panel p-0 border border-orange' do
-  div class: 'bloc-apercu-header bg-orange p-4' do
+div class: 'evaluations-sans-mise-en-action panel p-0 border border-orange' do
+  div class: 'bloc-apercu-header bg-orange p-4 mb-0' do
     h3 t('.titre')
     text_node link_to t('.voir_tout', nombre_evaluations: evaluations.count),
                       admin_evaluations_path(scope: :illettrisme_potentiel)
   end
-  div class: 'p-3' do
+  div class: 'px-3' do
+    div class: 'd-flex align-items-center question' do
+      div svg_tag_base64 'point_interrogation.svg', class: 'mr-3'
+      div t('.question'),
+          class: 'fw-semi-bold'
+    end
     render 'liste_evaluations', evaluations: evaluations.limit(6),
                                 partial_evaluation: 'evaluation_sans_mise_en_action'
+    render 'components/asterisque_solutions_illettrisme'
   end
 end

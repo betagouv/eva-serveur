@@ -21,6 +21,7 @@ fr:
       evaluations_sans_mise_en_action:
         titre: Diagnostics d’illettrisme potentiel
         voir_tout: "Voir tout (%{nombre_evaluations})"
+        question: Ces personnes semblent avoir besoin d’accompagnement. Avez-vous été en mesure de les orienter vers une solution adaptée* ?
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

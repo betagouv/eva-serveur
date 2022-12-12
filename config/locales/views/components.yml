@@ -55,3 +55,7 @@ fr:
           Parcours personnalisé
         description: |
           *Votre parcours a été personnalisé selon vos besoins spécifiques.*
+    asterisque_solutions_illettrisme:
+      description: |
+        Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :
+      lien: https://l.incubateur.net/eva-orientation

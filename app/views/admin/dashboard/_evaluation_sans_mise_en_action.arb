@@ -3,3 +3,4 @@
 span class: 'nom' do
   text_node nom_pour_ressource(evaluation)
 end
+render partial: 'components/boutons_mise_en_action', locals: { evaluation: evaluation }

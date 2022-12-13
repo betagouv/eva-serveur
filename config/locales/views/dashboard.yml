@@ -18,10 +18,20 @@ fr:
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
         date: "il y a %{date}"
-      evaluations_sans_mise_en_action:
-        titre: Diagnostics d’illettrisme potentiel
-        voir_tout: "Voir tout (%{nombre_evaluations})"
-        question: Ces personnes semblent avoir besoin d’accompagnement. Avez-vous été en mesure de les orienter vers une solution adaptée* ?
+      mise_en_action:
+        sans_evaluations:
+          titre: Diagnostics d’illettrisme potentiel
+          action: Aucun
+          description: |
+            ##### Les évaluations eva permettent de mettre en évidence les situations d’illettrisme. Vous retrouverez ici les bénéficiaires concernés.
+
+            Nos équipes peuvent vous aider dans cette démarche d’accompagnement.
+
+            Voici les pistes de solutions disponibles dans votre région<br>(ateliers, formations, ré-orientations, accompagnement social...) :<br><a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
+        avec_evaluations:
+          titre: Diagnostics d’illettrisme potentiel
+          action: "Voir tout (%{nombre_evaluations})"
+          question: Ces personnes semblent avoir besoin d’accompagnement. Avez-vous été en mesure de les orienter vers une solution adaptée* ?
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

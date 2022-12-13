@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+div class: 'contenu-sans-evaluations' do
+  div class: 'bloc-apercu-header bg-orange p-4 mb-0' do
+    h3 t('.titre')
+    div t('.action'), class: 'bouton--desactive'
+  end
+  div svg_tag_base64 'panneaux.svg', class: 'illustration'
+  div class: 'description' do
+    text_node md t('.description')
+  end
+end

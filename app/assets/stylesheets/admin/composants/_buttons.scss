@@ -68,3 +68,12 @@ button:not(.disabled):hover {
     @include bouton-arrondi();
   }
 }
+
+.bouton--desactive {
+  @include bouton-arrondi;
+  pointer-events: none;
+  &, &:link, :visited {
+    color: $eva_dark_blue_grey;
+  }
+  background-color: $eva_bluegrey;
+}

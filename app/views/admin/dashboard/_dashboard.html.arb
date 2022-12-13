@@ -26,9 +26,8 @@ if evaluations.present?
         render 'evaluations', evaluations: evaluations
       end
       column do
-        if evaluations_sans_mise_en_action.present?
-          render 'evaluations_sans_mise_en_action', evaluations: evaluations_sans_mise_en_action
-        end
+        render 'admin/dashboard/mise_en_action/evaluations_sans_mise_en_action',
+               evaluations: evaluations_sans_mise_en_action
       end
     end
   end

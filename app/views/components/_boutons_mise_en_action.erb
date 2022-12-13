@@ -13,7 +13,7 @@
     <% class_cache = evaluation.mise_en_action_effectuee.nil? ? 'd-flex' : 'hidden' %>
     <div data-reponse="vide" class="actions mise-en-action <%= class_cache %>">
       <a href="#"
-          class="bouton bouton-principal reponse-mise-en-action"
+          class="bouton bouton-principal reponse-mise-en-action mr-1"
           data-evaluation-id="<%= evaluation.id %>"
           data-reponse="true">Oui</a>
       <a href="#"

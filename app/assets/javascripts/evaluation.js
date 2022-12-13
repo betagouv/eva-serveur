@@ -1,13 +1,13 @@
-function afficheReponse(reponse) {
-  $('.mise-en-action').removeClass('d-flex').addClass('hidden');
-  $(`div[data-reponse='${reponse}']`).removeClass('hidden');
-  $('.card__banner--illettrisme').addClass('card__banner--illettrisme-avec-reponse');
+function afficheReponse(reponse, evaluationId) {
+  $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
+  $(`#${evaluationId} div[data-reponse='${reponse}']`).removeClass('hidden');
+  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--illettrisme-avec-reponse');
 }
 
-function modifieReponseAccompagnementIllettrisme() {
-  $('.mise-en-action').addClass('hidden');
-  $("div[data-reponse='vide']").removeClass('hidden').addClass('d-flex');
-  $('.card__banner--illettrisme').removeClass('card__banner--illettrisme-avec-reponse');
+function modifieReponseAccompagnementIllettrisme(evaluationId) {
+  $(`#${evaluationId} .mise-en-action`).addClass('hidden');
+  $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
+  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--illettrisme-avec-reponse');
 }
 
 function enregistreReponseAccompagnementIllettrisme(evaluationId, reponse) {
@@ -20,7 +20,7 @@ function enregistreReponseAccompagnementIllettrisme(evaluationId, reponse) {
     data: data,
     dataType: "json",
     success: function () {
-      afficheReponse(reponse);
+      afficheReponse(reponse, evaluationId);
     }
   });
 }
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $( ".modifier-mise-en-action" ).click(function(e) {
     e.preventDefault();
-    modifieReponseAccompagnementIllettrisme()
+    const evaluationId = $(this).data('evaluation-id');
+    modifieReponseAccompagnementIllettrisme(evaluationId)
   })
 });

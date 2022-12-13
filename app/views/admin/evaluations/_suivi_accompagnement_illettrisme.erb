@@ -11,24 +11,7 @@
     </div>
     <div>
       <div><%= md t('illettrisme_potentiel.message', scope: scope) %></div>
-      <div class='d-flex justify-content-center text-primary' data-reponse="">
-        <% class_cache = resource.mise_en_action_effectuee == true ? '' : 'hidden' %>
-        <div data-reponse="true" class="text-center mise-en-action <%= class_cache %>">
-          <strong>Oui</strong>, vous avez trouvé une solution<br>
-          (<a href="#" class="modifier-mise-en-action">Modifier votre réponse</a>)
-        </div>
-        <% class_cache = resource.mise_en_action_effectuee == false ? '' : 'hidden' %>
-        <div data-reponse="false" class="text-center mise-en-action <%= class_cache %>">
-          <strong>Non</strong>, vous n'avez pas trouvé de solution<br>
-          (<a href="#" class="modifier-mise-en-action">Modifier votre réponse</a>)
-        </div>
-        <% class_cache = resource.mise_en_action_effectuee.nil? ? 'd-flex' : 'hidden' %>
-        <div data-reponse="vide" class="actions mise-en-action <%= class_cache %>">
-          <%= render(BoutonComponent.new('Oui', '#', class: 'reponse-mise-en-action', 'data-evaluation-id': resource.id, 'data-reponse': true)) %>
-          <%= render(BoutonComponent.new('Non', '#', class: 'reponse-mise-en-action', 'data-evaluation-id': resource.id, 'data-reponse': false)) %>
-        </div>
-      </div>
-      <%= render 'components/asterisque_solutions_illettrisme' %>
+      <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: resource } %>
     </div>
   </div>
 </div>

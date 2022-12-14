@@ -42,17 +42,7 @@ fr:
         entete-code: Code campagne
         entete-url: URL
       prise_en_main:
-        titre: Bienvenue dans votre espace conseiller !
-        etapes:
-          "0":
-            description: Étape 1/3 - Eva utilise le concept de "campagne" pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
-            action: Créer ma première campagne
-          "1":
-            description: Étape 2/3 - Testez votre campagne en effectuant le parcours
-            action: Tester votre campagne
-          "2":
-            description: Étape 3/3 - Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
-            action: Consulter le guide de prise en main
+        titre: Bienvenue sur eva !
       validation_necessaire:
         titre: Bienvenue sur eva !
         description: |

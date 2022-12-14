@@ -39,3 +39,8 @@ $theme-colors: (
 
 // Variables pour ActiveAdmin
 $link-color: $eva_main_blue;
+
+$spacer: 1rem;
+$spacers: (
+  6: ($spacer * 2)
+)

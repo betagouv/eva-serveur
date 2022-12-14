@@ -54,12 +54,9 @@ describe 'Dashboard', type: :feature do
       context "je n'ai pas encore créé de campagne" do
         it "affiche l'encart" do
           visit admin_path
-          expect(page).to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).to have_content('Eva utilise le concept de "campagne" pour regrouper les ' \
-                                       'passations selon leurs objectifs, leurs publics cibles ' \
-                                       'ou les dispositifs mobilisés.')
-          expect(page).not_to have_content('Organisez votre première session puis retrouvez ici ' \
-                                           'vos dernières évaluations.')
+          expect(page).to have_content('Bienvenue sur eva')
+          expect(page).to have_content('Eva utilise le concept de')
+          expect(page).not_to have_content('Organisez votre première session')
         end
       end
 
@@ -70,11 +67,8 @@ describe 'Dashboard', type: :feature do
         it "n'affiche pas d'encart" do
           visit admin_path
           expect(page).not_to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).not_to have_content('Organisez votre première session puis retrouvez ici ' \
-                                           'vos dernières évaluations.')
-          expect(page).not_to have_content('Eva utilise le concept de "campagne" pour regrouper ' \
-                                           'les passations selon leurs objectifs, leurs publics ' \
-                                           'cibles ou les dispositifs mobilisés.')
+          expect(page).not_to have_content('Organisez votre première')
+          expect(page).not_to have_content('Eva utilise le concept de')
         end
 
         context 'affiche le message de validation en attente' do

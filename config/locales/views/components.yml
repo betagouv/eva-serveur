@@ -59,3 +59,22 @@ fr:
       description: |
         Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :
       lien: https://l.incubateur.net/eva-orientation
+    prise_en_main:
+      titre: Bienvenue sur eva !
+      sous_titre: Bien débuter
+      etapes:
+        "0":
+          titre: |
+            ## Créez votre campagne
+          description: Étape 1/3 - Eva utilise le concept de « campagne » pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+          action: Créer ma campagne
+        "1":
+          titre: |
+            ## Testez votre campagne
+          description: Étape 2/3 - Testez votre campagne en effectuant le parcours
+          action: Tester votre campagne
+        "2":
+          titre: |
+            ## Utilisez eva
+          description: Étape 3/3 - Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
+          action: Consulter le guide de prise en main

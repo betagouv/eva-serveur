@@ -44,9 +44,10 @@ class Structure < ApplicationRecord
   }
 
   scope :pas_vraiment_utilisatrices, lambda {
-    ids = Evaluation.joins(campagne: { compte: :structure })
-                    .select('structures.id')
-    where.not(id: ids)
+    ids_avec_evaluations = Evaluation.joins(campagne: { compte: :structure })
+                                     .select('structures.id')
+    ids_avec_campagnes = Campagne.joins(:compte).select('structure_id')
+    where.not(id: ids_avec_evaluations).where(id: ids_avec_campagnes)
   }
 
   scope :sans_campagne, lambda {

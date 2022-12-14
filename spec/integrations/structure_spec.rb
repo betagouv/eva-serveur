@@ -25,10 +25,22 @@ describe Structure, type: :integration do
       let!(:structure_pas_utilisatrice) { create :structure_locale }
       let!(:structure_utilisatrice) { create :structure_locale }
 
-      before { cree_evaluations_pour_structure(structure_utilisatrice) }
+      context 'quand ma structure a une campagne' do
+        before do
+          compte = create(:compte, structure: structure_pas_utilisatrice)
+          create(:campagne, compte: compte)
+          cree_evaluations_pour_structure(structure_utilisatrice)
+        end
 
-      it { expect(Structure.pas_vraiment_utilisatrices).to include structure_pas_utilisatrice }
-      it { expect(Structure.pas_vraiment_utilisatrices).not_to include structure_utilisatrice }
+        it { expect(Structure.pas_vraiment_utilisatrices).to include structure_pas_utilisatrice }
+        it { expect(Structure.pas_vraiment_utilisatrices).not_to include structure_utilisatrice }
+      end
+
+      context "quand ma structure n'a pas de campagne" do
+        it do
+          expect(Structure.pas_vraiment_utilisatrices).not_to include(structure_pas_utilisatrice)
+        end
+      end
     end
 
     describe '.non_activees' do

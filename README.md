@@ -30,11 +30,17 @@ Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campa
 
 Générer le fichier de description des composants :  
 `bundle exec rake view_component_storybook:write_stories_json`
+ # Storybook
 
-Puis démarrer storybook (votre serveur rails doit être démarré) :  
+Pour démarrer storybook (votre serveur rails doit être démarré) :
 ```
 npm install
 npm run storybook
+```
+
+Pour générer des nouvelles stories :
+```
+rake view_component_storybook:write_stories_json
 ```
 
 * Espace d'administration

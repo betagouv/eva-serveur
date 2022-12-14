@@ -12,13 +12,17 @@ class BoutonComponent < ViewComponent::Base
     border-primary
     bg-white
   ].freeze
+  DESACTIVE_CLASSES = %w[
+    bouton--desactive
+  ].freeze
   BASE_CLASSES = %w[
     bouton
   ].freeze
 
   BUTTON_TYPE_MAPPINGS = {
     primary: PRIMARY_CLASSES,
-    outline: OUTLINE_CLASSES
+    outline: OUTLINE_CLASSES,
+    desactive: DESACTIVE_CLASSES
   }.freeze
 
   def initialize(body, url, type: nil, **params)

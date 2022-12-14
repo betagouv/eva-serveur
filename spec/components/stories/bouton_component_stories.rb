@@ -18,4 +18,10 @@ class BoutonComponentStories < ViewComponent::Storybook::Stories
     url = text('https://preprod.eva.beta.gouv.fr/pro')
     constructor(body, url, type: :outline)
   end
+
+  story :desactive do
+    body = text('Bouton')
+    url = text('https://preprod.eva.beta.gouv.fr/pro')
+    constructor(body, url, type: :desactive)
+  end
 end

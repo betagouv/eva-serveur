@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-render partial: 'admin/dashboard/prise_en_main/base', locals: {
+render partial: 'components/prise_en_main/carte_base', locals: {
   numero_etape: 0,
   lien_action: new_admin_campagne_path
 }

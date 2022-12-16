@@ -4,7 +4,8 @@ div class: 'contenu-avec-evaluations' do
   div class: 'bloc-apercu-header bg-orange p-4 mb-0' do
     h3 t('.titre')
     text_node link_to t('.action', nombre_evaluations: evaluations.count),
-                      admin_evaluations_path(scope: :illettrisme_potentiel)
+                      admin_evaluations_path(q: { mise_en_action_effectuee_null: true },
+                                             scope: :illettrisme_potentiel)
   end
   div class: 'px-3' do
     div class: 'd-flex align-items-center question' do

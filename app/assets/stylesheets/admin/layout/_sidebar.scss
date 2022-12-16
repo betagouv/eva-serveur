@@ -1,3 +1,7 @@
+#search_status_sidebar_section {
+  display: none;
+}
+
 .sidebar_section.panel {
   &.action-items-sidebar {
     @include annule-panel;

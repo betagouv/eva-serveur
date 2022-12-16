@@ -31,6 +31,7 @@ fr:
         competences_transversales_incompletes: Évaluation des compétences transversales incomplète
         competences_de_base_incompletes: Évaluation des compétences de base incomplète
         beneficiaire: Bénéficiaire
+        mise_en_action_effectuee_null: Suivi en attente
         interpretations:
           synthese_competences_de_base:
             socle_clea: supérieur

@@ -18,6 +18,7 @@ fr:
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
         date: "il y a %{date}"
+        action: Voir
       mise_en_action:
         sans_evaluations:
           titre: Diagnostics d’illettrisme potentiel

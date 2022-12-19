@@ -9,7 +9,7 @@ div class: 'contenu-avec-evaluations' do
   end
   div class: 'px-3' do
     div class: 'd-flex align-items-center question' do
-      div svg_tag_base64 'point_interrogation.svg', class: 'mr-3'
+      text_node image_tag 'point_interrogation.svg', class: 'mr-3'
       div t('.question'),
           class: 'fw-semi-bold'
     end

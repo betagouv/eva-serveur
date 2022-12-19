@@ -18,6 +18,7 @@ fr:
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
         date: "il y a %{date}"
+        action: Voir
       mise_en_action:
         sans_evaluations:
           titre: Diagnostics d’illettrisme potentiel
@@ -27,7 +28,9 @@ fr:
 
             Nos équipes peuvent vous aider dans cette démarche d’accompagnement.
 
-            Voici les pistes de solutions disponibles dans votre région<br>(ateliers, formations, ré-orientations, accompagnement social...) :<br><a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
+            Voici les pistes de solutions disponibles dans votre région  
+            (ateliers, formations, ré-orientations, accompagnement social…) :  
+            <a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
         avec_evaluations:
           titre: Diagnostics d’illettrisme potentiel
           action: "Voir tout (%{nombre_evaluations})"

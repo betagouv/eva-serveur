@@ -5,6 +5,10 @@ h1 {
   margin-bottom: 2rem;
 }
 
+// h2 et h3 ont le même font-size de 1.5rem
+// notre h3 devrait donc faire 1.25rem
+// utiliser la mixin @include h3() en attendant un refactoring complet des h3
+
 h2 {
   @include titre;
   font-size: 1.5rem;

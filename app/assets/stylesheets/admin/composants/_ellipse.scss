@@ -1,3 +1,6 @@
+$taille-ellipse: 1.5rem;
+$hauteur-tick: .5rem;
+$largeur-tick: .75rem;
 
 .ellipse {
   width: 1rem;
@@ -5,9 +8,33 @@
   border-radius: 50%;
   display: inline-block;
 
+  &.ellipse-a-cocher {
+    border: 1px solid $eva_dark_blue_grey;
+    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+    width: $taille-ellipse;
+    height: $taille-ellipse;
+  }
+
   &.ellipse__105 {
     background: $eva_orange;
   }
+
+  &.ellipse--active {
+    background: $eva_light;
+  }
+
+  &.ellipse--desactive {
+    background: $eva_bluegrey;
+  }
+
+  &.ellipse--succes {
+    background: $eva_green;
+  }
+}
+
+.ellipse-a-cocher__tick {
+  top: calc(#{$taille-ellipse - $hauteur-tick} / 2);
+  left: calc(#{$taille-ellipse - $largeur-tick} / 2);
 }
 
 .paginated_collection .ellipse {

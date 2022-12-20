@@ -22,5 +22,18 @@ div class: 'carte-prise-en-main' do
       end
     end
   end
-  div class: 'carte__progression w-100 h-100'
+
+  div class: 'carte__progression w-100 h-100' do
+    h3 t('etapes.progression.titre', scope: scope)
+    ul do
+      PriseEnMain::ETAPES.each_with_index do |etape, index|
+        statut = statut_etape(index, numero_etape)
+        li do
+          render(EllipseComponent.new(statut))
+          span t("etapes.progression.#{etape}", scope: scope),
+               class: "progression__etape text-#{statut}"
+        end
+      end
+    end
+  end
 end

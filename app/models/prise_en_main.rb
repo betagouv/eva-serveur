@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PriseEnMain
+  ETAPES = %w[campagne_creee campagne_testee retour_effectue].freeze
+
   def initialize(compte:, nombre_campagnes:, nombre_evaluations:)
     @compte = compte
     @nombre_campagnes = nombre_campagnes

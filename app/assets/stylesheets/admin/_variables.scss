@@ -34,7 +34,10 @@ $font-texte: 'Work Sans';
 $theme-colors: (
   "primary": $eva_main_blue,
   "warning": $eva_dark_orange,
-  "orange": $eva_orange
+  "orange": $eva_orange,
+  "succes": $eva_green,
+  "active": $eva_light,
+  "desactive": $eva_bluegrey
 );
 
 // Variables pour ActiveAdmin

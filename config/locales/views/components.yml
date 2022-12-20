@@ -63,6 +63,11 @@ fr:
       titre: Bienvenue sur eva !
       sous_titre: Bien débuter
       etapes:
+        progression:
+          titre: Débutez eva en 3 étapes
+          campagne_creee: Campagne créée
+          campagne_testee: Campagne testée
+          retour_effectue: Retour d’expérience effectué
         "0":
           titre: |
             ## Créez votre campagne

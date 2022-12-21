@@ -33,7 +33,7 @@ if evaluations.present?
   end
 end
 
-if actualites.present?
+if actualites.present? && prise_en_main.terminee?
   div class: 'section-actualites' do
     columns do
       render 'actualites', actualites: actualites

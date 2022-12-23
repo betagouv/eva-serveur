@@ -64,22 +64,27 @@ fr:
       sous_titre: Bien débuter
       etapes:
         progression:
-          titre: Débutez eva en 3 étapes
-          campagne_creee: Campagne créée
-          campagne_testee: Campagne testée
-          retour_effectue: Retour d’expérience effectué
-        "0":
+          titre: Débutez eva en 4 étapes
+          creation_campagne: Campagne créée
+          test_campagne: Campagne testée
+          passations: 4 passations effectuées
+          retour_experience: Retour d’expérience effectué
+        creation_campagne:
           titre: |
             ## Créez votre campagne
-          description: Étape 1/3 - Eva utilise le concept de « campagne » pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
+          description: Eva utilise le concept de « campagne » pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
           action: Créer ma campagne
-        "1":
+        test_campagne:
           titre: |
             ## Testez votre campagne
-          description: Étape 2/3 - Testez votre campagne en effectuant le parcours
+          description: Testez votre campagne en effectuant le parcours
           action: Tester votre campagne
-        "2":
+        passations:
+          titre: |
+            ## Organisez 4 passations
+          description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « Vos dernières évaluations » ci-dessous."
+        retour_experience:
           titre: |
             ## Utilisez eva
-          description: Étape 3/3 - Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
+          description: Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
           action: Consulter le guide de prise en main

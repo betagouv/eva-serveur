@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 render partial: 'components/prise_en_main/carte_base', locals: {
-  numero_etape: 0,
+  etape_en_cours: 'creation_campagne',
   lien_action: new_admin_campagne_path
 }

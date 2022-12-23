@@ -12,25 +12,32 @@ describe PriseEnMain do
                     nombre_evaluations: nombre_evaluations
   end
 
-  describe '#numero_etape' do
+  describe '#etape_en_cours' do
     context "quand il n'y a pas de campagne" do
       let(:nombre_campagnes) { 0 }
 
-      it { expect(prise_en_main.numero_etape).to eq 0 }
+      it { expect(prise_en_main.etape_en_cours).to eq 'creation_campagne' }
     end
 
     context "quand il n'y a pas d'évaluation et qu'il y a une campagne" do
       let(:nombre_campagnes) { 1 }
       let(:nombre_evaluations) { 0 }
 
-      it { expect(prise_en_main.numero_etape).to eq 1 }
+      it { expect(prise_en_main.etape_en_cours).to eq 'test_campagne' }
     end
 
-    context "quand il y a une évaluation et qu'il y a une campagne" do
+    context "quand il y a moins de 4 évaluations et qu'il y a une campagne" do
       let(:nombre_campagnes) { 1 }
-      let(:nombre_evaluations) { 1 }
+      let(:nombre_evaluations) { 3 }
 
-      it { expect(prise_en_main.numero_etape).to eq 2 }
+      it { expect(prise_en_main.etape_en_cours).to eq 'passations' }
+    end
+
+    context "quand il y a au moins 4 évaluations et qu'il y a une campagne" do
+      let(:nombre_campagnes) { 1 }
+      let(:nombre_evaluations) { 4 }
+
+      it { expect(prise_en_main.etape_en_cours).to eq 'retour_experience' }
     end
   end
 
@@ -51,16 +58,16 @@ describe PriseEnMain do
       it { expect(prise_en_main.terminee?).to be false }
     end
 
-    context 'quand il y a une évaluation' do
-      let(:nombre_evaluations) { 1 }
+    context 'quand il y a moins de 4 évaluations' do
+      let(:nombre_evaluations) { 3 }
 
       before { allow(compte).to receive(:nouveau_compte?).and_return(false) }
 
       it { expect(prise_en_main.terminee?).to be false }
     end
 
-    context "quand le compte n'est pas nouveau et qu'il y a deux évaluations" do
-      let(:nombre_evaluations) { 2 }
+    context "quand le compte n'est pas nouveau et qu'il y quatre évaluations" do
+      let(:nombre_evaluations) { 4 }
 
       before { allow(compte).to receive(:nouveau_compte?).and_return(false) }
 

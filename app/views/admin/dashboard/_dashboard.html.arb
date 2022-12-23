@@ -16,7 +16,7 @@ elsif prise_en_main.en_cours?
   div class: 'row' do
     div class: 'col-6 offset-1' do
       h2 t('admin.dashboard.prise_en_main.titre'), class: 'text-center'
-      render partial: "components/prise_en_main/etape_#{prise_en_main.numero_etape}",
+      render partial: "components/prise_en_main/etape_#{prise_en_main.etape_en_cours}",
              locals: { campagne: campagnes.first }
     end
   end

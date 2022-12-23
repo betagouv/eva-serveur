@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 scope = 'components.prise_en_main'
+lien_action ||= nil
+lien_description ||= nil
 options_lien ||= {}
 options = { class: 'bouton bouton-arrondi' }.merge(options_lien)
 carte_entete_classes = 'd-flex align-items-center justify-content-between bg-orange'
@@ -10,15 +12,17 @@ div class: 'carte-prise-en-main' do
     div class: "carte__entete #{carte_entete_classes}" do
       div do
         h2 t('sous_titre', scope: scope), class: 'text-white'
-        text_node md t("etapes.#{numero_etape}.titre", scope: scope)
+        text_node md t("etapes.#{etape_en_cours}.titre", scope: scope)
       end
       text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration'
     end
     div class: 'carte__description' do
-      text_node md t("etapes.#{numero_etape}.description", scope: scope)
-      div class: 'carte__action d-flex justify-content-end mt-6' do
-        text_node link_to(t("etapes.#{numero_etape}.action", scope: scope), lien_action,
-                          options)
+      text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, scope: scope)
+      if lien_action
+        div class: 'carte__action d-flex justify-content-end mt-6' do
+          text_node link_to(t("etapes.#{etape_en_cours}.action", scope: scope), lien_action,
+                            options)
+        end
       end
     end
   end
@@ -26,8 +30,8 @@ div class: 'carte-prise-en-main' do
   div class: 'carte__progression w-100 h-100' do
     h3 t('etapes.progression.titre', scope: scope)
     ul do
-      PriseEnMain::ETAPES.each_with_index do |etape, index|
-        statut = statut_etape(index, numero_etape)
+      PriseEnMain::ETAPES.each do |etape|
+        statut = statut_etape(etape, etape_en_cours)
         li do
           render(EllipseComponent.new(statut))
           span t("etapes.progression.#{etape}", scope: scope),

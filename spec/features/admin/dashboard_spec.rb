@@ -60,9 +60,9 @@ describe 'Dashboard', type: :feature do
         end
       end
 
-      context "j'ai déjà créé une campagne et j'ai des évaluations" do
+      context "j'ai déjà créé une campagne et j'ai au moins 4 évaluations" do
         let!(:campagne) { create :campagne, compte: compte }
-        let!(:evaluation) { create_list :evaluation, 2, campagne: campagne }
+        let!(:evaluation) { create_list :evaluation, 4, campagne: campagne }
 
         it "n'affiche pas d'encart" do
           visit admin_path

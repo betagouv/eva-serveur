@@ -18,6 +18,14 @@ div class: 'carte-prise-en-main' do
     end
     div class: 'carte__description' do
       text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, scope: scope)
+      if etape_en_cours == 'passations'
+        nombre = prise_en_main.nombre_passations_restantes
+        div class: 'text-primary carte__passations-restantes' do
+          text_node md t("etapes.#{etape_en_cours}.passations_restantes",
+                         passations_restantes: passations_restantes(nombre),
+                         scope: scope)
+        end
+      end
       if lien_action
         div class: 'carte__action d-flex justify-content-end mt-6' do
           text_node link_to(t("etapes.#{etape_en_cours}.action", scope: scope), lien_action,

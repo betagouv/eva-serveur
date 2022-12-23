@@ -24,4 +24,8 @@ class PriseEnMain
   def en_cours?
     !terminee?
   end
+
+  def nombre_passations_restantes
+    4 - @nombre_evaluations
+  end
 end

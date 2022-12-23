@@ -13,4 +13,8 @@ module PriseEnMainHelper
       'desactive'
     end
   end
+
+  def passations_restantes(nombre)
+    "#{nombre} #{nombre == 1 ? 'passation' : 'passations'}"
+  end
 end

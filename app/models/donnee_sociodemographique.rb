@@ -3,6 +3,8 @@
 class DonneeSociodemographique < ApplicationRecord
   belongs_to :evaluation
 
+  validates :evaluation_id, presence: true, uniqueness: true
+
   GENRES = %w[homme femme autre].freeze
   enum :genre, GENRES.zip(GENRES).to_h
   NIVEAUX_ETUDES = %w[college cfg_dnb_bepc cap_bep bac

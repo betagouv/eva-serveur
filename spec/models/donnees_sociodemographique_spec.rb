@@ -4,6 +4,10 @@ require 'rails_helper'
 
 describe DonneeSociodemographique, type: :model do
   it { is_expected.to belong_to(:evaluation) }
+  it do
+    subject.evaluation = create(:evaluation)
+    is_expected.to validate_uniqueness_of(:evaluation_id).case_insensitive
+  end
 
   it do
     genres = DonneeSociodemographique::GENRES.zip(DonneeSociodemographique::GENRES).to_h

@@ -41,6 +41,7 @@
     @include pastille_rouge;
     &:after {
       right: -21px;
+      top: 0;
       width: 21px;
       height: 21px;
     }

@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
 class EllipseComponentStories < ViewComponent::Storybook::Stories
-  story :succes do
-    constructor('succes')
-  end
-
-  story :desactive do
-    constructor('desactive')
-  end
-
-  story :active do
-    constructor('active')
+  story :ellipse do
+    statut = select([:succes, :desactive, :active], :succes)
+    constructor(statut)
   end
 end

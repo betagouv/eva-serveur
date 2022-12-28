@@ -1,3 +1,13 @@
+// LIEN PAR DÉFAUT
+@mixin lien() {
+  text-decoration: underline;
+  color: $eva_main_blue;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .lien-retour {
   @include texte-xs();
 

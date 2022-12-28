@@ -239,6 +239,24 @@ ActiveAdmin.setup do |config|
                  send("admin_#{structure.type.underscore}_path", structure)
                },
                priority: 2
+      menu.add id: 'utility_compte',
+               label: I18n.t('active_admin.menu_connexion.compte').html_safe,
+               url: proc{ admin_compte_path(current_compte) },
+               priority: 3
+      menu.add id: 'utility_structure',
+              label: I18n.t('active_admin.menu_connexion.structure').html_safe,
+              url: proc{
+                structure = current_compte.structure
+                send("admin_#{structure.type.underscore}_path", structure)
+              },
+              priority: 4
+      menu.add id: 'utility_statistiques',
+              label: I18n.t('active_admin.menu_connexion.statistiques').html_safe,
+              url: proc{
+                structure = current_compte.structure
+                send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-statistiques")
+              },
+              priority: 5
       admin.add_logout_button_to_menu menu
     end
   end

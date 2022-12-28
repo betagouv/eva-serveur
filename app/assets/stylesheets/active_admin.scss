@@ -11,14 +11,6 @@
 @import "bootstrap_minimal";
 @import 'admin/utilities';
 
-// LAYOUT
-@import 'admin/layout/header';
-@import 'admin/layout/footer';
-@import 'admin/layout/breadcrumb';
-@import 'admin/layout/content';
-@import 'admin/layout/main_structure';
-@import 'admin/layout/sidebar';
-
 // COMPOSANTS
 @import 'admin/composants/autocomplete';
 @import 'admin/composants/filtres';
@@ -44,6 +36,14 @@
 @import "admin/composants/card_parcours_type";
 @import "admin/composants/situation_illustration";
 @import "admin/composants/carte_prise_en_main";
+
+// LAYOUT
+@import 'admin/layout/header';
+@import 'admin/layout/footer';
+@import 'admin/layout/breadcrumb';
+@import 'admin/layout/content';
+@import 'admin/layout/main_structure';
+@import 'admin/layout/sidebar';
 
 //PAGES
 @import 'admin/pages/dashboard/actualites';

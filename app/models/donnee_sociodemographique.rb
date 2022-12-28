@@ -3,7 +3,7 @@
 class DonneeSociodemographique < ApplicationRecord
   belongs_to :evaluation
 
-  validates :evaluation_id, presence: true, uniqueness: true
+  validates :evaluation_id, uniqueness: true
 
   GENRES = %w[homme femme autre].freeze
   enum :genre, GENRES.zip(GENRES).to_h

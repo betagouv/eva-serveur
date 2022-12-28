@@ -2,7 +2,7 @@
 
 class EllipseComponentStories < ViewComponent::Storybook::Stories
   story :ellipse do
-    statut = select([:succes, :desactive, :active], :succes)
+    statut = select(%i[succes desactive active], :succes)
     constructor(statut)
   end
 end

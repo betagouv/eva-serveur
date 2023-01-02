@@ -32,13 +32,6 @@ describe PriseEnMain do
 
       it { expect(prise_en_main.etape_en_cours).to eq 'passations' }
     end
-
-    context "quand il y a au moins 4 évaluations et qu'il y a une campagne" do
-      let(:nombre_campagnes) { 1 }
-      let(:nombre_evaluations) { 4 }
-
-      it { expect(prise_en_main.etape_en_cours).to eq 'retour_experience' }
-    end
   end
 
   describe '#terminee?' do

@@ -20,6 +20,19 @@ describe Compte do
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :prenom }
 
+  context 'quand un compte a été soft-delete' do
+    let(:compte) { build :compte, email: 'mon-email-supprime@example.com' }
+    before do
+      autre_compte = create :compte, email: 'mon-email-supprime@example.com'
+      autre_compte.destroy
+    end
+
+    it "Ne retourne pas d'erreur PostgreSQL" do
+      expect(compte.save).to eq false
+      expect(compte.errors.first.type).to eq :taken
+    end
+  end
+
   it do
     expect(subject).to define_enum_for(:statut_validation)
       .with_values(%i[en_attente acceptee refusee])

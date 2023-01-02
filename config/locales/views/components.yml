@@ -64,11 +64,10 @@ fr:
       sous_titre: Bien débuter
       etapes:
         progression:
-          titre: Débutez eva en 4 étapes
+          titre: Débutez eva en 3 étapes
           creation_campagne: Campagne créée
           test_campagne: Campagne testée
           passations: 4 passations effectuées
-          retour_experience: Retour d’expérience effectué
         creation_campagne:
           titre: |
             ## Créez votre campagne
@@ -85,8 +84,3 @@ fr:
           description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « *Vos dernières évaluations* » ci-dessous."
           passations_restantes: |
             **Il vous reste %{passations_restantes} à faire pour valider cette étape !**
-        retour_experience:
-          titre: |
-            ## Utilisez eva
-          description: Bravo, vous pouvez maintenant utiliser eva ! Rappelez-vous qu'eva est un service public accompagné, adapté pour un public francophone avec des compétences numériques minimales.
-          action: Consulter le guide de prise en main

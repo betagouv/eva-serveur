@@ -22,7 +22,7 @@ elsif prise_en_main.en_cours?
         div class: 'd-flex w-100 justify-content-end' do
           render BoutonComponent.new(t('admin.dashboard.prise_en_main.terminer'),
                                      quitter_mode_tutoriel_admin_compte_path(current_compte),
-                                     type: :outline,
+                                     type: :outline_orange,
                                      method: :patch)
         end
       end

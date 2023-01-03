@@ -46,6 +46,7 @@ fr:
         entete-url: URL
       prise_en_main:
         titre: Bienvenue sur eva !
+        terminer: Quitter le tutoriel
       validation_necessaire:
         titre: Bienvenue sur eva !
         description: |

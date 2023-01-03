@@ -28,6 +28,27 @@ describe 'Dashboard', type: :feature do
     end
   end
 
+  context 'quand je suis en mode en tutoriel' do
+    let!(:compte) do
+      create :compte_conseiller, statut_validation: :acceptee, structure: ma_structure
+    end
+
+    it 'affiche la prise en main' do
+      visit admin_path
+      expect(page).to have_content('Quitter le tutoriel')
+    end
+
+    context 'quand je veux quitter le mode tutoriel' do
+      it "n'affiche plus la prise en main" do
+        expect do
+          visit admin_path
+          click_on 'Quitter le tutoriel'
+        end.to change { compte.reload.mode_tutoriel }.from(true).to(false)
+        expect(page).not_to have_content('Quitter le tutoriel')
+      end
+    end
+  end
+
   context "quand il n'y a pas de compte en attente pour ma structure" do
     it "n'affiche pas de message d'alerte" do
       visit admin_path

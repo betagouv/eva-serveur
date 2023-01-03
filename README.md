@@ -256,14 +256,15 @@ Contenu:
 }
 ```
 
-## Modèle de données
+## Structure des données
+
+Un graphique de la structure de la base peut être généré afin de mieux comprendre les intérractions entre les différents modèles.
 
 ![](docs/erd.png)
 
-
 Pour générer ce graphique:
-  1. `bundle exec rake erd filetype=dot orientation=vertical attributes=foreign_keys,content,timestamps`
-  2. `dot -Tpng erd.dot -o docs/erd.png`
+
+`bundle exec rake erd`
 
 ## Licence
 

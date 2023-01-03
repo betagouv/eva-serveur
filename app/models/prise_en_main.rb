@@ -20,7 +20,7 @@ class PriseEnMain
   end
 
   def en_cours?
-    !terminee?
+    !terminee? && @compte.mode_tutoriel?
   end
 
   def nombre_passations_restantes

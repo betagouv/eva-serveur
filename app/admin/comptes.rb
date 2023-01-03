@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Compte do
   permit_params :email, :password, :password_confirmation, :role, :structure_id,
-                :statut_validation, :prenom, :nom, :telephone
+                :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel
 
   includes :structure
 
@@ -163,6 +163,11 @@ ActiveAdmin.register Compte do
 
   member_action :refuser, method: :patch do
     resource.validation_refusee!
+    redirect_to request.referer
+  end
+
+  member_action :quitter_mode_tutoriel, method: :patch do
+    current_compte.update(mode_tutoriel: false)
     redirect_to request.referer
   end
 end

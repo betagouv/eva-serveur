@@ -15,9 +15,17 @@ if current_compte.validation_refusee?
 elsif prise_en_main.en_cours?
   div class: 'row' do
     div class: 'col-6 offset-1' do
-      h2 t('admin.dashboard.prise_en_main.titre'), class: 'text-center'
-      render partial: "components/prise_en_main/etape_#{prise_en_main.etape_en_cours}",
-             locals: { campagne: campagnes.first }
+      section class: 'mb-5' do
+        h2 t('admin.dashboard.prise_en_main.titre'), class: 'text-center'
+        render partial: "components/prise_en_main/etape_#{prise_en_main.etape_en_cours}",
+               locals: { campagne: campagnes.first }
+        div class: 'd-flex w-100 justify-content-end' do
+          render BoutonComponent.new(t('admin.dashboard.prise_en_main.terminer'),
+                                     quitter_mode_tutoriel_admin_compte_path(current_compte),
+                                     type: :outline,
+                                     method: :patch)
+        end
+      end
     end
   end
 elsif current_compte.validation_en_attente?

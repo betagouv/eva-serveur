@@ -46,10 +46,6 @@ class Compte < ApplicationRecord
     Compte.where(structure: structure, role: ADMIN_ROLES)
   end
 
-  def nouveau_compte?
-    sign_in_count <= 4
-  end
-
   def compte_refuse?
     validation_refusee?
   end

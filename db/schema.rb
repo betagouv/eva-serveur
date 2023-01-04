@@ -172,7 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_103345) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_donnees_sociodemographiques_on_deleted_at"
-    t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id"
+    t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id", unique: true
     t.index ["genre"], name: "index_donnees_sociodemographiques_on_genre"
   end
 

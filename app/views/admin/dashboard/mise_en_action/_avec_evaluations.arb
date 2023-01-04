@@ -12,6 +12,6 @@ div class: 'contenu-avec-evaluations' do
     end
     render 'liste_evaluations', evaluations: evaluations.limit(6),
                                 partial_evaluation: 'evaluation_sans_mise_en_action'
-    render 'components/asterisque_solutions_illettrisme'
+    render 'components/banniere_solutions_illettrisme', asterisque: false
   end
 end

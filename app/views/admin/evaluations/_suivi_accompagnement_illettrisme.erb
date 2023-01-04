@@ -12,7 +12,7 @@
     <div>
       <div><%= md t('illettrisme_potentiel.message', scope: scope) %></div>
       <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: resource } %>
-      <%= render 'components/asterisque_solutions_illettrisme' %>
+      <%= render 'components/banniere_solutions_illettrisme', asterisque: true %>
     </div>
   </div>
 </div>

@@ -47,8 +47,10 @@ describe PriseEnMain do
       it { expect(prise_en_main.terminee?).to be false }
     end
 
-    context "quand le compte n'est pas nouveau et qu'il y quatre évaluations" do
+    context 'quand il y a au moins quatre évaluations et que le mode tutoriel est désactivé' do
       let(:nombre_evaluations) { 4 }
+
+      before { compte.update(mode_tutoriel: false) }
 
       it { expect(prise_en_main.terminee?).to be true }
     end

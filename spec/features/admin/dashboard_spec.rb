@@ -38,13 +38,85 @@ describe 'Dashboard', type: :feature do
       expect(page).to have_content('Quitter le tutoriel')
     end
 
-    context 'quand je veux quitter le mode tutoriel' do
+    context "quitter le mode tutoriel à n'importe quel moment" do
       it "n'affiche plus la prise en main" do
         expect do
           visit admin_path
           click_on 'Quitter le tutoriel'
         end.to change { compte.reload.mode_tutoriel }.from(true).to(false)
         expect(page).not_to have_content('Quitter le tutoriel')
+      end
+    end
+
+    context "je n'ai pas encore créé de campagne" do
+      it "affiche l'étape création de campagne" do
+        visit admin_path
+        expect(page).to have_content('Bienvenue sur eva')
+        expect(page).to have_content('Créez votre campagne')
+        expect(page).not_to have_content('Testez votre campagne')
+      end
+    end
+
+    context "j'ai créé une campagne mais je n'ai pas fait d'évaluation" do
+      let!(:campagne) { create :campagne, compte: compte }
+
+      it "affiche l'étape test de campagne" do
+        visit admin_path
+        expect(page).not_to have_content('Créez votre campagne')
+        expect(page).to have_content('Testez votre campagne')
+        expect(page).not_to have_content('Organisez votre première session')
+      end
+    end
+
+    context "j'ai créé une campagne et j'ai fait une évaluation" do
+      let!(:campagne) { create :campagne, compte: compte }
+      let!(:evaluation) { create_list :evaluation, 1, campagne: campagne }
+
+      it "affiche l'étape organiser 4 passations" do
+        visit admin_path
+        expect(page).not_to have_content('Testez votre campagne')
+        expect(page).to have_content('Organisez 4 passations')
+        expect(page).not_to have_content('fin')
+      end
+    end
+
+    context "j'ai déjà créé une campagne et j'ai au moins 4 évaluations" do
+      let!(:campagne) { create :campagne, compte: compte }
+      let!(:evaluation) { create_list :evaluation, 4, campagne: campagne }
+
+      it "affiche l'écran de fin" do
+        visit admin_path
+        expect(page).to have_content('Vous êtes prêt à utiliser eva')
+        expect do
+          click_on 'Fermer le tutoriel'
+        end.to change { compte.reload.mode_tutoriel }.from(true).to(false)
+        expect(page).not_to have_content('Vous êtes prêt à utiliser eva')
+      end
+    end
+  end
+
+  context 'quand je ne suis pas en mode tutoriel' do
+    context 'affiche le message de validation en attente' do
+      let!(:compte_support) do
+        create :compte,
+               nom: 'Ma structure',
+               prenom: 'Véronique',
+               telephone: '06 01 02 03 04',
+               email: Eva::EMAIL_SUPPORT
+      end
+
+      before do
+        compte.update(mode_tutoriel: false)
+        compte.validation_en_attente!
+      end
+
+      before { visit admin_path }
+
+      it do
+        expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
+        infos_support =
+          'contacter Véronique au 06 01 02 03 04 ou par mail à support@eva.beta.gouv.fr'
+        expect(page).to have_content infos_support
       end
     end
   end
@@ -65,54 +137,6 @@ describe 'Dashboard', type: :feature do
         'Pour des questions relatives au RGPD ainsi que pour plus de fluidité, ' \
         'les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.'
       )
-    end
-  end
-
-  describe 'Encart de bienvenue' do
-    context 'lorsque je me suis connecté plus de 4 fois' do
-      let(:compte) { create :compte_admin, sign_in_count: 5 }
-
-      context "je n'ai pas encore créé de campagne" do
-        it "affiche l'encart" do
-          visit admin_path
-          expect(page).to have_content('Bienvenue sur eva')
-          expect(page).to have_content('Eva utilise le concept de')
-          expect(page).not_to have_content('Organisez votre première session')
-        end
-      end
-
-      context "j'ai déjà créé une campagne et j'ai au moins 4 évaluations" do
-        let!(:campagne) { create :campagne, compte: compte }
-        let!(:evaluation) { create_list :evaluation, 4, campagne: campagne }
-
-        it "n'affiche pas d'encart" do
-          visit admin_path
-          expect(page).not_to have_content('Bienvenue dans votre espace conseiller !')
-          expect(page).not_to have_content('Organisez votre première')
-          expect(page).not_to have_content('Eva utilise le concept de')
-        end
-
-        context 'affiche le message de validation en attente' do
-          let!(:compte_support) do
-            create :compte,
-                   nom: 'Ma structure',
-                   prenom: 'Véronique',
-                   telephone: '06 01 02 03 04',
-                   email: Eva::EMAIL_SUPPORT
-          end
-
-          before { compte.validation_en_attente! }
-
-          before { visit admin_path }
-
-          it do
-            expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
-            infos_support =
-              'contacter Véronique au 06 01 02 03 04 ou par mail à support@eva.beta.gouv.fr'
-            expect(page).to have_content infos_support
-          end
-        end
-      end
     end
   end
 

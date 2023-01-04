@@ -84,3 +84,13 @@ fr:
           description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « *Vos dernières évaluations* » ci-dessous."
           passations_restantes: |
             **Il vous reste %{passations_restantes} à faire pour valider cette étape !**
+        fin:
+          titre: |
+            ## Vous êtes prêt à utiliser eva
+          description: |
+            Bravo ! Vous avez terminé ce tutoriel
+
+            Nos équipes restent à votre disposition :  
+            - via <ins class="text-primary">support@eva.beta.gouv.fr</ins>  
+            - via le chat (la petite bulle bleue en bas à droite de votre écran)
+

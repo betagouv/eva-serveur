@@ -54,9 +54,12 @@ $grid-gutter-width: 1.25rem;
     }
     &__description {
       padding: 1rem 1.5rem;
-    }
-    &__passations-restantes {
-      p { margin-bottom: 0 }
+      p {
+        margin-bottom: .5rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

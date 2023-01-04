@@ -33,7 +33,7 @@ fr:
             <a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
         avec_evaluations:
           titre: Diagnostics d’illettrisme potentiel
-          action: "Voir tout (%{nombre_evaluations})"
+          action: "Voir tout"
           question: |
             Au sein de votre structure, ces personnes semblent avoir  
             besoin d’accompagnement.  

@@ -22,8 +22,9 @@ fr:
           Si vous avez besoin d'aide,
           rendez-vous [ici](%{lien_aide})
       statistiques:
+        titre: Statistiques
         description:
-          nombre_evaluations: Nombre d'évaluations effectuées par structure sur les 12 derniers mois glissants.
+          sous_titre: Nombre d'évaluations effectuées par structure sur les 12 derniers mois glissants.
           repartition_evaluations: Répartition des niveaux d'illettrisme
           correlation_donnees_illettrisme: Corrélation entre le niveau d'illettrisme et les données sociodémographiques
       membres:

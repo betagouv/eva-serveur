@@ -7,6 +7,19 @@ class StatistiquesStructure
     @structure = structure
   end
 
+  def url
+    payload = {
+      resource: { dashboard: 23 },
+      params: {
+        'id' => [@structure.id]
+      },
+      exp: 10.minutes.from_now.to_i
+    }
+    token = ::JWT.encode payload, ENV.fetch('METABASE_SECRET_KEY', nil)
+
+    "#{ENV.fetch('METABASE_SITE_URL', nil)}/embed/dashboard/#{token}#bordered=false&titled=false"
+  end
+
   # Nombre d'évaluations pour chaque structure enfants des 12 derniers mois
   # 12 derniers mois = 12 mois qui précèdent, sans le mois en cours
   #

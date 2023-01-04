@@ -10,8 +10,7 @@ div class: 'contenu-avec-evaluations' do
   div class: 'px-3' do
     div class: 'd-flex align-items-center question' do
       text_node image_tag 'point_interrogation.svg', class: 'mr-3'
-      div t('.question'),
-          class: 'fw-semi-bold'
+      div md(t('.question')), class: 'fw-semi-bold'
     end
     render 'liste_evaluations', evaluations: evaluations.limit(6),
                                 partial_evaluation: 'evaluation_sans_mise_en_action'

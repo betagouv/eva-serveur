@@ -51,8 +51,8 @@ jobs:
       - run:
           name: DB Seed
           command: |
-            RAILS_ENV=development bin/rails db:create db:migrate --trace
-            RAILS_ENV=development bin/rails db:seed --trace
+            bin/rails db:create db:migrate --trace
+            bin/rails db:seed --trace
 
       - run:
           name: Rubocop

@@ -52,8 +52,11 @@ PROTOCOLE_SERVEUR=http
 HOTE_SERVEUR=localhost:3000
 URL_CLIENT=http://localhost:7700/jeu
 EMAIL_DEFAULT_FROM=eva@beta.gouv.fr
+METABASE_SITE_URL=http://metabase.eva.beta.gouv.fr
+METABASE_SECRET_KEY=<LE SECRET>
 ```
 Sans ces variables, le projet ne se lancera pas correctement en local.
+<LE SECRET> se trouve sur metabase https://metabase.eva.beta.gouv.fr/admin/settings/embedding-in-other-applications/standalone
 
 ## API
 

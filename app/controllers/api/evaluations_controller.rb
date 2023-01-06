@@ -15,12 +15,14 @@ module Api
     end
 
     def update
-      @evaluation = Evaluation.find(params[:id])
-      if @evaluation.update evaluation_params
-        render partial: 'evaluation',
-               locals: { evaluation: @evaluation }
-      else
-        retourne_erreur(@evaluation)
+      ActiveRecord::Base.transaction do
+        @evaluation = Evaluation.find(params[:id])
+        if @evaluation.update evaluation_params
+          render partial: 'evaluation',
+                 locals: { evaluation: @evaluation }
+        else
+          retourne_erreur(@evaluation)
+        end
       end
     end
 

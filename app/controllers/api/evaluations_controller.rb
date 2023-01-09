@@ -16,7 +16,7 @@ module Api
 
     def update
       ActiveRecord::Base.transaction do
-        @evaluation = Evaluation.find(params[:id])
+        @evaluation = Evaluation.find(evaluation_params[:id])
         if @evaluation.update evaluation_params
           render partial: 'evaluation',
                  locals: { evaluation: @evaluation }
@@ -39,14 +39,34 @@ module Api
     end
 
     def evaluation_params
-      permit_params = params
-                      .permit(:nom, :code_campagne, :terminee_le, :debutee_le,
-                              conditions_passation_attributes:
-                              %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
-                              donnee_sociodemographique_attributes:
-                              %i[age genre dernier_niveau_etude derniere_situation])
-      permit_params[:beneficiaire_attributes] = { nom: permit_params[:nom] } if permit_params[:nom]
-      permit_params
+      return @evaluation_params if @evaluation_params.present?
+
+      @evaluation_params = permit_params
+      retrouve_ids_nested_attributes
+      if @evaluation_params[:nom]
+        @evaluation_params[:beneficiaire_attributes] =
+          { nom: @evaluation_params[:nom] }
+      end
+      @evaluation_params
+    end
+
+    def permit_params
+      params.permit(:id, :nom, :code_campagne, :terminee_le, :debutee_le,
+                    conditions_passation_attributes:
+                    %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
+                    donnee_sociodemographique_attributes:
+                    %i[age genre dernier_niveau_etude derniere_situation])
+    end
+
+    def retrouve_ids_nested_attributes
+      if @evaluation_params[:donnee_sociodemographique_attributes]
+        @evaluation_params[:donnee_sociodemographique_attributes][:id] =
+          DonneeSociodemographique.find_by(evaluation_id: params[:id])&.id
+      end
+      return unless @evaluation_params[:conditions_passation_attributes]
+
+      @evaluation_params[:conditions_passation_attributes][:id] =
+        ConditionsPassation.find_by(evaluation_id: params[:id])&.id
     end
 
     def retourne_erreur(evaluation)

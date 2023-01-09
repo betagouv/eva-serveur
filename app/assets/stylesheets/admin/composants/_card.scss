@@ -1,10 +1,36 @@
 .card {
-  border-radius: 0.5rem;
-  background: $white;
+  @include carte-avec-ombre;
   margin-bottom: 1.5rem;
   overflow: hidden;
   font-size: 0.875rem;
-  @include ombre();
+
+  &.carte-liste {
+    @include texte-xs;
+    padding: 0.7rem 1rem;
+    min-height: 3rem;
+    margin-bottom: .5rem;
+
+    .carte__nom {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      a {
+        font-family: $font-titre;
+        font-weight: bold;
+        color: $eva_dark;
+        text-decoration: none;
+      }
+      .icone-anonyme {
+        top: 0;
+        margin-right: .25rem;
+      }
+    }
+    &:hover {
+      .carte__nom a {
+        color: $eva_main_blue;
+      }
+    }
+  }
 
   .card-body {
     padding: 1.5rem;

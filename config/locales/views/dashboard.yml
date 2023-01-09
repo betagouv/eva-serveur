@@ -12,12 +12,12 @@ fr:
         titre: Les actualités sur eva
       actualite:
         action: Lire
-      evaluations:
+      bloc_evaluations:
+        date: "il y a %{date}"
         titre: Vos dernières évaluations
         voir_tout: 'Voir toutes les évaluations'
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
-        date: "il y a %{date}"
         action: Voir
       mise_en_action:
         sans_evaluations:

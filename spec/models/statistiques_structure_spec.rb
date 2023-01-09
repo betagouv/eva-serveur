@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe StatistiquesStructure do
-  describe '#nombre_evaluations_des_3_derniers_mois' do
+  describe '#nombre_evaluations_des_12_derniers_mois' do
     let!(:eva) { create :structure_locale, nom: 'eva', structure_referente: paris }
     let!(:paris) do
       create :structure_administrative, nom: 'Paris', structure_referente: ile_de_france
@@ -15,44 +15,38 @@ describe StatistiquesStructure do
 
     let(:compte) { create :compte, structure: eva }
     let(:campagne) { create :campagne, compte: compte }
-    let!(:evaluation) { create :evaluation, campagne: campagne }
+    let!(:evaluation) do
+      Timecop.freeze(1.month.ago) do
+        create :evaluation, campagne: campagne
+      end
+    end
 
-    let(:resultat) { StatistiquesStructure.new(structure).nombre_evaluations_des_3_derniers_mois }
+    let(:resultat) { StatistiquesStructure.new(structure).nombre_evaluations_des_12_derniers_mois }
+
+    let(:mois_courant) { I18n.l(1.month.ago, format: '%B %Y') }
 
     context 'pour une structure locale' do
       let(:structure) { eva }
 
-      it do
-        mois_courant = I18n.l(Date.current, format: '%B')
-        expect(resultat).to eq({ ['eva', mois_courant] => 1 })
-      end
+      it { expect(resultat).to eq({ ['eva', mois_courant] => 1 }) }
     end
 
     context 'pour une structure administrative (département)' do
       let(:structure) { paris }
 
-      it do
-        mois_courant = I18n.l(Date.current, format: '%B')
-        expect(resultat).to eq({ ['eva', mois_courant] => 1 })
-      end
+      it { expect(resultat).to eq({ ['eva', mois_courant] => 1 }) }
     end
 
     context 'pour une structure administrative (régionale)' do
       let(:structure) { ile_de_france }
 
-      it do
-        mois_courant = I18n.l(Date.current, format: '%B')
-        expect(resultat).to eq({ ['Paris', mois_courant] => 1 })
-      end
+      it { expect(resultat).to eq({ ['Paris', mois_courant] => 1 }) }
     end
 
     context 'pour une structure administrative (nationale)' do
       let(:structure) { france }
 
-      it do
-        mois_courant = I18n.l(Date.current, format: '%B')
-        expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 1 })
-      end
+      it { expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 1 }) }
 
       context "avec plusieurs évaluations pour l'Île-de-france" do
         let!(:val_de_marne) do
@@ -61,12 +55,13 @@ describe StatistiquesStructure do
 
         let!(:compte2) { create :compte, structure: val_de_marne }
         let!(:campagne2) { create :campagne, compte: compte }
-        let!(:evaluation2) { create :evaluation, campagne: campagne }
-
-        it do
-          mois_courant = I18n.l(Date.current, format: '%B')
-          expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 2 })
+        let!(:evaluation2) do
+          Timecop.freeze(1.month.ago) do
+            create :evaluation, campagne: campagne
+          end
         end
+
+        it { expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 2 }) }
       end
     end
   end
@@ -81,7 +76,9 @@ describe StatistiquesStructure do
     context "quand l'évaluation appartient à la structure" do
       let(:synthese) { :ni_ni }
       before do
-        create :evaluation, campagne: campagne, synthese_competences_de_base: synthese
+        Timecop.freeze(1.month.ago) do
+          create :evaluation, campagne: campagne, synthese_competences_de_base: synthese
+        end
       end
 
       context 'avec une synthexe ni_ni' do

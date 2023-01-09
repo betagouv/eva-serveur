@@ -23,7 +23,7 @@ fr:
           rendez-vous [ici](%{lien_aide})
       statistiques:
         description:
-          nombre_evaluations: Nombre d'évaluations effectuées par structure sur les 3 derniers mois glissants.
+          nombre_evaluations: Nombre d'évaluations effectuées par structure sur les 12 derniers mois glissants.
           repartition_evaluations: Répartition des niveaux d'illettrisme
           correlation_donnees_illettrisme: Corrélation entre le niveau d'illettrisme et les données sociodémographiques
       membres:

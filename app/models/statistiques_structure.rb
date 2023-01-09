@@ -7,14 +7,15 @@ class StatistiquesStructure
     @structure = structure
   end
 
-  # Nombre d'évaluations pour chaque structure enfants des 3 derniers mois
+  # Nombre d'évaluations pour chaque structure enfants des 12 derniers mois
+  # 12 derniers mois = 12 mois qui précèdent, sans le mois en cours
   #
   # @return [Hash] { ['Paris', 'octobre'] => 1 }
-  def nombre_evaluations_des_3_derniers_mois
+  def nombre_evaluations_des_12_derniers_mois
     evaluations = Evaluation.pour_les_structures(structures)
-                            .des_3_derniers_mois
+                            .des_12_derniers_mois
                             .group(groupe_par)
-                            .group_by_month(:created_at, format: '%B')
+                            .group_by_month(:created_at, format: '%B %Y')
                             .count
     if a_des_petits_enfants?
       evaluations = regroupe_nombre_evaluations_par_structures_enfants(evaluations)
@@ -27,6 +28,7 @@ class StatistiquesStructure
   # @return [Hash] { "illettrisme_potentiel" => 65, "ni_ni" => 45, "socle_clea" => 10 }
   def repartition_evaluations
     repartition = Evaluation.pour_les_structures(structures)
+                            .des_12_derniers_mois
                             .where.not(synthese_competences_de_base: [nil, :aberrant])
                             .select(:synthese_competences_de_base)
                             .group(:synthese_competences_de_base)

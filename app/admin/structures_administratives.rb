@@ -37,7 +37,7 @@ ActiveAdmin.register StructureAdministrative do
     end
 
     def statistiques_structure
-      StatistiquesStructure.new(resource).nombre_evaluations_des_3_derniers_mois
+      StatistiquesStructure.new(resource).nombre_evaluations_des_12_derniers_mois
     end
 
     def trouve_structures_dependantes

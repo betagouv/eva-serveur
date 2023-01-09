@@ -3,14 +3,15 @@
 require 'rails_helper'
 
 describe 'Evaluation API', type: :request do
+  let(:unUserAgent) do
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0'
+  end
+
   describe 'POST /evaluations' do
     let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
     context 'Création quand une requête est valide' do
       let(:date) { Time.zone.local(2021, 10, 4) }
-      let(:unUserAgent) do
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0'
-      end
       let(:payload_valide_avec_campagne) do
         {
           nom: 'Roger',
@@ -32,7 +33,6 @@ describe 'Evaluation API', type: :request do
 
       before do
         post '/api/evaluations', params: payload_valide_avec_campagne
-        @donnee_sociodemographique = DonneeSociodemographique.last
       end
 
       it do
@@ -49,19 +49,24 @@ describe 'Evaluation API', type: :request do
 
       it do
         expect(ConditionsPassation.count).to eq 1
-        expect(ConditionsPassation.last.user_agent).to eq unUserAgent
-        expect(ConditionsPassation.last.materiel_utilise).to eq 'desktop'
-        expect(ConditionsPassation.last.modele_materiel).to eq nil
-        expect(ConditionsPassation.last.nom_navigateur).to eq 'Firefox'
-        expect(ConditionsPassation.last.version_navigateur).to eq '104.0'
-        expect(ConditionsPassation.last.hauteur_fenetre_navigation).to eq 10
-        expect(ConditionsPassation.last.largeur_fenetre_navigation).to eq 20
+        conditions_passation = ConditionsPassation.last
+        expect(conditions_passation.user_agent).to eq unUserAgent
+        expect(conditions_passation.materiel_utilise).to eq 'desktop'
+        expect(conditions_passation.modele_materiel).to eq nil
+        expect(conditions_passation.nom_navigateur).to eq 'Firefox'
+        expect(conditions_passation.version_navigateur).to eq '104.0'
+        expect(conditions_passation.hauteur_fenetre_navigation).to eq 10
+        expect(conditions_passation.largeur_fenetre_navigation).to eq 20
       end
 
-      it { expect(@donnee_sociodemographique.age).to eq 18 }
-      it { expect(@donnee_sociodemographique.genre).to eq 'homme' }
-      it { expect(@donnee_sociodemographique.dernier_niveau_etude).to eq 'college' }
-      it { expect(@donnee_sociodemographique.derniere_situation).to eq 'scolarisation' }
+      it do
+        expect(DonneeSociodemographique.count).to eq 1
+        donnee_sociodemographique = DonneeSociodemographique.last
+        expect(donnee_sociodemographique.age).to eq 18
+        expect(donnee_sociodemographique.genre).to eq 'homme'
+        expect(donnee_sociodemographique.dernier_niveau_etude).to eq 'college'
+        expect(donnee_sociodemographique.derniere_situation).to eq 'scolarisation'
+      end
     end
 
     context 'Quand le code campagne est inconnu' do
@@ -125,32 +130,72 @@ describe 'Evaluation API', type: :request do
         end.to raise_error(ArgumentError)
       end
     end
-  end
 
-  describe 'PATCH /evaluations/:id' do
-    let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
-
-    before { patch "/api/evaluations/#{evaluation.id}", params: params }
-
-    context 'Met à jour email et téléphone avec une requête valide' do
+    context 'avec de multiple mise à jour' do
       let(:date) { Time.zone.local(2021, 10, 4) }
       let(:params) do
-        { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05', terminee_le: date.iso8601 }
+        {
+          conditions_passation_attributes: {
+            user_agent: unUserAgent,
+            hauteur_fenetre_navigation: 10,
+            largeur_fenetre_navigation: 20
+          },
+          donnee_sociodemographique_attributes: {
+            age: 18,
+            genre: 'homme',
+            dernier_niveau_etude: 'college',
+            derniere_situation: 'scolarisation'
+          }
+        }
+      end
+
+      let(:params2) do
+        {
+          conditions_passation_attributes: {
+            hauteur_fenetre_navigation: 15
+          },
+          donnee_sociodemographique_attributes: {
+            age: 19
+          }
+        }
+      end
+
+      before do
+        patch "/api/evaluations/#{evaluation.id}", params: params
+        patch "/api/evaluations/#{evaluation.id}", params: params2
       end
 
       it do
-        evaluation.reload
-        expect(evaluation.terminee_le).to eq date
-        expect(response).to have_http_status(:ok)
+        expect(ConditionsPassation.count).to eq 1
+        expect(ConditionsPassation.last.hauteur_fenetre_navigation).to eq 15
+        expect(DonneeSociodemographique.count).to eq 1
+        expect(DonneeSociodemographique.last.age).to eq 19
       end
     end
 
-    context 'requête invalide' do
-      let(:params) { { nom: '' } }
+    context 'avec un seul patch' do
+      before { patch "/api/evaluations/#{evaluation.id}", params: params }
 
-      it do
-        expect(evaluation.reload.nom).to eq 'James'
-        expect(response).to have_http_status(:unprocessable_entity)
+      context 'Met à jour email et téléphone avec une requête valide' do
+        let(:date) { Time.zone.local(2021, 10, 4) }
+        let(:params) do
+          { email: 'coucou-a-jour@eva.fr', telephone: '01 02 03 04 05', terminee_le: date.iso8601 }
+        end
+
+        it do
+          evaluation.reload
+          expect(evaluation.terminee_le).to eq date
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
+      context 'requête invalide' do
+        let(:params) { { nom: '' } }
+
+        it do
+          expect(evaluation.reload.nom).to eq 'James'
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
       end
     end
   end

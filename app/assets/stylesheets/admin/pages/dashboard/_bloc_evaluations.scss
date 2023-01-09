@@ -1,0 +1,35 @@
+.bloc-evaluations {
+  .carte-liste {
+    .col:last-child {
+      flex: 2;
+    }
+    &:hover {
+      .carte__action {
+        background-image: none;
+        a {
+          opacity: 1;
+        }
+      }
+    }
+    .carte__nom,
+    .carte__date {
+      padding-right: 1rem;
+    }
+    .carte__pastille {
+      margin-right: 1rem;
+      width: 1rem;
+      padding-top: 6px;
+    }
+    .carte__nom {
+      width: 10.25rem;
+    }
+    .carte__action {
+      background: image-url('roue-dentee.svg') no-repeat right center;
+      .bouton {
+        @include bouton-carte($couleur-legere-accent-validation, $color:$eva_dark);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+    }
+  }
+}

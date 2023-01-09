@@ -40,13 +40,13 @@ elsif current_compte.validation_en_attente?
 end
 
 if evaluations.present?
-  div class: 'section-evaluations' do
+  section class: 'section-evaluations' do
     columns do
       column do
-        render 'evaluations', evaluations: evaluations
+        render 'bloc_evaluations', evaluations: evaluations
       end
       column do
-        render 'admin/dashboard/mise_en_action/evaluations_sans_mise_en_action',
+        render 'admin/dashboard/mise_en_action/bloc_evaluations_sans_mise_en_action',
                evaluations: evaluations_sans_mise_en_action
       end
     end
@@ -54,7 +54,7 @@ if evaluations.present?
 end
 
 if actualites.present? && prise_en_main.terminee?
-  div class: 'section-actualites' do
+  section class: 'section-actualites' do
     columns do
       render 'actualites', actualites: actualites
     end

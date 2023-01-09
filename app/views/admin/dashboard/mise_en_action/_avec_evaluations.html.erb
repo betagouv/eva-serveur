@@ -1,0 +1,20 @@
+<div class="contenu-avec-evaluations">
+  <div class="bloc-apercu-header bg-orange p-4 mb-0">
+    <h3><%= t('.titre') %></h3>
+    <%= render(BoutonComponent.new(t('.action'), admin_evaluations_path(scope: :illettrisme_potentiel) )) %>
+  </div>
+  <div class='px-3'>
+    <div class='d-flex align-items-center question'>
+      <%= image_tag 'point_interrogation.svg', class: 'mr-3' %>
+      <div class="fw-semi-bold"><%= md(t('.question')) %></div>
+    </div>
+    <div class='liste'>
+      <% evaluations.limit(6).each do |evaluation| %>
+        <%= render(CarteComponent.new(nom_pour_ressource(evaluation, nom: evaluation.nom.truncate(30)), admin_evaluation_path(evaluation))) do %>
+          <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: evaluation } %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render 'components/banniere_solutions_illettrisme', asterisque: false %>
+  </div>
+</div>

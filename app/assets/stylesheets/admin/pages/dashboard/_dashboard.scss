@@ -96,10 +96,6 @@
     }
   }
 
-  .evaluation {
-    height: 3rem;
-  }
-
   .card__banner--alert {
     padding: 1.5rem 2rem;
     gap: 2rem;
@@ -107,6 +103,32 @@
 
   .evaluations-sans-mise-en-action {
     box-shadow: none;
+
+    .carte-liste {
+      height: 3rem;
+      .carte__nom {
+        a {
+          display: flex;
+          align-items: center;
+          &:after {
+            content: '';
+            width: 1.5rem;
+            height: 1.5rem;
+            display: none;
+            margin-left: .5rem;
+            background: asset-data-url('oeil.svg') no-repeat center;
+          }
+        }
+      }
+      &:hover {
+        .carte__nom a:after {
+          display: inline-block;
+        }
+      }
+      .mise-en-action {
+        @include texte()
+      }
+    }
 
     .bloc-apercu-header {
       box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
@@ -147,7 +169,7 @@
     }
   }
 
-  .evaluations {
+  .bloc-evaluations {
     .bloc-apercu-header {
       margin-bottom: .875rem;
     }

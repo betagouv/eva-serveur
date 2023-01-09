@@ -1,0 +1,35 @@
+<div class='bloc-evaluations bloc-apercu'>
+  <div class='bloc-apercu-wrapper'>
+    <div class='bloc-apercu-header'>
+      <h3><%= t('.titre') %></h3>
+      <%= link_to t('.voir_tout'), admin_evaluations_path %>
+    </div>
+
+    <div class="evaluation-legende">
+      <%= render partial: 'admin/evaluations/pastille_illettrisme_potentiel', locals: {
+        etiquette: t('.legende_info')
+      } %>
+    </div>
+  </div>
+
+  <% evaluations.each do |evaluation| %>
+    <%= render(CarteComponent.new(nom_pour_ressource(evaluation), admin_evaluation_path(evaluation))) do %>
+      <div class='col'>
+        <span class='carte__pastille'>
+          <% if evaluation.illettrisme_potentiel? %>
+            <%= render partial: 'admin/evaluations/pastille_illettrisme_potentiel',
+                  locals: { avec_tooltip: true } %>
+          <% end %>
+        </span>
+      </div>
+      <div class='col d-flex justify-content-between align-items-center'>
+        <span class='carte__date'>
+          <%= t('.date', date: time_ago_in_words(evaluation.created_at)) %>
+        </span>
+        <span class='carte__action d-flex'>
+          <%= render(BoutonComponent.new('Voir', admin_evaluation_path(evaluation) )) %>
+        </span>
+      </div>
+    <% end %>
+  <% end %>
+</div>

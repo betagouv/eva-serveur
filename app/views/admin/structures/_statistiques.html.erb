@@ -3,7 +3,7 @@
 <h3>Statistiques</h3>
 <p class="statistiques__description"><%= t('.description.nombre_evaluations') %></p>
 <div class="panel">
-  <% evaluations = statistique.nombre_evaluations_des_3_derniers_mois %>
+  <% evaluations = statistique.nombre_evaluations_des_12_derniers_mois %>
   <% if evaluations.present? %>
     <%= column_chart evaluations, legend: 'bottom' %>
   <% else %>

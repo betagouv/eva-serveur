@@ -1,32 +1,3 @@
 # frozen_string_literal: true
 
-div class: 'references_restitution_illettrisme' do
-  scope = 'admin.restitutions.cefr.references'
-  div class: 'row marges-page' do
-    div class: 'col' do
-      div class: 'row' do
-        div class: 'col-auto col-icone-info' do
-          div svg_tag_base64 'info.svg', class: 'icone'
-        end
-        div class: 'col' do
-          div class: 'texte-explications' do
-            md t('explications-anlci', scope: scope)
-          end
-          div class: 'col badges-referentiels' do
-            text_node svg_tag_base64 'badges/anlci/profil1-blanc.svg', class: 'badge-references'
-            text_node svg_tag_base64 'badges/anlci/profil2-blanc.svg', class: 'badge-references'
-            text_node svg_tag_base64 'badges/anlci/profil3-blanc.svg', class: 'badge-references'
-            text_node svg_tag_base64 'badges/anlci/profil4-blanc.svg', class: 'badge-references'
-            text_node svg_tag_base64 'badges/anlci/profil4_plus-blanc.svg',
-                                     class: 'badge-references'
-            text_node svg_tag_base64 'badges/anlci/profil4_plus_plus-blanc.svg',
-                                     class: 'badge-references'
-          end
-          div class: 'texte-explications' do
-            md t('explications-lien', scope: scope)
-          end
-        end
-      end
-    end
-  end
-end
+render FooterReferentielComponent.new()

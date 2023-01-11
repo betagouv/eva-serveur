@@ -62,7 +62,7 @@ div class: 'evaluation__restitution-globale' do
                                           synthese: restitution_globale.synthese_pre_positionnement
         end
 
-        render 'pied_page', avant_pied_page: 'references_restitution_illettrisme'
+        render 'pied_page', pre_pied_page: 'referentiel_anlci'
       end
 
       if mes_avec_redaction_de_notes.present?
@@ -84,7 +84,7 @@ div class: 'evaluation__restitution-globale' do
 
           render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
-          render 'references_restitution_illettrisme'
+          render 'referentiel_anlci'
         end
       end
     end
@@ -114,7 +114,7 @@ div class: 'evaluation__restitution-globale' do
                synthese: restitution_globale.synthese_positionnement,
                pdf: pdf
              }
-      render 'pied_page'
+      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('officiel')
     end
   end
 end

@@ -1,11 +1,11 @@
-.references_restitution_illettrisme {
+.referentiel_anlci {
   width: 100%;
   background-color: $couleur-texte;
   color: $eva_light;
   padding: 1.5rem 0 !important;
 
   a {
-    color: $eva_light !important;
+    color: $eva_light;
   }
 
   .col-icone-info {
@@ -25,7 +25,6 @@
     display: flex;
     align-items: center;
     margin: 1rem 0;
-    padding-left: 0 !important;
   }
 
   .badge-references {

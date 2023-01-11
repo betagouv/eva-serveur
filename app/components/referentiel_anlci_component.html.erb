@@ -1,0 +1,25 @@
+<div class='referentiel_anlci'>
+  <% scope = 'admin.restitutions.cefr.references' %>
+  <div class='row marges-page'>
+    <div class='col'>
+      <div class='row'>
+        <div class='col-auto col-icone-info'>
+          <div><%= svg_tag_base64 'info.svg', class: 'icone' %></div>
+        </div>
+        <div class='col no-gutters'>
+          <div class='texte-explications'>
+            <%= md t('explications-anlci', scope: scope) %>
+          </div>
+          <div class='col badges-referentiels'>
+            <% @badges_referentiel.each do |badge| %>
+              <%= svg_tag_base64 "badges/anlci/#{badge}.svg", class: 'badge-references' %>
+            <% end %>
+          </div>
+          <div class='texte-explications'>
+            <%= md t('explications-lien', scope: scope) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

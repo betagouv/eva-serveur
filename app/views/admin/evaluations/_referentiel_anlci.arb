@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'references_restitution_illettrisme' do
+div class: 'referentiel_anlci' do
   scope = 'admin.restitutions.cefr.references'
   div class: 'row marges-page' do
     div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }

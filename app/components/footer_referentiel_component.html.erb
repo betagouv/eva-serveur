@@ -1,0 +1,30 @@
+<div class='references_restitution_illettrisme'>
+  <% scope = "admin.restitutions.cefr.references" %>
+  <div class='row marges-page'>
+    <div class='col'>
+      <div class='row'>
+        <div class='col-auto col-icone-info'>
+          <div><%= svg_tag_base64 'info.svg', class: 'icone' %></div>
+        </div>
+        <div class='col'>
+          <div class='texte-explications'>
+            <%= md t('explications-anlci', scope: scope) %>
+          </div>
+          <div class='col badges-referentiels'>
+            <%= svg_tag_base64 'badges/anlci/profil1-blanc.svg', class: 'badge-references' %>
+            <%= svg_tag_base64 'badges/anlci/profil2-blanc.svg', class: 'badge-references' %>
+            <%= svg_tag_base64 'badges/anlci/profil3-blanc.svg', class: 'badge-references' %>
+            <%= svg_tag_base64 'badges/anlci/profil4-blanc.svg', class: 'badge-references' %>
+            <%= svg_tag_base64 'badges/anlci/profil4_plus-blanc.svg',
+                                     class: 'badge-references' %>
+            <%= svg_tag_base64 'badges/anlci/profil4_plus_plus-blanc.svg',
+                                     class: 'badge-references' %>
+          </div>
+          <div class='texte-explications'>
+            <%= md t('explications-lien', scope: scope) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

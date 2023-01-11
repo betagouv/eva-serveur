@@ -10,6 +10,32 @@ describe Campagne, type: :model do
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
   it { is_expected.to belong_to(:questionnaire).optional }
 
+  describe 'configuration personnalisée' do
+    let(:campagne) { Campagne.new }
+
+    context 'quand la situation bureau est dans la configuration' do
+      let(:bureau) { create :situation, nom_technique: :questions }
+
+      before do
+        campagne.situations_configurations
+                .push SituationConfiguration.new situation: bureau
+      end
+
+      it 'ne peut pas créer la campagne sans lui associer le questionnaire bureau' do
+        campagne.save
+        erreur = 'Doit contenir le questionnaire associé à Bureau'
+        expect(campagne.errors[:questionnaire]).to include erreur
+      end
+    end
+
+    context "quand la situation bureau n'est pas dans la configuration" do
+      it do
+        campagne.save
+        expect(campagne.errors[:questionnaire]).to eq []
+      end
+    end
+  end
+
   describe '#questionnaire_pour' do
     let(:campagne) { Campagne.new }
     let(:situation) { Situation.new }

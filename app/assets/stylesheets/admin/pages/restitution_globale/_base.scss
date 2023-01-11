@@ -332,44 +332,6 @@
     vertical-align: top;
   }
 
-  .references_restitution_illettrisme {
-    width: 100%;
-    background-color: $couleur-texte;
-    color: $eva_light;
-    padding: 1.5rem 0;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-
-    a {
-      color: $eva_light;
-    }
-
-    .col-icone-info {
-      display: flex;
-    }
-
-    .icone {
-      height: 3.5rem;
-    }
-
-    .ordre {
-      font-size: 0.5rem;
-      line-height: 0.563rem;
-    }
-
-    .badges-referentiels {
-      display: flex;
-      align-items: center;
-      margin: 1rem 0;
-      padding-left: 0;
-    }
-
-    .badge-references {
-      height: 2.5rem;
-      margin-right: 0.4rem;
-    }
-  }
-
   .situation-redaction {
     padding-top: 3rem;
     border-top: 2px solid $eva_bluegrey;

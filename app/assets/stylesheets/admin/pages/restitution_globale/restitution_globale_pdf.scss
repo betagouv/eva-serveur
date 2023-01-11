@@ -3,6 +3,7 @@ $grid-gutter-width: 1.25rem;
 @import "bootstrap";
 @import "base";
 @import "../../../admin/composants/lettrisme";
+@import "../../../admin/composants/referentiel_anlci";
 @import "../../../pdf/base";
 
 .evaluation__restitution-globale {
@@ -24,6 +25,11 @@ $grid-gutter-width: 1.25rem;
 
   .marges-page {
     margin: 0 5rem;
+  }
+
+  a {
+    color: $couleur-texte;
+    text-decoration: underline;
   }
 
   .en-tete-page {
@@ -81,6 +87,8 @@ $grid-gutter-width: 1.25rem;
       font-size: 1rem;
       line-height: 2.5rem;
     }
+
+    a { color: $eva_light }
   }
 
   .autopositionnement {
@@ -115,7 +123,7 @@ $grid-gutter-width: 1.25rem;
     display: inline-block;
   }
 
-  .references_restitution_illettrisme {
+  .referentiel-anlci {
     border-radius: 0;
     padding: 1.125rem 0;
   }

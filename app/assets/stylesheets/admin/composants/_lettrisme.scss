@@ -16,11 +16,16 @@
 
   .panel {
     margin-bottom: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
     p {
       font-size: 0.875rem;
       margin-bottom: 0;
+    }
+  }
+
+  &:has(.telechargement_des_reponses) {
+    .panel--avec-references, .referentiel_anlci {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
     }
   }
 

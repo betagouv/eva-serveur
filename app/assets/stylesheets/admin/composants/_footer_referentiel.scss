@@ -1,0 +1,41 @@
+.references_restitution_illettrisme {
+  width: 100%;
+  background-color: $couleur-texte;
+  color: $eva_light;
+  padding: 1.5rem 0 !important;
+
+  a {
+    color: $eva_light !important;
+  }
+
+  .col-icone-info {
+    display: flex;
+  }
+
+  .icone {
+    height: 3.5rem;
+  }
+
+  .ordre {
+    font-size: 0.5rem;
+    line-height: 0.563rem;
+  }
+
+  .badges-referentiels {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+    padding-left: 0 !important;
+  }
+
+  .badge-references {
+    height: 2.5rem;
+    margin-right: 0.4rem;
+  }
+
+  .texte-explications {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

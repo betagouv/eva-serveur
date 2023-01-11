@@ -7,6 +7,7 @@ class Campagne < ApplicationRecord
   SITUATIONS_PRE_POSITIONNEMENT = %w[maintenance livraison objets_trouves].freeze
   SITUATIONS_POSITIONNEMENT = %w[cafe_de_la_place].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
+  SITUATION_BUREAU = %w[questions].freeze
 
   acts_as_paranoid
 
@@ -17,6 +18,7 @@ class Campagne < ApplicationRecord
   belongs_to :compte
   belongs_to :parcours_type, optional: true
 
+  validate :ajoute_questionnaire_bureau, if: proc { configuration_inclus?(SITUATION_BUREAU) }
   validates :type_programme, presence: true, on: :create
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
@@ -121,5 +123,11 @@ class Campagne < ApplicationRecord
     return false if options_personnalisation.nil?
 
     options_personnalisation.include? 'livraison'
+  end
+
+  def ajoute_questionnaire_bureau
+    return if questionnaire&.nom_technique == 'bureau'
+
+    errors.add :questionnaire, :bureau
   end
 end

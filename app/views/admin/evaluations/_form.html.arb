@@ -9,6 +9,7 @@ active_admin_form_for [:admin, resource] do |f|
                              collection: beneficiaires_accessibles
       f.input :statut
     end
+    f.input :responsable_suivi, collection: responsables_suivi_accessibles
   end
   actions
 end

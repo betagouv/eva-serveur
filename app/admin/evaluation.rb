@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evaluation do
-  permit_params :campagne_id, :nom, :beneficiaire_id, :statut
+  permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4
 
   includes campagne: :compte
@@ -115,7 +115,8 @@ ActiveAdmin.register Evaluation do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_accessibles, :traduction_niveau,
-                  :campagne_avec_competences_transversales?, :campagne_avec_positionnement?
+                  :campagne_avec_competences_transversales?, :campagne_avec_positionnement?,
+                  :responsables_suivi_accessibles
 
     def show
       show! do |format|
@@ -188,6 +189,10 @@ ActiveAdmin.register Evaluation do
 
     def campagnes_accessibles
       @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
+    end
+
+    def responsables_suivi_accessibles
+      @responsables_suivi_accessibles ||= Compte.accessible_by(current_ability)
     end
 
     def beneficiaires_accessibles

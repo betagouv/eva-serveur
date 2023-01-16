@@ -107,6 +107,11 @@ ActiveAdmin.register Evaluation do
     render partial: 'show'
   end
 
+  sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
+    span class: 'responsable-suivi' do
+      resource.responsable_suivi.nom_complet
+    end
+  end
   sidebar :menu, class: 'menu-sidebar', only: :show
 
   form partial: 'form'

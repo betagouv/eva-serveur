@@ -3,3 +3,33 @@
     max-width: 11.25rem;
   }
 }
+
+.show, .admin_evaluations {
+  .menu-sidebar {
+    margin-top: 2rem;
+  }
+}
+
+#responsable_de_suivi_sidebar_section {
+  $largeur-panel: 18.125rem;
+  $padding: 1rem;
+  @include carte-grise();
+  padding: 1rem;
+  box-shadow: none;
+  h3 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+    font-family: $font-texte;
+  }
+  .responsable-suivi {
+    display: inline-block;
+    @include tronque;
+    max-width: calc(#{ $largeur-panel - ($padding * 2) });
+    background-color: $eva_dark;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+    color: white;
+  }
+}

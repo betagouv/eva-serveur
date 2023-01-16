@@ -14,6 +14,8 @@ class Evaluation < ApplicationRecord
 
   belongs_to :campagne, counter_cache: :nombre_evaluations
   belongs_to :beneficiaire
+  belongs_to :responsable_suivi, optional: true, class_name: 'Compte'
+
   has_one :conditions_passation, dependent: :destroy
   has_one :donnee_sociodemographique, dependent: :destroy
   has_many :parties, dependent: :destroy

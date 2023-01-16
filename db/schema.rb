@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_103345) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_16_103315) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -196,9 +196,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_103345) do
     t.datetime "deleted_at"
     t.integer "statut", default: 0, null: false
     t.boolean "mise_en_action_effectuee"
+    t.uuid "responsable_suivi_id"
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
     t.index ["deleted_at"], name: "index_evaluations_on_deleted_at"
+    t.index ["responsable_suivi_id"], name: "index_evaluations_on_responsable_suivi_id"
     t.index ["statut"], name: "index_evaluations_on_statut"
     t.index ["synthese_competences_de_base"], name: "index_evaluations_on_synthese_competences_de_base"
   end
@@ -359,6 +361,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_103345) do
   add_foreign_key "donnees_sociodemographiques", "evaluations", on_delete: :cascade
   add_foreign_key "evaluations", "beneficiaires", on_delete: :cascade
   add_foreign_key "evaluations", "campagnes"
+  add_foreign_key "evaluations", "comptes", column: "responsable_suivi_id"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "situations", on_delete: :cascade

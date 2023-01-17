@@ -107,7 +107,7 @@
     $largeur-logout: 1.5rem;
     $largeur-roue: 1.25rem;
 
-    @include make-col(2, 8);
+    flex: 0 0 18.125rem;
 
     display: flex;
     flex-direction: column;

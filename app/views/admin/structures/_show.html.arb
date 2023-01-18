@@ -29,8 +29,9 @@ div class: 'row' do
              locals: { campagnes: campagnes }
     end
   end
-
-  div class: 'structure col-12' do
+end
+div class: 'row' do
+  div class: 'col-6' do
     section id: 'bloc-statistiques' do
       render partial: 'admin/structures/statistiques'
     end

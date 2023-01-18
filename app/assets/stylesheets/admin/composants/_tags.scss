@@ -38,8 +38,27 @@
   white-space: nowrap;
 }
 
-.tag-categorie {
+.tag {
   @include tag();
+  .lien-supprimer {
+    position: absolute;
+    right: 5px;
+    img {
+      vertical-align: baseline;
+    }
+  }
+}
+
+.tag-supprimable {
+  padding-right: 1.75rem;
+  position: relative;
+  display: block;
+  span {
+    margin-right: .75rem;
+  }
+}
+
+.tag-categorie {
   &.assistance {
     @include tag-couleur($couleur-accent-erreur, $couleur-accent-erreur)
   }
@@ -56,5 +75,3 @@
     border-color: $couleur-texte
   }
 }
-
-

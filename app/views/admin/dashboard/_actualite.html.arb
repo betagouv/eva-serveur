@@ -9,7 +9,7 @@ div class: 'carte-actualite' do
   div class: 'texte' do
     div class: 'entete' do
       render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                               classes: actualite.categorie
+                               classes: "tag-categorie #{actualite.categorie}"
     end
     span(class: 'titre') { link_to(actualite.titre, [:admin, actualite]) }
     div class: 'footer' do

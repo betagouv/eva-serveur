@@ -4,7 +4,7 @@ div class: 'autres-actualites' do
   autres_actualites.each do |actualite|
     div class: 'actualite' do
       render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                               classes: actualite.categorie
+                               classes: "tag-categorie #{actualite.categorie}"
       text_node link_to actualite.titre, [:admin, actualite], class: 'lien'
     end
   end

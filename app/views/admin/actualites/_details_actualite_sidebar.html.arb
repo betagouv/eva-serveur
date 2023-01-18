@@ -4,7 +4,7 @@ div class: 'metadonnees' do
   div class: 'donnee' do
     span 'Publié dans :', class: 'label'
     render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                             classes: actualite.categorie
+                             classes: "tag-categorie #{actualite.categorie}"
   end
   div class: 'donnee' do
     span 'Auteur :', class: 'label'

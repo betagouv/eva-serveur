@@ -40,7 +40,8 @@ class AbilityUtilisateur
     can %i[read mise_en_action], Evaluation, campagne: comptes_de_meme_structure(compte)
     return unless compte.admin?
 
-    can %i[update destroy], Evaluation, campagne: comptes_de_meme_structure(compte)
+    can %i[update destroy supprimer_responsable_suivi], Evaluation,
+        campagne: comptes_de_meme_structure(compte)
   end
 
   def droit_evenement(compte)

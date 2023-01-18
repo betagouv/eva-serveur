@@ -28,7 +28,7 @@ div class: 'menu menu-transverse' do
         if resource.illettrisme_potentiel?
           render 'components/tag', image_path: 'demande_aide',
                                    contenu: 'Formation recommandée',
-                                   classes: 'orange'
+                                   classes: 'tag-categorie orange'
         end
       end
     end
@@ -43,7 +43,7 @@ div class: 'menu menu-transverse' do
         if resource.illettrisme_potentiel?
           render 'components/tag', image_path: 'demande_aide',
                                    contenu: 'Formation recommandée',
-                                   classes: 'orange'
+                                   classes: 'tag-categorie orange'
         end
       end
     end

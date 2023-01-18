@@ -201,6 +201,7 @@ describe Ability do
       let(:evaluation) { create :evaluation, campagne: ma_campagne }
 
       it { is_expected.to be_able_to(:update, evaluation) }
+      it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
     end
   end
 

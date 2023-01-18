@@ -3,12 +3,12 @@
 
   #main_content_wrapper {
     #main_content {
-      margin-right: 310px;
+      margin-right: $sidebar-space;
     }
   }
   #sidebar {
-    width: 290px;
-    margin-left: -290px;
+    width: $sidebar-width;
+    margin-left: -$sidebar-width;
   }
 }
 

@@ -23,13 +23,13 @@
     font-weight: 600;
     font-family: $font-texte;
   }
-  .responsable-suivi {
-    display: inline-block;
+  .tag {
     @include tronque;
+    display: inline-block;
     max-width: calc(#{ $largeur-panel - ($padding * 2) });
-    background-color: $eva_dark;
     padding: 0.25rem 1rem;
-    border-radius: 0.25rem;
+    font-weight: 400;
     color: white;
+    background-color: $eva_dark;
   }
 }

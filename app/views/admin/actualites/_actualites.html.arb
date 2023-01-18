@@ -13,7 +13,7 @@ div class: 'actualites' do
         end
         div class: 'contenu' do
           render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                                   classes: actualite.categorie
+                                   classes: "tag-categorie #{actualite.categorie}"
           h3 class: 'titre' do
             link_to actualite.titre, admin_actualite_path(actualite)
           end

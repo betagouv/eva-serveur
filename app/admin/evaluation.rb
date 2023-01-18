@@ -100,6 +100,11 @@ ActiveAdmin.register Evaluation do
     resource.update(mise_en_action_effectuee: params[:mise_en_action_effectuee])
   end
 
+  member_action :supprimer_responsable_suivi, method: :patch do
+    resource.update(responsable_suivi: nil)
+    redirect_to request.referer
+  end
+
   show do
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,
@@ -108,9 +113,9 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
-    span class: 'responsable-suivi' do
-      resource.responsable_suivi.nom_complet
-    end
+    render 'components/tag', contenu: resource.responsable_suivi.nom_complet,
+                             url: supprimer_responsable_suivi_admin_evaluation_path(resource),
+                             supprimable: can?(:update, Evaluation)
   end
   sidebar :menu, class: 'menu-sidebar', only: :show
 

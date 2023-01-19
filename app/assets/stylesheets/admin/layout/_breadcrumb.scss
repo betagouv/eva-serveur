@@ -21,8 +21,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-family: $font-titre;
-      font-size: 1.5rem;
-      line-height: 1.15;
+      @include h2;
       color: #fff;
     }
 

@@ -23,10 +23,6 @@
   }
 
   h2 {
-    font-family: $font-titre;
-    color: $eva_dark;
-    font-weight: bold;
-    font-size: 1.5rem;
     margin: 3rem 0 1rem;
   }
 
@@ -57,9 +53,6 @@
     }
 
     .titre {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: $eva_dark;
       margin-bottom: 0;
     }
 
@@ -255,7 +248,6 @@
       color: $eva_light;
       margin-bottom: 1rem;
       margin-top: 0;
-      line-height: 1.875rem;
     }
 
     .col {

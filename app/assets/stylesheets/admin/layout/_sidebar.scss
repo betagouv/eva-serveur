@@ -4,8 +4,9 @@
 
 .sidebar_section.panel {
   &.action-items-sidebar {
-    @include annule-panel;
-    margin-bottom: 2rem;
+    @include annule-carte;
+    @include panel-gris();
+    margin-bottom: 0.5rem;
   }
 
   &.annule-panel {

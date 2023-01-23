@@ -9,6 +9,7 @@ fr:
         appareils: Appareils
         scolarite: Scolarité
         sante: Santé
+        questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'
@@ -38,7 +39,7 @@ fr:
         parcours:
           titre: Parcours sélectionné
       restitution_globale:
-        autopositionnement_titre: Questionnaire d'auto-positionnement
+        autopositionnement_titre: Profil de la personne
         prise_en_main_titre: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
       competences_transversales:

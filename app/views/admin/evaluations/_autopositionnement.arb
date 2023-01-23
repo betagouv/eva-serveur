@@ -1,18 +1,6 @@
 # frozen_string_literal: true
 
 div class: 'autopositionnement' do
-  auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
-    div class: 'row' do
-      div class: 'col intitule-question' do
-        div question.intitule
-      end
-      div class: 'col' do
-        div class: 'jauge' do
-          div reponse.position, class: "position-#{reponse.position} puce"
-        end
-      end
-    end
-  end
   div class: 'row question-standard' do
     questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
     div class: 'col' do
@@ -30,6 +18,19 @@ div class: 'autopositionnement' do
         categorie: t('.sante'),
         questions_reponses: questions_et_reponses_standard
       }
+    end
+  end
+  h2 t('.questionnaire-auto-positionnement'), class: 'categorie'
+  auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
+    div class: 'row' do
+      div class: 'col intitule-question' do
+        div question.intitule
+      end
+      div class: 'col' do
+        div class: 'jauge' do
+          div reponse.position, class: "position-#{reponse.position} puce"
+        end
+      end
     end
   end
 end

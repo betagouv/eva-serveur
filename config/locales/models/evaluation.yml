@@ -79,3 +79,4 @@ fr:
     resources:
       evaluation:
         delete_model: Supprimer
+        edit_model: Modifier

@@ -11,19 +11,12 @@
 }
 
 #responsable_de_suivi_sidebar_section {
-  $largeur-panel: 18.125rem;
-  $padding: 1rem;
-  @include carte-grise();
-  padding: 1rem;
-  box-shadow: none;
-  h3 {
-    text-transform: uppercase;
-    font-size: 1rem;
-    margin-bottom: .5rem;
-    font-weight: 600;
-    font-family: $font-texte;
-  }
+  @include panel-gris();
   .tag {
+    $largeur-panel: 18.125rem;
+    $padding: 1rem;
+
+    display: inline-block;
     @include tronque;
     display: inline-block;
     max-width: calc(#{ $largeur-panel - ($padding * 2) });

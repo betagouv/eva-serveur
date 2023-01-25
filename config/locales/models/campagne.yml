@@ -22,8 +22,6 @@ fr:
               blank: 'Vous devez choisir un type de programme.'
             code:
               invalid: Majuscules et chiffres uniquement
-            questionnaire:
-              bureau: "Doit contenir le questionnaire associé à Bureau"
   formtastic:
     labels:
       libelle: Libellé

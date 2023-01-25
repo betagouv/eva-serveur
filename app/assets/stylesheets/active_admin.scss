@@ -79,7 +79,7 @@ body {
 
   // initialisation du line-height des titres équivalente à la configuration d'active admin initiale pour éviter une regression du design
   // l'objectif est de pouvoir supprimer ces lignes suite au refacto des titres
-  h1, h3 {
+  h3 {
     line-height: 1;
   }
 

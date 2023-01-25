@@ -23,6 +23,11 @@
   line-height: 0.875rem;
 }
 
+@mixin h1() {
+  font-size: 2.25rem;
+  line-height: 2.813rem;
+}
+
 @mixin h2() {
   font-size: 1.5rem;
   line-height: 1.875rem;

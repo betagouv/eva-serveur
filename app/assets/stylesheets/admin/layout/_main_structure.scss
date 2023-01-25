@@ -1,15 +1,5 @@
 #active_admin_content {
   padding: 3rem 0;
-
-  #main_content_wrapper {
-    #main_content {
-      margin-right: $sidebar-space;
-    }
-  }
-  #sidebar {
-    width: $sidebar-width;
-    margin-left: -$sidebar-width;
-  }
 }
 
 body.logged_in {

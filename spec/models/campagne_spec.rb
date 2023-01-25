@@ -8,7 +8,6 @@ describe Campagne, type: :model do
   it { is_expected.to allow_value('ABCD1234').for(:code) }
   it { is_expected.not_to allow_value('ABC.123.').for(:code) }
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
-  it { is_expected.to belong_to(:questionnaire).optional }
 
   describe '#questionnaire_pour' do
     let(:campagne) { Campagne.new }

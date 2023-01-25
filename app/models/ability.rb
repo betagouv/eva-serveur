@@ -31,10 +31,9 @@ class Ability < AbilityUtilisateur
   def droit_questionnaire
     can :read, Questionnaire
     cannot :destroy, Questionnaire do |q|
-      Campagne.exists?(questionnaire: q) ||
-        Situation.where(questionnaire: q)
-                 .or(Situation.where(questionnaire_entrainement: q))
-                 .exists?
+      Situation.where(questionnaire: q)
+               .or(Situation.where(questionnaire_entrainement: q))
+               .exists?
     end
   end
 

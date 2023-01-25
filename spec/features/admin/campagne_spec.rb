@@ -143,13 +143,10 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'modification' do
-    let!(:questionnaire) { create :questionnaire, libelle: 'Mon QCM' }
-
     context 'en superadmin' do
       before do
         compte_conseiller.update(role: 'superadmin')
         visit edit_admin_campagne_path(campagne)
-        select 'Mon QCM'
       end
 
       context 'modifie la campagne et ses situations' do

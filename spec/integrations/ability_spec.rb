@@ -70,12 +70,6 @@ describe Ability do
 
       it { is_expected.to be_able_to(:manage, Questionnaire.new) }
 
-      context "quand une campagne l'utilise" do
-        let!(:campagne) { create :campagne, questionnaire: questionnaire }
-
-        it { is_expected.not_to be_able_to(:destroy, questionnaire) }
-      end
-
       context "quand une situation l'utilise comme questionnaire principal" do
         let!(:situation) { create :situation_livraison, questionnaire: questionnaire }
 

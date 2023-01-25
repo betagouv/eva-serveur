@@ -5,7 +5,7 @@
 
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
-    margin-right: $sidebar-space;
+    margin-right: $sidebar-width + ($section-padding * 2);
   }
 
   &.show {

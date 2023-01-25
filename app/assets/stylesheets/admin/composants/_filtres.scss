@@ -1,7 +1,11 @@
 .sidebar_section {
   form.filter_form {
     .filter_form_field {
-      &.select_and_search,
+      &.select_and_search {
+        input[type='text'] {
+          width: 6.4rem;
+        }
+      }
       &.filter_date_range {
         input[type='text'] {
           width: 7.188rem;

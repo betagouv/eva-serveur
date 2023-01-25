@@ -13,7 +13,6 @@ class Campagne < ApplicationRecord
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy
-  belongs_to :questionnaire, optional: true
   belongs_to :compte
   belongs_to :parcours_type, optional: true
 

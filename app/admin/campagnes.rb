@@ -3,10 +3,10 @@
 ActiveAdmin.register Campagne do
   menu priority: 3
 
-  permit_params :libelle, :code, :questionnaire_id, :compte,
+  permit_params :libelle, :code, :compte,
                 :compte_id, :affiche_competences_fortes, :parcours_type_id, :type_programme,
                 options_personnalisation: [],
-                situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
+                situations_configurations_attributes: %i[id situation_id _destroy]
 
   config.sort_order = 'created_at_desc'
 
@@ -21,7 +21,6 @@ ActiveAdmin.register Campagne do
          order_by: 'email_asc',
          if: proc { can? :manage, Compte }
   filter :situations
-  filter :questionnaire, if: proc { current_compte.anlci? }
   filter :created_at
 
   action_item :voir_evaluations, only: :show do

@@ -82,7 +82,6 @@ div class: 'nouvelle-campagne' do
               f.input :compte
               f.input :code
               f.input :affiche_competences_fortes
-              f.input :questionnaire
               if resource.persisted?
                 render partial: 'admin/situations_configurations/input_situations_configurations',
                        locals: { f: f }

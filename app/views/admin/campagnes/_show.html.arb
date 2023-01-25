@@ -24,7 +24,6 @@ div class: 'row' do
       div class: 'panel' do
         attributes_table_for campagne do
           row :id
-          row :questionnaire
           row :affiche_competences_fortes
           row :created_at
         end

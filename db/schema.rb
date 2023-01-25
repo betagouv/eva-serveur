@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_103315) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_25_144905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -88,7 +88,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_103315) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "questionnaire_id"
     t.uuid "compte_id"
     t.integer "nombre_evaluations", default: 0
     t.boolean "affiche_competences_fortes", default: true
@@ -99,7 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_103315) do
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["deleted_at"], name: "index_campagnes_on_deleted_at"
     t.index ["parcours_type_id"], name: "index_campagnes_on_parcours_type_id"
-    t.index ["questionnaire_id"], name: "index_campagnes_on_questionnaire_id"
   end
 
   create_table "choix", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -354,7 +352,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_103315) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "active_storage_blobs_id"
   add_foreign_key "campagnes", "comptes"
-  add_foreign_key "campagnes", "questionnaires"
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"
   add_foreign_key "conditions_passations", "evaluations", on_delete: :cascade

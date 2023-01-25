@@ -7,7 +7,7 @@ describe 'Campagne API', type: :request do
     let(:question) { create :question_qcm, intitule: 'Ma question' }
     let(:questionnaire) { create :questionnaire, questions: [question] }
     let!(:campagne) do
-      create :campagne, questionnaire: questionnaire, code: 'ETE21', libelle: 'Ma campagne ete 21'
+      create :campagne, code: 'ETE21', libelle: 'Ma campagne ete 21'
     end
 
     it 'retourne les informations de la campagne' do
@@ -17,21 +17,6 @@ describe 'Campagne API', type: :request do
       resultat = JSON.parse(response.body)
       expect(resultat['libelle']).to eq('Ma campagne ete 21')
       expect(resultat['code']).to eq('ETE21')
-    end
-
-    it 'retourne les questions de la campagne' do
-      get '/api/campagnes/ete21'
-
-      expect(response).to be_ok
-      expect(JSON.parse(response.body)['questions'].size).to be(1)
-    end
-
-    it "retourne des questions vide lorsque qu'il n'y a pas de questionnaire" do
-      campagne.update(questionnaire: nil)
-      get '/api/campagnes/ete21'
-
-      expect(response).to be_ok
-      expect(JSON.parse(response.body)['questions'].size).to be(0)
     end
 
     it "retourne une 404 lorsqu'elle n'existe pas" do

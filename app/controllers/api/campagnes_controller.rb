@@ -4,10 +4,6 @@ module Api
   class CampagnesController < Api::BaseController
     before_action :trouve_campagne
 
-    def show
-      @questions = @campagne.questionnaire&.questions || []
-    end
-
     private
 
     def trouve_campagne

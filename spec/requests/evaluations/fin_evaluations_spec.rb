@@ -4,9 +4,7 @@ require 'rails_helper'
 
 describe 'Fin Evaluation API', type: :request do
   describe 'POST /evaluations/:id/fin' do
-    let(:question) { create :question_qcm, intitule: 'Ma question' }
-    let(:questionnaire) { create :questionnaire, questions: [question] }
-    let(:campagne) { create :campagne, questionnaire: questionnaire }
+    let(:campagne) { create :campagne }
     let(:evaluation) { create :evaluation, campagne: campagne }
 
     let!(:partie) do

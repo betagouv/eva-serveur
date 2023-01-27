@@ -22,13 +22,6 @@
     }
   }
 
-  &:has(.telechargement_des_reponses) {
-    .panel--avec-references, .referentiel_anlci {
-      border-bottom-left-radius: 0px;
-      border-bottom-right-radius: 0px;
-    }
-  }
-
   .telechargement_des_reponses:hover {
     background-color: $eva_light;
     border: 2px solid $eva_main_blue;

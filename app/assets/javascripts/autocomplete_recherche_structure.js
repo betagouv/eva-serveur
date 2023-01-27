@@ -14,6 +14,16 @@ function construitReponse(item, codePostalSaisi) {
   return { label: label, value: label, code_postal: codePostal };
 }
 
+function ajouteReponseAucunResultat(event, ui) {
+  if (!ui.content.length) {
+    const recherche = $(".champ-recherche").val();
+    const reponseAucunResultat = {
+      value: '',
+      label: `Aucun résultat ne correspond à la recherche "${recherche}"`
+    };
+    ui.content.push(reponseAucunResultat);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   $( ".champ-recherche" ).autocomplete({
@@ -43,16 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     },
-    response: function(event, ui) {
-      if (!ui.content.length) {
-        const recherche = $(".champ-recherche").val();
-        const noResult = {
-          value: '',
-          label: `Aucun résultat ne correspond à la recherche "${recherche}"`
-        };
-        ui.content.push(noResult);
-      }
-    },
+    response: ajouteReponseAucunResultat,
     select: function( event, ui ) {
       $('#code_postal').val(ui.item.code_postal);
 

@@ -11,7 +11,7 @@
     <%= form_with method: :get do |f| %>
       <%= f.search_field :ville_ou_code_postal, placeholder: t('.placeholder_recherche'), value: params[:ville_ou_code_postal], class: 'champ-recherche' %>
       <%= f.hidden_field :code_postal, value: params[:code_postal] %>
-      <%= f.submit 'Chercher', id: 'bouton-chercher',
+      <%= f.submit t('.bouton_recherche_structure'), id: 'bouton-chercher',
         disabled: !params[:ville_ou_code_postal] || params[:ville_ou_code_postal].length == 0 %>
     <% end %>
 

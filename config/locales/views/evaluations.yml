@@ -55,6 +55,8 @@ fr:
         abstention: Ne sait pas
         bon: Correct
         mauvais: Erreur
+      recherche_responsable_suivi:
+        placeholder: Nom du responsable…
       tri:
         <<: *commun
         reste_plateau: Reste plateau

@@ -130,6 +130,12 @@ ActiveAdmin.register Evaluation do
                              url: supprimer_responsable_suivi_admin_evaluation_path(resource),
                              supprimable: can?(:update, Evaluation)
   end
+  sidebar :responsable_de_suivi, only: :show, if: proc {
+                                                    resource.responsable_suivi.blank? and
+                                                      can?(:update, Evaluation)
+                                                  } do
+    render 'recherche_responsable_suivi'
+  end
   sidebar :menu, class: 'menu-sidebar', only: :show
 
   form partial: 'form'

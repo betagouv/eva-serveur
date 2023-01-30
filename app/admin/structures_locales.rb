@@ -31,7 +31,7 @@ ActiveAdmin.register StructureLocale do
     end
     column :code_postal
     column :created_at do |structure|
-      l(structure.created_at, format: :court)
+      l(structure.created_at, format: :sans_heure)
     end
     column :nombre_evaluations, sortable: :nombre_evaluations
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation

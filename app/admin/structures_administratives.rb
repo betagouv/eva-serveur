@@ -11,7 +11,7 @@ ActiveAdmin.register StructureAdministrative do
   index do
     column :nom
     column :created_at do |structure|
-      l(structure.created_at, format: :court)
+      l(structure.created_at, format: :sans_heure)
     end
     actions
   end

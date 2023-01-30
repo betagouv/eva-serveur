@@ -17,8 +17,8 @@ ActiveAdmin.register Evenement do
     column :nom
     column :donnees
     column :position
-    column(:date) { |e| l(e.date, format: :date_heure) }
-    column(:created_at) { |e| l(e.created_at, format: :date_heure) }
+    column(:date)
+    column(:created_at)
   end
 
   index do

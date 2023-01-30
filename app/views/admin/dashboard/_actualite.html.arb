@@ -14,7 +14,7 @@ div class: 'carte-actualite' do
     span(class: 'titre') { link_to(actualite.titre, [:admin, actualite]) }
     div class: 'footer' do
       span class: 'date' do
-        l actualite.created_at, format: :point
+        l actualite.created_at, format: :sans_heure
       end
       text_node link_to t('.action'), [:admin, actualite], class: 'action'
     end

@@ -18,7 +18,7 @@ div class: 'row m-0' do
           span Evaluation.human_attribute_name('terminee_le')
         end
         div class: 'col col-2' do
-          span l(resource.terminee_le, format: :humain)
+          span l(resource.terminee_le, format: :avec_heure)
         end
       end
     end
@@ -42,7 +42,7 @@ div class: 'row m-0' do
           span Evaluation.human_attribute_name('anonymisee_le')
         end
         div class: 'col col-2' do
-          span l(resource.anonymise_le, format: :humain)
+          span l(resource.anonymise_le, format: :avec_heure)
         end
       end
     end

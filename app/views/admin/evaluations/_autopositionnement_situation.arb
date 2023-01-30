@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+h2 'Situation', class: 'categorie'
+
+donnees_sociosociodemographique = resource.donnee_sociodemographique
+
+div t('.quel_age_avez_vous')
+reponse = if donnees_sociosociodemographique&.age.present?
+            "#{donnees_sociosociodemographique.age} ans"
+          else
+            t('admin.evaluations.autopositionnement.non_renseigne')
+          end
+div reponse, class: 'reponse'
+
+div t('.vous_etes')
+reponse = if donnees_sociosociodemographique&.genre.present?
+            t(".#{donnees_sociosociodemographique.genre}")
+          else
+            t('admin.evaluations.autopositionnement.non_renseigne')
+          end
+div reponse, class: 'reponse'
+
+div t('.quelle_est_votre_derniere_situation')
+reponse = if donnees_sociosociodemographique&.derniere_situation.present?
+            t(".#{donnees_sociosociodemographique.derniere_situation}")
+          else
+            t('admin.evaluations.autopositionnement.non_renseigne')
+          end
+div reponse, class: 'reponse'

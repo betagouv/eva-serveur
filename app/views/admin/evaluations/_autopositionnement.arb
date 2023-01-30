@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 div class: 'autopositionnement' do
+  questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
   div class: 'row question-standard' do
-    questions_et_reponses_standard = auto_positionnement.questions_et_reponses(:standard)
     div class: 'col' do
-      render partial: 'categorie_autopositionnement', locals: {
-        categorie: t('.appareils'),
-        questions_reponses: questions_et_reponses_standard
-      }
-      render partial: 'categorie_autopositionnement', locals: {
-        categorie: t('.scolarite'),
-        questions_reponses: questions_et_reponses_standard
-      }
+      render 'autopositionnement_situation'
+    end
+    div class: 'col' do
+      render partial: 'autopositionnement_scolarite',
+             locals: { questions_et_reponses_standard: questions_et_reponses_standard }
+    end
+  end
+  div class: 'row question-standard' do
+    div class: 'col' do
+      render partial: 'autopositionnement_usage_du_numerique',
+             locals: { questions_et_reponses_standard: questions_et_reponses_standard }
     end
     div class: 'col' do
       render partial: 'categorie_autopositionnement', locals: {

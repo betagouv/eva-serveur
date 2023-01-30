@@ -1,7 +1,6 @@
 // JQuery autocomplete :
 
 .ui-autocomplete.ui-menu {
-  width: 266px;
   border-radius: 0 0 0.5rem 0.5rem;
   font-family: $font-texte;
   color: $eva_dark;
@@ -12,12 +11,22 @@
 
   .ui-menu-item {
     line-height: 1.1rem;
+    cursor: pointer;
     .ui-menu-item-wrapper {
       padding: 0.25rem 1rem;
     }
     .ui-state-active {
       background-color: $eva_main_blue;
+      color: $eva_light;
       border: none;
     }
+  }
+
+  &.recherche_structure {
+    width: 266px;
+  }
+
+  &.responsable_suivi {
+    width: 256px;
   }
 }

@@ -326,7 +326,9 @@ describe 'Admin - Evaluation', type: :feature do
 
   describe 'Edition' do
     let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
-    let!(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
+    let!(:mon_collegue) do
+      create :compte_admin, structure: mon_compte.structure, prenom: 'Liam', nom: 'Mercier'
+    end
     let!(:campagne_autre_structure) { create :campagne, libelle: 'Campagne autre structure' }
     let!(:collegue_autre_structure) do
       create :compte_conseiller,
@@ -364,14 +366,14 @@ describe 'Admin - Evaluation', type: :feature do
         it 'affiche les conseillers de la structure' do
           within('#evaluation_responsable_suivi_input') do
             expect(page).not_to have_content('collègue autre structure')
-            expect(page).to have_content(mon_compte.email)
-            expect(page).to have_content(mon_collegue.email)
+            expect(page).to have_content(mon_compte.nom_complet)
+            expect(page).to have_content(mon_collegue.nom_complet)
           end
         end
 
         it 'peut modifier le responsable suivi' do
           within('#evaluation_responsable_suivi_input') do
-            select mon_collegue.email
+            select mon_collegue.nom_complet
           end
           click_on 'Enregistrer'
           expect(evaluation.reload.responsable_suivi).to eq mon_collegue
@@ -402,14 +404,14 @@ describe 'Admin - Evaluation', type: :feature do
         it 'affiche uniquement les conseillers de ma structure' do
           within('#evaluation_responsable_suivi_input') do
             expect(page).not_to have_content('collègue autre structure')
-            expect(page).to have_content(mon_compte.email)
-            expect(page).to have_content(mon_collegue.email)
+            expect(page).to have_content(mon_compte.nom_complet)
+            expect(page).to have_content(mon_collegue.nom_complet)
           end
         end
 
         it 'peut modifier le responsable suivi' do
           within('#evaluation_responsable_suivi_input') do
-            select mon_collegue.email
+            select mon_collegue.nom_complet
           end
           click_on 'Enregistrer'
           expect(evaluation.reload.responsable_suivi).to eq mon_collegue

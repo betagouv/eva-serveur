@@ -49,12 +49,12 @@ describe Compte do
 
   it do
     expect(described_class.new(nom: 'Pig', email: 'pepa@france5.fr').display_name)
-      .to eql('Pig - pepa@france5.fr')
+      .to eql('Pig')
   end
 
   it do
     expect(described_class.new(prenom: 'Pepa', nom: 'Pig', email: 'pepa@france5.fr').display_name)
-      .to eql('Pepa Pig - pepa@france5.fr')
+      .to eql('Pepa Pig')
   end
 
   describe "validation DNS de l'email" do

@@ -24,7 +24,7 @@
       </div>
       <div class='col d-flex justify-content-between align-items-center'>
         <span class='carte__date'>
-          <%= t('.date', date: time_ago_in_words(evaluation.created_at)) %>
+          <%= l(evaluation.created_at) %>
         </span>
         <span class='carte__action d-flex'>
           <%= render(BoutonComponent.new('Voir', admin_evaluation_path(evaluation) )) %>

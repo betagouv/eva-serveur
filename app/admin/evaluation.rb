@@ -74,7 +74,7 @@ ActiveAdmin.register Evaluation do
     whitelist
     column('Structure') { |evaluation| evaluation.campagne.compte.structure.nom }
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
-    column('Date') { |evaluation| I18n.l(evaluation.created_at, format: :court) }
+    column('Date') { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
     column('passation complète') do |evaluation|
       I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')

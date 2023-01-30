@@ -13,7 +13,7 @@ div class: 'metadonnees' do
   div class: 'donnee' do
     span 'Date :', class: 'label'
     span class: 'date' do
-      l actualite.created_at, format: :point
+      l actualite.created_at, format: :sans_heure
     end
   end
 end

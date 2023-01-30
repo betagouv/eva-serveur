@@ -31,7 +31,7 @@ div id: 'evaluation__details', class: 'row' do
               span Evaluation.human_attribute_name('debutee_le')
             end
             div class: 'col col-2' do
-              span l(resource.debutee_le, format: :humain)
+              span l(resource.debutee_le, format: :avec_heure)
             end
           end
         end

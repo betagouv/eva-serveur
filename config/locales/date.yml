@@ -1,12 +1,10 @@
 fr:
   date:
     formats: &formats
-      court: "%d/%m/%Y"
-      point: "%d.%m.%Y"
-      anglais: "%Y-%m-%d"
-      mois_et_annee: "%B %Y"
+      sans_heure: "%d %b %Y"
+      default: "%d %b %Y"
   time:
     formats:
       <<: *formats
-      date_heure: "%d/%m/%Y %H:%M:%S"
-      humain: "%e %B %Y, %H:%M"
+      avec_heure: "%d %b %Y, %H:%M"
+      default: "%d %b %Y, %H:%M"

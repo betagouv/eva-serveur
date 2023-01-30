@@ -18,7 +18,7 @@ div class: 'actualites' do
             link_to actualite.titre, admin_actualite_path(actualite)
           end
           span class: 'date' do
-            l actualite.created_at, format: :point
+            l actualite.created_at, format: :sans_heure
           end
           if can?(:manage, Actualite)
             span class: 'action action-multiple' do

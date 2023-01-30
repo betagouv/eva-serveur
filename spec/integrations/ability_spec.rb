@@ -161,6 +161,8 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, SourceAide) }
     it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente) }
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
+    it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
+    it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Beneficiaire) }
   end
 
   context 'Compte admin' do
@@ -196,6 +198,7 @@ describe Ability do
 
       it { is_expected.to be_able_to(:update, evaluation) }
       it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
+      it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation) }
     end
   end
 
@@ -248,6 +251,8 @@ describe Ability do
     it { is_expected.not_to be_able_to(:manage, Campagne.new) }
     it { is_expected.not_to be_able_to(:create, evaluation_conseiller) }
     it { is_expected.not_to be_able_to(:update, evaluation_conseiller) }
+    it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation_conseiller) }
+    it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation_conseiller) }
     it { is_expected.not_to be_able_to(%i[read destroy], evaluation_superadmin) }
     it { is_expected.not_to be_able_to(:read, Evenement.new) }
     it { is_expected.not_to be_able_to(:read, evenement_superadmin) }

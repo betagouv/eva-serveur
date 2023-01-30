@@ -1,6 +1,6 @@
-<%= form_with id: :recherche_responsable_suivi, method: :patch do |f| %>
+<%= form_with id: :recherche_responsable_suivi, url: ajouter_responsable_suivi_admin_evaluation_path(resource) do |f| %>
   <%= f.search_field :nom_responsable_suivi, placeholder: t('.placeholder'), class: 'champ-recherche' %>
-  <%= f.hidden_field :evaluation_responsable_suivi_id, name: 'evaluation[responsable_suivi_id]'  %>
+  <%= f.hidden_field :responsable_suivi_id %>
 <% end %>
 
 <script>
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     response: ajouteReponseAucunResultat,
     select: function( event, ui ) {
-      $('#evaluation_responsable_suivi_id').val(ui.item.id);
+      $('#responsable_suivi_id').val(ui.item.id);
       $('#recherche_responsable_suivi').submit();
     },
     autoFocus: false,

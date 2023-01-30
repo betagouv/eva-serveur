@@ -35,7 +35,7 @@ class Compte < ApplicationRecord
   acts_as_paranoid
 
   def display_name
-    [nom_complet, email].compact_blank.join(' - ')
+    nom_complet.presence || email
   end
 
   def nom_complet

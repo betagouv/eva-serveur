@@ -232,6 +232,10 @@ body.logged_out {
     .champ-recherche {
       flex-grow: 1;
       margin-right: .5rem;
+
+      &--geographique {
+        background-image: image-url('punaise-recherche.svg');
+      }
     }
     .description-liste-structures {
       margin-bottom: 1rem;

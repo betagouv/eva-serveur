@@ -48,4 +48,20 @@ describe Evaluation do
       end
     end
   end
+
+  describe '#responsables_suivi' do
+    let!(:structure) { create :structure }
+    let!(:structure2) { create :structure }
+    let!(:compte1) { create :compte, structure: structure }
+    let!(:compte2) { create :compte, structure: structure }
+    let!(:compte_en_attente) { create :compte_conseiller, :en_attente, structure: structure }
+    let!(:compte_refusee) { create :compte_conseiller, :refusee, structure: structure }
+    let!(:compte_autre_structure) { create :compte, structure: structure2 }
+    let!(:campagne) { create :campagne, compte: compte1 }
+    let!(:evaluation) { create :evaluation, campagne: campagne }
+
+    it "retourne les responsables de suivi possible pour l'évaluation" do
+      expect(evaluation.responsables_suivi).to contain_exactly(compte1, compte2)
+    end
+  end
 end

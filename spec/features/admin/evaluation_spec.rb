@@ -326,9 +326,12 @@ describe 'Admin - Evaluation', type: :feature do
 
   describe 'Edition' do
     let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
+    let!(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
     let!(:campagne_autre_structure) { create :campagne, libelle: 'Campagne autre structure' }
     let!(:collegue_autre_structure) do
-      create :compte_conseiller, :structure_avec_admin, nom: 'collègue autre structure'
+      create :compte_conseiller,
+             :structure_avec_admin,
+             nom: 'collègue autre structure'
     end
 
     context 'Superadmin' do
@@ -358,25 +361,25 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       context 'responsable de suivi' do
-        it 'affiche tous les autres conseillers' do
+        it 'affiche les conseillers de la structure' do
           within('#evaluation_responsable_suivi_input') do
-            expect(page).to have_content('collègue autre structure')
+            expect(page).not_to have_content('collègue autre structure')
             expect(page).to have_content(mon_compte.email)
+            expect(page).to have_content(mon_collegue.email)
           end
         end
 
         it 'peut modifier le responsable suivi' do
           within('#evaluation_responsable_suivi_input') do
-            select collegue_autre_structure.email
+            select mon_collegue.email
           end
           click_on 'Enregistrer'
-          expect(evaluation.reload.responsable_suivi).to eq collegue_autre_structure
+          expect(evaluation.reload.responsable_suivi).to eq mon_collegue
         end
       end
     end
 
     context 'Admin' do
-      let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
       let!(:campagne_meme_structure) do
         create :campagne, compte: mon_collegue, libelle: 'Campagne même structure'
       end

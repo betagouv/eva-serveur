@@ -126,7 +126,7 @@ ActiveAdmin.register Evaluation do
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_accessibles, :traduction_niveau,
                   :campagne_avec_competences_transversales?, :campagne_avec_positionnement?,
-                  :responsables_suivi_accessibles
+                  :responsables_suivi_possibles
 
     def show
       show! do |format|
@@ -201,8 +201,8 @@ ActiveAdmin.register Evaluation do
       @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
     end
 
-    def responsables_suivi_accessibles
-      @responsables_suivi_accessibles ||= Compte.accessible_by(current_ability)
+    def responsables_suivi_possibles
+      @responsables_suivi_possibles ||= resource.responsables_suivi
     end
 
     def beneficiaires_accessibles

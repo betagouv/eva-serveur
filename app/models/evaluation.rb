@@ -63,6 +63,12 @@ class Evaluation < ApplicationRecord
     anonymise_le.present?
   end
 
+  def responsables_suivi
+    Compte
+      .where(structure_id: campagne&.compte&.structure_id)
+      .where(statut_validation: :acceptee)
+  end
+
   private
 
   def trouve_campagne_depuis_code

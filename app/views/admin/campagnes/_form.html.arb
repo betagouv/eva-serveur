@@ -14,13 +14,6 @@ div class: 'nouvelle-campagne' do
 
       active_admin_form_for [:admin, resource] do |f|
         f.semantic_errors
-        h2 t('.titre_libelle')
-        div class: 'panel' do
-          f.inputs do
-            f.input :libelle
-          end
-        end
-
         if resource.new_record?
           h2 'Programme'
           div id: 'zone-choix-type-programme' do
@@ -72,6 +65,13 @@ div class: 'nouvelle-campagne' do
                         label: false
               end
             end
+          end
+        end
+
+        h2 t('.titre_libelle')
+        div class: 'panel' do
+          f.inputs do
+            f.input :libelle
           end
         end
 

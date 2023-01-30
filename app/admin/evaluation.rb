@@ -118,6 +118,11 @@ ActiveAdmin.register Evaluation do
     redirect_to request.referer
   end
 
+  member_action :ajouter_responsable_suivi, method: :post do
+    resource.update(responsable_suivi: Compte.find(params['responsable_suivi_id']))
+    redirect_to request.referer
+  end
+
   show do
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,
@@ -128,11 +133,11 @@ ActiveAdmin.register Evaluation do
   sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
     render 'components/tag', contenu: resource.responsable_suivi.display_name,
                              url: supprimer_responsable_suivi_admin_evaluation_path(resource),
-                             supprimable: can?(:update, Evaluation)
+                             supprimable: can?(:supprimer_responsable_suivi, Evaluation)
   end
   sidebar :responsable_de_suivi, only: :show, if: proc {
                                                     resource.responsable_suivi.blank? and
-                                                      can?(:update, Evaluation)
+                                                      can?(:ajouter_responsable_suivi, Evaluation)
                                                   } do
     render 'recherche_responsable_suivi'
   end

@@ -314,11 +314,12 @@ describe 'Admin - Evaluation', type: :feature do
           visit admin_evaluation_path(evaluation)
         end
 
-        it "ne peut pas retirer l'assignation" do
+        it "peut retirer l'assignation de n'importe quel collègue de ma structure" do
           within('#responsable_de_suivi_sidebar_section') do
-            expect(page).to have_content(evaluation.responsable_suivi.nom_complet)
-            expect(page).not_to have_selector('.lien-supprimer')
+            find('a.lien-supprimer').click
           end
+          expect(page).not_to have_content(mon_collegue.email)
+          expect(evaluation.reload.responsable_suivi).to eq nil
         end
       end
     end

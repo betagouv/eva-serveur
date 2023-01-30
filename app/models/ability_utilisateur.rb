@@ -37,10 +37,12 @@ class AbilityUtilisateur
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
     return unless compte.validation_acceptee?
 
-    can %i[read mise_en_action], Evaluation, campagne: comptes_de_meme_structure(compte)
+    can %i[read mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi],
+        Evaluation,
+        campagne: comptes_de_meme_structure(compte)
     return unless compte.admin?
 
-    can %i[update destroy supprimer_responsable_suivi], Evaluation,
+    can %i[update destroy], Evaluation,
         campagne: comptes_de_meme_structure(compte)
   end
 
@@ -85,6 +87,7 @@ class AbilityUtilisateur
     cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
     cannot(:read, Aide::QuestionFrequente)
+    cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi], Evaluation)
   end
 
   def comptes_de_meme_structure(compte)

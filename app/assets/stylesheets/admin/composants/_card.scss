@@ -7,7 +7,7 @@
   &.carte-liste {
     @include texte-xs;
     color: $eva_dark;
-    padding: 0.7rem 1rem;
+    padding: 0 1rem;
     min-height: 3rem;
     margin-bottom: .5rem;
 
@@ -28,6 +28,11 @@
         margin-right: .25rem;
       }
     }
+
+    .tag {
+      background-color: white;
+    }
+
     &:hover {
       background-color: $eva_main_blue;
       color: white;

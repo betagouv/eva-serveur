@@ -22,12 +22,9 @@
           <% end %>
         </span>
       </div>
-      <div class='col d-flex justify-content-between align-items-center'>
+      <div class='col d-flex justify-content-end align-items-center'>
         <span class='carte__date'>
           <%= l(evaluation.created_at) %>
-        </span>
-        <span class='carte__action d-flex'>
-          <%= render(BoutonComponent.new('Voir', admin_evaluation_path(evaluation) )) %>
         </span>
       </div>
     <% end %>

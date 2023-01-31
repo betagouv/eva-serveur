@@ -6,6 +6,7 @@
 
   &.carte-liste {
     @include texte-xs;
+    color: $eva_dark;
     padding: 0.7rem 1rem;
     min-height: 3rem;
     margin-bottom: .5rem;
@@ -14,21 +15,17 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      a {
-        font-family: $font-titre;
-        font-weight: bold;
-        color: $eva_dark;
-        text-decoration: none;
-      }
+      font-family: $font-titre;
+      font-weight: bold;
+
       .icone-anonyme {
         top: 0;
         margin-right: .25rem;
       }
     }
     &:hover {
-      .carte__nom a {
-        color: $eva_main_blue;
-      }
+      background-color: $eva_main_blue;
+      color: white;
     }
   }
 

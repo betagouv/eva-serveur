@@ -56,7 +56,7 @@ end
 if actualites.present? && prise_en_main.terminee?
   section class: 'section-actualites' do
     columns do
-      render 'actualites', actualites: actualites
+      render 'bloc_actualites', actualites: actualites
     end
   end
 end

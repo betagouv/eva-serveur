@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class CarteComponentStories < ViewComponent::Storybook::Stories
-  story :carte_avec_nom do
-    nom = 'Tom Preston'
-    constructor(nom, '')
+  story :default do
+    constructor('') do
+      'Ceci est une carte.'
+    end
   end
 end

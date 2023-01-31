@@ -13,7 +13,10 @@
   </div>
 
   <% evaluations.each do |evaluation| %>
-    <%= render(CarteComponent.new(nom_pour_ressource(evaluation), admin_evaluation_path(evaluation))) do %>
+    <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
+      <div class='col d-flex'>
+        <span class='carte__nom'><%= nom_pour_ressource(evaluation) %></span>
+      </div>
       <div class='col'>
         <span class='carte__pastille'>
           <% if evaluation.illettrisme_potentiel? %>

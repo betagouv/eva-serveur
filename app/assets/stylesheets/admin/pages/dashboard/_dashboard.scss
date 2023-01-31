@@ -121,8 +121,12 @@
         }
       }
       &:hover {
-        .carte__nom a:after {
-          display: inline-block;
+        background-color: white;
+        .carte__nom a {
+          color: $eva_main_blue;
+          &:after {
+            display: inline-block;
+          }
         }
       }
       .mise-en-action {

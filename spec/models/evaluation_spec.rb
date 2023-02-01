@@ -47,6 +47,15 @@ describe Evaluation do
         end
       end
     end
+
+    describe '.non_anonymes' do
+      let(:evaluation_anonyme) { create :evaluation, anonymise_le: Time.zone.today }
+      let(:evaluation_non_anonyme) { create :evaluation, anonymise_le: nil }
+
+      it 'retourne les évaluations qui ne sont pas anonymisées' do
+        expect(described_class.non_anonymes).to eq [evaluation_non_anonyme]
+      end
+    end
   end
 
   describe '#responsables_suivi' do

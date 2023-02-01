@@ -50,6 +50,7 @@ ActiveAdmin.register_page 'Dashboard' do
       @evaluations_sans_mise_en_action = Evaluation.accessible_by(current_ability)
                                                    .where(mise_en_action_effectuee: nil)
                                                    .illettrisme_potentiel
+                                                   .non_anonymes
                                                    .order(created_at: :desc)
     end
 

@@ -54,6 +54,7 @@ class Evaluation < ApplicationRecord
         }
       )
   }
+  scope :non_anonymes, -> { where(anonymise_le: nil) }
 
   def display_name
     nom

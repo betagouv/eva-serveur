@@ -62,5 +62,15 @@ div class: 'row m-0' do
         span Evaluation.human_enum_name(:statut, resource.statut)
       end
     end
+    if resource.mise_en_action_le?
+      div class: 'row' do
+        div class: 'col col-1' do
+          span Evaluation.human_attribute_name('mise_en_action_le')
+        end
+        div class: 'col col-2' do
+          span l(resource.mise_en_action_le, format: :avec_heure)
+        end
+      end
+    end
   end
 end

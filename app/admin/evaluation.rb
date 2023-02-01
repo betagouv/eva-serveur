@@ -17,6 +17,13 @@ ActiveAdmin.register Evaluation do
          minimum_input_length: 2,
          order_by: 'libelle_asc'
   filter :created_at
+  filter :responsable_suivi_id,
+         as: :search_select_filter,
+         url: proc { admin_comptes_path },
+         fields: %i[email nom prenom],
+         display_name: 'display_name',
+         minimum_input_length: 2,
+         order_by: 'email_asc'
   filter :mise_en_action_effectuee_null,
          as: :boolean,
          label: I18n.t('activerecord.attributes.evaluation.mise_en_action_effectuee_null')
@@ -43,7 +50,7 @@ ActiveAdmin.register Evaluation do
     column(:nom) { |e| nom_pour_ressource(e) }
 
     if params[:scope] != 'illettrisme_potentiel'
-      column('Illettrisme potentiel') do |evaluation|
+      column do |evaluation|
         if evaluation.illettrisme_potentiel?
           render partial: 'pastille_illettrisme_potentiel',
                  locals: { avec_tooltip: true }
@@ -52,6 +59,12 @@ ActiveAdmin.register Evaluation do
     end
 
     column :campagne
+    column('Suivi par', :responsable_suivi) do |evaluation|
+      responsable = evaluation.responsable_suivi
+      next if responsable.blank?
+
+      link_to responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire'
+    end
     column :created_at
     actions
   end

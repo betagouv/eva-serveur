@@ -1,11 +1,17 @@
 // LIEN PAR DÉFAUT
-@mixin lien() {
-  text-decoration: underline;
-  color: $eva_main_blue;
+@mixin lien($color: $eva_main_blue) {
+  &, &:link, &:visited {
+    text-decoration: underline;
+    color: $color;
+  }
 
   &:hover {
     text-decoration: none;
   }
+}
+
+@mixin lien-secondaire() {
+  @include lien($eva_dark);
 }
 
 .lien-retour {
@@ -28,4 +34,8 @@
     // fix alignement vertical
     line-height: 0px;
   }
+}
+
+.lien-secondaire {
+  @include lien-secondaire();
 }

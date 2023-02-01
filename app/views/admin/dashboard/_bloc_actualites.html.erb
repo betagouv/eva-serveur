@@ -17,7 +17,7 @@
                                     classes: "tag-categorie #{actualite.categorie}" %>
           </div>
           <span class='carte__titre'><%= actualite.titre %></span>
-          <span><%= l actualite.created_at, format: :point %></span>
+          <span><%= l actualite.created_at, format: :avec_heure %></span>
         </div>
       <% end %>
     </div>
@@ -32,7 +32,7 @@
             <span class='carte__texte'><%= actualite.titre %></span>
           </div>
           <div class='col d-flex justify-content-end align-items-center'>
-            <span><%= l actualite.created_at, format: :point %></span>
+            <span><%= l actualite.created_at, format: :sans_heure %></span>
           </div>
         <% end %>
       <% end %>

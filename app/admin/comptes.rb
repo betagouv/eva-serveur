@@ -142,13 +142,8 @@ ActiveAdmin.register Compte do
     end
 
     def collection_roles
-      roles = Compte.roles.to_h
-      roles.delete('superadmin') unless current_compte.superadmin?
-      roles.delete('compte_generique') unless current_compte.superadmin?
-      roles.to_h do |_k, v|
-        traduction = Compte.human_enum_name(:role, v)
-        [traduction, v]
-      end
+      roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE
+      roles.map { |role| [Compte.human_enum_name(:role, role), role] }
     end
   end
 

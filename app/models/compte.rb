@@ -7,6 +7,7 @@ class Compte < ApplicationRecord
   devise :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable, :registerable, :confirmable
   ROLES = %w[superadmin charge_mission_regionale admin conseiller compte_generique].freeze
+  ROLES_STRUCTURE = %w[admin conseiller].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
   include Comptes::EnvoieEmails
@@ -15,7 +16,7 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
-  validates :role, inclusion: { in: %w[conseiller compte_generique] },
+  validates :role, inclusion: { in: %w[conseiller compte_generique], message: :comptes_refuses },
                    if: :compte_refuse?
   validates :email, uniqueness: {
     case_sensitive: false,

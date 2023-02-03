@@ -259,6 +259,16 @@ Contenu:
 }
 ```
 
+## Géolocalisation
+
+Nous utilisons deux services de géolocalisation :
+* Nominatim (openstreetmap) pour la doc chercher Nominatim dans cette page https://github.com/alexreisner/geocoder/blob/master/README_API_GUIDE.md
+* geo.api.gouv.fr/communes (https://api.gouv.fr/les-api/api-geo)
+
+Le premier service est utilisé pour rechercher la position GPS du code postal
+d'une structure, le second service pour valider les codes postaux et rechercher
+leurs informations au moment de la recherche de structure par code postal.
+
 ## Structure des données
 
 Un graphique de la structure de la base peut être généré afin de mieux comprendre les intérractions entre les différents modèles.

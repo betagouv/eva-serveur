@@ -87,3 +87,15 @@ fr:
       evaluation:
         delete_model: Supprimer
         edit_model: Modifier
+    xls:
+      evaluation:
+        structure: Structure
+        campagne: Campagne
+        date: Date
+        nom: Nom
+        completude: Passation complète ?
+        synthese: Niveau global
+        niveau_cefr: Niveau CEFR
+        niveau_cnef: Niveau CNEF
+        anlci_litteratie: ANLCI Littératie
+        anlci_numeratie: ANLCI Numératie

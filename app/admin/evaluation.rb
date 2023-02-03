@@ -83,28 +83,28 @@ ActiveAdmin.register Evaluation do
     end
   end
 
-  xls do
+  xls(i18n_scope: %i[active_admin xls evaluation]) do
     whitelist
-    column('Structure') { |evaluation| evaluation.campagne.compte.structure.nom }
+    column('structure') { |evaluation| evaluation.campagne.compte.structure.nom }
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
-    column('Date') { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
+    column('date') { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
-    column('passation complète') do |evaluation|
+    column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')
     end
-    column('Niveau global') do |evaluation|
+    column('synthese') do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)
     end
-    column('Niveau cefr') do |evaluation|
+    column('niveau_cefr') do |evaluation|
       traduction_niveau(evaluation, :niveau_cefr)
     end
-    column('Niveau cnef') do |evaluation|
+    column('niveau_cnef') do |evaluation|
       traduction_niveau(evaluation, :niveau_cnef)
     end
-    column('ANLCI Littératie') do |evaluation|
+    column('anlci_litteratie') do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_litteratie)
     end
-    column('ANLCI Numératie') do |evaluation|
+    column('anlci_numeratie') do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_numeratie)
     end
   end

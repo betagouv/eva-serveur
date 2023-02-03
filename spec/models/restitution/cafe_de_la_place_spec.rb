@@ -50,11 +50,11 @@ describe Restitution::CafeDeLaPlace do
     it "quand un profil n'est pas défini" do
       expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture: ::Competence::NIVEAU_INDETERMINE,
+                      lecture: Competence::NIVEAU_INDETERMINE,
                       comprehension_ecrite: :profil2,
                       production_ecrite: :profil4
                     })
-      expect(restitution.parcours_bas).to equal(::Competence::NIVEAU_INDETERMINE)
+      expect(restitution.parcours_bas).to equal(Competence::NIVEAU_INDETERMINE)
     end
   end
 
@@ -63,7 +63,7 @@ describe Restitution::CafeDeLaPlace do
       it 'retourne le profil aberrant' do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: 3, hgac: 3, hcvf: 3, hpfb: 3 })
-        expect(restitution.parcours_haut).to equal(::Competence::PROFIL_ABERRANT)
+        expect(restitution.parcours_haut).to equal(Competence::PROFIL_ABERRANT)
       end
     end
 
@@ -71,7 +71,7 @@ describe Restitution::CafeDeLaPlace do
       it 'retourne le profil 4H' do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: 4, hgac: 4, hcvf: 4, hpfb: 4 })
-        expect(restitution.parcours_haut).to equal(::Competence::PROFIL_4H)
+        expect(restitution.parcours_haut).to equal(Competence::PROFIL_4H)
       end
     end
 
@@ -79,7 +79,7 @@ describe Restitution::CafeDeLaPlace do
       it 'retourne le profil 4H+' do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: 7, hgac: 7, hcvf: 7, hpfb: 7 })
-        expect(restitution.parcours_haut).to equal(::Competence::PROFIL_4H_PLUS)
+        expect(restitution.parcours_haut).to equal(Competence::PROFIL_4H_PLUS)
       end
     end
 
@@ -87,7 +87,7 @@ describe Restitution::CafeDeLaPlace do
       it 'retourne le profil 4H++' do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: 9, hgac: 9, hcvf: 9, hpfb: 9 })
-        expect(restitution.parcours_haut).to equal(::Competence::PROFIL_4H_PLUS_PLUS)
+        expect(restitution.parcours_haut).to equal(Competence::PROFIL_4H_PLUS_PLUS)
       end
     end
 
@@ -95,7 +95,7 @@ describe Restitution::CafeDeLaPlace do
       it 'retourne le profil indeterminé' do
         expect(restitution).to receive(:scores_parcours_haut)
           .and_return({ hpar: nil, hgac: 9, hcvf: 5, hpfb: 2 })
-        expect(restitution.parcours_haut).to equal(::Competence::NIVEAU_INDETERMINE)
+        expect(restitution.parcours_haut).to equal(Competence::NIVEAU_INDETERMINE)
       end
     end
   end
@@ -103,22 +103,22 @@ describe Restitution::CafeDeLaPlace do
   describe '#niveau_litteratie' do
     context 'quand un parcours haut est profil 4H++' do
       before do
-        allow(restitution).to receive(:parcours_haut).and_return ::Competence::PROFIL_4H_PLUS_PLUS
+        allow(restitution).to receive(:parcours_haut).and_return Competence::PROFIL_4H_PLUS_PLUS
       end
 
       it 'retourne le profil 4H++' do
-        expect(restitution.niveau_litteratie).to equal(::Competence::PROFIL_4H_PLUS_PLUS)
+        expect(restitution.niveau_litteratie).to equal(Competence::PROFIL_4H_PLUS_PLUS)
       end
     end
 
     context 'quand un parcours haut est indeterminé' do
       before do
-        allow(restitution).to receive(:parcours_haut).and_return ::Competence::NIVEAU_INDETERMINE
-        allow(restitution).to receive(:parcours_bas).and_return ::Competence::PROFIL_3
+        allow(restitution).to receive(:parcours_haut).and_return Competence::NIVEAU_INDETERMINE
+        allow(restitution).to receive(:parcours_bas).and_return Competence::PROFIL_3
       end
 
       it 'retourne le profil du parcours bas' do
-        expect(restitution.niveau_litteratie).to equal(::Competence::PROFIL_3)
+        expect(restitution.niveau_litteratie).to equal(Competence::PROFIL_3)
       end
     end
   end

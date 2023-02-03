@@ -22,14 +22,18 @@ describe Restitution::Maintenance::TempsMotsFrancais do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_apparition_mot, donnees: { type: 'neutre', reponse: 'francais' },
-                                           date: Time.local(2019, 10, 9, 10, 1, 21, 950_000)),
-          build(:evenement_identification_mot, donnees: { type: 'neutre', reponse: 'francais' },
-                                               date: Time.local(2019, 10, 9, 10, 1, 21, 960_000)),
-          build(:evenement_apparition_mot, donnees: { type: 'neutre', reponse: 'francais' },
-                                           date: Time.local(2019, 10, 9, 10, 1, 22, 950_000)),
-          build(:evenement_identification_mot, donnees: { type: 'neutre', reponse: 'francais' },
-                                               date: Time.local(2019, 10, 9, 10, 1, 22, 970_000))
+          build(:evenement_apparition_mot,
+                donnees: { type: 'neutre', reponse: 'francais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 21, 950_000)),
+          build(:evenement_identification_mot,
+                donnees: { type: 'neutre', reponse: 'francais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 21, 960_000)),
+          build(:evenement_apparition_mot,
+                donnees: { type: 'neutre', reponse: 'francais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 22, 950_000)),
+          build(:evenement_identification_mot,
+                donnees: { type: 'neutre', reponse: 'francais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 22, 970_000))
         ]
       end
 
@@ -40,10 +44,12 @@ describe Restitution::Maintenance::TempsMotsFrancais do
       let(:evenements) do
         [
           build(:evenement_demarrage),
-          build(:evenement_apparition_mot, donnees: { type: 'non-mot', reponse: 'pasfrancais' },
-                                           date: Time.local(2019, 10, 9, 10, 1, 21, 950_000)),
-          build(:evenement_identification_mot, donnees: { type: 'non-mot', reponse: 'pasfrancais' },
-                                               date: Time.local(2019, 10, 9, 10, 1, 21, 960_000))
+          build(:evenement_apparition_mot,
+                donnees: { type: 'non-mot', reponse: 'pasfrancais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 21, 950_000)),
+          build(:evenement_identification_mot,
+                donnees: { type: 'non-mot', reponse: 'pasfrancais' },
+                date: Time.zone.local(2019, 10, 9, 10, 1, 21, 960_000))
         ]
       end
 

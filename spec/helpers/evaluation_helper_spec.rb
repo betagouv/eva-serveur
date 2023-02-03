@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe EvaluationHelper do
   describe '#niveau_bas?' do
-    let(:profil1) { ::Competence::PROFILS_BAS.first }
+    let(:profil1) { Competence::PROFILS_BAS.first }
     let(:profil_autre) { :profil_autre }
 
     it 'Retourne true si le profil renseigné est un niveau bas' do

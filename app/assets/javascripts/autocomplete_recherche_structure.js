@@ -25,6 +25,13 @@ function ajouteReponseAucunResultat(event, ui) {
   }
 }
 
+function afficheRecherche(boutonAjout, formulaireRecherche) {
+  boutonAjout.click(function () {
+    boutonAjout.hide()
+    formulaireRecherche.show()
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   $( ".champ-recherche" ).autocomplete({
     source: function (request, response) {

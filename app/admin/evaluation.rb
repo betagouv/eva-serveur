@@ -43,7 +43,7 @@ ActiveAdmin.register Evaluation do
         }, :illettrisme_potentiel
 
   index download_links: lambda {
-                          params[:action] == 'show' ? [:pdf] : %i[csv xls json]
+                          params[:action] == 'show' ? %i[pdf] : %i[xls]
                         }, row_class: lambda { |elem|
                                         'anonyme' if elem.anonyme?
                                       } do

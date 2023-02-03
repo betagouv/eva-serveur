@@ -193,7 +193,7 @@ describe Restitution::Globale do
       end
     end
 
-    context 'evaluation avancée' do
+    context 'positionnement' do
       let(:interpreteur_niveau1) do
         double(
           synthese: nil,
@@ -218,7 +218,7 @@ describe Restitution::Globale do
               synthese_competences_de_base: 'illettrisme_potentiel',
               niveau_cefr: nil,
               niveau_cnef: nil,
-              niveau_anlci_litteratie: nil,
+              niveau_anlci_litteratie: :profil2,
               niveau_anlci_numeratie: nil
             }
           )
@@ -235,7 +235,7 @@ describe Restitution::Globale do
               synthese_competences_de_base: 'ni_ni',
               niveau_cefr: nil,
               niveau_cnef: nil,
-              niveau_anlci_litteratie: nil,
+              niveau_anlci_litteratie: :profil3,
               niveau_anlci_numeratie: nil
             }
           )

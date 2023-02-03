@@ -189,9 +189,31 @@ describe Restitution::Illettrisme::Synthetiseur do
       it { expect(synthese(:profil_aberrant)).to eq 'aberrant' }
       it { expect(synthese(:indetermine)).to eq nil }
     end
+
+    describe '#niveau_anlci_litteratie' do
+      it "quand l'interpreteur n'existe pas" do
+        synthetiseur = Restitution::Illettrisme::Synthetiseur.new nil, nil
+        expect(synthetiseur.niveau_anlci_litteratie).to eq nil
+      end
+
+      it "quand le niveau n'existe pas" do
+        allow(interpreteur_positionnement).to receive(:synthese).and_return({})
+        expect(subject.niveau_anlci_litteratie).to eq nil
+      end
+
+      it 'quand le niveau existe' do
+        allow(interpreteur_positionnement).to receive(:synthese).and_return(
+          {
+            niveau_litteratie: :profil1
+          }
+        )
+
+        expect(subject.niveau_anlci_litteratie).to eq :profil1
+      end
+    end
   end
 
-  describe '#synthese' do
+  context 'quand il y a un positionnement et un pré-positionnement' do
     let(:interpreteur_positionnement) { double }
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
@@ -199,22 +221,28 @@ describe Restitution::Illettrisme::Synthetiseur do
                                                  interpreteur_positionnement
     end
 
-    context 'quand il y a un positionnement et un pré-positionnement' do
-      before do
-        allow(interpreteur_positionnement).to receive(:synthese).and_return(
-          {
-            niveau_litteratie: :profil_aberrant
-          }
-        )
-        allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr).and_return(
-          {
-            litteratie: nil, numeratie: nil
-          }
-        )
-      end
+    before do
+      allow(interpreteur_positionnement).to receive(:synthese).and_return(
+        {
+          niveau_litteratie: :profil_aberrant
+        }
+      )
+      allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr).and_return(
+        {
+          litteratie: nil, numeratie: nil
+        }
+      )
+    end
 
+    describe '#synthese' do
       it 'retourne la synthèse positionnement' do
         expect(subject.synthese).to eq 'aberrant'
+      end
+    end
+
+    describe '#niveau_anlci_litteratie' do
+      it 'retourne le niveau de positionnement' do
+        expect(subject.niveau_anlci_litteratie).to eq :profil_aberrant
       end
     end
   end

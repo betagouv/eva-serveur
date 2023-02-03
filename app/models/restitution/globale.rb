@@ -10,7 +10,8 @@ module Restitution
              to: :scores_niveau2_standardises, prefix: :niveau2
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau1_standardises, prefix: :niveau1
-    delegate :synthese, :synthese_positionnement, :synthese_pre_positionnement, to: :synthetiseur
+    delegate :synthese, :synthese_positionnement, :synthese_pre_positionnement,
+             :niveau_anlci_litteratie, to: :synthetiseur
 
     def initialize(evaluation:, restitutions:)
       @evaluation = evaluation
@@ -79,7 +80,7 @@ module Restitution
         synthese_competences_de_base: synthese,
         niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],
         niveau_cnef: interpreteur_niveau1.interpretations_cefr[:numeratie],
-        niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
+        niveau_anlci_litteratie: niveau_anlci_litteratie,
         niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie]
       }
     end

@@ -4,7 +4,10 @@ class Evaluation < ApplicationRecord
   SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
-  NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
+  NIVEAUX_ANLCI = %w[profil1 profil2 profil3
+                     profil4 profil4_plus profil4_plus_plus
+                     profil_4h profil_4h_plus profil_4h_plus_plus
+                     profil_aberrant indetermine].freeze
   NIVEAUX_COMPLETUDE = %w[incomplete
                           competences_de_base_incompletes
                           competences_transversales_incompletes

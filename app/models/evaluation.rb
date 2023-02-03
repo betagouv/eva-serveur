@@ -75,6 +75,22 @@ class Evaluation < ApplicationRecord
     update(mise_en_action_le: Time.zone.now)
   end
 
+  def self.tableau_de_bord(ability)
+    accessible_by(ability)
+      .non_anonymes
+      .order(created_at: :desc)
+      .limit(10)
+  end
+
+  def self.illettrismes_sans_mise_en_action(ability)
+    accessible_by(ability)
+      .where(mise_en_action_effectuee: nil)
+      .illettrisme_potentiel
+      .non_anonymes
+      .order(created_at: :desc)
+      .limit(6)
+  end
+
   private
 
   def trouve_campagne_depuis_code

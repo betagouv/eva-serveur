@@ -43,15 +43,12 @@ ActiveAdmin.register_page 'Dashboard' do
     end
 
     def recupere_evaluations
-      @evaluations = Evaluation.accessible_by(current_ability).order(created_at: :desc).limit(10)
+      @evaluations = Evaluation.tableau_de_bord(current_ability)
     end
 
     def recupere_evaluations_sans_mise_en_action
-      @evaluations_sans_mise_en_action = Evaluation.accessible_by(current_ability)
-                                                   .where(mise_en_action_effectuee: nil)
-                                                   .illettrisme_potentiel
-                                                   .non_anonymes
-                                                   .order(created_at: :desc)
+      @evaluations_sans_mise_en_action =
+        Evaluation.illettrismes_sans_mise_en_action(current_ability)
     end
 
     def recupere_actualites

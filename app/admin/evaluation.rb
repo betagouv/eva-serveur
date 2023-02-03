@@ -42,6 +42,13 @@ ActiveAdmin.register Evaluation do
                  }
         }, :illettrisme_potentiel
 
+  show do
+    params[:parties_selectionnees] =
+      FabriqueRestitution.initialise_selection(resource,
+                                               params[:parties_selectionnees])
+    render partial: 'show'
+  end
+
   index download_links: lambda {
                           params[:action] == 'show' ? %i[pdf] : %i[xls]
                         }, row_class: lambda { |elem|
@@ -69,6 +76,8 @@ ActiveAdmin.register Evaluation do
     actions
   end
 
+  form partial: 'form'
+
   sidebar :statistiques, only: :index, if: proc { can?(:manage, Compte) } do
     ul do
       collection_complete = collection.except(:limit, :offset, :order)
@@ -82,6 +91,21 @@ ActiveAdmin.register Evaluation do
       end
     end
   end
+
+  sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
+    render 'components/tag', contenu: resource.responsable_suivi.display_name,
+                             url: supprimer_responsable_suivi_admin_evaluation_path(resource),
+                             supprimable: can?(:supprimer_responsable_suivi, Evaluation)
+  end
+
+  sidebar :responsable_de_suivi, only: :show, if: proc {
+                                                    resource.responsable_suivi.blank? and
+                                                      can?(:ajouter_responsable_suivi, Evaluation)
+                                                  } do
+    render 'recherche_responsable_suivi'
+  end
+
+  sidebar :menu, class: 'menu-sidebar', only: :show
 
   xls(i18n_scope: %i[active_admin xls evaluation]) do
     whitelist
@@ -122,28 +146,6 @@ ActiveAdmin.register Evaluation do
     resource.update(responsable_suivi: Compte.find(params['responsable_suivi_id']))
     redirect_to request.referer
   end
-
-  show do
-    params[:parties_selectionnees] =
-      FabriqueRestitution.initialise_selection(resource,
-                                               params[:parties_selectionnees])
-    render partial: 'show'
-  end
-
-  sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
-    render 'components/tag', contenu: resource.responsable_suivi.display_name,
-                             url: supprimer_responsable_suivi_admin_evaluation_path(resource),
-                             supprimable: can?(:supprimer_responsable_suivi, Evaluation)
-  end
-  sidebar :responsable_de_suivi, only: :show, if: proc {
-                                                    resource.responsable_suivi.blank? and
-                                                      can?(:ajouter_responsable_suivi, Evaluation)
-                                                  } do
-    render 'recherche_responsable_suivi'
-  end
-  sidebar :menu, class: 'menu-sidebar', only: :show
-
-  form partial: 'form'
 
   controller do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,

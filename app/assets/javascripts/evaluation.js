@@ -12,8 +12,7 @@ function modifieReponseAccompagnementIllettrisme(evaluationId) {
 
 function enregistreReponseAccompagnementIllettrisme(evaluationId, reponse) {
   const data = {
-    mise_en_action_effectuee: reponse,
-    mise_en_action_le: new Date().toISOString()
+    mise_en_action_effectuee: reponse
   };
   $.ajax({
     method: 'PUT',

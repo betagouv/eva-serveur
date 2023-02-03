@@ -61,6 +61,7 @@ fr:
         mauvais: Erreur
       recherche_responsable_suivi:
         placeholder: Nom du responsable…
+        action: Ajouter un responsable de suivi
       tri:
         <<: *commun
         reste_plateau: Reste plateau

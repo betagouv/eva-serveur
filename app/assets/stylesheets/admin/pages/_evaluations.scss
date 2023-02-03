@@ -12,6 +12,7 @@
 
 #responsable_de_suivi_sidebar_section {
   @include panel-gris();
+  height: 5.125rem;
   .tag {
     $largeur-panel: 18.125rem;
     $padding: 1rem;
@@ -30,5 +31,17 @@
     border: 1px solid $eva_main_blue;
     padding: 0.25rem 0.25rem 0.25rem 1.5rem;
     border-radius: 0.25rem;
+  }
+  .bouton {
+    &::before {
+      content: asset-data-url('plus.svg');
+      margin-right: 4px;
+    }
+    &:hover::before {
+      content: asset-data-url('plus_bleu.svg');
+    }
+  }
+  input[name="nom_responsable_suivi"] {
+    height: 1.625rem;
   }
 }

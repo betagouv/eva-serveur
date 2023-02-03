@@ -42,10 +42,11 @@ button:not(.disabled):hover {
   font-weight: normal;
   box-shadow: none;
   background-image: none;
-  background-color: none;
+  background-color: transparent;
 }
 
-.bouton {
+
+button.bouton, .bouton {
   @include bouton();
 
   &.bouton-light {

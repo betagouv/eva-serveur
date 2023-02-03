@@ -66,7 +66,7 @@ module Restitution
     def efficience
       competences_utilisees = competences.except(*COMPETENCES_INUTILES_POUR_EFFICIENCE)
       return ::Competence::NIVEAU_INDETERMINE if competences_indeterminees?(competences_utilisees)
-      return 0 if competences_utilisees.size.zero?
+      return 0 if competences_utilisees.empty?
 
       competences_utilisees.inject(0) do |memo, (_competence, niveau)|
         memo + CORRESPONDANCES_NIVEAUX[niveau]

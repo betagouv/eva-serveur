@@ -76,22 +76,22 @@ describe Restitution::Base do
   describe '#efficience' do
     it "retourne l'efficience sans les compétences persévérance et compréhension consigne" do
       expect(restitution).to receive(:competences).and_return(
-        ::Competence::PERSEVERANCE => Competence::NIVEAU_1,
-        ::Competence::COMPREHENSION_CONSIGNE => Competence::NIVEAU_1,
-        ::Competence::RAPIDITE => Competence::NIVEAU_3,
-        ::Competence::COMPARAISON_TRI => Competence::NIVEAU_4,
-        ::Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_4
+        Competence::PERSEVERANCE => Competence::NIVEAU_1,
+        Competence::COMPREHENSION_CONSIGNE => Competence::NIVEAU_1,
+        Competence::RAPIDITE => Competence::NIVEAU_3,
+        Competence::COMPARAISON_TRI => Competence::NIVEAU_4,
+        Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_4
       )
       expect(restitution.efficience).to be(91)
     end
 
     it 'retourne une efficience indéterminé si une compétences indéterminé' do
       expect(restitution).to receive(:competences).and_return(
-        ::Competence::RAPIDITE => Competence::NIVEAU_1,
-        ::Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE,
-        ::Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_2
+        Competence::RAPIDITE => Competence::NIVEAU_1,
+        Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE,
+        Competence::ATTENTION_CONCENTRATION => Competence::NIVEAU_2
       )
-      expect(restitution.efficience).to eql(::Competence::NIVEAU_INDETERMINE)
+      expect(restitution.efficience).to eql(Competence::NIVEAU_INDETERMINE)
     end
 
     it "retourne 0 lorsque rien n'a été mesuré" do

@@ -9,7 +9,7 @@ describe ApplicationHelper do
     end
 
     it 'retourne la chaine indéterminé traduite' do
-      expect(helper.formate_efficience(::Competence::NIVEAU_INDETERMINE))
+      expect(helper.formate_efficience(Competence::NIVEAU_INDETERMINE))
         .to eql(I18n.t('admin.restitutions.evaluation.indetermine'))
     end
   end

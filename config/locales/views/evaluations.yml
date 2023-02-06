@@ -5,11 +5,15 @@ fr:
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"
         duree: Durée de passation
-      autopositionnement:
+      autopositionnement: &autopositionnement
         appareils: Appareils
         sante: Santé
         questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
         non_renseigne: 'Non renseigné'
+      questions_reponses_autopositionnement:
+        <<: *autopositionnement
+      questionnaire_autopositionnement:
+        <<: *autopositionnement
       autopositionnement_situation:
         quel_age_avez_vous: 'Quel âge avez vous ?'
         vous_etes: 'Vous êtes :'

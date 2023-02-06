@@ -92,7 +92,7 @@ $grid-gutter-width: 1.25rem;
   }
 
   .autopositionnement {
-    > .row {
+    &.questionnaire > .row {
       margin-bottom: 0;
     }
 

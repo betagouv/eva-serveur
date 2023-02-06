@@ -21,6 +21,7 @@ class Evaluation < ApplicationRecord
   has_many :parties, dependent: :destroy
 
   before_validation :trouve_campagne_depuis_code
+  after_update :enregistre_date, if: :saved_change_to_mise_en_action_effectuee?
   validates :nom, :debutee_le, presence: true
   validate :code_campagne_connu
 
@@ -68,6 +69,10 @@ class Evaluation < ApplicationRecord
     Compte
       .where(structure_id: campagne&.compte&.structure_id)
       .where(statut_validation: :acceptee)
+  end
+
+  def enregistre_date
+    update(mise_en_action_le: Time.zone.now)
   end
 
   private

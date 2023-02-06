@@ -15,7 +15,7 @@ class Structure < ApplicationRecord
   geocoded_by :code_postal, state: :region, params: { countrycodes: 'fr' } do |obj, resultats|
     if (resultat = resultats.first)
       region = 'Nouvelle-Calédonie' if obj.code_postal.start_with?('988')
-      region = 'Corse' if obj.code_postal.start_with?('20', '21')
+      region = 'Corse' if obj.code_postal.start_with?('20')
       region ||= resultat.state
       obj.region = region
       obj.latitude = resultat.latitude

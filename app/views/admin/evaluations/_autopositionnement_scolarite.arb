@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+h2 t('.scolarite'), class: 'categorie'
+
+donnees_sociosociodemographique = resource.donnee_sociodemographique
+
+questions_et_reponses_standard.each do |question, reponse|
+  if question.libelle.start_with?(t('.scolarite'))
+    div question.intitule
+    div reponse.intitule, class: 'reponse'
+  end
+end
+div t('.quel_est_votre_dernier_niveau_d_étude')
+reponse = if donnees_sociosociodemographique&.dernier_niveau_etude.present?
+            t(".#{donnees_sociosociodemographique.dernier_niveau_etude}")
+          else
+            t('admin.evaluations.autopositionnement.non_renseigne')
+          end
+div reponse, class: 'reponse'

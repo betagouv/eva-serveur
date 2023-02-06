@@ -7,9 +7,33 @@ fr:
         duree: Durée de passation
       autopositionnement:
         appareils: Appareils
-        scolarite: Scolarité
         sante: Santé
         questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
+        non_renseigne: 'Non renseigné'
+      autopositionnement_situation:
+        quel_age_avez_vous: 'Quel âge avez vous ?'
+        vous_etes: 'Vous êtes :'
+        quelle_est_votre_derniere_situation: 'Quelle est votre dernière situation ?'
+        scolarisation: Scolarisation
+        formation_professionnelle: Formation professionnelle
+        alternance: Alternance
+        emploi: Emploi
+        sans_emploi: Sans emploi
+        homme: Un homme
+        femme: Une femme
+        autre: D'un autre genre
+      autopositionnement_scolarite:
+        quel_est_votre_dernier_niveau_d_étude: 'Quel est votre dernier niveau d’étude ?'
+        scolarite: Scolarité
+        college: Collège
+        cfg_dnb_bepc: CFG / DNB (BEPC)
+        cap_bep: CAP / BEP
+        bac: Bac
+        bac_plus2: Bac+2
+        superieur_bac_plus2: Supérieur à Bac+2
+      autopositionnement_usage_du_numerique:
+        appareils: Appareils
+        usage_du_numerique: Usage du numérique
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'
@@ -181,7 +205,7 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
-        evaluation_anonyme: "Cette évaluation est anonyme : le nom de l'évalué·e est fictif et ses informations personnelles ont été supprimées."
+        evaluation_anonyme: "Cette évaluation est anonyme : le nom de l'évalué·e est fictif et ses informations personnelles ont été supprimées."
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       aide_interpretation_expression_ecrite: |

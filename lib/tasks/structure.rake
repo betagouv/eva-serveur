@@ -12,7 +12,7 @@ namespace :structure do
     structures.find_each do |structure|
       structure.geocode
       structure.save
-      p "assigne région \"#{structure.region}\" pour #{structure.nom}"
+      puts "assigne région \"#{structure.region}\" pour #{structure.nom}"
     end
   end
 end

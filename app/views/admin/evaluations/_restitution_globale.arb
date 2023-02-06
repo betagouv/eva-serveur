@@ -27,21 +27,51 @@ div class: 'evaluation__restitution-globale' do
   end
 
   if auto_positionnement
-    div id: 'auto_positionnement', class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale
+    if pdf
+      div id: 'auto_positionnement' do
+        div class: 'page' do
+          render 'entete_page', restitution_globale: restitution_globale
 
-      if pdf
-        h2 t('.autopositionnement_titre'), class: 'text-center mt-5 mb-4'
-      else
-        h2 t('.autopositionnement_titre')
-      end
+          h2 t('.autopositionnement_titre'), class: 'text-center mt-5 mb-4'
 
-      div class: 'panel' do
-        div class: 'marges-page' do
-          render partial: 'autopositionnement', locals: { auto_positionnement: auto_positionnement }
+          div class: 'panel' do
+            div class: 'marges-page' do
+              render partial: 'questions_reponses_autopositionnement',
+                     locals: { auto_positionnement: auto_positionnement }
+            end
+
+            render 'pied_page'
+          end
         end
+        div class: 'page' do
+          render 'entete_page', restitution_globale: restitution_globale
 
-        render 'pied_page'
+          div class: 'panel' do
+            div class: 'marges-page' do
+              render partial: 'questionnaire_autopositionnement',
+                     locals: { auto_positionnement: auto_positionnement }
+            end
+
+            render 'pied_page'
+          end
+        end
+      end
+    else
+      div id: 'auto_positionnement', class: 'page' do
+        render 'entete_page', restitution_globale: restitution_globale
+
+        h2 t('.autopositionnement_titre')
+
+        div class: 'panel' do
+          div class: 'marges-page' do
+            render partial: 'questions_reponses_autopositionnement',
+                   locals: { auto_positionnement: auto_positionnement }
+            render partial: 'questionnaire_autopositionnement',
+                   locals: { auto_positionnement: auto_positionnement }
+          end
+
+          render 'pied_page'
+        end
       end
     end
   end

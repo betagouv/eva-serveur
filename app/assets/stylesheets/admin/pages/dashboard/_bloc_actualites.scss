@@ -3,6 +3,10 @@
     height: 17rem;
     .card { padding: 0;}
     .carte__illustration {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
       overflow: hidden;
       height: 8rem;
       img {

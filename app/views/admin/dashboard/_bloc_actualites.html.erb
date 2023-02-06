@@ -8,9 +8,10 @@
     <div class='col derniere-actualite'>
       <%= render(CarteComponent.new([:admin, actualites.first])) do %>
       <% actualite = actualites.first %>
-        <div class='carte__illustration w-100'>
-          <%= image_tag cdn_for(actualite.illustration) if actualite.illustration.attached? %>
-        </div>
+        <% if actualite.illustration.attached? %>
+          <div class='carte__illustration w-100' style="background-image: url('<%= cdn_for(actualite.illustration) %>');">
+          </div>
+        <% end %>
         <div class='carte__texte d-flex'>
           <div class='entete'>
             <%= render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),

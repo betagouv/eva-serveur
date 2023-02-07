@@ -7,6 +7,7 @@ $largeur-tick: .75rem;
   height: 1rem;
   border-radius: 50%;
   display: inline-block;
+  flex-shrink: 0;
 
   &.ellipse-a-cocher {
     border: 1px solid $eva_dark_blue_grey;
@@ -15,7 +16,7 @@ $largeur-tick: .75rem;
     height: $taille-ellipse;
   }
 
-  &.ellipse__105 {
+  &.ellipse--alerte {
     background: $eva_orange;
   }
 
@@ -37,6 +38,3 @@ $largeur-tick: .75rem;
   left: calc(#{$taille-ellipse - $largeur-tick} / 2);
 }
 
-.paginated_collection .ellipse {
-  margin-top:6px;
-}

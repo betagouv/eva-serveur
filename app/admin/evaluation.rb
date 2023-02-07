@@ -36,10 +36,10 @@ ActiveAdmin.register Evaluation do
 
   scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
   scope proc {
-          render partial: 'pastille_illettrisme_potentiel',
-                 locals: {
-                   etiquette: I18n.t('activerecord.scopes.evaluation.illettrisme_potentiel')
-                 }
+          render(PastilleComponent.new(
+                   couleur: 'alerte',
+                   etiquette: I18n.t('components.pastille.illettrisme_potentiel')
+                 ))
         }, :illettrisme_potentiel
 
   show do
@@ -54,14 +54,16 @@ ActiveAdmin.register Evaluation do
                         }, row_class: lambda { |elem|
                                         'anonyme' if elem.anonyme?
                                       } do
-    column(:nom) { |e| nom_pour_ressource(e) }
-
-    if params[:scope] != 'illettrisme_potentiel'
-      column do |evaluation|
-        if evaluation.illettrisme_potentiel?
-          render partial: 'pastille_illettrisme_potentiel',
-                 locals: { avec_tooltip: true }
+    column(:nom) do |evaluation|
+      div class: 'd-flex' do
+        if params[:scope] != 'illettrisme_potentiel'
+          render(PastilleComponent.new(
+                   couleur: evaluation.illettrisme_potentiel? ? 'alerte' : '',
+                   tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
+                 ))
         end
+
+        div nom_pour_ressource(evaluation), class: 'nom'
       end
     end
 

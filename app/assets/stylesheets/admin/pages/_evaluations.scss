@@ -1,6 +1,15 @@
 #index_table_evaluations {
   .col-nom {
     max-width: 11.25rem;
+    .nom {
+      @include tronque();
+    }
+    .ellipse {
+      margin-right: .75rem;
+    }
+  }
+  td {
+    padding: .75rem 1rem;
   }
 }
 

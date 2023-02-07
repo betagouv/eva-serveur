@@ -87,24 +87,24 @@ ActiveAdmin.register Evaluation do
     whitelist
     column('structure') { |evaluation| evaluation.campagne.compte.structure.nom }
     column(:campagne) { |evaluation| evaluation.campagne.libelle }
-    column('date') { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
+    column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')
     end
-    column('synthese') do |evaluation|
+    column(:synthese_competences_de_base) do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)
     end
-    column('niveau_cefr') do |evaluation|
+    column(:niveau_cefr) do |evaluation|
       traduction_niveau(evaluation, :niveau_cefr)
     end
-    column('niveau_cnef') do |evaluation|
+    column(:niveau_cnef) do |evaluation|
       traduction_niveau(evaluation, :niveau_cnef)
     end
-    column('anlci_litteratie') do |evaluation|
+    column(:niveau_anlci_litteratie) do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_litteratie)
     end
-    column('anlci_numeratie') do |evaluation|
+    column(:niveau_anlci_numeratie) do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_numeratie)
     end
   end

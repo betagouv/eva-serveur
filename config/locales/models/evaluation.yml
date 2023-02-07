@@ -91,11 +91,11 @@ fr:
       evaluation:
         structure: Structure
         campagne: Campagne
-        date: Date
+        created_at: Date
         nom: Nom
         completude: Passation complète ?
-        synthese: Niveau global
+        synthese_competences_de_base: Niveau global
         niveau_cefr: Niveau CEFR
         niveau_cnef: Niveau CNEF
-        anlci_litteratie: ANLCI Littératie
-        anlci_numeratie: ANLCI Numératie
+        niveau_anlci_litteratie: ANLCI Littératie
+        niveau_anlci_numeratie: ANLCI Numératie

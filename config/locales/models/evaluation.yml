@@ -76,7 +76,6 @@ fr:
     scopes:
       evaluation:
         all: 'Toutes les évaluations'
-        illettrisme_potentiel: "Illettrisme potentiel"
   formtastic:
     actions:
       evaluation:

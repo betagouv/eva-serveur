@@ -6,9 +6,7 @@
     </div>
 
     <div class="evaluation-legende">
-      <%= render partial: 'admin/evaluations/pastille_illettrisme_potentiel', locals: {
-        etiquette: t('.legende_info')
-      } %>
+      <%= render(PastilleComponent.new(etiquette: t('.legende_info'), couleur: 'alerte')) %>
     </div>
   </div>
 
@@ -20,8 +18,7 @@
       <div class='col'>
         <span class='carte__pastille'>
           <% if evaluation.illettrisme_potentiel? %>
-            <%= render partial: 'admin/evaluations/pastille_illettrisme_potentiel',
-                  locals: { avec_tooltip: true } %>
+            <%= render(PastilleComponent.new(tooltip_content: t('components.pastille.illettrisme_potentiel'), couleur: 'alerte')) %>
           <% end %>
         </span>
       </div>

@@ -193,9 +193,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090917) do
     t.uuid "beneficiaire_id", null: false
     t.datetime "deleted_at"
     t.integer "statut", default: 0, null: false
-    t.boolean "mise_en_action_effectuee"
     t.uuid "responsable_suivi_id"
-    t.datetime "mise_en_action_le"
     t.string "positionnement_niveau_litteratie"
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
@@ -218,6 +216,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090917) do
     t.index ["position"], name: "index_evenements_on_position"
     t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
     t.index ["session_id"], name: "index_evenements_on_session_id"
+  end
+
+  create_table "mises_en_action", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "effectuee", null: false
+    t.datetime "repondue_le"
+    t.string "dispositif_de_remediation"
+    t.datetime "deleted_at"
+    t.uuid "evaluation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_mises_en_action_on_deleted_at"
+    t.index ["evaluation_id"], name: "index_mises_en_action_on_evaluation_id"
   end
 
   create_table "parcours_type", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -362,6 +372,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090917) do
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evaluations", "comptes", column: "responsable_suivi_id"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
+  add_foreign_key "mises_en_action", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "situations", on_delete: :cascade
   add_foreign_key "questionnaires_questions", "questionnaires"

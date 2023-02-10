@@ -22,15 +22,16 @@ class Evaluation < ApplicationRecord
 
   has_one :conditions_passation, dependent: :destroy
   has_one :donnee_sociodemographique, dependent: :destroy
+  has_one :mise_en_action, dependent: :destroy
   has_many :parties, dependent: :destroy
 
   before_validation :trouve_campagne_depuis_code
-  after_update :enregistre_date, if: :saved_change_to_mise_en_action_effectuee?
   validates :nom, :debutee_le, presence: true
   validate :code_campagne_connu
 
   accepts_nested_attributes_for :conditions_passation
   accepts_nested_attributes_for :donnee_sociodemographique
+  accepts_nested_attributes_for :mise_en_action
   accepts_nested_attributes_for :beneficiaire, update_only: true
   attr_accessor :code_campagne
 
@@ -77,10 +78,6 @@ class Evaluation < ApplicationRecord
       .where(statut_validation: :acceptee)
   end
 
-  def enregistre_date
-    update(mise_en_action_le: Time.zone.now)
-  end
-
   def self.tableau_de_bord(ability)
     accessible_by(ability)
       .non_anonymes
@@ -90,11 +87,21 @@ class Evaluation < ApplicationRecord
 
   def self.illettrismes_sans_mise_en_action(ability)
     accessible_by(ability)
-      .where(mise_en_action_effectuee: nil)
+      .where.missing(:mise_en_action)
       .illettrisme_potentiel
       .non_anonymes
       .order(created_at: :desc)
       .limit(6)
+  end
+
+  def enregistre_mise_en_action(reponse)
+    mise_en_action = MiseEnAction.find_or_initialize_by(evaluation: self)
+    mise_en_action.effectuee = reponse
+    mise_en_action.save
+  end
+
+  def a_mise_en_action?
+    @a_mise_en_action ||= MiseEnAction.find_by(evaluation_id: id).present?
   end
 
   private

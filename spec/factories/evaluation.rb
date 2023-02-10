@@ -10,5 +10,20 @@ FactoryBot.define do
     trait :terminee do
       terminee_le { Time.current }
     end
+
+    trait :avec_mise_en_action do
+      transient do
+        effectuee { true }
+        repondue_le { Time.zone.local(2023, 1, 1, 12, 0, 0) }
+      end
+
+      after(:create) do |evaluation, evaluator|
+        create(:mise_en_action, evaluation: evaluation)
+        evaluation.mise_en_action.update(
+          effectuee: evaluator.effectuee,
+          repondue_le: evaluator.repondue_le
+        )
+      end
+    end
   end
 end

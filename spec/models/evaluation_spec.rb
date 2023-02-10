@@ -73,4 +73,92 @@ describe Evaluation do
       expect(evaluation.responsables_suivi).to contain_exactly(compte1, compte2)
     end
   end
+
+  describe '#enregistre_mise_en_action' do
+    context 'lorsque la mise en action existe déjà' do
+      let(:date_mise_en_action) { Time.zone.local(2022, 1, 1, 12, 0, 0) }
+      let!(:evaluation) do
+        create :evaluation, :avec_mise_en_action, repondue_le: date_mise_en_action
+      end
+
+      before { evaluation.enregistre_mise_en_action(false) }
+
+      it 'met à jour la réponse mais pas la date de mise en action' do
+        expect(evaluation.reload.mise_en_action.effectuee).to eq false
+        expect(evaluation.reload.mise_en_action.repondue_le).to eq date_mise_en_action
+      end
+    end
+
+    context "quand il n'y a pas de mise en action associée" do
+      let!(:evaluation) { create :evaluation }
+
+      it 'créé et enregistre true en réponse' do
+        date_du_jour = Time.zone.local(2023, 1, 1, 12, 0, 0)
+        Timecop.freeze(date_du_jour) do
+          evaluation.enregistre_mise_en_action(true)
+        end
+        expect(evaluation.mise_en_action.effectuee).to eq true
+        expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
+      end
+
+      it 'créé et enregistre false en réponse' do
+        evaluation.enregistre_mise_en_action(false)
+        expect(evaluation.mise_en_action.effectuee).to eq false
+      end
+    end
+  end
+
+  describe '#a_mise_en_action?' do
+    context "quand aucune mise en action n'est associée à l'évaluation" do
+      let!(:evaluation) { create :evaluation }
+
+      it { expect(evaluation.a_mise_en_action?).to eq false }
+    end
+
+    context "quand une mise en action est associée à l'évaluation" do
+      context 'quand la mise en action a été effectué' do
+        let!(:evaluation) { create :evaluation, :avec_mise_en_action }
+
+        it { expect(evaluation.a_mise_en_action?).to eq true }
+      end
+
+      context "quand la mise en action n'a pas été effectué" do
+        let!(:evaluation) { create :evaluation, :avec_mise_en_action, effectuee: false }
+
+        it { expect(evaluation.reload.a_mise_en_action?).to eq true }
+      end
+    end
+  end
+
+  describe '#illettrismes_sans_mise_en_action' do
+    let(:compte_admin) { create :compte_admin }
+    let(:campagne) { create :campagne, compte: compte_admin }
+    let(:evaluation_autre_compte) do
+      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel
+    end
+    let!(:evaluation_sans_mise_en_action) do
+      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel,
+                          campagne: campagne
+    end
+    let!(:evaluation_ni_ni) do
+      create :evaluation, synthese_competences_de_base: :ni_ni, campagne: campagne
+    end
+    let!(:evaluation_mise_en_action_true) do
+      create :evaluation, :avec_mise_en_action,
+             synthese_competences_de_base: :illettrisme_potentiel,
+             campagne: campagne
+    end
+    let!(:evaluation_mise_en_action_false) do
+      create :evaluation, :avec_mise_en_action,
+             effectuee: false,
+             synthese_competences_de_base: :illettrisme_potentiel,
+             campagne: campagne
+    end
+
+    it 'retourne les évaluations sans mise en action' do
+      ability = Ability.new(compte_admin)
+      expect(described_class.illettrismes_sans_mise_en_action(ability))
+        .to eq [evaluation_sans_mise_en_action]
+    end
+  end
 end

@@ -59,14 +59,16 @@ module Api
     end
 
     def retrouve_ids_nested_attributes
-      if @evaluation_params[:donnee_sociodemographique_attributes]
-        @evaluation_params[:donnee_sociodemographique_attributes][:id] =
-          DonneeSociodemographique.find_by(evaluation_id: params[:id])&.id
+      nested_modeles = %i[donnee_sociodemographique
+                          conditions_passation
+                          mises_en_action]
+      nested_modeles.each do |nested_model|
+        attributs = "#{nested_model}_attributes"
+        if @evaluation_params[attributs.to_sym]
+          @evaluation_params[attributs.to_sym][:id] =
+            nested_model.to_s.camelize.constantize.find_by(evaluation_id: params[:id])&.id
+        end
       end
-      return unless @evaluation_params[:conditions_passation_attributes]
-
-      @evaluation_params[:conditions_passation_attributes][:id] =
-        ConditionsPassation.find_by(evaluation_id: params[:id])&.id
     end
 
     def retourne_erreur(evaluation)

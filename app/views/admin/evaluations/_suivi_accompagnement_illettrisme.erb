@@ -1,6 +1,6 @@
 <div class='row m-0'>
   <%
-    avec_reponse = resource.mise_en_action_effectuee.nil? ? '' : 'card__banner--illettrisme-avec-reponse'
+    avec_reponse = resource.a_mise_en_action? ? 'card__banner--illettrisme-avec-reponse' : ''
   %>
   <div class="container card__banner card__banner--illettrisme d-flex <%= avec_reponse %>">
     <div class='d-flex align-items-center justify-content-center'>

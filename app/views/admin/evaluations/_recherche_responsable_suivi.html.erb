@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   afficheRecherche(boutonAjout, formulaireRecherche);
 
   const comptes = [<% responsables_suivi_possibles.each do |compte| %>
-      { value: "<%= compte.display_name %>", id: "<%= compte.id %>" },
-    <% end %>];
+    { value: "<%= escape_javascript(compte.display_name.html_safe) %>", id: "<%= compte.id %>" },
+  <% end %>];
   $("#nom_responsable_suivi" ).autocomplete({
     source: function (request, response) {
       const term = request.term.toLowerCase();

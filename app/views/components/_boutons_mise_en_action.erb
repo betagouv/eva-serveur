@@ -1,4 +1,4 @@
-<div id='<%= evaluation.id %>' class='mise-en-action__texte d-flex justify-content-center text-primary text-center' data-reponse="">
+<div class='mise-en-action__texte d-flex justify-content-center text-primary text-center' data-reponse="">
   <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee == true ? '' : 'hidden' %>
   <div data-reponse="true" class="mise-en-action <%= classe_reponse_oui %>">
     <strong>Oui</strong>, vous avez trouvé une solution<br>

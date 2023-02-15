@@ -1,9 +1,31 @@
+@mixin bloc-evaluation() {
+  .evaluation--nom {
+    @include tronque();
+
+    &, &:link, &:visited {
+      text-decoration: none;
+    }
+  }
+
+  .evaluation--suivi-par {
+    color: $eva_dark_blue_grey;
+    @include texte-xs();
+    font-style: normal;
+    font-weight: 400;
+    margin-top: .5rem;
+    margin-left: 1.75rem;
+
+    a, a:link, a:visited {
+      color: $eva_dark_blue_grey;
+      font-weight: 600;
+    }
+  }
+
+}
+
 #index_table_evaluations {
   .col-nom {
     max-width: 11.25rem;
-    .nom {
-      @include tronque();
-    }
     .ellipse {
       margin-right: .75rem;
     }
@@ -11,6 +33,8 @@
   td {
     padding: .75rem 1rem;
   }
+
+  @include bloc-evaluation();
 }
 
 .show, .admin_evaluations {

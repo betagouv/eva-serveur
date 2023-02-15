@@ -165,6 +165,18 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
   end
 
+  describe 'Evaluation pré-positionnement' do
+    let(:interpreteur_pre_positionnement) { double }
+    let(:subject) do
+      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement, nil
+    end
+    describe '#positionnement_litteratie' do
+      it 'ne retourne rien' do
+        expect(subject.positionnement_litteratie).to eq nil
+      end
+    end
+  end
+
   describe 'Evaluation positionnement' do
     let(:interpreteur_positionnement) { double }
     let(:subject) do
@@ -188,28 +200,6 @@ describe Restitution::Illettrisme::Synthetiseur do
       it { expect(synthese(:profil_4h_plus_plus)).to eq 'socle_clea' }
       it { expect(synthese(:profil_aberrant)).to eq 'aberrant' }
       it { expect(synthese(:indetermine)).to eq nil }
-    end
-
-    describe '#niveau_anlci_litteratie' do
-      it "quand l'interpreteur n'existe pas" do
-        synthetiseur = Restitution::Illettrisme::Synthetiseur.new nil, nil
-        expect(synthetiseur.niveau_anlci_litteratie).to eq nil
-      end
-
-      it "quand le niveau n'existe pas" do
-        allow(interpreteur_positionnement).to receive(:synthese).and_return({})
-        expect(subject.niveau_anlci_litteratie).to eq nil
-      end
-
-      it 'quand le niveau existe' do
-        allow(interpreteur_positionnement).to receive(:synthese).and_return(
-          {
-            niveau_litteratie: :profil1
-          }
-        )
-
-        expect(subject.niveau_anlci_litteratie).to eq :profil1
-      end
     end
   end
 
@@ -240,9 +230,9 @@ describe Restitution::Illettrisme::Synthetiseur do
       end
     end
 
-    describe '#niveau_anlci_litteratie' do
+    describe '#positionnement_litteratie' do
       it 'retourne le niveau de positionnement' do
-        expect(subject.niveau_anlci_litteratie).to eq :profil_aberrant
+        expect(subject.positionnement_litteratie).to eq :profil_aberrant
       end
     end
   end

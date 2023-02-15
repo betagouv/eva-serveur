@@ -54,28 +54,7 @@ ActiveAdmin.register Evaluation do
                         }, row_class: lambda { |elem|
                                         'anonyme' if elem.anonyme?
                                       } do
-    column(:nom) do |evaluation|
-      div class: 'd-flex' do
-        if params[:scope] != 'illettrisme_potentiel'
-          render(PastilleComponent.new(
-                   couleur: evaluation.illettrisme_potentiel? ? 'alerte' : '',
-                   tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
-                 ))
-        end
-
-        div nom_pour_ressource(evaluation), class: 'nom'
-      end
-    end
-
-    column :campagne
-    column('Suivi par', :responsable_suivi) do |evaluation|
-      responsable = evaluation.responsable_suivi
-      next if responsable.blank?
-
-      link_to responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire'
-    end
-    column :created_at
-    actions
+    render 'index', context: self
   end
 
   form partial: 'form'

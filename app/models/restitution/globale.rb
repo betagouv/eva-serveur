@@ -80,8 +80,9 @@ module Restitution
         synthese_competences_de_base: synthese,
         niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],
         niveau_cnef: interpreteur_niveau1.interpretations_cefr[:numeratie],
-        niveau_anlci_litteratie: niveau_anlci_litteratie,
-        niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie]
+        niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
+        niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie],
+        positionnement_niveau_litteratie: synthetiseur.positionnement_litteratie
       }
     end
 
@@ -100,7 +101,7 @@ module Restitution
     private
 
     def cafe_de_la_place
-      restitutions.reverse.find do |restitution|
+      @cafe_de_la_place ||= restitutions.reverse.find do |restitution|
         restitution.situation.nom_technique == Situation::CAFE_DE_LA_PLACE
       end
     end

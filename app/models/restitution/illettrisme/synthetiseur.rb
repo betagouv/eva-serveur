@@ -26,9 +26,8 @@ module Restitution
         Synthetiseur.calcule_synthese(@algo_pre_positionnement)
       end
 
-      def niveau_anlci_litteratie
-        @algo_positionnement&.niveau_anlci_litteratie ||
-          @algo_pre_positionnement&.niveau_anlci_litteratie
+      def positionnement_litteratie
+        @algo_positionnement.niveau_positionnement if @algo_positionnement.present?
       end
 
       def self.calcule_synthese(algo)
@@ -63,13 +62,11 @@ module Restitution
           @interpreteur.interpretations_cefr[:litteratie].blank? and
             @interpreteur.interpretations_cefr[:numeratie].blank?
         end
-
-        def niveau_anlci_litteratie
-          @interpreteur.interpretations_anlci[:litteratie]
-        end
       end
 
       class SynthetiseurPositionnement
+        attr_reader :niveau_positionnement
+
         def initialize(interpreteur_positionnement)
           @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
         end
@@ -88,10 +85,6 @@ module Restitution
 
         def indetermine?
           @niveau_positionnement == :indetermine
-        end
-
-        def niveau_anlci_litteratie
-          @niveau_positionnement
         end
       end
     end

@@ -121,17 +121,16 @@ ActiveAdmin.register Evaluation do
     column(:synthese_competences_de_base) do |evaluation|
       traduction_niveau(evaluation, :synthese_competences_de_base)
     end
-    column(:niveau_cefr) do |evaluation|
-      traduction_niveau(evaluation, :niveau_cefr)
-    end
-    column(:niveau_cnef) do |evaluation|
-      traduction_niveau(evaluation, :niveau_cnef)
-    end
+    column(:niveau_cefr) { |evaluation| traduction_niveau(evaluation, :niveau_cefr) }
+    column(:niveau_cnef) { |evaluation| traduction_niveau(evaluation, :niveau_cnef) }
     column(:niveau_anlci_litteratie) do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_litteratie)
     end
     column(:niveau_anlci_numeratie) do |evaluation|
       traduction_niveau(evaluation, :niveau_anlci_numeratie)
+    end
+    column(:positionnement_niveau_litteratie) do |evaluation|
+      traduction_niveau(evaluation, :positionnement_niveau_litteratie)
     end
   end
 

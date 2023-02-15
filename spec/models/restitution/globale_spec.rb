@@ -187,7 +187,8 @@ describe Restitution::Globale do
               niveau_cefr: :pre_A1,
               niveau_cnef: :X1,
               niveau_anlci_litteratie: :profil1,
-              niveau_anlci_numeratie: :profil2
+              niveau_anlci_numeratie: :profil2,
+              positionnement_niveau_litteratie: nil
             }
           )
       end
@@ -218,8 +219,9 @@ describe Restitution::Globale do
               synthese_competences_de_base: 'illettrisme_potentiel',
               niveau_cefr: nil,
               niveau_cnef: nil,
-              niveau_anlci_litteratie: :profil2,
-              niveau_anlci_numeratie: nil
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil,
+              positionnement_niveau_litteratie: :profil2
             }
           )
       end
@@ -235,8 +237,9 @@ describe Restitution::Globale do
               synthese_competences_de_base: 'ni_ni',
               niveau_cefr: nil,
               niveau_cnef: nil,
-              niveau_anlci_litteratie: :profil3,
-              niveau_anlci_numeratie: nil
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil,
+              positionnement_niveau_litteratie: :profil3
             }
           )
       end

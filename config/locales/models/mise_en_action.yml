@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    attributes:
+      mise_en_action:
+        dispositifs_de_remediation:
+          formation_competences_de_base: Formation compétences de base / compétences clés
+          formation_metier: Formation métier / qualifiante
+          dispositif_remobilisation: Dispositif de remobilisation (E2C, EPIDE, Promo 16-18, etc.)
+          levee_freins_peripheriques: Levée de freins périphériques

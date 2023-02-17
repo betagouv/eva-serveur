@@ -25,6 +25,7 @@
 @import 'admin/composants/flash_messages';
 @import 'admin/composants/menu_transverse';
 @import 'admin/composants/modal';
+@import 'admin/composants/nom_anonymisable';
 @import 'admin/composants/clipboard';
 @import 'admin/composants/card';
 @import 'admin/composants/card_validation';
@@ -118,13 +119,4 @@ img {
   &.piece-ratee {
     background-color: $eva_bluegrey;
   }
-}
-
-.icone-anonyme {
-  position: relative;
-  top: .125em;
-  flex-shrink: 0;
-  height: 1em;
-  width: 1em;
-  fill: currentColor;
 }

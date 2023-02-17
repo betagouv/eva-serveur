@@ -23,8 +23,8 @@ ActiveAdmin.register Beneficiaire do
     render partial: 'show'
   end
 
-  index do
-    column(:nom) { |beneficiaire| nom_pour_ressource(beneficiaire) }
+  index row_class: ->(elem) { 'anonyme' if elem.anonyme? } do
+    column(:nom) { |beneficiaire| render NomAnonymisableComponent.new(beneficiaire) }
     column :created_at
     actions
   end

@@ -13,7 +13,7 @@
   <% evaluations.each do |evaluation| %>
     <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
       <div class='col d-flex'>
-        <span class='carte__nom'><%= nom_pour_ressource(evaluation) %></span>
+        <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation) %></span>
       </div>
       <div class='col'>
         <span class='carte__pastille'>

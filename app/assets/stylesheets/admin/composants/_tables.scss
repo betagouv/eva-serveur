@@ -146,6 +146,10 @@ table.index_table {
           background-color: $eva_light;
           color: $eva_dark_blue_grey;
 
+          a {
+            color: $eva_dark_blue_grey;
+          }
+
           &.col-actions .table_actions {
             background-color: $eva_light;
           }

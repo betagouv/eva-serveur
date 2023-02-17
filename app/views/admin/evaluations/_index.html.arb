@@ -2,28 +2,7 @@
 
 context.instance_eval do
   column(:nom) do |evaluation|
-    div class: 'd-flex' do
-      if params[:scope] != 'illettrisme_potentiel'
-        render(PastilleComponent.new(
-                 couleur: evaluation.illettrisme_potentiel? ? 'alerte' : '',
-                 tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
-               ))
-      end
-      div do
-        link_to(nom_pour_ressource(evaluation), admin_evaluation_path(evaluation),
-                class: 'evaluation--nom')
-      end
-    end
-    div do
-      responsable = evaluation.responsable_suivi
-      if responsable.present?
-        div class: 'evaluation--suivi-par' do
-          lien = link_to(responsable.display_name, admin_compte_path(responsable),
-                         class: 'lien-secondaire')
-          "Suivi(e) par #{lien}".html_safe
-        end
-      end
-    end
+    render partial: 'nom_evaluation', locals: { evaluation: evaluation }
   end
 
   column :campagne

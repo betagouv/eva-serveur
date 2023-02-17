@@ -2,7 +2,7 @@
 
 div class: 'row' do
   div class: 'offset-2 col-8' do
-    h2 nom_pour_ressource(beneficiaire)
+    h2 render NomAnonymisableComponent.new(beneficiaire)
     div class: 'panel' do
       t('.info')
     end

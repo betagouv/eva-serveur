@@ -4,7 +4,6 @@ module ActiveAdmin
   module ViewsHelper
     include StructureHelper
     include EvaluationHelper
-    include AnonymeHelper
     include ErreurHelper
     include PriseEnMainHelper
   end

@@ -1,0 +1,17 @@
+.nom-anonymisable {
+  display: flex;
+  align-items: center;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .icone-anonyme {
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5rem;
+    fill: currentColor;
+  }
+}

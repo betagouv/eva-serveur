@@ -12,20 +12,12 @@
     margin-bottom: .5rem;
 
     .carte__nom {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       font-family: $font-titre;
       font-weight: bold;
 
       a {
         color: $eva_dark;
         text-decoration: none;
-      }
-
-      .icone-anonyme {
-        top: 0;
-        margin-right: .25rem;
       }
     }
 

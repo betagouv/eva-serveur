@@ -3,7 +3,7 @@
 div id: 'evaluation__details', class: 'row' do
   scope = 'admin.evaluations.details_evaluation'
   div class: 'col col-6 mx-auto' do
-    h1 nom_pour_ressource(resource)
+    h1 render NomAnonymisableComponent.new(resource)
     h3 t('.titre'), class: 'titre'
     div class: 'card', id: resource.id.to_s do
       div class: 'row m-0' do

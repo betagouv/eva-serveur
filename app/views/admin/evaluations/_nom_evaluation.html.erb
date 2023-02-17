@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center">
+  <% if presence_pastille? %>
+   <%= render(PastilleComponent.new(
+                 couleur: evaluation.illettrisme_potentiel? ? 'alerte' : '',
+                 tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
+       ))%>
+  <% end %>
+  <%= link_to admin_evaluation_path(evaluation), class: "evaluation--nom" do %>
+    <%= render(NomAnonymisableComponent.new(evaluation)) %>
+  <% end %>
+</div>
+<div>
+  <% responsable = evaluation.responsable_suivi %>
+  <% if responsable.present? %>
+    <div class= "evaluation--suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
+      Suivi(e) par <%= link_to(responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire') %>
+    </div>
+  <% end %>
+</div>

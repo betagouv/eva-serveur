@@ -204,34 +204,47 @@ describe 'Evaluation', type: :request do
     end
   end
 
-  describe '#ajouter_responsable_suivi' do
+  describe 'member_action' do
     let(:mon_compte) { create :compte, role: 'admin' }
-    let(:parcours_type) { create :parcours_type, :competences_de_base }
-    let(:ma_campagne) do
-      create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019',
-                        parcours_type: parcours_type
-    end
-    let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
-    let(:evaluation) { create :evaluation, campagne: ma_campagne }
+    let(:ma_campagne) { create :campagne, compte: mon_compte }
 
     before do
       sign_in mon_compte
     end
 
-    it 'peut ajouter un responsable de suivi' do
-      expect do
-        post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
-             params: { responsable_suivi_id: mon_collegue.id }
-      end.to change { evaluation.reload.responsable_suivi }
-         .from(nil)
-        .to(mon_collegue)
+    describe '#ajouter_responsable_suivi' do
+      let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
+      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+
+      it 'peut ajouter un responsable de suivi' do
+        expect do
+          post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
+               params: { responsable_suivi_id: mon_collegue.id }
+        end.to change { evaluation.reload.responsable_suivi }
+           .from(nil)
+          .to(mon_collegue)
+      end
+
+      it "ne fait rien si le responsable de suivi n'existe pas" do
+        expect do
+          post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
+               params: { responsable_suivi_id: nil }
+        end.to_not(change { evaluation.reload.responsable_suivi })
+      end
     end
 
-    it "ne fait rien si le responsable de suivi n'existe pas" do
-      expect do
-        post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
-             params: { responsable_suivi_id: nil }
-      end.to_not(change { evaluation.reload.responsable_suivi })
+    describe '#renseigner_remediation' do
+      let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
+      let(:dipositif_remediation) { 'formation_metier' }
+
+      it 'peut renseigner le dispositif de remédiation' do
+        expect do
+          patch renseigner_remediation_admin_evaluation_path(evaluation),
+                params: { dispositif_de_remediation: dipositif_remediation }
+        end.to change { evaluation.reload.mise_en_action.dispositif_de_remediation }
+           .from(nil)
+          .to(dipositif_remediation)
+      end
     end
   end
 end

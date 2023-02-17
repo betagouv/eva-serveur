@@ -57,6 +57,27 @@ describe Evaluation do
         expect(described_class.non_anonymes).to eq [evaluation_non_anonyme]
       end
     end
+
+    describe '.sans_remediation' do
+      let!(:evaluation_sans_dispositif) { create :evaluation, :avec_mise_en_action }
+      let!(:evaluation_avec_dispositif) do
+        create :evaluation, :avec_mise_en_action, dispositif_de_remediation: 'formation_metier'
+      end
+
+      it 'retourne les évaluations sans dispositifs de remédiation' do
+        expect(described_class.sans_remediation)
+          .to eq [evaluation_sans_dispositif]
+      end
+    end
+
+    describe '.sans_mise_en_action' do
+      let!(:evaluation_avec_mise_en_action) { create :evaluation, :avec_mise_en_action }
+      let!(:evaluation_sans_mise_en_action) { create :evaluation }
+
+      it 'retourne les évaluations sans mise en action' do
+        expect(described_class.sans_mise_en_action).to eq [evaluation_sans_mise_en_action]
+      end
+    end
   end
 
   describe '#responsables_suivi' do
@@ -131,21 +152,11 @@ describe Evaluation do
     end
   end
 
-  describe '#illettrismes_sans_mise_en_action' do
+  describe '#tableau_de_bord_mises_en_action' do
     let(:compte_admin) { create :compte_admin }
     let(:campagne) { create :campagne, compte: compte_admin }
-    let(:evaluation_autre_compte) do
-      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel
-    end
     let!(:evaluation_sans_mise_en_action) do
-      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel,
-                          campagne: campagne
-    end
-    let!(:evaluation_ni_ni) do
-      create :evaluation, synthese_competences_de_base: :ni_ni, campagne: campagne
-    end
-    let!(:evaluation_mise_en_action_true) do
-      create :evaluation, :avec_mise_en_action,
+      create :evaluation,
              synthese_competences_de_base: :illettrisme_potentiel,
              campagne: campagne
     end
@@ -155,11 +166,23 @@ describe Evaluation do
              synthese_competences_de_base: :illettrisme_potentiel,
              campagne: campagne
     end
+    let!(:evaluation_ni_ni) do
+      create :evaluation, synthese_competences_de_base: :ni_ni, campagne: campagne
+    end
+    let!(:evaluation_sans_dispositif) do
+      create :evaluation, :avec_mise_en_action,
+             synthese_competences_de_base: :illettrisme_potentiel,
+             campagne: campagne
+    end
+    let!(:evaluation_autre_compte) do
+      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel
+    end
 
-    it 'retourne les évaluations sans mise en action' do
+    it 'retourne les évaluations de mises en action pour le tableau de bord' do
       ability = Ability.new(compte_admin)
-      expect(described_class.illettrismes_sans_mise_en_action(ability))
-        .to eq [evaluation_sans_mise_en_action]
+      expect(described_class.tableau_de_bord_mises_en_action(ability).pluck(:id))
+        .to eq [evaluation_sans_dispositif.id,
+                evaluation_sans_mise_en_action.id]
     end
   end
 end

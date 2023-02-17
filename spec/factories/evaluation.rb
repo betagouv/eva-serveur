@@ -15,13 +15,15 @@ FactoryBot.define do
       transient do
         effectuee { true }
         repondue_le { Time.zone.local(2023, 1, 1, 12, 0, 0) }
+        dispositif_de_remediation { nil }
       end
 
       after(:create) do |evaluation, evaluator|
         create(:mise_en_action, evaluation: evaluation)
         evaluation.mise_en_action.update(
           effectuee: evaluator.effectuee,
-          repondue_le: evaluator.repondue_le
+          repondue_le: evaluator.repondue_le,
+          dispositif_de_remediation: evaluator.dispositif_de_remediation
         )
       end
     end

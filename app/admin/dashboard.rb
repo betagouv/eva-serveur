@@ -48,7 +48,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
     def recupere_evaluations_sans_mise_en_action
       @evaluations_sans_mise_en_action =
-        Evaluation.illettrismes_sans_mise_en_action(current_ability)
+        Evaluation.tableau_de_bord_mises_en_action(current_ability)
     end
 
     def recupere_actualites

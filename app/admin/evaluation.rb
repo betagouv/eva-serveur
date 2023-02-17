@@ -125,6 +125,10 @@ ActiveAdmin.register Evaluation do
     redirect_to admin_evaluation_path(resource)
   end
 
+  member_action :renseigner_remediation, method: :patch do
+    resource.mise_en_action.update(dispositif_de_remediation: params[:dispositif_de_remediation])
+  end
+
   controller do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,

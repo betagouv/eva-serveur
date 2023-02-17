@@ -54,15 +54,15 @@ class Evaluation < ApplicationRecord
   }
   scope :pour_les_structures, lambda { |structures|
     joins(campagne: { compte: :structure })
-      .where(
-        campagnes: {
-          comptes: {
-            structure_id: structures
-          }
-        }
-      )
+      .where(campagnes: { comptes: { structure_id: structures } })
   }
   scope :non_anonymes, -> { where(anonymise_le: nil) }
+  scope :sans_remediation, lambda {
+    left_outer_joins(:mise_en_action)
+      .where(mises_en_action: { effectuee: true })
+      .where(mises_en_action: { dispositif_de_remediation: nil })
+  }
+  scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
 
   def display_name
     nom
@@ -85,13 +85,13 @@ class Evaluation < ApplicationRecord
       .limit(10)
   end
 
-  def self.illettrismes_sans_mise_en_action(ability)
-    accessible_by(ability)
-      .where.missing(:mise_en_action)
-      .illettrisme_potentiel
-      .non_anonymes
-      .order(created_at: :desc)
-      .limit(6)
+  def self.tableau_de_bord_mises_en_action(ability)
+    query = accessible_by(ability).illettrisme_potentiel
+    query.sans_remediation
+         .or(query.sans_mise_en_action)
+         .non_anonymes.order(created_at: :desc)
+         .includes(:mise_en_action)
+         .limit(6)
   end
 
   def enregistre_mise_en_action(reponse)
@@ -101,7 +101,7 @@ class Evaluation < ApplicationRecord
   end
 
   def a_mise_en_action?
-    @a_mise_en_action ||= MiseEnAction.find_by(evaluation_id: id).present?
+    @a_mise_en_action ||= mise_en_action.present?
   end
 
   private

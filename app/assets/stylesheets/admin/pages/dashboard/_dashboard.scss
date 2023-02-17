@@ -106,6 +106,9 @@
 
     .carte-liste {
       height: 3rem;
+      margin-bottom: 0;
+      margin-top: .5rem;
+
       .carte__nom {
         a {
           display: flex;

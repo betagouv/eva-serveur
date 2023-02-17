@@ -1,0 +1,24 @@
+<div id='<%= @ressource.id %>' class="carte__conteneur position-relative">
+  <div class="card carte-liste d-flex align-items-center <%= @menu_affiche ? 'carte--deroulante' : '' %>">
+    <div class="row w-100 no-gutters d-flex justify-content-between align-items-center">
+      <%= content %>
+    </div>
+  </div>
+  <div class="card carte__menu-deroulant position-absolute w-100 <%= @menu_affiche ? '' : 'hidden' %>" style="z-index: <%= @priorite %>;">
+    <p><%= @question %></p>
+    <form>
+      <ul style="list-style-type: none" class="m-0 mt-3 p-0">
+        <% @reponses.each_value do |option| %>
+          <li>
+            <% option_id = "#{option}-#{@ressource.id}" %>
+            <input type="radio" id="<%= option_id %>" name="dispositif_de_remediation" value="<%= option %>" autocomplete="off">
+            <label for="<%= option_id %>"><%= t("activerecord.attributes.mise_en_action.dispositifs_de_remediation.#{option}") %></label>
+          </li>
+        <% end %>
+        <li class="d-flex justify-content-end">
+          <button type="button" class="bouton valide-dispositif-remediation bouton--desactive" data-evaluation-id="<%= @ressource.id %>">Valider</button>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>

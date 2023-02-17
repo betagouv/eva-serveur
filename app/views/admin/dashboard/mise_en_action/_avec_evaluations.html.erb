@@ -9,15 +9,17 @@
       <div class="fw-semi-bold"><%= md(t('.question')) %></div>
     </div>
     <div class='liste'>
-      <% evaluations.limit(6).each do |evaluation| %>
-      <div id='<%= evaluation.id %>' class="card carte-liste d-flex align-items-center">
-        <div class="row w-100 no-gutters d-flex justify-content-between align-items-center">
+      <% evaluations.each_with_index do |evaluation, index| %>
+        <%= render(CarteAvecMenuDeroulant.new(evaluation,
+                                              t('.question_dispositif'),
+                                              MiseEnAction.dispositifs_de_remediation,
+                                              menu_affiche: effectuee_sans_dispositif_remediation?(evaluation),
+                                              priorite: evaluations.size - index.to_i)) do %>
           <div class='col d-flex'>
             <span class='carte__nom'><%= link_to evaluation.nom.truncate(30), admin_evaluation_path(evaluation) %></span>
           </div>
           <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: evaluation } %>
-        </div>
-      </div>
+        <% end %>
       <% end %>
     </div>
     <%= render 'components/banniere_solutions_illettrisme', asterisque: false %>

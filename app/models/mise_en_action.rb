@@ -20,4 +20,8 @@ class MiseEnAction < ApplicationRecord
 
     self.repondue_le = Time.zone.now
   end
+
+  def effectuee_sans_dispositif_remediation?
+    effectuee && dispositif_de_remediation.blank?
+  end
 end

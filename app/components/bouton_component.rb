@@ -19,6 +19,7 @@ class BoutonComponent < ViewComponent::Base
     bg-white
   ].freeze
   DESACTIVE_CLASSES = %w[
+    bouton-arrondi
     bouton--desactive
   ].freeze
   BASE_CLASSES = %w[

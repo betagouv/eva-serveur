@@ -9,7 +9,8 @@
     color: $eva_dark;
     padding: 0 1rem;
     min-height: 3rem;
-    margin-bottom: .5rem;
+    margin-bottom: 0;
+    margin-top: .5rem;
 
     .carte__nom {
       font-family: $font-titre;
@@ -72,4 +73,13 @@
       max-width: 10.5rem;
     }
   }
+}
+
+.carte__menu-deroulant {
+  color: white;
+  background-color: $eva_dark;
+  padding: 1rem;
+  border-radius: 0px 0px 1rem 1rem;
+  border: solid 1px white;
+  border-top: none;
 }

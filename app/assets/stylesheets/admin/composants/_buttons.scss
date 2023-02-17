@@ -1,4 +1,5 @@
 form input[type="submit"],
+form button,
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .has_many_container a.button {
@@ -13,6 +14,7 @@ form input[type="submit"],
   @include bouton-arrondi;
 }
 form input[type="submit"]:not(.disabled),
+form button:not(.disabled),
 .has_many_container a.button:not(.disabled) {
   &:hover {
     background: none;
@@ -68,13 +70,12 @@ button.bouton, .bouton {
   &.bouton-arrondi {
     @include bouton-arrondi();
   }
-}
 
-.bouton--desactive {
-  @include bouton-arrondi;
-  pointer-events: none;
-  &, &:link, :visited {
-    color: $eva_dark_blue_grey;
+  &.bouton--desactive {
+    pointer-events: none;
+    &, &:link, :visited {
+      color: $eva_dark_blue_grey;
+    }
+    background-color: $eva_bluegrey;
   }
-  background-color: $eva_bluegrey;
 }

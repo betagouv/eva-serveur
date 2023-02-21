@@ -1,5 +1,6 @@
 @mixin tag() {
   @include texte();
+  white-space: nowrap;
   padding: .25rem .5rem;
   text-align: center;
   align-items: center;

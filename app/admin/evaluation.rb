@@ -71,9 +71,9 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
-    render 'components/tag', contenu: resource.responsable_suivi.display_name,
-                             url: supprimer_responsable_suivi_admin_evaluation_path(resource),
-                             supprimable: can?(:supprimer_responsable_suivi, Evaluation)
+    render(Tag.new(resource.responsable_suivi.display_name,
+                   supprimable: can?(:supprimer_responsable_suivi, Evaluation),
+                   url: supprimer_responsable_suivi_admin_evaluation_path(resource)))
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {

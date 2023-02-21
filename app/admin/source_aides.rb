@@ -9,7 +9,8 @@ ActiveAdmin.register SourceAide do
 
   index do
     column(:categorie) do |a|
-      render 'components/tag', contenu: t(".categories.#{a.categorie}"), classes: 'tag-categorie'
+      render(Tag.new(t(a.categorie, scope: 'activerecord.attributes.source_aide.categories'),
+                     classes: 'tag-categorie'))
     end
     column :titre
     column :description

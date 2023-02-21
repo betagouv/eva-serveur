@@ -62,6 +62,8 @@ fr:
       recherche_responsable_suivi:
         placeholder: Nom du responsable…
         action: Ajouter un responsable de suivi
+      tags:
+        formation_recommandee: Formation recommandée
       tri:
         <<: *commun
         reste_plateau: Reste plateau

@@ -14,8 +14,8 @@
         <% end %>
         <div class='carte__texte d-flex'>
           <div class='entete'>
-            <%= render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                                    classes: "tag-categorie #{actualite.categorie}" %>
+            <%= render(Tag.new(t("categories.#{actualite.categorie}", scope: 'activerecord.attributes.actualite'),
+            classes: "tag-categorie #{actualite.categorie}")) %>
           </div>
           <span class='carte__titre'><%= actualite.titre %></span>
           <span><%= l actualite.created_at, format: :avec_heure %></span>
@@ -27,8 +27,8 @@
         <%= render(CarteComponent.new([:admin, actualite])) do %>
           <div class="col d-flex align-items-center">
             <div class="carte__entete">
-              <%= render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-              classes: "tag-categorie #{actualite.categorie}" %>
+              <%= render(Tag.new(t("categories.#{actualite.categorie}", scope: 'activerecord.attributes.actualite'),
+                                 classes: "tag-categorie #{actualite.categorie}")) %>
             </div>
             <span class='carte__texte'><%= actualite.titre %></span>
           </div>

@@ -2,7 +2,8 @@
 
 class MiseEnAction < ApplicationRecord
   DISPOSITIFS_REMEDIATION = %w[formation_competences_de_base formation_metier
-                               dispositif_remobilisation levee_freins_peripheriques].freeze
+                               dispositif_remobilisation levee_freins_peripheriques
+                               indetermine].freeze
 
   belongs_to :evaluation
 
@@ -23,5 +24,9 @@ class MiseEnAction < ApplicationRecord
 
   def effectuee_sans_dispositif_remediation?
     effectuee && dispositif_de_remediation.blank?
+  end
+
+  def effectuee?
+    effectuee
   end
 end

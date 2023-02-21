@@ -10,11 +10,13 @@ function reinitialiseFormulaire(evaluationId) {
 }
 
 function ouvreDispositifsRemediation(evaluationId) {
+  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='false']`).addClass('bouton-outline--main');
   $(`#${evaluationId} .carte-liste`).addClass('carte--deroulante');
   $(`#${evaluationId} .carte__menu-deroulant`).removeClass('hidden');
 }
 
 function fermeDispositifsRemediation(evaluationId) {
+  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='false']`).removeClass('bouton-outline--main');
   $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulante');
   $(`#${evaluationId} .carte__menu-deroulant`).addClass('hidden');
   reinitialiseFormulaire(evaluationId);
@@ -58,8 +60,7 @@ function activeBoutonValider() {
     }
   }
 }
-function enregistreDispositifRemediation(evaluationId) {
-  const reponse = $(`#${evaluationId} input[name=dispositif_de_remediation]:checked`).val();
+function enregistreDispositifRemediation(evaluationId, reponse) {
   const data = {
     dispositif_de_remediation: reponse
   };
@@ -86,6 +87,12 @@ function ecouteBoutons(boutons, callback) {
 document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".reponse-mise-en-action"), enregistreReponseMiseEnAction);
   ecouteBoutons($(".modifier-mise-en-action"), modifieReponseMiseEnAction);
-  ecouteBoutons($(".valide-dispositif-remediation"), enregistreDispositifRemediation);
+  ecouteBoutons($(".valide-dispositif-remediation"), function(evaluationId) {
+    const reponse = $(`#${evaluationId} input[name=dispositif_de_remediation]:checked`).val();
+    enregistreDispositifRemediation(evaluationId, reponse);
+  });
+  ecouteBoutons($(".ferme-dispositif-remediation"), function(evaluationId) {
+    enregistreDispositifRemediation(evaluationId, 'indetermine')
+  });
   activeBoutonValider();
 });

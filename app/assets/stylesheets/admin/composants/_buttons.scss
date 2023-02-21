@@ -17,7 +17,8 @@ form input[type="submit"]:not(.disabled),
 form button:not(.disabled),
 .has_many_container a.button:not(.disabled) {
   &:hover {
-    background: none;
+    background-color: #fff;
+    background-image: none;
   }
 }
 form.filter_form a.clear_filters_btn,
@@ -44,7 +45,7 @@ button:not(.disabled):hover {
   font-weight: normal;
   box-shadow: none;
   background-image: none;
-  background-color: transparent;
+  background-color: #fff;
 }
 
 
@@ -57,10 +58,27 @@ button.bouton, .bouton {
     color: $eva_dark_blue_grey;
   }
 
-  &.bouton-outline-light {
+  &.bouton-outline--main, &.bouton-outline--light,  &.bouton-outline--grey {
     background-color: transparent;
+  }
+
+  &.bouton-outline--main {
+    color: $eva_dark;
+    border-color: $eva_main_blue;
+  }
+
+  &.bouton-outline--light {
     color: $eva_light;
     border-color: $eva_light;
+  }
+
+  &.bouton-outline--grey {
+    color: $eva_bluegrey;
+    border-color: $eva_bluegrey;
+    &:hover {
+      color: $eva_main_blue;
+      border-color: $eva_main_blue;
+    }
   }
 
   &.bouton-principal {

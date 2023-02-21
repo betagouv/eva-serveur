@@ -26,9 +26,9 @@ div class: 'menu menu-transverse' do
       a href: '#francais_mathematiques' do
         text_node 'Français et Mathématiques'
         if resource.illettrisme_potentiel?
-          render 'components/tag', image_path: 'demande_aide',
-                                   contenu: 'Formation recommandée',
-                                   classes: 'tag-categorie orange'
+          render(Tag.new(t('formation_recommandee', scope: 'admin.evaluations.tags'),
+                         image_path: 'demande_aide',
+                         classes: 'tag-categorie orange'))
         end
       end
     end
@@ -41,9 +41,9 @@ div class: 'menu menu-transverse' do
       a href: '#lettrisme' do
         text_node 'Lettrisme'
         if resource.illettrisme_potentiel?
-          render 'components/tag', image_path: 'demande_aide',
-                                   contenu: 'Formation recommandée',
-                                   classes: 'tag-categorie orange'
+          render(Tag.new(t('formation_recommandee', scope: 'admin.evaluations.tags'),
+                         image_path: 'demande_aide',
+                         classes: 'tag-categorie orange'))
         end
       end
     end

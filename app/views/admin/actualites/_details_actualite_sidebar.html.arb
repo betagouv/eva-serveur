@@ -3,8 +3,10 @@
 div class: 'metadonnees' do
   div class: 'donnee' do
     span 'Publié dans :', class: 'label'
-    render 'components/tag', contenu: t(".categories.#{actualite.categorie}"),
-                             classes: "tag-categorie #{actualite.categorie}"
+    render(Tag.new(
+             t(actualite.categorie, scope: 'activerecord.attributes.actualite.categories'),
+             classes: "tag-categorie #{actualite.categorie}"
+           ))
   end
   div class: 'donnee' do
     span 'Auteur :', class: 'label'

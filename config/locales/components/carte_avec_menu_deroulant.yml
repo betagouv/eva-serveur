@@ -1,3 +1,4 @@
 fr:
   carte_avec_menu_deroulant:
-    action: Valider
+    action_valider: Valider
+    action_fermer: Ignorer

@@ -12,7 +12,7 @@
       <% evaluations.each_with_index do |evaluation, index| %>
         <%= render(CarteAvecMenuDeroulant.new(evaluation,
                                               t('.question_dispositif'),
-                                              MiseEnAction.dispositifs_de_remediation,
+                                              MiseEnAction.dispositifs_de_remediation.excluding('indetermine'),
                                               menu_affiche: effectuee_sans_dispositif_remediation?(evaluation),
                                               priorite: evaluations.size - index.to_i)) do %>
           <div class='col d-flex'>

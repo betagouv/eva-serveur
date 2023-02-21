@@ -18,7 +18,12 @@
           </li>
         <% end %>
         <li class="d-flex justify-content-end">
-          <button type="button" class="bouton valide-dispositif-remediation bouton--desactive" data-evaluation-id="<%= @ressource.id %>"><%= t('.action') %></button>
+          <button type="button" class="bouton bouton-outline--grey ferme-dispositif-remediation">
+            <%= t('.action_fermer') %>
+          </button>
+          <button type="button" class="bouton valide-dispositif-remediation mr-0 bouton--desactive">
+            <%= t('.action_valider') %>
+          </button>
         </li>
       </ul>
     </form>

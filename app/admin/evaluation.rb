@@ -4,7 +4,7 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4
 
-  includes campagne: :compte
+  includes :responsable_suivi, campagne: [:parcours_type]
 
   config.sort_order = 'created_at_desc'
 

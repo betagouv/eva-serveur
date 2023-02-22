@@ -24,9 +24,6 @@ ActiveAdmin.register Evaluation do
          display_name: 'display_name',
          minimum_input_length: 2,
          order_by: 'email_asc'
-  filter :mise_en_action_effectuee_null,
-         as: :boolean,
-         label: I18n.t('activerecord.attributes.evaluation.mise_en_action_effectuee_null')
   filter :statut,
          as: :select,
          collection: Evaluation.statuts.map { |v, id|

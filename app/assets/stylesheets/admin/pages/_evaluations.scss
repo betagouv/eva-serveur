@@ -17,13 +17,30 @@
     }
   }
 
+  .evaluation--campagne {
+    font-weight: 600;
+    @include texte-lg();
+
+    &, &:link, &:visited {
+      color: $eva_dark_blue_grey;
+      text-decoration: none;
+    }
+  }
+
   .evaluation--suivi-par {
+    margin-left: 1.75rem;
+    margin-top: .5rem;
+  }
+
+  .evaluation--parcours-type {
+    margin-top: 0.625rem;
+  }
+
+  .evaluation--suivi-par, .evaluation--parcours-type {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;
     font-weight: 400;
-    margin-top: .5rem;
-    margin-left: 1.75rem;
 
     a, a:link, a:visited {
       color: $eva_dark_blue_grey;
@@ -34,14 +51,20 @@
 }
 
 #index_table_evaluations {
+  $padding-horizontal : 1rem;
+  thead th { padding: 0 $padding-horizontal .5rem; }
+  tbody tr {
+    min-height: 4.5rem;
+  }
   .col-nom {
-    max-width: 11.25rem;
+    max-width: 20rem;
     .ellipse {
       margin-right: .75rem;
     }
   }
   td {
-    padding: .75rem 1rem;
+    padding: .75rem $padding-horizontal;
+    vertical-align: top;
   }
 
   @include bloc-evaluation();

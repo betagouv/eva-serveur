@@ -1,17 +1,17 @@
 <div class='mise-en-action__texte d-flex justify-content-center text-primary text-center' data-reponse="">
   <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee == true ? '' : 'hidden' %>
   <div data-reponse="true" class="mise-en-action <%= classe_reponse_oui %>">
-    <strong>Oui</strong>, vous avez trouvé une solution<br>
-    (<a href="#" class="modifier-mise-en-action">Modifier votre réponse</a>)
+    <%= t('.reponse_oui_html') %><br>
+    (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
   </div>
   <% classe_reponse_non = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee == false ? '' : 'hidden' %>
   <div data-reponse="false" class="mise-en-action <%= classe_reponse_non %>">
-    <strong>Non</strong>, vous n'avez pas trouvé de solution<br>
-    (<a href="#" class="modifier-mise-en-action">Modifier votre réponse</a>)
+    <%= t('.reponse_non_html') %><br>
+    (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
   </div>
   <% classe_reponse_en_attente = evaluation.a_mise_en_action? ? 'hidden' : 'd-flex' %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
-    <%= render(BoutonComponent.new('Oui', '#', class: 'reponse-mise-en-action', 'data-reponse': true)) %>
-    <%= render(BoutonComponent.new('Non', '#', class: 'reponse-mise-en-action', 'data-reponse': false)) %>
+    <%= render(BoutonComponent.new(t('.bouton_oui'), '#', class: 'reponse-mise-en-action', 'data-reponse': true)) %>
+    <%= render(BoutonComponent.new(t('.bouton_non'), '#', class: 'reponse-mise-en-action', 'data-reponse': false)) %>
   </div>
 </div>

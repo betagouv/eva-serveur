@@ -13,6 +13,11 @@
   border: 0;
 }
 
+@mixin texte-lg() {
+  font-size: 1rem;
+  line-height: 1.125rem;
+}
+
 @mixin texte() {
   font-size: 0.875rem;
   line-height: 1rem;

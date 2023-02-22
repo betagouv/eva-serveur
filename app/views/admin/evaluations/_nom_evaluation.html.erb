@@ -11,9 +11,11 @@
 </div>
 <div>
   <% responsable = evaluation.responsable_suivi %>
-  <% if responsable.present? %>
-    <div class= "evaluation--suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
-      Suivi(e) par <%= link_to(responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire') %>
-    </div>
-  <% end %>
+  <div class= "evaluation--suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
+    <% if responsable.present? %>
+      <%= t('.suivi_par') %> <%= link_to(responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire') %>
+    <% else %>
+      <%= t('.pas_de_responsable') %>
+    <% end %>
+  </div>
 </div>

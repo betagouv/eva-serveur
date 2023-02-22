@@ -5,7 +5,14 @@ context.instance_eval do
     render partial: 'nom_evaluation', locals: { evaluation: evaluation }
   end
 
-  column :campagne
+  column :campagne do |evaluation|
+    campagne = evaluation.campagne
+    div link_to(campagne.display_name, admin_campagne_path(campagne),
+                class: 'evaluation--campagne'),
+        class: 'd-flex align-items-center'
+    parcours_type = campagne.parcours_type
+    div parcours_type.display_name, class: 'evaluation--parcours-type' if parcours_type.present?
+  end
   column :created_at
   actions
 end

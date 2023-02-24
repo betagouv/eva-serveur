@@ -240,10 +240,24 @@ describe 'Evaluation', type: :request do
       it 'peut renseigner le dispositif de remédiation' do
         expect do
           patch renseigner_remediation_admin_evaluation_path(evaluation),
-                params: { dispositif_de_remediation: dipositif_remediation }
+                params: { reponse: dipositif_remediation }
         end.to change { evaluation.reload.mise_en_action.dispositif_de_remediation }
            .from(nil)
           .to(dipositif_remediation)
+      end
+    end
+
+    describe '#renseigner_difficulte' do
+      let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
+      let(:difficulte) { 'aucune_offre_formation' }
+
+      it 'peut renseigner la difficulté' do
+        expect do
+          patch renseigner_difficulte_admin_evaluation_path(evaluation),
+                params: { reponse: difficulte }
+        end.to change { evaluation.reload.mise_en_action.difficulte }
+           .from(nil)
+          .to(difficulte)
       end
     end
   end

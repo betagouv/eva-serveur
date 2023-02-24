@@ -1,0 +1,23 @@
+# frozen_string_literal: true
+
+class MiseEnAction
+  class Questionnaire
+    attr_reader :nom, :question, :reponses
+
+    def initialize(nom)
+      @nom = nom
+      recupere_question_reponses
+    end
+
+    def recupere_question_reponses
+      case @nom
+      when :remediation
+        @question = I18n.t('question.remediation')
+        @reponses = MiseEnAction.dispositifs_de_remediation.excluding('indetermine')
+      when :difficultes
+        @question = I18n.t('question.difficulte')
+        @reponses = MiseEnAction.difficultes.excluding('indetermine')
+      end
+    end
+  end
+end

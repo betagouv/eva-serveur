@@ -1,4 +1,4 @@
-.carte__menu-deroulant {
+.qcm {
   color: white;
   background-color: $eva_dark;
   padding: 1rem;
@@ -13,7 +13,7 @@
     }
   }
 
-  :checked + .tag { background-color: $eva_green; }
+  input:checked + .tag { background-color: $eva_green; }
 
   .tag {
     cursor: pointer;
@@ -21,5 +21,9 @@
     font-weight: 400;
     color: $eva-dark;
     border: none;
+  }
+
+  .bouton-fermer {
+    margin-right: .25rem;
   }
 }

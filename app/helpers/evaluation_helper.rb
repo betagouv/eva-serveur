@@ -13,4 +13,12 @@ module EvaluationHelper
   def effectuee_sans_dispositif_remediation?(ressource)
     ressource&.mise_en_action&.effectuee_sans_dispositif_remediation?
   end
+
+  def non_effectuee_sans_difficulte?(ressource)
+    ressource&.mise_en_action&.non_effectuee_sans_difficulte?
+  end
+
+  def mise_en_action_sans_qualification?(ressource)
+    effectuee_sans_dispositif_remediation?(ressource) || non_effectuee_sans_difficulte?(ressource)
+  end
 end

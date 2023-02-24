@@ -160,7 +160,7 @@ describe Evaluation do
              synthese_competences_de_base: :illettrisme_potentiel,
              campagne: campagne
     end
-    let!(:evaluation_mise_en_action_false) do
+    let!(:evaluation_sans_difficulte) do
       create :evaluation, :avec_mise_en_action,
              effectuee: false,
              synthese_competences_de_base: :illettrisme_potentiel,
@@ -182,6 +182,7 @@ describe Evaluation do
       ability = Ability.new(compte_admin)
       expect(described_class.tableau_de_bord_mises_en_action(ability).pluck(:id))
         .to eq [evaluation_sans_dispositif.id,
+                evaluation_sans_difficulte.id,
                 evaluation_sans_mise_en_action.id]
     end
   end

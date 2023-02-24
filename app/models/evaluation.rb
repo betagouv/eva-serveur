@@ -4,8 +4,7 @@ class Evaluation < ApplicationRecord
   SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
-  NIVEAUX_ANLCI = %w[profil1 profil2 profil3
-                     profil4 profil4_plus profil4_plus_plus].freeze
+  NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
   NIVEAUX_POSITIONNEMENT = %w[profil1 profil2 profil3 profil4
                               profil_4h profil_4h_plus profil_4h_plus_plus
                               profil_aberrant indetermine].freeze
@@ -62,6 +61,11 @@ class Evaluation < ApplicationRecord
       .where(mises_en_action: { effectuee: true })
       .where(mises_en_action: { dispositif_de_remediation: nil })
   }
+  scope :sans_difficulte, lambda {
+    left_outer_joins(:mise_en_action)
+      .where(mises_en_action: { effectuee: false })
+      .where(mises_en_action: { difficulte: nil })
+  }
   scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
 
   def display_name
@@ -73,9 +77,7 @@ class Evaluation < ApplicationRecord
   end
 
   def responsables_suivi
-    Compte
-      .where(structure_id: campagne&.compte&.structure_id)
-      .where(statut_validation: :acceptee)
+    Compte.where(structure_id: campagne&.compte&.structure_id).where(statut_validation: :acceptee)
   end
 
   def self.tableau_de_bord(ability)
@@ -88,6 +90,7 @@ class Evaluation < ApplicationRecord
   def self.tableau_de_bord_mises_en_action(ability)
     query = accessible_by(ability).illettrisme_potentiel
     query.sans_remediation
+         .or(query.sans_difficulte)
          .or(query.sans_mise_en_action)
          .non_anonymes.order(created_at: :desc)
          .includes(:mise_en_action)

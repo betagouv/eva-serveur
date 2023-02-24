@@ -5,7 +5,8 @@ class MiseEnAction < ApplicationRecord
                                dispositif_remobilisation levee_freins_peripheriques
                                indetermine].freeze
   DIFFICULTES = %w[aucune_offre_formation offre_formation_inaccessible
-                   freins_peripheriques accompagnement_necessaire].freeze
+                   freins_peripheriques accompagnement_necessaire
+                   indetermine].freeze
 
   belongs_to :evaluation
 
@@ -14,8 +15,9 @@ class MiseEnAction < ApplicationRecord
 
   before_save :enregistre_date
 
-  enum :dispositif_de_remediation, DISPOSITIFS_REMEDIATION.zip(DISPOSITIFS_REMEDIATION).to_h
-  enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h
+  enum dispositif_de_remediation: DISPOSITIFS_REMEDIATION.zip(DISPOSITIFS_REMEDIATION).to_h,
+       _suffix: true
+  enum difficulte: DIFFICULTES.zip(DIFFICULTES).to_h, _suffix: true
 
   acts_as_paranoid
 
@@ -27,6 +29,10 @@ class MiseEnAction < ApplicationRecord
 
   def effectuee_sans_dispositif_remediation?
     effectuee && dispositif_de_remediation.blank?
+  end
+
+  def non_effectuee_sans_difficulte?
+    effectuee == false && difficulte.blank?
   end
 
   def effectuee?

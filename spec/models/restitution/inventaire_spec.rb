@@ -259,5 +259,14 @@ describe Restitution::Inventaire do
 
       it { expect(@restitution.version?(2)).to be nil }
     end
+
+    context "si il n'y a pas d'événement démarrage" do
+      before do
+        evenements = []
+        @restitution = described_class.new(campagne, evenements)
+      end
+
+      it { expect(@restitution.version?(2)).to be nil }
+    end
   end
 end

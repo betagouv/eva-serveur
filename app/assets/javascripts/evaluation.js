@@ -5,20 +5,22 @@ function afficheModificationReponse(reponse, evaluationId) {
 }
 
 function reinitialiseFormulaire(evaluationId) {
-  $(`#${evaluationId} input[name=dispositif_de_remediation]`).prop('checked',false);
-  $(`#${evaluationId} .valide-dispositif-remediation`).addClass('bouton--desactive');
+  $(`#${evaluationId} input[name=reponse_qcm]`).prop('checked', false);
+  $(`#${evaluationId} .valide-qcm`).addClass('bouton--desactive');
 }
 
-function ouvreDispositifsRemediation(evaluationId) {
-  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='false']`).addClass('bouton-outline--main');
-  $(`#${evaluationId} .carte-liste`).addClass('carte--deroulante');
-  $(`#${evaluationId} .carte__menu-deroulant`).removeClass('hidden');
+function ouvreQcm(evaluationId, qcm, effectuee) {
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
+  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`).addClass('bouton-outline--main');
+  $(`#${evaluationId} .carte-liste`).addClass('carte--deroulee');
+  $(`#${evaluationId} .qcm`).addClass('hidden');
+  $(`#${evaluationId} .questions-${qcm}`).removeClass('hidden');
 }
 
-function fermeDispositifsRemediation(evaluationId) {
-  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='false']`).removeClass('bouton-outline--main');
-  $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulante');
-  $(`#${evaluationId} .carte__menu-deroulant`).addClass('hidden');
+function fermeQcm(evaluationId) {
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
+  $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulee');
+  $(`#${evaluationId} .qcm`).addClass('hidden');
   reinitialiseFormulaire(evaluationId);
 }
 
@@ -40,10 +42,11 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     data: data,
     dataType: "json",
     success: function () {
-      if(reponse && dashboard) {
-        ouvreDispositifsRemediation(evaluationId);
+      if(dashboard) {
+        const qcm = reponse ? 'remediation' : 'difficultes';
+        ouvreQcm(evaluationId, qcm, reponse);
       } else {
-        fermeDispositifsRemediation(evaluationId);
+        fermeQcm(evaluationId);
         afficheModificationReponse(reponse, evaluationId);
       }
     }
@@ -51,27 +54,27 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
 }
 
 function activeBoutonValider() {
-  const radios = $('input[name=dispositif_de_remediation]');
+  const radios = $('input[name=reponse_qcm]');
 
-  for(radio in radios) {
-    radios[radio].onclick = function(event) {
-      const evaluationId = event.currentTarget.closest('.carte__conteneur').getAttribute('id')
-      $(`#${evaluationId} .valide-dispositif-remediation`).removeClass('bouton--desactive');
-    }
-  }
+  radios.each(function() {
+    const radio = $(this)
+    radio.on("click", function(event) {
+      radio.closest('.qcm').find('.valide-qcm').removeClass('bouton--desactive');
+    })
+  });
 }
-function enregistreDispositifRemediation(evaluationId, reponse) {
-  const data = {
-    dispositif_de_remediation: reponse
-  };
+
+function enregistreQualificationMiseEnAction(evaluationId, reponse, $bouton) {
+  const effectuee = $bouton.closest('.qcm')[0].classList.contains('questions-remediation');
+  const action = effectuee ? 'renseigner_remediation' : 'renseigner_difficulte'
   $.ajax({
     method: 'PATCH',
-    url: `/pro/admin/evaluations/${evaluationId}/renseigner_remediation`,
-    data: data,
+    url: `/pro/admin/evaluations/${evaluationId}/${action}`,
+    data: { reponse },
     dataType: "json",
     success: function () {
-      afficheModificationReponse(true, evaluationId);
-      fermeDispositifsRemediation(evaluationId);
+      afficheModificationReponse(effectuee, evaluationId);
+      fermeQcm(evaluationId);
     }
   });
 }
@@ -87,12 +90,12 @@ function ecouteBoutons(boutons, callback) {
 document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".reponse-mise-en-action"), enregistreReponseMiseEnAction);
   ecouteBoutons($(".modifier-mise-en-action"), modifieReponseMiseEnAction);
-  ecouteBoutons($(".valide-dispositif-remediation"), function(evaluationId) {
-    const reponse = $(`#${evaluationId} input[name=dispositif_de_remediation]:checked`).val();
-    enregistreDispositifRemediation(evaluationId, reponse);
+  ecouteBoutons($(".valide-qcm"), function(evaluationId, $bouton) {
+    const reponse = $(`#${evaluationId} input[name=reponse_qcm]:checked`).val();
+    enregistreQualificationMiseEnAction(evaluationId, reponse, $bouton);
   });
-  ecouteBoutons($(".ferme-dispositif-remediation"), function(evaluationId) {
-    enregistreDispositifRemediation(evaluationId, 'indetermine')
+  ecouteBoutons($(".bouton-fermer"), function(evaluationId, $bouton) {
+    enregistreQualificationMiseEnAction(evaluationId, 'indetermine', $bouton)
   });
   activeBoutonValider();
 });

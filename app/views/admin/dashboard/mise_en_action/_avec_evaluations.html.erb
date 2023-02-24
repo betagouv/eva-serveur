@@ -10,15 +10,16 @@
     </div>
     <div class='liste'>
       <% evaluations.each_with_index do |evaluation, index| %>
-        <%= render(CarteAvecMenuDeroulant.new(evaluation,
-                                              t('.question_dispositif'),
-                                              MiseEnAction.dispositifs_de_remediation.excluding('indetermine'),
-                                              menu_affiche: effectuee_sans_dispositif_remediation?(evaluation),
-                                              priorite: evaluations.size - index.to_i)) do %>
-          <div class='col d-flex'>
-            <span class='carte__nom'><%= link_to evaluation.nom.truncate(30), admin_evaluation_path(evaluation) %></span>
-          </div>
-          <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: evaluation } %>
+        <%= render(CarteMiseEnAction.new(evaluation,
+                                         carte_deroulee: mise_en_action_sans_qualification?(evaluation))) do %>
+          <%= render(Qcm.new(evaluation,
+                             MiseEnAction::Questionnaire.new(:remediation),
+                             qcm_affiche: effectuee_sans_dispositif_remediation?(evaluation),
+                             priorite: evaluations.size - index.to_i)) %>
+          <%= render(Qcm.new(evaluation,
+                             MiseEnAction::Questionnaire.new(:difficultes),
+                             qcm_affiche: non_effectuee_sans_difficulte?(evaluation),
+                             priorite: evaluations.size - index.to_i)) %>
         <% end %>
       <% end %>
     </div>

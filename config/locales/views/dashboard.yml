@@ -37,7 +37,6 @@ fr:
             Au sein de votre structure, ces personnes semblent avoir  
             besoin d’accompagnement.  
             Avez-vous été en mesure de les orienter vers une solution adaptée ?
-          question_dispositif: Vers quel dispositif de remédiation cette personne a-t-elle été orientée ?
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

@@ -126,7 +126,11 @@ ActiveAdmin.register Evaluation do
   end
 
   member_action :renseigner_remediation, method: :patch do
-    resource.mise_en_action.update(dispositif_de_remediation: params[:dispositif_de_remediation])
+    resource.mise_en_action.update(dispositif_de_remediation: params[:reponse])
+  end
+
+  member_action :renseigner_difficulte, method: :patch do
+    resource.mise_en_action.update(difficulte: params[:reponse])
   end
 
   controller do

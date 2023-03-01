@@ -1,6 +1,11 @@
 fr:
   admin:
     evaluations:
+      index:
+        confirmation_suppression: 'Voulez-vous vraiment supprimer cette évaluation ?'
+        supprimer: Supprimer
+        modifier: Modifier
+        voir: Voir
       commun: &commun
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"

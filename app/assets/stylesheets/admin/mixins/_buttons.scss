@@ -51,3 +51,34 @@
   }
 }
 
+@mixin boutons-groupes() {
+  @include bouton();
+  border-radius: 0;
+  margin: 0;
+
+  &:first-child {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+  }
+  &:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+  }
+
+  &.view_link {
+    background-color: $couleur-legere-accent-validation;
+    border-color: $couleur-legere-accent-validation;
+    color: $eva_dark;
+  }
+  &.edit_link {
+    background-color: $eva_main_blue;
+    border-color: $eva_main_blue;
+    color: white;
+  }
+  &.delete_link {
+    background-color: $couleur-accent-erreur;
+    border-color: $couleur-accent-erreur;
+    color: white;
+  }
+}
+

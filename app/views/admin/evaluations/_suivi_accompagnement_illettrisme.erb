@@ -1,8 +1,7 @@
-<div class='row m-0'>
-  <%
-    avec_reponse = resource.a_mise_en_action? ? 'card__banner--illettrisme-avec-reponse' : ''
-  %>
-  <div class="container card__banner card__banner--illettrisme d-flex <%= avec_reponse %>">
+<% reponse = resource.a_mise_en_action? && !mise_en_action_sans_qualification?(resource) ? 'card__banner--succes' : 'card__banner--en-attente' %>
+
+<div class="card__banner card__banner--illettrisme <%= reponse %>">
+  <div class= 'container d-flex py-3 px-4'>
     <div class='d-flex align-items-center justify-content-center'>
       <svg width="96" height="96" class="card__banner__icone" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="96" height="96" rx="48"/>
@@ -12,7 +11,17 @@
     <div>
       <div><%= md t('illettrisme_potentiel.message', scope: scope) %></div>
       <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: resource } %>
-      <%= render 'components/banniere_solutions_illettrisme', asterisque: true %>
     </div>
+  </div>
+  <div class= 'container'>
+    <%= render(Qcm.new(resource,
+          MiseEnAction::Questionnaire.new(:remediation),
+          qcm_affiche: effectuee_sans_dispositif_remediation?(resource))) %>
+    <%= render(Qcm.new(resource,
+          MiseEnAction::Questionnaire.new(:difficultes),
+          qcm_affiche: non_effectuee_sans_difficulte?(resource))) %>
+  </div>
+  <div class= 'container py-3 px-4 bg-desactive'>
+    <%= render 'components/banniere_solutions_illettrisme', asterisque: true %>
   </div>
 </div>

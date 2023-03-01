@@ -67,7 +67,9 @@ div id: 'evaluation__details', class: 'row' do
         end
       end
       if resource.illettrisme_potentiel?
-        render partial: 'suivi_accompagnement_illettrisme', locals: { scope: scope }
+        div class: 'row m-0' do
+          render partial: 'suivi_accompagnement_illettrisme', locals: { scope: scope }
+        end
       end
     end
   end

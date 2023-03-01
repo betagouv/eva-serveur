@@ -1,7 +1,8 @@
 function afficheModificationReponse(reponse, evaluationId) {
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='${reponse}']`).removeClass('hidden');
-  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--illettrisme-avec-reponse');
+  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--en-attente');
+  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--succes');
 }
 
 function reinitialiseFormulaire(evaluationId) {
@@ -27,7 +28,8 @@ function fermeQcm(evaluationId) {
 function modifieReponseMiseEnAction(evaluationId) {
   $(`#${evaluationId} .mise-en-action`).addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
-  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--illettrisme-avec-reponse');
+  $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--succes');
+  $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--en-attente');
 }
 
 function enregistreReponseMiseEnAction(evaluationId, bouton) {
@@ -35,20 +37,14 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
   const data = {
     mise_en_action_effectuee: reponse
   };
-  const dashboard = (window.location.pathname == '/pro/admin/dashboard');
   $.ajax({
     method: 'PUT',
     url: `/pro/admin/evaluations/${evaluationId}/mise_en_action`,
     data: data,
     dataType: "json",
     success: function () {
-      if(dashboard) {
-        const qcm = reponse ? 'remediation' : 'difficultes';
-        ouvreQcm(evaluationId, qcm, reponse);
-      } else {
-        fermeQcm(evaluationId);
-        afficheModificationReponse(reponse, evaluationId);
-      }
+      const qcm = reponse ? 'remediation' : 'difficultes';
+      ouvreQcm(evaluationId, qcm, reponse);
     }
   });
 }

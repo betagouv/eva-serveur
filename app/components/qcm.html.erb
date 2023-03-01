@@ -1,4 +1,4 @@
-<div class="card qcm position-absolute w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? '' : 'hidden' %>" style="z-index: <%= @priorite %>;">
+<div class="card qcm w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? '' : 'hidden' %>" style="z-index: <%= @priorite %>;">
   <p><%= @questionnaire.question %></p>
   <form class="mt-3">
     <ul style="list-style-type: none" class="m-0 p-0">

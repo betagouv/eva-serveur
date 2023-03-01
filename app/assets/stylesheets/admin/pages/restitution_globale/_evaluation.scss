@@ -23,6 +23,12 @@
   }
 }
 
+@mixin card__banner($color-title, $color-border, $color-image) {
+  border: 2px solid $color-border;
+  h5 { color: $color-title; }
+  .card__banner__icone { fill: $color-image; }
+}
+
 #evaluation__details {
   $grid-columns: 8;
   $grid-gutter-width: 0;
@@ -62,29 +68,29 @@
   }
 
   .card__banner {
-    padding: 1rem 1.5rem;
     &--alert {
+      padding: 1rem 1.5rem;
       box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
+    }
+
+    &--succes {
+      @include card__banner($eva_dark, $eva_main_blue, $eva_bluegrey)
+    }
+
+    &--en-attente {
+      @include card__banner($eva_orange, $eva_orange, $eva_orange)
     }
 
     &--illettrisme {
       border-radius: 0 0 8px 8px;
-      border: 2px solid $eva_orange;
-      h5 {
-        color: $eva_orange;
-      }
-      .card__banner__icone {
-        fill: $eva_orange;
+
+      .container:last-child {
+        border-radius: 0 0 8px 8px;
       }
 
-      &-avec-reponse {
-        border: 2px solid $eva_main_blue;
-        h5 {
-          color: $eva_dark;
-        }
-        .card__banner__icone {
-          fill: $eva_bluegrey;
-        }
+      .qcm {
+        margin-bottom: 0;
+        border-radius: 0;
       }
 
       .actions {
@@ -92,7 +98,6 @@
       }
 
       .banniere-solutions-illettrisme {
-        margin-top: 1rem;
         @include texte-xs();
 
         a {

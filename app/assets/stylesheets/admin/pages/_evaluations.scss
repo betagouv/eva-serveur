@@ -33,10 +33,10 @@
   }
 
   .evaluation--parcours-type {
-    margin-top: 0.625rem;
+    margin-top: 1rem;
   }
 
-  .evaluation--suivi-par, .evaluation--parcours-type {
+  .evaluation--suivi-par, .evaluation--parcours-type, .evaluation--created_at {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;
@@ -48,6 +48,11 @@
     }
   }
 
+  .evaluation--created_at {
+    text-align: right;
+    white-space: nowrap;
+    margin-top: .75rem;
+  }
 }
 
 #index_table_evaluations {

@@ -1,18 +1,19 @@
 <div class='mise-en-action__texte d-flex justify-content-center text-primary text-center' data-reponse="">
-  <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee == true ? '' : 'hidden' %>
+  <% classe_reponse_oui = evaluation.a_mise_en_action? && effectuee_avec_dispositif_remediation?(evaluation) ? '' : 'hidden' %>
   <div data-reponse="true" class="mise-en-action <%= classe_reponse_oui %>">
     <%= t('.reponse_oui_html') %><br>
     (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
   </div>
-  <% classe_reponse_non = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee == false ? '' : 'hidden' %>
+  <% classe_reponse_non = evaluation.a_mise_en_action? && non_effectuee_avec_difficulte?(evaluation) ? '' : 'hidden' %>
   <div data-reponse="false" class="mise-en-action <%= classe_reponse_non %>">
     <%= t('.reponse_non_html') %><br>
     (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
   </div>
-  <% classe_reponse_en_attente = evaluation.a_mise_en_action? ? 'hidden' : 'd-flex' %>
+  <% classe_reponse_en_attente = evaluation.a_mise_en_action? && mise_en_action_avec_qualification?(evaluation) ? 'hidden' : 'd-flex' %>
   <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? ' bouton-outline--main' : '' %>
+  <% classe_reponse_non = evaluation.a_mise_en_action? && !evaluation.mise_en_action.effectuee? ? ' bouton-outline--main' : '' %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
-    <%= render(BoutonComponent.new(t('.bouton_oui'), '#', class: 'reponse-mise-en-action', 'data-reponse': true)) %>
-    <%= render(BoutonComponent.new(t('.bouton_non'), '#', class: "reponse-mise-en-action#{classe_reponse_oui}", 'data-reponse': false)) %>
+    <%= render(BoutonComponent.new(t('.bouton_oui'), '#', class: "reponse-mise-en-action#{classe_reponse_oui}", 'data-reponse': true)) %>
+    <%= render(BoutonComponent.new(t('.bouton_non'), '#', class: "reponse-mise-en-action#{classe_reponse_non}", 'data-reponse': false)) %>
   </div>
 </div>

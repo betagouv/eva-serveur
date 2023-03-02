@@ -11,7 +11,7 @@
     <div class='liste'>
       <% evaluations.each_with_index do |evaluation, index| %>
         <%= render(CarteMiseEnAction.new(evaluation,
-                                         carte_deroulee: mise_en_action_sans_qualification?(evaluation))) do %>
+                                         carte_deroulee: mise_en_action_avec_qualification?(evaluation))) do %>
           <%= render(Qcm.new(evaluation,
                              MiseEnAction::Questionnaire.new(:remediation),
                              qcm_affiche: effectuee_sans_dispositif_remediation?(evaluation),

@@ -27,12 +27,12 @@ class MiseEnAction < ApplicationRecord
     self.repondue_le = Time.zone.now
   end
 
-  def effectuee_sans_dispositif_remediation?
-    effectuee && dispositif_de_remediation.blank?
+  def effectuee_avec_dispositif_remediation?
+    effectuee && dispositif_de_remediation.present?
   end
 
-  def non_effectuee_sans_difficulte?
-    effectuee == false && difficulte.blank?
+  def non_effectuee_avec_difficulte?
+    effectuee == false && difficulte.present?
   end
 
   def effectuee?

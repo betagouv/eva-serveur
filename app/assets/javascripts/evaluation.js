@@ -26,6 +26,7 @@ function fermeQcm(evaluationId) {
 }
 
 function modifieReponseMiseEnAction(evaluationId) {
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
   $(`#${evaluationId} .mise-en-action`).addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
   $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--succes');

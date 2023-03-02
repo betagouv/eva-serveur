@@ -1,4 +1,4 @@
-<% reponse = resource.a_mise_en_action? && !mise_en_action_sans_qualification?(resource) ? 'card__banner--succes' : 'card__banner--en-attente' %>
+<% reponse = resource.a_mise_en_action? && mise_en_action_avec_qualification?(resource) ? 'card__banner--succes' : 'card__banner--en-attente' %>
 
 <div class="card__banner card__banner--illettrisme <%= reponse %>">
   <div class= 'container d-flex py-3 px-4'>

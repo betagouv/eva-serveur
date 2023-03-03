@@ -38,4 +38,13 @@ class MiseEnAction < ApplicationRecord
   def effectuee?
     effectuee
   end
+
+  def questionnaire
+    effectuee ? :remediation : :difficulte
+  end
+
+  def qualification
+    return dispositif_de_remediation if effectuee
+    return difficulte unless effectuee
+  end
 end

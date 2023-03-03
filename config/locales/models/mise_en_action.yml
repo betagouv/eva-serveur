@@ -7,7 +7,7 @@ fr:
           formation_metier: Formation métier / qualifiante
           dispositif_remobilisation: Dispositif de remobilisation (E2C, EPIDE, Promo 16-18, etc.)
           levee_freins_peripheriques: Levée de freins périphériques
-        difficultes:
+        difficulte:
           aucune_offre_formation: Aucune offre de formation compétences de base disponible
           offre_formation_inaccessible: Offre de formation inaccessible (financement, distance, etc.)
           freins_peripheriques: Freins périphériques (mobilité, logement, santé, etc.)

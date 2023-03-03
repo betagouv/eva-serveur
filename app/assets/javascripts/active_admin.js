@@ -15,6 +15,8 @@
 
 //= require chartkick
 //= require Chart.bundle
+//= require i18n
+//= require i18n/translations
 
 jQuery.datetimepicker.setLocale('fr');
 

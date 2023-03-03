@@ -1,14 +1,16 @@
 <div class='mise-en-action__texte d-flex justify-content-center text-primary text-center' data-reponse="">
-  <% classe_reponse_oui = evaluation.a_mise_en_action? && effectuee_avec_dispositif_remediation?(evaluation) ? '' : 'hidden' %>
-  <div data-reponse="true" class="mise-en-action <%= classe_reponse_oui %>">
-    <%= t('.reponse_oui_html') %><br>
-    (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
-  </div>
-  <% classe_reponse_non = evaluation.a_mise_en_action? && non_effectuee_avec_difficulte?(evaluation) ? '' : 'hidden' %>
-  <div data-reponse="false" class="mise-en-action <%= classe_reponse_non %>">
-    <%= t('.reponse_non_html') %><br>
-    (<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)
-  </div>
+  <%= render partial: 'components/modification_mise_en_action',
+    locals: { reponse_mise_en_action: true,
+              mise_en_action: evaluation&.mise_en_action,
+              affiche_qualification: affiche_qualification,
+              modification_affichee: evaluation.a_mise_en_action? && effectuee_avec_dispositif_remediation?(evaluation)
+            } %>
+  <%= render partial: 'components/modification_mise_en_action',
+    locals: { reponse_mise_en_action: false,
+              mise_en_action: evaluation&.mise_en_action,
+              affiche_qualification: affiche_qualification,
+              modification_affichee: evaluation.a_mise_en_action? && non_effectuee_avec_difficulte?(evaluation) } %>
+
   <% classe_reponse_en_attente = evaluation.a_mise_en_action? && mise_en_action_avec_qualification?(evaluation) ? 'hidden' : 'd-flex' %>
   <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? ' bouton-outline--main' : '' %>
   <% classe_reponse_non = evaluation.a_mise_en_action? && !evaluation.mise_en_action.effectuee? ? ' bouton-outline--main' : '' %>

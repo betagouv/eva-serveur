@@ -14,7 +14,7 @@ class MiseEnAction
       when :remediation
         @question = I18n.t('question.remediation')
         @reponses = MiseEnAction.dispositifs_de_remediation.excluding('indetermine')
-      when :difficultes
+      when :difficulte
         @question = I18n.t('question.difficulte')
         @reponses = MiseEnAction.difficultes.excluding('indetermine')
       end

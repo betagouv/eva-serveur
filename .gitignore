@@ -44,4 +44,7 @@ dump.rdb
 # Ignore storybook
 **/*.stories.json
 
+# Ignore js translations
+/public/javascripts
+
 node_modules/

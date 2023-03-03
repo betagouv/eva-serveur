@@ -1,6 +1,6 @@
-function afficheModificationReponse(reponse, evaluationId) {
+function afficheModificationReponse(reponseMiseEnAction, evaluationId) {
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
-  $(`#${evaluationId} div[data-reponse='${reponse}']`).removeClass('hidden');
+  $(`#${evaluationId} div[data-reponse='${reponseMiseEnAction}']`).removeClass('hidden').addClass('d-flex');
   $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--en-attente');
   $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--succes');
 }
@@ -27,7 +27,7 @@ function fermeQcm(evaluationId) {
 
 function modifieReponseMiseEnAction(evaluationId) {
   $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
-  $(`#${evaluationId} .mise-en-action`).addClass('hidden');
+  $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
   $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--succes');
   $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--en-attente');
@@ -44,7 +44,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     data: data,
     dataType: "json",
     success: function () {
-      const qcm = reponse ? 'remediation' : 'difficultes';
+      const qcm = reponse ? 'remediation' : 'difficulte';
       ouvreQcm(evaluationId, qcm, reponse);
     }
   });
@@ -61,19 +61,33 @@ function activeBoutonValider() {
   });
 }
 
-function enregistreQualificationMiseEnAction(evaluationId, reponse, $bouton) {
-  const effectuee = $bouton.closest('.qcm')[0].classList.contains('questions-remediation');
-  const action = effectuee ? 'renseigner_remediation' : 'renseigner_difficulte'
+function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer }) {
+  const qcm = recupereQcm($bouton)
+  const reponse = ignorer ? 'indetermine' : reponseSelectionnee(evaluationId, qcm);
+  const action = qcm == 'remediation' ? 'renseigner_remediation' : 'renseigner_difficulte'
+
   $.ajax({
     method: 'PATCH',
     url: `/pro/admin/evaluations/${evaluationId}/${action}`,
     data: { reponse },
     dataType: "json",
     success: function () {
-      afficheModificationReponse(effectuee, evaluationId);
+      afficheModificationReponse(miseEnActionEffectuee(qcm), evaluationId);
       fermeQcm(evaluationId);
     }
   });
+}
+
+function recupereQcm($bouton) {
+  return $bouton.closest('.qcm')[0].classList.contains('questions-remediation') ? 'remediation' : 'difficulte';
+};
+
+function reponseSelectionnee(evaluationId, qcm) {
+  return $(`#${evaluationId} .questions-${qcm} input[name=reponse_qcm]:checked`).val();
+};
+
+function miseEnActionEffectuee(qcm) {
+  return qcm == 'remediation';
 }
 
 function ecouteBoutons(boutons, callback) {
@@ -88,11 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".reponse-mise-en-action"), enregistreReponseMiseEnAction);
   ecouteBoutons($(".modifier-mise-en-action"), modifieReponseMiseEnAction);
   ecouteBoutons($(".valide-qcm"), function(evaluationId, $bouton) {
-    const reponse = $(`#${evaluationId} input[name=reponse_qcm]:checked`).val();
-    enregistreQualificationMiseEnAction(evaluationId, reponse, $bouton);
+    enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer: false });
   });
   ecouteBoutons($(".bouton-fermer"), function(evaluationId, $bouton) {
-    enregistreQualificationMiseEnAction(evaluationId, 'indetermine', $bouton)
+    enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer: true })
   });
   activeBoutonValider();
 });

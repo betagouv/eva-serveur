@@ -17,18 +17,24 @@
   }
 
   &.red {
-    @include tag-couleur($couleur-accent-erreur, $couleur-accent-erreur)
+    @include tag-couleur-contour($couleur-accent-erreur, $couleur-accent-erreur)
   }
 
   &.green {
-    @include tag-couleur($eva_dark_green, $eva_green)
+    @include tag-couleur-contour($eva_dark_green, $eva_green)
   }
 
 }
 
-@mixin tag-couleur($color, $border-color) {
+@mixin tag-couleur-contour($color, $border-color) {
   color: $color;
   border-color: $border-color;
+}
+
+@mixin tag-couleur-plein($color) {
+  background-color: $color;
+  border: none;
+  color: $eva_dark;
 }
 
 .status_tag {
@@ -61,15 +67,15 @@
 
 .tag-categorie {
   &.assistance {
-    @include tag-couleur($couleur-accent-erreur, $couleur-accent-erreur)
+    @include tag-couleur-contour($couleur-accent-erreur, $couleur-accent-erreur)
   }
 
   &.blog, &.orange {
-    @include tag-couleur($eva_dark_orange, $couleur-warning)
+    @include tag-couleur-contour($eva_dark_orange, $couleur-warning)
   }
 
   &.evolution {
-    @include tag-couleur($eva_dark_green, $eva_green)
+    @include tag-couleur-contour($eva_dark_green, $eva_green)
   }
 
   &.no, &.yes {

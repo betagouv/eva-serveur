@@ -4,7 +4,7 @@
       <div class='col d-flex'>
         <span class='carte__nom'><%= link_to @ressource.nom.truncate(30), admin_evaluation_path(@ressource) %></span>
       </div>
-      <%= render partial: 'components/boutons_mise_en_action', locals: { evaluation: @ressource } %>
+      <%= render partial: 'components/reponse_mise_en_action', locals: { evaluation: @ressource, affiche_qualification: false } %>
     </div>
   </div>
   <%= content %>

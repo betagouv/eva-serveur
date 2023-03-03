@@ -50,4 +50,44 @@ describe MiseEnAction, type: :model do
       end
     end
   end
+
+  describe '#qualification' do
+    context 'quand la mise en action est effectuee' do
+      let!(:mise_en_action) do
+        create :mise_en_action, effectuee: true, dispositif_de_remediation: 'formation_metier'
+      end
+
+      it 'renvoie le dispositif de remédiation' do
+        expect(mise_en_action.qualification).to eq 'formation_metier'
+      end
+    end
+
+    context "quand la mise en action n'est pas effectuee" do
+      let!(:mise_en_action) do
+        create :mise_en_action, effectuee: false, difficulte: 'freins_peripheriques'
+      end
+
+      it 'renvoie la difficulte' do
+        expect(mise_en_action.qualification).to eq 'freins_peripheriques'
+      end
+    end
+  end
+
+  describe '#questionnaire' do
+    let!(:mise_en_action) { create :mise_en_action, effectuee: true }
+
+    context 'quand la mise en action est effectuee' do
+      it 'renvoie :remediation' do
+        expect(mise_en_action.questionnaire).to eq :remediation
+      end
+    end
+
+    context "quand la mise en action n'est pas effectuee" do
+      before { mise_en_action.update effectuee: false }
+
+      it 'renvoie :difficulte' do
+        expect(mise_en_action.questionnaire).to eq :difficulte
+      end
+    end
+  end
 end

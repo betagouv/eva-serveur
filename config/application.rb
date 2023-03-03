@@ -63,6 +63,7 @@ module EvaServeur
     Rails.autoloaders.main.ignore(Rails.root.join('app/controllers/active_admin/**/*'))
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
+    config.middleware.use I18n::JS::Middleware
 
     config.view_component_storybook.stories_path = Rails.root.join("spec/components/stories")
 

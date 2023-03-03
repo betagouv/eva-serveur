@@ -16,10 +16,10 @@ describe MiseEnAction::Questionnaire, type: :model do
       end
     end
 
-    context 'quand le nom est difficultes' do
+    context 'quand le nom est difficulte' do
       it 'récupére la question et les réponses associées' do
         question = 'Quelle difficulté avez-vous rencontré ?'
-        questionnaire = MiseEnAction::Questionnaire.new(:difficultes)
+        questionnaire = MiseEnAction::Questionnaire.new(:difficulte)
         expect(questionnaire.question).to eq(question)
         expect(questionnaire.reponses.values).to eq(%w[aucune_offre_formation
                                                        offre_formation_inaccessible

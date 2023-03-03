@@ -59,12 +59,13 @@ fr:
       description: |
         Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :
       lien: https://l.incubateur.net/eva-orientation
-    boutons_mise_en_action:
+    reponse_mise_en_action:
         bouton_oui: Oui
         bouton_non: Non
+    modification_mise_en_action:
         modifier_reponse: Modifier votre réponse
-        reponse_oui_html: <strong>Oui</strong> vous avez trouvé une solution
-        reponse_non_html: <strong>Non</strong> vous n'avez pas trouvé de solution
+        reponse_true_html: <strong>Oui</strong> vous avez trouvé une solution
+        reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
     prise_en_main:
       titre: Bienvenue sur eva !
       sous_titre: Bien débuter

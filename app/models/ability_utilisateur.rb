@@ -23,7 +23,7 @@ class AbilityUtilisateur
     can :create, Campagne
     can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
     can %i[update read], Campagne, compte_id: compte.id
-    can :destroy, Campagne, nombre_evaluations: 0
+    can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
   end
 
   def droits_generiques(compte)

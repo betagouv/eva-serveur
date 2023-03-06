@@ -96,8 +96,7 @@
   .tag {
     $largeur-panel: 18.125rem;
     $padding: 1rem;
-    display: inline-block;
-    @include tronque;
+    @include tronque();
     display: inline-block;
     max-width: calc(#{ $largeur-panel - ($padding * 2) });
     padding: 0.25rem 1rem;

@@ -87,8 +87,8 @@ ActiveAdmin.register Evaluation do
 
   xls(i18n_scope: %i[active_admin xls evaluation]) do
     whitelist
-    column('structure') { |evaluation| evaluation.campagne.compte.structure.nom }
-    column(:campagne) { |evaluation| evaluation.campagne.libelle }
+    column('structure') { |evaluation| evaluation.campagne&.compte&.structure&.nom }
+    column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
     column(:completude) do |evaluation|

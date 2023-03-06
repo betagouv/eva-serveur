@@ -1,6 +1,7 @@
 @mixin bloc-evaluation() {
   .evaluation--nom {
     @include tronque();
+    width: 15.25rem;
     font-family: $font-titre;
     font-size: 1.125rem;
     line-height: 1.375rem;
@@ -19,6 +20,8 @@
 
   .evaluation--campagne {
     font-weight: 600;
+    @include tronque();
+    width: 28.75rem;
     @include texte-lg();
 
     &, &:link, &:visited {
@@ -29,11 +32,6 @@
 
   .evaluation--suivi-par {
     margin-left: 1.75rem;
-    margin-top: .5rem;
-  }
-
-  .evaluation--parcours-type {
-    margin-top: 1rem;
   }
 
   .evaluation--suivi-par, .evaluation--parcours-type, .evaluation--created_at {
@@ -56,16 +54,27 @@
 }
 
 #index_table_evaluations {
-  $padding-horizontal : 1rem;
+  $padding-horizontal: 0.625rem;
   thead th { padding: 0 $padding-horizontal .5rem; }
   tbody tr {
     min-height: 4.5rem;
   }
+  .cellule {
+    display: flex;
+    flex-direction: column;
+    height: 2.875rem;
+    justify-content: space-between;
+  }
   .col-nom {
-    max-width: 20rem;
     .ellipse {
       margin-right: .75rem;
     }
+  }
+  td:first-child {
+    padding-left: 1rem;
+  }
+  td:last-child {
+    padding-right: 1rem;
   }
   td {
     padding: .75rem $padding-horizontal;

@@ -36,12 +36,6 @@ fr:
     banniere_confirmation_email:
       renvoyer_email: |
           Renvoyer l’email de confirmation
-      renvoyer_instructions: Renvoyer les instructions de confirmation
-      nouvelle_inscription:
-        titre: Confirmez votre adresse email
-        instructions: 'Consultez votre boîte de réception, nous vous avons envoyé les instructions de confirmation à l’adresse suivante : '
-        email_non_recu: |
-          **Vous n’avez pas reçu notre email ?**
       modification_email:
         email_envoye_a: 'Un email de confirmation a été envoyé à :'
         demande_effectuee: |
@@ -72,27 +66,31 @@ fr:
         progression:
           titre: Débutez eva en 3 étapes
           creation_campagne: Campagne créée
+          confirmation_email: Email confirmé
           test_campagne: Campagne testée
           passations: 4 passations effectuées
         creation_campagne:
-          titre: |
-            ## Créez votre campagne
+          titre: Créez votre campagne
           description: Eva utilise le concept de « campagne » pour regrouper les passations selon leurs objectifs, leurs publics cibles ou les dispositifs mobilisés.
           action: Créer ma campagne
         test_campagne:
-          titre: |
-            ## Testez votre campagne
+          titre: Testez votre campagne
           description: Testez votre campagne en effectuant le parcours
           action: Tester votre campagne
+        confirmation_email:
+          titre: Confirmez votre adresse email
+          description: "Consultez votre boîte de réception, nous vous avons envoyé les instructions de confirmation à l’adresse suivante : %{email}"
+          action: |
+            Renvoyer les instructions de confirmation
+          question: |
+            **Vous n’avez pas reçu notre email ?**
         passations:
-          titre: |
-            ## Organisez 4 passations
+          titre: Organisez 4 passations
           description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « *Vos dernières évaluations* » ci-dessous."
           passations_restantes: |
             **Il vous reste %{passations_restantes} à faire pour valider cette étape !**
         fin:
-          titre: |
-            ## Vous êtes prêt à utiliser eva
+          titre: Vous êtes prêt à utiliser eva
           description: |
             Bravo ! Vous avez terminé ce tutoriel
 

@@ -72,9 +72,34 @@ describe 'Dashboard', type: :feature do
       let!(:campagne) { create :campagne, compte: compte }
       let!(:evaluation) { create_list :evaluation, 1, campagne: campagne }
 
+      it "affiche l'étape valider son email" do
+        visit admin_path
+        expect(compte.confirmed?).to be false
+        expect(compte.unconfirmed_email).to be nil
+        expect(page).not_to have_content('Testez votre campagne')
+        expect(page).to have_content('Confirmez votre adresse email')
+        expect(page).not_to have_content('Testez votre campagne')
+      end
+
+      it "redirige vers la page de renvoi des instructions avec l'email pré-rempli" do
+        visit admin_path
+        click_on 'Renvoyer les instructions de confirmation'
+
+        expect(page).to have_current_path(
+          new_compte_confirmation_path(email: compte.email_a_confirmer)
+        )
+      end
+    end
+
+    context "après l'étape de confirmation d'email" do
+      let!(:campagne) { create :campagne, compte: compte }
+      let!(:evaluation) { create_list :evaluation, 1, campagne: campagne }
+
+      before { compte.update(confirmed_at: Time.zone.today) }
+
       it "affiche l'étape organiser 4 passations" do
         visit admin_path
-        expect(page).not_to have_content('Testez votre campagne')
+        expect(page).not_to have_content('Confirmez votre email')
         expect(page).to have_content('Organisez 4 passations')
         expect(page).not_to have_content('fin')
       end
@@ -83,6 +108,8 @@ describe 'Dashboard', type: :feature do
     context "j'ai déjà créé une campagne et j'ai au moins 4 évaluations" do
       let!(:campagne) { create :campagne, compte: compte }
       let!(:evaluation) { create_list :evaluation, 4, campagne: campagne }
+
+      before { compte.update(confirmed_at: Time.zone.today) }
 
       it "affiche l'écran de fin" do
         visit admin_path
@@ -137,53 +164,6 @@ describe 'Dashboard', type: :feature do
         'Pour des questions relatives au RGPD ainsi que pour plus de fluidité, ' \
         'les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.'
       )
-    end
-  end
-
-  describe "Confirmation d'email" do
-    context "quand mon compte n'a jamais été confirmé" do
-      before do
-        create :compte_conseiller, confirmed_at: nil, structure: ma_structure
-        visit admin_path
-      end
-
-      it "affiche un message d'alerte" do
-        expect(compte.confirmed?).to be false
-        expect(compte.unconfirmed_email).to be nil
-        expect(page).to have_content('Confirmez votre adresse email')
-      end
-
-      it "redirige vers la page de renvoi des instructions avec l'email pré-rempli" do
-        click_on 'Renvoyer les instructions de confirmation'
-
-        expect(page).to have_current_path(
-          new_compte_confirmation_path(email: compte.email_a_confirmer)
-        )
-      end
-    end
-
-    context "quand une demande de modification d'email est en cours" do
-      let!(:compte) do
-        create :compte_conseiller, confirmed_at: Date.current - 1.day, structure: ma_structure,
-                                   unconfirmed_email: 'nouveau@mail.com'
-      end
-
-      it "affiche un message d'alerte" do
-        visit admin_path
-        expect(compte.confirmed?).to be true
-        expect(page).to have_content('Confirmez votre adresse email')
-      end
-    end
-
-    context 'quand mon compte est confirmé' do
-      let!(:compte) do
-        create :compte_conseiller, confirmed_at: Date.current - 1.day, structure: ma_structure
-      end
-
-      it "n'affiche pas de message d'alerte" do
-        visit admin_path
-        expect(page).not_to have_content('Confirmez votre adresse email')
-      end
     end
   end
 end

@@ -11,7 +11,7 @@
     }
   }
 
-  input:checked + .tag { @include tag-couleur-plein($eva_green) }
+  input:checked + .tag { @include tag-couleur-plein($eva_green); }
 
   .tag {
     cursor: pointer;

@@ -31,15 +31,17 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     ecouteBoutons($(".valide-qcm"), function(evaluationId, $bouton) {
-      const qcm = recupereQcm($bouton)
+      const effectuee = miseEnActionEffectuee($bouton)
+      const qcm = nomQcm(effectuee)
       const reponse = reponseSelectionnee(evaluationId, qcm);
       const traduction = I18n.t(`activerecord.attributes.mise_en_action.${qcm}.${reponse}`)
-      $(`div[data-reponse='${miseEnActionEffectuee(qcm)}'] .tag`).removeClass('hidden').text(traduction);
+      $(`div[data-reponse='${effectuee}'] .tag`).removeClass('hidden').text(traduction);
     });
 
     ecouteBoutons($(".bouton-fermer"), function(evaluationId, $bouton) {
-      const qcm = recupereQcm($bouton)
-      $(`div[data-reponse='${miseEnActionEffectuee(qcm)}'] .tag`).addClass('hidden')
+      const effectuee = miseEnActionEffectuee($bouton)
+      const qcm = nomQcm(effectuee)
+      $(`div[data-reponse='${effectuee}'] .tag`).addClass('hidden')
     });
   });
 </script>

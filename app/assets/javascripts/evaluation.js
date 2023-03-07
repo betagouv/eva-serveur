@@ -44,7 +44,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
     data: data,
     dataType: "json",
     success: function () {
-      const qcm = reponse ? 'remediation' : 'difficulte';
+      const qcm = nomQcm(reponse)
       ouvreQcm(evaluationId, qcm, reponse);
     }
   });
@@ -62,32 +62,32 @@ function activeBoutonValider() {
 }
 
 function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer }) {
-  const qcm = recupereQcm($bouton)
+  const effectuee = miseEnActionEffectuee($bouton)
+  const qcm = nomQcm(effectuee)
   const reponse = ignorer ? 'indetermine' : reponseSelectionnee(evaluationId, qcm);
-  const action = qcm == 'remediation' ? 'renseigner_remediation' : 'renseigner_difficulte'
 
   $.ajax({
     method: 'PATCH',
-    url: `/pro/admin/evaluations/${evaluationId}/${action}`,
+    url: `/pro/admin/evaluations/${evaluationId}/renseigner_${qcm}`,
     data: { reponse },
     dataType: "json",
     success: function () {
-      afficheModificationReponse(miseEnActionEffectuee(qcm), evaluationId);
+      afficheModificationReponse(effectuee, evaluationId);
       fermeQcm(evaluationId);
     }
   });
 }
 
-function recupereQcm($bouton) {
-  return $bouton.closest('.qcm')[0].classList.contains('questions-remediation') ? 'remediation' : 'difficulte';
+function nomQcm(miseEnActionEffectuee) {
+  return miseEnActionEffectuee ? 'remediation' : 'difficulte';
 };
 
 function reponseSelectionnee(evaluationId, qcm) {
   return $(`#${evaluationId} .questions-${qcm} input[name=reponse_qcm]:checked`).val();
 };
 
-function miseEnActionEffectuee(qcm) {
-  return qcm == 'remediation';
+function miseEnActionEffectuee($bouton) {
+  return $bouton.closest('.qcm')[0].classList.contains('questions-remediation')
 }
 
 function ecouteBoutons(boutons, callback) {

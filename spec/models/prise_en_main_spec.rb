@@ -26,9 +26,18 @@ describe PriseEnMain do
       it { expect(prise_en_main.etape_en_cours).to eq 'test_campagne' }
     end
 
-    context "quand il y a moins de 4 évaluations et qu'il y a une campagne" do
+    context "quand il y a moins de 4 évaluations, qu'il y a une campagne
+      mais que le compte n'est pas confirmé" do
       let(:nombre_campagnes) { 1 }
       let(:nombre_evaluations) { 3 }
+
+      it { expect(prise_en_main.etape_en_cours).to eq 'confirmation_email' }
+    end
+
+    context 'quand le compte est confirmé' do
+      let(:nombre_campagnes) { 1 }
+      let(:nombre_evaluations) { 3 }
+      let(:compte) { Compte.new(confirmed_at: Time.zone.now) }
 
       it { expect(prise_en_main.etape_en_cours).to eq 'passations' }
     end

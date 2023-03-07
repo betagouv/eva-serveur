@@ -3,6 +3,7 @@
 scope = 'components.prise_en_main'
 lien_action ||= nil
 lien_description ||= nil
+email ||= nil
 options_lien ||= {}
 options = { class: 'bouton bouton-arrondi' }.merge(options_lien)
 theme = etape_en_cours == PriseEnMain::ETAPES.last ? 'succes' : 'orange'
@@ -11,14 +12,15 @@ carte_entete_classes = "d-flex align-items-center justify-content-between bg-#{t
 div class: 'carte-prise-en-main' do
   div class: "carte__etape border border-right-0 border-#{theme}" do
     div class: "carte__entete #{carte_entete_classes}" do
-      div do
+      div class: 'carte__titres' do
         h2 t('sous_titre', scope: scope), class: 'text-white'
-        text_node md t("etapes.#{etape_en_cours}.titre", scope: scope)
+        h2 t("etapes.#{etape_en_cours}.titre", scope: scope)
       end
       text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration'
     end
     div class: 'carte__description' do
-      text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, scope: scope)
+      text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, email: email,
+                                                             scope: scope)
       if etape_en_cours == 'passations'
         nombre = prise_en_main.nombre_passations_restantes
         div class: 'text-primary' do
@@ -28,7 +30,12 @@ div class: 'carte-prise-en-main' do
         end
       end
       if lien_action
-        div class: 'carte__action d-flex justify-content-end mt-6' do
+        alignement = etape_en_cours == 'confirmation_email' ? 'between' : 'end'
+        div class: "carte__action d-flex justify-content-#{alignement} align-items-center mt-6" do
+          if etape_en_cours == 'confirmation_email'
+            span md t("etapes.#{etape_en_cours}.question",
+                      scope: scope)
+          end
           text_node link_to(t("etapes.#{etape_en_cours}.action", scope: scope), lien_action,
                             options)
         end
@@ -36,7 +43,7 @@ div class: 'carte-prise-en-main' do
     end
   end
 
-  div class: 'carte__progression w-100 h-100' do
+  div class: 'carte__progression w-100 h-100 rounded-0' do
     h3 t('etapes.progression.titre', scope: scope)
     ul do
       PriseEnMain::ETAPES.each do |etape|

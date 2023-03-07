@@ -20,8 +20,14 @@ $grid-gutter-width: 1.25rem;
       border-bottom-left-radius: 0.5rem;
     }
     &__illustration {
-      width: 11rem;
+      width: 10.938rem;
       height: 10.125rem;
+    }
+    &__titres {
+      width: 20.5rem;
+    }
+    &__action a {
+      max-width: 14rem;
     }
     &__progression {
       background-color: $eva_main_blue;

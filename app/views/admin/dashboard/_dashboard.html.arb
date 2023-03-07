@@ -1,15 +1,5 @@
 # frozen_string_literal: true
 
-if current_compte.email_non_confirme?
-  div class: 'row m-0' do
-    div class: 'offset-1 col-6' do
-      div class: 'card mb-5' do
-        render 'components/banniere_confirmation_email', demande: :nouvelle_inscription
-      end
-    end
-  end
-end
-
 if current_compte.validation_refusee?
   render 'validation_refusee'
 elsif prise_en_main.en_cours?

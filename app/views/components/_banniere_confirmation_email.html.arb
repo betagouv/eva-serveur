@@ -5,12 +5,13 @@ div class: 'card__banner card__banner--alert w-100 d-flex align-items-center' do
   when :nouvelle_inscription
     div svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
     div do
-      h4 t(".#{demande}.titre")
-      text_node md "#{t(".#{demande}.instructions")}<u>#{current_compte.email_a_confirmer}</u>"
+      scope = 'components.prise_en_main.etapes.confirmation_email'
+      h4 t('titre', scope: scope), class: 'banner__titre'
+      text_node md t('description', scope: scope, email: current_compte.email_a_confirmer)
       div class: 'd-flex justify-content-between align-items-center banner__action' do
-        div md t(".#{demande}.email_non_recu")
+        div md t('question', scope: scope)
         div do
-          link_to t('.renvoyer_instructions'),
+          link_to t('action', scope: scope),
                   new_confirmation_path(current_compte, email: current_compte.email_a_confirmer),
                   class: 'bouton bouton-principal text-center'
         end

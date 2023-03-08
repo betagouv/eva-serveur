@@ -9,10 +9,10 @@ context.instance_eval do
     campagne = evaluation.campagne
     div class: 'cellule' do
       div link_to(campagne.display_name, admin_campagne_path(campagne),
-                  class: 'evaluation--campagne'),
+                  class: 'evaluation__campagne'),
           class: 'd-flex align-items-center'
       parcours_type = campagne.parcours_type
-      div parcours_type.display_name, class: 'evaluation--parcours-type' if parcours_type.present?
+      div parcours_type.display_name, class: 'evaluation__parcours-type' if parcours_type.present?
     end
   end
   column :created_at do |evaluation|
@@ -35,6 +35,6 @@ context.instance_eval do
         end
       end
     end
-    div(l(evaluation.created_at), class: 'evaluation--created_at')
+    div(l(evaluation.created_at), class: 'evaluation__created_at')
   end
 end

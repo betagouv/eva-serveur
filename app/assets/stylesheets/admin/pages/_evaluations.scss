@@ -1,5 +1,5 @@
 @mixin bloc-evaluation() {
-  .evaluation--nom {
+  .evaluation__nom {
     @include tronque();
     width: 15.25rem;
     font-family: $font-titre;
@@ -18,7 +18,7 @@
     }
   }
 
-  .evaluation--campagne {
+  .evaluation__campagne {
     font-weight: 600;
     @include tronque();
     width: 28.75rem;
@@ -30,11 +30,11 @@
     }
   }
 
-  .evaluation--suivi-par {
+  .evaluation__suivi-par {
     margin-left: 1.75rem;
   }
 
-  .evaluation--suivi-par, .evaluation--parcours-type, .evaluation--created_at {
+  .evaluation__suivi-par, .evaluation__parcours-type, .evaluation__created_at {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;
@@ -46,7 +46,7 @@
     }
   }
 
-  .evaluation--created_at {
+  .evaluation__created_at {
     text-align: right;
     white-space: nowrap;
     margin-top: .75rem;

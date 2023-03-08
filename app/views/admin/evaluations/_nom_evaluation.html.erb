@@ -6,12 +6,12 @@
                    tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
          ))%>
     <% end %>
-    <%= link_to admin_evaluation_path(evaluation), class: "evaluation--nom" do %>
+    <%= link_to admin_evaluation_path(evaluation), class: "evaluation__nom" do %>
       <%= render(NomAnonymisableComponent.new(evaluation)) %>
     <% end %>
   </div>
   <% responsable = evaluation.responsable_suivi %>
-  <div class= "evaluation--suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
+  <div class= "evaluation__suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
     <% if responsable.present? %>
       <%= t('.suivi_par') %> <%= link_to(responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire') %>
     <% else %>

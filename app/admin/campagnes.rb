@@ -25,7 +25,7 @@ ActiveAdmin.register Campagne do
 
   action_item :voir_evaluations, only: :show do
     link_to I18n.t('admin.campagnes.action_items.voir_evaluations',
-                   count: resource.nombre_evaluations),
+                   count: Evaluation.where(campagne: resource).count),
             admin_evaluations_path(q: { campagne_id_eq: resource })
   end
 

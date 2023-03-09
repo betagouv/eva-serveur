@@ -6,7 +6,7 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom
     if current_compte.superadmin?
       f.input :beneficiaire, required: false,
-                             collection: beneficiaires_accessibles
+                             collection: beneficiaires_possibles
       f.input :statut
     end
     f.input :responsable_suivi, collection: responsables_suivi_possibles

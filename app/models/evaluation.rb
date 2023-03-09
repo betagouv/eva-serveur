@@ -80,6 +80,13 @@ class Evaluation < ApplicationRecord
     Compte.where(structure_id: campagne&.compte&.structure_id).where(statut_validation: :acceptee)
   end
 
+  def beneficiaires_possibles
+    Beneficiaire.joins(evaluations: { campagne: :compte })
+                .where(evaluations: { campagnes: { comptes: {
+                         structure_id: campagne&.compte&.structure_id
+                       } } })
+  end
+
   def self.tableau_de_bord(ability)
     accessible_by(ability)
       .non_anonymes

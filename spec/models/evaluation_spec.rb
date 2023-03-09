@@ -186,4 +186,18 @@ describe Evaluation do
                 evaluation_sans_mise_en_action.id]
     end
   end
+
+  describe '#beneficiaires_possibles' do
+    let(:compte) { create :compte_admin }
+    let(:campagne) { create :campagne, compte: compte }
+    let(:evaluation) { create :evaluation, campagne: campagne }
+    let(:autre_evaluation) { create :evaluation, campagne: campagne }
+    let(:eval_autre_structure) { create :evaluation }
+
+    it 'retourne les bénéficiaires de la structure' do
+      expect(evaluation.beneficiaires_possibles).to include(evaluation.beneficiaire)
+      expect(evaluation.beneficiaires_possibles).to include(autre_evaluation.beneficiaire)
+      expect(evaluation.beneficiaires_possibles).not_to include(eval_autre_structure.beneficiaire)
+    end
+  end
 end

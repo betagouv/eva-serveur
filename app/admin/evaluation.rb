@@ -136,7 +136,7 @@ ActiveAdmin.register Evaluation do
   controller do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
-                  :campagnes_accessibles, :beneficiaires_accessibles, :traduction_niveau,
+                  :campagnes_accessibles, :beneficiaires_possibles, :traduction_niveau,
                   :campagne_avec_competences_transversales?, :campagne_avec_positionnement?,
                   :responsables_suivi_possibles
 
@@ -217,8 +217,8 @@ ActiveAdmin.register Evaluation do
       @responsables_suivi_possibles ||= resource.responsables_suivi
     end
 
-    def beneficiaires_accessibles
-      @beneficiaires_accessibles ||= Beneficiaire.accessible_by(current_ability)
+    def beneficiaires_possibles
+      @beneficiaires_possibles ||= resource.beneficiaires_possibles
     end
   end
 end

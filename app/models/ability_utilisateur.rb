@@ -38,7 +38,7 @@ class AbilityUtilisateur
     return unless compte.validation_acceptee?
 
     can %i[read mise_en_action supprimer_responsable_suivi
-           ajouter_responsable_suivi renseigner_remediation renseigner_difficulte],
+           ajouter_responsable_suivi renseigner_qualification],
         Evaluation,
         campagne: comptes_de_meme_structure(compte)
     return unless compte.admin?
@@ -89,7 +89,7 @@ class AbilityUtilisateur
     cannot(:read, SourceAide)
     cannot(:read, Aide::QuestionFrequente)
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
-              renseigner_remediation renseigner_difficulte],
+              renseigner_qualification],
            Evaluation)
   end
 

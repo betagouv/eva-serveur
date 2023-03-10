@@ -43,7 +43,8 @@ class MiseEnAction < ApplicationRecord
   end
 
   def qualification
-    return remediation if effectuee
-    return difficulte unless effectuee
+    return if effectuee.nil?
+
+    send(questionnaire)
   end
 end

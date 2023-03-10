@@ -125,12 +125,9 @@ ActiveAdmin.register Evaluation do
     redirect_to admin_evaluation_path(resource)
   end
 
-  member_action :renseigner_remediation, method: :patch do
-    resource.mise_en_action.update(remediation: params[:reponse])
-  end
-
-  member_action :renseigner_difficulte, method: :patch do
-    resource.mise_en_action.update(difficulte: params[:reponse])
+  member_action :renseigner_qualification, method: :patch do
+    mise_en_action = resource.mise_en_action
+    mise_en_action.update(mise_en_action.questionnaire => params[:reponse])
   end
 
   controller do

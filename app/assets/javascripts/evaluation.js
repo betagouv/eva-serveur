@@ -63,12 +63,11 @@ function activeBoutonValider() {
 
 function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer }) {
   const effectuee = miseEnActionEffectuee($bouton)
-  const qcm = nomQcm(effectuee)
-  const reponse = ignorer ? 'indetermine' : reponseSelectionnee(evaluationId, qcm);
+  const reponse = ignorer ? 'indetermine' : reponseSelectionnee(evaluationId, nomQcm(effectuee));
 
   $.ajax({
     method: 'PATCH',
-    url: `/pro/admin/evaluations/${evaluationId}/renseigner_${qcm}`,
+    url: `/pro/admin/evaluations/${evaluationId}/renseigner_qualification`,
     data: { reponse },
     dataType: "json",
     success: function () {

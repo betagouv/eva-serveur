@@ -162,6 +162,7 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente) }
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
     it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
+    it { is_expected.not_to be_able_to(:renseigner_qualification, Evaluation) }
     it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Beneficiaire) }
   end
 
@@ -199,6 +200,7 @@ describe Ability do
       it { is_expected.to be_able_to(:update, evaluation) }
       it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
       it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation) }
+      it { is_expected.to be_able_to(:renseigner_qualification, evaluation) }
     end
   end
 

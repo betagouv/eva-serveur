@@ -233,31 +233,35 @@ describe 'Evaluation', type: :request do
       end
     end
 
-    describe '#renseigner_remediation' do
-      let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
-      let(:dipositif_remediation) { 'formation_metier' }
+    describe '#renseigner_qualification' do
+      context 'quand la mise en action est effectuee' do
+        let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
+        let(:remediation) { 'formation_metier' }
 
-      it 'peut renseigner le dispositif de remédiation' do
-        expect do
-          patch renseigner_remediation_admin_evaluation_path(evaluation),
-                params: { reponse: dipositif_remediation }
-        end.to change { evaluation.reload.mise_en_action.remediation }
-           .from(nil)
-          .to(dipositif_remediation)
+        it 'peut renseigner le dispositif de remédiation' do
+          expect do
+            patch renseigner_qualification_admin_evaluation_path(evaluation),
+                  params: { reponse: remediation }
+          end.to change { evaluation.reload.mise_en_action.remediation }
+             .from(nil)
+            .to(remediation)
+        end
       end
-    end
 
-    describe '#renseigner_difficulte' do
-      let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
-      let(:difficulte) { 'aucune_offre_formation' }
+      context 'quand la mise en action n est pas effectuee' do
+        let(:evaluation) do
+          create :evaluation, :avec_mise_en_action, effectuee: false, campagne: ma_campagne
+        end
+        let(:difficulte) { 'aucune_offre_formation' }
 
-      it 'peut renseigner la difficulté' do
-        expect do
-          patch renseigner_difficulte_admin_evaluation_path(evaluation),
-                params: { reponse: difficulte }
-        end.to change { evaluation.reload.mise_en_action.difficulte }
-           .from(nil)
-          .to(difficulte)
+        it 'peut renseigner la difficulté' do
+          expect do
+            patch renseigner_qualification_admin_evaluation_path(evaluation),
+                  params: { reponse: difficulte }
+          end.to change { evaluation.reload.mise_en_action.difficulte }
+             .from(nil)
+            .to(difficulte)
+        end
       end
     end
   end

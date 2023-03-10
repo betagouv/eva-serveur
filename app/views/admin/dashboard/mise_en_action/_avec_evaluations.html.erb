@@ -14,7 +14,7 @@
                                          carte_deroulee: mise_en_action_avec_qualification?(evaluation))) do %>
           <%= render(Qcm.new(evaluation,
                              MiseEnAction::Questionnaire.new(:remediation),
-                             qcm_affiche: effectuee_sans_dispositif_remediation?(evaluation),
+                             qcm_affiche: effectuee_sans_remediation?(evaluation),
                              priorite: evaluations.size - index.to_i)) %>
           <%= render(Qcm.new(evaluation,
                              MiseEnAction::Questionnaire.new(:difficulte),

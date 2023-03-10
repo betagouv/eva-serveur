@@ -15,7 +15,7 @@ FactoryBot.define do
       transient do
         effectuee { true }
         repondue_le { Time.zone.local(2023, 1, 1, 12, 0, 0) }
-        dispositif_de_remediation { nil }
+        remediation { nil }
         difficulte { nil }
       end
 
@@ -24,7 +24,7 @@ FactoryBot.define do
         evaluation.mise_en_action.update(
           effectuee: evaluator.effectuee,
           repondue_le: evaluator.repondue_le,
-          dispositif_de_remediation: evaluator.dispositif_de_remediation,
+          remediation: evaluator.remediation,
           difficulte: evaluator.difficulte
         )
       end

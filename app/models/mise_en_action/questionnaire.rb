@@ -13,7 +13,7 @@ class MiseEnAction
       case @nom
       when :remediation
         @question = I18n.t('question.remediation')
-        @reponses = MiseEnAction.dispositifs_de_remediation.excluding('indetermine')
+        @reponses = MiseEnAction.remediations.excluding('indetermine')
       when :difficulte
         @question = I18n.t('question.difficulte')
         @reponses = MiseEnAction.difficultes.excluding('indetermine')

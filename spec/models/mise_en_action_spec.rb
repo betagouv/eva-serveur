@@ -15,20 +15,20 @@ describe MiseEnAction, type: :model do
     should allow_value(false).for(:effectuee)
   end
 
-  describe '#effectuee_avec_dispositif_remediation?' do
+  describe '#effectuee_avec_remediation?' do
     let!(:mise_en_action) { create :mise_en_action, effectuee: true }
 
     context 'quand la mise en action est effectée et a un dispositif de remédiation' do
-      before { mise_en_action.update dispositif_de_remediation: 'formation_metier' }
+      before { mise_en_action.update remediation: 'formation_metier' }
 
       it 'renvoie true' do
-        expect(mise_en_action.effectuee_avec_dispositif_remediation?).to be true
+        expect(mise_en_action.effectuee_avec_remediation?).to be true
       end
     end
 
     context "quand la mise en action est effectée et n'a pas de dispositif de remédiation" do
       it 'renvoie false' do
-        expect(mise_en_action.effectuee_avec_dispositif_remediation?).to be false
+        expect(mise_en_action.effectuee_avec_remediation?).to be false
       end
     end
   end
@@ -54,7 +54,7 @@ describe MiseEnAction, type: :model do
   describe '#qualification' do
     context 'quand la mise en action est effectuee' do
       let!(:mise_en_action) do
-        create :mise_en_action, effectuee: true, dispositif_de_remediation: 'formation_metier'
+        create :mise_en_action, effectuee: true, remediation: 'formation_metier'
       end
 
       it 'renvoie le dispositif de remédiation' do

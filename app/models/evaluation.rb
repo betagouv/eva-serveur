@@ -55,7 +55,7 @@ class Evaluation < ApplicationRecord
   }
   scope :non_anonymes, -> { where(anonymise_le: nil) }
   scope :sans_qualification, lambda { |qualification|
-    effectuee = qualification == :dispositif_de_remediation
+    effectuee = qualification == :remediation
     left_outer_joins(:mise_en_action)
       .where(mises_en_action: { effectuee: effectuee })
       .where(mises_en_action: { qualification => nil })
@@ -88,7 +88,7 @@ class Evaluation < ApplicationRecord
 
   def self.tableau_de_bord_mises_en_action(ability)
     query = accessible_by(ability).illettrisme_potentiel
-    query.sans_qualification(:dispositif_de_remediation)
+    query.sans_qualification(:remediation)
          .or(query.sans_qualification(:difficulte))
          .or(query.sans_mise_en_action)
          .non_anonymes.order(created_at: :desc)

@@ -3,7 +3,7 @@
     locals: { reponse_mise_en_action: true,
               mise_en_action: evaluation&.mise_en_action,
               affiche_qualification: affiche_qualification,
-              modification_affichee: evaluation.a_mise_en_action? && effectuee_avec_dispositif_remediation?(evaluation)
+              modification_affichee: evaluation.a_mise_en_action? && effectuee_avec_remediation?(evaluation)
             } %>
   <%= render partial: 'components/modification_mise_en_action',
     locals: { reponse_mise_en_action: false,

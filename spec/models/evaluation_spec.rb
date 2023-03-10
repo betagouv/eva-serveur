@@ -58,15 +58,31 @@ describe Evaluation do
       end
     end
 
-    describe '.sans_remediation' do
+    describe '.sans_qualification' do
       let!(:evaluation_sans_dispositif) { create :evaluation, :avec_mise_en_action }
       let!(:evaluation_avec_dispositif) do
         create :evaluation, :avec_mise_en_action, dispositif_de_remediation: 'formation_metier'
       end
+      let!(:evaluation_sans_difficulte) do
+        create :evaluation, :avec_mise_en_action, effectuee: false
+      end
+      let!(:evaluation_avec_difficulte) do
+        create :evaluation, :avec_mise_en_action, effectuee: false,
+                                                  difficulte: 'aucune_offre_formation'
+      end
 
-      it 'retourne les évaluations sans dispositifs de remédiation' do
-        expect(described_class.sans_remediation)
-          .to eq [evaluation_sans_dispositif]
+      context 'pour la qualification dispositif de remédiation' do
+        it 'retourne les évaluations effectuees sans dispositifs de remédiation' do
+          expect(described_class.sans_qualification(:dispositif_de_remediation))
+            .to eq [evaluation_sans_dispositif]
+        end
+      end
+
+      context 'pour la qualification difficulte' do
+        it 'retourne les évaluations effectuees sans dispositifs de remédiation' do
+          expect(described_class.sans_qualification(:difficulte))
+            .to eq [evaluation_sans_difficulte]
+        end
       end
     end
 

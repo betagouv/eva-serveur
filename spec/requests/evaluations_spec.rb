@@ -241,7 +241,7 @@ describe 'Evaluation', type: :request do
         expect do
           patch renseigner_remediation_admin_evaluation_path(evaluation),
                 params: { reponse: dipositif_remediation }
-        end.to change { evaluation.reload.mise_en_action.dispositif_de_remediation }
+        end.to change { evaluation.reload.mise_en_action.remediation }
            .from(nil)
           .to(dipositif_remediation)
       end

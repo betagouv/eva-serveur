@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class MiseEnAction < ApplicationRecord
-  DISPOSITIFS_REMEDIATION = %w[formation_competences_de_base formation_metier
-                               dispositif_remobilisation levee_freins_peripheriques
-                               indetermine].freeze
+  REMEDIATIONS = %w[formation_competences_de_base formation_metier
+                    dispositif_remobilisation levee_freins_peripheriques
+                    indetermine].freeze
   DIFFICULTES = %w[aucune_offre_formation offre_formation_inaccessible
                    freins_peripheriques accompagnement_necessaire
                    indetermine].freeze
@@ -15,8 +15,7 @@ class MiseEnAction < ApplicationRecord
 
   before_save :enregistre_date
 
-  enum dispositif_de_remediation: DISPOSITIFS_REMEDIATION.zip(DISPOSITIFS_REMEDIATION).to_h,
-       _suffix: true
+  enum remediation: REMEDIATIONS.zip(REMEDIATIONS).to_h, _suffix: true
   enum difficulte: DIFFICULTES.zip(DIFFICULTES).to_h, _suffix: true
 
   acts_as_paranoid
@@ -27,8 +26,8 @@ class MiseEnAction < ApplicationRecord
     self.repondue_le = Time.zone.now
   end
 
-  def effectuee_avec_dispositif_remediation?
-    effectuee && dispositif_de_remediation.present?
+  def effectuee_avec_remediation?
+    effectuee && remediation.present?
   end
 
   def non_effectuee_avec_difficulte?
@@ -44,7 +43,7 @@ class MiseEnAction < ApplicationRecord
   end
 
   def qualification
-    return dispositif_de_remediation if effectuee
+    return remediation if effectuee
     return difficulte unless effectuee
   end
 end

@@ -10,13 +10,13 @@ module EvaluationHelper
     liste_filtree_illettrisme_potentiel ? false : true
   end
 
-  def effectuee_avec_dispositif_remediation?(ressource)
-    ressource&.mise_en_action&.effectuee_avec_dispositif_remediation?
+  def effectuee_avec_remediation?(ressource)
+    ressource&.mise_en_action&.effectuee_avec_remediation?
   end
 
-  def effectuee_sans_dispositif_remediation?(ressource)
+  def effectuee_sans_remediation?(ressource)
     ressource&.mise_en_action&.effectuee &&
-      ressource&.mise_en_action&.dispositif_de_remediation.blank?
+      ressource&.mise_en_action&.remediation.blank?
   end
 
   def non_effectuee_sans_difficulte?(ressource)
@@ -29,6 +29,6 @@ module EvaluationHelper
   end
 
   def mise_en_action_avec_qualification?(ressource)
-    effectuee_avec_dispositif_remediation?(ressource) || non_effectuee_avec_difficulte?(ressource)
+    effectuee_avec_remediation?(ressource) || non_effectuee_avec_difficulte?(ressource)
   end
 end

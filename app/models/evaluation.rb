@@ -8,10 +8,8 @@ class Evaluation < ApplicationRecord
   NIVEAUX_POSITIONNEMENT = %w[profil1 profil2 profil3 profil4
                               profil_4h profil_4h_plus profil_4h_plus_plus
                               profil_aberrant indetermine].freeze
-  NIVEAUX_COMPLETUDE = %w[incomplete
-                          competences_de_base_incompletes
-                          competences_transversales_incompletes
-                          complete].freeze
+  NIVEAUX_COMPLETUDE = %w[incomplete competences_de_base_incompletes
+                          competences_transversales_incompletes complete].freeze
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
   SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
 
@@ -56,15 +54,11 @@ class Evaluation < ApplicationRecord
       .where(campagnes: { comptes: { structure_id: structures } })
   }
   scope :non_anonymes, -> { where(anonymise_le: nil) }
-  scope :sans_remediation, lambda {
+  scope :sans_qualification, lambda { |qualification|
+    effectuee = qualification == :dispositif_de_remediation
     left_outer_joins(:mise_en_action)
-      .where(mises_en_action: { effectuee: true })
-      .where(mises_en_action: { dispositif_de_remediation: nil })
-  }
-  scope :sans_difficulte, lambda {
-    left_outer_joins(:mise_en_action)
-      .where(mises_en_action: { effectuee: false })
-      .where(mises_en_action: { difficulte: nil })
+      .where(mises_en_action: { effectuee: effectuee })
+      .where(mises_en_action: { qualification => nil })
   }
   scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
 
@@ -82,26 +76,23 @@ class Evaluation < ApplicationRecord
 
   def beneficiaires_possibles
     Beneficiaire.joins(evaluations: { campagne: :compte })
-                .where(evaluations: { campagnes: { comptes: {
-                         structure_id: campagne&.compte&.structure_id
-                       } } })
+                .where(evaluations: { campagnes: { comptes:
+                        { structure_id: campagne&.compte&.structure_id } } })
   end
 
   def self.tableau_de_bord(ability)
     accessible_by(ability)
       .non_anonymes
       .order(created_at: :desc)
-      .limit(10)
   end
 
   def self.tableau_de_bord_mises_en_action(ability)
     query = accessible_by(ability).illettrisme_potentiel
-    query.sans_remediation
-         .or(query.sans_difficulte)
+    query.sans_qualification(:dispositif_de_remediation)
+         .or(query.sans_qualification(:difficulte))
          .or(query.sans_mise_en_action)
          .non_anonymes.order(created_at: :desc)
          .includes(:mise_en_action)
-         .limit(6)
   end
 
   def enregistre_mise_en_action(reponse)

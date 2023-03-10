@@ -14,7 +14,7 @@ describe 'Campagne API', type: :request do
       get '/api/campagnes/ete21'
 
       expect(response).to be_ok
-      resultat = JSON.parse(response.body)
+      resultat = response.parsed_body
       expect(resultat['libelle']).to eq('Ma campagne ete 21')
       expect(resultat['code']).to eq('ETE21')
     end
@@ -57,7 +57,7 @@ describe 'Campagne API', type: :request do
       it 'retourne les situations de la campagne' do
         get '/api/campagnes/ete21'
 
-        reponse_json = JSON.parse(response.body)
+        reponse_json = response.parsed_body
 
         expect(reponse_json['situations'].size).to be(3)
         premiere_situation = reponse_json['situations'][0]

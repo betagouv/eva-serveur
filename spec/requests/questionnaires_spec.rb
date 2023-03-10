@@ -12,7 +12,7 @@ describe 'Questionnaires API', type: :request do
       get "/api/questionnaires/#{questionnaire.id}"
 
       expect(response).to be_ok
-      expect(JSON.parse(response.body).size).to be(2)
+      expect(response.parsed_body.size).to be(2)
     end
 
     it "retourne une 404 lorsque le questionnaire n'existe pas" do

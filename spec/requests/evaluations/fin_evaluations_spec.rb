@@ -35,7 +35,7 @@ describe 'Fin Evaluation API', type: :request do
     context 'retourne aucune compétences avec une évaluation sans compétences identifiées' do
       before { post "/api/evaluations/#{evaluation.id}/fin" }
 
-      it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
+      it { expect(response.parsed_body['competences_fortes']).to be_empty }
     end
 
     context 'avec une évaluation avec des compétences identifiées' do
@@ -48,7 +48,7 @@ describe 'Fin Evaluation API', type: :request do
           post "/api/evaluations/#{evaluation.id}/fin"
         end
 
-        it { expect(JSON.parse(response.body)['competences_fortes']).to be_empty }
+        it { expect(response.parsed_body['competences_fortes']).to be_empty }
       end
 
       context 'avec une campagne configurée avec compétences fortes' do
@@ -57,12 +57,12 @@ describe 'Fin Evaluation API', type: :request do
         it 'retourne les compétences triées par ordre de force décroissante' do
           attendues = [Competence::RAPIDITE, Competence::VIGILANCE_CONTROLE,
                        Competence::ORGANISATION_METHODE].map(&:to_s)
-          expect(JSON.parse(response.body)['competences_fortes'].pluck('nom_technique'))
+          expect(response.parsed_body['competences_fortes'].pluck('nom_technique'))
             .to eql(attendues)
         end
 
         it 'envoie aussi le nom et la description des compétences' do
-          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          premiere_competence = response.parsed_body['competences_fortes'][0]
           expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
           expect(premiere_competence['description'])
             .to eql(I18n.t("#{Competence::RAPIDITE}.description",
@@ -71,7 +71,7 @@ describe 'Fin Evaluation API', type: :request do
         end
 
         it "envoie aussi l'URL du picto des compétences" do
-          premiere_competence = JSON.parse(response.body)['competences_fortes'][0]
+          premiere_competence = response.parsed_body['competences_fortes'][0]
           expect(premiere_competence['picto'])
             .to start_with('http://asset_host:port/assets/rapidite')
         end

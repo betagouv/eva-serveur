@@ -5,11 +5,14 @@ Cette application sert de serveur et d'espace d'administration pour eva
 Pour voir les autres projets de eva :
 
 - [la partie cliente](https://github.com/betagouv/eva)
+- [Metabase](https://github.com/betagouv/eva-metabase)
 
 Anciens dépôts que nous n'utilisons plus aujourd'hui :
 
 - [la partie orchestration](https://github.com/betagouv/eva-orchestrateur)
 - [le site web](https://github.com/betagouv/eva-www)
+
+Autre dépendences :
 
 * Base de données et assimilé  
 PostgreSql

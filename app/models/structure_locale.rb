@@ -3,18 +3,19 @@
 class StructureLocale < Structure
   TYPE_NON_COMMUNIQUE = 'non_communique'
   TYPES_STRUCTURES = %w[
-    mission_locale
-    pole_emploi
     AFPA
-    GRETA
     apprentissage
-    organisme_formation
-    SIAE
-    service_insertion_collectivite
-    CRIA
-    orientation_scolaire
     cap_emploi
+    CRIA
     e2c
+    GRETA
+    mission_locale
+    organisme_formation
+    orientation_scolaire
+    PJJ_UEAJ
+    pole_emploi
+    service_insertion_collectivite
+    SIAE
     SMA
     autre
   ].freeze

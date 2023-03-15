@@ -6,7 +6,7 @@ FactoryBot.define do
     sequence(:nom_technique) { |n| "questionnaire_#{n}" }
 
     trait :livraison_avec_redaction do
-      libelle { 'Livraison (MES illettrisme 2)' }
+      libelle { 'Livraison avec rédaction' }
       nom_technique { Questionnaire::LIVRAISON_AVEC_REDACTION }
     end
 

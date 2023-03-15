@@ -6,17 +6,16 @@ describe 'Admin - Campagne', type: :feature do
   let(:structure_conseiller) { create :structure_locale }
   let(:compte_conseiller) { create :compte_admin, structure: structure_conseiller }
   let!(:compte_connecte) { connecte(compte_conseiller) }
-  let!(:ma_campagne) do
-    create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
-  end
-  let!(:campagne) do
-    autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
-    create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller
-  end
-  let!(:evaluation) { create :evaluation, campagne: campagne }
-  let!(:evaluation_conseiller) { create :evaluation, campagne: ma_campagne }
 
   describe 'index' do
+    let!(:ma_campagne) do
+      create :campagne, libelle: 'Amiens 18 juin', code: 'A5RC8', compte: compte_connecte
+    end
+    let!(:campagne) do
+      autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
+      create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller
+    end
+
     context 'en conseiller' do
       before { visit admin_campagnes_path }
 
@@ -47,6 +46,8 @@ describe 'Admin - Campagne', type: :feature do
     end
 
     context 'quelque soit le rôle' do
+      let!(:evaluation) { create :evaluation, campagne: campagne }
+      let!(:evaluation_conseiller) { create :evaluation, campagne: ma_campagne }
       before { visit admin_campagnes_path }
 
       it "affiche le nombre d'évaluation par campagne" do
@@ -89,6 +90,10 @@ describe 'Admin - Campagne', type: :feature do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'CODESUPERADMIN'
           expect(campagne.compte).to eq compte_conseiller
+
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations[0].situation).to eq situation_inventaire
+          expect(situations_configurations[1].situation).to eq situation_maintenance
         end
       end
     end
@@ -143,6 +148,22 @@ describe 'Admin - Campagne', type: :feature do
   end
 
   describe 'modification' do
+    let!(:questionnaire_sans_livraison) { create :questionnaire, :livraison_sans_redaction }
+    let!(:questionnaire_avec_livraison) { create :questionnaire, :livraison_avec_redaction }
+    let!(:situation_livraison) do
+      create :situation_livraison, questionnaire: questionnaire_sans_livraison
+    end
+    let!(:parcours_type) do
+      parcours = create :parcours_type, nom_technique: :parcours_type
+      parcours.situations_configurations.create situation: situation_livraison
+      parcours
+    end
+    let!(:campagne) do
+      autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
+      create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN',
+                        compte: autre_compte_conseiller, parcours_type: parcours_type
+    end
+
     context 'en superadmin' do
       before do
         compte_conseiller.update(role: 'superadmin')
@@ -150,32 +171,43 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       context 'modifie la campagne et ses situations' do
-        let!(:situation) { create :situation_inventaire }
-
         before do
           fill_in :campagne_code, with: 'UNC0D3'
-          click_on 'Modifier la campagne'
+          select 'Livraison avec rédaction',
+                 from: 'campagne_situations_configurations_attributes_0_questionnaire_id'
+          expect do
+            click_on 'Modifier la campagne'
+          end.to raise_error(Bullet::Notification::UnoptimizedQueryError,
+                             /AVOID eager loading detected/)
         end
 
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'UNC0D3'
+
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations[0].situation).to eq situation_livraison
+          expect(situations_configurations[0].questionnaire).to eq questionnaire_avec_livraison
         end
       end
     end
   end
 
   describe 'suppression' do
-    before { evaluation.destroy }
+    let!(:campagne) do
+      autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
+      create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller
+    end
+    let!(:evaluation) { create :evaluation, campagne: campagne }
 
-    context 'quand je supprime une campagne avec des évaluations associées' do
-      before { campagne.destroy }
-
-      it 'soft_delete la campagne' do
-        expect(campagne.deleted_at).not_to be nil
+    context 'quand je supprime une campagne avec des évaluations associées déjà supprimée' do
+      before do
+        evaluation.destroy
+        campagne.destroy
       end
 
-      it 'garde les évaluations soft_deleted associées en mémoire' do
+      it "soft_delete la campagne mais garde l'association avec l'evaluation" do
+        expect(campagne.deleted_at).not_to be nil
         expect(evaluation.campagne_id).to eq campagne.id
       end
     end

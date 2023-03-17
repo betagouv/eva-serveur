@@ -211,7 +211,14 @@ derniere_situtation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_sit
   ]
 end
 
+age = QuestionSaisie.find_or_create_by(nom_technique: 'quel_age') do |question|
+  question.libelle = 'quel age ?'
+  question.intitule = "Tout d'abord, merci de renseigner votre âge."
+  question.suffix_reponse = "ans"
+  question.type_saisie = 'numerique'
+end
+
 Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
   questionnaire.libelle='Sociodémographique et autopositionnement'
-  questionnaire.questions = [genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situtation]
+  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situtation]
 end

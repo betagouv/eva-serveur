@@ -4,7 +4,7 @@ ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :intitule, :message,
-                :intitule_reponse, :description, :reponse_placeholder
+                :suffix_reponse, :description, :reponse_placeholder
 
   filter :libelle
 
@@ -15,8 +15,9 @@ ActiveAdmin.register QuestionSaisie do
       f.input :nom_technique
       f.input :description
       f.input :intitule
-      f.input :intitule_reponse
+      f.input :suffix_reponse
       f.input :reponse_placeholder
+      f.input :type_saisie
     end
     f.actions do
       f.action :submit

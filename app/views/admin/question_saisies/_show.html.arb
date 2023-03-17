@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 panel 'Détails de la question' do
-  attributes_table_for question_redaction_note do
+  attributes_table_for question_saisie do
     row :id
     row :libelle
     row :nom_technique

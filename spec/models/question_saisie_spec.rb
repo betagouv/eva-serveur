@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe QuestionRedactionNote, type: :model do
+RSpec.describe QuestionSaisie, type: :model do
   describe '#as_json' do
     let(:file) { StringIO.new('test') }
 

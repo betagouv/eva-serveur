@@ -14,9 +14,6 @@ class QuestionQcm < Question
     json = slice(:id, :intitule, :nom_technique, :metacompetence, :type_qcm, :description,
                  :choix)
     json['type'] = 'qcm'
-    if illustration.attached?
-      json['illustration'] = ApplicationController.helpers.cdn_for(illustration)
-    end
     json
   end
 end

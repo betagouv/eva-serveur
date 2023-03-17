@@ -13,7 +13,7 @@ FactoryBot.define do
     intitule { 'Quel est le bon choix ?' }
   end
 
-  factory :question_redaction_note do
+  factory :question_saisie do
     libelle { 'Question Redaction Note' }
     nom_technique { 'question-redaction-note' }
     intitule { 'Ecrivez une note' }

@@ -15,7 +15,7 @@ module Restitution
 
     def questions_redaction
       @questions_redaction ||= questions_et_reponses.select do |q, r|
-        [q, r] if q.is_a?(QuestionRedactionNote)
+        [q, r] if q.is_a?(QuestionSaisie)
       end
     end
 

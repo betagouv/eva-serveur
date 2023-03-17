@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_103228) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_154350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -286,12 +286,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_103228) do
     t.string "type"
     t.string "description"
     t.string "reponse_placeholder"
-    t.string "intitule_reponse"
+    t.string "suffix_reponse"
     t.string "libelle"
     t.integer "metacompetence"
     t.integer "type_qcm", default: 0
     t.string "nom_technique"
     t.datetime "deleted_at"
+    t.integer "type_saisie", default: 0
     t.index ["deleted_at"], name: "index_questions_on_deleted_at"
   end
 

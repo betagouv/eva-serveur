@@ -17,7 +17,7 @@ fr:
         metacompetence: Méta-compétence
         type_qcm: Type QCM
       question_saisie:
-        intitule_reponse: Intitulé réponse
+        suffix_reponse: Suffix réponse
         reponse_placeholder: Réponse placeholder
   formtastic:
     actions:

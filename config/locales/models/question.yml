@@ -4,9 +4,9 @@ fr:
       question_qcm:
         one: Question QCM
         other: Questions QCM
-      question_redaction_note:
-        one: Question Rédaction de note
-        other: Questions rédaction de notes
+      question_saisie:
+        one: Question saisie
+        other: Questions saisie
     attributes:
       question:
         created_at: Créée le
@@ -16,7 +16,7 @@ fr:
         nom_technique: Nom technique
         metacompetence: Méta-compétence
         type_qcm: Type QCM
-      question_redaction_note:
+      question_saisie:
         intitule_reponse: Intitulé réponse
         reponse_placeholder: Réponse placeholder
   formtastic:
@@ -25,4 +25,4 @@ fr:
         create: Créer
         update: Enregistrer
       question_qcm: *question_actions
-      question_redaction_note: *question_actions
+      question_saisie: *question_actions

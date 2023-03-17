@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register QuestionRedactionNote do
+ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :intitule, :message,

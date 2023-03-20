@@ -1,4 +1,6 @@
 $largeur-colonne: 290px;
+$panels-largeur: 28rem;
+$panels-gap: 1rem;
 
 body.logged_out {
   font-size: .875rem;
@@ -28,7 +30,6 @@ body.logged_out {
     padding-top: 10rem;
     flex: 1 0 auto;
     margin: auto;
-    width: 445px;
     z-index: 2;
 
     &.conteneur-elargi {
@@ -103,11 +104,11 @@ body.logged_out {
     .panels-login {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: 1rem;
+      grid-gap: $panels-gap;
       grid-template-rows: 1fr;
       justify-content: center;
       .panel {
-        width: 445px;
+        width: $panels-largeur;
         padding: 0;
         margin-bottom: 0;
         .panel-content {
@@ -282,6 +283,12 @@ body.logged_out {
 
     .footer__a-propos {
       width: $largeur-colonne;
+    }
+
+    .footer__logos {
+      padding-left: 0;
+      padding-right: 0;
+      width: ($panels-largeur * 2 + $panels-gap);
     }
 
     a {

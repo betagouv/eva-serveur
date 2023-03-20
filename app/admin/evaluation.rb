@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
+# Nombre maximum d'évaluations que l'on peut télécharger dans le fichier XLS
+# fixé de manière un peu arbitraire en fonction de ce que l'on est capable
+# d'exporter en un temps raisonnable.
+LIMITE_EXPORT_XLS = 3000
+
 ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4
 
-  includes :responsable_suivi, campagne: [:parcours_type]
+  includes :responsable_suivi, campagne: [:parcours_type, { compte: [:structure] }]
 
   config.sort_order = 'created_at_desc'
 
@@ -46,11 +51,8 @@ ActiveAdmin.register Evaluation do
     render partial: 'show'
   end
 
-  index download_links: lambda {
-                          params[:action] == 'show' ? %i[pdf] : %i[xls]
-                        }, row_class: lambda { |elem|
-                                        'anonyme' if elem.anonyme?
-                                      } do
+  index download_links: -> { params[:action] == 'show' ? %i[pdf] : %i[xls] },
+        row_class: ->(elem) { 'anonyme' if elem.anonyme? } do
     render 'index', context: self
   end
 
@@ -94,19 +96,20 @@ ActiveAdmin.register Evaluation do
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')
     end
-    column(:synthese_competences_de_base) do |evaluation|
-      traduction_niveau(evaluation, :synthese_competences_de_base)
-    end
-    column(:niveau_cefr) { |evaluation| traduction_niveau(evaluation, :niveau_cefr) }
-    column(:niveau_cnef) { |evaluation| traduction_niveau(evaluation, :niveau_cnef) }
-    column(:niveau_anlci_litteratie) do |evaluation|
-      traduction_niveau(evaluation, :niveau_anlci_litteratie)
-    end
-    column(:niveau_anlci_numeratie) do |evaluation|
-      traduction_niveau(evaluation, :niveau_anlci_numeratie)
-    end
+    column(:synthese_competences_de_base) { |e| trad_niveau(e, :synthese_competences_de_base) }
+    column(:niveau_cefr) { |evaluation| trad_niveau(evaluation, :niveau_cefr) }
+    column(:niveau_cnef) { |evaluation| trad_niveau(evaluation, :niveau_cnef) }
+    column(:niveau_anlci_litteratie) { |e| trad_niveau(e, :niveau_anlci_litteratie) }
+    column(:niveau_anlci_numeratie) { |e| trad_niveau(e, :niveau_anlci_numeratie) }
     column(:positionnement_niveau_litteratie) do |evaluation|
-      traduction_niveau(evaluation, :positionnement_niveau_litteratie)
+      trad_niveau(evaluation, :positionnement_niveau_litteratie)
+    end
+
+    before_filter do |sheet|
+      if @collection.count > LIMITE_EXPORT_XLS
+        sheet << [I18n.t('active_admin.export.limite_atteinte', limite: LIMITE_EXPORT_XLS)]
+        @collection = @collection.limit!(LIMITE_EXPORT_XLS)
+      end
     end
   end
 
@@ -133,7 +136,7 @@ ActiveAdmin.register Evaluation do
   controller do
     helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
-                  :campagnes_accessibles, :beneficiaires_possibles, :traduction_niveau,
+                  :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?, :campagne_avec_positionnement?,
                   :responsables_suivi_possibles
 
@@ -163,7 +166,7 @@ ActiveAdmin.register Evaluation do
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
     end
 
-    def traduction_niveau(evaluation, interpretation)
+    def trad_niveau(evaluation, interpretation)
       scope = 'activerecord.attributes.evaluation.interpretations'
       niveau = evaluation.send(interpretation)
       t("#{interpretation}.#{niveau}", scope: scope) if niveau.present?

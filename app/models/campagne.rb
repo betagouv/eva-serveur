@@ -36,7 +36,13 @@ class Campagne < ApplicationRecord
   attr_accessor :options_personnalisation, :type_programme
 
   scope :de_la_structure, lambda { |structure|
-    joins(:compte).where('comptes.structure_id' => structure)
+    joins(:compte)
+      .left_outer_joins(:evaluations)
+      .group('id')
+      .where('comptes.structure_id' => structure)
+      .select('campagnes.id, libelle, code,
+              COUNT(evaluations.id) AS nombre_evaluations,
+              MAX(evaluations.created_at) AS date_derniere_evaluation')
   }
   scope :par_code, ->(code) { where code: code.upcase }
   scope :avec_situation, lambda { |situation|

@@ -3,6 +3,10 @@
   $grid-gutter-width: 1.25rem;
   @import "../../bootstrap_grid";
 
+  td.col, th.col {
+    padding: .625rem .75rem;
+  }
+
   &.show {
     // Retire le margin-right de activeadmin afin que le contenu de la page soit sur toute la largeur (filtre compris)
     #active_admin_content #main_content_wrapper #main_content {

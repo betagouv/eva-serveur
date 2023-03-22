@@ -9,6 +9,32 @@ describe Campagne, type: :model do
   it { is_expected.not_to allow_value('ABC.123.').for(:code) }
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
 
+  describe 'scopes' do
+    describe '.de_la_structure' do
+      let(:compte) { create :compte }
+      let(:autre_compte) { create :compte }
+      let(:campagne) { create :campagne, compte: compte }
+      let(:autre_campagne) { create :campagne, compte: autre_compte }
+      let!(:evaluation) do
+        create :evaluation, campagne: campagne, created_at: Time.zone.local(2019, 10, 9, 10, 1, 20)
+      end
+
+      subject(:campagnes) { described_class.de_la_structure(compte.structure) }
+
+      it "retourne les campagnes d'une structure donnée" do
+        expect(campagnes).to contain_exactly(campagne)
+      end
+
+      it "retourne le nombre d'évaluations pour une campagne" do
+        expect(campagnes.first.nombre_evaluations).to eq(1)
+      end
+
+      it 'retourne la date de la dernière évaluation pour une campagne' do
+        expect(campagnes.first.date_derniere_evaluation).to eq(evaluation.created_at)
+      end
+    end
+  end
+
   describe '#questionnaire_pour' do
     let(:campagne) { Campagne.new }
     let(:situation) { Situation.new }

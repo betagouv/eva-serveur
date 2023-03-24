@@ -26,7 +26,7 @@ fr:
         scolarisation: Scolarisation
         formation_professionnelle: Formation professionnelle
         alternance: Alternance
-        emploi: Emploi
+        en_emploi: En emploi
         sans_emploi: Sans emploi
         homme: Un homme
         femme: Une femme
@@ -35,7 +35,7 @@ fr:
         quel_est_votre_dernier_niveau_d_étude: 'Quel est votre dernier niveau d’étude ?'
         scolarite: Scolarité
         college: Collège
-        cfg_dnb_bepc: CFG / DNB (BEPC)
+        cfg_dnb: CFG / DNB
         cap_bep: CAP / BEP
         bac: Bac
         bac_plus2: Bac+2

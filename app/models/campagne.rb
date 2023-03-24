@@ -3,9 +3,6 @@
 require 'generateur_aleatoire'
 
 class Campagne < ApplicationRecord
-  SITUATIONS_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
-  SITUATIONS_PRE_POSITIONNEMENT = %w[maintenance livraison objets_trouves].freeze
-  SITUATIONS_POSITIONNEMENT = %w[cafe_de_la_place].freeze
   PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
 
   acts_as_paranoid
@@ -13,7 +10,6 @@ class Campagne < ApplicationRecord
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy
-
   has_many :evaluations, dependent: :restrict_with_error
   belongs_to :compte
   belongs_to :parcours_type, optional: true
@@ -63,15 +59,15 @@ class Campagne < ApplicationRecord
   end
 
   def avec_competences_transversales?
-    configuration_inclus?(SITUATIONS_COMPETENCES_TRANSVERSALES)
+    configuration_inclus?(Situation::SITUATIONS_COMPETENCES_TRANSVERSALES)
   end
 
   def avec_positionnement?
-    configuration_inclus?(SITUATIONS_POSITIONNEMENT)
+    configuration_inclus?(Situation::SITUATIONS_POSITIONNEMENT)
   end
 
   def avec_pre_positionnement?
-    configuration_inclus?(SITUATIONS_PRE_POSITIONNEMENT)
+    configuration_inclus?(Situation::SITUATIONS_PRE_POSITIONNEMENT)
   end
 
   private
@@ -84,7 +80,6 @@ class Campagne < ApplicationRecord
 
   def initialise_situations
     initialise_situations_optionnelles
-
     # rubocop:disable Rails/FindEach
     parcours_type.situations_configurations
                  .includes(situation: :questionnaire)

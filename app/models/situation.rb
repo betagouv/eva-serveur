@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Situation < ApplicationRecord
+  SITUATIONS_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
+  SITUATIONS_PRE_POSITIONNEMENT = %w[maintenance livraison objets_trouves].freeze
+  SITUATIONS_POSITIONNEMENT = %w[cafe_de_la_place].freeze
+
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true
 

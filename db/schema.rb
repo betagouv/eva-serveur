@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_154350) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_135608) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -169,6 +169,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_154350) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "langue_maternelle"
+    t.string "lieu_scolarite"
     t.index ["deleted_at"], name: "index_donnees_sociodemographiques_on_deleted_at"
     t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id", unique: true
     t.index ["genre"], name: "index_donnees_sociodemographiques_on_genre"

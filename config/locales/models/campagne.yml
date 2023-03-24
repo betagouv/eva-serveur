@@ -8,6 +8,7 @@ fr:
         code: Code
         affiche_competences_fortes: Afficher les compétences fortes ?
         nombre_evaluations: Éval.
+        date_derniere_evaluation: Date dernière eval.
     models:
       situation_configuration:
         one: Situation

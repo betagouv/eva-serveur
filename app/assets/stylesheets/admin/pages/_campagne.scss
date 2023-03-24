@@ -127,6 +127,12 @@
     }
   }
 
+  &.index {
+    .col-date_derniere_evaluation {
+      min-width: 7.5rem;
+    }
+  }
+
   .nouvelle-campagne {
     h3 {
       @include h3();

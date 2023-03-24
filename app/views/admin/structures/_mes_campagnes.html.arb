@@ -11,7 +11,7 @@ div class: 'bloc-mes-campagnes' do
           l(campagne.date_derniere_evaluation, format: :sans_heure)
         end
       end
-      column :nombre_evaluations
+      column :nombre_evaluations, class: 'text-right'
       column :actions do |campagne|
         div class: 'table_actions' do
           link_to t('.voir'), admin_campagne_path(campagne), class: 'view_link'

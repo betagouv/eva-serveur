@@ -89,7 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_085445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "compte_id"
-    t.integer "nombre_evaluations", default: 0
     t.boolean "affiche_competences_fortes", default: true
     t.uuid "parcours_type_id"
     t.datetime "anonymise_le"

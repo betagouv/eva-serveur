@@ -201,15 +201,4 @@ where "evenementsParGroup" > 1')
       logger.info "Il reste #{nombre_evenements} événements en double"
     end
   end
-
-  desc 'liste les campagnes corrompues'
-  task liste_campagnes_corrompues: :environment do
-    logger = RakeLogger.logger
-    Campagne.all.each do |c|
-      count = Evaluation.where(campagne: c).count
-      if c.nombre_evaluations != count
-        logger.info "#{c.id};#{c.libelle};#{c.nombre_evaluations};#{count}"
-      end
-    end
-  end
 end

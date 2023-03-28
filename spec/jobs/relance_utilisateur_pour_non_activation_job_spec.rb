@@ -13,7 +13,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
     end
   end
 
-  context 'quand le compte a une campagne sans passation' do
+  context 'quand le compte a une ou plusieurs campagne sans passation' do
     let(:campagne) { create :campagne, compte: compte }
 
     it "envoie un email pour relancer l'utilisateur" do

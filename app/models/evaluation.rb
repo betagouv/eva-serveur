@@ -13,7 +13,7 @@ class Evaluation < ApplicationRecord
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
   SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
 
-  belongs_to :campagne, counter_cache: :nombre_evaluations
+  belongs_to :campagne
   belongs_to :beneficiaire
   belongs_to :responsable_suivi, optional: true, class_name: 'Compte'
 

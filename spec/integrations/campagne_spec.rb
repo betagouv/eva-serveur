@@ -17,21 +17,6 @@ describe Campagne, type: :integration do
     end
   end
 
-  describe '#nombre_evaluations' do
-    let(:campagne) { create :campagne }
-    let(:campagne2) { create :campagne }
-    let!(:mon_evaluation) { create :evaluation, campagne: campagne }
-
-    it "est maintenu quand on change la campagne d'une évaluation" do
-      expect(campagne.nombre_evaluations).to eq(1)
-      expect(campagne2.nombre_evaluations).to eq(0)
-      mon_evaluation.campagne = campagne2
-      mon_evaluation.save
-      expect(campagne.reload.nombre_evaluations).to eq(0)
-      expect(campagne2.reload.nombre_evaluations).to eq(1)
-    end
-  end
-
   describe "création d'une campagne avec des situations" do
     # parcours type
     let!(:questionnaire_sans_livraison) { create :questionnaire, :livraison_sans_redaction }

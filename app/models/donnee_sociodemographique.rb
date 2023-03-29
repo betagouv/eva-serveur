@@ -7,7 +7,7 @@ class DonneeSociodemographique < ApplicationRecord
 
   GENRES = %w[homme femme autre].freeze
   enum :genre, GENRES.zip(GENRES).to_h
-  NIVEAUX_ETUDES = %w[pas_etude college cfg_dnb cap_bep bac
+  NIVEAUX_ETUDES = %w[pas_etudie college cfg_dnb cap_bep bac
                       bac_plus2 superieur_bac_plus2].freeze
   enum :dernier_niveau_etude, NIVEAUX_ETUDES.zip(NIVEAUX_ETUDES).to_h
   SITUATIONS = %w[scolarisation formation_professionnelle alternance en_emploi

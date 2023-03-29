@@ -185,7 +185,7 @@ lieu_scolarite = QuestionQcm.find_or_create_by(nom_technique: 'lieu_scolarite') 
   ]
 end
 
-niveau_etude = QuestionQcm.find_or_create_by(nom_technique: 'niveau_etude') do |question|
+niveau_etude = QuestionQcm.find_or_create_by(nom_technique: 'dernier_niveau_etude') do |question|
   question.libelle = "Niveau d'étude"
   question.intitule = "Quel niveau d'études avez-vous atteint ?"
   question.choix = [
@@ -211,7 +211,7 @@ derniere_situtation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_sit
   ]
 end
 
-age = QuestionSaisie.find_or_create_by(nom_technique: 'quel_age') do |question|
+age = QuestionSaisie.find_or_create_by(nom_technique: 'age') do |question|
   question.libelle = 'quel age ?'
   question.intitule = "Tout d'abord, merci de renseigner votre âge."
   question.suffix_reponse = "ans"

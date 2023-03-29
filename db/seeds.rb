@@ -199,7 +199,7 @@ niveau_etude = QuestionQcm.find_or_create_by(nom_technique: 'dernier_niveau_etud
   ]
 end
 
-derniere_situtation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_situtation') do |question|
+derniere_situation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_situation') do |question|
   question.libelle = 'Dernière situation'
   question.intitule = 'Quelle était votre dernière situation ?'
   question.choix = [
@@ -220,5 +220,5 @@ end
 
 Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
   questionnaire.libelle='Sociodémographique et autopositionnement'
-  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situtation]
+  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation]
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-h2 'Situation', class: 'categorie'
+h2 t('.titre'), class: 'categorie'
 
 donnees_sociosociodemographique = resource.donnee_sociodemographique
 

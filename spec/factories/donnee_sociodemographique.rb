@@ -2,9 +2,12 @@
 
 FactoryBot.define do
   factory :donnee_sociodemographique do
-    age { 30 }
-    genre { 'femme' }
-    dernier_niveau_etude { 'bac' }
+    age { 25 }
+    genre { 'homme' }
+    dernier_niveau_etude { 'pas_etudie' }
+    derniere_situation { 'en_emploi' }
+    langue_maternelle { 'oui' }
+    lieu_scolarite { 'non_scolarise' }
     evaluation
   end
 end

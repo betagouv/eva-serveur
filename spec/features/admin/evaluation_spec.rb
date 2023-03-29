@@ -155,6 +155,7 @@ describe 'Admin - Evaluation', type: :feature do
           allow(restitution_globale).to receive(:synthese_positionnement)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
+          allow(restitution_globale).to receive(:selectionne_derniere_restitution)
         end
 
         describe 'affiche le niveau global de litteratie et numératie' do

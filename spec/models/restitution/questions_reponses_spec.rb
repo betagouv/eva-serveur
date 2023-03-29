@@ -36,7 +36,7 @@ describe Restitution::QuestionsReponses do
       end
     end
 
-    context 'renvoie le texte de réponse pour les questions qui ne sont pas une Question QCM' do
+    context 'renvoie le texte de réponse pour les questions qui ne sont pas des Questions QCM' do
       let(:question_redaction_note) { create :question_saisie }
       let(:questionnaire) { create :questionnaire, questions: [question_redaction_note] }
 

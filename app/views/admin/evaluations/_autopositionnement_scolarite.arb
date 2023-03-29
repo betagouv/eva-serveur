@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-h2 t('.scolarite'), class: 'categorie'
+h2 t('.titre'), class: 'categorie'
 
 donnees_sociosociodemographique = resource.donnee_sociodemographique
 
 questions_et_reponses_standard.each do |question, reponse|
-  if question.libelle.start_with?(t('.scolarite'))
+  if question.libelle.start_with?(t('.titre'))
     div question.intitule
     div reponse.intitule, class: 'reponse'
   end
 end
-div t('.quel_est_votre_dernier_niveau_d_étude')
+div t('.quel_est_votre_dernier_niveau_d_etude')
 reponse = if donnees_sociosociodemographique&.dernier_niveau_etude.present?
             t(".#{donnees_sociosociodemographique.dernier_niveau_etude}")
           else

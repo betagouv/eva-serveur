@@ -20,6 +20,24 @@ namespace :reviewapp do
     end
   end
 
+  def configure_questionnaire_socio(campagne)
+    q = Questionnaire.where(nom_technique: 'sociodemographique_autopositionnement').first
+    premiere_situation_configuration = campagne.situations_configurations.first
+    premiere_situation_configuration.situation = Situation.where(nom_technique: 'bienvenue').first
+    premiere_situation_configuration.questionnaire = q
+    campagne.save
+  end
+
+  def cree_campagne_socio
+    campagne_socio = Campagne.find_or_create_by(code: 'SOCIO',
+                                                libelle: 'sociodémographie') do |campagne|
+      campagne.compte = Compte.where(email: 'superadmin@beta.gouv.fr').first
+      campagne.parcours_type = ParcoursType.where(nom_technique: 'competences_de_base').first
+      campagne.type_programme = 'test'
+    end
+    configure_questionnaire_socio(campagne_socio)
+  end
+
   desc 'init db'
   task initdb: :environment do
     contenu = File.read('db/evaluations_tests.sql')
@@ -36,6 +54,7 @@ namespace :reviewapp do
   task seed: :environment do
     structure_eva = Structure.where(nom: 'eva').first
     cree_les_comptes structure_eva
+    cree_campagne_socio
 
     Compte.all.each do |compte|
       compte.encrypted_password = '$2a$11$d.kf40n..7zqTGgCPANFlOiLvwGH35EPh0OsY6euJaje3Us20KIWO'

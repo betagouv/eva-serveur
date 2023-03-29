@@ -11,6 +11,12 @@ FactoryBot.define do
       terminee_le { Time.current }
     end
 
+    trait :avec_donnee_sociodemographique do
+      after(:create) do |evaluation|
+        create(:donnee_sociodemographique, evaluation: evaluation)
+      end
+    end
+
     trait :avec_mise_en_action do
       transient do
         effectuee { true }

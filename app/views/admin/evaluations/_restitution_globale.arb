@@ -26,7 +26,7 @@ div class: 'evaluation__restitution-globale' do
     end
   end
 
-  if auto_positionnement
+  if bienvenue
     if pdf
       div id: 'auto_positionnement' do
         div class: 'page' do
@@ -37,7 +37,7 @@ div class: 'evaluation__restitution-globale' do
           div class: 'panel' do
             div class: 'marges-page' do
               render partial: 'questions_reponses_autopositionnement',
-                     locals: { auto_positionnement: auto_positionnement }
+                     locals: { bienvenue: bienvenue }
             end
 
             render 'pied_page'
@@ -49,7 +49,7 @@ div class: 'evaluation__restitution-globale' do
           div class: 'panel' do
             div class: 'marges-page' do
               render partial: 'questionnaire_autopositionnement',
-                     locals: { auto_positionnement: auto_positionnement }
+                     locals: { auto_positionnement: bienvenue }
             end
 
             render 'pied_page'
@@ -65,9 +65,9 @@ div class: 'evaluation__restitution-globale' do
         div class: 'panel' do
           div class: 'marges-page' do
             render partial: 'questions_reponses_autopositionnement',
-                   locals: { auto_positionnement: auto_positionnement }
+                   locals: { bienvenue: bienvenue }
             render partial: 'questionnaire_autopositionnement',
-                   locals: { auto_positionnement: auto_positionnement }
+                   locals: { auto_positionnement: bienvenue }
           end
 
           render 'pied_page'

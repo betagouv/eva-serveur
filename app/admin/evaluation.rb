@@ -134,7 +134,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :restitution_globale, :parties, :prise_en_main?, :auto_positionnement,
+    helper_method :restitution_globale, :parties, :prise_en_main?, :bienvenue,
                   :restitution_cafe_de_la_place, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?, :campagne_avec_positionnement?,
@@ -188,21 +188,15 @@ ActiveAdmin.register Evaluation do
     end
 
     def prise_en_main?
-      selectionne_derniere_restitution(Situation::PLAN_DE_LA_VILLE)&.termine?
+      restitution_globale.selectionne_derniere_restitution(Situation::PLAN_DE_LA_VILLE)&.termine?
     end
 
-    def auto_positionnement
-      selectionne_derniere_restitution(Situation::BIENVENUE)
+    def bienvenue
+      restitution_globale.selectionne_derniere_restitution(Situation::BIENVENUE)
     end
 
     def restitution_cafe_de_la_place
-      selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
-    end
-
-    def selectionne_derniere_restitution(nom)
-      restitution_globale.restitutions.reverse.find do |restitution|
-        restitution.situation.nom_technique == nom
-      end
+      restitution_globale.selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end
 
     def parties

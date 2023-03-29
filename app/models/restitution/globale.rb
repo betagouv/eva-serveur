@@ -98,12 +98,14 @@ module Restitution
       niveaux_competences.collect { |competence, _| competence }
     end
 
+    def selectionne_derniere_restitution(nom)
+      restitutions.reverse.find { |restitution| restitution.situation.nom_technique == nom }
+    end
+
     private
 
     def cafe_de_la_place
-      @cafe_de_la_place ||= restitutions.reverse.find do |restitution|
-        restitution.situation.nom_technique == Situation::CAFE_DE_LA_PLACE
-      end
+      @cafe_de_la_place ||= selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end
 
     def extraie_competences_depuis_restitutions

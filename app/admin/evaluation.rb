@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-# Nombre maximum d'évaluations que l'on peut télécharger dans le fichier XLS
-# fixé de manière un peu arbitraire en fonction de ce que l'on est capable
-# d'exporter en un temps raisonnable.
-LIMITE_EXPORT_XLS = 3000
-
 ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4
@@ -106,9 +101,11 @@ ActiveAdmin.register Evaluation do
     end
 
     before_filter do |sheet|
-      if @collection.count > LIMITE_EXPORT_XLS
-        sheet << [I18n.t('active_admin.export.limite_atteinte', limite: LIMITE_EXPORT_XLS)]
-        @collection = @collection.limit!(LIMITE_EXPORT_XLS)
+      if @collection.count > Evaluation::LIMITE_EXPORT_XLS
+        sheet << [
+          I18n.t('active_admin.export.limite_atteinte', limite: Evaluation::LIMITE_EXPORT_XLS)
+        ]
+        @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
       end
     end
   end

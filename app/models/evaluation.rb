@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Evaluation < ApplicationRecord
+  # Nombre maximum d'évaluations que l'on peut télécharger dans le fichier XLS
+  # fixé de manière un peu arbitraire en fonction de ce que l'on est capable
+  # d'exporter en un temps raisonnable.
+  LIMITE_EXPORT_XLS = 3000
+
   SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze

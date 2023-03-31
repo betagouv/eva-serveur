@@ -218,7 +218,26 @@ age = QuestionSaisie.find_or_create_by(nom_technique: 'age') do |question|
   question.type_saisie = 'numerique'
 end
 
-Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
-  questionnaire.libelle='Sociodémographique et autopositionnement'
+difficultes_informatique = QuestionQcm.find_or_create_by(nom_technique: 'difficultes_informatique') do |question|
+  question.libelle = "Appareils: Difficultés avec l'informatique"
+  question.intitule = "Avez-vous des difficultés avec l'outil informatique (maux de tête, difficultés d'utilisation) ?"
+  question.choix = [
+    Choix.create(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
+    Choix.create(nom_technique: 'non', intitule: 'Non', type_choix: 'bon')
+  ]
+end
+
+Questionnaire.find_or_create_by(nom_technique: 'sociodemographique') do |questionnaire|
+  questionnaire.libelle = 'Sociodémographique'
   questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation]
 end
+
+questions_autopositionnement = Questionnaire.find_by(nom_technique: 'autopositionnement')
+                                            .questions
+                                            .where(nom_technique: ["bienvenue_1", "bienvenue_2", "bienvenue_3", "bienvenue_4", "bienvenue_5", "bienvenue_6", "bienvenue_7", "bienvenue_8", "bienvenue_10", "bienvenue_15"])
+
+Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
+  questionnaire.libelle = 'Sociodémographique et autopositionnement'
+  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation] + questions_autopositionnement[0...-1] + [difficultes_informatique] + [questions_autopositionnement[-1]]
+end
+

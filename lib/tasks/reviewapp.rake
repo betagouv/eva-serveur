@@ -21,9 +21,9 @@ namespace :reviewapp do
   end
 
   def configure_questionnaire_socio(campagne)
-    q = Questionnaire.where(nom_technique: 'sociodemographique_autopositionnement').first
+    q = Questionnaire.find_by(nom_technique: 'sociodemographique_autopositionnement')
     premiere_situation_configuration = campagne.situations_configurations.first
-    premiere_situation_configuration.situation = Situation.where(nom_technique: 'bienvenue').first
+    premiere_situation_configuration.situation = Situation.find_by(nom_technique: 'bienvenue')
     premiere_situation_configuration.questionnaire = q
     campagne.save
   end
@@ -31,8 +31,8 @@ namespace :reviewapp do
   def cree_campagne_socio
     campagne_socio = Campagne.find_or_create_by(code: 'SOCIO',
                                                 libelle: 'sociodémographie') do |campagne|
-      campagne.compte = Compte.where(email: 'superadmin@beta.gouv.fr').first
-      campagne.parcours_type = ParcoursType.where(nom_technique: 'competences_de_base').first
+      campagne.compte = Compte.find_by(email: 'superadmin@beta.gouv.fr')
+      campagne.parcours_type = ParcoursType.find_by(nom_technique: 'competences_de_base')
       campagne.type_programme = 'test'
     end
     configure_questionnaire_socio(campagne_socio)
@@ -52,7 +52,7 @@ namespace :reviewapp do
 
   desc 'initialise les données pour les applications de revues'
   task seed: :environment do
-    structure_eva = Structure.where(nom: 'eva').first
+    structure_eva = Structure.find_by(nom: 'eva')
     cree_les_comptes structure_eva
     cree_campagne_socio
 

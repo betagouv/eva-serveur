@@ -4,12 +4,13 @@ h2 t('.titre'), class: 'categorie'
 
 donnees_sociosociodemographique = resource.donnee_sociodemographique
 
-questions_et_reponses_standard.each do |question, reponse|
-  if question.libelle.start_with?(t('.titre'))
-    div question.intitule
-    div reponse.intitule, class: 'reponse'
-  end
-end
+div t('.quel_lieu_scolarite')
+reponse = if donnees_sociosociodemographique&.lieu_scolarite.present?
+            t(".#{donnees_sociosociodemographique.lieu_scolarite}")
+          else
+            t('admin.evaluations.autopositionnement.non_renseigne')
+          end
+div reponse, class: 'reponse'
 div t('.quel_est_votre_dernier_niveau_d_etude')
 reponse = if donnees_sociosociodemographique&.dernier_niveau_etude.present?
             t(".#{donnees_sociosociodemographique.dernier_niveau_etude}")

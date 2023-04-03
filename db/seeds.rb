@@ -157,8 +157,8 @@ Compte.where(email: Eva::EMAIL_SUPPORT).first_or_create do |compte|
 end
 
 genre = QuestionQcm.find_or_create_by(nom_technique: 'genre') do |question|
-  question.libelle = 'Genre'
-  question.intitule = 'Situation: Vous êtes ?'
+  question.libelle = 'Situation: Genre'
+  question.intitule = 'Vous êtes ?'
   question.choix = [
     Choix.create(nom_technique: 'homme', intitule: 'Un homme', type_choix: 'bon'),
     Choix.create(nom_technique: 'femme', intitule: 'Une femme', type_choix: 'bon'),

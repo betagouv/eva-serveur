@@ -22,7 +22,7 @@ fr:
       autopositionnement_situation:
         titre: Situation
         quel_age_avez_vous: 'Quel âge avez vous ?'
-        vous_etes: 'Vous êtes :'
+        vous_etes: 'Vous êtes ?'
         quelle_est_votre_derniere_situation: 'Quelle est votre dernière situation ?'
         scolarisation: Scolarisation
         formation_professionnelle: Formation professionnelle
@@ -34,7 +34,8 @@ fr:
         autre: D'un autre genre
       autopositionnement_scolarite:
         titre: Scolarité
-        quel_est_votre_dernier_niveau_d_etude: 'Quel est votre dernier niveau d’étude ?'
+        quel_est_votre_dernier_niveau_d_etude: "Quel niveau d’études avez-vous atteint ?"
+        quel_lieu_scolarite: "Êtes-vous allé à l'école ?"
         pas_etudie: Je ne suis pas allé à l'école
         college: Collège
         cfg_dnb: CFG / DNB
@@ -42,6 +43,9 @@ fr:
         bac: Bac
         bac_plus2: Bac+2
         superieur_bac_plus2: Supérieur à Bac+2
+        france: Oui, en France
+        etranger: Oui, dans un autre pays
+        non: Non
       autopositionnement_usage_du_numerique:
         appareils: Appareils
         usage_du_numerique: Usage du numérique

@@ -232,13 +232,7 @@ Questionnaire.find_or_create_by(nom_technique: 'sociodemographique') do |questio
   questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation]
 end
 
-questions_autopositionnement =
-  Questionnaire.find_by(nom_technique: 'autopositionnement')
-  .questions
-  .where(nom_technique: ["concentration", "comprehension", "differencier_objets", "analyse_travail", "tache_longue_et_difficile", "travail_sans_erreur", "dangers", "vue", "entendre", "trouble_dys"])
-
 Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
   questionnaire.libelle = 'Sociodémographique et autopositionnement'
-  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation] + questions_autopositionnement[0...-1] + [difficultes_informatique] + [questions_autopositionnement[-1]]
 end
 

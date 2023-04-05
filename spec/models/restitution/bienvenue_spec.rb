@@ -61,7 +61,25 @@ describe Restitution::Bienvenue do
         expect(donnees.age).to eq 25
         expect(donnees.genre).to eq 'homme'
         expect(donnees.lieu_scolarite).to eq 'non_scolarise'
+
         restitution.persiste
+
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.age).to eq 33
+        expect(donnees.genre).to eq 'homme'
+        expect(donnees.lieu_scolarite).to eq 'france'
+      end
+    end
+
+    context 'restaure et met à jour des données sociodémographiques effacées' do
+      let(:evaluation) { create :evaluation, :avec_donnee_sociodemographique, campagne: campagne }
+
+      it do
+        donnees = evaluation.donnee_sociodemographique
+        donnees.delete
+
+        restitution.persiste
+
         donnees = evaluation.reload.donnee_sociodemographique
         expect(donnees.age).to eq 33
         expect(donnees.genre).to eq 'homme'

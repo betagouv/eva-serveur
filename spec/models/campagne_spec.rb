@@ -45,9 +45,13 @@ describe Campagne, type: :model do
     end
 
     context 'sans configuration pour la situation' do
-      before { bouchonne_config_situation(nil) }
+      let(:questionnaire_par_default) { double }
+      before do
+        bouchonne_config_situation(nil)
+        allow(situation).to receive(:questionnaire).and_return(questionnaire_par_default)
+      end
 
-      it { expect(campagne.questionnaire_pour(situation)).to be_nil }
+      it { expect(campagne.questionnaire_pour(situation)).to eq questionnaire_par_default }
     end
 
     context 'avec configuration pour la situation' do

@@ -27,8 +27,9 @@ module Restitution
 
     def persiste
       super
-      donnees = DonneeSociodemographique.find_or_create_by(evaluation: partie.evaluation)
-      donnees.update(attributs_sociodemographiques)
+      donnees = DonneeSociodemographique.with_deleted
+                                        .find_or_create_by(evaluation: partie.evaluation)
+      donnees.update(attributs_sociodemographiques.merge(deleted_at: nil))
     end
   end
 end

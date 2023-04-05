@@ -55,7 +55,8 @@ class Campagne < ApplicationRecord
   end
 
   def questionnaire_pour(situation)
-    situations_configurations.find_by(situation: situation)&.questionnaire_utile
+    sc = situations_configurations.find_by(situation: situation)
+    sc.present? ? sc.questionnaire_utile : situation.questionnaire
   end
 
   def avec_competences_transversales?

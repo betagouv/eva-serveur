@@ -66,14 +66,16 @@ namespace :nettoyage do
 
     nombre_partie = Partie.where(situation: situation).count
     logger.info "Recalcule les #{nombre_partie} parties de la situation #{ENV.fetch('SITUATION')}…"
-    Partie
-      .where(situation: situation)
-      .find_each do |partie|
+    Partie.where(situation: situation).find_each do |partie|
+      if partie.evaluation_id.present? && partie.evaluation.nil?
+        partie.destroy
+      else
         restitution = FabriqueRestitution.instancie partie
         restitution.persiste if restitution.termine?
-        nombre_partie -= 1
-        logger.info "reste #{nombre_partie}"
       end
+      nombre_partie -= 1
+      logger.info "reste #{nombre_partie}"
+    end
     logger.info "C'est fini"
   end
 

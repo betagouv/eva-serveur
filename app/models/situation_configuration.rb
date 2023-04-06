@@ -6,6 +6,7 @@ class SituationConfiguration < ApplicationRecord
 
   delegate :libelle, :nom_technique, :questionnaire_entrainement_id, to: :situation
   delegate :livraison_sans_redaction?, to: :situation, allow_nil: true
+  delegate :bienvenue?, to: :situation, allow_nil: true
 
   acts_as_list scope: %i[campagne_id parcours_type_id]
 

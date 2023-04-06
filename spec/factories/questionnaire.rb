@@ -14,5 +14,15 @@ FactoryBot.define do
       libelle { 'Livraison sans rédaction' }
       nom_technique { Questionnaire::LIVRAISON_SANS_REDACTION }
     end
+
+    trait :sociodemographique_autopositionnement do
+      libelle { 'Sociodémographique et autopositionnement' }
+      nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT }
+    end
+
+    trait :sociodemographique do
+      libelle { 'Sociodémographique' }
+      nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE }
+    end
   end
 end

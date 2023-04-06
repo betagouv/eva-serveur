@@ -29,4 +29,8 @@ class Situation < ApplicationRecord
   def as_json(_options = nil)
     slice(:id, :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id)
   end
+
+  def bienvenue?
+    nom_technique == BIENVENUE
+  end
 end

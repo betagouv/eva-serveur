@@ -6,12 +6,12 @@ fr:
         duree_moyenne: 5mn
         description: |
           Ce module permet, en amont des évaluations, de vérifier la capacité des bénéficiaires à utiliser l’outil informatique (ordinateur ou tablette), en particulier la manipulation du clavier, de la souris et de l’écran tactile.
-      bienvenue:
-        nom: Bienvenue - Auto-positionnement
+      autopositionnement:
+        nom: Auto-positionnement
         duree_moyenne: 6mn
         description: |
           Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences, et de récolter des informations personnelles qui peuvent impacter les résultats de l’évaluation (troubles visuels ou auditifs, troubles dys, etc.)
-      livraison:
+      redaction:
         nom: Production écrite
         duree_moyenne: 6mn
         description: |

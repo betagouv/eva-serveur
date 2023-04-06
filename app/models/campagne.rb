@@ -3,7 +3,7 @@
 require 'generateur_aleatoire'
 
 class Campagne < ApplicationRecord
-  PERSONNALISATION = %w[plan_de_la_ville bienvenue livraison].freeze
+  PERSONNALISATION = %w[plan_de_la_ville autopositionnement redaction].freeze
 
   acts_as_paranoid
 
@@ -92,14 +92,11 @@ class Campagne < ApplicationRecord
 
   def initialise_situations_optionnelles
     return if options_personnalisation.blank?
+    return unless options_personnalisation.include? Situation::PLAN_DE_LA_VILLE
 
-    options_personnalisation.compact_blank.each do |situation_optionnelle|
-      situation = Situation.find_by nom_technique: situation_optionnelle
-      next if situation.blank?
-      next if situation.nom_technique == 'livraison'
+    situation = Situation.find_by nom_technique: Situation::PLAN_DE_LA_VILLE
 
-      situations_configurations.build situation_id: situation.id
-    end
+    situations_configurations.build situation_id: situation.id
   end
 
   def genere_code_unique
@@ -113,19 +110,21 @@ class Campagne < ApplicationRecord
   end
 
   def construit_situation_configuration(situation_configuration)
-    livraison_sans_redaction = situation_configuration.livraison_sans_redaction?
-    questionnaire_id = if inclus_expression_ecrite? && livraison_sans_redaction
-                         Questionnaire.livraison_avec_redaction.id
-                       else
-                         situation_configuration.questionnaire_id
-                       end
     situations_configurations.build situation_id: situation_configuration.situation_id,
-                                    questionnaire_id: questionnaire_id
+                                    questionnaire_id: questionnaire_id(situation_configuration)
   end
 
-  def inclus_expression_ecrite?
-    return false if options_personnalisation.nil?
+  def questionnaire_id(situation_configuration)
+    if situation_configuration.livraison_sans_redaction? && option_incluse?('redaction')
+      Questionnaire.livraison_avec_redaction.id
+    elsif situation_configuration.bienvenue? && option_incluse?('autopositionnement')
+      Questionnaire.bienvenue_avec_autopositionnement.id
+    else
+      situation_configuration.questionnaire_id
+    end
+  end
 
-    options_personnalisation.include? 'livraison'
+  def option_incluse?(option)
+    options_personnalisation.present? && options_personnalisation.include?(option)
   end
 end

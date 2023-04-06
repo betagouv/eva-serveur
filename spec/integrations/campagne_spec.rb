@@ -17,42 +17,35 @@ describe Campagne, type: :integration do
     end
   end
 
-  describe "création d'une campagne avec des situations" do
+  describe "Création d'une campagne avec des situations" do
     # parcours type
     let!(:questionnaire_sans_livraison) { create :questionnaire, :livraison_sans_redaction }
     let!(:questionnaire_avec_livraison) { create :questionnaire, :livraison_avec_redaction }
+    let!(:questionnaire_socio_auto) do
+      create :questionnaire, :sociodemographique_autopositionnement
+    end
+    let!(:bienvenue) { create :situation_bienvenue }
     let!(:situation_livraison) do
       create :situation_livraison, questionnaire: questionnaire_sans_livraison
     end
+    let(:situation_maintenance) { create :situation_maintenance }
+    let(:options_personnalisation) { nil }
+
     let(:parcours_type) do
       parcours = create :parcours_type
-      parcours.situations_configurations.create situation: situation_livraison
+      parcours.situations_configurations.create situation: situation_livraison, position: 1
       parcours
     end
-
-    let(:options_personnalisation) { nil }
     let(:campagne) do
       create :campagne, options_personnalisation: options_personnalisation,
                         parcours_type: parcours_type
     end
 
-    it 'crée la campagne avec les situations du parcours type' do
-      expect do
-        campagne
-      end.to change { described_class.count }.by(1)
-
-      campagne.reload
-      situations_configurations = campagne.situations_configurations.includes(:situation)
-      expect(situations_configurations[0].situation).to eq situation_livraison
-    end
-
     context 'quand le parcours type a plusieurs situations' do
-      let(:situation_maintenance) { create :situation_maintenance }
-
       let(:parcours_type) do
         parcours = create :parcours_type
-        parcours.situations_configurations.create situation: situation_maintenance, position: 1
-        parcours.situations_configurations.create situation: situation_livraison, position: 2
+        parcours.situations_configurations.create situation: situation_livraison, position: 1
+        parcours.situations_configurations.create situation: situation_maintenance, position: 2
         parcours
       end
 
@@ -60,43 +53,66 @@ describe Campagne, type: :integration do
         campagne.reload
 
         situations_configurations = campagne.situations_configurations.includes(:situation)
-        expect(situations_configurations[0].situation).to eq situation_maintenance
-        expect(situations_configurations[1].situation).to eq situation_livraison
-      end
-    end
-
-    context 'quand il y a des situations optionnelles' do
-      let!(:situation_plan_de_la_ville) { create :situation_plan_de_la_ville }
-      let!(:situation_bienvenue) { create :situation_bienvenue }
-      let(:options_personnalisation) { %w[plan_de_la_ville bienvenue] }
-
-      it "crée la campagne dans l'ordre des situations optionnelles" do
-        expect do
-          campagne
-        end.to change { described_class.count }.by(1)
-
-        campagne.reload
-        situations_configurations = campagne.situations_configurations.includes(:situation)
-        expect(situations_configurations[0].situation).to eq situation_plan_de_la_ville
-        expect(situations_configurations[1].situation).to eq situation_bienvenue
-        expect(situations_configurations[2].situation).to eq situation_livraison
-      end
-    end
-
-    context "pour la selection du module d'expression écrite" do
-      let(:options_personnalisation) { Campagne::PERSONNALISATION }
-
-      it 'utilise le questionnaire livraison avec redaction' do
-        expect do
-          campagne
-        end.to change { described_class.count }.by(1)
-
-        campagne.reload
-        situations_configurations = campagne.situations_configurations
         expect(situations_configurations[0].situation).to eq situation_livraison
-        questionnaire = situations_configurations[0].questionnaire
-        expect(questionnaire.nom_technique).to eq Questionnaire::LIVRAISON_AVEC_REDACTION
-        expect(situations_configurations.count).to eq 1
+        expect(situations_configurations[1].situation).to eq situation_maintenance
+      end
+    end
+
+    context 'options de personnalisation' do
+      context 'pour la selection de plan de la ville' do
+        let!(:situation_plan_de_la_ville) { create :situation_plan_de_la_ville }
+        let(:options_personnalisation) { %w[plan_de_la_ville] }
+
+        it "crée la campagne dans l'ordre des situations optionnelles" do
+          expect do
+            campagne
+          end.to change { described_class.count }.by(1)
+
+          campagne.reload
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations[0].situation).to eq situation_plan_de_la_ville
+          expect(situations_configurations[1].situation).to eq situation_livraison
+        end
+      end
+
+      context "pour la selection du module d'expression écrite" do
+        let(:options_personnalisation) { %w[redaction] }
+
+        it 'utilise le questionnaire livraison avec redaction' do
+          expect do
+            campagne
+          end.to change { described_class.count }.by(1)
+
+          campagne.reload
+          situations_configurations = campagne.situations_configurations
+          expect(situations_configurations[0].situation).to eq situation_livraison
+          questionnaire = situations_configurations[0].questionnaire
+          expect(questionnaire.nom_technique).to eq Questionnaire::LIVRAISON_AVEC_REDACTION
+          expect(situations_configurations.count).to eq 1
+        end
+      end
+
+      context "pour la selection de l'autopositionnement" do
+        let(:options_personnalisation) { %w[autopositionnement] }
+        let(:parcours_type) do
+          parcours = create :parcours_type
+          parcours.situations_configurations.create situation: bienvenue, position: 1
+          parcours
+        end
+
+        it 'utilise le questionnaire sociodemographique_autopositionnement' do
+          expect do
+            campagne
+          end.to change { described_class.count }.by(1)
+
+          campagne.reload
+
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations.count).to eq 1
+          expect(situations_configurations[0].situation.nom_technique).to eq 'bienvenue'
+          questionnaire = situations_configurations[0].questionnaire
+          expect(questionnaire).to eq questionnaire_socio_auto
+        end
       end
     end
   end

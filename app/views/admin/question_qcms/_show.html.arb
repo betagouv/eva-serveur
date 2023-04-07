@@ -4,6 +4,7 @@ panel 'Détails de la question' do
   attributes_table_for question_qcm do
     row :id
     row :libelle
+    row :categorie
     row :nom_technique
     row :description
     row :intitule

@@ -6,11 +6,13 @@ describe Restitution::Bienvenue do
   let(:choix_france) { create :choix, :bon, nom_technique: 'france' }
   let(:quel_age) do
     create :question_saisie, nom_technique: 'age',
-                             libelle: 'Situation: quel age ?'
+                             categorie: 'situation',
+                             libelle: 'quel age ?'
   end
   let(:scolarite) do
     create :question_qcm, nom_technique: 'lieu_scolarite',
-                          libelle: 'Scolarité: lieu de scolarité',
+                          categorie: 'scolarite',
+                          libelle: 'lieu de scolarité',
                           choix: [choix_france]
   end
   let(:situation) { create :situation_bienvenue }
@@ -119,6 +121,17 @@ describe Restitution::Bienvenue do
       it 'retourne false' do
         expect(restitution.inclus_autopositionnement?).to be false
       end
+    end
+  end
+
+  describe '#questionnaires_questions_pour' do
+    let(:evaluation) { create :evaluation, campagne: campagne }
+
+    it 'retourne les questionnaires questions pour une catégorie donnée' do
+      expect(restitution.questionnaires_questions_pour('situation').count).to eq 1
+      expect(restitution.questionnaires_questions_pour('situation').first.question).to eq quel_age
+      expect(restitution.questionnaires_questions_pour('scolarite').count).to eq 1
+      expect(restitution.questionnaires_questions_pour('scolarite').first.question).to eq scolarite
     end
   end
 end

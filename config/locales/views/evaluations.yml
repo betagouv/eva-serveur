@@ -19,34 +19,6 @@ fr:
         <<: *autopositionnement
       questionnaire_autopositionnement:
         <<: *autopositionnement
-      autopositionnement_situation:
-        titre: Situation
-        age: 'Quel âge avez vous ?'
-        derniere_situation: 'Quelle est votre dernière situation ?'
-        genre: 'Vous êtes ?'
-        langue_maternelle: Le français est-il votre langue maternelle ?
-        scolarisation: Scolarisation
-        formation_professionnelle: Formation professionnelle
-        alternance: Alternance
-        en_emploi: En emploi
-        sans_emploi: Sans emploi
-        homme: Un homme
-        femme: Une femme
-        autre: D'un autre genre
-      autopositionnement_scolarite:
-        titre: Scolarité
-        dernier_niveau_etude: "Quel niveau d’études avez-vous atteint ?"
-        lieu_scolarite: "Êtes-vous allé à l'école ?"
-        pas_etudie: Je ne suis pas allé à l'école
-        college: Collège
-        cfg_dnb: CFG / DNB
-        cap_bep: CAP / BEP
-        bac: Bac
-        bac_plus2: Bac+2
-        superieur_bac_plus2: Supérieur à Bac+2
-        france: Oui, en France
-        etranger: Oui, dans un autre pays
-        non: Non
       autopositionnement_usage_du_numerique:
         appareils: Appareils
         usage_du_numerique: Usage du numérique

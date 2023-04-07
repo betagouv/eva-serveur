@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+donnee_sociodemographique = resource.donnee_sociodemographique
+questions = Question.where(nom_technique: noms_techniques_questions)
+
+h2 questions.first.libelle, class: 'categorie'
+
+noms_techniques_questions.each do |nom_technique|
+  question = questions.find {|q| q.nom_technique == nom_technique }
+  div question.libelle
+  reponse = donnee_sociodemographique&.read_attribute(nom_technique)
+  if reponse.present?
+    if question.respond_to? :choix
+      reponse = question.choix.find {|c| c.nom_technique == reponse}.intitule
+    end
+  else
+    reponse = t('admin.evaluations.autopositionnement.non_renseigne')
+  end
+  div reponse, class: 'reponse'
+end

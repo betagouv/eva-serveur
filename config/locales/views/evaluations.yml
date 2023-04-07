@@ -21,9 +21,10 @@ fr:
         <<: *autopositionnement
       autopositionnement_situation:
         titre: Situation
-        quel_age_avez_vous: 'Quel âge avez vous ?'
-        vous_etes: 'Vous êtes ?'
-        quelle_est_votre_derniere_situation: 'Quelle est votre dernière situation ?'
+        age: 'Quel âge avez vous ?'
+        derniere_situation: 'Quelle est votre dernière situation ?'
+        genre: 'Vous êtes ?'
+        langue_maternelle: Le français est-il votre langue maternelle ?
         scolarisation: Scolarisation
         formation_professionnelle: Formation professionnelle
         alternance: Alternance
@@ -34,8 +35,8 @@ fr:
         autre: D'un autre genre
       autopositionnement_scolarite:
         titre: Scolarité
-        quel_est_votre_dernier_niveau_d_etude: "Quel niveau d’études avez-vous atteint ?"
-        quel_lieu_scolarite: "Êtes-vous allé à l'école ?"
+        dernier_niveau_etude: "Quel niveau d’études avez-vous atteint ?"
+        lieu_scolarite: "Êtes-vous allé à l'école ?"
         pas_etudie: Je ne suis pas allé à l'école
         college: Collège
         cfg_dnb: CFG / DNB

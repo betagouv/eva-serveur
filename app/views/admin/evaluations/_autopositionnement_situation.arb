@@ -2,28 +2,15 @@
 
 h2 t('.titre'), class: 'categorie'
 
-donnees_sociosociodemographique = resource.donnee_sociodemographique
+donnee_sociodemographique = resource.donnee_sociodemographique
+questions = %w[age genre langue_maternelle derniere_situation]
 
-div t('.quel_age_avez_vous')
-reponse = if donnees_sociosociodemographique&.age.present?
-            "#{donnees_sociosociodemographique.age} ans"
-          else
-            t('admin.evaluations.autopositionnement.non_renseigne')
-          end
-div reponse, class: 'reponse'
-
-div t('.vous_etes')
-reponse = if donnees_sociosociodemographique&.genre.present?
-            t(".#{donnees_sociosociodemographique.genre}")
-          else
-            t('admin.evaluations.autopositionnement.non_renseigne')
-          end
-div reponse, class: 'reponse'
-
-div t('.quelle_est_votre_derniere_situation')
-reponse = if donnees_sociosociodemographique&.derniere_situation.present?
-            t(".#{donnees_sociosociodemographique.derniere_situation}")
-          else
-            t('admin.evaluations.autopositionnement.non_renseigne')
-          end
-div reponse, class: 'reponse'
+questions.each do |question|
+  div t(".#{question}")
+  reponse = if donnee_sociodemographique&.read_attribute(question).present?
+              t(".#{donnee_sociodemographique&.read_attribute(question)}")
+            else
+              t('admin.evaluations.autopositionnement.non_renseigne')
+            end
+  div reponse, class: 'reponse'
+end

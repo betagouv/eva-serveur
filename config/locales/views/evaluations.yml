@@ -11,17 +11,18 @@ fr:
         nombre_erreurs: "Nombre d'erreurs"
         duree: Durée de passation
       autopositionnement: &autopositionnement
-        appareils: Appareils
-        sante: Santé
         questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
         non_renseigne: 'Non renseigné'
       questions_reponses_autopositionnement:
         <<: *autopositionnement
       questionnaire_autopositionnement:
         <<: *autopositionnement
-      autopositionnement_usage_du_numerique:
-        appareils: Appareils
-        usage_du_numerique: Usage du numérique
+      donnees_sociodemographiques:
+        situation: Situation
+        scolarite: Scolarité
+      autopositionnement:
+        appareils: Usage du numérique
+        sante: Santé
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'

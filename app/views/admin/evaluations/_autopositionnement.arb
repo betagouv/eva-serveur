@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-h2 categorie, class: 'categorie'
+h2 t(".#{categorie}"), class: 'categorie'
 questions_reponses.each do |question, reponse|
-  if question.libelle.start_with?(categorie)
+  if question.categorie == categorie
     div question.intitule
     div reponse.intitule, class: 'reponse'
   end

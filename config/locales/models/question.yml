@@ -12,6 +12,7 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         intitule: Intitulé
+        categorie: Catégorie
         libelle: Libellé
         nom_technique: Nom technique
         metacompetence: Méta-compétence

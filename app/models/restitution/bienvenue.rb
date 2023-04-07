@@ -12,13 +12,11 @@ module Restitution
     end
 
     def attributs_sociodemographiques
-      categorie_scolarite = I18n.t('admin.evaluations.autopositionnement_scolarite.titre')
-      categorie_situation = I18n.t('admin.evaluations.autopositionnement_situation.titre')
       questions_et_reponses.each_with_object({}) do |q_et_r, attributs|
         question = q_et_r.first
         reponse = q_et_r.last
-        next unless question.libelle.start_with?(categorie_scolarite) ||
-                    question.libelle.start_with?(categorie_situation)
+        next unless question.categorie_situation? ||
+                    question.categorie_scolarite?
 
         attributs[question.nom_technique] =
           reponse.respond_to?(:nom_technique) ? reponse.nom_technique : reponse
@@ -30,6 +28,13 @@ module Restitution
       donnees = DonneeSociodemographique.with_deleted
                                         .find_or_create_by(evaluation: partie.evaluation)
       donnees.update(attributs_sociodemographiques.merge(deleted_at: nil))
+    end
+
+    def questionnaires_questions_pour(categorie)
+      campagne.questionnaire_pour(situation)
+              .questionnaires_questions
+              .joins(:question)
+              .where(questions: { categorie: categorie })
     end
   end
 end

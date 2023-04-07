@@ -7,6 +7,9 @@ fr:
       question_saisie:
         one: Question saisie
         other: Questions saisie
+      question_sous_consigne:
+        one: Question sous consigne
+        other: Questions sous consigne
     attributes:
       question:
         created_at: Créée le

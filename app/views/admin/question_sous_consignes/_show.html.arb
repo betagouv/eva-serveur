@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+panel 'Détails de la question' do
+  attributes_table_for question_sous_consigne do
+    row :id
+    row :libelle
+    row :nom_technique
+    row :intitule
+    row :created_at
+  end
+end

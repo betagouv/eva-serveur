@@ -233,13 +233,3 @@ difficultes_informatique = QuestionQcm.find_or_create_by(nom_technique: 'difficu
     Choix.create(nom_technique: 'non', intitule: 'Non', type_choix: 'bon')
   ]
 end
-
-Questionnaire.find_or_create_by(nom_technique: 'sociodemographique') do |questionnaire|
-  questionnaire.libelle = 'Sociodémographique'
-  questionnaire.questions = [age, genre, langue_maternelle, lieu_scolarite, niveau_etude, derniere_situation]
-end
-
-Questionnaire.find_or_create_by(nom_technique: 'sociodemographique_autopositionnement') do |questionnaire|
-  questionnaire.libelle = 'Sociodémographique et autopositionnement'
-end
-

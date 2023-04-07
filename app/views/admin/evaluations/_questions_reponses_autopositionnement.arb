@@ -4,23 +4,23 @@ div class: 'autopositionnement mb-4' do
   questions_et_reponses_standard = bienvenue.questions_et_reponses(:standard)
   div class: 'row question-standard' do
     div class: 'col' do
-      render partial: 'donnees_sociodemographiques',
-             locals: { noms_techniques_questions: %w[age genre langue_maternelle derniere_situation] }
+      render partial: 'donnees_sociodemographiques', locals: { categorie: 'situation' }
     end
     div class: 'col' do
-      render partial: 'donnees_sociodemographiques',
-             locals: { noms_techniques_questions: %w[lieu_scolarite dernier_niveau_etude] }
+      render partial: 'donnees_sociodemographiques', locals: { categorie: 'scolarite' }
     end
   end
   if bienvenue.inclus_autopositionnement?
     div class: 'row question-standard' do
       div class: 'col' do
-        render partial: 'autopositionnement_usage_du_numerique',
-               locals: { questions_et_reponses_standard: questions_et_reponses_standard }
+        render partial: 'autopositionnement', locals: {
+          categorie: 'appareils',
+          questions_reponses: questions_et_reponses_standard
+        }
       end
       div class: 'col' do
-        render partial: 'categorie_autopositionnement', locals: {
-          categorie: t('.sante'),
+        render partial: 'autopositionnement', locals: {
+          categorie: 'sante',
           questions_reponses: questions_et_reponses_standard
         }
       end

@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionQcm do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :intitule, :description,
+  permit_params :categorie, :libelle, :nom_technique, :intitule, :description,
                 :metacompetence, :type_qcm,
                 choix_attributes: %i[id intitule type_choix _destroy nom_technique]
 
@@ -13,6 +13,7 @@ ActiveAdmin.register QuestionQcm do
     f.semantic_errors
     f.inputs do
       f.input :libelle
+      f.input :categorie, as: :select
       f.input :nom_technique
       f.input :intitule
       f.input :metacompetence
@@ -33,6 +34,7 @@ ActiveAdmin.register QuestionQcm do
 
   index do
     column :libelle
+    column :categorie
     column :intitule
     column :metacompetence
     column :type_qcm

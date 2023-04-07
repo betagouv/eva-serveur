@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :intitule, :message,
+  permit_params :categorie, :libelle, :nom_technique, :intitule, :message,
                 :suffix_reponse, :description, :reponse_placeholder
 
   filter :libelle
@@ -12,6 +12,7 @@ ActiveAdmin.register QuestionSaisie do
     f.semantic_errors
     f.inputs do
       f.input :libelle
+      f.input :categorie, as: :select
       f.input :nom_technique
       f.input :description
       f.input :intitule
@@ -27,6 +28,7 @@ ActiveAdmin.register QuestionSaisie do
 
   index do
     column :libelle
+    column :categorie
     column :intitule
     column :created_at
     actions

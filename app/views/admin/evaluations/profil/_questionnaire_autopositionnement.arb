@@ -3,7 +3,7 @@
 div class: 'autopositionnement questionnaire' do
   h2 t('.questionnaire-auto-positionnement'), class: 'categorie'
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
-    div class: 'row' do
+    div class: 'row question-jauge' do
       div class: 'col intitule-question' do
         div question.intitule
       end

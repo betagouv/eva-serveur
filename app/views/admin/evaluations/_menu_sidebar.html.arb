@@ -13,7 +13,7 @@ div class: 'menu menu-transverse' do
       end
     end
     li do
-      a href: '#auto_positionnement' do
+      a href: '#profil' do
         text_node 'Auto-positionnement'
       end
     end

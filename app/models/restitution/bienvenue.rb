@@ -36,5 +36,11 @@ module Restitution
               .joins(:question)
               .where(questions: { categorie: categorie })
     end
+
+    def inclus_autopositionnement?
+      questionnaire = campagne.questionnaire_pour(situation)&.nom_technique
+      [Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
+       Questionnaire::AUTOPOSITIONNEMENT].include?(questionnaire)
+    end
   end
 end

@@ -11,9 +11,9 @@ div class: 'evaluation__restitution-globale' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf
-        h2 t('.prise_en_main_titre'), class: 'text-center mt-5 mb-4'
+        h2 t('.prise_en_main.titre'), class: 'text-center mt-5 mb-4'
       else
-        h2 t('.prise_en_main_titre')
+        h2 t('.prise_en_main.titre')
       end
 
       div class: 'panel' do
@@ -28,46 +28,49 @@ div class: 'evaluation__restitution-globale' do
 
   if bienvenue
     if pdf
-      div id: 'auto_positionnement' do
+      div id: 'profil' do
         div class: 'page' do
           render 'entete_page', restitution_globale: restitution_globale
 
-          h2 t('.autopositionnement_titre'), class: 'text-center mt-5 mb-4'
+          h2 t('.profil.titre'), class: 'text-center mt-5 mb-4'
 
           div class: 'panel' do
             div class: 'marges-page' do
-              render partial: 'questions_reponses_autopositionnement',
+              render partial: 'admin/evaluations/profil/questions_reponses',
                      locals: { bienvenue: bienvenue }
             end
 
             render 'pied_page'
           end
         end
-        div class: 'page' do
-          render 'entete_page', restitution_globale: restitution_globale
+        if bienvenue.inclus_autopositionnement?
+          div class: 'page' do
+            render 'entete_page', restitution_globale: restitution_globale
+            div class: 'panel' do
+              div class: 'marges-page' do
+                render partial: 'admin/evaluations/profil/questionnaire_autopositionnement',
+                       locals: { auto_positionnement: bienvenue }
+              end
 
-          div class: 'panel' do
-            div class: 'marges-page' do
-              render partial: 'questionnaire_autopositionnement',
-                     locals: { auto_positionnement: bienvenue }
+              render 'pied_page'
             end
-
-            render 'pied_page'
           end
         end
       end
     else
-      div id: 'auto_positionnement', class: 'page' do
+      div id: 'profil', class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
 
-        h2 t('.autopositionnement_titre')
+        h2 t('.profil.titre')
 
         div class: 'panel' do
           div class: 'marges-page' do
-            render partial: 'questions_reponses_autopositionnement',
+            render partial: 'admin/evaluations/profil/questions_reponses',
                    locals: { bienvenue: bienvenue }
-            render partial: 'questionnaire_autopositionnement',
-                   locals: { auto_positionnement: bienvenue }
+            if bienvenue.inclus_autopositionnement?
+              render partial: 'admin/evaluations/profil/questionnaire_autopositionnement',
+                     locals: { auto_positionnement: bienvenue }
+            end
           end
 
           render 'pied_page'

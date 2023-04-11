@@ -10,19 +10,19 @@ fr:
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"
         duree: Durée de passation
-      autopositionnement: &autopositionnement
-        questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
-        non_renseigne: 'Non renseigné'
-      questions_reponses_autopositionnement:
-        <<: *autopositionnement
-      questionnaire_autopositionnement:
-        <<: *autopositionnement
-      donnees_sociodemographiques:
-        situation: Situation
-        scolarite: Scolarité
-      autopositionnement:
-        appareils: Usage du numérique
-        sante: Santé
+      profil:
+        autopositionnement: &autopositionnement
+          questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
+          non_renseigne: 'Non renseigné'
+          appareils: Usage du numérique
+          sante: Santé
+        questions_reponses:
+          <<: *autopositionnement
+        questionnaire_autopositionnement:
+          <<: *autopositionnement
+        donnees_sociodemographiques:
+          situation: Situation
+          scolarite: Scolarité
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'
@@ -57,8 +57,10 @@ fr:
         parcours:
           titre: Parcours sélectionné
       restitution_globale:
-        autopositionnement_titre: Profil de la personne
-        prise_en_main_titre: Compétences numériques
+        profil:
+          titre: Profil de la personne
+        prise_en_main:
+          titre: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
       competences_transversales:
         competences_fortes_titre: 'Vos compétences transversales'

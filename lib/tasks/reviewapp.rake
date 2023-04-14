@@ -20,22 +20,31 @@ namespace :reviewapp do
     end
   end
 
-  def configure_questionnaire_socio(campagne)
-    q = Questionnaire.find_by(nom_technique: 'sociodemographique_autopositionnement')
+  def configure_questionnaire(campagne, nom_technique)
+    q = Questionnaire.find_by(nom_technique: nom_technique)
     premiere_situation_configuration = campagne.situations_configurations.first
     premiere_situation_configuration.situation = Situation.find_by(nom_technique: 'bienvenue')
     premiere_situation_configuration.questionnaire = q
-    campagne.save
+    premiere_situation_configuration.save
   end
 
-  def cree_campagne_socio
-    campagne_socio = Campagne.find_or_create_by(code: 'SOCIO',
-                                                libelle: 'sociodémographie') do |campagne|
-      campagne.compte = Compte.find_by(email: 'superadmin@beta.gouv.fr')
-      campagne.parcours_type = ParcoursType.find_by(nom_technique: 'competences_de_base')
-      campagne.type_programme = 'test'
+  def cree_campagne(code, libelle, questionnaire)
+    campagne = Campagne.find_or_create_by(code: code,
+                                          libelle: libelle) do |c|
+      c.compte = Compte.find_by(email: 'superadmin@beta.gouv.fr')
+      c.parcours_type = ParcoursType.find_by(nom_technique: 'competences_de_base')
+      c.type_programme = 'test'
     end
-    configure_questionnaire_socio(campagne_socio)
+    configure_questionnaire(campagne, questionnaire)
+  end
+
+  def cree_campagnes_socio
+    cree_campagne('SOCIOAUTO',
+                  'sociodémographie et autopositionnement',
+                  'sociodemographique_autopositionnement')
+    cree_campagne('SOCIO',
+                  'sociodémographie',
+                  'sociodemographique')
   end
 
   desc 'init db'
@@ -54,7 +63,7 @@ namespace :reviewapp do
   task seed: :environment do
     structure_eva = Structure.find_by(nom: 'eva')
     cree_les_comptes structure_eva
-    cree_campagne_socio
+    cree_campagnes_socio
 
     Compte.all.each do |compte|
       compte.encrypted_password = '$2a$11$d.kf40n..7zqTGgCPANFlOiLvwGH35EPh0OsY6euJaje3Us20KIWO'

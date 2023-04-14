@@ -28,7 +28,7 @@ div class: 'evaluation__restitution-globale' do
 
   if bienvenue
     if pdf
-      div id: 'auto_positionnement' do
+      div id: 'profil' do
         div class: 'page' do
           render 'entete_page', restitution_globale: restitution_globale
 
@@ -59,7 +59,7 @@ div class: 'evaluation__restitution-globale' do
         end
       end
     else
-      div id: 'auto_positionnement', class: 'page' do
+      div id: 'profil', class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
 
         h2 t('.autopositionnement_titre')

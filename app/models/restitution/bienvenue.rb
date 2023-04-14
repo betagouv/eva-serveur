@@ -31,5 +31,16 @@ module Restitution
                                         .find_or_create_by(evaluation: partie.evaluation)
       donnees.update(attributs_sociodemographiques.merge(deleted_at: nil))
     end
+
+    def inclus_autopositionnement?
+      [Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
+       Questionnaire::AUTOPOSITIONNEMENT].include?(questionnaire)
+    end
+
+    private
+
+    def questionnaire
+      @questionnaire ||= campagne.questionnaire_pour(situation)&.nom_technique
+    end
   end
 end

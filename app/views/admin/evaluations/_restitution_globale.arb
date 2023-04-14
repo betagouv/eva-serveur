@@ -43,16 +43,18 @@ div class: 'evaluation__restitution-globale' do
             render 'pied_page'
           end
         end
-        div class: 'page' do
-          render 'entete_page', restitution_globale: restitution_globale
+        if bienvenue.inclus_autopositionnement?
+          div class: 'page' do
+            render 'entete_page', restitution_globale: restitution_globale
 
-          div class: 'panel' do
-            div class: 'marges-page' do
-              render partial: 'questionnaire_autopositionnement',
-                     locals: { auto_positionnement: bienvenue }
+            div class: 'panel' do
+              div class: 'marges-page' do
+                render partial: 'questionnaire_autopositionnement',
+                       locals: { auto_positionnement: bienvenue }
+              end
+
+              render 'pied_page'
             end
-
-            render 'pied_page'
           end
         end
       end
@@ -66,8 +68,10 @@ div class: 'evaluation__restitution-globale' do
           div class: 'marges-page' do
             render partial: 'questions_reponses_autopositionnement',
                    locals: { bienvenue: bienvenue }
-            render partial: 'questionnaire_autopositionnement',
-                   locals: { auto_positionnement: bienvenue }
+            if bienvenue.inclus_autopositionnement?
+              render partial: 'questionnaire_autopositionnement',
+                     locals: { auto_positionnement: bienvenue }
+            end
           end
 
           render 'pied_page'

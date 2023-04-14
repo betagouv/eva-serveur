@@ -5,6 +5,7 @@ class Questionnaire < ApplicationRecord
   LIVRAISON_AVEC_REDACTION = 'livraison_expression_ecrite'
   SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT = 'sociodemographique_autopositionnement'
   SOCIODEMOGRAPHIQUE = 'sociodemographique'
+  AUTOPOSITIONNEMENT = 'autopositionnement'
 
   has_many :questionnaires_questions, lambda {
                                         order(position: :asc)

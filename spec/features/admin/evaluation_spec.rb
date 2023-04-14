@@ -92,15 +92,33 @@ describe 'Admin - Evaluation', type: :feature do
       let(:campagne_bienvenue) do
         create :campagne, compte: Compte.first, parcours_type: parcours_type
       end
+      let(:quetionnaire_auto) { create :questionnaire, :sociodemographique_autopositionnement }
 
-      before do
-        campagne_bienvenue.situations_configurations.create situation: bienvenue
+      context 'sans autopositionnement' do
+        before do
+          campagne_bienvenue.situations_configurations.create situation: bienvenue
+        end
+
+        it 'affiche les données données sociodémographqiues par défaut' do
+          visit admin_evaluation_path(mon_evaluation_bienvenue)
+          expect(page).to have_content 'Situation'
+          expect(page).to have_content 'Scolarité'
+          expect(page).not_to have_content 'auto-positionnement'
+          expect(page).to have_content 'Roger'
+        end
       end
 
-      it 'restitution avec auto_positionnement' do
-        visit admin_evaluation_path(mon_evaluation_bienvenue)
-        expect(page).to have_content 'auto-positionnement'
-        expect(page).to have_content 'Roger'
+      context 'avec autopositionnement' do
+        before do
+          campagne_bienvenue.situations_configurations.create situation: bienvenue,
+                                                              questionnaire: quetionnaire_auto
+        end
+
+        it "affiche l'auto_positionnement en plus" do
+          visit admin_evaluation_path(mon_evaluation_bienvenue)
+          expect(page).to have_content 'auto-positionnement'
+          expect(page).to have_content 'Roger'
+        end
       end
     end
 

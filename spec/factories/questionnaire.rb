@@ -24,5 +24,10 @@ FactoryBot.define do
       libelle { 'Sociodémographique' }
       nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE }
     end
+
+    trait :autopositionnement do
+      libelle { 'Autopositionnement' }
+      nom_technique { Questionnaire::AUTOPOSITIONNEMENT }
+    end
   end
 end

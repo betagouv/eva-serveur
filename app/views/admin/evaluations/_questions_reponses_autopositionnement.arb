@@ -11,16 +11,18 @@ div class: 'autopositionnement mb-4' do
              locals: { questions_et_reponses_standard: questions_et_reponses_standard }
     end
   end
-  div class: 'row question-standard' do
-    div class: 'col' do
-      render partial: 'autopositionnement_usage_du_numerique',
-             locals: { questions_et_reponses_standard: questions_et_reponses_standard }
-    end
-    div class: 'col' do
-      render partial: 'categorie_autopositionnement', locals: {
-        categorie: t('.sante'),
-        questions_reponses: questions_et_reponses_standard
-      }
+  if bienvenue.inclus_autopositionnement?
+    div class: 'row question-standard' do
+      div class: 'col' do
+        render partial: 'autopositionnement_usage_du_numerique',
+               locals: { questions_et_reponses_standard: questions_et_reponses_standard }
+      end
+      div class: 'col' do
+        render partial: 'categorie_autopositionnement', locals: {
+          categorie: t('.sante'),
+          questions_reponses: questions_et_reponses_standard
+        }
+      end
     end
   end
 end

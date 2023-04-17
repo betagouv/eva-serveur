@@ -1,9 +1,17 @@
 {
   "devDependencies": {
     "@storybook/addon-controls": "^6.5.13",
-    "@storybook/server": "^7.0.5"
+    "@storybook/addon-essentials": "^7.0.5",
+    "@storybook/addon-links": "^7.0.5",
+    "@storybook/blocks": "^7.0.5",
+    "@storybook/server": "^7.0.5",
+    "@storybook/server-webpack5": "^7.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.5"
   },
   "scripts": {
-    "storybook": "start-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   }
 }

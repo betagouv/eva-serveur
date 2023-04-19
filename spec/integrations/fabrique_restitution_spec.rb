@@ -8,10 +8,41 @@ describe FabriqueRestitution do
     let(:campagne) { create :campagne }
     let(:evaluation) { create :evaluation, campagne: campagne }
     let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
+    let!(:demarrage) do
+      create(:evenement_demarrage, partie: partie, position: 0, date: 3.minutes.ago)
+    end
 
     before do
       campagne.situations_configurations.create situation: situation
-      create(:evenement_demarrage, partie: partie)
+    end
+
+    describe '#instancie' do
+      context 'avec des événements qui ont une position' do
+        let!(:reponse2) { create(:evenement_reponse, partie: partie, position: 2) }
+        let!(:reponse1) { create(:evenement_reponse, partie: partie, position: 1) }
+        let!(:fin) { create(:evenement_fin_situation, partie: partie, position: 3) }
+
+        it 'trie les événéments par position' do
+          restitution = FabriqueRestitution.instancie(partie)
+          expect(restitution.evenements).to eq [demarrage, reponse1, reponse2, fin]
+        end
+      end
+
+      context 'avec des événements sans position (evenements historiques)' do
+        let!(:fin) { create(:evenement_fin_situation, partie: partie, date: 1.minute.ago) }
+        let!(:reponse) { create(:evenement_reponse, partie: partie, date: 2.minutes.ago) }
+
+        before do
+          # rubocop:disable Rails/SkipsModelValidations
+          Evenement.all.update_all(position: nil)
+          # rubocop:enable Rails/SkipsModelValidations
+        end
+
+        it 'trie les événéments par date' do
+          restitution = FabriqueRestitution.instancie(partie)
+          expect(restitution.evenements).to eq [demarrage, reponse, fin]
+        end
+      end
     end
 
     it "instancie les restitution des parties de l'évaluation" do

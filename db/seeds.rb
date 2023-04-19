@@ -160,9 +160,9 @@ genre = QuestionQcm.find_or_create_by(nom_technique: 'genre') do |question|
   question.libelle = 'Situation: Genre'
   question.intitule = 'Vous êtes ?'
   question.choix = [
-    Choix.create(nom_technique: 'homme', intitule: 'Un homme', type_choix: 'bon'),
-    Choix.create(nom_technique: 'femme', intitule: 'Une femme', type_choix: 'bon'),
-    Choix.create(nom_technique: 'autre', intitule: 'Autre', type_choix: 'bon')
+    Choix.new(nom_technique: 'homme', intitule: 'Un homme', type_choix: 'bon'),
+    Choix.new(nom_technique: 'femme', intitule: 'Une femme', type_choix: 'bon'),
+    Choix.new(nom_technique: 'autre', intitule: 'Autre', type_choix: 'bon')
   ]
 end
 
@@ -170,8 +170,8 @@ langue_maternelle = QuestionQcm.find_or_create_by(nom_technique: 'langue_materne
   question.libelle = 'Situation: Langue maternelle'
   question.intitule = 'Le français est-il votre langue maternelle ?'
   question.choix = [
-    Choix.create(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
-    Choix.create(nom_technique: 'non', intitule: 'Non', type_choix: 'bon'),
+    Choix.new(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
+    Choix.new(nom_technique: 'non', intitule: 'Non', type_choix: 'bon'),
   ]
 end
 
@@ -179,9 +179,9 @@ lieu_scolarite = QuestionQcm.find_or_create_by(nom_technique: 'lieu_scolarite') 
   question.libelle = 'Scolarité: Lieu de scolarite'
   question.intitule = "Êtes-vous allé à l'école ?"
   question.choix = [
-    Choix.create(nom_technique: 'france', intitule: 'Oui, en France', type_choix: 'bon'),
-    Choix.create(nom_technique: 'etranger', intitule: 'Oui, dans un autre pays', type_choix: 'bon'),
-    Choix.create(nom_technique: 'non_scolarise', intitule: 'Non', type_choix: 'bon'),
+    Choix.new(nom_technique: 'france', intitule: 'Oui, en France', type_choix: 'bon'),
+    Choix.new(nom_technique: 'etranger', intitule: 'Oui, dans un autre pays', type_choix: 'bon'),
+    Choix.new(nom_technique: 'non_scolarise', intitule: 'Non', type_choix: 'bon'),
   ]
 end
 
@@ -189,13 +189,13 @@ niveau_etude = QuestionQcm.find_or_create_by(nom_technique: 'dernier_niveau_etud
   question.libelle = "Scolarité: Niveau d'étude"
   question.intitule = "Quel niveau d'études avez-vous atteint ?"
   question.choix = [
-    Choix.create(nom_technique: 'pas_etudie', intitule: "Je ne suis pas allé à l'école", type_choix: 'bon'),
-    Choix.create(nom_technique: 'college', intitule: 'Niveau Collège', type_choix: 'bon'),
-    Choix.create(nom_technique: 'cfg_dnb', intitule: 'Niveau certificat de formation générale ou diplôme national du brevet', type_choix: 'bon'),
-    Choix.create(nom_technique: 'cap_bep', intitule: 'Niveau CAP/BEP', type_choix: 'bon'),
-    Choix.create(nom_technique: 'bac', intitule: 'Niveau Bac', type_choix: 'bon'),
-    Choix.create(nom_technique: 'bac_plus2', intitule: 'Niveau Bac+2', type_choix: 'bon'),
-    Choix.create(nom_technique: 'superieur_bac_plus2', intitule: 'Niveau supérieur à Bac+2', type_choix: 'bon'),
+    Choix.new(nom_technique: 'pas_etudie', intitule: "Je ne suis pas allé à l'école", type_choix: 'bon'),
+    Choix.new(nom_technique: 'college', intitule: 'Niveau Collège', type_choix: 'bon'),
+    Choix.new(nom_technique: 'cfg_dnb', intitule: 'Niveau certificat de formation générale ou diplôme national du brevet', type_choix: 'bon'),
+    Choix.new(nom_technique: 'cap_bep', intitule: 'Niveau CAP/BEP', type_choix: 'bon'),
+    Choix.new(nom_technique: 'bac', intitule: 'Niveau Bac', type_choix: 'bon'),
+    Choix.new(nom_technique: 'bac_plus2', intitule: 'Niveau Bac+2', type_choix: 'bon'),
+    Choix.new(nom_technique: 'superieur_bac_plus2', intitule: 'Niveau supérieur à Bac+2', type_choix: 'bon'),
   ]
 end
 
@@ -203,11 +203,11 @@ derniere_situation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_situ
   question.libelle = 'Situation: Dernière situation'
   question.intitule = 'Quelle était votre dernière situation ?'
   question.choix = [
-    Choix.create(nom_technique: 'scolarisation', intitule: 'Scolarisation', type_choix: 'bon'),
-    Choix.create(nom_technique: 'formation_professionnelle', intitule: 'Formation professionnelle', type_choix: 'bon'),
-    Choix.create(nom_technique: 'alternance', intitule: 'Alternance', type_choix: 'bon'),
-    Choix.create(nom_technique: 'en_emploi', intitule: 'En emploi', type_choix: 'bon'),
-    Choix.create(nom_technique: 'sans_emploi', intitule: 'Sans emploi', type_choix: 'bon'),
+    Choix.new(nom_technique: 'scolarisation', intitule: 'Scolarisation', type_choix: 'bon'),
+    Choix.new(nom_technique: 'formation_professionnelle', intitule: 'Formation professionnelle', type_choix: 'bon'),
+    Choix.new(nom_technique: 'alternance', intitule: 'Alternance', type_choix: 'bon'),
+    Choix.new(nom_technique: 'en_emploi', intitule: 'En emploi', type_choix: 'bon'),
+    Choix.new(nom_technique: 'sans_emploi', intitule: 'Sans emploi', type_choix: 'bon'),
   ]
 end
 
@@ -222,7 +222,7 @@ difficultes_informatique = QuestionQcm.find_or_create_by(nom_technique: 'difficu
   question.libelle = "Appareils: Difficultés avec l'informatique"
   question.intitule = "Avez-vous des difficultés avec l'outil informatique (maux de tête, difficultés d'utilisation) ?"
   question.choix = [
-    Choix.create(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
-    Choix.create(nom_technique: 'non', intitule: 'Non', type_choix: 'bon')
+    Choix.new(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
+    Choix.new(nom_technique: 'non', intitule: 'Non', type_choix: 'bon')
   ]
 end

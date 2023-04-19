@@ -3,8 +3,7 @@
 module Restitution
   class Bienvenue < Base
     def questions_reponses
-      @questions_reponses ||= QuestionsReponses.new(evenements,
-                                                    campagne.questionnaire_pour(situation))
+      @questions_reponses ||= QuestionsReponses.new(evenements)
     end
 
     def questions_et_reponses(type_qcm = nil)

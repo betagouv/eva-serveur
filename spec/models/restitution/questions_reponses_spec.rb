@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Restitution::QuestionsReponses do
-  let(:restitution) { described_class.new(evenements, questionnaire) }
+  let(:restitution) { described_class.new(evenements) }
   let(:bon_choix_q1) { create :choix, :bon }
   let(:bon_choix_qjauge) { create :choix, :bon }
   let(:question1) do
@@ -12,7 +12,6 @@ describe Restitution::QuestionsReponses do
   let(:question_jauge) do
     create :question_qcm, choix: [bon_choix_qjauge], type_qcm: :jauge
   end
-  let(:questionnaire) { create :questionnaire, questions: [question1, question_jauge] }
 
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
@@ -21,7 +20,7 @@ describe Restitution::QuestionsReponses do
       it { expect(restitution.questions_et_reponses).to eq([]) }
     end
 
-    context 'retourne les questions et les réponses du questionnaire' do
+    context 'retourne les questions et les réponses' do
       let(:evenements) do
         [
           build(:evenement_reponse,
@@ -38,7 +37,6 @@ describe Restitution::QuestionsReponses do
 
     context 'renvoie le texte de réponse pour les questions qui ne sont pas des Questions QCM' do
       let(:question_redaction_note) { create :question_saisie }
-      let(:questionnaire) { create :questionnaire, questions: [question_redaction_note] }
 
       let(:evenements) do
         [
@@ -70,16 +68,16 @@ describe Restitution::QuestionsReponses do
   end
 
   describe 'questions_redaction' do
-    context 'renvoie les questions de saisie et leur réponse' do
-      let(:question_redaction_note) { create :question_saisie }
-      let(:questionnaire) do
-        create :questionnaire, questions: [question_redaction_note, question1]
-      end
+    context 'renvoie les questions de rédaction et leur réponse' do
+      let(:question_redaction_note) { create :question_saisie, nom_technique: 'redaction_note' }
+      let(:question_age) { create :question_saisie, nom_technique: 'age' }
 
       let(:evenements) do
         [
           build(:evenement_reponse,
                 donnees: { question: question_redaction_note.id, reponse: 'ton b' }),
+          build(:evenement_reponse,
+                donnees: { question: question_age.id, reponse: '34' }),
           build(:evenement_reponse,
                 donnees: { question: question1.id, reponse: bon_choix_q1.id })
         ]
@@ -91,22 +89,28 @@ describe Restitution::QuestionsReponses do
   end
 
   describe '#choix_reponse' do
-    context 'retourne le choix répondu' do
-      let(:evenements) do
-        [
-          build(:evenement_demarrage),
-          build(:evenement_reponse,
-                donnees: { question: question1.id, reponse: bon_choix_q1.id })
-        ]
-      end
-
-      it { expect(restitution.choix_repondu(question1)).to eql(bon_choix_q1) }
+    let(:question_redaction) { create :question_saisie, nom_technique: 'redaction_note' }
+    let(:reponse1) do
+      build(:evenement_reponse,
+            donnees: { question: question1.id, reponse: bon_choix_q1.id })
+    end
+    let(:reponse_redaction) do
+      build(:evenement_reponse,
+            donnees: { question: question_redaction.id, reponse: 'ton b' })
     end
 
-    context "ne retourne rien si la question n'a pas été répondu" do
-      let(:evenements) { [] }
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        reponse1,
+        reponse_redaction
+      ]
+    end
 
-      it { expect(restitution.choix_repondu(question1)).to be_nil }
+    it 'retourne les choix répondu' do
+      expect(restitution.choix_repondu(question1, reponse1)).to eql(bon_choix_q1)
+      expect(restitution.choix_repondu(question_redaction, reponse_redaction))
+        .to eql('ton b')
     end
   end
 

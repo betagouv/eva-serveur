@@ -35,6 +35,7 @@ class Campagne < ApplicationRecord
     joins(:compte)
       .avec_nombre_evaluations_et_derniere_evaluation
       .where('comptes.structure_id' => structure)
+      .order('date_derniere_evaluation DESC NULLS LAST')
   }
   scope :avec_nombre_evaluations_et_derniere_evaluation, lambda {
     left_outer_joins(:evaluations)

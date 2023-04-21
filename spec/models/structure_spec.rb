@@ -103,7 +103,7 @@ describe Structure, type: :model do
 
   describe 'à la création' do
     it 'programme un mail de relance' do
-      expect { create :structure, :avec_admin }
+      expect { create :structure }
         .to have_enqueued_job(RelanceStructureSansCampagneJob).exactly(1)
     end
   end

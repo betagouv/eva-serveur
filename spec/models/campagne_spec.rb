@@ -13,16 +13,24 @@ describe Campagne, type: :model do
     describe '.de_la_structure' do
       let(:compte) { create :compte }
       let(:autre_compte) { create :compte }
-      let(:campagne) { create :campagne, compte: compte }
       let(:autre_campagne) { create :campagne, compte: autre_compte }
-      let!(:evaluation) do
-        create :evaluation, campagne: campagne, created_at: Time.zone.local(2019, 10, 9, 10, 1, 20)
+
+      let!(:campagne_non_active) { create :campagne, libelle: 'non active', compte: compte }
+      let(:campagne_moins_active) { create :campagne, libelle: 'moins active', compte: compte }
+      let(:campagne_active) { create :campagne, libelle: 'active', compte: compte }
+      let!(:evaluation_recente) do
+        create :evaluation, campagne: campagne_active,
+                            created_at: Time.zone.local(2020, 1, 1, 12, 0, 21)
+      end
+      let!(:evaluation_pas_recente) do
+        create :evaluation, campagne: campagne_moins_active,
+                            created_at: Time.zone.local(2020, 1, 1, 12, 0, 20)
       end
 
       subject(:campagnes) { described_class.de_la_structure(compte.structure) }
 
-      it "retourne les campagnes d'une structure donnée" do
-        expect(campagnes).to contain_exactly(campagne)
+      it "retourne les campagnes d'une structure par ordre d'activité" do
+        expect(campagnes.all.map(&:libelle)).to eql ['active', 'moins active', 'non active']
       end
 
       it "retourne le nombre d'évaluations pour une campagne" do
@@ -30,7 +38,7 @@ describe Campagne, type: :model do
       end
 
       it 'retourne la date de la dernière évaluation pour une campagne' do
-        expect(campagnes.first.date_derniere_evaluation).to eq(evaluation.created_at)
+        expect(campagnes.first.date_derniere_evaluation).to eq(evaluation_recente.created_at)
       end
     end
   end

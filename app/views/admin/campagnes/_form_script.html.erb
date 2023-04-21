@@ -19,7 +19,7 @@ function reinitialiseSelection(inputClass) {
 
 function afficheZone(choix_selection, zoneAAfficher) {
   $(`#${zoneAAfficher}`).show();
-  const option_livraison = $("#campagne_options_personnalisation_livraison").parent();
+  const option_redaction = $("#campagne_options_personnalisation_redaction").parent();
   switch (choix_selection) {
     case "campagne_type_programme_positionnement":
       affichePositionnement()
@@ -30,9 +30,9 @@ function afficheZone(choix_selection, zoneAAfficher) {
     <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
     case "campagne_parcours_type_id_<%= parcours_type.id%>":
       <% if parcours_type.option_redaction? %>
-        option_livraison.show();
+        option_redaction.show();
       <% else %>
-        option_livraison.hide();
+        option_redaction.hide();
       <% end %>
         break;
     <% end %>

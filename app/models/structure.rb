@@ -14,10 +14,7 @@ class Structure < ApplicationRecord
 
   geocoded_by :code_postal, state: :region, params: { countrycodes: 'fr' } do |obj, resultats|
     if (resultat = resultats.first)
-      region = 'Nouvelle-Calédonie' if obj.code_postal.start_with?('988')
-      region = 'Corse' if obj.code_postal.start_with?('20')
-      region ||= resultat.state
-      obj.region = region
+      obj.region = cherche_region(obj.code_postal)
       obj.latitude = resultat.latitude
       obj.longitude = resultat.longitude
     end
@@ -79,5 +76,18 @@ class Structure < ApplicationRecord
     RelanceStructureSansCampagneJob
       .set(wait: 7.days)
       .perform_later(id)
+  end
+
+  def self.cherche_region(code_postal)
+    departement = code_postal.match(/^97|^98/) ? code_postal[0, 3] : code_postal[0, 2]
+    departement = '2A' if departement == '20'
+    begin
+      reponse = RestClient.get("https://geo.api.gouv.fr/departements/#{departement}")
+      code_region = JSON.parse(reponse)['codeRegion']
+      reponse = RestClient.get("https://geo.api.gouv.fr/regions/#{code_region}")
+      JSON.parse(reponse)['nom']
+    rescue RestClient::NotFound
+      Rails.logger.warn "Region introuvable pour le code postal #{code_postal}"
+    end
   end
 end

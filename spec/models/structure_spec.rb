@@ -13,19 +13,24 @@ describe Structure, type: :model do
     it { expect(SecureRandom.uuid).to match(Structure::REGEX_UUID) }
   end
 
+  def mock_geo_api(departement, code_region, region)
+    allow(RestClient).to receive(:get)
+      .with("https://geo.api.gouv.fr/departements/#{departement}")
+      .and_return({ codeRegion: code_region }.to_json)
+    allow(RestClient).to receive(:get)
+      .with("https://geo.api.gouv.fr/regions/#{code_region}")
+      .and_return({ nom: region }.to_json)
+  end
+
   describe 'géolocalisation à la validation' do
     describe "pour n'importe quel code postal" do
       let(:structure) { Structure.new code_postal: '75012' }
 
       before do
         Geocoder::Lookup::Test.add_stub(
-          '75012', [
-            {
-              'coordinates' => [40.7143528, -74.0059731],
-              'state' => 'Île-de-France'
-            }
-          ]
+          '75012', [{ 'coordinates' => [40.7143528, -74.0059731] }]
         )
+        mock_geo_api(75, 11, 'Île-de-France')
         structure.valid?
       end
 
@@ -45,11 +50,11 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '98850', [
             {
-              'state' => '',
               'coordinates' => [47.3129, 120.0596]
             }
           ]
         )
+        mock_geo_api(988, 988, 'Nouvelle-Calédonie')
         structure.valid?
       end
 
@@ -63,33 +68,9 @@ describe Structure, type: :model do
 
       before do
         Geocoder::Lookup::Test.add_stub(
-          '20090', [
-            {
-              'state' => '',
-              'coordinates' => [41.9333, 8.7507]
-            }
-          ]
+          '20090', [{ 'coordinates' => [41.9333, 8.7507] }]
         )
-        structure.valid?
-      end
-
-      it 'lui attribue la région Corse' do
-        expect(structure.region).to eql('Corse')
-      end
-    end
-
-    describe 'si ma structure a un code postal commençant par 21' do
-      let(:structure) { Structure.new code_postal: '20114' }
-
-      before do
-        Geocoder::Lookup::Test.add_stub(
-          '20114', [
-            {
-              'state' => '',
-              'coordinates' => [41.5188, 9.1264]
-            }
-          ]
-        )
+        mock_geo_api('2A', 94, 'Corse')
         structure.valid?
       end
 
@@ -106,11 +87,11 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '61000', [
             {
-              'state' => 'Normandie',
               'coordinates' => [48.4310232, 0.0922579]
             }
           ]
         )
+        mock_geo_api(61, 28, 'Normandie')
         structure.valid?
       end
 

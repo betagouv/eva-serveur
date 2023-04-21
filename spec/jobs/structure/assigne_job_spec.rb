@@ -7,14 +7,12 @@ describe Structure::AssigneRegionJob, type: :job do
 
   before do
     structure.update(region: nil)
-    Geocoder::Lookup::Test.add_stub(
-      '92100', [
-        {
-          'coordinates' => [40.7143528, -74.0059731],
-          'state' => 'Île-de-France'
-        }
-      ]
-    )
+    allow(RestClient).to receive(:get)
+      .with('https://geo.api.gouv.fr/departements/92')
+      .and_return({ codeRegion: 11 }.to_json)
+    allow(RestClient).to receive(:get)
+      .with('https://geo.api.gouv.fr/regions/11')
+      .and_return({ nom: 'Île-de-France' }.to_json)
     Structure::AssigneRegionJob.perform_now
     structure.reload
   end

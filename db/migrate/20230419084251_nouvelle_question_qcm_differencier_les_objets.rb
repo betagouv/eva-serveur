@@ -5,7 +5,7 @@ class NouvelleQuestionQcmDifferencierLesObjets < ActiveRecord::Migration[7.0]
 
   def up
     old_question = Question.find_by(nom_technique: 'differencier_objets')
-    old_question.update(nom_technique: 'confondre_objets')
+    old_question&.update(nom_technique: 'confondre_objets')
     new_question = QuestionQcm.find_or_create_by(nom_technique: 'differencier_objets', type_qcm: 'jauge') do |question|
       question.libelle = 'Il est facile pour moi de différencier les objets.'
       question.choix = [
@@ -19,6 +19,8 @@ class NouvelleQuestionQcmDifferencierLesObjets < ActiveRecord::Migration[7.0]
       ]
       question.intitule = "Il est facile pour moi de différencier les objets, même lorsqu'ils ont des formes ou des couleurs qui se ressemblent."
     end
-    QuestionnaireQuestion.where(question_id: old_question.id).update_all(question_id: new_question.id)
+    if old_question.present?
+      QuestionnaireQuestion.where(question_id: old_question.id).update_all(question_id: new_question.id)
+    end
   end
 end

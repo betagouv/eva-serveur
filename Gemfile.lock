@@ -170,7 +170,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.2.0)
-    connection_pool (2.3.0)
+    connection_pool (2.4.0)
     crass (1.0.6)
     date (3.3.3)
     descriptive_statistics (2.4.0)
@@ -397,6 +397,8 @@ GEM
       mail
     redcarpet (3.6.0)
     redis (4.8.0)
+    redis-client (0.14.1)
+      connection_pool
     regexp_parser (2.6.2)
     require_all (3.0.0)
     responders (3.0.1)
@@ -476,10 +478,11 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.5.8)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.0.8)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     sidekiq-scheduler (5.0.1)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 4, < 8)
@@ -605,7 +608,7 @@ DEPENDENCIES
   rubocop-rspec
   sass-rails (>= 6)
   shoulda-matchers
-  sidekiq (< 7)
+  sidekiq (< 8)
   sidekiq-scheduler
   spreadsheet
   spring (~> 3.0)

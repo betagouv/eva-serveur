@@ -15,4 +15,24 @@ namespace :structure do
       puts "assigne région \"#{structure.region}\" pour #{structure.nom}"
     end
   end
+
+  desc 'Vérifie les regions avec le nouvel algo'
+  task verifie_region: :environment do
+    logger = RakeLogger.logger
+    cps = Structure.group(:code_postal, :region).pluck(:code_postal, :region)
+    total = cps.count
+    logger.info "Nombre de Structure : #{total}"
+
+    count = 0
+    cps.each do |cp, ancienne_region|
+      print '.'
+
+      nouvelle_region = GeolocHelper.cherche_region(cp)
+      if ancienne_region != nouvelle_region
+        puts "\nanciennement \"#{ancienne_region}\" nouvelle \"#{nouvelle_region}\" : #{cp}"
+      end
+      count += 1
+    end
+    logger.info "C'est fini"
+  end
 end

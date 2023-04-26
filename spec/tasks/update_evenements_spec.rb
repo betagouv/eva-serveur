@@ -31,13 +31,15 @@ describe 'evenements:update_questions_reponses' do
   end
 
   it 'met à jour les évènements réponses de la questions confondre_objets' do
-    expect(evenement.reload.nom).to eq 'reponse'
-    expect(evenement.reload.donnees['question']).to eq(nouvelle_question.id)
-    expect(evenement.reload.donnees['reponse']).to eq(nouvelle_reponse.id)
+    evenement.reload
+    expect(evenement.nom).to eq 'reponse'
+    expect(evenement.donnees['question']).to eq(nouvelle_question.id)
+    expect(evenement.donnees['reponse']).to eq(nouvelle_reponse.id)
   end
 
   it 'met à jour les autres évènements' do
-    expect(evenement_affiche_question.reload.nom).to eq 'affichageQuestionQCM'
+    evenement_affiche_question.reload
+    expect(evenement_affiche_question.nom).to eq 'affichageQuestionQCM'
     expect(evenement_affiche_question.reload.donnees['question']).to eq(nouvelle_question.id)
   end
 

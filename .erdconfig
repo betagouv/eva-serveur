@@ -12,7 +12,7 @@ notation: simple
 orientation: horizontal
 polymorphism: false
 sort: true
-warn: true
+warn: false
 title: Modèle de données
 exclude: null
 only: null

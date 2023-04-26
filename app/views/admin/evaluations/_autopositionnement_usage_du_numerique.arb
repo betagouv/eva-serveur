@@ -4,6 +4,6 @@ h2 t('.usage_du_numerique'), class: 'categorie'
 questions_et_reponses_standard.each do |question, reponse|
   if question.libelle.start_with?(t('.appareils'))
     div question.intitule
-    div reponse.intitule, class: 'reponse'
+    div reponse&.intitule, class: 'reponse'
   end
 end

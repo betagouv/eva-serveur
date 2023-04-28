@@ -44,7 +44,7 @@ describe 'Evaluation', type: :request do
           expect(evaluation.beneficiaire.nom).to eq 'Roger'
 
           expect(response).to have_http_status(:created)
-          reponse = JSON.parse(response.body)
+          reponse = response.parsed_body
           expect(reponse['id']).to eq evaluation.id
         end
 
@@ -76,7 +76,7 @@ describe 'Evaluation', type: :request do
         before { post '/api/evaluations', params: payload_invalide }
 
         it 'retourne une 422' do
-          json = JSON.parse(response.body)
+          json = response.parsed_body
           expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le nom]
           expect(json.values.sort).to eq [['Code inconnu'], ['doit être présente'],
                                           ['doit être rempli'], ['doit être rempli(e)']]
@@ -90,7 +90,7 @@ describe 'Evaluation', type: :request do
         before { post '/api/evaluations', params: payload_invalide }
 
         it 'retourne une 422' do
-          json = JSON.parse(response.body)
+          json = response.parsed_body
           expect(json.keys.sort).to eq %w[campagne debutee_le nom]
           expect(json.values.sort).to eq [['doit être présente'], ['doit être rempli'],
                                           ['doit être rempli(e)']]
@@ -104,7 +104,7 @@ describe 'Evaluation', type: :request do
         before { post '/api/evaluations', params: payload_invalide }
 
         it 'retourne une 422' do
-          json = JSON.parse(response.body)
+          json = response.parsed_body
           expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
           expect(json.values.sort).to eq [['doit exister'], ['doit être présente'],
                                           ['doit être rempli'], ['doit être rempli(e)']]

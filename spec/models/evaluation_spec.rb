@@ -66,6 +66,21 @@ describe Evaluation do
         expect(described_class.sans_mise_en_action).to eq [evaluation_sans_mise_en_action]
       end
     end
+
+    describe '.competences_de_base_completes' do
+      let!(:evaluation_complete) { create :evaluation, completude: 'complete' }
+      let!(:evaluation_incomplete) { create :evaluation, completude: 'incomplete' }
+      let!(:evaluation_transversales_incompletes) do
+        create :evaluation, completude: 'competences_transversales_incompletes'
+      end
+
+      it do
+        expect(described_class.competences_de_base_completes).to contain_exactly(
+          evaluation_transversales_incompletes,
+          evaluation_complete
+        )
+      end
+    end
   end
 
   describe '#responsables_suivi' do
@@ -146,6 +161,7 @@ describe Evaluation do
     let!(:evaluation_sans_mise_en_action) do
       create :evaluation,
              synthese_competences_de_base: :illettrisme_potentiel,
+             completude: 'complete',
              campagne: campagne
     end
     let!(:evaluation_sans_difficulte) do

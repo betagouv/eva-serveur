@@ -60,6 +60,9 @@ class Evaluation < ApplicationRecord
   }
   scope :non_anonymes, -> { where(anonymise_le: nil) }
   scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
+  scope :competences_de_base_completes, lambda {
+    where(completude: %w[complete competences_transversales_incompletes])
+  }
 
   def display_name
     nom
@@ -89,7 +92,9 @@ class Evaluation < ApplicationRecord
     accessible_by(ability)
       .illettrisme_potentiel
       .sans_mise_en_action
-      .non_anonymes.order(created_at: :desc)
+      .competences_de_base_completes
+      .non_anonymes
+      .order(created_at: :desc)
       .includes(:mise_en_action)
   end
 

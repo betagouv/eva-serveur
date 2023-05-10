@@ -47,7 +47,7 @@ div class: 'mon-compte row' do
       end
     end
 
-    if can?(:manage, Compte)
+    if can?(:manage, Compte) || current_compte.charge_mission_regionale?
       div class: 'panel' do
         attributes_table_for compte do
           row :sign_in_count

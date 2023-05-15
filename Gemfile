@@ -19,7 +19,7 @@ gem 'activeadmin-xls', git: 'https://github.com/shanser/activeadmin-xls',
                        branch: 'autoload'
 gem 'acts_as_list'
 gem 'addressable'
-gem 'ancestry', '< 4.3'
+gem 'ancestry', '~> 4.3'
 gem 'auto_strip_attributes', '~> 2.6'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'

@@ -8,9 +8,9 @@ describe Structure, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to validate_uniqueness_of(:nom).scoped_to(:code_postal).case_insensitive }
 
-  describe 'REGEX_UUID' do
-    it { expect('uuid invalide').not_to match(Structure::REGEX_UUID) }
-    it { expect(SecureRandom.uuid).to match(Structure::REGEX_UUID) }
+  describe 'Ancestry primary key format' do
+    it { expect('uuid invalide').not_to match(Ancestry.default_primary_key_format) }
+    it { expect(SecureRandom.uuid).to match(Ancestry.default_primary_key_format) }
   end
 
   def mock_geo_api(departement, code_region, region)

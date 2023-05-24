@@ -12,5 +12,6 @@ sur le dépot github et mettre à jour les fichiers chez nous.
 
 ## Test
 
-En dev ou en pré-prod, nous n'activons pas de cookies (ni Hotjar, ni Matomo) ce qui fait que la banière n'apparait pas.
-Pour tester en dev, il suffit de définir les deux variables système : HOTJAR_ID et MATOMO_ID avant de lancer le serveur.
+En dev ou en pré-prod, nous n'activons pas de cookies ce qui fait que la
+banière n'apparait pas.  Pour tester en dev, il suffit de définir les variables
+système : CRISP_WEBSITE_ID, HOTJAR_ID et/ou MATOMO_ID avant de lancer le serveur.

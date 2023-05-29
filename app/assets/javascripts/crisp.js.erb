@@ -1,5 +1,5 @@
 // Integration Crisp
 <% if ENV['CRISP_WEBSITE_ID'].present? %>
-tarteaucitron.user.crispID = <%= ENV['CRISP_WEBSITE_ID'] %>;
+tarteaucitron.user.crispID = "<%= ENV['CRISP_WEBSITE_ID'] %>";
 (tarteaucitron.job = tarteaucitron.job || []).push('crisp');
 <% end %>

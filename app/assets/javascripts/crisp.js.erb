@@ -1,5 +1,12 @@
 // Integration Crisp
 <% if ENV['CRISP_WEBSITE_ID'].present? %>
-tarteaucitron.user.crispID = "<%= ENV['CRISP_WEBSITE_ID'] %>";
-(tarteaucitron.job = tarteaucitron.job || []).push('crisp');
+window.$crisp=[];
+window.CRISP_WEBSITE_ID="<%= ENV['CRISP_WEBSITE_ID'] %>";
+(function(){
+  d=document;
+  s=d.createElement("script");
+  s.src="https://client.crisp.chat/l.js";
+  s.async=1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
 <% end %>

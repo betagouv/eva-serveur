@@ -47,8 +47,9 @@ fr:
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
     footer: |
-      Ce site est créé avec ❤️ par <a href='https://beta.gouv.fr/startups/eva.html' target='_blank'>l'équipe</a> eva.
-      Le <a href='https://github.com/betagouv/eva-serveur' target='_blank'>code source</a> est libre.
+      Ce site est créé avec ❤️ par <a href='https://beta.gouv.fr/startups/eva.html' target='_blank'>l'équipe</a> eva -
+      Le <a href='https://github.com/betagouv/eva-serveur' target='_blank'>code source</a> est libre -
+      <a href="#tarteaucitron">Cookies</a>
     menu_connexion:
       compte: Voir mon compte
       structure: Voir ma structure

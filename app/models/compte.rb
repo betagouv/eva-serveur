@@ -26,7 +26,7 @@ class Compte < ApplicationRecord
 
   delegate :code_postal, to: :structure, prefix: true
 
-  belongs_to :structure
+  belongs_to :structure, optional: true
 
   accepts_nested_attributes_for :structure
 

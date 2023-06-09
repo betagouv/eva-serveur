@@ -233,10 +233,10 @@ ActiveAdmin.setup do |config|
                priority: 1,
                if: proc { !current_compte.email_non_confirme? }
       menu.add id: 'utility_structure_courante',
-               label: proc{ current_compte.structure.display_name },
+               label: proc{ current_compte.structure&.display_name },
                url: proc{
                  structure = current_compte.structure
-                 send("admin_#{structure.type.underscore}_path", structure)
+                 send("admin_#{structure.type.underscore}_path", structure) if structure
                },
                priority: 2
       menu.add id: 'utility_compte',
@@ -247,14 +247,14 @@ ActiveAdmin.setup do |config|
               label: I18n.t('active_admin.menu_connexion.structure').html_safe,
               url: proc{
                 structure = current_compte.structure
-                send("admin_#{structure.type.underscore}_path", structure)
+                send("admin_#{structure.type.underscore}_path", structure) if structure
               },
               priority: 4
       menu.add id: 'utility_statistiques',
               label: I18n.t('active_admin.menu_connexion.statistiques').html_safe,
               url: proc{
                 structure = current_compte.structure
-                send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-statistiques")
+                send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-statistiques") if structure
               },
               priority: 5
       admin.add_logout_button_to_menu menu

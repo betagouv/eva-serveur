@@ -7,11 +7,11 @@ ActiveAdmin.register_page 'Dashboard' do
 
   content title: proc { I18n.t('active_admin.dashboard') } do
     render partial: 'dashboard',
-           locals: {
-             evaluations: evaluations,
-             actualites: actualites,
-             campagnes: campagnes
-           }
+      locals: {
+        evaluations: evaluations,
+        actualites: actualites,
+        campagnes: campagnes
+      }
   end
 
   controller do
@@ -23,6 +23,14 @@ ActiveAdmin.register_page 'Dashboard' do
     before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
                   :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente,
                   :recupere_evaluations_sans_mise_en_action
+
+    def index
+      return if params[:ville_ou_code_postal].blank?
+
+      @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
+      @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
+        .where.not(id: @structures_code_postal)
+    end
 
     private
 

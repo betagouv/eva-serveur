@@ -5,12 +5,13 @@ fr:
       description: |
         **Vous souhaitez créer un compte conseiller eva.**
         Dans un premier temps merci de regarder si votre structure est déjà enregistrée.
-      label_champ_recherche: Entrez la localisation de la structure
+    recherche_structure:
       aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
-      structure_non_referencee: Vous ne trouvez pas votre structure ?
-      placeholder_recherche: Code postal ou ville
       bouton_recherche_structure: Chercher
+      label_champ_recherche: Entrez la localisation de la structure
       lien_retour: Se connecter
+      placeholder_recherche: Code postal ou ville
+      structure_non_referencee: Vous ne trouvez pas votre structure ?
     structure:
       code_postal: 'Code postal : '
       rejoindre_structure: Rejoindre

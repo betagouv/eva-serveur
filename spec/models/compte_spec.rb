@@ -15,7 +15,7 @@ describe Compte do
       .backed_by_column_of_type(:string)
   end
 
-  it { is_expected.to belong_to(:structure) }
+  it { is_expected.to belong_to(:structure).optional }
   it { is_expected.to validate_presence_of :statut_validation }
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :prenom }

@@ -18,10 +18,7 @@ class Compte < ApplicationRecord
   validate :verifie_dns_email, :structure_a_un_admin
   validates :role, inclusion: { in: %w[conseiller compte_generique], message: :comptes_refuses },
                    if: :compte_refuse?
-  validates :email, uniqueness: {
-    case_sensitive: false,
-    conditions: -> { with_deleted }
-  }
+  validates :email, uniqueness: { case_sensitive: false }
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 

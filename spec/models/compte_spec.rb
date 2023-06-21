@@ -27,9 +27,8 @@ describe Compte do
       autre_compte.destroy
     end
 
-    it "Ne retourne pas d'erreur PostgreSQL" do
-      expect(compte.save).to eq false
-      expect(compte.errors.first.type).to eq :taken
+    it "Peut ré-utiliser l'adresse email d'un compte effacé" do
+      expect(compte.save).to eq true
     end
   end
 

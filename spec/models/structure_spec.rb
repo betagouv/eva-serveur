@@ -13,6 +13,19 @@ describe Structure, type: :model do
     it { expect(SecureRandom.uuid).to match(Ancestry.default_primary_key_format) }
   end
 
+  context 'quand une structure a été soft-deleted' do
+    let(:structure) { build :structure, nom: 'nom', code_postal: '75012' }
+
+    before do
+      structure_existante_effacee = create :structure, nom: 'nom', code_postal: '75012'
+      structure_existante_effacee.destroy
+    end
+
+    it "Ne retourne pas d'erreur PostgreSQL" do
+      expect(structure.save).to eq false
+    end
+  end
+
   def mock_geo_api(departement, code_region, region)
     allow(RestClient).to receive(:get)
       .with("https://geo.api.gouv.fr/departements/#{departement}")

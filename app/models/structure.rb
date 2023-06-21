@@ -7,7 +7,11 @@ class Structure < ApplicationRecord
   alias structure_referente parent
   alias structure_referente= parent=
   validates :nom, presence: true
-  validates :nom, uniqueness: { case_sensitive: false, scope: :code_postal }
+  validates :nom, uniqueness: {
+    case_sensitive: false,
+    conditions: -> { with_deleted },
+    scope: :code_postal
+  }
 
   auto_strip_attributes :nom, squish: true
 

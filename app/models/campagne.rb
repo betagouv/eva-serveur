@@ -17,8 +17,8 @@ class Campagne < ApplicationRecord
   validates :type_programme, presence: true, on: :create
   validates :parcours_type, presence: true, on: :create
   validates :libelle, presence: true
-  validates :code, presence: true, uniqueness: { case_sensitive: false },
-                   format: { with: /\A[A-Z0-9]+\z/ }
+  validates :code, presence: true, format: { with: /\A[A-Z0-9]+\z/ },
+                   uniqueness: { case_sensitive: false, conditions: -> { with_deleted } }
   validates_associated :situations_configurations
 
   delegate :structure_code_postal, to: :compte

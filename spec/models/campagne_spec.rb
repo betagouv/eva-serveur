@@ -9,6 +9,21 @@ describe Campagne, type: :model do
   it { is_expected.not_to allow_value('ABC.123.').for(:code) }
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
 
+  context 'quand une campagne a été soft-delete' do
+    let(:compte) { create :compte }
+    let(:campagne) { build :campagne, compte: compte, code: 'XY234' }
+
+    before do
+      campagne_existante_effacee = create :campagne, libelle: 'effacée', compte: compte,
+                                                     code: 'XY234'
+      campagne_existante_effacee.destroy
+    end
+
+    it "Ne retourne pas d'erreur PostgreSQL" do
+      expect(campagne.save).to eq false
+    end
+  end
+
   describe 'scopes' do
     describe '.de_la_structure' do
       let(:compte) { create :compte }

@@ -119,6 +119,12 @@ $grid-gutter-width: 1.25rem;
     display: inline-block;
   }
 
+  .recommandation-anlci {
+    img {
+      margin-top: 1.5rem; // centrage par coïncidence
+    }
+  }
+
   .referentiel-anlci {
     border-radius: 0;
     padding: 1.125rem 0;

@@ -404,6 +404,13 @@
     align-items: center;
     border-bottom: 1px solid $anlci_orange;
     color: $anlci_orange;
+    img {
+      height: 4rem;
+    }
+
+    .col p:last-child {
+      margin-bottom: 0
+    }
   }
 
   .litteratie-numeratie-niveau1-anlci {

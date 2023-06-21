@@ -13,9 +13,9 @@ div id: 'correspondance_anlci', class: 'page' do
     div class: 'row no-gutters recommandation-anlci marges-page' do
       div class: 'col-auto' do
         if pdf
-          image_tag wicked_pdf_asset_base64('logo_anlci.png'), class: 'pr-5'
+          svg_tag_base64 'logo_anlci_nacarat.svg', class: 'pr-5'
         else
-          image_tag 'logo_anlci.png', class: 'pr-5'
+          image_tag 'logo_anlci_nacarat.svg', class: 'pr-5'
         end
       end
       div class: 'col' do

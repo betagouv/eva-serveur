@@ -17,7 +17,7 @@ fr:
     attributes:
       evaluation:
         created_at: Créée le
-        debutee_le: Débutée le
+        debutee_le: Date
         terminee_le: Terminée le
         anonymisee_le: Anonymisée le
         mise_en_action_le: Mise en action répondue le

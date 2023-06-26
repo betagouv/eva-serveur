@@ -3,6 +3,7 @@
 class CompteMailer < ApplicationMailer
   def nouveau_compte
     @compte = params[:compte]
+    @admins = ["mon admin", "mon autre admin"] ## @compte.find_admins
     mail(to: @compte.email,
          subject: t('.objet', structure: @compte.structure.display_name))
   end

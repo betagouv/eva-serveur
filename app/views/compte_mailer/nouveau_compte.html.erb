@@ -5,6 +5,14 @@
          url_connexion: root_url,
          url_client: URL_CLIENT
         ) %>
+<% unless @admins.empty? %>
+  <%= md t('.vos_admins') %>
+  <ul>
+    <% @admins.each do |admin| %>
+      <li><%= admin%></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= md t('layouts.mailer.aide_conseiller',
           document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN,
           email_support: Eva::EMAIL_SUPPORT) %>

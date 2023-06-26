@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-describe CompteMailer, type: :mailer do
+describe CompteMailer, type: :mailer, focus: true do
   describe '#nouveau_compte' do
     it 'envoie un email de confirmation de création de compte' do
-      structure = StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012'
+      structure = create :structure_locale, nom: 'Ma Super Structure'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
       email = CompteMailer.with(compte: compte).nouveau_compte
@@ -23,6 +23,15 @@ describe CompteMailer, type: :mailer do
       expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Besoin d&#39;aide')
       expect(email.body).to include(Eva::DOCUMENT_PRISE_EN_MAIN)
+      expect(email.body).not_to include('La validation de votre compte est en attente')
+    end
+
+    it 'ajoute la liste des admins quand il y en a' do
+      structure = create :structure_locale, :avec_admin
+      compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
+
+      email = CompteMailer.with(compte: compte).nouveau_compte
+      expect(email.body).to include('La validation de votre compte est en attente')
     end
   end
 

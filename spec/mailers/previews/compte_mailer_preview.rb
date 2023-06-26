@@ -8,6 +8,12 @@ class CompteMailerPreview < ActionMailer::Preview
     CompteMailer.with(compte: compte).nouveau_compte
   end
 
+  def nouveau_compte_avec_admin
+    structure = create :structure_locale, :avec_admin, nom: 'Ma Super Structure', code_postal: '75012'
+    compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
+    CompteMailer.with(compte: compte).nouveau_compte
+  end
+
   def alerte_admin
     structure = StructureLocale.new id: SecureRandom.uuid, nom: 'Ma Super Structure',
                                     code_postal: '75012'

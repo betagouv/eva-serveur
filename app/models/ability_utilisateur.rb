@@ -65,6 +65,7 @@ class AbilityUtilisateur
     can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
     can :read, compte
     can :update, compte
+    can :rejoindre_structure, compte
     comptes_generiques_ou_comptes_admin(compte)
     droits_validation_comptes(compte)
     cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }

@@ -1,0 +1,10 @@
+<div class="sous-panel">
+  <div class="infos">
+    <h4><%= structure.nom %></h4>
+    <div class="sous-infos"><strong><%= t('.code_postal') %></strong><%= structure.code_postal %></div>
+  </div>
+  <%= link_to t('.rejoindre_structure'),
+    rejoindre_structure_admin_compte_path(current_compte, structure_id: structure.id),
+    method: :patch
+  %>
+</div>

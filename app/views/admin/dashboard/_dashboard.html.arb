@@ -2,7 +2,7 @@
 
 if current_compte.structure.nil?
   h2 'Quelles est votre structure ?'
-  render '/structures/recherche_structure'
+  render partial: '/structures/recherche_structure', locals: { recherche_url: 'dashboard' }
 elsif current_compte.validation_refusee?
   render 'validation_refusee'
 elsif prise_en_main.en_cours?

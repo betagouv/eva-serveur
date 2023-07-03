@@ -124,6 +124,12 @@ ActiveAdmin.register Compte do
     end
   end
 
+  member_action :rejoindre_structure, method: :patch do
+    structure = Structure.find(params['structure_id'])
+    resource.update(structure: structure, statut_validation: 'en_attente', role: 'conseiller')
+    redirect_to request.referer
+  end
+
   controller do
     helper_method :peut_modifier_mot_de_passe?, :collection_roles
 

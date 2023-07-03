@@ -7,11 +7,11 @@ ActiveAdmin.register_page 'Dashboard' do
 
   content title: proc { I18n.t('active_admin.dashboard') } do
     render partial: 'dashboard',
-      locals: {
-        evaluations: evaluations,
-        actualites: actualites,
-        campagnes: campagnes
-      }
+           locals: {
+             evaluations: evaluations,
+             actualites: actualites,
+             campagnes: campagnes
+           }
   end
 
   controller do
@@ -29,7 +29,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
       @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
       @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
-        .where.not(id: @structures_code_postal)
+                                   .where.not(id: @structures_code_postal)
     end
 
     private

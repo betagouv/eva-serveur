@@ -84,6 +84,16 @@
       align-items: center;
     }
 
+    .legende-jauge {
+      position: relative;
+      color: $eva_bluegrey;
+
+      span:last-child {
+        position: absolute;
+        right: 0;
+      }
+    }
+
     .jauge {
       position: relative;
       background-image: asset-data-url('jauge.svg');

@@ -2,6 +2,15 @@
 
 div class: 'autopositionnement questionnaire' do
   h2 t('.questionnaire-auto-positionnement'), class: 'categorie'
+  div class: 'row mb-1' do
+    div class: 'col intitule-question'
+    div class: 'col' do
+      div class: 'legende-jauge' do
+        span t('.echelle-jauge-min')
+        span t('.echelle-jauge-max')
+      end
+    end
+  end
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
     div class: 'row' do
       div class: 'col intitule-question' do
@@ -9,7 +18,7 @@ div class: 'autopositionnement questionnaire' do
       end
       div class: 'col' do
         div class: 'jauge' do
-          div reponse.position, class: "position-#{reponse.position} puce"
+          div reponse.position, title: reponse.intitule, class: "position-#{reponse.position} puce"
         end
       end
     end

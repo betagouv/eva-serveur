@@ -5,6 +5,10 @@
   }
 }
 
+.ui-helper-hidden-accessible {
+  visibility: hidden;
+}
+
 .new, .edit, .show, .create, .update {
   .lien-retour {
     position: absolute;

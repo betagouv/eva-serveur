@@ -65,9 +65,10 @@ fr:
       sous_titre: Bien débuter
       etapes:
         progression:
-          titre: Débutez eva en 3 étapes
+          titre: Débutez eva en 5 étapes
           creation_campagne: Campagne créée
           confirmation_email: Email confirmé
+          rejoindre_structure: Structure trouvée
           test_campagne: Campagne testée
           passations: 4 passations effectuées
         creation_campagne:
@@ -85,6 +86,13 @@ fr:
             Renvoyer les instructions de confirmation
           question: |
             **Vous n’avez pas reçu notre email ?**
+        rejoindre_structure:
+          titre: Rejoignez votre structure
+          description: |
+            Recherchez votre structure et rejoignez là.
+
+            Vous pourrez ainsi retrouver vos collègues et mieux travailler ensemble.
+          action: Rechercher votre structure
         passations:
           titre: Organisez 4 passations
           description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « *Vos dernières évaluations* » ci-dessous."

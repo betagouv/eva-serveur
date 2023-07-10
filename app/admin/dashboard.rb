@@ -24,14 +24,6 @@ ActiveAdmin.register_page 'Dashboard' do
                   :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente,
                   :recupere_evaluations_sans_mise_en_action
 
-    def index
-      return if params[:ville_ou_code_postal].blank?
-
-      @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
-      @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
-                                   .where.not(id: @structures_code_postal)
-    end
-
     private
 
     def annonce

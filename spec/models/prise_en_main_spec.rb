@@ -13,41 +13,41 @@ describe PriseEnMain do
   end
 
   describe '#etape_en_cours' do
-    context "quand il n'y a pas de campagne" do
-      let(:nombre_campagnes) { 0 }
-
-      it { expect(prise_en_main.etape_en_cours).to eq 'creation_campagne' }
+    context "Quand le compte n'a pas de structure" do
+      it { expect(prise_en_main.etape_en_cours).to eq 'rejoindre_structure' }
     end
 
-    context 'quand il y a une campagne' do
-      let(:nombre_campagnes) { 1 }
+    context 'Quand le compte a rejoint une structure' do
+      let(:structure) { Structure.new }
 
-      context "et qu'il n'y a pas d'évaluation" do
-        let(:nombre_evaluations) { 0 }
-
-        it { expect(prise_en_main.etape_en_cours).to eq 'test_campagne' }
+      before do
+        compte.structure = structure
       end
 
-      context "et qu'il y a au moins une évaluation" do
-        let(:nombre_evaluations) { 1 }
+      context "et qu'il n'y a pas de campagne" do
+        let(:nombre_campagnes) { 0 }
 
-        context "et que le compte n'est pas confirmé" do
-          it { expect(prise_en_main.etape_en_cours).to eq 'confirmation_email' }
+        it { expect(prise_en_main.etape_en_cours).to eq 'creation_campagne' }
+      end
+
+      context "et qu'il y a une campagne" do
+        let(:nombre_campagnes) { 1 }
+
+        context "et qu'il n'y a pas d'évaluation" do
+          let(:nombre_evaluations) { 0 }
+
+          it { expect(prise_en_main.etape_en_cours).to eq 'test_campagne' }
         end
 
-        context 'et que le compte est confirmé' do
-          let(:compte) { Compte.new(confirmed_at: Time.zone.now) }
+        context "et qu'il y a au moins une évaluation" do
+          let(:nombre_evaluations) { 1 }
 
-          context "et que le compte n'a pas de structure" do
-            it { expect(prise_en_main.etape_en_cours).to eq 'rejoindre_structure' }
+          context "et que le compte n'est pas confirmé" do
+            it { expect(prise_en_main.etape_en_cours).to eq 'confirmation_email' }
           end
 
-          context 'et que le compte a rejoint une structure' do
-            let(:structure) { Structure.new }
-
-            before do
-              compte.structure = structure
-            end
+          context 'et que le compte est confirmé' do
+            let(:compte) { Compte.new(confirmed_at: Time.zone.now) }
 
             context "et qu'il y a moins de 4 passations" do
               let(:nombre_evaluations) { 3 }

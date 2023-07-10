@@ -6,6 +6,7 @@ fr:
       compte:
         signed_in_but_unconfirmed: ""
   active_admin:
+    recherche_structure: Rechercher ma structure
     devise:
       login:
         title: |

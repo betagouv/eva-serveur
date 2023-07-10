@@ -116,4 +116,41 @@ describe Campagne, type: :model do
       it { expect(campagne.avec_competences_transversales?).to be true }
     end
   end
+
+  describe '#genere_code_unique' do
+    let(:compte) { create :compte }
+    let(:campagne) { build :campagne, compte: compte, code: nil }
+    before do
+      allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'
+    end
+
+    context 'genere un code avec le code postal de la structure' do
+      before do
+        allow(compte).to receive(:structure_code_postal).and_return '75012'
+        campagne.genere_code_unique
+      end
+
+      it do
+        expect(campagne.code).to eq 'XXX75012'
+      end
+    end
+
+    context "quand il n'y a pas de compte" do
+      before do
+        campagne.compte = nil
+        campagne.genere_code_unique
+      end
+
+      it { expect(campagne.code).to be_nil }
+    end
+
+    context 'quand le code est déjà présent' do
+      before do
+        campagne.code = '123'
+        campagne.genere_code_unique
+      end
+
+      it { expect(campagne.code).to eq '123' }
+    end
+  end
 end

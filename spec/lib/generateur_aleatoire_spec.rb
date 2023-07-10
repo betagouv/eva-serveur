@@ -19,5 +19,10 @@ describe GenerateurAleatoire do
       chaine_generee = GenerateurAleatoire.majuscules 20
       expect(chaine_generee.upcase).to eq chaine_generee
     end
+
+    it 'ne contient pas de lettre en double' do
+      chaine_generee = GenerateurAleatoire.majuscules 26
+      expect(chaine_generee.chars.uniq.size).to eq 26
+    end
   end
 end

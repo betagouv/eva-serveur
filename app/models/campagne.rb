@@ -72,6 +72,16 @@ class Campagne < ApplicationRecord
     configuration_inclus?(Situation::SITUATIONS_PRE_POSITIONNEMENT)
   end
 
+  def genere_code_unique
+    return if self[:code].present?
+    return if compte.blank?
+
+    loop do
+      self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
+      break if Campagne.where(code: self[:code]).none?
+    end
+  end
+
   private
 
   def configuration_inclus?(situations)
@@ -98,16 +108,6 @@ class Campagne < ApplicationRecord
     situation = Situation.find_by nom_technique: Situation::PLAN_DE_LA_VILLE
 
     situations_configurations.build situation_id: situation.id
-  end
-
-  def genere_code_unique
-    return if self[:code].present?
-    return if compte.blank?
-
-    loop do
-      self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
-      break if Campagne.where(code: self[:code]).none?
-    end
   end
 
   def construit_situation_configuration(situation_configuration)

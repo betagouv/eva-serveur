@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Compte do
+  menu if: proc { current_compte.structure_id.present? }
   permit_params :email, :password, :password_confirmation, :role, :structure_id,
                 :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel
 
@@ -127,7 +128,7 @@ ActiveAdmin.register Compte do
   member_action :rejoindre_structure, method: :patch do
     structure = Structure.find(params['structure_id'])
     resource.update(structure: structure, statut_validation: 'en_attente', role: 'conseiller')
-    redirect_to request.referer
+    redirect_to admin_dashboard_path
   end
 
   controller do

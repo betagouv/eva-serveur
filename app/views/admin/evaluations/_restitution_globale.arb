@@ -6,26 +6,6 @@ titre_avec_aide_illettrisme = 'titre--avec-aide-illettrisme' if resource.illettr
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
-  if prise_en_main? && !pdf
-    div id: 'competence-numerique', class: 'page' do
-      render 'entete_page', restitution_globale: restitution_globale
-
-      if pdf
-        h2 t('.prise_en_main_titre'), class: 'text-center mt-5 mb-4'
-      else
-        h2 t('.prise_en_main_titre')
-      end
-
-      div class: 'panel' do
-        div class: 'marges-page' do
-          render partial: 'prise_en_main'
-        end
-
-        render 'pied_page'
-      end
-    end
-  end
-
   if bienvenue
     if pdf
       div id: 'profil' do
@@ -76,6 +56,26 @@ div class: 'evaluation__restitution-globale' do
 
           render 'pied_page'
         end
+      end
+    end
+  end
+
+  if prise_en_main?
+    div id: 'competence-numerique', class: 'page' do
+      render 'entete_page', restitution_globale: restitution_globale
+
+      if pdf
+        h2 t('.prise_en_main_titre'), class: 'text-center mt-5 mb-4'
+      else
+        h2 t('.prise_en_main_titre')
+      end
+
+      div class: 'panel' do
+        div class: 'marges-page' do
+          render partial: 'prise_en_main'
+        end
+
+        render 'pied_page'
       end
     end
   end

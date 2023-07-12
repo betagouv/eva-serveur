@@ -1,5 +1,0 @@
-# frozen_string_literal: true
-
-h2 'Quelles est votre structure ?'
-render partial: '/structures/recherche_structure',
-       locals: { recherche_url: 'recherche_structure' }

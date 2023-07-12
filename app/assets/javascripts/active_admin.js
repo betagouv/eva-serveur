@@ -9,7 +9,7 @@
 //= require bootstrap
 //= require faq
 //= require aide
-//= require autocomplete_recherche_structure
+//= require autocomplete_recherche
 //= require clipboard
 //= require evaluation
 

@@ -1,0 +1,36 @@
+<div class='label-champ-recherche'><%= t('.label_champ_recherche')%></div>
+<%= form_with url: @recherche_url, method: :get do |f| %>
+  <%= f.search_field :ville_ou_code_postal, placeholder: t('.placeholder_recherche'), value: params[:ville_ou_code_postal], class: 'champ-recherche champ-recherche--geographique' %>
+  <%= f.hidden_field :code_postal, value: params[:code_postal] %>
+  <%= f.submit t('.bouton_recherche_structure'), id: 'bouton-chercher',
+    disabled: !params[:ville_ou_code_postal] || params[:ville_ou_code_postal].length == 0 %>
+<% end %>
+
+<% if params[:ville_ou_code_postal].present? %>
+  <% if @structures_code_postal.present? %>
+    <p class="description-liste-structures mt-4"><%= @structures_code_postal.size %> résultat(s) pour <%= params[:code_postal] %></p>
+    <% @structures_code_postal.each do |structure| %>
+      <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
+    <% end %>
+
+    <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
+  <% end %>
+
+  <% if @structures.present? %>
+    <p class="description-liste-structures mt-4">Structures à proximité</p>
+    <% @structures.each do |structure| %>
+      <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
+    <% end %>
+  <% end %>
+
+  <% if @structures.empty? && @structures_code_postal.empty? %>
+    <p class="mt-4"><%= t('.aucun_resultat') %></p>
+  <% end %>
+
+  <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
+<% end %>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  $('.ui-menu').addClass('recherche_structure');
+});
+</script>

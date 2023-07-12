@@ -1,0 +1,7 @@
+fr:
+  recherche_structure_component:
+    aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
+    bouton_recherche_structure: Chercher
+    label_champ_recherche: Entrez la localisation de la structure
+    lien_retour: Se connecter
+    placeholder_recherche: Code postal ou ville

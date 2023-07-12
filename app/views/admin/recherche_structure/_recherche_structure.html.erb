@@ -1,5 +1,8 @@
-<div class="recherche_structure col col-8 panel">
+<div class="recherche-structure col col-8 panel">
   <h2><%= t('.titre') %></h2>
   <p><%= t('.message_accueil') %></p>
-  <%= render(partial: '/structures/recherche_structure', locals: { recherche_url: 'recherche_structure' }) %>
+  <%= render(RechercheStructureComponent.new(recherche_url: 'recherche_structure',
+                                             structures_code_postal: @structures_code_postal,
+                                             structures: @structures,
+                                             current_compte: current_compte)) %>
 </div>

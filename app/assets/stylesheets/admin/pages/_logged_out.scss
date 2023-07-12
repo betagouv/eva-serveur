@@ -215,46 +215,6 @@ body.logged_out {
     }
   }
 
-  .recherche-structure {
-    p:first-child {
-      margin-bottom: 2rem;
-    }
-    form {
-      display: flex;
-    }
-    form + .sous-panel {
-      margin-top: 1rem;
-    }
-    .label-champ-recherche {
-      font-size: .875rem;
-      margin-bottom: .5rem;
-      display: block;
-    }
-    .champ-recherche {
-      flex-grow: 1;
-      margin-right: .5rem;
-
-      &--geographique {
-        background-image: image-url('punaise-recherche.svg');
-      }
-    }
-    .description-liste-structures {
-      margin-bottom: 1rem;
-      color: $eva_main_blue;
-    }
-    .actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 2rem;
-    }
-    .creer-structure {
-      @include bouton-arrondi;
-      color: $eva_dark;
-      background-color: $couleur-warning;
-      border: none;
-    }
-  }
-
   form {
     .inputs {
       background-color: #fff;

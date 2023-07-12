@@ -71,5 +71,4 @@ document.addEventListener('DOMContentLoaded', () => {
     minLength: 3,
     delay: 100
   });
-  $('.ui-menu').addClass('recherche_structure');
 });

@@ -1,4 +1,3 @@
-
 <div id="active_admin_content">
   <% content_for :titre do %>
     <%= t('.titre') -%>
@@ -7,6 +6,8 @@
   <div class="recherche-structure">
     <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
     <%= md t('.description')%>
-    <%= render(partial: 'recherche_structure', locals: { recherche_url: '/structures' }) %>
+    <%= render(RechercheStructureComponent.new(recherche_url: '/structures',
+                                               structures_code_postal: @structures_code_postal,
+                                               structures: @structures)) %>
   </div>
 </div>

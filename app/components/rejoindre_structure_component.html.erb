@@ -1,0 +1,19 @@
+<div class="rejoindre-structure">
+  <div class="infos">
+    <h4><%= @structure.nom %></h4>
+    <div class="sous-infos"><strong><%= t('.code_postal') %></strong><%= @structure.code_postal %></div>
+  </div>
+  <% if @current_compte.present? %>
+    <%= link_to t('.rejoindre_structure'),
+      rejoindre_structure_admin_compte_path(@current_compte, structure_id: @structure.id),
+      method: :patch
+    %>
+  <% else %>
+    <%= link_to t('.rejoindre_structure'),
+                new_compte_registration_path(
+                  structure_id: @structure,
+                  code_postal: params[:code_postal],
+                  ville_ou_code_postal: params[:ville_ou_code_postal]
+                ) %>
+  <% end %>
+</div>

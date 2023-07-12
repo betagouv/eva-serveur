@@ -1,0 +1,21 @@
+#active_admin_content .rejoindre-structure {
+  @include carte-avec-bordure();
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem .75rem;
+  align-items: flex-start;
+
+  .infos {
+    max-width: 16.25rem;
+    .sous-infos {
+      margin-top: .75rem;
+      color: $couleur-texte;
+      font-size: .75rem;
+    }
+  }
+
+  a {
+    @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+  }
+}

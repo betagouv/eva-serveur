@@ -1,0 +1,26 @@
+.ui-helper-hidden-accessible {
+  visibility: hidden;
+}
+
+.recherche-structure {
+  form {
+    display: flex;
+  }
+  .label-champ-recherche {
+    font-size: .875rem;
+    margin-bottom: .5rem;
+    display: block;
+  }
+  .champ-recherche {
+    flex-grow: 1;
+    margin-right: .5rem;
+
+    &--geographique {
+      background-image: image-url('punaise-recherche.svg');
+    }
+  }
+  .description-liste-structures {
+    margin-bottom: 1rem;
+    color: $eva_main_blue;
+  }
+}

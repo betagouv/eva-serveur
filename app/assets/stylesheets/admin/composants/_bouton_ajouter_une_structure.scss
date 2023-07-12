@@ -1,0 +1,12 @@
+.bouton-creer-structure {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+
+  a {
+    @include bouton-arrondi;
+    color: $eva_dark;
+    background-color: $couleur-warning;
+    border: none;
+  }
+}

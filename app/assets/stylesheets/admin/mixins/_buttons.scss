@@ -16,7 +16,7 @@
   border-radius: 0.25rem;
   border: 1px solid transparent;
   background-color: $eva_main_blue;
-  &:hover {
+  &:not(.disabled):hover {
     background-color: #fff;
     border-color: $eva_main_blue;
     color: $eva_main_blue;

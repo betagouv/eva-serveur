@@ -35,7 +35,9 @@ function afficheRecherche(boutonAjout, formulaireRecherche) {
 document.addEventListener('DOMContentLoaded', () => {
   $( ".champ-recherche" ).autocomplete({
     source: function (request, response) {
-      $('#bouton-chercher').prop("disabled", true);
+      $('#bouton-chercher')
+        .prop("disabled", true)
+        .addClass("disabled");
       if (!request.term.match(/^\d{1,4}$/)) {
         let data = { limit: 6, type: 'commune-actuelle,arrondissement-municipal' };
         if (estUnCodePostal(request.term)) {
@@ -65,7 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
       $('#code_postal').val(ui.item.code_postal);
 
       const disabled = ui.item.value == '';
-      $('#bouton-chercher').prop("disabled", disabled);
+      $('#bouton-chercher')
+        .prop("disabled", disabled)
+        .toggleClass('disabled', disabled);
     },
     autoFocus: false,
     minLength: 3,

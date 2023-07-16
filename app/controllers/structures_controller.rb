@@ -5,11 +5,11 @@ class StructuresController < ApplicationController
   helper ::ActiveAdmin::ViewHelpers
 
   def index
-    return if params[:ville_ou_code_postal].blank?
-
-    @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
-    @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
-                                 .where.not(id: @structures_code_postal)
+    @recherche_structure_component = RechercheStructureComponent.new(
+      recherche_url: '/structures',
+      ville_ou_code_postal: params[:ville_ou_code_postal],
+      code_postal: params[:code_postal]
+    )
   end
 
   def show

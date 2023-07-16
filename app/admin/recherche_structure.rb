@@ -9,11 +9,12 @@ ActiveAdmin.register_page 'recherche_structure' do
 
   controller do
     def index
-      return if params[:ville_ou_code_postal].blank?
-
-      @structures_code_postal = StructureLocale.where(code_postal: params[:code_postal])
-      @structures = StructureLocale.near("#{params[:ville_ou_code_postal]}, FRANCE")
-                                   .where.not(id: @structures_code_postal)
+      @recherche_structure_component = RechercheStructureComponent.new(
+        recherche_url: 'recherche_structure',
+        current_compte: @current_compte,
+        ville_ou_code_postal: params[:ville_ou_code_postal],
+        code_postal: params[:code_postal]
+      )
     end
   end
 end

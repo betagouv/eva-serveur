@@ -3,9 +3,7 @@
     <%= t('.titre') -%>
   <% end %>
 
-  <div class="recherche-structure">
-    <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
-    <%= md t('.description')%>
-    <%= render(@recherche_structure_component) %>
-  </div>
+  <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
+  <%= md t('.description')%>
+  <%= render(@recherche_structure_component) %>
 </div>

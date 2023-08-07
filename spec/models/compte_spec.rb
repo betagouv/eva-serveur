@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe Compte do
+  ActiveJob::Base.queue_adapter = :test
+
   it do
     expect(subject).to define_enum_for(:role)
       .with_values(
@@ -92,6 +94,17 @@ describe Compte do
     it { expect(Compte.new(role: 'admin').au_moins_admin?).to be(true) }
     it { expect(Compte.new(role: 'compte_generique').au_moins_admin?).to be(true) }
     it { expect(Compte.new(role: 'conseiller').au_moins_admin?).to be(false) }
+  end
+
+  describe '#rejoindre_structure' do
+    let(:structure) { Structure.new }
+    let(:compte) { Compte.new statut_validation: nil, role: nil }
+
+    before { compte.rejoindre_structure(structure) }
+
+    it { expect(compte.structure).to eql(structure) }
+    it { expect(compte.statut_validation).to eql('en_attente') }
+    it { expect(compte.role).to eql('conseiller') }
   end
 
   describe "verifie la présence d'un admin" do

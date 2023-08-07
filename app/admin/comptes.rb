@@ -126,8 +126,7 @@ ActiveAdmin.register Compte do
   end
 
   member_action :rejoindre_structure, method: :patch do
-    structure = Structure.find(params['structure_id'])
-    resource.update(structure: structure, statut_validation: 'en_attente', role: 'conseiller')
+    resource.rejoindre_structure(Structure.find(params['structure_id']))
     redirect_to admin_dashboard_path
   end
 

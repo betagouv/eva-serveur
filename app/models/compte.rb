@@ -73,6 +73,10 @@ class Compte < ApplicationRecord
     unconfirmed_email.presence || email
   end
 
+  def rejoindre_structure(structure)
+    update(structure: structure, statut_validation: :en_attente, role: :conseiller)
+  end
+
   private
 
   def verifie_dns_email

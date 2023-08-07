@@ -74,7 +74,12 @@ class Compte < ApplicationRecord
   end
 
   def rejoindre_structure(structure)
-    update(structure: structure, statut_validation: :en_attente, role: :conseiller)
+    self.structure = structure
+    self.statut_validation = :en_attente
+    self.role = :conseiller
+
+    assigne_role_admin_si_pas_d_admin
+    save
   end
 
   private

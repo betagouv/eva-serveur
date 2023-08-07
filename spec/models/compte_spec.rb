@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe Compte do
-  ActiveJob::Base.queue_adapter = :test
-
   it do
     expect(subject).to define_enum_for(:role)
       .with_values(
@@ -100,7 +98,10 @@ describe Compte do
     let(:structure) { Structure.new }
     let(:compte) { Compte.new statut_validation: nil, role: nil }
 
-    before { compte.rejoindre_structure(structure) }
+    before do
+      allow(compte).to receive(:autres_admins?).and_return(true)
+      compte.rejoindre_structure(structure)
+    end
 
     it { expect(compte.structure).to eql(structure) }
     it { expect(compte.statut_validation).to eql('en_attente') }

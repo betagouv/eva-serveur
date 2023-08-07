@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe FabriqueEvenement do
-  ActiveJob::Base.queue_adapter = :test
   let!(:situation_livraison) { create :situation_livraison }
 
   let(:chemin) { Rails.root.join('spec/support/evenement/donnees.json') }

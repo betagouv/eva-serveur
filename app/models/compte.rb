@@ -84,6 +84,7 @@ class Compte < ApplicationRecord
   end
 
   def structure_a_un_admin
+    return if structure.nil?
     return if au_moins_admin?
     return if autres_admins?
 

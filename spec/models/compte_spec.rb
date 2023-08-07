@@ -96,7 +96,7 @@ describe Compte do
 
   describe "verifie la présence d'un admin" do
     let(:structure) { Structure.new }
-    let(:compte) { Compte.new role: 'admin' }
+    let(:compte) { Compte.new role: 'admin', structure: structure }
 
     before do
       allow(compte).to receive(:verifie_dns_email).and_return(true)
@@ -133,6 +133,15 @@ describe Compte do
 
       it 'ajoute un admin' do
         compte.role = 'admin'
+        compte.valid?
+        expect(compte.errors[:role]).to be_blank
+      end
+    end
+
+    context "Quand le compte n'a pas de structure" do
+      it 'le compte peut avoir un rôle de conseiller' do
+        compte.role = 'conseiller'
+        compte.structure = nil
         compte.valid?
         expect(compte.errors[:role]).to be_blank
       end

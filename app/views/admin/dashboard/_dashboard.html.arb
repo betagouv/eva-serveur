@@ -15,7 +15,7 @@ elsif prise_en_main.en_cours?
                                        quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :primary,
                                        method: :patch)
-          else
+          elsif current_compte.structure_id.present?
             render BoutonComponent.new(t('admin.dashboard.prise_en_main.quitter'),
                                        quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :outline_orange,

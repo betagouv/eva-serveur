@@ -28,24 +28,35 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context 'quand je suis en mode en tutoriel' do
+  context 'quand je suis avec un compte sans structure' do
+    let!(:compte) do
+      create :compte_conseiller, statut_validation: :acceptee, structure: nil
+    end
+
+    it 'Affiche le tutoriel sans le bouton quitter' do
+      visit admin_path
+      expect(page).to have_content('Bien débuter')
+      expect(page).not_to have_content('Quitter le tutoriel')
+    end
+  end
+
+  context 'quand je suis avec un compte avec une structure' do
     let!(:compte) do
       create :compte_conseiller, statut_validation: :acceptee, structure: ma_structure
     end
 
-    it 'affiche la prise en main' do
+    it 'affiche le tutoriel avec un bouton quitter' do
       visit admin_path
+      expect(page).to have_content('Bien débuter')
       expect(page).to have_content('Quitter le tutoriel')
     end
 
-    context "quitter le mode tutoriel à n'importe quel moment" do
-      it "n'affiche plus la prise en main" do
-        expect do
-          visit admin_path
-          click_on 'Quitter le tutoriel'
-        end.to change { compte.reload.mode_tutoriel }.from(true).to(false)
-        expect(page).not_to have_content('Quitter le tutoriel')
-      end
+    it 'peut quitter le mode tutoriel' do
+      expect do
+        visit admin_path
+        click_on 'Quitter le tutoriel'
+      end.to change { compte.reload.mode_tutoriel }.from(true).to(false)
+      expect(page).not_to have_content('Quitter le tutoriel')
     end
 
     context "je n'ai pas encore créé de campagne" do

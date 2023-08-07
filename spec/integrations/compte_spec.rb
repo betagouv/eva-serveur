@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe Compte, type: :integration do
-  ActiveJob::Base.queue_adapter = :test
-
   describe 'après création' do
     context 'quand le compte est en attente de validation' do
       let!(:structure) { create :structure_locale, :avec_admin }

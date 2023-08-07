@@ -3,11 +3,10 @@
 require 'rails_helper'
 
 describe 'Admin - Compte', type: :feature do
-  let!(:ma_structure) { create :structure_locale, nom: 'Ma structure' }
+  let!(:ma_structure) { create :structure_locale, nom: 'Ma structure', code_postal: '75012' }
   let!(:compte_superadmin) do
-    create :compte, structure: ma_structure, email: 'moi@structure'
+    create :compte_superadmin, structure: ma_structure, email: 'moi@structure'
   end
-  let(:compte_connecte) { compte_superadmin }
   let!(:collegue) do
     create :compte_conseiller, structure: ma_structure, email: 'collegue@structure',
                                prenom: 'Collègue'
@@ -16,6 +15,7 @@ describe 'Admin - Compte', type: :feature do
   before { connecte(compte_connecte) }
 
   describe 'index' do
+    let(:compte_connecte) { compte_superadmin }
     before { visit admin_comptes_path }
 
     it { expect(page).to have_content 'moi@structure' }
@@ -259,7 +259,51 @@ describe 'Admin - Compte', type: :feature do
     end
   end
 
+  context 'avec un compte sans structure' do
+    let(:compte_connecte) do
+      create :compte_conseiller, structure: nil
+    end
+
+    it 'peut rejoindre une structure' do
+      visit admin_recherche_structure_path(
+        ville_ou_code_postal: 'Paris+(75012)',
+        code_postal: '75012'
+      )
+      click_on 'Rejoindre'
+      expect(page).to have_current_path admin_dashboard_path
+      expect(compte_connecte.reload.structure).to eq ma_structure
+      expect(compte_connecte.role).to eq 'conseiller'
+    end
+
+    it "revient sur la page de recherche si la structure n'existe plus" do
+      visit admin_recherche_structure_path(
+        ville_ou_code_postal: 'Paris+(75012)',
+        code_postal: '75012'
+      )
+      ma_structure.destroy
+      click_on 'Rejoindre'
+      expect(page).to have_current_path admin_recherche_structure_path
+    end
+
+    context 'avec une structure sans admin' do
+      let!(:nouvelle_structure) { create :structure_locale, code_postal: '67000' }
+
+      it 'devient admin de la structure' do
+        visit admin_recherche_structure_path(
+          ville_ou_code_postal: 'Strasbourg(67000)',
+          code_postal: '67000'
+        )
+        find(:xpath, "(//a[text()='Rejoindre'])[1]").click
+        expect(page).to have_current_path admin_dashboard_path
+        expect(compte_connecte.reload.structure).to eq nouvelle_structure
+        expect(compte_connecte.role).to eq 'admin'
+      end
+    end
+  end
+
   describe '#show' do
+    let(:compte_connecte) { compte_superadmin }
+
     context "quand le compte connecté a fait une demande pour changer d'email" do
       before do
         compte_connecte.update unconfirmed_email: 'nouvel-email@exemple.fr'

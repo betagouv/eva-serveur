@@ -8,6 +8,8 @@ module Comptes
       after_commit :after_commit_on_create, on: :create
     end
 
+    private
+
     def after_commit_on_create
       return if superadmin?
 

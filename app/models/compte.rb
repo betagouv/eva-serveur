@@ -41,7 +41,7 @@ class Compte < ApplicationRecord
   end
 
   def find_admins
-    Compte.where(structure: structure, role: ADMIN_ROLES)
+    Compte.where(structure: structure, role: ADMIN_ROLES).where.not(structure: nil)
   end
 
   def compte_refuse?

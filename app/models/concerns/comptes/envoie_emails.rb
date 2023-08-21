@@ -5,30 +5,22 @@ module Comptes
     extend ActiveSupport::Concern
 
     included do
-      after_commit :after_commit_on_create, on: :create
+      after_commit :after_commit, on: %i[create update]
     end
 
     private
 
-    def after_commit_on_create
-      return if superadmin?
+    def after_commit
+      return if email_bienvenue_envoye? || email_non_confirme? || structure.blank? || superadmin?
 
+      envoie_bienvenue(self)
+      alerte_admins(self) if validation_en_attente?
       programme_email_relance(self)
-      envoie_emails(self)
+      update(email_bienvenue_envoye: true)
     end
 
-    def envoie_emails(compte)
+    def envoie_bienvenue(compte)
       CompteMailer.with(compte: compte).nouveau_compte.deliver_later
-
-      alerte_admins(compte) if compte.validation_en_attente?
-    end
-
-    def programme_email_relance(compte)
-      return unless compte.structure.instance_of?(StructureLocale)
-
-      RelanceUtilisateurPourNonActivationJob
-        .set(wait: Compte::DELAI_RELANCE_NON_ACTIVATION)
-        .perform_later(compte.id)
     end
 
     def alerte_admins(compte)
@@ -37,6 +29,14 @@ module Comptes
                     .alerte_admin
                     .deliver_later
       end
+    end
+
+    def programme_email_relance(compte)
+      return unless compte.structure.instance_of?(StructureLocale)
+
+      RelanceUtilisateurPourNonActivationJob
+        .set(wait: Compte::DELAI_RELANCE_NON_ACTIVATION)
+        .perform_later(compte.id)
     end
   end
 end

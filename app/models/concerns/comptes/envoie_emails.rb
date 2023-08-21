@@ -11,7 +11,12 @@ module Comptes
     private
 
     def after_commit
-      return if email_bienvenue_envoye? || email_non_confirme? || structure.blank? || superadmin?
+      if email_non_confirme?
+        update(email_bienvenue_envoye: false) if email_bienvenue_envoye?
+        return
+      end
+
+      return if email_bienvenue_envoye? || structure.blank? || superadmin?
 
       envoie_bienvenue(self)
       alerte_admins(self) if validation_en_attente?

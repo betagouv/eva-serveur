@@ -18,6 +18,14 @@ describe Compte, type: :integration do
           .to have_enqueued_mail(CompteMailer, :nouveau_compte).exactly(1)
       end
 
+      it "Réenvoie les emails d'accueil quand l'utilisateur change d'email" do
+        compte = create :compte_admin, structure: structure, confirmed_at: Time.zone.now
+        compte.update(email: 'nouvel_email@ut7.fr')
+        expect(compte.reload.email_non_confirme?).to be(true)
+        expect { compte.update(confirmed_at: Time.zone.now, unconfirmed_email: nil) }
+          .to have_enqueued_mail(CompteMailer, :nouveau_compte).exactly(1)
+      end
+
       describe "ne programme pas d'email" do
         it 'Quand les mails ont déjà été envoyé' do
           compte = create :compte_admin, structure: structure, confirmed_at: Time.zone.now

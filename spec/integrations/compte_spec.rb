@@ -83,7 +83,8 @@ describe Compte, type: :integration do
     let(:structure) { create :structure_locale }
     let(:compte) { create :compte_conseiller, structure: structure }
 
-    describe 'avec des admins' do
+    context 'avec des admins' do
+      let!(:compte_admin_sans_structure) { create :compte_admin, structure: nil }
       let!(:compte_admin) { create :compte_admin, structure: structure }
       let!(:compte_admin2) { create :compte_admin, structure: structure }
       let!(:compte_superadmin) { create :compte_superadmin, structure: structure }
@@ -92,6 +93,11 @@ describe Compte, type: :integration do
 
       it "trouve les admins d'un compte" do
         expect(compte.find_admins.count).to be(3)
+      end
+
+      it "quand le compte n'a pas de structure, retourne une liste vide" do
+        compte.update(structure: nil)
+        expect(compte.find_admins.count).to be(0)
       end
     end
   end

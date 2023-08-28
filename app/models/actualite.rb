@@ -7,6 +7,12 @@ class Actualite < ApplicationRecord
   validates :titre, :contenu, :categorie, presence: true
   validates :titre, length: { maximum: 100 }
 
+  def self.tableau_de_bord(ability)
+    accessible_by(ability)
+      .order(created_at: :desc)
+      .includes(illustration_attachment: :blob)
+  end
+
   def display_name
     titre
   end

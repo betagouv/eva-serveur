@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Campagne do
-  menu priority: 3, if: proc { current_compte.structure_id.present? }
+  menu priority: 3, if: proc { current_compte.structure_id.present? && can?(:read, Campagne) }
 
   permit_params :libelle, :code, :compte,
                 :compte_id, :affiche_competences_fortes, :parcours_type_id, :type_programme,

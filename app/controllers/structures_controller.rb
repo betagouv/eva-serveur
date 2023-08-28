@@ -6,7 +6,7 @@ class StructuresController < ApplicationController
 
   def index
     @recherche_structure_component = RechercheStructureComponent.new(
-      recherche_url: '/structures',
+      recherche_url: 'structures',
       ville_ou_code_postal: params[:ville_ou_code_postal],
       code_postal: params[:code_postal]
     )

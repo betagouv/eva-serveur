@@ -35,7 +35,7 @@ class AbilityUtilisateur
   def droit_evaluation(compte)
     cannot %i[create], Evaluation
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
-    return unless compte.validation_acceptee?
+    return unless compte.validation_acceptee? && compte.structure_id.present?
 
     can %i[read mise_en_action supprimer_responsable_suivi
            ajouter_responsable_suivi renseigner_qualification],

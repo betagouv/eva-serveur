@@ -257,7 +257,7 @@ describe Restitution::Inventaire do
         @restitution = described_class.new(campagne, evenements)
       end
 
-      it { expect(@restitution.version?(2)).to be nil }
+      it { expect(@restitution.version?(2)).to be false }
     end
 
     context "si il n'y a pas d'événement démarrage" do
@@ -266,7 +266,7 @@ describe Restitution::Inventaire do
         @restitution = described_class.new(campagne, evenements)
       end
 
-      it { expect(@restitution.version?(2)).to be nil }
+      it { expect(@restitution.version?(2)).to be false }
     end
   end
 end

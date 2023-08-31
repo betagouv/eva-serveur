@@ -14,6 +14,6 @@ class StatistiquesEvaluation
     return @evaluation.terminee_le - @evaluation.debutee_le if @evaluation.terminee_le.present?
 
     durees = Statistiques::Helper.secondes_par_eval('evaluations.id': @evaluation)
-    return durees[0].to_f unless durees.empty?
+    durees[0].to_f unless durees.empty?
   end
 end

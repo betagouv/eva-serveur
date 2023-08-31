@@ -93,7 +93,7 @@ module Restitution
 
     def version?(version)
       evenement_demarrage = evenements.find { |e| e.nom == EVENEMENT[:DEMARRAGE] }
-      return if evenement_demarrage.blank? || evenement_demarrage.donnees['version'].blank?
+      return false if evenement_demarrage.blank? || evenement_demarrage.donnees['version'].blank?
 
       evenement_demarrage.donnees['version'] == version
     end

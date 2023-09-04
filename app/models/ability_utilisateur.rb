@@ -2,10 +2,6 @@
 
 class AbilityUtilisateur
   def initialize(compte)
-    droits_utilisateur(compte)
-  end
-
-  def droits_utilisateur(compte)
     droits_generiques compte
     droit_campagne compte
     droit_evaluation compte
@@ -29,7 +25,6 @@ class AbilityUtilisateur
   def droits_generiques(compte)
     can :manage, :all if compte.superadmin?
     cannot :destroy, Campagne
-    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
   end
 
   def droit_evaluation(compte)
@@ -75,6 +70,10 @@ class AbilityUtilisateur
     can :read, Structure, id: compte.structure_id if compte.validation_acceptee?
     can :update, Structure, id: compte.structure_id if compte.admin?
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
+    return if compte.structure_id.present?
+
+    can :read, ActiveAdmin::Page, name: 'recherche_structure',
+                                  namespace_name: 'admin'
   end
 
   def droit_actualite(compte)

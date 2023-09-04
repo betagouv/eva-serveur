@@ -4,11 +4,12 @@ class Ability < AbilityUtilisateur
   include CanCan::Ability
 
   def initialize(compte)
-    droits_comptes_refuses compte
-    return if compte.validation_refusee?
-
-    super
-    droits_applicatifs
+    if compte.validation_refusee?
+      droits_comptes_refuses compte
+    else
+      super
+      droits_applicatifs
+    end
   end
 
   private
@@ -52,7 +53,8 @@ class Ability < AbilityUtilisateur
   end
 
   def droit_page
-    can :read, ActiveAdmin::Page
+    can :read, ActiveAdmin::Page, name: 'Aide', namespace_name: 'admin'
+    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
   end
 
   def droits_comptes_refuses(compte)

@@ -23,13 +23,14 @@
       <% @structures.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
+      <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
     <% end %>
 
     <% if @structures.empty? && @structures_code_postal.empty? %>
       <p class="mt-4"><%= t('.aucun_resultat') %></p>
+      <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
     <% end %>
 
-    <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
   <% end %>
 </div>
 <script>

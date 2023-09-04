@@ -222,6 +222,7 @@ describe Ability do
     it {
       is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
     }
+    it { is_expected.to be_able_to(:create, StructureLocale.new) }
   end
 
   context 'Compte conseiller' do

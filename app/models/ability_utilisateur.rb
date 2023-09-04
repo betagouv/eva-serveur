@@ -74,6 +74,7 @@ class AbilityUtilisateur
 
     can :read, ActiveAdmin::Page, name: 'recherche_structure',
                                   namespace_name: 'admin'
+    can :create, StructureLocale
   end
 
   def droit_actualite(compte)

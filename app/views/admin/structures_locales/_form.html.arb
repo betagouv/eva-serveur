@@ -1,16 +1,21 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
-  f.inputs do
-    f.input :nom
-    f.input :type_structure, as: :select, collection: collection_types_structures
-    f.input :code_postal
-    if can?(:manage, Compte)
-      f.input :parent_id, as: :select, collection: StructureAdministrative.all
+div class: 'panel nouvelle_structure' do
+  h2 t('.titre')
+  active_admin_form_for [:admin, resource] do |f|
+    f.inputs do
+      f.object.code_postal = params[:code_postal]&.delete('^0-9') if f.object.code_postal.blank?
+      f.input :nom
+      f.input :type_structure, as: :select, collection: collection_types_structures
+      f.input :code_postal
+      if can?(:manage, Compte)
+        f.input :parent_id, as: :select, collection: StructureAdministrative.all
+      end
     end
-  end
-  f.actions do
-    f.action :submit
-    annulation_formulaire(f)
+    text_node md t('.verifier_information_structure')
+    f.actions do
+      f.action :submit
+      annulation_formulaire(f) if current_compte.structure.present?
+    end
   end
 end

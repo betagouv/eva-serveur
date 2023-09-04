@@ -1,5 +1,7 @@
-<% if @current_compte.nil? %>
-  <div class="bouton-creer-structure">
-    <%= link_to t('.structure_non_referencee'), nouvelle_structure_path(code_postal: params[:code_postal]) %>
-  </div>
-<% end %>
+<% chemin_nouvelle_structure = @current_compte.present? ?
+  new_admin_structure_locale_path(code_postal: params[:code_postal]) :
+  nouvelle_structure_path(code_postal: params[:code_postal]) %>
+
+<div class="bouton-creer-structure">
+  <%= link_to t('.structure_non_referencee'), chemin_nouvelle_structure %>
+</div>

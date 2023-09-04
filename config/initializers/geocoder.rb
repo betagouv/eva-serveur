@@ -19,4 +19,5 @@ Geocoder.configure(
   # Calculation options
   units: :km,                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
+  http_headers: { "User-Agent" => "contact@eva.beta.gouv.fr" },
 )

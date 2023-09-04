@@ -24,6 +24,12 @@ fr:
         invitation:  |
           Pour inviter une personne à rejoindre cette structure,
           vous pouvez lui envoyer le lien suivant :
+    structures_locales:
+      form:
+        titre: Création d'une nouvelle structure
+        verifier_information_structure: |
+          **Veuillez vérifier les informations saisies avant de valider cette création.**
+          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
   nouvelles_structures:
     show:
       titre: Rejoindre eva

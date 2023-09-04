@@ -88,5 +88,16 @@ ActiveAdmin.register StructureLocale do
     def scoped_collection
       end_of_association_chain.avec_nombre_evaluations_et_date_derniere_evaluation
     end
+
+    def create
+      create! do |success, _failure|
+        if @current_compte.structure.blank?
+          success.html do
+            @current_compte.rejoindre_structure(resource)
+            redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
+          end
+        end
+      end
+    end
   end
 end

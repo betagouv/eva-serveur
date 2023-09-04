@@ -8,6 +8,13 @@
     margin-right: $sidebar-width + ($section-padding * 2);
   }
 
+  .nouvelle_structure {
+    fieldset.inputs {
+      background-color: white;
+      margin: 2rem 0;
+    }
+  }
+
   &.show {
     $largeur_image_entete: 12rem;
     $position_image_entete: 1.5rem;
@@ -27,11 +34,11 @@
             border: 0;
             font-size: 0.875rem;
           }
-    
+
           td {
             font-weight: 500;
           }
-    
+
           th {
             vertical-align: bottom;
             font-family: $font-texte;

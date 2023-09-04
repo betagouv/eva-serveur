@@ -217,6 +217,13 @@ describe Ability do
     end
   end
 
+  context 'Compte conseiller sans structure' do
+    let(:compte) { create :compte_conseiller, structure: nil }
+    it {
+      is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+    }
+  end
+
   context 'Compte conseiller' do
     let(:compte)                    { compte_conseiller }
     let!(:campagne_conseiller)    { create :campagne, compte: compte }
@@ -273,7 +280,11 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
-    it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(1, 2, 3)) }
+    it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Aide', {})) }
+    it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Dashboard', {})) }
+    it {
+      is_expected.not_to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+    }
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
     context 'peut consulter les campagnes de ma structure' do

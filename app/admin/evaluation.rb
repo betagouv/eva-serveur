@@ -127,7 +127,13 @@ ActiveAdmin.register Evaluation do
 
   member_action :renseigner_qualification, method: :patch do
     mise_en_action = resource.mise_en_action
-    mise_en_action.update(mise_en_action.questionnaire => params[:reponse])
+    effectuee = params[:effectuee]
+    qualification = params[:qualification]
+    if effectuee == 'true'
+      mise_en_action.update(effectuee: true, remediation: qualification)
+    else
+      mise_en_action.update(effectuee: false, difficulte: qualification)
+    end
   end
 
   controller do

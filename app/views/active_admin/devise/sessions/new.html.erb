@@ -10,8 +10,18 @@
       </div>
 
       <div class="panel-content">
-        <div class="espace-connexion">
-          <h4 class="espace-connexion-titre"><%= t('active_admin.devise.login.connexion') %></h4>
+        <div class="espace-inclusion-connect">
+          <h4 class="mb-3" ><%= t('.inclusion-connect.titre') %></h4>
+          <div class="panel-description">
+            <%= md t('.inclusion-connect.description') -%>
+          </div>
+          <div class='bouton-action bouton-action--center'>
+            <%= link_to image_tag('logo-inclusion-connect-one-line.svg', alt: 'Se connecter avec Inclusion Connect', height: 14), inclusion_connect_auth_path, class:'btn-inclusion-connect' %>
+          </div>
+          <div class="espace-inclusion-connect-transition" ><%= t('.inclusion-connect.transition') %></div>
+        </div>
+        <div class="espace-connexion separateur">
+          <h4 class="mb-3"><%= t('active_admin.devise.login.connexion') %></h4>
           <% scope = Devise::Mapping.find_scope!(resource_name) %>
           <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
             f.inputs do
@@ -32,7 +42,7 @@
           end
           %>
         </div>
-        <div class="espace-inscription">
+        <div class="espace-inscription separateur">
           <h4><%= t('active_admin.devise.login.inscription.content') -%></h4>
           <div class='bouton-action'>
             <%= link_to t('active_admin.devise.login.inscription.action'), structures_path, class:'actions' %>

@@ -8,6 +8,13 @@ fr:
   active_admin:
     recherche_structure: Rechercher ma structure
     devise:
+      sessions:
+        new:
+          inclusion-connect:
+            titre: J'ai ou je crée un compte Inclusion Connect
+            transition: OU
+            description: |
+              Inclusion Connect vous permet d'utiliser le même identifiant et mot de passe pour vous connecter à différents services. Simple, sécurisé, efficace !
       login:
         title: |
           Espace Pro

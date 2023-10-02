@@ -145,16 +145,15 @@ body.logged_out {
           min-width: 7.5rem;
         }
       }
+      .panel-description {
+        font-style: italic;
+        font-size: 0.875rem;
+      }
       .panel--evaluation {
         .panel-header {
           background-color: $eva_main_blue;
         }
         .panel-content {
-          .panel-description {
-            font-style: italic;
-            font-size: 0.875rem;
-            margin-bottom: 2rem;
-          }
           form {
             margin-top: 2rem;
           }
@@ -166,15 +165,23 @@ body.logged_out {
             display: flex;
             justify-content: flex-end;
           }
+          .bouton-action--center {
+            justify-content: center;
+          }
         }
       }
     }
+
+    .separateur {
+      margin-top: 1rem;
+      border-top: 1px solid $eva_bluegrey;
+      padding-top: 1rem;
+    }
+
     .espace-inscription {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 1rem;
-      border-top: 1px solid $eva_bluegrey;
 
       a {
         @include bouton-carte($eva_dark);
@@ -187,12 +194,19 @@ body.logged_out {
       }
     }
 
-    .espace-connexion {
-      margin-bottom: 1rem;
+    .espace-inclusion-connect {
+      &-transition {
+        margin-top: 1rem;
+        font-family: "Quicksand";
+        font-weight: bold;
+        font-size: 1.125rem;
+        text-align: center;
+      }
 
-      &-titre {
-        margin-bottom: 1rem;
-        font-size: .875rem;
+      .bouton-action {
+        a {
+          background-image: image-url('logo-inclusion-connect-bg.svg');
+        }
       }
     }
   }

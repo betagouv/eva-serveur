@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "@storybook/addon-controls": "^6.5.13",
-    "@storybook/server": "^6.5.13"
+    "@storybook/server": "^7.4.6"
   },
   "scripts": {
     "storybook": "start-storybook"

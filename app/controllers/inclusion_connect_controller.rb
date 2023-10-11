@@ -9,16 +9,31 @@ class InclusionConnectController < ApplicationController
   end
 
   def callback
-    compte = correct_state? &&
-             InclusionConnectHelper.compte(params[:code], inclusion_connect_callback_url)
-    if compte.blank?
-      flash[:error] = I18n.t('.inclusion-connect.authentification-impossible',
-                             email_contact: Eva::EMAIL_SUPPORT)
-      redirect_to new_compte_session_path and return
+    tokens = correct_state? &&
+             InclusionConnectHelper.recupere_tokens(params[:code], inclusion_connect_callback_url)
+    compte = tokens && InclusionConnectHelper.compte(tokens['access_token'])
+    echec_login and return if compte.blank?
+
+    session[:ic_logout_token] = tokens['id_token']
+    sign_in_and_redirect compte, scope: :compte
+  end
+
+  def logout
+    if session[:ic_state].blank? || session[:ic_logout_token].blank?
+      redirect_to destroy_compte_session_url and return
     end
 
-    session[:connected_with_inclusionconnect] = true
-    sign_in_and_redirect compte, scope: :compte
+    sign_out(current_compte)
+    redirect_to InclusionConnectHelper.logout(session, destroy_compte_session_url),
+                allow_other_host: true
+  end
+
+  private
+
+  def echec_login
+    flash[:error] = I18n.t('.inclusion-connect.authentification-impossible',
+                           email_contact: Eva::EMAIL_SUPPORT)
+    redirect_to new_compte_session_path
   end
 
   def correct_state?

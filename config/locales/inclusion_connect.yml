@@ -1,0 +1,3 @@
+fr:
+  inclusion-connect:
+    authentification-impossible: Nous n'avons pas pu vous authentifier. Contactez le support à l'adresse %{email_contact} si le problème persiste.

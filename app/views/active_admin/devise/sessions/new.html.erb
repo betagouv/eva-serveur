@@ -11,17 +11,21 @@
 
       <div class="panel-content">
         <div class="espace-inclusion-connect">
-          <h4 class="mb-3" ><%= t('.inclusion-connect.titre') %></h4>
-          <div class="panel-description">
-            <%= md t('.inclusion-connect.description') -%>
-          </div>
-          <div class='bouton-action bouton-action--center'>
-            <%= link_to image_tag('logo-inclusion-connect-one-line.svg', alt: 'Se connecter avec Inclusion Connect', height: 14), inclusion_connect_auth_path, class:'btn-inclusion-connect' %>
+          <div class="bouton-action bouton-action--centre">
+            <a class="actions" onclick="javascript:basculer_login_eva()">
+              <%= t('.eva-login.connexion') %>
+            </a>
           </div>
           <div class="espace-inclusion-connect-transition" ><%= t('.inclusion-connect.transition') %></div>
+          <div class='bouton-action bouton-action--centre'>
+            <%= link_to image_tag('logo-inclusion-connect-one-line.svg', alt: 'Se connecter avec Inclusion Connect', height: 14), inclusion_connect_auth_path, class:'btn-inclusion-connect' %>
+          </div>
+          <div class="panel-description mt-4">
+            <%= md t('.inclusion-connect.description') -%>
+          </div>
         </div>
-        <div class="espace-connexion separateur">
-          <h4 class="mb-3"><%= t('active_admin.devise.login.connexion') %></h4>
+        <div class="espace-connexion hidden">
+          <h4 class="mb-3"><%= t('.eva-login.titre') %></h4>
           <% scope = Devise::Mapping.find_scope!(resource_name) %>
           <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f|
             f.inputs do
@@ -37,12 +41,13 @@
               f.input :remember_me, label: t('active_admin.devise.login.remember_me'), as: :boolean if devise_mapping.rememberable?
             end
             div class: 'bouton-action actions' do
+              text_node link_to t('.eva-login.retour'), '#', onclick: "javascript:basculer_login_eva()", class:'actions actions-annuler'
               f.submit t('active_admin.devise.login.submit')
             end
           end
           %>
         </div>
-        <div class="espace-inscription separateur">
+        <div class="espace-inscription separateur hidden">
           <h4><%= t('active_admin.devise.login.inscription.content') -%></h4>
           <div class='bouton-action'>
             <%= link_to t('active_admin.devise.login.inscription.action'), structures_path, class:'actions' %>
@@ -84,3 +89,10 @@
     </div>
   </div>
 </div>
+<script>
+  function basculer_login_eva() {
+    $(".espace-connexion").toggleClass("hidden");
+    $(".espace-inscription").toggleClass("hidden");
+    $(".espace-inclusion-connect").toggleClass("hidden");
+  }
+</script>

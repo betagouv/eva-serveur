@@ -158,7 +158,7 @@
         flex: 1;
       }
     }
-}
+  }
 
 //ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
 
@@ -171,7 +171,7 @@
     li {
       margin-bottom: 0;
     }
-    .bouton--annuler a {
+    .bouton-annuler a {
       @include bouton-arrondi;
       min-width: 6.563rem;
       text-align: center;

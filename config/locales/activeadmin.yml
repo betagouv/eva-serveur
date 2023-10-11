@@ -11,15 +11,20 @@ fr:
       sessions:
         new:
           inclusion-connect:
-            titre: J'ai ou je crée un compte Inclusion Connect
             transition: OU
             description: |
-              Inclusion Connect vous permet d'utiliser le même identifiant et mot de passe pour vous connecter à différents services. Simple, sécurisé, efficace !
+              Inclusion Connect permet aux conseillers et conseillères d'utiliser le même identifiant et mot de passe pour se connecter à différents services. Simple, sécurisé, efficace !
+            inscription: créer mon compte conseiller Inclusion Connect
+          eva-login:
+            titre: J'ai déjà un compte conseiller
+            connexion: Se connecter avec un compte eva
+            description: |
+              Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
+            retour: Annuler
       login:
         title: |
           Espace Pro
         header_title: Je suis conseiller
-        connexion: J'ai déjà un compte
         inscription:
           content: Je n'ai pas encore de compte
           action: S'inscrire

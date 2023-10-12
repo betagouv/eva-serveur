@@ -63,6 +63,7 @@ module InclusionConnectHelper
       compte = Compte.find_by(email: user_info['email'])
       return if compte.blank?
 
+      confirmed_at = compte.confirmed_at || Time.zone.now
       compte.update!(
         prenom: user_info['given_name'],
         nom: user_info['family_name'],

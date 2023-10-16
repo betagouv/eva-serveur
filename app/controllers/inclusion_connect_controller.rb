@@ -17,9 +17,8 @@ class InclusionConnectController < ApplicationController
       redirect_to new_compte_session_path and return
     end
 
-    bypass_sign_in compte, scope: :compte
     session[:connected_with_inclusionconnect] = true
-    redirect_to root_path
+    sign_in_and_redirect compte, scope: :compte
   end
 
   def correct_state?

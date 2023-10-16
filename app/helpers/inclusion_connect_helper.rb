@@ -26,21 +26,16 @@ module InclusionConnectHelper
       user_info = get_user_info(token)
       return false if user_info.blank?
 
-      get_and_update_compte(user_info)
+      cree_ou_recupere_compte(user_info)
     end
 
     def get_token(code, callback_url)
-      data = {
-        grant_type: 'authorization_code',
-        redirect_uri: callback_url,
-        client_id: IC_CLIENT_ID,
-        client_secret: IC_CLIENT_SECRET,
-        code: code
-      }
-      uri = URI("#{IC_BASE_URL}/auth/token/")
+      data = { grant_type: 'authorization_code',
+               client_id: IC_CLIENT_ID, client_secret: IC_CLIENT_SECRET,
+               code: code, redirect_uri: callback_url }
 
       res = Typhoeus.post(
-        uri,
+        URI("#{IC_BASE_URL}/auth/token/"),
         body: data.to_query,
         headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
       )
@@ -59,16 +54,15 @@ module InclusionConnectHelper
       JSON.parse(res.body)
     end
 
-    def get_and_update_compte(user_info)
-      compte = Compte.find_by(email: user_info['email'])
+    def cree_ou_recupere_compte(user_info)
+      compte = Compte.find_or_create_by(email: user_info['email'])
       return if compte.blank?
 
       confirmed_at = compte.confirmed_at || Time.zone.now
-      compte.update!(
+      compte.update(
         prenom: user_info['given_name'],
         nom: user_info['family_name'],
-        confirmed_at: Time.zone.now,
-        last_sign_in_at: Time.zone.now
+        confirmed_at: confirmed_at
       )
       compte
     end

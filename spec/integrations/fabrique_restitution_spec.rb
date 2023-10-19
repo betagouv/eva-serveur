@@ -34,7 +34,7 @@ describe FabriqueRestitution do
 
         before do
           # rubocop:disable Rails/SkipsModelValidations
-          Evenement.all.update_all(position: nil)
+          Evenement.update_all(position: nil)
           # rubocop:enable Rails/SkipsModelValidations
         end
 

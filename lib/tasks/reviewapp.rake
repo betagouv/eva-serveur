@@ -65,7 +65,7 @@ namespace :reviewapp do
     cree_les_comptes structure_eva
     cree_campagnes_socio
 
-    Compte.all.each do |compte|
+    Compte.find_each do |compte|
       compte.encrypted_password = '$2a$11$d.kf40n..7zqTGgCPANFlOiLvwGH35EPh0OsY6euJaje3Us20KIWO'
       compte.save!(validate: false)
     end

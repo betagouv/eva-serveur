@@ -23,7 +23,7 @@ class InclusionConnectController < ApplicationController
       redirect_to destroy_compte_session_url and return
     end
 
-    sign_out(current_compte)
+    sign_out current_compte
     redirect_to InclusionConnectHelper.logout(session, destroy_compte_session_url),
                 allow_other_host: true
   end

@@ -34,6 +34,7 @@ describe InclusionConnectHelper do
           expect(compte.prenom).to eq('prénom')
           expect(compte.nom).to eq('nom')
           expect(compte.confirmed_at).to eq(aujourdhui)
+          expect(compte.password).not_to be_nil
         end
       end
     end
@@ -55,6 +56,7 @@ describe InclusionConnectHelper do
           expect(compte.prenom).to eq('prénom')
           expect(compte.nom).to eq('nom')
           expect(compte.confirmed_at).to eq(aujourdhui)
+          expect(compte.password).to be_nil
         end
       end
     end

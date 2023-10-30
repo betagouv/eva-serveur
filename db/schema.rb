@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_21_094529) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_30_132154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -137,9 +137,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_21_094529) do
     t.datetime "deleted_at"
     t.boolean "mode_tutoriel", default: true
     t.boolean "email_bienvenue_envoye"
+    t.string "id_inclusion_connect"
     t.index ["confirmation_token"], name: "index_comptes_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_comptes_on_deleted_at"
     t.index ["email"], name: "index_comptes_on_email", unique: true, where: "(deleted_at IS NULL)"
+    t.index ["id_inclusion_connect"], name: "index_comptes_on_id_inclusion_connect"
     t.index ["reset_password_token"], name: "index_comptes_on_reset_password_token", unique: true
     t.index ["structure_id"], name: "index_comptes_on_structure_id"
   end

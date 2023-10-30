@@ -72,24 +72,37 @@ module InclusionConnectHelper
     end
 
     def cree_ou_recupere_compte(user_info)
-      compte = Compte.find_or_create_by(email: user_info['email'])
-      return if compte.blank?
-
-      compte.update!(
-        prenom: user_info['given_name'],
-        nom: user_info['family_name'],
-        confirmed_at: confirmed_at(compte),
-        password: mot_de_passe_aleatoire(compte)
-      )
+      compte = Compte.find_by(id_inclusion_connect: user_info['sub'])
+      if compte.present? && compte.email != user_info['email']
+        compte = actualise_email_compte_existant(compte, user_info['email'])
+      end
+      compte ||= Compte.find_or_create_by(email: user_info['email'])
+      actualise_autres_champs(compte, user_info)
+      compte.save!
       compte
     end
 
-    def confirmed_at(compte)
-      compte.confirmed_at || Time.zone.now
+    private
+
+    def actualise_email_compte_existant(compte, email)
+      compte_existant = Compte.find_by(email: email)
+      if compte_existant.present?
+        compte.update!(id_inclusion_connect: nil)
+        compte = compte_existant
+      else
+        compte.email = email
+        compte.skip_reconfirmation!
+        compte.confirmed_at = Time.zone.now
+      end
+      compte
     end
 
-    def mot_de_passe_aleatoire(compte)
-      SecureRandom.uuid if compte.encrypted_password.blank?
+    def actualise_autres_champs(compte, user_info)
+      compte.id_inclusion_connect = user_info['sub']
+      compte.prenom = user_info['given_name']
+      compte.nom = user_info['family_name']
+      compte.password = SecureRandom.uuid if compte.encrypted_password.blank?
+      compte.confirmed_at ||= Time.zone.now
     end
   end
 end

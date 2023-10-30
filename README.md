@@ -56,10 +56,14 @@ HOTE_SERVEUR=localhost:3000
 URL_CLIENT=http://localhost:7700/jeu
 EMAIL_DEFAULT_FROM=eva@beta.gouv.fr
 METABASE_SITE_URL=http://metabase.eva.beta.gouv.fr
-METABASE_SECRET_KEY=<LE SECRET>
+METABASE_SECRET_KEY=<SECRET_METABASE>
+INCLUSION_CONNECT_CLIENT_ID=local_inclusion_connect
+INCLUSION_CONNECT_CLIENT_SECRET=<SECRET_IC>
+INCLUSION_CONNECT_BASE_URL=https://recette.connect.inclusion.beta.gouv.fr
 ```
 Sans ces variables, le projet ne se lancera pas correctement en local.
-<LE SECRET> se trouve sur metabase https://metabase.eva.beta.gouv.fr/admin/settings/embedding-in-other-applications/standalone
+<SECRET_METABASE> se trouve sur metabase https://metabase.eva.beta.gouv.fr/admin/settings/embedding-in-other-applications/standalone
+Demander le <SECRET_IC> à l'équipe
 
 ## API
 

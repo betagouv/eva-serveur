@@ -75,13 +75,21 @@ module InclusionConnectHelper
       compte = Compte.find_or_create_by(email: user_info['email'])
       return if compte.blank?
 
-      confirmed_at = compte.confirmed_at || Time.zone.now
-      compte.update(
+      compte.update!(
         prenom: user_info['given_name'],
         nom: user_info['family_name'],
-        confirmed_at: confirmed_at
+        confirmed_at: confirmed_at(compte),
+        password: mot_de_passe_aleatoire(compte)
       )
       compte
+    end
+
+    def confirmed_at(compte)
+      compte.confirmed_at || Time.zone.now
+    end
+
+    def mot_de_passe_aleatoire(compte)
+      SecureRandom.uuid if compte.encrypted_password.blank?
     end
   end
 end

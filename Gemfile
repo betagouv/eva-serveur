@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ruby '3.0.6'
+ruby '3.1.4'
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -30,7 +30,6 @@ gem 'descriptive_statistics', '~> 2.4.0', require: 'descriptive_statistics/safe'
 gem 'device_detector'
 gem 'devise'
 gem 'devise-i18n'
-gem 'digest', '~> 3.0.0'
 gem 'ffaker'
 gem 'geocoder'
 gem 'groupdate'

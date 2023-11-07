@@ -180,6 +180,9 @@ body.logged_out {
     }
 
     .espace-inscription {
+      &.hidden {
+        display: none;
+      }
       display: flex;
       justify-content: space-between;
       align-items: center;

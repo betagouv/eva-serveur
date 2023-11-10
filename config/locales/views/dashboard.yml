@@ -1,6 +1,13 @@
 fr:
   admin:
     dashboard:
+      modal_confirmation_cgu:
+        info_lien_cgu: |
+          ## Conditions Générales d'Utilisation
+          Les conditions générales d’utilisation du service eva sont consultables ici :
+        lien_cgu: CGU
+        demande_acceptation_cgu: 'Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva.'
+        bouton_acceptation_cgu: 'J’ai lu et j’accepte les CGU'
       modal_validation_comptes_en_attente:
         info_comptes_en_attente: |
           **Des demandes d'accès sont en attente de validation.** Vous pouvez les confirmer **dans la page de votre structure**.

@@ -4,9 +4,20 @@ require 'rails_helper'
 
 describe 'Dashboard', type: :feature do
   let!(:ma_structure) { create :structure_locale, :avec_admin }
-  let!(:compte) { create :compte_superadmin, structure: ma_structure }
+  let!(:compte) { create :compte_superadmin, structure: ma_structure, cgu_acceptees: true }
 
   before { connecte(compte) }
+
+  context "quand les CGU n'ont pas encore été acceptées" do
+    before { compte.update(cgu_acceptees: nil) }
+
+    it "affiche la modal d'acceptation des CGU" do
+      visit admin_path
+      expect(page).to have_content("Conditions Générales d'Utilisation")
+      click_on 'J’ai lu et j’accepte les CGU'
+      expect(compte.reload.cgu_acceptees).to be(true)
+    end
+  end
 
   context 'quand il y a des comptes en attente pour ma structure' do
     before { create :compte_conseiller, statut_validation: :en_attente, structure: ma_structure }

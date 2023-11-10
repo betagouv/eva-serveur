@@ -21,8 +21,10 @@
 jQuery.datetimepicker.setLocale('fr');
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('#validation-comptes-en-attente').modal({
-    show: true,
+  $('#validation-comptes-en-attente').modal();
+  $('#acceptation-cgu').modal({
+    backdrop: 'static',
+    keyboard: false
   });
   new ClipboardJS('.copier-coller');
   $('[data-toggle="tooltip"]').tooltip();

@@ -57,6 +57,8 @@ if campagnes.present?
   end
 end
 
-if comptes_en_attente.present? && can?(:autoriser, Compte)
+if !current_compte.cgu_acceptees?
+  render 'modal_confirmation_cgu'
+elsif comptes_en_attente.present? && can?(:autoriser, Compte)
   render 'modal_validation_comptes_en_attente'
 end

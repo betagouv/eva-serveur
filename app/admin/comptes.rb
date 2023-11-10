@@ -133,6 +133,26 @@ ActiveAdmin.register Compte do
     redirect_to admin_dashboard_path
   end
 
+  member_action :accepter_cgu, method: :patch do
+    resource.update!(cgu_acceptees: true)
+    redirect_to admin_dashboard_path
+  end
+
+  member_action :autoriser, method: :patch do
+    resource.validation_acceptee!
+    redirect_to request.referer
+  end
+
+  member_action :refuser, method: :patch do
+    resource.validation_refusee!
+    redirect_to request.referer
+  end
+
+  member_action :quitter_mode_tutoriel, method: :patch do
+    current_compte.update(mode_tutoriel: false)
+    redirect_to request.referer
+  end
+
   controller do
     helper_method :peut_modifier_mot_de_passe?, :collection_roles
 
@@ -159,20 +179,5 @@ ActiveAdmin.register Compte do
 
   show do
     render 'show'
-  end
-
-  member_action :autoriser, method: :patch do
-    resource.validation_acceptee!
-    redirect_to request.referer
-  end
-
-  member_action :refuser, method: :patch do
-    resource.validation_refusee!
-    redirect_to request.referer
-  end
-
-  member_action :quitter_mode_tutoriel, method: :patch do
-    current_compte.update(mode_tutoriel: false)
-    redirect_to request.referer
   end
 end

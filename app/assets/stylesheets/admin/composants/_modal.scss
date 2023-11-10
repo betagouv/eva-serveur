@@ -2,30 +2,30 @@
   &.show .modal-dialog {
     transform: translateY(-50%);
     margin-top: 50vh;
-  
+
     .modal-content {
       padding: 1rem;
       font-size: 0.875rem;
       align-items: center;
       flex-direction: row;
       border-radius: 0.5rem;
-  
+
       .modal-body {
         padding: 0rem;
         padding-left: 1rem;
       }
-      
+
       .message {
         margin-bottom: 2rem;
       }
-      
+
       .actions {
         display: flex;
         justify-content: flex-end;
-  
+
         .bouton {
           margin-right: .5rem;
-  
+
           &:last-child {
             margin-right: 0;
           }
@@ -33,7 +33,7 @@
       }
     }
   }
-  
+
   &.modal-danger {
     .modal-content {
       background-color: $eva_red;

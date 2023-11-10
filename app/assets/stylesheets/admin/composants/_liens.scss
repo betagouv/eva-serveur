@@ -39,3 +39,13 @@
 .lien-secondaire {
   @include lien-secondaire();
 }
+
+.lien-externe {
+  display: flex;
+
+  &:after {
+    content: image-url('external-link-line.svg');
+    display: flex;
+    height: 1rem;
+  }
+}

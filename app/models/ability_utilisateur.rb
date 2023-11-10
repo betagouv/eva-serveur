@@ -105,6 +105,7 @@ class AbilityUtilisateur
     can :update, Compte, structure_id: compte.structure_id
     can :edit_role, Compte, structure_id: compte.structure_id
     cannot :edit_role, compte if compte.compte_generique?
+    can :destroy, Compte, structure_id: compte.structure_id, role: :conseiller
   end
 
   def droits_validation_comptes(compte)

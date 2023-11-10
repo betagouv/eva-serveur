@@ -173,6 +173,7 @@ describe Ability do
 
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
+      let(:pas_collegue) { compte_conseiller }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
 
@@ -182,12 +183,15 @@ describe Ability do
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
+      it { is_expected.to be_able_to(:destroy, mon_collegue) }
+      it { is_expected.not_to be_able_to(:destroy, pas_collegue) }
       it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
       context 'quand un compte est admin' do
         before { mon_collegue.update(role: :admin) }
 
         it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
+        it { is_expected.not_to be_able_to(:destroy, mon_collegue) }
       end
     end
 

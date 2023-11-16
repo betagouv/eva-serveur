@@ -27,9 +27,8 @@ fr:
 
         Pour valider ce compte :
 
-          - cliquez sur le lien suivant,
-          - choisissez l'accès "autorisé" ou "refusé",
-          - et enfin, cliquez sur le bouton [modifier].
+          - cliquez sur le lien suivant ;
+          - cliquez sur « autoriser » ou « refuser » dans la section des comptes en attente.
 
         -> [Valider ce compte](%{url_validation})
 

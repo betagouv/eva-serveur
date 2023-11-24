@@ -3,7 +3,8 @@
 ActiveAdmin.register Compte do
   menu if: proc { current_compte.structure_id.present? && can?(:read, Compte) }
   permit_params :email, :password, :password_confirmation, :role, :structure_id,
-                :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel
+                :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel,
+                :cgu_acceptees
 
   includes :structure
 

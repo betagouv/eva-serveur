@@ -12,9 +12,19 @@ module Eva
         end
       end
 
-      def build_resource(hash = {})
-        super(hash)
-        resource.assigne_role_admin_si_pas_d_admin
+      def create
+        @compte = Compte.new compte_parametres
+        @compte.assigne_role_admin_si_pas_d_admin
+        if @compte.save
+          sign_in @compte
+          redirect_to admin_dashboard_path, notice: I18n.t('devise.registrations.signed_up')
+        else
+          render :new
+        end
+      end
+
+      def compte_parametres
+        params.require(:compte).permit!.to_h
       end
     end
   end

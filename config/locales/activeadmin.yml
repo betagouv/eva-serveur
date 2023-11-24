@@ -40,9 +40,16 @@ fr:
       registrations:
         new:
           title: Rejoindre la structure
-          description: Merci de renseigner vos informations.
+          instruction: Merci de renseigner vos informations.
+          description: Nous enverons un email à la personne admininstratrice de votre structure pour qu'elle vous autorise l'accès complet.
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
           lien_retour: Rechercher ma structure
+          cgu_acceptees: J'accepte les conditions générales d'utilisation
+          lien_cgu: CGU
+          demande_accepter_cgu: |
+            Les conditions générales d'utilisation sont consultables ici : %{lien}
+
+            Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire.
       passwords:
         new:
           lien_retour: Se connecter
@@ -62,7 +69,7 @@ fr:
     footer: |
       Ce site est créé avec ❤️ par <a href='https://beta.gouv.fr/startups/eva.html' target='_blank'>l'équipe</a> eva -
       Le <a href='https://github.com/betagouv/eva-serveur' target='_blank'>code source</a> est libre -
-      <a href="#tarteaucitron">Cookies</a> - <a href="/cgu/">CGU</a>
+      <a href="#tarteaucitron">Cookies</a> - <a href="/cgu/" target='_blank'>CGU</a>
     menu_connexion:
       compte: Voir mon compte
       structure: Voir ma structure

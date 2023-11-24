@@ -88,7 +88,7 @@ describe 'Admin - Compte', type: :feature do
       end
     end
 
-    describe 'Ajouter un nouvel superadmin' do
+    describe 'Ajouter un nouveau superadmin' do
       it do
         visit new_admin_compte_path
         expect do

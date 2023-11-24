@@ -33,6 +33,7 @@ describe 'Création de compte conseiller', type: :feature do
       fill_in :compte_email, with: 'monemail@eva.fr'
       fill_in :compte_password, with: 'Pass123'
       fill_in :compte_password_confirmation, with: 'Pass123'
+      check("J'accepte les conditions générales d'utilisation", allow_label_click: true)
     end
 
     it do
@@ -43,6 +44,7 @@ describe 'Création de compte conseiller', type: :feature do
       nouveau_compte = Compte.find_by email: 'monemail@eva.fr'
       expect(nouveau_compte.validation_en_attente?).to be true
       expect(nouveau_compte.structure).to eq structure
+      expect(nouveau_compte.cgu_acceptees).to be true
     end
   end
 

@@ -14,27 +14,48 @@
               ),
               class: 'lien-retour' %>
   <div id="login">
-    <h3><%= t('.description') -%></h3>
-    <p>Nous vous enverrons un email vous mettant en relation avec votre structure afin que celle-ci vous communique les accès.</p>
+    <h3><%= t('.instruction') -%></h3>
+    <p><%= t('.description') -%></p>
 
-    <% scope = Devise::Mapping.find_scope!(resource_name) %>
     <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:prenom, :nom, :email, :telephone, :password, :password_confirmation] } %>
-    <%= active_admin_form_for(resource, as: resource_name, url: send(:"#{scope}_registration_path"), html: { id: "registration_new" }) do |f|
-      f.inputs do
-        f.input :structure_id, as: :hidden
-        f.input :prenom
-        f.input :nom
-        resource.class.authentication_keys.each_with_index { |key, index|
-          f.input key, label: t('active_admin.devise.'+key.to_s+'.title')
-        }
-        f.input :telephone
-        f.input :password
-        f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' }
-      end
-      f.actions do
+    <%= semantic_form_for(resource,
+                              as: resource_name,
+                              url: send(:"#{Devise::Mapping.find_scope!(resource_name)}_registration_path"),
+                              html: { id: "registration_new" }) do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :structure_id, as: :hidden %>
+        <%= f.input :prenom %>
+        <%= f.input :nom %>
+        <%= f.input :email %>
+        <%= f.input :telephone %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
+        <%= f.input :cgu_acceptees, label: t('.cgu_acceptees') %>
+        <%= md t('.demande_accepter_cgu', lien: link_to(t('.lien_cgu'), '/cgu/', target: '_blank')) %>
+      <% end %>
+      <%= f.actions do
         f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' } }
-      end
-    end
-    %>
+      end %>
+    <% end %>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let enregistrer = $('input[type="submit"]')
+    let checked = $("#compte_cgu_acceptees").is(':checked');
+    if(!checked) {
+      enregistrer.addClass('disabled');
+      enregistrer.attr('disabled', 'disabled');
+    }
+    $('#compte_cgu_acceptees_input').on('change', () => {
+      checked = !checked
+      enregistrer.toggleClass('disabled');
+      if(checked) {
+        enregistrer.removeAttr('disabled');
+      }
+      else {
+        enregistrer.attr('disabled', 'disabled');
+      }
+    });
+  });
+</script>

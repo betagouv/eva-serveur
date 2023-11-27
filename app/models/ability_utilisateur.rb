@@ -61,6 +61,7 @@ class AbilityUtilisateur
     can :read, compte
     can :update, compte
     can :rejoindre_structure, compte
+    can :accepter_cgu, compte
     comptes_generiques_ou_comptes_admin(compte)
     droits_validation_comptes(compte)
     cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }

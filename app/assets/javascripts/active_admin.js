@@ -12,6 +12,7 @@
 //= require autocomplete_recherche
 //= require clipboard
 //= require evaluation
+//= require cgu
 
 //= require chartkick
 //= require Chart.bundle

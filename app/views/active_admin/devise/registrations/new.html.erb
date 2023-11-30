@@ -30,8 +30,8 @@
         <%= f.input :telephone %>
         <%= f.input :password %>
         <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= f.input :cgu_acceptees, label: t('.cgu_acceptees') %>
-        <%= md t('.demande_accepter_cgu', lien: lien_cgu()) %>
+        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees') %>
+        <%= md t('creation_compte.demande_accepter_cgu', lien: lien_cgu()) %>
       <% end %>
       <%= f.actions do
         f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' } }
@@ -40,22 +40,5 @@
   </div>
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    let enregistrer = $('input[type="submit"]')
-    let checked = $("#compte_cgu_acceptees").is(':checked');
-    if(!checked) {
-      enregistrer.addClass('disabled');
-      enregistrer.attr('disabled', 'disabled');
-    }
-    $('#compte_cgu_acceptees_input').on('change', () => {
-      checked = !checked
-      enregistrer.toggleClass('disabled');
-      if(checked) {
-        enregistrer.removeAttr('disabled');
-      }
-      else {
-        enregistrer.attr('disabled', 'disabled');
-      }
-    });
-  });
+  document.addEventListener('DOMContentLoaded', cgu_activation_submit);
 </script>

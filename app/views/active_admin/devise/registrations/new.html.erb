@@ -31,7 +31,7 @@
         <%= f.input :password %>
         <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
         <%= f.input :cgu_acceptees, label: t('.cgu_acceptees') %>
-        <%= md t('.demande_accepter_cgu', lien: link_to(t('.lien_cgu'), '/cgu/', target: '_blank')) %>
+        <%= md t('.demande_accepter_cgu', lien: lien_cgu()) %>
       <% end %>
       <%= f.actions do
         f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' } }

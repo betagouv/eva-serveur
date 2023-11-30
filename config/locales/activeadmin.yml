@@ -1,4 +1,6 @@
 fr:
+  cgu_helper:
+    lien_cgu: CGU
   devise:
     failure:
       already_authenticated: ""
@@ -45,7 +47,6 @@ fr:
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
           lien_retour: Rechercher ma structure
           cgu_acceptees: J'accepte les conditions générales d'utilisation
-          lien_cgu: CGU
           demande_accepter_cgu: |
             Les conditions générales d'utilisation sont consultables ici : %{lien}
 

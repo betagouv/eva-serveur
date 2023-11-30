@@ -1,4 +1,4 @@
-function activation_submit(cgu_acceptees) {
+function activation_bouton_submit(cgu_acceptees) {
   let bouton_submit = $('input[type="submit"]')
   if(cgu_acceptees) {
     bouton_submit.removeClass('disabled');
@@ -8,16 +8,16 @@ function activation_submit(cgu_acceptees) {
   else {
     bouton_submit.addClass('disabled');
     bouton_submit.attr('disabled', 'disabled');
-    bouton_submit.attr('title', 'Veuillez accepter les CGU');
+    bouton_submit.attr('title', I18n.t('creation_compte.cgu_tool_tip'));
   }
 }
 
 function cgu_activation_submit() {
   let cgu_acceptees = $("#compte_cgu_acceptees").is(':checked');
 
-  activation_submit(cgu_acceptees);
+  activation_bouton_submit(cgu_acceptees);
   $('#compte_cgu_acceptees_input').on('change', () => {
     cgu_acceptees = !cgu_acceptees
-    activation_submit(cgu_acceptees);
+    activation_bouton_submit(cgu_acceptees);
   });
 }

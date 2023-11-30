@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   new ClipboardJS('.copier-coller');
   $('[data-toggle="tooltip"]').tooltip();
+
+  I18n.locale = 'fr';
 });
 
 Chart.defaults.font.family = 'Work Sans';

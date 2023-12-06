@@ -30,7 +30,7 @@
         <%= f.input :telephone %>
         <%= f.input :password %>
         <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees') %>
+        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
         <%= md t('creation_compte.demande_accepter_cgu', lien: lien_cgu()) %>
       <% end %>
       <%= f.actions do

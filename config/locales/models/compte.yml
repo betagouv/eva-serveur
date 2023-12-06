@@ -78,5 +78,4 @@ fr:
     cgu_tool_tip: Veuillez accepter les CGU
     demande_accepter_cgu: |
       Les conditions générales d'utilisation sont consultables ici : %{lien}
-
       Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire.

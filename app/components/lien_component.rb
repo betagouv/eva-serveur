@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class LienComponent < ViewComponent::Base
-  def initialize(body, url, params)
+  def initialize(body, url, externe: false)
     @body = body
     @url = url
-    @params = params
+    @externe = externe
+    @params = { target: '_blank' } if externe
   end
 end

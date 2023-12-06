@@ -1,6 +1,5 @@
 fr:
-  cgu_helper:
-    lien_cgu: CGU
+  lien_cgu: CGU
   devise:
     failure:
       already_authenticated: ""

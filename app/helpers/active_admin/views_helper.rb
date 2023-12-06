@@ -6,6 +6,5 @@ module ActiveAdmin
     include EvaluationHelper
     include ErreurHelper
     include PriseEnMainHelper
-    include CguHelper
   end
 end

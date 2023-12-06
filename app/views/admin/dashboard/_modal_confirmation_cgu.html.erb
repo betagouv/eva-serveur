@@ -3,13 +3,8 @@
     <div class="modal-content">
       <div class="modal-body">
         <div class='message'>
-          <p>
-            <%= md t('.info_lien_cgu') %>
-            <%= lien_cgu  %>
-          </p>
-          <p>
-            <%= t('.demande_acceptation_cgu') %>
-          </p>
+          <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte",
+            locals: { scope: 'admin.dashboard.modal_confirmation_cgu' } %>
         </div>
         <div class='actions'>
           <%= link_to t('.bouton_acceptation_cgu'),

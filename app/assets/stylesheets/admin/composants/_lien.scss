@@ -1,13 +1,7 @@
 .composant-lien {
-  display: inline-block;
-}
-
-.lien-externe {
-  display: flex;
-
-  &:after {
-    content: image-url('external-link-line.svg');
-    display: flex;
-    height: 1rem;
+  .fa {
+    color: $eva_main_blue;
+    margin-left: 2px;
+    font-size: 0.75rem;
   }
 }

@@ -19,7 +19,7 @@
         <%= compte.input :email %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= md t('creation_compte.demande_accepter_cgu', lien: lien_cgu()) %>
+        <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: 'creation_compte' } %>
         <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
       <% end %>
     </div>

@@ -74,8 +74,7 @@ fr:
         edit_model: Modifier
         delete_model: Supprimer
   creation_compte:
-    cgu_acceptees: J'accepte les conditions générales d'utilisation
-    cgu_tool_tip: Veuillez accepter les CGU
-    demande_accepter_cgu: |
-      Les conditions générales d'utilisation sont consultables ici : %{lien}
-      Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire.
+    cgu_acceptees: "J'accepte les conditions générales d'utilisation"
+    cgu_tool_tip: "Veuillez accepter les CGU"
+    information_cgu: "Les conditions générales d'utilisation sont consultables ici :"
+    demande_acceptation: "Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire."

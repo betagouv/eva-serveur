@@ -19,8 +19,8 @@
         <%= compte.input :email %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
         <%= md t('creation_compte.demande_accepter_cgu', lien: lien_cgu()) %>
+        <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
       <% end %>
     </div>
     <div class="panel">

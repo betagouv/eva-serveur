@@ -30,8 +30,8 @@
         <%= f.input :telephone %>
         <%= f.input :password %>
         <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
         <%= md t('creation_compte.demande_accepter_cgu', lien: lien_cgu()) %>
+        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
       <% end %>
       <%= f.actions do
         f.action :submit, label: t('active_admin.devise.login.submit'), button_html: { value: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' } }

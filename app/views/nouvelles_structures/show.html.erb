@@ -19,8 +19,6 @@
         <%= compte.input :email %>
         <%= compte.input :password %>
         <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: 'creation_compte' } %>
-        <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
       <% end %>
     </div>
     <div class="panel">
@@ -34,6 +32,12 @@
       <% end %>
     </div>
   <% end %>
+  <div class="panel">
+    <%= compte.inputs do %>
+      <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: 'creation_compte' } %>
+      <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
+    <% end %>
+  </div>
   <div class="panel">
     <%= md t('.actions.validation') %>
     <%= compte.actions do %>

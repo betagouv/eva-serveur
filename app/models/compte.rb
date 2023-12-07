@@ -19,6 +19,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: %w[conseiller compte_generique], message: :comptes_refuses },
                    if: :compte_refuse?
   validates :email, uniqueness: { case_sensitive: false }
+  validates_with PasswordValidator, fields: [:password]
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 

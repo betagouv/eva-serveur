@@ -5,7 +5,7 @@ FactoryBot.define do
     email
     nom { 'Nom' }
     prenom { 'Prénom' }
-    password { 'password' }
+    password { 'Password78901$' }
     role { 'superadmin' }
     statut_validation { :acceptee }
     cgu_acceptees { true }

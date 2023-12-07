@@ -100,8 +100,8 @@ describe 'Admin - Compte', type: :feature do
                      'Compte générique']
           expect(page).to have_select(:compte_role, options: options)
           select 'Ma structure'
-          fill_in :compte_password, with: 'billyjoel'
-          fill_in :compte_password_confirmation, with: 'billyjoel'
+          fill_in :compte_password, with: 'billyJoel123$$$'
+          fill_in :compte_password_confirmation, with: 'billyJoel123$$$'
           click_on 'Créer un compte'
         end.to change(Compte, :count)
         expect(Compte.last.structure).to eq ma_structure
@@ -146,8 +146,8 @@ describe 'Admin - Compte', type: :feature do
         fill_in :compte_prenom, with: 'Peppa'
         fill_in :compte_nom, with: 'Pig'
         fill_in :compte_email, with: 'collegue@exemple.fr'
-        fill_in :compte_password, with: 'billyjoel'
-        fill_in :compte_password_confirmation, with: 'billyjoel'
+        fill_in :compte_password, with: 'billyjoel123$$$'
+        fill_in :compte_password_confirmation, with: 'billyjoel123$$$'
 
         expect do
           click_on 'Créer un compte'
@@ -232,8 +232,8 @@ describe 'Admin - Compte', type: :feature do
       before do
         visit edit_admin_compte_path(compte_connecte)
         fill_in :compte_prenom, with: 'Robert'
-        fill_in :compte_password, with: 'new_password'
-        fill_in :compte_password_confirmation, with: 'new_password'
+        fill_in :compte_password, with: 'new_password123$$$'
+        fill_in :compte_password_confirmation, with: 'new_password123$$$'
         click_on 'Modifier'
       end
 
@@ -242,7 +242,7 @@ describe 'Admin - Compte', type: :feature do
         expect(page).not_to have_content 'Accès'
         expect(compte_connecte.prenom).to eq 'Robert'
         fill_in :compte_email, with: 'new_password'
-        fill_in :compte_password, with: 'new_password'
+        fill_in :compte_password, with: 'new_password123$$$'
         click_on 'Se connecter'
       end
     end

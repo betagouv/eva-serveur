@@ -78,3 +78,6 @@ fr:
     cgu_tool_tip: "Veuillez accepter les CGU"
     information_cgu: "Les conditions générales d'utilisation sont consultables ici :"
     demande_acceptation: "Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire."
+    regles_mot_de_passe: |
+      doit contenir au moins 12 caractères dont une majuscule, une minuscule, un chiffre et un symbol.
+      Nous vous recommandons l'utilisation d'un générateur de mot de passe fort.

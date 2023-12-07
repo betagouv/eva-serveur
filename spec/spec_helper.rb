@@ -52,7 +52,7 @@ RSpec.configure do |config|
   }.freeze
 
   def se_connecter_comme_superadmin
-    connecte create(:compte_superadmin, email: 'superadmin@exemple.fr', password: 'password')
+    connecte create(:compte_superadmin, email: 'superadmin@exemple.fr', password: 'Password08$$$$')
   end
 
   def connecte(compte)

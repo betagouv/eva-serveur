@@ -71,6 +71,8 @@ fr:
       statistiques: Voir les statistiques
     resource:
       index:
+        stats: Afficher les statistiques
+        sans_stats: Masquer les statistiques
         rapport: Rapport
         evenements: Évenements
     sidebars:

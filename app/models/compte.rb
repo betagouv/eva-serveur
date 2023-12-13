@@ -36,7 +36,6 @@ class Compte < ApplicationRecord
 
   accepts_nested_attributes_for :structure
 
-
   def display_name
     nom_complet.presence || email
   end

@@ -48,14 +48,13 @@ ActiveAdmin.register Compte do
          if: proc { can? :manage, Compte }
 
   def filtrer_par_activation_structure(statut_activation, options = {})
-    options.merge!({ if: -> { can? :manage, Compte } })
+    options.merge!({ if: -> { params[:stats] && can?(:manage, Compte) } })
     scope statut_activation, options do |scope|
       scope.where(structure: Structure.send(statut_activation))
     end
   end
 
-  scope :all, { default: true, if: -> { can? :manage, Compte } }
-
+  scope :all, { default: true, if: -> { params[:stats] && can?(:manage, Compte) } }
   filtrer_par_activation_structure(:pas_vraiment_utilisatrices)
   filtrer_par_activation_structure(:non_activees)
   filtrer_par_activation_structure(:actives)
@@ -79,6 +78,19 @@ ActiveAdmin.register Compte do
     end
     actions
   end
+
+  action_item :stats, only: :index, if: -> { can? :manage, Compte } do
+    if params[:stats]
+      link_to t('.sans_stats'), admin_comptes_path
+    else
+      link_to t('.stats'), admin_comptes_path(stats: true)
+    end
+  end
+
+  sidebar :aide_filtres,
+          partial: 'admin/structures_locales/aide_filtres_sidebar',
+          only: :index,
+          if: -> { params[:stats] && can?(:manage, Compte) }
 
   form do |f|
     f.inputs do
@@ -105,11 +117,6 @@ ActiveAdmin.register Compte do
       annulation_formulaire(f)
     end
   end
-
-  sidebar :aide_filtres,
-          partial: 'admin/structures_locales/aide_filtres_sidebar',
-          only: :index,
-          if: -> { can? :manage, Compte }
 
   csv do
     column :prenom

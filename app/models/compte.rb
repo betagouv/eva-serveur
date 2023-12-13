@@ -2,15 +2,20 @@
 
 class Compte < ApplicationRecord
   DELAI_RELANCE_NON_ACTIVATION = 30.days
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :trackable,
-         :recoverable, :rememberable, :validatable, :registerable, :confirmable
   ROLES = %w[superadmin charge_mission_regionale admin conseiller compte_generique].freeze
   ROLES_STRUCTURE = %w[admin conseiller].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :trackable,
+         :recoverable, :rememberable, :validatable, :registerable, :confirmable
+
+  acts_as_paranoid
+
   include Comptes::EnvoieEmails
+
   validates :role, inclusion: { in: ROLES }
   enum :role, ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
@@ -31,7 +36,6 @@ class Compte < ApplicationRecord
 
   accepts_nested_attributes_for :structure
 
-  acts_as_paranoid
 
   def display_name
     nom_complet.presence || email

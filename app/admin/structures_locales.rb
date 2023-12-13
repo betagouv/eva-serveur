@@ -16,13 +16,23 @@ ActiveAdmin.register StructureLocale do
          collection: proc { Structure.distinct.order(:region).pluck(:region) }
   filter :created_at
 
-  scope :all, default: true
-  scope :sans_campagne
-  scope :pas_vraiment_utilisatrices
-  scope :non_activees
-  scope :actives
-  scope :inactives
-  scope :abandonnistes
+  scope :all, default: true, if: -> { params[:stats] }
+  scope :sans_campagne, if: -> { params[:stats] }
+  scope :pas_vraiment_utilisatrices, if: -> { params[:stats] }
+  scope :non_activees, if: -> { params[:stats] }
+  scope :actives, if: -> { params[:stats] }
+  scope :inactives, if: -> { params[:stats] }
+  scope :abandonnistes, if: -> { params[:stats] }
+
+  action_item :stats, only: :index do
+    if params[:stats]
+      link_to t('.sans_stats'), admin_structures_locales_path
+    else
+      link_to t('.stats'), admin_structures_locales_path(stats: true)
+    end
+  end
+
+  sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
   index do
     column :nom
@@ -66,8 +76,6 @@ ActiveAdmin.register StructureLocale do
   show do
     render partial: 'admin/structures/show', locals: { structure: resource }
   end
-
-  sidebar :aide_filtres, only: :index
 
   form partial: 'form'
 

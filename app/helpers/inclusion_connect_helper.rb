@@ -72,11 +72,12 @@ module InclusionConnectHelper
     end
 
     def cree_ou_recupere_compte(user_info)
+      email = user_info['email'].strip.downcase
       compte = Compte.find_by(id_inclusion_connect: user_info['sub'])
-      if compte.present? && compte.email != user_info['email']
-        compte = actualise_email_compte_existant(compte, user_info['email'])
+      if compte.present? && compte.email != email
+        compte = actualise_email_compte_existant(compte, email)
       end
-      compte ||= Compte.find_or_create_by(email: user_info['email'])
+      compte ||= Compte.find_or_create_by(email: email)
       actualise_autres_champs(compte, user_info)
       compte.save!
       compte

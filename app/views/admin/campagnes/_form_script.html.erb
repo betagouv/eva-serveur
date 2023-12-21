@@ -18,7 +18,8 @@ function reinitialiseSelection(inputClass) {
 }
 
 function afficheZone(choix_selection, zoneAAfficher) {
-  $(`#${zoneAAfficher}`).show();
+  let $zone = $(`#${zoneAAfficher}`)
+  $zone.show();
   const option_redaction = $("#campagne_options_personnalisation_redaction").parent();
   switch (choix_selection) {
     case "campagne_type_programme_positionnement":
@@ -37,13 +38,15 @@ function afficheZone(choix_selection, zoneAAfficher) {
         break;
     <% end %>
   }
+  $zone.find('.choix-item').first().trigger('focus');
 }
 
 function enregistreSelectionListener(choix, zoneAAfficher ) {
-  $(`.${choix}`).click(function (e) {
-    if (e.target.id) {
+  $(`.${choix}`).on('click', function (e) {
+    let id = $(this).find('input').attr('id');
+    if (id) {
       reinitialiseSelection(choix);
-      afficheZone(e.target.id, zoneAAfficher)
+      afficheZone(id, zoneAAfficher)
       $('html, body').animate({
         scrollTop: $(`#${zoneAAfficher}`).offset().top
       }, 300);
@@ -52,6 +55,9 @@ function enregistreSelectionListener(choix, zoneAAfficher ) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  $('.choix-item').on('keyup', function(event) {
+    if (event.keyCode == 13) $(this).parent().trigger('click');
+  });
   enregistreSelectionListener('input-choix-type-programme', 'zone-choix-parcours')
   enregistreSelectionListener('input-choix-option-parcours-type', 'zone-de-personnalisation')
 });

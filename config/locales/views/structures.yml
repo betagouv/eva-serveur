@@ -1,6 +1,7 @@
 fr:
   structures:
     index:
+      title: Rechercher ma structure
       titre: Bienvenue !
       description: |
         **Vous souhaitez créer un compte conseiller eva.**
@@ -34,6 +35,7 @@ fr:
           Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
   nouvelles_structures:
     show:
+      title: Créer une nouvelle structure
       titre: Rejoindre eva
       structure:
         titre: Votre structure

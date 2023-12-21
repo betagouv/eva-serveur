@@ -123,7 +123,7 @@
     box-shadow: 0px 0px 0.5rem rgba(30, 65, 106, 0.25);
 
     &:hover {
-      #utility_compte, #utility_structure, #utility_statistiques {
+      #utility_compte, #utility_structure, #utility_statistiques, #utility_logout {
         display: block;
       }
       #utility_structure_courante::after {
@@ -205,7 +205,7 @@
           background: asset-data-url('roue-dentee.svg') no-repeat center;
         }
       }
-      &_compte, &_statistiques, &_structure {
+      &_compte, &_structure, &_statistiques, &_logout {
         display: none;
         padding-bottom: .5rem;
         background-color: $eva_bluegrey;
@@ -214,7 +214,7 @@
       &_compte {
         padding-top: 1rem;
       }
-      &_statistiques {
+      &_logout {
         padding-bottom: 1rem;
         &:after {
           content: '';

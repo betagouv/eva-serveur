@@ -256,6 +256,10 @@ ActiveAdmin.setup do |config|
                 send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-statistiques") if structure
               },
               priority: 5
+      menu.add id: 'utility_logout',
+              label: I18n.t('active_admin.menu_connexion.logout').html_safe,
+              url: proc{ send(config.logout_link_path) },
+              priority: 6
       admin.add_logout_button_to_menu menu
     end
   end

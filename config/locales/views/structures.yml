@@ -24,6 +24,8 @@ fr:
         invitation:  |
           Pour inviter une personne à rejoindre cette structure,
           vous pouvez lui envoyer le lien suivant :
+      mes_campagnes:
+        voir: Voir
     structures_locales:
       form:
         titre: Création d'une nouvelle structure

@@ -69,6 +69,7 @@ fr:
       compte: Voir mon compte
       structure: Voir ma structure
       statistiques: Voir les statistiques
+      logout: Déconnexion
     resource:
       index:
         stats: Afficher les statistiques

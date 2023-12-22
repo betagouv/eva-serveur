@@ -51,7 +51,6 @@ fr:
         edit:
           lien_retour: Se connecter
           consigne: Saisissez et confirmez votre nouveau mot de passe ci-dessous.
-          caracteristique: Votre mot de passe doit comporter au moins 6 caractères.
           token_invalide: Votre lien de réinitialisation n’est pas valide.
           submit: Valider mon nouveau mot de passe
       change_password:

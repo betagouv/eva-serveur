@@ -6,7 +6,7 @@
   <div id="login">
     <div class='mot-de-passe-instruction'>
       <p class='mot-de-passe-instruction--consigne'><%= t('.consigne') %></p>
-      <p><%= t('.caracteristique')%></p>
+      <p><%= t(@regles_mot_de_passe, scope: 'creation_compte', longueur_mot_de_passe: Devise.password_length.first)%></p>
     </div>
     <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:password, :password_confirmation] } %>
     <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|

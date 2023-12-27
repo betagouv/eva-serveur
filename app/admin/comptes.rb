@@ -55,6 +55,7 @@ ActiveAdmin.register Compte do
   end
 
   scope :all, { default: true, if: -> { params[:stats] && can?(:manage, Compte) } }
+  filtrer_par_activation_structure(:sans_campagne)
   filtrer_par_activation_structure(:pas_vraiment_utilisatrices)
   filtrer_par_activation_structure(:non_activees)
   filtrer_par_activation_structure(:actives)

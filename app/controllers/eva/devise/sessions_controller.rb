@@ -4,6 +4,7 @@ module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController
       before_action :check_compte_confirmation, only: :create
+      before_action :valide_robustesse_mot_de_de_passe, only: :create
 
       def create
         self.resource = warden.authenticate!(auth_options)
@@ -43,6 +44,23 @@ module Eva
         return if compte.blank?
 
         redirect_to new_compte_confirmation_path unless compte.active_for_authentication?
+      end
+
+      def valide_robustesse_mot_de_de_passe
+        return unless params.key?(:compte)
+
+        compte = warden.authenticate!(auth_options)
+        return if succes_validation(compte, params[:compte][:password])
+
+        set_flash_message!(:alert, :mot_de_passe_faible)
+        token = compte.send(:set_reset_password_token)
+        sign_out(compte)
+        redirect_to(edit_password_path(:compte, reset_password_token: token))
+      end
+
+      def succes_validation(compte, pass)
+        !compte.anlci? ||
+          PasswordValidator.est_avec_12_maj_min_num_et_symbol?(pass)
       end
     end
   end

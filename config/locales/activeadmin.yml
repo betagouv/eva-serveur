@@ -6,6 +6,7 @@ fr:
     sessions:
       compte:
         signed_in_but_unconfirmed: ""
+        mot_de_passe_faible: Votre mot de passe est trop faible veuillez en choisir un nouveau
   active_admin:
     recherche_structure: Rechercher ma structure
     devise:

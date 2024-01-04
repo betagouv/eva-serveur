@@ -42,8 +42,8 @@ function afficheZone(choix_selection, zoneAAfficher) {
 }
 
 function enregistreSelectionListener(choix, zoneAAfficher ) {
-  $(`.${choix}`).on('click', function (e) {
-    let id = $(this).find('input').attr('id');
+  $(`.${choix}`).on('click', function (e, id_selection_clavier) {
+    let id = e.target.id || id_selection_clavier;
     if (id) {
       reinitialiseSelection(choix);
       afficheZone(id, zoneAAfficher)
@@ -56,7 +56,11 @@ function enregistreSelectionListener(choix, zoneAAfficher ) {
 
 document.addEventListener('DOMContentLoaded', () => {
   $('.choix-item').on('keyup', function(event) {
-    if (event.keyCode == 13) $(this).parent().trigger('click');
+    if (event.keyCode == 13) {
+      let $label = $(this).parent();
+      let id = $label.find('input').attr('id');
+      $label.trigger('click', id);
+    }
   });
   enregistreSelectionListener('input-choix-type-programme', 'zone-choix-parcours')
   enregistreSelectionListener('input-choix-option-parcours-type', 'zone-de-personnalisation')

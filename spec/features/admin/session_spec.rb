@@ -4,6 +4,15 @@ require 'rails_helper'
 
 describe 'Session', type: :feature do
   describe 'Connexion Espace Pro' do
+    context 'Quand tout va bien' do
+      let!(:compte) { create :compte }
+
+      it "Se connect à l'application" do
+        connecte(compte)
+        expect(page).to have_current_path(admin_dashboard_path)
+      end
+    end
+
     context "Quand le compte n'existe pas" do
       before do
         connecte_email email: 'invalid@email.com'
@@ -11,6 +20,22 @@ describe 'Session', type: :feature do
 
       it "Renvoie un message d'erreur" do
         expect(page).to have_content('Email ou mot de passe incorrect')
+      end
+    end
+
+    context 'Quand mon compte anlci a un mot de passe faible car les règles ont été remforcées' do
+      let!(:compte) do
+        compte = create :compte, role: :superadmin
+        # rubocop:disable Rails/SkipsModelValidations
+        compte.update_attribute(:password, '123')
+        # rubocop:enable Rails/SkipsModelValidations
+        compte
+      end
+
+      it "Refuse la connexion et renvoie un message d'erreur" do
+        connecte(compte)
+        expect(page).to have_current_path(new_compte_session_path)
+        expect(page).to have_content("Votre mot de passe n'est pas conforme")
       end
     end
 

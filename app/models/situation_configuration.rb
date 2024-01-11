@@ -15,7 +15,7 @@ class SituationConfiguration < ApplicationRecord
   acts_as_paranoid
 
   def questionnaire_utile
-    @questionnaire_utile ||= (questionnaire || situation.questionnaire)
+    @questionnaire_utile ||= questionnaire || situation.questionnaire
   end
 
   class << self

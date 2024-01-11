@@ -38,10 +38,10 @@ module Restitution
         return if score.blank?
 
         PALIERS[referentiel][competence].each_with_index do |palier, index|
-          return "palier#{index}".to_sym if score <= palier
+          return :"palier#{index}" if score <= palier
         end
 
-        "palier#{PALIERS[referentiel][competence].count}".to_sym
+        :"palier#{PALIERS[referentiel][competence].count}"
       end
     end
   end

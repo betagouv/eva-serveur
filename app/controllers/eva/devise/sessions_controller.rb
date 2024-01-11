@@ -4,12 +4,12 @@ module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController
       before_action :check_compte_confirmation, only: :create
-      before_action :valide_robustesse_mot_de_de_passe, only: :create
 
       def create
         self.resource = warden.authenticate!(auth_options)
-        assigne_message_flash resource
-        sign_in(resource_name, resource)
+        return unless est_mot_de_passe_conforme(resource)
+
+        sign_in_avec_message(resource)
         yield resource if block_given?
         respond_with resource, location: after_sign_in_path_for(resource)
       end
@@ -29,12 +29,13 @@ module Eva
 
       private
 
-      def assigne_message_flash(resource)
-        if resource.confirmed?
+      def sign_in_avec_message(compte)
+        if compte.confirmed?
           set_flash_message!(:notice, :signed_in)
         else
-          set_flash_message! :alert, :"signed_in_but_#{resource.inactive_message}"
+          set_flash_message! :alert, :"signed_in_but_#{compte.inactive_message}"
         end
+        sign_in(resource_name, compte)
       end
 
       def check_compte_confirmation
@@ -46,19 +47,18 @@ module Eva
         redirect_to new_compte_confirmation_path unless compte.active_for_authentication?
       end
 
-      def valide_robustesse_mot_de_de_passe
-        return unless params.key?(:compte)
-
-        compte = warden.authenticate!(auth_options)
-        return if succes_validation(compte, params[:compte][:password])
+      def est_mot_de_passe_conforme(compte)
+        return true unless params.key?(:compte)
+        return true if succes_validation_anlci(compte, params[:compte][:password])
 
         set_flash_message!(:alert, :mot_de_passe_faible)
-        token = compte.send(:set_reset_password_token)
+        compte.send(:set_reset_password_token)
+        compte.send_reset_password_instructions
         sign_out(compte)
-        redirect_to(edit_password_path(:compte, reset_password_token: token))
+        redirect_to new_compte_session_path and return false
       end
 
-      def succes_validation(compte, pass)
+      def succes_validation_anlci(compte, pass)
         !compte.anlci? ||
           PasswordValidator.est_avec_12_maj_min_num_et_symbol?(pass)
       end

@@ -24,6 +24,7 @@ fr:
               Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
             retour: Annuler
       login:
+        bienvenue: Bienvenue sur eva
         title: Authentification
         titre: Espace Pro
         header_title: Je suis conseiller

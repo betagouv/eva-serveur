@@ -27,7 +27,7 @@ body.logged_out {
 
   #content_wrapper {
     position: relative;
-    padding-top: 10rem;
+    padding-top: 2rem;
     flex: 1 0 auto;
     margin: auto;
     z-index: 2;
@@ -63,11 +63,15 @@ body.logged_out {
       margin: 0 auto 3rem;
       font-family: $font-titre;
       text-align: center;
+      .logo-eva {
+        width: 6rem;
+      }
       h1 {
         color: $eva_light;
         font-size: 1.5rem;
         line-height: 1.875rem;
         font-weight: bold;
+        margin-top: 3rem;
         + h2 {
           margin-top: 1rem;
         }

@@ -66,7 +66,7 @@ namespace :reviewapp do
     cree_campagnes_socio
 
     Compte.find_each do |compte|
-      compte.encrypted_password = '$2a$11$d.kf40n..7zqTGgCPANFlOiLvwGH35EPh0OsY6euJaje3Us20KIWO'
+      compte.encrypted_password = '$2a$11$TE.U8c5Rka9PqDk5uL31xePkHnlp0EYsY7RuDyuhJEODObxoNGq/y'
       compte.save!(validate: false)
     end
   end

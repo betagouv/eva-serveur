@@ -80,5 +80,5 @@ fr:
     demande_acceptation: "Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire."
     regles_mot_de_passe: Votre mot de passe doit comporter au moins %{longueur_mot_de_passe} caractères.
     regles_mot_de_passe_anlci: |
-      doit contenir au moins 12 caractères dont une majuscule, une minuscule, un chiffre et un symbol.
+      Votre mot de passe doit contenir au moins 12 caractères dont une majuscule, une minuscule, un chiffre et un symbole.
       Nous vous recommandons l'utilisation d'un générateur de mot de passe fort.

@@ -115,18 +115,14 @@ body.logged_out {
           padding: 1.5rem;
         }
         .panel-header {
-          height: 4rem;
-          border-radius: 0.5rem 0.5rem 0 0;
           display: flex;
           align-items: center;
-          p {
-            font-family: $font-titre;
-            font-size: 1rem;
-            font-weight: 700;
-            color: $eva_light;
-            padding-left: 1.5rem;
-            margin: 0;
-          }
+          height: 4rem;
+          border-radius: 0.5rem 0.5rem 0 0;
+          font-size: 1rem;
+          color: $eva_light;
+          padding-left: 1.5rem;
+          margin: 0;
         }
       }
       form {

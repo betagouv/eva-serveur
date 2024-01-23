@@ -10,16 +10,16 @@ RSpec.describe SourceAide, type: :model do
   it { is_expected.to validate_presence_of(:type_document) }
 
   describe 'retourne les sources par catégories' do
-    let!(:source1) { create :source_aide, categorie: 'prise_en_main' }
-    let!(:source2) { create :source_aide, categorie: 'prise_en_main' }
-    let!(:source3) { create :source_aide, categorie: 'animer_restituer' }
+    let!(:source3) { create :source_aide, categorie: :animer_restituer }
+    let!(:source1) { create :source_aide, categorie: :prise_en_main }
+    let!(:source2) { create :source_aide, categorie: :prise_en_main }
 
     it do
-      expect(SourceAide.sources_par_categorie).to eql(
-        {
-          'prise_en_main' => [source1, source2],
-          'animer_restituer' => [source3]
-        }
+      expect(SourceAide.sources_par_categorie.to_a).to eql(
+        [
+          ['prise_en_main', [source1, source2]],
+          ['animer_restituer', [source3]]
+        ]
       )
     end
   end

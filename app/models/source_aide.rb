@@ -11,7 +11,7 @@ class SourceAide < ApplicationRecord
   end
 
   def self.sources_par_categorie
-    all.each_with_object({}) do |source, result|
+    order(:categorie).each_with_object({}) do |source, result|
       result[source.categorie] ||= []
       result[source.categorie] << source
     end

@@ -10,7 +10,7 @@ describe InclusionConnectHelper do
 
   describe '#logout' do
     it "construit l'url de deconnexion et nettoie la session" do
-      stub_const('::IC_BASE_URL', 'https://IC_HOST')
+      stub_const('::InclusionConnectHelper::IC_BASE_URL', 'https://IC_HOST')
       session = {
         ic_state: 'STATE',
         ic_logout_token: 'TOKEN'

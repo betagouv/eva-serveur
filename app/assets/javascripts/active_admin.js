@@ -23,7 +23,7 @@ jQuery.datetimepicker.setLocale('fr');
 
 document.addEventListener('DOMContentLoaded', () => {
   $('#validation-comptes-en-attente').modal();
-  $('#acceptation-cgu').modal({
+  $('.modal--static').modal({
     backdrop: 'static',
     keyboard: false
   });

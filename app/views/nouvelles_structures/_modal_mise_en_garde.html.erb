@@ -1,0 +1,15 @@
+<div class="modal modal--static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class='message'>
+          <h3><%= t('.titre') %></h3>
+          <p><%= md t('.message')%></p>
+        </div>
+        <div class='actions'>
+          <%= link_to t('.bouton'), url_for(mise_en_garde: "cache"), class: "bouton" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

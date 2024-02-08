@@ -34,6 +34,13 @@ fr:
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
   nouvelles_structures:
+    modal_mise_en_garde:
+      titre: Mise en garde
+      message: |
+        Vous êtes sur le point de créer une nouvelle structure dans eva, en même temps que votre compte. Cette opération vous désignera comme administrateur ou administratrice de cette structure et vous aurez ainsi la responsabilité d'accepter ou refuser les comptes désirant rejoindre cette structure par la suite.
+
+        Si vous n'êtes pas sûr d'être habilité à prendre cette responsabilité, veuillez prendre contact préalablement avec votre responsable hiérarchique.
+      bouton: Créer mon compte et ma structure
     show:
       title: Créer une nouvelle structure
       titre: Rejoindre eva
@@ -52,3 +59,4 @@ fr:
           Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
       creer_structure: Valider la création de mon compte
       lien_retour: Rechercher ma structure
+

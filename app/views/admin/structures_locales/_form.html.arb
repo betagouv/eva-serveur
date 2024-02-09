@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+render partial: 'nouvelles_structures/modal_mise_en_garde' if params[:mise_en_garde] == 'affiche'
 div class: 'panel nouvelle_structure' do
   h2 t('.titre')
   active_admin_form_for [:admin, resource] do |f|

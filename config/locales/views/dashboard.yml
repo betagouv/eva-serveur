@@ -1,6 +1,14 @@
 fr:
   admin:
     dashboard:
+      alerte_compte_demo: |
+        ## Attention ! Vous êtes connecté avec un compte de démonstration
+
+        Sentez-vous libre d'explorer l'interface, d'expérimenter, de créer des campagnes, de tester les modules d'évaluation.
+
+        Notez que plusieurs utilisateurs peuvent utiliser ce compte en même temps et que tout ce qui est créé avec **ce compte est effacé quotidiennement**.
+
+        **Attention !** N'utilisez pas ce compte pour faire des évaluations avec vos bénéficiaires.
       modal_confirmation_cgu:
         titre : "Conditions Générales d'Utilisation"
         information_cgu: "Les conditions générales d’utilisation du service eva sont consultables ici :"

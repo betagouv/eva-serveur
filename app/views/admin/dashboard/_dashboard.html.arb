@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+if current_compte.email == Eva::EMAIL_DEMO
+  div class: 'panel' do
+    md t('admin.dashboard.alerte_compte_demo')
+  end
+end
+
 if current_compte.validation_refusee?
   render 'validation_refusee'
 elsif prise_en_main.en_cours?

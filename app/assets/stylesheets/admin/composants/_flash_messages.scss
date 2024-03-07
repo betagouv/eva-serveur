@@ -103,7 +103,7 @@ body.logged_out {
     &_notice {
       background-color: $eva_dark_green;
     }
-    &_alert, &_error {
+    &_alert, &_error, &_recaptcha_error {
       @include flash-error;
     }
   }

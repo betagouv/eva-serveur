@@ -1,0 +1,7 @@
+fr:
+  demo:
+    show:
+      title: Connexion démonstration
+      titre: Connexion à la démonstration
+      submit: Se connecter à la démonstration
+      connexion_impossible: La connexion au compte de démo est impossible pour l'instant, veuillez réessayer plus tard.

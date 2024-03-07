@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     get "inclusion_connect/logout" => "inclusion_connect#logout"
     get "inclusion_connect/auth" => "inclusion_connect#auth"
     get "inclusion_connect/callback" => "inclusion_connect#callback"
+    get "demo" => "demo#show"
+    post "demo/connect" => "demo#connect"
 
     ActiveAdmin.routes(self)
     get '/admin/structures/:id', to: 'structures#show'

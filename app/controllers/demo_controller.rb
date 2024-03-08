@@ -10,6 +10,7 @@ class DemoController < ApplicationController
     compte = Compte.find_by(email: Eva::EMAIL_DEMO)
     echec_login and return if compte.blank?
 
+    ConnexionDemo.create
     sign_in_and_redirect compte, scope: :compte
   end
 

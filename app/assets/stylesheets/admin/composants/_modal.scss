@@ -22,14 +22,7 @@
       .actions {
         display: flex;
         justify-content: flex-end;
-
-        .bouton {
-          margin-right: .5rem;
-
-          &:last-child {
-            margin-right: 0;
-          }
-        }
+        gap: .5rem;
       }
     }
   }

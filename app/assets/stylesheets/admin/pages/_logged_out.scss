@@ -171,17 +171,6 @@ body.logged_out {
       }
     }
 
-    .panel--mise-en-garde {
-      .bouton-action {
-        display: flex;
-        justify-content: flex-end;
-
-        a {
-          @include bouton-arrondi();
-        }
-      }
-    }
-
     .separateur {
       margin-top: 1rem;
       border-top: 1px solid $eva_bluegrey;
@@ -189,21 +178,25 @@ body.logged_out {
     }
 
     .espace-inscription {
+      display: flex;
+      flex-direction: column;
+
       &.hidden {
         display: none;
       }
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
 
-      a {
-        @include bouton-carte($eva_dark);
-        height: 2rem;
-        border-radius: 2.875rem;
-        align-items: center;
-        font-size: 0.875rem;
-        padding: 0 0.94rem;
-        color: #fff;
+      .actions {
+        margin-top: 1rem;
+
+        .action-principale {
+          @include bouton-carte($eva_dark);
+          height: 2rem;
+          border-radius: 2.875rem;
+          align-items: center;
+          font-size: 0.875rem;
+          padding: 0 0.94rem;
+          color: #fff;
+        }
       }
     }
 
@@ -261,10 +254,15 @@ body.logged_out {
     .actions li {
       float: right;
     }
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.625rem;
+
+    input[type=submit] {
+      margin: 0;
     }
   }
 

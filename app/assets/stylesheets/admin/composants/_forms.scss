@@ -190,13 +190,6 @@ form {
   }
 }
 
-.logged_out {
-  form .buttons input[type=submit], form .buttons input[type=button], form .buttons button, form .actions input[type=submit], form .actions input[type=button], form .actions button {
-    margin-right: 0;
-    margin-left: 10px;
-  }
-}
-
 #error_explanation {
   .errors {
     background: $eva_red;

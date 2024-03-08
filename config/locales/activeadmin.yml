@@ -28,6 +28,8 @@ fr:
         title: Authentification
         titre: Espace Pro
         header_title: Je suis conseiller
+        demo:
+          action: Démonstration
         inscription:
           content: Je n'ai pas encore de compte
           action: S'inscrire

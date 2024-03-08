@@ -25,6 +25,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'donnee_sociodemographique', 'donnees_sociodemographiques'
   inflect.irregular 'type_de_programme', 'types_de_programme'
   inflect.irregular 'mise_en_action', 'mises_en_action'
+  inflect.irregular 'connexion_demo', 'connexions_demo'
 end
 
 # These inflection rules are supported but not enabled by default:

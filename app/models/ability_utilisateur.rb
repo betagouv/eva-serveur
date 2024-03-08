@@ -65,6 +65,7 @@ class AbilityUtilisateur
     comptes_generiques_ou_comptes_admin(compte)
     droits_validation_comptes(compte)
     cannot(:destroy, Compte) { |c| Campagne.exists?(compte: c) }
+    cannot :update, compte if compte.email == Eva::EMAIL_DEMO
   end
 
   def droit_structure(compte)

@@ -398,4 +398,13 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, Evaluation)
     end
   end
+
+  context 'Compte de démo' do
+    let!(:compte) { create :compte_conseiller, :structure_avec_admin, email: Eva::EMAIL_DEMO }
+
+    it 'ne peut pas modifier son compte' do
+      expect(subject).to be_able_to(:read, compte)
+      expect(subject).not_to be_able_to(:update, compte)
+    end
+  end
 end

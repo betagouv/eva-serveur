@@ -8,10 +8,15 @@
     notification_admin_job:
       cron: '0 9 * * 1'
       class: NotificationAdminComptesEnAttenteJob
-      description: Notifie à l'administrateur toutes les semaines des comptes en attentes 
+      description: Notifie à l'administrateur toutes les semaines des comptes en attentes
       enabled: true
     structure_assigne_region_job:
       cron: '0 1 * * *'
       class: Structure::AssigneRegionJob
       description: Assigne les régions pour les structures sans région. (job exécuté chaque jour)
+      enabled: true
+    reinitialise_compte_demo_job:
+      cron: '0 2 * * *'
+      class: ReinitialiseCompteDemoJob
+      description: Efface les campagnes, évaluations et bénéficiaires du compte de démo (job exécuté chaque jour)
       enabled: true

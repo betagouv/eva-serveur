@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe RelanceUtilisateurPourNonActivationJob, type: :job do
-  let(:compte) { create :compte_admin }
+  let(:compte) { create :compte_admin, email_bienvenue_envoye: false }
 
   context "quand le compte n'a pas de campagne" do
     it "envoie un email pour relancer l'utilisateur" do

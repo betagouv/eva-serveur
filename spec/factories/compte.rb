@@ -9,6 +9,7 @@ FactoryBot.define do
     role { 'superadmin' }
     statut_validation { :acceptee }
     cgu_acceptees { true }
+    email_bienvenue_envoye { true }
     structure factory: :structure_locale
 
     trait :structure_avec_admin do

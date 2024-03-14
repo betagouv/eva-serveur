@@ -8,8 +8,12 @@ describe Compte, type: :integration do
       let!(:structure) { create :structure_locale }
 
       it 'programme un mail de bienvenue' do
-        expect { create :compte_admin, structure: structure, confirmed_at: Time.zone.now }
-          .to have_enqueued_mail(CompteMailer, :nouveau_compte).exactly(1)
+        expect do
+          create :compte_admin,
+                 structure: structure,
+                 confirmed_at: Time.zone.now,
+                 email_bienvenue_envoye: false
+        end.to have_enqueued_mail(CompteMailer, :nouveau_compte).exactly(1)
       end
 
       it "attend la validation de l'email pour envoyer les mails" do
@@ -58,7 +62,8 @@ describe Compte, type: :integration do
           create :compte_conseiller,
                  structure: structure,
                  statut_validation: :acceptee,
-                 confirmed_at: Time.zone.now
+                 confirmed_at: Time.zone.now,
+                 email_bienvenue_envoye: false
         end.to have_enqueued_mail(CompteMailer, :alerte_admin).exactly(0)
       end
 
@@ -67,7 +72,8 @@ describe Compte, type: :integration do
           create :compte_conseiller,
                  structure: structure,
                  statut_validation: :en_attente,
-                 confirmed_at: Time.zone.now
+                 confirmed_at: Time.zone.now,
+                 email_bienvenue_envoye: false
         end.to have_enqueued_mail(CompteMailer, :alerte_admin).exactly(1)
       end
     end
@@ -80,7 +86,8 @@ describe Compte, type: :integration do
           expect do
             create :compte_admin,
                    structure: structure,
-                   confirmed_at: Time.zone.now
+                   confirmed_at: Time.zone.now,
+                   email_bienvenue_envoye: false
           end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(1)
         end
       end
@@ -92,7 +99,8 @@ describe Compte, type: :integration do
           expect do
             create :compte_admin,
                    structure: structure,
-                   confirmed_at: Time.zone.now
+                   confirmed_at: Time.zone.now,
+                   email_bienvenue_envoye: false
           end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(0)
         end
       end
@@ -102,7 +110,8 @@ describe Compte, type: :integration do
           expect do
             create :compte_admin,
                    structure: nil,
-                   confirmed_at: Time.zone.now
+                   confirmed_at: Time.zone.now,
+                   email_bienvenue_envoye: false
           end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(0)
         end
       end

@@ -29,6 +29,15 @@ describe ReinitialiseCompteDemoJob, type: :job do
     expect(Compte.where(role: :admin).count).to eq(1)
   end
 
+  it "créé l'admin de la structure même s'il existe d'autres admins" do
+    structure = create :structure_locale, nom: 'autre structure'
+    create :compte_admin, structure: structure
+
+    ReinitialiseCompteDemoJob.perform_now
+
+    expect(Compte.where(role: :admin).count).to eq(2)
+  end
+
   it 'Supprime les campagnes et les évaluations du compte de démo' do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
     create :compte_admin, structure: structure

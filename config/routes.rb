@@ -50,5 +50,7 @@ Rails.application.routes.draw do
       resources :questionnaires, only: [:show]
       resources :evenements
     end
+
+    get '*path', to: 'erreurs#not_found', constraints: lambda { |_req| Rails.env.production? }
   end
 end

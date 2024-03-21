@@ -1,0 +1,10 @@
+fr:
+  layouts:
+    erreurs:
+      message-accueil: Oups…
+      retour-accueil: Retour à l'accueil
+  erreurs:
+    404:
+      title: 404
+      titre: Erreur 404
+      description: La page demandée n'existe pas

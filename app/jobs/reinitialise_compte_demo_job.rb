@@ -30,12 +30,12 @@ class ReinitialiseCompteDemoJob < ApplicationJob
   end
 
   def vide_compte(compte)
-    Campagne.where(compte: compte).find_each do |campagne|
+    Campagne.with_deleted.where(compte: compte).find_each do |campagne|
       logger.info "destruction de la campagne #{campagne.libelle}"
-      Evaluation.where(campagne: campagne).find_each do |evaluation|
-        beneficiaire = evaluation.beneficiaire
+      Evaluation.with_deleted.where(campagne: campagne).find_each do |evaluation|
+        b = evaluation.beneficiaire
         evaluation.really_destroy!
-        beneficiaire.really_destroy! unless Evaluation.exists?(beneficiaire: beneficiaire)
+        b.really_destroy! unless Evaluation.with_deleted.exists?(beneficiaire: b)
       end
       campagne.really_destroy!
     end

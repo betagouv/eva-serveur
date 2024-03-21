@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="<%=I18n.locale%>">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title><%= [content_for?(:title) ? yield(:title) : nil, ActiveAdmin.application.site_title(self)].compact.join(" | ") %></title>
+
+    <% ActiveAdmin.application.stylesheets.each do |style, options| %>
+      <% if ActiveAdmin.application.use_webpacker %>
+        <%= stylesheet_pack_tag style, **options %>
+      <% else %>
+        <%= stylesheet_link_tag style, **options %>
+      <% end %>
+    <% end %>
+
+    <%= favicon_link_tag ActiveAdmin.application.favicon if ActiveAdmin.application.favicon %>
+
+    <%= csrf_meta_tag %>
+  </head>
+  <body class="active-admin erreurs <%= controller.action_name %>">
+    <div id="wrapper">
+      <%= image_tag 'eva-logo-bleu.svg', class: 'logo-eva', alt: t('active_admin.devise.login.bienvenue')%>
+      <div class="partie-centrale">
+        <%= image_tag 'illustration-erreurs.svg' %>
+        <div class="contenu">
+          <div class="message-accueil"><%= t('.message-accueil') %></div>
+          <%= yield %>
+          <%= link_to t('.retour-accueil'), admin_dashboard_path, class: "action" %>
+        </div>
+      </div>
+      <%= render partial: 'components/footer', locals: { sponsors: false } %>
+    </div>
+  </body>
+</html>

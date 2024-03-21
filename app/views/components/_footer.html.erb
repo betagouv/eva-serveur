@@ -1,15 +1,18 @@
+<% sponsors = local_assigns.fetch :sponsors, true %>
 <footer id="footer-principal">
   <div class="footer__a-propos"><%= t('active_admin.footer').html_safe %></div>
-  <div class="footer__ligne"></div>
-  <div class="footer__logos">
-    <div class="logos__groupe">
-      <%= image_tag 'logo_ministere_travail.svg', alt: 'Logo du ministere du travail',
-                    class: 'logo-ministere-travail' %>
-      <%= image_tag 'logo_anlci.svg', alt: "Logo de l'ANLCI"%>
+  <% if sponsors %>
+    <div class="footer__ligne"></div>
+    <div class="footer__logos">
+      <div class="logos__groupe">
+        <%= image_tag 'logo_ministere_travail.svg', alt: 'Logo du ministere du travail',
+                      class: 'logo-ministere-travail' %>
+        <%= image_tag 'logo_anlci.svg', alt: "Logo de l'ANLCI"%>
+      </div>
+      <div class="logos__groupe">
+        <%= image_tag 'logo_france_relance.svg', alt: 'Logo de france relance' %>
+        <%= image_tag 'logo_union_europeenne.png', alt: "Logo de l'union européenne" %>
+      </div>
     </div>
-    <div class="logos__groupe">
-      <%= image_tag 'logo_france_relance.svg', alt: 'Logo de france relance' %>
-      <%= image_tag 'logo_union_europeenne.png', alt: "Logo de l'union européenne" %>
-    </div>
-  </div>
+  <% end %>
 </footer>

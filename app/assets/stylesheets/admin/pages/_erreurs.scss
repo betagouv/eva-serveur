@@ -1,0 +1,51 @@
+body.erreurs {
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 2rem 0;
+
+    .logo-eva {
+      width: 6rem;
+    }
+
+    .partie-centrale {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      img {
+        flex-basis: 18rem;
+        flex-shrink: 1;
+        width: 100%;
+      }
+
+      .contenu {
+        flex-shrink: 1;
+
+        .message-accueil {
+          color: $eva_dark;
+          font-family: Quicksand;
+          font-size: 3rem;
+          font-weight: 700;
+          line-height: normal;
+        }
+
+        h1 {
+          color: $eva_dark_blue_grey;
+          font-family: "Work Sans";
+          font-size: 1rem;
+          font-weight: 400;
+          margin: 1rem 0 0 0;
+          line-height: normal;
+        }
+
+        .action {
+            @include bouton-arrondi;
+        }
+      }
+    }
+  }
+}

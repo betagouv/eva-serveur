@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ReinitialiseCompteDemoJob, type: :job do
+describe ReinitialiseCompteDemoJob, type: :job, focus: true do
   it "Créé la structure et le compte de démo si rien n'existe" do
     ReinitialiseCompteDemoJob.perform_now
 
@@ -44,15 +44,19 @@ describe ReinitialiseCompteDemoJob, type: :job do
     compte_existant = create :compte_conseiller, structure: structure, email: Eva::EMAIL_DEMO
     campagne = create :campagne, compte: compte_existant
     beneficiaire = create :beneficiaire, nom: 'nom'
-    create :evaluation, campagne: campagne, beneficiaire: beneficiaire
-    create :evaluation, campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, nom: 'eval1', campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, nom: 'eval4', campagne: campagne, beneficiaire: beneficiaire,
+                        deleted_at: Time.zone.now
+    create :evaluation, nom: 'eval2', campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, nom: 'eval3', campagne: campagne, deleted_at: Time.zone.now
+    create :campagne, libelle: 'c supprimée', compte: compte_existant, deleted_at: Time.zone.now
 
     ReinitialiseCompteDemoJob.perform_now
 
     compte_demo = Compte.find_by(email: Eva::EMAIL_DEMO)
     expect(compte_demo.id).to eq(compte_existant.id)
-    expect(Evaluation.count).to eq(0)
-    expect(Beneficiaire.count).to eq(0)
-    expect(Campagne.where(compte: compte_demo).count).to eq(0)
+    expect(Evaluation.with_deleted.count).to eq(0)
+    expect(Beneficiaire.with_deleted.count).to eq(0)
+    expect(Campagne.with_deleted.where(compte: compte_demo).count).to eq(0)
   end
 end

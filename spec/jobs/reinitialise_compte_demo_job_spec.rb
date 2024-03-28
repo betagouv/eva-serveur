@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ReinitialiseCompteDemoJob, type: :job, focus: true do
+describe ReinitialiseCompteDemoJob, type: :job do
   it "Créé la structure et le compte de démo si rien n'existe" do
     ReinitialiseCompteDemoJob.perform_now
 

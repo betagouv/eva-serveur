@@ -4,7 +4,7 @@ h3 t("activerecord.attributes.source_aide.titres_categories.#{categorie}"),
    id: categorie,
    class: 'aide_titre'
 div class: 'sources_aide' do
-  sources_aide.each do |source_aide|
+  sources_aide.sort_by(&:position).each do |source_aide|
     a href: source_aide.url, target: '_blank', class: 'source_aide' do
       text_node image_tag "source-aide-#{source_aide.type_document}.svg", class: 'illustration'
       div class: 'details' do

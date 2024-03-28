@@ -3,7 +3,7 @@
 ActiveAdmin.register SourceAide do
   menu parent: 'Accompagnement'
 
-  permit_params :titre, :description, :url, :categorie, :type_document
+  permit_params :titre, :description, :url, :categorie, :type_document, :position
 
   config.filters = false
 
@@ -12,6 +12,7 @@ ActiveAdmin.register SourceAide do
       render(Tag.new(t(a.categorie, scope: 'activerecord.attributes.source_aide.categories'),
                      classes: 'tag-categorie'))
     end
+    column :position
     column :titre
     column :description
     column :url do |a|

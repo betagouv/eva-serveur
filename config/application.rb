@@ -15,6 +15,7 @@ require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require 'view_component'
 require 'view_component/storybook'
+require './lib/custom_exceptions_app_wrapper'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -37,6 +38,7 @@ module EvaServeur
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.exceptions_app = CustomExceptionsAppWrapper.new(exceptions_app: routes)
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

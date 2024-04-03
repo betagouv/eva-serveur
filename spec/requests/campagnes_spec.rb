@@ -20,7 +20,7 @@ describe 'Campagne API', type: :request do
     end
 
     it "retourne une 404 lorsqu'elle n'existe pas" do
-      get '/api/campagnes/404'
+      get '/api/campagnes/inconnue'
 
       expect(response).to have_http_status(:not_found)
     end

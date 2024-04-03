@@ -51,6 +51,9 @@ Rails.application.routes.draw do
       resources :evenements
     end
 
-    get '*path', to: 'erreurs#not_found', constraints: lambda { |_req| Rails.env.production? }
+    match '404', via: :all, to: 'erreurs#not_found'
+    match '500', via: :all, to: 'erreurs#internal_serveur_error'
+    match '422', via: :all, to: 'erreurs#unprocessable_entity'
   end
+
 end

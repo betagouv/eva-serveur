@@ -4,7 +4,18 @@ fr:
       message-accueil: Oups…
       retour-accueil: Retour à l'accueil
   erreurs:
-    404:
-      title: 404
-      titre: Erreur 404
-      description: La page demandée n'existe pas
+    erreur:
+      404:
+        title: 404
+        titre: Erreur 404
+        description: La page demandée n'existe pas.
+      500:
+        title: 500
+        titre: Erreur 500
+        description: Une erreur est survenue.
+      422:
+        title: 422
+        titre: Erreur 422
+        description: |
+          Le serveur n'a pas pu traiter votre demande.  
+          Veuillez réessayer.

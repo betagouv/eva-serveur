@@ -7,4 +7,24 @@ describe 'Index', type: :feature do
     visit '/'
     expect(page.current_url).to eql(new_compte_session_url)
   end
+
+  it 'Redirige vers la page 404' do
+    expect { visit '/page_inconnue' }
+      .to raise_error(ActionController::RoutingError)
+  end
+
+  it 'Render page 404' do
+    visit '/pro/404'
+    expect(page).to have_content "La page demandée n'existe pas."
+  end
+
+  it 'Render page 500' do
+    visit '/pro/500'
+    expect(page).to have_content 'Une erreur est survenue'
+  end
+
+  it 'Render page 422' do
+    visit '/pro/422'
+    expect(page).to have_content 'Veuillez réessayer'
+  end
 end

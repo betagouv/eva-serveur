@@ -17,6 +17,10 @@ fr:
         personnalisation: Personnalisation
         explication_personnalisation: |
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
+        explication_libelle: |
+          Le libellé d'une campagne permet de retrouver facilement vos évaluations.
+
+          **Attention** : il est également visible par les bénéficiaires pendant l'évaluation.
         configuration_avancee: Configuration avancée
       votre_code_campagne:
         explication_code: |

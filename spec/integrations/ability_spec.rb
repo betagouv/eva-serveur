@@ -46,7 +46,7 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Beneficiaire) }
 
     it 'avec une campagne qui a des évaluations' do
-      expect(subject).not_to be_able_to(:destroy, campagne_superadmin)
+      expect(subject).to be_able_to(:destroy, campagne_superadmin)
     end
 
     it "avec une campagne qui n'a pas d'évaluation" do
@@ -245,7 +245,7 @@ describe Ability do
     end
 
     it 'avec une campagne qui a des évaluations' do
-      expect(subject).not_to be_able_to(:destroy, campagne_conseiller)
+      expect(subject).to be_able_to(:destroy, campagne_conseiller)
     end
 
     it { is_expected.not_to be_able_to(:manage, :all) }
@@ -281,6 +281,7 @@ describe Ability do
     it { is_expected.to be_able_to(:read, evenement_conseiller) }
     it { is_expected.to be_able_to(%i[update read], Campagne.new(compte: compte)) }
     it { is_expected.to be_able_to(:destroy, Campagne.new(compte: compte)) }
+    it { is_expected.not_to be_able_to(:destroy, campagne_superadmin) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }

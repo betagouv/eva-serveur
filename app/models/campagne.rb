@@ -10,7 +10,7 @@ class Campagne < ApplicationRecord
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy
-  has_many :evaluations, dependent: :restrict_with_error
+  has_many :evaluations, dependent: :destroy
   belongs_to :compte
   belongs_to :parcours_type, optional: true
 

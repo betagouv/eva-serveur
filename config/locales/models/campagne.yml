@@ -44,3 +44,4 @@ fr:
         delete_model: Supprimer
         new_model: Nouvelle campagne
         edit_model: Modification de la campagne
+        delete_confirmation: Attention, supprimer cette campagne supprimera toutes les évaluations qu'elle contient.

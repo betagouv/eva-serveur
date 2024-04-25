@@ -70,6 +70,9 @@ div class: 'nouvelle-campagne' do
 
         h2 t('.titre_libelle')
         div class: 'panel' do
+          div class: 'panel__description description--secondaire' do
+            md t('.explication_libelle')
+          end
           f.inputs do
             f.input :libelle
           end

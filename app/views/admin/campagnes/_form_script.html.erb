@@ -1,25 +1,29 @@
 <script>
 function affichePrePositionnement() {
-  $('.positionnement').hide();
-  $('.pre-positionnement').show();
+  $('.positionnement').addClass('hidden');
+  $prepositionnement = $('.pre-positionnement');
+  $prepositionnement.removeClass('hidden');
+  $prepositionnement.find('.choix-item:first').trigger('focus');
 }
 
 function affichePositionnement() {
-  $('.pre-positionnement').hide();
-  $('.positionnement').show();
+  $('.pre-positionnement').addClass('hidden');
+  $positionnement = $('.positionnement');
+  $positionnement.removeClass('hidden');
+  $positionnement.find('.choix-item:first').trigger('focus');
 }
 
 function reinitialiseSelection(inputClass) {
   $(".input-choix-option-personnalisation input").prop("checked", false );
   if (inputClass == 'input-choix-type-programme') {
     $(".input-choix-option-parcours-type input").prop("checked", false );
-    $('#zone-de-personnalisation').hide();
+    $('#zone-de-personnalisation').addClass('hidden');
   }
 }
 
 function afficheZone(choix_selection, zoneAAfficher) {
   let $zone = $(`#${zoneAAfficher}`)
-  $zone.show();
+  $zone.removeClass('hidden');
   const option_redaction = $("#campagne_options_personnalisation_redaction").parent();
   switch (choix_selection) {
     case "campagne_type_programme_positionnement":
@@ -31,14 +35,14 @@ function afficheZone(choix_selection, zoneAAfficher) {
     <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
     case "campagne_parcours_type_id_<%= parcours_type.id%>":
       <% if parcours_type.option_redaction? %>
-        option_redaction.show();
+        option_redaction.removeClass('hidden');
       <% else %>
-        option_redaction.hide();
+        option_redaction.addClass('hidden');
       <% end %>
-        break;
+      $zone.find('.choix-item:first').trigger('focus');
+      break;
     <% end %>
   }
-  $zone.find('.choix-item').first().trigger('focus');
 }
 
 function enregistreSelectionListener(choix, zoneAAfficher ) {

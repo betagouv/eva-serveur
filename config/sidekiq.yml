@@ -13,10 +13,15 @@
     structure_assigne_region_job:
       cron: '0 1 * * *'
       class: Structure::AssigneRegionJob
-      description: Assigne les régions pour les structures sans région. (job exécuté chaque jour)
+      description: Assigne les régions pour les structures sans région.
       enabled: true
     reinitialise_compte_demo_job:
-      cron: '0 2 * * *'
+      cron: '30 1 * * *'
       class: ReinitialiseCompteDemoJob
-      description: Efface les campagnes, évaluations et bénéficiaires du compte de démo (job exécuté chaque jour)
+      description: Efface les campagnes, évaluations et bénéficiaires du compte de démo
+      enabled: true
+    nettoyage_evaluations_job:
+      cron: '0 2 * * *'
+      class: NettoyageEvaluationsJob
+      description: Efface réellement les parties des évaluations effacées
       enabled: true

@@ -18,8 +18,7 @@ ActiveAdmin.register Campagne do
          fields: %i[email nom prenom],
          display_name: 'display_name',
          minimum_input_length: 2,
-         order_by: 'email_asc',
-         if: proc { can? :manage, Compte }
+         order_by: 'email_asc'
   filter :situations
   filter :created_at
 

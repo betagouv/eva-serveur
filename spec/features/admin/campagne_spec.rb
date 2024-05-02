@@ -25,9 +25,9 @@ describe 'Admin - Campagne', type: :feature do
         expect(page).not_to have_content 'Rouen 30 mars'
       end
 
-      it 'ne permet pas de filtrer par compte' do
+      it 'permet de filtrer par compte' do
         within '#filters_sidebar_section' do
-          expect(page).not_to have_content 'Compte'
+          expect(page).to have_content 'Compte'
         end
       end
     end

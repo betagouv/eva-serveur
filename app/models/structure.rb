@@ -9,7 +9,6 @@ class Structure < ApplicationRecord
   validates :nom, presence: true
   validates :nom, uniqueness: {
     case_sensitive: false,
-    conditions: -> { with_deleted },
     scope: :code_postal
   }
 

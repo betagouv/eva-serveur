@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_28_141534) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_15_090301) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -371,7 +371,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_28_141534) do
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
-    t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true
+    t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true, where: "(deleted_at IS NULL)"
     t.index ["type"], name: "index_structures_on_type"
   end
 

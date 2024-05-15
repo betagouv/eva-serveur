@@ -11,7 +11,7 @@ describe Structure, type: :model do
     it { expect(SecureRandom.uuid).to match(Ancestry.default_primary_key_format) }
   end
 
-  context 'quand une structure a été soft-deleted' do
+  context 'quand une structure avec le même nom, même CP, a été soft-deleted' do
     let(:structure) { build :structure, nom: 'nom', code_postal: '75012' }
 
     before do
@@ -19,8 +19,8 @@ describe Structure, type: :model do
       structure_existante_effacee.destroy
     end
 
-    it "Ne retourne pas d'erreur PostgreSQL" do
-      expect(structure.save).to eq false
+    it "Peut ré-utiliser le nom d'une structure effacé" do
+      expect(structure.save).to eq true
     end
   end
 

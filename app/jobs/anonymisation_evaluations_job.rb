@@ -13,6 +13,6 @@ class AnonymisationEvaluationsJob < ApplicationJob
 
   def evaluations_de_plus_1_an
     Evaluation.where(anonymise_le: nil)
-              .where('created_at < ?', 1.year.ago)
+              .where(created_at: ...1.year.ago)
   end
 end

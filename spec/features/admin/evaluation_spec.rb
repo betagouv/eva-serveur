@@ -237,7 +237,9 @@ describe 'Admin - Evaluation', type: :feature do
         it "affiche l'évaluation en pdf" do
           allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
           visit admin_evaluation_path(mon_evaluation, format: :pdf)
+          # rubocop:disable Lint/Debugger
           path = page.save_page
+          # rubocop:enable Lint/Debugger
 
           reader = PDF::Reader.new(path)
           expect(reader.page(1).text).to include('Roger')

@@ -76,7 +76,7 @@ module Restitution
 
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementSecurite.new e }
-      super(campagne, evenements)
+      super
     end
 
     def termine?

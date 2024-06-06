@@ -41,7 +41,7 @@ module Restitution
 
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementMaintenance.new e }
-      super(campagne, evenements)
+      super
     end
 
     METRIQUES.each_key do |metrique|

@@ -4,7 +4,7 @@ module Restitution
   class Controle
     class ComparaisonTri < Restitution::Competence::Base
       def initialize(restitution)
-        super(restitution)
+        super
         @restitution_hors_4_premiers = restitution.enleve_premiers_evenements_pieces(4)
       end
 

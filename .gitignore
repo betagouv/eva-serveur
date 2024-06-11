@@ -31,6 +31,7 @@
 
 # Ignore locally installed gems
 /vendor/ruby
+/vendor/bundle
 
 # Erd
 erd.dot

@@ -27,19 +27,22 @@ describe Restitution::ExportCafeDeLaPlace do
     it 'génére un fichier xls avec les evenements réponses' do
       create :evenement_reponse, donnees: { question: 'LOdi1', reponse: 'couverture', score: 2 },
                                  partie: partie
-      create :evenement_reponse, donnees: { question: 'ACrd3', reponse: 'Londres' }, partie: partie
+      create :evenement_reponse, donnees: { question: 'LOdi4', reponse: 'chatMadameCoupin' },
+                                 partie: partie
 
       xls = response_service.to_xls
       spreadsheet = Spreadsheet.open(StringIO.new(xls))
       worksheet = spreadsheet.worksheet(0)
 
-      expect(worksheet.row(1)[0]).to eq('LOdi1')
-      expect(worksheet.row(1)[1]).to eq('couverture')
-      expect(worksheet.row(1)[2]).to eq(2)
+      question1 = worksheet.row(1)
+      expect(question1[0]).to eq('LOdi1')
+      expect(question1[1]).to eq('Couverture')
+      expect(question1[2]).to eq(2)
 
-      expect(worksheet.row(2)[0]).to eq('ACrd3')
-      expect(worksheet.row(2)[1]).to eq('Londres')
-      expect(worksheet.row(2)[2]).to eq(0)
+      question2 = worksheet.row(2)
+      expect(question2[0]).to eq('LOdi4')
+      expect(question2[1]).to eq('Chat madame coupin')
+      expect(question2[2]).to eq(0)
     end
   end
 end

@@ -44,11 +44,15 @@ module Restitution
       evenements = Evenement.where(session_id: @partie.session_id)
       evenements.reponses.order(position: :asc).each do |evenement|
         sheet[ligne, 0] = evenement.donnees['question']
-        sheet[ligne, 1] = evenement.donnees['reponse']
+        sheet[ligne, 1] = reponse_humanisee(evenement.donnees['reponse'])
         sheet[ligne, 2] = evenement.donnees['score'] || SCORE_PAR_DEFAULT
         ligne += 1
       end
       ligne
+    end
+
+    def reponse_humanisee(reponse)
+      reponse.underscore.humanize
     end
 
     def initialise_sheet(sheet)

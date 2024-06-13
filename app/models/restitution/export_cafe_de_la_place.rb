@@ -3,11 +3,14 @@
 module Restitution
   class ExportCafeDeLaPlace
     WORKSHEET_NAME = 'Données'
-    SCORE_PAR_DEFAULT = 0
     ENTETES_XLS = [
       {
         titre: 'Code Question',
         taille: 20
+      },
+      {
+        titre: 'Intitulé',
+        taille: 80
       },
       {
         titre: 'Réponse',
@@ -16,6 +19,14 @@ module Restitution
       {
         titre: 'Score',
         taille: 10
+      },
+      {
+        titre: 'Score max',
+        taille: 10
+      },
+      {
+        titre: 'Métacompétence',
+        taille: 20
       }
     ].freeze
 
@@ -43,13 +54,24 @@ module Restitution
       ligne = 1
       evenements = Evenement.where(session_id: @partie.session_id)
       evenements.reponses.order(position: :asc).each do |evenement|
-        sheet[ligne, 0] = evenement.donnees['question']
-        sheet[ligne, 1] = evenement.donnees['reponse']
-        sheet[ligne, 2] = evenement.donnees['score'] || SCORE_PAR_DEFAULT
+        sheet = remplis_la_ligne(sheet, ligne, evenement)
         ligne += 1
       end
       ligne
     end
+
+    # rubocop:disable Metrics/AbcSize
+    def remplis_la_ligne(sheet, ligne, evenement)
+      sheet[ligne, 0] = evenement.donnees['question']
+      sheet[ligne, 1] = evenement.donnees['intitule']
+      sheet[ligne, 2] = evenement.donnees['reponse']
+      sheet[ligne, 3] = evenement.donnees['score']
+      sheet[ligne, 4] = evenement.donnees['score_max']
+      sheet[ligne, 5] = evenement.donnees['metacompetence']
+
+      sheet
+    end
+    # rubocop:enable Metrics/AbcSize
 
     def initialise_sheet(sheet)
       format_premiere_ligne = Spreadsheet::Format.new(weight: :bold)

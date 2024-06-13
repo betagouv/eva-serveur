@@ -20,26 +20,53 @@ describe Restitution::ExportCafeDeLaPlace do
 
       expect(spreadsheet.worksheets.count).to eq(1)
       expect(worksheet.row(0)[0]).to eq('Code Question')
-      expect(worksheet.row(0)[1]).to eq('Réponse')
-      expect(worksheet.row(0)[2]).to eq('Score')
+      expect(worksheet.row(0)[1]).to eq('Intitulé')
+      expect(worksheet.row(0)[2]).to eq('Réponse')
+      expect(worksheet.row(0)[3]).to eq('Score')
+      expect(worksheet.row(0)[4]).to eq('Score max')
+      expect(worksheet.row(0)[5]).to eq('Métacompétence')
     end
 
     it 'génére un fichier xls avec les evenements réponses' do
-      create :evenement_reponse, donnees: { question: 'LOdi1', reponse: 'couverture', score: 2 },
-                                 partie: partie
-      create :evenement_reponse, donnees: { question: 'ACrd3', reponse: 'Londres' }, partie: partie
+      create :evenement_reponse,
+             partie: partie,
+             donnees: {
+               question: 'LOdi1',
+               reponse: 'couverture',
+               score: 2,
+               score_max: 2,
+               intitule: 'De quoi s’agit-il ?',
+               metacompetence: 'numeratie'
+             }
+      intitule_reponse2 = 'Donc, c’est une émission sur les livres. Quel est le nom du livre \
+      dont on parle ?'
+      create :evenement_reponse,
+             partie: partie,
+             donnees: {
+               intitule: intitule_reponse2,
+               question: 'LOdi4',
+               reponse: 'chatMadameCoupin'
+             }
 
       xls = response_service.to_xls
       spreadsheet = Spreadsheet.open(StringIO.new(xls))
       worksheet = spreadsheet.worksheet(0)
 
-      expect(worksheet.row(1)[0]).to eq('LOdi1')
-      expect(worksheet.row(1)[1]).to eq('couverture')
-      expect(worksheet.row(1)[2]).to eq(2)
+      question1 = worksheet.row(1)
+      expect(question1[0]).to eq('LOdi1')
+      expect(question1[1]).to eq('De quoi s’agit-il ?')
+      expect(question1[2]).to eq('couverture')
+      expect(question1[3]).to eq(2)
+      expect(question1[4]).to eq(2)
+      expect(question1[5]).to eq('numeratie')
 
-      expect(worksheet.row(2)[0]).to eq('ACrd3')
-      expect(worksheet.row(2)[1]).to eq('Londres')
-      expect(worksheet.row(2)[2]).to eq(0)
+      question2 = worksheet.row(2)
+      expect(question2[0]).to eq('LOdi4')
+      expect(question2[1]).to eq(intitule_reponse2)
+      expect(question2[2]).to eq('chatMadameCoupin')
+      expect(question2[3]).to eq(nil)
+      expect(question2[4]).to eq(nil)
+      expect(question2[5]).to eq(nil)
     end
   end
 end

@@ -2,34 +2,46 @@ $taille-ellipse: 1.5rem;
 $hauteur-tick: .5rem;
 $largeur-tick: .75rem;
 
+@mixin couleur-ellipse() {
+  &.ellipse--alerte {
+    background-color: $eva_orange;
+  }
+
+  &.ellipse--active {
+    background-color: $eva_light;
+  }
+
+  &.ellipse--desactive {
+    background-color: $eva_bluegrey;
+  }
+
+  &.ellipse--succes {
+    background-color: $eva_green;
+  }
+}
+
+button.ellipse {
+  &:hover {
+    @include couleur-ellipse();
+  }
+
+}
+
 .ellipse {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
+  border: none;
+  padding: 0;
+  @include couleur-ellipse();
 
   &.ellipse-a-cocher {
     border: 1px solid $eva_dark_blue_grey;
     box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
     width: $taille-ellipse;
     height: $taille-ellipse;
-  }
-
-  &.ellipse--alerte {
-    background: $eva_orange;
-  }
-
-  &.ellipse--active {
-    background: $eva_light;
-  }
-
-  &.ellipse--desactive {
-    background: $eva_bluegrey;
-  }
-
-  &.ellipse--succes {
-    background: $eva_green;
   }
 }
 

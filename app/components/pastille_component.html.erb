@@ -1,7 +1,11 @@
-<span class="ellipse ellipse--<%= @couleur %>"
-      data-toggle=<%= @tooltip_content ? 'tooltip' : 'none' %>
-      data-placement='right'
-      title="<%= @tooltip_content %>">
-</span>
+<% if @tooltip_content and @couleur != "" %>
+  <button type="button"
+          class="ellipse ellipse--<%= @couleur %>"
+          data-toggle='tooltip'
+          data-placement='right'
+          title="<%= @tooltip_content %>"></button>
+<% else %>
+  <span class="ellipse ellipse--<%= @couleur %>"> </span>
+<% end %>
 <%= @etiquette %>
 

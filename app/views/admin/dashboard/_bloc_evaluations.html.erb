@@ -11,22 +11,28 @@
   </div>
 
   <% evaluations.each do |evaluation| %>
-    <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
-      <div class='col d-flex'>
-        <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation) %></span>
-      </div>
+    <div class="row w-100 no-gutters d-flex align-items-center position-relative">
       <div class='col'>
-        <span class='carte__pastille'>
-          <% if evaluation.illettrisme_potentiel? %>
-            <%= render(PastilleComponent.new(tooltip_content: t('components.pastille.illettrisme_potentiel'), couleur: 'alerte')) %>
-          <% end %>
-        </span>
+        <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
+          <div class='col d-flex'>
+            <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation) %></span>
+          </div>
+          <div class='col'>
+            <span class='carte__pastille-place-holder'>
+            </span>
+          </div>
+          <div class='col d-flex justify-content-end align-items-center'>
+            <span class='carte__date'>
+              <%= l(evaluation.created_at) %>
+            </span>
+          </div>
+        <% end %>
       </div>
-      <div class='col d-flex justify-content-end align-items-center'>
-        <span class='carte__date'>
-          <%= l(evaluation.created_at) %>
-        </span>
+      <div class='col-0 position-absolute carte__pastille'>
+        <% if evaluation.illettrisme_potentiel? %>
+          <%= render(PastilleComponent.new(tooltip_content: t('components.pastille.illettrisme_potentiel'), couleur: 'alerte')) %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>

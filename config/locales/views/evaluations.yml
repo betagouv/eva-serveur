@@ -81,7 +81,12 @@ fr:
         4: 4
         apte: Apte
         apte_avec_aide: Apte avec aide
-
+        numeratie_niveau1:
+          nom: Score Niveau 1
+        numeratie_niveau2:
+          nom: Score Niveau 2
+        numeratie_niveau3:
+          nom: Score Niveau 3
         parcours_bas:
           nom: Profil parcours bas
         parcours_haut:

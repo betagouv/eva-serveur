@@ -15,4 +15,8 @@ class Evenement < ApplicationRecord
   def fin_situation?
     nom == 'finSituation'
   end
+
+  def reponse_intitule
+    donnees['reponse_intitule'].presence || donnees['reponse']
+  end
 end

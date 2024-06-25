@@ -64,7 +64,7 @@ module Restitution
     def remplis_la_ligne(sheet, ligne, evenement)
       sheet[ligne, 0] = evenement.donnees['question']
       sheet[ligne, 1] = evenement.donnees['intitule']
-      sheet[ligne, 2] = evenement.donnees['reponse']
+      sheet[ligne, 2] = evenement.reponse_intitule
       sheet[ligne, 3] = evenement.donnees['score']
       sheet[ligne, 4] = evenement.donnees['score_max']
       sheet[ligne, 5] = evenement.donnees['metacompetence']

@@ -33,19 +33,21 @@ describe Restitution::ExportCafeDeLaPlace do
              donnees: {
                question: 'LOdi1',
                reponse: 'couverture',
+               reponse_intitule: nil,
                score: 2,
                score_max: 2,
                intitule: 'De quoi s’agit-il ?',
                metacompetence: 'numeratie'
              }
-      intitule_reponse2 = 'Donc, c’est une émission sur les livres. Quel est le nom du livre \
+      intitule_question2 = 'Donc, c’est une émission sur les livres. Quel est le nom du livre \
       dont on parle ?'
       create :evenement_reponse,
              partie: partie,
              donnees: {
-               intitule: intitule_reponse2,
+               intitule: intitule_question2,
                question: 'LOdi4',
-               reponse: 'chatMadameCoupin'
+               reponse: 'chatMadameCoupin',
+               reponse_intitule: 'Le chat de Mme Coupin'
              }
 
       xls = response_service.to_xls
@@ -62,8 +64,8 @@ describe Restitution::ExportCafeDeLaPlace do
 
       question2 = worksheet.row(2)
       expect(question2[0]).to eq('LOdi4')
-      expect(question2[1]).to eq(intitule_reponse2)
-      expect(question2[2]).to eq('chatMadameCoupin')
+      expect(question2[1]).to eq(intitule_question2)
+      expect(question2[2]).to eq('Le chat de Mme Coupin')
       expect(question2[3]).to eq(nil)
       expect(question2[4]).to eq(nil)
       expect(question2[5]).to eq(nil)

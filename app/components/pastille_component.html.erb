@@ -3,6 +3,7 @@
           class="ellipse ellipse--<%= @couleur %>"
           data-toggle='tooltip'
           data-placement='right'
+          onmousedown='event.preventDefault();'
           title="<%= @tooltip_content %>">
           <span class="sr-only"><%= @tooltip_content%></span>
   </button>

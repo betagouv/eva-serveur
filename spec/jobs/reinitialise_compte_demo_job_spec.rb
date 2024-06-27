@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe ReinitialiseCompteDemoJob, type: :job do
   it "Créé la structure et le compte de démo si rien n'existe" do
-    ReinitialiseCompteDemoJob.perform_now
+    described_class.perform_now
 
     compte_demo = Compte.find_by(email: Eva::EMAIL_DEMO)
     expect(compte_demo).not_to be_nil
@@ -14,7 +14,7 @@ describe ReinitialiseCompteDemoJob, type: :job do
   it 'Ne re-créé pas la structure si elle existe déjà' do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
 
-    ReinitialiseCompteDemoJob.perform_now
+    described_class.perform_now
 
     compte_demo = Compte.find_by(email: Eva::EMAIL_DEMO)
     expect(compte_demo.structure).to eq(structure)
@@ -24,7 +24,7 @@ describe ReinitialiseCompteDemoJob, type: :job do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
     create :compte_admin, structure: structure
 
-    ReinitialiseCompteDemoJob.perform_now
+    described_class.perform_now
 
     expect(Compte.where(role: :admin).count).to eq(1)
   end
@@ -33,7 +33,7 @@ describe ReinitialiseCompteDemoJob, type: :job do
     structure = create :structure_locale, nom: 'autre structure'
     create :compte_admin, structure: structure
 
-    ReinitialiseCompteDemoJob.perform_now
+    described_class.perform_now
 
     expect(Compte.where(role: :admin).count).to eq(2)
   end
@@ -51,7 +51,7 @@ describe ReinitialiseCompteDemoJob, type: :job do
     create :evaluation, nom: 'eval3', campagne: campagne, deleted_at: Time.zone.now
     create :campagne, libelle: 'c supprimée', compte: compte_existant, deleted_at: Time.zone.now
 
-    ReinitialiseCompteDemoJob.perform_now
+    described_class.perform_now
 
     compte_demo = Compte.find_by(email: Eva::EMAIL_DEMO)
     expect(compte_demo.id).to eq(compte_existant.id)

@@ -4,7 +4,7 @@ require_relative '../../decorators/evenement_place_du_marche'
 
 module Restitution
   class PlaceDuMarche < Base
-    def initialize(evenements)
+    def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
       super
     end

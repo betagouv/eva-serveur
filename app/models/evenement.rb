@@ -17,6 +17,6 @@ class Evenement < ApplicationRecord
   end
 
   def reponse_intitule
-    donnees['reponse_intitule'].presence || donnees['reponse']
+    donnees['reponseIntitule'].presence || donnees['reponse']
   end
 end

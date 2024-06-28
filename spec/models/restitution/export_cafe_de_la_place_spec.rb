@@ -33,9 +33,9 @@ describe Restitution::ExportCafeDeLaPlace do
              donnees: {
                question: 'LOdi1',
                reponse: 'couverture',
-               reponse_intitule: nil,
+               reponseIntitule: nil,
                score: 2,
-               score_max: 2,
+               scoreMax: 2,
                intitule: 'De quoi s’agit-il ?',
                metacompetence: 'numeratie'
              }
@@ -47,7 +47,7 @@ describe Restitution::ExportCafeDeLaPlace do
                intitule: intitule_question2,
                question: 'LOdi4',
                reponse: 'chatMadameCoupin',
-               reponse_intitule: 'Le chat de Mme Coupin'
+               reponseIntitule: 'Le chat de Mme Coupin'
              }
 
       xls = response_service.to_xls

@@ -10,7 +10,7 @@ module Restitution
     end
 
     def score_niveau1
-      Evacob::ScoreModule.new.calcule(evenements, :NumeratieN1)
+      Evacob::ScoreModule.new.calcule(evenements, :N1P)
     end
 
     def score_niveau2

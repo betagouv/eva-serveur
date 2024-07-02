@@ -15,7 +15,7 @@ describe Restitution::PlaceDuMarche do
                                                     donnees: { question: 'question' }),
                           build(:evenement_reponse,
                                 donnees: { succes: true,
-                                           question: 'NumeratieN1Q2',
+                                           question: 'N1PQ2',
                                            score: 1 },
                                 partie: partie),
                           build(:evenement_reponse,

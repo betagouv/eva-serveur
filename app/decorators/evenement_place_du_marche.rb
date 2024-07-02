@@ -2,7 +2,7 @@
 
 class EvenementPlaceDuMarche < SimpleDelegator
   PREFIX_QUESTIONS = {
-    NumeratieN1: 'NumeratieN1',
+    N1P: 'N1P',
     NumeratieN2: 'NumeratieN2',
     NumeratieN3: 'NumeratieN3'
   }.freeze

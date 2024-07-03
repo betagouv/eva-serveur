@@ -41,7 +41,8 @@ module Eva
       def check_compte_confirmation
         return unless params.key?(:compte)
 
-        compte = Compte.find_by email: params[:compte][:email].strip
+        compte = Compte.find_by(email: params[:compte][:email]&.strip)
+
         return if compte.blank?
 
         redirect_to new_compte_confirmation_path unless compte.active_for_authentication?

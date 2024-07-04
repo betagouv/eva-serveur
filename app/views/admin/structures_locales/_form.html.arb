@@ -9,6 +9,7 @@ div class: 'panel nouvelle_structure' do
       f.input :nom
       f.input :type_structure, as: :select, collection: collection_types_structures
       f.input :code_postal
+      f.input :siret
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end

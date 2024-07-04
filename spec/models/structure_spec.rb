@@ -5,6 +5,7 @@ require 'rails_helper'
 describe Structure, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to validate_uniqueness_of(:nom).scoped_to(:code_postal).case_insensitive }
+  it { is_expected.to validate_numericality_of(:siret) }
 
   describe 'Ancestry primary key format' do
     it { expect('uuid invalide').not_to match(Ancestry.default_primary_key_format) }
@@ -116,6 +117,43 @@ describe Structure, type: :model do
     it 'programme un mail de relance' do
       expect { create :structure }
         .to have_enqueued_job(RelanceStructureSansCampagneJob).exactly(1)
+    end
+  end
+
+  describe 'validation du champ siret' do
+    context 'quand il est vide' do
+      let(:structure) { build :structure }
+
+      before { structure.valid? }
+
+      it { expect(structure.errors[:siret]).to be_blank }
+    end
+
+    context 'quand il est un siret valide (14 chiffres)' do
+      let(:structure) { build :structure, siret: '12345678901234' }
+
+      before { structure.valid? }
+
+      it { expect(structure.errors[:siret]).to be_blank }
+    end
+
+    context 'quand il est un siren valide (9 chiffres)' do
+      let(:structure) { build :structure, siret: '123456789' }
+
+      before { structure.valid? }
+
+      it { expect(structure.errors[:siret]).to be_blank }
+    end
+
+    context 'quand il est invalide' do
+      let(:structure) { build :structure, siret: '12345678' }
+
+      before { structure.valid? }
+
+      it do
+        expect(structure.errors[:siret])
+          .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+      end
     end
   end
 end

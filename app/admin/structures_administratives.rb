@@ -3,7 +3,7 @@
 ActiveAdmin.register StructureAdministrative do
   menu parent: 'Terrain', if: proc { current_compte.anlci? }
 
-  permit_params :nom, :parent_id
+  permit_params :nom, :parent_id, :siret
 
   filter :nom
   filter :created_at

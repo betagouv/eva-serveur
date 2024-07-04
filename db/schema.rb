@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_24_120736) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_04_141851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -368,6 +368,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_120736) do
     t.string "type"
     t.datetime "deleted_at"
     t.string "ancestry", null: false, collation: "C"
+    t.string "siret"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"

@@ -33,6 +33,7 @@
         <%= structure.input :nom, placeholder: t('.placeholders.structure.nom') %>
         <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
         <%= structure.input :code_postal, placeholder: t('.placeholders.structure.code_postal') %>
+        <%= structure.input :siret %>
       <% end %>
     </div>
   <% end %>

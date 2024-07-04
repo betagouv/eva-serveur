@@ -6,6 +6,8 @@ fr:
           attributes:
             nom:
               taken: Cette structure existe
+            siret:
+              invalid: Le numéro est invalide
     models:
       structure_administrative:
         one: Structure administrative
@@ -19,6 +21,7 @@ fr:
         updated_at: Mise à jour le
         nom: Nom de structure
         code_postal: Code Postal
+        siret: Siret ou Siren
         region: Région
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente

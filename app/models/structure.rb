@@ -11,6 +11,8 @@ class Structure < ApplicationRecord
     case_sensitive: false,
     scope: :code_postal
   }
+  validates :siret, numericality: { only_integer: true, allow_blank: true }
+  validate :verifie_siret_ou_siren
 
   auto_strip_attributes :nom, squish: true
 
@@ -78,5 +80,14 @@ class Structure < ApplicationRecord
     RelanceStructureSansCampagneJob
       .set(wait: 7.days)
       .perform_later(id)
+  end
+
+  private
+
+  def verifie_siret_ou_siren
+    return if siret.blank?
+    return if siret.size == 14 || siret.size == 9
+
+    errors.add(:siret, :invalid)
   end
 end

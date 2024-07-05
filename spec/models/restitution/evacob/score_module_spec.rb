@@ -53,4 +53,68 @@ describe Restitution::Evacob::ScoreModule do
       it { expect(metrique_score_reponse_orientation).to eq(nil) }
     end
   end
+
+  describe 'metrique score_numeratie' do
+    let(:metrique_score_reponse_numeratie) do
+      described_class.new.calcule(evenements_decores(evenements, :place_du_marche), :N1,
+                                  avec_rattrapage: true)
+    end
+    let(:question_initiale1) { 'N1Pes1' }
+    let(:question_rattrapage1) { 'N1Res1' }
+    let(:question_initiale2) { 'N1Pes2' }
+    let(:question_rattrapage2) { 'N1Res2' }
+
+    context 'sans réponses au rattapage' do
+      let(:evenements_reponses) do
+        [build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 })]
+      end
+
+      it do
+        expect(metrique_score_reponse_numeratie).to eq(1)
+      end
+    end
+
+    context 'avec réponses au rattapage' do
+      context 'lorsque le score total du rattrapage est meilleur' do
+        let(:evenements_reponses) do
+          [
+            build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }),
+            build(:evenement_reponse, donnees: { question: question_initiale2, score: 0 }),
+            build(:evenement_reponse, donnees: { question: question_rattrapage1, score: 1 }),
+            build(:evenement_reponse, donnees: { question: question_rattrapage2, score: 1 })
+          ]
+        end
+
+        it do
+          expect(metrique_score_reponse_numeratie).to eq(2)
+        end
+      end
+
+      context 'lorsque le score total initial est meilleur' do
+        let(:evenements_reponses) do
+          [
+            build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }),
+            build(:evenement_reponse, donnees: { question: question_initiale2, score: 1 }),
+            build(:evenement_reponse, donnees: { question: question_rattrapage1, score: 0 }),
+            build(:evenement_reponse, donnees: { question: question_rattrapage2, score: 1 })
+          ]
+        end
+
+        it do
+          expect(metrique_score_reponse_numeratie).to eq(2)
+        end
+      end
+    end
+  end
+
+  context 'sans evenements réponses' do
+    let(:metrique_score) do
+      described_class.new.calcule(evenements_decores(evenements, :place_du_marche), :N1)
+    end
+    let(:evenements_reponses) { [] }
+
+    it 'retourne nil' do
+      expect(metrique_score).to eq(nil)
+    end
+  end
 end

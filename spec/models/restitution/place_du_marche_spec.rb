@@ -15,7 +15,7 @@ describe Restitution::PlaceDuMarche do
                                                     donnees: { question: 'question' }),
                           build(:evenement_reponse,
                                 donnees: { succes: true,
-                                           question: 'N1PQ2',
+                                           question: 'N1Prn1',
                                            score: 1 },
                                 partie: partie),
                           build(:evenement_reponse,
@@ -43,8 +43,70 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#score_niveau1' do
-    it 'retourne le score du niveau 1' do
-      expect(restitution.score_niveau1).to eq 1
+    context 'sans rattrapage' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N1Pse1',
+                                               score: 1 },
+                                    partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N1Pvn1',
+                                               score: 1 },
+                                    partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N1Prn1',
+                                               score: 1 },
+                                    partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N2',
+                                               score: 0.5 },
+                                    partie: partie)
+                            ])
+      end
+
+      it 'retourne le score du niveau 1' do
+        expect(restitution.score_niveau1).to eq 3
+      end
+    end
+
+    context 'avec du rattrapage' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N1Pse1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N1Pvn1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N1Prn1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N1Rrn1',
+                                                                   score: 2 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N2',
+                                                                   score: 0.5 },
+                                                        partie: partie)
+                            ])
+      end
+
+      it 'retourne le score du niveau 1' do
+        expect(restitution.score_niveau1).to eq 4
+      end
     end
   end
 

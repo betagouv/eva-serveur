@@ -6,6 +6,7 @@ require_relative '../app/decorators/evenement_securite'
 require_relative '../app/decorators/evenement_livraison'
 require_relative '../app/decorators/evenement_objets_trouves'
 require_relative '../app/decorators/evenement_evacob'
+require_relative '../app/decorators/evenement_place_du_marche'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -48,7 +49,8 @@ RSpec.configure do |config|
     securite: EvenementSecurite,
     livraison: EvenementLivraison,
     objets_trouves: EvenementObjetsTrouves,
-    evacob: EvenementEvacob
+    evacob: EvenementEvacob,
+    place_du_marche: EvenementPlaceDuMarche
   }.freeze
 
   def se_connecter_comme_superadmin

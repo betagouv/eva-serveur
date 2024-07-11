@@ -78,10 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
     minLength: 3,
     delay: 100
   });
-  $(".autocomplete-nom-siret input").autocomplete({
+  $(".autocomplete-nom-structure input").autocomplete({
     source: function (request, response) {
       const nom = encodeURI(request.term);
-      let code_postal = $('#compte_structure_attributes_code_postal').val().trim();
+      let code_postal = $('.autocomplete-code-postal input').val().trim();
       if(code_postal.length != 0) {
         code_postal = `&code_postal=${encodeURI(code_postal)}`
       }
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     response: ajouteReponseAucunResultat,
     select: function( event, ui ) {
-      $('#compte_structure_attributes_siret').val(ui.item.siret)
-      $('#compte_structure_attributes_code_postal').val(ui.item.code_postal)
+      $('.autocomplete-siret input').val(ui.item.siret)
+      $('.autocomplete-code-postal input').val(ui.item.code_postal)
     },
     autoFocus: false,
     minLength: 3,

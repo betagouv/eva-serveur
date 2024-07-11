@@ -6,10 +6,10 @@ div class: 'panel nouvelle_structure' do
   active_admin_form_for [:admin, resource] do |f|
     f.inputs do
       f.object.code_postal = params[:code_postal]&.delete('^0-9') if f.object.code_postal.blank?
-      f.input :nom
+      f.input :code_postal, wrapper_html: { class: 'autocomplete-code-postal' }
+      f.input :nom, wrapper_html: { class: 'autocomplete-nom-structure' }
       f.input :type_structure, as: :select, collection: collection_types_structures
-      f.input :code_postal
-      f.input :siret
+      f.input :siret, wrapper_html: { class: 'autocomplete-siret' }
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end

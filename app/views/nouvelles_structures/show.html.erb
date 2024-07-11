@@ -30,10 +30,16 @@
       <p class="description"><%= t('.structure.description') %></p>
       <%= structure.inputs do %>
         <% structure.object.code_postal = params[:code_postal]&.delete('^0-9') if structure.object.code_postal.blank? %>
-        <%= structure.input :nom, placeholder: t('.placeholders.structure.nom'), wrapper_html: { class: 'autocomplete-nom-siret' } %>
+        <%= structure.input :code_postal,
+          placeholder: t('.placeholders.structure.code_postal'),
+          wrapper_html: { class: 'autocomplete-code-postal' }
+        %>
+        <%= structure.input :nom,
+          placeholder: t('.placeholders.structure.nom'),
+          wrapper_html: { class: 'autocomplete-nom-structure' }
+        %>
         <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
-        <%= structure.input :code_postal, placeholder: t('.placeholders.structure.code_postal') %>
-        <%= structure.input :siret %>
+        <%= structure.input :siret, wrapper_html: { class: 'autocomplete-siret' } %>
       <% end %>
     </div>
   <% end %>

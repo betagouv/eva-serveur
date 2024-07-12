@@ -36,8 +36,8 @@ function afficheRecherche(boutonAjout, formulaireRecherche) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  $(".champ-recherche").autocomplete({
+function autocompleteRechercheStructure() {
+  return {
     source: function (request, response) {
       $('#bouton-chercher')
         .prop("disabled", true)
@@ -77,7 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
     autoFocus: false,
     minLength: 3,
     delay: 100
-  });
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
   $(".autocomplete-nom-structure input").autocomplete({
     source: function (request, response) {
       const nom = encodeURI(request.term);

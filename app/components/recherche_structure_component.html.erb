@@ -35,6 +35,7 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  $("#ville_ou_code_postal").autocomplete(autocompleteRechercheStructure());
   $('.ui-menu').addClass('recherche_structure');
 });
 </script>

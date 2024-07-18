@@ -107,14 +107,40 @@ describe Restitution::Evacob::ScoreModule do
     end
   end
 
-  context 'sans evenements réponses' do
-    let(:metrique_score) do
-      described_class.new.calcule(evenements_decores(evenements, :place_du_marche), :N1)
+  describe 'metrique pourcentage_reussite' do
+    let(:metrique_pourcentage_reussite) do
+      described_class.new.calcule_pourcentage_reussite(
+        evenements_decores(evenements, :place_du_marche),
+        :N1
+      )
+    end
+
+    context 'avec un score' do
+      let(:evenements_reponses) do
+        [
+          build(:evenement_reponse, donnees: { question: 'N1Pes1', score: 1, scoreMax: 1 }),
+          build(:evenement_reponse, donnees: { question: 'N1Pes2', score: 0, scoreMax: 0.5 })
+        ]
+      end
+
+      it "calcule le pourcentage de réussite d'un niveau" do
+        expect(metrique_pourcentage_reussite.round).to eq(67)
+      end
+    end
+  end
+
+  describe 'sans evenements réponses' do
+    let(:calcul_metrique) do
+      described_class.new.calcule(evenements, :N1)
+    end
+    let(:calcule_pourcentage) do
+      described_class.new.calcule_pourcentage_reussite(evenements, :N1)
     end
     let(:evenements_reponses) { [] }
 
     it 'retourne nil' do
-      expect(metrique_score).to eq(nil)
+      expect(calcul_metrique).to eq(nil)
+      expect(calcule_pourcentage).to eq(nil)
     end
   end
 end

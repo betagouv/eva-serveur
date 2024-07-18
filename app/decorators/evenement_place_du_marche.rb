@@ -3,8 +3,8 @@
 class EvenementPlaceDuMarche < SimpleDelegator
   PREFIX_QUESTIONS = {
     N1: 'N1',
-    NumeratieN2: 'NumeratieN2',
-    NumeratieN3: 'NumeratieN3'
+    N2: 'N2',
+    N3: 'N3'
   }.freeze
 
   def module?(nom_module)
@@ -13,5 +13,9 @@ class EvenementPlaceDuMarche < SimpleDelegator
 
   def score_reponse
     donnees['score'] || 0
+  end
+
+  def score_max_reponse
+    donnees['scoreMax'] || 0
   end
 end

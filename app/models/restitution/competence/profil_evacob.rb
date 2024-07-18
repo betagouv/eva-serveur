@@ -27,6 +27,12 @@ module Restitution
           ::Competence::PROFIL_4H_PLUS => 26,
           ::Competence::PROFIL_4H => 16,
           ::Competence::PROFIL_ABERRANT => 0
+        },
+        'profil_numeratie' => {
+          ::Competence::PROFIL_4 => 4,
+          ::Competence::PROFIL_3 => 3,
+          ::Competence::PROFIL_2 => 2,
+          ::Competence::PROFIL_1 => 1
         }
       }.freeze
 
@@ -44,6 +50,17 @@ module Restitution
 
         SEUILS[@metrique].each do |niveau, seuil|
           return niveau if @score >= seuil
+        end
+      end
+
+      def profil_numeratie
+        return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
+
+        @score ||= @restitution.partie.metriques[@metrique]
+        return ::Competence::NIVEAU_INDETERMINE if @score.blank?
+
+        SEUILS[@metrique].each do |profil, niveau|
+          return profil if @score == niveau
         end
       end
     end

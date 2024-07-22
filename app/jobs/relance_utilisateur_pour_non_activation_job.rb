@@ -7,9 +7,13 @@ class RelanceUtilisateurPourNonActivationJob < ApplicationJob
     compte = Compte.find_by id: compte_id
     return if compte.blank? || compte.structure.blank?
 
-    campagnes = Campagne.avec_nombre_evaluations_et_derniere_evaluation.where(compte: compte)
-    return unless campagnes.map(&:nombre_evaluations).reduce(:+).to_i.zero?
+    return unless compte_sans_evaluations?(compte)
 
     CompteMailer.with(compte: compte).relance.deliver_now
+  end
+
+  def compte_sans_evaluations?(compte)
+    campagnes = Campagne.avec_nombre_evaluations_et_derniere_evaluation.where(compte: compte)
+    campagnes.map(&:nombre_evaluations).reduce(:+).to_i.zero?
   end
 end

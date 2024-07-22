@@ -34,10 +34,10 @@ class Campagne < ApplicationRecord
   }
   scope :avec_nombre_evaluations_et_derniere_evaluation, lambda {
     left_outer_joins(:evaluations)
-      .group('id')
+      .group(:id)
       .select('campagnes.*,
-            COUNT(evaluations.id) AS nombre_evaluations,
-            MAX(evaluations.created_at) AS date_derniere_evaluation')
+              COUNT(evaluations.id) AS nombre_evaluations,
+              MAX(evaluations.created_at) AS date_derniere_evaluation')
   }
   scope :par_code, ->(code) { where code: code.upcase }
   scope :avec_situation, lambda { |situation|

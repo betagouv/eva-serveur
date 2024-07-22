@@ -13,7 +13,10 @@ class RelanceUtilisateurPourNonActivationJob < ApplicationJob
   end
 
   def compte_sans_evaluations?(compte)
-    campagnes = Campagne.avec_nombre_evaluations_et_derniere_evaluation.where(compte: compte)
-    campagnes.map(&:nombre_evaluations).reduce(:+).to_i.zero?
+    Campagne.left_outer_joins(:evaluations)
+            .where(compte: compte)
+            .group(:compte_id)
+            .pluck('COUNT(evaluations.id)')
+            .all?(&:zero?)
   end
 end

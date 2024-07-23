@@ -4,6 +4,7 @@ class Situation < ApplicationRecord
   SITUATIONS_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
   SITUATIONS_PRE_POSITIONNEMENT = %w[maintenance livraison objets_trouves].freeze
   SITUATIONS_POSITIONNEMENT = %w[cafe_de_la_place].freeze
+  SITUATIONS_NUMERATIE = %w[place_du_marche].freeze
 
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true
@@ -17,6 +18,7 @@ class Situation < ApplicationRecord
   BIENVENUE = 'bienvenue'
   CAFE_DE_LA_PLACE = 'cafe_de_la_place'
   PLAN_DE_LA_VILLE = 'plan_de_la_ville'
+  PLACE_DU_MARCHE = 'place_du_marche'
   COULEURS_BORDURES = ['#6E85FD', '#82ABE8', '#8FC6DA', '#9FD9C9', '#ABCE8F', '#DFBC78', '#FBAF55',
                        '#FD8554', '#FD5965', '#FD586D'].freeze
 

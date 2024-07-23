@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 niveaux_competences = restitution_globale.niveaux_competences
-titre_avec_aide_illettrisme = 'titre--avec-aide-illettrisme' if resource.illettrisme_potentiel?
+titre_avec_aide_illettrisme_litteratie = 'titre--avec-aide-illettrisme' if restitution_globale.synthese_positionnement == 'illettrisme_potentiel'
+titre_avec_aide_illettrisme_numeratie = 'titre--avec-aide-illettrisme' if restitution_globale.synthese_positionnement_numeratie == 'illettrisme_potentiel'
 
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
@@ -110,7 +111,7 @@ div class: 'evaluation__restitution-globale' do
       end
     else
       div id: 'francais_mathematiques', class: 'page' do
-        h2 t('titre', scope: 'admin.restitutions.cefr'), class: titre_avec_aide_illettrisme.to_s
+        h2 t('titre', scope: 'admin.restitutions.cefr'), class: titre_avec_aide_illettrisme_litteratie.to_s
 
         div class: 'panel panel--avec-references' do
           render 'francais_mathematique', pdf: pdf,
@@ -140,12 +141,32 @@ div class: 'evaluation__restitution-globale' do
         h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: 'text-center mt-5 mb-4'
       else
         h2 t('titre', scope: 'admin.restitutions.lettrisme'),
-           class: titre_avec_aide_illettrisme.to_s
+           class: titre_avec_aide_illettrisme_litteratie.to_s
       end
 
       render partial: 'lettrisme',
              locals: {
                synthese: restitution_globale.synthese_positionnement,
+               pdf: pdf
+             }
+      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('officiel')
+    end
+  end
+
+  if campagne_avec_positionnement_numeratie?
+    div id: 'numeratie', class: 'page page-lettrisme' do
+      render 'entete_page', restitution_globale: restitution_globale
+
+      if pdf
+        h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center mt-5 mb-4'
+      else
+        h2 t('titre', scope: 'admin.restitutions.numeratie'),
+           class: titre_avec_aide_illettrisme_numeratie.to_s
+      end
+
+      render partial: 'numeratie',
+             locals: {
+               synthese: restitution_globale.synthese_positionnement_numeratie,
                pdf: pdf
              }
       render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('officiel')

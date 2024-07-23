@@ -2,15 +2,16 @@
 
 module Restitution
   class Globale
-    attr_reader :evaluation, :restitutions, :synthese_positionnement, :synthese_pre_positionnement
-
-    NIVEAU_INDETERMINE = :indetermine
+    attr_reader :evaluation, :restitutions, :synthese_positionnement, :synthese_pre_positionnement,
+                :synthese_positionnement_numeratie,
+                NIVEAU_INDETERMINE = :indetermine
 
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau2_standardises, prefix: :niveau2
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau1_standardises, prefix: :niveau1
     delegate :synthese, :synthese_positionnement, :synthese_pre_positionnement,
+             :synthese_positionnement_numeratie,
              :niveau_anlci_litteratie, to: :synthetiseur
 
     def initialize(evaluation:, restitutions:)
@@ -66,7 +67,8 @@ module Restitution
     end
 
     def synthetiseur
-      @synthetiseur ||= Illettrisme::Synthetiseur.new(interpreteur_niveau1, cafe_de_la_place)
+      @synthetiseur ||= Illettrisme::Synthetiseur.new(interpreteur_niveau1, cafe_de_la_place,
+                                                      place_du_marche)
     end
 
     def interpretations_niveau2(categorie)
@@ -106,6 +108,10 @@ module Restitution
 
     def cafe_de_la_place
       @cafe_de_la_place ||= selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
+    end
+
+    def place_du_marche
+      @place_du_marche ||= selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
     end
 
     def extraie_competences_depuis_restitutions

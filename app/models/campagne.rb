@@ -68,6 +68,10 @@ class Campagne < ApplicationRecord
     configuration_inclus?(Situation::SITUATIONS_POSITIONNEMENT)
   end
 
+  def avec_numeratie?
+    configuration_inclus?(Situation::SITUATIONS_NUMERATIE)
+  end
+
   def avec_pre_positionnement?
     configuration_inclus?(Situation::SITUATIONS_PRE_POSITIONNEMENT)
   end

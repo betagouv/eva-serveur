@@ -3,23 +3,32 @@
 module Restitution
   module Illettrisme
     class Synthetiseur
-      def initialize(interpreteur_pre_positionnement, interpreteur_positionnement)
+      def initialize(interpreteur_pre_positionnement, interpreteur_positionnement,
+                     interpreteur_numeratie)
         @algo_pre_positionnement =
           if interpreteur_pre_positionnement.present?
             SynthetiseurPrePositionnement.new(interpreteur_pre_positionnement)
           end
         @algo_positionnement =
           if interpreteur_positionnement.present?
-            SynthetiseurPositionnement.new(interpreteur_positionnement)
+            SynthetiseurPositionnement.new(interpreteur_positionnement, nil)
+          end
+        @algo_numeratie =
+          if interpreteur_numeratie.present?
+            SynthetiseurPositionnement.new(nil, interpreteur_numeratie)
           end
       end
 
       def synthese
-        synthese_positionnement.presence || synthese_pre_positionnement
+        synthese_positionnement.presence || synthese_pre_positionnement || synthese_positionnement_numeratie.presence
       end
 
       def synthese_positionnement
         Synthetiseur.calcule_synthese(@algo_positionnement)
+      end
+
+      def synthese_positionnement_numeratie
+        Synthetiseur.calcule_synthese(@algo_numeratie)
       end
 
       def synthese_pre_positionnement
@@ -28,6 +37,10 @@ module Restitution
 
       def positionnement_litteratie
         @algo_positionnement.niveau_positionnement if @algo_positionnement.present?
+      end
+
+      def positionnement_numeratie
+        @algo_numeratie.niveau_numeratie if @algo_numeratie.present?
       end
 
       def self.calcule_synthese(algo)
@@ -65,10 +78,15 @@ module Restitution
       end
 
       class SynthetiseurPositionnement
-        attr_reader :niveau_positionnement
+        attr_reader :niveau_positionnement, :niveau_numeratie
 
-        def initialize(interpreteur_positionnement)
-          @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
+        def initialize(interpreteur_positionnement, interpreteur_numeratie)
+          if interpreteur_positionnement
+            @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
+          end
+          return unless interpreteur_numeratie
+
+          @niveau_numeratie = interpreteur_numeratie.synthese[:profil_numeratie]
         end
 
         def socle_clea?
@@ -76,7 +94,7 @@ module Restitution
         end
 
         def illettrisme_potentiel?
-          @niveau_positionnement.in?(%i[profil1 profil2])
+          @niveau_positionnement.in?(%i[profil1 profil2]) || @niveau_numeratie.in?(%i[profil1])
         end
 
         def aberrant?
@@ -84,7 +102,7 @@ module Restitution
         end
 
         def indetermine?
-          @niveau_positionnement == :indetermine
+          @niveau_positionnement == :indetermine || @niveau_numeratie == :indetermine
         end
       end
     end

@@ -1,8 +1,8 @@
-<% profil = restitution_cafe_de_la_place ? restitution_cafe_de_la_place.niveau_litteratie : 'indetermine' %>
+<% profil = restitution_pour_situation(Situation::CAFE_DE_LA_PLACE) ? restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).niveau_litteratie : 'indetermine' %>
 
 <div class="panel panel-lettrisme panel--avec-references">
   <div class='marges-page'>
-    <%= render 'demande_aide_illettrisme' if !pdf && resource.illettrisme_potentiel? %>
+    <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel' %>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
       scope: "admin.evaluations.lettrisme.litteratie",
@@ -11,15 +11,15 @@
       pdf: pdf %>
     <% if niveau_bas?(profil) %>
       <div class="lettrisme-sous-competences">
-        <% restitution_cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
+        <% restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).competences_lettrisme.each do |competence, profil| %>
           <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
         <% end %>
       </div>
     <% end %>
   </div>
   <%= render ReferentielAnlciComponent.new('officiel') unless pdf %>
-  <% if !pdf && restitution_cafe_de_la_place %>
-    <a href="<%= admin_partie_cafe_de_la_place_reponses_path(restitution_cafe_de_la_place.partie.id) %>" class="telechargement_des_reponses">
+  <% if !pdf && restitution_pour_situation(Situation::CAFE_DE_LA_PLACE) %>
+    <a href="<%= admin_partie_cafe_de_la_place_reponses_path(restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).partie.id) %>" class="telechargement_des_reponses">
     <h3>
       <%= t('.telechargement_des_reponses')%>
     </h3>

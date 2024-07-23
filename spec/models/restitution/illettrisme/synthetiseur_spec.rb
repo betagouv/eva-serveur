@@ -168,7 +168,7 @@ describe Restitution::Illettrisme::Synthetiseur do
   describe 'Evaluation pré-positionnement' do
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement, nil
+      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement, nil, nil
     end
     describe '#positionnement_litteratie' do
       it 'ne retourne rien' do
@@ -177,10 +177,10 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
   end
 
-  describe 'Evaluation positionnement' do
+  describe 'Evaluation positionnement Littératie' do
     let(:interpreteur_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_positionnement
+      Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_positionnement, nil
     end
 
     describe '#synthese' do
@@ -203,12 +203,36 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
   end
 
+  describe 'Evaluation positionnement Numératie' do
+    let(:interpreteur_numeratie) { double }
+    let(:subject) do
+      Restitution::Illettrisme::Synthetiseur.new nil, nil, interpreteur_numeratie
+    end
+
+    describe '#synthese' do
+      def synthese(profil)
+        allow(interpreteur_numeratie).to receive(:synthese).and_return(
+          {
+            profil_numeratie: profil
+          }
+        )
+        subject.synthese
+      end
+
+      it { expect(synthese(:profil1)).to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:profil2)).not_to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:profil3)).not_to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:profil4)).not_to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:indetermine)).to eq nil }
+    end
+  end
+
   context 'quand il y a un positionnement et un pré-positionnement' do
     let(:interpreteur_positionnement) { double }
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
       Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement,
-                                                 interpreteur_positionnement
+                                                 interpreteur_positionnement, nil
     end
 
     before do
@@ -233,6 +257,47 @@ describe Restitution::Illettrisme::Synthetiseur do
     describe '#positionnement_litteratie' do
       it 'retourne le niveau de positionnement' do
         expect(subject.positionnement_litteratie).to eq :profil_aberrant
+      end
+    end
+  end
+
+  context 'quand il y a un positionnement littératie et numératie' do
+    let(:interpreteur_positionnement) { double }
+    let(:interpreteur_numeratie) { double }
+    let(:subject) do
+      Restitution::Illettrisme::Synthetiseur.new nil,
+                                                 interpreteur_positionnement,
+                                                 interpreteur_numeratie
+    end
+
+    before do
+      allow(interpreteur_positionnement).to receive(:synthese).and_return(
+        {
+          niveau_litteratie: :profil_aberrant
+        }
+      )
+      allow(interpreteur_numeratie).to receive(:synthese).and_return(
+        {
+          profil_numeratie: :profil1
+        }
+      )
+    end
+
+    describe '#synthese' do
+      it 'retourne la synthèse positionnement' do
+        expect(subject.synthese).to eq 'aberrant'
+      end
+    end
+
+    describe '#positionnement_litteratie' do
+      fit 'retourne le niveau de positionnement' do
+        expect(subject.positionnement_litteratie).to eq :profil_aberrant
+      end
+    end
+
+    describe '#positionnement_numeratie' do
+      it 'retourne le niveau de positionnement de numératie' do
+        expect(subject.positionnement_numeratie).to eq :profil1
       end
     end
   end

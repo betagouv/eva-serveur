@@ -1,0 +1,13 @@
+<% profil = restitution_pour_situation(Situation::PLACE_DU_MARCHE) ? restitution_pour_situation(Situation::PLACE_DU_MARCHE).profil_numeratie : 'indetermine' %>
+
+<div class="panel panel-lettrisme">
+  <div class='marges-page'>
+    <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel'%>
+    <%= render 'litteratie_numeratie_synthese',
+      synthese: synthese,
+      scope: "admin.evaluations.lettrisme.numeratie",
+      description: "#{profil}.description",
+      icone: "icone_profil/icone_#{profil}.svg",
+      pdf: pdf %>
+  </div>
+</div>

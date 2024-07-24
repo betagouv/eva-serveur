@@ -3,16 +3,14 @@
 module Restitution
   class Globale
     attr_reader :evaluation, :restitutions, :synthese_positionnement, :synthese_pre_positionnement,
-                :synthese_positionnement_numeratie,
-                NIVEAU_INDETERMINE = :indetermine
+                :synthese_positionnement_numeratie, NIVEAU_INDETERMINE = :indetermine
 
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau2_standardises, prefix: :niveau2
-    delegate :moyennes_metriques, :ecarts_types_metriques,
-             to: :scores_niveau1_standardises, prefix: :niveau1
+    delegate :moyennes_metriques, :ecarts_types_metriques, to: :scores_niveau1_standardises,
+                                                           prefix: :niveau1
     delegate :synthese, :synthese_positionnement, :synthese_pre_positionnement,
-             :synthese_positionnement_numeratie,
-             :niveau_anlci_litteratie, to: :synthetiseur
+             :synthese_positionnement_numeratie, :niveau_anlci_litteratie, to: :synthetiseur
 
     def initialize(evaluation:, restitutions:)
       @evaluation = evaluation
@@ -67,14 +65,12 @@ module Restitution
     end
 
     def synthetiseur
-      @synthetiseur ||= Illettrisme::Synthetiseur.new(interpreteur_niveau1, cafe_de_la_place,
-                                                      place_du_marche)
+      @synthetiseur ||= Illettrisme::Synthetiseur.new(interpreteur_niveau1, litteratie, numeratie)
     end
 
     def interpretations_niveau2(categorie)
       Illettrisme::InterpreteurNiveau2
-        .new(scores_niveau2_standardises.calcule)
-        .interpretations(categorie)
+        .new(scores_niveau2_standardises.calcule).interpretations(categorie)
     end
 
     def interpretations
@@ -106,12 +102,12 @@ module Restitution
 
     private
 
-    def cafe_de_la_place
-      @cafe_de_la_place ||= selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
+    def litteratie
+      @litteratie ||= selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end
 
-    def place_du_marche
-      @place_du_marche ||= selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
+    def numeratie
+      @numeratie ||= selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
     end
 
     def extraie_competences_depuis_restitutions

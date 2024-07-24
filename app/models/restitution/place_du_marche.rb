@@ -24,6 +24,7 @@ module Restitution
         'succes' => Evacob::ScoreModule.new
       }
     }.freeze
+    SEUIL_MINIMUM = 70
 
     def initialize(campagne, evenements)
       evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
@@ -55,9 +56,9 @@ module Restitution
       n2 = pourcentage_de_reussite_pour(:N2)
       n3 = pourcentage_de_reussite_pour(:N3)
 
-      return 1 if n1 < 70
-      return 2 if n2 && n2 < 70
-      return 3 if n3 && n3 < 70
+      return 1 if n1 < SEUIL_MINIMUM
+      return 2 if n2 && n2 < SEUIL_MINIMUM
+      return 3 if n3 && n3 < SEUIL_MINIMUM
 
       4
     end

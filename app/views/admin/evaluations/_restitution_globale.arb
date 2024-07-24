@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 niveaux_competences = restitution_globale.niveaux_competences
-titre_avec_aide_illettrisme_litteratie = 'titre--avec-aide-illettrisme' if restitution_globale.synthese_positionnement == 'illettrisme_potentiel'
-titre_avec_aide_illettrisme_numeratie = 'titre--avec-aide-illettrisme' if restitution_globale.synthese_positionnement_numeratie == 'illettrisme_potentiel'
+if restitution_globale.synthese_positionnement == 'illettrisme_potentiel'
+  titre_avec_aide_illettrisme_litteratie = 'titre--avec-aide-illettrisme'
+end
+if restitution_globale.synthese_positionnement_numeratie == 'illettrisme_potentiel'
+  titre_avec_aide_illettrisme_numeratie = 'titre--avec-aide-illettrisme'
+end
 
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
@@ -111,7 +115,8 @@ div class: 'evaluation__restitution-globale' do
       end
     else
       div id: 'francais_mathematiques', class: 'page' do
-        h2 t('titre', scope: 'admin.restitutions.cefr'), class: titre_avec_aide_illettrisme_litteratie.to_s
+        h2 t('titre', scope: 'admin.restitutions.cefr'),
+           class: titre_avec_aide_illettrisme_litteratie.to_s
 
         div class: 'panel panel--avec-references' do
           render 'francais_mathematique', pdf: pdf,

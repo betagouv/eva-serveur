@@ -290,7 +290,7 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
 
     describe '#positionnement_litteratie' do
-      fit 'retourne le niveau de positionnement' do
+      it 'retourne le niveau de positionnement' do
         expect(subject.positionnement_litteratie).to eq :profil_aberrant
       end
     end

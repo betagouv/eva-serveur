@@ -93,6 +93,8 @@ fr:
           nom: Profil parcours haut
         niveau_litteratie:
           nom: Profil de lettrisme
+        profil_numeratie:
+          nom: Profil de numératie
         niveau_anlci_litteratie:
           nom: Niveau ANLCI littératie
         efficience:

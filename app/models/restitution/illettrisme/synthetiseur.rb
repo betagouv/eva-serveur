@@ -3,8 +3,7 @@
 module Restitution
   module Illettrisme
     class Synthetiseur
-      def initialize(interpreteur_pre_positionnement, interpreteur_positionnement,
-                     interpreteur_numeratie)
+      def initialize(interpreteur_pre_positionnement, interpreteur_positionnement, inter_numeratie)
         @algo_pre_positionnement =
           if interpreteur_pre_positionnement.present?
             SynthetiseurPrePositionnement.new(interpreteur_pre_positionnement)
@@ -14,13 +13,13 @@ module Restitution
             SynthetiseurPositionnement.new(interpreteur_positionnement, nil)
           end
         @algo_numeratie =
-          if interpreteur_numeratie.present?
-            SynthetiseurPositionnement.new(nil, interpreteur_numeratie)
-          end
+          (SynthetiseurPositionnement.new(nil, inter_numeratie) if inter_numeratie.present?)
       end
 
       def synthese
-        synthese_positionnement.presence || synthese_pre_positionnement || synthese_positionnement_numeratie.presence
+        synthese_positionnement.presence ||
+          synthese_pre_positionnement ||
+          synthese_positionnement_numeratie.presence
       end
 
       def synthese_positionnement
@@ -80,13 +79,13 @@ module Restitution
       class SynthetiseurPositionnement
         attr_reader :niveau_positionnement, :niveau_numeratie
 
-        def initialize(interpreteur_positionnement, interpreteur_numeratie)
+        def initialize(interpreteur_positionnement, inter_numeratie)
           if interpreteur_positionnement
             @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
           end
-          return unless interpreteur_numeratie
+          return unless inter_numeratie
 
-          @niveau_numeratie = interpreteur_numeratie.synthese[:profil_numeratie]
+          @niveau_numeratie = inter_numeratie.synthese[:profil_numeratie]
         end
 
         def socle_clea?

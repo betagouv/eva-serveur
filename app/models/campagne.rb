@@ -7,9 +7,7 @@ class Campagne < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :situations_configurations, lambda {
-                                         order(position: :asc)
-                                       }, dependent: :destroy
+  has_many :situations_configurations, -> { order(position: :asc) }, dependent: :destroy
   has_many :evaluations, dependent: :destroy
   belongs_to :compte
   belongs_to :parcours_type, optional: true
@@ -20,11 +18,8 @@ class Campagne < ApplicationRecord
   validates :code, presence: true, format: { with: /\A[A-Z0-9]+\z/ },
                    uniqueness: { case_sensitive: false, conditions: -> { with_deleted } }
   validates_associated :situations_configurations
-
   delegate :structure_code_postal, to: :compte
-
   auto_strip_attributes :libelle, :code, squish: true
-
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   before_validation :genere_code_unique

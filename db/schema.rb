@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_04_141851) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_24_131840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -205,6 +205,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_04_141851) do
     t.integer "statut", default: 0, null: false
     t.uuid "responsable_suivi_id"
     t.string "positionnement_niveau_litteratie"
+    t.string "positionnement_niveau_numeratie"
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
     t.index ["deleted_at"], name: "index_evaluations_on_deleted_at"

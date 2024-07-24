@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class Evaluation < ApplicationRecord
-  # Nombre maximum d'évaluations que l'on peut télécharger dans le fichier XLS
-  # fixé de manière un peu arbitraire en fonction de ce que l'on est capable
-  # d'exporter en un temps raisonnable.
+  # Nb max d'évaluations que l'on peut télécharger dans le fichier XLS fixé de manière arbitraire
+  # en fonction de ce que l'on est capable d'exporter en un temps raisonnable.
   LIMITE_EXPORT_XLS = 3000
-
   SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
@@ -13,6 +11,7 @@ class Evaluation < ApplicationRecord
   NIVEAUX_POSITIONNEMENT = %w[profil1 profil2 profil3 profil4
                               profil_4h profil_4h_plus profil_4h_plus_plus
                               profil_aberrant indetermine].freeze
+  NIVEAUX_NUMERATIE = %w[profil1 profil2 profil3 profil4].freeze
   NIVEAUX_COMPLETUDE = %w[incomplete competences_de_base_incompletes
                           competences_transversales_incompletes complete].freeze
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
@@ -46,6 +45,8 @@ class Evaluation < ApplicationRecord
   enum :niveau_anlci_numeratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
   enum :positionnement_niveau_litteratie,
        NIVEAUX_POSITIONNEMENT.zip(NIVEAUX_POSITIONNEMENT).to_h, prefix: true
+  enum :positionnement_niveau_numeratie,
+       NIVEAUX_NUMERATIE.zip(NIVEAUX_NUMERATIE).to_h, prefix: true
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
   enum :statut, %i[a_suivre suivi_en_cours suivi_effectue]
 
@@ -77,25 +78,21 @@ class Evaluation < ApplicationRecord
   end
 
   def beneficiaires_possibles
-    Beneficiaire.joins(evaluations: { campagne: :compte })
-                .where(evaluations: { campagnes: { comptes:
-                        { structure_id: campagne&.compte&.structure_id } } })
+    Beneficiaire.joins(evaluations: { campagne: :compte }).where(evaluations: { campagnes:
+    { comptes: { structure_id: campagne&.compte&.structure_id } } })
   end
 
   def self.tableau_de_bord(ability)
-    accessible_by(ability)
-      .non_anonymes
-      .order(created_at: :desc)
+    accessible_by(ability).non_anonymes.order(created_at: :desc)
   end
 
   def self.tableau_de_bord_mises_en_action(ability)
-    accessible_by(ability)
-      .illettrisme_potentiel
-      .sans_mise_en_action
-      .competences_de_base_completes
-      .non_anonymes
-      .order(created_at: :desc)
-      .includes(:mise_en_action)
+    accessible_by(ability).illettrisme_potentiel
+                          .sans_mise_en_action
+                          .competences_de_base_completes
+                          .non_anonymes
+                          .order(created_at: :desc)
+                          .includes(:mise_en_action)
   end
 
   def enregistre_mise_en_action(reponse)
@@ -106,6 +103,11 @@ class Evaluation < ApplicationRecord
 
   def a_mise_en_action?
     @a_mise_en_action ||= mise_en_action.present?
+  end
+
+  def illettrisme_potentiel?
+    synthese_competences_de_base == 'illettrisme_potentiel' ||
+      positionnement_niveau_numeratie_profil1?
   end
 
   private

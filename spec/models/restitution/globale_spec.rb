@@ -174,7 +174,7 @@ describe Restitution::Globale do
       end
 
       before do
-        allow(restitution_globale).to receive(:cafe_de_la_place).and_return(nil)
+        allow(restitution_globale).to receive(:litteratie).and_return(nil)
       end
 
       it do
@@ -188,7 +188,8 @@ describe Restitution::Globale do
               niveau_cnef: :X1,
               niveau_anlci_litteratie: :profil1,
               niveau_anlci_numeratie: :profil2,
-              positionnement_niveau_litteratie: nil
+              positionnement_niveau_litteratie: nil,
+              positionnement_niveau_numeratie: nil
             }
           )
       end
@@ -202,17 +203,20 @@ describe Restitution::Globale do
           interpretations_anlci: { litteratie: nil, numeratie: nil }
         )
       end
-      let(:cafe_de_la_place) { double }
+      let(:litteratie) { double }
+      let(:numeratie) { double }
 
       before do
-        allow(restitution_globale).to receive(:cafe_de_la_place).and_return(cafe_de_la_place)
+        allow(restitution_globale).to receive(:litteratie).and_return(litteratie)
+        allow(restitution_globale).to receive(:numeratie).and_return(litteratie)
       end
 
       it do
         allow(Restitution::Illettrisme::InterpreteurNiveau1)
           .to receive(:new).and_return(interpreteur_niveau1)
-        allow(cafe_de_la_place)
-          .to receive(:synthese).and_return({ niveau_litteratie: :profil2 })
+        allow(litteratie)
+          .to receive(:synthese).and_return({ niveau_litteratie: :profil2,
+                                              profil_numeratie: :profil1 })
         expect(restitution_globale.interpretations)
           .to eq(
             {
@@ -221,7 +225,8 @@ describe Restitution::Globale do
               niveau_cnef: nil,
               niveau_anlci_litteratie: nil,
               niveau_anlci_numeratie: nil,
-              positionnement_niveau_litteratie: :profil2
+              positionnement_niveau_litteratie: :profil2,
+              positionnement_niveau_numeratie: :profil1
             }
           )
       end
@@ -229,7 +234,7 @@ describe Restitution::Globale do
       it do
         allow(Restitution::Illettrisme::InterpreteurNiveau1)
           .to receive(:new).and_return(interpreteur_niveau1)
-        allow(cafe_de_la_place)
+        allow(litteratie)
           .to receive(:synthese).and_return({ niveau_litteratie: :profil3 })
         expect(restitution_globale.interpretations)
           .to eq(
@@ -239,7 +244,8 @@ describe Restitution::Globale do
               niveau_cnef: nil,
               niveau_anlci_litteratie: nil,
               niveau_anlci_numeratie: nil,
-              positionnement_niveau_litteratie: :profil3
+              positionnement_niveau_litteratie: :profil3,
+              positionnement_niveau_numeratie: nil
             }
           )
       end

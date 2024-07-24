@@ -171,6 +171,7 @@ describe 'Admin - Evaluation', type: :feature do
           allow(restitution_globale).to receive(:synthese)
           allow(restitution_globale).to receive(:synthese_pre_positionnement)
           allow(restitution_globale).to receive(:synthese_positionnement)
+          allow(restitution_globale).to receive(:synthese_positionnement_numeratie)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
           allow(restitution_globale).to receive(:selectionne_derniere_restitution)

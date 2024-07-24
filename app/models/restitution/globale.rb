@@ -74,14 +74,13 @@ module Restitution
     end
 
     def interpretations
-      {
-        synthese_competences_de_base: synthese,
+      { synthese_competences_de_base: synthese,
         niveau_cefr: interpreteur_niveau1.interpretations_cefr[:litteratie],
         niveau_cnef: interpreteur_niveau1.interpretations_cefr[:numeratie],
         niveau_anlci_litteratie: interpreteur_niveau1.interpretations_anlci[:litteratie],
         niveau_anlci_numeratie: interpreteur_niveau1.interpretations_anlci[:numeratie],
-        positionnement_niveau_litteratie: synthetiseur.positionnement_litteratie
-      }
+        positionnement_niveau_litteratie: synthetiseur.positionnement_litteratie,
+        positionnement_niveau_numeratie: synthetiseur.positionnement_numeratie }
     end
 
     def interpretations_competences_transversales

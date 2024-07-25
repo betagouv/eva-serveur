@@ -30,8 +30,9 @@ module Restitution
       }
     ].freeze
 
-    def initialize(partie:)
-      @partie = partie
+    def initialize(partie_litteratie:, partie_numeratie:)
+      @partie_litteratie = partie_litteratie
+      @partie_numeratie = partie_numeratie
     end
 
     def to_xls
@@ -52,7 +53,8 @@ module Restitution
 
     def remplie_la_feuille(sheet)
       ligne = 1
-      evenements = Evenement.where(session_id: @partie.session_id)
+      evenements = Evenement.where(session_id: @partie_litteratie&.session_id)
+                            .or(Evenement.where(session_id: @partie_numeratie&.session_id))
       evenements.reponses.order(position: :asc).each do |evenement|
         sheet = remplis_la_ligne(sheet, ligne, evenement)
         ligne += 1

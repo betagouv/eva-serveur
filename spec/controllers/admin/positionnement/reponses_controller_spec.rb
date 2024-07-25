@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Admin::CafeDeLaPlace::ReponsesController do
+describe Admin::Positionnement::ReponsesController do
   let(:situation) { create(:situation) }
   let(:evaluation) { create :evaluation }
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
@@ -12,8 +12,9 @@ describe Admin::CafeDeLaPlace::ReponsesController do
     sign_in compte
   end
 
-  it 'returne un fichier xls' do
-    get :show, params: { partie_id: partie.id }
+  it 'retourne un fichier xls' do
+    get :show,
+        params: { partie_numeratie_id: partie.id, partie_litteratie_id: partie.id }
 
     expect(response.header['Content-Type']).to include 'excel'
     expect(response).to have_http_status(:success)
@@ -26,5 +27,12 @@ describe Admin::CafeDeLaPlace::ReponsesController do
     nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
 
     expect(subject.nom_du_fichier(partie)).to eq(nom_du_fichier_attendu)
+  end
+
+  context "lorsque l'un des params est manquant" do
+    it 'retourne un fichier xls' do
+      get :show, params: { partie_numeratie_id: partie.id }
+      expect(response).to have_http_status(:success)
+    end
   end
 end

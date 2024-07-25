@@ -9,7 +9,7 @@ describe Restitution::ExportPositionnement do
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
 
   subject(:response_service) do
-    described_class.new(partie: partie)
+    described_class.new(partie_litteratie: partie, partie_numeratie: partie)
   end
 
   describe '.to_xls' do

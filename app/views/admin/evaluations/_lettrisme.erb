@@ -1,5 +1,4 @@
-<% profil = restitution_pour_situation(Situation::CAFE_DE_LA_PLACE) ? restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).niveau_litteratie : 'indetermine' %>
-
+<% profil = cafe_de_la_place ? cafe_de_la_place.niveau_litteratie : 'indetermine' %>
 <div class="panel panel-lettrisme panel--avec-references">
   <div class='marges-page'>
     <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel' %>
@@ -11,22 +10,15 @@
       pdf: pdf %>
     <% if niveau_bas?(profil) %>
       <div class="lettrisme-sous-competences">
-        <% restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).competences_lettrisme.each do |competence, profil| %>
+        <% cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
           <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
         <% end %>
       </div>
     <% end %>
   </div>
   <%= render ReferentielAnlciComponent.new('officiel') unless pdf %>
-  <% if !pdf && restitution_pour_situation(Situation::CAFE_DE_LA_PLACE) %>
-    <a href="<%= admin_partie_cafe_de_la_place_reponses_path(restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).partie.id) %>" class="telechargement_des_reponses">
-    <h3>
-      <%= t('.telechargement_des_reponses')%>
-    </h3>
-    <svg class="icone-telechargement" width="23" height="27" viewBox="0 0 23 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.8945 2C12.8945 1.17157 12.223 0.5 11.3945 0.5C10.5661 0.5 9.89453 1.17157 9.89453 2H12.8945ZM10.3339 23.5607C10.9197 24.1464 11.8694 24.1464 12.4552 23.5607L22.0011 14.0147C22.5869 13.4289 22.5869 12.4792 22.0011 11.8934C21.4153 11.3076 20.4656 11.3076 19.8798 11.8934L11.3945 20.3787L2.90925 11.8934C2.32346 11.3076 1.37372 11.3076 0.78793 11.8934C0.202143 12.4792 0.202143 13.4289 0.78793 14.0147L10.3339 23.5607ZM9.89453 2V22.5H12.8945V2H9.89453Z" fill="#FBF9FA"/>
-      <path d="M1.96484 25.0005H20.4648" stroke="#FBF9FA" stroke-width="3" stroke-linecap="round" />
-    </svg>
-    </a>
+  <% if !pdf && cafe_de_la_place && !place_du_marche %>
+    <% route = admin_positionnement_reponses_path(partie_litteratie_id: cafe_de_la_place.partie.id)%>
+    <%= render partial: 'telechargement_reponses', locals: { route: route } %>
   <% end %>
 </div>

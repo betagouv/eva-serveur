@@ -21,38 +21,4 @@
       margin-bottom: 0;
     }
   }
-
-  .telechargement_des_reponses:hover {
-    background-color: $eva_light;
-    border: 2px solid $eva_main_blue;
-
-    h3 {
-      color: $eva_main_blue;
-    }
-
-    .icone-telechargement {
-      path {
-        fill: $eva_main_blue;
-        stroke: $eva_main_blue;
-      }
-    }
-  }
-
-  .telechargement_des_reponses {
-    border: 2px solid transparent;
-    display: flex;
-    padding: 1rem 3rem;
-    gap: 2rem;
-    justify-content: space-between;
-    align-items: center;
-    background: $eva_main_blue;
-    box-shadow: 0rem 0rem 0.5rem rgba(30, 65, 106, 0.25);
-    border-radius: 0rem 0rem 0.5rem 0.5rem;
-
-    h3 {
-      text-decoration-line: underline;
-      color: $eva_light;
-      margin: 0;
-    }
-  }
 }

@@ -1,6 +1,7 @@
-<% profil = restitution_pour_situation(Situation::PLACE_DU_MARCHE) ? restitution_pour_situation(Situation::PLACE_DU_MARCHE).profil_numeratie : 'indetermine' %>
+<% profil = place_du_marche ? place_du_marche.profil_numeratie : 'indetermine' %>
+<% partie_litteratie = cafe_de_la_place ? restitution_pour_situation(Situation::CAFE_DE_LA_PLACE).partie.id : '' %>
 
-<div class="panel">
+<div class="panel panel--avec-references">
   <div class='marges-page'>
     <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel'%>
     <%= render 'litteratie_numeratie_synthese',
@@ -10,4 +11,8 @@
       icone: "icone_profil/icone_#{profil}.svg",
       pdf: pdf %>
   </div>
+  <% if !pdf %>
+    <% route = admin_positionnement_reponses_path(partie_litteratie_id: partie_litteratie, partie_numeratie_id: place_du_marche.partie.id)%>
+    <%= render partial: 'telechargement_reponses', locals: { route: route } %>
+  <% end %>
 </div>

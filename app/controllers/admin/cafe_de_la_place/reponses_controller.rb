@@ -6,7 +6,7 @@ module Admin
       def show
         partie = Partie.find(params[:partie_id])
         redirect_to root_path unless Ability.new(current_compte).can?(:read, partie.evaluation)
-        export = ::Restitution::ExportCafeDeLaPlace.new(partie: partie)
+        export = ::Restitution::ExportPositionnement.new(partie: partie)
         send_data export.to_xls,
                   content_type: 'application/vnd.ms-excel',
                   filename: nom_du_fichier(partie)

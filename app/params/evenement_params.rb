@@ -3,15 +3,11 @@
 class EvenementParams
   class << self
     def from(params)
-      permitted = params.permit(
-        :date,
-        :nom,
-        :session_id,
-        :position,
-        donnees: {}
-      )
-      formate!(permitted)
-      permitted
+      evenement_params = params.clone
+      evenement_params.delete(:situation)
+      evenement_params.delete(:evaluation_id)
+      formate!(evenement_params)
+      evenement_params
     end
 
     private
@@ -21,10 +17,10 @@ class EvenementParams
     end
 
     def formate_date!(params)
-      date = params['date']
+      date = params[:date]
       return if date.blank?
 
-      params['date'] = Time.strptime(date.to_s, '%Q')
+      params[:date] = Time.strptime(date.to_s, '%Q')
     end
   end
 end

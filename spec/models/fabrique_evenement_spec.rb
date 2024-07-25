@@ -10,7 +10,7 @@ describe FabriqueEvenement do
   let(:evaluation) { create :evaluation }
   let(:nom_evenement) { 'finSituation' }
   let(:parametres) do
-    ActionController::Parameters.new(
+    {
       date: 1_631_891_703_815,
       donnees: {},
       nom: nom_evenement,
@@ -18,7 +18,7 @@ describe FabriqueEvenement do
       session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
       situation: situation_livraison.nom_technique,
       evaluation_id: evaluation.id
-    )
+    }
   end
 
   describe '#call' do
@@ -75,7 +75,7 @@ describe FabriqueEvenement do
 
     context "quand l'id de l'évaluation est invalide" do
       let(:parametres_invalide) do
-        ActionController::Parameters.new(
+        {
           date: 1_631_891_703_815,
           donnees: {},
           nom: 'finSituation',
@@ -83,7 +83,7 @@ describe FabriqueEvenement do
           session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
           situation: situation_livraison.nom_technique,
           evaluation_id: nil
-        )
+        }
       end
 
       it 'ne crée rien' do
@@ -98,14 +98,14 @@ describe FabriqueEvenement do
 
     context "quand la création de l'évènement échoue" do
       let(:parametres_invalide) do
-        ActionController::Parameters.new(
+        {
           date: nil,
           nom: 'finSituation',
           situation: 'livraison',
           session_id: 'O8j78U2xcb2',
           donnees: donnees,
           evaluation_id: evaluation.id
-        )
+        }
       end
 
       it 'la partie est quand même créée' do

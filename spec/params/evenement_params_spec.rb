@@ -12,7 +12,8 @@ describe EvenementParams do
         date: 1_580_743_539_508,
         donnees: {},
         session_id: 'ma session id',
-        autre_param: 'autre paramètre'
+        situation: 'autre paramètre',
+        evaluation_id: 'id'
       )
 
       evenement_params = described_class.from(params)

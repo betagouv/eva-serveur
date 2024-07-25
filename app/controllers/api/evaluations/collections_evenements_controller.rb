@@ -4,7 +4,6 @@ module Api
   module Evaluations
     class CollectionsEvenementsController < Api::BaseController
       def create
-        # params.permit(evenements: [:date, :donnees, :nom, :position, :session_id, :situation])
         if Evaluation.exists?(permit_params[:evaluation_id])
           PersisteCollectionEvenementsJob.perform_later(
             permit_params[:evaluation_id],
@@ -29,13 +28,6 @@ module Api
                                            :situation,
                                            { donnees: {} }
                                          ])
-      end
-
-      def cree_evenements(evaluation_id, evenements)
-        evenements.each do |parametres|
-          parametres.merge!(evaluation_id: evaluation_id)
-          FabriqueEvenement.new(parametres).call
-        end
       end
     end
   end

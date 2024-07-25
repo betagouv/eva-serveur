@@ -14,7 +14,7 @@ describe 'Evenement API', type: :request do
         date: 1_551_111_089_238,
         nom: 'ouvertureContenant',
         donnees: donnees,
-        situation: 'inventaire',
+        situation: situation_inventaire.nom_technique,
         position: 58,
         session_id: 'O8j78U2xcb2',
         evaluation_id: evaluation.id
@@ -25,7 +25,7 @@ describe 'Evenement API', type: :request do
       {
         date: nil,
         nom: 'ouvertureContenant',
-        situation: 'inventaire',
+        situation: situation_inventaire.nom_technique,
         session_id: 'O8j78U2xcb2',
         donnees: donnees,
         evaluation_id: evaluation.id

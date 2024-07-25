@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class ExportCafeDeLaPlace
+  class ExportPositionnement
     WORKSHEET_NAME = 'Données'
     ENTETES_XLS = [
       {

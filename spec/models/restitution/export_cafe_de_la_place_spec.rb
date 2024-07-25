@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::ExportCafeDeLaPlace do
+describe Restitution::ExportPositionnement do
   let(:situation) { create(:situation) }
   let(:evaluation) { create :evaluation }
   let(:question) { create(:question) }

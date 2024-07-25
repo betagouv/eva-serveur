@@ -1,6 +1,8 @@
 fr:
   admin:
     evaluations:
+      telechargement_reponses:
+        cta: 'Télécharger le détail des réponses'
       index:
         confirmation_suppression: 'Voulez-vous vraiment supprimer cette évaluation ?'
         supprimer: Supprimer

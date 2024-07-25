@@ -2,7 +2,6 @@ fr:
   admin:
     evaluations:
       lettrisme:
-        telechargement_des_reponses: 'Télécharger le détail des réponses'
         litteratie:
           profil_aberrant:
             description: |

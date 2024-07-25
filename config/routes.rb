@@ -33,10 +33,8 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :controle_syntheses_restitutions, only: :index
-      resources :parties do
-        namespace :cafe_de_la_place do
-          resource :reponses, only: [:show], defaults: { format: 'xls' }
-        end
+      namespace :positionnement do
+        get 'reponses(/:partie_numeratie_id)(/:partie_litteratie_id)', to: 'reponses#show', as: :reponses, defaults: { format: 'xls' }
       end
     end
 

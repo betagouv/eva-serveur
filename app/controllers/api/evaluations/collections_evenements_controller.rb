@@ -4,24 +4,38 @@ module Api
   module Evaluations
     class CollectionsEvenementsController < Api::BaseController
       def create
-        @evenements = cree_evenements
-
-        if @evenements.all?(&:persisted?)
+        # params.permit(evenements: [:date, :donnees, :nom, :position, :session_id, :situation])
+        if Evaluation.exists?(permit_params[:evaluation_id])
+          PersisteCollectionEvenementsJob.perform_later(
+            permit_params[:evaluation_id],
+            permit_params[:evenements]
+          )
           render json: {}, status: :created
         else
-          render json: {}, status: :unprocessable_entity
+          render json: { message: I18n.t('admin.evaluations.inconnue') },
+                 status: :unprocessable_entity
         end
       end
 
       private
 
-      def cree_evenements
-        evenements = []
-        params[:evenements].each do |parametres|
-          parametres.merge!(evaluation_id: params[:evaluation_id])
-          evenements << FabriqueEvenement.new(parametres).call
+      def permit_params
+        @permit_params ||= params.permit(:evaluation_id,
+                                         evenements: [
+                                           :date,
+                                           :nom,
+                                           :position,
+                                           :session_id,
+                                           :situation,
+                                           { donnees: {} }
+                                         ])
+      end
+
+      def cree_evenements(evaluation_id, evenements)
+        evenements.each do |parametres|
+          parametres.merge!(evaluation_id: evaluation_id)
+          FabriqueEvenement.new(parametres).call
         end
-        evenements
       end
     end
   end

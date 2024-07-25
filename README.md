@@ -207,7 +207,7 @@ Contenu:
       "session_id":"54af3010-315c-4755-b268-08c4bf520f64",
       "situation":"bienvenue",
       "nom":"reponse",
-      "donnees": { 
+      "donnees": {
         "question":"f728be21-6f19-4901-ba07-0ac26ad702d7",
         "reponse":"5f5ce41c-a2f0-4512-b266-39a4945dbeba"
       },

@@ -107,7 +107,7 @@ class Evaluation < ApplicationRecord
 
   def illettrisme_potentiel?
     synthese_competences_de_base == 'illettrisme_potentiel' ||
-      positionnement_niveau_numeratie_profil1?
+      positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?
   end
 
   private

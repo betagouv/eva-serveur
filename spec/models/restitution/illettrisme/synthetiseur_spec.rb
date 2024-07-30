@@ -220,9 +220,9 @@ describe Restitution::Illettrisme::Synthetiseur do
       end
 
       it { expect(synthese(:profil1)).to eq 'illettrisme_potentiel' }
-      it { expect(synthese(:profil2)).not_to eq 'illettrisme_potentiel' }
-      it { expect(synthese(:profil3)).not_to eq 'illettrisme_potentiel' }
-      it { expect(synthese(:profil4)).not_to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:profil2)).to eq 'illettrisme_potentiel' }
+      it { expect(synthese(:profil3)).to eq 'ni_ni' }
+      it { expect(synthese(:profil4)).to eq 'socle_clea' }
       it { expect(synthese(:indetermine)).to eq nil }
     end
   end
@@ -298,6 +298,12 @@ describe Restitution::Illettrisme::Synthetiseur do
     describe '#positionnement_numeratie' do
       it 'retourne le niveau de positionnement de numératie' do
         expect(subject.positionnement_numeratie).to eq :profil1
+      end
+    end
+
+    describe '#synthese_positionnement_numeratie' do
+      it 'retourne la synthèse du niveau de positionnement de numératie' do
+        expect(subject.synthese_positionnement_numeratie).to eq 'illettrisme_potentiel'
       end
     end
   end

@@ -89,11 +89,13 @@ module Restitution
         end
 
         def socle_clea?
-          @niveau_positionnement.in?(%i[profil4 profil_4h profil_4h_plus profil_4h_plus_plus])
+          @niveau_positionnement.in?(%i[profil4 profil_4h profil_4h_plus
+                                        profil_4h_plus_plus]) || @niveau_numeratie.in?(%i[profil4])
         end
 
         def illettrisme_potentiel?
-          @niveau_positionnement.in?(%i[profil1 profil2]) || @niveau_numeratie.in?(%i[profil1])
+          @niveau_positionnement.in?(%i[profil1
+                                        profil2]) || @niveau_numeratie.in?(%i[profil1 profil2])
         end
 
         def aberrant?

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-render 'form_question_script'
-
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [:admin, resource], html: { class: 'form-question' } do |f|
   f.inputs do
     f.input :libelle
     f.input :nom_technique, placeholder: 'N1Prn1'

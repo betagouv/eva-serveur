@@ -1,0 +1,23 @@
+# frozen_string_literal: true
+
+render 'form_question_script'
+
+active_admin_form_for [:admin, resource] do |f|
+    f.inputs do
+    f.input :libelle
+    f.input :nom_technique
+    f.input :intitule, :label => t('.label_intitule')
+    f.input :type, as: :select, class: 'choix-type'
+    # f.input :consigne
+    f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
+      c.input :id, as: :hidden
+      c.input :intitule
+      c.input :nom_technique
+      c.input :type_choix
+    end
+  end
+  f.actions do
+    f.action :submit
+    annulation_formulaire(f)
+  end
+end

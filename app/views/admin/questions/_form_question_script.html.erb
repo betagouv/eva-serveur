@@ -1,0 +1,14 @@
+<script>
+  function initialisation() {
+    const inputType = document.getElementById("question_qcm_type");
+    const choix = $('.choix');
+    inputType && inputType.value === 'QuestionQcm' ? choix.show() : choix.hide();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initialisation();
+    $('#question_type_input').on('change', function(event) {
+      event.target.value === 'QuestionQcm' ? $('.choix').show() : $('.choix').hide();
+    });
+});
+</script>

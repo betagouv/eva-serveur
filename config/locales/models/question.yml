@@ -15,6 +15,7 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         intitule: Intitulé
+        modalite_reponse: Consigne
         categorie: Catégorie
         libelle: Libellé
         nom_technique: Nom technique

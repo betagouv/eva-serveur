@@ -6,7 +6,8 @@ panel 'Détails de la question' do
     row :libelle
     row :nom_technique
     row :intitule
-    row :type
+    row t('.label_type'), &:type
+    row :modalite_reponse
     row :created_at
   end
 end

@@ -1,0 +1,14 @@
+fr:
+  admin:
+    question_qcms:
+      form:
+        nom_technique_placeholder: N1Pse1
+        label:
+          intitule: |
+            Intitulé de la question
+            (telle qu’elle sera écrite dans le jeu)
+          modalite_reponse: Consigne
+          intitule_reponse: Intitulé réponse
+          intitule_audio: Intitulé audio
+          modalite_reponse_audio: Consigne audio
+          intitule_reponse_audio: Intitulé réponse audio

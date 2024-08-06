@@ -1,8 +1,0 @@
-fr:
-  admin:
-    questions:
-      form:
-        nom_technique_placeholder: N1Pse1
-        intitule: |
-          Intitulé de la question
-          (telle qu’elle sera écrite dans le jeu)

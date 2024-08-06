@@ -1,0 +1,14 @@
+.form-question {
+  .transcriptions {
+    padding: 0;
+    .has_many_remove {
+      display: none;
+    }
+  }
+}
+
+.show.admin_questions {
+ td {
+  vertical-align: middle;
+ }
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_071011) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_06_131119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -378,6 +378,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_071011) do
     t.index ["type"], name: "index_structures_on_type"
   end
 
+  create_table "transcriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "ecrit"
+    t.integer "categorie", default: 0
+    t.uuid "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_transcriptions_on_question_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "active_storage_blobs_id"
   add_foreign_key "campagnes", "comptes"
@@ -397,4 +406,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_071011) do
   add_foreign_key "situations", "questionnaires"
   add_foreign_key "situations", "questionnaires", column: "questionnaire_entrainement_id"
   add_foreign_key "situations_configurations", "campagnes"
+  add_foreign_key "transcriptions", "questions"
 end

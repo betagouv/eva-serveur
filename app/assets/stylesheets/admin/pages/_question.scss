@@ -8,7 +8,11 @@
 }
 
 .show.admin_questions {
- td {
-  vertical-align: middle;
- }
+  tr.even, tr.odd {
+    td  {
+      background: transparent;
+      vertical-align: middle;
+      border-bottom: 1px solid $eva_bluegrey;
+    }
+  }
 }

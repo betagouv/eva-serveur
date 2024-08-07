@@ -5,14 +5,26 @@ panel 'Détails de la question' do
     row :id
     row :libelle
     row :nom_technique
-    row :intitule
     row t('.label_type'), &:type
+    row :intitule
+    row 'Audio Intitulé' do
+      intitule_transcription = question.transcriptions.find_by(categorie: :intitule)
+      if intitule_transcription&.audio&.attached?
+        audio_tag(url_for(intitule_transcription.audio), controls: true)
+      end
+    end
     row :modalite_reponse
+    row 'Audio Modalite Réponse' do
+      modalite_reponse_transcription = question.transcriptions.find_by(categorie: :modalite_reponse)
+      if modalite_reponse_transcription&.audio&.attached?
+        audio_tag(url_for(modalite_reponse_transcription.audio), controls: true)
+      end
+    end
     row :created_at
   end
 end
 
-if question.QuestionQcm?
+unless question.choix.blank?
   panel 'Choix' do
     reorderable_table_for question.choix do
       column :intitule
@@ -20,23 +32,7 @@ if question.QuestionQcm?
       column :audio do |transcription|
         if transcription.audio.attached?
           audio_tag(url_for(transcription.audio), controls: true)
-        else
-          div "Pas d'audio"
         end
-      end
-    end
-  end
-end
-
-panel 'Transcriptions audios' do
-  table_for question.transcriptions do
-    column :ecrit
-    column :categorie
-    column :audio do |transcription|
-      if transcription.audio.attached?
-        audio_tag(url_for(transcription.audio), controls: true)
-      else
-        div "Pas d'audio"
       end
     end
   end

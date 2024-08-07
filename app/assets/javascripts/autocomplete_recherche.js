@@ -93,7 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
         success: function (datas) {
           let reponses = [];
           for(const item of datas.results) {
-            for(const etablissement of item.matching_etablissements) {
+            const etablissements = item.matching_etablissements
+              .sort((e1, e2) => {
+                if (e1.est_siege == e2.est_siege) return 0;
+                if (e1.est_siege) return -1;
+                else return 1;
+              });
+            for(const etablissement of etablissements) {
               const value = capitalise(item.nom_complet.toLowerCase());
               const label = `${value} - ${etablissement.adresse}`;
               reponses.push({

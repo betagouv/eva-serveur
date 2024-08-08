@@ -87,7 +87,7 @@
 body {
   @include texte();
   font-family: $font-texte;
-  color: $eva_dark;
+  color: $couleur-texte;
   background-color: $eva_light;
   overflow-x: hidden;
 

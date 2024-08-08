@@ -7,7 +7,10 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
-    row :intitule
+    row :intitule do
+      intitule_transcription = question_qcm.transcriptions.find_by(categorie: :intitule)
+      div intitule_transcription.ecrit if intitule_transcription.ecrit
+    end
     row :metacompetence
     row :type_qcm
     row :modalite_reponse

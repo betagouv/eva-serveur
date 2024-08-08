@@ -5,7 +5,7 @@ panel 'Détails de la question' do
     row :id
     row :libelle
     row :nom_technique
-    row(:intitule) { md(question_sous_consigne.intitule) }
+    row(:intitule) { md(question_sous_consigne.transcription_ecrite_pour(:intitule)) }
     row :created_at
   end
 end

@@ -2,6 +2,10 @@ function estUnCodePostal(texte) {
   return texte.match(/^\d{5}$/);
 }
 
+function capitalise(s) {
+    return s[0].toUpperCase() + s.slice(1);
+}
+
 function construitReponse(item, codePostalSaisi) {
   const ville = item.nom;
   let codePostal = '';
@@ -16,7 +20,7 @@ function construitReponse(item, codePostalSaisi) {
 
 function ajouteReponseAucunResultat(event, ui) {
   if (!ui.content.length) {
-    const recherche = $(".champ-recherche").val();
+    const recherche = $(event.target).val();
     const reponseAucunResultat = {
       value: '',
       label: `Aucun résultat ne correspond à la recherche "${recherche}"`
@@ -32,8 +36,8 @@ function afficheRecherche(boutonAjout, formulaireRecherche) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  $( ".champ-recherche" ).autocomplete({
+function autocompleteRechercheStructure() {
+  return {
     source: function (request, response) {
       $('#bouton-chercher')
         .prop("disabled", true)
@@ -52,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
           dataType: "json",
           success: function (datas) {
             response($.map(datas, function (item) {
-              const reponse = construitReponse(item, data.codePostal)
-              return reponse;
-            }))
+              return construitReponse(item, data.codePostal)
+            }));
           },
           error: function () {
             response([]);
@@ -74,5 +77,53 @@ document.addEventListener('DOMContentLoaded', () => {
     autoFocus: false,
     minLength: 3,
     delay: 100
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  $(".autocomplete-nom-structure input").autocomplete({
+    source: function (request, response) {
+      const nom = encodeURI(request.term);
+      let code_postal = $('.autocomplete-code-postal input').val().trim();
+      if(code_postal.length != 0) {
+        code_postal = `&code_postal=${encodeURI(code_postal)}`
+      }
+      $.ajax({
+        url: `https://recherche-entreprises.api.gouv.fr/search?q=${nom}${code_postal}&per_page=6`,
+        success: function (datas) {
+          let reponses = [];
+          for(const item of datas.results) {
+            const etablissements = item.matching_etablissements
+              .sort((e1, e2) => {
+                if (e1.est_siege == e2.est_siege) return 0;
+                if (e1.est_siege) return -1;
+                else return 1;
+              });
+            for(const etablissement of etablissements) {
+              const value = capitalise(item.nom_complet.toLowerCase());
+              const label = `${value} - ${etablissement.adresse}`;
+              reponses.push({
+                label: label,
+                value: value,
+                siret: item.siege.siret,
+                code_postal: etablissement.code_postal
+              });
+            }
+          }
+          response(reponses);
+        },
+        error: function () {
+          response([]);
+        }
+      });
+    },
+    response: ajouteReponseAucunResultat,
+    select: function( event, ui ) {
+      $('.autocomplete-siret input').val(ui.item.siret)
+      $('.autocomplete-code-postal input').val(ui.item.code_postal)
+    },
+    autoFocus: false,
+    minLength: 3,
+    delay: 150
   });
 });

@@ -1,17 +1,20 @@
-$eva_main_blue: #6E84FE;
+$eva_main_blue: #000091;
+$eva_main_light: #C1C1FB;
 $eva_dark_green: #0C826D;
 $eva_green: #9ADBD0;
 $eva_dark_orange: #E4912F;
 $eva_orange: #FDAF54;
 $eva_red: #fd5c54;
-$eva_dark: #1E416A;
-$eva_dark_blue_grey: #7B83B0;
-$eva_bluegrey: #D6DAEC;
+$eva_dark: #161616;
+$eva_less_dark: #666666;
+$eva_dark_blue_grey: #3A3A3A;
+$eva_bluegrey: #ECECFE;
 $eva_light: #FBF9FA;
 
 $anlci_orange: #fc5d5d; // Couleur officielle : nacarat
 
 $couleur-texte: $eva_dark_blue_grey;
+$couleur-texte-light: $eva_less_dark;
 $couleur-liens: $eva_main_blue;
 $couleur-accent-erreur: $eva_red;
 $couleur-warning: $eva_orange;

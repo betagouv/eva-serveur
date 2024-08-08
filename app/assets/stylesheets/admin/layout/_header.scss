@@ -145,7 +145,7 @@
       &_email {
         margin-bottom: .75rem;
         a {
-          color: $eva_dark_blue_grey;
+          color: $couleur-texte-light;
           &:hover {
             color: $eva_main_blue;
           }
@@ -209,7 +209,7 @@
           height: 1.25rem;
           right: $padding-horizontale;
           bottom: $padding-verticale;
-          background: asset-data-url('roue-dentee-blanche.svg') no-repeat center;
+          background: asset-data-url('roue-dentee.svg') no-repeat center;
         }
       }
 

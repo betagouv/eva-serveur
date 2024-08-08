@@ -15,10 +15,10 @@ body.logged_in {
   }
   &::before {
     top: 0;
-    background-color: $eva_dark;
+    background-color: $eva_main_blue;
   }
   &::after {
     top: 64px;
-    background-color: $eva_main_blue;
+    background-color: $eva_bluegrey;
   }
 }

@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   validates :libelle, :nom_technique, :type, presence: true
 
   CATEGORIE = %i[situation scolarite sante appareils].freeze
-  TYPES = %i[QuestionQcm QuestionSaisie].freeze
+  TYPES = %i[QuestionQcm QuestionSaisie QuestionSousConsigne].freeze
   enum :type, TYPES.zip(TYPES.map(&:to_s)).to_h
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 

@@ -6,15 +6,17 @@ panel 'Détails de la question' do
     row :libelle
     row :nom_technique
     row t('.label_type'), &:type
-    row :intitule
-    row 'Audio Intitulé' do
-      intitule_transcription = question.transcriptions.find_by(categorie: :intitule)
+    intitule_transcription = question.transcriptions.find_by(categorie: :intitule)
+    row :intitule do
+      div intitule_transcription.ecrit if intitule_transcription.ecrit
+    end
+    row :audio_intitule do
       if intitule_transcription&.audio&.attached?
         audio_tag(url_for(intitule_transcription.audio), controls: true)
       end
     end
     row :modalite_reponse
-    row 'Audio Modalite Réponse' do
+    row :audio_consigne do
       modalite_reponse_transcription = question.transcriptions.find_by(categorie: :modalite_reponse)
       if modalite_reponse_transcription&.audio&.attached?
         audio_tag(url_for(modalite_reponse_transcription.audio), controls: true)

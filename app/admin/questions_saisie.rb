@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
-  permit_params :categorie, :libelle, :nom_technique, :intitule, :message,
+  permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :reponse_placeholder
 
   filter :libelle
@@ -15,7 +15,14 @@ ActiveAdmin.register QuestionSaisie do
       f.input :categorie, as: :select
       f.input :nom_technique
       f.input :description
-      f.input :intitule
+
+      if f.object.transcription_pour(:intitule).nil?
+        f.object.transcriptions.build(categorie: :intitule)
+      end
+
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        t.input :ecrit, label: 'Intitulé'
+      end
       f.input :suffix_reponse
       f.input :reponse_placeholder
       f.input :type_saisie
@@ -29,7 +36,9 @@ ActiveAdmin.register QuestionSaisie do
   index do
     column :libelle
     column :categorie
-    column :intitule
+    column :intitule do |question|
+      question.transcription_ecrite_pour(:intitule)
+    end
     column :created_at
     actions
   end

@@ -9,8 +9,10 @@ class QuestionSaisie < Question
                                                  reject_if: :reject_transcriptions
 
   def as_json(_options = nil)
-    json = slice(:id, :intitule, :nom_technique, :suffix_reponse, :description)
+    transcription = Transcription.find_by(categorie: :intitule, question_id: id)
+    json = slice(:id, :nom_technique, :suffix_reponse, :description)
     json['type'] = 'saisie'
+    json['intitule'] = transcription&.ecrit
     json['sous_type'] = type_saisie
     json['placeholder'] = reponse_placeholder
     json

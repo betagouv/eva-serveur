@@ -3,7 +3,8 @@
 ActiveAdmin.register QuestionSousConsigne do
   menu parent: 'Parcours', if: proc { current_compte.superadmin? }
 
-  permit_params :libelle, :nom_technique, :intitule
+  permit_params :libelle, :nom_technique,
+                transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle
 
@@ -12,7 +13,13 @@ ActiveAdmin.register QuestionSousConsigne do
     f.inputs do
       f.input :libelle
       f.input :nom_technique
-      f.input :intitule
+      if f.object.transcription_pour(:intitule).nil?
+        f.object.transcriptions.build(categorie: :intitule)
+      end
+
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        t.input :ecrit, label: 'Intitulé'
+      end
     end
     f.actions do
       f.action :submit
@@ -22,7 +29,9 @@ ActiveAdmin.register QuestionSousConsigne do
 
   index do
     column :libelle
-    column :intitule
+    column :intitule do |question|
+      question.transcription_ecrite_pour(:intitule)
+    end
     column :created_at
     actions
   end

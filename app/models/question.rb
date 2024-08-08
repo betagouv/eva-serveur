@@ -16,6 +16,14 @@ class Question < ApplicationRecord
     [categorie, libelle].compact.join(' : ')
   end
 
+  def transcription_ecrite_pour(categorie)
+    transcriptions.find_by(categorie: categorie)&.ecrit
+  end
+
+  def transcription_pour(categorie)
+    transcriptions.find_by(categorie: categorie)
+  end
+
   private
 
   def reject_transcriptions(attributes)

@@ -14,9 +14,11 @@ class QuestionQcm < Question
                                                  reject_if: :reject_transcriptions
 
   def as_json(_options = nil)
-    json = slice(:id, :intitule, :nom_technique, :metacompetence, :type_qcm, :description,
+    transcription = Transcription.find_by(categorie: :intitule, question_id: id)
+    json = slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
                  :choix)
     json['type'] = 'qcm'
+    json['intitule'] = transcription&.ecrit
     json
   end
 

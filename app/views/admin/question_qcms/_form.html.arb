@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource], html: { class: 'form-question' } do |f|
+active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     f.input :libelle
     f.input :categorie, as: :select
@@ -10,20 +10,47 @@ active_admin_form_for [:admin, resource], html: { class: 'form-question' } do |f
     f.input :description
   end
 
-  f.object.transcriptions.build if f.object.transcriptions.empty?
-
   f.inputs do
-    f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
-      t.input :id, as: :hidden
-      t.input :ecrit, label: t('.label.intitule')
-      t.input :audio, as: :file, label: 'Intitulé audio', input_html: { accept: 'audio/*' }
-    end
-    f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
-      t.input :id, as: :hidden
-      t.input :ecrit, label: t('.label.modalite_reponse')
-      t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
-                      input_html: { accept: 'audio/*' }
-      t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
+    if f.object.new_record?
+      f.object.transcriptions.build
+
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        t.input :id, as: :hidden
+        t.input :ecrit, label: t('.label.intitule')
+        t.input :audio, as: :file, label: t('.label.intitule_audio'),
+                        input_html: { accept: 'audio/*' }
+      end
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        t.input :id, as: :hidden
+        t.input :ecrit, label: t('.label.modalite_reponse')
+        t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
+                        input_html: { accept: 'audio/*' }
+        t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
+      end
+    else
+      if f.object.transcription_pour(:intitule).nil?
+        f.object.transcriptions.build(categorie: :intitule)
+      end
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        if t.object.intitule?
+          t.input :id, as: :hidden
+          t.input :ecrit, label: t('.label.intitule')
+          t.input :audio, as: :file, label: 'Intitulé audio', input_html: { accept: 'audio/*' }
+          t.input :categorie, as: :hidden, input_html: { value: :intitule }
+        end
+      end
+      if f.object.transcription_pour(:modalite_reponse).nil?
+        f.object.transcriptions.build(categorie: :modalite_reponse)
+      end
+      f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+        if t.object.modalite_reponse?
+          t.input :id, as: :hidden
+          t.input :ecrit, label: t('.label.modalite_reponse')
+          t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
+                          input_html: { accept: 'audio/*' }
+          t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
+        end
+      end
     end
     f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
       c.input :id, as: :hidden
@@ -34,7 +61,6 @@ active_admin_form_for [:admin, resource], html: { class: 'form-question' } do |f
       c.input :type_choix
     end
   end
-
   f.actions do
     f.action :submit
     annulation_formulaire(f)

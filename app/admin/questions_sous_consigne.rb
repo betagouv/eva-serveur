@@ -18,7 +18,7 @@ ActiveAdmin.register QuestionSousConsigne do
       end
 
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
-        t.input :ecrit, label: 'Intitulé'
+        t.input :ecrit, label: t('.label.intitule')
       end
     end
     f.actions do

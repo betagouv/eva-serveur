@@ -4,18 +4,39 @@ FactoryBot.define do
   factory :question do
     libelle { 'Question' }
     nom_technique { 'question' }
-    intitule { 'Ma Question' }
+
+    transient do
+      transcription_ecrit { 'Ma question ?' }
+    end
+
+    after(:create) do |question, evaluator|
+      create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
+    end
   end
 
   factory :question_qcm do
     libelle { 'Question QCM' }
     nom_technique { 'question-qcm' }
-    intitule { 'Quel est le bon choix ?' }
+
+    transient do
+      transcription_ecrit { 'Quel est le bon choix ?' }
+    end
+
+    after(:create) do |question, evaluator|
+      create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
+    end
   end
 
   factory :question_saisie do
     libelle { 'Question Redaction Note' }
     nom_technique { 'question-redaction-note' }
-    intitule { 'Ecrivez une note' }
+
+    transient do
+      transcription_ecrit { 'Ecrivez une note' }
+    end
+
+    after(:create) do |question, evaluator|
+      create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
+    end
   end
 end

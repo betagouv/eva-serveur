@@ -160,7 +160,7 @@ end
 genre = QuestionQcm.find_or_create_by(nom_technique: 'genre') do |question|
   question.libelle = 'Genre'
   question.categorie = 'situation'
-  question.intitule = 'Vous êtes ?'
+  Transcription.find_or_create_by(question_id: question.id, ecrit: 'Vous êtes ?')
   question.choix = [
     Choix.new(nom_technique: 'homme', intitule: 'Un homme', type_choix: 'bon'),
     Choix.new(nom_technique: 'femme', intitule: 'Une femme', type_choix: 'bon'),
@@ -171,7 +171,7 @@ end
 langue_maternelle = QuestionQcm.find_or_create_by(nom_technique: 'langue_maternelle') do |question|
   question.libelle = 'Langue maternelle'
   question.categorie = 'situation'
-  question.intitule = 'Le français est-il votre langue maternelle ?'
+  Transcription.find_or_create_by(question_id: question.id, ecrit: 'Le français est-il votre langue maternelle ?')
   question.choix = [
     Choix.new(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
     Choix.new(nom_technique: 'non', intitule: 'Non', type_choix: 'bon'),
@@ -181,7 +181,7 @@ end
 lieu_scolarite = QuestionQcm.find_or_create_by(nom_technique: 'lieu_scolarite') do |question|
   question.libelle = 'Lieu de scolarite'
   question.categorie = 'scolarite'
-  question.intitule = "Êtes-vous allé à l'école ?"
+  Transcription.find_or_create_by(question_id: question.id, ecrit: "Êtes-vous allé à l'école ?")
   question.choix = [
     Choix.new(nom_technique: 'france', intitule: 'Oui, en France', type_choix: 'bon'),
     Choix.new(nom_technique: 'etranger', intitule: 'Oui, dans un autre pays', type_choix: 'bon'),
@@ -192,7 +192,7 @@ end
 niveau_etude = QuestionQcm.find_or_create_by(nom_technique: 'dernier_niveau_etude') do |question|
   question.libelle = "Niveau d'étude"
   question.categorie = 'scolarite'
-  question.intitule = "Quel niveau d'études avez-vous atteint ?"
+  Transcription.find_or_create_by(question_id: question.id, ecrit: "Quel niveau d'études avez-vous atteint ?")
   question.choix = [
     Choix.new(nom_technique: 'pas_etudie', intitule: "Je ne suis pas allé à l'école", type_choix: 'bon'),
     Choix.new(nom_technique: 'college', intitule: 'Niveau Collège', type_choix: 'bon'),
@@ -207,7 +207,7 @@ end
 derniere_situation = QuestionQcm.find_or_create_by(nom_technique: 'derniere_situation') do |question|
   question.libelle = 'Dernière situation'
   question.categorie = 'situation'
-  question.intitule = 'Quelle était votre dernière situation ?'
+  Transcription.find_or_create_by(question_id: question.id, ecrit: 'Quelle était votre dernière situation ?')
   question.choix = [
     Choix.new(nom_technique: 'scolarisation', intitule: 'Scolarisation', type_choix: 'bon'),
     Choix.new(nom_technique: 'formation_professionnelle', intitule: 'Formation professionnelle', type_choix: 'bon'),
@@ -220,7 +220,7 @@ end
 age = QuestionSaisie.find_or_create_by(nom_technique: 'age') do |question|
   question.libelle = 'quel age ?'
   question.categorie = 'situation'
-  question.intitule = "Tout d'abord, merci de renseigner votre âge."
+  Transcription.find_or_create_by(question_id: question.id, ecrit: "Tout d'abord, merci de renseigner votre âge.")
   question.suffix_reponse = "ans"
   question.type_saisie = 'numerique'
 end
@@ -228,7 +228,7 @@ end
 difficultes_informatique = QuestionQcm.find_or_create_by(nom_technique: 'difficultes_informatique') do |question|
   question.libelle = "Difficultés avec l'informatique"
   question.categorie = 'appareils'
-  question.intitule = "Avez-vous des difficultés avec l'outil informatique (maux de tête, difficultés d'utilisation) ?"
+  Transcription.find_or_create_by(question_id: question.id, ecrit: "Avez-vous des difficultés avec l'outil informatique (maux de tête, difficultés d'utilisation) ?")
   question.choix = [
     Choix.new(nom_technique: 'oui', intitule: 'Oui', type_choix: 'bon'),
     Choix.new(nom_technique: 'non', intitule: 'Non', type_choix: 'bon')

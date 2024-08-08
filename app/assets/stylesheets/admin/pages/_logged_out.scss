@@ -13,7 +13,7 @@ body.logged_out {
     position: relative;
     &::before {
       content: '';
-      background: $eva_dark image-url('vagues-verticales.svg') no-repeat top center;
+      background: $eva_less_dark image-url('vagues-verticales.svg') no-repeat top center;
       height: 100%;
       display: block;
       position: absolute;

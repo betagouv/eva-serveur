@@ -13,7 +13,6 @@
 //= require clipboard
 //= require evaluation
 //= require cgu
-//=require form_question_script
 
 //= require chartkick
 //= require Chart.bundle

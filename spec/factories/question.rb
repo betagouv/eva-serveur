@@ -5,7 +5,6 @@ FactoryBot.define do
     libelle { 'Question' }
     nom_technique { 'question' }
     intitule { 'Ma Question' }
-    type { 'QuestionQcm' }
   end
 
   factory :question_qcm do

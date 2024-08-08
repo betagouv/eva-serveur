@@ -77,20 +77,6 @@
         }
       }
     }
-    #aide {
-      position: absolute;
-      top: 50%;
-      right: 1.25rem;
-      margin-top: -.52rem;
-      a {
-        padding-left: 2rem;
-        background: $eva_main_blue asset-data-url('icon_aide.svg') no-repeat 10px 8px;
-      }
-      a:hover,
-      &.current > a {
-        color: #fff;
-      }
-    }
   }
   .header-item {
     top: auto;

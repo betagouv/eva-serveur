@@ -7,11 +7,8 @@ class QuestionQcm < Question
                      order(position: :asc)
                    }, foreign_key: :question_id,
                       dependent: :destroy
-  has_many :transcriptions, foreign_key: :question_id, dependent: :destroy
 
   accepts_nested_attributes_for :choix, allow_destroy: true
-  accepts_nested_attributes_for :transcriptions, allow_destroy: true,
-                                                 reject_if: :reject_transcriptions
 
   def as_json(_options = nil)
     transcription = Transcription.find_by(categorie: :intitule, question_id: id)
@@ -20,11 +17,5 @@ class QuestionQcm < Question
     json['type'] = 'qcm'
     json['intitule'] = transcription&.ecrit
     json
-  end
-
-  private
-
-  def reject_transcriptions(attributes)
-    attributes['audio'].blank? && attributes['ecrit'].blank? && new_record?
   end
 end

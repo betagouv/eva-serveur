@@ -1,4 +1,4 @@
-.form-question, form.question_saisie, form.question_qcm, form.question_sous_consigne {
+form.question_saisie, form.question_qcm, form.question_sous_consigne {
   .transcriptions {
     padding: 0;
     .has_many_remove {
@@ -6,8 +6,7 @@
     }
   }
 }
-
-.show.admin_questions {
+.show.admin_question_qcms {
   tr.even, tr.odd {
     td  {
       background: transparent;

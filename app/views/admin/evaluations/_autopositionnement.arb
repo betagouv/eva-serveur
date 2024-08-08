@@ -3,7 +3,7 @@
 h2 t(".#{categorie}"), class: 'categorie'
 questions_reponses.each do |question, reponse|
   if question.categorie == categorie
-    div question.intitule
+    div question.transcription_ecrite_pour(:intitule)
     div reponse.intitule, class: 'reponse'
   end
 end

@@ -10,6 +10,8 @@ class Question < ApplicationRecord
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 
+  after_update :supprime_transcription
+
   acts_as_paranoid
 
   def display_name
@@ -27,6 +29,12 @@ class Question < ApplicationRecord
   private
 
   def reject_transcriptions(attributes)
-    attributes['audio'].blank? && attributes['ecrit'].blank? && new_record?
+    attributes['audio'].blank? && attributes['ecrit'].blank? if new_record?
+  end
+
+  def supprime_transcription
+    transcriptions.each do |t|
+      t.destroy if t.ecrit.blank? && !t.audio.attached?
+    end
   end
 end

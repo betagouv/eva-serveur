@@ -4,7 +4,8 @@ ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :message,
-                :suffix_reponse, :description, :reponse_placeholder
+                :suffix_reponse, :description, :reponse_placeholder,
+                transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle
 
@@ -21,7 +22,7 @@ ActiveAdmin.register QuestionSaisie do
       end
 
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
-        t.input :ecrit, label: 'Intitulé'
+        t.input :ecrit, label: t('.label.intitule')
       end
       f.input :suffix_reponse
       f.input :reponse_placeholder

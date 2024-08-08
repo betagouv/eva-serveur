@@ -7,7 +7,10 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
-    row :intitule
+    row :intitule do
+      intitule = question_saisie.transcription_ecrite_pour(:intitule)
+      div intitule if intitule
+    end
     row :suffix_reponse
     row :reponse_placeholder
     row :type_saisie

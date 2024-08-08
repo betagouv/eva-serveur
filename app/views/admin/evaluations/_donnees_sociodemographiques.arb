@@ -5,7 +5,7 @@ donnee_sociodemographique = resource.donnee_sociodemographique
 h2 t(".#{categorie}"), class: 'categorie'
 
 bienvenue.questionnaires_questions_pour(categorie).each do |config|
-  div config.question.intitule
+  div config.question.transcription_ecrite_pour(:intitule)
   reponse = donnee_sociodemographique&.read_attribute(config.question.nom_technique)
   if reponse.present?
     if config.question.respond_to? :choix

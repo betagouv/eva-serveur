@@ -7,9 +7,19 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
+    intitule = question_qcm.transcription_pour(:intitule)
     row :intitule do
-      intitule_transcription = question_qcm.transcriptions.find_by(categorie: :intitule)
-      div intitule_transcription.ecrit if intitule_transcription.ecrit
+      div intitule.ecrit if intitule&.ecrit
+    end
+    row :audio_intitule do
+      audio_tag(url_for(intitule.audio), controls: true) if intitule&.audio&.attached?
+    end
+    consigne = question_qcm.transcription_pour(:modalite_reponse)
+    row :consigne do
+      div consigne.ecrit if consigne&.ecrit
+    end
+    row :audio_consigne do
+      audio_tag(url_for(consigne.audio), controls: true) if consigne&.audio&.attached?
     end
     row :metacompetence
     row :type_qcm
@@ -20,28 +30,10 @@ end
 
 panel 'Choix' do
   reorderable_table_for question_qcm.choix do
-      column :intitule
-      column :type_choix
-      column :audio do |transcription|
-        if transcription.audio.attached?
-          audio_tag(url_for(transcription.audio), controls: true)
-        else
-          div "Pas d'audio"
-        end
-      end
-    end
-end
-
-panel 'Transcriptions audios' do
-  table_for question_qcm.transcriptions do
-    column :ecrit
-    column :categorie
+    column :intitule
+    column :type_choix
     column :audio do |transcription|
-      if transcription.audio.attached?
-        audio_tag(url_for(transcription.audio), controls: true)
-      else
-        div "Pas d'audio"
-      end
+      audio_tag(url_for(transcription.audio), controls: true) if transcription.audio.attached?
     end
   end
 end

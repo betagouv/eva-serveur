@@ -77,20 +77,6 @@
         }
       }
     }
-    #aide {
-      position: absolute;
-      top: 50%;
-      right: 1.25rem;
-      margin-top: -.52rem;
-      a {
-        padding-left: 2rem;
-        background: $eva_main_blue asset-data-url('icon_aide.svg') no-repeat 10px 8px;
-      }
-      a:hover,
-      &.current > a {
-        color: #fff;
-      }
-    }
   }
   .header-item {
     top: auto;
@@ -159,7 +145,7 @@
       &_email {
         margin-bottom: .75rem;
         a {
-          color: $eva_dark_blue_grey;
+          color: $couleur-texte-light;
           &:hover {
             color: $eva_main_blue;
           }
@@ -223,7 +209,7 @@
           height: 1.25rem;
           right: $padding-horizontale;
           bottom: $padding-verticale;
-          background: asset-data-url('roue-dentee-blanche.svg') no-repeat center;
+          background: asset-data-url('roue-dentee.svg') no-repeat center;
         }
       }
 

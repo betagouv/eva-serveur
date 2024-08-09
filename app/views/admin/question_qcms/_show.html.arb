@@ -23,7 +23,6 @@ panel 'Détails de la question' do
     end
     row :metacompetence
     row :type_qcm
-    row :modalite_reponse
     row :created_at
   end
 end

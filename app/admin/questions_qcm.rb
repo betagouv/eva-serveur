@@ -4,7 +4,7 @@ ActiveAdmin.register QuestionQcm do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :intitule, :description,
-                :metacompetence, :type_qcm,
+                :metacompetence, :type_qcm, :modalite_reponse,
                 choix_attributes: %i[id intitule type_choix _destroy nom_technique]
 
   filter :intitule
@@ -14,11 +14,12 @@ ActiveAdmin.register QuestionQcm do
     f.inputs do
       f.input :libelle
       f.input :categorie, as: :select
-      f.input :nom_technique
-      f.input :intitule
+      f.input :nom_technique, placeholder: t('admin.questions.form.nom_technique_placeholder')
+      f.input :intitule, label: t('admin.questions.form.intitule')
       f.input :metacompetence
       f.input :type_qcm
       f.input :description
+      f.input :modalite_reponse
       f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
         c.input :id, as: :hidden
         c.input :intitule

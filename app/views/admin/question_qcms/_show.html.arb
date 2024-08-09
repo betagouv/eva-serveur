@@ -12,14 +12,14 @@ panel 'Détails de la question' do
       div intitule.ecrit if intitule&.ecrit
     end
     row :audio_intitule do
-      audio_tag(url_for(intitule.audio), controls: true) if intitule&.audio&.attached?
+      tag_audio(intitule)
     end
     consigne = question_qcm.transcription_pour(:modalite_reponse)
     row :consigne do
       div consigne.ecrit if consigne&.ecrit
     end
     row :audio_consigne do
-      audio_tag(url_for(consigne.audio), controls: true) if consigne&.audio&.attached?
+      tag_audio(consigne)
     end
     row :metacompetence
     row :type_qcm
@@ -32,7 +32,7 @@ panel 'Choix' do
     column :intitule
     column :type_choix
     column :audio do |transcription|
-      audio_tag(url_for(transcription.audio), controls: true) if transcription.audio.attached?
+      tag_audio(transcription)
     end
   end
 end

@@ -39,7 +39,7 @@ module EvaServeur
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.exceptions_app = CustomExceptionsAppWrapper.new(exceptions_app: routes)
-
+    
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.orm :active_record, foreign_key_type: :uuid
@@ -53,6 +53,7 @@ module EvaServeur
     }
 
     config.active_job.queue_adapter = :sidekiq
+    config.active_storage.track_variants = false
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do

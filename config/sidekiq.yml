@@ -1,3 +1,8 @@
+:queues:
+  - active_storage_transform
+  - active_storage_analysis
+  - active_storage_purge
+
 :scheduler:
   :schedule:
     anonymisations_evaluations_job:

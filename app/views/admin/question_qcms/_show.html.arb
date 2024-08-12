@@ -7,6 +7,12 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
+    row :illustration do
+      if resource.illustration.attached?
+        link_to("Voir l'image du jeu", url_for(resource.illustration), target: '_blank',
+                                                                       rel: 'noopener')
+      end
+    end
     intitule = question_qcm.transcription_pour(:intitule)
     row :intitule do
       div intitule.ecrit if intitule&.ecrit

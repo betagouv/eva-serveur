@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
+  has_one_attached :illustration
+  validates :illustration,
+            blob: { content_type: ['image/png', 'image/jpeg', 'image/webp'] }
+
   validates :libelle, :nom_technique, presence: true
   has_many :transcriptions, dependent: :destroy
 

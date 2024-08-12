@@ -17,6 +17,7 @@ gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls', git: 'https://github.com/shanser/activeadmin-xls',
                        branch: 'autoload'
+gem 'activestorage-validator', '~> 0.4.0'
 gem 'acts_as_list'
 gem 'addressable'
 gem 'ancestry', '~> 4.3'

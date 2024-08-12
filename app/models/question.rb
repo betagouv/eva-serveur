@@ -7,8 +7,10 @@ class Question < ApplicationRecord
                        preprocessed: true
   end
 
+  ILLUSTRATION_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/webp'].freeze
+
   validates :illustration,
-            blob: { content_type: ['image/png', 'image/jpeg', 'image/webp'] }
+            blob: { content_type: ILLUSTRATION_CONTENT_TYPES }
 
   validates :libelle, :nom_technique, presence: true
   has_many :transcriptions, dependent: :destroy

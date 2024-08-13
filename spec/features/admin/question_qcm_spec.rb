@@ -61,6 +61,19 @@ describe 'Admin - Question QCM', type: :feature do
         expect(Question.first.transcription_ecrite_pour(:modalite_reponse)).to eq 'Consigne'
       end
     end
+
+    context 'quand une illustration est ajoutée' do
+      before do
+        fill_in :question_qcm_libelle, with: 'Question'
+        fill_in :question_qcm_nom_technique, with: 'question'
+        attach_file(:question_qcm_illustration, Rails.root.join('spec/support/programme_tele.png'))
+        click_on 'Créer'
+      end
+
+      it do
+        expect(Question.first.illustration.attached?).to eq true
+      end
+    end
   end
 
   describe 'modification' do

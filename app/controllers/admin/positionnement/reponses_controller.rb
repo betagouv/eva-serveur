@@ -7,7 +7,7 @@ module Admin
         partie_numeratie = find_partie(params[:partie_numeratie_id])
         partie_litteratie = find_partie(params[:partie_litteratie_id])
 
-        redirect_to root_path unless abilities?(partie_numeratie, partie_litteratie)
+        redirect_to root_path and return unless abilities?(partie_numeratie, partie_litteratie)
 
         export = ::Restitution::ExportPositionnement.new(partie_numeratie: partie_numeratie,
                                                          partie_litteratie: partie_litteratie)

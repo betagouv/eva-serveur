@@ -1,0 +1,14 @@
+fr:
+  admin:
+    question_saisies:
+      form:
+        ajout_reponse: Ajouter une réponse
+        label:
+          intitule: |
+              Intitulé de la question
+              (telle qu’elle sera écrite dans le jeu)
+          reponse: Bonne réponse
+          reponse_nom_technique: Nom technique de la réponse
+      show:
+        label:
+          reponse: Bonne réponse

@@ -9,7 +9,7 @@ panel 'Détails de la question' do
     row :description
     row :illustration do
       if resource.illustration.attached?
-        link_to("Voir l'image du jeu", url_for(resource.illustration), target: '_blank',
+        link_to("Voir l'image du jeu", cdn_for(resource.illustration), target: '_blank',
                                                                        rel: 'noopener')
       end
     end

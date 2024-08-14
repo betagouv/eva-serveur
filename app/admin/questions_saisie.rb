@@ -4,7 +4,7 @@ ActiveAdmin.register QuestionSaisie do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :message,
-                :suffix_reponse, :description, :reponse_placeholder,
+                :suffix_reponse, :description, :reponse_placeholder, :type_saisie,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 choix_attributes: %i[id intitule audio type_choix _destroy nom_technique]
 

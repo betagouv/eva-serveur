@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
-  has_one_attached :illustration do |attachable|
-    attachable.variant :thumb,
-                       resize_to_limit: [1008, 566],
-                       preprocessed: true
-  end
+  has_one_attached :illustration
 
   ILLUSTRATION_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/webp'].freeze
 

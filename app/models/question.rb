@@ -13,6 +13,7 @@ class Question < ApplicationRecord
             blob: { content_type: ILLUSTRATION_CONTENT_TYPES }
 
   validates :libelle, :nom_technique, presence: true
+  validates :nom_technique, uniqueness: true
   has_many :transcriptions, dependent: :destroy
 
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,

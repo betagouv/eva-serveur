@@ -9,6 +9,7 @@ ActiveAdmin.register QuestionSaisie do
                 choix_attributes: %i[id intitule audio type_choix _destroy nom_technique]
 
   filter :libelle
+  filter :nom_technique
 
   form partial: 'form'
 

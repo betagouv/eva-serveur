@@ -9,8 +9,9 @@ panel 'Détails de la question' do
     row :description
     row :illustration do
       if resource.illustration.attached?
-        link_to("Voir l'image du jeu", cdn_for(resource.illustration), target: '_blank',
-                                                                       rel: 'noopener')
+        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(resource.illustration), class: "qcm_miniature"
+        end
       end
     end
     intitule = question_qcm.transcription_pour(:intitule)

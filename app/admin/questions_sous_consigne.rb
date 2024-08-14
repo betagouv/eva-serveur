@@ -7,6 +7,7 @@ ActiveAdmin.register QuestionSousConsigne do
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle
+  filter :nom_technique
 
   form do |f|
     f.semantic_errors

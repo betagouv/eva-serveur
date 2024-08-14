@@ -9,6 +9,7 @@ ActiveAdmin.register QuestionQcm do
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle
+  filter :nom_technique
 
   form partial: 'form'
 

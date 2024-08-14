@@ -1,6 +1,6 @@
 fr:
   admin:
-    question_saisies:
+    questions_saisies:
       form:
         ajout_reponse: Ajouter une réponse
         label:

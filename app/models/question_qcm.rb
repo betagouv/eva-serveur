@@ -12,10 +12,12 @@ class QuestionQcm < Question
 
   def as_json(_options = nil)
     transcription = Transcription.find_by(categorie: :intitule, question_id: id)
+    illustration_url = ApplicationController.helpers.cdn_for(illustration) if illustration.attached?
     json = slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
-                 :choix)
+                 :choix, :illustration)
     json['type'] = 'qcm'
     json['intitule'] = transcription&.ecrit
+    json['illustration'] = illustration_url
     json
   end
 end

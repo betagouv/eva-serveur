@@ -18,7 +18,7 @@ describe 'Admin - Question Saisie', type: :feature do
         click_on 'Créer'
       end
 
-      fit do
+      it do
         expect(Question.first.type_saisie).to eq 'numerique'
       end
     end

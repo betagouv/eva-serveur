@@ -7,7 +7,10 @@ describe 'Admin - Question QCM', type: :feature do
 
   describe 'index' do
     let!(:question) do
-      create :question_qcm, transcription_ecrit: 'Comment ça va ?'
+      create :question_qcm
+    end
+    let!(:transcription) do
+      create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
     end
 
     before { visit admin_question_qcms_path }
@@ -78,7 +81,10 @@ describe 'Admin - Question QCM', type: :feature do
 
   describe 'modification' do
     let!(:question) do
-      create :question_qcm, transcription_ecrit: 'Comment ça va ?'
+      create :question_qcm
+    end
+    let!(:transcription) do
+      create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
     end
 
     before do

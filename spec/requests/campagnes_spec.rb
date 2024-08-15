@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Campagne API', type: :request do
   describe 'GET /campagnes/:code_campagne' do
-    let(:question) { create :question_qcm, transcription_ecrit: 'Ma question' }
+    let(:question) { create :question_saisie, transcription_ecrit: 'Ma question' }
     let(:questionnaire) { create :questionnaire, questions: [question] }
     let!(:campagne) do
       create :campagne, code: 'ETE21', libelle: 'Ma campagne ete 21'
@@ -27,7 +27,7 @@ describe 'Campagne API', type: :request do
 
     context 'quand la campagne a des situations' do
       let(:question_entrainement) do
-        create :question_qcm, transcription_ecrit: 'Ma question entrainement'
+        create :question_saisie, transcription_ecrit: 'Ma question entrainement'
       end
       let(:questionnaire_entrainement) do
         create :questionnaire,

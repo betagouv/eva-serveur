@@ -10,21 +10,14 @@ FactoryBot.define do
     end
 
     after(:create) do |question, evaluator|
-      create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
+      create(:transcription, question_id: question.id,
+                             ecrit: evaluator.transcription_ecrit)
     end
   end
 
   factory :question_qcm do
     libelle { 'Question QCM' }
     nom_technique { 'question-qcm' }
-
-    transient do
-      transcription_ecrit { 'Quel est le bon choix ?' }
-    end
-
-    after(:create) do |question, evaluator|
-      create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
-    end
   end
 
   factory :question_saisie do

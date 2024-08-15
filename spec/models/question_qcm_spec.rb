@@ -7,20 +7,25 @@ RSpec.describe QuestionQcm, type: :model do
 
   describe '#as_json' do
     it 'serialise les champs' do
-      question_qcm = create(:question_qcm, transcription_ecrit: 'Mon Intitulé',
-                                           illustration: Rack::Test::UploadedFile.new(
-                                             Rails.root.join('spec/support/programme_tele.png')
-                                           ))
+      question_qcm = create(:question_qcm,
+                            illustration: Rack::Test::UploadedFile.new(
+                              Rails.root.join('spec/support/programme_tele.png')
+                            ))
+      transcription = create(:transcription, :avec_audio, question_id: question_qcm.id,
+                                                          ecrit: 'Mon Intitulé')
 
       json = question_qcm.as_json
       expect(json.keys)
-        .to match_array(%w[choix description id intitule nom_technique type metacompetence
+        .to match_array(%w[choix description id intitule audio_url nom_technique type metacompetence
                            type_qcm illustration])
       expect(json['type']).to eql('qcm')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
                                             question_qcm.illustration
                                           ))
+      expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
+                                         transcription.audio
+                                       ))
     end
   end
 end

@@ -55,13 +55,6 @@ module EvaServeur
     config.active_job.queue_adapter = :sidekiq
     config.active_storage.track_variants = false
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :patch]
-      end
-    end
-
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     Rails.autoloaders.main.ignore(Rails.root.join('app/controllers/active_admin/**/*'))
     config.i18n.available_locales = [:fr]

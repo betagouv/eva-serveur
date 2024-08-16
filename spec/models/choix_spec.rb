@@ -19,4 +19,27 @@ RSpec.describe Choix, type: :model do
       expect(json.keys).to match_array(%w[id intitule type_choix nom_technique])
     end
   end
+
+  describe 'validations' do
+    let(:choix) do
+      Choix.new(intitule: 'intitule', type_choix: :bon, nom_technique: 'nom_technique')
+    end
+
+    it 'ne valide pas un audio de type wav' do
+      choix.audio.attach(io: Rails.root.join('spec/support/bravo.wav').open,
+                         filename: 'bravo.wav')
+      expect(choix.valid?).to be(false)
+      expect(choix.errors[:audio]).to include('doit être un fichier MP3 ou MP4')
+      choix.save
+      expect(choix.audio).to_not be_attached
+    end
+
+    it 'valide un audio de type mp3' do
+      choix.audio.attach(io: Rails.root.join('spec/support/alcoolique.mp3').open,
+                         filename: 'alcoolique.mp3')
+      expect(choix.valid?).to be(true)
+      choix.save
+      expect(choix.audio).to be_attached
+    end
+  end
 end

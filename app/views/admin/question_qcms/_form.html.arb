@@ -21,13 +21,13 @@ active_admin_form_for [:admin, resource] do |f|
         t.input :id, as: :hidden
         t.input :ecrit, label: t('.label.intitule')
         t.input :audio, as: :file, label: t('.label.intitule_audio'),
-                        input_html: { accept: 'audio/*' }
+                        input_html: { accept: 'audio/mpeg, audio/mp4' }
       end
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
         t.input :id, as: :hidden
         t.input :ecrit, label: t('.label.modalite_reponse')
         t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
-                        input_html: { accept: 'audio/*' }
+                        input_html: { accept: 'audio/mpeg, audio/mp4' }
         t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
       end
     else
@@ -38,7 +38,8 @@ active_admin_form_for [:admin, resource] do |f|
         if t.object.intitule?
           t.input :id, as: :hidden
           t.input :ecrit, label: t('.label.intitule')
-          t.input :audio, as: :file, label: 'Intitulé audio', input_html: { accept: 'audio/*' }
+          t.input :audio, as: :file, label: 'Intitulé audio',
+                          input_html: { accept: 'audio/mpeg, audio/mp4' }
           t.input :categorie, as: :hidden, input_html: { value: :intitule }
         end
       end
@@ -50,7 +51,7 @@ active_admin_form_for [:admin, resource] do |f|
           t.input :id, as: :hidden
           t.input :ecrit, label: t('.label.modalite_reponse')
           t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
-                          input_html: { accept: 'audio/*' }
+                          input_html: { accept: 'audio/mpeg, audio/mp4' }
           t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
         end
       end
@@ -59,7 +60,7 @@ active_admin_form_for [:admin, resource] do |f|
       c.input :id, as: :hidden
       c.input :intitule, label: t('.label.intitule_reponse')
       c.input :audio, as: :file, label: t('.label.intitule_reponse_audio'),
-                      input_html: { accept: 'audio/*' }
+                      input_html: { accept: 'audio/mpeg, audio/mp4' }
       c.input :nom_technique
       c.input :type_choix
     end

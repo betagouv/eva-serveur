@@ -18,5 +18,9 @@ FactoryBot.define do
       type_choix { :abstention }
       intitule { 'choix abstention' }
     end
+
+    trait :avec_audio do
+      audio { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/alcoolique.mp3')) }
+    end
   end
 end

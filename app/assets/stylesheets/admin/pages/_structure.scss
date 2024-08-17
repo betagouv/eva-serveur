@@ -57,7 +57,7 @@
 
     #bloc-membres {
       .panel-invitation {
-        background: $eva_dark;
+        background: $eva_main_light;
         margin-bottom: 1rem;
 
         .container-instructions {
@@ -65,13 +65,13 @@
         }
           &-message, &-lien {
             font-size: 0.875rem;
-            color: $eva_light;
+            color: $eva_dark;
           }
           &-message {
             width: 100%;
 
             p {
-              margin-bottom: 1rem;
+              margin: 0 1rem 1rem 0;
             }
           }
       }

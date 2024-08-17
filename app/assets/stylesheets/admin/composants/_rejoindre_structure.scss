@@ -16,6 +16,6 @@
   }
 
   a {
-    @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+    @include bouton;
   }
 }

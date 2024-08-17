@@ -4,7 +4,7 @@ $panels-gap: 1rem;
 
 body.logged_out {
   font-size: .875rem;
-  background-color: $eva_light;
+  background-color: #fff;
 
   #wrapper {
     flex-direction: column;
@@ -137,7 +137,7 @@ body.logged_out {
       }
       .panel--connexion {
         .panel-header {
-          background-color: $eva_dark;
+          background-color: $eva_less_dark;
         }
       }
       .panel-description {
@@ -189,13 +189,15 @@ body.logged_out {
         margin-top: 1rem;
 
         .action-principale {
-          @include bouton-carte($eva_dark);
+          @include bouton-arrondi;
+          display: inline-flex;
+          border-color: $eva_less_dark;
+          background-color: $eva_less_dark;
           height: 2rem;
           border-radius: 2.875rem;
           align-items: center;
           font-size: 0.875rem;
           padding: 0 0.94rem;
-          color: #fff;
         }
       }
     }
@@ -215,9 +217,11 @@ body.logged_out {
 
       .bouton-action {
         .actions {
-          @include bouton-carte($eva_dark);
+          @include bouton-arrondi;
+          display: inline-flex;
+          border-color: $eva_less_dark;
+          background-color: $eva_less_dark;
           height: 3.625rem;
-          border-radius: 2.875rem;
           align-items: center;
           font-size: 1rem;
           padding: 0 1rem;

@@ -17,7 +17,6 @@ form input[type="submit"]:not(.disabled),
 form button:not(.disabled),
 .has_many_container a.button:not(.disabled) {
   &:hover {
-    background-color: #fff;
     background-image: none;
   }
 }
@@ -31,12 +30,15 @@ form fieldset.actions li.cancel a,
   font-size: .7rem;
   margin-right: 0;
   border-color: $eva_main_blue;
-  background-color: #fff;
+  background-color: $grey-1000;
+  &:not(.disabled):hover {
+    background-color: $grey-1000-hover;
+  }
 }
 form.filter_form a.clear_filters_btn:not(.disabled),
 form fieldset.actions li.cancel a:not(.disabled) {
   &:hover {
-    background: none;
+    background-image: none;
   }
 }
 
@@ -95,6 +97,7 @@ button.bouton, .bouton {
     &, &:link, :visited {
       color: $eva_dark_blue_grey;
     }
-    background-color: $eva_bluegrey;
+    background-color: $grey-925;
+    border-color: $grey-925;
   }
 }

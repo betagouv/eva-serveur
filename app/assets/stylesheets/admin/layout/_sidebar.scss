@@ -23,7 +23,7 @@
     flex-wrap: wrap;
 
     a {
-      @include bouton-carte($eva_main_blue);
+      @include bouton;
     }
   }
 }

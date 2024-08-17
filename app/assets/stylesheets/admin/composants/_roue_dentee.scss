@@ -1,28 +1,6 @@
-@mixin roue-dentee() {
-  background-image: image-url('roue-dentee.svg');
-  background-position: right center;
-  background-repeat: no-repeat;
-  min-height: 1.25rem;
-
+.roue-dentee {
   display: flex;
   justify-content: flex-end;
-
-  .roue-dentee__actions, .table_actions {
-    opacity: 0;
-    transition: opacity 0.2s;
-    position: absolute;
-  }
-
-  &:hover {
-    background-image: none;
-
-    .roue-dentee__actions, .table_actions {
-      opacity: 1;
-    }
-  }
-}
-
-.roue-dentee {
   @include roue-dentee();
 
   .roue-dentee__actions a {

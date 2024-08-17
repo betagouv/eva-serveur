@@ -185,8 +185,9 @@ form {
   }
 
   input[type=submit]:disabled {
-    background-color: $eva_bluegrey;
-    border-color: $eva_bluegrey;
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
   }
 }
 

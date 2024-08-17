@@ -65,17 +65,15 @@ table.index_table {
           color: $eva_main_blue;
         }
         &.col-actions {
+          @include roue-dentee();
           width: 40px;
-          position: relative;
-          background: image-url('roue-dentee.svg') right 1rem center no-repeat;
           background-color: #FFF;
+          background-position-x: right 0.75rem;
+          position: relative;
 
           .table_actions {
-            opacity: 0;
-            transition: opacity 0.2s;
             display: flex;
             justify-content: flex-end;
-            position: absolute;
             right: 1rem;
             top: 50%;
             transform: translateY(-50%);
@@ -85,42 +83,8 @@ table.index_table {
             padding: 0 0 0 1rem;
 
             a {
-              height: 1.5rem;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: 0.25rem 0.5rem;
-              color: $eva_light;
-              margin: 0;
-              text-decoration: none;
-              background-color: $couleur-texte;
-              min-width: 3rem;
-              box-sizing: border-box;
-              font-size: .75rem;
-
-              &.view_link {
-                background-color: $couleur-legere-accent-validation;
-                color: $eva_dark;
-              }
-              &.edit_link {
-                background-color: $eva_main_blue;
-              }
-              &.delete_link {
-                background-color: $couleur-accent-erreur;
-              }
-              &:first-child {
-                border-top-left-radius: 0.25rem;
-                border-bottom-left-radius: 0.25rem;
-              }
-              &:last-child {
-                border-top-right-radius: 0.25rem;
-                border-bottom-right-radius: 0.25rem;
-              }
+              @include boutons-groupes;
             }
-          }
-
-          .actions_visibles {
-            opacity:1;
           }
         }
         &.col-illustration {

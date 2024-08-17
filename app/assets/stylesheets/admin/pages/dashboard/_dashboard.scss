@@ -90,7 +90,7 @@
           }
         }
         .bouton-jouer {
-          @include bouton-carte($eva_main_blue);
+          @include bouton;
         }
       }
     }

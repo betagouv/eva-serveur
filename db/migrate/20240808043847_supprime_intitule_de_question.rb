@@ -1,4 +1,6 @@
 class SupprimeIntituleDeQuestion < ActiveRecord::Migration[7.0]
+  class ::Question < ApplicationRecord; end
+
   def up
     remove_column :questions, :intitule, :string
   end

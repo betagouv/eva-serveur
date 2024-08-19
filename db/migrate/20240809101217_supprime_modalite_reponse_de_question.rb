@@ -1,4 +1,6 @@
 class SupprimeModaliteReponseDeQuestion < ActiveRecord::Migration[7.0]
+  class ::Question < ApplicationRecord; end
+
   def up
     remove_column :questions, :modalite_reponse, :string
   end

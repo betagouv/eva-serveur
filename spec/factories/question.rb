@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :question do
     libelle { 'Question' }
-    nom_technique { 'question' }
+    sequence(:nom_technique) { |n| "question-#{n}" }
 
     transient do
       transcription_ecrit { 'Ma question ?' }
@@ -17,12 +17,12 @@ FactoryBot.define do
 
   factory :question_qcm do
     libelle { 'Question QCM' }
-    nom_technique { 'question-qcm' }
+    sequence(:nom_technique) { |n| "question-qcm-#{n}" }
   end
 
   factory :question_saisie do
     libelle { 'Question Redaction Note' }
-    nom_technique { 'question-redaction-note' }
+    sequence(:nom_technique) { |n| "question-saisie-#{n}" }
 
     transient do
       transcription_ecrit { 'Ecrivez une note' }

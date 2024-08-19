@@ -22,10 +22,12 @@ Par exemple, à la phrase « j'adore les séries télévisées », sélectionn
   def down
     change_column :questions, :intitule, :string
     question = QuestionSousConsigne.find_by(nom_technique: "sous_consigne_autopositionnement")
-    QuestionnaireQuestion.find_by(question_id: question.id).really_destroy!
-    question.really_destroy!
-    question = QuestionSousConsigne.find_by(nom_technique: "sous_consigne_sante")
-    QuestionnaireQuestion.find_by(question_id: question.id).really_destroy!
-    question.really_destroy!
+    if question.present?
+      QuestionnaireQuestion.find_by(question_id: question.id).really_destroy!
+      question.really_destroy!
+      question = QuestionSousConsigne.find_by(nom_technique: "sous_consigne_sante")
+      QuestionnaireQuestion.find_by(question_id: question.id).really_destroy!
+      question.really_destroy!
+    end
   end
 end

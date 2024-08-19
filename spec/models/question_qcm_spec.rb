@@ -13,12 +13,13 @@ RSpec.describe QuestionQcm, type: :model do
                             ))
       transcription = create(:transcription, :avec_audio, question_id: question_qcm.id,
                                                           ecrit: 'Mon Intitulé')
+      modalite = create(:transcription, question_id: question_qcm.id, categorie: :modalite_reponse)
       choix = create(:choix, :bon, :avec_audio, question_id: question_qcm.id)
 
       json = question_qcm.as_json
       expect(json.keys)
         .to match_array(%w[choix description id intitule audio_url nom_technique type metacompetence
-                           type_qcm illustration])
+                           type_qcm illustration modalite_reponse])
       expect(json['type']).to eql('qcm')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
@@ -30,6 +31,7 @@ RSpec.describe QuestionQcm, type: :model do
       expect(json['choix'][0]['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                                      choix.audio
                                                    ))
+      expect(json['modalite_reponse']).to eql(modalite.ecrit)
     end
   end
 end

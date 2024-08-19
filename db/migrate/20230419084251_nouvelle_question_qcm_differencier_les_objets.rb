@@ -1,5 +1,6 @@
 class NouvelleQuestionQcmDifferencierLesObjets < ActiveRecord::Migration[7.0]
-  class ::Questionnaire < ApplicationRecord; end
+  class ::Choix < ApplicationRecord; end
+  class ::QuestionnaireQuestion < ApplicationRecord; end
   class ::Question < ApplicationRecord; end
   class ::QuestionQcm < Question; end
 

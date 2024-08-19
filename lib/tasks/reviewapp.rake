@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rake_logger'
+
 COMPTES = {
   'superadmin@beta.gouv.fr' => { prenom: 'super', nom: 'admin', role: 'superadmin' },
   'admin@beta.gouv.fr' => { prenom: 'admin', nom: 'admin', role: 'admin' },
@@ -45,6 +47,18 @@ namespace :reviewapp do
     cree_campagne('SOCIO',
                   'sociodémographie',
                   'sociodemographique')
+  end
+
+  desc 'Ignore migrations'
+  task ignore_migrations: :environment do |_t, args|
+    logger = RakeLogger.logger
+    ActiveRecord::Base.transaction do
+      args.extras.each do |migration|
+        logger.info("ignore la migration #{migration}")
+        ActiveRecord::Base.connection
+                          .execute("INSERT INTO public.schema_migrations VALUES ('#{migration}');")
+      end
+    end
   end
 
   desc 'init db'

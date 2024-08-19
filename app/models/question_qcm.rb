@@ -11,19 +11,21 @@ class QuestionQcm < Question
   accepts_nested_attributes_for :choix, allow_destroy: true
 
   def as_json(_options = nil)
-    transcription = Transcription.find_by(categorie: :intitule, question_id: id)
+    intitule = Transcription.find_by(categorie: :intitule, question_id: id)
+    modalite = Transcription.find_by(categorie: :modalite_reponse, question_id: id)
     illustration_url = cdn_for(illustration) if illustration.attached?
-    audio_url = cdn_for(transcription.audio) if transcription&.audio&.attached?
-    json_object(transcription&.ecrit, illustration_url, audio_url)
+    audio_url = cdn_for(intitule.audio) if intitule&.audio&.attached?
+    json_object(intitule&.ecrit, illustration_url, audio_url, modalite&.ecrit)
   end
 
   private
 
-  def json_object(intitule, illustration, audio)
+  def json_object(intitule, illustration, audio, modalite)
     json = slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
                  :illustration)
     json['type'] = 'qcm'
     json['intitule'] = intitule
+    json['modalite_reponse'] = modalite
     json['illustration'] = illustration
     json['audio_url'] = audio
     json['choix'] = question_choix

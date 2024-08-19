@@ -1,5 +1,5 @@
 class AjouteQuestionsConsigneAuQuestionnaireBienvenue < ActiveRecord::Migration[7.0]
-  class Questionnaire < ApplicationRecord; end
+  class ::Questionnaire < ApplicationRecord; end
   class ::Question < ApplicationRecord; end
   class ::QuestionSousConsigne < Question; end
 
@@ -12,11 +12,13 @@ class AjouteQuestionsConsigneAuQuestionnaireBienvenue < ActiveRecord::Migration[
 
 Vous devez répondre en utilisant une échelle allant de 1 « pas du tout », à 7 « tout à fait ».  
 Par exemple, à la phrase « j'adore les séries télévisées », sélectionnez le chiffre 7 si vous adorez les séries télévisées.})
-    QuestionnaireQuestion.find_or_create_by(questionnaire_id: questionnaire.id, question_id: question_auto.id, position: 7)
-    question_sante = QuestionSousConsigne.find_or_create_by(libelle: 'Sous consigne - Santé',
-      nom_technique: 'sous_consigne_sante',
-      intitule: "Maintenant, merci de répondre à ces quelques questions, qui nous permettront de mieux interpréter vos résultats sur eva.")
-    QuestionnaireQuestion.find_or_create_by(questionnaire_id: questionnaire.id, question_id: question_sante.id, position: 15)
+    if questionnaire.present? && question_auto.present?
+      QuestionnaireQuestion.find_or_create_by(questionnaire_id: questionnaire.id, question_id: question_auto.id, position: 7)
+      question_sante = QuestionSousConsigne.find_or_create_by(libelle: 'Sous consigne - Santé',
+        nom_technique: 'sous_consigne_sante',
+        intitule: "Maintenant, merci de répondre à ces quelques questions, qui nous permettront de mieux interpréter vos résultats sur eva.")
+      QuestionnaireQuestion.find_or_create_by(questionnaire_id: questionnaire.id, question_id: question_sante.id, position: 15)
+    end
   end
 
   def down

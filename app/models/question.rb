@@ -34,6 +34,10 @@ class Question < ApplicationRecord
     transcriptions.find_by(categorie: categorie)
   end
 
+  def restitue_reponse(reponse)
+    reponse
+  end
+
   private
 
   def reject_transcriptions(attributes)

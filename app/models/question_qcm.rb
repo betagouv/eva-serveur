@@ -10,6 +10,10 @@ class QuestionQcm < Question
 
   accepts_nested_attributes_for :choix, allow_destroy: true
 
+  def restitue_reponse(reponse)
+    choix.find { |c| c.nom_technique == reponse }.intitule
+  end
+
   def as_json(_options = nil)
     intitule = Transcription.find_by(categorie: :intitule, question_id: id)
     modalite = Transcription.find_by(categorie: :modalite_reponse, question_id: id)

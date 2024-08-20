@@ -5,6 +5,10 @@ class Question < ApplicationRecord
 
   ILLUSTRATION_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/webp'].freeze
 
+  attr_accessor :supprimer_illustration
+
+  before_save :purge_illustration_if_requested
+
   validates :illustration,
             blob: { content_type: ILLUSTRATION_CONTENT_TYPES }
 
@@ -48,5 +52,9 @@ class Question < ApplicationRecord
     transcriptions.each do |t|
       t.destroy if t.ecrit.blank? && !t.audio.attached?
     end
+  end
+
+  def purge_illustration_if_requested
+    illustration.purge if supprimer_illustration == '1'
   end
 end

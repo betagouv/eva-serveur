@@ -4,7 +4,7 @@ ActiveAdmin.register QuestionQcm do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :description,
-                :metacompetence, :type_qcm, :illustration,
+                :metacompetence, :type_qcm, :illustration, :supprimer_illustration,
                 choix_attributes: %i[id intitule audio type_choix _destroy nom_technique],
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 

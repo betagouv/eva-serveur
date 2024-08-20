@@ -81,7 +81,8 @@ describe 'Admin - Question QCM', type: :feature do
 
   describe 'modification' do
     let!(:question) do
-      create :question_qcm
+      create :question_qcm,
+             illustration: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))
     end
     let!(:transcription) do
       create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
@@ -89,13 +90,31 @@ describe 'Admin - Question QCM', type: :feature do
 
     before do
       visit edit_admin_question_qcm_path(question)
-      fill_in :question_qcm_transcriptions_attributes_0_ecrit, with: nil
     end
 
-    it "supprime la transcription si l'admin supprime la valeur et qu'il n'y a pas d'audio" do
-      expect(Question.first.transcriptions).to_not be_empty
-      click_on 'Enregistrer'
-      expect(Question.first.transcriptions).to be_empty
+    context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do
+      before do
+        fill_in :question_qcm_transcriptions_attributes_0_ecrit, with: nil
+      end
+
+      it 'supprime la transcription' do
+        expect(Question.first.transcriptions).to_not be_empty
+        click_on 'Enregistrer'
+        expect(Question.first.transcriptions).to be_empty
+      end
+    end
+
+    context "quand l'admin coche supprimer l'illustration" do
+      before do
+        check 'question_qcm_supprimer_illustration'
+      end
+
+      it "supprime l'illustration" do
+        expect(question.illustration.attached?).to eq true
+        click_on 'Enregistrer'
+        question.reload
+        expect(question.illustration.attached?).to eq false
+      end
     end
   end
 end

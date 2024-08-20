@@ -9,13 +9,13 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :type_qcm
     f.input :description
     f.input :illustration, as: :file,
-                        input_html: { accept: Question::ILLUSTRATION_CONTENT_TYPES.join(',') },
-                        hint: t('.illustration.hint')
+                           input_html: { accept: Question::ILLUSTRATION_CONTENT_TYPES.join(',') },
+                           hint: t('.illustration.hint')
 
     if f.object.illustration.attached?
       f.input :supprimer_illustration, as: :boolean,
-                                    label: t('.label.supprimer_illustration'),
-                                    hint: image_tag(f.object.illustration)
+                                       label: t('.label.supprimer_illustration'),
+                                       hint: image_tag(f.object.illustration)
     end
   end
 
@@ -49,6 +49,11 @@ active_admin_form_for [:admin, resource] do |f|
           t.input :categorie, as: :hidden, input_html: { value: :intitule }
         end
       end
+      if f.object.transcription_pour(:intitule).audio.attached?
+        f.input :supprimer_audio_intitule, as: :boolean,
+                                           label: t('.label.supprimer_audio_intitule'),
+                                           hint: tag_audio(f.object.transcription_pour(:intitule))
+      end
       if f.object.transcription_pour(:modalite_reponse).nil?
         f.object.transcriptions.build(categorie: :modalite_reponse)
       end
@@ -60,6 +65,12 @@ active_admin_form_for [:admin, resource] do |f|
                           input_html: { accept: 'audio/mpeg, audio/mp4' }
           t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
         end
+      end
+      if f.object.transcription_pour(:modalite_reponse).audio.attached?
+        f.input :supprimer_audio_modalite_reponse,
+                as: :boolean,
+                label: t('.label.supprimer_audio_modalite_reponse'),
+                hint: tag_audio(f.object.transcription_pour(:modalite_reponse))
       end
     end
     f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|

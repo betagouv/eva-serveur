@@ -82,30 +82,35 @@ describe 'Admin - Question QCM', type: :feature do
   describe 'modification' do
     let!(:question) do
       create :question_qcm,
-             illustration: Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))
+             illustration: Rack::Test::UploadedFile.new(
+               Rails.root.join('spec/support/programme_tele.png')
+             )
     end
     let!(:transcription) do
       create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
     end
 
-    before do
-      visit edit_admin_question_qcm_path(question)
+    let!(:modalite_reponse) do
+      create :transcription, :avec_audio, question_id: question.id, ecrit: 'Comment ça va ?',
+                                          categorie: :modalite_reponse
     end
 
     context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do
       before do
+        visit edit_admin_question_qcm_path(question)
         fill_in :question_qcm_transcriptions_attributes_0_ecrit, with: nil
       end
 
       it 'supprime la transcription' do
-        expect(Question.first.transcriptions).to_not be_empty
+        expect(Question.first.transcriptions.count).to eq 2
         click_on 'Enregistrer'
-        expect(Question.first.transcriptions).to be_empty
+        expect(Question.first.transcriptions.count).to eq 1
       end
     end
 
     context "quand l'admin coche supprimer l'illustration" do
       before do
+        visit edit_admin_question_qcm_path(question)
         check 'question_qcm_supprimer_illustration'
       end
 
@@ -114,6 +119,50 @@ describe 'Admin - Question QCM', type: :feature do
         click_on 'Enregistrer'
         question.reload
         expect(question.illustration.attached?).to eq false
+      end
+    end
+
+    context "quand l'admin coche supprimer l'audio de l'intitulé" do
+      before do
+        Question.first.transcriptions.find_by(categorie: :intitule)
+                .update(audio: Rack::Test::UploadedFile.new(
+                  Rails.root.join('spec/support/alcoolique.mp3')
+                ))
+        visit edit_admin_question_qcm_path(question)
+        check 'question_qcm_supprimer_audio_intitule'
+      end
+
+      it "supprime l'audio" do
+        expect(
+          Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
+        ).to eq true
+        click_on 'Enregistrer'
+        question.reload
+        expect(
+          Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
+        ).to eq false
+      end
+    end
+
+    context "quand l'admin coche supprimer l'audio de la consigne" do
+      before do
+        Question.first.transcriptions.find_by(categorie: :modalite_reponse)
+                .update(audio: Rack::Test::UploadedFile.new(
+                  Rails.root.join('spec/support/alcoolique.mp3')
+                ))
+        visit edit_admin_question_qcm_path(question)
+        check 'question_qcm_supprimer_audio_modalite_reponse'
+      end
+
+      it "supprime l'audio" do
+        expect(
+          Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
+        ).to eq true
+        click_on 'Enregistrer'
+        question.reload
+        expect(
+          Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
+        ).to eq false
       end
     end
   end

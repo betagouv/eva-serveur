@@ -9,8 +9,14 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :type_qcm
     f.input :description
     f.input :illustration, as: :file,
-                           input_html: { accept: Question::ILLUSTRATION_CONTENT_TYPES.join(',') },
-                           hint: 'La taille de l’image rendue est de 1008x566.'
+                        input_html: { accept: Question::ILLUSTRATION_CONTENT_TYPES.join(',') },
+                        hint: t('.illustration.hint')
+
+    if f.object.illustration.attached?
+      f.input :supprimer_illustration, as: :boolean,
+                                    label: t('.label.supprimer_illustration'),
+                                    hint: image_tag(f.object.illustration)
+    end
   end
 
   f.inputs do

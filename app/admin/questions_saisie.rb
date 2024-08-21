@@ -6,6 +6,8 @@ ActiveAdmin.register QuestionSaisie do
   permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :reponse_placeholder, :type_saisie,
                 :illustration, :supprimer_illustration,
+                :supprimer_audio_intitule,
+                :supprimer_audio_modalite_reponse,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 choix_attributes: %i[id intitule audio type_choix _destroy nom_technique]
 

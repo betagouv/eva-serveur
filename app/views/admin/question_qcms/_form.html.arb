@@ -43,7 +43,7 @@ active_admin_form_for [:admin, resource] do |f|
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
         if t.object.intitule?
           t.input :id, as: :hidden
-          t.input :ecrit, label: t('.label.intitule')
+          t.input :ecrit, label: t('.label.intitule'), input_html: { rows: 4 }
           t.input :audio, as: :file, label: 'Intitulé audio',
                           input_html: { accept: 'audio/mpeg, audio/mp4' }
           t.input :categorie, as: :hidden, input_html: { value: :intitule }
@@ -60,7 +60,7 @@ active_admin_form_for [:admin, resource] do |f|
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
         if t.object.modalite_reponse?
           t.input :id, as: :hidden
-          t.input :ecrit, label: t('.label.modalite_reponse')
+          t.input :ecrit, label: t('.label.modalite_reponse'), input_html: { rows: 4 }
           t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
                           input_html: { accept: 'audio/mpeg, audio/mp4' }
           t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
@@ -69,7 +69,7 @@ active_admin_form_for [:admin, resource] do |f|
       if f.object.transcription_pour(:modalite_reponse).audio.attached?
         f.input :supprimer_audio_modalite_reponse,
                 as: :boolean,
-                label: t('.label.supprimer_audio_modalite_reponse'),
+                label: t('.label.supprimer_audio_modalite'),
                 hint: tag_audio(f.object.transcription_pour(:modalite_reponse))
       end
     end

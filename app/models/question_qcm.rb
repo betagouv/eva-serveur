@@ -18,22 +18,36 @@ class QuestionQcm < Question
     intitule = Transcription.find_by(categorie: :intitule, question_id: id)
     modalite = Transcription.find_by(categorie: :modalite_reponse, question_id: id)
     illustration_url = cdn_for(illustration) if illustration.attached?
-    audio_url = cdn_for(intitule.audio) if intitule&.audio&.attached?
-    json_object(intitule&.ecrit, illustration_url, audio_url, modalite&.ecrit)
+    json_object(intitule, modalite, illustration_url)
   end
 
   private
 
-  def json_object(intitule, illustration, audio, modalite)
-    json = slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
-                 :illustration)
-    json['type'] = 'qcm'
-    json['intitule'] = intitule
-    json['modalite_reponse'] = modalite
-    json['illustration'] = illustration
-    json['audio_url'] = audio
-    json['choix'] = question_choix
-    json
+  def json_object(intitule, modalite, illustration)
+    json = base_json_object(illustration)
+    json.merge!(additional_json_fields(intitule, modalite))
+  end
+
+  def base_json_object(illustration)
+    slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
+          :illustration).tap do |json|
+      json['type'] = 'qcm'
+      json['illustration'] = illustration
+    end
+  end
+
+  def additional_json_fields(intitule, modalite)
+    fields = {
+      'intitule' => intitule&.ecrit,
+      'modalite_reponse' => modalite&.ecrit,
+      'audio_url' => question_audio_principal(intitule, modalite),
+      'choix' => question_choix
+    }
+    if question_audio_secondaire(intitule)
+      fields['intitule_audio'] = question_audio_secondaire(intitule)
+    end
+
+    fields
   end
 
   def question_choix
@@ -47,5 +61,19 @@ class QuestionQcm < Question
 
   def cdn_for(attachment)
     ApplicationController.helpers.cdn_for(attachment)
+  end
+
+  def question_audio_principal(intitule, modalite)
+    if intitule&.ecrit.present? && intitule.audio.attached?
+      cdn_for(intitule.audio)
+    elsif modalite&.ecrit.present? && modalite.audio.attached?
+      cdn_for(modalite.audio)
+    end
+  end
+
+  def question_audio_secondaire(intitule)
+    return unless intitule&.ecrit.blank? && intitule.audio.attached?
+
+    cdn_for(intitule.audio)
   end
 end

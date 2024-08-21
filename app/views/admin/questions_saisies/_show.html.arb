@@ -14,9 +14,19 @@ panel 'Détails de la question' do
         end
       end
     end
+    intitule = question_saisie.transcription_pour(:intitule)
     row :intitule do
-      intitule = question_saisie.transcription_ecrite_pour(:intitule)
-      div intitule if intitule
+      div intitule.ecrit if intitule&.ecrit
+    end
+    row :audio_intitule do
+      tag_audio(intitule)
+    end
+    consigne = question_saisie.transcription_pour(:modalite_reponse)
+    row :consigne do
+      div consigne.ecrit if consigne&.ecrit
+    end
+    row :audio_consigne do
+      tag_audio(consigne)
     end
     row :suffix_reponse
     row :reponse_placeholder

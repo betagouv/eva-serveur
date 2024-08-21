@@ -13,4 +13,13 @@ class Transcription < ApplicationRecord
     errors.add(:audio, 'doit être un fichier MP3 ou MP4')
     audio.purge
   end
+
+  def supprime_audio_intitule?(suppression_valeur)
+    intitule? && audio.attached? && suppression_valeur == '1'
+  end
+
+  def supprime_audio_consigne?(suppression_valeur)
+    modalite_reponse? && audio.attached? &&
+      suppression_valeur == '1'
+  end
 end

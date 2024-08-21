@@ -36,7 +36,6 @@ ActiveAdmin.register QuestionQcm do
   controller do
     def update
       if @question.update(question_params)
-        @question.supprime_attachment_sur_requete
         redirect_to admin_question_qcm_path
       else
         render :edit, status: :unprocessable_entity

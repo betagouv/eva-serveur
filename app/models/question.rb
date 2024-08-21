@@ -21,7 +21,7 @@ class Question < ApplicationRecord
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 
-  after_update :supprime_transcription, :supprime_attachment_sur_requete
+  after_update :supprime_transcription, :supprime_attachment
 
   acts_as_paranoid
 
@@ -41,11 +41,11 @@ class Question < ApplicationRecord
     reponse
   end
 
-  def supprime_attachment_sur_requete
-    illustration.purge if supprime_illustration?(illustration)
+  def supprime_attachment
+    illustration.purge if supprime_illustration?
     transcriptions.find_each do |t|
-      t.audio.purge if supprime_audio_intitule?(t)
-      t.audio.purge if supprime_audio_consigne?(t)
+      t.audio.purge if t.supprime_audio_intitule?(supprimer_audio_intitule)
+      t.audio.purge if t.supprime_audio_consigne?(supprimer_audio_modalite_reponse)
     end
   end
 
@@ -61,16 +61,7 @@ class Question < ApplicationRecord
     end
   end
 
-  def supprime_audio_intitule?(transcription)
-    transcription.intitule? && transcription.audio.attached? && supprimer_audio_intitule == '1'
-  end
-
-  def supprime_audio_consigne?(transcription)
-    transcription.modalite_reponse? && transcription.audio.attached? &&
-      supprimer_audio_modalite_reponse == '1'
-  end
-
-  def supprime_illustration?(illustration)
+  def supprime_illustration?
     illustration.attached? && supprimer_illustration == '1'
   end
 end

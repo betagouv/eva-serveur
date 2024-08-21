@@ -5,6 +5,9 @@ form.question_saisie, form.question_qcm, form.question_sous_consigne {
       display: none;
     }
   }
+  .inline-hints img {
+    width: 300px;
+  }
 }
 form.question_saisie .choix {
   .has_one ~ .has_many_add {

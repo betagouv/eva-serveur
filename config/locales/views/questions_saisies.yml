@@ -3,6 +3,8 @@ fr:
     questions_saisies:
       form:
         ajout_reponse: Ajouter une réponse
+        illustration:
+          hint: 'La taille de l’image rendue est de 1008x566.'
         label:
           intitule: |
               Intitulé de la question

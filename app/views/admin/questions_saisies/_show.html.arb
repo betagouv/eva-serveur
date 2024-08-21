@@ -7,6 +7,13 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
+    row :illustration do
+      if resource.illustration.attached?
+        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(resource.illustration), class: 'qcm_miniature'
+        end
+      end
+    end
     row :intitule do
       intitule = question_saisie.transcription_ecrite_pour(:intitule)
       div intitule if intitule

@@ -5,6 +5,8 @@ class Transcription < ApplicationRecord
 
   validate :audio_type
 
+  AUDIOS_CONTENT_TYPES = ['audio/mpeg', 'audio/mp4'].freeze
+
   enum categorie: { intitule: 0, modalite_reponse: 1 }
 
   def audio_type

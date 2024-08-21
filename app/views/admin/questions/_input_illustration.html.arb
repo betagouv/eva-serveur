@@ -1,0 +1,10 @@
+# frozen_string_literal: true
+
+f.input :illustration, as: :file,
+                       input_html: { accept: Question::ILLUSTRATION_CONTENT_TYPES.join(',') },
+                       hint: t('.illustration.hint')
+if f.object.illustration.attached?
+  f.input :supprimer_illustration, as: :boolean,
+                                   label: t('.label.supprimer_illustration'),
+                                   hint: image_tag(cdn_for(f.object.illustration))
+end

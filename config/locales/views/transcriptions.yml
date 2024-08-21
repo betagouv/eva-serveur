@@ -1,0 +1,11 @@
+fr:
+  admin:
+    transcriptions:
+      input_ecrit_audio:
+        label:
+          intitule: |
+            Intitulé de la question
+            (telle qu’elle sera écrite dans le jeu)
+          modalite_reponse: Consigne
+          modalite_reponse_audio: Consigne audio
+          intitule_audio: Intitulé audio

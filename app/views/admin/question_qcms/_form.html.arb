@@ -15,7 +15,7 @@ active_admin_form_for [:admin, resource] do |f|
     if f.object.illustration.attached?
       f.input :supprimer_illustration, as: :boolean,
                                        label: t('.label.supprimer_illustration'),
-                                       hint: image_tag(f.object.illustration)
+                                       hint: image_tag(cdn_for(f.object.illustration))
     end
   end
 

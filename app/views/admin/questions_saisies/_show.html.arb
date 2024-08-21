@@ -32,8 +32,8 @@ panel 'Détails de la question' do
     row :reponse_placeholder
     row :type_saisie
     row :created_at
-    row t('.label.reponse'), :choix do
-      question_saisie.choix&.intitule
+    row :bonne_reponse do
+      question_saisie.bonne_reponse&.intitule
     end
   end
 end

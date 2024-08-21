@@ -9,7 +9,7 @@ ActiveAdmin.register QuestionSaisie do
                 :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
-                choix_attributes: %i[id intitule audio type_choix _destroy nom_technique]
+                bonne_reponse_attributes: %i[id intitule audio type_choix _destroy nom_technique]
 
   filter :libelle
   filter :nom_technique

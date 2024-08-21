@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe QuestionSaisie, type: :model do
-  it { is_expected.to have_one(:choix).with_foreign_key(:question_id) }
+  it { is_expected.to have_one(:bonne_reponse).with_foreign_key(:question_id) }
 
   describe '#as_json' do
     it 'serialise les champs' do

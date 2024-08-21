@@ -17,8 +17,8 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :suffix_reponse
     f.input :reponse_placeholder
     f.input :type_saisie
-    f.has_many :choix, allow_destroy: false, new_record: t('.ajout_reponse'), heading: false,
-                       class: 'has_one' do |c|
+    f.has_many :bonne_reponse, allow_destroy: false, new_record: t('.ajout_reponse'),
+                               heading: false, class: 'has_one' do |c|
       c.input :id, as: :hidden
       c.input :intitule, label: t('.label.reponse')
       c.input :nom_technique, label: t('.label.reponse_nom_technique')

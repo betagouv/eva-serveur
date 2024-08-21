@@ -25,6 +25,7 @@ fr:
       question_saisie:
         suffix_reponse: Suffix réponse
         reponse_placeholder: Réponse placeholder
+        bonne_reponse: Bonne réponse
   formtastic:
     actions:
       question: &question_actions

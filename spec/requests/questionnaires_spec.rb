@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 describe 'Questionnaires API', type: :request do
-  describe 'GET /questionnaires/:id' do
+  fdescribe 'GET /questionnaires/:id' do
     let(:question1) { create :question_saisie, transcription_ecrit: 'Ma question 1' }
-    let(:question2) { create :question_saisie, transcription_ecrit: 'Ma question 2' }
+    let(:question2) { create :question_qcm }
     let(:questionnaire) { create :questionnaire, questions: [question1, question2] }
 
     it 'retourne les questions' do

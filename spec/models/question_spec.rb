@@ -26,7 +26,7 @@ describe Question, type: :model do
                nom_technique: 'choix_1',
                intitule: 'intitule'
       end
-      let(:question) { create :question_saisie, choix: choix1 }
+      let(:question) { create :question_saisie, bonne_reponse: choix1 }
 
       it 'retourne la réponse' do
         expect(question.restitue_reponse('35')).to eq '35'

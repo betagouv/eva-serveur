@@ -42,10 +42,10 @@ class Question < ApplicationRecord
   end
 
   def supprime_attachment
-    illustration.purge if supprime_illustration?
+    illustration.purge_later if supprime_illustration?
     transcriptions.find_each do |t|
-      t.audio.purge if t.supprime_audio_intitule?(supprimer_audio_intitule)
-      t.audio.purge if t.supprime_audio_consigne?(supprimer_audio_modalite_reponse)
+      t.audio.purge_later if t.supprime_audio_intitule?(supprimer_audio_intitule)
+      t.audio.purge_later if t.supprime_audio_consigne?(supprimer_audio_modalite_reponse)
     end
   end
 

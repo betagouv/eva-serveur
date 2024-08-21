@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
+  t.input :id, as: :hidden
+  t.input :ecrit, label: t(".label.#{transcription_categorie}"), input_html: { rows: 4 }
+  t.input :audio, as: :file, label: t(".label.#{transcription_categorie}_audio"),
+                  input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+  t.input :categorie, as: :hidden, input_html: { value: transcription_categorie }
+end

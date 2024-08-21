@@ -3,22 +3,6 @@ fr:
     questions_saisies:
       form:
         ajout_reponse: Ajouter une réponse
-        illustration:
-          hint: 'La taille de l’image rendue est de 1008x566.'
-        label:
-          intitule: |
-              Intitulé de la question
-              (telle qu’elle sera écrite dans le jeu)
-          reponse: Bonne réponse
-          reponse_nom_technique: Nom technique de la réponse
-          modalite_reponse: Consigne
-          intitule_reponse: Intitulé réponse
-          intitule_audio: Intitulé audio
-          modalite_reponse_audio: Consigne audio
-          intitule_reponse_audio: Intitulé réponse audio
-          supprimer_illustration : Supprimer l'illustration actuelle
-          supprimer_audio_intitule: Supprimer l'audio de l'intitulé actuel
-          supprimer_audio_modalite: Supprimer l'audio de la consigne actuelle
       show:
         label:
           reponse: Bonne réponse

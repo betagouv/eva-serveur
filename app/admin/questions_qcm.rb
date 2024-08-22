@@ -21,7 +21,7 @@ ActiveAdmin.register QuestionQcm do
     column :libelle
     column :categorie
     column :intitule do |question|
-      question.transcription_ecrite_pour(:intitule)
+      question.transcription_intitule&.ecrit
     end
     column :metacompetence
     column :type_qcm

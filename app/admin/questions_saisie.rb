@@ -19,8 +19,9 @@ ActiveAdmin.register QuestionSaisie do
   index do
     column :libelle
     column :categorie
+    column :transcription_intitule
     column :intitule do |question|
-      question.transcription_ecrite_pour(:intitule)
+      question.transcription_intitule&.ecrit
     end
     column :created_at
     actions

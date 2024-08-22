@@ -14,9 +14,7 @@ ActiveAdmin.register QuestionSousConsigne do
     f.inputs do
       f.input :libelle
       f.input :nom_technique
-      if f.object.transcription_pour(:intitule).nil?
-        f.object.transcriptions.build(categorie: :intitule)
-      end
+      f.object.transcriptions.build(categorie: :intitule) if f.object.transcription_intitule.nil?
 
       f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
         t.input :ecrit, label: t('.label.intitule')

@@ -31,14 +31,19 @@ module Api
       questions_ids_groupes.each do |type, question_objects|
         ids = question_objects.map(&:id) # Récupérer les ids des questions pour chaque type
 
-        association_to_include = [:bonne_reponse] if type == QuestionSaisie.to_s
-        association_to_include = [:choix]         if type == QuestionQcm.to_s
-
         questions_par_type[type] =
-          Question.where(id: ids).includes(association_to_include)
+          Question.where(id: ids).includes(includes_association(type))
       end
 
       questions_par_type
+    end
+
+    def includes_association(type)
+      association_to_include = [:bonne_reponse] if type == QuestionSaisie.to_s
+      association_to_include = %i[choix illustration_attachment] if type == QuestionQcm.to_s
+
+      default_question_includes = [:transcription_intitule]
+      default_question_includes.push(association_to_include).flatten
     end
   end
 end

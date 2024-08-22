@@ -8,7 +8,7 @@ if f.object.new_record?
   render partial: 'admin/transcriptions/input_ecrit_audio',
          locals: { f: f, transcription_categorie: :modalite_reponse }
 else
-  f.object.transcriptions.build(categorie: :intitule) if f.object.transcription_pour(:intitule).nil?
+  f.object.transcriptions.build(categorie: :intitule) if f.object.transcription_intitule.nil?
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
     if t.object.intitule?
       t.input :id, as: :hidden
@@ -18,12 +18,12 @@ else
       t.input :categorie, as: :hidden, input_html: { value: :intitule }
     end
   end
-  if f.object.transcription_pour(:intitule).audio.attached?
+  if f.object.transcription_intitule.audio.attached?
     f.input :supprimer_audio_intitule, as: :boolean,
                                        label: t('.label.supprimer_audio_intitule'),
-                                       hint: tag_audio(f.object.transcription_pour(:intitule))
+                                       hint: tag_audio(f.object.transcription_intitule)
   end
-  if f.object.transcription_pour(:modalite_reponse).nil?
+  if f.object.transcription_modalite_reponse.nil?
     f.object.transcriptions.build(categorie: :modalite_reponse)
   end
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
@@ -35,10 +35,10 @@ else
       t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
     end
   end
-  if f.object.transcription_pour(:modalite_reponse)&.audio&.attached?
+  if f.object.transcription_modalite_reponse&.audio&.attached?
     f.input :supprimer_audio_modalite_reponse,
             as: :boolean,
             label: t('.label.supprimer_audio_modalite'),
-            hint: tag_audio(f.object.transcription_pour(:modalite_reponse))
+            hint: tag_audio(f.object.transcription_modalite_reponse)
   end
 end

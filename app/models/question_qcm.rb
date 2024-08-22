@@ -15,7 +15,7 @@ class QuestionQcm < Question
   end
 
   def as_json(_options = nil)
-    intitule = Transcription.find_by(categorie: :intitule, question_id: id)
+    intitule = transcription_intitule
     modalite = Transcription.find_by(categorie: :modalite_reponse, question_id: id)
     illustration_url = cdn_for(illustration) if illustration.attached?
     json_object(intitule, modalite, illustration_url)
@@ -72,7 +72,8 @@ class QuestionQcm < Question
   end
 
   def question_audio_secondaire(intitule)
-    return unless intitule&.ecrit.blank? && intitule.audio.attached?
+    return unless intitule
+    return unless intitule.ecrit.blank? && intitule.audio.attached?
 
     cdn_for(intitule.audio)
   end

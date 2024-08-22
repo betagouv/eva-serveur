@@ -47,7 +47,7 @@ describe 'Admin - Question QCM', type: :feature do
 
       it do
         expect(Question.first.transcriptions.count).to eq 1
-        expect(Question.first.transcription_ecrite_pour(:intitule)).to eq 'Intitulé'
+        expect(Question.first.transcription_intitule&.ecrit).to eq 'Intitulé'
       end
     end
 
@@ -61,7 +61,7 @@ describe 'Admin - Question QCM', type: :feature do
 
       it do
         expect(Question.first.transcriptions.count).to eq 1
-        expect(Question.first.transcription_ecrite_pour(:modalite_reponse)).to eq 'Consigne'
+        expect(Question.first.transcription_modalite_reponse&.ecrit).to eq 'Consigne'
       end
     end
 

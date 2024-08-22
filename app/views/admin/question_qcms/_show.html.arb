@@ -14,14 +14,14 @@ panel 'Détails de la question' do
         end
       end
     end
-    intitule = question_qcm.transcription_pour(:intitule)
+    intitule = question_qcm.transcription_intitule
     row :intitule do
       div intitule.ecrit if intitule&.ecrit
     end
     row :audio_intitule do
       tag_audio(intitule)
     end
-    consigne = question_qcm.transcription_pour(:modalite_reponse)
+    consigne = question_qcm.transcription_modalite_reponse
     row :consigne do
       div consigne.ecrit if consigne&.ecrit
     end

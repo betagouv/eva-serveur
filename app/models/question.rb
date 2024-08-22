@@ -14,6 +14,12 @@ class Question < ApplicationRecord
   validates :libelle, :nom_technique, presence: true
   validates :nom_technique, uniqueness: true
   has_many :transcriptions, dependent: :destroy
+  has_one :transcription_intitule, lambda {
+                                     where(categorie: :intitule)
+                                   }, class_name: 'Transcription', dependent: :destroy
+  has_one :transcription_modalite_reponse, lambda {
+                                             where(categorie: :modalite_reponse)
+                                           }, class_name: 'Transcription', dependent: :destroy
 
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
@@ -27,14 +33,6 @@ class Question < ApplicationRecord
 
   def display_name
     [categorie, libelle].compact.join(' : ')
-  end
-
-  def transcription_ecrite_pour(categorie)
-    transcriptions.find_by(categorie: categorie)&.ecrit
-  end
-
-  def transcription_pour(categorie)
-    transcriptions.find_by(categorie: categorie)
   end
 
   def restitue_reponse(reponse)

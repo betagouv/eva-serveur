@@ -111,7 +111,7 @@ namespace :stats do
   def affiche_reponses_livraison
     visite_reponses_livraison do |identification, question, libelle, choix, temps|
       metacompetence = question.metacompetence
-      question_reponse = [question.transcription_ecrite_pour(:intitule)]
+      question_reponse = [question.transcription_intitule&.ecrit]
       if choix.present?
         succes = choix.type_choix == 'bon'
         question_reponse << "\"#{choix.intitule}\""

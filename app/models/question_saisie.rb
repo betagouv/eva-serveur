@@ -9,10 +9,9 @@ class QuestionSaisie < Question
   accepts_nested_attributes_for :bonne_reponse, allow_destroy: true
 
   def as_json(_options = nil)
-    transcription = Transcription.find_by(categorie: :intitule, question_id: id)
     json = slice(:id, :nom_technique, :suffix_reponse, :description)
     json['type'] = 'saisie'
-    json['intitule'] = transcription&.ecrit
+    json['intitule'] = transcription_intitule&.ecrit
     json['sous_type'] = type_saisie
     json['placeholder'] = reponse_placeholder
     json['reponse'] = bonne_reponse&.intitule

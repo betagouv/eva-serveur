@@ -15,10 +15,8 @@ class QuestionQcm < Question
   end
 
   def as_json(_options = nil)
-    intitule = transcription_intitule
-    modalite = Transcription.find_by(categorie: :modalite_reponse, question_id: id)
     illustration_url = cdn_for(illustration) if illustration.attached?
-    json_object(intitule, modalite, illustration_url)
+    json_object(transcription_intitule, transcription_modalite_reponse, illustration_url)
   end
 
   private

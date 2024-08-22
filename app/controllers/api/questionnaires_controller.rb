@@ -40,9 +40,9 @@ module Api
 
     def includes_association(type)
       association_to_include = [:bonne_reponse] if type == QuestionSaisie.to_s
-      association_to_include = %i[choix illustration_attachment] if type == QuestionQcm.to_s
+      association_to_include = %i[choix] if type == QuestionQcm.to_s
 
-      default_question_includes = [:transcription_intitule]
+      default_question_includes = %i[transcription_intitule illustration_attachment]
       default_question_includes.push(association_to_include).flatten
     end
   end

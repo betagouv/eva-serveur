@@ -23,7 +23,7 @@ fr:
         libelle: Libellé
         nom_technique: Nom technique
         metacompetence: Méta-compétence
-        illustration: Image du jeu
+        illustration: Image de fond de la question
         type_qcm: Type QCM
       question_saisie:
         suffix_reponse: Suffix réponse

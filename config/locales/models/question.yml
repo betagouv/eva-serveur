@@ -10,6 +10,9 @@ fr:
       question_sous_consigne:
         one: Question sous consigne
         other: Questions sous consigne
+      question_clic_dans_image:
+        one: Question clic dans image
+        other: Questions clic dans image
     attributes:
       question:
         created_at: Créée le

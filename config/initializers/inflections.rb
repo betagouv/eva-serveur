@@ -27,6 +27,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'mise_en_action', 'mises_en_action'
   inflect.irregular 'connexion_demo', 'connexions_demo'
   inflect.irregular 'question_saisie', 'questions_saisies'
+  inflect.irregular 'question_clic_dans_image', 'questions_clic_dans_image'
 end
 
 # These inflection rules are supported but not enabled by default:

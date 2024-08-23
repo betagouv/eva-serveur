@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+active_admin_form_for [:admin, resource] do |f|
+  f.semantic_errors
+  f.inputs do
+    f.input :libelle
+    f.input :nom_technique
+    f.input :description
+    render partial: 'admin/questions/input_illustration', locals: { f: f }
+  end
+
+  f.inputs do
+    render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+           locals: { f: f }
+  end
+  f.actions do
+    f.action :submit
+    annulation_formulaire(f)
+  end
+end

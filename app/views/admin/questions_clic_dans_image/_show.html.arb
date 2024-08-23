@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+panel 'Détails de la question' do
+  attributes_table_for question_clic_dans_image do
+    row :id
+    row :libelle
+    row :nom_technique
+    row :description
+    row :illustration do
+      if resource.illustration.attached?
+        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(resource.illustration), class: 'qcm_miniature'
+        end
+      end
+    end
+    intitule = question_clic_dans_image.transcription_intitule
+    row :intitule do
+      div intitule.ecrit if intitule&.ecrit
+    end
+    row :audio_intitule do
+      tag_audio(intitule)
+    end
+    consigne = question_clic_dans_image.transcription_modalite_reponse
+    row :consigne do
+      div consigne.ecrit if consigne&.ecrit
+    end
+    row :audio_consigne do
+      tag_audio(consigne)
+    end
+    row :created_at
+  end
+end

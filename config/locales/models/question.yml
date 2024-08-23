@@ -36,3 +36,4 @@ fr:
         update: Enregistrer
       question_qcm: *question_actions
       question_saisie: *question_actions
+      question_clic_dans_image: *question_actions

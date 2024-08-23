@@ -13,7 +13,7 @@ active_admin_form_for [:admin, resource] do |f|
 
   f.inputs do
     render partial: 'admin/questions/inputs_avec_transcriptions_audios',
-           locals: { f: f, transcription_categorie: :intitule }
+           locals: { f: f }
 
     f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
       c.input :id, as: :hidden

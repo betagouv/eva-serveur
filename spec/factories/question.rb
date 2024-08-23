@@ -32,4 +32,9 @@ FactoryBot.define do
       create(:transcription, question_id: question.id, ecrit: evaluator.transcription_ecrit)
     end
   end
+
+  factory :question_clic_dans_image do
+    libelle { 'Question clic dans image' }
+    sequence(:nom_technique) { |n| "question-clic-dans-image-#{n}" }
+  end
 end

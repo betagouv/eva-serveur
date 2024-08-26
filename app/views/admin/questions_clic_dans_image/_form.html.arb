@@ -7,6 +7,16 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :description
     render partial: 'admin/questions/input_illustration', locals: { f: f }
+    f.input :zone_cliquable,
+            as: :file,
+            hint: "L'un des éléments cliquables doit contenir la classe css `bonne-reponse`",
+            input_html: { accept: 'image/svg+xml' }
+    if f.object.zone_cliquable.attached? && f.object.errors[:zone_cliquable].blank?
+      f.input :supprimer_zone_cliquable,
+              as: :boolean,
+              label: t('.label.supprimer_zone_cliquable'),
+              hint: svg_attachment_base64(resource.zone_cliquable, class: 'image-preview')
+    end
   end
 
   f.inputs do

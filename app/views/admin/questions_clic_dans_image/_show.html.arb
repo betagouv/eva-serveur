@@ -9,7 +9,14 @@ panel 'Détails de la question' do
     row :illustration do
       if resource.illustration.attached?
         link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(resource.illustration), class: 'qcm_miniature'
+          image_tag cdn_for(resource.illustration), class: 'image-preview'
+        end
+      end
+    end
+    row :zone_cliquable do
+      if resource.zone_cliquable.attached?
+        link_to(cdn_for(resource.zone_cliquable), target: '_blank', rel: 'noopener') do
+          svg_attachment_base64(resource.zone_cliquable, class: 'image-preview')
         end
       end
     end

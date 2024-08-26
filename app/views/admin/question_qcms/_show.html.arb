@@ -10,7 +10,7 @@ panel 'Détails de la question' do
     row :illustration do
       if resource.illustration.attached?
         link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(resource.illustration), class: 'qcm_miniature'
+          image_tag cdn_for(resource.illustration), class: 'image-preview'
         end
       end
     end

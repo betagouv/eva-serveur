@@ -97,6 +97,39 @@ describe 'Admin - Question Clic dans Image', type: :feature do
         expect(Question.first.illustration.attached?).to eq true
       end
     end
+
+    context 'quand une zone cliquable est ajoutée' do
+      context 'avec la classe css bonne-reponse' do
+        before do
+          fill_in :question_clic_dans_image_libelle, with: 'Question'
+          fill_in :question_clic_dans_image_nom_technique, with: 'question'
+          attach_file(:question_clic_dans_image_zone_cliquable,
+                      Rails.root.join('spec/support/accessibilite-avec-reponse.svg'))
+          click_on 'Créer'
+        end
+
+        it do
+          question = Question.first
+          expect(question.zone_cliquable.attached?).to eq true
+          expect(question.errors[:zone_cliquable]).to be_empty
+        end
+      end
+
+      context 'sans la classe css bonne-reponse' do
+        before do
+          fill_in :question_clic_dans_image_libelle, with: 'Question'
+          fill_in :question_clic_dans_image_nom_technique, with: 'question'
+          attach_file(:question_clic_dans_image_zone_cliquable,
+                      Rails.root.join('spec/support/accessibilite-sans-reponse.svg'))
+          click_on 'Créer'
+        end
+
+        it do
+          expect(page).to have_content("doit contenir la classe 'bonne_reponse'")
+          expect(Question.count).to eq(0)
+        end
+      end
+    end
   end
 
   describe 'modification' do

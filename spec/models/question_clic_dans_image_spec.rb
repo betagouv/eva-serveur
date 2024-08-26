@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe QuestionClicDansImage, type: :model do
+  it { is_expected.to have_one_attached(:zone_cliquable) }
+
   describe '#as_json' do
     let(:question_clic_dans_image) do
       create(:question_clic_dans_image, illustration: Rack::Test::UploadedFile.new(
@@ -51,6 +53,35 @@ RSpec.describe QuestionClicDansImage, type: :model do
         expect(json['intitule_audio']).to eql(Rails.application.routes.url_helpers.url_for(
                                                 intitule.audio
                                               ))
+      end
+    end
+  end
+
+  describe 'validations' do
+    let(:question) do
+      build(:question_clic_dans_image)
+    end
+
+    context 'avec un attachment au format svg' do
+      it 'est valide' do
+        question.zone_cliquable.attach(
+          io: Rails.root.join('spec/support/accessibilite-sans-reponse.svg').open,
+          filename: 'valid.svg',
+          content_type: 'image/svg+xml'
+        )
+        expect(question).to be_valid
+      end
+    end
+
+    context "avec un attachement d'un autre format" do
+      it "n'est pas valide" do
+        question.zone_cliquable.attach(
+          io: Rails.root.join('spec/support/programme_tele.png').open,
+          filename: 'invalid.png',
+          content_type: 'image/png'
+        )
+        expect(question).not_to be_valid
+        expect(question.errors[:zone_cliquable]).to include("n'est pas un format de fichier valide")
       end
     end
   end

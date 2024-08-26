@@ -7,7 +7,7 @@ class Transcription < ApplicationRecord
 
   AUDIOS_CONTENT_TYPES = ['audio/mpeg', 'audio/mp4'].freeze
 
-  enum categorie: { intitule: 0, modalite_reponse: 1 }
+  enum :categorie, { intitule: 0, modalite_reponse: 1 }
 
   def audio_type
     return unless audio.attached? && !audio.content_type.in?(%w[audio/mpeg audio/mp4])

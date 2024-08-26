@@ -48,7 +48,7 @@ class Evaluation < ApplicationRecord
   enum :positionnement_niveau_numeratie,
        NIVEAUX_NUMERATIE.zip(NIVEAUX_NUMERATIE).to_h, prefix: true
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
-  enum :statut, %i[a_suivre suivi_en_cours suivi_effectue]
+  enum :statut, { a_suivre: 0, suivi_en_cours: 1, suivi_effectue: 2 }
 
   scope :des_12_derniers_mois, lambda {
     dernier_mois_complete = 1.month.ago.end_of_month

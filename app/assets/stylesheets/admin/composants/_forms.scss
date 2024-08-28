@@ -183,12 +183,6 @@ form {
     background-position: 0.5rem center;
     padding-left: 2rem;
   }
-
-  input[type=submit]:disabled {
-    color: $grey-625;
-    background-color: $grey-925;
-    border-color: $grey-925;
-  }
 }
 
 #error_explanation {

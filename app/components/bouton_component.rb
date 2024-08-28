@@ -6,16 +6,10 @@ class BoutonComponent < ViewComponent::Base
   PRIMARY_CLASSES = %w[
     bouton-arrondi
   ].freeze
-  OUTLINE_CLASSES = %w[
+  SECONDARY_CLASSES = %w[
     bouton-arrondi
     text-primary
     border-primary
-    bg-white
-  ].freeze
-  OUTLINE_ORANGE_CLASSES = %w[
-    bouton-arrondi
-    text-orange
-    border-orange
     bg-white
   ].freeze
   DESACTIVE_CLASSES = %w[
@@ -28,8 +22,7 @@ class BoutonComponent < ViewComponent::Base
 
   BUTTON_TYPE_MAPPINGS = {
     primary: PRIMARY_CLASSES,
-    outline: OUTLINE_CLASSES,
-    outline_orange: OUTLINE_ORANGE_CLASSES,
+    secondary: SECONDARY_CLASSES,
     desactive: DESACTIVE_CLASSES
   }.freeze
 

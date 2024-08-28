@@ -6,14 +6,12 @@ lien_description ||= nil
 email ||= nil
 options_lien ||= {}
 options = { class: 'bouton bouton-arrondi' }.merge(options_lien)
-theme = etape_en_cours == PriseEnMain::ETAPES.last ? 'succes' : 'orange'
-carte_entete_classes = "d-flex align-items-center justify-content-between bg-#{theme}"
+carte_entete_classes = "d-flex align-items-center justify-content-between bg-orange"
 
 div class: 'carte-prise-en-main' do
-  div class: "carte__etape border border-right-0 border-#{theme}" do
+  div class: "carte__etape border border-right-0 border-orange" do
     div class: "carte__entete #{carte_entete_classes}" do
       div class: 'carte__titres' do
-        h2 t('sous_titre', scope: scope), class: 'text-white'
         h2 t("etapes.#{etape_en_cours}.titre", scope: scope)
       end
       text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration'

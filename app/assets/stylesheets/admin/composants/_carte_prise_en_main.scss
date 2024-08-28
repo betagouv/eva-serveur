@@ -30,14 +30,14 @@ $grid-gutter-width: 1.25rem;
       max-width: 14rem;
     }
     &__progression {
-      background-color: $eva_main_blue;
+      background-color: $eva_bluegrey;
       padding: 0 1.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       h3 {
         @include h3();
-        color: $eva_light;
+        color: $eva_dark;
       }
       ul {
         list-style: none;

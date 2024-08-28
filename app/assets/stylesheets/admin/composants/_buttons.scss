@@ -23,7 +23,7 @@ form button:not(.disabled),
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .action-secondaire {
-  @include bouton-arrondi;
+  @include bouton-arrondi();
   &, &:link, &:visited {
     color: $eva_main_blue;
   }
@@ -33,6 +33,8 @@ form fieldset.actions li.cancel a,
   background-color: $grey-1000;
   &:not(.disabled):hover {
     filter: brightness(96%);
+    border-color: $eva_main_blue;
+    background-color: $grey-1000;
   }
 }
 form.filter_form a.clear_filters_btn:not(.disabled),

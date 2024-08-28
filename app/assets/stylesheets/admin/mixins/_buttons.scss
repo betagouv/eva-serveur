@@ -9,6 +9,13 @@
   text-align: center;
 
   border: 1px solid;
+
+  &:disabled, &:disabled:hover {
+    cursor: default;
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
+  }
 }
 
 // bouton carré (secondaire)
@@ -39,6 +46,11 @@
   &:not(.disabled):hover {
     border-color: $blue-france-sun-113-hover;
     background-color: $blue-france-sun-113-hover;
+  }
+  &:disabled:hover {
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
   }
 }
 

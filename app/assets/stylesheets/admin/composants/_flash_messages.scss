@@ -4,8 +4,8 @@
 }
 
 @mixin flash-success() {
-  color: $eva_dark_green;
-  background-color: $eva-green;
+  color: $eva_light;
+  background-color: $eva_green;
 }
 
 @mixin flash-error() {

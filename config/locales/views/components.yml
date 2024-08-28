@@ -62,7 +62,6 @@ fr:
         reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
     prise_en_main:
       titre: Bienvenue sur eva !
-      sous_titre: Bien débuter
       etapes:
         progression:
           titre: Débutez eva en 5 étapes

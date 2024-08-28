@@ -1,23 +1,29 @@
 // Couleurs du DSFR
 $blue-france-sun-113: #000091;
 $blue-france-sun-113-hover: #1212FF;
+$success-425: #18753C;
+$info-950: #E8EDFF;
 $grey-1000: #FFFFFF;
 $grey-1000-hover: #F6F6F6;
+$grey-950: #ECECFE;
 $grey-925: #E5E5E5;
+$grey-850: #CECECE;
 $grey-625: #929292;
+$grey-425: #666666;
+$orange-terre-battue-850-hover: #FB926B;
 
 // Couleurs eva
 $eva_main_blue: $blue-france-sun-113;
 $eva_main_light: #C1C1FB;
 $eva_dark_green: #0C826D;
-$eva_green: #9ADBD0;
+$eva_green: $success-425;
 $eva_dark_orange: #E4912F;
-$eva_orange: #FDAF54;
+$eva_orange: $orange-terre-battue-850-hover;
 $eva_red: #fd5c54;
 $eva_dark: #161616;
-$eva_less_dark: #666666;
+$eva_less_dark: $grey-425;
 $eva_dark_blue_grey: #3A3A3A;
-$eva_bluegrey: #ECECFE;
+$eva_bluegrey: $grey-950;
 $eva_light: #FBF9FA;
 
 $anlci_orange: #fc5d5d; // Couleur officielle : nacarat
@@ -50,8 +56,8 @@ $theme-colors: (
   "warning": $eva_dark_orange,
   "orange": $eva_orange,
   "succes": $eva_green,
-  "active": $eva_light,
-  "desactive": $eva_bluegrey
+  "active": $grey-425,
+  "desactive": $grey-850
 );
 
 // Variables pour ActiveAdmin

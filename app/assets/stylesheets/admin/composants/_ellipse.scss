@@ -8,10 +8,12 @@ $largeur-tick: .75rem;
   }
 
   &.ellipse--active {
+    border: 1px solid $grey-850;
     background-color: $eva_light;
   }
 
   &.ellipse--desactive {
+    border: 1px solid $grey-850;
     background-color: $eva_bluegrey;
   }
 
@@ -38,8 +40,6 @@ button.ellipse {
   @include couleur-ellipse();
 
   &.ellipse-a-cocher {
-    border: 1px solid $eva_dark_blue_grey;
-    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
     width: $taille-ellipse;
     height: $taille-ellipse;
   }

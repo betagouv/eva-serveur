@@ -5,7 +5,6 @@ class QuestionSaisie < Question
   enum :type_saisie, { redaction: 0, numerique: 1 }
 
   has_one :bonne_reponse, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
-
   accepts_nested_attributes_for :bonne_reponse, allow_destroy: true
 
   def as_json(_options = nil)
@@ -51,7 +50,7 @@ class QuestionSaisie < Question
   end
 
   def question_audio_secondaire(intitule)
-    return unless intitule&.ecrit.blank? && intitule.audio.attached?
+    return unless intitule&.ecrit.blank? && intitule&.audio&.attached?
 
     cdn_for(intitule.audio)
   end

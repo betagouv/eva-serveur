@@ -50,7 +50,7 @@ class QuestionClicDansImage < Question
   end
 
   def question_audio_secondaire(intitule)
-    return unless intitule&.ecrit.blank? && intitule.audio.attached?
+    return unless intitule&.ecrit.blank? && intitule&.audio&.attached?
 
     cdn_for(intitule.audio)
   end

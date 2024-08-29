@@ -21,8 +21,9 @@ class QuestionClicDansImage < Question
   def base_json_object
     slice(:id, :nom_technique).tap do |json|
       json['type'] = 'clic_dans_image'
-      json['illustration'] = cdn_for(illustration)
+      json['illustration'] = cdn_for(illustration) if illustration.attached?
       json['description'] = description
+      json['zone_cliquable'] = fichier_encode_base64(zone_cliquable) if zone_cliquable.attached?
     end
   end
 
@@ -70,5 +71,10 @@ class QuestionClicDansImage < Question
 
     errors.add(:zone_cliquable, "doit contenir la classe 'bonne_reponse'")
     throw(:abort)
+  end
+
+  def fichier_encode_base64(attachment)
+    file_content = attachment.download
+    ApplicationController.helpers.fichier_encode_en_base64(file_content)
   end
 end

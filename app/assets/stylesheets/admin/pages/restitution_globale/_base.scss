@@ -114,14 +114,15 @@
       margin-top: -14px;
       width: 28px;
       line-height: 28px;
-      background-image: asset-data-url('puce_jauge.svg');
+      background-color: $eva_main_blue;
+      border-radius: 1rem;
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       text-align: center;
       font-family: $font-titre;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: $eva_light;
     }
 

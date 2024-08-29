@@ -7,9 +7,13 @@ RSpec.describe QuestionClicDansImage, type: :model do
 
   describe '#as_json' do
     let(:question_clic_dans_image) do
-      create(:question_clic_dans_image, illustration: Rack::Test::UploadedFile.new(
-        Rails.root.join('spec/support/programme_tele.png')
-      ))
+      create(:question_clic_dans_image,
+             illustration: Rack::Test::UploadedFile.new(
+               Rails.root.join('spec/support/programme_tele.png')
+             ),
+             zone_cliquable: Rack::Test::UploadedFile.new(
+               Rails.root.join('spec/support/accessibilite-avec-reponse.svg')
+             ))
     end
 
     let!(:modalite) do
@@ -24,7 +28,7 @@ RSpec.describe QuestionClicDansImage, type: :model do
       json = question_clic_dans_image.as_json
       expect(json.keys)
         .to match_array(%w[description id intitule audio_url nom_technique type illustration
-                           modalite_reponse])
+                           modalite_reponse zone_cliquable])
       expect(json['type']).to eql('clic_dans_image')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
@@ -34,6 +38,7 @@ RSpec.describe QuestionClicDansImage, type: :model do
                                          intitule.audio
                                        ))
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
+      expect(json['zone_cliquable']).to start_with('data:image/svg+xml;base64,')
     end
 
     context "quand il n'y a pas d'intitulé écrit" do

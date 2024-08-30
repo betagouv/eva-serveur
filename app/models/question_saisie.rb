@@ -31,27 +31,15 @@ class QuestionSaisie < Question
                'audio_url' => question_audio_principal(intitule, modalite),
                'reponse' => { 'textes' => bonne_reponse&.intitule,
                               'bonneReponse' => bonne_reponse&.type_choix == 'bon' } }
-    if question_audio_secondaire(intitule)
-      fields['intitule_audio'] = question_audio_secondaire(intitule)
-    end
+    fields['intitule_audio'] = intitule&.audio_url if intitule&.audio_url && intitule&.ecrit.blank?
     fields
   end
 
   def question_audio_principal(intitule, modalite)
     if intitule&.ecrit.present? && intitule.audio.attached?
-      cdn_for(intitule.audio)
+      intitule.audio_url
     elsif modalite&.ecrit.present? && modalite.audio.attached?
-      cdn_for(modalite.audio)
+      modalite.audio_url
     end
-  end
-
-  def cdn_for(attachment)
-    ApplicationController.helpers.cdn_for(attachment) if attachment.attached?
-  end
-
-  def question_audio_secondaire(intitule)
-    return unless intitule&.ecrit.blank? && intitule&.audio&.attached?
-
-    cdn_for(intitule.audio)
   end
 end

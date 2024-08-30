@@ -41,9 +41,7 @@ class QuestionQcm < Question
       'audio_url' => question_audio_principal(intitule, modalite),
       'choix' => question_choix
     }
-    if question_audio_secondaire(intitule)
-      fields['intitule_audio'] = question_audio_secondaire(intitule)
-    end
+    fields['intitule_audio'] = intitule&.audio_url if intitule&.ecrit.blank? && intitule&.audio_url
 
     fields
   end
@@ -57,22 +55,11 @@ class QuestionQcm < Question
     end
   end
 
-  def cdn_for(attachment)
-    ApplicationController.helpers.cdn_for(attachment)
-  end
-
   def question_audio_principal(intitule, modalite)
     if intitule&.ecrit.present? && intitule.audio.attached?
-      cdn_for(intitule.audio)
+      intitule.audio_url
     elsif modalite&.ecrit.present? && modalite.audio.attached?
-      cdn_for(modalite.audio)
+      modalite.audio_url
     end
-  end
-
-  def question_audio_secondaire(intitule)
-    return unless intitule
-    return unless intitule.ecrit.blank? && intitule.audio.attached?
-
-    cdn_for(intitule.audio)
   end
 end

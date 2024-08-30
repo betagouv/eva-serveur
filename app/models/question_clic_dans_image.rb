@@ -31,28 +31,16 @@ class QuestionClicDansImage < Question
     fields = { 'intitule' => intitule&.ecrit,
                'modalite_reponse' => modalite&.ecrit,
                'audio_url' => question_audio_principal(intitule, modalite) }
-    if question_audio_secondaire(intitule)
-      fields['intitule_audio'] = question_audio_secondaire(intitule)
-    end
+    fields['intitule_audio'] = intitule&.audio_url if intitule&.ecrit.blank? && intitule&.audio_url
     fields
   end
 
   def question_audio_principal(intitule, modalite)
     if intitule&.ecrit.present? && intitule.audio.attached?
-      cdn_for(intitule.audio)
+      intitule.audio_url
     elsif modalite&.ecrit.present? && modalite.audio.attached?
-      cdn_for(modalite.audio)
+      modalite.audio_url
     end
-  end
-
-  def cdn_for(attachment)
-    ApplicationController.helpers.cdn_for(attachment) if attachment.attached?
-  end
-
-  def question_audio_secondaire(intitule)
-    return unless intitule&.ecrit.blank? && intitule&.audio&.attached?
-
-    cdn_for(intitule.audio)
   end
 
   def supprime_zone_cliquable

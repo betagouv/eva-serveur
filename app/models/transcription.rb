@@ -16,6 +16,10 @@ class Transcription < ApplicationRecord
     audio.purge
   end
 
+  def audio_url
+    cdn_for(audio)
+  end
+
   def supprime_audio_intitule?(suppression_valeur)
     intitule? && audio.attached? && suppression_valeur == '1'
   end

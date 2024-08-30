@@ -23,7 +23,7 @@
                                   method: :patch,
                                   class: 'action lien-autoriser' %>
       <% end %>
-      <%= 
+      <%=
         if can?(:refuser, compte)
           link_to 'Refuser', refuser_admin_compte_path(compte),
                             method: :patch,

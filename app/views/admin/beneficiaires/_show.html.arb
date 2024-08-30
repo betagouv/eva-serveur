@@ -16,13 +16,12 @@ if beneficiaire.evaluations.present?
   paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
                        download_links: false) do
     table_for collection, sortable: true, class: 'index_table' do
-      column 'Date', :created_at, sortable: :created_at
+      column :created_at, sortable: :created_at
       column :campagne
-      column :actions do |evaluation|
+      column '', :actions, class: 'col-actions' do |evaluation|
         div class: 'table_actions' do
-          text_node link_to(t('.voir'), admin_evaluation_path(evaluation), class: 'view_link')
-          text_node link_to(t('.modifier'), edit_admin_evaluation_path(evaluation),
-                            class: 'edit_link')
+          text_node link_to t('.voir'), admin_evaluation_path(evaluation)
+          text_node link_to t('.modifier'), edit_admin_evaluation_path(evaluation)
         end
       end
     end

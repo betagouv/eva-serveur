@@ -1,9 +1,7 @@
 .roue-dentee {
-  display: flex;
-  justify-content: flex-end;
   @include roue-dentee();
-
-  .roue-dentee__actions a {
-    @include boutons-groupes()
+  background-position-x: right;
+  .table_actions {
+    left: calc(100% - 20px);
   }
 }

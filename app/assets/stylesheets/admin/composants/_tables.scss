@@ -66,39 +66,11 @@ table.index_table {
         }
         &.col-actions {
           @include roue-dentee();
-          width: 40px;
+          min-width: 40px;
           background-color: #FFF;
-          background-position-x: right 0.75rem;
-          position: relative;
-
-          .table_actions {
-            display: flex;
-            justify-content: flex-end;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 98%;
-            background: #fff;
-            align-items: center;
-            padding: 0 0 0 1rem;
-
-            a {
-              @include boutons-groupes;
-            }
-          }
         }
         &.col-illustration {
           line-height: 0;
-        }
-      }
-
-      &:hover {
-        .col-actions {
-          background-image: none;
-
-          .table_actions {
-            opacity: 1;
-          }
         }
       }
 

@@ -17,6 +17,8 @@ class Transcription < ApplicationRecord
   end
 
   def audio_url
+    return unless audio.attached?
+
     cdn_for(audio)
   end
 

@@ -9,7 +9,7 @@ class QuestionGlisserDeposer < Question
 
   def as_json(_options = nil)
     json = base_json
-    json.merge!(audio_fields, reponses_fields)
+    json.merge!(json_audio_fields, reponses_fields)
   end
 
   private
@@ -21,17 +21,6 @@ class QuestionGlisserDeposer < Question
       json['modalite_reponse'] = transcription_modalite_reponse&.ecrit
       json['intitule'] = transcription_intitule&.ecrit
     end
-  end
-
-  def audio_fields
-    return { 'audio_url' => transcription_intitule.audio_url } if transcription_intitule&.complete?
-
-    if transcription_modalite_reponse&.complete?
-      return { 'audio_url' => transcription_modalite_reponse.audio_url,
-               'intitule_url' => transcription_intitule&.audio_url }
-    end
-
-    {}
   end
 
   def reponses_fields

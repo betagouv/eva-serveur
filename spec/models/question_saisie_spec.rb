@@ -47,35 +47,6 @@ describe QuestionSaisie, type: :model do
                                           ))
     end
 
-    context "quand il n'y a pas d'intitulé écrit" do
-      before do
-        Transcription.find_by(categorie: :intitule,
-                              question_id: question_saisie.id).update(ecrit: '')
-        json
-      end
-
-      it "retourne l'audio de la consigne en audio principal" do
-        expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                           modalite.audio
-                                         ))
-      end
-
-      it "retourne l'audio de l'intitulé en audio secondaire" do
-        expect(json['intitule_audio']).to eql(Rails.application.routes.url_helpers.url_for(
-                                                question_saisie.transcriptions.first.audio
-                                              ))
-      end
-    end
-
-    context 'quand il y a un intitulé écrit' do
-      it "retourne l'audio de l'intitulé en audio principal" do
-        json
-        expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                           question_saisie.transcriptions.first.audio
-                                         ))
-      end
-    end
-
     context "quand il n'y a pas de réponse" do
       it 'ne retourne pas de reponse' do
         reponse.destroy

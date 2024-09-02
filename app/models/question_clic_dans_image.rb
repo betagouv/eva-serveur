@@ -12,13 +12,13 @@ class QuestionClicDansImage < Question
   after_update :supprime_zone_cliquable
 
   def as_json(_options = nil)
-    json = base_json_object
-    json.merge!(additional_json_fields(transcription_intitule, transcription_modalite_reponse))
+    json = base_json
+    json.merge!(json_audio_fields, additional_json_fields)
   end
 
   private
 
-  def base_json_object
+  def base_json
     slice(:id, :nom_technique).tap do |json|
       json['type'] = 'clic-dans-image'
       json['illustration'] = cdn_for(illustration) if illustration.attached?
@@ -27,20 +27,9 @@ class QuestionClicDansImage < Question
     end
   end
 
-  def additional_json_fields(intitule, modalite)
-    fields = { 'intitule' => intitule&.ecrit,
-               'modalite_reponse' => modalite&.ecrit,
-               'audio_url' => question_audio_principal(intitule, modalite) }
-    fields['intitule_audio'] = intitule&.audio_url if intitule&.ecrit.blank? && intitule&.audio_url
-    fields
-  end
-
-  def question_audio_principal(intitule, modalite)
-    if intitule&.ecrit.present? && intitule.audio.attached?
-      intitule.audio_url
-    elsif modalite&.ecrit.present? && modalite.audio.attached?
-      modalite.audio_url
-    end
+  def additional_json_fields
+    { 'intitule' => transcription_intitule&.ecrit,
+      'modalite_reponse' => transcription_modalite_reponse&.ecrit }
   end
 
   def supprime_zone_cliquable

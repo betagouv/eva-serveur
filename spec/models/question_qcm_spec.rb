@@ -40,25 +40,5 @@ RSpec.describe QuestionQcm, type: :model do
                                                    ))
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
     end
-
-    context "quand il n'y a pas d'intitulé écrit" do
-      let!(:intitule) do
-        create(:transcription, :avec_audio, question_id: question_qcm.id, ecrit: '')
-      end
-
-      it "retourne l'audio de la modalité de réponse comme audio de la question" do
-        json = question_qcm.as_json
-        expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                           modalite.audio
-                                         ))
-      end
-
-      it "retourne l'audio de l'intitulé comme audio secondaire" do
-        json = question_qcm.as_json
-        expect(json['intitule_audio']).to eql(Rails.application.routes.url_helpers.url_for(
-                                                intitule.audio
-                                              ))
-      end
-    end
   end
 end

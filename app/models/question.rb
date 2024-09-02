@@ -45,6 +45,17 @@ class Question < ApplicationRecord
     end
   end
 
+  def json_audio_fields
+    return {} if sans_audios?
+    return { 'audio_url' => transcription_intitule.audio_url } if transcription_intitule&.complete?
+    if modalite_complete_sans_audio_intitule?
+      return { 'audio_url' => transcription_modalite_reponse.audio_url }
+    end
+
+    { 'audio_url' => transcription_modalite_reponse&.audio_url,
+      'intitule_audio' => transcription_intitule&.audio_url }
+  end
+
   private
 
   def reject_transcriptions(attributes)
@@ -59,5 +70,13 @@ class Question < ApplicationRecord
 
   def supprime_illustration?
     illustration.attached? && supprimer_illustration == '1'
+  end
+
+  def sans_audios?
+    transcription_intitule&.audio_url.blank? && transcription_modalite_reponse&.audio_url.blank?
+  end
+
+  def modalite_complete_sans_audio_intitule?
+    transcription_intitule&.audio_url.blank? && transcription_modalite_reponse&.complete?
   end
 end

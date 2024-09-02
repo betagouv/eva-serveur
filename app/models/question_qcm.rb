@@ -15,35 +15,26 @@ class QuestionQcm < Question
   end
 
   def as_json(_options = nil)
-    illustration_url = cdn_for(illustration) if illustration.attached?
-    json_object(transcription_intitule, transcription_modalite_reponse, illustration_url)
+    json = base_json
+    json.merge!(json_audio_fields, additional_json_fields)
   end
 
   private
 
-  def json_object(intitule, modalite, illustration)
-    json = base_json_object(illustration)
-    json.merge!(additional_json_fields(intitule, modalite))
-  end
-
-  def base_json_object(illustration)
+  def base_json
     slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
           :illustration).tap do |json|
       json['type'] = 'qcm'
-      json['illustration'] = illustration
+      json['illustration'] = cdn_for(illustration)
     end
   end
 
-  def additional_json_fields(intitule, modalite)
-    fields = {
-      'intitule' => intitule&.ecrit,
-      'modalite_reponse' => modalite&.ecrit,
-      'audio_url' => question_audio_principal(intitule, modalite),
+  def additional_json_fields
+    {
+      'intitule' => transcription_intitule&.ecrit,
+      'modalite_reponse' => transcription_modalite_reponse&.ecrit,
       'choix' => question_choix
     }
-    fields['intitule_audio'] = intitule&.audio_url if intitule&.ecrit.blank? && intitule&.audio_url
-
-    fields
   end
 
   def question_choix
@@ -52,14 +43,6 @@ class QuestionQcm < Question
       choix.slice(:id, :nom_technique, :intitule, :type_choix, :position).merge(
         'audio_url' => audio_url
       )
-    end
-  end
-
-  def question_audio_principal(intitule, modalite)
-    if intitule&.ecrit.present? && intitule.audio.attached?
-      intitule.audio_url
-    elsif modalite&.ecrit.present? && modalite.audio.attached?
-      modalite.audio_url
     end
   end
 end

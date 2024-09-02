@@ -8,13 +8,13 @@ class QuestionSaisie < Question
   accepts_nested_attributes_for :bonne_reponse, allow_destroy: true
 
   def as_json(_options = nil)
-    json = base_json_object
-    json.merge!(additional_json_fields(transcription_intitule, transcription_modalite_reponse))
+    json = base_json
+    json.merge!(json_audio_fields, additional_json_fields)
   end
 
   private
 
-  def base_json_object
+  def base_json
     slice(:id, :nom_technique, :suffix_reponse, :description,
           :illustration).tap do |json|
       json['type'] = 'saisie'
@@ -25,24 +25,13 @@ class QuestionSaisie < Question
     end
   end
 
-  def additional_json_fields(intitule, modalite)
-    if bonne_reponse.present?
+  def additional_json_fields
+    if bonne_reponse
       reponse = { 'textes' => bonne_reponse.intitule,
                   'bonneReponse' => bonne_reponse.type_choix == 'bon' }
     end
-    fields = { 'intitule' => intitule&.ecrit,
-               'modalite_reponse' => modalite&.ecrit,
-               'audio_url' => question_audio_principal(intitule, modalite),
-               'reponse' => reponse }
-    fields['intitule_audio'] = intitule&.audio_url if intitule&.audio_url && intitule&.ecrit.blank?
-    fields
-  end
-
-  def question_audio_principal(intitule, modalite)
-    if intitule&.ecrit.present? && intitule.audio.attached?
-      intitule.audio_url
-    elsif modalite&.ecrit.present? && modalite.audio.attached?
-      modalite.audio_url
-    end
+    { 'intitule' => transcription_intitule&.ecrit,
+      'modalite_reponse' => transcription_modalite_reponse&.ecrit,
+      'reponse' => reponse }
   end
 end

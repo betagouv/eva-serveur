@@ -47,4 +47,80 @@ describe Question, type: :model do
       end
     end
   end
+
+  describe '#json_audio_fields' do
+    let(:question) { create :question }
+
+    context "quand la question n'a pas de transcriptions audios" do
+      it 'ne retourne rien' do
+        expect(question.json_audio_fields).to be_empty
+      end
+    end
+
+    context 'quand la question a des transcriptions audios' do
+      context "quand l'intitulé est complet" do
+        before do
+          question.transcription_intitule.audio.attach(
+            io: Rails.root.join('spec/support/alcoolique.mp3').open, filename: 'alcoolique.mp3'
+          )
+        end
+
+        it "retourne l'url de l'audio de l'intitulé dans le champ audio_url" do
+          expect(question.transcription_intitule.complete?).to eq true
+          expect(question.json_audio_fields).to eq(
+            { 'audio_url' => question.transcription_intitule.audio_url }
+          )
+        end
+      end
+
+      context "quand l'intitulé est incomplet" do
+        before do
+          question.transcription_intitule.audio.attach(
+            io: Rails.root.join('spec/support/alcoolique.mp3').open, filename: 'alcoolique.mp3'
+          )
+          question.transcription_intitule.update(ecrit: nil)
+        end
+
+        it "retourne l'url de l'audio de l'intitulé dans le champ intitule_audio" do
+          expect(question.transcription_intitule.complete?).to eq false
+          expect(question.json_audio_fields['audio_url']).to eq(nil)
+          expect(question.json_audio_fields['intitule_audio']).to eq(
+            question.transcription_intitule.audio_url
+          )
+        end
+      end
+
+      context 'quand la modalité de réponse est complète' do
+        let!(:modalite_reponse) do
+          create :transcription, :avec_audio, question_id: question.id, categorie: :modalite_reponse
+        end
+
+        it "retourne l'url de l'audio de la modalité de réponse dans le champ intitule_audio" do
+          expect(question.transcription_modalite_reponse.complete?).to eq true
+          expect(question.json_audio_fields).to eq(
+            { 'audio_url' => question.transcription_modalite_reponse.audio_url }
+          )
+        end
+      end
+
+      context "quand la modalité de réponse est complète et l'intitulé incomplet" do
+        let!(:modalite_reponse) do
+          create :transcription, :avec_audio, question_id: question.id, categorie: :modalite_reponse
+        end
+
+        before do
+          question.transcription_intitule.audio.attach(
+            io: Rails.root.join('spec/support/alcoolique.mp3').open, filename: 'alcoolique.mp3'
+          )
+          question.transcription_intitule.update(ecrit: nil)
+        end
+
+        it do
+          fields = question.json_audio_fields
+          expect(fields['audio_url']).to eq(question.transcription_modalite_reponse.audio_url)
+          expect(fields['intitule_audio']).to eq(question.transcription_intitule.audio_url)
+        end
+      end
+    end
+  end
 end

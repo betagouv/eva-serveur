@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe QuestionClicDansImage, type: :model do
+describe QuestionClicDansImage, type: :model do
   it { is_expected.to have_one_attached(:zone_cliquable) }
 
   describe '#as_json' do
@@ -39,26 +39,6 @@ RSpec.describe QuestionClicDansImage, type: :model do
                                        ))
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['zone_cliquable']).to start_with('data:image/svg+xml;base64,')
-    end
-
-    context "quand il n'y a pas d'intitulé écrit" do
-      let!(:intitule) do
-        create(:transcription, :avec_audio, question_id: question_clic_dans_image.id, ecrit: '')
-      end
-
-      it "retourne l'audio de la modalité de réponse comme audio de la question" do
-        json = question_clic_dans_image.as_json
-        expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                           modalite.audio
-                                         ))
-      end
-
-      it "retourne l'audio de l'intitulé comme audio secondaire" do
-        json = question_clic_dans_image.as_json
-        expect(json['intitule_audio']).to eql(Rails.application.routes.url_helpers.url_for(
-                                                intitule.audio
-                                              ))
-      end
     end
   end
 

@@ -25,7 +25,7 @@ describe QuestionGlisserDeposer, type: :model do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique
                                           description illustration modalite_reponse type
-                                          reponsesNonClassees intitule_url])
+                                          reponsesNonClassees])
       expect(json['type']).to eql('glisser-deposer-billets')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
@@ -39,50 +39,6 @@ describe QuestionGlisserDeposer, type: :model do
         expect(json['reponsesNonClassees'].first['illustration']).to_not be(nil)
         expect(json['reponsesNonClassees'].first['position']).to eql(1)
         expect(json['reponsesNonClassees'].first['position_client']).to eql(2)
-      end
-    end
-  end
-
-  describe 'les audios' do
-    context 'quand il y a une modalité de réponse compléte' do
-      context 'avec un intitulé complet' do
-        let!(:intitule) do
-          create(:transcription, :avec_audio, question_id: question.id,
-                                              ecrit: 'Mon Intitulé')
-        end
-        it do
-          expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                             intitule.audio
-                                           ))
-          expect(json['intitule']).to eql('Mon Intitulé')
-          expect(json['intitule_url']).to eql(nil)
-        end
-      end
-
-      context 'sans intitulé' do
-        it do
-          expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                             modalite.audio
-                                           ))
-          expect(json['intitule']).to eql(nil)
-          expect(json['intitule_url']).to eql(nil)
-        end
-      end
-
-      context 'avec un intitulé incomplet' do
-        let!(:intitule) do
-          create(:transcription, :avec_audio, question_id: question.id,
-                                              ecrit: nil)
-        end
-        it do
-          expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                             modalite.audio
-                                           ))
-          expect(json['intitule']).to eql(nil)
-          expect(json['intitule_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                                intitule.audio
-                                              ))
-        end
       end
     end
   end

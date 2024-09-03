@@ -9,10 +9,10 @@ describe Restitution::ExportPositionnement do
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
 
   subject(:response_service) do
-    described_class.new(partie_litteratie: partie, partie_numeratie: partie)
+    described_class.new(partie: partie)
   end
 
-  describe '.to_xls' do
+  describe '#to_xls' do
     it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
       xls = response_service.to_xls
       spreadsheet = Spreadsheet.open(StringIO.new(xls))
@@ -69,6 +69,21 @@ describe Restitution::ExportPositionnement do
       expect(question2[3]).to eq(nil)
       expect(question2[4]).to eq(nil)
       expect(question2[5]).to eq(nil)
+    end
+  end
+
+  describe '#content_type_xls' do
+    it { expect(response_service.content_type_xls).to eq 'application/vnd.ms-excel' }
+  end
+
+  describe '#nom_du_fichier' do
+    it "genere le nom du fichier en fonction de l'évaluation" do
+      code_de_campagne = evaluation.campagne.code.parameterize
+      nom_de_levaluation = evaluation.nom.parameterize.first(15)
+      date = DateTime.current.strftime('%Y%m%d')
+      nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
+
+      expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
     end
   end
 end

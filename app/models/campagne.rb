@@ -56,19 +56,19 @@ class Campagne < ApplicationRecord
   end
 
   def avec_competences_transversales?
-    configuration_inclus?(Situation::SITUATIONS_COMPETENCES_TRANSVERSALES)
+    configuration_inclus?(&:competences_transversales?)
   end
 
   def avec_positionnement?
-    configuration_inclus?(Situation::SITUATIONS_POSITIONNEMENT)
+    configuration_inclus?(&:positionnement?)
   end
 
   def avec_numeratie?
-    configuration_inclus?(Situation::SITUATIONS_NUMERATIE)
+    configuration_inclus?(&:numeratie?)
   end
 
   def avec_pre_positionnement?
-    configuration_inclus?(Situation::SITUATIONS_PRE_POSITIONNEMENT)
+    configuration_inclus?(&:pre_positionnement?)
   end
 
   def genere_code_unique
@@ -83,9 +83,9 @@ class Campagne < ApplicationRecord
 
   private
 
-  def configuration_inclus?(situations)
+  def configuration_inclus?
     situations_configurations.any? do |configuration|
-      situations.include?(configuration.situation.nom_technique)
+      yield(configuration.situation)
     end
   end
 

@@ -1,5 +1,4 @@
 <% profil = place_du_marche ? place_du_marche.profil_numeratie : 'indetermine' %>
-<% partie_litteratie = cafe_de_la_place ? cafe_de_la_place.partie.id : '' %>
 <% classes_panel = place_du_marche ? "panel panel--avec-references" : "panel" %>
 
 <div class="<%= classes_panel %>">
@@ -13,7 +12,7 @@
       pdf: pdf %>
   </div>
   <% if !pdf && place_du_marche %>
-    <% route = admin_positionnement_reponses_path(partie_litteratie_id: partie_litteratie, partie_numeratie_id: place_du_marche.partie.id)%>
+    <% route = admin_positionnement_partie_reponses_path(partie_id: place_du_marche.partie.id)%>
     <%= render partial: 'telechargement_reponses', locals: { route: route } %>
   <% end %>
 </div>

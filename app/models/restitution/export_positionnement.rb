@@ -30,9 +30,8 @@ module Restitution
       }
     ].freeze
 
-    def initialize(partie_litteratie:, partie_numeratie:)
-      @partie_litteratie = partie_litteratie
-      @partie_numeratie = partie_numeratie
+    def initialize(partie:)
+      @partie = partie
     end
 
     def to_xls
@@ -41,6 +40,19 @@ module Restitution
       initialise_sheet(sheet)
       remplie_la_feuille(sheet)
       retourne_le_contenu_du_xls(workbook)
+    end
+
+    def content_type_xls
+      'application/vnd.ms-excel'
+    end
+
+    def nom_du_fichier
+      evaluation = @partie.evaluation
+
+      code_de_campagne = evaluation.campagne.code.parameterize
+      nom_de_levaluation = evaluation.nom.parameterize.first(15)
+      date = DateTime.current.strftime('%Y%m%d')
+      "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
     end
 
     private
@@ -53,8 +65,7 @@ module Restitution
 
     def remplie_la_feuille(sheet)
       ligne = 1
-      evenements = Evenement.where(session_id: @partie_litteratie&.session_id)
-                            .or(Evenement.where(session_id: @partie_numeratie&.session_id))
+      evenements = Evenement.where(session_id: @partie.session_id)
       evenements.reponses.order(position: :asc).each do |evenement|
         sheet = remplis_la_ligne(sheet, ligne, evenement)
         ligne += 1

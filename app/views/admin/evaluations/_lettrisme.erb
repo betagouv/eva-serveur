@@ -18,7 +18,7 @@
   </div>
   <%= render ReferentielAnlciComponent.new('officiel') unless pdf %>
   <% if !pdf && cafe_de_la_place && !place_du_marche %>
-    <% route = admin_positionnement_reponses_path(partie_litteratie_id: cafe_de_la_place.partie.id)%>
+    <% route = admin_positionnement_partie_reponses_path(partie_id: cafe_de_la_place.partie.id)%>
     <%= render partial: 'telechargement_reponses', locals: { route: route } %>
   <% end %>
 </div>

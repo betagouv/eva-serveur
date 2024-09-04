@@ -2,8 +2,12 @@
 $blue-france-sun-113: #000091;
 $blue-france-sun-113-hover: #1212FF;
 $blue-france-925: #E3E3FD;
+$success-950: #B8FEC9;
 $success-425: #18753C;
 $info-950: #E8EDFF;
+$info-425: #0063CB;
+$warning-950: #FFE9E6;
+$warning-425: #B34000;
 $grey-1000: #FFFFFF;
 $grey-1000-hover: #F6F6F6;
 $grey-950: #ECECFE;
@@ -12,6 +16,7 @@ $grey-925: #E5E5E5;
 $grey-850: #CECECE;
 $grey-625: #929292;
 $grey-425: #666666;
+$grey-200: #3A3A3A;
 $orange-terre-battue-850-hover: #FB926B;
 
 // Couleurs eva
@@ -24,7 +29,7 @@ $eva_orange: $orange-terre-battue-850-hover;
 $eva_red: #fd5c54;
 $eva_dark: #161616;
 $eva_less_dark: $grey-425;
-$eva_dark_blue_grey: #3A3A3A;
+$eva_dark_blue_grey: $grey-200;
 $eva_bluegrey: $grey-950;
 $eva_light: #FBF9FA;
 

@@ -1,16 +1,16 @@
 @mixin flash-alert() {
-  color: $eva-dark;
-  background-color: $eva-orange;
+  color: $warning-425;
+  background-color: $warning-950;
 }
 
 @mixin flash-success() {
-  color: $eva_light;
-  background-color: $eva_green;
+  color: $success-425;
+  background-color: $success-950;
 }
 
 @mixin flash-error() {
-  background-color: $eva_red;
-  color: $eva_light;
+  color: $error-425;
+  background-color: $error-950;
 }
 
 .flash {
@@ -101,7 +101,7 @@ body.logged_out {
     color: $eva_light;
     margin-bottom: 0;
     &_notice {
-      background-color: $eva_dark_green;
+      @include flash-success;
     }
     &_alert, &_error, &_recaptcha_error {
       @include flash-error;

@@ -29,8 +29,9 @@
 
   &.modal-danger {
     .modal-content {
-      background-color: $eva_red;
-      color: $eva_light;
+      background-color: $error-950;
+      border-color: $error-425;
+      color: $error-425;
 
       &::before {
         background-image: asset-data-url('icones/error.svg');
@@ -42,7 +43,7 @@
       }
     }
     .bouton-light {
-      color: $eva_red;
+      color: $error-425;
     }
   }
 }

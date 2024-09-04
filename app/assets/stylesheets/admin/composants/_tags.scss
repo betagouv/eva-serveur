@@ -71,11 +71,11 @@
   }
 
   &.blog, &.orange {
-    @include tag-couleur-contour($eva_dark_orange, $couleur-warning)
+    @include tag-couleur-contour($eva_orange, $eva_orange)
   }
 
   &.evolution {
-    @include tag-couleur-contour($eva_dark_green, $eva_green)
+    @include tag-couleur-contour($eva_green, $eva_green)
   }
 
   &.no, &.yes {

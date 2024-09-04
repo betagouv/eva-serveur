@@ -115,9 +115,6 @@
       content: asset-data-url('plus.svg');
       margin-right: 4px;
     }
-    &:hover::before {
-      content: asset-data-url('plus_bleu.svg');
-    }
   }
   input[name="nom_responsable_suivi"] {
     height: 1.625rem;

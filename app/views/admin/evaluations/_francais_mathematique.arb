@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div id: 'francais_mathematiques', class: 'francais-mathematiques marges-page' do
+div class: 'marges-page' do
   render 'demande_aide_illettrisme' if !pdf && resource.illettrisme_potentiel?
 
   render 'litteratie_numeratie_synthese',

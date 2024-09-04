@@ -5,9 +5,15 @@ $blue-france-925: #E3E3FD;
 $success-950: #B8FEC9;
 $success-425: #18753C;
 $info-950: #E8EDFF;
+$info-950-hover: #C2D1FF;
 $info-425: #0063CB;
+$info-425-hover: #3B87FF;
 $warning-950: #FFE9E6;
+$warning-950-hover: #FFC6BD;
 $warning-425: #B34000;
+$warning-425-hover: #FF6218;
+$error-950: #FFE9E9;
+$error-425: #CE0500;
 $grey-1000: #FFFFFF;
 $grey-1000-hover: #F6F6F6;
 $grey-950: #ECECFE;
@@ -24,9 +30,8 @@ $eva_main_blue: $blue-france-sun-113;
 $eva_main_light: #C1C1FB;
 $eva_dark_green: #0C826D;
 $eva_green: $success-425;
-$eva_dark_orange: #E4912F;
 $eva_orange: $orange-terre-battue-850-hover;
-$eva_red: #fd5c54;
+$eva_red: $error-425;
 $eva_dark: #161616;
 $eva_less_dark: $grey-425;
 $eva_dark_blue_grey: $grey-200;
@@ -39,7 +44,7 @@ $couleur-texte: $eva_dark_blue_grey;
 $couleur-texte-light: $eva_less_dark;
 $couleur-liens: $eva_main_blue;
 $couleur-accent-erreur: $eva_red;
-$couleur-warning: $eva_orange;
+$couleur-warning: $warning-425;
 $couleur-legere-accent-validation: $eva_green;
 
 $border-radius: .75rem;
@@ -60,7 +65,7 @@ $font-texte: 'Work Sans';
 
 $theme-colors: (
   "primary": $eva_main_blue,
-  "warning": $eva_dark_orange,
+  "warning": $couleur-warning,
   "orange": $eva_orange,
   "succes": $eva_green,
   "active": $grey-425,

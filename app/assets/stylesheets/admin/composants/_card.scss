@@ -46,13 +46,15 @@
       $banner-padding: 1.5rem;
       padding: $banner-padding;
       gap: 2rem;
+      background-color: $success-950;
+      color: $success-425;
       h4 {
         margin-bottom: 2rem;
+        color: $success-425;
       }
       p {
         margin-bottom: 0.5rem;
       }
-      background-color: $eva-green;
       &__button {
         display: flex;
         flex-direction: row-reverse;

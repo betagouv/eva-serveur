@@ -15,6 +15,7 @@ fr:
         demande_acceptation: 'Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva.'
         bouton_acceptation_cgu: 'J’ai lu et j’accepte les CGU'
       modal_validation_comptes_en_attente:
+        annuler: Plus tard
         info_comptes_en_attente: |
           **Des demandes d'accès sont en attente de validation.** Vous pouvez les confirmer **dans la page de votre structure**.
       index:

@@ -50,12 +50,21 @@
       font-size: .75rem;
 
       &.lien-autoriser {
-        background-color: $couleur-liens;
+        background-color: $info-950;
+        color: $info-425;
+        &:hover {
+          background-color: $info-950-hover;
+          color: $info-425-hover;
+        }
       }
 
       &.lien-refuser {
-        background-color: $couleur-warning;
-        color: $eva_dark;
+        background-color: $warning-950;
+        color: $warning-425;
+        &:hover {
+          background-color: $warning-950-hover;
+          color: $warning-425-hover;
+        }
       }
 
       &:first-child {

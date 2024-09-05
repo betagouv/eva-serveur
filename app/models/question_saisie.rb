@@ -26,11 +26,14 @@ class QuestionSaisie < Question
   end
 
   def additional_json_fields(intitule, modalite)
+    if bonne_reponse.present?
+      reponse = { 'textes' => bonne_reponse.intitule,
+                  'bonneReponse' => bonne_reponse.type_choix == 'bon' }
+    end
     fields = { 'intitule' => intitule&.ecrit,
                'modalite_reponse' => modalite&.ecrit,
                'audio_url' => question_audio_principal(intitule, modalite),
-               'reponse' => { 'textes' => bonne_reponse&.intitule,
-                              'bonneReponse' => bonne_reponse&.type_choix == 'bon' } }
+               'reponse' => reponse }
     fields['intitule_audio'] = intitule&.audio_url if intitule&.audio_url && intitule&.ecrit.blank?
     fields
   end

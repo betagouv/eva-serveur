@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe QuestionSaisie, type: :model do
+describe QuestionSaisie, type: :model do
   it { is_expected.to have_one(:bonne_reponse).with_foreign_key(:question_id) }
 
   describe '#as_json' do
@@ -73,6 +73,13 @@ RSpec.describe QuestionSaisie, type: :model do
         expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                            question_saisie.transcriptions.first.audio
                                          ))
+      end
+    end
+
+    context "quand il n'y a pas de réponse" do
+      it 'ne retourne pas de reponse' do
+        reponse.destroy
+        expect(json['reponse']).to be_nil
       end
     end
   end

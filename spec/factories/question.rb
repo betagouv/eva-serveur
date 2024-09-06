@@ -37,4 +37,9 @@ FactoryBot.define do
     libelle { 'Question clic dans image' }
     sequence(:nom_technique) { |n| "question-clic-dans-image-#{n}" }
   end
+
+  factory :question_glisser_deposer do
+    libelle { 'Question glisser deposer' }
+    sequence(:nom_technique) { |n| "question-glissser-deposer-#{n}" }
+  end
 end

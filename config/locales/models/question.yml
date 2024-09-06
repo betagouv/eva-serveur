@@ -12,7 +12,10 @@ fr:
         other: Questions sous consigne
       question_clic_dans_image:
         one: Question clic dans image
-        other: Questions clic dans image
+        other: Questions clic dans image      
+      question_glisser_deposer:
+        one: Question glisser déposer
+        other: Questions glisser déposer
     attributes:
       question:
         created_at: Créée le
@@ -37,3 +40,4 @@ fr:
       question_qcm: *question_actions
       question_saisie: *question_actions
       question_clic_dans_image: *question_actions
+      question_glisser_deposer: *question_actions

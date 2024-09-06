@@ -28,6 +28,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'connexion_demo', 'connexions_demo'
   inflect.irregular 'question_saisie', 'questions_saisies'
   inflect.irregular 'question_clic_dans_image', 'questions_clic_dans_image'
+  inflect.irregular 'question_glisser_deposer', 'questions_glisser_deposer'
 end
 
 # These inflection rules are supported but not enabled by default:

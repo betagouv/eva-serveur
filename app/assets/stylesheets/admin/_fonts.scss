@@ -1,3 +1,23 @@
+/* Marianne-regular - latin-ext */
+@font-face {
+  font-family: 'Marianne';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+       font-url('Marianne-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       font-url('Marianne-Regular.woff') format('woff'), /* Modern Browsers */
+}
+
+/* Marianne-bold - latin-ext */
+@font-face {
+  font-family: 'Marianne';
+  font-style: bold;
+  font-weight: 700;
+  src: local(''),
+       font-url('Marianne-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       font-url('Marianne-Bold.woff') format('woff'), /* Modern Browsers */
+}
+
 /* quicksand-regular - latin-ext */
 @font-face {
   font-family: 'Quicksand';

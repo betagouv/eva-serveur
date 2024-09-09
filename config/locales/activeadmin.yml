@@ -12,11 +12,9 @@ fr:
     devise:
       sessions:
         new:
-          inclusion-connect:
+          pro-connect:
             transition: OU
-            description: |
-              Inclusion Connect permet aux conseillers et conseillères d'utiliser le même identifiant et mot de passe pour se connecter à différents services. Simple, sécurisé, efficace !
-            inscription: créer mon compte conseiller Inclusion Connect
+            libelle-lien-pro-connect: Qu’est-ce que ProConnect ?
           eva-login:
             titre: J'ai déjà un compte conseiller
             connexion: Se connecter avec un compte eva

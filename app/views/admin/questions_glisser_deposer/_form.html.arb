@@ -17,10 +17,13 @@ active_admin_form_for [:admin, resource] do |f|
       r.input :nom_technique
       r.input :position
       r.input :type_choix, as: :hidden, input_html: { value: :bon }
+      label = r.object.illustration.attached? ? t('.label_illustration') : true
+      hint =
+        r.object.illustration.attached? ? image_tag(cdn_for(r.object.illustration)) : t('.hint')
       r.input :illustration, as: :file,
-                             label: r.object.illustration.attached? ? t('.label_illustration') : true,
+                             label: label,
                              input_html: { accept: illustration_content_types.join(',') },
-                             hint: r.object.illustration.attached? ? image_tag(cdn_for(r.object.illustration)) : t('.hint')
+                             hint: hint
     end
   end
   f.actions do

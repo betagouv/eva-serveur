@@ -22,5 +22,11 @@ FactoryBot.define do
     trait :avec_audio do
       audio { Rack::Test::UploadedFile.new(Rails.root.join('spec/support/alcoolique.mp3')) }
     end
+
+    trait :avec_illustration do
+      illustration do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))
+      end
+    end
   end
 end

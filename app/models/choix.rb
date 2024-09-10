@@ -6,7 +6,7 @@ class Choix < ApplicationRecord
   validates :illustration,
             blob: { content_type: ApplicationController.helpers.illustration_content_types }
 
-  validates :intitule, :type_choix, :nom_technique, presence: true
+  validates :type_choix, :nom_technique, presence: true
   enum :type_choix, { bon: 0, mauvais: 1, abstention: 2 }
   has_one_attached :audio
 

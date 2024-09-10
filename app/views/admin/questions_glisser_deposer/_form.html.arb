@@ -11,6 +11,17 @@ active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     render partial: 'admin/questions/inputs_avec_transcriptions_audios',
            locals: { f: f }
+    f.has_many :reponses, allow_destroy: true, new_record: t('.ajout_reponse'),
+                          heading: t('.reponses') do |r|
+      r.input :id, as: :hidden
+      r.input :nom_technique
+      r.input :position
+      r.input :type_choix, as: :hidden, input_html: { value: :bon }
+      r.input :illustration, as: :file,
+                             label: r.object.illustration.attached? ? t('.label_illustration') : true,
+                             input_html: { accept: illustration_content_types.join(',') },
+                             hint: r.object.illustration.attached? ? image_tag(cdn_for(r.object.illustration)) : t('.hint')
+    end
   end
   f.actions do
     f.action :submit

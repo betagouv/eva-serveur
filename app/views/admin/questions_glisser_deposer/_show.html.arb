@@ -30,3 +30,16 @@ panel 'Détails de la question' do
     row :created_at
   end
 end
+
+panel 'Réponses' do
+  reorderable_table_for question_glisser_deposer.reponses do
+    column :position
+    column :illustration do |reponse|
+      if reponse.illustration.attached?
+        link_to(cdn_for(reponse.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(reponse.illustration), class: 'image-preview'
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,8 @@
+fr:
+  admin:
+    questions_glisser_deposer:
+      form:
+        ajout_reponse: Ajouter une réponse
+        reponses: Réponses
+        label_illustration: 'Illustration (la taille rendue est de 100x60)'
+        hint: La taille de l'image rendue est de 100x60

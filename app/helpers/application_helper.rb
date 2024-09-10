@@ -50,4 +50,8 @@ module ApplicationHelper
     encodage = Base64.strict_encode64 file_content
     "data:image/svg+xml;base64,#{encodage}"
   end
+
+  def illustration_content_types
+    %w[image/png image/jpeg image/webp].freeze
+  end
 end

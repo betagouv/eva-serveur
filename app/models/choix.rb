@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Choix < ApplicationRecord
+  has_one_attached :illustration
+
+  validates :illustration,
+            blob: { content_type: ApplicationController.helpers.illustration_content_types }
+
   validates :intitule, :type_choix, :nom_technique, presence: true
   enum :type_choix, { bon: 0, mauvais: 1, abstention: 2 }
   has_one_attached :audio

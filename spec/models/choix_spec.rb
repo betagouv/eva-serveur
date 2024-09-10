@@ -7,6 +7,7 @@ RSpec.describe Choix, type: :model do
   it { is_expected.to validate_presence_of :type_choix }
   it { is_expected.to validate_presence_of :nom_technique }
   it { is_expected.to have_one_attached(:audio) }
+  it { is_expected.to have_one_attached(:illustration) }
 
   it do
     expect(subject).to define_enum_for(:type_choix)

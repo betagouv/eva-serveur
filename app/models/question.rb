@@ -3,13 +3,11 @@
 class Question < ApplicationRecord
   has_one_attached :illustration
 
-  ILLUSTRATION_CONTENT_TYPES = ['image/png', 'image/jpeg', 'image/webp'].freeze
-
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse
 
   validates :illustration,
-            blob: { content_type: ILLUSTRATION_CONTENT_TYPES }
+            blob: { content_type: ApplicationController.helpers.illustration_content_types }
 
   validates :libelle, :nom_technique, presence: true
   validates :nom_technique, uniqueness: true

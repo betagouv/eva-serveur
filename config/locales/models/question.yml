@@ -32,6 +32,8 @@ fr:
         suffix_reponse: Suffix réponse
         reponse_placeholder: Réponse placeholder
         bonne_reponse: Bonne réponse
+      question_glisser_deposer:
+        reponses: Réponses
   formtastic:
     actions:
       question: &question_actions

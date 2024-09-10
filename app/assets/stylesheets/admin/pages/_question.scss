@@ -1,4 +1,8 @@
-form.question_saisie, form.question_clic_dans_image, form.question_qcm, form.question_sous_consigne {
+form.question_saisie,
+form.question_clic_dans_image,
+form.question_qcm,
+form.question_sous_consigne,
+form.question_glisser_deposer {
   .transcriptions {
     padding: 0;
     .has_many_remove {
@@ -14,12 +18,15 @@ form.question_saisie .choix {
     display: none !important;
   }
 }
-.show.admin_question_qcms {
+.show.admin_question_qcms, .show.admin_questions_glisser_deposer {
   tr.even, tr.odd {
     td  {
       background: transparent;
       vertical-align: middle;
       border-bottom: 1px solid $eva_bluegrey;
+    }
+    .image-preview {
+      width: 100px;
     }
   }
 }

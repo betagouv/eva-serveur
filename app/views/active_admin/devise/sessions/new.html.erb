@@ -16,12 +16,12 @@
           <p class="espace-pro-connect-transition" ><%= t('.pro-connect.transition') %></p>
           <div class="bouton-action bouton-action--centre">
             <div class='pro-connect-group'>
-              <%= link_to inclusion_connect_auth_path, class:'btn-pro-connect' do %>
+              <%= link_to pro_connect_auth_path, class:'btn-pro-connect' do %>
                 <span class="pro-connect__login">S’identifier avec</span>
                 <span class="pro-connect__brand">ProConnect</span>
               <% end %>
               <p>
-                <a href="https://proconnect.gouv.fr/" target="_blank" rel="noopener" title="<%= t('.pro-connect.libelle-lien-pro-connect') %> - nouvelle fenêtre">
+                <a href="https://www.proconnect.gouv.fr/" target="_blank" rel="noopener" title="<%= t('.pro-connect.libelle-lien-pro-connect') %> - nouvelle fenêtre">
                   <%= t('.pro-connect.libelle-lien-pro-connect') %>
                 </a>
               </p>

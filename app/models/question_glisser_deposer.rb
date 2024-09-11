@@ -36,7 +36,7 @@ class QuestionGlisserDeposer < Question
   end
 
   def reponses_fields
-    reponses_non_classees = reponses.map do |reponse|
+    reponses_non_classees = reponses.order('RANDOM()').map do |reponse|
       illustration_url = cdn_for(reponse.illustration) if reponse.illustration.attached?
       reponse.slice(:id, :position).merge(
         'illustration' => illustration_url

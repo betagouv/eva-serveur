@@ -15,7 +15,6 @@ active_admin_form_for [:admin, resource] do |f|
                           heading: t('.reponses') do |r|
       r.input :id, as: :hidden
       r.input :nom_technique
-      r.input :position
       r.input :type_choix, as: :hidden, input_html: { value: :bon }
       label = r.object.illustration.attached? ? t('.label_illustration') : true
       hint =

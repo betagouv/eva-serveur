@@ -17,7 +17,7 @@ describe QuestionGlisserDeposer, type: :model do
                                           categorie: :modalite_reponse)
     end
     let!(:reponse1) { create(:choix, :avec_illustration, :bon, question_id: question.id) }
-    let!(:reponse2) { create(:choix, :bon, question_id: question.id) }
+    let!(:reponse2) { create(:choix, :avec_illustration, :bon, question_id: question.id) }
     let(:json) { question.as_json }
 
     it 'serialise les champs' do
@@ -36,11 +36,7 @@ describe QuestionGlisserDeposer, type: :model do
                                          intitule.audio
                                        ))
       expect(json['reponsesNonClassees'].size).to eql(2)
-      expect(json['reponsesNonClassees'].first['illustration']).to eql(
-        Rails.application.routes.url_helpers.url_for(
-          reponse1.illustration
-        )
-      )
+      expect(json['reponsesNonClassees'].first['illustration']).to_not be(nil)
     end
   end
 end

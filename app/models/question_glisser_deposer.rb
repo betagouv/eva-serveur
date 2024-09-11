@@ -13,7 +13,7 @@ class QuestionGlisserDeposer < Question
 
   def base_json
     slice(:id, :nom_technique, :description).tap do |json|
-      json['type'] = 'glisser_deposer_billets'
+      json['type'] = 'glisser-deposer-billets'
       json['illustration'] = cdn_for(illustration) if illustration.attached?
       json['modalite_reponse'] = transcription_modalite_reponse&.ecrit
       json['intitule'] = transcription_intitule&.ecrit

@@ -1,46 +1,58 @@
 # frozen_string_literal: true
 
-module InclusionConnectHelper
-  IC_CLIENT_ID = ENV.fetch('INCLUSION_CONNECT_CLIENT_ID', nil)
-  IC_CLIENT_SECRET = ENV.fetch('INCLUSION_CONNECT_CLIENT_SECRET', nil)
-  IC_BASE_URL = ENV.fetch('INCLUSION_CONNECT_BASE_URL', nil)
+module ProConnectHelper
+  PC_CLIENT_ID = ENV.fetch('PRO_CONNECT_CLIENT_ID', nil)
+  PC_CLIENT_SECRET = ENV.fetch('PRO_CONNECT_CLIENT_SECRET', nil)
+  PC_BASE_URL = ENV.fetch('PRO_CONNECT_BASE_URL', nil)
 
   class << self
-    def auth_path(ic_state, callback_url)
+    def auth_path(pc_state, pc_nonce, callback_url)
       query = {
         response_type: 'code',
-        client_id: IC_CLIENT_ID,
+        client_id: PC_CLIENT_ID,
         redirect_uri: callback_url,
-        scope: 'openid email profile',
-        state: ic_state,
-        nonce: Digest::SHA1.hexdigest('Something to check when it come back ?'),
-        from: 'community'
+        acr_values: 'eidas1',
+        scope: 'openid email usual_name given_name',
+        state: pc_state,
+        nonce: pc_nonce
       }
-      "#{IC_BASE_URL}/auth/authorize?#{query.to_query}"
+      "#{PC_BASE_URL}/api/v2/authorize?#{query.to_query}"
     end
 
     def logout_confirmed(post_logout_redirect_uri)
       query = {
-        client_id: IC_CLIENT_ID,
+        client_id: PC_CLIENT_ID,
         post_logout_redirect_uri: post_logout_redirect_uri
       }
-      "#{IC_BASE_URL}/auth/logout?#{query.to_query}"
+      "#{PC_BASE_URL}/api/v2/session/end?#{query.to_query}"
     end
 
     def logout(session, post_logout_redirect_uri)
       query = {
-        state: session[:ic_state],
-        id_token_hint: session[:ic_logout_token],
+        state: session[:pc_state],
+        id_token_hint: session[:pc_logout_token],
         post_logout_redirect_uri: post_logout_redirect_uri
       }
-      session[:ic_logout_token] = nil
-      "#{IC_BASE_URL}/auth/logout?#{query.to_query}"
+      session[:pc_logout_token] = nil
+      "#{PC_BASE_URL}/api/v2/session/end?#{query.to_query}"
     end
 
-    def compte(token)
-      return false if token.blank?
+    def decode_jwt(jwt)
+      decode = JWT.decode(jwt, PC_CLIENT_SECRET, true, { algorithm: 'HS256' })
+      yield(decode[0])
+    rescue JWT::DecodeError => e
+      Rails.logger.warn "erreur JWT: #{e}"
+      false
+    end
 
-      user_info = get_user_info(token)
+    def verifie(id_token_jwt, nonce)
+      decode_jwt(id_token_jwt) { |id_token| id_token['nonce'] == nonce }
+    end
+
+    def compte(access_token)
+      return false if access_token.blank?
+
+      user_info = get_user_info(access_token)
       return false if user_info.blank?
 
       cree_ou_recupere_compte(user_info)
@@ -48,11 +60,11 @@ module InclusionConnectHelper
 
     def recupere_tokens(code, callback_url)
       data = { grant_type: 'authorization_code',
-               client_id: IC_CLIENT_ID, client_secret: IC_CLIENT_SECRET,
+               client_id: PC_CLIENT_ID, client_secret: PC_CLIENT_SECRET,
                code: code, redirect_uri: callback_url }
 
       res = Typhoeus.post(
-        URI("#{IC_BASE_URL}/auth/token/"),
+        URI("#{PC_BASE_URL}/api/v2/token"),
         body: data.to_query,
         headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
       )
@@ -62,18 +74,17 @@ module InclusionConnectHelper
     end
 
     def get_user_info(token)
-      uri = URI("#{IC_BASE_URL}/auth/userinfo/")
-      uri.query = URI.encode_www_form({ schema: 'openid' })
+      uri = URI("#{PC_BASE_URL}/api/v2/userinfo")
 
       res = Typhoeus.get(uri, headers: { 'Authorization' => "Bearer #{token}" })
       return false unless res.success?
 
-      JSON.parse(res.body)
+      decode_jwt(res.body) { |user_info| user_info }
     end
 
     def cree_ou_recupere_compte(user_info)
       email = user_info['email'].strip.downcase
-      compte = Compte.find_by(id_inclusion_connect: user_info['sub'])
+      compte = Compte.find_by(id_pro_connect: user_info['sub'])
       if compte.present? && compte.email != email
         compte = actualise_email_compte_existant(compte, email)
       end
@@ -88,7 +99,7 @@ module InclusionConnectHelper
     def actualise_email_compte_existant(compte, email)
       compte_existant = Compte.find_by(email: email)
       if compte_existant.present?
-        compte.update!(id_inclusion_connect: nil)
+        compte.update!(id_pro_connect: nil)
         compte = compte_existant
       else
         compte.email = email
@@ -99,9 +110,9 @@ module InclusionConnectHelper
     end
 
     def actualise_autres_champs(compte, user_info)
-      compte.id_inclusion_connect = user_info['sub']
+      compte.id_pro_connect = user_info['sub']
       compte.prenom = user_info['given_name']
-      compte.nom = user_info['family_name']
+      compte.nom = user_info['usual_name']
       compte.password = SecureRandom.uuid if compte.encrypted_password.blank?
       compte.confirmed_at ||= Time.zone.now
     end

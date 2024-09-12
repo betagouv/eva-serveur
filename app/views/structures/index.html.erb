@@ -1,10 +1,12 @@
 <div id="active_admin_content">
-  <% content_for :title, t('.title') %>
-  <% content_for :titre do %>
-    <%= t('.titre') -%>
-  <% end %>
+  <div class="panel">
+    <% content_for :title, t('.title') %>
+    <% content_for :titre do %>
+      <%= t('.titre') -%>
+    <% end %>
 
-  <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
-  <%= md t('.description')%>
-  <%= render(@recherche_structure_component) %>
+    <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
+    <%= md t('.description')%>
+    <%= render(@recherche_structure_component) %>
+  </div>
 </div>

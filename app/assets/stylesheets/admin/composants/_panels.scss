@@ -1,6 +1,11 @@
-.section,
-.panel,
 body.logged_out #content_wrapper #active_admin_content {
+  box-shadow: none;
+  background: none;
+  padding: 0;
+}
+
+.section,
+.panel {
   @include carte-avec-ombre();
   padding: 1.5rem;
   margin-bottom: 1.5rem;

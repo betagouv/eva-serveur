@@ -79,6 +79,21 @@
     }
   }
 
+  input + .choix-item {
+    .choix-item__icone {
+      .icone-loupe {
+        path, rect {
+          fill: $eva_main_blue;
+        }
+      }
+      .icone-pin {
+        path {
+          stroke: $eva_main_blue;
+        }
+      }
+    }
+  }
+
   input:checked + .choix-item {
     border-color: $couleur-texte;
     background: $eva_main_blue;

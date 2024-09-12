@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 div class: 'marges-page' do
-  render 'demande_aide_illettrisme' if !pdf && resource.illettrisme_potentiel?
-
   render 'litteratie_numeratie_synthese',
          synthese: synthese,
          description: synthese,

@@ -13,6 +13,6 @@ class TagStories < ViewComponent::Storybook::Stories
 
   story :avec_image do
     contenu = 'tag'
-    constructor(contenu, image_path: 'demande_aide')
+    constructor(contenu, image_path: 'avatar_salut')
   end
 end

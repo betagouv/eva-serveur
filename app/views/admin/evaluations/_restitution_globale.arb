@@ -109,8 +109,7 @@ div class: 'evaluation__restitution-globale' do
       end
     else
       div id: 'francais_mathematiques', class: 'page' do
-        class_titre = resource.illettrisme_potentiel? ? 'titre--avec-aide-illettrisme' : ''
-        h2 t('titre', scope: 'admin.restitutions.cefr'), class: class_titre
+        h2 t('titre', scope: 'admin.restitutions.cefr')
 
         div class: 'panel panel--avec-references' do
           render 'francais_mathematique', pdf: pdf,
@@ -139,11 +138,7 @@ div class: 'evaluation__restitution-globale' do
       if pdf
         h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: 'text-center mt-5 mb-4'
       else
-        class_titre = ''
-        if restitution_globale.synthese_positionnement == 'illettrisme_potentiel'
-          class_titre = 'titre--avec-aide-illettrisme'
-        end
-        h2 t('titre', scope: 'admin.restitutions.lettrisme'), class: class_titre
+        h2 t('titre', scope: 'admin.restitutions.lettrisme')
       end
 
       render partial: 'lettrisme',
@@ -162,11 +157,7 @@ div class: 'evaluation__restitution-globale' do
       if pdf
         h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center mt-5 mb-4'
       else
-        class_titre = ''
-        if restitution_globale.synthese_positionnement_numeratie == 'illettrisme_potentiel'
-          class_titre = 'titre--avec-aide-illettrisme'
-        end
-        h2 t('titre', scope: 'admin.restitutions.numeratie'), class: class_titre
+        h2 t('titre', scope: 'admin.restitutions.numeratie')
       end
 
       render partial: 'numeratie',

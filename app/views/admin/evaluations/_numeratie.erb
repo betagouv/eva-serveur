@@ -3,7 +3,6 @@
 
 <div class="<%= classes_panel %>">
   <div class='marges-page'>
-    <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel'%>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
       scope: "admin.evaluations.numeratie",

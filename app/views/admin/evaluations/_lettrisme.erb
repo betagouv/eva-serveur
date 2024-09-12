@@ -1,7 +1,6 @@
 <% profil = cafe_de_la_place ? cafe_de_la_place.niveau_litteratie : 'indetermine' %>
 <div class="panel panel-lettrisme panel--avec-references">
   <div class='marges-page'>
-    <%= render 'demande_aide_illettrisme' if !pdf && synthese == 'illettrisme_potentiel' %>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
       scope: "admin.evaluations.lettrisme.litteratie",

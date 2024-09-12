@@ -25,11 +25,6 @@ div class: 'menu menu-transverse' do
     li do
       a href: '#francais_mathematiques' do
         text_node 'Français et Mathématiques'
-        if resource.illettrisme_potentiel?
-          render(Tag.new(t('formation_recommandee', scope: 'admin.evaluations.tags'),
-                         image_path: 'demande_aide',
-                         classes: 'tag-categorie orange'))
-        end
       end
     end
     li do
@@ -40,21 +35,11 @@ div class: 'menu menu-transverse' do
     li do
       a href: '#lettrisme' do
         text_node 'Lettrisme'
-        if restitution_globale.synthese_positionnement == 'illettrisme_potentiel'
-          render(Tag.new(t('formation_recommandee', scope: 'admin.evaluations.tags'),
-                         image_path: 'demande_aide',
-                         classes: 'tag-categorie orange'))
-        end
       end
     end
     li do
       a href: '#numeratie' do
         text_node 'Numeratie'
-        if restitution_globale.synthese_positionnement_numeratie == 'illettrisme_potentiel'
-          render(Tag.new(t('formation_recommandee', scope: 'admin.evaluations.tags'),
-                         image_path: 'demande_aide',
-                         classes: 'tag-categorie orange'))
-        end
       end
     end
   end

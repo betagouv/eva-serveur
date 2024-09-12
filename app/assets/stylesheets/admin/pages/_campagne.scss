@@ -148,12 +148,12 @@
       color: $eva_dark_blue_grey;
     }
 
-    fieldset.inputs {
+    fieldset.inputs, fieldset.input-choix, fieldset.choices {
       background-color: #fff;
+
       input[type="text"],
       .select2 {
-        width: auto;
-        flex: 1;
+        width: 100%;
       }
     }
   }
@@ -162,6 +162,7 @@
 
   form fieldset.actions {
     margin-top: 2rem;
+
     ol {
       display: flex;
       justify-content: space-between;

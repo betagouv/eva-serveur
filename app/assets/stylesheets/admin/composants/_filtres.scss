@@ -1,24 +1,46 @@
 .sidebar_section {
-  form.filter_form {
+  form {
+    &.filter_form {
+      input[type="text"] {
+      }
+      ::placeholder {
+        color: $couleur-texte;
+      }
+
+      .filter_form_field {
+        &.select_and_search {
+          input[type='text'] {
+            width: 6.4rem;
+          }
+        }
+        &.filter_date_range {
+          input[type='text'] {
+            width: 7.188rem;
+          }
+        }
+      }
+      .input:not(.select_and_search) {
+        select {
+          width: 100%;
+        }
+      }
+      .select2-selection {
+        padding: .5rem 0.5rem;
+      }
+    }
+
     .filter_form_field {
-      &.select_and_search {
-        input[type='text'] {
-          width: 6.4rem;
-        }
-      }
-      &.filter_date_range {
-        input[type='text'] {
-          width: 7.188rem;
-        }
-      }
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
     }
-    .input:not(.select_and_search) {
-      select {
-        width: 100%;
-      }
-    }
-    .select2-selection {
-      height: 100%;
+
+    label {
+      text-transform: none;
+      font-weight: normal;
+      color: $eva_dark;
+      width: 100%;
+      line-height: 1.5rem;
     }
   }
 }

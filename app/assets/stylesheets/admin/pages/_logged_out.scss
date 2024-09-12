@@ -154,7 +154,7 @@ body.logged_out {
         }
         .panel-content {
           form {
-            margin-top: 2rem;
+            margin-top: 1rem;
           }
         }
       }
@@ -233,8 +233,7 @@ body.logged_out {
       input[type="text"],
       input[type="email"],
       input[type="password"] {
-        width: auto;
-        flex: 1;
+        width: 100%;
       }
       li {
         padding: 0;

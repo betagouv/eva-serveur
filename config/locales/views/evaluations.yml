@@ -52,8 +52,6 @@ fr:
       recherche_responsable_suivi:
         placeholder: Nom du responsable…
         action: Ajouter un responsable de suivi
-      tags:
-        formation_recommandee: Formation recommandée
       tri:
         <<: *commun
         reste_plateau: Reste plateau
@@ -200,10 +198,6 @@ fr:
             D'après nos enquêtes, seulement **25% des personnes en illettrisme potentiel réussissent à entrer en formation.**
 
             **Avez-vous été en mesure d’orienter cette personne vers une solution d’accompagnement adaptée* ?**
-      demande_aide_illettrisme:
-        aide_description: |
-          Vous ne trouvez aucune formation adaptée à lui proposer ou aucun financement disponible ?
-        aide_cta: Signaler une difficulté
       parties:
         titre: Administration
         rapport: Rapport

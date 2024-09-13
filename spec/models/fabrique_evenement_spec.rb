@@ -9,13 +9,14 @@ describe FabriqueEvenement do
   let(:donnees) { JSON.parse(File.read(chemin)) }
   let(:evaluation) { create :evaluation }
   let(:nom_evenement) { 'finSituation' }
+  let(:session_id) { '184e1079-3bb9-4229-921e-4c2574d94934' }
   let(:parametres) do
     {
       date: 1_631_891_703_815,
       donnees: {},
       nom: nom_evenement,
       position: 0,
-      session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
+      session_id: session_id,
       situation: situation_livraison.nom_technique,
       evaluation_id: evaluation.id
     }
@@ -57,7 +58,7 @@ describe FabriqueEvenement do
 
     context 'quand une partie est déjà existante' do
       let!(:partie) do
-        create :partie, session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
+        create :partie, session_id: session_id,
                         situation: situation_livraison,
                         evaluation: evaluation
       end
@@ -80,7 +81,7 @@ describe FabriqueEvenement do
           donnees: {},
           nom: 'finSituation',
           position: 0,
-          session_id: '184e1079-3bb9-4229-921e-4c2574d94934',
+          session_id: session_id,
           situation: situation_livraison.nom_technique,
           evaluation_id: nil
         }
@@ -88,7 +89,32 @@ describe FabriqueEvenement do
 
       it 'ne crée rien' do
         expect do
-          FabriqueEvenement.new(parametres_invalide).call
+          expect(FabriqueEvenement.new(parametres_invalide).call).to be_nil
+        end.to change(Partie, :count)
+          .by(0)
+          .and change(Evenement, :count)
+          .by(0)
+      end
+    end
+
+    context 'quand la partie existe déjà, mais sur une autre évaluation commencée plus tôt' do
+      let(:autre_evaluation) { create :evaluation }
+      let(:parametres_invalide) do
+        {
+          date: 1_631_891_703_815,
+          donnees: {},
+          nom: 'finSituation',
+          position: 1,
+          session_id: session_id,
+          situation: situation_livraison.nom_technique,
+          evaluation_id: autre_evaluation.id
+        }
+      end
+
+      it 'ne crée rien' do
+        FabriqueEvenement.new(parametres).call
+        expect do
+          expect(FabriqueEvenement.new(parametres_invalide).call).to be_nil
         end.to change(Partie, :count)
           .by(0)
           .and change(Evenement, :count)
@@ -110,7 +136,7 @@ describe FabriqueEvenement do
 
       it 'la partie est quand même créée' do
         expect do
-          FabriqueEvenement.new(parametres_invalide).call
+          expect(FabriqueEvenement.new(parametres_invalide).call.persisted?).to be false
         end.to change(Partie, :count)
           .by(1)
           .and change(Evenement, :count)

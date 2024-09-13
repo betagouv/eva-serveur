@@ -15,7 +15,7 @@ module Eva
       def create
         @compte = Compte.new compte_parametres
         @compte.assigne_role_admin_si_pas_d_admin
-        if @compte.save
+        if verify_recaptcha(model: @compte) && @compte.save
           sign_in @compte
           redirect_to admin_dashboard_path, notice: I18n.t('devise.registrations.signed_up')
         else

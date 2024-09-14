@@ -3,6 +3,8 @@
 module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController
+      include CampagneHelper
+
       before_action :check_compte_confirmation, only: :create
 
       def create
@@ -15,12 +17,10 @@ module Eva
       end
 
       def connexion_espace_jeu
-        code = params[:code].upcase
-        campagne = Campagne.par_code(code)
+        code = params[:code]&.upcase
+        campagne = code.present? && Campagne.par_code(code)
         if campagne.present?
-          params_url = { code: code }
-          url = "#{URL_CLIENT}?#{params_url.to_query}"
-          redirect_to url
+          redirect_to url_campagne(code), allow_other_host: true
         else
           code_erreur = t('active_admin.devise.login.evaluations.code_invalide')
           redirect_to new_compte_session_path(code: code, code_erreur: code_erreur)

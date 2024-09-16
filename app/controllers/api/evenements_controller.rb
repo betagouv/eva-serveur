@@ -4,7 +4,10 @@ module Api
   class EvenementsController < Api::BaseController
     def create
       evenement = FabriqueEvenement.new(permit_params).call
-      if evenement.persisted?
+      if evenement.blank?
+        logger.warn "Echec recherche partie, evenement ignoré : #{permit_params}"
+        render json: {}, status: :ok
+      elsif evenement.persisted?
         render json: evenement, status: :created
       else
         render json: evenement.errors.full_messages, status: :unprocessable_entity

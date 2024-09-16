@@ -11,7 +11,7 @@ class NouvellesStructuresController < ApplicationController
 
   def create
     @compte = Compte.new compte_parametres
-    if @compte.save
+    if verify_recaptcha(model: @compte) && @compte.save
       envoie_emails
       sign_in @compte
       redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')

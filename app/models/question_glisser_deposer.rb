@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class QuestionGlisserDeposer < Question
-  has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
+  has_many :reponses, -> { order(position: :asc) },
+           foreign_key: :question_id,
+           class_name: 'Choix',
+           dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
   def as_json(_options = nil)

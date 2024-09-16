@@ -50,7 +50,7 @@ fr:
           question: |
             Au sein de votre structure, ces personnes semblent avoir  
             besoin d’accompagnement.  
-            Avez-vous été en mesure de les orienter vers une solution adaptée ?
+            **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

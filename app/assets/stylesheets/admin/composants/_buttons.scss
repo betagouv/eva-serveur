@@ -64,15 +64,15 @@ button.bouton, .bouton {
   }
 
   &.valide-qcm:hover {
-    background-color: $grey-1000-hover ;
+    background-color: $grey-1000-hover;
   }
 
   &.bouton-outline--main {
     background-color: $grey-1000 ;
   }
 
-  &.bouton-outline--light, &.bouton-outline--grey,
-  &.bouton-outline--light:hover, &.bouton-outline--grey:hover {
+  &.bouton-outline--light,
+  &.bouton-outline--light:hover {
     background-color: transparent;
   }
 
@@ -85,11 +85,6 @@ button.bouton, .bouton {
   &.bouton-outline--light {
     color: $eva_light;
     border-color: $eva_light;
-  }
-
-  &.bouton-outline--grey {
-    color: $eva_bluegrey;
-    border-color: $eva_bluegrey;
   }
 
   &.bouton-principal {
@@ -107,5 +102,9 @@ button.bouton, .bouton {
     }
     background-color: $grey-925;
     border-color: $grey-925;
+  }
+
+  &.bouton-tertiaire {
+    @include bouton-tertiaire;
   }
 }

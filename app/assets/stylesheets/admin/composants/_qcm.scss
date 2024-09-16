@@ -1,6 +1,6 @@
 .qcm {
-  color: white;
-  background-color: $eva_main_light;
+  border: none;
+  background-color: $grey-950;
   padding: 1rem;
   border-radius: 0px 0px 1rem 1rem;
 
@@ -11,7 +11,7 @@
     }
   }
 
-  input:checked + .tag { @include tag-couleur-plein($eva_green); }
+  input:checked + .tag { @include tag-couleur-plein($success-950); }
 
   .tag {
     cursor: pointer;
@@ -19,10 +19,6 @@
     font-weight: 400;
     color: $eva_dark;
     border: none;
-  }
-
-  .bouton-fermer {
-    margin-right: .25rem;
   }
 }
 

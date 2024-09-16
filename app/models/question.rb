@@ -60,13 +60,4 @@ class Question < ApplicationRecord
   def supprime_illustration?
     illustration.attached? && supprimer_illustration == '1'
   end
-
-  def intitule_complet?
-    transcription_intitule&.ecrit.present? && transcription_intitule&.audio&.attached?
-  end
-
-  def modalite_complete?
-    transcription_modalite_reponse&.ecrit.present? &&
-      transcription_modalite_reponse&.audio&.attached?
-  end
 end

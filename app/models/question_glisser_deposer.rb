@@ -29,8 +29,8 @@ class QuestionGlisserDeposer < Question
   end
 
   def audio_principal
-    return unless intitule_complet? || modalite_complete?
-    return transcription_intitule.audio_url if intitule_complet?
+    return unless transcription_intitule.complete? || transcription_modalite_reponse.complete?
+    return transcription_intitule.audio_url if transcription_intitule.complete?
 
     transcription_modalite_reponse.audio_url
   end

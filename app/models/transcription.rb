@@ -28,4 +28,8 @@ class Transcription < ApplicationRecord
     modalite_reponse? && audio.attached? &&
       suppression_valeur == '1'
   end
+
+  def complete?
+    ecrit.present? && audio&.attached?
+  end
 end

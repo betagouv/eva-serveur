@@ -25,4 +25,38 @@ RSpec.describe Transcription, type: :model do
       expect(transcription.audio).to be_attached
     end
   end
+
+  describe '.complete?' do
+    let(:transcription) { Transcription.new }
+
+    context 'quand il y a un écrit et un audio' do
+      it 'retourne true' do
+        transcription.ecrit = 'Some text'
+        transcription.audio.attach(io: Rails.root.join('spec/support/alcoolique.mp3').open,
+                                   filename: 'alcoolique.mp3')
+        expect(transcription.complete?).to be(true)
+      end
+    end
+
+    context "quand il n'y a pas d'écrit" do
+      it 'retourne false' do
+        transcription.audio.attach(io: Rails.root.join('spec/support/alcoolique.mp3').open,
+                                   filename: 'alcoolique.mp3')
+        expect(transcription.complete?).to be(false)
+      end
+    end
+
+    context "quand il n'y a pas d'audio" do
+      it 'retourne false' do
+        transcription.ecrit = 'Some text'
+        expect(transcription.complete?).to be(false)
+      end
+    end
+
+    context "quand il n'y a ni écrit ni audio" do
+      it 'retourne false' do
+        expect(transcription.complete?).to be(false)
+      end
+    end
+  end
 end

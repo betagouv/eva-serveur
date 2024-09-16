@@ -104,6 +104,24 @@
   .evaluations-sans-mise-en-action {
     box-shadow: none;
 
+    .contenu-avec-evaluations {
+      background-color: $blue-france-950;
+      padding-bottom: 0.5rem;
+    }
+
+    .card {
+      box-shadow: none;
+
+      &.carte--deroulee {
+        border-radius: .5rem .5rem 0 0;
+        box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+
+        & ~ .qcm {
+          box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+        }
+      }
+    }
+
     .carte-liste {
       height: 3rem;
       margin-bottom: 0;
@@ -177,8 +195,6 @@
 
     .qcm {
       position: absolute;
-      border: solid 1px white;
-      border-top: none;
     }
   }
 

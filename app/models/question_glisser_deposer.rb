@@ -24,18 +24,14 @@ class QuestionGlisserDeposer < Question
   end
 
   def audio_fields
-    fields = { 'audio_url' => audio_principal }
-    if transcription_intitule&.ecrit.blank? && transcription_intitule&.audio_url
-      fields['intitule_audio'] = transcription_intitule&.audio_url
+    return { 'audio_url' => transcription_intitule.audio_url } if transcription_intitule&.complete?
+
+    if transcription_modalite_reponse&.complete?
+      return { 'audio_url' => transcription_modalite_reponse.audio_url,
+               'intitule_url' => transcription_intitule&.audio_url }
     end
-    fields
-  end
 
-  def audio_principal
-    return unless transcription_intitule.complete? || transcription_modalite_reponse.complete?
-    return transcription_intitule.audio_url if transcription_intitule.complete?
-
-    transcription_modalite_reponse.audio_url
+    {}
   end
 
   def reponses_fields

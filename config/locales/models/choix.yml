@@ -6,6 +6,7 @@ fr:
         updated_at: Mis à jour le
         intitule: Intitulé
         type_choix: Bon/Mauvais/Abstention?
+        position_client: Position de la proposition
   formtastic:
     actions:
       choix:

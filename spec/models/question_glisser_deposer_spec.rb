@@ -16,13 +16,17 @@ describe QuestionGlisserDeposer, type: :model do
       create(:transcription, :avec_audio, question_id: question.id,
                                           categorie: :modalite_reponse)
     end
-    let!(:reponse1) { create(:choix, :avec_illustration, :bon, question_id: question.id) }
+    let!(:reponse1) do
+      create(:choix, :avec_illustration, :bon, question_id: question.id, position_client: 2)
+    end
     let!(:reponse2) { create(:choix, :avec_illustration, :bon, question_id: question.id) }
+    let!(:intitule) do
+      create(:transcription, :avec_audio, question_id: question.id,
+                                          ecrit: 'Mon Intitulé')
+    end
     let(:json) { question.as_json }
 
     it 'serialise les champs' do
-      intitule = create(:transcription, :avec_audio, question_id: question.id,
-                                                     ecrit: 'Mon Intitulé')
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique
                                           description illustration modalite_reponse type
                                           reponsesNonClassees])
@@ -35,8 +39,15 @@ describe QuestionGlisserDeposer, type: :model do
       expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                          intitule.audio
                                        ))
-      expect(json['reponsesNonClassees'].size).to eql(2)
-      expect(json['reponsesNonClassees'].first['illustration']).to_not be(nil)
+    end
+
+    describe 'les reponsesNonClassees' do
+      it do
+        expect(json['reponsesNonClassees'].size).to eql(2)
+        expect(json['reponsesNonClassees'].first['illustration']).to_not be(nil)
+        expect(json['reponsesNonClassees'].first['position']).to eql(1)
+        expect(json['reponsesNonClassees'].first['position_client']).to eql(2)
+      end
     end
   end
 end

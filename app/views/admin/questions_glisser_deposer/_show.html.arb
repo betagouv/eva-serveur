@@ -40,5 +40,6 @@ panel 'Réponses' do
         end
       end
     end
+    column :position_client
   end
 end

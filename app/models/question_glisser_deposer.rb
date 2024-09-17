@@ -39,9 +39,9 @@ class QuestionGlisserDeposer < Question
   end
 
   def reponses_fields
-    reponses_non_classees = reponses.to_a.shuffle.map do |reponse|
+    reponses_non_classees = reponses.map do |reponse|
       illustration_url = cdn_for(reponse.illustration) if reponse.illustration.attached?
-      reponse.slice(:id, :position).merge(
+      reponse.slice(:id, :position, :position_client).merge(
         'illustration' => illustration_url
       )
     end

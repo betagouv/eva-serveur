@@ -65,7 +65,7 @@ body.logged_out {
         width: 6rem;
       }
       h1 {
-        color: $eva_dark;
+        color: $grey-50;
         font-size: 1.5rem;
         line-height: 1.875rem;
         font-weight: bold;
@@ -88,7 +88,7 @@ body.logged_out {
       border-top-left-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
       box-shadow: none;
-      color: $eva_dark;
+      color: $grey-50;
       background: none;
     }
 
@@ -149,7 +149,7 @@ body.logged_out {
       }
       .panel--evaluation {
         .panel-header {
-          color: $eva_dark;
+          color: $grey-50;
           background-color: $eva-orange;
         }
         .panel-content {

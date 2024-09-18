@@ -35,3 +35,19 @@
 @import "active_admin/structure/footer";
 @import "active_admin/structure/main_structure";
 @import "active_admin/structure/title_bar";
+
+.bg-alerte {
+  color: $warning-425;
+  background-color: $warning-950;
+  a, h4 {
+    color: $warning-425;
+  }
+}
+
+.bg-information {
+  color: $info-425;
+  background-color: $info-950;
+  a, h4 {
+    color: $info-425;
+  }
+}

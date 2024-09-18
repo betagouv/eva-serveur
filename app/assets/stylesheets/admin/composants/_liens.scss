@@ -11,7 +11,7 @@
 }
 
 @mixin lien-secondaire() {
-  @include lien($eva_dark);
+  @include lien($couleur-texte);
 }
 
 .lien-retour {
@@ -24,7 +24,7 @@
   margin-right: 0.5rem;
 
   &, &:link, &:visited {
-    color: $eva_dark;
+    color: $couleur-texte;
     text-decoration: none;
   }
 

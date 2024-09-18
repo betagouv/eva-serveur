@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: 'referentiel_anlci' do
+div class: 'referentiel_anlci bg-information' do
   scope = 'admin.restitutions.cefr.references'
   div class: 'row marges-page' do
     div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }
@@ -16,10 +16,10 @@ div class: 'referentiel_anlci' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/pre_A1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/A1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/A2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/B1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/pre_A1-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/A1-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/A2-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/B1-referentiel.svg', class: 'badge-references'
         end
 
         div class: 'col-auto' do
@@ -27,10 +27,10 @@ div class: 'referentiel_anlci' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/pre_X1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/X1-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/X2-blanc.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/Y1-blanc.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/pre_X1-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/X1-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/X2-referentiel.svg', class: 'badge-references'
+          text_node svg_tag_base64 'badges/cefr/Y1-referentiel.svg', class: 'badge-references'
         end
       end
       div(class: 'col texte-explications') { md t('explications-lien', scope: scope) }

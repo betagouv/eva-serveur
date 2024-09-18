@@ -57,8 +57,20 @@
             </div>
           <% end -%>
 
-          <h2>Sous compétences de positionnement</h2>
-          <div class="lettrisme-sous-competences">
+          <h2>Sous compétences de positionnement CEFR</h2>
+          <div>
+            <% @sous_competences_prepositionnement.each do |donnees| -%>
+              <%= render 'admin/evaluations/competence_niveau1',
+                competence: donnees[0],
+                niveau: donnees[1],
+                referentiel: 'cefr',
+                pdf: false
+              %>
+            <% end -%>
+          </div>
+
+          <h2>Sous compétences de positionnement ANLCI</h2>
+          <div>
             <% @sous_competences_positionnement.each do |donnees| -%>
               <%= render 'admin/evaluations/lettrisme_sous_competence', sous_competence: donnees[0], profil: donnees[1].to_s %>
             <% end -%>

@@ -44,7 +44,7 @@
             font-family: $font-texte;
             font-weight: normal;
             text-transform: none;
-            color: $eva_dark;
+            color: $couleur-texte;
           }
         }
       }
@@ -65,7 +65,7 @@
         }
           &-message, &-lien {
             font-size: 0.875rem;
-            color: $eva_dark;
+            color: $couleur-texte;
           }
           &-message {
             width: 100%;
@@ -80,7 +80,7 @@
         margin-bottom: 2rem;
         .sous-titre {
           font-family: $font-texte;
-          color: $eva_dark;
+          color: $couleur-texte;
           display: flex;
           align-items: center;
           margin-bottom: 0.5rem;

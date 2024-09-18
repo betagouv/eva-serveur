@@ -1,1 +1,10 @@
-<svg width="210" height="6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 3a3 3 0 013-3h67v6H3a3 3 0 01-3-3z" fill="#D6DAEC"/><path d="M140 0h67a3 3 0 110 6h-67V0z" fill="#1E416A"/><path fill="#7B83B0" d="M70 0h70v6H70z"/><rect x="33" y="1" width="4" height="4" rx="2" fill="#fff"/><rect x="138" y="1" width="4" height="4" rx="2" fill="#fff"/><rect x="173" y="1" width="4" height="4" rx="2" fill="#fff"/><rect x="68" y="1" width="4" height="4" rx="2" fill="#fff"/><rect x="103" y="1" width="4" height="4" rx="2" fill="#fff"/></svg>
+<svg width="345" height="11" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 5.5A5.5 5.5 0 0 1 5.5 0H117v11H5.5A5.5 5.5 0 0 1 0 5.5Z" fill="#FDDFD8"/>
+  <path d="M229 0h110.5a5.5 5.5 0 1 1 0 11H229V0Z" fill="#FB926B"/>
+  <path fill="#FCC0B0" d="M117 0h112v11H117z"/>
+  <rect x="58" y="3" width="6" height="6" rx="3" fill="#fff"/>
+  <rect x="226" y="3" width="6" height="6" rx="3" fill="#fff"/>
+  <rect x="282" y="3" width="6" height="6" rx="3" fill="#fff"/>
+  <rect x="114" y="3" width="6" height="6" rx="3" fill="#fff"/>
+  <rect x="170" y="3" width="6" height="6" rx="3" fill="#fff"/>
+</svg>

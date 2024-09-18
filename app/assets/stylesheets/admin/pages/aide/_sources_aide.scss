@@ -8,12 +8,13 @@
     @include carte-avec-ombre();
     display: flex;
     padding: 1.5rem;
-    color: $eva_dark;
+    color: $couleur-texte;
     font-size: .875rem;
     text-decoration: none;
 
     .illustration {
       margin-right: 1.5rem;
+      height: 100%;
     }
 
     .titre {

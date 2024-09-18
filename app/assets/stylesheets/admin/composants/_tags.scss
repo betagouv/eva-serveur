@@ -34,7 +34,7 @@
 @mixin tag-couleur-plein($color) {
   background-color: $color;
   border: none;
-  color: $eva_dark;
+  color: $couleur-texte;
 }
 
 .status_tag {
@@ -79,6 +79,6 @@
   }
 
   &.no, &.yes {
-    border-color: $couleur-texte
+    border-color: $couleur-texte;
   }
 }

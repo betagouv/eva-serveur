@@ -120,7 +120,7 @@
           font-weight: normal;
           font-size: 0.875rem;
           text-transform: none;
-          color: $eva_dark;
+          color: $couleur-texte;
         }
       }
     }
@@ -178,11 +178,11 @@
       min-width: 6.563rem;
       text-align: center;
       margin-right: 0;
-      color: $eva_dark;
+      color: $couleur-texte;
       background-color: $eva_bluegrey;
       border-color: $eva_bluegrey;
       &:hover {
-        color: $eva_dark;
+        color: $couleur-texte;
         border-color: $eva_bluegrey;
       }
     }

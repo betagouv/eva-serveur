@@ -50,7 +50,7 @@ div id: 'evaluation__details', class: 'row' do
       end
       unless resource.complete?
         div class: 'row m-0' do
-          div class: 'container card__banner card__banner--alert d-flex' do
+          div class: 'container card__banner bg-alerte d-flex' do
             div(class: 'col-2 d-flex align-items-center justify-content-center') do
               svg_tag_base64 'attention_icone.svg', class: 'banner__icone'
             end

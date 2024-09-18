@@ -103,7 +103,7 @@ button.bouton, .bouton {
     background-color: $grey-925;
     border-color: $grey-925;
   }
-
+  
   &.bouton-tertiaire {
     @include bouton-tertiaire;
   }

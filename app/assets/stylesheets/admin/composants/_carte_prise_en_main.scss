@@ -37,7 +37,7 @@ $grid-gutter-width: 1.25rem;
       justify-content: center;
       h3 {
         @include h3();
-        color: $eva_dark;
+        color: $grey-50;
       }
       ul {
         list-style: none;

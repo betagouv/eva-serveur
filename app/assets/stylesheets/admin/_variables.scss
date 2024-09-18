@@ -34,13 +34,11 @@ $eva_dark_green: #0C826D;
 $eva_green: $success-425;
 $eva_orange: $orange-terre-battue-850-hover;
 $eva_red: $error-425;
-$eva_dark: $grey-50;
+$eva_dark: #1E416A;  // $grey-50;
 $eva_less_dark: $grey-425;
 $eva_dark_blue_grey: $grey-200;
 $eva_bluegrey: $blue-france-950;
 $eva_light: #FBF9FA;
-
-$anlci_orange: #fc5d5d; // Couleur officielle : nacarat
 
 $couleur-texte: $grey-200;
 $couleur-texte-light: $eva_less_dark;
@@ -80,4 +78,4 @@ $link-color: $eva_main_blue;
 $spacer: 1rem;
 $spacers: (
   6: ($spacer * 2)
-)
+);

@@ -68,17 +68,17 @@
   }
 
   .card__banner {
-    &--alert {
+    &.bg-alerte {
       padding: 1rem 1.5rem;
       box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
     }
 
     &--succes {
-      @include card__banner($eva_dark, $eva_green, $eva_green)
+      @include card__banner($couleur-texte, $eva_green, $eva_green)
     }
 
     &--en-attente {
-      @include card__banner($eva_orange, $eva_orange, $eva_orange)
+      @include card__banner($warning-425, $warning-425, $warning-425)
     }
 
     &--illettrisme {
@@ -104,10 +104,6 @@
 
       .banniere-solutions-illettrisme {
         @include texte-xs();
-
-        a {
-          color: $eva_dark;
-        }
       }
     }
 

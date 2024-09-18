@@ -18,10 +18,12 @@
     outline-style: solid;
     outline-width: 2px;
   }
+}
 
-  &::placeholder {
-    color: $couleur-texte;
-  }
+input::placeholder {
+  color: $grey-425;
+  font-style: italic;
+  opacity: 1;
 }
 
 form fieldset.inputs {

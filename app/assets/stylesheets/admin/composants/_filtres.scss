@@ -3,9 +3,6 @@
     &.filter_form {
       input[type="text"] {
       }
-      ::placeholder {
-        color: $couleur-texte;
-      }
 
       .filter_form_field {
         &.select_and_search {

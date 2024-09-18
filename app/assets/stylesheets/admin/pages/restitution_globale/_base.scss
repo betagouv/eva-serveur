@@ -2,7 +2,6 @@
 @import "admin/mixins";
 
 .evaluation__restitution-globale {
-  color: $couleur-texte;
   font-size: 0.875rem;
   font-family: $font-texte;
 
@@ -325,7 +324,6 @@
 
   .aide-redaction {
     position: relative;
-    color: $couleur-texte;
     padding: 2rem 2rem;
     border: 1px solid $couleur-legere-accent-validation;
     box-sizing: border-box;

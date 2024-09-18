@@ -65,12 +65,10 @@
       @include titre();
       font-size: .875rem;
       line-height: 1.125rem;
-      color: $couleur-texte;
       margin-bottom: .625rem;
     }
     &__duree, &__description {
       @include texte-xs();
-      color: $couleur-texte;
       font-weight: normal;
       margin: 0;
     }
@@ -96,12 +94,7 @@
 
   input:checked + .choix-item {
     border-color: $couleur-texte;
-    background: $eva_main_blue;
-
-    .choix-item__titre {
-      color: $eva_light;
-      font-size: .875rem;
-    }
+    background-color: $eva_main_blue;
 
     .choix-item__icone {
       .icone-loupe {
@@ -116,7 +109,7 @@
       }
     }
 
-    &, div, span, p, ul li {
+    &, div, span, p, ul li, .choix-item__titre {
       color: $eva_light;
     }
   }

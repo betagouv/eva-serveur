@@ -6,7 +6,7 @@
 
   &.carte-liste {
     @include texte-xs;
-    color: $eva_dark;
+    color: $couleur-texte;
     padding: 0 1rem;
     min-height: 3rem;
     margin-bottom: 0;
@@ -17,7 +17,7 @@
       font-weight: bold;
 
       a {
-        color: $eva_dark;
+        color: $couleur-texte;
         text-decoration: none;
       }
     }

@@ -10,9 +10,10 @@
 //= require faq
 //= require aide
 //= require autocomplete_recherche
+//= require bouton_menu
+//= require cgu
 //= require clipboard
 //= require evaluation
-//= require cgu
 
 //= require chartkick
 //= require Chart.bundle

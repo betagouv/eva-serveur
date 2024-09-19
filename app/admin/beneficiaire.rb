@@ -27,5 +27,8 @@ ActiveAdmin.register Beneficiaire do
     column(:nom) { |beneficiaire| render NomAnonymisableComponent.new(beneficiaire) }
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 end

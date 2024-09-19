@@ -39,6 +39,9 @@ ActiveAdmin.register Campagne do
     column :compte if can?(:manage, Compte)
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

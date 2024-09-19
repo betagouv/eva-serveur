@@ -14,6 +14,9 @@ ActiveAdmin.register StructureAdministrative do
       l(structure.created_at, format: :sans_heure)
     end
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

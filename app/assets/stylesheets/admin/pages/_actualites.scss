@@ -40,6 +40,18 @@
         font-size: 0.875rem;
         color: $eva_dark_blue_grey;
       }
+      .menu-actions {
+        @include menu-actions();
+        .table_actions {
+          left: 9rem;
+          top: 1.5rem;
+        }
+      }
+      .bouton-menu {
+        position: absolute;
+        right: 1rem;
+        bottom: 0.5rem;
+      }
       .action {
         position: absolute;
         right: 1rem;

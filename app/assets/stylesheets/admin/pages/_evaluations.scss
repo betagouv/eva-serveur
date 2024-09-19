@@ -49,7 +49,14 @@
   .evaluation__created_at {
     text-align: right;
     white-space: nowrap;
-    margin-top: .75rem;
+  }
+
+  .menu-actions {
+    @include menu-actions();
+    .table_actions {
+      left: calc(100% - 2rem);
+      top: 2rem;
+    }
   }
 }
 
@@ -75,6 +82,10 @@
   }
   td:last-child {
     padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 4.5rem;
   }
   td {
     padding: .75rem $padding-horizontal;

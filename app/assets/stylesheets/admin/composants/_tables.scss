@@ -1,6 +1,11 @@
 table.index_table {
   font-size: 0.875rem;
   border-spacing: 0 0.5rem;
+
+  .col-actions {
+    padding: 0;
+  }
+
   thead {
     th {
       text-shadow: none;
@@ -64,9 +69,7 @@ table.index_table {
           color: $eva_main_blue;
         }
         &.col-actions {
-          @include roue-dentee();
-          min-width: 40px;
-          background-color: #FFF;
+          @include menu-actions();
         }
         &.col-illustration {
           line-height: 0;
@@ -75,7 +78,6 @@ table.index_table {
 
       &.anonyme {
         td {
-          background-color: $eva_light;
           color: $eva_dark_blue_grey;
 
           a {

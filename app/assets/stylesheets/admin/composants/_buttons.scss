@@ -107,4 +107,21 @@ button.bouton, .bouton {
   &.bouton-tertiaire {
     @include bouton-tertiaire;
   }
+
+  &.bouton-menu {
+    @include bouton-tertiaire-sans-contour;
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::before {
+      content: asset-data-url('icones/trois_points.svg');
+    }
+  }
 }

@@ -1,8 +1,4 @@
 .admin_structures, .admin_structures_locales, .admin_structures_administratives {
-  $grid-columns: 6;
-  $grid-gutter-width: 1.25rem;
-  @import "../../bootstrap_grid";
-
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);
@@ -16,6 +12,10 @@
   }
 
   &.show {
+    $grid-columns: 6;
+    $grid-gutter-width: 1.25rem;
+    @import "../../bootstrap_grid";
+
     $largeur_image_entete: 12rem;
     $position_image_entete: 1.5rem;
     .bloc-structure-infos {

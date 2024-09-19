@@ -24,7 +24,7 @@ div class: 'actualites' do
             l actualite.created_at, format: :sans_heure
           end
           if can?(:manage, Actualite)
-            span class: 'action roue-dentee' do
+            span class: 'menu-actions' do
               div class: 'table_actions' do
                 text_node link_to t('.action.lire'), admin_actualite_path(actualite)
                 text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite)
@@ -33,6 +33,7 @@ div class: 'actualites' do
                                   data: { confirm: t('.action.supprimer-confirmation') }
               end
             end
+            render partial: 'components/bouton_menu_actions'
           else
             span class: 'action' do
               link_to t('.action.lire'), admin_actualite_path(actualite), class: 'action-simple'

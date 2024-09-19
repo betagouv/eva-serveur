@@ -35,6 +35,9 @@ ActiveAdmin.register Situation do
     actions do |situation|
       link_to 'Parties', admin_situation_parties_path(situation) if can?(:manage, Partie)
     end
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

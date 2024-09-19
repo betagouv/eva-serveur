@@ -78,6 +78,9 @@ ActiveAdmin.register Compte do
       column :created_at
     end
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   action_item :stats, only: :index, if: -> { can? :manage, Compte } do

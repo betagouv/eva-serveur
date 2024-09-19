@@ -1,7 +1,0 @@
-.roue-dentee {
-  @include roue-dentee();
-  background-position-x: right;
-  .table_actions {
-    left: calc(100% - 20px);
-  }
-}

@@ -71,10 +71,8 @@
   text-align: left;
 }
 
-$hauteur_roue_dentee: 1.25rem;
-@mixin roue-dentee() {
-  background: image-url('roue-dentee.svg') left center no-repeat;
-  min-height: $hauteur_roue_dentee;
+$hauteur_menu_actions: 2rem;
+@mixin menu-actions() {
   position: relative;
 
   .table_actions {
@@ -83,7 +81,7 @@ $hauteur_roue_dentee: 1.25rem;
     transition: opacity 0.2s, height 0.2s;
     overflow: hidden;
     position: absolute;
-    top: calc(50% + #{$hauteur_roue_dentee} / 2);
+    top: calc(50% + #{$hauteur_menu_actions} / 2);
     left: 0;
     z-index: 1;
 
@@ -101,6 +99,16 @@ $hauteur_roue_dentee: 1.25rem;
 
     a:first-child {
       box-shadow: none;
+    }
+
+    &.montrer {
+      opacity: 1;
+      height: unset;
+      overflow: visible;
+
+      a:focus {
+        z-index: 2;
+      }
     }
   }
 

@@ -29,7 +29,7 @@ ActiveAdmin.register QuestionSousConsigne do
   index do
     column :libelle
     column :intitule do |question|
-      question.transcription_ecrite_pour(:intitule)
+      question.transcription_intitule&.ecrit
     end
     column :created_at
     actions

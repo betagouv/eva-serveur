@@ -34,7 +34,9 @@ RSpec.configure do |config|
 
   config.before do
     allow(Truemail).to receive(:valid?).and_return(true)
-    allow(RestClient).to receive(:get).and_raise(RestClient::NotFound.new)
+    reponse = Typhoeus::Response.new
+    allow(reponse).to receive(:success?).and_return(false)
+    allow(Typhoeus).to receive(:get).and_return(reponse)
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
@@ -71,5 +73,13 @@ RSpec.configure do |config|
 
   def evenements_decores(evenements, scope)
     evenements.map { |e| DECORATORS[scope].new e }
+  end
+
+  def mock_reponse_typhoeus(url, reponse)
+    tr = Typhoeus::Response.new
+    allow(tr).to receive(:success?).and_return(true)
+    expect(tr).to receive(:body).and_return(reponse.to_json)
+    expect(Typhoeus).to receive(:get)
+      .with(url).and_return(tr)
   end
 end

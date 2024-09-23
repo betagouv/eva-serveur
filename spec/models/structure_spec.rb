@@ -26,12 +26,11 @@ describe Structure, type: :model do
   end
 
   def mock_geo_api(departement, code_region, region)
-    allow(RestClient).to receive(:get)
-      .with("https://geo.api.gouv.fr/departements/#{departement}")
-      .and_return({ codeRegion: code_region }.to_json)
-    allow(RestClient).to receive(:get)
-      .with("https://geo.api.gouv.fr/regions/#{code_region}")
-      .and_return({ nom: region }.to_json)
+    mock_reponse_typhoeus("https://geo.api.gouv.fr/departements/#{departement}",
+                          { codeRegion: code_region })
+
+    mock_reponse_typhoeus("https://geo.api.gouv.fr/regions/#{code_region}",
+                          { nom: region })
   end
 
   describe 'géolocalisation à la validation' do

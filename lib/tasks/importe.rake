@@ -103,4 +103,21 @@ namespace :importe do
       Choix.find(id_nom_technique[0]).update(nom_technique: id_nom_technique[1])
     end
   end
+
+  desc 'Importe les id_pro_connect'
+  task id_pro_connect: :environment do
+    nb_ligne = 0
+    nb_importe = 0
+    CSV.parse($stdin, headers: true, header_converters: :symbol).each do |row|
+      nb_ligne += 1
+      ligne = row.to_hash
+      compte = Compte.find_by id_inclusion_connect: ligne[:id_inclusion_connect]
+      next if compte.blank?
+
+      RakeLogger.logger.info "Importe : #{ligne[:id_inclusion_connect]},#{ligne[:id_pro_connect]}"
+      compte.update!(id_pro_connect: ligne[:id_pro_connect])
+      nb_importe += 1
+    end
+    RakeLogger.logger.info "Importés : #{nb_importe} / #{nb_ligne}"
+  end
 end

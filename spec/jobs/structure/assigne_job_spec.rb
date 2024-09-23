@@ -7,15 +7,15 @@ describe Structure::AssigneRegionJob, type: :job do
 
   before do
     structure.update(region: nil)
-    allow(RestClient).to receive(:get)
-      .with('https://geo.api.gouv.fr/departements/92')
-      .and_return({ codeRegion: 11 }.to_json)
-    allow(RestClient).to receive(:get)
-      .with('https://geo.api.gouv.fr/regions/11')
-      .and_return({ nom: 'Île-de-France' }.to_json)
+
+    mock_reponse_typhoeus('https://geo.api.gouv.fr/departements/92',
+                          { codeRegion: 11 })
+
+    mock_reponse_typhoeus('https://geo.api.gouv.fr/regions/11',
+                          { nom: 'Île-de-France' })
+
     Structure::AssigneRegionJob.perform_now
-    structure.reload
   end
 
-  it { expect(structure.region).to eq 'Île-de-France' }
+  it { expect(structure.reload.region).to eq 'Île-de-France' }
 end

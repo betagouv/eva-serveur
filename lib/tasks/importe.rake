@@ -23,6 +23,24 @@ namespace :importe do
     end
   end
 
+  desc 'Importe les SIRETs des structures des conseillers connus'
+  task siret: :environment do
+    nb_ligne = 0
+    nb_importe = 0
+    CSV.parse($stdin, headers: true, header_converters: :symbol).each do |row|
+      nb_ligne += 1
+      ligne = row.to_hash
+      compte = Compte.find_by id_inclusion_connect: ligne[:id_inclusion_connect]
+      next if compte.blank? || compte.structure.blank? || compte.structure.siret.present?
+
+      RakeLogger.logger.info "Importe : #{ligne[:id_inclusion_connect]},#{ligne[:siret]}"
+      structure = compte.structure
+      structure.update!(siret: ligne[:siret])
+      nb_importe += 1
+    end
+    RakeLogger.logger.info "Importés : #{nb_importe} / #{nb_ligne}"
+  end
+
   choix = [
     %w[2c178015-a7c1-4ff8-a344-8553a61e754a bienvenue_pas_facile],
     %w[e9ac38e1-41d6-4248-bb17-ffdef2416868 bienvenue_plutot_pas_facile],

@@ -13,6 +13,19 @@ panel 'Détails de la question' do
         end
       end
     end
+    row :zones_depot_url do
+      if resource.zones_depot_url.attached?
+        ul do
+          resource.zones_depot_url.each do |file|
+            li do
+              link_to(cdn_for(file), target: '_blank', rel: 'noopener') do
+                svg_attachment_base64(file, class: 'image-preview')
+              end
+            end
+          end
+        end
+      end
+    end
     intitule = question_glisser_deposer.transcription_intitule
     row :intitule do
       div intitule.ecrit if intitule&.ecrit

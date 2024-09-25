@@ -46,6 +46,20 @@ module ApplicationHelper
     image_tag fichier_encode_en_base64(file_content), options
   end
 
+  def inline_svg_content(attachment, options = {})
+    return unless attachment.attached?
+
+    file_content = attachment.download
+    svg_with_class(file_content, options[:class])
+  end
+
+  def svg_with_class(svg_content, css_class)
+    return svg_content if css_class.blank?
+
+    svg_content.sub!('<svg', "<svg class=\"#{css_class}\"")
+    svg_content.html_safe
+  end
+
   def fichier_encode_en_base64(file_content)
     encodage = Base64.strict_encode64 file_content
     "data:image/svg+xml;base64,#{encodage}"

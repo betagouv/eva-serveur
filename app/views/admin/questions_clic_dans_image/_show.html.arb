@@ -16,7 +16,7 @@ panel 'Détails de la question' do
     row :zone_cliquable do
       if resource.zone_cliquable.attached?
         link_to(cdn_for(resource.zone_cliquable), target: '_blank', rel: 'noopener') do
-          svg_attachment_base64(resource.zone_cliquable, class: 'image-preview')
+          raw inline_svg_content(resource.zone_cliquable, class: 'image-preview')
         end
       end
     end

@@ -19,7 +19,6 @@ ActiveAdmin.register QuestionSaisie do
   index do
     column :libelle
     column :categorie
-    column :transcription_intitule
     column :intitule do |question|
       question.transcription_intitule&.ecrit
     end

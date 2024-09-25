@@ -30,3 +30,10 @@ form.question_saisie .choix {
     }
   }
 }
+.show.admin_questions_clic_dans_image {
+  svg {
+    stroke: $eva_bluegrey;
+    stroke-width: 3px;
+    opacity: 0.3;
+  }
+}

@@ -7,6 +7,17 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :description
     render partial: 'admin/questions/input_illustration', locals: { f: f }
+    f.input :zones_depot_url,
+            as: :file,
+            hint: "L'un des éléments cliquables doit contenir la classe css `zone-depot` " \
+                  'et la classe css `zone-depot--reponse.nom_technique`',
+            input_html: { accept: 'image/svg+xml', multiple: true }
+    if f.object.zones_depot_url.attached? && f.object.errors[:zones_depot_url].blank?
+      f.input :supprimer_zones_depot_url,
+              as: :boolean,
+              label: t('.label.supprimer_zones_depot_url'),
+              hint: svg_attachment_base64(resource.zones_depot_url, class: 'image-preview')
+    end
   end
   f.inputs do
     render partial: 'admin/questions/inputs_avec_transcriptions_audios',

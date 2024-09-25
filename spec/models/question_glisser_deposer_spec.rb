@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe QuestionGlisserDeposer, type: :model do
   it { is_expected.to have_many(:reponses).with_foreign_key(:question_id) }
+  it { is_expected.to have_many_attached(:zones_depot_url) }
 
   let(:question) do
     create(:question_glisser_deposer,
@@ -39,6 +40,36 @@ describe QuestionGlisserDeposer, type: :model do
         expect(json['reponsesNonClassees'].first['illustration']).to_not be(nil)
         expect(json['reponsesNonClassees'].first['position']).to eql(1)
         expect(json['reponsesNonClassees'].first['position_client']).to eql(2)
+      end
+    end
+  end
+
+  describe 'validations' do
+    let(:question) do
+      build(:question_glisser_deposer)
+    end
+
+    context 'avec un attachment au format svg' do
+      it 'est valide' do
+        question.zones_depot_url.attach(
+          io: Rails.root.join('spec/support/accessibilite-sans-reponse.svg').open,
+          filename: 'valid.svg',
+          content_type: 'image/svg+xml'
+        )
+        expect(question).to be_valid
+      end
+    end
+
+    context "avec un attachement d'un autre format" do
+      it "n'est pas valide" do
+        question.zones_depot_url.attach(
+          io: Rails.root.join('spec/support/programme_tele.png').open,
+          filename: 'invalid.png',
+          content_type: 'image/png'
+        )
+        expect(question).not_to be_valid
+        erreur = question.errors[:zones_depot_url]
+        expect(erreur).to include("n'est pas un format de fichier valide")
       end
     end
   end

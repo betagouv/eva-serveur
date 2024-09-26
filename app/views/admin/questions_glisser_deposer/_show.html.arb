@@ -32,7 +32,7 @@ panel 'Détails de la question' do
 end
 
 panel 'Réponses' do
-  para "Classer les réponses dans l’ordre souhaité"
+  para 'Classer les réponses dans l’ordre souhaité'
   reorderable_table_for question_glisser_deposer.reponses do
     column :illustration do |reponse|
       if reponse.illustration.attached?

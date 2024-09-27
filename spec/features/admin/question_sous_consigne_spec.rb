@@ -15,7 +15,7 @@ describe 'Admin - Question Sous Consigne', type: :feature do
 
     before { visit admin_question_sous_consignes_path }
 
-    fit do
+    it do
       expect(page).to have_content 'Intitulé sous consigne'
     end
   end

@@ -42,4 +42,9 @@ FactoryBot.define do
     libelle { 'Question glisser deposer' }
     sequence(:nom_technique) { |n| "question-glissser-deposer-#{n}" }
   end
+
+  factory :question_sous_consigne do
+    libelle { 'Question sous consigne' }
+    sequence(:nom_technique) { |n| "question-sous-consigne-#{n}" }
+  end
 end

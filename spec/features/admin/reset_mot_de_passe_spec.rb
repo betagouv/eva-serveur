@@ -9,7 +9,7 @@ describe 'Reset mot de passe', type: :feature do
       click_on 'Renvoyer les instructions de confirmation'
     end
 
-    it { expect(page.has_css?('#error_explanation')).to eq false }
+    it { expect(page.has_css?('#error_explanation')).to be false }
   end
 
   describe 'page modification du mot de passe' do
@@ -24,7 +24,7 @@ describe 'Reset mot de passe', type: :feature do
         click_on 'Valider mon nouveau mot de passe'
       end
 
-      it { expect(page.has_css?('#error_explanation')).to eq false }
+      it { expect(page.has_css?('#error_explanation')).to be false }
     end
 
     context 'avec un token invalide' do

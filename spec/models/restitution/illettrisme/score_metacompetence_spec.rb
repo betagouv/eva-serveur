@@ -14,6 +14,7 @@ describe Restitution::Illettrisme::ScoreMetacompetence do
       before do
         nombre_bonnes_reponse_est 0
       end
+
       it { expect(score).to eq(0) }
     end
 
@@ -22,7 +23,8 @@ describe Restitution::Illettrisme::ScoreMetacompetence do
         nombre_bonnes_reponse_est 1
         temps_moyen_bonnes_reponses_est 0
       end
-      it { expect(score).to eq(nil) }
+
+      it { expect(score).to be_nil }
     end
 
     context 'divise le nombre de bonnes réponses par le temps moyen' do
@@ -30,6 +32,7 @@ describe Restitution::Illettrisme::ScoreMetacompetence do
         nombre_bonnes_reponse_est 3
         temps_moyen_bonnes_reponses_est 2
       end
+
       it { expect(score).to eq(1.5) }
     end
 

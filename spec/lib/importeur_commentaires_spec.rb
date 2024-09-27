@@ -19,8 +19,8 @@ describe ImporteurCommentaires do
     it do
       expect(logger).to receive(:info)
         .with('Importe : mon-conseiller@milo.fr,Mon utilisation,')
-      expect { ImporteurCommentaires.importe(ligne, evabot) }
-        .to(change { ActiveAdmin::Comment.count })
+      expect { described_class.importe(ligne, evabot) }
+        .to(change(ActiveAdmin::Comment, :count))
       commentaire = ActiveAdmin::Comment.last
       expect(commentaire.resource).to eq structure
       expect(commentaire.body).to eq 'utilisation_eva : Mon utilisation'
@@ -29,7 +29,7 @@ describe ImporteurCommentaires do
     context 'importe les notes' do
       let(:ligne) { { notes: 'Mes notes', mail: 'mon-conseiller@milo.fr' } }
 
-      before { ImporteurCommentaires.importe(ligne, evabot) }
+      before { described_class.importe(ligne, evabot) }
 
       it { expect(ActiveAdmin::Comment.last.body).to eq 'notes : Mes notes' }
     end
@@ -39,17 +39,17 @@ describe ImporteurCommentaires do
 
       it do
         expect(logger).to receive(:info).exactly(0).times
-        expect { ImporteurCommentaires.importe(ligne, evabot) }
-          .not_to(change { ActiveAdmin::Comment.count })
+        expect { described_class.importe(ligne, evabot) }
+          .not_to(change(ActiveAdmin::Comment, :count))
       end
     end
 
     context 'ne duplique pas les commentaires pour permettre de réimporter si besoin' do
-      before { ImporteurCommentaires.importe(ligne, evabot) }
+      before { described_class.importe(ligne, evabot) }
 
       it do
-        expect { ImporteurCommentaires.importe(ligne, evabot) }
-          .not_to(change { ActiveAdmin::Comment.count })
+        expect { described_class.importe(ligne, evabot) }
+          .not_to(change(ActiveAdmin::Comment, :count))
       end
     end
   end
@@ -60,8 +60,8 @@ describe ImporteurCommentaires do
     it do
       expect(logger).to receive(:warn)
         .with('Commentaire ignoré pour le compte inconnu : inconnu@milo.fr,Mon usage,une note')
-      expect { ImporteurCommentaires.importe(ligne, evabot) }
-        .not_to(change { ActiveAdmin::Comment.count })
+      expect { described_class.importe(ligne, evabot) }
+        .not_to(change(ActiveAdmin::Comment, :count))
     end
   end
 end

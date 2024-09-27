@@ -15,8 +15,8 @@ describe 'nettoyage:supprime_doublons_evenements' do
     let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
 
     it do
-      expect(logger).to receive(:info).exactly(1).times
-      expect { subject.invoke }.to_not(change { Evenement.count })
+      expect(logger).to receive(:info).once
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 
@@ -28,7 +28,7 @@ describe 'nettoyage:supprime_doublons_evenements' do
        create(:evenement_piece_bien_placee, partie: partie2, position: 1)]
     end
 
-    it { expect { subject.invoke }.to_not(change { Evenement.count }) }
+    it { expect { subject.invoke }.not_to(change(Evenement, :count)) }
   end
 
   context 'avec deux événements en double dans la même partie' do
@@ -44,8 +44,8 @@ describe 'nettoyage:supprime_doublons_evenements' do
     end
 
     it do
-      expect(logger).to receive(:info).exactly(2).times
-      expect { subject.invoke }.to(change { Evenement.count }.by(-1))
+      expect(logger).to receive(:info).twice
+      expect { subject.invoke }.to(change(Evenement, :count).by(-1))
     end
   end
 end

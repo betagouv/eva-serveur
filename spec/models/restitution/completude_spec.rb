@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Completude do
   let(:completude) do
-    Restitution::Completude.new(evaluation, restitutions)
+    described_class.new(evaluation, restitutions)
   end
 
   describe '#calcule' do

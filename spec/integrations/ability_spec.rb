@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 describe Ability do
-  subject(:ability) { Ability.new(compte) }
+  subject(:ability) { described_class.new(compte) }
 
   let(:compte_superadmin) { create :compte_superadmin }
   let(:compte_charge_mission_regionale) do
@@ -223,9 +223,11 @@ describe Ability do
 
   context 'Compte conseiller sans structure' do
     let(:compte) { create :compte_conseiller, structure: nil }
+
     it {
-      is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+      expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
     }
+
     it { is_expected.to be_able_to(:create, StructureLocale.new) }
   end
 
@@ -288,9 +290,12 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Aide', {})) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Dashboard', {})) }
+
     it {
-      is_expected.not_to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+      expect(subject).not_to be_able_to(:read,
+                                        ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
     }
+
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
     context 'peut consulter les campagnes de ma structure' do

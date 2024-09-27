@@ -6,8 +6,7 @@ describe Restitution::Tri::Rapidite do
   let(:restitution) { double }
 
   def pour(termine: nil, secondes: nil)
-    allow(restitution).to receive(:temps_total).and_return(secondes)
-    allow(restitution).to receive(:termine?).and_return(termine)
+    allow(restitution).to receive_messages(temps_total: secondes, termine?: termine)
     described_class.new(restitution)
   end
 

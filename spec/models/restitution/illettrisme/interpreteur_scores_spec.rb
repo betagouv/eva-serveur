@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Restitution::Illettrisme::InterpreteurScores do
-  let(:subject) { Restitution::Illettrisme::InterpreteurScores.new scores_standardises }
+  let(:subject) { described_class.new scores_standardises }
 
   context 'pour des compétences de niveau 2' do
     let(:competences) { %i[score_ccf score_memorisation] }
@@ -19,6 +19,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'competence <= à -1' do
       let(:scores_standardises) { { score_ccf: -1, score_memorisation: -4 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier0 }, { score_memorisation: :palier0 }])
@@ -27,6 +28,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context '-1 < competence <= à 0' do
       let(:scores_standardises) { { score_ccf: -0.99, score_memorisation: 0 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])
@@ -35,6 +37,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
     context 'competence > à 0' do
       let(:scores_standardises) { { score_ccf: 0.1 } }
+
       it do
         expect(subject.interpretations(competences))
           .to eq([{ score_ccf: :palier2 }, { score_memorisation: nil }])

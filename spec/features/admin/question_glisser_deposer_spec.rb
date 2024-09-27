@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Question Glisser Deposer', type: :feature do
-  before(:each) { se_connecter_comme_superadmin }
+  before { se_connecter_comme_superadmin }
 
   describe 'show' do
     let!(:question) do
@@ -13,7 +13,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
     end
 
-    before(:each) { visit admin_question_glisser_deposer_path(question) }
+    before { visit admin_question_glisser_deposer_path(question) }
 
     it 'affiche le libellé de la question et la transcription associée' do
       expect(page).to have_content 'Libellé de la question'
@@ -29,7 +29,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
     end
 
-    before(:each) { visit admin_questions_glisser_deposer_path }
+    before { visit admin_questions_glisser_deposer_path }
 
     it do
       expect(page).to have_content 'Comment ça va ?'
@@ -37,24 +37,24 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
   end
 
   describe 'création' do
-    before(:each) do
+    before do
       visit new_admin_question_glisser_deposer_path
     end
 
     context 'sans transcriptions' do
-      before(:each) do
+      before do
         fill_in :question_glisser_deposer_libelle, with: 'Question'
         fill_in :question_glisser_deposer_nom_technique, with: 'question'
       end
 
       it 'créé une nouvelle question' do
-        expect { click_on 'Créer' }.to(change { Question.count })
+        expect { click_on 'Créer' }.to(change(Question, :count))
         expect(Question.first.transcriptions).to be_empty
       end
     end
 
     context 'quand une transcription pour intitule est ajouté' do
-      before(:each) do
+      before do
         fill_in :question_glisser_deposer_libelle, with: 'Question'
         fill_in :question_glisser_deposer_nom_technique, with: 'question'
         fill_in :question_glisser_deposer_transcriptions_attributes_0_ecrit, with: 'Intitulé'
@@ -68,7 +68,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
     end
 
     context 'quand une transcription pour modalité réponse est ajoutée' do
-      before(:each) do
+      before do
         fill_in :question_glisser_deposer_libelle, with: 'Question'
         fill_in :question_glisser_deposer_nom_technique, with: 'question'
         fill_in :question_glisser_deposer_transcriptions_attributes_1_ecrit, with: 'Consigne'
@@ -82,7 +82,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
     end
 
     context 'quand une illustration est ajoutée' do
-      before(:each) do
+      before do
         fill_in :question_glisser_deposer_libelle, with: 'Question'
         fill_in :question_glisser_deposer_nom_technique, with: 'question'
         attach_file(:question_glisser_deposer_illustration,
@@ -91,7 +91,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       end
 
       it do
-        expect(Question.first.illustration.attached?).to eq true
+        expect(Question.first.illustration.attached?).to be true
       end
     end
   end
@@ -113,7 +113,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
     end
 
     context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do
-      before(:each) do
+      before do
         visit edit_admin_question_glisser_deposer_path(question)
         fill_in :question_glisser_deposer_transcriptions_attributes_0_ecrit, with: nil
       end
@@ -126,21 +126,21 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
     end
 
     context "quand l'admin coche supprimer l'illustration" do
-      before(:each) do
+      before do
         visit edit_admin_question_glisser_deposer_path(question)
         check 'question_glisser_deposer_supprimer_illustration'
       end
 
       it "supprime l'illustration" do
-        expect(question.illustration.attached?).to eq true
+        expect(question.illustration.attached?).to be true
         click_on 'Enregistrer'
         question.reload
-        expect(question.illustration.attached?).to eq false
+        expect(question.illustration.attached?).to be false
       end
     end
 
     context "quand l'admin coche supprimer l'audio de l'intitulé" do
-      before(:each) do
+      before do
         Question.first.transcriptions.find_by(categorie: :intitule)
                 .update(audio: Rack::Test::UploadedFile.new(
                   Rails.root.join('spec/support/alcoolique.mp3')
@@ -152,17 +152,17 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       it "supprime l'audio" do
         expect(
           Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq true
+        ).to be true
         click_on 'Enregistrer'
         question.reload
         expect(
           Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq false
+        ).to be false
       end
     end
 
     context "quand l'admin coche supprimer l'audio de la consigne" do
-      before(:each) do
+      before do
         Question.first.transcriptions.find_by(categorie: :modalite_reponse)
                 .update(audio: Rack::Test::UploadedFile.new(
                   Rails.root.join('spec/support/alcoolique.mp3')
@@ -174,12 +174,12 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       it "supprime l'audio" do
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq true
+        ).to be true
         click_on 'Enregistrer'
         question.reload
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq false
+        ).to be false
       end
     end
   end

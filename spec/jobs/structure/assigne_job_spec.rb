@@ -14,7 +14,7 @@ describe Structure::AssigneRegionJob, type: :job do
     mock_reponse_typhoeus('https://geo.api.gouv.fr/regions/11',
                           { nom: 'Île-de-France' })
 
-    Structure::AssigneRegionJob.perform_now
+    described_class.perform_now
   end
 
   it { expect(structure.reload.region).to eq 'Île-de-France' }

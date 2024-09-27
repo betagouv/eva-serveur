@@ -22,13 +22,14 @@ describe Compte do
 
   context 'quand un compte a été soft-delete' do
     let(:compte) { build :compte, email: 'mon-email-supprime@example.com' }
+
     before do
       autre_compte = create :compte, email: 'mon-email-supprime@example.com'
       autre_compte.destroy
     end
 
     it "Peut ré-utiliser l'adresse email d'un compte effacé" do
-      expect(compte.save).to eq true
+      expect(compte.save).to be true
     end
   end
 
@@ -57,7 +58,7 @@ describe Compte do
   end
 
   describe "validation DNS de l'email" do
-    let(:compte) { Compte.new email: 'email@example.com' }
+    let(:compte) { described_class.new email: 'email@example.com' }
 
     before do
       allow(compte).to receive(:email_changed?).and_return(true)
@@ -71,32 +72,34 @@ describe Compte do
     end
 
     context "quand l'email est invalide" do
-      before { allow(Truemail).to receive(:valid?).with('email@example.com').and_return(false) }
-
-      before { compte.valid? }
+      before do
+        allow(Truemail).to receive(:valid?).with('email@example.com').and_return(false)
+        compte.valid?
+      end
 
       it { expect(compte.errors[:email]).to include(I18n.t('errors.messages.invalid')) }
     end
 
     context "quand l'email du compte n'est pas modifié" do
-      before { allow(compte).to receive(:email_changed?).and_return(false) }
-
-      before { compte.valid? }
+      before do
+        allow(compte).to receive(:email_changed?).and_return(false)
+        compte.valid?
+      end
 
       it { expect(Truemail).not_to have_received(:valid?).with('email@example.com') }
     end
   end
 
   describe '#au_moins_admin?' do
-    it { expect(Compte.new(role: 'superadmin').au_moins_admin?).to be(true) }
-    it { expect(Compte.new(role: 'admin').au_moins_admin?).to be(true) }
-    it { expect(Compte.new(role: 'compte_generique').au_moins_admin?).to be(true) }
-    it { expect(Compte.new(role: 'conseiller').au_moins_admin?).to be(false) }
+    it { expect(described_class.new(role: 'superadmin').au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: 'admin').au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: 'compte_generique').au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: 'conseiller').au_moins_admin?).to be(false) }
   end
 
   describe '#rejoindre_structure' do
     let(:structure) { Structure.new }
-    let(:compte) { Compte.new statut_validation: nil, role: nil }
+    let(:compte) { described_class.new statut_validation: nil, role: nil }
 
     before do
       allow(compte).to receive(:autres_admins?).and_return(true)
@@ -110,7 +113,7 @@ describe Compte do
 
   describe "verifie la présence d'un admin" do
     let(:structure) { Structure.new }
-    let(:compte) { Compte.new role: 'admin', structure: structure }
+    let(:compte) { described_class.new role: 'admin', structure: structure }
 
     before do
       allow(compte).to receive(:verifie_dns_email).and_return(true)
@@ -164,7 +167,7 @@ describe Compte do
 
   describe '#assigne_role_admin_si_pas_d_admin' do
     let(:structure) { Structure.new }
-    let(:compte) { Compte.new role: 'conseiller' }
+    let(:compte) { described_class.new role: 'conseiller' }
 
     context 'quand il y a un autre admins dans la structure' do
       before do

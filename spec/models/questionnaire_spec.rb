@@ -12,15 +12,17 @@ RSpec.describe Questionnaire, type: :model do
   describe '#livraison_sans_redaction?' do
     context 'quand le questionnaire est livraison sans rédaction' do
       let(:questionnaire) do
-        Questionnaire.new nom_technique: Questionnaire::LIVRAISON_SANS_REDACTION
+        described_class.new nom_technique: Questionnaire::LIVRAISON_SANS_REDACTION
       end
+
       it { expect(questionnaire.livraison_sans_redaction?).to be(true) }
     end
 
     context "quand le questionnaire n'est pas livraison sans rédaction" do
       let(:questionnaire) do
-        Questionnaire.new nom_technique: Questionnaire::LIVRAISON_AVEC_REDACTION
+        described_class.new nom_technique: Questionnaire::LIVRAISON_AVEC_REDACTION
       end
+
       it { expect(questionnaire.livraison_sans_redaction?).to be(false) }
     end
   end

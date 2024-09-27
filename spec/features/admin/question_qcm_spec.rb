@@ -32,7 +32,7 @@ describe 'Admin - Question QCM', type: :feature do
       end
 
       it 'créé une nouvelle question' do
-        expect { click_on 'Créer' }.to(change { Question.count })
+        expect { click_on 'Créer' }.to(change(Question, :count))
         expect(Question.first.transcriptions).to be_empty
       end
     end
@@ -74,7 +74,7 @@ describe 'Admin - Question QCM', type: :feature do
       end
 
       it do
-        expect(Question.first.illustration.attached?).to eq true
+        expect(Question.first.illustration.attached?).to be true
       end
     end
   end
@@ -115,10 +115,10 @@ describe 'Admin - Question QCM', type: :feature do
       end
 
       it "supprime l'illustration" do
-        expect(question.illustration.attached?).to eq true
+        expect(question.illustration.attached?).to be true
         click_on 'Enregistrer'
         question.reload
-        expect(question.illustration.attached?).to eq false
+        expect(question.illustration.attached?).to be false
       end
     end
 
@@ -135,12 +135,12 @@ describe 'Admin - Question QCM', type: :feature do
       it "supprime l'audio" do
         expect(
           Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq true
+        ).to be true
         click_on 'Enregistrer'
         question.reload
         expect(
           Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq false
+        ).to be false
       end
     end
 
@@ -157,12 +157,12 @@ describe 'Admin - Question QCM', type: :feature do
       it "supprime l'audio" do
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq true
+        ).to be true
         click_on 'Enregistrer'
         question.reload
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq false
+        ).to be false
       end
     end
   end

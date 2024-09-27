@@ -22,7 +22,7 @@ RSpec.describe Choix, type: :model do
 
   describe 'validations' do
     let(:choix) do
-      Choix.new(intitule: 'intitule', type_choix: :bon, nom_technique: 'nom_technique')
+      described_class.new(intitule: 'intitule', type_choix: :bon, nom_technique: 'nom_technique')
     end
 
     it 'ne valide pas un audio de type wav' do
@@ -31,7 +31,7 @@ RSpec.describe Choix, type: :model do
       expect(choix.valid?).to be(false)
       expect(choix.errors[:audio]).to include('doit être un fichier MP3 ou MP4')
       choix.save
-      expect(choix.audio).to_not be_attached
+      expect(choix.audio).not_to be_attached
     end
 
     it 'valide un audio de type mp3' do

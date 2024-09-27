@@ -25,7 +25,7 @@ describe FabriqueEvenement do
   describe '#call' do
     it 'crée une partie et un évènement' do
       expect do
-        FabriqueEvenement.new(parametres).call
+        described_class.new(parametres).call
       end.to change(Partie, :count)
         .by(1)
         .and change(Evenement, :count)
@@ -33,7 +33,7 @@ describe FabriqueEvenement do
     end
 
     it "retourne l'évènement" do
-      expect(FabriqueEvenement.new(parametres).call).to be_an_instance_of Evenement
+      expect(described_class.new(parametres).call).to be_an_instance_of Evenement
     end
 
     context "quand l'évènement est une fin de situation" do
@@ -41,7 +41,7 @@ describe FabriqueEvenement do
 
       it 'programme un job pour assigner les métriques à la partie' do
         expect do
-          FabriqueEvenement.new(parametres).call
+          described_class.new(parametres).call
         end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(1)
       end
     end
@@ -51,7 +51,7 @@ describe FabriqueEvenement do
 
       it 'ne programme pas de job pour assigner les métriques à la partie' do
         expect do
-          FabriqueEvenement.new(parametres).call
+          described_class.new(parametres).call
         end.to have_enqueued_job(PersisteMetriquesPartieJob).exactly(0)
       end
     end
@@ -65,7 +65,7 @@ describe FabriqueEvenement do
 
       it 'crée un évènement' do
         expect do
-          FabriqueEvenement.new(parametres).call
+          described_class.new(parametres).call
         end.to change(Partie, :count)
           .by(0)
           .and change(Evenement, :count)
@@ -89,7 +89,7 @@ describe FabriqueEvenement do
 
       it 'ne crée rien' do
         expect do
-          expect(FabriqueEvenement.new(parametres_invalide).call).to be_nil
+          expect(described_class.new(parametres_invalide).call).to be_nil
         end.to change(Partie, :count)
           .by(0)
           .and change(Evenement, :count)
@@ -112,9 +112,9 @@ describe FabriqueEvenement do
       end
 
       it 'ne crée rien' do
-        FabriqueEvenement.new(parametres).call
+        described_class.new(parametres).call
         expect do
-          expect(FabriqueEvenement.new(parametres_invalide).call).to be_nil
+          expect(described_class.new(parametres_invalide).call).to be_nil
         end.to change(Partie, :count)
           .by(0)
           .and change(Evenement, :count)
@@ -136,7 +136,7 @@ describe FabriqueEvenement do
 
       it 'la partie est quand même créée' do
         expect do
-          expect(FabriqueEvenement.new(parametres_invalide).call.persisted?).to be false
+          expect(described_class.new(parametres_invalide).call.persisted?).to be false
         end.to change(Partie, :count)
           .by(1)
           .and change(Evenement, :count)
@@ -145,12 +145,12 @@ describe FabriqueEvenement do
 
       it 'ne persiste pas les métriques de la partie' do
         expect do
-          FabriqueEvenement.new(parametres_invalide).call
+          described_class.new(parametres_invalide).call
         end.not_to have_enqueued_job(PersisteMetriquesPartieJob)
       end
 
       it "retourne une instance d'évènement" do
-        expect(FabriqueEvenement.new(parametres_invalide).call.class).to eq Evenement
+        expect(described_class.new(parametres_invalide).call.class).to eq Evenement
       end
     end
   end

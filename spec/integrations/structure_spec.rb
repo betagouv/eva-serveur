@@ -8,7 +8,7 @@ describe Structure, type: :integration do
       let!(:structure) { create :structure_locale }
 
       context 'sans aucune campagne' do
-        it { expect(Structure.sans_campagne.count).to eq 1 }
+        it { expect(described_class.sans_campagne.count).to eq 1 }
       end
 
       context 'avec au moins une campagne' do
@@ -17,7 +17,7 @@ describe Structure, type: :integration do
           create :campagne, compte: compte
         end
 
-        it { expect(Structure.sans_campagne.count).to eq 0 }
+        it { expect(described_class.sans_campagne.count).to eq 0 }
       end
     end
 
@@ -32,13 +32,18 @@ describe Structure, type: :integration do
           cree_evaluations_pour_structure(structure_utilisatrice)
         end
 
-        it { expect(Structure.pas_vraiment_utilisatrices).to include structure_pas_utilisatrice }
-        it { expect(Structure.pas_vraiment_utilisatrices).not_to include structure_utilisatrice }
+        it {
+          expect(described_class.pas_vraiment_utilisatrices).to include structure_pas_utilisatrice
+        }
+
+        it {
+          expect(described_class.pas_vraiment_utilisatrices).not_to include structure_utilisatrice
+        }
       end
 
       context "quand ma structure n'a pas de campagne" do
         it do
-          expect(Structure.pas_vraiment_utilisatrices).not_to include(structure_pas_utilisatrice)
+          expect(described_class.pas_vraiment_utilisatrices).not_to include(structure_pas_utilisatrice)
         end
       end
     end
@@ -52,8 +57,8 @@ describe Structure, type: :integration do
         cree_evaluations_pour_structure structure_activee, nombre_evaluations: 4
       end
 
-      it { expect(Structure.non_activees).to include structure_non_activee }
-      it { expect(Structure.non_activees).not_to include structure_activee }
+      it { expect(described_class.non_activees).to include structure_non_activee }
+      it { expect(described_class.non_activees).not_to include structure_activee }
     end
 
     describe '.activees' do
@@ -63,7 +68,7 @@ describe Structure, type: :integration do
         cree_evaluations_pour_structure structure_activee, nombre_evaluations: 4
       end
 
-      it { expect(Structure.activees).to include structure_activee }
+      it { expect(described_class.activees).to include structure_activee }
     end
 
     describe '.inactives' do
@@ -83,8 +88,8 @@ describe Structure, type: :integration do
         )
       end
 
-      it { expect(Structure.inactives).to include structure_inactivee }
-      it { expect(Structure.inactives).not_to include structure_activee }
+      it { expect(described_class.inactives).to include structure_inactivee }
+      it { expect(described_class.inactives).not_to include structure_activee }
     end
 
     describe '.abandonnistes' do
@@ -98,7 +103,7 @@ describe Structure, type: :integration do
         )
       end
 
-      it { expect(Structure.abandonnistes).to include structure_abandonnee }
+      it { expect(described_class.abandonnistes).to include structure_abandonnee }
     end
 
     describe '.avec_nombre_evaluations_et_date_derniere_evaluation' do
@@ -114,8 +119,8 @@ describe Structure, type: :integration do
       end
 
       let(:structures) do
-        Structure.avec_nombre_evaluations_et_date_derniere_evaluation
-                 .order(:created_at)
+        described_class.avec_nombre_evaluations_et_date_derniere_evaluation
+                       .order(:created_at)
       end
 
       it do

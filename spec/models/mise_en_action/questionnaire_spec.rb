@@ -7,7 +7,7 @@ describe MiseEnAction::Questionnaire, type: :model do
     context 'quand le nom est remediation' do
       it 'récupére la question et les réponses associées' do
         question = 'Vers quel dispositif de remédiation cette personne a-t-elle été orientée ?'
-        questionnaire = MiseEnAction::Questionnaire.new(:remediation)
+        questionnaire = described_class.new(:remediation)
         expect(questionnaire.question).to eq(question)
         expect(questionnaire.reponses.values).to eq(%w[formation_competences_de_base
                                                        formation_metier
@@ -19,7 +19,7 @@ describe MiseEnAction::Questionnaire, type: :model do
     context 'quand le nom est difficulte' do
       it 'récupére la question et les réponses associées' do
         question = 'Quelle difficulté avez-vous rencontré ?'
-        questionnaire = MiseEnAction::Questionnaire.new(:difficulte)
+        questionnaire = described_class.new(:difficulte)
         expect(questionnaire.question).to eq(question)
         expect(questionnaire.reponses.values).to eq(%w[aucune_offre_formation
                                                        offre_formation_inaccessible

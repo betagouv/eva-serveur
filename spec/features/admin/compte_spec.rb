@@ -16,6 +16,7 @@ describe 'Admin - Compte', type: :feature do
 
   describe 'index' do
     let(:compte_connecte) { compte_superadmin }
+
     before { visit admin_comptes_path }
 
     it { expect(page).to have_content 'moi@structure' }
@@ -311,6 +312,7 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it { expect(page).to have_content(/nouvel-email@exemple.fr/) }
+
       it do
         expect(page).to have_content(/Consultez votre boîte de réception,/)
       end
@@ -336,7 +338,7 @@ describe 'Admin - Compte', type: :feature do
       context "quand je suis sur la show d'un autre compte" do
         before { visit admin_compte_path(collegue) }
 
-        it { expect(page).to_not have_content(/Confirmez votre adresse email/) }
+        it { expect(page).not_to have_content(/Confirmez votre adresse email/) }
       end
 
       context "quand l'email du compte d'un collègue a été modifié" do

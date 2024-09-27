@@ -12,7 +12,7 @@ describe Anonymisation::Compte, type: :integration do
   end
 
   it 'anonymise le compte' do
-    Anonymisation::Compte.new(compte).anonymise
+    described_class.new(compte).anonymise
 
     compte.reload
     expect(compte.anonymise_le).not_to be_nil

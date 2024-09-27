@@ -48,6 +48,7 @@ describe 'Admin - Campagne', type: :feature do
     context 'quelque soit le rôle' do
       let!(:evaluation) { create :evaluation, campagne: campagne }
       let!(:evaluation_conseiller) { create :evaluation, campagne: ma_campagne }
+
       before { visit admin_campagnes_path }
 
       it "affiche le nombre d'évaluation par campagne" do
@@ -207,7 +208,7 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       it "soft_delete la campagne mais garde l'association avec l'evaluation" do
-        expect(campagne.deleted_at).not_to be nil
+        expect(campagne.deleted_at).not_to be_nil
         expect(evaluation.campagne_id).to eq campagne.id
       end
     end

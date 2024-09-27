@@ -17,12 +17,12 @@ describe Evenement, type: :model do
 
   describe '#fin_situation?' do
     it "retourne true quand le nom de l'évènement est 'finSituation'" do
-      evenement = Evenement.new nom: 'finSituation'
+      evenement = described_class.new nom: 'finSituation'
       expect(evenement.fin_situation?).to be true
     end
 
     it "retourne false quand le nom de l'évènement n'est pas 'finSituation'" do
-      evenement = Evenement.new nom: 'autre'
+      evenement = described_class.new nom: 'autre'
       expect(evenement.fin_situation?).to be false
     end
   end

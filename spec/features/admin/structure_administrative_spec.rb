@@ -4,9 +4,9 @@ require 'rails_helper'
 
 describe 'Admin - Structure administrative', type: :feature do
   let(:compte_courant) { create(:compte_superadmin) }
-  before { connecte(compte_courant) }
-
   let!(:structure) { create :structure_administrative, :avec_admin, nom: 'Ma structure' }
+
+  before { connecte(compte_courant) }
 
   describe 'index' do
     before { visit admin_structures_administratives_path }

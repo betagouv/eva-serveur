@@ -4,8 +4,8 @@ require 'rails_helper'
 
 describe Restitution::Globale do
   let(:restitution_globale) do
-    Restitution::Globale.new restitutions: restitutions,
-                             evaluation: evaluation
+    described_class.new restitutions: restitutions,
+                        evaluation: evaluation
   end
   let(:evaluation) { double }
 
@@ -164,6 +164,7 @@ describe Restitution::Globale do
 
   describe '#interpretations' do
     let(:restitutions) { [] }
+
     context 'pre-positionnement' do
       let(:interpreteur_niveau1) do
         double(
@@ -207,8 +208,8 @@ describe Restitution::Globale do
       let(:numeratie) { double }
 
       before do
-        allow(restitution_globale).to receive(:litteratie).and_return(litteratie)
-        allow(restitution_globale).to receive(:numeratie).and_return(litteratie)
+        allow(restitution_globale).to receive_messages(litteratie: litteratie,
+                                                       numeratie: litteratie)
       end
 
       it do

@@ -25,32 +25,32 @@ describe Restitution::Competence::ProfilEvacob do
 
     it 'a le niveau 1' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 6 })
-      expect(competence_lecture_bas.niveau).to eql(:profil1)
+      expect(competence_lecture_bas.niveau).to be(:profil1)
     end
 
     it 'a le niveau 2 bas' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 7 })
-      expect(competence_lecture_bas.niveau).to eql(:profil2)
+      expect(competence_lecture_bas.niveau).to be(:profil2)
     end
 
     it 'a le niveau 2 haut' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 10 })
-      expect(competence_lecture_bas.niveau).to eql(:profil2)
+      expect(competence_lecture_bas.niveau).to be(:profil2)
     end
 
     it 'a le niveau 3 bas' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 11 })
-      expect(competence_lecture_bas.niveau).to eql(:profil3)
+      expect(competence_lecture_bas.niveau).to be(:profil3)
     end
 
     it 'a le niveau 3 haut' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 14 })
-      expect(competence_lecture_bas.niveau).to eql(:profil3)
+      expect(competence_lecture_bas.niveau).to be(:profil3)
     end
 
     it 'a le niveau 4' do
       expect(partie).to receive(:metriques).and_return({ 'score_lecture' => 15 })
-      expect(competence_lecture_bas.niveau).to eql(:profil4)
+      expect(competence_lecture_bas.niveau).to be(:profil4)
     end
   end
 

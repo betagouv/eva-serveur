@@ -66,7 +66,7 @@ describe Question, type: :model do
         end
 
         it "retourne l'url de l'audio de l'intitulé dans le champ audio_url" do
-          expect(question.transcription_intitule.complete?).to eq true
+          expect(question.transcription_intitule.complete?).to be true
           expect(question.json_audio_fields).to eq(
             { 'audio_url' => question.transcription_intitule.audio_url }
           )
@@ -82,8 +82,8 @@ describe Question, type: :model do
         end
 
         it "retourne l'url de l'audio de l'intitulé dans le champ intitule_audio" do
-          expect(question.transcription_intitule.complete?).to eq false
-          expect(question.json_audio_fields['audio_url']).to eq(nil)
+          expect(question.transcription_intitule.complete?).to be false
+          expect(question.json_audio_fields['audio_url']).to be_nil
           expect(question.json_audio_fields['intitule_audio']).to eq(
             question.transcription_intitule.audio_url
           )
@@ -96,7 +96,7 @@ describe Question, type: :model do
         end
 
         it "retourne l'url de l'audio de la modalité de réponse dans le champ intitule_audio" do
-          expect(question.transcription_modalite_reponse.complete?).to eq true
+          expect(question.transcription_modalite_reponse.complete?).to be true
           expect(question.json_audio_fields).to eq(
             { 'audio_url' => question.transcription_modalite_reponse.audio_url }
           )

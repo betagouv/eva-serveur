@@ -113,8 +113,8 @@ describe Restitution::CafeDeLaPlace do
 
     context 'quand un parcours haut est indeterminé' do
       before do
-        allow(restitution).to receive(:parcours_haut).and_return Competence::NIVEAU_INDETERMINE
-        allow(restitution).to receive(:parcours_bas).and_return Competence::PROFIL_3
+        allow(restitution).to receive_messages(parcours_haut: Competence::NIVEAU_INDETERMINE,
+                                               parcours_bas: Competence::PROFIL_3)
       end
 
       it 'retourne le profil du parcours bas' do

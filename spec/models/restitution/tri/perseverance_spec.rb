@@ -6,9 +6,8 @@ describe Restitution::Tri::Perseverance do
   let(:restitution) { double }
 
   def pour(termine: nil, secondes: nil, erreurs: nil)
-    allow(restitution).to receive(:termine?).and_return(termine)
-    allow(restitution).to receive(:nombre_mal_placees).and_return(erreurs)
-    allow(restitution).to receive(:temps_total).and_return(secondes)
+    allow(restitution).to receive_messages(termine?: termine, nombre_mal_placees: erreurs,
+                                           temps_total: secondes)
     described_class.new(restitution)
   end
 

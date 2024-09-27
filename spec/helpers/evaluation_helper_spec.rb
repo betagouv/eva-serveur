@@ -8,11 +8,11 @@ describe EvaluationHelper do
     let(:profil_autre) { :profil_autre }
 
     it 'Retourne true si le profil renseigné est un niveau bas' do
-      expect(niveau_bas?(:profil1)).to eq true
+      expect(niveau_bas?(:profil1)).to be true
     end
 
     it "Retourne false si le profil renseigné n'est pas un niveau bas" do
-      expect(niveau_bas?(:profil_autre)).to eq false
+      expect(niveau_bas?(:profil_autre)).to be false
     end
   end
 end

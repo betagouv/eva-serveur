@@ -5,6 +5,7 @@ require 'rails_helper'
 describe Eva::Devise::SessionsController, type: :controller do
   let!(:compte) { create :compte_admin }
   let!(:campagne) { create :campagne, compte: compte, code: 'CODECAMPAGNE' }
+
   describe 'POST connexion_espace_jeu' do
     context 'quand on passe un code campagne valide' do
       it "redirige vers l'espace jeu" do

@@ -18,13 +18,13 @@ describe Api::EvaluationsController do
     it 'ajoute bien une evaluation à la création' do
       expect do
         post :create, params: evaluation_params
-      end.to change { Evaluation.count }.by(1)
+      end.to change(Evaluation, :count).by(1)
     end
 
     it "lorsqu'on crée une evaluation, on crée un bénéficiaire" do
       expect do
         post :create, params: evaluation_params
-      end.to change { Beneficiaire.count }.by(1)
+      end.to change(Beneficiaire, :count).by(1)
     end
   end
 
@@ -39,7 +39,7 @@ describe Api::EvaluationsController do
       evaluation = create :evaluation
       expect do
         put :update, params: { id: evaluation.id, nom: nom }
-      end.to change { Beneficiaire.count }.by(0)
+      end.not_to(change(Beneficiaire, :count))
       expect(response).to have_http_status(:success)
     end
   end

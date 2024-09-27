@@ -74,7 +74,7 @@ describe Restitution::PlaceDuMarche do
       it 'retourne le score selon le niveau' do
         expect(restitution.score_pour(:N1)).to eq 3
         expect(restitution.score_pour(:N2)).to eq(0.5)
-        expect(restitution.score_pour(:N3)).to eq(nil)
+        expect(restitution.score_pour(:N3)).to be_nil
       end
     end
 
@@ -179,7 +179,7 @@ describe Restitution::PlaceDuMarche do
       end
 
       it 'retourne nil' do
-        expect(restitution.niveau_numeratie).to eq nil
+        expect(restitution.niveau_numeratie).to be_nil
       end
     end
 

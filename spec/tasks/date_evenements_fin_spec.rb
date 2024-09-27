@@ -14,9 +14,10 @@ describe 'nettoyage:date_evenements_fin' do
   end
   let!(:evenements) { [evenement_precedent, evenement_fin] }
 
-  before { allow(logger).to receive :info }
-
-  before { subject.invoke }
+  before do
+    allow(logger).to receive :info
+    subject.invoke
+  end
 
   context 'événement avec date unique' do
     let(:date_fin) { 1.day.ago.beginning_of_day }

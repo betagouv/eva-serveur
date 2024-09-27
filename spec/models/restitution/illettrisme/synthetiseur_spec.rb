@@ -8,8 +8,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
     context 'quand la restitution détecte un illettrisme potentiel' do
       before do
-        allow(algo).to receive(:indetermine?).and_return(false)
-        allow(algo).to receive(:illettrisme_potentiel?).and_return(true)
+        allow(algo).to receive_messages(indetermine?: false, illettrisme_potentiel?: true)
       end
 
       it { expect(described_class.calcule_synthese(algo)).to eq 'illettrisme_potentiel' }
@@ -17,9 +16,8 @@ describe Restitution::Illettrisme::Synthetiseur do
 
     context "quand la restitution détecte un socle cléa en cours d'aquisition" do
       before do
-        allow(algo).to receive(:indetermine?).and_return(false)
-        allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
-        allow(algo).to receive(:socle_clea?).and_return(true)
+        allow(algo).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
+                                        socle_clea?: true)
       end
 
       it { expect(described_class.calcule_synthese(algo)).to eq 'socle_clea' }
@@ -28,9 +26,8 @@ describe Restitution::Illettrisme::Synthetiseur do
     context 'quand la restitution détecte un niveau intermédiaire' do
       before do
         allow(algo).to receive(:indetermine?).and_return(false)
-        allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
-        allow(algo).to receive(:socle_clea?).and_return(false)
-        allow(algo).to receive(:aberrant?).and_return(false)
+        allow(algo).to receive_messages(illettrisme_potentiel?: false, socle_clea?: false,
+                                        aberrant?: false)
         allow(algo).to receive(:indetermine?).and_return(false)
       end
 
@@ -39,10 +36,8 @@ describe Restitution::Illettrisme::Synthetiseur do
 
     context 'quand la restitution détecte un niveau aberrant' do
       before do
-        allow(algo).to receive(:indetermine?).and_return(false)
-        allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
-        allow(algo).to receive(:socle_clea?).and_return(false)
-        allow(algo).to receive(:aberrant?).and_return(true)
+        allow(algo).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
+                                        socle_clea?: false, aberrant?: true)
       end
 
       it { expect(described_class.calcule_synthese(algo)).to eq 'aberrant' }
@@ -50,13 +45,11 @@ describe Restitution::Illettrisme::Synthetiseur do
 
     context "quand la restitution n'a pas de score" do
       before do
-        allow(algo).to receive(:illettrisme_potentiel?).and_return(false)
-        allow(algo).to receive(:socle_clea?).and_return(false)
-        allow(algo).to receive(:aberrant?).and_return(false)
-        allow(algo).to receive(:indetermine?).and_return(true)
+        allow(algo).to receive_messages(illettrisme_potentiel?: false, socle_clea?: false,
+                                        aberrant?: false, indetermine?: true)
       end
 
-      it { expect(described_class.calcule_synthese(algo)).to eq nil }
+      it { expect(described_class.calcule_synthese(algo)).to be_nil }
     end
 
     context 'quand la restitution détecte un niveau indetermine' do
@@ -64,7 +57,7 @@ describe Restitution::Illettrisme::Synthetiseur do
         allow(algo).to receive(:indetermine?).and_return(true)
       end
 
-      it { expect(described_class.calcule_synthese(algo)).to eq nil }
+      it { expect(described_class.calcule_synthese(algo)).to be_nil }
     end
   end
 
@@ -168,11 +161,12 @@ describe Restitution::Illettrisme::Synthetiseur do
   describe 'Evaluation pré-positionnement' do
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement, nil, nil
+      described_class.new interpreteur_pre_positionnement, nil, nil
     end
+
     describe '#positionnement_litteratie' do
       it 'ne retourne rien' do
-        expect(subject.positionnement_litteratie).to eq nil
+        expect(subject.positionnement_litteratie).to be_nil
       end
     end
   end
@@ -180,7 +174,7 @@ describe Restitution::Illettrisme::Synthetiseur do
   describe 'Evaluation positionnement Littératie' do
     let(:interpreteur_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new nil, interpreteur_positionnement, nil
+      described_class.new nil, interpreteur_positionnement, nil
     end
 
     describe '#synthese' do
@@ -199,14 +193,14 @@ describe Restitution::Illettrisme::Synthetiseur do
       it { expect(synthese(:profil4)).to eq 'socle_clea' }
       it { expect(synthese(:profil_4h_plus_plus)).to eq 'socle_clea' }
       it { expect(synthese(:profil_aberrant)).to eq 'aberrant' }
-      it { expect(synthese(:indetermine)).to eq nil }
+      it { expect(synthese(:indetermine)).to be_nil }
     end
   end
 
   describe 'Evaluation positionnement Numératie' do
     let(:interpreteur_numeratie) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new nil, nil, interpreteur_numeratie
+      described_class.new nil, nil, interpreteur_numeratie
     end
 
     describe '#synthese' do
@@ -223,7 +217,7 @@ describe Restitution::Illettrisme::Synthetiseur do
       it { expect(synthese(:profil2)).to eq 'illettrisme_potentiel' }
       it { expect(synthese(:profil3)).to eq 'ni_ni' }
       it { expect(synthese(:profil4)).to eq 'socle_clea' }
-      it { expect(synthese(:indetermine)).to eq nil }
+      it { expect(synthese(:indetermine)).to be_nil }
     end
   end
 
@@ -231,8 +225,8 @@ describe Restitution::Illettrisme::Synthetiseur do
     let(:interpreteur_positionnement) { double }
     let(:interpreteur_pre_positionnement) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new interpreteur_pre_positionnement,
-                                                 interpreteur_positionnement, nil
+      described_class.new interpreteur_pre_positionnement,
+                          interpreteur_positionnement, nil
     end
 
     before do
@@ -265,9 +259,9 @@ describe Restitution::Illettrisme::Synthetiseur do
     let(:interpreteur_positionnement) { double }
     let(:interpreteur_numeratie) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur.new nil,
-                                                 interpreteur_positionnement,
-                                                 interpreteur_numeratie
+      described_class.new nil,
+                          interpreteur_positionnement,
+                          interpreteur_numeratie
     end
 
     before do

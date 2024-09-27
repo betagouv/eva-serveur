@@ -10,7 +10,7 @@ describe AnonymisationEvaluationsJob, type: :job do
                                                     created_at: 2.years.ago,
                                                     nom: 'deja anonymise'
 
-    AnonymisationEvaluationsJob.perform_now
+    described_class.perform_now
 
     ancienne_evaluation.reload
     evaluation_recente.reload

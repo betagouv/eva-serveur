@@ -97,7 +97,7 @@ describe 'Dashboard', type: :feature do
       it "affiche l'étape valider son email" do
         visit admin_path
         expect(compte.confirmed?).to be false
-        expect(compte.unconfirmed_email).to be nil
+        expect(compte.unconfirmed_email).to be_nil
         expect(page).not_to have_content('Testez votre campagne')
         expect(page).to have_content('Confirmez votre adresse email')
         expect(page).not_to have_content('Testez votre campagne')
@@ -157,9 +157,8 @@ describe 'Dashboard', type: :feature do
       before do
         compte.update(mode_tutoriel: false)
         compte.validation_en_attente!
+        visit admin_path
       end
-
-      before { visit admin_path }
 
       it do
         expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")

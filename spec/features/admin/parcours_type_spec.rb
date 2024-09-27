@@ -28,7 +28,7 @@ describe 'Admin - Parcours type', type: :feature do
     end
 
     it do
-      expect { click_on 'Créer' }.to(change { ParcoursType.count })
+      expect { click_on 'Créer' }.to(change(ParcoursType, :count))
       expect(ParcoursType.last.description).to eq('Ma description')
     end
   end

@@ -1,6 +1,9 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-packaging
   - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 2.7
@@ -65,3 +68,8 @@ Rails/RedundantPresenceValidationOnBelongsTo:
 Lint/MissingSuper:
   Exclude:
     - 'app/components/**/*'
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/views/**/*'
+    - 'spec/tasks/**/*'

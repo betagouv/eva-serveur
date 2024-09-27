@@ -53,7 +53,7 @@ describe 'Evaluation', type: :request do
           conditions_passation = ConditionsPassation.last
           expect(conditions_passation.user_agent).to eq unUserAgent
           expect(conditions_passation.materiel_utilise).to eq 'desktop'
-          expect(conditions_passation.modele_materiel).to eq nil
+          expect(conditions_passation.modele_materiel).to be_nil
           expect(conditions_passation.nom_navigateur).to eq 'Firefox'
           expect(conditions_passation.version_navigateur).to eq '104.0'
           expect(conditions_passation.hauteur_fenetre_navigation).to eq 10
@@ -70,7 +70,7 @@ describe 'Evaluation', type: :request do
         end
       end
 
-      context 'Quand le code campagne est inconnu' do
+      context 'quand le code campagne est inconnu' do
         let(:payload_invalide) { { nom: '', code_campagne: 'ETE190' } }
 
         before { post '/api/evaluations', params: payload_invalide }
@@ -84,7 +84,7 @@ describe 'Evaluation', type: :request do
         end
       end
 
-      context 'Quand une requête est invalide' do
+      context 'quand une requête est invalide' do
         let(:payload_invalide) { { nom: '', code_campagne: '' } }
 
         before { post '/api/evaluations', params: payload_invalide }
@@ -98,7 +98,7 @@ describe 'Evaluation', type: :request do
         end
       end
 
-      context 'Quand une requête est vide' do
+      context 'quand une requête est vide' do
         let(:payload_invalide) { {} }
 
         before { post '/api/evaluations', params: payload_invalide }
@@ -116,7 +116,7 @@ describe 'Evaluation', type: :request do
     describe 'PATCH /evaluations/:id' do
       let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
 
-      context 'Quand une requête est invalide pour un enum de données sociodémographiques' do
+      context 'quand une requête est invalide pour un enum de données sociodémographiques' do
         let(:params) do
           {
             donnee_sociodemographique_attributes: {
@@ -229,7 +229,7 @@ describe 'Evaluation', type: :request do
         expect do
           post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
                params: { responsable_suivi_id: nil }
-        end.to_not(change { evaluation.reload.responsable_suivi })
+        end.not_to(change { evaluation.reload.responsable_suivi })
       end
     end
 
@@ -243,7 +243,7 @@ describe 'Evaluation', type: :request do
         patch renseigner_qualification_admin_evaluation_path(evaluation),
               params: { effectuee: true, qualification: remediation }
         evaluation.reload
-        expect(evaluation.mise_en_action.effectuee).to eq true
+        expect(evaluation.mise_en_action.effectuee).to be true
         expect(evaluation.mise_en_action.remediation).to eq remediation
       end
 
@@ -251,7 +251,7 @@ describe 'Evaluation', type: :request do
         patch renseigner_qualification_admin_evaluation_path(evaluation),
               params: { effectuee: true, qualification: indetermine }
         evaluation.reload
-        expect(evaluation.mise_en_action.effectuee).to eq true
+        expect(evaluation.mise_en_action.effectuee).to be true
         expect(evaluation.mise_en_action.remediation).to eq indetermine
       end
 
@@ -259,7 +259,7 @@ describe 'Evaluation', type: :request do
         patch renseigner_qualification_admin_evaluation_path(evaluation),
               params: { effectuee: false, qualification: difficulte }
         evaluation.reload
-        expect(evaluation.mise_en_action.effectuee).to eq false
+        expect(evaluation.mise_en_action.effectuee).to be false
         expect(evaluation.mise_en_action.difficulte).to eq difficulte
       end
 
@@ -267,7 +267,7 @@ describe 'Evaluation', type: :request do
         patch renseigner_qualification_admin_evaluation_path(evaluation),
               params: { effectuee: false, qualification: indetermine }
         evaluation.reload
-        expect(evaluation.mise_en_action.effectuee).to eq false
+        expect(evaluation.mise_en_action.effectuee).to be false
         expect(evaluation.mise_en_action.difficulte).to eq indetermine
       end
     end

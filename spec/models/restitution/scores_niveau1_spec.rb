@@ -6,7 +6,7 @@ describe Restitution::ScoresNiveau1 do
   let(:scores_niveau2) { double }
 
   let(:scores_niveau1) do
-    Restitution::ScoresNiveau1.new(scores_niveau2)
+    described_class.new(scores_niveau2)
   end
 
   it 'à partir des score standardisés de niveau 2' do

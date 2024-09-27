@@ -3,7 +3,11 @@
 require 'rails_helper'
 
 describe 'admin/campagnes/_programme.html.arb' do
-  before { assign(:campagne, Campagne.new(parcours_type: parcours_type)) }
+  before do
+    assign(:campagne, Campagne.new(parcours_type: parcours_type))
+    assign(:situations_configurations, [situation_configuration_maintenance])
+    render
+  end
 
   let(:parcours_type) { nil }
   let(:maintenance) do
@@ -12,9 +16,6 @@ describe 'admin/campagnes/_programme.html.arb' do
            libelle: 'Maintenance'
   end
   let(:situation_configuration_maintenance) { SituationConfiguration.new(situation: maintenance) }
-  before { assign(:situations_configurations, [situation_configuration_maintenance]) }
-
-  before { render }
 
   it { expect(rendered).to match(/Maintenance/) }
 

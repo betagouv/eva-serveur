@@ -8,7 +8,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
     ancienne_evaluation = create :evaluation, created_at: 2.years.ago, beneficiaire: beneficiaire
     evaluation_recente = create :evaluation, created_at: 11.months.ago, beneficiaire: beneficiaire
 
-    AnonymisationBeneficiairesJob.perform_now
+    described_class.perform_now
 
     ancienne_evaluation.reload
     evaluation_recente.reload
@@ -22,7 +22,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
     ancienne_evaluation = create :evaluation, created_at: 2.years.ago, beneficiaire: beneficiaire
     evaluation_recente = create :evaluation, created_at: 16.months.ago, beneficiaire: beneficiaire
 
-    AnonymisationBeneficiairesJob.perform_now
+    described_class.perform_now
 
     ancienne_evaluation.reload
     evaluation_recente.reload
@@ -39,7 +39,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
     evaluation_recente = create :evaluation, created_at: 16.months.ago, beneficiaire: beneficiaire,
                                              anonymise_le: date_anonymisation
 
-    AnonymisationBeneficiairesJob.perform_now
+    described_class.perform_now
 
     ancienne_evaluation.reload
     evaluation_recente.reload

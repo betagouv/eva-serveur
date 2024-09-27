@@ -6,12 +6,10 @@ describe Restitution::Tri::ComprehensionConsigne do
   let(:restitution) { double }
 
   def pour(termine: nil, jouees: nil, erreurs: nil, relectures: nil)
-    allow(restitution).to receive(:termine?).and_return(termine)
     bien_placees = jouees || 0
     bien_placees -= erreurs if erreurs
-    allow(restitution).to receive(:nombre_bien_placees).and_return(bien_placees)
-    allow(restitution).to receive(:nombre_mal_placees).and_return(erreurs)
-    allow(restitution).to receive(:nombre_rejoue_consigne).and_return(relectures)
+    allow(restitution).to receive_messages(termine?: termine, nombre_bien_placees: bien_placees,
+                                           nombre_mal_placees: erreurs, nombre_rejoue_consigne: relectures)
     described_class.new(restitution)
   end
 

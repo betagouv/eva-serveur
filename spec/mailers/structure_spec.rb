@@ -9,7 +9,7 @@ describe StructureMailer, type: :mailer do
 
   describe '#nouvelle_structure' do
     it "envoie un email pour informer de la création d'une structure" do
-      email = StructureMailer.with(compte: compte, structure: structure).nouvelle_structure
+      email = described_class.with(compte: compte, structure: structure).nouvelle_structure
 
       assert_emails 1 do
         email.deliver_now
@@ -29,7 +29,7 @@ describe StructureMailer, type: :mailer do
 
   describe '#relance_creation_campagne' do
     it 'envoie un email de relance pour inciter à créer une campagne' do
-      email = StructureMailer.with(compte_admin: compte).relance_creation_campagne
+      email = described_class.with(compte_admin: compte).relance_creation_campagne
 
       assert_emails 1 do
         email.deliver_now

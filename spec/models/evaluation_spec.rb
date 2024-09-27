@@ -8,11 +8,11 @@ describe Evaluation do
   it { is_expected.to validate_presence_of :statut }
   it { is_expected.to belong_to :campagne }
   it { is_expected.to belong_to(:responsable_suivi).optional }
-  it { should accept_nested_attributes_for :beneficiaire }
+  it { is_expected.to accept_nested_attributes_for :beneficiaire }
   it { is_expected.to have_one :conditions_passation }
-  it { should accept_nested_attributes_for :conditions_passation }
+  it { is_expected.to accept_nested_attributes_for :conditions_passation }
   it { is_expected.to have_one :donnee_sociodemographique }
-  it { should accept_nested_attributes_for :donnee_sociodemographique }
+  it { is_expected.to accept_nested_attributes_for :donnee_sociodemographique }
 
   describe 'scopes' do
     describe '.des_12_derniers_mois' do
@@ -20,7 +20,7 @@ describe Evaluation do
         Timecop.freeze(Time.zone.local(2023, 1, 10, 12, 0, 0)) do
           Timecop.freeze(Time.zone.local(2023, 1, 1, 0, 0, 0)) { create(:evaluation) }
 
-          expect(Evaluation.des_12_derniers_mois.count).to eq 0
+          expect(described_class.des_12_derniers_mois.count).to eq 0
         end
       end
 
@@ -28,7 +28,7 @@ describe Evaluation do
         Timecop.freeze(Time.zone.local(2023, 1, 10, 12, 0, 0)) do
           Timecop.freeze(Time.zone.local(2022, 12, 31, 23, 59, 59)) { create(:evaluation) }
 
-          expect(Evaluation.des_12_derniers_mois.count).to eq 1
+          expect(described_class.des_12_derniers_mois.count).to eq 1
         end
       end
 
@@ -36,7 +36,7 @@ describe Evaluation do
         Timecop.freeze(Time.zone.local(2023, 1, 10, 12, 0, 0)) do
           Timecop.freeze(Time.zone.local(2022, 1, 1, 0, 0, 0)) { create(:evaluation) }
 
-          expect(Evaluation.des_12_derniers_mois.count).to eq 1
+          expect(described_class.des_12_derniers_mois.count).to eq 1
         end
       end
 
@@ -44,7 +44,7 @@ describe Evaluation do
         Timecop.freeze(Time.zone.local(2023, 1, 10, 12, 0, 0)) do
           Timecop.freeze(Time.zone.local(2021, 12, 31, 23, 59, 59)) { create(:evaluation) }
 
-          expect(Evaluation.des_12_derniers_mois.count).to eq 0
+          expect(described_class.des_12_derniers_mois.count).to eq 0
         end
       end
     end
@@ -109,7 +109,7 @@ describe Evaluation do
       before { evaluation.enregistre_mise_en_action(false) }
 
       it 'met à jour la réponse mais pas la date de mise en action' do
-        expect(evaluation.reload.mise_en_action.effectuee).to eq false
+        expect(evaluation.reload.mise_en_action.effectuee).to be false
         expect(evaluation.reload.mise_en_action.repondue_le).to eq date_mise_en_action
       end
     end
@@ -122,13 +122,13 @@ describe Evaluation do
         Timecop.freeze(date_du_jour) do
           evaluation.enregistre_mise_en_action(true)
         end
-        expect(evaluation.mise_en_action.effectuee).to eq true
+        expect(evaluation.mise_en_action.effectuee).to be true
         expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
       end
 
       it 'créé et enregistre false en réponse' do
         evaluation.enregistre_mise_en_action(false)
-        expect(evaluation.mise_en_action.effectuee).to eq false
+        expect(evaluation.mise_en_action.effectuee).to be false
       end
     end
   end
@@ -137,20 +137,20 @@ describe Evaluation do
     context "quand aucune mise en action n'est associée à l'évaluation" do
       let!(:evaluation) { create :evaluation }
 
-      it { expect(evaluation.a_mise_en_action?).to eq false }
+      it { expect(evaluation.a_mise_en_action?).to be false }
     end
 
     context "quand une mise en action est associée à l'évaluation" do
       context 'quand la mise en action a été effectué' do
         let!(:evaluation) { create :evaluation, :avec_mise_en_action }
 
-        it { expect(evaluation.a_mise_en_action?).to eq true }
+        it { expect(evaluation.a_mise_en_action?).to be true }
       end
 
       context "quand la mise en action n'a pas été effectué" do
         let!(:evaluation) { create :evaluation, :avec_mise_en_action, effectuee: false }
 
-        it { expect(evaluation.reload.a_mise_en_action?).to eq true }
+        it { expect(evaluation.reload.a_mise_en_action?).to be true }
       end
     end
   end

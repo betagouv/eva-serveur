@@ -12,8 +12,8 @@ describe Campagne, type: :integration do
     it 'supprime les dépendances' do
       expect do
         campagne.destroy
-      end.to change { described_class.count }.by(-1)
-                                             .and change { SituationConfiguration.count }.by(-1)
+      end.to change(described_class, :count).by(-1)
+                                            .and change(SituationConfiguration, :count).by(-1)
     end
   end
 
@@ -66,7 +66,7 @@ describe Campagne, type: :integration do
         it "crée la campagne dans l'ordre des situations optionnelles" do
           expect do
             campagne
-          end.to change { described_class.count }.by(1)
+          end.to change(described_class, :count).by(1)
 
           campagne.reload
           situations_configurations = campagne.situations_configurations.includes(:situation)
@@ -81,7 +81,7 @@ describe Campagne, type: :integration do
         it 'utilise le questionnaire livraison avec redaction' do
           expect do
             campagne
-          end.to change { described_class.count }.by(1)
+          end.to change(described_class, :count).by(1)
 
           campagne.reload
           situations_configurations = campagne.situations_configurations
@@ -103,7 +103,7 @@ describe Campagne, type: :integration do
         it 'utilise le questionnaire sociodemographique_autopositionnement' do
           expect do
             campagne
-          end.to change { described_class.count }.by(1)
+          end.to change(described_class, :count).by(1)
 
           campagne.reload
 

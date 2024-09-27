@@ -36,10 +36,9 @@ describe Restitution::Maintenance::ScoreVocabulaire do
       let(:mock_metrique_temps) { double }
 
       it do
-        allow(standardisateur).to receive(:moyennes_metriques)
-          .and_return(temps_moyen_mots_francais: 2.7)
-        allow(standardisateur).to receive(:ecarts_types_metriques)
-          .and_return(temps_moyen_mots_francais: 0.5)
+        allow(standardisateur).to receive_messages(
+          moyennes_metriques: { temps_moyen_mots_francais: 2.7 }, ecarts_types_metriques: { temps_moyen_mots_francais: 0.5 }
+        )
 
         allow(metrique_score_ccf).to receive(:standardisateur).and_return(standardisateur)
 

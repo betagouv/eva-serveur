@@ -61,6 +61,7 @@ describe 'Admin - Restitution', type: :feature do
     end
 
     before { visit admin_restitution_path(partie) }
+
     it { expect(page).to have_content('Nombre De Bonnes Réponses Numératie') }
   end
 
@@ -75,8 +76,8 @@ describe 'Admin - Restitution', type: :feature do
     it do
       within('#action_items_sidebar_section') { click_on 'Supprimer' }
 
-      expect(partie.reload.deleted?).to eq true
-      expect(evenements.first.reload.deleted?).to eq true
+      expect(partie.reload.deleted?).to be true
+      expect(evenements.first.reload.deleted?).to be true
       within('#main_content') { expect(page).to have_content 'John Doe' }
     end
   end

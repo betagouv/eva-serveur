@@ -11,7 +11,7 @@ describe Anonymisation::Structure, type: :integration do
     end
 
     it 'anonymise une structure' do
-      Anonymisation::Structure.new(structure).anonymise
+      described_class.new(structure).anonymise
 
       structure.reload
       expect(structure.anonymise_le).not_to be_nil
@@ -32,7 +32,7 @@ describe Anonymisation::Structure, type: :integration do
     end
 
     it 'anonymise une structure' do
-      Anonymisation::Structure.new(structure).anonymise
+      described_class.new(structure).anonymise
 
       structure.reload
       expect(structure.code_postal).to eql('non_communique')

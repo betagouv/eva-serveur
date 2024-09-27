@@ -44,13 +44,13 @@ describe Restitution::Evacob::ScoreModule do
       end
       let(:evenements_reponses) { [reponse_parcours_haut] }
 
-      it { expect(metrique_score_reponse_orientation).to eq(nil) }
+      it { expect(metrique_score_reponse_orientation).to be_nil }
     end
 
     context 'sans réponse' do
       let(:evenements_reponses) { [] }
 
-      it { expect(metrique_score_reponse_orientation).to eq(nil) }
+      it { expect(metrique_score_reponse_orientation).to be_nil }
     end
   end
 
@@ -139,8 +139,8 @@ describe Restitution::Evacob::ScoreModule do
     let(:evenements_reponses) { [] }
 
     it 'retourne nil' do
-      expect(calcul_metrique).to eq(nil)
-      expect(calcule_pourcentage).to eq(nil)
+      expect(calcul_metrique).to be_nil
+      expect(calcule_pourcentage).to be_nil
     end
   end
 end

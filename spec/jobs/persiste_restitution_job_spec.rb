@@ -11,6 +11,6 @@ describe PersisteRestitutionJob, type: :job do
       .with(evaluation)
       .and_return restitution
     expect(restitution).to receive(:persiste)
-    PersisteRestitutionJob.perform_now(evaluation)
+    described_class.perform_now(evaluation)
   end
 end

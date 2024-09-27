@@ -16,7 +16,7 @@ describe ImporteurTelephone do
       it do
         expect(logger).to receive(:info)
           .with('Importe : conseiller@eva.fr,01-02-03-04-05')
-        ImporteurTelephone.importe(ligne)
+        described_class.importe(ligne)
         expect(compte.reload.telephone).to eq '01-02-03-04-05'
       end
     end
@@ -27,7 +27,7 @@ describe ImporteurTelephone do
       it do
         expect(logger).to receive(:warn)
           .with('conseiller@eva.fr: téléphone 01 01 01 02 02 déjà présent; 01-02-03-04-05 ignoré')
-        ImporteurTelephone.importe(ligne)
+        described_class.importe(ligne)
         expect(compte.reload.telephone).to eq '01 01 01 02 02'
       end
     end
@@ -39,7 +39,7 @@ describe ImporteurTelephone do
     it do
       expect(logger).to receive(:warn)
         .with('Téléphone ignoré pour le compte inconnu : inconnu@eva.fr - 02 03 04 05 06')
-      ImporteurTelephone.importe(ligne)
+      described_class.importe(ligne)
     end
   end
 end

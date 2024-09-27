@@ -21,7 +21,7 @@ describe 'Admin - Questionnaire', type: :feature do
     end
 
     it do
-      expect { click_on 'Créer' }.to(change { Questionnaire.count })
+      expect { click_on 'Créer' }.to(change(Questionnaire, :count))
       expect(page).to have_content 'Evaluation Formation'
     end
   end

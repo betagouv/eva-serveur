@@ -7,7 +7,7 @@ describe Restitution::ScoresStandardises do
   let(:scores) { double }
 
   let(:scores_standardises) do
-    Restitution::ScoresStandardises.new(scores)
+    described_class.new(scores)
   end
 
   context 'pas de scores' do

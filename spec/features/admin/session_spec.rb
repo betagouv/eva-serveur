@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Session', type: :feature do
   describe 'Connexion Espace Pro' do
-    context 'Quand tout va bien' do
+    context 'quand tout va bien' do
       let!(:compte) { create :compte }
 
       it "Se connect à l'application" do
@@ -23,7 +23,7 @@ describe 'Session', type: :feature do
       end
     end
 
-    context 'Quand mon compte anlci a un mot de passe faible car les règles ont été remforcées' do
+    context 'quand mon compte anlci a un mot de passe faible car les règles ont été remforcées' do
       let!(:compte) do
         compte = create :compte, role: :superadmin
         # rubocop:disable Rails/SkipsModelValidations
@@ -76,7 +76,7 @@ describe 'Session', type: :feature do
       end
     end
 
-    context 'Quand mon compte est confirmé et existe' do
+    context 'quand mon compte est confirmé et existe' do
       let!(:compte_confirme) { create :compte, confirmed_at: Time.zone.now }
 
       it 'me connecte à mon espace pro' do
@@ -87,7 +87,7 @@ describe 'Session', type: :feature do
   end
 
   describe 'Connexion Espace Jeu' do
-    context 'Quand le code de campagne est invalide' do
+    context 'quand le code de campagne est invalide' do
       before do
         visit new_compte_session_path
         fill_in :code, with: 'invalide'

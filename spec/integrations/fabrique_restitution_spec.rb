@@ -23,7 +23,7 @@ describe FabriqueRestitution do
         let!(:fin) { create(:evenement_fin_situation, partie: partie, position: 3) }
 
         it 'trie les événéments par position' do
-          restitution = FabriqueRestitution.instancie(partie)
+          restitution = described_class.instancie(partie)
           expect(restitution.evenements).to eq [demarrage, reponse1, reponse2, fin]
         end
       end
@@ -39,14 +39,14 @@ describe FabriqueRestitution do
         end
 
         it 'trie les événéments par date' do
-          restitution = FabriqueRestitution.instancie(partie)
+          restitution = described_class.instancie(partie)
           expect(restitution.evenements).to eq [demarrage, reponse, fin]
         end
       end
     end
 
     it "instancie les restitution des parties de l'évaluation" do
-      restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+      restitutions = described_class.restitution_globale(evaluation).restitutions
       expect(restitutions.map(&:partie)).to eq [partie]
     end
 
@@ -58,7 +58,7 @@ describe FabriqueRestitution do
         create(:evenement_demarrage, partie: partie_intrue)
       end
 
-      it { expect(FabriqueRestitution.restitution_globale(evaluation).restitutions.count).to eq 1 }
+      it { expect(described_class.restitution_globale(evaluation).restitutions.count).to eq 1 }
     end
 
     context "quand il n'y a pas d'évenement pour une partie, n'instancie pas la restitution" do
@@ -70,7 +70,7 @@ describe FabriqueRestitution do
       end
 
       it do
-        restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+        restitutions = described_class.restitution_globale(evaluation).restitutions
         expect(restitutions.map(&:partie)).to eq [partie]
       end
     end
@@ -92,7 +92,7 @@ describe FabriqueRestitution do
         end
 
         it 'utilise la première partie pour la restitution globale' do
-          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          restitutions = described_class.restitution_globale(evaluation).restitutions
           expect(restitutions[1].partie).to eq partie1
         end
       end
@@ -104,7 +104,7 @@ describe FabriqueRestitution do
         end
 
         it 'utilise cette partie pour la restitution globale' do
-          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          restitutions = described_class.restitution_globale(evaluation).restitutions
           expect(restitutions[1].partie).to eq partie2
         end
       end
@@ -116,7 +116,7 @@ describe FabriqueRestitution do
         end
 
         it 'utilise la première partie pour la restitution globale' do
-          restitutions = FabriqueRestitution.restitution_globale(evaluation).restitutions
+          restitutions = described_class.restitution_globale(evaluation).restitutions
           expect(restitutions[1].partie).to eq partie1
         end
       end

@@ -8,7 +8,7 @@ describe CompteMailer, type: :mailer do
       structure = StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012'
       compte = Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure
 
-      email = CompteMailer.with(compte: compte).nouveau_compte
+      email = described_class.with(compte: compte).nouveau_compte
 
       assert_emails 1 do
         email.deliver_now
@@ -39,8 +39,8 @@ describe CompteMailer, type: :mailer do
                           email: 'debut@test.com',
                           structure: structure,
                           id: SecureRandom.uuid
-      email = CompteMailer.with(compte: compte, compte_admin: admin)
-                          .alerte_admin
+      email = described_class.with(compte: compte, compte_admin: admin)
+                             .alerte_admin
 
       assert_emails 1 do
         email.deliver_now
@@ -61,7 +61,7 @@ describe CompteMailer, type: :mailer do
   describe 'relance' do
     let(:structure) { StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012' }
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }
-    let(:mail) { CompteMailer.with(compte: compte).relance }
+    let(:mail) { described_class.with(compte: compte).relance }
 
     it 'renders the headers' do
       expect(mail.subject).to eq(

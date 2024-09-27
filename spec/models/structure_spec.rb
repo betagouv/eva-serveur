@@ -21,7 +21,7 @@ describe Structure, type: :model do
     end
 
     it "Peut ré-utiliser le nom d'une structure effacé" do
-      expect(structure.save).to eq true
+      expect(structure.save).to be true
     end
   end
 
@@ -35,7 +35,7 @@ describe Structure, type: :model do
 
   describe 'géolocalisation à la validation' do
     describe "pour n'importe quel code postal" do
-      let(:structure) { Structure.new code_postal: '75012' }
+      let(:structure) { described_class.new code_postal: '75012' }
 
       before do
         Geocoder::Lookup::Test.add_stub(
@@ -51,11 +51,11 @@ describe Structure, type: :model do
         expect(structure.region).to eql('Île-de-France')
       end
 
-      it { expect(Structure.geocoder_options[:params]).to include(countrycodes: 'fr') }
+      it { expect(described_class.geocoder_options[:params]).to include(countrycodes: 'fr') }
     end
 
     describe 'si ma structure a un code postal commençant par 988' do
-      let(:structure) { Structure.new code_postal: '98850' }
+      let(:structure) { described_class.new code_postal: '98850' }
 
       before do
         Geocoder::Lookup::Test.add_stub(
@@ -75,7 +75,7 @@ describe Structure, type: :model do
     end
 
     describe 'si ma structure a un code postal commençant par 20' do
-      let(:structure) { Structure.new code_postal: '20090' }
+      let(:structure) { described_class.new code_postal: '20090' }
 
       before do
         Geocoder::Lookup::Test.add_stub(
@@ -91,7 +91,7 @@ describe Structure, type: :model do
     end
 
     context 'quand ma structure a déjà une région' do
-      let(:structure) { Structure.new code_postal: '20114', region: 'Corse' }
+      let(:structure) { described_class.new code_postal: '20114', region: 'Corse' }
 
       before do
         structure.code_postal = '61000'

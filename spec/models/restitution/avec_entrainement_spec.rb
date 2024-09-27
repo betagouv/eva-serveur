@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::AvecEntrainement do
   let(:campagne) { Campagne.new }
-  let(:restitution) { Restitution::AvecEntrainement.new campagne, evenements }
+  let(:restitution) { described_class.new campagne, evenements }
 
   describe '#evenements_situation et #evenements_entrainement' do
     context "ignore les évenements d'entrainement même s'ils ont la même date" do

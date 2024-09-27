@@ -10,7 +10,7 @@ describe RelanceStructureSansCampagneJob, type: :job do
   context "quand la structure n'a pas de campagne" do
     it 'envoie un email pour relancer uniquement les admins' do
       expect do
-        RelanceStructureSansCampagneJob.perform_now(compte_admin.structure_id)
+        described_class.perform_now(compte_admin.structure_id)
       end.to change { ActionMailer::Base.deliveries.count }.by(2)
     end
   end
@@ -20,8 +20,8 @@ describe RelanceStructureSansCampagneJob, type: :job do
 
     it "n'envoie pas de mail pour relancer l'admin" do
       expect do
-        RelanceStructureSansCampagneJob.perform_now(compte_admin.structure_id)
-      end.to change { ActionMailer::Base.deliveries.count }.by(0)
+        described_class.perform_now(compte_admin.structure_id)
+      end.not_to(change { ActionMailer::Base.deliveries.count })
     end
   end
 end

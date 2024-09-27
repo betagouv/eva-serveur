@@ -32,7 +32,7 @@ describe 'Evenement API', type: :request do
       }
     end
 
-    context 'Quand une requête est valide' do
+    context 'quand une requête est valide' do
       it 'Crée un événement et une partie' do
         post '/api/evenements', params: payload_valide
 
@@ -47,7 +47,7 @@ describe 'Evenement API', type: :request do
       end
     end
 
-    context 'Quand une requête est invalide' do
+    context 'quand une requête est invalide' do
       before { post '/api/evenements', params: payload_invalide }
 
       it 'retourne une 422' do

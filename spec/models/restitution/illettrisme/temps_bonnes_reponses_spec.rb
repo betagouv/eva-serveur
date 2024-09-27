@@ -31,6 +31,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
+
       it { expect(temps_bonnes_reponses_numeratie).to eq([1]) }
     end
 
@@ -44,6 +45,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
+
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
     end
 
@@ -61,6 +63,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                     date: Time.zone.local(2019, 10, 9, 10, 1, 22))
         ]
       end
+
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
     end
 
@@ -71,6 +74,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
                                                    date: Time.zone.local(2019, 10, 9, 10, 1, 21))
         ]
       end
+
       it { expect(temps_bonnes_reponses_numeratie).to eq([]) }
     end
   end

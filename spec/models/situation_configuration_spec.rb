@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe SituationConfiguration do
-  it { should delegate_method(:livraison_sans_redaction?).to(:situation).allow_nil }
+  it { is_expected.to delegate_method(:livraison_sans_redaction?).to(:situation).allow_nil }
 
   it do
     expect(subject).to validate_uniqueness_of(:situation_id).scoped_to(%i[campagne_id

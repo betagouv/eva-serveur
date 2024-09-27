@@ -26,6 +26,6 @@ describe 'Admin - Situation', type: :feature do
       fill_in :situation_nom_technique, with: 'inventaire'
     end
 
-    it { expect { click_on 'Créer' }.to(change { Situation.count }) }
+    it { expect { click_on 'Créer' }.to(change(Situation, :count)) }
   end
 end

@@ -20,12 +20,14 @@ describe Campagne, type: :model do
     end
 
     it "Ne retourne pas d'erreur PostgreSQL" do
-      expect(campagne.save).to eq false
+      expect(campagne.save).to be false
     end
   end
 
   describe 'scopes' do
     describe '.de_la_structure' do
+      subject(:campagnes) { described_class.de_la_structure(compte.structure) }
+
       let(:compte) { create :compte }
       let(:autre_compte) { create :compte }
       let(:autre_campagne) { create :campagne, compte: autre_compte }
@@ -42,8 +44,6 @@ describe Campagne, type: :model do
                             created_at: Time.zone.local(2020, 1, 1, 12, 0, 20)
       end
 
-      subject(:campagnes) { described_class.de_la_structure(compte.structure) }
-
       it "retourne les campagnes d'une structure par ordre d'activité" do
         expect(campagnes.all.map(&:libelle)).to eql ['active', 'moins active', 'non active']
       end
@@ -59,7 +59,7 @@ describe Campagne, type: :model do
   end
 
   describe '#questionnaire_pour' do
-    let(:campagne) { Campagne.new }
+    let(:campagne) { described_class.new }
     let(:situation) { Situation.new }
 
     def bouchonne_config_situation(situation_configuration)
@@ -69,6 +69,7 @@ describe Campagne, type: :model do
 
     context 'sans configuration pour la situation' do
       let(:questionnaire_par_default) { double }
+
       before do
         bouchonne_config_situation(nil)
         allow(situation).to receive(:questionnaire).and_return(questionnaire_par_default)
@@ -88,7 +89,7 @@ describe Campagne, type: :model do
   end
 
   describe '#avec_competences_transversales?' do
-    let(:campagne) { Campagne.new }
+    let(:campagne) { described_class.new }
     let(:maintenance) { create :situation, nom_technique: :maintenance }
 
     context 'sans situation' do
@@ -120,6 +121,7 @@ describe Campagne, type: :model do
   describe '#genere_code_unique' do
     let(:compte) { create :compte }
     let(:campagne) { build :campagne, compte: compte, code: nil }
+
     before do
       allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'
     end

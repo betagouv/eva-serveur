@@ -52,8 +52,7 @@ describe ApplicationHelper do
       allow(ENV).to receive(:fetch).with('PROTOCOLE_SERVEUR').and_return('https')
       allow(ENV).to receive(:fetch).with('HOTE_STOCKAGE').and_return('stockage.eva.beta.gouv.fr')
 
-      allow(fichier).to receive(:filename).and_return('fichier.jpg')
-      allow(fichier).to receive(:key).and_return('ma_cle')
+      allow(fichier).to receive_messages(filename: 'fichier.jpg', key: 'ma_cle')
     end
 
     context 'en environnement de production' do

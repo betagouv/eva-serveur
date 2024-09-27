@@ -7,9 +7,9 @@ describe PriseEnMain do
   let(:nombre_campagnes) { 1 }
   let(:nombre_evaluations) { 1 }
   let(:prise_en_main) do
-    PriseEnMain.new compte: compte,
-                    nombre_campagnes: nombre_campagnes,
-                    nombre_evaluations: nombre_evaluations
+    described_class.new compte: compte,
+                        nombre_campagnes: nombre_campagnes,
+                        nombre_evaluations: nombre_evaluations
   end
 
   describe '#etape_en_cours' do
@@ -17,7 +17,7 @@ describe PriseEnMain do
       it { expect(prise_en_main.etape_en_cours).to eq 'rejoindre_structure' }
     end
 
-    context 'Quand le compte a rejoint une structure' do
+    context 'quand le compte a rejoint une structure' do
       let(:structure) { Structure.new }
 
       before do

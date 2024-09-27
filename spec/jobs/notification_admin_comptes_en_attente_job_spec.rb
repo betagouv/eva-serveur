@@ -10,7 +10,7 @@ RSpec.describe NotificationAdminComptesEnAttenteJob, type: :job do
 
     it "envoie un mail hebdomadairement pour relancer l'admin" do
       expect do
-        NotificationAdminComptesEnAttenteJob.perform_now
+        described_class.perform_now
       end.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end

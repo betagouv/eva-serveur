@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 describe Restitution::ExportPositionnement do
+  subject(:response_service) do
+    described_class.new(partie: partie)
+  end
+
   let(:situation) { create(:situation) }
   let(:evaluation) { create :evaluation }
   let(:question) { create(:question) }
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
-
-  subject(:response_service) do
-    described_class.new(partie: partie)
-  end
 
   describe '#to_xls' do
     it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
@@ -66,9 +66,9 @@ describe Restitution::ExportPositionnement do
       expect(question2[0]).to eq('LOdi4')
       expect(question2[1]).to eq(intitule_question2)
       expect(question2[2]).to eq('Le chat de Mme Coupin')
-      expect(question2[3]).to eq(nil)
-      expect(question2[4]).to eq(nil)
-      expect(question2[5]).to eq(nil)
+      expect(question2[3]).to be_nil
+      expect(question2[4]).to be_nil
+      expect(question2[5]).to be_nil
     end
   end
 

@@ -21,7 +21,7 @@ describe StatistiquesStructure do
       end
     end
 
-    let(:resultat) { StatistiquesStructure.new(structure).nombre_evaluations_des_12_derniers_mois }
+    let(:resultat) { described_class.new(structure).nombre_evaluations_des_12_derniers_mois }
 
     let(:mois_courant) { I18n.l(1.month.ago, format: '%B %Y') }
 
@@ -71,10 +71,11 @@ describe StatistiquesStructure do
     let(:compte) { create :compte, structure: structure }
     let(:campagne) { create :campagne, compte: compte }
 
-    let(:resultat) { StatistiquesStructure.new(structure).repartition_evaluations }
+    let(:resultat) { described_class.new(structure).repartition_evaluations }
 
     context "quand l'évaluation appartient à la structure" do
       let(:synthese) { :ni_ni }
+
       before do
         Timecop.freeze(1.month.ago) do
           create :evaluation, campagne: campagne, synthese_competences_de_base: synthese
@@ -83,6 +84,7 @@ describe StatistiquesStructure do
 
       context 'avec une synthexe ni_ni' do
         let(:synthese) { :ni_ni }
+
         it 'est prise en compte dans le calcul' do
           expect(resultat).to eq({ 'Niveau Intermédiaire' => 1 })
         end
@@ -90,6 +92,7 @@ describe StatistiquesStructure do
 
       context 'avec une synthexe ni_ni' do
         let(:synthese) { :socle_clea }
+
         it 'est prise en compte dans le calcul' do
           expect(resultat).to eq({ 'Pas de difficultés repérées' => 1 })
         end
@@ -97,6 +100,7 @@ describe StatistiquesStructure do
 
       context 'avec une synthexe illettrisme_potentiel' do
         let(:synthese) { :illettrisme_potentiel }
+
         it 'est prise en compte dans le calcul' do
           expect(resultat).to eq({ 'Illettrisme potentiel' => 1 })
         end
@@ -105,6 +109,7 @@ describe StatistiquesStructure do
 
     context "quand l'évaluation n'appartient pas à la structure" do
       let(:autre_campagne) { create :campagne }
+
       before do
         create :evaluation, campagne: autre_campagne, synthese_competences_de_base: :ni_ni
       end
@@ -151,13 +156,13 @@ describe StatistiquesStructure do
     end
 
     let(:resultat) do
-      StatistiquesStructure.new(structure)
-                           .correlation_entre_niveau_illettrisme_et_genre(:illettrisme_potentiel)
+      described_class.new(structure)
+                     .correlation_entre_niveau_illettrisme_et_genre(:illettrisme_potentiel)
     end
 
     context "quand la structure n'a pas de données sociodémographiques" do
       it 'ne renvoie rien' do
-        expect(resultat).to be(nil)
+        expect(resultat).to be_nil
       end
     end
 

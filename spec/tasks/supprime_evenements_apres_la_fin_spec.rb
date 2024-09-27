@@ -15,7 +15,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 
@@ -28,7 +28,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
     it do
       expect(logger).to receive(:info).exactly(3).times
-      expect { subject.invoke }.to(change { Evenement.count }.by(-2))
+      expect { subject.invoke }.to(change(Evenement, :count).by(-2))
       expect(Evenement.last.nom).to eq 'finSituation'
     end
   end
@@ -41,7 +41,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     end
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 
@@ -54,7 +54,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     end
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 
@@ -62,7 +62,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     let!(:evenements) { [create(:evenement_piece_bien_placee, partie: partie)] }
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 
@@ -74,7 +74,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
     end
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 end

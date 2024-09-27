@@ -163,11 +163,9 @@ describe 'Admin - Evaluation', type: :feature do
 
         before do
           competences = [[Competence::ORGANISATION_METHODE, Competence::NIVEAU_4]]
-          allow(restitution_globale).to receive(:niveaux_competences).and_return(competences)
           interpretations = [[Competence::ORGANISATION_METHODE, 4.0]]
-          allow(restitution_globale).to receive(:interpretations_competences_transversales)
-            .and_return(interpretations)
-          allow(restitution_globale).to receive(:structure).and_return('structure')
+          allow(restitution_globale).to receive_messages(niveaux_competences: competences,
+                                                         interpretations_competences_transversales: interpretations, structure: 'structure')
           allow(restitution_globale).to receive(:synthese)
           allow(restitution_globale).to receive(:synthese_pre_positionnement)
           allow(restitution_globale).to receive(:synthese_positionnement)
@@ -305,7 +303,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       it do
         within('#action_items_sidebar_section') { click_on 'Supprimer' }
-        expect(evaluation.reload.deleted?).to eq true
+        expect(evaluation.reload.deleted?).to be true
         expect(page.current_url).to eql(admin_campagne_url(ma_campagne))
       end
     end
@@ -324,7 +322,7 @@ describe 'Admin - Evaluation', type: :feature do
             find('a.lien-supprimer').click
           end
           expect(page).not_to have_content(mon_collegue.email)
-          expect(evaluation.reload.responsable_suivi).to eq nil
+          expect(evaluation.reload.responsable_suivi).to be_nil
         end
       end
 
@@ -341,7 +339,7 @@ describe 'Admin - Evaluation', type: :feature do
             find('a.lien-supprimer').click
           end
           expect(page).not_to have_content(mon_collegue.email)
-          expect(evaluation.reload.responsable_suivi).to eq nil
+          expect(evaluation.reload.responsable_suivi).to be_nil
         end
       end
     end

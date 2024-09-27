@@ -22,7 +22,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
       end
 
       it do
-        expect { subject.invoke }.to(change { Evenement.count })
+        expect { subject.invoke }.to(change(Evenement, :count))
 
         evenement = Evenement.order(:created_at).last
         expect(evenement.nom).to eq 'finSituation'
@@ -35,7 +35,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
         let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
 
         it do
-          expect { subject.invoke }.not_to(change { Evenement.count })
+          expect { subject.invoke }.not_to(change(Evenement, :count))
         end
       end
 
@@ -46,7 +46,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
         end
 
         it do
-          expect { subject.invoke }.not_to(change { Evenement.count })
+          expect { subject.invoke }.not_to(change(Evenement, :count))
         end
       end
     end
@@ -58,7 +58,7 @@ describe 'nettoyage:ajoute_evenements_termines' do
     let!(:evenements) { [] }
 
     it do
-      expect { subject.invoke }.not_to(change { Evenement.count })
+      expect { subject.invoke }.not_to(change(Evenement, :count))
     end
   end
 end

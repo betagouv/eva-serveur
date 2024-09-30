@@ -34,9 +34,11 @@
   .actions {
     display: flex;
     justify-content: flex-end;
+    gap: 3px;
     min-width: 8rem;
 
     .action {
+      @include bouton();
       height: 1.5rem;
       display: flex;
       justify-content: center;
@@ -46,33 +48,6 @@
       text-decoration: none;
       box-sizing: border-box;
       font-size: .75rem;
-
-      &.lien-autoriser {
-        background-color: $info-950;
-        color: $info-425;
-        &:hover {
-          background-color: $info-950-hover;
-          color: $info-425-hover;
-        }
-      }
-
-      &.lien-refuser {
-        background-color: $warning-950;
-        color: $warning-425;
-        &:hover {
-          background-color: $warning-950-hover;
-          color: $warning-425-hover;
-        }
-      }
-
-      &:first-child {
-        border-top-left-radius: 0.25rem;
-        border-bottom-left-radius: 0.25rem;
-      }
-      &:last-child {
-        border-top-right-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
-      } 
     }
   }
 }

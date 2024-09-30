@@ -25,10 +25,10 @@ form.question_saisie .choix {
       vertical-align: middle;
       border-bottom: 1px solid $eva_bluegrey;
     }
-    .image-preview {
-      width: 100px;
-    }
   }
+}
+.show .image-preview {
+  width: 100px;
 }
 .show.admin_questions_clic_dans_image {
   svg {

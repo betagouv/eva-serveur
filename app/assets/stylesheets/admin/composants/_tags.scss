@@ -5,8 +5,6 @@
   text-align: center;
   align-items: center;
   display: inline-flex;
-  background-color: transparent;
-  border: 1px solid $eva_dark_blue_grey;
   border-radius: .25rem;
   font-weight: 500;
   color: $couleur-texte;
@@ -17,24 +15,23 @@
   }
 
   &.red {
-    @include tag-couleur-contour($couleur-accent-erreur, $couleur-accent-erreur)
+    @include tag-couleur-majuscule($error-425, $error-950)
   }
 
   &.green {
-    @include tag-couleur-contour($eva_dark_green, $eva_green)
+    @include tag-couleur-majuscule($success-425, $success-950)
   }
 
 }
 
-@mixin tag-couleur-contour($color, $border-color) {
-  color: $color;
-  border-color: $border-color;
+@mixin tag-couleur-majuscule($couleur-principale, $couleur-principale-legere) {
+  @include tag-couleur($couleur-principale, $couleur-principale-legere);
+  text-transform: uppercase;
 }
 
-@mixin tag-couleur-plein($color) {
-  background-color: $color;
-  border: none;
-  color: $couleur-texte;
+@mixin tag-couleur($couleur-principale, $couleur-principale-legere) {
+  color: $couleur-principale;
+  background-color: $couleur-principale-legere;
 }
 
 .status_tag {
@@ -67,15 +64,15 @@
 
 .tag-categorie {
   &.assistance {
-    @include tag-couleur-contour($couleur-accent-erreur, $couleur-accent-erreur)
+    @include tag-couleur-majuscule($warning-425, $warning-950)
   }
 
   &.blog, &.orange {
-    @include tag-couleur-contour($eva_orange, $eva_orange)
+    @include tag-couleur-majuscule($yellow-tournesol-407, $yellow-tournesol-950)
   }
 
   &.evolution {
-    @include tag-couleur-contour($eva_green, $eva_green)
+    @include tag-couleur-majuscule($success-425, $success-950)
   }
 
   &.no, &.yes {

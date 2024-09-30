@@ -13,13 +13,13 @@
         width: 100%
       }
     }
-  
+
     .carte__texte {
       gap: 1rem;
       min-height: 9rem;
       flex-direction: column;
       padding: 0.625rem 1rem;
-  
+
       .carte__titre {
         font-size: 1.25rem;
         line-height: 1.5rem;
@@ -33,9 +33,6 @@
       .col:first-child {
         flex: 3;
         gap: 1rem;
-      }
-      .carte__entete {
-        min-width: 5.625rem;
       }
       .carte__texte {
         @include texte;

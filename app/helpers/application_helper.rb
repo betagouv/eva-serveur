@@ -25,10 +25,10 @@ module ApplicationHelper
     'col-4 px-5 mb-4'
   end
 
-  def svg_tag_base64(path_with_extension, options = {})
+  def svg_tag_base64(chemin_avec_extension, options = {})
     ## Ne pas oublier de rajouter l'extension au path sinon ça ne build pas en production
 
-    raw = Rails.application.assets_manifest.find_sources(path_with_extension).first
+    raw = Rails.application.assets_manifest.find_sources(chemin_avec_extension).first
     image_tag fichier_encode_en_base64(raw), options
   end
 
@@ -53,13 +53,6 @@ module ApplicationHelper
     svg_with_class(file_content, options[:class])
   end
 
-  def svg_with_class(svg_content, css_class)
-    return svg_content if css_class.blank?
-
-    svg_content.sub!('<svg', "<svg class=\"#{css_class}\"")
-    svg_content.html_safe
-  end
-
   def fichier_encode_en_base64(file_content)
     encodage = Base64.strict_encode64 file_content
     "data:image/svg+xml;base64,#{encodage}"
@@ -67,5 +60,14 @@ module ApplicationHelper
 
   def illustration_content_types
     %w[image/png image/jpeg image/webp].freeze
+  end
+
+  private
+
+  def svg_with_class(svg_content, css_class)
+    return svg_content if css_class.blank?
+
+    svg_content.sub!('<svg', "<svg class=\"#{css_class}\"")
+    svg_content.html_safe
   end
 end

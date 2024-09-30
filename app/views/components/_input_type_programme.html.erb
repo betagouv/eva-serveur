@@ -1,15 +1,9 @@
 <div class="choix-item" tabindex="0">
   <div class="choix-item__icone">
     <% if programme == :pre_positionnement %>
-      <svg width="50" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" class="icone-pin">
-        <path d="m7.91 38.578-.024-.029C4.804 34.907 3.25 30.07 3.25 24.541 3.25 12.69 13.206 3 25 3s21.75 9.689 21.75 21.541c0 5.427-1.685 10.222-4.685 14.067L27.314 56.483a3 3 0 0 1-4.628 0L7.91 38.578Z" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M27.75 23.75c0 1.912-1.457 3.25-3 3.25s-3-1.338-3-3.25 1.457-3.25 3-3.25 3 1.338 3 3.25Z" fill="#000" stroke-width="6"/>
-      </svg>
+      <%= inline_svg_tag 'icone_prepositionnement.svg', class: 'icone-pin' %>
     <% elsif programme == :positionnement %>
-      <svg width="64" height="64" fill="none" xmlns="http://www.w3.org/2000/svg" class="icone-loupe">
-        <rect x="19.2" y="32" width="12.8" height="12.8" rx="2" transform="rotate(-90 19.2 32)"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M41.044 45.673a25.375 25.375 0 0 1-15.558 5.298C11.41 50.971 0 39.561 0 25.486 0 11.41 11.41 0 25.486 0 39.56 0 50.97 11.41 50.97 25.486a25.375 25.375 0 0 1-5.298 15.558c.367.168.711.403 1.014.706l16.29 16.29a3.49 3.49 0 1 1-4.936 4.938L41.75 46.686a3.485 3.485 0 0 1-.706-1.014Zm2.946-20.187c0 10.22-8.285 18.504-18.504 18.504-10.22 0-18.504-8.285-18.504-18.504 0-10.22 8.284-18.504 18.504-18.504S43.99 15.266 43.99 25.486Z"/>
-      </svg>
+      <%= inline_svg_tag 'icone_positionnement.svg', class: 'icone-loupe' %>
     <% end %>
   </div>
 

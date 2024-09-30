@@ -11,14 +11,14 @@
     }
   }
 
-  input:checked + .tag { @include tag-couleur-plein($success-950); }
+  input:checked + .tag { @include tag-couleur($success-425, $success-950); }
+  input:hover:not(:checked) + .tag { @include tag-couleur($couleur-texte, $success-950); }
 
   .tag {
     cursor: pointer;
     background-color: white;
     font-weight: 400;
     color: $couleur-texte;
-    border: none;
   }
 }
 

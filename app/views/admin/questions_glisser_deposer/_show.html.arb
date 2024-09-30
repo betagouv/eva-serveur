@@ -16,10 +16,10 @@ panel 'Détails de la question' do
     row :zones_depot_url do
       if resource.zones_depot_url.attached?
         ul do
-          resource.zones_depot_url.each do |file|
+          resource.zones_depot_url.each do |zone_depot_url|
             li do
-              link_to(cdn_for(file), target: '_blank', rel: 'noopener') do
-                svg_attachment_base64(file, class: 'image-preview')
+              link_to(cdn_for(zone_depot_url), target: '_blank', rel: 'noopener') do
+                inline_svg_content(zone_depot_url, class: 'image-preview')
               end
             end
           end

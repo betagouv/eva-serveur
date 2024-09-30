@@ -4,7 +4,9 @@ class CreationQuestionNumeratie < ActiveRecord::Migration[7.0]
   class ::QuestionnaireQuestion < ApplicationRecord; end
 
   def change
-    numeratie = Questionnaire.find_or_create_by(nom_technique: 'numeratie_2024')
+    numeratie = Questionnaire.find_or_create_by(nom_technique: 'numeratie_2024') do |q|
+      q.libelle = 'Numératie 2024'
+    end
     {
       'QuestionClicDansImage' => ['N1Pse1', 'N1Pse2', 'N1Pse3', 'N1Pse4'],
       'QuestionQcm' => ['N1Prn1', 'N1Prn2', 'N1Rrn1', 'N1Rrn2', 'N1Pes1', 'N1Pes2', 'N1Res1', 'N1Res2', 'N1Pon2', 'N1Pvn1', 'N1Pvn2', 'N1Pvn3', 'N1Pvn4'],

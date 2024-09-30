@@ -1,0 +1,109 @@
+.pro-connect-group {
+  word-wrap: break-word;
+  font-family: Marianne,arial,sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  text-rendering: optimizeLegibility;
+
+  .btn-pro-connect {
+    background-color: #000091;
+    color: #f5f5fe;
+    display: inline-flex;
+    user-select: none;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: .75rem;
+    padding: .625em .75em .625em 4em;
+    text-decoration: none;
+    position: relative;
+
+
+    .pro-connect__login, .pro-connect__brand {
+      line-height: 1;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .pro-connect__login {
+      font-size: 1.0625em;
+    }
+
+    .pro-connect__brand {
+      font-size: 1.125em;
+      font-weight: 700;
+    }
+
+    & + p a {
+      color: #000091;
+      font-size: .875rem;
+      line-height: 1.5rem;
+      text-decoration: none;
+      background-image: linear-gradient(0deg,currentColor,currentColor),linear-gradient(0deg,currentColor,currentColor);
+      background-position: 0 100%,0 calc(100% - .0625rem);
+      background-repeat: no-repeat, no-repeat;
+      background-size: 0 .125rem, 100% .0625rem;
+      transition: background-size 0s;
+
+      &:hover {
+        background-size: 100% .125em,100% .0625em;
+      }
+
+      &::after {
+        background-color: currentColor;
+        content: "";
+        display: inline-block;
+        flex: 0 0 auto;
+        height: 1rem;
+        margin-left: .25rem;
+        mask-image: image-url('target-blank-icon.svg');
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        vertical-align: calc(.375em - .5rem);
+        width: 1rem;
+      }
+    }
+  }
+
+  .btn-pro-connect::before {
+    background-image: image-url('logo-pro-connect-bg.svg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 2.5em 3em;
+    bottom: .25em;
+    content: "";
+    display: block;
+    height: 3em;
+    left: .75em;
+    margin-top: -1.5em;
+    position: absolute;
+    top: 50%;
+    width: 2.5em;
+  }
+}
+
+.btn-pro-connect.active, .btn-pro-connect.focus, .btn-pro-connect.hover, .btn-pro-connect:active, .btn-pro-connect:focus, .btn-pro-connect:hover {
+  text-decoration: none;
+  color: #fff;
+  border-color: #2323ff;
+  background-color: #2323ff;
+}
+
+.btn-pro-connect:focus {
+  outline-offset: 2px;
+  outline: #0a76f6 2px solid;
+}
+
+.btn-pro-connect:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+.btn-pro-connect:focus-visible {
+  outline-offset: 2px;
+  outline: #0a76f6 2px solid;
+}
+
+.btn-pro-connect.disabled, .btn-pro-connect:disabled {
+  pointer-events: none;
+  background-color: #b3b4c3;
+  border-color: #b3b4c3;
+}

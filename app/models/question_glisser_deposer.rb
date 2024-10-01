@@ -7,15 +7,15 @@ class QuestionGlisserDeposer < Question
            dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
-  has_many_attached :zones_depot_url
+  has_one_attached :zone_depot_url
 
-  validates :zones_depot_url,
+  validates :zone_depot_url,
             blob: { content_type: 'image/svg+xml' }
 
-  attr_accessor :supprimer_zones_depot_url
+  attr_accessor :supprimer_zone_depot_url
 
-  before_save :valide_zones_depot_url_avec_reponse
-  after_update :supprime_zones_depot_url
+  before_save :valide_zone_depot_url_avec_reponse
+  after_update :supprime_zone_depot_url
 
   def as_json(_options = nil)
     json = base_json
@@ -43,38 +43,28 @@ class QuestionGlisserDeposer < Question
     { 'reponsesNonClassees' => reponses_non_classees }
   end
 
-  def supprime_zones_depot_url
-    zones_depot_url.purge_later if zones_depot_url.attached? && supprimer_zones_depot_url == '1'
+  def supprime_zone_depot_url
+    zone_depot_url.purge_later if zone_depot_url.attached? && supprimer_zone_depot_url == '1'
   end
 
-  def valide_zones_depot_url_avec_reponse
-    return unless zones_depot_url_attached?
-    return if zones_depot_url_changes_nil?
+  def valide_zone_depot_url_avec_reponse
+    return unless zone_depot_url.attached?
+    return if attachment_changes['zone_depot_url'].nil?
 
-    attachment_changes['zones_depot_url'].attachable.each do |file|
-      doc = Nokogiri::XML(file.download, nil, 'UTF-8')
+    file = attachment_changes['zone_depot_url'].attachable
+    doc = Nokogiri::XML(file, nil, 'UTF-8')
+    return unless elements_depot(doc).empty?
 
-      if zones_depot_invalid?(doc)
-        add_invalid_zones_depot_error
-        throw(:abort)
-      end
-    end
+    invalid_zone_depot_error(reponse)
   end
 
-  def zones_depot_url_attached?
-    zones_depot_url.attached?
-  end
-
-  def zones_depot_url_changes_nil?
-    attachment_changes['zones_depot_url'].nil?
-  end
-
-  def zones_depot_invalid?(doc)
-    doc.css('.zone-depot').empty? || doc.css(".zone-depot--#{reponse.nom_technique}").empty?
-  end
-
-  def add_invalid_zones_depot_error
-    errors.add(:zones_depot_url,
+  def invalid_zone_depot_error(reponse)
+    errors.add(:zone_depot_url,
                "doit contenir les classes 'zone-depot' et 'zone-depot--#{reponse.nom_technique}'")
+    throw(:abort)
+  end
+
+  def elements_depot(doc)
+    doc.css('.zone-depot') || doc.css(".zone-depot--#{reponse.nom_technique}")
   end
 end

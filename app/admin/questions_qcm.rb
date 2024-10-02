@@ -18,7 +18,9 @@ ActiveAdmin.register QuestionQcm do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_question_qcm_path(q)
+    end
     column :categorie
     column :intitule do |question|
       question.transcription_intitule&.ecrit

@@ -9,7 +9,9 @@ ActiveAdmin.register Aide::QuestionFrequente do
   filter :created_at
 
   index do
-    column :question
+    column :question do |q|
+      link_to q.question, admin_aide_question_frequente_path(q)
+    end
     column :created_at
     actions
     column '', class: 'bouton-action' do

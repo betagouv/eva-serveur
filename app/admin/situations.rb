@@ -26,7 +26,8 @@ ActiveAdmin.register Situation do
 
   index do
     column :illustration do |situation|
-      situation_illustration(situation)
+      illustration = situation_illustration(situation)
+      link_to illustration, admin_situation_path(situation) if illustration.present?
     end
     column :libelle
     column :nom_technique

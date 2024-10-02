@@ -18,7 +18,9 @@ ActiveAdmin.register QuestionGlisserDeposer do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_question_glisser_deposer_path(q)
+    end
     column :intitule do |question|
       question.transcription_intitule&.ecrit
     end

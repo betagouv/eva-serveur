@@ -59,6 +59,9 @@ table.index_table {
           border-left: 1px solid $eva_bluegrey;
           border-top-left-radius: 0.5rem;
           border-bottom-left-radius: 0.5rem;
+          a {
+            text-decoration: none;
+          }
         }
         &:last-child {
           border-right: 1px solid $eva_bluegrey;

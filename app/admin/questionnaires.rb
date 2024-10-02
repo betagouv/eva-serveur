@@ -25,7 +25,9 @@ ActiveAdmin.register Questionnaire do
   end
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_questionnaire_path(q)
+    end
     column :nom_technique
     column :created_at
     actions

@@ -18,7 +18,9 @@ ActiveAdmin.register QuestionClicDansImage do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_question_clic_dans_image_path(q)
+    end
     column :intitule do |question|
       question.transcription_intitule&.ecrit
     end

@@ -6,7 +6,9 @@ ActiveAdmin.register AnnonceGenerale do
   permit_params :texte, :afficher
 
   index do
-    column :texte
+    column :texte do |ag|
+      link_to ag.texte, admin_annonce_generale_path(ag)
+    end
     column :afficher
     column :created_at
     actions

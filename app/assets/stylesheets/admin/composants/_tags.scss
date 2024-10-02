@@ -78,4 +78,7 @@
   &.no, &.yes {
     border-color: $couleur-texte;
   }
+  &.source-aide {
+    @include tag-couleur($grey-425, $grey-950);
+  }
 }

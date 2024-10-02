@@ -8,12 +8,14 @@ ActiveAdmin.register SourceAide do
   config.filters = false
 
   index do
+    column :titre do |sa|
+      link_to sa.titre, admin_source_aide_path(sa)
+    end
     column(:categorie) do |a|
       render(Tag.new(t(a.categorie, scope: 'activerecord.attributes.source_aide.categories'),
-                     classes: 'tag-categorie'))
+                     classes: 'tag-categorie source-aide'))
     end
     column :position
-    column :titre
     column :description
     column :url do |a|
       link_to a.url, a.url, target: '_blank', rel: 'noopener'

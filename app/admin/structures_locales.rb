@@ -35,7 +35,9 @@ ActiveAdmin.register StructureLocale do
   sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
   index do
-    column :nom
+    column :nom do |sl|
+      link_to sl.nom, admin_structure_locale_path(sl)
+    end
     column(:type_structure) do |structure|
       traduction_type_structure(structure.type_structure)
     end

@@ -63,7 +63,9 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:abandonnistes)
 
   index do
-    column :prenom
+    column :prenom do |compte|
+      link_to compte.prenom, admin_compte_path(compte)
+    end
     column :nom
     column :email
     column :telephone

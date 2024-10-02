@@ -29,7 +29,9 @@ ActiveAdmin.register Campagne do
   end
 
   index do
-    column :libelle
+    column :libelle do |campagne|
+      link_to campagne.libelle, admin_campagne_path(campagne)
+    end
     column :code
     column :nombre_evaluations, class: 'col-nombre_evaluations text-right',
                                 sortable: :nombre_evaluations

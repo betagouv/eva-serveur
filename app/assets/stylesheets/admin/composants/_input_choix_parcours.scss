@@ -22,25 +22,22 @@
     }
   }
 
-  input:checked + .choix-item .checkbox-option-personnalisation img {
-    display: inline;
+  input:checked + .choix-item .checkbox-option-personnalisation {
+    --data-uri-svg: url('check.svg');
+    background-color: white;
   }
 }
 
 .checkbox-option-personnalisation {
-  height: 1rem;
-  width: 1rem;
-  background: $eva_light;
-
-  border: 1px solid  $eva_bluegrey;
-  box-sizing: border-box;
-  border-radius: 4px;
-  line-height: 12px;
+  --data-uri-svg: none;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 0.25rem;
   text-align: center;
-
-  img {
-    display: none;
-  }
+  background-image: radial-gradient(at 5px 4px,transparent 4px,#000091 4px,#000091 5px,transparent 6px),linear-gradient(#000091,#000091),radial-gradient(at calc(100% - 5px) 4px,transparent 4px,#000091 4px,#000091 5px,transparent 6px),linear-gradient(#000091,#000091),radial-gradient(at calc(100% - 5px) calc(100% - 4px),transparent 4px,#000091 4px,#000091 5px,transparent 6px),linear-gradient(#000091,#000091),radial-gradient(at 5px calc(100% - 4px),transparent 4px,#000091 4px,#000091 5px,transparent 6px),linear-gradient(#000091,#000091),var(--data-uri-svg);
+  background-position: 0 0,.25rem 0,100% 0,0 .25rem,100% 100%,calc(100% - .25rem) 100%,0 100%,100% .25rem,50%;
+  background-repeat: no-repeat;
+  background-size: .25rem .25rem,calc(100% - .25rem) 1px,.25rem .25rem,1px calc(100% - .5rem),.25rem .25rem,calc(100% - .5rem) 1px,.25rem .25rem,1px calc(100% - .5rem),1rem;
 }
 
 .input-choix-parcours {

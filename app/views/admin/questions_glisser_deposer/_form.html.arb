@@ -14,12 +14,10 @@ active_admin_form_for [:admin, resource] do |f|
             input_html: { accept: 'image/svg+xml' }
 
     if f.object.zone_depot_url.attached? && f.object.errors[:zone_depot_url].blank?
-      f.object.zone_depot_url.each_with_index do |file, index|
-        f.input "supprimer_zone_depot_url_#{index}",
-                as: :boolean,
-                label: t('.label.supprimer_zone_depot_url'),
-                hint: svg_attachment_base64(file, class: 'image-preview')
-      end
+      f.input :supprimer_zone_depot_url,
+              as: :boolean,
+              label: t('.label.supprimer_zone_depot_url'),
+              hint: svg_attachment_base64(resource.zone_depot_url, class: 'image-preview')
     end
   end
   f.inputs do

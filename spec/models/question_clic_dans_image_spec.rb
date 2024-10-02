@@ -70,4 +70,32 @@ describe QuestionClicDansImage, type: :model do
       end
     end
   end
+
+  describe '#clic_multiple?' do
+    context 'avec plusieurs éléments cliquables' do
+      let(:question) do
+        create(:question_clic_dans_image,
+               zone_cliquable: Rack::Test::UploadedFile.new(
+                 Rails.root.join('spec/support/accessibilite-avec-reponse-multiple.svg')
+               ))
+      end
+
+      it 'est clic simple' do
+        expect(question.clic_multiple?).to be true
+      end
+    end
+
+    context 'avec un seul élément cliquable' do
+      let(:question) do
+        create(:question_clic_dans_image,
+               zone_cliquable: Rack::Test::UploadedFile.new(
+                 Rails.root.join('spec/support/accessibilite-avec-reponse.svg')
+               ))
+      end
+
+      it 'est clic multiple' do
+        expect(question.clic_multiple?).to be false
+      end
+    end
+  end
 end

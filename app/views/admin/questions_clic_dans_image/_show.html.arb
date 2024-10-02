@@ -34,6 +34,9 @@ panel 'Détails de la question' do
     row :audio_consigne do
       tag_audio(consigne)
     end
+    row :clic do
+      type_clic(question_clic_dans_image)
+    end
     row :created_at
   end
 end

@@ -16,6 +16,17 @@ class QuestionClicDansImage < Question
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
+  def clic_multiple?
+    return false unless zone_cliquable.attached?
+
+    svg_content = zone_cliquable.download
+
+    doc = Nokogiri::XML(svg_content, nil, 'UTF-8')
+    elements_cliquables = doc.css('.bonne-reponse')
+
+    elements_cliquables.size > 1
+  end
+
   private
 
   def base_json

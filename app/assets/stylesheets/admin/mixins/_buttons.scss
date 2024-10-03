@@ -1,4 +1,4 @@
-@mixin tous-boutons() {
+@mixin base-boutons() {
   &, &:link, &:visited {
     text-decoration: none;
   }
@@ -6,6 +6,7 @@
   cursor: pointer;
   font-family: $font-texte;
   text-align: center;
+  box-shadow: none;
 
   border: 1px solid;
 
@@ -17,12 +18,21 @@
   }
 }
 
-// bouton primaire
-@mixin bouton-arrondi() {
-  @include tous-boutons();
+@mixin grand-bouton() {
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
   border-radius: 2.875rem;
+}
+
+@mixin petit-bouton() {
+  @include texte-xs();
+  padding: .25rem .5rem;
+  border-radius: 0.25rem;
+  min-width: 3rem;
+}
+
+@mixin bouton-primaire() {
+  @include base-boutons();
   color: $eva_light;
   border-color: $eva_main_blue;
   background-color: $eva_main_blue;
@@ -37,15 +47,9 @@
   }
 }
 
-// bouton carré (secondaire)
-@mixin bouton() {
-  @include tous-boutons();
-  padding: .25rem .5rem;
-  min-width: 3rem;
-  @include texte-xs();
-
+@mixin bouton-secondaire() {
+  @include base-boutons();
   color: $eva_main_blue;
-  border-radius: 0.25rem;
   border-color: $eva_main_blue;
   background-color: $grey-1000;
   box-shadow: none;
@@ -55,7 +59,7 @@
 }
 
 @mixin bouton-tertiaire {
-  @include bouton();
+  @include bouton-secondaire;
   border-color: $grey-900;
 
   &:hover {

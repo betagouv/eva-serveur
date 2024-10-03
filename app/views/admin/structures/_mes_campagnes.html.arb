@@ -13,7 +13,7 @@ div class: 'bloc-mes-campagnes' do
       end
       column :nombre_evaluations, class: 'text-right'
       column :actions do |campagne|
-        link_to t('.voir'), admin_campagne_path(campagne), class: 'bouton'
+        link_to t('.voir'), admin_campagne_path(campagne), class: 'bouton-secondaire petit-bouton'
       end
     end
   else

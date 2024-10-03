@@ -44,7 +44,7 @@ div id: 'evaluation__details', class: 'row' do
                       parties_selectionnees: params[:parties_selectionnees],
                       format: :pdf
                     },
-                    class: 'bouton bouton-arrondi', target: '_blank', rel: 'noopener')
+                    class: 'bouton grand-bouton', target: '_blank', rel: 'noopener')
           end
         end
       end

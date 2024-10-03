@@ -43,7 +43,8 @@ body.erreurs {
         }
 
         .action {
-            @include bouton-arrondi;
+            @include bouton-primaire;
+            @include grand-bouton;
         }
       }
     }

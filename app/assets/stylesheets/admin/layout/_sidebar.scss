@@ -23,7 +23,8 @@
     flex-wrap: wrap;
 
     a {
-      @include bouton;
+      @include bouton-secondaire;
+      @include petit-bouton;
     }
   }
 }

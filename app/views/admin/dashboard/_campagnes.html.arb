@@ -25,8 +25,10 @@ div class: 'bloc-apercu' do
         text_node link_to campagne.code, admin_campagne_path(campagne), class: 'campagne-code'
         span class: 'campagne-url' do
           a url, href: url, target: '_blank'
-          button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
-          text_node link_to 'Jouer', url, class: 'bouton-jouer', target: '_blank', rel: 'noopener'
+          button "Copier l'URL", class: 'bouton-secondaire petit-bouton copier-coller',
+                                 'data-clipboard-text': url
+          text_node link_to 'Jouer', url, class: 'bouton-secondaire petit-bouton',
+                                          target: '_blank', rel: 'noopener'
         end
       end
     end

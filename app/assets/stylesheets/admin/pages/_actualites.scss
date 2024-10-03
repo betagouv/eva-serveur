@@ -59,7 +59,8 @@
         width: 1.25rem;
 
         .action-simple {
-          @include bouton;
+          @include bouton-secondaire;
+          @include petit-bouton;
           margin-left: -1.5rem;
         }
       }

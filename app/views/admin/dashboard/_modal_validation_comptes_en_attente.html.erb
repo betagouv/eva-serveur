@@ -10,7 +10,7 @@
           <% structure = current_compte.structure %>
           <%= link_to 'Voir les demandes',
                       send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-membres"),
-                      class: "bouton bouton-light" %>
+                      class: "bouton petit-bouton" %>
         </div>
       </div>
     </div>

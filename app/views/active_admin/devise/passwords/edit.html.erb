@@ -3,7 +3,7 @@
     <%= t('active_admin.devise.change_password.title') -%>
   <% end %>
   <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
-  <div id="login">
+  <div id="login" class="panel">
     <div class='mot-de-passe-instruction'>
       <p class='mot-de-passe-instruction--consigne'><%= t('.consigne') %></p>
       <p><%= t(@regles_mot_de_passe, scope: 'creation_compte', longueur_mot_de_passe: Devise.password_length.first)%></p>

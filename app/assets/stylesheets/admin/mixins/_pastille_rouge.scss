@@ -1,9 +1,9 @@
 @mixin pastille_rouge {
-  background-color: $eva_red;
+  background-color: $error-950;
   border-radius: 4px;
   padding: 2px 4px;
   margin-right: 2.875rem;
-  color: $eva_light;
+  color: $error-425;
   display: inline-flex;
   width: auto;
   overflow: initial;

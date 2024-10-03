@@ -4,7 +4,7 @@ $panels-gap: 1rem;
 
 body.logged_out {
   font-size: .875rem;
-  background-color: #fff;
+  background-color: $grey-1000;
 
   #wrapper {
     flex-direction: column;
@@ -222,7 +222,7 @@ body.logged_out {
           align-items: center;
           font-size: 1rem;
           padding: 0 1rem;
-          color: #fff;
+          color: $grey-1000;
         }
       }
     }
@@ -247,7 +247,7 @@ body.logged_out {
 
   form {
     .inputs {
-      background-color: #fff;
+      background-color: $grey-1000;
       margin-bottom: 1rem;
     }
     .buttons li,

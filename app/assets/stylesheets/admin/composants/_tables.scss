@@ -40,7 +40,7 @@ table.index_table {
 
       &.even {
         td {
-          background-color: #FFF;
+          background-color: $grey-1000;
         }
       }
 
@@ -52,7 +52,7 @@ table.index_table {
         border-top: 1px solid $eva_bluegrey;
         border-bottom: 1px solid $eva_bluegrey;
         color: $couleur-texte;
-        background-color: #FFF;
+        background-color: $grey-1000;
         &:first-child {
           font-weight: 600;
           padding-left: 1.375rem;

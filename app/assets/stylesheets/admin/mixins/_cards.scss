@@ -1,7 +1,7 @@
 @mixin carte {
   position: relative;
   border-radius: 0.5rem;
-  background-color: #fff;
+  background-color: $grey-1000;
   & > div:last-child {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;

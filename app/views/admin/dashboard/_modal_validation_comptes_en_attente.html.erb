@@ -1,4 +1,4 @@
-<div class="modal modal-danger" id="validation-comptes-en-attente" tabindex="-1" role="dialog">
+<div class="modal modal-alerte" id="validation-comptes-en-attente" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -6,7 +6,7 @@
           <%= md t('.info_comptes_en_attente') %>
         </div>
         <div class='actions'>
-          <a class="bouton bouton-light" href="#" data-dismiss="modal"><%= t('.annuler') %></a>
+          <a class="bouton-secondaire petit-bouton" href="#" data-dismiss="modal"><%= t('.annuler') %></a>
           <% structure = current_compte.structure %>
           <%= link_to 'Voir les demandes',
                       send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-membres"),

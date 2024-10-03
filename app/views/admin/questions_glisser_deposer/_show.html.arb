@@ -13,10 +13,10 @@ panel 'Détails de la question' do
         end
       end
     end
-    row :zone_depot_url do
-      if resource.zone_depot_url.attached?
-        link_to(cdn_for(resource.zone_depot_url), target: '_blank', rel: 'noopener') do
-          raw inline_svg_content(resource.zone_depot_url, class: 'image-preview')
+    row :zone_depot do
+      if resource.zone_depot.attached?
+        link_to(cdn_for(resource.zone_depot), target: '_blank', rel: 'noopener') do
+          raw inline_svg_content(resource.zone_depot, class: 'image-preview')
         end
       end
     end

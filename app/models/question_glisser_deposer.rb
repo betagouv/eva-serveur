@@ -7,15 +7,15 @@ class QuestionGlisserDeposer < Question
            dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
-  has_one_attached :zone_depot_url
+  has_one_attached :zone_depot
 
-  validates :zone_depot_url,
+  validates :zone_depot,
             blob: { content_type: 'image/svg+xml' }
 
-  attr_accessor :supprimer_zone_depot_url
+  attr_accessor :supprimer_zone_depot
 
-  before_save :valide_zone_depot_url_avec_reponse
-  after_update :supprime_zone_depot_url
+  before_save :valide_zone_depot_avec_reponse
+  after_update :supprime_zone_depot
 
   def as_json(_options = nil)
     json = base_json

@@ -7,17 +7,17 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :description
     render partial: 'admin/questions/input_illustration', locals: { f: f }
-    f.input :zone_depot_url,
+    f.input :zone_depot,
             as: :file,
             hint: 'Les éléments doivent contenir la classe css `zone-depot` ' \
                   'et la classe css `zone-depot--reponse.nom_technique`',
             input_html: { accept: 'image/svg+xml' }
 
-    if f.object.zone_depot_url.attached? && f.object.errors[:zone_depot_url].blank?
-      f.input :supprimer_zone_depot_url,
+    if f.object.zone_depot.attached? && f.object.errors[:zone_depot].blank?
+      f.input :supprimer_zone_depot,
               as: :boolean,
-              label: t('.label.supprimer_zone_depot_url'),
-              hint: svg_attachment_base64(resource.zone_depot_url, class: 'image-preview')
+              label: t('.label.supprimer_zone_depot'),
+              hint: svg_attachment_base64(resource.zone_depot, class: 'image-preview')
     end
   end
   f.inputs do

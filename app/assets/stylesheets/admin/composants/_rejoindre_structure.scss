@@ -15,6 +15,7 @@
   }
 
   a {
-    @include bouton;
+    @include bouton-secondaire;
+    @include petit-bouton;
   }
 }

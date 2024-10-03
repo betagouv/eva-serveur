@@ -4,7 +4,7 @@ class BoutonComponentStories < ViewComponent::Storybook::Stories
   story :default do
     body = text('Bouton')
     url = text('https://preprod.eva.beta.gouv.fr/pro')
-    constructor(body, url, type: nil)
+    constructor(body, url)
   end
 
   story :primary do
@@ -13,10 +13,10 @@ class BoutonComponentStories < ViewComponent::Storybook::Stories
     constructor(body, url, type: :primary)
   end
 
-  story :outline do
+  story :secondary do
     body = text('Bouton')
     url = text('https://preprod.eva.beta.gouv.fr/pro')
-    constructor(body, url, type: :outline)
+    constructor(body, url, type: :secondary)
   end
 
   story :desactive do

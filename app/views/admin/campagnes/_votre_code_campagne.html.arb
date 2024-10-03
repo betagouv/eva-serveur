@@ -18,12 +18,14 @@ div id: 'votre_code_campagne', class: 'row' do
               text_node safe_join(rendu_code)
             end
             code = campagne.code
-            button 'Copier le code', class: 'button copier-coller', 'data-clipboard-text': code
+            button 'Copier le code', class: 'bouton-secondaire petit-bouton copier-coller',
+                                     'data-clipboard-text': code
           end
           row(:url) do
             text_node lien_campagne(campagne)
             url = url_campagne(campagne.code)
-            button "Copier l'URL", class: 'button copier-coller', 'data-clipboard-text': url
+            button "Copier l'URL", class: 'bouton-secondaire petit-bouton button copier-coller',
+                                   'data-clipboard-text': url
           end
         end
       end

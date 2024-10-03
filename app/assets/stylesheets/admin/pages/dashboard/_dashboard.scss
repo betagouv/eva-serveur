@@ -34,7 +34,8 @@
       }
 
       > a {
-        @include bouton-arrondi;
+        @include bouton-primaire;
+        @include grand-bouton;
         display: inline-block;
       }
     }
@@ -88,9 +89,6 @@
           a:first-child {
             flex: 1;
           }
-        }
-        .bouton-jouer {
-          @include bouton;
         }
       }
     }

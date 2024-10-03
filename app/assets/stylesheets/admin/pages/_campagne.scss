@@ -80,9 +80,6 @@
         .conteneur-action {
           padding-left: 8.5rem;
         }
-        .bouton-jouer {
-          @include bouton;
-        }
       }
       &-situation {
         margin-top: 1.5rem;
@@ -174,7 +171,8 @@
       margin-bottom: 0;
     }
     .bouton-annuler a {
-      @include bouton-arrondi;
+      @include bouton-primaire;
+      @include grand-bouton;
       min-width: 6.563rem;
       text-align: center;
       margin-right: 0;

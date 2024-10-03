@@ -5,7 +5,7 @@ lien_action ||= nil
 lien_description ||= nil
 email ||= nil
 options_lien ||= {}
-options = { class: 'bouton bouton-arrondi' }.merge(options_lien)
+options = { class: 'bouton grand-bouton' }.merge(options_lien)
 carte_entete_classes = 'd-flex align-items-center justify-content-between bg-orange'
 
 div class: 'carte-prise-en-main' do

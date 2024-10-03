@@ -190,7 +190,8 @@ body.logged_out {
         margin-top: 1rem;
 
         .action-principale {
-          @include bouton-arrondi;
+          @include bouton-primaire;
+          @include grand-bouton;
           display: inline-flex;
           height: 2rem;
           border-radius: 2.875rem;
@@ -216,7 +217,8 @@ body.logged_out {
 
       .bouton-action {
         .actions {
-          @include bouton-arrondi;
+          @include bouton-primaire;
+          @include grand-bouton;
           display: inline-flex;
           height: 3.625rem;
           align-items: center;

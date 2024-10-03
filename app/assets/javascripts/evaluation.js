@@ -11,22 +11,22 @@ function reinitialiseFormulaire(evaluationId) {
 }
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
-  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
-  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`).addClass('bouton-outline--main');
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
+  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`).addClass('bouton--actif');
   $(`#${evaluationId} .carte-liste`).addClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
   $(`#${evaluationId} .questions-${qcm}`).removeClass('hidden');
 }
 
 function fermeQcm(evaluationId) {
-  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
   $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
   reinitialiseFormulaire(evaluationId);
 }
 
 function modifieReponseMiseEnAction(evaluationId) {
-  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton-outline--main');
+  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
   $(`#${evaluationId} .mise-en-action`).removeClass('d-flex').addClass('hidden');
   $(`#${evaluationId} div[data-reponse='vide']`).removeClass('hidden').addClass('d-flex');
   $(`#${evaluationId} .card__banner--illettrisme`).removeClass('card__banner--succes');

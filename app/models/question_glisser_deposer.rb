@@ -43,28 +43,31 @@ class QuestionGlisserDeposer < Question
     { 'reponsesNonClassees' => reponses_non_classees }
   end
 
-  def supprime_zone_depot_url
-    zone_depot_url.purge_later if zone_depot_url.attached? && supprimer_zone_depot_url == '1'
+  def supprime_zone_depot
+    zone_depot.purge_later if zone_depot.attached? && supprimer_zone_depot == '1'
   end
 
-  def valide_zone_depot_url_avec_reponse
-    return unless zone_depot_url.attached?
-    return if attachment_changes['zone_depot_url'].nil?
+  def valide_zone_depot_avec_reponse
+    return unless zone_depot.attached?
+    return if attachment_changes['zone_depot'].nil?
 
-    file = attachment_changes['zone_depot_url'].attachable
+    file = attachment_changes['zone_depot'].attachable
     doc = Nokogiri::XML(file, nil, 'UTF-8')
+
     return unless elements_depot(doc).empty?
 
-    invalid_zone_depot_error(reponse)
+    invalid_zone_depot_error
   end
 
-  def invalid_zone_depot_error(reponse)
-    errors.add(:zone_depot_url,
-               "doit contenir les classes 'zone-depot' et 'zone-depot--#{reponse.nom_technique}'")
+  def invalid_zone_depot_error
+    errors.add(:zone_depot,
+               "doit contenir les classes 'zone-depot zone-depot--reponse-nom-technique'")
     throw(:abort)
   end
 
   def elements_depot(doc)
-    doc.css('.zone-depot') || doc.css(".zone-depot--#{reponse.nom_technique}")
+    doc.css('.zone-depot').select do |element|
+      element[:class].split.any? { |cls| cls.start_with?('zone-depot--') }
+    end
   end
 end

@@ -57,7 +57,9 @@ body.logged_in {
       @include flash-alert;
 
       &::before {
-        background-image: asset-data-url('icones/alert.svg');
+        mask-image: url('icones/alert.svg');
+        background-color: currentColor;
+        mask-repeat: no-repeat;
       }
     }
 

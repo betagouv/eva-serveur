@@ -4,11 +4,30 @@
     margin-top: 50vh;
 
     .modal-content {
-      padding: 1rem;
       font-size: 0.875rem;
       align-items: center;
       flex-direction: row;
       border-radius: 0.5rem;
+      background-repeat: no-repeat,no-repeat,no-repeat;
+      background-size: 1px 1px,1px 1px,1px 1px,2.5rem 100%;
+      padding: 1rem 2.25rem 1rem 3.5rem;
+      position: relative;
+
+      &::before {
+        content: "";
+        background-color: currentColor;
+        --icon-size: 1.5rem;
+        color: $grey-1000;
+        display: inline-block;
+        height: var(--icon-size);
+        left: 0;
+        margin: 1rem .5rem;
+        mask-size: 100% 100%;
+        position: absolute;
+        top: 0;
+        vertical-align: calc((.75em - var(--icon-size))*.5);
+        width: var(--icon-size);
+      }
 
       .modal-body {
         padding: 0rem;
@@ -27,23 +46,25 @@
     }
   }
 
-  &.modal-danger {
+  &.modal-info {
     .modal-content {
-      background-color: $error-950;
-      border-color: $error-425;
-      color: $error-425;
+      border-color: $info-425;
+      background-image: linear-gradient(0deg,$info-425,$info-425),linear-gradient(0deg,$info-425,$info-425),linear-gradient(0deg,$info-425,$info-425),linear-gradient(0deg,$info-425,$info-425),linear-gradient(0deg,$info-425,$info-425);
 
       &::before {
-        background-image: asset-data-url('icones/error.svg');
-        content: '';
-        height: 4rem;
-        background-repeat: no-repeat;
-        background-size: cover;
-        flex: 0 0 4rem;
+        mask-image: url('icones/info.svg');
       }
     }
-    .bouton-light {
-      color: $error-425;
+  }
+
+  &.modal-alerte {
+    .modal-content {
+      border-color: $warning-425;
+      background-image: linear-gradient(0deg,$warning-425,$warning-425),linear-gradient(0deg,$warning-425,$warning-425),linear-gradient(0deg,$warning-425,$warning-425),linear-gradient(0deg,$warning-425,$warning-425),linear-gradient(0deg,$warning-425,$warning-425);
+
+      &::before {
+        mask-image: url('icones/alert.svg');
+      }
     }
   }
 }

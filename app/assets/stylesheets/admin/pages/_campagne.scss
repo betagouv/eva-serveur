@@ -152,7 +152,7 @@
     }
 
     fieldset.inputs, fieldset.input-choix, fieldset.choices {
-      background-color: #fff;
+      background-color: $grey-1000;
 
       input[type="text"],
       .select2 {

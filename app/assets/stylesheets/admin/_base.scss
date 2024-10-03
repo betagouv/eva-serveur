@@ -36,6 +36,14 @@
 @import "active_admin/structure/main_structure";
 @import "active_admin/structure/title_bar";
 
+.bg-erreur {
+  color: $error-425;
+  background-color: $error-950;
+  a, h4 {
+    color: $error-425;
+  }
+}
+
 .bg-alerte {
   color: $warning-425;
   background-color: $warning-950;

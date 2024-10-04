@@ -30,7 +30,7 @@ describe QuestionGlisserDeposer, type: :model do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique
                                           description illustration modalite_reponse type
                                           reponsesNonClassees zone_depot_url])
-      expect(json['type']).to eql('glisser-deposer-billets')
+      expect(json['type']).to eql('glisser-deposer')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
                                             question.illustration

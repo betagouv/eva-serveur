@@ -37,7 +37,7 @@ class QuestionGlisserDeposer < Question
   def reponses_fields
     reponses_non_classees = reponses.map do |reponse|
       illustration_url = cdn_for(reponse.illustration) if reponse.illustration.attached?
-      reponse.slice(:id, :position, :position_client).merge(
+      reponse.slice(:id, :position, :nom_technique, :position_client).merge(
         'illustration' => illustration_url
       )
     end

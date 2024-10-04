@@ -44,6 +44,7 @@ describe QuestionGlisserDeposer, type: :model do
         expect(json['reponsesNonClassees'].first['illustration']).not_to be_nil
         expect(json['reponsesNonClassees'].first['position']).to be(1)
         expect(json['reponsesNonClassees'].first['position_client']).to be(2)
+        expect(json['reponsesNonClassees'].first['nom_technique']).to eql(reponse1.nom_technique)
       end
     end
   end

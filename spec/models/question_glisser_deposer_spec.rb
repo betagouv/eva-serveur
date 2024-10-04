@@ -35,9 +35,7 @@ describe QuestionGlisserDeposer, type: :model do
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
                                             question.illustration
                                           ))
-      expect(json['zone_depot_url']).to eql(Rails.application.routes.url_helpers.url_for(
-                                              question.zone_depot
-                                            ))
+      expect(json['zone_depot_url']).to start_with('data:image/svg+xml;base64,')
     end
 
     describe 'les reponsesNonClassees' do

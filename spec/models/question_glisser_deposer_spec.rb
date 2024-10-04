@@ -2,184 +2,80 @@
 
 require 'rails_helper'
 
-describe 'Admin - Question Glisser Deposer', type: :feature do
-  before(:each) { se_connecter_comme_superadmin }
-
-  describe 'show' do
-    let!(:question) do
-      create :question_glisser_deposer, libelle: 'Libellé de la question'
-    end
-    let!(:transcription) do
-      create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
-    end
-
-    before(:each) { visit admin_question_glisser_deposer_path(question) }
-
-    it 'affiche le libellé de la question et la transcription associée' do
-      expect(page).to have_content 'Libellé de la question'
-      expect(page).to have_content 'Comment ça va ?'
-    end
+describe QuestionGlisserDeposer, type: :model do
+  let!(:question) do
+    create(:question_glisser_deposer,
+           illustration: Rack::Test::UploadedFile.new(
+             Rails.root.join('spec/support/programme_tele.png')
+           ),
+           zone_depot: Rack::Test::UploadedFile.new(
+             Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg')
+           ))
+  end
+  let(:json) { question.as_json }
+  let!(:reponse1) do
+    create(:choix, :avec_illustration, :bon, question_id: question.id, position_client: 2)
+  end
+  let!(:reponse2) { create(:choix, :avec_illustration, :bon, question_id: question.id) }
+  let!(:modalite) do
+    create(:transcription, :avec_audio, question_id: question.id,
+                                        categorie: :modalite_reponse)
   end
 
-  describe 'index' do
-    let!(:question) do
-      create :question_glisser_deposer
-    end
-    let!(:transcription) do
-      create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
-    end
+  it { is_expected.to have_many(:reponses).with_foreign_key(:question_id) }
+  it { is_expected.to have_one_attached(:zone_depot) }
 
-    before(:each) { visit admin_questions_glisser_deposer_path }
-
-    it do
-      expect(page).to have_content 'Comment ça va ?'
-    end
-  end
-
-  describe 'création' do
-    before(:each) do
-      visit new_admin_question_glisser_deposer_path
+  describe '#as_json' do
+    it 'serialise les champs' do
+      expect(json.keys).to match_array(%w[id intitule audio_url nom_technique
+                                          description illustration modalite_reponse type
+                                          reponsesNonClassees zone_depot_url])
+      expect(json['type']).to eql('glisser-deposer-billets')
+      expect(json['modalite_reponse']).to eql(modalite.ecrit)
+      expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
+                                            question.illustration
+                                          ))
+      expect(json['zone_depot_url']).to eql(Rails.application.routes.url_helpers.url_for(
+                                              question.zone_depot
+                                            ))
     end
 
-    context 'sans transcriptions' do
-      before(:each) do
-        fill_in :question_glisser_deposer_libelle, with: 'Question'
-        fill_in :question_glisser_deposer_nom_technique, with: 'question'
-      end
-
-      it 'créé une nouvelle question' do
-        expect { click_on 'Créer' }.to(change { Question.count })
-        expect(Question.first.transcriptions).to be_empty
-      end
-    end
-
-    context 'quand une transcription pour intitule est ajouté' do
-      before(:each) do
-        fill_in :question_glisser_deposer_libelle, with: 'Question'
-        fill_in :question_glisser_deposer_nom_technique, with: 'question'
-        fill_in :question_glisser_deposer_transcriptions_attributes_0_ecrit, with: 'Intitulé'
-        click_on 'Créer'
-      end
-
+    describe 'les reponsesNonClassees' do
       it do
-        expect(Question.first.transcriptions.count).to eq 1
-        expect(Question.first.transcription_intitule&.ecrit).to eq 'Intitulé'
-      end
-    end
-
-    context 'quand une transcription pour modalité réponse est ajoutée' do
-      before(:each) do
-        fill_in :question_glisser_deposer_libelle, with: 'Question'
-        fill_in :question_glisser_deposer_nom_technique, with: 'question'
-        fill_in :question_glisser_deposer_transcriptions_attributes_1_ecrit, with: 'Consigne'
-        click_on 'Créer'
-      end
-
-      it do
-        expect(Question.first.transcriptions.count).to eq 1
-        expect(Question.first.transcription_modalite_reponse&.ecrit).to eq 'Consigne'
-      end
-    end
-
-    context 'quand une illustration est ajoutée' do
-      before(:each) do
-        fill_in :question_glisser_deposer_libelle, with: 'Question'
-        fill_in :question_glisser_deposer_nom_technique, with: 'question'
-        attach_file(:question_glisser_deposer_illustration,
-                    Rails.root.join('spec/support/programme_tele.png'))
-        click_on 'Créer'
-      end
-
-      it do
-        expect(Question.first.illustration.attached?).to eq true
+        expect(json['reponsesNonClassees'].size).to be(2)
+        expect(json['reponsesNonClassees'].first['illustration']).not_to be_nil
+        expect(json['reponsesNonClassees'].first['position']).to be(1)
+        expect(json['reponsesNonClassees'].first['position_client']).to be(2)
       end
     end
   end
 
-  describe 'modification' do
-    let!(:question) do
-      create :question_glisser_deposer,
-             illustration: Rack::Test::UploadedFile.new(
-               Rails.root.join('spec/support/programme_tele.png')
-             )
-    end
-    let!(:transcription) do
-      create :transcription, question_id: question.id, ecrit: 'Comment ça va ?'
+  describe 'validations' do
+    let(:question) do
+      build(:question_glisser_deposer)
     end
 
-    let!(:modalite_reponse) do
-      create :transcription, :avec_audio, question_id: question.id, ecrit: 'Comment ça va ?',
-                                          categorie: :modalite_reponse
-    end
-
-    context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do
-      before(:each) do
-        visit edit_admin_question_glisser_deposer_path(question)
-        fill_in :question_glisser_deposer_transcriptions_attributes_0_ecrit, with: nil
-      end
-
-      it 'supprime la transcription' do
-        expect(Question.first.transcriptions.count).to eq 2
-        click_on 'Enregistrer'
-        expect(Question.first.transcriptions.count).to eq 1
+    context 'avec un attachment au format svg' do
+      it 'est valide' do
+        question.zone_depot.attach(
+          io: Rails.root.join('spec/support/accessibilite-sans-reponse.svg').open,
+          filename: 'valid.svg',
+          content_type: 'image/svg+xml'
+        )
+        expect(question).to be_valid
       end
     end
 
-    context "quand l'admin coche supprimer l'illustration" do
-      before(:each) do
-        visit edit_admin_question_glisser_deposer_path(question)
-        check 'question_glisser_deposer_supprimer_illustration'
-      end
-
-      it "supprime l'illustration" do
-        expect(question.illustration.attached?).to eq true
-        click_on 'Enregistrer'
-        question.reload
-        expect(question.illustration.attached?).to eq false
-      end
-    end
-
-    context "quand l'admin coche supprimer l'audio de l'intitulé" do
-      before(:each) do
-        Question.first.transcriptions.find_by(categorie: :intitule)
-                .update(audio: Rack::Test::UploadedFile.new(
-                  Rails.root.join('spec/support/alcoolique.mp3')
-                ))
-        visit edit_admin_question_glisser_deposer_path(question)
-        check 'question_glisser_deposer_supprimer_audio_intitule'
-      end
-
-      it "supprime l'audio" do
-        expect(
-          Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq true
-        click_on 'Enregistrer'
-        question.reload
-        expect(
-          Question.first.transcriptions.find_by(categorie: :intitule).audio.attached?
-        ).to eq false
-      end
-    end
-
-    context "quand l'admin coche supprimer l'audio de la consigne" do
-      before(:each) do
-        Question.first.transcriptions.find_by(categorie: :modalite_reponse)
-                .update(audio: Rack::Test::UploadedFile.new(
-                  Rails.root.join('spec/support/alcoolique.mp3')
-                ))
-        visit edit_admin_question_glisser_deposer_path(question)
-        check 'question_glisser_deposer_supprimer_audio_modalite_reponse'
-      end
-
-      it "supprime l'audio" do
-        expect(
-          Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq true
-        click_on 'Enregistrer'
-        question.reload
-        expect(
-          Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
-        ).to eq false
+    context "avec un attachement d'un autre format" do
+      it "n'est pas valide" do
+        question.zone_depot.attach(
+          io: Rails.root.join('spec/support/programme_tele.png').open,
+          filename: 'invalid.png',
+          content_type: 'image/png'
+        )
+        expect(question).not_to be_valid
+        erreur = question.errors[:zone_depot]
+        expect(erreur).to include("n'est pas un format de fichier valide")
       end
     end
   end

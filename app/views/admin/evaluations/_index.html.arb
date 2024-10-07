@@ -16,25 +16,21 @@ context.instance_eval do
     end
   end
   column :created_at do |evaluation|
-    div class: 'roue-dentee' do
-      div class: 'roue-dentee__actions table_actions' do
-        if can?(:read, evaluation)
-          text_node link_to t('.voir'), admin_evaluation_path(evaluation),
-                            class: 'view_link member_link'
-        end
+    div class: 'menu-actions' do
+      div class: 'table_actions' do
+        text_node link_to t('.voir'), admin_evaluation_path(evaluation) if can?(:read, evaluation)
         if can?(:edit, evaluation)
-          text_node link_to t('.modifier'), edit_admin_evaluation_path(evaluation),
-                            class: 'edit_link member_link'
+          text_node link_to t('.modifier'), edit_admin_evaluation_path(evaluation)
         end
         if can?(:destroy, evaluation)
           text_node link_to t('.supprimer'),
                             admin_evaluation_path(evaluation),
                             method: :delete,
-                            class: 'delete_link member_link',
                             data: { confirm: t('.confirmation_suppression') }
         end
       end
     end
+    render partial: 'components/bouton_menu_actions'
     div(l(evaluation.created_at), class: 'evaluation__created_at')
   end
 end

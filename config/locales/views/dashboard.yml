@@ -15,8 +15,10 @@ fr:
         demande_acceptation: 'Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva.'
         bouton_acceptation_cgu: 'J’ai lu et j’accepte les CGU'
       modal_validation_comptes_en_attente:
+        annuler: Plus tard
         info_comptes_en_attente: |
-          **Des demandes d'accès sont en attente de validation.** Vous pouvez les confirmer **dans la page de votre structure**.
+          ## Accès en attente de validation
+          Des demandes d'accès sont en attente de validation. Vous pouvez les confirmer dans la page de votre structure.
       index:
         incitation_creation_compte_personnel: |
           Pour des questions relatives au RGPD ainsi que pour plus de fluidité, les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.</br>
@@ -49,7 +51,7 @@ fr:
           question: |
             Au sein de votre structure, ces personnes semblent avoir  
             besoin d’accompagnement.  
-            Avez-vous été en mesure de les orienter vers une solution adaptée ?
+            **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
       campagnes:
         titre: Vos campagnes
         action: Gérer mes campagnes

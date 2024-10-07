@@ -94,6 +94,73 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
         expect(Question.first.illustration.attached?).to be true
       end
     end
+
+    context 'quand le svg zone depot est ajouté' do
+      let!(:message_erreur) do
+        "doit contenir les classes 'zone-depot zone-depot--reponse-nom-technique'"
+      end
+
+      context 'avec la classe css zone-depot et sans la classe zone-depot--reponse-nom-technique' do
+        before do
+          fill_in :question_glisser_deposer_libelle, with: 'Question'
+          fill_in :question_glisser_deposer_nom_technique, with: 'question'
+          attach_file(:question_glisser_deposer_zone_depot,
+                      Rails.root.join('spec/support/N1Pse1-sans-bonne-reponse.svg'))
+          click_on 'Créer'
+        end
+
+        it do
+          expect(Question.count).to eq(0)
+          expect(page).to have_content(message_erreur)
+        end
+      end
+
+      context 'sans la classe css zone-depot et avec la classe zone-depot--reponse-nom-technique' do
+        before do
+          fill_in :question_glisser_deposer_libelle, with: 'Question'
+          fill_in :question_glisser_deposer_nom_technique, with: 'question'
+          attach_file(:question_glisser_deposer_zone_depot,
+                      Rails.root.join('spec/support/N1Pse1-sans-zone-depot.svg'))
+          click_on 'Créer'
+        end
+
+        it 'ne valide pas le formulaire' do
+          expect(Question.count).to eq(0)
+          expect(page).to have_content(message_erreur)
+        end
+      end
+
+      context 'sans aucune des deux classes' do
+        before do
+          fill_in :question_glisser_deposer_libelle, with: 'Question'
+          fill_in :question_glisser_deposer_nom_technique, with: 'question'
+          attach_file(:question_glisser_deposer_zone_depot,
+                      Rails.root.join('spec/support/N1Pse1-zone-depot-non-valide.svg'))
+          click_on 'Créer'
+        end
+
+        it 'ne valide pas le formulaire' do
+          expect(Question.count).to eq(0)
+          expect(page).to have_content(message_erreur)
+        end
+      end
+
+      context 'avec les deux classes' do
+        before do
+          fill_in :question_glisser_deposer_libelle, with: 'Question'
+          fill_in :question_glisser_deposer_nom_technique, with: 'question'
+          attach_file(:question_glisser_deposer_zone_depot,
+                      Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg'))
+          click_on 'Créer'
+        end
+
+        it do
+          question = Question.first
+          expect(question.zone_depot.attached?).to be true
+          expect(question.errors[:zone_depot]).to be_empty
+        end
+      end
+    end
   end
 
   describe 'modification' do
@@ -101,6 +168,9 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       create :question_glisser_deposer,
              illustration: Rack::Test::UploadedFile.new(
                Rails.root.join('spec/support/programme_tele.png')
+             ),
+             zone_depot: Rack::Test::UploadedFile.new(
+               Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg')
              )
     end
     let!(:transcription) do
@@ -180,6 +250,20 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
         ).to be false
+      end
+    end
+
+    context "quand l'admin coche supprimer le svg zone depot" do
+      before do
+        visit edit_admin_question_glisser_deposer_path(question)
+        check 'question_glisser_deposer_supprimer_zone_depot'
+      end
+
+      it 'supprime le svg zone depot' do
+        expect(question.zone_depot.attached?).to be true
+        click_on 'Enregistrer'
+        question.reload
+        expect(question.zone_depot.attached?).to be false
       end
     end
   end

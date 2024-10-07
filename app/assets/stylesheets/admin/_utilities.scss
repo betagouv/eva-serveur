@@ -1,5 +1,5 @@
 .bord-rouge {
-  border: 2px solid $eva_red;
+  border: 2px solid $warning-425;
 }
 
 .supprime-espace-derniere-balise {
@@ -22,6 +22,15 @@
   text-overflow: ellipsis;
 }
 
-.carte--deroulee {
-  border-radius: .5rem .5rem 0 0;
+.visually-hidden {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

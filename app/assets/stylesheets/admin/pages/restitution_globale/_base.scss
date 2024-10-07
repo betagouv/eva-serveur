@@ -2,7 +2,6 @@
 @import "admin/mixins";
 
 .evaluation__restitution-globale {
-  color: $couleur-texte;
   font-size: 0.875rem;
   font-family: $font-texte;
 
@@ -49,7 +48,7 @@
 
     .description {
       margin-top: 0.5rem;
-      color: $eva_dark;
+      color: $couleur-texte;
     }
 
     .clause-non-responsabilite {
@@ -66,7 +65,8 @@
   }
 
   .autopositionnement {
-    color: $eva_dark;
+    color: $couleur-texte;
+    margin-top: 2rem;
 
     > .row {
       margin-bottom: 2rem;
@@ -78,16 +78,6 @@
     .intitule-question {
       display: flex;
       align-items: center;
-    }
-
-    .legende-jauge {
-      position: relative;
-      color: $eva_bluegrey;
-
-      span:last-child {
-        position: absolute;
-        right: 0;
-      }
     }
 
     .jauge {
@@ -114,14 +104,15 @@
       margin-top: -14px;
       width: 28px;
       line-height: 28px;
-      background-image: asset-data-url('puce_jauge.svg');
+      background-color: $eva_main_blue;
+      border-radius: 1rem;
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
       text-align: center;
       font-family: $font-titre;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: $eva_light;
     }
 
@@ -173,7 +164,7 @@
       border-radius: 0 0.3rem 0.3rem 0;
 
       &.remplissage {
-        background-color: $eva_dark;
+        background-color: $eva_main_blue;
 
         &-3 {
           width: 100%;
@@ -228,14 +219,14 @@
   }
 
   .synthese-illettrisme {
-    color: $eva_light;
+    color: $eva_dark_blue_grey;
     border-radius: 2rem;
     padding: 2rem 2rem;
     margin: 0 5rem 2rem;
-    background-color: $eva-dark;
+    background-color: $grey-1000-hover;
 
     a {
-      color: $eva_light;
+      color: $eva_dark_blue_grey;
     }
 
     .col {
@@ -243,7 +234,6 @@
     }
 
     h2 {
-      color: $eva_light;
       margin-bottom: 1rem;
       margin-top: 0;
     }
@@ -255,23 +245,25 @@
     }
 
     &.illettrisme_potentiel {
-      color: $eva_dark;
-      background-color: $couleur-warning;
+      background-color: $warning-950;
 
       h2 {
-        color: $eva_dark;
+        color: $warning-425;
       }
     }
 
     &.ni_ni {
-      background-color: $eva_main_blue;
+      background-color: $info-950;
+
+      h2 {
+        color: $info-425;
+      }
     }
 
     &.socle_clea {
-      color: $eva_dark;
-      background-color: $couleur-legere-accent-validation;
+      background-color: $success-950;
       h2 {
-        color: $eva_dark;
+        color: $success-425;
       }
     }
   }
@@ -308,9 +300,9 @@
   .note-redaction {
     position: relative;
     font-style: italic;
-    color: $eva_main_blue;
+    color: $couleur-texte;
     padding: 2.2rem 2rem;
-    border: 1px solid $eva_main_blue;
+    border: 1px solid $eva_orange;
     box-sizing: border-box;
     border-radius: 1.8rem;
   }
@@ -323,11 +315,11 @@
 
   .aide-redaction {
     position: relative;
-    color: $couleur-texte;
     padding: 2rem 2rem;
-    border: 1px solid $couleur-legere-accent-validation;
+    border: 1px solid $info-425;
     box-sizing: border-box;
     border-radius: 1.8rem;
+    color: $info-425;
 
     div p:last-child {
       margin-bottom: 0;
@@ -373,8 +365,8 @@
   .recommandation-anlci {
     padding: 0 1rem 1.5rem;
     align-items: center;
-    border-bottom: 1px solid $anlci_orange;
-    color: $anlci_orange;
+    border-bottom: 1px solid $grey-200;
+    color: $grey-200;
     img {
       height: 4rem;
     }
@@ -393,7 +385,7 @@
     padding: 1.5rem 3rem;
 
     h3 {
-      color: $eva_dark;
+      color: $grey-50;
       margin-bottom: .5rem;
     }
   }

@@ -4,9 +4,7 @@
   margin-top: 2rem;
 
   a {
-    @include bouton-arrondi;
-    color: $eva_dark;
-    background-color: $couleur-warning;
-    border: none;
+    @include bouton-primaire;
+    @include grand-bouton;
   }
 }

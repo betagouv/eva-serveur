@@ -12,7 +12,6 @@
 
       .conteneur {
         @include carte-avec-ombre;
-        overflow: hidden;
       }
       .illustration {
         height: 145px;
@@ -34,54 +33,37 @@
         font-size: 1rem;
         a {
           text-decoration: none;
-          color: $eva_dark;
+          color: $couleur-texte;
         }
       }
       .date {
         font-size: 0.875rem;
         color: $eva_dark_blue_grey;
       }
+      .menu-actions {
+        @include menu-actions();
+        .table_actions {
+          left: 9rem;
+          top: 1.5rem;
+        }
+      }
+      .bouton-menu {
+        position: absolute;
+        right: 1rem;
+        bottom: 0.5rem;
+      }
       .action {
         position: absolute;
         right: 1rem;
         bottom: 1rem;
-      }
-      .action-multiple {
-        background: image-url('roue-dentee.svg') no-repeat right center;
-        .lien {
-          opacity: 0;
-          transition: opacity 0.2s;
-          border-radius: 0;
-          &:first-child {
-            border-top-left-radius: 0.25rem;
-            border-bottom-left-radius: 0.25rem;
-          }
-          &:last-child {
-            border-top-right-radius: 0.25rem;
-            border-bottom-right-radius: 0.25rem;
-          }
-        }
-      }
-      &:hover {
-        .action-multiple {
-          background-image: none;
-          .lien {
-            opacity: 1;
+        width: 1.25rem;
 
-          }
+        .action-simple {
+          @include bouton-secondaire;
+          @include petit-bouton;
+          margin-left: -1.5rem;
         }
       }
-      .lien {
-        &-lire {
-          @include bouton-carte($eva_green, $eva_dark);
-        }
-        &-modifier {
-          @include bouton-carte($eva_main_blue, $eva_light);
-        }
-        &-supprimer {
-          @include bouton-carte($eva_red, $eva_light);
-        }
-      } 
     }
   }
 }

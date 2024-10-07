@@ -10,12 +10,12 @@
     max-width: 16.25rem;
     .sous-infos {
       margin-top: .75rem;
-      color: $couleur-texte;
       font-size: .75rem;
     }
   }
 
   a {
-    @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
+    @include bouton-secondaire;
+    @include petit-bouton;
   }
 }

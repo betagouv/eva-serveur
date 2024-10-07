@@ -26,7 +26,7 @@ body.erreurs {
         flex-shrink: 1;
 
         .message-accueil {
-          color: $eva_dark;
+          color: $couleur-texte;
           font-family: Quicksand;
           font-size: 3rem;
           font-weight: 700;
@@ -43,7 +43,8 @@ body.erreurs {
         }
 
         .action {
-            @include bouton-arrondi;
+            @include bouton-primaire;
+            @include grand-bouton;
         }
       }
     }

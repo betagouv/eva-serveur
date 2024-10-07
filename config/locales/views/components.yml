@@ -34,8 +34,7 @@ fr:
 
             N. B. : la restitution propose un détail des items réussis ou échoués.
     banniere_confirmation_email:
-      renvoyer_email: |
-          Renvoyer l’email de confirmation
+      renvoyer_email: Renvoyer l’email de confirmation
       modification_email:
         email_envoye_a: 'Un email de confirmation a été envoyé à :'
         demande_effectuee: |
@@ -62,7 +61,6 @@ fr:
         reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
     prise_en_main:
       titre: Bienvenue sur eva !
-      sous_titre: Bien débuter
       etapes:
         progression:
           titre: Débutez eva en 5 étapes

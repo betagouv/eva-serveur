@@ -29,7 +29,6 @@
 @import 'admin/composants/menu_transverse';
 @import 'admin/composants/modal';
 @import 'admin/composants/nom_anonymisable';
-@import 'admin/composants/clipboard';
 @import 'admin/composants/card';
 @import 'admin/composants/card_validation';
 @import "admin/composants/card_parcours_type";
@@ -45,7 +44,6 @@
 @import 'admin/composants/recherche_structure';
 @import 'admin/composants/rejoindre_structure';
 @import 'admin/composants/bouton_ajouter_une_structure';
-@import "admin/composants/roue_dentee";
 
 // UTILITIES
 @import 'admin/utilities';
@@ -87,7 +85,7 @@
 body {
   @include texte();
   font-family: $font-texte;
-  color: $eva_dark;
+  color: $couleur-texte;
   background-color: $eva_light;
   overflow-x: hidden;
 

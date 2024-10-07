@@ -1,13 +1,17 @@
 table.index_table {
   font-size: 0.875rem;
   border-spacing: 0 0.5rem;
+
+  .col-actions {
+    padding: 0;
+  }
+
   thead {
     th {
       text-shadow: none;
       font-weight: normal;
       border: 0;
       box-shadow: none;
-      color: $couleur-texte;
       background: none;
       padding-top: 0;
       padding-bottom: .5rem;
@@ -36,7 +40,7 @@ table.index_table {
 
       &.even {
         td {
-          background-color: #FFF;
+          background-color: $grey-1000;
         }
       }
 
@@ -47,14 +51,17 @@ table.index_table {
         vertical-align: middle;
         border-top: 1px solid $eva_bluegrey;
         border-bottom: 1px solid $eva_bluegrey;
-        color: $eva_dark;
-        background-color: #FFF;
+        color: $couleur-texte;
+        background-color: $grey-1000;
         &:first-child {
           font-weight: 600;
           padding-left: 1.375rem;
           border-left: 1px solid $eva_bluegrey;
           border-top-left-radius: 0.5rem;
           border-bottom-left-radius: 0.5rem;
+          a {
+            text-decoration: none;
+          }
         }
         &:last-child {
           border-right: 1px solid $eva_bluegrey;
@@ -65,82 +72,15 @@ table.index_table {
           color: $eva_main_blue;
         }
         &.col-actions {
-          width: 40px;
-          position: relative;
-          background: image-url('roue-dentee.svg') right 1rem center no-repeat;
-          background-color: #FFF;
-
-          .table_actions {
-            opacity: 0;
-            transition: opacity 0.2s;
-            display: flex;
-            justify-content: flex-end;
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 98%;
-            background: #fff;
-            align-items: center;
-            padding: 0 0 0 1rem;
-
-            a {
-              height: 1.5rem;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              padding: 0.25rem 0.5rem;
-              color: $eva_light;
-              margin: 0;
-              text-decoration: none;
-              background-color: $couleur-texte;
-              min-width: 3rem;
-              box-sizing: border-box;
-              font-size: .75rem;
-
-              &.view_link {
-                background-color: $couleur-legere-accent-validation;
-                color: $eva_dark;
-              }
-              &.edit_link {
-                background-color: $eva_main_blue;
-              }
-              &.delete_link {
-                background-color: $couleur-accent-erreur;
-              }
-              &:first-child {
-                border-top-left-radius: 0.25rem;
-                border-bottom-left-radius: 0.25rem;
-              }
-              &:last-child {
-                border-top-right-radius: 0.25rem;
-                border-bottom-right-radius: 0.25rem;
-              }
-            }
-          }
-
-          .actions_visibles {
-            opacity:1;
-          }
+          @include menu-actions();
         }
         &.col-illustration {
           line-height: 0;
         }
       }
 
-      &:hover {
-        .col-actions {
-          background-image: none;
-
-          .table_actions {
-            opacity: 1;
-          }
-        }
-      }
-
       &.anonyme {
         td {
-          background-color: $eva_light;
           color: $eva_dark_blue_grey;
 
           a {

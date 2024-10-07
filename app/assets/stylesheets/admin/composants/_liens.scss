@@ -11,7 +11,7 @@
 }
 
 @mixin lien-secondaire() {
-  @include lien($eva_dark);
+  @include lien($couleur-texte);
 }
 
 .lien-retour {
@@ -20,11 +20,11 @@
   align-items: center;
   display: flex;
   border: none;
-  padding: 0;
-  padding-right: 1rem;
+  padding: .25rem .5rem;
+  margin-right: 0.5rem;
 
   &, &:link, &:visited {
-    color: $eva_dark;
+    color: $couleur-texte;
     text-decoration: none;
   }
 
@@ -33,6 +33,10 @@
     margin-right: .5rem;
     // fix alignement vertical
     line-height: 0px;
+  }
+
+  &:hover {
+    background-color: $grey-1000-hover;
   }
 }
 

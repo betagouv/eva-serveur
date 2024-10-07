@@ -26,7 +26,7 @@
   }
   a,
   a:link {
-    color: #fff;
+    color: $grey-1000;
     @include texte-xs;
   }
   ul.tabs {
@@ -41,7 +41,7 @@
       &:hover > a,
       &.current > a {
         color: $eva_main_blue;
-        background: #fff;
+        background: $grey-1000;
       }
       > a {
         padding: 0.438rem 0.813rem;
@@ -54,41 +54,27 @@
           background: none;
         }
         &.current > a {
-          background-color: #fff;
+          background-color: $grey-1000;
         }
         &:hover > a {
           border-top-right-radius: 0.6rem;
           border-top-left-radius: 0.6rem;
-          border-bottom: 0.3rem solid #fff;
+          border-bottom: 0.3rem solid $grey-1000;
           background: none;
-          background-color: #fff;
+          background-color: $grey-1000;
         }
         .menu_item > a:hover {
           text-decoration: underline;
         }
       }
       ul {
-        background-color: #fff;
+        background-color: $grey-1000;
         li {
           a,
           a:hover {
             color: $eva_main_blue;
           }
         }
-      }
-    }
-    #aide {
-      position: absolute;
-      top: 50%;
-      right: 1.25rem;
-      margin-top: -.52rem;
-      a {
-        padding-left: 2rem;
-        background: $eva_main_blue asset-data-url('icon_aide.svg') no-repeat 10px 8px;
-      }
-      a:hover,
-      &.current > a {
-        color: #fff;
       }
     }
   }
@@ -116,7 +102,7 @@
     text-align: left;
     font-size: 0;
     border-radius: 1rem;
-    background-color: #fff;
+    background-color: $grey-1000;
     overflow: hidden;
     padding: 0;
     margin-bottom: auto;
@@ -142,7 +128,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: $eva_dark;
+        color: $couleur-texte;
         background-color: transparent;
         &:hover {
           color: $eva_main_blue;
@@ -159,7 +145,7 @@
       &_email {
         margin-bottom: .75rem;
         a {
-          color: $eva_dark_blue_grey;
+          color: $couleur-texte-light;
           &:hover {
             color: $eva_main_blue;
           }
@@ -223,7 +209,7 @@
           height: 1.25rem;
           right: $padding-horizontale;
           bottom: $padding-verticale;
-          background: asset-data-url('roue-dentee-blanche.svg') no-repeat center;
+          background: asset-data-url('roue-dentee.svg') no-repeat center;
         }
       }
 

@@ -1,8 +1,4 @@
 .admin_structures, .admin_structures_locales, .admin_structures_administratives {
-  $grid-columns: 6;
-  $grid-gutter-width: 1.25rem;
-  @import "../../bootstrap_grid";
-
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);
@@ -16,6 +12,10 @@
   }
 
   &.show {
+    $grid-columns: 6;
+    $grid-gutter-width: 1.25rem;
+    @import "../../bootstrap_grid";
+
     $largeur_image_entete: 12rem;
     $position_image_entete: 1.5rem;
     .bloc-structure-infos {
@@ -44,7 +44,7 @@
             font-family: $font-texte;
             font-weight: normal;
             text-transform: none;
-            color: $eva_dark;
+            color: $couleur-texte;
           }
         }
       }
@@ -57,7 +57,7 @@
 
     #bloc-membres {
       .panel-invitation {
-        background: $eva_dark;
+        background: $eva_bluegrey;
         margin-bottom: 1rem;
 
         .container-instructions {
@@ -65,13 +65,13 @@
         }
           &-message, &-lien {
             font-size: 0.875rem;
-            color: $eva_light;
+            color: $couleur-texte;
           }
           &-message {
             width: 100%;
 
             p {
-              margin-bottom: 1rem;
+              margin: 0 1rem 1rem 0;
             }
           }
       }
@@ -80,7 +80,7 @@
         margin-bottom: 2rem;
         .sous-titre {
           font-family: $font-texte;
-          color: $eva_dark;
+          color: $couleur-texte;
           display: flex;
           align-items: center;
           margin-bottom: 0.5rem;
@@ -98,6 +98,9 @@
         td, th { padding: .625rem .75rem; }
         .col-derniere_evaluation {
           min-width: 7.5rem;
+        }
+        .col-actions {
+          background-image: none;
         }
       }
     }

@@ -6,7 +6,7 @@
 
   &.carte-liste {
     @include texte-xs;
-    color: $eva_dark;
+    color: $couleur-texte;
     padding: 0 1rem;
     min-height: 3rem;
     margin-bottom: 0;
@@ -17,18 +17,13 @@
       font-weight: bold;
 
       a {
-        color: $eva_dark;
+        color: $couleur-texte;
         text-decoration: none;
       }
     }
 
-    .tag {
-      background-color: white;
-    }
-
     &:hover {
-      background-color: $eva_main_blue;
-      color: white;
+      background-color: $eva_main_light;
     }
   }
 
@@ -37,9 +32,6 @@
   }
 
   .card__banner {
-    &.card__banner--alert {
-      background-color: $eva-orange;
-    }
     h4 {
       margin-bottom: 1rem;
     }
@@ -47,13 +39,15 @@
       $banner-padding: 1.5rem;
       padding: $banner-padding;
       gap: 2rem;
+      background-color: $success-950;
+      color: $success-425;
       h4 {
         margin-bottom: 2rem;
+        color: $success-425;
       }
       p {
         margin-bottom: 0.5rem;
       }
-      background-color: $eva-green;
       &__button {
         display: flex;
         flex-direction: row-reverse;
@@ -68,7 +62,7 @@
         margin: 0;
       }
     }
-    .bouton-principal {
+    .bouton-carte-principal {
       display: block;
       max-width: 10.5rem;
     }

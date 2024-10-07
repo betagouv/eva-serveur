@@ -9,11 +9,16 @@ ActiveAdmin.register StructureAdministrative do
   filter :created_at
 
   index do
-    column :nom
+    column :nom do |sa|
+      link_to sa.nom, admin_structure_administrative_path(sa)
+    end
     column :created_at do |structure|
       l(structure.created_at, format: :sans_heure)
     end
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

@@ -9,7 +9,7 @@
           <%= md t('.invitation') %>
         </div>
         <div>
-          <button style= "white-space: nowrap" class="button copier-coller" type="button" data-clipboard-text="<%= url %>">Copier l'URL</button>
+          <button style= "white-space: nowrap" class="bouton-secondaire petit-bouton copier-coller" type="button" data-clipboard-text="<%= url %>">Copier l'URL</button>
         </div>
       </div>
       <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
@@ -21,13 +21,13 @@
       <% if can?(:autoriser, compte) %>
         <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
                                   method: :patch,
-                                  class: 'action lien-autoriser' %>
+                                  class: 'action' %>
       <% end %>
-      <%= 
+      <%=
         if can?(:refuser, compte)
           link_to 'Refuser', refuser_admin_compte_path(compte),
                             method: :patch,
-                            class: 'action lien-refuser'
+                            class: 'action'
         end
       %>
     <% end %>
@@ -39,7 +39,7 @@
         if can?(:refuser, compte)
           link_to 'Refuser', refuser_admin_compte_path(compte),
                             method: :patch,
-                            class: 'action lien-refuser'
+                            class: 'action'
         end
       %>
     <% end %>
@@ -50,7 +50,7 @@
       <% if can?(:autoriser, compte) %>
         <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
                                   method: :patch,
-                                  class: 'action lien-autoriser' %>
+                                  class: 'action' %>
       <% end %>
     <% end %>
   </div>

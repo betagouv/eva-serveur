@@ -4,7 +4,7 @@
     margin-top: 50vh;
 
     .modal-content {
-      padding: 1rem;
+      @include panel_alerte;
       font-size: 0.875rem;
       align-items: center;
       flex-direction: row;
@@ -27,22 +27,15 @@
     }
   }
 
-  &.modal-danger {
+  &.modal-info {
     .modal-content {
-      background-color: $eva_red;
-      color: $eva_light;
-
-      &::before {
-        background-image: asset-data-url('icones/error.svg');
-        content: '';
-        height: 4rem;
-        background-repeat: no-repeat;
-        background-size: cover;
-        flex: 0 0 4rem;
-      }
+      @include panel_alerte_couleur($info-425, 'icones/info.svg');
     }
-    .bouton-light {
-      color: $eva_red;
+  }
+
+  &.modal-alerte {
+    .modal-content {
+      @include panel_alerte_couleur($warning-425, 'icones/alert.svg');
     }
   }
 }

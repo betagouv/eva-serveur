@@ -7,7 +7,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
 
   permit_params :libelle, :nom_technique, :description, :illustration, :supprimer_illustration,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_intitule,
-                :zone_depot_url, :supprimer_zone_depot_url,
+                :supprimer_zone_depot, :zone_depot,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 reponses_attributes: %i[id illustration position type_choix position_client
                                         nom_technique _destroy]
@@ -18,12 +18,17 @@ ActiveAdmin.register QuestionGlisserDeposer do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_question_glisser_deposer_path(q)
+    end
     column :intitule do |question|
       question.transcription_intitule&.ecrit
     end
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

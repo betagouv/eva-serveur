@@ -22,14 +22,14 @@
       text-overflow: ellipsis;
       font-family: $font-titre;
       @include h2;
-      color: #fff;
+      color: $grey-50;
     }
 
     .breadcrumb {
       margin-bottom: 0.5rem;
 
       a, .breadcrumb_sep {
-        color: $eva_bluegrey;
+        color: $couleur-texte;
       }
 
       .breadcrumb_sep {

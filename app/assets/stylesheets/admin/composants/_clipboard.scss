@@ -1,7 +1,0 @@
-.copier-coller {
-  @include bouton-carte($couleur-legere-accent-validation, $eva_dark);
-  cursor: pointer;
-  &:not(.disabled):hover {
-    background-color: #fff;
-  }
-}

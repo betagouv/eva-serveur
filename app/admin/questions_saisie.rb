@@ -17,13 +17,18 @@ ActiveAdmin.register QuestionSaisie do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_question_saisie_path(q)
+    end
     column :categorie
     column :intitule do |question|
       question.transcription_intitule&.ecrit
     end
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

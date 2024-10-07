@@ -8,7 +8,7 @@
   font-size: .875rem;
   min-height: 3rem;
 
-  .information-principale, 
+  .information-principale,
   .information-secondaire {
     word-break: break-word;
   }
@@ -34,38 +34,21 @@
   .actions {
     display: flex;
     justify-content: flex-end;
+    gap: 3px;
     min-width: 8rem;
 
     .action {
+      @include bouton-secondaire;
+      @include petit-bouton;
       height: 1.5rem;
       display: flex;
       justify-content: center;
       width: 4rem;
       align-items: center;
-      color: $eva_light;
       margin: 0;
       text-decoration: none;
-      background-color: $couleur-texte;
       box-sizing: border-box;
       font-size: .75rem;
-
-      &.lien-autoriser {
-        background-color: $couleur-liens;
-      }
-
-      &.lien-refuser {
-        background-color: $couleur-warning;
-        color: $eva_dark;
-      }
-
-      &:first-child {
-        border-top-left-radius: 0.25rem;
-        border-bottom-left-radius: 0.25rem;
-      }
-      &:last-child {
-        border-top-right-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
-      } 
     }
   }
 }

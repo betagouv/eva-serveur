@@ -63,7 +63,9 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:abandonnistes)
 
   index do
-    column :prenom
+    column :prenom do |compte|
+      link_to compte.prenom, admin_compte_path(compte)
+    end
     column :nom
     column :email
     column :telephone
@@ -78,6 +80,9 @@ ActiveAdmin.register Compte do
       column :created_at
     end
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   action_item :stats, only: :index, if: -> { can? :manage, Compte } do

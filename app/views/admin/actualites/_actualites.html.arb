@@ -24,19 +24,19 @@ div class: 'actualites' do
             l actualite.created_at, format: :sans_heure
           end
           if can?(:manage, Actualite)
-            span class: 'action action-multiple' do
-              text_node link_to t('.action.lire'), admin_actualite_path(actualite),
-                                class: 'lien lien-lire'
-              text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite),
-                                class: 'lien lien-modifier'
-              text_node link_to t('.action.supprimer'), admin_actualite_path(actualite),
-                                method: :delete,
-                                data: { confirm: t('.action.supprimer-confirmation') },
-                                class: 'lien lien-supprimer'
+            span class: 'menu-actions' do
+              div class: 'table_actions' do
+                text_node link_to t('.action.lire'), admin_actualite_path(actualite)
+                text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite)
+                text_node link_to t('.action.supprimer'), admin_actualite_path(actualite),
+                                  method: :delete,
+                                  data: { confirm: t('.action.supprimer-confirmation') }
+              end
             end
+            render partial: 'components/bouton_menu_actions'
           else
             span class: 'action' do
-              link_to t('.action.lire'), admin_actualite_path(actualite), class: 'lien lien-lire'
+              link_to t('.action.lire'), admin_actualite_path(actualite), class: 'action-simple'
             end
           end
         end

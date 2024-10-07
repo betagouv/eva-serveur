@@ -34,7 +34,8 @@
       }
 
       > a {
-        @include bouton-arrondi;
+        @include bouton-primaire;
+        @include grand-bouton;
         display: inline-block;
       }
     }
@@ -89,9 +90,6 @@
             flex: 1;
           }
         }
-        .bouton-jouer {
-          @include bouton-carte($eva_main_blue);
-        }
       }
     }
   }
@@ -103,6 +101,24 @@
 
   .evaluations-sans-mise-en-action {
     box-shadow: none;
+
+    .contenu-avec-evaluations {
+      background-color: $blue-france-950;
+      padding-bottom: 0.5rem;
+    }
+
+    .card {
+      box-shadow: none;
+
+      &.carte--deroulee {
+        border-radius: .5rem .5rem 0 0;
+        box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+
+        & ~ .qcm {
+          box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+        }
+      }
+    }
 
     .carte-liste {
       height: 3rem;
@@ -143,7 +159,7 @@
     }
 
     .banniere-solutions-illettrisme, .description {
-      a { color: $eva_dark; }
+      a { color: $couleur-texte }
     }
 
     .contenu-avec-evaluations {
@@ -177,8 +193,6 @@
 
     .qcm {
       position: absolute;
-      border: solid 1px white;
-      border-top: none;
     }
   }
 
@@ -190,6 +204,7 @@
 
   .mise-en-action__texte {
     text-align: right !important;
+    color: $eva_main_blue;
   }
 
   .actions {

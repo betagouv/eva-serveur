@@ -4,7 +4,7 @@ $panels-gap: 1rem;
 
 body.logged_out {
   font-size: .875rem;
-  background-color: $eva_light;
+  background-color: $grey-1000;
 
   #wrapper {
     flex-direction: column;
@@ -13,7 +13,7 @@ body.logged_out {
     position: relative;
     &::before {
       content: '';
-      background: $eva_dark image-url('vagues-verticales.svg') no-repeat top center;
+      background: $eva_main_blue image-url('vagues-verticales.svg') no-repeat top center;
       height: 100%;
       display: block;
       position: absolute;
@@ -65,7 +65,7 @@ body.logged_out {
         width: 6rem;
       }
       h1 {
-        color: $eva_light;
+        color: $grey-50;
         font-size: 1.5rem;
         line-height: 1.875rem;
         font-weight: bold;
@@ -88,7 +88,7 @@ body.logged_out {
       border-top-left-radius: 0.5rem;
       border-top-right-radius: 0.5rem;
       box-shadow: none;
-      color: $eva_dark;
+      color: $grey-50;
       background: none;
     }
 
@@ -137,7 +137,7 @@ body.logged_out {
       }
       .panel--connexion {
         .panel-header {
-          background-color: $eva_dark;
+          background-color: $eva_main_blue;
         }
       }
       .panel-description {
@@ -149,11 +149,12 @@ body.logged_out {
       }
       .panel--evaluation {
         .panel-header {
-          background-color: $eva_main_blue;
+          color: $grey-50;
+          background-color: $eva-orange;
         }
         .panel-content {
           form {
-            margin-top: 2rem;
+            margin-top: 1rem;
           }
         }
       }
@@ -189,13 +190,14 @@ body.logged_out {
         margin-top: 1rem;
 
         .action-principale {
-          @include bouton-carte($eva_dark);
+          @include bouton-primaire;
+          @include grand-bouton;
+          display: inline-flex;
           height: 2rem;
           border-radius: 2.875rem;
           align-items: center;
           font-size: 0.875rem;
           padding: 0 0.94rem;
-          color: #fff;
         }
       }
     }
@@ -215,13 +217,14 @@ body.logged_out {
 
       .bouton-action {
         .actions {
-          @include bouton-carte($eva_dark);
+          @include bouton-primaire;
+          @include grand-bouton;
+          display: inline-flex;
           height: 3.625rem;
-          border-radius: 2.875rem;
           align-items: center;
           font-size: 1rem;
           padding: 0 1rem;
-          color: #fff;
+          color: $grey-1000;
         }
       }
     }
@@ -232,8 +235,7 @@ body.logged_out {
       input[type="text"],
       input[type="email"],
       input[type="password"] {
-        width: auto;
-        flex: 1;
+        width: 100%;
       }
       li {
         padding: 0;
@@ -247,7 +249,7 @@ body.logged_out {
 
   form {
     .inputs {
-      background-color: #fff;
+      background-color: $grey-1000;
       margin-bottom: 1rem;
     }
     .buttons li,
@@ -287,7 +289,7 @@ body.logged_out {
     }
 
     a {
-      color: $eva_main_blue;
+      color: white;
     }
   }
 

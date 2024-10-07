@@ -4,12 +4,12 @@
   margin-bottom: 3.75rem;
   position: relative;
   font-size: 0.875rem;
-  color: $eva_dark;
+  color: $couleur-texte;
   p:last-child {
     margin-bottom: 0;
   }
   a {
-    color: $eva_light;
+    color: $couleur-texte;
   }
   .contact {
     &__description {
@@ -24,7 +24,7 @@
       right: 1.625rem;
       border-radius: 1rem;
       transform: rotate(3deg);
-      background-color: $eva_main_blue;
+      background-color: $eva_bluegrey;
     }
   }
   .support {
@@ -38,7 +38,6 @@
       margin-bottom: 1.6rem;
       h4 {
         margin-left: 0.625rem;
-        color: $eva_light;
       }
     }
     &__logo {

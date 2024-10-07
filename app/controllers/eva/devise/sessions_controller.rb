@@ -31,7 +31,7 @@ module Eva
 
       def sign_in_avec_message(compte)
         if compte.confirmed?
-          set_flash_message!(:notice, :signed_in)
+          set_flash_message! :success, :signed_in
         else
           set_flash_message! :alert, :"signed_in_but_#{compte.inactive_message}"
         end

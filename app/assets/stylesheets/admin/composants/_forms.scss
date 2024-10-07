@@ -1,27 +1,43 @@
 @mixin base-input {
-  color: $eva_dark;
-  border-radius: .5rem;
-  border: 1px solid $eva_bluegrey;
-  padding: 0.5rem;
-
-  &:focus-visible {
-    outline: none;
-  }
+  background-color: $grey-950;
+  border-radius: .25rem .25rem 0 0;
+  border: 0;
+  box-shadow: inset 0 -2px 0 0 $grey-200;
+  color: $grey-200;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: .5rem 1rem;
+  width: 100%;
+  text-rendering: optimizeLegibility;
 
   &:focus {
-    border-color: $eva_main_blue;
-    @include ombre();
-  }
-
-  &::placeholder {
-    color: $couleur-texte;
+    border: 0;
+    outline-color: #0a76f6;
+    outline-offset: 2px;
+    outline-style: solid;
+    outline-width: 2px;
   }
 }
+
+input::placeholder {
+  color: $grey-425;
+  font-style: italic;
+  opacity: 1;
+}
+
+form fieldset.inputs {
+  max-width: 70%;
+}
+
+.panel form fieldset.inputs, form .panel fieldset.inputs {
+  max-width: 100%;
+}
+
 
 form {
   fieldset {
     padding: 0;
-    margin-bottom: 0;
 
     &.inputs,
     legend span {
@@ -40,8 +56,6 @@ form {
     > ol > li {
       padding: 0;
       margin-bottom: 1rem;
-      display: flex;
-      flex-wrap: wrap;
 
       &.has_many_container {
         display: block;
@@ -51,21 +65,14 @@ form {
         margin-bottom: 0;
       }
 
-      fieldset {
-        flex: 1;
-        &:not(.inputs) ol {
-          padding-left:33%;
-        }
-      }
-
       label {
         line-height: 1.875rem;
-        font-size: .875rem;
-        width: 33%;
+        font-size: 1rem;
+        width: 100%;
         padding-right: .75rem;
         text-transform: none;
         font-weight: normal;
-        color: $eva_dark;
+        color: $couleur-texte;
         abbr[title] {
           text-decoration:none;
           color: $couleur-accent-erreur;
@@ -76,19 +83,27 @@ form {
         display: flex;
         align-items: center;
         width: 100%;
-      }
-
-      &.boolean label, .liens-partages {
-        padding-left: 33%;
-      }
-
-      &.libelle-long {
-        label {
-          line-height: 1;
-        }
+        padding-left: 0;
       }
 
       &.error {
+        position: relative;
+
+        &::before {
+          background-image: linear-gradient(0deg,$error-425,$error-425);
+          background-position: 0 0;
+          background-repeat: no-repeat;
+          background-size: .125rem 100%;
+          bottom: 0;
+          content: "";
+          display: block;
+          left: -.75rem;
+          pointer-events: none;
+          position: absolute;
+          right: -.75rem;
+          top: 0;
+        }
+
         input[type="text"],
         input[type="password"],
         input[type="email"],
@@ -98,20 +113,39 @@ form {
         input[type="date"],
         input[type="time"],
         input[type="search"],
+        select,
         textarea {
-          border-color: $eva_red;
+          border: 1px solid $eva_red;
+        }
+        label {
+          color: $eva_red;
         }
       }
 
-      p.inline-errors,
-      p.inline-hints {
-        margin-left: 33%;
-      }
       p.inline-errors {
         color: $eva_red;
+        margin: 0.3em 0 0 0;
+        font-weight: normal;
+        font-size: .75rem;
+        margin-top: 1rem;
+
+        &::before {
+          --icon-size: 1rem;
+          mask-image: asset-data-url('icone_erreur.svg');
+          background-color: currentColor;
+          content: "";
+          display: inline-block;
+          flex: 0 0 auto;
+          height: var(--icon-size);
+          margin-right: .25rem;
+          -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+          vertical-align: calc((.75em - var(--icon-size))*.5);
+          width: var(--icon-size);
+        }
       }
       p.inline-hints {
-        color: $eva_dark;
+        color: $couleur-texte;
         a {
           float: none;
         }
@@ -119,35 +153,29 @@ form {
     }
     select {
       appearance: none;
-      height: 2rem;
       position: relative;
       padding-left: .5rem;
       padding-right: 2rem;
-      background-color: white;
     }
     li.select {
       position: relative;
 
-      &:after {
+      &::after {
         content: '';
         color: $eva_main_blue;
         right: 0.7rem;
-        top: 0.4rem;
+        top: 2.4rem;
         position: absolute;
         pointer-events: none;
         background-image: asset-data-url('fleche_select.svg');
         height: 1rem;
         width: 1rem;
       }
-
       .select2-selection__arrow {
         display: none;
       }
       .select2-selection__clear {
         margin-right: .7rem;
-      }
-      .select2-selection {
-        height: 100%;
       }
     }
     &.actions {
@@ -174,7 +202,6 @@ form {
   select,
   textarea {
     @include base-input();
-    width: 67%;
   }
 
   input[type="search"] {
@@ -182,11 +209,6 @@ form {
     background-repeat: no-repeat;
     background-position: 0.5rem center;
     padding-left: 2rem;
-  }
-
-  input[type=submit]:disabled {
-    background-color: $eva_bluegrey;
-    border-color: $eva_bluegrey;
   }
 }
 
@@ -201,42 +223,19 @@ form {
   }
 }
 
-/* FILTRES */
-.sidebar_section form {
-  label {
-    text-transform: none;
-    font-weight: normal;
-    color: $eva_dark;
-  }
-  &.filter_form {
-    input[type="text"] {
-      color: $eva_dark;
-      border-color: $eva_bluegrey;
-      border-radius: .5rem;
-      &:focus {
-        border: 1px solid $eva_main_blue;
-        @include ombre();
-      }
-    }
-    ::placeholder {
-      color: $couleur-texte;
-    }
-  }
-}
-
 /* SELECT2 */
 form:not(.filter_form) .select2-container {
-  width: 67% !important;
+  width: 100% !important;
 }
 .select2 {
   &-container {
-    height: 32px;
     .select2-selection {
-      border-radius: .5rem;
+      @include base-input();
+      height: 2.5rem;
     }
   }
   &-results__option {
-    color: $eva_dark;
+    color: $couleur-texte;
     &:focus {
       border: 1px solid $eva_main_blue;
       @include ombre();
@@ -249,6 +248,6 @@ form:not(.filter_form) .select2-container {
     border-color: $eva_main_blue transparent transparent transparent;
   }
   .select2-selection__rendered {
-    color: $eva_dark;
+    color: $couleur-texte;
   }
 }

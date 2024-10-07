@@ -5,7 +5,20 @@ panel 'Détails de la question' do
     row :id
     row :libelle
     row :nom_technique
-    row(:transcription_intitule) { md(question_sous_consigne.transcription_intitule&.ecrit) }
+    row :illustration do
+      if resource.illustration.attached?
+        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(resource.illustration), class: 'image-preview'
+        end
+      end
+    end
+    intitule = question_sous_consigne.transcription_intitule
+    row :intitule do
+      div intitule.ecrit if intitule&.ecrit
+    end
+    row :audio_intitule do
+      tag_audio(intitule)
+    end
     row :created_at
   end
 end

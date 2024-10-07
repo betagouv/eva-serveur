@@ -44,13 +44,13 @@ div id: 'evaluation__details', class: 'row' do
                       parties_selectionnees: params[:parties_selectionnees],
                       format: :pdf
                     },
-                    class: 'bouton bouton-arrondi', target: '_blank', rel: 'noopener')
+                    class: 'bouton grand-bouton', target: '_blank', rel: 'noopener')
           end
         end
       end
       unless resource.complete?
         div class: 'row m-0' do
-          div class: 'container card__banner card__banner--alert d-flex' do
+          div class: 'container card__banner bg-alerte d-flex' do
             div(class: 'col-2 d-flex align-items-center justify-content-center') do
               svg_tag_base64 'attention_icone.svg', class: 'banner__icone'
             end

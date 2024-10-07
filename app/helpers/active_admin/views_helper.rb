@@ -7,5 +7,6 @@ module ActiveAdmin
     include ErreurHelper
     include PriseEnMainHelper
     include TranscriptionHelper
+    include QuestionHelper
   end
 end

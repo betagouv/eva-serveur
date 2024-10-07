@@ -14,11 +14,16 @@ ActiveAdmin.register ParcoursType do
   form partial: 'form'
 
   index do
-    column :libelle
+    column :libelle do |pt|
+      link_to pt.libelle, admin_parcours_type_path(pt)
+    end
     column :nom_technique
     column :duree_moyenne
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

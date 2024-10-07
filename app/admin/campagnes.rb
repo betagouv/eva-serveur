@@ -29,7 +29,9 @@ ActiveAdmin.register Campagne do
   end
 
   index do
-    column :libelle
+    column :libelle do |campagne|
+      link_to campagne.libelle, admin_campagne_path(campagne)
+    end
     column :code
     column :nombre_evaluations, class: 'col-nombre_evaluations text-right',
                                 sortable: :nombre_evaluations
@@ -39,6 +41,9 @@ ActiveAdmin.register Campagne do
     column :compte if can?(:manage, Compte)
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

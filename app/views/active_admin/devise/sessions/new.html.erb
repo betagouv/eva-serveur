@@ -66,7 +66,7 @@
         <%= form_with url: connexion_espace_jeu_path do |form| %>
           <fieldset class='inputs'>
             <ol>
-              <li class='input'>
+              <li class='input <%= params[:code_erreur] ? "error" : ""%>'>
                 <%= form.label :code, t('active_admin.devise.login.evaluations.campagne') %>
                 <% code = params[:code] %>
                 <%= form.text_field :code, placeholder: 'DEMO', value: code %>

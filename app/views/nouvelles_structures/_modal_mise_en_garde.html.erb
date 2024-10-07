@@ -1,4 +1,4 @@
-<div class="modal modal--static" tabindex="-1" role="dialog">
+<div class="modal modal-alerte modal--static" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -7,10 +7,10 @@
           <p><%= md t('.message')%></p>
         </div>
         <div class='actions'>
-          <%= link_to t('.bouton_retour'), 'javascript:history.back()', class: 'bouton bouton-light' %>
+          <%= link_to t('.bouton_retour'), 'javascript:history.back()', class: 'bouton-secondaire petit-bouton' %>
           <%= link_to t('.bouton'),
             url_for(params.permit(:code_postal)),
-            class: 'bouton' %>
+            class: 'bouton petit-bouton' %>
         </div>
       </div>
     </div>

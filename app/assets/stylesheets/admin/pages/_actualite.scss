@@ -11,14 +11,14 @@
     }
 
     .actualite-complete {
-      color: $eva_dark;
-    
+      color: $couleur-texte;
+
       .titre {
         @include titre();
         font-size: 2.25rem;
         margin-bottom: 2rem;
       }
-    
+
       .illustration {
         img {
           width: 100%;
@@ -26,24 +26,24 @@
         }
         margin-bottom: 2rem;
       }
-    
+
       .contenu {
         @include make-col(3, 5);
         @include make-col-offset(1, 5);
         padding: 0 .625rem;
-    
+
         img, iframe, blockquote {
           width: calc(100% + 2.5rem);
           border-radius: .5rem;
           margin: 0 -1.25rem;
         }
-    
+
         a {
           color: $eva_main_blue;
         }
       }
     }
-    
+
     .actualite-complete,
     .details-actualite,
     .autres-actualites {
@@ -76,15 +76,15 @@
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
-    
+
         .tag-categorie {
           margin-right: 1rem;
         }
-    
+
         .lien {
           color: $eva_main_blue;
           text-decoration: underline;
-    
+
           &:hover {
             text-decoration: none;
           }

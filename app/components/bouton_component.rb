@@ -4,36 +4,27 @@ class BoutonComponent < ViewComponent::Base
   attr_accessor :type
 
   PRIMARY_CLASSES = %w[
-    bouton-arrondi
+    bouton
+    grand-bouton
   ].freeze
-  OUTLINE_CLASSES = %w[
-    bouton-arrondi
+  SECONDARY_CLASSES = %w[
+    bouton-secondaire
+    grand-bouton
     text-primary
-    border-primary
-    bg-white
-  ].freeze
-  OUTLINE_ORANGE_CLASSES = %w[
-    bouton-arrondi
-    text-orange
-    border-orange
-    bg-white
   ].freeze
   DESACTIVE_CLASSES = %w[
-    bouton-arrondi
-    bouton--desactive
-  ].freeze
-  BASE_CLASSES = %w[
     bouton
+    grand-bouton
+    bouton--desactive
   ].freeze
 
   BUTTON_TYPE_MAPPINGS = {
     primary: PRIMARY_CLASSES,
-    outline: OUTLINE_CLASSES,
-    outline_orange: OUTLINE_ORANGE_CLASSES,
+    secondary: SECONDARY_CLASSES,
     desactive: DESACTIVE_CLASSES
   }.freeze
 
-  def initialize(body, url, type: nil, **params)
+  def initialize(body, url, type: :primary, **params)
     @body = body
     @url = url
     @type = type
@@ -43,9 +34,6 @@ class BoutonComponent < ViewComponent::Base
   end
 
   def classes
-    classes = BASE_CLASSES
-    classes += BUTTON_TYPE_MAPPINGS[@type] if @type.present?
-    classes = classes.flatten
-    classes.join(' ')
+    BUTTON_TYPE_MAPPINGS[@type].join(' ')
   end
 end

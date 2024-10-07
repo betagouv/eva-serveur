@@ -35,7 +35,9 @@ ActiveAdmin.register StructureLocale do
   sidebar :aide_filtres, only: :index, if: -> { params[:stats] }
 
   index do
-    column :nom
+    column :nom do |sl|
+      link_to sl.nom, admin_structure_locale_path(sl)
+    end
     column(:type_structure) do |structure|
       traduction_type_structure(structure.type_structure)
     end
@@ -46,6 +48,9 @@ ActiveAdmin.register StructureLocale do
     column :nombre_evaluations, sortable: :nombre_evaluations
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   csv do

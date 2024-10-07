@@ -1,84 +1,132 @@
-// bouton carré
-@mixin bouton() {
+@mixin base-boutons() {
   &, &:link, &:visited {
     text-decoration: none;
-    color: $eva_light;
   }
   display: inline-block;
   cursor: pointer;
-  box-shadow: none;
-  padding: .25rem .5rem;
-  min-width: 3rem;
-  @include texte-xs();
   font-family: $font-texte;
   text-align: center;
+  box-shadow: none;
 
-  border-radius: 0.25rem;
-  border: 1px solid transparent;
-  background-color: $eva_main_blue;
-  &:not(.disabled):hover {
-    background-color: #fff;
-    border-color: $eva_main_blue;
-    color: $eva_main_blue;
-    box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+  border: 1px solid;
+
+  &:disabled, &:disabled:hover {
+    cursor: default;
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
   }
 }
 
-@mixin bouton-arrondi() {
-  @include bouton();
+@mixin grand-bouton() {
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
   border-radius: 2.875rem;
 }
 
-// le nom est vraiment pas top
-@mixin bouton-carte($background-color, $color:$eva_light) {
-  @include bouton();
+@mixin petit-bouton() {
+  @include texte-xs();
+  padding: .25rem .5rem;
+  border-radius: 0.25rem;
+  min-width: 3rem;
+}
 
-  background-color: $background-color;
-  &, &:link, &:visited {
-    color: $color;
+@mixin bouton-primaire() {
+  @include base-boutons();
+  color: $eva_light;
+  border-color: $eva_main_blue;
+  background-color: $eva_main_blue;
+  &:not(.disabled):hover {
+    border-color: $blue-france-sun-113-hover;
+    background-color: $blue-france-sun-113-hover;
   }
-
-  // style bizarre
-  display: inline-flex;
-  justify-content: center;
-  box-sizing: border-box;
-
-  &:hover {
-    border-color: $background-color;
-    color: $background-color;
+  &:disabled:hover {
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
   }
 }
 
-@mixin boutons-groupes() {
-  @include bouton();
+@mixin bouton-secondaire() {
+  @include base-boutons();
+  color: $eva_main_blue;
+  border-color: $eva_main_blue;
+  background-color: $grey-1000;
+  box-shadow: none;
+  &:not(.disabled):hover {
+    filter: brightness(96%);
+  }
+}
+
+@mixin bouton-tertiaire {
+  @include bouton-secondaire;
+  border-color: $grey-900;
+
+  &:hover {
+    background-color: $grey-1000-hover;
+  }
+}
+
+@mixin bouton-tertiaire-sans-contour {
+  @include bouton-tertiaire();
+  border: none;
   border-radius: 0;
-  margin: 0;
+  padding: .75rem 1rem;
+  text-align: left;
+}
 
-  &:first-child {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-  &:last-child {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+$hauteur_menu_actions: 2rem;
+@mixin menu-actions() {
+  position: relative;
+
+  .table_actions {
+    opacity: 0;
+    height: 0;
+    transition: opacity 0.2s, height 0.2s;
+    overflow: hidden;
+    position: absolute;
+    top: calc(50% + #{$hauteur_menu_actions} / 2);
+    left: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: $grey-1000;
+    box-shadow: 0px 3px 9px rgba(0, 0, 18, 0.16);
+
+    a {
+      @include bouton-tertiaire-sans-contour;
+      box-shadow: 0 calc(-1rem - 1px) 0 -1rem $grey-900;
+      width: 100%;
+    }
+
+    a:first-child {
+      box-shadow: none;
+    }
+
+    &.montrer {
+      opacity: 1;
+      height: unset;
+      overflow: visible;
+
+      a:focus {
+        z-index: 2;
+      }
+    }
   }
 
-  &.view_link {
-    background-color: $couleur-legere-accent-validation;
-    border-color: $couleur-legere-accent-validation;
-    color: $eva_dark;
-  }
-  &.edit_link {
-    background-color: $eva_main_blue;
-    border-color: $eva_main_blue;
-    color: white;
-  }
-  &.delete_link {
-    background-color: $couleur-accent-erreur;
-    border-color: $couleur-accent-erreur;
-    color: white;
+  &:hover, &:focus-within {
+
+    .table_actions {
+      opacity: 1;
+      height: unset;
+      overflow: visible;
+
+      a:focus {
+        z-index: 2;
+      }
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-<button class="bouton"><%= t('.action') %></button>
+<button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t('.action') %></button>
 <%= form_with id: :recherche_responsable_suivi, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: 'hidden' do |f| %>
   <%= f.search_field :nom_responsable_suivi, placeholder: t('.placeholder'), class: 'champ-recherche' %>
   <%= f.hidden_field :responsable_suivi_id %>
@@ -6,7 +6,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const boutonAjout = $("#responsable_de_suivi_sidebar_section .bouton" );
+  const boutonAjout = $("#responsable_de_suivi_sidebar_section button" );
   const formulaireRecherche = $("#recherche_responsable_suivi" );
 
   afficheRecherche(boutonAjout, formulaireRecherche);

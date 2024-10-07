@@ -9,9 +9,9 @@ class ReferentielAnlciComponent < ViewComponent::Base
   end
 
   def badges_referentiel
-    commun = %w[profil1-blanc profil2-blanc profil3-blanc profil4-blanc]
-    officiel = %w[profil_4h-blanc profil_4h_plus-blanc profil_4h_plus_plus-blanc]
-    version_eva = %w[profil4_plus-blanc profil4_plus_plus-blanc]
+    commun = %w[profil1-referentiel profil2-referentiel profil3-referentiel profil4-referentiel]
+    officiel = %w[profil_4h-referentiel profil_4h_plus-referentiel profil_4h_plus_plus-referentiel]
+    version_eva = %w[profil4_plus-referentiel profil4_plus_plus-referentiel]
     return (commun << officiel).flatten if @type == 'officiel'
 
     (commun << version_eva).flatten

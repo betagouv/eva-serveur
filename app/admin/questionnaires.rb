@@ -25,10 +25,15 @@ ActiveAdmin.register Questionnaire do
   end
 
   index do
-    column :libelle
+    column :libelle do |q|
+      link_to q.libelle, admin_questionnaire_path(q)
+    end
     column :nom_technique
     column :created_at
     actions
+    column '', class: 'bouton-action' do
+      render partial: 'components/bouton_menu_actions'
+    end
   end
 
   show do

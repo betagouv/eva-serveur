@@ -5,6 +5,9 @@
 
   td.col, th.col {
     padding: .625rem .75rem;
+    &.col-actions {
+      padding: 0;
+    }
   }
 
   &.show {
@@ -33,8 +36,7 @@
         margin-bottom: 1rem;
       }
       &-code {
-        border: 2px solid $eva_green;
-        border-bottom: none;
+        border: 2px solid $success-425;
         .row {
           &-code {
             font-size: 1.5rem;
@@ -78,9 +80,6 @@
         .conteneur-action {
           padding-left: 8.5rem;
         }
-        .bouton-jouer {
-          @include bouton-carte($eva_main_blue);
-        }
       }
       &-situation {
         margin-top: 1.5rem;
@@ -118,7 +117,7 @@
           font-weight: normal;
           font-size: 0.875rem;
           text-transform: none;
-          color: $eva_dark;
+          color: $couleur-texte;
         }
       }
     }
@@ -149,12 +148,12 @@
       color: $eva_dark_blue_grey;
     }
 
-    fieldset.inputs {
-      background-color: #fff;
+    fieldset.inputs, fieldset.input-choix, fieldset.choices {
+      background-color: $grey-1000;
+
       input[type="text"],
       .select2 {
-        width: auto;
-        flex: 1;
+        width: 100%;
       }
     }
   }
@@ -163,6 +162,7 @@
 
   form fieldset.actions {
     margin-top: 2rem;
+
     ol {
       display: flex;
       justify-content: space-between;
@@ -171,15 +171,16 @@
       margin-bottom: 0;
     }
     .bouton-annuler a {
-      @include bouton-arrondi;
+      @include bouton-primaire;
+      @include grand-bouton;
       min-width: 6.563rem;
       text-align: center;
       margin-right: 0;
-      color: $eva_dark;
+      color: $couleur-texte;
       background-color: $eva_bluegrey;
       border-color: $eva_bluegrey;
       &:hover {
-        color: $eva_dark;
+        color: $couleur-texte;
         border-color: $eva_bluegrey;
       }
     }

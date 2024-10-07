@@ -1,16 +1,16 @@
 @mixin flash-alert() {
-  color: $eva-dark;
-  background-color: $eva-orange;
+  color: $warning-425;
+  background-color: $warning-950;
 }
 
 @mixin flash-success() {
-  color: $eva_dark_green;
-  background-color: $eva-green;
+  color: $success-425;
+  background-color: $success-950;
 }
 
 @mixin flash-error() {
-  background-color: $eva_red;
-  color: $eva_light;
+  color: $error-425;
+  background-color: $error-950;
 }
 
 .flash {
@@ -26,27 +26,24 @@ body.logged_in {
   }
 
   .flash {
-    @include ombre();
     display: flex;
     align-items: center;
     padding: .5rem 1.25rem;
     line-height: 1.5;
 
+    @include panel_alerte;
+    padding: 0.625rem 2.25rem 0.625rem 3.5rem;
+    border-top: 0;
+    &::before {
+      margin: 0.5rem;
+    }
+
     &:first-child {
       border-radius: 0 0 0.5rem 0.5rem;
     }
 
-    &::before {
-      content: '';
-      display: inline-block;
-      height: 2rem;
-      min-width: 2rem;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
     a {
-      color: $eva_dark;
+      color: $couleur-texte;
     }
 
     &_annonce_generale,
@@ -54,28 +51,19 @@ body.logged_in {
     &_evaluation_anonyme,
     &_beneficiaire_anonyme,
     &_alert {
-      @include flash-alert;
-
-      &::before {
-        background-image: asset-data-url('icones/alert.svg');
-      }
+      @include panel_alerte_couleur($warning-425, 'icones/alert.svg');
     }
 
-    &_notice,
-    &_success {
-      @include flash-success;
+    &_notice {
+      @include panel_alerte_couleur($info-425, 'icones/info.svg');
+    }
 
-      &::before {
-        background-image: asset-data-url('icones/notice.svg');
-      }
+    &_success {
+      @include panel_alerte_couleur($success-425, 'icones/success.svg');
     }
 
     &_error {
-      @include flash-error;
-
-      &::before {
-        background-image: asset-data-url('icones/error.svg');
-      }
+      @include panel_alerte_couleur($error-425, 'icones/error.svg');
 
       a {
         color: $eva_light;
@@ -101,7 +89,7 @@ body.logged_out {
     color: $eva_light;
     margin-bottom: 0;
     &_notice {
-      background-color: $eva_dark_green;
+      @include flash-success;
     }
     &_alert, &_error, &_recaptcha_error {
       @include flash-error;

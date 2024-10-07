@@ -23,10 +23,18 @@
   }
 }
 
-@mixin card__banner($color-title, $color-border, $color-image) {
-  border: 1px solid $color-border;
-  h5 { color: $color-title; }
-  .card__banner__icone { fill: $color-image; }
+@mixin card__banner-couleur($couleur-principale, $couleur-principale-legere) {
+  border: 1px solid $couleur-principale;
+  h5 { color: $couleur-principale; }
+  .card__banner__icone { fill: $couleur-principale; }
+  .mise-en-action__texte { color: $couleur-principale; }
+}
+
+.container--asterisque {
+  background-color: $eva_bluegrey;
+  a {
+    color: $couleur-texte;
+  }
 }
 
 #evaluation__details {
@@ -68,17 +76,17 @@
   }
 
   .card__banner {
-    &--alert {
+    &.bg-alerte {
       padding: 1rem 1.5rem;
       box-shadow: inset 0px 8px 8px -8px rgba(30, 65, 106, 0.25);
     }
 
     &--succes {
-      @include card__banner($eva_dark, $eva_green, $eva_green)
+      @include card__banner-couleur($success-425, $success-950);
     }
 
     &--en-attente {
-      @include card__banner($eva_orange, $eva_orange, $eva_orange)
+      @include card__banner-couleur($warning-425, $warning-950);
     }
 
     &--illettrisme {
@@ -88,7 +96,7 @@
         border-radius: 0 0 8px 8px;
       }
       .mise-en-action .tag {
-        @include tag-couleur-plein($eva_green);
+        @include tag-couleur($success-425, $success-950);
         margin: .5rem 0;
         font-weight: 400;
       }
@@ -104,10 +112,6 @@
 
       .banniere-solutions-illettrisme {
         @include texte-xs();
-
-        a {
-          color: $eva_dark;
-        }
       }
     }
 

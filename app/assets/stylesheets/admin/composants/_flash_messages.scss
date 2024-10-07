@@ -26,23 +26,20 @@ body.logged_in {
   }
 
   .flash {
-    @include ombre();
     display: flex;
     align-items: center;
     padding: .5rem 1.25rem;
     line-height: 1.5;
 
-    &:first-child {
-      border-radius: 0 0 0.5rem 0.5rem;
+    @include panel_alerte;
+    padding: 0.625rem 2.25rem 0.625rem 3.5rem;
+    border-top: 0;
+    &::before {
+      margin: 0.5rem;
     }
 
-    &::before {
-      content: '';
-      display: inline-block;
-      height: 2rem;
-      min-width: 2rem;
-      background-position: center;
-      background-repeat: no-repeat;
+    &:first-child {
+      border-radius: 0 0 0.5rem 0.5rem;
     }
 
     a {
@@ -54,30 +51,19 @@ body.logged_in {
     &_evaluation_anonyme,
     &_beneficiaire_anonyme,
     &_alert {
-      @include flash-alert;
-
-      &::before {
-        mask-image: url('icones/alert.svg');
-        background-color: currentColor;
-        mask-repeat: no-repeat;
-      }
+      @include panel_alerte_couleur($warning-425, 'icones/alert.svg');
     }
 
-    &_notice,
-    &_success {
-      @include flash-success;
+    &_notice {
+      @include panel_alerte_couleur($info-425, 'icones/info.svg');
+    }
 
-      &::before {
-        background-image: asset-data-url('icones/notice.svg');
-      }
+    &_success {
+      @include panel_alerte_couleur($success-425, 'icones/success.svg');
     }
 
     &_error {
-      @include flash-error;
-
-      &::before {
-        background-image: asset-data-url('icones/error.svg');
-      }
+      @include panel_alerte_couleur($error-425, 'icones/error.svg');
 
       a {
         color: $eva_light;

@@ -19,3 +19,36 @@
     font-family: $font-texte;
   }
 }
+
+@mixin panel_alerte() {
+  background-repeat: no-repeat,no-repeat,no-repeat;
+  background-size: 1px 1px,1px 1px,1px 1px,2.5rem 100%;
+  padding: 1rem 2.25rem 1rem 3.5rem;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  &::before {
+    content: "";
+    background-color: currentColor;
+    --icon-size: 1.5rem;
+    color: $grey-1000;
+    display: inline-block;
+    height: var(--icon-size);
+    left: 0;
+    margin: 1rem .5rem;
+    mask-size: 100% 100%;
+    position: absolute;
+    top: 0;
+    vertical-align: calc((.75em - var(--icon-size))*.5);
+    width: var(--icon-size);
+  }
+}
+
+@mixin panel_alerte_couleur($couleur, $icone) {
+  border-color: $couleur;
+  background-image: linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur),linear-gradient(0deg,$couleur,$couleur);
+
+  &::before {
+    mask-image: url($icone);
+  }
+}

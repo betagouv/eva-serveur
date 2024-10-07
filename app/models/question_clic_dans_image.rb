@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionClicDansImage < Question
+  CLASS_BONNE_REPONSE = 'bonne-reponse'
+
   has_one_attached :zone_cliquable
   has_one_attached :image_au_clic
 
@@ -24,11 +26,7 @@ class QuestionClicDansImage < Question
     return false unless zone_cliquable.attached?
 
     svg_content = zone_cliquable.download
-
-    doc = Nokogiri::XML(svg_content, nil, 'UTF-8')
-    elements_cliquables = doc.css('.bonne-reponse')
-
-    elements_cliquables.size > 1
+    svg_contient_class_bonne_reponse?(svg_content, 2)
   end
 
   private
@@ -60,12 +58,19 @@ class QuestionClicDansImage < Question
     return if attachment_changes['zone_cliquable'].nil?
 
     file = attachment_changes['zone_cliquable'].attachable
-    doc = Nokogiri::XML(file, nil, 'UTF-8')
-    elements_cliquables = doc.css('.bonne-reponse')
+    return if svg_contient_class_bonne_reponse?(file, 1)
 
-    return unless elements_cliquables.empty?
-
-    errors.add(:zone_cliquable, "doit contenir la classe 'bonne_reponse'")
+    errors.add(:zone_cliquable, :class_bonne_reponse_not_found)
     throw(:abort)
+  end
+
+  def fichier_encode_base64(attachment)
+    file_content = attachment.download
+    ApplicationController.helpers.fichier_encode_en_base64(file_content)
+  end
+
+  def svg_contient_class_bonne_reponse?(svg_content, minimum)
+    doc = Nokogiri::XML(svg_content, nil, 'UTF-8')
+    doc.css(".#{CLASS_BONNE_REPONSE}").size >= minimum
   end
 end

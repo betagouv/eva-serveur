@@ -3,6 +3,8 @@
 ActiveAdmin.register AnnonceGenerale do
   menu parent: 'Accompagnement'
 
+  config.sort_order = 'created_at_desc'
+
   permit_params :texte, :afficher
 
   index do

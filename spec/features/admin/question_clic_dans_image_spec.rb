@@ -125,7 +125,9 @@ describe 'Admin - Question Clic dans Image', type: :feature do
         end
 
         it do
-          expect(page).to have_content("doit contenir la classe 'bonne_reponse'")
+          expect(page).to have_content(
+            "doit contenir la classe '#{QuestionClicDansImage::CLASS_BONNE_REPONSE}'"
+          )
           expect(Question.count).to eq(0)
         end
       end

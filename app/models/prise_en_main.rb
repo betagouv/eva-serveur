@@ -25,7 +25,7 @@ class PriseEnMain
   end
 
   def en_cours?
-    @compte.mode_tutoriel?
+    @compte.mode_tutoriel? || @compte.structure.blank?
   end
 
   def nombre_passations_restantes

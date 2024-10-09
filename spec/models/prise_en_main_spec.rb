@@ -70,7 +70,19 @@ describe PriseEnMain do
     context 'quand le mode tutoriel est désactivé' do
       before { compte.update(mode_tutoriel: false) }
 
-      it { expect(prise_en_main.terminee?).to be true }
+      context 'et que le compte a une structure' do
+        let(:structure) { Structure.new }
+
+        before do
+          compte.structure = structure
+        end
+
+        it { expect(prise_en_main.terminee?).to be true }
+      end
+
+      context "et que le compte n'a pas de structure" do
+        it { expect(prise_en_main.terminee?).to be false }
+      end
     end
 
     context 'quand le mode tutoriel est activé' do

@@ -4,42 +4,42 @@ div class: 'menu menu-transverse' do
   ul do
     li do
       a href: '#evaluation__details' do
-        text_node 'Détails de l\'évaluation'
+        text_node t('admin.evaluations.details_evaluation.titre_menu_lateral')
       end
     end
     li do
       a href: '#evaluation__deroulement' do
-        text_node 'Déroulement de la passation'
+        text_node t('admin.evaluations.deroulement_passation.titre_menu_lateral')
       end
     end
     li do
       a href: '#profil' do
-        text_node 'Profil de la personne'
+        text_node t('admin.evaluations.restitution_globale.autopositionnement.titre_menu_lateral')
       end
     end
     li do
       a href: '#competences_transversales' do
-        text_node 'Vos compétences transversales'
+        text_node t('admin.evaluations.competences_transversales.titre_menu_lateral')
       end
     end
     li do
       a href: '#francais_mathematiques' do
-        text_node 'Français et Mathématiques'
+        text_node t('admin.restitutions.cefr.titre_menu_lateral')
       end
     end
     li do
       a href: '#correspondance_anlci' do
-        text_node "Correspondance avec l'ANLCI"
+        text_node t('admin.restitutions.anlci.titre_menu_lateral')
       end
     end
     li do
       a href: '#lettrisme' do
-        text_node 'Lettrisme'
+        text_node t('admin.restitutions.lettrisme.titre_menu_lateral')
       end
     end
     li do
       a href: '#numeratie' do
-        text_node 'Numeratie'
+        text_node t('admin.restitutions.numeratie.titre_menu_lateral')
       end
     end
   end

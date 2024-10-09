@@ -1,0 +1,6 @@
+fr:
+  admin:
+    questions_clic_dans_image:
+      form:
+        label:
+          image_au_clic:  Image à positionner au clic

@@ -2,17 +2,21 @@
 
 class QuestionClicDansImage < Question
   has_one_attached :zone_cliquable
+  has_one_attached :image_au_clic
 
   validates :zone_cliquable,
             blob: { content_type: 'image/svg+xml' }
+  validates :image_au_clic,
+            blob: { content_type: 'image/svg+xml' }
 
-  attr_accessor :supprimer_zone_cliquable
+  attr_accessor :supprimer_zone_cliquable, :supprimer_image_au_clic
 
   before_save :valide_zone_cliquable_avec_reponse
-  after_update :supprime_zone_cliquable
+  after_update :supprime_zone_cliquable, :supprime_image_au_clic
 
   def as_json(_options = nil)
     json = base_json
+    json['image_au_clic'] = fichier_encode_base64(image_au_clic) if image_au_clic.attached?
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
@@ -45,6 +49,10 @@ class QuestionClicDansImage < Question
 
   def supprime_zone_cliquable
     zone_cliquable.purge_later if zone_cliquable.attached? && supprimer_zone_cliquable == '1'
+  end
+
+  def supprime_image_au_clic
+    image_au_clic.purge_later if image_au_clic.attached? && supprimer_image_au_clic == '1'
   end
 
   def valide_zone_cliquable_avec_reponse

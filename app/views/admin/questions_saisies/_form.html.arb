@@ -8,23 +8,23 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :description
     render partial: 'admin/questions/input_illustration', locals: { f: f }
-  end
-
-  f.inputs do
-    render partial: 'admin/questions/inputs_avec_transcriptions_audios',
-           locals: { f: f }
 
     f.input :suffix_reponse
     f.input :reponse_placeholder
     f.input :type_saisie
-    f.has_many :bonne_reponse, allow_destroy: false, new_record: t('.ajout_reponse'),
-                               heading: false, class: 'has_one' do |c|
-      c.input :id, as: :hidden
-      c.input :intitule, label: t('.label.reponse')
-      c.input :nom_technique, label: t('.label.reponse_nom_technique')
-      c.input :type_choix, as: :hidden, input_html: { value: :bon }
-    end
   end
+
+  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+         locals: { f: f }
+
+  f.has_many :bonne_reponse, allow_destroy: false, new_record: t('.ajout_reponse'),
+                             heading: false, class: 'has_one' do |c|
+    c.input :id, as: :hidden
+    c.input :intitule, label: t('.label.reponse')
+    c.input :nom_technique, label: t('.label.reponse_nom_technique')
+    c.input :type_choix, as: :hidden, input_html: { value: :bon }
+  end
+
   f.actions do
     f.action :submit
     annulation_formulaire(f)

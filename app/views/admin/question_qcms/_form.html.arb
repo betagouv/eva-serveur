@@ -11,19 +11,18 @@ active_admin_form_for [:admin, resource] do |f|
     render partial: 'admin/questions/input_illustration', locals: { f: f }
   end
 
-  f.inputs do
-    render partial: 'admin/questions/inputs_avec_transcriptions_audios',
-           locals: { f: f }
+  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+         locals: { f: f }
 
-    f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
-      c.input :id, as: :hidden
-      c.input :intitule, label: t('.label.intitule_reponse')
-      c.input :audio, as: :file, label: t('.label.intitule_reponse_audio'),
-                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
-      c.input :nom_technique
-      c.input :type_choix
-    end
+  f.has_many :choix, allow_destroy: ->(choix) { can? :destroy, choix } do |c|
+    c.input :id, as: :hidden
+    c.input :intitule, label: t('.label.intitule_reponse')
+    c.input :audio, as: :file, label: t('.label.intitule_reponse_audio'),
+                    input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+    c.input :nom_technique
+    c.input :type_choix
   end
+
   f.actions do
     f.action :submit
     annulation_formulaire(f)

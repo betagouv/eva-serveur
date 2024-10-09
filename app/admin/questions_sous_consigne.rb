@@ -16,17 +16,25 @@ ActiveAdmin.register QuestionSousConsigne do
       f.input :libelle
       f.input :nom_technique
       render partial: 'admin/questions/input_illustration', locals: { f: f }
+    end
+    f.object.transcriptions.build(categorie: :intitule) if f.object.transcription_intitule.nil?
 
-      f.object.transcriptions.build(categorie: :intitule) if f.object.transcription_intitule.nil?
+    f.has_many :transcriptions, allow_destroy: false, new_record: false,
+                                heading: false do |t|
+      t.input :id, as: :hidden
+      t.input :ecrit, label: t('.label.intitule'), input_html: { rows: 4 }
+      t.input :audio, as: :file, label: t('.label.intitule_audio'),
+                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+      t.input :categorie, as: :hidden, input_html: { value: :intitule }
+    end
 
-      render partial: 'admin/transcriptions/input_ecrit_audio',
-             locals: { f: f, transcription_categorie: :intitule }
-
+    f.inputs do
       if f.object.transcription_intitule&.audio&.attached?
         f.input :supprimer_audio_intitule, as: :boolean,
                                            hint: tag_audio(f.object.transcription_intitule)
       end
     end
+
     f.actions do
       f.action :submit
       annulation_formulaire(f)

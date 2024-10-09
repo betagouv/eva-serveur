@@ -19,9 +19,9 @@ else
     end
   end
   if f.object.transcription_intitule&.audio&.attached?
-    f.input :supprimer_audio_intitule, as: :boolean,
-                                       label: t('.label.supprimer_audio_intitule'),
-                                       hint: tag_audio(f.object.transcription_intitule)
+      f.input :supprimer_audio_intitule, as: :boolean,
+                                        label: t('.label.supprimer_audio_intitule'),
+                                        hint: tag_audio(f.object.transcription_intitule)
   end
   if f.object.transcription_modalite_reponse.nil?
     f.object.transcriptions.build(categorie: :modalite_reponse)

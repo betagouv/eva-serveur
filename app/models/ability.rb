@@ -59,6 +59,6 @@ class Ability < AbilityUtilisateur
 
   def droits_comptes_refuses(compte)
     can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
-    can %i[update read], compte
+    can %i[update read accepter_cgu], compte
   end
 end

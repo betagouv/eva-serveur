@@ -11,7 +11,7 @@ div class: 'evaluation__restitution-globale' do
         div class: 'page' do
           render 'entete_page', restitution_globale: restitution_globale
 
-          h2 t('.autopositionnement_titre'), class: 'text-center mt-5 mb-4'
+          h2 t('.autopositionnement.titre'), class: 'text-center mt-5 mb-4'
 
           div class: 'panel' do
             div class: 'marges-page' do
@@ -41,7 +41,7 @@ div class: 'evaluation__restitution-globale' do
       div id: 'profil', class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
 
-        h2 t('.autopositionnement_titre')
+        h2 t('.autopositionnement.titre')
 
         div class: 'panel' do
           div class: 'marges-page' do

@@ -19,9 +19,11 @@ else
     end
   end
   if f.object.transcription_intitule&.audio&.attached?
-    f.input :supprimer_audio_intitule, as: :boolean,
-                                       label: t('.label.supprimer_audio_intitule'),
-                                       hint: tag_audio(f.object.transcription_intitule)
+    f.inputs do
+      f.input :supprimer_audio_intitule, as: :boolean,
+                                         label: t('.label.supprimer_audio_intitule'),
+                                         hint: tag_audio(f.object.transcription_intitule)
+    end
   end
   if f.object.transcription_modalite_reponse.nil?
     f.object.transcriptions.build(categorie: :modalite_reponse)
@@ -36,9 +38,11 @@ else
     end
   end
   if f.object.transcription_modalite_reponse&.audio&.attached?
-    f.input :supprimer_audio_modalite_reponse,
-            as: :boolean,
-            label: t('.label.supprimer_audio_modalite'),
-            hint: tag_audio(f.object.transcription_modalite_reponse)
+    f.inputs do
+      f.input :supprimer_audio_modalite_reponse,
+              as: :boolean,
+              label: t('.label.supprimer_audio_modalite'),
+              hint: tag_audio(f.object.transcription_modalite_reponse)
+    end
   end
 end

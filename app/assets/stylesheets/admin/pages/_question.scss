@@ -10,7 +10,11 @@ form.question_glisser_deposer {
     }
   }
   .inline-hints img {
-    width: 300px;
+    max-width: 300px;
+    max-height: 200px;
+  }
+  .inline-hints {
+    margin-left: 0;
   }
 }
 form.question_saisie .choix {
@@ -29,11 +33,17 @@ form.question_saisie .choix {
 }
 .show .image-preview {
   width: 100px;
+  max-height: 100px;
 }
 .show.admin_questions_clic_dans_image {
-  svg {
+  .row-zone_cliquable svg {
     stroke: $eva_bluegrey;
     stroke-width: 3px;
     opacity: 0.3;
+  }
+}
+#question_clic_dans_image_supprimer_image_au_clic_input {
+  img {
+    padding: 40px;
   }
 }

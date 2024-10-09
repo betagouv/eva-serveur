@@ -8,8 +8,10 @@ ActiveAdmin.register QuestionClicDansImage do
   permit_params :libelle, :nom_technique, :description,
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
+                :image_au_clic,
                 :zone_cliquable, :supprimer_zone_cliquable,
                 :supprimer_audio_modalite_reponse,
+                :supprimer_image_au_clic,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 
   filter :libelle

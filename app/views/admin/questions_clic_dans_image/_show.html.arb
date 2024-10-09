@@ -20,6 +20,13 @@ panel 'Détails de la question' do
         end
       end
     end
+    row :image_au_clic do
+      if resource.image_au_clic.attached?
+        link_to(cdn_for(resource.image_au_clic), target: '_blank', rel: 'noopener') do
+          raw inline_svg_content(resource.image_au_clic, class: 'image-preview')
+        end
+      end
+    end
     intitule = question_clic_dans_image.transcription_intitule
     row :intitule do
       div intitule.ecrit if intitule&.ecrit

@@ -4,6 +4,7 @@ require 'rails_helper'
 
 describe QuestionClicDansImage, type: :model do
   it { is_expected.to have_one_attached(:zone_cliquable) }
+  it { is_expected.to have_one_attached(:image_au_clic) }
 
   describe '#as_json' do
     let(:question_clic_dans_image) do
@@ -12,6 +13,9 @@ describe QuestionClicDansImage, type: :model do
                Rails.root.join('spec/support/programme_tele.png')
              ),
              zone_cliquable: Rack::Test::UploadedFile.new(
+               Rails.root.join('spec/support/accessibilite-avec-reponse.svg')
+             ),
+             image_au_clic: Rack::Test::UploadedFile.new(
                Rails.root.join('spec/support/accessibilite-avec-reponse.svg')
              ))
     end
@@ -28,7 +32,7 @@ describe QuestionClicDansImage, type: :model do
       json = question_clic_dans_image.as_json
       expect(json.keys)
         .to match_array(%w[description id intitule audio_url nom_technique type illustration
-                           modalite_reponse zone_cliquable])
+                           modalite_reponse zone_cliquable image_au_clic])
       expect(json['type']).to eql('clic-dans-image')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
@@ -39,6 +43,7 @@ describe QuestionClicDansImage, type: :model do
                                        ))
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['zone_cliquable']).to start_with('data:image/svg+xml;base64,')
+      expect(json['image_au_clic']).to start_with('data:image/svg+xml;base64,')
     end
   end
 

@@ -390,6 +390,7 @@ describe Ability do
     it 'peut consulter et modifier son compte' do
       expect(subject).to be_able_to(:read, compte)
       expect(subject).to be_able_to(:update, compte)
+      expect(subject).to be_able_to(:accepter_cgu, compte)
     end
 
     it 'ne peut pas consulter les Campagnes' do

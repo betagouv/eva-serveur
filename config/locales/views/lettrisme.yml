@@ -7,7 +7,7 @@ fr:
             description: |
               ##Votre score n’a pas pu être calculé
 
-              Les raisons peuvent être les suivantes :
+              Les raisons peuvent être les suivantes :
 
               *	vous avez abandonné à un ou plusieurs mini-jeux,
 
@@ -34,35 +34,35 @@ fr:
             description: |
               ##Vos compétences en français peuvent être améliorées
 
-              Votre score indique que vous pouvez encore progresser en français. Même si vous vous en sortez au quotidien, certaines tâches ou activités pourraient probablement être plus faciles pour vous si vous progressiez en français.<br><br>
+              Votre score indique que vous pouvez encore progresser en français. Même si vous vous en sortez au quotidien, certaines tâches ou activités pourraient probablement être plus faciles pour vous si vous progressiez en français.
 
-              N’hésitez pas à en parler avec la personne qui vous accompagne !
+              N’hésitez pas à en parler avec la personne qui vous accompagne !
           profil4:
             description: |
               ##Vous maîtrisez les bases du français
 
-              Votre score indique que vous maîtrisez les fondamentaux de la communication en français, ce qui signifie que vous êtes plutôt à l’aise en français pour comprendre et communiquer en contexte professionnel.<br><br>
+              Votre score indique que vous maîtrisez les fondamentaux de la communication en français, ce qui signifie que vous êtes plutôt à l’aise en français pour comprendre et communiquer en contexte professionnel.
 
-              Cela vous ouvre les portes de nombreuses formations ou de nombreux emplois !
+              Cela vous ouvre les portes de nombreuses formations ou de nombreux emplois !
           profil_4h:
             description: |
               ##Certification Cléa indiquée
 
-              Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !<br><br>
+              Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !
 
               Maîtriser les fondamentaux de la communication en français vous ouvre les portes de nombreuses formations ou de nombreux emplois, n’hésitez pas à valoriser la maîtrise de cette compétence !
           profil_4h_plus:
             description: |
               ##Certification Cléa indiquée
 
-              Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !<br><br>
+              Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !
 
               Maîtriser les fondamentaux de la communication en français vous ouvre les portes de nombreuses formations ou de nombreux emplois, n’hésitez pas à valoriser la maîtrise de cette compétence !
           profil_4h_plus_plus:
             description: |
               ##Très bonne maîtrise du français
 
-              Bravo ! Votre score n’indique aucune difficulté en français, ce qui signifie que vous êtes parfaitement à l’aise en français pour comprendre et communiquer en contexte professionnel.<br><br>
+              Bravo ! Votre score n’indique aucune difficulté en français, ce qui signifie que vous êtes parfaitement à l’aise en français pour comprendre et communiquer en contexte professionnel.
 
               N’hésitez pas à valoriser la maîtrise de cette compétence !
       lettrisme_sous_competence:

@@ -47,12 +47,13 @@
           <% @syntheses_positionnement.each do |donnees| -%>
             <div id="lettrisme" class="page">
               <div class="panel">
-              <%= render 'admin/evaluations/litteratie_numeratie_synthese',
-                synthese: donnees[1],
-                scope: "admin.evaluations.lettrisme.litteratie",
-                description: "#{donnees[0]}.description",
-                icone: "icone_profil/icone_#{donnees[0]}.svg",
-                pdf: false %>
+                <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                  synthese: donnees[1],
+                  scope: "admin.evaluations.lettrisme.litteratie",
+                  description: "#{donnees[0]}.description",
+                  icone: "icone_profil/icone_#{donnees[0]}.svg",
+                  pdf: false %>
+                <div/> <!-- pour absorber le style specifique de la dernière div du panel -->
               </div>
             </div>
           <% end -%>

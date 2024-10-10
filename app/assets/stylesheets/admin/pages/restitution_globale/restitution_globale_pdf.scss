@@ -1,7 +1,10 @@
 $grid-columns: 8;
 $grid-gutter-width: 1.25rem;
 @import "bootstrap";
+@import "../../../admin/variables";
+@import "../../../admin/mixins";
 @import "base";
+@import "../../../admin/bg";
 @import "../../../admin/composants/lettrisme";
 @import "../../../admin/composants/referentiel_anlci";
 @import "../../../pdf/base";
@@ -28,7 +31,6 @@ $grid-gutter-width: 1.25rem;
   }
 
   a {
-    color: $couleur-texte;
     text-decoration: underline;
   }
 
@@ -78,7 +80,7 @@ $grid-gutter-width: 1.25rem;
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: $eva_dark;
+    background-color: $eva_main_blue;
 
     .contact {
       width: 100%;
@@ -86,9 +88,10 @@ $grid-gutter-width: 1.25rem;
       text-align: center;
       font-size: 1rem;
       line-height: 2.5rem;
+
+      a { color: $eva_light }
     }
 
-    a { color: $eva_light }
   }
 
   .autopositionnement {

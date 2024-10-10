@@ -31,9 +31,9 @@ div id: 'correspondance_anlci', class: 'page' do
     end
 
     if pdf
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('version_eva')
+      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
     else
-      render ReferentielAnlciComponent.new('version_eva')
+      render ReferentielAnlciComponent.new
     end
   end
 end

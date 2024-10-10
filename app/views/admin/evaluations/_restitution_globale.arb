@@ -146,7 +146,7 @@ div class: 'evaluation__restitution-globale' do
                synthese: restitution_globale.synthese_positionnement,
                pdf: pdf
              }
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('officiel')
+      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
     end
   end
 
@@ -165,7 +165,7 @@ div class: 'evaluation__restitution-globale' do
                synthese: restitution_globale.synthese_positionnement_numeratie,
                pdf: pdf
              }
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new('officiel')
+      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
     end
   end
 end

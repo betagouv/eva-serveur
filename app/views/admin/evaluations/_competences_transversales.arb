@@ -4,9 +4,9 @@ div id: 'competences_transversales', class: 'page' do
   render 'entete_page', restitution_globale: restitution_globale
 
   if pdf
-    h2 t('.competences_fortes_titre'), class: 'text-center my-5'
+    h2 t('.titre'), class: 'text-center my-5'
   else
-    h2 t('.competences_fortes_titre')
+    h2 t('.titre')
   end
 
   div class: 'panel' do

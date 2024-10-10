@@ -55,14 +55,18 @@ fr:
         reste_plateau: Reste plateau
       deroulement_passation:
         titre: Déroulement de la passation
+        titre_menu_lateral: Déroulement de la passation
         parcours:
           titre: Parcours sélectionné
       restitution_globale:
-        autopositionnement_titre: Profil de la personne
+        autopositionnement:
+          titre: Profil de la personne
+          titre_menu_lateral: Profil de la personne
         prise_en_main_titre: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
       competences_transversales:
-        competences_fortes_titre: 'Vos compétences transversales'
+        titre: Vos compétences transversales
+        titre_menu_lateral: Compétences transversales
         competences_fortes_vides: |
           Vos résultats n'ont pas pu être calculés. Les raisons peuvent être les suivantes :
 
@@ -171,6 +175,7 @@ fr:
             Vous parvenez **très bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester concentré·e sur une tâche pendant longtemps malgré la difficulté et la distraction. Aussi, vous savez être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous adapter rapidement à de nombreux métiers du BTP, de l’Industrie, et de la Surveillance, bravo !
       details_evaluation:
         titre: Détails de l'évaluation
+        titre_menu_lateral: Détails de l'évaluation
         donnees_sociodemographiques: Socio-démo
         evaluation_competences_de_base_incomplete: |
           #### Évaluation des compétences de base incomplète
@@ -364,6 +369,7 @@ fr:
         [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
       cefr:
         titre: Vos compétences en français et mathématiques
+        titre_menu_lateral: Français et Mathématiques
         niveau: 'Niveau %{niveau}'
         litteratie:
           titre: Français
@@ -428,7 +434,8 @@ fr:
             Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :  
             <a href="https://l.incubateur.net/eva-referentiel/" target="_blank">https://l.incubateur.net/eva-referentiel/</a>
       anlci:
-        titre: "Correspondance avec l’ANLCI"
+        titre: Correspondance avec l'ANLCI
+        titre_menu_lateral: Correspondance ANLCI
         recommandation: |
           **Pour les personnes qui sont allées à l'école en France**, nous recommandons de se référer à la restitution basée sur les degrés d'éloignement de l'illettrisme de l'Agence Nationale de Lutte Contre l'Illettrisme (ANLCI).
 
@@ -489,5 +496,7 @@ fr:
               **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
       lettrisme:
         titre: Communiquer en français - Lettrisme
+        titre_menu_lateral: Lettrisme
       numeratie:
         titre: Calculer et raisonner - Numératie
+        titre_menu_lateral: Numératie

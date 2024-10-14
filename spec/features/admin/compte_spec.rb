@@ -65,20 +65,6 @@ describe 'Admin - Compte', type: :feature do
       it { expect(collegue.reload.validation_refusee?).to be true }
     end
 
-    describe 'Refuser un admin' do
-      before do
-        visit edit_admin_compte_path(collegue)
-        select 'Admin'
-        choose 'Refusé'
-        click_on 'Modifier'
-      end
-
-      it 'ne permet pas de refuser un admin' do
-        expect(page).to have_content('ce compte ne peut pas avoir le rôle admin en étant ' \
-                                     'refusé. Uniquement conseiller ou compte générique')
-      end
-    end
-
     describe 'Je vois les informations d\'un collègue' do
       it do
         visit admin_compte_path(collegue)
@@ -168,20 +154,6 @@ describe 'Admin - Compte', type: :feature do
       end
 
       it { expect(collegue.reload.validation_refusee?).to be true }
-    end
-
-    describe 'Refuser un admin' do
-      before do
-        visit edit_admin_compte_path(collegue)
-        select 'Admin'
-        choose 'Refusé'
-        click_on 'Modifier'
-      end
-
-      it 'ne permet pas de refuser un admin' do
-        expect(page).to have_content('ce compte ne peut pas avoir le rôle admin en étant ' \
-                                     'refusé. Uniquement conseiller ou compte générique')
-      end
     end
 
     describe "modifier le mot de passe d'un collègue" do

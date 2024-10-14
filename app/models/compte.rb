@@ -21,8 +21,6 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
-  validates :role, inclusion: { in: %w[conseiller compte_generique], message: :comptes_refuses },
-                   if: :compte_refuse?
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [:password]
 
@@ -45,11 +43,8 @@ class Compte < ApplicationRecord
   end
 
   def find_admins
-    Compte.where(structure: structure, role: ADMIN_ROLES).where.not(structure: nil)
-  end
-
-  def compte_refuse?
-    validation_refusee?
+    Compte.where(structure: structure, role: ADMIN_ROLES, statut_validation: :acceptee)
+          .where.not(structure: nil)
   end
 
   def anlci?
@@ -98,10 +93,14 @@ class Compte < ApplicationRecord
 
   def structure_a_un_admin
     return if structure.nil?
-    return if au_moins_admin?
+    return if au_moins_admin? && !validation_refusee?
     return if autres_admins?
 
-    errors.add(:role, :structure_doit_avoir_un_admin)
+    if au_moins_admin? && validation_refusee?
+      errors.add(:statut_validation, :structure_doit_avoir_un_admin)
+    else
+      errors.add(:role, :structure_doit_avoir_un_admin)
+    end
   end
 
   def autres_admins?

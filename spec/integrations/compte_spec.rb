@@ -126,6 +126,7 @@ describe Compte, type: :integration do
       let!(:compte_admin_sans_structure) { create :compte_admin, structure: nil }
       let!(:compte_admin) { create :compte_admin, structure: structure }
       let!(:compte_admin2) { create :compte_admin, structure: structure }
+      let!(:compte_admin_refuse) { create :compte_admin, :refusee, structure: structure }
       let!(:compte_superadmin) { create :compte_superadmin, structure: structure }
       let(:autre_structure) { create :structure }
       let!(:autre_admin) { create :compte_admin, structure: autre_structure }

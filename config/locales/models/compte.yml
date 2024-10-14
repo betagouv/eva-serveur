@@ -48,11 +48,11 @@ fr:
       models:
         compte:
           attributes:
+            statut_validation:
+              structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur autorisé
             role:
-              structure_doit_avoir_un_admin: 'La structure doit avoir au moins un administrateur'
+              structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur
               inclusion: n'est pas inclus dans la liste
-              comptes_refuses: |
-                ce compte ne peut pas avoir le rôle %<value>s en étant refusé. Uniquement conseiller ou compte générique
   formtastic:
     actions:
       compte:

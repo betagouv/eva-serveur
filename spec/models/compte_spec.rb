@@ -141,6 +141,13 @@ describe Compte do
         compte.valid?
         expect(compte.errors[:role]).to include 'La structure doit avoir au moins un administrateur'
       end
+
+      it 'ne peut pas refuser cet admin' do
+        compte.statut_validation = 'refusee'
+        compte.valid?
+        expect(compte.errors[:statut_validation])
+          .to include 'La structure doit avoir au moins un administrateur autorisé'
+      end
     end
 
     context "quand il n'y a pas d'admin dans la structure" do

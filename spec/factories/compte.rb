@@ -15,6 +15,15 @@ FactoryBot.define do
     trait :structure_avec_admin do
       structure { create(:structure, :avec_admin) }
     end
+    trait :en_attente do
+      statut_validation { :en_attente }
+    end
+    trait :acceptee do
+      statut_validation { :acceptee }
+    end
+    trait :refusee do
+      statut_validation { :refusee }
+    end
 
     factory :compte_superadmin do
       role { 'superadmin' }
@@ -27,15 +36,6 @@ FactoryBot.define do
     end
     factory :compte_conseiller do
       role { 'conseiller' }
-      trait :en_attente do
-        statut_validation { :en_attente }
-      end
-      trait :acceptee do
-        statut_validation { :acceptee }
-      end
-      trait :refusee do
-        statut_validation { :refusee }
-      end
     end
     factory :compte_generique do
       role { 'compte_generique' }

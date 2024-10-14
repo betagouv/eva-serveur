@@ -39,7 +39,7 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
     let(:campagne) { create :campagne, compte: compte }
 
     before do
-      compte.update(structure_id: nil)
+      compte.update(role: :conseiller, statut_validation: :en_attente, structure_id: nil)
     end
 
     it 'ne fais rien' do

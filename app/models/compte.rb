@@ -19,6 +19,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: ROLES }
   enum :role, ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
+  validate :verifie_etat_si_structure_manquante
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
@@ -44,7 +45,6 @@ class Compte < ApplicationRecord
 
   def find_admins
     Compte.where(structure: structure, role: ADMIN_ROLES, statut_validation: :acceptee)
-          .where.not(structure: nil)
   end
 
   def anlci?
@@ -82,6 +82,16 @@ class Compte < ApplicationRecord
   end
 
   private
+
+  def verifie_etat_si_structure_manquante
+    return if structure.present?
+
+    unless validation_en_attente?
+      errors.add(:statut_validation,
+                 :doit_etre_en_attente_si_structure_vide)
+    end
+    errors.add(:role, :doit_etre_conseiller_si_structure_vide) unless conseiller?
+  end
 
   def verifie_dns_email
     return if email.blank?

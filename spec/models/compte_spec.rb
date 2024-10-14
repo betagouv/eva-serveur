@@ -21,7 +21,9 @@ describe Compte do
   it { is_expected.to validate_presence_of :prenom }
 
   context 'quand un compte a été soft-delete' do
-    let(:compte) { build :compte, email: 'mon-email-supprime@example.com' }
+    let(:compte) do
+      build :compte, email: 'mon-email-supprime@example.com'
+    end
 
     before do
       autre_compte = create :compte, email: 'mon-email-supprime@example.com'
@@ -111,13 +113,66 @@ describe Compte do
     it { expect(compte.role).to eql('conseiller') }
   end
 
+  describe "verifie le statut s'il n'y a pas de structure" do
+    context 'Quand il y a une de structure' do
+      let(:structure) { Structure.new }
+      let(:compte) { described_class.new role: 'admin', structure: structure }
+
+      context 'quand le statut est accepté' do
+        before do
+          compte.statut_validation = :acceptee
+        end
+
+        it "il n'y a pas d'erreur" do
+          compte.valid?
+          expect(compte.errors[:statut_validation]).to be_blank
+        end
+      end
+    end
+
+    context "Quand il n'y a pas de structure" do
+      let(:compte) { described_class.new role: 'conseiller', structure: nil }
+
+      context 'quand le statut est accepté' do
+        before do
+          compte.statut_validation = :acceptee
+        end
+
+        it 'il signal une erreur' do
+          compte.valid?
+          expect(compte.errors[:statut_validation])
+            .to include "doit être 'en attente' s'il n'y a pas de structure"
+        end
+      end
+
+      context "quand le role n'est pas conseiller" do
+        before do
+          compte.role = :admin
+        end
+
+        it 'il signal une erreur' do
+          compte.valid?
+          expect(compte.errors[:role])
+            .to include "doit être 'conseiller' s'il n'y a pas de structure"
+        end
+      end
+
+      context 'quand le statut est en_attente et le role conseiller' do
+        before do
+          compte.statut_validation = :en_attente
+        end
+
+        it "il n'y a pas d'erreur" do
+          compte.valid?
+          expect(compte.errors[:statut_validation]).to be_blank
+        end
+      end
+    end
+  end
+
   describe "verifie la présence d'un admin" do
     let(:structure) { Structure.new }
     let(:compte) { described_class.new role: 'admin', structure: structure }
-
-    before do
-      allow(compte).to receive(:verifie_dns_email).and_return(true)
-    end
 
     context 'quand il y a un autre admins dans la structure' do
       before do

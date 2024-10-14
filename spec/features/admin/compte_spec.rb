@@ -234,7 +234,7 @@ describe 'Admin - Compte', type: :feature do
 
   context 'avec un compte sans structure' do
     let(:compte_connecte) do
-      create :compte_conseiller, structure: nil
+      create :compte_conseiller, :en_attente, structure: nil
     end
 
     it 'peut rejoindre une structure' do

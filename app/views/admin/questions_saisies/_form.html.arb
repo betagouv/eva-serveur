@@ -15,6 +15,7 @@ active_admin_form_for [:admin, resource] do |f|
            locals: { f: f }
 
     f.input :suffix_reponse
+    f.input :reponse_longueur_max, as: :number
     f.input :reponse_placeholder
     f.input :type_saisie
     f.has_many :bonne_reponse, allow_destroy: false, new_record: t('.ajout_reponse'),

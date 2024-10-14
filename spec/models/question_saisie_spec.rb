@@ -10,6 +10,7 @@ describe QuestionSaisie, type: :model do
       create(:question_saisie,
              transcription_ecrit: 'Mon Intitulé',
              reponse_placeholder: 'écrivez ici',
+             reponse_longueur_max: 5,
              illustration: Rack::Test::UploadedFile.new(
                Rails.root.join('spec/support/programme_tele.png')
              ))
@@ -31,7 +32,7 @@ describe QuestionSaisie, type: :model do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique suffix_reponse
                                           description illustration modalite_reponse type sous_type
-                                          placeholder reponse])
+                                          placeholder reponse max_length])
       expect(json['type']).to eql('saisie')
       expect(json['sous_type']).to eql('redaction')
       expect(json['placeholder']).to eql('écrivez ici')
@@ -39,6 +40,7 @@ describe QuestionSaisie, type: :model do
       expect(json['reponse']['textes']).to eql(reponse.intitule)
       expect(json['reponse']['bonneReponse']).to be(true)
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
+      expect(json['max_length']).to eql(question_saisie.reponse_longueur_max)
     end
 
     it "retourne l'illustration" do

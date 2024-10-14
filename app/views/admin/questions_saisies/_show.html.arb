@@ -29,6 +29,7 @@ panel 'Détails de la question' do
       tag_audio(consigne)
     end
     row :suffix_reponse
+    row :reponse_longueur_max
     row :reponse_placeholder
     row :type_saisie
     row :created_at

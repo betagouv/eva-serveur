@@ -7,6 +7,7 @@ ActiveAdmin.register QuestionSaisie do
                 :suffix_reponse, :description, :reponse_placeholder, :type_saisie,
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
+                :reponse_longueur_max,
                 :supprimer_audio_modalite_reponse,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 bonne_reponse_attributes: %i[id intitule audio type_choix _destroy nom_technique]

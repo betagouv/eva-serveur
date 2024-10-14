@@ -22,6 +22,7 @@ class QuestionSaisie < Question
       json['sous_type'] = type_saisie
       json['placeholder'] = reponse_placeholder
       json['description'] = description
+      json['max_length'] = reponse_longueur_max
     end
   end
 

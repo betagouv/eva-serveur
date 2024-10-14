@@ -19,6 +19,7 @@ class Compte < ApplicationRecord
   validates :role, inclusion: { in: ROLES }
   enum :role, ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
+  validate :verifie_etat_si_structure_manquante
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
   validates :role, inclusion: { in: %w[conseiller compte_generique], message: :comptes_refuses },
@@ -87,6 +88,12 @@ class Compte < ApplicationRecord
   end
 
   private
+
+  def verifie_etat_si_structure_manquante
+    return unless structure.blank? && !validation_en_attente?
+
+    errors.add(:statut_validation, :doit_etre_en_attente_si_structure_vide)
+  end
 
   def verifie_dns_email
     return if email.blank?

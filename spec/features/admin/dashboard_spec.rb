@@ -41,7 +41,7 @@ describe 'Dashboard', type: :feature do
 
   context 'quand je suis avec un compte sans structure' do
     let!(:compte) do
-      create :compte_conseiller, statut_validation: :acceptee, structure: nil
+      create :compte_conseiller, :en_attente, structure: nil
     end
 
     it 'Affiche le tutoriel sans le bouton quitter' do

@@ -222,7 +222,7 @@ describe Ability do
   end
 
   context 'Compte conseiller sans structure' do
-    let(:compte) { create :compte_conseiller, structure: nil }
+    let(:compte) { create :compte_conseiller, :en_attente, structure: nil }
 
     it {
       expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))

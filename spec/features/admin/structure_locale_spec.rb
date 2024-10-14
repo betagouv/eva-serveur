@@ -84,7 +84,7 @@ describe 'Admin - Structure locale', type: :feature do
   end
 
   describe 'avec un compte sans structure' do
-    let(:compte) { create(:compte_conseiller, structure: nil) }
+    let(:compte) { create(:compte_conseiller, :en_attente, structure: nil) }
 
     before { connecte(compte) }
 

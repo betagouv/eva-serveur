@@ -4,7 +4,9 @@ div class: 'bloc-mes-campagnes' do
   h3 'Campagnes'
   if campagnes.present?
     table_for campagnes, class: 'index_table' do
-      column :libelle
+      column :libelle do |campagne|
+        link_to campagne.libelle, admin_campagne_path(campagne)
+      end
       column :code
       column t('activerecord.attributes.structure.date_derniere_evaluation') do |campagne|
         if campagne.date_derniere_evaluation.present?

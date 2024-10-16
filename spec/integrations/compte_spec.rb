@@ -38,7 +38,7 @@ describe Compte, type: :integration do
         end
 
         it "Quand le compte n'a pas de structure" do
-          expect { create :compte_admin, structure: nil, confirmed_at: Time.zone.now }
+          expect { create :compte_admin, :en_attente, structure: nil, confirmed_at: Time.zone.now }
             .to have_enqueued_mail(CompteMailer, :nouveau_compte).exactly(0)
         end
 
@@ -109,6 +109,7 @@ describe Compte, type: :integration do
         it 'ne programme pas de mail de relance' do
           expect do
             create :compte_admin,
+                   :en_attente,
                    structure: nil,
                    confirmed_at: Time.zone.now,
                    email_bienvenue_envoye: false
@@ -123,7 +124,7 @@ describe Compte, type: :integration do
     let(:compte) { create :compte_conseiller, structure: structure }
 
     context 'avec des admins' do
-      let!(:compte_admin_sans_structure) { create :compte_admin, structure: nil }
+      let!(:compte_admin_sans_structure) { create :compte_admin, :en_attente, structure: nil }
       let!(:compte_admin) { create :compte_admin, structure: structure }
       let!(:compte_admin2) { create :compte_admin, structure: structure }
       let!(:compte_superadmin) { create :compte_superadmin, structure: structure }
@@ -135,7 +136,7 @@ describe Compte, type: :integration do
       end
 
       it "quand le compte n'a pas de structure, retourne une liste vide" do
-        compte.update(structure: nil)
+        compte.update(statut_validation: :en_attente, structure: nil)
         expect(compte.find_admins.count).to be(0)
       end
     end

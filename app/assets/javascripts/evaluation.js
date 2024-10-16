@@ -107,4 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer: true })
   });
   activeBoutonValider();
+  $("input[name=reponse_qcm]").on('focus', function(event) {
+    $(event.currentTarget).click();
+  });
 });

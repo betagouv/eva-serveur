@@ -1,23 +1,25 @@
 <div class="qcm w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? '' : 'hidden' %>" style="z-index: <%= @priorite %>;">
-  <p><%= @questionnaire.question %></p>
-  <form class="mt-3">
-    <ul style="list-style-type: none" class="m-0 p-0">
-      <% @questionnaire.reponses.each_value do |option| %>
-        <li>
-          <label>
-            <input type="radio" name="reponse_qcm" value="<%= option %>" class="hidden" autocomplete="off">
-            <%= render(Tag.new(t("activerecord.attributes.mise_en_action.#{@questionnaire.nom}.#{option}"))) %>
-          </label>
-        </li>
-      <% end %>
-      <li class="d-flex justify-content-end">
-        <button type="button" class="bouton-secondaire petit-bouton bouton-fermer mr-1">
-          <%= t('.action_fermer') %>
-        </button>
-        <button type="button" class="bouton valide-qcm mr-0 bouton--desactive">
-          <%= t('.action_valider') %>
-        </button>
-      </li>
-    </ul>
+  <form>
+    <fieldset class="mb-0">
+      <legend><%= @questionnaire.question %></legend>
+      <ul class="mt-3 p-0">
+        <% @questionnaire.reponses.each_value do |option| %>
+          <li>
+            <label>
+              <input type="radio" name="reponse_qcm" value="<%= option %>" autocomplete="off">
+              <%= render(Tag.new(t("activerecord.attributes.mise_en_action.#{@questionnaire.nom}.#{option}"))) %>
+            </label>
+          </li>
+        <% end %>
+      </ul>
+    </fieldset>
+    <div class="mt-3 d-flex justify-content-end">
+      <button type="button" class="bouton-secondaire petit-bouton bouton-fermer mr-1">
+        <%= t('.action_fermer') %>
+      </button>
+      <button type="button" class="bouton petit-bouton valide-qcm mr-0 bouton--desactive">
+        <%= t('.action_valider') %>
+      </button>
+    </div>
   </form>
 </div>

@@ -6,9 +6,12 @@
 
   li {
     margin-top: 0.25rem;
-    &:last-child {
-      margin-top: 1rem;
-    }
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    outline: none;
+    position: absolute;
   }
 
   input:checked + .tag { @include tag-couleur($success-425, $success-950); }

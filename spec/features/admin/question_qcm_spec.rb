@@ -65,6 +65,21 @@ describe 'Admin - Question QCM', type: :feature do
       end
     end
 
+    context 'quand une transcription pour consigne est ajoutée' do
+      before do
+        fill_in :question_qcm_libelle, with: 'Question'
+        fill_in :question_qcm_nom_technique, with: 'question'
+        attach_file(:question_qcm_transcriptions_attributes_2_audio,
+                    Rails.root.join('spec/support/alcoolique.mp3'))
+        click_on 'Créer'
+      end
+
+      it do
+        expect(Question.first.transcriptions.count).to eq 1
+        expect(Question.first.transcription_consigne&.audio&.attached?).to be true
+      end
+    end
+
     context 'quand une illustration est ajoutée' do
       before do
         fill_in :question_qcm_libelle, with: 'Question'
@@ -95,16 +110,20 @@ describe 'Admin - Question QCM', type: :feature do
                                           categorie: :modalite_reponse
     end
 
+    let!(:consigne) do
+      create :transcription, :avec_audio, question_id: question.id, categorie: :consigne
+    end
+
     context "quand l'admin supprime l'écrit d'une transcription et qu'il n'y a pas d'audio" do
       before do
         visit edit_admin_question_qcm_path(question)
-        fill_in :question_qcm_transcriptions_attributes_0_ecrit, with: nil
+        fill_in :question_qcm_transcriptions_attributes_0_ecrit, with: ''
       end
 
       it 'supprime la transcription' do
-        expect(Question.first.transcriptions.count).to eq 2
+        expect(Question.first.transcriptions.count).to eq 3
         click_on 'Enregistrer'
-        expect(Question.first.transcriptions.count).to eq 1
+        expect(Question.first.transcriptions.count).to eq 2
       end
     end
 
@@ -144,7 +163,7 @@ describe 'Admin - Question QCM', type: :feature do
       end
     end
 
-    context "quand l'admin coche supprimer l'audio de la consigne" do
+    context "quand l'admin coche supprimer l'audio de la modalité de réponse" do
       before do
         Question.first.transcriptions.find_by(categorie: :modalite_reponse)
                 .update(audio: Rack::Test::UploadedFile.new(
@@ -162,6 +181,28 @@ describe 'Admin - Question QCM', type: :feature do
         question.reload
         expect(
           Question.first.transcriptions.find_by(categorie: :modalite_reponse).audio.attached?
+        ).to be false
+      end
+    end
+
+    context "quand l'admin coche supprimer l'audio de la consigne" do
+      before do
+        Question.first.transcriptions.find_by(categorie: :consigne)
+                .update(audio: Rack::Test::UploadedFile.new(
+                  Rails.root.join('spec/support/alcoolique.mp3')
+                ))
+        visit edit_admin_question_qcm_path(question)
+        check 'question_qcm_supprimer_audio_consigne'
+      end
+
+      it "supprime l'audio" do
+        expect(
+          Question.first.transcriptions.find_by(categorie: :consigne).audio.attached?
+        ).to be true
+        click_on 'Enregistrer'
+        question.reload
+        expect(
+          Question.first.transcriptions.find_by(categorie: :consigne).audio.attached?
         ).to be false
       end
     end

@@ -7,7 +7,7 @@ class Transcription < ApplicationRecord
 
   AUDIOS_CONTENT_TYPES = ['audio/mpeg', 'audio/mp4'].freeze
 
-  enum :categorie, { intitule: 0, modalite_reponse: 1 }
+  enum :categorie, { intitule: 0, modalite_reponse: 1, consigne: 2 }
 
   def audio_type
     return unless audio.attached? && !audio.content_type.in?(AUDIOS_CONTENT_TYPES)
@@ -22,13 +22,8 @@ class Transcription < ApplicationRecord
     cdn_for(audio)
   end
 
-  def supprime_audio_intitule?(suppression_valeur)
-    intitule? && audio.attached? && suppression_valeur == '1'
-  end
-
-  def supprime_audio_consigne?(suppression_valeur)
-    modalite_reponse? && audio.attached? &&
-      suppression_valeur == '1'
+  def supprime_audio(type, suppression_valeur)
+    audio.purge_later if send("#{type}?") && audio.attached? && suppression_valeur == '1'
   end
 
   def complete?

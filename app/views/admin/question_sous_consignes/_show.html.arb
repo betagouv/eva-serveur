@@ -19,6 +19,9 @@ panel 'Détails de la question' do
     row :audio_intitule do
       tag_audio(intitule)
     end
+    row :audio_consigne_bouton do
+      tag_audio(question_sous_consigne.transcription_consigne)
+    end
     row :created_at
   end
 end

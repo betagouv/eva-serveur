@@ -45,6 +45,7 @@ module Api
       default_question_includes = [
         { transcription_intitule: :audio_attachment },
         { transcription_modalite_reponse: :audio_attachment },
+        { transcription_consigne: :audio_attachment },
         :illustration_attachment
       ]
       default_question_includes.push(association_to_include).flatten

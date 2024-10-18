@@ -31,7 +31,7 @@ describe QuestionSaisie, type: :model do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique suffix_reponse
                                           description illustration modalite_reponse type sous_type
-                                          placeholder reponse])
+                                          placeholder reponse consigne_audio])
       expect(json['type']).to eql('saisie')
       expect(json['sous_type']).to eql('redaction')
       expect(json['placeholder']).to eql('écrivez ici')

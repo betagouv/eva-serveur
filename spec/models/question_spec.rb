@@ -6,9 +6,11 @@ describe Question, type: :model do
   it { is_expected.to validate_presence_of :libelle }
   it { is_expected.to validate_presence_of :nom_technique }
   it { is_expected.to validate_uniqueness_of :nom_technique }
-  it { is_expected.to have_many(:transcriptions).dependent(:destroy) }
   it { is_expected.to accept_nested_attributes_for(:transcriptions).allow_destroy(true) }
   it { is_expected.to have_one_attached(:illustration) }
+  it { is_expected.to have_one(:transcription_intitule).dependent(:destroy) }
+  it { is_expected.to have_one(:transcription_modalite_reponse).dependent(:destroy) }
+  it { is_expected.to have_one(:transcription_consigne).dependent(:destroy) }
 
   describe '#restitue_reponse' do
     context "quand la question saisie n'a pas de choix" do
@@ -50,11 +52,8 @@ describe Question, type: :model do
 
   describe '#json_audio_fields' do
     let(:question) { create :question }
-
-    context "quand la question n'a pas de transcriptions audios" do
-      it 'ne retourne rien' do
-        expect(question.json_audio_fields).to be_empty
-      end
+    let!(:transcription_consigne) do
+      create :transcription, question_id: question.id, categorie: :consigne
     end
 
     context 'quand la question a des transcriptions audios' do
@@ -67,8 +66,8 @@ describe Question, type: :model do
 
         it "retourne l'url de l'audio de l'intitulé dans le champ audio_url" do
           expect(question.transcription_intitule.complete?).to be true
-          expect(question.json_audio_fields).to eq(
-            { 'audio_url' => question.transcription_intitule.audio_url }
+          expect(question.json_audio_fields['audio_url']).to eq(
+            question.transcription_intitule.audio_url
           )
         end
       end
@@ -97,8 +96,8 @@ describe Question, type: :model do
 
         it "retourne l'url de l'audio de la modalité de réponse dans le champ intitule_audio" do
           expect(question.transcription_modalite_reponse.complete?).to be true
-          expect(question.json_audio_fields).to eq(
-            { 'audio_url' => question.transcription_modalite_reponse.audio_url }
+          expect(question.json_audio_fields['audio_url']).to eq(
+            question.transcription_modalite_reponse.audio_url
           )
         end
       end
@@ -120,6 +119,15 @@ describe Question, type: :model do
           expect(fields['audio_url']).to eq(question.transcription_modalite_reponse.audio_url)
           expect(fields['intitule_audio']).to eq(question.transcription_intitule.audio_url)
         end
+      end
+
+      it "retourne l'audio de la consigne" do
+        question.transcription_consigne.audio.attach(
+          io: Rails.root.join('spec/support/alcoolique.mp3').open, filename: 'alcoolique.mp3'
+        )
+        expect(question.json_audio_fields['consigne_audio']).to eq(
+          question.transcription_consigne.audio_url
+        )
       end
     end
   end

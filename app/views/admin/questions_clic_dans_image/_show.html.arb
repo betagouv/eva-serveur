@@ -41,6 +41,9 @@ panel 'Détails de la question' do
     row :audio_consigne do
       tag_audio(consigne)
     end
+    row :audio_consigne_bouton do
+      tag_audio(question_clic_dans_image.transcription_consigne)
+    end
     row :clic do
       type_clic(question_clic_dans_image)
     end

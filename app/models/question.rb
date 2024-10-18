@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   has_one_attached :illustration
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
-                :supprimer_audio_modalite_reponse
+                :supprimer_audio_modalite_reponse, :supprimer_audio_consigne
 
   validates :illustration,
             blob: { content_type: ApplicationController.helpers.illustration_content_types }
@@ -18,11 +18,16 @@ class Question < ApplicationRecord
   has_one :transcription_modalite_reponse, lambda {
                                              where(categorie: :modalite_reponse)
                                            }, class_name: 'Transcription', dependent: :destroy
+  has_one :transcription_consigne, lambda {
+    where(categorie: :consigne)
+  }, class_name: 'Transcription', dependent: :destroy
 
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
 
   CATEGORIE = %i[situation scolarite sante appareils].freeze
+  AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
+
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 
   after_update :supprime_transcription, :supprime_attachment
@@ -37,11 +42,18 @@ class Question < ApplicationRecord
     reponse
   end
 
+  def suppressions_audios
+    { intitule: supprimer_audio_intitule,
+      modalite_reponse: supprimer_audio_modalite_reponse,
+      consigne: supprimer_audio_consigne }.symbolize_keys
+  end
+
   def supprime_attachment
     illustration.purge_later if supprime_illustration?
     transcriptions.find_each do |t|
-      t.audio.purge_later if t.supprime_audio_intitule?(supprimer_audio_intitule)
-      t.audio.purge_later if t.supprime_audio_consigne?(supprimer_audio_modalite_reponse)
+      AUDIO_TYPES.each do |type|
+        t.supprime_audio(type, suppressions_audios[type])
+      end
     end
   end
 

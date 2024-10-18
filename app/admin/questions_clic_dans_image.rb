@@ -10,7 +10,7 @@ ActiveAdmin.register QuestionClicDansImage do
                 :supprimer_audio_intitule,
                 :image_au_clic,
                 :zone_cliquable, :supprimer_zone_cliquable,
-                :supprimer_audio_modalite_reponse,
+                :supprimer_audio_modalite_reponse, :supprimer_audio_consigne,
                 :supprimer_image_au_clic,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]
 

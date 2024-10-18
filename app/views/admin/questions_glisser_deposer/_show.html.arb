@@ -34,6 +34,9 @@ panel 'Détails de la question' do
     row :audio_consigne do
       tag_audio(consigne)
     end
+    row :audio_consigne_bouton do
+      tag_audio(question_glisser_deposer.transcription_consigne)
+    end
     row :created_at
   end
 end

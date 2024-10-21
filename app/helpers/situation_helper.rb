@@ -6,6 +6,7 @@ module SituationHelper
 
     image_tag cdn_for(situation.illustration),
               style: couleur_bord.present? ? "border-color: #{couleur_bord};" : '',
-              class: 'situation-illustration'
+              class: 'situation-illustration',
+              alt: ''
   end
 end

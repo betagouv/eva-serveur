@@ -17,6 +17,7 @@ div class: 'row' do
               traduction_type_structure(structure.type_structure)
             end
             row :code_postal
+            row :siret
             row :region
           end
           row :created_at

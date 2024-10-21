@@ -99,3 +99,13 @@ table.index_table {
 .attributes_table table th {
   text-shadow: none;
 }
+
+.pagination {
+  a {
+    box-shadow: none;
+    background-image: none;
+  }
+}
+.pagination_information {
+  color: $couleur-texte;
+}

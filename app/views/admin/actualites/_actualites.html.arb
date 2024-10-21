@@ -7,7 +7,7 @@ div class: 'actualites' do
         if actualite.illustration.attached?
           div class: 'illustration' do
             link_to admin_actualite_path(actualite) do
-              image_tag cdn_for(actualite.illustration)
+              image_tag cdn_for(actualite.illustration), alt: ''
             end
           end
         end

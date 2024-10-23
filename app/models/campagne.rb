@@ -59,16 +59,16 @@ class Campagne < ApplicationRecord
     configuration_inclus?(&:competences_transversales?)
   end
 
-  def avec_positionnement?
-    configuration_inclus?(&:positionnement?)
-  end
-
   def avec_numeratie?
     configuration_inclus?(&:numeratie?)
   end
 
   def avec_pre_positionnement?
     configuration_inclus?(&:pre_positionnement?)
+  end
+
+  def avec_litteratie?
+    configuration_inclus?(&:litteratie?)
   end
 
   def genere_code_unique

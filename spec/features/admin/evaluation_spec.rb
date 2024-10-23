@@ -122,6 +122,32 @@ describe 'Admin - Evaluation', type: :feature do
       end
     end
 
+    context 'situation cafe de la place' do
+      let!(:mon_evaluation_litteratie) { create :evaluation, campagne: campagne }
+      let!(:partie) do
+        create :partie, situation: cafe_de_la_place, evaluation: mon_evaluation_litteratie
+      end
+      let(:cafe_de_la_place) { create(:situation_cafe_de_la_place) }
+      let(:campagne) do
+        create :campagne, compte: Compte.first, parcours_type: parcours_type
+      end
+
+      before do
+        create :evenement_demarrage, partie: partie
+      end
+
+      it "n'affiche pas le bloc litteratie par défaut" do
+        visit admin_evaluation_path(mon_evaluation_litteratie)
+        expect(page).not_to have_content 'Communiquer en français - Lettrisme'
+      end
+
+      it 'affiche le bloc litteratie si la situation est présente' do
+        campagne.situations_configurations.create situation: cafe_de_la_place
+        visit admin_evaluation_path(mon_evaluation_litteratie)
+        expect(page).to have_content 'Communiquer en français - Lettrisme'
+      end
+    end
+
     context 'Rôle admin' do
       let(:role) { 'admin' }
       let!(:mon_evaluation) do

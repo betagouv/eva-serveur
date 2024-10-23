@@ -131,7 +131,7 @@ div class: 'evaluation__restitution-globale' do
            }
   end
 
-  if campagne_avec_positionnement?
+  if campagne_avec_litteratie?
     div id: 'lettrisme', class: 'page page-lettrisme' do
       render 'entete_page', restitution_globale: restitution_globale
 

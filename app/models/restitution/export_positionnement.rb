@@ -4,31 +4,30 @@ module Restitution
   class ExportPositionnement
     WORKSHEET_NAME = 'Données'
     ENTETES_XLS = [
-      {
-        titre: 'Code Question',
-        taille: 20
-      },
-      {
-        titre: 'Intitulé',
-        taille: 80
-      },
-      {
-        titre: 'Réponse',
-        taille: 45
-      },
-      {
-        titre: 'Score',
-        taille: 10
-      },
-      {
-        titre: 'Score max',
-        taille: 10
-      },
-      {
-        titre: 'Métacompétence',
-        taille: 20
-      }
+      { titre: 'Code Question', taille: 20 },
+      { titre: 'Intitulé', taille: 80 },
+      { titre: 'Réponse', taille: 45 },
+      { titre: 'Score', taille: 10 },
+      { titre: 'Score max', taille: 10 },
+      { titre: 'Métacompétence', taille: 20 },
+      { titre: 'Code cléa', taille: 20 }
     ].freeze
+
+    CODECLEA_METACOMPETENCE = {
+      '2.1.1' => %w[operations_addition operations_soustraction operations_multiplication
+                    operations_multiplication operations_division],
+      '2.1.2' => %w[denombrement],
+      '2.1.3' => %w[ordonner_nombres_entiers ordonner_nombres_decimaux operations_nombres_entiers],
+      '2.1.4' => %w[estimation],
+      '2.3.1' => %w[unites_temps],
+      '2.3.2' => %w[plannings],
+      '2.3.3' => %w[renseigner_horaires],
+      '2.3.5' => %w[tableaux_graphiques],
+      '2.3.7' => %w[surfaces perimetres],
+      '2.4.1' => %w[lecture_plan],
+      '2.5.3' => %w[situation_dans_lespace reconnaitre_les_nombres reconaitre_les_nombres
+                    vocabulaire_numeracie]
+    }.freeze
 
     def initialize(partie:)
       @partie = partie
@@ -81,6 +80,7 @@ module Restitution
       sheet[ligne, 3] = evenement.donnees['score']
       sheet[ligne, 4] = evenement.donnees['scoreMax']
       sheet[ligne, 5] = evenement.donnees['metacompetence']
+      sheet[ligne, 6] = code_clea(evenement)
 
       sheet
     end
@@ -93,6 +93,13 @@ module Restitution
         sheet[0, colonne] = entete[:titre]
         sheet.column(colonne).width = entete[:taille]
       end
+    end
+
+    def code_clea(evenement)
+      metacompetence = evenement.donnees['metacompetence']
+      CODECLEA_METACOMPETENCE.find do |_, metacompetences|
+        metacompetences.include?(metacompetence)
+      end&.first
     end
   end
 end

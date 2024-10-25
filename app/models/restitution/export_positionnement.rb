@@ -41,7 +41,7 @@ module Restitution
 
     def regroupe_par_code_clea(evenements)
       evenements.group_by do |evenement|
-        code = code_clea(evenement)
+        code = evenement.code_clea
         [code.nil? ? 1 : 0, code]
       end
     end
@@ -94,7 +94,7 @@ module Restitution
       sheet[ligne, 3] = evenement.donnees['score']
       sheet[ligne, 4] = evenement.donnees['scoreMax']
       sheet[ligne, 5] = evenement.donnees['metacompetence']
-      sheet[ligne, 6] = code_clea(evenement)
+      sheet[ligne, 6] = evenement.code_clea
 
       sheet
     end
@@ -107,13 +107,6 @@ module Restitution
         sheet[0, colonne] = entete[:titre]
         sheet.column(colonne).width = entete[:taille]
       end
-    end
-
-    def code_clea(evenement)
-      metacompetence = evenement.donnees['metacompetence']
-      Evenement::CODECLEA_METACOMPETENCE.find do |_, metacompetences|
-        metacompetences.include?(metacompetence)
-      end&.first
     end
   end
 end

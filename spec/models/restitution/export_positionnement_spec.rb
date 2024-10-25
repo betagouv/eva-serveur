@@ -82,4 +82,22 @@ describe Restitution::ExportPositionnement do
       expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
     end
   end
+
+  describe '#regroupe_par_code_clea' do
+    it 'trie les evenements par code clea' do
+      evenement1 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'perimetres' }
+      evenement2 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'estimation' }
+      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
+
+      results = {
+        [0, '2.1.4'] => [evenement2],
+        [0, '2.3.7'] => [evenement1],
+        [1, nil] => [evenement3]
+      }
+
+      expect(response_service.regroupe_par_code_clea(Evenement.all)).to eq(results)
+    end
+  end
 end

@@ -54,6 +54,13 @@ module Restitution
       "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
     end
 
+    def regroupe_par_code_clea(evenements)
+      evenements.group_by do |evenement|
+        code = code_clea(evenement)
+        [code.nil? ? 1 : 0, code]
+      end
+    end
+
     private
 
     def retourne_le_contenu_du_xls(workbook)
@@ -64,10 +71,12 @@ module Restitution
 
     def remplie_la_feuille(sheet)
       ligne = 1
-      evenements = Evenement.where(session_id: @partie.session_id)
-      evenements.reponses.order(position: :asc).each do |evenement|
-        sheet = remplis_la_ligne(sheet, ligne, evenement)
-        ligne += 1
+      evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
+      regroupe_par_code_clea(evenements_reponses).each_value do |evenements|
+        evenements.each do |evenement|
+          sheet = remplis_la_ligne(sheet, ligne, evenement)
+          ligne += 1
+        end
       end
       ligne
     end

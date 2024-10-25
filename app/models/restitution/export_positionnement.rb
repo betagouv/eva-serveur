@@ -3,6 +3,7 @@
 module Restitution
   class ExportPositionnement
     WORKSHEET_NAME = 'Données'
+
     ENTETES_XLS = [
       { titre: 'Code Question', taille: 20 },
       { titre: 'Intitulé', taille: 80 },
@@ -12,22 +13,6 @@ module Restitution
       { titre: 'Métacompétence', taille: 20 },
       { titre: 'Code cléa', taille: 20 }
     ].freeze
-
-    CODECLEA_METACOMPETENCE = {
-      '2.1.1' => %w[operations_addition operations_soustraction operations_multiplication
-                    operations_multiplication operations_division],
-      '2.1.2' => %w[denombrement],
-      '2.1.3' => %w[ordonner_nombres_entiers ordonner_nombres_decimaux operations_nombres_entiers],
-      '2.1.4' => %w[estimation],
-      '2.3.1' => %w[unites_temps],
-      '2.3.2' => %w[plannings],
-      '2.3.3' => %w[renseigner_horaires],
-      '2.3.5' => %w[tableaux_graphiques],
-      '2.3.7' => %w[surfaces perimetres],
-      '2.4.1' => %w[lecture_plan],
-      '2.5.3' => %w[situation_dans_lespace reconnaitre_les_nombres reconaitre_les_nombres
-                    vocabulaire_numeracie]
-    }.freeze
 
     def initialize(partie:)
       @partie = partie
@@ -73,15 +58,28 @@ module Restitution
       ligne = 1
       evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
       regroupe_par_code_clea(evenements_reponses).each do |code, evenements|
-        ligne = remplis_code_et_evenements(sheet, ligne, code, evenements)
+        ligne = remplis_reponses_par_code(sheet, ligne, code, evenements)
       end
       ligne
     end
 
-    def remplis_code_et_evenements(sheet, ligne, code, evenements)
-      sheet[ligne, 0] = code[1]
+    def remplis_reponses_par_code(sheet, ligne, code, evenements)
+      if code[1].present?
+        sheet[ligne, 0] = "#{code[1]} - score: #{pourcentage_reussite(evenements)}%"
+        sheet.merge_cells(ligne, 0, ligne, 6)
+      end
       ligne += 1
-      evenements.each do |evenement|
+      remplis_reponses(sheet, ligne, evenements)
+    end
+
+    def pourcentage_reussite(evenements)
+      scores = evenements.map { |e| [e.donnees['scoreMax'], e.donnees['score']] }
+      score_max, score = scores.transpose.map(&:sum)
+      score_max.zero? ? 0 : (score * 100 / score_max).round
+    end
+
+    def remplis_reponses(sheet, ligne, evenements)
+      evenements.sort_by(&:position).each do |evenement|
         sheet = remplis_la_ligne(sheet, ligne, evenement)
         ligne += 1
       end
@@ -113,7 +111,7 @@ module Restitution
 
     def code_clea(evenement)
       metacompetence = evenement.donnees['metacompetence']
-      CODECLEA_METACOMPETENCE.find do |_, metacompetences|
+      Evenement::CODECLEA_METACOMPETENCE.find do |_, metacompetences|
         metacompetences.include?(metacompetence)
       end&.first
     end

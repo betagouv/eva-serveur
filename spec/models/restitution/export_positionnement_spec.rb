@@ -45,6 +45,12 @@ describe Restitution::ExportPositionnement do
                           metacompetence: 'renseigner_horaires' }
         create :evenement_reponse,
                partie: partie,
+               donnees: { question: 'LOdi2',
+                          score: 1,
+                          scoreMax: 2,
+                          metacompetence: 'renseigner_horaires' }
+        create :evenement_reponse,
+               partie: partie,
                donnees: { intitule: intitule_question2,
                           question: 'LOdi4',
                           reponse: 'chatMadameCoupin',
@@ -56,7 +62,7 @@ describe Restitution::ExportPositionnement do
         spreadsheet = Spreadsheet.open(StringIO.new(xls))
         worksheet = spreadsheet.worksheet(0)
         question2 = worksheet.row(1)
-        expect(question2[0]).to eq('2.3.3')
+        expect(question2[0]).to eq('2.3.3 - score: 75%')
         question1 = worksheet.row(2)
         expect(question1[0]).to eq('LOdi1')
         expect(question1[1]).to eq('De quoi s’agit-il ?')
@@ -67,13 +73,13 @@ describe Restitution::ExportPositionnement do
         expect(question1[6]).to eq('2.3.3')
       end
 
-      it 'varifie les détails de la deuxième question' do
+      it 'verifie les détails de la deuxième question' do
         xls = response_service.to_xls
         spreadsheet = Spreadsheet.open(StringIO.new(xls))
         worksheet = spreadsheet.worksheet(0)
-        question2 = worksheet.row(3)
-        expect(question2[0]).to be_nil
         question2 = worksheet.row(4)
+        expect(question2[0]).to be_nil
+        question2 = worksheet.row(5)
         expect(question2[0]).to eq('LOdi4')
         expect(question2[1]).to eq(intitule_question2)
         expect(question2[2]).to eq('Le chat de Mme Coupin')

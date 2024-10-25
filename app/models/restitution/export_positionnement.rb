@@ -72,11 +72,18 @@ module Restitution
     def remplie_la_feuille(sheet)
       ligne = 1
       evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
-      regroupe_par_code_clea(evenements_reponses).each_value do |evenements|
-        evenements.each do |evenement|
-          sheet = remplis_la_ligne(sheet, ligne, evenement)
-          ligne += 1
-        end
+      regroupe_par_code_clea(evenements_reponses).each do |code, evenements|
+        ligne = remplis_code_et_evenements(sheet, ligne, code, evenements)
+      end
+      ligne
+    end
+
+    def remplis_code_et_evenements(sheet, ligne, code, evenements)
+      sheet[ligne, 0] = code[1]
+      ligne += 1
+      evenements.each do |evenement|
+        sheet = remplis_la_ligne(sheet, ligne, evenement)
+        ligne += 1
       end
       ligne
     end

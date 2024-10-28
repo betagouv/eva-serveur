@@ -70,7 +70,7 @@ module Restitution
     end
 
     def pourcentage_reussite(evenements)
-      scores = evenements.map { |e| [e.donnees['scoreMax'], e.donnees['score']] }
+      scores = evenements.map { |e| [e.donnees['scoreMax'] || 0, e.donnees['score'] || 0] }
       score_max, score = scores.transpose.map(&:sum)
       score_max.zero? ? 0 : (score * 100 / score_max).round
     end

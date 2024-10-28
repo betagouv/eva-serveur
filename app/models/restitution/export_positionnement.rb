@@ -88,7 +88,7 @@ module Restitution
       sheet[ligne, 0] = evenement.donnees['question']
       sheet[ligne, 1] = evenement.donnees['intitule']
       sheet[ligne, 2] = evenement.reponse_intitule
-      sheet[ligne, 3] = evenement.donnees['score']
+      sheet[ligne, 3] = evenement.donnees['score'] || 0
       sheet[ligne, 4] = evenement.donnees['scoreMax']
       sheet[ligne, 5] = evenement.donnees['metacompetence']
       sheet[ligne, 6] = evenement.code_clea

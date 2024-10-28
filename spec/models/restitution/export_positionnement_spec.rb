@@ -86,11 +86,11 @@ describe Restitution::ExportPositionnement do
         question2 = worksheet.row(5)
         expect(question2[0]).to eq('LOdi3')
         question2 = worksheet.row(6)
-        expect(question2[3]).to be_nil
+        expect(question2[3]).to eq(0)
         expect(question2[4]).to be_nil
         expect(question2[1]).to eq(intitule_question2)
         expect(question2[2]).to eq('Le chat de Mme Coupin')
-        expect(question2[3]).to be_nil
+        expect(question2[3]).to eq(0)
         expect(question2[4]).to be_nil
         expect(question2[5]).to be_nil
       end

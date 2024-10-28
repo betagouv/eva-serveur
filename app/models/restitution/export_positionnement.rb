@@ -40,10 +40,7 @@ module Restitution
     end
 
     def regroupe_par_code_clea(evenements)
-      evenements.group_by do |evenement|
-        code = evenement.code_clea
-        [code.nil? ? 1 : 0, code]
-      end
+      evenements.group_by(&:code_clea)
     end
 
     private
@@ -64,8 +61,8 @@ module Restitution
     end
 
     def remplis_reponses_par_code(sheet, ligne, code, evenements)
-      if code[1].present?
-        sheet[ligne, 0] = "#{code[1]} - score: #{pourcentage_reussite(evenements)}%"
+      if code.present?
+        sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}%"
         sheet.merge_cells(ligne, 0, ligne, 6)
       end
       ligne += 1

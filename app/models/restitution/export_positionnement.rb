@@ -78,7 +78,9 @@ module Restitution
       sheet[ligne, 1] = evenement.donnees['intitule']
       sheet[ligne, 2] = evenement.reponse_intitule
       sheet[ligne, 3] = evenement.donnees['score']
+      sheet.row(ligne).set_format(3, format_score(evenement.donnees['score']))
       sheet[ligne, 4] = evenement.donnees['scoreMax']
+      sheet.row(ligne).set_format(4, format_score(evenement.donnees['scoreMax']))
       sheet[ligne, 5] = evenement.donnees['metacompetence']
       sheet[ligne, 6] = code_clea(evenement)
 
@@ -100,6 +102,16 @@ module Restitution
       CODECLEA_METACOMPETENCE.find do |_, metacompetences|
         metacompetences.include?(metacompetence)
       end&.first
+    end
+
+    def format_score(score)
+      return unless score
+
+      if (score % 1).zero?
+        Spreadsheet::Format.new(number_format: '0')
+      else
+        Spreadsheet::Format.new(number_format: '0.00')
+      end
     end
   end
 end

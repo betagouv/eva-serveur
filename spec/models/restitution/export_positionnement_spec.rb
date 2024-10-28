@@ -45,6 +45,7 @@ describe Restitution::ExportPositionnement do
              donnees: { intitule: intitule_question2,
                         question: 'LOdi4',
                         reponse: 'chatMadameCoupin',
+                        score: 0.75,
                         reponseIntitule: 'Le chat de Mme Coupin' }
 
       xls = response_service.to_xls
@@ -62,7 +63,7 @@ describe Restitution::ExportPositionnement do
       expect(question2[0]).to eq('LOdi4')
       expect(question2[1]).to eq(intitule_question2)
       expect(question2[2]).to eq('Le chat de Mme Coupin')
-      expect(question2[3]).to be_nil
+      expect(question2[3]).to eq(0.75)
       expect(question2[4]).to be_nil
       expect(question2[5]).to be_nil
     end

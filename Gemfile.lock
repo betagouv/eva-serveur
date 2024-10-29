@@ -192,6 +192,8 @@ GEM
     devise-i18n (1.12.1)
       devise (>= 4.9.0)
     diff-lcs (1.5.1)
+    down (5.4.2)
+      addressable (~> 2.8)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
@@ -587,6 +589,7 @@ DEPENDENCIES
   device_detector
   devise
   devise-i18n
+  down
   factory_bot_rails
   ffaker
   font-awesome-sass (~> 6.5.1)

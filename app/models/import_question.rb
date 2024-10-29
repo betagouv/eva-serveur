@@ -33,12 +33,25 @@ class ImportQuestion
   end
 
   def genere_nouvelle_question(data)
-    question = Question.create(type: @type, libelle: data[0],
-                               nom_technique: data[1], description: data[2])
-    Transcription.create(ecrit: data[3], question_id: question.id,
-                         categorie: :intitule)
-    Transcription.create(ecrit: data[5], question_id: question.id,
-                         categorie: :modalite_reponse)
-    question
+    @question = Question.create!(type: @type, libelle: data[0],
+                                 nom_technique: data[1], description: data[2])
+    cree_transcription(:intitule, data[4], data[3])
+    cree_transcription(:modalite_reponse, data[6], data[5])
+
+    @question
+  end
+
+  def cree_transcription(categorie, audio_url, ecrit)
+    transcription = Transcription.create!(ecrit: ecrit, question_id: @question.id,
+                                          categorie: categorie)
+    return if audio_url.blank?
+
+    audio_file = Down.download(audio_url)
+    audio_blob = ActiveStorage::Blob.create_and_upload!(
+      io: audio_file,
+      filename: 'audio.mp3',
+      content_type: 'audio/mpeg'
+    )
+    transcription.audio.attach(audio_blob)
   end
 end

@@ -38,6 +38,11 @@ Rails.application.routes.draw do
           resource :reponses, only: [:show], defaults: { format: 'xls' }
         end
       end
+      resources :questions_clic_dans_image do
+        collection do
+          post 'import_xls'
+        end
+      end
     end
 
     namespace :api do

@@ -1,0 +1,10 @@
+<%= form_with url: url, method: :post, local: true do |form| %>
+  <div class="field">
+    <%= form.label :csv_file, "CSV File" %>
+    <%= form.file_field :csv_file, accept: '.xls' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Importer le fichier' %>
+  </div>
+<% end %>

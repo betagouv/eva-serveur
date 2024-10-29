@@ -67,8 +67,6 @@ class Question < ApplicationRecord
     json
   end
 
-  private
-
   def audio_url
     return transcription_intitule.audio_url if transcription_intitule&.complete?
 

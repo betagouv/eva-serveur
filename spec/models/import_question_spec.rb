@@ -21,9 +21,13 @@ describe ImportQuestion do
 
       it 'crée les transcriptions' do
         service.preremplis_donnees(file)
-        expect(Question.last.transcriptions.count).to eq 2
-        expect(Question.last.transcriptions.first.categorie).to eq 'intitule'
-        expect(Question.last.transcriptions.last.categorie).to eq 'modalite_reponse'
+        transcriptions = Question.last.transcriptions
+        expect(transcriptions.count).to eq 2
+        expect(transcriptions.first.categorie).to eq 'intitule'
+        expect(transcriptions.first.ecrit).to eq 'Ceci est un intitulé'
+        expect(transcriptions.first.audio.attached?).to be true
+        expect(transcriptions.last.categorie).to eq 'modalite_reponse'
+        expect(transcriptions.last.ecrit).to eq 'Ceci est une consigne'
       end
     end
 

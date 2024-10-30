@@ -35,7 +35,7 @@ ActiveAdmin.register QuestionClicDansImage do
 
   action_item :importer_question, only: :index, if: -> { can? :manage, Question } do
     link_to 'Importer question clic dans image',
-            admin_import_xls_path(url: import_xls_admin_questions_clic_dans_image_path)
+            admin_import_xls_path(type: 'QuestionClicDansImage')
   end
 
   show do
@@ -45,15 +45,6 @@ ActiveAdmin.register QuestionClicDansImage do
   controller do
     def set_question
       @question = Question.includes(transcriptions: :audio_attachment).find(params[:id])
-    end
-
-    def import_xls
-      return if params[:csv_file].blank?
-
-      import = ImportQuestion.new('QuestionClicDansImage')
-
-      question = import.preremplis_donnees(params[:csv_file])
-      redirect_to edit_admin_question_clic_dans_image_path(question)
     end
   end
 end

@@ -7,7 +7,7 @@ describe ImportQuestion do
     described_class.new('QuestionClicDansImage')
   end
 
-  describe '#preremplis_donnees' do
+  describe '#remplis_donnees' do
     describe 'avec un fichier valide' do
       let(:file) do
         fixture_file_upload('spec/support/import_question.xls', 'text/xls')
@@ -15,12 +15,12 @@ describe ImportQuestion do
 
       it 'importe une nouvelle question' do
         expect do
-          service.preremplis_donnees(file)
+          service.remplis_donnees(file)
         end.to change(Question, :count).by(1)
       end
 
       it 'crée les transcriptions' do
-        service.preremplis_donnees(file)
+        service.remplis_donnees(file)
         transcriptions = Question.last.transcriptions
         expect(transcriptions.count).to eq 2
         expect(transcriptions.first.categorie).to eq 'intitule'
@@ -38,7 +38,7 @@ describe ImportQuestion do
 
       it "n'importe pas de question" do
         expect do
-          service.preremplis_donnees(file)
+          service.remplis_donnees(file)
         end.not_to change(Question, :count)
       end
     end

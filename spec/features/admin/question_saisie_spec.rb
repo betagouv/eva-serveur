@@ -5,6 +5,21 @@ require 'rails_helper'
 describe 'Admin - Question Saisie', type: :feature do
   before { se_connecter_comme_superadmin }
 
+  describe 'index' do
+    let!(:question) do
+      create :question_saisie
+    end
+
+    before { visit admin_questions_saisies_path }
+
+    it "redirige vers le formulaire d'importation de question" do
+      within('.action-items-sidebar') do
+        click_on 'Importer question saisie'
+      end
+      expect(page).to have_content 'Importer question'
+    end
+  end
+
   describe 'création' do
     before do
       visit new_admin_question_saisie_path

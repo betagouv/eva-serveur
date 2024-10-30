@@ -9,6 +9,7 @@ fr:
         mot_de_passe_faible: Votre mot de passe n'est pas conforme aux nouvelles exigences de sécurité. Un mail de réinitialisation vous a été envoyé, veuillez suivre ses instructions pour définir un nouveau mot de passe. N'hésitez pas à contacter le support si vous rencontrez des difficultés.
   active_admin:
     recherche_structure: Rechercher ma structure
+    import_question: Importer une question
     devise:
       sessions:
         new:

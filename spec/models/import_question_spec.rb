@@ -28,6 +28,15 @@ describe ImportQuestion do
         expect(transcriptions.first.audio.attached?).to be true
         expect(transcriptions.last.categorie).to eq 'modalite_reponse'
         expect(transcriptions.last.ecrit).to eq 'Ceci est une consigne'
+        expect(transcriptions.last.audio.attached?).to be true
+      end
+
+      it "importe les données d'une question" do
+        service.remplis_donnees(file)
+        question = Question.last
+        expect(question.nom_technique).to eq 'N1Pse5'
+        expect(question.libelle).to eq 'N1Pse5'
+        expect(question.illustration.attached?).to be true
       end
     end
 
@@ -36,10 +45,12 @@ describe ImportQuestion do
         fixture_file_upload('spec/support/import_question_invalide.xls', 'text/xls')
       end
 
-      it "n'importe pas de question" do
+      it 'renvoie une erreur avec les headers manquants' do
+        message = service.send(:message_erreur_headers)
+
         expect do
           service.remplis_donnees(file)
-        end.not_to change(Question, :count)
+        end.to raise_error(ImportQuestion::Error, message)
       end
     end
   end

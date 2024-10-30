@@ -23,7 +23,7 @@ describe 'Admin - Question QCM', type: :feature do
       within('.action-items-sidebar') do
         click_on 'Importer question qcm'
       end
-      expect(page).to have_content 'Importer question'
+      expect(page).to have_content 'Importer une question'
     end
   end
 

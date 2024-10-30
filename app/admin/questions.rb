@@ -9,8 +9,12 @@ ActiveAdmin.register Question do
 
       import = ImportQuestion.new(params[:type])
       @question = import.remplis_donnees(params[:file_xls])
-      ## TODO gère l'erreur si la question n'a pas pu être créée
+
+      flash[:success] = I18n.t('.layouts.succes.import_question')
       redirect_to redirection_apres_import
+    rescue ImportQuestion::Error => e
+      flash[:error] = e.message
+      redirect_to admin_import_xls_path(type: params[:type])
     end
 
     private

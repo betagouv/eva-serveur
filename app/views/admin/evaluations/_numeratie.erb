@@ -5,8 +5,7 @@
   <div class='marges-page'>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
-      scope: "admin.evaluations.numeratie",
-      description: "#{profil}.description",
+      scope: "admin.evaluations.numeratie.#{profil}",
       icone: "icone_profil/icone_#{profil}.svg",
       pdf: pdf %>
   </div>

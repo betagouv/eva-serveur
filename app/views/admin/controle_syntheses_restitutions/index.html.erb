@@ -34,8 +34,7 @@
                 <div id="lettrisme" class="page">
                   <%= render 'admin/evaluations/litteratie_numeratie_synthese',
                     synthese: synthese,
-                    scope: "admin.restitutions.cefr",
-                    description: synthese,
+                    scope: "admin.restitutions.cefr.#{synthese}",
                     icone: "punaise-#{synthese}.svg",
                     pdf: false %>
                 </div>
@@ -43,14 +42,27 @@
             </div>
           <% end -%>
 
-          <h2>Synthèses de positionnement</h2>
-          <% @syntheses_positionnement.each do |donnees| -%>
+          <h2>Synthèses de positionnement littératie</h2>
+          <% @syntheses_positionnement_litteratie.each do |donnees| -%>
             <div id="lettrisme" class="page">
               <div class="panel">
                 <%= render 'admin/evaluations/litteratie_numeratie_synthese',
                   synthese: donnees[1],
-                  scope: "admin.evaluations.lettrisme.litteratie",
-                  description: "#{donnees[0]}.description",
+                  scope: "admin.evaluations.lettrisme.litteratie.#{donnees[0]}",
+                  icone: "icone_profil/icone_#{donnees[0]}.svg",
+                  pdf: false %>
+                <div/> <!-- pour absorber le style specifique de la dernière div du panel -->
+              </div>
+            </div>
+          <% end -%>
+
+          <h2>Synthèses de positionnement numératie</h2>
+          <% @syntheses_positionnement_numeratie.each do |donnees| -%>
+            <div id="lettrisme" class="page">
+              <div class="panel">
+                <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                  synthese: donnees[1],
+                  scope: "admin.evaluations.numeratie.#{donnees[0]}",
                   icone: "icone_profil/icone_#{donnees[0]}.svg",
                   pdf: false %>
                 <div/> <!-- pour absorber le style specifique de la dernière div du panel -->

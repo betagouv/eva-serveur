@@ -4,7 +4,7 @@
     <div class='col'>
       <div class='row'>
         <div class='col-auto col-icone-info'>
-          <div><%= svg_tag_base64 'info.svg', class: 'icone' %></div>
+          <div><%= svg_tag_base64 'info.svg', class: 'icone', alt: 'Information' %></div>
         </div>
         <div class='col no-gutters'>
           <div class='texte-explications'>
@@ -12,7 +12,9 @@
           </div>
           <div class='col badges-referentiels'>
             <% @badges_referentiel.each do |badge| %>
-              <%= svg_tag_base64 "badges/anlci/#{badge}.svg", class: 'badge-references' %>
+              <%= svg_tag_base64 "badges/anlci/#{badge}.svg",
+                                 class: 'badge-references',
+                                 alt: t(badge, scope: scope) %>
             <% end %>
           </div>
           <div class='texte-explications'>

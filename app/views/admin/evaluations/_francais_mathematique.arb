@@ -3,8 +3,7 @@
 div class: 'marges-page' do
   render 'litteratie_numeratie_synthese',
          synthese: synthese,
-         description: synthese,
-         scope: 'admin.restitutions.cefr',
+         scope: "admin.restitutions.cefr.#{synthese}",
          icone: "punaise-#{synthese}.svg",
          pdf: pdf
 
@@ -16,13 +15,13 @@ div class: 'marges-page' do
 
   div class: 'row my-4' do
     div class: 'col-auto badge' do
-      img # place holder
+      image_tag '', alt: '' # place holder
     end
     div class: 'col' do
       render 'metacompetences', categorie: :litteratie
     end
     div class: 'col-auto badge' do
-      img # place holder
+      image_tag '', alt: '' # place holder
     end
     div class: 'col' do
       render 'metacompetences', categorie: :numeratie

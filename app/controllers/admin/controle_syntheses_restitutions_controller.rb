@@ -29,7 +29,8 @@ module Admin
 
     def index
       @syntheses_pre_positionnement = syntheses_pre_positionnement
-      @syntheses_positionnement = syntheses_positionnement
+      @syntheses_positionnement_litteratie = syntheses_positionnement_litteratie
+      @syntheses_positionnement_numeratie = syntheses_positionnement_numeratie
       @sous_competences_prepositionnement = SOUS_COMPETENCES_PREPOSITIONNEMENT
       @sous_competences_positionnement = SOUS_COMPETENCES_POSITIONNEMENT
     end
@@ -43,7 +44,7 @@ module Admin
       ]
     end
 
-    def syntheses_positionnement
+    def syntheses_positionnement_litteratie
       [[::Competence::NIVEAU_INDETERMINE, nil],
        [::Competence::PROFIL_ABERRANT, 'aberrant'],
        [::Competence::PROFIL_1, 'illettrisme_potentiel'],
@@ -53,6 +54,14 @@ module Admin
        [::Competence::PROFIL_4H, 'socle_clea'],
        [::Competence::PROFIL_4H_PLUS, 'socle_clea'],
        [::Competence::PROFIL_4H_PLUS_PLUS, 'socle_clea']]
+    end
+
+    def syntheses_positionnement_numeratie
+      [[::Competence::NIVEAU_INDETERMINE, nil],
+       [::Competence::PROFIL_1, 'illettrisme_potentiel'],
+       [::Competence::PROFIL_2, 'illettrisme_potentiel'],
+       [::Competence::PROFIL_3, 'ni_ni'],
+       [::Competence::PROFIL_4, 'socle_clea']]
     end
   end
 end

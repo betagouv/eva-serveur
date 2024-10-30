@@ -1,7 +1,7 @@
 <div class="sous-competence__container">
   <div class="row">
     <div class= "col-auto">
-      <%= svg_tag_base64 "badges/anlci/#{profil}.svg" %>
+      <%= image_tag "badges/anlci/#{profil}.svg", alt: t(".#{profil}.alt_icone") %>
     </div>
     <div class= "col-7">
       <%= md t(".#{sous_competence}.titre") %>

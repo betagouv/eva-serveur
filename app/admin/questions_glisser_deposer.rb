@@ -17,6 +17,11 @@ ActiveAdmin.register QuestionGlisserDeposer do
 
   form partial: 'form'
 
+  action_item :importer_question, only: :index, if: -> { can? :manage, Question } do
+    link_to 'Importer question glisser déposer',
+            admin_import_xls_path(type: 'QuestionGlisserDeposer')
+  end
+
   index do
     column :libelle do |q|
       link_to q.libelle, admin_question_glisser_deposer_path(q)

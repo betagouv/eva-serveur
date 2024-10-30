@@ -10,6 +10,11 @@ ActiveAdmin.register QuestionSousConsigne do
   filter :libelle
   filter :nom_technique
 
+  action_item :importer_question, only: :index, if: -> { can? :manage, Question } do
+    link_to 'Importer question sous consigne',
+            admin_import_xls_path(type: 'QuestionSousConsigne')
+  end
+
   form do |f|
     f.semantic_errors
     f.inputs do

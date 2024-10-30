@@ -18,5 +18,12 @@ describe 'Admin - Question Sous Consigne', type: :feature do
     it do
       expect(page).to have_content 'Intitulé sous consigne'
     end
+
+    it "redirige vers le formulaire d'importation de question" do
+      within('.action-items-sidebar') do
+        click_on 'Importer question sous consigne'
+      end
+      expect(page).to have_content 'Importer question'
+    end
   end
 end

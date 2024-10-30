@@ -17,6 +17,11 @@ ActiveAdmin.register QuestionQcm do
 
   form partial: 'form'
 
+  action_item :importer_question, only: :index, if: -> { can? :manage, Question } do
+    link_to 'Importer question qcm',
+            admin_import_xls_path(type: 'QuestionQcm')
+  end
+
   index do
     column :libelle do |q|
       link_to q.libelle, admin_question_qcm_path(q)

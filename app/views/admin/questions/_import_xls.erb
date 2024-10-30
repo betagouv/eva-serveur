@@ -1,8 +1,10 @@
-<%= form_with url: url, method: :post, local: true do |form| %>
+<%= form_with model: @question, url: import_xls_admin_questions_path, method: :post, local: true do |form| %>
   <div class="field">
-    <%= form.label :csv_file, "CSV File" %>
-    <%= form.file_field :csv_file, accept: '.xls' %>
+    <%= form.label :file_xls, "Fichier XLS" %>
+    <%= form.file_field :file_xls, accept: '.xls' %>
   </div>
+
+  <%= form.hidden_field :type, value: type %>
 
   <div class="actions">
     <%= form.submit 'Importer le fichier' %>

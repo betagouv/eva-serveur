@@ -38,7 +38,7 @@ describe 'Admin - Question Clic dans Image', type: :feature do
       expect(page).to have_content 'Comment ça va ?'
     end
 
-    it "redirige vers le formulaire d'importation de questions" do
+    it "redirige vers le formulaire d'importation de question" do
       within('.action-items-sidebar') do
         click_on 'Importer question clic dans image'
       end

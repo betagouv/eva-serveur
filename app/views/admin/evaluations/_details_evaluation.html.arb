@@ -36,10 +36,8 @@ div id: 'evaluation__details', class: 'row' do
           end
         end
         div class: 'col-2 card-pdf' do
-          div class: 'pdf-image' do
-            inline_svg_tag('source-aide-pdf.svg')
-          end
-          div class: 'pdf-bouton' do
+          div image_tag 'source-aide-pdf.svg', alt: 'document PDF'
+          div class: 'mt-2' do
             link_to('Exporter', {
                       parties_selectionnees: params[:parties_selectionnees],
                       format: :pdf
@@ -52,7 +50,7 @@ div id: 'evaluation__details', class: 'row' do
         div class: 'row m-0' do
           div class: 'container card__banner bg-alerte d-flex' do
             div(class: 'col-2 d-flex align-items-center justify-content-center') do
-              svg_tag_base64 'attention_icone.svg', class: 'banner__icone'
+              image_tag 'attention_icone.svg', class: 'banner__icone', alt: 'Attention'
             end
             div class: 'col-6 supprime-espace-derniere-balise' do
               if resource.competences_de_base_incompletes?

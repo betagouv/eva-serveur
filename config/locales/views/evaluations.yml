@@ -214,8 +214,9 @@ fr:
         pas_de_responsable: Pas de responsable de suivi
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
+      redaction: Rédaction
       aide_interpretation_expression_ecrite: |
-        Outils d’analyse pour la communication écrite
+        Outils d’analyse pour la communication écrite :
 
         **La capacité à communiquer** à l'écrit de manière compréhensible : le texte est-il clair à la première lecture ?
 
@@ -368,6 +369,7 @@ fr:
         Les raisons peuvent être trouvées ici :  
         [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
       cefr:
+        alt_icone: ''
         titre: Vos compétences en français et mathématiques
         titre_menu_lateral: Français et Mathématiques
         niveau: 'Niveau %{niveau}'
@@ -407,25 +409,45 @@ fr:
             description: |
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
-        socle_clea: |
-          ## Certification Cléa indiquée
+        socle_clea:
+          alt_icone: ''
+          description: |
+            ## Certification Cléa indiquée
 
-          Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
+            Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 
-          **Nous vous conseillons d’échanger avec votre conseiller ou votre conseillère de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
-        ni_ni: |
-          ## Vos compétences peuvent encore être améliorées
+            **Nous vous conseillons d’échanger avec votre conseiller ou votre conseillère de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
+        ni_ni:
+          alt_icone: ''
+          description: |
+            ## Vos compétences peuvent encore être améliorées
 
-          Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
-        illettrisme_potentiel: |
-          ## Formation vivement recommandée
+            Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
+        illettrisme_potentiel:
+          alt_icone: ''
+          description: |
+            ## Formation vivement recommandée
 
-          Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
-          Il est important que vous échangiez à ce sujet avec votre conseiller.
+            Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
+            Il est important que vous échangiez à ce sujet avec votre conseiller.
         references:
           ordre: '(par ordre croissant)'
           francais: 'Français :'
           mathematiques: 'Mathématiques :'
+          pre_A1: Niveau pre A1
+          A1: Niveau A1
+          A2: Niveau A2
+          B1: Niveau B1
+          pre_X1: Niveau pre X1
+          X1: Niveau X1
+          X2: Niveau X2
+          Y1: Niveau Y1
+          profil1-referentiel: Profil 1
+          profil2-referentiel: Profil 2
+          profil3-referentiel: Profil 3
+          profil4-referentiel: Profil 4
+          profil4_plus-referentiel: Profil 4 plus
+          profil4_plus_plus-referentiel: Profil 4 plus plus
           explications-cefr: |
             Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
           explications-anlci: |

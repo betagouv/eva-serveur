@@ -3,7 +3,9 @@
 div class: 'referentiel_anlci bg-information' do
   scope = 'admin.restitutions.cefr.references'
   div class: 'row marges-page' do
-    div(class: 'col-auto col-icone-info') { svg_tag_base64 'info.svg', class: 'icone' }
+    div(class: 'col-auto col-icone-info') do
+      svg_tag_base64 'info.svg', class: 'icone', alt: 'Information'
+    end
     div class: 'col' do
       div class: 'col' do
         div class: 'row' do
@@ -16,10 +18,11 @@ div class: 'referentiel_anlci bg-information' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/pre_A1-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/A1-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/A2-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/B1-referentiel.svg', class: 'badge-references'
+          %w[pre_A1 A1 A2 B1].each do |badge|
+            text_node svg_tag_base64 "badges/cefr/#{badge}-referentiel.svg",
+                                     class: 'badge-references',
+                                     alt: t(badge, scope: scope)
+          end
         end
 
         div class: 'col-auto' do
@@ -27,10 +30,11 @@ div class: 'referentiel_anlci bg-information' do
           div t('ordre', scope: scope), class: 'ordre'
         end
         div class: 'col' do
-          text_node svg_tag_base64 'badges/cefr/pre_X1-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/X1-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/X2-referentiel.svg', class: 'badge-references'
-          text_node svg_tag_base64 'badges/cefr/Y1-referentiel.svg', class: 'badge-references'
+          %w[pre_X1 X1 X2 Y1].each do |badge|
+            text_node svg_tag_base64 "badges/cefr/#{badge}-referentiel.svg",
+                                     class: 'badge-references',
+                                     alt: t(badge, scope: scope)
+          end
         end
       end
       div(class: 'col texte-explications') { md t('explications-lien', scope: scope) }

@@ -95,7 +95,7 @@ div class: 'evaluation__restitution-globale' do
                                           synthese: restitution_globale.synthese_pre_positionnement
         end
 
-        render 'pied_page', pre_pied_page: 'referentiel_anlci'
+        render 'pied_page', pre_pied_page: 'referentiel_europeen'
       end
 
       if mes_avec_redaction_de_notes.present?
@@ -117,7 +117,7 @@ div class: 'evaluation__restitution-globale' do
 
           render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
-          render 'referentiel_anlci'
+          render 'referentiel_europeen'
         end
       end
     end

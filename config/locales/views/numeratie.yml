@@ -2,7 +2,10 @@ fr:
   admin:
     evaluations:
       numeratie:
+        indetermine:
+          alt_icone: ''
         profil1:
+          alt_icone: Profil 1
           description: |
             ##Formation vivement recommandée
 
@@ -10,6 +13,7 @@ fr:
 
             Il est important que vous échangiez à ce sujet avec la personne qui vous accompagne.
         profil2:
+          alt_icone: Profil 2
           description:  |
             ##Formation vivement recommandée
 
@@ -17,6 +21,7 @@ fr:
 
             Il est important que vous échangiez à ce sujet avec la personne qui vous accompagne.
         profil3:
+          alt_icone: Profil 3
           description: |
             ##Vos compétences en calcul et raisonnement peuvent être améliorées
 
@@ -24,6 +29,7 @@ fr:
 
             N’hésitez pas à en parler avec la personne qui vous accompagne !
         profil4:
+          alt_icone: Profil 4
           description: |
             ##Vous maîtrisez les bases du calcul et du raisonnement
 

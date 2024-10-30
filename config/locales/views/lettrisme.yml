@@ -3,7 +3,10 @@ fr:
     evaluations:
       lettrisme:
         litteratie:
+          indetermine:
+            alt_icone: ''
           profil_aberrant:
+            alt_icone: Profil aberrant
             description: |
               ##Votre score n’a pas pu être calculé
 
@@ -17,6 +20,7 @@ fr:
 
               *	vous n’avez pas encore terminé le parcours.
           profil1:
+            alt_icone: Profil 1
             description: |
               ##Formation vivement recommandée
 
@@ -24,6 +28,7 @@ fr:
 
               Il est important que vous échangiez à ce sujet avec la personne qui vous accompagne.
           profil2:
+            alt_icone: Profil 2
             description:  |
               ##Formation vivement recommandée
 
@@ -31,6 +36,7 @@ fr:
 
               Il est important que vous échangiez à ce sujet avec la personne qui vous accompagne.
           profil3:
+            alt_icone: Profil 3
             description: |
               ##Vos compétences en français peuvent être améliorées
 
@@ -38,6 +44,7 @@ fr:
 
               N’hésitez pas à en parler avec la personne qui vous accompagne !
           profil4:
+            alt_icone: Profil 4
             description: |
               ##Vous maîtrisez les bases du français
 
@@ -45,6 +52,7 @@ fr:
 
               Cela vous ouvre les portes de nombreuses formations ou de nombreux emplois !
           profil_4h:
+            alt_icone: Profil 4
             description: |
               ##Certification Cléa indiquée
 
@@ -52,6 +60,7 @@ fr:
 
               Maîtriser les fondamentaux de la communication en français vous ouvre les portes de nombreuses formations ou de nombreux emplois, n’hésitez pas à valoriser la maîtrise de cette compétence !
           profil_4h_plus:
+            alt_icone: Profil 4 plus
             description: |
               ##Certification Cléa indiquée
 
@@ -59,6 +68,7 @@ fr:
 
               Maîtriser les fondamentaux de la communication en français vous ouvre les portes de nombreuses formations ou de nombreux emplois, n’hésitez pas à valoriser la maîtrise de cette compétence !
           profil_4h_plus_plus:
+            alt_icone: Profil 4 plus plus
             description: |
               ##Très bonne maîtrise du français
 
@@ -66,6 +76,14 @@ fr:
 
               N’hésitez pas à valoriser la maîtrise de cette compétence !
       lettrisme_sous_competence:
+        profil1:
+          alt_icone: Profil 1
+        profil2:
+          alt_icone: Profil 2
+        profil3:
+          alt_icone: Profil 3
+        profil4:
+          alt_icone: Profil 4
         lecture:
           titre: |
             ##Lecture

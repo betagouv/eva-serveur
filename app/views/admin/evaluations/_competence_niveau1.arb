@@ -8,7 +8,7 @@ div class: 'col-auto badge' do
     div svg_tag_base64 "#{competence}_#{referentiel}.svg"
     div svg_tag_base64 "badges/#{referentiel}/#{niveau}.svg" if niveau.present?
   else
-    div image_tag "#{competence}_#{referentiel}.svg"
+    div image_tag "#{competence}_#{referentiel}.svg", alt: ''
     if niveau.present?
       div image_tag "badges/#{referentiel}/#{niveau}.svg",
                     alt: "Niveau #{niveau}"

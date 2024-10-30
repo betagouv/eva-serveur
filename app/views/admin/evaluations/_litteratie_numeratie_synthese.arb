@@ -7,12 +7,12 @@ div class: "synthese-illettrisme #{synthese}" do
       if pdf
         div svg_tag_base64 icone
       else
-        div image_tag icone
+        div image_tag icone, alt: t('alt_icone', scope: scope)
       end
     end
     div class: 'col' do
       if synthese.present?
-        md t(description, scope: scope)
+        md t('description', scope: scope)
       else
         md t('admin.restitutions.score_non_calcule')
       end

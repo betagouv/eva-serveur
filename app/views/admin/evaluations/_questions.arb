@@ -14,7 +14,7 @@ unless restitution.questions_redaction.empty?
         if pdf
           svg_tag_base64 'crochet-aide-redaction.svg'
         else
-          image_tag 'crochet-aide-redaction.svg'
+          image_tag 'crochet-aide-redaction.svg', alt: ''
         end
       end
       div class: 'col-4 mb-5' do
@@ -23,7 +23,7 @@ unless restitution.questions_redaction.empty?
             if pdf
               svg_tag_base64 'redaction.svg'
             else
-              image_tag 'redaction.svg'
+              image_tag 'redaction.svg', alt: t('admin.restitutions.redaction')
             end
           end
         end
@@ -36,7 +36,7 @@ unless restitution.questions_redaction.empty?
               if pdf
                 svg_tag_base64 'aide-redaction.svg'
               else
-                image_tag 'aide-redaction.svg'
+                image_tag 'aide-redaction.svg', alt: ''
               end
             end
           end

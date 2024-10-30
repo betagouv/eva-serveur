@@ -3,8 +3,7 @@
   <div class='marges-page'>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
-      scope: "admin.evaluations.lettrisme.litteratie",
-      description: "#{profil}.description",
+      scope: "admin.evaluations.lettrisme.litteratie.#{profil}",
       icone: "icone_profil/icone_#{profil}.svg",
       pdf: pdf %>
     <% if niveau_bas?(profil) %>

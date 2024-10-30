@@ -30,7 +30,7 @@ div id: 'competences_transversales', class: 'page' do
                 if pdf
                   svg_tag_base64 "#{competence}.svg"
                 else
-                  image_tag "#{competence}.svg"
+                  image_tag "#{competence}.svg", alt: ''
                 end
               end
               div class: 'informations-competence' do

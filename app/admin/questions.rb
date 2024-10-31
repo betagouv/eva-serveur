@@ -7,13 +7,24 @@ ActiveAdmin.register Question do
     def import_xls
       return if params[:file_xls].blank?
 
-      import = ImportQuestion.new(params[:type])
-      @question = import.remplis_donnees(params[:file_xls])
-
+      importe_question
       flash[:success] = I18n.t('.layouts.succes.import_question')
       redirect_to redirection_apres_import
     rescue ImportQuestion::Error => e
-      flash[:error] = e.message
+      erreur_import(e)
+    rescue ImportXls::Error => e
+      raise ImportQuestion::Error, e.message
+    end
+
+    private
+
+    def importe_question
+      import = ImportQuestion.new(params[:type])
+      @question = import.remplis_donnees(params[:file_xls])
+    end
+
+    def erreur_import(error)
+      flash[:error] = error.message
       redirect_to admin_import_xls_path(type: params[:type])
     end
 

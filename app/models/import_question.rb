@@ -10,7 +10,6 @@ class ImportQuestion < ImportXls
                              intitule_audio].freeze
   HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
                       consigne_ecrit consigne_audio description].freeze
-
   HEADERS_ATTENDUS = { 'QuestionClicDansImage' => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
                        'QuestionGlisserDeposer' => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
                        'QuestionQcm' => HEADERS_COMMUN + HEADERS_QCM,
@@ -65,6 +64,7 @@ class ImportQuestion < ImportXls
 
   def update_clic_dans_image
     attache_fichier(@question.image_au_clic, @data[9])
+    attache_fichier(@question.zone_cliquable, @data[8])
   end
 
   def update_glisser_deposer
@@ -99,10 +99,8 @@ class ImportQuestion < ImportXls
   end
 
   def cree_reponse_generique(intitule, nom_technique, type_choix, position_client = nil)
-    Choix.create!(intitule: intitule,
-                  nom_technique: nom_technique,
-                  question_id: @question.id,
-                  type_choix: type_choix,
+    Choix.create!(intitule: intitule, nom_technique: nom_technique,
+                  question_id: @question.id, type_choix: type_choix,
                   position_client: position_client)
   end
 

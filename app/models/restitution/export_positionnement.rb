@@ -55,7 +55,7 @@ module Restitution
 
     def remplis_reponses_par_code(ligne, code, evenements)
       if code.present?
-        @sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}%"
+        @sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}"
         ligne += 1
       end
       remplis_reponses(ligne, evenements)
@@ -64,7 +64,7 @@ module Restitution
     def pourcentage_reussite(evenements)
       scores = evenements.map { |e| [e.donnees['scoreMax'] || 0, e.donnees['score'] || 0] }
       score_max, score = scores.transpose.map(&:sum)
-      score_max.zero? ? 0 : (score * 100 / score_max).round
+      score_max.zero? ? 'non applicable' : "#{(score * 100 / score_max).round}%"
     end
 
     def remplis_reponses(ligne, evenements)

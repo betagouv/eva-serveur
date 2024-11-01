@@ -131,7 +131,7 @@ div class: 'evaluation__restitution-globale' do
            }
   end
 
-  if campagne_avec_litteratie?
+  if campagne_avec_positionnement?(:litteratie)
     div id: 'lettrisme', class: 'page page-lettrisme' do
       render 'entete_page', restitution_globale: restitution_globale
 
@@ -150,7 +150,7 @@ div class: 'evaluation__restitution-globale' do
     end
   end
 
-  if campagne_avec_positionnement_numeratie?
+  if campagne_avec_positionnement?(:numeratie)
     div id: 'numeratie', class: 'page page-lettrisme' do
       render 'entete_page', restitution_globale: restitution_globale
 

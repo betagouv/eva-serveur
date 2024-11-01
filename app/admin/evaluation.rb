@@ -126,8 +126,8 @@ ActiveAdmin.register Evaluation do
     helper_method :restitution_globale, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
-                  :campagne_avec_competences_transversales?, :campagne_avec_litteratie?,
-                  :responsables_suivi_possibles, :campagne_avec_positionnement_numeratie?
+                  :campagne_avec_competences_transversales?,
+                  :responsables_suivi_possibles, :campagne_avec_positionnement?
 
     def show
       show! do |format|
@@ -172,12 +172,8 @@ ActiveAdmin.register Evaluation do
       @evaluation.campagne.avec_competences_transversales?
     end
 
-    def campagne_avec_litteratie?
-      @evaluation.campagne.avec_litteratie?
-    end
-
-    def campagne_avec_positionnement_numeratie?
-      @evaluation.campagne.avec_numeratie?
+    def campagne_avec_positionnement?(competence)
+      @evaluation.campagne.avec_positionnement?(competence)
     end
 
     def prise_en_main?

@@ -36,7 +36,6 @@ describe Restitution::ExportPositionnement do
                partie: partie,
                donnees: { question: 'LOdi1',
                           reponse: 'couverture',
-                          reponseIntitule: nil,
                           score: 2,
                           scoreMax: 2,
                           intitule: 'De quoi s’agit-il ?',
@@ -45,11 +44,10 @@ describe Restitution::ExportPositionnement do
                partie: partie,
                donnees: { intitule: intitule_question2,
                           question: 'LOdi2',
-                          reponse: 'chatMadameCoupin',
                           reponseIntitule: 'Le chat de Mme Coupin' }
       end
 
-      it 'verifie les détails de la première question' do
+      it 'verifie les détails de la première question question' do
         ligne = worksheet.row(1)
         expect(ligne[0]).to eq('LOdi1')
         expect(ligne[1]).to eq('De quoi s’agit-il ?')
@@ -62,8 +60,6 @@ describe Restitution::ExportPositionnement do
       it 'verifie les détails de la deuxième question' do
         ligne = worksheet.row(2)
         expect(ligne[0]).to eq('LOdi2')
-        expect(ligne[3]).to be_nil
-        expect(ligne[4]).to be_nil
         expect(ligne[1]).to eq(intitule_question2)
         expect(ligne[2]).to eq('Le chat de Mme Coupin')
         expect(ligne[3]).to be_nil
@@ -171,7 +167,7 @@ describe Restitution::ExportPositionnement do
 
       it 'verifie les détails du groupe cléa suivant' do
         ligne = worksheet.row(4)
-        expect(ligne[0]).to eq('2.4.1 - score: 0%')
+        expect(ligne[0]).to eq('2.4.1 - score: non applicable')
         ligne = worksheet.row(5)
         expect(ligne[0]).to eq('2.4.1')
         expect(ligne[1]).to eq('LOdi3')

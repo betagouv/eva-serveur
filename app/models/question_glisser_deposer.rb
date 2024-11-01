@@ -49,15 +49,10 @@ class QuestionGlisserDeposer < Question
   end
 
   def valide_zone_depot_avec_reponse
-    return unless zone_depot.attached?
-    return if attachment_changes['zone_depot'].nil?
+    return unless zone_depot.attached? && attachment_changes['zone_depot']
 
     file = attachment_changes['zone_depot'].attachable
-    doc = Nokogiri::XML(file, nil, 'UTF-8')
-
-    return unless elements_depot(doc).empty?
-
-    invalid_zone_depot_error
+    invalid_zone_depot_error unless svg_contient_classes?(file)
   end
 
   def invalid_zone_depot_error
@@ -66,9 +61,12 @@ class QuestionGlisserDeposer < Question
     throw(:abort)
   end
 
-  def elements_depot(doc)
-    doc.css('.zone-depot').select do |element|
-      element[:class].split.any? { |cls| cls.start_with?('zone-depot--') }
+  def svg_contient_classes?(svg_content)
+    doc = ApplicationController.helpers.parse_svg_content(svg_content)
+    doc.css('.zone-depot').any? do |element|
+      element[:class].split.any? do |cls|
+        cls.start_with?('zone-depot--')
+      end
     end
   end
 end

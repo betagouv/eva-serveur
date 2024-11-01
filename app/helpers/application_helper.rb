@@ -58,6 +58,12 @@ module ApplicationHelper
     "data:image/svg+xml;base64,#{encodage}"
   end
 
+  def parse_svg_content(svg_content)
+    content = svg_content.is_a?(Hash) && svg_content[:io] ? svg_content[:io].read : svg_content
+    svg_content[:io].rewind if svg_content.is_a?(Hash) && svg_content[:io]
+    Nokogiri::XML(content, nil, 'UTF-8')
+  end
+
   def illustration_content_types
     %w[image/png image/jpeg image/webp].freeze
   end

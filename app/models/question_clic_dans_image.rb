@@ -64,13 +64,13 @@ class QuestionClicDansImage < Question
     throw(:abort)
   end
 
+  def svg_contient_class_bonne_reponse?(svg_content, minimum)
+    doc = ApplicationController.helpers.parse_svg_content(svg_content)
+    doc.css(".#{CLASS_BONNE_REPONSE}").size >= minimum
+  end
+
   def fichier_encode_base64(attachment)
     file_content = attachment.download
     ApplicationController.helpers.fichier_encode_en_base64(file_content)
-  end
-
-  def svg_contient_class_bonne_reponse?(svg_content, minimum)
-    doc = Nokogiri::XML(svg_content, nil, 'UTF-8')
-    doc.css(".#{CLASS_BONNE_REPONSE}").size >= minimum
   end
 end

@@ -97,17 +97,23 @@ describe ImportQuestion do
       fixture_file_upload('spec/support/import_question_glisser.xls', 'text/xls')
     end
 
+    it 'importe les données spécifiques' do
+      service.remplis_donnees(file)
+      question = Question.last
+      expect(question.zone_depot.attached?).to be true
+    end
+
     it 'crée les réponses' do
       service.remplis_donnees(file)
       reponses = Question.last.reponses
       expect(reponses.count).to eq 2
       reponse1 = reponses.first
-      expect(reponse1.nom_technique).to eq 'reponse1'
+      expect(reponse1.nom_technique).to eq 'N2Pon2R1'
       expect(reponse1.position_client).to eq 2
       expect(reponse1.type_choix).to eq 'bon'
       expect(reponse1.illustration.attached?).to be true
       reponse2 = reponses.last
-      expect(reponse2.nom_technique).to eq 'reponse2'
+      expect(reponse2.nom_technique).to eq 'N2Pon2R2'
       expect(reponse2.position_client).to eq 1
       expect(reponse1.type_choix).to eq 'bon'
       expect(reponse2.illustration.attached?).to be true
@@ -127,6 +133,7 @@ describe ImportQuestion do
       service.remplis_donnees(file)
       question = Question.last
       expect(question.image_au_clic.attached?).to be true
+      expect(question.zone_cliquable.attached?).to be true
     end
   end
 

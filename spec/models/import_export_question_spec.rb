@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe ImportExportQuestion do
-  describe 'import es données' do
+  describe 'importe les données' do
     describe 'pour toutes les questions' do
       subject(:service) do
         described_class.new(question)
@@ -54,7 +54,7 @@ describe ImportExportQuestion do
 
           expect do
             service.importe_donnees(file)
-          end.to raise_error(ImportExportQuestion::Error, message)
+          end.to raise_error(ImportQuestion::Error, message)
         end
       end
     end
@@ -195,22 +195,5 @@ describe ImportExportQuestion do
         expect(transcriptions.first.audio.attached?).to be true
       end
     end
-  end
-
-  describe 'exporte les données' do
-    # describe 'exporte les données' do
-    #   subject(:service) do
-    #     described_class.new(Question.new(type: 'QuestionClicDansImage'))
-    #   end
-
-    #   let(:question) do
-    #     create(:question_clic_dans_image, description: 'desription', reponse_placeholder: 'placeholder',
-    #                                       suffix_reponse: 'suffix')
-    #   end
-
-    #   fit 'exporte les données' do
-    #     service.exporte_donnees(question)
-    #   end
-    # end
   end
 end

@@ -5,7 +5,7 @@ class ImportXls
 
   def initialize(type, headers)
     @type = type
-    @headers_attendus = headers[type]
+    @headers_attendus = headers
   end
 
   def valide_headers
@@ -13,8 +13,6 @@ class ImportXls
 
     raise Error, message_erreur_headers
   end
-
-  private
 
   def message_erreur_headers
     I18n.t('.layouts.erreurs.import_question.mauvais_format',

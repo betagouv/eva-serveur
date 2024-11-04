@@ -53,20 +53,6 @@ ActiveAdmin.register Evaluation do
 
   form partial: 'form'
 
-  sidebar :statistiques, only: :index, if: proc { can?(:manage, Compte) } do
-    ul do
-      collection_complete = collection.except(:limit, :offset, :order)
-      evaluations_par_synthese = collection_complete.select(:synthese_competences_de_base)
-                                                    .group(:synthese_competences_de_base)
-                                                    .count
-      evaluations_par_synthese.delete(nil)
-
-      div do
-        pie_chart evaluations_par_synthese
-      end
-    end
-  end
-
   sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
     render(Tag.new(resource.responsable_suivi.display_name,
                    supprimable: can?(:supprimer_responsable_suivi, Evaluation),

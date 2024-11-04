@@ -30,12 +30,11 @@ class ImportExportQuestion < ImportXls
     raise Error, message_erreur_validation(e)
   end
 
-  # def exporte_donnees(question)
-  #   @question = question
-  #   send_data to_xls,
-  #             content_type: content_type_xls,
-  #             filename: nom_du_fichier
-  # end
+  def exporte_donnees
+    send_data to_xls,
+              content_type: content_type_xls,
+              filename: nom_du_fichier
+  end
 
   private
 

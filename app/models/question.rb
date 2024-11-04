@@ -67,6 +67,10 @@ class Question < ApplicationRecord
     json
   end
 
+  def sous_consigne?
+    type == 'QuestionSousConsigne'
+  end
+
   private
 
   def audio_url

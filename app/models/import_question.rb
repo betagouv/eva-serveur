@@ -7,6 +7,12 @@ class ImportQuestion < ImportXls
     @type = question.type
   end
 
+  def import_from_xls(file)
+    recupere_data(file)
+    valide_headers
+    cree_question
+  end
+
   def cree_question
     ActiveRecord::Base.transaction do
       intialise_question

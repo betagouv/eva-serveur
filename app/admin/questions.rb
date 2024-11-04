@@ -5,18 +5,20 @@ ActiveAdmin.register Question do
 
   member_action :export_xls, method: :get do
     question = Question.find(params[:id])
-    export = ImportExportQuestion.new(question)
-    export.exporte_donnees
+    export = ImportExportQuestion.new(question).exporte_donnees
+    send_data export[:xls],
+              content_type: export[:content_type],
+              filename: export[:filename]
   end
 
   controller do
     def import_xls
       return if params[:file_xls].blank?
 
-      importe_question
+      question = recupere_question
       flash[:success] = I18n.t('.layouts.succes.import_question')
-      redirect_to redirection_apres_import
-    rescue ImportExportQuestion::Error => e
+      redirect_to redirection_apres_import(question)
+    rescue ImportQuestion::Error => e
       erreur_import(e)
     rescue ImportXls::Error => e
       raise ImportExportQuestion::Error, e.message
@@ -24,9 +26,9 @@ ActiveAdmin.register Question do
 
     private
 
-    def importe_question
-      import = ImportExportQuestion.new(Question.new(type: params[:type]))
-      @question = import.importe_donnees(params[:file_xls])
+    def recupere_question
+      question = Question.new(type: params[:type])
+      ImportExportQuestion.new(question).importe_donnees(params[:file_xls])
     end
 
     def erreur_import(error)
@@ -36,13 +38,13 @@ ActiveAdmin.register Question do
 
     private
 
-    def redirection_apres_import
+    def redirection_apres_import(question)
       redirection_paths = {
-        'QuestionClicDansImage' => edit_admin_question_clic_dans_image_path(@question),
-        'QuestionGlisserDeposer' => edit_admin_question_glisser_deposer_path(@question),
-        'QuestionQcm' => edit_admin_question_qcm_path(@question),
-        'QuestionSaisie' => edit_admin_question_saisie_path(@question),
-        'QuestionSousConsigne' => edit_admin_question_sous_consigne_path(@question)
+        'QuestionClicDansImage' => edit_admin_question_clic_dans_image_path(question),
+        'QuestionGlisserDeposer' => edit_admin_question_glisser_deposer_path(question),
+        'QuestionQcm' => edit_admin_question_qcm_path(question),
+        'QuestionSaisie' => edit_admin_question_saisie_path(question),
+        'QuestionSousConsigne' => edit_admin_question_sous_consigne_path(question)
       }
 
       redirection_paths[params[:type]]

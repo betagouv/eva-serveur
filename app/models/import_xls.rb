@@ -52,10 +52,6 @@ class ImportXls
     raise Error, message_erreur_telechargement(@current_download)
   end
 
-  def message_erreur_validation(exception)
-    exception.record.errors.full_messages.to_sentence.to_s
-  end
-
   def message_erreur_telechargement(current_download)
     "Impossible de télécharger un fichier depuis l'url : #{current_download}"
   end

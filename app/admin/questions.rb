@@ -19,7 +19,7 @@ ActiveAdmin.register Question do
     private
 
     def importe_question
-      import = ImportQuestion.new(params[:type])
+      import = ImportQuestion.new(Question.new(type: params[:type]))
       @question = import.remplis_donnees(params[:file_xls])
     end
 

@@ -11,7 +11,7 @@ class ImportQuestion < ImportXls
     ActiveRecord::Base.transaction do
       intialise_question
       cree_transcription(:intitule, @data[4], @data[3])
-      cree_transcription(:modalite_reponse, @data[6], @data[5]) unless sous_consigne?
+      cree_transcription(:modalite_reponse, @data[6], @data[5]) unless @question.sous_consigne?
       update_champs_specifiques
     end
     @question
@@ -89,9 +89,5 @@ class ImportQuestion < ImportXls
         headers_data[item.to_i][data_type] = @data[index]
       end
     end
-  end
-
-  def sous_consigne?
-    @type == 'QuestionSousConsigne'
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ImportQuestion < ImportXls
+class ImportExportQuestion < ImportXls
   HEADERS_CLIC_DANS_IMAGE = %i[zone_cliquable image_au_clic].freeze
   HEADERS_GLISSER_DEPOSER = %i[zone_depot].freeze
   HEADERS_QCM = %i[type_qcm].freeze
@@ -22,7 +22,7 @@ class ImportQuestion < ImportXls
     @type = question.type
   end
 
-  def remplis_donnees(file)
+  def importe_donnees(file)
     recupere_data(file)
     valide_headers
     cree_question
@@ -30,7 +30,31 @@ class ImportQuestion < ImportXls
     raise Error, message_erreur_validation(e)
   end
 
+  # def exporte_donnees(question)
+  #   @question = question
+  #   send_data to_xls,
+  #             content_type: content_type_xls,
+  #             filename: nom_du_fichier
+  # end
+
   private
+
+  # def to_xls
+  #   workbook = Spreadsheet::Workbook.new
+  #   sheet = workbook.create_worksheet(name: 'worksheet name')
+  #   initialise_sheet(sheet)
+  #   remplie_la_feuille(sheet)
+  #   retourne_le_contenu_du_xls(workbook)
+  # end
+
+  # def content_type_xls
+  #   'application/vnd.ms-excel'
+  # end
+
+  # def nom_du_fichier
+  #   date = DateTime.current.strftime('%Y%m%d')
+  #   "#{date}-#{@question.nom_technique}.xls"
+  # end
 
   def cree_question
     ActiveRecord::Base.transaction do

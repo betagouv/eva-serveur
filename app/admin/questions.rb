@@ -10,17 +10,17 @@ ActiveAdmin.register Question do
       importe_question
       flash[:success] = I18n.t('.layouts.succes.import_question')
       redirect_to redirection_apres_import
-    rescue ImportQuestion::Error => e
+    rescue ImportExportQuestion::Error => e
       erreur_import(e)
     rescue ImportXls::Error => e
-      raise ImportQuestion::Error, e.message
+      raise ImportExportQuestion::Error, e.message
     end
 
     private
 
     def importe_question
-      import = ImportQuestion.new(Question.new(type: params[:type]))
-      @question = import.remplis_donnees(params[:file_xls])
+      import = ImportExportQuestion.new(Question.new(type: params[:type]))
+      @question = import.importe_donnees(params[:file_xls])
     end
 
     def erreur_import(error)

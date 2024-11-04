@@ -6,8 +6,8 @@ div class: 'actualites' do
       div class: 'conteneur' do
         if actualite.illustration.attached?
           div class: 'illustration' do
-            link_to admin_actualite_path(actualite) do
-              image_tag cdn_for(actualite.illustration), alt: ''
+            link_to admin_actualite_path(actualite), aria: { describedby: actualite.id } do
+              image_tag cdn_for(actualite.illustration), alt: t('.action.lire')
             end
           end
         end
@@ -18,7 +18,7 @@ div class: 'actualites' do
                    classes: "tag-categorie #{actualite.categorie}"
                  ))
           h3 class: 'titre' do
-            link_to actualite.titre, admin_actualite_path(actualite)
+            link_to actualite.titre, admin_actualite_path(actualite), id: actualite.id
           end
           span class: 'date' do
             l actualite.created_at, format: :sans_heure
@@ -26,17 +26,22 @@ div class: 'actualites' do
           if can?(:manage, Actualite)
             span class: 'menu-actions' do
               div class: 'table_actions' do
-                text_node link_to t('.action.lire'), admin_actualite_path(actualite)
-                text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite)
+                text_node link_to t('.action.lire'), admin_actualite_path(actualite),
+                                  aria: { describedby: actualite.id }
+                text_node link_to t('.action.modifier'), edit_admin_actualite_path(actualite),
+                                  aria: { describedby: actualite.id }
                 text_node link_to t('.action.supprimer'), admin_actualite_path(actualite),
                                   method: :delete,
-                                  data: { confirm: t('.action.supprimer-confirmation') }
+                                  data: { confirm: t('.action.supprimer-confirmation') },
+                                  aria: { describedby: actualite.id }
               end
             end
             render partial: 'components/bouton_menu_actions'
           else
             span class: 'action' do
-              link_to t('.action.lire'), admin_actualite_path(actualite), class: 'action-simple'
+              link_to t('.action.lire'), admin_actualite_path(actualite),
+                      class: 'action-simple',
+                      aria: { describedby: actualite.id }
             end
           end
         end

@@ -29,6 +29,14 @@ class QuestionClicDansImage < Question
     svg_contient_class_bonne_reponse?(svg_content, 2)
   end
 
+  def zone_cliquable_url
+    cdn_for(zone_cliquable)
+  end
+
+  def image_au_clic_url
+    cdn_for(image_au_clic)
+  end
+
   private
 
   def base_json

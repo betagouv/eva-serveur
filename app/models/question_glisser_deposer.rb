@@ -23,6 +23,10 @@ class QuestionGlisserDeposer < Question
     json.merge!(json_audio_fields, reponses_fields)
   end
 
+  def zone_depot_url
+    cdn_for(zone_depot)
+  end
+
   private
 
   def base_json

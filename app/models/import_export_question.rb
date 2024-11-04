@@ -16,42 +16,27 @@ class ImportExportQuestion
                        'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
                        'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
 
-  delegate :message_erreur_headers, to: :@import
-
   def initialize(question)
     @question = question
     @type = question.type
-    @import = ImportQuestion.new(@question, HEADERS_ATTENDUS[@type])
   end
 
   def importe_donnees(file)
-    @import.recupere_data(file)
-    @import.valide_headers
-    @import.cree_question
+    ImportQuestion.new(@question, HEADERS_ATTENDUS[@type]).import_from_xls(file)
   rescue ActiveRecord::RecordInvalid => e
-    raise Error, message_erreur_validation(e)
+    raise ImportQuestion::Error, message_erreur_validation(e)
   end
 
   def exporte_donnees
-    send_data to_xls,
-              content_type: content_type_xls,
-              filename: nom_du_fichier
+    export = ExportQuestion.new(@question, HEADERS_ATTENDUS[@type])
+    {
+      xls: export.to_xls,
+      content_type: export.content_type_xls,
+      filename: export.nom_du_fichier
+    }
   end
 
-  # def to_xls
-  #   workbook = Spreadsheet::Workbook.new
-  #   sheet = workbook.create_worksheet(name: 'worksheet name')
-  #   initialise_sheet(sheet)
-  #   remplie_la_feuille(sheet)
-  #   retourne_le_contenu_du_xls(workbook)
-  # end
-
-  # def content_type_xls
-  #   'application/vnd.ms-excel'
-  # end
-
-  # def nom_du_fichier
-  #   date = DateTime.current.strftime('%Y%m%d')
-  #   "#{date}-#{@question.nom_technique}.xls"
-  # end
+  def message_erreur_validation(exception)
+    exception.record.errors.full_messages.to_sentence.to_s
+  end
 end

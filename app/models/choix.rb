@@ -26,4 +26,12 @@ class Choix < ApplicationRecord
     errors.add(:audio, 'doit être un fichier MP3 ou MP4')
     audio.purge
   end
+
+  def audio_url
+    cdn_for(audio)
+  end
+
+  def illustration_url
+    cdn_for(illustration)
+  end
 end

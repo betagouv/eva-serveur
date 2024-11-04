@@ -71,6 +71,10 @@ class Question < ApplicationRecord
     type == 'QuestionSousConsigne'
   end
 
+  def illustration_url
+    cdn_for(illustration)
+  end
+
   private
 
   def audio_url

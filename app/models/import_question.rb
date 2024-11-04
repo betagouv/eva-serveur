@@ -16,9 +16,10 @@ class ImportQuestion < ImportXls
                        'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
                        'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
 
-  def initialize(type)
-    super(type, HEADERS_ATTENDUS)
-    @type = type
+  def initialize(question)
+    super(question.type, HEADERS_ATTENDUS)
+    @question = question
+    @type = question.type
   end
 
   def remplis_donnees(file)
@@ -42,9 +43,10 @@ class ImportQuestion < ImportXls
   end
 
   def intialise_question
-    @question = Question.create!(type: @type, libelle: @data[0],
-                                 nom_technique: @data[1], description: @data[7])
+    @question.assign_attributes(libelle: @data[0],
+                                nom_technique: @data[1], description: @data[7])
     attache_fichier(@question.illustration, @data[2])
+    @question.save!
   end
 
   def cree_transcription(categorie, audio_url, ecrit)

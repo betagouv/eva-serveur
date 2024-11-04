@@ -5,8 +5,10 @@ require 'rails_helper'
 describe ImportQuestion do
   describe 'pour toutes les questions' do
     subject(:service) do
-      described_class.new('QuestionClicDansImage')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionClicDansImage') }
 
     describe 'avec un fichier valide' do
       let(:file) do
@@ -58,8 +60,10 @@ describe ImportQuestion do
 
   describe 'pour une question de type qcm' do
     subject(:service) do
-      described_class.new('QuestionQcm')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionQcm') }
 
     let(:file) do
       fixture_file_upload('spec/support/import_question_qcm.xls', 'text/xls')
@@ -90,8 +94,10 @@ describe ImportQuestion do
 
   describe 'pour une question de type glisser deposer' do
     subject(:service) do
-      described_class.new('QuestionGlisserDeposer')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionGlisserDeposer') }
 
     let(:file) do
       fixture_file_upload('spec/support/import_question_glisser.xls', 'text/xls')
@@ -122,8 +128,10 @@ describe ImportQuestion do
 
   describe 'pour une question de type clic dans image' do
     subject(:service) do
-      described_class.new('QuestionClicDansImage')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionClicDansImage') }
 
     let(:file) do
       fixture_file_upload('spec/support/import_question_clic.xls', 'text/xls')
@@ -139,8 +147,10 @@ describe ImportQuestion do
 
   describe 'pour une question de type saisie' do
     subject(:service) do
-      described_class.new('QuestionSaisie')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionSaisie') }
 
     let(:file) do
       fixture_file_upload('spec/support/import_question_saisie.xls', 'text/xls')
@@ -159,8 +169,10 @@ describe ImportQuestion do
 
   describe 'pour une question de type sous consigne' do
     subject(:service) do
-      described_class.new('QuestionSousConsigne')
+      described_class.new(question)
     end
+
+    let(:question) { Question.new(type: 'QuestionSousConsigne') }
 
     let(:file) do
       fixture_file_upload('spec/support/import_question_consigne.xls', 'text/xls')

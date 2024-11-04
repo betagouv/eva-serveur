@@ -42,6 +42,7 @@ Rails.application.routes.draw do
         collection do
           post 'import_xls'
         end
+        resource :export_xls, only: [:show], defaults: { format: 'xls' }, controller: 'questions/export_xls'
       end
     end
 

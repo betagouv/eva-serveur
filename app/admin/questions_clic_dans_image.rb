@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionClicDansImage do
-  before_action :set_question, only: %i[update]
+  before_action :set_question, only: %i[update show]
 
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
@@ -36,6 +36,11 @@ ActiveAdmin.register QuestionClicDansImage do
   action_item :importer_question, only: :index do
     link_to 'Importer question clic dans image',
             admin_import_xls_path(type: 'QuestionClicDansImage')
+  end
+
+  action_item :exporter_question, only: :show do
+    link_to 'Exporter le contenu de la question',
+            admin_question_export_xls_path(question_id: question.id)
   end
 
   show do

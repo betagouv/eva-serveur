@@ -3,6 +3,12 @@
 ActiveAdmin.register Question do
   menu false
 
+  member_action :export_xls, method: :get do
+    question = Question.find(params[:id])
+    export = ImportExportQuestion.new(question)
+    export.exporte_donnees
+  end
+
   controller do
     def import_xls
       return if params[:file_xls].blank?

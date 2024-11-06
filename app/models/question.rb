@@ -27,6 +27,13 @@ class Question < ApplicationRecord
 
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
+  INTERACTION_TYPES = {
+    'QuestionQcm' => 'qcm',
+    'QuestionClicDansImage' => 'clic dans image',
+    'QuestionGlisserDeposer' => 'glisser deposer',
+    'QuestionSousConsigne' => 'sous consigne',
+    'QuestionSaisie' => 'saisie'
+  }.freeze
 
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 
@@ -67,12 +74,24 @@ class Question < ApplicationRecord
     json
   end
 
-  def sous_consigne?
-    type == 'QuestionSousConsigne'
-  end
-
   def illustration_url
     cdn_for(illustration)
+  end
+
+  def interaction
+    INTERACTION_TYPES[type]
+  end
+
+  def saisie?
+    type == 'QuestionSaisie'
+  end
+
+  def qcm?
+    type == 'QuestionQcm'
+  end
+
+  def sous_consigne?
+    type == 'QuestionSousConsigne'
   end
 
   private

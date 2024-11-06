@@ -19,6 +19,14 @@ class QuestionQcm < Question
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
+  def liste_choix
+    choix.pluck(:intitule).join(' | ')
+  end
+
+  def bonnes_reponses
+    choix.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
+  end
+
   private
 
   def base_json

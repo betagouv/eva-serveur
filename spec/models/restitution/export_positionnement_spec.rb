@@ -7,92 +7,77 @@ describe Restitution::ExportPositionnement do
     described_class.new(partie: partie)
   end
 
-  let(:situation) { create(:situation) }
+  let(:situation) { create(:situation_cafe_de_la_place) }
   let(:evaluation) { create :evaluation }
-  let(:question) { create(:question) }
+  let!(:question) { create(:question_qcm, nom_technique: 'LOdi1') }
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
 
-  describe '#to_xls' do
-    it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
-      xls = response_service.to_xls
-      spreadsheet = Spreadsheet.open(StringIO.new(xls))
-      worksheet = spreadsheet.worksheet(0)
-
-      expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[0]).to eq('Code Question')
-      expect(worksheet.row(0)[1]).to eq('Intitulé')
-      expect(worksheet.row(0)[2]).to eq('Réponse')
-      expect(worksheet.row(0)[3]).to eq('Score')
-      expect(worksheet.row(0)[4]).to eq('Score max')
-      expect(worksheet.row(0)[5]).to eq('Métacompétence')
-      expect(worksheet.row(0)[6]).to eq('Code cléa')
-    end
-
-    describe 'génére un fichier xls avec les evenements réponses' do
-      let(:intitule_question2) do
-        'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
-      end
-
-      before do
-        create :evenement_reponse,
-               partie: partie,
-               donnees: { question: 'LOdi1',
-                          reponse: 'couverture',
-                          reponseIntitule: nil,
-                          score: 2,
-                          scoreMax: 2,
-                          intitule: 'De quoi s’agit-il ?',
-                          metacompetence: 'renseigner_horaires' }
-        create :evenement_reponse,
-               partie: partie,
-               donnees: { question: 'LOdi2',
-                          score: 1,
-                          scoreMax: 2,
-                          metacompetence: 'renseigner_horaires' }
-        create :evenement_reponse,
-               partie: partie,
-               donnees: { question: 'LOdi3',
-                          metacompetence: 'parametres' }
-        create :evenement_reponse,
-               partie: partie,
-               donnees: { intitule: intitule_question2,
-                          question: 'LOdi4',
-                          reponse: 'chatMadameCoupin',
-                          reponseIntitule: 'Le chat de Mme Coupin' }
-      end
-
-      it 'verifie les détails de la première question' do
+  describe 'pour un export littératie' do
+    describe '#to_xls' do
+      it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
         xls = response_service.to_xls
         spreadsheet = Spreadsheet.open(StringIO.new(xls))
         worksheet = spreadsheet.worksheet(0)
-        question2 = worksheet.row(1)
-        expect(question2[0]).to eq('2.3.3 - score: 75%')
-        question1 = worksheet.row(2)
-        expect(question1[0]).to eq('LOdi1')
-        expect(question1[1]).to eq('De quoi s’agit-il ?')
-        expect(question1[2]).to eq('couverture')
-        expect(question1[3]).to eq(2)
-        expect(question1[4]).to eq(2)
-        expect(question1[5]).to eq('renseigner_horaires')
-        expect(question1[6]).to eq('2.3.3')
+
+        expect(spreadsheet.worksheets.count).to eq(1)
+        expect(worksheet.row(0)[0]).to eq('Code Question')
+        expect(worksheet.row(0)[1]).to eq('Intitulé')
+        expect(worksheet.row(0)[2]).to eq('Réponse')
+        expect(worksheet.row(0)[3]).to eq('Score')
+        expect(worksheet.row(0)[4]).to eq('Score max')
+        expect(worksheet.row(0)[5]).to eq('Métacompétence')
       end
 
-      it 'verifie les détails de la deuxième question' do
-        xls = response_service.to_xls
-        spreadsheet = Spreadsheet.open(StringIO.new(xls))
-        worksheet = spreadsheet.worksheet(0)
-        question2 = worksheet.row(4)
-        expect(question2[0]).to be_nil
-        question2 = worksheet.row(5)
-        expect(question2[0]).to eq('LOdi3')
-        question2 = worksheet.row(6)
-        expect(question2[3]).to be_nil
-        expect(question2[4]).to be_nil
-        expect(question2[1]).to eq(intitule_question2)
-        expect(question2[2]).to eq('Le chat de Mme Coupin')
-        expect(question2[3]).to be_nil
-        expect(question2[4]).to be_nil
-        expect(question2[5]).to be_nil
+      describe 'génére un fichier xls avec les evenements réponses' do
+        let(:intitule_question2) do
+          'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
+        end
+
+        before do
+          create :evenement_reponse,
+                 partie: partie,
+                 donnees: { question: 'LOdi1',
+                            reponse: 'couverture',
+                            reponseIntitule: nil,
+                            score: 2,
+                            scoreMax: 2,
+                            intitule: 'De quoi s’agit-il ?',
+                            metacompetence: 'lecture' }
+          create :evenement_reponse,
+                 partie: partie,
+                 donnees: { intitule: intitule_question2,
+                            question: 'LOdi2',
+                            reponse: 'chatMadameCoupin',
+                            reponseIntitule: 'Le chat de Mme Coupin' }
+        end
+
+        it 'verifie les détails de la première question' do
+          xls = response_service.to_xls
+          spreadsheet = Spreadsheet.open(StringIO.new(xls))
+          worksheet = spreadsheet.worksheet(0)
+          question1 = worksheet.row(1)
+          expect(question1[0]).to eq('LOdi1')
+          expect(question1[1]).to eq('De quoi s’agit-il ?')
+          expect(question1[2]).to eq('couverture')
+          expect(question1[3]).to eq(2)
+          expect(question1[4]).to eq(2)
+          expect(question1[5]).to eq('lecture')
+        end
+
+        it 'verifie les détails de la deuxième question' do
+          xls = response_service.to_xls
+          spreadsheet = Spreadsheet.open(StringIO.new(xls))
+          worksheet = spreadsheet.worksheet(0)
+          question2 = worksheet.row(2)
+          expect(question2[0]).to eq('LOdi2')
+          expect(question2[3]).to be_nil
+          expect(question2[4]).to be_nil
+          expect(question2[1]).to eq(intitule_question2)
+          expect(question2[2]).to eq('Le chat de Mme Coupin')
+          expect(question2[3]).to be_nil
+          expect(question2[4]).to be_nil
+          expect(question2[5]).to be_nil
+        end
       end
     end
   end
@@ -127,6 +112,98 @@ describe Restitution::ExportPositionnement do
       }
 
       expect(response_service.regroupe_par_code_clea(Evenement.all)).to eq(results)
+    end
+  end
+
+  describe 'pour un export numératie' do
+    subject(:response_service) do
+      described_class.new(partie: partie)
+    end
+
+    let(:situation) { create(:situation_place_du_marche) }
+    let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
+    let!(:choix) { create(:choix, :mauvais, question_id: question.id, intitule: 'drapeau') }
+    let!(:choix2) { create(:choix, :bon, question_id: question.id, intitule: 'couverture') }
+    let!(:choix3) { create(:choix, :mauvais, question_id: question.id, intitule: 'autre') }
+
+    describe '#to_xls' do
+      it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
+        xls = response_service.to_xls
+        spreadsheet = Spreadsheet.open(StringIO.new(xls))
+        worksheet = spreadsheet.worksheet(0)
+
+        expect(spreadsheet.worksheets.count).to eq(1)
+        expect(worksheet.row(0)[0]).to eq('Code cléa')
+        expect(worksheet.row(0)[1]).to eq('Item')
+        expect(worksheet.row(0)[2]).to eq('Méta compétence')
+        expect(worksheet.row(0)[3]).to eq('Interaction')
+        expect(worksheet.row(0)[4]).to eq('Intitulé de la question')
+        expect(worksheet.row(0)[5]).to eq('Réponses possibles')
+        expect(worksheet.row(0)[6]).to eq('Réponses attendue')
+        expect(worksheet.row(0)[7]).to eq('Réponse du bénéficiaire')
+        expect(worksheet.row(0)[8]).to eq('Score attribué')
+        expect(worksheet.row(0)[9]).to eq('Score possible de la question')
+      end
+
+      describe 'génére un fichier xls avec les evenements réponses' do
+        before do
+          create :evenement_reponse,
+                 partie: partie,
+                 donnees: { question: 'LOdi1',
+                            reponse: 'drapeau',
+                            reponseIntitule: nil,
+                            score: 0,
+                            scoreMax: 2,
+                            intitule: 'De quoi s’agit-il ?',
+                            metacompetence: 'renseigner_horaires' }
+          create :evenement_reponse,
+                 partie: partie,
+                 donnees: { question: 'LOdi2',
+                            score: 1,
+                            scoreMax: 2,
+                            metacompetence: 'renseigner_horaires' }
+          create :evenement_reponse,
+                 partie: partie,
+                 donnees: { question: 'LOdi3',
+                            metacompetence: 'lecture_plan' }
+        end
+
+        it 'verifie le pourcentage de réussite' do
+          xls = response_service.to_xls
+          spreadsheet = Spreadsheet.open(StringIO.new(xls))
+          worksheet = spreadsheet.worksheet(0)
+          ligne = worksheet.row(1)
+          expect(ligne[0]).to eq('2.3.3 - score: 25%')
+        end
+
+        it 'verifie les détails de la première question' do
+          xls = response_service.to_xls
+          spreadsheet = Spreadsheet.open(StringIO.new(xls))
+          worksheet = spreadsheet.worksheet(0)
+          question1 = worksheet.row(2)
+          expect(question1[0]).to eq('2.3.3')
+          expect(question1[1]).to eq('LOdi1')
+          expect(question1[2]).to eq('Renseigner horaires')
+          expect(question1[3]).to eq('qcm')
+          expect(question1[4]).to eq('De quoi s’agit-il ?')
+          expect(question1[5]).to eq('drapeau | couverture | autre')
+          expect(question1[6]).to eq('couverture')
+          expect(question1[7]).to eq('drapeau')
+          expect(question1[8]).to eq(0)
+          expect(question1[9]).to eq(2)
+        end
+
+        it 'verifie les détails du groupe cléa suivant' do
+          xls = response_service.to_xls
+          spreadsheet = Spreadsheet.open(StringIO.new(xls))
+          worksheet = spreadsheet.worksheet(0)
+          question2 = worksheet.row(4)
+          expect(question2[0]).to eq('2.4.1 - score: 0%')
+          question2 = worksheet.row(5)
+          expect(question2[0]).to eq('2.4.1')
+          expect(question2[1]).to eq('LOdi3')
+        end
+      end
     end
   end
 end

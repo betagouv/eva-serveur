@@ -1,42 +1,41 @@
 # frozen_string_literal: true
 
 module Restitution
-  class ExportPositionnement
-    WORKSHEET_NAME = 'Données'
-
-    ENTETES_XLS = [
-      { titre: 'Code Question', taille: 20 },
-      { titre: 'Intitulé', taille: 80 },
-      { titre: 'Réponse', taille: 45 },
-      { titre: 'Score', taille: 10 },
-      { titre: 'Score max', taille: 10 },
-      { titre: 'Métacompétence', taille: 20 },
-      { titre: 'Code cléa', taille: 20 }
-    ].freeze
+  class ExportPositionnement < ExportXls
+    ENTETES_LITTERATIE = [{ titre: 'Code Question', taille: 20 },
+                          { titre: 'Intitulé', taille: 80 },
+                          { titre: 'Réponse', taille: 45 },
+                          { titre: 'Score', taille: 10 },
+                          { titre: 'Score max', taille: 10 },
+                          { titre: 'Métacompétence', taille: 20 }].freeze
+    ENTETES_NUMERATIE = [{ titre: 'Code cléa', taille: 10 },
+                         { titre: 'Item', taille: 20 },
+                         { titre: 'Méta compétence', taille: 20 },
+                         { titre: 'Interaction', taille: 20 },
+                         { titre: 'Intitulé de la question', taille: 80 },
+                         { titre: 'Réponses possibles', taille: 20 },
+                         { titre: 'Réponses attendue', taille: 20 },
+                         { titre: 'Réponse du bénéficiaire', taille: 20 },
+                         { titre: 'Score attribué', taille: 10 },
+                         { titre: 'Score possible de la question', taille: 10 }].freeze
 
     def initialize(partie:)
+      super()
       @partie = partie
     end
 
     def to_xls
-      workbook = Spreadsheet::Workbook.new
-      sheet = workbook.create_worksheet(name: WORKSHEET_NAME)
-      initialise_sheet(sheet)
-      remplie_la_feuille(sheet)
-      retourne_le_contenu_du_xls(workbook)
-    end
-
-    def content_type_xls
-      'application/vnd.ms-excel'
+      entetes = @partie.situation.litteratie? ? ENTETES_LITTERATIE : ENTETES_NUMERATIE
+      export = ExportXls.new(entetes: entetes)
+      remplie_la_feuille(export.sheet)
+      retourne_le_contenu_du_xls(export.workbook)
     end
 
     def nom_du_fichier
       evaluation = @partie.evaluation
-
       code_de_campagne = evaluation.campagne.code.parameterize
       nom_de_levaluation = evaluation.nom.parameterize.first(15)
-      date = DateTime.current.strftime('%Y%m%d')
-      "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
+      genere_fichier("#{nom_de_levaluation}-#{code_de_campagne}")
     end
 
     def regroupe_par_code_clea(evenements)
@@ -63,9 +62,8 @@ module Restitution
     def remplis_reponses_par_code(sheet, ligne, code, evenements)
       if code.present?
         sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}%"
-        sheet.merge_cells(ligne, 0, ligne, 6)
+        ligne += 1
       end
-      ligne += 1
       remplis_reponses(sheet, ligne, evenements)
     end
 
@@ -77,33 +75,47 @@ module Restitution
 
     def remplis_reponses(sheet, ligne, evenements)
       evenements.sort_by(&:position).each do |evenement|
-        sheet = remplis_la_ligne(sheet, ligne, evenement)
-        ligne += 1
+        ligne = remplis_ligne(sheet, ligne, evenement)
       end
       ligne
     end
 
-    # rubocop:disable Metrics/AbcSize
-    def remplis_la_ligne(sheet, ligne, evenement)
-      sheet[ligne, 0] = evenement.donnees['question']
-      sheet[ligne, 1] = evenement.donnees['intitule']
-      sheet[ligne, 2] = evenement.reponse_intitule
-      sheet[ligne, 3] = evenement.donnees['score']
-      sheet[ligne, 4] = evenement.donnees['scoreMax']
-      sheet[ligne, 5] = evenement.donnees['metacompetence']
-      sheet[ligne, 6] = evenement.code_clea
-
-      sheet
+    def remplis_ligne(sheet, ligne, evenement)
+      method = @partie.situation.litteratie? ? :remplis_litteratie : :remplis_numeratie
+      send(method, sheet, ligne, evenement)
+      ligne + 1
     end
-    # rubocop:enable Metrics/AbcSize
 
-    def initialise_sheet(sheet)
-      format_premiere_ligne = Spreadsheet::Format.new(weight: :bold)
-      sheet.row(0).default_format = format_premiere_ligne
-      ENTETES_XLS.each_with_index do |entete, colonne|
-        sheet[0, colonne] = entete[:titre]
-        sheet.column(colonne).width = entete[:taille]
-      end
+    def remplis_litteratie(sheet, ligne, evenement)
+      sheet.row(ligne).replace([evenement.donnees['question'],
+                                evenement.donnees['intitule'],
+                                evenement.reponse_intitule,
+                                evenement.donnees['score'],
+                                evenement.donnees['scoreMax'],
+                                evenement.donnees['metacompetence']])
+    end
+
+    def remplis_numeratie(sheet, ligne, evenement)
+      question = Question.find_by(nom_technique: evenement.donnees['question'])
+      sheet.row(ligne).replace([evenement.code_clea,
+                                evenement.donnees['question'],
+                                evenement.donnees['metacompetence']&.humanize,
+                                question&.interaction,
+                                evenement.donnees['intitule']])
+      remplis_choix(sheet, ligne, evenement, question)
+      remplis_score(sheet, ligne, evenement)
+    end
+
+    def remplis_score(sheet, ligne, evenement)
+      sheet[ligne, 8] = evenement.donnees['score']
+      sheet[ligne, 9] = evenement.donnees['scoreMax']
+    end
+
+    def remplis_choix(sheet, ligne, evenement, question)
+      sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
+      sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm?
+      sheet[ligne, 6] = question&.bonne_reponse&.intitule if question&.saisie?
+      sheet[ligne, 7] = evenement.reponse_intitule
     end
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe ExportQuestion do
+describe Question::Export do
   subject(:response_service) { described_class.new(question, headers) }
 
   let(:headers) { [] }
@@ -25,7 +25,7 @@ describe ExportQuestion do
                                           ecrit: 'Ceci est une consigne')
     end
     let(:headers) do
-      ImportExportQuestion::HEADERS_ATTENDUS[question.type]
+      Question::ImportExport::HEADERS_ATTENDUS[question.type]
     end
 
     it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
@@ -60,7 +60,7 @@ describe ExportQuestion do
   describe 'pour une question glisser deposer' do
     let(:question) { create(:question_glisser_deposer) }
     let(:headers) do
-      ImportExportQuestion::HEADERS_ATTENDUS[question.type]
+      Question::ImportExport::HEADERS_ATTENDUS[question.type]
     end
     let!(:reponse) { create(:choix, :bon, question_id: question.id) }
     let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }
@@ -95,7 +95,7 @@ describe ExportQuestion do
   describe 'pour une question saisie' do
     let(:question) { create(:question_saisie) }
     let(:headers) do
-      ImportExportQuestion::HEADERS_ATTENDUS[question.type]
+      Question::ImportExport::HEADERS_ATTENDUS[question.type]
     end
     let!(:reponse) { create(:choix, :bon, question_id: question.id) }
 
@@ -121,7 +121,7 @@ describe ExportQuestion do
   describe 'pour une question qcm' do
     let(:question) { create(:question_qcm) }
     let(:headers) do
-      ImportExportQuestion::HEADERS_ATTENDUS[question.type]
+      Question::ImportExport::HEADERS_ATTENDUS[question.type]
     end
     let!(:reponse) { create(:choix, :bon, question_id: question.id) }
     let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }

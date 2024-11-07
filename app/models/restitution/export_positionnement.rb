@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Restitution
-  class ExportPositionnement < ExportXls
+  class ExportPositionnement < ::ImportExport::ExportXls
     ENTETES_LITTERATIE = [{ titre: 'Code Question', taille: 20 },
                           { titre: 'Intitulé', taille: 80 },
                           { titre: 'Réponse', taille: 45 },
@@ -26,7 +26,7 @@ module Restitution
 
     def to_xls
       entetes = @partie.situation.litteratie? ? ENTETES_LITTERATIE : ENTETES_NUMERATIE
-      @sheet = ExportXls.new(entetes: entetes).sheet
+      @sheet = ::ImportExport::ExportXls.new(entetes: entetes).sheet
       remplie_la_feuille
       retourne_le_contenu_du_xls
     end

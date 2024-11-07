@@ -1,0 +1,44 @@
+# frozen_string_literal: true
+
+class Question
+  class ImportExport
+    HEADERS_CLIC_DANS_IMAGE = %i[zone_cliquable image_au_clic].freeze
+    HEADERS_GLISSER_DEPOSER = %i[zone_depot].freeze
+    HEADERS_QCM = %i[type_qcm].freeze
+    HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie bonne_reponse_intitule
+                        bonne_reponse_nom_technique].freeze
+    HEADERS_SOUS_CONSIGNE = %i[libelle nom_technique illustration intitule_ecrit
+                               intitule_audio].freeze
+    HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
+                        consigne_ecrit consigne_audio description].freeze
+    HEADERS_ATTENDUS = { 'QuestionClicDansImage' => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
+                         'QuestionGlisserDeposer' => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
+                         'QuestionQcm' => HEADERS_COMMUN + HEADERS_QCM,
+                         'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
+                         'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
+
+    def initialize(question)
+      @question = question
+      @type = question.type
+    end
+
+    def importe_donnees(file)
+      Import.new(@question, HEADERS_ATTENDUS[@type]).import_from_xls(file)
+    rescue ActiveRecord::RecordInvalid => e
+      raise Import::Error, message_erreur_validation(e)
+    end
+
+    def exporte_donnees
+      export = Export.new(@question, HEADERS_ATTENDUS[@type])
+      {
+        xls: export.to_xls,
+        content_type: export.content_type_xls,
+        filename: export.nom_du_fichier
+      }
+    end
+
+    def message_erreur_validation(exception)
+      exception.record.errors.full_messages.to_sentence.to_s
+    end
+  end
+end

@@ -5,7 +5,7 @@ ActiveAdmin.register Question do
 
   member_action :export_xls, method: :get do
     question = Question.find(params[:id])
-    export = ImportExportQuestion.new(question).exporte_donnees
+    export = ImportExport.new(question).exporte_donnees
     send_data export[:xls],
               content_type: export[:content_type],
               filename: export[:filename]
@@ -18,17 +18,17 @@ ActiveAdmin.register Question do
       question = recupere_question
       flash[:success] = I18n.t('.layouts.succes.import_question')
       redirect_to redirection_apres_import(question)
-    rescue ImportQuestion::Error => e
+    rescue Question::Import::Error => e
       erreur_import(e)
-    rescue ImportXls::Error => e
-      raise ImportExportQuestion::Error, e.message
+    rescue ImportExport::ImportXls::Error => e
+      raise Question::ImportExport::Error, e.message
     end
 
     private
 
     def recupere_question
       question = Question.new(type: params[:type])
-      ImportExportQuestion.new(question).importe_donnees(params[:file_xls])
+      Question::ImportExport.new(question).importe_donnees(params[:file_xls])
     end
 
     def erreur_import(error)

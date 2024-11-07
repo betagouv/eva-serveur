@@ -1,44 +1,24 @@
 # frozen_string_literal: true
 
-class ExportQuestion
-  WORKSHEET_NAME = 'Données'
-
+class ExportQuestion < ExportXls
   def initialize(question, headers)
+    super()
     @question = question
     @headers = headers
-    @sheet = sheet
   end
 
   def to_xls
-    initialise_feuille
+    entetes = @headers.map { |header| { titre: header.to_s.humanize, taille: 20 } }
+    @sheet = ExportXls.new(entetes: entetes).sheet
     remplie_la_feuille
     retourne_le_contenu_du_xls
   end
 
-  def content_type_xls
-    'application/vnd.ms-excel'
-  end
-
   def nom_du_fichier
-    date = DateTime.current.strftime('%Y%m%d')
-    "#{date}-#{@question.nom_technique}.xls"
+    genere_fichier(@question.nom_technique)
   end
 
   private
-
-  def sheet
-    workbook = Spreadsheet::Workbook.new
-    workbook.create_worksheet(name: WORKSHEET_NAME)
-  end
-
-  def initialise_feuille
-    format_premiere_ligne = Spreadsheet::Format.new(weight: :bold)
-    @sheet.row(0).default_format = format_premiere_ligne
-    @headers.each_with_index do |entete, colonne|
-      @sheet[0, colonne] = entete.to_s.humanize
-      @sheet.column(colonne).width = 20
-    end
-  end
 
   def remplie_la_feuille
     @headers.each { |_valeur| remplis_champs_commun }
@@ -110,11 +90,5 @@ class ExportQuestion
       @sheet[0, 9 + (index * 4) + i] = "reponse_#{index + 1}_#{col}"
       @sheet[ligne, 9 + (index * 4) + i] = choix.send(col)
     end
-  end
-
-  def retourne_le_contenu_du_xls
-    file_contents = StringIO.new
-    @sheet.workbook.write file_contents
-    file_contents.string
   end
 end

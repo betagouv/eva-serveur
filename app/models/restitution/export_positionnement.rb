@@ -26,9 +26,9 @@ module Restitution
 
     def to_xls
       entetes = @partie.situation.litteratie? ? ENTETES_LITTERATIE : ENTETES_NUMERATIE
-      export = ExportXls.new(entetes: entetes)
-      remplie_la_feuille(export.sheet)
-      retourne_le_contenu_du_xls(export.workbook)
+      @sheet = ExportXls.new(entetes: entetes).sheet
+      remplie_la_feuille
+      retourne_le_contenu_du_xls
     end
 
     def nom_du_fichier
@@ -44,27 +44,21 @@ module Restitution
 
     private
 
-    def retourne_le_contenu_du_xls(workbook)
-      file_contents = StringIO.new
-      workbook.write file_contents
-      file_contents.string
-    end
-
-    def remplie_la_feuille(sheet)
+    def remplie_la_feuille
       ligne = 1
       evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
       regroupe_par_code_clea(evenements_reponses).each do |code, evenements|
-        ligne = remplis_reponses_par_code(sheet, ligne, code, evenements)
+        ligne = remplis_reponses_par_code(ligne, code, evenements)
       end
       ligne
     end
 
-    def remplis_reponses_par_code(sheet, ligne, code, evenements)
+    def remplis_reponses_par_code(ligne, code, evenements)
       if code.present?
-        sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}%"
+        @sheet[ligne, 0] = "#{code} - score: #{pourcentage_reussite(evenements)}%"
         ligne += 1
       end
-      remplis_reponses(sheet, ligne, evenements)
+      remplis_reponses(ligne, evenements)
     end
 
     def pourcentage_reussite(evenements)
@@ -73,49 +67,49 @@ module Restitution
       score_max.zero? ? 0 : (score * 100 / score_max).round
     end
 
-    def remplis_reponses(sheet, ligne, evenements)
+    def remplis_reponses(ligne, evenements)
       evenements.sort_by(&:position).each do |evenement|
-        ligne = remplis_ligne(sheet, ligne, evenement)
+        ligne = remplis_ligne(ligne, evenement)
       end
       ligne
     end
 
-    def remplis_ligne(sheet, ligne, evenement)
+    def remplis_ligne(ligne, evenement)
       method = @partie.situation.litteratie? ? :remplis_litteratie : :remplis_numeratie
-      send(method, sheet, ligne, evenement)
+      send(method, ligne, evenement)
       ligne + 1
     end
 
-    def remplis_litteratie(sheet, ligne, evenement)
-      sheet.row(ligne).replace([evenement.donnees['question'],
-                                evenement.donnees['intitule'],
-                                evenement.reponse_intitule,
-                                evenement.donnees['score'],
-                                evenement.donnees['scoreMax'],
-                                evenement.donnees['metacompetence']])
+    def remplis_litteratie(ligne, evenement)
+      @sheet.row(ligne).replace([evenement.donnees['question'],
+                                 evenement.donnees['intitule'],
+                                 evenement.reponse_intitule,
+                                 evenement.donnees['score'],
+                                 evenement.donnees['scoreMax'],
+                                 evenement.donnees['metacompetence']])
     end
 
-    def remplis_numeratie(sheet, ligne, evenement)
+    def remplis_numeratie(ligne, evenement)
       question = Question.find_by(nom_technique: evenement.donnees['question'])
-      sheet.row(ligne).replace([evenement.code_clea,
-                                evenement.donnees['question'],
-                                evenement.donnees['metacompetence']&.humanize,
-                                question&.interaction,
-                                evenement.donnees['intitule']])
-      remplis_choix(sheet, ligne, evenement, question)
-      remplis_score(sheet, ligne, evenement)
+      @sheet.row(ligne).replace([evenement.code_clea,
+                                 evenement.donnees['question'],
+                                 evenement.donnees['metacompetence']&.humanize,
+                                 question&.interaction,
+                                 evenement.donnees['intitule']])
+      remplis_choix(ligne, evenement, question)
+      remplis_score(ligne, evenement)
     end
 
-    def remplis_score(sheet, ligne, evenement)
-      sheet[ligne, 8] = evenement.donnees['score']
-      sheet[ligne, 9] = evenement.donnees['scoreMax']
+    def remplis_score(ligne, evenement)
+      @sheet[ligne, 8] = evenement.donnees['score']
+      @sheet[ligne, 9] = evenement.donnees['scoreMax']
     end
 
-    def remplis_choix(sheet, ligne, evenement, question)
-      sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-      sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm?
-      sheet[ligne, 6] = question&.bonne_reponse&.intitule if question&.saisie?
-      sheet[ligne, 7] = evenement.reponse_intitule
+    def remplis_choix(ligne, evenement, question)
+      @sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
+      @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm?
+      @sheet[ligne, 6] = question&.bonne_reponse&.intitule if question&.saisie?
+      @sheet[ligne, 7] = evenement.reponse_intitule
     end
   end
 end

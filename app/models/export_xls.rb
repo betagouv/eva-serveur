@@ -29,4 +29,10 @@ class ExportXls
       @sheet.column(colonne).width = entete[:taille]
     end
   end
+
+  def retourne_le_contenu_du_xls
+    file_contents = StringIO.new
+    @sheet.workbook.write file_contents
+    file_contents.string
+  end
 end

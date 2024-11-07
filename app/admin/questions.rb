@@ -5,7 +5,7 @@ ActiveAdmin.register Question do
 
   member_action :export_xls, method: :get do
     question = Question.find(params[:id])
-    export = ImportExport.new(question).exporte_donnees
+    export = Question::ImportExport.new(question).exporte_donnees
     send_data export[:xls],
               content_type: export[:content_type],
               filename: export[:filename]

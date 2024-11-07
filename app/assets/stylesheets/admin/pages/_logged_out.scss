@@ -57,10 +57,10 @@ body.logged_out {
 
 
     .groupe-titres {
-      width: $largeur-colonne;
-      margin: 0 auto 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       font-family: $font-titre;
-      text-align: center;
       .logo-eva {
         width: 6rem;
       }
@@ -111,6 +111,7 @@ body.logged_out {
       justify-content: center;
       .panel {
         width: $panels-largeur;
+        max-width: 47vw;
         padding: 0;
         margin-bottom: 0;
         .panel-content {
@@ -266,7 +267,6 @@ body.logged_out {
 
   #footer-principal {
     box-sizing: border-box;
-    color: $eva_light;
     padding: 1rem 1.875rem 0 1.875rem;
     position: relative;
     display: flex;
@@ -274,18 +274,15 @@ body.logged_out {
     align-items: center;
 
     .footer__a-propos {
-      width: $largeur-colonne;
-      margin: 0;
+      background-color: $eva_light;
     }
 
     .footer__logos {
-      padding-left: 0;
+      background-color: $eva_light;
       padding-right: 0;
+      padding-left: 0;
       width: ($panels-largeur * 2 + $panels-gap);
-    }
-
-    a {
-      color: white;
+      max-width: 100%;
     }
   }
 

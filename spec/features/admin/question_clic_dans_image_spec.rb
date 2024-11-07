@@ -22,6 +22,14 @@ describe 'Admin - Question Clic dans Image', type: :feature do
     it 'affiche la transcription associée' do
       expect(page).to have_content 'Comment ça va ?'
     end
+
+    it "affiche le bouton d'export" do
+      expect(page).to have_link 'Exporter le contenu de la question'
+      within('.action-items-sidebar') do
+        click_on 'Exporter le contenu de la question'
+      end
+      expect(page.response_headers['Content-Type']).to eq 'application/vnd.ms-excel'
+    end
   end
 
   describe 'index' do

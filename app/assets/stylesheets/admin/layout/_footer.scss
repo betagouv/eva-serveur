@@ -4,6 +4,11 @@
   color: $couleur-texte;
   padding: 1.75rem 0 0;
 
+  .footer__a-propos {
+    margin: 0;
+    padding-top: 0.8rem;
+  }
+
   .footer__ligne {
     border-top: 1px solid $eva_dark_blue_grey;
     width: 100%;
@@ -11,15 +16,21 @@
     margin-bottom: 0;
   }
 
+  @media (max-width: 630px) {
+    .footer__logos {
+      flex-direction: column;
+    }
+  }
+
   .footer__logos {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.75rem 155px 1.25rem 155px;
-    background-color: $eva_light;
+    padding: 1rem 10% 1.25rem 10%;
     width: 100%;
 
     img { max-height: 4rem; }
+    .logo-eva { width: 7.25rem; }
     .logo-ministere-travail { max-height: 7.25rem; }
 
     .logos__groupe {

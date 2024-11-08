@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 describe Question::ImportExport do
-  subject(:service) do
-    described_class.new(question)
-  end
-
   describe '#exporte_donnees' do
+    subject(:service) do
+      described_class.new(question: question)
+    end
+
     let!(:question) { create(:question_clic_dans_image) }
 
     it 'exporte les données' do
@@ -20,7 +20,11 @@ describe Question::ImportExport do
   end
 
   describe '#importe_donnees' do
-    let(:question) { create(:question_clic_dans_image) }
+    subject(:service) do
+      described_class.new(type: type)
+    end
+
+    let!(:type) { 'QuestionClicDansImage' }
     let!(:file) do
       fixture_file_upload('spec/support/import_question_clic.xls', 'text/xls')
     end
@@ -29,7 +33,7 @@ describe Question::ImportExport do
       expect(Question.count).to eq 0
       expect do
         service.importe_donnees(file)
-      end.to change(Question, :count).by(1)
+      end.to change(Question, :count).by(2)
     end
   end
 end

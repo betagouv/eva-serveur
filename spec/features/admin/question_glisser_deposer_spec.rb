@@ -39,7 +39,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
       within('.action-items-sidebar') do
         click_on 'Importer question glisser déposer'
       end
-      expect(page).to have_content 'Importer une question'
+      expect(page).to have_content 'Importer une ou plusieurs questions'
     end
   end
 

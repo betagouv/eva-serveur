@@ -35,8 +35,8 @@ module ImportExport
 
     def recupere_data(file)
       sheet = Spreadsheet.open(file.path).worksheet(0)
-      @data = sheet.rows[1]
-      @headers = sheet.rows[0]
+      @headers = sheet.rows[0] # La première ligne contient les headers
+      @data = sheet.rows[1..] # Les autres lignes contiennent les données
     end
 
     def telecharge_fichier(url)
@@ -59,6 +59,10 @@ module ImportExport
 
     def attache_fichier(attachment, url)
       attachment.attach(telecharge_fichier(url)) if url.present?
+    end
+
+    def message_erreur_validation(exception, row)
+      "Erreur ligne #{row}: #{exception.record.errors.full_messages.to_sentence}"
     end
   end
 end

@@ -17,13 +17,13 @@ class Question
                          'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
                          'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
 
-    def initialize(question)
+    def initialize(question: nil, type: nil)
       @question = question
-      @type = question.type
+      @type = type || question.type
     end
 
     def importe_donnees(file)
-      Import.new(@question, HEADERS_ATTENDUS[@type]).import_from_xls(file)
+      Import.new(@type, HEADERS_ATTENDUS[@type]).import_from_xls(file)
     rescue ActiveRecord::RecordInvalid => e
       raise Import::Error, message_erreur_validation(e)
     end
@@ -37,8 +37,8 @@ class Question
       }
     end
 
-    def message_erreur_validation(exception)
-      exception.record.errors.full_messages.to_sentence.to_s
+    def message_erreur_validation(exception, row)
+      "Erreur ligne #{row}: #{exception.record.errors.full_messages.to_sentence}"
     end
   end
 end

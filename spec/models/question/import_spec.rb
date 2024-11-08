@@ -6,13 +6,13 @@ describe Question::Import do
   describe 'importe les données' do
     describe 'pour toutes les questions' do
       subject(:service) do
-        described_class.new(question_clic, headers)
+        described_class.new(type_clic, headers)
       end
 
-      let(:question_clic) { Question.new(type: 'QuestionClicDansImage') }
+      let(:type_clic) { 'QuestionClicDansImage' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_clic.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_clic]
       end
 
       describe 'avec un fichier valide' do
@@ -23,7 +23,7 @@ describe Question::Import do
         it 'importe une nouvelle question' do
           expect do
             service.import_from_xls(file)
-          end.to change(Question, :count).by(1)
+          end.to change(Question, :count).by(2)
         end
 
         it 'crée les transcriptions' do
@@ -41,8 +41,8 @@ describe Question::Import do
         it "importe les données d'une question" do
           service.import_from_xls(file)
           question = Question.last
-          expect(question.nom_technique).to eq 'N1Pse5'
-          expect(question.libelle).to eq 'N1Pse5'
+          expect(question.nom_technique).to eq 'N1Pse6'
+          expect(question.libelle).to eq 'N1Pse6'
           expect(question.description).to eq 'Ceci est une description'
           expect(question.illustration.attached?).to be true
         end
@@ -65,13 +65,13 @@ describe Question::Import do
 
     describe 'pour une question de type qcm' do
       subject(:service) do
-        described_class.new(question_qcm, headers)
+        described_class.new(type_qcm, headers)
       end
 
-      let(:question_qcm) { Question.new(type: 'QuestionQcm') }
+      let(:type_qcm) { 'QuestionQcm' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_qcm.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_qcm]
       end
 
       let(:file) do
@@ -103,13 +103,13 @@ describe Question::Import do
 
     describe 'pour une question de type glisser deposer' do
       subject(:service) do
-        described_class.new(question_glisser, headers)
+        described_class.new(type_glisser, headers)
       end
 
-      let(:question_glisser) { Question.new(type: 'QuestionGlisserDeposer') }
+      let(:type_glisser) { 'QuestionGlisserDeposer' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_glisser.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_glisser]
       end
 
       let(:file) do
@@ -141,13 +141,13 @@ describe Question::Import do
 
     describe 'pour une question de type clic dans image' do
       subject(:service) do
-        described_class.new(question_clic, headers)
+        described_class.new(type_clic, headers)
       end
 
-      let(:question_clic) { Question.new(type: 'QuestionClicDansImage') }
+      let(:type_clic) { 'QuestionClicDansImage' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_clic.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_clic]
       end
 
       let(:file) do
@@ -164,13 +164,13 @@ describe Question::Import do
 
     describe 'pour une question de type saisie' do
       subject(:service) do
-        described_class.new(question_clic, headers)
+        described_class.new(type_saisie, headers)
       end
 
-      let(:question_clic) { Question.new(type: 'QuestionSaisie') }
+      let(:type_saisie) { 'QuestionSaisie' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_clic.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_saisie]
       end
 
       let(:file) do
@@ -190,13 +190,13 @@ describe Question::Import do
 
     describe 'pour une question de type sous consigne' do
       subject(:service) do
-        described_class.new(question_consigne, headers)
+        described_class.new(type_consigne, headers)
       end
 
-      let(:question_consigne) { Question.new(type: 'QuestionSousConsigne') }
+      let(:type_consigne) { 'QuestionSousConsigne' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[question_consigne.type]
+        Question::ImportExport::HEADERS_ATTENDUS[type_consigne]
       end
 
       let(:file) do
@@ -206,8 +206,8 @@ describe Question::Import do
       it 'importe les données' do
         service.import_from_xls(file)
         question = Question.last
-        expect(question.nom_technique).to eq 'N1Pse5'
-        expect(question.libelle).to eq 'N1Pse5'
+        expect(question.nom_technique).to eq 'N1Pse6'
+        expect(question.libelle).to eq 'N1Pse6'
       end
 
       it "créé la transcription de li'intitulé seulement" do

@@ -7,7 +7,7 @@ fr:
         mauvais_format: |
           Le fichier n'est pas au bon format. Il doit contenir les colonnes dans l'ordre suivant : %{headers}
     succes:
-      import_question: La question a bien été importée et créée
+      import_question: Les questions ont bien été importées et créées
 
   erreurs:
     erreur:

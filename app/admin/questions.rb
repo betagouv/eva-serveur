@@ -5,7 +5,7 @@ ActiveAdmin.register Question do
 
   member_action :export_xls, method: :get do
     question = Question.find(params[:id])
-    export = Question::ImportExport.new(question).exporte_donnees
+    export = Question::ImportExport.new(question: question).exporte_donnees
     send_data export[:xls],
               content_type: export[:content_type],
               filename: export[:filename]
@@ -15,9 +15,9 @@ ActiveAdmin.register Question do
     def import_xls
       return if params[:file_xls].blank?
 
-      question = recupere_question
+      initialise_import
       flash[:success] = I18n.t('.layouts.succes.import_question')
-      redirect_to redirection_apres_import(question)
+      redirect_to redirection_apres_import
     rescue Question::Import::Error => e
       erreur_import(e)
     rescue ImportExport::ImportXls::Error => e
@@ -26,9 +26,8 @@ ActiveAdmin.register Question do
 
     private
 
-    def recupere_question
-      question = Question.new(type: params[:type])
-      Question::ImportExport.new(question).importe_donnees(params[:file_xls])
+    def initialise_import
+      Question::ImportExport.new(type: params[:type]).importe_donnees(params[:file_xls])
     end
 
     def erreur_import(error)
@@ -38,16 +37,16 @@ ActiveAdmin.register Question do
 
     private
 
-    def redirection_apres_import(question)
+    def redirection_apres_import
       redirection_paths = {
-        'QuestionClicDansImage' => edit_admin_question_clic_dans_image_path(question),
-        'QuestionGlisserDeposer' => edit_admin_question_glisser_deposer_path(question),
-        'QuestionQcm' => edit_admin_question_qcm_path(question),
-        'QuestionSaisie' => edit_admin_question_saisie_path(question),
-        'QuestionSousConsigne' => edit_admin_question_sous_consigne_path(question)
+        'QuestionClicDansImage' => admin_questions_clic_dans_image_path,
+        'QuestionGlisserDeposer' => admin_questions_glisser_deposer_path,
+        'QuestionQcm' => admin_question_qcms_path,
+        'QuestionSaisie' => admin_questions_saisies_path,
+        'QuestionSousConsigne' => admin_question_sous_consignes_path
       }
 
-      redirection_paths[params[:type]]
+      redirection_paths[params[:type]] || admin_questions_path
     end
   end
 end

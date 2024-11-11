@@ -7,26 +7,88 @@ describe 'questions:attache_assets' do
   let(:logger) { RakeLogger.logger }
   let!(:question) { create :question_qcm, nom_technique: 'lodi_1' }
   let!(:transcription) { create :transcription, question_id: question.id, categorie: :intitule }
-  let!(:choix) { create :choix, :bon, question_id: question.id, nom_technique: 'LOdi/couverture' }
+  let!(:choix) { create :choix, :bon, question_id: question.id, nom_technique: 'LOdi_couverture' }
   let!(:choix2) do
-    create :choix, :mauvais, question_id: question.id, nom_technique: 'ALrd/jazz_a_dimoudon'
+    create :choix, :mauvais, question_id: question.id, nom_technique: 'LOdi_drap'
   end
 
-  before do
-    allow(logger).to receive :info
-    subject.invoke
+  context 'appellé avec une dossier id inconnu' do
+    let(:error_message) do
+      "Le dossier avec l'id 'inconnue' n'est pas accessible: " \
+        'notFound: File not found: inconnue.'
+    end
+
+    before do
+      ENV['DOSSIER_ID'] = 'inconnue'
+      allow(GoogleDriveStorage).to receive(:existe_dossier?).with('inconnue').and_raise(
+        GoogleDriveStorage::Error, error_message
+      )
+      subject.reenable
+    end
+
+    it do
+      expect(logger).to receive(:error).with(error_message)
+      expect(logger).to receive(:info).exactly(0).times
+      subject.invoke
+    end
   end
 
-  context "attache l'illustration à la question correspondante" do
-    it { expect(question.reload.illustration.attached?).to be true }
+  context 'appellé sans dossier id' do
+    it do
+      ENV['DOSSIER_ID'] = nil
+      expect(logger).to receive(:error)
+        .with("La variable d'environnement DOSSIER_ID est manquante")
+      expect(logger).to receive(:info)
+        .with('Usage : rake questions:attache_assets DOSSIER_ID=<dossier_id>')
+      subject.invoke
+    end
   end
 
-  context "attache l'audio à l'intitulé de la question correspondante" do
-    it { expect(question.reload.transcription_intitule.audio.attached?).to be true }
-  end
+  context 'appellé avec un dossier id valide' do
+    let(:fake_files) do
+      [
+        instance_double(GoogleDrive::File, name: 'illustration.png',
+                                           download_to_string: 'fake_content'),
+        instance_double(GoogleDrive::File, name: 'lodi_1.mp3',
+                                           download_to_string: 'fake_content'),
+        instance_double(GoogleDrive::File, name: 'LOdi_couverture.mp3',
+                                           download_to_string: 'fake_content'),
+        instance_double(GoogleDrive::File, name: 'LOdi_drap.mp3',
+                                           download_to_string: 'fake_content')
+      ]
+    end
 
-  context "attache l'audio aux choix de la question correspondante" do
-    it { expect(question.reload.choix[0].audio.attached?).to be true }
-    it { expect(question.reload.choix[1].audio.attached?).to be true }
+    before do
+      ENV['DOSSIER_ID'] = 'fake-dossier-id'
+      allow(GoogleDriveStorage).to receive(:existe_dossier?).with('fake-dossier-id')
+                                                            .and_return(true)
+
+      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
+                                                                   'programme_tele.png')
+                                                             .and_return(fake_files[0])
+      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id', 'lodi_1.mp3')
+                                                             .and_return(fake_files[1])
+      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
+                                                                   'LOdi_couverture.mp3')
+                                                             .and_return(fake_files[2])
+      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
+                                                                   'LOdi_drap.mp3')
+                                                             .and_return(fake_files[3])
+      subject.reenable
+      subject.invoke
+    end
+
+    context "attache l'illustration à la question correspondante" do
+      it { expect(question.reload.illustration.attached?).to be true }
+    end
+
+    context "attache l'audio à l'intitulé de la question correspondante" do
+      it { expect(question.reload.transcription_intitule.audio.attached?).to be true }
+    end
+
+    context "attache l'audio aux choix de la question correspondante" do
+      it { expect(question.reload.choix[0].audio.attached?).to be true }
+      it { expect(question.reload.choix[1].audio.attached?).to be true }
+    end
   end
 end

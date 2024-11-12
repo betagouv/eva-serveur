@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Question::ImportExport do
+describe ImportExport::Questions::ImportExportDonnees do
   describe '#exporte_donnees' do
     subject(:service) do
       described_class.new(question: question)

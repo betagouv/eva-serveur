@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Question::Import do
+describe ImportExport::Questions::Import do
   describe 'importe les données' do
     describe 'pour toutes les questions' do
       subject(:service) do
@@ -12,7 +12,7 @@ describe Question::Import do
       let(:type_clic) { 'QuestionClicDansImage' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_clic]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_clic]
       end
 
       describe 'avec un fichier valide' do
@@ -58,7 +58,7 @@ describe Question::Import do
 
           expect do
             service.import_from_xls(file)
-          end.to raise_error(Question::Import::Error, message)
+          end.to raise_error(ImportExport::Questions::Import::Error, message)
         end
       end
     end
@@ -71,7 +71,7 @@ describe Question::Import do
       let(:type_qcm) { 'QuestionQcm' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_qcm]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_qcm]
       end
 
       let(:file) do
@@ -109,7 +109,7 @@ describe Question::Import do
       let(:type_glisser) { 'QuestionGlisserDeposer' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_glisser]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_glisser]
       end
 
       let(:file) do
@@ -147,7 +147,7 @@ describe Question::Import do
       let(:type_clic) { 'QuestionClicDansImage' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_clic]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_clic]
       end
 
       let(:file) do
@@ -170,7 +170,7 @@ describe Question::Import do
       let(:type_saisie) { 'QuestionSaisie' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_saisie]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_saisie]
       end
 
       let(:file) do
@@ -196,7 +196,7 @@ describe Question::Import do
       let(:type_consigne) { 'QuestionSousConsigne' }
 
       let(:headers) do
-        Question::ImportExport::HEADERS_ATTENDUS[type_consigne]
+        ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_consigne]
       end
 
       let(:file) do

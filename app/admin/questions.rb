@@ -27,8 +27,8 @@ ActiveAdmin.register Question do
     private
 
     def initialise_import
-      ImportExport::Questions::ImportExport.new(type: params[:type])
-                                           .importe_donnees(params[:file_xls])
+      ImportExport::Questions::ImportExportDonnees.new(type: params[:type])
+                                                  .importe_donnees(params[:file_xls])
     end
 
     def erreur_import(error)

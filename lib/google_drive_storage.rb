@@ -41,7 +41,7 @@ class GoogleDriveStorage
     end
 
     file = @dossier.files.find { |f| f.name == nom_fichier }
-    raise "Fichier '#{nom_fichier}' n'existe pas dans le dossier '#{dossier_id}'" unless file
+    raise Error, "Fichier '#{nom_fichier}' n'existe pas dans le dossier '#{dossier_id}'" unless file
 
     file
   end

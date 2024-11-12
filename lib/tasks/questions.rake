@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake_logger'
+require 'google_drive_storage'
 
 # rubocop:disable Naming/VariableNumber
 NOM_TECHNIQUES_QCM = {

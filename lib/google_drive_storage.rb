@@ -2,6 +2,9 @@
 
 class GoogleDriveStorage
   class Error < StandardError; end
+
+  attr_reader :session
+
   GOOGLE_DRIVE_ACCOUNT_CONFIG = {
     'type' => 'service_account',
     'project_id' => ENV.fetch('GOOGLE_PROJECT_ID', nil),
@@ -18,7 +21,11 @@ class GoogleDriveStorage
     'universe_domain' => 'googleapis.com'
   }.freeze
 
-  def self.recupere_session
+  def initialize
+    @session = recupere_session
+  end
+
+  def recupere_session
     Tempfile.create(['google_drive_service_account', '.json']) do |file|
       file.write(GOOGLE_DRIVE_ACCOUNT_CONFIG.to_json)
       file.rewind
@@ -26,21 +33,14 @@ class GoogleDriveStorage
     end
   end
 
-  def self.existe_dossier?(dossier_id)
-    session = recupere_session
-    begin
-      @dossier = session.collection_by_id(dossier_id)
-    rescue Google::Apis::ClientError => e
-      raise Error, "Le dossier avec l'id '#{dossier_id}' n'est pas accessible : #{e.message}"
-    end
+  def existe_dossier?(dossier_id)
+    true if @session.collection_by_id(dossier_id)
+  rescue Google::Apis::ClientError => e
+    raise Error, "Le dossier avec l'id '#{dossier_id}' n'est pas accessible : #{e.message}"
   end
 
-  def self.recupere_fichier(dossier_id, nom_fichier)
-    unless existe_dossier?(dossier_id)
-      raise "Le dossier avec l'id '#{dossier_id}' n'est pas accessible"
-    end
-
-    file = @dossier.files.find { |f| f.name == nom_fichier }
+  def recupere_fichier(dossier_id, nom_fichier)
+    file = @session.file_by_title(nom_fichier)
     raise Error, "Fichier '#{nom_fichier}' n'existe pas dans le dossier '#{dossier_id}'" unless file
 
     file

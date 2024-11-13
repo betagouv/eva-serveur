@@ -51,8 +51,9 @@ namespace :questions do
       next
     end
 
+    @drive = GoogleDriveStorage.new
     begin
-      GoogleDriveStorage.existe_dossier?(ENV.fetch(dossier_id, nil))
+      @drive.existe_dossier?(ENV.fetch(dossier_id, nil))
     rescue GoogleDriveStorage::Error => e
       logger.error e.message
       next
@@ -60,22 +61,20 @@ namespace :questions do
 
     NOM_TECHNIQUES_QCM.each do |question_nom_technique, nom_illustration|
       question = Question.find_by(nom_technique: question_nom_technique)
-      if question.blank?
+      if question
+        recupere_fichier(ENV.fetch(dossier_id, nil), question, "#{nom_illustration}.png")
+        recupere_fichier(ENV.fetch(dossier_id, nil), question, "#{question.nom_technique}.mp3",
+                         question.transcription_intitule)
+        attach_audio_choix(ENV.fetch(dossier_id, nil), question)
+      else
         puts "Pas de question trouvée pour le nom_technique '#{question_nom_technique}'"
       end
-      next if question.blank?
-
-      recupere_fichier(ENV.fetch(dossier_id), question, "#{nom_illustration}.png")
-      recupere_fichier(ENV.fetch(dossier_id), question, "#{question.nom_technique}.mp3",
-                       question.transcription_intitule)
-      attach_audio_choix(ENV.fetch(dossier_id), question)
     end
-    puts 'Création des assets finie.'
   end
 end
 
 def recupere_fichier(dossier_id, question, fichier_path, model = nil)
-  file = GoogleDriveStorage.recupere_fichier(dossier_id, fichier_path)
+  file = @drive.recupere_fichier(dossier_id, fichier_path)
   if file
     file_content = file.download_to_string
     attach_file_to(model || question, file_content, fichier_path, question.nom_technique)

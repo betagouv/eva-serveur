@@ -14,13 +14,15 @@ describe 'questions:attache_assets' do
 
   context 'appellé avec une dossier id inconnu' do
     let(:error_message) do
-      "Le dossier avec l'id 'inconnue' n'est pas accessible: " \
+      "Le dossier avec l'id 'inconnue' n'est pas accessible : " \
         'notFound: File not found: inconnue.'
     end
 
     before do
       ENV['DOSSIER_ID'] = 'inconnue'
-      allow(GoogleDriveStorage).to receive(:existe_dossier?).with('inconnue').and_raise(
+      drive = instance_double(GoogleDriveStorage)
+      allow(GoogleDriveStorage).to receive(:new).and_return(drive)
+      allow(drive).to receive(:existe_dossier?).with('inconnue').and_raise(
         GoogleDriveStorage::Error, error_message
       )
       subject.reenable
@@ -60,20 +62,16 @@ describe 'questions:attache_assets' do
 
     before do
       ENV['DOSSIER_ID'] = 'fake-dossier-id'
-      allow(GoogleDriveStorage).to receive(:existe_dossier?).with('fake-dossier-id')
-                                                            .and_return(true)
+      drive = instance_double(GoogleDriveStorage)
+      allow(GoogleDriveStorage).to receive(:new).and_return(drive)
+      allow(drive).to receive(:existe_dossier?).with('fake-dossier-id').and_return(true)
 
-      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
-                                                                   'programme_tele.png')
-                                                             .and_return(fake_files[0])
-      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id', 'lodi_1.mp3')
-                                                             .and_return(fake_files[1])
-      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
-                                                                   'LOdi_couverture.mp3')
-                                                             .and_return(fake_files[2])
-      allow(GoogleDriveStorage).to receive(:recupere_fichier).with('fake-dossier-id',
-                                                                   'LOdi_drap.mp3')
-                                                             .and_return(fake_files[3])
+      file_names = ['programme_tele.png', 'lodi_1.mp3', 'LOdi_couverture.mp3', 'LOdi_drap.mp3']
+      file_names.each_with_index do |file_name, index|
+        allow(drive).to receive(:recupere_fichier).with('fake-dossier-id',
+                                                        file_name).and_return(fake_files[index])
+      end
+
       subject.reenable
       subject.invoke
     end

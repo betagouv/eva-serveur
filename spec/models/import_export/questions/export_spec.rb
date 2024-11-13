@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Export do
-  subject(:response_service) { described_class.new(question, headers) }
+  subject(:response_service) { described_class.new([question], headers) }
 
   let(:headers) { [] }
   let(:question) { create(:question) }
@@ -154,11 +154,13 @@ describe ImportExport::Questions::Export do
   end
 
   describe '#nom_du_fichier' do
+    let(:question) { create(:question_qcm) }
+
     it 'genere le nom du fichier' do
       date = DateTime.current.strftime('%Y%m%d')
-      nom_du_fichier_attendu = "#{date}-#{question.nom_technique}.xls"
+      nom_du_fichier_attendu = "#{date}-#{question.type}.xls"
 
-      expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
+      expect(response_service.nom_du_fichier(question.type)).to eq(nom_du_fichier_attendu)
     end
   end
 

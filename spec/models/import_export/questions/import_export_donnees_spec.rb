@@ -5,14 +5,14 @@ require 'rails_helper'
 describe ImportExport::Questions::ImportExportDonnees do
   describe '#exporte_donnees' do
     subject(:service) do
-      described_class.new(question: question)
+      described_class.new(questions: [question], type: question.type)
     end
 
     let!(:question) { create(:question_clic_dans_image) }
 
     it 'exporte les données' do
       date = DateTime.current.strftime('%Y%m%d')
-      nom_du_fichier_attendu = "#{date}-#{question.nom_technique}.xls"
+      nom_du_fichier_attendu = "#{date}-#{question.type}.xls"
       expect(service.exporte_donnees[:xls]).not_to be_nil
       expect(service.exporte_donnees[:content_type]).to eq 'application/vnd.ms-excel'
       expect(service.exporte_donnees[:filename]).to eq nom_du_fichier_attendu

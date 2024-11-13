@@ -18,9 +18,9 @@ module ImportExport
                            'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
                            'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
 
-      def initialize(question: nil, type: nil)
-        @question = question
-        @type = type || question.type
+      def initialize(questions: nil, type: nil)
+        @questions = questions
+        @type = type
       end
 
       def importe_donnees(file)
@@ -30,11 +30,11 @@ module ImportExport
       end
 
       def exporte_donnees
-        export = Export.new(@question, HEADERS_ATTENDUS[@type])
+        export = Export.new(@questions, HEADERS_ATTENDUS[@type])
         {
           xls: export.to_xls,
           content_type: export.content_type_xls,
-          filename: export.nom_du_fichier
+          filename: export.nom_du_fichier(@type)
         }
       end
 

@@ -44,6 +44,11 @@ Rails.application.routes.draw do
         end
         resource :export_xls, only: [:show], defaults: { format: 'xls' }, controller: 'questions/export_xls'
       end
+      resources :questionnaires do
+        member do
+          get :export_questions, only: [:show], defaults: { format: 'xls' }
+        end
+      end
     end
 
     namespace :api do

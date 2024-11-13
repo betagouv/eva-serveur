@@ -34,4 +34,8 @@ class Questionnaire < ApplicationRecord
   def livraison_sans_redaction?
     nom_technique == Questionnaire::LIVRAISON_SANS_REDACTION
   end
+
+  def questions_par_type
+    questions.group_by(&:type)
+  end
 end

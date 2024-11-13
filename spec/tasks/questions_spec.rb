@@ -62,6 +62,7 @@ describe 'questions:attache_assets' do
 
     before do
       ENV['DOSSIER_ID'] = 'fake-dossier-id'
+      ENV['TYPE_QUESTION'] = 'QCM'
       drive = instance_double(GoogleDriveStorage)
       allow(GoogleDriveStorage).to receive(:new).and_return(drive)
       allow(drive).to receive(:existe_dossier?).with('fake-dossier-id').and_return(true)

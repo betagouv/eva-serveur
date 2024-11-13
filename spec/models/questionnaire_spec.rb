@@ -26,4 +26,24 @@ RSpec.describe Questionnaire, type: :model do
       it { expect(questionnaire.livraison_sans_redaction?).to be(false) }
     end
   end
+
+  describe '#questions_par_type' do
+    let(:questionnaire) { create :questionnaire }
+    let(:question_clic_dans_image) { create :question_clic_dans_image }
+    let(:question_qcm) { create :question_qcm }
+
+    before do
+      create :questionnaire_question, questionnaire_id: questionnaire.id,
+                                      question_id: question_clic_dans_image.id
+      create :questionnaire_question, questionnaire_id: questionnaire.id,
+                                      question_id: question_qcm.id
+    end
+
+    it do
+      expect(questionnaire.questions_par_type).to eq(
+        'QuestionClicDansImage' => [question_clic_dans_image],
+        'QuestionQcm' => [question_qcm]
+      )
+    end
+  end
 end

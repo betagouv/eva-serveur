@@ -128,6 +128,17 @@ describe Structure, type: :model do
       it { expect(structure.errors[:siret]).to be_blank }
     end
 
+    context 'quand il est un siret valide avec des espaces' do
+      let(:structure) { build :structure, siret: '1234567890 1234' }
+
+      before { structure.valid? }
+
+      it do
+        expect(structure.errors[:siret]).to be_blank
+        expect(structure.siret).to eq('12345678901234')
+      end
+    end
+
     context 'quand il est un siret valide (14 chiffres)' do
       let(:structure) { build :structure, siret: '12345678901234' }
 

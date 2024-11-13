@@ -24,6 +24,7 @@ class Structure < ApplicationRecord
     end
   end
 
+  before_validation :retire_espaces_siret
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
   after_create :programme_email_relance
 
@@ -89,5 +90,11 @@ class Structure < ApplicationRecord
     return if siret.size == 14 || siret.size == 9
 
     errors.add(:siret, :invalid)
+  end
+
+  def retire_espaces_siret
+    return if siret.blank?
+
+    self.siret = siret.gsub(/[[:space:]]/, '')
   end
 end

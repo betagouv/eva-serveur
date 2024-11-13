@@ -29,7 +29,9 @@ fr:
         voir: Voir
     structures_locales:
       form:
-        titre: Création d'une nouvelle structure
+        titre:
+          nouveau: Création d'une nouvelle structure
+          modification: Modification de la structure
         verifier_information_structure: |
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)

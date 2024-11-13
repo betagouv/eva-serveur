@@ -31,22 +31,20 @@ module ImportExport
         end
       end
 
-      # rubocop:disable Metrics/AbcSize
       def cree_question
-        @question = Question.new(type: @type) # On crée une nouvelle instance pour chaque ligne
-        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1], description: @row[7])
-        attache_fichier(@question.illustration, @row[2])
-        @question.save!
-        cree_transcription(:intitule, @row[4], @row[3])
-        cree_transcription(:modalite_reponse, @row[6], @row[5]) unless @question.sous_consigne?
-        update_champs_specifiques
-        @question
+        ActiveRecord::Base.transaction do
+          intialise_question
+          cree_transcription(:intitule, @row[4], @row[3])
+          cree_transcription(:modalite_reponse, @row[6], @row[5]) unless @question.sous_consigne?
+          update_champs_specifiques
+          @question
+        end
       end
-      # rubocop:enable Metrics/AbcSize
 
       def intialise_question
-        @question.assign_attributes(libelle: @row[0],
-                                    nom_technique: @row[1], description: @row[7])
+        @question = Question.new(type: @type) # On crée une nouvelle instance pour chaque ligne
+        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1],
+                                    description: @row[7])
         attache_fichier(@question.illustration, @row[2])
         @question.save!
       end

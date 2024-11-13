@@ -8,6 +8,14 @@ ActiveAdmin.register Questionnaire do
 
   filter :questions
 
+  member_action :export_questions, method: :get
+
+  action_item :export_questions, only: :show do
+    link_to 'Exporter les questions en XLS',
+            export_questions_admin_questionnaire_path(resource),
+            format: :xls
+  end
+
   form do |f|
     f.semantic_errors
     f.inputs do
@@ -43,6 +51,19 @@ ActiveAdmin.register Questionnaire do
   controller do
     def find_resource
       scoped_collection.where(id: params[:id]).includes(questionnaires_questions: :question).first!
+    end
+
+    def export_questions
+      questionnaire = find_resource
+      questions_par_type = questionnaire.questions_par_type
+
+      questions_par_type.each do |type, questions|
+        export = ImportExport::Questions::ImportExportDonnees.new(questions: questions,
+                                                                  type: type).exporte_donnees
+        send_data export[:xls],
+                  content_type: export[:content_type],
+                  filename: export[:filename]
+      end
     end
   end
 end

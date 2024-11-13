@@ -18,7 +18,7 @@ class Campagne < ApplicationRecord
   validates :code, presence: true, format: { with: /\A[A-Z0-9]+\z/ },
                    uniqueness: { case_sensitive: false, conditions: -> { with_deleted } }
   validates_associated :situations_configurations
-  delegate :structure_code_postal, to: :compte
+  delegate :structure_code_postal, :structure, to: :compte
   auto_strip_attributes :libelle, :code, squish: true
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 

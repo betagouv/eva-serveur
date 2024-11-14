@@ -24,7 +24,11 @@ div id: 'competences_transversales', class: 'page' do
             div class: 'competence-transversale' do
               div class: 'conteneur-jauge' do
                 div class: 'jauge'
-                div class: "jauge remplissage remplissage-#{interpretation}"
+                div class: "jauge remplissage remplissage-#{interpretation}",
+                    aria: {
+                      label: t(".niveau.#{interpretation}"),
+                      describedby: competence
+                    }
               end
               span class: 'image-competence' do
                 if pdf
@@ -35,6 +39,7 @@ div id: 'competences_transversales', class: 'page' do
               end
               div class: 'informations-competence' do
                 h3 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
+                   id: competence,
                    class: 'nom-competence'
                 div class: 'description-competence' do
                   div md t("#{competence}.stanine#{interpretation}",

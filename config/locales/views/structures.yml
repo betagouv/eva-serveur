@@ -34,7 +34,7 @@ fr:
           modification: Modification de la structure
         verifier_information_structure: |
           **Veuillez vérifier les informations saisies avant de valider cette création.**
-          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
+          Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
   nouvelles_structures:
     modal_mise_en_garde:
       titre: Mise en garde
@@ -59,6 +59,6 @@ fr:
       actions:
         validation: |
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**
-          Si vous avez des difficultés, vous pouvez nous contacter à : [contact@beta.gouv.fr](mailto:contact@beta.gouv.fr)
+          Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
       creer_structure: Valider la création de mon compte
       lien_retour: Rechercher ma structure

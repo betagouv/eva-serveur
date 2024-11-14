@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: 'prise-en-main row' do
-  div image_tag('souris.svg'), class: 'col-auto'
+  div image_tag('souris.svg', alt: ''), class: 'col-auto'
   div class: 'col' do
     h2 t('.titre'), class: 'titre'
     div t('.description'), class: 'description'

@@ -8,7 +8,6 @@ class ReferentielAnlciComponent < ViewComponent::Base
   end
 
   def badges_referentiel
-    %w[profil1-referentiel profil2-referentiel profil3-referentiel profil4-referentiel
-       profil4_plus-referentiel profil4_plus_plus-referentiel]
+    %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus]
   end
 end

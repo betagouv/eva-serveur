@@ -11,7 +11,7 @@ div class: 'col-auto badge' do
     div image_tag "#{competence}_#{referentiel}.svg", alt: ''
     if niveau.present?
       div image_tag "badges/#{referentiel}/#{niveau}.svg",
-                    alt: "Niveau #{niveau}"
+                    alt: t(niveau, scope: 'admin.restitutions.references')
     end
   end
 end

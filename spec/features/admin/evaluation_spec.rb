@@ -198,8 +198,8 @@ describe 'Admin - Evaluation', type: :feature do
             mon_evaluation.update(niveau_anlci_litteratie: :profil3,
                                   niveau_anlci_numeratie: :profil4)
             visit admin_evaluation_path(mon_evaluation)
-            expect(page).to have_xpath("//img[@alt='Niveau profil3']")
-            expect(page).to have_xpath("//img[@alt='Niveau profil4']")
+            expect(page).to have_xpath("//img[@alt='Profil 3']")
+            expect(page).to have_xpath("//img[@alt='Profil 4']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do

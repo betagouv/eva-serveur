@@ -368,6 +368,31 @@ fr:
 
         Les raisons peuvent être trouvées ici :  
         [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
+      references:
+        ordre: '(par ordre croissant)'
+        francais: 'Français :'
+        mathematiques: 'Mathématiques :'
+        pre_A1: Niveau pre A1
+        A1: Niveau A1
+        A2: Niveau A2
+        B1: Niveau B1 plus
+        pre_X1: Niveau pre X1
+        X1: Niveau X1
+        X2: Niveau X2
+        Y1: Niveau Y1 plus
+        profil1: Profil 1
+        profil2: Profil 2
+        profil3: Profil 3
+        profil4: Profil 4
+        profil4_plus: Profil 4 plus
+        profil4_plus_plus: Profil 4 plus plus
+        explications-cefr: |
+          Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
+        explications-anlci: |
+          Les restitutions eva sont basées sur les référentiels de l'Agence Nationale de Lutte Contre l'Illettrisme d'évaluation du français et des mathématiques.
+        explications-lien: |
+          Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :  
+          <a href="https://l.incubateur.net/eva-referentiel/" target="_blank">https://l.incubateur.net/eva-referentiel/</a>
       cefr:
         alt_icone: ''
         titre: Vos compétences en français et mathématiques
@@ -430,31 +455,6 @@ fr:
 
             Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
             Il est important que vous échangiez à ce sujet avec votre conseiller.
-        references:
-          ordre: '(par ordre croissant)'
-          francais: 'Français :'
-          mathematiques: 'Mathématiques :'
-          pre_A1: Niveau pre A1
-          A1: Niveau A1
-          A2: Niveau A2
-          B1: Niveau B1
-          pre_X1: Niveau pre X1
-          X1: Niveau X1
-          X2: Niveau X2
-          Y1: Niveau Y1
-          profil1-referentiel: Profil 1
-          profil2-referentiel: Profil 2
-          profil3-referentiel: Profil 3
-          profil4-referentiel: Profil 4
-          profil4_plus-referentiel: Profil 4 plus
-          profil4_plus_plus-referentiel: Profil 4 plus plus
-          explications-cefr: |
-            Les restitutions eva sont basées sur les référentiels européens d’évaluation du français et des mathématiques, ainsi que sur le référentiel Cléa.
-          explications-anlci: |
-            Les restitutions eva sont basées sur les référentiels de l'Agence Nationale de Lutte Contre l'Illettrisme d'évaluation du français et des mathématiques.
-          explications-lien: |
-            Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :  
-            <a href="https://l.incubateur.net/eva-referentiel/" target="_blank">https://l.incubateur.net/eva-referentiel/</a>
       anlci:
         titre: Correspondance avec l'ANLCI
         titre_menu_lateral: Correspondance ANLCI

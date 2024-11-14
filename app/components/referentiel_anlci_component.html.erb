@@ -1,5 +1,5 @@
 <div class='referentiel_anlci bg-information'>
-  <% scope = 'admin.restitutions.cefr.references' %>
+  <% scope = 'admin.restitutions.references' %>
   <div class='row marges-page'>
     <div class='col'>
       <div class='row'>
@@ -12,7 +12,7 @@
           </div>
           <div class='col badges-referentiels'>
             <% @badges_referentiel.each do |badge| %>
-              <%= svg_tag_base64 "badges/anlci/#{badge}.svg",
+              <%= svg_tag_base64 "badges/anlci/#{badge}-referentiel.svg",
                                  class: 'badge-references',
                                  alt: t(badge, scope: scope) %>
             <% end %>

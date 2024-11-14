@@ -3,4 +3,4 @@ fr:
     beneficiaires:
       show:
         info: Vous pouvez consulter ici toutes les passations de ce bénéficiaire.
-        beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom de l'évalué·e est fictif et ses informations personnelles ont été supprimées."
+        beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."

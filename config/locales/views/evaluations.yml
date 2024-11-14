@@ -76,6 +76,10 @@ fr:
 
           Pour obtenir vos scores, n'hésitez pas à repasser le parcours eva plus tard.
         etiquette_lien_metiers: "Détail et métiers associés : "
+        niveau:
+          1: niveau 1
+          2: niveau 2
+          3: niveau 3
       restitution_competence:
         indetermine: non obs.
         1: 1

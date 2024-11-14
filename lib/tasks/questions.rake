@@ -61,53 +61,15 @@ module ConstantesQuestions
 
   unless const_defined?(:NOM_TECHNIQUES_GLISSER_DEPOSER)
     NOM_TECHNIQUES_GLISSER_DEPOSER = [
-      hpar_1: 'journal_vide'
+      %w[hpar_1 journal_vide]
     ].freeze
   end
 
   unless const_defined?(:NOM_TECHNIQUES_SAISIE)
-    NOM_TECHNIQUES_SAISIE = [
-      aplc_1: 'liste_de_course',
-      aplc_2: 'liste_de_course',
-      aplc_3: 'liste_de_course',
-      aplc_4: 'liste_de_course',
-      aplc_5: 'liste_de_course',
-      aplc_6: 'liste_de_course',
-      aplc_7: 'liste_de_course',
-      aplc_8: 'liste_de_course',
-      aplc_9: 'liste_de_course',
-      aplc_10: 'liste_de_course',
-      aplc_11: 'liste_de_course',
-      aplc_12: 'liste_de_course',
-      aplc_13: 'liste_de_course',
-      aplc_14: 'liste_de_course',
-      aplc_15: 'liste_de_course',
-      aplc_16: 'liste_de_course',
-      aplc_17: 'liste_de_course',
-      aplc_18: 'liste_de_course',
-      aplc_19: 'liste_de_course',
-      aplc_20: 'liste_de_course',
-      hpfb_1: 'telephone_email',
-      hpfb_2: 'telephone_email',
-      hpfb_3: 'telephone_email',
-      hpfb_4: 'telephone_email',
-      hpfb_5: 'telephone_email',
-      hpfb_6: 'telephone_email',
-      hpfb_7: 'telephone_email',
-      hpfb_8: 'telephone_email',
-      hpfb_9: 'telephone_email',
-      hpfb_10: 'telephone_email',
-      hpfb_11: 'telephone_email',
-      hpfb_12: 'telephone_email',
-      hpfb_13: 'telephone_email',
-      hpfb_14: 'telephone_email',
-      hpfb_15: 'telephone_email',
-      hpfb_16: 'telephone_email',
-      hpfb_17: 'telephone_email',
-      hpfb_18: 'telephone_email',
-      hpfb_19: 'telephone_email',
-      hpfb_20: 'telephone_email'
-    ].freeze
+    aplc_techniques = Array.new(20) { |i| ["aplc_#{i + 1}", 'liste_de_course'] }
+    hpfb_techniques = Array.new(20) { |i| ["hpfb_#{i + 1}", 'telephone_email'] }
+
+    NOM_TECHNIQUES_SAISIE = (aplc_techniques + hpfb_techniques).freeze
   end
 
   DOSSIER_ID = 'DOSSIER_ID' unless const_defined?(:DOSSIER_ID)
@@ -158,18 +120,25 @@ def attache_assets(nom_techniques)
     question = Question.find_by(nom_technique: question_nom_technique)
     next unless question
 
-    recupere_fichier(question, "#{nom_illustration}.png")
-    recupere_fichier(question, "#{question.nom_technique}.mp3", question.transcription_intitule)
-    attach_audio_choix(question) if question.qcm?
-    attach_images_reponses(question) if question.glisser_deposer?
+    attache_fichiers(question, nom_illustration)
   end
 end
 
-def recupere_fichier(question, fichier_path, model = nil)
+def attache_fichiers(question, nom_illustration)
+  recupere_fichier(question, "#{nom_illustration}.png")
+  if question.transcription_intitule
+    recupere_fichier(question, "#{question.nom_technique}.mp3",
+                     question.transcription_intitule)
+  end
+  attache_audio_choix(question) if question.qcm?
+  attache_images_reponses(question) if question.glisser_deposer?
+end
+
+def recupere_fichier(question, fichier_path, attachment_model = question)
   file = @drive.recupere_fichier(ENV.fetch(ConstantesQuestions::DOSSIER_ID, nil), fichier_path)
   if file
     file_content = file.download_to_string
-    attach_file_to(model || question, file_content, fichier_path, question.nom_technique)
+    attache_fichier_pour(attachment_model, file_content, fichier_path, question.nom_technique)
   else
     @logger.error "Pas de fichier trouvé sur Google Drive pour '#{fichier_path}'"
   end
@@ -177,20 +146,22 @@ rescue GoogleDriveStorage::Error => e
   @logger.error e.message
 end
 
-def attach_audio_choix(question)
+def attache_audio_choix(question)
   question.choix.each do |choix|
     recupere_fichier(question, "#{choix.nom_technique}.mp3", choix)
   end
 end
 
-def attach_images_reponses(question)
+def attache_images_reponses(question)
   question.reponses.each do |choix|
     recupere_fichier(question, "#{choix.nom_technique}.png", choix)
   end
 end
 
-def attach_file_to(instance, file_content, fichier_path, nom_technique)
-  instance.send(attachment_type(fichier_path)).attach(
+def attache_fichier_pour(model, file_content, fichier_path, nom_technique)
+  return unless model
+
+  model.send(attachment_type(fichier_path)).attach(
     io: StringIO.new(file_content),
     filename: fichier_path,
     content_type: content_type_for(fichier_path)

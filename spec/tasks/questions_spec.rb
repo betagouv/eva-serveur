@@ -11,6 +11,8 @@ describe 'questions:attache_assets' do
   let!(:choix2) do
     create :choix, :mauvais, question_id: question.id, nom_technique: 'LOdi_drap'
   end
+  let!(:sous_consigne) { create :question_sous_consigne, nom_technique: 'sous_consigne_LOdi_1' }
+  let!(:question_saisie) { create :question_saisie, nom_technique: 'aplc_1' }
 
   before do
     allow(logger).to receive :info
@@ -62,38 +64,76 @@ describe 'questions:attache_assets' do
         instance_double(GoogleDrive::File, name: 'LOdi_couverture.mp3',
                                            download_to_string: 'fake_content'),
         instance_double(GoogleDrive::File, name: 'LOdi_drap.mp3',
+                                           download_to_string: 'fake_content'),
+        instance_double(GoogleDrive::File, name: 'liste_de_course.png',
                                            download_to_string: 'fake_content')
       ]
     end
 
+    let(:drive) { instance_double(GoogleDriveStorage) }
+
     before do
       ENV['DOSSIER_ID'] = 'fake-dossier-id'
-      ENV['TYPE_QUESTION'] = 'QCM'
-      drive = instance_double(GoogleDriveStorage)
       allow(GoogleDriveStorage).to receive(:new).and_return(drive)
       allow(drive).to receive(:existe_dossier?).with('fake-dossier-id').and_return(true)
 
-      file_names = ['programme_tele.png', 'lodi_1.mp3', 'LOdi_couverture.mp3', 'LOdi_drap.mp3']
+      file_names = ['programme_tele.png', 'lodi_1.mp3', 'LOdi_couverture.mp3', 'LOdi_drap.mp3',
+                    'liste_de_course.png']
       file_names.each_with_index do |file_name, index|
         allow(drive).to receive(:recupere_fichier).with('fake-dossier-id',
                                                         file_name).and_return(fake_files[index])
       end
-
-      subject.reenable
-      subject.invoke
     end
 
-    context "attache l'illustration à la question correspondante" do
-      it { expect(question.reload.illustration.attached?).to be true }
+    context 'pour un type de question QCM' do
+      before do
+        ENV['TYPE_QUESTION'] = 'QCM'
+
+        subject.reenable
+        subject.invoke
+      end
+
+      context "attache l'illustration à la question correspondante" do
+        it { expect(question.reload.illustration.attached?).to be true }
+      end
+
+      context "attache l'audio à l'intitulé de la question correspondante" do
+        it { expect(question.reload.transcription_intitule.audio.attached?).to be true }
+      end
+
+      context "attache l'audio aux choix de la question correspondante" do
+        it { expect(question.reload.choix[0].audio.attached?).to be true }
+        it { expect(question.reload.choix[1].audio.attached?).to be true }
+      end
     end
 
-    context "attache l'audio à l'intitulé de la question correspondante" do
-      it { expect(question.reload.transcription_intitule.audio.attached?).to be true }
+    context 'pour un type de question SOUS_CONSIGNE' do
+      before do
+        ENV['TYPE_QUESTION'] = 'SOUS_CONSIGNE'
+
+        subject.reenable
+        subject.invoke
+      end
+
+      context "attache l'illustration à la question correspondante" do
+        it { expect(sous_consigne.reload.illustration.attached?).to be true }
+      end
     end
 
-    context "attache l'audio aux choix de la question correspondante" do
-      it { expect(question.reload.choix[0].audio.attached?).to be true }
-      it { expect(question.reload.choix[1].audio.attached?).to be true }
+    context 'pour un type de question SAISIE' do
+      before do
+        ENV['TYPE_QUESTION'] = 'SAISIE'
+
+        allow(drive).to receive(:recupere_fichier).with('fake-dossier-id',
+                                                        'aplc_1.mp3').and_return(nil)
+
+        subject.reenable
+        subject.invoke
+      end
+
+      context "attache l'illustration à la question correspondante" do
+        it { expect(question_saisie.reload.illustration.attached?).to be true }
+      end
     end
   end
 end

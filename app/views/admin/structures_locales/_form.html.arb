@@ -14,7 +14,7 @@ div class: 'panel nouvelle_structure' do
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end
     end
-    text_node md t('.verifier_information_structure')
+    text_node md t('.verifier_information_structure', email_contact: Eva::EMAIL_CONTACT)
     f.actions do
       f.action :submit
       annulation_formulaire(f) if current_compte.structure.present?

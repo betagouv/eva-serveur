@@ -45,7 +45,7 @@
     <%= recaptcha_tags %>
   </div>
   <div class="panel">
-    <%= md t('.actions.validation') %>
+    <%= md t('.actions.validation', email_contact: Eva::EMAIL_CONTACT) %>
     <%= compte.actions do %>
       <%= compte.action :submit, label: t('.creer_structure'), wrapper_html: { class: 'd-flex justify-content-end' } %>
     <% end %>

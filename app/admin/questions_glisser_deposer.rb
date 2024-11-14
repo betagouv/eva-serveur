@@ -9,7 +9,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
                 :supprimer_audio_modalite_reponse, :supprimer_audio_intitule,
                 :supprimer_zone_depot, :zone_depot, :supprimer_audio_consigne,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
-                reponses_attributes: %i[id illustration position type_choix position_client
+                reponses_attributes: %i[id illustration intitule position type_choix position_client
                                         nom_technique _destroy]
 
   filter :libelle

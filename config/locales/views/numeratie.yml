@@ -7,7 +7,7 @@ fr:
         profil1:
           alt_icone: Profil 1
           description: |
-            ##Formation vivement recommandée
+            ### Formation vivement recommandée
 
             Votre score indique que vous rencontrez d’importantes difficultés en calcul et raisonnement, qui pourraient vous desservir dans vos futurs emplois et formations.
 
@@ -15,7 +15,7 @@ fr:
         profil2:
           alt_icone: Profil 2
           description:  |
-            ##Formation vivement recommandée
+            ### Formation vivement recommandée
 
             Votre score indique que vous rencontrez d’importantes difficultés en calcul et raisonnement, qui pourraient vous desservir dans vos futurs emplois et formations.
 
@@ -23,7 +23,7 @@ fr:
         profil3:
           alt_icone: Profil 3
           description: |
-            ##Vos compétences en calcul et raisonnement peuvent être améliorées
+            ### Vos compétences en calcul et raisonnement peuvent être améliorées
 
             Votre score indique que vous pouvez encore progresser en calcul et raisonnement. Même si vous vous en sortez au quotidien, certaines tâches ou activités pourraient probablement être plus faciles pour vous si vous progressiez en calcul et raisonnement.<br><br>
 
@@ -31,7 +31,7 @@ fr:
         profil4:
           alt_icone: Profil 4
           description: |
-            ##Vous maîtrisez les bases du calcul et du raisonnement
+            ### Vous maîtrisez les bases du calcul et du raisonnement
 
             Votre score indique que vous maîtrisez les fondamentaux de la communication en calcul et raisonnement, ce qui signifie que vous êtes plutôt à l’aise en calcul et raisonnement pour comprendre et communiquer en contexte professionnel.<br><br>
 

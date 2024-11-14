@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 unless restitution.questions_redaction.empty?
-  h3 t('.situation', situation: situation_libelle), class: 'situation-redaction mb-3'
+  h4 t('.situation', situation: situation_libelle), class: 'situation-redaction mb-3'
   restitution.questions_redaction.each do |question, reponse|
     div class: 'row mb-3' do
       div class: 'col-8 mb-4' do
-        h2 t('admin.restitutions.reponse_expression_ecrite', question: question.libelle),
+        h5 t('admin.restitutions.reponse_expression_ecrite', question: question.libelle),
            class: 'titre-redaction'
       end
     end

@@ -13,11 +13,11 @@
     display: none;
   }
 
-  h2 {
+  h3 {
     margin: 3rem 0 1rem;
   }
 
-  h3 {
+  h4 {
     color: $eva_main_blue;
     font-size: 1rem;
   }
@@ -230,7 +230,8 @@
       padding-left: 1.375rem;
     }
 
-    h2 {
+    h3 {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
       margin-top: 0;
     }
@@ -244,7 +245,7 @@
     &.illettrisme_potentiel {
       background-color: $warning-950;
 
-      h2 {
+      h3 {
         color: $warning-425;
       }
     }
@@ -252,14 +253,14 @@
     &.ni_ni {
       background-color: $info-950;
 
-      h2 {
+      h3 {
         color: $info-425;
       }
     }
 
     &.socle_clea {
       background-color: $success-950;
-      h2 {
+      h3 {
         color: $success-425;
       }
     }
@@ -383,7 +384,8 @@
 
     h3 {
       color: $grey-50;
-      margin-bottom: .5rem;
+      margin: 0 0 .5rem 0;
+      font-size: 1rem;
     }
   }
 }

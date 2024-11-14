@@ -37,7 +37,7 @@ describe 'Admin - Question Glisser Deposer', type: :feature do
 
     it "redirige vers le formulaire d'importation de question" do
       within('.action-items-sidebar') do
-        click_on 'Importer question glisser déposer'
+        click_on 'Importer questions glisser déposer'
       end
       expect(page).to have_content 'Importer une ou plusieurs questions'
     end

@@ -21,7 +21,7 @@ describe 'Admin - Question QCM', type: :feature do
 
     it "redirige vers le formulaire d'importation de question" do
       within('.action-items-sidebar') do
-        click_on 'Importer question qcm'
+        click_on 'Importer questions QCM'
       end
       expect(page).to have_content 'Importer une ou plusieurs questions'
     end

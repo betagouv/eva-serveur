@@ -16,13 +16,11 @@ ActiveAdmin.register QuestionSaisie do
   filter :nom_technique
 
   action_item :importer_question, only: :index do
-    link_to 'Importer question saisie',
-            admin_import_xls_path(type: 'QuestionSaisie')
+    link_to 'Importer questions saisies', admin_import_xls_path(type: 'QuestionSaisie')
   end
 
   action_item :exporter_question, only: :show do
-    link_to 'Exporter le contenu de la question',
-            admin_question_export_xls_path(question_id: params[:id])
+    link_to 'Exporter la question en XLS', admin_question_export_xls_path(question_id: params[:id])
   end
 
   form partial: 'form'

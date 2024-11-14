@@ -18,13 +18,11 @@ ActiveAdmin.register QuestionQcm do
   form partial: 'form'
 
   action_item :importer_question, only: :index do
-    link_to 'Importer question qcm',
-            admin_import_xls_path(type: 'QuestionQcm')
+    link_to 'Importer questions QCM', admin_import_xls_path(type: 'QuestionQcm')
   end
 
   action_item :exporter_question, only: :show do
-    link_to 'Exporter le contenu de la question',
-            admin_question_export_xls_path(question_id: params[:id])
+    link_to 'Exporter la question en XLS', admin_question_export_xls_path(question_id: params[:id])
   end
 
   index do

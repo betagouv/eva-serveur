@@ -24,9 +24,9 @@ describe 'Admin - Question Clic dans Image', type: :feature do
     end
 
     it "affiche le bouton d'export" do
-      expect(page).to have_link 'Exporter le contenu de la question'
+      expect(page).to have_link 'Exporter la question en XLS'
       within('.action-items-sidebar') do
-        click_on 'Exporter le contenu de la question'
+        click_on 'Exporter la question en XLS'
       end
       expect(page.response_headers['Content-Type']).to eq 'application/vnd.ms-excel'
     end
@@ -48,7 +48,7 @@ describe 'Admin - Question Clic dans Image', type: :feature do
 
     it "redirige vers le formulaire d'importation de question" do
       within('.action-items-sidebar') do
-        click_on 'Importer question clic dans image'
+        click_on 'Importer questions clic dans image'
       end
       expect(page).to have_content 'Importer une ou plusieurs questions'
     end

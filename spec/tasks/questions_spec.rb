@@ -20,6 +20,7 @@ describe 'questions:attache_assets' do
 
     before do
       ENV['DOSSIER_ID'] = 'inconnue'
+      ENV['TYPE_QUESTION'] = 'QCM'
       drive = instance_double(GoogleDriveStorage)
       allow(GoogleDriveStorage).to receive(:new).and_return(drive)
       allow(drive).to receive(:existe_dossier?).with('inconnue').and_raise(
@@ -41,7 +42,8 @@ describe 'questions:attache_assets' do
       expect(logger).to receive(:error)
         .with("La variable d'environnement DOSSIER_ID est manquante")
       expect(logger).to receive(:info)
-        .with('Usage : rake questions:attache_assets DOSSIER_ID=<dossier_id>')
+        .with('Usage : rake questions:attache_assets DOSSIER_ID=<dossier_id> ' \
+              'TYPE_QUESTION=<TYPE_QUESTION>')
       subject.invoke
     end
   end

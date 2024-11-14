@@ -12,6 +12,10 @@ describe 'questions:attache_assets' do
     create :choix, :mauvais, question_id: question.id, nom_technique: 'LOdi_drap'
   end
 
+  before do
+    allow(logger).to receive :info
+  end
+
   context 'appellé avec une dossier id inconnu' do
     let(:error_message) do
       "Le dossier avec l'id 'inconnue' n'est pas accessible : " \

@@ -91,6 +91,10 @@ class Question < ApplicationRecord
     type == QuestionQcm::QUESTION_TYPE
   end
 
+  def glisser_deposer?
+    type == QuestionGlisserDeposer::QUESTION_TYPE
+  end
+
   def sous_consigne?
     type == QuestionSousConsigne::QUESTION_TYPE
   end

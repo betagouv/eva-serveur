@@ -208,7 +208,7 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
-        evaluation_anonyme: "Cette évaluation est anonyme : le nom de l'évalué·e est fictif et ses informations personnelles ont été supprimées."
+        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
       nom_evaluation:
         suivi_par: Suivi(e) par
         pas_de_responsable: Pas de responsable de suivi
@@ -313,7 +313,7 @@ fr:
         score_memorisation: Score Mémorisation
       restitution_colonnes:
         cote_z: Cote Z
-        valeur_utilisateur: Valeur de l'évalué·e
+        valeur_utilisateur: Valeur du bénéficiaire
         moyenne: Moyenne
         ecart_type: Écart type
       pas_de_score: |

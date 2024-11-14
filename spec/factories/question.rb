@@ -47,4 +47,9 @@ FactoryBot.define do
     libelle { 'Question sous consigne' }
     sequence(:nom_technique) { |n| "question-sous-consigne-#{n}" }
   end
+
+  factory :question_clic_dans_texte do
+    libelle { 'Question clic dans texte' }
+    sequence(:nom_technique) { |n| "question-clic-dans-texte-#{n}" }
+  end
 end

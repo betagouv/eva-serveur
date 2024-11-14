@@ -557,6 +557,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     ruby2_keywords (0.0.5)
+    rubyzip (2.3.2)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
     sass-rails (6.0.0)
@@ -714,6 +715,7 @@ DEPENDENCIES
   rubocop-packaging
   rubocop-rails
   rubocop-rspec
+  rubyzip
   sass-rails (>= 6)
   shoulda-matchers
   sidekiq (< 8)

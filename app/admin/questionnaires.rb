@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'zip'
+
 ActiveAdmin.register Questionnaire do
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
@@ -11,8 +13,7 @@ ActiveAdmin.register Questionnaire do
   member_action :export_questions, method: :get
 
   action_item :export_questions, only: :show do
-    link_to 'Exporter les questions en XLS',
-            export_questions_admin_questionnaire_path(resource),
+    link_to 'Exporter les questions en XLS', export_questions_admin_questionnaire_path(resource),
             format: :xls
   end
 
@@ -55,15 +56,25 @@ ActiveAdmin.register Questionnaire do
 
     def export_questions
       questionnaire = find_resource
-      questions_par_type = questionnaire.questions_par_type
+      compressed_filestream = generate_zip_file(questionnaire.questions_par_type)
 
-      questions_par_type.each do |type, questions|
-        export = ImportExport::Questions::ImportExportDonnees.new(questions: questions,
-                                                                  type: type).exporte_donnees
-        send_data export[:xls],
-                  content_type: export[:content_type],
-                  filename: export[:filename]
-      end
+      send_data compressed_filestream.read,
+                filename: "questionnaire_#{questionnaire.id}_export.zip",
+                type: 'application/zip'
+    end
+
+    private
+
+    def generate_zip_file(questions_par_type)
+      Zip::OutputStream.write_buffer do |zip|
+        questions_par_type.each do |type, questions|
+          export =
+            ImportExport::Questions::ImportExportDonnees.new(questions: questions,
+                                                             type: type).exporte_donnees
+          zip.put_next_entry("#{type}_questions_export.xls")
+          zip.write export[:xls]
+        end
+      end.tap(&:rewind)
     end
   end
 end

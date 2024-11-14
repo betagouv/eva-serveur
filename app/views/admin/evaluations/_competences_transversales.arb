@@ -34,7 +34,7 @@ div id: 'competences_transversales', class: 'page' do
                 end
               end
               div class: 'informations-competence' do
-                h2 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
+                h3 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
                    class: 'nom-competence'
                 div class: 'description-competence' do
                   div md t("#{competence}.stanine#{interpretation}",

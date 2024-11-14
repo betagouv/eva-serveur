@@ -8,7 +8,7 @@ fr:
           profil_aberrant:
             alt_icone: Profil aberrant
             description: |
-              ##Votre score n’a pas pu être calculé
+              ### Votre score n’a pas pu être calculé
 
               Les raisons peuvent être les suivantes :
 
@@ -22,7 +22,7 @@ fr:
           profil1:
             alt_icone: Profil 1
             description: |
-              ##Formation vivement recommandée
+              ### Formation vivement recommandée
 
               Votre score indique que vous rencontrez d’importantes difficultés en français, qui pourraient vous desservir dans vos futurs emplois et formations.
 
@@ -30,7 +30,7 @@ fr:
           profil2:
             alt_icone: Profil 2
             description:  |
-              ##Formation vivement recommandée
+              ### Formation vivement recommandée
 
               Votre score indique que vous rencontrez d’importantes difficultés en français, qui pourraient vous desservir dans vos futurs emplois et formations.
 
@@ -38,7 +38,7 @@ fr:
           profil3:
             alt_icone: Profil 3
             description: |
-              ##Vos compétences en français peuvent être améliorées
+              ### Vos compétences en français peuvent être améliorées
 
               Votre score indique que vous pouvez encore progresser en français. Même si vous vous en sortez au quotidien, certaines tâches ou activités pourraient probablement être plus faciles pour vous si vous progressiez en français.
 
@@ -46,7 +46,7 @@ fr:
           profil4:
             alt_icone: Profil 4
             description: |
-              ##Vous maîtrisez les bases du français
+              ### Vous maîtrisez les bases du français
 
               Votre score indique que vous maîtrisez les fondamentaux de la communication en français, ce qui signifie que vous êtes plutôt à l’aise en français pour comprendre et communiquer en contexte professionnel.
 
@@ -54,7 +54,7 @@ fr:
           profil_4h:
             alt_icone: Profil 4
             description: |
-              ##Certification Cléa indiquée
+              ### Certification Cléa indiquée
 
               Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !
 
@@ -62,7 +62,7 @@ fr:
           profil_4h_plus:
             alt_icone: Profil 4 plus
             description: |
-              ##Certification Cléa indiquée
+              ### Certification Cléa indiquée
 
               Votre score indique que vous êtes à l’aise en français pour comprendre et communiquer en contexte professionnel, bravo !
 
@@ -70,7 +70,7 @@ fr:
           profil_4h_plus_plus:
             alt_icone: Profil 4 plus plus
             description: |
-              ##Très bonne maîtrise du français
+              ### Très bonne maîtrise du français
 
               Bravo ! Votre score n’indique aucune difficulté en français, ce qui signifie que vous êtes parfaitement à l’aise en français pour comprendre et communiquer en contexte professionnel.
 
@@ -85,8 +85,7 @@ fr:
         profil4:
           alt_icone: Profil 4
         lecture:
-          titre: |
-            ##Lecture
+          titre: Lecture
           profil1:
             description: |
               Votre score indique que vous avez d’importantes difficultés en lecture. Cela signifie qu’il peut être très difficile pour vous d’identifier ou de comprendre les lettres et les chiffres présentés à l’écrit, ou de décrypter des mots.
@@ -100,8 +99,7 @@ fr:
             description: |
               Votre score indique que vous êtes plutôt à l’aise avec la lecture, ce qui signifie que vous parvenez globalement à identifier et comprendre les lettres ou les chiffres présentés à l’écrit, et à décrypter les mots.
         comprehension_ecrite:
-          titre: |
-            ##Compréhension écrite
+          titre: Compréhension écrite
           profil1:
             description: |
               Votre score indique que vous avez d’importantes difficultés en compréhension écrite. Cela signifie qu’il peut être très difficile pour vous de lire et de comprendre des informations données à l’écrit.
@@ -115,8 +113,7 @@ fr:
             description: |
               Votre score indique que vous parvenez plutôt bien à comprendre les informations données à l’écrit. Autrement dit, vous êtes plutôt à l’aise avec la lecture, l’identification des mots et la compréhension de textes simples.
         production_ecrite:
-          titre: |
-            ##Production écrite
+          titre: Production écrite
           profil1:
             description: |
               Il semble que vous avez d’importantes difficultés en production écrite. Cela signifie qu’il peut être très difficile pour vous de vous exprimer à l’écrit en français, de rédiger un ensemble de mots ou un texte.

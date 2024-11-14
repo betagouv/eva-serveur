@@ -16,7 +16,7 @@ div class: 'col-auto badge' do
   end
 end
 div class: 'col' do
-  h2 class: 'mb-3 mt-0' do
+  h3 class: 'mb-3 mt-0' do
     div t(:titre, scope: scope)
   end
 

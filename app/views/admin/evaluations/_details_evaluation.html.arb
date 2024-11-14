@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 div id: 'evaluation__details', class: 'row' do
-  scope = 'admin.evaluations.details_evaluation'
   div class: 'col col-6 mx-auto' do
     h1 render NomAnonymisableComponent.new(resource)
-    h3 t('.titre'), class: 'titre'
+    h2 t('.titre'), class: 'titre'
     div class: 'card carte__conteneur', id: resource.id.to_s do
       div class: 'row m-0' do
         div class: 'col col-6 card-informations' do
@@ -54,11 +53,11 @@ div id: 'evaluation__details', class: 'row' do
             end
             div class: 'col-6 supprime-espace-derniere-balise' do
               if resource.competences_de_base_incompletes?
-                md t('evaluation_competences_de_base_incomplete', scope: scope)
+                md t('.evaluation_competences_de_base_incomplete')
               elsif resource.competences_transversales_incompletes?
-                md t('evaluation_competences_transversales_incomplete', scope: scope)
+                md t('.evaluation_competences_transversales_incomplete')
               else
-                md t('evaluation_incomplete', scope: scope)
+                md t('.evaluation_incomplete')
               end
             end
           end
@@ -66,6 +65,7 @@ div id: 'evaluation__details', class: 'row' do
       end
       if resource.illettrisme_potentiel?
         div class: 'row m-0' do
+          scope = 'admin.evaluations.details_evaluation'
           render partial: 'suivi_accompagnement_illettrisme', locals: { scope: scope }
         end
       end

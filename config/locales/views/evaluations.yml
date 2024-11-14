@@ -364,7 +364,7 @@ fr:
             - Réalisation d’une suite de calculs mathématiques
 
       score_non_calcule: |
-        ## Votre score n'a pas pu être calculé.
+        ### Votre score n'a pas pu être calculé.
 
         Les raisons peuvent être trouvées ici :  
         [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
@@ -412,7 +412,7 @@ fr:
         socle_clea:
           alt_icone: ''
           description: |
-            ## Certification Cléa indiquée
+            ### Certification Cléa indiquée
 
             Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
 
@@ -420,13 +420,13 @@ fr:
         ni_ni:
           alt_icone: ''
           description: |
-            ## Vos compétences peuvent encore être améliorées
+            ### Vos compétences peuvent encore être améliorées
 
             Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
         illettrisme_potentiel:
           alt_icone: ''
           description: |
-            ## Formation vivement recommandée
+            ### Formation vivement recommandée
 
             Votre score indique que vous rencontrez d’importantes difficultés en français ou en mathématiques, qui pourraient vous desservir dans vos futurs emplois et formations.
             Il est important que vous échangiez à ce sujet avec votre conseiller.

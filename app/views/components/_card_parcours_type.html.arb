@@ -6,7 +6,7 @@ div id: 'card-parcours-type' do
       h4 parcours_type.libelle
       text_node md(parcours_type.description)
       if parcours_type.duree_moyenne.present?
-        div class: 'carte__duree' do
+        para class: 'carte__duree' do
           text_node 'Durée moyenne : '
           text_node parcours_type.duree_moyenne
         end

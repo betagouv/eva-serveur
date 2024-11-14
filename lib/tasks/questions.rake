@@ -54,6 +54,9 @@ constantes = {
     sous_consigne_HPfb_1: 'terrasse_cafe',
     sous_consigne_HPfb_2: 'telephone_email'
   },
+  NOM_TECHNIQUES_GLISSER_DEPOSER: {
+    hpar_1: 'journal_vide'
+  },
   DOSSIER_ID: 'DOSSIER_ID',
   TYPE_QUESTION: 'TYPE_QUESTION'
 }
@@ -82,6 +85,8 @@ namespace :questions do
       attache_assets(NOM_TECHNIQUES_QCM)
     when 'SOUS_CONSIGNE'
       attache_assets(NOM_TECHNIQUES_CONSIGNES)
+    when 'GLISSER_DEPOSER'
+      attache_assets(NOM_TECHNIQUES_GLISSER_DEPOSER)
     end
   end
 end
@@ -102,6 +107,7 @@ def attache_assets(nom_techniques)
     recupere_fichier(question, "#{nom_illustration}.png")
     recupere_fichier(question, "#{question.nom_technique}.mp3", question.transcription_intitule)
     attach_audio_choix(question) if nom_techniques == NOM_TECHNIQUES_QCM
+    attach_images_reponses(question) if nom_techniques == NOM_TECHNIQUES_GLISSER_DEPOSER
   end
 end
 
@@ -120,6 +126,12 @@ end
 def attach_audio_choix(question)
   question.choix.each do |choix|
     recupere_fichier(question, "#{choix.nom_technique}.mp3", choix)
+  end
+end
+
+def attach_images_reponses(question)
+  question.reponses.each do |choix|
+    recupere_fichier(question, "#{choix.nom_technique}.png", choix)
   end
 end
 

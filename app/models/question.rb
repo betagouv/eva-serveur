@@ -32,7 +32,8 @@ class Question < ApplicationRecord
     'QuestionClicDansImage' => 'clic dans image',
     'QuestionGlisserDeposer' => 'glisser deposer',
     'QuestionSousConsigne' => 'sous consigne',
-    'QuestionSaisie' => 'saisie'
+    'QuestionSaisie' => 'saisie',
+    'QuestionClicDansTexte' => 'clic dans texte'
   }.freeze
 
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true

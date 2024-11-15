@@ -9,6 +9,7 @@ ActiveAdmin.register QuestionSaisie do
                 :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse,
                 :supprimer_audio_consigne,
+                :texte_a_trous,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 bonne_reponse_attributes: %i[id intitule audio type_choix _destroy nom_technique]
 

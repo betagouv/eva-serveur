@@ -24,6 +24,7 @@ class QuestionSaisie < Question
       json['sous_type'] = type_saisie
       json['placeholder'] = reponse_placeholder
       json['description'] = description
+      json['texte_a_trous'] = texte_a_trous
     end
   end
 

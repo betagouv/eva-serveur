@@ -19,7 +19,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
 
   action_item :importer_question, only: :index do
     link_to 'Importer questions glisser déposer',
-            admin_import_xls_path(type: 'QuestionGlisserDeposer')
+            admin_import_xls_path(type: QuestionGlisserDeposer::QUESTION_TYPE)
   end
 
   action_item :exporter_question, only: :show do

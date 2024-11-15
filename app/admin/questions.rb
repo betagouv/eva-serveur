@@ -42,12 +42,12 @@ ActiveAdmin.register Question do
 
     def redirection_apres_import
       redirection_paths = {
-        'QuestionClicDansImage' => admin_questions_clic_dans_image_path,
-        'QuestionGlisserDeposer' => admin_questions_glisser_deposer_path,
-        'QuestionQcm' => admin_question_qcms_path,
-        'QuestionSaisie' => admin_questions_saisies_path,
-        'QuestionSousConsigne' => admin_question_sous_consignes_path,
-        'QuestionClicDansTexte' => admin_questions_clic_dans_texte_path
+        QuestionClicDansImage::QUESTION_TYPE => admin_questions_clic_dans_image_path,
+        QuestionGlisserDeposer::QUESTION_TYPE => admin_questions_glisser_deposer_path,
+        QuestionQcm::QUESTION_TYPE => admin_question_qcms_path,
+        QuestionSaisie::QUESTION_TYPE => admin_questions_saisies_path,
+        QuestionSousConsigne::QUESTION_TYPE => admin_question_sous_consignes_path,
+        QuestionClicDansTexte::QUESTION_TYPE => admin_questions_clic_dans_texte_path
       }
 
       redirection_paths[params[:type]] || admin_questions_path

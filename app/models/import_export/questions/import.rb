@@ -55,11 +55,11 @@ module ImportExport
 
       def update_champs_specifiques
         updates = {
-          'QuestionClicDansImage' => :update_clic_dans_image,
-          'QuestionGlisserDeposer' => :update_glisser_deposer,
-          'QuestionQcm' => :update_qcm,
-          'QuestionSaisie' => :update_saisie,
-          'QuestionClicDansTexte' => :update_clic_dans_texte
+          QuestionClicDansImage::QUESTION_TYPE => :update_clic_dans_image,
+          QuestionGlisserDeposer::QUESTION_TYPE => :update_glisser_deposer,
+          QuestionQcm::QUESTION_TYPE => :update_qcm,
+          QuestionSaisie::QUESTION_TYPE => :update_saisie,
+          QuestionClicDansTexte::QUESTION_TYPE => :update_clic_dans_texte
         }
         send(updates[@type]) if updates.key?(@type)
       end

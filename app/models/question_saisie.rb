@@ -2,6 +2,8 @@
 
 class QuestionSaisie < Question
   QUESTION_REDACTION = 'redaction_note'
+  QUESTION_TYPE = 'QuestionSaisie'
+
   enum :type_saisie, { redaction: 0, numerique: 1 }
 
   has_one :bonne_reponse, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy

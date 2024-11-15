@@ -16,7 +16,7 @@ ActiveAdmin.register QuestionClicDansTexte do
 
   action_item :importer_question, only: :index do
     link_to 'Importer questions Clic dans texte',
-            admin_import_xls_path(type: 'QuestionClicDansTexte')
+            admin_import_xls_path(type: QuestionClicDansTexte::QUESTION_TYPE)
   end
 
   action_item :exporter_question, only: :show do

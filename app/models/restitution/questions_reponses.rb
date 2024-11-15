@@ -32,8 +32,8 @@ module Restitution
 
     def questions_repondues
       questions_ids = reponses.collect { |r| r.donnees['question'] }
-      Question.where(id: questions_ids, type: 'QuestionQcm').includes(:choix) +
-        Question.where(id: questions_ids).where.not(type: 'QuestionQcm')
+      Question.where(id: questions_ids, type: QuestionQcm::QUESTION_TYPE).includes(:choix) +
+        Question.where(id: questions_ids).where.not(type: QuestionQcm::QUESTION_TYPE)
     end
   end
 end

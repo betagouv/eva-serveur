@@ -28,12 +28,12 @@ class Question < ApplicationRecord
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
   INTERACTION_TYPES = {
-    'QuestionQcm' => 'qcm',
-    'QuestionClicDansImage' => 'clic dans image',
-    'QuestionGlisserDeposer' => 'glisser deposer',
-    'QuestionSousConsigne' => 'sous consigne',
-    'QuestionSaisie' => 'saisie',
-    'QuestionClicDansTexte' => 'clic dans texte'
+    QuestionQcm::QUESTION_TYPE => 'qcm',
+    QuestionClicDansImage::QUESTION_TYPE => 'clic dans image',
+    QuestionGlisserDeposer::QUESTION_TYPE => 'glisser deposer',
+    QuestionSousConsigne::QUESTION_TYPE => 'sous consigne',
+    QuestionSaisie::QUESTION_TYPE => 'saisie',
+    QuestionClicDansTexte::QUESTION_TYPE => 'clic dans texte'
   }.freeze
 
   enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
@@ -84,15 +84,15 @@ class Question < ApplicationRecord
   end
 
   def saisie?
-    type == 'QuestionSaisie'
+    type == QuestionSaisie::QUESTION_TYPE
   end
 
   def qcm?
-    type == 'QuestionQcm'
+    type == QuestionQcm::QUESTION_TYPE
   end
 
   def sous_consigne?
-    type == 'QuestionSousConsigne'
+    type == QuestionSousConsigne::QUESTION_TYPE
   end
 
   private

@@ -35,7 +35,7 @@ ActiveAdmin.register QuestionClicDansImage do
 
   action_item :importer_question, only: :index do
     link_to 'Importer questions clic dans image',
-            admin_import_xls_path(type: 'QuestionClicDansImage')
+            admin_import_xls_path(type: QuestionClicDansImage::QUESTION_TYPE)
   end
 
   action_item :exporter_question, only: :show do

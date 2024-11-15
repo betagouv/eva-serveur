@@ -13,12 +13,14 @@ module ImportExport
                                  intitule_audio].freeze
       HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
                           consigne_ecrit consigne_audio description].freeze
-      HEADERS_ATTENDUS = { 'QuestionClicDansImage' => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
-                           'QuestionClicDansTexte' => HEADERS_COMMUN + HEADERS_CLIC_DANS_TEXTE,
-                           'QuestionGlisserDeposer' => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
-                           'QuestionQcm' => HEADERS_COMMUN + HEADERS_QCM,
-                           'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,
-                           'QuestionSousConsigne' => HEADERS_SOUS_CONSIGNE }.freeze
+      HEADERS_ATTENDUS = {
+        QuestionClicDansImage::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
+        QuestionClicDansTexte::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_TEXTE,
+        QuestionGlisserDeposer::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
+        QuestionQcm::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_QCM,
+        QuestionSaisie::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_SAISIE,
+        QuestionSousConsigne::QUESTION_TYPE => HEADERS_SOUS_CONSIGNE
+      }.freeze
 
       def initialize(questions: nil, type: nil)
         @questions = questions

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class QuestionSousConsigne < Question
+  QUESTION_TYPE = 'QuestionSousConsigne'
+
   def as_json(_options = nil)
     json = slice(:id, :nom_technique)
     json['type'] = 'sous-consigne'

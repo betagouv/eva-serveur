@@ -2,6 +2,7 @@
 
 class QuestionClicDansImage < Question
   CLASS_BONNE_REPONSE = 'bonne-reponse'
+  QUESTION_TYPE = 'QuestionClicDansImage'
 
   has_one_attached :zone_cliquable
   has_one_attached :image_au_clic

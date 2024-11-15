@@ -50,11 +50,11 @@ module ImportExport
 
       def remplis_champs_specifiques
         case @question.type
-        when 'QuestionClicDansImage' then remplis_champs_clic_dans_image
-        when 'QuestionGlisserDeposer' then remplis_champs_glisser_deposer
-        when 'QuestionQcm' then remplis_champs_qcm
-        when 'QuestionSaisie' then remplis_champs_saisie
-        when 'QuestionClicDansTexte' then remplis_champs_clic_dans_texte
+        when QuestionClicDansImage::QUESTION_TYPE then remplis_champs_clic_dans_image
+        when QuestionGlisserDeposer::QUESTION_TYPE then remplis_champs_glisser_deposer
+        when QuestionQcm::QUESTION_TYPE then remplis_champs_qcm
+        when QuestionSaisie::QUESTION_TYPE then remplis_champs_saisie
+        when QuestionClicDansTexte::QUESTION_TYPE then remplis_champs_clic_dans_texte
         end
       end
 

@@ -43,8 +43,7 @@ module ImportExport
 
       def intialise_question
         @question = Question.new(type: @type) # On crée une nouvelle instance pour chaque ligne
-        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1],
-                                    description: @row[7])
+        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1], description: @row[7])
         attache_fichier(@question.illustration, @row[2])
         @question.save!
       end
@@ -59,7 +58,8 @@ module ImportExport
           'QuestionClicDansImage' => :update_clic_dans_image,
           'QuestionGlisserDeposer' => :update_glisser_deposer,
           'QuestionQcm' => :update_qcm,
-          'QuestionSaisie' => :update_saisie
+          'QuestionSaisie' => :update_saisie,
+          'QuestionClicDansTexte' => :update_clic_dans_texte
         }
         send(updates[@type]) if updates.key?(@type)
       end
@@ -83,6 +83,10 @@ module ImportExport
         @question.update!(suffix_reponse: @row[8], reponse_placeholder: @row[9],
                           type_saisie: @row[10])
         cree_reponse_generique(@row[11], @row[12], 'bon')
+      end
+
+      def update_clic_dans_texte
+        @question.update!(texte_sur_illustration: @row[8])
       end
 
       def cree_reponses(type, creation_method)

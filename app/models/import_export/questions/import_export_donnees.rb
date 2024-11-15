@@ -4,6 +4,7 @@ module ImportExport
   module Questions
     class ImportExportDonnees
       HEADERS_CLIC_DANS_IMAGE = %i[zone_cliquable image_au_clic].freeze
+      HEADERS_CLIC_DANS_TEXTE = %i[texte_sur_illustration].freeze
       HEADERS_GLISSER_DEPOSER = %i[zone_depot].freeze
       HEADERS_QCM = %i[type_qcm].freeze
       HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie bonne_reponse_intitule
@@ -13,6 +14,7 @@ module ImportExport
       HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
                           consigne_ecrit consigne_audio description].freeze
       HEADERS_ATTENDUS = { 'QuestionClicDansImage' => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
+                           'QuestionClicDansTexte' => HEADERS_COMMUN + HEADERS_CLIC_DANS_TEXTE,
                            'QuestionGlisserDeposer' => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
                            'QuestionQcm' => HEADERS_COMMUN + HEADERS_QCM,
                            'QuestionSaisie' => HEADERS_COMMUN + HEADERS_SAISIE,

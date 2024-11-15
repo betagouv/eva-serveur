@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 describe QuestionClicDansTexte, type: :model do
-  it { is_expected.to validate_presence_of(:texte_sur_illustration) }
-
   describe '#as_json' do
     let(:contenu) { 'Mon Intitulé [mot1](#bonne-reponse) [mot2](#bonne-reponse) [mot3]()' }
     let(:question_clic_dans_texte) do

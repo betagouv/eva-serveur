@@ -1,7 +1,9 @@
 <div class="banniere-solutions-illettrisme d-flex">
   <%= image_tag 'information.svg', class: 'mr-3', alt: '' unless asterisque %>
   <div class="banniere__description font-italic">
-    <%= '*' if asterisque %>
+    <% if asterisque %>
+      <span id="asterisque">*</span>
+    <% end %>
     <%= t('.description') %>
     <a href="<%= t('.lien') %>" target="_blank"><%= t('.lien') %></a>
   </div>

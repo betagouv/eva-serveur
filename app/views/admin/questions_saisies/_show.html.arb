@@ -34,6 +34,7 @@ panel 'Détails de la question' do
     row :suffix_reponse
     row :reponse_placeholder
     row :type_saisie
+    row :texte_a_trous
     row :created_at
     row :bonne_reponse do
       question_saisie.bonne_reponse&.intitule

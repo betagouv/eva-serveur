@@ -14,6 +14,7 @@
 //= require cgu
 //= require clipboard
 //= require evaluation
+//= require simple_mde
 
 //= require chartkick
 //= require Chart.bundle
@@ -36,4 +37,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Chart.defaults.font.family = 'Work Sans';
 Chart.defaults.font.size = 14;
-

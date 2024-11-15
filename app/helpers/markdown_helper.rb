@@ -16,7 +16,7 @@ module MarkdownHelper
   end
 
   def interprete_markdown_en_html(contenu)
-    markdown ||= Redcarpet::Markdown.new(EvaMarkdownRender, hard_wrap: true)
+    markdown ||= Redcarpet::Markdown.new(EvaMarkdownRender, tables: true, hard_wrap: true)
     markdown.render(contenu).html_safe
   end
 end

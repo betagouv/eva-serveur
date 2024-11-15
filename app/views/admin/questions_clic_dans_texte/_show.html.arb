@@ -1,0 +1,42 @@
+# frozen_string_literal: true
+
+panel 'Détails de la question' do
+  attributes_table_for resource do
+    row :id
+    row :libelle
+    row :categorie
+    row :nom_technique
+    row :description
+    row :illustration do
+      if resource.illustration.attached?
+        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
+          image_tag cdn_for(resource.illustration), class: 'image-preview'
+        end
+      end
+    end
+    row :texte_sur_illustration do
+      div md(resource.texte_sur_illustration)
+    end
+    intitule = resource.transcription_intitule
+    row :intitule do
+      div intitule.ecrit if intitule&.ecrit
+    end
+    row :audio_intitule do
+      tag_audio(intitule)
+    end
+    consigne = resource.transcription_modalite_reponse
+    row :consigne do
+      div consigne.ecrit if consigne&.ecrit
+    end
+    row :audio_consigne do
+      tag_audio(consigne)
+    end
+    row :audio_consigne_bouton do
+      tag_audio(resource.transcription_consigne)
+    end
+    row :suffix_reponse
+    row :reponse_placeholder
+    row :type_saisie
+    row :created_at
+  end
+end

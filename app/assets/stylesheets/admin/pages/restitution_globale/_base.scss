@@ -75,6 +75,9 @@
     .intitule-question {
       display: flex;
       align-items: center;
+      p {
+        margin: 0;
+      }
     }
 
     .jauge {

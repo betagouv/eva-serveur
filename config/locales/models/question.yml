@@ -12,7 +12,10 @@ fr:
         other: Questions sous consigne
       question_clic_dans_image:
         one: Question clic dans image
-        other: Questions clic dans image      
+        other: Questions clic dans image
+      question_clic_dans_texte:
+        one: Question clic dans texte
+        other: Questions clic dans texte
       question_glisser_deposer:
         one: Question glisser déposer
         other: Questions glisser déposer

@@ -46,7 +46,8 @@ ActiveAdmin.register Question do
         'QuestionGlisserDeposer' => admin_questions_glisser_deposer_path,
         'QuestionQcm' => admin_question_qcms_path,
         'QuestionSaisie' => admin_questions_saisies_path,
-        'QuestionSousConsigne' => admin_question_sous_consignes_path
+        'QuestionSousConsigne' => admin_question_sous_consignes_path,
+        'QuestionClicDansTexte' => admin_questions_clic_dans_texte_path
       }
 
       redirection_paths[params[:type]] || admin_questions_path

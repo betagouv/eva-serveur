@@ -12,7 +12,7 @@ module ImportExport
       def to_xls
         entetes = @headers.map { |header| { titre: header.to_s.humanize, taille: 20 } }
         @sheet = ::ImportExport::ExportXls.new(entetes: entetes).sheet
-        remplie_la_feuille
+        remplis_la_feuille
         retourne_le_contenu_du_xls
       end
 
@@ -22,7 +22,7 @@ module ImportExport
 
       private
 
-      def remplie_la_feuille
+      def remplis_la_feuille
         @questions.each_with_index do |question, index|
           @question = question
           @ligne = index + 1
@@ -54,6 +54,7 @@ module ImportExport
         when 'QuestionGlisserDeposer' then remplis_champs_glisser_deposer
         when 'QuestionQcm' then remplis_champs_qcm
         when 'QuestionSaisie' then remplis_champs_saisie
+        when 'QuestionClicDansTexte' then remplis_champs_clic_dans_texte
         end
       end
 
@@ -80,6 +81,10 @@ module ImportExport
       def remplis_champs_qcm
         @sheet[@ligne, 8] = @question.type_qcm
         @question.choix.each_with_index { |choix, index| ajoute_choix(choix, index) }
+      end
+
+      def remplis_champs_clic_dans_texte
+        @sheet[@ligne, 8] = @question.texte_sur_illustration
       end
 
       def ajoute_choix(choix, index)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionClicDansTexte < Question
-  validates :texte_sur_illustration, presence: true
+  # validates :texte_sur_illustration, presence: true
 
   def as_json(_options = nil)
     base_json

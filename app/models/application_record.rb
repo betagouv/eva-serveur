@@ -10,6 +10,16 @@ class ApplicationRecord < ActiveRecord::Base
     )
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    attributes = column_names + _ransackers.keys + _ransack_aliases.keys
+    attributes += attribute_aliases.keys if Ransack::SUPPORTS_ATTRIBUTE_ALIAS
+    attributes.uniq
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    reflect_on_all_associations.map { |a| a.name.to_s }
+  end
+
   private
 
   def cdn_for(attachment)

@@ -107,8 +107,7 @@ module Restitution
 
     def remplis_choix(ligne, evenement, question)
       @sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-      @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm?
-      @sheet[ligne, 6] = question&.bonne_reponse&.intitule if question&.saisie?
+      @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
       @sheet[ligne, 7] = evenement.reponse_intitule
     end
   end

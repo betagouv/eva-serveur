@@ -183,8 +183,8 @@ describe ImportExport::Questions::Import do
         expect(question.suffix_reponse).to eq 'suffixe'
         expect(question.reponse_placeholder).to eq 'placeholder'
         expect(question.type_saisie).to eq 'numerique'
-        expect(question.bonne_reponse.intitule).to eq '9'
-        expect(question.bonne_reponse.nom_technique).to eq '9'
+        expect(question.reponses.last.intitule).to eq '9'
+        expect(question.reponses.last.nom_technique).to eq '9'
       end
     end
 

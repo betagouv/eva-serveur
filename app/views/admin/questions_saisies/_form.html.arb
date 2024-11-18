@@ -18,12 +18,12 @@ active_admin_form_for [:admin, resource] do |f|
   render partial: 'admin/questions/inputs_avec_transcriptions_audios',
          locals: { f: f }
 
-  f.has_many :bonne_reponse, allow_destroy: false, new_record: t('.ajout_reponse'),
-                             heading: false, class: 'has_one' do |c|
+  f.has_many :reponses, allow_destroy: false, new_record: t('.ajout_reponse'),
+                        heading: false do |c|
     c.input :id, as: :hidden
     c.input :intitule, label: t('.label.reponse')
     c.input :nom_technique, label: t('.label.reponse_nom_technique')
-    c.input :type_choix, as: :hidden, input_html: { value: :bon }
+    c.input :type_choix
   end
 
   f.actions do

@@ -72,10 +72,7 @@ module ImportExport
         @sheet[@ligne, 8] = @question.suffix_reponse
         @sheet[@ligne, 9] = @question.reponse_placeholder
         @sheet[@ligne, 10] = @question.type_saisie
-        return unless @question.bonne_reponse
-
-        @sheet[@ligne, 11] = @question.bonne_reponse.intitule
-        @sheet[@ligne, 12] = @question.bonne_reponse.nom_technique
+        @question.reponses.each_with_index { |reponse, index| ajoute_saisies(reponse, index) }
       end
 
       def remplis_champs_qcm
@@ -92,6 +89,14 @@ module ImportExport
         columns.each_with_index do |col, i|
           @sheet[0, 9 + (index * 4) + i] = "choix_#{index + 1}_#{col}"
           @sheet[@ligne, 9 + (index * 4) + i] = choix.send(col)
+        end
+      end
+
+      def ajoute_saisies(reponse, index)
+        columns = %w[intitule nom_technique type_choix]
+        columns.each_with_index do |col, i|
+          @sheet[0, 11 + (index * 3) + i] = "reponse_#{index + 1}_#{col}"
+          @sheet[@ligne, 11 + (index * 3) + i] = reponse.send(col)
         end
       end
 

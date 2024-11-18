@@ -39,7 +39,7 @@ module Api
     end
 
     def includes_association(type)
-      association_to_include = [:bonne_reponse] if type == QuestionSaisie.to_s
+      association_to_include = %i[reponses] if type == QuestionSaisie.to_s
       association_to_include = %i[choix] if type == QuestionQcm.to_s
 
       default_question_includes = [

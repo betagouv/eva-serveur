@@ -183,8 +183,13 @@ describe ImportExport::Questions::Import do
         expect(question.suffix_reponse).to eq 'suffixe'
         expect(question.reponse_placeholder).to eq 'placeholder'
         expect(question.type_saisie).to eq 'numerique'
-        expect(question.reponses.last.intitule).to eq '9'
-        expect(question.reponses.last.nom_technique).to eq '9'
+        expect(question.texte_a_trous).to eq '<html>'
+        expect(question.reponses.first.intitule).to eq '9'
+        expect(question.reponses.first.nom_technique).to eq 'reponse1'
+        expect(question.reponses.first.type_choix).to eq 'acceptable'
+        expect(question.reponses.second.intitule).to eq '10'
+        expect(question.reponses.second.nom_technique).to eq 'reponse2'
+        expect(question.reponses.second.type_choix).to eq 'bon'
       end
     end
 

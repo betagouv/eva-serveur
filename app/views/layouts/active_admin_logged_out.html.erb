@@ -13,11 +13,11 @@
       <%= stylesheet_link_tag style, **options %>
     <% end %>
   <% end %>
-  <% ActiveAdmin.application.javascripts.each do |path| %>
+  <% ActiveAdmin.application.javascripts.each do |path, options| %>
     <% if ActiveAdmin.application.use_webpacker %>
-      <%= javascript_pack_tag path %>
+      <%= javascript_pack_tag path, **options %>
     <% else %>
-      <%= javascript_include_tag path %>
+      <%= javascript_include_tag path, **options %>
     <% end %>
   <% end %>
 
@@ -27,7 +27,8 @@
     <%= tag(:meta, name: name, content: content) %>
   <% end %>
 
-  <%= csrf_meta_tag %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 </head>
 <body class="active_admin logged_out <%= controller.action_name %>">
 <div id="wrapper">
@@ -45,9 +46,9 @@
         <%= content_tag :div, message, class: "flash flash_#{type}" %>
       <% end %>
     </div>
-
-    <%= yield %>
-
+    <div id="active_admin_content">
+      <%= yield %>
+    </div>
   </div>
   <%= render partial: 'components/footer' %>
 </div>

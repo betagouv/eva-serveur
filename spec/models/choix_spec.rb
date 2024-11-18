@@ -10,7 +10,7 @@ RSpec.describe Choix, type: :model do
 
   it do
     expect(subject).to define_enum_for(:type_choix)
-      .with_values(%i[bon mauvais abstention])
+      .with_values(%i[bon mauvais abstention bonus acceptable])
   end
 
   describe '#as_json' do

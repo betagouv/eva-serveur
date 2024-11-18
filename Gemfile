@@ -5,14 +5,13 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0.0'
+gem 'rails', '~> 7.2.0'
 # Use Puma as the app server
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 
 gem 'sass-rails', '>= 6'
 # Reduces boot times through caching; required in config/boot.rb
-gem 'activeadmin', git: 'https://github.com/shanser/activeadmin',
-                   branch: '7084-renders-action-items-only-when-authorized'
+gem 'activeadmin', '~> 3.2.5'
 gem 'activeadmin_addons'
 gem 'activeadmin_reorderable'
 gem 'activeadmin-xls', git: 'https://github.com/shanser/activeadmin-xls',
@@ -81,7 +80,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'
-  gem 'rspec-rails', '6.0.0.rc1'
+  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-packaging', require: false
   gem 'rubocop-rails', require: false

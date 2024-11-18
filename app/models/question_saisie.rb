@@ -21,7 +21,7 @@ class QuestionSaisie < Question
           :illustration).tap do |json|
       json['type'] = 'saisie'
       json['illustration'] = cdn_for(illustration)
-      json['sous_type'] = type_saisie
+      json['sous_type'] = sous_type
       json['placeholder'] = reponse_placeholder
       json['description'] = description
       json['texte_a_trous'] = texte_a_trous
@@ -36,5 +36,9 @@ class QuestionSaisie < Question
     { 'intitule' => transcription_intitule&.ecrit,
       'modalite_reponse' => transcription_modalite_reponse&.ecrit,
       'reponse' => reponse }
+  end
+
+  def sous_type
+    type_saisie == 'redaction' ? 'texte' : type_saisie
   end
 end

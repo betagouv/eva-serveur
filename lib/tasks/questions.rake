@@ -40,22 +40,64 @@ constantes = {
     hcvf_4: 'rubrique_environnement'
   },
   NOM_TECHNIQUES_CONSIGNES: {
-    sous_consigne_LOdi_1: 'programme_tele',
-    sous_consigne_LOdi_2: 'programme_tele_zoom',
-    sous_consigne_ALrd_1: 'terrasse_cafe',
-    sous_consigne_ALrd_2: 'liste_titres_musique',
-    sous_consigne_ACrd_1: 'magazine_sans_texte',
-    sous_consigne_ACrd_2: 'magazine_sans_texte',
-    sous_consigne_APlc_1: 'terrasse_cafe',
-    sous_consigne_APlc_2: 'telephone_liste_de_courses',
-    sous_consigne_HPar_1: 'hpar_c1',
-    sous_consigne_HGac_1: 'graphique_avec_selection',
-    sous_consigne_HCvf_1: 'rubrique_environnement',
-    sous_consigne_HPfb_1: 'terrasse_cafe',
-    sous_consigne_HPfb_2: 'telephone_email'
+    sous_consigne_lodi_1: 'programme_tele',
+    sous_consigne_lodi_2: 'programme_tele_zoom',
+    sous_consigne_alrd_1: 'terrasse_cafe',
+    sous_consigne_alrd_2: 'liste_titres_musique',
+    sous_consigne_acrd_1: 'magazine_sans_texte',
+    sous_consigne_acrd_2: 'magazine_sans_texte',
+    sous_consigne_aplc_1: 'terrasse_cafe',
+    sous_consigne_aplc_2: 'telephone_liste_de_courses',
+    sous_consigne_hpar_1: 'hpar_c1',
+    sous_consigne_hgac_1: 'graphique_avec_selection',
+    sous_consigne_hcvf_1: 'rubrique_environnement',
+    sous_consigne_hpfb_1: 'terrasse_cafe',
+    sous_consigne_hpfb_2: 'telephone_email'
   },
   NOM_TECHNIQUES_GLISSER_DEPOSER: {
     hpar_1: 'journal_vide'
+  },
+  NOM_TECHNIQUES_SAISIE: {
+    aplc_1: 'liste_de_course',
+    aplc_2: 'liste_de_course',
+    aplc_3: 'liste_de_course',
+    aplc_4: 'liste_de_course',
+    aplc_5: 'liste_de_course',
+    aplc_6: 'liste_de_course',
+    aplc_7: 'liste_de_course',
+    aplc_8: 'liste_de_course',
+    aplc_9: 'liste_de_course',
+    aplc_10: 'liste_de_course',
+    aplc_11: 'liste_de_course',
+    aplc_12: 'liste_de_course',
+    aplc_13: 'liste_de_course',
+    aplc_14: 'liste_de_course',
+    aplc_15: 'liste_de_course',
+    aplc_16: 'liste_de_course',
+    aplc_17: 'liste_de_course',
+    aplc_18: 'liste_de_course',
+    aplc_19: 'liste_de_course',
+    aplc_20: 'liste_de_course',
+    hpfb_1: 'telephone_email',
+    hpfb_2: 'telephone_email',
+    hpfb_3: 'telephone_email',
+    hpfb_4: 'telephone_email',
+    hpfb_5: 'telephone_email',
+    hpfb_6: 'telephone_email',
+    hpfb_7: 'telephone_email',
+    hpfb_8: 'telephone_email',
+    hpfb_9: 'telephone_email',
+    hpfb_10: 'telephone_email',
+    hpfb_11: 'telephone_email',
+    hpfb_12: 'telephone_email',
+    hpfb_13: 'telephone_email',
+    hpfb_14: 'telephone_email',
+    hpfb_15: 'telephone_email',
+    hpfb_16: 'telephone_email',
+    hpfb_17: 'telephone_email',
+    hpfb_18: 'telephone_email',
+    hpfb_19: 'telephone_email',
+    hpfb_20: 'telephone_email'
   },
   DOSSIER_ID: 'DOSSIER_ID',
   TYPE_QUESTION: 'TYPE_QUESTION'
@@ -87,6 +129,8 @@ namespace :questions do
       attache_assets(NOM_TECHNIQUES_CONSIGNES)
     when 'GLISSER_DEPOSER'
       attache_assets(NOM_TECHNIQUES_GLISSER_DEPOSER)
+    when 'SAISIE'
+      attache_assets(NOM_TECHNIQUES_SAISIE)
     end
   end
 end

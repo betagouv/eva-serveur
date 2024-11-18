@@ -36,8 +36,12 @@ panel 'Détails de la question' do
     row :type_saisie
     row :texte_a_trous
     row :created_at
-    row :bonne_reponse do
-      question_saisie.bonne_reponse&.intitule
-    end
+  end
+end
+
+panel 'Réponses' do
+  table_for question_saisie.reponses do
+    column :intitule
+    column :type_choix
   end
 end

@@ -6,12 +6,16 @@ class QuestionSaisie < Question
 
   enum :type_saisie, { redaction: 0, numerique: 1 }
 
-  has_one :bonne_reponse, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
-  accepts_nested_attributes_for :bonne_reponse, allow_destroy: true
+  has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
+  accepts_nested_attributes_for :reponses, allow_destroy: true
 
   def as_json(_options = nil)
     json = base_json
     json.merge!(json_audio_fields, additional_json_fields)
+  end
+
+  def bonnes_reponses
+    choix.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
   end
 
   private
@@ -29,16 +33,18 @@ class QuestionSaisie < Question
   end
 
   def additional_json_fields
-    if bonne_reponse
-      reponse = { 'textes' => bonne_reponse.intitule,
-                  'bonneReponse' => bonne_reponse.type_choix == 'bon' }
-    end
     { 'intitule' => transcription_intitule&.ecrit,
       'modalite_reponse' => transcription_modalite_reponse&.ecrit,
-      'reponse' => reponse }
+      'reponses' => question_reponses }
   end
 
   def sous_type
     type_saisie == 'redaction' ? 'texte' : type_saisie
+  end
+
+  def question_reponses
+    reponses.map do |reponse|
+      reponse.slice(:nom_technique, :intitule, :type_choix)
+    end
   end
 end

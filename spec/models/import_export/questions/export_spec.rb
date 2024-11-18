@@ -104,8 +104,9 @@ describe ImportExport::Questions::Export do
       expect(worksheet.row(0)[8]).to eq('Suffix reponse')
       expect(worksheet.row(0)[9]).to eq('Reponse placeholder')
       expect(worksheet.row(0)[10]).to eq('Type saisie')
-      expect(worksheet.row(0)[11]).to eq('Bonne reponse intitule')
-      expect(worksheet.row(0)[12]).to eq('Bonne reponse nom technique')
+      expect(worksheet.row(0)[11]).to eq('reponse_1_intitule')
+      expect(worksheet.row(0)[12]).to eq('reponse_1_nom_technique')
+      expect(worksheet.row(0)[13]).to eq('reponse_1_type_choix')
     end
 
     it 'génére un fichier xls avec les détails de la question' do
@@ -113,8 +114,8 @@ describe ImportExport::Questions::Export do
       expect(ligne[8]).to eq(question.suffix_reponse)
       expect(ligne[9]).to eq(question.reponse_placeholder)
       expect(ligne[10]).to eq(question.type_saisie)
-      expect(ligne[11]).to eq(question.bonne_reponse.intitule)
-      expect(ligne[12]).to eq(question.bonne_reponse.nom_technique)
+      expect(ligne[11]).to eq(question.reponses.last.intitule)
+      expect(ligne[12]).to eq(question.reponses.last.nom_technique)
     end
   end
 

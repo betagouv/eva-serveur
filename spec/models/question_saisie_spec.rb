@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe QuestionSaisie, type: :model do
-  it { is_expected.to have_one(:bonne_reponse).with_foreign_key(:question_id) }
+  it { is_expected.to have_many(:reponses).with_foreign_key(:question_id) }
 
   describe '#as_json' do
     let(:question_saisie) do
@@ -31,13 +31,13 @@ describe QuestionSaisie, type: :model do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique suffix_reponse
                                           description illustration modalite_reponse type sous_type
-                                          placeholder reponse consigne_audio])
+                                          placeholder reponses texte_a_trous consigne_audio])
       expect(json['type']).to eql('saisie')
-      expect(json['sous_type']).to eql('redaction')
+      expect(json['sous_type']).to eql('texte')
       expect(json['placeholder']).to eql('écrivez ici')
       expect(json['intitule']).to eql('Mon Intitulé')
-      expect(json['reponse']['textes']).to eql(reponse.intitule)
-      expect(json['reponse']['bonneReponse']).to be(true)
+      expect(json['reponses'][0]['intitule']).to eql(reponse.intitule)
+      expect(json['reponses'][0]['type_choix']).to eql('bon')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
     end
 

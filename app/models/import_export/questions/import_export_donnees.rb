@@ -7,8 +7,7 @@ module ImportExport
       HEADERS_CLIC_DANS_TEXTE = %i[texte_sur_illustration].freeze
       HEADERS_GLISSER_DEPOSER = %i[zone_depot].freeze
       HEADERS_QCM = %i[type_qcm].freeze
-      HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie bonne_reponse_intitule
-                          bonne_reponse_nom_technique].freeze
+      HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie texte_a_trous].freeze
       HEADERS_SOUS_CONSIGNE = %i[libelle nom_technique illustration intitule_ecrit
                                  intitule_audio].freeze
       HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio

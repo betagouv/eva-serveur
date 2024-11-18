@@ -54,13 +54,11 @@ module ImportExport
       end
 
       def update_champs_specifiques
-        updates = {
-          QuestionClicDansImage::QUESTION_TYPE => :update_clic_dans_image,
-          QuestionGlisserDeposer::QUESTION_TYPE => :update_glisser_deposer,
-          QuestionQcm::QUESTION_TYPE => :update_qcm,
-          QuestionSaisie::QUESTION_TYPE => :update_saisie,
-          QuestionClicDansTexte::QUESTION_TYPE => :update_clic_dans_texte
-        }
+        updates = { QuestionClicDansImage::QUESTION_TYPE => :update_clic_dans_image,
+                    QuestionGlisserDeposer::QUESTION_TYPE => :update_glisser_deposer,
+                    QuestionQcm::QUESTION_TYPE => :update_qcm,
+                    QuestionSaisie::QUESTION_TYPE => :update_saisie,
+                    QuestionClicDansTexte::QUESTION_TYPE => :update_clic_dans_texte }
         send(updates[@type]) if updates.key?(@type)
       end
 
@@ -76,13 +74,13 @@ module ImportExport
 
       def update_qcm
         @question.update!(type_qcm: @row[8])
-        cree_reponses('choix', method(:cree_chaque_choix))
+        cree_reponses('choix', method(:cree_choix))
       end
 
       def update_saisie
         @question.update!(suffix_reponse: @row[8], reponse_placeholder: @row[9],
-                          type_saisie: @row[10])
-        cree_reponse_generique(@row[11], @row[12], 'bon')
+                          type_saisie: @row[10], texte_a_trous: @row[11])
+        cree_reponses('reponse', method(:cree_reponse_saisie))
       end
 
       def update_clic_dans_texte
@@ -95,7 +93,7 @@ module ImportExport
         end
       end
 
-      def cree_chaque_choix(data)
+      def cree_choix(data)
         choix = cree_reponse_generique(data['intitule'], data['nom_technique'], data['type_choix'])
         attache_fichier(choix.audio, data['audio'])
       end
@@ -106,10 +104,13 @@ module ImportExport
         attache_fichier(reponse.illustration, data['illustration'])
       end
 
+      def cree_reponse_saisie(data)
+        cree_reponse_generique(data['intitule'], data['nom_technique'], data['type_choix'])
+      end
+
       def cree_reponse_generique(intitule, nom_technique, type_choix, position_client = nil)
-        Choix.create!(intitule: intitule, nom_technique: nom_technique,
-                      question_id: @question.id, type_choix: type_choix,
-                      position_client: position_client)
+        Choix.create!(intitule: intitule, nom_technique: nom_technique, question_id: @question.id,
+                      type_choix: type_choix, position_client: position_client)
       end
 
       def extrait_colonnes_reponses(reponse)

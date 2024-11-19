@@ -87,24 +87,24 @@ module ImportExport
       def ajoute_choix(choix, index)
         columns = %w[intitule nom_technique type_choix audio]
         columns.each_with_index do |col, i|
-          @sheet[0, 9 + (index * 4) + i] = "choix_#{index + 1}_#{col}"
-          @sheet[@ligne, 9 + (index * 4) + i] = choix.send(col)
+          @sheet[0, 9 + (index * columns.size) + i] = "choix_#{index + 1}_#{col}"
+          @sheet[@ligne, 9 + (index * columns.size) + i] = choix.send(col)
         end
       end
 
       def ajoute_saisies(reponse, index)
         columns = %w[intitule nom_technique type_choix]
         columns.each_with_index do |col, i|
-          @sheet[0, 11 + (index * 3) + i] = "reponse_#{index + 1}_#{col}"
-          @sheet[@ligne, 11 + (index * 3) + i] = reponse.send(col)
+          @sheet[0, 11 + (index * columns.size) + i] = "reponse_#{index + 1}_#{col}"
+          @sheet[@ligne, 11 + (index * columns.size) + i] = reponse.send(col)
         end
       end
 
       def ajoute_reponses(choix, index)
         columns = %w[nom_technique position_client type_choix illustration]
         columns.each_with_index do |col, i|
-          @sheet[0, 9 + (index * 4) + i] = "reponse_#{index + 1}_#{col}"
-          @sheet[@ligne, 9 + (index * 4) + i] = choix.send(col)
+          @sheet[0, 9 + (index * columns.size) + i] = "reponse_#{index + 1}_#{col}"
+          @sheet[@ligne, 9 + (index * columns.size) + i] = choix.send(col)
         end
       end
     end

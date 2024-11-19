@@ -64,5 +64,11 @@ module ImportExport
     def message_erreur_validation(exception, row)
       "Erreur ligne #{row}: #{exception.record.errors.full_messages.to_sentence}"
     end
+
+    XLS_MIME_TYPE = 'application/vnd.ms-excel'
+
+    def self.fichier_xls?(file)
+      file.content_type == XLS_MIME_TYPE && File.extname(file.original_filename) == '.xls'
+    end
   end
 end

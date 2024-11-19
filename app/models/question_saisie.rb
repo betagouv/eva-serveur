@@ -4,7 +4,7 @@ class QuestionSaisie < Question
   QUESTION_REDACTION = 'redaction_note'
   QUESTION_TYPE = 'QuestionSaisie'
 
-  enum :type_saisie, { redaction: 0, numerique: 1 }
+  enum :type_saisie, { redaction: 0, numerique: 1, texte: 2 }
 
   has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
@@ -25,7 +25,7 @@ class QuestionSaisie < Question
           :illustration).tap do |json|
       json['type'] = 'saisie'
       json['illustration'] = cdn_for(illustration)
-      json['sous_type'] = sous_type
+      json['sous_type'] = type_saisie
       json['placeholder'] = reponse_placeholder
       json['description'] = description
       json['texte_a_trous'] = texte_a_trous
@@ -36,10 +36,6 @@ class QuestionSaisie < Question
     { 'intitule' => transcription_intitule&.ecrit,
       'modalite_reponse' => transcription_modalite_reponse&.ecrit,
       'reponses' => question_reponses }
-  end
-
-  def sous_type
-    type_saisie == 'redaction' ? 'texte' : type_saisie
   end
 
   def question_reponses

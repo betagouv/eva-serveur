@@ -10,6 +10,7 @@ describe QuestionSaisie, type: :model do
       create(:question_saisie,
              transcription_ecrit: 'Mon Intitulé',
              reponse_placeholder: 'écrivez ici',
+             type_saisie: 'texte',
              illustration: Rack::Test::UploadedFile.new(
                Rails.root.join('spec/support/programme_tele.png')
              ))

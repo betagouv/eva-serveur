@@ -16,6 +16,7 @@ ActiveAdmin.register Question do
   controller do
     def import_xls
       return if params[:file_xls].blank?
+      return invalide_format_xls unless ImportExport::ImportXls.fichier_xls?(params[:file_xls])
 
       initialise_import
       flash[:success] = I18n.t('.layouts.succes.import_question')
@@ -51,6 +52,11 @@ ActiveAdmin.register Question do
       }
 
       redirection_paths[params[:type]] || admin_questions_path
+    end
+
+    def invalide_format_xls
+      flash[:error] = I18n.t('.layouts.erreurs.import_question.format_invalide', format: 'XLS')
+      redirect_to admin_import_xls_path(type: params[:type])
     end
   end
 end

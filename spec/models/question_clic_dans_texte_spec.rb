@@ -15,12 +15,12 @@ describe QuestionClicDansTexte, type: :model do
     let(:json) { question_clic_dans_texte.as_json }
 
     it 'serialise les champs' do
-      expect(json.keys).to match_array(%w[id nom_technique description texte_sur_illustration
-                                          illustration bonnesReponses type])
-      expect(json['type']).to eql('clic-dans-texte')
-      expect(json['texte_sur_illustration']).to eql(contenu)
+      expect(json.keys).to match_array(%w[id nom_technique description texte_cliquable
+                                          illustration reponse type])
+      expect(json['type']).to eql('clic-sur-mots')
+      expect(json['texte_cliquable']).to eql(contenu)
       expect(json['description']).to eql(question_clic_dans_texte.description)
-      expect(json['bonnesReponses']).to eql(%w[mot1 mot2])
+      expect(json['reponse']['bonne_reponse']).to eql(%w[mot1 mot2])
     end
 
     it "retourne l'illustration" do

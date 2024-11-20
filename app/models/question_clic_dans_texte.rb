@@ -10,12 +10,11 @@ class QuestionClicDansTexte < Question
   private
 
   def base_json
-    slice(:id, :nom_technique, :description, :texte_sur_illustration,
-          :illustration).tap do |json|
+    slice(:id, :nom_technique, :description, :illustration).tap do |json|
       json['type'] = 'clic-sur-mots'
       json['illustration'] = cdn_for(illustration)
       json['description'] = description
-      json['bonnesReponses'] = bonnes_reponses_json
+      json['reponse'] = { bonne_reponse: bonnes_reponses_json }
       json['texte_cliquable'] = texte_sur_illustration
     end
   end

@@ -117,11 +117,11 @@ module ImportExport
 
       def extrait_colonnes_reponses(reponse)
         @headers.each_with_index.with_object({}) do |(header, index), headers_data|
-          if (match = header.to_s.match(/#{reponse}_(\d+)_(.*)/))
-            item, data_type = match.captures
-            headers_data[item.to_i] ||= {}
-            headers_data[item.to_i][data_type] = @row[index]
-          end
+          next unless (match = header.to_s.match(/#{reponse}_(\d+)_(.*)/))
+
+          item, data_type = match.captures
+          headers_data[item.to_i] ||= {}
+          headers_data[item.to_i][data_type] = @row[index]
         end
       end
     end

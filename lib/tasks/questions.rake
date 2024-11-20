@@ -59,6 +59,22 @@ module ConstantesQuestions
     ].freeze
   end
 
+  unless const_defined?(:NOM_TECHNIQUES_CLIC_TEXTE)
+    NOM_TECHNIQUES_CLIC_TEXTE = [
+      %w[alrd_11 telephone_sans_titres],
+      %w[alrd_12 telephone_sans_titres],
+      %w[alrd_13 telephone_sans_titres],
+      %w[alrd_14 telephone_sans_titres],
+      %w[acrd_1 magazine_sans_texte],
+      %w[acrd_2 magazine_sans_texte],
+      %w[acrd_3 magazine_sans_texte],
+      %w[acrd_4 magazine_sans_texte],
+      %w[acrd_5 magazine_sans_texte],
+      %w[hcvf_1 rubrique_environnement],
+      %w[hcvf_2 rubrique_environnement]
+    ].freeze
+  end
+
   unless const_defined?(:NOM_TECHNIQUES_GLISSER_DEPOSER)
     NOM_TECHNIQUES_GLISSER_DEPOSER = [
       %w[hpar_1 journal_vide]
@@ -103,6 +119,8 @@ namespace :questions do
       attache_assets(ConstantesQuestions::NOM_TECHNIQUES_GLISSER_DEPOSER)
     when 'SAISIE'
       attache_assets(ConstantesQuestions::NOM_TECHNIQUES_SAISIE)
+    when 'CLIC_DANS_TEXTE'
+      attache_assets(ConstantesQuestions::NOM_TECHNIQUES_CLIC_TEXTE)
     end
   end
 end

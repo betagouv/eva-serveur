@@ -89,6 +89,8 @@ module ImportExport
 
       def cree_reponses(type, creation_method)
         extrait_colonnes_reponses(type).each_value do |data|
+          next if data.values.all?(&:nil?) ## si une ligne de réponse est vide on la saute
+
           creation_method.call(data)
         end
       end

@@ -80,20 +80,21 @@ describe ImportExport::Questions::Import do
 
       it 'importe les données spécifiques' do
         service.import_from_xls(file)
-        question = Question.last
+        expect(Question.count).to eq 2
+        question = Question.first
         expect(question.type_qcm).to eq 'standard'
       end
 
       it 'crée les choix' do
         service.import_from_xls(file)
-        choix = Question.last.choix
+        choix = Question.first.choix
         expect(choix.count).to eq 2
-        choix1 = Choix.first
+        choix1 = choix.first
         expect(choix1.intitule).to eq 'Choix1'
         expect(choix1.nom_technique).to eq 'Choix1'
         expect(choix1.type_choix).to eq 'bon'
         expect(choix1.audio.attached?).to be true
-        choix2 = Choix.last
+        choix2 = choix.last
         expect(choix2.intitule).to eq 'Choix2'
         expect(choix2.nom_technique).to eq 'Choix2'
         expect(choix2.type_choix).to eq 'mauvais'

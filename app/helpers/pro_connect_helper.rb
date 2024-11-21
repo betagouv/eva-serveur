@@ -12,7 +12,7 @@ module ProConnectHelper
         client_id: PC_CLIENT_ID,
         redirect_uri: callback_url,
         acr_values: 'eidas1',
-        scope: 'openid email usual_name given_name',
+        scope: 'openid email usual_name given_name siret',
         state: pc_state,
         nonce: pc_nonce
       }

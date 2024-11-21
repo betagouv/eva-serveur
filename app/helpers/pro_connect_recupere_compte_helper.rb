@@ -40,11 +40,14 @@ module ProConnectRecupereCompteHelper
     end
 
     def actualise_autres_champs_et_sauve(compte, user_info)
-      compte.id_pro_connect = user_info['sub']
-      compte.prenom = user_info['given_name']
-      compte.nom = user_info['usual_name']
+      compte.assign_attributes(
+        id_pro_connect: user_info['sub'],
+        prenom: user_info['given_name'],
+        nom: user_info['usual_name'],
+        siret_pro_connect: user_info['siret'],
+        confirmed_at: compte.confirmed_at || Time.zone.now
+      )
       compte.password = SecureRandom.uuid if compte.encrypted_password.blank?
-      compte.confirmed_at ||= Time.zone.now
       compte.save!
       compte
     end

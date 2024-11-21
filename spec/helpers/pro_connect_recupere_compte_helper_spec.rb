@@ -9,24 +9,31 @@ describe ProConnectRecupereCompteHelper do
   let(:hier) { Time.zone.local(2023, 1, 9, 12, 0, 0) }
 
   describe '#cree_ou_recupere_compte' do
-    let(:id_ic) { 'identifiant_ic' }
+    let(:sub) { 'identifiant_pc' }
+    let(:siret) { '13002526500013' }
+
+    def user_info(email)
+      {
+        'sub' => sub,
+        'email' => email,
+        'given_name' => 'prénom',
+        'usual_name' => 'nom',
+        'siret' => siret
+      }
+    end
 
     context "le compte n'existe pas" do
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
           expect(compte.email).to eq(email)
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.confirmed_at).to eq(aujourdhui)
           expect(compte.password).not_to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
+          expect(compte.prenom).to eq('prénom')
+          expect(compte.nom).to eq('nom')
+          expect(compte.siret_pro_connect).to eq(siret)
         end
       end
     end
@@ -38,19 +45,15 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
           expect(compte.email).to eq(email)
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.confirmed_at).to eq(aujourdhui)
           expect(compte.password).to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
+          expect(compte.prenom).to eq('prénom')
+          expect(compte.nom).to eq('nom')
+          expect(compte.siret_pro_connect).to eq(siret)
         end
       end
     end
@@ -62,19 +65,15 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => 'toto@eva.beta.gouv.FR',
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info('toto@eva.beta.gouv.FR'))
           expect(compte).not_to be_nil
           expect(compte.email).to eq(email)
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.confirmed_at).to eq(aujourdhui)
           expect(compte.password).to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
+          expect(compte.prenom).to eq('prénom')
+          expect(compte.nom).to eq('nom')
+          expect(compte.siret_pro_connect).to eq(siret)
         end
       end
     end
@@ -86,19 +85,13 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.email).to eq(email)
           expect(compte.confirmed_at).to eq(aujourdhui)
           expect(compte.password).not_to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
+
           expect(compte.id).not_to eq(Compte.only_deleted.find_by(email: email).id)
         end
       end
@@ -106,48 +99,34 @@ describe ProConnectRecupereCompteHelper do
 
     context 'le compte existe déjà en base avec id pro connect, même email' do
       before do
-        create :compte_admin, email: email, confirmed_at: hier, id_pro_connect: id_ic
+        create :compte_admin, email: email, confirmed_at: hier, id_pro_connect: sub
       end
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.email).to eq(email)
           expect(compte.confirmed_at).to eq(hier)
           expect(compte.password).to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
         end
       end
     end
 
     context 'le compte existe déjà en base avec id pro connect, email différent' do
       before do
-        create :compte_admin, email: ancien_email, confirmed_at: hier, id_pro_connect: id_ic
+        create :compte_admin, email: ancien_email, confirmed_at: hier, id_pro_connect: sub
       end
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.email).to eq(email)
           expect(compte.confirmed_at).to eq(aujourdhui)
           expect(compte.password).to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
         end
       end
     end
@@ -155,24 +134,17 @@ describe ProConnectRecupereCompteHelper do
     context "Il existe deux comptes en base dans le cas d'une mise à jourd d'email" do
       before do
         create :compte_admin, email: email, confirmed_at: hier
-        create :compte_admin, email: ancien_email, confirmed_at: hier, id_pro_connect: id_ic
+        create :compte_admin, email: ancien_email, confirmed_at: hier, id_pro_connect: sub
       end
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte).not_to be_nil
-          expect(compte.prenom).to eq('prénom')
-          expect(compte.nom).to eq('nom')
           expect(compte.email).to eq(email)
           expect(compte.confirmed_at).to eq(hier)
           expect(compte.password).to be_nil
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
           ancien_compte = Compte.find_by(email: ancien_email)
           expect(ancien_compte).not_to be_nil
           expect(ancien_compte.id_pro_connect).to be_nil
@@ -187,12 +159,7 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email))
           expect(compte.confirmed_at).to eq(hier)
         end
       end
@@ -205,15 +172,10 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte({
-                                                             'sub' => id_ic,
-                                                             'email' => email_ft,
-                                                             'given_name' => 'prénom',
-                                                             'usual_name' => 'nom'
-                                                           })
+          compte = described_class.cree_ou_recupere_compte(user_info(email_ft))
           expect(compte).not_to be_nil
           expect(compte.email).to eq(email_ft)
-          expect(compte.id_pro_connect).to eq(id_ic)
+          expect(compte.id_pro_connect).to eq(sub)
           expect(compte.id).to eq(compte_pe.id)
         end
       end

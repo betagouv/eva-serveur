@@ -16,6 +16,7 @@ describe 'questions:attache_assets' do
 
   before do
     allow(logger).to receive :info
+    allow(logger).to receive :error
   end
 
   context 'appellé avec une dossier id inconnu' do

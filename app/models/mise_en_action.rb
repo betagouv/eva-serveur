@@ -15,8 +15,8 @@ class MiseEnAction < ApplicationRecord
 
   before_save :enregistre_date
 
-  enum remediation: REMEDIATIONS.zip(REMEDIATIONS).to_h, _suffix: true
-  enum difficulte: DIFFICULTES.zip(DIFFICULTES).to_h, _suffix: true
+  enum :remediation, REMEDIATIONS.zip(REMEDIATIONS).to_h, suffix: true
+  enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h, suffix: true
 
   acts_as_paranoid
 

@@ -1,3 +1,4 @@
+<% @question ||= Question.new %>
 <%= form_with model: @question, url: import_xls_admin_questions_path, method: :post, local: true do |form| %>
   <div class="field">
     <%= form.label :file_xls, "Fichier XLS" %>

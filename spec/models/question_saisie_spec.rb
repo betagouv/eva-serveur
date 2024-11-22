@@ -20,6 +20,7 @@ describe QuestionSaisie, type: :model do
                                           categorie: :modalite_reponse)
     end
     let!(:reponse) { create(:choix, :bon, question_id: question_saisie.id) }
+    let!(:reponse2) { create(:choix, :bon, question_id: question_saisie.id) }
     let(:json) { question_saisie.as_json }
 
     before do
@@ -52,6 +53,12 @@ describe QuestionSaisie, type: :model do
       it 'ne retourne pas de reponse' do
         reponse.destroy
         expect(json['reponse']).to be_nil
+      end
+    end
+
+    describe '#bonnes_reponses' do
+      it 'retourne les bonnes réponses' do
+        expect(question_saisie.bonnes_reponses).to eql('bon choix | bon choix')
       end
     end
   end

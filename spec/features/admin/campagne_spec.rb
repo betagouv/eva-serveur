@@ -176,10 +176,7 @@ describe 'Admin - Campagne', type: :feature do
           fill_in :campagne_code, with: 'UNC0D3'
           select 'Livraison avec rédaction',
                  from: 'campagne_situations_configurations_attributes_0_questionnaire_id'
-          expect do
-            click_on 'Modifier la campagne'
-          end.to raise_error(Bullet::Notification::UnoptimizedQueryError,
-                             /AVOID eager loading detected/)
+          click_on 'Modifier la campagne'
         end
 
         it do

@@ -125,10 +125,12 @@ describe 'Evaluation', type: :request do
           }
         end
 
-        it 'retourne une 500 (comportement par défaut des enums Rails)' do
-          expect do
-            patch "/api/evaluations/#{evaluation.id}", params: params
-          end.to raise_error(ArgumentError)
+        before do
+          patch "/api/evaluations/#{evaluation.id}", params: params
+        end
+
+        it 'ignore la requette (comportement par défaut Rails)' do
+          expect(DonneeSociodemographique.count).to eq 0
         end
       end
 

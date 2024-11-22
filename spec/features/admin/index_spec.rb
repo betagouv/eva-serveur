@@ -9,8 +9,8 @@ describe 'Index', type: :feature do
   end
 
   it 'Redirige vers la page 404' do
-    expect { visit '/page_inconnue' }
-      .to raise_error(ActionController::RoutingError)
+    visit '/page_inconnue'
+    expect(page).to have_http_status(:not_found)
   end
 
   it 'Render page 404' do

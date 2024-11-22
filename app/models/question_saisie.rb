@@ -15,7 +15,7 @@ class QuestionSaisie < Question
   end
 
   def bonnes_reponses
-    choix.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
+    reponses.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
   end
 
   private

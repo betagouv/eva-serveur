@@ -8,13 +8,14 @@
   <% content_for :sous_titre do %>
     <%= resource.structure&.nom -%>
   <% end %>
-  <%= link_to t('.lien_retour'),
-              structures_path(
-                code_postal: params[:code_postal],
-                ville_ou_code_postal: params[:ville_ou_code_postal]
-              ),
-              class: 'lien-retour' %>
   <div id="login" class="panel">
+    <%= link_to t('.lien_retour'),
+                structures_path(
+                  code_postal: params[:code_postal],
+                  ville_ou_code_postal: params[:ville_ou_code_postal]
+                ),
+                class: 'lien-retour',
+                aria: { label: t('.description_lien_retour') } %>
     <h3><%= t('.instruction') -%></h3>
     <p><%= t('.description') -%></p>
 

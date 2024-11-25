@@ -1,4 +1,12 @@
 class RenomeNomTechniqueQuestionBienvenue16 < ActiveRecord::Migration[7.0]
+  class Question < ApplicationRecord
+    CATEGORIE = %i[situation scolarite sante appareils].freeze
+    attribute :categorie, :string
+    enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
+  end
+
+  class QuestionQcm < Question; end
+
   def up
     bienvenue_16 = QuestionQcm.find_by(nom_technique: 'bienvenue_16')
     return unless bienvenue_16.present?

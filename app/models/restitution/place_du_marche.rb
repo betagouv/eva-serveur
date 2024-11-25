@@ -50,21 +50,23 @@ module Restitution
     end
 
     def niveau_numeratie
+      niveau = 0
       n1 = pourcentage_de_reussite_pour(:N1)
-      return unless n1
+      return niveau if n1.blank?
 
       n2 = pourcentage_de_reussite_pour(:N2)
       n3 = pourcentage_de_reussite_pour(:N3)
 
-      return 1 if n1 < SEUIL_MINIMUM
-      return 2 if n2 && n2 < SEUIL_MINIMUM
-      return 3 if n3 && n3 < SEUIL_MINIMUM
+      niveau = 1
+      niveau = 2 if n1 > SEUIL_MINIMUM
+      niveau = 3 if n2 && n2 > SEUIL_MINIMUM
+      niveau = 4 if n3 && n3 > SEUIL_MINIMUM
 
-      4
+      niveau
     end
 
     def profil_numeratie
-      return ::Competence::NIVEAU_INDETERMINE if niveau_numeratie.blank?
+      return ::Competence::NIVEAU_INDETERMINE if niveau_numeratie.zero?
 
       Competence::ProfilEvacob.new(self, 'profil_numeratie',
                                    niveau_numeratie).profil_numeratie

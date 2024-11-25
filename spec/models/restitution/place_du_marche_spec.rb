@@ -161,9 +161,9 @@ describe Restitution::PlaceDuMarche do
       end
     end
 
-    context "quand il n'y a pas de niveau littératie" do
+    context 'quand le niveau numératie est 0' do
       before do
-        allow(restitution).to receive(:niveau_numeratie).and_return nil
+        allow(restitution).to receive(:niveau_numeratie).and_return 0
       end
 
       it 'retourne le profil indéterminé' do
@@ -173,26 +173,36 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#niveau_numeratie' do
+    before do
+      allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return nil
+      allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return nil
+      allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return nil
+    end
+
     context 'quand le pourcentage de réussite pour N1 est nil' do
       before do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return nil
       end
 
-      it 'retourne nil' do
-        expect(restitution.niveau_numeratie).to be_nil
-      end
+      it { expect(restitution.niveau_numeratie).to eq 0 }
     end
 
     context 'quand le pourcentage de réussite pour N1 est inférieur à 70 et N2 est nil' do
       before do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return 59
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return nil
-        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return nil
       end
 
-      it 'retourne 1' do
-        expect(restitution.niveau_numeratie).to eq 1
+      it { expect(restitution.niveau_numeratie).to eq 1 }
+    end
+
+    context 'quand le pourcentage de réussite pour N1 est supérieur à 70 et N2 est nil' do
+      before do
+        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return 71
+        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return nil
       end
+
+      it { expect(restitution.niveau_numeratie).to eq 2 }
     end
 
     context 'quand le pourcentage de réussite pour N2 est inférieur à 70 et N3 est nil' do
@@ -202,9 +212,7 @@ describe Restitution::PlaceDuMarche do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return nil
       end
 
-      it 'retourne 2' do
-        expect(restitution.niveau_numeratie).to eq 2
-      end
+      it { expect(restitution.niveau_numeratie).to eq 2 }
     end
 
     context 'quand le pourcentage de réussite pour N3 est inférieur à 70' do
@@ -214,9 +222,7 @@ describe Restitution::PlaceDuMarche do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return 59
       end
 
-      it 'retourne 3' do
-        expect(restitution.niveau_numeratie).to eq 3
-      end
+      it { expect(restitution.niveau_numeratie).to eq 3 }
     end
 
     context 'quand le pourcentage de réussite pour N3 est supérieur à 70' do
@@ -226,9 +232,7 @@ describe Restitution::PlaceDuMarche do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return 71
       end
 
-      it 'retourne 4' do
-        expect(restitution.niveau_numeratie).to eq 4
-      end
+      it { expect(restitution.niveau_numeratie).to eq 4 }
     end
   end
 end

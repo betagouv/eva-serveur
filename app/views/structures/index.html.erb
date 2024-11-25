@@ -5,7 +5,10 @@
       <%= t('.titre') -%>
     <% end %>
 
-    <%= link_to t('.lien_retour'), new_compte_session_path, class: 'lien-retour' %>
+    <%= link_to t('.lien_retour'),
+                new_compte_session_path,
+                class: 'lien-retour',
+                aria: { label: t('.description_lien_retour') } %>
     <%= md t('.description')%>
     <%= render(@recherche_structure_component) %>
   </div>

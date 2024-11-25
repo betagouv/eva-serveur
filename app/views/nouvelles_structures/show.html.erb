@@ -14,7 +14,10 @@
   <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys,[:prenom, :nom, :telephone, :email, :password, :password_confirmation, :"structure.nom", :"structure.code_postal", :"structure.type_structure"]) %>
   <%= compte.semantic_fields_for :structure do |structure| %>
     <div class="panel">
-      <%= link_to t('.lien_retour'), structures_path, class: 'lien-retour' %>
+      <%= link_to t('.lien_retour'),
+                  structures_path,
+                  class: 'lien-retour',
+                  aria: { label: t('.description_lien_retour') } %>
       <h3><%= t('.compte.titre') %></h3>
       <%= compte.inputs do %>
         <%= compte.input :prenom %>

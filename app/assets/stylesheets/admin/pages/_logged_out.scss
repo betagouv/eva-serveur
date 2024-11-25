@@ -70,6 +70,8 @@ body.logged_out {
         line-height: 1.875rem;
         font-weight: bold;
         margin-top: 3rem;
+        max-width: 17rem;
+        text-align: center;
         + h2 {
           margin-top: 1rem;
         }
@@ -241,6 +243,7 @@ body.logged_out {
     a {
       color: $eva_main_blue;
       float: none;
+      margin: 0;
     }
   }
 
@@ -293,7 +296,6 @@ body.logged_out {
     margin-bottom: 1.5rem;
     p {
       margin-bottom: 1rem;
-      padding-right: 1.5rem;
     }
   }
 }

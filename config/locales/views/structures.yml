@@ -6,6 +6,8 @@ fr:
       description: |
         **Vous souhaitez créer un compte conseiller eva.**
         Dans un premier temps merci de regarder si votre structure est déjà enregistrée.
+      lien_retour: Se connecter
+      description_lien_retour: Retour à la page de connexion
   admin:
     structures:
       show:
@@ -62,3 +64,4 @@ fr:
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
       creer_structure: Valider la création de mon compte
       lien_retour: Rechercher ma structure
+      description_lien_retour: Retour à la recherche de structure

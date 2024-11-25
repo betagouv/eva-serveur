@@ -1,4 +1,12 @@
 class RenommeNomTechniquesQuestionsBienvenue < ActiveRecord::Migration[7.0]
+  class Question < ApplicationRecord
+    CATEGORIE = %i[situation scolarite sante appareils].freeze
+    attribute :categorie, :string
+    enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
+  end
+
+  class QuestionQcm < Question; end
+
   def up
     QuestionQcm.where(nom_technique: 'bienvenue_1').update(nom_technique: 'concentration')
     QuestionQcm.where(nom_technique: 'bienvenue_2').update(nom_technique: 'comprehension')

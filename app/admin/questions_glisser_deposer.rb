@@ -8,6 +8,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
   permit_params :libelle, :nom_technique, :description, :illustration, :supprimer_illustration,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_intitule,
                 :supprimer_zone_depot, :zone_depot, :supprimer_audio_consigne,
+                :demarrage_audio_modalite_reponse,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 reponses_attributes: %i[id illustration intitule position type_choix position_client
                                         nom_technique _destroy]

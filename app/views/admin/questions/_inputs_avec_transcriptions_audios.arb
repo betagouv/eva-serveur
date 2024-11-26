@@ -43,6 +43,9 @@ else
       t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
     end
   end
+  f.inputs do
+    f.input :demarrage_audio_modalite_reponse, label: t('.label.demarrage_audio_modalite_reponse')
+  end
   if f.object.transcription_modalite_reponse&.audio&.attached?
     f.inputs do
       f.input :supprimer_audio_modalite_reponse,

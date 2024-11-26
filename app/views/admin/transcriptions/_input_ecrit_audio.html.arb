@@ -7,3 +7,8 @@ f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: fa
                   input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
   t.input :categorie, as: :hidden, input_html: { value: transcription_categorie }
 end
+if transcription_categorie == :modalite_reponse
+  f.inputs do
+    f.input :demarrage_audio_modalite_reponse, label: t('.label.demarrage_audio_modalite_reponse')
+  end
+end

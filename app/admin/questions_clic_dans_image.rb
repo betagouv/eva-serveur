@@ -9,6 +9,7 @@ ActiveAdmin.register QuestionClicDansImage do
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
                 :image_au_clic,
+                :demarrage_audio_modalite_reponse,
                 :zone_cliquable, :supprimer_zone_cliquable,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne,
                 :supprimer_image_au_clic,

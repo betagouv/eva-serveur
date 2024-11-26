@@ -7,6 +7,7 @@ ActiveAdmin.register QuestionSaisie do
                 :suffix_reponse, :description, :reponse_placeholder, :type_saisie,
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
+                :demarrage_audio_modalite_reponse,
                 :supprimer_audio_modalite_reponse,
                 :supprimer_audio_consigne,
                 :texte_a_trous,

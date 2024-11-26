@@ -7,6 +7,7 @@ ActiveAdmin.register QuestionClicDansTexte do
                 :suffix_reponse, :description, :reponse_placeholder,
                 :illustration, :supprimer_illustration, :texte_sur_illustration,
                 :supprimer_audio_intitule,
+                :demarrage_audio_modalite_reponse,
                 :supprimer_audio_modalite_reponse,
                 :supprimer_audio_consigne,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy]

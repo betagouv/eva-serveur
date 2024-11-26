@@ -148,6 +148,20 @@ describe 'Admin - Question QCM', type: :feature do
       end
     end
 
+    context "quand l'admin coche lire la consigne en premier" do
+      before do
+        visit edit_admin_question_qcm_path(question)
+        check 'question_qcm_demarrage_audio_modalite_reponse'
+      end
+
+      it 'met à jour la question' do
+        expect(question.demarrage_audio_modalite_reponse).to be false
+        click_on 'Enregistrer'
+        question.reload
+        expect(question.demarrage_audio_modalite_reponse).to be true
+      end
+    end
+
     context "quand l'admin coche supprimer l'audio de l'intitulé" do
       before do
         Question.first.transcriptions.find_by(categorie: :intitule)

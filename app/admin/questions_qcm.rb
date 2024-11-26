@@ -48,28 +48,6 @@ ActiveAdmin.register QuestionQcm do
   end
 
   controller do
-    def update
-      if @question.update(question_params)
-        redirect_to admin_question_qcm_path
-      else
-        render :edit, status: :unprocessable_entity
-      end
-    end
-
-    private
-
-    def question_params
-      params.require(:question_qcm).permit(
-        :categorie, :libelle, :nom_technique, :description,
-        :metacompetence, :type_qcm, :illustration, :supprimer_illustration,
-        :supprimer_audio_intitule,
-        :supprimer_audio_modalite_reponse,
-        :supprimer_audio_consigne,
-        choix_attributes: %i[id intitule audio type_choix _destroy nom_technique],
-        transcriptions_attributes: %i[id categorie ecrit audio _destroy]
-      )
-    end
-
     def set_question
       @question = Question.includes(transcriptions: :audio_attachment).find(params[:id])
     end

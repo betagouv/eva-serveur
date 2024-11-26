@@ -35,7 +35,7 @@ ActiveAdmin.register Partie do
       link_to t('.evenements'),
               admin_campagne_evenements_path(
                 partie.campagne,
-                q: { 'session_id_equals' => partie.session_id }
+                q: { session_id_eq: partie.session_id }
               )
     end
   end

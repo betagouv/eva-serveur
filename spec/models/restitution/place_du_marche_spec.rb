@@ -202,7 +202,7 @@ describe Restitution::PlaceDuMarche do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return nil
       end
 
-      it { expect(restitution.niveau_numeratie).to eq 2 }
+      it { expect(restitution.niveau_numeratie).to eq 1 }
     end
 
     context 'quand le pourcentage de réussite pour N2 est inférieur à 70 et N3 est nil' do

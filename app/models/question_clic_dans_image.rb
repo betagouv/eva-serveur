@@ -41,7 +41,7 @@ class QuestionClicDansImage < Question
   private
 
   def base_json
-    slice(:id, :nom_technique).tap do |json|
+    slice(:id, :nom_technique, :demarrage_audio_modalite_reponse).tap do |json|
       json['type'] = 'clic-dans-image'
       json['illustration'] = cdn_for(illustration) if illustration.attached?
       json['description'] = description

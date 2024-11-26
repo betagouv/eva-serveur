@@ -11,7 +11,8 @@ class QuestionClicDansTexte < Question
   private
 
   def base_json
-    slice(:id, :nom_technique, :description, :illustration).tap do |json|
+    slice(:id, :nom_technique, :description, :illustration,
+          :demarrage_audio_modalite_reponse).tap do |json|
       json['type'] = 'clic-sur-mots'
       json['illustration'] = cdn_for(illustration)
       json['description'] = description

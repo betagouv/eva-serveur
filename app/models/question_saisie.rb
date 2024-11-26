@@ -22,7 +22,7 @@ class QuestionSaisie < Question
 
   def base_json
     slice(:id, :nom_technique, :suffix_reponse, :description,
-          :illustration).tap do |json|
+          :demarrage_audio_modalite_reponse, :illustration).tap do |json|
       json['type'] = 'saisie'
       json['illustration'] = cdn_for(illustration)
       json['sous_type'] = type_saisie

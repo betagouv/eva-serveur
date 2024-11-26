@@ -49,6 +49,7 @@ module Restitution
         profil_numeratie: profil_numeratie }
     end
 
+    # rubocop:disable Metrics/CyclomaticComplexity
     def niveau_numeratie
       niveau = 0
       n1 = pourcentage_de_reussite_pour(:N1)
@@ -58,12 +59,13 @@ module Restitution
       n3 = pourcentage_de_reussite_pour(:N3)
 
       niveau = 1
-      niveau = 2 if n1 > SEUIL_MINIMUM
-      niveau = 3 if n2 && n2 > SEUIL_MINIMUM
+      niveau = 2 if n2 && n1 > SEUIL_MINIMUM
+      niveau = 3 if n3 && n2 > SEUIL_MINIMUM
       niveau = 4 if n3 && n3 > SEUIL_MINIMUM
 
       niveau
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
 
     def profil_numeratie
       return ::Competence::NIVEAU_INDETERMINE if niveau_numeratie.zero?

@@ -31,6 +31,9 @@ panel 'Détails de la question' do
     row :audio_consigne_bouton do
       tag_audio(question_saisie.transcription_consigne)
     end
+    row :aide do
+      div md(resource.aide)
+    end
     row :suffix_reponse
     row :reponse_placeholder
     row :type_saisie

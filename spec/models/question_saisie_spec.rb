@@ -13,7 +13,8 @@ describe QuestionSaisie, type: :model do
              type_saisie: 'texte',
              illustration: Rack::Test::UploadedFile.new(
                Rails.root.join('spec/support/programme_tele.png')
-             ))
+             ),
+             aide: 'Aide')
     end
     let!(:modalite) do
       create(:transcription, :avec_audio, question_id: question_saisie.id,
@@ -34,7 +35,7 @@ describe QuestionSaisie, type: :model do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique suffix_reponse
                                           description illustration modalite_reponse type sous_type
                                           placeholder reponses texte_a_trous consigne_audio
-                                          demarrage_audio_modalite_reponse])
+                                          demarrage_audio_modalite_reponse aide])
       expect(json['type']).to eql('saisie')
       expect(json['sous_type']).to eql('texte')
       expect(json['placeholder']).to eql('écrivez ici')
@@ -42,6 +43,7 @@ describe QuestionSaisie, type: :model do
       expect(json['reponses'][0]['intitule']).to eql(reponse.intitule)
       expect(json['reponses'][0]['type_choix']).to eql('bon')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
+      expect(json['aide']).to eql('Aide')
     end
 
     it "retourne l'illustration" do

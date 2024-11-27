@@ -22,14 +22,21 @@ class QuestionSaisie < Question
 
   def base_json
     slice(:id, :nom_technique, :suffix_reponse, :description,
-          :demarrage_audio_modalite_reponse, :illustration).tap do |json|
-      json['type'] = 'saisie'
-      json['illustration'] = cdn_for(illustration)
-      json['sous_type'] = type_saisie
-      json['placeholder'] = reponse_placeholder
-      json['description'] = description
-      json['texte_a_trous'] = texte_a_trous
+          :demarrage_audio_modalite_reponse, :illustration, :aide).tap do |json|
+      json.merge!(base_attributes)
     end
+  end
+
+  def base_attributes
+    {
+      'type' => 'saisie',
+      'illustration' => cdn_for(illustration),
+      'sous_type' => type_saisie,
+      'placeholder' => reponse_placeholder,
+      'description' => description,
+      'texte_a_trous' => texte_a_trous,
+      'aide' => aide
+    }
   end
 
   def additional_json_fields

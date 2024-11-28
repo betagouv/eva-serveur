@@ -5,21 +5,18 @@ require_relative '../../decorators/evenement_place_du_marche'
 module Restitution
   class PlaceDuMarche < Base
     SCORES = {
-      'score_N1' => {
+      N1: {
         'type' => :nombre,
-        'parametre' => :N1,
         'score' => Evacob::ScoreModule.new,
         'succes' => Evacob::ScoreModule.new
       },
-      'score_N2' => {
+      N2: {
         'type' => :nombre,
-        'parametre' => :N2,
         'score' => Evacob::ScoreModule.new,
         'succes' => Evacob::ScoreModule.new
       },
-      'score_N3' => {
+      N3: {
         'type' => :nombre,
-        'parametre' => :N3,
         'score' => Evacob::ScoreModule.new,
         'succes' => Evacob::ScoreModule.new
       }
@@ -32,14 +29,11 @@ module Restitution
     end
 
     def score_pour(niveau)
-      SCORES["score_#{niveau}"]['score'].calcule(evenements, niveau, avec_rattrapage: true)
+      SCORES[niveau]['score'].calcule(evenements, niveau, avec_rattrapage: true)
     end
 
     def pourcentage_de_reussite_pour(niveau)
-      SCORES["score_#{niveau}"]['succes'].calcule_pourcentage_reussite(
-        evenements,
-        SCORES["score_#{niveau}"]['parametre']
-      )
+      SCORES[niveau]['succes'].calcule_pourcentage_reussite(evenements, niveau)
     end
 
     def synthese

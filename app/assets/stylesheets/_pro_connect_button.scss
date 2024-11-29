@@ -32,36 +32,6 @@
       font-size: 1.125em;
       font-weight: 700;
     }
-
-    & + p a {
-      color: #000091;
-      font-size: .875rem;
-      line-height: 1.5rem;
-      text-decoration: none;
-      background-image: linear-gradient(0deg,currentColor,currentColor),linear-gradient(0deg,currentColor,currentColor);
-      background-position: 0 100%,0 calc(100% - .0625rem);
-      background-repeat: no-repeat, no-repeat;
-      background-size: 0 .125rem, 100% .0625rem;
-      transition: background-size 0s;
-
-      &:hover {
-        background-size: 100% .125em,100% .0625em;
-      }
-
-      &::after {
-        background-color: currentColor;
-        content: "";
-        display: inline-block;
-        flex: 0 0 auto;
-        height: 1rem;
-        margin-left: .25rem;
-        mask-image: image-url('target-blank-icon.svg');
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
-        vertical-align: calc(.375em - .5rem);
-        width: 1rem;
-      }
-    }
   }
 
   .btn-pro-connect::before {

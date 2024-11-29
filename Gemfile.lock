@@ -235,8 +235,6 @@ GEM
     faraday-retry (1.0.3)
     ffaker (2.23.0)
     ffi (1.17.0)
-    font-awesome-sass (6.5.2)
-      sassc (~> 2.0)
     foreman (0.88.1)
     formatador (1.1.0)
     formtastic (5.0.0)
@@ -697,7 +695,6 @@ DEPENDENCIES
   down
   factory_bot_rails
   ffaker
-  font-awesome-sass (~> 6.5.1)
   foreman
   geocoder
   google-api-client (~> 0.53)

@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: .75rem;
-    padding: .625em .75em .625em 4em;
+    padding: .625em .75em .625em 4.5em;
     text-decoration: none;
     position: relative;
 
@@ -68,16 +68,16 @@
     background-image: image-url('logo-pro-connect-bg.svg');
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-size: 2.5em 3em;
+    background-size: 3.375em 3em;
     bottom: .25em;
     content: "";
     display: block;
     height: 3em;
-    left: .75em;
+    left: .625em;
     margin-top: -1.5em;
     position: absolute;
     top: 50%;
-    width: 2.5em;
+    width: 3.375em;
   }
 }
 

@@ -21,9 +21,7 @@
                 <span class="pro-connect__brand">ProConnect</span>
               <% end %>
               <p>
-                <a href="https://www.proconnect.gouv.fr/" target="_blank" rel="noopener" title="<%= t('.pro-connect.libelle-lien-pro-connect') %> - nouvelle fenêtre">
-                  <%= t('.pro-connect.libelle-lien-pro-connect') %>
-                </a>
+              <%= render LienComponent.new(t('.pro-connect.libelle-lien-pro-connect'), 'https://www.proconnect.gouv.fr/', externe: true) %>
               </p>
             </div>
           </div>

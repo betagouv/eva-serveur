@@ -9,6 +9,7 @@ body.logged_out #content_wrapper #active_admin_content {
   @include carte-avec-ombre();
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  max-width: 100vw;
 
   > h3, .titre {
     @include titre-carte();

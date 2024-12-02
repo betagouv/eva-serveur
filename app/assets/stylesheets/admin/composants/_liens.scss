@@ -14,18 +14,18 @@
   @include lien($couleur-texte);
 }
 
-.lien-retour {
+#login a.lien-retour, a.lien-retour {
   @include texte-xs();
 
   align-items: center;
   display: flex;
   border: none;
   padding: .25rem .5rem;
-  margin-right: 0.5rem;
 
   &, &:link, &:visited {
     color: $couleur-texte;
     text-decoration: none;
+    margin-bottom: 1rem;
   }
 
   &::before {

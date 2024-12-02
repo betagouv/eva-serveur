@@ -1,20 +1,28 @@
 .index {
-  .lien-retour {
-    position: absolute;
-    left: -8.5rem;
+  @media (min-width: 760px) {
+    .lien-retour {
+      position: absolute;
+      left: -8.5rem;
+    }
   }
 }
 
 .new, .edit, .show, .create, .update {
-  .lien-retour {
-    position: absolute;
-    left: -8.5rem;
+  #content_wrapper:not(.conteneur-elargi) {
+    @media (min-width: 760px) {
+      .lien-retour {
+        position: absolute;
+        left: -8.5rem;
+      }
+    }
   }
 
   .conteneur-elargi {
-    .lien-retour {
-      position: absolute;
-      left: -13rem;
+    @media (min-width: 1040px) {
+      .lien-retour {
+        position: absolute;
+        left: -13rem;
+      }
     }
   }
 }

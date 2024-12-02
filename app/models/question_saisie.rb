@@ -4,7 +4,7 @@ class QuestionSaisie < Question
   QUESTION_REDACTION = 'redaction_note'
   QUESTION_TYPE = 'QuestionSaisie'
 
-  enum :type_saisie, { redaction: 0, numerique: 1, texte: 2 }
+  enum :type_saisie, { redaction: 0, numerique: 1, texte: 2, prix_avec_centimes: 3 }
 
   has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true

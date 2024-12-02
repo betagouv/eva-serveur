@@ -33,7 +33,9 @@ function afficheRecherche(boutonAjout, formulaireRecherche) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  $( ".champ-recherche" ).autocomplete({
+  let champRecherche = $( ".champ-recherche" );
+  champRecherche.focus();
+  champRecherche.autocomplete({
     source: function (request, response) {
       $('#bouton-chercher')
         .prop("disabled", true)

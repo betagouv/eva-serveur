@@ -2,5 +2,4 @@ fr:
   admin:
     recherche_structure:
       recherche_structure:
-        titre: Quelle est votre structure ?
         message_accueil: Avant de pouvoir commencer à utiliser eva en tant que conseiller ou conseillère, vous devez retrouver votre structure pour la rejoindre.

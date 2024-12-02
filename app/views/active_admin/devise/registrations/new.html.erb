@@ -9,7 +9,7 @@
     <%= resource.structure&.nom -%>
   <% end %>
   <div id="login" class="panel">
-    <%= link_to t('.lien_retour'),
+    <%= link_to t('structures.index.title'),
                 structures_path(
                   code_postal: params[:code_postal],
                   ville_ou_code_postal: params[:ville_ou_code_postal]

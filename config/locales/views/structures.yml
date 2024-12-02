@@ -63,5 +63,4 @@ fr:
           **Veuillez vérifier les informations saisies avant de valider votre inscription.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
       creer_structure: Valider la création de mon compte
-      lien_retour: Rechercher ma structure
       description_lien_retour: Retour à la recherche de structure

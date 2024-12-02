@@ -4,6 +4,9 @@
     <% content_for :titre do %>
       <%= t('.titre') -%>
     <% end %>
+    <% content_for :sous_titre do %>
+      <%= t('.title') -%>
+    <% end %>
 
     <%= link_to t('.lien_retour'),
                 new_compte_session_path,

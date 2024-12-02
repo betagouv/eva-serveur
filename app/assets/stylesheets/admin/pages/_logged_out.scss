@@ -6,6 +6,28 @@ body.logged_out {
   font-size: .875rem;
   background-color: $eva_light;
 
+  h2 {
+    padding: 0;
+    margin: 0 0 1.125rem;;
+    font-size: 1.125rem;
+    font-family: $font-titre;
+    text-shadow: none;
+    box-shadow: none;
+    color: $grey-50;
+    background: none;
+  }
+
+  h3 {
+    @include titre-carte;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-bottom: 1.25rem;
+    padding: 0;
+    + .description {
+      margin-bottom: 0;
+    }
+  }
+
   #wrapper {
     flex-direction: column;
     display: flex;
@@ -78,30 +100,6 @@ body.logged_out {
       }
       h2 {
         font-size: 1rem;
-      }
-    }
-
-    h2 {
-      padding: 0;
-      margin: 0 0 1.125rem;;
-      font-size: 1.125rem;
-      font-family: $font-titre;
-      text-shadow: none;
-      border-top-left-radius: 0.5rem;
-      border-top-right-radius: 0.5rem;
-      box-shadow: none;
-      color: $grey-50;
-      background: none;
-    }
-
-    h3 {
-      @include titre-carte;
-      font-size: 1.25rem;
-      line-height: 1.5rem;
-      margin-bottom: 1.25rem;
-      padding: 0;
-      + .description {
-        margin-bottom: 0;
       }
     }
 

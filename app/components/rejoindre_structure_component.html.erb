@@ -1,7 +1,7 @@
 <div class="rejoindre-structure">
   <div class="infos" id="<%= @structure.id %>" >
     <h4><%= @structure.nom %></h4>
-    <div class="sous-infos"><strong><%= t('.code_postal') %></strong><%= @structure.code_postal %></div>
+    <p class="sous-infos"><strong><%= t('.code_postal') %></strong><%= @structure.code_postal %></p>
   </div>
   <% if @current_compte.present? %>
     <%= link_to t('.rejoindre_structure'),

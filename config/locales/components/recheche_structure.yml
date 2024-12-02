@@ -4,3 +4,11 @@ fr:
     bouton_recherche_structure: Chercher
     label_champ_recherche: Entrez la localisation de la structure
     placeholder_recherche: Code postal ou ville
+    titre_resultats:
+      zero: ""
+      one: "1 résultat pour %{code_postal}"
+      other: "%{count} résultats pour %{code_postal}"
+    titre_resultats_proches:
+      zero: ""
+      one: Structure à proximité
+      other: Structures à proximité

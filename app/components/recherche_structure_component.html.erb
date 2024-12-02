@@ -10,7 +10,7 @@
 
   <% if @ville_ou_code_postal.present? %>
     <% if @structures_code_postal.present? %>
-      <p class="description-liste-structures mt-4"><%= @structures_code_postal.size %> résultat(s) pour <%= @code_postal %></p>
+      <h3 class="description-liste-structures mt-4"><%= t('.titre_resultats', count: @structures_code_postal.size, code_postal: @code_postal) %></h3>
       <% @structures_code_postal.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
@@ -19,7 +19,7 @@
     <% end %>
 
     <% if @structures.present? %>
-      <p class="description-liste-structures mt-4">Structures à proximité</p>
+      <h3 class="description-liste-structures mt-4"><%= t('.titre_resultats_proches', count: @structures.size) %></h3>
       <% @structures.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>

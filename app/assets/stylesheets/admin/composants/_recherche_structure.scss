@@ -19,8 +19,12 @@
       background-image: image-url('punaise-recherche.svg');
     }
   }
-  .description-liste-structures {
+
+  h3.description-liste-structures {
+    @include texte;
     margin-bottom: 1rem;
     color: $eva_main_blue;
+    font-family: $font-texte;
+    font-weight: normal;
   }
 }

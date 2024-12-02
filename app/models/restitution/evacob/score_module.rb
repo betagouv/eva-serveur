@@ -28,8 +28,8 @@ module Restitution
 
         return if evenements.blank?
 
-        score_max = evenements&.sum(&:score_max_reponse)
-        score = evenements&.sum(&:score_reponse)
+        score_max = evenements&.sum(&:score_max_reponse).to_f
+        score = evenements&.sum(&:score_reponse).to_f
 
         (score / score_max) * 100 if score.present? && score_max.present?
       end

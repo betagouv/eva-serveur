@@ -3,7 +3,7 @@
 ActiveAdmin.register_page 'recherche_structure' do
   menu false
 
-  content title: proc { I18n.t('active_admin.recherche_structure') } do
+  content title: proc { I18n.t('structures.index.title') } do
     render partial: 'recherche_structure'
   end
 

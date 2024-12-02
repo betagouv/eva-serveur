@@ -10,7 +10,6 @@ fr:
         signed_in_but_unconfirmed: ""
         mot_de_passe_faible: Votre mot de passe n'est pas conforme aux nouvelles exigences de sécurité. Un mail de réinitialisation vous a été envoyé, veuillez suivre ses instructions pour définir un nouveau mot de passe. N'hésitez pas à contacter le support si vous rencontrez des difficultés.
   active_admin:
-    recherche_structure: Rechercher ma structure
     import_question: Importer une ou plusieurs questions
     devise:
       sessions:
@@ -28,6 +27,8 @@ fr:
         bienvenue: Bienvenue sur eva
         title: Authentification
         titre: Espace Pro
+        lien_retour: Se connecter
+        description_lien_retour: Retour à la page de connexion
         header_title: Je suis conseiller
         demo:
           action: Démonstration
@@ -49,15 +50,8 @@ fr:
           instruction: Merci de renseigner vos informations.
           description: Nous enverons un email à la personne admininstratrice de votre structure pour qu'elle vous autorise l'accès complet.
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
-          lien_retour: Rechercher ma structure
-          description_lien_retour: Retour à la recherche de structure
       passwords:
-        new:
-          lien_retour: Se connecter
-          description_lien_retour: Retour à la page de connexion
         edit:
-          lien_retour: Se connecter
-          description_lien_retour: Retour à la page de connexion
           consigne: Saisissez et confirmez votre nouveau mot de passe ci-dessous.
           token_invalide: Votre lien de réinitialisation n’est pas valide.
           submit: Valider mon nouveau mot de passe

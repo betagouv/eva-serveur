@@ -17,13 +17,13 @@ describe Restitution::PlaceDuMarche do
               donnees: { succes: true, question: 'N1Prn1', scoreMax: 1, score: 1 },
               partie: partie),
         build(:evenement_reponse,
-              donnees: { succes: true, question: 'N2Q1', score: 0.5, scoreMax: 0.5 },
+              donnees: { succes: true, question: 'N2Pod1', score: 0.5, scoreMax: 0.5 },
               partie: partie),
         build(:evenement_reponse,
-              donnees: { succes: false, question: 'N2Q2', score: 0, scoreMax: 0.5 },
+              donnees: { succes: false, question: 'N2Pod2', score: 0, scoreMax: 0.5 },
               partie: partie),
         build(:evenement_reponse,
-              donnees: { succes: false, scoreMax: 1, question: 'N3Q1' },
+              donnees: { succes: false, scoreMax: 1, question: 'N3Ppo' },
               partie: partie)
       ]
     )
@@ -65,7 +65,7 @@ describe Restitution::PlaceDuMarche do
                                     partie: partie),
                               build(:evenement_reponse,
                                     donnees: { succes: true,
-                                               question: 'N2',
+                                               question: 'N2Pod1',
                                                score: 0.5 },
                                     partie: partie)
                             ])
@@ -100,7 +100,7 @@ describe Restitution::PlaceDuMarche do
                                                                    score: 2 },
                                                         partie: partie),
                               build(:evenement_reponse, donnees: { succes: true,
-                                                                   question: 'N2',
+                                                                   question: 'N2Pod1',
                                                                    score: 0.5 },
                                                         partie: partie)
                             ])

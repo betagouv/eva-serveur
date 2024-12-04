@@ -30,6 +30,7 @@ fr:
       bloc_evaluations:
         titre: Vos dernières évaluations
         voir_tout: 'Voir toutes les évaluations'
+        legende_sr: "Légende : Les pastilles oranges indiquent les"
         legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
         action: Voir

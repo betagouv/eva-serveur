@@ -12,8 +12,25 @@ module Restitution
         'N1Poa' => 'N1Roa',
         'N1Pos' => 'N1Ros',
         'N1Pvn' => nil,
-        'N2' => nil,
-        'N3' => nil
+        'N2Plp' => 'N2Rlp',
+        'N2Ppe' => 'N2Rpe',
+        'N2Psu' => 'N2Rsu',
+        'N2Pom' => 'N2Rom',
+        'N2Pon' => 'N2Ron',
+        'N2Pod' => 'N2Rod',
+        'N2Put' => 'N2Rut',
+        'N2Prh' => 'N2Rrh',
+        'N2Ptg' => 'N2Rtg',
+        'N2Ppl' => 'N2Rpl',
+        'N3Ppl' => 'N3Rpl',
+        'N3Put' => 'N3Rut',
+        'N3Pum' => nil,
+        'N3Pim' => nil,
+        'N3Ppo' => 'N3Rpo',
+        'N3Ppr' => 'N3Rpr',
+        'N3Pps' => 'N3Rps',
+        'N3Pvo' => 'N3Rvo',
+        'N3Prp' => 'N3Rrp'
       }.freeze
 
       def calcule(evenements, nom_module, avec_rattrapage: false)

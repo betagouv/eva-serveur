@@ -245,11 +245,14 @@ describe 'Admin - Evaluation', type: :feature do
           visit admin_evaluation_path(mon_evaluation, format: :pdf)
           # rubocop:disable Lint/Debugger
           path = page.save_page
+          pdf_path = path.sub('.html', '.pdf')
+          File.rename(path, pdf_path) # Renomme l'extension du fichier pour pouvoir l'ouvrir
+          # system("open #{pdf_path}")
           # rubocop:enable Lint/Debugger
 
-          reader = PDF::Reader.new(path)
+          reader = PDF::Reader.new(pdf_path)
           expect(reader.page(1).text).to include('Roger')
-          expect(reader.page(1).text).to include('structure')
+          expect(reader.page(2).text).to include('structure')
         end
       end
     end

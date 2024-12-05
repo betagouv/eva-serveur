@@ -38,6 +38,9 @@
     > li {
       margin-right: 0;
       margin-top: 0.12rem;
+      &:focus-within ul {
+        display: block;
+      }
       &:hover > a,
       &.current > a {
         color: $eva_main_blue;
@@ -56,12 +59,15 @@
         &.current > a {
           background-color: $grey-1000;
         }
-        &:hover > a {
+        &:hover > a, &:focus-within > a {
+          color: $eva_main_blue;
+          border-radius: 0;
           border-top-right-radius: 0.6rem;
           border-top-left-radius: 0.6rem;
           border-bottom: 0.3rem solid $grey-1000;
           background: none;
           background-color: $grey-1000;
+          z-index: 1020;
         }
         .menu_item > a:hover {
           text-decoration: underline;

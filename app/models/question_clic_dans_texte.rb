@@ -3,6 +3,8 @@
 class QuestionClicDansTexte < Question
   QUESTION_TYPE = 'QuestionClicDansTexte'
 
+  enum :metacompetence, Metacompetence::METACOMPETENCES
+
   def as_json(_options = nil)
     json = base_json
     json.merge!(json_audio_fields, additional_json_fields)

@@ -3,8 +3,10 @@
 class QuestionQcm < Question
   QUESTION_TYPE = 'QuestionQcm'
 
-  enum :metacompetence, { numeratie: 0, ccf: 1, 'syntaxe-orthographe': 2 }
+  enum :metacompetence, Metacompetence::METACOMPETENCES
+
   enum :type_qcm, { standard: 0, jauge: 1 }
+
   has_many :choix, lambda {
                      order(position: :asc)
                    }, foreign_key: :question_id,

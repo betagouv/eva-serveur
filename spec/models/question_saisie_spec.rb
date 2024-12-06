@@ -5,6 +5,10 @@ require 'rails_helper'
 describe QuestionSaisie, type: :model do
   it { is_expected.to have_many(:reponses).with_foreign_key(:question_id) }
 
+  it do
+    expect(subject).to define_enum_for(:metacompetence).with_values(Metacompetence::METACOMPETENCES)
+  end
+
   describe '#as_json' do
     let(:question_saisie) do
       create(:question_saisie,

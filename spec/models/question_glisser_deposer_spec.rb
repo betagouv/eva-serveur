@@ -25,6 +25,10 @@ describe QuestionGlisserDeposer, type: :model do
   it { is_expected.to have_many(:reponses).with_foreign_key(:question_id) }
   it { is_expected.to have_one_attached(:zone_depot) }
 
+  it do
+    expect(subject).to define_enum_for(:metacompetence).with_values(Metacompetence::METACOMPETENCES)
+  end
+
   describe '#as_json' do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique

@@ -32,6 +32,8 @@
       padding: 1.5rem;
     }
     .campagne {
+      width: 100%;
+
       table {
         margin-bottom: 1rem;
       }
@@ -111,7 +113,7 @@
           font-weight: 500;
         }
         th {
-          width: 7.875rem;
+          width: auto;
           vertical-align: bottom;
           font-family: $font-texte;
           font-weight: normal;

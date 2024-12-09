@@ -11,15 +11,19 @@ function reinitialiseFormulaire(evaluationId) {
 }
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
-  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
-  $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`).addClass('bouton--actif');
+  fermeQcm(evaluationId);
+  bouton_actif = $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`);
+  bouton_actif.addClass('bouton--actif');
+  bouton_actif.attr('aria-expanded', true);
   $(`#${evaluationId} .carte-liste`).addClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
   $(`#${evaluationId} .questions-${qcm}`).removeClass('hidden');
 }
 
 function fermeQcm(evaluationId) {
-  $(`#${evaluationId} .reponse-mise-en-action`).removeClass('bouton--actif');
+  let boutons_reponses_mise_en_action = $(`#${evaluationId} .reponse-mise-en-action`);
+  boutons_reponses_mise_en_action.removeClass('bouton--actif');
+  boutons_reponses_mise_en_action.attr('aria-expanded', false);
   $(`#${evaluationId} .carte-liste`).removeClass('carte--deroulee');
   $(`#${evaluationId} .qcm`).addClass('hidden');
   reinitialiseFormulaire(evaluationId);

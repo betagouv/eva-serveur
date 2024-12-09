@@ -25,4 +25,10 @@ class Metacompetence
   METACOMPETENCES_NUMERATIE = CORRESPONDANCES_CODECLEA.values.flatten
 
   METACOMPETENCES = (METACOMPETENCES_BASE + METACOMPETENCES_NUMERATIE).freeze
+
+  def self.code_clea(metacompetence)
+    CORRESPONDANCES_CODECLEA.find do |_, metacompetences|
+      metacompetences.include?(metacompetence)
+    end&.first
+  end
 end

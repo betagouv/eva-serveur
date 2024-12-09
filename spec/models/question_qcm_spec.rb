@@ -31,7 +31,7 @@ RSpec.describe QuestionQcm, type: :model do
       expect(json.keys)
         .to match_array(%w[choix description id intitule audio_url nom_technique type metacompetence
                            type_qcm illustration modalite_reponse consigne_audio
-                           demarrage_audio_modalite_reponse])
+                           demarrage_audio_modalite_reponse score])
       expect(json['type']).to eql('qcm')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(

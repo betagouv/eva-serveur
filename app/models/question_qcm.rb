@@ -35,7 +35,7 @@ class QuestionQcm < Question
 
   def base_json
     slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
-          :demarrage_audio_modalite_reponse, :illustration).tap do |json|
+          :demarrage_audio_modalite_reponse, :illustration, :score, :metacompetence).tap do |json|
       json['type'] = 'qcm'
       json['illustration'] = cdn_for(illustration)
     end

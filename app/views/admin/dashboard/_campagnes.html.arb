@@ -7,7 +7,7 @@ div class: 'bloc-apercu' do
   end
 
   div class: 'campagnes-liste' do
-    div class: 'liste-entete' do
+    div class: 'liste-entete', aria: { hidden: true } do
       span class: 'entete-libelle' do
         text_node t('.entete-libelle')
       end
@@ -21,14 +21,18 @@ div class: 'bloc-apercu' do
     campagnes.each do |campagne|
       url = url_campagne(campagne.code)
       div class: 'campagne' do
-        text_node link_to campagne.libelle, admin_campagne_path(campagne), class: 'campagne-libelle'
-        text_node link_to campagne.code, admin_campagne_path(campagne), class: 'campagne-code'
+        text_node link_to campagne.libelle, admin_campagne_path(campagne),
+                          class: 'campagne-libelle', id: campagne.id
+        span campagne.code, class: 'campagne-code',
+                            aria: { label: "#{t('.entete-code')} : #{campagne.code}" }
         span class: 'campagne-url' do
           a url, href: url, target: '_blank'
           button "Copier l'URL", class: 'bouton-secondaire petit-bouton copier-coller',
-                                 'data-clipboard-text': url
+                                 'data-clipboard-text': url,
+                                 aria: { describedby: campagne.id }
           text_node link_to 'Jouer', url, class: 'bouton-secondaire petit-bouton',
-                                          target: '_blank', rel: 'noopener'
+                                          target: '_blank', rel: 'noopener',
+                                          aria: { describedby: campagne.id }
         end
       end
     end

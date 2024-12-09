@@ -96,7 +96,7 @@ describe Restitution::ExportPositionnement do
                partie: partie,
                donnees: { question: 'LOdi1',
                           reponse: 'drapeau',
-                          reponseIntitule: nil,
+                          reponseIntitule: "c'est un drapeau",
                           score: 0,
                           scoreMax: 2,
                           intitule: 'De quoi s’agit-il ?',
@@ -131,7 +131,7 @@ describe Restitution::ExportPositionnement do
         expect(ligne[4]).to eq('De quoi s’agit-il ?')
         expect(ligne[5]).to eq('drapeau | couverture | autre')
         expect(ligne[6]).to eq('couverture')
-        expect(ligne[7]).to eq('drapeau')
+        expect(ligne[7]).to eq("c'est un drapeau")
         expect(ligne[8]).to eq('0')
         expect(ligne[9]).to eq('2')
       end

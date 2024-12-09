@@ -6,7 +6,10 @@
   <div class='px-3'>
     <div class='d-flex align-items-center question'>
       <%= image_tag 'point_interrogation.svg', class: 'mr-3', alt: '' %>
-      <div><%= md(t('.question')) %></div>
+      <div>
+        <%= md(t('.introduction')) %>
+        <span id="question-diagnostics"><%= md(t('.question')) %></span>
+      </div>
     </div>
     <div class='liste'>
       <% evaluations.each_with_index do |evaluation, index| %>

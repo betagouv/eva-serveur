@@ -103,7 +103,7 @@ module Restitution
                                  donnees['metacompetence']&.humanize,
                                  question&.interaction,
                                  donnees['intitule']])
-      remplis_choix(ligne, donnees['reponse'], question)
+      remplis_choix(ligne, donnees, question)
       remplis_score(ligne, donnees)
     end
 
@@ -112,10 +112,10 @@ module Restitution
       @sheet[ligne, 9] = evenement['scoreMax'].to_s
     end
 
-    def remplis_choix(ligne, intitule, question)
+    def remplis_choix(ligne, donnees, question)
       @sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
       @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
-      @sheet[ligne, 7] = intitule
+      @sheet[ligne, 7] = donnees['reponseIntitule'] || donnees['reponse']
     end
   end
 end

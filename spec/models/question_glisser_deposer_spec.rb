@@ -31,7 +31,7 @@ describe QuestionGlisserDeposer, type: :model do
 
   describe '#as_json' do
     it 'serialise les champs' do
-      expect(json.keys).to match_array(%w[id intitule audio_url nom_technique
+      expect(json.keys).to match_array(%w[id intitule audio_url nom_technique score metacompetence
                                           description illustration modalite_reponse type
                                           reponsesNonClassees zone_depot_url consigne_audio
                                           intitule_audio demarrage_audio_modalite_reponse])

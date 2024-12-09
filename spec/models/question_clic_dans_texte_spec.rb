@@ -21,7 +21,7 @@ describe QuestionClicDansTexte, type: :model do
     it 'serialise les champs' do
       expect(json.keys).to match_array(%w[id nom_technique audio_url description texte_cliquable
                                           illustration intitule_audio reponse type intitule
-                                          modalite_reponse consigne_audio
+                                          modalite_reponse consigne_audio score metacompetence
                                           demarrage_audio_modalite_reponse])
       expect(json['type']).to eql('clic-sur-mots')
       expect(json['texte_cliquable']).to eql(contenu)

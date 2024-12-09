@@ -49,9 +49,10 @@ fr:
         avec_evaluations:
           titre: Diagnostics d’illettrisme potentiel
           action: "Voir tout"
-          question: |
+          introduction: |
             Au sein de votre structure, ces personnes semblent avoir  
-            besoin d’accompagnement.  
+            besoin d’accompagnement.
+          question: |
             **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
       campagnes:
         titre: Vos campagnes

@@ -11,6 +11,9 @@ class Evenement < ApplicationRecord
   acts_as_paranoid
 
   scope :reponses, -> { where(nom: 'reponse') }
+  scope :questions_repondues, lambda {
+    reponses.select("donnees->>'question' AS question").map(&:question)
+  }
 
   def fin_situation?
     nom == 'finSituation'

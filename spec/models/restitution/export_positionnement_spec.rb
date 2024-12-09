@@ -69,39 +69,6 @@ describe Restitution::ExportPositionnement do
     end
   end
 
-  describe '#content_type_xls' do
-    it { expect(response_service.content_type_xls).to eq 'application/vnd.ms-excel' }
-  end
-
-  describe '#nom_du_fichier' do
-    it "genere le nom du fichier en fonction de l'évaluation" do
-      code_de_campagne = partie.evaluation.campagne.code.parameterize
-      nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)
-      date = DateTime.current.strftime('%Y%m%d')
-      nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
-
-      expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
-    end
-  end
-
-  describe '#regroupe_par_code_clea' do
-    it 'trie les evenements par code clea' do
-      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
-      evenement1 = create :evenement_reponse, partie: partie,
-                                              donnees: { metacompetence: 'perimetres' }
-      evenement2 = create :evenement_reponse, partie: partie,
-                                              donnees: { metacompetence: 'estimation' }
-
-      results = {
-        '2.1.4' => [evenement2],
-        '2.3.7' => [evenement1],
-        nil => [evenement3]
-      }
-
-      expect(response_service.regroupe_par_code_clea(Evenement.all)).to eq(results)
-    end
-  end
-
   describe 'pour un export numératie' do
     let(:situation) { create(:situation_place_du_marche) }
     let!(:partie) { create :partie, situation: situation }
@@ -144,11 +111,15 @@ describe Restitution::ExportPositionnement do
                partie: partie,
                donnees: { question: 'LOdi3',
                           metacompetence: 'lecture_plan' }
+        partie.situation.update(questionnaire: create(:questionnaire))
+        question = create(:question_qcm, nom_technique: 'LOdi4',
+                                         metacompetence: :renseigner_horaires, score: 1)
+        partie.situation.questionnaire.questions << question
       end
 
       it 'verifie le pourcentage de réussite' do
         ligne = worksheet.row(1)
-        expect(ligne[0]).to eq('2.3.3 - score: 25%')
+        expect(ligne[0]).to eq('2.3.3 - score: 20%')
       end
 
       it 'verifie les détails de la première question' do
@@ -161,17 +132,114 @@ describe Restitution::ExportPositionnement do
         expect(ligne[5]).to eq('drapeau | couverture | autre')
         expect(ligne[6]).to eq('couverture')
         expect(ligne[7]).to eq('drapeau')
-        expect(ligne[8]).to eq(0)
-        expect(ligne[9]).to eq(2)
+        expect(ligne[8]).to eq('0')
+        expect(ligne[9]).to eq('2')
+      end
+
+      it 'verifie les autres questions du même groupe' do
+        ligne = worksheet.row(3)
+        expect(ligne[1]).to eq('LOdi2')
+        ligne = worksheet.row(4)
+        expect(ligne[1]).to eq('LOdi4')
       end
 
       it 'verifie les détails du groupe cléa suivant' do
-        ligne = worksheet.row(4)
-        expect(ligne[0]).to eq('2.4.1 - score: non applicable')
         ligne = worksheet.row(5)
+        expect(ligne[0]).to eq('2.4.1 - score: non applicable')
+        ligne = worksheet.row(6)
         expect(ligne[0]).to eq('2.4.1')
         expect(ligne[1]).to eq('LOdi3')
       end
+    end
+  end
+
+  describe '#content_type_xls' do
+    it { expect(response_service.content_type_xls).to eq 'application/vnd.ms-excel' }
+  end
+
+  describe '#nom_du_fichier' do
+    it "genere le nom du fichier en fonction de l'évaluation" do
+      code_de_campagne = partie.evaluation.campagne.code.parameterize
+      nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)
+      date = DateTime.current.strftime('%Y%m%d')
+      nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
+
+      expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
+    end
+  end
+
+  describe '#regroupe_par_code_clea' do
+    it 'trie les evenements par code clea' do
+      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
+      evenement1 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'perimetres' }
+      evenement2 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'estimation' }
+
+      results = {
+        '2.1.4' => [evenement2.donnees],
+        '2.3.7' => [evenement1.donnees],
+        nil => [evenement3.donnees]
+      }
+
+      expect(response_service.regroupe_par_code_clea).to eq(results)
+    end
+
+    describe 'quand il y a des questions non répondues' do
+      let(:question1) { create(:question_qcm, nom_technique: 'LOdi3', metacompetence: :surfaces) }
+      let(:question2) { create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation) }
+
+      it 'trie les evenements et les questions non répondues par code clea' do
+        partie.situation.update(questionnaire: create(:questionnaire))
+        partie.situation.questionnaire.questions << question1
+        evenement1 = create :evenement_reponse,
+                            partie: partie,
+                            donnees: { question: 'LOdi1', metacompetence: :surfaces }
+        evenement2 = create :evenement_reponse,
+                            partie: partie,
+                            donnees: { question: 'LOdi2', metacompetence: :estimation }
+
+        service = response_service.regroupe_par_code_clea
+
+        expect(service['2.1.4']).to eq([evenement2.donnees])
+        expect(service['2.3.7'][0]).to eq(evenement1.donnees)
+        expect(service['2.3.7'][1]['question']).to eq(question1.nom_technique)
+        expect(service['2.3.7'][1]['scoreMax']).to eq(question1.score)
+      end
+    end
+  end
+
+  describe '#questions_non_repondues' do
+    let!(:question_consigne) { create(:question_sous_consigne, nom_technique: 'N1Pse1') }
+    let!(:question_rattrapage) { create(:question_qcm, nom_technique: 'N1Rse1') }
+    let!(:question_deja_repondue) { create(:question_qcm, nom_technique: 'N2Poa1') }
+    let!(:question_non_repondue) { create(:question_qcm, nom_technique: 'N2Poa2') }
+
+    before do
+      partie.situation.update(questionnaire: create(:questionnaire))
+    end
+
+    it 'renvoie les questions non répondues' do
+      partie.situation.questionnaire.questions << question_non_repondue
+      expect(response_service.questions_non_repondues).to eq([question_non_repondue])
+    end
+
+    it 'exclut les sous consignes' do
+      partie.situation.questionnaire.questions << question_consigne
+      expect(response_service.questions_non_repondues).to eq([])
+    end
+
+    it 'exclut les questions de rattrapage' do
+      partie.situation.questionnaire.questions << question_rattrapage
+      expect(response_service.questions_non_repondues).to eq([])
+    end
+
+    it 'exclut les questions déjà répondues' do
+      partie.situation.questionnaire.questions << question_deja_repondue
+      create :evenement_reponse,
+             partie: partie,
+             donnees: { question: 'N2Poa1' }
+      expect(response_service.questions_non_repondues).to eq([])
     end
   end
 end

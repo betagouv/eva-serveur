@@ -100,30 +100,43 @@ describe Restitution::Positionnement::Export do
                           score: 0,
                           scoreMax: 2,
                           intitule: 'De quoi s’agit-il ?',
-                          metacompetence: 'renseigner_horaires' }
+                          metacompetence: :renseigner_horaires }
         create :evenement_reponse,
                partie: partie,
                donnees: { question: 'LOdi2',
                           score: 1,
                           scoreMax: 2,
-                          metacompetence: 'renseigner_horaires' }
+                          metacompetence: :renseigner_horaires }
         create :evenement_reponse,
                partie: partie,
                donnees: { question: 'LOdi3',
-                          metacompetence: 'lecture_plan' }
+                          metacompetence: 'tableaux_graphiques',
+                          scoreMax: 1,
+                          score: 1 }
         partie.situation.update(questionnaire: create(:questionnaire))
         question = create(:question_qcm, nom_technique: 'LOdi4',
                                          metacompetence: :renseigner_horaires, score: 1)
+        create :evenement_reponse,
+               partie: partie,
+               donnees: { question: 'LOdi5',
+                          metacompetence: 'situation_dans_lespace' }
         partie.situation.questionnaire.questions << question
       end
 
-      it 'verifie le pourcentage de réussite' do
+      it 'vérifie la première ligne avec le code cléa du sous domaine et le % de réussite' do
         ligne = worksheet.row(1)
+        expect(ligne[0]).to eq(
+          '2.3 - Lire et calculer les unités de mesures, de temps et des quantités - score: 33%'
+        )
+      end
+
+      it 'verifie la deuxième ligne avec le code cléa du sous sous domaine et le % de réussite' do
+        ligne = worksheet.row(2)
         expect(ligne[0]).to eq('2.3.3 - score: 20%')
       end
 
       it 'verifie les détails de la première question' do
-        ligne = worksheet.row(2)
+        ligne = worksheet.row(3)
         expect(ligne[0]).to eq('2.3.3')
         expect(ligne[1]).to eq('LOdi1')
         expect(ligne[2]).to eq('Renseigner horaires')
@@ -136,19 +149,33 @@ describe Restitution::Positionnement::Export do
         expect(ligne[9]).to eq('2')
       end
 
-      it 'verifie les autres questions du même groupe' do
-        ligne = worksheet.row(3)
-        expect(ligne[1]).to eq('LOdi2')
+      it 'verifie les autres questions du même sous sous domaine' do
         ligne = worksheet.row(4)
+        expect(ligne[0]).to eq('2.3.3')
+        expect(ligne[1]).to eq('LOdi2')
+        ligne = worksheet.row(5)
+        expect(ligne[0]).to eq('2.3.3')
         expect(ligne[1]).to eq('LOdi4')
       end
 
-      it 'verifie les détails du groupe cléa suivant' do
-        ligne = worksheet.row(5)
-        expect(ligne[0]).to eq('2.4.1 - score: non applicable')
+      it 'verifie le sous sous domaine suivant' do
         ligne = worksheet.row(6)
-        expect(ligne[0]).to eq('2.4.1')
+        expect(ligne[0]).to eq('2.3.5 - score: 100%')
+        ligne = worksheet.row(7)
+        expect(ligne[0]).to eq('2.3.5')
         expect(ligne[1]).to eq('LOdi3')
+      end
+
+      it "verifie le sous domaine suivant quand la réponse n'a pas de score" do
+        ligne = worksheet.row(8)
+        expect(ligne[0]).to eq(
+          '2.5 - Restituer oralement un raisonnement mathématique - score: non applicable'
+        )
+        ligne = worksheet.row(9)
+        expect(ligne[0]).to eq('2.5.3 - score: non applicable')
+        ligne = worksheet.row(10)
+        expect(ligne[0]).to eq('2.5.3')
+        expect(ligne[1]).to eq('LOdi5')
       end
     end
   end

@@ -16,4 +16,17 @@ describe Metacompetence, type: :model do
   it 'retourne toutes les métacompétences' do
     expect(Metacompetence::METACOMPETENCES).to eq(metacompetences)
   end
+
+  it "retourne le code cléa du sous domaine d'une métacompétence" do
+    expect(described_class.new('operations_addition').code_clea_sous_domaine).to eq('2.1')
+  end
+
+  it "retourne le code cléa du sous sous domaine d'une métacompétence" do
+    expect(described_class.new('operations_addition').code_clea_sous_sous_domaine).to eq('2.1.1')
+  end
+
+  it 'retourne nil si le code clea n\'est pas trouvé' do
+    expect(described_class.new('toto').code_clea_sous_sous_domaine).to be_nil
+    expect(described_class.new('toto').code_clea_sous_domaine).to be_nil
+  end
 end

@@ -26,22 +26,4 @@ describe Evenement, type: :model do
       expect(evenement.fin_situation?).to be false
     end
   end
-
-  describe '#code_clea' do
-    let(:evenement) { described_class.new }
-
-    it 'retourne le code clea de l\'evenement' do
-      evenement.donnees = { 'metacompetence' => 'operations_addition' }
-      expect(evenement.code_clea).to eq '2.1.1'
-    end
-
-    it 'retourne nil si le code clea n\'est pas trouvé' do
-      evenement.donnees = { 'metacompetence' => 'lecture' }
-      expect(evenement.code_clea).to be_nil
-    end
-
-    it "retourne nil si il n'y a pas de metacompétence associé" do
-      expect(evenement.code_clea).to be_nil
-    end
-  end
 end

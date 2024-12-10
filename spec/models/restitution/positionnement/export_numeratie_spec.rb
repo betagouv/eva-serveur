@@ -11,21 +11,23 @@ describe Restitution::Positionnement::ExportNumeratie do
   let(:spreadsheet) { Spreadsheet::Workbook.new }
   let(:worksheet) { spreadsheet.worksheet(0) }
 
-  describe '#regroupe_par_code_clea' do
-    it 'trie les evenements par code clea' do
-      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
+  describe '#regroupe_par_codes_clea' do
+    it 'trie les evenements par codes clea' do
       evenement1 = create :evenement_reponse, partie: partie,
                                               donnees: { metacompetence: 'perimetres' }
       evenement2 = create :evenement_reponse, partie: partie,
                                               donnees: { metacompetence: 'estimation' }
 
       results = {
-        '2.1.4' => [evenement2.donnees],
-        '2.3.7' => [evenement1.donnees],
-        nil => [evenement3.donnees]
+        '2.1' => {
+          '2.1.4' => [evenement2.donnees]
+        },
+        '2.3' => {
+          '2.3.7' => [evenement1.donnees]
+        }
       }
 
-      expect(response_service.regroupe_par_code_clea).to eq(results)
+      expect(response_service.regroupe_par_codes_clea).to eq(results)
     end
 
     describe 'quand il y a des questions non répondues' do
@@ -42,12 +44,12 @@ describe Restitution::Positionnement::ExportNumeratie do
                             partie: partie,
                             donnees: { question: 'LOdi2', metacompetence: :estimation }
 
-        service = response_service.regroupe_par_code_clea
+        service = response_service.regroupe_par_codes_clea
 
-        expect(service['2.1.4']).to eq([evenement2.donnees])
-        expect(service['2.3.7'][0]).to eq(evenement1.donnees)
-        expect(service['2.3.7'][1]['question']).to eq(question1.nom_technique)
-        expect(service['2.3.7'][1]['scoreMax']).to eq(question1.score)
+        expect(service['2.1']['2.1.4']).to eq([evenement2.donnees])
+        expect(service['2.3']['2.3.7'][0]).to eq(evenement1.donnees)
+        expect(service['2.3']['2.3.7'][1]['question']).to eq(question1.nom_technique)
+        expect(service['2.3']['2.3.7'][1]['scoreMax']).to eq(question1.score)
       end
     end
   end

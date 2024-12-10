@@ -22,13 +22,4 @@ class Evenement < ApplicationRecord
   def reponse_intitule
     donnees['reponseIntitule'].presence || donnees['reponse']
   end
-
-  def code_clea
-    metacompetence = donnees['metacompetence']
-    return if metacompetence.blank?
-
-    Metacompetence::CORRESPONDANCES_CODECLEA.find do |_, metacompetences|
-      metacompetences.include?(metacompetence)
-    end&.first
-  end
 end

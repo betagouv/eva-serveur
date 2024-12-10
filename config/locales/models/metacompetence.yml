@@ -1,0 +1,9 @@
+fr:
+  activerecord:
+    metacompetence:
+      codes_clea:
+        "2_1": Se repérer dans l'univers des nombres
+        "2_2": Résoudre un problème mettant en jeu une ou plusieurs opérations
+        "2_3": Lire et calculer les unités de mesures, de temps et des quantités
+        "2_4": Se repérer dans l'espace
+        "2_5": Restituer oralement un raisonnement mathématique

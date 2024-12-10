@@ -32,11 +32,11 @@ class Metacompetence
   }.freeze
 
   CODECLEA_INTITULES = {
-    '2.1' => "Se repérer dans l'univers des nombres",
-    '2.2' => 'Résoudre un problème mettant en jeu une ou plusieurs opérations',
-    '2.3' => 'Lire et calculer les unités de mesures, de temps et des quantités',
-    '2.4' => "Se repérer dans l'espace",
-    '2.5' => 'Restituer oralement un raisonnement mathématique'
+    '2.1' => I18n.t('activerecord.metacompetence.codes_clea.2_1'),
+    '2.2' => I18n.t('activerecord.metacompetence.codes_clea.2_2'),
+    '2.3' => I18n.t('activerecord.metacompetence.codes_clea.2_3'),
+    '2.4' => I18n.t('activerecord.metacompetence.codes_clea.2_4'),
+    '2.5' => I18n.t('activerecord.metacompetence.codes_clea.2_5')
   }.freeze
 
   METACOMPETENCES_BASE = %w[numeratie ccf syntaxe-orthographe].freeze

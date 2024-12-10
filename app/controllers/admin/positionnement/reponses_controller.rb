@@ -8,7 +8,7 @@ module Admin
       def show
         redirect_to(root_path) and return unless can_read_partie?
 
-        export = ::Restitution::ExportPositionnement.new(partie: @partie)
+        export = ::Restitution::Positionnement::Export.new(partie: @partie)
         send_data export.to_xls,
                   content_type: export.content_type_xls,
                   filename: export.nom_du_fichier

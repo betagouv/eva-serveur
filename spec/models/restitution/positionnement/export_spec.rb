@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Restitution::ExportPositionnement do
+describe Restitution::Positionnement::Export do
   subject(:response_service) do
     described_class.new(partie: partie)
   end
@@ -153,10 +153,6 @@ describe Restitution::ExportPositionnement do
     end
   end
 
-  describe '#content_type_xls' do
-    it { expect(response_service.content_type_xls).to eq 'application/vnd.ms-excel' }
-  end
-
   describe '#nom_du_fichier' do
     it "genere le nom du fichier en fonction de l'évaluation" do
       code_de_campagne = partie.evaluation.campagne.code.parameterize
@@ -165,81 +161,6 @@ describe Restitution::ExportPositionnement do
       nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
 
       expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
-    end
-  end
-
-  describe '#regroupe_par_code_clea' do
-    it 'trie les evenements par code clea' do
-      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
-      evenement1 = create :evenement_reponse, partie: partie,
-                                              donnees: { metacompetence: 'perimetres' }
-      evenement2 = create :evenement_reponse, partie: partie,
-                                              donnees: { metacompetence: 'estimation' }
-
-      results = {
-        '2.1.4' => [evenement2.donnees],
-        '2.3.7' => [evenement1.donnees],
-        nil => [evenement3.donnees]
-      }
-
-      expect(response_service.regroupe_par_code_clea).to eq(results)
-    end
-
-    describe 'quand il y a des questions non répondues' do
-      let(:question1) { create(:question_qcm, nom_technique: 'LOdi3', metacompetence: :surfaces) }
-      let(:question2) { create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation) }
-
-      it 'trie les evenements et les questions non répondues par code clea' do
-        partie.situation.update(questionnaire: create(:questionnaire))
-        partie.situation.questionnaire.questions << question1
-        evenement1 = create :evenement_reponse,
-                            partie: partie,
-                            donnees: { question: 'LOdi1', metacompetence: :surfaces }
-        evenement2 = create :evenement_reponse,
-                            partie: partie,
-                            donnees: { question: 'LOdi2', metacompetence: :estimation }
-
-        service = response_service.regroupe_par_code_clea
-
-        expect(service['2.1.4']).to eq([evenement2.donnees])
-        expect(service['2.3.7'][0]).to eq(evenement1.donnees)
-        expect(service['2.3.7'][1]['question']).to eq(question1.nom_technique)
-        expect(service['2.3.7'][1]['scoreMax']).to eq(question1.score)
-      end
-    end
-  end
-
-  describe '#questions_non_repondues' do
-    let!(:question_consigne) { create(:question_sous_consigne, nom_technique: 'N1Pse1') }
-    let!(:question_rattrapage) { create(:question_qcm, nom_technique: 'N1Rse1') }
-    let!(:question_deja_repondue) { create(:question_qcm, nom_technique: 'N2Poa1') }
-    let!(:question_non_repondue) { create(:question_qcm, nom_technique: 'N2Poa2') }
-
-    before do
-      partie.situation.update(questionnaire: create(:questionnaire))
-    end
-
-    it 'renvoie les questions non répondues' do
-      partie.situation.questionnaire.questions << question_non_repondue
-      expect(response_service.questions_non_repondues).to eq([question_non_repondue])
-    end
-
-    it 'exclut les sous consignes' do
-      partie.situation.questionnaire.questions << question_consigne
-      expect(response_service.questions_non_repondues).to eq([])
-    end
-
-    it 'exclut les questions de rattrapage' do
-      partie.situation.questionnaire.questions << question_rattrapage
-      expect(response_service.questions_non_repondues).to eq([])
-    end
-
-    it 'exclut les questions déjà répondues' do
-      partie.situation.questionnaire.questions << question_deja_repondue
-      create :evenement_reponse,
-             partie: partie,
-             donnees: { question: 'N2Poa1' }
-      expect(response_service.questions_non_repondues).to eq([])
     end
   end
 end

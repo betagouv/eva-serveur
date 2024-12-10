@@ -1,0 +1,88 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+describe Restitution::Positionnement::ExportNumeratie do
+  subject(:response_service) do
+    described_class.new(partie, worksheet)
+  end
+
+  let(:partie) { create :partie }
+  let(:spreadsheet) { Spreadsheet::Workbook.new }
+  let(:worksheet) { spreadsheet.worksheet(0) }
+
+  describe '#regroupe_par_code_clea' do
+    it 'trie les evenements par code clea' do
+      evenement3 = create :evenement_reponse, partie: partie, donnees: { metacompetence: 'LOdi3' }
+      evenement1 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'perimetres' }
+      evenement2 = create :evenement_reponse, partie: partie,
+                                              donnees: { metacompetence: 'estimation' }
+
+      results = {
+        '2.1.4' => [evenement2.donnees],
+        '2.3.7' => [evenement1.donnees],
+        nil => [evenement3.donnees]
+      }
+
+      expect(response_service.regroupe_par_code_clea).to eq(results)
+    end
+
+    describe 'quand il y a des questions non répondues' do
+      let(:question1) { create(:question_qcm, nom_technique: 'LOdi3', metacompetence: :surfaces) }
+      let(:question2) { create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation) }
+
+      it 'trie les evenements et les questions non répondues par code clea' do
+        partie.situation.update(questionnaire: create(:questionnaire))
+        partie.situation.questionnaire.questions << question1
+        evenement1 = create :evenement_reponse,
+                            partie: partie,
+                            donnees: { question: 'LOdi1', metacompetence: :surfaces }
+        evenement2 = create :evenement_reponse,
+                            partie: partie,
+                            donnees: { question: 'LOdi2', metacompetence: :estimation }
+
+        service = response_service.regroupe_par_code_clea
+
+        expect(service['2.1.4']).to eq([evenement2.donnees])
+        expect(service['2.3.7'][0]).to eq(evenement1.donnees)
+        expect(service['2.3.7'][1]['question']).to eq(question1.nom_technique)
+        expect(service['2.3.7'][1]['scoreMax']).to eq(question1.score)
+      end
+    end
+  end
+
+  describe '#questions_non_repondues' do
+    let!(:question_consigne) { create(:question_sous_consigne, nom_technique: 'N1Pse1') }
+    let!(:question_rattrapage) { create(:question_qcm, nom_technique: 'N1Rse1') }
+    let!(:question_deja_repondue) { create(:question_qcm, nom_technique: 'N2Poa1') }
+    let!(:question_non_repondue) { create(:question_qcm, nom_technique: 'N2Poa2') }
+
+    before do
+      partie.situation.update(questionnaire: create(:questionnaire))
+    end
+
+    it 'renvoie les questions non répondues' do
+      partie.situation.questionnaire.questions << question_non_repondue
+      expect(response_service.questions_non_repondues).to eq([question_non_repondue])
+    end
+
+    it 'exclut les sous consignes' do
+      partie.situation.questionnaire.questions << question_consigne
+      expect(response_service.questions_non_repondues).to eq([])
+    end
+
+    it 'exclut les questions de rattrapage' do
+      partie.situation.questionnaire.questions << question_rattrapage
+      expect(response_service.questions_non_repondues).to eq([])
+    end
+
+    it 'exclut les questions déjà répondues' do
+      partie.situation.questionnaire.questions << question_deja_repondue
+      create :evenement_reponse,
+             partie: partie,
+             donnees: { question: 'N2Poa1' }
+      expect(response_service.questions_non_repondues).to eq([])
+    end
+  end
+end

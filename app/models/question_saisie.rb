@@ -10,6 +10,8 @@ class QuestionSaisie < Question
   has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
+  before_save :parametre_prix_avec_centimes, if: -> { type_saisie == 'prix_avec_centimes' }
+
   def as_json(_options = nil)
     json = base_json
     json.merge!(json_audio_fields, additional_json_fields)
@@ -17,6 +19,11 @@ class QuestionSaisie < Question
 
   def bonnes_reponses
     reponses.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
+  end
+
+  def parametre_prix_avec_centimes
+    self.reponse_placeholder = '0,00' if reponse_placeholder.blank?
+    self.suffix_reponse = '€' if suffix_reponse.blank?
   end
 
   private
@@ -36,7 +43,8 @@ class QuestionSaisie < Question
       'placeholder' => reponse_placeholder,
       'description' => description,
       'texte_a_trous' => texte_a_trous,
-      'aide' => aide
+      'aide' => aide,
+      'max_length' => type_saisie == 'prix_avec_centimes' ? 6 : nil
     }
   end
 

@@ -40,7 +40,7 @@ describe QuestionSaisie, type: :model do
                                           description illustration modalite_reponse type sous_type
                                           placeholder reponses texte_a_trous consigne_audio
                                           demarrage_audio_modalite_reponse aide score
-                                          metacompetence])
+                                          metacompetence max_length])
       expect(json['type']).to eql('saisie')
       expect(json['sous_type']).to eql('texte')
       expect(json['placeholder']).to eql('écrivez ici')
@@ -67,6 +67,39 @@ describe QuestionSaisie, type: :model do
     describe '#bonnes_reponses' do
       it 'retourne les bonnes réponses' do
         expect(question_saisie.bonnes_reponses).to eql('bon choix | bon choix')
+      end
+    end
+  end
+
+  describe '#parametre_prix_avec_centimes' do
+    context 'sans reponse_placeholder et suffix_reponse spécifiés' do
+      let(:question_saisie) { create(:question_saisie, type_saisie: 'prix_avec_centimes') }
+
+      it 'paramétre les champs par défaut' do
+        question_saisie.parametre_prix_avec_centimes
+        expect(question_saisie.reponse_placeholder).to eql('0,00')
+        expect(question_saisie.suffix_reponse).to eql('€')
+      end
+    end
+
+    context 'avec reponse_placeholder et suffix_reponse spécifiés' do
+      let(:question_saisie) do
+        create(:question_saisie, type_saisie: 'prix_avec_centimes', reponse_placeholder: '1.000',
+                                 suffix_reponse: '$')
+      end
+
+      it 'ne met pas à jour les champs si ils sont déjà renseignés' do
+        expect(question_saisie.reponse_placeholder).to eql('1.000')
+        expect(question_saisie.suffix_reponse).to eql('$')
+      end
+    end
+
+    context 'quand le type de saisie n est pas prix_avec_centimes' do
+      let(:question_saisie) { create(:question_saisie, type_saisie: 'texte') }
+
+      it 'ne met pas à jour les champs' do
+        expect(question_saisie.reponse_placeholder).to be_nil
+        expect(question_saisie.suffix_reponse).to be_nil
       end
     end
   end

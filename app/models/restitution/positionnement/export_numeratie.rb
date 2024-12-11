@@ -10,15 +10,8 @@ module Restitution
       end
 
       def regroupe_par_codes_clea
-        questions_classees = questions_repondues_et_non_repondues.group_by do |e|
-          Metacompetence.new(e['metacompetence']).code_clea_sous_domaine
-        end
-
-        questions_classees.transform_values do |groupes|
-          groupes.group_by do |e|
-            Metacompetence.new(e['metacompetence']).code_clea_sous_sous_domaine
-          end
-        end
+        groupes_clea = regroupe_par_sous_domaine
+        regroupe_par_sous_sous_domaine(groupes_clea)
       end
 
       def questions_non_repondues
@@ -31,20 +24,38 @@ module Restitution
         end
       end
 
-      def questions_repondues_et_non_repondues
-        non_repondues = questions_non_repondues.map(&:as_json).each do |q|
-          q['scoreMax'] = q.delete('score')
-          q['question'] = q.delete('nom_technique')
-        end
-        @evenements_reponses.map(&:donnees) + non_repondues
-      end
-
       def remplis_reponses(ligne, reponses)
         reponses.each do |reponse|
           question = Question.find_by(nom_technique: reponse['question'])
           ligne = remplis_ligne(ligne, reponse, question)
         end
         ligne
+      end
+
+      private
+
+      def regroupe_par_sous_domaine
+        groupes_clea = questions_repondues_et_non_repondues.group_by do |e|
+          Metacompetence.new(e['metacompetence']).code_clea_sous_domaine
+        end
+        tri_par_ordre_croissant(groupes_clea)
+      end
+
+      def regroupe_par_sous_sous_domaine(groupes_clea)
+        groupes_clea.transform_values do |groupes|
+          sous_groupes_clea = groupes.group_by do |e|
+            Metacompetence.new(e['metacompetence']).code_clea_sous_sous_domaine
+          end
+          tri_par_ordre_croissant(sous_groupes_clea)
+        end
+      end
+
+      def questions_repondues_et_non_repondues
+        non_repondues = questions_non_repondues.map(&:as_json).each do |q|
+          q['scoreMax'] = q.delete('score')
+          q['question'] = q.delete('nom_technique')
+        end
+        @evenements_reponses.map(&:donnees) + non_repondues
       end
 
       def remplis_ligne(ligne, donnees, question)
@@ -72,6 +83,10 @@ module Restitution
 
       def question_rattrapage(nom_technique)
         nom_technique.start_with?('N1R', 'N2R', 'N3R')
+      end
+
+      def tri_par_ordre_croissant(groupes_clea)
+        groupes_clea.sort_by { |code, _| code.to_s }.to_h
       end
     end
   end

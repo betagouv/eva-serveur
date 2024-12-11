@@ -31,25 +31,40 @@ describe Restitution::Positionnement::ExportNumeratie do
     end
 
     describe 'quand il y a des questions non répondues' do
-      let(:question1) { create(:question_qcm, nom_technique: 'LOdi3', metacompetence: :surfaces) }
-      let(:question2) { create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation) }
+      let(:questions) do
+        [
+          create(:question_qcm, nom_technique: 'LOdi3', metacompetence: :surfaces),
+          create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation),
+          create(:question_qcm, nom_technique: 'LOdi4', metacompetence: :tableaux_graphiques)
+        ]
+      end
+
+      let!(:evenements) do
+        [
+          create(:evenement_reponse, partie: partie,
+                                     donnees: { question: 'LOdi1', metacompetence: :surfaces }),
+          create(:evenement_reponse, partie: partie,
+                                     donnees: { question: 'LOdi2', metacompetence: :estimation })
+        ]
+      end
+
+      let(:liste) { response_service.regroupe_par_codes_clea }
+
+      before do
+        partie.situation.update(questionnaire: create(:questionnaire))
+        partie.situation.questionnaire.questions.push(*questions)
+      end
 
       it 'trie les evenements et les questions non répondues par code clea' do
-        partie.situation.update(questionnaire: create(:questionnaire))
-        partie.situation.questionnaire.questions << question1
-        evenement1 = create :evenement_reponse,
-                            partie: partie,
-                            donnees: { question: 'LOdi1', metacompetence: :surfaces }
-        evenement2 = create :evenement_reponse,
-                            partie: partie,
-                            donnees: { question: 'LOdi2', metacompetence: :estimation }
+        expect(liste['2.1']['2.1.4']).to eq([evenements[1].donnees])
+        expect(liste['2.3']['2.3.7'][0]).to eq(evenements[0].donnees)
+        expect(liste['2.3']['2.3.7'][1]['question']).to eq(questions[0].nom_technique)
+        expect(liste['2.3']['2.3.7'][1]['scoreMax']).to eq(questions[0].score)
+      end
 
-        service = response_service.regroupe_par_codes_clea
-
-        expect(service['2.1']['2.1.4']).to eq([evenement2.donnees])
-        expect(service['2.3']['2.3.7'][0]).to eq(evenement1.donnees)
-        expect(service['2.3']['2.3.7'][1]['question']).to eq(question1.nom_technique)
-        expect(service['2.3']['2.3.7'][1]['scoreMax']).to eq(question1.score)
+      it "tri dans l'ordre croissant" do
+        expect(liste.keys).to eq(['2.1', '2.3'])
+        expect(liste['2.3'].keys).to eq(['2.3.5', '2.3.7'])
       end
     end
   end

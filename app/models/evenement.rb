@@ -14,6 +14,20 @@ class Evenement < ApplicationRecord
   scope :questions_repondues, lambda {
     reponses.select("donnees->>'question' AS question").map(&:question)
   }
+  scope :questions_non_repondues, lambda { |questionnaire, noms_techniques|
+    questionnaire&.questions&.reject do |q|
+      questions_repondues.include?(q.nom_technique) ||
+        q.sous_consigne? ||
+        noms_techniques.any? { |noms| q.nom_technique.start_with?(*noms) }
+    end
+  }
+  scope :questions_repondues_et_non_repondues, lambda { |questionnaire, noms_techniques|
+    non_repondues = questions_non_repondues(questionnaire, noms_techniques).map(&:as_json).each do |q|
+      q['scoreMax'] = q.delete('score')
+      q['question'] = q.delete('nom_technique')
+    end
+    reponses.map(&:donnees) + non_repondues
+  }
 
   def fin_situation?
     nom == 'finSituation'
@@ -21,5 +35,17 @@ class Evenement < ApplicationRecord
 
   def reponse_intitule
     donnees['reponseIntitule'].presence || donnees['reponse']
+  end
+
+  def self.regroupe_par_codes_clea(questionnaire, noms_techniques)
+    groupes_clea = questions_repondues_et_non_repondues(questionnaire,
+                                                        noms_techniques).group_by do |e|
+      Metacompetence.new(e['metacompetence']).code_clea_sous_domaine
+    end
+    groupes_clea.transform_values do |groupes|
+      groupes.group_by do |e|
+        Metacompetence.new(e['metacompetence']).code_clea_sous_sous_domaine
+      end
+    end
   end
 end

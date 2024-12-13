@@ -25,7 +25,8 @@ describe Restitution::PlaceDuMarche do
         build(:evenement_reponse,
               donnees: { succes: false, scoreMax: 1, question: 'N3Q1' },
               partie: partie)
-      ]
+      ],
+      partie
     )
   end
 
@@ -34,7 +35,7 @@ describe Restitution::PlaceDuMarche do
       evenements = [
         build(:evenement_demarrage)
       ]
-      restitution = described_class.new(campagne, evenements)
+      restitution = described_class.new(campagne, evenements, partie)
       expect(restitution.synthese.keys).to eql(%i[numeratie_niveau1
                                                   numeratie_niveau2
                                                   numeratie_niveau3
@@ -68,7 +69,7 @@ describe Restitution::PlaceDuMarche do
                                                question: 'N2',
                                                score: 0.5 },
                                     partie: partie)
-                            ])
+                            ], partie)
       end
 
       it 'retourne le score selon le niveau' do
@@ -103,7 +104,8 @@ describe Restitution::PlaceDuMarche do
                                                                    question: 'N2',
                                                                    score: 0.5 },
                                                         partie: partie)
-                            ])
+                            ],
+                            partie)
       end
 
       it 'retourne le score du niveau donné' do

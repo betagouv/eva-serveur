@@ -25,9 +25,10 @@ module Restitution
 
     alias date created_at
 
-    def initialize(campagne, evenements)
+    def initialize(campagne, evenements, partie = nil)
       @campagne = campagne
       @evenements = evenements
+      @partie = partie
     end
 
     def persiste

@@ -21,6 +21,29 @@ module Restitution
         'succes' => Evacob::ScoreModule.new
       }
     }.freeze
+
+    METRIQUES = {
+      2.1 => {
+        pourcentage_reussite: 0,
+        seuil: 75
+      },
+      2.2 => {
+        pourcentage_reussite: 0,
+        seuil: 50
+      },
+      2.3 => {
+        pourcentage_reussite: 0,
+        seuil: 75
+      },
+      2.4 => {
+        pourcentage_reussite: 0,
+        seuil: 100
+      },
+      2.5 => {
+        pourcentage_reussite: 0,
+        seuil: 66
+      }
+    }.freeze
     SEUIL_MINIMUM = 70
 
     def initialize(campagne, evenements)
@@ -71,6 +94,22 @@ module Restitution
         e.donnees['question'].start_with?('N3R')
       end
       evenements_rattrapage.present?
+    end
+
+    # rubocop:disable Naming/VariableNumber
+    def competences_numeratie
+      @competences_numeratie ||= {
+        '2_1': { profil: succes?(2.1), pourcentage: METRIQUES[2.1][:pourcentage_reussite] },
+        '2_2': { profil: succes?(2.2), pourcentage: METRIQUES[2.2][:pourcentage_reussite] },
+        '2_3': { profil: succes?(2.3), pourcentage: METRIQUES[2.3][:pourcentage_reussite] },
+        '2_4': { profil: succes?(2.4), pourcentage: METRIQUES[2.4][:pourcentage_reussite] },
+        '2_5': { profil: succes?(2.5), pourcentage: METRIQUES[2.5][:pourcentage_reussite] }
+      }
+    end
+    # rubocop:enable Naming/VariableNumber
+
+    def succes?(code_clea)
+      METRIQUES[code_clea][:pourcentage_reussite] >= METRIQUES[code_clea][:seuil]
     end
   end
 end

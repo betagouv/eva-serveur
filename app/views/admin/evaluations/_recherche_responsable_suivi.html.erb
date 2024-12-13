@@ -1,6 +1,7 @@
 <button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t('.action') %></button>
 <%= form_with id: :recherche_responsable_suivi, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: 'hidden' do |f| %>
-  <%= f.search_field :nom_responsable_suivi, placeholder: t('.placeholder'), class: 'champ-recherche' %>
+    <label class="sr-only" for="recherche-responsable-suivi-autocomplete"><%= t('.libelle_champ_recherche') %></label>
+  <div id="nom-responsable-suivi-autocomplete-container" class="champ-recherche" ></div>
   <%= f.hidden_field :responsable_suivi_id %>
 <% end %>
 
@@ -9,24 +10,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const boutonAjout = $("#responsable_de_suivi_sidebar_section button" );
   const formulaireRecherche = $("#recherche_responsable_suivi" );
 
-  afficheRecherche(boutonAjout, formulaireRecherche);
-
   const comptes = [<% responsables_suivi_possibles.each do |compte| %>
-    { value: "<%= escape_javascript(compte.display_name.html_safe) %>", id: "<%= compte.id %>" },
+    { nom: "<%= escape_javascript(compte.display_name.html_safe) %>", identifiant: "<%= compte.id %>" },
   <% end %>];
-  $("#nom_responsable_suivi" ).autocomplete({
-    source: function (request, response) {
-      const term = request.term.toLowerCase();
-      response(comptes.filter(compte => compte.value.toLowerCase().includes(term)));
-    },
-    response: ajouteReponseAucunResultat,
-    select: function( event, ui ) {
-      $('#responsable_suivi_id').val(ui.item.id);
-      $('#recherche_responsable_suivi').submit();
-    },
-    autoFocus: false,
-    minLength: 0,
+
+  afficheRecherche(boutonAjout, formulaireRecherche, () => {
+      const container = document.querySelector('#nom-responsable-suivi-autocomplete-container');
+      initialiseAutocomplete({
+        focus: true,
+        element: container,
+        id: 'recherche-responsable-suivi-autocomplete',
+        name: 'nom_responsable_suivi',
+        placeholder: I18n.t('admin.evaluations.recherche_responsable_suivi.placeholder'),
+        source: (requete, reponse) => {
+            const term = requete.toLowerCase();
+            reponse(comptes.filter(compte => compte.nom.toLowerCase().includes(term)));
+        },
+        templates: {
+          inputValue: (reponse) => reponse ? reponse.nom : '',
+          suggestion: (reponse) => `<div class="responsable-suivi-suggestion">${reponse.nom}</div>`
+        },
+        onConfirm: (selectedItem) => {
+          if (! selectedItem) return;
+
+          $('#responsable_suivi_id').val(selectedItem.identifiant);
+          $('#recherche_responsable_suivi').submit();
+        }
+      })
   });
-  $('.ui-menu').addClass('responsable_suivi');
 });
 </script>

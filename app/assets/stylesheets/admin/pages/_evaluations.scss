@@ -113,11 +113,10 @@
     padding: 0.25rem 1rem;
     font-weight: 400;
     color: white;
-    background-color: $eva_dark;
+    background-color: $eva_main_blue;
   }
   .champ-recherche {
     width: 100%;
-    border: 1px solid $eva_main_blue;
   }
   .bouton-icone-plus {
     &::before {

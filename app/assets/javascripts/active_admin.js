@@ -2,9 +2,9 @@
 //= require activeadmin_addons/all
 //= require vendor/select2_locale_fr
 //= require vendor/datepicker-fr
+//= require accessible-autocomplete.min
 //= require activeadmin_reorderable
 //= require jquery3
-//= require jquery-ui
 //= require popper
 //= require bootstrap
 //= require faq
@@ -22,6 +22,7 @@
 //= require i18n/translations
 
 jQuery.datetimepicker.setLocale('fr');
+I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
   $('#validation-comptes-en-attente').modal();
@@ -31,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   new ClipboardJS('.copier-coller');
   $('[data-toggle="tooltip"]').tooltip();
-
-  I18n.locale = 'fr';
 });
 
 Chart.defaults.font.family = 'Work Sans';

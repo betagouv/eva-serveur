@@ -2,6 +2,19 @@ function estUnCodePostal(texte) {
   return texte.match(/^\d{5}$/);
 }
 
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, tag => {
+    const entityMap = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    };
+    return entityMap[tag] || tag
+  });
+}
+
 function construitReponse(item, codePostalSaisi) {
   const ville = item.nom;
   let codePostal = '';
@@ -11,70 +24,129 @@ function construitReponse(item, codePostalSaisi) {
     codePostal = item.codesPostaux[0];
   }
   const label = `${ville} (${codePostal})`;
-  return { label: label, value: label, code_postal: codePostal };
+  return { value: label, ville: ville, code_postal: codePostal };
 }
 
-function ajouteReponseAucunResultat(event, ui) {
-  if (!ui.content.length) {
-    const recherche = $(".champ-recherche").val();
-    const reponseAucunResultat = {
-      value: '',
-      label: `Aucun résultat ne correspond à la recherche "${recherche}"`
-    };
-    ui.content.push(reponseAucunResultat);
-  }
-}
-
-function afficheRecherche(boutonAjout, formulaireRecherche) {
+function afficheRecherche(boutonAjout, formulaireRecherche, initAutocomplete) {
   boutonAjout.click(function () {
     boutonAjout.hide()
     formulaireRecherche.show()
+    initAutocomplete();
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  let champRecherche = $( ".champ-recherche" );
-  champRecherche.focus();
-  champRecherche.autocomplete({
-    source: function (request, response) {
-      $('#bouton-chercher')
-        .prop("disabled", true)
-        .addClass("disabled");
-      if (!request.term.match(/^\d{1,4}$/)) {
-        let data = { limit: 6, type: 'commune-actuelle,arrondissement-municipal' };
-        if (estUnCodePostal(request.term)) {
-          data.codePostal = request.term
-        } else {
-          data.nom = request.term;
-          data.boost = 'population';
-        }
-        $.ajax({
-          url: "https://geo.api.gouv.fr/communes",
-          data: data,
-          dataType: "json",
-          success: function (datas) {
-            response($.map(datas, function (item) {
-              const reponse = construitReponse(item, data.codePostal)
-              return reponse;
-            }))
-          },
-          error: function () {
-            response([]);
-          }
-        });
+function requeteCommunes(requete, reponse, $) {
+  $('#bouton-chercher')
+    .prop("disabled", true)
+    .addClass("disabled");
+  if (!requete.match(/^\d{1,4}$/)) {
+    let data = { limit: 6, type: 'commune-actuelle,arrondissement-municipal' };
+    if (estUnCodePostal(requete)) {
+      data.codePostal = requete
+    } else {
+      data.nom = requete;
+      data.boost = 'population';
+    }
+    $.ajax({
+      url: "https://geo.api.gouv.fr/communes",
+      data: data,
+      dataType: "json",
+      success: function (datas) {
+        reponse($.map(datas, function (item) {
+          return construitReponse(item, data.codePostal);
+        }))
+      },
+      error: function () {
+        reponse([]);
       }
-    },
-    response: ajouteReponseAucunResultat,
-    select: function( event, ui ) {
-      $('#code_postal').val(ui.item.code_postal);
+    });
+  }
+}
 
-      const disabled = ui.item.value == '';
+function getUrlParameter(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
+}
+
+function initialiseAutocomplete(options) {
+  const {
+      focus,
+      element,
+      id,
+      name,
+      minLength,
+      placeholder,
+      source,
+      defaultValue,
+      templates,
+      onConfirm
+  } = options;
+
+  const autocomplete = accessibleAutocomplete({
+    element: element,
+    id: id, // id de l'input créé a utiliser dans l'attribut for du label
+    name: name,
+    showAllValues: false,
+    autoselect: false,
+    displayMenu: 'overlay',
+    minLength: minLength,
+    placeholder: placeholder,
+    source: source,
+    templates: templates,
+    onConfirm: onConfirm,
+    tNoResults: () => "Aucun résultat trouvé",
+    tStatusNoResults: () => "Aucun résultat trouvé",
+    tStatusSelectedOption: (selectedOption, length, index) => `${selectedOption} ${index + 1} sur ${length} est selectionné`,
+    tAssistiveHint: () => "Quand le résultat de l'autocomplétion est disponible, utilisez les flèches hautes et basses pour passer en revue et la touche entrer pour sélectionner.",
+    tStatusQueryTooShort: (minQueryLength) => `Entrez au moins ${minQueryLength} characters pour avoir un résultat`,
+    tStatusResults: (length, contentSelectedOption) => {
+        const words = {
+            result: (length === 1) ? 'resultat' : 'resultats',
+            is: (length === 1) ? 'disponible' : 'disponibles'
+        };
+
+        return "<span>{length} {words.result} {words.is}. {contentSelectedOption}</span>";
+    }
+  });
+
+  const input = element.querySelector("input");
+  input.type = 'search';
+
+  if (focus) {
+    input.focus();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('#recherche-structure-autocomplete-container');
+  if(!container){ return; }
+
+  initialiseAutocomplete({
+    focus: !getUrlParameter('code_postal'),
+    element: container,
+    id: 'recherche-structure-autocomplete',
+    name: 'ville_ou_code_postal',
+    placeholder: I18n.t('recherche_structure_component.placeholder_recherche'),
+    minLength: 3,
+    source: (requete, reponse) => { requeteCommunes(requete, reponse, $); },
+    templates: {
+      inputValue: (reponse) => reponse ? reponse.value : '',
+      suggestion: (reponse) => `
+      <div class="commune-suggestion">
+        <strong>${escapeHTML(reponse.ville)}</strong>
+        (${escapeHTML(reponse.code_postal)})
+      </div>
+      `
+    },
+    onConfirm: (selectedItem) => {
+      if (! selectedItem) return;
+
+      $('#code_postal').val(selectedItem.code_postal);
+
+      const disabled = selectedItem.value == '';
       $('#bouton-chercher')
         .prop("disabled", disabled)
         .toggleClass('disabled', disabled);
     },
-    autoFocus: false,
-    minLength: 3,
-    delay: 100
   });
 });

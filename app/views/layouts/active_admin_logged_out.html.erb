@@ -2,7 +2,6 @@
 <html lang="<%=I18n.locale%>">
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
   <title><%= [content_for?(:title) ? yield(:title) : nil, ActiveAdmin.application.site_title(self)].compact.join(" | ") %></title>
 

@@ -48,6 +48,7 @@ fr:
         bon: Correct
         mauvais: Erreur
       recherche_responsable_suivi:
+        libelle_champ_recherche: rechercher un responsable de suivi
         placeholder: Nom du responsable…
         action: Ajouter un responsable de suivi
       tri:

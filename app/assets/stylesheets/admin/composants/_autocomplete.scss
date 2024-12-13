@@ -1,7 +1,6 @@
-// JQuery autocomplete :
-
-.ui-autocomplete.ui-menu {
+.autocomplete__menu--overlay {
   border-radius: 0 0 0.5rem 0.5rem;
+  border: 1px solid #c5c5c5;
   font-family: $font-texte;
   color: $couleur-texte;
   background-color: $eva_light;
@@ -9,24 +8,12 @@
   padding: 0.3rem 0;
   box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
 
-  .ui-menu-item {
-    line-height: 1.1rem;
-    cursor: pointer;
-    .ui-menu-item-wrapper {
-      padding: 0.25rem 1rem;
-    }
-    .ui-state-active {
-      background-color: $eva_main_blue;
-      color: $eva_light;
-      border: none;
-    }
-  }
+  .autocomplete__option {
+    font-size: 1rem;
 
-  &.recherche_structure {
-    width: 266px;
-  }
-
-  &.responsable_suivi {
-    width: 256px;
+    &:hover, &--focused {
+      background-color: $blue-france-sun-113-hover;
+      border-color: $blue-france-sun-113-hover;
+    }
   }
 }

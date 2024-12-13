@@ -82,11 +82,18 @@
             <% end -%>
           </div>
 
-          <h2>Sous compétences de positionnement ANLCI</h2>
+          <h2>Sous compétences de positionnement littératie ANLCI</h2>
           <div>
-            <% @sous_competences_positionnement.each do |donnees| -%>
-              <%= render 'admin/evaluations/lettrisme_sous_competence', sous_competence: donnees[0], profil: donnees[1].to_s %>
-            <% end -%>
+            <%= render 'admin/evaluations/positionnement/sous_competences',
+              sous_competences: @sous_competences_positionnement_litteratie,
+              competence: :litteratie %>
+          </div>
+
+          <h2>Sous compétences de positionnement numératie ANLCI</h2>
+          <div>
+            <%= render 'admin/evaluations/positionnement/sous_competences',
+              sous_competences: @sous_competences_positionnement_numeratie,
+              competence: :numeratie %>
           </div>
         </div>
       </div>

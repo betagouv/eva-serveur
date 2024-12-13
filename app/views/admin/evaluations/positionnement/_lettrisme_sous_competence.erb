@@ -4,8 +4,8 @@
       <%= image_tag "badges/anlci/#{profil}.svg", alt: t(".#{profil}.alt_icone") %>
     </div>
     <div class= "col-7">
-      <h3><%= t(".#{sous_competence}.titre") %></h3>
-      <%= md t(".#{sous_competence}.#{profil}.description") %>
+      <h3><%= t(".#{competence}.#{sous_competence}.titre") %></h3>
+      <%= md t(".#{competence}.#{sous_competence}.description.#{profil}") %>
     </div>
   </div>
 </div>

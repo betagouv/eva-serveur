@@ -7,11 +7,9 @@
       icone: "icone_profil/icone_#{profil}.svg",
       pdf: pdf %>
     <% if niveau_bas?(profil) %>
-      <div class="lettrisme-sous-competences">
-        <% cafe_de_la_place.competences_lettrisme.each do |competence, profil| %>
-          <%= render 'lettrisme_sous_competence', sous_competence: competence, profil: profil %>
-        <% end %>
-      </div>
+      <%= render 'admin/evaluations/positionnement/sous_competences',
+        sous_competences: cafe_de_la_place.competences_lettrisme,
+        competence: :litteratie %>
     <% end %>
   </div>
   <%= render ReferentielAnlciComponent.new unless pdf %>

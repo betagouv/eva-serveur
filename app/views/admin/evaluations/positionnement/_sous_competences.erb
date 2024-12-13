@@ -1,0 +1,21 @@
+<div class="lettrisme-sous-competences">
+  <% sous_competences.each do |sous_competence, metriques| %>
+    <div class="sous-competence__container">
+      <div class="row">
+        <div class= "col-auto">
+          <% if competence == :litteratie %>
+            <%= image_tag "badges/anlci/#{metriques[:profil]}.svg", alt: t(".#{metriques[:profil]}.alt_icone") %>
+          <% else %>
+            <div class="badge">
+              <span><%= metriques[:pourcentage] %>%</span>
+            </div>
+          <% end %>
+        </div>
+        <div class= "col-7">
+          <h3><%= t(".#{competence}.#{sous_competence}.titre") %></h3>
+          <%= md t(".#{competence}.#{sous_competence}.description.#{metriques[:profil]}") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

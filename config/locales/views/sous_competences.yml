@@ -1,0 +1,74 @@
+fr:
+  admin:
+    evaluations:
+      positionnement:
+        sous_competences:
+          litteratie:
+            profil1:
+              alt_icone: Profil 1
+            profil2:
+              alt_icone: Profil 2
+            profil3:
+              alt_icone: Profil 3
+            profil4:
+              alt_icone: Profil 4
+            lecture:
+              titre: Lecture
+              description:
+                profil1: |
+                    Votre score indique que vous avez d’importantes difficultés en lecture. Cela signifie qu’il peut être très difficile pour vous d’identifier ou de comprendre les lettres et les chiffres présentés à l’écrit, ou de décrypter des mots.
+                profil2: |
+                    Votre score indique que vous avez des difficultés en lecture. Cela signifie qu’il est probablement difficile pour vous d’identifier ou de comprendre les lettres et les chiffres présentés à l’écrit, ou de décrypter des mots.
+                profil3: |
+                    Votre score indique que vous ne maîtrisez pas encore complètement la compétence de lecture. Cela signifie que vous avez probablement des difficultés à identifier ou comprendre les lettres et les chiffres présentés à l’écrit, ou à décrypter des mots.
+                profil4: |
+                    Votre score indique que vous êtes plutôt à l’aise avec la lecture, ce qui signifie que vous parvenez globalement à identifier et comprendre les lettres ou les chiffres présentés à l’écrit, et à décrypter les mots.
+            comprehension:
+              titre: Compréhension écrite
+              description:
+                profil1: |
+                    Votre score indique que vous avez d’importantes difficultés en compréhension écrite. Cela signifie qu’il peut être très difficile pour vous de lire et de comprendre des informations données à l’écrit.
+                profil2: |
+                    Votre score indique que vous avez des difficultés en compréhension écrite. Cela signifie qu’il est probablement difficile pour vous de lire et/ou de comprendre des informations données à l’écrit.
+                profil3: |
+                    Votre score indique que vous ne maîtrisez pas encore complètement la compétence de compréhension écrite. Cela signifie que vous avez probablement des difficultés à lire ou bien à comprendre des informations données à l’écrit.
+                profil4: |
+                  Votre score indique que vous parvenez plutôt bien à comprendre les informations données à l’écrit. Autrement dit, vous êtes plutôt à l’aise avec la lecture, l’identification des mots et la compréhension de textes simples.
+            production:
+              titre: Production écrite
+              description:
+                profil1: |
+                    Il semble que vous avez d’importantes difficultés en production écrite. Cela signifie qu’il peut être très difficile pour vous de vous exprimer à l’écrit en français, de rédiger un ensemble de mots ou un texte.
+                profil2: |
+                    Il semble que vous avez des difficultés en production écrite. Cela signifie qu’il est probablement difficile pour vous de vous exprimer à l’écrit en français, de rédiger un ensemble de mots ou un texte.
+                profil3: |
+                    Il semble que vous ne maîtrisez pas encore complètement la compétence de production écrite. Cela signifie que vous avez probablement des difficultés à écrire ou vous exprimer à l’écrit en français.
+                profil4: |
+                  Il semble que vous maîtrisez plutôt bien la compétence de production écrite. Autrement dit, vous parvenez plutôt bien à écrire des mots en français pour transmettre des informations ou des idées.
+          numeratie:
+            "2_1":
+              titre: Lire, écrire, compter avec les nombres entiers
+              description:
+                true: Votre score indique une maîtrise des nombres entiers. Vous êtes capable de les lire, de les écrire et de les utiliser dans des calculs simples.
+                false: Votre score indique des difficultés dans la manipulation des nombres entiers. Cela peut rendre complexe des tâches telles que la lecture des chiffres ou le calcul de base dans des situations du quotidien.
+            "2_2":
+              titre: Utiliser les fractions, décimales et pourcentages
+              description:
+                true: Votre score reflète une bonne maîtrise des fractions, des nombres décimaux et des pourcentages. Vous êtes à l’aise pour les appliquer dans des situations concrètes du quotidien.
+                false: Votre score montre des lacunes dans la compréhension et l'utilisation des fractions, des nombres décimaux et des pourcentages. Cela peut poser problème dans des activités comme calculer des réductions, comparer des prix ou diviser des quantités.
+            "2_3":
+              titre: Comprendre et utiliser les unités de mesure, les repères temporels et spatiaux
+              description:
+                true: Votre score montre une bonne compréhension et utilisation des unités de mesure, des repères temporels et spatiaux. Vous pouvez gérer des situations pratiques comme lire un horaire ou utiliser des outils de mesure courants.
+                false: Votre score montre des difficultés avec les unités de mesure, les repères temporels et spatiaux. Cela peut rendre plus complexe des tâches telles que comprendre un planning, lire une carte ou utiliser des outils de mesure.
+            "2_4":
+              titre: Réaliser un raisonnement logique et mathématique
+              description:
+                true: Votre score reflète une bonne capacité à réaliser des raisonnements logiques et mathématiques. Vous pouvez résoudre des problèmes impliquant plusieurs étapes de manière efficace.
+                false: Votre score indique des difficultés dans les raisonnements logiques et mathématiques. Cela peut rendre plus complexe la résolution de problèmes impliquant plusieurs étapes ou des concepts abstraits.
+            "2_5":
+              titre: Lire et interpréter des données chiffrées
+              description:
+                true: Votre score montre une bonne aptitude à lire et interpréter des données chiffrées. Vous êtes capable d’analyser efficacement des graphiques, tableaux ou autres représentations numériques.
+                false: Votre score montre des difficultés à lire et interpréter des données chiffrées. Cela peut rendre compliqué l’analyse de graphiques, de tableaux ou de statistiques.
+

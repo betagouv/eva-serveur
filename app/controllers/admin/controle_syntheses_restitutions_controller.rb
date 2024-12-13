@@ -2,19 +2,31 @@
 
 module Admin
   class ControleSynthesesRestitutionsController < ApplicationController
-    SOUS_COMPETENCES_POSITIONNEMENT = [
-      ['lecture', ::Competence::PROFIL_1],
-      ['lecture', ::Competence::PROFIL_2],
-      ['lecture', ::Competence::PROFIL_3],
-      ['lecture', ::Competence::PROFIL_4],
-      ['comprehension_ecrite', ::Competence::PROFIL_1],
-      ['comprehension_ecrite', ::Competence::PROFIL_2],
-      ['comprehension_ecrite', ::Competence::PROFIL_3],
-      ['comprehension_ecrite', ::Competence::PROFIL_4],
-      ['production_ecrite', ::Competence::PROFIL_1],
-      ['production_ecrite', ::Competence::PROFIL_2],
-      ['production_ecrite', ::Competence::PROFIL_3],
-      ['production_ecrite', ::Competence::PROFIL_4]
+    SOUS_COMPETENCES_POSITIONNEMENT_LITTERATIE = [
+      ['lecture', { profil: ::Competence::PROFIL_1.to_s }],
+      ['lecture', { profil: ::Competence::PROFIL_2.to_s }],
+      ['lecture', { profil: ::Competence::PROFIL_3.to_s }],
+      ['lecture', { profil: ::Competence::PROFIL_4.to_s }],
+      ['comprehension', { profil: ::Competence::PROFIL_1.to_s }],
+      ['comprehension', { profil: ::Competence::PROFIL_2.to_s }],
+      ['comprehension', { profil: ::Competence::PROFIL_3.to_s }],
+      ['comprehension', { profil: ::Competence::PROFIL_4.to_s }],
+      ['production', { profil: ::Competence::PROFIL_1.to_s }],
+      ['production', { profil: ::Competence::PROFIL_2.to_s }],
+      ['production', { profil: ::Competence::PROFIL_3.to_s }],
+      ['production', { profil: ::Competence::PROFIL_4.to_s }]
+    ].freeze
+    SOUS_COMPETENCES_POSITIONNEMENT_NUMERATIE = [
+      ['2_1', { pourcentage: 100, profil: true }],
+      ['2_2', { pourcentage: 100, profil: true }],
+      ['2_3', { pourcentage: 100, profil: true }],
+      ['2_4', { pourcentage: 100, profil: true }],
+      ['2_5', { pourcentage: 100, profil: true }],
+      ['2_1', { pourcentage: 10, profil: false }],
+      ['2_2', { pourcentage: 10, profil: false }],
+      ['2_3', { pourcentage: 10, profil: false }],
+      ['2_4', { pourcentage: 10, profil: false }],
+      ['2_5', { pourcentage: 10, profil: false }]
     ].freeze
     SOUS_COMPETENCES_PREPOSITIONNEMENT = [
       ['litteratie', :pre_A1],
@@ -32,7 +44,8 @@ module Admin
       @syntheses_positionnement_litteratie = syntheses_positionnement_litteratie
       @syntheses_positionnement_numeratie = syntheses_positionnement_numeratie
       @sous_competences_prepositionnement = SOUS_COMPETENCES_PREPOSITIONNEMENT
-      @sous_competences_positionnement = SOUS_COMPETENCES_POSITIONNEMENT
+      @sous_competences_positionnement_litteratie = SOUS_COMPETENCES_POSITIONNEMENT_LITTERATIE
+      @sous_competences_positionnement_numeratie = SOUS_COMPETENCES_POSITIONNEMENT_NUMERATIE
     end
 
     def syntheses_pre_positionnement

@@ -4,7 +4,7 @@ require_relative '../../decorators/evenement_place_du_marche'
 
 module Restitution
   class PlaceDuMarche < Base
-    SCORES = {
+    SCORES_NIVEAUX = {
       N1: {
         'type' => :nombre,
         'score' => Evacob::ScoreModule.new,
@@ -22,41 +22,41 @@ module Restitution
       }
     }.freeze
 
-    METRIQUES = {
-      2.1 => {
-        pourcentage_reussite: 0,
-        seuil: 75
-      },
-      2.2 => {
-        pourcentage_reussite: 0,
-        seuil: 50
-      },
-      2.3 => {
-        pourcentage_reussite: 0,
-        seuil: 75
-      },
-      2.4 => {
-        pourcentage_reussite: 0,
-        seuil: 100
-      },
-      2.5 => {
-        pourcentage_reussite: 0,
-        seuil: 66
-      }
+    SCORES_CLEA = {
+      '2.1' => { pourcentage_reussite: 0, seuil: 75 },
+      '2.2' => { pourcentage_reussite: 0, seuil: 50 },
+      '2.3' => { pourcentage_reussite: 0, seuil: 75 },
+      '2.4' => { pourcentage_reussite: 0, seuil: 100 },
+      '2.5' => { pourcentage_reussite: 0, seuil: 66 }
     }.freeze
+
     SEUIL_MINIMUM = 70
 
     def initialize(campagne, evenements)
+      situation = Situation.find_by(nom_technique: 'place_du_marche')
+      questionnaire = campagne.questionnaire_pour(situation)
+      @groupes_clea = evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
       evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
+      calcule_pourcentage_reussite_competence_clea
       super
     end
 
-    def score_pour(niveau, avec_rattrapage: true)
-      SCORES[niveau]['score'].calcule(evenements, niveau, avec_rattrapage: avec_rattrapage)
+    def score_pour(niveau)
+      SCORES_NIVEAUX[niveau]['score'].calcule(evenements, niveau, avec_rattrapage: true)
+    end
+
+    def calcule_pourcentage_reussite_competence_clea
+      SCORES_CLEA.each_key do |code|
+        SCORES_CLEA[code][:pourcentage_reussite] =
+          Evacob::ScoreMetacompetence.new
+                                     .calcule_pourcentage_reussite(
+                                       @groupes_clea[code].values.flatten
+                                     )
+      end
     end
 
     def pourcentage_de_reussite_pour(niveau)
-      SCORES[niveau]['succes'].calcule_pourcentage_reussite(evenements, niveau)
+      SCORES_NIVEAUX[niveau]['succes'].calcule_pourcentage_reussite(evenements, niveau)
     end
 
     def synthese
@@ -85,8 +85,7 @@ module Restitution
     def profil_numeratie
       return ::Competence::NIVEAU_INDETERMINE if niveau_numeratie.zero?
 
-      Competence::ProfilEvacob.new(self, 'profil_numeratie',
-                                   niveau_numeratie).profil_numeratie
+      Competence::ProfilEvacob.new(self, 'profil_numeratie', niveau_numeratie).profil_numeratie
     end
 
     def a_passe_des_questions_de_rattrapage?
@@ -99,17 +98,19 @@ module Restitution
     # rubocop:disable Naming/VariableNumber
     def competences_numeratie
       @competences_numeratie ||= {
-        '2_1': { profil: succes?(2.1), pourcentage: METRIQUES[2.1][:pourcentage_reussite] },
-        '2_2': { profil: succes?(2.2), pourcentage: METRIQUES[2.2][:pourcentage_reussite] },
-        '2_3': { profil: succes?(2.3), pourcentage: METRIQUES[2.3][:pourcentage_reussite] },
-        '2_4': { profil: succes?(2.4), pourcentage: METRIQUES[2.4][:pourcentage_reussite] },
-        '2_5': { profil: succes?(2.5), pourcentage: METRIQUES[2.5][:pourcentage_reussite] }
+        '2_1': { profil: succes?('2.1'), pourcentage: SCORES_CLEA['2.1'][:pourcentage_reussite] },
+        '2_2': { profil: succes?('2.2'), pourcentage: SCORES_CLEA['2.2'][:pourcentage_reussite] },
+        '2_3': { profil: succes?('2.3'), pourcentage: SCORES_CLEA['2.3'][:pourcentage_reussite] },
+        '2_4': { profil: succes?('2.4'), pourcentage: SCORES_CLEA['2.4'][:pourcentage_reussite] },
+        '2_5': { profil: succes?('2.5'), pourcentage: SCORES_CLEA['2.5'][:pourcentage_reussite] }
       }
     end
     # rubocop:enable Naming/VariableNumber
 
+    private
+
     def succes?(code_clea)
-      METRIQUES[code_clea][:pourcentage_reussite] >= METRIQUES[code_clea][:seuil]
+      SCORES_CLEA[code_clea][:pourcentage_reussite] >= SCORES_CLEA[code_clea][:seuil]
     end
   end
 end

@@ -32,9 +32,11 @@ fr:
         illustration: Image de fond de la question
         type_qcm: Type QCM
       question_saisie:
-        suffix_reponse: Suffix réponse
-        reponse_placeholder: Réponse placeholder
+        type_saisie: Type de saisie
+        suffix_reponse: Suffix de la réponse
+        reponse_placeholder: Placeholder
         bonne_reponse: Bonne réponse
+        texte_a_trous: Texte à trous
       question_glisser_deposer:
         reponses: Réponses
     errors:

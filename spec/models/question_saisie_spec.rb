@@ -71,12 +71,12 @@ describe QuestionSaisie, type: :model do
     end
   end
 
-  describe '#parametre_prix_avec_centimes' do
+  describe '#parametre_nombre_avec_virgule' do
     context 'sans reponse_placeholder et suffix_reponse spécifiés' do
-      let(:question_saisie) { create(:question_saisie, type_saisie: 'prix_avec_centimes') }
+      let(:question_saisie) { create(:question_saisie, type_saisie: 'nombre_avec_virgule') }
 
       it 'paramétre les champs par défaut' do
-        question_saisie.parametre_prix_avec_centimes
+        question_saisie.parametre_nombre_avec_virgule
         expect(question_saisie.reponse_placeholder).to eql('0,00')
         expect(question_saisie.suffix_reponse).to eql('€')
       end
@@ -84,7 +84,7 @@ describe QuestionSaisie, type: :model do
 
     context 'avec reponse_placeholder et suffix_reponse spécifiés' do
       let(:question_saisie) do
-        create(:question_saisie, type_saisie: 'prix_avec_centimes', reponse_placeholder: '1.000',
+        create(:question_saisie, type_saisie: 'nombre_avec_virgule', reponse_placeholder: '1.000',
                                  suffix_reponse: '$')
       end
 
@@ -94,7 +94,7 @@ describe QuestionSaisie, type: :model do
       end
     end
 
-    context 'quand le type de saisie n est pas prix_avec_centimes' do
+    context 'quand le type de saisie n est pas nombre_avec_virgule' do
       let(:question_saisie) { create(:question_saisie, type_saisie: 'texte') }
 
       it 'ne met pas à jour les champs' do

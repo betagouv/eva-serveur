@@ -5,12 +5,12 @@ class QuestionSaisie < Question
   QUESTION_TYPE = 'QuestionSaisie'
 
   enum :metacompetence, Metacompetence::METACOMPETENCES
-  enum :type_saisie, { redaction: 0, numerique: 1, texte: 2, prix_avec_centimes: 3 }
+  enum :type_saisie, { redaction: 0, numerique: 1, texte: 2, nombre_avec_virgule: 3 }
 
   has_many :reponses, class_name: 'Choix', foreign_key: :question_id, dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
-  before_save :parametre_prix_avec_centimes, if: -> { type_saisie == 'prix_avec_centimes' }
+  before_save :parametre_nombre_avec_virgule, if: -> { type_saisie == 'nombre_avec_virgule' }
 
   def as_json(_options = nil)
     json = base_json
@@ -21,7 +21,7 @@ class QuestionSaisie < Question
     reponses.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
   end
 
-  def parametre_prix_avec_centimes
+  def parametre_nombre_avec_virgule
     self.reponse_placeholder = '0,00' if reponse_placeholder.blank?
     self.suffix_reponse = '€' if suffix_reponse.blank?
   end
@@ -44,7 +44,7 @@ class QuestionSaisie < Question
       'description' => description,
       'texte_a_trous' => texte_a_trous,
       'aide' => aide,
-      'max_length' => type_saisie == 'prix_avec_centimes' ? 6 : nil
+      'max_length' => type_saisie == 'nombre_avec_virgule' ? 6 : nil
     }
   end
 

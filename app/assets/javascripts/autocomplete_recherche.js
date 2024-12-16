@@ -1,5 +1,6 @@
-function estUnCodePostal(texte) {
-  return texte.match(/^\d{5}$/);
+function extraitCodePostal(texte) {
+  const match = texte.match(/(\d{5})/);
+  return match ? match[1] : null;
 }
 
 function escapeHTML(str) {
@@ -41,8 +42,8 @@ function requeteCommunes(requete, reponse, $) {
     .addClass("disabled");
   if (!requete.match(/^\d{1,4}$/)) {
     let data = { limit: 6, type: 'commune-actuelle,arrondissement-municipal' };
-    if (estUnCodePostal(requete)) {
-      data.codePostal = requete
+    if (extraitCodePostal(requete)) {
+      data.codePostal = extraitCodePostal(requete);
     } else {
       data.nom = requete;
       data.boost = 'population';
@@ -74,10 +75,10 @@ function initialiseAutocomplete(options) {
       element,
       id,
       name,
+      defaultValue,
       minLength,
       placeholder,
       source,
-      defaultValue,
       templates,
       onConfirm
   } = options;
@@ -86,13 +87,30 @@ function initialiseAutocomplete(options) {
     element: element,
     id: id, // id de l'input créé a utiliser dans l'attribut for du label
     name: name,
+    defaultValue: defaultValue || '',
     showAllValues: false,
     autoselect: false,
     displayMenu: 'overlay',
     minLength: minLength,
     placeholder: placeholder,
     source: source,
-    templates: templates,
+    templates: {
+      inputValue: (reponse) => {
+          if (typeof reponse == 'string') { // quand defaultValue contient une string non vide
+              return reponse;
+          }
+          return templates.inputValue(reponse);
+      },
+      suggestion: (reponse) => {
+        if (typeof reponse == 'string') { // quand defaultValue contient une string non vide
+          return reponse;
+        }
+        else {
+            return templates.suggestion(reponse);
+        }
+      }
+    },
+
     onConfirm: onConfirm,
     tNoResults: () => "Aucun résultat trouvé",
     tStatusNoResults: () => "Aucun résultat trouvé",
@@ -126,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     element: container,
     id: 'recherche-structure-autocomplete',
     name: 'ville_ou_code_postal',
+    defaultValue: getUrlParameter('ville_ou_code_postal'),
     placeholder: I18n.t('recherche_structure_component.placeholder_recherche'),
     minLength: 3,
     source: (requete, reponse) => { requeteCommunes(requete, reponse, $); },

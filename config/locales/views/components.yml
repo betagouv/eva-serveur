@@ -61,6 +61,9 @@ fr:
         reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
     prise_en_main:
       titre: Bienvenue sur eva !
+      succes: (étape complétée)
+      active: (étape en cours)
+      desactive: (étape en attente)
       etapes:
         progression:
           titre: Débutez eva en 5 étapes

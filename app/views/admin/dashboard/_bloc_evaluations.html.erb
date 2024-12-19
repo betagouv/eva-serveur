@@ -5,7 +5,7 @@
       <%= link_to t('.voir_tout'), admin_evaluations_path %>
     </div>
 
-    <p class="evaluation-legende" sr-only="<%= t('.legende_sr') %>">
+    <p class="evaluation-legende" aria-label="<%= t('.legende_sr') %>">
       <%= render(PastilleComponent.new(etiquette: t('.legende_info'), couleur: 'alerte')) %>
     </p>
   </div>

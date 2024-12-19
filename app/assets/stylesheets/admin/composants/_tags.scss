@@ -9,11 +9,6 @@
   font-weight: 500;
   color: $couleur-texte;
 
-  .tag__icone {
-    margin-right: .25rem;
-    width: 13px;
-  }
-
   &.red {
     @include tag-couleur-majuscule($error-425, $error-950)
   }

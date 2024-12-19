@@ -1,11 +1,8 @@
 <div class="tag<%= ' tag-supprimable' if @supprimable %> <%= @classes %>">
-  <% if @image_path.present? %>
-    <%= image_tag("#{@image_path}.png", class: 'tag__icone') %>
-  <% end %>
   <span><%= @contenu %></span>
   <% if @supprimable %>
     <%= link_to @url, method: :patch, class: 'lien-supprimer' do %>
-        <%= image_tag("croix.svg") %>
+        <%= image_tag "croix.svg", alt: t(".supprimer") %>
     <% end %>
   <% end %>
 </div>

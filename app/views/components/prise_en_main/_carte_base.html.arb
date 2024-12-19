@@ -14,7 +14,7 @@ div class: 'carte-prise-en-main' do
       div class: 'carte__titres' do
         h2 t("etapes.#{etape_en_cours}.titre", scope: scope)
       end
-      text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration'
+      text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration', alt: ''
     end
     div class: 'carte__description' do
       text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, email: email,
@@ -50,8 +50,10 @@ div class: 'carte-prise-en-main' do
 
         li do
           render(EllipseComponent.new(statut))
-          span t("etapes.progression.#{etape}", scope: scope),
-               class: "progression__etape text-#{statut}"
+          para class: "m-0 progression__etape text-#{statut}" do
+            text_node t("etapes.progression.#{etape}", scope: scope)
+            span t(statut, scope: scope), class: 'sr-only'
+          end
         end
       end
     end

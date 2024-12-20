@@ -28,8 +28,8 @@ module Restitution
       super
     end
 
-    def score_pour(niveau)
-      SCORES[niveau]['score'].calcule(evenements, niveau, avec_rattrapage: true)
+    def score_pour(niveau, avec_rattrapage: true)
+      SCORES[niveau]['score'].calcule(evenements, niveau, avec_rattrapage: avec_rattrapage)
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -43,10 +43,9 @@ module Restitution
         profil_numeratie: profil_numeratie }
     end
 
-    def niveau_numeratie
+    def niveau_numeratie # rubocop:disable Metrics/CyclomaticComplexity
       niveau = 0
-      n1 = pourcentage_de_reussite_pour(:N1)
-      return niveau if n1.blank?
+      return niveau if pourcentage_de_reussite_pour(:N1).blank?
 
       n2 = pourcentage_de_reussite_pour(:N2)
       n3 = pourcentage_de_reussite_pour(:N3)
@@ -55,6 +54,7 @@ module Restitution
       niveau = 2 if n2
       niveau = 3 if n3
       niveau = 4 if n3 && n3 > SEUIL_MINIMUM
+      niveau = 5 if niveau == 4 && !a_passe_des_questions_de_rattrapage?
 
       niveau
     end
@@ -64,6 +64,13 @@ module Restitution
 
       Competence::ProfilEvacob.new(self, 'profil_numeratie',
                                    niveau_numeratie).profil_numeratie
+    end
+
+    def a_passe_des_questions_de_rattrapage?
+      evenements_rattrapage = MetriquesHelper.filtre_evenements_reponses(evenements) do |e|
+        e.donnees['question'].start_with?('N3R')
+      end
+      evenements_rattrapage.present?
     end
   end
 end

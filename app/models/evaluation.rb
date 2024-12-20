@@ -11,7 +11,7 @@ class Evaluation < ApplicationRecord
   NIVEAUX_POSITIONNEMENT = %w[profil1 profil2 profil3 profil4
                               profil_4h profil_4h_plus profil_4h_plus_plus
                               profil_aberrant indetermine].freeze
-  NIVEAUX_NUMERATIE = %w[profil1 profil2 profil3 profil4 indetermine].freeze
+  NIVEAUX_NUMERATIE = %w[profil1 profil2 profil3 profil4 profil4_plus indetermine].freeze
   NIVEAUX_COMPLETUDE = %w[incomplete competences_de_base_incompletes
                           competences_transversales_incompletes complete].freeze
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze

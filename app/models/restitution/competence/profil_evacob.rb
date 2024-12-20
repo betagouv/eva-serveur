@@ -29,6 +29,7 @@ module Restitution
           ::Competence::PROFIL_ABERRANT => 0
         },
         'profil_numeratie' => {
+          ::Competence::PROFIL_4_PLUS => 5,
           ::Competence::PROFIL_4 => 4,
           ::Competence::PROFIL_3 => 3,
           ::Competence::PROFIL_2 => 2,

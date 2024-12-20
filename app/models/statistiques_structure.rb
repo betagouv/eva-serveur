@@ -77,7 +77,7 @@ class StatistiquesStructure
   def transforme_valeurs_en_pourcentage(hash)
     total_valeurs = hash.values.sum
     hash.update(hash) do |_cle, valeur|
-      (valeur.to_f / total_valeurs * 100)
+      Pourcentage.new(valeur: valeur, valeur_max: total_valeurs).calcul
     end
   end
 

@@ -28,10 +28,10 @@ module Restitution
 
         return if evenements.blank?
 
-        score_max = evenements&.sum(&:score_max_reponse).to_f
-        score = evenements&.sum(&:score_reponse).to_f
+        score_max = evenements&.sum(&:score_max_reponse)
+        score = evenements&.sum(&:score_reponse)
 
-        (score / score_max) * 100 if score.present? && score_max.present?
+        Pourcentage.new(valeur: score, valeur_max: score_max).calcul
       end
 
       private

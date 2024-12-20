@@ -6,9 +6,13 @@
           <% if competence == :litteratie %>
             <%= image_tag "badges/anlci/#{metriques[:profil]}.svg", alt: t(".#{metriques[:profil]}.alt_icone") %>
           <% else %>
-            <div class="badge">
-              <span><%= metriques[:pourcentage] %>%</span>
-            </div>
+            <% succes = metriques[:profil] == true %>
+            <% couleur = succes ? :vert : :orange %>
+
+            <%= render(
+              partial: 'components/badge_profil',
+              locals: { couleur: couleur, titre: "#{metriques[:pourcentage]}%" }
+            ) %>
           <% end %>
         </div>
         <div class= "col-7">

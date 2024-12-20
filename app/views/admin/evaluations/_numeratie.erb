@@ -8,9 +8,11 @@
       scope: "admin.evaluations.numeratie.#{profil}",
       icone: "icone_profil/icone_#{profil}.svg",
       pdf: pdf %>
-    <%= render 'admin/evaluations/positionnement/sous_competences',
-        sous_competences: place_du_marche.competences_numeratie,
-        competence: :numeratie %>
+    <% if place_du_marche %>
+      <%= render 'admin/evaluations/positionnement/sous_competences',
+          sous_competences: place_du_marche.competences_numeratie,
+          competence: :numeratie %>
+    <% end %>
   </div>
   <% if !pdf && place_du_marche %>
     <% route = admin_positionnement_partie_reponses_path(partie_id: place_du_marche.partie.id)%>

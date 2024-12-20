@@ -69,7 +69,8 @@ module Restitution
       def pourcentage_reussite(reponses)
         scores = reponses.map { |e| [e['scoreMax'] || 0, e['score'] || 0] }
         score_max, score = scores.transpose.map(&:sum)
-        score_max.zero? ? 'non applicable' : "#{(score.to_f * 100 / score_max.to_f).round}%"
+        pourcentage = Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
+        score_max.zero? ? 'non applicable' : "#{pourcentage}%"
       end
     end
   end

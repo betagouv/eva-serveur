@@ -161,6 +161,16 @@ describe Restitution::PlaceDuMarche do
       end
     end
 
+    context 'quand le niveau numératie est 5 (4 Plus)' do
+      before do
+        allow(restitution).to receive(:niveau_numeratie).and_return 5
+      end
+
+      it 'retourne le profil 4 Plus' do
+        expect(restitution.profil_numeratie).to equal(Competence::PROFIL_4_PLUS)
+      end
+    end
+
     context 'quand le niveau numératie est 0' do
       before do
         allow(restitution).to receive(:niveau_numeratie).and_return 0
@@ -230,9 +240,80 @@ describe Restitution::PlaceDuMarche do
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return 71
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return 71
         allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return 71
+        allow(restitution).to receive(:a_passe_des_questions_de_rattrapage?).and_return true
       end
 
       it { expect(restitution.niveau_numeratie).to eq 4 }
+    end
+
+    context 'quand le pourcentage de réussite pour N3 est supérieur à 70 sans rattrapage' do
+      before do
+        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return 71
+        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return 71
+        allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return 71
+        allow(restitution).to receive(:a_passe_des_questions_de_rattrapage?).and_return false
+      end
+
+      it { expect(restitution.niveau_numeratie).to eq 5 }
+    end
+  end
+
+  describe '#a_passe_des_questions_de_rattrapage?' do
+    context 'sans rattrapage' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N3Pse1',
+                                               score: 1 },
+                                    partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N3Pvn1',
+                                               score: 1 },
+                                    partie: partie),
+                              build(:evenement_reponse,
+                                    donnees: { succes: true,
+                                               question: 'N3Prn1',
+                                               score: 1 },
+                                    partie: partie)
+                            ])
+      end
+
+      it do
+        expect(restitution.a_passe_des_questions_de_rattrapage?).to be false
+      end
+    end
+
+    context 'avec du rattrapage' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N3Pse1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N3Pvn1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N3Prn1',
+                                                                   score: 1 },
+                                                        partie: partie),
+                              build(:evenement_reponse, donnees: { succes: true,
+                                                                   question: 'N3Rrn1',
+                                                                   score: 2 },
+                                                        partie: partie)
+                            ])
+      end
+
+      it do
+        expect(restitution.a_passe_des_questions_de_rattrapage?).to be true
+      end
     end
   end
 end

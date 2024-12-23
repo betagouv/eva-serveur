@@ -34,7 +34,7 @@ module Restitution
 
     def initialize(campagne, evenements)
       @campagne = campagne
-      evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
+      @evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
       calcule_pourcentage_reussite_competence_clea
       super
     end
@@ -112,11 +112,10 @@ module Restitution
     end
 
     def evenements_groupes_cleas
-      Rails.logger.debug campagne
       @evenements_groupes_cleas ||= begin
         situation = Situation.find_by(nom_technique: 'place_du_marche')
         questionnaire = @campagne.questionnaire_pour(situation)
-        evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
+        @evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
       end
     end
   end

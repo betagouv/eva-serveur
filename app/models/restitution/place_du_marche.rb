@@ -33,9 +33,7 @@ module Restitution
     SEUIL_MINIMUM = 70
 
     def initialize(campagne, evenements)
-      situation = Situation.find_by(nom_technique: 'place_du_marche')
-      questionnaire = campagne.questionnaire_pour(situation)
-      @groupes_clea = evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
+      @campagne = campagne
       evenements = evenements.map { |e| EvenementPlaceDuMarche.new e }
       calcule_pourcentage_reussite_competence_clea
       super
@@ -50,7 +48,7 @@ module Restitution
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new
                                      .calcule_pourcentage_reussite(
-                                       @groupes_clea[code].values.flatten
+                                       evenements_groupes_cleas[code].values.flatten
                                      )
       end
     end
@@ -111,6 +109,15 @@ module Restitution
 
     def succes?(code_clea)
       SCORES_CLEA[code_clea][:pourcentage_reussite] >= SCORES_CLEA[code_clea][:seuil]
+    end
+
+    def evenements_groupes_cleas
+      Rails.logger.debug campagne
+      @evenements_groupes_cleas ||= begin
+        situation = Situation.find_by(nom_technique: 'place_du_marche')
+        questionnaire = @campagne.questionnaire_pour(situation)
+        evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
+      end
     end
   end
 end

@@ -4,38 +4,41 @@ require 'rails_helper'
 
 describe Restitution::PlaceDuMarche do
   let(:evaluation) { create :evaluation, nom: 'Test' }
-  let(:situation) { create :situation }
+  let!(:situation) { create :situation_place_du_marche }
   let(:campagne) { build :campagne }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
+  let(:evenements) do
+    [
+      build(:evenement_demarrage, partie: partie),
+      build(:evenement_reponse, partie: partie, donnees: { question: 'question' }),
+      build(:evenement_reponse,
+            donnees: { succes: true, question: 'N1Prn1', scoreMax: 1, score: 1 },
+            partie: partie),
+      build(:evenement_reponse,
+            donnees: { succes: true, question: 'N2Q1', score: 0.5, scoreMax: 0.5 },
+            partie: partie),
+      build(:evenement_reponse,
+            donnees: { succes: false, question: 'N2Q2', score: 0, scoreMax: 0.5 },
+            partie: partie),
+      build(:evenement_reponse,
+            donnees: { succes: false, scoreMax: 1, question: 'N3Q1' },
+            partie: partie)
+    ]
+  end
   let(:restitution) do
     described_class.new(
-      campagne,
-      [
-        build(:evenement_demarrage, partie: partie),
-        build(:evenement_reponse, partie: partie, donnees: { question: 'question' }),
-        build(:evenement_reponse,
-              donnees: { succes: true, question: 'N1Prn1', scoreMax: 1, score: 1 },
-              partie: partie),
-        build(:evenement_reponse,
-              donnees: { succes: true, question: 'N2Q1', score: 0.5, scoreMax: 0.5 },
-              partie: partie),
-        build(:evenement_reponse,
-              donnees: { succes: false, question: 'N2Q2', score: 0, scoreMax: 0.5 },
-              partie: partie),
-        build(:evenement_reponse,
-              donnees: { succes: false, scoreMax: 1, question: 'N3Q1' },
-              partie: partie)
-      ],
-      partie
+      campagne, evenements
     )
   end
 
   describe '#synthèse' do
     it 'retourne la synthèse des score des niveaux évalués et le profil' do
-      evenements = [
-        build(:evenement_demarrage)
-      ]
-      restitution = described_class.new(campagne, evenements, partie)
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
+      restitution = described_class.new(campagne, evenements)
       expect(restitution.synthese.keys).to eql(%i[numeratie_niveau1
                                                   numeratie_niveau2
                                                   numeratie_niveau3
@@ -44,6 +47,14 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#score_pour' do
+    before do
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
+    end
+
     context 'sans rattrapage' do
       let(:restitution) do
         described_class.new(campagne,
@@ -69,7 +80,7 @@ describe Restitution::PlaceDuMarche do
                                                question: 'N2',
                                                score: 0.5 },
                                     partie: partie)
-                            ], partie)
+                            ])
       end
 
       it 'retourne le score selon le niveau' do
@@ -104,8 +115,7 @@ describe Restitution::PlaceDuMarche do
                                                                    question: 'N2',
                                                                    score: 0.5 },
                                                         partie: partie)
-                            ],
-                            partie)
+                            ])
       end
 
       it 'retourne le score du niveau donné' do
@@ -115,6 +125,14 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#pourcentage_de_reussite_pour' do
+    before do
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
+    end
+
     it 'retourne le pourcentage de réussite pour un niveau donné' do
       expect(restitution.pourcentage_de_reussite_pour(:N1)).to eq(100)
       expect(restitution.pourcentage_de_reussite_pour(:N2)).to eq(50)
@@ -123,6 +141,14 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#profil_numeratie' do
+    before do
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
+    end
+
     context 'quand le niveau numératie est 1' do
       before do
         allow(restitution).to receive(:niveau_numeratie).and_return 1
@@ -186,6 +212,11 @@ describe Restitution::PlaceDuMarche do
 
   describe '#niveau_numeratie' do
     before do
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
       allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N1).and_return nil
       allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N2).and_return nil
       allow(restitution).to receive(:pourcentage_de_reussite_pour).with(:N3).and_return nil
@@ -261,6 +292,14 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#a_passe_des_questions_de_rattrapage?' do
+    before do
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(described_class).to receive(
+        :calcule_pourcentage_reussite_competence_clea
+      )
+      # rubocop:enable RSpec/AnyInstance
+    end
+
     context 'sans rattrapage' do
       let(:restitution) do
         described_class.new(campagne,

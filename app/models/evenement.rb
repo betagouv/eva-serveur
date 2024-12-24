@@ -22,7 +22,8 @@ class Evenement < ApplicationRecord
     end
   }
   scope :questions_repondues_et_non_repondues, lambda { |questionnaire, noms_techniques|
-    non_repondues = questions_non_repondues(questionnaire, noms_techniques).map(&:as_json).each do |q|
+    non_repondues = questions_non_repondues(questionnaire, noms_techniques).map(&:as_json)
+                                                                           .each do |q|
       q['scoreMax'] = q.delete('score')
       q['question'] = q.delete('nom_technique')
     end

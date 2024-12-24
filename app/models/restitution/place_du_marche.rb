@@ -35,13 +35,14 @@ module Restitution
     def initialize(campagne, evenements)
       @campagne = campagne
       @evenements = evenements
-      @evenementsPlaceDuMarche = evenements.map { |e| EvenementPlaceDuMarche.new e }
+      @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
       calcule_pourcentage_reussite_competence_clea
       super
     end
 
     def score_pour(niveau)
-      SCORES_NIVEAUX[niveau]['score'].calcule(@evenementsPlaceDuMarche, niveau, avec_rattrapage: true)
+      SCORES_NIVEAUX[niveau]['score'].calcule(@evenements_place_du_marche, niveau,
+                                              avec_rattrapage: true)
     end
 
     def calcule_pourcentage_reussite_competence_clea
@@ -55,7 +56,8 @@ module Restitution
     end
 
     def pourcentage_de_reussite_pour(niveau)
-      SCORES_NIVEAUX[niveau]['succes'].calcule_pourcentage_reussite(@evenementsPlaceDuMarche, niveau)
+      SCORES_NIVEAUX[niveau]['succes'].calcule_pourcentage_reussite(@evenements_place_du_marche,
+                                                                    niveau)
     end
 
     def synthese
@@ -88,7 +90,8 @@ module Restitution
     end
 
     def a_passe_des_questions_de_rattrapage?
-      evenements_rattrapage = MetriquesHelper.filtre_evenements_reponses(@evenementsPlaceDuMarche) do |e|
+      evenements_rattrapage = MetriquesHelper
+                              .filtre_evenements_reponses(@evenements_place_du_marche) do |e|
         e.donnees['question'].start_with?('N3R')
       end
       evenements_rattrapage.present?

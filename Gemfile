@@ -82,6 +82,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-packaging', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rails-accessibility', require: false
   gem 'rubocop-rspec', require: false
 end
 

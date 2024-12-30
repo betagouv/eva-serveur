@@ -7,11 +7,8 @@ panel 'Détails de la question' do
     row :nom_technique
     row :description
     row :illustration do
-      if resource.illustration.attached?
-        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(resource.illustration), class: 'image-preview'
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.illustration }
     end
     row :zone_depot do
       if resource.zone_depot.attached?
@@ -45,11 +42,8 @@ panel 'Réponses' do
   para 'Classer les réponses dans l’ordre souhaité'
   reorderable_table_for question_glisser_deposer.reponses do
     column :illustration do |reponse|
-      if reponse.illustration.attached?
-        link_to(cdn_for(reponse.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(reponse.illustration), class: 'image-preview'
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: reponse.illustration }
     end
     column :position_client
   end

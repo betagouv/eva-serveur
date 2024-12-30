@@ -4,6 +4,8 @@ fr:
       input_illustration:
         illustration:
           hint: 'La taille de l’image rendue est de 1008x566.'
+        label:
+          supprimer_illustration: Supprimer l'illustration actuelle
       inputs_avec_transcriptions_audios:
         label:
           intitule: |
@@ -15,7 +17,6 @@ fr:
           consigne_audio: Bouton répéter la consigne
           intitule_reponse_audio: Intitulé réponse audio
           modalite_reponse_audio: Consigne audio
-          supprimer_illustration : Supprimer l'illustration actuelle
           supprimer_audio_intitule: Supprimer l'audio de l'intitulé actuel
           supprimer_audio_modalite: Supprimer l'audio de la consigne actuelle
           supprimer_audio_consigne: Supprimer l'audio du bouton répéter la consigne

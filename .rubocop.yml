@@ -1,6 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 require:
+  - ./spec/rubocop/cop/custom/svg_image_alt_tag.rb
   - rubocop-rails-accessibility
   - rubocop-packaging
   - rubocop-rails
@@ -20,6 +21,9 @@ AllCops:
     - 'test/**/*'
     - 'vendor/**/*'
     - 'spec/spec_helper.rb'
+
+Custom/SvgImageAltTag:
+  Enabled: true
 
 Style/Documentation:
   Enabled: false

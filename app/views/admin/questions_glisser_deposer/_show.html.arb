@@ -11,11 +11,8 @@ panel 'Détails de la question' do
              locals: { illustration: resource.illustration }
     end
     row :zone_depot do
-      if resource.zone_depot.attached?
-        link_to(cdn_for(resource.zone_depot), target: '_blank', rel: 'noopener') do
-          raw inline_svg_content(resource.zone_depot, class: 'image-preview')
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.zone_depot }
     end
     intitule = question_glisser_deposer.transcription_intitule
     row :intitule do

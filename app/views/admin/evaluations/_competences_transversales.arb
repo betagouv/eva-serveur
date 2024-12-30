@@ -46,7 +46,7 @@ div id: 'competences_transversales', class: 'page' do
                            scope: 'admin.evaluations.restitution_competence')
                   div class: 'lien-metier' do
                     if pdf
-                      text_node svg_tag_base64 'lien.svg', class: 'image-lien'
+                      text_node svg_tag_base64 'lien.svg', class: 'image-lien', alt: ''
                     else
                       text_node image_tag 'lien.svg', alt: '', class: 'image-lien'
                     end

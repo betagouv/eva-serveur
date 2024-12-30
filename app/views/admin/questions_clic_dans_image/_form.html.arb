@@ -15,7 +15,9 @@ active_admin_form_for [:admin, resource] do |f|
       f.input :supprimer_zone_cliquable,
               as: :boolean,
               label: t('.label.supprimer_zone_cliquable'),
-              hint: svg_attachment_base64(resource.zone_cliquable, class: 'image-preview')
+              hint: svg_attachment_base64(resource.zone_cliquable,
+                                          class: 'image-preview',
+                                          alt: resource.zone_cliquable.filename)
     end
     f.input :image_au_clic,
             label: t('.label.image_au_clic'),
@@ -24,7 +26,9 @@ active_admin_form_for [:admin, resource] do |f|
     if f.object.image_au_clic.attached?
       f.input :supprimer_image_au_clic,
               as: :boolean,
-              hint: svg_attachment_base64(resource.image_au_clic, class: 'image-preview')
+              hint: svg_attachment_base64(resource.image_au_clic,
+                                          class: 'image-preview',
+                                          alt: resource.image_au_clic.filename)
     end
   end
 

@@ -8,11 +8,8 @@ panel 'Détails de la question' do
     row :nom_technique
     row :description
     row :illustration do
-      if resource.illustration.attached?
-        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(resource.illustration), class: 'image-preview'
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.illustration }
     end
     intitule = question_qcm.transcription_intitule
     row :intitule do

@@ -6,11 +6,8 @@ panel 'Détails de la question' do
     row :libelle
     row :nom_technique
     row :illustration do
-      if resource.illustration.attached?
-        link_to(cdn_for(resource.illustration), target: '_blank', rel: 'noopener') do
-          image_tag cdn_for(resource.illustration), class: 'image-preview'
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.illustration }
     end
     intitule = question_sous_consigne.transcription_intitule
     row :intitule do

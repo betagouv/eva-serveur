@@ -6,5 +6,6 @@ f.input :illustration, as: :file,
 if f.object.illustration.attached?
   f.input :supprimer_illustration, as: :boolean,
                                    label: t('.label.supprimer_illustration'),
-                                   hint: image_tag(cdn_for(f.object.illustration))
+                                   hint: image_tag(cdn_for(f.object.illustration),
+                                                   alt: f.object.illustration.filename)
 end

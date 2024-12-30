@@ -5,7 +5,7 @@ div class: 'contenu-sans-evaluations' do
     h3 t('.titre')
     div t('.action'), class: 'bouton grand-bouton bouton--desactive'
   end
-  div svg_tag_base64 'panneaux.svg', class: 'illustration'
+  div image_tag 'panneaux.svg', class: 'illustration', alt: ''
   div class: 'description' do
     text_node md t('.description')
   end

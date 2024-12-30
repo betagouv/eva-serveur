@@ -17,7 +17,9 @@ active_admin_form_for [:admin, resource] do |f|
       f.input :supprimer_zone_depot,
               as: :boolean,
               label: t('.label.supprimer_zone_depot'),
-              hint: svg_attachment_base64(resource.zone_depot, class: 'image-preview')
+              hint: svg_attachment_base64(resource.zone_depot,
+                                          class: 'image-preview',
+                                          alt: resource.zone_depot.filename)
     end
   end
   render partial: 'admin/questions/inputs_avec_transcriptions_audios',

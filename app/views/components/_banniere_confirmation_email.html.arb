@@ -3,7 +3,7 @@
 div class: 'card__banner card__banner--alert w-100 d-flex align-items-center bg-erreur' do
   case demande
   when :nouvelle_inscription
-    div svg_tag_base64 'icones/icone-enveloppe.svg', class: 'banner__icone'
+    div image_tag 'icones/icone-enveloppe.svg', class: 'banner__icone', alt: ''
     div do
       scope = 'components.prise_en_main.etapes.confirmation_email'
       h4 t('titre', scope: scope), class: 'banner__titre'

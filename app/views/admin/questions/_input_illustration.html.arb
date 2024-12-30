@@ -3,9 +3,9 @@
 f.input :illustration, as: :file,
                        input_html: { accept: illustration_content_types.join(',') },
                        hint: t('.illustration.hint')
-if f.object.illustration.attached?
+if resource.illustration.attached?
   f.input :supprimer_illustration, as: :boolean,
                                    label: t('.label.supprimer_illustration'),
-                                   hint: image_tag(cdn_for(f.object.illustration),
-                                                   alt: f.object.illustration.filename)
+                                   hint: image_tag(cdn_for(resource.illustration),
+                                                   alt: resource.illustration.filename)
 end

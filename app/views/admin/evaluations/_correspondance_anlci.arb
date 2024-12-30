@@ -13,7 +13,7 @@ div id: 'correspondance_anlci', class: 'page' do
     div class: 'row no-gutters recommandation-anlci marges-page' do
       div class: 'col-auto' do
         if pdf
-          svg_tag_base64 'logo_anlci.svg', class: 'pr-5'
+          svg_tag_base64 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
         else
           image_tag 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
         end

@@ -11,18 +11,12 @@ panel 'Détails de la question' do
              locals: { illustration: resource.illustration }
     end
     row :zone_cliquable do
-      if resource.zone_cliquable.attached?
-        link_to(cdn_for(resource.zone_cliquable), target: '_blank', rel: 'noopener') do
-          raw inline_svg_content(resource.zone_cliquable, class: 'image-preview')
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.zone_cliquable }
     end
     row :image_au_clic do
-      if resource.image_au_clic.attached?
-        link_to(cdn_for(resource.image_au_clic), target: '_blank', rel: 'noopener') do
-          raw inline_svg_content(resource.image_au_clic, class: 'image-preview')
-        end
-      end
+      render partial: 'admin/questions/show_illustration',
+             locals: { illustration: resource.image_au_clic }
     end
     intitule = question_clic_dans_image.transcription_intitule
     row :intitule do

@@ -11,19 +11,13 @@ class Evenement < ApplicationRecord
   acts_as_paranoid
 
   scope :reponses, -> { where(nom: 'reponse') }
-  scope :questions_repondues, lambda {
-    reponses.select("donnees->>'question' AS question").map(&:question)
-  }
-  scope :questions_non_repondues, lambda { |questionnaire, noms_techniques|
-    questionnaire&.questions&.reject do |q|
-      questions_repondues.include?(q.nom_technique) ||
-        q.sous_consigne? ||
-        noms_techniques.any? { |noms| q.nom_technique.start_with?(*noms) }
-    end
-  }
   scope :questions_repondues_et_non_repondues, lambda { |questionnaire, noms_techniques|
-    non_repondues = questions_non_repondues(questionnaire, noms_techniques).map(&:as_json)
-                                                                           .each do |q|
+    noms_techniques_repondues = (noms_techniques + questions_repondues.map(&:nom_technique)).flatten
+    non_repondues = questionnaire.questions
+                                 .includes(:illustration_attachment, :transcription_consigne,
+                                           :transcription_intitule, :transcription_modalite_reponse)
+                                 .non_repondues(noms_techniques_repondues)
+    non_repondues = non_repondues.map(&:as_json).each do |q|
       q['scoreMax'] = q.delete('score')
       q['question'] = q.delete('nom_technique')
     end
@@ -36,6 +30,10 @@ class Evenement < ApplicationRecord
 
   def reponse_intitule
     donnees['reponseIntitule'].presence || donnees['reponse']
+  end
+
+  def self.questions_repondues
+    reponses.select("donnees->>'question' AS question").map(&:question)
   end
 
   def self.regroupe_par_codes_clea(questionnaire, noms_techniques)

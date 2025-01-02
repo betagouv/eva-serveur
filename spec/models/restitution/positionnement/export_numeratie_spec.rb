@@ -89,9 +89,9 @@ describe Restitution::Positionnement::ExportNumeratie do
       expect(response_service.questions_non_repondues).to eq([])
     end
 
-    it 'exclut les questions de rattrapage' do
+    it "n'exclut pas les questions de rattrapage" do
       partie.situation.questionnaire.questions << question_rattrapage
-      expect(response_service.questions_non_repondues).to eq([])
+      expect(response_service.questions_non_repondues).to eq([question_rattrapage])
     end
 
     it 'exclut les questions déjà répondues' do

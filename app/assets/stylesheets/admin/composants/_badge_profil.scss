@@ -10,11 +10,11 @@
   font-weight: bold;
   font-size: 1.2rem;
 
-  &--vert {
+  &--success {
     border-color: $eva_light_green;
   }
 
-  &--orange {
+  &--warning {
     border-color: $eva_orange;
   }
 }

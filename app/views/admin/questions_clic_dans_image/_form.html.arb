@@ -7,29 +7,24 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :nom_technique
     f.input :description
     render partial: 'admin/questions/input_illustration', locals: { f: f }
-    f.input :zone_cliquable,
-            as: :file,
-            hint: "L'un des éléments cliquables doit contenir la classe css `bonne-reponse`",
-            input_html: { accept: 'image/svg+xml' }
-    if f.object.zone_cliquable.attached? && f.object.errors[:zone_cliquable].blank?
-      f.input :supprimer_zone_cliquable,
-              as: :boolean,
-              label: t('.label.supprimer_zone_cliquable'),
-              hint: svg_attachment_base64(resource.zone_cliquable,
-                                          class: 'image-preview',
-                                          alt: resource.zone_cliquable.filename)
-    end
-    f.input :image_au_clic,
-            label: t('.label.image_au_clic'),
-            as: :file,
-            input_html: { accept: 'image/svg+xml' }
-    if f.object.image_au_clic.attached?
-      f.input :supprimer_image_au_clic,
-              as: :boolean,
-              hint: svg_attachment_base64(resource.image_au_clic,
-                                          class: 'image-preview',
-                                          alt: resource.image_au_clic.filename)
-    end
+    render partial: 'admin/questions/input_illustration_base',
+           locals: {
+             f: f,
+             nom: :zone_cliquable,
+             nom_suppression: :supprimer_zone_cliquable,
+             image: resource.zone_cliquable,
+             hint: '.format_fichier_zone_cliquable',
+             content_type: :svg
+           }
+    render partial: 'admin/questions/input_illustration_base',
+           locals: {
+             f: f,
+             nom: :image_au_clic,
+             label: t('.label.image_au_clic'),
+             nom_suppression: :supprimer_image_au_clic,
+             image: resource.image_au_clic,
+             content_type: :svg
+           }
   end
 
   render partial: 'admin/questions/inputs_avec_transcriptions_audios',

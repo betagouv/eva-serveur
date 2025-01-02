@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-f.input :illustration, as: :file,
-                       input_html: { accept: illustration_content_types.join(',') },
-                       hint: t('.illustration.hint')
-if resource.illustration.attached?
-  f.input :supprimer_illustration, as: :boolean,
-                                   label: t('.label.supprimer_illustration'),
-                                   hint: image_tag(cdn_for(resource.illustration),
-                                                   alt: resource.illustration.filename)
-end
+render partial: 'admin/questions/input_illustration_base',
+       locals: {
+         f: f,
+         nom: :illustration,
+         nom_suppression: :supprimer_illustration,
+         image: resource.illustration,
+         hint: '.illustration.hint',
+         content_type: :default
+       }

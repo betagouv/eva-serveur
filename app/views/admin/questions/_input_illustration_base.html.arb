@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+content_type = content_type == :default ? illustration_content_types.join(',') : 'image/svg+xml'
+hint = hint.present? ? t(hint) : ''
+
+f.input nom,
+        as: :file,
+        hint: hint,
+        label: label,
+        input_html: { accept: content_type }
+
+if image.attached? && f.object.errors[nom].blank?
+  f.input nom_suppression, as: :boolean,
+                           label: t('.supprimer_illustration'),
+                           hint: image_tag(image,
+                                           class: 'image-preview',
+                                           alt: image.filename)
+end

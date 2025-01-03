@@ -22,6 +22,8 @@ class Question < ApplicationRecord
     where(categorie: :consigne)
   }, class_name: 'Transcription', dependent: :destroy
 
+  scope :n_est_pas_une_sous_consigne, -> { where.not(type: QuestionSousConsigne::QUESTION_TYPE) }
+
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
 
@@ -97,6 +99,10 @@ class Question < ApplicationRecord
 
   def sous_consigne?
     type == QuestionSousConsigne::QUESTION_TYPE
+  end
+
+  def self.non_repondues(noms_techniques_repondues)
+    n_est_pas_une_sous_consigne.where.not(nom_technique: noms_techniques_repondues)
   end
 
   private

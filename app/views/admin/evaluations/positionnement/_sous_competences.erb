@@ -7,11 +7,11 @@
             <%= image_tag "badges/anlci/#{metriques[:profil]}.svg", alt: t(".#{metriques[:profil]}.alt_icone") %>
           <% else %>
             <% succes = metriques[:profil] == true %>
-            <% couleur = succes ? :vert : :orange %>
+            <% type = succes ? :complete : :incomplet %>
 
             <%= render(
               partial: 'components/badge_profil',
-              locals: { couleur: couleur, titre: "#{metriques[:pourcentage]}%" }
+              locals: { type: type, titre: "#{metriques[:pourcentage]}%" }
             ) %>
           <% end %>
         </div>

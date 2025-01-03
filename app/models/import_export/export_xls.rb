@@ -5,11 +5,11 @@ module ImportExport
     attr_reader :workbook, :sheet
 
     WORKSHEET = 'Données'
+    WORKSHEET_SYNTHESE = 'Synthèse'
 
-    def initialize(entetes: [])
+    def initialize(entetes: [], workbook: nil)
       @entetes = entetes
-      @workbook = Spreadsheet::Workbook.new
-      initialise_sheet
+      @workbook = workbook
     end
 
     def content_type_xls
@@ -21,20 +21,18 @@ module ImportExport
       "#{date}-#{titre}.xls"
     end
 
-    def initialise_sheet
-      @sheet = @workbook.create_worksheet(name: WORKSHEET)
-      format_premiere_ligne = Spreadsheet::Format.new(weight: :bold)
-      @sheet.row(0).default_format = format_premiere_ligne
-      @entetes.each_with_index do |entete, colonne|
-        @sheet[0, colonne] = entete[:titre]
-        @sheet.column(colonne).width = entete[:taille]
-      end
-    end
-
     def retourne_le_contenu_du_xls
       file_contents = StringIO.new
       @sheet.workbook.write file_contents
       file_contents.string
+    end
+
+    def create_worksheet_donnees
+      ImportExport::CreationSheetXls.new(WORKSHEET, @entetes, @workbook).initialise_sheet
+    end
+
+    def create_worksheet_synthese
+      ImportExport::CreationSheetXls.new(WORKSHEET_SYNTHESE, @entetes, @workbook).initialise_sheet 
     end
   end
 end

@@ -10,8 +10,13 @@ module Restitution
       end
 
       def to_xls
+        workbook = Spreadsheet::Workbook.new
         entetes = ImportExport::Positionnement::ExportDonnees.new(@partie).entetes
-        @sheet = ::ImportExport::ExportXls.new(entetes: entetes).sheet
+        @sheet = ::ImportExport::ExportXls.new(entetes: entetes, workbook: workbook).create_worksheet_donnees
+
+        entetes_syhthese = ImportExport::Positionnement::ExportDonnees::ENTETES_SYNTHESE
+        @sheet_synthese = ::ImportExport::ExportXls.new(entetes: entetes_syhthese, workbook: workbook).create_worksheet_synthese
+        
         remplie_la_feuille
         retourne_le_contenu_du_xls
       end
@@ -38,6 +43,11 @@ module Restitution
       def remplis_reponses_litteratie(ligne)
         export = ExportLitteratie.new(@evenements_reponses.sort_by(&:position), @sheet)
         export.remplis_reponses(ligne)
+      end
+
+      def remplis_scores(ligne)
+        export = ExportNumeratie.new(@partie, @sheet_synthese)
+        pp "export.regroupe_par_codes_clea: #{export.regroupe_par_codes_clea}"
       end
 
       def remplis_reponses_numeratie(ligne)

@@ -24,6 +24,12 @@ module ImportExport
         { titre: 'Score possible de la question', taille: 10 }
       ].freeze
 
+      ENTETES_SYNTHESE = [
+        { titre: 'Points', taille: 20 },
+        { titre: 'Points maximum', taille: 10 },
+        { titre: 'Score', taille: 10 }
+      ].freeze
+
       def initialize(partie)
         @partie = partie
       end

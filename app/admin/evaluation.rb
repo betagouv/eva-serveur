@@ -146,6 +146,12 @@ ActiveAdmin.register Evaluation do
 
     private
 
+    def find_resource
+      scoped_collection.where(id: params[:id])
+                       .includes(campagne: { situations_configurations: :situation })
+                       .first!
+    end
+
     def statistiques
       @statistiques ||= StatistiquesEvaluation.new(resource)
     end

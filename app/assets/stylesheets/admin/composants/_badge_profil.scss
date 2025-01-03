@@ -10,11 +10,11 @@
   font-weight: bold;
   font-size: 1.2rem;
 
-  &--success {
-    border-color: $eva_light_green;
+  &--complete {
+    border-color: $eva_green;
   }
 
-  &--warning {
+  &--incomplet {
     border-color: $eva_orange;
   }
 }

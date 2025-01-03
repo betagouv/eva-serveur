@@ -1,5 +1,5 @@
 fr:
   badge_profil:
     title:
-      success: "Succès"
-      warning: ""
+      complete: "Complété"
+      incomplet: "Non atteint"

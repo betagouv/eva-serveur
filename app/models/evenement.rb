@@ -12,7 +12,7 @@ class Evenement < ApplicationRecord
 
   scope :reponses, -> { where(nom: 'reponse') }
   scope :questions_repondues_et_non_repondues, lambda { |questionnaire, noms_techniques|
-    noms_techniques_repondues = (noms_techniques + questions_repondues.map(&:nom_technique)).flatten
+    noms_techniques_repondues = (noms_techniques + questions_repondues).flatten
     non_repondues = questionnaire.questions
                                  .includes(:illustration_attachment, :transcription_consigne,
                                            :transcription_intitule, :transcription_modalite_reponse)

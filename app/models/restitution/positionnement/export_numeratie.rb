@@ -20,7 +20,7 @@ module Restitution
 
         questionnaire.questions.reject do |q|
           @evenements_reponses.questions_repondues.include?(q[:nom_technique]) ||
-            question_rattrapage(q[:nom_technique]) || q.sous_consigne?
+            q.sous_consigne?
         end
       end
 
@@ -79,10 +79,6 @@ module Restitution
         @sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
         @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
         @sheet[ligne, 7] = donnees['reponseIntitule'] || donnees['reponse']
-      end
-
-      def question_rattrapage(nom_technique)
-        nom_technique.start_with?('N1R', 'N2R', 'N3R')
       end
 
       def tri_par_ordre_croissant(groupes_clea)

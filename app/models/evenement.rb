@@ -11,18 +11,6 @@ class Evenement < ApplicationRecord
   acts_as_paranoid
 
   scope :reponses, -> { where(nom: 'reponse') }
-  scope :questions_repondues_et_non_repondues, lambda { |questionnaire, noms_techniques|
-    noms_techniques_repondues = (noms_techniques + questions_repondues).flatten
-    non_repondues = questionnaire.questions
-                                 .includes(:illustration_attachment, :transcription_consigne,
-                                           :transcription_intitule, :transcription_modalite_reponse)
-                                 .non_repondues(noms_techniques_repondues)
-    non_repondues = non_repondues.map(&:as_json).each do |q|
-      q['scoreMax'] = q.delete('score')
-      q['question'] = q.delete('nom_technique')
-    end
-    reponses.map(&:donnees) + non_repondues
-  }
 
   def fin_situation?
     nom == 'finSituation'
@@ -46,5 +34,18 @@ class Evenement < ApplicationRecord
         Metacompetence.new(e['metacompetence']).code_clea_sous_sous_domaine
       end
     end
+  end
+
+  def self.questions_repondues_et_non_repondues(questionnaire, noms_techniques)
+    noms_techniques_repondues = (noms_techniques + questions_repondues).flatten
+    non_repondues = questionnaire.questions
+                                 .includes(:illustration_attachment, :transcription_consigne,
+                                           :transcription_intitule, :transcription_modalite_reponse)
+                                 .non_repondues(noms_techniques_repondues)
+    non_repondues = non_repondues.map(&:as_json).each do |q|
+      q['scoreMax'] = q.delete('score')
+      q['question'] = q.delete('nom_technique')
+    end
+    reponses.map(&:donnees) + non_repondues
   end
 end

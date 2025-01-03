@@ -31,6 +31,10 @@ class QuestionQcm < Question
     choix.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
   end
 
+  def self.preload_assocations_pour_as_json
+    base_includes_pour_as_json + [{ choix: :audio_attachment }]
+  end
+
   private
 
   def base_json

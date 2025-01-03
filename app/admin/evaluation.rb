@@ -4,7 +4,7 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }
 
-  includes :responsable_suivi, campagne: [:parcours_type, { compte: [:structure] }]
+  includes :responsable_suivi, campagne: [:parcours_type]
 
   config.sort_order = 'created_at_desc'
 
@@ -145,6 +145,12 @@ ActiveAdmin.register Evaluation do
     end
 
     private
+
+    def find_resource
+      scoped_collection.where(id: params[:id])
+                       .includes(campagne: { situations_configurations: :situation })
+                       .first!
+    end
 
     def statistiques
       @statistiques ||= StatistiquesEvaluation.new(resource)

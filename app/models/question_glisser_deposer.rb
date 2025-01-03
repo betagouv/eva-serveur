@@ -30,6 +30,10 @@ class QuestionGlisserDeposer < Question
     cdn_for(zone_depot)
   end
 
+  def self.preload_assocations_pour_as_json
+    base_includes_pour_as_json + [:zone_depot_attachment, { reponses: :illustration_attachment }]
+  end
+
   private
 
   def base_json

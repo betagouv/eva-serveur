@@ -47,7 +47,7 @@ module Restitution
 
     def calcule_pourcentage_reussite_competence_clea
       SCORES_CLEA.each_key do |code|
-        next if evenements_groupes_cleas[code].empty?
+        next unless evenements_groupes_cleas[code]
 
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new

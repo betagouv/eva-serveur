@@ -47,27 +47,27 @@ fr:
                   Il semble que vous maîtrisez plutôt bien la compétence de production écrite. Autrement dit, vous parvenez plutôt bien à écrire des mots en français pour transmettre des informations ou des idées.
           numeratie:
             "2_1":
-              titre: Lire, écrire, compter avec les nombres entiers
+              titre: Se repérer dans l’univers des nombres
               description:
                 true: Votre score indique une maîtrise des nombres entiers. Vous êtes capable de les lire, de les écrire et de les utiliser dans des calculs simples.
                 false: Votre score indique des difficultés dans la manipulation des nombres entiers. Cela peut rendre complexe des tâches telles que la lecture des chiffres ou le calcul de base dans des situations du quotidien.
             "2_2":
-              titre: Utiliser les fractions, décimales et pourcentages
+              titre: Résoudre un problème mettant en jeu une ou plusieurs opérations
               description:
                 true: Votre score reflète une bonne maîtrise des fractions, des nombres décimaux et des pourcentages. Vous êtes à l’aise pour les appliquer dans des situations concrètes du quotidien.
                 false: Votre score montre des lacunes dans la compréhension et l'utilisation des fractions, des nombres décimaux et des pourcentages. Cela peut poser problème dans des activités comme calculer des réductions, comparer des prix ou diviser des quantités.
             "2_3":
-              titre: Comprendre et utiliser les unités de mesure, les repères temporels et spatiaux
+              titre: Lire et calculer les unités de mesures, de temps et des quantités
               description:
                 true: Votre score montre une bonne compréhension et utilisation des unités de mesure, des repères temporels et spatiaux. Vous pouvez gérer des situations pratiques comme lire un horaire ou utiliser des outils de mesure courants.
                 false: Votre score montre des difficultés avec les unités de mesure, les repères temporels et spatiaux. Cela peut rendre plus complexe des tâches telles que comprendre un planning, lire une carte ou utiliser des outils de mesure.
             "2_4":
-              titre: Réaliser un raisonnement logique et mathématique
+              titre: Se repérer dans l'espace
               description:
                 true: Votre score reflète une bonne capacité à réaliser des raisonnements logiques et mathématiques. Vous pouvez résoudre des problèmes impliquant plusieurs étapes de manière efficace.
                 false: Votre score indique des difficultés dans les raisonnements logiques et mathématiques. Cela peut rendre plus complexe la résolution de problèmes impliquant plusieurs étapes ou des concepts abstraits.
             "2_5":
-              titre: Lire et interpréter des données chiffrées
+              titre: Restituer oralement un raisonnement mathématique
               description:
                 true: Votre score montre une bonne aptitude à lire et interpréter des données chiffrées. Vous êtes capable d’analyser efficacement des graphiques, tableaux ou autres représentations numériques.
                 false: Votre score montre des difficultés à lire et interpréter des données chiffrées. Cela peut rendre compliqué l’analyse de graphiques, de tableaux ou de statistiques.

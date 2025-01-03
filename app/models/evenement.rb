@@ -39,9 +39,9 @@ class Evenement < ApplicationRecord
   def self.questions_repondues_et_non_repondues(questionnaire, noms_techniques)
     noms_techniques_repondues = (noms_techniques + questions_repondues).flatten
     non_repondues = questionnaire.questions
-                                 .includes(:illustration_attachment, :transcription_consigne,
-                                           :transcription_intitule, :transcription_modalite_reponse)
                                  .non_repondues(noms_techniques_repondues)
+                                 .preload_all_pour_as_json
+
     non_repondues = non_repondues.map(&:as_json).each do |q|
       q['scoreMax'] = q.delete('score')
       q['question'] = q.delete('nom_technique')

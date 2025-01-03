@@ -26,6 +26,10 @@ class QuestionSaisie < Question
     self.suffix_reponse = '€' if suffix_reponse.blank?
   end
 
+  def self.preload_assocations_pour_as_json
+    base_includes_pour_as_json + [:reponses]
+  end
+
   private
 
   def base_json

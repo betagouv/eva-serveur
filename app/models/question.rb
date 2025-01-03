@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Question < ApplicationRecord
+class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_one_attached :illustration
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
@@ -23,6 +23,20 @@ class Question < ApplicationRecord
   }, class_name: 'Transcription', dependent: :destroy
 
   scope :n_est_pas_une_sous_consigne, -> { where.not(type: QuestionSousConsigne::QUESTION_TYPE) }
+  scope :preload_all_pour_as_json, lambda {
+    group_by(&:type).each do |type, questions|
+      # Récupérer la classe du type et appeler sa méthode preload_pour_as_json
+      klass = type.constantize
+      next unless klass.respond_to?(:preload_assocations_pour_as_json)
+
+      ActiveRecord::Associations::Preloader.new(
+        records: questions,
+        associations: klass.preload_assocations_pour_as_json
+      ).call
+    end
+
+    self
+  }
 
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
@@ -103,6 +117,15 @@ class Question < ApplicationRecord
 
   def self.non_repondues(noms_techniques_repondues)
     n_est_pas_une_sous_consigne.where.not(nom_technique: noms_techniques_repondues)
+  end
+
+  def self.base_includes_pour_as_json
+    [
+      :illustration_attachment,
+      { transcription_consigne: :audio_attachment },
+      { transcription_intitule: :audio_attachment },
+      { transcription_modalite_reponse: :audio_attachment }
+    ]
   end
 
   private

@@ -14,7 +14,7 @@ class FabriqueRestitution
 
     def restitution_globale(evaluation, parties_selectionnees_ids = nil)
       restitutions_retenues = instancie_restitutions(evaluation, parties_selectionnees_ids)
-      Restitution::Globale.new restitutions: restitutions_retenues, evaluation: evaluation
+      Restitution::Globale.new evaluation: evaluation, restitutions: restitutions_retenues
     end
 
     def instancie_restitutions(evaluation, parties_selectionnees_ids = nil)

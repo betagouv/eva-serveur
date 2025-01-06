@@ -143,16 +143,30 @@ describe Restitution::Positionnement::Export do
           expect(worksheet.row(1)[4]).to eq('33%')
         end
 
-        it 'verifie les sous sous domaines et et le % de réussite' do
+        it 'verifie les sous sous domaines et le % de réussite dans un autre tableau' do
           worksheet = spreadsheet.worksheet(0)
+          ligne = worksheet.row(4)
+          expect(ligne[0]).to be_nil
+          expect(ligne[1]).to be_nil
+          expect(ligne[2]).to eq('Points')
+          expect(ligne[3]).to eq('Points maximum')
+          expect(ligne[4]).to eq('Score')
+
           ligne = worksheet.row(5)
+          expect(ligne[0]).to eq('2.3.3')
+          expect(ligne[1]).to be_nil
+          expect(ligne[2]).to eq('20%')
+          expect(ligne[3]).to eq('20%')
+          expect(ligne[4]).to eq('20%')
+
+          ligne = worksheet.row(6)
           expect(ligne[0]).to eq('2.3.5')
           expect(ligne[1]).to be_nil
           expect(ligne[2]).to eq('100%')
           expect(ligne[3]).to eq('100%')
           expect(ligne[4]).to eq('100%')
 
-          ligne = worksheet.row(6)
+          ligne = worksheet.row(7)
           expect(ligne[0]).to eq('2.5.3')
           expect(ligne[1]).to be_nil
           expect(ligne[2]).to eq('non applicable')

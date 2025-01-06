@@ -3,7 +3,7 @@
 require_relative '../../decorators/evenement_place_du_marche'
 
 module Restitution
-  class PlaceDuMarche < Base
+  class PlaceDuMarche < Base # rubocop:disable Metrics/ClassLength
     SCORES_NIVEAUX = {
       N1: {
         'type' => :nombre,
@@ -49,11 +49,12 @@ module Restitution
       SCORES_CLEA.each_key do |code|
         next unless evenements_groupes_cleas[code]
 
+        evenements = evenements_groupes_cleas[code].values.flatten
+        evenements = filtre_evenements_reponses(evenements)
+
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new
-                                     .calcule_pourcentage_reussite(
-                                       evenements_groupes_cleas[code].values.flatten
-                                     )
+                                     .calcule_pourcentage_reussite(evenements)
       end
     end
 
@@ -123,6 +124,22 @@ module Restitution
         questionnaire = @campagne.questionnaire_pour(situation)
         @evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
       end
+    end
+
+    def filtre_evenements_reponses(evenements)
+      evenements = evenements_par_module(evenements, :N1)
+      evenements = evenements_par_module(evenements, :N2)
+      evenements_par_module(evenements, :N3)
+    end
+
+    def evenements_par_module(evenements, nom_module)
+      module_rattrapage = "#{nom_module}R"
+      a_fait_un_rattrapage = evenements.any? do |e|
+        e.donnees['question'].start_with?(module_rattrapage) && e.donnees['score'].present?
+      end
+      return evenements if a_fait_un_rattrapage
+
+      evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
     end
   end
 end

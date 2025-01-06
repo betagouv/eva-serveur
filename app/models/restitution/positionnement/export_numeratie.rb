@@ -100,15 +100,10 @@ module Restitution
         end.to_h
       end
 
-      def question_rattrapage(nom_technique)
-        nom_technique.start_with?('N1R', 'N2R', 'N3R')
-      end
-
       def filtre_evenements_reponses(evenements)
-        evenements_par_module(evenements, :N1)
-        evenements_par_module(evenements, :N2)
+        evenements = evenements_par_module(evenements, :N1)
+        evenements = evenements_par_module(evenements, :N2)
         evenements_par_module(evenements, :N3)
-        evenements
       end
 
       def evenements_par_module(evenements, nom_module)
@@ -118,7 +113,7 @@ module Restitution
         end
         return evenements if a_fait_un_rattrapage
 
-        evenements.reject! { |e| e['question'].start_with?(module_rattrapage) }
+        evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
       end
 
       def pourcentage_reussite(reponses)

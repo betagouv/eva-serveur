@@ -25,14 +25,14 @@ module Restitution
       end
 
       def remplis_sous_domaine(ligne, code, reponses)
-        pourcentage = pourcentage_reussite(reponses_filtres(reponses))
+        pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
         @sheet[ligne, 0] =
           "#{code} - #{intitule_code_cle} - score: #{pourcentage}"
       end
 
       def remplis_sous_sous_domaine(ligne, sous_code, reponses)
-        pourcentage = pourcentage_reussite(reponses_filtres(reponses))
+        pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
         @sheet[ligne, 0] = "#{sous_code} - score: #{pourcentage}"
       end
 
@@ -95,28 +95,30 @@ module Restitution
 
       # Trie par code cléa et par question
       def tri_par_ordre_croissant(groupes_clea)
-        groupes_clea.sort_by { |code, reponses|
+        groupes_clea.sort_by do |code, reponses|
           [code.to_s, reponses.pluck('question').sort]
-        }.to_h
+        end.to_h
       end
 
       def question_rattrapage(nom_technique)
         nom_technique.start_with?('N1R', 'N2R', 'N3R')
       end
 
-      # On vérifie si l'évalué a répondu à une question de rattrapage
-      def a_repondu_a_une_question_rattrapage?(reponses)
-        reponses.any? do |e|
-          question_rattrapage(e['question']) && e['score'].present?
-        end
+      def filtre_evenements_reponses(evenements)
+        evenements_par_module(evenements, :N1)
+        evenements_par_module(evenements, :N2)
+        evenements_par_module(evenements, :N3)
+        evenements
       end
 
-      # On filtre les réponses pour ne garder ou non les questions de rattrapage
-      # Si il a répondu à une question de rattrapage, on garde toutes les réponses rattrapage
-      def reponses_filtres(reponses)
-        return reponses if a_repondu_a_une_question_rattrapage?(reponses)
+      def evenements_par_module(evenements, nom_module)
+        module_rattrapage = "#{nom_module}R"
+        a_fait_un_rattrapage = evenements.any? do |e|
+          e['question'].start_with?(module_rattrapage) && e['score'].present?
+        end
+        return evenements if a_fait_un_rattrapage
 
-        reponses.reject { |e| question_rattrapage(e['question']) }
+        evenements.reject! { |e| e['question'].start_with?(module_rattrapage) }
       end
 
       def pourcentage_reussite(reponses)

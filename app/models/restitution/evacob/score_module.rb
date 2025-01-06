@@ -83,6 +83,23 @@ module Restitution
           [question, NUMERATIE_METRIQUES[question]].max_by { |metrique| score_totaux[metrique] }
         end
       end
+
+      def filtre_evenements_reponses(evenements)
+        evenements_par_module(evenements, :N1)
+        evenements_par_module(evenements, :N2)
+        evenements_par_module(evenements, :N3)
+        evenements
+      end
+
+      def evenements_par_module(evenements, nom_module)
+        module_rattrapage = "#{nom_module}R"
+        a_fait_un_rattrapage = evenements.any? do |e|
+          e.donnees['question'].start_with?(module_rattrapage)
+        end
+        return evenements if a_fait_un_rattrapage
+
+        evenements.reject! { |e| e.donnees['question'].start_with?(module_rattrapage) }
+      end
     end
   end
 end

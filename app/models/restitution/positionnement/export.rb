@@ -2,7 +2,7 @@
 
 module Restitution
   module Positionnement
-    class Export < ::ImportExport::ExportXls
+    class Export < ::ImportExport::ExportXls # rubocop:disable Metrics/ClassLength
       def initialize(partie:)
         super()
         @partie = partie
@@ -83,6 +83,9 @@ module Restitution
         export = ExportNumeratie.new(@partie, @sheet_synthese)
         ligne = defini_le_tableau_des_sous_domaines(ligne, export)
         ligne += 1
+        ajoute_en_tetes(@sheet_synthese, ligne,
+                        ImportExport::Positionnement::ExportDonnees::ENTETES_SYNTHESE)
+        ligne += 1
         defini_le_tableau_des_sous_sous_domaines(ligne, export)
       end
 
@@ -119,6 +122,17 @@ module Restitution
       def recupere_les_sous_sous_domaines(ligne, sous_code, evenements, export)
         export.remplis_sous_sous_domaine(ligne, sous_code, evenements)
         ligne + 1
+      end
+
+      def ajoute_en_tetes(sheet, ligne_depart, entetes)
+        format_entetes = Spreadsheet::Format.new(
+          weight: :bold
+        )
+
+        entetes.each_with_index do |entete, colonne|
+          sheet[ligne_depart, colonne] = entete[:titre]
+          sheet.row(ligne_depart).set_format(colonne, format_entetes)
+        end
       end
     end
   end

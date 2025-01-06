@@ -9,7 +9,7 @@ module ImportExport
       @workbook = workbook
 
       @sheet = @workbook.create_worksheet(name: @titre)
-      format_premiere_ligne = Spreadsheet::Format.new(weight: :bold)
+      format_premiere_ligne = Spreadsheet::Format.new(weight: :bold, border: :none)
       @sheet.row(0).default_format = format_premiere_ligne
     end
 

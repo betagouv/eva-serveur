@@ -79,9 +79,9 @@ describe Restitution::Positionnement::Export do
     context 'génére un fichier xls avec les differents onglets' do
       it "vérifie les entetes de l'onglet synthèse" do
         worksheet = spreadsheet.worksheet(0)
-        expect(worksheet.row(0)[0]).to eq('Points')
-        expect(worksheet.row(0)[1]).to eq('Points maximum')
-        expect(worksheet.row(0)[2]).to eq('Score')
+        expect(worksheet.row(0)[2]).to eq('Points')
+        expect(worksheet.row(0)[3]).to eq('Points maximum')
+        expect(worksheet.row(0)[4]).to eq('Score')
       end
 
       it "vérifie les entetes de l'onglet donnees" do
@@ -132,65 +132,67 @@ describe Restitution::Positionnement::Export do
         partie.situation.questionnaire.questions << question
       end
 
-      it 'vérifie la première ligne avec le code cléa du sous domaine et le % de réussite' do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(1)
-        expect(ligne[0]).to eq(
-          '2.3 - Lire et calculer les unités de mesures, de temps et des quantités - score: 33%'
-        )
+      context "sur l'onglet de synthese" do
+        it 'verifie la deuxième ligne avec le code cléa du sous domaine et le % de réussite' do
+          worksheet = spreadsheet.worksheet(0)
+          intitule = 'Lire et calculer les unités de mesures, de temps et des quantités'
+          expect(worksheet.row(1)[0]).to eq('2.3')
+          expect(worksheet.row(1)[1]).to eq(intitule)
+          expect(worksheet.row(1)[2]).to eq(intitule)
+          expect(worksheet.row(1)[3]).to eq(intitule)
+          expect(worksheet.row(1)[4]).to eq('33%')
+        end
+
+        it 'verifie les sous sous domaines et et le % de réussite' do
+          worksheet = spreadsheet.worksheet(0)
+          ligne = worksheet.row(5)
+          expect(ligne[0]).to eq('2.3.5')
+          expect(ligne[1]).to be_nil
+          expect(ligne[2]).to eq('100%')
+          expect(ligne[3]).to eq('100%')
+          expect(ligne[4]).to eq('100%')
+
+          ligne = worksheet.row(6)
+          expect(ligne[0]).to eq('2.5.3')
+          expect(ligne[1]).to be_nil
+          expect(ligne[2]).to eq('non applicable')
+          expect(ligne[3]).to eq('non applicable')
+          expect(ligne[4]).to eq('non applicable')
+        end
       end
 
-      it 'verifie la deuxième ligne avec le code cléa du sous sous domaine et le % de réussite' do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(2)
-        expect(ligne[0]).to eq('2.3.3 - score: 20%')
-      end
+      context "sur l'onglet de donnees" do
+        it 'verifie les détails de la première question' do
+          worksheet = spreadsheet.worksheet(1)
+          ligne = worksheet.row(1)
+          expect(ligne[0]).to eq('2.3.3')
+          expect(ligne[1]).to eq('LOdi1')
+          expect(ligne[2]).to eq('Renseigner horaires')
+          expect(ligne[3]).to eq('qcm')
+          expect(ligne[4]).to eq('De quoi s’agit-il ?')
+          expect(ligne[5]).to eq('drapeau | couverture | autre')
+          expect(ligne[6]).to eq('couverture')
+          expect(ligne[7]).to eq("c'est un drapeau")
+          expect(ligne[8]).to eq('0')
+          expect(ligne[9]).to eq('2')
+        end
 
-      it 'verifie les détails de la première question' do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(3)
-        expect(ligne[0]).to eq('2.3.3')
-        expect(ligne[1]).to eq('LOdi1')
-        expect(ligne[2]).to eq('Renseigner horaires')
-        expect(ligne[3]).to eq('qcm')
-        expect(ligne[4]).to eq('De quoi s’agit-il ?')
-        expect(ligne[5]).to eq('drapeau | couverture | autre')
-        expect(ligne[6]).to eq('couverture')
-        expect(ligne[7]).to eq("c'est un drapeau")
-        expect(ligne[8]).to eq('0')
-        expect(ligne[9]).to eq('2')
-      end
+        it 'verifie les questions du même sous sous domaine' do
+          worksheet = spreadsheet.worksheet(1)
+          ligne = worksheet.row(2)
+          expect(ligne[0]).to eq('2.3.3')
+          expect(ligne[1]).to eq('LOdi2')
+          ligne = worksheet.row(3)
+          expect(ligne[0]).to eq('2.3.3')
+          expect(ligne[1]).to eq('LOdi4')
+        end
 
-      it 'verifie les autres questions du même sous sous domaine' do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(4)
-        expect(ligne[0]).to eq('2.3.3')
-        expect(ligne[1]).to eq('LOdi2')
-        ligne = worksheet.row(5)
-        expect(ligne[0]).to eq('2.3.3')
-        expect(ligne[1]).to eq('LOdi4')
-      end
-
-      it 'verifie le sous sous domaine suivant' do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(6)
-        expect(ligne[0]).to eq('2.3.5 - score: 100%')
-        ligne = worksheet.row(7)
-        expect(ligne[0]).to eq('2.3.5')
-        expect(ligne[1]).to eq('LOdi3')
-      end
-
-      it "verifie le sous domaine suivant quand la réponse n'a pas de score" do
-        worksheet = spreadsheet.worksheet(1)
-        ligne = worksheet.row(8)
-        expect(ligne[0]).to eq(
-          '2.5 - Restituer oralement un raisonnement mathématique - score: non applicable'
-        )
-        ligne = worksheet.row(9)
-        expect(ligne[0]).to eq('2.5.3 - score: non applicable')
-        ligne = worksheet.row(10)
-        expect(ligne[0]).to eq('2.5.3')
-        expect(ligne[1]).to eq('LOdi5')
+        it 'verifie le sous sous domaine suivant' do
+          worksheet = spreadsheet.worksheet(1)
+          ligne = worksheet.row(5)
+          expect(ligne[0]).to eq('2.5.3')
+          expect(ligne[1]).to eq('LOdi5')
+        end
       end
     end
   end

@@ -121,8 +121,11 @@ describe Restitution::Positionnement::ExportNumeratie do
 
       it 'remplis les sous domaines' do
         response_service.remplis_sous_domaine(ligne, code, reponses)
-        expect(worksheet[ligne,
-                         0]).to eq("2.1 - Se repérer dans l'univers des nombres - score: 50%")
+        expect(worksheet[ligne, 0]).to eq('2.1')
+        expect(worksheet[ligne, 1]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 2]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 3]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 4]).to eq('50%')
       end
     end
 
@@ -136,8 +139,11 @@ describe Restitution::Positionnement::ExportNumeratie do
 
       it 'remplis les sous domaines' do
         response_service.remplis_sous_domaine(ligne, code, reponses)
-        expect(worksheet[ligne,
-                         0]).to eq("2.1 - Se repérer dans l'univers des nombres - score: 25%")
+        expect(worksheet[ligne, 0]).to eq('2.1')
+        expect(worksheet[ligne, 1]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 2]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 3]).to eq("Se repérer dans l'univers des nombres")
+        expect(worksheet[ligne, 4]).to eq('25%')
       end
     end
   end
@@ -156,7 +162,11 @@ describe Restitution::Positionnement::ExportNumeratie do
 
       it 'remplis les sous domaines' do
         response_service.remplis_sous_sous_domaine(ligne, sous_code, reponses)
-        expect(worksheet[ligne, 0]).to eq('2.1.1 - score: 50%')
+        expect(worksheet[ligne, 0]).to eq('2.1.1')
+        expect(worksheet[ligne, 1]).to be_nil
+        expect(worksheet[ligne, 2]).to eq('50%')
+        expect(worksheet[ligne, 3]).to eq('50%')
+        expect(worksheet[ligne, 4]).to eq('50%')
       end
     end
 
@@ -170,7 +180,11 @@ describe Restitution::Positionnement::ExportNumeratie do
 
       it 'remplis les sous domaines' do
         response_service.remplis_sous_sous_domaine(ligne, sous_code, reponses)
-        expect(worksheet[ligne, 0]).to eq('2.1.1 - score: 25%')
+        expect(worksheet[ligne, 0]).to eq('2.1.1')
+        expect(worksheet[ligne, 1]).to be_nil
+        expect(worksheet[ligne, 2]).to eq('25%')
+        expect(worksheet[ligne, 3]).to eq('25%')
+        expect(worksheet[ligne, 4]).to eq('25%')
       end
     end
   end

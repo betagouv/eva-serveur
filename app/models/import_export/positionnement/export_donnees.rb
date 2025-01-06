@@ -24,7 +24,9 @@ module ImportExport
         { titre: 'Score possible de la question', taille: 10 }
       ].freeze
       ENTETES_SYNTHESE = [
-        { titre: 'Points', taille: 20 },
+        { titre: '', taille: 10 },
+        { titre: '', taille: 50 },
+        { titre: 'Points', taille: 10 },
         { titre: 'Points maximum', taille: 10 },
         { titre: 'Score', taille: 10 }
       ].freeze

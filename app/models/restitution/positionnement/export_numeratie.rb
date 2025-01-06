@@ -2,7 +2,7 @@
 
 module Restitution
   module Positionnement
-    class ExportNumeratie
+    class ExportNumeratie # rubocop:disable Metrics/ClassLength
       def initialize(partie, sheet)
         @partie = partie
         @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
@@ -27,13 +27,19 @@ module Restitution
       def remplis_sous_domaine(ligne, code, reponses)
         pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
-        @sheet[ligne, 0] =
-          "#{code} - #{intitule_code_cle} - score: #{pourcentage}"
+        @sheet[ligne, 0] = code
+        @sheet[ligne, 1] = intitule_code_cle
+        @sheet[ligne, 2] = intitule_code_cle
+        @sheet[ligne, 3] = intitule_code_cle
+        @sheet[ligne, 4] = pourcentage
       end
 
       def remplis_sous_sous_domaine(ligne, sous_code, reponses)
         pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
-        @sheet[ligne, 0] = "#{sous_code} - score: #{pourcentage}"
+        @sheet[ligne, 0] = sous_code
+        @sheet[ligne, 2] = pourcentage
+        @sheet[ligne, 3] = pourcentage
+        @sheet[ligne, 4] = pourcentage
       end
 
       def remplis_reponses(ligne, reponses)

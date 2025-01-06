@@ -93,8 +93,11 @@ module Restitution
         @sheet[ligne, 7] = donnees['reponseIntitule'] || donnees['reponse']
       end
 
+      # Trie par code cléa et par question
       def tri_par_ordre_croissant(groupes_clea)
-        groupes_clea.sort_by { |code, _| code.to_s }.to_h
+        groupes_clea.sort_by { |code, reponses|
+          [code.to_s, reponses.pluck('question').sort]
+        }.to_h
       end
 
       def question_rattrapage(nom_technique)

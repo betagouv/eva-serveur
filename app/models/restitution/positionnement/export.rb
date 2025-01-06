@@ -50,9 +50,7 @@ module Restitution
 
       def remplis_par_sous_domaine(ligne, code, sous_codes, export)
         reponses = sous_codes.values.flatten
-        @sheet[ligne, 0] =
-          "#{code} - #{Metacompetence::CODECLEA_INTITULES[code]} - " \
-          "score: #{pourcentage_reussite(reponses)}"
+        export.remplis_sous_domaine(ligne, code, reponses)
         ligne += 1
         sous_codes.each do |sous_code, evenements|
           ligne = remplis_par_sous_sous_domaine(ligne, sous_code, evenements, export)
@@ -61,16 +59,9 @@ module Restitution
       end
 
       def remplis_par_sous_sous_domaine(ligne, sous_code, evenements, export)
-        @sheet[ligne, 0] = "#{sous_code} - score: #{pourcentage_reussite(evenements)}"
+        export.remplis_sous_sous_domaine(ligne, sous_code, evenements)
         ligne += 1
         export.remplis_reponses(ligne, evenements)
-      end
-
-      def pourcentage_reussite(reponses)
-        scores = reponses.map { |e| [e['scoreMax'] || 0, e['score'] || 0] }
-        score_max, score = scores.transpose.map(&:sum)
-        pourcentage = Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
-        score_max.zero? ? 'non applicable' : "#{pourcentage}%"
       end
     end
   end

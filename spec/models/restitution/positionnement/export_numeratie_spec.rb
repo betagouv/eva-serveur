@@ -9,7 +9,10 @@ describe Restitution::Positionnement::ExportNumeratie do
 
   let(:partie) { create :partie }
   let(:spreadsheet) { Spreadsheet::Workbook.new }
-  let(:worksheet) { spreadsheet.worksheet(0) }
+  let(:worksheet) do
+    entetes = ImportExport::Positionnement::ExportDonnees.new(partie).entetes
+    ImportExport::ExportXls.new(entetes: entetes).sheet
+  end
 
   describe '#regroupe_par_codes_clea' do
     it 'trie les evenements par codes clea' do
@@ -100,6 +103,74 @@ describe Restitution::Positionnement::ExportNumeratie do
              partie: partie,
              donnees: { question: 'N2Poa1' }
       expect(response_service.questions_non_repondues).to eq([])
+    end
+  end
+
+  describe '#remplis_sous_domaine' do
+    let(:ligne) { 1 }
+    let(:code) { '2.1' }
+
+    context "quand les questions de rattrapage n'ont pas été repondues" do
+      let(:reponses) do
+        [
+          { 'question' => 'N1Poa1', 'score' => 1, 'scoreMax' => 2 },
+          { 'question' => 'N1Roa1', 'score' => nil, 'scoreMax' => 2 }
+        ]
+      end
+
+      it 'remplis les sous domaines' do
+        response_service.remplis_sous_domaine(ligne, code, reponses)
+        expect(worksheet[ligne,
+                         0]).to eq("2.1 - Se repérer dans l'univers des nombres - score: 50%")
+      end
+    end
+
+    context 'quand les questions de rattrapge ont été repondues' do
+      let(:reponses) do
+        [
+          { 'question' => 'N1Poa1', 'score' => 1, 'scoreMax' => 2 },
+          { 'question' => 'N1Roa1', 'score' => 0, 'scoreMax' => 2 }
+        ]
+      end
+
+      it 'remplis les sous domaines' do
+        response_service.remplis_sous_domaine(ligne, code, reponses)
+        expect(worksheet[ligne,
+                         0]).to eq("2.1 - Se repérer dans l'univers des nombres - score: 25%")
+      end
+    end
+  end
+
+  describe '#remplis_sous_sous_domaine' do
+    let(:ligne) { 1 }
+    let(:sous_code) { '2.1.1' }
+
+    context "quand les questions de rattrapage n'ont pas été repondues" do
+      let(:reponses) do
+        [
+          { 'question' => 'N1Poa1', 'score' => 1, 'scoreMax' => 2 },
+          { 'question' => 'N1Roa1', 'score' => nil, 'scoreMax' => 2 }
+        ]
+      end
+
+      it 'remplis les sous domaines' do
+        response_service.remplis_sous_sous_domaine(ligne, sous_code, reponses)
+        expect(worksheet[ligne, 0]).to eq('2.1.1 - score: 50%')
+      end
+    end
+
+    context 'quand les questions de rattrapge ont été repondues' do
+      let(:reponses) do
+        [
+          { 'question' => 'N1Poa1', 'score' => 1, 'scoreMax' => 2 },
+          { 'question' => 'N1Roa1', 'score' => 0, 'scoreMax' => 2 }
+        ]
+      end
+
+      it 'remplis les sous domaines' do
+        response_service.remplis_sous_sous_domaine(ligne, sous_code, reponses)
+        expect(worksheet[ligne, 0]).to eq('2.1.1 - score: 25%')
+      end
     end
   end
 end

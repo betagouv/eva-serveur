@@ -24,6 +24,18 @@ module Restitution
         end
       end
 
+      def remplis_sous_domaine(ligne, code, reponses)
+        pourcentage = pourcentage_reussite(reponses_filtres(reponses))
+        intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
+        @sheet[ligne, 0] =
+          "#{code} - #{intitule_code_cle} - score: #{pourcentage}"
+      end
+
+      def remplis_sous_sous_domaine(ligne, sous_code, reponses)
+        pourcentage = pourcentage_reussite(reponses_filtres(reponses))
+        @sheet[ligne, 0] = "#{sous_code} - score: #{pourcentage}"
+      end
+
       def remplis_reponses(ligne, reponses)
         reponses.each do |reponse|
           question = Question.find_by(nom_technique: reponse['question'])
@@ -83,6 +95,32 @@ module Restitution
 
       def tri_par_ordre_croissant(groupes_clea)
         groupes_clea.sort_by { |code, _| code.to_s }.to_h
+      end
+
+      def question_rattrapage(nom_technique)
+        nom_technique.start_with?('N1R', 'N2R', 'N3R')
+      end
+
+      # On vérifie si l'évalué a répondu à une question de rattrapage
+      def a_repondu_a_une_question_rattrapage?(reponses)
+        reponses.any? do |e|
+          question_rattrapage(e['question']) && e['score'].present?
+        end
+      end
+
+      # On filtre les réponses pour ne garder ou non les questions de rattrapage
+      # Si il a répondu à une question de rattrapage, on garde toutes les réponses rattrapage
+      def reponses_filtres(reponses)
+        return reponses if a_repondu_a_une_question_rattrapage?(reponses)
+
+        reponses.reject { |e| question_rattrapage(e['question']) }
+      end
+
+      def pourcentage_reussite(reponses)
+        scores = reponses.map { |e| [e['scoreMax'] || 0, e['score'] || 0] }
+        score_max, score = scores.transpose.map(&:sum)
+        pourcentage = Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
+        score_max.zero? ? 'non applicable' : "#{pourcentage}%"
       end
     end
   end

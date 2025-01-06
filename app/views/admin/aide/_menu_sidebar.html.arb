@@ -23,5 +23,5 @@ div class: 'menu-transverse' do
     end
   end
 
-  text_node image_tag 'avatar_pouce_leve.svg', class: 'avatar-pouce-leve', alt: ''
+  text_node image_tag 'avatar_pouce_leve.png', class: 'avatar-pouce-leve', alt: ''
 end

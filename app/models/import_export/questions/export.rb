@@ -10,8 +10,11 @@ module ImportExport
       end
 
       def to_xls
+        workbook = Spreadsheet::Workbook.new
         entetes = @headers.map { |header| { titre: header.to_s.humanize, taille: 20 } }
-        @sheet = ::ImportExport::ExportXls.new(entetes: entetes).sheet
+        @sheet = ::ImportExport::ExportXls.new(entetes: entetes,
+                                               workbook: workbook).cree_worksheet_donnees
+
         remplis_la_feuille
         retourne_le_contenu_du_xls
       end

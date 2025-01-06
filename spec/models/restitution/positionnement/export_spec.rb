@@ -76,18 +76,27 @@ describe Restitution::Positionnement::Export do
     let!(:choix2) { create(:choix, :bon, question_id: question.id, intitule: 'couverture') }
     let!(:choix3) { create(:choix, :mauvais, question_id: question.id, intitule: 'autre') }
 
-    it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
-      expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[0]).to eq('Code cléa')
-      expect(worksheet.row(0)[1]).to eq('Item')
-      expect(worksheet.row(0)[2]).to eq('Méta compétence')
-      expect(worksheet.row(0)[3]).to eq('Interaction')
-      expect(worksheet.row(0)[4]).to eq('Intitulé de la question')
-      expect(worksheet.row(0)[5]).to eq('Réponses possibles')
-      expect(worksheet.row(0)[6]).to eq('Réponses attendue')
-      expect(worksheet.row(0)[7]).to eq('Réponse du bénéficiaire')
-      expect(worksheet.row(0)[8]).to eq('Score attribué')
-      expect(worksheet.row(0)[9]).to eq('Score possible de la question')
+    context 'génére un fichier xls avec les differents onglets' do
+      it "vérifie les entetes de l'onglet synthèse" do
+        worksheet = spreadsheet.worksheet(0)
+        expect(worksheet.row(0)[0]).to eq('Points')
+        expect(worksheet.row(0)[1]).to eq('Points maximum')
+        expect(worksheet.row(0)[2]).to eq('Score')
+      end
+
+      it "vérifie les entetes de l'onglet donnees" do
+        worksheet = spreadsheet.worksheet(1)
+        expect(worksheet.row(0)[0]).to eq('Code cléa')
+        expect(worksheet.row(0)[1]).to eq('Item')
+        expect(worksheet.row(0)[2]).to eq('Méta compétence')
+        expect(worksheet.row(0)[3]).to eq('Interaction')
+        expect(worksheet.row(0)[4]).to eq('Intitulé de la question')
+        expect(worksheet.row(0)[5]).to eq('Réponses possibles')
+        expect(worksheet.row(0)[6]).to eq('Réponses attendue')
+        expect(worksheet.row(0)[7]).to eq('Réponse du bénéficiaire')
+        expect(worksheet.row(0)[8]).to eq('Score attribué')
+        expect(worksheet.row(0)[9]).to eq('Score possible de la question')
+      end
     end
 
     describe 'génére un fichier xls avec les evenements réponses' do
@@ -124,6 +133,7 @@ describe Restitution::Positionnement::Export do
       end
 
       it 'vérifie la première ligne avec le code cléa du sous domaine et le % de réussite' do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(1)
         expect(ligne[0]).to eq(
           '2.3 - Lire et calculer les unités de mesures, de temps et des quantités - score: 33%'
@@ -131,11 +141,13 @@ describe Restitution::Positionnement::Export do
       end
 
       it 'verifie la deuxième ligne avec le code cléa du sous sous domaine et le % de réussite' do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(2)
         expect(ligne[0]).to eq('2.3.3 - score: 20%')
       end
 
       it 'verifie les détails de la première question' do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(3)
         expect(ligne[0]).to eq('2.3.3')
         expect(ligne[1]).to eq('LOdi1')
@@ -150,6 +162,7 @@ describe Restitution::Positionnement::Export do
       end
 
       it 'verifie les autres questions du même sous sous domaine' do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(4)
         expect(ligne[0]).to eq('2.3.3')
         expect(ligne[1]).to eq('LOdi2')
@@ -159,6 +172,7 @@ describe Restitution::Positionnement::Export do
       end
 
       it 'verifie le sous sous domaine suivant' do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(6)
         expect(ligne[0]).to eq('2.3.5 - score: 100%')
         ligne = worksheet.row(7)
@@ -167,6 +181,7 @@ describe Restitution::Positionnement::Export do
       end
 
       it "verifie le sous domaine suivant quand la réponse n'a pas de score" do
+        worksheet = spreadsheet.worksheet(1)
         ligne = worksheet.row(8)
         expect(ligne[0]).to eq(
           '2.5 - Restituer oralement un raisonnement mathématique - score: non applicable'

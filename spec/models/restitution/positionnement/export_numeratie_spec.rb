@@ -11,7 +11,8 @@ describe Restitution::Positionnement::ExportNumeratie do
   let(:spreadsheet) { Spreadsheet::Workbook.new }
   let(:worksheet) do
     entetes = ImportExport::Positionnement::ExportDonnees.new(partie).entetes
-    ImportExport::ExportXls.new(entetes: entetes).sheet
+    ImportExport::ExportXls.new(entetes: entetes,
+                                workbook: spreadsheet).cree_worksheet_donnees
   end
 
   describe '#regroupe_par_codes_clea' do

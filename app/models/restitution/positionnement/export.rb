@@ -7,11 +7,11 @@ module Restitution
         super()
         @partie = partie
         @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
+        @workbook = Spreadsheet::Workbook.new
       end
 
       def to_xls
-        entetes = ImportExport::Positionnement::ExportDonnees.new(@partie).entetes
-        @sheet = ::ImportExport::ExportXls.new(entetes: entetes).sheet
+        defini_onglets_du_fichier
         remplie_la_feuille
         retourne_le_contenu_du_xls
       end
@@ -24,6 +24,24 @@ module Restitution
       end
 
       private
+
+      def defini_onglets_du_fichier
+        if @partie.situation.numeratie?
+          @sheet_synthese = cree_worksheet_synthese(
+            ImportExport::Positionnement::ExportDonnees::ENTETES_SYNTHESE
+          )
+        end
+        entetes_donnees = ImportExport::Positionnement::ExportDonnees.new(@partie).entetes
+        @sheet = cree_worksheet_donnees(entetes_donnees)
+      end
+
+      def cree_worksheet_synthese(entetes)
+        ::ImportExport::ExportXls.new(entetes: entetes, workbook: @workbook).cree_worksheet_synthese
+      end
+
+      def cree_worksheet_donnees(entetes)
+        ::ImportExport::ExportXls.new(entetes: entetes, workbook: @workbook).cree_worksheet_donnees
+      end
 
       def remplie_la_feuille
         ligne = 1

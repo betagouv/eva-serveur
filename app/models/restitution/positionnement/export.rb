@@ -13,6 +13,7 @@ module Restitution
       def to_xls
         defini_onglets_du_fichier
         remplie_la_feuille
+        remplie_la_feuille_de_synthese if @partie.situation.numeratie?
         retourne_le_contenu_du_xls
       end
 
@@ -66,20 +67,58 @@ module Restitution
         ligne
       end
 
-      def remplis_par_sous_domaine(ligne, code, sous_codes, export)
-        reponses = sous_codes.values.flatten
-        export.remplis_sous_domaine(ligne, code, reponses)
-        ligne += 1
+      def remplis_par_sous_domaine(ligne, _code, sous_codes, export)
         sous_codes.each do |sous_code, evenements|
           ligne = remplis_par_sous_sous_domaine(ligne, sous_code, evenements, export)
         end
         ligne
       end
 
-      def remplis_par_sous_sous_domaine(ligne, sous_code, evenements, export)
-        export.remplis_sous_sous_domaine(ligne, sous_code, evenements)
-        ligne += 1
+      def remplis_par_sous_sous_domaine(ligne, _sous_code, evenements, export)
         export.remplis_reponses(ligne, evenements)
+      end
+
+      def remplie_la_feuille_de_synthese
+        ligne = 1
+        export = ExportNumeratie.new(@partie, @sheet_synthese)
+        ligne = defini_le_tableau_des_sous_domaines(ligne, export)
+        ligne += 1
+        defini_le_tableau_des_sous_sous_domaines(ligne, export)
+      end
+
+      def defini_le_tableau_des_sous_domaines(ligne, export)
+        export.regroupe_par_codes_clea.each do |code, sous_codes|
+          ligne = remplis_par_sous_domaine_sythese(ligne, code, sous_codes, export)
+        end
+
+        ligne
+      end
+
+      def defini_le_tableau_des_sous_sous_domaines(ligne, export)
+        export.regroupe_par_codes_clea.each_value do |sous_codes|
+          ligne = remplis_sous_sous_domaine_synthese(ligne, sous_codes, export)
+        end
+
+        ligne
+      end
+
+      def remplis_par_sous_domaine_sythese(ligne, code, sous_codes, export)
+        reponses = sous_codes.values.flatten
+        export.remplis_sous_domaine(ligne, code, reponses)
+        ligne + 1
+      end
+
+      def remplis_sous_sous_domaine_synthese(ligne, sous_codes, export)
+        sous_codes.each do |sous_code, evenements|
+          ligne = recupere_les_sous_sous_domaines(ligne, sous_code, evenements, export)
+        end
+
+        ligne
+      end
+
+      def recupere_les_sous_sous_domaines(ligne, sous_code, evenements, export)
+        export.remplis_sous_sous_domaine(ligne, sous_code, evenements)
+        ligne + 1
       end
     end
   end

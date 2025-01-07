@@ -26,19 +26,25 @@ module Restitution
 
       def remplis_sous_domaine(ligne, code, reponses)
         pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
+        score_max = calcule_score_max(filtre_evenements_reponses(reponses))
+        score = calcule_score(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
+
         @sheet[ligne, 0] = code
         @sheet[ligne, 1] = intitule_code_cle
-        @sheet[ligne, 2] = intitule_code_cle
-        @sheet[ligne, 3] = intitule_code_cle
+        @sheet[ligne, 2] = score
+        @sheet[ligne, 3] = score_max
         @sheet[ligne, 4] = pourcentage
       end
 
       def remplis_sous_sous_domaine(ligne, sous_code, reponses)
         pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
+        score_max = calcule_score_max(filtre_evenements_reponses(reponses))
+        score = calcule_score(filtre_evenements_reponses(reponses))
+
         @sheet[ligne, 0] = sous_code
-        @sheet[ligne, 2] = pourcentage
-        @sheet[ligne, 3] = pourcentage
+        @sheet[ligne, 2] = score
+        @sheet[ligne, 3] = score_max
         @sheet[ligne, 4] = pourcentage
       end
 
@@ -127,6 +133,14 @@ module Restitution
         score_max, score = scores.transpose.map(&:sum)
         pourcentage = Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
         score_max.zero? ? 'non applicable' : "#{pourcentage}%"
+      end
+
+      def calcule_score_max(reponses)
+        reponses.map { |e| e['scoreMax'] || 0 }.sum
+      end
+
+      def calcule_score(reponses)
+        reponses.map { |e| e['score'] || 0 }.sum
       end
     end
   end

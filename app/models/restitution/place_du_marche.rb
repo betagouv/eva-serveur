@@ -135,7 +135,7 @@ module Restitution
     def evenements_par_module(evenements, nom_module)
       module_rattrapage = "#{nom_module}R"
       a_fait_un_rattrapage = evenements.any? do |e|
-        e.donnees['question'].start_with?(module_rattrapage) && e.donnees['score'].present?
+        e['question'].start_with?(module_rattrapage) && e['score'].present?
       end
       return evenements if a_fait_un_rattrapage
 

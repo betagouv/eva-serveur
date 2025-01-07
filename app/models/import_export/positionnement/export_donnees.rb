@@ -15,13 +15,13 @@ module ImportExport
         { titre: 'Code cléa', taille: 10 },
         { titre: 'Item', taille: 20 },
         { titre: 'Méta compétence', taille: 20 },
+        { titre: 'Score attribué', taille: 10 },
+        { titre: 'Score possible de la question', taille: 10 },
         { titre: 'Interaction', taille: 20 },
         { titre: 'Intitulé de la question', taille: 80 },
         { titre: 'Réponses possibles', taille: 20 },
         { titre: 'Réponses attendue', taille: 20 },
-        { titre: 'Réponse du bénéficiaire', taille: 20 },
-        { titre: 'Score attribué', taille: 10 },
-        { titre: 'Score possible de la question', taille: 10 }
+        { titre: 'Réponse du bénéficiaire', taille: 20 }
       ].freeze
       ENTETES_SYNTHESE = [
         { titre: '', taille: 10 },

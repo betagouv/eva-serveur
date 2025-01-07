@@ -84,25 +84,27 @@ module Restitution
 
       def remplis_ligne(ligne, donnees, question)
         code = Metacompetence.new(donnees['metacompetence']).code_clea_sous_sous_domaine
-        @sheet.row(ligne).replace([code,
-                                   donnees['question'],
-                                   donnees['metacompetence']&.humanize,
-                                   question&.interaction,
-                                   donnees['intitule']])
+        @sheet.row(ligne).replace(ligne_data(code, donnees, question))
         remplis_choix(ligne, donnees, question)
-        remplis_score(ligne, donnees)
         ligne + 1
       end
 
-      def remplis_score(ligne, evenement)
-        @sheet[ligne, 8] = evenement['score'].to_s
-        @sheet[ligne, 9] = evenement['scoreMax'].to_s
+      def ligne_data(code, donnees, question)
+        [
+          code,
+          donnees['question'],
+          donnees['metacompetence']&.humanize,
+          donnees['score'].to_s,
+          donnees['scoreMax'].to_s,
+          question&.interaction,
+          donnees['intitule']
+        ]
       end
 
       def remplis_choix(ligne, donnees, question)
-        @sheet[ligne, 5] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-        @sheet[ligne, 6] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
-        @sheet[ligne, 7] = donnees['reponseIntitule'] || donnees['reponse']
+        @sheet[ligne, 7] = question&.interaction == 'qcm' ? question&.liste_choix : nil
+        @sheet[ligne, 8] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
+        @sheet[ligne, 9] = donnees['reponseIntitule'] || donnees['reponse']
       end
 
       # Trie par code cléa et par question

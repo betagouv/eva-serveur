@@ -5,12 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+# Les methods options et head sont ajoutées pour permettre à l'API de répondre aux requêtes préflight CORS
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
 
     resource '*',
       headers: :any,
-      methods: [:get, :post, :patch]
+      methods: [:get, :post, :patch, :options, :head]
   end
 end

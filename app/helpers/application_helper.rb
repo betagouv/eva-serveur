@@ -29,7 +29,7 @@ module ApplicationHelper
     ## Ne pas oublier de rajouter l'extension au path sinon ça ne build pas en production
 
     raw = Rails.application.assets_manifest.find_sources(chemin_avec_extension).first
-    image_tag fichier_encode_en_base64(raw), alt: options[:alt], class: options[:class]
+    image_tag svg_encode_en_base64(raw), alt: options[:alt], class: options[:class]
   end
 
   def cdn_for(fichier)
@@ -39,11 +39,11 @@ module ApplicationHelper
     "#{ENV.fetch('PROTOCOLE_SERVEUR')}://#{ENV.fetch('HOTE_STOCKAGE')}/#{fichier.key}?#{param}"
   end
 
-  def svg_attachment_base64(attachment, options = {})
+  def svg_attachment_base64(attachment)
     return unless attachment.attached?
 
     file_content = attachment.download
-    image_tag fichier_encode_en_base64(file_content), alt: options[:alt], class: options[:class]
+    svg_encode_en_base64(file_content)
   end
 
   def inline_svg_content(attachment, options = {})
@@ -53,7 +53,7 @@ module ApplicationHelper
     svg_with_class(file_content, options[:class])
   end
 
-  def fichier_encode_en_base64(file_content)
+  def svg_encode_en_base64(file_content)
     encodage = Base64.strict_encode64 file_content
     "data:image/svg+xml;base64,#{encodage}"
   end

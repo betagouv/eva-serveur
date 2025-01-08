@@ -21,7 +21,7 @@ class QuestionClicDansImage < Question
 
   def as_json(_options = nil)
     json = base_json
-    json['image_au_clic'] = fichier_encode_base64(image_au_clic) if image_au_clic.attached?
+    json['image_au_clic'] = svg_attachment_base64(image_au_clic) if image_au_clic.attached?
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
@@ -52,7 +52,7 @@ class QuestionClicDansImage < Question
       json['type'] = 'clic-dans-image'
       json['illustration'] = cdn_for(illustration) if illustration.attached?
       json['description'] = description
-      json['zone_cliquable'] = fichier_encode_base64(zone_cliquable) if zone_cliquable.attached?
+      json['zone_cliquable'] = svg_attachment_base64(zone_cliquable) if zone_cliquable.attached?
     end
   end
 
@@ -83,10 +83,5 @@ class QuestionClicDansImage < Question
   def svg_contient_class_bonne_reponse?(svg_content, minimum)
     doc = ApplicationController.helpers.parse_svg_content(svg_content)
     doc.css(".#{CLASS_BONNE_REPONSE}").size >= minimum
-  end
-
-  def fichier_encode_base64(attachment)
-    file_content = attachment.download
-    ApplicationController.helpers.fichier_encode_en_base64(file_content)
   end
 end

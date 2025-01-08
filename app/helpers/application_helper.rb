@@ -25,6 +25,8 @@ module ApplicationHelper
     'col-4 px-5 mb-4'
   end
 
+  # cette fonction n'est nécessaire que pour les svg dans les PDF.
+  # Utiliser prioritairement `image_tag` même pour les SVG
   def svg_tag_base64(chemin_avec_extension, options = {})
     ## Ne pas oublier de rajouter l'extension au path sinon ça ne build pas en production
 

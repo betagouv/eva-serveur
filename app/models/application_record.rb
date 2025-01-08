@@ -28,8 +28,7 @@ class ApplicationRecord < ActiveRecord::Base
     ApplicationController.helpers.cdn_for(attachment)
   end
 
-  def fichier_encode_base64(attachment)
-    file_content = attachment.download
-    ApplicationController.helpers.fichier_encode_en_base64(file_content)
+  def svg_attachment_base64(attachment)
+    ApplicationController.helpers.svg_attachment_base64(attachment)
   end
 end

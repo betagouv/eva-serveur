@@ -39,7 +39,7 @@ module EvaServeur
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.exceptions_app = CustomExceptionsAppWrapper.new(exceptions_app: routes)
-    
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.orm :active_record, foreign_key_type: :uuid
@@ -54,6 +54,12 @@ module EvaServeur
 
     config.active_job.queue_adapter = :sidekiq
     config.active_storage.track_variants = false
+
+    # La configuration suivante est necessaire pour que image_tag puisse afficher des svg issuent d'active storage
+    image_svg = ["image/svg+xml"]
+    config.active_storage.content_types_to_serve_as_binary -= image_svg
+    config.active_storage.variable_content_types += image_svg
+    config.active_storage.web_image_content_types += image_svg
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.autoload_lib(ignore: %w(assets tasks generateur_aleatoire.rb importeur_telephone.rb google_drive_storage.rb custom_exceptions_app_wrapper.rb importeur_commentaires.rb rake_logger.rb))

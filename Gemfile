@@ -106,6 +106,7 @@ group :test do
   gem 'pdf-reader'
   gem 'shoulda-matchers'
   gem 'timecop'
+  gem 'webmock'
 end
 
 group :production do

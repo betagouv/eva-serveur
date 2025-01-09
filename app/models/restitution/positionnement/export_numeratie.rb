@@ -83,10 +83,22 @@ module Restitution
       end
 
       def remplis_ligne(ligne, donnees, question)
+        est_non_repondu = questions_non_repondues.any? do |q|
+          q[:nom_technique] == donnees['question']
+        end
+
         code = Metacompetence.new(donnees['metacompetence']).code_clea_sous_sous_domaine
-        @sheet.row(ligne).replace(ligne_data(code, donnees, question))
+        row_data = ligne_data(code, donnees, question)
+        @sheet.row(ligne).replace(row_data)
+        grise_ligne(ligne) if est_non_repondu
         remplis_choix(ligne, donnees, question)
         ligne + 1
+      end
+
+      XLS_COLOR_GRAY = :xls_color_14 # rubocop:disable Naming/VariableNumber
+      def grise_ligne(ligne)
+        format_grise = Spreadsheet::Format.new(pattern_fg_color: XLS_COLOR_GRAY, pattern: 1)
+        @sheet.row(ligne).default_format = format_grise
       end
 
       def ligne_data(code, donnees, question)

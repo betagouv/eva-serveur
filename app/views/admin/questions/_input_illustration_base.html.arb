@@ -12,7 +12,7 @@ f.input nom,
 if image.attached? && f.object.errors[nom].blank?
   f.input nom_suppression, as: :boolean,
                            label: t('.supprimer_illustration'),
-                           hint: image_tag(image,
+                           hint: image_tag(cdn_for(image),
                                            class: 'image-preview',
                                            alt: image.filename)
 end

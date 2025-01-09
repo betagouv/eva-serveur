@@ -49,3 +49,4 @@ dump.rdb
 /public/javascripts
 
 node_modules/
+.DS_Store

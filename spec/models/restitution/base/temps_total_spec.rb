@@ -43,4 +43,18 @@ describe Restitution::Base::TempsTotal do
       it { expect(metrique_temps_total).to eq 2.minutes }
     end
   end
+
+  describe '#format_temps_total' do
+    it 'formate correctement le temps total en mm:ss pour des minutes et secondes exactes' do
+      expect(described_class.format_temps_total(300)).to eq('05:00')
+    end
+
+    it 'formate correctement le temps total en mm:ss pour moins d’une minute' do
+      expect(described_class.format_temps_total(45)).to eq('00:45')
+    end
+
+    it 'formate correctement le temps total en mm:ss pour zéro seconde' do
+      expect(described_class.format_temps_total(0)).to eq('00:00')
+    end
+  end
 end

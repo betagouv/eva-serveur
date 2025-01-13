@@ -20,10 +20,10 @@ module Restitution
         @sheet.row(ligne).replace([evenement.donnees['question'],
                                    evenement.donnees['intitule'],
                                    evenement.reponse_intitule,
-                                   calcule_temps_passe(evenement),
                                    evenement.donnees['score'],
                                    evenement.donnees['scoreMax'],
-                                   evenement.donnees['metacompetence']])
+                                   evenement.donnees['metacompetence'],
+                                   calcule_temps_passe(evenement)])
         ligne + 1
       end
 

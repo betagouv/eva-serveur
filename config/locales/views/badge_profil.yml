@@ -1,5 +1,5 @@
 fr:
   badge_profil:
     title:
-      complete: "Complété"
-      incomplet: "Non atteint"
+      acquis: "Acquis"
+      non_acquis: "Non acquis"

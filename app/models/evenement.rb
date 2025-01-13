@@ -24,6 +24,12 @@ class Evenement < ApplicationRecord
     reponses.select("donnees->>'question' AS question").map(&:question)
   end
 
+  def recupere_evenement_affichage_question_qcm
+    Evenement.where("donnees ->> 'question' = ?", donnees['question'])
+             .where(nom: 'affichageQuestionQCM',  session_id: session_id)
+             .first
+  end
+
   def self.regroupe_par_codes_clea(questionnaire, noms_techniques)
     groupes_clea = questions_repondues_et_non_repondues(questionnaire,
                                                         noms_techniques).group_by do |e|

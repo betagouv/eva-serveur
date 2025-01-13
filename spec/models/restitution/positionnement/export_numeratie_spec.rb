@@ -125,7 +125,7 @@ describe Restitution::Positionnement::ExportNumeratie do
         expect(worksheet[ligne, 1]).to eq("Se repérer dans l'univers des nombres")
         expect(worksheet[ligne, 2]).to eq(1)
         expect(worksheet[ligne, 3]).to eq(2)
-        expect(worksheet[ligne, 4]).to eq('50%')
+        expect(worksheet[ligne, 4]).to eq(0.5)
       end
     end
 
@@ -143,7 +143,7 @@ describe Restitution::Positionnement::ExportNumeratie do
         expect(worksheet[ligne, 1]).to eq("Se repérer dans l'univers des nombres")
         expect(worksheet[ligne, 2]).to eq(1)
         expect(worksheet[ligne, 3]).to eq(4)
-        expect(worksheet[ligne, 4]).to eq('25%')
+        expect(worksheet[ligne, 4]).to eq(0.25)
       end
     end
   end
@@ -167,7 +167,7 @@ describe Restitution::Positionnement::ExportNumeratie do
                          1]).to eq('Réaliser les 4 opérations à la main ou avec une calculette')
         expect(worksheet[ligne, 2]).to eq(1)
         expect(worksheet[ligne, 3]).to eq(2)
-        expect(worksheet[ligne, 4]).to eq('50%')
+        expect(worksheet[ligne, 4]).to eq(0.5)
       end
     end
 
@@ -186,7 +186,7 @@ describe Restitution::Positionnement::ExportNumeratie do
                          1]).to eq('Réaliser les 4 opérations à la main ou avec une calculette')
         expect(worksheet[ligne, 2]).to eq(1)
         expect(worksheet[ligne, 3]).to eq(4)
-        expect(worksheet[ligne, 4]).to eq('25%')
+        expect(worksheet[ligne, 4]).to eq(0.25)
       end
     end
   end

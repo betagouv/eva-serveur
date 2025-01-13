@@ -9,10 +9,9 @@
             <% succes = metriques[:profil] == true %>
             <% type = succes ? :acquis : :non_acquis %>
 
-            <%= render(
-              partial: 'components/badge_profil',
-              locals: { type: type, titre: "#{metriques[:pourcentage]}%" }
-            ) %>
+            <%= render(BadgeProfilComponent.new(type)) do %>
+              <%= metriques[:pourcentage] %>%
+            <% end %>
           <% end %>
         </div>
         <div class= "col-7">

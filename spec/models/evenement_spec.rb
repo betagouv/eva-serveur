@@ -26,4 +26,26 @@ describe Evenement, type: :model do
       expect(evenement.fin_situation?).to be false
     end
   end
+
+  describe '#recupere_evenement_affichage_question_qcm' do
+    subject { described_class.new(partie: partie, donnees: donnees) }
+
+    let(:donnees) { { 'question' => 'Question 1' } }
+    let(:partie) { create :partie }
+
+    let!(:evenement) do
+      create :evenement, nom: 'affichageQuestionQCM', donnees: donnees, partie: partie
+    end
+
+    it "retourne l'evenement affichageQuestionQCM de l'evenement reponse" do
+      result = subject.recupere_evenement_affichage_question_qcm
+      expect(result).to eq(evenement)
+    end
+
+    it "ne retourne pas d'evenement affichageQuestionQCM si la question ne correspond pas" do
+      subject.donnees = { 'question' => 'Non-existent question' }
+      result = subject.recupere_evenement_affichage_question_qcm
+      expect(result).to be_nil
+    end
+  end
 end

@@ -165,7 +165,7 @@ describe Restitution::Positionnement::Export do
           expect(worksheet.row(1)[1]).to eq(intitule)
           expect(worksheet.row(1)[2]).to eq(2)
           expect(worksheet.row(1)[3]).to eq(6.0)
-          expect(worksheet.row(1)[4]).to eq('33%')
+          expect(worksheet.row(1)[4]).to eq(0.33)
         end
 
         it 'verifie les sous sous domaines et le % de réussite dans un autre tableau' do
@@ -182,13 +182,13 @@ describe Restitution::Positionnement::Export do
           expect(ligne[1]).to eq('Renseigner correctement les horaires')
           expect(ligne[2]).to eq(1)
           expect(ligne[3]).to eq(5.0)
-          expect(ligne[4]).to eq('20%')
+          expect(ligne[4]).to eq(0.2)
 
           ligne = worksheet.row(6)
           expect(ligne[0]).to eq('2.3.5')
           expect(ligne[2]).to eq(1)
           expect(ligne[3]).to eq(1)
-          expect(ligne[4]).to eq('100%')
+          expect(ligne[4]).to eq(1)
 
           ligne = worksheet.row(7)
           expect(ligne[0]).to eq('2.5.3')

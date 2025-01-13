@@ -3,6 +3,9 @@
 module Restitution
   module Positionnement
     class ExportNumeratie # rubocop:disable Metrics/ClassLength
+      NUMBER_FORMAT = Spreadsheet::Format.new(number_format: '0')
+      POURCENTAGE_FORMAT = Spreadsheet::Format.new(number_format: '0%')
+
       def initialize(partie, sheet)
         @partie = partie
         @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
@@ -32,11 +35,11 @@ module Restitution
         score = calcule_score(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
 
-        @sheet[ligne, 0] = code
-        @sheet[ligne, 1] = intitule_code_cle
-        @sheet[ligne, 2] = score
-        @sheet[ligne, 3] = score_max
-        @sheet[ligne, 4] = pourcentage
+        set_valeur(ligne, 0, code)
+        set_valeur(ligne, 1, intitule_code_cle)
+        set_nombre(ligne, 2, score)
+        set_nombre(ligne, 3, score_max)
+        set_pourcentage(ligne, 4, pourcentage)
       end
 
       def remplis_sous_sous_domaine(ligne, sous_code, reponses)
@@ -45,11 +48,11 @@ module Restitution
         score = calcule_score(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[sous_code]
 
-        @sheet[ligne, 0] = sous_code
-        @sheet[ligne, 1] = intitule_code_cle
-        @sheet[ligne, 2] = score
-        @sheet[ligne, 3] = score_max
-        @sheet[ligne, 4] = pourcentage
+        set_valeur(ligne, 0, sous_code)
+        set_valeur(ligne, 1, intitule_code_cle)
+        set_nombre(ligne, 2, score)
+        set_nombre(ligne, 3, score_max)
+        set_pourcentage(ligne, 4, pourcentage)
       end
 
       def remplis_reponses(ligne, reponses)
@@ -112,8 +115,8 @@ module Restitution
           code,
           donnees['question'],
           donnees['metacompetence']&.humanize,
-          donnees['score'].to_s,
-          donnees['scoreMax'].to_s,
+          donnees['score'],
+          donnees['scoreMax'],
           pris_en_compte_pour_calcul_score_clea?(liste_questions, donnees['question']),
           question&.interaction,
           donnees['intitule']
@@ -125,10 +128,12 @@ module Restitution
       end
 
       def remplis_choix(ligne, donnees, question)
-        @sheet[ligne, 8] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-        @sheet[ligne, 9] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
-        @sheet[ligne, 10] = donnees['reponseIntitule'] || donnees['reponse']
-        @sheet[ligne, 11] = @temps_par_question[donnees['question']]
+        choix = question&.interaction == 'qcm' ? question&.liste_choix : nil
+        set_valeur(ligne, 8, choix)
+        set_valeur(ligne, 9, question&.bonnes_reponses) if question&.qcm? || question&.saisie?
+        reponse = donnees['reponseIntitule'] || donnees['reponse']
+        set_valeur(ligne, 10, reponse)
+        set_valeur(ligne, 11, @temps_par_question[donnees['question']])
       end
 
       # Trie par code cléa et par question
@@ -154,11 +159,15 @@ module Restitution
         evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
       end
 
+      # Retourne 1.0, 1, 0.6
+      # 1.0 pour 100%
       def pourcentage_reussite(reponses)
         scores = reponses.map { |e| [e['scoreMax'] || 0, e['score'] || 0] }
         score_max, score = scores.transpose.map(&:sum)
         pourcentage = Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
-        score_max.zero? ? 'non applicable' : "#{pourcentage}%"
+        return 'non applicable' if pourcentage.nil?
+
+        pourcentage.to_f / 100
       end
 
       def calcule_score_max(reponses)
@@ -167,6 +176,23 @@ module Restitution
 
       def calcule_score(reponses)
         reponses.map { |e| e['score'] || 0 }.sum
+      end
+
+      def set_valeur(ligne, col, valeur)
+        @sheet[ligne, col] = valeur
+      end
+
+      # nombre entier uniquement
+      def set_nombre(ligne, col, valeur)
+        set_valeur(ligne, col, valeur)
+        @sheet.row(ligne).set_format(col, NUMBER_FORMAT)
+      end
+
+      # la valeur doit être compris entre 0 et 1
+      # exemple : 0.5 pour 50%
+      def set_pourcentage(ligne, col, valeur)
+        set_valeur(ligne, col, valeur)
+        @sheet.row(ligne).set_format(col, POURCENTAGE_FORMAT)
       end
     end
   end

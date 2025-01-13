@@ -7,6 +7,7 @@ module ImportExport
         { titre: 'Code Question', taille: 20 },
         { titre: 'Intitulé', taille: 80 },
         { titre: 'Réponse', taille: 45 },
+        { titre: 'Temps de passation', taille: 10 },
         { titre: 'Score', taille: 10 },
         { titre: 'Score max', taille: 10 },
         { titre: 'Métacompétence', taille: 20 }

@@ -21,9 +21,10 @@ describe Restitution::Positionnement::Export do
       expect(worksheet.row(0)[0]).to eq('Code Question')
       expect(worksheet.row(0)[1]).to eq('Intitulé')
       expect(worksheet.row(0)[2]).to eq('Réponse')
-      expect(worksheet.row(0)[3]).to eq('Score')
-      expect(worksheet.row(0)[4]).to eq('Score max')
-      expect(worksheet.row(0)[5]).to eq('Métacompétence')
+      expect(worksheet.row(0)[3]).to eq('Temps de passation')
+      expect(worksheet.row(0)[4]).to eq('Score')
+      expect(worksheet.row(0)[5]).to eq('Score max')
+      expect(worksheet.row(0)[6]).to eq('Métacompétence')
     end
 
     describe 'génére un fichier xls avec les evenements réponses' do
@@ -32,8 +33,13 @@ describe Restitution::Positionnement::Export do
       end
 
       before do
+        create :evenement_affichage_question_qcm,
+               date: DateTime.current,
+               partie: partie,
+               donnees: { question: 'LOdi1' }
         create :evenement_reponse,
                partie: partie,
+               date: DateTime.current,
                donnees: { question: 'LOdi1',
                           reponse: 'couverture',
                           score: 2,
@@ -52,9 +58,10 @@ describe Restitution::Positionnement::Export do
         expect(ligne[0]).to eq('LOdi1')
         expect(ligne[1]).to eq('De quoi s’agit-il ?')
         expect(ligne[2]).to eq('couverture')
-        expect(ligne[3]).to eq(2)
+        expect(ligne[3]).to eq('00:00')
         expect(ligne[4]).to eq(2)
-        expect(ligne[5]).to eq('lecture')
+        expect(ligne[5]).to eq(2)
+        expect(ligne[6]).to eq('lecture')
       end
 
       it 'verifie les détails de la deuxième question' do
@@ -62,9 +69,10 @@ describe Restitution::Positionnement::Export do
         expect(ligne[0]).to eq('LOdi2')
         expect(ligne[1]).to eq(intitule_question2)
         expect(ligne[2]).to eq('Le chat de Mme Coupin')
-        expect(ligne[3]).to be_nil
+        expect(ligne[3]).to eq('00:00')
         expect(ligne[4]).to be_nil
         expect(ligne[5]).to be_nil
+        expect(ligne[6]).to be_nil
       end
     end
   end

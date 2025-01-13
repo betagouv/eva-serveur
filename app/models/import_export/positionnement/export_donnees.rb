@@ -16,6 +16,7 @@ module ImportExport
         { titre: 'Code cléa', taille: 10 },
         { titre: 'Item', taille: 20 },
         { titre: 'Méta compétence', taille: 20 },
+        { titre: 'Temps de passation', taille: 10 },
         { titre: 'Score attribué', taille: 10 },
         { titre: 'Score possible de la question', taille: 10 },
         { titre: 'Interaction', taille: 20 },

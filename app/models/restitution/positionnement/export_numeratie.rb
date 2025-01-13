@@ -106,6 +106,7 @@ module Restitution
           code,
           donnees['question'],
           donnees['metacompetence']&.humanize,
+          calcule_temps_passe(donnees['question']),
           donnees['score'].to_s,
           donnees['scoreMax'].to_s,
           question&.interaction,
@@ -113,10 +114,20 @@ module Restitution
         ]
       end
 
+      def calcule_temps_passe(question)
+        evenement_reponse = @evenements_reponses.find_by("donnees ->> 'question' = ?", question)
+        return if evenement_reponse.nil?
+
+        evenement_qcm = evenement_reponse.recupere_evenement_affichage_question_qcm
+        temps_total = evenement_qcm.nil? ? 0 : evenement_reponse.date - evenement_qcm.date
+
+        Restitution::Base::TempsTotal.format_temps_total(temps_total)
+      end
+
       def remplis_choix(ligne, donnees, question)
-        @sheet[ligne, 7] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-        @sheet[ligne, 8] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
-        @sheet[ligne, 9] = donnees['reponseIntitule'] || donnees['reponse']
+        @sheet[ligne, 8] = question&.interaction == 'qcm' ? question&.liste_choix : nil
+        @sheet[ligne, 9] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
+        @sheet[ligne, 10] = donnees['reponseIntitule'] || donnees['reponse']
       end
 
       # Trie par code cléa et par question

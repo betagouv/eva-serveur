@@ -45,17 +45,28 @@ module Restitution
                                               avec_rattrapage: true)
     end
 
-    def calcule_pourcentage_reussite_competence_clea
+    def calcule_pourcentage_reussite_competence_clea # rubocop:disable Metrics/AbcSize
       SCORES_CLEA.each_key do |code|
         next unless evenements_groupes_cleas[code]
 
         evenements = evenements_groupes_cleas[code].values.flatten
         evenements = filtre_evenements_reponses(evenements)
-
+        SCORES_CLEA[code][:nombre_questions_repondues] = questions_reponues_pour(evenements)
+        SCORES_CLEA[code][:nombre_total_questions] = questions_total_pour(evenements)
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new
                                      .calcule_pourcentage_reussite(evenements)
       end
+    end
+
+    def questions_reponues_pour(evenements)
+      evenements.reject do |e|
+        e['score'].blank?
+      end.size
+    end
+
+    def questions_total_pour(evenements)
+      evenements.size
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -103,16 +114,25 @@ module Restitution
     # rubocop:disable Naming/VariableNumber
     def competences_numeratie
       @competences_numeratie ||= {
-        '2_1': { profil: succes?('2.1'), pourcentage: SCORES_CLEA['2.1'][:pourcentage_reussite] },
-        '2_2': { profil: succes?('2.2'), pourcentage: SCORES_CLEA['2.2'][:pourcentage_reussite] },
-        '2_3': { profil: succes?('2.3'), pourcentage: SCORES_CLEA['2.3'][:pourcentage_reussite] },
-        '2_4': { profil: succes?('2.4'), pourcentage: SCORES_CLEA['2.4'][:pourcentage_reussite] },
-        '2_5': { profil: succes?('2.5'), pourcentage: SCORES_CLEA['2.5'][:pourcentage_reussite] }
+        '2_1': creer_numeratie('2.1'),
+        '2_2': creer_numeratie('2.2'),
+        '2_3': creer_numeratie('2.3'),
+        '2_4': creer_numeratie('2.4'),
+        '2_5': creer_numeratie('2.5')
       }
     end
     # rubocop:enable Naming/VariableNumber
 
     private
+
+    def creer_numeratie(code)
+      Restitution::SousCompetence::Numeratie.new(
+        succes: succes?(code),
+        pourcentage_reussite: SCORES_CLEA[code][:pourcentage_reussite],
+        nombre_questions_repondues: SCORES_CLEA[code][:nombre_questions_repondues],
+        nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions]
+      )
+    end
 
     def succes?(code_clea)
       SCORES_CLEA[code_clea][:pourcentage_reussite] >= SCORES_CLEA[code_clea][:seuil]
@@ -121,8 +141,8 @@ module Restitution
     def evenements_groupes_cleas
       @evenements_groupes_cleas ||= begin
         situation = Situation.find_by(nom_technique: 'place_du_marche')
-        questionnaire = @campagne.questionnaire_pour(situation)
-        @evenements.regroupe_par_codes_clea(questionnaire, %w[N1R N2R N3R])
+        @questionnaire = @campagne.questionnaire_pour(situation)
+        @evenements.regroupe_par_codes_clea(@questionnaire, %w[N1R N2R N3R])
       end
     end
 
@@ -140,6 +160,11 @@ module Restitution
       return evenements if a_fait_un_rattrapage
 
       evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
+    end
+
+    def questions_non_repondues_par_module(evenements, nom_module)
+      module_rattrapage = "#{nom_module}R"
+      evenements.select { |e| e['question'].start_with?(module_rattrapage) && e['score'].blank? }
     end
   end
 end

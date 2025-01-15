@@ -6,7 +6,8 @@ fr:
           hint: 'La taille de l’image rendue est de 1008x566.'
         supprimer_illustration: Supprimer l'illustration actuelle
         format_fichier_zone_cliquable: L'un des éléments cliquables doit contenir la classe css `bonne-reponse`
-        format_fichier_zone_depot: Les éléments doivent contenir la classe css `zone-depot` et la classe css `zone-depot--reponse.nom_technique`
+        format_fichier_zone_depot: |
+          Les éléments doivent contenir la classe css `zone-depot` et la classe css `zone-depot--{reponse-nom-technique}` (exemple : `zone-depot zone-depot--N1Ron1GD1`)
       inputs_avec_transcriptions_audios:
         label:
           intitule: |

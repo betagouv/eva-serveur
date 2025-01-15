@@ -18,6 +18,7 @@ module ImportExport
         { titre: 'Méta compétence', taille: 20 },
         { titre: 'Score attribué', taille: 10 },
         { titre: 'Score possible de la question', taille: 10 },
+        { titre: 'Prise en compte dans le calcul du score Cléa ?', taille: 30 },
         { titre: 'Interaction', taille: 20 },
         { titre: 'Intitulé de la question', taille: 80 },
         { titre: 'Réponses possibles', taille: 20 },

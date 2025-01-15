@@ -168,21 +168,19 @@ describe Restitution::Positionnement::Export do
 
           ligne = worksheet.row(5)
           expect(ligne[0]).to eq('2.3.3')
-          expect(ligne[1]).to be_nil
+          expect(ligne[1]).to eq('Renseigner correctement les horaires')
           expect(ligne[2]).to eq(1)
           expect(ligne[3]).to eq(5.0)
           expect(ligne[4]).to eq('20%')
 
           ligne = worksheet.row(6)
           expect(ligne[0]).to eq('2.3.5')
-          expect(ligne[1]).to be_nil
           expect(ligne[2]).to eq(1)
           expect(ligne[3]).to eq(1)
           expect(ligne[4]).to eq('100%')
 
           ligne = worksheet.row(7)
           expect(ligne[0]).to eq('2.5.3')
-          expect(ligne[1]).to be_nil
           expect(ligne[2]).to eq(0)
           expect(ligne[3]).to eq(0)
           expect(ligne[4]).to eq('non applicable')

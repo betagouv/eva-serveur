@@ -51,9 +51,11 @@ module Restitution
       end
 
       def remplis_reponses(ligne, reponses)
+        liste_questions = filtre_evenements_reponses(reponses).map { |e| [e['question']] }.flatten
+
         reponses.each do |reponse|
           question = Question.find_by(nom_technique: reponse['question'])
-          ligne = remplis_ligne(ligne, reponse, question)
+          ligne = remplis_ligne(ligne, reponse, question, liste_questions)
         end
         ligne
       end
@@ -84,13 +86,13 @@ module Restitution
         @evenements_reponses.map(&:donnees) + non_repondues
       end
 
-      def remplis_ligne(ligne, donnees, question)
+      def remplis_ligne(ligne, donnees, question, liste_questions)
         est_non_repondu = questions_non_repondues.any? do |q|
           q[:nom_technique] == donnees['question']
         end
 
         code = Metacompetence.new(donnees['metacompetence']).code_clea_sous_sous_domaine
-        row_data = ligne_data(code, donnees, question)
+        row_data = ligne_data(code, donnees, question, liste_questions)
         @sheet.row(ligne).replace(row_data)
         grise_ligne(ligne) if est_non_repondu
         remplis_choix(ligne, donnees, question)
@@ -103,16 +105,21 @@ module Restitution
         @sheet.row(ligne).default_format = format_grise
       end
 
-      def ligne_data(code, donnees, question)
+      def ligne_data(code, donnees, question, liste_questions)
         [
           code,
           donnees['question'],
           donnees['metacompetence']&.humanize,
           donnees['score'].to_s,
           donnees['scoreMax'].to_s,
+          pris_en_compte_pour_calcul_score_clea?(liste_questions, donnees['question']),
           question&.interaction,
           donnees['intitule']
         ]
+      end
+
+      def pris_en_compte_pour_calcul_score_clea?(liste_questions, question)
+        liste_questions.include?(question) ? 'Oui' : 'Non'
       end
 
       def calcule_temps_passe(question)
@@ -126,10 +133,10 @@ module Restitution
       end
 
       def remplis_choix(ligne, donnees, question)
-        @sheet[ligne, 7] = question&.interaction == 'qcm' ? question&.liste_choix : nil
-        @sheet[ligne, 8] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
-        @sheet[ligne, 9] = donnees['reponseIntitule'] || donnees['reponse']
-        @sheet[ligne, 10] = calcule_temps_passe(donnees['question'])
+        @sheet[ligne, 8] = question&.interaction == 'qcm' ? question&.liste_choix : nil
+        @sheet[ligne, 9] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
+        @sheet[ligne, 10] = donnees['reponseIntitule'] || donnees['reponse']
+        @sheet[ligne, 11] = calcule_temps_passe(donnees['question'])
       end
 
       # Trie par code cléa et par question

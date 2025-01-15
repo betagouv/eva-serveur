@@ -99,12 +99,13 @@ describe Restitution::Positionnement::Export do
         expect(worksheet.row(0)[2]).to eq('Méta compétence')
         expect(worksheet.row(0)[3]).to eq('Score attribué')
         expect(worksheet.row(0)[4]).to eq('Score possible de la question')
-        expect(worksheet.row(0)[5]).to eq('Interaction')
-        expect(worksheet.row(0)[6]).to eq('Intitulé de la question')
-        expect(worksheet.row(0)[7]).to eq('Réponses possibles')
-        expect(worksheet.row(0)[8]).to eq('Réponses attendue')
-        expect(worksheet.row(0)[9]).to eq('Réponse du bénéficiaire')
-        expect(worksheet.row(0)[10]).to eq('Temps de passation')
+        expect(worksheet.row(0)[5]).to eq('Prise en compte dans le calcul du score Cléa ?')
+        expect(worksheet.row(0)[6]).to eq('Interaction')
+        expect(worksheet.row(0)[7]).to eq('Intitulé de la question')
+        expect(worksheet.row(0)[8]).to eq('Réponses possibles')
+        expect(worksheet.row(0)[9]).to eq('Réponses attendue')
+        expect(worksheet.row(0)[10]).to eq('Réponse du bénéficiaire')
+        expect(worksheet.row(0)[11]).to eq('Temps de passation')
       end
     end
 

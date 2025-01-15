@@ -42,6 +42,7 @@ module Restitution
         score_max = calcule_score_max(filtre_evenements_reponses(reponses))
         score = calcule_score(filtre_evenements_reponses(reponses))
         intitule_code_cle = Metacompetence::CODECLEA_INTITULES[sous_code]
+
         @sheet[ligne, 0] = sous_code
         @sheet[ligne, 1] = intitule_code_cle
         @sheet[ligne, 2] = score

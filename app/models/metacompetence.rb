@@ -46,7 +46,12 @@ class Metacompetence
     '2.2.2' => I18n.t('activerecord.metacompetence.codes_clea.2_2_2'),
     '2.3.1' => I18n.t('activerecord.metacompetence.codes_clea.2_3_1'),
     '2.3.2' => I18n.t('activerecord.metacompetence.codes_clea.2_3_2'),
-    '2.3.3' => I18n.t('activerecord.metacompetence.codes_clea.2_3_3')
+    '2.3.3' => I18n.t('activerecord.metacompetence.codes_clea.2_3_3'),
+    '2.3.4' => I18n.t('activerecord.metacompetence.codes_clea.2_3_4'),
+    '2.3.5' => I18n.t('activerecord.metacompetence.codes_clea.2_3_5'),
+    '2.3.7' => I18n.t('activerecord.metacompetence.codes_clea.2_3_7'),
+    '2.4.1' => I18n.t('activerecord.metacompetence.codes_clea.2_4_1'),
+    '2.5.3' => I18n.t('activerecord.metacompetence.codes_clea.2_5_3')
   }.freeze
 
   METACOMPETENCES_BASE = %w[numeratie ccf syntaxe-orthographe].freeze

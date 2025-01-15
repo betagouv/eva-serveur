@@ -197,12 +197,13 @@ describe Restitution::Positionnement::Export do
           expect(ligne[2]).to eq('Renseigner horaires')
           expect(ligne[3]).to eq('0')
           expect(ligne[4]).to eq('2')
-          expect(ligne[5]).to eq('qcm')
-          expect(ligne[6]).to eq('De quoi s’agit-il ?')
-          expect(ligne[7]).to eq('drapeau | couverture | autre')
-          expect(ligne[8]).to eq('couverture')
-          expect(ligne[9]).to eq("c'est un drapeau")
-          expect(ligne[10]).to eq('00:59')
+          expect(ligne[5]).to eq('Oui')
+          expect(ligne[6]).to eq('qcm')
+          expect(ligne[7]).to eq('De quoi s’agit-il ?')
+          expect(ligne[8]).to eq('drapeau | couverture | autre')
+          expect(ligne[9]).to eq('couverture')
+          expect(ligne[10]).to eq("c'est un drapeau")
+          expect(ligne[11]).to eq('00:59')
         end
 
         it 'verifie les questions du même sous sous domaine' do
@@ -210,7 +211,7 @@ describe Restitution::Positionnement::Export do
           ligne = worksheet.row(2)
           expect(ligne[0]).to eq('2.3.3')
           expect(ligne[1]).to eq('LOdi2')
-          expect(ligne[10]).to eq('00:00')
+          expect(ligne[11]).to eq('00:00')
           ligne = worksheet.row(3)
           expect(ligne[0]).to eq('2.3.3')
           expect(ligne[1]).to eq('LOdi4')

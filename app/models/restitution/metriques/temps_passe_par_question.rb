@@ -12,7 +12,7 @@ module Restitution
       def calculer
         return if @evenements.empty?
 
-        evenements_groupes = @evenements.groupees_par_questions
+        evenements_groupes = @evenements.groupes_par_questions
         evenements_groupes.each_with_object({}) do |(question, evenements), result|
           temps_total = calcul_temps_total(evenements)
           result[question] = formate_duree(temps_total)

@@ -4,16 +4,17 @@ require 'rails_helper'
 
 describe Restitution::Positionnement::ExportNumeratie do
   subject(:response_service) do
-    described_class.new(partie, worksheet)
+    described_class.new(partie, onglet_xls)
   end
 
   let(:partie) { create :partie }
-  let(:spreadsheet) { Spreadsheet::Workbook.new }
-  let(:worksheet) do
+  let(:export) { ImportExport::ExportXls.new }
+  let(:onglet_xls) do
     entetes = ImportExport::Positionnement::ExportDonnees.new(partie).entetes
-    ImportExport::ExportXls.new(entetes: entetes,
-                                workbook: spreadsheet).cree_worksheet_donnees
+    export.cree_worksheet_donnees(entetes)
   end
+  let(:spreadsheet) { export.workbook }
+  let(:worksheet) { spreadsheet.worksheet(0) }
 
   describe '#regroupe_par_codes_clea' do
     it 'trie les evenements par codes clea' do

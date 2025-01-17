@@ -10,10 +10,9 @@ module ImportExport
       end
 
       def to_xls
-        workbook = Spreadsheet::Workbook.new
         entetes = @headers.map { |header| { titre: header.to_s.humanize, taille: 20 } }
-        @sheet = ::ImportExport::ExportXls.new(entetes: entetes,
-                                               workbook: workbook).cree_worksheet_donnees
+        @export = ::ImportExport::ExportXls.new
+        @onglet = @export.cree_worksheet_donnees(entetes)
 
         remplis_la_feuille
         retourne_le_contenu_du_xls
@@ -34,20 +33,20 @@ module ImportExport
       end
 
       def remplis_champs_commun
-        @sheet[@ligne, 0] = @question.libelle
-        @sheet[@ligne, 1] = @question.nom_technique
-        @sheet[@ligne, 2] = @question.illustration_url
-        @sheet[@ligne, 3] = @question.transcription_intitule&.ecrit
-        @sheet[@ligne, 4] = @question.transcription_intitule&.audio_url
+        @onglet.set_valeur(@ligne, 0, @question.libelle)
+        @onglet.set_valeur(@ligne, 1, @question.nom_technique)
+        @onglet.set_valeur(@ligne, 2, @question.illustration_url)
+        @onglet.set_valeur(@ligne, 3, @question.transcription_intitule&.ecrit)
+        @onglet.set_valeur(@ligne, 4, @question.transcription_intitule&.audio_url)
         remplis_champs_additionnels
       end
 
       def remplis_champs_additionnels
         return if @question.sous_consigne?
 
-        @sheet[@ligne, 6] = @question.transcription_modalite_reponse&.audio_url
-        @sheet[@ligne, 5] = @question.transcription_modalite_reponse&.ecrit
-        @sheet[@ligne, 7] = @question.description
+        @onglet.set_valeur(@ligne, 5, @question.transcription_modalite_reponse&.ecrit)
+        @onglet.set_valeur(@ligne, 6, @question.transcription_modalite_reponse&.audio_url)
+        @onglet.set_valeur(@ligne, 7, @question.description)
         remplis_champs_specifiques
       end
 
@@ -62,52 +61,55 @@ module ImportExport
       end
 
       def remplis_champs_clic_dans_image
-        @sheet[@ligne, 8] = @question.zone_cliquable_url
-        @sheet[@ligne, 9] = @question.image_au_clic_url
+        @onglet.set_valeur(@ligne, 8, @question.zone_cliquable_url)
+        @onglet.set_valeur(@ligne, 9, @question.image_au_clic_url)
       end
 
       def remplis_champs_glisser_deposer
-        @sheet[@ligne, 8] = @question.zone_depot_url
+        @onglet.set_valeur(@ligne, 8, @question.zone_depot_url)
         @question.reponses.each_with_index { |choix, index| ajoute_reponses(choix, index) }
       end
 
       def remplis_champs_saisie
-        @sheet[@ligne, 8] = @question.suffix_reponse
-        @sheet[@ligne, 9] = @question.reponse_placeholder
-        @sheet[@ligne, 10] = @question.type_saisie
+        @onglet.set_valeur(@ligne, 8, @question.suffix_reponse)
+        @onglet.set_valeur(@ligne, 9, @question.reponse_placeholder)
+        @onglet.set_valeur(@ligne, 10, @question.type_saisie)
         @question.reponses.each_with_index { |reponse, index| ajoute_saisies(reponse, index) }
       end
 
       def remplis_champs_qcm
-        @sheet[@ligne, 8] = @question.type_qcm
+        @onglet.set_valeur(@ligne, 8, @question.type_qcm)
         @question.choix.each_with_index { |choix, index| ajoute_choix(choix, index) }
       end
 
       def remplis_champs_clic_dans_texte
-        @sheet[@ligne, 8] = @question.texte_sur_illustration
+        @onglet.set_valeur(@ligne, 8, @question.texte_sur_illustration)
       end
 
       def ajoute_choix(choix, index)
-        columns = %w[intitule nom_technique type_choix audio]
+        columns = %w[intitule nom_technique type_choix audio_url]
         columns.each_with_index do |col, i|
-          @sheet[0, 9 + (index * columns.size) + i] = "choix_#{index + 1}_#{col}"
-          @sheet[@ligne, 9 + (index * columns.size) + i] = choix.send(col)
+          colonne = 9 + (index * columns.size) + i
+          @onglet.set_valeur(0, colonne, "choix_#{index + 1}_#{col}")
+          @onglet.set_valeur(@ligne, colonne, choix.send(col))
         end
       end
 
       def ajoute_saisies(reponse, index)
         columns = %w[intitule nom_technique type_choix]
         columns.each_with_index do |col, i|
-          @sheet[0, 11 + (index * columns.size) + i] = "reponse_#{index + 1}_#{col}"
-          @sheet[@ligne, 11 + (index * columns.size) + i] = reponse.send(col)
+          colonne = 11 + (index * columns.size) + i
+          @onglet.set_valeur(0, colonne, "reponse_#{index + 1}_#{col}")
+          @onglet.set_valeur(@ligne, colonne, reponse.send(col))
         end
       end
 
       def ajoute_reponses(choix, index)
-        columns = %w[nom_technique position_client type_choix illustration]
+        columns = %w[nom_technique position_client type_choix illustration_url]
         columns.each_with_index do |col, i|
-          @sheet[0, 9 + (index * columns.size) + i] = "reponse_#{index + 1}_#{col}"
-          @sheet[@ligne, 9 + (index * columns.size) + i] = choix.send(col)
+          colonne = 9 + (index * columns.size) + i
+          @onglet.set_valeur(0, colonne, "reponse_#{index + 1}_#{col}")
+          @onglet.set_valeur(@ligne, colonne, choix.send(col).to_s)
         end
       end
     end

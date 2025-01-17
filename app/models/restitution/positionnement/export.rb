@@ -6,7 +6,6 @@ module Restitution
       def initialize(partie:)
         super()
         @partie = partie
-        @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
         @workbook = Spreadsheet::Workbook.new
       end
 
@@ -55,7 +54,7 @@ module Restitution
       end
 
       def remplis_reponses_litteratie(ligne)
-        export = ExportLitteratie.new(@evenements_reponses.sort_by(&:position), @sheet)
+        export = ExportLitteratie.new(@partie, @sheet)
         export.remplis_reponses(ligne)
       end
 

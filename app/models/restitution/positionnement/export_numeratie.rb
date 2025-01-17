@@ -7,6 +7,8 @@ module Restitution
         @partie = partie
         @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
         @sheet = sheet
+        @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
+                              .new(@partie.evenements).calculer
       end
 
       def regroupe_par_codes_clea
@@ -122,21 +124,11 @@ module Restitution
         liste_questions.include?(question) ? 'Oui' : 'Non'
       end
 
-      def calcule_temps_passe(question)
-        evenement_reponse = @evenements_reponses.find_by("donnees ->> 'question' = ?", question)
-        return if evenement_reponse.nil?
-
-        evenement_qcm = evenement_reponse.recupere_evenement_affichage_question_qcm
-        temps_total = evenement_qcm.nil? ? 0 : evenement_reponse.date - evenement_qcm.date
-
-        Restitution::Base::TempsTotal.format_temps_total(temps_total)
-      end
-
       def remplis_choix(ligne, donnees, question)
         @sheet[ligne, 8] = question&.interaction == 'qcm' ? question&.liste_choix : nil
         @sheet[ligne, 9] = question&.bonnes_reponses if question&.qcm? || question&.saisie?
         @sheet[ligne, 10] = donnees['reponseIntitule'] || donnees['reponse']
-        @sheet[ligne, 11] = calcule_temps_passe(donnees['question'])
+        @sheet[ligne, 11] = @temps_par_question[donnees['question']]
       end
 
       # Trie par code cléa et par question

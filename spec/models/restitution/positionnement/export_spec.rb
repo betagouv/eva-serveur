@@ -33,13 +33,15 @@ describe Restitution::Positionnement::Export do
       end
 
       before do
+        heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
+        heure_fin = heure_debut + 59.seconds
         create :evenement_affichage_question_qcm,
-               date: DateTime.current,
                partie: partie,
+               date: heure_debut,
                donnees: { question: 'LOdi1' }
         create :evenement_reponse,
                partie: partie,
-               date: DateTime.current,
+               date: heure_fin,
                donnees: { question: 'LOdi1',
                           reponse: 'couverture',
                           score: 2,
@@ -61,7 +63,7 @@ describe Restitution::Positionnement::Export do
         expect(ligne[3]).to eq(2)
         expect(ligne[4]).to eq(2)
         expect(ligne[5]).to eq('lecture')
-        expect(ligne[6]).to eq('00:00')
+        expect(ligne[6]).to eq('00:59')
       end
 
       it 'verifie les détails de la deuxième question' do
@@ -72,7 +74,7 @@ describe Restitution::Positionnement::Export do
         expect(ligne[3]).to be_nil
         expect(ligne[4]).to be_nil
         expect(ligne[5]).to be_nil
-        expect(ligne[6]).to eq('00:00')
+        expect(ligne[6]).to be_nil
       end
     end
   end
@@ -111,9 +113,13 @@ describe Restitution::Positionnement::Export do
 
     describe 'génére un fichier xls avec les evenements réponses' do
       before do
+        heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
+        heure_fin = heure_debut + 59.seconds
+
         create :evenement_reponse,
-               date: DateTime.current,
+               date: heure_fin,
                partie: partie,
+               position: 2,
                donnees: { question: 'LOdi1',
                           reponse: 'drapeau',
                           reponseIntitule: "c'est un drapeau",
@@ -122,16 +128,19 @@ describe Restitution::Positionnement::Export do
                           intitule: 'De quoi s’agit-il ?',
                           metacompetence: :renseigner_horaires }
         create :evenement_affichage_question_qcm,
-               date: DateTime.current,
+               date: heure_debut,
                partie: partie,
+               position: 1,
                donnees: { question: 'LOdi1' }
         create :evenement_reponse,
                partie: partie,
+               position: 3,
                donnees: { question: 'LOdi2',
                           score: 1,
                           scoreMax: 2,
                           metacompetence: :renseigner_horaires }
         create :evenement_reponse,
+               position: 4,
                partie: partie,
                donnees: { question: 'LOdi3',
                           metacompetence: 'tableaux_graphiques',
@@ -142,6 +151,7 @@ describe Restitution::Positionnement::Export do
                                          metacompetence: :renseigner_horaires, score: 1)
         create :evenement_reponse,
                partie: partie,
+               position: 5,
                donnees: { question: 'LOdi5',
                           metacompetence: 'situation_dans_lespace' }
         partie.situation.questionnaire.questions << question
@@ -211,7 +221,7 @@ describe Restitution::Positionnement::Export do
           ligne = worksheet.row(2)
           expect(ligne[0]).to eq('2.3.3')
           expect(ligne[1]).to eq('LOdi2')
-          expect(ligne[11]).to eq('00:00')
+          expect(ligne[10]).to be_nil
           ligne = worksheet.row(3)
           expect(ligne[0]).to eq('2.3.3')
           expect(ligne[1]).to eq('LOdi4')

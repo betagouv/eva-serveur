@@ -3,14 +3,17 @@
 module Restitution
   module Positionnement
     class ExportLitteratie
-      def initialize(evenements_reponses, sheet)
+      def initialize(partie, sheet)
         super()
-        @evenements_reponses = evenements_reponses
         @sheet = sheet
+        @partie = partie
+        @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
+                              .new(@partie.evenements).calculer
+        @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
       end
 
       def remplis_reponses(ligne)
-        @evenements_reponses.each do |evenement|
+        @evenements_reponses.sort_by(&:position).each do |evenement|
           ligne = remplis_ligne(ligne, evenement)
         end
         ligne
@@ -23,15 +26,8 @@ module Restitution
                                    evenement.donnees['score'],
                                    evenement.donnees['scoreMax'],
                                    evenement.donnees['metacompetence'],
-                                   calcule_temps_passe(evenement)])
+                                   @temps_par_question[evenement.donnees['question']]])
         ligne + 1
-      end
-
-      def calcule_temps_passe(evenement)
-        evenement_debut = evenement.recupere_evenement_affichage_question_qcm
-        temps_total = evenement_debut.nil? ? 0 : evenement.date - evenement_debut.date
-
-        Restitution::Base::TempsTotal.format_temps_total(temps_total)
       end
     end
   end

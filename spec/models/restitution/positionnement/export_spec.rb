@@ -4,55 +4,56 @@ require 'rails_helper'
 
 describe Restitution::Positionnement::Export do
   subject(:response_service) do
-    described_class.new(partie: partie)
+    response_service = described_class.new(partie: partie)
+    response_service.to_xls
+    response_service
   end
 
-  let(:spreadsheet) { Spreadsheet.open(StringIO.new(response_service.to_xls)) }
+  let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
   let(:question) { create(:question_qcm, nom_technique: 'LOdi1') }
   let(:partie) { create :partie }
 
   describe 'pour un export littératie' do
     let(:situation) { create(:situation_cafe_de_la_place) }
-    let!(:partie) { create :partie, situation: situation }
+    let(:partie) { create :partie, situation: situation }
+    let(:intitule_question2) do
+      'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
+    end
 
-    it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
-      expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[0]).to eq('Code Question')
-      expect(worksheet.row(0)[1]).to eq('Intitulé')
-      expect(worksheet.row(0)[2]).to eq('Réponse')
-      expect(worksheet.row(0)[3]).to eq('Score')
-      expect(worksheet.row(0)[4]).to eq('Score max')
-      expect(worksheet.row(0)[5]).to eq('Métacompétence')
-      expect(worksheet.row(0)[6]).to eq('Temps de passation')
+    before do
+      heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
+      heure_fin = heure_debut + 59.seconds
+      create :evenement_affichage_question_qcm,
+             partie: partie,
+             date: heure_debut,
+             donnees: { question: 'LOdi1' }
+      create :evenement_reponse,
+             partie: partie,
+             date: heure_fin,
+             donnees: { question: 'LOdi1',
+                        reponse: 'couverture',
+                        score: 2,
+                        scoreMax: 2,
+                        intitule: 'De quoi s’agit-il ?',
+                        metacompetence: 'lecture' }
+      create :evenement_reponse,
+             partie: partie,
+             donnees: { intitule: intitule_question2,
+                        question: 'LOdi2',
+                        reponseIntitule: 'Le chat de Mme Coupin' }
     end
 
     describe 'génére un fichier xls avec les evenements réponses' do
-      let(:intitule_question2) do
-        'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
-      end
-
-      before do
-        heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
-        heure_fin = heure_debut + 59.seconds
-        create :evenement_affichage_question_qcm,
-               partie: partie,
-               date: heure_debut,
-               donnees: { question: 'LOdi1' }
-        create :evenement_reponse,
-               partie: partie,
-               date: heure_fin,
-               donnees: { question: 'LOdi1',
-                          reponse: 'couverture',
-                          score: 2,
-                          scoreMax: 2,
-                          intitule: 'De quoi s’agit-il ?',
-                          metacompetence: 'lecture' }
-        create :evenement_reponse,
-               partie: partie,
-               donnees: { intitule: intitule_question2,
-                          question: 'LOdi2',
-                          reponseIntitule: 'Le chat de Mme Coupin' }
+      it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
+        expect(spreadsheet.worksheets.count).to eq(1)
+        expect(worksheet.row(0)[0]).to eq('Code Question')
+        expect(worksheet.row(0)[1]).to eq('Intitulé')
+        expect(worksheet.row(0)[2]).to eq('Réponse')
+        expect(worksheet.row(0)[3]).to eq('Score')
+        expect(worksheet.row(0)[4]).to eq('Score max')
+        expect(worksheet.row(0)[5]).to eq('Métacompétence')
+        expect(worksheet.row(0)[6]).to eq('Temps de passation')
       end
 
       it 'verifie les détails de la première question question' do
@@ -171,8 +172,8 @@ describe Restitution::Positionnement::Export do
         it 'verifie les sous sous domaines et le % de réussite dans un autre tableau' do
           worksheet = spreadsheet.worksheet(0)
           ligne = worksheet.row(4)
-          expect(ligne[0]).to be_nil
-          expect(ligne[1]).to be_nil
+          expect(ligne[0]).to eq ''
+          expect(ligne[1]).to eq ''
           expect(ligne[2]).to eq('Points')
           expect(ligne[3]).to eq('Points maximum')
           expect(ligne[4]).to eq('Score')
@@ -200,13 +201,13 @@ describe Restitution::Positionnement::Export do
 
       context "sur l'onglet de donnees" do
         it 'verifie les détails de la première question' do
-          worksheet = spreadsheet.worksheet(1)
+          worksheet = spreadsheet.worksheet(ImportExport::ExportXls::WORKSHEET_DONNEES)
           ligne = worksheet.row(1)
           expect(ligne[0]).to eq('2.3.3')
           expect(ligne[1]).to eq('LOdi1')
           expect(ligne[2]).to eq('Renseigner horaires')
-          expect(ligne[3]).to eq('0')
-          expect(ligne[4]).to eq('2')
+          expect(ligne[3]).to eq(0)
+          expect(ligne[4]).to eq(2)
           expect(ligne[5]).to eq('Oui')
           expect(ligne[6]).to eq('qcm')
           expect(ligne[7]).to eq('De quoi s’agit-il ?')

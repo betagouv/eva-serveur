@@ -3,13 +3,11 @@
 module Restitution
   module Positionnement
     class ExportNumeratie # rubocop:disable Metrics/ClassLength
-      NUMBER_FORMAT = Spreadsheet::Format.new(number_format: '0')
-      POURCENTAGE_FORMAT = Spreadsheet::Format.new(number_format: '0%')
-
-      def initialize(partie, sheet)
+      def initialize(partie, onglet_xls)
+        super()
         @partie = partie
         @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
-        @sheet = sheet
+        @onglet_xls = onglet_xls
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
                               .new(@partie.evenements).calculer
       end
@@ -30,29 +28,13 @@ module Restitution
       end
 
       def remplis_sous_domaine(ligne, code, reponses)
-        pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
-        score_max = calcule_score_max(filtre_evenements_reponses(reponses))
-        score = calcule_score(filtre_evenements_reponses(reponses))
-        intitule_code_cle = Metacompetence::CODECLEA_INTITULES[code]
-
-        set_valeur(ligne, 0, code)
-        set_valeur(ligne, 1, intitule_code_cle)
-        set_nombre(ligne, 2, score)
-        set_nombre(ligne, 3, score_max)
-        set_pourcentage(ligne, 4, pourcentage)
+        @onglet_xls.set_valeur(ligne, 0, code)
+        valeurs_communes(ligne, code, reponses)
       end
 
       def remplis_sous_sous_domaine(ligne, sous_code, reponses)
-        pourcentage = pourcentage_reussite(filtre_evenements_reponses(reponses))
-        score_max = calcule_score_max(filtre_evenements_reponses(reponses))
-        score = calcule_score(filtre_evenements_reponses(reponses))
-        intitule_code_cle = Metacompetence::CODECLEA_INTITULES[sous_code]
-
-        set_valeur(ligne, 0, sous_code)
-        set_valeur(ligne, 1, intitule_code_cle)
-        set_nombre(ligne, 2, score)
-        set_nombre(ligne, 3, score_max)
-        set_pourcentage(ligne, 4, pourcentage)
+        @onglet_xls.set_valeur(ligne, 0, sous_code)
+        valeurs_communes(ligne, sous_code, reponses)
       end
 
       def remplis_reponses(ligne, reponses)
@@ -66,6 +48,13 @@ module Restitution
       end
 
       private
+
+      def valeurs_communes(ligne, code, reponses)
+        @onglet_xls.set_valeur(ligne, 1, intitule_code_clea(code))
+        @onglet_xls.set_nombre(ligne, 2, score(reponses))
+        @onglet_xls.set_nombre(ligne, 3, score_max(reponses))
+        @onglet_xls.set_pourcentage(ligne, 4, pourcentage(reponses))
+      end
 
       def regroupe_par_sous_domaine
         groupes_clea = questions_repondues_et_non_repondues.group_by do |e|
@@ -91,36 +80,25 @@ module Restitution
         @evenements_reponses.map(&:donnees) + non_repondues
       end
 
-      def remplis_ligne(ligne, donnees, question, liste_questions)
+      def remplis_ligne(ligne, donnees, question, liste_questions) # rubocop:disable Metrics
         est_non_repondu = questions_non_repondues.any? do |q|
           q[:nom_technique] == donnees['question']
         end
 
         code = Metacompetence.new(donnees['metacompetence']).code_clea_sous_sous_domaine
-        row_data = ligne_data(code, donnees, question, liste_questions)
-        @sheet.row(ligne).replace(row_data)
-        grise_ligne(ligne) if est_non_repondu
+        @onglet_xls.set_valeur(ligne, 0, code)
+        @onglet_xls.set_valeur(ligne, 1, donnees['question'])
+        @onglet_xls.set_valeur(ligne, 2, donnees['metacompetence']&.humanize)
+        @onglet_xls.set_valeur(ligne, 3, donnees['score'])
+        @onglet_xls.set_valeur(ligne, 4, donnees['scoreMax'])
+        valeur = pris_en_compte_pour_calcul_score_clea?(liste_questions, donnees['question'])
+        @onglet_xls.set_valeur(ligne, 5, valeur)
+        @onglet_xls.set_valeur(ligne, 6, question&.interaction)
+        @onglet_xls.set_valeur(ligne, 7, donnees['intitule'])
+
+        @onglet_xls.grise_ligne(ligne) if est_non_repondu
         remplis_choix(ligne, donnees, question)
         ligne + 1
-      end
-
-      XLS_COLOR_GRAY = :xls_color_14 # rubocop:disable Naming/VariableNumber
-      def grise_ligne(ligne)
-        format_grise = Spreadsheet::Format.new(pattern_fg_color: XLS_COLOR_GRAY, pattern: 1)
-        @sheet.row(ligne).default_format = format_grise
-      end
-
-      def ligne_data(code, donnees, question, liste_questions)
-        [
-          code,
-          donnees['question'],
-          donnees['metacompetence']&.humanize,
-          donnees['score'],
-          donnees['scoreMax'],
-          pris_en_compte_pour_calcul_score_clea?(liste_questions, donnees['question']),
-          question&.interaction,
-          donnees['intitule']
-        ]
       end
 
       def pris_en_compte_pour_calcul_score_clea?(liste_questions, question)
@@ -129,11 +107,13 @@ module Restitution
 
       def remplis_choix(ligne, donnees, question)
         choix = question&.interaction == 'qcm' ? question&.liste_choix : nil
-        set_valeur(ligne, 8, choix)
-        set_valeur(ligne, 9, question&.bonnes_reponses) if question&.qcm? || question&.saisie?
+        @onglet_xls.set_valeur(ligne, 8, choix)
+        if question&.qcm? || question&.saisie?
+          @onglet_xls.set_valeur(ligne, 9, question&.bonnes_reponses)
+        end
         reponse = donnees['reponseIntitule'] || donnees['reponse']
-        set_valeur(ligne, 10, reponse)
-        set_valeur(ligne, 11, @temps_par_question[donnees['question']])
+        @onglet_xls.set_valeur(ligne, 10, reponse)
+        @onglet_xls.set_valeur(ligne, 11, @temps_par_question[donnees['question']])
       end
 
       # Trie par code cléa et par question
@@ -159,8 +139,6 @@ module Restitution
         evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
       end
 
-      # Retourne 1.0, 1, 0.6
-      # 1.0 pour 100%
       def pourcentage_reussite(reponses)
         scores = reponses.map { |e| [e['scoreMax'] || 0, e['score'] || 0] }
         score_max, score = scores.transpose.map(&:sum)
@@ -178,21 +156,20 @@ module Restitution
         reponses.map { |e| e['score'] || 0 }.sum
       end
 
-      def set_valeur(ligne, col, valeur)
-        @sheet[ligne, col] = valeur
+      def pourcentage(reponses)
+        pourcentage_reussite(filtre_evenements_reponses(reponses))
       end
 
-      # nombre entier uniquement
-      def set_nombre(ligne, col, valeur)
-        set_valeur(ligne, col, valeur)
-        @sheet.row(ligne).set_format(col, NUMBER_FORMAT)
+      def score_max(reponses)
+        calcule_score_max(filtre_evenements_reponses(reponses))
       end
 
-      # la valeur doit être compris entre 0 et 1
-      # exemple : 0.5 pour 50%
-      def set_pourcentage(ligne, col, valeur)
-        set_valeur(ligne, col, valeur)
-        @sheet.row(ligne).set_format(col, POURCENTAGE_FORMAT)
+      def score(reponses)
+        calcule_score(filtre_evenements_reponses(reponses))
+      end
+
+      def intitule_code_clea(code)
+        Metacompetence::CODECLEA_INTITULES[code]
       end
     end
   end

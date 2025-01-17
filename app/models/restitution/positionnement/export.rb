@@ -6,12 +6,12 @@ module Restitution
       def initialize(partie:)
         super()
         @partie = partie
-        @workbook = Spreadsheet::Workbook.new
+        @export = ::ImportExport::ExportXls.new
       end
 
       def to_xls
         defini_onglets_du_fichier
-        remplie_la_feuille
+        remplie_la_feuille_de_donnee
         remplie_la_feuille_de_synthese if @partie.situation.numeratie?
         retourne_le_contenu_du_xls
       end
@@ -27,23 +27,15 @@ module Restitution
 
       def defini_onglets_du_fichier
         if @partie.situation.numeratie?
-          @sheet_synthese = cree_worksheet_synthese(
+          @onglet_synthese = @export.cree_worksheet_synthese(
             ImportExport::Positionnement::ExportDonnees::ENTETES_SYNTHESE
           )
         end
         entetes_donnees = ImportExport::Positionnement::ExportDonnees.new(@partie).entetes
-        @sheet = cree_worksheet_donnees(entetes_donnees)
+        @onglet_donnees = @export.cree_worksheet_donnees(entetes_donnees)
       end
 
-      def cree_worksheet_synthese(entetes)
-        ::ImportExport::ExportXls.new(entetes: entetes, workbook: @workbook).cree_worksheet_synthese
-      end
-
-      def cree_worksheet_donnees(entetes)
-        ::ImportExport::ExportXls.new(entetes: entetes, workbook: @workbook).cree_worksheet_donnees
-      end
-
-      def remplie_la_feuille
+      def remplie_la_feuille_de_donnee
         ligne = 1
         if @partie.situation.litteratie?
           ligne = remplis_reponses_litteratie(ligne)
@@ -54,12 +46,12 @@ module Restitution
       end
 
       def remplis_reponses_litteratie(ligne)
-        export = ExportLitteratie.new(@partie, @sheet)
+        export = ExportLitteratie.new(@partie, @onglet_donnees)
         export.remplis_reponses(ligne)
       end
 
       def remplis_reponses_numeratie(ligne)
-        export = ExportNumeratie.new(@partie, @sheet)
+        export = ExportNumeratie.new(@partie, @onglet_donnees)
         export.regroupe_par_codes_clea.each do |code, sous_codes|
           ligne = remplis_par_sous_domaine(ligne, code, sous_codes, export)
         end
@@ -79,10 +71,10 @@ module Restitution
 
       def remplie_la_feuille_de_synthese
         ligne = 1
-        export = ExportNumeratie.new(@partie, @sheet_synthese)
+        export = ExportNumeratie.new(@partie, @onglet_synthese)
         ligne = defini_le_tableau_des_sous_domaines(ligne, export)
         ligne += 1
-        ajoute_en_tetes(@sheet_synthese, ligne,
+        ajoute_en_tetes(@onglet_synthese.sheet, ligne,
                         ImportExport::Positionnement::ExportDonnees::ENTETES_SYNTHESE)
         ligne += 1
         defini_le_tableau_des_sous_sous_domaines(ligne, export)

@@ -11,7 +11,7 @@ class Evenement < ApplicationRecord
   acts_as_paranoid
 
   scope :reponses, -> { where(nom: 'reponse') }
-  scope :groupees_par_questions, lambda {
+  scope :groupes_par_questions, lambda {
     select("donnees->>'question' AS question, date, position")
       .order(:position)
       .group_by(&:question)

@@ -3,11 +3,15 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Export do
-  subject(:response_service) { described_class.new([question], headers) }
+  subject(:response_service) do
+    response_service = described_class.new([question], headers)
+    response_service.to_xls
+    response_service
+  end
 
   let(:headers) { [] }
   let(:question) { create(:question) }
-  let(:spreadsheet) { Spreadsheet.open(StringIO.new(response_service.to_xls)) }
+  let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
 
   describe 'pour une question clic' do
@@ -58,7 +62,7 @@ describe ImportExport::Questions::Export do
   end
 
   describe 'pour une question glisser deposer' do
-    let(:question) { create(:question_glisser_deposer) }
+    let!(:question) { create(:question_glisser_deposer) }
     let(:headers) do
       ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
     end
@@ -71,24 +75,25 @@ describe ImportExport::Questions::Export do
       expect(worksheet.row(0)[9]).to eq('reponse_1_nom_technique')
       expect(worksheet.row(0)[10]).to eq('reponse_1_position_client')
       expect(worksheet.row(0)[11]).to eq('reponse_1_type_choix')
-      expect(worksheet.row(0)[12]).to eq('reponse_1_illustration')
+      expect(worksheet.row(0)[12]).to eq('reponse_1_illustration_url')
       expect(worksheet.row(0)[13]).to eq('reponse_2_nom_technique')
       expect(worksheet.row(0)[14]).to eq('reponse_2_position_client')
       expect(worksheet.row(0)[15]).to eq('reponse_2_type_choix')
-      expect(worksheet.row(0)[16]).to eq('reponse_2_illustration')
+      expect(worksheet.row(0)[16]).to eq('reponse_2_illustration_url')
     end
 
     it 'génére un fichier xls avec les détails de la question' do
       ligne = worksheet.row(1)
+
       expect(ligne[8]).to eq(question.zone_depot_url)
       expect(ligne[9]).to eq(reponse.nom_technique)
-      expect(ligne[10]).to eq(reponse.position_client)
+      expect(ligne[10]).to eq(reponse.position_client.to_s)
       expect(ligne[11]).to eq(reponse.type_choix)
-      expect(ligne[12]).to eq(reponse.illustration_url)
+      expect(ligne[12]).to eq(reponse.illustration_url.to_s)
       expect(ligne[13]).to eq(reponse2.nom_technique)
-      expect(ligne[14]).to eq(reponse2.position_client)
+      expect(ligne[14]).to eq(reponse2.position_client.to_s)
       expect(ligne[15]).to eq(reponse2.type_choix)
-      expect(ligne[16]).to eq(reponse2.illustration_url)
+      expect(ligne[16]).to eq(reponse2.illustration_url.to_s)
     end
   end
 
@@ -133,11 +138,11 @@ describe ImportExport::Questions::Export do
       expect(worksheet.row(0)[9]).to eq('choix_1_intitule')
       expect(worksheet.row(0)[10]).to eq('choix_1_nom_technique')
       expect(worksheet.row(0)[11]).to eq('choix_1_type_choix')
-      expect(worksheet.row(0)[12]).to eq('choix_1_audio')
+      expect(worksheet.row(0)[12]).to eq('choix_1_audio_url')
       expect(worksheet.row(0)[13]).to eq('choix_2_intitule')
       expect(worksheet.row(0)[14]).to eq('choix_2_nom_technique')
       expect(worksheet.row(0)[15]).to eq('choix_2_type_choix')
-      expect(worksheet.row(0)[16]).to eq('choix_2_audio')
+      expect(worksheet.row(0)[16]).to eq('choix_2_audio_url')
     end
 
     it 'génére un fichier xls avec les détails de la question' do

@@ -2,14 +2,16 @@
 
 module ImportExport
   class ExportXls
-    attr_reader :workbook, :sheet
+    attr_reader :workbook, :export, :onglets
 
-    WORKSHEET = 'Données'
+    WORKSHEET_DONNEES = 'Données'
     WORKSHEET_SYNTHESE = 'Synthèse'
+    NUMBER_FORMAT = Spreadsheet::Format.new(number_format: '0')
+    POURCENTAGE_FORMAT = Spreadsheet::Format.new(number_format: '0%')
 
-    def initialize(entetes: [], workbook: nil)
-      @entetes = entetes
-      @workbook = workbook
+    def initialize
+      @workbook = Spreadsheet::Workbook.new
+      @onglets = {}
     end
 
     def content_type_xls
@@ -23,20 +25,16 @@ module ImportExport
 
     def retourne_le_contenu_du_xls
       file_contents = StringIO.new
-      @sheet.workbook.write file_contents
+      @export.workbook.write file_contents
       file_contents.string
     end
 
-    def cree_worksheet_donnees
-      onglet = ImportExport::Worksheet.new(WORKSHEET, @workbook)
-      onglet.remplis_entetes(@entetes)
-      onglet.sheet
+    def cree_worksheet_donnees(entetes)
+      @onglets[WORKSHEET_DONNEES.to_sym] = OngletXls.new(WORKSHEET_DONNEES, @workbook, entetes)
     end
 
-    def cree_worksheet_synthese
-      onglet = ImportExport::Worksheet.new(WORKSHEET_SYNTHESE, @workbook)
-      onglet.remplis_entetes(@entetes)
-      onglet.sheet
+    def cree_worksheet_synthese(entetes)
+      @onglets[WORKSHEET_SYNTHESE.to_sym] = OngletXls.new(WORKSHEET_SYNTHESE, @workbook, entetes)
     end
   end
 end

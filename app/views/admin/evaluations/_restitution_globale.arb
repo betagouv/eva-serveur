@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-niveaux_competences = restitution_globale.niveaux_competences
-
 div class: 'evaluation__restitution-globale' do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
@@ -166,66 +164,6 @@ div class: 'evaluation__restitution-globale' do
                pdf: pdf
              }
       render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
-    end
-  end
-end
-
-if can?(:manage, Compte) && resource.campagne.avec_pre_positionnement? && !pdf
-  div class: 'evaluation__scores panel' do
-    tabs do
-      tab 'Scores litteratie et numératie' do
-        scores_niveau1 = restitution_globale.scores_niveau1.calcule
-        moyennes = restitution_globale.niveau1_moyennes_metriques
-        ecarts_types = restitution_globale.niveau1_ecarts_types_metriques
-        scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
-        attributes_table_for [
-          [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
-          [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
-          [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
-          [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
-        ] do
-          row do |(titre, _)|
-            strong titre
-          end
-          scores_niveau1.each_key do |nom_metrique|
-            row(nom_metrique) do |(_, valeur_colonne)|
-              valeur_colonne[nom_metrique]&.round(2)
-            end
-          end
-        end
-      end
-
-      tab 'Scores meta-compétences' do
-        scores_niveau2 = restitution_globale.scores_niveau2.calcule
-        moyennes = restitution_globale.niveau2_moyennes_metriques
-        ecarts_types = restitution_globale.niveau2_ecarts_types_metriques
-        scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
-        attributes_table_for [
-          [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
-          [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
-          [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
-          [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
-        ] do
-          row do |(titre, _)|
-            strong titre
-          end
-          Restitution::ScoresNiveau2::METRIQUES_ILLETTRISME.each do |nom_metrique|
-            row(nom_metrique) do |(_, valeur_colonne)|
-              valeur_colonne[nom_metrique]&.round(2)
-            end
-          end
-        end
-      end
-
-      tab 'Niveaux compétences transversales' do
-        ol do
-          niveaux_competences.each do |competence, niveau|
-            li span t("#{competence}.nom",
-                      scope: 'admin.evaluations.restitution_competence') +
-                    ": #{niveau}"
-          end
-        end
-      end
     end
   end
 end

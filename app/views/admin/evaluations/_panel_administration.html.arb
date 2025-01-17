@@ -1,0 +1,88 @@
+# frozen_string_literal: true
+
+niveaux_competences = restitution_globale.niveaux_competences
+
+h2 t('.titre')
+div class: 'panel evaluation__administration' do
+  render 'informations_complementaires'
+
+  if resource.campagne.avec_pre_positionnement?
+    div class: 'evaluation__scores' do
+      tabs do
+        tab t('.tabs.scores_litteratie_numeratie') do
+          scores_niveau1 = restitution_globale.scores_niveau1.calcule
+          moyennes = restitution_globale.niveau1_moyennes_metriques
+          ecarts_types = restitution_globale.niveau1_ecarts_types_metriques
+          scores_niveau1_standardises = restitution_globale.scores_niveau1_standardises.calcule
+          attributes_table_for [
+            [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau1],
+            [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
+            [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
+            [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau1_standardises]
+          ] do
+            row do |(titre, _)|
+              strong titre
+            end
+            scores_niveau1.each_key do |nom_metrique|
+              row(nom_metrique) do |(_, valeur_colonne)|
+                valeur_colonne[nom_metrique]&.round(2)
+              end
+            end
+          end
+        end
+
+        tab t('.tabs.scores_meta_competences') do
+          scores_niveau2 = restitution_globale.scores_niveau2.calcule
+          moyennes = restitution_globale.niveau2_moyennes_metriques
+          ecarts_types = restitution_globale.niveau2_ecarts_types_metriques
+          scores_niveau2_standardises = restitution_globale.scores_niveau2_standardises.calcule
+          attributes_table_for [
+            [t('admin.restitutions.restitution_colonnes.valeur_utilisateur'), scores_niveau2],
+            [t('admin.restitutions.restitution_colonnes.moyenne'), moyennes],
+            [t('admin.restitutions.restitution_colonnes.ecart_type'), ecarts_types],
+            [t('admin.restitutions.restitution_colonnes.cote_z'), scores_niveau2_standardises]
+          ] do
+            row do |(titre, _)|
+              strong titre
+            end
+            Restitution::ScoresNiveau2::METRIQUES_ILLETTRISME.each do |nom_metrique|
+              row(nom_metrique) do |(_, valeur_colonne)|
+                valeur_colonne[nom_metrique]&.round(2)
+              end
+            end
+          end
+        end
+
+        tab t('.tabs.niveaux_competences_transversales') do
+          ol do
+            niveaux_competences.each do |competence, niveau|
+              li span t("#{competence}.nom",
+                        scope: 'admin.evaluations.restitution_competence') +
+                      ": #{niveau}"
+            end
+          end
+        end
+      end
+    end
+  end
+  hr
+  form method: :get do
+    table_for parties do
+      column :selection do |partie|
+        check_box_tag 'parties_selectionnees[]', partie.id,
+                      params[:parties_selectionnees].include?(partie.id)
+      end
+      column :situation
+      column :created_at
+      column '' do |partie|
+        span link_to t('.rapport'), admin_restitution_path(partie)
+        span link_to t('.evenements'),
+                     admin_campagne_evenements_path(
+                       resource.campagne,
+                       q: { session_id_eq: partie.session_id }
+                     )
+      end
+    end
+    div submit_tag 'Valider la sélection'
+  end
+end

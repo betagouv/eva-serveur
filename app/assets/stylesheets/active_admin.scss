@@ -15,6 +15,7 @@
 @import "pro_connect_button";
 @import url("/pro/dsfr/dsfr.min.css");
 @import url("/pro/dsfr/utility.min.css");
+@import 'admin/adaptation_dsfr';
 
 // COMPOSANTS
 @import 'admin/composants/autocomplete';
@@ -25,7 +26,6 @@
 @import 'admin/composants/forms';
 @import "admin/composants/liens";
 @import 'admin/composants/buttons';
-@import 'admin/composants/lien';
 @import 'admin/composants/tags';
 @import 'admin/composants/input_choix';
 @import 'admin/composants/input_choix_parcours';
@@ -103,10 +103,6 @@ body {
   h4 {
     line-height: 1.25;
   }
-}
-
-[href] {
-  background-image: none;
 }
 
 img {

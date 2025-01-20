@@ -82,12 +82,8 @@
         }
 
         .lien {
-          color: $eva_main_blue;
-          text-decoration: underline;
-
-          &:hover {
-            text-decoration: none;
-          }
+          // le style dsfr ne supporte pas les liens sur plusieurs lignes
+          @include lien-non-dsfr;
         }
       }
     }

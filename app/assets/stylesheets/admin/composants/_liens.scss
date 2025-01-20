@@ -1,7 +1,7 @@
-// LIEN PAR DÉFAUT
-@mixin lien($color: $eva_main_blue) {
+@mixin lien-non-dsfr($color: $eva_main_blue) {
   &, &:link, &:visited {
     text-decoration: underline;
+    background-image: none;
     color: $color;
   }
 
@@ -11,7 +11,7 @@
 }
 
 @mixin lien-secondaire() {
-  @include lien($couleur-texte);
+  @include lien-non-dsfr($couleur-texte);
 }
 
 #login a.lien-retour, a.lien-retour {
@@ -25,6 +25,7 @@
   &, &:link, &:visited {
     color: $couleur-texte;
     text-decoration: none;
+    background-image: none;
     margin-bottom: 1rem;
   }
 

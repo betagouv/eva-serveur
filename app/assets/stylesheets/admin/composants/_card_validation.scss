@@ -19,6 +19,7 @@
     a {
       color: $couleur-liens;
       text-decoration: none;
+      background-image: none;
     }
   }
 
@@ -46,7 +47,6 @@
       width: 4rem;
       align-items: center;
       margin: 0;
-      text-decoration: none;
       box-sizing: border-box;
       font-size: .75rem;
     }

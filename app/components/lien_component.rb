@@ -9,7 +9,6 @@ class LienComponent < ViewComponent::Base
 
     @params = { target: '_blank',
                 title: I18n.t('.lien_externe', texte_du_lien: body),
-                rel: 'noopener',
-                class: 'lien-externe' }
+                rel: 'noopener' }
   end
 end

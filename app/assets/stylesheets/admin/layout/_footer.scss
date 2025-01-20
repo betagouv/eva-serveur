@@ -1,8 +1,11 @@
 #footer-principal {
   text-align: center;
-  font-size: 0.8rem;
   color: $couleur-texte;
   padding: 1.75rem 0 0;
+  p {
+    font-size: 0.8rem;
+    line-height: 1rem;
+  }
 
   .footer__a-propos {
     margin: 0;

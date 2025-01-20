@@ -22,7 +22,7 @@ class QuestionGlisserDeposer < Question
 
   def as_json(_options = nil)
     json = base_json
-    json['zone_depot_url'] = svg_attachment_base64(zone_depot) if zone_depot.attached?
+    json['zone_depot_url'] = cdn_for(zone_depot) if zone_depot.attached?
     json.merge!(json_audio_fields, reponses_fields)
   end
 

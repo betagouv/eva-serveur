@@ -21,7 +21,7 @@ class QuestionClicDansImage < Question
 
   def as_json(_options = nil)
     json = base_json
-    json['image_au_clic'] = svg_attachment_base64(image_au_clic) if image_au_clic.attached?
+    json['image_au_clic'] = cdn_for(image_au_clic) if image_au_clic.attached?
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
@@ -52,7 +52,7 @@ class QuestionClicDansImage < Question
       json['type'] = 'clic-dans-image'
       json['illustration'] = cdn_for(illustration) if illustration.attached?
       json['description'] = description
-      json['zone_cliquable'] = svg_attachment_base64(zone_cliquable) if zone_cliquable.attached?
+      json['zone_cliquable'] = cdn_for(zone_cliquable) if zone_cliquable.attached?
     end
   end
 

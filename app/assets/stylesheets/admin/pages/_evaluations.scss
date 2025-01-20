@@ -9,6 +9,7 @@
 
     &, &:link, &:visited {
       text-decoration: none;
+      background-image: none;
     }
 
     .icone-anonyme {
@@ -27,6 +28,7 @@
     &, &:link, &:visited {
       color: $eva_dark_blue_grey;
       text-decoration: none;
+      background-image: none;
     }
   }
 

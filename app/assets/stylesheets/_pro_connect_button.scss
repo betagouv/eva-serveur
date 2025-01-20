@@ -15,6 +15,7 @@
     margin-bottom: .75rem;
     padding: .625em .75em .625em 4.5em;
     text-decoration: none;
+    background-image: none;
     position: relative;
 
 
@@ -51,7 +52,7 @@
   }
 }
 
-.btn-pro-connect.active, .btn-pro-connect.focus, .btn-pro-connect.hover, .btn-pro-connect:active, .btn-pro-connect:focus, .btn-pro-connect:hover {
+.btn-pro-connect.active, .btn-pro-connect.focus, .btn-pro-connect.hover, .btn-pro-connect:active, .btn-pro-connect:focus,  a[href].btn-pro-connect:hover {
   text-decoration: none;
   color: #fff;
   border-color: #2323ff;

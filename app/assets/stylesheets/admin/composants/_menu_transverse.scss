@@ -29,6 +29,7 @@
     a {
       color: $couleur-texte;
       text-decoration: none;
+      background-image: none;
       transition: color .2s, font-weight .2s;
 
       &:hover {

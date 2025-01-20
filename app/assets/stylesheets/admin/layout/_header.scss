@@ -84,9 +84,6 @@
       }
     }
   }
-  .header-item {
-    top: auto;
-  }
   #tabs {
     padding-left: 6.4rem;
     @media screen and (max-width: 1280px) {
@@ -201,7 +198,7 @@
         display: none;
         padding-bottom: .5rem;
         background-color: $eva_bluegrey;
-        a { @include lien; }
+        a { @include lien-non-dsfr; }
       }
       &_compte {
         padding-top: 1rem;

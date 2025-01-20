@@ -1,0 +1,14 @@
+#header {
+  h1 a, ul.tabs > li a {
+    background-image: none;
+  }
+}
+ol > li::marker {
+  content: none;
+}
+.tarteaucitronSelfLink {
+    background-image: none;
+    &::after {
+      display: none;
+    }
+}

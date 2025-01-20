@@ -1,6 +1,7 @@
 @mixin base-boutons() {
   &, &:link, &:visited {
     text-decoration: none;
+    background-image: none;
   }
   display: inline-block;
   cursor: pointer;

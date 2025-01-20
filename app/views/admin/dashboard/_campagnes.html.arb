@@ -26,7 +26,7 @@ div class: 'bloc-apercu' do
         span campagne.code, class: 'campagne-code',
                             aria: { label: "#{t('.entete-code')} : #{campagne.code}" }
         span class: 'campagne-url' do
-          a url, href: url, target: '_blank'
+          span a url, href: url, target: '_blank'
           button "Copier l'URL", class: 'bouton-secondaire petit-bouton copier-coller',
                                  'data-clipboard-text': url,
                                  aria: { describedby: campagne.id }

@@ -18,18 +18,25 @@ Autre dépendences :
 PostgreSql
 Redis
 
-* Création de la base  
+## Initialisation de l'environnement de developpement
+
+```
+bundle install
+npm install
+```
+
+### Création de la base  
 `rake db:create`
 
-* Initialisation de la base  
+### Initialisation de la base  
 `rake db:migrate` && `rake db:seed`
 
 Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campagne avec l'interface d'administration décrite ci-dessous.
 
-* Lancer les tests
+### Lancer les tests
 `bundle exec rake spec` ou `guard`
 
-* Lancer storybook en développement  
+### Lancer storybook en développement  
 
 Générer le fichier de description des composants :  
 `bundle exec rake view_component_storybook:write_stories_json`
@@ -37,7 +44,6 @@ Générer le fichier de description des composants :
 
 Pour démarrer storybook (votre serveur rails doit être démarré) :
 ```
-npm install
 npm run storybook
 ```
 
@@ -46,10 +52,10 @@ Pour générer des nouvelles stories :
 rake view_component_storybook:write_stories_json
 ```
 
-* Espace d'administration
+### Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
 
-* Variables d'environnement
+### Variables d'environnement
 ```
 PROTOCOLE_SERVEUR=http
 HOTE_SERVEUR=localhost:3000

@@ -47,8 +47,8 @@ describe QuestionClicDansImage, type: :model do
                                          intitule.audio
                                        ))
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
-      expect(json['zone_cliquable']).to start_with('http://')
-      expect(json['image_au_clic']).to start_with('http://')
+      expect(json['zone_cliquable_url']).to start_with('http://')
+      expect(json['image_au_clic_url']).to start_with('http://')
     end
   end
 

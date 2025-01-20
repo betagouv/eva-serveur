@@ -13,6 +13,8 @@
 @import 'admin/typography';
 @import "bootstrap_minimal";
 @import "pro_connect_button";
+@import url("/pro/dsfr/dsfr.min.css");
+@import url("/pro/dsfr/utility.min.css");
 
 // COMPOSANTS
 @import 'admin/composants/autocomplete';
@@ -101,6 +103,10 @@ body {
   h4 {
     line-height: 1.25;
   }
+}
+
+[href] {
+  background-image: none;
 }
 
 img {

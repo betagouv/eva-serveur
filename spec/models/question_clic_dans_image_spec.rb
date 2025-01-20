@@ -36,7 +36,7 @@ describe QuestionClicDansImage, type: :model do
       json = question_clic_dans_image.as_json
       expect(json.keys)
         .to match_array(%w[description id intitule audio_url nom_technique type illustration
-                           modalite_reponse zone_cliquable image_au_clic consigne_audio
+                           modalite_reponse zone_cliquable_url image_au_clic_url consigne_audio
                            score metacompetence demarrage_audio_modalite_reponse])
       expect(json['type']).to eql('clic-dans-image')
       expect(json['intitule']).to eql('Mon Intitulé')

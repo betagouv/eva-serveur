@@ -27,14 +27,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :n_est_pas_une_sous_consigne, -> { where.not(type: QuestionSousConsigne::QUESTION_TYPE) }
   scope :preload_all_pour_as_json, lambda {
     group_by(&:type).each do |type, questions|
-      # Récupérer la classe du type et appeler sa méthode preload_pour_as_json
-      klass = type.constantize
-      next unless klass.respond_to?(:preload_assocations_pour_as_json)
-
-      ActiveRecord::Associations::Preloader.new(
-        records: questions,
-        associations: klass.preload_assocations_pour_as_json
-      ).call
+      Question.preload_questions_pour_type(type, questions)
     end
 
     self
@@ -117,6 +110,17 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def sous_consigne?
     type == QuestionSousConsigne::QUESTION_TYPE
+  end
+
+  def self.preload_questions_pour_type(type, questions)
+    # Récupérer la classe du type et appeler sa méthode preload_pour_as_json
+    klass = type.constantize
+    return unless klass.respond_to?(:preload_assocations_pour_as_json)
+
+    ActiveRecord::Associations::Preloader.new(
+      records: questions,
+      associations: klass.preload_assocations_pour_as_json
+    ).call
   end
 
   def self.non_repondues(noms_techniques_repondues)

@@ -31,3 +31,7 @@
       class: NettoyageComptesStructureDemoJob
       description: Efface les comptes en attente dans la structure de démo ANLCI
       enabled: true
+    redimensionne_illustrations_job:
+      class: RedimensionneIllustrationsJob
+      description: Redimensionne les illustrations des questions
+      enabled: true

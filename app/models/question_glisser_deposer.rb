@@ -32,7 +32,7 @@ class QuestionGlisserDeposer < Question
 
   def self.preload_assocations_pour_as_json
     base_includes_pour_as_json + [
-      :zone_depot_attachment,
+      { zone_depot_attachment: :blob },
       { reponses: { illustration_attachment: :blob } }
     ]
   end

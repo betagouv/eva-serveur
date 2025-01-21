@@ -41,7 +41,7 @@ class QuestionClicDansImage < Question
   end
 
   def self.preload_assocations_pour_as_json
-    base_includes_pour_as_json + %i[zone_cliquable_attachment image_au_clic_attachment]
+    base_includes_pour_as_json + [image_au_clic_attachment: :blob, zone_cliquable_attachment: :blob]
   end
 
   private

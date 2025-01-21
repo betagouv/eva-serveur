@@ -129,7 +129,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def self.base_includes_pour_as_json
     [
-      :illustration_attachment,
+      { illustration_attachment: :blob },
       { transcription_consigne: :audio_attachment },
       { transcription_intitule: :audio_attachment },
       { transcription_modalite_reponse: :audio_attachment }

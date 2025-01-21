@@ -12,6 +12,11 @@ describe 'Campagne API', type: :request do
       create :campagne, code: 'ETE21', libelle: 'Ma campagne ete 21'
     end
 
+    before do
+      Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment',
+                          association: :blob
+    end
+
     it 'retourne les informations de la campagne' do
       get '/api/campagnes/ete21'
 

@@ -36,11 +36,32 @@ FactoryBot.define do
   factory :question_clic_dans_image do
     libelle { 'Question clic dans image' }
     sequence(:nom_technique) { |n| "question-clic-dans-image-#{n}" }
+
+    trait :avec_images do
+      illustration do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))
+      end
+      zone_cliquable do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/zone-clicable-valide.svg'))
+      end
+      image_au_clic do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/zone-clicable-valide.svg'))
+      end
+    end
   end
 
   factory :question_glisser_deposer do
     libelle { 'Question glisser deposer' }
     sequence(:nom_technique) { |n| "question-glissser-deposer-#{n}" }
+
+    trait :avec_images do
+      illustration do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))
+      end
+      zone_depot do
+        Rack::Test::UploadedFile.new(Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg'))
+      end
+    end
   end
 
   factory :question_sous_consigne do

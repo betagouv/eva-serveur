@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
-  has_one_attached :illustration
+  has_one_attached :illustration, resize_to_limit: [1008, 566], preprocessed: true
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne

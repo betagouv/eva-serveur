@@ -1,8 +1,8 @@
 :queues:
   - default
-  - active_storage_transform
-  - active_storage_analysis
-  - active_storage_purge
+  - [active_storage_transform, 3]
+  - [active_storage_analysis, 1]
+  - [active_storage_purge, 1]
 
 :scheduler:
   :schedule:

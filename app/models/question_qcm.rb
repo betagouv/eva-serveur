@@ -32,7 +32,7 @@ class QuestionQcm < Question
   end
 
   def self.preload_assocations_pour_as_json
-    base_includes_pour_as_json + [{ choix: :audio_attachment }]
+    base_includes_pour_as_json + [{ choix: { audio_attachment: :blob } }]
   end
 
   private

@@ -43,10 +43,10 @@ module Api
       association_to_include = %i[choix] if type == QuestionQcm.to_s
 
       default_question_includes = [
-        { transcription_intitule: :audio_attachment },
-        { transcription_modalite_reponse: :audio_attachment },
-        { transcription_consigne: :audio_attachment },
-        :illustration_attachment
+        { transcription_intitule: { audio_attachment: :blob } },
+        { transcription_modalite_reponse: { audio_attachment: :blob } },
+        { transcription_consigne: { audio_attachment: :blob } },
+        { illustration_attachment: :blob }
       ]
       default_question_includes.push(association_to_include).flatten
     end

@@ -37,6 +37,7 @@ gem 'google-api-client', '~> 0.53'
 gem 'google_drive', '~> 3.0'
 gem 'groupdate'
 gem 'i18n-js', '~> 3.9.0'
+gem 'image_processing'
 gem 'inline_svg'
 gem 'jbuilder'
 gem 'jquery-rails'
@@ -64,7 +65,6 @@ gem 'view_component_storybook'
 gem 'web-console', group: :development
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
-gem 'image_processing'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

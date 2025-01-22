@@ -41,13 +41,6 @@ module ApplicationHelper
     "#{ENV.fetch('PROTOCOLE_SERVEUR')}://#{ENV.fetch('HOTE_STOCKAGE')}/#{fichier.key}?#{param}"
   end
 
-  def svg_attachment_base64(attachment)
-    return unless attachment.attached?
-
-    file_content = attachment.download
-    svg_encode_en_base64(file_content)
-  end
-
   def inline_svg_content(attachment, options = {})
     return unless attachment.attached?
 

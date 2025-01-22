@@ -27,8 +27,4 @@ class ApplicationRecord < ActiveRecord::Base
 
     ApplicationController.helpers.cdn_for(attachment)
   end
-
-  def svg_attachment_base64(attachment)
-    ApplicationController.helpers.svg_attachment_base64(attachment)
-  end
 end

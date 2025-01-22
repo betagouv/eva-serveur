@@ -6,6 +6,9 @@
 ol > li::marker {
   content: none;
 }
+a, a:link, a:visited {
+  text-decoration: none;
+}
 .tarteaucitronSelfLink {
     background-image: none;
     &::after {

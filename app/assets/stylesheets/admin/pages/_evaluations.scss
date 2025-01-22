@@ -8,7 +8,6 @@
     font-weight: bold;
 
     &, &:link, &:visited {
-      text-decoration: none;
       background-image: none;
     }
 
@@ -27,7 +26,6 @@
 
     &, &:link, &:visited {
       color: $eva_dark_blue_grey;
-      text-decoration: none;
       background-image: none;
     }
   }

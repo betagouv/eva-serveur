@@ -13,6 +13,7 @@ describe 'Campagne API', type: :request do
     end
 
     before do
+      # Bullet ne considère pas l'include de Blob comme nécéssaire, alors qu'il l'est.
       Bullet.add_safelist type: :unused_eager_loading, class_name: 'ActiveStorage::Attachment',
                           association: :blob
     end

@@ -4,11 +4,9 @@
     margin-top: 50vh;
 
     .modal-content {
-      @include panel_alerte;
-      font-size: 0.875rem;
-      align-items: center;
       flex-direction: row;
-      border-radius: 0.5rem;
+      border-radius: 0;
+      border: none;
 
       .modal-body {
         padding: 0rem;
@@ -24,18 +22,6 @@
         justify-content: flex-end;
         gap: .5rem;
       }
-    }
-  }
-
-  &.modal-info {
-    .modal-content {
-      @include panel_alerte_couleur($info-425, 'icones/info.svg');
-    }
-  }
-
-  &.modal-alerte {
-    .modal-content {
-      @include panel_alerte_couleur($warning-425, 'icones/alert.svg');
     }
   }
 }

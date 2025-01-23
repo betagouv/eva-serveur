@@ -71,6 +71,13 @@
       @include texte-xs();
       font-weight: normal;
       margin: 0;
+      p {
+        @include texte-xs();
+      }
+      ul {
+        list-style: disc;
+        padding-left: 1rem;
+      }
     }
     &__duree {
       font-style: italic;

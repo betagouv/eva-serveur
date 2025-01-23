@@ -19,7 +19,7 @@ describe QuestionSousConsigne, type: :model do
 
     it "retourne l'illustration" do
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
-                                            question_sous_consigne.illustration
+                                            question_sous_consigne.illustration.variant(:defaut)
                                           ))
     end
   end

@@ -42,7 +42,7 @@ class QuestionSaisie < Question
   def base_attributes
     {
       'type' => 'saisie',
-      'illustration' => cdn_for(illustration),
+      'illustration' => illustration_url,
       'sous_type' => type_saisie,
       'placeholder' => reponse_placeholder,
       'description' => description,

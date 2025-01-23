@@ -43,7 +43,7 @@ class QuestionGlisserDeposer < Question
     slice(:id, :nom_technique, :description, :demarrage_audio_modalite_reponse,
           :score, :metacompetence).tap do |json|
       json['type'] = 'glisser-deposer'
-      json['illustration'] = cdn_for(illustration) if illustration.attached?
+      json['illustration'] = illustration_url
       json['modalite_reponse'] = transcription_modalite_reponse&.ecrit
       json['intitule'] = transcription_intitule&.ecrit
     end

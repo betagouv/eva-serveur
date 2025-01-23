@@ -31,7 +31,7 @@ describe QuestionClicDansTexte, type: :model do
 
     it "retourne l'illustration" do
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
-                                            question_clic_dans_texte.illustration
+                                            question_clic_dans_texte.illustration.variant(:defaut)
                                           ))
     end
   end

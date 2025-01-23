@@ -35,7 +35,7 @@ RSpec.describe QuestionQcm, type: :model do
       expect(json['type']).to eql('qcm')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
-                                            question_qcm.illustration
+                                            question_qcm.illustration.variant(:defaut)
                                           ))
       expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                          intitule.audio

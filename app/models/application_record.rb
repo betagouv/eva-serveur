@@ -23,7 +23,7 @@ class ApplicationRecord < ActiveRecord::Base
   private
 
   def cdn_for(attachment)
-    return unless attachment.attached?
+    return if attachment.is_a?(ActiveStorage::Attached) && !attachment.attached?
 
     ApplicationController.helpers.cdn_for(attachment)
   end

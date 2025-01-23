@@ -53,7 +53,7 @@ describe QuestionSaisie, type: :model do
 
     it "retourne l'illustration" do
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
-                                            question_saisie.illustration
+                                            question_saisie.illustration.variant(:defaut)
                                           ))
     end
 

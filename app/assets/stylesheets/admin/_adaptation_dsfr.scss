@@ -15,3 +15,24 @@ a, a:link, a:visited {
       display: none;
     }
 }
+
+// Fix conflit entre l'accordeon et les boutons
+.fr-accordion__btn {
+  border-radius: unset;
+  border-color: unset;
+  border-top-color: unset;
+  border-right-color: unset;
+  border-bottom-color: unset;
+  border: unset;
+
+  &:not(.disabled):hover, &:not(.disabled):hover {
+    font-weight: 500;
+    background-color: var(--hover-tint);
+  }
+
+  &:active, &:not(.disabled):active {
+    background-color: var(--active-tint);
+    box-shadow: unset;
+    background-image: unset;
+  }
+}

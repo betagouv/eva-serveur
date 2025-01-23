@@ -6,14 +6,7 @@
     "storybook": "^7.6.11"
   },
   "scripts": {
-    "storybook": "storybook dev",
-    "nettoie-dsfr": "rm -rf public/pro/dsfr",
-    "cree-dsfr-dossiers": "mkdir -p public/pro/dsfr/fonts && mkdir -p public/pro/dsfr/icons",
-    "copie-dsfr-css": "cp node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/pro/dsfr/ && cp node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/pro/dsfr/",
-    "copie-dsfr-polices": "cp -r node_modules/@gouvfr/dsfr/dist/fonts/* public/pro/dsfr/fonts/",
-    "copie-dsfr-icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* public/pro/dsfr/icons/",
-    "copie-dsfr": "npm run nettoie-dsfr && npm run cree-dsfr-dossiers && npm run copie-dsfr-css && npm run copie-dsfr-polices && npm run copie-dsfr-icons",
-    "postinstall": "npm run copie-dsfr"
+    "storybook": "storybook dev"
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.13.0"

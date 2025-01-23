@@ -10,6 +10,10 @@
     }
   }
 
+  p {
+    font-size: 0.875rem;
+  }
+
   &.show {
     // Retire le margin-right de activeadmin afin que le contenu de la page soit sur toute la largeur (filtre compris)
     #active_admin_content #main_content_wrapper #main_content {

@@ -6,7 +6,7 @@
           <% if objet_sous_competence.is_a?(Restitution::SousCompetence::Litteratie) %>
             <%= image_tag "badges/anlci/#{metriques[:profil]}.svg", alt: t(".#{metriques[:profil]}.alt_icone") %>
           <% else %>
-            <% succes = objet_sous_competence.succes %>
+            <% succes = objet_sous_competence&.succes %>
             <% type = succes ? :acquis : :non_acquis %>
             <%= render(BadgeProfilComponent.new(type)) do %>
               <%= objet_sous_competence.pourcentage_reussite %>%

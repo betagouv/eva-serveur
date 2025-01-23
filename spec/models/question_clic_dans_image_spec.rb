@@ -41,7 +41,7 @@ describe QuestionClicDansImage, type: :model do
       expect(json['type']).to eql('clic-dans-image')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
-                                            question_clic_dans_image.illustration
+                                            question_clic_dans_image.illustration.variant(:defaut)
                                           ))
       expect(json['audio_url']).to eql(Rails.application.routes.url_helpers.url_for(
                                          intitule.audio

@@ -50,7 +50,7 @@ class QuestionClicDansImage < Question
     slice(:id, :nom_technique, :demarrage_audio_modalite_reponse, :score,
           :metacompetence).tap do |json|
       json['type'] = 'clic-dans-image'
-      json['illustration'] = cdn_for(illustration) if illustration.attached?
+      json['illustration'] = illustration_url
       json['description'] = description
       json['zone_cliquable_url'] = cdn_for(zone_cliquable) if zone_cliquable.attached?
     end

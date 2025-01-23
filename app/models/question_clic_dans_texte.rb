@@ -16,7 +16,7 @@ class QuestionClicDansTexte < Question
     slice(:id, :nom_technique, :description, :illustration,
           :demarrage_audio_modalite_reponse, :score, :metacompetence).tap do |json|
       json['type'] = 'clic-sur-mots'
-      json['illustration'] = cdn_for(illustration)
+      json['illustration'] = illustration_url
       json['description'] = description
       json['reponse'] = { bonne_reponse: bonnes_reponses_json }
       json['texte_cliquable'] = texte_sur_illustration

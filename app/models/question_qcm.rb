@@ -41,7 +41,7 @@ class QuestionQcm < Question
     slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
           :demarrage_audio_modalite_reponse, :illustration, :score, :metacompetence).tap do |json|
       json['type'] = 'qcm'
-      json['illustration'] = cdn_for(illustration)
+      json['illustration'] = illustration_url
     end
   end
 

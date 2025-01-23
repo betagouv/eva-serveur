@@ -22,7 +22,7 @@ div id: 'votre_code_campagne', class: 'row' do
                                      'data-clipboard-text': code
           end
           row(:url) do
-            text_node lien_campagne(campagne)
+            span text_node lien_campagne(campagne)
             url = url_campagne(campagne.code)
             button "Copier l'URL", class: 'bouton-secondaire petit-bouton button copier-coller',
                                    'data-clipboard-text': url

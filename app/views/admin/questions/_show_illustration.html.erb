@@ -1,5 +1,5 @@
 <% if illustration.attached? %>
-  <%= link_to illustration_url, target: '_blank', rel: 'noopener' do %>
-    <%= image_tag illustration_url, class: 'image-preview', alt: illustration.filename %>
+  <%= link_to illustration, target: '_blank', rel: 'noopener' do %>
+    <%= image_tag illustration, class: 'image-preview', alt: illustration.filename %>
   <% end %>
 <% end %>

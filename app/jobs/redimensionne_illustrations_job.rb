@@ -7,7 +7,7 @@ class RedimensionneIllustrationsJob < ApplicationJob
     Question.find_each do |question|
       next unless question.illustration.attached?
 
-      question.illustration.variant(resize_to_limit: [1008, 566]).processed
+      question.illustration.variant(:defaut).processed
     end
   end
 end

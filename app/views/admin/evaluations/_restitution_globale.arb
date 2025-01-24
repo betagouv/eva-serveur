@@ -62,9 +62,9 @@ div class: 'evaluation__restitution-globale' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf
-        h2 t('.prise_en_main_titre'), class: 'text-center mt-5 mb-4'
+        h2 t('.prise_en_main.titre'), class: 'text-center mt-5 mb-4'
       else
-        h2 t('.prise_en_main_titre')
+        h2 t('.prise_en_main.titre')
       end
 
       div class: 'panel' do

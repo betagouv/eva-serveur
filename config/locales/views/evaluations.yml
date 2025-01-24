@@ -63,7 +63,9 @@ fr:
         autopositionnement:
           titre: Profil de la personne
           titre_menu_lateral: Profil de la personne
-        prise_en_main_titre: Compétences numériques
+        prise_en_main:
+          titre: Compétences numériques
+          titre_menu_lateral: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
       competences_transversales:
         titre: Vos compétences transversales

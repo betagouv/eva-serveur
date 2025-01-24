@@ -18,6 +18,11 @@ div class: 'menu menu-transverse' do
       end
     end
     li do
+      a href: '#competence-numerique' do
+        text_node t('admin.evaluations.restitution_globale.prise_en_main.titre_menu_lateral')
+      end
+    end
+    li do
       a href: '#competences_transversales' do
         text_node t('admin.evaluations.competences_transversales.titre_menu_lateral')
       end

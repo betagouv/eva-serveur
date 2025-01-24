@@ -43,7 +43,7 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it 'affiche une restitution' do
-          expect(page).to have_content 'Compétences numériques'
+          expect(page).to have_content 'Maîtrise des fondamentaux de l’informatique'
         end
       end
 
@@ -54,7 +54,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         it "n'affiche pas de restitution si la situation n'est par terminée" do
           visit admin_evaluation_path(mon_evaluation_plan_de_la_ville)
-          expect(page).not_to have_content 'Compétences numériques'
+          expect(page).not_to have_content 'Maîtrise des fondamentaux de l’informatique'
         end
       end
     end
@@ -156,7 +156,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       it 'restitution sans plan de la ville' do
         visit admin_evaluation_path(mon_evaluation)
-        expect(page).not_to have_content 'Compétences numériques'
+        expect(page).not_to have_content 'Maîtrise des fondamentaux de l’informatique'
       end
 
       describe 'en moquant restitution_globale :' do

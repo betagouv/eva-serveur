@@ -238,6 +238,7 @@ ActiveAdmin.setup do |config|
   config.register_javascript 'crisp.js'
   config.register_javascript "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
   config.register_stylesheet "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+  config.register_javascript '/pro/dsfr/dsfr.nomodule.min.js'
 
   # == CSV options
   #

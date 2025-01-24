@@ -12,7 +12,7 @@ function reinitialiseFormulaire(evaluationId) {
 
 function ouvreQcm(evaluationId, qcm, effectuee) {
   fermeQcm(evaluationId);
-  bouton_actif = $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`);
+  let bouton_actif = $(`#${evaluationId} .reponse-mise-en-action[data-reponse='${effectuee}']`);
   bouton_actif.addClass('bouton--actif');
   bouton_actif.attr('aria-expanded', true);
   $(`#${evaluationId} .carte-liste`).addClass('carte--deroulee');
@@ -83,11 +83,11 @@ function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer })
 
 function nomQcm(miseEnActionEffectuee) {
   return miseEnActionEffectuee ? 'remediation' : 'difficulte';
-};
+}
 
 function reponseSelectionnee(evaluationId, qcm) {
   return $(`#${evaluationId} .questions-${qcm} input[name=reponse_qcm]:checked`).val();
-};
+}
 
 function miseEnActionEffectuee($bouton) {
   return $bouton.closest('.qcm')[0].classList.contains('questions-remediation')
@@ -99,7 +99,7 @@ function ecouteBoutons(boutons, callback) {
     const evaluationId = event.currentTarget.closest('.carte__conteneur').getAttribute('id')
     callback(evaluationId, $(this));
   });
-};
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   ecouteBoutons($(".reponse-mise-en-action"), enregistreReponseMiseEnAction);

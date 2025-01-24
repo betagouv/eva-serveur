@@ -1,6 +1,10 @@
 .evaluation__restitution-globale {
   font-size: 0.875rem;
   font-family: $font-texte;
+  p {
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
 
   .panel {
     padding: 3rem 0;

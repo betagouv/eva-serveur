@@ -2,7 +2,14 @@
 
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_one_attached :illustration do |attachable|
-    attachable.variant :defaut, resize_to_limit: [1080, 566], preprocessed: true, format: :jpg
+    attachable.variant :defaut,
+                       resize_to_limit: [1080, 566],
+                       preprocessed: true,
+                       saver: { quality: 90 },
+                       format: :jpg,
+                       combine_options: {
+                         strip: true
+                       }
   end
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,

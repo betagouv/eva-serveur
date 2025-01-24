@@ -6,10 +6,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
                        resize_to_limit: [1080, 566],
                        preprocessed: true,
                        saver: { quality: 100 },
-                       format: :jpg,
-                       combine_options: {
-                         strip: true
-                       }
+                       format: :jpg
   end
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,

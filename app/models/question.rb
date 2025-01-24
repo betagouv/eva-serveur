@@ -5,7 +5,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     attachable.variant :defaut,
                        resize_to_limit: [1080, 566],
                        preprocessed: true,
-                       saver: { quality: 100 },
+                       saver: { quality: 90 },
                        format: :jpg
   end
 

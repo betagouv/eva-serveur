@@ -36,3 +36,8 @@ a, a:link, a:visited {
     background-image: unset;
   }
 }
+
+// Fix conflit entre la table (DSFR) et la table d'ActiveAdmin
+.fr-table__content table {
+  margin-bottom: unset;
+}

@@ -20,14 +20,14 @@
           <%= image_tag 'fleche-droite.svg', alt: 'fleche', class: 'fleche-droite' %>
           <%= "#{nombre_questions_repondues} questions passées sur les #{nombre_total_questions} du sous-domaine" %>
         </div>
-        <div>
+        <div class="sous-competence__critere-accordion">
           <%= dsfr_accordion do |accordion| %>
             <%= accordion.with_section(title: "Voir le détail", expanded: true) do %>
-              <div class="fr-table--lg fr-table fr-table" id="table-lg-component">
+              <div class="fr-table fr-table--bordered fr-table--no-scroll" id="table-bordered-component">
                 <div class="fr-table__wrapper">
                   <div class="fr-table__container">
                     <div class="fr-table__content">
-                      <table id="table-lg">
+                      <table id="table-bordered">
                         <thead>
                           <tr>
                             <th scope="col">Critère</th>
@@ -37,29 +37,29 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr id="table-lg-row-key-1" data-row-key="1">
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
+                          <tr id="table-bordered-row-key-1" data-row-key="1">
+                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
+                            <td>2.1.1</td>
+                            <td>2 sur 4</td>
+                            <td>70%</td>
                           </tr>
-                          <tr id="table-lg-row-key-2" data-row-key="2">
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
+                          <tr id="table-bordered-row-key-2" data-row-key="2">
+                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
+                            <td>2.1.1</td>
+                            <td>2 sur 4</td>
+                            <td>70%</td>
                           </tr>
-                          <tr id="table-lg-row-key-3" data-row-key="3">
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
+                          <tr id="table-bordered-row-key-3" data-row-key="3">
+                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
+                            <td>2.1.1</td>
+                            <td>2 sur 4</td>
+                            <td>70%</td>
                           </tr>
-                          <tr id="table-lg-row-key-4" data-row-key="4">
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
-                            <td>Lorem [...] elit ut.</td>
+                          <tr id="table-bordered-row-key-4" data-row-key="4">
+                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
+                            <td>2.1.1</td>
+                            <td>2 sur 4</td>
+                            <td>70%</td>
                           </tr>
                         </tbody>
                       </table>

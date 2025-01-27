@@ -7,7 +7,7 @@
   }
 
   .panel {
-    padding: 3rem 0;
+    padding: 2rem 0;
     &--avec-references {
       padding-bottom: 0;
     }
@@ -18,7 +18,7 @@
   }
 
   h3 {
-    margin: 3rem 0 1rem;
+    margin: 2rem 0 1rem;
   }
 
   h4 {
@@ -27,7 +27,7 @@
   }
 
   .marges-page {
-    margin: 0 3rem;
+    padding: 0 2rem;
   }
 
   .header, .title_bar { display: none; }
@@ -384,6 +384,10 @@
   .litteratie-numeratie-niveau1-anlci {
     padding-top: 3.75rem;
     padding-bottom: 4.375rem;
+  }
+
+  .sous-competence__critere-accordion {
+    margin-top: 2rem;
   }
 
   .panel-parcours {

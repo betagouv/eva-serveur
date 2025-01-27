@@ -8,7 +8,7 @@ fr:
         Pensez à vous rendre dans l'onglet aide pour accéder aux
         documentations utiles et à la rubrique Foire aux Questions !
 
-        Le pas à pas de prise en main de l'espace conseiller est [disponible ici](%{document_prise_en_main})
+        Le pas à pas de prise en main de l'espace conseiller est <a href="%{document_prise_en_main}" target="_blank">disponible ici</a>
 
         Pour toute question relative à votre compte, n'hésitez pas à nous
         adresser votre demande à l'adresse [%{email_support}](mailto:%{email_support})

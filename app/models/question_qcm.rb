@@ -3,8 +3,6 @@
 class QuestionQcm < Question
   QUESTION_TYPE = 'QuestionQcm'
 
-  enum :metacompetence, Metacompetence::METACOMPETENCES
-
   enum :type_qcm, { standard: 0, jauge: 1 }
 
   has_many :choix, lambda {

@@ -56,6 +56,7 @@ module Restitution
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new
                                      .calcule_pourcentage_reussite(evenements)
+        # SCORES_CLEA[code][:criteres] = 
       end
     end
 

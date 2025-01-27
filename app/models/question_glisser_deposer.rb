@@ -8,8 +8,6 @@ class QuestionGlisserDeposer < Question
            dependent: :destroy
   accepts_nested_attributes_for :reponses, allow_destroy: true
 
-  enum :metacompetence, Metacompetence::METACOMPETENCES
-
   has_one_attached :zone_depot
 
   validates :zone_depot,

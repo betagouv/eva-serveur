@@ -9,6 +9,8 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
                        format: :jpg
   end
 
+  enum :metacompetence, Metacompetence::METACOMPETENCES
+
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne
 

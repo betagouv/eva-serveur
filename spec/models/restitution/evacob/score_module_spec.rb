@@ -96,7 +96,7 @@ describe Restitution::Evacob::ScoreModule do
             build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }),
             build(:evenement_reponse, donnees: { question: question_initiale2, score: 1 }),
             build(:evenement_reponse, donnees: { question: question_rattrapage1, score: 0 }),
-            build(:evenement_reponse, donnees: { question: question_rattrapage2, score: 1 })
+            build(:evenement_reponse, donnees: { question: question_rattrapage2, score: 0 })
           ]
         end
 
@@ -104,6 +104,41 @@ describe Restitution::Evacob::ScoreModule do
           expect(metrique_score_reponse_numeratie).to eq(2)
         end
       end
+    end
+  end
+
+  describe 'a_une_question_rattrapage?' do
+    let(:metrique_score_reponse_numeratie) do
+      described_class.new.calcule(evenements_decores(evenements, :place_du_marche), :N1,
+                                  avec_rattrapage: true)
+    end
+    let(:question_initiale1) { 'N1Pes1' }
+    let(:question_rattrapage1) { 'N1Res1' }
+    let(:question_initiale2) { 'N1Pes2' }
+    let(:question_rattrapage2) { 'N1Res2' }
+
+    context 'avec au moins une question de rattrapage' do
+      let(:evenements) do
+        [
+          build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }),
+          build(:evenement_reponse, donnees: { question: question_initiale2, score: 0 }),
+          build(:evenement_reponse, donnees: { question: question_rattrapage1, score: 1 }),
+          build(:evenement_reponse, donnees: { question: question_rattrapage2, score: 1 })
+        ]
+      end
+
+      it { expect(described_class.new.a_une_question_rattrapage?(evenements)).to be true }
+    end
+
+    context 'sans question de rattrapage' do
+      let(:evenements) do
+        [
+          build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }),
+          build(:evenement_reponse, donnees: { question: question_initiale2, score: 0 })
+        ]
+      end
+
+      it { expect(described_class.new.a_une_question_rattrapage?(evenements)).to be false }
     end
   end
 

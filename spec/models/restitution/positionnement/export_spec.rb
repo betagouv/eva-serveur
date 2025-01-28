@@ -11,12 +11,15 @@ describe Restitution::Positionnement::Export do
 
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
-  let(:question) { create(:question_qcm, nom_technique: 'LOdi1') }
-  let(:partie) { create :partie }
+  let!(:question1) { create(:question_qcm, nom_technique: 'LOdi1') }
+  let!(:question2) { create(:question_qcm, nom_technique: 'LOdi2') }
+  let(:questions) { [question1, question2] }
+  let(:questionnaire) { create(:questionnaire, questions: questions) }
+  let(:situation) { create(:situation, questionnaire: questionnaire) }
+  let!(:partie) { create :partie, situation: situation }
 
   describe 'pour un export littératie' do
-    let(:situation) { create(:situation_cafe_de_la_place) }
-    let(:partie) { create :partie, situation: situation }
+    let(:situation) { create(:situation_cafe_de_la_place, questionnaire: questionnaire) }
     let(:intitule_question2) do
       'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
     end
@@ -58,6 +61,7 @@ describe Restitution::Positionnement::Export do
 
       it 'verifie les détails de la première question question' do
         ligne = worksheet.row(1)
+
         expect(ligne[0]).to eq('LOdi1')
         expect(ligne[1]).to eq('De quoi s’agit-il ?')
         expect(ligne[2]).to eq('couverture')
@@ -72,7 +76,7 @@ describe Restitution::Positionnement::Export do
         expect(ligne[0]).to eq('LOdi2')
         expect(ligne[1]).to eq(intitule_question2)
         expect(ligne[2]).to eq('Le chat de Mme Coupin')
-        expect(ligne[3]).to be_nil
+        expect(ligne[3]).to eq 0
         expect(ligne[4]).to be_nil
         expect(ligne[5]).to be_nil
         expect(ligne[6]).to be_nil
@@ -81,7 +85,9 @@ describe Restitution::Positionnement::Export do
   end
 
   describe 'pour un export numératie' do
-    let(:situation) { create(:situation_place_du_marche) }
+    let!(:question) { create :question }
+    let(:questions) { [question] }
+    let!(:situation) { create(:situation_place_du_marche, questionnaire: questionnaire) }
     let!(:partie) { create :partie, situation: situation }
     let!(:choix) { create(:choix, :mauvais, question_id: question.id, intitule: 'drapeau') }
     let!(:choix2) { create(:choix, :bon, question_id: question.id, intitule: 'couverture') }
@@ -113,6 +119,18 @@ describe Restitution::Positionnement::Export do
     end
 
     describe 'génére un fichier xls avec les evenements réponses' do
+      let!(:question1) do
+        create(:question_qcm, nom_technique: 'LOdi1', choix: [choix, choix2, choix3])
+      end
+      let!(:question2) { create(:question_qcm, nom_technique: 'LOdi2') }
+      let!(:question3) { create(:question_qcm, nom_technique: 'LOdi3') }
+      let!(:question4) do
+        create(:question_qcm, nom_technique: 'LOdi4', metacompetence: :renseigner_horaires,
+                              score: 1)
+      end
+      let!(:question5) { create(:question_qcm, nom_technique: 'LOdi5') }
+      let(:questions) { [question1, question2, question3, question4, question5] }
+
       before do
         heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
         heure_fin = heure_debut + 59.seconds
@@ -147,15 +165,11 @@ describe Restitution::Positionnement::Export do
                           metacompetence: 'tableaux_graphiques',
                           scoreMax: 1,
                           score: 1 }
-        partie.situation.update(questionnaire: create(:questionnaire))
-        question = create(:question_qcm, nom_technique: 'LOdi4',
-                                         metacompetence: :renseigner_horaires, score: 1)
         create :evenement_reponse,
                partie: partie,
                position: 5,
                donnees: { question: 'LOdi5',
                           metacompetence: 'situation_dans_lespace' }
-        partie.situation.questionnaire.questions << question
       end
 
       context "sur l'onglet de synthese" do

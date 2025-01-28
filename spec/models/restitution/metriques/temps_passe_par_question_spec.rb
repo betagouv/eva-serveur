@@ -11,8 +11,8 @@ RSpec.describe Restitution::Metriques::TempsPasseParQuestion do
     context "quand il n'y a pas d'evenements" do
       let(:evenements) { [] }
 
-      it 'returns nil' do
-        expect(service.calculer).to be_nil
+      it 'returns {}' do
+        expect(service.calculer).to eq({})
       end
     end
 

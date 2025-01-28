@@ -24,7 +24,8 @@ module Restitution
       end
 
       def calcule_pourcentage_reussite(evenements, nom_module)
-        evenements = recupere_evenements_reponses_filtres(evenements, nom_module, true)
+        evenements = recupere_evenements_reponses_filtres(evenements, nom_module,
+                                                          a_une_question_rattrapage?(evenements))
 
         return if evenements.blank?
 
@@ -32,6 +33,16 @@ module Restitution
         score = evenements&.sum(&:score_reponse)
 
         Pourcentage.new(valeur: score, valeur_max: score_max).calcul
+      end
+
+      def a_une_question_rattrapage?(evenements)
+        evenements.any? do |e|
+          NUMERATIE_METRIQUES.values.compact.any? do |metrique|
+            next if e.donnees['score'].blank?
+
+            e.donnees['question'].start_with?(metrique)
+          end
+        end
       end
 
       private

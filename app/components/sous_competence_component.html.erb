@@ -20,56 +20,42 @@
           <%= image_tag 'fleche-droite.svg', alt: 'fleche', class: 'fleche-droite' %>
           <%= "#{nombre_questions_repondues} questions passées sur les #{nombre_total_questions} du sous-domaine" %>
         </div>
-        <div class="sous-competence__critere-accordion">
-          <%= dsfr_accordion do |accordion| %>
-            <%= accordion.with_section(title: "Voir le détail", expanded: true) do %>
-              <div class="fr-table fr-table--bordered fr-table--no-scroll" id="table-bordered-component">
-                <div class="fr-table__wrapper">
-                  <div class="fr-table__container">
-                    <div class="fr-table__content">
-                      <table id="table-bordered">
-                        <thead>
-                          <tr>
-                            <th scope="col">Critère</th>
-                            <th scope="col">Code Cléa</th>
-                            <th scope="col">Tests proposés</th>
-                            <th scope="col">Résultat</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr id="table-bordered-row-key-1" data-row-key="1">
-                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
-                            <td>2.1.1</td>
-                            <td>2 sur 4</td>
-                            <td>70%</td>
-                          </tr>
-                          <tr id="table-bordered-row-key-2" data-row-key="2">
-                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
-                            <td>2.1.1</td>
-                            <td>2 sur 4</td>
-                            <td>70%</td>
-                          </tr>
-                          <tr id="table-bordered-row-key-3" data-row-key="3">
-                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
-                            <td>2.1.1</td>
-                            <td>2 sur 4</td>
-                            <td>70%</td>
-                          </tr>
-                          <tr id="table-bordered-row-key-4" data-row-key="4">
-                            <td>Réaliser les 4 opérations à la main ou avec une calculette</td>
-                            <td>2.1.1</td>
-                            <td>2 sur 4</td>
-                            <td>70%</td>
-                          </tr>
-                        </tbody>
-                      </table>
+        <% if @objet_sous_competence.criteres.present? %>
+          <div class="sous-competence__critere-accordion">
+            <%= dsfr_accordion do |accordion| %>
+              <%= accordion.with_section(title: "Voir le détail", expanded: true) do %>
+                <div class="fr-table fr-table--bordered fr-table--no-scroll" id="table-bordered-component">
+                  <div class="fr-table__wrapper">
+                    <div class="fr-table__container">
+                      <div class="fr-table__content">
+                        <table id="table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">Critère</th>
+                              <th scope="col">Code Cléa</th>
+                              <th scope="col">Tests proposés</th>
+                              <th scope="col">Résultat</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @objet_sous_competence.criteres.each_with_index do |critere, index| %>
+                              <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
+                                <td><%= critere.libelle %></td>
+                                <td><%= critere.code_clea %></td>
+                                <td><%= critere.nombre_tests_proposes %> sur <%= critere.nombre_tests_proposes_max %></td>
+                                <td>70%</td>
+                              </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

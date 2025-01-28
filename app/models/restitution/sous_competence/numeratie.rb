@@ -10,6 +10,7 @@ module Restitution
       attribute :pourcentage_reussite, :integer
       attribute :nombre_questions_repondues, :integer
       attribute :nombre_total_questions, :integer
+      attribute :criteres, array: true, default: -> { [] }
     end
   end
 end

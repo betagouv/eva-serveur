@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Restitution
   module Critere
     class Numeratie

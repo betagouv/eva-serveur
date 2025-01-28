@@ -9,6 +9,30 @@ FactoryBot.define do
       transcription_ecrit { 'Ma question ?' }
     end
 
+    trait :numeratie_niveau1 do
+      nom_technique { 'N1Prn2' }
+    end
+
+    trait :numeratie_niveau1_rattrapage do
+      nom_technique { 'N1Rrn2' }
+    end
+
+    trait :numeratie_niveau2 do
+      nom_technique { 'N2Prn2' }
+    end
+
+    trait :numeratie_niveau2_rattrapage do
+      nom_technique { 'N2Rrn2' }
+    end
+
+    trait :numeratie_niveau3 do
+      nom_technique { 'N3Prn2' }
+    end
+
+    trait :numeratie_niveau3_rattrapage do
+      nom_technique { 'N3Rrn2' }
+    end
+
     after(:create) do |question, evaluator|
       create(:transcription, question_id: question.id,
                              ecrit: evaluator.transcription_ecrit)

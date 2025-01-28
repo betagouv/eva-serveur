@@ -73,6 +73,25 @@ class Metacompetence
     end&.first
   end
 
+  def self.metacompetences_pour_code(code)
+    metacompetences_par_code[code].presence ||
+      metacompetences_par_sous_code[code]
+  end
+
+  def self.metacompetences_par_code
+    CORRESPONDANCES_CODECLEA.transform_values do |sous_codes|
+      sous_codes.values.flatten
+    end
+  end
+
+  def self.metacompetences_par_sous_code
+    CORRESPONDANCES_CODECLEA.each_with_object({}) do |(_, sous_codes), result|
+      sous_codes.each do |sous_code, metacompetences|
+        result[sous_code] = metacompetences
+      end
+    end
+  end
+
   private
 
   def recupere_codes_clea

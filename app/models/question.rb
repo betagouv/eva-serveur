@@ -140,6 +140,24 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     ]
   end
 
+  def self.pour_code_clea(questions, code)
+    metacompetences = Metacompetence.metacompetences_pour_code(code)
+    questions.select { |question| metacompetences.include? question.metacompetence }
+  end
+
+  def self.prises_en_compte_pour_calcul_score_clea(questions, questions_repondues)
+    resultat = questions.to_a
+    niveaux = %w[N1R N2R N3R]
+
+    niveaux.each do |niveau|
+      if questions_repondues.none? { |question| question.nom_technique.start_with?(niveau) }
+        resultat.reject! { |question| question.nom_technique.start_with?(niveau) }
+      end
+    end
+
+    resultat
+  end
+
   private
 
   def audio_url

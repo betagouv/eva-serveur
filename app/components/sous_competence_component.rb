@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SousCompetenceComponent < ViewComponent::Base
+  include MarkdownHelper
+
   def initialize(competence, sous_competence, objet_sous_competence)
     @competence = competence
     @sous_competence = sous_competence

@@ -1,26 +1,5 @@
 <div>
   <% sous_competences.each do |sous_competence, objet_sous_competence| %>
-    <div class="sous-competence__container">
-      <div class="row">
-        <div class= "col-auto">
-          <% if objet_sous_competence.is_a?(Restitution::SousCompetence::Litteratie) %>
-            <%= image_tag "badges/anlci/#{metriques[:profil]}.svg", alt: t(".#{metriques[:profil]}.alt_icone") %>
-          <% else %>
-            <% succes = objet_sous_competence&.succes %>
-            <% type = succes ? :acquis : :non_acquis %>
-            <%= render(BadgeProfilComponent.new(type)) do %>
-              <%= objet_sous_competence.pourcentage_reussite %>%
-            <% end %>
-          <% end %>
-        </div>
-        <div class= "col-7">
-          <h3><%= t(".#{competence}.#{sous_competence}.titre") %></h3>
-          <%= md t(".#{competence}.#{sous_competence}.description.#{objet_sous_competence.succes}") %>
-          <% if objet_sous_competence.is_a?(Restitution::SousCompetence::Numeratie) %>
-            <%= image_tag "fleche-droite.svg", alt: "fleche", class: "fleche-droite" %> <%= "#{objet_sous_competence.nombre_questions_repondues} questions passées sur les #{objet_sous_competence.nombre_total_questions} du sous-domaine" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <%= render(SousCompetenceComponent.new(competence, sous_competence, objet_sous_competence)) %>
   <% end %>
 </div>

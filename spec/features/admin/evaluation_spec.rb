@@ -129,6 +129,28 @@ describe 'Admin - Evaluation', type: :feature do
       end
     end
 
+    context 'situation place du marché' do
+      let!(:mon_evaluation_numeratie) { create :evaluation, campagne: campagne }
+      let!(:partie) do
+        create :partie, situation: place_du_marche, evaluation: mon_evaluation_numeratie
+      end
+      let(:questionnaire) { create :questionnaire }
+      let(:place_du_marche) { create(:situation_place_du_marche, questionnaire: questionnaire) }
+      let(:campagne) do
+        create :campagne, compte: Compte.first, parcours_type: parcours_type
+      end
+
+      before do
+        campagne.situations_configurations.create situation: place_du_marche
+        create :evenement_demarrage, partie: partie
+      end
+
+      it 'affiche le bloc numératie' do
+        visit admin_evaluation_path(mon_evaluation_numeratie)
+        expect(page).to have_http_status(:success)
+      end
+    end
+
     context 'Rôle admin' do
       let(:role) { 'admin' }
       let!(:mon_evaluation) do

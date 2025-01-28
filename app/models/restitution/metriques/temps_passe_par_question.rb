@@ -10,7 +10,7 @@ module Restitution
       end
 
       def calculer
-        return if @evenements.empty?
+        return {} if @evenements.empty?
 
         evenements_groupes = @evenements.groupes_par_questions
         evenements_groupes.each_with_object({}) do |(question, evenements), result|

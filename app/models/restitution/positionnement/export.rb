@@ -59,14 +59,14 @@ module Restitution
       end
 
       def remplis_par_sous_domaine(ligne, _code, sous_codes, export)
-        sous_codes.each do |sous_code, evenements|
-          ligne = remplis_par_sous_sous_domaine(ligne, sous_code, evenements, export)
+        sous_codes.each do |sous_code, evenements_questions|
+          ligne = remplis_par_sous_sous_domaine(ligne, sous_code, evenements_questions, export)
         end
         ligne
       end
 
-      def remplis_par_sous_sous_domaine(ligne, _sous_code, evenements, export)
-        export.remplis_reponses(ligne, evenements)
+      def remplis_par_sous_sous_domaine(ligne, _sous_code, evenements_questions, export)
+        export.remplis_reponses(ligne, evenements_questions)
       end
 
       def remplie_la_feuille_de_synthese
@@ -97,21 +97,21 @@ module Restitution
       end
 
       def remplis_par_sous_domaine_sythese(ligne, code, sous_codes, export)
-        reponses = sous_codes.values.flatten
-        export.remplis_sous_domaine(ligne, code, reponses)
+        evenements_questions = sous_codes.values.flatten
+        export.remplis_sous_domaine(ligne, code, evenements_questions)
         ligne + 1
       end
 
       def remplis_sous_sous_domaine_synthese(ligne, sous_codes, export)
-        sous_codes.each do |sous_code, evenements|
-          ligne = recupere_les_sous_sous_domaines(ligne, sous_code, evenements, export)
+        sous_codes.each do |sous_code, evenements_questions|
+          ligne = recupere_les_sous_sous_domaines(ligne, sous_code, evenements_questions, export)
         end
 
         ligne
       end
 
-      def recupere_les_sous_sous_domaines(ligne, sous_code, evenements, export)
-        export.remplis_sous_sous_domaine(ligne, sous_code, evenements)
+      def recupere_les_sous_sous_domaines(ligne, sous_code, evenements_questions, export)
+        export.remplis_sous_sous_domaine(ligne, sous_code, evenements_questions)
         ligne + 1
       end
 

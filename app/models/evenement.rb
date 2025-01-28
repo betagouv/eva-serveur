@@ -17,6 +17,10 @@ class Evenement < ApplicationRecord
       .group_by(&:question)
   }
 
+  def question_nom_technique
+    donnees['question']
+  end
+
   def fin_situation?
     nom == 'finSituation'
   end

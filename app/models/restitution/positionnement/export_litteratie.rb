@@ -13,7 +13,7 @@ module Restitution
 
         questions = Question.where(nom_technique: evenements_reponses.map do |evenement|
           evenement.donnees['question']
-        end)
+        end).order(:nom_technique)
         @evenements_questions = questions.map do |question|
           evenement = evenements_reponses.find do |e|
             e.question_nom_technique == question.nom_technique

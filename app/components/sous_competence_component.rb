@@ -12,11 +12,11 @@ class SousCompetenceComponent < ViewComponent::Base
   end
 
   def avec_succes?
-    @objet_sous_competence.key?(:succes)
+    @objet_sous_competence.respond_to?(:succes)
   end
 
   def badge_type
-    @objet_sous_competence[:succes] ? :acquis : :non_acquis
+    @objet_sous_competence.succes ? :acquis : :non_acquis
   end
 
   def titre_traduction
@@ -25,6 +25,14 @@ class SousCompetenceComponent < ViewComponent::Base
 
   def description_traduction(profil)
     "#{traduction_path}.#{@competence}.#{@sous_competence}.description.#{profil}"
+  end
+
+  def profil
+    if @objet_sous_competence.is_a?(Hash)
+      @objet_sous_competence[:profil]
+    else
+      @objet_sous_competence.profil
+    end
   end
 
   private

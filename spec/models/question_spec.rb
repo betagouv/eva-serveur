@@ -131,4 +131,67 @@ describe Question, type: :model do
       end
     end
   end
+
+  describe '.pour_code_clea(questions, code)' do
+    let(:code) { '2.1' }
+    let(:sous_code) { '2.1.1' }
+    let(:metacompetence_numeratie) do
+      Metacompetence::CORRESPONDANCES_CODECLEA[code][sous_code].first
+    end
+    let!(:question_attendu) { create(:question, metacompetence: metacompetence_numeratie) }
+    let!(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
+    let!(:autre_question) { create(:question, metacompetence: autre_metacompetence) }
+
+    let(:questions) { [question_attendu, autre_question] }
+
+    it 'retourne les questions du sous_code' do
+      expect(described_class.pour_code_clea(questions, sous_code)).to eq [question_attendu]
+    end
+
+    it 'retourne les questions du code' do
+      expect(described_class.pour_code_clea(questions,
+                                            code)).to eq [question_attendu, autre_question]
+    end
+  end
+
+  describe '.prises_en_compte_pour_calcul_score_clea(questions_repondues)' do
+    let!(:question_n1) { create(:question, :numeratie_niveau1) }
+    let!(:question_rattrapage_n1) { create(:question, :numeratie_niveau1_rattrapage) }
+    let!(:question_rattrapage_n2) { create(:question, :numeratie_niveau2_rattrapage) }
+    let!(:question_rattrapage_n3) { create(:question, :numeratie_niveau3_rattrapage) }
+
+    let(:questions) { described_class.all }
+
+    let(:resultat) do
+      described_class.prises_en_compte_pour_calcul_score_clea(questions, questions_repondues)
+    end
+
+    context "quand aucune question n'a été repondue" do
+      let(:questions_repondues) { [] }
+
+      it 'retourne les questions sans les rattrapages' do
+        expect(resultat).not_to include(question_rattrapage_n1)
+        expect(resultat).to include(question_n1)
+      end
+    end
+
+    context "quand aucune question de rattrapage n'a été repondue" do
+      let(:questions_repondues) { [question_n1] }
+
+      it 'retourne les questions sans les rattrapages' do
+        expect(resultat).not_to include(question_rattrapage_n1)
+      end
+    end
+
+    context 'quand une question de rattrapage N1 a été répondue' do
+      let!(:questions_repondues) { [question_rattrapage_n1] }
+
+      it 'retourne les questions sans les rattrapages n2 et n3' do
+        expect(resultat).to include(question_n1)
+        expect(resultat).to include(question_rattrapage_n1)
+        expect(resultat).not_to include(question_rattrapage_n2)
+        expect(resultat).not_to include(question_rattrapage_n3)
+      end
+    end
+  end
 end

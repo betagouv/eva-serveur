@@ -23,11 +23,11 @@ module Restitution
     }.freeze
 
     SCORES_CLEA = {
-      '2.1' => { pourcentage_reussite: 0, seuil: 75 },
-      '2.2' => { pourcentage_reussite: 0, seuil: 50 },
-      '2.3' => { pourcentage_reussite: 0, seuil: 75 },
-      '2.4' => { pourcentage_reussite: 0, seuil: 100 },
-      '2.5' => { pourcentage_reussite: 0, seuil: 66 }
+      '2.1' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0 },
+      '2.2' => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0 },
+      '2.3' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0 },
+      '2.4' => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0 },
+      '2.5' => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0 }
     }.freeze
 
     SEUIL_MINIMUM = 70
@@ -35,7 +35,34 @@ module Restitution
     def initialize(campagne, evenements)
       @campagne = campagne
       @evenements = evenements
+      evenements_reponses = evenements.reponses
+      evenements.first.situation
       @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
+
+      questions_situation = campagne.situations_configurations
+                                    .map(&:questionnaire_utile)
+                                    .compact
+                                    .flatten
+                                    .map(&:questions)
+                                    .flatten
+
+      @questions_repondues = Question.where(nom_technique: @evenements.questions_repondues)
+      @questions = Question.prises_en_compte_pour_calcul_score_clea(
+        questions_situation, @questions_repondues
+      )
+
+      @evenements_questions = evenements_reponses.map do |evenement|
+        question = questions_situation.find do |q|
+          evenement.question_nom_technique == q.nom_technique
+        end
+
+        EvenementQuestion.new(question: question, evenement: evenement)
+      end
+
+      @evenements_questions_a_prendre_en_compte =
+        @evenements_questions.select do |evenement_question|
+          @questions.map(&:nom_technique).include? evenement_question.nom_technique
+        end
       calcule_pourcentage_reussite_competence_clea
       super
     end
@@ -47,16 +74,27 @@ module Restitution
 
     def calcule_pourcentage_reussite_competence_clea # rubocop:disable Metrics/AbcSize
       SCORES_CLEA.each_key do |code|
+        SCORES_CLEA[code][:nombre_total_questions] = Question.pour_code_clea(@questions, code).size
+        Metacompetence::CORRESPONDANCES_CODECLEA[code].each_key do |sous_code|
+          Rails.logger.debug sous_code
+          SCORES_CLEA[code][:criteres] ||= []
+          SCORES_CLEA[code][:criteres] << Restitution::Critere::Numeratie.new(
+            libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
+            code_clea: sous_code,
+            nombre_tests_proposes: 0,
+            nombre_tests_proposes_max: Question.pour_code_clea(@questions, sous_code).size,
+            pourcentage_reussite: 70
+          )
+        end
+
         next unless evenements_groupes_cleas[code]
 
         evenements = evenements_groupes_cleas[code].values.flatten
         evenements = filtre_evenements_reponses(evenements)
         SCORES_CLEA[code][:nombre_questions_repondues] = questions_reponues_pour(evenements)
-        SCORES_CLEA[code][:nombre_total_questions] = questions_total_pour(evenements)
         SCORES_CLEA[code][:pourcentage_reussite] =
           Evacob::ScoreMetacompetence.new
                                      .calcule_pourcentage_reussite(evenements)
-        # SCORES_CLEA[code][:criteres] = 
       end
     end
 
@@ -64,10 +102,6 @@ module Restitution
       evenements.reject do |e|
         e['score'].blank?
       end.size
-    end
-
-    def questions_total_pour(evenements)
-      evenements.size
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -131,7 +165,8 @@ module Restitution
         succes: succes?(code),
         pourcentage_reussite: SCORES_CLEA[code][:pourcentage_reussite],
         nombre_questions_repondues: SCORES_CLEA[code][:nombre_questions_repondues],
-        nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions]
+        nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions],
+        criteres: SCORES_CLEA[code][:criteres]
       )
     end
 

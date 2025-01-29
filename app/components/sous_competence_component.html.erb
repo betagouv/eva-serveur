@@ -6,7 +6,7 @@
                       alt: t(".#{profil}.alt_icone") %>
       <% elsif avec_succes? %>
         <%= render BadgeProfilComponent.new(badge_type) do %>
-          <%= @objet_sous_competence.pourcentage_reussite %>
+          <%= @objet_sous_competence.pourcentage_reussite %>%
         <% end %>
       <% end %>
     </div>

@@ -145,17 +145,12 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     questions.select { |question| metacompetences.include? question.metacompetence }
   end
 
-  def self.prises_en_compte_pour_calcul_score_clea(questions, questions_repondues)
-    resultat = questions.to_a
-    niveaux = %w[N1R N2R N3R]
+  def est_principale?
+    nom_technique[2] == 'P'
+  end
 
-    niveaux.each do |niveau|
-      if questions_repondues.none? { |question| question.nom_technique.start_with?(niveau) }
-        resultat.reject! { |question| question.nom_technique.start_with?(niveau) }
-      end
-    end
-
-    resultat
+  def est_un_rattrapage?
+    nom_technique[2] == 'R'
   end
 
   private

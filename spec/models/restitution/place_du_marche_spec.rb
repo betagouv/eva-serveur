@@ -77,7 +77,7 @@ describe Restitution::PlaceDuMarche do
                                     partie: partie),
                               build(:evenement_reponse,
                                     donnees: { succes: true,
-                                               question: 'N2',
+                                               question: 'N2Pom',
                                                score: 0.5 },
                                     partie: partie)
                             ])

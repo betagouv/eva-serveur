@@ -13,12 +13,12 @@ class SousCompetenceComponent < ViewComponent::Base
     @competence == :litteratie
   end
 
-  def avec_succes?
-    @objet_sous_competence.respond_to?(:succes)
+  def numeratie?
+    @competence == :numeratie
   end
 
   def badge_type
-    @objet_sous_competence.succes ? :acquis : :non_acquis
+    succes ? :acquis : :non_acquis
   end
 
   def titre_traduction
@@ -30,11 +30,23 @@ class SousCompetenceComponent < ViewComponent::Base
   end
 
   def profil
-    if @objet_sous_competence.is_a?(Hash)
-      @objet_sous_competence[:profil]
-    else
-      @objet_sous_competence.profil
-    end
+    @objet_sous_competence.profil
+  end
+
+  def nombre_questions_repondues
+    @objet_sous_competence.nombre_questions_repondues
+  end
+
+  def nombre_total_questions
+    @objet_sous_competence.nombre_total_questions
+  end
+
+  def succes
+    @objet_sous_competence.succes
+  end
+
+  def pourcentage_reussite
+    @objet_sous_competence.pourcentage_reussite
   end
 
   private

@@ -4,26 +4,23 @@
       <% if litteratie? %>
         <%= image_tag "badges/anlci/#{profil}.svg",
                       alt: t(".#{profil}.alt_icone") %>
-      <% elsif avec_succes? %>
+      <% elsif numeratie? %>
         <%= render BadgeProfilComponent.new(badge_type) do %>
-          <%= @objet_sous_competence.pourcentage_reussite %>%
+          <%= pourcentage_reussite %>%
         <% end %>
       <% end %>
     </div>
     <div class="col-7">
-      <% if litteratie? %>
-        <div>
-          <h3><%= I18n.t(titre_traduction) %></h3>
+      <div>
+        <h3><%= I18n.t(titre_traduction) %></h3>
+        <% if litteratie? %>
           <%= md I18n.t(description_traduction(profil)) %>
-        </div>
-      <% elsif avec_succes? %>
-        <div>
-          <h3><%= I18n.t(titre_traduction) %></h3>
-          <%= md I18n.t(description_traduction(@objet_sous_competence.succes)) %>
+        <% elsif numeratie? %>
+          <%= md I18n.t(description_traduction(succes)) %>
           <%= image_tag 'fleche-droite.svg', alt: 'fleche', class: 'fleche-droite' %>
-          <%= "#{@objet_sous_competence.nombre_questions_repondues} questions passées sur les #{@objet_sous_competence.nombre_total_questions} du sous-domaine" %>
-        </div>
-      <% end %>
+          <%= "#{nombre_questions_repondues} questions passées sur les #{nombre_total_questions} du sous-domaine" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

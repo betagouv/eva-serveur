@@ -20,7 +20,7 @@
           <%= image_tag 'fleche-droite.svg', alt: 'fleche', class: 'fleche-droite' %>
           <%= "#{nombre_questions_repondues} questions passées sur les #{nombre_total_questions} du sous-domaine" %>
         </div>
-        <% if objet_sous_competence.criteres.present? %>
+        <% if @objet_sous_competence.criteres.present? %>
           <div class="sous-competence__critere-accordion">
             <%= dsfr_accordion do |accordion| %>
               <%= accordion.with_section(title: "Voir le détail", expanded: true) do %>
@@ -38,7 +38,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <% objet_sous_competence.criteres.each_with_index do |critere, index| %>
+                            <% @objet_sous_competence.criteres.each_with_index do |critere, index| %>
                               <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
                                 <td><%= critere.libelle %></td>
                                 <td><%= critere.code_clea %></td>

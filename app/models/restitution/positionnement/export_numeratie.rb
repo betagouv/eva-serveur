@@ -83,17 +83,18 @@ module Restitution
       end
 
       def remplis_ligne(ligne, evenement_question) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        @onglet_xls.grise_ligne(ligne) unless evenement_question.a_ete_repondue?
+
         @onglet_xls.set_valeur(ligne, 0, evenement_question.code_clea)
         @onglet_xls.set_valeur(ligne, 1, evenement_question.nom_technique)
         @onglet_xls.set_valeur(ligne, 2, evenement_question.metacompetence&.humanize)
-        @onglet_xls.set_valeur(ligne, 3, evenement_question.score)
-        @onglet_xls.set_valeur(ligne, 4, evenement_question.score_max)
+        @onglet_xls.set_nombre(ligne, 3, evenement_question.score)
+        @onglet_xls.set_nombre(ligne, 4, evenement_question.score_max)
         pris_en_compte = pris_en_compte_pour_calcul_score_clea?(evenement_question)
         @onglet_xls.set_valeur(ligne, 5, pris_en_compte)
         @onglet_xls.set_valeur(ligne, 6, evenement_question.interaction)
         @onglet_xls.set_valeur(ligne, 7, evenement_question.intitule)
 
-        @onglet_xls.grise_ligne(ligne) unless evenement_question.a_ete_repondue?
         remplis_choix(ligne, evenement_question)
         ligne + 1
       end

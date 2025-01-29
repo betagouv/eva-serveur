@@ -42,6 +42,14 @@ class EvenementQuestion
     @evenement.persisted? && score.present?
   end
 
+  def est_principale?
+    @question.est_principale?
+  end
+
+  def est_un_rattrapage?
+    @question.est_un_rattrapage?
+  end
+
   def interaction
     @question.interaction
   end
@@ -55,7 +63,32 @@ class EvenementQuestion
   end
 
   def pris_en_compte_pour_calcul_score_clea?(questions)
-    questions.any? { |q| q.nom_technique == @question.nom_technique }
+    questions.any? { |q| q.nom_technique == nom_technique }
+  end
+
+  def self.prises_en_compte_pour_calcul_score_clea(evenements_questions) # rubocop:disable all
+    resultat = evenements_questions.flatten
+
+    evenements_questions_groupes = evenements_questions.group_by do |evenement_question|
+      evenement_question.nom_technique[0, 5]
+    end
+
+    evenements_questions_groupes.each do |nom_technique, groupe|
+      next unless groupe.all? do |evenement_question|
+        evenement_question.est_principale? && evenement_question.score.positive?
+      end
+
+      nom_technique_rattrapage =
+        Restitution::Evacob::ScoreModule::NUMERATIE_METRIQUES[nom_technique]
+
+      next unless nom_technique_rattrapage
+
+      resultat.reject! do |evenement_question|
+        evenement_question.nom_technique.start_with? nom_technique_rattrapage
+      end
+    end
+
+    resultat
   end
 
   def self.pourcentage_pour_groupe(evenements_questions)

@@ -30,31 +30,35 @@ describe Restitution::CafeDeLaPlace do
     it 'quand le profil lecture est le plus petit' do
       expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture: { profil: :profil1 },
-                      comprehension_ecrite: { profil: :profil2 },
-                      production_ecrite: { profil: :profil3 }
+                      lecture: Restitution::SousCompetence::Litteratie.new(profil: :profil1),
+                      comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),
+                      production: Restitution::SousCompetence::Litteratie.new(profil: :profil3)
                     })
+
       expect(restitution.parcours_bas).to equal(:profil1)
     end
 
     it 'quand le profil comprehension est le plus petit' do
       expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture: { profil: :profil3 },
-                      comprehension_ecrite: { profil: :profil2 },
-                      production_ecrite: { profil: :profil4 }
+                      lecture: Restitution::SousCompetence::Litteratie.new(profil: :profil3),
+                      comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),
+                      production: Restitution::SousCompetence::Litteratie.new(profil: :profil4)
                     })
+
       expect(restitution.parcours_bas).to equal(:profil2)
     end
 
     it "quand un profil n'est pas défini" do
+      niveau_inter = Competence::NIVEAU_INDETERMINE
       expect(restitution).to receive(:competences_lettrisme)
         .and_return({
-                      lecture: { profil: Competence::NIVEAU_INDETERMINE },
-                      comprehension_ecrite: { profil: :profil2 },
-                      production_ecrite: { profil: :profil4 }
+                      lecture: Restitution::SousCompetence::Litteratie.new(profil: niveau_inter),
+                      comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),
+                      production: Restitution::SousCompetence::Litteratie.new(profil: :profil4)
                     })
-      expect(restitution.parcours_bas).to equal(Competence::NIVEAU_INDETERMINE)
+
+      expect(restitution.parcours_bas).to equal(niveau_inter)
     end
   end
 

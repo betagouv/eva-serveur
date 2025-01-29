@@ -58,7 +58,7 @@ module Restitution
     end
 
     def parcours_bas
-      profils = competences_lettrisme.values.pluck(:profil)
+      profils = competences_lettrisme.values.map { |competence| competence.profil.to_sym }
       return ::Competence::NIVEAU_INDETERMINE if profils.include?(::Competence::NIVEAU_INDETERMINE)
 
       position_minimum = profils.map do |profil|
@@ -91,8 +91,12 @@ module Restitution
     def competences_lettrisme
       @competences_lettrisme ||= %i[lecture comprehension
                                     production].index_with do |comp|
-        { profil: Competence::ProfilEvacob.new(self, "score_#{comp}") }.transform_values(&:niveau)
+        Restitution::SousCompetence::Litteratie.new(profil: competence(comp).niveau)
       end
+    end
+
+    def competence(comp)
+      Competence::ProfilEvacob.new(self, "score_#{comp}")
     end
 
     def scores_parcours_haut

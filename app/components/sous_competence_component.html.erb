@@ -23,7 +23,7 @@
         <% if @objet_sous_competence.criteres.present? %>
           <div class="sous-competence__critere-accordion">
             <%= dsfr_accordion do |accordion| %>
-              <%= accordion.with_section(title: "Voir le détail", expanded: true) do %>
+              <%= accordion.with_section(title: "Voir le détail") do %>
                 <div class="fr-table fr-table--bordered fr-table--no-scroll" id="table-bordered-component">
                   <div class="fr-table__wrapper">
                     <div class="fr-table__container">

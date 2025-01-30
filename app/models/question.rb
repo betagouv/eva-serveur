@@ -142,11 +142,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     ]
   end
 
-  def self.pour_code_clea(questions, code)
-    metacompetences = Metacompetence.metacompetences_pour_code(code)
-    questions.select { |question| metacompetences.include? question.metacompetence }
-  end
-
   def est_principale?
     nom_technique[2] == 'P'
   end

@@ -131,26 +131,4 @@ describe Question, type: :model do
       end
     end
   end
-
-  xdescribe '.pour_code_clea(questions, code)' do # rubocop:disable RSpec/PendingWithoutReason
-    let(:code) { '2.1' }
-    let(:sous_code) { '2.1.1' }
-    let(:metacompetence_numeratie) do
-      Metacompetence::CORRESPONDANCES_CODECLEA[code][sous_code].first
-    end
-    let!(:question_attendu) { create(:question, metacompetence: metacompetence_numeratie) }
-    let!(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
-    let!(:autre_question) { create(:question, metacompetence: autre_metacompetence) }
-
-    let(:questions) { [question_attendu, autre_question] }
-
-    it 'retourne les questions du sous_code' do
-      expect(described_class.pour_code_clea(questions, sous_code)).to eq [question_attendu]
-    end
-
-    it 'retourne les questions du code' do
-      expect(described_class.pour_code_clea(questions,
-                                            code)).to eq [question_attendu, autre_question]
-    end
-  end
 end

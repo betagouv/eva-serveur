@@ -32,10 +32,10 @@ module Restitution
 
     SEUIL_MINIMUM = 70
 
-    def initialize(campagne, evenements)
+    def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity
       @campagne = campagne
       @evenements = evenements
-      evenements_reponses = evenements.reponses
+      evenements_reponses = evenements.select { |evenement| evenement.nom == 'reponse' }
       evenements.first.situation
       @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
 
@@ -46,23 +46,18 @@ module Restitution
                                     .map(&:questions)
                                     .flatten
 
-      @questions_repondues = Question.where(nom_technique: @evenements.questions_repondues)
-      @questions = Question.prises_en_compte_pour_calcul_score_clea(
-        questions_situation, @questions_repondues
-      )
+      noms_techniques = evenements_reponses.map(&:question_nom_technique)
+      @questions_repondues = Question.where(nom_technique: noms_techniques)
 
-      @evenements_questions = evenements_reponses.map do |evenement|
-        question = questions_situation.find do |q|
-          evenement.question_nom_technique == q.nom_technique
+      @evenements_questions = questions_situation.map do |question_situation|
+        evenement = evenements_reponses.find do |e|
+          e.question_nom_technique == question_situation.nom_technique
         end
-
-        EvenementQuestion.new(question: question, evenement: evenement)
+        EvenementQuestion.new(question: question_situation, evenement: evenement)
       end
 
       @evenements_questions_a_prendre_en_compte =
-        @evenements_questions.select do |evenement_question|
-          @questions.map(&:nom_technique).include? evenement_question.nom_technique
-        end
+        EvenementQuestion.prises_en_compte_pour_calcul_score_clea(@evenements_questions)
       calcule_pourcentage_reussite_competence_clea
       super
     end
@@ -72,36 +67,31 @@ module Restitution
                                               avec_rattrapage: true)
     end
 
-    def calcule_pourcentage_reussite_competence_clea # rubocop:disable Metrics/AbcSize
+    def calcule_pourcentage_reussite_competence_clea # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       SCORES_CLEA.each_key do |code|
-        SCORES_CLEA[code][:nombre_total_questions] = Question.pour_code_clea(@questions, code).size
+        SCORES_CLEA[code][:criteres] = []
         Metacompetence::CORRESPONDANCES_CODECLEA[code].each_key do |sous_code|
-          Rails.logger.debug sous_code
-          SCORES_CLEA[code][:criteres] ||= []
-          SCORES_CLEA[code][:criteres] << Restitution::Critere::Numeratie.new(
-            libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
-            code_clea: sous_code,
-            nombre_tests_proposes: 0,
-            nombre_tests_proposes_max: Question.pour_code_clea(@questions, sous_code).size,
-            pourcentage_reussite: 70
-          )
+          calcule_pourcentage_reussite_critere_clea(code, sous_code)
         end
 
-        next unless evenements_groupes_cleas[code]
-
-        evenements = evenements_groupes_cleas[code].values.flatten
-        evenements = filtre_evenements_reponses(evenements)
-        SCORES_CLEA[code][:nombre_questions_repondues] = questions_reponues_pour(evenements)
-        SCORES_CLEA[code][:pourcentage_reussite] =
-          Evacob::ScoreMetacompetence.new
-                                     .calcule_pourcentage_reussite(evenements)
+        eq_pour_code = evenements_questions_pour_code(code)
+        SCORES_CLEA[code][:nombre_total_questions] = eq_pour_code.size
+        SCORES_CLEA[code][:nombre_questions_repondues] = eq_pour_code.select(&:a_ete_repondue?).size
+        pourcentage = EvenementQuestion.pourcentage_pour_groupe(eq_pour_code)
+        SCORES_CLEA[code][:pourcentage_reussite] = pourcentage
       end
     end
 
-    def questions_reponues_pour(evenements)
-      evenements.reject do |e|
-        e['score'].blank?
-      end.size
+    def calcule_pourcentage_reussite_critere_clea(code, sous_code)
+      eq_pour_code = evenements_questions_pour_code(sous_code)
+
+      SCORES_CLEA[code][:criteres] << Restitution::Critere::Numeratie.new(
+        libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
+        code_clea: sous_code,
+        nombre_tests_proposes: eq_pour_code.select(&:a_ete_repondue?).size,
+        nombre_tests_proposes_max: eq_pour_code.size,
+        pourcentage_reussite: EvenementQuestion.pourcentage_pour_groupe(eq_pour_code)
+      )
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -160,6 +150,10 @@ module Restitution
 
     private
 
+    def evenements_questions_pour_code(code)
+      EvenementQuestion.pour_code_clea(@evenements_questions_a_prendre_en_compte, code)
+    end
+
     def creer_numeratie(code)
       Restitution::SousCompetence::Numeratie.new(
         succes: succes?(code),
@@ -171,6 +165,8 @@ module Restitution
     end
 
     def succes?(code_clea)
+      return false if SCORES_CLEA[code_clea][:pourcentage_reussite].nil?
+
       SCORES_CLEA[code_clea][:pourcentage_reussite] >= SCORES_CLEA[code_clea][:seuil]
     end
 

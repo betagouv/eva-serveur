@@ -43,7 +43,7 @@
                                 <td><%= critere.libelle %></td>
                                 <td><%= critere.code_clea %></td>
                                 <td><%= critere.nombre_tests_proposes %> sur <%= critere.nombre_tests_proposes_max %></td>
-                                <td>70%</td>
+                                <td><%= critere.pourcentage_reussite %>%</td>
                               </tr>
                             <% end %>
                           </tbody>

@@ -34,6 +34,7 @@ describe Restitution::Positionnement::ExportNumeratie do
                                  }
 
       resultat = response_service.regroupe_par_codes_clea
+
       expect(resultat['2.1']['2.1.4'].first).to be_a EvenementQuestion
       expect(resultat['2.3']['2.3.7'].first).to be_a EvenementQuestion
     end

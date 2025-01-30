@@ -32,7 +32,7 @@ module Restitution
 
     SEUIL_MINIMUM = 70
 
-    def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity
+    def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
       @campagne = campagne
       @evenements = evenements
       evenements_reponses = evenements.select { |evenement| evenement.nom == 'reponse' }
@@ -45,6 +45,9 @@ module Restitution
                                     .flatten
                                     .map(&:questions)
                                     .flatten
+                                    .reject do |question|
+                                      question.type == QuestionSousConsigne::QUESTION_TYPE
+                                    end
 
       noms_techniques = evenements_reponses.map(&:question_nom_technique)
       @questions_repondues = Question.where(nom_technique: noms_techniques)

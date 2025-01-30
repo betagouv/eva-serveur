@@ -10,6 +10,11 @@ module Restitution
         @questions_repondues =
           Question.where(nom_technique: @evenements_reponses.map(&:question_nom_technique).uniq)
         @questions_situation = @partie.situation.questionnaire&.questions || []
+
+        @questions_situation = @questions_situation.to_a.reject do |question|
+          question.type == QuestionSousConsigne::QUESTION_TYPE
+        end
+
         @onglet_xls = onglet_xls
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
                               .new(@partie.evenements).calculer

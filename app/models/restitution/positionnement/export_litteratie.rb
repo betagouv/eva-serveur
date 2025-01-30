@@ -3,7 +3,9 @@
 
 module Restitution
   module Positionnement
-    class ExportLitteratie      
+    class ExportLitteratie
+      attr_reader :evenements_questions
+
       def initialize(partie, onglet_xls)
         super()
         @partie = partie
@@ -14,12 +16,14 @@ module Restitution
         questions = Question.where(nom_technique: evenements_reponses.map do |evenement|
           evenement.donnees['question']
         end).order(:nom_technique)
-        @evenements_questions = questions.map do |question|
-          evenement = evenements_reponses.find do |e|
-            e.question_nom_technique == question.nom_technique
+
+        @evenements_questions = evenements_reponses.map do |evenement|
+          question = questions.find do |question|
+            evenement.donnees['question'] == question.nom_technique
           end
           EvenementQuestion.new(question: question, evenement: evenement)
         end
+
         @onglet_xls = onglet_xls
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
                               .new(@partie.evenements).calculer

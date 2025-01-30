@@ -3,7 +3,7 @@
 class EvenementQuestion
   def initialize(question:, evenement: nil)
     @evenement = evenement || Evenement.new(donnees: {})
-    @question = question
+    @question = question || Question.new(nom_technique: evenement.donnees['question'])
   end
 
   def score

@@ -35,17 +35,34 @@ module Restitution
     def initialize(campagne, evenements)
       @campagne = campagne
       @evenements = evenements
+      evenements_reponses = evenements.reponses
       evenements.first.situation
+      @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
+
       questions_situation = campagne.situations_configurations
-                                    .map(&:questionnaire)
+                                    .map(&:questionnaire_utile)
+                                    .compact
                                     .flatten
                                     .map(&:questions)
                                     .flatten
+
       @questions_repondues = Question.where(nom_technique: @evenements.questions_repondues)
       @questions = Question.prises_en_compte_pour_calcul_score_clea(
         questions_situation, @questions_repondues
       )
-      @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
+
+      @evenements_questions = evenements_reponses.map do |evenement|
+        question = questions_situation.find do |q|
+          evenement.question_nom_technique == q.nom_technique
+        end
+
+        EvenementQuestion.new(question: question, evenement: evenement)
+      end
+
+      @evenements_questions_a_prendre_en_compte =
+        @evenements_questions.select do |evenement_question|
+          @questions.map(&:nom_technique).include? evenement_question.nom_technique
+        end
       calcule_pourcentage_reussite_competence_clea
       super
     end

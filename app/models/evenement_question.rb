@@ -115,4 +115,11 @@ class EvenementQuestion
         .map(&:nom_technique).include? evenement_question.nom_technique
     end
   end
+
+  def self.pour_code_clea(evenements_questions, code)
+    metacompetences = Metacompetence.metacompetences_pour_code(code)
+    evenements_questions.select do |evenement_question|
+      metacompetences.include? evenement_question.metacompetence
+    end
+  end
 end

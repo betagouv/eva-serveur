@@ -6,8 +6,6 @@ module ImportExport
 
     WORKSHEET_DONNEES = 'Données'
     WORKSHEET_SYNTHESE = 'Synthèse'
-    NUMBER_FORMAT = Spreadsheet::Format.new(number_format: '0')
-    POURCENTAGE_FORMAT = Spreadsheet::Format.new(number_format: '0%')
 
     def initialize
       @workbook = Spreadsheet::Workbook.new

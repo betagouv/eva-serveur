@@ -10,9 +10,6 @@ module Restitution
         @questions_repondues =
           Question.where(nom_technique: @evenements_reponses.map(&:question_nom_technique).uniq)
         @questions_situation = @partie.situation.questionnaire&.questions || []
-        @questions = Question.prises_en_compte_pour_calcul_score_clea(@questions_situation,
-                                                                      @questions_repondues)
-        @questions_non_repondues = @questions - @questions_repondues
         @onglet_xls = onglet_xls
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
                               .new(@partie.evenements).calculer
@@ -25,9 +22,7 @@ module Restitution
         end
 
         @evenements_questions_a_prendre_en_compte =
-          @evenements_questions.select do |evenement_question|
-            @questions.map(&:nom_technique).include? evenement_question.nom_technique
-          end
+          EvenementQuestion.prises_en_compte_pour_calcul_score_clea(@evenements_questions)
       end
 
       def regroupe_par_codes_clea
@@ -83,23 +78,27 @@ module Restitution
       end
 
       def remplis_ligne(ligne, evenement_question) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        @onglet_xls.grise_ligne(ligne) unless evenement_question.a_ete_repondue?
+
         @onglet_xls.set_valeur(ligne, 0, evenement_question.code_clea)
         @onglet_xls.set_valeur(ligne, 1, evenement_question.nom_technique)
         @onglet_xls.set_valeur(ligne, 2, evenement_question.metacompetence&.humanize)
-        @onglet_xls.set_valeur(ligne, 3, evenement_question.score)
-        @onglet_xls.set_valeur(ligne, 4, evenement_question.score_max)
+        @onglet_xls.set_nombre(ligne, 3, evenement_question.score)
+        @onglet_xls.set_nombre(ligne, 4, evenement_question.score_max)
         pris_en_compte = pris_en_compte_pour_calcul_score_clea?(evenement_question)
         @onglet_xls.set_valeur(ligne, 5, pris_en_compte)
         @onglet_xls.set_valeur(ligne, 6, evenement_question.interaction)
         @onglet_xls.set_valeur(ligne, 7, evenement_question.intitule)
 
-        @onglet_xls.grise_ligne(ligne) unless evenement_question.a_ete_repondue?
         remplis_choix(ligne, evenement_question)
         ligne + 1
       end
 
       def pris_en_compte_pour_calcul_score_clea?(evenement_question)
-        pris_en_compte = evenement_question.pris_en_compte_pour_calcul_score_clea?(@questions)
+        pris_en_compte =
+          evenement_question.pris_en_compte_pour_calcul_score_clea?(
+            @evenements_questions_a_prendre_en_compte
+          )
         pris_en_compte ? 'Oui' : 'Non'
       end
 

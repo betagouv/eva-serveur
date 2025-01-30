@@ -54,4 +54,33 @@ describe EvenementQuestion, type: :model do
       end
     end
   end
+
+  describe '.pour_code_clea(evenements_questions, code)' do
+    let(:code) { '2.1' }
+    let(:sous_code) { '2.1.1' }
+
+    let(:metacompetence_numeratie) do
+      Metacompetence::CORRESPONDANCES_CODECLEA[code][sous_code].first
+    end
+    let!(:question_attendu) { build(:question, metacompetence: metacompetence_numeratie) }
+    let(:evenement_question_attendu) { described_class.new(question: question_attendu) }
+
+    let!(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
+    let!(:autre_question) { build(:question, metacompetence: autre_metacompetence) }
+    let(:evenement_question_autre) { described_class.new(question: autre_question) }
+
+    let(:evenements_questions) { [evenement_question_attendu, evenement_question_autre] }
+
+    it 'retourne les questions du sous_code' do
+      expect(described_class.pour_code_clea(evenements_questions, sous_code)).to(
+        eq([evenement_question_attendu])
+      )
+    end
+
+    it 'retourne les questions du code' do
+      expect(described_class.pour_code_clea(evenements_questions,
+                                            code)).to eq [evenement_question_attendu,
+                                                          evenement_question_autre]
+    end
+  end
 end

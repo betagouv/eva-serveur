@@ -43,7 +43,15 @@
                                 <td><%= critere.libelle %></td>
                                 <td><%= critere.code_clea %></td>
                                 <td><%= critere.nombre_tests_proposes %> sur <%= critere.nombre_tests_proposes_max %></td>
-                                <td><%= critere.pourcentage_reussite %>%</td>
+                                <td>
+                                  <%=
+                                    if critere.acquis?
+                                      dsfr_badge(status: :success) { "Acquis" }
+                                    else
+                                      dsfr_badge(status: :error) { "Non&nbsp;acquis".html_safe }
+                                    end
+                                  %>
+                                </td>
                               </tr>
                             <% end %>
                           </tbody>

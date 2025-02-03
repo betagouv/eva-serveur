@@ -29,6 +29,10 @@ class SousCompetenceComponent < ViewComponent::Base
     "#{traduction_path}.#{@competence}.#{@sous_competence}.description.#{profil}"
   end
 
+  def tests_proposes_traduction
+    "#{traduction_path}.tests_proposes"
+  end
+
   def profil
     @objet_sous_competence.profil
   end

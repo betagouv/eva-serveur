@@ -18,7 +18,7 @@
         <% elsif numeratie? %>
           <%= md I18n.t(description_traduction(succes)) %>
           <%= image_tag 'fleche-droite.svg', alt: 'fleche', class: 'fleche-droite' %>
-          <%= "#{nombre_questions_repondues} questions passées sur les #{nombre_total_questions} du sous-domaine" %>
+          <%= I18n.t(tests_proposes_traduction, count: nombre_questions_repondues) %>
         </div>
         <% if @objet_sous_competence.criteres.present? %>
           <div class="sous-competence__critere-accordion">

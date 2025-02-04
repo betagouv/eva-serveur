@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_03_173358) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_03_164111) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -313,6 +313,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_173358) do
     t.boolean "demarrage_audio_modalite_reponse", default: false
     t.text "aide"
     t.float "score"
+    t.string "orientation"
     t.index ["deleted_at"], name: "index_questions_on_deleted_at"
     t.index ["libelle"], name: "index_questions_on_libelle"
     t.index ["nom_technique"], name: "index_questions_on_nom_technique", unique: true, where: "(deleted_at IS NULL)"

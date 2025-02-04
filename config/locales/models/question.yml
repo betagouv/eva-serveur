@@ -39,6 +39,7 @@ fr:
         texte_a_trous: Texte à trous
       question_glisser_deposer:
         reponses: Réponses
+        orientation: Orientation de la zone de prélèvement
     errors:
       models:
         question_clic_dans_image:

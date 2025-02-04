@@ -13,6 +13,12 @@ class QuestionGlisserDeposer < Question
   validates :zone_depot,
             blob: { content_type: 'image/svg+xml' }
 
+  ORIENTATION_CHOIX = %w[vertical horizontal].freeze
+
+  validates :orientation,
+            inclusion: { in: ORIENTATION_CHOIX },
+            allow_blank: true
+
   attr_accessor :supprimer_zone_depot
 
   before_save :valide_zone_depot_avec_reponse
@@ -44,6 +50,7 @@ class QuestionGlisserDeposer < Question
       json['illustration'] = illustration_url
       json['modalite_reponse'] = transcription_modalite_reponse&.ecrit
       json['intitule'] = transcription_intitule&.ecrit
+      json['orientation'] = orientation
     end
   end
 

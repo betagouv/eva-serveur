@@ -18,7 +18,7 @@ active_admin_form_for [:admin, resource] do |f|
            }
     f.input :orientation, as: :select,
                           collection: QuestionGlisserDeposer::ORIENTATION_CHOIX,
-                          include_blank: false
+                          include_blank: true
   end
 
   render partial: 'admin/questions/inputs_avec_transcriptions_audios',

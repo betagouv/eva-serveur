@@ -33,6 +33,8 @@ npm install
 
 Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campagne avec l'interface d'administration décrite ci-dessous.
 
+**Note :** Si vous avez utilisé la base de donnée de preprod, vous devez supprimer (localement) les assets afin de pouvoir lancer le jeu en local à l'aide de la commande : `rake active_storage:destroy_attachments`
+
 ### Lancer les tests
 `bundle exec rake spec` ou `guard`
 

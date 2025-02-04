@@ -34,13 +34,15 @@ describe QuestionGlisserDeposer, type: :model do
       expect(json.keys).to match_array(%w[id intitule audio_url nom_technique score metacompetence
                                           description illustration modalite_reponse type
                                           reponsesNonClassees zone_depot_url consigne_audio
-                                          intitule_audio demarrage_audio_modalite_reponse])
+                                          intitule_audio demarrage_audio_modalite_reponse
+                                          orientation])
       expect(json['type']).to eql('glisser-deposer')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(
                                             question.illustration.variant(:defaut)
                                           ))
       expect(json['zone_depot_url']).to start_with('http://')
+      expect(json['orientation']).to eql('vertical')
     end
 
     describe 'les reponsesNonClassees' do

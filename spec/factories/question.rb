@@ -77,7 +77,7 @@ FactoryBot.define do
   factory :question_glisser_deposer do
     libelle { 'Question glisser deposer' }
     sequence(:nom_technique) { |n| "question-glissser-deposer-#{n}" }
-
+    orientation { 'vertical' }
     trait :avec_images do
       illustration do
         Rack::Test::UploadedFile.new(Rails.root.join('spec/support/programme_tele.png'))

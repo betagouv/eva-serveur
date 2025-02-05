@@ -10,6 +10,7 @@ panel 'Détails de la question' do
       render partial: 'admin/questions/show_illustration',
              locals: { illustration: resource.illustration }
     end
+    row :orientation
     row :zone_depot do
       render partial: 'admin/questions/show_illustration',
              locals: { illustration: resource.zone_depot }

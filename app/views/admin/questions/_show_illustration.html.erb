@@ -2,4 +2,6 @@
   <%= link_to cdn_for(illustration), target: '_blank', rel: 'noopener' do %>
     <%= image_tag cdn_for(illustration), class: 'image-preview', alt: illustration.filename %>
   <% end %>
+<% else %>
+    <span class="empty">Vide</span>
 <% end %>

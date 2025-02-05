@@ -39,4 +39,32 @@ describe Restitution::Critere::Numeratie do
       it { expect(critere.acquis?).to be(false) }
     end
   end
+
+  describe '#resultat' do
+    let(:critere) do
+      described_class.new attributes.merge(nombre_tests_proposes: nombre_tests,
+                                           pourcentage_reussite: pourcentage)
+    end
+
+    context 'quand le nombre de tests proposés est zéro' do
+      let(:nombre_tests) { 0 }
+      let(:pourcentage) { 75 }
+
+      it { expect(critere.resultat).to eq(:non_evalue) }
+    end
+
+    context 'quand le critère est acquis' do
+      let(:nombre_tests) { 3 }
+      let(:pourcentage) { 75 }
+
+      it { expect(critere.resultat).to eq(:acquis) }
+    end
+
+    context 'quand le critère n\'est pas acquis' do
+      let(:nombre_tests) { 3 }
+      let(:pourcentage) { 50 }
+
+      it { expect(critere.resultat).to eq(:non_acquis) }
+    end
+  end
 end

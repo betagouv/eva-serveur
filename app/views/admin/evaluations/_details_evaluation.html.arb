@@ -13,7 +13,7 @@ div id: 'evaluation__details', class: 'row' do
                 span 'Bénéficiaire'
               end
               div class: 'col col-2' do
-                para auto_link resource.beneficiaire
+                para auto_link(resource.beneficiaire), class: 'restitution-p'
               end
             end
           end
@@ -22,7 +22,7 @@ div id: 'evaluation__details', class: 'row' do
               span 'Campagne'
             end
             div class: 'col col-2' do
-              para auto_link resource.campagne
+              para auto_link(resource.campagne), class: 'restitution-p'
             end
           end
           div class: 'row' do
@@ -30,7 +30,7 @@ div id: 'evaluation__details', class: 'row' do
               span Evaluation.human_attribute_name('debutee_le')
             end
             div class: 'col col-2' do
-              para l(resource.debutee_le, format: :avec_heure)
+              para l(resource.debutee_le, format: :avec_heure), class: 'restitution-p'
             end
           end
         end

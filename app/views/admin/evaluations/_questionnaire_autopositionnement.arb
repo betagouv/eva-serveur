@@ -5,7 +5,7 @@ div class: 'autopositionnement questionnaire' do
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
     div class: 'row' do
       div class: 'col intitule-question' do
-        para question.transcription_intitule&.ecrit
+        para question.transcription_intitule&.ecrit, class: 'restitution-p'
       end
       div class: 'col' do
         div class: 'jauge' do

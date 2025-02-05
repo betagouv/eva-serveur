@@ -149,7 +149,7 @@ div class: 'evaluation__restitution-globale' do
   end
 
   if campagne_avec_positionnement?(:numeratie)
-    div id: 'numeratie', class: 'page page-lettrisme' do
+    div id: 'numeratie', class: 'page page-numeratie' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf

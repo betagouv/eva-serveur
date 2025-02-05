@@ -17,7 +17,9 @@ class SousCompetenceComponent < ViewComponent::Base
     @competence == :numeratie
   end
 
-  def badge_type
+  def badge_status
+    return :non_evalue if nombre_questions_repondues.zero?
+
     succes ? :acquis : :non_acquis
   end
 

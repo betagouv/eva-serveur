@@ -28,6 +28,12 @@ module Restitution
 
         pourcentage_reussite >= minimum_pourcentage
       end
+
+      def resultat
+        return :non_evalue if nombre_tests_proposes.zero?
+
+        acquis? ? :acquis : :non_acquis
+      end
     end
   end
 end

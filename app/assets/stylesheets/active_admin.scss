@@ -19,7 +19,7 @@
 
 // COMPOSANTS
 @import 'admin/composants/autocomplete';
-@import 'admin/composants/badge_profil';
+@import "admin/composants/badge_acquisition";
 @import 'admin/composants/filtres';
 @import 'admin/composants/panels';
 @import 'admin/composants/tables';
@@ -45,6 +45,7 @@
 @import "admin/composants/ellipse";
 @import "admin/composants/tooltip";
 @import "admin/composants/situation_illustration";
+@import "admin/composants/sous_competence";
 @import "admin/composants/referentiel_anlci";
 @import 'admin/composants/recherche_structure';
 @import 'admin/composants/rejoindre_structure';

@@ -1,10 +1,6 @@
 .evaluation__restitution-globale {
   font-size: 0.875rem;
   font-family: $font-texte;
-  p {
-    font-size: 0.875rem;
-    line-height: 1rem;
-  }
 
   .panel {
     padding: 2rem 0;
@@ -15,10 +11,6 @@
 
   .en-tete-page, .pied-page {
     display: none;
-  }
-
-  h3 {
-    margin: 2rem 0 1rem;
   }
 
   h4 {
@@ -386,10 +378,6 @@
     padding-bottom: 4.375rem;
   }
 
-  .sous-competence__critere-accordion {
-    margin-top: 2rem;
-  }
-
   .panel-parcours {
     padding: 1.5rem 3rem;
 
@@ -421,4 +409,13 @@
   &.niveau-1 { background-color: $couleur-niveau-1; }
   &.niveau-2 { background-color: $couleur-niveau-2; }
   &.niveau-3 { background-color: $couleur-niveau-3; }
+}
+
+.restitution-p {
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.restitution-h3 {
+  margin: 2rem 0 1rem;  
 }

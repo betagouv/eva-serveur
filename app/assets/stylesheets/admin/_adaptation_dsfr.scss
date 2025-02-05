@@ -23,6 +23,7 @@ a.pas-souligne {
 
 // Fix conflit entre l'accordeon et les boutons
 .fr-accordion__btn {
+  font-family: $font-titre;
   border-radius: unset;
   border-color: unset;
   border-top-color: unset;

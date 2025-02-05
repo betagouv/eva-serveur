@@ -9,6 +9,11 @@ ol > li::marker {
 a, a:link, a:visited {
   text-decoration: none;
 }
+
+a.pas-souligne {
+  background-image: none;
+}
+
 .tarteaucitronSelfLink {
     background-image: none;
     &::after {

@@ -24,12 +24,17 @@ a.pas-souligne {
 // Fix conflit entre l'accordeon et les boutons
 .fr-accordion__btn {
   font-family: $font-titre;
+
   border-radius: unset;
   border-color: unset;
   border-top-color: unset;
   border-right-color: unset;
   border-bottom-color: unset;
   border: unset;
+
+  &, &:not(.disabled):hover {
+    font-weight: bold !important;
+  }
 
   &:not(.disabled):hover, &:not(.disabled):hover {
     font-weight: 500;

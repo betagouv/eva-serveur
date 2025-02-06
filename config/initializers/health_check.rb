@@ -18,7 +18,7 @@ HealthCheck.setup do |config|
   # les check standard sont pour /healthcheck.json
   config.standard_checks = %w[database migrations]
   # les check complets sont pour /healthcheck/all.json
-  config.full_checks = %w[site database migrations redis sidekiq-redis]
+  config.full_checks = %w[site database migrations]
 
   # Envoyer le détail de l'erreur sur Slack
   config.on_failure do |checks, msg|

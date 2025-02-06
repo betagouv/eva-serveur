@@ -16,6 +16,8 @@ fr:
       autopositionnement: &autopositionnement
         questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
         non_renseigne: 'Non renseigné'
+        appareils: Usage du numérique
+        sante: Santé
       questions_reponses_autopositionnement:
         <<: *autopositionnement
       questionnaire_autopositionnement:
@@ -23,9 +25,6 @@ fr:
       donnees_sociodemographiques:
         situation: Situation
         scolarite: Scolarité
-      autopositionnement:
-        appareils: Usage du numérique
-        sante: Santé
       controle:
         <<: *commun
         nombre_trop_tard: 'Nombre de trop tard'

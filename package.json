@@ -1,14 +1,16 @@
 {
   "devDependencies": {
+    "@captive/stylelint-config": "^3.0.19",
     "@storybook/addon-controls": "^7.6.11",
     "@storybook/server": "^7.6.11",
     "@storybook/server-webpack5": "^7.6.11",
-    "storybook": "^7.6.11",
-    "vscode-langservers-extracted": "^4.10.0",
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "eslint-plugin-promise": "^6.0.0",
+    "storybook": "^7.6.11",
+    "stylelint": "^16.14.1",
+    "vscode-langservers-extracted": "^4.10.0"
   },
   "scripts": {
     "storybook": "storybook dev",
@@ -19,9 +21,19 @@
     "copie-dsfr-icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* public/pro/dsfr/icons/",
     "copie-dsfr-js": "cp -r node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.nomodule.min.js public/pro/dsfr/dsfr.nomodule.min.js",
     "copie-dsfr": "npm run nettoie-dsfr && npm run cree-dsfr-dossiers && npm run copie-dsfr-css && npm run copie-dsfr-polices && npm run copie-dsfr-icons && npm run copie-dsfr-js",
-    "postinstall": "npm run copie-dsfr"
+    "postinstall": "npm run copie-dsfr",
+    "lint": "npm run lint:style",
+    "format": "npm run format:style",
+    "lint:style": "stylelint \"app/**/*.{css,scss}\"",
+    "format:style": "stylelint \"app/**/*.{css,scss}\" --fix"
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.13.0"
+  },
+  "stylelint": {
+    "extends": [
+      "@captive/stylelint-config",
+      "./.stylelint_todo.cjs"
+    ]
   }
 }

@@ -2,7 +2,7 @@
 
 module Admin
   module Positionnement
-    class ReponsesController < Api::BaseController
+    class ReponsesController < ApplicationController
       before_action :find_partie
 
       def show
@@ -22,7 +22,9 @@ module Admin
       end
 
       def can_read_partie?
-        Ability.new(current_compte).can?(:read, @evaluation)
+        return false if current_compte.nil?
+
+        current_ability.can?(:read, @evaluation)
       end
     end
   end

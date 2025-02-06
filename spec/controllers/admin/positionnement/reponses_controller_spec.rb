@@ -6,10 +6,10 @@ describe Admin::Positionnement::ReponsesController do
   let(:situation) { create(:situation) }
   let(:evaluation) { create :evaluation }
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
-  let!(:compte) { create :compte_superadmin }
-
-  before do
+  let!(:compte) do
+    compte = create :compte_superadmin
     sign_in compte
+    compte
   end
 
   it 'retourne un fichier xls' do
@@ -35,6 +35,15 @@ describe Admin::Positionnement::ReponsesController do
       get :show, params: { partie_id: partie.id }
       expect(controller).not_to receive(:send_data)
       expect(response).to redirect_to(root_path)
+    end
+  end
+
+  context "quand il n'y a pas de compte" do
+    let!(:compte) { nil }
+
+    it do
+      get :show, params: { partie_id: partie.id }
+      expect(response).to have_http_status(302)
     end
   end
 end

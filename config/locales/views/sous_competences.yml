@@ -3,7 +3,10 @@ fr:
     evaluations:
       positionnement:
         sous_competences:
-          tests_proposes: "%{count} tests proposés"
+          tests_proposes:
+            zero: "0 test proposé"
+            one: "1 test proposé"
+            other: "%{count} tests proposés"
           litteratie:
             profil1:
               alt_icone: Profil 1

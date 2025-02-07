@@ -3,6 +3,9 @@
     background-image: none;
   }
 }
+ul {
+  list-style-type: none;
+}
 ol > li::marker {
   content: none;
 }

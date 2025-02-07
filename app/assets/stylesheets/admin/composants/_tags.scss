@@ -44,19 +44,17 @@
   @include tag();
   .lien-supprimer {
     position: absolute;
-    right: 5px;
+    right: 0.5rem;
+    background-image: none;
+
     img {
       vertical-align: baseline;
     }
   }
-}
 
-.tag-supprimable {
-  padding-right: 1.75rem;
-  position: relative;
-  display: block;
-  span {
-    margin-right: .75rem;
+  &.tag--supprimable {
+    padding-right: 1.25rem;
+    position: relative;
   }
 }
 

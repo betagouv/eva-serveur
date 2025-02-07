@@ -3,16 +3,11 @@
 class TagStories < ViewComponent::Storybook::Stories
   story :default do
     contenu = 'tag'
-    constructor(contenu)
+    constructor(contenu, classes: 'tag-categorie evolution')
   end
 
   story :supprimable do
     contenu = 'tag'
-    constructor(contenu, supprimable: true)
-  end
-
-  story :avec_image do
-    contenu = 'tag'
-    constructor(contenu, image_path: 'avatar_salut')
+    constructor(contenu, supprimable: true, classes: 'tag-categorie evolution')
   end
 end

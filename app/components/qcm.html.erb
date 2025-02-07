@@ -6,7 +6,7 @@
         <% @questionnaire.reponses.each_value do |option| %>
           <li>
             <label>
-              <input type="radio" name="reponse_qcm" value="<%= option %>" autocomplete="off">
+              <input type="radio" name="reponse_qcm" value="<%= option %>" autocomplete="off" aria-hidden="true">
               <%= render(Tag.new(t("activerecord.attributes.mise_en_action.#{@questionnaire.nom}.#{option}"))) %>
             </label>
           </li>

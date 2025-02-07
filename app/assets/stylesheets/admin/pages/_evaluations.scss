@@ -110,7 +110,6 @@
     @include tronque();
     display: inline-block;
     max-width: calc(#{ $largeur-panel - ($padding * 2) });
-    padding: 0.25rem 1rem;
     font-weight: 400;
     color: white;
     background-color: $eva_main_blue;

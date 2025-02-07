@@ -1,5 +1,5 @@
-<div class="tag<%= ' tag-supprimable' if @supprimable %> <%= @classes %>">
-  <span><%= @contenu %></span>
+<div class="tag<%= ' tag--supprimable' if @supprimable %> <%= @classes %>">
+  <%= @contenu %>
   <% if @supprimable %>
     <%= link_to @url, method: :patch, class: 'lien-supprimer' do %>
         <%= image_tag "croix.svg", alt: t(".supprimer") %>

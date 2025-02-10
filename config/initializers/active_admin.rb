@@ -374,21 +374,7 @@ ActiveAdmin.setup do |config|
   # You can add your own content to the site head like analytics. Make sure
   # you only pass content you trust.
   #
-  config.head = '<div class="fr-skiplinks" id="skiplink">
-  <nav class="fr-container" role="navigation" aria-label="Accès rapide">
-    <ul class="fr-skiplinks__list">
-        <li>
-          <a class="fr-link" href="#active_admin_content">Contenu</a>
-        </li>
-        <li>
-          <a class="fr-link" href="#header">Menu</a>
-        </li>
-        <li>
-          <a class="fr-link" href="#footer-principal"">Pied de page</a>
-        </li>
-    </ul>
-  </nav>
-</div>'.html_safe
+  config.head = ''.html_safe
 
   # == Footer
   #

@@ -692,9 +692,8 @@ var tarteaucitron = {
 
                         div.id = 'tarteaucitronRoot';
                         if (tarteaucitron.parameters.bodyPosition === 'top') {
-                            // Prepend tarteaucitron: #tarteaucitronRoot first-child of the body for better accessibility
-                            var bodyFirstChild = body.firstChild;
-                            body.insertBefore(div, bodyFirstChild);
+                            // Append tarteaucitron: #tarteaucitronRoot last-child of the body so that screen reader do not read it first
+                            body.appendChild(div);
                         }
                         else {
                             // Append tarteaucitron: #tarteaucitronRoot last-child of the body

@@ -25,6 +25,12 @@ bundle install
 npm install
 ```
 
+### Dépendences système pour le developpement
+
+Le redimentionnement des images est dépendant d'une librairie système : vips
+
+voir [libvips install instructions](https://www.libvips.org/install.html)
+
 ### Création de la base  
 `rake db:create`
 

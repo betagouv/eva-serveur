@@ -42,8 +42,8 @@ module ImportExport
       end
 
       def intialise_question
-        @question = Question.new(type: @type) # On crée une nouvelle instance pour chaque ligne
-        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1], description: @row[7])
+        @question = @type.constantize.find_or_create_by(nom_technique: @row[1])
+        @question.assign_attributes(libelle: @row[0], description: @row[7])
         attache_fichier(@question.illustration, @row[2])
         @question.save!
       end

@@ -12,7 +12,7 @@ attributes_table_for resource do
     elsif restitution.abandon?
       status_tag t('admin.restitutions.evaluation.abandon'), class: 'red'
     else
-      status_tag t('admin.restitutions.evaluation.en_cours')
+      status_tag t('admin.restitutions.evaluation.en_cours'), class: 'grey'
     end
   end
   row(t('admin.restitutions.evaluation.temps')) do |restitution|

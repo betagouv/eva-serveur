@@ -17,6 +17,9 @@
     @include tag-couleur-majuscule($success-425, $success-950)
   }
 
+  &.grey {
+    @include tag-couleur($grey-425, $grey-950);
+  }
 }
 
 @mixin tag-couleur-majuscule($couleur-principale, $couleur-principale-legere) {
@@ -72,8 +75,5 @@
 
   &.no, &.yes {
     border-color: $couleur-texte;
-  }
-  &.source-aide {
-    @include tag-couleur($grey-425, $grey-950);
   }
 }

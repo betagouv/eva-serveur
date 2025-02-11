@@ -74,6 +74,7 @@ module ImportExport
         @onglet.set_valeur(@ligne, 8, @question.suffix_reponse)
         @onglet.set_valeur(@ligne, 9, @question.reponse_placeholder)
         @onglet.set_valeur(@ligne, 10, @question.type_saisie)
+        @onglet.set_valeur(@ligne, 11, @question.texte_a_trous)
         @question.reponses.each_with_index { |reponse, index| ajoute_saisies(reponse, index) }
       end
 
@@ -98,7 +99,7 @@ module ImportExport
       def ajoute_saisies(reponse, index)
         columns = %w[intitule nom_technique type_choix]
         columns.each_with_index do |col, i|
-          colonne = 11 + (index * columns.size) + i
+          colonne = 12 + (index * columns.size) + i
           @onglet.set_valeur(0, colonne, "reponse_#{index + 1}_#{col}")
           @onglet.set_valeur(@ligne, colonne, reponse.send(col))
         end

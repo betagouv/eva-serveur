@@ -14,6 +14,8 @@ describe ImportExport::Questions::Export do
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
 
+  let(:headers_xls) { worksheet.row(0).map { |header| header.parameterize.underscore.to_sym } }
+
   describe 'pour une question clic' do
     let(:question) do
       create(:question_clic_dans_image, description: 'Ceci est une description',
@@ -34,16 +36,11 @@ describe ImportExport::Questions::Export do
 
     it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
       expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[0]).to eq('Libelle')
-      expect(worksheet.row(0)[1]).to eq('Nom technique')
-      expect(worksheet.row(0)[2]).to eq('Illustration')
-      expect(worksheet.row(0)[3]).to eq('Intitule ecrit')
-      expect(worksheet.row(0)[4]).to eq('Intitule audio')
-      expect(worksheet.row(0)[5]).to eq('Consigne ecrit')
-      expect(worksheet.row(0)[6]).to eq('Consigne audio')
-      expect(worksheet.row(0)[7]).to eq('Description')
-      expect(worksheet.row(0)[8]).to eq('Zone cliquable')
-      expect(worksheet.row(0)[9]).to eq('Image au clic')
+
+      headers_attendus = ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[
+        QuestionClicDansImage::QUESTION_TYPE
+      ]
+      expect(headers_xls).to eq headers_attendus
     end
 
     it 'génére un fichier xls avec les détails de la question' do
@@ -71,15 +68,16 @@ describe ImportExport::Questions::Export do
 
     it 'génére un fichier xls avec les entêtes spécifiques' do
       expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[8]).to eq('Zone depot')
-      expect(worksheet.row(0)[9]).to eq('reponse_1_nom_technique')
-      expect(worksheet.row(0)[10]).to eq('reponse_1_position_client')
-      expect(worksheet.row(0)[11]).to eq('reponse_1_type_choix')
-      expect(worksheet.row(0)[12]).to eq('reponse_1_illustration_url')
-      expect(worksheet.row(0)[13]).to eq('reponse_2_nom_technique')
-      expect(worksheet.row(0)[14]).to eq('reponse_2_position_client')
-      expect(worksheet.row(0)[15]).to eq('reponse_2_type_choix')
-      expect(worksheet.row(0)[16]).to eq('reponse_2_illustration_url')
+
+      headers_attendus = ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[
+        QuestionGlisserDeposer::QUESTION_TYPE
+      ]
+      headers_attendus += %i[reponse_1_nom_technique reponse_1_position_client reponse_1_type_choix
+                             reponse_1_illustration_url reponse_2_nom_technique
+                             reponse_2_position_client reponse_2_type_choix
+                             reponse_2_illustration_url]
+
+      expect(headers_xls).to eq headers_attendus
     end
 
     it 'génére un fichier xls avec les détails de la question' do
@@ -106,12 +104,13 @@ describe ImportExport::Questions::Export do
 
     it 'génére un fichier xls avec les entêtes spécifiques' do
       expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[8]).to eq('Suffix reponse')
-      expect(worksheet.row(0)[9]).to eq('Reponse placeholder')
-      expect(worksheet.row(0)[10]).to eq('Type saisie')
-      expect(worksheet.row(0)[11]).to eq('reponse_1_intitule')
-      expect(worksheet.row(0)[12]).to eq('reponse_1_nom_technique')
-      expect(worksheet.row(0)[13]).to eq('reponse_1_type_choix')
+
+      headers_attendus = ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[
+        QuestionSaisie::QUESTION_TYPE
+      ]
+      headers_attendus += %i[reponse_1_intitule reponse_1_nom_technique reponse_1_type_choix]
+
+      expect(headers_xls).to eq headers_attendus
     end
 
     it 'génére un fichier xls avec les détails de la question' do
@@ -119,8 +118,9 @@ describe ImportExport::Questions::Export do
       expect(ligne[8]).to eq(question.suffix_reponse)
       expect(ligne[9]).to eq(question.reponse_placeholder)
       expect(ligne[10]).to eq(question.type_saisie)
-      expect(ligne[11]).to eq(question.reponses.last.intitule)
-      expect(ligne[12]).to eq(question.reponses.last.nom_technique)
+      expect(ligne[11]).to eq(question.texte_a_trous)
+      expect(ligne[12]).to eq(question.reponses.last.intitule)
+      expect(ligne[13]).to eq(question.reponses.last.nom_technique)
     end
   end
 
@@ -134,15 +134,15 @@ describe ImportExport::Questions::Export do
 
     it 'génére un fichier xls avec les entêtes spécifiques' do
       expect(spreadsheet.worksheets.count).to eq(1)
-      expect(worksheet.row(0)[8]).to eq('Type qcm')
-      expect(worksheet.row(0)[9]).to eq('choix_1_intitule')
-      expect(worksheet.row(0)[10]).to eq('choix_1_nom_technique')
-      expect(worksheet.row(0)[11]).to eq('choix_1_type_choix')
-      expect(worksheet.row(0)[12]).to eq('choix_1_audio_url')
-      expect(worksheet.row(0)[13]).to eq('choix_2_intitule')
-      expect(worksheet.row(0)[14]).to eq('choix_2_nom_technique')
-      expect(worksheet.row(0)[15]).to eq('choix_2_type_choix')
-      expect(worksheet.row(0)[16]).to eq('choix_2_audio_url')
+
+      headers_attendus = ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[
+        QuestionQcm::QUESTION_TYPE
+      ]
+      headers_attendus += %i[choix_1_intitule choix_1_nom_technique choix_1_type_choix
+                             choix_1_audio_url choix_2_intitule choix_2_nom_technique
+                             choix_2_type_choix choix_2_audio_url]
+
+      expect(headers_xls).to eq headers_attendus
     end
 
     it 'génére un fichier xls avec les détails de la question' do

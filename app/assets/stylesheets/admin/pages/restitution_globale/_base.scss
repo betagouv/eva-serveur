@@ -3,7 +3,7 @@
   font-family: $font-texte;
 
   .panel {
-    padding: 2rem 0;
+    padding: 3rem 0;
     &--avec-references {
       padding-bottom: 0;
     }
@@ -18,8 +18,12 @@
     font-size: 1rem;
   }
 
+  h3 {
+    margin: 3rem 0 1rem;
+  }
+
   .marges-page {
-    padding: 0 2rem;
+    margin: 0 3rem;
   }
 
   .header, .title_bar { display: none; }

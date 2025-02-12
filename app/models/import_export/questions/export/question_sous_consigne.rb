@@ -5,8 +5,7 @@ module ImportExport
     class Export
       class QuestionSousConsigne < ImportExport::Questions::Export
         def initialize(questions, _headers_commun)
-          headers = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
-                       consigne_ecrit consigne_audio description].freeze
+          headers = %i[libelle nom_technique illustration intitule_ecrit intitule_audio].freeze
           super(questions, headers)
         end
 

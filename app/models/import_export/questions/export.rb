@@ -67,6 +67,7 @@ module ImportExport
 
       def remplis_champs_glisser_deposer
         @onglet.set_valeur(@ligne, 8, @question.zone_depot_url)
+        @onglet.set_valeur(@ligne, 9, @question.orientation)
         @question.reponses.each_with_index { |choix, index| ajoute_reponses(choix, index) }
       end
 
@@ -108,7 +109,7 @@ module ImportExport
       def ajoute_reponses(choix, index)
         columns = %w[nom_technique position_client type_choix illustration_url]
         columns.each_with_index do |col, i|
-          colonne = 9 + (index * columns.size) + i
+          colonne = 10 + (index * columns.size) + i
           @onglet.set_valeur(0, colonne, "reponse_#{index + 1}_#{col}")
           @onglet.set_valeur(@ligne, colonne, choix.send(col).to_s)
         end

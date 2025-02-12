@@ -20,6 +20,14 @@ module ImportExport
         QuestionSaisie::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_SAISIE,
         QuestionSousConsigne::QUESTION_TYPE => HEADERS_SOUS_CONSIGNE
       }.freeze
+      EXPORTEURS = {
+        QuestionClicDansImage::QUESTION_TYPE => Export::QuestionClicDansImage,
+        QuestionClicDansTexte::QUESTION_TYPE => Export::QuestionClicDansTexte,
+        QuestionGlisserDeposer::QUESTION_TYPE => Export::QuestionGlisserDeposer,
+        QuestionQcm::QUESTION_TYPE => Export::QuestionQcm,
+        QuestionSaisie::QUESTION_TYPE => Export::QuestionSaisie,
+        QuestionSousConsigne::QUESTION_TYPE => Export::QuestionSousConsigne
+      }.freeze
 
       def initialize(questions: nil, type: nil)
         @questions = questions
@@ -33,7 +41,8 @@ module ImportExport
       end
 
       def exporte_donnees
-        export = Export.new(@questions, HEADERS_ATTENDUS[@type])
+        Rails.logger.debug EXPORTEURS[@type]
+        export = EXPORTEURS[@type].new(@questions, HEADERS_COMMUN)
         {
           xls: export.to_xls,
           content_type: export.content_type_xls,

@@ -4,19 +4,22 @@ require 'rails_helper'
 
 describe ImportExport::Questions::Export do
   subject(:response_service) do
-    response_service = described_class.new([question], headers)
+    response_service = exporteur.new(
+      [question], ImportExport::Questions::ImportExportDonnees::HEADERS_COMMUN
+    )
     response_service.to_xls
     response_service
   end
 
+  let(:exporteur) { described_class }
   let(:headers) { [] }
   let(:question) { create(:question) }
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
-
   let(:headers_xls) { worksheet.row(0).map { |header| header.parameterize.underscore.to_sym } }
 
-  describe 'pour une question clic' do
+  describe 'pour une question clic dans image' do
+    let(:exporteur) { ImportExport::Questions::Export::QuestionClicDansImage }
     let(:question) do
       create(:question_clic_dans_image, description: 'Ceci est une description',
                                         nom_technique: 'clic')
@@ -59,6 +62,7 @@ describe ImportExport::Questions::Export do
   end
 
   describe 'pour une question glisser deposer' do
+    let(:exporteur) { ImportExport::Questions::Export::QuestionGlisserDeposer }
     let!(:question) { create(:question_glisser_deposer) }
     let(:headers) do
       ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
@@ -97,6 +101,7 @@ describe ImportExport::Questions::Export do
   end
 
   describe 'pour une question saisie' do
+    let(:exporteur) { ImportExport::Questions::Export::QuestionSaisie }
     let(:question) { create(:question_saisie) }
     let(:headers) do
       ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
@@ -126,6 +131,7 @@ describe ImportExport::Questions::Export do
   end
 
   describe 'pour une question qcm' do
+    let(:exporteur) { ImportExport::Questions::Export::QuestionQcm }
     let(:question) { create(:question_qcm) }
     let(:headers) do
       ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]

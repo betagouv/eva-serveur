@@ -41,7 +41,6 @@ module ImportExport
       end
 
       def exporte_donnees
-        Rails.logger.debug EXPORTEURS[@type]
         export = EXPORTEURS[@type].new(@questions, HEADERS_COMMUN)
         {
           xls: export.to_xls,

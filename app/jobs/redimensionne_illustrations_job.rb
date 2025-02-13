@@ -7,7 +7,6 @@ class RedimensionneIllustrationsJob < ApplicationJob
     Question.find_each do |question|
       next unless question.illustration.attached?
 
-      question.illustration.variant(:defaut).destroy
       question.illustration.variant(:defaut).processed
     end
   end

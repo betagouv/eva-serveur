@@ -42,8 +42,8 @@ module ImportExport
       end
 
       def intialise_question
-        @question = Question.new(type: @type) # On crée une nouvelle instance pour chaque ligne
-        @question.assign_attributes(libelle: @row[0], nom_technique: @row[1], description: @row[7])
+        @question = @type.constantize.find_or_create_by(nom_technique: @row[1])
+        @question.assign_attributes(libelle: @row[0], description: @row[7])
         attache_fichier(@question.illustration, @row[2])
         @question.save!
       end
@@ -53,61 +53,14 @@ module ImportExport
         attache_fichier(t.audio, audio_url)
       end
 
-      def update_champs_specifiques
-        updates = { QuestionClicDansImage::QUESTION_TYPE => :update_clic_dans_image,
-                    QuestionGlisserDeposer::QUESTION_TYPE => :update_glisser_deposer,
-                    QuestionQcm::QUESTION_TYPE => :update_qcm,
-                    QuestionSaisie::QUESTION_TYPE => :update_saisie,
-                    QuestionClicDansTexte::QUESTION_TYPE => :update_clic_dans_texte }
-        send(updates[@type]) if updates.key?(@type)
-      end
+      def update_champs_specifiques; end
 
-      def update_clic_dans_image
-        attache_fichier(@question.image_au_clic, @row[9])
-        attache_fichier(@question.zone_cliquable, @row[8])
-      end
-
-      def update_glisser_deposer
-        cree_reponses('reponse', method(:cree_reponse))
-        attache_fichier(@question.zone_depot, @row[8])
-      end
-
-      def update_qcm
-        @question.update!(type_qcm: @row[8])
-        cree_reponses('choix', method(:cree_choix))
-      end
-
-      def update_saisie
-        @question.update!(suffix_reponse: @row[8], reponse_placeholder: @row[9],
-                          type_saisie: @row[10], texte_a_trous: @row[11])
-        cree_reponses('reponse', method(:cree_reponse_saisie))
-      end
-
-      def update_clic_dans_texte
-        @question.update!(texte_sur_illustration: @row[8])
-      end
-
-      def cree_reponses(type, creation_method)
+      def cree_reponses(type)
         extrait_colonnes_reponses(type).each_value do |data|
           next if data.values.all?(&:nil?) ## si une ligne de réponse est vide on la saute
 
-          creation_method.call(data)
+          yield(data)
         end
-      end
-
-      def cree_choix(data)
-        choix = cree_reponse_generique(data['intitule'], data['nom_technique'], data['type_choix'])
-        attache_fichier(choix.audio, data['audio'])
-      end
-
-      def cree_reponse(data)
-        reponse = cree_reponse_generique(nil, data['nom_technique'], data['type_choix'],
-                                         data['position_client'])
-        attache_fichier(reponse.illustration, data['illustration'])
-      end
-
-      def cree_reponse_saisie(data)
-        cree_reponse_generique(data['intitule'], data['nom_technique'], data['type_choix'])
       end
 
       def cree_reponse_generique(intitule, nom_technique, type_choix, position_client = nil)

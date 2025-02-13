@@ -26,11 +26,11 @@ describe ImportExport::Questions::Import do
 
     describe 'pour toutes les questions' do
       subject(:service) do
-        described_class.new(type_clic, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionClicDansImage }
       let(:type_clic) { 'QuestionClicDansImage' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_clic]
       end
@@ -85,15 +85,14 @@ describe ImportExport::Questions::Import do
 
     describe 'pour une question de type qcm' do
       subject(:service) do
-        described_class.new(type_qcm, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionQcm }
       let(:type_qcm) { 'QuestionQcm' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_qcm]
       end
-
       let(:file) do
         file_fixture_upload('spec/support/import_question_qcm.xls', 'text/xls')
       end
@@ -124,15 +123,14 @@ describe ImportExport::Questions::Import do
 
     describe 'pour une question de type glisser deposer' do
       subject(:service) do
-        described_class.new(type_glisser, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionGlisserDeposer }
       let(:type_glisser) { 'QuestionGlisserDeposer' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_glisser]
       end
-
       let(:file) do
         file_fixture_upload('spec/support/import_question_glisser.xls', 'text/xls')
       end
@@ -162,15 +160,14 @@ describe ImportExport::Questions::Import do
 
     describe 'pour une question de type clic dans image' do
       subject(:service) do
-        described_class.new(type_clic, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionClicDansImage }
       let(:type_clic) { 'QuestionClicDansImage' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_clic]
       end
-
       let(:file) do
         file_fixture_upload('spec/support/import_question_clic.xls', 'text/xls')
       end
@@ -185,15 +182,14 @@ describe ImportExport::Questions::Import do
 
     describe 'pour une question de type saisie' do
       subject(:service) do
-        described_class.new(type_saisie, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionSaisie }
       let(:type_saisie) { 'QuestionSaisie' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_saisie]
       end
-
       let(:file) do
         file_fixture_upload('spec/support/import_question_saisie.xls', 'text/xls')
       end
@@ -216,15 +212,14 @@ describe ImportExport::Questions::Import do
 
     describe 'pour une question de type sous consigne' do
       subject(:service) do
-        described_class.new(type_consigne, headers)
+        importeur.new(headers)
       end
 
+      let(:importeur) { ImportExport::Questions::Import::QuestionSousConsigne }
       let(:type_consigne) { 'QuestionSousConsigne' }
-
       let(:headers) do
         ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_consigne]
       end
-
       let(:file) do
         file_fixture_upload('spec/support/import_question_consigne.xls', 'text/xls')
       end

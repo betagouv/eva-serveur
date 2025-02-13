@@ -87,7 +87,7 @@ class Structure < ApplicationRecord
 
   def verifie_siret_ou_siren
     return if siret.blank?
-    return if siret.size == 14 || siret.size == 9
+    return if [14, 9].include?(siret.size)
 
     errors.add(:siret, :invalid)
   end

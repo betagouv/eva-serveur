@@ -23,7 +23,7 @@ require 'sidekiq/testing'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+Rails.root.glob('spec/support/shared_contexts/*.rb').sort.each { |f| require f }
 
 Sidekiq::Testing.fake!
 ActiveJob::Base.queue_adapter = :test
@@ -82,4 +82,3 @@ end
 Geocoder.configure(lookup: :test, ip_lookup: :test)
 
 require 'support/comparateur_niveau_restitution'
-require 'support/shared_contexts/rake'

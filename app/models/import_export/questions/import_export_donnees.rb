@@ -20,6 +20,14 @@ module ImportExport
         QuestionSaisie::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_SAISIE,
         QuestionSousConsigne::QUESTION_TYPE => HEADERS_SOUS_CONSIGNE
       }.freeze
+      IMPORTEURS = {
+        QuestionClicDansImage::QUESTION_TYPE => Import::QuestionClicDansImage,
+        QuestionClicDansTexte::QUESTION_TYPE => Import::QuestionClicDansTexte,
+        QuestionGlisserDeposer::QUESTION_TYPE => Import::QuestionGlisserDeposer,
+        QuestionQcm::QUESTION_TYPE => Import::QuestionQcm,
+        QuestionSaisie::QUESTION_TYPE => Import::QuestionSaisie,
+        QuestionSousConsigne::QUESTION_TYPE => Import::QuestionSousConsigne
+      }.freeze
       EXPORTEURS = {
         QuestionClicDansImage::QUESTION_TYPE => Export::QuestionClicDansImage,
         QuestionClicDansTexte::QUESTION_TYPE => Export::QuestionClicDansTexte,
@@ -35,7 +43,7 @@ module ImportExport
       end
 
       def importe_donnees(file)
-        Import.new(@type, HEADERS_ATTENDUS[@type]).import_from_xls(file)
+        IMPORTEURS[@type].new(HEADERS_ATTENDUS[@type]).import_from_xls(file)
       rescue ActiveRecord::RecordInvalid => e
         raise Import::Error, message_erreur_validation(e)
       end

@@ -4,11 +4,6 @@ module ImportExport
   module Questions
     class Export
       class QuestionQcm < ImportExport::Questions::Export
-        def initialize(questions, headers_commun)
-          headers = headers_commun + %i[type_qcm].freeze
-          super(questions, headers)
-        end
-
         private
 
         def remplis_champs_specifiques(col)

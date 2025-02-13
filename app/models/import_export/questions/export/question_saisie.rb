@@ -4,12 +4,6 @@ module ImportExport
   module Questions
     class Export
       class QuestionSaisie < ImportExport::Questions::Export
-        def initialize(questions, headers_commun)
-          headers = headers_commun + %i[suffix_reponse reponse_placeholder type_saisie
-                                        texte_a_trous].freeze
-          super(questions, headers)
-        end
-
         private
 
         def remplis_champs_specifiques(col)

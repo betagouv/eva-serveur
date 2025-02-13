@@ -5,6 +5,7 @@ require 'rails_helper'
 describe ImportExport::Questions::Export::QuestionClicDansTexte do
   include_context 'export'
 
+  let(:type) { 'QuestionClicDansTexte' }
   let(:question) do
     create(:question_clic_dans_image, description: 'Ceci est une description',
                                       nom_technique: 'clic')
@@ -17,9 +18,6 @@ describe ImportExport::Questions::Export::QuestionClicDansTexte do
     create(:transcription, :avec_audio, question_id: question.id,
                                         categorie: :modalite_reponse,
                                         ecrit: 'Ceci est une consigne')
-  end
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
   end
 
   it 'génére un fichier xls avec les entêtes sur chaque colonnes' do

@@ -5,10 +5,8 @@ require 'rails_helper'
 describe ImportExport::Questions::Export::QuestionQcm do
   include_context 'export'
 
+  let(:type) { 'QuestionQcm' }
   let(:question) { create(:question_qcm) }
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
-  end
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
   let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }
 

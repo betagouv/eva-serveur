@@ -49,7 +49,7 @@ module ImportExport
       end
 
       def exporte_donnees
-        export = EXPORTEURS[@type].new(@questions, HEADERS_COMMUN)
+        export = EXPORTEURS[@type].new(@questions, HEADERS_ATTENDUS[@type])
         {
           xls: export.to_xls,
           content_type: export.content_type_xls,

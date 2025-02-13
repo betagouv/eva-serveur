@@ -5,10 +5,8 @@ require 'rails_helper'
 describe ImportExport::Questions::Export::QuestionGlisserDeposer do
   include_context 'export'
 
+  let(:type) { 'QuestionGlisserDeposer' }
   let!(:question) { create(:question_glisser_deposer) }
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
-  end
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
   let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }
 

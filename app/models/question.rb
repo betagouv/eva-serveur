@@ -92,10 +92,14 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     json
   end
 
-  def illustration_url
+  def illustration_url(variant: :defaut)
     return unless illustration.attached?
 
-    cdn_for(illustration.variant(:defaut))
+    if variant
+      cdn_for(illustration.variant(variant))
+    else
+      cdn_for(illustration)
+    end
   end
 
   def interaction

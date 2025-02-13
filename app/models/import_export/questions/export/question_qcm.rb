@@ -14,7 +14,7 @@ module ImportExport
         end
 
         def ajoute_choix(choix, index, col_debut)
-          columns = %w[intitule nom_technique type_choix audio_url]
+          columns = %w[intitule nom_technique type_choix audio_url illustration_url]
           columns.each_with_index do |col, i|
             colonne = col_debut + (index * columns.size) + i
             @onglet.set_valeur(0, colonne, "choix_#{index + 1}_#{col}")

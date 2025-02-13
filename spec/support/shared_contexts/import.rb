@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+shared_context 'import' do
+  include ActionDispatch::TestProcess::FixtureFile
 
-describe ImportExport::Questions::Import::QuestionClicDansImage do
-  let(:type) { 'QuestionClicDansImage' }
-  let(:file) do
-    file_fixture_upload('spec/support/import_question_clic.xls', 'text/xls')
+  subject(:service) do
+    "ImportExport::Questions::Import::#{type}".constantize.new(headers)
   end
 
-  include_context 'import'
+  let(:headers) do
+    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type]
+  end
 
   before do
     # Stub les URLS présentes dans les fichiers de test XLS
@@ -26,12 +27,5 @@ describe ImportExport::Questions::Import::QuestionClicDansImage do
     stub_request(:get, 'https://serveur/zone_depot.svg')
       .to_return(status: 200,
                  body: Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg').read)
-  end
-
-  it 'importe les données spécifiques' do
-    service.import_from_xls(file)
-    question = Question.last
-    expect(question.image_au_clic.attached?).to be true
-    expect(question.zone_cliquable.attached?).to be true
   end
 end

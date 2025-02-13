@@ -3,17 +3,9 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Import do
-  include ActionDispatch::TestProcess::FixtureFile
+  let(:type) { 'QuestionClicDansImage' }
 
-  subject(:service) do
-    importeur.new(headers)
-  end
-
-  let(:importeur) { ImportExport::Questions::Import::QuestionClicDansImage }
-  let(:type_clic) { 'QuestionClicDansImage' }
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_clic]
-  end
+  include_context 'import'
 
   before do
     # Stub les URLS présentes dans les fichiers de test XLS
@@ -27,10 +19,10 @@ describe ImportExport::Questions::Import do
     stub_request(:get, 'https://serveur/reponse2.png')
     stub_request(:get, 'https://serveur/zone_clicable.svg')
       .to_return(status: 200,
-                  body: Rails.root.join('spec/support/zone-clicable-valide.svg').read)
+                 body: Rails.root.join('spec/support/zone-clicable-valide.svg').read)
     stub_request(:get, 'https://serveur/zone_depot.svg')
       .to_return(status: 200,
-                  body: Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg').read)
+                 body: Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg').read)
   end
 
   describe 'avec un fichier valide' do

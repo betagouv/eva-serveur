@@ -3,19 +3,12 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Import::QuestionSousConsigne do
-  include ActionDispatch::TestProcess::FixtureFile
-  
-  subject(:service) do
-    described_class.new(headers)
-  end
-
-  let(:type_consigne) { 'QuestionSousConsigne' }
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[type_consigne]
-  end
+  let(:type) { 'QuestionSousConsigne' }
   let(:file) do
     file_fixture_upload('spec/support/import_question_consigne.xls', 'text/xls')
   end
+
+  include_context 'import'
 
   before do
     # Stub les URLS présentes dans les fichiers de test XLS
@@ -29,10 +22,10 @@ describe ImportExport::Questions::Import::QuestionSousConsigne do
     stub_request(:get, 'https://serveur/reponse2.png')
     stub_request(:get, 'https://serveur/zone_clicable.svg')
       .to_return(status: 200,
-                  body: Rails.root.join('spec/support/zone-clicable-valide.svg').read)
+                 body: Rails.root.join('spec/support/zone-clicable-valide.svg').read)
     stub_request(:get, 'https://serveur/zone_depot.svg')
       .to_return(status: 200,
-                  body: Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg').read)
+                 body: Rails.root.join('spec/support/N1Pse1-zone-depot-valide.svg').read)
   end
 
   it 'importe les données' do

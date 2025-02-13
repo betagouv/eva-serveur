@@ -5,10 +5,8 @@ require 'rails_helper'
 describe ImportExport::Questions::Export::QuestionSaisie do
   include_context 'export'
 
+  let(:type) { 'QuestionSaisie' }
   let(:question) { create(:question_saisie) }
-  let(:headers) do
-    ImportExport::Questions::ImportExportDonnees::HEADERS_ATTENDUS[question.type]
-  end
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
 
   it 'génére un fichier xls avec les entêtes spécifiques' do

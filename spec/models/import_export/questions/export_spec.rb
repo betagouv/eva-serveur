@@ -3,6 +3,9 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Export do
+  let(:question) { create(:question) }
+  let(:type) { 'QuestionQcm' }
+
   include_context 'export'
 
   describe '#nom_du_fichier' do

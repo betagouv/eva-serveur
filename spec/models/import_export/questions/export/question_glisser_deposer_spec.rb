@@ -6,7 +6,7 @@ describe ImportExport::Questions::Export::QuestionGlisserDeposer do
   include_context 'export'
 
   let(:type) { 'QuestionGlisserDeposer' }
-  let!(:question) { create(:question_glisser_deposer) }
+  let!(:question) { create(:question_glisser_deposer, :avec_images) }
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
   let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }
 
@@ -27,6 +27,7 @@ describe ImportExport::Questions::Export::QuestionGlisserDeposer do
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
 
+    expect(ligne[2]).to eq(question.illustration_url(variant: nil))
     expect(ligne[8]).to eq(question.zone_depot_url)
     expect(ligne[9]).to eq(question.orientation)
     expect(ligne[10]).to eq(reponse.nom_technique)

@@ -8,6 +8,8 @@ class Metacompetence
       '2.1.2' => %w[denombrement],
       '2.1.3' => %w[ordonner_nombres_entiers ordonner_nombres_decimaux operations_nombres_entiers],
       '2.1.4' => %w[estimation],
+      '2.1.5' => %w[],
+      '2.1.6' => %w[],
       '2.1.7' => %w[proportionnalite]
     },
     '2.2' => {
@@ -20,12 +22,15 @@ class Metacompetence
       '2.3.3' => %w[renseigner_horaires],
       '2.3.4' => %w[unites_de_mesure instruments_de_mesure],
       '2.3.5' => %w[tableaux_graphiques],
+      '2.3.6' => %w[],
       '2.3.7' => %w[surfaces perimetres perimetres_surfaces volumes]
     },
     '2.4' => {
       '2.4.1' => %w[lecture_plan]
     },
     '2.5' => {
+      '2.5.1' => %w[],
+      '2.5.2' => %w[],
       '2.5.3' => %w[situation_dans_lespace reconnaitre_les_nombres reconaitre_les_nombres
                     vocabulaire_numeracie]
     }
@@ -41,6 +46,8 @@ class Metacompetence
     '2.1.2' => I18n.t('activerecord.metacompetence.codes_clea.2_1_2'),
     '2.1.3' => I18n.t('activerecord.metacompetence.codes_clea.2_1_3'),
     '2.1.4' => I18n.t('activerecord.metacompetence.codes_clea.2_1_4'),
+    '2.1.5' => I18n.t('activerecord.metacompetence.codes_clea.2_1_5'),
+    '2.1.6' => I18n.t('activerecord.metacompetence.codes_clea.2_1_6'),
     '2.1.7' => I18n.t('activerecord.metacompetence.codes_clea.2_1_7'),
     '2.2.1' => I18n.t('activerecord.metacompetence.codes_clea.2_2_1'),
     '2.2.2' => I18n.t('activerecord.metacompetence.codes_clea.2_2_2'),
@@ -49,8 +56,11 @@ class Metacompetence
     '2.3.3' => I18n.t('activerecord.metacompetence.codes_clea.2_3_3'),
     '2.3.4' => I18n.t('activerecord.metacompetence.codes_clea.2_3_4'),
     '2.3.5' => I18n.t('activerecord.metacompetence.codes_clea.2_3_5'),
+    '2.3.6' => I18n.t('activerecord.metacompetence.codes_clea.2_3_6'),
     '2.3.7' => I18n.t('activerecord.metacompetence.codes_clea.2_3_7'),
     '2.4.1' => I18n.t('activerecord.metacompetence.codes_clea.2_4_1'),
+    '2.5.1' => I18n.t('activerecord.metacompetence.codes_clea.2_5_1'),
+    '2.5.2' => I18n.t('activerecord.metacompetence.codes_clea.2_5_2'),
     '2.5.3' => I18n.t('activerecord.metacompetence.codes_clea.2_5_3')
   }.freeze
 

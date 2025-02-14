@@ -30,6 +30,7 @@ module Restitution
       end
 
       def resultat
+        return :pas_de_test if nombre_tests_proposes_max.zero?
         return :non_evalue if nombre_tests_proposes.zero?
 
         acquis? ? :acquis : :non_acquis

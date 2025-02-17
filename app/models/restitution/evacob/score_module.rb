@@ -35,6 +35,12 @@ module Restitution
         'N3Prp' => 'N3Rrp'
       }.freeze
 
+      SCORE_MAX_PAR_NIVEAU = {
+        N1: 16,
+        N2: 20,
+        N3: 18
+      }.freeze
+
       def calcule(evenements, nom_module, avec_rattrapage: false)
         evenements_filtres = recupere_evenements_reponses_filtres(evenements, nom_module,
                                                                   avec_rattrapage)
@@ -48,7 +54,7 @@ module Restitution
 
         return if evenements.blank?
 
-        score_max = evenements&.sum(&:score_max_reponse)
+        score_max = SCORE_MAX_PAR_NIVEAU[nom_module]
         score = evenements&.sum(&:score_reponse)
 
         Pourcentage.new(valeur: score, valeur_max: score_max).calcul

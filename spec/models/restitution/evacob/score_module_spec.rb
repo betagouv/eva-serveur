@@ -159,20 +159,20 @@ describe Restitution::Evacob::ScoreModule do
       end
 
       it "calcule le pourcentage de réussite d'un niveau" do
-        expect(metrique_pourcentage_reussite.round).to eq(67)
+        expect(metrique_pourcentage_reussite.round).to eq(6)
       end
     end
 
     context 'quand les scores ne sont que des entiers' do
       let(:evenements_reponses) do
         [
-          build(:evenement_reponse, donnees: { question: 'N1Pes1', score: 8, scoreMax: 10 }),
-          build(:evenement_reponse, donnees: { question: 'N1Pes2', score: 8, scoreMax: 10 })
+          build(:evenement_reponse, donnees: { question: 'N1Pes1', score: 6, scoreMax: 8 }),
+          build(:evenement_reponse, donnees: { question: 'N1Pes2', score: 6, scoreMax: 8 })
         ]
       end
 
       it "calcule le pourcentage de réussite d'un niveau" do
-        expect(metrique_pourcentage_reussite.round).to eq(80)
+        expect(metrique_pourcentage_reussite.round).to eq(75)
       end
     end
   end

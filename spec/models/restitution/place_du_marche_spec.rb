@@ -134,8 +134,8 @@ describe Restitution::PlaceDuMarche do
     end
 
     it 'retourne le pourcentage de réussite pour un niveau donné' do
-      expect(restitution.pourcentage_de_reussite_pour(:N1)).to eq(100)
-      expect(restitution.pourcentage_de_reussite_pour(:N2)).to eq(50)
+      expect(restitution.pourcentage_de_reussite_pour(:N1)).to eq(6.25)
+      expect(restitution.pourcentage_de_reussite_pour(:N2)).to eq(2.5)
       expect(restitution.pourcentage_de_reussite_pour(:N3)).to eq(0)
     end
   end

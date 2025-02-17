@@ -63,7 +63,7 @@ module ImportExport
         end
       end
 
-      def cree_reponse_generique(intitule, nom_technique, type_choix, position_client = nil)
+      def cree_reponse_generique(intitule:, nom_technique:, type_choix:, position_client: nil)
         Choix.create!(intitule: intitule, nom_technique: nom_technique, question_id: @question.id,
                       type_choix: type_choix, position_client: position_client)
       end

@@ -19,9 +19,12 @@ module ImportExport
 
         def cree_choix(data)
           choix = cree_reponse_generique(
-            data['intitule'], data['nom_technique'], data['type_choix']
+            intitule: data['intitule'],
+            nom_technique: data['nom_technique'],
+            type_choix: data['type_choix']
           )
-          attache_fichier(choix.audio, data['audio'])
+          attache_fichier(choix.audio, data['audio_url'])
+          attache_fichier(choix.illustration, data['illustration_url'])
         end
       end
     end

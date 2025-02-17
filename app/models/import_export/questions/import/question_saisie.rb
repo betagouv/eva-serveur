@@ -19,7 +19,11 @@ module ImportExport
         end
 
         def cree_reponse_saisie(data)
-          cree_reponse_generique(data['intitule'], data['nom_technique'], data['type_choix'])
+          cree_reponse_generique(
+            intitule: data['intitule'],
+            nom_technique: data['nom_technique'],
+            type_choix: data['type_choix']
+          )
         end
       end
     end

@@ -1,3 +1,0 @@
-fr:
-  import_export:
-    erreur_telechargement: "Impossible de télécharger un fichier depuis l'url : %{url}"

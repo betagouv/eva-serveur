@@ -45,7 +45,7 @@ module ImportExport
       def importe_donnees(file)
         IMPORTEURS[@type].new(HEADERS_ATTENDUS[@type]).import_from_xls(file)
       rescue ActiveRecord::RecordInvalid => e
-        raise Import::Error, message_erreur_validation(e)
+        raise Import::Error, e.record.errors.full_messages.to_sentence
       end
 
       def exporte_donnees
@@ -55,10 +55,6 @@ module ImportExport
           content_type: export.content_type_xls,
           filename: export.nom_du_fichier(@type)
         }
-      end
-
-      def message_erreur_validation(exception, row)
-        "Erreur ligne #{row}: #{exception.record.errors.full_messages.to_sentence}"
       end
     end
   end

@@ -18,9 +18,13 @@ module ImportExport
         end
 
         def cree_reponse(data)
-          reponse = cree_reponse_generique(nil, data['nom_technique'], data['type_choix'],
-                                           data['position_client'])
-          attache_fichier(reponse.illustration, data['illustration'])
+          reponse = cree_reponse_generique(
+            intitule: nil,
+            nom_technique: data['nom_technique'],
+            type_choix: data['type_choix'],
+            position_client: data['position_client']
+          )
+          attache_fichier(reponse.illustration, data['illustration_url'])
         end
       end
     end

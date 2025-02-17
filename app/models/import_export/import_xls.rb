@@ -43,10 +43,6 @@ module ImportExport
       attachment.attach(ImportXls.telecharge_fichier(url, nom_technique)) if url.present?
     end
 
-    def message_erreur_validation(exception, row)
-      "Erreur ligne #{row}: #{exception.record.errors.full_messages.to_sentence}"
-    end
-
     XLS_MIME_TYPE = 'application/vnd.ms-excel'
 
     def self.fichier_xls?(file)
@@ -60,7 +56,7 @@ module ImportExport
       content_type = Marcel::MimeType.for extension: extension
       { io: fichier, filename: nom_fichier, content_type: content_type }
     rescue Down::Error
-      raise Error, I18n.t('.import_export.erreur_telechargement', url: url)
+      raise Error, I18n.t('.layouts.erreurs.import_question.telechargement_impossible', url: url)
     end
   end
 end

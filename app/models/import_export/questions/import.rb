@@ -31,6 +31,12 @@ module ImportExport
         end
       end
 
+      def message_erreur_validation(exception, index)
+        I18n.t('.layouts.erreurs.import_question.ligne',
+               numero: index,
+               message: exception.record.errors.full_messages.to_sentence)
+      end
+
       def cree_question
         ActiveRecord::Base.transaction do
           intialise_question

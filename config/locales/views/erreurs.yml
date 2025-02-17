@@ -8,6 +8,8 @@ fr:
           Le fichier n’est pas au bon format. Il doit être au format .xls
         mauvais_format: |
           Le fichier n'est pas au bon format. Il doit contenir les colonnes dans l'ordre suivant : %{headers}
+        telechargement_impossible: "Impossible de télécharger un fichier depuis l'url : %{url}"
+        ligne: "Erreur ligne %{row}: %{message}"
     succes:
       import_question: Les questions ont bien été importées et créées
 

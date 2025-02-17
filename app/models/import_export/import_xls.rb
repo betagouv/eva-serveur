@@ -39,26 +39,8 @@ module ImportExport
       @data = sheet.rows[1..] # Les autres lignes contiennent les données
     end
 
-    def telecharge_fichier(url)
-      @current_download = url
-      return unless url
-
-      fichier = Down.download(url)
-      content_type = Marcel::MimeType.for(fichier.path, name: fichier.original_filename)
-
-      { io: fichier,
-        filename: fichier.original_filename,
-        content_type: content_type }
-    rescue Down::Error
-      raise Error, message_erreur_telechargement(@current_download)
-    end
-
-    def message_erreur_telechargement(current_download)
-      "Impossible de télécharger un fichier depuis l'url : #{current_download}"
-    end
-
-    def attache_fichier(attachment, url)
-      attachment.attach(telecharge_fichier(url)) if url.present?
+    def attache_fichier(attachment, url, nom_technique)
+      attachment.attach(ImportXls.telecharge_fichier(url, nom_technique)) if url.present?
     end
 
     def message_erreur_validation(exception, row)
@@ -69,6 +51,16 @@ module ImportExport
 
     def self.fichier_xls?(file)
       file.content_type == XLS_MIME_TYPE && File.extname(file.original_filename) == '.xls'
+    end
+
+    def self.telecharge_fichier(url, nom_technique)
+      fichier = Down.download(url)
+      extension = File.extname(url)
+      nom_fichier = "#{nom_technique}#{extension}"
+      content_type = Marcel::MimeType.for extension: extension
+      { io: fichier, filename: nom_fichier, content_type: content_type }
+    rescue Down::Error
+      raise Error, I18n.t('.import_export.erreur_telechargement', url: url)
     end
   end
 end

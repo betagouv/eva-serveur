@@ -11,7 +11,7 @@ module ImportExport
         private
 
         def update_champs_specifiques
-          attache_fichier(@question.zone_depot, @row[8])
+          attache_fichier(@question.zone_depot, @row[8], "#{@row[1]}_zone_depot")
           cree_reponses('reponse') do |data|
             cree_reponse(data)
           end
@@ -24,7 +24,7 @@ module ImportExport
             type_choix: data['type_choix'],
             position_client: data['position_client']
           )
-          attache_fichier(reponse.illustration, data['illustration_url'])
+          attache_fichier(reponse.illustration, data['illustration_url'], data['nom_technique'])
         end
       end
     end

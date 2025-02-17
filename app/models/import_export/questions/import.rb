@@ -34,8 +34,11 @@ module ImportExport
       def cree_question
         ActiveRecord::Base.transaction do
           intialise_question
-          cree_transcription(:intitule, @row[4], @row[3])
-          cree_transcription(:modalite_reponse, @row[6], @row[5]) unless @question.sous_consigne?
+          cree_transcription(:intitule, @row[4], @row[3], "#{@row[1]}_intitule")
+          unless @question.sous_consigne?
+            cree_transcription(:modalite_reponse, @row[6], @row[5],
+                               "#{@row[1]}_modalite_reponse")
+          end
           update_champs_specifiques
           @question
         end
@@ -44,15 +47,15 @@ module ImportExport
       def intialise_question
         @question = @type.constantize.find_or_create_by(nom_technique: @row[1])
         @question.assign_attributes(libelle: @row[0], description: @row[7])
-        attache_fichier(@question.illustration, @row[2])
+        attache_fichier(@question.illustration, @row[2], "#{@row[1]}_illustration")
         @question.save!
       end
 
-      def cree_transcription(categorie, audio_url, ecrit)
+      def cree_transcription(categorie, audio_url, ecrit, nom_technique)
         t = Transcription.where(question_id: @question.id, categorie: categorie).first_or_initialize
         t.assign_attributes(ecrit: ecrit)
         t.save!
-        attache_fichier(t.audio, audio_url)
+        attache_fichier(t.audio, audio_url, nom_technique)
       end
 
       def update_champs_specifiques; end

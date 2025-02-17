@@ -23,8 +23,8 @@ module ImportExport
             nom_technique: data['nom_technique'],
             type_choix: data['type_choix']
           )
-          attache_fichier(choix.audio, data['audio_url'])
-          attache_fichier(choix.illustration, data['illustration_url'])
+          attache_fichier(choix.audio, data['audio_url'], data['nom_technique'])
+          attache_fichier(choix.illustration, data['illustration_url'], data['nom_technique'])
         end
       end
     end

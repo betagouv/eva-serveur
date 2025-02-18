@@ -49,7 +49,9 @@ module ImportExport
       end
 
       def cree_transcription(categorie, audio_url, ecrit)
-        t = Transcription.create!(ecrit: ecrit, question_id: @question.id, categorie: categorie)
+        t = Transcription.where(question_id: @question.id, categorie: categorie).first_or_initialize
+        t.assign_attributes(ecrit: ecrit)
+        t.save!
         attache_fichier(t.audio, audio_url)
       end
 
@@ -64,8 +66,11 @@ module ImportExport
       end
 
       def cree_reponse_generique(intitule:, nom_technique:, type_choix:, position_client: nil)
-        Choix.create!(intitule: intitule, nom_technique: nom_technique, question_id: @question.id,
-                      type_choix: type_choix, position_client: position_client)
+        choix = Choix.where(nom_technique: nom_technique).first_or_initialize
+        choix.assign_attributes(intitule: intitule, question_id: @question.id,
+                                type_choix: type_choix, position_client: position_client)
+        choix.save!
+        choix
       end
 
       def extrait_colonnes_reponses(reponse)

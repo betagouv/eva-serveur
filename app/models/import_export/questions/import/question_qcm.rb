@@ -10,8 +10,8 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques
-          @question.update!(type_qcm: @row[8])
+        def update_champs_specifiques(col_debut)
+          @question.update!(type_qcm: @row[col_debut + 1])
           cree_reponses('choix') do |data|
             cree_choix(data)
           end

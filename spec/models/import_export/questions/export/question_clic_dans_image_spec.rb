@@ -39,7 +39,8 @@ describe ImportExport::Questions::Export::QuestionClicDansImage do
     expect(ligne[5]).to eq('Ceci est une consigne')
     expect(ligne[6]).to eq(consigne.audio_url)
     expect(ligne[7]).to eq('Ceci est une description')
-    expect(ligne[8]).to eq(question.zone_cliquable_url)
-    expect(ligne[9]).to eq(question.image_au_clic_url)
+    expect(ligne[8]).to be(false)
+    expect(ligne[9]).to eq(question.zone_cliquable_url)
+    expect(ligne[10]).to eq(question.image_au_clic_url)
   end
 end

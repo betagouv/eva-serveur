@@ -10,7 +10,7 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques; end
+        def update_champs_specifiques(col_debut); end
       end
     end
   end

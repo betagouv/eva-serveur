@@ -39,6 +39,7 @@ describe ImportExport::Questions::Export::QuestionClicDansTexte do
     expect(ligne[5]).to eq('Ceci est une consigne')
     expect(ligne[6]).to eq(consigne.audio_url)
     expect(ligne[7]).to eq('Ceci est une description')
-    expect(ligne[8]).to eq(question.texte_sur_illustration)
+    expect(ligne[8]).to be(false)
+    expect(ligne[9]).to eq(question.texte_sur_illustration)
   end
 end

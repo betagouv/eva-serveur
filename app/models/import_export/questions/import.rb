@@ -45,14 +45,15 @@ module ImportExport
             cree_transcription(:modalite_reponse, @row[6], @row[5],
                                "#{@row[1]}_modalite_reponse")
           end
-          update_champs_specifiques
+          update_champs_specifiques(ImportExportDonnees::HEADERS_COMMUN.size - 1)
           @question
         end
       end
 
       def intialise_question
         @question = @type.constantize.find_or_create_by(nom_technique: @row[1])
-        @question.assign_attributes(libelle: @row[0], description: @row[7])
+        @question.assign_attributes(libelle: @row[0], description: @row[7],
+                                    demarrage_audio_modalite_reponse: @row[8])
         attache_fichier(@question.illustration, @row[2], "#{@row[1]}_illustration")
         @question.save!
       end
@@ -82,9 +83,9 @@ module ImportExport
         choix
       end
 
-      def extrait_colonnes_reponses(reponse)
+      def extrait_colonnes_reponses(type)
         @headers.each_with_index.with_object({}) do |(header, index), headers_data|
-          next unless (match = header.to_s.match(/#{reponse}_(\d+)_(.*)/))
+          next unless (match = header.to_s.match(/#{type}_(\d+)_(.*)/))
 
           item, data_type = match.captures
           headers_data[item.to_i] ||= {}

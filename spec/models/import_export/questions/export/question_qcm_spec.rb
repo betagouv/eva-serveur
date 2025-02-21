@@ -26,16 +26,17 @@ describe ImportExport::Questions::Export::QuestionQcm do
 
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
-    expect(ligne[8]).to eq(question.type_qcm)
-    expect(ligne[9]).to eq(reponse.intitule)
-    expect(ligne[10]).to eq(reponse.nom_technique)
-    expect(ligne[11]).to eq(reponse.type_choix)
-    expect(ligne[12]).to eq(reponse.audio_url)
-    expect(ligne[13]).to eq(reponse.illustration_url)
-    expect(ligne[14]).to eq(reponse2.intitule)
-    expect(ligne[15]).to eq(reponse2.nom_technique)
-    expect(ligne[16]).to eq(reponse2.type_choix)
-    expect(ligne[17]).to eq(reponse2.audio_url)
-    expect(ligne[18]).to eq(reponse2.illustration_url)
+    expect(ligne[8]).to be(false)
+    expect(ligne[9]).to eq(question.type_qcm)
+    expect(ligne[10]).to eq(reponse.intitule)
+    expect(ligne[11]).to eq(reponse.nom_technique)
+    expect(ligne[12]).to eq(reponse.type_choix)
+    expect(ligne[13]).to eq(reponse.audio_url)
+    expect(ligne[14]).to eq(reponse.illustration_url)
+    expect(ligne[15]).to eq(reponse2.intitule)
+    expect(ligne[16]).to eq(reponse2.nom_technique)
+    expect(ligne[17]).to eq(reponse2.type_choix)
+    expect(ligne[18]).to eq(reponse2.audio_url)
+    expect(ligne[19]).to eq(reponse2.illustration_url)
   end
 end

@@ -11,7 +11,8 @@ module ImportExport
       HEADERS_SOUS_CONSIGNE = %i[libelle nom_technique illustration intitule_ecrit
                                  intitule_audio].freeze
       HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
-                          consigne_ecrit consigne_audio description].freeze
+                          consigne_ecrit consigne_audio description
+                          demarrage_audio_modalite_reponse].freeze
       HEADERS_ATTENDUS = {
         QuestionClicDansImage::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
         QuestionClicDansTexte::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_TEXTE,

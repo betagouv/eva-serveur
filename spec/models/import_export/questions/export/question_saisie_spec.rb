@@ -22,11 +22,12 @@ describe ImportExport::Questions::Export::QuestionSaisie do
 
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
-    expect(ligne[8]).to eq(question.suffix_reponse)
-    expect(ligne[9]).to eq(question.reponse_placeholder)
-    expect(ligne[10]).to eq(question.type_saisie)
-    expect(ligne[11]).to eq(question.texte_a_trous)
-    expect(ligne[12]).to eq(question.reponses.last.intitule)
-    expect(ligne[13]).to eq(question.reponses.last.nom_technique)
+    expect(ligne[8]).to be(false)
+    expect(ligne[9]).to eq(question.suffix_reponse)
+    expect(ligne[10]).to eq(question.reponse_placeholder)
+    expect(ligne[11]).to eq(question.type_saisie)
+    expect(ligne[12]).to eq(question.texte_a_trous)
+    expect(ligne[13]).to eq(question.reponses.last.intitule)
+    expect(ligne[14]).to eq(question.reponses.last.nom_technique)
   end
 end

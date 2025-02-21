@@ -10,9 +10,11 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques
-          @question.update!(suffix_reponse: @row[8], reponse_placeholder: @row[9],
-                            type_saisie: @row[10], texte_a_trous: @row[11])
+        def update_champs_specifiques(col_debut)
+          @question.update!(suffix_reponse: @row[col_debut += 1],
+                            reponse_placeholder: @row[col_debut += 1],
+                            type_saisie: @row[col_debut += 1],
+                            texte_a_trous: @row[col_debut + 1])
           cree_reponses('reponse') do |data|
             cree_reponse_saisie(data)
           end

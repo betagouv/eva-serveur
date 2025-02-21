@@ -48,6 +48,7 @@ module ImportExport
         @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.ecrit)
         @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.audio_url)
         @onglet.set_valeur(@ligne, col += 1, @question.description)
+        @onglet.set_valeur(@ligne, col += 1, @question.demarrage_audio_modalite_reponse)
         remplis_champs_specifiques(col)
       end
 

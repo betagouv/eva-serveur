@@ -10,8 +10,9 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques
-          attache_fichier(@question.zone_depot, @row[8], "#{@row[1]}_zone_depot")
+        def update_champs_specifiques(col_debut)
+          attache_fichier(@question.zone_depot, @row[col_debut += 1], "#{@row[1]}_zone_depot")
+          @question.update!(orientation: @row[col_debut + 1])
           cree_reponses('reponse') do |data|
             cree_reponse(data)
           end

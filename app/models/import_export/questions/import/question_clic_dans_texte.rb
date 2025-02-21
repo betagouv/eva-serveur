@@ -10,8 +10,8 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques
-          @question.update!(texte_sur_illustration: @row[8])
+        def update_champs_specifiques(col_debut)
+          @question.update!(texte_sur_illustration: @row[col_debut + 1])
         end
       end
     end

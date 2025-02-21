@@ -31,7 +31,7 @@ describe ImportExport::Questions::Import::QuestionClicDansImage do
   it 'importe les données spécifiques' do
     service.import_from_xls(file)
     question = Question.last
-    expect(question.image_au_clic.attached?).to be true
     expect(question.zone_cliquable.attached?).to be true
+    expect(question.image_au_clic.attached?).to be true
   end
 end

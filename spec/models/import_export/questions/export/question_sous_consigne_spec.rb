@@ -3,10 +3,12 @@
 require 'rails_helper'
 
 describe ImportExport::Questions::Export::QuestionSousConsigne do
+  include_context 'export'
+
   let(:type) { 'QuestionSousConsigne' }
   let(:question) do
-    create(:question_clic_dans_image, description: 'Ceci est une description',
-                                      nom_technique: 'clic')
+    create(:question_sous_consigne, description: 'Ceci est une description',
+                                    nom_technique: 'clic')
   end
   let!(:intitule) do
     create(:transcription, :avec_audio, question_id: question.id, categorie: :intitule,
@@ -17,8 +19,6 @@ describe ImportExport::Questions::Export::QuestionSousConsigne do
                                         categorie: :modalite_reponse,
                                         ecrit: 'Ceci est une consigne')
   end
-
-  include_context 'export'
 
   it 'génére un fichier xls avec les entêtes sur chaque colonnes' do
     expect(spreadsheet.worksheets.count).to eq(1)
@@ -31,14 +31,10 @@ describe ImportExport::Questions::Export::QuestionSousConsigne do
 
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
-    expect(ligne[0]).to eq('Question clic dans image')
+    expect(ligne[0]).to eq('Question sous consigne')
     expect(ligne[1]).to eq('clic')
     expect(ligne[2]).to be_nil
     expect(ligne[3]).to eq('Ceci est un intitulé')
     expect(ligne[4]).to eq(intitule.audio_url)
-    expect(ligne[5]).to eq('Ceci est une consigne')
-    expect(ligne[6]).to eq(consigne.audio_url)
-    expect(ligne[7]).to eq('Ceci est une description')
-    expect(ligne[8]).to eq(question.texte_sur_illustration)
   end
 end

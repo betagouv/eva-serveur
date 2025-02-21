@@ -21,6 +21,7 @@ panel 'Détails de la question' do
     row :audio_intitule do
       tag_audio(intitule)
     end
+    row :demarrage_audio_modalite_reponse
     consigne = resource.transcription_modalite_reponse
     row :consigne do
       div consigne.ecrit if consigne&.ecrit

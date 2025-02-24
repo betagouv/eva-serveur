@@ -1,4 +1,7 @@
 window.addEventListener('load', () => {
+  let body_connecte = document.querySelector("body.logged_in")
+  if(!body_connecte) return;
+
   const skiplinks = document.createElement('div');
   skiplinks.className = 'fr-skiplinks';
   skiplinks.id = 'skiplink';
@@ -11,5 +14,5 @@ window.addEventListener('load', () => {
       </ul>
     </nav>
   `;
-  document.body.insertBefore(skiplinks, document.body.firstChild);
+  body_connecte.insertBefore(skiplinks, body_connecte.firstChild);
 });

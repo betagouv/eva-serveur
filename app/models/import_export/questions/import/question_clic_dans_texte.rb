@@ -10,8 +10,9 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques(col_debut)
-          @question.update!(texte_sur_illustration: @row[col_debut + 1])
+        def update_champs_specifiques(question, col)
+          col = initialise_modalite_reponse(question, col)
+          question.update!(texte_sur_illustration: @row[col + 1])
         end
       end
     end

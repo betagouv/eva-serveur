@@ -10,10 +10,11 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques(col_debut)
-          attache_fichier(@question.zone_cliquable, @row[col_debut += 1],
+        def update_champs_specifiques(question, col)
+          col = initialise_modalite_reponse(question, col)
+          attache_fichier(question.zone_cliquable, @row[col += 1],
                           "#{@row[1]}_zone_cliquable")
-          attache_fichier(@question.image_au_clic, @row[col_debut + 1], "#{@row[1]}_image_au_clic")
+          attache_fichier(question.image_au_clic, @row[col + 1], "#{@row[1]}_image_au_clic")
         end
       end
     end

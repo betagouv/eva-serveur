@@ -7,10 +7,6 @@ module ImportExport
         def initialize(headers_attendus)
           super('QuestionSousConsigne', headers_attendus)
         end
-
-        private
-
-        def update_champs_specifiques(col_debut); end
       end
     end
   end

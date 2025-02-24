@@ -8,18 +8,19 @@ module ImportExport
       HEADERS_GLISSER_DEPOSER = %i[zone_depot orientation].freeze
       HEADERS_QCM = %i[type_qcm].freeze
       HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie texte_a_trous].freeze
-      HEADERS_SOUS_CONSIGNE = %i[libelle nom_technique illustration intitule_ecrit
-                                 intitule_audio].freeze
-      HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio
-                          consigne_ecrit consigne_audio description
-                          demarrage_audio_modalite_reponse].freeze
+      HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio].freeze
+      HEADERS_MODALITE_REPONSE = %i[consigne_ecrit consigne_audio description
+                                    demarrage_audio_modalite_reponse].freeze
       HEADERS_ATTENDUS = {
-        QuestionClicDansImage::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_IMAGE,
-        QuestionClicDansTexte::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_CLIC_DANS_TEXTE,
-        QuestionGlisserDeposer::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_GLISSER_DEPOSER,
-        QuestionQcm::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_QCM,
-        QuestionSaisie::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_SAISIE,
-        QuestionSousConsigne::QUESTION_TYPE => HEADERS_SOUS_CONSIGNE
+        QuestionClicDansImage::QUESTION_TYPE =>
+          HEADERS_COMMUN + HEADERS_MODALITE_REPONSE + HEADERS_CLIC_DANS_IMAGE,
+        QuestionClicDansTexte::QUESTION_TYPE =>
+          HEADERS_COMMUN + HEADERS_MODALITE_REPONSE + HEADERS_CLIC_DANS_TEXTE,
+        QuestionGlisserDeposer::QUESTION_TYPE =>
+          HEADERS_COMMUN + HEADERS_MODALITE_REPONSE + HEADERS_GLISSER_DEPOSER,
+        QuestionQcm::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_MODALITE_REPONSE + HEADERS_QCM,
+        QuestionSaisie::QUESTION_TYPE => HEADERS_COMMUN + HEADERS_MODALITE_REPONSE + HEADERS_SAISIE,
+        QuestionSousConsigne::QUESTION_TYPE => HEADERS_COMMUN
       }.freeze
       IMPORTEURS = {
         QuestionClicDansImage::QUESTION_TYPE => Import::QuestionClicDansImage,

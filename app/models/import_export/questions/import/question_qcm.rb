@@ -10,15 +10,17 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques(col_debut)
-          @question.update!(type_qcm: @row[col_debut + 1])
+        def update_champs_specifiques(question, col)
+          col = initialise_modalite_reponse(question, col)
+          question.update!(type_qcm: @row[col + 1])
           cree_reponses('choix') do |data|
-            cree_choix(data)
+            cree_choix(question, data)
           end
         end
 
-        def cree_choix(data)
+        def cree_choix(question, data)
           choix = cree_reponse_generique(
+            question_id: question.id,
             intitule: data['intitule'],
             nom_technique: data['nom_technique'],
             type_choix: data['type_choix']

@@ -24,7 +24,7 @@ module ImportExport
 
           begin
             @row = row
-            cree_question
+            cree_ou_actualise_question
           rescue ActiveRecord::RecordInvalid => e
             errors << message_erreur_validation(e, index)
           end
@@ -37,35 +37,38 @@ module ImportExport
                message: exception.record.errors.full_messages.to_sentence)
       end
 
-      def cree_question
+      def cree_ou_actualise_question
         ActiveRecord::Base.transaction do
-          intialise_question
-          cree_transcription(:intitule, @row[4], @row[3], "#{@row[1]}_intitule")
-          unless @question.sous_consigne?
-            cree_transcription(:modalite_reponse, @row[6], @row[5],
-                               "#{@row[1]}_modalite_reponse")
-          end
-          update_champs_specifiques(ImportExportDonnees::HEADERS_COMMUN.size - 1)
-          @question
+          col = 0
+          question = @type.constantize.find_or_create_by(nom_technique: @row[col += 1])
+          actualise_libelle(question)
+          attache_fichier(question.illustration, @row[col += 1], "#{@row[1]}_illustration")
+          cree_transcription(question.id, :intitule, @row[col += 1], @row[col += 1],
+                             "#{@row[1]}_intitule")
+          update_champs_specifiques(question, col)
         end
       end
 
-      def intialise_question
-        @question = @type.constantize.find_or_create_by(nom_technique: @row[1])
-        @question.assign_attributes(libelle: @row[0], description: @row[7],
-                                    demarrage_audio_modalite_reponse: @row[8])
-        attache_fichier(@question.illustration, @row[2], "#{@row[1]}_illustration")
-        @question.save!
+      def actualise_libelle(question)
+        question.update!(libelle: @row[0])
       end
 
-      def cree_transcription(categorie, audio_url, ecrit, nom_technique)
-        t = Transcription.where(question_id: @question.id, categorie: categorie).first_or_initialize
+      def initialise_modalite_reponse(question, col)
+        cree_transcription(question.id, :modalite_reponse, @row[col += 1], @row[col += 1],
+                           "#{@row[1]}_modalite_reponse")
+        question.update!(description: @row[col += 1],
+                         demarrage_audio_modalite_reponse: @row[col += 1])
+        col
+      end
+
+      def cree_transcription(question_id, categorie, ecrit, audio_url, nom_technique)
+        t = Transcription.where(question_id: question_id, categorie: categorie).first_or_initialize
         t.assign_attributes(ecrit: ecrit)
         t.save!
         attache_fichier(t.audio, audio_url, nom_technique)
       end
 
-      def update_champs_specifiques; end
+      def update_champs_specifiques(question, col); end
 
       def cree_reponses(type)
         extrait_colonnes_reponses(type).each_value do |data|
@@ -75,9 +78,10 @@ module ImportExport
         end
       end
 
-      def cree_reponse_generique(intitule:, nom_technique:, type_choix:, position_client: nil)
+      def cree_reponse_generique(question_id:, intitule:, nom_technique:, type_choix:,
+                                 position_client: nil)
         choix = Choix.where(nom_technique: nom_technique).first_or_initialize
-        choix.assign_attributes(intitule: intitule, question_id: @question.id,
+        choix.assign_attributes(intitule: intitule, question_id: question_id,
                                 type_choix: type_choix, position_client: position_client)
         choix.save!
         choix

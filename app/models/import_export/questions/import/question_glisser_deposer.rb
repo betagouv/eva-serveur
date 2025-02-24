@@ -10,16 +10,18 @@ module ImportExport
 
         private
 
-        def update_champs_specifiques(col_debut)
-          attache_fichier(@question.zone_depot, @row[col_debut += 1], "#{@row[1]}_zone_depot")
-          @question.update!(orientation: @row[col_debut + 1])
+        def update_champs_specifiques(question, col)
+          col = initialise_modalite_reponse(question, col)
+          attache_fichier(question.zone_depot, @row[col += 1], "#{@row[1]}_zone_depot")
+          question.update!(orientation: @row[col + 1])
           cree_reponses('reponse') do |data|
-            cree_reponse(data)
+            cree_reponse(question.id, data)
           end
         end
 
-        def cree_reponse(data)
+        def cree_reponse(question_id, data)
           reponse = cree_reponse_generique(
+            question_id: question_id,
             intitule: nil,
             nom_technique: data['nom_technique'],
             type_choix: data['type_choix'],

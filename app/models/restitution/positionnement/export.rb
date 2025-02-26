@@ -2,7 +2,7 @@
 
 module Restitution
   module Positionnement
-    class Export < ::ImportExport::ExportXls # rubocop:disable Metrics/ClassLength
+    class Export < ::ImportExport::ExportXls
       def initialize(partie:)
         super()
         @partie = partie
@@ -11,8 +11,7 @@ module Restitution
 
       def to_xls
         defini_onglets_du_fichier
-        remplie_la_feuille_de_donnee
-        remplie_la_feuille_de_synthese if @partie.situation.numeratie?
+        remplie_les_onglets
         retourne_le_contenu_du_xls
       end
 
@@ -35,38 +34,13 @@ module Restitution
         @onglet_donnees = @export.cree_worksheet_donnees(entetes_donnees)
       end
 
-      def remplie_la_feuille_de_donnee
-        ligne = 1
+      def remplie_les_onglets
         if @partie.situation.litteratie?
-          ligne = remplis_reponses_litteratie(ligne)
+          ExportLitteratie.new(@partie, @onglet_donnees).remplis_reponses(1)
         elsif @partie.situation.numeratie?
-          ligne = remplis_reponses_numeratie(ligne)
+          ExportNumeratie.new(@partie, @onglet_donnees).remplis_reponses(1)
+          remplie_la_feuille_de_synthese
         end
-        ligne
-      end
-
-      def remplis_reponses_litteratie(ligne)
-        export = ExportLitteratie.new(@partie, @onglet_donnees)
-        export.remplis_reponses(ligne)
-      end
-
-      def remplis_reponses_numeratie(ligne)
-        export = ExportNumeratie.new(@partie, @onglet_donnees)
-        export.regroupe_par_codes_clea.each do |code, sous_codes|
-          ligne = remplis_par_sous_domaine(ligne, code, sous_codes, export)
-        end
-        ligne
-      end
-
-      def remplis_par_sous_domaine(ligne, _code, sous_codes, export)
-        sous_codes.each do |sous_code, evenements_questions|
-          ligne = remplis_par_sous_sous_domaine(ligne, sous_code, evenements_questions, export)
-        end
-        ligne
-      end
-
-      def remplis_par_sous_sous_domaine(ligne, _sous_code, evenements_questions, export)
-        export.remplis_reponses(ligne, evenements_questions)
       end
 
       def remplie_la_feuille_de_synthese

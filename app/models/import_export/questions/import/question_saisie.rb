@@ -3,20 +3,20 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionSaisie < ImportExport::Questions::Import
+      class QuestionSaisie < ImportExport::Questions::Import::QuestionAvecModaliteReponse
         def initialize(headers_attendus)
           super('QuestionSaisie', headers_attendus)
         end
 
         private
 
-        def update_champs_specifiques(question, col)
-          col = initialise_modalite_reponse(question, col)
-          question.update!(suffix_reponse: @row[col += 1],
-                           reponse_placeholder: @row[col += 1],
-                           type_saisie: @row[col += 1],
-                           texte_a_trous: @row[col + 1])
-          cree_reponses('reponse') do |data|
+        def cree_ou_actualise_question(cellules)
+          question = super
+          question.update!(suffix_reponse: cellules.suivant,
+                           reponse_placeholder: cellules.suivant,
+                           type_saisie: cellules.suivant,
+                           texte_a_trous: cellules.suivant)
+          cree_reponses('reponse', cellules) do |data|
             cree_reponse_saisie(question.id, data)
           end
         end

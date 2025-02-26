@@ -3,18 +3,18 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionGlisserDeposer < ImportExport::Questions::Import
+      class QuestionGlisserDeposer < ImportExport::Questions::Import::QuestionAvecModaliteReponse
         def initialize(headers_attendus)
           super('QuestionGlisserDeposer', headers_attendus)
         end
 
         private
 
-        def update_champs_specifiques(question, col)
-          col = initialise_modalite_reponse(question, col)
-          attache_fichier(question.zone_depot, @row[col += 1], "#{@row[1]}_zone_depot")
-          question.update!(orientation: @row[col + 1])
-          cree_reponses('reponse') do |data|
+        def cree_ou_actualise_question(cellules)
+          question = super
+          attache_fichier(question.zone_depot, cellules.suivant, "#{cellules.cell(1)}_zone_depot")
+          question.update!(orientation: cellules.suivant)
+          cree_reponses('reponse', cellules) do |data|
             cree_reponse(question.id, data)
           end
         end

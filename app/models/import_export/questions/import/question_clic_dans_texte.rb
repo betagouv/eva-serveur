@@ -3,16 +3,16 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionClicDansTexte < ImportExport::Questions::Import
+      class QuestionClicDansTexte < ImportExport::Questions::Import::QuestionAvecModaliteReponse
         def initialize(headers_attendus)
           super('QuestionClicDansTexte', headers_attendus)
         end
 
         private
 
-        def update_champs_specifiques(question, col)
-          col = initialise_modalite_reponse(question, col)
-          question.update!(texte_sur_illustration: @row[col + 1])
+        def cree_ou_actualise_question(cellules)
+          question = super
+          question.update!(texte_sur_illustration: cellules.suivant)
         end
       end
     end

@@ -12,19 +12,19 @@ module ImportExport
       def import_from_xls(file)
         recupere_data(file)
         valide_headers
-        errors = process_rows(@data)
+        errors = importe_ligne(@data)
         raise Import::Error, errors.join("\n") if errors.any?
       end
 
       private
 
-      def process_rows(data)
-        data.each_with_index.with_object([]) do |(row, index), errors|
-          next if row.compact.empty?
+      def importe_ligne(data)
+        data.each_with_index.with_object([]) do |(ligne, index), errors|
+          next if ligne.compact.empty?
 
           begin
-            @row = row
-            cree_ou_actualise_question
+            cellules = IterateurCellules.new(ligne)
+            ActiveRecord::Base.transaction { cree_ou_actualise_question(cellules) }
           rescue ActiveRecord::RecordInvalid => e
             errors << message_erreur_validation(e, index)
           end
@@ -37,28 +37,18 @@ module ImportExport
                message: exception.record.errors.full_messages.to_sentence)
       end
 
-      def cree_ou_actualise_question
-        ActiveRecord::Base.transaction do
-          col = 0
-          question = @type.constantize.find_or_create_by(nom_technique: @row[col += 1])
-          actualise_libelle(question)
-          attache_fichier(question.illustration, @row[col += 1], "#{@row[1]}_illustration")
-          cree_transcription(question.id, :intitule, @row[col += 1], @row[col += 1],
-                             "#{@row[1]}_intitule")
-          update_champs_specifiques(question, col)
-        end
+      def cree_ou_actualise_question(cellules)
+        cellules.suivant # saute la première colonne
+        question = @type.constantize.find_or_create_by(nom_technique: cellules.suivant)
+        actualise_libelle(question, cellules)
+        attache_fichier(question.illustration, cellules.suivant, "#{cellules.cell(1)}_illustration")
+        cree_transcription(question.id, :intitule, cellules.suivant, cellules.suivant,
+                           "#{cellules.cell(1)}_intitule")
+        question
       end
 
-      def actualise_libelle(question)
-        question.update!(libelle: @row[0])
-      end
-
-      def initialise_modalite_reponse(question, col)
-        cree_transcription(question.id, :modalite_reponse, @row[col += 1], @row[col += 1],
-                           "#{@row[1]}_modalite_reponse")
-        question.update!(description: @row[col += 1],
-                         demarrage_audio_modalite_reponse: @row[col += 1])
-        col
+      def actualise_libelle(question, cellules)
+        question.update!(libelle: cellules.cell(0))
       end
 
       def cree_transcription(question_id, categorie, ecrit, audio_url, nom_technique)
@@ -70,8 +60,8 @@ module ImportExport
 
       def update_champs_specifiques(question, col); end
 
-      def cree_reponses(type)
-        extrait_colonnes_reponses(type).each_value do |data|
+      def cree_reponses(type, cellules)
+        extrait_colonnes_reponses(type, cellules).each_value do |data|
           next if data.values.all?(&:nil?) ## si une ligne de réponse est vide on la saute
 
           yield(data)
@@ -87,13 +77,13 @@ module ImportExport
         choix
       end
 
-      def extrait_colonnes_reponses(type)
+      def extrait_colonnes_reponses(type, cellules)
         @headers.each_with_index.with_object({}) do |(header, index), headers_data|
           next unless (match = header.to_s.match(/#{type}_(\d+)_(.*)/))
 
           item, data_type = match.captures
           headers_data[item.to_i] ||= {}
-          headers_data[item.to_i][data_type] = @row[index]
+          headers_data[item.to_i][data_type] = cellules.cell(index)
         end
       end
     end

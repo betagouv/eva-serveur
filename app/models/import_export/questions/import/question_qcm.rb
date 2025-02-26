@@ -3,17 +3,17 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionQcm < ImportExport::Questions::Import
+      class QuestionQcm < ImportExport::Questions::Import::QuestionAvecModaliteReponse
         def initialize(headers_attendus)
           super('QuestionQcm', headers_attendus)
         end
 
         private
 
-        def update_champs_specifiques(question, col)
-          col = initialise_modalite_reponse(question, col)
-          question.update!(type_qcm: @row[col + 1])
-          cree_reponses('choix') do |data|
+        def cree_ou_actualise_question(cellules)
+          question = super
+          question.update!(type_qcm: cellules.suivant)
+          cree_reponses('choix', cellules) do |data|
             cree_choix(question, data)
           end
         end

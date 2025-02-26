@@ -3,11 +3,7 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionSousConsigne < ImportExport::Questions::Export
-        private
-
-        def remplis_champs_specifiques(col); end
-      end
+      class QuestionSousConsigne < ImportExport::Questions::Export; end
     end
   end
 end

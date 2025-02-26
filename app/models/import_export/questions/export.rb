@@ -28,31 +28,19 @@ module ImportExport
         @questions.each_with_index do |question, index|
           @question = question
           @ligne = index + 1
-          remplis_champs_commun
+          remplis_champs
         end
       end
 
-      def remplis_champs_commun
+      def remplis_champs
         col = -1
         @onglet.set_valeur(@ligne, col += 1, @question.libelle)
         @onglet.set_valeur(@ligne, col += 1, @question.nom_technique)
         @onglet.set_valeur(@ligne, col += 1, @question.illustration_url(variant: nil))
         @onglet.set_valeur(@ligne, col += 1, @question.transcription_intitule&.ecrit)
         @onglet.set_valeur(@ligne, col += 1, @question.transcription_intitule&.audio_url)
-        remplis_champs_additionnels(col)
+        col
       end
-
-      def remplis_champs_additionnels(col)
-        return if @question.sous_consigne?
-
-        @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.ecrit)
-        @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.audio_url)
-        @onglet.set_valeur(@ligne, col += 1, @question.description)
-        @onglet.set_valeur(@ligne, col += 1, @question.demarrage_audio_modalite_reponse)
-        remplis_champs_specifiques(col)
-      end
-
-      def remplis_champs_specifiques(col); end
     end
   end
 end

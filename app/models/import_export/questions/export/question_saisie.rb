@@ -3,10 +3,11 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionSaisie < ImportExport::Questions::Export
+      class QuestionSaisie < ImportExport::Questions::Export::QuestionAvecModaliteReponse
         private
 
-        def remplis_champs_specifiques(col)
+        def remplis_champs
+          col = super
           @onglet.set_valeur(@ligne, col += 1, @question.suffix_reponse)
           @onglet.set_valeur(@ligne, col += 1, @question.reponse_placeholder)
           @onglet.set_valeur(@ligne, col += 1, @question.type_saisie)

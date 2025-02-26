@@ -3,10 +3,11 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionQcm < ImportExport::Questions::Export
+      class QuestionQcm < ImportExport::Questions::Export::QuestionAvecModaliteReponse
         private
 
-        def remplis_champs_specifiques(col)
+        def remplis_champs
+          col = super
           @onglet.set_valeur(@ligne, col += 1, @question.type_qcm)
           @question.choix.each_with_index do |choix, index|
             ajoute_choix(choix, index, col + 1)

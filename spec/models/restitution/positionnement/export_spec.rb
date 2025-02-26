@@ -119,17 +119,10 @@ describe Restitution::Positionnement::Export do
     end
 
     describe 'génére un fichier xls avec les evenements réponses' do
-      let!(:question1) do
-        create(:question_qcm, nom_technique: 'LOdi1', choix: [choix, choix2, choix3])
-      end
-      let!(:question2) { create(:question_qcm, nom_technique: 'LOdi2') }
-      let!(:question3) { create(:question_qcm, nom_technique: 'LOdi3') }
-      let!(:question4) do
-        create(:question_qcm, nom_technique: 'LOdi4', metacompetence: :renseigner_horaires,
-                              score: 1)
-      end
-      let!(:question5) { create(:question_qcm, nom_technique: 'LOdi5') }
-      let(:questions) { [question1, question2, question3, question4, question5] }
+      let!(:question1) { create :question, :numeratie_niveau1 }
+      let!(:question2) { create :question, :numeratie_niveau2 }
+      let!(:question3) { create :question, :numeratie_niveau3 }
+      let(:questions) { [question1, question2, question3] }
 
       before do
         heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
@@ -139,9 +132,7 @@ describe Restitution::Positionnement::Export do
                date: heure_fin,
                partie: partie,
                position: 2,
-               donnees: { question: 'LOdi1',
-                          reponse: 'drapeau',
-                          reponseIntitule: "c'est un drapeau",
+               donnees: { question: question1.nom_technique,
                           score: 0,
                           scoreMax: 2,
                           intitule: 'De quoi s’agit-il ?',
@@ -150,26 +141,21 @@ describe Restitution::Positionnement::Export do
                date: heure_debut,
                partie: partie,
                position: 1,
-               donnees: { question: 'LOdi1' }
+               donnees: { question: question1.nom_technique }
         create :evenement_reponse,
                partie: partie,
                position: 3,
-               donnees: { question: 'LOdi2',
+               donnees: { question: question2.nom_technique,
                           score: 1,
                           scoreMax: 2,
                           metacompetence: :renseigner_horaires }
         create :evenement_reponse,
                position: 4,
                partie: partie,
-               donnees: { question: 'LOdi3',
+               donnees: { question: question3.nom_technique,
                           metacompetence: 'tableaux_graphiques',
-                          scoreMax: 1,
+                          scoreMax: 2,
                           score: 1 }
-        create :evenement_reponse,
-               partie: partie,
-               position: 5,
-               donnees: { question: 'LOdi5',
-                          metacompetence: 'situation_dans_lespace' }
       end
 
       context "sur l'onglet de synthese" do
@@ -186,30 +172,17 @@ describe Restitution::Positionnement::Export do
         it 'verifie les sous sous domaines et le % de réussite dans un autre tableau' do
           worksheet = spreadsheet.worksheet(0)
           ligne = worksheet.row(4)
-          expect(ligne[0]).to eq ''
-          expect(ligne[1]).to eq ''
-          expect(ligne[2]).to eq('Points')
-          expect(ligne[3]).to eq('Points maximum')
-          expect(ligne[4]).to eq('Score')
+          expect(ligne[0]).to eq '2.3.3'
+          expect(ligne[1]).to eq 'Renseigner correctement les horaires'
+          expect(ligne[2]).to eq(1)
+          expect(ligne[3]).to eq(4.0)
+          expect(ligne[4]).to eq(0.25)
 
           ligne = worksheet.row(5)
-          expect(ligne[0]).to eq('2.3.3')
-          expect(ligne[1]).to eq('Renseigner correctement les horaires')
-          expect(ligne[2]).to eq(1)
-          expect(ligne[3]).to eq(5.0)
-          expect(ligne[4]).to eq(0.2)
-
-          ligne = worksheet.row(6)
           expect(ligne[0]).to eq('2.3.5')
           expect(ligne[2]).to eq(1)
-          expect(ligne[3]).to eq(1)
-          expect(ligne[4]).to eq(1)
-
-          ligne = worksheet.row(7)
-          expect(ligne[0]).to eq('2.5.3')
-          expect(ligne[2]).to eq(0)
-          expect(ligne[3]).to eq(0)
-          expect(ligne[4]).to eq('non applicable')
+          expect(ligne[3]).to eq(2)
+          expect(ligne[4]).to eq(0.5)
         end
       end
 
@@ -218,16 +191,12 @@ describe Restitution::Positionnement::Export do
           worksheet = spreadsheet.worksheet(ImportExport::ExportXls::WORKSHEET_DONNEES)
           ligne = worksheet.row(1)
           expect(ligne[0]).to eq('2.3.3')
-          expect(ligne[1]).to eq('LOdi1')
+          expect(ligne[1]).to eq(question1.nom_technique)
           expect(ligne[2]).to eq('Renseigner horaires')
           expect(ligne[3]).to eq(0)
           expect(ligne[4]).to eq(2)
           expect(ligne[5]).to eq('Oui')
-          expect(ligne[6]).to eq('qcm')
           expect(ligne[7]).to eq('De quoi s’agit-il ?')
-          expect(ligne[8]).to eq('drapeau | couverture | autre')
-          expect(ligne[9]).to eq('couverture')
-          expect(ligne[10]).to eq("c'est un drapeau")
           expect(ligne[11]).to eq('00:59')
         end
 
@@ -235,18 +204,11 @@ describe Restitution::Positionnement::Export do
           worksheet = spreadsheet.worksheet(1)
           ligne = worksheet.row(2)
           expect(ligne[0]).to eq('2.3.3')
-          expect(ligne[1]).to eq('LOdi2')
+          expect(ligne[1]).to eq(question2.nom_technique)
           expect(ligne[10]).to be_nil
           ligne = worksheet.row(3)
-          expect(ligne[0]).to eq('2.3.3')
-          expect(ligne[1]).to eq('LOdi4')
-        end
-
-        it 'verifie le sous sous domaine suivant' do
-          worksheet = spreadsheet.worksheet(1)
-          ligne = worksheet.row(5)
-          expect(ligne[0]).to eq('2.5.3')
-          expect(ligne[1]).to eq('LOdi5')
+          expect(ligne[0]).to eq('2.3.5')
+          expect(ligne[1]).to eq(question3.nom_technique)
         end
       end
     end

@@ -3,31 +3,44 @@
 module Restitution
   module Positionnement
     class ExportNumeratie # rubocop:disable Metrics/ClassLength
-      def initialize(partie, onglet_xls) # rubocop:disable all
-        super()
-        @partie = partie
-        @evenements_reponses = Evenement.where(session_id: @partie.session_id).reponses
-        @questions_repondues =
-          Question.where(nom_technique: @evenements_reponses.map(&:question_nom_technique).uniq)
-        @questions_situation = @partie.situation.questionnaire&.questions || []
-
-        @questions_situation = @questions_situation.to_a.reject do |question|
-          question.type == QuestionSousConsigne::QUESTION_TYPE
-        end
-
+      def initialize(partie, onglet_xls)
         @onglet_xls = onglet_xls
+
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
-                              .new(@partie.evenements).calculer
+                              .new(partie.evenements).calculer
 
-        @evenements_questions = @questions_situation.map do |question_situation|
-          evenement = @evenements_reponses.find do |e|
-            e.question_nom_technique == question_situation.nom_technique
-          end
-          EvenementQuestion.new(question: question_situation, evenement: evenement)
-        end
-
+        @evenements_questions = evenements_questions(partie)
         @evenements_questions_a_prendre_en_compte =
           EvenementQuestion.prises_en_compte_pour_calcul_score_clea(@evenements_questions)
+      end
+
+      def evenements_questions(partie)
+        evenements_reponses = Evenement.where(session_id: partie.session_id).reponses
+        questions_situation = partie.situation.questionnaire&.questions || []
+        questions_situation_repondables = questions_situation.to_a.reject do |question|
+          question.type == QuestionSousConsigne::QUESTION_TYPE
+        end
+        questions_situation_repondables.map do |question|
+          reponse = reponse_de_la_question(evenements_reponses, question.nom_technique)
+          EvenementQuestion.new(question: question, evenement: reponse)
+        end
+      end
+
+      def reponse_de_la_question(evenements_reponses, nom_technique)
+        evenements_reponses.find { |e| e.question_nom_technique == nom_technique }
+      end
+
+      def remplis_reponses(ligne)
+        regroupe_par_codes_clea.each_value do |sous_codes|
+          ligne = remplis_par_sous_domaine(ligne, sous_codes)
+        end
+      end
+
+      def remplis_par_sous_domaine(ligne, sous_codes)
+        sous_codes.each_value do |evenements_questions|
+          ligne = remplis_reponses_sous_sous_domaine(ligne, evenements_questions)
+        end
+        ligne
       end
 
       def regroupe_par_codes_clea
@@ -45,7 +58,7 @@ module Restitution
         valeurs_communes(ligne, sous_code, evenements_questions)
       end
 
-      def remplis_reponses(ligne, evenements_questions)
+      def remplis_reponses_sous_sous_domaine(ligne, evenements_questions)
         evenements_questions.each do |evenement_question|
           ligne = remplis_ligne(ligne, evenement_question)
         end

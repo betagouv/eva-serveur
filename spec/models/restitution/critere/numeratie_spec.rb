@@ -69,7 +69,7 @@ describe Restitution::Critere::Numeratie do
 
     context 'quand le critère n\'a pas de test proposé' do
       let(:critere) do
-        described_class.new attributes.merge(nombre_tests_proposes_max: 0)
+        described_class.new attributes.merge(code_clea: '2.1.5')
       end
 
       it { expect(critere.resultat).to eq(:pas_de_test) }

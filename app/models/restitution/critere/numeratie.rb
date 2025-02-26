@@ -15,6 +15,8 @@ module Restitution
         '2.5': 66
       }.freeze
 
+      CODE_CLEA_SANS_TEST = %w[2.1.5 2.1.6 2.3.6 2.5.1 2.5.2].freeze
+
       attribute :libelle, :string
       attribute :code_clea, :string
       attribute :nombre_tests_proposes, :integer
@@ -30,7 +32,7 @@ module Restitution
       end
 
       def resultat
-        return :pas_de_test if nombre_tests_proposes_max.zero?
+        return :pas_de_test if CODE_CLEA_SANS_TEST.include?(code_clea)
         return :non_evalue if nombre_tests_proposes.zero?
 
         acquis? ? :acquis : :non_acquis

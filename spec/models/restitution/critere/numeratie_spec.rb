@@ -74,5 +74,15 @@ describe Restitution::Critere::Numeratie do
 
       it { expect(critere.resultat).to eq(:pas_de_test) }
     end
+
+    context 'quand le critère a un test proposé' do
+      let(:nombre_tests) { 3 }
+      let(:pourcentage) { 50 }
+      let(:critere) do
+        described_class.new attributes.merge(code_clea: '2.1.7')
+      end
+
+      it { expect(critere.resultat).not_to eq(:pas_de_test) }
+    end
   end
 end

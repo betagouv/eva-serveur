@@ -62,16 +62,16 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation pre prositionnement' do
-    let(:interpreteur_pre_positionnement) { double }
+    let(:interpreteur_diagnostique) { double }
     let(:subject) do
-      Restitution::Illettrisme::Synthetiseur::SynthetiseurPrePositionnement
-        .new interpreteur_pre_positionnement
+      Restitution::Illettrisme::Synthetiseur::SynthetiseurDiagnostique
+        .new interpreteur_diagnostique
     end
 
     describe '#socle_clea?' do
       context 'Socle Cléa Atteint' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :B1, numeratie: :Y1 })
         end
 
@@ -80,7 +80,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'Socle Cléa Atteint non atteint, litteratie insufisante' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :A2, numeratie: :Y1 })
         end
 
@@ -89,7 +89,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'Socle Cléa Atteint non atteint, numeratie insufisante' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :B1, numeratie: :X2 })
         end
 
@@ -100,7 +100,7 @@ describe Restitution::Illettrisme::Synthetiseur do
     describe '#illettrisme_potentiel?' do
       context "pas d'illettrisme potentiel" do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :A1, numeratie: :X1 })
         end
 
@@ -111,7 +111,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'à cause de la litteratie' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :pre_A1, numeratie: :X1 })
         end
 
@@ -120,7 +120,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'à cause de la numératie' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :A1, numeratie: :pre_X1 })
         end
 
@@ -131,7 +131,7 @@ describe Restitution::Illettrisme::Synthetiseur do
     describe '#indetermine?' do
       context 'litteratie est présente' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: :A1, numeratie: nil })
         end
 
@@ -140,7 +140,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'numératie est présente' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: nil, numeratie: :X1 })
         end
 
@@ -149,7 +149,7 @@ describe Restitution::Illettrisme::Synthetiseur do
 
       context 'evaluation vide' do
         before do
-          allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr)
+          allow(interpreteur_diagnostique).to receive(:interpretations_cefr)
             .and_return({ litteratie: nil, numeratie: nil })
         end
 
@@ -159,9 +159,9 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation pré-positionnement' do
-    let(:interpreteur_pre_positionnement) { double }
+    let(:interpreteur_diagnostique) { double }
     let(:subject) do
-      described_class.new interpreteur_pre_positionnement, nil, nil
+      described_class.new interpreteur_diagnostique, nil, nil
     end
 
     describe '#positionnement_litteratie' do
@@ -223,9 +223,9 @@ describe Restitution::Illettrisme::Synthetiseur do
 
   context 'quand il y a un positionnement et un pré-positionnement' do
     let(:interpreteur_positionnement) { double }
-    let(:interpreteur_pre_positionnement) { double }
+    let(:interpreteur_diagnostique) { double }
     let(:subject) do
-      described_class.new interpreteur_pre_positionnement,
+      described_class.new interpreteur_diagnostique,
                           interpreteur_positionnement, nil
     end
 
@@ -235,7 +235,7 @@ describe Restitution::Illettrisme::Synthetiseur do
           niveau_litteratie: :profil_aberrant
         }
       )
-      allow(interpreteur_pre_positionnement).to receive(:interpretations_cefr).and_return(
+      allow(interpreteur_diagnostique).to receive(:interpretations_cefr).and_return(
         {
           litteratie: nil, numeratie: nil
         }

@@ -36,9 +36,11 @@ div class: 'nouvelle-campagne' do
                 md t('.explication_choix_programme')
               end
 
-              %w[pre_positionnement positionnement].each do |type_programme|
-                classes_type_programme = type_programme.gsub('_', '-')
-                classes_type_programme += ' hidden' if f.object.type_programme != type_programme
+              ParcoursType::TYPES_DE_PROGRAMME.each do |type_programme|
+                classes_type_programme = type_programme.to_s
+                if f.object.type_programme != type_programme.to_s
+                  classes_type_programme += ' hidden'
+                end
                 div class: classes_type_programme do
                   f.inputs class: 'input-choix input-choix-option-parcours-type' do
                     collection = collection_parcours_type(parcours_type.send(type_programme))

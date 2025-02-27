@@ -11,7 +11,7 @@ fr:
         duree_moyenne: Durée moyenne
         type_de_programme: Type de programme
         types_de_programme:
-          pre_positionnement: Pré-positionnement
+          diagnostique : Diagnostique
           positionnement: Positionnement
         created_at: créé le
         updated_at: Mis à jour le

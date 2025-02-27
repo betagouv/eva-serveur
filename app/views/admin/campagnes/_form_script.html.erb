@@ -1,13 +1,13 @@
 <script>
-function affichePrePositionnement() {
+function afficheDiagnostique() {
   $('.positionnement').addClass('hidden');
-  $prepositionnement = $('.pre-positionnement');
-  $prepositionnement.removeClass('hidden');
-  $prepositionnement.find('.choix-item:first').trigger('focus');
+  $diagnostique = $('.diagnostique');
+  $diagnostique.removeClass('hidden');
+  $diagnostique.find('.choix-item:first').trigger('focus');
 }
 
 function affichePositionnement() {
-  $('.pre-positionnement').addClass('hidden');
+  $('.diagnostique').addClass('hidden');
   $positionnement = $('.positionnement');
   $positionnement.removeClass('hidden');
   $positionnement.find('.choix-item:first').trigger('focus');
@@ -29,8 +29,8 @@ function afficheZone(choix_selection, zoneAAfficher) {
     case "campagne_type_programme_positionnement":
       affichePositionnement()
       break;
-    case "campagne_type_programme_pre_positionnement":
-      affichePrePositionnement()
+    case "campagne_type_programme_diagnostique":
+      afficheDiagnostique()
       break;
     <% ParcoursType.includes(:situations_configurations, situations_configurations: :situation).all.each do |parcours_type| %>
     case "campagne_parcours_type_id_<%= parcours_type.id%>":

@@ -2,7 +2,7 @@
 
 class ParcoursType < ApplicationRecord
   self.implicit_order_column = 'created_at'
-  TYPES_DE_PROGRAMME = %i[pre_positionnement positionnement].freeze
+  TYPES_DE_PROGRAMME = %i[diagnostique positionnement].freeze
 
   validates :libelle, :duree_moyenne, presence: true
   validates :nom_technique, presence: true, uniqueness: true

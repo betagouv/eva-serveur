@@ -17,22 +17,20 @@ fr:
         description: |
           Ce module propose aux bénéficiaires de décrire brièvement à l’écrit une scène quotidienne afin de permettre aux accompagnants d’évaluer leur niveau en expression écrite.
     input_type_programme:
-        pre_positionnement:
-          libelle: Pré-positionnement
-          icone: pin
+        diagnostique:
+          libelle: Diagnostique
           description: |
             Des parcours ludiques et rapides pour disposer d’une vue d’ensemble et valoriser les compétences maîtrisées.
             À proposer en début de parcours d’accompagnement.
 
-            N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
+            N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
         positionnement:
           libelle: Positionnement
-          icone: loupe
           description: |
             Des parcours adaptatifs pour un bilan approfondi de la maîtrise des compétences de base.
             À proposer lors du positionnement ou en début de formation.
 
-            N. B. : la restitution propose un détail des items réussis ou échoués.
+            N. B. : la restitution propose un détail des items réussis ou échoués.
     banniere_confirmation_email:
       renvoyer_email: Renvoyer l’email de confirmation
       modification_email:

@@ -56,7 +56,7 @@ module Admin
                                                          nombre_total_questions: 10,
                                                          nombre_questions_repondues: 1)]
     ].freeze
-    SOUS_COMPETENCES_PREPOSITIONNEMENT = [
+    SOUS_COMPETENCES_DIAGNOSTIQUE = [
       ['litteratie', :pre_A1],
       ['litteratie', :A1],
       ['litteratie', :A2],
@@ -68,15 +68,15 @@ module Admin
     ].freeze
 
     def index
-      @syntheses_pre_positionnement = syntheses_pre_positionnement
+      @syntheses_diagnostique = syntheses_diagnostique
       @syntheses_positionnement_litteratie = syntheses_positionnement_litteratie
       @syntheses_positionnement_numeratie = syntheses_positionnement_numeratie
-      @sous_competences_prepositionnement = SOUS_COMPETENCES_PREPOSITIONNEMENT
+      @sous_competences_diagnostique = SOUS_COMPETENCES_DIAGNOSTIQUE
       @sous_competences_positionnement_litteratie = SOUS_COMPETENCES_POSITIONNEMENT_LITTERATIE
       @sous_competences_positionnement_numeratie = SOUS_COMPETENCES_POSITIONNEMENT_NUMERATIE
     end
 
-    def syntheses_pre_positionnement
+    def syntheses_diagnostique
       [
         nil,
         'illettrisme_potentiel',

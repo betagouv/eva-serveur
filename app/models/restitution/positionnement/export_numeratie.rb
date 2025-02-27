@@ -16,7 +16,7 @@ module Restitution
 
       def evenements_questions(partie)
         evenements_reponses = Evenement.where(session_id: partie.session_id).reponses
-        questions_situation = partie.situation.questionnaire&.questions || []
+        questions_situation = partie.campagne.questionnaire_pour(partie.situation).questions
         questions_situation_repondables = questions_situation.to_a.reject do |question|
           question.type == QuestionSousConsigne::QUESTION_TYPE
         end

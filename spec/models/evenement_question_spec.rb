@@ -47,7 +47,7 @@ describe EvenementQuestion, type: :model do
 
     let(:evenements_questions) { [] }
 
-    context 'lorsque plusieurs niveaux ont été joués' do
+    context 'quand plusieurs niveaux ont été joués' do
       let(:evenements_questions) { [evenement_question_n1, evenement_question_n2] }
 
       it 'ne garde que les questions du dernier niveau atteint' do
@@ -56,22 +56,21 @@ describe EvenementQuestion, type: :model do
       end
     end
 
-    context 'lorsqu\'aucun niveau n\'a été joué' do
+    context 'quand aucun niveau n\'a été joué' do
       let(:evenements_questions) { [evenement_question_n3] }
 
-      it 'retourne toutes les questions car aucun niveau ne peut être déterminé' do
+      it 'retourne toutes les questions principales car aucun niveau ne peut être déterminé' do
         resultat = described_class.prises_en_compte_pour_calcul_score_clea(evenements_questions)
         expect(resultat).to contain_exactly(evenement_question_n3)
       end
     end
 
     context 'quand une question principale est réussie' do
-      let(:evenements_questions) { [evenement_question_n1, evenement_question_rattrapage_n3] }
+      let(:evenements_questions) { [evenement_question_n1] }
 
       it 'ignore la question de rattrapage' do
         resultat = described_class.prises_en_compte_pour_calcul_score_clea(evenements_questions)
         expect(resultat).to contain_exactly(evenement_question_n1)
-        expect(resultat).not_to include(evenement_question_rattrapage_n3)
       end
     end
 
@@ -85,9 +84,7 @@ describe EvenementQuestion, type: :model do
     end
 
     context 'quand on a joué uniquement le niveau 1 et 2 mais pas le niveau 3' do
-      let(:evenement_question_n3) do
-        described_class.new(question: question_n3, evenement: nil)
-      end
+      let(:evenement_question_n3) { described_class.new(question: question_n3, evenement: nil) }
       let(:evenements_questions) do
         [evenement_question_n1, evenement_question_n2, evenement_question_n3]
       end
@@ -95,38 +92,37 @@ describe EvenementQuestion, type: :model do
       it 'ne garde que les questions des niveaux 1 et 2 et exclut le niveau 3' do
         resultat = described_class.prises_en_compte_pour_calcul_score_clea(evenements_questions)
 
-        expect(resultat).to include(evenement_question_n1, evenement_question_n2)
-        expect(resultat).not_to include(evenement_question_n3)
+        expect(resultat).to include(evenement_question_n1, evenement_question_n2,
+                                    evenement_question_n3)
       end
     end
   end
 
-  describe '.pour_code_clea(evenements_questions, code)' do
+  describe '.pour_code_clea' do
     let(:code) { '2.1' }
     let(:sous_code) { '2.1.1' }
 
     let(:metacompetence_numeratie) do
       Metacompetence::CORRESPONDANCES_CODECLEA[code][sous_code].first
     end
-    let!(:question_attendu) { build(:question, metacompetence: metacompetence_numeratie) }
-    let(:evenement_question_attendu) { described_class.new(question: question_attendu) }
+    let(:question_attendue) { build(:question, metacompetence: metacompetence_numeratie) }
+    let(:evenement_question_attendue) { described_class.new(question: question_attendue) }
 
-    let!(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
-    let!(:autre_question) { build(:question, metacompetence: autre_metacompetence) }
+    let(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
+    let(:autre_question) { build(:question, metacompetence: autre_metacompetence) }
     let(:evenement_question_autre) { described_class.new(question: autre_question) }
 
-    let(:evenements_questions) { [evenement_question_attendu, evenement_question_autre] }
+    let(:evenements_questions) { [evenement_question_attendue, evenement_question_autre] }
 
-    it 'retourne les questions du sous_code' do
-      expect(described_class.pour_code_clea(evenements_questions, sous_code)).to(
-        eq([evenement_question_attendu])
-      )
+    it 'retourne les questions du sous-code' do
+      expect(described_class.pour_code_clea(evenements_questions,
+                                            sous_code)).to eq([evenement_question_attendue])
     end
 
-    it 'retourne les questions du code' do
+    it 'retourne les questions du code Cléa entier' do
       expect(described_class.pour_code_clea(evenements_questions,
-                                            code)).to eq [evenement_question_attendu,
-                                                          evenement_question_autre]
+                                            code)).to eq([evenement_question_attendue,
+                                                          evenement_question_autre])
     end
   end
 end

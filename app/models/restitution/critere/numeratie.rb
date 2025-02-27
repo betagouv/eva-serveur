@@ -32,10 +32,18 @@ module Restitution
       end
 
       def resultat
-        return :pas_de_test if CODE_CLEA_SANS_TEST.include?(code_clea)
-        return :non_evalue if nombre_tests_proposes.zero?
+        return :pas_de_test if pas_de_test?
+        return :non_evalue if non_evalue?
 
         acquis? ? :acquis : :non_acquis
+      end
+
+      def pas_de_test?
+        CODE_CLEA_SANS_TEST.include?(code_clea)
+      end
+
+      def non_evalue?
+        nombre_tests_proposes.zero?
       end
     end
   end

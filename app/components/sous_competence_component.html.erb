@@ -53,13 +53,13 @@
                           <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
                             <td><%= critere.libelle %></td>
                             <td><%= critere.code_clea %></td>
-                            <% if critere.nombre_tests_proposes_max.zero? %>
+                            <% if critere.pas_de_test? %>
                               <td>Pas de test disponible</td>
                             <% else %>
                               <td><%= critere.nombre_tests_proposes %> sur <%= critere.nombre_tests_proposes_max %></td>
                             <% end %>
                             <td>
-                              <% unless critere.resultat == :pas_de_test %>
+                              <% unless critere.pas_de_test? %>
                                 <%=
                                   render(BadgeAcquisitionComponent.new(status: critere.resultat, classes: ["fr-badge--sm"]))
                                 %>

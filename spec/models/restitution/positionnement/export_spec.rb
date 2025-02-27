@@ -11,15 +11,20 @@ describe Restitution::Positionnement::Export do
 
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
-  let!(:question1) { create(:question_qcm, nom_technique: 'LOdi1') }
-  let!(:question2) { create(:question_qcm, nom_technique: 'LOdi2') }
+  let!(:question1) { create :question_qcm, nom_technique: 'LOdi1' }
+  let!(:question2) { create :question_qcm, nom_technique: 'LOdi2' }
   let(:questions) { [question1, question2] }
-  let(:questionnaire) { create(:questionnaire, questions: questions) }
-  let(:situation) { create(:situation, questionnaire: questionnaire) }
-  let!(:partie) { create :partie, situation: situation }
+  let(:questionnaire) { create :questionnaire, questions: questions }
+  let(:campagne) { create :campagne }
+  let(:evaluation) { create :evaluation, campagne: campagne }
+  let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
+
+  before do
+    campagne.situations_configurations.create situation: situation, questionnaire: questionnaire
+  end
 
   describe 'pour un export littératie' do
-    let(:situation) { create(:situation_cafe_de_la_place, questionnaire: questionnaire) }
+    let(:situation) { create(:situation_cafe_de_la_place) }
     let(:intitule_question2) do
       'Donc, c’est une émission sur les livres. Quel est le nom du livre dont on parle ?'
     end
@@ -87,8 +92,7 @@ describe Restitution::Positionnement::Export do
   describe 'pour un export numératie' do
     let!(:question) { create :question }
     let(:questions) { [question] }
-    let!(:situation) { create(:situation_place_du_marche, questionnaire: questionnaire) }
-    let!(:partie) { create :partie, situation: situation }
+    let!(:situation) { create(:situation_place_du_marche) }
     let!(:choix) { create(:choix, :mauvais, question_id: question.id, intitule: 'drapeau') }
     let!(:choix2) { create(:choix, :bon, question_id: question.id, intitule: 'couverture') }
     let!(:choix3) { create(:choix, :mauvais, question_id: question.id, intitule: 'autre') }
@@ -215,6 +219,8 @@ describe Restitution::Positionnement::Export do
   end
 
   describe '#nom_du_fichier' do
+    let(:situation) { create :situation }
+
     it "genere le nom du fichier en fonction de l'évaluation" do
       code_de_campagne = partie.evaluation.campagne.code.parameterize
       nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)

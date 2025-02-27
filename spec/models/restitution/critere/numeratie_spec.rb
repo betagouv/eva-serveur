@@ -85,4 +85,40 @@ describe Restitution::Critere::Numeratie do
       it { expect(critere.resultat).not_to eq(:pas_de_test) }
     end
   end
+
+  describe '#pas_de_test?' do
+    let(:critere) do
+      described_class.new attributes.merge(code_clea: code_clea)
+    end
+
+    context 'quand le critère a un test proposé' do
+      let(:code_clea) { '2.1.7' }
+
+      it { expect(critere.pas_de_test?).to be(false) }
+    end
+
+    context 'quand le critère n\'a pas de test proposé' do
+      let(:code_clea) { '2.1.5' }
+
+      it { expect(critere.pas_de_test?).to be(true) }
+    end
+  end
+
+  describe '#non_evalue?' do
+    let(:critere) do
+      described_class.new attributes.merge(nombre_tests_proposes: nombre_tests)
+    end
+
+    context 'quand le nombre de tests proposés est zéro' do
+      let(:nombre_tests) { 0 }
+
+      it { expect(critere.non_evalue?).to be(true) }
+    end
+
+    context 'quand le nombre de tests proposés est supérieur à zéro' do
+      let(:nombre_tests) { 1 }
+
+      it { expect(critere.non_evalue?).to be(false) }
+    end
+  end
 end

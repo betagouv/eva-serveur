@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionGlisserDeposer < ImportExport::Questions::Export::QuestionAvecModaliteReponse
+      class QuestionGlisserDeposer < ImportExport::Questions::Export::QuestionTest
         private
 
         def remplis_champs

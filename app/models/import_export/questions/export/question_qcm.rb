@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionQcm < ImportExport::Questions::Export::QuestionAvecModaliteReponse
+      class QuestionQcm < ImportExport::Questions::Export::QuestionTest
         private
 
         def remplis_champs

@@ -7,7 +7,8 @@ describe ImportExport::Questions::Export::QuestionClicDansTexte do
 
   let(:type) { 'QuestionClicDansTexte' }
   let(:question) do
-    create(:question_clic_dans_image, description: 'Ceci est une description',
+    create(:question_clic_dans_image, metacompetence: 'operations_soustraction',
+                                      description: 'Ceci est une description',
                                       nom_technique: 'clic')
   end
   let!(:intitule) do
@@ -36,10 +37,11 @@ describe ImportExport::Questions::Export::QuestionClicDansTexte do
     expect(ligne[2]).to be_nil
     expect(ligne[3]).to eq('Ceci est un intitulé')
     expect(ligne[4]).to eq(intitule.audio_url)
-    expect(ligne[5]).to eq('Ceci est une consigne')
-    expect(ligne[6]).to eq(consigne.audio_url)
-    expect(ligne[7]).to eq('Ceci est une description')
-    expect(ligne[8]).to be(false)
-    expect(ligne[9]).to eq(question.texte_sur_illustration)
+    expect(ligne[5]).to eq('operations_soustraction')
+    expect(ligne[6]).to eq('Ceci est une consigne')
+    expect(ligne[7]).to eq(consigne.audio_url)
+    expect(ligne[8]).to eq('Ceci est une description')
+    expect(ligne[9]).to be(false)
+    expect(ligne[10]).to eq(question.texte_sur_illustration)
   end
 end

@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionSaisie < ImportExport::Questions::Import::QuestionAvecModaliteReponse
+      class QuestionSaisie < ImportExport::Questions::Import::QuestionTest
         def initialize(headers_attendus)
           super('QuestionSaisie', headers_attendus)
         end

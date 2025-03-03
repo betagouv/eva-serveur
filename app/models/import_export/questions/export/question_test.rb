@@ -3,11 +3,12 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionAvecModaliteReponse < ImportExport::Questions::Export
+      class QuestionTest < ImportExport::Questions::Export
         private
 
         def remplis_champs
           col = super
+          @onglet.set_valeur(@ligne, col += 1, @question.metacompetence)
           @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.ecrit)
           @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.audio_url)
           @onglet.set_valeur(@ligne, col += 1, @question.description)

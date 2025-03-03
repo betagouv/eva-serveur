@@ -3,9 +3,10 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionAvecModaliteReponse < ImportExport::Questions::Import
+      class QuestionTest < ImportExport::Questions::Import
         def cree_ou_actualise_question(cellules)
           question = super
+          question.update!(metacompetence: cellules.suivant)
           cree_transcription(question.id, :modalite_reponse, cellules.suivant, cellules.suivant,
                              "#{cellules.cell(1)}_modalite_reponse")
           question.update!(description: cellules.suivant,

@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionClicDansTexte < ImportExport::Questions::Import::QuestionAvecModaliteReponse
+      class QuestionClicDansTexte < ImportExport::Questions::Import::QuestionTest
         def initialize(headers_attendus)
           super('QuestionClicDansTexte', headers_attendus)
         end

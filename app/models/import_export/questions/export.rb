@@ -19,7 +19,7 @@ module ImportExport
       end
 
       def nom_du_fichier(type)
-        genere_fichier(type)
+        FichierHelper.nom_fichier_horodate(type, 'xls')
       end
 
       private

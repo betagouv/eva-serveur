@@ -59,7 +59,9 @@ ActiveAdmin.register Questionnaire do
       compressed_filestream = generate_zip_file(questionnaire.questions_par_type)
 
       send_data compressed_filestream.read,
-                filename: "questionnaire_#{questionnaire.id}_export.zip",
+                filename: FichierHelper.nom_fichier_horodate(
+                  "questionnaire_#{questionnaire.id}_export", 'zip'
+                ),
                 type: 'application/zip'
     end
 
@@ -71,7 +73,7 @@ ActiveAdmin.register Questionnaire do
           export =
             ImportExport::Questions::ImportExportDonnees.new(questions: questions,
                                                              type: type).exporte_donnees
-          zip.put_next_entry("#{type}_questions_export.xls")
+          zip.put_next_entry(export[:filename])
           zip.write export[:xls]
         end
       end.tap(&:rewind)

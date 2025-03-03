@@ -13,11 +13,12 @@ describe ImportExport::Questions::ImportExportDonnees do
     let!(:question) { create(:question_clic_dans_image) }
 
     it 'exporte les données' do
-      date = DateTime.current.strftime('%Y%m%d')
-      nom_du_fichier_attendu = "#{date}-#{question.type}.xls"
-      expect(service.exporte_donnees[:xls]).not_to be_nil
-      expect(service.exporte_donnees[:content_type]).to eq 'application/vnd.ms-excel'
-      expect(service.exporte_donnees[:filename]).to eq nom_du_fichier_attendu
+      Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
+        nom_du_fichier_attendu = '20250228010203-QuestionClicDansImage.xls'
+        expect(service.exporte_donnees[:xls]).not_to be_nil
+        expect(service.exporte_donnees[:content_type]).to eq 'application/vnd.ms-excel'
+        expect(service.exporte_donnees[:filename]).to eq nom_du_fichier_attendu
+      end
     end
   end
 

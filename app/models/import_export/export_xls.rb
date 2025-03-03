@@ -16,11 +16,6 @@ module ImportExport
       'application/vnd.ms-excel'
     end
 
-    def genere_fichier(titre)
-      date = DateTime.current.strftime('%Y%m%d')
-      "#{date}-#{titre}.xls"
-    end
-
     def retourne_le_contenu_du_xls
       file_contents = StringIO.new
       @export.workbook.write file_contents

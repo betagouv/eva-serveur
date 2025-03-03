@@ -10,8 +10,8 @@ describe ImportExport::Questions::Export do
 
   describe '#nom_du_fichier' do
     it 'genere le nom du fichier' do
-      Timecop.freeze(Date.new(2025, 2, 28)) do
-        nom_du_fichier_attendu = '20250228-QuestionQcm.xls'
+      Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
+        nom_du_fichier_attendu = '20250228010203-QuestionQcm.xls'
         expect(response_service.nom_du_fichier('QuestionQcm')).to eq(nom_du_fichier_attendu)
       end
     end

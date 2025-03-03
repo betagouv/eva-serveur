@@ -19,7 +19,7 @@ module Restitution
         evaluation = @partie.evaluation
         code_de_campagne = evaluation.campagne.code.parameterize
         nom_de_levaluation = evaluation.nom.parameterize.first(15)
-        genere_fichier("#{nom_de_levaluation}-#{code_de_campagne}")
+        FichierHelper.nom_fichier_horodate("#{nom_de_levaluation}-#{code_de_campagne}", 'xls')
       end
 
       private

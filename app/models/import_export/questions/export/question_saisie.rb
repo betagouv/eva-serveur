@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Export
-      class QuestionSaisie < ImportExport::Questions::Export::QuestionAvecModaliteReponse
+      class QuestionSaisie < ImportExport::Questions::Export::QuestionTest
         private
 
         def remplis_champs

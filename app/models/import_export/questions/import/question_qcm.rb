@@ -3,7 +3,7 @@
 module ImportExport
   module Questions
     class Import
-      class QuestionQcm < ImportExport::Questions::Import::QuestionAvecModaliteReponse
+      class QuestionQcm < ImportExport::Questions::Import::QuestionTest
         def initialize(headers_attendus)
           super('QuestionQcm', headers_attendus)
         end

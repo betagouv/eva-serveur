@@ -3,6 +3,8 @@
 module Restitution
   module Positionnement
     class Export < ::ImportExport::ExportXls
+      include Fichier
+
       def initialize(partie:)
         super()
         @partie = partie
@@ -19,7 +21,7 @@ module Restitution
         evaluation = @partie.evaluation
         code_de_campagne = evaluation.campagne.code.parameterize
         nom_de_levaluation = evaluation.nom.parameterize.first(15)
-        genere_fichier("#{nom_de_levaluation}-#{code_de_campagne}")
+        nom_fichier_horodate("#{nom_de_levaluation}-#{code_de_campagne}", 'xls')
       end
 
       private

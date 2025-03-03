@@ -222,12 +222,9 @@ describe Restitution::Positionnement::Export do
     let(:situation) { create :situation }
 
     it "genere le nom du fichier en fonction de l'évaluation" do
-      code_de_campagne = partie.evaluation.campagne.code.parameterize
-      nom_de_levaluation = partie.evaluation.nom.parameterize.first(15)
-      date = DateTime.current.strftime('%Y%m%d')
-      nom_du_fichier_attendu = "#{date}-#{nom_de_levaluation}-#{code_de_campagne}.xls"
-
-      expect(response_service.nom_du_fichier).to eq(nom_du_fichier_attendu)
+      Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
+        expect(response_service.nom_du_fichier).to eq('20250228010203-roger-code10.xls')
+      end
     end
   end
 end

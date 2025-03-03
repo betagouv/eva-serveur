@@ -3,6 +3,8 @@
 module ImportExport
   module Questions
     class Export < ::ImportExport::ExportXls
+      include Fichier
+
       def initialize(questions, headers)
         super()
         @questions = questions
@@ -19,7 +21,7 @@ module ImportExport
       end
 
       def nom_du_fichier(type)
-        genere_fichier(type)
+        nom_fichier_horodate(type, 'xls')
       end
 
       private

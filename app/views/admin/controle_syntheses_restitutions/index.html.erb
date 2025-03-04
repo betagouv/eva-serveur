@@ -27,8 +27,8 @@
     <div class="row" style="width: 958px;">
       <div class="col">
         <div class="evaluation__restitution-globale">
-          <h2>Synthèses de diagnostique</h2>
-          <% @syntheses_diagnostique.each do |synthese| -%>
+          <h2>Synthèses de diagnostic</h2>
+          <% @syntheses_diagnostic.each do |synthese| -%>
             <div class="panel">
               <div class="marges-page">
                 <div id="lettrisme" class="page">
@@ -70,9 +70,9 @@
             </div>
           <% end -%>
 
-          <h2>Sous compétences de diagnostique CEFR</h2>
+          <h2>Sous compétences de diagnostic CEFR</h2>
           <div>
-            <% @sous_competences_diagnostique.each do |donnees| -%>
+            <% @sous_competences_diagnostic.each do |donnees| -%>
               <%= render 'admin/evaluations/competence_niveau1',
                 competence: donnees[0],
                 niveau: donnees[1],

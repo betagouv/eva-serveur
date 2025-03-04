@@ -9,7 +9,7 @@ class Situation < ApplicationRecord
                        '#FD8554', '#FD5965', '#FD586D'].freeze
 
   SITUATIONS_COMPETENCES_TRANSVERSALES = %w[controle inventaire securite tri].freeze
-  SITUATIONS_DIAGNOSTIQUE = %w[maintenance livraison objets_trouves].freeze
+  SITUATIONS_DIAGNOSTIC = %w[maintenance livraison objets_trouves].freeze
   SITUATIONS_NUMERATIE = %w[place_du_marche].freeze
   SITUATIONS_LITTERATIE = %w[cafe_de_la_place].freeze
   SITUATIONS_POSITIONNEMENT = SITUATIONS_NUMERATIE + SITUATIONS_LITTERATIE
@@ -49,8 +49,8 @@ class Situation < ApplicationRecord
     SITUATIONS_POSITIONNEMENT.include?(nom_technique)
   end
 
-  def diagnostique?
-    SITUATIONS_DIAGNOSTIQUE.include?(nom_technique)
+  def diagnostic?
+    SITUATIONS_DIAGNOSTIC.include?(nom_technique)
   end
 
   def competences_transversales?

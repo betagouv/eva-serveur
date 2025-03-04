@@ -6,7 +6,7 @@ h2 t('.titre')
 div class: 'panel evaluation__administration' do
   render 'informations_complementaires'
 
-  if resource.campagne.avec_diagnostique?
+  if resource.campagne.avec_diagnostic?
     div class: 'evaluation__scores' do
       tabs do
         tab t('.tabs.scores_litteratie_numeratie') do

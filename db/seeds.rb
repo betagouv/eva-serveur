@@ -107,7 +107,7 @@ end
 ParcoursType.find_or_create_by(nom_technique: 'complet') do |parcours_type|
   parcours_type.libelle = 'Parcours complet'
   parcours_type.duree_moyenne = '55 minutes'
-  parcours_type.type_de_programme = 'diagnostique'
+  parcours_type.type_de_programme = 'diagnostic'
   parcours_type.description = %{Ce parcours permet d'évaluer à la fois :
 
 - **les compétences de base** *(littératie et numératie)*
@@ -129,7 +129,7 @@ end
 ParcoursType.find_or_create_by(nom_technique: 'competences_de_base') do |parcours_type|
   parcours_type.libelle = 'Parcours compétences de base'
   parcours_type.duree_moyenne = '25 minutes'
-  parcours_type.type_de_programme = 'diagnostique'
+  parcours_type.type_de_programme = 'diagnostic'
   parcours_type.description = %{Ce parcours permet d'évaluer uniquement **les compétences de base** *(littératie et numératie)*.}
   situations = Situation.where(nom_technique: [
     'maintenance',

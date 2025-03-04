@@ -59,8 +59,8 @@ class Campagne < ApplicationRecord
     configuration_inclus?(&:competences_transversales?)
   end
 
-  def avec_diagnostique?
-    configuration_inclus?(&:diagnostique?)
+  def avec_diagnostic?
+    configuration_inclus?(&:diagnostic?)
   end
 
   def avec_positionnement?(competence)

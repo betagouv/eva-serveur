@@ -17,8 +17,8 @@ fr:
         description: |
           Ce module propose aux bénéficiaires de décrire brièvement à l’écrit une scène quotidienne afin de permettre aux accompagnants d’évaluer leur niveau en expression écrite.
     input_type_programme:
-        diagnostique:
-          libelle: Diagnostique
+        diagnostic:
+          libelle: Diagnostic
           description: |
             Des parcours ludiques et rapides pour disposer d’une vue d’ensemble et valoriser les compétences maîtrisées.
             À proposer en début de parcours d’accompagnement.

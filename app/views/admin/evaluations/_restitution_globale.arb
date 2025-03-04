@@ -81,7 +81,7 @@ div class: 'evaluation__restitution-globale' do
     render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
   end
 
-  if resource.campagne.avec_diagnostique?
+  if resource.campagne.avec_diagnostic?
     if pdf
       div class: 'page' do
         render 'entete_page', restitution_globale: restitution_globale
@@ -90,7 +90,7 @@ div class: 'evaluation__restitution-globale' do
 
         div class: 'panel' do
           render 'francais_mathematique', pdf: pdf,
-                                          synthese: restitution_globale.synthese_diagnostique
+                                          synthese: restitution_globale.synthese_diagnostic
         end
 
         render 'pied_page', pre_pied_page: 'referentiel_europeen'
@@ -111,7 +111,7 @@ div class: 'evaluation__restitution-globale' do
 
         div class: 'panel panel--avec-references' do
           render 'francais_mathematique', pdf: pdf,
-                                          synthese: restitution_globale.synthese_diagnostique
+                                          synthese: restitution_globale.synthese_diagnostic
 
           render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 
@@ -121,7 +121,7 @@ div class: 'evaluation__restitution-globale' do
     end
   end
 
-  if resource.campagne.avec_diagnostique?
+  if resource.campagne.avec_diagnostic?
     render partial: 'correspondance_anlci',
            locals: {
              restitution_globale: restitution_globale,

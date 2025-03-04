@@ -3,11 +3,9 @@
 module Restitution
   module Illettrisme
     class Synthetiseur
-      def initialize(interpreteur_diagnostique, interpreteur_positionnement, inter_numeratie)
-        @algo_diagnostique =
-          if interpreteur_diagnostique.present?
-            SynthetiseurDiagnostique.new(interpreteur_diagnostique)
-          end
+      def initialize(interpreteur_diagnostic, interpreteur_positionnement, inter_numeratie)
+        @algo_diagnostic =
+          (SynthetiseurDiagnostic.new(interpreteur_diagnostic) if interpreteur_diagnostic.present?)
         @algo_positionnement =
           if interpreteur_positionnement.present?
             SynthetiseurPositionnement.new(interpreteur_positionnement, nil)
@@ -18,7 +16,7 @@ module Restitution
 
       def synthese
         synthese_positionnement.presence ||
-          synthese_diagnostique ||
+          synthese_diagnostic ||
           synthese_positionnement_numeratie.presence
       end
 
@@ -30,8 +28,8 @@ module Restitution
         Synthetiseur.calcule_synthese(@algo_numeratie)
       end
 
-      def synthese_diagnostique
-        Synthetiseur.calcule_synthese(@algo_diagnostique)
+      def synthese_diagnostic
+        Synthetiseur.calcule_synthese(@algo_diagnostic)
       end
 
       def positionnement_litteratie
@@ -51,9 +49,9 @@ module Restitution
         'ni_ni'
       end
 
-      class SynthetiseurDiagnostique
-        def initialize(interpreteur_diagnostique)
-          @interpreteur = interpreteur_diagnostique
+      class SynthetiseurDiagnostic
+        def initialize(interpreteur_diagnostic)
+          @interpreteur = interpreteur_diagnostic
         end
 
         def socle_clea?

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  CATEGORIE = %i[situation scolarite sante appareils].freeze
+  AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
+
   has_one_attached :illustration do |attachable|
     attachable.variant :defaut,
                        resize_to_limit: [1080, 566],
@@ -10,6 +13,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   enum :metacompetence, Metacompetence::METACOMPETENCES
+  enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne
@@ -42,8 +46,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
 
-  CATEGORIE = %i[situation scolarite sante appareils].freeze
-  AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
   INTERACTION_TYPES = {
     QuestionQcm::QUESTION_TYPE => 'qcm',
     QuestionClicDansImage::QUESTION_TYPE => 'clic dans image',
@@ -52,9 +54,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     QuestionSaisie::QUESTION_TYPE => 'saisie',
     QuestionClicDansTexte::QUESTION_TYPE => 'clic dans texte'
   }.freeze
-
-  enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
-
   after_update :supprime_transcription, :supprime_attachment
 
   acts_as_paranoid

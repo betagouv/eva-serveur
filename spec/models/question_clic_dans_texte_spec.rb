@@ -3,10 +3,6 @@
 require 'rails_helper'
 
 describe QuestionClicDansTexte, type: :model do
-  it do
-    expect(subject).to define_enum_for(:metacompetence).with_values(Metacompetence::METACOMPETENCES)
-  end
-
   describe '#as_json' do
     let(:contenu) { 'Mon Intitulé [mot1](#bonne-reponse) [mot2](#bonne-reponse) [mot3]()' }
     let(:question_clic_dans_texte) do

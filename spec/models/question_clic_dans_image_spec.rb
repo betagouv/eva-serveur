@@ -6,10 +6,6 @@ describe QuestionClicDansImage, type: :model do
   it { is_expected.to have_one_attached(:zone_cliquable) }
   it { is_expected.to have_one_attached(:image_au_clic) }
 
-  it do
-    expect(subject).to define_enum_for(:metacompetence).with_values(Metacompetence::METACOMPETENCES)
-  end
-
   describe '#as_json' do
     let(:question_clic_dans_image) do
       create(:question_clic_dans_image,

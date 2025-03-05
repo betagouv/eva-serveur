@@ -6,6 +6,7 @@ panel 'Détails de la question' do
     row :libelle
     row :nom_technique
     row :description
+    row :metacompetence
     row :illustration do
       render partial: 'admin/questions/show_illustration',
              locals: { illustration: resource.illustration }

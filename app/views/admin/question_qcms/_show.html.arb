@@ -7,6 +7,7 @@ panel 'Détails de la question' do
     row :categorie
     row :nom_technique
     row :description
+    row :metacompetence
     row :illustration do
       render partial: 'admin/questions/show_illustration',
              locals: { illustration: resource.illustration }
@@ -29,7 +30,6 @@ panel 'Détails de la question' do
     row :audio_consigne_bouton do
       tag_audio(question_qcm.transcription_consigne)
     end
-    row :metacompetence
     row :type_qcm
     row :created_at
   end

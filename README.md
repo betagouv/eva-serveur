@@ -27,9 +27,16 @@ npm install
 
 ### Dépendences système pour le developpement
 
+#### vips
 Le redimentionnement des images est dépendant d'une librairie système : vips
 
 voir [libvips install instructions](https://www.libvips.org/install.html)
+
+#### GraphViz's
+
+Pour la génération du graphique de la structure de la base avec erd
+
+https://graphviz.org/download/
 
 ### Création de la base  
 `rake db:create`
@@ -300,6 +307,7 @@ Un graphique de la structure de la base peut être généré afin de mieux compr
 ![](docs/erd.png)
 
 Pour générer ce graphique:
+- installer la dépendence GraphViz's (voir ci-dessus)
 
 `bundle exec rake erd`
 

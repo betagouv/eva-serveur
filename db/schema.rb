@@ -317,6 +317,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_173240) do
     t.index ["deleted_at"], name: "index_questions_on_deleted_at"
     t.index ["libelle"], name: "index_questions_on_libelle"
     t.index ["nom_technique"], name: "index_questions_on_nom_technique", unique: true, where: "(deleted_at IS NULL)"
+    t.index ["type"], name: "index_questions_on_type"
   end
 
   create_table "questions_frequentes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

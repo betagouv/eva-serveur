@@ -1,4 +1,6 @@
 class ChangePrePositionnementEnDiagnostique < ActiveRecord::Migration[7.2]
+  class ParcoursType < ApplicationRecord; end
+
   def up
     ParcoursType.where(type_de_programme: 'pre_positionnement').update(type_de_programme: 'diagnostique')
   end

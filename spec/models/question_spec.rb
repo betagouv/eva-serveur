@@ -12,6 +12,27 @@ describe Question, type: :model do
   it { is_expected.to have_one(:transcription_modalite_reponse).dependent(:destroy) }
   it { is_expected.to have_one(:transcription_consigne).dependent(:destroy) }
 
+  describe '#supprime_attachments' do
+    let(:question) { create :question_clic_dans_image, :avec_images }
+
+    it "supprime l'illustration" do
+      question.update(supprimer_illustration: '1')
+
+      expect(question.illustration.attached?).to be false
+    end
+
+    context 'quand une illustration est supprimé et changé en même temps' do
+      it "ne supprime pas l'illustration" do
+        nouvelle_illustration = Rack::Test::UploadedFile.new(
+          Rails.root.join('spec/support/programme_tele.png')
+        )
+        question.update(illustration: nouvelle_illustration, supprimer_illustration: '1')
+
+        expect(question.illustration.attached?).to be true
+      end
+    end
+  end
+
   describe '#restitue_reponse' do
     context "quand la question saisie n'a pas de choix" do
       let(:question) { create :question_saisie }

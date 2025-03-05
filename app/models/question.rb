@@ -12,8 +12,8 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
                        format: :jpg
   end
 
-  enum :metacompetence, Metacompetence::METACOMPETENCES
-  enum :categorie, CATEGORIE.zip(CATEGORIE.map(&:to_s)).to_h, prefix: true
+  enum :metacompetence, Metacompetence::METACOMPETENCES.index_with(&:to_s)
+  enum :categorie, CATEGORIE.index_with(&:to_s), prefix: true
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne

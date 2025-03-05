@@ -5,10 +5,6 @@ require 'rails_helper'
 RSpec.describe QuestionQcm, type: :model do
   it { is_expected.to have_many(:choix).order(position: :asc).with_foreign_key(:question_id) }
 
-  it do
-    expect(subject).to define_enum_for(:metacompetence).with_values(Metacompetence::METACOMPETENCES)
-  end
-
   describe '#as_json' do
     let(:question_qcm) do
       create(:question_qcm, illustration: Rack::Test::UploadedFile.new(

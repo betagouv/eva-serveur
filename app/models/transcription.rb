@@ -20,8 +20,15 @@ class Transcription < ApplicationRecord
     cdn_for(audio)
   end
 
-  def supprime_audio(type, suppression_valeur)
-    audio.purge_later if send("#{type}?") && audio.attached? && suppression_valeur == '1'
+  def supprime_audio?(champ, suppression_valeur)
+    send("#{champ}?") &&
+      audio.attached? &&
+      suppression_valeur == '1' &&
+      !nouveau_audio?
+  end
+
+  def nouveau_audio?
+    attachment_changes && attachment_changes['audio'].present?
   end
 
   def complete?

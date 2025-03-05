@@ -2,7 +2,7 @@
 
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   CATEGORIE = %i[situation scolarite sante appareils].freeze
-  AUDIO_TYPES = %i[intitule modalite_reponse consigne].freeze
+  CHAMPS_AUDIO = %i[intitule modalite_reponse consigne].freeze
 
   has_one_attached :illustration do |attachable|
     attachable.variant :defaut,
@@ -54,7 +54,8 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     QuestionSaisie::QUESTION_TYPE => 'saisie',
     QuestionClicDansTexte::QUESTION_TYPE => 'clic dans texte'
   }.freeze
-  after_update :supprime_transcription, :supprime_attachment
+
+  after_update :supprime_transcription, :supprime_attachments
 
   acts_as_paranoid
 
@@ -70,15 +71,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     { intitule: supprimer_audio_intitule,
       modalite_reponse: supprimer_audio_modalite_reponse,
       consigne: supprimer_audio_consigne }.symbolize_keys
-  end
-
-  def supprime_attachment
-    illustration.purge_later if supprime_illustration?
-    transcriptions.find_each do |t|
-      AUDIO_TYPES.each do |type|
-        t.supprime_audio(type, suppressions_audios[type])
-      end
-    end
   end
 
   def json_audio_fields
@@ -165,6 +157,15 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     attributes['audio'].blank? && attributes['ecrit'].blank? if new_record?
   end
 
+  def supprime_attachments
+    illustration.purge_later if supprime_illustration?
+    transcriptions.find_each do |t|
+      CHAMPS_AUDIO.each do |champ|
+        t.audio.purge_later if t.supprime_audio?(champ, suppressions_audios[champ])
+      end
+    end
+  end
+
   def supprime_transcription
     transcriptions.each do |t|
       t.destroy if t.ecrit.blank? && !t.audio.attached?
@@ -172,6 +173,12 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def supprime_illustration?
-    illustration.attached? && supprimer_illustration == '1'
+    illustration.attached? &&
+      supprimer_illustration == '1' &&
+      !nouvelle_illustration?
+  end
+
+  def nouvelle_illustration?
+    attachment_changes && attachment_changes['illustration'].present?
   end
 end

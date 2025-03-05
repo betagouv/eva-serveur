@@ -105,7 +105,7 @@ module Restitution
         @onglet_xls.set_nombre(ligne, 4, evenement_question.score_max)
         pris_en_compte = pris_en_compte_pour_calcul_score_clea?(evenement_question)
         @onglet_xls.set_valeur(ligne, 5, pris_en_compte)
-        @onglet_xls.set_valeur(ligne, 6, evenement_question.interaction)
+        @onglet_xls.set_valeur(ligne, 6, I18n.t(".interaction.#{evenement_question.type_question}"))
         @onglet_xls.set_valeur(ligne, 7, evenement_question.intitule)
 
         remplis_choix(ligne, evenement_question)

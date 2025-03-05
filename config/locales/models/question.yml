@@ -1,4 +1,10 @@
 fr:
+  interaction:
+    QuestionClicDansImage: Clic dans l'image
+    QuestionClicDansTexte: Clic dans le texte
+    QuestionGlisserDeposer: Glisser-Déposer
+    QuestionQcm: QCM
+    QuestionSaisie: Saisie
   activerecord:
     models:
       question_qcm:

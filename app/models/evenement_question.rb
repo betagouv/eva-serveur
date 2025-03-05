@@ -50,8 +50,8 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
     @question.est_un_rattrapage?
   end
 
-  def interaction
-    @question.interaction
+  def type_question
+    @question.type
   end
 
   def code_clea

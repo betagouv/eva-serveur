@@ -46,15 +46,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   accepts_nested_attributes_for :transcriptions, allow_destroy: true,
                                                  reject_if: :reject_transcriptions
 
-  INTERACTION_TYPES = {
-    QuestionQcm::QUESTION_TYPE => 'qcm',
-    QuestionClicDansImage::QUESTION_TYPE => 'clic dans image',
-    QuestionGlisserDeposer::QUESTION_TYPE => 'glisser deposer',
-    QuestionSousConsigne::QUESTION_TYPE => 'sous consigne',
-    QuestionSaisie::QUESTION_TYPE => 'saisie',
-    QuestionClicDansTexte::QUESTION_TYPE => 'clic dans texte'
-  }.freeze
-
   after_update :supprime_transcription, :supprime_attachments
 
   acts_as_paranoid
@@ -91,10 +82,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     else
       cdn_for(illustration)
     end
-  end
-
-  def interaction
-    INTERACTION_TYPES[type]
   end
 
   def saisie?

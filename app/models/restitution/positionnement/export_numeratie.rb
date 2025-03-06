@@ -81,7 +81,7 @@ module Restitution
 
       def regroupe_par_sous_domaine
         groupes_clea = @evenements_questions.group_by do |evenement_question|
-          Metacompetence.new(evenement_question.metacompetence).code_clea_sous_domaine
+          Metacompetence.code_clea_sous_domaine(evenement_question.metacompetence)
         end
         tri_par_ordre_croissant(groupes_clea)
       end
@@ -89,7 +89,7 @@ module Restitution
       def regroupe_par_sous_sous_domaine(groupes_clea)
         groupes_clea.transform_values do |groupes|
           sous_groupes_clea = groupes.group_by do |evenement_question|
-            Metacompetence.new(evenement_question.metacompetence).code_clea_sous_sous_domaine
+            Metacompetence.code_clea_sous_sous_domaine(evenement_question.metacompetence)
           end
           tri_par_ordre_croissant(sous_groupes_clea)
         end

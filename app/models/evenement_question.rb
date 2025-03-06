@@ -55,7 +55,7 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
   end
 
   def code_clea
-    Metacompetence.new(metacompetence).code_clea_sous_sous_domaine
+    Metacompetence.code_clea_sous_sous_domaine(metacompetence)
   end
 
   def nom_technique

@@ -42,11 +42,11 @@ class Evenement < ApplicationRecord
   def self.regroupe_par_codes_clea(questionnaire, noms_techniques)
     groupes_clea = questions_repondues_et_non_repondues(questionnaire,
                                                         noms_techniques).group_by do |e|
-      Metacompetence.new(e['metacompetence']).code_clea_sous_domaine
+      Metacompetence.code_clea_sous_domaine(e['metacompetence'])
     end
     groupes_clea.transform_values do |groupes|
       groupes.group_by do |e|
-        Metacompetence.new(e['metacompetence']).code_clea_sous_sous_domaine
+        Metacompetence.code_clea_sous_sous_domaine(e['metacompetence'])
       end
     end
   end

@@ -68,44 +68,40 @@ class Metacompetence
 
   METACOMPETENCES = (METACOMPETENCES_BASE + METACOMPETENCES_NUMERATIE).freeze
 
-  def initialize(metacompetence)
-    @metacompetence = metacompetence
-  end
-
-  def code_clea_sous_domaine
-    recupere_codes_clea&.first
-  end
-
-  def code_clea_sous_sous_domaine
-    recupere_codes_clea&.last&.find do |_, metacompetences|
-      metacompetences.include?(@metacompetence)
-    end&.first
-  end
-
-  def self.metacompetences_pour_code(code)
-    metacompetences_par_code[code].presence ||
-      metacompetences_par_sous_code[code]
-  end
-
-  def self.metacompetences_par_code
-    CORRESPONDANCES_CODECLEA.transform_values do |sous_codes|
-      sous_codes.values.flatten
+  class << self
+    def code_clea_sous_domaine(metacompetence)
+      recupere_codes_clea(metacompetence)&.first
     end
-  end
 
-  def self.metacompetences_par_sous_code
-    CORRESPONDANCES_CODECLEA.each_with_object({}) do |(_, sous_codes), result|
-      sous_codes.each do |sous_code, metacompetences|
-        result[sous_code] = metacompetences
+    def code_clea_sous_sous_domaine(metacompetence)
+      recupere_codes_clea(metacompetence)&.last&.find do |_, metacompetences|
+        metacompetences.include?(metacompetence)
+      end&.first
+    end
+
+    def metacompetences_pour_code(code)
+      metacompetences_par_code[code].presence ||
+        metacompetences_par_sous_code[code]
+    end
+
+    def metacompetences_par_code
+      CORRESPONDANCES_CODECLEA.transform_values do |sous_codes|
+        sous_codes.values.flatten
       end
     end
-  end
 
-  private
+    def metacompetences_par_sous_code
+      CORRESPONDANCES_CODECLEA.each_with_object({}) do |(_, sous_codes), result|
+        sous_codes.each do |sous_code, metacompetences|
+          result[sous_code] = metacompetences
+        end
+      end
+    end
 
-  def recupere_codes_clea
-    CORRESPONDANCES_CODECLEA.find do |_, metacompetences|
-      metacompetences.values.flatten.include?(@metacompetence)
+    def recupere_codes_clea(metacompetence)
+      CORRESPONDANCES_CODECLEA.find do |_, metacompetences|
+        metacompetences.values.flatten.include?(metacompetence)
+      end
     end
   end
 end

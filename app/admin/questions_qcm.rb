@@ -48,6 +48,10 @@ ActiveAdmin.register QuestionQcm do
   end
 
   controller do
+    def find_resource
+      scoped_collection.includes(choix: :audio_attachment).where(id: params[:id]).first!
+    end
+
     def set_question
       @question = Question.includes(transcriptions: :audio_attachment).find(params[:id])
     end

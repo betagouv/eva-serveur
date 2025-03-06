@@ -6,7 +6,7 @@ class Metacompetence
       '2.1.1' => %w[operations_addition operations_soustraction operations_multiplication
                     operations_division],
       '2.1.2' => %w[denombrement],
-      '2.1.3' => %w[ordonner_nombres_decimaux operations_nombres_entiers],
+      '2.1.3' => %w[ordonner_nombres_entiers ordonner_nombres_decimaux],
       '2.1.4' => %w[estimation],
       '2.1.5' => %w[],
       '2.1.6' => %w[],

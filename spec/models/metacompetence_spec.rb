@@ -12,8 +12,8 @@ describe Metacompetence, type: :model do
        operations_multiplication
        operations_division
        denombrement
+       ordonner_nombres_entiers
        ordonner_nombres_decimaux
-       operations_nombres_entiers
        estimation
        proportionnalite
        resolution_de_probleme

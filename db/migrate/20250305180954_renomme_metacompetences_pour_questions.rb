@@ -1,8 +1,10 @@
 class RenommeMetacompetencesPourQuestions < ActiveRecord::Migration[7.2]
   def up
+    Question.reset_column_information
+
     Question.where(metacompetence: "reconaitre_les_nombres").update_all(metacompetence: "reconnaitre_les_nombres")
     Question.where(metacompetence: "plannings").update_all(metacompetence: "plannings_lecture")
-    Question.where(metacompetence: "ordonner_nombres_entiers").update_all(metacompetence: "")
+    Question.where(metacompetence: "operations_nombres_entiers").update_all(metacompetence: "")
     Question.where(metacompetence: "unites_temps").update_all(metacompetence: "unites_de_temps")
     Question.where(metacompetence: "perimetres_surfaces").update_all(metacompetence: "perimetres")
 

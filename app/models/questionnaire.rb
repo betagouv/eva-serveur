@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Questionnaire < ApplicationRecord
+  include Fichier
+
   LIVRAISON_SANS_REDACTION = 'livraison_sans_redaction'
   LIVRAISON_AVEC_REDACTION = 'livraison_expression_ecrite'
   SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT = 'sociodemographique_autopositionnement'
@@ -37,5 +39,9 @@ class Questionnaire < ApplicationRecord
 
   def questions_par_type
     questions.group_by(&:type)
+  end
+
+  def nom_fichier_export
+    nom_fichier_horodate("export-questionnaire-#{nom_technique}", 'zip')
   end
 end

@@ -46,4 +46,15 @@ RSpec.describe Questionnaire, type: :model do
       )
     end
   end
+
+  describe '#nom_fichier_export' do
+    let(:questionnaire) { create :questionnaire, nom_technique: 'nom_technique' }
+
+    it "retourn un fichier horodaté avec l'identifiant" do
+      Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
+        expect(questionnaire.nom_fichier_export)
+          .to eq '20250228010203-export-questionnaire-nom_technique.zip'
+      end
+    end
+  end
 end

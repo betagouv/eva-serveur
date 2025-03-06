@@ -3,8 +3,6 @@
 require 'zip'
 
 ActiveAdmin.register Questionnaire do
-  include Fichier
-
   menu parent: 'Parcours', if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique,
@@ -61,9 +59,7 @@ ActiveAdmin.register Questionnaire do
       compressed_filestream = generate_zip_file(questionnaire.questions_par_type)
 
       send_data compressed_filestream.read,
-                filename: nom_fichier_horodate(
-                  "questionnaire_#{questionnaire.id}_export", 'zip'
-                ),
+                filename: questionnaire.nom_fichier_export,
                 type: 'application/zip'
     end
 

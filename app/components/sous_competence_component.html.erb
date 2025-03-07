@@ -56,7 +56,7 @@
                             <% if critere.pas_de_test? %>
                               <td>Pas de test disponible</td>
                             <% else %>
-                              <td><%= critere.nombre_tests_proposes %> sur <%= critere.nombre_tests_proposes_max %></td>
+                              <td><%= critere.nombre_tests_proposes %></td>
                             <% end %>
                             <td>
                               <% unless critere.pas_de_test? %>

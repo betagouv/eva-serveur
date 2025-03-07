@@ -146,6 +146,9 @@ describe Restitution::PlaceDuMarche do
       allow_any_instance_of(described_class).to receive(
         :calcule_pourcentage_reussite_competence_clea
       )
+      allow_any_instance_of(Restitution::Competence::ProfilEvacob).to receive(
+        :a_passe_le_niveau_1?
+      ).and_return(true)
       # rubocop:enable RSpec/AnyInstance
     end
 

@@ -55,7 +55,7 @@ module Restitution
       end
 
       def profil_numeratie
-        return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
+        return ::Competence::NIVEAU_INDETERMINE unless a_passe_le_niveau_1?
 
         @score ||= @restitution.partie.metriques[@metrique]
         return ::Competence::NIVEAU_INDETERMINE if @score.blank?
@@ -63,6 +63,13 @@ module Restitution
         SEUILS[@metrique].each do |profil, niveau|
           return profil if @score == niveau
         end
+      end
+
+      DERNIERE_QUESTION_NIVEAU_1 = 'N1Pvn4'
+      def a_passe_le_niveau_1?
+        @restitution.partie.evenements.find do |evenement|
+          evenement.question_nom_technique == DERNIERE_QUESTION_NIVEAU_1
+        end.present?
       end
     end
   end

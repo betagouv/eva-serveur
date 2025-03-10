@@ -7,14 +7,34 @@
 // Les DPI actuels sont de 133x133 dpi de manière arbitraire.
 // La page sera ajustée à la génération du PDF pour remplir toute la page
 // (Paramètre "smart shrinking", de wkhtmltopdf, actif par défaut).
-$largeur-page: 1100px;
-$hauteur-page: 1557px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
+$largeur-page: 794px;
+$hauteur-page: 1555px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-underline-offset: 10%;
+}
+
+body {
+	-webkit-font-smoothing: antialiased; /* Améliore le rendu sur WebKit (Chrome, Safari) */
+	-moz-osx-font-smoothing: grayscale;  /* Pour Firefox sur macOS */
+	text-rendering: optimizeLegibility;  /* Meilleur rendu des polices */
+}
 
 .page {
-  height: $hauteur-page;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
   position: relative;
   page-break-after: always;
-  border-bottom: none;
+  break-after: page;
+  
+  -bottom: none;
+}
+
+.break-after-page {
+  break-after: page;
 }
 
 .row {
@@ -28,4 +48,36 @@ $hauteur-page: 1557px; // 1555 + 2px pour éviter d'avoir une ligne blanche en b
 
 .col-auto {
   -webkit-box-flex: 0;
+  border: none; // Il y a une bordure noir qui apparait sur cet élément
+}
+
+.page-numeratie {
+  .content {
+    display: flex;
+    padding: 0px 7.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+
+  /* Adaptation */
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .synthese-illettrisme {
+    margin: 0 5rem 0;
+  }
+
+  .fr-accordion {
+    display: none;
+  }
+
+  .fr-tile__title:before {
+    display: none;
+  }
 }

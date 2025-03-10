@@ -4,15 +4,10 @@ competence = competence.to_s
 scope = "admin.restitutions.#{referentiel}.#{competence}"
 
 div class: 'col-auto badge' do
-  if pdf
-    div svg_tag_base64 "#{competence}_#{referentiel}.svg"
-    div svg_tag_base64 "badges/#{referentiel}/#{niveau}.svg" if niveau.present?
-  else
-    div image_tag "#{competence}_#{referentiel}.svg", alt: ''
-    if niveau.present?
-      div image_tag "badges/#{referentiel}/#{niveau}.svg",
-                    alt: t(niveau, scope: 'admin.restitutions.references')
-    end
+  div image_tag "#{competence}_#{referentiel}.svg", alt: ''
+  if niveau.present?
+    div image_tag "badges/#{referentiel}/#{niveau}.svg",
+                  alt: t(niveau, scope: 'admin.restitutions.references')
   end
 end
 div class: 'col' do

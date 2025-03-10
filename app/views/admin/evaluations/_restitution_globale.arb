@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-div class: 'evaluation__restitution-globale' do
+class_css = campagne_avec_positionnement?(:litteratie) ? 'litteratie' : 'numeratie'
+div class: "evaluation__restitution-globale #{class_css}" do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
   if bienvenue
@@ -149,21 +150,58 @@ div class: 'evaluation__restitution-globale' do
   end
 
   if campagne_avec_positionnement?(:numeratie)
-    div id: 'numeratie', class: 'page page-numeratie' do
-      render 'entete_page', restitution_globale: restitution_globale
+    if pdf
+      profil = place_du_marche ? place_du_marche.profil_numeratie : 'indetermine'
 
-      if pdf
-        h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center mt-5 mb-4'
-      else
-        h2 t('titre', scope: 'admin.restitutions.numeratie')
+      synthese = restitution_globale.synthese_positionnement_numeratie
+      sous_competences = place_du_marche.competences_numeratie.to_a if place_du_marche
+
+      div class: 'page page-numeratie' do
+        render 'entete_page', restitution_globale: restitution_globale
+
+        div class: 'content' do
+          h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center'
+
+          render(
+            'litteratie_numeratie_synthese',
+            synthese: synthese,
+            scope: "admin.evaluations.numeratie.#{profil}",
+            icone: "icone_profil/icone_#{profil}.svg"
+          )
+
+          sous_competence = sous_competences[0]
+          render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]))
+
+          sous_competence = sous_competences[1]
+          render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]))
+        end
       end
 
-      render partial: 'numeratie',
-             locals: {
-               synthese: restitution_globale.synthese_positionnement_numeratie,
-               pdf: pdf
-             }
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
+      div class: 'page page-numeratie' do
+        render 'entete_page', restitution_globale: restitution_globale
+
+        div class: 'content' do
+          sous_competence = sous_competences[2]
+          render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]))
+
+          sous_competence = sous_competences[3]
+          render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]))
+
+          sous_competence = sous_competences[4]
+          render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]))
+        end
+      end
+    else
+      div id: 'numeratie', class: 'page page-numeratie' do
+        render 'entete_page', restitution_globale: restitution_globale
+        h2 t('titre', scope: 'admin.restitutions.numeratie')
+
+        render partial: 'numeratie',
+               locals: {
+                 synthese: restitution_globale.synthese_positionnement_numeratie,
+                 pdf: pdf
+               }
+      end
     end
   end
 end

@@ -14,15 +14,11 @@ div class: 'marges-page' do
          pdf: pdf
 
   div class: 'row my-4' do
-    div class: 'col-auto badge' do
-      image_tag '', alt: '' # place holder
-    end
+    div class: 'col-auto badge'
     div class: 'col' do
       render 'metacompetences', categorie: :litteratie
     end
-    div class: 'col-auto badge' do
-      image_tag '', alt: '' # place holder
-    end
+    div class: 'col-auto badge'
     div class: 'col' do
       render 'metacompetences', categorie: :numeratie
     end

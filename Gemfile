@@ -65,6 +65,9 @@ gem 'typhoeus'
 gem 'view_component'
 gem 'view_component_storybook'
 gem 'web-console', group: :development
+
+# PDF
+gem 'puppeteer-ruby'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 

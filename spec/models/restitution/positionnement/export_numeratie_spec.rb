@@ -73,5 +73,44 @@ describe Restitution::Positionnement::ExportNumeratie do
         expect(liste['2.3'].keys).to eq(['2.3.5', '2.3.7'])
       end
     end
+
+    describe '#tri_par_ordre_croissant' do
+      it 'trie les questions correctement par code_clea et famille metacompetence' do
+        question1 = create(:question, nom_technique: 'N1Poa1')
+        question2 = create(:question, nom_technique: 'N1Poa2')
+        question3 = create(:question, nom_technique: 'N1Roa1')
+        question4 = create(:question, nom_technique: 'N1Roa2')
+        question5 = create(:question, nom_technique: 'N1Pos1')
+        question6 = create(:question, nom_technique: 'N1Pos2')
+        question7 = create(:question, nom_technique: 'N1Ros1')
+        question8 = create(:question, nom_technique: 'N1Ros2')
+
+        evenements_questions = [
+          EvenementQuestion.new(question: question1),
+          EvenementQuestion.new(question: question2),
+          EvenementQuestion.new(question: question3),
+          EvenementQuestion.new(question: question4),
+          EvenementQuestion.new(question: question5),
+          EvenementQuestion.new(question: question6),
+          EvenementQuestion.new(question: question7),
+          EvenementQuestion.new(question: question8)
+        ]
+
+        groupes_clea = { '2.1.1' => evenements_questions }
+
+        resultat = response_service.send(:tri_par_ordre_croissant, groupes_clea)
+
+        expect(resultat['2.1.1'].map(&:nom_technique)).to eq(%w[
+                                                               N1Poa1
+                                                               N1Poa2
+                                                               N1Roa1
+                                                               N1Roa2
+                                                               N1Pos1
+                                                               N1Pos2
+                                                               N1Ros1
+                                                               N1Ros2
+                                                             ])
+      end
+    end
   end
 end

@@ -36,10 +36,13 @@ $grid-gutter-width: 1.25rem;
 
   .en-tete-page {
     display: block;
-    background-image: asset-data-url('vague.svg');
-    background-size: 100% 200px;
+    background-image: asset-url('vague.svg');
+    background-size: contain;
     background-repeat: no-repeat;
-    height: 200px;
+    height: 256px;
+    width: 100%;
+    position: static;
+    top: 0;
     padding: 2.25rem 5rem 0 5rem;
 
     .eva-logo {

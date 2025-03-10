@@ -4,11 +4,8 @@ div class: "synthese-illettrisme #{synthese}" do
   div class: 'row' do
     div class: 'col-auto' do
       icone = 'icone_profil/icone_indetermine.svg' if synthese.blank?
-      if pdf
-        div svg_tag_base64 icone
-      else
-        div image_tag icone, alt: t('alt_icone', scope: scope)
-      end
+
+      div image_tag icone, alt: t('alt_icone', scope: scope)
     end
     div class: 'col' do
       if synthese.present?

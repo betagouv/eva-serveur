@@ -2,7 +2,7 @@
 
 div class: 'en-tete-page' do
   div class: 'row pt-2' do
-    div class: 'col col-7 identite' do
+    div class: 'col col-5 identite' do
       span class: 'eva-logo' do
         span svg_tag_base64 'eva-logo.svg'
       end
@@ -10,7 +10,7 @@ div class: 'en-tete-page' do
         restitution_globale.utilisateur
       end
     end
-    div class: 'col col-5 contexte' do
+    div class: 'col col-3 contexte' do
       div class: 'date-restitution pt-2' do
         l restitution_globale.date, format: :avec_heure
       end

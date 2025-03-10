@@ -132,8 +132,20 @@ ActiveAdmin.register Evaluation do
     def show
       show! do |format|
         format.html
-        format.pdf { render pdf: resource.nom }
+        format.pdf { render_pdf }
       end
+    end
+
+    def render_pdf
+      html_content = render_to_string(
+        template: 'admin/evaluations/show',
+        layout: false,
+        locals: { resource: resource }
+      )
+
+      pdf_path = Html2Pdf.new.genere_pdf_depuis_html(html_content)
+
+      send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf')
     end
 
     def destroy

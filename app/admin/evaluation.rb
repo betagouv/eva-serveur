@@ -132,7 +132,35 @@ ActiveAdmin.register Evaluation do
     def show
       show! do |format|
         format.html
-        format.pdf { render pdf: resource.nom }
+        format.pdf do
+          # html_content = render_to_string(
+          #   partial: 'admin/evaluations/show', # Adjust path if necessary
+          #   layout: false,
+          #   formats: [:html],
+          #   locals: { resource: resource, parties_selectionnees: params[:parties_selectionnees] }
+          # )
+          html_content = render_to_string(
+            template: 'admin/evaluations/show',
+            layout: false,
+            locals: { resource: resource }
+          )
+
+          # url = admin_evaluation_url(
+          #   resource.id,
+          #   parties_selectionnees: params['parties_selectionnees'],
+          #   format: :html
+          # )
+          # p url
+          # pdf_path = Html2Pdf.new(url).genere_pdf
+          pdf_path = Html2Pdf.new.genere_pdf_depuis_html(html_content)
+
+          send_file(
+            pdf_path,
+            filename: "#{resource.nom}.pdf",
+            type: 'application/pdf',
+            disposition: 'inline'
+          )
+        end
       end
     end
 

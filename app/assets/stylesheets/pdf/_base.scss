@@ -8,9 +8,21 @@
 // La page sera ajustée à la génération du PDF pour remplir toute la page
 // (Paramètre "smart shrinking", de wkhtmltopdf, actif par défaut).
 $largeur-page: 1100px;
-$hauteur-page: 1557px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
+$hauteur-page: 1555px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
 
 .page {
+  position: relative;
+  width: 100%;
   height: $hauteur-page;
   position: relative;
   page-break-after: always;
@@ -28,4 +40,8 @@ $hauteur-page: 1557px; // 1555 + 2px pour éviter d'avoir une ligne blanche en b
 
 .col-auto {
   -webkit-box-flex: 0;
+}
+
+.fr-accordion {
+  display: none;
 }

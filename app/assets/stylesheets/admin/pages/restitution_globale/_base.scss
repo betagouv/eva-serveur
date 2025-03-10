@@ -1,3 +1,14 @@
+.evaluation__restitution-globale.litteratie {
+  h4 {
+    color: $eva_main_blue;
+    font-size: 1rem;
+  }
+  
+  h3 {
+    margin: 3rem 0 1rem;
+  }
+}
+
 .evaluation__restitution-globale {
   font-size: 0.875rem;
   font-family: $font-texte;
@@ -11,15 +22,6 @@
 
   .en-tete-page, .pied-page {
     display: none;
-  }
-
-  h4 {
-    color: $eva_main_blue;
-    font-size: 1rem;
-  }
-
-  h3 {
-    margin: 3rem 0 1rem;
   }
 
   .marges-page {

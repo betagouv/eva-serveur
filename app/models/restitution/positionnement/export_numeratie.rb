@@ -127,11 +127,16 @@ module Restitution
         @onglet_xls.set_valeur(ligne, 11, @temps_par_question[evenement_question.nom_technique])
       end
 
-      # Trie par code cléa et par question
       def tri_par_ordre_croissant(groupes_clea)
-        groupes_clea.sort_by do |code, evenements_questions|
-          [code.to_s, evenements_questions.map(&:nom_technique).sort]
-        end.to_h
+        groupes_clea = groupes_clea.sort_by { |code, _| code.to_s }.to_h
+        tri_par_metacompetence(groupes_clea)
+      end
+
+      def tri_par_metacompetence(groupes_clea)
+        groupes_clea.transform_values do |evenements_questions|
+          groupes_familles = regroupe_par_famille(evenements_questions)
+          trie_les_familles(groupes_familles)
+        end
       end
 
       def pourcentage(evenements_questions)
@@ -143,6 +148,37 @@ module Restitution
 
       def intitule_code_clea(code)
         Metacompetence::CODECLEA_INTITULES[code]
+      end
+
+      def regroupe_par_famille(evenements_questions)
+        evenements_questions.group_by do |eq|
+          nom = eq.nom_technique
+          match = nom.match(/(N\d+)([PR])([a-z]+)(\d+)/)
+          next nom unless match
+
+          prefixe = match[1]
+          categorie = match[3]
+          "#{prefixe}#{categorie}"
+        end
+      end
+
+      def trie_les_familles(groupes_familles)
+        groupes_familles.sort_by { |famille, _| famille }.flat_map do |_, questions|
+          trie_les_questions(questions)
+        end
+      end
+
+      def trie_les_questions(questions)
+        questions.sort_by do |eq|
+          nom = eq.nom_technique
+          match = nom.match(/(N\d+)([PR])([a-z]+)(\d+)/)
+          next nom unless match
+
+          type = match[2]
+          numero = match[4].to_i
+
+          [type == 'P' ? 0 : 1, numero]
+        end
       end
     end
   end

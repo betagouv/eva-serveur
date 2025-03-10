@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-div class: 'evaluation__restitution-globale' do
+class_css = campagne_avec_positionnement?(:litteratie) ? 'litteratie' : 'numeratie'
+div class: "evaluation__restitution-globale #{class_css}" do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
   if bienvenue
@@ -163,7 +164,6 @@ div class: 'evaluation__restitution-globale' do
                synthese: restitution_globale.synthese_positionnement_numeratie,
                pdf: pdf
              }
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
     end
   end
 end

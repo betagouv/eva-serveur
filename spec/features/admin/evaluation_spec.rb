@@ -273,8 +273,9 @@ describe 'Admin - Evaluation', type: :feature do
           # rubocop:enable Lint/Debugger
 
           reader = PDF::Reader.new(pdf_path)
+
           expect(reader.page(1).text).to include('Roger')
-          expect(reader.page(2).text).to include('structure')
+          expect(reader.page(1).text).to include('structure')
         end
       end
     end

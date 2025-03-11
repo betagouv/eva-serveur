@@ -25,15 +25,6 @@ module ApplicationHelper
     'col-4 px-5 mb-4'
   end
 
-  # cette fonction n'est nécessaire que pour les svg dans les PDF.
-  # Utiliser prioritairement `image_tag` même pour les SVG
-  def svg_tag_base64(chemin_avec_extension, options = {})
-    ## Ne pas oublier de rajouter l'extension au path sinon ça ne build pas en production
-
-    raw = Rails.application.assets_manifest.find_sources(chemin_avec_extension).first
-    image_tag svg_encode_en_base64(raw), alt: options[:alt], class: options[:class]
-  end
-
   def cdn_for(fichier)
     return Rails.application.routes.url_helpers.url_for(fichier) unless Rails.env.production?
 

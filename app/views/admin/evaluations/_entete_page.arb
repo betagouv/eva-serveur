@@ -4,7 +4,7 @@ div class: 'en-tete-page' do
   div class: 'row pt-2' do
     div class: 'col col-5 identite' do
       span class: 'eva-logo' do
-        span svg_tag_base64 'eva-logo.svg'
+        span image_tag 'eva-logo.svg', alt: 'logo EVA'
       end
       span class: 'nom-evalue' do
         restitution_globale.utilisateur

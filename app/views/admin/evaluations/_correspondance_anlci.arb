@@ -12,11 +12,7 @@ div id: 'correspondance_anlci', class: 'page' do
   div class: 'panel panel--avec-references' do
     div class: 'row no-gutters recommandation-anlci marges-page' do
       div class: 'col-auto' do
-        if pdf
-          svg_tag_base64 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
-        else
-          image_tag 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
-        end
+        image_tag 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
       end
       div class: 'col' do
         md t('recommandation', scope: 'admin.restitutions.anlci')
@@ -26,8 +22,7 @@ div id: 'correspondance_anlci', class: 'page' do
       render 'litteratie_numeratie_niveau1',
              niveau_litteratie: resource.niveau_anlci_litteratie,
              niveau_numeratie: resource.niveau_anlci_numeratie,
-             referentiel: 'anlci',
-             pdf: pdf
+             referentiel: 'anlci'
     end
 
     if pdf

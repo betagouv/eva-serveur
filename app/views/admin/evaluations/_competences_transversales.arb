@@ -31,11 +31,7 @@ div id: 'competences_transversales', class: 'page' do
                     }
               end
               span class: 'image-competence' do
-                if pdf
-                  svg_tag_base64 "#{competence}.svg"
-                else
-                  image_tag "#{competence}.svg", alt: ''
-                end
+                image_tag "#{competence}.svg", alt: ''
               end
               div class: 'informations-competence' do
                 h3 t("#{competence}.nom", scope: 'admin.evaluations.restitution_competence'),
@@ -45,11 +41,7 @@ div id: 'competences_transversales', class: 'page' do
                   div md t("#{competence}.stanine#{interpretation}",
                            scope: 'admin.evaluations.restitution_competence')
                   div class: 'lien-metier' do
-                    if pdf
-                      text_node svg_tag_base64 'lien.svg', class: 'image-lien', alt: ''
-                    else
-                      text_node image_tag 'lien.svg', alt: '', class: 'image-lien'
-                    end
+                    text_node image_tag 'lien.svg', alt: '', class: 'image-lien'
                     span class: 'align-middle' do
                       text_node t('.etiquette_lien_metiers')
                       url_competence = "#{URL_COMPETENCES_SITE_VITRINE}#{competence}/"

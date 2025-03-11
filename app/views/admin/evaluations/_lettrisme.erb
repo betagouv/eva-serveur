@@ -4,8 +4,7 @@
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
       scope: "admin.evaluations.lettrisme.litteratie.#{profil}",
-      icone: "icone_profil/icone_#{profil}.svg",
-      pdf: pdf %>
+      icone: "icone_profil/icone_#{profil}.svg" %>
     <% if niveau_bas?(profil) %>
       <%= render 'admin/evaluations/positionnement/sous_competences',
         sous_competences: cafe_de_la_place.competences_lettrisme,

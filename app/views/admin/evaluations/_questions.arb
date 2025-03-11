@@ -11,20 +11,12 @@ unless restitution.questions_redaction.empty?
     end
     div class: 'row reponse-question' do
       span class: 'crochet-aide-redaction' do
-        if pdf
-          svg_tag_base64 'crochet-aide-redaction.svg'
-        else
-          image_tag 'crochet-aide-redaction.svg', alt: ''
-        end
+        image_tag 'crochet-aide-redaction.svg', alt: ''
       end
       div class: 'col-4 mb-5' do
         div reponse, class: 'my-2 note-redaction' do
           span class: 'image-redaction' do
-            if pdf
-              svg_tag_base64 'redaction.svg'
-            else
-              image_tag 'redaction.svg', alt: t('admin.restitutions.redaction')
-            end
+            image_tag 'redaction.svg', alt: t('admin.restitutions.redaction')
           end
         end
       end
@@ -33,11 +25,7 @@ unless restitution.questions_redaction.empty?
           div class: 'my-2 aide-redaction' do
             div md t('admin.restitutions.aide_interpretation_expression_ecrite')
             span class: 'image-redaction' do
-              if pdf
-                svg_tag_base64 'aide-redaction.svg'
-              else
-                image_tag 'aide-redaction.svg', alt: ''
-              end
+              image_tag 'aide-redaction.svg', alt: ''
             end
           end
         end

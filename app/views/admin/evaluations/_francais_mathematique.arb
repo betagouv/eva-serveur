@@ -4,14 +4,12 @@ div class: 'marges-page' do
   render 'litteratie_numeratie_synthese',
          synthese: synthese,
          scope: "admin.restitutions.cefr.#{synthese}",
-         icone: "punaise-#{synthese}.svg",
-         pdf: pdf
+         icone: "punaise-#{synthese}.svg"
 
   render 'litteratie_numeratie_niveau1',
          niveau_litteratie: resource.niveau_cefr,
          niveau_numeratie: resource.niveau_cnef,
-         referentiel: 'cefr',
-         pdf: pdf
+         referentiel: 'cefr'
 
   div class: 'row my-4' do
     div class: 'col-auto badge'

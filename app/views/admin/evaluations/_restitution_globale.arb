@@ -44,8 +44,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
         h2 t('titre', scope: 'admin.restitutions.cefr'), class: 'text-center mt-5 mb-4'
 
         div class: 'panel' do
-          render 'francais_mathematique', pdf: pdf,
-                                          synthese: restitution_globale.synthese_diagnostic
+          render 'francais_mathematique', synthese: restitution_globale.synthese_diagnostic
         end
 
         render 'pied_page', pre_pied_page: 'referentiel_europeen'
@@ -65,8 +64,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
         h2 t('titre', scope: 'admin.restitutions.cefr')
 
         div class: 'panel panel--avec-references' do
-          render 'francais_mathematique', pdf: pdf,
-                                          synthese: restitution_globale.synthese_diagnostic
+          render 'francais_mathematique', synthese: restitution_globale.synthese_diagnostic
 
           render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
 

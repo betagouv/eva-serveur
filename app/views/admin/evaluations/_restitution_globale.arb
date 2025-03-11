@@ -5,57 +5,11 @@ div class: "evaluation__restitution-globale #{class_css}" do
   render 'deroulement_passation' unless resource.campagne.parcours_type.blank? || pdf
 
   if bienvenue
-    if pdf
-      div id: 'profil' do
-        div class: 'page' do
-          render 'entete_page', restitution_globale: restitution_globale
-
-          h2 t('.autopositionnement.titre'), class: 'text-center mt-5 mb-4'
-
-          div class: 'panel' do
-            div class: 'marges-page' do
-              render partial: 'questions_reponses_autopositionnement',
-                     locals: { bienvenue: bienvenue }
-            end
-
-            render 'pied_page'
-          end
-        end
-        if bienvenue.inclus_autopositionnement?
-          div class: 'page' do
-            render 'entete_page', restitution_globale: restitution_globale
-
-            div class: 'panel' do
-              div class: 'marges-page' do
-                render partial: 'questionnaire_autopositionnement',
-                       locals: { auto_positionnement: bienvenue }
-              end
-
-              render 'pied_page'
-            end
-          end
-        end
-      end
-    else
-      div id: 'profil', class: 'page' do
-        render 'entete_page', restitution_globale: restitution_globale
-
-        h2 t('.autopositionnement.titre')
-
-        div class: 'panel' do
-          div class: 'marges-page' do
-            render partial: 'questions_reponses_autopositionnement',
-                   locals: { bienvenue: bienvenue }
-            if bienvenue.inclus_autopositionnement?
-              render partial: 'questionnaire_autopositionnement',
-                     locals: { auto_positionnement: bienvenue }
-            end
-          end
-
-          render 'pied_page'
-        end
-      end
-    end
+    render(
+      Evaluation::BienvenueComponent.new(
+        restitution_globale: restitution_globale, bienvenue: bienvenue
+      )
+    )
   end
 
   if prise_en_main?

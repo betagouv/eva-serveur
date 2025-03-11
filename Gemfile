@@ -68,8 +68,6 @@ gem 'web-console', group: :development
 
 # PDF
 gem 'puppeteer-ruby'
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

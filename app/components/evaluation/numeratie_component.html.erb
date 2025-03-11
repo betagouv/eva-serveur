@@ -1,0 +1,22 @@
+<div id='numeratie' class='page page-numeratie'>
+  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+  <h2><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
+
+  <div class="<%= classes_panel %>">
+    <div class='marges-page'>
+      <%= render 'litteratie_numeratie_synthese',
+        synthese: @synthese,
+        scope: "admin.evaluations.numeratie.#{@profil}",
+        icone: "icone_profil/icone_#{@profil}.svg" %>
+      <% if @place_du_marche %>
+        <%= render 'admin/evaluations/positionnement/sous_competences',
+            sous_competences: @sous_competences,
+            competence: :numeratie %>
+      <% end %>
+    </div>
+    <% if @place_du_marche %>
+      <% route = admin_positionnement_partie_reponses_path(partie_id: @place_du_marche.partie.id)%>
+      <%= render partial: 'telechargement_reponses', locals: { route: route } %>
+    <% end %>
+  </div>
+</div>

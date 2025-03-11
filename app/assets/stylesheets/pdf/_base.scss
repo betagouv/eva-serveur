@@ -2,14 +2,6 @@
 @import 'admin/variables';
 @import "admin/typography";
 
-// Les deux dimensions suivantes ont été calculées proportionnellement à la taille A4
-// en gardant un DPI constant entre la hauteur et la largeur.
-// Les DPI actuels sont de 133x133 dpi de manière arbitraire.
-// La page sera ajustée à la génération du PDF pour remplir toute la page
-// (Paramètre "smart shrinking", de wkhtmltopdf, actif par défaut).
-$largeur-page: 794px;
-$hauteur-page: 1555px; // 1555 + 2px pour éviter d'avoir une ligne blanche en bas de page 😢
-
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;

@@ -14,11 +14,9 @@
     ) %>
 
     <% if @sous_competences %>
-      <% sous_competence = @sous_competences[0] %>
-      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
-
-      <% sous_competence = @sous_competences[1] %>
-      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% @sous_competences[0..1].each do |sous_competence| %>
+        <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% end %>
     <% end %>
   </div>
 </div>
@@ -28,14 +26,9 @@
     <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
     <div class="content">
-      <% sous_competence = @sous_competences[2] %>
-      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
-
-      <% sous_competence = @sous_competences[3] %>
-      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
-
-      <% sous_competence = @sous_competences[4] %>
-      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% @sous_competences[2..4].each do |sous_competence| %>
+        <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% end %>
     </div>
   </div>
 <% end %>

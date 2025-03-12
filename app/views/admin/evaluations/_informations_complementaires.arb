@@ -26,7 +26,7 @@ div class: 'row m-0' do
       cp = resource.conditions_passation
       div class: 'row' do
         div class: 'col-1' do
-          span 'Materiel Utilisé'
+          span t('.materiel_utilise')
         end
         div class: 'col col-2' do
           span "#{cp.materiel_utilise} | #{cp.nom_navigateur} #{cp.version_navigateur}"
@@ -51,7 +51,7 @@ div class: 'row m-0' do
         span t('.donnees_sociodemographiques')
       end
       div class: 'col col-2' do
-        auto_link resource.donnee_sociodemographique
+        span resource.donnee_sociodemographique
       end
     end
     div class: 'row' do

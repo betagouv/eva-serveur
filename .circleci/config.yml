@@ -20,7 +20,7 @@ jobs:
           POSTGRES_PASSWORD: ""
       - image: cimg/redis:6.2
     steps:
-      - browser-tools/install-chromedrive
+      - browser-tools/install-browser-tools
       - checkout
 
       # Which version of bundler?

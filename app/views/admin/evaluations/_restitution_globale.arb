@@ -101,7 +101,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
     end
   end
 
-  if place_du_marche
+  if campagne_avec_positionnement?(:numeratie)
     render(
       Evaluation::NumeratieComponent.new(
         restitution_globale: restitution_globale, place_du_marche: place_du_marche

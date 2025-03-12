@@ -1,4 +1,4 @@
-<% @sous_competences = @sous_competences.to_a %>
+<% @sous_competences = @sous_competences&.to_a %>
 
 <div class="page page-numeratie">
   <%= render 'entete_page', restitution_globale: @restitution_globale %>
@@ -13,25 +13,29 @@
       icone: "icone_profil/icone_#{@profil}.svg"
     ) %>
 
-    <% sous_competence = @sous_competences[0] %>
-    <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+    <% if @sous_competences %>
+      <% sous_competence = @sous_competences[0] %>
+      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
 
-    <% sous_competence = @sous_competences[1] %>
-    <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% sous_competence = @sous_competences[1] %>
+      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+    <% end %>
   </div>
 </div>
 
-<div class="page page-numeratie">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+<% if @sous_competences %>
+  <div class="page page-numeratie">
+    <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
-  <div class="content">
-    <% sous_competence = @sous_competences[2] %>
-    <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+    <div class="content">
+      <% sous_competence = @sous_competences[2] %>
+      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
 
-    <% sous_competence = @sous_competences[3] %>
-    <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% sous_competence = @sous_competences[3] %>
+      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
 
-    <% sous_competence = @sous_competences[4] %>
-    <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+      <% sous_competence = @sous_competences[4] %>
+      <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
+    </div>
   </div>
-</div>
+<% end %>

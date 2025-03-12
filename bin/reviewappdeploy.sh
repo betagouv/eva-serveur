@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 bundle exec rails db:migrate VERSION=20210305110556
 bundle exec rails db:migrate VERSION=20230406135310

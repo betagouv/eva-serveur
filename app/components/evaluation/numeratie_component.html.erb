@@ -1,10 +1,9 @@
 <div id='numeratie' class='page page-numeratie'>
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
   <h2><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
 
   <div class="<%= classes_panel %>">
     <div class='marges-page'>
-      <%= render 'litteratie_numeratie_synthese',
+      <%= render 'admin/evaluations/litteratie_numeratie_synthese',
         synthese: @synthese,
         scope: "admin.evaluations.numeratie.#{@profil}",
         icone: "icone_profil/icone_#{@profil}.svg" %>

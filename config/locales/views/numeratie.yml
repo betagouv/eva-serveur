@@ -3,7 +3,8 @@ fr:
     evaluations:
       numeratie:
         indetermine:
-          alt_icone: ''
+          alt_icone: Profil indéterminé
+          description: ''
         profil1:
           alt_icone: Profil 1
           description: |

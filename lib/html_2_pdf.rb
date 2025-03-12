@@ -21,7 +21,7 @@ class Html2Pdf
 
   def puppeteer_options
     options = {
-      headless: false, args: ['--no-sandbox', '--disable-setuid-sandbox']
+      headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']
     }
     options[:executable_path] = ENV['GOOGLE_CHROME_SHIM'] if ENV['GOOGLE_CHROME_SHIM']
     options

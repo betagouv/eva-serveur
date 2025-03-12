@@ -8,12 +8,6 @@
   text-underline-offset: 10%;
 }
 
-body {
-	-webkit-font-smoothing: antialiased; /* Améliore le rendu sur WebKit (Chrome, Safari) */
-	-moz-osx-font-smoothing: grayscale;  /* Pour Firefox sur macOS */
-	text-rendering: optimizeLegibility;  /* Meilleur rendu des polices */
-}
-
 .page {
   position: relative;
   width: 100vw;
@@ -21,8 +15,6 @@ body {
   position: relative;
   page-break-after: always;
   break-after: page;
-  
-  -bottom: none;
 }
 
 .break-after-page {

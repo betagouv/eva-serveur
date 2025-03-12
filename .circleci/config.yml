@@ -1,9 +1,11 @@
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.5.3
 jobs:
   build:
     parallelism: 1
     docker:
-      - image: cimg/ruby:3.2.6-node
+      - image: cimg/ruby:3.2.6-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -18,6 +20,7 @@ jobs:
           POSTGRES_PASSWORD: ""
       - image: cimg/redis:6.2
     steps:
+      - browser-tools/install-chromedrive
       - checkout
 
       # Which version of bundler?

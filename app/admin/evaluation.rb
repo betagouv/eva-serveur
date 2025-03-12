@@ -139,7 +139,7 @@ ActiveAdmin.register Evaluation do
     def render_pdf
       html_content = render_to_string(
         template: 'admin/evaluations/show',
-        layout: false,
+        layout: 'application',
         locals: { resource: resource }
       )
 

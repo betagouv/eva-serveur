@@ -1,14 +1,14 @@
 <html>
-<head>
-  <title>Eva</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>Eva</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'dsfr', media: 'all' %>
-  <%= javascript_include_tag 'active_admin' %>
-</head>
-<body>
-  <%= yield %>
-</body>
+    <%= stylesheet_link_tag 'active_admin', media: 'all' %>
+    <%= javascript_include_tag 'active_admin' %>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
 </html>

@@ -12,7 +12,7 @@ class Html2Pdf
       page.pdf(**pdf_options)
       filename
     end
-  rescue Puppeteer::Connection::ProtocolError => e
+  rescue Puppeteer::Connection::ProtocolError, Puppeteer::TimeoutError => e
     Rails.logger.error(e.message)
     false
   end

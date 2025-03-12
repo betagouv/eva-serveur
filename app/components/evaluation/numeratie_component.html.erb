@@ -8,7 +8,7 @@
         synthese: @synthese,
         scope: "admin.evaluations.numeratie.#{@profil}",
         icone: "icone_profil/icone_#{@profil}.svg" %>
-      <% if @place_du_marche %>
+      <% if @sous_competences %>
         <%= render 'admin/evaluations/positionnement/sous_competences',
             sous_competences: @sous_competences,
             competence: :numeratie %>

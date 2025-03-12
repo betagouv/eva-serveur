@@ -1,7 +1,7 @@
 <% @sous_competences = @sous_competences&.to_a %>
 
 <div class="page page-numeratie">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+  <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
 
   <div class="content">
     <h2 class="text-center"><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
@@ -23,7 +23,7 @@
 
 <% if @sous_competences %>
   <div class="page page-numeratie">
-    <%= render 'entete_page', restitution_globale: @restitution_globale %>
+    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
 
     <div class="content">
       <% @sous_competences[2..4].each do |sous_competence| %>

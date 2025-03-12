@@ -4,7 +4,8 @@ fr:
       lettrisme:
         litteratie:
           indetermine:
-            alt_icone: ''
+            alt_icone: Profil indéterminé
+            description: ''
           profil_aberrant:
             alt_icone: Profil aberrant
             description: |

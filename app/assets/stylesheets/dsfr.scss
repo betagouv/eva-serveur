@@ -2,6 +2,6 @@
 @import url("/pro/dsfr/utility.min.css");
 
 // Désactive la bordure noire en bas
-.fr-tile__title-sans-bordure-noire {
+.fr-tile__title-sans-bordure-noire:before {
   display: none;
 }

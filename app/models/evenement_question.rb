@@ -6,6 +6,8 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
     @question = question || Question.new(nom_technique: evenement.donnees['question'])
   end
 
+  delegate :est_principale?, :est_un_rattrapage?, :nom_technique, to: :@question
+
   def score
     @evenement.donnees['score'] || 0
   end
@@ -42,24 +44,12 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
     @evenement.persisted? && score.present?
   end
 
-  def est_principale?
-    @question.est_principale?
-  end
-
-  def est_un_rattrapage?
-    @question.est_un_rattrapage?
-  end
-
   def type_question
     @question.type
   end
 
   def code_clea
     Metacompetence.code_clea_sous_sous_domaine(metacompetence)
-  end
-
-  def nom_technique
-    @question.nom_technique
   end
 
   def pris_en_compte_pour_calcul_score_clea?(questions)

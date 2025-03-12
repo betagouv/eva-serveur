@@ -9,6 +9,9 @@ class SousCompetenceComponent < ViewComponent::Base
     @objet_sous_competence = objet_sous_competence
   end
 
+  delegate :profil, :nombre_questions_repondues, :nombre_total_questions, :succes,
+           :pourcentage_reussite, to: :@objet_sous_competence
+
   def litteratie?
     @competence == :litteratie
   end
@@ -33,26 +36,6 @@ class SousCompetenceComponent < ViewComponent::Base
 
   def tests_proposes_traduction
     "#{traduction_path}.tests_proposes"
-  end
-
-  def profil
-    @objet_sous_competence.profil
-  end
-
-  def nombre_questions_repondues
-    @objet_sous_competence.nombre_questions_repondues
-  end
-
-  def nombre_total_questions
-    @objet_sous_competence.nombre_total_questions
-  end
-
-  def succes
-    @objet_sous_competence.succes
-  end
-
-  def pourcentage_reussite
-    @objet_sous_competence.pourcentage_reussite
   end
 
   private

@@ -10,6 +10,15 @@ module Restitution
       questions_reponses.questions_et_reponses(type_qcm)
     end
 
+    def verifie_reponse(question, reponse)
+      if question.type_saisie == 'numerique'
+        i = reponse.to_i
+        return i < 2**31 ? i : nil
+      end
+
+      reponse.respond_to?(:nom_technique) ? reponse.nom_technique : reponse
+    end
+
     def attributs_sociodemographiques
       questions_et_reponses.each_with_object({}) do |q_et_r, attributs|
         question = q_et_r.first
@@ -17,8 +26,7 @@ module Restitution
         next unless question.categorie_situation? ||
                     question.categorie_scolarite?
 
-        attributs[question.nom_technique] =
-          reponse.respond_to?(:nom_technique) ? reponse.nom_technique : reponse
+        attributs[question.nom_technique] = verifie_reponse(question, reponse)
       end
     end
 

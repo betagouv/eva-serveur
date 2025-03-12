@@ -7,7 +7,8 @@ describe Restitution::Bienvenue do
   let(:quel_age) do
     create :question_saisie, nom_technique: 'age',
                              categorie: 'situation',
-                             libelle: 'quel age ?'
+                             libelle: 'quel age ?',
+                             type_saisie: :numerique
   end
   let(:scolarite) do
     create :question_qcm, nom_technique: 'lieu_scolarite',
@@ -21,13 +22,14 @@ describe Restitution::Bienvenue do
   let(:campagne) { Campagne.new }
 
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
+  let!(:age) { '33' }
   let(:evenements) do
     [
       build(:evenement_demarrage, partie: partie),
       build(:evenement_affichage_question_qcm, donnees: { question: quel_age.id },
                                                date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
       build(:evenement_reponse, donnees: { question: quel_age.id,
-                                           reponse: '33' },
+                                           reponse: age },
                                 date: Time.zone.local(2019, 10, 9, 10, 1, 22)),
       build(:evenement_affichage_question_qcm, donnees: { question: scolarite.id },
                                                date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
@@ -85,6 +87,30 @@ describe Restitution::Bienvenue do
         donnees = evaluation.reload.donnee_sociodemographique
         expect(donnees.age).to eq 33
         expect(donnees.genre).to eq 'homme'
+        expect(donnees.lieu_scolarite).to eq 'france'
+      end
+    end
+
+    context "Cas d'un age avec un entier trop grand" do
+      let(:age) { '2147483648' }
+      let(:evaluation) { create :evaluation, campagne: campagne }
+
+      it do
+        restitution.persiste
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.age).to be_nil
+        expect(donnees.lieu_scolarite).to eq 'france'
+      end
+    end
+
+    context "Cas d'un age avec maximum" do
+      let(:age) { '2147483647' }
+      let(:evaluation) { create :evaluation, campagne: campagne }
+
+      it do
+        restitution.persiste
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.age).to eq 2_147_483_647
         expect(donnees.lieu_scolarite).to eq 'france'
       end
     end

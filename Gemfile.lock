@@ -327,8 +327,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.8)
       domain_name (~> 0.5)
-    httpclient (2.9.0)
-      mutex_m
+    httpclient (2.8.3)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.2)
@@ -418,7 +417,6 @@ GEM
     msgpack (1.8.0)
     multi_json (1.15.0)
     multipart-post (2.4.1)
-    mutex_m (0.3.0)
     nenv (0.3.0)
     net-imap (0.5.6)
       date
@@ -759,6 +757,7 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   health_check
+  httpclient (< 2.9)
   i18n-js (~> 3.9.0)
   image_processing
   inline_svg

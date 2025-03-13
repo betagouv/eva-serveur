@@ -7,9 +7,10 @@ class AnonymisationBeneficiairesJob < ApplicationJob
 
   def perform
     beneficiaires_a_annonymiser.find_each do |beneficiaire|
-      Anonymisation::Beneficiaire.new(beneficiaire).anonymise
+      nom_genere = FFaker::NameFR.name
+      Anonymisation::Beneficiaire.new(beneficiaire).anonymise(nom_genere)
       beneficiaire.evaluations.each do |evaluation|
-        Anonymisation::Evaluation.new(evaluation).anonymise
+        Anonymisation::Evaluation.new(evaluation).anonymise(nom_genere)
       end
     end
   end

@@ -27,6 +27,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
   it "anonymise les bénéficiaires qui n'ont que des évaluations ancienne" do
     date_anonymisation = Time.zone.local(2025, 1, 2, 12, 0, 0)
     Timecop.freeze(date_anonymisation) do
+      expect(FFaker::NameFR).to receive(:name).and_return('nom généré')
       beneficiaire = create :beneficiaire, nom: 'nom'
       ancienne_evaluation = create :evaluation, created_at: Date.new(2020, 1, 1),
                                                 beneficiaire: beneficiaire
@@ -42,6 +43,10 @@ describe AnonymisationBeneficiairesJob, type: :job do
       expect(beneficiaire.anonymise_le).to eq date_anonymisation
       expect(ancienne_evaluation.anonymise_le).to eq date_anonymisation
       expect(autre_evaluation_ancienne.anonymise_le).to eq date_anonymisation
+
+      expect(beneficiaire.nom).to eq 'nom généré'
+      expect(ancienne_evaluation.nom).to eq 'nom généré'
+      expect(autre_evaluation_ancienne.nom).to eq 'nom généré'
     end
   end
 

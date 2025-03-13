@@ -33,7 +33,7 @@ class Html2Pdf
   def pause_pdf
     return if ENV['DEBUG_PDF'].blank?
 
-    Rails.logger.debug 'Press Enter to continue...'
+    Rails.logger.debug 'Appuyer sur la touche "Entrer" pour continuer le processus'
     gets # Attend que l'utilisateur appuie sur "Enter" (dans le terminal du serveur)
   end
 

@@ -3,11 +3,12 @@
 require 'puppeteer-ruby'
 
 class Html2Pdf
+  A4_VIEWPORT = Puppeteer::Viewport.new(width: 1008, height: 1488)
+  A4_WINDOW_SIZE = '--window-size=1920,1080'
+
   def genere_pdf_depuis_html(html_content)
     Puppeteer.launch(**puppeteer_options) do |browser|
-      page = browser.new_page
-
-      page.set_content(html_content, wait_until: 'networkidle2')
+      page = prepare_page(browser, html_content)
 
       page.pdf(**pdf_options)
       filename
@@ -19,10 +20,31 @@ class Html2Pdf
 
   private
 
+  def prepare_page(browser, html_content)
+    page = browser.new_page
+    page.viewport = A4_VIEWPORT
+    page.set_content(html_content, wait_until: 'networkidle2')
+    pause_pdf
+    page
+  end
+
+  # Le mode debug permet d'ouvrir une page chrome pour visualiser le rendu
+  # et inspecter l'html avant la transformation en PDF
+  def pause_pdf
+    return if ENV['DEBUG_PDF'].blank?
+
+    Rails.logger.debug 'Press Enter to continue...'
+    gets # Attend que l'utilisateur appuie sur "Enter" (dans le terminal du serveur)
+  end
+
   def puppeteer_options
     options = {
-      headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']
+      headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', A4_WINDOW_SIZE]
     }
+    if ENV['DEBUG_PDF'].present?
+      options[:headless] = false
+      options[:args] += ['--auto-open-devtools-for-tabs']
+    end
     options[:executable_path] = ENV['GOOGLE_CHROME_SHIM'] if ENV['GOOGLE_CHROME_SHIM']
     options
   end

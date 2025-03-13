@@ -71,18 +71,10 @@ rake view_component_storybook:write_stories_json
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
 
 ### Variables d'environnement
-```
-PROTOCOLE_SERVEUR=http
-HOTE_SERVEUR=localhost:3000
-URL_CLIENT=http://localhost:7700/jeu
-EMAIL_DEFAULT_FROM=eva@beta.gouv.fr
-METABASE_SITE_URL=http://metabase.eva.beta.gouv.fr
-METABASE_SECRET_KEY=<SECRET_METABASE>
-PRO_CONNECT_CLIENT_ID=<client_id_Pro_connect>
-PRO_CONNECT_CLIENT_SECRET=<SECRET_PROCONNECT>
-PRO_CONNECT_BASE_URL=https://fca.integ01.dev-agentconnect.fr
-```
-Sans ces variables, le projet ne se lancera pas correctement en local.
+
+- Copier-coller le fichier `.env.template` vers `.env` : `cp .env.template .env`
+
+Sans les variables, le projet ne se lancera pas correctement en local.
 <SECRET_METABASE> se trouve sur metabase https://metabase.eva.beta.gouv.fr/admin/settings/embedding-in-other-applications/standalone
 Demander le <SECRET_IC> à l'équipe
 

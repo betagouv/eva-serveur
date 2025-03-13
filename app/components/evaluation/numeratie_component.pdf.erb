@@ -19,6 +19,8 @@
       <% end %>
     <% end %>
   </div>
+
+  <%= render 'pied_page' %>
 </div>
 
 <% if @sous_competences %>
@@ -30,6 +32,8 @@
         <%= render(SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1])) %>
       <% end %>
     </div>
+
+    <%= render 'pied_page' %>
   </div>
 
   <div class="page page-numeratie">
@@ -50,6 +54,8 @@
         </div>
       <% end %>
     </div>
+
+    <%= render 'pied_page' %>
   </div>
 
   <div class="page page-numeratie">
@@ -69,5 +75,7 @@
         </div>
       <% end %>
     </div>
+
+    <%= render 'pied_page' %>
   </div>
 <% end %>

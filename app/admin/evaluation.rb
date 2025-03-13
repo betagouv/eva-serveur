@@ -145,7 +145,7 @@ ActiveAdmin.register Evaluation do
 
       pdf_path = Html2Pdf.new.genere_pdf_depuis_html(html_content)
 
-      send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf')
+      send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf', disposition: 'inline')
     end
 
     def destroy

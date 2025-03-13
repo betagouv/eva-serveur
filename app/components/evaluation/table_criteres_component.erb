@@ -1,0 +1,38 @@
+<div class="fr-table fr-table--no-scroll" id="table-bordered-component">
+  <div class="fr-table__wrapper" style="width: 100%;">
+    <div class="fr-table__container">
+      <div class="fr-table__content">
+        <table id="table-bordered" style="width: 100%;">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 63%;">Critère</th>
+              <th scope="col" style="width: 8%;">Code&nbsp;Cléa</th>
+              <th scope="col" style="width: 15%;">Tests&nbsp;proposés</th>
+              <th scope="col" style="width: 14%;">Résultat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @criteres.each_with_index do |critere, index| %>
+              <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
+                <td><%= critere.libelle %></td>
+                <td><%= critere.code_clea %></td>
+                <% if critere.pas_de_test? %>
+                  <td>Pas de test disponible</td>
+                <% else %>
+                  <td><%= critere.nombre_tests_proposes %></td>
+                <% end %>
+                <td>
+                  <% unless critere.pas_de_test? %>
+                    <%=
+                      render(BadgeAcquisitionComponent.new(status: critere.resultat, classes: ["fr-badge--sm"]))
+                    %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

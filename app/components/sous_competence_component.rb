@@ -38,6 +38,11 @@ class SousCompetenceComponent < ViewComponent::Base
     "#{traduction_path}.tests_proposes"
   end
 
+  def resultat
+    score = nombre_questions_repondues.zero? ? '' : "Score #{pourcentage_reussite}% - "
+    "#{score} #{I18n.t(tests_proposes_traduction, count: nombre_questions_repondues)}"
+  end
+
   private
 
   def traduction_path

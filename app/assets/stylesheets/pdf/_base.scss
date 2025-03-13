@@ -1,6 +1,7 @@
 @import "fonts";
 @import 'admin/variables';
 @import "admin/typography";
+@import "components/numeratie_component";
 
 * {
   box-sizing: border-box;
@@ -12,7 +13,6 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
   page-break-after: always;
   break-after: page;
 }

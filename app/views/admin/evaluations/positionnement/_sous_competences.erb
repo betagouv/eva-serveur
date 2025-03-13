@@ -1,5 +1,20 @@
 <div>
   <% sous_competences.each do |sous_competence, objet_sous_competence| %>
-    <%= render(SousCompetenceComponent.new(competence, sous_competence, objet_sous_competence)) %>
+    <div class="sous-competence__container <%= competence == :numeratie ? 'sous-competence__numeratie' : 'sous-competence__litteratie' %>">
+      <%= render(SousCompetenceComponent.new(competence, sous_competence, objet_sous_competence)) %>
+
+      <% if competence == :numeratie %>
+        <% criteres = objet_sous_competence.criteres %>
+        <% if criteres.present? %>
+          <div class="sous-competence__critere-accordion">
+            <%= dsfr_accordion do |accordion| %>
+              <%= accordion.with_section(title: "Voir le détail") do %>
+                <%= render(Evaluation::TableCriteresComponent.new(criteres)) %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
 </div>

@@ -1,0 +1,38 @@
+.page.page-numeratie {
+  .liste-criteres {
+    gap: 1.5rem;
+  }
+
+  .critere-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .fr-tile__title {
+      order: 1;
+    }
+
+    .fr-tile__detail {
+      order: 2;
+    }
+
+    .fr-table {
+      order: 3;
+    }
+  }
+
+  .fr-table {
+    margin: 0;
+  }
+
+  .fr-tile__title {
+    margin: 0;
+  }
+
+  .fr-tile__detail {
+    margin: 0;
+  }
+
+
+}

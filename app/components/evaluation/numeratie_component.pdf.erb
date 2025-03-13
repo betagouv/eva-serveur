@@ -31,4 +31,43 @@
       <% end %>
     </div>
   </div>
+
+  <div class="page page-numeratie">
+    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+
+    <div class="content liste-criteres">
+      <h2><%= t('titre_details', scope: 'admin.restitutions.numeratie') %></h2>
+      <% @sous_competences[0..1].each do |sous_competence| %>
+        <% criteres = sous_competence[1].criteres %>
+        <% sous_competence_component = SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]) %>
+
+        <div class="critere-container">
+          <h3 class="fr-tile__title fr-tile__title-sans-bordure-noire">
+            <%= I18n.t(sous_competence_component.titre_traduction) %>
+          </h3>
+          <p class="fr-tile__detail"><%= sous_competence_component.resultat %></p>
+          <%= render(Evaluation::TableCriteresComponent.new(criteres)) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="page page-numeratie">
+    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+
+    <div class="content liste-criteres">
+      <% @sous_competences[2..4].each do |sous_competence| %>
+        <% criteres = sous_competence[1].criteres %>
+        <% sous_competence_component = SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]) %>
+
+        <div class="critere-container">
+          <h3 class="fr-tile__title fr-tile__title-sans-bordure-noire">
+            <%= I18n.t(sous_competence_component.titre_traduction) %>
+          </h3>
+          <p class="fr-tile__detail"><%= sous_competence_component.resultat %></p>
+          <%= render(Evaluation::TableCriteresComponent.new(criteres)) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

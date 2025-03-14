@@ -8,7 +8,7 @@
         <% if criteres.present? %>
           <div class="sous-competence__critere-accordion">
             <%= dsfr_accordion do |accordion| %>
-              <%= accordion.with_section(title: "Voir le détail") do %>
+              <%= accordion.with_section(title: t('sous_competences.accordion_title')) do %>
                 <%= render(Evaluation::TableCriteresComponent.new(criteres)) %>
               <% end %>
             <% end %>

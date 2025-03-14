@@ -1,14 +1,14 @@
-<div class="fr-table fr-table--no-scroll" id="table-bordered-component">
-  <div class="fr-table__wrapper" style="width: 100%;">
+<div class="fr-table fr-table--no-scroll fr-table--criteres-component" id="table-bordered-component">
+  <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
-        <table id="table-bordered" style="width: 100%;">
+        <table id="table-bordered">
           <thead>
             <tr>
-              <th scope="col" style="width: 63%;">Critère</th>
-              <th scope="col" style="width: 8%;">Code&nbsp;Cléa</th>
-              <th scope="col" style="width: 15%;">Tests&nbsp;proposés</th>
-              <th scope="col" style="width: 14%;">Résultat</th>
+              <th scope="col"><%= t('evaluation.critere') %></th>
+              <th scope="col"><%= t('evaluation.code_clea') %></th>
+              <th scope="col"><%= t('evaluation.tests_proposes') %></th>
+              <th scope="col"><%= t('evaluation.resultat') %></th>
             </tr>
           </thead>
           <tbody>
@@ -17,7 +17,7 @@
                 <td><%= critere.libelle %></td>
                 <td><%= critere.code_clea %></td>
                 <% if critere.pas_de_test? %>
-                  <td>Pas de test disponible</td>
+                  <td><%= t('evaluation.pas_de_test_disponible') %></td>
                 <% else %>
                   <td><%= critere.nombre_tests_proposes %></td>
                 <% end %>

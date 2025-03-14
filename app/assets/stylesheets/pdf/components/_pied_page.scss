@@ -1,0 +1,17 @@
+.pied-page {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: $eva_main_blue;
+
+  .contact {
+    width: 100%;
+    color: $eva_light;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 2.5rem;
+
+    a { color: $eva_light }
+  }
+}

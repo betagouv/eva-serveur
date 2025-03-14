@@ -33,4 +33,26 @@
   .fr-tile__detail {
     margin: 0;
   }
+
+  .content {
+    display: flex;
+    padding: 1rem $padding-pdf 0 $padding-pdf;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+
+  /* Adaptation */
+
+  h2 {
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .synthese-illettrisme {
+    margin: 0 5rem 0;
+  }
 }

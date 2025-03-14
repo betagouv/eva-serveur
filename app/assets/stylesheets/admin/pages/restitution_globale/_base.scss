@@ -1,3 +1,7 @@
+.en-tete-page, .pied-page {
+  display: none;
+}
+
 .evaluation__restitution-globale.litteratie {
   h4 {
     color: $eva_main_blue;
@@ -18,10 +22,6 @@
     &--avec-references {
       padding-bottom: 0;
     }
-  }
-
-  .en-tete-page, .pied-page {
-    display: none;
   }
 
   .marges-page {

@@ -1,0 +1,43 @@
+.en-tete-page {
+  display: block;
+  background-image: asset-url('vague.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 256px;
+  width: 100%;
+  position: static;
+  top: 0;
+  padding: 2.25rem $padding-pdf 0 $padding-pdf;
+
+  .eva-logo {
+    margin-right: 1.5rem;
+  }
+
+  .contexte {
+    text-align: right;
+  }
+
+  .structure, .date-restitution {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.125rem;
+  }
+
+  .structure {
+    color: #FBF9FA;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .date-restitution {
+    color: $eva_bluegrey;
+  }
+
+  .nom-evalue {
+    font-family: $font-titre;
+    color: #FBF9FA;
+    font-size: 2rem;
+    vertical-align: bottom;
+    font-weight: bold;
+  }
+}

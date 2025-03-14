@@ -1,0 +1,25 @@
+.page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  page-break-after: always;
+  break-after: page;
+}
+
+.break-after-page {
+  break-after: page;
+}
+
+.row {
+  page-break-inside: avoid;
+  display: -webkit-box;
+}
+
+.col {
+  -webkit-box-flex: 1;
+}
+
+.col-auto {
+  -webkit-box-flex: 0;
+  border: none; // Il y a une bordure noir qui apparait sur cet élément
+}

@@ -7,8 +7,7 @@ if mes_avec_redaction_de_notes.present?
 
       render 'questions', {
         restitution: restitution,
-        situation_libelle: situation.libelle,
-        pdf: pdf
+        situation_libelle: situation.libelle
       }
     end
   end

@@ -66,22 +66,6 @@ fr:
           titre: Compétences numériques
           titre_menu_lateral: Compétences numériques
         legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
-      competences_transversales:
-        titre: Vos compétences transversales
-        titre_menu_lateral: Compétences transversales
-        competences_fortes_vides: |
-          Vos résultats n'ont pas pu être calculés. Les raisons peuvent être les suivantes :
-
-          - vous avez abandonné à un ou plusieurs mini-jeux,
-          - vous avez laissé un ou plusieurs mini-jeux se dérouler sans action de votre part (vous vous êtes par exemple absenté·e quelques minutes),
-          - des problèmes techniques ont empêché la sauvegarde de vos données (mauvaise connexion internet par exemple).
-
-          Pour obtenir vos scores, n'hésitez pas à repasser le parcours eva plus tard.
-        etiquette_lien_metiers: "Détail et métiers associés : "
-        niveau:
-          1: niveau 1
-          2: niveau 2
-          3: niveau 3
       restitution_competence:
         indetermine: non obs.
         1: 1

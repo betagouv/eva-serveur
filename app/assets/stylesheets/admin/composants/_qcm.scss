@@ -15,13 +15,16 @@
   }
 
   input:checked + .tag { @include tag-couleur($success-425, $success-950); }
-  input:hover:not(:checked) + .tag { @include tag-couleur($couleur-texte, $success-950); }
+  input:hover:not(:checked) + .tag, input:focus + .tag {
+    @include focus();
+  }
 
   .tag {
     cursor: pointer;
     background-color: white;
     font-weight: 400;
     color: $couleur-texte;
+    margin: 0.1rem 0;
   }
 }
 

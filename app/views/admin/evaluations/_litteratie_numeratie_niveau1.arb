@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 div class: 'row' do
-  render 'competence_niveau1',
+  render 'admin/evaluations/competence_niveau1',
          competence: 'litteratie',
          niveau: niveau_litteratie,
          referentiel: referentiel
-  render 'competence_niveau1',
+  render 'admin/evaluations/competence_niveau1',
          competence: 'numeratie',
          niveau: niveau_numeratie,
          referentiel: referentiel

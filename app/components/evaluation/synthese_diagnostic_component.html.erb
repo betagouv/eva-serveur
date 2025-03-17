@@ -1,0 +1,32 @@
+<div id="francais_mathematiques" class="page">
+  <h2><%= t('titre', scope: 'admin.restitutions.cefr') %></h2>
+
+  <div class="panel panel--avec-references">
+    <div class="marges-page">
+      <%= render 'litteratie_numeratie_synthese',
+            synthese: @synthese_diagnostic,
+            scope: "admin.restitutions.cefr.#{@synthese_diagnostic}",
+            icone: "punaise-#{@synthese_diagnostic}.svg" %>
+
+      <%= render 'litteratie_numeratie_niveau1',
+            niveau_litteratie: @niveau_cefr,
+            niveau_numeratie: @niveau_cnef,
+            referentiel: 'cefr' %>
+
+      <div class="row my-4">
+        <div class="col-auto badge"></div>
+        <div class="col">
+          <%= render 'metacompetences', categorie: :litteratie %>
+        </div>
+        <div class="col-auto badge"></div>
+        <div class="col">
+          <%= render 'metacompetences', categorie: :numeratie %>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'communication_ecrite', restitution_globale: @restitution_globale, mes_avec_redaction_de_notes: @mes_avec_redaction_de_notes %>
+
+    <%= render 'referentiel_europeen' %>
+  </div>
+</div>

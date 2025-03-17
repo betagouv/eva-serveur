@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div id: 'correspondance_anlci', class: 'page' do
+div id: 'correspondance_anlci', class: 'page adaptation-pdf' do
   if pdf
     render 'entete_page', restitution_globale: restitution_globale
 

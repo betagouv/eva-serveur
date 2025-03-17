@@ -1,7 +1,7 @@
-<div id="competences_transversales" class="page">
+<div id="competences_transversales" class="page adaptation-pdf">
   <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
-  <h2 class="text-center my-5"><%= t('.titre') %></h2>
+  <h2 class="text-center my-4"><%= t('.titre') %></h2>
 
   <div class="panel">
     <div class="marges-page">
@@ -13,7 +13,7 @@
             </div>
           <% end %>
 
-          <% @interpretations[0..2].each do |competence, interpretation| %>
+          <% @interpretations.each do |competence, interpretation| %>
             <%= render Evaluation::CompetenceTransversaleComponent.new(competence: competence, interpretation: interpretation) %>
           <% end %>
         </div>
@@ -23,28 +23,3 @@
     <%= render 'pied_page' %>
   </div>
 </div>
-
-<% if @interpretations.size > 3 %>
-  <div class="page competences_transversales">
-    <%= render 'entete_page', restitution_globale: @restitution_globale %>
-    <div class="panel">
-      <div class="marges-page">
-        <div class="row">
-          <div class="col">
-            <% if @restitution_globale.interpretations_competences_transversales.blank? %>
-              <div class="competences-transversales-vides">
-                <%= md t('.competences_fortes_vides') %>
-              </div>
-            <% end %>
-
-            <% @interpretations[3..@interpretations.size - 1].each do |competence, interpretation| %>
-              <%= render Evaluation::CompetenceTransversaleComponent.new(competence: competence, interpretation: interpretation) %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-      <%= render 'pied_page' %>
-    </div>
-  </div>
-<% end %>

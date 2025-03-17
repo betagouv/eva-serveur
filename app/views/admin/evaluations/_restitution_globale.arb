@@ -13,7 +13,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
   end
 
   if prise_en_main?
-    div id: 'competence-numerique', class: 'page' do
+    div id: 'competence-numerique', class: 'page adaptation-pdf' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf
@@ -57,7 +57,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
   end
 
   if campagne_avec_positionnement?(:litteratie)
-    div id: 'lettrisme', class: 'page page-lettrisme' do
+    div id: 'lettrisme', class: 'page page-lettrisme adaptation-pdf' do
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf

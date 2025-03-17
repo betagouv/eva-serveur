@@ -28,10 +28,14 @@ class Html2Pdf
     page
   end
 
+  def debug_mode?
+    ENV['DEBUG_PDF'].present? && Rails.env.development?
+  end
+
   # Le mode debug permet d'ouvrir une page chrome pour visualiser le rendu
   # et inspecter l'html avant la transformation en PDF
   def pause_pdf
-    return if ENV['DEBUG_PDF'].blank?
+    return unless debug_mode?
 
     Rails.logger.debug 'Appuyer sur la touche "Entrer" pour continuer le processus'
     gets # Attend que l'utilisateur appuie sur "Enter" (dans le terminal du serveur)
@@ -41,7 +45,7 @@ class Html2Pdf
     options = {
       headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', A4_WINDOW_SIZE]
     }
-    if ENV['DEBUG_PDF'].present?
+    if debug_mode?
       options[:headless] = false
       options[:args] += ['--auto-open-devtools-for-tabs']
     end

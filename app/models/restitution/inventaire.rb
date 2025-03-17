@@ -67,11 +67,11 @@ module Restitution
     end
 
     def essais_verifies
-      essais.last.verifie? ? essais : essais[0...-1]
+      essais.last&.verifie? ? essais : essais[0...-1]
     end
 
     def essais
-      evenements_sans_la_fin = evenements.to_a.delete_if { |e| e.nom == EVENEMENT[:FIN_SITUATION] }
+      evenements_sans_la_fin = evenements.to_a.reject { |e| e.nom == EVENEMENT[:FIN_SITUATION] }
       evenements_par_essais = evenements_sans_la_fin.chunk_while do |evenement_avant, _|
         evenement_avant.nom != EVENEMENT[:SAISIE_INVENTAIRE]
       end

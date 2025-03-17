@@ -154,6 +154,14 @@ describe Restitution::Inventaire do
   end
 
   describe '#essais_verifies' do
+    it "Quand seul l'évenement de fin a été enregistré" do
+      evenements = [
+        build(:evenement_fin_situation)
+      ]
+      restitution = described_class.new(campagne, evenements)
+      expect(restitution.essais_verifies).to eq([])
+    end
+
     it 'retourne les essais verifiés avec le nombre de click et le temps' do
       evenements = [
         build(:evenement_demarrage, date: 10.minutes.ago),

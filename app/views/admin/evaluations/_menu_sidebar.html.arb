@@ -24,7 +24,7 @@ div class: 'menu menu-transverse' do
     end
     li do
       a href: '#competences_transversales' do
-        text_node t('admin.evaluations.competences_transversales.titre_menu_lateral')
+        text_node t('evaluation.competences_transversales_component.titre_menu_lateral')
       end
     end
     li do

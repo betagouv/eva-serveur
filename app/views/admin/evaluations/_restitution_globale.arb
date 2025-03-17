@@ -33,7 +33,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
   end
 
   if campagne_avec_competences_transversales?
-    render 'competences_transversales', pdf: pdf, restitution_globale: restitution_globale
+    render Evaluation::CompetencesTransversalesComponent.new(restitution_globale: restitution_globale)
   end
 
   if resource.campagne.avec_diagnostic?
@@ -54,7 +54,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
         div class: 'page' do
           render 'entete_page', restitution_globale: restitution_globale
 
-          render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+          render 'communication_ecrite', restitution_globale: restitution_globale
 
           render 'pied_page'
         end
@@ -66,7 +66,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
         div class: 'panel panel--avec-references' do
           render 'francais_mathematique', synthese: restitution_globale.synthese_diagnostic
 
-          render 'communication_ecrite', restitution_globale: restitution_globale, pdf: pdf
+          render 'communication_ecrite', restitution_globale: restitution_globale
 
           render 'referentiel_europeen'
         end

@@ -136,3 +136,9 @@ img {
     background-color: $eva_bluegrey;
   }
 }
+
+.sr-only { // surcharge de la class definie par bootstrap
+  user-select: none;
+  pointer-events: none;
+  cursor: not-allowed;
+}

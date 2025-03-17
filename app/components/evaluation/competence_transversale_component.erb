@@ -1,27 +1,27 @@
 <div class="competence-transversale">
-  <div class="conteneur-jauge">
-    <div class="jauge"></div>
-    <div class="jauge remplissage remplissage-<%= @interpretation %>"
-        aria-label="<%= t(".niveau.#{@interpretation}") %>"
-        aria-describedby="<%= @competence %>">
-    </div>
-  </div>
-  <span class="image-competence">
-    <%= image_tag "#{@competence}.svg", alt: '' %>
-  </span>
   <div class="informations-competence">
     <h3 id="<%= @competence %>" class="nom-competence">
       <%= t("#{@competence}.nom", scope: 'admin.evaluations.restitution_competence') %>
     </h3>
     <div class="description-competence">
+      <div class="jauge">
+        <div class="remplissage remplissage-<%= @interpretation %>">
+          <span class="sr-only"><%= t(".niveau.#{@interpretation}") %></span>
+        </div>
+      </div>
+      <span class="image-competence">
+        <%= image_tag "#{@competence}.svg", alt: '' %>
+      </span>
       <div>
         <%= md t("#{@competence}.stanine#{@interpretation}", scope: 'admin.evaluations.restitution_competence') %>
       </div>
       <div class="lien-metier">
         <%= image_tag 'lien.svg', alt: '', class: 'image-lien' %>
         <span class="align-middle">
-          <%= t('.etiquette_lien_metiers') %>
-          <a href="<%= url_competence %>" target="_blank">
+          <span aria-hidden="true"><%= t('.etiquette_lien_metiers') %></span>
+          <a href="<%= url_competence %>" target="_blank"
+            aria-label="<%= t('.etiquette_lien_metiers')%>"
+            aria-describedby="<%= @competence %>">
             <%= url_competence %>
           </a>
         </span>

@@ -49,6 +49,10 @@ a.pas-souligne {
     box-shadow: unset;
     background-image: unset;
   }
+
+  &:-moz-focusring { // pour contrer le normalize d'activeadmin
+    @include focus();
+  }
 }
 
 // Fix conflit entre la table (DSFR) et la table d'ActiveAdmin

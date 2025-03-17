@@ -1,3 +1,8 @@
+@mixin focus() {
+  outline: 2px solid $focus-525;
+  outline-offset: 2px;
+}
+
 @mixin base-boutons() {
   &, &:link, &:visited {
     background-image: none;
@@ -16,6 +21,10 @@
     color: $grey-625;
     background-color: $grey-925;
     border-color: $grey-925;
+  }
+
+  &:focus {
+    @include focus();
   }
 }
 

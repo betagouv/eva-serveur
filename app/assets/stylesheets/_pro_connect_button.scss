@@ -57,18 +57,12 @@
   background-color: #2323ff;
 }
 
-.btn-pro-connect:focus {
-  outline-offset: 2px;
-  outline: #0a76f6 2px solid;
+.btn-pro-connect:focus, .btn-pro-connect:focus-visible {
+  @include focus();
 }
 
 .btn-pro-connect:focus:not(:focus-visible) {
   outline: 0;
-}
-
-.btn-pro-connect:focus-visible {
-  outline-offset: 2px;
-  outline: #0a76f6 2px solid;
 }
 
 .btn-pro-connect.disabled, .btn-pro-connect:disabled {

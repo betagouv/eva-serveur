@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page adaptation-pdf">
   <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
   <h2 class="text-center mt-5 mb-4"><%= t('titre', scope: 'admin.restitutions.cefr') %></h2>
@@ -14,18 +14,7 @@
             niveau_litteratie: @niveau_cefr,
             niveau_numeratie: @niveau_cnef,
             referentiel: 'cefr' %>
-    </div>
-  </div>
-
-  <%= render 'pied_page', pre_pied_page: 'referentiel_europeen' %>
-</div>
-
-<div class="page">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
-
-  <div class="panel">
-    <div class="marges-page">
-      <div class="row my-4">
+      <div class="row">
         <div class="col-auto badge"></div>
         <div class="col">
           <%= render 'metacompetences', categorie: :litteratie %>
@@ -42,7 +31,7 @@
 </div>
 
 <% if @mes_avec_redaction_de_notes.present? %>
-  <div class="page">
+  <div class="page adaptation-pdf">
     <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
     <%= render 'communication_ecrite', restitution_globale: @restitution_globale, mes_avec_redaction_de_notes: @mes_avec_redaction_de_notes %>

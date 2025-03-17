@@ -1,9 +1,10 @@
 .en-tete-page {
   display: block;
   background-image: asset-url('vague.svg');
-  background-size: contain;
+  background-size: cover;
+  background-position: bottom;
   background-repeat: no-repeat;
-  height: 256px;
+  height: 180px;
   width: 100%;
   position: static;
   top: 0;

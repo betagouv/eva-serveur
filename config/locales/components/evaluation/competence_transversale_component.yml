@@ -3,6 +3,6 @@ fr:
     competence_transversale_component:
       etiquette_lien_metiers: "Détail et métiers associés : "
       niveau:
-        1: niveau 1
-        2: niveau 2
-        3: niveau 3
+        1: Vous avez atteint le niveau 1
+        2: Vous avez atteint le niveau 2
+        3: Vous avez atteint le niveau 3

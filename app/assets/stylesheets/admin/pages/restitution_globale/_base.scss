@@ -138,24 +138,22 @@
       margin-bottom: 0;
     }
 
-    .conteneur-jauge {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 85%;
-    }
-
     .jauge {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 85%;
       height: 0.6rem;
       border: 1px solid $eva_dark;
       border-radius: 0 0.3rem 0.3rem 0;
+      overflow: hidden;
+      user-select: none;
+      pointer-events: none;
 
-      &.remplissage {
+      .remplissage {
         background-color: $eva_main_blue;
+        height: 0.5rem;
+        border-radius: 0 0.3rem 0.3rem 0;
 
         &-3 {
           width: 100%;

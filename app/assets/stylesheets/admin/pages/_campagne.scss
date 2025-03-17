@@ -177,18 +177,8 @@
       margin-bottom: 0;
     }
     .bouton-annuler a {
-      @include bouton-primaire;
-      @include grand-bouton;
-      min-width: 6.563rem;
-      text-align: center;
-      margin-right: 0;
-      color: $couleur-texte;
-      background-color: $eva_bluegrey;
-      border-color: $eva_bluegrey;
-      &:hover {
-        color: $couleur-texte;
-        border-color: $eva_bluegrey;
-      }
+      @include bouton-secondaire();
+      @include grand-bouton();
     }
 
     input {

@@ -4,11 +4,11 @@
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-  height: 180px;
+  min-height: 180px;
   width: 100%;
   position: static;
   top: 0;
-  padding: 2.25rem $padding-pdf 0 $padding-pdf;
+  padding: 2.25rem $padding-pdf;
 
   .eva-logo {
     margin-right: 1.5rem;

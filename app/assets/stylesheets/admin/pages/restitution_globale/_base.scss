@@ -2,17 +2,6 @@
   display: none;
 }
 
-.evaluation__restitution-globale.litteratie {
-  h4 {
-    color: $eva_main_blue;
-    font-size: 1rem;
-  }
-  
-  h3 {
-    margin: 3rem 0 1rem;
-  }
-}
-
 .evaluation__restitution-globale {
   font-size: 0.875rem;
   font-family: $font-texte;
@@ -423,5 +412,12 @@
 }
 
 .restitution-h3 {
-  margin: 2rem 0 1rem;  
+  margin: 2rem 0 1rem;
+}
+
+.page.francais_mathematiques {
+  h4 {
+    color: $eva_main_blue;
+    font-size: 1rem;
+  }
 }

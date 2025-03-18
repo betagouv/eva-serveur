@@ -33,8 +33,9 @@ $padding-pdf: 5rem;
 // Cette mixin adapte le style des anciens PDF (avant la numératie)
 @mixin adaptation-pdf {
   .page.adaptation-pdf {
+    font-size: 1rem;
     p {
-      font-size: 14px;
+      font-size: 1rem;
       line-height: 1.3;
     }
   }

@@ -1,5 +1,5 @@
 <div id="profil">
-  <div class="page adaptation-pdf">
+  <div class="page adaptation-pdf profil">
     <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
     <h2 class="text-center mt-5 mb-4"><%= t('admin.evaluations.restitution_globale.autopositionnement.titre') %></h2>
@@ -14,7 +14,7 @@
   </div>
 
   <% if @bienvenue.inclus_autopositionnement? %>
-    <div class="page adaptation-pdf">
+    <div class="page adaptation-pdf profil">
       <%= render 'entete_page', restitution_globale: @restitution_globale %>
 
       <div class="panel">

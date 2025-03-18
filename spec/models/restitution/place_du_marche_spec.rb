@@ -360,4 +360,49 @@ describe Restitution::PlaceDuMarche do
       end
     end
   end
+
+  describe '#nombres_questions_reussies' do
+    it 'retourne le nombre de questions réussies' do
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.1').and_return([
+        double(succes: true),
+        double(succes: true),
+        double(succes: true)
+      ])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.2').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.3').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.4').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.5').and_return([])
+      expect(restitution.nombres_questions_reussies).to eq({ '2.1' => 3, '2.2' => 0, '2.3' => 0, '2.4' => 0, '2.5' => 0 })
+    end
+  end
+
+  describe '#nombres_questions_echecs' do
+    it 'retourne le nombre de questions en échec' do
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.1').and_return([
+        double(succes: false, a_ete_repondue?: true),
+        double(succes: false, a_ete_repondue?: true),
+        double(succes: false, a_ete_repondue?: true)
+      ])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.2').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.3').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.4').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.5').and_return([])
+      expect(restitution.nombres_questions_echecs).to eq({ '2.1' => 3, '2.2' => 0, '2.3' => 0, '2.4' => 0, '2.5' => 0 })
+    end
+  end
+
+  describe '#nombres_questions_non_passées' do
+    it 'retourne le nombre de questions non passées' do
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.1').and_return([
+        double(a_ete_repondue?: false),
+        double(a_ete_repondue?: false),
+        double(a_ete_repondue?: false)
+      ])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.2').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.3').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.4').and_return([])
+      allow(restitution).to receive(:evenements_questions_pour_code).with('2.5').and_return([])
+      expect(restitution.nombres_questions_non_passées).to eq({ '2.1' => 3, '2.2' => 0, '2.3' => 0, '2.4' => 0, '2.5' => 0 })
+    end
+  end
 end

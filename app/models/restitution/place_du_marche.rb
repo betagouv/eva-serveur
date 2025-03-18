@@ -151,6 +151,18 @@ module Restitution
     end
     # rubocop:enable Naming/VariableNumber
 
+    def nombres_questions_reussies
+      calculer_nombres_questions_par_sous_domaine { |eq| eq.succes }
+    end
+
+    def nombres_questions_echecs
+      calculer_nombres_questions_par_sous_domaine { |eq| !eq.succes && eq.a_ete_repondue? }
+    end
+
+    def nombres_questions_non_passées
+      calculer_nombres_questions_par_sous_domaine { |eq| !eq.a_ete_repondue? }
+    end
+
     private
 
     def evenements_questions_pour_code(code)
@@ -200,6 +212,15 @@ module Restitution
     def questions_non_repondues_par_module(evenements, nom_module)
       module_rattrapage = "#{nom_module}R"
       evenements.select { |e| e['question'].start_with?(module_rattrapage) && e['score'].blank? }
+    end
+
+    def calculer_nombres_questions_par_sous_domaine
+      resultats = Hash.new(0)
+      SCORES_CLEA.keys.each do |code|
+        eq_pour_code = evenements_questions_pour_code(code)
+        resultats[code] = eq_pour_code.count { |eq| yield(eq) }
+      end
+      resultats
     end
   end
 end

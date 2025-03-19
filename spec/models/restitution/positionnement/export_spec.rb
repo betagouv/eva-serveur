@@ -122,6 +122,33 @@ describe Restitution::Positionnement::Export do
       end
     end
 
+    describe 'génére un fichier xls avec une question sans réponse' do
+      let!(:question1) { create :question, :numeratie_niveau1 }
+      let!(:question2) { create :question, :numeratie_niveau2 }
+      let!(:question3) { create :question, :numeratie_niveau3 }
+      let(:questions) { [question1, question2, question3] }
+
+      before do
+        heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
+        create :evenement_affichage_question_qcm,
+               date: heure_debut,
+               partie: partie,
+               position: 1,
+               donnees: { question: question1.nom_technique }
+      end
+
+      context "sur l'onglet de synthese" do
+        it 'verifie la deuxième ligne avec le code cléa du sous domaine et le % de réussite' do
+          worksheet = spreadsheet.worksheet(0)
+          expect(worksheet.row(1)[0]).to be_nil
+          expect(worksheet.row(1)[1]).to be_nil
+          expect(worksheet.row(1)[2]).to eq(0)
+          expect(worksheet.row(1)[3]).to eq(0)
+          expect(worksheet.row(1)[4]).to eq('non applicable')
+        end
+      end
+    end
+
     describe 'génére un fichier xls avec les evenements réponses' do
       let!(:question1) { create :question, :numeratie_niveau1 }
       let!(:question2) { create :question, :numeratie_niveau2 }

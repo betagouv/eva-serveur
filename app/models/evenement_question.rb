@@ -58,7 +58,7 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
 
   class << self
     def pourcentage_pour_groupe(evenements_questions)
-      scores = evenements_questions.map { |eq| [eq.score_max, eq.score] }.compact
+      scores = evenements_questions.map { |eq| [eq.score_max.presence || 0, eq.score] }.compact
       score_max, score = scores.transpose.map(&:sum)
       Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
     end

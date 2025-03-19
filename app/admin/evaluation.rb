@@ -146,7 +146,11 @@ ActiveAdmin.register Evaluation do
       pdf_path = Html2Pdf.new.genere_pdf_depuis_html(html_content)
 
       send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf',
-                          disposition: 'inline')
+                          disposition: disposition)
+    end
+
+    def disposition
+      Rails.env.development? ? 'inline' : 'attachment'
     end
 
     def destroy

@@ -10,7 +10,8 @@ class SousCompetenceComponent < ViewComponent::Base
   end
 
   delegate :profil, :nombre_questions_repondues, :nombre_total_questions, :succes,
-           :pourcentage_reussite, to: :@objet_sous_competence
+           :pourcentage_reussite, :nombre_questions_reussies, :nombre_questions_echecs,
+           :nombre_questions_non_passees, to: :@objet_sous_competence
 
   def litteratie?
     @competence == :litteratie
@@ -34,13 +35,8 @@ class SousCompetenceComponent < ViewComponent::Base
     "#{traduction_path}.#{@competence}.#{@sous_competence}.description.#{profil}"
   end
 
-  def tests_proposes_traduction
-    "#{traduction_path}.tests_proposes"
-  end
-
   def resultat
-    score = nombre_questions_repondues.zero? ? '' : "Score #{pourcentage_reussite}% - "
-    "#{score} #{I18n.t(tests_proposes_traduction, count: nombre_questions_repondues)}"
+    nombre_questions_repondues.zero? ? '' : "Score #{pourcentage_reussite}% "
   end
 
   private

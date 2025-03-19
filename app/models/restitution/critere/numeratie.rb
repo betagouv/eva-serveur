@@ -22,6 +22,9 @@ module Restitution
       attribute :nombre_tests_proposes, :integer
       attribute :nombre_tests_proposes_max, :integer
       attribute :pourcentage_reussite, :integer
+      attribute :nombre_questions_reussies, :integer
+      attribute :nombre_questions_echecs, :integer
+      attribute :nombre_questions_non_passees, :integer
 
       def acquis?
         minimum_pourcentage = RESULTATS[code_clea[0, 3].to_sym]

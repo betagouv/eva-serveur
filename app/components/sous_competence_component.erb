@@ -12,17 +12,19 @@
     </div>
   </div>
 <% elsif numeratie? %>
-  <div class="fr-tile fr-tile--horizontal fr-tile--sous-domaine" id="tile-17">
+  <div class="sous-competence fr-tile fr-tile--horizontal fr-tile--sous-domaine" id="tile-17">
     <div class="fr-tile__body">
       <div class="fr-tile__content">
         <h3 class="fr-tile__title fr-tile__title-sans-bordure-noire">
-          <%= render(BadgeAcquisitionComponent.new(status: badge_status)) %><br>
           <%= I18n.t(titre_traduction) %>
         </h3>
         <div class="fr-tile__desc"><%= md I18n.t(description_traduction(succes)) %></div>
-        <p class="fr-tile__detail"><%= resultat %></p>
+        <div class="sous-competence__barre-segmentee">
+          <%= render(BarreSegmenteeComponent.new(nombre_questions_reussies: nombre_questions_reussies, nombre_questions_echecs: nombre_questions_echecs, nombre_questions_non_passees: nombre_questions_non_passees, sous_competence: @sous_competence.to_s.gsub('_', '.'), resultat: resultat)) %>
+        </div>
       </div>
     </div>
+    
     <div class="fr-tile__header">
       <div class="fr-tile__pictogram">
         <%= inline_svg_tag("icone_profil/numeratie_#{@sous_competence}.svg") %>

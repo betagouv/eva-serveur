@@ -1,0 +1,20 @@
+<div class="barre-segmentee">
+  <div class="barre-segmentee__score"><%= @resultat %></div>
+  <div class="barre-segmentee__legende">
+      Réussite : <%= @nombre_questions_reussies %> - 
+      Échec : <%= @nombre_questions_echecs %> - 
+      Non passés : <%= @nombre_questions_non_passees %> - 
+      Total : <%= nombre_questions_total %>
+  </div>
+  <div class="barre-segmentee__graphique">
+    <% if @nombre_questions_reussies.positive? %>
+      <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--succes" style="width: <%= pourcentage_questions(@nombre_questions_reussies) %>%"></div>
+    <% end %>
+    <% if @nombre_questions_echecs.positive? %>
+      <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--echec" style="width: <%= pourcentage_questions(@nombre_questions_echecs) %>%"></div>
+    <% end %>
+    <% if @nombre_questions_non_passees.positive? %>
+      <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--non-passee" style="width: <%= pourcentage_questions(@nombre_questions_non_passees) %>%"></div>
+    <% end %>
+  </div>
+</div>

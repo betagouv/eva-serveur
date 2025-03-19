@@ -9,3 +9,13 @@
     margin: unset;
   }
 }
+.sous-competence {
+  .fr-tile__content {
+    padding-bottom: 0 !important;
+  }
+}
+
+.sous-competence__barre-segmentee {
+  order: 3;
+  padding: 0.75rem 0;
+}

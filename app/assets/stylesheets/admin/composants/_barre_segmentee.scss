@@ -1,0 +1,51 @@
+$barre-segmentee-succes: $emeraude-main-632;
+$barre-segmentee-echec: $orange-terre-battue-main-645;
+$barre-segmentee-non-passee: $grey-850;
+
+.barre-segmentee {
+  width: 320px;
+}
+
+.barre-segmentee__legende {
+  display: inline-block;
+  color: $grey-425;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.barre-segmentee__graphique {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.barre-segmentee__graphique-element {
+  height: 100%;
+}
+
+.barre-segmentee__graphique-element--succes {
+  background-color: $barre-segmentee-succes;
+}
+
+.barre-segmentee__graphique-element--echec {
+  background-color: $barre-segmentee-echec;
+}
+
+.barre-segmentee__graphique-element--non-passee {
+  background-color: $barre-segmentee-non-passee;
+}
+
+.barre-segmentee__score {
+  color: $grey-50;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}

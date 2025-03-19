@@ -23,11 +23,21 @@ module Restitution
     }.freeze
 
     SCORES_CLEA = {
-      '2.1' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0 },
-      '2.2' => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0 },
-      '2.3' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0 },
-      '2.4' => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0 },
-      '2.5' => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0 }
+      '2.1' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
+                 nombre_questions_reussies: 0,
+                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
+      '2.2' => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0,
+                 nombre_questions_reussies: 0,
+                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
+      '2.3' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
+                 nombre_questions_reussies: 0,
+                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
+      '2.4' => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0,
+                 nombre_questions_reussies: 0,
+                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
+      '2.5' => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0,
+                 nombre_questions_reussies: 0,
+                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 }
     }.freeze
 
     SEUIL_MINIMUM = 70
@@ -88,13 +98,7 @@ module Restitution
     def calcule_pourcentage_reussite_critere_clea(code, sous_code)
       eq_pour_code = evenements_questions_pour_code(sous_code)
 
-      SCORES_CLEA[code][:criteres] << Restitution::Critere::Numeratie.new(
-        libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
-        code_clea: sous_code,
-        nombre_tests_proposes: eq_pour_code.select(&:a_ete_repondue?).size,
-        nombre_tests_proposes_max: eq_pour_code.size,
-        pourcentage_reussite: EvenementQuestion.pourcentage_pour_groupe(eq_pour_code)
-      )
+      SCORES_CLEA[code][:criteres] << creer_critere_numeratie(eq_pour_code, sous_code)
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -151,18 +155,6 @@ module Restitution
     end
     # rubocop:enable Naming/VariableNumber
 
-    def nombres_questions_reussies
-      calculer_nombres_questions_par_sous_domaine { |eq| eq.succes }
-    end
-
-    def nombres_questions_echecs
-      calculer_nombres_questions_par_sous_domaine { |eq| !eq.succes && eq.a_ete_repondue? }
-    end
-
-    def nombres_questions_non_passées
-      calculer_nombres_questions_par_sous_domaine { |eq| !eq.a_ete_repondue? }
-    end
-
     private
 
     def evenements_questions_pour_code(code)
@@ -175,6 +167,9 @@ module Restitution
         pourcentage_reussite: SCORES_CLEA[code][:pourcentage_reussite],
         nombre_questions_repondues: SCORES_CLEA[code][:nombre_questions_repondues],
         nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions],
+        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(code),
+        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(code),
+        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(code),
         criteres: SCORES_CLEA[code][:criteres]
       )
     end
@@ -214,13 +209,44 @@ module Restitution
       evenements.select { |e| e['question'].start_with?(module_rattrapage) && e['score'].blank? }
     end
 
-    def calculer_nombres_questions_par_sous_domaine
+    def calculer_nombres_questions_par_sous_domaine(&block)
       resultats = Hash.new(0)
-      SCORES_CLEA.keys.each do |code|
+      SCORES_CLEA.each_key do |code|
         eq_pour_code = evenements_questions_pour_code(code)
-        resultats[code] = eq_pour_code.count { |eq| yield(eq) }
+        resultats[code] = eq_pour_code.count(&block)
       end
       resultats
+    end
+
+    def nombre_questions_reussies_par_sous_domaine(code)
+      return 0 if evenements_questions_pour_code(code).empty?
+
+      evenements_questions_pour_code(code).select(&:succes).count
+    end
+
+    def nombre_questions_echecs_par_sous_domaine(code)
+      return 0 if evenements_questions_pour_code(code).empty?
+
+      evenements_questions_pour_code(code).select { |eq| !eq.succes && eq.a_ete_repondue? }.count
+    end
+
+    def nombre_questions_non_repondues_par_sous_domaine(code)
+      return 0 if evenements_questions_pour_code(code).empty?
+
+      evenements_questions_pour_code(code).reject(&:a_ete_repondue?).count
+    end
+
+    def creer_critere_numeratie(eq_pour_code, sous_code)
+      Restitution::Critere::Numeratie.new(
+        libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
+        code_clea: sous_code,
+        nombre_tests_proposes: eq_pour_code.select(&:a_ete_repondue?).size,
+        nombre_tests_proposes_max: eq_pour_code.size,
+        pourcentage_reussite: EvenementQuestion.pourcentage_pour_groupe(eq_pour_code),
+        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(sous_code),
+        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(sous_code),
+        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(sous_code)
+      )
     end
   end
 end

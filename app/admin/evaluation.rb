@@ -137,16 +137,17 @@ ActiveAdmin.register Evaluation do
     end
 
     def render_pdf
-      html_content = render_to_string(
-        template: 'admin/evaluations/show',
-        layout: 'application',
-        locals: { resource: resource }
-      )
+      html_content = render_to_string(template: 'admin/evaluations/show', layout: 'application',
+                                      locals: { resource: resource })
 
-      pdf_path = Html2Pdf.new.genere_pdf_depuis_html(html_content)
-
-      send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf',
-                          disposition: disposition)
+      pdf_path = Html2Pdf.genere_pdf_depuis_html(html_content)
+      if pdf_path == false
+        flash[:error] = t('.erreur_generation_pdf')
+        redirect_to admin_evaluation_path(resource)
+      else
+        send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf',
+                            disposition: disposition)
+      end
     end
 
     def disposition

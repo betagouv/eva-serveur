@@ -262,20 +262,29 @@ describe 'Admin - Evaluation', type: :feature do
           end
         end
 
-        it "affiche l'évaluation en pdf" do
-          allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
-          visit admin_evaluation_path(mon_evaluation, format: :pdf)
-          # rubocop:disable Lint/Debugger
-          path = page.save_page
-          pdf_path = path.sub('.html', '.pdf')
-          File.rename(path, pdf_path) # Renomme l'extension du fichier pour pouvoir l'ouvrir
-          # system("open #{pdf_path}")
-          # rubocop:enable Lint/Debugger
+        describe 'génération PDF' do
+          it "affiche l'évaluation en pdf" do
+            allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
+            visit admin_evaluation_path(mon_evaluation, format: :pdf)
+            # rubocop:disable Lint/Debugger
+            path = page.save_page
+            pdf_path = path.sub('.html', '.pdf')
+            File.rename(path, pdf_path) # Renomme l'extension du fichier pour pouvoir l'ouvrir
+            # system("open #{pdf_path}")
+            # rubocop:enable Lint/Debugger
 
-          reader = PDF::Reader.new(pdf_path)
+            reader = PDF::Reader.new(pdf_path)
 
-          expect(reader.page(1).text).to include('Roger')
-          expect(reader.page(1).text).to include('structure')
+            expect(reader.page(1).text).to include('Roger')
+            expect(reader.page(1).text).to include('structure')
+          end
+
+          it 'erreur timeout à la génération du pdf' do
+            allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
+            expect(Html2Pdf).to receive(:genere_pdf_depuis_html).and_return(false)
+            visit admin_evaluation_path(mon_evaluation, format: :pdf)
+            expect(page).to have_content 'La génération du PDF a échoué. Veuillez réessayer dans un moment'
+          end
         end
       end
     end

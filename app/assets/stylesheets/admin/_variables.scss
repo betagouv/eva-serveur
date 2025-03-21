@@ -1,88 +1,19 @@
-// Couleurs du DSFR
-$blue-france-sun-113: #000091;
-$blue-france-sun-113-hover: #1212FF;
-$blue-france-sun-113-active: #2323FF;
-$blue-france-950: #ECECFE;
-$blue-france-925: #E3E3FD;
-$success-950: #B8FEC9;
-$success-425: #18753C;
-$emeraude-main-632: #00A95F;
-$info-950: #E8EDFF;
-$info-950-hover: #C2D1FF;
-$info-425: #0063CB;
-$info-425-hover: #3B87FF;
-$warning-950: #FFE9E6;
-$warning-950-hover: #FFC6BD;
-$warning-425: #B34000;
-$warning-425-hover: #FF6218;
-$error-950: #FFE9E9;
-$error-425: #CE0500;
-$grey-1000: #FFFFFF;
-$grey-1000-hover: #F6F6F6;
-$grey-950: #EEEEEE;
-$grey-900: #DDDDDD;
-$grey-925: #E5E5E5;
-$grey-850: #CECECE;
-$grey-625: #929292;
-$grey-425: #666666;
-$grey-200: #3A3A3A;
-$grey-50: #161616;
-$yellow-tournesol-950: #FEECC2;
-$yellow-tournesol-407: #716043;
-$orange-terre-battue-850-hover: #FB926B;
-$orange-terre-battue-main-645: #E4794A;
-$focus-525: #0A76F6;
-
-// Couleurs eva
-$eva_main_blue: $blue-france-sun-113;
-$eva_main_light: #C1C1FB;
-$eva_dark_green: #0C826D;
-$eva_light_green: $success-950;
-$eva_green: $success-425;
-$eva_orange: $orange-terre-battue-850-hover;
-$eva_red: $error-425;
-$eva_dark: #1E416A;  // $grey-50;
-$eva_less_dark: $grey-425;
-$eva_dark_blue_grey: $grey-200;
-$eva_bluegrey: $blue-france-950;
-$eva_light: #FBF9FA;
-
-$couleur-texte: $grey-200;
-$couleur-texte-light: $eva_less_dark;
-$couleur-liens: $eva_main_blue;
-$couleur-accent-erreur: $eva_red;
-$couleur-warning: $warning-425;
-$couleur-legere-accent-validation: $eva_green;
+@import "admin/variables/colors";
+@import "admin/variables/sizes";
+@import "admin/variables/spacings";
+@import "admin/variables/fonts";
+@import "admin/variables/typographies";
 
 $border-radius: .75rem;
-
-$couleur-niveau-indetermine: $eva_bluegrey;
-$couleur-niveau-1: $couleur-legere-accent-validation;
-$couleur-niveau-2: $couleur-warning;
-$couleur-niveau-3: $couleur-accent-erreur;
+$border-radius-sm: $dsfr-radius-sm;
 
 $container: 1220px;
 $sidebar-width: 290px;
 $section-padding: 10px;
 
-$grid-gutter-width: 3rem;
+$grid-gutter-width: $dsfr-spacing-4v;
 
-$font-titre: 'Quicksand';
-$font-texte: 'Work Sans';
-
-$theme-colors: (
-  "primary": $eva_main_blue,
-  "warning": $couleur-warning,
-  "orange": $eva_orange,
-  "succes": $eva_green,
-  "active": $grey-425,
-  "desactive": $grey-850
-);
-
-// Variables pour ActiveAdmin
-$link-color: $eva_main_blue;
-
-$spacer: 1rem;
+$spacer: $dsfr-spacing-4v;
 $spacers: (
   6: ($spacer * 2)
 );

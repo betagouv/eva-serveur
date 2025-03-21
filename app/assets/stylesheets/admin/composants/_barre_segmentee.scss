@@ -9,21 +9,18 @@ $barre-segmentee-non-passee: $grey-850;
 .barre-segmentee__legende {
   display: inline-block;
   color: $grey-425;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
+  @include dsfr-texte-xs;
   white-space: nowrap;
 }
 
 .barre-segmentee__graphique {
   display: flex;
-  gap: 2px;
-  height: 8px;
-  border-radius: 5px;
+  gap: $dsfr-spacing-1v;
+  height: $dsfr-height-xxxs;
+  border-radius: $dsfr-radius-sm;
   overflow: hidden;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: $dsfr-spacing-2v;
 }
 
 .barre-segmentee__graphique-element {
@@ -44,8 +41,5 @@ $barre-segmentee-non-passee: $grey-850;
 
 .barre-segmentee__score {
   color: $grey-50;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
+  @include dsfr-texte-sm;
 }

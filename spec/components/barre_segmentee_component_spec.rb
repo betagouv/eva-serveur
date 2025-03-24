@@ -48,8 +48,19 @@ describe BarreSegmenteeComponent, type: :component do
     )
   end
 
-  context 'lorsque le pourcentage est zéro' do
+  context 'quand le pourcentage est zéro' do
     let(:pourcentage_reussite) { 0 }
+
+    it 'rendu correctement le composant sans affichage de score' do
+      render_inline(component)
+
+      expect(page).to have_css('.barre-segmentee')
+      expect(page).not_to have_content('Score 0%')
+    end
+  end
+
+  context 'quand le pourcentage est nil' do
+    let(:pourcentage_reussite) { nil }
 
     it 'rendu correctement le composant sans affichage de score' do
       render_inline(component)

@@ -20,7 +20,7 @@ class BarreSegmenteeComponent < ViewComponent::Base
   end
 
   def resultat
-    if @pourcentage_reussite.nil? || @pourcentage_reussite.zero?
+    if @pourcentage_reussite.nil?
       ''
     else
       "Score #{@pourcentage_reussite}% "

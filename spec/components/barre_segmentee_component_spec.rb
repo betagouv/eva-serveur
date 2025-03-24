@@ -55,7 +55,7 @@ describe BarreSegmenteeComponent, type: :component do
       render_inline(component)
 
       expect(page).to have_css('.barre-segmentee')
-      expect(page).not_to have_content('Score 0%')
+      expect(page).to have_content('Score 0%')
     end
   end
 

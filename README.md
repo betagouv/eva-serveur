@@ -75,7 +75,7 @@ accessible à l'url `/admin`, un compte admin est créé avec l'execution du see
 - Copier-coller le fichier `.env.template` vers `.env` : `cp .env.template .env`
 
 Sans les variables, le projet ne se lancera pas correctement en local.
-<SECRET_METABASE> se trouve sur metabase https://metabase.eva.beta.gouv.fr/admin/settings/embedding-in-other-applications/standalone
+<SECRET_METABASE> se trouve sur metabase https://metabase.eva.anlci.gouv.fr/admin/settings/embedding-in-other-applications/standalone
 Demander le <SECRET_IC> à l'équipe
 
 ## API

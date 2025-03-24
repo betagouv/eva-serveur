@@ -20,7 +20,7 @@
         </h3>
         <div class="fr-tile__desc"><%= md I18n.t(description_traduction(succes)) %></div>
         <div class="sous-competence__barre-segmentee">
-          <%= render(BarreSegmenteeComponent.new(nombre_questions_reussies: nombre_questions_reussies, nombre_questions_echecs: nombre_questions_echecs, nombre_questions_non_passees: nombre_questions_non_passees, sous_competence: @sous_competence.to_s.gsub('_', '.'), resultat: resultat)) %>
+          <%= render(BarreSegmenteeComponent.new(nombre_questions_reussies: nombre_questions_reussies, nombre_questions_echecs: nombre_questions_echecs, nombre_questions_non_passees: nombre_questions_non_passees, resultat: resultat)) %>
         </div>
       </div>
     </div>

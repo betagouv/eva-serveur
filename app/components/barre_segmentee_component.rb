@@ -2,11 +2,10 @@
 
 class BarreSegmenteeComponent < ViewComponent::Base
   def initialize(nombre_questions_reussies:, nombre_questions_echecs:,
-                 nombre_questions_non_passees:, sous_competence:, resultat:)
+                 nombre_questions_non_passees:, resultat:)
     @nombre_questions_reussies = nombre_questions_reussies
     @nombre_questions_echecs = nombre_questions_echecs
     @nombre_questions_non_passees = nombre_questions_non_passees
-    @sous_competence = sous_competence
     @resultat = resultat
   end
 

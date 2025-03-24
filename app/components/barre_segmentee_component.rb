@@ -19,7 +19,6 @@ class BarreSegmenteeComponent < ViewComponent::Base
     (nombre_questions.to_f / nombre_questions_total) * 100
   end
 
-
   def resultat
     @pourcentage_reussite.zero? ? '' : "Score #{@pourcentage_reussite}% "
   end

@@ -15,10 +15,12 @@
   <div class="sous-competence fr-tile fr-tile--horizontal fr-tile--sous-domaine" id="tile-17">
     <div class="fr-tile__body">
       <div class="fr-tile__content">
-        <h3 class="fr-tile__title fr-tile__title-sans-bordure-noire">
-          <%= I18n.t(titre_traduction) %>
-        </h3>
-        <div class="fr-tile__desc"><%= md I18n.t(description_traduction(succes)) %></div>
+        <div>
+          <h3 class="fr-tile__title fr-tile__title-sans-bordure-noire">
+            <%= I18n.t(titre_traduction) %>
+          </h3>
+          <div class="fr-tile__desc"><%= md I18n.t(description_traduction(succes)) %></div>
+        </div>
         <div class="sous-competence__barre-segmentee">
           <%= render(BarreSegmenteeComponent.new(nombre_questions_reussies: nombre_questions_reussies, nombre_questions_echecs: nombre_questions_echecs, nombre_questions_non_passees: nombre_questions_non_passees, pourcentage_reussite: pourcentage_reussite)) %>
         </div>

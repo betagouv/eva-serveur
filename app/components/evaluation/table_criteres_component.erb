@@ -1,4 +1,4 @@
-<div class="fr-table fr-table--no-scroll fr-table--criteres-component" id="table-bordered-component">
+<div class="fr-table fr-table--lg fr-table--no-scroll fr-table--criteres-component" id="table-bordered-component">
   <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
@@ -7,7 +7,6 @@
             <tr>
               <th scope="col"><%= t('evaluation.critere') %></th>
               <th scope="col"><%= t('evaluation.code_clea') %></th>
-              <th scope="col"><%= t('evaluation.tests_proposes') %></th>
               <th scope="col"><%= t('evaluation.resultat') %></th>
             </tr>
           </thead>
@@ -16,16 +15,16 @@
               <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
                 <td><%= critere.libelle %></td>
                 <td><%= critere.code_clea %></td>
-                <% if critere.pas_de_test? %>
-                  <td><%= t('evaluation.pas_de_test_disponible') %></td>
-                <% else %>
-                  <td><%= critere.nombre_tests_proposes %></td>
-                <% end %>
                 <td>
-                  <% unless critere.pas_de_test? %>
-                    <%=
-                      render(BadgeAcquisitionComponent.new(status: critere.resultat, classes: ["fr-badge--sm"]))
-                    %>
+                  <% if critere.pas_de_test? %>
+                    <%= t('evaluation.pas_de_test_disponible') %></td>
+                  <% else %>
+                    <%= render(BarreSegmenteeComponent.new(
+                      nombre_questions_reussies: critere.nombre_questions_reussies,
+                      nombre_questions_echecs: critere.nombre_questions_echecs,
+                      nombre_questions_non_passees: critere.nombre_questions_non_passees,
+                      pourcentage_reussite: critere.pourcentage_reussite
+                    )) %>
                   <% end %>
                 </td>
               </tr>

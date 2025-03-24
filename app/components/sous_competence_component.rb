@@ -35,10 +35,6 @@ class SousCompetenceComponent < ViewComponent::Base
     "#{traduction_path}.#{@competence}.#{@sous_competence}.description.#{profil}"
   end
 
-  def resultat
-    nombre_questions_repondues.zero? ? '' : "Score #{pourcentage_reussite}% "
-  end
-
   private
 
   def traduction_path

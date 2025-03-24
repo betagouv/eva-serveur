@@ -2,12 +2,11 @@
 
 class BarreSegmenteeComponent < ViewComponent::Base
   def initialize(nombre_questions_reussies:, nombre_questions_echecs:,
-                 nombre_questions_non_passees:, sous_competence:, resultat:)
+                 nombre_questions_non_passees:, pourcentage_reussite:)
     @nombre_questions_reussies = nombre_questions_reussies
     @nombre_questions_echecs = nombre_questions_echecs
     @nombre_questions_non_passees = nombre_questions_non_passees
-    @sous_competence = sous_competence
-    @resultat = resultat
+    @pourcentage_reussite = pourcentage_reussite
   end
 
   def nombre_questions_total
@@ -18,5 +17,13 @@ class BarreSegmenteeComponent < ViewComponent::Base
     return 0 if nombre_questions_total.zero?
 
     (nombre_questions.to_f / nombre_questions_total) * 100
+  end
+
+  def resultat
+    if @pourcentage_reussite.nil? || @pourcentage_reussite.zero?
+      ''
+    else
+      "Score #{@pourcentage_reussite}% "
+    end
   end
 end

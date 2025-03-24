@@ -2,6 +2,5 @@ fr:
   evaluation:
     critere: "Critère"
     code_clea: "Code Cléa"
-    tests_proposes: "Tests proposés"
     resultat: "Résultat"
     pas_de_test_disponible: "Pas de test disponible"

@@ -15,7 +15,7 @@ $barre-segmentee-non-passee: $grey-850;
 
 .barre-segmentee__graphique {
   display: flex;
-  gap: $dsfr-spacing-1v;
+  gap: 2px;
   height: $dsfr-height-xxxs;
   border-radius: $dsfr-radius-sm;
   overflow: hidden;

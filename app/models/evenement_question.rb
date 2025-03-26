@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EvenementQuestion # rubocop:disable Metrics/ClassLength
+class EvenementQuestion
   def initialize(question:, evenement: nil)
     @evenement = evenement || Evenement.new(donnees: {})
     @question = question || Question.new(nom_technique: evenement.donnees['question'])
@@ -117,18 +117,13 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
       questions_a_prendre = []
 
       groupes_clea.each_value do |questions|
-        questions_principales, questions_rattrapage = partitionner_questions(questions)
+        questions_principales, questions_rattrapage =
+          questions.partition(&:est_principale?)
         questions_principales.each { |q| questions_a_prendre << q }
         questions_rattrapage.each { |q| questions_a_prendre << q if q.a_ete_repondue? }
       end
 
       questions_a_prendre
-    end
-
-    private
-
-    def partitionner_questions(questions)
-      questions.partition(&:est_principale?)
     end
   end
 end

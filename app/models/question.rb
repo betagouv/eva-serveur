@@ -91,22 +91,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def saisie?
-    type == QuestionSaisie::QUESTION_TYPE
-  end
-
-  def qcm?
-    type == QuestionQcm::QUESTION_TYPE
-  end
-
-  def glisser_deposer?
-    type == QuestionGlisserDeposer::QUESTION_TYPE
-  end
-
-  def sous_consigne?
-    type == QuestionSousConsigne::QUESTION_TYPE
-  end
-
   def self.preload_questions_pour_type(type, questions)
     # Récupérer la classe du type et appeler sa méthode preload_pour_as_json
     klass = type.constantize

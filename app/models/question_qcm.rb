@@ -12,8 +12,15 @@ class QuestionQcm < Question
 
   accepts_nested_attributes_for :choix, allow_destroy: true
 
-  def restitue_reponse(reponse)
-    choix.find { |c| c.nom_technique == reponse }.intitule
+  def restitue_reponse(nom_technique_reponse)
+    choix.find { |c| c.nom_technique == nom_technique_reponse }.intitule
+  end
+
+  def intitule_reponse(reponse)
+    c = choix.find_by(id: reponse)
+    return reponse if c.nil?
+
+    c.intitule.presence || c.nom_technique
   end
 
   def as_json(_options = nil)
@@ -21,12 +28,12 @@ class QuestionQcm < Question
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
-  def liste_choix
-    choix.pluck(:intitule).join(' | ')
+  def reponses_possibles
+    choix.map { |c| c.intitule.presence || c.nom_technique }.join(' | ')
   end
 
   def bonnes_reponses
-    choix.where(type_choix: :bon)&.pluck(:intitule)&.join(' | ')
+    choix.where(type_choix: :bon).map { |c| c.intitule.presence || c.nom_technique }.join(' | ')
   end
 
   def self.preload_assocations_pour_as_json

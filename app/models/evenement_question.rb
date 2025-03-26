@@ -6,7 +6,8 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
     @question = question || Question.new(nom_technique: evenement.donnees['question'])
   end
 
-  delegate :est_principale?, :est_un_rattrapage?, :nom_technique, to: :@question
+  delegate :est_principale?, :est_un_rattrapage?, :nom_technique, :bonnes_reponses,
+           :reponses_possibles, to: :@question
 
   def score
     @evenement.donnees['score'] || 0
@@ -21,15 +22,8 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
   end
 
   def reponse
-    @evenement.donnees['reponseIntitule'] || @evenement.donnees['reponse']
-  end
-
-  def reponses_possibles
-    @question.qcm? ? @question.liste_choix : nil
-  end
-
-  def reponses_attendues
-    @question.qcm? || @question.saisie? ? @question.bonnes_reponses : nil
+    @evenement.donnees['reponseIntitule'] ||
+      @question.intitule_reponse(@evenement.donnees['reponse'])
   end
 
   def intitule
@@ -124,7 +118,6 @@ class EvenementQuestion # rubocop:disable Metrics/ClassLength
 
       groupes_clea.each_value do |questions|
         questions_principales, questions_rattrapage = partitionner_questions(questions)
-
         questions_principales.each { |q| questions_a_prendre << q }
         questions_rattrapage.each { |q| questions_a_prendre << q if q.a_ete_repondue? }
       end

@@ -98,6 +98,40 @@ describe EvenementQuestion, type: :model do
     end
   end
 
+  describe '#reponse' do
+    let(:choix1) { create :choix, :bon, nom_technique: 'choix_1', intitule: '' }
+
+    let(:question_qcm) { create(:question_qcm, choix: [choix1]) }
+    let(:evenement_question_n1) do
+      described_class.new(question: question_qcm, evenement: evenement_n1)
+    end
+
+    context 'avec un envenement qui a un intitulé de réponse' do
+      let(:evenement_n1) do
+        build(:evenement, donnees: { score: 1, reponseIntitule: 'la réponse du bénéficaire' })
+      end
+
+      it { expect(evenement_question_n1.reponse).to eq('la réponse du bénéficaire') }
+    end
+
+    context 'avec un envenement sans intitulé de réponse' do
+      let(:evenement_n1) do
+        build(:evenement, donnees: { score: 1, question: question_qcm, reponse: choix1.id })
+      end
+
+      it { expect(evenement_question_n1.reponse).to eq('choix_1') }
+    end
+
+    context 'avec un envenement avec un intitulé de réponse vide' do
+      let(:evenement_n1) do
+        build(:evenement, donnees: { score: 1, question: question_qcm,
+                                     reponse: choix1.id, reponseIntitule: '' })
+      end
+
+      it { expect(evenement_question_n1.reponse).to eq('choix_1') }
+    end
+  end
+
   describe '.pour_code_clea' do
     let(:code) { '2.1' }
     let(:sous_code) { '2.1.1' }

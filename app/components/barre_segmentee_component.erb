@@ -1,15 +1,16 @@
 <div class="barre-segmentee">
   <% if @pourcentage_reussite.present? %>
-    <div class="barre-segmentee__score"><%= resultat %></div>
+    <p class="barre-segmentee__score"><%= resultat %></p>
   <% end %>
-  <div class="barre-segmentee__legende">
-      Réussite : <%= @nombre_questions_reussies %> - 
-      Échec : <%= @nombre_questions_echecs %> - 
-      Non passés : <%= @nombre_questions_non_passees %> - 
-      Total : <%= nombre_questions_total %>
-  </div>
+  <p class="barre-segmentee__legende">
+    <%= I18n.t('.barre_segmentee.legende',
+               reussite: @nombre_questions_reussies,
+               echec: @nombre_questions_echecs,
+               non_passees: @nombre_questions_non_passees,
+               total: nombre_questions_total) %>
+  </p>
   <% if @pourcentage_reussite.present? %>
-    <div class="barre-segmentee__graphique">
+    <div class="barre-segmentee__graphique" aria-hidden="true">
       <% if @nombre_questions_reussies.positive? %>
         <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--succes" style="width: <%= pourcentage_questions(@nombre_questions_reussies) %>%"></div>
       <% end %>

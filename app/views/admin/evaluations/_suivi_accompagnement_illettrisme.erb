@@ -2,8 +2,8 @@
 
 <div class="card__banner card__banner--illettrisme <%= reponse %>">
   <div class= 'container d-flex py-3 px-4'>
-    <div class='d-flex align-items-center justify-content-center'>
-      <%= inline_svg_tag 'banner_icone_question.svg', class: 'card__banner__icone', alt: '' %>
+    <div class='d-flex align-items-center justify-content-center' aria-hidden="true">
+      <%= inline_svg_tag 'banner_icone_question.svg', class: 'card__banner__icone' %>
     </div>
     <div>
       <div><%= md t('illettrisme_potentiel.message', scope: scope) %></div>

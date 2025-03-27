@@ -22,10 +22,10 @@ describe BarreSegmenteeComponent, type: :component do
     render_inline(component)
 
     expect(page).to have_css('.barre-segmentee')
-    expect(page).to have_content("Réussite : #{nombre_questions_reussies}")
-    expect(page).to have_content("Échec : #{nombre_questions_echecs}")
-    expect(page).to have_content("Non passés : #{nombre_questions_non_passees}")
-    expect(page).to have_content("Total : #{component.nombre_questions_total}")
+    expect(page).to have_content("Réussite : #{nombre_questions_reussies}")
+    expect(page).to have_content("Échec : #{nombre_questions_echecs}")
+    expect(page).to have_content("Non passés : #{nombre_questions_non_passees}")
+    expect(page).to have_content("Total : #{component.nombre_questions_total}")
     expect(page).to have_content("Score #{pourcentage_reussite}%")
   end
 

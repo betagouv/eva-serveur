@@ -29,7 +29,11 @@
 
 @mixin card__banner-couleur($couleur-principale, $couleur-principale-legere) {
   border: 1px solid $couleur-principale;
-  h5 { color: $couleur-principale; }
+  h3 {
+    color: $couleur-principale;
+    font-size: 1rem;
+    line-height:1.25rem;
+  }
   .card__banner__icone { fill: $couleur-principale; }
   .mise-en-action__texte { color: $couleur-principale; }
 }

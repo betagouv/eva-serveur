@@ -18,6 +18,12 @@
   }
 }
 
+@mixin hint {
+  color: $couleur-texte;
+  margin: 0;
+  font-style: normal;
+}
+
 input::placeholder {
   color: $grey-425;
   font-style: italic;
@@ -143,7 +149,8 @@ form {
         }
       }
       p.inline-hints {
-        color: $couleur-texte;
+        @include hint();
+
         a {
           float: none;
         }

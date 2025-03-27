@@ -6,7 +6,8 @@
       <%= inline_svg_tag 'banner_icone_question.svg', class: 'card__banner__icone' %>
     </div>
     <div>
-      <div><%= md t('illettrisme_potentiel.message', scope: scope) %></div>
+      <h3><%= t('illettrisme_potentiel.titre', scope: scope) %></h3>
+      <%= md t('illettrisme_potentiel.message', scope: scope) %>
       <%= render partial: 'components/reponse_mise_en_action', locals: { evaluation: resource, affiche_qualification: true } %>
     </div>
   </div>

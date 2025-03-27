@@ -22,7 +22,7 @@ class EvenementQuestion
   end
 
   def reponse
-    @evenement.donnees['reponseIntitule'] ||
+    @evenement.donnees['reponseIntitule'].presence ||
       @question.intitule_reponse(@evenement.donnees['reponse'])
   end
 

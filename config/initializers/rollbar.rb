@@ -11,6 +11,8 @@ Rollbar.configure do |config|
 
   # Specify custom root path
   config.root = '/app'
+  config.branch = ENV['BRANCHE_GITHUB']
+
 
   # By default, Rollbar will try to call the `current_user` controller method
   # to fetch the logged-in user object, and then call that object's `id`

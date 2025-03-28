@@ -19,7 +19,9 @@ ActiveAdmin.register QuestionQcm do
   form partial: 'form'
 
   action_item :importer_question, only: :index do
-    link_to 'Importer questions QCM', admin_import_xls_path(type: QuestionQcm::QUESTION_TYPE)
+    link_to 'Importer questions QCM',
+            admin_import_xls_path(type: QuestionQcm::QUESTION_TYPE, model: 'question',
+                                  redirect_to: admin_question_qcms_path)
   end
 
   action_item :exporter_question, only: :show do

@@ -18,7 +18,9 @@ ActiveAdmin.register QuestionSaisie do
   filter :nom_technique
 
   action_item :importer_question, only: :index do
-    link_to 'Importer questions saisies', admin_import_xls_path(type: QuestionSaisie::QUESTION_TYPE)
+    link_to 'Importer questions saisies',
+            admin_import_xls_path(type: QuestionSaisie::QUESTION_TYPE, model: 'question',
+                                  redirect_to: admin_questions_saisies_path)
   end
 
   action_item :exporter_question, only: :show do

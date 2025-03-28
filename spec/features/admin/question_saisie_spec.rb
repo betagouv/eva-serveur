@@ -12,11 +12,15 @@ describe 'Admin - Question Saisie', type: :feature do
 
     before { visit admin_questions_saisies_path }
 
-    it "redirige vers le formulaire d'importation de question" do
-      within('.action-items-sidebar') do
-        click_on 'Importer questions saisie'
-      end
-      expect(page).to have_content 'Importer une ou plusieurs questions'
+    it "affiche le bouton d'import" do
+      expect(page).to have_link(
+        'Importer questions saisies',
+        href: admin_import_xls_path(
+          type: QuestionSaisie::QUESTION_TYPE,
+          model: 'question',
+          redirect_to: admin_questions_saisies_path
+        )
+      )
     end
   end
 

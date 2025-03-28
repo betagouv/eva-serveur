@@ -12,7 +12,8 @@ ActiveAdmin.register QuestionSousConsigne do
 
   action_item :importer_question, only: :index do
     link_to 'Importer questions sous consigne',
-            admin_import_xls_path(type: QuestionSousConsigne::QUESTION_TYPE)
+            admin_import_xls_path(type: QuestionSousConsigne::QUESTION_TYPE, model: 'question',
+                                  redirect_to: admin_question_sous_consignes_path)
   end
 
   action_item :exporter_question, only: :show do

@@ -1,0 +1,11 @@
+fr:
+  active_admin:
+    import_xls:
+      title:
+        question: Importer une ou plusieurs questions
+        questionnaire: Importer un questionnaire
+      flash:
+        succes: L'import a été effectué avec succès
+        echec: "L'import a échoué"
+        format_invalide: |
+          Le fichier n’est pas au bon format. Il doit être au format .xls

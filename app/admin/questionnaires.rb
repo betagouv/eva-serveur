@@ -17,6 +17,11 @@ ActiveAdmin.register Questionnaire do
             format: :xls
   end
 
+  action_item :import_xls, only: :index do
+    link_to 'Importer un questionnaire en XLS',
+            admin_import_xls_path(model: 'questionnaire', redirect_to: admin_questionnaires_path)
+  end
+
   form do |f|
     f.semantic_errors
     f.inputs do

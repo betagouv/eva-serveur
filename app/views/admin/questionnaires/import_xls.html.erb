@@ -1,0 +1,10 @@
+<%= form_tag import_xls_admin_questionnaires_path, multipart: true, method: :post do %>
+  <div class="field">
+    <%= label_tag :file_xls, "Fichier XLS" %>
+    <%= file_field_tag :file_xls, accept: '.xls', required: true %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag 'Importer le fichier', class: 'btn btn-primary' %>
+  </div>
+<% end %>

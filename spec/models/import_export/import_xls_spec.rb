@@ -14,7 +14,7 @@ describe ImportExport::ImportXls do
       it "retourne un message d'erreur" do
         expect { described_class.telecharge_fichier('url_corrompue', 'N3Pim4') }
           .to raise_error(ImportExport::ImportXls::Error,
-                          "Impossible de télécharger un fichier depuis l'url : url_corrompue")
+                          "Impossible de télécharger le fichier à l'URL url_corrompue")
       end
     end
 

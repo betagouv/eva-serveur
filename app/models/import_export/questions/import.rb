@@ -31,12 +31,6 @@ module ImportExport
         end
       end
 
-      def message_erreur_validation(exception, index)
-        I18n.t('.layouts.erreurs.import_question.ligne',
-               numero: index,
-               message: exception.record.errors.full_messages.to_sentence)
-      end
-
       def cree_ou_actualise_question(cellules)
         cellules.suivant # saute la première colonne
         question = @type.constantize.find_or_create_by(nom_technique: cellules.suivant)

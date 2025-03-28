@@ -25,17 +25,4 @@ describe 'Admin - Questionnaire', type: :feature do
       expect(page).to have_content 'Evaluation Formation'
     end
   end
-
-  describe 'import' do
-    it 'importe un fichier XLS' do
-      visit new_import_xls_admin_questionnaires_path
-
-      chemin_fichier = Rails.root.join('spec/support/import_questionnaire.xls').to_s
-      attach_file('file_xls', chemin_fichier)
-      click_button 'Importer le fichier'
-
-      expect(page).to have_http_status(200)
-      expect(Questionnaire.count).to eq(1)
-    end
-  end
 end

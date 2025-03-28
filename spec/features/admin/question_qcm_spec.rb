@@ -19,11 +19,15 @@ describe 'Admin - Question QCM', type: :feature do
       expect(page).to have_content 'Comment ça va ?'
     end
 
-    it "redirige vers le formulaire d'importation de question" do
-      within('.action-items-sidebar') do
-        click_on 'Importer questions QCM'
-      end
-      expect(page).to have_content 'Importer une ou plusieurs questions'
+    it "affiche le bouton d'import" do
+      expect(page).to have_link(
+        'Importer questions QCM',
+        href: admin_import_xls_path(
+          type: QuestionQcm::QUESTION_TYPE,
+          model: 'question',
+          redirect_to: admin_question_qcms_path
+        )
+      )
     end
   end
 

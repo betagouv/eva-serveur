@@ -19,11 +19,15 @@ describe 'Admin - Question Sous Consigne', type: :feature do
       expect(page).to have_content 'Intitulé sous consigne'
     end
 
-    it "redirige vers le formulaire d'importation de question" do
-      within('.action-items-sidebar') do
-        click_on 'Importer questions sous consigne'
-      end
-      expect(page).to have_content 'Importer une ou plusieurs questions'
+    it "affiche le bouton d'import" do
+      expect(page).to have_link(
+        'Importer questions sous consigne',
+        href: admin_import_xls_path(
+          type: QuestionSousConsigne::QUESTION_TYPE,
+          model: 'question',
+          redirect_to: admin_question_sous_consignes_path
+        )
+      )
     end
   end
 end

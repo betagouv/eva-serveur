@@ -17,25 +17,9 @@ ActiveAdmin.register Questionnaire do
             format: :xls
   end
 
-  collection_action :new_import_xls, method: :get do
-    render 'admin/questionnaires/import_xls'
-  end
-
-  collection_action :import_xls, method: :post do
-    file = params[:file_xls]
-    if file
-      ImportExport::Questionnaire::Import.new(
-        ImportExport::Questionnaire::ImportExportDonnees::HEADERS_ATTENDUS
-      ).import_from_xls(file)
-      flash[:success] =
-        redirect_to admin_questionnaires_path, success: I18n.t('.layouts.import_question.succes')
-    else
-      redirect_to admin_questionnaires_path, alert: I18n.t('.layouts.import_question.succes')
-    end
-  end
-
   action_item :import_xls, only: :index do
-    link_to 'Importer les questionnaires en XLS', import_xls_admin_questionnaires_path
+    link_to 'Importer un questionnaire en XLS',
+            admin_import_xls_path(model: 'questionnaire', redirect_to: admin_questionnaires_path)
   end
 
   form do |f|

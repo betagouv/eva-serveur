@@ -230,7 +230,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_182404) do
     t.index ["deleted_at"], name: "index_evenements_on_deleted_at"
     t.index ["position"], name: "index_evenements_on_position"
     t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"
-    t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 
   create_table "mises_en_action", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

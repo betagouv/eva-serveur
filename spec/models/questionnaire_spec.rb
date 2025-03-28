@@ -7,7 +7,17 @@ RSpec.describe Questionnaire, type: :model do
 
   it { is_expected.to validate_presence_of :libelle }
   it { is_expected.to validate_presence_of :nom_technique }
-  it { is_expected.to validate_uniqueness_of :nom_technique }
+
+  context 'avec un enregistrement soft-supprimé' do
+    before do
+      create(:questionnaire, nom_technique: 'unique_nom_technique', deleted_at: Time.current)
+    end
+
+    it "ne permet pas la création d'un nouvel enregistrement avec le même nom_technique" do
+      new_questionnaire = build(:questionnaire, nom_technique: 'unique_nom_technique')
+      expect(new_questionnaire).to be_invalid
+    end
+  end
 
   describe '#livraison_sans_redaction?' do
     context 'quand le questionnaire est livraison sans rédaction' do

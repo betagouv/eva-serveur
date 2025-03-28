@@ -16,7 +16,7 @@ module ImportExport
     end
 
     def message_erreur_headers
-      I18n.t('.layouts.erreurs.import_question.mauvais_format',
+      I18n.t('import_export.import_xls.erreurs.mauvais_format',
              headers: headers_attendus_to_s)
     end
 
@@ -56,7 +56,13 @@ module ImportExport
       content_type = Marcel::MimeType.for extension: extension
       { io: fichier, filename: nom_fichier, content_type: content_type }
     rescue Down::Error
-      raise Error, I18n.t('.layouts.erreurs.import_question.telechargement_impossible', url: url)
+      raise Error, I18n.t('import_export.import_xls.erreurs.telechargement_impossible', url: url)
+    end
+
+    def message_erreur_validation(exception, index)
+      I18n.t('import_export.import_xls.erreurs.validation',
+             numero: index,
+             message: exception.record.errors.full_messages.to_sentence)
     end
   end
 end

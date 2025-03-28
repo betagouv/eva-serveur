@@ -15,7 +15,9 @@ class Questionnaire < ApplicationRecord
   has_many :questions, through: :questionnaires_questions
 
   validates :libelle, presence: true
-  validates :nom_technique, presence: true, uniqueness: true
+  validates :nom_technique, presence: true, uniqueness: { scope: :deleted_at, conditions: lambda {
+    with_deleted
+  } }
 
   accepts_nested_attributes_for :questionnaires_questions, allow_destroy: true
 

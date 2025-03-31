@@ -53,6 +53,7 @@ describe ImportExport::Questions::Import do
       question = Question.last
       expect(question.nom_technique).to eq 'N1Pse6'
       expect(question.libelle).to eq 'N1Pse6'
+      expect(question.score).to eq 2
       expect(question.description).to eq 'Ceci est une description'
       expect(question.illustration.attached?).to be true
     end

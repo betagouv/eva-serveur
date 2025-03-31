@@ -33,16 +33,20 @@ module ImportExport
 
       def cree_ou_actualise_question(cellules)
         cellules.suivant # saute la première colonne
-        question = @type.constantize.find_or_create_by(nom_technique: cellules.suivant)
-        actualise_libelle(question, cellules)
-        attache_fichier(question.illustration, cellules.suivant, "#{cellules.cell(1)}_illustration")
+        nom_technique = cellules.suivant
+        question = @type.constantize.find_or_create_by(nom_technique: nom_technique)
+        actualise_attributs_question(question, cellules)
+        attache_fichier(question.illustration, cellules.suivant, "#{nom_technique}_illustration")
         cree_transcription(question.id, :intitule, cellules.suivant, cellules.suivant,
-                           "#{cellules.cell(1)}_intitule")
+                           "#{nom_technique}_intitule")
         question
       end
 
-      def actualise_libelle(question, cellules)
-        question.update!(libelle: cellules.cell(0))
+      def actualise_attributs_question(question, cellules)
+        question.update!(
+          libelle: cellules.cell(0),
+          score: cellules.suivant
+        )
       end
 
       def cree_transcription(question_id, categorie, ecrit, audio_url, nom_technique)

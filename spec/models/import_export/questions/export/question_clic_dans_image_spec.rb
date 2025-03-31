@@ -9,7 +9,8 @@ describe ImportExport::Questions::Export::QuestionClicDansImage do
   let(:question) do
     create(:question_clic_dans_image, metacompetence: 'operations_soustraction',
                                       description: 'Ceci est une description',
-                                      nom_technique: 'clic')
+                                      nom_technique: 'clic',
+                                      score: 2)
   end
   let!(:intitule) do
     create(:transcription, :avec_audio, question_id: question.id, categorie: :intitule,
@@ -34,15 +35,16 @@ describe ImportExport::Questions::Export::QuestionClicDansImage do
     ligne = worksheet.row(1)
     expect(ligne[0]).to eq('Question clic dans image')
     expect(ligne[1]).to eq('clic')
-    expect(ligne[2]).to be_nil
-    expect(ligne[3]).to eq('Ceci est un intitulé')
-    expect(ligne[4]).to eq(intitule.audio_url)
-    expect(ligne[5]).to eq('operations_soustraction')
-    expect(ligne[6]).to eq('Ceci est une consigne')
-    expect(ligne[7]).to eq(consigne.audio_url)
-    expect(ligne[8]).to eq('Ceci est une description')
-    expect(ligne[9]).to be(false)
-    expect(ligne[10]).to eq(question.zone_cliquable_url)
-    expect(ligne[11]).to eq(question.image_au_clic_url)
+    expect(ligne[2]).to eq(2)
+    expect(ligne[3]).to be_nil
+    expect(ligne[4]).to eq('Ceci est un intitulé')
+    expect(ligne[5]).to eq(intitule.audio_url)
+    expect(ligne[6]).to eq('operations_soustraction')
+    expect(ligne[7]).to eq('Ceci est une consigne')
+    expect(ligne[8]).to eq(consigne.audio_url)
+    expect(ligne[9]).to eq('Ceci est une description')
+    expect(ligne[10]).to be(false)
+    expect(ligne[11]).to eq(question.zone_cliquable_url)
+    expect(ligne[12]).to eq(question.image_au_clic_url)
   end
 end

@@ -5,6 +5,36 @@ require 'rails_helper'
 describe ImportExport::Questions::ImportExportDonnees do
   include ActionDispatch::TestProcess::FixtureFile
 
+  describe '#HEADERS_COMMUN' do
+    it 'vérifie les colonnes spécifiques et ignorées' do
+      columns_specifiques = %i[illustration intitule_audio intitule_ecrit libelle
+                               nom_technique score]
+      colonnes_ignorees_attendues = Question.column_names.map(&:to_sym) - columns_specifiques
+
+      headers = ImportExport::Questions::ImportExportDonnees::HEADERS_COMMUN
+      expect(headers).to match_array(columns_specifiques)
+      expect(colonnes_ignorees_attendues).to contain_exactly(
+        :aide,
+        :categorie,
+        :created_at,
+        :deleted_at,
+        :id,
+        :orientation,
+        :reponse_placeholder,
+        :suffix_reponse,
+        :texte_a_trous,
+        :texte_sur_illustration,
+        :type,
+        :type_qcm,
+        :type_saisie,
+        :updated_at,
+        :demarrage_audio_modalite_reponse,
+        :description,
+        :metacompetence
+      )
+    end
+  end
+
   describe '#exporte_donnees' do
     subject(:service) do
       described_class.new(questions: [question], type: question.type)

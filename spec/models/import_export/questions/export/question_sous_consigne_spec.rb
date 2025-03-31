@@ -8,7 +8,8 @@ describe ImportExport::Questions::Export::QuestionSousConsigne do
   let(:type) { 'QuestionSousConsigne' }
   let(:question) do
     create(:question_sous_consigne, description: 'Ceci est une description',
-                                    nom_technique: 'clic')
+                                    nom_technique: 'clic',
+                                    score: 2)
   end
   let!(:intitule) do
     create(:transcription, :avec_audio, question_id: question.id, categorie: :intitule,
@@ -33,8 +34,9 @@ describe ImportExport::Questions::Export::QuestionSousConsigne do
     ligne = worksheet.row(1)
     expect(ligne[0]).to eq('Question sous consigne')
     expect(ligne[1]).to eq('clic')
-    expect(ligne[2]).to be_nil
-    expect(ligne[3]).to eq('Ceci est un intitulé')
-    expect(ligne[4]).to eq(intitule.audio_url)
+    expect(ligne[2]).to eq(2)
+    expect(ligne[3]).to be_nil
+    expect(ligne[4]).to eq('Ceci est un intitulé')
+    expect(ligne[5]).to eq(intitule.audio_url)
   end
 end

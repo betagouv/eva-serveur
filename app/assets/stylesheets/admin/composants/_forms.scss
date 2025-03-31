@@ -19,7 +19,7 @@
 }
 
 @mixin hint {
-  color: $couleur-texte;
+  color: var(--text-mention-grey);
   margin: 0;
   font-style: normal;
 }

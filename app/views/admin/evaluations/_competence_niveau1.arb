@@ -4,7 +4,7 @@ competence = competence.to_s
 scope = "admin.restitutions.#{referentiel}.#{competence}"
 
 div class: 'col-auto badge' do
-  div image_tag "#{competence}_#{referentiel}.svg", alt: ''
+  div image_tag "#{competence}_#{referentiel}.svg", alt: t(:titre, scope: scope)
   if niveau.present?
     div image_tag "badges/#{referentiel}/#{niveau}.svg",
                   alt: t(niveau, scope: 'admin.restitutions.references')

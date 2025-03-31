@@ -1,6 +1,6 @@
 <div class="barre-segmentee">
   <% if @pourcentage_reussite.present? %>
-    <p class="barre-segmentee__score"><%= resultat %></p>
+    <p class="barre-segmentee__score"><%= I18n.t('.barre_segmentee.score', score: @pourcentage_reussite) %></p>
   <% end %>
   <p class="barre-segmentee__legende">
     <%= I18n.t('.barre_segmentee.legende',

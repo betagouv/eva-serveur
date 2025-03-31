@@ -6,7 +6,7 @@ describe ImportExport::Questions::Export::QuestionSaisie do
   include_context 'export'
 
   let(:type) { 'QuestionSaisie' }
-  let(:question) { create(:question_saisie) }
+  let(:question) { create(:question_saisie, score: 2) }
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
 
   it 'génére un fichier xls avec les entêtes spécifiques' do
@@ -22,12 +22,13 @@ describe ImportExport::Questions::Export::QuestionSaisie do
 
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
-    expect(ligne[9]).to be(false)
-    expect(ligne[10]).to eq(question.suffix_reponse)
-    expect(ligne[11]).to eq(question.reponse_placeholder)
-    expect(ligne[12]).to eq(question.type_saisie)
-    expect(ligne[13]).to eq(question.texte_a_trous)
-    expect(ligne[14]).to eq(question.reponses.last.intitule)
-    expect(ligne[15]).to eq(question.reponses.last.nom_technique)
+    expect(ligne[2]).to eq(2)
+    expect(ligne[10]).to be(false)
+    expect(ligne[11]).to eq(question.suffix_reponse)
+    expect(ligne[12]).to eq(question.reponse_placeholder)
+    expect(ligne[13]).to eq(question.type_saisie)
+    expect(ligne[14]).to eq(question.texte_a_trous)
+    expect(ligne[15]).to eq(question.reponses.last.intitule)
+    expect(ligne[16]).to eq(question.reponses.last.nom_technique)
   end
 end

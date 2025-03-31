@@ -6,7 +6,7 @@ describe ImportExport::Questions::Export::QuestionGlisserDeposer do
   include_context 'export'
 
   let(:type) { 'QuestionGlisserDeposer' }
-  let!(:question) { create(:question_glisser_deposer, :avec_images) }
+  let!(:question) { create(:question_glisser_deposer, :avec_images, score: 2) }
   let!(:reponse) { create(:choix, :bon, question_id: question.id) }
   let!(:reponse2) { create(:choix, :mauvais, question_id: question.id) }
 
@@ -27,17 +27,18 @@ describe ImportExport::Questions::Export::QuestionGlisserDeposer do
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
 
-    expect(ligne[2]).to eq(question.illustration_url(variant: nil))
-    expect(ligne[9]).to be(false)
-    expect(ligne[10]).to eq(question.zone_depot_url)
-    expect(ligne[11]).to eq(question.orientation)
-    expect(ligne[12]).to eq(reponse.nom_technique)
-    expect(ligne[13]).to eq(reponse.position_client.to_s)
-    expect(ligne[14]).to eq(reponse.type_choix)
-    expect(ligne[15]).to eq(reponse.illustration_url.to_s)
-    expect(ligne[16]).to eq(reponse2.nom_technique)
-    expect(ligne[17]).to eq(reponse2.position_client.to_s)
-    expect(ligne[18]).to eq(reponse2.type_choix)
-    expect(ligne[19]).to eq(reponse2.illustration_url.to_s)
+    expect(ligne[2]).to eq(2)
+    expect(ligne[3]).to eq(question.illustration_url(variant: nil))
+    expect(ligne[10]).to be(false)
+    expect(ligne[11]).to eq(question.zone_depot_url)
+    expect(ligne[12]).to eq(question.orientation)
+    expect(ligne[13]).to eq(reponse.nom_technique)
+    expect(ligne[14]).to eq(reponse.position_client.to_s)
+    expect(ligne[15]).to eq(reponse.type_choix)
+    expect(ligne[16]).to eq(reponse.illustration_url.to_s)
+    expect(ligne[17]).to eq(reponse2.nom_technique)
+    expect(ligne[18]).to eq(reponse2.position_client.to_s)
+    expect(ligne[19]).to eq(reponse2.type_choix)
+    expect(ligne[20]).to eq(reponse2.illustration_url.to_s)
   end
 end

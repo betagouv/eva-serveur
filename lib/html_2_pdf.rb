@@ -16,6 +16,7 @@ class Html2Pdf
       end
     rescue Puppeteer::Connection::ProtocolError, Puppeteer::TimeoutError => e
       Rails.logger.error("Puppeteer : #{e.message}")
+      Rollbar.error(e)
       false
     end
 

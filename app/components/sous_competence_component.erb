@@ -13,6 +13,12 @@
   </div>
 <% elsif numeratie? %>
   <div class="sous-competence fr-tile fr-tile--horizontal fr-tile--sous-domaine" id="tile-17">
+    <div class="fr-tile__header" aria-hidden="true">
+      <div class="fr-tile__pictogram">
+        <%= image_tag("icone_profil/numeratie_#{@sous_competence}.svg", alt: '') %>
+      </div>
+    </div>
+
     <div class="fr-tile__body">
       <div class="fr-tile__content">
         <div>
@@ -24,12 +30,6 @@
         <div class="sous-competence__barre-segmentee">
           <%= render(BarreSegmenteeComponent.new(nombre_questions_reussies: nombre_questions_reussies, nombre_questions_echecs: nombre_questions_echecs, nombre_questions_non_passees: nombre_questions_non_passees, pourcentage_reussite: pourcentage_reussite)) %>
         </div>
-      </div>
-    </div>
-
-    <div class="fr-tile__header" aria-hidden="true">
-      <div class="fr-tile__pictogram">
-        <%= image_tag("icone_profil/numeratie_#{@sous_competence}.svg", alt: '') %>
       </div>
     </div>
   </div>

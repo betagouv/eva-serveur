@@ -1,0 +1,44 @@
+- nom_technique: 'LOdi-sous-consigne-1'
+
+- nom_technique: 'LOdi1'
+
+- nom_technique: 'LOdi2'
+  metacompetence: 'lecture'
+  score: 1
+
+- nom_technique: 'LOdi3'
+  score: 1
+
+- nom_technique: 'LOdi4'
+  metacompetence: 'lecture'
+  score: 1
+
+- nom_technique: 'LOdi5'
+  metacompetence: 'lecture'
+  score: 1
+
+- nom_technique: 'LOdi-sous-consigne-2'
+
+- nom_technique: 'LOdi6'
+  score: 1
+
+- nom_technique: 'LOdi7'
+  score: 1
+
+- nom_technique: 'LOdi8'
+  score: 1
+
+- nom_technique: 'LOdi9'
+  score: 1
+
+- nom_technique: 'LOdi10'
+  score: 1
+
+- nom_technique: 'LOdi11'
+  score: 1
+
+- nom_technique: 'LOdi12'
+  score: 1
+
+- nom_technique: 'LOdi13'
+  score: 1

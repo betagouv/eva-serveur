@@ -5,7 +5,7 @@ require 'rails_helper'
 describe QuestionData::Base, type: :model do
   describe 'Chargement de la premiere question' do
     before { stub_static_record_data_loading(yml_data) }
-  
+
     let(:yml_data) do
       [
         { 'nom_technique' => 'question_1', 'score' => 1, 'metacompetence' => 'comprehension' },

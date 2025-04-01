@@ -143,8 +143,8 @@ describe Restitution::Positionnement::Export do
           expect(worksheet.row(1)[0]).to be_nil
           expect(worksheet.row(1)[1]).to be_nil
           expect(worksheet.row(1)[2]).to eq(0)
-          expect(worksheet.row(1)[3]).to eq(0)
-          expect(worksheet.row(1)[4]).to eq('non applicable')
+          expect(worksheet.row(1)[3]).to eq(1)
+          expect(worksheet.row(1)[4]).to eq(0)
         end
       end
     end

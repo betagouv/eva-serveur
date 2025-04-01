@@ -4,11 +4,11 @@ require 'rails_helper'
 
 describe EvenementQuestion, type: :model do
   describe '.prises_en_compte_pour_calcul_score_clea' do
-    let(:question_n1) { build(:question, :numeratie_niveau1, score: 1) }
-    let(:question_n2) { build(:question, :numeratie_niveau2, score: 2) }
-    let(:question_n3) { build(:question, :numeratie_niveau3, score: 0) }
-    let(:question_rattrapage_n1) { build(:question, :numeratie_niveau1_rattrapage, score: 1) }
-    let(:question_rattrapage_n3) { build(:question, :numeratie_niveau3_rattrapage, score: 2) }
+    let(:question_n1) { build(:question, :numeratie_niveau1) }
+    let(:question_n2) { build(:question, :numeratie_niveau2) }
+    let(:question_n3) { build(:question, :numeratie_niveau3) }
+    let(:question_rattrapage_n1) { build(:question, :numeratie_niveau1_rattrapage) }
+    let(:question_rattrapage_n3) { build(:question, :numeratie_niveau3_rattrapage) }
 
     let(:evenement_n1) do
       evenement = build(:evenement, donnees: { score: 1, question: question_n1.nom_technique })

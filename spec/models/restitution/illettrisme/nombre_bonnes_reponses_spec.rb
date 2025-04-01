@@ -12,7 +12,7 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
   let(:evenements_reponses) { [] }
   let(:bon_choix_numeratie) { create :choix, :bon }
   let(:question_numeratie) do
-    create :question_qcm, metacompetence: :numeratie, choix: [bon_choix_numeratie]
+    create :question_qcm, :livraison, choix: [bon_choix_numeratie]
   end
 
   describe 'metrique nombre_bonnes_reponses' do
@@ -49,7 +49,7 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
     end
 
     context 'ignore les bonnes réponses des autres metacompetences' do
-      let(:question_ccf) { create :question_qcm, metacompetence: :ccf }
+      let(:question_ccf) { create :question_qcm, :metacompetence_ccf }
       let(:bon_choix_ccf) { create :choix, :bon, question_id: question_ccf.id }
       let(:evenements_reponses) do
         [build(:evenement_reponse,

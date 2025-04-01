@@ -13,7 +13,7 @@ describe Restitution::Livraison, type: :integration do
 
     let(:bon_choix) { create :choix, :bon }
     let(:question_numeratie) do
-      create :question_qcm, metacompetence: :numeratie, choix: [bon_choix]
+      create :question_qcm, :livraison, choix: [bon_choix]
     end
 
     before do

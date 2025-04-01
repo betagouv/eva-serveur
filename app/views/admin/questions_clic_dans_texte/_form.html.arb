@@ -6,7 +6,6 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :libelle
     f.input :nom_technique
     f.input :description
-    f.input :metacompetence, as: :select, collection: Metacompetence::METACOMPETENCES
     render partial: 'admin/questions/input_illustration', locals: { f: f }
     f.input :texte_sur_illustration, as: :text, input_html: { class: 'simple-mde-editor' }
   end

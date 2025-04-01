@@ -139,11 +139,20 @@ describe EvenementQuestion, type: :model do
     let(:metacompetence_numeratie) do
       Metacompetence::CORRESPONDANCES_CODECLEA[code][sous_code].first
     end
-    let(:question_attendue) { build(:question, metacompetence: metacompetence_numeratie) }
+    let(:question_attendue) do
+      nom_technique = QuestionData::Base.find_by(
+        metacompetence: metacompetence_numeratie
+      ).nom_technique
+      build(:question, nom_technique: nom_technique)
+    end
+
     let(:evenement_question_attendue) { described_class.new(question: question_attendue) }
 
     let(:autre_metacompetence) { Metacompetence::CORRESPONDANCES_CODECLEA[code]['2.1.2'].first }
-    let(:autre_question) { build(:question, metacompetence: autre_metacompetence) }
+    let(:autre_question) do
+      nom_technique = QuestionData::Base.find_by(metacompetence: autre_metacompetence).nom_technique
+      build(:question, nom_technique: nom_technique)
+    end
     let(:evenement_question_autre) { described_class.new(question: autre_question) }
 
     let(:evenements_questions) { [evenement_question_attendue, evenement_question_autre] }

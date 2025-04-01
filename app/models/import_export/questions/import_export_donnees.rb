@@ -9,7 +9,7 @@ module ImportExport
       HEADERS_QCM = %i[type_qcm].freeze
       HEADERS_SAISIE = %i[suffix_reponse reponse_placeholder type_saisie texte_a_trous].freeze
       HEADERS_COMMUN = %i[libelle nom_technique illustration intitule_ecrit intitule_audio].freeze
-      HEADERS_QUESTION_TEST = %i[metacompetence consigne_ecrit consigne_audio description
+      HEADERS_QUESTION_TEST = %i[consigne_ecrit consigne_audio description
                                  demarrage_audio_modalite_reponse].freeze
       HEADERS_ATTENDUS = {
         QuestionClicDansImage::QUESTION_TYPE =>

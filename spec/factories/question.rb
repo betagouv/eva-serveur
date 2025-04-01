@@ -18,19 +18,23 @@ FactoryBot.define do
     end
 
     trait :numeratie_niveau2 do
-      nom_technique { 'N2Prn2' }
+      nom_technique { 'N2Pon1' }
     end
 
     trait :numeratie_niveau2_rattrapage do
-      nom_technique { 'N2Rrn2' }
+      nom_technique { 'N2Ron1' }
     end
 
     trait :numeratie_niveau3 do
-      nom_technique { 'N3Prn2' }
+      nom_technique { 'N3Pum1' }
     end
 
     trait :numeratie_niveau3_rattrapage do
-      nom_technique { 'N3Rrn2' }
+      nom_technique { 'N3Rum1' }
+    end
+
+    trait :livraison do
+      nom_technique { 'multiplication_niveau2' }
     end
 
     after(:create) do |question, evaluator|
@@ -42,6 +46,14 @@ FactoryBot.define do
   factory :question_qcm do
     libelle { 'Question QCM' }
     sequence(:nom_technique) { |n| "question-qcm-#{n}" }
+
+    trait :livraison do
+      nom_technique { 'multiplication_niveau2' }
+    end
+
+    trait :metacompetence_ccf do
+      nom_technique { 'connaissance_et_comprehension_1' }
+    end
   end
 
   factory :question_saisie do

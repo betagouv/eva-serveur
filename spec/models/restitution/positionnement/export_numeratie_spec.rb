@@ -7,8 +7,8 @@ describe Restitution::Positionnement::ExportNumeratie do
     described_class.new(partie, onglet_xls)
   end
 
-  let(:question1) { create :question, nom_technique: 'N1Pde' }
-  let(:question2) { create :question, nom_technique: 'N1Pes' }
+  let(:question1) { create :question, nom_technique: 'N2Ppe1' }
+  let(:question2) { create :question, nom_technique: 'N1Pes1' }
   let(:questions) { [question1, question2] }
   let(:questionnaire) { create :questionnaire, questions: questions }
   let(:situation) { create :situation, questionnaire: questionnaire }
@@ -42,18 +42,18 @@ describe Restitution::Positionnement::ExportNumeratie do
     describe 'quand il y a des questions non répondues' do
       let(:questions) do
         [
-          create(:question_qcm, nom_technique: 'LOdi1', metacompetence: :surfaces),
-          create(:question_qcm, nom_technique: 'LOdi2', metacompetence: :estimation),
-          create(:question_qcm, nom_technique: 'LOdi4', metacompetence: :tableaux_graphiques)
+          create(:question_qcm, nom_technique: 'N2Psu1'),
+          create(:question_qcm, nom_technique: 'N1Pes1'),
+          create(:question_qcm, nom_technique: 'N2Ptg1')
         ]
       end
 
       let!(:evenements) do
         [
           create(:evenement_reponse, partie: partie,
-                                     donnees: { question: 'LOdi1', metacompetence: :surfaces }),
+                                     donnees: { question: 'N2Psu1' }),
           create(:evenement_reponse, partie: partie,
-                                     donnees: { question: 'LOdi2', metacompetence: :estimation })
+                                     donnees: { question: 'N1Pes1', metacompetence: :estimation })
         ]
       end
 

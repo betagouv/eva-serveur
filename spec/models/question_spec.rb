@@ -12,12 +12,6 @@ describe Question, type: :model do
   it { is_expected.to have_one(:transcription_modalite_reponse).dependent(:destroy) }
   it { is_expected.to have_one(:transcription_consigne).dependent(:destroy) }
 
-  it do
-    expect(subject).to define_enum_for(:metacompetence)
-      .with_values(Metacompetence::METACOMPETENCES.index_with(&:to_s))
-      .backed_by_column_of_type(:string)
-  end
-
   describe '#supprime_attachments' do
     let(:question) { create :question_clic_dans_image, :avec_images }
 

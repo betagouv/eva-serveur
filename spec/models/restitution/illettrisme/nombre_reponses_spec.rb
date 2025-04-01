@@ -10,7 +10,7 @@ describe Restitution::Illettrisme::NombreReponses do
     let(:evenements) { [] }
     let(:choix_ccf) { create :choix, :mauvais }
     let(:question_ccf) do
-      create :question_qcm, metacompetence: :ccf, choix: [choix_ccf]
+      create :question_qcm, :metacompetence_ccf, choix: [choix_ccf]
     end
 
     describe 'metrique nombre_reponses' do
@@ -28,7 +28,7 @@ describe Restitution::Illettrisme::NombreReponses do
       end
 
       context 'ignore les événements non réponse' do
-        let(:question_ccf) { create :question_qcm, metacompetence: :ccf }
+        let(:question_ccf) { create :question_qcm, :metacompetence_ccf }
         let(:evenements) do
           [
             build(:evenement_demarrage),
@@ -41,7 +41,7 @@ describe Restitution::Illettrisme::NombreReponses do
       end
 
       context 'ignore les réponses des autres metacompetences' do
-        let(:question_numeratie) { create :question_qcm, metacompetence: :numeratie }
+        let(:question_numeratie) { create :question_qcm, nom_technique: 'numeratie_division' }
         let(:choix_numeratie) { create :choix, :bon, question_id: question_numeratie.id }
         let(:evenements) do
           [build(:evenement_reponse,

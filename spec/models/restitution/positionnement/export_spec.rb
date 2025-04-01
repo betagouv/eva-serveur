@@ -82,8 +82,8 @@ describe Restitution::Positionnement::Export do
         expect(ligne[1]).to eq(intitule_question2)
         expect(ligne[2]).to eq('Le chat de Mme Coupin')
         expect(ligne[3]).to eq 0
-        expect(ligne[4]).to be_nil
-        expect(ligne[5]).to be_nil
+        expect(ligne[4]).to eq 1
+        expect(ligne[5]).to eq 'lecture'
         expect(ligne[6]).to be_nil
       end
     end
@@ -140,8 +140,8 @@ describe Restitution::Positionnement::Export do
       context "sur l'onglet de synthese" do
         it 'verifie la deuxième ligne avec le code cléa du sous domaine et le % de réussite' do
           worksheet = spreadsheet.worksheet(0)
-          expect(worksheet.row(1)[0]).to be_nil
-          expect(worksheet.row(1)[1]).to be_nil
+          expect(worksheet.row(1)[0]).to eq '2.1'
+          expect(worksheet.row(1)[1]).to eq "Se repérer dans l'univers des nombres"
           expect(worksheet.row(1)[2]).to eq(0)
           expect(worksheet.row(1)[3]).to eq(1)
           expect(worksheet.row(1)[4]).to eq(0)

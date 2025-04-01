@@ -13,7 +13,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
   let(:bon_choix) { create :choix, :bon }
   let(:mauvais_choix) { create :choix, :mauvais }
   let(:question_numeratie) do
-    create :question_qcm, metacompetence: :numeratie, choix: [bon_choix, mauvais_choix]
+    create :question_qcm, :livraison, choix: [bon_choix, mauvais_choix]
   end
 
   describe 'metrique temps de bonnes réponses' do
@@ -52,7 +52,8 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
     context 'ignore les autres compétences' do
       let(:bon_choix_ccf) { create :choix, :bon }
       let(:question_ccf) do
-        create :question_qcm, metacompetence: :ccf, choix: [bon_choix_ccf]
+        create :question_qcm, nom_technique: 'connaissance_et_comprehension_1',
+                              choix: [bon_choix_ccf]
       end
       let(:evenements_reponses) do
         [

@@ -7,7 +7,6 @@ active_admin_form_for [:admin, resource] do |f|
     f.input :categorie, as: :select
     f.input :nom_technique
     f.input :description
-    f.input :metacompetence, as: :select, collection: Metacompetence::METACOMPETENCES
     render partial: 'admin/questions/input_illustration', locals: { f: f }
     f.input :type_saisie
     f.input :suffix_reponse

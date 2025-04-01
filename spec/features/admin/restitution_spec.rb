@@ -42,7 +42,7 @@ describe 'Admin - Restitution', type: :feature do
     let(:situation) { create :situation_livraison }
     let(:bon_choix) { create :choix, :bon }
     let(:question_numeratie) do
-      create :question_qcm, metacompetence: :numeratie, choix: [bon_choix]
+      create :question_qcm, nom_technique: 'agenda-entrainement', choix: [bon_choix]
     end
     let!(:evenements) do
       [

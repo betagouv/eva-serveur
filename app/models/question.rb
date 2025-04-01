@@ -12,7 +12,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
                        format: :jpg
   end
 
-  enum :metacompetence, Metacompetence::METACOMPETENCES.index_with(&:to_s)
   enum :categorie, CATEGORIE.index_with(&:to_s), prefix: true
 
   attr_accessor :supprimer_illustration, :supprimer_audio_intitule,
@@ -53,7 +52,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def question_data
     QuestionData::Base.find_by(nom_technique: nom_technique)
   end
-  delegate :score, to: :question_data, allow_nil: true
+  delegate :score, :metacompetence, to: :question_data, allow_nil: true
 
   def display_name
     [categorie, libelle].compact.join(' : ')

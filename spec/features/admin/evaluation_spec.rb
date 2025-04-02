@@ -119,13 +119,13 @@ describe 'Admin - Evaluation', type: :feature do
 
       it "n'affiche pas le bloc litteratie par défaut" do
         visit admin_evaluation_path(mon_evaluation_litteratie)
-        expect(page).not_to have_content 'Communiquer en français - Lettrisme'
+        expect(page).not_to have_content 'Communiquer en français - Littératie'
       end
 
       it 'affiche le bloc litteratie si la situation est présente' do
         campagne.situations_configurations.create situation: cafe_de_la_place
         visit admin_evaluation_path(mon_evaluation_litteratie)
-        expect(page).to have_content 'Communiquer en français - Lettrisme'
+        expect(page).to have_content 'Communiquer en français - Littératie'
       end
     end
 

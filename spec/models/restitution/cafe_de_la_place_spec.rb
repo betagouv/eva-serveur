@@ -28,7 +28,7 @@ describe Restitution::CafeDeLaPlace do
 
   describe '#parcours_bas' do
     it 'quand le profil lecture est le plus petit' do
-      expect(restitution).to receive(:competences_lettrisme)
+      expect(restitution).to receive(:competences_litteratie)
         .and_return({
                       lecture: Restitution::SousCompetence::Litteratie.new(profil: :profil1),
                       comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),
@@ -39,7 +39,7 @@ describe Restitution::CafeDeLaPlace do
     end
 
     it 'quand le profil comprehension est le plus petit' do
-      expect(restitution).to receive(:competences_lettrisme)
+      expect(restitution).to receive(:competences_litteratie)
         .and_return({
                       lecture: Restitution::SousCompetence::Litteratie.new(profil: :profil3),
                       comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),
@@ -51,7 +51,7 @@ describe Restitution::CafeDeLaPlace do
 
     it "quand un profil n'est pas défini" do
       niveau_inter = Competence::NIVEAU_INDETERMINE
-      expect(restitution).to receive(:competences_lettrisme)
+      expect(restitution).to receive(:competences_litteratie)
         .and_return({
                       lecture: Restitution::SousCompetence::Litteratie.new(profil: niveau_inter),
                       comprehension: Restitution::SousCompetence::Litteratie.new(profil: :profil2),

@@ -13,7 +13,7 @@ $padding-pdf: 5rem;
 
 @import "admin/pages/restitution_globale/base";
 @import "admin/bg";
-@import "admin/composants/lettrisme";
+@import "admin/composants/litteratie";
 @import "admin/composants/referentiel_anlci";
 @import "admin/composants/evaluation/table_criteres";
 @import "admin/composants/barre_segmentee";
@@ -127,7 +127,7 @@ $padding-pdf: 5rem;
     border-bottom: 0;
   }
 
-  .page-lettrisme {
+  .page-litteratie {
     .synthese-illettrisme {
       margin: 0 7rem 3rem;
       img {

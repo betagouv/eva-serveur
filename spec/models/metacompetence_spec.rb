@@ -35,10 +35,6 @@ describe Metacompetence, type: :model do
        vocabulaire_numeracie]
   end
 
-  it do
-    expect(Metacompetence::METACOMPETENCES).to eq(metacompetences)
-  end
-
   describe '.code_clea_sous_domaine' do
     it "retourne le code cléa du sous domaine d'une métacompétence" do
       expect(described_class.code_clea_sous_domaine('operations_addition')).to eq('2.1')

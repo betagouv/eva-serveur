@@ -1,13 +1,13 @@
 <% profil = cafe_de_la_place ? cafe_de_la_place.niveau_litteratie : 'indetermine' %>
-<div class="panel panel-lettrisme panel--avec-references">
+<div class="panel panel--avec-references">
   <div class='marges-page'>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
-      scope: "admin.evaluations.lettrisme.litteratie.#{profil}",
+      scope: "admin.evaluations.litteratie.#{profil}",
       icone: "icone_profil/icone_#{profil}.svg" %>
     <% if niveau_bas?(profil) %>
       <%= render 'admin/evaluations/positionnement/sous_competences',
-        sous_competences: cafe_de_la_place.competences_lettrisme,
+        sous_competences: cafe_de_la_place.competences_litteratie,
         competence: :litteratie %>
     <% end %>
   </div>

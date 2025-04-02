@@ -31,7 +31,7 @@
           <% @syntheses_diagnostic.each do |synthese| -%>
             <div class="panel">
               <div class="marges-page">
-                <div id="lettrisme" class="page">
+                <div class="page">
                   <%= render 'admin/evaluations/litteratie_numeratie_synthese',
                     synthese: synthese,
                     scope: "admin.restitutions.cefr.#{synthese}",
@@ -43,11 +43,11 @@
 
           <h2>Synthèses de positionnement littératie</h2>
           <% @syntheses_positionnement_litteratie.each do |donnees| -%>
-            <div id="lettrisme" class="page">
+            <div class="page">
               <div class="panel">
                 <%= render 'admin/evaluations/litteratie_numeratie_synthese',
                   synthese: donnees[1],
-                  scope: "admin.evaluations.lettrisme.litteratie.#{donnees[0]}",
+                  scope: "admin.evaluations.litteratie.#{donnees[0]}",
                   icone: "icone_profil/icone_#{donnees[0]}.svg"%>
                 <div/> <!-- pour absorber le style specifique de la dernière div du panel -->
               </div>
@@ -56,7 +56,7 @@
 
           <h2>Synthèses de positionnement numératie</h2>
           <% @syntheses_positionnement_numeratie.each do |donnees| -%>
-            <div id="lettrisme" class="page">
+            <div class="page">
               <div class="panel">
                 <%= render 'admin/evaluations/litteratie_numeratie_synthese',
                   synthese: donnees[1],

@@ -4,7 +4,7 @@
       <%= render(SousCompetenceComponent.new(competence, sous_competence, objet_sous_competence)) %> 
 
       <% if competence == :numeratie %>
-        <% criteres = objet_sous_competence.criteres %>       
+        <% criteres = objet_sous_competence.criteres %>
         <% if criteres.present? %>
           <div class="sous-competence__critere-accordion">
             <%= dsfr_accordion do |accordion| %>

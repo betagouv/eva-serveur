@@ -85,7 +85,7 @@ fr:
         parcours_haut:
           nom: Profil parcours haut
         niveau_litteratie:
-          nom: Profil de lettrisme
+          nom: Profil de littératie
         profil_numeratie:
           nom: Profil de numératie
         niveau_anlci_litteratie:
@@ -510,9 +510,9 @@ fr:
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
               **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
-      lettrisme:
-        titre: Communiquer en français - Lettrisme
-        titre_menu_lateral: Lettrisme
+      litteratie:
+        titre: Communiquer en français - Littératie
+        titre_menu_lateral: Littératie
       numeratie:
         titre: Calculer et raisonner - Numératie
         titre_details: Calculer et raisonner - Détails

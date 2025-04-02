@@ -38,8 +38,8 @@ div class: 'menu menu-transverse' do
       end
     end
     li do
-      a href: '#lettrisme' do
-        text_node t('admin.restitutions.lettrisme.titre_menu_lateral')
+      a href: '#litteratie' do
+        text_node t('admin.restitutions.litteratie.titre_menu_lateral')
       end
     end
     li do

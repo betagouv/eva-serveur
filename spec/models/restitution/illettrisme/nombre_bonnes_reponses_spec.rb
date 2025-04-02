@@ -12,7 +12,8 @@ describe Restitution::Illettrisme::NombreBonnesReponses do
   let(:evenements_reponses) { [] }
   let(:bon_choix_numeratie) { create :choix, :bon }
   let(:question_numeratie) do
-    create :question_qcm, :livraison, choix: [bon_choix_numeratie]
+    nom_technique = QuestionData.find_by(metacompetence: 'numeratie').nom_technique
+    create :question_qcm, nom_technique: nom_technique, choix: [bon_choix_numeratie]
   end
 
   describe 'metrique nombre_bonnes_reponses' do

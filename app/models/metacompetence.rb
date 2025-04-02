@@ -63,10 +63,7 @@ class Metacompetence
     '2.5.3' => I18n.t('activerecord.metacompetence.codes_clea.2_5_3')
   }.freeze
 
-  METACOMPETENCES_BASE = %w[numeratie ccf syntaxe-orthographe].freeze
   METACOMPETENCES_NUMERATIE = CORRESPONDANCES_CODECLEA.values.flat_map(&:values).flatten.freeze
-
-  METACOMPETENCES = (METACOMPETENCES_BASE + METACOMPETENCES_NUMERATIE).freeze
 
   class << self
     def code_clea_sous_domaine(metacompetence)

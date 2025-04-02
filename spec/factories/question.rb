@@ -33,10 +33,6 @@ FactoryBot.define do
       nom_technique { 'N3Rum1' }
     end
 
-    trait :livraison do
-      nom_technique { 'multiplication_niveau2' }
-    end
-
     after(:create) do |question, evaluator|
       create(:transcription, question_id: question.id,
                              ecrit: evaluator.transcription_ecrit)
@@ -46,10 +42,6 @@ FactoryBot.define do
   factory :question_qcm do
     libelle { 'Question QCM' }
     sequence(:nom_technique) { |n| "question-qcm-#{n}" }
-
-    trait :livraison do
-      nom_technique { 'multiplication_niveau2' }
-    end
 
     trait :metacompetence_ccf do
       nom_technique { 'connaissance_et_comprehension_1' }

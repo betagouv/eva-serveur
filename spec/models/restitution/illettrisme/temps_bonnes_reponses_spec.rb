@@ -13,7 +13,8 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
   let(:bon_choix) { create :choix, :bon }
   let(:mauvais_choix) { create :choix, :mauvais }
   let(:question_numeratie) do
-    create :question_qcm, :livraison, choix: [bon_choix, mauvais_choix]
+    nom_technique = QuestionData.find_by(metacompetence: 'numeratie').nom_technique
+    create :question_qcm, nom_technique: nom_technique, choix: [bon_choix, mauvais_choix]
   end
 
   describe 'metrique temps de bonnes réponses' do

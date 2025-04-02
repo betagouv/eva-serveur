@@ -1,38 +1,38 @@
-- nom_technique: 'agenda-entrainement'
-  metacompetence: 'ccf'
+- nom_technique: agenda-entrainement
+  metacompetence: ccf
 
-- nom_technique: 'photo'
-  metacompetence: 'ccf'
+- nom_technique: photo
+  metacompetence: ccf
 
-- nom_technique: 'deverrouillage'
-  metacompetence: 'numeratie'
+- nom_technique: deverrouillage
+  metacompetence: numeratie
 
-- nom_technique: 'agenda'
-  metacompetence: 'ccf'
+- nom_technique: agenda
+  metacompetence: ccf
 
-- nom_technique: 'notes'
-  metacompetence: 'ccf'
+- nom_technique: notes
+  metacompetence: ccf
 
-- nom_technique: 'fin1'
-  metacompetence: 'memorisation'
+- nom_technique: fin1
+  metacompetence: memorisation
 
-- nom_technique: 'fin2'
-  metacompetence: 'memorisation'
+- nom_technique: fin2
+  metacompetence: memorisation
 
-- nom_technique: 'fin3'
-  metacompetence: 'memorisation'
+- nom_technique: fin3
+  metacompetence: memorisation
 
-- nom_technique: 'quel-bureau'
-  metacompetence: 'numeratie'
+- nom_technique: quel-bureau
+  metacompetence: numeratie
 
-- nom_technique: 'quelle-salle-reserver'
-  metacompetence: 'numeratie'
+- nom_technique: quelle-salle-reserver
+  metacompetence: numeratie
 
-- nom_technique: 'ou-retrouver-dounia'
-  metacompetence: 'ccf'
+- nom_technique: ou-retrouver-dounia
+  metacompetence: ccf
 
-- nom_technique: 'heure-bureau-mickael'
-  metacompetence: 'ccf'
+- nom_technique: heure-bureau-mickael
+  metacompetence: ccf
 
-- nom_technique: 'nombre-tours-de-manege'
-  metacompetence: 'numeratie'
+- nom_technique: nombre-tours-de-manege
+  metacompetence: numeratie

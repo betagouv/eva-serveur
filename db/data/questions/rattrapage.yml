@@ -1,140 +1,139 @@
-- nom_technique: 'N1Rrn1'
-  metacompetence: 'reconnaitre_les_nombres'
+- nom_technique: N1Rrn1
+  metacompetence: reconnaitre_les_nombres
   score: 1
-- nom_technique: 'N1Rrn2'
-  metacompetence: 'reconnaitre_les_nombres'
+- nom_technique: N1Rrn2
+  metacompetence: reconnaitre_les_nombres
   score: 1
-- nom_technique: 'N1Rde1'
-  metacompetence: 'denombrement'
+- nom_technique: N1Rde1
+  metacompetence: denombrement
   score: 1
-- nom_technique: 'N1Rde2'
-  metacompetence: 'denombrement'
+- nom_technique: N1Rde2
+  metacompetence: denombrement
   score: 1
-- nom_technique: 'N1Res1'
-  metacompetence: 'estimation'
+- nom_technique: N1Res1
+  metacompetence: estimation
   score: 1
-- nom_technique: 'N1Res2'
-  metacompetence: 'estimation'
+- nom_technique: N1Res2
+  metacompetence: estimation
   score: 1
-- nom_technique: 'N1Ron1'
-  metacompetence: 'ordonner_nombres_decimaux'
+- nom_technique: N1Ron1
+  metacompetence: ordonner_nombres_decimaux
   score: 1
-- nom_technique: 'N1Ron2'
-  metacompetence: 'ordonner_nombres_decimaux'
+- nom_technique: N1Ron2
+  metacompetence: ordonner_nombres_decimaux
   score: 1
-- nom_technique: 'N1Roa1'
-  metacompetence: 'operations_addition'
+- nom_technique: N1Roa1
+  metacompetence: operations_addition
   score: 1
-- nom_technique: 'N1Roa2'
-  metacompetence: 'operations_addition'
+- nom_technique: N1Roa2
+  metacompetence: operations_addition
   score: 1
-- nom_technique: 'N1Ros1'
-  metacompetence: 'operations_soustraction'
+- nom_technique: N1Ros1
+  metacompetence: operations_soustraction
   score: 1
-- nom_technique: 'N1Ros2'
-  metacompetence: 'operations_soustraction'
+- nom_technique: N1Ros2
+  metacompetence: operations_soustraction
   score: 1
-- nom_technique: 'N2Rlp1'
-  metacompetence: 'lecture_plan'
+- nom_technique: N2Rlp1
+  metacompetence: lecture_plan
   score: 1
-- nom_technique: 'N2Rlp2'
-  metacompetence: 'lecture_plan'
+- nom_technique: N2Rlp2
+  metacompetence: lecture_plan
   score: 1
-- nom_technique: 'N2Rpe1'
-  metacompetence: 'perimetres'
+- nom_technique: N2Rpe1
+  metacompetence: perimetres
   score: 1
-- nom_technique: 'N2Rpe2'
-  metacompetence: 'perimetres'
+- nom_technique: N2Rpe2
+  metacompetence: perimetres
   score: 1
-- nom_technique: 'N2Rsu1'
-  metacompetence: 'surfaces'
+- nom_technique: N2Rsu1
+  metacompetence: surfaces
   score: 1
-- nom_technique: 'N2Rsu2'
-  metacompetence: 'surfaces'
+- nom_technique: N2Rsu2
+  metacompetence: surfaces
   score: 1
-- nom_technique: 'N2Rom1'
-  metacompetence: 'operations_multiplication'
+- nom_technique: N2Rom1
+  metacompetence: operations_multiplication
   score: 1
-- nom_technique: 'N2Rom2'
-  metacompetence: 'operations_multiplication'
+- nom_technique: N2Rom2
+  metacompetence: operations_multiplication
   score: 1
-- nom_technique: 'N2Ron1'
-  metacompetence: 'ordonner_nombres_decimaux'
+- nom_technique: N2Ron1
+  metacompetence: ordonner_nombres_decimaux
   score: 1
-- nom_technique: 'N2Ron2'
-  metacompetence: 'ordonner_nombres_decimaux'
+- nom_technique: N2Ron2
+  metacompetence: ordonner_nombres_decimaux
   score: 1
-- nom_technique: 'N2Rod1'
-  metacompetence: 'operations_division'
+- nom_technique: N2Rod1
+  metacompetence: operations_division
   score: 1
-- nom_technique: 'N2Rod2'
-  metacompetence: 'operations_division'
+- nom_technique: N2Rod2
+  metacompetence: operations_division
   score: 1
-- nom_technique: 'N2Rut1'
-  metacompetence: 'unites_de_temps'
+- nom_technique: N2Rut1
+  metacompetence: unites_de_temps
   score: 1
-- nom_technique: 'N2Rut2'
-  metacompetence: 'unites_de_temps'
+- nom_technique: N2Rut2
+  metacompetence: unites_de_temps
   score: 1
 
-- nom_technique: 'N2Rrh1'
-  metacompetence: 'renseigner_horaires'
-  modalite_reponse: 'Vous devez mettre les horloges dans les bonnes cases, en fonction des horaires affichés. Pour confirmer votre réponse, cliquez sur le bouton "Valider" ,'
+- nom_technique: N2Rrh1
+  metacompetence: renseigner_horaires
   score: 1
-- nom_technique: 'N2Rrh2'
-  metacompetence: 'renseigner_horaires'
+- nom_technique: N2Rrh2
+  metacompetence: renseigner_horaires
   score: 1
-- nom_technique: 'N2Rtg1'
-  metacompetence: 'tableaux_graphiques'
+- nom_technique: N2Rtg1
+  metacompetence: tableaux_graphiques
   score: 1
-- nom_technique: 'N2Rtg2'
-  metacompetence: 'tableaux_graphiques'
+- nom_technique: N2Rtg2
+  metacompetence: tableaux_graphiques
   score: 1
-- nom_technique: 'N2Rpl1'
-  metacompetence: 'plannings_lecture'
+- nom_technique: N2Rpl1
+  metacompetence: plannings_lecture
   score: 1
-- nom_technique: 'N2Rpl2'
-  metacompetence: 'plannings_lecture'
+- nom_technique: N2Rpl2
+  metacompetence: plannings_lecture
   score: 1
-- nom_technique: 'N3Rpl1'
-  metacompetence: 'plannings_calculs'
+- nom_technique: N3Rpl1
+  metacompetence: plannings_calculs
   score: 1
-- nom_technique: 'N3Rpl2'
-  metacompetence: 'plannings_calculs'
+- nom_technique: N3Rpl2
+  metacompetence: plannings_calculs
   score: 1
-- nom_technique: 'N3Rut1'
-  metacompetence: 'unites_de_temps_conversions'
+- nom_technique: N3Rut1
+  metacompetence: unites_de_temps_conversions
   score: 1
-- nom_technique: 'N3Rut2'
-  metacompetence: 'unites_de_temps_conversions'
+- nom_technique: N3Rut2
+  metacompetence: unites_de_temps_conversions
   score: 1
-- nom_technique: 'N3Rpo1'
-  metacompetence: 'pourcentages'
+- nom_technique: N3Rpo1
+  metacompetence: pourcentages
   score: 1
-- nom_technique: 'N3Rpo2'
-  metacompetence: 'pourcentages'
+- nom_technique: N3Rpo2
+  metacompetence: pourcentages
   score: 1
-- nom_technique: 'N3Rpr1'
-  metacompetence: 'proportionnalite'
+- nom_technique: N3Rpr1
+  metacompetence: proportionnalite
   score: 1
-- nom_technique: 'N3Rpr2'
-  metacompetence: 'proportionnalite'
+- nom_technique: N3Rpr2
+  metacompetence: proportionnalite
   score: 1
-- nom_technique: 'N3Rps1'
-  metacompetence: 'perimetres'
+- nom_technique: N3Rps1
+  metacompetence: perimetres
   score: 1
-- nom_technique: 'N3Rps2'
-  metacompetence: 'surfaces'
+- nom_technique: N3Rps2
+  metacompetence: surfaces
   score: 1
-- nom_technique: 'N3Rvo1'
-  metacompetence: 'volumes'
+- nom_technique: N3Rvo1
+  metacompetence: volumes
   score: 1
-- nom_technique: 'N3Rvo2'
-  metacompetence: 'volumes'
+- nom_technique: N3Rvo2
+  metacompetence: volumes
   score: 1
-- nom_technique: 'N3Rrp1'
-  metacompetence: 'resolution_de_probleme'
+- nom_technique: N3Rrp1
+  metacompetence: resolution_de_probleme
   score: 1
-- nom_technique: 'N3Rrp2'
-  metacompetence: 'resolution_de_probleme'
+- nom_technique: N3Rrp2
+  metacompetence: resolution_de_probleme
   score: 1

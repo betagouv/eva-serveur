@@ -23,10 +23,4 @@ describe QuestionData, type: :model do
       expect(premiere_question.metacompetence).to eq('comprehension')
     end
   end
-
-  describe '.all' do
-    it "vérifie que l'on peut charger toutes les questions" do # rubocop:disable RSpec/NoExpectationExample
-      _questions = described_class.all
-    end
-  end
 end

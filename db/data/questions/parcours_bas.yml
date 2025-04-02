@@ -1,187 +1,187 @@
-- nom_technique: sous_consigne_ALrd_1
+- nom_technique: ALrd-sous-consigne-1
 
-- nom_technique: sous_consigne_ALrd_2
+- nom_technique: ALrd-sous-consigne-2
 
-- nom_technique: titre_1
+- nom_technique: ALrd1
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_2
+- nom_technique: ALrd2
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_10
+- nom_technique: ALrd3
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_3
+- nom_technique: ALrd4
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_11
+- nom_technique: ALrd5
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_6
+- nom_technique: ALrd6
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_8
+- nom_technique: ALrd7
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_5
+- nom_technique: ALrd8
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_4
+- nom_technique: ALrd9
   metacompetence: lecture
   score: 1
 
-- nom_technique: titre_7
+- nom_technique: ALrd10
   metacompetence: lecture
   score: 1
 
-- nom_technique: alrd_11
+- nom_technique: ALrd11
   metacompetence: lecture
   score: 1
 
-- nom_technique: alrd_12
+- nom_technique: ALrd12
   metacompetence: lecture
   score: 1
 
-- nom_technique: alrd_13
+- nom_technique: ALrd13
   metacompetence: lecture
   score: 1
 
-- nom_technique: alrd_14
+- nom_technique: ALrd14
   metacompetence: lecture
   score: 1
 
-- nom_technique: sous_consigne_ACrd_1
+- nom_technique: ACrd-sous-consigne-1
 
-- nom_technique: acrd_1
+- nom_technique: ACrd1
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_2
+- nom_technique: ACrd2
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_3
+- nom_technique: ACrd3
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_4
+- nom_technique: ACrd4
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_5
+- nom_technique: ACrd5
   metacompetence: comprehension
   score: 1
 
-- nom_technique: sous_consigne_ACrd_2
+- nom_technique: ACrd-sous-consigne-2
 
-- nom_technique: acrd_6
+- nom_technique: ACrd6
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_7
+- nom_technique: ACrd7
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_8
+- nom_technique: ACrd8
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_9
+- nom_technique: ACrd9
   metacompetence: comprehension
   score: 1
 
-- nom_technique: acrd_10
+- nom_technique: ACrd10
   metacompetence: comprehension
   score: 1
 
-- nom_technique: sous_consigne_APlc_1
+- nom_technique: APlc-sous-consigne-1
 
-- nom_technique: sous_consigne_APlc_2
+- nom_technique: APlc-sous-consigne-2
 
-- nom_technique: aplc_1
+- nom_technique: APlc1
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_2
+- nom_technique: APlc2
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_3
+- nom_technique: APlc3
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_4
+- nom_technique: APlc4
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_5
+- nom_technique: APlc5
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_6
+- nom_technique: APlc6
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_7
+- nom_technique: APlc7
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_8
+- nom_technique: APlc8
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_9
+- nom_technique: APlc9
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_10
+- nom_technique: APlc10
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_11
+- nom_technique: APlc11
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_12
+- nom_technique: APlc12
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_13
+- nom_technique: APlc13
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_14
+- nom_technique: APlc14
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_15
+- nom_technique: APlc15
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_16
+- nom_technique: APlc16
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_17
+- nom_technique: APlc17
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_18
+- nom_technique: APlc18
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_19
+- nom_technique: APlc19
   metacompetence: production
   score: 1
 
-- nom_technique: aplc_20
+- nom_technique: APlc20
   metacompetence: production
   score: 1

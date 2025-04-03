@@ -4,5 +4,5 @@
                    url_connexion: root_url) %>
 <%= md t('.x_personnes_utilisent_eva', count: @effectif) %>
 <%= md t('.besoin_aide', lien_rubrique_aide: admin_aide_url,
-                         lien_livestorm: Eva::LIEN_LIVESTORM,
+                         lien_inscription_presentation: ENV["LIEN_INSCRIPTION_PRESENTATION"],
                          email_support: Eva::EMAIL_SUPPORT) %>

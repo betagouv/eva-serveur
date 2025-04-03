@@ -54,7 +54,7 @@ fr:
       besoin_aide: |
         ### Vous souhaitez découvrir ou redécouvrir eva ?
 
-        Choisissez une date de participation à [une de nos présentations](%{lien_livestorm})
+        Choisissez une date de participation à <a href="%{lien_inscription_presentation}" target="_blank">une de nos présentations</a>
 
         ### Vous avez besoin de plus d'informations ?
 

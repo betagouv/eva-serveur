@@ -7,5 +7,4 @@ module Eva
   EMAIL_DEMO = 'demo@eva.beta.gouv.fr'
   STRUCTURE_DEMO = 'Structure démo ANLCI'
   EMAIL_DEMO_EN_ATTENTE = 'nouveau.anlci@yopmail.fr'
-  LIEN_LIVESTORM = 'https://app.livestorm.co/eva-diagnostic-cptc/presentation-et-demonstration-eva-session?type=detailed'
 end

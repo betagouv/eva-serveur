@@ -51,6 +51,7 @@ FactoryBot.define do
   factory :question_saisie do
     libelle { 'Question Redaction Note' }
     sequence(:nom_technique) { |n| "question-saisie-#{n}" }
+    aide { 'Ceci est une aide' }
 
     transient do
       transcription_ecrit { 'Ecrivez une note' }

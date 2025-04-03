@@ -15,7 +15,8 @@ module ImportExport
           question.update!(suffix_reponse: cellules.suivant,
                            reponse_placeholder: cellules.suivant,
                            type_saisie: cellules.suivant,
-                           texte_a_trous: cellules.suivant)
+                           texte_a_trous: cellules.suivant,
+                           aide: cellules.suivant)
           cree_reponses('reponse', cellules) do |data|
             cree_reponse_saisie(question.id, data)
           end

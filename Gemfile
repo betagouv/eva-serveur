@@ -22,6 +22,7 @@ gem 'ancestry', '~> 4.3'
 gem 'auto_strip_attributes', '~> 2.6'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3', '>= 4.3.1'
+gem 'bullet'
 gem 'cancancan'
 gem 'chartkick'
 gem 'coffee-rails'
@@ -75,7 +76,6 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'bullet'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'listen', '~> 3.2'
   gem 'rspec_junit_formatter', '~> 0.4.1'

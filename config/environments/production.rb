@@ -1,4 +1,11 @@
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rollbar = true
+    Bullet.rails_logger = true
+    Bullet.alert = false
+    Bullet.add_footer = false
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

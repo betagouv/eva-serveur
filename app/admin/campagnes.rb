@@ -84,7 +84,7 @@ ActiveAdmin.register Campagne do
     end
 
     def parcours_type
-      @parcours_type = ParcoursType.order(:created_at)
+      @parcours_type ||= ParcoursType.where(actif: true).order(:created_at)
     end
 
     def situations_configurations

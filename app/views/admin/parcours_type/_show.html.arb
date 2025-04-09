@@ -3,6 +3,7 @@
 panel 'Détails du parcours type' do
   attributes_table_for parcours_type do
     row :libelle
+    row :actif
     row :nom_technique
     row :duree_moyenne
     row(:type_de_programme) do

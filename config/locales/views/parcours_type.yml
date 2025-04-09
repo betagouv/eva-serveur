@@ -1,0 +1,5 @@
+fr:
+  admin:
+    parcours_type:
+      form:
+        hint_actif: Activez pour le faire apparaitre dans le formulaire de création de campagne

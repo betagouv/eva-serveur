@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_09_091700) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_09_101829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -256,6 +256,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_09_091700) do
     t.string "type_de_programme"
     t.datetime "deleted_at"
     t.boolean "actif", default: true
+    t.integer "position"
     t.index ["deleted_at"], name: "index_parcours_type_on_deleted_at"
   end
 

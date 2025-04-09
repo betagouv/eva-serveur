@@ -3,8 +3,9 @@
 active_admin_form_for [:admin, resource] do |f|
   f.inputs do
     f.input :libelle
-    f.input :actif, hint: t('.hint_actif')
     f.input :nom_technique
+    f.input :actif, hint: t('.hint_actif')
+    f.input :position, hint: t('.hint_position')
     f.input :duree_moyenne
     f.input :type_de_programme, as: :select
     f.input :description, as: :text

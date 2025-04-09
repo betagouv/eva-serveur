@@ -9,10 +9,14 @@ form fieldset.actions li.cancel a,
   border: none;
   background: none;
 }
-form input[type="submit"],
-.has_many_container a.button {
+form input[type="submit"] {
   @include bouton-primaire;
   @include grand-bouton;
+}
+
+.has_many_container a.button {
+  @include bouton-primaire;
+  @include petit-bouton;
 }
 form input[type="submit"]:not(.disabled),
 form button:not(.disabled),

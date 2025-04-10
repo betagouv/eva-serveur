@@ -8,8 +8,8 @@ ActiveAdmin.register ParcoursType do
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
   filter :libelle
-  filter :position
   filter :nom_technique
+  filter :type_de_programme, as: :select
   filter :created_at
   filter :description
 
@@ -22,7 +22,7 @@ ActiveAdmin.register ParcoursType do
     column :actif
     column :position
     column :nom_technique
-    column :duree_moyenne
+    column :type_de_programme
     column :created_at
     actions
     column '', class: 'bouton-action' do

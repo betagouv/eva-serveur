@@ -101,12 +101,13 @@ module Restitution
         @onglet_xls.set_valeur(ligne, 0, evenement_question.code_clea)
         @onglet_xls.set_valeur(ligne, 1, evenement_question.nom_technique)
         @onglet_xls.set_valeur(ligne, 2, evenement_question.metacompetence&.humanize)
-        @onglet_xls.set_nombre(ligne, 3, evenement_question.score)
-        @onglet_xls.set_nombre(ligne, 4, evenement_question.score_max)
+        @onglet_xls.set_valeur_booleenne(ligne, 3, evenement_question.a_ete_repondue?)
+        @onglet_xls.set_nombre(ligne, 4, evenement_question.score)
+        @onglet_xls.set_nombre(ligne, 5, evenement_question.score_max)
         pris_en_compte = pris_en_compte_pour_calcul_score_clea?(evenement_question)
-        @onglet_xls.set_valeur(ligne, 5, pris_en_compte)
-        @onglet_xls.set_valeur(ligne, 6, I18n.t(".interaction.#{evenement_question.type_question}"))
-        @onglet_xls.set_valeur(ligne, 7, evenement_question.intitule)
+        @onglet_xls.set_valeur(ligne, 6, pris_en_compte)
+        @onglet_xls.set_valeur(ligne, 7, I18n.t(".interaction.#{evenement_question.type_question}"))
+        @onglet_xls.set_valeur(ligne, 8, evenement_question.intitule)
 
         remplis_choix(ligne, evenement_question)
         ligne + 1

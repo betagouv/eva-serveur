@@ -35,6 +35,11 @@ module ImportExport
       set_format_colonne(ligne, colonne, POURCENTAGE_FORMAT)
     end
 
+    def set_valeur_booleenne(ligne, colonne, valeur)
+      valeur_texte = valeur ? I18n.t('.interaction.true') : I18n.t('.interaction.false')
+      set_valeur(ligne, colonne, valeur_texte)
+    end
+
     XLS_COLOR_GRAY = :xls_color_14 # rubocop:disable Naming/VariableNumber
     def grise_ligne(ligne)
       format_grise = Spreadsheet::Format.new(pattern_fg_color: XLS_COLOR_GRAY, pattern: 1)

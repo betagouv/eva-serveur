@@ -5,6 +5,8 @@ fr:
     QuestionGlisserDeposer: Glisser-Déposer
     QuestionQcm: QCM
     QuestionSaisie: Saisie
+    true: ✅ Oui
+    false: ❌ Non
   activerecord:
     models:
       question_qcm:

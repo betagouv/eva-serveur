@@ -40,12 +40,6 @@ module ImportExport
       set_valeur(ligne, colonne, valeur_texte)
     end
 
-    XLS_COLOR_GRAY = :xls_color_14 # rubocop:disable Naming/VariableNumber
-    def grise_ligne(ligne)
-      format_grise = Spreadsheet::Format.new(pattern_fg_color: XLS_COLOR_GRAY, pattern: 1)
-      set_format_ligne(ligne, format_grise)
-    end
-
     private
 
     def remplis_entetes(entetes)

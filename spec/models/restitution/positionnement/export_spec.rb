@@ -229,7 +229,7 @@ describe Restitution::Positionnement::Export do
           expect(ligne[4]).to eq(0)
           expect(ligne[5]).to eq(2)
           expect(ligne[6]).to eq('Oui')
-          expect(ligne[11]).to eq('00:59')
+          expect(ligne[12]).to eq('00:59')
         end
 
         it 'verifie les questions du même sous sous domaine' do

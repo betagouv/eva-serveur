@@ -122,10 +122,10 @@ module Restitution
       end
 
       def remplis_choix(ligne, evenement_question)
-        @onglet_xls.set_valeur(ligne, 8, evenement_question.reponses_possibles)
-        @onglet_xls.set_valeur(ligne, 9, evenement_question.bonnes_reponses)
-        @onglet_xls.set_valeur(ligne, 10, evenement_question.reponse)
-        @onglet_xls.set_valeur(ligne, 11, @temps_par_question[evenement_question.nom_technique])
+        @onglet_xls.set_valeur(ligne, 9, evenement_question.reponses_possibles)
+        @onglet_xls.set_valeur(ligne, 10, evenement_question.bonnes_reponses)
+        @onglet_xls.set_valeur(ligne, 11, evenement_question.reponse)
+        @onglet_xls.set_valeur(ligne, 12, @temps_par_question[evenement_question.nom_technique])
       end
 
       def tri_par_ordre_croissant(groupes_clea)

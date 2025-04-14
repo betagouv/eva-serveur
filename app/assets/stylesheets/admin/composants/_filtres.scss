@@ -11,19 +11,18 @@
           }
         }
         &.filter_date_range {
-          input[type='text'] {
-            width: 7.188rem;
+          input:first-of-type {
+            margin-bottom: 0.5rem;
           }
-        }
-      }
-      .input:not(.select_and_search) {
-        select {
-          width: 100%;
         }
       }
       .select2-selection {
         padding: .5rem 0.5rem;
       }
+    }
+
+    .buttons {
+      margin-top: 1rem;
     }
 
     .filter_form_field {

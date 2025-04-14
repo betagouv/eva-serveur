@@ -25,7 +25,6 @@ ActiveAdmin.register Partie do
          order_by: 'nom_asc'
   filter :session_id
   filter :created_at
-  filter :updated_at
 
   index pagination_total: false do
     column :evaluation

@@ -1,5 +1,8 @@
 <div id='numeratie' class='page page-numeratie'>
   <h2><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
+  <% if @place_du_marche && !@place_du_marche.evaluation_terminee? %>
+    <%= render(Evaluation::AlerteIncompleteComponent.new) %>
+  <% end %>
 
   <div class="<%= classes_panel %>">
     <div class='marges-page'>

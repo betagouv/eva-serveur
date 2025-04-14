@@ -362,7 +362,7 @@ describe Restitution::PlaceDuMarche do
   end
 
   describe '#evaluation_terminee?' do
-    context 'quand la situation n\'est pas terminée' do
+    context "quand la situation n'est pas terminée" do
       let(:restitution) do
         described_class.new(campagne,
                             [

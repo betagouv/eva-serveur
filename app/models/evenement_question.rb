@@ -50,6 +50,10 @@ class EvenementQuestion
     questions.any? { |q| q.nom_technique == nom_technique }
   end
 
+  def fin_situation?
+    @evenement.nom == 'finSituation'
+  end
+
   class << self
     def pourcentage_pour_groupe(evenements_questions)
       scores = evenements_questions.map { |eq| [eq.score_max.presence || 0, eq.score] }.compact

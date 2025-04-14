@@ -3,8 +3,7 @@
 class Evaluation
   class AlerteIncompleteComponent < ViewComponent::Base
     def initialize
-      @titre = 'admin.restitutions.numeratie.alerte_incomplete.titre'
-      @body = 'admin.restitutions.numeratie.alerte_incomplete.body'
+      @scope = 'admin.restitutions.numeratie.alerte_incomplete'
     end
   end
 end

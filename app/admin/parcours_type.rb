@@ -10,8 +10,8 @@ ActiveAdmin.register ParcoursType do
   filter :libelle
   filter :nom_technique
   filter :type_de_programme, as: :select
-  filter :created_at
   filter :description
+  filter :created_at
 
   form partial: 'form'
 

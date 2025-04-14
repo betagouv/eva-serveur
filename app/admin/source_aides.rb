@@ -5,7 +5,9 @@ ActiveAdmin.register SourceAide do
 
   permit_params :titre, :description, :url, :categorie, :type_document, :position
 
-  config.filters = false
+  filter :titre
+  filter :categorie, as: :select
+  filter :description
 
   index do
     column :titre do |sa|

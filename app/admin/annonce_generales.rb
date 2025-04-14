@@ -7,6 +7,10 @@ ActiveAdmin.register AnnonceGenerale do
 
   permit_params :texte, :afficher
 
+  filter :texte
+  filter :afficher, as: :boolean
+  filter :created_at
+
   index do
     column :texte do |ag|
       link_to ag.texte, admin_annonce_generale_path(ag)

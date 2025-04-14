@@ -6,6 +6,10 @@ ActiveAdmin.register Situation do
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
                 :description, :illustration
 
+  filter :libelle
+  filter :nom_technique
+  filter :description
+
   includes :questionnaire, :questionnaire_entrainement, illustration_attachment: :blob
 
   form do |f|

@@ -518,7 +518,9 @@ fr:
         titre_details: Calculer et raisonner - Détails
         titre_menu_lateral: Numératie
         interpreter_resultats_contenu: "La restitution du parcours des compétences de numératie s’appuie sur les degrés de compétences de bases définis dans le Cadre national de référence et le Référentiel des compétences clés en situation professionnelles (RCCSP) de l’ANLCI :"
-        interpreter_resultats_details: "Les détails de la restitution sont basés sur le domaine 2 du référentiel CléA “Utilisation des règles de base de calcul et du raisonnement mathématique”. Pour en savoir plus sur ces référentiels et les conditions d’interprétation des résultats :"
+        interpreter_resultats_details_html: |
+          Les détails de la restitution sont basés sur le domaine 2 du référentiel CléA “Utilisation des règles de base de calcul et du raisonnement mathématique”.<br>
+          Pour en savoir plus sur ces référentiels et les conditions d’interprétation des résultats :
         alerte_incomplete:
           titre: Évaluation incomplète
           body: L’évalué n’a pas terminé ou a interrompu la situation “Place du marché”. Cela peut avoir un impact sur la fiabilité des résultats.

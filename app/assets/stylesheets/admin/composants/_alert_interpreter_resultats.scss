@@ -1,0 +1,29 @@
+.alert-interpreter-resultats {
+  margin: $numeratie-component-margin;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--text-default-grey);
+  }
+
+  .alert-interpreter-resultats__contenu {
+    display: flex;
+    gap: $dsfr-spacing-1v;
+    flex-direction: column;
+  }
+
+  .alert-interpreter-resultats__badges {
+    display: flex;
+    gap: $dsfr-spacing-2v;
+    padding: $dsfr-spacing-1v 0;
+  }
+
+  .badge-references {
+    height: 40px;
+    width: 40px;
+    fill: var(--text-default-grey);
+  }
+}

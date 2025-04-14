@@ -11,7 +11,7 @@ class Evaluation
     end
 
     def classes_panel
-      @place_du_marche ? 'panel panel--avec-references' : 'panel'
+      'panel'
     end
   end
 end

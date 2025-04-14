@@ -2,18 +2,18 @@
 
 questionnaire = situation_configuration.questionnaire_utile&.nom_technique
 
-div class: 'campagne-situation d-flex align-items-center' do
+div class: "campagne-situation d-flex align-items-center" do
   div do
     situation_illustration(situation_configuration.situation, couleur_bord: couleur)
   end
-  div class: 'situation__texte' do
-    div class: 'd-flex mb-2' do
+  div class: "situation__texte" do
+    div class: "d-flex mb-2" do
       h5 situation_configuration.situation.libelle
       case questionnaire
       when Questionnaire::LIVRAISON_AVEC_REDACTION
-        render(Tag.new("+ #{t('.redaction')}", classes: 'tag-categorie green'))
+        render(Tag.new("+ #{t('.redaction')}", classes: "tag-categorie green"))
       when Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT
-        render(Tag.new("+ #{t('.autopositionnement')}", classes: 'tag-categorie green'))
+        render(Tag.new("+ #{t('.autopositionnement')}", classes: "tag-categorie green"))
       end
     end
     para situation_configuration.situation.description

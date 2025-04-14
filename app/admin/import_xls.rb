@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register_page 'import_xls' do
+ActiveAdmin.register_page "import_xls" do
   menu false
 
   content title: proc { I18n.t("active_admin.import_xls.title.#{params[:model]}") } do
-    render partial: 'admin/import_xls/form',
+    render partial: "admin/import_xls/form",
            locals: {
              model: params[:model],
              type: params[:type],
@@ -18,9 +18,9 @@ ActiveAdmin.register_page 'import_xls' do
     if file
       importe_fichier!
 
-      flash[:success] = I18n.t('active_admin.import_xls.flash.succes')
+      flash[:success] = I18n.t("active_admin.import_xls.flash.succes")
     else
-      flash[:error] = I18n.t('active_admin.import_xls.flash.echec')
+      flash[:error] = I18n.t("active_admin.import_xls.flash.echec")
     end
     redirect_to lien_redirection
   rescue ImportExport::ImportXls::Error => e
@@ -29,9 +29,9 @@ ActiveAdmin.register_page 'import_xls' do
 
   controller do
     def importe_fichier!
-      if model == 'questionnaire'
+      if model == "questionnaire"
         import_questionnaire
-      elsif model == 'question'
+      elsif model == "question"
         import_questions
       end
     end
@@ -64,7 +64,7 @@ ActiveAdmin.register_page 'import_xls' do
     end
 
     def invalide_format_xls
-      redirect_apres_erreur(I18n.t('active_admin.import_xls.flash.format_invalide', format: 'XLS'))
+      redirect_apres_erreur(I18n.t("active_admin.import_xls.flash.format_invalide", format: "XLS"))
     end
 
     def redirect_apres_erreur(message)

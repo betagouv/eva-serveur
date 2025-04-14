@@ -30,7 +30,7 @@ module ImportExport
 
       def cree_ou_actualise_questionnaire(ligne)
         questionnaire = ::Questionnaire.find_or_initialize_by(nom_technique: ligne[1])
-        noms_techniques_ordonnes = ligne[2].split(',')
+        noms_techniques_ordonnes = ligne[2].split(",")
         questions = recupere_questions(noms_techniques_ordonnes)
 
         questionnaire.assign_attributes(

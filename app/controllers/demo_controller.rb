@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DemoController < ApplicationController
-  layout 'active_admin_logged_out'
+  layout "active_admin_logged_out"
   helper ::ActiveAdmin::ViewHelpers
 
   def connect
@@ -15,7 +15,7 @@ class DemoController < ApplicationController
   end
 
   def echec_login
-    flash[:error] = I18n.t('.demo.show.connexion_impossible')
+    flash[:error] = I18n.t(".demo.show.connexion_impossible")
     redirect_to new_compte_session_path
   end
 

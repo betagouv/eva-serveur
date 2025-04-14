@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails de la question' do
+panel "Détails de la question" do
   attributes_table_for question_glisser_deposer do
     row :id
     row :libelle
@@ -8,12 +8,12 @@ panel 'Détails de la question' do
     row :description
     row :metacompetence
     row :illustration do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.illustration }
     end
     row :orientation
     row :zone_depot do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.zone_depot }
     end
     intitule = question_glisser_deposer.transcription_intitule
@@ -38,11 +38,11 @@ panel 'Détails de la question' do
   end
 end
 
-panel 'Réponses' do
-  para 'Classer les réponses dans l’ordre souhaité'
+panel "Réponses" do
+  para "Classer les réponses dans l’ordre souhaité"
   reorderable_table_for question_glisser_deposer.reponses do
     column :illustration do |reponse|
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: reponse.illustration }
     end
     column :position_client

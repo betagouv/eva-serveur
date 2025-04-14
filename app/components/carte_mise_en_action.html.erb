@@ -1,10 +1,10 @@
 <div id="<%= @ressource.id %>" class="carte__conteneur position-relative">
-  <div class="card carte-liste d-flex align-items-center <%= @carte_deroulee ? 'carte--deroulee' : '' %>">
+  <div class="card carte-liste d-flex align-items-center <%= @carte_deroulee ? "carte--deroulee" : "" %>">
     <div class="row w-100 no-gutters d-flex justify-content-between align-items-center">
       <div class='col d-flex'>
         <span id="nom-<%= @ressource.id %>" class='carte__nom'><%= link_to @ressource.nom.truncate(30), admin_evaluation_path(@ressource) %></span>
       </div>
-      <%= render partial: 'components/reponse_mise_en_action', locals: { evaluation: @ressource, affiche_qualification: false } %>
+      <%= render partial: "components/reponse_mise_en_action", locals: { evaluation: @ressource, affiche_qualification: false } %>
     </div>
   </div>
   <%= content %>

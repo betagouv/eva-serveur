@@ -7,7 +7,7 @@ describe 'Campagne API', type: :request do
     let(:question1) { create :question_saisie, transcription_ecrit: 'Ma question' }
     let(:question2) { create :question_clic_dans_image, :avec_images }
     let(:question3) { create :question_glisser_deposer, :avec_images }
-    let!(:questionnaire) { create :questionnaire, questions: [question1, question2, question3] }
+    let!(:questionnaire) { create :questionnaire, questions: [ question1, question2, question3 ] }
     let!(:campagne) do
       create :campagne, code: 'ETE21', libelle: 'Ma campagne ete 21'
     end
@@ -39,9 +39,9 @@ describe 'Campagne API', type: :request do
       end
       let(:questionnaire_entrainement) do
         create :questionnaire,
-               questions: [question_entrainement]
+               questions: [ question_entrainement ]
       end
-      let(:questionnaire_surcharge) { create :questionnaire, questions: [question_entrainement] }
+      let(:questionnaire_surcharge) { create :questionnaire, questions: [ question_entrainement ] }
       let(:situation_bienvenue) do
         create :situation_bienvenue,
                libelle: 'Bienvenue',

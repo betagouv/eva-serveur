@@ -16,11 +16,11 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
 
     context 'deux qualifications de dangers différents' do
       let(:evenements) do
-        [build(:evenement_demarrage),
+        [ build(:evenement_demarrage),
          build(:evenement_qualification_danger,
                donnees: { reponse: 'mauvais', danger: 'danger1' }),
          build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'danger2' })]
+               donnees: { reponse: 'bonne', danger: 'danger2' }) ]
       end
 
       it { expect(metrique_nombre_retours_deja_qualifies).to eq 0 }
@@ -28,11 +28,11 @@ describe Restitution::Securite::NombreRetoursDejaQualifies do
 
     context 'deux qualifications du même danger' do
       let(:evenements) do
-        [build(:evenement_demarrage),
+        [ build(:evenement_demarrage),
          build(:evenement_qualification_danger,
                donnees: { reponse: 'mauvais', danger: 'danger' }),
          build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'danger' })]
+               donnees: { reponse: 'bonne', danger: 'danger' }) ]
       end
 
       it { expect(metrique_nombre_retours_deja_qualifies).to eq 1 }

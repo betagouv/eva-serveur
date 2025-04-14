@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-div class: 'card__banner card__banner--green d-flex justify-content-between' do
-  div class: 'd-flex align-items-end' do
-    image_tag 'avatar_bienvenue.png', class: 'banner__icone', alt: ''
+div class: "card__banner card__banner--green d-flex justify-content-between" do
+  div class: "d-flex align-items-end" do
+    image_tag "avatar_bienvenue.png", class: "banner__icone", alt: ""
   end
-  div class: 'card__banner__texte' do
-    div class: 'card__banner__description' do
-      md t('.testez_votre_campagne')
+  div class: "card__banner__texte" do
+    div class: "card__banner__description" do
+      md t(".testez_votre_campagne")
     end
-    div class: 'card__banner--green__button' do
-      render(BoutonComponent.new(t('.bouton'), url_campagne(campagne.code)))
+    div class: "card__banner--green__button" do
+      render(BoutonComponent.new(t(".bouton"), url_campagne(campagne.code)))
     end
   end
 end

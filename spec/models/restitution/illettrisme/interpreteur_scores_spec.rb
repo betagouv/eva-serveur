@@ -13,7 +13,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: nil }, { score_memorisation: nil }])
+          .to eq([ { score_ccf: nil }, { score_memorisation: nil } ])
       end
     end
 
@@ -22,7 +22,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier0 }, { score_memorisation: :palier0 }])
+          .to eq([ { score_ccf: :palier0 }, { score_memorisation: :palier0 } ])
       end
     end
 
@@ -31,7 +31,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier1 }, { score_memorisation: :palier1 }])
+          .to eq([ { score_ccf: :palier1 }, { score_memorisation: :palier1 } ])
       end
     end
 
@@ -40,7 +40,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
 
       it do
         expect(subject.interpretations(competences))
-          .to eq([{ score_ccf: :palier2 }, { score_memorisation: nil }])
+          .to eq([ { score_ccf: :palier2 }, { score_memorisation: nil } ])
       end
     end
   end
@@ -52,7 +52,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
       it do
         expect(subject.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
                                        :CEFR))
-          .to eq([{ litteratie: :palier0 }, { numeratie: :palier0 }])
+          .to eq([ { litteratie: :palier0 }, { numeratie: :palier0 } ])
       end
     end
 
@@ -62,7 +62,7 @@ describe Restitution::Illettrisme::InterpreteurScores do
       it do
         expect(subject.interpretations(Restitution::ScoresNiveau1::METRIQUES_NIVEAU1,
                                        :ANLCI))
-          .to eq([{ litteratie: :palier5 }, { numeratie: :palier5 }])
+          .to eq([ { litteratie: :palier5 }, { numeratie: :palier5 } ])
       end
     end
   end

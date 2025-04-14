@@ -32,7 +32,7 @@ module Restitution
 
     def persiste
       nom_restitution = self.class.name
-      return unless nom_restitution.constantize.const_defined?('METRIQUES')
+      return unless nom_restitution.constantize.const_defined?("METRIQUES")
 
       dictionnaire_metriques = "#{nom_restitution}::METRIQUES".constantize
       metriques = dictionnaire_metriques.keys.index_with do |nom_metrique|

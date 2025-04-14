@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails de la situation' do
+panel "Détails de la situation" do
   attributes_table_for situation do
     row :libelle
     row :nom_technique

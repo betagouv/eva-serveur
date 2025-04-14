@@ -6,11 +6,11 @@ module PriseEnMainHelper
     index_etape_en_cours = PriseEnMain::ETAPES.find_index(etape_en_cours)
     case index_etape
     when index_etape_en_cours
-      'active'
+      "active"
     when 0..index_etape_en_cours
-      'succes'
+      "succes"
     else
-      'desactive'
+      "desactive"
     end
   end
 

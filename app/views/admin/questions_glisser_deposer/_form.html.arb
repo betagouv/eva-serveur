@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
     f.input :libelle
     f.input :nom_technique
     f.input :description
-    render partial: 'admin/questions/input_illustration', locals: { f: f }
-    render partial: 'admin/questions/input_illustration_base',
+    render partial: "admin/questions/input_illustration", locals: { f: f }
+    render partial: "admin/questions/input_illustration_base",
            locals: {
              f: f,
              nom: :zone_depot,
              nom_suppression: :supprimer_zone_depot,
              image: resource.zone_depot,
-             hint: '.format_fichier_zone_depot',
+             hint: ".format_fichier_zone_depot",
              content_type: :svg
            }
     f.input :orientation, as: :select,
@@ -21,26 +21,26 @@ active_admin_form_for [:admin, resource] do |f|
                           include_blank: true
   end
 
-  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+  render partial: "admin/questions/inputs_avec_transcriptions_audios",
          locals: { f: f }
-  f.has_many :reponses, allow_destroy: true, new_record: t('.ajout_reponse'),
-                        heading: t('.reponses') do |r|
+  f.has_many :reponses, allow_destroy: true, new_record: t(".ajout_reponse"),
+                        heading: t(".reponses") do |r|
     r.input :id, as: :hidden
     r.input :nom_technique
     r.input :intitule
     r.input :position_client
     r.input :type_choix, as: :hidden, input_html: { value: :bon }
-    label = r.object.illustration.attached? ? t('.label_illustration') : true
+    label = r.object.illustration.attached? ? t(".label_illustration") : true
     hint =
       if r.object.illustration.attached?
         image_tag(cdn_for(r.object.illustration),
                   alt: r.object.illustration.filename)
       else
-        t('.hint')
+        t(".hint")
       end
     r.input :illustration, as: :file,
                            label: label,
-                           input_html: { accept: illustration_content_types.join(',') },
+                           input_html: { accept: illustration_content_types.join(",") },
                            hint: hint
   end
   f.actions do

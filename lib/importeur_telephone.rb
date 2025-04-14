@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rake_logger'
+require "rake_logger"
 
 class ImporteurTelephone
   class << self
@@ -17,7 +17,7 @@ class ImporteurTelephone
 
     def import_possible?(ligne, compte)
       if compte.blank?
-        RakeLogger.logger.warn 'Téléphone ignoré pour le compte inconnu : ' \
+        RakeLogger.logger.warn "Téléphone ignoré pour le compte inconnu : " \
                                "#{ligne[:mail]} - #{ligne[:telephone]}"
         return false
       elsif compte.telephone.present?

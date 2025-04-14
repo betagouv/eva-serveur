@@ -23,7 +23,7 @@ class Compte < ApplicationRecord
   validates :nom, :prenom, presence: { on: :create }
   validate :verifie_dns_email, :structure_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
-  validates_with PasswordValidator, fields: [:password]
+  validates_with PasswordValidator, fields: [ :password ]
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
@@ -40,7 +40,7 @@ class Compte < ApplicationRecord
   end
 
   def nom_complet
-    [prenom, nom].compact_blank.join(' ')
+    [ prenom, nom ].compact_blank.join(" ")
   end
 
   def find_admins

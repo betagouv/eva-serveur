@@ -89,7 +89,7 @@ describe Ability do
       it { is_expected.to be_able_to(:manage, Question.new) }
 
       context "quand un questionnaire l'utilise" do
-        let!(:questionnaire) { create :questionnaire, questions: [question] }
+        let!(:questionnaire) { create :questionnaire, questions: [ question ] }
 
         it { is_expected.not_to be_able_to(:destroy, question) }
       end

@@ -5,9 +5,9 @@ module Restitution
     PIECES_TOTAL = 60
 
     EVENEMENT = {
-      PIECE_BIEN_PLACEE: 'pieceBienPlacee',
-      PIECE_MAL_PLACEE: 'pieceMalPlacee',
-      PIECE_NON_TRIEE: 'pieceRatee'
+      PIECE_BIEN_PLACEE: "pieceBienPlacee",
+      PIECE_MAL_PLACEE: "pieceMalPlacee",
+      PIECE_NON_TRIEE: "pieceRatee"
     }.freeze
 
     def termine?

@@ -9,7 +9,7 @@ ActiveAdmin.register Actualite do
   filter :contenu
   filter :created_at
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   form do |f|
     f.semantic_errors
@@ -26,17 +26,17 @@ ActiveAdmin.register Actualite do
   end
 
   index do
-    render partial: 'actualites', locals: { actualites: actualites }
+    render partial: "actualites", locals: { actualites: actualites }
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 
-  sidebar :details_actualite, class: 'details-actualite annule-panel', only: :show
+  sidebar :details_actualite, class: "details-actualite annule-panel", only: :show
 
-  sidebar :autres_actualites, class: 'autres-actualites annule-carte', only: :show do
-    render partial: 'autres_actualites_sidebar',
+  sidebar :autres_actualites, class: "autres-actualites annule-carte", only: :show do
+    render partial: "autres_actualites_sidebar",
            locals: { autres_actualites: actualite.recentes_sauf_moi(3) }
   end
 end

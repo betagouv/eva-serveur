@@ -1,41 +1,41 @@
 <div class="page adaptation-pdf francais_mathematiques">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+  <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-  <h2 class="text-center mt-5 mb-4"><%= t('titre', scope: 'admin.restitutions.cefr') %></h2>
+  <h2 class="text-center mt-5 mb-4"><%= t("titre", scope: "admin.restitutions.cefr") %></h2>
 
   <div class="panel">
     <div class="marges-page">
-      <%= render 'litteratie_numeratie_synthese',
+      <%= render "litteratie_numeratie_synthese",
             synthese: @synthese_diagnostic,
             scope: "admin.restitutions.cefr.#{@synthese_diagnostic}",
             icone: "punaise-#{@synthese_diagnostic}.svg" %>
 
-      <%= render 'litteratie_numeratie_niveau1',
+      <%= render "litteratie_numeratie_niveau1",
             niveau_litteratie: @niveau_cefr,
             niveau_numeratie: @niveau_cnef,
-            referentiel: 'cefr' %>
+            referentiel: "cefr" %>
       <div class="row">
         <div class="col-auto badge"></div>
         <div class="col">
-          <%= render 'metacompetences', categorie: :litteratie %>
+          <%= render "metacompetences", categorie: :litteratie %>
         </div>
         <div class="col-auto badge"></div>
         <div class="col">
-          <%= render 'metacompetences', categorie: :numeratie %>
+          <%= render "metacompetences", categorie: :numeratie %>
         </div>
       </div>
     </div>
   </div>
 
-  <%= render 'pied_page', pre_pied_page: 'referentiel_europeen' %>
+  <%= render "pied_page", pre_pied_page: "referentiel_europeen" %>
 </div>
 
 <% if @mes_avec_redaction_de_notes.present? %>
   <div class="page adaptation-pdf francais_mathematiques">
-    <%= render 'entete_page', restitution_globale: @restitution_globale %>
+    <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-    <%= render 'communication_ecrite', restitution_globale: @restitution_globale, mes_avec_redaction_de_notes: @mes_avec_redaction_de_notes %>
+    <%= render "communication_ecrite", restitution_globale: @restitution_globale, mes_avec_redaction_de_notes: @mes_avec_redaction_de_notes %>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 <% end %>

@@ -1,30 +1,30 @@
 # frozen_string_literal: true
 
-div class: 'mon-compte row' do
-  div class: 'offset-1 col-4' do
+div class: "mon-compte row" do
+  div class: "offset-1 col-4" do
     if current_compte == compte
-      h2 t('.titre', prenom: compte.prenom), class: 'titre-entete-page'
+      h2 t(".titre", prenom: compte.prenom), class: "titre-entete-page"
 
-      render 'components/panel_introduction',
-             text: t('.introduction', lien_aide: admin_aide_path),
-             image: 'avatar_salut.png'
+      render "components/panel_introduction",
+             text: t(".introduction", lien_aide: admin_aide_path),
+             image: "avatar_salut.png"
     end
 
-    div class: 'card' do
+    div class: "card" do
       if current_compte == compte && !compte.confirmed?
-        render 'components/banniere_confirmation_email', demande: :nouvelle_inscription
+        render "components/banniere_confirmation_email", demande: :nouvelle_inscription
       elsif compte.unconfirmed_email.present?
-        render 'components/banniere_confirmation_email', demande: :modification_email
+        render "components/banniere_confirmation_email", demande: :modification_email
       elsif compte.email_non_confirme? && current_compte.superadmin?
-        render 'components/banniere_confirmation_email', demande: :confirmation_autre_compte
+        render "components/banniere_confirmation_email", demande: :confirmation_autre_compte
       end
-      div class: 'card-body' do
+      div class: "card-body" do
         attributes_table_for compte do
           row :prenom
           row :nom
           row(:email) do
             if compte.email_non_confirme? && current_compte.superadmin?
-              span(compte.email, class: 'email-non-confirme')
+              span(compte.email, class: "email-non-confirme")
             else
               compte.email
             end
@@ -38,7 +38,7 @@ div class: 'mon-compte row' do
       end
     end
 
-    div class: 'panel' do
+    div class: "panel" do
       attributes_table_for compte do
         row :structure
         row :statut_validation do
@@ -48,7 +48,7 @@ div class: 'mon-compte row' do
     end
 
     if can?(:manage, Compte) || current_compte.charge_mission_regionale?
-      div class: 'panel' do
+      div class: "panel" do
         attributes_table_for compte do
           row :sign_in_count
           row :current_sign_in_at

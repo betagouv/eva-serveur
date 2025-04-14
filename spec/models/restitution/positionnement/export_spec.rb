@@ -13,7 +13,7 @@ describe Restitution::Positionnement::Export do
   let(:worksheet) { spreadsheet.worksheet(0) }
   let!(:question1) { create :question_qcm, nom_technique: 'LOdi1' }
   let!(:question2) { create :question_qcm, nom_technique: 'LOdi2' }
-  let(:questions) { [question1, question2] }
+  let(:questions) { [ question1, question2 ] }
   let(:questionnaire) { create :questionnaire, questions: questions }
   let(:campagne) { create :campagne, code: 'CODE123' }
   let(:evaluation) { create :evaluation, campagne: campagne }
@@ -91,7 +91,7 @@ describe Restitution::Positionnement::Export do
 
   describe 'pour un export numératie' do
     let!(:question) { create :question }
-    let(:questions) { [question] }
+    let(:questions) { [ question ] }
     let!(:situation) { create(:situation_place_du_marche) }
     let!(:choix) { create(:choix, :mauvais, question_id: question.id, intitule: 'drapeau') }
     let!(:choix2) { create(:choix, :bon, question_id: question.id, intitule: 'couverture') }
@@ -127,7 +127,7 @@ describe Restitution::Positionnement::Export do
       let!(:question1) { create :question, :numeratie_niveau1 }
       let!(:question2) { create :question, :numeratie_niveau2 }
       let!(:question3) { create :question, :numeratie_niveau3 }
-      let(:questions) { [question1, question2, question3] }
+      let(:questions) { [ question1, question2, question3 ] }
 
       before do
         heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)
@@ -154,7 +154,7 @@ describe Restitution::Positionnement::Export do
       let!(:question1) { create :question, :numeratie_niveau1 }
       let!(:question2) { create :question, :numeratie_niveau2 }
       let!(:question3) { create :question, :numeratie_niveau3 }
-      let(:questions) { [question1, question2, question3] }
+      let(:questions) { [ question1, question2, question3 ] }
 
       before do
         heure_debut = DateTime.new(2025, 1, 17, 10, 0, 0)

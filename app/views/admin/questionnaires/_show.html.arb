@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails du questionnaire' do
+panel "Détails du questionnaire" do
   attributes_table_for questionnaire do
     row :id
     row :libelle
@@ -9,7 +9,7 @@ panel 'Détails du questionnaire' do
   end
 end
 
-panel 'Questions' do
+panel "Questions" do
   reorderable_table_for questionnaire.questionnaires_questions do
     column :question
   end

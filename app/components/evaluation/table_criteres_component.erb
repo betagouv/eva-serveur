@@ -5,9 +5,9 @@
         <table id="table-bordered">
           <thead>
             <tr>
-              <th scope="col"><%= t('evaluation.critere') %></th>
-              <th scope="col"><%= t('evaluation.code_clea') %></th>
-              <th scope="col"><%= t('evaluation.resultat') %></th>
+              <th scope="col"><%= t("evaluation.critere") %></th>
+              <th scope="col"><%= t("evaluation.code_clea") %></th>
+              <th scope="col"><%= t("evaluation.resultat") %></th>
             </tr>
           </thead>
           <tbody>
@@ -17,7 +17,7 @@
                 <td><%= critere.code_clea %></td>
                 <td>
                   <% if critere.pas_de_test? %>
-                    <%= t('evaluation.pas_de_test_disponible') %></td>
+                    <%= t("evaluation.pas_de_test_disponible") %></td>
                   <% else %>
                     <%= render(BarreSegmenteeComponent.new(
                       nombre_questions_reussies: critere.nombre_questions_reussies,

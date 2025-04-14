@@ -45,7 +45,7 @@ class AbilityUtilisateur
   def droit_evenement(compte)
     cannot %i[update create], Evenement
 
-    @session_ids ||= Partie.where('comptes.structure_id' => compte.structure_id)
+    @session_ids ||= Partie.where("comptes.structure_id" => compte.structure_id)
                            .joins(evaluation: { campagne: :compte }).pluck(:session_id)
     can :read, Evenement, Evenement.where(session_id: @session_ids) do |e|
       @session_ids.include?(e.session_id)
@@ -74,8 +74,8 @@ class AbilityUtilisateur
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
     return if compte.structure_id.present?
 
-    can :read, ActiveAdmin::Page, name: 'recherche_structure',
-                                  namespace_name: 'admin'
+    can :read, ActiveAdmin::Page, name: "recherche_structure",
+                                  namespace_name: "admin"
     can :create, StructureLocale
   end
 

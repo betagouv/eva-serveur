@@ -4,14 +4,14 @@ class CompteMailer < ApplicationMailer
   def nouveau_compte
     @compte = params[:compte]
     mail(to: @compte.email,
-         subject: t('.objet', structure: @compte.structure.display_name))
+         subject: t(".objet", structure: @compte.structure.display_name))
   end
 
   def alerte_admin
     @compte = params[:compte]
     @compte_admin = params[:compte_admin]
     mail(to: @compte_admin.email,
-         subject: t('.objet', structure: @compte.structure.display_name))
+         subject: t(".objet", structure: @compte.structure.display_name))
   end
 
   def relance
@@ -22,7 +22,7 @@ class CompteMailer < ApplicationMailer
 
     mail(
       to: @compte.email,
-      subject: t('.objet', prenom: @compte.prenom)
+      subject: t(".objet", prenom: @compte.prenom)
     )
   end
 
@@ -31,7 +31,7 @@ class CompteMailer < ApplicationMailer
     @compte_admin = params[:compte_admin]
     mail(
       to: @compte_admin.email,
-      subject: t('.objet')
+      subject: t(".objet")
     )
   end
 end

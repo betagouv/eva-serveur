@@ -5,7 +5,7 @@ module ImportExport
     class Import
       class QuestionSousConsigne < ImportExport::Questions::Import
         def initialize(headers_attendus)
-          super('QuestionSousConsigne', headers_attendus)
+          super("QuestionSousConsigne", headers_attendus)
         end
       end
     end

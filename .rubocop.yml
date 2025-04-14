@@ -1,5 +1,8 @@
 inherit_from: .rubocop_todo.yml
 
+inherit_gem:
+  rubocop-rails-omakase: rubocop.yml
+
 require:
   - rubocop-rails-accessibility
   - rubocop-packaging
@@ -7,9 +10,10 @@ require:
 plugins:
   - rubocop-rails
   - rubocop-rspec
+  - rubocop-erb
 
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
     - 'bin/**/*'
@@ -21,7 +25,6 @@ AllCops:
     - 'tmp/**/*'
     - 'test/**/*'
     - 'vendor/**/*'
-    - 'spec/spec_helper.rb'
 
 Style/Documentation:
   Enabled: false
@@ -34,7 +37,6 @@ Layout/LineLength:
 
 Metrics/BlockLength:
   Exclude:
-    - 'app/views/**/*'
     - 'spec/factories/*'
     - 'Guardfile'
   AllowedMethods:
@@ -62,9 +64,6 @@ Rails/OutputSafety:
   Enabled: false
 Rails/InverseOf:
   Enabled: false
-Rails/Delegate:
-  Exclude:
-    - 'app/decorators/evenement_livraison.rb'
 Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: false
 
@@ -74,5 +73,4 @@ Lint/MissingSuper:
 
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/views/**/*'
     - 'spec/tasks/**/*'

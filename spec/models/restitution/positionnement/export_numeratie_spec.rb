@@ -9,7 +9,7 @@ describe Restitution::Positionnement::ExportNumeratie do
 
   let(:question1) { create :question, nom_technique: 'N2Ppe1' }
   let(:question2) { create :question, nom_technique: 'N1Pes1' }
-  let(:questions) { [question1, question2] }
+  let(:questions) { [ question1, question2 ] }
   let(:questionnaire) { create :questionnaire, questions: questions }
   let(:situation) { create :situation, questionnaire: questionnaire }
   let(:partie) { create :partie, situation: situation }
@@ -69,8 +69,8 @@ describe Restitution::Positionnement::ExportNumeratie do
       end
 
       it "tri dans l'ordre croissant" do
-        expect(liste.keys).to eq(['2.1', '2.3'])
-        expect(liste['2.3'].keys).to eq(['2.3.5', '2.3.7'])
+        expect(liste.keys).to eq([ '2.1', '2.3' ])
+        expect(liste['2.3'].keys).to eq([ '2.3.5', '2.3.7' ])
       end
     end
 

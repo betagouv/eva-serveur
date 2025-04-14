@@ -1,41 +1,41 @@
 # frozen_string_literal: true
 
-require_relative '../../decorators/evenement_place_du_marche'
+require_relative "../../decorators/evenement_place_du_marche"
 
 module Restitution
   class PlaceDuMarche < Base # rubocop:disable Metrics/ClassLength
     SCORES_NIVEAUX = {
       N1: {
-        'type' => :nombre,
-        'score' => Evacob::ScoreModule.new,
-        'succes' => Evacob::ScoreModule.new
+        "type" => :nombre,
+        "score" => Evacob::ScoreModule.new,
+        "succes" => Evacob::ScoreModule.new
       },
       N2: {
-        'type' => :nombre,
-        'score' => Evacob::ScoreModule.new,
-        'succes' => Evacob::ScoreModule.new
+        "type" => :nombre,
+        "score" => Evacob::ScoreModule.new,
+        "succes" => Evacob::ScoreModule.new
       },
       N3: {
-        'type' => :nombre,
-        'score' => Evacob::ScoreModule.new,
-        'succes' => Evacob::ScoreModule.new
+        "type" => :nombre,
+        "score" => Evacob::ScoreModule.new,
+        "succes" => Evacob::ScoreModule.new
       }
     }.freeze
 
     SCORES_CLEA = {
-      '2.1' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
+      "2.1" => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
                  nombre_questions_reussies: 0,
                  nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      '2.2' => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0,
+      "2.2" => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0,
                  nombre_questions_reussies: 0,
                  nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      '2.3' => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
+      "2.3" => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
                  nombre_questions_reussies: 0,
                  nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      '2.4' => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0,
+      "2.4" => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0,
                  nombre_questions_reussies: 0,
                  nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      '2.5' => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0,
+      "2.5" => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0,
                  nombre_questions_reussies: 0,
                  nombre_questions_echecs: 0, nombre_questions_non_passees: 0 }
     }.freeze
@@ -45,7 +45,7 @@ module Restitution
     def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
       @campagne = campagne
       @evenements = evenements
-      evenements_reponses = evenements.select { |evenement| evenement.nom == 'reponse' }
+      evenements_reponses = evenements.select { |evenement| evenement.nom == "reponse" }
       evenements.first.situation
       @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
 
@@ -76,7 +76,7 @@ module Restitution
     end
 
     def score_pour(niveau)
-      SCORES_NIVEAUX[niveau]['score'].calcule(@evenements_place_du_marche, niveau,
+      SCORES_NIVEAUX[niveau]["score"].calcule(@evenements_place_du_marche, niveau,
                                               avec_rattrapage: true)
     end
 
@@ -102,7 +102,7 @@ module Restitution
     end
 
     def pourcentage_de_reussite_pour(niveau)
-      SCORES_NIVEAUX[niveau]['succes'].calcule_pourcentage_reussite(@evenements_place_du_marche,
+      SCORES_NIVEAUX[niveau]["succes"].calcule_pourcentage_reussite(@evenements_place_du_marche,
                                                                     niveau)
     end
 
@@ -132,13 +132,13 @@ module Restitution
     def profil_numeratie
       return ::Competence::NIVEAU_INDETERMINE if niveau_numeratie.zero?
 
-      Competence::ProfilEvacob.new(self, 'profil_numeratie', niveau_numeratie).profil_numeratie
+      Competence::ProfilEvacob.new(self, "profil_numeratie", niveau_numeratie).profil_numeratie
     end
 
     def a_passe_des_questions_de_rattrapage?
       evenements_rattrapage = MetriquesHelper
                               .filtre_evenements_reponses(@evenements_place_du_marche) do |e|
-        e.donnees['question'].start_with?('N3R')
+        e.donnees["question"].start_with?("N3R")
       end
       evenements_rattrapage.present?
     end
@@ -146,11 +146,11 @@ module Restitution
     # rubocop:disable Naming/VariableNumber
     def competences_numeratie
       @competences_numeratie ||= {
-        '2_1': creer_numeratie('2.1'),
-        '2_2': creer_numeratie('2.2'),
-        '2_3': creer_numeratie('2.3'),
-        '2_4': creer_numeratie('2.4'),
-        '2_5': creer_numeratie('2.5')
+        '2_1': creer_numeratie("2.1"),
+        '2_2': creer_numeratie("2.2"),
+        '2_3': creer_numeratie("2.3"),
+        '2_4': creer_numeratie("2.4"),
+        '2_5': creer_numeratie("2.5")
       }
     end
     # rubocop:enable Naming/VariableNumber
@@ -186,7 +186,7 @@ module Restitution
 
     def evenements_groupes_cleas
       @evenements_groupes_cleas ||= begin
-        situation = Situation.find_by(nom_technique: 'place_du_marche')
+        situation = Situation.find_by(nom_technique: "place_du_marche")
         @questionnaire = @campagne.questionnaire_pour(situation)
         @evenements.regroupe_par_codes_clea(@questionnaire, %w[N1R N2R N3R])
       end
@@ -201,16 +201,16 @@ module Restitution
     def evenements_par_module(evenements, nom_module)
       module_rattrapage = "#{nom_module}R"
       a_fait_un_rattrapage = evenements.any? do |e|
-        e['question'].start_with?(module_rattrapage) && e['score'].present?
+        e["question"].start_with?(module_rattrapage) && e["score"].present?
       end
       return evenements if a_fait_un_rattrapage
 
-      evenements.reject { |e| e['question'].start_with?(module_rattrapage) }
+      evenements.reject { |e| e["question"].start_with?(module_rattrapage) }
     end
 
     def questions_non_repondues_par_module(evenements, nom_module)
       module_rattrapage = "#{nom_module}R"
-      evenements.select { |e| e['question'].start_with?(module_rattrapage) && e['score'].blank? }
+      evenements.select { |e| e["question"].start_with?(module_rattrapage) && e["score"].blank? }
     end
 
     def calculer_nombres_questions_par_sous_domaine(&block)

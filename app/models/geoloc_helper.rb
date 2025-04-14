@@ -11,7 +11,7 @@ class GeolocHelper
         return
       end
 
-      code_region = JSON.parse(reponse.body)['codeRegion']
+      code_region = JSON.parse(reponse.body)["codeRegion"]
       cherche_nom_region(code_region)
     end
 
@@ -22,12 +22,12 @@ class GeolocHelper
         return
       end
 
-      JSON.parse(reponse.body)['nom']
+      JSON.parse(reponse.body)["nom"]
     end
 
     def departement(code_postal)
       departement = code_postal.match(/^97|^98/) ? code_postal[0, 3] : code_postal[0, 2]
-      departement = '2A' if departement == '20'
+      departement = "2A" if departement == "20"
       departement
     end
 

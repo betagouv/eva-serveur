@@ -7,7 +7,7 @@ describe Restitution::Controle::ComparaisonTri do
   let(:restitution_hors_4_premiers) { double }
 
   before do
-    allow(restitution).to receive_messages(abandon?: false, evenements: [1, 2, 3, 4])
+    allow(restitution).to receive_messages(abandon?: false, evenements: [ 1, 2, 3, 4 ])
     allow(restitution).to receive(:enleve_premiers_evenements_pieces)
       .with(4).and_return(restitution_hors_4_premiers)
   end

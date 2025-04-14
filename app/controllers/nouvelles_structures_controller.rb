@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NouvellesStructuresController < ApplicationController
-  layout 'active_admin_logged_out'
+  layout "active_admin_logged_out"
   helper ::ActiveAdmin::ViewHelpers
 
   def show
@@ -14,7 +14,7 @@ class NouvellesStructuresController < ApplicationController
     if verify_recaptcha(model: @compte) && @compte.save
       envoie_emails
       sign_in @compte
-      redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
+      redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")
     else
       render :show
     end
@@ -24,7 +24,7 @@ class NouvellesStructuresController < ApplicationController
 
   def compte_parametres
     parametres = params.require(:compte).permit!.to_h
-    parametres.merge!(statut_validation: :acceptee, role: 'admin')
+    parametres.merge!(statut_validation: :acceptee, role: "admin")
     parametres[:structure_attributes].merge!(type: StructureLocale.name)
     parametres
   end

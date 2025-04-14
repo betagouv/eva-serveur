@@ -4,38 +4,38 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }
 
-  includes :responsable_suivi, campagne: [:parcours_type]
+  includes :responsable_suivi, campagne: [ :parcours_type ]
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   filter :nom
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },
          fields: %i[libelle code],
-         display_name: 'display_name',
+         display_name: "display_name",
          minimum_input_length: 2,
-         order_by: 'libelle_asc'
+         order_by: "libelle_asc"
   filter :created_at
   filter :responsable_suivi_id,
          as: :search_select_filter,
          url: proc { admin_comptes_path },
          fields: %i[email nom prenom],
-         display_name: 'display_name',
+         display_name: "display_name",
          minimum_input_length: 2,
-         order_by: 'email_asc'
+         order_by: "email_asc"
   filter :statut,
          as: :select,
          collection: Evaluation.statuts.map { |v, id|
-           [Evaluation.human_enum_name(:statut, v), id]
+           [ Evaluation.human_enum_name(:statut, v), id ]
          },
          if: proc { current_compte.superadmin? }
 
-  scope proc { I18n.t('activerecord.scopes.evaluation.all') }, :all, default: true
+  scope proc { I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true
   scope proc {
           render(PastilleComponent.new(
-                   couleur: 'alerte',
-                   etiquette: I18n.t('components.pastille.illettrisme_potentiel')
+                   couleur: "alerte",
+                   etiquette: I18n.t("components.pastille.illettrisme_potentiel")
                  ))
         }, :illettrisme_potentiel
 
@@ -43,15 +43,15 @@ ActiveAdmin.register Evaluation do
     params[:parties_selectionnees] =
       FabriqueRestitution.initialise_selection(resource,
                                                params[:parties_selectionnees])
-    render partial: 'show'
+    render partial: "show"
   end
 
-  index download_links: -> { params[:action] == 'show' ? %i[pdf] : %i[xls] },
-        row_class: ->(elem) { 'anonyme' if elem.anonyme? } do
-    render 'index', context: self
+  index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
+        row_class: ->(elem) { "anonyme" if elem.anonyme? } do
+    render "index", context: self
   end
 
-  form partial: 'form'
+  form partial: "form"
 
   sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
     render(Tag.new(resource.responsable_suivi.display_name,
@@ -63,19 +63,19 @@ ActiveAdmin.register Evaluation do
                                                     resource.responsable_suivi.blank? and
                                                       can?(:ajouter_responsable_suivi, Evaluation)
                                                   } do
-    render 'recherche_responsable_suivi'
+    render "recherche_responsable_suivi"
   end
 
-  sidebar :menu, class: 'menu-sidebar', only: :show
+  sidebar :menu, class: "menu-sidebar", only: :show
 
   xls(i18n_scope: %i[active_admin xls evaluation]) do
     whitelist
-    column('structure') { |evaluation| evaluation.campagne&.structure&.nom }
+    column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
     column(:completude) do |evaluation|
-      I18n.t(evaluation.completude, scope: 'activerecord.attributes.evaluation')
+      I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
     end
     column(:synthese_competences_de_base) { |e| trad_niveau(e, :synthese_competences_de_base) }
     column(:niveau_cefr) { |evaluation| trad_niveau(evaluation, :niveau_cefr) }
@@ -89,7 +89,7 @@ ActiveAdmin.register Evaluation do
     before_filter do |sheet|
       if @collection.count > Evaluation::LIMITE_EXPORT_XLS
         sheet << [
-          I18n.t('active_admin.export.limite_atteinte', limite: Evaluation::LIMITE_EXPORT_XLS)
+          I18n.t("active_admin.export.limite_atteinte", limite: Evaluation::LIMITE_EXPORT_XLS)
         ]
         @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
       end
@@ -106,7 +106,7 @@ ActiveAdmin.register Evaluation do
   end
 
   member_action :ajouter_responsable_suivi, method: :post do
-    responsable = Compte.where(id: params['responsable_suivi_id']).first
+    responsable = Compte.where(id: params["responsable_suivi_id"]).first
     resource.update(responsable_suivi: responsable) if responsable.present?
     redirect_to admin_evaluation_path(resource)
   end
@@ -115,7 +115,7 @@ ActiveAdmin.register Evaluation do
     mise_en_action = resource.mise_en_action
     effectuee = params[:effectuee]
     qualification = params[:qualification]
-    if effectuee == 'true'
+    if effectuee == "true"
       mise_en_action.update(effectuee: true, remediation: qualification)
     else
       mise_en_action.update(effectuee: false, difficulte: qualification)
@@ -137,21 +137,21 @@ ActiveAdmin.register Evaluation do
     end
 
     def render_pdf
-      html_content = render_to_string(template: 'admin/evaluations/show', layout: 'application',
+      html_content = render_to_string(template: "admin/evaluations/show", layout: "application",
                                       locals: { resource: resource })
 
       pdf_path = Html2Pdf.genere_pdf_depuis_html(html_content)
       if pdf_path == false
-        flash[:error] = t('.erreur_generation_pdf')
+        flash[:error] = t(".erreur_generation_pdf")
         redirect_to admin_evaluation_path(resource)
       else
-        send_file(pdf_path, filename: "#{resource.nom}.pdf", type: 'application/pdf',
+        send_file(pdf_path, filename: "#{resource.nom}.pdf", type: "application/pdf",
                             disposition: disposition)
       end
     end
 
     def disposition
-      Rails.env.development? ? 'inline' : 'attachment'
+      Rails.env.development? ? "inline" : "attachment"
     end
 
     def destroy
@@ -159,7 +159,7 @@ ActiveAdmin.register Evaluation do
     end
 
     before_action only: :show do
-      flash.now[:evaluation_anonyme] = t('.evaluation_anonyme') if resource.anonyme?
+      flash.now[:evaluation_anonyme] = t(".evaluation_anonyme") if resource.anonyme?
     end
 
     private
@@ -184,7 +184,7 @@ ActiveAdmin.register Evaluation do
     end
 
     def trad_niveau(evaluation, interpretation)
-      scope = 'activerecord.attributes.evaluation.interpretations'
+      scope = "activerecord.attributes.evaluation.interpretations"
       niveau = evaluation.send(interpretation)
       t("#{interpretation}.#{niveau}", scope: scope) if niveau.present?
     end

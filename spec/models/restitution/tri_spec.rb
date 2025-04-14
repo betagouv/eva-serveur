@@ -73,10 +73,10 @@ describe Restitution::Tri do
         build(:evenement_demarrage)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.competences.keys).to eql([Competence::PERSEVERANCE,
+      expect(restitution.competences.keys).to eql([ Competence::PERSEVERANCE,
                                                    Competence::COMPREHENSION_CONSIGNE,
                                                    Competence::RAPIDITE,
-                                                   Competence::COMPARAISON_TRI])
+                                                   Competence::COMPARAISON_TRI ])
     end
   end
 end

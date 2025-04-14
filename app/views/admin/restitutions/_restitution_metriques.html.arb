@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-scope = 'admin.restitutions.restitution_colonnes'
+scope = "admin.restitutions.restitution_colonnes"
 
-panel t('.restitution_metriques') do
-  return unless resource.class.const_defined?('METRIQUES')
+panel t(".restitution_metriques") do
+  return unless resource.class.const_defined?("METRIQUES")
 
   attributes_table_for [
-    [t('valeur_utilisateur', scope: scope), metriques_partie],
-    [t('moyenne', scope: scope), moyenne],
-    [t('ecart_type', scope: scope), ecart_type],
-    [t('cote_z', scope: scope), cote_z]
+    [ t("valeur_utilisateur", scope: scope), metriques_partie ],
+    [ t("moyenne", scope: scope), moyenne ],
+    [ t("ecart_type", scope: scope), ecart_type ],
+    [ t("cote_z", scope: scope), cote_z ]
   ] do
     row do |(titre, _)|
       strong titre
@@ -17,9 +17,9 @@ panel t('.restitution_metriques') do
     resource.class::METRIQUES.each do |nom_metrique, data|
       row t(".#{nom_metrique}") do |(_, valeurs_colonne)|
         valeur = valeurs_colonne[nom_metrique]
-        case data['type']
+        case data["type"]
         when :texte
-          t(valeur, scope: 'admin.evaluations.restitution_competence')
+          t(valeur, scope: "admin.evaluations.restitution_competence")
         when :map
           ul do
             valeur&.each do |clef, val|

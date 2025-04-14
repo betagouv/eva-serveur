@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-panel t('.restitution_controle') do
+panel t(".restitution_controle") do
   attributes_table_for restitution do
-    row t('.pieces_bien_placees'), &:nombre_bien_placees
-    row t('.pieces_mal_placees'), &:nombre_mal_placees
-    row t('.pieces_non_triees'), &:nombre_non_triees
-    row(t('.frise')) { render 'controle_frise_pieces', restitution: restitution }
+    row t(".pieces_bien_placees"), &:nombre_bien_placees
+    row t(".pieces_mal_placees"), &:nombre_mal_placees
+    row t(".pieces_non_triees"), &:nombre_non_triees
+    row(t(".frise")) { render "controle_frise_pieces", restitution: restitution }
   end
 end

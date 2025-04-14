@@ -3,12 +3,12 @@
 module ProConnectRecupereCompteHelper
   class << self
     def cree_ou_recupere_compte(user_info)
-      email = user_info['email'].strip.downcase
-      compte = Compte.find_by(id_pro_connect: user_info['sub'])
+      email = user_info["email"].strip.downcase
+      compte = Compte.find_by(id_pro_connect: user_info["sub"])
       if compte.present? && compte.email != email
         compte = actualise_email_compte_existant(compte, email)
       end
-      if compte.blank? && email.end_with?('francetravail.fr')
+      if compte.blank? && email.end_with?("francetravail.fr")
         compte = cherche_compte_pole_emploi(email)
       end
       compte ||= Compte.find_or_create_by(email: email)
@@ -31,7 +31,7 @@ module ProConnectRecupereCompteHelper
     end
 
     def cherche_compte_pole_emploi(email)
-      email_pe = email.gsub('francetravail.fr', 'pole-emploi.fr')
+      email_pe = email.gsub("francetravail.fr", "pole-emploi.fr")
       compte = Compte.find_by(email: email_pe)
       compte&.email = email
       compte&.skip_reconfirmation!
@@ -41,10 +41,10 @@ module ProConnectRecupereCompteHelper
 
     def actualise_autres_champs_et_sauve(compte, user_info)
       compte.assign_attributes(
-        id_pro_connect: user_info['sub'],
-        prenom: user_info['given_name'],
-        nom: user_info['usual_name'],
-        siret_pro_connect: user_info['siret'],
+        id_pro_connect: user_info["sub"],
+        prenom: user_info["given_name"],
+        nom: user_info["usual_name"],
+        siret_pro_connect: user_info["siret"],
         confirmed_at: compte.confirmed_at || Time.zone.now
       )
       compte.password = SecureRandom.uuid if compte.encrypted_password.blank?

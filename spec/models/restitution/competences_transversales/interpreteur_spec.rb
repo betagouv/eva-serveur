@@ -12,25 +12,25 @@ describe Restitution::CompetencesTransversales::Interpreteur do
   end
 
   context 'niveau à 4' do
-    let(:niveaux_competences) { [[Competence::COMPARAISON_TRI, 4.0]] }
+    let(:niveaux_competences) { [ [ Competence::COMPARAISON_TRI, 4.0 ] ] }
 
-    it { expect(subject.interpretations).to eq([[Competence::COMPARAISON_TRI, 3]]) }
+    it { expect(subject.interpretations).to eq([ [ Competence::COMPARAISON_TRI, 3 ] ]) }
   end
 
   context 'niveau entre 1 et 4 (exclus)' do
     let(:niveaux_competences) do
-      [[Competence::COMPARAISON_TRI, 3.9], [Competence::RAPIDITE, 1.1]]
+      [ [ Competence::COMPARAISON_TRI, 3.9 ], [ Competence::RAPIDITE, 1.1 ] ]
     end
 
     it do
       expect(subject.interpretations)
-        .to eq([[Competence::COMPARAISON_TRI, 2], [Competence::RAPIDITE, 2]])
+        .to eq([ [ Competence::COMPARAISON_TRI, 2 ], [ Competence::RAPIDITE, 2 ] ])
     end
   end
 
   context 'niveau à 1' do
-    let(:niveaux_competences) { [[Competence::COMPARAISON_TRI, 1]] }
+    let(:niveaux_competences) { [ [ Competence::COMPARAISON_TRI, 1 ] ] }
 
-    it { expect(subject.interpretations).to eq([[Competence::COMPARAISON_TRI, 1]]) }
+    it { expect(subject.interpretations).to eq([ [ Competence::COMPARAISON_TRI, 1 ] ]) }
   end
 end

@@ -1,18 +1,18 @@
 <div class="recherche-structure">
-  <label for="recherche-structure-autocomplete" class='label-champ-recherche'><%= t('.label_champ_recherche')%></label>
+  <label for="recherche-structure-autocomplete" class='label-champ-recherche'><%= t(".label_champ_recherche")%></label>
   <%= form_with url: @recherche_url, method: :get do |f| %>
     <div id="recherche-structure-autocomplete-container" class="champ-recherche champ-recherche--geographique" ></div>
     <%= f.hidden_field :code_postal, value: @code_postal %>
-    <% class_disabled = @button_disabled ? 'disabled': '' %>
-    <%= f.submit t('.bouton_recherche_structure'), id: 'bouton-chercher',
+    <% class_disabled = @button_disabled ? "disabled": "" %>
+    <%= f.submit t(".bouton_recherche_structure"), id: "bouton-chercher",
       class: class_disabled, disabled: @button_disabled,
-      aria: { labelledby: 'recherche-structure-autocomplete' }
+      aria: { labelledby: "recherche-structure-autocomplete" }
     %>
   <% end %>
 
   <% if @ville_ou_code_postal.present? %>
     <% if @structures_code_postal.present? %>
-      <h3 class="description-liste-structures mt-4"><%= t('.titre_resultats', count: @structures_code_postal.size, code_postal: @code_postal) %></h3>
+      <h3 class="description-liste-structures mt-4"><%= t(".titre_resultats", count: @structures_code_postal.size, code_postal: @code_postal) %></h3>
       <% @structures_code_postal.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
@@ -21,7 +21,7 @@
     <% end %>
 
     <% if @structures.present? %>
-      <h3 class="description-liste-structures mt-4"><%= t('.titre_resultats_proches', count: @structures.size) %></h3>
+      <h3 class="description-liste-structures mt-4"><%= t(".titre_resultats_proches", count: @structures.size) %></h3>
       <% @structures.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
@@ -29,7 +29,7 @@
     <% end %>
 
     <% if @structures.empty? && @structures_code_postal.empty? %>
-      <p class="mt-4"><%= t('.aucun_resultat') %></p>
+      <p class="mt-4"><%= t(".aucun_resultat") %></p>
       <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
     <% end %>
 

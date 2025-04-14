@@ -1,50 +1,50 @@
 # frozen_string_literal: true
 
-div class: 'menu menu-transverse' do
+div class: "menu menu-transverse" do
   ul do
     li do
-      a href: '#evaluation__details' do
-        text_node t('admin.evaluations.details_evaluation.titre_menu_lateral')
+      a href: "#evaluation__details" do
+        text_node t("admin.evaluations.details_evaluation.titre_menu_lateral")
       end
     end
     li do
-      a href: '#evaluation__deroulement' do
-        text_node t('admin.evaluations.deroulement_passation.titre_menu_lateral')
+      a href: "#evaluation__deroulement" do
+        text_node t("admin.evaluations.deroulement_passation.titre_menu_lateral")
       end
     end
     li do
-      a href: '#profil' do
-        text_node t('admin.evaluations.restitution_globale.autopositionnement.titre_menu_lateral')
+      a href: "#profil" do
+        text_node t("admin.evaluations.restitution_globale.autopositionnement.titre_menu_lateral")
       end
     end
     li do
-      a href: '#competence-numerique' do
-        text_node t('admin.evaluations.restitution_globale.prise_en_main.titre_menu_lateral')
+      a href: "#competence-numerique" do
+        text_node t("admin.evaluations.restitution_globale.prise_en_main.titre_menu_lateral")
       end
     end
     li do
-      a href: '#competences_transversales' do
-        text_node t('evaluation.competences_transversales_component.titre_menu_lateral')
+      a href: "#competences_transversales" do
+        text_node t("evaluation.competences_transversales_component.titre_menu_lateral")
       end
     end
     li do
-      a href: '#francais_mathematiques' do
-        text_node t('admin.restitutions.cefr.titre_menu_lateral')
+      a href: "#francais_mathematiques" do
+        text_node t("admin.restitutions.cefr.titre_menu_lateral")
       end
     end
     li do
-      a href: '#correspondance_anlci' do
-        text_node t('admin.restitutions.anlci.titre_menu_lateral')
+      a href: "#correspondance_anlci" do
+        text_node t("admin.restitutions.anlci.titre_menu_lateral")
       end
     end
     li do
-      a href: '#litteratie' do
-        text_node t('admin.restitutions.litteratie.titre_menu_lateral')
+      a href: "#litteratie" do
+        text_node t("admin.restitutions.litteratie.titre_menu_lateral")
       end
     end
     li do
-      a href: '#numeratie' do
-        text_node t('admin.restitutions.numeratie.titre_menu_lateral')
+      a href: "#numeratie" do
+        text_node t("admin.restitutions.numeratie.titre_menu_lateral")
       end
     end
   end

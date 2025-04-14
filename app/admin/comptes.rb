@@ -8,7 +8,7 @@ ActiveAdmin.register Compte do
 
   includes :structure
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   filter :email
   filter :nom
@@ -16,21 +16,21 @@ ActiveAdmin.register Compte do
   filter :statut_validation,
          as: :select,
          collection: Compte.statuts_validation.map { |v, id|
-                       [Compte.human_enum_name(:statut_validation, v), id]
+                       [ Compte.human_enum_name(:statut_validation, v), id ]
                      }
 
   filter :structure_id,
          as: :search_select_filter,
          url: proc { admin_structures_path },
          fields: %i[nom code_postal],
-         display_name: 'display_name',
+         display_name: "display_name",
          minimum_input_length: 2,
-         order_by: 'nom_asc',
+         order_by: "nom_asc",
          if: proc { can? :manage, Compte }
   filter :role,
          as: :select,
          collection: Compte.roles.map { |v, id|
-                       [Compte.human_enum_name(:role, v), id]
+                       [ Compte.human_enum_name(:role, v), id ]
                      },
          if: proc { can? :manage, Compte }
   filter :created_at
@@ -38,13 +38,13 @@ ActiveAdmin.register Compte do
   filter :structure_type_structure_eq,
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures,
-         label: I18n.t('type_structure', count: 1, scope: 'activerecord.attributes.structure'),
+         label: I18n.t("type_structure", count: 1, scope: "activerecord.attributes.structure"),
          if: proc { can? :manage, Compte }
 
   filter :structure_region_eq,
          as: :select,
          collection: proc { Structure.distinct.order(:region).pluck(:region) },
-         label: I18n.t('region', scope: 'activerecord.attributes.structure'),
+         label: I18n.t("region", scope: "activerecord.attributes.structure"),
          if: proc { can? :manage, Compte }
 
   def filtrer_par_activation_structure(statut_activation, options = {})
@@ -80,21 +80,21 @@ ActiveAdmin.register Compte do
       column :created_at
     end
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   action_item :stats, only: :index, if: -> { can? :manage, Compte } do
     if params[:stats]
-      link_to t('.sans_stats'), admin_comptes_path
+      link_to t(".sans_stats"), admin_comptes_path
     else
-      link_to t('.stats'), admin_comptes_path(stats: true)
+      link_to t(".stats"), admin_comptes_path(stats: true)
     end
   end
 
   sidebar :aide_filtres,
-          partial: 'admin/structures_locales/aide_filtres_sidebar',
+          partial: "admin/structures_locales/aide_filtres_sidebar",
           only: :index,
           if: -> { params[:stats] && can?(:manage, Compte) }
 
@@ -114,7 +114,7 @@ ActiveAdmin.register Compte do
         f.input :statut_validation, as: :radio
       end
       if peut_modifier_mot_de_passe?
-        f.input :password, hint: resource.persisted? ? t('.aide_mot_de_passe') : ''
+        f.input :password, hint: resource.persisted? ? t(".aide_mot_de_passe") : ""
         f.input :password_confirmation
       end
     end
@@ -173,9 +173,9 @@ ActiveAdmin.register Compte do
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
                         :update
-                      else
+      else
                         :update_without_password
-                      end
+      end
       object.send(update_method, *attributes)
     end
 
@@ -187,11 +187,11 @@ ActiveAdmin.register Compte do
 
     def collection_roles
       roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE
-      roles.map { |role| [Compte.human_enum_name(:role, role), role] }
+      roles.map { |role| [ Compte.human_enum_name(:role, role), role ] }
     end
   end
 
   show do
-    render 'show'
+    render "show"
   end
 end

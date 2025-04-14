@@ -3,9 +3,9 @@
 module Restitution
   class MetriquesHelper
     EVENEMENT = {
-      DEMARRAGE: 'demarrage',
-      ACTIVATION_AIDE1: 'activationAide',
-      REPONSE: 'reponse'
+      DEMARRAGE: "demarrage",
+      ACTIVATION_AIDE1: "activationAide",
+      REPONSE: "reponse"
     }.freeze
 
     class << self

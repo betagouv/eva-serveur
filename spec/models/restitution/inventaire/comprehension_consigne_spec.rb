@@ -18,7 +18,7 @@ describe Restitution::Inventaire::ComprehensionConsigne do
     expect(restitution).to receive(:nombre_essais_validation).and_return(1)
     expect(restitution).to receive(:reussite?).and_return(false)
     expect(restitution).to receive(:abandon?).and_return(true)
-    expect(restitution).to receive(:essais_verifies).and_return([essai])
+    expect(restitution).to receive(:essais_verifies).and_return([ essai ])
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_1)

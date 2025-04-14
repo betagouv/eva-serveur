@@ -13,10 +13,10 @@ describe Restitution::AvecEntrainement do
               date: Time.zone.local(2019, 10, 9, 10, 0))
       end
       let(:demarrage) { build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0)) }
-      let(:evenements) { [demarrage_entrainement, demarrage] }
+      let(:evenements) { [ demarrage_entrainement, demarrage ] }
 
-      it { expect(restitution.evenements_entrainement).to eq [demarrage_entrainement] }
-      it { expect(restitution.evenements_situation).to eq [demarrage] }
+      it { expect(restitution.evenements_entrainement).to eq [ demarrage_entrainement ] }
+      it { expect(restitution.evenements_situation).to eq [ demarrage ] }
     end
   end
 end

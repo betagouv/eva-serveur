@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'importeur_commentaires'
-require 'importeur_telephone'
+require "importeur_commentaires"
+require "importeur_telephone"
 
 namespace :importe do
-  desc 'Importe les commentaires Airtable'
+  desc "Importe les commentaires Airtable"
   task commentaires_airtable: :environment do
     eva_bot = Compte.find_by email: Eva::EMAIL_SUPPORT
     if eva_bot.blank?
@@ -16,14 +16,14 @@ namespace :importe do
     end
   end
 
-  desc 'Importe les numéros de téléphone des conseillers connus'
+  desc "Importe les numéros de téléphone des conseillers connus"
   task telephones: :environment do
     CSV.parse($stdin, headers: true, header_converters: :symbol).each do |row|
       ImporteurTelephone.importe row.to_hash
     end
   end
 
-  desc 'Importe les SIRETs des structures des conseillers connus'
+  desc "Importe les SIRETs des structures des conseillers connus"
   task siret: :environment do
     nb_ligne = 0
     nb_importe = 0
@@ -114,10 +114,10 @@ namespace :importe do
     %w[84b007b5-f8fd-4e15-b517-4fb764237af9 bienvenue_non]
   ]
 
-  desc 'ajoute les nom_technique des choix'
+  desc "ajoute les nom_technique des choix"
   task nom_technique_choix: :environment do
     choix.each do |id_nom_technique|
-      print('.')
+      print(".")
       Choix.find(id_nom_technique[0]).update(nom_technique: id_nom_technique[1])
     end
   end

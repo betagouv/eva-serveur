@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-div class: 'panel panel-introduction' do
-  div class: 'introduction-consigne' do
+div class: "panel panel-introduction" do
+  div class: "introduction-consigne" do
     md text
   end
-  div image_tag image, class: 'introduction-image', alt: ''
+  div image_tag image, class: "introduction-image", alt: ""
 end

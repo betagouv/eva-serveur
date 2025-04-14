@@ -24,7 +24,7 @@ describe FabriqueRestitution do
 
         it 'trie les événéments par position' do
           restitution = described_class.instancie(partie)
-          expect(restitution.evenements).to eq [demarrage, reponse1, reponse2, fin]
+          expect(restitution.evenements).to eq [ demarrage, reponse1, reponse2, fin ]
         end
       end
 
@@ -40,14 +40,14 @@ describe FabriqueRestitution do
 
         it 'trie les événéments par date' do
           restitution = described_class.instancie(partie)
-          expect(restitution.evenements).to eq [demarrage, reponse, fin]
+          expect(restitution.evenements).to eq [ demarrage, reponse, fin ]
         end
       end
     end
 
     it "instancie les restitution des parties de l'évaluation" do
       restitutions = described_class.restitution_globale(evaluation).restitutions
-      expect(restitutions.map(&:partie)).to eq [partie]
+      expect(restitutions.map(&:partie)).to eq [ partie ]
     end
 
     context 'instancie uniquement les parties présentes dans la campagne' do
@@ -71,7 +71,7 @@ describe FabriqueRestitution do
 
       it do
         restitutions = described_class.restitution_globale(evaluation).restitutions
-        expect(restitutions.map(&:partie)).to eq [partie]
+        expect(restitutions.map(&:partie)).to eq [ partie ]
       end
     end
 

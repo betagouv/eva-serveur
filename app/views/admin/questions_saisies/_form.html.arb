@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
     f.input :libelle
     f.input :categorie, as: :select
     f.input :nom_technique
     f.input :description
-    render partial: 'admin/questions/input_illustration', locals: { f: f }
+    render partial: "admin/questions/input_illustration", locals: { f: f }
     f.input :type_saisie
     f.input :suffix_reponse
     f.input :reponse_placeholder
     f.input :texte_a_trous, input_html: { rows: 10 }
-    f.input :aide, as: :text, input_html: { class: 'simple-mde-editor' }
+    f.input :aide, as: :text, input_html: { class: "simple-mde-editor" }
   end
 
-  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+  render partial: "admin/questions/inputs_avec_transcriptions_audios",
          locals: { f: f }
 
-  f.has_many :reponses, allow_destroy: false, new_record: t('.ajout_reponse'),
+  f.has_many :reponses, allow_destroy: false, new_record: t(".ajout_reponse"),
                         heading: false do |c|
     c.input :id, as: :hidden
-    c.input :intitule, label: t('.label.reponse')
-    c.input :nom_technique, label: t('.label.reponse_nom_technique')
+    c.input :intitule, label: t(".label.reponse")
+    c.input :nom_technique, label: t(".label.reponse_nom_technique")
     c.input :type_choix
   end
 

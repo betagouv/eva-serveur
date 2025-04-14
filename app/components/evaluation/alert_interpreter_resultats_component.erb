@@ -1,15 +1,15 @@
-<%= dsfr_alert(type: :info, title: "Interpréter les résultats", classes: 'alert-interpreter-resultats') do %>
+<%= dsfr_alert(type: :info, title: "Interpréter les résultats", classes: "alert-interpreter-resultats") do %>
   <div class="alert-interpreter-resultats__contenu">
-    <p><%= t('interpreter_resultats_contenu', scope: @scope) %></p>
+    <p><%= t("interpreter_resultats_contenu", scope: @scope) %></p>
     <div class="alert-interpreter-resultats__badges">
       <% @badges.each do |badge| %>
         <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
-                          class: 'badge-references',
+                          class: "badge-references",
                           alt: t(badge, scope: @scope_badge) %>
       <% end %>
     </div>
     <p>
-      <%= t('interpreter_resultats_details_html', scope: @scope) %>
+      <%= t("interpreter_resultats_details_html", scope: @scope) %>
       <br>
       <%= dsfr_link_to @lien, @lien, target: "_blank", rel: "noopener" %>
     </p>

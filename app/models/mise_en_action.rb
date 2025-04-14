@@ -11,7 +11,7 @@ class MiseEnAction < ApplicationRecord
   belongs_to :evaluation
 
   validates :evaluation_id, uniqueness: true
-  validates :effectuee, absence: false, inclusion: { in: [true, false] }
+  validates :effectuee, absence: false, inclusion: { in: [ true, false ] }
 
   before_save :enregistre_date
 

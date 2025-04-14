@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-div class: 'evaluations-sans-mise-en-action panel p-0 border border-orange' do
+div class: "evaluations-sans-mise-en-action panel p-0 border border-orange" do
   if evaluations.present?
-    render 'admin/dashboard/mise_en_action/avec_evaluations', evaluations: evaluations
+    render "admin/dashboard/mise_en_action/avec_evaluations", evaluations: evaluations
   else
-    render 'admin/dashboard/mise_en_action/sans_evaluations'
+    render "admin/dashboard/mise_en_action/sans_evaluations"
   end
 end

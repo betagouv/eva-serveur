@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
-div class: 'row' do
-  div class: 'offset-1 col-4' do
-    div class: 'panel font-italic' do
-      t('.intro')
+div class: "row" do
+  div class: "offset-1 col-4" do
+    div class: "panel font-italic" do
+      t(".intro")
     end
-    render 'votre_code_campagne'
+    render "votre_code_campagne"
 
-    h2 'Détails de la campagne'
+    h2 "Détails de la campagne"
 
-    div class: 'panel' do
+    div class: "panel" do
       attributes_table_for campagne do
         row :libelle
         row :compte
       end
     end
 
-    render 'programme'
+    render "programme"
 
     if can?(:manage, Compte)
-      h2 'Administration'
+      h2 "Administration"
 
-      div class: 'panel' do
+      div class: "panel" do
         attributes_table_for campagne do
           row :id
           row :affiche_competences_fortes
@@ -30,7 +30,7 @@ div class: 'row' do
 
         hr
 
-        render partial: 'admin/situations_configurations/liste_situations_configurations',
+        render partial: "admin/situations_configurations/liste_situations_configurations",
                locals: { situations_configurations: situations_configurations }
       end
     end

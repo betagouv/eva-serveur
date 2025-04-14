@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AnnonceGenerale do
-  menu parent: 'Accompagnement'
+  menu parent: "Accompagnement"
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   permit_params :texte, :afficher
 
@@ -18,8 +18,8 @@ ActiveAdmin.register AnnonceGenerale do
     column :afficher
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 end

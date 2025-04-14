@@ -49,7 +49,7 @@ describe Question, type: :model do
                nom_technique: 'choix_1',
                intitule: 'intitule'
       end
-      let(:question) { create :question_saisie, reponses: [choix1] }
+      let(:question) { create :question_saisie, reponses: [ choix1 ] }
 
       it 'retourne la réponse' do
         expect(question.restitue_reponse('35')).to eq '35'
@@ -63,7 +63,7 @@ describe Question, type: :model do
                nom_technique: 'choix_1',
                intitule: 'intitule'
       end
-      let(:question) { create :question_qcm, choix: [choix1] }
+      let(:question) { create :question_qcm, choix: [ choix1 ] }
 
       it "retourne l'intitulé de la réponse" do
         expect(question.reload.restitue_reponse('choix_1')).to eq 'intitule'

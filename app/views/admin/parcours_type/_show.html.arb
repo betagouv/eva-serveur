@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails du parcours type' do
+panel "Détails du parcours type" do
   attributes_table_for parcours_type do
     row :libelle
     row :actif
@@ -8,7 +8,7 @@ panel 'Détails du parcours type' do
     row :nom_technique
     row :duree_moyenne
     row(:type_de_programme) do
-      scope = 'activerecord.attributes.parcours_type.types_de_programme'
+      scope = "activerecord.attributes.parcours_type.types_de_programme"
       parcours_type.type_de_programme ? t(parcours_type.type_de_programme, scope: scope) : nil
     end
     row(:description) { md(parcours_type.description) }
@@ -17,7 +17,7 @@ panel 'Détails du parcours type' do
   end
 end
 
-panel t('admin.campagnes.show.titre_panel_parcours'), class: 'campagne-parcours' do
-  render partial: 'admin/situations_configurations/liste_situations_configurations',
+panel t("admin.campagnes.show.titre_panel_parcours"), class: "campagne-parcours" do
+  render partial: "admin/situations_configurations/liste_situations_configurations",
          locals: { situations_configurations: parcours_type.situations_configurations }
 end

@@ -6,7 +6,7 @@ class EvenementLivraison < SimpleDelegator
   end
 
   def question
-    @question ||= Question.find_by id: donnees['question']
+    @question ||= Question.find_by id: donnees["question"]
   end
 
   def bonne_reponse?
@@ -14,6 +14,6 @@ class EvenementLivraison < SimpleDelegator
   end
 
   def choix
-    @choix ||= question.choix.find_by(id: donnees['reponse'])
+    @choix ||= question.choix.find_by(id: donnees["reponse"])
   end
 end

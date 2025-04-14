@@ -7,14 +7,14 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
     described_class.new.calcule(evenements_decores(evenements, :livraison), 'numeratie')
   end
   let(:evenements) do
-    [build(:evenement_demarrage)] + evenements_reponses
+    [ build(:evenement_demarrage) ] + evenements_reponses
   end
   let(:evenements_reponses) { [] }
   let(:bon_choix) { create :choix, :bon }
   let(:mauvais_choix) { create :choix, :mauvais }
   let(:question_numeratie) do
     nom_technique = QuestionData.find_by(metacompetence: 'numeratie').nom_technique
-    create :question_qcm, nom_technique: nom_technique, choix: [bon_choix, mauvais_choix]
+    create :question_qcm, nom_technique: nom_technique, choix: [ bon_choix, mauvais_choix ]
   end
 
   describe 'metrique temps de bonnes réponses' do
@@ -33,7 +33,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
         ]
       end
 
-      it { expect(temps_bonnes_reponses_numeratie).to eq([1]) }
+      it { expect(temps_bonnes_reponses_numeratie).to eq([ 1 ]) }
     end
 
     context 'une mauvaise réponse' do
@@ -54,7 +54,7 @@ describe Restitution::Illettrisme::TempsBonnesReponses do
       let(:bon_choix_ccf) { create :choix, :bon }
       let(:question_ccf) do
         create :question_qcm, nom_technique: 'connaissance_et_comprehension_1',
-                              choix: [bon_choix_ccf]
+                              choix: [ bon_choix_ccf ]
       end
       let(:evenements_reponses) do
         [

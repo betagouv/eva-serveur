@@ -1,18 +1,18 @@
 <div id="active_admin_content">
   <div class="panel">
-    <% content_for :title, t('.title') %>
+    <% content_for :title, t(".title") %>
     <% content_for :titre do %>
-      <%= t('.titre') -%>
+      <%= t(".titre") -%>
     <% end %>
     <% content_for :sous_titre do %>
-      <%= t('.title') -%>
+      <%= t(".title") -%>
     <% end %>
 
-    <%= link_to t('active_admin.devise.login.lien_retour'),
+    <%= link_to t("active_admin.devise.login.lien_retour"),
                 new_compte_session_path,
-                class: 'lien-retour',
-                aria: { label: t('active_admin.devise.login.description_lien_retour') } %>
-    <%= md t('.description')%>
+                class: "lien-retour",
+                aria: { label: t("active_admin.devise.login.description_lien_retour") } %>
+    <%= md t(".description")%>
     <%= render(@recherche_structure_component) %>
   </div>
 </div>

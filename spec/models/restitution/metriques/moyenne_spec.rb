@@ -15,12 +15,12 @@ describe Restitution::Metriques::Moyenne do
     end
 
     it "calcul la moyenne d'une valeur" do
-      expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([1])
+      expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([ 1 ])
       expect(metrique_moyenne.calcule([], [])).to be(1.0)
     end
 
     it 'calcul la moyenne de deux valeurs entières' do
-      expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([1, 2])
+      expect(mock_metrique_a_moyenner).to receive(:calcule).and_return([ 1, 2 ])
       expect(metrique_moyenne.calcule([], [])).to be(1.5)
     end
   end

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 if mes_avec_redaction_de_notes.present?
-  div class: 'marges-page' do
+  div class: "marges-page" do
     mes_avec_redaction_de_notes.each do |restitution|
       situation = restitution.situation
 
-      render 'questions', {
+      render "questions", {
         restitution: restitution,
         situation_libelle: situation.libelle
       }

@@ -11,11 +11,11 @@ class StatistiquesStructure
     payload = {
       resource: { dashboard: 23 },
       params: {
-        'id' => [@structure.id]
+        "id" => [ @structure.id ]
       },
       exp: 10.minutes.from_now.to_i
     }
-    token = ::JWT.encode payload, ENV.fetch('METABASE_SECRET_KEY', nil)
+    token = ::JWT.encode payload, ENV.fetch("METABASE_SECRET_KEY", nil)
 
     "#{ENV.fetch('METABASE_SITE_URL', nil)}/embed/dashboard/#{token}#bordered=false&titled=false"
   end
@@ -28,7 +28,7 @@ class StatistiquesStructure
     evaluations = Evaluation.pour_les_structures(structures)
                             .des_12_derniers_mois
                             .group(groupe_par)
-                            .group_by_month(:created_at, format: '%B %Y')
+                            .group_by_month(:created_at, format: "%B %Y")
                             .count
     if a_des_petits_enfants?
       evaluations = regroupe_nombre_evaluations_par_structures_enfants(evaluations)
@@ -42,7 +42,7 @@ class StatistiquesStructure
   def repartition_evaluations
     repartition = Evaluation.pour_les_structures(structures)
                             .des_12_derniers_mois
-                            .where.not(synthese_competences_de_base: [nil, :aberrant])
+                            .where.not(synthese_competences_de_base: [ nil, :aberrant ])
                             .select(:synthese_competences_de_base)
                             .group(:synthese_competences_de_base)
                             .count
@@ -112,9 +112,9 @@ class StatistiquesStructure
   def structures_dependantes
     @structures_dependantes ||= if structure.instance_of?(StructureAdministrative)
                                   structure.descendants
-                                else
+    else
                                   []
-                                end
+    end
   end
 
   def a_des_petits_enfants?
@@ -124,6 +124,6 @@ class StatistiquesStructure
   end
 
   def groupe_par
-    a_des_petits_enfants? ? 'structures.ancestry' : 'structures.nom'
+    a_des_petits_enfants? ? "structures.ancestry" : "structures.nom"
   end
 end

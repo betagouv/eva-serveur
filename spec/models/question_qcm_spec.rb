@@ -13,8 +13,8 @@ describe QuestionQcm, type: :model do
     let(:choix2) { create :choix, :bon, nom_technique: 'choix_2', intitule: '' }
     let(:choix3) { create :choix, :mauvais, nom_technique: 'choix_3', intitule: '' }
 
-    let(:question_qcm) { create(:question_qcm, choix: [choix1, choix2, choix3]) }
-    let(:question_qcm_sans_bonne_reponses) { create(:question_qcm, choix: [choix3]) }
+    let(:question_qcm) { create(:question_qcm, choix: [ choix1, choix2, choix3 ]) }
+    let(:question_qcm_sans_bonne_reponses) { create(:question_qcm, choix: [ choix3 ]) }
 
     describe '#reponses_possibles' do
       it "retourne l'intitulé ou le nom technique a défaut" do

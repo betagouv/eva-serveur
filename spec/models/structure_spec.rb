@@ -39,7 +39,7 @@ describe Structure, type: :model do
 
       before do
         Geocoder::Lookup::Test.add_stub(
-          '75012', [{ 'coordinates' => [40.7143528, -74.0059731] }]
+          '75012', [ { 'coordinates' => [ 40.7143528, -74.0059731 ] } ]
         )
         mock_geo_api(75, 11, 'Île-de-France')
         structure.valid?
@@ -61,7 +61,7 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '98850', [
             {
-              'coordinates' => [47.3129, 120.0596]
+              'coordinates' => [ 47.3129, 120.0596 ]
             }
           ]
         )
@@ -79,7 +79,7 @@ describe Structure, type: :model do
 
       before do
         Geocoder::Lookup::Test.add_stub(
-          '20090', [{ 'coordinates' => [41.9333, 8.7507] }]
+          '20090', [ { 'coordinates' => [ 41.9333, 8.7507 ] } ]
         )
         mock_geo_api('2A', 94, 'Corse')
         structure.valid?
@@ -98,7 +98,7 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '61000', [
             {
-              'coordinates' => [48.4310232, 0.0922579]
+              'coordinates' => [ 48.4310232, 0.0922579 ]
             }
           ]
         )

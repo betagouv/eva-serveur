@@ -14,11 +14,11 @@ describe Restitution::Bienvenue do
     create :question_qcm, nom_technique: 'lieu_scolarite',
                           categorie: 'scolarite',
                           libelle: 'lieu de scolarité',
-                          choix: [choix_france]
+                          choix: [ choix_france ]
   end
   let(:situation) { create :situation_bienvenue }
   let(:evenements) { [] }
-  let(:questionnaire) { create :questionnaire, questions: [quel_age, scolarite] }
+  let(:questionnaire) { create :questionnaire, questions: [ quel_age, scolarite ] }
   let(:campagne) { Campagne.new }
 
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }

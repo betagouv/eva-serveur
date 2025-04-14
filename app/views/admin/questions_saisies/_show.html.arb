@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails de la question' do
+panel "Détails de la question" do
   attributes_table_for question_saisie do
     row :id
     row :libelle
@@ -9,7 +9,7 @@ panel 'Détails de la question' do
     row :description
     row :metacompetence
     row :illustration do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.illustration }
     end
     intitule = question_saisie.transcription_intitule
@@ -41,7 +41,7 @@ panel 'Détails de la question' do
   end
 end
 
-panel 'Réponses' do
+panel "Réponses" do
   table_for question_saisie.reponses do
     column :intitule
     column :type_choix

@@ -116,7 +116,7 @@ module Restitution
           evenement_question.pris_en_compte_pour_calcul_score_clea?(
             @evenements_questions_a_prendre_en_compte
           )
-        pris_en_compte ? 'Oui' : 'Non'
+        pris_en_compte ? "Oui" : "Non"
       end
 
       def remplis_choix(ligne, evenement_question)
@@ -140,7 +140,7 @@ module Restitution
 
       def pourcentage(evenements_questions)
         pourcentage = EvenementQuestion.pourcentage_pour_groupe(evenements_questions)
-        return 'non applicable' if pourcentage.nil?
+        return "non applicable" if pourcentage.nil?
 
         pourcentage.to_f / 100
       end
@@ -176,7 +176,7 @@ module Restitution
           type = match[2]
           numero = match[4].to_i
 
-          [type == 'P' ? 0 : 1, numero]
+          [ type == "P" ? 0 : 1, numero ]
         end
       end
     end

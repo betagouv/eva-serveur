@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Restitution::Evacob::ScoreModule do
   let(:evenements) do
-    [build(:evenement_demarrage)] + evenements_reponses
+    [ build(:evenement_demarrage) ] + evenements_reponses
   end
 
   describe 'metrique score_orientation' do
@@ -32,7 +32,7 @@ describe Restitution::Evacob::ScoreModule do
 
     context 'avec une réponse du module sans score' do
       let(:evenements_reponses) do
-        [build(:evenement_reponse, donnees: { question: question_lodi1 })]
+        [ build(:evenement_reponse, donnees: { question: question_lodi1 }) ]
       end
 
       it { expect(metrique_score_reponse_orientation).to eq(0) }
@@ -42,7 +42,7 @@ describe Restitution::Evacob::ScoreModule do
       let(:reponse_parcours_haut) do
         build(:evenement_reponse, donnees: { question: question_hpar1 })
       end
-      let(:evenements_reponses) { [reponse_parcours_haut] }
+      let(:evenements_reponses) { [ reponse_parcours_haut ] }
 
       it { expect(metrique_score_reponse_orientation).to be_nil }
     end
@@ -66,7 +66,7 @@ describe Restitution::Evacob::ScoreModule do
 
     context 'sans réponses au rattapage' do
       let(:evenements_reponses) do
-        [build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 })]
+        [ build(:evenement_reponse, donnees: { question: question_initiale1, score: 1 }) ]
       end
 
       it do

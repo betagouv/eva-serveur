@@ -12,7 +12,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
   before { allow(logger).to receive :info }
 
   context 'sans événement après la fin' do
-    let!(:evenements) { [create(:evenement_fin_situation, partie: partie)] }
+    let!(:evenements) { [ create(:evenement_fin_situation, partie: partie) ] }
 
     it do
       expect { subject.invoke }.not_to(change(Evenement, :count))
@@ -21,9 +21,9 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
 
   context 'avec événements après la fin' do
     let!(:evenements) do
-      [create(:evenement_fin_situation, partie: partie, date: 3.minutes.ago),
+      [ create(:evenement_fin_situation, partie: partie, date: 3.minutes.ago),
        create(:evenement_piece_bien_placee, partie: partie, date: 2.minutes.ago),
-       create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago)]
+       create(:evenement_piece_bien_placee, partie: partie, date: 1.minute.ago) ]
     end
 
     it do
@@ -36,8 +36,8 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
   context 'avec un événement au même moment que la fin' do
     une_date = DateTime.new(2020, 5, 1, 12, 0, 1.0)
     let!(:evenements) do
-      [create(:evenement_fin_situation, partie: partie, date: une_date),
-       create(:evenement_piece_bien_placee, partie: partie, date: une_date)]
+      [ create(:evenement_fin_situation, partie: partie, date: une_date),
+       create(:evenement_piece_bien_placee, partie: partie, date: une_date) ]
     end
 
     it do
@@ -59,7 +59,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
   end
 
   context 'sans événement fin' do
-    let!(:evenements) { [create(:evenement_piece_bien_placee, partie: partie)] }
+    let!(:evenements) { [ create(:evenement_piece_bien_placee, partie: partie) ] }
 
     it do
       expect { subject.invoke }.not_to(change(Evenement, :count))

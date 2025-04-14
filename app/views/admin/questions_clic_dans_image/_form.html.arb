@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
     f.input :libelle
     f.input :nom_technique
     f.input :description
-    render partial: 'admin/questions/input_illustration', locals: { f: f }
-    render partial: 'admin/questions/input_illustration_base',
+    render partial: "admin/questions/input_illustration", locals: { f: f }
+    render partial: "admin/questions/input_illustration_base",
            locals: {
              f: f,
              nom: :zone_cliquable,
              nom_suppression: :supprimer_zone_cliquable,
              image: resource.zone_cliquable,
-             hint: '.format_fichier_zone_cliquable',
+             hint: ".format_fichier_zone_cliquable",
              content_type: :svg
            }
-    render partial: 'admin/questions/input_illustration_base',
+    render partial: "admin/questions/input_illustration_base",
            locals: {
              f: f,
              nom: :image_au_clic,
-             label: t('.label.image_au_clic'),
+             label: t(".label.image_au_clic"),
              nom_suppression: :supprimer_image_au_clic,
              image: resource.image_au_clic,
              content_type: :svg
            }
   end
 
-  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+  render partial: "admin/questions/inputs_avec_transcriptions_audios",
          locals: { f: f }
 
   f.actions do

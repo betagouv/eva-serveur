@@ -5,7 +5,7 @@ module ImportExport
     class Import
       class QuestionSaisie < ImportExport::Questions::Import::QuestionTest
         def initialize(headers_attendus)
-          super('QuestionSaisie', headers_attendus)
+          super("QuestionSaisie", headers_attendus)
         end
 
         private
@@ -17,7 +17,7 @@ module ImportExport
                            type_saisie: cellules.suivant,
                            texte_a_trous: cellules.suivant,
                            aide: cellules.suivant)
-          cree_reponses('reponse', cellules) do |data|
+          cree_reponses("reponse", cellules) do |data|
             cree_reponse_saisie(question.id, data)
           end
         end
@@ -25,9 +25,9 @@ module ImportExport
         def cree_reponse_saisie(question_id, data)
           cree_reponse_generique(
             question_id: question_id,
-            intitule: data['intitule'],
-            nom_technique: data['nom_technique'],
-            type_choix: data['type_choix']
+            intitule: data["intitule"],
+            nom_technique: data["nom_technique"],
+            type_choix: data["type_choix"]
           )
         end
       end

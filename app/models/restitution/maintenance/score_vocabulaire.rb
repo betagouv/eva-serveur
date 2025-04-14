@@ -47,7 +47,7 @@ module Restitution
       def standardisateur
         @standardisateur ||= Restitution::StandardisateurGlissant.new(
           %i[temps_moyen_mots_francais temps_moyen_non_mots],
-          proc { Partie.where(situation: Situation.where(nom_technique: 'maintenance')) }
+          proc { Partie.where(situation: Situation.where(nom_technique: "maintenance")) }
         )
       end
     end

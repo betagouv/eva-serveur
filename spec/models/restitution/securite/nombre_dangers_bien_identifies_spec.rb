@@ -16,8 +16,8 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
 
     context 'avec bonne identification' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_identification_danger, donnees: { reponse: 'oui', danger: 'danger' })]
+        [ build(:evenement_demarrage),
+         build(:evenement_identification_danger, donnees: { reponse: 'oui', danger: 'danger' }) ]
       end
 
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 1 }
@@ -25,8 +25,8 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
 
     context 'ignore les réponses négatives' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_identification_danger, donnees: { reponse: 'non' })]
+        [ build(:evenement_demarrage),
+         build(:evenement_identification_danger, donnees: { reponse: 'non' }) ]
       end
 
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 0 }
@@ -34,8 +34,8 @@ describe Restitution::Securite::NombreDangersBienIdentifies do
 
     context 'ignore les identifications de zone sans danger' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_identification_danger, donnees: { reponse: 'oui' })]
+        [ build(:evenement_demarrage),
+         build(:evenement_identification_danger, donnees: { reponse: 'oui' }) ]
       end
 
       it { expect(metrique_nombre_dangers_bien_identifies).to eq 0 }

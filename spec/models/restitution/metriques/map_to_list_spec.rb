@@ -16,7 +16,7 @@ describe Restitution::Metriques::MapToList do
 
     it 'rend une liste des valeurs quand il y en a' do
       expect(mock_metrique_a_moyenner).to receive(:calcule).and_return({ mesure: 1, mesure2: 1.1 })
-      expect(metrique_moyenne.calcule([], [])).to eql([1, 1.1])
+      expect(metrique_moyenne.calcule([], [])).to eql([ 1, 1.1 ])
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails de la question' do
+panel "Détails de la question" do
   attributes_table_for resource do
     row :id
     row :libelle
@@ -9,7 +9,7 @@ panel 'Détails de la question' do
     row :description
     row :metacompetence
     row :illustration do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.illustration }
     end
     row :texte_sur_illustration do

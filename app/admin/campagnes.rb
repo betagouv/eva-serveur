@@ -8,7 +8,7 @@ ActiveAdmin.register Campagne do
                 options_personnalisation: [],
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   filter :libelle
   filter :code
@@ -16,14 +16,14 @@ ActiveAdmin.register Campagne do
          as: :search_select_filter,
          url: proc { admin_comptes_path },
          fields: %i[email nom prenom],
-         display_name: 'display_name',
+         display_name: "display_name",
          minimum_input_length: 2,
-         order_by: 'email_asc'
+         order_by: "email_asc"
   filter :situations
   filter :created_at
 
   action_item :voir_evaluations, only: :show do
-    link_to I18n.t('admin.campagnes.action_items.voir_evaluations',
+    link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
                    count: Evaluation.where(campagne: resource).count),
             admin_evaluations_path(q: { campagne_id_eq: resource })
   end
@@ -33,7 +33,7 @@ ActiveAdmin.register Campagne do
       link_to campagne.libelle, admin_campagne_path(campagne)
     end
     column :code
-    column :nombre_evaluations, class: 'col-nombre_evaluations text-right',
+    column :nombre_evaluations, class: "col-nombre_evaluations text-right",
                                 sortable: :nombre_evaluations
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation do |campagne|
       l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
@@ -41,16 +41,16 @@ ActiveAdmin.register Campagne do
     column :compte if can?(:manage, Compte)
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 
-  form partial: 'form'
+  form partial: "form"
 
   controller do
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
@@ -59,7 +59,7 @@ ActiveAdmin.register Campagne do
 
     def create
       create!
-      flash[:notice] = I18n.t('admin.campagnes.show.nouvelle_campagne') if resource.save
+      flash[:notice] = I18n.t("admin.campagnes.show.nouvelle_campagne") if resource.save
     end
 
     def show
@@ -90,9 +90,9 @@ ActiveAdmin.register Campagne do
     def situations_configurations
       @situations_configurations ||= resource
                                      .situations_configurations
-                                     .includes([:questionnaire,
+                                     .includes([ :questionnaire,
                                                 { situation: %i[questionnaire
-                                                                illustration_attachment] }])
+                                                                illustration_attachment] } ])
     end
   end
 end

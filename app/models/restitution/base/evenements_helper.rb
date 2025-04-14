@@ -4,9 +4,9 @@ module Restitution
   class Base
     class EvenementsHelper
       EVENEMENT = {
-        FIN_SITUATION: 'finSituation',
-        REJOUE_CONSIGNE: 'rejoueConsigne',
-        ABANDON: 'abandon'
+        FIN_SITUATION: "finSituation",
+        REJOUE_CONSIGNE: "rejoueConsigne",
+        ABANDON: "abandon"
       }.freeze
 
       def initialize(evenements)

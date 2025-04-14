@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
     f.input :libelle
     f.input :nom_technique
     f.input :description
-    render partial: 'admin/questions/input_illustration', locals: { f: f }
-    f.input :texte_sur_illustration, as: :text, input_html: { class: 'simple-mde-editor' }
+    render partial: "admin/questions/input_illustration", locals: { f: f }
+    f.input :texte_sur_illustration, as: :text, input_html: { class: "simple-mde-editor" }
   end
 
-  render partial: 'admin/questions/inputs_avec_transcriptions_audios',
+  render partial: "admin/questions/inputs_avec_transcriptions_audios",
          locals: { f: f }
 
   f.actions do

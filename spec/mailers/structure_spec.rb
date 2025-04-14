@@ -15,8 +15,8 @@ describe StructureMailer, type: :mailer do
         email.deliver_now
       end
 
-      expect(email.from).to eql([Eva::EMAIL_CONTACT])
-      expect(email.to).to eql(['debut@test.com'])
+      expect(email.from).to eql([ Eva::EMAIL_CONTACT ])
+      expect(email.to).to eql([ 'debut@test.com' ])
       expect(email.subject).to eql('Création de « Ma Super Structure - 75012 »')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Paule')
@@ -35,8 +35,8 @@ describe StructureMailer, type: :mailer do
         email.deliver_now
       end
 
-      expect(email.from).to eql([Eva::EMAIL_CONTACT])
-      expect(email.to).to eql(['debut@test.com'])
+      expect(email.from).to eql([ Eva::EMAIL_CONTACT ])
+      expect(email.to).to eql([ 'debut@test.com' ])
       expect(email.subject).to eql('Eva - Et si vous testiez les compétences avec des jeux ?')
       expect(email.body).to include('Paule')
       expect(email.body).to include('Ma Super Structure - 75012')

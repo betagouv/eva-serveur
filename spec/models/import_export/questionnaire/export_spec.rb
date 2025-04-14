@@ -5,7 +5,7 @@ require 'rails_helper'
 describe ImportExport::Questionnaire::Export do
   subject(:response_service) do
     response_service = described_class.new(
-      [questionnaire], headers
+      [ questionnaire ], headers
     )
     response_service.to_xls
     response_service
@@ -17,7 +17,7 @@ describe ImportExport::Questionnaire::Export do
   let(:question1) { create :question, nom_technique: 'question1' }
   let(:question2) { create :question, nom_technique: 'question2' }
   let(:question3) { create :question, nom_technique: 'question3' }
-  let!(:questionnaire) { create(:questionnaire, questions: [question1, question3, question2]) }
+  let!(:questionnaire) { create(:questionnaire, questions: [ question1, question3, question2 ]) }
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
   let(:headers_xls) { worksheet.row(0).map { |header| header.parameterize.underscore.to_sym } }

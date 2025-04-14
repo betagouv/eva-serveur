@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionQcm do
   before_action :set_question, only: %i[update]
 
-  menu parent: 'Parcours', if: proc { can? :manage, Compte }
+  menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :description,
                 :type_qcm, :illustration, :supprimer_illustration,
@@ -16,16 +16,16 @@ ActiveAdmin.register QuestionQcm do
   filter :libelle
   filter :nom_technique
 
-  form partial: 'form'
+  form partial: "form"
 
   action_item :importer_question, only: :index do
-    link_to 'Importer questions QCM',
-            admin_import_xls_path(type: QuestionQcm::QUESTION_TYPE, model: 'question',
+    link_to "Importer questions QCM",
+            admin_import_xls_path(type: QuestionQcm::QUESTION_TYPE, model: "question",
                                   redirect_to: admin_question_qcms_path)
   end
 
   action_item :exporter_question, only: :show do
-    link_to 'Exporter la question en XLS', admin_question_export_xls_path(question_id: params[:id])
+    link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
   end
 
   index do
@@ -40,13 +40,13 @@ ActiveAdmin.register QuestionQcm do
     column :type_qcm
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 
   controller do

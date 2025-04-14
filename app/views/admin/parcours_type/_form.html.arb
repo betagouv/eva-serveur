@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-active_admin_form_for [:admin, resource] do |f|
+active_admin_form_for [ :admin, resource ] do |f|
   f.inputs do
     f.input :libelle
     f.input :nom_technique
-    f.input :actif, hint: t('.hint_actif')
-    f.input :position, hint: t('.hint_position')
+    f.input :actif, hint: t(".hint_actif")
+    f.input :position, hint: t(".hint_position")
     f.input :duree_moyenne
     f.input :type_de_programme, as: :select
     f.input :description, as: :text
-    render partial: 'admin/situations_configurations/input_situations_configurations',
+    render partial: "admin/situations_configurations/input_situations_configurations",
            locals: { f: f }
   end
   f.actions do

@@ -78,8 +78,8 @@ describe 'Evaluation', type: :request do
         it 'retourne une 422' do
           json = response.parsed_body
           expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le nom]
-          expect(json.values.sort).to eq [['Code inconnu'], ['doit être présente'],
-                                          ['doit être rempli'], ['doit être rempli(e)']]
+          expect(json.values.sort).to eq [ [ 'Code inconnu' ], [ 'doit être présente' ],
+                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -92,8 +92,8 @@ describe 'Evaluation', type: :request do
         it 'retourne une 422' do
           json = response.parsed_body
           expect(json.keys.sort).to eq %w[campagne debutee_le nom]
-          expect(json.values.sort).to eq [['doit être présente'], ['doit être rempli'],
-                                          ['doit être rempli(e)']]
+          expect(json.values.sort).to eq [ [ 'doit être présente' ], [ 'doit être rempli' ],
+                                          [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -106,8 +106,8 @@ describe 'Evaluation', type: :request do
         it 'retourne une 422' do
           json = response.parsed_body
           expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
-          expect(json.values.sort).to eq [['doit exister'], ['doit être présente'],
-                                          ['doit être rempli'], ['doit être rempli(e)']]
+          expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
+                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end

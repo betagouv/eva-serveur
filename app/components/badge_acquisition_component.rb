@@ -3,15 +3,15 @@
 class BadgeAcquisitionComponent < ViewComponent::Base
   STATUS = %i[acquis non_acquis non_evalue].freeze
   COLORS_CLASSES = {
-    acquis: ['fr-badge--green-emeraude'],
-    non_acquis: ['fr-badge--orange-terre-battue'],
-    non_evalue: ['fr-badge--grey']
+    acquis: [ "fr-badge--green-emeraude" ],
+    non_acquis: [ "fr-badge--orange-terre-battue" ],
+    non_evalue: [ "fr-badge--grey" ]
   }.freeze
 
   ICONES = {
-    acquis: 'checkbox-circle-fill',
-    non_acquis: 'close-circle-fill',
-    non_evalue: 'indeterminate-circle-fill'
+    acquis: "checkbox-circle-fill",
+    non_acquis: "close-circle-fill",
+    non_evalue: "indeterminate-circle-fill"
   }.freeze
 
   def initialize(status:, classes: [])
@@ -27,7 +27,7 @@ class BadgeAcquisitionComponent < ViewComponent::Base
   def validation
     return if STATUS.include? @status.to_sym
 
-    valeurs = STATUS.join(', ')
+    valeurs = STATUS.join(", ")
     raise "Le status #{@status} est invalide pour BadgeProfilComponent. Valeurs possible : #{valeurs}" # rubocop:disable Layout/LineLength
   end
 

@@ -18,6 +18,6 @@ class CustomExceptionsAppWrapper
   def fallback_to_html_format_if_invalid_mime_type(request)
     request.formats
   rescue ActionDispatch::Http::MimeNegotiation::InvalidType
-    request.set_header 'CONTENT_TYPE', 'text/html'
+    request.set_header "CONTENT_TYPE", "text/html"
   end
 end

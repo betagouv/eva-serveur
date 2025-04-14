@@ -83,8 +83,8 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_nom, with: 'Doe'
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
           select 'Superadmin'
-          options = ['', 'Superadmin', 'Chargé de Mission Régionale', 'Admin', 'Conseiller',
-                     'Compte générique']
+          options = [ '', 'Superadmin', 'Chargé de Mission Régionale', 'Admin', 'Conseiller',
+                     'Compte générique' ]
           expect(page).to have_select(:compte_role, options: options)
           select 'Ma structure'
           fill_in :compte_password, with: 'billyJoel123$$$'
@@ -116,7 +116,7 @@ describe 'Admin - Compte', type: :feature do
       it do
         visit edit_admin_compte_path(collegue)
         select 'Admin'
-        options = ['', 'Admin', 'Conseiller']
+        options = [ '', 'Admin', 'Conseiller' ]
         expect(page).to have_select(:compte_role, options: options)
         expect(page).to have_content 'Accès'
 

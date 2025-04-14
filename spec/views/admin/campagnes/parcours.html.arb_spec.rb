@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'admin/campagnes/_programme.html.arb' do
   before do
     assign(:campagne, Campagne.new(parcours_type: parcours_type))
-    assign(:situations_configurations, [situation_configuration_maintenance])
+    assign(:situations_configurations, [ situation_configuration_maintenance ])
     render
   end
 

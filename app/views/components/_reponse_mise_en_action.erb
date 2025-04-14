@@ -1,25 +1,25 @@
 <div class='mise-en-action__texte d-flex justify-content-center text-center' data-reponse="">
-  <%= render partial: 'components/modification_mise_en_action',
+  <%= render partial: "components/modification_mise_en_action",
     locals: { reponse_mise_en_action: true,
               mise_en_action: evaluation&.mise_en_action,
               affiche_qualification: affiche_qualification,
               modification_affichee: evaluation.a_mise_en_action? && effectuee_avec_remediation?(evaluation)
             } %>
-  <%= render partial: 'components/modification_mise_en_action',
+  <%= render partial: "components/modification_mise_en_action",
     locals: { reponse_mise_en_action: false,
               mise_en_action: evaluation&.mise_en_action,
               affiche_qualification: affiche_qualification,
               modification_affichee: evaluation.a_mise_en_action? && non_effectuee_avec_difficulte?(evaluation) } %>
 
-  <% classe_reponse_en_attente = evaluation.a_mise_en_action? && mise_en_action_avec_qualification?(evaluation) ? 'hidden' : 'd-flex' %>
-  <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? ' bouton--actif' : '' %>
-  <% classe_reponse_non = evaluation.a_mise_en_action? && !evaluation.mise_en_action.effectuee? ? ' bouton--actif' : '' %>
+  <% classe_reponse_en_attente = evaluation.a_mise_en_action? && mise_en_action_avec_qualification?(evaluation) ? "hidden" : "d-flex" %>
+  <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
+  <% classe_reponse_non = evaluation.a_mise_en_action? && !evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
     <button type="button" class="bouton-secondaire petit-bouton reponse-mise-en-action<%= classe_reponse_oui %>" data-reponse="true" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
-      <%= t('.bouton_oui') %>
+      <%= t(".bouton_oui") %>
     </button>
     <button type="button" class="bouton-secondaire petit-bouton reponse-mise-en-action<%= classe_reponse_non %>" data-reponse="false" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
-      <%= t('.bouton_non') %>
+      <%= t(".bouton_non") %>
     </button>
   </div>
 </div>

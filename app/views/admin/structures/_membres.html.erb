@@ -1,12 +1,12 @@
 <% url = new_compte_registration_url(structure_id: resource.id) %>
 
 <div id='bloc-membres'>
-  <h3><%= t('.titre') %></h3>
+  <h3><%= t(".titre") %></h3>
   <% if current_compte.au_moins_admin? %>
     <div class="panel panel-invitation">
       <div class="container-instructions">
         <div class="panel-invitation-message">
-          <%= md t('.invitation') %>
+          <%= md t(".invitation") %>
         </div>
         <div>
           <button style= "white-space: nowrap" class="bouton-secondaire petit-bouton copier-coller" type="button" data-clipboard-text="<%= url %>">Copier l'URL</button>
@@ -17,11 +17,11 @@
   <% end %>
 
   <div class='liste-membres'>
-    <%= render 'admin/structures/cards_validation', comptes: @comptes_en_attente, title: 'En attente' do |compte| %>
+    <%= render "admin/structures/cards_validation", comptes: @comptes_en_attente, title: "En attente" do |compte| %>
       <% if can?(:autoriser, compte) %>
-        <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
+        <%= link_to "Autoriser", autoriser_admin_compte_path(compte),
                                   method: :patch,
-                                  class: 'action' %>
+                                  class: "action" %>
       <% end %>
       <%=
         if can?(:refuser, compte)
@@ -34,7 +34,7 @@
   </div>
 
   <div class='liste-membres'>
-    <%= render 'admin/structures/cards_validation', comptes: @comptes_acceptes, title: 'Autorisés' do |compte| %>
+    <%= render "admin/structures/cards_validation", comptes: @comptes_acceptes, title: "Autorisés" do |compte| %>
       <%= 
         if can?(:refuser, compte)
           link_to 'Refuser', refuser_admin_compte_path(compte),
@@ -46,11 +46,11 @@
   </div>
 
   <div class='liste-membres'>
-    <%= render 'admin/structures/cards_validation', comptes: @comptes_refuses, title: 'Refusés' do |compte| %>
+    <%= render "admin/structures/cards_validation", comptes: @comptes_refuses, title: "Refusés" do |compte| %>
       <% if can?(:autoriser, compte) %>
-        <%= link_to 'Autoriser', autoriser_admin_compte_path(compte),
+        <%= link_to "Autoriser", autoriser_admin_compte_path(compte),
                                   method: :patch,
-                                  class: 'action' %>
+                                  class: "action" %>
       <% end %>
     <% end %>
   </div>

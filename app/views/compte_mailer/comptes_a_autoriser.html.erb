@@ -1,11 +1,11 @@
-<%= md t('.intro', prenom_admin: @compte_admin.prenom,
+<%= md t(".intro", prenom_admin: @compte_admin.prenom,
                    structure: @compte_admin.structure.display_name) %>
 <ul>
 <% @comptes.each do |compte| %>
-    <li><%= md t('.nom_prenom_compte', prenom_compte: compte.prenom, nom_compte: compte.nom) %></li>
+    <li><%= md t(".nom_prenom_compte", prenom_compte: compte.prenom, nom_compte: compte.nom) %></li>
 <% end %>
 </ul>
 <% structure = @compte_admin.structure %>
 <% lien = send("admin_#{structure.type.underscore}_url", structure, anchor: "bloc-membres") %>
-<%= md t('.contenu', lien_autorisation: lien,
+<%= md t(".contenu", lien_autorisation: lien,
                      email_support: Eva::EMAIL_SUPPORT) %>

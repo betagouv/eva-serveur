@@ -53,12 +53,12 @@ class Ability < AbilityUtilisateur
   end
 
   def droit_page
-    can :read, ActiveAdmin::Page, name: 'Aide', namespace_name: 'admin'
-    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
+    can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
+    can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
   end
 
   def droits_comptes_refuses(compte)
-    can :read, ActiveAdmin::Page, name: 'Dashboard', namespace_name: 'admin'
+    can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
     can %i[update read accepter_cgu], compte
   end
 end

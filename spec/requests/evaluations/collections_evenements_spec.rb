@@ -35,7 +35,7 @@ describe 'API Collections Evenements', type: :request do
       }
     end
     let(:donnees_evenements) do
-      { evenements: [evenement1, evenement2, evenement3] }
+      { evenements: [ evenement1, evenement2, evenement3 ] }
     end
     let(:donnees_evenements_transmises) do
       donnees_evenements[:evenements].map(&:to_json).map { |s| JSON.parse(s) }.map do |e|

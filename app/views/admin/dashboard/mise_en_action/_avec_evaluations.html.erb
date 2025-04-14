@@ -1,14 +1,14 @@
 <div class="contenu-avec-evaluations">
   <div class="bloc-apercu-header bg-orange p-4 mb-0">
-    <h3><%= t('.titre') %></h3>
-    <%= render(BoutonComponent.new(t('.action'), admin_evaluations_path(scope: :illettrisme_potentiel) )) %>
+    <h3><%= t(".titre") %></h3>
+    <%= render(BoutonComponent.new(t(".action"), admin_evaluations_path(scope: :illettrisme_potentiel))) %>
   </div>
   <div class='px-3'>
     <div class='d-flex align-items-center question'>
-      <%= image_tag 'point_interrogation.svg', class: 'mr-3', alt: '' %>
+      <%= image_tag "point_interrogation.svg", class: "mr-3", alt: "" %>
       <div>
-        <%= md(t('.introduction')) %>
-        <span id="question-diagnostics"><%= md(t('.question')) %></span>
+        <%= md(t(".introduction")) %>
+        <span id="question-diagnostics"><%= md(t(".question")) %></span>
       </div>
     </div>
     <div class='liste'>
@@ -26,6 +26,6 @@
         <% end %>
       <% end %>
     </div>
-    <%= render 'components/banniere_solutions_illettrisme', asterisque: false %>
+    <%= render "components/banniere_solutions_illettrisme", asterisque: false %>
   </div>
 </div>

@@ -5,8 +5,8 @@ module SituationHelper
     return unless situation.illustration.attached?
 
     image_tag cdn_for(situation.illustration),
-              style: couleur_bord.present? ? "border-color: #{couleur_bord};" : '',
-              class: 'situation-illustration',
-              alt: ''
+              style: couleur_bord.present? ? "border-color: #{couleur_bord};" : "",
+              class: "situation-illustration",
+              alt: ""
   end
 end

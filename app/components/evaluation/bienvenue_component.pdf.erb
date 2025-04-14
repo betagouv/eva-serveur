@@ -1,28 +1,28 @@
 <div id="profil">
   <div class="page adaptation-pdf profil">
-    <%= render 'entete_page', restitution_globale: @restitution_globale %>
+    <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-    <h2 class="text-center mt-5 mb-4"><%= t('admin.evaluations.restitution_globale.autopositionnement.titre') %></h2>
+    <h2 class="text-center mt-5 mb-4"><%= t("admin.evaluations.restitution_globale.autopositionnement.titre") %></h2>
 
     <div class="panel">
       <div class="marges-page">
-        <%= render partial: 'questions_reponses_autopositionnement', locals: { bienvenue: @bienvenue } %>
+        <%= render partial: "questions_reponses_autopositionnement", locals: { bienvenue: @bienvenue } %>
       </div>
 
-      <%= render 'pied_page' %>
+      <%= render "pied_page" %>
     </div>
   </div>
 
   <% if @bienvenue.inclus_autopositionnement? %>
     <div class="page adaptation-pdf profil">
-      <%= render 'entete_page', restitution_globale: @restitution_globale %>
+      <%= render "entete_page", restitution_globale: @restitution_globale %>
 
       <div class="panel">
         <div class="marges-page">
-          <%= render partial: 'questionnaire_autopositionnement', locals: { auto_positionnement: @bienvenue } %>
+          <%= render partial: "questionnaire_autopositionnement", locals: { auto_positionnement: @bienvenue } %>
         </div>
 
-        <%= render 'pied_page' %>
+        <%= render "pied_page" %>
       </div>
     </div>
   <% end %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register StructureLocale do
-  menu parent: 'Terrain', if: proc { current_compte.anlci? }
+  menu parent: "Terrain", if: proc { current_compte.anlci? }
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret
@@ -26,9 +26,9 @@ ActiveAdmin.register StructureLocale do
 
   action_item :stats, only: :index do
     if params[:stats]
-      link_to t('.sans_stats'), admin_structures_locales_path
+      link_to t(".sans_stats"), admin_structures_locales_path
     else
-      link_to t('.stats'), admin_structures_locales_path(stats: true)
+      link_to t(".stats"), admin_structures_locales_path(stats: true)
     end
   end
 
@@ -48,8 +48,8 @@ ActiveAdmin.register StructureLocale do
     column :nombre_evaluations, sortable: :nombre_evaluations
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
@@ -62,7 +62,7 @@ ActiveAdmin.register StructureLocale do
     end
     column :nombre_evaluations
     column :date_derniere_evaluation
-    column 'Date de création', &:created_at
+    column "Date de création", &:created_at
   end
 
   xls do
@@ -75,14 +75,14 @@ ActiveAdmin.register StructureLocale do
     end
     column :nombre_evaluations
     column :date_derniere_evaluation
-    column 'Date de création', &:created_at
+    column "Date de création", &:created_at
   end
 
   show do
-    render partial: 'admin/structures/show', locals: { structure: resource }
+    render partial: "admin/structures/show", locals: { structure: resource }
   end
 
-  form partial: 'form'
+  form partial: "form"
 
   controller do
     before_action :trouve_comptes, :trouve_campagnes, only: :show
@@ -107,7 +107,7 @@ ActiveAdmin.register StructureLocale do
         if @current_compte.structure.blank?
           success.html do
             @current_compte.rejoindre_structure(resource)
-            redirect_to admin_dashboard_path, notice: I18n.t('nouvelle_structure.bienvenue')
+            redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")
           end
         end
       end

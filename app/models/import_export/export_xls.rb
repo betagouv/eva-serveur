@@ -4,8 +4,8 @@ module ImportExport
   class ExportXls
     attr_reader :workbook, :export, :onglets
 
-    WORKSHEET_DONNEES = 'Données'
-    WORKSHEET_SYNTHESE = 'Synthèse'
+    WORKSHEET_DONNEES = "Données"
+    WORKSHEET_SYNTHESE = "Synthèse"
 
     def initialize
       @workbook = Spreadsheet::Workbook.new
@@ -23,11 +23,11 @@ module ImportExport
     end
 
     def nom_du_fichier(type)
-      nom_fichier_horodate(type, 'xls')
+      nom_fichier_horodate(type, "xls")
     end
 
     def content_type_xls
-      'application/vnd.ms-excel'
+      "application/vnd.ms-excel"
     end
 
     def retourne_le_contenu_du_xls

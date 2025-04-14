@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-panel t('.titre') do
+panel t(".titre") do
   attributes_table_for restitution do
     restitution.competences.each do |competence, niveau|
       row(t("#{competence}.nom",
-            scope: 'admin.evaluations.restitution_competence')) { niveau }
+            scope: "admin.evaluations.restitution_competence")) { niveau }
     end
     restitution.synthese.each do |metrique, niveau|
       row(t("#{metrique}.nom",
-            scope: 'admin.evaluations.restitution_competence')) { niveau }
+            scope: "admin.evaluations.restitution_competence")) { niveau }
     end
   end
 end

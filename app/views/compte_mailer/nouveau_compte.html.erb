@@ -1,10 +1,10 @@
-<%= md t('.corps',
+<%= md t(".corps",
          prenom: @compte.prenom,
          email: @compte.email,
          structure: @compte.structure.display_name,
          url_connexion: root_url,
          url_client: URL_CLIENT
         ) %>
-<%= md t('layouts.mailer.aide_conseiller',
+<%= md t("layouts.mailer.aide_conseiller",
           document_prise_en_main: Eva::DOCUMENT_PRISE_EN_MAIN,
           email_support: Eva::EMAIL_SUPPORT) %>

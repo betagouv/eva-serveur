@@ -1,34 +1,34 @@
 # frozen_string_literal: true
 
-div class: 'row m-0' do
-  div class: 'col col-6 card-informations' do
+div class: "row m-0" do
+  div class: "col col-6 card-informations" do
     if statistiques.temps_total
-      div class: 'row' do
-        div class: 'col col-1' do
-          span Evaluation.human_attribute_name('temps_total')
+      div class: "row" do
+        div class: "col col-1" do
+          span Evaluation.human_attribute_name("temps_total")
         end
-        div class: 'col col-2' do
+        div class: "col col-2" do
           span { formate_duree statistiques.temps_total }
         end
       end
     end
     if resource.terminee_le
-      div class: 'row' do
-        div class: 'col col-1' do
-          span Evaluation.human_attribute_name('terminee_le')
+      div class: "row" do
+        div class: "col col-1" do
+          span Evaluation.human_attribute_name("terminee_le")
         end
-        div class: 'col col-2' do
+        div class: "col col-2" do
           span l(resource.terminee_le, format: :avec_heure)
         end
       end
     end
     if resource.conditions_passation
       cp = resource.conditions_passation
-      div class: 'row' do
-        div class: 'col-1' do
-          span t('.materiel_utilise')
+      div class: "row" do
+        div class: "col-1" do
+          span t(".materiel_utilise")
         end
-        div class: 'col col-2' do
+        div class: "col col-2" do
           span "#{cp.materiel_utilise} | #{cp.nom_navigateur} #{cp.version_navigateur}"
           div do
             "#{cp.largeur_fenetre_navigation}x#{cp.hauteur_fenetre_navigation}"
@@ -37,37 +37,37 @@ div class: 'row m-0' do
       end
     end
     if resource.anonyme?
-      div class: 'row' do
-        div class: 'col col-1' do
-          span Evaluation.human_attribute_name('anonymisee_le')
+      div class: "row" do
+        div class: "col col-1" do
+          span Evaluation.human_attribute_name("anonymisee_le")
         end
-        div class: 'col col-2' do
+        div class: "col col-2" do
           span l(resource.anonymise_le, format: :avec_heure)
         end
       end
     end
-    div class: 'row' do
-      div class: 'col-1' do
-        span t('.donnees_sociodemographiques')
+    div class: "row" do
+      div class: "col-1" do
+        span t(".donnees_sociodemographiques")
       end
-      div class: 'col col-2' do
+      div class: "col col-2" do
         span resource.donnee_sociodemographique
       end
     end
-    div class: 'row' do
-      div class: 'col-1' do
-        span Evaluation.human_attribute_name('statut')
+    div class: "row" do
+      div class: "col-1" do
+        span Evaluation.human_attribute_name("statut")
       end
-      div class: 'col col-2' do
+      div class: "col col-2" do
         span Evaluation.human_enum_name(:statut, resource.statut)
       end
     end
     if resource.mise_en_action&.repondue_le.present?
-      div class: 'row' do
-        div class: 'col col-1' do
-          span Evaluation.human_attribute_name('mise_en_action_le')
+      div class: "row" do
+        div class: "col col-1" do
+          span Evaluation.human_attribute_name("mise_en_action_le")
         end
-        div class: 'col col-2' do
+        div class: "col col-2" do
           span l(resource.mise_en_action.repondue_le, format: :avec_heure)
         end
       end

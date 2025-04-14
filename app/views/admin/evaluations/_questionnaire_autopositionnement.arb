@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-div class: 'autopositionnement questionnaire' do
-  h3 t('.questionnaire-auto-positionnement'), class: 'categorie'
+div class: "autopositionnement questionnaire" do
+  h3 t(".questionnaire-auto-positionnement"), class: "categorie"
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
-    div class: 'row' do
-      div class: 'col intitule-question' do
-        para question.transcription_intitule&.ecrit, class: 'restitution-p'
+    div class: "row" do
+      div class: "col intitule-question" do
+        para question.transcription_intitule&.ecrit, class: "restitution-p"
       end
-      div class: 'col' do
-        div class: 'jauge' do
+      div class: "col" do
+        div class: "jauge" do
           div reponse.position, title: reponse.intitule, class: "position-#{reponse.position} puce"
         end
       end

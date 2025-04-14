@@ -36,7 +36,7 @@ class CompteMailerPreview < ActionMailer::Preview
     compte2 = Compte.new prenom: 'Jackie', nom: 'Chan', email: 'compte_2@gmail.com',
                          structure: structure
 
-    CompteMailer.with(comptes: [compte1, compte2], compte_admin: compte_admin)
+    CompteMailer.with(comptes: [ compte1, compte2 ], compte_admin: compte_admin)
                 .comptes_a_autoriser
   end
 end

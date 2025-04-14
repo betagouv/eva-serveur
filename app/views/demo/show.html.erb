@@ -1,12 +1,12 @@
-<% content_for :title, t('.title') %>
+<% content_for :title, t(".title") %>
 <% content_for :titre do %>
-  <%= t('.titre') -%>
+  <%= t(".titre") -%>
 <% end %>
-<% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <%= form_with url: demo_connect_path, class: "d-flex flex-column align-items-center" do |demo| %>
   <div class="panel w-80 d-flex flex-column align-items-center justify-content-between" style="gap: 1.5rem;">
     <%= recaptcha_tags %>
-    <%= demo.submit t('.submit'), wrapper_html: { class: 'd-flex justify-content-end' } %>
+    <%= demo.submit t(".submit"), wrapper_html: { class: "d-flex justify-content-end" } %>
   </div>
 <% end %>

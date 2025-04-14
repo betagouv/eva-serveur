@@ -3,11 +3,11 @@
 class Questionnaire < ApplicationRecord
   include Fichier
 
-  LIVRAISON_SANS_REDACTION = 'livraison_sans_redaction'
-  LIVRAISON_AVEC_REDACTION = 'livraison_expression_ecrite'
-  SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT = 'sociodemographique_autopositionnement'
-  SOCIODEMOGRAPHIQUE = 'sociodemographique'
-  AUTOPOSITIONNEMENT = 'autopositionnement'
+  LIVRAISON_SANS_REDACTION = "livraison_sans_redaction"
+  LIVRAISON_AVEC_REDACTION = "livraison_expression_ecrite"
+  SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT = "sociodemographique_autopositionnement"
+  SOCIODEMOGRAPHIQUE = "sociodemographique"
+  AUTOPOSITIONNEMENT = "autopositionnement"
 
   has_many :questionnaires_questions, lambda {
                                         order(position: :asc)
@@ -44,6 +44,6 @@ class Questionnaire < ApplicationRecord
   end
 
   def nom_fichier_export
-    nom_fichier_horodate("export-questionnaire-#{nom_technique}", 'zip')
+    nom_fichier_horodate("export-questionnaire-#{nom_technique}", "zip")
   end
 end

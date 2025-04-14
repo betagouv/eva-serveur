@@ -61,9 +61,9 @@ describe Restitution::Securite do
       let(:evaluation) { create :evaluation, campagne: campagne }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let(:evenements) do
-        [build(:evenement_demarrage, partie: partie),
+        [ build(:evenement_demarrage, partie: partie),
          build(:evenement_ouverture_zone, partie: partie, donnees: { zone: 'zone1' }),
-         build(:evenement_ouverture_zone, partie: partie, donnees: { zone: 'zone1' })]
+         build(:evenement_ouverture_zone, partie: partie, donnees: { zone: 'zone1' }) ]
       end
 
       it do
@@ -73,7 +73,7 @@ describe Restitution::Securite do
         expect(restitution).to receive(:nombre_retours_deja_qualifies).and_return 4
         expect(restitution).to receive(:nombre_dangers_bien_identifies_avant_aide1).and_return 5
         expect(restitution).to receive(:attention_visuo_spatiale).and_return Competence::APTE
-        expect(restitution).to receive(:delai_ouvertures_zones_dangers).and_return [1, 2]
+        expect(restitution).to receive(:delai_ouvertures_zones_dangers).and_return [ 1, 2 ]
         expect(restitution).to receive(:delai_moyen_ouvertures_zones_dangers).and_return 7
         expect(restitution).to receive(:temps_entrainement).and_return 8
         expect(restitution).to receive(:temps_total).and_return 9
@@ -86,7 +86,7 @@ describe Restitution::Securite do
         expect(partie.metriques['nombre_retours_deja_qualifies']).to eq 4
         expect(partie.metriques['nombre_dangers_bien_identifies_avant_aide1']).to be 5
         expect(partie.metriques['attention_visuo_spatiale']).to eql 'apte'
-        expect(partie.metriques['delai_ouvertures_zones_dangers']).to eql [1, 2]
+        expect(partie.metriques['delai_ouvertures_zones_dangers']).to eql [ 1, 2 ]
         expect(partie.metriques['delai_moyen_ouvertures_zones_dangers']).to be 7
         expect(partie.metriques['temps_entrainement']).to be 8
         expect(partie.metriques['temps_total']).to be 9

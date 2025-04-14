@@ -16,8 +16,8 @@ describe Restitution::Securite::NombreDangersBienQualifies do
 
     context 'avec bonne qualification' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_qualification_danger, :bon)]
+        [ build(:evenement_demarrage),
+         build(:evenement_qualification_danger, :bon) ]
       end
 
       it { expect(metrique_nombre_bien_qualifies).to eq 1 }
@@ -25,8 +25,8 @@ describe Restitution::Securite::NombreDangersBienQualifies do
 
     context 'ignore les mauvaises qualifications' do
       let(:evenements) do
-        [build(:evenement_demarrage),
-         build(:evenement_qualification_danger, :mauvais)]
+        [ build(:evenement_demarrage),
+         build(:evenement_qualification_danger, :mauvais) ]
       end
 
       it { expect(metrique_nombre_bien_qualifies).to eq 0 }
@@ -34,11 +34,11 @@ describe Restitution::Securite::NombreDangersBienQualifies do
 
     context 'prend en compte la requalification' do
       let(:evenements) do
-        [build(:evenement_demarrage),
+        [ build(:evenement_demarrage),
          build(:evenement_qualification_danger,
                donnees: { reponse: 'mauvais', danger: 'danger' }, created_at: 1.minute.ago),
          build(:evenement_qualification_danger,
-               donnees: { reponse: 'bonne', danger: 'danger' }, created_at: 2.minutes.ago)]
+               donnees: { reponse: 'bonne', danger: 'danger' }, created_at: 2.minutes.ago) ]
       end
 
       it { expect(metrique_nombre_bien_qualifies).to eq 0 }

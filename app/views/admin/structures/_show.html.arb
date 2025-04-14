@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-div class: 'row' do
-  div class: 'structure offset-1 col-4' do
-    div class: 'bloc-structure-infos' do
-      h2 structure.nom, class: 'titre-entete-page'
+div class: "row" do
+  div class: "structure offset-1 col-4" do
+    div class: "bloc-structure-infos" do
+      h2 structure.nom, class: "titre-entete-page"
 
-      render 'components/panel_introduction',
-             text: t('.introduction', lien_aide: admin_aide_path),
-             image: 'bienvenue.png'
+      render "components/panel_introduction",
+             text: t(".introduction", lien_aide: admin_aide_path),
+             image: "bienvenue.png"
 
-      div class: 'panel' do
+      div class: "panel" do
         attributes_table_for structure do
           row :nom
           if structure.instance_of?(StructureLocale)
@@ -24,22 +24,22 @@ div class: 'row' do
         end
       end
 
-      render 'admin/structures/membres'
+      render "admin/structures/membres"
 
-      render partial: 'admin/structures/mes_campagnes',
+      render partial: "admin/structures/mes_campagnes",
              locals: { campagnes: campagnes }
     end
   end
 end
-div class: 'row' do
-  div class: 'col-6' do
-    section id: 'bloc-statistiques' do
-      render partial: 'admin/structures/statistiques'
+div class: "row" do
+  div class: "col-6" do
+    section id: "bloc-statistiques" do
+      render partial: "admin/structures/statistiques"
     end
 
     if can?(:manage, Compte)
       section do
-        panel 'Administration' do
+        panel "Administration" do
           attributes_table_for structure do
             row :id
             row :latitude

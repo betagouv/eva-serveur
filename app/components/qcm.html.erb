@@ -1,4 +1,4 @@
-<div class="qcm w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? '' : 'hidden' %>" style="z-index: <%= @priorite %>;">
+<div class="qcm w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? "" : "hidden" %>" style="z-index: <%= @priorite %>;">
   <form>
     <fieldset class="mb-0">
       <legend><%= @questionnaire.question %></legend>
@@ -15,10 +15,10 @@
     </fieldset>
     <div class="mt-3 d-flex justify-content-end">
       <button type="button" class="bouton-secondaire petit-bouton bouton-fermer mr-1">
-        <%= t('.action_fermer') %>
+        <%= t(".action_fermer") %>
       </button>
       <button type="button" class="bouton petit-bouton valide-qcm mr-0 bouton--desactive">
-        <%= t('.action_valider') %>
+        <%= t(".action_valider") %>
       </button>
     </div>
   </form>

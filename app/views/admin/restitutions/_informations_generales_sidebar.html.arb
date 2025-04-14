@@ -6,16 +6,16 @@ attributes_table_for resource do
   end
   row :situation
   row :date
-  row(t('admin.restitutions.evaluation.etat')) do |restitution|
+  row(t("admin.restitutions.evaluation.etat")) do |restitution|
     if restitution.termine?
-      status_tag t('admin.restitutions.evaluation.termine'), class: 'green'
+      status_tag t("admin.restitutions.evaluation.termine"), class: "green"
     elsif restitution.abandon?
-      status_tag t('admin.restitutions.evaluation.abandon'), class: 'red'
+      status_tag t("admin.restitutions.evaluation.abandon"), class: "red"
     else
-      status_tag t('admin.restitutions.evaluation.en_cours'), class: 'grey'
+      status_tag t("admin.restitutions.evaluation.en_cours"), class: "grey"
     end
   end
-  row(t('admin.restitutions.evaluation.temps')) do |restitution|
+  row(t("admin.restitutions.evaluation.temps")) do |restitution|
     formate_duree(restitution.temps_total)
   end
 end

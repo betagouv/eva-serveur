@@ -5,7 +5,7 @@ module ImportExport
     class Import
       class QuestionClicDansTexte < ImportExport::Questions::Import::QuestionTest
         def initialize(headers_attendus)
-          super('QuestionClicDansTexte', headers_attendus)
+          super("QuestionClicDansTexte", headers_attendus)
         end
 
         private

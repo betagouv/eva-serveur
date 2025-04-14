@@ -17,8 +17,8 @@ RSpec.describe SourceAide, type: :model do
     it do
       expect(described_class.sources_par_categorie.to_a).to eql(
         [
-          ['prise_en_main', [source1, source2]],
-          ['animer_restituer', [source3]]
+          [ 'prise_en_main', [ source1, source2 ] ],
+          [ 'animer_restituer', [ source3 ] ]
         ]
       )
     end

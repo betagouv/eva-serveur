@@ -35,7 +35,7 @@ describe Restitution::Base do
   end
 
   context "avec une liste d'au moins un événement" do
-    let(:evenements) { [build(:evenement_demarrage, partie: partie)] }
+    let(:evenements) { [ build(:evenement_demarrage, partie: partie) ] }
 
     it "renvoie l'évaluation associée" do
       expect(restitution.evaluation).to eql(evaluation)
@@ -67,7 +67,7 @@ describe Restitution::Base do
     end
 
     context "retourne false lorsque l'événement de fin n'est pas trouvé" do
-      let(:evenements) { [build(:evenement_demarrage)] }
+      let(:evenements) { [ build(:evenement_demarrage) ] }
 
       it { expect(described_class.new(campagne, evenements).termine?).to be false }
     end

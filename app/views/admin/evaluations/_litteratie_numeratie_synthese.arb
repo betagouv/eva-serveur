@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
 div class: "synthese-illettrisme #{synthese}" do
-  div class: 'row' do
-    div class: 'col-auto' do
-      icone = 'icone_profil/icone_indetermine.svg' if synthese.blank?
+  div class: "row" do
+    div class: "col-auto" do
+      icone = "icone_profil/icone_indetermine.svg" if synthese.blank?
 
-      div image_tag icone, alt: t('alt_icone', scope: scope)
+      div image_tag icone, alt: t("alt_icone", scope: scope)
     end
-    div class: 'col' do
+    div class: "col" do
       if synthese.present?
-        md t('description', scope: scope)
+        md t("description", scope: scope)
       else
-        md t('admin.restitutions.score_non_calcule')
+        md t("admin.restitutions.score_non_calcule")
       end
     end
   end

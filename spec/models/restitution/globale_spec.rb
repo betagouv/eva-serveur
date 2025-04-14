@@ -10,7 +10,7 @@ describe Restitution::Globale do
   let(:evaluation) { double }
 
   describe "#utilisateur retourne le nom de l'évaluation" do
-    let(:restitutions) { [double] }
+    let(:restitutions) { [ double ] }
     let(:evaluation) { double(nom: 'Jean Bon') }
 
     it { expect(restitution_globale.utilisateur).to eq('Jean Bon') }
@@ -18,14 +18,14 @@ describe Restitution::Globale do
 
   describe "#date retourne la date de l'évaluation" do
     let(:date) { 2.days.ago }
-    let(:restitutions) { [double] }
+    let(:restitutions) { [ double ] }
     let(:evaluation) { double(created_at: date) }
 
     it { expect(restitution_globale.date).to eq(date) }
   end
 
   describe "#structure retourne le nom de la structure où a été passé l'évaluation" do
-    let(:restitutions) { [double] }
+    let(:restitutions) { [ double ] }
     let(:structure) { double(nom: 'Mission locale modiale') }
     let(:compte) { double(structure: structure) }
     let(:campagne) { double(compte: compte) }
@@ -35,7 +35,7 @@ describe Restitution::Globale do
   end
 
   describe "#structure s'il n'y a pas de structure pour le compte" do
-    let(:restitutions) { [double] }
+    let(:restitutions) { [ double ] }
     let(:compte) { double(structure: nil) }
     let(:campagne) { double(compte: compte) }
     let(:evaluation) { double(campagne: campagne) }
@@ -54,22 +54,22 @@ describe Restitution::Globale do
     end
 
     context 'une évaluation, une compétences' do
-      let(:restitutions) { [double(competences: niveau_comparaison)] }
+      let(:restitutions) { [ double(competences: niveau_comparaison) ] }
 
       it do
         expect(restitution_globale.niveaux_competences)
-          .to eq([[Competence::COMPARAISON_TRI, 4.0]])
+          .to eq([ [ Competence::COMPARAISON_TRI, 4.0 ] ])
       end
     end
 
     context 'une évaluation, deux compétences' do
-      let(:restitutions) { [double(competences: niveau_comparaison.merge(niveau_rapidite))] }
+      let(:restitutions) { [ double(competences: niveau_comparaison.merge(niveau_rapidite)) ] }
 
       it do
         expect(restitution_globale.niveaux_competences)
           .to eq([
-                   [Competence::COMPARAISON_TRI, 4.0],
-                   [Competence::RAPIDITE, 4.0]
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::RAPIDITE, 4.0 ]
                  ])
       end
     end
@@ -77,13 +77,13 @@ describe Restitution::Globale do
     context 'deux évaluation, deux compétences différentes' do
       let(:restitution1) { double(competences: niveau_comparaison) }
       let(:restitution2) { double(competences: niveau_rapidite) }
-      let(:restitutions) { [restitution1, restitution2] }
+      let(:restitutions) { [ restitution1, restitution2 ] }
 
       it do
         expect(restitution_globale.niveaux_competences)
           .to eq([
-                   [Competence::COMPARAISON_TRI, 4.0],
-                   [Competence::RAPIDITE, 4.0]
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::RAPIDITE, 4.0 ]
                  ])
       end
     end
@@ -92,20 +92,20 @@ describe Restitution::Globale do
       let(:niveau_faible) { { Competence::ORGANISATION_METHODE => Competence::NIVEAU_1 } }
       let(:restitution1) { double(competences: niveau_faible) }
       let(:restitution2) { double(competences: niveau_comparaison) }
-      let(:restitutions) { [restitution1, restitution2] }
+      let(:restitutions) { [ restitution1, restitution2 ] }
 
       it do
         expect(restitution_globale.niveaux_competences)
           .to eq([
-                   [Competence::COMPARAISON_TRI, 4.0],
-                   [Competence::ORGANISATION_METHODE, 1.0]
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::ORGANISATION_METHODE, 1.0 ]
                  ])
       end
     end
 
     context 'ignore les niveaux indéterminées' do
       let(:niveau_indetermine) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE } }
-      let(:restitutions) { [double(competences: niveau_indetermine)] }
+      let(:restitutions) { [ double(competences: niveau_indetermine) ] }
 
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
     end
@@ -114,17 +114,17 @@ describe Restitution::Globale do
       let(:niveau_comparaison3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
       let(:restitution1) { double(competences: niveau_comparaison) }
       let(:restitution2) { double(competences: niveau_comparaison3) }
-      let(:restitutions) { [restitution1, restitution2] }
+      let(:restitutions) { [ restitution1, restitution2 ] }
 
       it do
-        resultat = [Competence::COMPARAISON_TRI, 3.5]
-        expect(restitution_globale.niveaux_competences).to eq([resultat])
+        resultat = [ Competence::COMPARAISON_TRI, 3.5 ]
+        expect(restitution_globale.niveaux_competences).to eq([ resultat ])
       end
     end
 
     context "ignore les compétences inutilisées dans l'efficience" do
       let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
-      let(:restitutions) { [double(competences: niveau_perseverance)] }
+      let(:restitutions) { [ double(competences: niveau_perseverance) ] }
 
       it { expect(restitution_globale.niveaux_competences).to eq([]) }
     end
@@ -135,14 +135,14 @@ describe Restitution::Globale do
     let(:interpretations) { restitution_globale.interpretations_niveau1_cefr }
 
     context 'sans illettrisme potentiel' do
-      let(:interpreteur_niveau1_cefr) { double(interpretations_cefr: [trop: :bon]) }
+      let(:interpreteur_niveau1_cefr) { double(interpretations_cefr: [ trop: :bon ]) }
 
       before do
         allow(Restitution::Illettrisme::InterpreteurNiveau1)
           .to receive(:new).and_return(interpreteur_niveau1_cefr)
       end
 
-      it { expect(interpretations).to eq [trop: :bon] }
+      it { expect(interpretations).to eq [ trop: :bon ] }
     end
   end
 
@@ -151,14 +151,14 @@ describe Restitution::Globale do
     let(:interpretations) { restitution_globale.interpretations_niveau1_anlci }
 
     context 'sans illettrisme potentiel' do
-      let(:interpreteur_niveau1_anlci) { double(interpretations_anlci: [trop: :bon]) }
+      let(:interpreteur_niveau1_anlci) { double(interpretations_anlci: [ trop: :bon ]) }
 
       before do
         allow(Restitution::Illettrisme::InterpreteurNiveau1)
           .to receive(:new).and_return(interpreteur_niveau1_anlci)
       end
 
-      it { expect(interpretations).to eq [trop: :bon] }
+      it { expect(interpretations).to eq [ trop: :bon ] }
     end
   end
 

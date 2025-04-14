@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionQcm < Question
-  QUESTION_TYPE = 'QuestionQcm'
+  QUESTION_TYPE = "QuestionQcm"
 
   enum :type_qcm, { standard: 0, jauge: 1 }
 
@@ -29,15 +29,15 @@ class QuestionQcm < Question
   end
 
   def reponses_possibles
-    choix.map { |c| c.intitule.presence || c.nom_technique }.join(' | ')
+    choix.map { |c| c.intitule.presence || c.nom_technique }.join(" | ")
   end
 
   def bonnes_reponses
-    choix.where(type_choix: :bon).map { |c| c.intitule.presence || c.nom_technique }.join(' | ')
+    choix.where(type_choix: :bon).map { |c| c.intitule.presence || c.nom_technique }.join(" | ")
   end
 
   def self.preload_assocations_pour_as_json
-    base_includes_pour_as_json + [{ choix: { audio_attachment: :blob } }]
+    base_includes_pour_as_json + [ { choix: { audio_attachment: :blob } } ]
   end
 
   private
@@ -45,16 +45,16 @@ class QuestionQcm < Question
   def base_json
     slice(:id, :nom_technique, :metacompetence, :type_qcm, :description,
           :demarrage_audio_modalite_reponse, :illustration, :score, :metacompetence).tap do |json|
-      json['type'] = 'qcm'
-      json['illustration'] = illustration_url
+      json["type"] = "qcm"
+      json["illustration"] = illustration_url
     end
   end
 
   def additional_json_fields
     {
-      'intitule' => transcription_intitule&.ecrit,
-      'modalite_reponse' => transcription_modalite_reponse&.ecrit,
-      'choix' => question_choix
+      "intitule" => transcription_intitule&.ecrit,
+      "modalite_reponse" => transcription_modalite_reponse&.ecrit,
+      "choix" => question_choix
     }
   end
 
@@ -62,7 +62,7 @@ class QuestionQcm < Question
     choix.map do |choix|
       audio_url = cdn_for(choix.audio) if choix&.audio&.attached?
       choix.slice(:id, :nom_technique, :intitule, :type_choix, :position).merge(
-        'audio_url' => audio_url
+        "audio_url" => audio_url
       )
     end
   end

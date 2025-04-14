@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-div class: 'metadonnees' do
-  div class: 'donnee' do
-    span 'Publié dans :', class: 'label'
+div class: "metadonnees" do
+  div class: "donnee" do
+    span "Publié dans :", class: "label"
     render(Tag.new(
-             t(actualite.categorie, scope: 'activerecord.attributes.actualite.categories'),
+             t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
              classes: "tag-categorie #{actualite.categorie}"
            ))
   end
-  div class: 'donnee' do
-    span 'Auteur :', class: 'label'
-    text_node 'Équipe eva'
+  div class: "donnee" do
+    span "Auteur :", class: "label"
+    text_node "Équipe eva"
   end
-  div class: 'donnee' do
-    span 'Date :', class: 'label'
-    span class: 'date' do
+  div class: "donnee" do
+    span "Date :", class: "label"
+    span class: "date" do
       l actualite.created_at, format: :sans_heure
     end
   end

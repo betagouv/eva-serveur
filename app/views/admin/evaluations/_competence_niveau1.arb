@@ -3,23 +3,23 @@
 competence = competence.to_s
 scope = "admin.restitutions.#{referentiel}.#{competence}"
 
-div class: 'col-auto badge' do
+div class: "col-auto badge" do
   div image_tag "#{competence}_#{referentiel}.svg", alt: t(:titre, scope: scope)
   if niveau.present?
     div image_tag "badges/#{referentiel}/#{niveau}.svg",
-                  alt: t(niveau, scope: 'admin.restitutions.references')
+                  alt: t(niveau, scope: "admin.restitutions.references")
   end
 end
-div class: 'col' do
-  h3 class: 'restitution-h3 mb-3 mt-0' do
+div class: "col" do
+  h3 class: "restitution-h3 mb-3 mt-0" do
     div t(:titre, scope: scope)
   end
 
-  div class: 'stanine-niveau-francais-mathematique' do
+  div class: "stanine-niveau-francais-mathematique" do
     if niveau.present?
       md t("#{niveau}.description", scope: scope)
     else
-      md t('admin.restitutions.pas_de_score')
+      md t("admin.restitutions.pas_de_score")
     end
   end
 end

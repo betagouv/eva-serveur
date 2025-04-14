@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rake_logger'
+require "rake_logger"
 
 namespace :nettoyage do
   def anonymise_evaluations
     puts "\n-- anonymise les évaluations --"
     Evaluation.find_each do |evaluation|
-      print '.'
+      print "."
       Anonymisation::Evaluation.new(evaluation).anonymise
     end
   end
@@ -16,7 +16,7 @@ namespace :nettoyage do
     Compte.find_each do |compte|
       next if compte.superadmin?
 
-      print '.'
+      print "."
       Anonymisation::Compte.new(compte).anonymise
     end
   end
@@ -24,7 +24,7 @@ namespace :nettoyage do
   def anonymise_structures
     puts "\n-- anonymise les structures --"
     Structure.find_each do |structure|
-      print '.'
+      print "."
       Anonymisation::Structure.new(structure).anonymise
     end
   end
@@ -32,13 +32,13 @@ namespace :nettoyage do
   def anonymise_campagnes
     puts "\n-- anonymise les campagnes --"
     Campagne.find_each do |campagne|
-      print '.'
-      campagne.code = campagne.code.gsub(/[ -É]/, '')
+      print "."
+      campagne.code = campagne.code.gsub(/[ -É]/, "")
       Anonymisation::Campagne.new(campagne).anonymise
     end
   end
 
-  desc 'Anonymise la base de données en entier'
+  desc "Anonymise la base de données en entier"
   task anonymise: :environment do
     return if Rails.env.production?
 
@@ -50,11 +50,11 @@ namespace :nettoyage do
 
   desc "Recalculer les metriques d'une situation."
   task recalcule_metriques: :environment do
-    arg_situation = 'SITUATION'
+    arg_situation = "SITUATION"
     logger = RakeLogger.logger
     unless ENV.key?(arg_situation)
       logger.error "La variable d'environnement #{arg_situation} est manquante"
-      logger.info 'Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>'
+      logger.info "Usage : rake nettoyage:recalcule_metriques SITUATION=<nom_technique>"
       next
     end
 
@@ -79,29 +79,29 @@ namespace :nettoyage do
     logger.info "C'est fini"
   end
 
-  desc 'Ajoute les événements terminés'
+  desc "Ajoute les événements terminés"
   task ajoute_evenements_termines: :environment do
     Partie.find_each do |partie|
       evenements = Evenement.where(partie: partie)
-      next if evenements.exists?(nom: 'finSituation')
+      next if evenements.exists?(nom: "finSituation")
 
       restitution = FabriqueRestitution.instancie partie
       next unless restitution.termine?
 
       dernier_evenement = evenements.order(:date).last
-      Evenement.create! partie: partie, nom: 'finSituation', date: dernier_evenement.date + 0.001
+      Evenement.create! partie: partie, nom: "finSituation", date: dernier_evenement.date + 0.001
     end
   end
 
-  desc 'Supprime les événements après la fin'
+  desc "Supprime les événements après la fin"
   task supprime_evenements_apres_la_fin: :environment do
     logger = RakeLogger.logger
-    logger.info 'Evenements effacées:'
+    logger.info "Evenements effacées:"
     Partie.find_each do |partie|
       date_fin = nil
       evenements = Evenement.where(partie: partie).order(:position, :date)
       evenements_jusqua_fin = evenements.take_while do |evenement|
-        date_fin ||= evenement.date if evenement.nom == 'finSituation'
+        date_fin ||= evenement.date if evenement.nom == "finSituation"
 
         date_fin.nil? || evenement.date == date_fin
       end
@@ -112,7 +112,7 @@ namespace :nettoyage do
     end
   end
 
-  desc 'Assure une date de fin correcte'
+  desc "Assure une date de fin correcte"
   task date_evenements_fin: :environment do
     logger = RakeLogger.logger
     logger.info "Décale événements fin qui ont la mieme date que l'événement précédent..."
@@ -122,7 +122,7 @@ namespace :nettoyage do
       next if derniers_evenements.count < 2 ||
               derniers_evenements.first.date != derniers_evenements.last.date
 
-      fin = derniers_evenements.detect { |e| e.nom == 'finSituation' }
+      fin = derniers_evenements.detect { |e| e.nom == "finSituation" }
 
       next if fin.blank?
 
@@ -132,9 +132,9 @@ namespace :nettoyage do
     end
   end
 
-  desc 'Supprime la situation controle de toutes les campagnes'
+  desc "Supprime la situation controle de toutes les campagnes"
   task supprime_controle_campagne: :environment do
-    SituationConfiguration.where(situation: Situation.where(nom_technique: 'controle')).destroy_all
+    SituationConfiguration.where(situation: Situation.where(nom_technique: "controle")).destroy_all
   end
 
   def supprime_espace_inutile(objet, attributs)
@@ -144,39 +144,39 @@ namespace :nettoyage do
     objet.update(changements)
   end
 
-  desc 'Supprime les espaces inutiles pour les campagnes, comptes et structures'
+  desc "Supprime les espaces inutiles pour les campagnes, comptes et structures"
   task supprime_espaces_inutiles: :environment do
     puts "\n-- campagnes --"
     Campagne.find_each do |campagne|
       supprime_espace_inutile(campagne, %i[libelle code])
-      print '.'
+      print "."
     end
     puts "\n-- comptes --"
     Compte.find_each do |compte|
       supprime_espace_inutile(compte, %i[email nom prenom telephone])
-      print '.'
+      print "."
     end
     puts "\n-- structures --"
     Structure.find_each do |structure|
       supprime_espace_inutile(structure, %i[nom code_postal])
-      print '.'
+      print "."
     end
   end
 
-  desc 'Supprime les illustrations des questions'
+  desc "Supprime les illustrations des questions"
   task supprime_illustrations_questions: :environment do
-    ActiveStorage::Blob.where(service_name: 'openstack').find_each do |blob|
+    ActiveStorage::Blob.where(service_name: "openstack").find_each do |blob|
       ActiveStorage::Attachment.where(blob_id: blob.id).destroy_all
       blob.destroy
     end
 
     Question.find_each do |question|
       question.illustration.purge
-      print '.'
+      print "."
     end
   end
 
-  desc 'supprime les doublons'
+  desc "supprime les doublons"
   task supprime_doublons_evenements: :environment do
     logger = RakeLogger.logger
 

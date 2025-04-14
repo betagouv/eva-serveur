@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
-render 'form_script'
-div class: 'nouvelle-campagne' do
-  div class: 'row' do
-    div class: 'offset-1 col-4' do
-      titre = resource.new_record? ? 'new' : 'edit'
+render "form_script"
+div class: "nouvelle-campagne" do
+  div class: "row" do
+    div class: "offset-1 col-4" do
+      titre = resource.new_record? ? "new" : "edit"
       h1 t("active_admin.resources.campagne.#{titre}_model")
-      div class: 'panel' do
-        div class: 'panel__description' do
-          md t('.explication_campagne')
+      div class: "panel" do
+        div class: "panel__description" do
+          md t(".explication_campagne")
         end
       end
 
-      active_admin_form_for [:admin, resource] do |f|
+      active_admin_form_for [ :admin, resource ] do |f|
         f.semantic_errors
         if resource.new_record?
-          h2 'Programme'
-          div id: 'zone-choix-type-programme' do
-            div class: 'panel' do
-              h3 t('.choix_type_programme')
-              f.inputs class: 'input-choix input-choix-type-programme' do
+          h2 "Programme"
+          div id: "zone-choix-type-programme" do
+            div class: "panel" do
+              h3 t(".choix_type_programme")
+              f.inputs class: "input-choix input-choix-type-programme" do
                 f.input :type_programme,
                         as: :radio,
                         collection: collection_types_programme,
@@ -28,21 +28,21 @@ div class: 'nouvelle-campagne' do
             end
           end
 
-          div id: 'zone-choix-parcours',
-              class: f.object.type_programme.present? ? '' : 'hidden' do
-            div class: 'panel' do
-              h3 t('.choix_parcours')
-              div class: 'panel__description description--secondaire' do
-                md t('.explication_choix_programme')
+          div id: "zone-choix-parcours",
+              class: f.object.type_programme.present? ? "" : "hidden" do
+            div class: "panel" do
+              h3 t(".choix_parcours")
+              div class: "panel__description description--secondaire" do
+                md t(".explication_choix_programme")
               end
 
               ParcoursType::TYPES_DE_PROGRAMME.each do |type_programme|
                 classes_type_programme = type_programme.to_s
                 if f.object.type_programme != type_programme.to_s
-                  classes_type_programme += ' hidden'
+                  classes_type_programme += " hidden"
                 end
                 div class: classes_type_programme do
-                  f.inputs class: 'input-choix input-choix-option-parcours-type' do
+                  f.inputs class: "input-choix input-choix-option-parcours-type" do
                     collection = collection_parcours_type(parcours_type.send(type_programme))
                     f.input :parcours_type, as: :radio,
                                             collection: collection,
@@ -54,13 +54,13 @@ div class: 'nouvelle-campagne' do
             end
           end
 
-          div id: 'zone-de-personnalisation',
-              class: f.object.parcours_type_id.present? ? '' : 'hidden' do
-            h2 t('.personnalisation')
-            div class: 'panel' do
-              para t('.explication_personnalisation'),
-                   class: 'panel__description description--secondaire'
-              f.inputs class: 'input-choix input-choix-option-personnalisation' do
+          div id: "zone-de-personnalisation",
+              class: f.object.parcours_type_id.present? ? "" : "hidden" do
+            h2 t(".personnalisation")
+            div class: "panel" do
+              para t(".explication_personnalisation"),
+                   class: "panel__description description--secondaire"
+              f.inputs class: "input-choix input-choix-option-personnalisation" do
                 f.input :options_personnalisation,
                         as: :check_boxes,
                         collection: collection_options_personnalisation,
@@ -70,10 +70,10 @@ div class: 'nouvelle-campagne' do
           end
         end
 
-        h2 t('.titre_libelle')
-        div class: 'panel' do
-          div class: 'panel__description description--secondaire' do
-            md t('.explication_libelle')
+        h2 t(".titre_libelle")
+        div class: "panel" do
+          div class: "panel__description description--secondaire" do
+            md t(".explication_libelle")
           end
           f.inputs do
             f.input :libelle
@@ -81,14 +81,14 @@ div class: 'nouvelle-campagne' do
         end
 
         if current_compte.superadmin?
-          div class: 'panel' do
-            h2 t('.configuration_avancee')
+          div class: "panel" do
+            h2 t(".configuration_avancee")
             f.inputs do
               f.input :compte
               f.input :code
               f.input :affiche_competences_fortes
               if resource.persisted?
-                render partial: 'admin/situations_configurations/input_situations_configurations',
+                render partial: "admin/situations_configurations/input_situations_configurations",
                        locals: { f: f }
               end
             end

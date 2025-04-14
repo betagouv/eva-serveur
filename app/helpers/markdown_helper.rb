@@ -2,7 +2,7 @@
 
 module MarkdownHelper
   def md(contenu)
-    return '' if contenu.nil?
+    return "" if contenu.nil?
 
     interprete_markdown_en_html(contenu)
   end

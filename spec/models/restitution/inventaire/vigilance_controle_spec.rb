@@ -34,7 +34,7 @@ describe Restitution::Inventaire::VigilanceControle do
 
   it 'Réussite au 1er essai: niveau 4' do
     allow(restitution).to receive_messages(reussite?: true, nombre_essais_validation: 1,
-                                           essais_verifies: [essai_reussite])
+                                           essais_verifies: [ essai_reussite ])
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_4)
@@ -42,7 +42,7 @@ describe Restitution::Inventaire::VigilanceControle do
 
   it 'Réussite au 2eme essai lorsque le 1er essai comporte 7 non remplissages: niveau 4' do
     allow(restitution).to receive_messages(reussite?: true, nombre_essais_validation: 2,
-                                           essais_verifies: [essai_de_prise_en_main, double])
+                                           essais_verifies: [ essai_de_prise_en_main, double ])
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_4)
@@ -50,7 +50,7 @@ describe Restitution::Inventaire::VigilanceControle do
 
   it 'Réussite au 2eme essai lorsque le 1er essai comporte 8 non remplissages: niveau 4' do
     allow(restitution).to receive_messages(reussite?: true, nombre_essais_validation: 2,
-                                           essais_verifies: [essai_de_prise_en_main_vide, double])
+                                           essais_verifies: [ essai_de_prise_en_main_vide, double ])
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_4)

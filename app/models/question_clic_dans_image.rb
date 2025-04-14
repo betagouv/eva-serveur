@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class QuestionClicDansImage < Question
-  CLASS_BONNE_REPONSE = 'bonne-reponse'
-  QUESTION_TYPE = 'QuestionClicDansImage'
+  CLASS_BONNE_REPONSE = "bonne-reponse"
+  QUESTION_TYPE = "QuestionClicDansImage"
 
   has_one_attached :zone_cliquable
   has_one_attached :image_au_clic
 
   validates :zone_cliquable,
-            blob: { content_type: 'image/svg+xml' }
+            blob: { content_type: "image/svg+xml" }
   validates :image_au_clic,
-            blob: { content_type: 'image/svg+xml' }
+            blob: { content_type: "image/svg+xml" }
 
   attr_accessor :supprimer_zone_cliquable, :supprimer_image_au_clic
 
@@ -19,7 +19,7 @@ class QuestionClicDansImage < Question
 
   def as_json(_options = nil)
     json = base_json
-    json['image_au_clic_url'] = cdn_for(image_au_clic) if image_au_clic.attached?
+    json["image_au_clic_url"] = cdn_for(image_au_clic) if image_au_clic.attached?
     json.merge!(json_audio_fields, additional_json_fields)
   end
 
@@ -39,7 +39,7 @@ class QuestionClicDansImage < Question
   end
 
   def self.preload_assocations_pour_as_json
-    base_includes_pour_as_json + [image_au_clic_attachment: :blob, zone_cliquable_attachment: :blob]
+    base_includes_pour_as_json + [ image_au_clic_attachment: :blob, zone_cliquable_attachment: :blob ]
   end
 
   private
@@ -47,31 +47,31 @@ class QuestionClicDansImage < Question
   def base_json
     slice(:id, :nom_technique, :demarrage_audio_modalite_reponse, :score,
           :metacompetence).tap do |json|
-      json['type'] = 'clic-dans-image'
-      json['illustration'] = illustration_url
-      json['description'] = description
-      json['zone_cliquable_url'] = cdn_for(zone_cliquable) if zone_cliquable.attached?
+      json["type"] = "clic-dans-image"
+      json["illustration"] = illustration_url
+      json["description"] = description
+      json["zone_cliquable_url"] = cdn_for(zone_cliquable) if zone_cliquable.attached?
     end
   end
 
   def additional_json_fields
-    { 'intitule' => transcription_intitule&.ecrit,
-      'modalite_reponse' => transcription_modalite_reponse&.ecrit }
+    { "intitule" => transcription_intitule&.ecrit,
+      "modalite_reponse" => transcription_modalite_reponse&.ecrit }
   end
 
   def supprime_zone_cliquable
-    zone_cliquable.purge_later if zone_cliquable.attached? && supprimer_zone_cliquable == '1'
+    zone_cliquable.purge_later if zone_cliquable.attached? && supprimer_zone_cliquable == "1"
   end
 
   def supprime_image_au_clic
-    image_au_clic.purge_later if image_au_clic.attached? && supprimer_image_au_clic == '1'
+    image_au_clic.purge_later if image_au_clic.attached? && supprimer_image_au_clic == "1"
   end
 
   def valide_zone_cliquable_avec_reponse
     return unless zone_cliquable.attached?
-    return if attachment_changes['zone_cliquable'].nil?
+    return if attachment_changes["zone_cliquable"].nil?
 
-    file = attachment_changes['zone_cliquable'].attachable
+    file = attachment_changes["zone_cliquable"].attachable
     return if svg_contient_class_bonne_reponse?(file, 1)
 
     errors.add(:zone_cliquable, :class_bonne_reponse_not_found)

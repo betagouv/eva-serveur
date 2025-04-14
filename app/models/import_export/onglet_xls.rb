@@ -4,9 +4,9 @@ module ImportExport
   class OngletXls
     attr_reader :sheet
 
-    NUMBER_FORMAT = '0'
-    DECIMAL_NUMBER_FORMAT = '0.0#'
-    POURCENTAGE_FORMAT = '0%'
+    NUMBER_FORMAT = "0"
+    DECIMAL_NUMBER_FORMAT = "0.0#"
+    POURCENTAGE_FORMAT = "0%"
 
     def initialize(titre, workbook, entetes)
       @titre = titre
@@ -36,7 +36,7 @@ module ImportExport
     end
 
     def set_valeur_booleenne(ligne, colonne, valeur)
-      valeur_texte = valeur ? I18n.t('.interaction.true') : I18n.t('.interaction.false')
+      valeur_texte = valeur ? I18n.t(".interaction.true") : I18n.t(".interaction.false")
       set_valeur(ligne, colonne, valeur_texte)
     end
 

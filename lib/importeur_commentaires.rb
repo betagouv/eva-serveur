@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rake_logger'
+require "rake_logger"
 
 class ImporteurCommentaires
   class << self

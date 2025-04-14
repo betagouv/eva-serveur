@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-panel 'Détails de la question' do
+panel "Détails de la question" do
   attributes_table_for question_sous_consigne do
     row :id
     row :libelle
     row :nom_technique
     row :illustration do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.illustration }
     end
     intitule = question_sous_consigne.transcription_intitule

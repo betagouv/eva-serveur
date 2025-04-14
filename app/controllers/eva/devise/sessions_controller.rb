@@ -22,7 +22,7 @@ module Eva
         if campagne.present?
           redirect_to url_campagne(code), allow_other_host: true
         else
-          code_erreur = t('active_admin.devise.login.evaluations.code_invalide')
+          code_erreur = t("active_admin.devise.login.evaluations.code_invalide")
           redirect_to new_compte_session_path(code: code, code_erreur: code_erreur)
         end
       end

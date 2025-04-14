@@ -1,7 +1,7 @@
 <div id="competences_transversales" class="page competences_transversales">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+  <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-  <h2><%= t('.titre') %></h2>
+  <h2><%= t(".titre") %></h2>
   <% unless @completude_competences_transversales %>
     <%= render Evaluation::AlerteIncompleteComponent.new %>
   <% end %>
@@ -12,7 +12,7 @@
         <div class="col">
           <% if @restitution_globale.interpretations_competences_transversales.blank? %>
             <div class="competences-transversales-vides">
-              <%= md t('.competences_fortes_vides') %>
+              <%= md t(".competences_fortes_vides") %>
             </div>
           <% end %>
 
@@ -23,6 +23,6 @@
       </div>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 </div>

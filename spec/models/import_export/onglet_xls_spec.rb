@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe ImportExport::OngletXls do
   let(:onglet_xls) do
-    entetes = [{ titre: 'Mon titre', taille: 20 }]
+    entetes = [ { titre: 'Mon titre', taille: 20 } ]
     workbook = Spreadsheet::Workbook.new
     described_class.new(ImportExport::ExportXls::WORKSHEET_DONNEES, workbook, entetes)
   end

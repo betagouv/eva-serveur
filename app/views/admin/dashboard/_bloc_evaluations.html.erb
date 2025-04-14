@@ -1,12 +1,12 @@
 <div class='bloc-evaluations bloc-apercu'>
   <div class='bloc-apercu-wrapper'>
     <div class='bloc-apercu-header'>
-      <h3><%= t('.titre') %></h3>
-      <%= link_to t('.voir_tout'), admin_evaluations_path %>
+      <h3><%= t(".titre") %></h3>
+      <%= link_to t(".voir_tout"), admin_evaluations_path %>
     </div>
 
-    <p class="evaluation-legende" aria-label="<%= t('.legende_sr') %>">
-      <%= render(PastilleComponent.new(etiquette: t('.legende_info'), couleur: 'alerte')) %>
+    <p class="evaluation-legende" aria-label="<%= t(".legende_sr") %>">
+      <%= render(PastilleComponent.new(etiquette: t(".legende_info"), couleur: "alerte")) %>
     </p>
   </div>
 
@@ -30,7 +30,7 @@
       </div>
       <div class='col-0 position-absolute carte__pastille'>
         <% if evaluation.illettrisme_potentiel? %>
-          <%= render(PastilleComponent.new(tooltip_content: t('components.pastille.illettrisme_potentiel'), couleur: 'alerte')) %>
+          <%= render(PastilleComponent.new(tooltip_content: t("components.pastille.illettrisme_potentiel"), couleur: "alerte")) %>
         <% end %>
       </div>
     </div>

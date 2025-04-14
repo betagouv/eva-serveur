@@ -15,10 +15,10 @@ class LienComponent < ViewComponent::Base
       description = description_extern(aria[:label])
       @params[:aria][:label] = description
     end
-    @params = @params.merge({ target: '_blank', title: description, rel: 'noopener' })
+    @params = @params.merge({ target: "_blank", title: description, rel: "noopener" })
   end
 
   def description_extern(description)
-    I18n.t('.lien_externe', texte_du_lien: description)
+    I18n.t(".lien_externe", texte_du_lien: description)
   end
 end

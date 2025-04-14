@@ -18,9 +18,9 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
 
     context "avec identification du danger sans avoir activé l'aide" do
       let(:evenements) do
-        [build(:evenement_demarrage),
+        [ build(:evenement_demarrage),
          build(:evenement_identification_danger,
-               donnees: { reponse: 'oui', danger: danger_visuo_spatial })]
+               donnees: { reponse: 'oui', danger: danger_visuo_spatial }) ]
       end
 
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE }
@@ -28,11 +28,11 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
 
     context "avec identification du danger après avoir activé l'aide" do
       let(:evenements) do
-        [build(:evenement_demarrage, date: 3.minutes.ago),
+        [ build(:evenement_demarrage, date: 3.minutes.ago),
          build(:activation_aide, date: 2.minutes.ago),
          build(:evenement_identification_danger,
                donnees: { reponse: 'oui', danger: danger_visuo_spatial },
-               date: 1.minute.ago)]
+               date: 1.minute.ago) ]
       end
 
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE_AVEC_AIDE }
@@ -40,11 +40,11 @@ describe Restitution::Securite::AttentionVisuoSpaciale do
 
     context "avec identification du danger avant avoir activé l'aide" do
       let(:evenements) do
-        [build(:evenement_demarrage, date: 3.minutes.ago),
+        [ build(:evenement_demarrage, date: 3.minutes.ago),
          build(:evenement_identification_danger,
                donnees: { reponse: 'oui', danger: danger_visuo_spatial },
                date: 2.minutes.ago),
-         build(:activation_aide, date: 1.minute.ago)]
+         build(:activation_aide, date: 1.minute.ago) ]
       end
 
       it { expect(metrique_attention_visuo_spaciale).to eq Competence::APTE }

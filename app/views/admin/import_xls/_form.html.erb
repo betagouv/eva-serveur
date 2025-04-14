@@ -1,7 +1,7 @@
 <%= form_with url: admin_import_xls_create_path, multipart: true, method: :post do |form| %>
   <div class="field">
     <%= form.label :file_xls, "Fichier XLS" %>
-    <%= form.file_field :file_xls, accept: '.xls', required: true %>
+    <%= form.file_field :file_xls, accept: ".xls", required: true %>
   </div>
 
   <%= form.hidden_field :model, value: model %>
@@ -9,6 +9,6 @@
   <%= form.hidden_field :redirect_to, value: redirect_to %>
 
   <div class="actions">
-    <%= form.submit 'Importer le fichier' %>
+    <%= form.submit "Importer le fichier" %>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ParcoursType do
-  menu parent: 'Parcours', if: proc { can? :manage, Compte }
+  menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :libelle, :actif, :position, :nom_technique,
                 :duree_moyenne, :description, :type_de_programme,
@@ -13,7 +13,7 @@ ActiveAdmin.register ParcoursType do
   filter :description
   filter :created_at
 
-  form partial: 'form'
+  form partial: "form"
 
   index do
     column :libelle do |pt|
@@ -25,12 +25,12 @@ ActiveAdmin.register ParcoursType do
     column :type_de_programme
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 end

@@ -16,7 +16,7 @@ describe Restitution::AvecEntrainement::TempsEntrainement do
 
     context 'avec un seul événement' do
       let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.zone.local(2019, 10, 9, 10, 2))]
+        [ build(:evenement_demarrage_entrainement, date: Time.zone.local(2019, 10, 9, 10, 2)) ]
       end
 
       it { expect(metrique_temps_entrainement).to eq 0.minutes }
@@ -24,11 +24,11 @@ describe Restitution::AvecEntrainement::TempsEntrainement do
 
     context "d'un entrainement complet" do
       let(:evenements) do
-        [build(:evenement_demarrage_entrainement, date: Time.zone.local(2019, 10, 9, 10, 2)),
+        [ build(:evenement_demarrage_entrainement, date: Time.zone.local(2019, 10, 9, 10, 2)),
          build(:evenement_identification_danger,
                donnees: { reponse: 'oui', danger: 'danger' },
                date: Time.zone.local(2019, 10, 9, 10, 3)),
-         build(:evenement_qualification_danger, date: Time.zone.local(2019, 10, 9, 10, 7))]
+         build(:evenement_qualification_danger, date: Time.zone.local(2019, 10, 9, 10, 7)) ]
       end
 
       it { expect(metrique_temps_entrainement).to eq 5.minutes }

@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 namespace :structure do
-  desc 'Assigne les régions pour les structures sans région'
+  desc "Assigne les régions pour les structures sans région"
   task assigne_region: :environment do
     Structure::AssigneRegionJob.perform_now
   end
 
-  desc 'Réassigne les régions des structures avec un code postal commençant par 21'
+  desc "Réassigne les régions des structures avec un code postal commençant par 21"
   task reassigne_region_corse: :environment do
-    structures = Structure.where(region: 'Corse').where('code_postal LIKE ?', '21%')
+    structures = Structure.where(region: "Corse").where("code_postal LIKE ?", "21%")
     structures.find_each do |structure|
       structure.geocode
       structure.save
@@ -16,7 +16,7 @@ namespace :structure do
     end
   end
 
-  desc 'Vérifie les regions avec le nouvel algo'
+  desc "Vérifie les regions avec le nouvel algo"
   task verifie_region: :environment do
     logger = RakeLogger.logger
     cps = Structure.group(:code_postal, :region).pluck(:code_postal, :region)
@@ -25,7 +25,7 @@ namespace :structure do
 
     count = 0
     cps.each do |cp, ancienne_region|
-      print '.'
+      print "."
 
       nouvelle_region = GeolocHelper.cherche_region(cp)
       if ancienne_region != nouvelle_region

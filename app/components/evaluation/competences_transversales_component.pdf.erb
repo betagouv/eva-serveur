@@ -1,7 +1,7 @@
 <div id="competences_transversales" class="page adaptation-pdf competences_transversales">
-  <%= render 'entete_page', restitution_globale: @restitution_globale %>
+  <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-  <h2 class="text-center my-4"><%= t('.titre') %></h2>
+  <h2 class="text-center my-4"><%= t(".titre") %></h2>
 
   <div class="panel">
     <div class="marges-page">
@@ -9,7 +9,7 @@
         <div class="col">
           <% if @restitution_globale.interpretations_competences_transversales.blank? %>
             <div class="competences-transversales-vides">
-              <%= md t('.competences_fortes_vides') %>
+              <%= md t(".competences_fortes_vides") %>
             </div>
           <% end %>
 
@@ -20,6 +20,6 @@
       </div>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 </div>

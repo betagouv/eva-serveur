@@ -24,6 +24,6 @@ class DonneeSociodemographique < ApplicationRecord
       lieu_scolarite,
       dernier_niveau_etude,
       derniere_situation
-    ].compact.join(' | ')
+    ].compact.join(" | ")
   end
 end

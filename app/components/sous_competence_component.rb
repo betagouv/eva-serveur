@@ -38,6 +38,6 @@ class SousCompetenceComponent < ViewComponent::Base
   private
 
   def traduction_path
-    'admin.evaluations.positionnement.sous_competences'
+    "admin.evaluations.positionnement.sous_competences"
   end
 end

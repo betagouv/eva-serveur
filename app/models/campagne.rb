@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'generateur_aleatoire'
+require "generateur_aleatoire"
 
 class Campagne < ApplicationRecord
   PERSONNALISATION = %w[plan_de_la_ville autopositionnement redaction].freeze
@@ -29,8 +29,8 @@ class Campagne < ApplicationRecord
   scope :de_la_structure, lambda { |structure|
     joins(:compte)
       .avec_nombre_evaluations_et_derniere_evaluation
-      .where('comptes.structure_id' => structure)
-      .order('date_derniere_evaluation DESC NULLS LAST')
+      .where("comptes.structure_id" => structure)
+      .order("date_derniere_evaluation DESC NULLS LAST")
   }
   scope :avec_nombre_evaluations_et_derniere_evaluation, lambda {
     left_outer_joins(:evaluations)
@@ -111,9 +111,9 @@ class Campagne < ApplicationRecord
   end
 
   def questionnaire_id(situation_configuration)
-    if situation_configuration.livraison_sans_redaction? && option_incluse?('redaction')
+    if situation_configuration.livraison_sans_redaction? && option_incluse?("redaction")
       Questionnaire.livraison_avec_redaction.id
-    elsif situation_configuration.bienvenue? && option_incluse?('autopositionnement')
+    elsif situation_configuration.bienvenue? && option_incluse?("autopositionnement")
       Questionnaire.bienvenue_avec_autopositionnement.id
     else
       situation_configuration.questionnaire_id

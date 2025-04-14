@@ -3,7 +3,7 @@
 class GenerateurAleatoire
   class << self
     def majuscules(longueur)
-      ('A'..'Z').to_a.sample(longueur).join
+      ("A".."Z").to_a.sample(longueur).join
     end
   end
 end

@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
-div class: 'bloc-mes-campagnes' do
-  h3 'Campagnes'
+div class: "bloc-mes-campagnes" do
+  h3 "Campagnes"
   if campagnes.present?
-    table_for campagnes, class: 'index_table' do
+    table_for campagnes, class: "index_table" do
       column :libelle do |campagne|
         link_to campagne.libelle, admin_campagne_path(campagne)
       end
       column :code
-      column t('activerecord.attributes.structure.date_derniere_evaluation') do |campagne|
+      column t("activerecord.attributes.structure.date_derniere_evaluation") do |campagne|
         if campagne.date_derniere_evaluation.present?
           l(campagne.date_derniere_evaluation, format: :sans_heure)
         end
       end
-      column :nombre_evaluations, class: 'text-right'
+      column :nombre_evaluations, class: "text-right"
       column :actions do |campagne|
-        link_to t('.voir'), admin_campagne_path(campagne), class: 'bouton-secondaire petit-bouton'
+        link_to t(".voir"), admin_campagne_path(campagne), class: "bouton-secondaire petit-bouton"
       end
     end
   else
-    div 'Pas de campagne à afficher pour le moment. Pour créer une campagne, rendez-vous sur ',
-        class: 'panel' do
+    div "Pas de campagne à afficher pour le moment. Pour créer une campagne, rendez-vous sur ",
+        class: "panel" do
       span do
-        link_to 'cette page.', new_admin_campagne_path
+        link_to "cette page.", new_admin_campagne_path
       end
     end
   end

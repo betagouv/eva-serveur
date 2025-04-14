@@ -1,26 +1,26 @@
 <% statistique = StatistiquesStructure.new(resource) %>
 
-<h3><%= t('.titre')%></h3>
+<h3><%= t(".titre")%></h3>
 <% if resource.instance_of?(StructureAdministrative) %>
-  <p class="statistiques__description"><%= t('.description.sous_titre') %></p>
+  <p class="statistiques__description"><%= t(".description.sous_titre") %></p>
   <div class="panel">
    <% evaluations = statistique.nombre_evaluations_des_12_derniers_mois %>
    <% if evaluations.present? %>
-     <%= column_chart evaluations, legend: 'bottom' %>
+     <%= column_chart evaluations, legend: "bottom" %>
    <% else %>
      Pas d'évaluation à afficher pour le moment
    <% end %>
   </div>
 
-  <p class="statistiques__description"><%= t('.description.repartition_evaluations') %></p>
+  <p class="statistiques__description"><%= t(".description.repartition_evaluations") %></p>
   <div class="panel">
    <% evaluations = statistique.repartition_evaluations %>
    <% if evaluations.present? %>
      <%= pie_chart evaluations, library: {
        plugins: {
          legend: {
-           position: 'right',
-           align: 'start',
+           position: "right",
+           align: "start",
          }
        }
      } %>
@@ -41,10 +41,10 @@
  <% end %>
 
 <% if current_compte.anlci? %>
-  <p class="statistiques__description"><%= t('.description.correlation_donnees_illettrisme') %></p>
+  <p class="statistiques__description"><%= t(".description.correlation_donnees_illettrisme") %></p>
   <div class="panel">
     <% Evaluation::SYNTHESES.each do |synthese| %>
-      <% next if synthese == 'aberrant' %>
+      <% next if synthese == "aberrant" %>
       <% donnees_par_synthese = statistique.correlation_entre_niveau_illettrisme_et_genre(synthese) %>
 
       <% if donnees_par_synthese.present? %>

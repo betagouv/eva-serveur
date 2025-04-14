@@ -31,7 +31,7 @@ describe Restitution::Maintenance::TempsNonMots do
         ]
       end
 
-      it { expect(metrique_temps_non_mots).to eq [0.01] }
+      it { expect(metrique_temps_non_mots).to eq [ 0.01 ] }
     end
 
     context "avec un événement d'identification non-mot incorrect" do
@@ -104,7 +104,7 @@ describe Restitution::Maintenance::TempsNonMots do
       end
 
       it 'ne prend en compte que les idenfifications correctes' do
-        expect(metrique_temps_non_mots).to eq [0.01, 1.86]
+        expect(metrique_temps_non_mots).to eq [ 0.01, 1.86 ]
       end
     end
   end

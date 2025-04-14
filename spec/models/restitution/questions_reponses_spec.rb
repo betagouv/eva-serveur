@@ -7,15 +7,15 @@ describe Restitution::QuestionsReponses do
   let(:bon_choix_q1) { create :choix, :bon }
   let(:bon_choix_qjauge) { create :choix, :bon }
   let(:question1) do
-    create :question_qcm, choix: [bon_choix_q1]
+    create :question_qcm, choix: [ bon_choix_q1 ]
   end
   let(:question_jauge) do
-    create :question_qcm, choix: [bon_choix_qjauge], type_qcm: :jauge
+    create :question_qcm, choix: [ bon_choix_qjauge ], type_qcm: :jauge
   end
 
   describe '#questions_et_reponses' do
     context "retourne aucune question et réponse si aucune n'a été répondu" do
-      let(:evenements) { [build(:evenement_demarrage)] }
+      let(:evenements) { [ build(:evenement_demarrage) ] }
 
       it { expect(restitution.questions_et_reponses).to eq([]) }
     end

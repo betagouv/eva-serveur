@@ -123,25 +123,25 @@ describe Restitution::Controle do
     end
 
     it 'enlève tout les événements de pièces' do
-      expect(restitution.enleve_premiers_evenements_pieces(4).evenements).to eql([demarrage])
+      expect(restitution.enleve_premiers_evenements_pieces(4).evenements).to eql([ demarrage ])
     end
 
     it 'enlève les x premiers événements de pièces' do
       restitution.enleve_premiers_evenements_pieces(2).evenements.tap do |evenements|
-        expect(evenements).to eql([demarrage, bien_placee])
+        expect(evenements).to eql([ demarrage, bien_placee ])
       end
     end
   end
 
   describe '#competences' do
-    let(:evenements) { [build(:evenement_demarrage)] }
+    let(:evenements) { [ build(:evenement_demarrage) ] }
 
     it 'retourne les compétences évaluées' do
-      expect(restitution.competences.keys).to eql([Competence::PERSEVERANCE,
+      expect(restitution.competences.keys).to eql([ Competence::PERSEVERANCE,
                                                    Competence::COMPREHENSION_CONSIGNE,
                                                    Competence::RAPIDITE,
                                                    Competence::COMPARAISON_TRI,
-                                                   Competence::ATTENTION_CONCENTRATION])
+                                                   Competence::ATTENTION_CONCENTRATION ])
     end
   end
 end

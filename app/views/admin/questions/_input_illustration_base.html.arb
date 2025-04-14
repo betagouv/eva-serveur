@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-content_type = content_type == :default ? illustration_content_types.join(',') : 'image/svg+xml'
-hint = hint.present? ? t(hint) : ''
+content_type = content_type == :default ? illustration_content_types.join(",") : "image/svg+xml"
+hint = hint.present? ? t(hint) : ""
 
 f.input nom,
         as: :file,
@@ -11,8 +11,8 @@ f.input nom,
 
 if image.attached? && f.object.errors[nom].blank?
   f.input nom_suppression, as: :boolean,
-                           label: t('.supprimer_illustration'),
+                           label: t(".supprimer_illustration"),
                            hint: image_tag(cdn_for(image),
-                                           class: 'image-preview',
+                                           class: "image-preview",
                                            alt: image.filename)
 end

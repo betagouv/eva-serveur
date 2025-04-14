@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-  <title><%= [content_for?(:title) ? yield(:title) : nil, ActiveAdmin.application.site_title(self)].compact.join(" | ") %></title>
+  <title><%= [ content_for?(:title) ? yield(:title) : nil, ActiveAdmin.application.site_title(self) ].compact.join(" | ") %></title>
 
   <% ActiveAdmin.application.stylesheets.each do |style, options| %>
     <% if ActiveAdmin.application.use_webpacker %>
@@ -34,7 +34,7 @@
 
   <div id="content_wrapper" class="<%= yield :classes_conteneur %>">
     <div class="groupe-titres">
-      <%= image_tag 'eva-logo-bleu.svg', class: 'logo-eva', alt: t('active_admin.devise.login.bienvenue')%>
+      <%= image_tag "eva-logo-bleu.svg", class: "logo-eva", alt: t("active_admin.devise.login.bienvenue")%>
       <h1><%= yield :titre %></h1>
       <% if yield(:sous_titre).present? %>
         <h2><%= yield :sous_titre %></h2>
@@ -49,7 +49,7 @@
       <%= yield %>
     </div>
   </div>
-  <%= render partial: 'components/footer' %>
+  <%= render partial: "components/footer" %>
 </div>
 </body>
 </html>

@@ -10,7 +10,7 @@ describe 'Questionnaires API', type: :request do
     let(:question4) { create :question_qcm }
 
     let(:questionnaire) do
-      create :questionnaire, questions: [question1, question2, question3, question4]
+      create :questionnaire, questions: [ question1, question2, question3, question4 ]
     end
 
     it 'retourne les questions' do

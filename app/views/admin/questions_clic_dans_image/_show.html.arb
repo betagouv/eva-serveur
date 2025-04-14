@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-panel 'Détails de la question' do
+panel "Détails de la question" do
   attributes_table_for question_clic_dans_image do
     row :id
     row :libelle
@@ -8,15 +8,15 @@ panel 'Détails de la question' do
     row :description
     row :metacompetence
     row :illustration do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.illustration }
     end
     row :zone_cliquable do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.zone_cliquable }
     end
     row :image_au_clic do
-      render partial: 'admin/questions/show_illustration',
+      render partial: "admin/questions/show_illustration",
              locals: { illustration: resource.image_au_clic }
     end
     intitule = question_clic_dans_image.transcription_intitule

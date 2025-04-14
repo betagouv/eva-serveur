@@ -28,25 +28,25 @@ describe StatistiquesStructure do
     context 'pour une structure locale' do
       let(:structure) { eva }
 
-      it { expect(resultat).to eq({ ['eva', mois_courant] => 1 }) }
+      it { expect(resultat).to eq({ [ 'eva', mois_courant ] => 1 }) }
     end
 
     context 'pour une structure administrative (département)' do
       let(:structure) { paris }
 
-      it { expect(resultat).to eq({ ['eva', mois_courant] => 1 }) }
+      it { expect(resultat).to eq({ [ 'eva', mois_courant ] => 1 }) }
     end
 
     context 'pour une structure administrative (régionale)' do
       let(:structure) { ile_de_france }
 
-      it { expect(resultat).to eq({ ['Paris', mois_courant] => 1 }) }
+      it { expect(resultat).to eq({ [ 'Paris', mois_courant ] => 1 }) }
     end
 
     context 'pour une structure administrative (nationale)' do
       let(:structure) { france }
 
-      it { expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 1 }) }
+      it { expect(resultat).to eq({ [ 'Ile-de-France', mois_courant ] => 1 }) }
 
       context "avec plusieurs évaluations pour l'Île-de-france" do
         let!(:val_de_marne) do
@@ -61,7 +61,7 @@ describe StatistiquesStructure do
           end
         end
 
-        it { expect(resultat).to eq({ ['Ile-de-France', mois_courant] => 2 }) }
+        it { expect(resultat).to eq({ [ 'Ile-de-France', mois_courant ] => 2 }) }
       end
     end
   end

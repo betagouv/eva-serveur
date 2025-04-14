@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'addressable/uri'
+require "addressable/uri"
 
-ActiveAdmin.register_page 'Dashboard' do
-  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
+ActiveAdmin.register_page "Dashboard" do
+  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
-  content title: proc { I18n.t('active_admin.dashboard') } do
-    render partial: 'dashboard',
+  content title: proc { I18n.t("active_admin.dashboard") } do
+    render partial: "dashboard",
            locals: {
              evaluations: evaluations,
              actualites: actualites,
@@ -33,7 +33,7 @@ ActiveAdmin.register_page 'Dashboard' do
     def message_incitation_compte_personnel
       return unless current_compte.compte_generique?
 
-      lien = new_admin_compte_path(compte: { statut_validation: 'acceptee' })
+      lien = new_admin_compte_path(compte: { statut_validation: "acceptee" })
       flash.now[:compte_generique] =
         "<span>#{t('.incitation_creation_compte_personnel', lien: lien)}</span>".html_safe
     end

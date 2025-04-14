@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 module ProConnectHelper
-  PC_CLIENT_ID = ENV.fetch('PRO_CONNECT_CLIENT_ID', nil)
-  PC_CLIENT_SECRET = ENV.fetch('PRO_CONNECT_CLIENT_SECRET', nil)
-  PC_BASE_URL = ENV.fetch('PRO_CONNECT_BASE_URL', nil)
+  PC_CLIENT_ID = ENV.fetch("PRO_CONNECT_CLIENT_ID", nil)
+  PC_CLIENT_SECRET = ENV.fetch("PRO_CONNECT_CLIENT_SECRET", nil)
+  PC_BASE_URL = ENV.fetch("PRO_CONNECT_BASE_URL", nil)
 
   class << self
     def auth_path(pc_state, pc_nonce, callback_url)
       query = {
-        response_type: 'code',
+        response_type: "code",
         client_id: PC_CLIENT_ID,
         redirect_uri: callback_url,
-        acr_values: 'eidas1',
-        scope: 'openid email usual_name given_name siret',
+        acr_values: "eidas1",
+        scope: "openid email usual_name given_name siret",
         state: pc_state,
         nonce: pc_nonce
       }
@@ -38,7 +38,7 @@ module ProConnectHelper
     end
 
     def decode_jwt(jwt)
-      decode = JWT.decode(jwt, PC_CLIENT_SECRET, true, { algorithm: 'HS256' })
+      decode = JWT.decode(jwt, PC_CLIENT_SECRET, true, { algorithm: "HS256" })
       yield(decode[0])
     rescue JWT::DecodeError => e
       Rails.logger.warn "erreur JWT: #{e}"
@@ -46,7 +46,7 @@ module ProConnectHelper
     end
 
     def verifie(id_token_jwt, nonce)
-      decode_jwt(id_token_jwt) { |id_token| id_token['nonce'] == nonce }
+      decode_jwt(id_token_jwt) { |id_token| id_token["nonce"] == nonce }
     end
 
     def compte(access_token)
@@ -59,14 +59,14 @@ module ProConnectHelper
     end
 
     def recupere_tokens(code, callback_url)
-      data = { grant_type: 'authorization_code',
+      data = { grant_type: "authorization_code",
                client_id: PC_CLIENT_ID, client_secret: PC_CLIENT_SECRET,
                code: code, redirect_uri: callback_url }
 
       res = Typhoeus.post(
         URI("#{PC_BASE_URL}/api/v2/token"),
         body: data.to_query,
-        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" }
       )
       return false unless res.success?
 
@@ -76,7 +76,7 @@ module ProConnectHelper
     def get_user_info(token)
       uri = URI("#{PC_BASE_URL}/api/v2/userinfo")
 
-      res = Typhoeus.get(uri, headers: { 'Authorization' => "Bearer #{token}" })
+      res = Typhoeus.get(uri, headers: { "Authorization" => "Bearer #{token}" })
       return false unless res.success?
 
       decode_jwt(res.body) { |user_info| user_info }

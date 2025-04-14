@@ -1,12 +1,12 @@
 <% structure = @compte_admin.structure %>
 
 <div style="font-size: 14px;">
-  <%= md t('.corps',
+  <%= md t(".corps",
           prenom: @compte_admin.prenom,
           structure: structure.display_name
           ) %>
 
   <div class="text-center" style="margin: 2rem 0;">
-    <%= link_to 'Créez votre première campagne', new_admin_campagne_url, class: 'bouton' %>
+    <%= link_to "Créez votre première campagne", new_admin_campagne_url, class: "bouton" %>
   </div>
 </div>

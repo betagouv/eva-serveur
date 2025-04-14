@@ -30,7 +30,7 @@ describe 'Admin - Restitution', type: :feature do
   describe 'rapport de la situation inventaire' do
     let(:situation) { create :situation_inventaire }
     let!(:evenements) do
-      [create(:evenement_saisie_inventaire, :echec, partie: partie)]
+      [ create(:evenement_saisie_inventaire, :echec, partie: partie) ]
     end
 
     before { visit admin_restitution_path(partie) }
@@ -42,7 +42,7 @@ describe 'Admin - Restitution', type: :feature do
     let(:situation) { create :situation_livraison }
     let(:bon_choix) { create :choix, :bon }
     let(:question_numeratie) do
-      create :question_qcm, nom_technique: 'agenda-entrainement', choix: [bon_choix]
+      create :question_qcm, nom_technique: 'agenda-entrainement', choix: [ bon_choix ]
     end
     let!(:evenements) do
       [
@@ -68,7 +68,7 @@ describe 'Admin - Restitution', type: :feature do
   describe "suppression d'une partie" do
     let(:situation) { create :situation_inventaire }
     let!(:evenements) do
-      [create(:evenement_saisie_inventaire, :echec, partie: partie)]
+      [ create(:evenement_saisie_inventaire, :echec, partie: partie) ]
     end
 
     before { visit admin_restitution_path(partie) }

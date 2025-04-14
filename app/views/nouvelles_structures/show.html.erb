@@ -1,56 +1,56 @@
-<% content_for :title, t('.title') %>
+<% content_for :title, t(".title") %>
 <% content_for :titre do %>
-  <%= t('.titre') -%>
+  <%= t(".titre") -%>
 <% end %>
 <% content_for :sous_titre do %>
   <%= @compte.structure.nom -%>
 <% end %>
-<% content_for :classes_conteneur do 'conteneur-elargi conteneur-invisible' end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <% if params[:mise_en_garde] == "affiche" %>
-  <%= render 'modal_mise_en_garde' %>
+  <%= render "modal_mise_en_garde" %>
 <% end %>
 <%= semantic_form_for @compte, url: nouvelle_structure_path do |compte| %>
-  <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys,[:prenom, :nom, :telephone, :email, :password, :password_confirmation, :"structure.nom", :"structure.code_postal", :"structure.type_structure"]) %>
+  <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :telephone, :email, :password, :password_confirmation, :"structure.nom", :"structure.code_postal", :"structure.type_structure" ]) %>
   <%= compte.semantic_fields_for :structure do |structure| %>
     <div class="panel">
-      <%= link_to t('structures.index.title'),
+      <%= link_to t("structures.index.title"),
                   structures_path,
-                  class: 'lien-retour',
-                  aria: { label: t('structures.index.description_lien_retour') } %>
-      <h3><%= t('.compte.titre') %></h3>
+                  class: "lien-retour",
+                  aria: { label: t("structures.index.description_lien_retour") } %>
+      <h3><%= t(".compte.titre") %></h3>
       <%= compte.inputs do %>
         <%= compte.input :prenom %>
         <%= compte.input :nom %>
         <%= compte.input :telephone %>
         <%= compte.input :email %>
         <%= compte.input :password %>
-        <%= compte.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
+        <%= compte.input :password_confirmation, required: true, wrapper_html: { class: "libelle-long" } %>
       <% end %>
     </div>
     <div class="panel">
-      <h3 class="mb-0"><%= t('.structure.titre') %></h3>
-      <p class="description"><%= t('.structure.description') %></p>
+      <h3 class="mb-0"><%= t(".structure.titre") %></h3>
+      <p class="description"><%= t(".structure.description") %></p>
       <%= structure.inputs do %>
-        <% structure.object.code_postal = params[:code_postal]&.delete('^0-9') if structure.object.code_postal.blank? %>
-        <%= structure.input :nom, placeholder: t('.placeholders.structure.nom') %>
+        <% structure.object.code_postal = params[:code_postal]&.delete("^0-9") if structure.object.code_postal.blank? %>
+        <%= structure.input :nom, placeholder: t(".placeholders.structure.nom") %>
         <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
-        <%= structure.input :code_postal, placeholder: t('.placeholders.structure.code_postal') %>
+        <%= structure.input :code_postal, placeholder: t(".placeholders.structure.code_postal") %>
         <%= structure.input :siret %>
       <% end %>
     </div>
   <% end %>
   <div class="panel">
     <%= compte.inputs do %>
-      <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: 'creation_compte' } %>
-      <%= compte.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
+      <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>
+      <%= compte.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
     <% end %>
     <%= recaptcha_tags %>
   </div>
   <div class="panel">
-    <%= md t('.actions.validation', email_contact: Eva::EMAIL_CONTACT) %>
+    <%= md t(".actions.validation", email_contact: Eva::EMAIL_CONTACT) %>
     <%= compte.actions do %>
-      <%= compte.action :submit, label: t('.creer_structure'), wrapper_html: { class: 'd-flex justify-content-end' } %>
+      <%= compte.action :submit, label: t(".creer_structure"), wrapper_html: { class: "d-flex justify-content-end" } %>
     <% end %>
   </div>
 <% end %>

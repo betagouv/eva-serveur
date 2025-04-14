@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
 if current_compte.email == Eva::EMAIL_DEMO
-  div class: 'panel' do
-    md t('admin.dashboard.alerte_compte_demo')
+  div class: "panel" do
+    md t("admin.dashboard.alerte_compte_demo")
   end
 end
 
 if current_compte.validation_refusee?
-  render 'validation_refusee'
+  render "validation_refusee"
 elsif prise_en_main.en_cours?
-  section class: 'mb-5' do
-    div class: 'row' do
-      div class: 'col-6 offset-1' do
-        h2 t('admin.dashboard.prise_en_main.titre'), class: 'text-center'
+  section class: "mb-5" do
+    div class: "row" do
+      div class: "col-6 offset-1" do
+        h2 t("admin.dashboard.prise_en_main.titre"), class: "text-center"
         render partial: "components/prise_en_main/etape_#{prise_en_main.etape_en_cours}",
                locals: { campagne: campagnes.first }
-        div class: 'd-flex w-100 justify-content-end' do
+        div class: "d-flex w-100 justify-content-end" do
           if prise_en_main.etape_en_cours == PriseEnMain::ETAPES.last
-            render BoutonComponent.new(t('admin.dashboard.prise_en_main.terminer'),
+            render BoutonComponent.new(t("admin.dashboard.prise_en_main.terminer"),
                                        quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :primary,
                                        method: :patch)
           elsif current_compte.structure_id.present?
-            render BoutonComponent.new(t('admin.dashboard.prise_en_main.quitter'),
+            render BoutonComponent.new(t("admin.dashboard.prise_en_main.quitter"),
                                        quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :secondary,
                                        method: :patch)
@@ -32,17 +32,17 @@ elsif prise_en_main.en_cours?
     end
   end
 elsif current_compte.validation_en_attente?
-  render 'validation_necessaire'
+  render "validation_necessaire"
 end
 
 if evaluations.present?
-  section class: 'section-evaluations' do
+  section class: "section-evaluations" do
     columns do
       column do
-        render 'bloc_evaluations', evaluations: evaluations
+        render "bloc_evaluations", evaluations: evaluations
       end
       column do
-        render 'admin/dashboard/mise_en_action/bloc_evaluations_sans_mise_en_action',
+        render "admin/dashboard/mise_en_action/bloc_evaluations_sans_mise_en_action",
                evaluations: evaluations_sans_mise_en_action
       end
     end
@@ -50,21 +50,21 @@ if evaluations.present?
 end
 
 if actualites.present? && prise_en_main.terminee?
-  section class: 'section-actualites' do
+  section class: "section-actualites" do
     columns do
-      render 'bloc_actualites', actualites: actualites
+      render "bloc_actualites", actualites: actualites
     end
   end
 end
 
 if campagnes.present?
   columns do
-    render 'campagnes', campagnes: campagnes
+    render "campagnes", campagnes: campagnes
   end
 end
 
 if !current_compte.cgu_acceptees?
-  render 'modal_confirmation_cgu'
+  render "modal_confirmation_cgu"
 elsif comptes_en_attente.present? && can?(:autoriser, Compte)
-  render 'modal_validation_comptes_en_attente'
+  render "modal_validation_comptes_en_attente"
 end

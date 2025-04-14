@@ -3,45 +3,45 @@
 module Restitution
   class CafeDeLaPlace < Base
     METRIQUES = {
-      'score_orientation' => {
-        'type' => :nombre,
-        'parametre' => :orientation,
-        'instance' => Evacob::ScoreModule.new
+      "score_orientation" => {
+        "type" => :nombre,
+        "parametre" => :orientation,
+        "instance" => Evacob::ScoreModule.new
       },
-      'score_lecture' => {
-        'type' => :nombre,
-        'parametre' => 'lecture',
-        'instance' => Evacob::ScoreMetacompetence.new
+      "score_lecture" => {
+        "type" => :nombre,
+        "parametre" => "lecture",
+        "instance" => Evacob::ScoreMetacompetence.new
       },
-      'score_comprehension' => {
-        'type' => :nombre,
-        'parametre' => 'comprehension',
-        'instance' => Evacob::ScoreMetacompetence.new
+      "score_comprehension" => {
+        "type" => :nombre,
+        "parametre" => "comprehension",
+        "instance" => Evacob::ScoreMetacompetence.new
       },
-      'score_production' => {
-        'type' => :nombre,
-        'parametre' => 'production',
-        'instance' => Evacob::ScoreMetacompetence.new
+      "score_production" => {
+        "type" => :nombre,
+        "parametre" => "production",
+        "instance" => Evacob::ScoreMetacompetence.new
       },
-      'score_hpar' => {
-        'type' => :nombre,
-        'parametre' => :hpar,
-        'instance' => Evacob::ScoreModule.new
+      "score_hpar" => {
+        "type" => :nombre,
+        "parametre" => :hpar,
+        "instance" => Evacob::ScoreModule.new
       },
-      'score_hgac' => {
-        'type' => :nombre,
-        'parametre' => :hgac,
-        'instance' => Evacob::ScoreModule.new
+      "score_hgac" => {
+        "type" => :nombre,
+        "parametre" => :hgac,
+        "instance" => Evacob::ScoreModule.new
       },
-      'score_hcvf' => {
-        'type' => :nombre,
-        'parametre' => :hcvf,
-        'instance' => Evacob::ScoreModule.new
+      "score_hcvf" => {
+        "type" => :nombre,
+        "parametre" => :hcvf,
+        "instance" => Evacob::ScoreModule.new
       },
-      'score_hpfb' => {
-        'type' => :nombre,
-        'parametre' => :hpfb,
-        'instance' => Evacob::ScoreModule.new
+      "score_hpfb" => {
+        "type" => :nombre,
+        "parametre" => :hpfb,
+        "instance" => Evacob::ScoreModule.new
       }
     }.freeze
 
@@ -56,8 +56,8 @@ module Restitution
 
     METRIQUES.each_key do |metrique|
       define_method metrique do
-        METRIQUES[metrique]['instance']
-          .calcule(evenements, METRIQUES[metrique]['parametre'])
+        METRIQUES[metrique]["instance"]
+          .calcule(evenements, METRIQUES[metrique]["parametre"])
       end
     end
 
@@ -75,7 +75,7 @@ module Restitution
       scores = scores_parcours_haut.values
       return ::Competence::NIVEAU_INDETERMINE if scores.include?(nil)
 
-      Competence::ProfilEvacob.new(self, 'score_parcours_haut', scores.sum).niveau
+      Competence::ProfilEvacob.new(self, "score_parcours_haut", scores.sum).niveau
     end
 
     def niveau_litteratie
@@ -105,10 +105,10 @@ module Restitution
 
     def scores_parcours_haut
       @scores_parcours_haut ||= {
-        hpar: partie.metriques['score_hpar'],
-        hgac: partie.metriques['score_hgac'],
-        hcvf: partie.metriques['score_hcvf'],
-        hpfb: partie.metriques['score_hpfb']
+        hpar: partie.metriques["score_hpar"],
+        hgac: partie.metriques["score_hgac"],
+        hcvf: partie.metriques["score_hcvf"],
+        hpfb: partie.metriques["score_hpfb"]
       }
     end
   end

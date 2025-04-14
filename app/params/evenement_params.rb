@@ -20,7 +20,7 @@ class EvenementParams
       date = params[:date]
       return if date.blank?
 
-      params[:date] = Time.strptime(date.to_s, '%Q')
+      params[:date] = Time.strptime(date.to_s, "%Q")
     end
   end
 end

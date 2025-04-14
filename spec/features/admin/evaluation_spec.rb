@@ -162,7 +162,7 @@ describe 'Admin - Evaluation', type: :feature do
       let(:situation) { build(:situation_inventaire) }
       let!(:partie) { create :partie, situation: situation, evaluation: mon_evaluation }
       let!(:evenement) { create :evenement_demarrage, partie: partie }
-      let(:restitution) { Restitution::Inventaire.new(ma_campagne, [evenement]) }
+      let(:restitution) { Restitution::Inventaire.new(ma_campagne, [ evenement ]) }
 
       it "n'affiche pas les situations jouées" do
         visit admin_evaluation_path(mon_evaluation)
@@ -187,12 +187,12 @@ describe 'Admin - Evaluation', type: :feature do
                  date: DateTime.now,
                  utilisateur: 'Roger',
                  efficience: 5,
-                 restitutions: [restitution])
+                 restitutions: [ restitution ])
         end
 
         before do
-          competences = [[Competence::ORGANISATION_METHODE, Competence::NIVEAU_4]]
-          interpretations = [[Competence::ORGANISATION_METHODE, 4.0]]
+          competences = [ [ Competence::ORGANISATION_METHODE, Competence::NIVEAU_4 ] ]
+          interpretations = [ [ Competence::ORGANISATION_METHODE, 4.0 ] ]
           allow(restitution_globale).to receive_messages(niveaux_competences: competences,
                                                          interpretations_competences_transversales: interpretations, structure: 'structure')
           allow(restitution_globale).to receive(:synthese)
@@ -249,10 +249,10 @@ describe 'Admin - Evaluation', type: :feature do
           it 'de litteratie et numératie' do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:litteratie)
-              .and_return([{ score_ccf: :palier0 }])
+              .and_return([ { score_ccf: :palier0 } ])
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:numeratie)
-              .and_return([{ score_numeratie: :palier0 }])
+              .and_return([ { score_numeratie: :palier0 } ])
             visit admin_evaluation_path(mon_evaluation)
 
             expect(page).to have_content 'Connaissance et compréhension du français'

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-div class: 'autres-actualites' do
+div class: "autres-actualites" do
   autres_actualites.each do |actualite|
-    div class: 'actualite' do
+    div class: "actualite" do
       render(Tag.new(
-               t(actualite.categorie, scope: 'activerecord.attributes.actualite.categories'),
+               t(actualite.categorie, scope: "activerecord.attributes.actualite.categories"),
                classes: "tag-categorie #{actualite.categorie}"
              ))
-      text_node link_to actualite.titre, [:admin, actualite], class: 'lien'
+      text_node link_to actualite.titre, [ :admin, actualite ], class: "lien"
     end
   end
 end

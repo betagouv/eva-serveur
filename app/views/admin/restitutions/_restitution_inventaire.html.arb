@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
-panel t('.informations_specifiques') do
+panel t(".informations_specifiques") do
   attributes_table_for resource do
-    row t('.ouverture_contenant'), &:nombre_ouverture_contenant
-    row t('.nombre_essais_validation'),
+    row t(".ouverture_contenant"), &:nombre_ouverture_contenant
+    row t(".nombre_essais_validation"),
         &:nombre_essais_validation
   end
 end
 
-panel t('.restitution_essais') do
+panel t(".restitution_essais") do
   table_for restitution.essais do
     nombre_essais = 0
-    column('') { |_e| "Essai #{nombre_essais += 1}" }
-    column t('admin.restitutions.evaluation.etat') do |essai|
+    column("") { |_e| "Essai #{nombre_essais += 1}" }
+    column t("admin.restitutions.evaluation.etat") do |essai|
       if essai.reussite?
-        status_tag t('admin.restitutions.evaluation.reussite'), class: 'green'
+        status_tag t("admin.restitutions.evaluation.reussite"), class: "green"
       elsif essai.abandon?
-        status_tag t('admin.restitutions.evaluation.abandon'), class: 'red'
+        status_tag t("admin.restitutions.evaluation.abandon"), class: "red"
       elsif essai.verifie?
-        status_tag t('admin.restitutions.evaluation.echec'), class: 'red'
+        status_tag t("admin.restitutions.evaluation.echec"), class: "red"
       else
-        status_tag t('admin.restitutions.evaluation.en_cours')
+        status_tag t("admin.restitutions.evaluation.en_cours")
       end
     end
-    column t('admin.restitutions.evaluation.temps') do |essai|
+    column t("admin.restitutions.evaluation.temps") do |essai|
       "+#{distance_of_time_in_words(essai.temps_total)}"
     end
-    column t('.ouverture_contenant'), &:nombre_ouverture_contenant
-    column t('.nombre_erreurs'), &:nombre_erreurs
-    column t('.nombre_de_non_remplissage'), &:nombre_de_non_remplissage
+    column t(".ouverture_contenant"), &:nombre_ouverture_contenant
+    column t(".nombre_erreurs"), &:nombre_erreurs
+    column t(".nombre_de_non_remplissage"), &:nombre_de_non_remplissage
   end
 end

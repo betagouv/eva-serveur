@@ -1,24 +1,24 @@
 <div id='numeratie' class='page page-numeratie'>
-  <h2><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
+  <h2><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
   <% if @place_du_marche && !@place_du_marche.evaluation_terminee? %>
     <%= render(Evaluation::AlerteIncompleteComponent.new) %>
   <% end %>
 
   <div class="<%= classes_panel %>">
     <div class='marges-page'>
-      <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+      <%= render "admin/evaluations/litteratie_numeratie_synthese",
         synthese: @synthese,
         scope: "admin.evaluations.numeratie.#{@profil}",
         icone: "icone_profil/icone_#{@profil}.svg" %>
       <% if @sous_competences %>
-        <%= render 'admin/evaluations/positionnement/sous_competences',
+        <%= render "admin/evaluations/positionnement/sous_competences",
             sous_competences: @sous_competences,
             competence: :numeratie %>
       <% end %>
       <%= render(Evaluation::AlertInterpreterResultatsComponent.new) %>
       <% if @place_du_marche %>
         <% route = admin_positionnement_partie_reponses_path(partie_id: @place_du_marche.partie.id)%>
-        <%= render partial: 'telechargement_reponses', locals: { route: route } %>
+        <%= render partial: "telechargement_reponses", locals: { route: route } %>
       <% end %>
     </div>
   </div>

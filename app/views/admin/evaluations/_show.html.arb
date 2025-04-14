@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-div class: 'evaluation' do
-  div class: 'row' do
-    div class: 'col-8' do
-      render 'details_evaluation'
-      render 'restitution_globale', pdf: false
-      render 'panel_administration' if can?(:manage, Compte)
+div class: "evaluation" do
+  div class: "row" do
+    div class: "col-8" do
+      render "details_evaluation"
+      render "restitution_globale", pdf: false
+      render "panel_administration" if can?(:manage, Compte)
     end
   end
 end

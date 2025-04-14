@@ -19,7 +19,7 @@ module Restitution
         evenements_situation.each do |e|
           if e.demarrage? || e.qualification_danger?
             date_evenement_precedent = e.date
-          elsif e.donnees['danger'] == danger && e.ouverture_zone_danger?
+          elsif e.donnees["danger"] == danger && e.ouverture_zone_danger?
             return e.date - date_evenement_precedent
           end
         end

@@ -1,11 +1,11 @@
 <% scope = "activerecord.attributes.mise_en_action.#{mise_en_action.questionnaire}" if mise_en_action %>
-<% pas_de_qualification = mise_en_action&.qualification == 'indetermine' %>
+<% pas_de_qualification = mise_en_action&.qualification == "indetermine" %>
 
-<div data-reponse="<%= reponse_mise_en_action %>" class="mise-en-action flex-column <%= modification_affichee ? 'd-flex' : 'hidden' %>">
+<div data-reponse="<%= reponse_mise_en_action %>" class="mise-en-action flex-column <%= modification_affichee ? "d-flex" : "hidden" %>">
   <span><%= t(".reponse_#{reponse_mise_en_action}_html") %></span>
   <% if affiche_qualification %>
-    <% contenu = mise_en_action&.qualification ? t("#{mise_en_action.qualification}", scope: scope) : '' %>
-    <span><%= render(Tag.new(contenu, classes: pas_de_qualification ? 'hidden' : '' )) %></span>
+    <% contenu = mise_en_action&.qualification ? t("#{mise_en_action.qualification}", scope: scope) : "" %>
+    <span><%= render(Tag.new(contenu, classes: pas_de_qualification ? "hidden" : "")) %></span>
   <% end %>
   <span>(<a href="#" class="modifier-mise-en-action"><%= t(".modifier_reponse") %></a>)</span>
 </div>

@@ -3,14 +3,14 @@
     <div class="modal-content fr-alert fr-alert--warning">
       <div class="modal-body">
         <div class='message'>
-          <h3><%= t('.titre') %></h3>
-          <p><%= md t('.message')%></p>
+          <h3><%= t(".titre") %></h3>
+          <p><%= md t(".message")%></p>
         </div>
         <div class='actions'>
-          <%= link_to t('.bouton_retour'), 'javascript:history.back()', class: 'bouton-secondaire petit-bouton' %>
-          <%= link_to t('.bouton'),
+          <%= link_to t(".bouton_retour"), "javascript:history.back()", class: "bouton-secondaire petit-bouton" %>
+          <%= link_to t(".bouton"),
             url_for(params.permit(:code_postal)),
-            class: 'bouton petit-bouton' %>
+            class: "bouton petit-bouton" %>
         </div>
       </div>
     </div>

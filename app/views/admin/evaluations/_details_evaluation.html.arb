@@ -1,72 +1,72 @@
 # frozen_string_literal: true
 
-div id: 'evaluation__details', class: 'row' do
-  div class: 'col col-6 mx-auto' do
+div id: "evaluation__details", class: "row" do
+  div class: "col col-6 mx-auto" do
     h1 render NomAnonymisableComponent.new(resource)
-    h2 t('.titre'), class: 'titre'
-    div class: 'card carte__conteneur', id: resource.id.to_s do
-      div class: 'row m-0' do
-        div class: 'col col-6 card-informations' do
+    h2 t(".titre"), class: "titre"
+    div class: "card carte__conteneur", id: resource.id.to_s do
+      div class: "row m-0" do
+        div class: "col col-6 card-informations" do
           if can?(:manage, Beneficiaire)
-            div class: 'row' do
-              div class: 'col-1' do
-                span 'Bénéficiaire'
+            div class: "row" do
+              div class: "col-1" do
+                span "Bénéficiaire"
               end
-              div class: 'col col-2' do
-                para auto_link(resource.beneficiaire), class: 'restitution-p'
+              div class: "col col-2" do
+                para auto_link(resource.beneficiaire), class: "restitution-p"
               end
             end
           end
-          div class: 'row' do
-            div class: 'col-1' do
-              span 'Campagne'
+          div class: "row" do
+            div class: "col-1" do
+              span "Campagne"
             end
-            div class: 'col col-2' do
-              para auto_link(resource.campagne), class: 'restitution-p'
+            div class: "col col-2" do
+              para auto_link(resource.campagne), class: "restitution-p"
             end
           end
-          div class: 'row' do
-            div class: 'col col-1' do
-              span Evaluation.human_attribute_name('debutee_le')
+          div class: "row" do
+            div class: "col col-1" do
+              span Evaluation.human_attribute_name("debutee_le")
             end
-            div class: 'col col-2' do
-              para l(resource.debutee_le, format: :avec_heure), class: 'restitution-p'
+            div class: "col col-2" do
+              para l(resource.debutee_le, format: :avec_heure), class: "restitution-p"
             end
           end
         end
-        div class: 'col-2 card-pdf' do
-          div image_tag 'source-aide-pdf.svg', alt: 'document PDF'
-          div class: 'mt-2' do
-            link_to('Exporter', {
+        div class: "col-2 card-pdf" do
+          div image_tag "source-aide-pdf.svg", alt: "document PDF"
+          div class: "mt-2" do
+            link_to("Exporter", {
                       parties_selectionnees: params[:parties_selectionnees],
                       format: :pdf
                     },
-                    class: 'bouton grand-bouton', target: '_blank', rel: 'noopener')
+                    class: "bouton grand-bouton", target: "_blank", rel: "noopener")
           end
         end
       end
       unless resource.complete?
-        div class: 'row m-0' do
-          div class: 'container card__banner bg-alerte d-flex' do
-            div(class: 'col-2 d-flex align-items-center justify-content-center') do
-              image_tag 'attention_icone.svg', class: 'banner__icone', alt: 'Attention'
+        div class: "row m-0" do
+          div class: "container card__banner bg-alerte d-flex" do
+            div(class: "col-2 d-flex align-items-center justify-content-center") do
+              image_tag "attention_icone.svg", class: "banner__icone", alt: "Attention"
             end
-            div class: 'col-6 supprime-espace-derniere-balise' do
+            div class: "col-6 supprime-espace-derniere-balise" do
               if resource.competences_de_base_incompletes?
-                md t('.evaluation_competences_de_base_incomplete')
+                md t(".evaluation_competences_de_base_incomplete")
               elsif resource.competences_transversales_incompletes?
-                md t('.evaluation_competences_transversales_incomplete')
+                md t(".evaluation_competences_transversales_incomplete")
               else
-                md t('.evaluation_incomplete')
+                md t(".evaluation_incomplete")
               end
             end
           end
         end
       end
       if resource.illettrisme_potentiel?
-        div class: 'row m-0' do
-          scope = 'admin.evaluations.details_evaluation'
-          render partial: 'suivi_accompagnement_illettrisme', locals: { scope: scope }
+        div class: "row m-0" do
+          scope = "admin.evaluations.details_evaluation"
+          render partial: "suivi_accompagnement_illettrisme", locals: { scope: scope }
         end
       end
     end

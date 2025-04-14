@@ -4,9 +4,9 @@ module ActiveAdmin
   module ActionsItemsSidebar
     module ResourceExtension
       ACTION_MAP = {
-        'new' => :create,
-        'edit' => :update,
-        'destroy' => :destroy
+        "new" => :create,
+        "edit" => :update,
+        "destroy" => :destroy
       }.freeze
 
       def initialize(*)
@@ -16,7 +16,7 @@ module ActiveAdmin
 
       def actions_items_sidebar_section
         ActiveAdmin::SidebarSection.new :action_items, if: au_moins_une_action_autorisee,
-                                                       class: 'action-items-sidebar' do
+                                                       class: "action-items-sidebar" do
           insert_tag view_factory.action_items,
                      active_admin_config.action_items_for(params[:action], self)
         end

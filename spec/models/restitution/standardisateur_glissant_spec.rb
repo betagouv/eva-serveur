@@ -13,7 +13,7 @@ describe Restitution::StandardisateurGlissant do
       proc_vide = proc do
         # procedure vide pour mock
       end
-      described_class.new ['temps_moyen_recherche_zones_dangers'], proc_vide, standards_figes
+      described_class.new [ 'temps_moyen_recherche_zones_dangers' ], proc_vide, standards_figes
     end
 
     it { expect(subject.moyennes_metriques).to eq('temps_moyen_recherche_zones_dangers' => 12) }
@@ -23,7 +23,7 @@ describe Restitution::StandardisateurGlissant do
   context 'peut ne pas recevoir de standards figés' do
     let(:subject) do
       described_class.new(
-        ['temps_moyen_recherche_zones_dangers'],
+        [ 'temps_moyen_recherche_zones_dangers' ],
         proc { Partie.where(situation: Situation.where(nom_technique: 'securite')) }
       )
     end

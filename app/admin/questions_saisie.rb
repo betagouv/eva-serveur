@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register QuestionSaisie do
-  menu parent: 'Parcours', if: proc { can? :manage, Compte }
+  menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :reponse_placeholder, :type_saisie, :aide,
@@ -18,16 +18,16 @@ ActiveAdmin.register QuestionSaisie do
   filter :nom_technique
 
   action_item :importer_question, only: :index do
-    link_to 'Importer questions saisies',
-            admin_import_xls_path(type: QuestionSaisie::QUESTION_TYPE, model: 'question',
+    link_to "Importer questions saisies",
+            admin_import_xls_path(type: QuestionSaisie::QUESTION_TYPE, model: "question",
                                   redirect_to: admin_questions_saisies_path)
   end
 
   action_item :exporter_question, only: :show do
-    link_to 'Exporter la question en XLS', admin_question_export_xls_path(question_id: params[:id])
+    link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
   end
 
-  form partial: 'form'
+  form partial: "form"
 
   index do
     column :libelle do |q|
@@ -39,12 +39,12 @@ ActiveAdmin.register QuestionSaisie do
     end
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 end

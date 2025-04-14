@@ -1,36 +1,36 @@
 # frozen_string_literal: true
 
-div id: 'votre_code_campagne', class: 'row' do
-  div class: 'col mx-auto' do
-    h2 'Votre code campagne'
-    div class: 'card campagne-code' do
-      div class: 'row m-0 card-informations' do
-        div md t('.explication_code')
+div id: "votre_code_campagne", class: "row" do
+  div class: "col mx-auto" do
+    h2 "Votre code campagne"
+    div class: "card campagne-code" do
+      div class: "row m-0 card-informations" do
+        div md t(".explication_code")
 
         attributes_table_for campagne do
           row(:code) do
-            div class: 'code' do
+            div class: "code" do
               rendu_code = []
               campagne.code.each_char do |c|
-                couleur = c == c.match(/[0-9]/) ? 'violet' : 'bleu'
+                couleur = c == c.match(/[0-9]/) ? "violet" : "bleu"
                 rendu_code << tag.span(c, class: couleur)
               end
               text_node safe_join(rendu_code)
             end
             code = campagne.code
-            button 'Copier le code', class: 'bouton-secondaire petit-bouton copier-coller',
+            button "Copier le code", class: "bouton-secondaire petit-bouton copier-coller",
                                      'data-clipboard-text': code
           end
           row(:url) do
             span text_node lien_campagne(campagne)
             url = url_campagne(campagne.code)
-            button "Copier l'URL", class: 'bouton-secondaire petit-bouton button copier-coller',
+            button "Copier l'URL", class: "bouton-secondaire petit-bouton button copier-coller",
                                    'data-clipboard-text': url
           end
         end
       end
-      div class: 'row m-0' do
-        render 'banniere_test_campagne'
+      div class: "row m-0" do
+        render "banniere_test_campagne"
       end
     end
   end

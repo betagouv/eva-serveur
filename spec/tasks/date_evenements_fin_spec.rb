@@ -12,7 +12,7 @@ describe 'nettoyage:date_evenements_fin' do
   let(:evenement_precedent) do
     create(:evenement, partie: partie, date: 2.days.ago.beginning_of_day)
   end
-  let!(:evenements) { [evenement_precedent, evenement_fin] }
+  let!(:evenements) { [ evenement_precedent, evenement_fin ] }
 
   before do
     allow(logger).to receive :info
@@ -35,7 +35,7 @@ describe 'nettoyage:date_evenements_fin' do
 
   context 'même date mais sans événement fin' do
     let(:autre_evenement) { create(:evenement, partie: partie, date: evenement_precedent.date) }
-    let!(:evenements) { [evenement_precedent, autre_evenement] }
+    let!(:evenements) { [ evenement_precedent, autre_evenement ] }
 
     it { expect(autre_evenement.reload.date).to eq evenement_precedent.date }
   end
@@ -48,7 +48,7 @@ describe 'nettoyage:date_evenements_fin' do
       create(:evenement, partie: autre_partie, date: 3.days.ago.beginning_of_day)
     end
 
-    let!(:evenements) { [evenement_autre_partie, evenement_fin] }
+    let!(:evenements) { [ evenement_autre_partie, evenement_fin ] }
 
     it { expect(evenement_fin.reload.date).to eq date_fin }
   end
@@ -56,7 +56,7 @@ describe 'nettoyage:date_evenements_fin' do
   context 'trie les événements par date' do
     let(:date_fin) { evenement_precedent.date }
     let(:evenement_le_plus_tot) { create(:evenement, partie: partie, date: date_fin - 1.minute) }
-    let!(:evenements) { [evenement_precedent, evenement_fin, evenement_le_plus_tot] }
+    let!(:evenements) { [ evenement_precedent, evenement_fin, evenement_le_plus_tot ] }
 
     it do
       expect(evenement_fin.reload.date - evenement_precedent.reload.date).to eq(0.001)

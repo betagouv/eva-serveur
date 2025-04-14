@@ -85,7 +85,7 @@ describe Restitution::Competence::ProfilEvacob do
 
     context 'quand le joueur a complété le niveau 1' do
       let(:derniere_question_niveau1) { 'N1Pvn4' }
-      let(:evenements) { [double(question_nom_technique: derniere_question_niveau1)] } # rubocop:disable RSpec/VerifiedDoubles
+      let(:evenements) { [ double(question_nom_technique: derniere_question_niveau1) ] } # rubocop:disable RSpec/VerifiedDoubles
 
       it do
         expect(

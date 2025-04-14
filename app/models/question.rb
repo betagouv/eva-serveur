@@ -6,7 +6,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   has_one_attached :illustration do |attachable|
     attachable.variant :defaut,
-                       resize_to_limit: [1080, 566],
+                       resize_to_limit: [ 1080, 566 ],
                        preprocessed: true,
                        saver: { quality: 90 },
                        format: :jpg
@@ -25,13 +25,13 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   has_many :transcriptions, dependent: :destroy
   has_one :transcription_intitule, lambda {
                                      where(categorie: :intitule)
-                                   }, class_name: 'Transcription', dependent: :destroy
+                                   }, class_name: "Transcription", dependent: :destroy
   has_one :transcription_modalite_reponse, lambda {
                                              where(categorie: :modalite_reponse)
-                                           }, class_name: 'Transcription', dependent: :destroy
+                                           }, class_name: "Transcription", dependent: :destroy
   has_one :transcription_consigne, lambda {
     where(categorie: :consigne)
-  }, class_name: 'Transcription', dependent: :destroy
+  }, class_name: "Transcription", dependent: :destroy
 
   scope :n_est_pas_une_sous_consigne, -> { where.not(type: QuestionSousConsigne::QUESTION_TYPE) }
   scope :preload_all_pour_as_json, lambda {
@@ -55,7 +55,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   delegate :score, :metacompetence, to: :question_data, allow_nil: true
 
   def display_name
-    [categorie, libelle].compact.join(' : ')
+    [ categorie, libelle ].compact.join(" : ")
   end
 
   def restitue_reponse(reponse)
@@ -76,10 +76,10 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def json_audio_fields
-    json = { 'consigne_audio' => transcription_consigne&.audio_url }
-    json['audio_url'] = audio_url
+    json = { "consigne_audio" => transcription_consigne&.audio_url }
+    json["audio_url"] = audio_url
     unless transcription_intitule&.complete?
-      json['intitule_audio'] =
+      json["intitule_audio"] =
         transcription_intitule&.audio_url
     end
     json
@@ -120,11 +120,11 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def est_principale?
-    nom_technique[2] == 'P'
+    nom_technique[2] == "P"
   end
 
   def est_un_rattrapage?
-    nom_technique[2] == 'R'
+    nom_technique[2] == "R"
   end
 
   private
@@ -136,7 +136,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def reject_transcriptions(attributes)
-    attributes['audio'].blank? && attributes['ecrit'].blank? if new_record?
+    attributes["audio"].blank? && attributes["ecrit"].blank? if new_record?
   end
 
   def supprime_attachments
@@ -156,11 +156,11 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def supprime_illustration?
     illustration.attached? &&
-      supprimer_illustration == '1' &&
+      supprimer_illustration == "1" &&
       !nouvelle_illustration?
   end
 
   def nouvelle_illustration?
-    attachment_changes && attachment_changes['illustration'].present?
+    attachment_changes && attachment_changes["illustration"].present?
   end
 end

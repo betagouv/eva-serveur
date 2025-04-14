@@ -22,7 +22,7 @@ describe Restitution::ScoresNiveau2 do
     let(:partie) { double(situation_id: situation_id) }
 
     it do
-      scores = described_class.new([partie],
+      scores = described_class.new([ partie ],
                                    { situation_id => standardisateur })
       allow(partie).to receive(:metriques).and_return({ 'score_ccf' => 110 })
       allow(standardisateur).to receive(:standardise).with(:score_ccf, 110).and_return(1.1)
@@ -35,7 +35,7 @@ describe Restitution::ScoresNiveau2 do
     let(:partie2) { double(situation_id: situation_id) }
 
     it do
-      scores = described_class.new([partie1, partie2],
+      scores = described_class.new([ partie1, partie2 ],
                                    { situation_id => standardisateur })
       allow(partie1).to receive(:metriques).and_return({ 'score_ccf' => 110 })
       allow(partie2).to receive(:metriques).and_return({ 'score_ccf' => 120 })
@@ -52,7 +52,7 @@ describe Restitution::ScoresNiveau2 do
     let(:partie2) { double(situation_id: situation_id) }
 
     it do
-      scores = described_class.new([partie1, partie2],
+      scores = described_class.new([ partie1, partie2 ],
                                    { situation_id => standardisateur })
       allow(partie1).to receive(:metriques)
         .and_return({ 'score_ccf' => 110, 'score_memorisation' => 120 })

@@ -29,11 +29,11 @@ class BoutonComponent < ViewComponent::Base
     @url = url
     @type = type
     @params = params
-    @params[:class] ||= ''
+    @params[:class] ||= ""
     @params[:class] += " #{classes}"
   end
 
   def classes
-    BUTTON_TYPE_MAPPINGS[@type].join(' ')
+    BUTTON_TYPE_MAPPINGS[@type].join(" ")
   end
 end

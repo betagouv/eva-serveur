@@ -2,8 +2,8 @@
   <div class="d-flex align-items-center">
     <% if presence_pastille? %>
      <%= render(PastilleComponent.new(
-                   couleur: evaluation.illettrisme_potentiel? ? 'alerte' : '',
-                   tooltip_content: I18n.t('components.pastille.illettrisme_potentiel')
+                   couleur: evaluation.illettrisme_potentiel? ? "alerte" : "",
+                   tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
          ))%>
     <% end %>
     <%= link_to admin_evaluation_path(evaluation), class: "evaluation__nom" do %>
@@ -11,11 +11,11 @@
     <% end %>
   </div>
   <% responsable = evaluation.responsable_suivi %>
-  <div class= "evaluation__suivi-par <%= presence_pastille? ? '' : 'ml-0' %>">
+  <div class= "evaluation__suivi-par <%= presence_pastille? ? "" : "ml-0" %>">
     <% if responsable.present? %>
-      <%= t('.suivi_par') %> <%= link_to(responsable.display_name, admin_compte_path(responsable), class: 'lien-secondaire') %>
+      <%= t(".suivi_par") %> <%= link_to(responsable.display_name, admin_compte_path(responsable), class: "lien-secondaire") %>
     <% else %>
-      <%= t('.pas_de_responsable') %>
+      <%= t(".pas_de_responsable") %>
     <% end %>
   </div>
 </div>

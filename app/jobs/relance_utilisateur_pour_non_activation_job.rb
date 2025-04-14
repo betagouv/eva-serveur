@@ -16,7 +16,7 @@ class RelanceUtilisateurPourNonActivationJob < ApplicationJob
     Campagne.left_outer_joins(:evaluations)
             .where(compte: compte)
             .group(:compte_id)
-            .pluck('COUNT(evaluations.id)')
+            .pluck("COUNT(evaluations.id)")
             .all?(&:zero?)
   end
 end

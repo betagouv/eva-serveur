@@ -1,43 +1,43 @@
 # frozen_string_literal: true
 
-div class: 'referentiel_anlci bg-information' do
-  scope = 'admin.restitutions.references'
-  div class: 'row marges-page' do
-    div(class: 'col-auto col-icone-info') do
-      image_tag 'info.svg', class: 'icone', alt: 'Information'
+div class: "referentiel_anlci bg-information" do
+  scope = "admin.restitutions.references"
+  div class: "row marges-page" do
+    div(class: "col-auto col-icone-info") do
+      image_tag "info.svg", class: "icone", alt: "Information"
     end
-    div class: 'col' do
-      div class: 'col' do
-        div class: 'row' do
-          div(class: 'col texte-explications') { md t('explications-cefr', scope: scope) }
+    div class: "col" do
+      div class: "col" do
+        div class: "row" do
+          div(class: "col texte-explications") { md t("explications-cefr", scope: scope) }
         end
       end
-      div class: 'row pl-2 pb-3 pt-3 align-items-center' do
-        div class: 'col-auto' do
-          div t('francais', scope: scope)
-          div t('ordre', scope: scope), class: 'ordre'
+      div class: "row pl-2 pb-3 pt-3 align-items-center" do
+        div class: "col-auto" do
+          div t("francais", scope: scope)
+          div t("ordre", scope: scope), class: "ordre"
         end
-        div class: 'col' do
+        div class: "col" do
           %w[pre_A1 A1 A2 B1].each do |badge|
             text_node image_tag "badges/cefr/#{badge}-referentiel.svg",
-                                class: 'badge-references',
+                                class: "badge-references",
                                 alt: t(badge, scope: scope)
           end
         end
 
-        div class: 'col-auto' do
-          div t('mathematiques', scope: scope)
-          div t('ordre', scope: scope), class: 'ordre'
+        div class: "col-auto" do
+          div t("mathematiques", scope: scope)
+          div t("ordre", scope: scope), class: "ordre"
         end
-        div class: 'col' do
+        div class: "col" do
           %w[pre_X1 X1 X2 Y1].each do |badge|
             text_node image_tag "badges/cefr/#{badge}-referentiel.svg",
-                                class: 'badge-references',
+                                class: "badge-references",
                                 alt: t(badge, scope: scope)
           end
         end
       end
-      div(class: 'col texte-explications') { md t('explications-lien', scope: scope) }
+      div(class: "col texte-explications") { md t("explications-lien", scope: scope) }
     end
   end
 end

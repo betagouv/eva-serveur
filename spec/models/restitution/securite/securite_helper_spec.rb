@@ -8,7 +8,7 @@ describe Restitution::Securite::SecuriteHelper do
     let(:e2) { Evenement.new donnees: { 'danger' => 'camion' } }
 
     it 'trie les dangers par ordre alphabetique' do
-      expect(described_class.filtre_par_danger([e1, e2], &:present?).keys)
+      expect(described_class.filtre_par_danger([ e1, e2 ], &:present?).keys)
         .to eql(%w[camion signalisation])
     end
   end

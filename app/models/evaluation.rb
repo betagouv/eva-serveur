@@ -19,7 +19,7 @@ class Evaluation < ApplicationRecord
 
   belongs_to :campagne
   belongs_to :beneficiaire
-  belongs_to :responsable_suivi, optional: true, class_name: 'Compte'
+  belongs_to :responsable_suivi, optional: true, class_name: "Compte"
 
   has_one :conditions_passation, dependent: :destroy
   has_one :donnee_sociodemographique, dependent: :destroy
@@ -106,7 +106,7 @@ class Evaluation < ApplicationRecord
   end
 
   def illettrisme_potentiel?
-    synthese_competences_de_base == 'illettrisme_potentiel' ||
+    synthese_competences_de_base == "illettrisme_potentiel" ||
       positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?
   end
 

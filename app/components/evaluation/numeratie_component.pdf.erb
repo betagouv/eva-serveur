@@ -1,13 +1,13 @@
 <% @sous_competences = @sous_competences&.to_a %>
 
 <div class="page page-numeratie">
-  <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+  <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
   <div class="content">
-    <h2 class="text-center"><%= t('titre', scope: 'admin.restitutions.numeratie') %></h2>
+    <h2 class="text-center"><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
 
     <%= render(
-      'litteratie_numeratie_synthese',
+      "litteratie_numeratie_synthese",
       synthese: @synthese,
       scope: "admin.evaluations.numeratie.#{@profil}",
       icone: "icone_profil/icone_#{@profil}.svg"
@@ -20,12 +20,12 @@
     <% end %>
   </div>
 
-  <%= render 'pied_page' %>
+  <%= render "pied_page" %>
 </div>
 
 <% if @sous_competences %>
   <div class="page page-numeratie">
-    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content">
       <% @sous_competences[2..4].each do |sous_competence| %>
@@ -33,14 +33,14 @@
       <% end %>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
-      <h2><%= t('titre_details', scope: 'admin.restitutions.numeratie') %></h2>
+      <h2><%= t("titre_details", scope: "admin.restitutions.numeratie") %></h2>
       <% @sous_competences[0..1].each do |sous_competence| %>
         <% criteres = sous_competence[1].criteres %>
         <% sous_competence_component = SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]) %>
@@ -54,11 +54,11 @@
       <% end %>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
       <% @sous_competences[2..3].each do |sous_competence| %>
@@ -74,11 +74,11 @@
       <% end %>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render 'admin/evaluations/entete_page', restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
       <% @sous_competences[4..4].each do |sous_competence| %>
@@ -94,6 +94,6 @@
       <% end %>
     </div>
 
-    <%= render 'pied_page' %>
+    <%= render "pied_page" %>
   </div>
 <% end %>

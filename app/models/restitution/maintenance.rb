@@ -1,41 +1,41 @@
 # frozen_string_literal: true
 
-require_relative '../../decorators/evenement_maintenance'
+require_relative "../../decorators/evenement_maintenance"
 
 module Restitution
   class Maintenance < AvecEntrainement
     METRIQUES = {
-      'temps_total' => {
-        'type' => :nombre,
-        'instance' => Base::TempsTotal.new
+      "temps_total" => {
+        "type" => :nombre,
+        "instance" => Base::TempsTotal.new
       },
-      'temps_entrainement' => {
-        'type' => :nombre,
-        'instance' => AvecEntrainement::TempsEntrainement.new
+      "temps_entrainement" => {
+        "type" => :nombre,
+        "instance" => AvecEntrainement::TempsEntrainement.new
       },
-      'nombre_bonnes_reponses_francais' => {
-        'type' => :nombre,
-        'instance' => Maintenance::NombreBonnesReponsesMotFrancais.new
+      "nombre_bonnes_reponses_francais" => {
+        "type" => :nombre,
+        "instance" => Maintenance::NombreBonnesReponsesMotFrancais.new
       },
-      'nombre_bonnes_reponses_non_mot' => {
-        'type' => :nombre,
-        'instance' => Maintenance::NombreBonnesReponsesNonMot.new
+      "nombre_bonnes_reponses_non_mot" => {
+        "type" => :nombre,
+        "instance" => Maintenance::NombreBonnesReponsesNonMot.new
       },
-      'nombre_non_reponses' => {
-        'type' => :nombre,
-        'instance' => Maintenance::NombreNonReponses.new
+      "nombre_non_reponses" => {
+        "type" => :nombre,
+        "instance" => Maintenance::NombreNonReponses.new
       },
-      'temps_moyen_mots_francais' => {
-        'type' => :nombre,
-        'instance' => Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new)
+      "temps_moyen_mots_francais" => {
+        "type" => :nombre,
+        "instance" => Metriques::Moyenne.new(Maintenance::TempsMotsFrancais.new)
       },
-      'temps_moyen_non_mots' => {
-        'type' => :nombre,
-        'instance' => Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
+      "temps_moyen_non_mots" => {
+        "type" => :nombre,
+        "instance" => Metriques::Moyenne.new(Maintenance::TempsNonMots.new)
       },
-      'score_ccf' => {
-        'type' => :nombre,
-        'instance' => Maintenance::ScoreVocabulaire.new
+      "score_ccf" => {
+        "type" => :nombre,
+        "instance" => Maintenance::ScoreVocabulaire.new
       }
     }.freeze
 
@@ -46,7 +46,7 @@ module Restitution
 
     METRIQUES.each_key do |metrique|
       define_method metrique do
-        METRIQUES[metrique]['instance']
+        METRIQUES[metrique]["instance"]
           .calcule(evenements_situation, evenements_entrainement)
       end
     end

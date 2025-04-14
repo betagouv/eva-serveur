@@ -6,7 +6,7 @@ class StructureMailer < ApplicationMailer
     @compte = params[:compte]
 
     mail(to: @compte.email,
-         subject: t('.objet', structure: @structure.display_name))
+         subject: t(".objet", structure: @structure.display_name))
   end
 
   def relance_creation_campagne
@@ -14,7 +14,7 @@ class StructureMailer < ApplicationMailer
 
     mail(
       to: @compte_admin.email,
-      subject: t('.objet', prenom: @compte_admin.prenom)
+      subject: t(".objet", prenom: @compte_admin.prenom)
     )
   end
 end

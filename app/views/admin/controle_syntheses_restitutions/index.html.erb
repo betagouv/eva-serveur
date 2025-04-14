@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-  <title><%= [@page_title, ActiveAdmin.application.site_title(self)].compact.join(" | ") %></title>
+  <title><%= [ @page_title, ActiveAdmin.application.site_title(self) ].compact.join(" | ") %></title>
 
   <% ActiveAdmin.application.stylesheets.each do |style, options| %>
     <% if ActiveAdmin.application.use_webpacker %>
@@ -32,7 +32,7 @@
             <div class="panel">
               <div class="marges-page">
                 <div class="page">
-                  <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                  <%= render "admin/evaluations/litteratie_numeratie_synthese",
                     synthese: synthese,
                     scope: "admin.restitutions.cefr.#{synthese}",
                     icone: "punaise-#{synthese}.svg" %>
@@ -45,7 +45,7 @@
           <% @syntheses_positionnement_litteratie.each do |donnees| -%>
             <div class="page">
               <div class="panel">
-                <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                <%= render "admin/evaluations/litteratie_numeratie_synthese",
                   synthese: donnees[1],
                   scope: "admin.evaluations.litteratie.#{donnees[0]}",
                   icone: "icone_profil/icone_#{donnees[0]}.svg"%>
@@ -58,7 +58,7 @@
           <% @syntheses_positionnement_numeratie.each do |donnees| -%>
             <div class="page">
               <div class="panel">
-                <%= render 'admin/evaluations/litteratie_numeratie_synthese',
+                <%= render "admin/evaluations/litteratie_numeratie_synthese",
                   synthese: donnees[1],
                   scope: "admin.evaluations.numeratie.#{donnees[0]}",
                   icone: "icone_profil/icone_#{donnees[0]}.svg" %>
@@ -70,24 +70,24 @@
           <h2>Sous compétences de diagnostic CEFR</h2>
           <div>
             <% @sous_competences_diagnostic.each do |donnees| -%>
-              <%= render 'admin/evaluations/competence_niveau1',
+              <%= render "admin/evaluations/competence_niveau1",
                 competence: donnees[0],
                 niveau: donnees[1],
-                referentiel: 'cefr'
+                referentiel: "cefr"
               %>
             <% end -%>
           </div>
 
           <h2>Sous compétences de positionnement littératie ANLCI</h2>
           <div>
-            <%= render 'admin/evaluations/positionnement/sous_competences',
+            <%= render "admin/evaluations/positionnement/sous_competences",
               sous_competences: @sous_competences_positionnement_litteratie,
               competence: :litteratie %>
           </div>
 
           <h2>Sous compétences de positionnement numératie ANLCI</h2>
           <div>
-            <%= render 'admin/evaluations/positionnement/sous_competences',
+            <%= render "admin/evaluations/positionnement/sous_competences",
               sous_competences: @sous_competences_positionnement_numeratie,
               competence: :numeratie %>
           </div>

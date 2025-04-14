@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StructureLocale < Structure
-  TYPE_NON_COMMUNIQUE = 'non_communique'
+  TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[
     AFPA
     apprentissage
@@ -21,7 +21,7 @@ class StructureLocale < Structure
   ].freeze
 
   validates :code_postal, :type_structure, presence: true
-  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [TYPE_NON_COMMUNIQUE]) }
+  validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }
   validates :code_postal, numericality: { only_integer: true }, length: { is: 5 },
                           unless: proc { |s| s.code_postal == TYPE_NON_COMMUNIQUE }
 
@@ -33,13 +33,13 @@ class StructureLocale < Structure
 
   def cible_evaluation
     case type_structure
-    when 'mission_locale', 'orientation_scolaire', 'e2c', 'SMA'
-      'jeunes'
-    when 'SIAE', 'cap_emploi' then "demandeurs d'emploi"
-    when 'service_insertion_collectivite' then 'usagers'
-    when 'organisme_formation' then 'stagiaires'
+    when "mission_locale", "orientation_scolaire", "e2c", "SMA"
+      "jeunes"
+    when "SIAE", "cap_emploi" then "demandeurs d'emploi"
+    when "service_insertion_collectivite" then "usagers"
+    when "organisme_formation" then "stagiaires"
     else
-      'bénéficiaires'
+      "bénéficiaires"
     end
   end
 end

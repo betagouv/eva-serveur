@@ -1,46 +1,46 @@
 # frozen_string_literal: true
 
-div class: 'card__banner card__banner--alert w-100 d-flex align-items-center bg-erreur' do
+div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-erreur" do
   case demande
   when :nouvelle_inscription
-    div image_tag 'icones/icone-enveloppe.svg', class: 'banner__icone', alt: ''
+    div image_tag "icones/icone-enveloppe.svg", class: "banner__icone", alt: ""
     div do
-      scope = 'components.prise_en_main.etapes.confirmation_email'
-      h4 t('titre', scope: scope), class: 'banner__titre'
-      text_node md t('description', scope: scope, email: current_compte.email_a_confirmer)
-      div class: 'd-flex justify-content-between align-items-center banner__action' do
-        div md t('question', scope: scope)
+      scope = "components.prise_en_main.etapes.confirmation_email"
+      h4 t("titre", scope: scope), class: "banner__titre"
+      text_node md t("description", scope: scope, email: current_compte.email_a_confirmer)
+      div class: "d-flex justify-content-between align-items-center banner__action" do
+        div md t("question", scope: scope)
         div do
-          link_to t('action', scope: scope),
+          link_to t("action", scope: scope),
                   new_confirmation_path(current_compte, email: current_compte.email_a_confirmer),
-                  class: 'bouton petit-bouton bouton-carte-principal text-center'
+                  class: "bouton petit-bouton bouton-carte-principal text-center"
         end
       end
     end
   when :modification_email
-    div class: 'w-100' do
+    div class: "w-100" do
       text_node md t(".#{demande}.demande_effectuee")
-      div class: 'd-flex justify-content-between' do
+      div class: "d-flex justify-content-between" do
         div do
           div t(".#{demande}.email_envoye_a")
-          span compte.unconfirmed_email, class: 'font-weight-bold'
+          span compte.unconfirmed_email, class: "font-weight-bold"
         end
         div do
-          link_to t('.renvoyer_email'),
+          link_to t(".renvoyer_email"),
                   new_confirmation_path(compte, email: compte.email_a_confirmer),
-                  class: 'bouton petit-bouton bouton-carte-principal text-center'
+                  class: "bouton petit-bouton bouton-carte-principal text-center"
         end
       end
     end
   when :confirmation_autre_compte
-    div class: 'd-flex justify-content-between w-100' do
-      div class: 'align-self-center' do
+    div class: "d-flex justify-content-between w-100" do
+      div class: "align-self-center" do
         div t(".#{demande}.email_non_confirme")
       end
       div do
-        link_to t('.renvoyer_email'),
+        link_to t(".renvoyer_email"),
                 new_confirmation_path(compte, email: compte.email_a_confirmer),
-                class: 'bouton petit-bouton bouton-carte-principal text-center'
+                class: "bouton petit-bouton bouton-carte-principal text-center"
       end
     end
   end

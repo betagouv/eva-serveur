@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Evenement do
-  config.sort_order = 'date_desc'
+  config.sort_order = "date_desc"
   belongs_to :campagne
   includes partie: %i[situation evaluation]
 
-  filter :partie_situation_nom_technique, label: 'Situation',
+  filter :partie_situation_nom_technique, label: "Situation",
                                           as: :select,
                                           collection: proc { Situation.pluck(:nom_technique) }
   filter :date

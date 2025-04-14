@@ -236,11 +236,11 @@ describe Restitution::Inventaire do
         build(:evenement_demarrage)
       ]
       restitution = described_class.new(campagne, evenements)
-      expect(restitution.competences.keys).to eql([Competence::PERSEVERANCE,
+      expect(restitution.competences.keys).to eql([ Competence::PERSEVERANCE,
                                                    Competence::COMPREHENSION_CONSIGNE,
                                                    Competence::RAPIDITE,
                                                    Competence::VIGILANCE_CONTROLE,
-                                                   Competence::ORGANISATION_METHODE])
+                                                   Competence::ORGANISATION_METHODE ])
     end
   end
 

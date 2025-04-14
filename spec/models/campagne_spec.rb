@@ -45,7 +45,7 @@ describe Campagne, type: :model do
       end
 
       it "retourne les campagnes d'une structure par ordre d'activité" do
-        expect(campagnes.all.map(&:libelle)).to eql ['active', 'moins active', 'non active']
+        expect(campagnes.all.map(&:libelle)).to eql [ 'active', 'moins active', 'non active' ]
       end
 
       it "retourne le nombre d'évaluations pour une campagne" do

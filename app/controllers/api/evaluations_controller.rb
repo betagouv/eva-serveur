@@ -6,7 +6,7 @@ module Api
       evaluation = Evaluation.new(evaluation_params)
       initialise_conditions_passation(evaluation.conditions_passation)
       if evaluation.save
-        render partial: 'evaluation',
+        render partial: "evaluation",
                locals: { evaluation: evaluation },
                status: :created
       else
@@ -18,7 +18,7 @@ module Api
       ActiveRecord::Base.transaction do
         @evaluation = Evaluation.find(evaluation_params[:id])
         if @evaluation.update evaluation_params
-          render partial: 'evaluation',
+          render partial: "evaluation",
                  locals: { evaluation: @evaluation }
         else
           retourne_erreur(@evaluation)

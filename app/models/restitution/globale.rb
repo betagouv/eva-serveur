@@ -111,7 +111,7 @@ module Restitution
 
     def extraie_competences_depuis_restitutions
       moyenne_competences.each_with_object([]) do |(competence, niveaux), memo|
-        memo << [competence, niveaux.sum.fdiv(niveaux.size)]
+        memo << [ competence, niveaux.sum.fdiv(niveaux.size) ]
       end
     end
 

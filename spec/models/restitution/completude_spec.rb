@@ -21,11 +21,11 @@ describe Restitution::Completude do
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
                                             Evaluation::SITUATION_COMPETENCES_TRANSVERSALES)
-                                      .and_return([controle.id])
+                                      .and_return([ controle.id ])
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
                                             Evaluation::SITUATION_COMPETENCES_BASE)
-                                      .and_return([livraison.id])
+                                      .and_return([ livraison.id ])
       end
 
       context "quand aucune situations n'a été complétée" do

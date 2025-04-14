@@ -7,7 +7,7 @@ describe ImportExport::Questions::ImportExportDonnees do
 
   describe '#exporte_donnees' do
     subject(:service) do
-      described_class.new(questions: [question], type: question.type)
+      described_class.new(questions: [ question ], type: question.type)
     end
 
     let!(:question) { create(:question_clic_dans_image) }

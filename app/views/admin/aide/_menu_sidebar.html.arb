@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-div class: 'menu-transverse' do
-  div class: 'menu' do
+div class: "menu-transverse" do
+  div class: "menu" do
     ul do
       li do
-        a href: '#aide_contact' do
-          text_node t('.aide_contact')
+        a href: "#aide_contact" do
+          text_node t(".aide_contact")
         end
       end
       categories.each do |categorie|
@@ -16,12 +16,12 @@ div class: 'menu-transverse' do
         end
       end
       li do
-        a href: '#foire_aux_questions' do
-          text_node t('.foire_aux_questions')
+        a href: "#foire_aux_questions" do
+          text_node t(".foire_aux_questions")
         end
       end
     end
   end
 
-  text_node image_tag 'avatar_pouce_leve.png', class: 'avatar-pouce-leve', alt: ''
+  text_node image_tag "avatar_pouce_leve.png", class: "avatar-pouce-leve", alt: ""
 end

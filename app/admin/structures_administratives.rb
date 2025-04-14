@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register StructureAdministrative do
-  menu parent: 'Terrain', if: proc { current_compte.anlci? }
+  menu parent: "Terrain", if: proc { current_compte.anlci? }
 
   permit_params :nom, :parent_id, :siret
 
@@ -16,16 +16,16 @@ ActiveAdmin.register StructureAdministrative do
       l(structure.created_at, format: :sans_heure)
     end
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'admin/structures/show', locals: { structure: resource }
+    render partial: "admin/structures/show", locals: { structure: resource }
   end
 
-  form partial: 'form'
+  form partial: "form"
 
   controller do
     before_action :trouve_comptes, :trouve_campagnes, :trouve_structures_dependantes, only: :show

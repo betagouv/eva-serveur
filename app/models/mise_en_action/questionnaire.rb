@@ -12,11 +12,11 @@ class MiseEnAction
     def recupere_question_reponses
       case @nom
       when :remediation
-        @question = I18n.t('question.remediation')
-        @reponses = MiseEnAction.remediations.excluding('indetermine')
+        @question = I18n.t("question.remediation")
+        @reponses = MiseEnAction.remediations.excluding("indetermine")
       when :difficulte
-        @question = I18n.t('question.difficulte')
-        @reponses = MiseEnAction.difficultes.excluding('indetermine')
+        @question = I18n.t("question.difficulte")
+        @reponses = MiseEnAction.difficultes.excluding("indetermine")
       end
     end
   end

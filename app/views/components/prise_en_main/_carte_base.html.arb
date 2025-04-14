@@ -1,36 +1,36 @@
 # frozen_string_literal: true
 
-scope = 'components.prise_en_main'
+scope = "components.prise_en_main"
 lien_action ||= nil
 lien_description ||= nil
 email ||= nil
 options_lien ||= {}
-options = { class: 'bouton grand-bouton' }.merge(options_lien)
-carte_entete_classes = 'd-flex align-items-center justify-content-between bg-orange'
+options = { class: "bouton grand-bouton" }.merge(options_lien)
+carte_entete_classes = "d-flex align-items-center justify-content-between bg-orange"
 
-div class: 'carte-prise-en-main' do
-  div class: 'carte__etape border border-right-0 border-orange' do
+div class: "carte-prise-en-main" do
+  div class: "carte__etape border border-right-0 border-orange" do
     div class: "carte__entete #{carte_entete_classes}" do
-      div class: 'carte__titres' do
+      div class: "carte__titres" do
         h2 t("etapes.#{etape_en_cours}.titre", scope: scope)
       end
-      text_node image_tag 'avatar_bienvenue.png', class: 'carte__illustration', alt: ''
+      text_node image_tag "avatar_bienvenue.png", class: "carte__illustration", alt: ""
     end
-    div class: 'carte__description' do
+    div class: "carte__description" do
       text_node md t("etapes.#{etape_en_cours}.description", lien: lien_description, email: email,
                                                              scope: scope)
-      if etape_en_cours == 'passations'
+      if etape_en_cours == "passations"
         nombre = prise_en_main.nombre_passations_restantes
-        div class: 'text-primary' do
+        div class: "text-primary" do
           text_node md t("etapes.#{etape_en_cours}.passations_restantes",
                          passations_restantes: passations_restantes(nombre),
                          scope: scope)
         end
       end
       if lien_action
-        alignement = etape_en_cours == 'confirmation_email' ? 'between' : 'end'
+        alignement = etape_en_cours == "confirmation_email" ? "between" : "end"
         div class: "carte__action d-flex justify-content-#{alignement} align-items-center mt-6" do
-          if etape_en_cours == 'confirmation_email'
+          if etape_en_cours == "confirmation_email"
             span md t("etapes.#{etape_en_cours}.question",
                       scope: scope)
           end
@@ -41,18 +41,18 @@ div class: 'carte-prise-en-main' do
     end
   end
 
-  div class: 'carte__progression w-100 h-100 rounded-0' do
-    h3 t('etapes.progression.titre', scope: scope)
+  div class: "carte__progression w-100 h-100 rounded-0" do
+    h3 t("etapes.progression.titre", scope: scope)
     ul do
       PriseEnMain::ETAPES.each do |etape|
         statut = statut_etape(etape, etape_en_cours)
-        next if etape == 'fin'
+        next if etape == "fin"
 
         li do
           render(EllipseComponent.new(statut))
           para class: "m-0 progression__etape text-#{statut}" do
             text_node t("etapes.progression.#{etape}", scope: scope)
-            span t(statut, scope: scope), class: 'sr-only'
+            span t(statut, scope: scope), class: "sr-only"
           end
         end
       end

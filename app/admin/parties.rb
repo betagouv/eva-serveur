@@ -6,7 +6,7 @@ ActiveAdmin.register Partie do
 
   actions :index, :show
 
-  config.sort_order = 'created_at_desc'
+  config.sort_order = "created_at_desc"
 
   scope :all, default: true, show_count: false
   scope(:terminees, show_count: false) do |scope|
@@ -20,9 +20,9 @@ ActiveAdmin.register Partie do
          as: :search_select_filter,
          url: proc { admin_evaluations_path },
          fields: %i[nom email telephone],
-         display_name: 'nom',
+         display_name: "nom",
          minimum_input_length: 2,
-         order_by: 'nom_asc'
+         order_by: "nom_asc"
   filter :session_id
   filter :created_at
 
@@ -31,7 +31,7 @@ ActiveAdmin.register Partie do
     column :metriques
     column :created_at
     actions do |partie|
-      link_to t('.evenements'),
+      link_to t(".evenements"),
               admin_campagne_evenements_path(
                 partie.campagne,
                 q: { session_id_eq: partie.session_id }

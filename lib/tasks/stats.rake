@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :stats do
-  desc 'Extrait les données pour la bascule vers un algorithme figé'
+  desc "Extrait les données pour la bascule vers un algorithme figé"
   task niveau_1_et2: :environment do
     evaluations = recupere_evaluations
     puts "Nombre d'évaluation : #{evaluations.count}"
@@ -15,28 +15,28 @@ namespace :stats do
       colonnes = [
         e.id,
         campagne&.code, e.created_at,
-        scores.values.join(';'),
+        scores.values.join(";"),
         rg.interpreteur_niveau1.synthese,
         %i[score_ccf score_syntaxe_orthographe score_memorisation score_numeratie].map do |score|
           scores_metacompetence[score]
-        end.join(';'),
+        end.join(";"),
         structure&.type_structure
       ]
-      puts colonnes.join(';')
+      puts colonnes.join(";")
     end
   end
 
   def entete_colonnes
     [
-      'id eva', 'campagne', 'date creation de la partie', 'litteratie_z', 'numeratie_z',
-      'synthese illettrisme', 'score_ccf', 'score_syntaxe_orthographe', 'score_memorisation',
-      'score_numeratie', 'type de structure'
-    ].join(';')
+      "id eva", "campagne", "date creation de la partie", "litteratie_z", "numeratie_z",
+      "synthese illettrisme", "score_ccf", "score_syntaxe_orthographe", "score_memorisation",
+      "score_numeratie", "type de structure"
+    ].join(";")
   end
 
   def recupere_evaluations
     Evaluation.includes(
-      campagne: [:situations_configurations, { compte: :structure }]
+      campagne: [ :situations_configurations, { compte: :structure } ]
     ).where.not(comptes: { role: :superadmin })
   end
 
@@ -61,7 +61,7 @@ namespace :stats do
 
   def visite_evenements_partie(situation, evenements_partie)
     evenement_fin = evenements_partie.pop
-    return unless evenement_fin.nom == 'finSituation'
+    return unless evenement_fin.nom == "finSituation"
 
     evenements_partie.pop if situation == :livraison ## supprime la note de rédaction
     evenements_partie.each_slice(2) do |affichage, reponse|
@@ -86,8 +86,8 @@ namespace :stats do
 
   def affiche_reponses_maintenance
     visite_reponses(:maintenance) do |identification, reponse, temps|
-      reponse_pasfrancais = reponse.donnees['reponse'] == 'pasfrancais'
-      type_non_mot = reponse.donnees['type'] == 'non-mot'
+      reponse_pasfrancais = reponse.donnees["reponse"] == "pasfrancais"
+      type_non_mot = reponse.donnees["type"] == "non-mot"
       succes = (reponse_pasfrancais == type_non_mot)
       valeurs = "#{succes};#{temps}"
       puts "#{identification};maintenance;ccf;#{reponse.donnees['mot']};#{valeurs}"
@@ -96,12 +96,12 @@ namespace :stats do
 
   def visite_reponses_livraison
     visite_reponses(:livraison) do |identification, reponse, temps|
-      next if reponse.donnees['reponse'].blank?
+      next if reponse.donnees["reponse"].blank?
 
-      question = Question.find(reponse.donnees['question'])
+      question = Question.find(reponse.donnees["question"])
       libelle = question.libelle
-      if libelle != 'Communication écrite'
-        reponse = reponse.donnees['reponse']
+      if libelle != "Communication écrite"
+        reponse = reponse.donnees["reponse"]
         choix = Choix.find(reponse)
       end
       yield(identification, question, libelle, choix, temps)
@@ -111,9 +111,9 @@ namespace :stats do
   def affiche_reponses_livraison
     visite_reponses_livraison do |identification, question, libelle, choix, temps|
       metacompetence = question.metacompetence
-      question_reponse = [question.transcription_intitule&.ecrit]
+      question_reponse = [ question.transcription_intitule&.ecrit ]
       if choix.present?
-        succes = choix.type_choix == 'bon'
+        succes = choix.type_choix == "bon"
         question_reponse << "\"#{choix.intitule}\""
       end
       colonnes_question = "#{identification};livraison;#{metacompetence};#{libelle}"
@@ -129,16 +129,16 @@ namespace :stats do
     end
   end
 
-  desc 'Extrait les données des questions'
+  desc "Extrait les données des questions"
   task questions: :environment do
-    puts 'évaluation;partie;campagne;MES;meta-competence;question;succes;temps de reponse'
+    puts "évaluation;partie;campagne;MES;meta-competence;question;succes;temps de reponse"
     affiche_reponses_maintenance
     affiche_reponses_livraison
     affiche_reponses_objets_trouves
   end
 
   def noms_colonnes(mes, colonnes, colonnes_z)
-    noms = ''
+    noms = ""
     noms += "#{mes}: #{colonnes[mes].join("; #{mes}: ")};" unless colonnes[mes].empty?
     unless colonnes_z[mes].empty?
       noms += "#{mes}: cote_z_#{colonnes_z[mes].join("; #{mes}: cote_z_")};"
@@ -147,7 +147,7 @@ namespace :stats do
   end
 
   def print_entete_colonnes(colonnes, colonnes_z)
-    entete_colonnes = 'evaluation;date creation;'
+    entete_colonnes = "evaluation;date creation;"
     colonnes.each_key do |mes|
       entete_colonnes += noms_colonnes(mes, colonnes, colonnes_z)
     end
@@ -156,7 +156,7 @@ namespace :stats do
 
   def lit_valeurs_colonne(valeurs, colonnes)
     colonnes&.each do |colonne|
-      valeurs << (yield(colonne) || 'vide')
+      valeurs << (yield(colonne) || "vide")
     end
   end
 
@@ -186,7 +186,7 @@ namespace :stats do
   def collecte_donnees(evaluation, colonnes, colonnes_z)
     situations = {}
     colonnes.each_key do |mes|
-      situations[mes] = Array.new(colonnes[mes].count + colonnes_z[mes].count, 'vide')
+      situations[mes] = Array.new(colonnes[mes].count + colonnes_z[mes].count, "vide")
     end
 
     visite_parties(evaluation, colonnes.keys) do |situation, partie, restitution|
@@ -197,20 +197,20 @@ namespace :stats do
     situations
   end
 
-  desc 'Extrait les données de tri, inventaire et securité'
+  desc "Extrait les données de tri, inventaire et securité"
   task competences_transversales: :environment do
     Rails.logger.level = :warn
     colonnes = {
-      'tri' => %i[nombre_bien_placees nombre_mal_placees temps_total],
-      'inventaire' => %i[nombre_ouverture_contenant nombre_essais_validation temps_total],
-      'controle' => %i[nombre_bien_placees nombre_mal_placees nombre_non_triees temps_total],
-      'securite' => Restitution::Securite::METRIQUES.keys
+      "tri" => %i[nombre_bien_placees nombre_mal_placees temps_total],
+      "inventaire" => %i[nombre_ouverture_contenant nombre_essais_validation temps_total],
+      "controle" => %i[nombre_bien_placees nombre_mal_placees nombre_non_triees temps_total],
+      "securite" => Restitution::Securite::METRIQUES.keys
     }
     colonnes_z = {
-      'tri' => [],
-      'inventaire' => [],
-      'controle' => [],
-      'securite' => Restitution::Securite::METRIQUES.keys
+      "tri" => [],
+      "inventaire" => [],
+      "controle" => [],
+      "securite" => Restitution::Securite::METRIQUES.keys
     }
     evaluations = recupere_evaluations
     puts "Nombre d'évaluation : #{evaluations.count}"
@@ -219,19 +219,19 @@ namespace :stats do
       situations = collecte_donnees(e, colonnes, colonnes_z)
 
       valeurs_des_parties = situations.keys.map do |situation|
-        situations[situation].join('; ')
+        situations[situation].join("; ")
       end
-      puts "#{e.id};#{e.created_at};" + valeurs_des_parties.join('; ')
+      puts "#{e.id};#{e.created_at};" + valeurs_des_parties.join("; ")
     end
   end
 
   desc "calcule les temps max, min et moyens des évaluations d'une campagne"
   task temps_moyens_campagne: :environment do
-    arg_campagne = 'CAMPAGNE'
+    arg_campagne = "CAMPAGNE"
     logger = RakeLogger.logger
     unless ENV.key?(arg_campagne)
       logger.error "La variable d'environnement #{arg_campagne} est manquante"
-      logger.info 'Usage : rake stats:temps_moyens_campagne CAMPAGNE=id_campagne'
+      logger.info "Usage : rake stats:temps_moyens_campagne CAMPAGNE=id_campagne"
       next
     end
     campagne = Campagne.find(ENV.fetch(arg_campagne))
@@ -240,7 +240,7 @@ namespace :stats do
     min = helper.formate_duree statistiques.temps_min
     max = helper.formate_duree statistiques.temps_max
     moyenne = helper.formate_duree statistiques.temps_moyen
-    puts 'id_campagne;temps_min;temps_max;temps_moyen'
+    puts "id_campagne;temps_min;temps_max;temps_moyen"
     puts "#{ENV.fetch(arg_campagne)};#{min};#{max};#{moyenne}"
   end
 end

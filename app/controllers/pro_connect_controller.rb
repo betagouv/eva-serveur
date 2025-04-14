@@ -15,14 +15,14 @@ class ProConnectController < ApplicationController
     compte = lit_tokens(tokens)
     echec_login and return if compte.blank?
 
-    session[:pc_logout_token] = tokens['id_token']
+    session[:pc_logout_token] = tokens["id_token"]
     sign_in_and_redirect compte, scope: :compte
   end
 
   def lit_tokens(tokens)
     tokens &&
-      ProConnectHelper.verifie(tokens['id_token'], session[:pc_nonce]) &&
-      ProConnectHelper.compte(tokens['access_token'])
+      ProConnectHelper.verifie(tokens["id_token"], session[:pc_nonce]) &&
+      ProConnectHelper.compte(tokens["access_token"])
   end
 
   def logout
@@ -38,7 +38,7 @@ class ProConnectController < ApplicationController
   private
 
   def echec_login
-    flash[:error] = I18n.t('.pro-connect.authentification-impossible',
+    flash[:error] = I18n.t(".pro-connect.authentification-impossible",
                            email_contact: Eva::EMAIL_SUPPORT)
     redirect_to new_compte_session_path
   end

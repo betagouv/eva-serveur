@@ -16,7 +16,7 @@ module ImportExport
     end
 
     def message_erreur_headers
-      I18n.t('import_export.import_xls.erreurs.mauvais_format',
+      I18n.t("import_export.import_xls.erreurs.mauvais_format",
              headers: headers_attendus_to_s)
     end
 
@@ -29,8 +29,8 @@ module ImportExport
 
     def headers_attendus_to_s
       @headers_attendus.map do |h|
-        h.to_s.tr('_', ' ')
-      end.join(', ')
+        h.to_s.tr("_", " ")
+      end.join(", ")
     end
 
     def recupere_data(file)
@@ -43,10 +43,10 @@ module ImportExport
       attachment.attach(ImportXls.telecharge_fichier(url, nom_technique)) if url.present?
     end
 
-    XLS_MIME_TYPE = 'application/vnd.ms-excel'
+    XLS_MIME_TYPE = "application/vnd.ms-excel"
 
     def self.fichier_xls?(file)
-      file.content_type == XLS_MIME_TYPE && File.extname(file.original_filename) == '.xls'
+      file.content_type == XLS_MIME_TYPE && File.extname(file.original_filename) == ".xls"
     end
 
     def self.telecharge_fichier(url, nom_technique)
@@ -56,11 +56,11 @@ module ImportExport
       content_type = Marcel::MimeType.for extension: extension
       { io: fichier, filename: nom_fichier, content_type: content_type }
     rescue Down::Error
-      raise Error, I18n.t('import_export.import_xls.erreurs.telechargement_impossible', url: url)
+      raise Error, I18n.t("import_export.import_xls.erreurs.telechargement_impossible", url: url)
     end
 
     def message_erreur_validation(exception, index)
-      I18n.t('import_export.import_xls.erreurs.validation',
+      I18n.t("import_export.import_xls.erreurs.validation",
              numero: index,
              message: exception.record.errors.full_messages.to_sentence)
     end

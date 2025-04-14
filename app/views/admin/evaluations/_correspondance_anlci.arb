@@ -1,32 +1,32 @@
 # frozen_string_literal: true
 
-div id: 'correspondance_anlci', class: 'page adaptation-pdf correspondance_anlci' do
+div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci" do
   if pdf
-    render 'entete_page', restitution_globale: restitution_globale
+    render "entete_page", restitution_globale: restitution_globale
 
-    h2 t('titre', scope: 'admin.restitutions.anlci'), class: 'text-center mt-5 mb-4'
+    h2 t("titre", scope: "admin.restitutions.anlci"), class: "text-center mt-5 mb-4"
   else
-    h2 t('titre', scope: 'admin.restitutions.anlci')
+    h2 t("titre", scope: "admin.restitutions.anlci")
   end
 
-  div class: 'panel panel--avec-references' do
-    div class: 'row no-gutters recommandation-anlci marges-page' do
-      div class: 'col-auto' do
-        image_tag 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')
+  div class: "panel panel--avec-references" do
+    div class: "row no-gutters recommandation-anlci marges-page" do
+      div class: "col-auto" do
+        image_tag "logo_anlci.svg", class: "pr-5", alt: t("logo_anlci")
       end
-      div class: 'col' do
-        md t('recommandation', scope: 'admin.restitutions.anlci')
+      div class: "col" do
+        md t("recommandation", scope: "admin.restitutions.anlci")
       end
     end
-    div class: 'marges-page litteratie-numeratie-niveau1-anlci' do
-      render 'litteratie_numeratie_niveau1',
+    div class: "marges-page litteratie-numeratie-niveau1-anlci" do
+      render "litteratie_numeratie_niveau1",
              niveau_litteratie: resource.niveau_anlci_litteratie,
              niveau_numeratie: resource.niveau_anlci_numeratie,
-             referentiel: 'anlci'
+             referentiel: "anlci"
     end
 
     if pdf
-      render 'pied_page', pre_pied_page: ReferentielAnlciComponent.new
+      render "pied_page", pre_pied_page: ReferentielAnlciComponent.new
     else
       render ReferentielAnlciComponent.new
     end

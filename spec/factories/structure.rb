@@ -3,7 +3,7 @@
 Geocoder::Lookup::Test.set_default_stub(
   [
     {
-      'coordinates' => [40.7143528, -74.0059731]
+      'coordinates' => [ 40.7143528, -74.0059731 ]
     }
   ]
 )

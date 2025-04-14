@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-h3 t(".#{categorie}"), class: 'categorie'
+h3 t(".#{categorie}"), class: "categorie"
 questions_reponses.each do |question, reponse|
   if question.categorie == categorie
     div question.transcription_intitule&.ecrit
-    div reponse.intitule, class: 'reponse'
+    div reponse.intitule, class: "reponse"
   end
 end

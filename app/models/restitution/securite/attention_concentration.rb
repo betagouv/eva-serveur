@@ -7,7 +7,7 @@ module Restitution
         return ::Competence::NIVEAU_INDETERMINE if @restitution.abandon?
 
         temps_recherche_standardise =
-          @restitution.cote_z_metriques['temps_moyen_recherche_zones_dangers']
+          @restitution.cote_z_metriques["temps_moyen_recherche_zones_dangers"]
         return ::Competence::NIVEAU_INDETERMINE if temps_recherche_standardise.blank?
 
         evalue(-1 * temps_recherche_standardise)

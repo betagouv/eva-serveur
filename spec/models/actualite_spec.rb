@@ -17,9 +17,9 @@ describe Actualite do
     let!(:actualite2) { create :actualite, titre: 'titre2' }
     let!(:actualite3) { create :actualite, titre: 'titre3' }
 
-    it { expect(actualite1.recentes_sauf_moi(1)).to eql([actualite3]) }
-    it { expect(actualite1.recentes_sauf_moi(3)).to eql([actualite3, actualite2]) }
-    it { expect(actualite2.recentes_sauf_moi(3)).to eql([actualite3, actualite1]) }
+    it { expect(actualite1.recentes_sauf_moi(1)).to eql([ actualite3 ]) }
+    it { expect(actualite1.recentes_sauf_moi(3)).to eql([ actualite3, actualite2 ]) }
+    it { expect(actualite2.recentes_sauf_moi(3)).to eql([ actualite3, actualite1 ]) }
   end
 
   describe '#tableau_de_bord' do
@@ -34,7 +34,7 @@ describe Actualite do
     it 'affiche les actualités, la plus récente en premier' do
       ability = Ability.new(compte_admin)
       expect(described_class.tableau_de_bord(ability))
-        .to eq [actualite3, actualite2, actualite1]
+        .to eq [ actualite3, actualite2, actualite1 ]
     end
 
     it "n'affiche aucune actualité aux comptes refusés" do

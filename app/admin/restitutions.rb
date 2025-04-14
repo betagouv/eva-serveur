@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Partie, as: 'Restitutions' do
+ActiveAdmin.register Partie, as: "Restitutions" do
   menu false
   actions :show, :destroy
 
@@ -13,7 +13,7 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
     end
 
     def chemin_vue
-      resource.class.to_s.underscore.tr('/', '_')
+      resource.class.to_s.underscore.tr("/", "_")
     end
 
     def destroy
@@ -29,13 +29,13 @@ ActiveAdmin.register Partie, as: 'Restitutions' do
     rescue ActionView::MissingTemplate
       nil
     end
-    render 'restitution_metriques',
+    render "restitution_metriques",
            metriques_partie: resource.partie.metriques,
            moyenne: resource.moyennes_metriques,
            ecart_type: resource.ecarts_types_metriques,
            cote_z: resource.cote_z_metriques
-    render 'restitution_competences_de_base', restitution: resource
-    render 'restitution_competences', restitution: resource
+    render "restitution_competences_de_base", restitution: resource
+    render "restitution_competences", restitution: resource
   end
 
   sidebar :informations_generales, only: :show

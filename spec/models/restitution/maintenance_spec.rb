@@ -13,7 +13,7 @@ describe Restitution::Maintenance do
       let(:evaluation) { create :evaluation, campagne: campagne }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let(:evenements) do
-        [build(:evenement_demarrage, partie: partie)]
+        [ build(:evenement_demarrage, partie: partie) ]
       end
 
       it do

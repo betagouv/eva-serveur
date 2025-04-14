@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-panel t('.titre') do
+panel t(".titre") do
   return if resource.competences_de_base.empty?
 
   attributes_table_for restitution do
     restitution.competences_de_base.each do |competence, niveau|
       row(t("#{competence}.nom",
-            scope: 'admin.evaluations.restitution_competence')) do
+            scope: "admin.evaluations.restitution_competence")) do
         if niveau == Competence::NIVEAU_INDETERMINE
-          span 'Vide', class: :empty
+          span "Vide", class: :empty
         else
-          div '', class: "niveau-competence-base niveau-#{niveau}"
+          div "", class: "niveau-competence-base niveau-#{niveau}"
         end
       end
     end

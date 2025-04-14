@@ -9,7 +9,7 @@ module Restitution
 
       def interpretations
         @niveaux_competences.map do |competence, niveau|
-          [competence, interprete(niveau)]
+          [ competence, interprete(niveau) ]
         end
       end
 

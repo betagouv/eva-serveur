@@ -16,7 +16,7 @@ end
 describe StaticRecord::Base, type: :model do
   before do
     TestRecord.chemin_data = 'test/*.yml'
-    allow(Dir).to receive(:glob).and_return(['/path/to/test_file.yml'])
+    allow(Dir).to receive(:glob).and_return([ '/path/to/test_file.yml' ])
   end
 
   describe '.all' do

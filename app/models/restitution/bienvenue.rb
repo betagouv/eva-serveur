@@ -11,7 +11,7 @@ module Restitution
     end
 
     def verifie_reponse(question, reponse)
-      if question.type_saisie == 'numerique'
+      if question.type_saisie == "numerique"
         i = reponse.to_i
         return i < 2**31 ? i : nil
       end
@@ -38,8 +38,8 @@ module Restitution
     end
 
     def inclus_autopositionnement?
-      [Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
-       Questionnaire::AUTOPOSITIONNEMENT].include?(questionnaire)
+      [ Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
+       Questionnaire::AUTOPOSITIONNEMENT ].include?(questionnaire)
     end
 
     def questionnaires_questions_pour(categorie)

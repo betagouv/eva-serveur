@@ -1,24 +1,24 @@
 <div class='referentiel_anlci bg-information'>
-  <% scope = 'admin.restitutions.references' %>
+  <% scope = "admin.restitutions.references" %>
   <div class='row marges-page'>
     <div class='col'>
       <div class='row'>
         <div class='col-auto col-icone-info'>
-          <div><%= image_tag 'info.svg', class: 'icone', alt: 'Information' %></div>
+          <div><%= image_tag "info.svg", class: "icone", alt: "Information" %></div>
         </div>
         <div class='col no-gutters'>
           <div class='texte-explications'>
-            <%= md t('explications-anlci', scope: scope) %>
+            <%= md t("explications-anlci", scope: scope) %>
           </div>
           <div class='col badges-referentiels'>
             <% @badges_referentiel.each do |badge| %>
               <%= image_tag "badges/anlci/#{badge}-referentiel.svg",
-                            class: 'badge-references',
+                            class: "badge-references",
                             alt: t(badge, scope: scope) %>
             <% end %>
           </div>
           <div class='texte-explications'>
-            <%= md t('explications-lien', scope: scope) %>
+            <%= md t("explications-lien", scope: scope) %>
           </div>
         </div>
       </div>

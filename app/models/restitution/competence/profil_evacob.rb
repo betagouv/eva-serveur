@@ -4,31 +4,31 @@ module Restitution
   module Competence
     class ProfilEvacob < Restitution::Competence::Base
       SEUILS = {
-        'score_lecture' => {
+        "score_lecture" => {
           ::Competence::PROFIL_4 => 15,
           ::Competence::PROFIL_3 => 11,
           ::Competence::PROFIL_2 => 7,
           ::Competence::PROFIL_1 => 0
         },
-        'score_comprehension' => {
+        "score_comprehension" => {
           ::Competence::PROFIL_4 => 9,
           ::Competence::PROFIL_3 => 7,
           ::Competence::PROFIL_2 => 5,
           ::Competence::PROFIL_1 => 0
         },
-        'score_production' => {
+        "score_production" => {
           ::Competence::PROFIL_4 => 18,
           ::Competence::PROFIL_3 => 14,
           ::Competence::PROFIL_2 => 9,
           ::Competence::PROFIL_1 => 0
         },
-        'score_parcours_haut' => {
+        "score_parcours_haut" => {
           ::Competence::PROFIL_4H_PLUS_PLUS => 33,
           ::Competence::PROFIL_4H_PLUS => 26,
           ::Competence::PROFIL_4H => 16,
           ::Competence::PROFIL_ABERRANT => 0
         },
-        'profil_numeratie' => {
+        "profil_numeratie" => {
           ::Competence::PROFIL_4_PLUS => 5,
           ::Competence::PROFIL_4 => 4,
           ::Competence::PROFIL_3 => 3,
@@ -65,7 +65,7 @@ module Restitution
         end
       end
 
-      DERNIERE_QUESTION_NIVEAU_1 = 'N1Pvn4'
+      DERNIERE_QUESTION_NIVEAU_1 = "N1Pvn4"
       def a_passe_le_niveau_1?
         @restitution.partie.evenements.find do |evenement|
           evenement.question_nom_technique == DERNIERE_QUESTION_NIVEAU_1

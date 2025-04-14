@@ -3,7 +3,7 @@
 class EvenementQuestion
   def initialize(question:, evenement: nil)
     @evenement = evenement || Evenement.new(donnees: {})
-    @question = question || Question.new(nom_technique: evenement.donnees['question'])
+    @question = question || Question.new(nom_technique: evenement.donnees["question"])
   end
 
   delegate :est_principale?, :est_un_rattrapage?, :nom_technique, :bonnes_reponses,
@@ -11,28 +11,28 @@ class EvenementQuestion
   delegate :fin_situation?, to: :@evenement
 
   def score
-    @evenement.donnees['score'] || 0
+    @evenement.donnees["score"] || 0
   end
 
   def score_max
-    @evenement.donnees['scoreMax'] || @question.score
+    @evenement.donnees["scoreMax"] || @question.score
   end
 
   def succes
-    @evenement.donnees['succes'] || false
+    @evenement.donnees["succes"] || false
   end
 
   def reponse
-    @evenement.donnees['reponseIntitule'].presence ||
-      @question.intitule_reponse(@evenement.donnees['reponse'])
+    @evenement.donnees["reponseIntitule"].presence ||
+      @question.intitule_reponse(@evenement.donnees["reponse"])
   end
 
   def intitule
-    @evenement.donnees['intitule'] || @question.transcription_intitule&.ecrit
+    @evenement.donnees["intitule"] || @question.transcription_intitule&.ecrit
   end
 
   def metacompetence
-    @evenement.donnees['metacompetence'] || @question.metacompetence
+    @evenement.donnees["metacompetence"] || @question.metacompetence
   end
 
   def a_ete_repondue?
@@ -53,7 +53,7 @@ class EvenementQuestion
 
   class << self
     def pourcentage_pour_groupe(evenements_questions)
-      scores = evenements_questions.map { |eq| [eq.score_max.presence || 0, eq.score] }.compact
+      scores = evenements_questions.map { |eq| [ eq.score_max.presence || 0, eq.score ] }.compact
       score_max, score = scores.transpose.map(&:sum)
       Pourcentage.new(valeur: score, valeur_max: score_max).calcul&.round
     end

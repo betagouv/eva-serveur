@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-render partial: 'nouvelles_structures/modal_mise_en_garde' if params[:mise_en_garde] == 'affiche'
-div class: 'panel nouvelle_structure' do
-  h2 t(resource.new_record? ? '.titre.nouveau' : '.titre.modification')
-  active_admin_form_for [:admin, resource] do |f|
+render partial: "nouvelles_structures/modal_mise_en_garde" if params[:mise_en_garde] == "affiche"
+div class: "panel nouvelle_structure" do
+  h2 t(resource.new_record? ? ".titre.nouveau" : ".titre.modification")
+  active_admin_form_for [ :admin, resource ] do |f|
     f.inputs do
-      f.object.code_postal = params[:code_postal]&.delete('^0-9') if f.object.code_postal.blank?
+      f.object.code_postal = params[:code_postal]&.delete("^0-9") if f.object.code_postal.blank?
       f.input :nom
       f.input :type_structure, as: :select, collection: collection_types_structures
       f.input :code_postal
@@ -14,7 +14,7 @@ div class: 'panel nouvelle_structure' do
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end
     end
-    text_node md t('.verifier_information_structure', email_contact: Eva::EMAIL_CONTACT)
+    text_node md t(".verifier_information_structure", email_contact: Eva::EMAIL_CONTACT)
     f.actions do
       f.action :submit
       annulation_formulaire(f) if current_compte.structure.present?

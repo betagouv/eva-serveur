@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-render partial: 'admin/questions/input_illustration_base',
+render partial: "admin/questions/input_illustration_base",
        locals: {
          f: f,
          nom: :illustration,
          nom_suppression: :supprimer_illustration,
          image: resource.illustration,
-         hint: '.illustration.hint',
+         hint: ".illustration.hint",
          content_type: :default
        }

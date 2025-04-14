@@ -18,7 +18,7 @@ module ImportExport
         @onglet.set_valeur(@ligne, col += 1, questionnaire.libelle)
         @onglet.set_valeur(@ligne, col += 1, questionnaire.nom_technique)
         @onglet.set_valeur(@ligne, col += 1,
-                           questionnaire.questions.map(&:nom_technique).join(','))
+                           questionnaire.questions.map(&:nom_technique).join(","))
         col
       end
     end

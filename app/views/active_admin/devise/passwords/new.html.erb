@@ -1,25 +1,25 @@
 <div id="active_admin_content">
   <% content_for :titre do %>
-    <%= t('active_admin.devise.reset_password.title') -%>
+    <%= t("active_admin.devise.reset_password.title") -%>
   <% end %>
   <div id="login" class="panel">
-    <%= link_to t('active_admin.devise.login.lien_retour'),
+    <%= link_to t("active_admin.devise.login.lien_retour"),
                 new_compte_session_path,
-                class: 'lien-retour',
-                aria: { label: t('active_admin.devise.login.description_lien_retour') } %>
-    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:email] } %>
+                class: "lien-retour",
+                aria: { label: t("active_admin.devise.login.description_lien_retour") } %>
+    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [ :email ] } %>
     <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
       if params[:token_invalide]
-        para para t('active_admin.devise.reset_password.token_invalide')
+        para para t("active_admin.devise.reset_password.token_invalide")
         br
-        para t('active_admin.devise.reset_password.saisir_a_nouveau')
+        para t("active_admin.devise.reset_password.saisir_a_nouveau")
         br
       end
       f.inputs do
         f.input :email
       end
       f.actions do
-        f.action :submit, label: t('active_admin.devise.reset_password.submit'), button_html: { value: t('active_admin.devise.reset_password.submit') }
+        f.action :submit, label: t("active_admin.devise.reset_password.submit"), button_html: { value: t("active_admin.devise.reset_password.submit") }
       end
     end %>
   </div>

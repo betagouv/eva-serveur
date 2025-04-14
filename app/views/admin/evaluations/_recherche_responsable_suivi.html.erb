@@ -1,6 +1,6 @@
-<button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t('.action') %></button>
-<%= form_with id: :recherche_responsable_suivi, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: 'hidden' do |f| %>
-    <label class="sr-only" for="recherche-responsable-suivi-autocomplete"><%= t('.libelle_champ_recherche') %></label>
+<button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t(".action") %></button>
+<%= form_with id: :recherche_responsable_suivi, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: "hidden" do |f| %>
+    <label class="sr-only" for="recherche-responsable-suivi-autocomplete"><%= t(".libelle_champ_recherche") %></label>
   <div id="nom-responsable-suivi-autocomplete-container" class="champ-recherche" ></div>
   <%= f.hidden_field :responsable_suivi_id %>
 <% end %>

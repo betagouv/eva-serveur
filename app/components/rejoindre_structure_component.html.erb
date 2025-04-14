@@ -1,16 +1,16 @@
 <div class="rejoindre-structure">
   <div class="infos" id="<%= @structure.id %>" >
     <h4><%= @structure.nom %></h4>
-    <p class="sous-infos"><strong><%= t('.code_postal') %></strong><%= @structure.code_postal %></p>
+    <p class="sous-infos"><strong><%= t(".code_postal") %></strong><%= @structure.code_postal %></p>
   </div>
   <% if @current_compte.present? %>
-    <%= link_to t('.rejoindre_structure'),
+    <%= link_to t(".rejoindre_structure"),
                 rejoindre_structure_admin_compte_path(@current_compte, structure_id: @structure.id),
                 aria: { describedby: @structure.id },
                 method: :patch
     %>
   <% else %>
-    <%= link_to t('.rejoindre_structure'),
+    <%= link_to t(".rejoindre_structure"),
                 new_compte_registration_path(
                   structure_id: @structure,
                   code_postal: params[:code_postal],

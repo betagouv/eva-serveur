@@ -1,25 +1,25 @@
-<% content_for :title, t('.title') %>
-<% content_for :classes_conteneur do 'conteneur-elargi' end %>
+<% content_for :title, t(".title") %>
+<% content_for :classes_conteneur do "conteneur-elargi" end %>
 
 <div id="active_admin_content">
   <% content_for :titre do %>
-    <%= t('.title') -%>
+    <%= t(".title") -%>
   <% end %>
   <% content_for :sous_titre do %>
     <%= resource.structure&.nom -%>
   <% end %>
   <div id="login" class="panel">
-    <%= link_to t('structures.index.title'),
+    <%= link_to t("structures.index.title"),
                 structures_path(
                   code_postal: params[:code_postal],
                   ville_ou_code_postal: params[:ville_ou_code_postal]
                 ),
-                class: 'lien-retour',
-                aria: { label: t('structures.index.description_lien_retour') } %>
-    <h3><%= t('.instruction') -%></h3>
-    <p><%= t('.description') -%></p>
+                class: "lien-retour",
+                aria: { label: t("structures.index.description_lien_retour") } %>
+    <h3><%= t(".instruction") -%></h3>
+    <p><%= t(".description") -%></p>
 
-    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [:prenom, :nom, :email, :telephone, :password, :password_confirmation] } %>
+    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [ :prenom, :nom, :email, :telephone, :password, :password_confirmation ] } %>
     <%= semantic_form_for(resource,
                               as: resource_name,
                               url: send(:"#{Devise::Mapping.find_scope!(resource_name)}_registration_path"),
@@ -31,13 +31,13 @@
         <%= f.input :email %>
         <%= f.input :telephone %>
         <%= f.input :password %>
-        <%= f.input :password_confirmation, required:true, wrapper_html: { class: 'libelle-long' } %>
-        <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: 'creation_compte' } %>
-        <%= f.input :cgu_acceptees, label: t('creation_compte.cgu_acceptees'), required: true %>
+        <%= f.input :password_confirmation, required: true, wrapper_html: { class: "libelle-long" } %>
+        <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>
+        <%= f.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
         <%= recaptcha_tags %>
       <% end %>
       <%= f.actions do
-        f.action :submit, label: t('active_admin.devise.sign_up.submit'), wrapper_html: { class: 'd-flex justify-content-end' }
+        f.action :submit, label: t("active_admin.devise.sign_up.submit"), wrapper_html: { class: "d-flex justify-content-end" }
       end %>
     <% end %>
   </div>

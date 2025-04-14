@@ -51,8 +51,8 @@ RSpec.describe Questionnaire, type: :model do
 
     it do
       expect(questionnaire.questions_par_type).to eq(
-        'QuestionClicDansImage' => [question_clic_dans_image],
-        'QuestionQcm' => [question_qcm]
+        'QuestionClicDansImage' => [ question_clic_dans_image ],
+        'QuestionQcm' => [ question_qcm ]
       )
     end
   end

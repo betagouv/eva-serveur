@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ParcoursType < ApplicationRecord
-  self.implicit_order_column = 'created_at'
+  self.implicit_order_column = "created_at"
   TYPES_DE_PROGRAMME = %i[diagnostic positionnement].freeze
 
   validates :libelle, :duree_moyenne, presence: true
@@ -21,6 +21,6 @@ class ParcoursType < ApplicationRecord
   end
 
   def option_redaction?
-    situations_configurations.map(&:nom_technique).include?('livraison')
+    situations_configurations.map(&:nom_technique).include?("livraison")
   end
 end

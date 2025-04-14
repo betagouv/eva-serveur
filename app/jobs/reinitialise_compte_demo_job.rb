@@ -5,7 +5,7 @@ class ReinitialiseCompteDemoJob < ApplicationJob
   queue_as :default
 
   def perform
-    logger.info 'création de la structure de démo si nécessaire'
+    logger.info "création de la structure de démo si nécessaire"
     structure_demo = cree_structure_demo
 
     logger.info "Recherche et nettoyage d'un compte de démo existant"
@@ -23,10 +23,10 @@ class ReinitialiseCompteDemoJob < ApplicationJob
 
   def verifie_ou_cree_admin(structure)
     Compte.where(role: :admin, structure: structure).first_or_create do |c|
-      logger.info 'Création du compte Admin de la structure de démo'
-      c.prenom = 'Alex'
-      c.nom = 'Admin'
-      c.email = 'admin@eva.beta.gouv.fr'
+      logger.info "Création du compte Admin de la structure de démo"
+      c.prenom = "Alex"
+      c.nom = "Admin"
+      c.email = "admin@eva.beta.gouv.fr"
       c.statut_validation = :acceptee
       c.confirmed_at = Time.zone.now
       c.email_bienvenue_envoye = true
@@ -44,8 +44,8 @@ class ReinitialiseCompteDemoJob < ApplicationJob
   end
 
   def assigne_champs_compte_demo(compte)
-    compte.prenom = 'Dominique'
-    compte.nom = 'Démo'
+    compte.prenom = "Dominique"
+    compte.nom = "Démo"
     compte.role = :conseiller
     compte.statut_validation = :acceptee
     compte.confirmed_at = Time.zone.now

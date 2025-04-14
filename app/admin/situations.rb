@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Situation do
-  menu parent: 'Parcours', if: proc { can? :manage, Compte }
+  menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
                 :description, :illustration
@@ -38,14 +38,14 @@ ActiveAdmin.register Situation do
     column :questionnaire
     column :questionnaire_entrainement
     actions do |situation|
-      link_to 'Parties', admin_situation_parties_path(situation) if can?(:manage, Partie)
+      link_to "Parties", admin_situation_parties_path(situation) if can?(:manage, Partie)
     end
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render 'show'
+    render "show"
   end
 end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rake_logger'
+require "rake_logger"
 
 namespace :beneficiaires do
-  desc 'Supprime les bénéficiaires sans évaluations'
+  desc "Supprime les bénéficiaires sans évaluations"
   task supprimer_les_beneficiaires_sans_evaluations: :environment do
     logger = RakeLogger.logger
 

@@ -11,13 +11,13 @@ module Eva
       private
 
       def trouve_regles_mot_de_passe
-        @regles_mot_de_passe = compte&.anlci? ? 'regles_mot_de_passe_anlci' : 'regles_mot_de_passe'
+        @regles_mot_de_passe = compte&.anlci? ? "regles_mot_de_passe_anlci" : "regles_mot_de_passe"
       end
 
       def validate_reset_password_token
         return if compte&.reset_password_period_valid?
 
-        flash[:error] = t('active_admin.devise.passwords.edit.token_invalide')
+        flash[:error] = t("active_admin.devise.passwords.edit.token_invalide")
         redirect_to new_compte_password_path(token_invalide: true)
       end
 

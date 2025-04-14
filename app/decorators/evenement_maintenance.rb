@@ -2,27 +2,27 @@
 
 class EvenementMaintenance < SimpleDelegator
   EVENEMENT = {
-    NON_MOT: 'non-mot',
-    REPONSE_NON_FRANCAIS: 'pasfrancais',
-    REPONSE_FRANCAIS: 'francais',
-    IDENTIFICATION: 'identificationMot',
-    APPARITION_MOT: 'apparitionMot'
+    NON_MOT: "non-mot",
+    REPONSE_NON_FRANCAIS: "pasfrancais",
+    REPONSE_FRANCAIS: "francais",
+    IDENTIFICATION: "identificationMot",
+    APPARITION_MOT: "apparitionMot"
   }.freeze
 
   def type_non_mot?
-    donnees['type'] == EVENEMENT[:NON_MOT]
+    donnees["type"] == EVENEMENT[:NON_MOT]
   end
 
   def type_mot_francais?
-    donnees['type'].present? && donnees['type'] != EVENEMENT[:NON_MOT]
+    donnees["type"].present? && donnees["type"] != EVENEMENT[:NON_MOT]
   end
 
   def reponse_francais?
-    donnees['reponse'] == EVENEMENT[:REPONSE_FRANCAIS]
+    donnees["reponse"] == EVENEMENT[:REPONSE_FRANCAIS]
   end
 
   def reponse_non_francais?
-    donnees['reponse'] == EVENEMENT[:REPONSE_NON_FRANCAIS]
+    donnees["reponse"] == EVENEMENT[:REPONSE_NON_FRANCAIS]
   end
 
   def identification_non_mot_correct?
@@ -46,6 +46,6 @@ class EvenementMaintenance < SimpleDelegator
   end
 
   def non_reponse?
-    donnees['reponse'].nil? && identification_mot?
+    donnees["reponse"].nil? && identification_mot?
   end
 end

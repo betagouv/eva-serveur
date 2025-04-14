@@ -14,8 +14,8 @@ describe CompteMailer, type: :mailer do
         email.deliver_now
       end
 
-      expect(email.from).to eql([Eva::EMAIL_CONTACT])
-      expect(email.to).to eql(['debut@test.com'])
+      expect(email.from).to eql([ Eva::EMAIL_CONTACT ])
+      expect(email.to).to eql([ 'debut@test.com' ])
       expect(email.subject).to eql('Votre accès eva à « Ma Super Structure - 75012 »')
       expect(email.multipart?).to be(false)
       expect(email.body).to include('Paule')
@@ -46,8 +46,8 @@ describe CompteMailer, type: :mailer do
         email.deliver_now
       end
 
-      expect(email.from).to eql([Eva::EMAIL_CONTACT])
-      expect(email.to).to eql(['debut@test.com'])
+      expect(email.from).to eql([ Eva::EMAIL_CONTACT ])
+      expect(email.to).to eql([ 'debut@test.com' ])
       expect(email.subject).to eql("Validez l'accès eva à « Ma Super Structure - 75012 » " \
                                    'de vos collègues')
       expect(email.multipart?).to be(false)
@@ -67,8 +67,8 @@ describe CompteMailer, type: :mailer do
       expect(mail.subject).to eq(
         'Paule, quelques ressources pour vous aider à réaliser vos premières évaluations'
       )
-      expect(mail.to).to eq(['debut@test.com'])
-      expect(mail.from).to eql([Eva::EMAIL_CONTACT])
+      expect(mail.to).to eq([ 'debut@test.com' ])
+      expect(mail.from).to eql([ Eva::EMAIL_CONTACT ])
     end
   end
 end

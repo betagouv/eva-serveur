@@ -42,11 +42,11 @@ module Restitution
 
       def self.calcule_synthese(algo)
         return if algo.blank? || algo.indetermine?
-        return 'illettrisme_potentiel' if algo.illettrisme_potentiel?
-        return 'socle_clea' if algo.socle_clea?
-        return 'aberrant' if algo.aberrant?
+        return "illettrisme_potentiel" if algo.illettrisme_potentiel?
+        return "socle_clea" if algo.socle_clea?
+        return "aberrant" if algo.aberrant?
 
-        'ni_ni'
+        "ni_ni"
       end
 
       class SynthetiseurDiagnostic

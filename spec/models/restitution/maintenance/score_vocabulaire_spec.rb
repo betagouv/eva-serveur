@@ -42,7 +42,7 @@ describe Restitution::Maintenance::ScoreVocabulaire do
 
         allow(metrique_score_ccf).to receive(:standardisateur).and_return(standardisateur)
 
-        expect(mock_metrique_temps).to receive(:calcule).and_return([2.7, 3.7, 3.8])
+        expect(mock_metrique_temps).to receive(:calcule).and_return([ 2.7, 3.7, 3.8 ])
         temps_moyen_normalise = metrique_score_ccf
                                 .temps_moyen_normalise(:temps_moyen_mots_francais,
                                                        mock_metrique_temps)

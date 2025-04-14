@@ -2,15 +2,15 @@
 
 donnee_sociodemographique = resource.donnee_sociodemographique
 
-h3 t(".#{categorie}"), class: 'categorie'
+h3 t(".#{categorie}"), class: "categorie"
 
 bienvenue.questionnaires_questions_pour(categorie).each do |config|
   div config.question.transcription_intitule&.ecrit
   reponse = donnee_sociodemographique&.read_attribute(config.question.nom_technique)
   reponse = if reponse.present?
               config.question.restitue_reponse(reponse)
-            else
-              t('admin.evaluations.autopositionnement.non_renseigne')
-            end
-  div reponse, class: 'reponse'
+  else
+              t("admin.evaluations.autopositionnement.non_renseigne")
+  end
+  div reponse, class: "reponse"
 end

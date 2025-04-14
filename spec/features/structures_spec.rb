@@ -4,17 +4,17 @@ require 'rails_helper'
 
 describe 'Structures', type: :feature do
   before do
-    paris12 = { 'coordinates' => [40.7143528, -74.0059731] }
-    Geocoder::Lookup::Test.add_stub('75012, FRANCE', [paris12])
-    Geocoder::Lookup::Test.add_stub('75012', [paris12])
+    paris12 = { 'coordinates' => [ 40.7143528, -74.0059731 ] }
+    Geocoder::Lookup::Test.add_stub('75012, FRANCE', [ paris12 ])
+    Geocoder::Lookup::Test.add_stub('75012', [ paris12 ])
 
-    paris13 = { 'coordinates' => [40.7143529, -74.0059730] }
-    Geocoder::Lookup::Test.add_stub('75013, FRANCE', [paris13])
-    Geocoder::Lookup::Test.add_stub('75013', [paris13])
+    paris13 = { 'coordinates' => [ 40.7143529, -74.0059730 ] }
+    Geocoder::Lookup::Test.add_stub('75013, FRANCE', [ paris13 ])
+    Geocoder::Lookup::Test.add_stub('75013', [ paris13 ])
 
-    lyon = { 'coordinates' => [45.7632404, 4.8338496] }
-    Geocoder::Lookup::Test.add_stub('69000, FRANCE', [lyon])
-    Geocoder::Lookup::Test.add_stub('69000', [lyon])
+    lyon = { 'coordinates' => [ 45.7632404, 4.8338496 ] }
+    Geocoder::Lookup::Test.add_stub('69000, FRANCE', [ lyon ])
+    Geocoder::Lookup::Test.add_stub('69000', [ lyon ])
   end
 
   describe "#index liste les structures proche d'un code postal" do

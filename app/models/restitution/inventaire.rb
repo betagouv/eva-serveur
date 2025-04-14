@@ -3,12 +3,12 @@
 module Restitution
   class Inventaire < Base
     EVENEMENT = {
-      OUVERTURE_CONTENANT: 'ouvertureContenant',
-      SAISIE_INVENTAIRE: 'saisieInventaire',
-      FIN_SITUATION: 'finSituation',
-      DEMARRAGE: 'demarrage'
+      OUVERTURE_CONTENANT: "ouvertureContenant",
+      SAISIE_INVENTAIRE: "saisieInventaire",
+      FIN_SITUATION: "finSituation",
+      DEMARRAGE: "demarrage"
     }.freeze
-    VERSION_2 = '2'
+    VERSION_2 = "2"
 
     class Essai < Inventaire
       def initialize(campagne, evenements, date_depart_situation)
@@ -21,11 +21,11 @@ module Restitution
       end
 
       def nombre_erreurs
-        compte_reponse { |reponse| !reponse['reussite'] }
+        compte_reponse { |reponse| !reponse["reussite"] }
       end
 
       def nombre_de_non_remplissage
-        compte_reponse { |reponse| reponse['quantite'].blank? }
+        compte_reponse { |reponse| reponse["quantite"].blank? }
       end
 
       def nombre_erreurs_sauf_de_non_remplissage
@@ -35,17 +35,17 @@ module Restitution
       end
 
       def verifie?
-        dernier_evenement.donnees['reponses']
+        dernier_evenement.donnees["reponses"]
       end
 
       def reussite?
-        dernier_evenement.donnees['reussite']
+        dernier_evenement.donnees["reussite"]
       end
 
       def compte_reponse
         return nil unless verifie?
 
-        dernier_evenement.donnees['reponses'].inject(0) do |compteur, (_id, reponse)|
+        dernier_evenement.donnees["reponses"].inject(0) do |compteur, (_id, reponse)|
           compteur += 1 if yield reponse
           compteur
         end
@@ -93,9 +93,9 @@ module Restitution
 
     def version?(version)
       evenement_demarrage = evenements.find { |e| e.nom == EVENEMENT[:DEMARRAGE] }
-      return false if evenement_demarrage.blank? || evenement_demarrage.donnees['version'].blank?
+      return false if evenement_demarrage.blank? || evenement_demarrage.donnees["version"].blank?
 
-      evenement_demarrage.donnees['version'] == version
+      evenement_demarrage.donnees["version"] == version
     end
   end
 end

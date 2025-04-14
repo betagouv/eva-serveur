@@ -3,12 +3,12 @@
     <div class="modal-content fr-alert fr-alert--warning">
       <div class="modal-body">
         <div class='message'>
-          <%= md t('.info_comptes_en_attente') %>
+          <%= md t(".info_comptes_en_attente") %>
         </div>
         <div class='actions'>
-          <a class="bouton-secondaire petit-bouton" href="#" data-dismiss="modal"><%= t('.annuler') %></a>
+          <a class="bouton-secondaire petit-bouton" href="#" data-dismiss="modal"><%= t(".annuler") %></a>
           <% structure = current_compte.structure %>
-          <%= link_to 'Voir les demandes',
+          <%= link_to "Voir les demandes",
                       send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-membres"),
                       class: "bouton petit-bouton" %>
         </div>

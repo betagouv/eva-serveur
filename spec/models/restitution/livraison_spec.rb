@@ -7,7 +7,7 @@ describe Restitution::Livraison do
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
   let(:situation) { create :situation_livraison }
   let(:campagne) { build :campagne }
-  let(:restitution) { described_class.new(campagne, [build(:evenement_demarrage, partie: partie)]) }
+  let(:restitution) { described_class.new(campagne, [ build(:evenement_demarrage, partie: partie) ]) }
 
   describe '#efficience' do
     it 'retourne nil' do

@@ -54,7 +54,7 @@ describe Evaluation do
       let(:evaluation_non_anonyme) { create :evaluation, anonymise_le: nil }
 
       it 'retourne les évaluations qui ne sont pas anonymisées' do
-        expect(described_class.non_anonymes).to eq [evaluation_non_anonyme]
+        expect(described_class.non_anonymes).to eq [ evaluation_non_anonyme ]
       end
     end
 
@@ -63,7 +63,7 @@ describe Evaluation do
       let!(:evaluation_sans_mise_en_action) { create :evaluation }
 
       it 'retourne les évaluations sans mise en action' do
-        expect(described_class.sans_mise_en_action).to eq [evaluation_sans_mise_en_action]
+        expect(described_class.sans_mise_en_action).to eq [ evaluation_sans_mise_en_action ]
       end
     end
 
@@ -185,7 +185,7 @@ describe Evaluation do
     it 'retourne les évaluations de mises en action pour le tableau de bord' do
       ability = Ability.new(compte_admin)
       expect(described_class.tableau_de_bord_mises_en_action(ability).pluck(:id))
-        .to eq [evaluation_sans_mise_en_action.id]
+        .to eq [ evaluation_sans_mise_en_action.id ]
     end
   end
 

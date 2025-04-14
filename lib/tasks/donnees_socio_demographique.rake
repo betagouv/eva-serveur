@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'rake_logger'
+require "rake_logger"
 
 namespace :donnees_socio_demographique do
-  desc 'Supprime les données socio démographique en double'
+  desc "Supprime les données socio démographique en double"
   task supprimer_doublons: :environment do
     logger = RakeLogger.logger
 
@@ -31,7 +31,7 @@ def recupere_doublons
   evaluation_ids = DonneeSociodemographique.with_deleted
                                            .select(:evaluation_id)
                                            .group(:evaluation_id)
-                                           .having('count(*) > 1')
+                                           .having("count(*) > 1")
                                            .select(:evaluation_id)
   DonneeSociodemographique.with_deleted
                           .where(evaluation_id: evaluation_ids)

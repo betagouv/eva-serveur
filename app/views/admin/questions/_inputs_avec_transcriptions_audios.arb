@@ -3,14 +3,14 @@
 if f.object.new_record?
   f.object.transcriptions.build
 
-  render partial: 'admin/transcriptions/input_ecrit_audio',
+  render partial: "admin/transcriptions/input_ecrit_audio",
          locals: { f: f, transcription_categorie: :intitule }
-  render partial: 'admin/transcriptions/input_ecrit_audio',
+  render partial: "admin/transcriptions/input_ecrit_audio",
          locals: { f: f, transcription_categorie: :modalite_reponse }
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
     t.input :id, as: :hidden
-    t.input :audio, as: :file, label: t('.label.consigne_audio'),
-                    input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+    t.input :audio, as: :file, label: t(".label.consigne_audio"),
+                    input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(",") }
     t.input :categorie, as: :hidden, input_html: { value: :consigne }
   end
 else
@@ -18,16 +18,16 @@ else
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
     if t.object.intitule?
       t.input :id, as: :hidden
-      t.input :ecrit, label: t('.label.intitule'), input_html: { rows: 4 }
-      t.input :audio, as: :file, label: 'Intitulé audio',
-                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+      t.input :ecrit, label: t(".label.intitule"), input_html: { rows: 4 }
+      t.input :audio, as: :file, label: "Intitulé audio",
+                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(",") }
       t.input :categorie, as: :hidden, input_html: { value: :intitule }
     end
   end
   if f.object.transcription_intitule&.audio&.attached?
     f.inputs do
       f.input :supprimer_audio_intitule, as: :boolean,
-                                         label: t('.label.supprimer_audio_intitule'),
+                                         label: t(".label.supprimer_audio_intitule"),
                                          hint: tag_audio(f.object.transcription_intitule)
     end
   end
@@ -37,20 +37,20 @@ else
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
     if t.object.modalite_reponse?
       t.input :id, as: :hidden
-      t.input :ecrit, label: t('.label.modalite_reponse'), input_html: { rows: 4 }
-      t.input :audio, as: :file, label: t('.label.modalite_reponse_audio'),
-                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+      t.input :ecrit, label: t(".label.modalite_reponse"), input_html: { rows: 4 }
+      t.input :audio, as: :file, label: t(".label.modalite_reponse_audio"),
+                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(",") }
       t.input :categorie, as: :hidden, input_html: { value: :modalite_reponse }
     end
   end
   f.inputs do
-    f.input :demarrage_audio_modalite_reponse, label: t('.label.demarrage_audio_modalite_reponse')
+    f.input :demarrage_audio_modalite_reponse, label: t(".label.demarrage_audio_modalite_reponse")
   end
   if f.object.transcription_modalite_reponse&.audio&.attached?
     f.inputs do
       f.input :supprimer_audio_modalite_reponse,
               as: :boolean,
-              label: t('.label.supprimer_audio_modalite'),
+              label: t(".label.supprimer_audio_modalite"),
               hint: tag_audio(f.object.transcription_modalite_reponse)
     end
   end
@@ -58,8 +58,8 @@ else
   f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
     if t.object.consigne?
       t.input :id, as: :hidden
-      t.input :audio, as: :file, label: t('.label.consigne_audio'),
-                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(',') }
+      t.input :audio, as: :file, label: t(".label.consigne_audio"),
+                      input_html: { accept: Transcription::AUDIOS_CONTENT_TYPES.join(",") }
       t.input :categorie, as: :hidden, input_html: { value: :consigne }
     end
   end
@@ -67,7 +67,7 @@ else
     f.inputs do
       f.input :supprimer_audio_consigne,
               as: :boolean,
-              label: t('.label.supprimer_audio_consigne'),
+              label: t(".label.supprimer_audio_consigne"),
               hint: tag_audio(f.object.transcription_consigne)
     end
   end

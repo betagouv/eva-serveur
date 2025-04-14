@@ -3,7 +3,7 @@
 ActiveAdmin.register QuestionGlisserDeposer do
   before_action :set_question, only: %i[update]
 
-  menu parent: 'Parcours', if: proc { can? :manage, Compte }
+  menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :libelle, :nom_technique, :description, :illustration, :supprimer_illustration,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_intitule,
@@ -16,16 +16,16 @@ ActiveAdmin.register QuestionGlisserDeposer do
   filter :libelle
   filter :nom_technique
 
-  form partial: 'form'
+  form partial: "form"
 
   action_item :importer_question, only: :index do
-    link_to 'Importer questions glisser déposer',
-            admin_import_xls_path(type: QuestionGlisserDeposer::QUESTION_TYPE, model: 'question',
+    link_to "Importer questions glisser déposer",
+            admin_import_xls_path(type: QuestionGlisserDeposer::QUESTION_TYPE, model: "question",
                                   redirect_to: admin_questions_glisser_deposer_path)
   end
 
   action_item :exporter_question, only: :show do
-    link_to 'Exporter la question en XLS', admin_question_export_xls_path(question_id: params[:id])
+    link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
   end
 
   index do
@@ -37,13 +37,13 @@ ActiveAdmin.register QuestionGlisserDeposer do
     end
     column :created_at
     actions
-    column '', class: 'bouton-action' do
-      render partial: 'components/bouton_menu_actions'
+    column "", class: "bouton-action" do
+      render partial: "components/bouton_menu_actions"
     end
   end
 
   show do
-    render partial: 'show'
+    render partial: "show"
   end
 
   controller do

@@ -14,7 +14,7 @@ describe Restitution::Livraison, type: :integration do
     let(:bon_choix) { create :choix, :bon }
     let(:question_numeratie) do
       nom_technique = QuestionData.find_by(metacompetence: 'numeratie').nom_technique
-      create :question_qcm, nom_technique: nom_technique, choix: [bon_choix]
+      create :question_qcm, nom_technique: nom_technique, choix: [ bon_choix ]
     end
 
     before do

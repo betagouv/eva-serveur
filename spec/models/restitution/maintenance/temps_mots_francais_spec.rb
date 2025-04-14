@@ -37,7 +37,7 @@ describe Restitution::Maintenance::TempsMotsFrancais do
         ]
       end
 
-      it { expect(metrique_temps_mots_francais).to eq [0.01, 0.02] }
+      it { expect(metrique_temps_mots_francais).to eq [ 0.01, 0.02 ] }
     end
 
     context "avec un événement d'identification non mot correcte" do

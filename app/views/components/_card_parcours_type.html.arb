@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
-div id: 'card-parcours-type' do
-  div class: 'carte' do
+div id: "card-parcours-type" do
+  div class: "carte" do
     if parcours_type.present?
       h4 parcours_type.libelle
       text_node md(parcours_type.description)
       if parcours_type.duree_moyenne.present?
-        para class: 'carte__duree' do
-          text_node 'Durée moyenne : '
+        para class: "carte__duree" do
+          text_node "Durée moyenne : "
           text_node parcours_type.duree_moyenne
         end
       end
     else
-      h4 t('.parcours_personnalise.libelle')
-      text_node md t('.parcours_personnalise.description')
+      h4 t(".parcours_personnalise.libelle")
+      text_node md t(".parcours_personnalise.description")
     end
   end
 end

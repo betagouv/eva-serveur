@@ -12,7 +12,7 @@ class Choix < ApplicationRecord
 
   validate :audio_type
 
-  AUDIOS_CONTENT_TYPES = ['audio/mpeg', 'audio/mp4'].freeze
+  AUDIOS_CONTENT_TYPES = [ "audio/mpeg", "audio/mp4" ].freeze
 
   acts_as_list scope: :question_id
 
@@ -23,7 +23,7 @@ class Choix < ApplicationRecord
   def audio_type
     return unless audio.attached? && !audio.content_type.in?(AUDIOS_CONTENT_TYPES)
 
-    errors.add(:audio, 'doit être un fichier MP3 ou MP4')
+    errors.add(:audio, "doit être un fichier MP3 ou MP4")
     audio.purge
   end
 

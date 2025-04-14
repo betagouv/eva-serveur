@@ -2,10 +2,10 @@
 
 class EvenementObjetsTrouves < SimpleDelegator
   def metacompetence
-    donnees['metacompetence']
+    donnees["metacompetence"]
   end
 
   def bonne_reponse?
-    donnees['succes']
+    donnees["succes"]
   end
 end

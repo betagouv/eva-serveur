@@ -20,7 +20,7 @@ FactoryBot.define do
 
       before(:create) do |parcours_type|
         situation = create(:situation_cafe_de_la_place)
-        parcours_type.situations_configurations_attributes = [{ situation: situation }]
+        parcours_type.situations_configurations_attributes = [ { situation: situation } ]
       end
     end
 

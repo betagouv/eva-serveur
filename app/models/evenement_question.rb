@@ -8,6 +8,7 @@ class EvenementQuestion
 
   delegate :est_principale?, :est_un_rattrapage?, :nom_technique, :bonnes_reponses,
            :reponses_possibles, to: :@question
+  delegate :fin_situation?, to: :@evenement
 
   def score
     @evenement.donnees['score'] || 0
@@ -48,10 +49,6 @@ class EvenementQuestion
 
   def pris_en_compte_pour_calcul_score_clea?(questions)
     questions.any? { |q| q.nom_technique == nom_technique }
-  end
-
-  def fin_situation?
-    @evenement.nom == 'finSituation'
   end
 
   class << self
@@ -121,8 +118,7 @@ class EvenementQuestion
       questions_a_prendre = []
 
       groupes_clea.each_value do |questions|
-        questions_principales, questions_rattrapage =
-          questions.partition(&:est_principale?)
+        questions_principales, questions_rattrapage = questions.partition(&:est_principale?)
         questions_principales.each { |q| questions_a_prendre << q }
         questions_rattrapage.each { |q| questions_a_prendre << q if q.a_ete_repondue? }
       end

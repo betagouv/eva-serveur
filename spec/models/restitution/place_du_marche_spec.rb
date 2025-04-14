@@ -360,4 +360,33 @@ describe Restitution::PlaceDuMarche do
       end
     end
   end
+
+  describe '#evaluation_terminee?' do
+    context 'quand la situation n\'est pas terminée' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie)
+                            ])
+      end
+
+      it 'retourne false' do
+        expect(restitution.evaluation_terminee?).to be false
+      end
+    end
+
+    context 'quand la situation est terminée' do
+      let(:restitution) do
+        described_class.new(campagne,
+                            [
+                              build(:evenement_demarrage, partie: partie),
+                              build(:evenement_fin_situation, partie: partie)
+                            ])
+      end
+
+      it 'retourne true' do
+        expect(restitution.evaluation_terminee?).to be true
+      end
+    end
+  end
 end

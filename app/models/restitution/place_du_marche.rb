@@ -155,6 +155,10 @@ module Restitution
     end
     # rubocop:enable Naming/VariableNumber
 
+    def evaluation_terminee?
+      @evenements.any?(&:fin_situation?)
+    end
+
     private
 
     def evenements_questions_pour_code(code)

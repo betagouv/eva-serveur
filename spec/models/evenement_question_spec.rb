@@ -168,4 +168,25 @@ describe EvenementQuestion, type: :model do
                                                           evenement_question_autre])
     end
   end
+
+  fdescribe '#fin_situation?' do
+    let(:question) { build(:question) }
+    let(:evenement_question) { described_class.new(question: question, evenement: evenement) }
+
+    context 'quand l\'événement est un événement de fin de situation' do
+      let(:evenement) { build(:evenement_fin_situation) }
+
+      it 'retourne true' do
+        expect(evenement_question.fin_situation?).to be_truthy
+      end
+    end
+
+    context 'quand l\'événement n\'est pas un événement de fin de situation' do
+      let(:evenement) { build(:evenement_demarrage) }
+
+      it 'retourne false' do
+        expect(evenement_question.fin_situation?).to be_falsey
+      end
+    end
+  end
 end

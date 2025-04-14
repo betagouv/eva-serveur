@@ -96,8 +96,6 @@ module Restitution
       end
 
       def remplis_ligne(ligne, evenement_question) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        @onglet_xls.grise_ligne(ligne) unless evenement_question.a_ete_repondue?
-
         @onglet_xls.set_valeur(ligne, 0, evenement_question.code_clea)
         @onglet_xls.set_valeur(ligne, 1, evenement_question.nom_technique)
         @onglet_xls.set_valeur(ligne, 2, evenement_question.metacompetence&.humanize)

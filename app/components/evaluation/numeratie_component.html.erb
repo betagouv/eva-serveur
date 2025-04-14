@@ -12,10 +12,11 @@
             sous_competences: @sous_competences,
             competence: :numeratie %>
       <% end %>
+      <%= render(Evaluation::AlertInterpreterResultatsComponent.new) %>
+      <% if @place_du_marche %>
+        <% route = admin_positionnement_partie_reponses_path(partie_id: @place_du_marche.partie.id)%>
+        <%= render partial: 'telechargement_reponses', locals: { route: route } %>
+      <% end %>
     </div>
-    <% if @place_du_marche %>
-      <% route = admin_positionnement_partie_reponses_path(partie_id: @place_du_marche.partie.id)%>
-      <%= render partial: 'telechargement_reponses', locals: { route: route } %>
-    <% end %>
   </div>
 </div>

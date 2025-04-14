@@ -59,3 +59,8 @@ a.pas-souligne {
 .fr-table__content table {
   margin-bottom: unset;
 }
+
+// Fix conflit entre les tuiles (DSFR) et la règle d'ActiveAdmin : .section > div, .panel > div
+.fr-tile {
+  padding: 2rem 2rem 2.25rem !important;
+}

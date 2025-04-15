@@ -30,6 +30,7 @@ module ImportExport
 
       def cree_ou_actualise_questionnaire(ligne)
         questionnaire = ::Questionnaire.find_or_initialize_by(nom_technique: ligne[1])
+        # WTF CA IMPORTE PAS DANS LE BON ORDRE
         questions = Question.where(nom_technique: ligne[2].split(','))
         questionnaire.assign_attributes(
           libelle: ligne[0],

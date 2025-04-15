@@ -14,8 +14,10 @@ describe ImportExport::Questionnaire::Export do
   let(:headers) do
     ImportExport::Questionnaire::ImportExportDonnees::HEADERS_ATTENDUS
   end
-  let(:question) { create :question }
-  let!(:questionnaire) { create(:questionnaire, questions: [question]) }
+  let(:question1) { create :question, nom_technique: 'question1' }
+  let(:question2) { create :question, nom_technique: 'question2' }
+  let(:question3) { create :question, nom_technique: 'question3' }
+  let!(:questionnaire) { create(:questionnaire, questions: [question1, question3, question2]) }
   let(:spreadsheet) { response_service.export.workbook }
   let(:worksheet) { spreadsheet.worksheet(0) }
   let(:headers_xls) { worksheet.row(0).map { |header| header.parameterize.underscore.to_sym } }
@@ -31,6 +33,6 @@ describe ImportExport::Questionnaire::Export do
 
     expect(ligne[0]).to eq questionnaire.libelle
     expect(ligne[1]).to eq questionnaire.nom_technique
-    expect(ligne[2]).to eq questionnaire.questions.map(&:nom_technique)
+    expect(ligne[2]).to eq 'question1,question3,question2'
   end
 end

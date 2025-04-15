@@ -12,14 +12,29 @@ ActiveAdmin.register Questionnaire do
 
   member_action :export_questions, method: :get
 
+  action_item :export_questionnaire, only: :show do
+    link_to 'Exporter le questionnaire', export_admin_questionnaire_path(resource)
+  end
+
   action_item :export_questions, only: :show do
-    link_to 'Exporter les questions en XLS', export_questions_admin_questionnaire_path(resource),
+    link_to 'Exporter le contenu des questions',
+            export_questions_admin_questionnaire_path(resource),
             format: :xls
   end
 
   action_item :import_xls, only: :index do
     link_to 'Importer un questionnaire en XLS',
             admin_import_xls_path(model: 'questionnaire', redirect_to: admin_questionnaires_path)
+  end
+
+  member_action :export, method: :get do
+    questionnaire = Questionnaire.find(params[:id])
+    export =
+      ImportExport::Questionnaire::ImportExportDonnees.new(questionnaires: [questionnaire])
+                                                      .exporte_donnees
+    send_data export[:xls],
+              content_type: export[:content_type],
+              filename: export[:filename]
   end
 
   form do |f|
@@ -44,7 +59,9 @@ ActiveAdmin.register Questionnaire do
     end
     column :nom_technique
     column :created_at
-    actions
+    actions do |questionnaire|
+      link_to 'Exporter', export_admin_questionnaire_path(questionnaire)
+    end
     column '', class: 'bouton-action' do
       render partial: 'components/bouton_menu_actions'
     end

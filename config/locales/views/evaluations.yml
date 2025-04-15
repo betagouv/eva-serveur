@@ -523,4 +523,4 @@ fr:
           Pour en savoir plus sur ces référentiels et les conditions d’interprétation des résultats :
         alerte_incomplete:
           titre: Évaluation incomplète
-          body: L’évalué n’a pas terminé ou a interrompu la situation “Place du marché”. Cela peut avoir un impact sur la fiabilité des résultats.
+          body: Vous n’avez pas terminé ou vous avez interrompu votre parcours sur eva. Cela peut avoir un impact sur la fiabilité des résultats ci-dessous. 

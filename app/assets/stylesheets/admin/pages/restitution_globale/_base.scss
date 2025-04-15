@@ -8,6 +8,9 @@
 
   .panel {
     padding: 3rem 0;
+    &--avec-references {
+      padding-bottom: 0;
+    }
   }
 
   .marges-page {

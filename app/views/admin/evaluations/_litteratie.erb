@@ -1,5 +1,5 @@
 <% profil = cafe_de_la_place ? cafe_de_la_place.niveau_litteratie : 'indetermine' %>
-<div class="panel">
+<div class="panel panel--avec-references">
   <div class='marges-page'>
     <%= render 'litteratie_numeratie_synthese',
       synthese: synthese,
@@ -10,10 +10,12 @@
         sous_competences: cafe_de_la_place.competences_litteratie,
         competence: :litteratie %>
     <% end %>
-    <%= render ReferentielAnlciComponent.new unless pdf %>
-    <% if !pdf && cafe_de_la_place && !place_du_marche %>
-      <% route = admin_positionnement_partie_reponses_path(partie_id: cafe_de_la_place.partie.id)%>
-      <%= render partial: 'telechargement_reponses', locals: { route: route } %>
-    <% end %>
   </div>
+  <%= render ReferentielAnlciComponent.new unless pdf %>
+  <% if !pdf && cafe_de_la_place && !place_du_marche %>
+    <% route = admin_positionnement_partie_reponses_path(partie_id: cafe_de_la_place.partie.id)%>
+    <div class="padding-tuile">
+      <%= render partial: 'telechargement_reponses', locals: { route: route } %>
+    </div>
+  <% end %>
 </div>

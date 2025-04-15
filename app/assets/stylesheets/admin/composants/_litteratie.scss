@@ -22,7 +22,7 @@
     p {
       font-size: 0.875rem;
     }
-    p:last-child {
+    p:last-child:not(.fr-tile__detail) {
       margin-bottom: 0;
     }
   }

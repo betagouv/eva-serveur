@@ -19,8 +19,9 @@ describe ImportExport::Questionnaire::Import do
     end
 
     before do
-      create(:question, nom_technique: 'N1Pse1')
+      # Crée les questions dans un ordre aléatoire
       create(:question, nom_technique: 'N1Pse2')
+      create(:question, nom_technique: 'N1Pse1')
       create(:question, nom_technique: 'N1Pse3')
     end
 

@@ -9,7 +9,7 @@ div id: 'correspondance_anlci', class: 'page adaptation-pdf correspondance_anlci
     h2 t('titre', scope: 'admin.restitutions.anlci')
   end
 
-  div class: 'panel' do
+  div class: 'panel panel--avec-references' do
     div class: 'row no-gutters recommandation-anlci marges-page' do
       div class: 'col-auto' do
         image_tag 'logo_anlci.svg', class: 'pr-5', alt: t('logo_anlci')

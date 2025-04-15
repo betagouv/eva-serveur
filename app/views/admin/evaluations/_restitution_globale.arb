@@ -34,7 +34,8 @@ div class: "evaluation__restitution-globale #{class_css}" do
 
   if campagne_avec_competences_transversales?
     render Evaluation::CompetencesTransversalesComponent.new(
-      restitution_globale: restitution_globale
+      restitution_globale: restitution_globale,
+      completude_competences_transversales: completude.competences_transversales?
     )
   end
 
@@ -44,7 +45,8 @@ div class: "evaluation__restitution-globale #{class_css}" do
       synthese_diagnostic: restitution_globale.synthese_diagnostic,
       mes_avec_redaction_de_notes: mes_avec_redaction_de_notes,
       niveau_cnef: resource.niveau_cnef,
-      niveau_cefr: resource.niveau_cefr
+      niveau_cefr: resource.niveau_cefr,
+      completude_competences_de_base: completude.competences_de_base?
     )
   end
 
@@ -65,6 +67,8 @@ div class: "evaluation__restitution-globale #{class_css}" do
       else
         h2 t('titre', scope: 'admin.restitutions.litteratie')
       end
+
+      render Evaluation::AlerteIncompleteComponent.new unless cafe_de_la_place&.complete?
 
       render partial: 'litteratie',
              locals: {

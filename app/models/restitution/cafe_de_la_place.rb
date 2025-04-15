@@ -50,6 +50,10 @@ module Restitution
       super
     end
 
+    def complete?
+      evenements.any? { |e| e.nom == 'finSituation' }
+    end
+
     METRIQUES.each_key do |metrique|
       define_method metrique do
         METRIQUES[metrique]['instance']

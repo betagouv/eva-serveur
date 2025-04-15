@@ -22,7 +22,6 @@ describe ImportExport::Questions::Export::QuestionSaisie do
 
   it 'génére un fichier xls avec les détails de la question' do
     ligne = worksheet.row(1)
-    puts ligne.inspect
     expect(ligne[8]).to be(false)
     expect(ligne[9]).to eq(question.suffix_reponse)
     expect(ligne[10]).to eq(question.reponse_placeholder)

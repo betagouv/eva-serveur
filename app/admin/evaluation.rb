@@ -123,7 +123,7 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
-    helper_method :restitution_globale, :parties, :prise_en_main?, :bienvenue,
+    helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
@@ -177,6 +177,10 @@ ActiveAdmin.register Evaluation do
     def restitution_globale
       @restitution_globale ||=
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
+    end
+
+    def completude
+      @completude ||= Restitution::Completude.new(resource, restitution_globale.restitutions)
     end
 
     def trad_niveau(evaluation, interpretation)

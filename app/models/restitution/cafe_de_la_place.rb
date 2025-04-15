@@ -51,7 +51,7 @@ module Restitution
     end
 
     def complete?
-      evenements.any? { |e| e.nom == 'finSituation' }
+      evenements.any?(&:fin_situation?)
     end
 
     METRIQUES.each_key do |metrique|

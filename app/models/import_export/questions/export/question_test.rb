@@ -6,12 +6,12 @@ module ImportExport
       class QuestionTest < ImportExport::Questions::Export
         private
 
-        def remplis_champs
+        def remplis_champs(question)
           col = super
-          @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.ecrit)
-          @onglet.set_valeur(@ligne, col += 1, @question.transcription_modalite_reponse&.audio_url)
-          @onglet.set_valeur(@ligne, col += 1, @question.description)
-          @onglet.set_valeur(@ligne, col += 1, @question.demarrage_audio_modalite_reponse)
+          @onglet.set_valeur(@ligne, col += 1, question.transcription_modalite_reponse&.ecrit)
+          @onglet.set_valeur(@ligne, col += 1, question.transcription_modalite_reponse&.audio_url)
+          @onglet.set_valeur(@ligne, col += 1, question.description)
+          @onglet.set_valeur(@ligne, col += 1, question.demarrage_audio_modalite_reponse)
           col
         end
       end

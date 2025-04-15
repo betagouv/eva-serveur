@@ -10,6 +10,20 @@ module ImportExport
     def initialize
       @workbook = Spreadsheet::Workbook.new
       @onglets = {}
+      @donnees = []
+    end
+
+    def to_xls
+      entetes = @headers.map { |header| { titre: header.to_s.humanize, taille: 20 } }
+      @export = ::ImportExport::ExportXls.new
+      @onglet = @export.cree_worksheet_donnees(entetes)
+
+      remplis_la_feuille
+      retourne_le_contenu_du_xls
+    end
+
+    def nom_du_fichier(type)
+      nom_fichier_horodate(type, 'xls')
     end
 
     def content_type_xls
@@ -28,6 +42,13 @@ module ImportExport
 
     def cree_worksheet_synthese(entetes)
       @onglets[WORKSHEET_SYNTHESE.to_sym] = OngletXls.new(WORKSHEET_SYNTHESE, @workbook, entetes)
+    end
+
+    def remplis_la_feuille
+      @donnees.each_with_index do |donnee, index|
+        @ligne = index + 1
+        remplis_champs(donnee)
+      end
     end
   end
 end

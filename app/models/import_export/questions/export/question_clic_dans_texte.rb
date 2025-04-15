@@ -6,9 +6,9 @@ module ImportExport
       class QuestionClicDansTexte < ImportExport::Questions::Export::QuestionTest
         private
 
-        def remplis_champs
+        def remplis_champs(question)
           col = super
-          @onglet.set_valeur(@ligne, col += 1, @question.texte_sur_illustration)
+          @onglet.set_valeur(@ligne, col += 1, question.texte_sur_illustration)
           col
         end
       end

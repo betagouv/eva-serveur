@@ -6,11 +6,11 @@ module ImportExport
       class QuestionGlisserDeposer < ImportExport::Questions::Export::QuestionTest
         private
 
-        def remplis_champs
+        def remplis_champs(question)
           col = super
-          @onglet.set_valeur(@ligne, col += 1, @question.zone_depot_url)
-          @onglet.set_valeur(@ligne, col += 1, @question.orientation)
-          @question.reponses.each_with_index do |choix, index|
+          @onglet.set_valeur(@ligne, col += 1, question.zone_depot_url)
+          @onglet.set_valeur(@ligne, col += 1, question.orientation)
+          question.reponses.each_with_index do |choix, index|
             ajoute_reponses(choix, index, col + 1)
           end
         end

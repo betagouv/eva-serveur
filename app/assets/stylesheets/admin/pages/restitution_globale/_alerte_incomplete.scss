@@ -1,3 +1,9 @@
 .alert-incomplete {
   margin-bottom: $dsfr-spacing-6v;
+  padding-top: $dsfr-spacing-4v;
+  padding-bottom: $dsfr-spacing-4v;
+
+  p {
+    margin-bottom: 0;
+  }
 }

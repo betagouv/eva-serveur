@@ -2,18 +2,13 @@
 
 class Evaluation
   class SyntheseDiagnosticComponent < ViewComponent::Base
-    def initialize(
-      restitution_globale:,
-      synthese_diagnostic:,
-      mes_avec_redaction_de_notes:,
-      niveau_cnef:,
-      niveau_cefr:
-    )
-      @restitution_globale = restitution_globale
-      @synthese_diagnostic = synthese_diagnostic
-      @mes_avec_redaction_de_notes = mes_avec_redaction_de_notes
-      @niveau_cnef = niveau_cnef
-      @niveau_cefr = niveau_cefr
+    def initialize(params = {})
+      @restitution_globale = params[:restitution_globale]
+      @synthese_diagnostic = params[:synthese_diagnostic]
+      @mes_avec_redaction_de_notes = params[:mes_avec_redaction_de_notes]
+      @niveau_cnef = params[:niveau_cnef]
+      @niveau_cefr = params[:niveau_cefr]
+      @completude_competences_de_base = params[:completude_competences_de_base]
     end
   end
 end

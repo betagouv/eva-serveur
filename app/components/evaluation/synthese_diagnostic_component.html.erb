@@ -1,5 +1,8 @@
 <div id="francais_mathematiques" class="page francais_mathematiques">
   <h2><%= t('titre', scope: 'admin.restitutions.cefr') %></h2>
+  <% unless @completude_competences_de_base %>
+    <%= render Evaluation::AlerteIncompleteComponent.new %>
+  <% end %>
 
   <div class="panel panel--avec-references">
     <div class="marges-page">

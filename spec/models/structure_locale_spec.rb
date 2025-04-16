@@ -10,7 +10,7 @@ describe StructureLocale, type: :model do
 
   it do
     types_structures = %w[
-      mission_locale pole_emploi SIAE service_insertion_collectivite CRIA
+      mission_locale france_travail SIAE service_insertion_collectivite CRIA
       organisme_formation orientation_scolaire cap_emploi e2c SMA autre
     ]
     expect(subject).to validate_inclusion_of(:type_structure).in_array(types_structures)

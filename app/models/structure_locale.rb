@@ -13,7 +13,7 @@ class StructureLocale < Structure
     organisme_formation
     orientation_scolaire
     PJJ_UEAJ
-    pole_emploi
+    france_travail
     service_insertion_collectivite
     SIAE
     SMA

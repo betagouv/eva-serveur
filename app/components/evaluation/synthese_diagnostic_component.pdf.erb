@@ -2,7 +2,10 @@
   <%= render "entete_page", restitution_globale: @restitution_globale %>
 
   <h2 class="text-center mt-5 mb-4"><%= t("titre", scope: "admin.restitutions.cefr") %></h2>
-
+  <% unless @completude_competences_de_base %>
+    <%= render Evaluation::AlertIncompleteComponent.new %>
+  <% end %>
+  
   <div class="panel">
     <div class="marges-page">
       <%= render "litteratie_numeratie_synthese",

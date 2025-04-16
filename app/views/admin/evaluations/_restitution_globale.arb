@@ -68,7 +68,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
         h2 t("titre", scope: "admin.restitutions.litteratie")
       end
 
-      render Evaluation::AlerteIncompleteComponent.new unless cafe_de_la_place&.complete?
+      render Evaluation::AlertIncompleteComponent.new unless cafe_de_la_place&.complete?
 
       render partial: "litteratie",
              locals: {

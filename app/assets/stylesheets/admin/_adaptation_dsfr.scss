@@ -4,7 +4,9 @@
   }
 }
 ul {
-  list-style-type: none;
+  list-style-type: var(--ul-type);
+  padding-left: var(--ul-start);
+  margin: var(--text-spacing);
 }
 ol > li::marker {
   content: none;

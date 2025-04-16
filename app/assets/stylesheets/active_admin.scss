@@ -52,6 +52,7 @@
 @import 'admin/composants/bouton_ajouter_une_structure';
 @import "admin/composants/evaluation/table_criteres";
 @import "admin/composants/barre_segmentee";
+@import 'admin/composants/alert_incomplete';
 
 // UTILITIES
 @import 'admin/utilities';
@@ -83,7 +84,6 @@
 @import 'admin/pages/restitution_globale/evaluation';
 @import 'admin/pages/restitution_globale/base';
 @import 'admin/pages/restitution_globale/numeratie';
-@import 'admin/pages/restitution_globale/alerte_incomplete';
 @import 'admin/pages/login/structures';
 @import 'admin/pages/question';
 

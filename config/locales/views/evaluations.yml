@@ -521,6 +521,6 @@ fr:
         interpreter_resultats_details_html: |
           Les détails de la restitution sont basés sur le domaine 2 du référentiel CléA “Utilisation des règles de base de calcul et du raisonnement mathématique”.<br>
           Pour en savoir plus sur ces référentiels et les conditions d’interprétation des résultats :
-        alerte_incomplete:
+        alert_incomplete:
           titre: Évaluation incomplète
           body: Vous n’avez pas terminé ou vous avez interrompu votre parcours sur eva. Cela peut avoir un impact sur la fiabilité des résultats ci-dessous. 

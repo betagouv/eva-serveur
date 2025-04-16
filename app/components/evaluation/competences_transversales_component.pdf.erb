@@ -2,6 +2,9 @@
   <%= render "entete_page", restitution_globale: @restitution_globale %>
 
   <h2 class="text-center my-4"><%= t(".titre") %></h2>
+  <% unless @completude_competences_transversales %>
+    <%= render Evaluation::AlertIncompleteComponent.new %>
+  <% end %>
 
   <div class="panel">
     <div class="marges-page">

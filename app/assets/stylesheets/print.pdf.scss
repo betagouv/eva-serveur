@@ -27,7 +27,7 @@ $padding-pdf: 5rem;
 @import "pdf/components/numeratie_component";
 @import "pdf/components/entete_page";
 @import "pdf/components/pied_page";
-
+@import "pdf/components/alert_incomplete";
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;

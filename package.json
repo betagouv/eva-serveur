@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "@storybook/addon-controls": "^7.6.11",
+    "@storybook/addon-controls": "^8.6.12",
     "@storybook/server": "^7.6.11",
-    "@storybook/server-webpack5": "^7.6.11",
-    "storybook": "^7.6.11",
+    "@storybook/server-webpack5": "^8.6.12",
+    "storybook": "^8.6.12",
     "vscode-langservers-extracted": "^4.10.0",
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",

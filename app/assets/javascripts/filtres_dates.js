@@ -10,6 +10,8 @@ function convertir_champ(input, label) {
 }
 
 function utilise_date_picker_du_dsfr(filtre) {
+  if (!filtre) return;
+
   filtre.querySelectorAll('label').forEach((label) => label.remove());
   const champs = filtre.querySelectorAll('input');
   convertir_champ(champs[0], I18n.t('admin.date_depuis'));

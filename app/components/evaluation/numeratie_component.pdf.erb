@@ -4,7 +4,7 @@
   <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
   <div class="content">
-    <h2 class="text-center"><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
+    <h2 class="text-center evaluation__titre"><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
     <% if @place_du_marche && !@place_du_marche.evaluation_terminee? %>
       <%= render(Evaluation::AlertIncompleteComponent.new) %>
     <% end %>
@@ -43,7 +43,7 @@
     <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
-      <h2><%= t("titre_details", scope: "admin.restitutions.numeratie") %></h2>
+      <h2 class="evaluation__titre"><%= t("titre_details", scope: "admin.restitutions.numeratie") %></h2>
       <% @sous_competences[0..1].each do |sous_competence| %>
         <% criteres = sous_competence[1].criteres %>
         <% sous_competence_component = SousCompetenceComponent.new(:numeratie, sous_competence[0], sous_competence[1]) %>

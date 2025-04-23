@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div id: "evaluation__deroulement" do
-  h2 t(".titre")
+  h2 t(".titre"), class: "evaluation__titre"
   div class: "panel panel-parcours" do
     h3 t(".parcours.titre"), class: ".restitution-h3"
     render "components/card_parcours_type", parcours_type: resource.campagne.parcours_type

@@ -2,7 +2,7 @@
 
 niveaux_competences = restitution_globale.niveaux_competences
 
-h2 t(".titre")
+h2 t(".titre"), class: "evaluation__titre"
 div class: "panel evaluation__administration" do
   render "informations_complementaires"
 

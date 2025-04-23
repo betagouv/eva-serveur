@@ -1,7 +1,7 @@
 <div id="competences_transversales" class="page competences_transversales">
   <%= render "entete_page", restitution_globale: @restitution_globale %>
 
-  <h2><%= t(".titre") %></h2>
+  <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <% unless @completude_competences_transversales %>
     <%= render Evaluation::AlertIncompleteComponent.new %>
   <% end %>

@@ -1,5 +1,5 @@
 <div id='numeratie' class='page page-numeratie'>
-  <h2><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
+  <h2 class="evaluation__titre"><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
   <% if @place_du_marche && !@place_du_marche.evaluation_terminee? %>
     <%= render(Evaluation::AlertIncompleteComponent.new) %>
   <% end %>

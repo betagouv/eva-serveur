@@ -85,6 +85,9 @@ ActiveAdmin.register Evaluation do
     column(:positionnement_niveau_litteratie) do |evaluation|
       trad_niveau(evaluation, :positionnement_niveau_litteratie)
     end
+    column(:positionnement_niveau_numeratie) do |evaluation|
+      trad_niveau(evaluation, :positionnement_niveau_numeratie)
+    end
 
     before_filter do |sheet|
       if @collection.count > Evaluation::LIMITE_EXPORT_XLS

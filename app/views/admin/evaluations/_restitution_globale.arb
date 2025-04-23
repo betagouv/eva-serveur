@@ -72,7 +72,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
 
       render partial: "litteratie",
              locals: {
-               synthese: restitution_globale.synthese_positionnement,
+               synthese: restitution_globale.synthese_positionnement_litteratie,
                pdf: pdf
              }
       render "pied_page", pre_pied_page: ReferentielAnlciComponent.new

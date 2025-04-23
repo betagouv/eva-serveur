@@ -61,9 +61,19 @@ fr:
             profil2: Profil 2
             profil3: Profil 3
             profil4: Profil 4
-            profil_4h: Profil 4H
-            profil_4h_plus: Profil 4H+
-            profil_4h_plus_plus: Profil 4H++
+            profil_4h: Profil 4
+            profil_4h_plus: Profil 4+
+            profil_4h_plus_plus: Profil 4++
+            profil_aberrant: Aberrant
+            indetermine: Indéterminé
+          positionnement_niveau_numeratie:
+            profil1: Profil 1
+            profil2: Profil 2
+            profil3: Profil 3
+            profil4: Profil 4
+            profil_4h: Profil 4
+            profil_4h_plus: Profil 4+
+            profil_4h_plus_plus: Profil 4++
             profil_aberrant: Aberrant
             indetermine: Indéterminé
           niveau_anlci_numeratie:
@@ -98,8 +108,9 @@ fr:
         nom: Nom
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global
-        niveau_cefr: Niveau CEFR (pré-positionnement)
-        niveau_cnef: Niveau CNEF (pré-positionnement)
-        niveau_anlci_litteratie: ANLCI Littératie (pré-positionnement)
-        niveau_anlci_numeratie: ANLCI Numératie (pré-positionnement)
+        niveau_cefr: Niveau CEFR (diagnostic)
+        niveau_cnef: Niveau CNEF (diagnostic)
+        niveau_anlci_litteratie: ANLCI Littératie (diagnostic)
+        niveau_anlci_numeratie: ANLCI Numératie (diagnostic)
         positionnement_niveau_litteratie: Positionnement Littératie
+        positionnement_niveau_numeratie: Positionnement Numératie

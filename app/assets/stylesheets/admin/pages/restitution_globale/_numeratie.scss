@@ -8,11 +8,19 @@
   }
 
   .marges-page {
-    padding: 0 2rem;
+    padding: 0;
     margin: 0;
   }
 
   .sous-competence__critere-accordion {
     margin-top: 0;
+  }
+
+  .panel {
+    padding: $dsfr-spacing-8v;
+  }
+
+  .fr-accordion__btn {
+    padding: $dsfr-spacing-4v;
   }
 }

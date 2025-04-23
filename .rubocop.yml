@@ -5,12 +5,12 @@ inherit_gem:
 
 require:
   - rubocop-rails-accessibility
-  - rubocop-packaging
 
 plugins:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-erb
+  - rubocop-packaging
 
 AllCops:
   TargetRubyVersion: 3.2

@@ -197,7 +197,7 @@ describe 'Admin - Evaluation', type: :feature do
                                                          interpretations_competences_transversales: interpretations, structure: 'structure')
           allow(restitution_globale).to receive(:synthese)
           allow(restitution_globale).to receive(:synthese_diagnostic)
-          allow(restitution_globale).to receive(:synthese_positionnement)
+          allow(restitution_globale).to receive(:synthese_positionnement_litteratie)
           allow(restitution_globale).to receive(:synthese_positionnement_numeratie)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)

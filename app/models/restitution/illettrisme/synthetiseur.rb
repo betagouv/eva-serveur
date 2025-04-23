@@ -3,48 +3,49 @@
 module Restitution
   module Illettrisme
     class Synthetiseur
-      def initialize(interpreteur_diagnostic, interpreteur_positionnement, inter_numeratie)
+      def initialize(interpreteur_diagnostic, inter_litteratie, inter_numeratie)
         @algo_diagnostic =
           (SynthetiseurDiagnostic.new(interpreteur_diagnostic) if interpreteur_diagnostic.present?)
-        @algo_positionnement =
-          if interpreteur_positionnement.present?
-            SynthetiseurPositionnement.new(interpreteur_positionnement, nil)
-          end
-        @algo_numeratie =
+        @algo_positionnement_litteratie =
+          (SynthetiseurPositionnement.new(inter_litteratie, nil) if inter_litteratie.present?)
+        @algo_positionnement_numeratie =
           (SynthetiseurPositionnement.new(nil, inter_numeratie) if inter_numeratie.present?)
       end
 
       def synthese
-        synthese_positionnement.presence ||
-          synthese_diagnostic ||
-          synthese_positionnement_numeratie.presence
+          synthese_positionnement || synthese_diagnostic
       end
 
-      def synthese_positionnement
-        Synthetiseur.calcule_synthese(@algo_positionnement)
+      def synthese_positionnement_litteratie
+        Synthetiseur.calcule_synthese([ @algo_positionnement_litteratie ])
       end
 
       def synthese_positionnement_numeratie
-        Synthetiseur.calcule_synthese(@algo_numeratie)
+        Synthetiseur.calcule_synthese([ @algo_positionnement_numeratie ])
+      end
+
+      def synthese_positionnement
+        Synthetiseur.calcule_synthese([ @algo_positionnement_litteratie, @algo_positionnement_numeratie ])
       end
 
       def synthese_diagnostic
-        Synthetiseur.calcule_synthese(@algo_diagnostic)
+        Synthetiseur.calcule_synthese([ @algo_diagnostic ])
       end
 
       def positionnement_litteratie
-        @algo_positionnement.niveau_positionnement if @algo_positionnement.present?
+        @algo_positionnement_litteratie.niveau_positionnement if @algo_positionnement_litteratie.present?
       end
 
       def positionnement_numeratie
-        @algo_numeratie.niveau_numeratie if @algo_numeratie.present?
+        @algo_positionnement_numeratie.niveau_numeratie if @algo_positionnement_numeratie.present?
       end
 
-      def self.calcule_synthese(algo)
-        return if algo.blank? || algo.indetermine?
-        return "illettrisme_potentiel" if algo.illettrisme_potentiel?
-        return "socle_clea" if algo.socle_clea?
-        return "aberrant" if algo.aberrant?
+      def self.calcule_synthese(algos)
+        algos.reject! { |objet| objet.blank? || objet.indetermine? }
+        return if algos.empty?
+        return "illettrisme_potentiel" if algos.any? { |algo| algo.illettrisme_potentiel? }
+        return "socle_clea" if algos.all? { |algo| algo.socle_clea? }
+        return "aberrant" if algos.all? { |algo| algo.aberrant? }
 
         "ni_ni"
       end
@@ -77,9 +78,9 @@ module Restitution
       class SynthetiseurPositionnement
         attr_reader :niveau_positionnement, :niveau_numeratie
 
-        def initialize(interpreteur_positionnement, inter_numeratie)
-          if interpreteur_positionnement
-            @niveau_positionnement = interpreteur_positionnement.synthese[:niveau_litteratie]
+        def initialize(inter_litteratie, inter_numeratie)
+          if inter_litteratie
+            @niveau_positionnement = inter_litteratie.synthese[:niveau_litteratie]
           end
           return unless inter_numeratie
 

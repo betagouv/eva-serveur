@@ -9,7 +9,8 @@ describe ErreurHelper do
 
     it 'Retourne les erreurs qui ne concerne pas les champs affichés' do
       allow(erreurs).to receive(:messages).and_return(messages)
-      allow(erreurs).to receive(:full_messages_for).with(:nom).and_return([ "nom n'est pas unique" ])
+      allow(erreurs).to receive(:full_messages_for).with(:nom)
+        .and_return([ "nom n'est pas unique" ])
       expect(erreurs_generales(erreurs, [ :email ])).to eql([ "nom n'est pas unique" ])
     end
 

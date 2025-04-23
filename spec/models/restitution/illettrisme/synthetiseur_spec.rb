@@ -24,17 +24,41 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
 
     context 'quand la restitution détecte un illettrisme potentiel' do
-      it { expect(described_class.calcule_synthese([ algo_illetrisme ])).to eq 'illettrisme_potentiel' }
-      it { expect(described_class.calcule_synthese([ algo_illetrisme, algo_socle_clea ])).to eq 'illettrisme_potentiel' }
-      it { expect(described_class.calcule_synthese([ algo_socle_clea, algo_illetrisme ])).to eq 'illettrisme_potentiel' }
-      it { expect(described_class.calcule_synthese([ algo_indetermine, algo_illetrisme ])).to eq 'illettrisme_potentiel' }
+      it do
+        expect(described_class.calcule_synthese([ algo_illetrisme ]))
+          .to eq 'illettrisme_potentiel'
+      end
+
+      it do
+        expect(described_class.calcule_synthese([ algo_illetrisme, algo_socle_clea ]))
+          .to eq 'illettrisme_potentiel'
+      end
+
+      it do
+        expect(described_class.calcule_synthese([ algo_socle_clea, algo_illetrisme ]))
+          .to eq 'illettrisme_potentiel'
+      end
+
+      it do
+        expect(described_class.calcule_synthese([ algo_indetermine, algo_illetrisme ]))
+          .to eq 'illettrisme_potentiel'
+      end
     end
 
     context "quand la restitution détecte un socle cléa en cours d'aquisition" do
       it { expect(described_class.calcule_synthese([ algo_socle_clea ])).to eq 'socle_clea' }
-      it { expect(described_class.calcule_synthese([ algo_socle_clea, algo_socle_clea ])).to eq 'socle_clea' }
+
+      it do
+        expect(described_class.calcule_synthese([ algo_socle_clea, algo_socle_clea ]))
+          .to eq 'socle_clea'
+      end
+
       it { expect(described_class.calcule_synthese([ nil, algo_socle_clea ])).to eq 'socle_clea' }
-      it { expect(described_class.calcule_synthese([ algo_indetermine, algo_socle_clea ])).to eq 'socle_clea' }
+
+      it do
+        expect(described_class.calcule_synthese([ algo_indetermine, algo_socle_clea ]))
+          .to eq 'socle_clea'
+      end
     end
 
     context 'quand la restitution détecte un niveau intermédiaire' do
@@ -45,7 +69,11 @@ describe Restitution::Illettrisme::Synthetiseur do
     context 'quand la restitution détecte un niveau aberrant' do
       it { expect(described_class.calcule_synthese([ algo_aberrant ])).to eq 'aberrant' }
       it { expect(described_class.calcule_synthese([ nil, algo_aberrant ])).to eq 'aberrant' }
-      it { expect(described_class.calcule_synthese([ algo_indetermine, algo_aberrant ])).to eq 'aberrant' }
+
+      it do
+        expect(described_class.calcule_synthese([ algo_indetermine, algo_aberrant ]))
+          .to eq 'aberrant'
+      end
     end
 
     context "quand la restitution n'a pas de score" do
@@ -54,7 +82,11 @@ describe Restitution::Illettrisme::Synthetiseur do
 
     context 'quand la restitution détecte un niveau indetermine' do
       it { expect(described_class.calcule_synthese([ algo_indetermine ])).to be_nil }
-      it { expect(described_class.calcule_synthese([ algo_indetermine, algo_indetermine ])).to be_nil }
+
+      it do
+        expect(described_class.calcule_synthese([ algo_indetermine, algo_indetermine ]))
+          .to be_nil
+      end
     end
   end
 

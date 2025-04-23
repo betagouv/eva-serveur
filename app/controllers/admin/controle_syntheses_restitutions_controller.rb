@@ -3,10 +3,14 @@
 module Admin
   class ControleSynthesesRestitutionsController < ApplicationController # rubocop:disable Metrics/ClassLength
     SOUS_COMPETENCES_POSITIONNEMENT_LITTERATIE = [
-      [ "lecture", Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_1.to_s) ],
-      [ "lecture", Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_2.to_s) ],
-      [ "lecture", Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_3.to_s) ],
-      [ "lecture", Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_4.to_s) ],
+      [ "lecture",
+        Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_1.to_s) ],
+      [ "lecture",
+        Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_2.to_s) ],
+      [ "lecture",
+        Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_3.to_s) ],
+      [ "lecture",
+        Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_4.to_s) ],
       [ "comprehension",
        Restitution::SousCompetence::Litteratie.new(profil: ::Competence::PROFIL_1.to_s) ],
       [ "comprehension",

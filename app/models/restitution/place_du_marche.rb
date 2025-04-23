@@ -249,7 +249,8 @@ module Restitution
         pourcentage_reussite: EvenementQuestion.pourcentage_pour_groupe(eq_pour_code),
         nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(eq_pour_sous_code),
         nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(eq_pour_sous_code),
-        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(eq_pour_sous_code)
+        nombre_questions_non_passees:
+          nombre_questions_non_repondues_par_sous_domaine(eq_pour_sous_code)
       )
     end
   end

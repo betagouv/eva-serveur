@@ -4,7 +4,8 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
   if pdf
     render "entete_page", restitution_globale: restitution_globale
 
-    h2 t("titre", scope: "admin.restitutions.anlci"), class: "text-center mt-5 mb-4 evaluation__titre"
+    h2 t("titre", scope: "admin.restitutions.anlci"),
+       class: "text-center mt-5 mb-4 evaluation__titre"
   else
     h2 t("titre", scope: "admin.restitutions.anlci"), class: "evaluation__titre"
   end

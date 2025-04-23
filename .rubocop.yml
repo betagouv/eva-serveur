@@ -30,15 +30,25 @@ Style/Documentation:
   Enabled: false
 
 Style/AsciiComments:
+  Enabled: true
   AllowedChars: ['à', 'é', 'è', 'ë', 'ê', 'î', 'ï', 'ô', 'ù', 'ç', 'À', 'É', 'È', 'Ë', 'Ê', 'Î', 'Ï', 'Ô', 'Ù', 'Ç']
 
 Layout/LineLength:
+  Enabled: true
   Max: 100
 
+Style/SymbolProc:
+  Enabled: true
+
+Style/IfUnlessModifier:
+  Enabled: true
+
 Metrics/BlockLength:
+  Enabled: true
   Exclude:
     - 'spec/factories/*'
     - 'Guardfile'
+    - 'app/**/*.arb'
   AllowedMethods:
     - describe
     - it
@@ -50,8 +60,10 @@ Metrics/BlockLength:
     - show
     - controller
     - namespace
+    - xls
 
 Metrics/AbcSize:
+  Enabled: true
   Exclude:
     - 'spec/models/restitution/inventaire/rapidite_spec.rb'
     - 'spec/models/restitution/controle/perseverance_spec.rb'
@@ -59,18 +71,12 @@ Metrics/AbcSize:
     - 'spec/models/restitution/tri/perseverance_spec.rb'
     - 'spec/models/restitution/tri/comprehension_consigne_spec.rb'
 
-# Désactiver temporairement
-Rails/OutputSafety:
-  Enabled: false
-Rails/InverseOf:
-  Enabled: false
-Rails/RedundantPresenceValidationOnBelongsTo:
-  Enabled: false
-
 Lint/MissingSuper:
+  Enabled: true
   Exclude:
     - 'app/components/**/*'
 
 RSpec/DescribeClass:
+  Enabled: true
   Exclude:
     - 'spec/tasks/**/*'

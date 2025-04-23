@@ -63,7 +63,8 @@ div class: "evaluation__restitution-globale #{class_css}" do
       render "entete_page", restitution_globale: restitution_globale
 
       if pdf
-        h2 t("titre", scope: "admin.restitutions.litteratie"), class: "text-center mt-5 mb-4 evaluation__titre"
+        h2 t("titre", scope: "admin.restitutions.litteratie"),
+           class: "text-center mt-5 mb-4 evaluation__titre"
       else
         h2 t("titre", scope: "admin.restitutions.litteratie"), class: "evaluation__titre"
       end

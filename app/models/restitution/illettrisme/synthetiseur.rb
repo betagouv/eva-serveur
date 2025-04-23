@@ -25,7 +25,8 @@ module Restitution
       end
 
       def synthese_positionnement
-        Synthetiseur.calcule_synthese([ @algo_positionnement_litteratie, @algo_positionnement_numeratie ])
+        Synthetiseur.calcule_synthese([ @algo_positionnement_litteratie,
+                                        @algo_positionnement_numeratie ])
       end
 
       def synthese_diagnostic
@@ -33,7 +34,9 @@ module Restitution
       end
 
       def positionnement_litteratie
-        @algo_positionnement_litteratie.niveau_positionnement if @algo_positionnement_litteratie.present?
+        if @algo_positionnement_litteratie.present?
+          @algo_positionnement_litteratie.niveau_positionnement
+        end
       end
 
       def positionnement_numeratie
@@ -43,9 +46,9 @@ module Restitution
       def self.calcule_synthese(algos)
         algos.reject! { |objet| objet.blank? || objet.indetermine? }
         return if algos.empty?
-        return "illettrisme_potentiel" if algos.any? { |algo| algo.illettrisme_potentiel? }
-        return "socle_clea" if algos.all? { |algo| algo.socle_clea? }
-        return "aberrant" if algos.all? { |algo| algo.aberrant? }
+        return "illettrisme_potentiel" if algos.any? &:illettrisme_potentiel?
+        return "socle_clea" if algos.all? &:socle_clea?
+        return "aberrant" if algos.all? &:aberrant?
 
         "ni_ni"
       end
@@ -79,9 +82,7 @@ module Restitution
         attr_reader :niveau_positionnement, :niveau_numeratie
 
         def initialize(inter_litteratie, inter_numeratie)
-          if inter_litteratie
-            @niveau_positionnement = inter_litteratie.synthese[:niveau_litteratie]
-          end
+          @niveau_positionnement = inter_litteratie.synthese[:niveau_litteratie] if inter_litteratie
           return unless inter_numeratie
 
           @niveau_numeratie = inter_numeratie.synthese[:profil_numeratie]

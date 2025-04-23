@@ -2,8 +2,9 @@
 
 module Restitution
   class Globale
-    attr_reader :evaluation, :restitutions, :synthese_positionnement_litteratie, :synthese_diagnostic,
-                :synthese_positionnement_numeratie, NIVEAU_INDETERMINE = :indetermine
+    attr_reader :evaluation, :restitutions, :synthese_positionnement_litteratie,
+                :synthese_diagnostic, :synthese_positionnement_numeratie,
+                NIVEAU_INDETERMINE = :indetermine
 
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau2_standardises, prefix: :niveau2

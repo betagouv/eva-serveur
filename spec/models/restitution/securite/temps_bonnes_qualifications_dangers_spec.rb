@@ -9,7 +9,9 @@ describe Restitution::Securite::TempsBonnesQualificationsDangers do
 
   describe '#temps_bonnes_qualifications_dangers' do
     context 'sans évenement' do
-      let(:evenements) { [ build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0)) ] }
+      let(:evenements) do
+        [ build(:evenement_demarrage, date: Time.zone.local(2019, 10, 9, 10, 0)) ]
+      end
 
       it { expect(temps_bonnes_qualifications_dangers).to eq({}) }
     end

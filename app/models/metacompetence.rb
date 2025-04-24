@@ -77,20 +77,25 @@ class Metacompetence
     end
 
     def metacompetences_pour_code(code)
-      metacompetences_par_code[code].presence ||
-        metacompetences_par_sous_code[code]
+      return metacompetences_par_code[code] if CORRESPONDANCES_CODECLEA.key?(code)
+
+      metacompetences_par_sous_code[code]
     end
 
     def metacompetences_par_code
-      CORRESPONDANCES_CODECLEA.transform_values do |sous_codes|
-        sous_codes.values.flatten
+      @metacompetences_par_code ||= begin
+        CORRESPONDANCES_CODECLEA.transform_values do |sous_codes|
+          sous_codes.values.flatten
+        end
       end
     end
 
     def metacompetences_par_sous_code
-      CORRESPONDANCES_CODECLEA.each_with_object({}) do |(_, sous_codes), result|
-        sous_codes.each do |sous_code, metacompetences|
-          result[sous_code] = metacompetences
+      @metacompetences_par_sous_code ||= begin
+        CORRESPONDANCES_CODECLEA.each_with_object({}) do |(_, sous_codes), result|
+          sous_codes.each do |sous_code, metacompetences|
+            result[sous_code] = metacompetences
+          end
         end
       end
     end

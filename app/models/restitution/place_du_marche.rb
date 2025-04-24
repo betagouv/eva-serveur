@@ -61,7 +61,6 @@ module Restitution
 
       noms_techniques = evenements_reponses.map(&:question_nom_technique)
       @questions_repondues = Question.where(nom_technique: noms_techniques)
-
       @evenements_questions = questions_situation.map do |question_situation|
         evenement = evenements_reponses.find do |e|
           e.question_nom_technique == question_situation.nom_technique
@@ -86,7 +85,6 @@ module Restitution
         Metacompetence::CORRESPONDANCES_CODECLEA[code].each_key do |sous_code|
           calcule_pourcentage_reussite_critere_clea(code, sous_code)
         end
-
         eq_pour_code = evenements_questions_pour_code(code)
         SCORES_CLEA[code][:nombre_total_questions] = eq_pour_code.size
         SCORES_CLEA[code][:nombre_questions_repondues] = eq_pour_code.select(&:a_ete_repondue?).size
@@ -166,14 +164,15 @@ module Restitution
     end
 
     def creer_numeratie(code)
+      eq_pour_code = evenements_questions_pour_code(code)
       Restitution::SousCompetence::Numeratie.new(
         succes: succes?(code),
         pourcentage_reussite: SCORES_CLEA[code][:pourcentage_reussite],
         nombre_questions_repondues: SCORES_CLEA[code][:nombre_questions_repondues],
         nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions],
-        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(code),
-        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(code),
-        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(code),
+        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(eq_pour_code),
+        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(eq_pour_code),
+        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(eq_pour_code),
         criteres: SCORES_CLEA[code][:criteres]
       )
     end
@@ -222,34 +221,35 @@ module Restitution
       resultats
     end
 
-    def nombre_questions_reussies_par_sous_domaine(code)
-      return 0 if evenements_questions_pour_code(code).empty?
+    def nombre_questions_reussies_par_sous_domaine(eq_pour_sous_code)
+      return 0 if eq_pour_sous_code.empty?
 
-      evenements_questions_pour_code(code).select(&:succes).count
+      eq_pour_sous_code.select(&:succes).count
     end
 
-    def nombre_questions_echecs_par_sous_domaine(code)
-      return 0 if evenements_questions_pour_code(code).empty?
+    def nombre_questions_echecs_par_sous_domaine(eq_pour_sous_code)
+      return 0 if eq_pour_sous_code.empty?
 
-      evenements_questions_pour_code(code).select { |eq| !eq.succes && eq.a_ete_repondue? }.count
+      eq_pour_sous_code.select { |eq| !eq.succes && eq.a_ete_repondue? }.count
     end
 
-    def nombre_questions_non_repondues_par_sous_domaine(code)
-      return 0 if evenements_questions_pour_code(code).empty?
+    def nombre_questions_non_repondues_par_sous_domaine(eq_pour_sous_code)
+      return 0 if eq_pour_sous_code.empty?
 
-      evenements_questions_pour_code(code).reject(&:a_ete_repondue?).count
+      eq_pour_sous_code.reject(&:a_ete_repondue?).count
     end
 
     def creer_critere_numeratie(eq_pour_code, sous_code)
+      eq_pour_sous_code = evenements_questions_pour_code(sous_code)
       Restitution::Critere::Numeratie.new(
         libelle: Metacompetence::CODECLEA_INTITULES[sous_code],
         code_clea: sous_code,
         nombre_tests_proposes: eq_pour_code.select(&:a_ete_repondue?).size,
         nombre_tests_proposes_max: eq_pour_code.size,
         pourcentage_reussite: EvenementQuestion.pourcentage_pour_groupe(eq_pour_code),
-        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(sous_code),
-        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(sous_code),
-        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(sous_code)
+        nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(eq_pour_sous_code),
+        nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(eq_pour_sous_code),
+        nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(eq_pour_sous_code)
       )
     end
   end

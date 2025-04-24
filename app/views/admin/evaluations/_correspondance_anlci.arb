@@ -26,10 +26,6 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
              referentiel: "anlci"
     end
 
-    if pdf
-      render "pied_page", pre_pied_page: ReferentielAnlciComponent.new
-    else
-      render ReferentielAnlciComponent.new
-    end
+    render ReferentielAnlciComponent.new unless pdf
   end
 end

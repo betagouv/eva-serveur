@@ -76,7 +76,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
                synthese: restitution_globale.synthese_positionnement_litteratie,
                pdf: pdf
              }
-      render "pied_page", pre_pied_page: ReferentielAnlciComponent.new
+      render "pied_page", pre_pied_page: ReferentielAnlciComponent.new unless pdf
     end
   end
 

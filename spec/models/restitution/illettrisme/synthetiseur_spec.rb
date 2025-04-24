@@ -4,76 +4,64 @@ require 'rails_helper'
 
 describe Restitution::Illettrisme::Synthetiseur do
   describe '#calcule_synthese' do
-    let(:algo_illetrisme) { double }
-    let(:algo_socle_clea) { double }
-    let(:algo_aberrant) { double }
-    let(:algo_ni_ni) { double }
-    let(:algo_sans_score) { double }
-    let(:algo_indetermine) { double }
+    let(:illetrisme) { double }
+    let(:socle_clea) { double }
+    let(:aberrant) { double }
+    let(:ni_ni) { double }
+    let(:sans_score) { double }
+    let(:indetermine) { double }
 
     before do
-      allow(algo_illetrisme).to receive_messages(indetermine?: false, illettrisme_potentiel?: true)
-      allow(algo_socle_clea).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
-                                                 socle_clea?: true)
-      allow(algo_ni_ni).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
-                                            socle_clea?: false, aberrant?: false)
-      allow(algo_aberrant).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
-                                               socle_clea?: false, aberrant?: true)
-      allow(algo_indetermine).to receive_messages(indetermine?: true, illettrisme_potentiel?: false,
-                                                  socle_clea?: false, aberrant?: false)
+      allow(illetrisme).to receive_messages(indetermine?: false, illettrisme_potentiel?: true)
+      allow(socle_clea).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
+                                            socle_clea?: true, aberrant?: false)
+      allow(ni_ni).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
+                                       socle_clea?: false, aberrant?: false)
+      allow(aberrant).to receive_messages(indetermine?: false, illettrisme_potentiel?: false,
+                                          socle_clea?: false, aberrant?: true)
+      allow(indetermine).to receive_messages(indetermine?: true, illettrisme_potentiel?: false,
+                                             socle_clea?: false, aberrant?: false)
     end
 
     context 'quand la restitution détecte un illettrisme potentiel' do
+      it { expect(described_class.calcule_synthese([ illetrisme ])).to eq 'illettrisme_potentiel' }
+
       it do
-        expect(described_class.calcule_synthese([ algo_illetrisme ]))
+        expect(described_class.calcule_synthese([ illetrisme, socle_clea ]))
           .to eq 'illettrisme_potentiel'
       end
 
       it do
-        expect(described_class.calcule_synthese([ algo_illetrisme, algo_socle_clea ]))
+        expect(described_class.calcule_synthese([ socle_clea, illetrisme ]))
           .to eq 'illettrisme_potentiel'
       end
 
       it do
-        expect(described_class.calcule_synthese([ algo_socle_clea, algo_illetrisme ]))
-          .to eq 'illettrisme_potentiel'
-      end
-
-      it do
-        expect(described_class.calcule_synthese([ algo_indetermine, algo_illetrisme ]))
+        expect(described_class.calcule_synthese([ indetermine, illetrisme ]))
           .to eq 'illettrisme_potentiel'
       end
     end
 
     context "quand la restitution détecte un socle cléa en cours d'aquisition" do
-      it { expect(described_class.calcule_synthese([ algo_socle_clea ])).to eq 'socle_clea' }
+      it { expect(described_class.calcule_synthese([ socle_clea ])).to eq 'socle_clea' }
+      it { expect(described_class.calcule_synthese([ socle_clea, socle_clea ])).to eq 'socle_clea' }
+      it { expect(described_class.calcule_synthese([ nil, socle_clea ])).to eq 'socle_clea' }
 
       it do
-        expect(described_class.calcule_synthese([ algo_socle_clea, algo_socle_clea ]))
-          .to eq 'socle_clea'
-      end
-
-      it { expect(described_class.calcule_synthese([ nil, algo_socle_clea ])).to eq 'socle_clea' }
-
-      it do
-        expect(described_class.calcule_synthese([ algo_indetermine, algo_socle_clea ]))
+        expect(described_class.calcule_synthese([ indetermine, socle_clea ]))
           .to eq 'socle_clea'
       end
     end
 
     context 'quand la restitution détecte un niveau intermédiaire' do
-      it { expect(described_class.calcule_synthese([ algo_ni_ni ])).to eq 'ni_ni' }
-      it { expect(described_class.calcule_synthese([ algo_aberrant, algo_ni_ni ])).to eq 'ni_ni' }
+      it { expect(described_class.calcule_synthese([ ni_ni ])).to eq 'ni_ni' }
+      it { expect(described_class.calcule_synthese([ socle_clea, ni_ni ])).to eq 'ni_ni' }
     end
 
     context 'quand la restitution détecte un niveau aberrant' do
-      it { expect(described_class.calcule_synthese([ algo_aberrant ])).to eq 'aberrant' }
-      it { expect(described_class.calcule_synthese([ nil, algo_aberrant ])).to eq 'aberrant' }
-
-      it do
-        expect(described_class.calcule_synthese([ algo_indetermine, algo_aberrant ]))
-          .to eq 'aberrant'
-      end
+      it { expect(described_class.calcule_synthese([ aberrant ])).to eq 'aberrant' }
+      it { expect(described_class.calcule_synthese([ nil, aberrant ])).to eq 'aberrant' }
+      it { expect(described_class.calcule_synthese([ indetermine, aberrant ])).to eq 'aberrant' }
     end
 
     context "quand la restitution n'a pas de score" do
@@ -81,12 +69,9 @@ describe Restitution::Illettrisme::Synthetiseur do
     end
 
     context 'quand la restitution détecte un niveau indetermine' do
-      it { expect(described_class.calcule_synthese([ algo_indetermine ])).to be_nil }
-
-      it do
-        expect(described_class.calcule_synthese([ algo_indetermine, algo_indetermine ]))
-          .to be_nil
-      end
+      it { expect(described_class.calcule_synthese([ indetermine ])).to be_nil }
+      it { expect(described_class.calcule_synthese([ indetermine, indetermine ])) .to be_nil }
+      it { expect(described_class.calcule_synthese([ aberrant, socle_clea ])).to be_nil }
     end
   end
 

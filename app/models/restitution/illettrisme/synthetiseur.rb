@@ -49,6 +49,7 @@ module Restitution
         return "illettrisme_potentiel" if algos.any? &:illettrisme_potentiel?
         return "socle_clea" if algos.all? &:socle_clea?
         return "aberrant" if algos.all? &:aberrant?
+        return if algos.any? &:aberrant?
 
         "ni_ni"
       end

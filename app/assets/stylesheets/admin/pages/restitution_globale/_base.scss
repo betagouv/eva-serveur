@@ -7,7 +7,7 @@
   font-family: $font-texte;
 
   .panel {
-    padding: 3rem 0;
+    padding: 2rem 0;
     &--avec-references {
       padding-bottom: 0;
     }
@@ -54,13 +54,9 @@
 
   .autopositionnement {
     color: $couleur-texte;
-    margin-top: 2rem;
 
     > .row {
       margin-bottom: 2rem;
-      &:last-child {
-        margin-bottom: 0;
-      }
     }
 
     .intitule-question {

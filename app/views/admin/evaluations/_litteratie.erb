@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <%= render ReferentielAnlciComponent.new unless pdf %>
-  <% if !pdf && cafe_de_la_place && !place_du_marche %>
+  <% if !pdf && cafe_de_la_place %>
     <% route = admin_positionnement_partie_reponses_path(partie_id: cafe_de_la_place.partie.id)%>
     <div class="padding-tuile">
       <%= render partial: "telechargement_reponses", locals: { route: route } %>

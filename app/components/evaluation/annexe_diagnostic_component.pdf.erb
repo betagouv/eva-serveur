@@ -1,38 +1,54 @@
-<div id="annexe_restitution" class="page page-numeratie adaptation-pdf annexe_restitution">
+<div id="annexe_restitution" class="page adaptation-pdf annexe_restitution">
   <%= render "entete_page", restitution_globale: @restitution_globale %>
   <div class="content">
     <h2 class="text-center my-4 evaluation__titre"><%= t(".titre") %></h2>
     <div class="annexe_restitution__introduction">
       <%= t(".introduction") %>
-      <div class="annexe_restitution__blocs">
-        <div class="annexe_restitution__bloc">
+      <div class="row">
+        <div class="col">
           <div class="annexe_restitution__encadre">
             <div class="annexe_restitution__encadre--body">
-              <h6 class="annexe_restitution__encadre--body--titre"><%= t(".restitution_litteratie_titre") %></h6>
-              <%= t(".restitution_litteratie") %>
+              <h6 class="annexe_restitution__encadre--body--titre"><%= t(".restitution_francais_titre") %></h6>
+              <%= t(".restitution_francais") %>
             </div>
             <div class="annexe_restitution__badges">
-              <% @badges_litteratie.each do |badge| %>
-                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+              <% @badges_francais.each do |badge| %>
+                <%= inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
                                   class: "badge-references",
                                   alt: t(badge, scope: @scope_badge) %>
               <% end %>
             </div>
           </div>
         </div>
-        <div class="annexe_restitution__bloc">
+        <div class="col">
           <div class="annexe_restitution__encadre">
             <div class="annexe_restitution__encadre--body">
-              <h6 class="annexe_restitution__encadre--body--titre"><%= t(".restitution_numeratie_titre") %></h6>
-              <%= t(".restitution_numeratie") %>
+              <h6 class="annexe_restitution__encadre--body--titre"><%= t(".restitution_maths_titre") %></h6>
+              <%= t(".restitution_maths") %>
             </div>
             <div class="annexe_restitution__badges">
-              <% @badges_numeratie.each do |badge| %>
-                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+              <% @badges_maths.each do |badge| %>
+                <%= inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
                                   class: "badge-references",
                                   alt: t(badge, scope: @scope_badge) %>
               <% end %>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="annexe_restitution__encadre">
+            <div class="annexe_restitution__encadre--body">
+              <h6 class="annexe_restitution__encadre--body--titre"><%= t(".restitution_francais_et_maths_titre") %></h6>
+              <%= t(".restitution_francais_et_maths") %>
+            </div>
+            <div class="annexe_restitution__badges">
+              <% @badges_francais_et_maths.each do |badge| %>
+                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+                                  class: "badge-references",
+                                  alt: t(badge, scope: @scope_badge) %>
+              <% end %>
           </div>
         </div>
       </div>

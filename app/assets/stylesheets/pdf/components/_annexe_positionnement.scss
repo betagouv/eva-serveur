@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  gap: $dsfr-spacing-6v;
 }
 
 .annexe_restitution__blocs {
   display: flex;
-  gap: 24px;
+  gap: $dsfr-spacing-6v;
 }
 
 .annexe_restitution__bloc {
@@ -19,10 +19,10 @@
 .annexe_restitution__encadre {
   border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
   display: flex;
-  padding: 32px;
+  padding: $dsfr-spacing-8v;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: $dsfr-spacing-3v;
   flex: 1 0 0;
   justify-content: space-between;
 }
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: $dsfr-spacing-2v;
   align-self: stretch;
 }
 .annexe_restitution__encadre--body--titre {
@@ -38,7 +38,7 @@
 }
 
 .annexe_restitution__titre {
-  margin-bottom: 1.5rem;
+  margin-bottom: $dsfr-spacing-6v;
 }
 
 #annexe_restitution {
@@ -68,8 +68,8 @@
 }
 
 .badge-references {
-  height: 40px;
-  width: 40px;
+  height: $dsfr-spacing-8v;
+  width: $dsfr-spacing-8v;
   fill: var(--text-default-grey);
 }
 

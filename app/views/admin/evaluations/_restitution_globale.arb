@@ -87,4 +87,12 @@ div class: "evaluation__restitution-globale #{class_css}" do
       )
     )
   end
+
+  render Evaluation::AnnexeDiagnosticComponent.new(
+    restitution_globale: restitution_globale
+  ) if pdf && resource.campagne.avec_diagnostic?
+
+  render Evaluation::AnnexePositionnementComponent.new(
+    restitution_globale: restitution_globale
+  ) if pdf && (campagne_avec_positionnement?(:litteratie) || campagne_avec_positionnement?(:numeratie))
 end

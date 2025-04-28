@@ -1,0 +1,8 @@
+<%= dsfr_alert(type: :info, title: "Pour en savoir plus", classes: "alert-annexe") do %>
+  <div class="alert-annexe__contenu">
+    <ul>
+      <li><p>Sur les référentiels utilisés : <%= link_to @lien_referentiel, @lien_referentiel %></p></li>
+      <li><p>Sur le positionnement : <%= link_to @lien_positionnement, @lien_positionnement %></p></li>
+    </ul>
+  </div>
+<% end %>

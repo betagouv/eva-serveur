@@ -28,6 +28,8 @@ $padding-pdf: 5rem;
 @import "pdf/components/entete_page";
 @import "pdf/components/pied_page";
 @import "pdf/components/alert_incomplete";
+@import "pdf/components/annexe_positionnement";
+
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -52,10 +54,6 @@ $padding-pdf: 5rem;
 
   .panel {
     padding-top: 0;
-  }
-
-  h2 {
-    font-size: 1.80rem;
   }
 
   h3 {

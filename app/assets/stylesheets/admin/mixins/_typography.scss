@@ -42,3 +42,10 @@
   font-size: 1.25rem;
   line-height: 1.563rem;
 }
+
+@mixin h6() {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}

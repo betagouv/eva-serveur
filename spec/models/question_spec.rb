@@ -152,4 +152,29 @@ describe Question, type: :model do
       end
     end
   end
+
+  describe '#question_data' do
+    let(:nom_technique) { 'N1Pse1' }
+    let(:question) { described_class.new nom_technique: nom_technique }
+
+    context "quand le nom technique correspond à une question data" do
+      it do
+        question_data = instance_double(QuestionData, nom_technique: nom_technique)
+        allow(QuestionData).to receive(:find_by).with(nom_technique: nom_technique).and_return(question_data)
+
+        expect(question.question_data).to eq question_data
+      end
+    end
+
+    context "quand le nom technique comporte un variant" do
+      let(:nom_technique) { 'N1Pse1_variant' }
+
+      it do
+        question_data = instance_double(QuestionData, nom_technique: 'N1Pse1')
+        allow(QuestionData).to receive(:find_by).with(nom_technique: 'N1Pse1').and_return(question_data)
+
+        expect(question.question_data).to eq question_data
+      end
+    end
+  end
 end

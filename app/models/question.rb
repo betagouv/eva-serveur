@@ -50,7 +50,11 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   acts_as_paranoid
 
   def question_data
-    QuestionData.find_by(nom_technique: nom_technique)
+    QuestionData.find_by(nom_technique: nom_technique_sans_variant)
+  end
+
+  def nom_technique_sans_variant
+    nom_technique.split("_").first
   end
   delegate :score, :metacompetence, to: :question_data, allow_nil: true
 

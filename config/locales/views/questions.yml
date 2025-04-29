@@ -1,6 +1,9 @@
 fr:
   admin:
     questions:
+      hints:
+        nom_technique: |
+          Pour créer un variant, suivez la nomenclature de type N1Pse1_variant pour que la question hérite automatiquement de la métacompétence de la question N1Pse1
       input_illustration_base:
         illustration:
           hint: 'La taille de l’image rendue est de 1008x566.'

@@ -160,7 +160,8 @@ describe Question, type: :model do
     context "quand le nom technique correspond à une question data" do
       it do
         question_data = instance_double(QuestionData, nom_technique: nom_technique)
-        allow(QuestionData).to receive(:find_by).with(nom_technique: nom_technique).and_return(question_data)
+        allow(QuestionData).to receive(:find_by).with(nom_technique: nom_technique)
+                                                .and_return(question_data)
 
         expect(question.question_data).to eq question_data
       end
@@ -171,7 +172,8 @@ describe Question, type: :model do
 
       it do
         question_data = instance_double(QuestionData, nom_technique: 'N1Pse1')
-        allow(QuestionData).to receive(:find_by).with(nom_technique: 'N1Pse1').and_return(question_data)
+        allow(QuestionData).to receive(:find_by).with(nom_technique: 'N1Pse1')
+                                                .and_return(question_data)
 
         expect(question.question_data).to eq question_data
       end

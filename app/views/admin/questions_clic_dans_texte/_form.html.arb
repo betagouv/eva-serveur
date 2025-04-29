@@ -4,7 +4,7 @@ active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
     f.input :libelle
-    f.input :nom_technique
+    f.input :nom_technique, hint: t('admin.questions.hints.nom_technique')
     f.input :description
     render partial: "admin/questions/input_illustration", locals: { f: f }
     f.input :texte_sur_illustration, as: :text, input_html: { class: "simple-mde-editor" }

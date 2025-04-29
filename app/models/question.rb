@@ -54,7 +54,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def nom_technique_sans_variant
-    nom_technique.split("_").first
+    nom_technique.split("__").first
   end
   delegate :score, :metacompetence, to: :question_data, allow_nil: true
 

@@ -155,28 +155,32 @@ describe Question, type: :model do
 
   describe '#question_data' do
     let(:nom_technique) { 'N1Pse1' }
+    let(:nom_technique_pour_question_data) { nom_technique }
     let(:question) { described_class.new nom_technique: nom_technique }
+    let(:question_data) do
+      instance_double(QuestionData, nom_technique: nom_technique_pour_question_data)
+    end
+
+    before do
+      allow(QuestionData).to receive(:find_by).with(nom_technique: nom_technique_pour_question_data)
+                                              .and_return(question_data)
+    end
 
     context "quand le nom technique correspond à une question data" do
-      it do
-        question_data = instance_double(QuestionData, nom_technique: nom_technique)
-        allow(QuestionData).to receive(:find_by).with(nom_technique: nom_technique)
-                                                .and_return(question_data)
+      it { expect(question.question_data).to eq question_data }
+    end
 
-        expect(question.question_data).to eq question_data
-      end
+    context "quand le nom technique de la question comporte un underscore" do
+      let(:nom_technique) { 'acrd_7' }
+
+      it { expect(question.question_data).to eq question_data }
     end
 
     context "quand le nom technique comporte un variant" do
-      let(:nom_technique) { 'N1Pse1_variant' }
+      let(:nom_technique) { 'N1Pse1__variant' }
+      let(:nom_technique_pour_question_data) { 'N1Pse1' }
 
-      it do
-        question_data = instance_double(QuestionData, nom_technique: 'N1Pse1')
-        allow(QuestionData).to receive(:find_by).with(nom_technique: 'N1Pse1')
-                                                .and_return(question_data)
-
-        expect(question.question_data).to eq question_data
-      end
+      it { expect(question.question_data).to eq question_data }
     end
   end
 end

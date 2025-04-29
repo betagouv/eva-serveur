@@ -1,0 +1,2 @@
+f.input :libelle
+f.input :nom_technique, hint: t('admin.questions.hints.nom_technique')

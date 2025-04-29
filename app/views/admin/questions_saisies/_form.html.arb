@@ -3,8 +3,7 @@
 active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do
-    f.input :libelle
-    f.input :nom_technique, hint: t('admin.questions.hints.nom_technique')
+    render partial: "admin/questions/base_form", locals: { f: f }
     f.input :categorie, as: :select
     f.input :description
     render partial: "admin/questions/input_illustration", locals: { f: f }

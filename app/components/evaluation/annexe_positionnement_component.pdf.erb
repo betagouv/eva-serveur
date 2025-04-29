@@ -1,5 +1,6 @@
 <div id="annexe_restitution" class="page page-numeratie adaptation-pdf annexe_restitution">
-  <%= render "entete_page", restitution_globale: @restitution_globale %>
+  <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+
   <div class="content">
     <h2 class="text-center my-4 evaluation__titre"><%= t(".titre") %></h2>
     <div class="annexe_restitution__introduction">
@@ -50,4 +51,6 @@
 
     <%= render Evaluation::AlertAnnexeComponent.new %>
   </div>
+
+  <%= render "pied_page" %>
 </div>

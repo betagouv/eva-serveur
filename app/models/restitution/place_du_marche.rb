@@ -45,31 +45,15 @@ module Restitution
     def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
       @campagne = campagne
       @evenements = evenements
-      evenements_reponses = evenements.select { |evenement| evenement.nom == "reponse" }
-      evenements.first.situation
       @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
 
-      questions_situation = campagne.situations_configurations
-                                    .map(&:questionnaire_utile)
-                                    .compact
-                                    .flatten
-                                    .map(&:questions)
-                                    .flatten
-                                    .reject do |question|
-                                      question.type == QuestionSousConsigne::QUESTION_TYPE
-                                    end
+      situation = evenements.first.situation
+      questions = campagne.questionnaire_pour(situation)&.questions
 
-      noms_techniques = evenements_reponses.map(&:question_nom_technique)
-      @questions_repondues = Question.where(nom_technique: noms_techniques)
-      @evenements_questions = questions_situation.map do |question_situation|
-        evenement = evenements_reponses.find do |e|
-          e.question_nom_technique == question_situation.nom_technique
-        end
-        EvenementQuestion.new(question: question_situation, evenement: evenement)
-      end
+      evenements_questions = EvenementQuestion.construit_pour(evenements, questions)
 
       @evenements_questions_a_prendre_en_compte =
-        EvenementQuestion.prises_en_compte_pour_calcul_score_clea(@evenements_questions)
+        EvenementQuestion.prises_en_compte_pour_calcul_score_clea(evenements_questions)
       calcule_pourcentage_reussite_competence_clea
       super
     end

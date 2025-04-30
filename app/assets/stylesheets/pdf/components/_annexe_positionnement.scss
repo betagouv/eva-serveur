@@ -5,6 +5,10 @@
   gap: $dsfr-spacing-6v;
 }
 
+.annexe_restitution__introduction--diagnostic {
+  margin-bottom: $dsfr-spacing-12v;
+}
+
 .annexe_restitution__blocs {
   display: flex;
   gap: $dsfr-spacing-6v;
@@ -45,6 +49,10 @@
   .content {
     padding: $dsfr-spacing-8v $dsfr-spacing-16v 0 $dsfr-spacing-16v;
     gap: $dsfr-spacing-12v;
+  }
+
+  h3 {
+    @include h6;
   }
 }
 

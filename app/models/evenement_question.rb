@@ -52,6 +52,21 @@ class EvenementQuestion
   end
 
   class << self
+    ##
+    # Passer l'ensemble des questions de la situation d'une campagne
+    # Ex : campagne.questionnaire_pour(situation).questions
+    # Passer l'ensemble des evenements de la partie
+    def construit_pour(evenements, questions)
+      evenements = evenements.select(&:reponse?)
+      questions = questions.to_a.reject { |question|
+ question.type == QuestionSousConsigne::QUESTION_TYPE }
+
+      questions.map do |question|
+        evenement = evenements.find { |e| e.question_nom_technique == question.nom_technique }
+        EvenementQuestion.new(question: question, evenement: evenement)
+      end
+    end
+
     def pourcentage_pour_groupe(evenements_questions)
       scores = evenements_questions.map { |eq| [ eq.score_max.presence || 0, eq.score ] }.compact
       score_max, score = scores.transpose.map(&:sum)

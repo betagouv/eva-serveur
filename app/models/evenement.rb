@@ -25,6 +25,10 @@ class Evenement < ApplicationRecord
     nom == "finSituation"
   end
 
+  def reponse?
+    nom == "reponse"
+  end
+
   def reponse_intitule
     donnees["reponseIntitule"].presence || donnees["reponse"]
   end

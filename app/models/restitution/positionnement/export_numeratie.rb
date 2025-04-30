@@ -9,21 +9,12 @@ module Restitution
         @temps_par_question = Restitution::Metriques::TempsPasseParQuestion
                               .new(partie.evenements).calculer
 
-        @evenements_questions = evenements_questions(partie)
+        evenements = Evenement.where(session_id: partie.session_id).reponses
+        questions = partie.campagne.questionnaire_pour(partie.situation).questions
+        @evenements_questions = EvenementQuestion.construit_pour(evenements, questions)
+
         @evenements_questions_a_prendre_en_compte =
           EvenementQuestion.prises_en_compte_pour_calcul_score_clea(@evenements_questions)
-      end
-
-      def evenements_questions(partie)
-        evenements_reponses = Evenement.where(session_id: partie.session_id).reponses
-        questions_situation = partie.campagne.questionnaire_pour(partie.situation).questions
-        questions_situation_repondables = questions_situation.to_a.reject do |question|
-          question.type == QuestionSousConsigne::QUESTION_TYPE
-        end
-        questions_situation_repondables.map do |question|
-          reponse = reponse_de_la_question(evenements_reponses, question.nom_technique)
-          EvenementQuestion.new(question: question, evenement: reponse)
-        end
       end
 
       def reponse_de_la_question(evenements_reponses, nom_technique)

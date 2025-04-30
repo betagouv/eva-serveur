@@ -170,20 +170,26 @@ describe EvenementQuestion, type: :model do
   end
 
   describe '.construit_pour' do
-    let(:question1) { instance_double(Question, nom_technique: "Q1", type: "normal") }
-    let(:question2) {
- instance_double(Question, nom_technique: "Q2", type: QuestionSousConsigne::QUESTION_TYPE) }
-    let(:question3) { instance_double(Question, nom_technique: "Q3", type: "normal") }
+    let(:question1) {
+ instance_double(Question, nom_technique: "Q1", nom_technique_sans_variant: "Q1", type: "normal") }
+    let(:question_variant) {
+ instance_double(Question, nom_technique: "Q2__variant", nom_technique_sans_variant: "Q2",
+type: "normal") }
+    let(:question_sous_consigne) {
+ instance_double(Question, nom_technique: "Q3", type: QuestionSousConsigne::QUESTION_TYPE) }
 
     let(:evenement_valide1) {
- instance_double(Evenement, reponse?: true, question_nom_technique: "Q1") }
+ instance_double(Evenement, reponse?: true, question_nom_technique: "Q1",
+donnees: { "succes" => true }) }
+    let(:evenement_valide_variant) {
+ instance_double(Evenement, reponse?: true, question_nom_technique: "Q2",
+donnees: { "succes" => true }) }
     let(:evenement_non_reponse) {
- instance_double(Evenement, reponse?: false, question_nom_technique: "Q2") }
-    let(:evenement_valide2) {
- instance_double(Evenement, reponse?: true, question_nom_technique: "Q3") }
+ instance_double(Evenement, reponse?: false, question_nom_technique: "Q3",
+donnees: { "succes" => true }) }
 
-    let(:evenements) { [ evenement_valide1, evenement_non_reponse, evenement_valide2 ] }
-    let(:questions) { [ question1, question2, question3 ] }
+    let(:evenements) { [ evenement_valide1, evenement_valide_variant, evenement_non_reponse ] }
+    let(:questions) { [ question1, question_variant, question_sous_consigne ] }
 
     it "doit retourner un array d'EvenementQuestion" do
       resultat = described_class.construit_pour(evenements, questions)
@@ -194,15 +200,21 @@ describe EvenementQuestion, type: :model do
     it "exclue les evenements qui ne sont pas des réponse" do
       resultat = described_class.construit_pour(evenements, questions)
 
-      expect(resultat.map(&:nom_technique)).not_to include("Q2")
+      expect(resultat.map(&:nom_technique)).not_to include("Q3")
     end
 
     it "exclue les questions qui sont des sous consigne" do
       resultat = described_class.construit_pour(evenements, questions)
 
       noms_techniques = resultat.map(&:nom_technique)
-      expect(noms_techniques).to include("Q1", "Q3")
-      expect(noms_techniques).not_to include("Q2")
+      expect(noms_techniques).to include("Q1", "Q2__variant")
+      expect(noms_techniques).not_to include("Q3")
+    end
+
+    it "utilise nom_technique_sans_variant pour les questions variants" do
+      resultat = described_class.construit_pour(evenements, questions)
+
+      expect(resultat.all? { |eq| eq.succes == true }).to be true
     end
   end
 end

@@ -58,11 +58,14 @@ class EvenementQuestion
     # Passer l'ensemble des evenements de la partie
     def construit_pour(evenements, questions)
       evenements = evenements.select(&:reponse?)
-      questions = questions.to_a.reject { |question|
- question.type == QuestionSousConsigne::QUESTION_TYPE }
+      questions = questions.to_a.reject do |question|
+        question.type == QuestionSousConsigne::QUESTION_TYPE
+      end
 
       questions.map do |question|
-        evenement = evenements.find { |e| e.question_nom_technique == question.nom_technique }
+        evenement = evenements.find do |e|
+          e.question_nom_technique == question.nom_technique_sans_variant
+        end
         EvenementQuestion.new(question: question, evenement: evenement)
       end
     end

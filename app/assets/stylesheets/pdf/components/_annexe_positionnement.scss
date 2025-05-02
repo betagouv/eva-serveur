@@ -58,6 +58,7 @@
 
 .alert-annexe {
   width: 100%;
+  padding-bottom: 0;
 
   .fr-alert__title {
     @include h6;
@@ -83,4 +84,14 @@
 
 a {
   color: var(--text-default-grey);
+}
+
+.annexe_restitution__liste-interpretation {
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+.annexe_restitution__liste-interpretation--diagnostic {
+  margin-bottom: $dsfr-spacing-12v;
 }

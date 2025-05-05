@@ -7,12 +7,14 @@
   &, &:link, &:visited {
     background-image: none;
   }
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   font-family: $font-texte;
   text-align: center;
   box-shadow: none;
   transition: all 150ms ease-out;
+  width: fit-content;
 
   border: 1px solid;
 
@@ -107,6 +109,7 @@ $hauteur_menu_actions: 2rem;
 
     a {
       @include bouton-tertiaire-sans-contour;
+      justify-content: left;
       box-shadow: 0 calc(-1rem - 1px) 0 -1rem $grey-900;
       width: 100%;
     }

@@ -12,6 +12,7 @@
 //= require aide
 //= require autocomplete_recherche
 //= require filtres_dates
+//= require menu_mobile
 //= require bouton_menu
 //= require cgu
 //= require clipboard

@@ -86,9 +86,7 @@ button.bouton, a.bouton, .bouton {
     margin: 0;
     padding: 0;
 
-    display: flex;
     align-items: center;
-    justify-content: center;
 
     &::before {
       content: asset-data-url('icones/trois_points.svg');

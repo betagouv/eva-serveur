@@ -2,6 +2,7 @@ fr:
   logo_anlci: "ANLCI: Agence nationale de lutte contre l'illettrisme"
   lien_cgu: CGU
   lien_externe: "%{texte_du_lien} - nouvelle fenêtre"
+  label-menu-mobile: Affiche le menu
   devise:
     failure:
       already_authenticated: ""

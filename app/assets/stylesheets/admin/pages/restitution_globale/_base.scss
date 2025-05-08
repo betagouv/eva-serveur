@@ -254,6 +254,12 @@
       }
     }
   }
+  @media (max-width: 768px) {
+    .synthese-illettrisme {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+  }
 
   .stanine-niveau-francais-mathematique {
     color: $eva_main_blue;

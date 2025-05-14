@@ -26,6 +26,10 @@ a.pas-souligne {
     }
 }
 
+.fr-skiplinks {
+  z-index: 99; // nécessaire pour positionner au dessus du breadcumb en version mobile
+}
+
 // Fix conflit entre l'accordeon et les boutons
 .fr-accordion__btn {
   font-family: $font-titre;

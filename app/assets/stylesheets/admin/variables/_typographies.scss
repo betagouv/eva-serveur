@@ -69,3 +69,7 @@
   font-weight: 700;
   line-height: 56px;
 }
+
+.text-xs {
+  @include dsfr-texte-xs();
+}

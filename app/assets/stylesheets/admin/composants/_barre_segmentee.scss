@@ -4,13 +4,14 @@ $barre-segmentee-non-passee: $grey-850;
 
 .barre-segmentee {
   width: 320px;
+  max-width: 100%;
 }
 
 .barre-segmentee__legende {
   display: inline-block;
   color: $grey-425;
   @include dsfr-texte-xs;
-  white-space: nowrap;
+  white-space: break-spaces;
 }
 
 .barre-segmentee__graphique {

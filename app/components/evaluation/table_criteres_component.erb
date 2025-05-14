@@ -1,4 +1,4 @@
-<div class="fr-table fr-table--lg fr-table--no-scroll fr-table--criteres-component" id="table-bordered-component">
+<div class="fr-table fr-table--lg fr-table--criteres-component" id="table-bordered-component">
   <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
@@ -13,9 +13,9 @@
           <tbody>
             <% @criteres.each_with_index do |critere, index| %>
               <tr id="table-bordered-row-key-<%= index %>" data-row-key="<%= index %>">
-                <td><%= critere.libelle %></td>
-                <td><%= critere.code_clea %></td>
-                <td>
+                <td class="fr-col-5"><%= critere.libelle %></td>
+                <td class="fr-col-2"><%= critere.code_clea %></td>
+                <td class="fr-col-5">
                   <% if critere.pas_de_test? %>
                     <%= t("evaluation.pas_de_test_disponible") %></td>
                   <% else %>

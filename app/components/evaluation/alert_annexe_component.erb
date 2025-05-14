@@ -1,4 +1,4 @@
-<%= dsfr_alert(type: :info, title: "Pour en savoir plus", classes: "alert-annexe") do %>
+<%= dsfr_alert(type: :info, title: "Pour en savoir plus", html_attributes: { class: "alert-annexe" }) do %>
   <div class="alert-annexe__contenu">
     <ul>
       <li>Sur les référentiels utilisés : <%= link_to @lien_referentiel, @lien_referentiel %></li>

@@ -10,6 +10,8 @@ ActiveAdmin.register Campagne do
 
   config.sort_order = "created_at_desc"
 
+  includes :parcours_type
+
   filter :libelle
   filter :code
   filter :compte_id,
@@ -30,7 +32,12 @@ ActiveAdmin.register Campagne do
 
   index do
     column :libelle do |campagne|
-      link_to campagne.libelle, admin_campagne_path(campagne)
+      content_tag(:div) do
+        concat(link_to(campagne.libelle, admin_campagne_path(campagne)))
+        if campagne.parcours_type.present?
+          concat(content_tag(:div, campagne.parcours_type.libelle, class: "text-xs"))
+        end
+      end
     end
     column :code
     column :nombre_evaluations, class: "col-nombre_evaluations text-right",

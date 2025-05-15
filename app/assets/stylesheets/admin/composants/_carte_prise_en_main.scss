@@ -2,7 +2,10 @@ $grid-gutter-width: 1.25rem;
 
 .carte-prise-en-main {
   display: grid;
-  grid-template-columns: 4fr 2fr;
+  grid-template-columns: 66% 33%;
+  @media (max-width: 640px) {
+    grid-template-columns: 60% 40%;
+  }
   grid-gap: $grid-gutter-width;
   @include carte-avec-ombre();
   overflow: hidden;

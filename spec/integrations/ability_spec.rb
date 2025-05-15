@@ -159,7 +159,6 @@ describe Ability do
     it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
     it { is_expected.not_to be_able_to(:read, AnnonceGenerale) }
     it { is_expected.not_to be_able_to(:read, SourceAide) }
-    it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente) }
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
     it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
     it { is_expected.not_to be_able_to(:renseigner_qualification, Evaluation) }
@@ -273,7 +272,6 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, Evenement.new) }
     it { is_expected.not_to be_able_to(:read, evenement_superadmin) }
     it { is_expected.not_to be_able_to(:read, SourceAide.new) }
-    it { is_expected.not_to be_able_to(:read, Aide::QuestionFrequente.new) }
     it { is_expected.not_to be_able_to(:update, compte.structure) }
     it { is_expected.to be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:update, compte) }

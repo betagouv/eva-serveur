@@ -8,7 +8,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
-//= require faq
 //= require aide
 //= require autocomplete_recherche
 //= require filtres_dates

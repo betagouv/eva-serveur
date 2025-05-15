@@ -8,16 +8,13 @@ fr:
         foire_aux_question: Foire aux questions
       contact:
         titre: Nous sommes là pour vous aider
-        description: "**Bienvenue sur l’aide eva !** Un problème ? Besoin d’aide pour présenter ou prendre en main
-        l’outil ? Vous trouverez toutes les ressources pour vous accompagner sur cette page.
+        description: |
+          **Bienvenue sur l’aide eva !** Un problème ? Besoin d’aide pour présenter ou prendre en main l’outil ? Vous trouverez toutes les ressources pour vous accompagner sur cette page.
 
-
-        Si toutefois vous n’avez pas trouvé la réponse à votre question, contactez-nous."
+          Si toutefois vous n’avez pas trouvé la réponse à votre question, contactez-nous.
         support:
           titre: Support
-          description: "Pour bénéficier de support technique, signaler un bug, nous faire des suggestions, ou toute autre question, écrivez-nous sur :
+          description: |
+            Pour bénéficier de support technique, signaler un bug, nous faire des suggestions, ou toute autre question, écrivez-nous sur :
 
-
-          [%{email_contact}](mailto:%{email_contact})"
-      faq:
-        titre: Foire aux questions
+            [%{email_contact}](mailto:%{email_contact})

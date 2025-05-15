@@ -90,7 +90,6 @@ class AbilityUtilisateur
     cannot(:read, AnnonceGenerale)
     cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
-    cannot(:read, Aide::QuestionFrequente)
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification],
            Evaluation)

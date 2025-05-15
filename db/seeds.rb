@@ -10,9 +10,9 @@ SourceAide.find_or_create_by(titre: 'Guide de prise en main') do |source_aide|
   source_aide.categorie= :prise_en_main
   source_aide.type_document= :pdf
 end
-SourceAide.find_or_create_by(titre: 'Exemples de restitution') do |source_aide|
-  source_aide.description= "Plusieurs exemples de restitution eva selon les niveaux alerte illettrisme\n\nFichiers PDF de 4 pages"
-  source_aide.url= 'https://drive.google.com/drive/u/1/folders/1tOCcjxxT9P_UL6r4CXVScEiN090j3IA2'
+SourceAide.find_or_create_by(titre: 'Foire Aux Questions') do |source_aide|
+  source_aide.description= "Retrouver les réponses aux questions les plus fréquentes sur notre site public."
+  source_aide.url= 'https://eva.anlci.gouv.fr/centre-daide'
   source_aide.categorie= :prise_en_main
   source_aide.type_document= :repertoire
 end

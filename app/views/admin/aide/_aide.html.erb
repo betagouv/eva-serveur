@@ -1,0 +1,13 @@
+<div class="aide">
+  <div class="row">
+    <div class="contenu_aide col-8">
+      <%= render partial: "contact" %>
+      <% sources_par_categorie.each do |categorie, sources| %>
+        <%= render partial: "categorie_aide", locals: {
+          sources_aide: sources,
+          categorie: categorie
+        } %>
+      <% end %>
+    </div>
+  </div>
+</div>

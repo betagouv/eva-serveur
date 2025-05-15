@@ -15,11 +15,6 @@
   }
 
   &.show {
-    // Retire le margin-right de activeadmin afin que le contenu de la page soit sur toute la largeur (filtre compris)
-    #active_admin_content #main_content_wrapper #main_content {
-      margin-right: 0;
-    }
-
     h2 {
       margin-top: 1.5rem;
     }

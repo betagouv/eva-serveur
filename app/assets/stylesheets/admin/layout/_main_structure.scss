@@ -1,7 +1,11 @@
 #active_admin_content {
   padding: .5rem 0;
-  #main_content_wrapper #main_content {
-    margin-top: 2.5rem;
+  #main_content_wrapper {
+    max-width: 100vw;
+
+    #main_content {
+      margin-top: 2.5rem;
+    }
   }
 }
 

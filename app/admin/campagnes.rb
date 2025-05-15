@@ -34,9 +34,7 @@ ActiveAdmin.register Campagne do
     column :libelle do |campagne|
       content_tag(:div) do
         concat(link_to(campagne.libelle, admin_campagne_path(campagne)))
-        if campagne.parcours_type.present?
-          concat(content_tag(:div, campagne.parcours_type.libelle, class: "text-xs"))
-        end
+        concat(content_tag(:div, parcours_type_libelle(campagne), class: "text-xs"))
       end
     end
     column :code

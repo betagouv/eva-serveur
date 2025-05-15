@@ -1,12 +1,21 @@
 .admin_actualites {
   &.show {
-    #active_admin_content {
+    #active_admin_content.with_sidebar {
       #main_content_wrapper #main_content {
         margin-right: 465px;
       }
       #sidebar {
         width: 445px;
         margin-left: -445px;
+      }
+      @media (max-width: 854px) {
+        #main_content_wrapper #main_content {
+          margin-right: 0;
+        }
+        #sidebar {
+          width: 100%;
+          margin-left: 0;
+        }
       }
     }
 

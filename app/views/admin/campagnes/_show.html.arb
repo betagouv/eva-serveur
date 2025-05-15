@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: "row" do
-  div class: "offset-1 col-4" do
+  div class: "offset-1 col-6" do
     div class: "panel font-italic" do
       t(".intro")
     end

@@ -1,23 +1,33 @@
-SourceAide.find_or_create_by(titre: 'Vidéo explicative pour les conseiller·ère·s') do |source_aide|
-  source_aide.description="Vidéo accessible sur Youtube\nDurée : 5mn27"
-  source_aide.url='https://youtu.be/WC9nICmMgbY'
+SourceAide.find_or_create_by(titre: 'Tutoriels vidéo de prise en main') do |source_aide|
+  source_aide.description="Eva détaillé étape par étape pour vous former et retrouver toutes les manipulations de l’outil.\n\nDurées : entre 5mn et 15mn"
+  source_aide.url='https://youtube.com/playlist?list=PL6OVjjnBhE-8dEQEau1cbC3PSzOBd1oub&si=yuZo2S7qykFE0EEa'
   source_aide.categorie=:prise_en_main
   source_aide.type_document=:video
+  source_aide.position=0
 end
 SourceAide.find_or_create_by(titre: 'Guide de prise en main') do |source_aide|
-  source_aide.description= "Fichier PDF imprimable\n14 pages"
-  source_aide.url= 'https://drive.google.com/file/d/1VzZLNJ8pw5MihpSqZj1qEVAwXvRlkiOE/view'
+  source_aide.description= "Fichier PDF imprimable\n\n5 pages"
+  source_aide.url= 'https://docs.google.com/presentation/d/1_ERLlP3---x0EoINQNotuOAdmR_zQAa1S_RZbQj6peo/edit?usp=sharing'
   source_aide.categorie= :prise_en_main
   source_aide.type_document= :pdf
+  source_aide.position=1
+end
+SourceAide.find_or_create_by(titre: 'Exemples de fiches de restitution') do |source_aide|
+  source_aide.description= "Plusieurs exemples de restitution eva selon les niveaux alerte illettrisme\n\nFichiers PDF de 4 pages"
+  source_aide.url= 'https://eva.anlci.gouv.fr/centre-daide'
+  source_aide.categorie= :prise_en_main
+  source_aide.type_document= :repertoire
+  source_aide.position=2
 end
 SourceAide.find_or_create_by(titre: 'Foire Aux Questions') do |source_aide|
   source_aide.description= "Retrouver les réponses aux questions les plus fréquentes sur notre site public."
   source_aide.url= 'https://eva.anlci.gouv.fr/centre-daide'
   source_aide.categorie= :prise_en_main
   source_aide.type_document= :repertoire
+  source_aide.position=3
 end
 SourceAide.find_or_create_by(titre: 'Vidéo introductive pour les candidats et les candidates') do |source_aide|
-  source_aide.description="Vidéo accessible sur Youtube\nDurée : 1mn50"
+  source_aide.description="Durée : 1mn50"
   source_aide.url= 'https://youtu.be/T7Gh0sMZBqY'
   source_aide.categorie= :animer_restituer
   source_aide.type_document= :video
@@ -28,14 +38,20 @@ SourceAide.find_or_create_by(titre: 'Document d’interprétation des résultats
   source_aide.categorie= :animer_restituer
   source_aide.type_document= :web_doc
 end
+SourceAide.find_or_create_by(titre: 'Mode hors ligne - explication et activation') do |source_aide|
+  source_aide.description= "Si vous avez besoins de faire passer des évaluations dans des endroits non connectés à internet, c'est possible. Vous trouverez ici toutes les informations pour activer et utiliser ce mode de fonctionnement."
+  source_aide.url= 'https://eva.beta.gouv.fr/mode-hors-ligne/'
+  source_aide.categorie= :animer_restituer
+  source_aide.type_document= :web_doc
+end
 SourceAide.find_or_create_by(titre: "Fiche de présentation d'eva") do |source_aide|
-  source_aide.description= "Fichier PDF imprimable\n1 page"
+  source_aide.description= "Fichier PDF imprimable\n\n1 page"
   source_aide.url= 'https://drive.google.com/file/d/1dzL55etvlvoaoW7NtSOaK-_Nhdf945C7/view'
   source_aide.categorie= :presenter_eva
   source_aide.type_document= :pdf
 end
 SourceAide.find_or_create_by(titre: 'Vidéo de démonstration') do |source_aide|
-  source_aide.description="Vidéo accessible sur Youtube\nDurée : 3mn46"
+  source_aide.description="Durée : 3mn46"
   source_aide.url= 'https://youtu.be/wz8SftVc53k'
   source_aide.categorie= :presenter_eva
   source_aide.type_document= :video

@@ -70,5 +70,29 @@ describe CompteMailer, type: :mailer do
       expect(mail.to).to eq([ 'debut@test.com' ])
       expect(mail.from).to eql([ Eva::EMAIL_CONTACT ])
     end
+
+    context "pour une structure de type inconnue" do
+      before { structure.type_structure = nil }
+
+      it "affiche la cible d'évaluation par defaut" do
+        expect(mail.body).to include "bénéficiaires"
+      end
+    end
+
+    context "pour une structure de type autre" do
+      before { structure.type_structure = "autre" }
+
+      it "affiche la cible d'évaluation par defaut" do
+        expect(mail.body).to include "bénéficiaires"
+      end
+    end
+
+    context "pour une structure de type SMA" do
+      before { structure.type_structure = "SMA" }
+
+      it "affiche la cible d'évaluation" do
+        expect(mail.body).to include "jeunes"
+      end
+    end
   end
 end

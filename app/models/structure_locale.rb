@@ -17,8 +17,21 @@ class StructureLocale < Structure
     service_insertion_collectivite
     SIAE
     SMA
+    SMV
     autre
   ].freeze
+
+  CIBLE_EVALUATION = {
+    SIAE: "demandeurs d'emploi",
+    SMA: "jeunes",
+    SMV: "jeunes",
+    cap_emploi: "demandeurs d'emploi",
+    e2c: "jeunes",
+    mission_locale: "jeunes",
+    organisme_formation: "stagiaires",
+    orientation_scolaire: "jeunes",
+    service_insertion_collectivite: "usagers"
+  }.freeze
 
   validates :code_postal, :type_structure, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }
@@ -32,14 +45,6 @@ class StructureLocale < Structure
   end
 
   def cible_evaluation
-    case type_structure
-    when "mission_locale", "orientation_scolaire", "e2c", "SMA"
-      "jeunes"
-    when "SIAE", "cap_emploi" then "demandeurs d'emploi"
-    when "service_insertion_collectivite" then "usagers"
-    when "organisme_formation" then "stagiaires"
-    else
-      "bénéficiaires"
-    end
+    CIBLE_EVALUATION[type_structure&.to_sym] || "bénéficiaires"
   end
 end

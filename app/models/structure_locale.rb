@@ -22,11 +22,16 @@ class StructureLocale < Structure
   ].freeze
 
   CIBLE_EVALUATION = {
-    SIAE: "demandeurs d'emploi",
+    AFPA: "stagiaires",
+    GRETA: "stagiaires",
+    PJJ_UEAJ: "jeunes",
+    SIAE: "salarié(e)s",
     SMA: "jeunes",
     SMV: "jeunes",
+    apprentissage: "stagiaires",
     cap_emploi: "demandeurs d'emploi",
     e2c: "jeunes",
+    france_travail: "demandeurs d'emploi",
     mission_locale: "jeunes",
     organisme_formation: "stagiaires",
     orientation_scolaire: "jeunes",

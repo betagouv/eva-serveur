@@ -46,6 +46,7 @@ fr:
           service_insertion_collectivite: Service d'insertion collectivité
           SIAE: SIAE
           SMA: SMA
+          SMV: SMV
   formtastic:
     actions:
       structure: &actions_structure

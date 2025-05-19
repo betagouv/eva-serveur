@@ -163,7 +163,7 @@ describe 'Dashboard', type: :feature do
       it do
         expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
         infos_support =
-          'contacter Véronique au 06 01 02 03 04 ou par mail à support@eva.beta.gouv.fr'
+          'contacter Véronique au 06 01 02 03 04 ou par mail à eva@anlci.gouv.fr'
         expect(page).to have_content infos_support
       end
     end

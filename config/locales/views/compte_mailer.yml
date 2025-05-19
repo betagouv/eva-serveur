@@ -40,9 +40,10 @@ fr:
 
         Depuis %{delai_relance} vous avez un accès gratuit à eva.
 
-        Eva est un outil d’évaluation ludique qui permet de détecter
-        l'illettrisme et de valoriser les %{cible_evaluation} que vous accompagnez
-        en vous appuyant sur leurs compétences transversales.
+        Eva est un outil d'évaluation ludique qui permet de détecter
+        difficultés avec les compétences de base et de valoriser les
+        %{cible_evaluation} que vous accompagnez en vous appuyant sur leurs
+        compétences transversales.
 
         ### Vous souhaitez essayer eva ? Découvrir les jeux, les réaliser puis visualiser les résultats ?
 

@@ -103,7 +103,6 @@ fr:
             Bravo ! Vous avez terminé ce tutoriel
 
             Nos équipes restent à votre disposition :  
-            - via <a href="mailto:support@eva.beta.gouv.fr" class="text-primary">support@eva.beta.gouv.fr</a>  
-            - via le chat (la petite bulle bleue en bas à droite de votre écran)
+            - via <a href="mailto:%{email}" class="text-primary">%{email}</a>  
     pastille:
       illettrisme_potentiel: Illettrisme potentiel

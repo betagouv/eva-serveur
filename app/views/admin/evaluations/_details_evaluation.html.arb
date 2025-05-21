@@ -35,14 +35,12 @@ div id: "evaluation__details", class: "row" do
           end
         end
         div class: "col-2 card-pdf" do
-          div image_tag "source-aide-pdf.svg", alt: "document PDF"
-          div class: "mt-2" do
-            link_to("Exporter", {
-                      parties_selectionnees: params[:parties_selectionnees],
-                      format: :pdf
-                    },
-                    class: "bouton grand-bouton", target: "_blank", rel: "noopener")
-          end
+          text_node image_tag "source-aide-pdf.svg", alt: "document PDF"
+          text_node link_to("Exporter", {
+                    parties_selectionnees: params[:parties_selectionnees],
+                    format: :pdf
+                  },
+                  class: "mt-2 bouton grand-bouton", target: "_blank", rel: "noopener")
         end
       end
       unless resource.complete?

@@ -5,7 +5,8 @@
     <%= f.hidden_field :code_postal, value: @code_postal %>
     <% class_disabled = @button_disabled ? "disabled": "" %>
     <%= f.submit t(".bouton_recherche_structure"), id: "bouton-chercher",
-      class: class_disabled, disabled: @button_disabled,
+      class: class_disabled,
+      disabled: @button_disabled,
       aria: { labelledby: "recherche-structure-autocomplete" }
     %>
   <% end %>

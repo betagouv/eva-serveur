@@ -18,16 +18,20 @@
       width: 111px;
     }
 
-    .titre {
-      font-weight: bold;
-      margin-bottom: .5rem;
-    }
+    .details {
+      width: 100%;
 
-    .description {
-      font-style: italic;
-      p {
-        line-height: 1rem;
-        font-size: .875rem;
+      .titre {
+        font-weight: bold;
+        margin-bottom: .5rem;
+      }
+
+      .description {
+        font-style: italic;
+        p {
+          line-height: 1rem;
+          font-size: .875rem;
+        }
       }
     }
 

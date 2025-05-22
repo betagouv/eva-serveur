@@ -6,7 +6,10 @@
   <% if @current_compte.present? %>
     <%= link_to t(".rejoindre_structure"),
                 rejoindre_structure_admin_compte_path(@current_compte, structure_id: @structure.id),
-                aria: { describedby: @structure.id },
+                aria: {
+                  describedby: @structure.id,
+                  label: t(".aria_rejoindre_structure", nom: @structure.nom, code_postal: @structure.code_postal)
+                },
                 method: :patch
     %>
   <% else %>
@@ -16,6 +19,9 @@
                   code_postal: params[:code_postal],
                   ville_ou_code_postal: params[:ville_ou_code_postal]
                 ),
-                aria: { describedby: @structure.id } %>
+                aria: {
+                  describedby: @structure.id,
+                  label: t(".aria_rejoindre_structure", nom: @structure.nom, code_postal: @structure.code_postal)
+                } %>
   <% end %>
 </div>

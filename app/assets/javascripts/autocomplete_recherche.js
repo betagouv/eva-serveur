@@ -112,18 +112,18 @@ function initialiseAutocomplete(options) {
     },
 
     onConfirm: onConfirm,
-    tNoResults: () => "Aucun résultat trouvé",
-    tStatusNoResults: () => "Aucun résultat trouvé",
-    tStatusSelectedOption: (selectedOption, length, index) => `${selectedOption} ${index + 1} sur ${length} est selectionné`,
-    tAssistiveHint: () => "Quand le résultat de l'autocomplétion est disponible, utilisez les flèches hautes et basses pour passer en revue et la touche entrer pour sélectionner.",
+    tNoResults: () => I18n.t('recherche_structure_component.no_results'),
+    tStatusNoResults: () => I18n.t('recherche_structure_component.no_results'),
+    tStatusSelectedOption: (selectedOption, length, index) => `${selectedOption} ${index + 1} sur ${length} est sélectionné`,
+    tAssistiveHint: () => I18n.t('recherche_structure_component.assistive_hint'),
     tStatusQueryTooShort: (minQueryLength) => `Entrez au moins ${minQueryLength} characters pour avoir un résultat`,
     tStatusResults: (length, contentSelectedOption) => {
         const words = {
-            result: (length === 1) ? 'resultat' : 'resultats',
+            result: (length === 1) ? 'résultat' : 'résultats',
             is: (length === 1) ? 'disponible' : 'disponibles'
         };
 
-        return "<span>{length} {words.result} {words.is}. {contentSelectedOption}</span>";
+        return `${length} ${words.result} ${words.is}. ${contentSelectedOption}`;
     }
   });
 

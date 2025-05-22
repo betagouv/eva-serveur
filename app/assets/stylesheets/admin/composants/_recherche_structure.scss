@@ -6,6 +6,11 @@
   form {
     display: flex;
   }
+
+  form input[type="submit"] {
+    height: auto;
+  }
+
   .label-champ-recherche {
     font-size: .875rem;
     margin-bottom: .5rem;

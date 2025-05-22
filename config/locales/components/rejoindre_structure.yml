@@ -2,3 +2,4 @@ fr:
   rejoindre_structure_component:
       code_postal: 'Code postal : '
       rejoindre_structure: Rejoindre
+      aria_rejoindre_structure: "Rejoindre %{nom}, code postal : %{code_postal}"

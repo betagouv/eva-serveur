@@ -1,9 +1,11 @@
 fr:
   recherche_structure_component:
-    aucun_resultat: "Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche."
+    aucun_resultat: Nous n'avons pas trouvé de structure référencée dans eva pour cette recherche.
     bouton_recherche_structure: Chercher
     label_champ_recherche: Entrez la localisation de la structure
     placeholder_recherche: Code postal ou ville
+    no_results: Aucun résultat trouvé
+    assistive_hint: Saisissez un code postal ou une ville. Quand le résultat de l'autocomplétion est disponible, utilisez les flèches hautes et basses pour passer en revue et la touche entrer pour sélectionner.
     titre_resultats:
       zero: ""
       one: "1 résultat pour %{code_postal}"

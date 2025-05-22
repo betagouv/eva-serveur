@@ -40,7 +40,7 @@
   <body class='corp-message'>
     <%= yield %>
     <%= md t(".signature") %>
-    <%= image_tag "signature.png", alt: t(".description_image", url: ENV["HOTE_SERVEUR"]) %>
+    <img src="<%= ENV["PROTOCOLE_SERVEUR"] %>://<%= ENV["HOTE_SERVEUR"] %>/images/signature.png" alt="<%= t(".description_image", url: ENV["HOTE_SERVEUR"]) %>" />
     <div style="text-align: center; color: #929292;">
       <%= md t(".ps") %>
     </div>

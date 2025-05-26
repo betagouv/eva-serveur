@@ -29,6 +29,8 @@ fr:
         structures_dependantes: Structures dépendantes
         nombre_evaluations: Nombre d'évaluations
         autorisation_creation_campagne: Création de campagne - Conseillers
+        autorisation_creation_campagne_true: Autorisé
+        autorisation_creation_campagne_false: Interdit
         type_structure:
           one: 'Type de structure'
           non_communique: Non communiqué

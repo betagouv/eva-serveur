@@ -4,7 +4,8 @@ ActiveAdmin.register StructureLocale do
   menu parent: "Terrain", if: proc { current_compte.anlci? }
   actions :all
 
-  permit_params :nom, :type_structure, :code_postal, :parent_id, :siret, :autorisation_creation_campagne
+  permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
+                :autorisation_creation_campagne
 
   filter :nom
   filter :type_structure,

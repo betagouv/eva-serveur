@@ -18,6 +18,14 @@ div class: "row" do
             end
             row :code_postal
             row :siret
+            row :autorisation_creation_campagne do
+              render(BadgeComponent.new(
+                contenu: traduction_autorisation_creation_campagne(
+                  resource.autorisation_creation_campagne
+                ),
+                html_class: badge_class(structure.autorisation_creation_campagne))
+              )
+            end
             row :region
           end
           row :created_at

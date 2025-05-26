@@ -28,6 +28,7 @@ fr:
         parent_id: Structure référente
         structures_dependantes: Structures dépendantes
         nombre_evaluations: Nombre d'évaluations
+        autorisation_creation_campagne: Création de campagne - Conseillers
         type_structure:
           one: 'Type de structure'
           non_communique: Non communiqué

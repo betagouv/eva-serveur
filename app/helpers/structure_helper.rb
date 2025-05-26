@@ -33,4 +33,12 @@ module StructureHelper
       campagne.really_destroy!
     end
   end
+
+  def badge_class(autorisation_creation_campagne)
+    autorisation_creation_campagne ? "-green-emeraude" : "-orange-terre-battue"
+  end
+
+  def traduction_autorisation_creation_campagne(autorisation_creation_campagne)
+    I18n.t("activerecord.attributes.structure.autorisation_creation_campagne_#{autorisation_creation_campagne}") # rubocop:disable Metrics/LineLength
+  end
 end

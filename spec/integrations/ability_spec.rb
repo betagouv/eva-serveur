@@ -273,7 +273,6 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, evenement_superadmin) }
     it { is_expected.not_to be_able_to(:read, SourceAide.new) }
     it { is_expected.not_to be_able_to(:update, compte.structure) }
-    it { is_expected.to be_able_to(:create, Campagne.new) }
     it { is_expected.to be_able_to(:update, compte) }
     it { is_expected.not_to be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
@@ -295,6 +294,22 @@ describe Ability do
     }
 
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
+
+    context "quand la structure n'autorise pas la création de campagne" do
+      before do
+        compte.structure.update(autorisation_creation_campagne: false)
+      end
+
+      it { is_expected.not_to be_able_to(:create, Campagne) }
+    end
+
+    context "quand la structure autorise la création de campagne" do
+      before do
+        compte.structure.update(autorisation_creation_campagne: true)
+      end
+
+      it { is_expected.to be_able_to(:create, Campagne) }
+    end
 
     context 'peut consulter les campagnes de ma structure' do
       let(:mon_collegue) { create :compte, structure: compte_conseiller.structure }
@@ -349,10 +364,6 @@ describe Ability do
     let!(:autre_compte) { create :compte_conseiller, structure: compte.structure }
     let!(:autre_campagne) { create :campagne, compte: autre_compte }
     let!(:autre_evaluation) { create :evaluation, campagne: autre_campagne }
-
-    it 'peut créer une campagne' do
-      expect(subject).to be_able_to(:create, Campagne.new)
-    end
 
     it 'peut lire ses campagnes' do
       expect(subject).to be_able_to(:read, ma_campagne)

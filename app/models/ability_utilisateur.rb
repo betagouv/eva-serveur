@@ -16,7 +16,7 @@ class AbilityUtilisateur
   private
 
   def droit_campagne(compte)
-    can :create, Campagne
+    can :create, Campagne if can_create_campagne?(compte)
     can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
     can %i[update read destroy], Campagne, compte_id: compte.id
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
@@ -116,5 +116,9 @@ class AbilityUtilisateur
     end
     can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
     cannot :refuser, Compte, &:au_moins_admin?
+  end
+
+  def can_create_campagne?(compte)
+    compte.structure&.autorisation_creation_campagne || compte.admin? || compte.superadmin?
   end
 end

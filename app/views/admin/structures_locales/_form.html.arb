@@ -13,6 +13,7 @@ div class: "panel nouvelle_structure" do
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end
+      f.input :autorisation_creation_campagne, as: :toggle
     end
     text_node md t(".verifier_information_structure", email_contact: Eva::EMAIL_CONTACT)
     f.actions do

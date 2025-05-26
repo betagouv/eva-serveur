@@ -1,0 +1,5 @@
+<div class="fr-toggle">
+  <%= @f.check_box @method, input_html_options %>
+  <label class="fr-toggle__label" for="<%= input_id %>"><%= @label %></label>
+  <div class="fr-messages-group" id="<%= input_id %>-messages" aria-live="polite"></div>
+</div>

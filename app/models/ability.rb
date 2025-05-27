@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Ability < AbilityUtilisateur
-  include CanCan::Ability
-
   def initialize(compte)
     if compte.validation_refusee?
       droits_comptes_refuses compte

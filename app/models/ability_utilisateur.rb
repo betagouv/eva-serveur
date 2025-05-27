@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 class AbilityUtilisateur
+  include CanCan::Ability
+  attr_reader :compte
+
   def initialize(compte)
+    @compte = compte
+
     droits_generiques compte
     droit_campagne compte
     droit_evaluation compte
@@ -11,6 +16,10 @@ class AbilityUtilisateur
     droit_structure compte
     droit_actualite compte
     droits_cmr if compte.charge_mission_regionale?
+  end
+
+  def can_update_active_pour_campagne?(campagne)
+    @compte.au_moins_admin? || campagne.compte_id == @compte.id
   end
 
   private

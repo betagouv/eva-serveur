@@ -24,6 +24,20 @@ ActiveAdmin.register Campagne do
   filter :situations
   filter :created_at
 
+  action_item :nouvelle_campagne_disabled, only: :index, if: proc { !can?(:create, Campagne) } do
+    render DsfrBoutonComponent.new(
+      label: I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"),
+      btn_level: :secondary,
+      btn_size: :sm,
+      icon: "add-line",
+      html_attributes: { disabled: true }
+    )
+  end
+    
+  action_item :nouvelle_campagne_disabled_explication, only: :index, if: proc { !can?(:create, Campagne) } do
+    span I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication"), class: "fr-text--xs text-grey-425"
+  end
+
   action_item :voir_evaluations, only: :show do
     link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
                    count: Evaluation.where(campagne: resource).count),

@@ -10,7 +10,7 @@ class DsfrBoutonComponent < ViewComponent::Base
   end
 
   def btn_classes
-    classes = ["fr-btn"]
+    classes = [ "fr-btn" ]
     classes << "fr-btn--#{@btn_level}"
     classes << "fr-btn--icon-left" if @icon
     classes << "fr-icon-#{@icon}" if @icon

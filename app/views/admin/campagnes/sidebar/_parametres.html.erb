@@ -1,0 +1,22 @@
+<% if current_ability.can_update_active_pour_campagne?(@campagne) %>
+  <div class="sidebar-parametres">
+    <div class="sidebar-parametres--header">
+      <div class="sidebar-parametres--titre">
+        Paramètres
+      </div>
+      <div class="sidebar-parametres--description">
+        <%= @campagne.active ? "Décocher pour rendre cette campagne inactive." : "Cocher pour rendre cette campagne active."  %>
+      </div>
+    </div>
+    <div class="sidebar-parametres--content">
+      <%= form_with(model: @campagne, url: admin_campagne_path(@campagne), method: :patch, local: true, class: "sidebar-parametres--form") do |builder| %>
+        <%= render(ToggleComponent.new(
+          f: builder,
+          method: :active,
+          label: "Campagne active",
+          classes: "fr-toggle--border-bottom fr-toggle--label-left toggle-auto-soumission"
+        )) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

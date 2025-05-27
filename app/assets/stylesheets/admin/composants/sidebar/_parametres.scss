@@ -1,0 +1,73 @@
+.action_item--sidebar-parametres {
+  margin-top: $dsfr-font-size-md;
+  width: 100%;
+}
+
+.sidebar-parametres {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.sidebar-parametres--header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  gap: $dsfr-spacing-2v;
+}
+
+.sidebar-parametres--titre {
+  align-self: stretch;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  font-size: $dsfr-font-size-md;
+  text-align: left;
+  color: $grey-50;
+}
+
+.sidebar-parametres--description {
+  align-self: stretch;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  font-size: $dsfr-font-size-xs;
+  text-align: left;
+  color: $grey-425;
+}
+
+.sidebar-parametres--content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 100%;
+  gap: $dsfr-spacing-4v;
+  padding-top: $dsfr-spacing-4v;
+}
+
+.sidebar-parametres--form {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  gap: $dsfr-spacing-8v;
+}
+
+.sidebar-parametres--form .fr-toggle {
+  width: 100%;
+}

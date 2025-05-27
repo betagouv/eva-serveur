@@ -2,6 +2,14 @@
 
 div class: "row" do
   div class: "offset-1 col-6" do
+    class_active = resource.active ? "fr-badge--success" :  ""
+    text_active = resource.active ? "ACTIVE" :  "INACTIVE"
+    render(
+      BadgeComponent.new(
+        contenu: text_active,
+        html_class: class_active
+      )
+    )
     div class: "panel font-italic" do
       t(".intro")
     end

@@ -35,7 +35,7 @@ module StructureHelper
   end
 
   def badge_class(autorisation_creation_campagne)
-    autorisation_creation_campagne ? "-green-emeraude" : "-orange-terre-battue"
+    autorisation_creation_campagne ? "fr-badge--green-emeraude" : "fr-badge--orange-terre-battue"
   end
 
   def traduction_autorisation_creation_campagne(autorisation_creation_campagne)

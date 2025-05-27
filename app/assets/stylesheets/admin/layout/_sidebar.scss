@@ -8,6 +8,10 @@
       @include annule-carte;
       @include panel-gris();
       margin-bottom: 0.5rem;
+
+      background: var(--color-background-default, #FFF);      
+      /* dsfr/shadow-sm */
+      box-shadow: 0px 2px 6px 0px rgba(0, 0, 18, 0.16);
     }
 
     &.annule-panel {

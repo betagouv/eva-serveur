@@ -27,10 +27,23 @@ describe 'Campagne API', type: :request do
       expect(resultat['code']).to eq('ETE21')
     end
 
-    it "retourne une 404 lorsqu'elle n'existe pas" do
-      get '/api/campagnes/inconnue'
+    context "quand la campagne n'existe pas" do
+      it "retourne une 404" do
+        code_inconnue = 'INCONNUE'
+        get "/api/campagnes/#{code_inconnue}"
 
-      expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "quand la campagne n'est pas active" do
+      it "retourne une 404" do
+        campagne.update!(active: false)
+
+        get "/api/campagnes/#{campagne.code}"
+
+        expect(response).to have_http_status(:not_found)
+      end
     end
 
     context 'quand la campagne a des situations' do

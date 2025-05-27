@@ -40,6 +40,7 @@ class Campagne < ApplicationRecord
               MAX(evaluations.created_at) AS date_derniere_evaluation')
   }
   scope :par_code, ->(code) { where code: code.upcase }
+  scope :active, -> { where(active: true) }
   scope :avec_situation, lambda { |situation|
     joins(:situations_configurations).where(situations_configurations: {
                                               situation_id: situation&.id

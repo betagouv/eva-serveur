@@ -10,7 +10,7 @@ module Api
 
     def trouve_campagne
       questions_incluses = %i[questionnaires_questions questions]
-      @campagne = Campagne.includes(
+      @campagne = Campagne.active.includes(
         situations_configurations: [
           { questionnaire: questions_incluses },
           { situation: [

@@ -78,3 +78,23 @@ a.pas-souligne {
 .fr-toggle__label {
   display: flex !important;
 }
+.fr-btn--secondary {
+  border-radius: 0;
+  border: 1px solid var(--light-decisions-border-border-disabled-grey, #E5E5E5) !important;
+
+}
+
+.fr-btn--secondary:disabled,
+a.fr-btn--secondary:not([href]) {
+  box-shadow: inset 0 0 0 0px var(--border-disabled-grey) !important;
+}
+
+.fr-btn--secondary:hover {
+  font-weight: 500 !important;
+  background-color: transparent !important;
+  border: 1px solid var(--light-decisions-border-border-disabled-grey, #E5E5E5) !important;
+}
+
+.text-grey-425 {
+  color: $grey-425;
+}

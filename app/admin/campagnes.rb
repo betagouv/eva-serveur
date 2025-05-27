@@ -30,6 +30,10 @@ ActiveAdmin.register Campagne do
             admin_evaluations_path(q: { campagne_id_eq: resource })
   end
 
+  action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do
+    render partial: "admin/campagnes/sidebar/parametres"
+  end
+
   index do
     column :libelle do |campagne|
       content_tag(:div) do

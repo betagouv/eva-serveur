@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class ToggleComponent < ViewComponent::Base
-  def initialize(f:, method:, label:)
+  def initialize(f:, method:, label:, classes: nil)
     @f = f
     @method = method
     @label = label
+    @classes = classes
   end
 
   def input_id

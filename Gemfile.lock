@@ -686,6 +686,7 @@ DEPENDENCIES
   devise
   devise-i18n
   down
+  dsfr-assets (~> 1.13)
   dsfr-view-components (~> 2.0)
   factory_bot_rails
   ffaker

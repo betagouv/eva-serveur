@@ -16,6 +16,7 @@ require "rails/test_unit/railtie"
 require 'view_component'
 require 'view_component/storybook'
 require 'dsfr/components'
+require 'dsfr/assets'
 require './lib/custom_exceptions_app_wrapper'
 
 # Require the gems listed in Gemfile, including any gems

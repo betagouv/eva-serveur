@@ -239,6 +239,7 @@ ActiveAdmin.setup do |config|
   config.register_javascript "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
   config.register_stylesheet "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
   config.register_javascript '/pro/dsfr/dsfr.nomodule.min.js'
+  config.register_stylesheet "utility/dsfr-utility.min.css", media: "all", "data-turbo-track": "reload"
 
   # == CSV options
   #

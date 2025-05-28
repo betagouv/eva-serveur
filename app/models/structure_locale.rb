@@ -8,6 +8,7 @@ class StructureLocale < Structure
     cap_emploi
     CRIA
     e2c
+    entreprise
     GRETA
     mission_locale
     organisme_formation
@@ -31,6 +32,7 @@ class StructureLocale < Structure
     apprentissage: "stagiaires",
     cap_emploi: "demandeurs d'emploi",
     e2c: "jeunes",
+    entreprise: "salarié(e)s",
     france_travail: "demandeurs d'emploi",
     mission_locale: "jeunes",
     organisme_formation: "stagiaires",

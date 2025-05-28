@@ -13,19 +13,24 @@
 
   <% if @ville_ou_code_postal.present? %>
     <% if @structures_code_postal.present? %>
+      <ul class="pl-0" title="<%= t(".titre_resultats", count: @structures_code_postal.size, code_postal: @code_postal) %>">
       <h3 class="description-liste-structures mt-4"><%= t(".titre_resultats", count: @structures_code_postal.size, code_postal: @code_postal) %></h3>
       <% @structures_code_postal.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
+      </ul>
 
       <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
     <% end %>
 
     <% if @structures.present? %>
+      <ul class="pl-0" title="<%= t(".titre_resultats_proches", count: @structures.size) %>">
       <h3 class="description-liste-structures mt-4"><%= t(".titre_resultats_proches", count: @structures.size) %></h3>
       <% @structures.each do |structure| %>
         <%= render(RejoindreStructureComponent.new(structure, @current_compte)) %>
       <% end %>
+      </ul>
+
       <%= render BoutonAjouterUneStructureComponent.new(@current_compte) %>
     <% end %>
 

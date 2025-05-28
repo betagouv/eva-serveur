@@ -1,4 +1,4 @@
-<div class="rejoindre-structure">
+<li class="rejoindre-structure">
   <div class="infos" id="<%= @structure.id %>" >
     <h4><%= @structure.nom %></h4>
     <p class="sous-infos"><strong><%= t(".code_postal") %></strong><%= @structure.code_postal %></p>
@@ -24,4 +24,4 @@
                   label: t(".aria_rejoindre_structure", nom: @structure.nom, code_postal: @structure.code_postal)
                 } %>
   <% end %>
-</div>
+</li>

@@ -30,7 +30,7 @@ fr:
     resources:
       source_aide:
         delete_model: Supprimer
-        new_model: Ajouter une nouvelle source d'aide
+        new_model: Nouvelle source d'aide
         edit_model: Modifier
     status_tag:
       <<: *traduction-categories

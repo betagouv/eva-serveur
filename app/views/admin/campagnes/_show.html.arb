@@ -1,45 +1,52 @@
 # frozen_string_literal: true
 
 div class: "row" do
-  div class: "offset-1 col-6" do
-    class_active = resource.active ? "fr-badge--success" :  ""
-    text_active = resource.active ? "ACTIVE" :  "INACTIVE"
-    render(
-      BadgeComponent.new(
-        contenu: text_active,
-        html_class: class_active
+  div class: "offset-1 col-6 campagne--page" do
+    div do
+      class_active = resource.active ? "fr-badge--success" :  ""
+      text_active = resource.active ? "ACTIVE" :  "INACTIVE"
+      render(
+        BadgeComponent.new(
+          contenu: text_active,
+          html_class: class_active
+        )
       )
-    )
+      h2 resource.display_name, class: "campagne--titre"
+    end
     div class: "panel font-italic" do
       t(".intro")
     end
     render "votre_code_campagne"
 
-    h2 "Détails de la campagne"
+    div do
+      h2 "Détails de la campagne"
 
-    div class: "panel" do
-      attributes_table_for campagne do
-        row :libelle
-        row :compte
+      div class: "panel" do
+        attributes_table_for campagne do
+          row :libelle
+          row :compte
+        end
       end
     end
 
     render "programme"
 
     if can?(:manage, Compte)
-      h2 "Administration"
+      div do
+        h2 "Administration"
 
-      div class: "panel" do
-        attributes_table_for campagne do
-          row :id
-          row :affiche_competences_fortes
-          row :created_at
+        div class: "panel" do
+          attributes_table_for campagne do
+            row :id
+            row :affiche_competences_fortes
+            row :created_at
+          end
+
+          hr
+
+          render partial: "admin/situations_configurations/liste_situations_configurations",
+                locals: { situations_configurations: situations_configurations }
         end
-
-        hr
-
-        render partial: "admin/situations_configurations/liste_situations_configurations",
-               locals: { situations_configurations: situations_configurations }
       end
     end
   end

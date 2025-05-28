@@ -78,6 +78,7 @@ a.pas-souligne {
 .fr-toggle__label {
   display: flex !important;
 }
+
 .fr-btn--secondary {
   border-radius: 0;
   border: 1px solid var(--light-decisions-border-border-disabled-grey, #E5E5E5) !important;
@@ -124,4 +125,5 @@ a.fr-btn--secondary:not([href]) {
 
 .fr-badge {
   font-weight: 600 !important;
+  margin: 0;
 }

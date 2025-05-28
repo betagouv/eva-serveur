@@ -234,6 +234,8 @@ form:not(.filter_form) .select2-container {
 }
 .select2 {
   &-container {
+    max-width: 100%;
+
     .select2-selection {
       @include base-input();
       height: 2.5rem;

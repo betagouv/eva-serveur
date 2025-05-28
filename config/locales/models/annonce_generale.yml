@@ -16,5 +16,5 @@ fr:
     resources:
       annonce_generale:
         delete_model: Supprimer
-        new_model: Ajouter une nouvelle annonce générale
+        new_model: Nouvelle annonce générale
         edit_model: Modifier

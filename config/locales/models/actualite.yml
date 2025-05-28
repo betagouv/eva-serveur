@@ -21,7 +21,7 @@ fr:
     resources:
       actualite:
         delete_model: Supprimer
-        new_model: Ajouter une nouvelle actualité
+        new_model: Nouvelle actualité
         edit_model: Modifier
     status_tag:
       <<: *traduction-categories

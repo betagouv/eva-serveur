@@ -111,6 +111,11 @@ a.fr-btn--secondary:not([href]) {
 
 .fr-btn--secondary a {
   border: none !important;
+  padding: 0 !important;
+  font-size: $dsfr-font-size-sm !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: $dsfr-line-height-md !important;
 }
 
 .fr-btn--sm a {

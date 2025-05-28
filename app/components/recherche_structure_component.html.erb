@@ -38,6 +38,15 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  $('.ui-menu').addClass('recherche_structure');
+  const champ_recherche = document.querySelector('.ui-menu');
+  if(champ_recherche) {
+    champ_recherche.classList.add('recherche_structure');
+  }
+  const premier_bouton_rejoindre = document.querySelector('.rejoindre-structure a');
+  if(premier_bouton_rejoindre) {
+    setTimeout(() => {
+      premier_bouton_rejoindre.focus();
+    }, 100)
+  }
 });
 </script>

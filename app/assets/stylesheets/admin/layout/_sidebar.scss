@@ -25,7 +25,7 @@
     .action_items {
       display: flex;
       gap: .5rem;
-      flex-wrap: wrap;
+      flex-direction: column;
 
       a {
         @include bouton-secondaire;

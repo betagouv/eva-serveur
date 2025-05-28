@@ -50,7 +50,7 @@ fr:
           one: Consulter 1 évaluation
           other: Consulter %{count} évaluations
         nouvelle_campagne_disabled: Nouvelle campagne
-        nouvelle_campagne_disabled_explication: La création de nouvelles campagnes a été désactivée par le compte “admin” de votre structure. Vous pouvez utiliser une des campagnes existantes.
+        nouvelle_campagne_disabled_explication: La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes.
       situation:
         autopositionnement: Autopositionnement
         redaction: Exercice de rédaction

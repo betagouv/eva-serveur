@@ -74,7 +74,8 @@ describe 'Admin - Restitution', type: :feature do
     before { visit admin_restitution_path(partie) }
 
     it do
-      within('#action_items_sidebar_section') { click_on 'Supprimer' }
+      find("#action_items_sidebar_section a[href='#{admin_restitution_path(partie)}']").click
+
 
       expect(partie.reload.deleted?).to be true
       expect(evenements.first.reload.deleted?).to be true

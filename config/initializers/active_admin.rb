@@ -404,6 +404,7 @@ ActiveAdmin.setup do |config|
         edit: "pencil-line",
         new: "add-line",
         delete: "delete-line",
+        destroy: "delete-line",
         show: "eye-line"
       }
 

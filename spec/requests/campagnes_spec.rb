@@ -37,12 +37,13 @@ describe 'Campagne API', type: :request do
     end
 
     context "quand la campagne n'est pas active" do
-      it "retourne une 404" do
+      it "retourne une 403" do
         campagne.update!(active: false)
 
         get "/api/campagnes/#{campagne.code}"
 
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:forbidden)
+        expect(response.parsed_body['error']).to eq(I18n.t("errors.campagne_inactive"))
       end
     end
 

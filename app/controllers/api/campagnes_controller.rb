@@ -2,15 +2,26 @@
 
 module Api
   class CampagnesController < Api::BaseController
-    before_action :trouve_campagne, :preload_questions
+    before_action :trouve_et_verifie_campagne, :preload_questions
 
     def show; end
 
     private
 
-    def trouve_campagne
+    def trouve_et_verifie_campagne
+      @campagne = Campagne.par_code(params[:code_campagne]).take!
+
+      unless @campagne.active?
+        render json: { error: I18n.t(".errors.campagne_inactive") }, status: :forbidden
+        return
+      end
+
+      precharge_inclusions
+    end
+
+    def precharge_inclusions
       questions_incluses = %i[questionnaires_questions questions]
-      @campagne = Campagne.active.includes(
+      @campagne = @campagne.class.includes(
         situations_configurations: [
           { questionnaire: questions_incluses },
           { situation: [
@@ -18,7 +29,7 @@ module Api
             { questionnaire: questions_incluses }
           ] }
         ]
-      ).par_code(params[:code_campagne]).take!
+      ).find(@campagne.id)
     end
 
     def preload_questions

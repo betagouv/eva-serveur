@@ -3,7 +3,7 @@
 div class: "row" do
   div class: "offset-1 col-6 campagne--page" do
     div do
-      class_active = resource.active ? "fr-badge--success" :  ""
+      class_active = resource.active ? "fr-badge--green-emeraude" :  ""
       text_active = resource.active ? "ACTIVE" :  "INACTIVE"
       render(
         BadgeComponent.new(

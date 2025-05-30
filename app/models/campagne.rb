@@ -41,6 +41,7 @@ class Campagne < ApplicationRecord
   }
   scope :par_code, ->(code) { where code: code.upcase }
   scope :active, -> { where(active: true) }
+  scope :privee, -> { where(privee: true) }
   scope :avec_situation, lambda { |situation|
     joins(:situations_configurations).where(situations_configurations: {
                                               situation_id: situation&.id

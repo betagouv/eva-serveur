@@ -5,7 +5,7 @@
         Paramètres
       </div>
       <div class="sidebar-parametres--description">
-        <%= @campagne.active ? "Décocher pour rendre cette campagne inactive." : "Cocher pour rendre cette campagne active."  %>
+        <%= I18n.t("admin.campagnes.action_items.parametres.description")  %>
       </div>
     </div>
     <div class="sidebar-parametres--content">
@@ -14,6 +14,16 @@
           f: builder,
           method: :active,
           label: "Campagne active",
+          classes: "fr-toggle--border-bottom fr-toggle--label-left toggle-auto-soumission"
+        )) %>
+      <% end %>
+    </div>
+    <div class="sidebar-parametres--content">
+      <%= form_with(model: @campagne, url: admin_campagne_path(@campagne), method: :patch, local: true, class: "sidebar-parametres--form") do |builder| %>
+        <%= render(ToggleComponent.new(
+          f: builder,
+          method: :privee,
+          label: "Campagne privée",
           classes: "fr-toggle--border-bottom fr-toggle--label-left toggle-auto-soumission"
         )) %>
       <% end %>

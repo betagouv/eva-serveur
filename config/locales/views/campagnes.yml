@@ -54,6 +54,8 @@ fr:
         nouvelle_campagne_disabled: Nouvelle campagne
         nouvelle_campagne_disabled_explication: La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes.
         dupliquer: Dupliquer
+        parametres: 
+          description: Activez ou rendez cette campagne privée.
       situation:
         autopositionnement: Autopositionnement
         redaction: Exercice de rédaction

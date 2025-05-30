@@ -11,6 +11,14 @@ div class: "row" do
           html_class: class_active
         )
       )
+      if resource.privee
+       render(
+          BadgeComponent.new(
+            contenu: "PRIVEE",
+            html_class: "fr-badge--blue-cumulus"
+          )
+        )
+      end
       h2 resource.display_name, class: "campagne--titre"
     end
     div class: "panel font-italic" do

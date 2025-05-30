@@ -7,5 +7,9 @@ FactoryBot.define do
     association :compte, factory: :compte_admin
     parcours_type
     type_programme { :diagnostic }
+
+    trait :avec_situations_configurations do
+      situations_configurations { build_list(:situation_configuration, 1) }
+    end
   end
 end

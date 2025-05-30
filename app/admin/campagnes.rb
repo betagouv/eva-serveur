@@ -33,6 +33,12 @@ class: "bouton-disabled")
   class: "fr-text--xs text-grey-425"
   end
 
+  action_item :dupliquer, only: :show do
+    link_to I18n.t("admin.campagnes.action_items.dupliquer"),
+           duplique_admin_campagne_path(resource),
+           method: :post
+  end
+
   action_item :voir_evaluations, only: :show do
     link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
            count: Evaluation.where(campagne: resource).count),
@@ -41,6 +47,12 @@ class: "bouton-disabled")
 
   action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do
     render partial: "admin/campagnes/sidebar/parametres"
+  end
+
+  member_action :duplique, method: :post do
+    campagne_dupliquee =CampagneDuplicateur.new(resource).duplique!
+    redirect_to admin_campagne_path(campagne_dupliquee),
+notice: I18n.t("admin.campagnes.duplique.notice")
   end
 
   index do

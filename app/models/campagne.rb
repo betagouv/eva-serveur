@@ -87,6 +87,8 @@ class Campagne < ApplicationRecord
   end
 
   def initialise_situations
+    return if situations_configurations.any?
+
     initialise_situations_optionnelles
     # rubocop:disable Rails/FindEach
     parcours_type.situations_configurations

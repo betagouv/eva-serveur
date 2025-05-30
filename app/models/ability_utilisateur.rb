@@ -25,7 +25,7 @@ class AbilityUtilisateur
   private
 
   def droit_campagne(compte)
-    can :create, Campagne if can_create_campagne?(compte)
+    can %i[create duplique], Campagne if can_create_campagne?(compte)
     can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
     can %i[update read destroy], Campagne, compte_id: compte.id
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }

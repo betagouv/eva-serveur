@@ -40,5 +40,12 @@ FactoryBot.define do
         ]
       end
     end
+
+    trait :avec_situations_configurations do
+      situations_configurations do
+        situation = create(:situation_maintenance)
+        build_list(:situation_configuration, 1, situation: situation)
+      end
+    end
   end
 end

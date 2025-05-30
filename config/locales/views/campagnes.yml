@@ -1,6 +1,8 @@
 fr:
   admin:
     campagnes:
+      duplique:
+        notice: La campagne a été dupliquée
       form:
         explication_campagne:  |
           **Une campagne eva est une sélection d'activités, de jeux, de questionnaires, formant un programme d'évaluation commun à plusieurs personnes.**
@@ -51,6 +53,7 @@ fr:
           other: Consulter %{count} évaluations
         nouvelle_campagne_disabled: Nouvelle campagne
         nouvelle_campagne_disabled_explication: La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes.
+        dupliquer: Dupliquer
       situation:
         autopositionnement: Autopositionnement
         redaction: Exercice de rédaction

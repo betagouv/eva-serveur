@@ -153,7 +153,7 @@ describe Ability do
     it { is_expected.to be_able_to(:read, Situation.new) }
     it { is_expected.not_to be_able_to(%i[create update destroy], Situation.new) }
     it { is_expected.to be_able_to(:read, Campagne.new) }
-    it { is_expected.not_to be_able_to(%i[create update destroy], Campagne.new) }
+    it { is_expected.not_to be_able_to(%i[create duplique update destroy], Campagne.new) }
     it { is_expected.to be_able_to(:read, Restitution::Base.new(nil, nil)) }
     it { is_expected.to be_able_to(:read, Actualite) }
     it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
@@ -301,6 +301,7 @@ describe Ability do
       end
 
       it { is_expected.not_to be_able_to(:create, Campagne) }
+      it { is_expected.not_to be_able_to(:duplique, Campagne) }
     end
 
     context "quand la structure autorise la création de campagne" do
@@ -309,6 +310,7 @@ describe Ability do
       end
 
       it { is_expected.to be_able_to(:create, Campagne) }
+      it { is_expected.to be_able_to(:duplique, Campagne) }
     end
 
     context 'peut consulter les campagnes de ma structure' do

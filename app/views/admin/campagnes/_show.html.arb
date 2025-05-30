@@ -14,7 +14,7 @@ div class: "row" do
       if resource.privee
        render(
           BadgeComponent.new(
-            contenu: "PRIVEE",
+            contenu: "PRIVÉE",
             html_class: "fr-badge--blue-cumulus"
           )
         )

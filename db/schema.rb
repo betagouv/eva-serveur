@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_27_075158) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_30_101743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -94,11 +94,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_27_075158) do
     t.datetime "anonymise_le"
     t.datetime "deleted_at"
     t.boolean "active", default: true
+    t.boolean "privee", default: false
     t.index ["active"], name: "index_campagnes_on_active"
     t.index ["code"], name: "index_campagnes_on_code", unique: true
     t.index ["compte_id"], name: "index_campagnes_on_compte_id"
     t.index ["deleted_at"], name: "index_campagnes_on_deleted_at"
     t.index ["parcours_type_id"], name: "index_campagnes_on_parcours_type_id"
+    t.index ["privee"], name: "index_campagnes_on_privee"
   end
 
   create_table "choix", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

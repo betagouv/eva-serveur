@@ -33,7 +33,7 @@ class: "bouton-disabled")
   class: "fr-text--xs text-grey-425"
   end
 
-  action_item :dupliquer, only: :show do
+  action_item :dupliquer, only: :show, if: proc { can?(:duplique, resource) } do
     link_to I18n.t("admin.campagnes.action_items.dupliquer"),
            duplique_admin_campagne_path(resource),
            method: :post

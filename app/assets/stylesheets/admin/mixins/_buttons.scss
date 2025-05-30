@@ -144,3 +144,11 @@ $hauteur_menu_actions: 2rem;
   }
 }
 
+@mixin bouton-disabled() {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+  pointer-events: none;
+  border: 1px solid $grey-425 !important;
+  color: $grey-425 !important;
+}
+

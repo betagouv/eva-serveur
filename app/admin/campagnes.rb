@@ -25,29 +25,18 @@ ActiveAdmin.register Campagne do
   filter :created_at
 
   action_item :nouvelle_campagne_disabled, only: :index, if: proc { !can?(:create, Campagne) } do
-    div do
-      render DsfrBoutonComponent.new(
-        label: I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"),
-        btn_level: :secondary,
-        btn_size: :sm,
-        icon: "add-line",
-        html_attributes: { disabled: true }
-      )
+    div class: "fr-mb-2v" do
+      link_to(I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"), "#",
+class: "bouton-disabled")
     end
     span I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication"),
   class: "fr-text--xs text-grey-425"
   end
 
   action_item :voir_evaluations, only: :show do
-    link = link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
+    link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
            count: Evaluation.where(campagne: resource).count),
            admin_evaluations_path(q: { campagne_id_eq: resource })
-    render DsfrBoutonComponent.new(
-      label: link,
-      btn_level: :secondary,
-      btn_size: :sm,
-      icon: "eye-line"
-    )
   end
 
   action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do

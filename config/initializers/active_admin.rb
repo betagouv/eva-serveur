@@ -397,32 +397,4 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
-
-  ActiveAdmin::Views::ActionItems.class_eval do
-    def build(action_items)
-      icon_map = {
-        edit: "pencil-line",
-        new: "add-line",
-        delete: "delete-line",
-        destroy: "delete-line",
-        show: "eye-line"
-      }
-
-      action_items.each do |action_item|
-        content = instance_exec(&action_item.block)
-        icon = icon_map[action_item.name]
-  
-        if content.is_a?(String)
-          content = render(
-            DsfrBoutonComponent.new(
-              label: content,
-              btn_level: :secondary,
-              btn_size: :sm,
-              icon: icon
-            )
-          )
-        end
-      end
-    end
-  end
 end

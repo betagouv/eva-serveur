@@ -23,10 +23,10 @@ class AbilityUtilisateur
   end
 
   private
-
   def droit_campagne(compte)
     can %i[create duplique], Campagne if can_create_campagne?(compte)
-    can %i[update read], Campagne, comptes_de_meme_structure(compte) if compte.validation_acceptee?
+    can %i[update read], Campagne,
+comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acceptee?
     can %i[update read destroy], Campagne, compte_id: compte.id
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
   end
@@ -44,11 +44,32 @@ class AbilityUtilisateur
     can %i[read mise_en_action supprimer_responsable_suivi
            ajouter_responsable_suivi renseigner_qualification],
         Evaluation,
-        campagne: comptes_de_meme_structure(compte)
+        campagne: comptes_de_meme_structure(compte).merge(privee: false)
+
+    can :read, Evaluation, responsable_suivi_id: compte.id
+
     return unless compte.admin?
 
     can %i[update destroy], Evaluation,
         campagne: comptes_de_meme_structure(compte)
+  end
+
+  def droit_evaluation(compte)
+    cannot :create, Evaluation
+    can :read, Evaluation, responsable_suivi_id: compte.id
+    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
+
+    if compte.validation_acceptee? && compte.structure_id.present?
+      can %i[read mise_en_action supprimer_responsable_suivi
+             ajouter_responsable_suivi renseigner_qualification],
+          Evaluation,
+          campagne: { compte: { structure_id: compte.structure_id }, privee: false }
+    end
+
+    if compte.admin? && compte.structure_id.present?
+      can %i[update destroy], Evaluation,
+          campagne: { compte: { structure_id: compte.structure_id }, privee: false }
+    end
   end
 
   def droit_evenement(compte)

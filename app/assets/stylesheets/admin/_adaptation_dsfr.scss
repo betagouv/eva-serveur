@@ -79,48 +79,8 @@ a.pas-souligne {
   display: flex !important;
 }
 
-.fr-btn--secondary {
-  border-radius: 0;
-  border: 1px solid var(--light-decisions-border-border-disabled-grey, #E5E5E5) !important;
-
-}
-
-.fr-btn--secondary:disabled,
-a.fr-btn--secondary:not([href]) {
-  box-shadow: inset 0 0 0 1px var(--light-decisions-border-border-disabled-grey) !important;
-}
-
-.fr-btn--secondary:disabled:hover {
-  font-weight: 500 !important;
-  background-color: transparent !important;
-  box-shadow:inset 0 0 0 1px var(--light-decisions-border-border-disabled-grey) !important;
-}
-
-.fr-btn--secondary:hover:not(:disabled) {
-  font-weight: 500 !important;
-  box-shadow: inset 0 0 0 1px var(--border-action-high-blue-france) !important;
-  background-color: var(--hover-tint) !important;
-}
-
-.fr-btn--secondary:hover:not(:disabled) a {
-  font-weight: 500 !important;
-  background-color: transparent !important;
-}
 .text-grey-425 {
   color: $grey-425;
-}
-
-.fr-btn--secondary a {
-  border: none !important;
-  padding: 0 !important;
-  font-size: $dsfr-font-size-sm !important;
-  font-style: normal !important;
-  font-weight: 500 !important;
-  line-height: $dsfr-line-height-md !important;
-}
-
-.fr-btn--sm a {
-  font-size: $dsfr-font-size-sm !important;
 }
 
 .fr-badge {

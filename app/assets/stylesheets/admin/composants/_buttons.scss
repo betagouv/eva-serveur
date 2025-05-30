@@ -109,3 +109,7 @@ button.bouton, a.bouton, .bouton {
 .grand-bouton {
   @include grand-bouton;
 }
+
+.bouton-disabled {
+  @include bouton-disabled;
+}

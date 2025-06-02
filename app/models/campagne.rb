@@ -131,13 +131,16 @@ class Campagne < ApplicationRecord
 
   def libelle_unique_pour_structure
     return if compte&.structure.blank?
+    return unless campagne_existe_dans_structure?
 
-    doublon = Campagne.joins(:compte)
-                      .where(libelle: libelle.strip, comptes: { structure_id: compte.structure_id })
-                      .where.not(id: id)
-                      .exists?
+    errors.add(:libelle, I18n.t("activerecord.errors.models.campagne.attributes.libelle.unique"))
+  end
 
-    errors.add(:libelle,
-I18n.t("activerecord.errors.models.campagne.attributes.libelle.unique")) if doublon
+  def campagne_existe_dans_structure?
+    Campagne.joins(:compte)
+            .where.not(id: id)
+            .where("LOWER(campagnes.libelle) = ?", libelle.strip.downcase)
+            .where(comptes: { structure_id: compte.structure_id })
+            .exists?
   end
 end

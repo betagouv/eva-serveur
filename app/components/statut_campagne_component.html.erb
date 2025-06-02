@@ -1,0 +1,11 @@
+<%= render BadgeComponent.new(
+  contenu: @campagne.active? ? "ACTIVE" : "INACTIVE",
+  html_class: @campagne.active? ? "fr-badge--green-emeraude" : ""
+) %>
+
+<% if @campagne.privee? %>
+  <%= render BadgeComponent.new(
+    contenu: "PRIVÉE",
+    html_class: "fr-badge--blue-cumulus"
+  ) %>
+<% end %>

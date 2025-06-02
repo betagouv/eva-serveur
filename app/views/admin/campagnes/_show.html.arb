@@ -3,22 +3,7 @@
 div class: "row" do
   div class: "offset-1 col-6 campagne--page" do
     div do
-      class_active = resource.active ? "fr-badge--green-emeraude" :  ""
-      text_active = resource.active ? "ACTIVE" :  "INACTIVE"
-      render(
-        BadgeComponent.new(
-          contenu: text_active,
-          html_class: class_active
-        )
-      )
-      if resource.privee
-       render(
-          BadgeComponent.new(
-            contenu: "PRIVÉE",
-            html_class: "fr-badge--blue-cumulus"
-          )
-        )
-      end
+      render(StatutCampagneComponent.new(resource))
       h2 resource.display_name, class: "campagne--titre"
     end
     div class: "panel font-italic" do

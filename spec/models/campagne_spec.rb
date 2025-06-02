@@ -155,4 +155,23 @@ describe Campagne, type: :model do
       it { expect(campagne.code).to eq '123' }
     end
   end
+
+  describe 'validations: unicité du libellé pour une structure' do
+    let!(:structure) { create(:structure, code_postal: "12345") }
+    let!(:compte) { create(:compte, structure: structure) }
+    let!(:campagne) { create(:campagne, compte: compte, libelle: 'libelle') }
+
+    it "retourne une erreur si le libellé est pris par une autre campagne de la même structure" do
+      nouvelle_campagne = described_class.new(compte: compte, libelle: 'libelle')
+      nouvelle_campagne.valid?
+      message_erreur = "est déjà utilisé par une autre campagne de votre structure"
+      expect(nouvelle_campagne.errors[:libelle]).to include(message_erreur)
+    end
+
+    it "ne retourne pas d'erreur si le libellé est unique pour la structure" do
+      nouvelle_campagne = described_class.new(compte: compte, libelle: 'nouveau_libelle')
+      nouvelle_campagne.valid?
+      expect(nouvelle_campagne.errors[:libelle]).to be_empty
+    end
+  end
 end

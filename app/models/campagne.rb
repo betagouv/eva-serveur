@@ -18,6 +18,7 @@ class Campagne < ApplicationRecord
   validates :code, presence: true, format: { with: /\A[A-Z0-9]+\z/ },
                    uniqueness: { case_sensitive: false, conditions: -> { with_deleted } }
   validates_associated :situations_configurations
+  validate :libelle_unique_pour_structure
   delegate :structure_code_postal, :structure, to: :compte
   auto_strip_attributes :libelle, :code, squish: true
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
@@ -126,5 +127,17 @@ class Campagne < ApplicationRecord
 
   def option_incluse?(option)
     options_personnalisation.present? && options_personnalisation.include?(option)
+  end
+
+  def libelle_unique_pour_structure
+    return if compte&.structure.blank?
+
+    doublon = Campagne.joins(:compte)
+                      .where(libelle: libelle.strip, comptes: { structure_id: compte.structure_id })
+                      .where.not(id: id)
+                      .exists?
+
+    errors.add(:libelle,
+I18n.t("activerecord.errors.models.campagne.attributes.libelle.unique")) if doublon
   end
 end

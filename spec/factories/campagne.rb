@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :campagne do
-    libelle { 'Ma campagne' }
+    sequence(:libelle) { |n| "Ma campagne #{n}" }
     sequence(:code) { |n| "CODE#{n}" }
     association :compte, factory: :compte_admin
     parcours_type

@@ -173,5 +173,12 @@ describe Campagne, type: :model do
       nouvelle_campagne.valid?
       expect(nouvelle_campagne.errors[:libelle]).to be_empty
     end
+
+    it "retourne une erreur si le libellé est écrit avec une casse différente" do
+      nouvelle_campagne = described_class.new(compte: compte, libelle: 'Libelle')
+      nouvelle_campagne.valid?
+      message_erreur = "est déjà utilisé par une autre campagne de votre structure"
+      expect(nouvelle_campagne.errors[:libelle]).to include(message_erreur)
+    end
   end
 end

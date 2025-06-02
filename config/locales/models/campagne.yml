@@ -23,6 +23,8 @@ fr:
               blank: 'Vous devez choisir un type de programme.'
             code:
               invalid: Majuscules et chiffres uniquement
+            libelle:
+              unique: est déjà utilisé par une autre campagne de votre structure
   formtastic:
     labels:
       libelle: Libellé

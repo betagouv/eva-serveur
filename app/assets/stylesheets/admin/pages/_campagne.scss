@@ -129,6 +129,12 @@
     .col-date_derniere_evaluation {
       min-width: 7.5rem;
     }
+
+    .col-libelle .contenu-libelle {
+      display: flex;
+      flex-direction: column;
+      gap: $dsfr-spacing-1v;
+    }
   }
 
   .nouvelle-campagne {

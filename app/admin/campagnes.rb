@@ -57,9 +57,14 @@ notice: I18n.t("admin.campagnes.duplique.notice")
 
   index do
     column :libelle do |campagne|
-      content_tag(:div) do
-        concat(link_to(campagne.libelle, admin_campagne_path(campagne)))
-        concat(content_tag(:div, parcours_type_libelle(campagne), class: "text-xs"))
+      div class: "contenu-libelle" do
+        div do
+          div link_to(campagne.libelle, admin_campagne_path(campagne))
+          div parcours_type_libelle(campagne), class: "text-xs"
+        end
+        div do
+          render(StatutCampagneComponent.new(campagne))
+        end
       end
     end
     column :code

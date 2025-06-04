@@ -1,6 +1,7 @@
 class CampagneDuplicateur
-  def initialize(campagne)
+  def initialize(campagne, current_compte)
     @campagne = campagne
+    @current_compte = current_compte
   end
 
   def duplique!
@@ -9,6 +10,7 @@ class CampagneDuplicateur
     assigne_type_programme
     reset_code
     duplique_situations_configurations
+    assigne_compte_id
     @campagne_dupliquee.save!
     @campagne_dupliquee
   end
@@ -35,5 +37,9 @@ class CampagneDuplicateur
   def assigne_type_programme
     @campagne_dupliquee.type_programme =
       @campagne.parcours_type&.type_de_programme || ParcoursType::TYPES_DE_PROGRAMME.first
+  end
+
+  def assigne_compte_id
+    @campagne_dupliquee.compte_id = @current_compte.id
   end
 end

@@ -32,5 +32,16 @@ describe CampagneDuplicateur, type: :model do
         expect(duplicated_config.questionnaire_id).to eq(original_config.questionnaire_id)
       end
     end
+
+    context "quand le libellé de la campagne existe déjà" do
+      before do
+        create(:campagne, libelle: "#{campagne.libelle} - copie", compte: current_compte)
+      end
+
+      it 'ajoute un suffixe numérique au libellé' do
+        duplicated_campagne = duplicateur.duplique!
+        expect(duplicated_campagne.libelle).to eq("#{campagne.libelle} - copie 2")
+      end
+    end
   end
 end

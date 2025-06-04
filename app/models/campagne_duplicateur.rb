@@ -22,7 +22,7 @@ class CampagneDuplicateur
   end
 
   def assigne_libelle_copie
-    @campagne_dupliquee.libelle = "#{@campagne.libelle} - copie"
+    @campagne_dupliquee.libelle = libelle_copie_unique
   end
 
   def duplique_situations_configurations
@@ -41,5 +41,21 @@ class CampagneDuplicateur
 
   def assigne_compte_id
     @campagne_dupliquee.compte_id = @current_compte.id
+  end
+
+  def libelle_copie_unique
+    base = "#{@campagne.libelle} - copie"
+
+    existants = Campagne
+      .where("libelle ILIKE ?", "#{base}%")
+      .pluck(:libelle)
+
+    return base unless existants.include?(base)
+
+    max_suffix = existants.map do |libelle|
+      libelle.match(/ - copie(?: (\d+))?$/)&.captures&.first&.to_i || 1
+    end.max
+
+    "#{base} #{max_suffix + 1}"
   end
 end

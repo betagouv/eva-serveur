@@ -7,7 +7,8 @@ describe CampagneDuplicateur, type: :model do
     campagne.type_programme = nil
     campagne
   end
-  let(:duplicateur) { described_class.new(campagne) }
+  let(:current_compte) { create(:compte) }
+  let(:duplicateur) { described_class.new(campagne, current_compte) }
 
   describe '#duplique!' do
     it 'duplique la campagne' do
@@ -16,6 +17,7 @@ describe CampagneDuplicateur, type: :model do
       expect(duplicated_campagne).to be_persisted
       expect(duplicated_campagne).not_to eq(campagne)
       expect(duplicated_campagne.libelle).to eq("#{campagne.libelle} - copie")
+      expect(duplicated_campagne.compte_id).to eq(current_compte.id)
     end
 
     it 'duplique les associations de la campagne' do

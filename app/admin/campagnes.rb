@@ -50,7 +50,7 @@ class: "bouton-disabled")
   end
 
   member_action :duplique, method: :post do
-    campagne_dupliquee =CampagneDuplicateur.new(resource).duplique!
+    campagne_dupliquee =CampagneDuplicateur.new(resource, current_compte).duplique!
     redirect_to admin_campagne_path(campagne_dupliquee),
 notice: I18n.t("admin.campagnes.duplique.notice")
   end

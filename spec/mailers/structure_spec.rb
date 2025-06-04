@@ -23,7 +23,7 @@ describe StructureMailer, type: :mailer do
       expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Besoin d&#39;aide')
       expect(email.body).to include(Eva::DOCUMENT_PRISE_EN_MAIN)
-      expect(email.body).to include("http://test.com/pro/admin/sign_up?structure_id=#{id}")
+      expect(email.body).to include("http://test.com/admin/sign_up?structure_id=#{id}")
     end
   end
 
@@ -41,7 +41,7 @@ describe StructureMailer, type: :mailer do
       expect(email.body).to include('Paule')
       expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Créez votre première campagne')
-      expect(email.body).to include('http://test.com/pro/admin/campagnes/new')
+      expect(email.body).to include('http://test.com/admin/campagnes/new')
     end
   end
 end

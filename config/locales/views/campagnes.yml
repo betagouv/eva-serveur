@@ -2,7 +2,9 @@ fr:
   admin:
     campagnes:
       duplique:
-        notice: La campagne a été dupliquée
+        notice: |
+          La campagne a bien été dupliquée.
+          Vous êtes maintenant sur le détail de la copie. Vous pouvez modifier le libellé de cette campagne à tout moment.
       form:
         explication_campagne:  |
           **Une campagne eva est une sélection d'activités, de jeux, de questionnaires, formant un programme d'évaluation commun à plusieurs personnes.**

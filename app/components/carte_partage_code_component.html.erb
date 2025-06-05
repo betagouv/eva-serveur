@@ -1,0 +1,40 @@
+<div class="card carte-partage-code">
+  <div class="carte-partage-code__informations">
+    <div class="carte-partage-code__description">
+      <%= @description %>
+    </div>
+
+    <div class="carte-partage-code__code-lignes">
+      <div class="carte-partage-code__code-ligne">
+        <div class="carte-partage-code__information-libelle">
+          Code
+        </div>
+        <div class="carte-partage-code__information-valeur">
+          <%= render CodeComponent.new(@code) %>
+          <%= button_tag "Copier le code",
+                    class: "bouton-secondaire petit-bouton copier-coller",
+                    data: { clipboard_text: @code } %>
+        </div>
+      </div>
+
+      <% if @url %>
+        <div class="carte-partage-code__code-ligne">
+          <div class="carte-partage-code__information-libelle">
+            URL
+          </div>
+          <div class="carte-partage-code__information-valeur">
+            <div class="url">
+              <%= link_to @url, @url, target: "_blank", rel: "noopener" %>
+            </div>
+            <%= button_tag "Copier l'URL",
+                      class: "bouton-secondaire petit-bouton copier-coller",
+                      data: { clipboard_text: @url } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="carte-partage-code__footer">
+    <%= footer %>
+  </div>
+</div>

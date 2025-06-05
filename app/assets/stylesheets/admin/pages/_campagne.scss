@@ -32,54 +32,6 @@
       table {
         margin-bottom: 1rem;
       }
-      &-code {
-        border: 2px solid $success-425;
-        margin-bottom: 0;
-
-        .row {
-          &-code {
-            font-size: 1.5rem;
-            .code {
-              display: flex;
-              letter-spacing: 0.2rem;
-              line-height: 1.75rem;
-            }
-            .violet {
-              color: $eva_main_blue;
-            }
-            td {
-              position: relative;
-              font-weight: 600;
-            }
-            .copier-coller {
-              bottom: 0.7rem;
-            }
-          }
-          &-url {
-            position: relative;
-            th {
-              text-transform: uppercase;
-            }
-            td {
-              padding-right: 6rem;
-              span {
-                padding-right: 2rem;
-              }
-            }
-          }
-        }
-        .campagne {
-          position: relative;
-        }
-        .copier-coller {
-          position: absolute;
-          right: 0;
-          bottom: 0.4rem;
-        }
-        .conteneur-action {
-          padding-left: 8.5rem;
-        }
-      }
       &-situation {
         margin-top: 1.5rem;
         gap: 1rem;

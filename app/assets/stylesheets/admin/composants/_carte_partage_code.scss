@@ -1,0 +1,37 @@
+.carte-partage-code {
+  border: 2px solid $success-425;
+  margin-bottom: 0;
+  font-size: .875rem;
+  line-height: 1.5rem;
+}
+
+.carte-partage-code__informations {
+  padding: $dsfr-spacing-6v;
+  display: flex;
+  gap: $dsfr-spacing-6v;
+  flex-direction: column;
+}
+
+.carte-partage-code__code-lignes {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-3v;
+}
+
+.carte-partage-code__code-ligne {
+  display: flex;
+  gap: $dsfr-spacing-5v;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carte-partage-code__information-libelle {
+  width: 110px;
+}
+
+.carte-partage-code__information-valeur {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}

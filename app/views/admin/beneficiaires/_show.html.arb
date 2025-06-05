@@ -10,7 +10,10 @@ div class: "page-beneficiaire" do
     end
   end
 
-  render CartePartageCodeComponent.new(code: beneficiaire.code, description: "Afin de rattacher une nouvelle campagne à ce bénéficiaire, vous pouvez partager le code suivant.")
+  render CartePartageCodeComponent.new(
+    code: beneficiaire.code,
+    description: I18n.t("admin.beneficiaires.show.carte_partage_code.description")
+  )
 
   if beneficiaire.evaluations.present?
     order_param = (params[:order] || "created_at_desc").gsub("_asc", " asc").gsub(

@@ -4,3 +4,5 @@ fr:
       show:
         info: Vous pouvez consulter ici toutes les passations de ce bénéficiaire.
         beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
+        carte_partage_code:
+          description: "Afin de rattacher une nouvelle campagne à ce bénéficiaire, vous pouvez partager le code suivant."

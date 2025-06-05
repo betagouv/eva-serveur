@@ -25,4 +25,17 @@ describe GenerateurAleatoire do
       expect(chaine_generee.chars.uniq.size).to eq 26
     end
   end
+
+  describe '#nombres' do
+    it 'permet de choisir la longueur' do
+      chaine_generee = described_class.nombres 15
+      expect(chaine_generee.to_s.size).to eq 15
+    end
+
+    it 'génère des résultats différents à chaque appel' do
+      generation1 = described_class.nombres 10
+      generation2 = described_class.nombres 10
+      expect(generation1).not_to eq generation2
+    end
+  end
 end

@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   end
 
   # Configuration avec préfixe /pro (pour compatibilité avec les anciennes URLs)
+  get '/pro', to: redirect('/admin/dashboard')
   scope 'pro' do
     get '/admin', to: redirect('/admin/dashboard')
     get '/admin/*path', to: redirect { |params, request| "/admin/#{params[:path]}" }

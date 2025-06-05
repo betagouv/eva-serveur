@@ -1,27 +1,31 @@
 # frozen_string_literal: true
 
-div class: "row" do
-  div class: "offset-2 col-8" do
-    h2 render NomAnonymisableComponent.new(beneficiaire)
-    div class: "panel" do
-      t(".info")
+div class: "page-beneficiaire" do
+  div class: "row" do
+    div class: "offset-2 col-8" do
+      h2 render NomAnonymisableComponent.new(beneficiaire)
+      div class: "panel" do
+        t(".info")
+      end
     end
   end
-end
 
-if beneficiaire.evaluations.present?
-  order_param = (params[:order] || "created_at_desc").gsub("_asc", " asc").gsub(
-    "_desc", " desc"
-  )
-  paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
-                       download_links: false) do
-    table_for collection, sortable: true, class: "index_table" do
-      column :created_at, sortable: :created_at
-      column :campagne
-      column "", :actions, class: "col-actions" do |evaluation|
-        div class: "table_actions" do
-          text_node link_to t(".voir"), admin_evaluation_path(evaluation)
-          text_node link_to t(".modifier"), edit_admin_evaluation_path(evaluation)
+  render CartePartageCodeComponent.new(code: beneficiaire.code, description: "Afin de rattacher une nouvelle campagne à ce bénéficiaire, vous pouvez partager le code suivant.")
+
+  if beneficiaire.evaluations.present?
+    order_param = (params[:order] || "created_at_desc").gsub("_asc", " asc").gsub(
+      "_desc", " desc"
+    )
+    paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
+                        download_links: false) do
+      table_for collection, sortable: true, class: "index_table" do
+        column :created_at, sortable: :created_at
+        column :campagne
+        column "", :actions, class: "col-actions" do |evaluation|
+          div class: "table_actions" do
+            text_node link_to t(".voir"), admin_evaluation_path(evaluation)
+            text_node link_to t(".modifier"), edit_admin_evaluation_path(evaluation)
+          end
         end
       end
     end

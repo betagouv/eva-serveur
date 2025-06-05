@@ -1,0 +1,5 @@
+<div class="code">
+  <% @code.each_char do |c| %>
+    <span class="<%= classe_couleur_pour_caractere(c) %>"><%= c %></span>
+  <% end %>
+</div>

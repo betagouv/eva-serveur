@@ -41,11 +41,6 @@ module CampagneHelper
     Addressable::URI.escape("#{URL_CLIENT}?code=#{code}")
   end
 
-  def lien_campagne(campagne)
-    url = url_campagne(campagne.code)
-    link_to url, url, target: "_blank", rel: "noopener"
-  end
-
   def parcours_type_libelle(campagne)
     if campagne.parcours_type.nil?
       I18n.t("components.card_parcours_type.parcours_personnalise.libelle")

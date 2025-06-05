@@ -1,0 +1,14 @@
+<%# frozen_string_literal: true %>
+
+<div id="votre_code_campagne" class="row">
+  <div class="col mx-auto">
+    <h2>Votre code campagne</h2>
+    <%= render CartePartageCodeComponent.new(code: @campagne.code, url: url_campagne(@campagne.code), description: t(".explication_code")) do |component| %>
+      <% component.with_footer do %>
+        <div class="row m-0">
+          <%= render "banniere_test_campagne" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

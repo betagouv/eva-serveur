@@ -37,7 +37,9 @@
 @import 'admin/composants/card';
 @import 'admin/composants/card_validation';
 @import "admin/composants/card_parcours_type";
+@import 'admin/composants/carte_partage_code';
 @import "admin/composants/carte_prise_en_main";
+@import "admin/composants/code";
 @import "admin/composants/qcm";
 @import "admin/composants/litteratie";
 @import "admin/composants/telechargement_reponses";
@@ -79,6 +81,7 @@
 @import 'admin/pages/logged_out';
 @import 'admin/pages/actualites';
 @import 'admin/pages/actualite';
+@import 'admin/pages/beneficiaire';
 @import 'admin/pages/comptes';
 @import 'admin/pages/campagne';
 @import 'admin/pages/structure';

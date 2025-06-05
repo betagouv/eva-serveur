@@ -10,7 +10,7 @@ describe Beneficiaire do
   it { is_expected.not_to allow_value('abc1234').for(:code) }
 
   describe '#genere_code_unique' do
-    let(:beneficiaire) { Beneficiaire.new nom: "Mathéo" }
+    let(:beneficiaire) { described_class.new nom: "Mathéo" }
 
     context 'genere un code avec le nom du bénéficiare' do
       before do
@@ -24,7 +24,7 @@ describe Beneficiaire do
     end
 
     context "quand le nom comporte un accent" do
-      let(:beneficiaire) { Beneficiaire.new nom: "Élise" }
+      let(:beneficiaire) { described_class.new nom: "Élise" }
 
       before do
         allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
@@ -37,7 +37,7 @@ describe Beneficiaire do
     end
 
     context "quand le nom comporte un caractère spécial" do
-      let(:beneficiaire) { Beneficiaire.new nom: "E-T Lise" }
+      let(:beneficiaire) { described_class.new nom: "E-T Lise" }
 
       before do
         allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)

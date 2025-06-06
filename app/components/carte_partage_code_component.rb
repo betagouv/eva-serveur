@@ -3,7 +3,8 @@
 class CartePartageCodeComponent < ViewComponent::Base
   renders_one :footer
 
-  def initialize(code:, url: nil, description:)
+  def initialize(libelle_code: "Code", code:, url: nil, description:)
+    @libelle_code = libelle_code
     @code = code
     @url = url
     @description = description

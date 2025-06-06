@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   scope '(pro)' do
     namespace :api do
+      resources :beneficiaires, only: :show, param: :code_personnel
       resources :campagnes, only: :show, param: :code_campagne
       resources :evaluations, only: [:create, :update] do
         resource :fin, only: [:create], controller: 'evaluations/fins'

@@ -77,10 +77,56 @@ describe 'Evaluation', type: :request do
 
         it 'retourne une 422' do
           json = response.parsed_body
-          expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le nom]
-          expect(json.values.sort).to eq [ [ 'Code inconnu' ], [ 'doit être présente' ],
+          expect(json.keys.sort).to eq %w[beneficiaire campagne code_campagne debutee_le nom]
+          expect(json.values.sort).to eq [ [ "Code inconnu" ], [ "doit exister" ],
+                                          [ 'doit être présente' ],
                                           [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+
+      context 'quand le code personnel est inconnu' do
+        let(:payload_invalide) { { nom: '', code_personnel: '1234567890' } }
+
+        before { post '/api/evaluations', params: payload_invalide }
+
+        it 'retourne une 422' do
+          json = response.parsed_body
+          expect(json.keys).to include "beneficiaire"
+          expect(json.values).to include [ "doit exister" ]
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
+
+      context 'quand le code personnel est connu' do
+        let(:beneficiaire) { create :beneficiaire }
+        let(:date) { Time.zone.local(2021, 10, 4) }
+        let(:payload_valide) do
+          {
+            code_personnel: beneficiaire.code_personnel,
+            nom: '',
+            code_campagne: 'ETE19',
+            debutee_le: date.iso8601,
+            conditions_passation_attributes: {
+              user_agent: unUserAgent,
+              hauteur_fenetre_navigation: 10,
+              largeur_fenetre_navigation: 20
+            },
+            donnee_sociodemographique_attributes: {
+              age: 18,
+              genre: 'homme',
+              dernier_niveau_etude: 'college',
+              derniere_situation: 'scolarisation'
+            }
+          }
+        end
+
+        before { post '/api/evaluations', params: payload_valide }
+
+        it 'retourne une 201' do
+          expect(response).to have_http_status(:created)
+          expect(Evaluation.last.beneficiaire).to eq beneficiaire
+          expect(Evaluation.last.nom).to eq beneficiaire.nom
         end
       end
 
@@ -91,9 +137,9 @@ describe 'Evaluation', type: :request do
 
         it 'retourne une 422' do
           json = response.parsed_body
-          expect(json.keys.sort).to eq %w[campagne debutee_le nom]
-          expect(json.values.sort).to eq [ [ 'doit être présente' ], [ 'doit être rempli' ],
-                                          [ 'doit être rempli(e)' ] ]
+          expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
+          expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
+                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end

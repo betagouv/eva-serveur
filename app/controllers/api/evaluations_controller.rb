@@ -43,16 +43,13 @@ module Api
 
       @evaluation_params = permit_params
       retrouve_ids_nested_attributes
-      if @evaluation_params[:nom]
-        @evaluation_params[:beneficiaire_attributes] =
-          { nom: @evaluation_params[:nom] }
-      end
+      traite_beneficiaire
       @evaluation_params
     end
 
     def permit_params
-      params.permit(:id, :nom, :code_campagne, :terminee_le, :debutee_le,
-                    conditions_passation_attributes:
+      params.permit(:id, :nom, :code_personnel, :code_campagne, :terminee_le, :debutee_le,
+                    :beneficiaire_id, conditions_passation_attributes:
                     %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
                     donnee_sociodemographique_attributes:
                     %i[age genre dernier_niveau_etude derniere_situation])
@@ -74,6 +71,28 @@ module Api
     def retourne_erreur(evaluation)
       evaluation.errors.delete(:'beneficiaire.nom')
       render json: evaluation.errors, status: :unprocessable_entity
+    end
+
+    def traite_beneficiaire
+      if @evaluation_params[:code_personnel].present?
+        traite_avec_code_personnel
+      elsif @evaluation_params[:nom].present?
+        construit_beneficiaire_attributes
+      end
+    end
+
+    def traite_avec_code_personnel
+      code = @evaluation_params.delete(:code_personnel)
+      beneficiaire = Beneficiaire.find_by(code_personnel: code)
+
+      return unless beneficiaire
+
+      @evaluation_params[:beneficiaire_id] = beneficiaire.id
+      @evaluation_params[:nom] = beneficiaire.nom
+    end
+
+    def construit_beneficiaire_attributes
+      @evaluation_params[:beneficiaire_attributes] = { nom: @evaluation_params[:nom] }
     end
   end
 end

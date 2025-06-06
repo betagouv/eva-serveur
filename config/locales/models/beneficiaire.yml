@@ -14,6 +14,11 @@ fr:
         create: Créer
         update: Enregistrer
   active_admin:
+    batch_actions:
+      action_label: "%{title}"
+      labels:
+        lier: "Lier les beneficiaires"
+
     resources:
       beneficiaire:
         delete_model: Supprimer

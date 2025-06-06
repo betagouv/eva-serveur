@@ -64,6 +64,7 @@ class Evaluation < ApplicationRecord
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
   }
+  scope :pour_beneficiaires, ->(ids) { where(beneficiaire_id: ids) }
 
   def display_name
     nom

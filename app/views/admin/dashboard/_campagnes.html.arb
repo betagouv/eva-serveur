@@ -27,9 +27,11 @@ div class: "bloc-apercu" do
                             aria: { label: "#{t('.entete-code')} : #{campagne.code}" }
         span class: "campagne-url" do
           span a url, href: url, target: "_blank"
-          button "Copier l'URL", class: "bouton-secondaire petit-bouton copier-coller",
-                                 'data-clipboard-text': url,
-                                 aria: { describedby: campagne.id }
+          render BoutonCopierComponent.new(
+            libelle: I18n.t("actions.copier_url"),
+            texte: url,
+            aria: { describedby: campagne.id }
+          )
           text_node link_to "Jouer", url, class: "bouton-secondaire petit-bouton",
                                           target: "_blank", rel: "noopener",
                                           aria: { describedby: campagne.id }

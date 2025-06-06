@@ -12,6 +12,7 @@ div class: "page-beneficiaire" do
 
   render CartePartageCodeComponent.new(
     code: beneficiaire.code,
+    libelle_code: "Code personnel",
     description: I18n.t("admin.beneficiaires.show.carte_partage_code.description")
   )
 

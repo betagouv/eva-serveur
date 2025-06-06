@@ -9,7 +9,7 @@
           <%= md t(".invitation") %>
         </div>
         <div>
-          <button style= "white-space: nowrap" class="bouton-secondaire petit-bouton copier-coller" type="button" data-clipboard-text="<%= url %>">Copier l'URL</button>
+          <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_url"), texte: url, style: "white-space: nowrap") %>
         </div>
       </div>
       <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>

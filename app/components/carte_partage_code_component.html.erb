@@ -11,9 +11,7 @@
         </div>
         <div class="carte-partage-code__information-valeur">
           <%= render CodeComponent.new(@code) %>
-          <%= button_tag "Copier le code",
-                    class: "bouton-secondaire petit-bouton copier-coller",
-                    data: { clipboard_text: @code } %>
+          <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_code"), texte: @code) %>
         </div>
       </div>
 
@@ -26,9 +24,7 @@
             <div class="url">
               <%= link_to @url, @url, target: "_blank", rel: "noopener" %>
             </div>
-            <%= button_tag "Copier l'URL",
-                      class: "bouton-secondaire petit-bouton copier-coller",
-                      data: { clipboard_text: @url } %>
+            <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_url"), texte: @url) %>
           </div>
         </div>
       <% end %>

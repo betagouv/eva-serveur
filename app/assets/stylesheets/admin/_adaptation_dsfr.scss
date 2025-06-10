@@ -87,3 +87,7 @@ a.pas-souligne {
   font-weight: 600 !important;
   margin: 0;
 }
+
+.fr-fieldset__element .fr-checkbox-group--sm input[type=checkbox] + label:before {
+  margin-top: 0;
+}

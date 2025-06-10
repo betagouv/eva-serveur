@@ -38,7 +38,7 @@ table.index_table {
       border-radius: 0.5rem;
       @include ombre();
 
-      &.even {
+      &.even, &.odd {
         td {
           background-color: $grey-1000;
         }
@@ -108,4 +108,10 @@ table.index_table {
 }
 .pagination_information {
   color: $couleur-texte;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }

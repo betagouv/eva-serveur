@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 context.instance_eval do
+  selectable_column
   column(:nom) do |evaluation|
     render partial: "nom_evaluation", locals: { evaluation: evaluation }
   end

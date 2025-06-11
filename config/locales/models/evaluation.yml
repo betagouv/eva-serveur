@@ -100,6 +100,14 @@ fr:
       evaluation:
         delete_model: Supprimer
         edit_model: Modifier
+    batch_actions:
+      action_label: "%{title}"
+      labels:
+        lier_evaluations: Lier les évaluations sélectionnées
+        destroy: Supprimer les évaluations sélectionnées
+      evaluation:
+        message_alert: Vous devez sélectionner au moins deux évaluations pour pouvoir les lier.
+        message_notice: Les évaluations ont bien été lié au bénéficiaire.
     xls:
       evaluation:
         structure: Structure

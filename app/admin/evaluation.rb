@@ -6,6 +6,7 @@ ActiveAdmin.register Evaluation do
 
   includes :responsable_suivi, campagne: [ :parcours_type ]
 
+  config.batch_actions = true
   config.sort_order = "created_at_desc"
 
   filter :nom
@@ -38,6 +39,23 @@ ActiveAdmin.register Evaluation do
                    etiquette: I18n.t("components.pastille.illettrisme_potentiel")
                  ))
         }, :illettrisme_potentiel
+
+
+
+  batch_action :lier_evaluations do |evaluation_ids|
+    evaluations = Evaluation.where(id: evaluation_ids)
+
+    if evaluations.size < 2
+      redirect_to collection_path,
+      alert: I18n.t("active_admin.batch_actions.evaluation.message_alert")
+      next
+    end
+
+    LieurEvaluations.new(evaluations).call
+
+    redirect_to collection_path,
+        notice: I18n.t("active_admin.batch_actions.evaluation.message_notice")
+  end
 
   show do
     params[:parties_selectionnees] =

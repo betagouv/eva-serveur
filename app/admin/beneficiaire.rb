@@ -14,7 +14,7 @@ ActiveAdmin.register Beneficiaire do
       next
     end
 
-    beneficiaire = beneficiaires.le_plus_ancien
+    beneficiaire = beneficiaires.par_date_creation_asc.first
     beneficiaires_a_fusionner = beneficiaires.sauf_pour(beneficiaire.id)
 
     LieurBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner).call

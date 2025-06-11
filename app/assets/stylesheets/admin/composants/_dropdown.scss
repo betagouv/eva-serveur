@@ -1,0 +1,55 @@
+.dropdown_menu {
+  font-size: $dsfr-font-size-xs;
+}
+
+.dropdown_menu .dropdown_menu_button {
+  padding: 0.5rem 1rem;
+  border-color: $blue-france-sun-113;
+  color: $blue-france-sun-113;
+}
+
+.dropdown_menu .dropdown_menu_list_wrapper {
+  box-shadow: none;
+  display: inline-block;
+  position: absolute;
+  background-color: inherit;
+  background-image: inherit;
+  border: none;
+}
+
+.dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list {
+  border-radius: $dsfr-radius-md;
+  box-shadow: 0 1px 3px #444;
+  border: none;
+}
+
+.dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li {
+  border-bottom: none;
+}
+
+.dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li a {
+  font-family: $font-titre;
+  font-style: normal;
+  font-weight: 700;
+  font-size: $dsfr-font-size-xs;
+  line-height: $dsfr-line-height-sm;
+  background-image: none;
+  text-align: start;
+
+  &:hover {
+    color: inherit;
+    text-shadow: none;
+    background-image: none;
+    background-color: inherit;
+    background-color: $grey-925;
+  }
+}
+
+.dropdown_menu .dropdown_menu_nipple {
+  border-style: none;
+
+  &::before,
+  &::after {
+    border-style: none;
+  }
+}

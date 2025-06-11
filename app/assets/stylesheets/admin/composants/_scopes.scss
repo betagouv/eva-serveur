@@ -10,14 +10,15 @@
 }
 
 .table_tools {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 0.5rem;
 }
 
 .scopes {
   @include reset-ul();
 
-  border: 1px solid $eva_bluegrey;
-  border-radius: 1rem;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -37,6 +38,8 @@
 
   .scope-default-group {
     display: flex;
+    border: 1px solid $eva_bluegrey;
+    border-radius: 1rem;
   }
 
   .scope:first-child {

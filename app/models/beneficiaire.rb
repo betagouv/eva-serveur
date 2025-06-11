@@ -10,7 +10,7 @@ class Beneficiaire < ApplicationRecord
 
   acts_as_paranoid
 
-  scope :le_plus_ancien, -> { order(created_at: :asc).first }
+  scope :par_date_creation_asc, -> { order(created_at: :asc) }
   scope :sauf_pour, ->(id) { where.not(id: id) }
 
   def anonyme?

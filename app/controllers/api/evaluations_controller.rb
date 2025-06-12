@@ -93,6 +93,7 @@ module Api
 
     def construit_beneficiaire_attributes
       @evaluation_params[:beneficiaire_attributes] = { nom: @evaluation_params[:nom] }
+      @evaluation_params.delete(:code_personnel)
     end
   end
 end

@@ -1,4 +1,4 @@
-class LieurEvaluations
+class LienEvaluations
   attr_reader :evaluations
 
   def initialize(evaluations)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LieurEvaluations, type: :model do
+RSpec.describe LienEvaluations, type: :model do
   describe '#call' do
     let!(:beneficiaire_ancien) { create(:beneficiaire, created_at: 3.years.ago) }
     let!(:beneficiaire_recent) { create(:beneficiaire, created_at: 1.year.ago) }

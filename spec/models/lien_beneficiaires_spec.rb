@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LieurBeneficiaires, type: :model do
+describe LienBeneficiaires, type: :model do
   describe '.call' do
     let(:beneficiaire) { instance_double(Beneficiaire, id: 1) }
     let(:beneficiaires) { class_double(Beneficiaire) }

@@ -1,4 +1,4 @@
 fr:
   barre_segmentee:
-    legende: "Réussite : %{reussite}, Échec : %{echec}, Non passés : %{non_passees}, Total : %{total}"
+    legende: "Réussite : %{reussite}, Échec : %{echec}, Non passés : %{non_passees}, Total : %{total}"
     score: "Score %{score}%"

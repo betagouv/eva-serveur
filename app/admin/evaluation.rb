@@ -51,7 +51,7 @@ ActiveAdmin.register Evaluation do
       next
     end
 
-    LieurEvaluations.new(evaluations).call
+    LienEvaluations.new(evaluations).call
 
     redirect_to collection_path,
         notice: I18n.t("active_admin.batch_actions.evaluation.message_notice")

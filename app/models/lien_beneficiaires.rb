@@ -1,4 +1,4 @@
-class LieurBeneficiaires
+class LienBeneficiaires
   attr_reader :beneficiaire, :beneficiaires_a_fusionner
 
   def initialize(beneficiaire, beneficiaires_a_fusionner)

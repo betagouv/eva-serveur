@@ -25,6 +25,7 @@
 
 .dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li {
   border-bottom: none;
+  margin: $dsfr-spacing-2v;
 }
 
 .dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li a {
@@ -43,6 +44,11 @@
     background-color: inherit;
     background-color: $grey-925;
   }
+}
+
+.dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li:first-child a,
+.dropdown_menu .dropdown_menu_list_wrapper .dropdown_menu_list li:last-child a {
+  border-radius: inherit;
 }
 
 .dropdown_menu .dropdown_menu_nipple {

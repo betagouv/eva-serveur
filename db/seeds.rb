@@ -40,7 +40,7 @@ SourceAide.find_or_create_by(titre: 'Document d’interprétation des résultats
 end
 SourceAide.find_or_create_by(titre: 'Mode hors ligne - explication et activation') do |source_aide|
   source_aide.description= "Si vous avez besoins de faire passer des évaluations dans des endroits non connectés à internet, c'est possible. Vous trouverez ici toutes les informations pour activer et utiliser ce mode de fonctionnement."
-  source_aide.url= 'https://eva.beta.gouv.fr/mode-hors-ligne/'
+  source_aide.url= 'https://eva.anlci.gouv.fr/mode-hors-ligne/'
   source_aide.categorie= :animer_restituer
   source_aide.type_document= :web_doc
 end

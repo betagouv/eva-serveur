@@ -107,7 +107,7 @@ fr:
         destroy: Supprimer les évaluations sélectionnées
       evaluation:
         message_alert: Vous devez sélectionner au moins deux évaluations pour pouvoir les lier.
-        message_notice: Les évaluations ont bien été lié au bénéficiaire.
+        message_notice: Les évaluations ont bien été liées au bénéficiaire.
     xls:
       evaluation:
         structure: Structure

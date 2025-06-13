@@ -26,7 +26,7 @@ class ReinitialiseCompteDemoJob < ApplicationJob
       logger.info "Création du compte Admin de la structure de démo"
       c.prenom = "Alex"
       c.nom = "Admin"
-      c.email = "admin@eva.beta.gouv.fr"
+      c.email = "admin.anlci@yopmail.fr "
       c.statut_validation = :acceptee
       c.confirmed_at = Time.zone.now
       c.email_bienvenue_envoye = true

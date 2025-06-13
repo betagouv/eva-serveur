@@ -10,7 +10,7 @@ class Evaluation
     end
 
     def url_competence
-      "#{URL_COMPETENCES_SITE_VITRINE}#{@competence}/"
+      "#{ENV['URL_COMPETENCES']}/#{@competence}/"
     end
   end
 end

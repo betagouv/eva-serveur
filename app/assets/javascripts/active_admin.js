@@ -28,6 +28,8 @@ jQuery.datetimepicker.setLocale('fr');
 I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input.batch-actions-resource-selection, input.toggle_all').forEach(checkbox => checkbox.checked = false);
+
   $('#validation-comptes-en-attente').modal();
   $('.modal--static').modal({
     backdrop: 'static',

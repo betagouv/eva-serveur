@@ -50,7 +50,7 @@ describe ApplicationHelper do
 
     before do
       allow(ENV).to receive(:fetch).with('PROTOCOLE_SERVEUR').and_return('https')
-      allow(ENV).to receive(:fetch).with('HOTE_STOCKAGE').and_return('stockage.eva.beta.gouv.fr')
+      allow(ENV).to receive(:fetch).with('HOTE_STOCKAGE').and_return('stockage.eva.ancli.gouv.fr')
 
       allow(fichier).to receive_messages(filename: 'fichier.jpg', key: 'ma_cle')
     end
@@ -63,7 +63,7 @@ describe ApplicationHelper do
       end
 
       it 'retourne une url avec le nom du fichier pour y accéder' do
-        url = 'https://stockage.eva.beta.gouv.fr/ma_cle?filename=fichier.jpg'
+        url = 'https://stockage.eva.ancli.gouv.fr/ma_cle?filename=fichier.jpg'
         expect(helper.cdn_for(fichier)).to eq url
       end
     end

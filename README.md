@@ -257,7 +257,7 @@ Contenu:
           "type": "qcm",
           "intitule": "Ma question",
           "nom_technique": "ma-question",
-          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
+          "illustration": "https://stockagepreprod.eva.anlci.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
           "description": "Ma description",
           "choix": []
         }
@@ -269,7 +269,7 @@ Contenu:
           "type": "qcm",
           "intitule": "Ma question",
           "nom_technique": "ma-question",
-          "illustration": "https://stockagepreprod.eva.beta.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
+          "illustration": "https://stockagepreprod.eva.anlci.gouv.fr/7yii4m9m7t7bjvl42z7qmofuie7w?filename=bienvenue_background.jpg",
           "description": "Ma description",
           "choix": []
         }

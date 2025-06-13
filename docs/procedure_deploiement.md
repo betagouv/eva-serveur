@@ -23,7 +23,7 @@ Controle de ce qui va être déployé :
 
 Vérification de l'activité de la prod :
 
-Je regarde en prod sur https://api.app.eva.beta.gouv.fr/admin/dashboard s'il n'y a pas l'air d'avoir une évaluation en cours
+Je regarde en prod sur https://pro.eva.anlci.gouv.fr/admin/dashboard s'il n'y a pas l'air d'avoir une évaluation en cours
 Je regarde aussi l'activité du serveur sur scalingo
 
 ## Déploiement

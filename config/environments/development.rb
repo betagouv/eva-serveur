@@ -44,7 +44,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: ENV['HOTE_SERVEUR'] || 'eva.beta.gouv.fr' }
+  config.action_mailer.default_url_options = { host: ENV['HOTE_SERVEUR'] }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

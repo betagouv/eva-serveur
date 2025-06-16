@@ -20,11 +20,11 @@ describe Restitution::Completude do
       before do
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_TRANSVERSALES)
+                                            Situation::SITUATIONS_COMPETENCES_TRANSVERSALES)
                                       .and_return([ controle.id ])
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_BASE)
+                                            Situation::SITUATIONS_DIAGNOSTIC)
                                       .and_return([ livraison.id ])
       end
 
@@ -119,11 +119,11 @@ describe Restitution::Completude do
       before do
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_TRANSVERSALES)
+                                            Situation::SITUATIONS_COMPETENCES_TRANSVERSALES)
                                       .and_return([])
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_BASE)
+                                            Situation::SITUATIONS_DIAGNOSTIC)
                                       .and_return([
                                                     livraison.id,
                                                     maintenance.id,
@@ -160,13 +160,13 @@ describe Restitution::Completude do
       before do
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_TRANSVERSALES)
+                                            Situation::SITUATIONS_COMPETENCES_TRANSVERSALES)
                                       .and_return([
                                                     controle.id
                                                   ])
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_BASE)
+                                            Situation::SITUATIONS_DIAGNOSTIC)
                                       .and_return([])
       end
 

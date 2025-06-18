@@ -140,10 +140,6 @@ comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acce
   end
 
   def droits_validation_comptes(compte)
-    if compte.validation_acceptee?
-      can(%i[autoriser refuser], Compte, structure_id: compte.structure_id,
-                                         statut_validation: :en_attente)
-    end
     can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
     cannot :refuser, Compte, &:au_moins_admin?
   end

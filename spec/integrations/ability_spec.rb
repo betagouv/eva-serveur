@@ -335,8 +335,8 @@ describe Ability do
         create :compte_conseiller, :en_attente, structure: compte_conseiller.structure
       end
 
-      it { is_expected.to be_able_to(:autoriser, mon_collegue) }
-      it { is_expected.to be_able_to(:refuser, mon_collegue) }
+      it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
+      it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
     end
 
     context 'pour un compte refusé' do

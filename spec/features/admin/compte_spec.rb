@@ -84,7 +84,7 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_email, with: 'jeanmarc@exemple.fr'
           select 'Superadmin'
           options = [ '', 'Superadmin', 'Chargé de Mission Régionale', 'Admin', 'Conseiller',
-                     'Compte générique' ]
+                     'Compte générique', 'Intervenant externe' ]
           expect(page).to have_select(:compte_role, options: options)
           select 'Ma structure'
           fill_in :compte_password, with: 'billyJoel123$$$'

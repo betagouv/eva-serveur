@@ -16,6 +16,7 @@ class AbilityUtilisateur
     droit_structure compte
     droit_actualite compte
     droits_cmr if compte.charge_mission_regionale?
+    droits_intervenant_externe if compte.externe?
   end
 
   def can_update_active_pour_campagne?(campagne)
@@ -26,7 +27,7 @@ class AbilityUtilisateur
   def droit_campagne(compte)
     can %i[create duplique], Campagne if can_create_campagne?(compte)
     can %i[update read], Campagne,
-comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acceptee?
+      campagnes_publique_de_la_structure(compte) if compte.validation_acceptee?
     can %i[update read destroy], Campagne, compte_id: compte.id
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
   end
@@ -37,38 +38,21 @@ comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acce
   end
 
   def droit_evaluation(compte)
-    cannot %i[create], Evaluation
-    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
-    return unless compte.validation_acceptee? && compte.structure_id.present?
-
-    can %i[read mise_en_action supprimer_responsable_suivi
-           ajouter_responsable_suivi renseigner_qualification],
-        Evaluation,
-        campagne: comptes_de_meme_structure(compte).merge(privee: false)
-
-    can :read, Evaluation, responsable_suivi_id: compte.id
-
-    return unless compte.admin?
-
-    can %i[update destroy], Evaluation,
-        campagne: comptes_de_meme_structure(compte)
-  end
-
-  def droit_evaluation(compte)
     cannot :create, Evaluation
     can :read, Evaluation, responsable_suivi_id: compte.id
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
+    return if compte.structure_id.blank?
 
-    if compte.validation_acceptee? && compte.structure_id.present?
+    if compte.validation_acceptee?
       can %i[read mise_en_action supprimer_responsable_suivi
              ajouter_responsable_suivi renseigner_qualification],
           Evaluation,
-          campagne: { compte: { structure_id: compte.structure_id }, privee: false }
+          campagne: campagnes_publique_de_la_structure(compte)
     end
 
-    if compte.admin? && compte.structure_id.present?
+    if compte.admin?
       can %i[update destroy], Evaluation,
-          campagne: { compte: { structure_id: compte.structure_id }, privee: false }
+          campagne: campagnes_publique_de_la_structure(compte)
     end
   end
 
@@ -83,13 +67,12 @@ comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acce
   end
 
   def droit_restitution(compte)
-    can :manage, Restitution::Base, campagne: comptes_de_meme_structure(compte)
+    can :manage, Restitution::Base, campagne: campagnes_publique_de_la_structure(compte)
   end
 
   def droit_compte(compte)
     can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
-    can :read, compte
-    can :update, compte
+    can %i[read update], compte
     can :rejoindre_structure, compte
     can :accepter_cgu, compte
     comptes_generiques_ou_comptes_admin(compte)
@@ -125,8 +108,17 @@ comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acce
            Evaluation)
   end
 
-  def comptes_de_meme_structure(compte)
-    { compte: { structure_id: compte.structure_id } }
+  def droits_intervenant_externe
+    cannot(%i[create update duplique], Campagne)
+    cannot(:read, Compte)
+    can %i[read update], compte
+    cannot(:read, Structure)
+    cannot(:read, Evaluation)
+    cannot(:read, Campagne)
+  end
+
+  def campagnes_publique_de_la_structure(compte)
+    { compte: { structure_id: compte.structure_id }, privee: false }
   end
 
   def comptes_generiques_ou_comptes_admin(compte)
@@ -136,7 +128,7 @@ comptes_de_meme_structure(compte).merge(privee: false) if compte.validation_acce
     can :update, Compte, structure_id: compte.structure_id
     can :edit_role, Compte, structure_id: compte.structure_id
     cannot :edit_role, compte if compte.compte_generique?
-    can :destroy, Compte, structure_id: compte.structure_id, role: :conseiller
+    can :destroy, Compte, structure_id: compte.structure_id, role: %i[conseiller externe]
   end
 
   def droits_validation_comptes(compte)

@@ -23,14 +23,25 @@ div class: "page-beneficiaire" do
     )
     paginated_collection(beneficiaire.evaluations.order(order_param).page(params[:page]).per(15),
                         download_links: false) do
-      table_for collection, sortable: true, class: "index_table" do
-        column :created_at, sortable: :created_at
-        column :campagne
-        column "", :actions, class: "col-actions" do |evaluation|
-          div class: "table_actions" do
-            text_node link_to t(".voir"), admin_evaluation_path(evaluation)
-            text_node link_to t(".modifier"), edit_admin_evaluation_path(evaluation)
+      table_for collection, sortable: true, class: "index_table",
+id: "index_table_evaluations_beneficiaire" do
+        column(:nom) do |evaluation|
+          render partial: "/admin/evaluations/nom_evaluation", locals: { evaluation: evaluation }
+        end
+        column :campagne do |evaluation|
+          campagne = evaluation.campagne
+          div class: "cellule" do
+            div link_to(campagne.display_name, admin_campagne_path(campagne),
+                        class: "evaluation__campagne"),
+                class: "d-flex align-items-center"
+            parcours_type = campagne.parcours_type
+            div parcours_type.type_de_programme.capitalize,
+class: "evaluation__parcours-type" if parcours_type.present?
           end
+        end
+        column :created_at do |evaluation|
+          render partial: "/admin/evaluations/actions_et_date_creation",
+locals: { evaluation: evaluation }
         end
       end
     end

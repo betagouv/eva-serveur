@@ -78,10 +78,13 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-                                                    resource.responsable_suivi.blank? and
-                                                      can?(:ajouter_responsable_suivi, Evaluation)
-                                                  } do
+       resource.responsable_suivi.blank? and can?(:ajouter_responsable_suivi, Evaluation) } do
     render "recherche_responsable_suivi"
+  end
+
+  sidebar :consultations_externes, only: :show,
+      if: proc { can?(:ajouter_compte_externe, Evaluation) } do
+    render "recherche_comptes_externes"
   end
 
   sidebar :menu, class: "menu-sidebar", only: :show

@@ -207,6 +207,7 @@ describe Ability do
       it { is_expected.to be_able_to(:update, evaluation) }
       it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
       it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation) }
+      it { is_expected.to be_able_to(:ajouter_compte_externe, evaluation) }
       it { is_expected.to be_able_to(:renseigner_qualification, evaluation) }
     end
   end

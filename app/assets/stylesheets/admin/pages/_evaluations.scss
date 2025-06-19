@@ -100,9 +100,8 @@
   }
 }
 
-#responsable_de_suivi_sidebar_section {
+#responsable_de_suivi_sidebar_section, #consultations_externes_sidebar_section {
   @include panel-gris();
-  height: 5.125rem;
   .tag {
     $largeur-panel: 18.125rem;
     $padding: 1rem;
@@ -122,7 +121,7 @@
       margin-right: 4px;
     }
   }
-  input[name="nom_responsable_suivi"] {
+  input {
     height: 1.625rem;
   }
 }

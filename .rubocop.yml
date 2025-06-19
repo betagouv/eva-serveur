@@ -80,3 +80,6 @@ RSpec/DescribeClass:
   Enabled: true
   Exclude:
     - 'spec/tasks/**/*'
+
+Lint/DuplicateMethods:
+  Enabled: true

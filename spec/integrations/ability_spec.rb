@@ -7,12 +7,11 @@ describe Ability do
   subject(:ability) { described_class.new(compte) }
 
   let(:compte_superadmin) { create :compte_superadmin }
+  let(:structure_avec_admin) { create :structure, :avec_admin }
   let(:compte_charge_mission_regionale) do
-    create :compte_charge_mission_regionale, :structure_avec_admin
+    create :compte_charge_mission_regionale, structure: structure_avec_admin
   end
-  let(:compte_admin) { create :compte_admin }
-  let(:compte_generique) { create :compte_generique, :structure_avec_admin }
-  let(:compte_conseiller) { create :compte_conseiller, :structure_avec_admin }
+  let(:compte_conseiller) { create :compte_conseiller, structure: structure_avec_admin }
   let!(:campagne_superadmin) { create :campagne, compte: compte_superadmin }
   let!(:campagne_superadmin_sans_eval) { create :campagne, compte: compte_superadmin }
   let!(:campagne_conseiller) { create :campagne, compte: compte_conseiller }
@@ -166,12 +165,13 @@ describe Ability do
   end
 
   context 'Compte admin' do
-    let(:compte) { compte_admin }
+    let(:compte) { create :compte_admin }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
 
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
+      let(:iternvenant_externe) { create :compte, role: :externe, structure: compte.structure }
       let(:pas_collegue) { compte_conseiller }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
@@ -183,6 +183,7 @@ describe Ability do
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, mon_collegue) }
+      it { is_expected.to be_able_to(:destroy, iternvenant_externe) }
       it { is_expected.not_to be_able_to(:destroy, pas_collegue) }
       it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
@@ -208,7 +209,7 @@ describe Ability do
   end
 
   context 'Compte générique' do
-    let(:compte) { compte_generique }
+    let(:compte) { create :compte_generique, structure: structure_avec_admin }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
     it { is_expected.not_to be_able_to(:edit_role, compte) }
@@ -228,6 +229,21 @@ describe Ability do
     }
 
     it { is_expected.to be_able_to(:create, StructureLocale.new) }
+  end
+
+  context 'Compte externe' do
+    let(:compte) { create :compte_externe, structure: structure_avec_admin }
+
+    it { is_expected.not_to be_able_to(:create, Campagne) }
+    it { is_expected.not_to be_able_to(:update, Campagne) }
+    it { is_expected.not_to be_able_to(:duplique, Campagne) }
+    it { is_expected.not_to be_able_to(:read, Compte) }
+    it { is_expected.to be_able_to(:read, compte) }
+    it { is_expected.to be_able_to(:update, compte) }
+    it { is_expected.not_to be_able_to(:read, Structure.new) }
+    it { is_expected.not_to be_able_to(:read, compte.structure) }
+    it { is_expected.not_to be_able_to(:read, Evaluation) }
+    it { is_expected.not_to be_able_to(:read, Campagne) }
   end
 
   context 'Compte conseiller' do
@@ -359,7 +375,7 @@ describe Ability do
   end
 
   context 'Compte en attente de validation' do
-    let!(:compte) { create :compte_conseiller, :structure_avec_admin, :en_attente }
+    let!(:compte) { create :compte_conseiller, :en_attente, structure: structure_avec_admin }
     let!(:ma_campagne) { create :campagne, compte: compte }
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne }
 
@@ -396,7 +412,7 @@ describe Ability do
   end
 
   context 'Compte refusé' do
-    let!(:compte) { create :compte_conseiller, :structure_avec_admin, :refusee }
+    let!(:compte) { create :compte_conseiller, :refusee, structure: structure_avec_admin }
 
     it 'peut consulter et modifier son compte' do
       expect(subject).to be_able_to(:read, compte)

@@ -39,6 +39,7 @@ fr:
           admin: Admin
           conseiller: Conseiller
           compte_generique: Compte générique
+          externe: Intervenant externe
         statut_validation: Accès
         statuts_validation:
           en_attente: En attente

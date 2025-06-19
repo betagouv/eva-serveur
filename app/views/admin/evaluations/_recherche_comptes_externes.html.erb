@@ -1,0 +1,42 @@
+<button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t(".action") %></button>
+<%= form_with id: :recherche_comptes_externes, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: "hidden" do |f| %>
+    <label class="sr-only" for="recherche-comptes-externe-autocomplete"><%= t(".libelle_champ_recherche") %></label>
+  <div id="nom-comptes-externe-autocomplete-container" class="champ-recherche" ></div>
+  <%= f.hidden_field :compte_externe_id %>
+<% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const boutonAjout = $("#consultations_externes_sidebar_section button" );
+  const formulaireRecherche = $("#recherche_comptes_externes" );
+
+  const comptes = [<% responsables_suivi_possibles.each do |compte| %>
+    { nom: "<%= escape_javascript(compte.display_name.html_safe) %>", identifiant: "<%= compte.id %>" },
+  <% end %>];
+
+  afficheRecherche(boutonAjout, formulaireRecherche, () => {
+      const container = document.querySelector('#nom-comptes-externe-autocomplete-container');
+      initialiseAutocomplete({
+        focus: true,
+        element: container,
+        id: 'recherche-comptes-externe-autocomplete',
+        name: 'nom_compte_externe',
+        placeholder: I18n.t('admin.evaluations.recherche_comptes_externes.placeholder'),
+        source: (requete, reponse) => {
+            const term = requete.toLowerCase();
+            reponse(comptes.filter(compte => compte.nom.toLowerCase().includes(term)));
+        },
+        templates: {
+          inputValue: (reponse) => reponse ? reponse.nom : '',
+          suggestion: (reponse) => `<div class="comptes-externe-suggestion">${reponse.nom}</div>`
+        },
+        onConfirm: (selectedItem) => {
+          if (! selectedItem) return;
+
+          $('#compte_externe_id').val(selectedItem.identifiant);
+          $('#recherche_comptes_externes').submit();
+        }
+      })
+  });
+});
+</script>

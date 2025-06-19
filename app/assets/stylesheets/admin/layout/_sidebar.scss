@@ -4,10 +4,11 @@
 
 .sidebar {
   .sidebar_section.panel {
+    margin-bottom: 0.5rem;
+
     &.action-items-sidebar {
       @include annule-carte;
       @include panel-gris();
-      margin-bottom: 0.5rem;
 
       background: var(--color-background-default, #FFF);      
       /* dsfr/shadow-sm */

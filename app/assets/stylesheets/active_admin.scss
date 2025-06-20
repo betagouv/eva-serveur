@@ -151,3 +151,15 @@ img {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+.modal-role-utilisateur {
+  margin-bottom: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-4v;
+
+  h1 {
+    margin: $dsfr-spacing-0;
+  }
+}
+

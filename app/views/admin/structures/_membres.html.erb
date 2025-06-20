@@ -18,18 +18,13 @@
 
   <div class='liste-membres'>
     <%= render "admin/structures/cards_validation", comptes: @comptes_en_attente, title: "En attente" do |compte| %>
-      <% if can?(:autoriser, compte) %>
-        <%= link_to "Autoriser", autoriser_admin_compte_path(compte),
-                                  method: :patch,
-                                  class: "action" %>
-      <% end %>
-      <%=
-        if can?(:refuser, compte)
-          link_to 'Refuser', refuser_admin_compte_path(compte),
-                            method: :patch,
-                            class: 'action'
-        end
-      %>
+      <%= link_to "Vérifier", "#", 
+          class: "action", 
+          "data-fr-opened": "false", 
+          "aria-controls": "fr-modal-#{compte.id}" %>
+
+
+      <%= render "admin/structures/modal_verification", compte: compte, roles: Compte::ROLES_STRUCTURE %>
     <% end %>
   </div>
 

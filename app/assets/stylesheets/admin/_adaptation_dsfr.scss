@@ -91,3 +91,25 @@ a.pas-souligne {
 .fr-fieldset__element .fr-checkbox-group--sm input[type=checkbox] + label:before {
   margin-top: 0;
 }
+
+.fr-modal__content {
+  margin-bottom: 0 !important;
+}
+button.fr-link--close.fr-link {
+  border: none;
+}
+
+button.fr-link--close.fr-link:hover {
+  background-color: $grey-1000-hover;
+  cursor: pointer;  
+  border-radius: 0;
+}
+
+.fr-modal__footer {
+  display: flex;
+  padding: $dsfr-spacing-12v $dsfr-spacing-0 $dsfr-spacing-8v $dsfr-spacing-0;
+  justify-content: flex-end;
+  align-items: center;
+  gap: $dsfr-spacing-4v;
+  align-self: stretch;
+}

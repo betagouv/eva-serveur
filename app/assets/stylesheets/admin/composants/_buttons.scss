@@ -13,7 +13,13 @@ form input[type="submit"] {
   @include bouton-primaire;
   @include grand-bouton;
 }
-
+form input[type="submit"].bouton-secondaire {
+  @include bouton-secondaire;
+  @include grand-bouton;
+}
+form input[type="submit"].bouton-secondaire:not(.disabled):hover {
+  @include bouton-secondaire
+}
 .has_many_container a.button {
   @include bouton-primaire;
   @include petit-bouton;

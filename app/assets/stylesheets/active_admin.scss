@@ -151,3 +151,37 @@ img {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+
+.modal-role-utilisateur {
+  margin-bottom: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h1 {
+    margin: 0;
+  }
+
+  .fr-modal__footer {
+    display: flex;
+    padding: 48px 0px 32px 0px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+  }
+}
+
+.fr-modal__content {
+  margin-bottom: 0 !important;
+}
+button.fr-link--close.fr-link {
+  border: none;
+}
+
+button.fr-link--close.fr-link:hover {
+  background-color: #f6f6f6;
+  cursor: pointer;  
+  border-radius: 0;
+}

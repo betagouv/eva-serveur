@@ -29,6 +29,11 @@ ActiveAdmin.register StructureAdministrative do
 
   controller do
     before_action :trouve_comptes, :trouve_campagnes, :trouve_structures_dependantes, only: :show
+    helper_method :collection_roles
+
+    def collection_roles
+      current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_POUR_VERIFICATION
+    end
 
     def trouve_comptes
       comptes = Compte.where(structure: resource).order(:prenom, :nom)

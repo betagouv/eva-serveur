@@ -9,11 +9,11 @@
             Choisissez un rôle :
           </legend>
 
-          <% roles.each_with_index do |role, index| %>
+          <% collection_roles.each do |role| %>
             <div class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-group--sm">
-                <%= f.radio_button :role, role, id: "role_#{index}" %>
-                <%= f.label :role, role.humanize, value: role, class: "fr-label", for: "role_#{index}" %>
+                <%= f.radio_button :role, role, id: role %>
+                <%= f.label :role, Compte.human_enum_name(:role, role), class: "fr-label", for: role %>
               </div>
             </div>
           <% end %>

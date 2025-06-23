@@ -113,3 +113,9 @@ button.fr-link--close.fr-link:hover {
   gap: $dsfr-spacing-4v;
   align-self: stretch;
 }
+
+.fr-btn {
+  &:disabled {
+    @include bouton-disabled;
+  }
+}

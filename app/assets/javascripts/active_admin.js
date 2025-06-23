@@ -18,6 +18,7 @@
 //= require clipboard
 //= require evaluation
 //= require simple_mde
+//= require modal_verification
 
 //= require chartkick
 //= require Chart.bundle

@@ -162,7 +162,9 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, Beneficiaire) }
     it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
     it { is_expected.not_to be_able_to(:renseigner_qualification, Evaluation) }
-    it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Beneficiaire) }
+    it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Evaluation) }
+    it { is_expected.not_to be_able_to(:ajouter_compte_externe, Evaluation) }
+    it { is_expected.not_to be_able_to(:supprimer_compte_externe, Evaluation) }
   end
 
   context 'Compte admin' do
@@ -248,6 +250,10 @@ describe Ability do
     it { is_expected.not_to be_able_to(:read, compte.structure) }
     it { is_expected.not_to be_able_to(:read, Evaluation) }
     it { is_expected.not_to be_able_to(:read, Campagne) }
+    it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
+    it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Evaluation) }
+    it { is_expected.not_to be_able_to(:ajouter_compte_externe, Evaluation) }
+    it { is_expected.not_to be_able_to(:supprimer_compte_externe, Evaluation) }
   end
 
   context 'Compte conseiller' do

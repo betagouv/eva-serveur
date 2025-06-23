@@ -107,6 +107,7 @@ class AbilityUtilisateur
     cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
+              supprimer_compte_externe ajouter_compte_externe
               renseigner_qualification],
            Evaluation)
   end
@@ -118,6 +119,9 @@ class AbilityUtilisateur
     cannot(:read, Structure)
     cannot(:read, Evaluation)
     cannot(:read, Campagne)
+    cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
+              supprimer_compte_externe ajouter_compte_externe],
+           Evaluation)
   end
 
   def campagnes_publique_de_la_structure(compte)

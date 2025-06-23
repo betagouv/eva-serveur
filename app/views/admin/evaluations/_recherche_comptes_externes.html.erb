@@ -1,42 +1,11 @@
-<button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t(".action") %></button>
-<%= form_with id: :recherche_comptes_externes, url: ajouter_compte_externe_admin_evaluation_path(resource), class: "hidden" do |f| %>
-    <label class="sr-only" for="recherche-comptes-externe-autocomplete"><%= t(".libelle_champ_recherche") %></label>
-  <div id="nom-comptes-externe-autocomplete-container" class="champ-recherche" ></div>
-  <%= f.hidden_field :compte_externe_id %>
-<% end %>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const boutonAjout = $("#consultations_externes_sidebar_section button" );
-  const formulaireRecherche = $("#recherche_comptes_externes" );
-
-  const comptes = [<% comptes_externes_possibles.each do |compte| %>
-    { nom: "<%= escape_javascript(compte.display_name.html_safe) %>", identifiant: "<%= compte.id %>" },
-  <% end %>];
-
-  afficheRecherche(boutonAjout, formulaireRecherche, () => {
-      const container = document.querySelector('#nom-comptes-externe-autocomplete-container');
-      initialiseAutocomplete({
-        focus: true,
-        element: container,
-        id: 'recherche-comptes-externe-autocomplete',
-        name: 'nom_compte_externe',
-        placeholder: I18n.t('admin.evaluations.recherche_comptes_externes.placeholder'),
-        source: (requete, reponse) => {
-            const term = requete.toLowerCase();
-            reponse(comptes.filter(compte => compte.nom.toLowerCase().includes(term)));
-        },
-        templates: {
-          inputValue: (reponse) => reponse ? reponse.nom : '',
-          suggestion: (reponse) => `<div class="comptes-externe-suggestion">${reponse.nom}</div>`
-        },
-        onConfirm: (selectedItem) => {
-          if (! selectedItem) return;
-
-          $('#compte_externe_id').val(selectedItem.identifiant);
-          $('#recherche_comptes_externes').submit();
-        }
-      })
-  });
-});
-</script>
+<%= render "recherche_compte", locals: {
+  form_id: :recherche_comptes_externes,
+  form_url: ajouter_compte_externe_admin_evaluation_path(resource),
+  autocomplete_id: "recherche-comptes-externe-autocomplete",
+  container_id: "nom-comptes-externe-autocomplete-container",
+  hidden_field_name: :compte_externe_id,
+  sidebar_section_id: "consultations_externes_sidebar_section",
+  comptes_collection: comptes_externes_possibles,
+  autocomplete_name: "nom_compte_externe",
+  translation_scope: "comptes_externes"
+} %>

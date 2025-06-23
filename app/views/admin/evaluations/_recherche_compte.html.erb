@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const formulaireRecherche = $("#<%= locals[:form_id] %>" );
 
   const comptes = [<% locals[:comptes_collection].each do |compte| %>
-    { nom: "<%= escape_javascript(compte.display_name.html_safe) %>", identifiant: "<%= compte.id %>" },
+    {
+      nom: "<%= escape_javascript(compte.display_name.html_safe) %>",
+      identifiant: "<%= compte.id %>",
+      email: "<%= escape_javascript(compte.email.html_safe) %>"
+    },
   <% end %>];
 
   afficheRecherche(boutonAjout, formulaireRecherche, () => {
@@ -21,10 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         element: container,
         id: '<%= locals[:autocomplete_id] %>',
         name: '<%= locals[:autocomplete_name] %>',
-        placeholder: I18n.t('admin.evaluations.recherche_compte.<%= locals[:translation_scope] %>.placeholder'),
+        placeholder: I18n.t('admin.evaluations.recherche_compte.placeholder'),
         source: (requete, reponse) => {
             const term = requete.toLowerCase();
-            reponse(comptes.filter(compte => compte.nom.toLowerCase().includes(term)));
+            const comptes_filtres = comptes.filter(compte =>  {
+              return compte.nom.toLowerCase().includes(term) ||
+                compte.email.toLowerCase().includes(term)
+            });
+            reponse(comptes_filtres);
         },
         templates: {
           inputValue: (reponse) => reponse ? reponse.nom : '',

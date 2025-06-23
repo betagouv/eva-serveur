@@ -47,13 +47,12 @@ fr:
         bon: Correct
         mauvais: Erreur
       recherche_compte:
+        placeholder: Nom ou email
         responsable_suivi:
           libelle_champ_recherche: rechercher un responsable de suivi
-          placeholder: Nom du responsable…
           action: Ajouter un responsable de suivi
         comptes_externes:
           libelle_champ_recherche: rechercher un compte
-          placeholder: Nom de l'intervenant…
           action: Ajouter un intervenant externe
       tri:
         <<: *commun

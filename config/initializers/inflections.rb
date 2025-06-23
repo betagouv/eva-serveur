@@ -12,6 +12,7 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'situation_configuration', 'situations_configurations'
+  inflect.irregular 'affectation_compte_externe', 'affectations_comptes_externes'
   inflect.irregular 'questionnaire_question', 'questionnaires_questions'
   inflect.irregular 'choix', 'choix'
   inflect.irregular 'nouvelle_structure', 'nouvelles_structures'

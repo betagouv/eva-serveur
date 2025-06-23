@@ -260,11 +260,11 @@ describe 'Evaluation', type: :request do
       sign_in mon_compte
     end
 
-    describe '#ajouter_responsable_suivi' do
-      let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
+    describe "#ajouter_responsable_suivi" do
+      let(:mon_collegue) { create :compte_conseiller, structure: mon_compte.structure }
       let(:evaluation) { create :evaluation, campagne: ma_campagne }
 
-      it 'peut ajouter un responsable de suivi' do
+      it "peut ajouter un responsable de suivi" do
         expect do
           post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
                params: { responsable_suivi_id: mon_collegue.id }
@@ -278,6 +278,29 @@ describe 'Evaluation', type: :request do
           post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
                params: { responsable_suivi_id: nil }
         end.not_to(change { evaluation.reload.responsable_suivi })
+      end
+    end
+
+    describe "#ajouter_compte_externe" do
+      let(:compte_externe) { create :compte_externe, structure: mon_compte.structure }
+      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+
+      it "peut ajouter un compte externe" do
+        expect do
+          post ajouter_compte_externe_admin_evaluation_path(evaluation),
+               params: { compte_externe_id: compte_externe.id }
+        end.to change { evaluation.reload.affectations_comptes_externes.count }
+           .from(0)
+           .to(1)
+
+        expect(evaluation.affectations_comptes_externes.last.compte).to eq(compte_externe)
+      end
+
+      it "ne fait rien si le compte externe n'existe pas" do
+        expect do
+          post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
+               params: { compte_externe_id: "identifiant-inconnu" }
+        end.not_to(change { evaluation.reload.affectations_comptes_externes.count })
       end
     end
 

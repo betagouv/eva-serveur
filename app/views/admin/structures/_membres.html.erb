@@ -18,10 +18,12 @@
 
   <div class='liste-membres'>
     <%= render "admin/structures/cards_validation", comptes: @comptes_en_attente, title: "En attente" do |compte| %>
-      <%= link_to "Vérifier", "#", 
+      <%= if can?(:verifier, compte) 
+        link_to "Vérifier", "#", 
           class: "action", 
           "data-fr-opened": "false", 
-          "aria-controls": "fr-modal-#{compte.id}" %>
+          "aria-controls": "fr-modal-#{compte.id}"
+        end %>
 
 
       <%= render "admin/structures/modal_verification", compte: compte, roles: Compte::ROLES_STRUCTURE %>

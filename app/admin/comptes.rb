@@ -153,40 +153,21 @@ ActiveAdmin.register Compte do
   end
 
   member_action :autoriser, method: :patch do
-    resource.validation_acceptee!
-    redirect_to request.referer
+    autoriser_compte
   end
-
-member_action :verifier, method: :patch do
-  if params[:decision] == "Autoriser"
-    if params[:role].present?
-      resource.update(role: params[:role])
-      resource.validation_acceptee!
-    else
-      flash[:error] = "Veuillez sélectionner un rôle."
-      return redirect_to request.referer
-    end
-
-  elsif params[:decision] == "Refuser"
-    resource.update(role: params[:role]) if params[:role].present?
-    resource.validation_refusee!
-  end
-
-  redirect_to request.referer, notice: "Compte mis à jour."
-end
-
 
   member_action :refuser, method: :patch do
-    resource.validation_refusee!
-    redirect_to request.referer
+    refuser_compte
+  end
+
+  member_action :verifier, method: :patch do
+    params[:decision] == "Autoriser" ? autoriser_compte : refuser_compte
   end
 
   member_action :quitter_mode_tutoriel, method: :patch do
     current_compte.update(mode_tutoriel: false)
     redirect_to request.referer
   end
-
-
 
   controller do
     helper_method :peut_modifier_mot_de_passe?, :collection_roles
@@ -205,6 +186,23 @@ end
         resource == current_compte ||
         can?(:manage, Compte)
     end
+
+    def autoriser_compte
+      met_a_jour_role
+      resource.validation_acceptee!
+      redirect_to request.referer
+    end
+
+    def refuser_compte
+      met_a_jour_role
+      resource.validation_refusee!
+      redirect_to request.referer
+    end
+
+    def met_a_jour_role
+      resource.update(role: params[:role]) if params[:role].present?
+    end
+
 
     def collection_roles
       roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE

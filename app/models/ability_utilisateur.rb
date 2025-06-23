@@ -48,7 +48,7 @@ class AbilityUtilisateur
     if compte.validation_acceptee?
       can %i[read mise_en_action supprimer_responsable_suivi
              ajouter_responsable_suivi renseigner_qualification
-             ajouter_compte_externe],
+             ajouter_compte_externe supprimer_compte_externe],
           Evaluation,
           campagne: campagnes_publique_de_la_structure(compte)
     end

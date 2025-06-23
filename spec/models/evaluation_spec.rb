@@ -13,6 +13,7 @@ describe Evaluation do
   it { is_expected.to accept_nested_attributes_for :conditions_passation }
   it { is_expected.to have_one :donnee_sociodemographique }
   it { is_expected.to accept_nested_attributes_for :donnee_sociodemographique }
+  it { is_expected.to have_many :affectations_comptes_externes }
 
   describe 'scopes' do
     describe '.des_12_derniers_mois' do
@@ -96,6 +97,25 @@ describe Evaluation do
 
     it "retourne les responsables de suivi possible pour l'évaluation" do
       expect(evaluation.responsables_suivi).to contain_exactly(compte1, compte2)
+    end
+  end
+
+  describe '#compte_externes_possibles' do
+    let!(:structure) { create :structure }
+    let!(:structure2) { create :structure }
+    let!(:compte1) { create :compte, structure: structure }
+    let!(:compte_externe1) { create :compte_externe, structure: structure }
+    let!(:compte_externe2) { create :compte_externe, structure: structure }
+    let!(:compte_en_attente) { create :compte_conseiller, :en_attente, structure: structure }
+    let!(:compte_refusee) { create :compte_conseiller, :refusee, structure: structure }
+    let!(:compte_autre_structure) { create :compte, structure: structure2 }
+    let!(:compte_externe_autre_externe) { create :compte_externe, structure: structure2 }
+    let!(:campagne) { create :campagne, compte: compte1 }
+    let!(:evaluation) { create :evaluation, campagne: campagne }
+
+    it "retourne les comptes externes possible pour l'évaluation" do
+      expect(evaluation.comptes_externes_possibles)
+        .to contain_exactly(compte_externe1, compte_externe2)
     end
   end
 
@@ -200,6 +220,18 @@ describe Evaluation do
       expect(evaluation.beneficiaires_possibles).to include(evaluation.beneficiaire)
       expect(evaluation.beneficiaires_possibles).to include(autre_evaluation.beneficiaire)
       expect(evaluation.beneficiaires_possibles).not_to include(eval_autre_structure.beneficiaire)
+    end
+  end
+
+  describe 'dependent destroy' do
+    it 'détruit les affectations_comptes_externes quand on supprime une évaluation' do
+      evaluation = create :evaluation
+      compte_externe = create :compte_externe, structure: evaluation.campagne.compte.structure
+      affectation = AffectationCompteExterne.create!(evaluation_id: evaluation.id,
+                                                     compte_id: compte_externe.id)
+
+      expect { evaluation.destroy }.to change(AffectationCompteExterne, :count).by(-1)
+      expect(AffectationCompteExterne.exists?(affectation.id)).to be false
     end
   end
 end

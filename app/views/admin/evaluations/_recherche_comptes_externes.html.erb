@@ -1,5 +1,5 @@
 <button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t(".action") %></button>
-<%= form_with id: :recherche_comptes_externes, url: ajouter_responsable_suivi_admin_evaluation_path(resource), class: "hidden" do |f| %>
+<%= form_with id: :recherche_comptes_externes, url: ajouter_compte_externe_admin_evaluation_path(resource), class: "hidden" do |f| %>
     <label class="sr-only" for="recherche-comptes-externe-autocomplete"><%= t(".libelle_champ_recherche") %></label>
   <div id="nom-comptes-externe-autocomplete-container" class="champ-recherche" ></div>
   <%= f.hidden_field :compte_externe_id %>
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const boutonAjout = $("#consultations_externes_sidebar_section button" );
   const formulaireRecherche = $("#recherche_comptes_externes" );
 
-  const comptes = [<% responsables_suivi_possibles.each do |compte| %>
+  const comptes = [<% comptes_externes_possibles.each do |compte| %>
     { nom: "<%= escape_javascript(compte.display_name.html_safe) %>", identifiant: "<%= compte.id %>" },
   <% end %>];
 

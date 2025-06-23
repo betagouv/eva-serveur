@@ -83,8 +83,17 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :consultations_externes, only: :show,
-      if: proc { can?(:ajouter_compte_externe, Evaluation) } do
-    render "recherche_comptes_externes"
+    if: proc { !resource.affectations_comptes_externes.empty? ||
+               can?(:ajouter_compte_externe, Evaluation) } do
+    resource.affectations_comptes_externes.each do |affectation|
+      url = supprimer_compte_externe_admin_evaluation_path(
+        resource,
+        compte_id: affectation.compte.id)
+      render(Tag.new(affectation.compte.display_name,
+                     supprimable: can?(:supprimer_compte_externe, Evaluation),
+                     url: url))
+    end
+    render "recherche_comptes_externes" if can?(:ajouter_compte_externe, Evaluation)
   end
 
   sidebar :menu, class: "menu-sidebar", only: :show
@@ -129,9 +138,21 @@ ActiveAdmin.register Evaluation do
     redirect_to request.referer
   end
 
+  member_action :supprimer_compte_externe, method: :patch do
+    AffectationCompteExterne
+      .find_by(evaluation_id: resource.id, compte_id: params["compte_id"])&.destroy
+    redirect_to request.referer
+  end
+
   member_action :ajouter_responsable_suivi, method: :post do
     responsable = Compte.where(id: params["responsable_suivi_id"]).first
     resource.update(responsable_suivi: responsable) if responsable.present?
+    redirect_to admin_evaluation_path(resource)
+  end
+
+  member_action :ajouter_compte_externe, method: :post do
+    compte = Compte.where(id: params["compte_externe_id"]).first
+    resource.affectations_comptes_externes.create!(compte_id: compte.id) if compte.present?
     redirect_to admin_evaluation_path(resource)
   end
 
@@ -152,7 +173,7 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :batch_action_access?
+                  :batch_action_access?, :comptes_externes_possibles
 
     def show
       show! do |format|
@@ -255,6 +276,10 @@ ActiveAdmin.register Evaluation do
 
     def responsables_suivi_possibles
       @responsables_suivi_possibles ||= resource.responsables_suivi
+    end
+
+    def comptes_externes_possibles
+      @comptes_externes_possibles ||= resource.comptes_externes_possibles
     end
 
     def beneficiaires_possibles

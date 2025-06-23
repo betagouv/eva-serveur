@@ -350,8 +350,30 @@ describe 'Admin - Evaluation', type: :feature do
       end
     end
 
+    describe 'comptes externes' do
+      let(:externe) { create :compte_admin, nom: "Martin Externe", structure: mon_compte.structure }
+      let(:evaluation) do
+        create :evaluation, campagne: ma_campagne
+      end
+
+      context "en tant qu'admin" do
+        before do
+          evaluation.affectations_comptes_externes.create!(compte_id: externe.id)
+          visit admin_evaluation_path(evaluation)
+        end
+
+        it "peut retirer l'assignation d'un compte externe" do
+          within('#consultations_externes_sidebar_section') do
+            find('a.lien-supprimer').click
+          end
+          expect(page).not_to have_content(externe.nom)
+          expect(evaluation.reload.affectations_comptes_externes).to be_empty
+        end
+      end
+    end
+
     describe 'responsable de suivi' do
-      let(:mon_collegue) { create :compte_admin, structure: mon_compte.structure }
+      let(:mon_collegue) { create :compte_admin, nom: "Martin Collègue", structure: mon_compte.structure }
       let(:evaluation) do
         create :evaluation, campagne: ma_campagne, responsable_suivi: mon_collegue
       end
@@ -363,7 +385,7 @@ describe 'Admin - Evaluation', type: :feature do
           within('#responsable_de_suivi_sidebar_section') do
             find('a.lien-supprimer').click
           end
-          expect(page).not_to have_content(mon_collegue.email)
+          expect(page).not_to have_content(mon_collegue.nom)
           expect(evaluation.reload.responsable_suivi).to be_nil
         end
       end

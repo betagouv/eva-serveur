@@ -25,6 +25,7 @@ class Evaluation < ApplicationRecord
   has_one :donnee_sociodemographique, dependent: :destroy
   has_one :mise_en_action, dependent: :destroy
   has_many :parties, dependent: :destroy
+  has_many :affectations_comptes_externes, dependent: :destroy
 
   before_validation :trouve_campagne_depuis_code
   validates :nom, :debutee_le, :statut, presence: true
@@ -76,6 +77,10 @@ class Evaluation < ApplicationRecord
 
   def responsables_suivi
     Compte.where(structure_id: campagne&.compte&.structure_id).where(statut_validation: :acceptee)
+  end
+
+  def comptes_externes_possibles
+    Compte.where(structure_id: campagne&.compte&.structure_id).where(role: :externe)
   end
 
   def beneficiaires_possibles

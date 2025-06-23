@@ -182,6 +182,7 @@ describe Ability do
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
+      it { is_expected.to be_able_to(:verifier, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, iternvenant_externe) }
       it { is_expected.not_to be_able_to(:destroy, pas_collegue) }
@@ -351,6 +352,7 @@ describe Ability do
         create :compte_conseiller, :en_attente, structure: compte_conseiller.structure
       end
 
+      it { is_expected.not_to be_able_to(:verifier, mon_collegue) }
       it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
     end
@@ -360,6 +362,7 @@ describe Ability do
         create :compte_conseiller, :refusee, structure: compte_conseiller.structure
       end
 
+      it { is_expected.not_to be_able_to(:verifier, mon_collegue) }
       it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
     end
@@ -369,6 +372,7 @@ describe Ability do
         create :compte_conseiller, :acceptee, structure: compte_conseiller.structure
       end
 
+      it { is_expected.not_to be_able_to(:verifier, mon_collegue) }
       it { is_expected.not_to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
     end

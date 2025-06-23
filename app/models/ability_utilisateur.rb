@@ -132,7 +132,8 @@ class AbilityUtilisateur
   end
 
   def droits_validation_comptes(compte)
-    can %i[autoriser refuser], Compte, structure_id: compte.structure_id if compte.au_moins_admin?
+    can %i[autoriser refuser verifier], Compte,
+structure_id: compte.structure_id if compte.au_moins_admin?
     cannot :refuser, Compte, &:au_moins_admin?
   end
 

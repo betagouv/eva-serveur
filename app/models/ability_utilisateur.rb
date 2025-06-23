@@ -119,6 +119,9 @@ class AbilityUtilisateur
     cannot(:read, Structure)
     cannot(:read, Evaluation)
     cannot(:read, Campagne)
+    can(:read, Evaluation, { affectations_comptes_externes: { compte_id: compte.id } })
+    can(:read, Campagne,
+        { evaluations: { affectations_comptes_externes: { compte_id: compte.id } } })
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
               supprimer_compte_externe ajouter_compte_externe],
            Evaluation)

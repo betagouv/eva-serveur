@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+render "admin/comptes/membres"
+
+
+context.instance_eval do
+  column :prenom do |compte|
+    link_to compte.prenom, admin_compte_path(compte)
+  end
+  column :nom
+  column :email
+  column :telephone
+  column :statut_validation do |compte|
+    Compte.human_enum_name(:statut_validation, compte.statut_validation)
+  end
+  if can? :manage, Compte
+    column :role do |compte|
+      Compte.human_enum_name(:role, compte.role)
+    end
+    column :structure
+    column :created_at
+  end
+  actions
+  column "", class: "bouton-action" do
+    render partial: "components/bouton_menu_actions"
+  end
+end

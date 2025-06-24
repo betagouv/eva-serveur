@@ -19,8 +19,10 @@ describe 'Admin - Structure locale', type: :feature do
         create :structure_locale, :avec_admin, nom: 'Ma structure', type_structure: 'mission_locale'
       end
       let!(:compte) do
-        create :compte, structure: structure, statut_validation: :en_attente, role: :conseiller
+        create :compte, structure: structure, statut_validation: statut_validation,
+role: :conseiller
       end
+      let(:statut_validation) { :en_attente }
 
       before { visit admin_structure_locale_path(structure) }
 
@@ -34,14 +36,22 @@ describe 'Admin - Structure locale', type: :feature do
       end
 
       describe 'Mes collègues' do
-        it 'autorise un compte' do
-          click_on 'Autoriser'
-          expect(compte.reload.validation_acceptee?).to be true
+        context 'quand le compte est refusé' do
+          let(:statut_validation) { :refusee }
+
+          it 'autorise un compte' do
+            click_on 'Autoriser'
+            expect(compte.reload.validation_acceptee?).to be true
+          end
         end
 
-        it 'refuse un compte' do
-          click_on 'Refuser'
-          expect(compte.reload.validation_refusee?).to be true
+        context 'quand le compte est accepté' do
+          let(:statut_validation) { :acceptee }
+
+          it 'refuse un compte' do
+            click_on 'Refuser'
+            expect(compte.reload.validation_refusee?).to be true
+          end
         end
       end
     end

@@ -1,7 +1,8 @@
+
 <%= dsfr_modal(title: "<span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Demande d'accès".html_safe, html_attributes: { id: "fr-modal-#{compte.id}" }) do %>
   <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
     <div class="modal-role-utilisateur">
-      <p><strong><%= compte.display_name %></strong> a demandé un accès à la structure <%= resource.nom %></p>
+      <p><strong><%= compte.display_name %></strong> a demandé un accès à la structure <%= current_compte.structure.nom %></p>
 
       <div class="fr-select-group fr-mb-4">
         <fieldset class="fr-fieldset" id="role-selection" aria-labelledby="role-selection-legend">
@@ -9,7 +10,7 @@
             Choisissez un rôle :
           </legend>
 
-          <% collection_roles.each do |role| %>
+          <% collection_roles_pour_verification.each do |role| %>
             <div class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-group--sm">
                 <%= f.radio_button :role, role, id: role %>
@@ -23,8 +24,12 @@
       </div>
 
       <div class="fr-modal__footer">
-        <%= f.submit "Refuser", name: "decision", value: "Refuser", class: "fr-btn bouton-secondaire" %>
-        <%= f.submit "Autoriser", name: "decision", value: "Autoriser", class: "fr-btn", id: "valider-modal-verification" %>
+        <button type="submit" name="decision" value="Refuser" class="fr-btn bouton-secondaire">
+          Refuser
+        </button>
+        <button type="submit" name="decision" value="Autoriser" class="fr-btn " id="valider-modal-verification">
+          Autoriser
+        </button>
       </div>
     </div>
   <% end %>

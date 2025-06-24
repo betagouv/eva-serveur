@@ -9,6 +9,7 @@ form fieldset.actions li.cancel a,
   border: none;
   background: none;
 }
+
 form input[type="submit"] {
   @include bouton-primaire;
   @include grand-bouton;
@@ -17,6 +18,7 @@ form input[type="submit"].bouton-secondaire {
   @include bouton-secondaire;
   @include grand-bouton;
 }
+
 form input[type="submit"].bouton-secondaire:not(.disabled):hover {
   @include bouton-secondaire
 }
@@ -118,4 +120,8 @@ button.bouton, a.bouton, .bouton {
 
 .bouton-disabled {
   @include bouton-disabled;
+}
+
+.bouton-actions {
+  @include bouton-action;
 }

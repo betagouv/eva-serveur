@@ -24,6 +24,7 @@ class AbilityUtilisateur
   end
 
   private
+
   def droit_campagne(compte)
     can %i[create duplique], Campagne if can_create_campagne?(compte)
     can %i[update read], Campagne,
@@ -39,6 +40,7 @@ class AbilityUtilisateur
 
   def droit_evaluation(compte)
     cannot :create, Evaluation
+    can :acces_actions_groupees, Evaluation if compte.superadmin?
     can :read, Evaluation, responsable_suivi_id: compte.id
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
     return if compte.structure_id.blank?

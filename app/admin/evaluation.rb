@@ -41,8 +41,8 @@ ActiveAdmin.register Evaluation do
         }, :illettrisme_potentiel
 
 
-
-  batch_action :lier_evaluations do |evaluation_ids|
+  batch_action :destroy, if: proc { batch_action_access? }
+  batch_action :lier_evaluations, if: proc { batch_action_access? } do |evaluation_ids|
     evaluations = Evaluation.where(id: evaluation_ids)
 
     if evaluations.size < 2
@@ -148,7 +148,8 @@ ActiveAdmin.register Evaluation do
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
-                  :responsables_suivi_possibles, :campagne_avec_positionnement?
+                  :responsables_suivi_possibles, :campagne_avec_positionnement?,
+                  :batch_action_access?
 
     def show
       show! do |format|
@@ -169,6 +170,10 @@ ActiveAdmin.register Evaluation do
         send_file(pdf_path, filename: "#{resource.nom}.pdf", type: "application/pdf",
                             disposition: disposition)
       end
+    end
+
+    def batch_action_access?
+      can? :acces_actions_groupees, Evaluation
     end
 
     def disposition

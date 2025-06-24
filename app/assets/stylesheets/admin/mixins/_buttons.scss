@@ -152,3 +152,16 @@ $hauteur_menu_actions: 2rem;
   color: $grey-425 !important;
 }
 
+@mixin bouton-action() {
+  @include bouton-secondaire;
+  @include petit-bouton;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  width: 4rem;
+  align-items: center;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: .75rem;
+}
+

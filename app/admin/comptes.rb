@@ -63,26 +63,7 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:abandonnistes)
 
   index do
-    column :prenom do |compte|
-      link_to compte.prenom, admin_compte_path(compte)
-    end
-    column :nom
-    column :email
-    column :telephone
-    column :statut_validation do |compte|
-      Compte.human_enum_name(:statut_validation, compte.statut_validation)
-    end
-    if can? :manage, Compte
-      column :role do |compte|
-        Compte.human_enum_name(:role, compte.role)
-      end
-      column :structure
-      column :created_at
-    end
-    actions
-    column "", class: "bouton-action" do
-      render partial: "components/bouton_menu_actions"
-    end
+    render "index", context: self
   end
 
   action_item :stats, only: :index, if: -> { can? :manage, Compte } do
@@ -170,7 +151,9 @@ ActiveAdmin.register Compte do
   end
 
   controller do
-    helper_method :peut_modifier_mot_de_passe?, :collection_roles
+    before_action :trouve_comptes, only: :index
+    helper_method :peut_modifier_mot_de_passe?, :collection_roles,
+:collection_roles_pour_verification
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
@@ -207,6 +190,17 @@ ActiveAdmin.register Compte do
     def collection_roles
       roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE
       roles.map { |role| [ Compte.human_enum_name(:role, role), role ] }
+    end
+
+    def collection_roles_pour_verification
+      current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_POUR_VERIFICATION
+    end
+
+    def trouve_comptes
+      comptes = Compte.de_la_structure(current_compte.structure).order(:prenom, :nom)
+      @comptes_en_attente = comptes.validation_en_attente
+      # @comptes_refuses = comptes.validation_refusee
+      # @comptes_acceptes = comptes.validation_acceptee
     end
   end
 

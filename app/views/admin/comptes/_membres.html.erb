@@ -1,0 +1,14 @@
+<div id='bloc-membres'>
+  <div class='liste-membres'>
+    <% @comptes_en_attente.each do |compte| %>
+      <div class="fr-callout">
+        <h3 class="fr-callout__title"><%= compte.display_name %> a fait une demande d'accès</h3>    
+        <p class="fr-callout__text"><%= compte.email %></p>
+        <% if can?(:verifier, compte) %>
+          <%= link_to "Vérifier", "#", class: "bouton-actions", "data-fr-opened": "false", "aria-controls": "fr-modal-#{compte.id}" %>
+          <%= render "admin/comptes/modal_verification", compte: compte %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

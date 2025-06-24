@@ -15,8 +15,10 @@ describe 'Admin - Structure administrative', type: :feature do
   end
 
   describe 'show' do
+    let(:statut_validation) { :en_attente }
+
     let!(:compte) do
-      create :compte, structure: structure, statut_validation: :en_attente, role: :conseiller
+      create :compte, structure: structure, statut_validation: statut_validation, role: :conseiller
     end
 
     before { visit admin_structure_administrative_path(structure) }
@@ -31,14 +33,22 @@ describe 'Admin - Structure administrative', type: :feature do
     end
 
     describe 'Mes collègues' do
-      it 'autorise un compte' do
-        click_on 'Autoriser'
-        expect(compte.reload.validation_acceptee?).to be true
+      context 'quand le compte est refusé' do
+        let(:statut_validation) { :refusee }
+
+        it 'autorise un compte' do
+          click_on 'Autoriser'
+          expect(compte.reload.validation_acceptee?).to be true
+        end
       end
 
-      it 'refuse un compte' do
-        click_on 'Refuser'
-        expect(compte.reload.validation_refusee?).to be true
+      context 'quand le compte est accepté' do
+        let(:statut_validation) { :acceptee }
+
+        it 'refuse un compte' do
+          click_on 'Refuser'
+          expect(compte.reload.validation_refusee?).to be true
+        end
       end
     end
 

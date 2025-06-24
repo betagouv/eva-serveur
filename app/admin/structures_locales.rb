@@ -87,11 +87,9 @@ ActiveAdmin.register StructureLocale do
 
   controller do
     before_action :trouve_comptes, :trouve_campagnes, only: :show
-    helper_method :collection_roles
 
     def trouve_comptes
       comptes = Compte.where(structure: resource).order(:prenom, :nom)
-      @comptes_en_attente = comptes.validation_en_attente
       @comptes_refuses = comptes.validation_refusee
       @comptes_acceptes = comptes.validation_acceptee
     end
@@ -102,10 +100,6 @@ ActiveAdmin.register StructureLocale do
 
     def scoped_collection
       end_of_association_chain.avec_nombre_evaluations_et_date_derniere_evaluation
-    end
-
-    def collection_roles
-      current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_POUR_VERIFICATION
     end
 
     def create

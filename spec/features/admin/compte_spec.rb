@@ -116,7 +116,7 @@ describe 'Admin - Compte', type: :feature do
       it do
         visit edit_admin_compte_path(collegue)
         select 'Admin'
-        options = [ '', 'Admin', 'Conseiller' ]
+        options = [ '', 'Admin', 'Conseiller', 'Intervenant externe' ]
         expect(page).to have_select(:compte_role, options: options)
         expect(page).to have_content 'Accès'
 

@@ -3,8 +3,7 @@
 class Compte < ApplicationRecord
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   ROLES = %w[superadmin admin charge_mission_regionale conseiller compte_generique externe].freeze
-  ROLES_POUR_VERIFICATION = %w[admin conseiller externe].freeze
-  ROLES_STRUCTURE = %w[admin conseiller].freeze
+  ROLES_STRUCTURE = %w[admin conseiller externe].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
 

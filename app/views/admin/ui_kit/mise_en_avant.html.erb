@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>Démo MiseEnAvantComponent</h1>
+
+  <h2>Avec bouton</h2>
+  <%= render MiseEnAvantComponent.new(
+        titre: "Jean Dupont a fait une demande d'accès",
+        description: "jean.dupont@example.com",
+        icone: "information-line",
+        bouton_label: "Vérifier",
+        bouton_attributes: { "data-fr-opened": "false", "aria-controls": "fr-modal-123" }
+      ) %>
+
+  <h2>Sans bouton</h2>
+  <%= render MiseEnAvantComponent.new(
+        titre: "Jean Dupont a fait une demande d'accès",
+        description: "jean.dupont@example.com",
+        icone: "information-line"
+      ) %>
+</div>

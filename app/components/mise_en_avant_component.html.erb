@@ -1,0 +1,13 @@
+<div class="<%= ["fr-callout", ("fr-icon-#{@icone}" if @icone)].compact.join(' ') %>" <%= tag.attributes(@html_attributes) %>>
+  <h3 class="fr-callout__title"><%= @titre %></h3>
+
+  <% if @description.present? %>
+    <p class="fr-callout__text"><%= @description %></p>
+  <% end %>
+
+  <% if @bouton_label.present? %>
+    <%= link_to @bouton_label, "#", { class: "fr-btn" }.merge(@bouton_attributes) %>
+  <% end %>
+
+  <%= content %>
+</div>

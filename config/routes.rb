@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :controle_syntheses_restitutions, only: :index
+    get "/ui_kit/mise_en_avant", to: "ui_kit#mise_en_avant"
     namespace :positionnement do
       resources :parties do
         resource :reponses, only: [:show], defaults: { format: 'xls' }

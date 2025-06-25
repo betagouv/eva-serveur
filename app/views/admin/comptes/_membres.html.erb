@@ -1,14 +1,21 @@
 <div id='bloc-membres'>
   <div class='liste-membres'>
     <% @comptes_en_attente.each do |compte| %>
-      <div class="fr-callout">
-        <h3 class="fr-callout__title"><%= compte.display_name %> a fait une demande d'accès</h3>    
-        <p class="fr-callout__text"><%= compte.email %></p>
-        <% if can?(:verifier, compte) %>
-          <%= link_to "Vérifier", "#", class: "bouton-actions", "data-fr-opened": "false", "aria-controls": "fr-modal-#{compte.id}" %>
-          <%= render "admin/comptes/modal_verification", compte: compte %>
-        <% end %>
-      </div>
+      <% if can?(:verifier, compte) %>
+        <% bouton_label = "Vérifier" %>
+        <% bouton_attributes = { "data-fr-opened": "false", "aria-controls": "fr-modal-#{compte.id}" } %>
+      <% end %>
+
+      <%= render MiseEnAvantComponent.new(
+            titre: "#{compte.display_name} a fait une demande d'accès",
+            description: compte.email,
+            bouton_label: bouton_label,
+            bouton_attributes: bouton_attributes
+          ) do %>
+        
+        <%= render "admin/comptes/modal_verification", compte: compte %>
+
+      <% end %>
     <% end %>
   </div>
 </div>

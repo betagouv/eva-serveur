@@ -192,10 +192,6 @@ ActiveAdmin.register Compte do
       roles.map { |role| [ Compte.human_enum_name(:role, role), role ] }
     end
 
-    def collection_roles_pour_verification
-      current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_POUR_VERIFICATION
-    end
-
     def trouve_comptes
       comptes = Compte.de_la_structure(current_compte.structure).order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente

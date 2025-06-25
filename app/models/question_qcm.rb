@@ -13,7 +13,8 @@ class QuestionQcm < Question
   accepts_nested_attributes_for :choix, allow_destroy: true
 
   def restitue_reponse(nom_technique_reponse)
-    choix.find { |c| c.nom_technique == nom_technique_reponse }.intitule
+    reponse = choix.find { |c| c.nom_technique == nom_technique_reponse }
+    reponse.present? ? reponse.intitule : nom_technique_reponse
   end
 
   def intitule_reponse(reponse)

@@ -34,26 +34,6 @@ role: :conseiller
           expect(page).to have_content message
         end
       end
-
-      describe 'Mes collègues' do
-        context 'quand le compte est refusé' do
-          let(:statut_validation) { :refusee }
-
-          it 'autorise un compte' do
-            click_on 'Autoriser'
-            expect(compte.reload.validation_acceptee?).to be true
-          end
-        end
-
-        context 'quand le compte est accepté' do
-          let(:statut_validation) { :acceptee }
-
-          it 'refuse un compte' do
-            click_on 'Refuser'
-            expect(compte.reload.validation_refusee?).to be true
-          end
-        end
-      end
     end
 
     describe 'create' do

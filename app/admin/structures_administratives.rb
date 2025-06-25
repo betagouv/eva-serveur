@@ -28,13 +28,7 @@ ActiveAdmin.register StructureAdministrative do
   form partial: "form"
 
   controller do
-    before_action :trouve_comptes, :trouve_campagnes, :trouve_structures_dependantes, only: :show
-
-    def trouve_comptes
-      comptes = Compte.de_la_structure(resource).order(:prenom, :nom)
-      @comptes_refuses = comptes.validation_refusee
-      @comptes_acceptes = comptes.validation_acceptee
-    end
+    before_action :trouve_campagnes, :trouve_structures_dependantes, only: :show
 
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)

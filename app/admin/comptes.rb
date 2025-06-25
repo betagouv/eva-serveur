@@ -199,8 +199,6 @@ ActiveAdmin.register Compte do
     def trouve_comptes
       comptes = Compte.de_la_structure(current_compte.structure).order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente
-      # @comptes_refuses = comptes.validation_refusee
-      # @comptes_acceptes = comptes.validation_acceptee
     end
   end
 

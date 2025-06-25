@@ -15,26 +15,4 @@
       <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
     </div>
   <% end %>
-
-  <div class='liste-membres'>
-    <%= render "admin/structures/cards_validation", comptes: @comptes_acceptes, title: "Autorisés" do |compte| %>
-      <%= 
-        if can?(:refuser, compte)
-          link_to 'Refuser', refuser_admin_compte_path(compte),
-                            method: :patch,
-                            class: 'action'
-        end
-      %>
-    <% end %>
-  </div>
-
-  <div class='liste-membres'>
-    <%= render "admin/structures/cards_validation", comptes: @comptes_refuses, title: "Refusés" do |compte| %>
-      <% if can?(:autoriser, compte) %>
-        <%= link_to "Autoriser", autoriser_admin_compte_path(compte),
-                                  method: :patch,
-                                  class: "action" %>
-      <% end %>
-    <% end %>
-  </div>
 </div>

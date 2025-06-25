@@ -86,13 +86,7 @@ ActiveAdmin.register StructureLocale do
   form partial: "form"
 
   controller do
-    before_action :trouve_comptes, :trouve_campagnes, only: :show
-
-    def trouve_comptes
-      comptes = Compte.where(structure: resource).order(:prenom, :nom)
-      @comptes_refuses = comptes.validation_refusee
-      @comptes_acceptes = comptes.validation_acceptee
-    end
+    before_action :trouve_campagnes, only: :show
 
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)

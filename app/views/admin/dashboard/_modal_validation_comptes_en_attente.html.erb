@@ -7,10 +7,7 @@
         </div>
         <div class='actions'>
           <a class="bouton-secondaire petit-bouton" href="#" data-dismiss="modal"><%= t(".annuler") %></a>
-          <% structure = current_compte.structure %>
-          <%= link_to "Voir les demandes",
-                      send("admin_#{structure.type.underscore}_path", structure, anchor: "bloc-membres"),
-                      class: "bouton petit-bouton" %>
+          <%= link_to "Voir les demandes", admin_comptes_path, class: "bouton petit-bouton" %>
         </div>
       </div>
     </div>

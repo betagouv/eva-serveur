@@ -69,6 +69,21 @@ describe Question, type: :model do
         expect(question.reload.restitue_reponse('choix_1')).to eq 'intitule'
       end
     end
+
+    context "quand la reponse est un des choix d'un qcm inconnu" do
+      let(:choix1) do
+        create :choix,
+               :bon,
+               nom_technique: 'choix_1',
+               intitule: 'intitule'
+      end
+      let(:question) { create :question_qcm, choix: [ choix1 ] }
+
+      it "retourne l'intitulé de la réponse" do
+        expect(question.reload.restitue_reponse('nom_technique_inconnu'))
+          .to eq 'nom_technique_inconnu'
+      end
+    end
   end
 
   describe '#json_audio_fields' do

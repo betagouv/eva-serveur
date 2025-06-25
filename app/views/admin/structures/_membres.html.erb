@@ -1,8 +1,7 @@
 <% url = new_compte_registration_url(structure_id: resource.id) %>
-
+<% if current_compte.au_moins_admin? %>
 <div id='bloc-membres'>
   <h3><%= t(".titre") %></h3>
-  <% if current_compte.au_moins_admin? %>
     <div class="panel panel-invitation">
       <div class="container-instructions">
         <div class="panel-invitation-message">
@@ -14,5 +13,5 @@
       </div>
       <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

@@ -115,7 +115,14 @@ button.fr-link--close.fr-link:hover {
 }
 
 .fr-btn {
+  @include bouton-primaire();
+  @include grand-bouton();
+  
   &:disabled {
     @include bouton-disabled;
   }
+}
+
+a.fr-btn {
+  color: $eva_light !important;
 }

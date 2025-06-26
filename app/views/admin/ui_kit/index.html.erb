@@ -11,22 +11,17 @@
       { name: 'Badge', path: 'badge', description: 'Composant d\'affichage de badge' },
       { name: 'Barre Segmentée', path: 'barre_segmentee', description: 'Barre de progression segmentée' },
       { name: 'Bouton', path: 'bouton', description: 'Composant bouton personnalisable' },
-      { name: 'Bouton Ajouter Structure', path: 'bouton_ajouter_une_structure', description: 'Bouton pour ajouter une structure' },
       { name: 'Bouton Copier', path: 'bouton_copier', description: 'Bouton pour copier du contenu' },
       { name: 'Carte', path: 'carte', description: 'Composant carte générique' },
-      { name: 'Carte Mise en Action', path: 'carte_mise_en_action', description: 'Carte pour les mises en action' },
       { name: 'Carte Partage Code', path: 'carte_partage_code', description: 'Carte pour partager des codes' },
       { name: 'Code', path: 'code', description: 'Affichage de code' },
       { name: 'Ellipse', path: 'ellipse', description: 'Composant ellipse' },
       { name: 'Lien', path: 'lien', description: 'Composant lien personnalisé' },
       { name: 'Mise en Avant', path: 'mise_en_avant', description: 'Composant de mise en avant' },
-      { name: 'Nom Anonymisable', path: 'nom_anonymisable', description: 'Affichage de nom avec anonymisation' },
       { name: 'Pastille', path: 'pastille', description: 'Composant pastille' },
-      { name: 'QCM', path: 'qcm', description: 'Composant QCM' },
       { name: 'Recherche Structure', path: 'recherche_structure', description: 'Composant de recherche de structure' },
       { name: 'Référentiel ANLCI', path: 'referentiel_anlci', description: 'Composant référentiel ANLCI' },
       { name: 'Rejoindre Structure', path: 'rejoindre_structure', description: 'Composant pour rejoindre une structure' },
-      { name: 'Sous Compétence', path: 'sous_competence', description: 'Composant sous compétence' },
       { name: 'Statut Campagne', path: 'statut_campagne', description: 'Composant statut de campagne' },
       { name: 'Tag', path: 'tag', description: 'Composant tag' },
       { name: 'Toggle', path: 'toggle', description: 'Composant toggle/switch' }
@@ -38,7 +33,7 @@
           <div class="fr-card__body">
             <div class="fr-card__content">
               <h3 class="fr-card__title">
-                <%= link_to component[:name], "/admin/ui_kit/#{component[:path]}", class: 'fr-link' %>
+                <%= link_to component[:name], "/admin/ui_kit/#{component[:path]}", class: "fr-link" %>
               </h3>
               <p class="fr-card__desc">
                 <%= component[:description] %>

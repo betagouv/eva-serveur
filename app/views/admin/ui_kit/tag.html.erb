@@ -9,12 +9,11 @@
   <%= render Tag.new("Important") %>
 
   <h2>Tag supprimable</h2>
-  <%= render Tag.new("À supprimer", supprimable: true) %>
+  <%= render Tag.new("À supprimer", supprimable: true, url: "#") %>
 
   <h2>Tag avec classes personnalisées</h2>
   <%= render Tag.new(
         "Personnalisé",
-        classes: "fr-tag--success"
       ) %>
 
   <h2>Tag avec lien</h2>
@@ -25,15 +24,15 @@
 
   <h2>Différents types de tags</h2>
   <div class="fr-mb-2w">
-    <%= render Tag.new("Succès", classes: "fr-tag--success") %>
+    <%= render Tag.new("Assistance", classes: "tag-categorie assistance") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render Tag.new("Erreur", classes: "fr-tag--error") %>
+    <%= render Tag.new("Blog", classes: "tag-categorie blog") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render Tag.new("Info", classes: "fr-tag--info") %>
+    <%= render Tag.new("Evolution", classes: "tag-categorie evolution") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render Tag.new("Warning", classes: "fr-tag--warning") %>
+    <%= render Tag.new("Oui", classes: "tag-categorie yes") %>
   </div>
 </div> 

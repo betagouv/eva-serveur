@@ -3,7 +3,8 @@
 div class: "row" do
   div class: "offset-1 col-6 campagne--page" do
     div do
-      render(StatutCampagneComponent.new(resource))
+      render(StatutCampagneComponent.new(campagne_active: resource.active,
+campagne_privee: resource.privee))
       h2 resource.display_name, class: "campagne--titre"
     end
     div class: "panel font-italic" do

@@ -6,5 +6,14 @@
   <h1>Démo StatutCampagneComponent</h1>
 
   <h2>Composant statut de campagne</h2>
-  <%= render StatutCampagneComponent.new %>
+  <%= render StatutCampagneComponent.new(campagne_active: true, campagne_privee: false) %>
+
+  <h2>Composant statut de campagne privée</h2>
+  <%= render StatutCampagneComponent.new(campagne_active: true, campagne_privee: true) %>
+
+  <h2>Composant statut de campagne inactive</h2>
+  <%= render StatutCampagneComponent.new(campagne_active: false, campagne_privee: false) %>
+
+  <h2>Composant statut de campagne privée inactive</h2>
+  <%= render StatutCampagneComponent.new(campagne_active: false, campagne_privee: true) %>
 </div> 

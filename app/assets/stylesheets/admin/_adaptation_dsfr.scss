@@ -115,12 +115,17 @@ button.fr-link--close.fr-link:hover {
 }
 
 .fr-btn {
-  @include bouton-primaire();
   @include grand-bouton();
+  @include bouton-primaire();
+  &.bouton-secondaire {
+    @include bouton-secondaire();
+  }
   
   &:disabled {
     @include bouton-disabled;
   }
+
+
 }
 
 a.fr-btn {

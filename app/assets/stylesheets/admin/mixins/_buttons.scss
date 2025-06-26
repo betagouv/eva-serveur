@@ -68,6 +68,10 @@
   box-shadow: none;
   &:not(.disabled):hover {
     filter: brightness(96%);
+    text-shadow: none;
+    box-shadow: none;
+    background-image: none;
+    background-color: #FFFFFF;
   }
 }
 

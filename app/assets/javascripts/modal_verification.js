@@ -1,14 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const btnValider = document.getElementById("valider-modal-verification");
-  if (!btnValider) return;
+  document.querySelectorAll(".fr-modal").forEach(modal => {
+    const btnValider = modal.querySelector(".fr-btn[name='decision'][value='Autoriser']");
+    if (!btnValider) return;
 
-  const radios = [...document.querySelectorAll('input[type="radio"][name="role"]')];
+    const radios = modal.querySelectorAll('input[type="radio"][name="role"]');
 
-  const toggleButton = () => {
-    btnValider.disabled = !radios.some(radio => radio.checked);
-  };
+    const toggleButton = () => {
+      const isChecked = [...radios].some(radio => radio.checked);
+      btnValider.disabled = !isChecked;
+    };
 
-  radios.forEach(radio => radio.addEventListener("change", toggleButton));
+    radios.forEach(radio => {
+      radio.addEventListener("change", toggleButton);
+    });
 
-  toggleButton();
+    toggleButton();
+  });
 });

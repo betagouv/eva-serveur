@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo EllipseComponent</h1>
+
+  <h2>Ellipse avec différents statuts</h2>
+  <div class="fr-mb-2w">
+    <%= render EllipseComponent.new("actif") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render EllipseComponent.new("inactif") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render EllipseComponent.new("en_attente") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render EllipseComponent.new("termine") %>
+  </div>
+</div> 

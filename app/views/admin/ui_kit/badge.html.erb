@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo BadgeComponent</h1>
+
+  <h2>Avec icône</h2>
+  <%= render BadgeComponent.new(
+        contenu: "Nouveau",
+        html_class: "fr-badge--success",
+        display_icon: true
+      ) %>
+
+  <h2>Sans icône</h2>
+  <%= render BadgeComponent.new(
+        contenu: "Terminé",
+        html_class: "fr-badge--info",
+        display_icon: false
+      ) %>
+
+  <h2>Différents types</h2>
+  <div class="fr-mb-2w">
+    <%= render BadgeComponent.new(contenu: "Succès", html_class: "fr-badge--success", display_icon: true) %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render BadgeComponent.new(contenu: "Erreur", html_class: "fr-badge--error", display_icon: true) %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render BadgeComponent.new(contenu: "Info", html_class: "fr-badge--info", display_icon: true) %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render BadgeComponent.new(contenu: "Warning", html_class: "fr-badge--warning", display_icon: true) %>
+  </div>
+</div> 

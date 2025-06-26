@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo NomAnonymisableComponent</h1>
+
+  <p class="fr-text--lead">
+    Ce composant affiche un nom avec possibilité d'anonymisation selon la ressource fournie.
+  </p>
+
+  <h2>Exemple d'utilisation</h2>
+  <div class="fr-mb-2w">
+    <%= render NomAnonymisableComponent.new("Jean Dupont") %>
+  </div>
+  
+  <div class="fr-mb-2w">
+    <%= render NomAnonymisableComponent.new("Marie Martin") %>
+  </div>
+</div> 

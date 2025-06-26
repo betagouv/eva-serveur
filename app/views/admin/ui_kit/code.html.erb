@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo CodeComponent</h1>
+
+  <h2>Code simple</h2>
+  <%= render CodeComponent.new("ABC123") %>
+
+  <h2>Code avec chiffres</h2>
+  <%= render CodeComponent.new("123456") %>
+
+  <h2>Code avec lettres</h2>
+  <%= render CodeComponent.new("ABCDEF") %>
+
+  <h2>Code mixte</h2>
+  <%= render CodeComponent.new("A1B2C3") %>
+</div> 

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo BoutonComponent</h1>
+
+  <h2>Bouton primaire</h2>
+  <%= render BoutonComponent.new("Bouton Primaire", "#", type: :primary) %>
+
+  <h2>Bouton secondaire</h2>
+  <%= render BoutonComponent.new("Bouton Secondaire", "#", type: :secondary) %>
+
+  <h2>Bouton désactivé</h2>
+  <%= render BoutonComponent.new("Bouton Désactivé", "#", type: :desactive) %>
+
+  <h2>Avec paramètres supplémentaires</h2>
+  <%= render BoutonComponent.new(
+        "Bouton avec ID",
+        "#",
+        type: :primary,
+        id: "mon-bouton",
+        data: { test: "value" }
+      ) %>
+</div> 

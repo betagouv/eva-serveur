@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo TagComponent</h1>
+
+  <h2>Tag simple</h2>
+  <%= render Tag.new("Important") %>
+
+  <h2>Tag supprimable</h2>
+  <%= render Tag.new("À supprimer", supprimable: true) %>
+
+  <h2>Tag avec classes personnalisées</h2>
+  <%= render Tag.new(
+        "Personnalisé",
+        classes: "fr-tag--success"
+      ) %>
+
+  <h2>Tag avec lien</h2>
+  <%= render Tag.new(
+        "Cliquable",
+        url: "#"
+      ) %>
+
+  <h2>Différents types de tags</h2>
+  <div class="fr-mb-2w">
+    <%= render Tag.new("Succès", classes: "fr-tag--success") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render Tag.new("Erreur", classes: "fr-tag--error") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render Tag.new("Info", classes: "fr-tag--info") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render Tag.new("Warning", classes: "fr-tag--warning") %>
+  </div>
+</div> 

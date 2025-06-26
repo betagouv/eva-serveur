@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   authenticate :compte, ->(o) { o.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+  
+  mount ViewComponent::Storybook::Engine, at: "/storybook" if Rails.env.development?
 
   root to: redirect('/admin/dashboard')
 
@@ -32,7 +34,32 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :controle_syntheses_restitutions, only: :index
-    get "/ui_kit/mise_en_avant", to: "ui_kit#mise_en_avant"
+    
+    # UI Kit routes
+    get '/ui_kit', to: 'ui_kit#index'
+    get '/ui_kit/mise_en_avant', to: 'ui_kit#mise_en_avant'
+    get '/ui_kit/badge', to: 'ui_kit#badge'
+    get '/ui_kit/bouton', to: 'ui_kit#bouton'
+    get '/ui_kit/bouton_ajouter_une_structure', to: 'ui_kit#bouton_ajouter_une_structure'
+    get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
+    get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
+    get '/ui_kit/carte', to: 'ui_kit#carte'
+    get '/ui_kit/carte_mise_en_action', to: 'ui_kit#carte_mise_en_action'
+    get '/ui_kit/carte_partage_code', to: 'ui_kit#carte_partage_code'
+    get '/ui_kit/code', to: 'ui_kit#code'
+    get '/ui_kit/ellipse', to: 'ui_kit#ellipse'
+    get '/ui_kit/lien', to: 'ui_kit#lien'
+    get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
+    get '/ui_kit/pastille', to: 'ui_kit#pastille'
+    get '/ui_kit/qcm', to: 'ui_kit#qcm'
+    get '/ui_kit/recherche_structure', to: 'ui_kit#recherche_structure'
+    get '/ui_kit/referentiel_anlci', to: 'ui_kit#referentiel_anlci'
+    get '/ui_kit/rejoindre_structure', to: 'ui_kit#rejoindre_structure'
+    get '/ui_kit/sous_competence', to: 'ui_kit#sous_competence'
+    get '/ui_kit/statut_campagne', to: 'ui_kit#statut_campagne'
+    get '/ui_kit/tag', to: 'ui_kit#tag'
+    get '/ui_kit/toggle', to: 'ui_kit#toggle'
+    
     namespace :positionnement do
       resources :parties do
         resource :reponses, only: [:show], defaults: { format: 'xls' }

@@ -13,8 +13,8 @@
           <% collection_roles.each do |libelle, role| %>
             <div class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-group--sm">
-                <%= f.radio_button :role, role, id: role %>
-                <%= f.label :role, libelle, class: "fr-label", for: role %>
+                <%= f.radio_button :role, role, id: "role_#{role}_#{compte.id}" %>
+                <%= f.label :role, libelle, class: "fr-label", for: "role_#{role}_#{compte.id}" %>
               </div>
             </div>
           <% end %>

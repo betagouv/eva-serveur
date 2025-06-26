@@ -11,27 +11,27 @@
   <h2>Pastille avec couleur</h2>
   <%= render PastilleComponent.new(
         etiquette: "10",
-        couleur: "success"
+        couleur: "succes"
       ) %>
 
   <h2>Pastille avec tooltip</h2>
   <%= render PastilleComponent.new(
         etiquette: "3",
         tooltip_content: "3 nouvelles notifications",
-        couleur: "warning"
+        couleur: "alerte"
       ) %>
 
   <h2>Différentes couleurs</h2>
   <div class="fr-mb-2w">
-    <%= render PastilleComponent.new(etiquette: "1", couleur: "success") %>
+    <%= render PastilleComponent.new(etiquette: "1", couleur: "alerte", tooltip_content: "1 nouvelle notification") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render PastilleComponent.new(etiquette: "2", couleur: "error") %>
+    <%= render PastilleComponent.new(etiquette: "2", couleur: "active", tooltip_content: "2 nouvelles notifications") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render PastilleComponent.new(etiquette: "3", couleur: "info") %>
+    <%= render PastilleComponent.new(etiquette: "3", couleur: "desactive", tooltip_content: "3 nouvelles notifications") %>
   </div>
   <div class="fr-mb-2w">
-    <%= render PastilleComponent.new(etiquette: "4", couleur: "warning") %>
+    <%= render PastilleComponent.new(etiquette: "4", couleur: "succes", tooltip_content: "4 nouvelles notifications") %>
   </div>
 </div> 

@@ -65,7 +65,8 @@ notice: I18n.t("admin.campagnes.duplique.notice")
           div parcours_type_libelle(campagne), class: "text-xs"
         end
         div do
-          render(StatutCampagneComponent.new(campagne))
+          render(StatutCampagneComponent.new(campagne_active: campagne.active,
+campagne_privee: campagne.privee))
         end
       end
     end

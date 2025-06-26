@@ -18,19 +18,12 @@
           label: "Recevoir les notifications"
         ) %>
 
-    <h2>Toggle avec classes personnalisées</h2>
+    <h2>Toggle avec classes personnalisées et label à gauche</h2>
     <%= render ToggleComponent.new(
           f: f,
-          method: :newsletter,
-          label: "S'abonner à la newsletter",
-          classes: "fr-toggle--border-bottom"
-        ) %>
-
-    <h2>Toggle désactivé</h2>
-    <%= render ToggleComponent.new(
-          f: f,
-          method: :maintenance,
-          label: "Mode maintenance"
+          method: :active,
+          label: "Campagne active",
+          classes: "fr-toggle--border-bottom fr-toggle--label-left"
         ) %>
   <% end %>
 </div> 

@@ -634,8 +634,6 @@ GEM
       activesupport (>= 5.2.0, < 8.1)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
-    view_component_storybook (0.12.1)
-      view_component (>= 2.54)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -747,7 +745,6 @@ DEPENDENCIES
   typhoeus
   tzinfo-data
   view_component
-  view_component_storybook
   web-console
   webmock
 

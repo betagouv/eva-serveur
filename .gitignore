@@ -42,9 +42,6 @@ erd.dot
 # fichier de Redis
 dump.rdb
 
-# Ignore storybook
-**/*.stories.json
-
 # Ignore js translations
 /public/javascripts
 /public/pro/dsfr

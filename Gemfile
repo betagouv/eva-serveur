@@ -61,7 +61,6 @@ gem "sprockets-rails"
 gem "truemail"
 gem "typhoeus"
 gem "view_component"
-gem "view_component_storybook"
 gem "web-console", group: :development
 
 # PDF

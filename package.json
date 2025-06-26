@@ -1,9 +1,5 @@
 {
   "devDependencies": {
-    "@storybook/addon-controls": "^8.6.12",
-    "@storybook/server": "^7.6.11",
-    "@storybook/server-webpack5": "^8.6.12",
-    "storybook": "^8.6.12",
     "vscode-langservers-extracted": "^4.10.0",
     "eslint": "^8.8.0",
     "eslint-plugin-import": "^2.25.4",
@@ -11,7 +7,6 @@
     "eslint-plugin-promise": "^6.0.0"
   },
   "scripts": {
-    "storybook": "storybook dev",
     "nettoie-dsfr": "rm -rf public/pro/dsfr",
     "cree-dsfr-dossiers": "mkdir -p public/pro/dsfr/fonts && mkdir -p public/pro/dsfr/icons",
     "copie-dsfr-css": "cp node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/pro/dsfr/ && cp node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/pro/dsfr/",

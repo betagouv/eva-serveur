@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo BarreSegmenteeComponent</h1>
+
+  <h2>Barre avec succès</h2>
+  <%= render BarreSegmenteeComponent.new(
+        nombre_questions_reussies: 8,
+        nombre_questions_echecs: 2,
+        nombre_questions_non_passees: 0,
+        pourcentage_reussite: 80
+      ) %>
+
+  <h2>Barre avec échecs</h2>
+  <%= render BarreSegmenteeComponent.new(
+        nombre_questions_reussies: 3,
+        nombre_questions_echecs: 7,
+        nombre_questions_non_passees: 0,
+        pourcentage_reussite: 30
+      ) %>
+
+  <h2>Barre avec questions non passées</h2>
+  <%= render BarreSegmenteeComponent.new(
+        nombre_questions_reussies: 5,
+        nombre_questions_echecs: 2,
+        nombre_questions_non_passees: 3,
+        pourcentage_reussite: 50
+      ) %>
+
+  <h2>Barre vide</h2>
+  <%= render BarreSegmenteeComponent.new(
+        nombre_questions_reussies: 0,
+        nombre_questions_echecs: 0,
+        nombre_questions_non_passees: 0,
+        pourcentage_reussite: 0
+      ) %>
+</div> 

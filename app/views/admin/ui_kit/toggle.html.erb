@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo ToggleComponent</h1>
+
+  <p class="fr-text--lead">
+    Le composant Toggle nécessite un formulaire pour fonctionner correctement.
+    Voici un exemple avec un formulaire simple.
+  </p>
+
+  <%= form_with url: "#", local: true do |f| %>
+    <h2>Toggle simple</h2>
+    <%= render ToggleComponent.new(
+          f: f,
+          method: :notifications,
+          label: "Recevoir les notifications"
+        ) %>
+
+    <h2>Toggle avec classes personnalisées</h2>
+    <%= render ToggleComponent.new(
+          f: f,
+          method: :newsletter,
+          label: "S'abonner à la newsletter",
+          classes: "fr-toggle--border-bottom"
+        ) %>
+
+    <h2>Toggle désactivé</h2>
+    <%= render ToggleComponent.new(
+          f: f,
+          method: :maintenance,
+          label: "Mode maintenance"
+        ) %>
+  <% end %>
+</div> 

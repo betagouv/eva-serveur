@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo PastilleComponent</h1>
+
+  <h2>Pastille simple</h2>
+  <%= render PastilleComponent.new(etiquette: "5") %>
+
+  <h2>Pastille avec couleur</h2>
+  <%= render PastilleComponent.new(
+        etiquette: "10",
+        couleur: "success"
+      ) %>
+
+  <h2>Pastille avec tooltip</h2>
+  <%= render PastilleComponent.new(
+        etiquette: "3",
+        tooltip_content: "3 nouvelles notifications",
+        couleur: "warning"
+      ) %>
+
+  <h2>Différentes couleurs</h2>
+  <div class="fr-mb-2w">
+    <%= render PastilleComponent.new(etiquette: "1", couleur: "success") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render PastilleComponent.new(etiquette: "2", couleur: "error") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render PastilleComponent.new(etiquette: "3", couleur: "info") %>
+  </div>
+  <div class="fr-mb-2w">
+    <%= render PastilleComponent.new(etiquette: "4", couleur: "warning") %>
+  </div>
+</div> 

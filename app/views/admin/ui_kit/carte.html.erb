@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo CarteComponent</h1>
+
+  <h2>Carte simple</h2>
+  <%= render CarteComponent.new("#") %>
+
+  <h2>Carte avec classes personnalisées</h2>
+  <%= render CarteComponent.new(
+        "#",
+        classes: "fr-card--horizontal fr-card--grey"
+      ) %>
+
+  <h2>Exemple d'utilisation dans une grille</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12 fr-col-md-6">
+      <%= render CarteComponent.new("#") %>
+    </div>
+    <div class="fr-col-12 fr-col-md-6">
+      <%= render CarteComponent.new("#") %>
+    </div>
+  </div>
+</div> 

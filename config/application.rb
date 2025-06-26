@@ -14,7 +14,6 @@ require "jwt"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require 'view_component'
-require 'view_component/storybook'
 require 'dsfr/components'
 require 'dsfr/assets'
 require './lib/custom_exceptions_app_wrapper'
@@ -71,8 +70,6 @@ module EvaServeur
     config.i18n.default_locale = :fr
 
     config.middleware.use I18n::JS::Middleware
-
-    config.view_component_storybook.stories_path = Rails.root.join("spec/components/stories")
 
     ::ActionView::Base.field_error_proc = Formtastic::Helpers::FormHelper.formtastic_field_error_proc
 

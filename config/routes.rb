@@ -24,8 +24,6 @@ Rails.application.routes.draw do
   authenticate :compte, ->(o) { o.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
-  
-  mount ViewComponent::Storybook::Engine, at: "/storybook" if Rails.env.development?
 
   root to: redirect('/admin/dashboard')
 

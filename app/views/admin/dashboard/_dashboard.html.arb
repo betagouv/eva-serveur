@@ -8,7 +8,7 @@ end
 
 if current_compte.validation_refusee?
   render "validation_refusee"
-elsif prise_en_main.en_cours? && !current_compte.externe?
+elsif prise_en_main.en_cours?
   section class: "mb-5" do
     div class: "row" do
       div class: "col-6 offset-1" do
@@ -49,7 +49,7 @@ if evaluations.present?
   end
 end
 
-if actualites.present? && (prise_en_main.terminee? || current_compte.externe?)
+if actualites.present? && (prise_en_main.terminee?)
   section class: "section-actualites" do
     columns do
       render "bloc_actualites", actualites: actualites
@@ -57,7 +57,7 @@ if actualites.present? && (prise_en_main.terminee? || current_compte.externe?)
   end
 end
 
-if campagnes.present? && !current_compte.externe?
+if campagnes.present?
   columns do
     render "campagnes", campagnes: campagnes
   end

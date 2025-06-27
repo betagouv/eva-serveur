@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_23_092912) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_27_085157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -63,17 +63,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_23_092912) do
     t.string "titre"
     t.text "contenu"
     t.integer "categorie"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "affectations_comptes_externes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "evaluation_id", null: false
-    t.uuid "compte_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["compte_id"], name: "index_affectations_intervenants_externes_on_compte_id"
-    t.index ["evaluation_id"], name: "index_affectations_intervenants_externes_on_evaluation_id"
   end
 
   create_table "annonce_generales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

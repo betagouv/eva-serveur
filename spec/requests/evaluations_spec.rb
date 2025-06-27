@@ -281,29 +281,6 @@ describe 'Evaluation', type: :request do
       end
     end
 
-    describe "#ajouter_compte_externe" do
-      let(:compte_externe) { create :compte_externe, structure: mon_compte.structure }
-      let(:evaluation) { create :evaluation, campagne: ma_campagne }
-
-      it "peut ajouter un compte externe" do
-        expect do
-          post ajouter_compte_externe_admin_evaluation_path(evaluation),
-               params: { compte_externe_id: compte_externe.id }
-        end.to change { evaluation.reload.affectations_comptes_externes.count }
-           .from(0)
-           .to(1)
-
-        expect(evaluation.affectations_comptes_externes.last.compte).to eq(compte_externe)
-      end
-
-      it "ne fait rien si le compte externe n'existe pas" do
-        expect do
-          post ajouter_responsable_suivi_admin_evaluation_path(evaluation),
-               params: { compte_externe_id: "identifiant-inconnu" }
-        end.not_to(change { evaluation.reload.affectations_comptes_externes.count })
-      end
-    end
-
     describe '#renseigner_qualification' do
       let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
       let(:remediation) { 'formation_metier' }

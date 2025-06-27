@@ -10,8 +10,7 @@ describe Compte do
         charge_mission_regionale: 'charge_mission_regionale',
         admin: 'admin',
         conseiller: 'conseiller',
-        compte_generique: 'compte_generique',
-        externe: 'externe'
+        compte_generique: 'compte_generique'
       )
       .backed_by_column_of_type(:string)
   end

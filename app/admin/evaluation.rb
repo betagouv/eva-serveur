@@ -82,20 +82,6 @@ ActiveAdmin.register Evaluation do
     render "recherche_responsable_suivi"
   end
 
-  sidebar :consultations_externes, only: :show,
-    if: proc { !resource.affectations_comptes_externes.empty? ||
-               can?(:ajouter_compte_externe, Evaluation) } do
-    resource.affectations_comptes_externes.each do |affectation|
-      url = supprimer_compte_externe_admin_evaluation_path(
-        resource,
-        compte_id: affectation.compte.id)
-      render(Tag.new(affectation.compte.display_name,
-                     supprimable: can?(:supprimer_compte_externe, Evaluation),
-                     url: url))
-    end
-    render "recherche_comptes_externes" if can?(:ajouter_compte_externe, Evaluation)
-  end
-
   sidebar :menu, class: "menu-sidebar", only: :show
 
   xls(i18n_scope: %i[active_admin xls evaluation]) do
@@ -138,21 +124,9 @@ ActiveAdmin.register Evaluation do
     redirect_to request.referer
   end
 
-  member_action :supprimer_compte_externe, method: :patch do
-    AffectationCompteExterne
-      .find_by(evaluation_id: resource.id, compte_id: params["compte_id"])&.destroy
-    redirect_to request.referer
-  end
-
   member_action :ajouter_responsable_suivi, method: :post do
     responsable = Compte.where(id: params["responsable_suivi_id"]).first
     resource.update(responsable_suivi: responsable) if responsable.present?
-    redirect_to admin_evaluation_path(resource)
-  end
-
-  member_action :ajouter_compte_externe, method: :post do
-    compte = Compte.where(id: params["compte_externe_id"]).first
-    resource.affectations_comptes_externes.create!(compte_id: compte.id) if compte.present?
     redirect_to admin_evaluation_path(resource)
   end
 

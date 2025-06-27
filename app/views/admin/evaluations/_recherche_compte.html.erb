@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
         source: (requete, reponse) => {
             const term = requete.toLowerCase();
             const comptes_filtres = comptes.filter(compte =>  {
-              return compte.nom.toLowerCase().includes(term) ||
-                compte.email.toLowerCase().includes(term)
+              return compte.nom.toLowerCase().includes(term.trim()) ||
+                compte.email.toLowerCase().includes(term.trim())
             });
             reponse(comptes_filtres);
         },

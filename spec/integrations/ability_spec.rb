@@ -163,8 +163,6 @@ describe Ability do
     it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
     it { is_expected.not_to be_able_to(:renseigner_qualification, Evaluation) }
     it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Evaluation) }
-    it { is_expected.not_to be_able_to(:ajouter_compte_externe, Evaluation) }
-    it { is_expected.not_to be_able_to(:supprimer_compte_externe, Evaluation) }
   end
 
   context 'Compte admin' do
@@ -174,7 +172,6 @@ describe Ability do
 
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
-      let(:iternvenant_externe) { create :compte, role: :externe, structure: compte.structure }
       let(:pas_collegue) { compte_conseiller }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
@@ -187,7 +184,6 @@ describe Ability do
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
       it { is_expected.to be_able_to(:verifier, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, mon_collegue) }
-      it { is_expected.to be_able_to(:destroy, iternvenant_externe) }
       it { is_expected.not_to be_able_to(:destroy, pas_collegue) }
       it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
@@ -209,7 +205,6 @@ describe Ability do
       it { is_expected.to be_able_to(:update, evaluation) }
       it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
       it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation) }
-      it { is_expected.to be_able_to(:ajouter_compte_externe, evaluation) }
       it { is_expected.to be_able_to(:renseigner_qualification, evaluation) }
     end
   end
@@ -235,43 +230,6 @@ describe Ability do
     }
 
     it { is_expected.to be_able_to(:create, StructureLocale.new) }
-  end
-
-  context 'Compte externe' do
-    let(:compte) { create :compte_externe, structure: structure_avec_admin }
-
-    let!(:structure) { create :structure }
-    let!(:compte1) { create :compte, structure: structure }
-    let!(:compte2) { create :compte, structure: structure }
-    let!(:campagne) { create :campagne, compte: compte1 }
-    let!(:campagne2) { create :campagne, compte: compte1 }
-    let!(:campagne3) { create :campagne, compte: compte2 }
-    let!(:evaluation) { create :evaluation, campagne: campagne }
-    let!(:evaluation2) { create :evaluation, campagne: campagne }
-    let!(:evaluation3) { create :evaluation, campagne: campagne2 }
-
-    before do
-      evaluation.affectations_comptes_externes.create!(compte_id: compte.id)
-    end
-
-    it { is_expected.not_to be_able_to(:create, Campagne) }
-    it { is_expected.not_to be_able_to(:update, Campagne) }
-    it { is_expected.not_to be_able_to(:duplique, Campagne) }
-    it { is_expected.not_to be_able_to(:read, Compte) }
-    it { is_expected.to be_able_to(:read, compte) }
-    it { is_expected.to be_able_to(:update, compte) }
-    it { is_expected.not_to be_able_to(:read, Structure.new) }
-    it { is_expected.not_to be_able_to(:read, compte.structure) }
-    it { is_expected.to be_able_to(:read, evaluation) }
-    it { is_expected.not_to be_able_to(:read, evaluation2) }
-    it { is_expected.not_to be_able_to(:read, evaluation3) }
-    it { is_expected.to be_able_to(:read, campagne) }
-    it { is_expected.not_to be_able_to(:read, campagne2) }
-    it { is_expected.not_to be_able_to(:read, campagne3) }
-    it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
-    it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Evaluation) }
-    it { is_expected.not_to be_able_to(:ajouter_compte_externe, Evaluation) }
-    it { is_expected.not_to be_able_to(:supprimer_compte_externe, Evaluation) }
   end
 
   context 'Compte conseiller' do

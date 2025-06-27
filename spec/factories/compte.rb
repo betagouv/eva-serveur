@@ -37,9 +37,6 @@ FactoryBot.define do
     factory :compte_conseiller do
       role { 'conseiller' }
     end
-    factory :compte_externe do
-      role { 'externe' }
-    end
     factory :compte_generique do
       role { 'compte_generique' }
     end

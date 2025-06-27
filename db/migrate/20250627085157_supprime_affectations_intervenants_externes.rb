@@ -1,0 +1,13 @@
+class SupprimeAffectationsIntervenantsExternes < ActiveRecord::Migration[7.2]
+  def up
+    drop_table :affectations_comptes_externes
+  end
+
+  def down
+    create_table :affectations_comptes_externes, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
+      t.uuid :evaluation_id, null: false, index: true
+      t.uuid :compte_id, null: false, index: true
+      t.timestamps
+    end
+  end
+end

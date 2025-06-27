@@ -16,7 +16,6 @@ class AbilityUtilisateur
     droit_structure compte
     droit_actualite compte
     droits_cmr if compte.charge_mission_regionale?
-    droits_intervenant_externe if compte.externe?
   end
 
   def can_update_active_pour_campagne?(campagne)
@@ -47,8 +46,7 @@ class AbilityUtilisateur
 
     if compte.validation_acceptee?
       can %i[read mise_en_action supprimer_responsable_suivi
-             ajouter_responsable_suivi renseigner_qualification
-             ajouter_compte_externe supprimer_compte_externe],
+             ajouter_responsable_suivi renseigner_qualification],
           Evaluation,
           campagne: campagnes_publique_de_la_structure(compte)
     end
@@ -107,23 +105,7 @@ class AbilityUtilisateur
     cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
-              supprimer_compte_externe ajouter_compte_externe
               renseigner_qualification],
-           Evaluation)
-  end
-
-  def droits_intervenant_externe
-    cannot(%i[create update duplique], Campagne)
-    cannot(:read, Compte)
-    can %i[read update], compte
-    cannot(:read, Structure)
-    cannot(:read, Evaluation)
-    cannot(:read, Campagne)
-    can(:read, Evaluation, { affectations_comptes_externes: { compte_id: compte.id } })
-    can(:read, Campagne,
-        { evaluations: { affectations_comptes_externes: { compte_id: compte.id } } })
-    cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
-              supprimer_compte_externe ajouter_compte_externe],
            Evaluation)
   end
 
@@ -138,7 +120,7 @@ class AbilityUtilisateur
     can :update, Compte, structure_id: compte.structure_id
     can :edit_role, Compte, structure_id: compte.structure_id
     cannot :edit_role, compte if compte.compte_generique?
-    can :destroy, Compte, structure_id: compte.structure_id, role: %i[conseiller externe]
+    can :destroy, Compte, structure_id: compte.structure_id, role: %i[conseiller]
   end
 
   def droits_validation_comptes(compte)

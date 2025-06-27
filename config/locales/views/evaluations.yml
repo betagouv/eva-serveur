@@ -51,9 +51,6 @@ fr:
         responsable_suivi:
           libelle_champ_recherche: rechercher un responsable de suivi
           action: Ajouter un responsable de suivi
-        comptes_externes:
-          libelle_champ_recherche: rechercher un compte
-          action: Ajouter un intervenant externe
       tri:
         <<: *commun
         reste_plateau: Reste plateau

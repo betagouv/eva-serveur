@@ -9,7 +9,7 @@ ActiveAdmin.setup do |config|
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  config.site_title_link = "/pro"
+  config.site_title_link = "/"
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -231,14 +231,14 @@ ActiveAdmin.setup do |config|
 
   #
   # To load a javascript file:
-  config.register_javascript '/pro/tarteaucitron/tarteaucitron.js'
+  config.register_javascript '/tarteaucitron/tarteaucitron.js'
   config.register_javascript 'tarteaucitron-init.js'
   config.register_javascript 'hotjar.js'
   config.register_javascript 'matomo.js'
   config.register_javascript 'crisp.js'
   config.register_javascript "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
   config.register_stylesheet "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-  config.register_javascript '/pro/dsfr/dsfr.nomodule.min.js'
+  config.register_javascript '/dsfr/dsfr.nomodule.min.js'
   config.register_stylesheet "utility/dsfr-utility.min.css", media: "all", "data-turbo-track": "reload"
 
   # == CSV options

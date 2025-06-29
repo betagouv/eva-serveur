@@ -44,7 +44,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
   };
   $.ajax({
     method: 'PUT',
-    url: `/pro/admin/evaluations/${evaluationId}/mise_en_action`,
+    url: `/admin/evaluations/${evaluationId}/mise_en_action`,
     data: data,
     dataType: "json",
     success: function () {
@@ -71,7 +71,7 @@ function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer })
 
   $.ajax({
     method: 'PATCH',
-    url: `/pro/admin/evaluations/${evaluationId}/renseigner_qualification`,
+    url: `/admin/evaluations/${evaluationId}/renseigner_qualification`,
     data: { effectuee, qualification },
     dataType: "json",
     success: function () {

@@ -44,7 +44,7 @@ dump.rdb
 
 # Ignore js translations
 /public/javascripts
-/public/pro/dsfr
+/public/dsfr
 
 node_modules/
 .DS_Store

@@ -7,12 +7,12 @@
     "eslint-plugin-promise": "^6.0.0"
   },
   "scripts": {
-    "nettoie-dsfr": "rm -rf public/pro/dsfr",
-    "cree-dsfr-dossiers": "mkdir -p public/pro/dsfr/fonts && mkdir -p public/pro/dsfr/icons",
-    "copie-dsfr-css": "cp node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/pro/dsfr/ && cp node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/pro/dsfr/",
-    "copie-dsfr-polices": "cp -r node_modules/@gouvfr/dsfr/dist/fonts/* public/pro/dsfr/fonts/",
-    "copie-dsfr-icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* public/pro/dsfr/icons/",
-    "copie-dsfr-js": "cp -r node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.nomodule.min.js public/pro/dsfr/dsfr.nomodule.min.js",
+    "nettoie-dsfr": "rm -rf public/dsfr",
+    "cree-dsfr-dossiers": "mkdir -p public/dsfr/fonts && mkdir -p public/dsfr/icons",
+    "copie-dsfr-css": "cp node_modules/@gouvfr/dsfr/dist/dsfr.min.css public/dsfr/ && cp node_modules/@gouvfr/dsfr/dist/utility/utility.min.css public/dsfr/",
+    "copie-dsfr-polices": "cp -r node_modules/@gouvfr/dsfr/dist/fonts/* public/dsfr/fonts/",
+    "copie-dsfr-icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* public/dsfr/icons/",
+    "copie-dsfr-js": "cp -r node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.nomodule.min.js public/dsfr/dsfr.nomodule.min.js",
     "copie-dsfr": "npm run nettoie-dsfr && npm run cree-dsfr-dossiers && npm run copie-dsfr-css && npm run copie-dsfr-polices && npm run copie-dsfr-icons && npm run copie-dsfr-js",
     "postinstall": "npm run copie-dsfr"
   },

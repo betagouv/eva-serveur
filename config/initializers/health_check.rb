@@ -2,7 +2,7 @@
 
 HealthCheck.setup do |config|
   # on souhaite avoir l'url /healthcheck/all.json
-  config.uri = '/pro/healthcheck'
+  config.uri = '/healthcheck'
 
   # Permet de voir l'erreur en activant la variable d'environnement
   # HEALTHCHECK_DEBUG=true

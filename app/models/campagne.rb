@@ -139,7 +139,7 @@ class Campagne < ApplicationRecord
   def campagne_existe_dans_structure?
     Campagne.joins(:compte)
             .where.not(id: id)
-            .where("LOWER(campagnes.libelle) = ?", libelle.strip.downcase)
+            .where("LOWER(campagnes.libelle) = ?", libelle&.strip&.downcase)
             .where(comptes: { structure_id: compte.structure_id })
             .exists?
   end

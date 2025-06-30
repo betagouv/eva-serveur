@@ -180,5 +180,12 @@ describe Campagne, type: :model do
       message_erreur = "est déjà utilisé par une autre campagne de votre structure"
       expect(nouvelle_campagne.errors[:libelle]).to include(message_erreur)
     end
+
+    it "retourne une erreur si le libellé est vide" do
+      nouvelle_campagne = described_class.new(compte: compte, libelle: nil)
+      nouvelle_campagne.valid?
+      message_erreur = "doit être rempli(e)"
+      expect(nouvelle_campagne.errors[:libelle]).to include(message_erreur)
+    end
   end
 end

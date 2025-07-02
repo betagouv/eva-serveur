@@ -37,6 +37,9 @@ function modifieReponseMiseEnAction(evaluationId) {
   $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--en-attente');
 }
 
+const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_path('ID_EVALUATION') %>";
+const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_path('ID_EVALUATION') %>";
+
 function enregistreReponseMiseEnAction(evaluationId, bouton) {
   const reponse = bouton.data('reponse');
   const data = {
@@ -44,7 +47,7 @@ function enregistreReponseMiseEnAction(evaluationId, bouton) {
   };
   $.ajax({
     method: 'PUT',
-    url: `/admin/evaluations/${evaluationId}/mise_en_action`,
+    url: chemin_mise_en_action.replace('ID_EVALUATION', evaluationId),
     data: data,
     dataType: "json",
     success: function () {
@@ -71,7 +74,7 @@ function enregistreQualificationMiseEnAction(evaluationId, $bouton, { ignorer })
 
   $.ajax({
     method: 'PATCH',
-    url: `/admin/evaluations/${evaluationId}/renseigner_qualification`,
+    url: chemin_renseigner_qualification.replace('ID_EVALUATION', evaluationId),
     data: { effectuee, qualification },
     dataType: "json",
     success: function () {

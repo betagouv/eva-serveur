@@ -1,5 +1,6 @@
 //= require active_admin/base
 //= require activeadmin_addons/all
+//= require actions_groupees
 //= require liens_evitement
 //= require vendor/select2_locale_fr
 //= require accessible-autocomplete.min
@@ -28,8 +29,6 @@ jQuery.datetimepicker.setLocale('fr');
 I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('input.batch-actions-resource-selection, input.toggle_all').forEach(checkbox => checkbox.checked = false);
-
   $('#validation-comptes-en-attente').modal();
   $('.modal--static').modal({
     backdrop: 'static',

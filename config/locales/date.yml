@@ -1,7 +1,7 @@
 fr:
   admin:
-    date_depuis: créé(e) depuis le
-    date_jusqua: jusqu'au
+    date_depuis: Créé(e) depuis le
+    date_jusqua: Créé(e) avant le
   date:
     formats: &formats
       sans_heure: "%d %b %Y"

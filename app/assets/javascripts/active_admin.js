@@ -2,7 +2,6 @@
 //= require activeadmin_addons/all
 //= require liens_evitement
 //= require vendor/select2_locale_fr
-//= require vendor/datepicker-fr
 //= require accessible-autocomplete.min
 //= require activeadmin_reorderable
 //= require jquery3

@@ -11,12 +11,9 @@ context.instance_eval do
   column :email
   column :telephone
   column :statut_validation do |compte|
-    Compte.human_enum_name(:statut_validation, compte.statut_validation)
+    traduis_acces(compte.statut_validation, compte.role)
   end
   if can? :manage, Compte
-    column :role do |compte|
-      Compte.human_enum_name(:role, compte.role)
-    end
     column :structure
     column :created_at
   end

@@ -1,0 +1,4 @@
+fr:
+  components:
+    bouton_menu_actions:
+      label: "ouvrir le menu des actions"

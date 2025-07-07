@@ -4,17 +4,16 @@
       <% if can?(:verifier, compte) %>
         <% bouton_label = "Vérifier" %>
         <% bouton_attributes = { "data-fr-opened": "false", "aria-controls": "fr-modal-#{compte.id}" } %>
-      <% end %>
 
-      <%= render MiseEnAvantComponent.new(
-            titre: "#{compte.display_name} a fait une demande d'accès",
-            description: compte.email,
-            bouton_label: bouton_label,
-            bouton_attributes: bouton_attributes
-          ) do %>
-        
-        <%= render "admin/comptes/modal_verification", compte: compte %>
-
+        <%= render MiseEnAvantComponent.new(
+              titre: "#{compte.display_name} a fait une demande d'accès",
+              description: compte.email,
+              bouton_label: bouton_label,
+              bouton_attributes: bouton_attributes
+            ) do %>
+          
+          <%= render "admin/comptes/modal_verification", compte: compte %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

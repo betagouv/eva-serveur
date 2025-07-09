@@ -29,10 +29,7 @@ ActiveAdmin.register Compte do
          if: proc { can? :manage, Compte }
   filter :role,
          as: :select,
-         collection: Compte.roles.map { |v, id|
-                       [ Compte.human_enum_name(:role, v), id ]
-                     },
-         if: proc { can? :manage, Compte }
+         collection: proc { collection_roles }
   filter :created_at
 
   filter :structure_type_structure_eq,
@@ -152,8 +149,7 @@ ActiveAdmin.register Compte do
 
   controller do
     before_action :trouve_comptes, only: :index
-    helper_method :peut_modifier_mot_de_passe?, :collection_roles,
-:collection_roles_pour_verification
+    helper_method :peut_modifier_mot_de_passe?, :collection_roles
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?

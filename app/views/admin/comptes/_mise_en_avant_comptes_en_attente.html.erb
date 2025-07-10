@@ -1,4 +1,4 @@
-<div id='bloc-membres'>
+<div id='bloc-mises-en-avant'>
   <div class='liste-membres'>
     <% @comptes_en_attente.each do |compte| %>
       <% if can?(:verifier, compte) %>
@@ -11,10 +11,20 @@
               bouton_label: bouton_label,
               bouton_attributes: bouton_attributes
             ) do %>
-          
+
           <%= render "admin/comptes/modal_verification", compte: compte %>
         <% end %>
       <% end %>
     <% end %>
   </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Le code suivant est un hack du code par defaut activeAdmin pour que les
+  // mises en avant soit dans la div `index_content`et non dans la div `index_as_table`.
+  // Pour permetre de rendre scrollable `ìndex_as_table`
+  const mise_en_avant = document.querySelector('#bloc-mises-en-avant')
+  mise_en_avant.parentNode.parentNode
+    .insertBefore(mise_en_avant, mise_en_avant.parentNode.parentNode.firstChild)
+});
+</script>

@@ -5,7 +5,5 @@
     <li><%= md t(".nom_prenom_compte", prenom_compte: compte.prenom, nom_compte: compte.nom) %></li>
 <% end %>
 </ul>
-<% structure = @compte_admin.structure %>
-<% lien = send("admin_#{structure.type.underscore}_url", structure, anchor: "bloc-membres") %>
-<%= md t(".contenu", lien_autorisation: lien,
+<%= md t(".contenu", lien_autorisation: admin_comptes_url,
                      email_support: Eva::EMAIL_SUPPORT) %>

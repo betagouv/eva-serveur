@@ -3,7 +3,10 @@ table.index_table {
   border-spacing: 0 0.5rem;
 
   .col-actions {
-    padding: 0;
+    text-align: right;
+    .bouton-menu {
+      display: inline-flex;
+    }
   }
 
   thead {

@@ -25,9 +25,6 @@ ActiveAdmin.register ParcoursType do
     column :type_de_programme
     column :created_at
     actions
-    column "", class: "bouton-action" do
-      render partial: "components/bouton_menu_actions"
-    end
   end
 
   show do

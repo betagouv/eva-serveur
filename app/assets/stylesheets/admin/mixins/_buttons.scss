@@ -134,16 +134,13 @@ $hauteur_menu_actions: 2rem;
     }
   }
 
-  &:hover, &:focus-within {
+  .table_actions:focus-within {
+    opacity: 1;
+    height: unset;
+    overflow: visible;
 
-    .table_actions {
-      opacity: 1;
-      height: unset;
-      overflow: visible;
-
-      a:focus {
-        z-index: 2;
-      }
+    a:focus {
+      z-index: 2;
     }
   }
 }

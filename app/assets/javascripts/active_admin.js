@@ -13,7 +13,7 @@
 //= require filtres_dates
 //= require form_toggle_submit
 //= require menu_mobile
-//= require bouton_menu
+//= require bouton_menu_actions
 //= require cgu
 //= require clipboard
 //= require evaluation

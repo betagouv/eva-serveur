@@ -18,7 +18,4 @@ context.instance_eval do
     column :created_at
   end
   actions
-  column "", class: "bouton-action" do
-    render partial: "components/bouton_menu_actions"
-  end
 end

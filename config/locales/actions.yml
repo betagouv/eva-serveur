@@ -1,4 +1,7 @@
 fr:
+  components:
+    bouton_menu_actions:
+      label: "ouvrir le menu des actions"
   actions:
     copier_url: "Copier l'URL"
     copier_code: "Copier le code"

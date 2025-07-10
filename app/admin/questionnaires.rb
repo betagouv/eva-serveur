@@ -62,9 +62,6 @@ ActiveAdmin.register Questionnaire do
     actions do |questionnaire|
       link_to "Exporter", export_admin_questionnaire_path(questionnaire)
     end
-    column "", class: "bouton-action" do
-      render partial: "components/bouton_menu_actions"
-    end
   end
 
   show do

@@ -54,7 +54,7 @@ describe CompteMailer, type: :mailer do
       expect(email.body).to include('Admin')
       expect(email.body).to include('Paule Delaporte')
       expect(email.body).to include('Ma Super Structure - 75012')
-      expect(email.body).to include(admin_structure_locale_url(compte.structure))
+      expect(email.body).to include(admin_comptes_url)
     end
   end
 

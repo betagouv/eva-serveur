@@ -4,5 +4,5 @@
          prenom: @compte.prenom,
          nom: @compte.nom,
          structure: structure.display_name,
-         url_validation: send("admin_#{structure.type.underscore}_url", structure, anchor: "bloc-membres"),
+         url_validation: admin_comptes_url,
         ) %>

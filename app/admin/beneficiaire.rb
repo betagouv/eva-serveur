@@ -48,8 +48,5 @@ ActiveAdmin.register Beneficiaire do
     end
     column :created_at
     actions
-    column "", class: "bouton-action" do
-      render partial: "components/bouton_menu_actions"
-    end
   end
 end

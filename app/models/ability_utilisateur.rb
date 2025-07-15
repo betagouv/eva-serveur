@@ -39,7 +39,6 @@ class AbilityUtilisateur
 
   def droit_evaluation(compte)
     cannot :create, Evaluation
-    can :acces_actions_groupees, Evaluation if compte.superadmin?
     can :read, Evaluation, responsable_suivi_id: compte.id
     can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
     return if compte.structure_id.blank?

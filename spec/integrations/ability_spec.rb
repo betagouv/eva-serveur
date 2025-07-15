@@ -43,7 +43,6 @@ describe Ability do
     it { is_expected.to be_able_to(:manage, Restitution::Base.new(nil, nil)) }
     it { is_expected.to be_able_to(:manage, Actualite) }
     it { is_expected.to be_able_to(:manage, Beneficiaire) }
-    it { is_expected.to be_able_to(:acces_actions_groupees, Evaluation) }
 
     it 'avec une campagne qui a des évaluations' do
       expect(subject).to be_able_to(:destroy, campagne_superadmin)
@@ -196,7 +195,6 @@ describe Ability do
     end
 
     it { is_expected.to be_able_to(:update, compte.structure) }
-    it { is_expected.not_to be_able_to(:acces_actions_groupees, Evaluation) }
 
     context 'peut gérer les évaluations de ma structure' do
       let(:ma_campagne) { create :campagne, compte: compte }

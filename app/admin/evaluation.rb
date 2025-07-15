@@ -6,7 +6,6 @@ ActiveAdmin.register Evaluation do
 
   includes :responsable_suivi, campagne: [ :parcours_type ]
 
-  config.batch_actions = true
   config.sort_order = "created_at_desc"
 
   filter :nom
@@ -39,23 +38,6 @@ ActiveAdmin.register Evaluation do
                    etiquette: I18n.t("components.pastille.illettrisme_potentiel")
                  ))
         }, :illettrisme_potentiel
-
-
-  batch_action :destroy, if: proc { batch_action_access? }
-  batch_action :lier_evaluations, if: proc { batch_action_access? } do |evaluation_ids|
-    evaluations = Evaluation.where(id: evaluation_ids)
-
-    if evaluations.size < 2
-      redirect_to collection_path,
-      alert: I18n.t("active_admin.batch_actions.evaluation.message_alert")
-      next
-    end
-
-    LienEvaluations.new(evaluations).call
-
-    redirect_to collection_path,
-        notice: I18n.t("active_admin.batch_actions.evaluation.message_notice")
-  end
 
   show do
     params[:parties_selectionnees] =
@@ -147,7 +129,7 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :batch_action_access?, :comptes_externes_possibles
+                  :comptes_externes_possibles
 
     def show
       show! do |format|
@@ -168,10 +150,6 @@ ActiveAdmin.register Evaluation do
         send_file(pdf_path, filename: "#{resource.nom}.pdf", type: "application/pdf",
                             disposition: disposition)
       end
-    end
-
-    def batch_action_access?
-      can? :acces_actions_groupees, Evaluation
     end
 
     def disposition

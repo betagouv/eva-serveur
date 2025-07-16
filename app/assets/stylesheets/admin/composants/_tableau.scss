@@ -1,0 +1,19 @@
+.tableau-component {
+  padding: 32px;
+  border: 1px solid $grey-900;
+  background-color: white;
+  margin: 0;
+}
+
+.tableau-boutons-action {
+  direction: rtl;
+}
+
+.tableau-boutons-action .menu-actions {
+  @include menu-actions();
+}
+
+.tableau-component__content table {
+  border-collapse: unset;
+  border: 1px solid $grey-625;
+}

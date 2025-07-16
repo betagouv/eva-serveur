@@ -1,0 +1,38 @@
+<div class="tableau-component fr-table" id="table-0-component">
+  <div class="fr-table__wrapper">
+    <div class="fr-table__container">
+      <div class="fr-table__content">
+        <table id="table-0">
+          <thead>
+            <tr style="border-bottom-color: $grey-200;">
+              <% colonnes.each do |colonne| %>
+                <th><%= colonne[:titre] %></th>
+              <% end %>
+              <% if actions? %>
+                <th></th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% collection.each_with_index do |item, index| %>
+              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>">
+                <% colonnes.each do |colonne| %>
+                  <td><%= capture(item, &colonne[:block]) %></td>
+                <% end %>
+                <% if actions? %>
+                  <td class="tableau-boutons-action">
+                    <%= render BoutonMenuActionsComponent.new(
+                        { label: t("tableau.actions.voir"), url: polymorphic_path([ :admin, item ]) },
+                        { label: t("tableau.actions.modifier"), url: edit_polymorphic_path([ :admin, item ]) },
+                        { label: t("tableau.actions.supprimer"), url: polymorphic_path([ :admin, item ]), method: :delete, data: { confirm: t("tableau.actions.confirmation") } }
+                      ) %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

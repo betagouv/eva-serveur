@@ -1,0 +1,5 @@
+.bouton-menu-actions {
+  .menu-actions {
+    @include menu-actions();
+  }
+}

@@ -1,0 +1,17 @@
+<div class="menu-actions">
+  <%= render partial: "components/bouton_menu_actions" %>
+  
+  <div class="table_actions">
+    <% @actions.each do |action| %>
+      <%= link_to(
+            action[:label],
+            action[:url],
+            {
+              method: action[:method],
+              data: action[:data],
+              class: action[:class]
+            }.compact
+          ) %>
+    <% end %>
+  </div>
+</div>

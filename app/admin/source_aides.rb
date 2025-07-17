@@ -23,8 +23,5 @@ ActiveAdmin.register SourceAide do
       link_to a.url, a.url, target: "_blank", rel: "noopener"
     end
     actions
-    column "", class: "bouton-action" do
-      render partial: "components/bouton_menu_actions"
-    end
   end
 end

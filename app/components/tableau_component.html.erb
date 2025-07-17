@@ -21,18 +21,12 @@
                   <td><%= capture(item, &colonne[:block]) %></td>
                 <% end %>
                 <% if actions == true %>
-                  <td>
-                    <div class="menu-actions">
-                      <div class="table_actions">
-                          <%= link_to t(".voir"), polymorphic_path([:admin, item]) %>
-                          <%= link_to t(".modifier"), edit_polymorphic_path([:admin, item]) %>
-                          <%= link_to t(".supprimer"),
-                                      polymorphic_path([:admin, item]),
-                                      method: :delete,
-                                      data: { confirm: t(".confirmation_suppression") } %>
-                      </div>
-                    </div>
-                    <%= render partial: "components/bouton_menu_actions" %>
+                  <td class="tableau-boutons-action">
+                    <%= render MenuBoutonsActionComponent.new(
+                        { label: "Voir", url: "#" },
+                        { label: "Modifier", url: "#" },
+                        { label: "Supprimer", url: "#", method: :delete, data: { confirm: "Voulez-vous supprimer ?" } }
+                      ) %>
                   </td>
                 <% end %>
               </tr>

@@ -1,0 +1,30 @@
+<% utilisateur_struct = Struct.new(:nom, :email, :ville)
+
+   utilisateurs_fictifs = [
+     utilisateur_struct.new("Alice", "alice@example.com", "Paris"),
+     utilisateur_struct.new("Bob", "bob@example.com", "Boulogne"),
+     utilisateur_struct.new("Charlie", "charlie@example.com", "Marseille"),
+   ]
+%>
+
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo TableauComponent</h1>
+
+  <h2>Avec Actions</h2>
+  <%= render TableauComponent.new(titre: "Liste utilisateurs avec actions", collection: utilisateurs_fictifs) do |tableau| %>
+    <% tableau.colonne(titre: "Nom") { |u| u.nom } %>
+    <% tableau.colonne(titre: "Email") { |u| u.email } %>
+    <% tableau.colonne(titre: "Ville") { |u| u.ville } %>
+  <% end %>
+
+  <h2>Sans Actions</h2>
+  <%= render TableauComponent.new(titre: "Liste utilisateurs sans actions", actions: false, collection: utilisateurs_fictifs) do |tableau| %>
+    <% tableau.colonne(titre: "Nom") { |u| u.nom } %>
+    <% tableau.colonne(titre: "Email") { |u| u.email } %>
+    <% tableau.colonne(titre: "Ville") { |u| u.ville } %>
+  <% end %>
+</div>

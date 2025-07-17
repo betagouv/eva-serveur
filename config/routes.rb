@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     get '/ui_kit/code', to: 'ui_kit#code'
     get '/ui_kit/ellipse', to: 'ui_kit#ellipse'
     get '/ui_kit/lien', to: 'ui_kit#lien'
+    get '/ui_kit/menu_boutons_action', to: 'ui_kit#menu_boutons_action'
     # get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
     get '/ui_kit/pastille', to: 'ui_kit#pastille'
     # get '/ui_kit/qcm', to: 'ui_kit#qcm'
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
     # get '/ui_kit/sous_competence', to: 'ui_kit#sous_competence'
     get '/ui_kit/statut_campagne', to: 'ui_kit#statut_campagne'
     get '/ui_kit/tag', to: 'ui_kit#tag'
+    get '/ui_kit/tableau', to: 'ui_kit#tableau'
     get '/ui_kit/toggle', to: 'ui_kit#toggle'
     
     namespace :positionnement do

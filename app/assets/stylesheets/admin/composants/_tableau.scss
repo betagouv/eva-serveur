@@ -1,0 +1,21 @@
+.tableau-boutons-action .menu-actions {
+  position: relative;
+  
+  @include menu-actions();
+}
+
+.tableau-boutons-action .menu-actions .table_actions {
+  position: fixed !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  margin-top: 2rem !important;
+  z-index: 99999 !important;
+  display: block !important;
+}
+
+.fr-table__content table {
+  border-collapse: unset;
+  border: 1px solid $grey-625;
+}

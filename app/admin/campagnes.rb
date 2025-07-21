@@ -57,6 +57,12 @@ class: "bouton-disabled")
 notice: I18n.t("admin.campagnes.duplique.notice")
   end
 
+  member_action :autoriser_compte, method: :post do
+    compte = Compte.find_by(id: params["compte_id"])
+    resource.campagne_compte_autorisations.create!(compte_id: compte.id) if compte.present?
+    redirect_to admin_campagne_path(resource)
+  end
+
   index do
     column :libelle do |campagne|
       div class: "contenu-libelle" do

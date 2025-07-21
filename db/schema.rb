@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_27_085157) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_21_122551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -83,6 +83,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_27_085157) do
     t.string "code_personnel"
     t.index ["code_personnel"], name: "index_beneficiaires_on_code_personnel", unique: true
     t.index ["deleted_at"], name: "index_beneficiaires_on_deleted_at"
+  end
+
+  create_table "campagne_compte_autorisations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "campagne_id", null: false
+    t.uuid "compte_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campagne_id"], name: "index_campagne_compte_autorisations_on_campagne_id"
+    t.index ["compte_id"], name: "index_campagne_compte_autorisations_on_compte_id"
   end
 
   create_table "campagnes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

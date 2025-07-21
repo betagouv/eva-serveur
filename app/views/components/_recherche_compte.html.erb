@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element: container,
         id: '<%= locals[:autocomplete_id] %>',
         name: '<%= locals[:autocomplete_name] %>',
-        placeholder: I18n.t('admin.evaluations.recherche_compte.placeholder'),
+        placeholder: "<%= t(".placeholder") %>",
         source: (requete, reponse) => {
             const term = requete.toLowerCase();
             const comptes_filtres = comptes.filter(compte =>  {

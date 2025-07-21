@@ -1,0 +1,11 @@
+<%= render "components/recherche_compte", locals: {
+  form_id: :recherche_comptes_structure,
+  form_url: autoriser_compte_admin_campagne_path(resource),
+  autocomplete_id: "recherche-comptes-structure-autocomplete",
+  container_id: "comptes-autorises-autocomplete-container",
+  hidden_field_name: :compte_id,
+  sidebar_section_id: "acces_prives_sidebar_section",
+  comptes_collection: comptes_structure,
+  autocomplete_name: "nom_compte_structure",
+  translation_scope: "campagne_compte_autorisations"
+} %>

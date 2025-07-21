@@ -63,6 +63,26 @@ notice: I18n.t("admin.campagnes.duplique.notice")
     redirect_to admin_campagne_path(resource)
   end
 
+  member_action :revoquer_compte, method: :patch do
+    CampagneCompteAutorisation
+      .find_by(campagne_id: resource.id, compte_id: params["compte_id"])&.destroy
+    redirect_to request.referer
+  end
+
+  sidebar :autorisation_compte, only: :show,
+    if: proc { !resource.campagne_compte_autorisations.empty? ||
+               can?(:autoriser_compte, resource) } do
+    resource.campagne_compte_autorisations.each do |autorisation|
+      url = revoquer_compte_admin_campagne_path(
+        resource,
+        compte_id: autorisation.compte.id)
+      render(Tag.new(autorisation.compte.display_name,
+                     supprimable: can?(:revoquer_compte, Campagne),
+                     url: url))
+    end
+    # render "recherche_comptes_structure" if can?(:ajouter_compte, Campagne)
+  end
+
   index do
     column :libelle do |campagne|
       div class: "contenu-libelle" do

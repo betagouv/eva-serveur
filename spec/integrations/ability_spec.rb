@@ -153,7 +153,7 @@ describe Ability do
     it { is_expected.not_to be_able_to(%i[create update destroy], Situation.new) }
     it { is_expected.to be_able_to(:read, Campagne.new) }
     it { is_expected.not_to be_able_to(%i[create duplique update destroy], Campagne.new) }
-    it { is_expected.not_to be_able_to(:autoriser_compte, Campagne) }
+    it { is_expected.not_to be_able_to(%i[autoriser_compte revoquer_compte], Campagne) }
     it { is_expected.to be_able_to(:read, Restitution::Base.new(nil, nil)) }
     it { is_expected.to be_able_to(:read, Actualite) }
     it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
@@ -281,7 +281,7 @@ describe Ability do
     it { is_expected.to be_able_to(:read, evenement_conseiller) }
 
     it do
-      expect(subject).to be_able_to(%i[read update autoriser_compte destroy],
+      expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte destroy],
                                     Campagne.new(compte: compte))
     end
 

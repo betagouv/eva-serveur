@@ -191,6 +191,26 @@ describe 'Admin - Campagne', type: :feature do
     end
   end
 
+  describe 'autorisation comptes' do
+    let(:mon_collegue) { create :compte_admin, nom: "Martin", structure: compte_connecte.structure }
+    let!(:ma_campagne) { create :campagne, compte: compte_connecte, privee: true }
+
+    context "en tant propriétaire de ma campagne" do
+      before do
+        ma_campagne.campagne_compte_autorisations.create!(compte_id: mon_collegue.id)
+        visit admin_campagne_path(ma_campagne.reload)
+      end
+
+      it "je peux retirer l'autorisation de n'importe quel collègue" do
+        within('#autorisation_compte_sidebar_section') do
+          find('a.lien-supprimer').click
+        end
+        expect(page).not_to have_content(mon_collegue.nom)
+        expect(ma_campagne.reload.campagne_compte_autorisations).to be_empty
+      end
+    end
+  end
+
   describe 'suppression' do
     let!(:campagne) do
       autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'

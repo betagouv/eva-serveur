@@ -52,9 +52,9 @@ class: "bouton-disabled")
   end
 
   member_action :duplique, method: :post do
-    campagne_dupliquee =CampagneDuplicateur.new(resource, current_compte).duplique!
+    campagne_dupliquee = CampagneDuplicateur.new(resource, current_compte).duplique!
     redirect_to admin_campagne_path(campagne_dupliquee),
-notice: I18n.t("admin.campagnes.duplique.notice")
+      notice: I18n.t("admin.campagnes.duplique.notice")
   end
 
   member_action :autoriser_compte, method: :post do
@@ -69,7 +69,7 @@ notice: I18n.t("admin.campagnes.duplique.notice")
     redirect_to request.referer
   end
 
-  sidebar :autorisation_compte, only: :show,
+  sidebar :acces_prives, only: :show,
     if: proc { !resource.campagne_compte_autorisations.empty? ||
                can?(:autoriser_compte, resource) } do
     resource.campagne_compte_autorisations.each do |autorisation|
@@ -77,10 +77,11 @@ notice: I18n.t("admin.campagnes.duplique.notice")
         resource,
         compte_id: autorisation.compte.id)
       render(Tag.new(autorisation.compte.display_name,
+                     classes: "bleu-france",
                      supprimable: can?(:revoquer_compte, Campagne),
                      url: url))
     end
-    # render "recherche_comptes_structure" if can?(:ajouter_compte, Campagne)
+    render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)
   end
 
   index do
@@ -114,6 +115,8 @@ campagne_privee: campagne.privee))
   form partial: "form"
 
   controller do
+    helper_method :comptes_structure
+
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
     before_action :situations_configurations, only: %i[show]
@@ -135,8 +138,7 @@ campagne_privee: campagne.privee))
     end
 
     def find_resource
-      scoped_collection.where(id: params[:id])
-                       .first!
+      scoped_collection.where(id: params[:id]).first!
     end
 
     def assigne_valeurs_par_defaut
@@ -154,6 +156,10 @@ campagne_privee: campagne.privee))
                                      .includes([ :questionnaire,
                                                 { situation: %i[questionnaire
                                                                 illustration_attachment] } ])
+    end
+
+    def comptes_structure
+      @compte_structure ||= Compte.de_la_structure(resource.compte.structure).order(:prenom, :nom)
     end
   end
 end

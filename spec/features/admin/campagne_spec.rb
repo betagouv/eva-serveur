@@ -202,7 +202,7 @@ describe 'Admin - Campagne', type: :feature do
       end
 
       it "je peux retirer l'autorisation de n'importe quel collègue" do
-        within('#autorisation_compte_sidebar_section') do
+        within('#acces_prives_sidebar_section') do
           find('a.lien-supprimer').click
         end
         expect(page).not_to have_content(mon_collegue.nom)

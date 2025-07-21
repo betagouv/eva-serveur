@@ -46,11 +46,6 @@ fr:
         abstention: Ne sait pas
         bon: Correct
         mauvais: Erreur
-      recherche_compte:
-        placeholder: Nom ou email
-        responsable_suivi:
-          libelle_champ_recherche: rechercher un responsable de suivi
-          action: Ajouter un responsable de suivi
       tri:
         <<: *commun
         reste_plateau: Reste plateau

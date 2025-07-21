@@ -100,7 +100,7 @@
   }
 }
 
-#responsable_de_suivi_sidebar_section, #consultations_externes_sidebar_section {
+#responsable_de_suivi_sidebar_section, #acces_prives_sidebar_section {
   @include panel-gris();
   .tag {
     $largeur-panel: 18.125rem;

@@ -109,7 +109,7 @@ ActiveAdmin.register Evaluation do
   end
 
   member_action :ajouter_responsable_suivi, method: :post do
-    responsable = Compte.where(id: params["responsable_suivi_id"]).first
+    responsable = Compte.find_by(id: params["responsable_suivi_id"])
     resource.update(responsable_suivi: responsable) if responsable.present?
     redirect_to admin_evaluation_path(resource)
   end

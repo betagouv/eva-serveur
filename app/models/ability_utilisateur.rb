@@ -28,7 +28,7 @@ class AbilityUtilisateur
     can %i[create duplique], Campagne if can_create_campagne?(compte)
     can %i[update read], Campagne,
       campagnes_publique_de_la_structure(compte) if compte.validation_acceptee?
-    can %i[update read destroy], Campagne, compte_id: compte.id
+    can %i[read update autoriser_compte destroy], Campagne, compte_id: compte.id
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
   end
 
@@ -106,6 +106,7 @@ class AbilityUtilisateur
     cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification],
            Evaluation)
+    cannot(:autoriser_compte, Campagne)
   end
 
   def campagnes_publique_de_la_structure(compte)

@@ -8,6 +8,7 @@ describe Campagne, type: :model do
   it { is_expected.to allow_value('ABCD1234').for(:code) }
   it { is_expected.not_to allow_value('ABC.123.').for(:code) }
   it { is_expected.not_to allow_value('abcd1234').for(:code) }
+  it { is_expected.to have_many :campagne_compte_autorisations }
 
   context 'quand une campagne a été soft-delete' do
     let(:compte) { create :compte }
@@ -21,6 +22,19 @@ describe Campagne, type: :model do
 
     it "Ne retourne pas d'erreur PostgreSQL" do
       expect(campagne.save).to be false
+    end
+  end
+
+  describe 'dependent destroy' do
+    it 'détruit les campagne_compte_autorisations quand on supprime' do
+      campagne = create :campagne, privee: true
+      autre_compte = create :compte_conseiller, structure: campagne.compte.structure
+      autorisation = CampagneCompteAutorisation.create!(campagne_id: campagne.id,
+                                                        compte_id: autre_compte.id)
+
+      campagne.destroy
+      expect(CampagneCompteAutorisation
+        .only_deleted.find(autorisation.id).deleted_at).not_to be_nil
     end
   end
 

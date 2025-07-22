@@ -67,7 +67,7 @@ class Evaluation < ApplicationRecord
   scope :pour_beneficiaires, ->(ids) { where(beneficiaire_id: ids) }
 
   def display_name
-    nom
+    beneficiaire.nom
   end
 
   def anonyme?

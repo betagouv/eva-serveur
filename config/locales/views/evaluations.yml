@@ -165,6 +165,7 @@ fr:
           stanine3: |
             Vous parvenez **très bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester concentré·e sur une tâche pendant longtemps malgré la difficulté et la distraction. Aussi, vous savez être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous adapter rapidement à de nombreux métiers du BTP, de l’Industrie, et de la Surveillance, bravo !
       details_evaluation:
+        code_personnel: Code personnel
         titre: Détails de l'évaluation
         titre_menu_lateral: Détails de l'évaluation
         donnees_sociodemographiques: Socio-démo
@@ -204,9 +205,6 @@ fr:
           restitution_globale: Restitution globale
         evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
-      nom_evaluation:
-        suivi_par: Suivi(e) par
-        pas_de_responsable: Pas de responsable de suivi
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       redaction: Rédaction

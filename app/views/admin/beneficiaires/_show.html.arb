@@ -17,6 +17,11 @@ div class: "page-beneficiaire" do
     description: I18n.t("admin.beneficiaires.show.carte_partage_code.description")
   )
 
+  if beneficiaire.evaluations_diagnostic.present?
+    render partial: "admin/beneficiaires/liste_evaluations_diagnostic",
+locals: { beneficiaire: beneficiaire }
+  end
+
   if beneficiaire.evaluations.present?
     order_param = (params[:order] || "created_at_desc").gsub("_asc", " asc").gsub(
       "_desc", " desc"

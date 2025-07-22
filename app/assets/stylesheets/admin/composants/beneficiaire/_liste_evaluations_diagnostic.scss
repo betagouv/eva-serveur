@@ -1,0 +1,10 @@
+.liste-evaluations-container {
+  display: flex;
+  gap: $dsfr-spacing-6v;
+  flex-direction: column;
+}
+
+.liste-evaluations-container h2 {
+  font-size: $dsfr-font-size-4xl;
+  margin: 0
+}

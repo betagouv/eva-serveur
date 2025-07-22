@@ -35,5 +35,13 @@ FactoryBot.define do
         )
       end
     end
+
+    trait :diagnostic do
+      association :campagne, factory: [ :campagne, :avec_parcours_diagnostic ]
+    end
+
+    trait :positionnement do
+      association :campagne, factory: [ :campagne, :avec_parcours_positionnement ]
+    end
   end
 end

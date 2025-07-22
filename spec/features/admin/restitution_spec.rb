@@ -76,10 +76,9 @@ describe 'Admin - Restitution', type: :feature do
     it do
       find("#action_items_sidebar_section a[href='#{admin_restitution_path(partie)}']").click
 
-
       expect(partie.reload.deleted?).to be true
       expect(evenements.first.reload.deleted?).to be true
-      within('#main_content') { expect(page).to have_content 'John Doe' }
+      within('#main_content') { expect(page).to have_content 'Roger' }
     end
   end
 end

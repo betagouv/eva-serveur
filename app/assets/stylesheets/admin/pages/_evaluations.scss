@@ -30,11 +30,11 @@
     }
   }
 
-  .evaluation__suivi-par {
+  .evaluation__code-personnel {
     margin-left: 1.75rem;
   }
 
-  .evaluation__suivi-par, .evaluation__parcours-type, .evaluation__created_at {
+  .evaluation__code-personnel, .evaluation__parcours-type, .evaluation__created_at {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;

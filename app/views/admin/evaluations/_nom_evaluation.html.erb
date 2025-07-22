@@ -7,15 +7,10 @@
          ))%>
     <% end %>
     <%= link_to admin_evaluation_path(evaluation), class: "evaluation__nom" do %>
-      <%= render(NomAnonymisableComponent.new(evaluation)) %>
+      <%= render(NomAnonymisableComponent.new(evaluation.beneficiaire)) %>
     <% end %>
   </div>
-  <% responsable = evaluation.responsable_suivi %>
-  <div class= "evaluation__suivi-par <%= presence_pastille? ? "" : "ml-0" %>">
-    <% if responsable.present? %>
-      <%= t(".suivi_par") %> <%= link_to(responsable.display_name, admin_compte_path(responsable), class: "lien-secondaire") %>
-    <% else %>
-      <%= t(".pas_de_responsable") %>
-    <% end %>
+  <div class= "evaluation__code-personnel <%= presence_pastille? ? "" : "ml-0" %>">
+    <%= evaluation.beneficiaire.code_personnel %>
   </div>
 </div>

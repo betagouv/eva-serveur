@@ -81,6 +81,18 @@ describe Evaluation do
         )
       end
     end
+
+    describe '.diagnostic' do
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+
+      it 'retourne uniquement les évaluations de type diagnostic' do
+        resultats = described_class.diagnostic
+
+        expect(resultats).to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_positionnement)
+      end
+    end
   end
 
   describe '#responsables_suivi' do

@@ -65,6 +65,10 @@ class Evaluation < ApplicationRecord
     where(completude: %w[complete competences_transversales_incompletes])
   }
   scope :pour_beneficiaires, ->(ids) { where(beneficiaire_id: ids) }
+  scope :diagnostic, -> {
+    joins(campagne: :parcours_type)
+      .where(parcours_type: { type_de_programme: :diagnostic })
+  }
 
   def display_name
     beneficiaire.nom

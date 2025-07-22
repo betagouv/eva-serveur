@@ -11,5 +11,13 @@ FactoryBot.define do
     trait :avec_situations_configurations do
       situations_configurations { build_list(:situation_configuration, 1) }
     end
+
+    trait :avec_parcours_diagnostic do
+      association :parcours_type, factory: [ :parcours_type, :diagnostic ]
+    end
+
+    trait :avec_parcours_positionnement do
+      association :parcours_type, factory: [ :parcours_type, :positionnement ]
+    end
   end
 end

@@ -47,5 +47,13 @@ FactoryBot.define do
         build_list(:situation_configuration, 1, situation: situation)
       end
     end
+
+    trait :diagnostic do
+      type_de_programme { :diagnostic }
+    end
+
+    trait :positionnement do
+      type_de_programme { :positionnement }
+    end
   end
 end

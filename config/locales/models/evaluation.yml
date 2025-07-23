@@ -107,7 +107,7 @@ fr:
         created_at: Date
         nom: Nom
         code_personnel: Code personnel
-        completude: Passation complète ?
+        completude: Passation complète ?
         synthese_competences_de_base: Niveau global
         niveau_cefr: Niveau CEFR (diagnostic)
         niveau_cnef: Niveau CNEF (diagnostic)

@@ -20,7 +20,7 @@
                   <td><%= capture(item, &colonne[:block]) %></td>
                 <% end %>
                 <% if actions? %>
-                  <td class="tableau-boutons-action">
+                  <td class="col-actions tableau-boutons-action">
                     <%= render BoutonMenuActionsComponent.new(
                         { label: t("tableau.actions.voir"), url: polymorphic_path([ :admin, item ]) },
                         { label: t("tableau.actions.modifier"), url: edit_polymorphic_path([ :admin, item ]) },

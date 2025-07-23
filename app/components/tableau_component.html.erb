@@ -21,7 +21,7 @@
                 <% end %>
                 <% if actions? %>
                   <td class="col-actions tableau-boutons-action">
-                    <%= render BoutonMenuActionsComponent.new(
+                    <%= render MenuActionsComponent.new(
                         { label: t("tableau.actions.voir"), url: polymorphic_path([ :admin, item ]) },
                         { label: t("tableau.actions.modifier"), url: edit_polymorphic_path([ :admin, item ]) },
                         { label: t("tableau.actions.supprimer"), url: polymorphic_path([ :admin, item ]), method: :delete, data: { confirm: t("tableau.actions.confirmation") } }

@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     get '/ui_kit/code', to: 'ui_kit#code'
     get '/ui_kit/ellipse', to: 'ui_kit#ellipse'
     get '/ui_kit/lien', to: 'ui_kit#lien'
-    get '/ui_kit/bouton_menu_actions', to: 'ui_kit#bouton_menu_actions'
+    get '/ui_kit/menu_actions', to: 'ui_kit#menu_actions'
     # get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
     get '/ui_kit/pastille', to: 'ui_kit#pastille'
     # get '/ui_kit/qcm', to: 'ui_kit#qcm'

@@ -3,13 +3,13 @@
     <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
   </div>
 
-  <h1>Démo BoutonMenuActionsComponent</h1>
+  <h1>Démo MenuActionsComponent</h1>
   
   <table>
     <tbody>
       <tr>
         <td class="col-actions bouton-menu-actions">
-          <%= render BoutonMenuActionsComponent.new(
+          <%= render MenuActionsComponent.new(
               { label: "Voir", url: "#" },
               { label: "Modifier", url: "#" },
               { label: "Supprimer", url: "#", method: :delete, data: { confirm: "Voulez-vous supprimer ?" } }

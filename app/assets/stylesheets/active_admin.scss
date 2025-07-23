@@ -59,7 +59,6 @@
 @import 'admin/composants/dropdown';
 @import 'admin/composants/tableau';
 @import 'admin/composants/menu_actions';
-@import "admin/composants/beneficiaire/liste_evaluations_diagnostic";
 
 // UTILITIES
 @import 'admin/utilities';
@@ -95,6 +94,9 @@
 @import 'admin/pages/restitution_globale/deroulement';
 @import 'admin/pages/login/structures';
 @import 'admin/pages/question';
+
+// BENEFICIAIRE
+@import 'admin/beneficiaire/liste_evaluations_diagnostic';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

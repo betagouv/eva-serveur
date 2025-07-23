@@ -2,9 +2,10 @@
   display: flex;
   gap: $dsfr-spacing-6v;
   flex-direction: column;
+
+  h2 {
+    font-size: $dsfr-font-size-4xl;
+    margin: 0
+  }
 }
 
-.liste-evaluations-container h2 {
-  font-size: $dsfr-font-size-4xl;
-  margin: 0
-}

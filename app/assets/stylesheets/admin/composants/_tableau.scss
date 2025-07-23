@@ -7,17 +7,12 @@
 
 .tableau-boutons-action {
   direction: rtl;
-}
 
-.tableau-boutons-action .menu-actions {
-  @include menu-actions();
+  .menu-actions {
+    @include menu-actions();
 
-  .table_actions {
-    z-index: 100;
+    .table_actions {
+      z-index: 100;
+    }
   }
-}
-
-.tableau-component__content table {
-  border-collapse: unset;
-  border: 1px solid $grey-625;
 }

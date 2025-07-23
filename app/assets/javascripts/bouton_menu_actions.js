@@ -3,6 +3,21 @@ function trouve_le_menu(bouton) {
   return parent_commun.querySelector('.table_actions')
 }
 
+function deplace_menu(bouton_menu, menu) {
+    const rect_bouton = bouton_menu.getBoundingClientRect();
+    let posX = rect_bouton.left;
+    let posY = rect_bouton.bottom + 4;
+
+    const largeur_fenetre = window.innerWidth;
+    const largeur_menu = menu.getBoundingClientRect().width;
+    if (posX + largeur_menu > largeur_fenetre) {
+        posX = largeur_fenetre - largeur_menu;
+    }
+
+    menu.style.left = posX + 'px';
+    menu.style.top = posY + 'px';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const celules = document.querySelectorAll('td.col-actions');
 
@@ -19,20 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let menu = trouve_le_menu(bouton_menu);
         bouton_menu.addEventListener('click', (event) => {
             event.preventDefault();
-
-            const rect_bouton = bouton_menu.getBoundingClientRect();
-            let posX = rect_bouton.left;
-            let posY = rect_bouton.bottom + 4;
-
-            const largeur_fenetre = window.innerWidth;
-            const largeur_menu = menu.getBoundingClientRect().width;
-            if (posX + largeur_menu > largeur_fenetre) {
-                posX = largeur_fenetre - largeur_menu;
-            }
-
-            menu.style.left = posX + 'px';
-            menu.style.top = posY + 'px';
+            deplace_menu(bouton_menu, menu);
             menu.classList.toggle('montrer');
+        });
+        menu.querySelector("a").addEventListener('focus', () => {
+            deplace_menu(bouton_menu, menu);
         });
         bouton_menu.parentElement.addEventListener("mouseleave", () => {
             menu.classList.remove('montrer');

@@ -5,4 +5,7 @@ fr:
         info: Vous pouvez consulter ici toutes les passations de ce bénéficiaire.
         beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         carte_partage_code:
-          description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
+          description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
+      liste_evaluations_diagnostic:
+        created_at: "Date"
+        campagne: "Campagne"

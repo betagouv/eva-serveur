@@ -10,9 +10,9 @@
       <tr>
         <td class="col-actions bouton-menu-actions">
           <%= render MenuActionsComponent.new(
-              { label: "Voir", url: "#" },
-              { label: "Modifier", url: "#" },
-              { label: "Supprimer", url: "#", method: :delete, data: { confirm: "Voulez-vous supprimer ?" } }
+              { label: t(".option_1"), url: "#" },
+              { label: t(".option_2"), url: "#" },
+              { label: t(".option_3"), url: "#", method: :delete, data: { confirm: t(".option_suppression") } }
             ) %>
         </td>
       </tr>

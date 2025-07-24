@@ -23,8 +23,7 @@ describe 'Admin - Parties', type: :feature do
     before { visit admin_situation_parties_path(situation) }
 
     it do
-      expect(page).to have_content('evaluation 1')
-      expect(page).to have_content('evaluation 2')
+      expect(page).to have_content('Roger')
       expect(page).not_to have_content('evaluation inventaire')
     end
   end

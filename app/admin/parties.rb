@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Partie do
   belongs_to :situation
-  includes evaluation: :campagne
+  includes evaluation: [ :beneficiaire, :campagne ]
 
   actions :index, :show
 

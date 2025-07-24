@@ -1,5 +1,11 @@
 .page-beneficiaire {
   display: flex;
   flex-direction: column;
-  gap: $dsfr-spacing-6v;
+  gap: $dsfr-spacing-12v;
+}
+
+.panel--beneficiaire { 
+  h2 {
+    font-size: $dsfr-font-size-4xl;
+  }
 }

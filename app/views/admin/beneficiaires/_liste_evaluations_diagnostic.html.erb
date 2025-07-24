@@ -1,11 +1,10 @@
-<div class="liste-evaluations-container">
-  <h2> Évaluations de diagnostic </h2>
+<%= render PanelComponent.new(titre: t(".titre-evaluation-diagnostic"), classes: "panel--beneficiaire") do %>
   <%= render TableauComponent.new(collection: beneficiaire.evaluations_diagnostic) do |tableau| %>
     <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
       <% evaluation.created_at.strftime("%d/%m/%Y") %>
     <%end %>
-    <% tableau.colonne(titre: t(".campagne")) do |evaluation|%>
+    <% tableau.colonne(titre: Evaluation.human_attribute_name("campagne")) do |evaluation|%>
       <% evaluation.campagne.display_name %>
     <%end %>
   <% end %>
-</div>
+<% end %>

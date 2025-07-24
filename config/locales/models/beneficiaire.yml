@@ -4,6 +4,7 @@ fr:
       beneficiaire:
         created_at: Créé le
         updated_at: Mis à jour le
+        code_personnel: Code personnel
     models:
       beneficiaire:
         one: Bénéficiaire

@@ -59,3 +59,22 @@ body.logged_out #content_wrapper #active_admin_content {
     }
   }
 }
+
+.panel-component {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-6v;
+
+  h2 {
+    margin: 0;
+  }
+
+  .panel {
+    border: 1px solid $grey-900;
+    border-radius: 0;
+    box-shadow: none;
+    padding: $dsfr-spacing-8v;
+    margin: 0;
+  }
+}
+

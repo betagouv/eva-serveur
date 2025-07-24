@@ -7,5 +7,5 @@ fr:
         carte_partage_code:
           description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
       liste_evaluations_diagnostic:
+        titre-evaluation-diagnostic: "Évaluations de diagnostic"
         created_at: "Date"
-        campagne: "Campagne"

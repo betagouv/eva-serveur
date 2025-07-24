@@ -21,7 +21,7 @@
 @import 'admin/composants/autocomplete';
 @import "admin/composants/badge_acquisition";
 @import 'admin/composants/filtres';
-@import 'admin/composants/panels';
+@import 'admin/composants/panel';
 @import 'admin/composants/tables';
 @import 'admin/composants/forms';
 @import "admin/composants/liens";
@@ -94,9 +94,6 @@
 @import 'admin/pages/restitution_globale/deroulement';
 @import 'admin/pages/login/structures';
 @import 'admin/pages/question';
-
-// BENEFICIAIRE
-@import 'admin/beneficiaire/liste_evaluations_diagnostic';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

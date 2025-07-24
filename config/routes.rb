@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get '/ui_kit/lien', to: 'ui_kit#lien'
     get '/ui_kit/menu_actions', to: 'ui_kit#menu_actions'
     # get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
+    get '/ui_kit/panel', to: 'ui_kit#panel'
     get '/ui_kit/pastille', to: 'ui_kit#pastille'
     # get '/ui_kit/qcm', to: 'ui_kit#qcm'
     get '/ui_kit/recherche_structure', to: 'ui_kit#recherche_structure'

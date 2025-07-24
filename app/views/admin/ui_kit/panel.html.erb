@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo PanelComponent</h1>
+
+  <%= render PanelComponent.new(titre: "Mon titre") do %>
+    <h3>Contenu du panel</h3>
+    <p>Contenu du panel avec un titre</p>
+  <% end %>
+</div> 

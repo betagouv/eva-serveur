@@ -17,7 +17,7 @@
             <% collection.each_with_index do |item, index| %>
               <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>">
                 <% colonnes.each do |colonne| %>
-                  <td><%= capture(item, &colonne[:block]) %></td>
+                  <td><%= view_context.capture(item, &colonne[:block]) %></td>
                 <% end %>
                 <% if actions? %>
                   <td class="col-actions tableau-boutons-action">

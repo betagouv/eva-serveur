@@ -1,0 +1,29 @@
+<%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
+  <%= render TableauComponent.new(collection: beneficiaire.evaluations_positionnement.order(created_at: :desc)) do |tableau| %>
+    <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
+      <% evaluation.created_at.strftime("%d/%m/%Y") %>
+    <%end %>
+    <% tableau.colonne(titre: "Littératie") do |evaluation|%>
+      <% if  evaluation.positionnement_niveau_litteratie.blank? %>
+        <%= render BadgeComponent.new(
+          contenu: "Non testé",
+          html_class: "",
+          display_icon: false
+        ) %>
+      <% else %>
+        <% evaluation.positionnement_niveau_litteratie %>
+      <% end %>
+    <%end %>
+    <% tableau.colonne(titre: "Numératie") do |evaluation|%>
+    <% if  evaluation.positionnement_niveau_numeratie.blank? %>
+        <%= render BadgeComponent.new(
+          contenu: "Non testé",
+          html_class: "",
+          display_icon: false
+        ) %>
+      <% else %>
+        <% evaluation.positionnement_niveau_numeratie %>
+      <% end %>
+    <%end %>
+  <% end %>
+<% end %>

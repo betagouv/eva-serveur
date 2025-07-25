@@ -9,3 +9,6 @@ fr:
       liste_evaluations_diagnostic:
         titre-evaluation-diagnostic: "Évaluations de diagnostic"
         created_at: "Date"
+      liste_evaluations_positionnement:
+        titre-evaluation-positionnement: "Évaluations de positionnement"
+        created_at: "Date"

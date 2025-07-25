@@ -82,15 +82,22 @@ describe Evaluation do
       end
     end
 
-    describe '.diagnostic' do
+    describe '.avec_type_de_programme' do
       let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
       let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
 
       it 'retourne uniquement les évaluations de type diagnostic' do
-        resultats = described_class.diagnostic
+        resultats = described_class.avec_type_de_programme(:diagnostic)
 
         expect(resultats).to include(evaluation_diagnostic)
         expect(resultats).not_to include(evaluation_positionnement)
+      end
+
+      it 'retourne uniquement les évaluations de type positionnement' do
+        resultats = described_class.avec_type_de_programme(:positionnement)
+
+        expect(resultats).not_to include(evaluation_diagnostic)
+        expect(resultats).to include(evaluation_positionnement)
       end
     end
   end

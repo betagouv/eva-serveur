@@ -11,7 +11,8 @@
       <%= render BadgeComponent.new(
         contenu: contenu,
         html_class: couleur_badges_positionnement(niveau_litteratie),
-        display_icon: false
+        display_icon: false,
+        taille: "sm"
       ) %>
     <% end %>
 
@@ -22,7 +23,8 @@
       <%= render BadgeComponent.new(
         contenu: contenu,
         html_class: couleur_badges_positionnement(niveau_numeratie),
-        display_icon: false
+        display_icon: false,
+        taille: "sm"
       ) %>
     <% end %>
     <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>

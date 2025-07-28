@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     get '/ui_kit/rejoindre_structure', to: 'ui_kit#rejoindre_structure'
     # get '/ui_kit/sous_competence', to: 'ui_kit#sous_competence'
     get '/ui_kit/statut_campagne', to: 'ui_kit#statut_campagne'
+    get '/ui_kit/tableau', to: 'ui_kit#tableau'
     get '/ui_kit/tag', to: 'ui_kit#tag'
     get '/ui_kit/toggle', to: 'ui_kit#toggle'
     

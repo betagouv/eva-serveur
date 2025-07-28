@@ -1,0 +1,43 @@
+<% mes_infos = [
+    { created_at: 3.days.ago, nom: "Campagne A", id: 1 },
+    { created_at: 2.days.ago, nom: "Campagne B", id: 2 },
+    { created_at: 1.day.ago, nom: "Campagne C", id: 3 }
+  ]
+%>
+
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+  <h1>Démo TableauComponent</h1>
+
+  <div class="fr-mb-6w">
+    <h2>Tableau simple</h2>
+    <%= render TableauComponent.new(collection: mes_infos) do |tableau| %>
+      <% tableau.colonne(titre: "Date") do |evaluation|%>
+        <% evaluation[:created_at].strftime("%d/%m/%Y") %>
+      <%end %>
+      <% tableau.colonne(titre: "Campagne") do |evaluation|%>
+        <% evaluation[:nom] %>
+      <%end %>
+    <% end %>
+  </div>
+
+  <div class="fr-mb-6w">
+    <h2>Tableau avec actions</h2>
+    <%= render TableauComponent.new(collection: mes_infos) do |tableau| %>
+      <% tableau.colonne(titre: "Date") do |evaluation|%>
+        <% evaluation[:created_at].strftime("%d/%m/%Y") %>
+      <%end %>
+      <% tableau.colonne(titre: "Campagne") do |evaluation|%>
+        <% evaluation[:nom] %>
+      <%end %>
+      <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
+        <%= render MenuActionsComponent.new(
+          { label: "Option 1", url: "#" },
+          { label: "Option 2", url: "#" },
+        ) %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

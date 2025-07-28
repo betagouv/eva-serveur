@@ -1,23 +1,18 @@
 class TableauComponent < ViewComponent::Base
-  def initialize(collection:, actions: true)
+  def initialize(collection:)
     @collection = collection
     @colonnes = []
-    @actions = actions
   end
 
-  def colonne(titre:, &block)
-    @colonnes << { titre: titre, block: block }
+  def colonne(titre: nil, td_class: nil, &block)
+    @colonnes << { titre: titre, td_class: td_class, block: block }
   end
 
   def before_render
     content if content.present?
   end
 
-  def actions?
-    actions
-  end
-
   private
 
-  attr_reader :titre, :collection, :colonnes, :actions
+  attr_reader :collection, :colonnes
 end

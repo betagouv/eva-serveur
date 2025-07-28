@@ -88,6 +88,11 @@ a.pas-souligne {
   margin: 0;
 }
 
+.fr-badge--grey-950 {
+  color: $grey-425;
+  background-color: $grey-950;
+}
+
 .fr-fieldset__element .fr-checkbox-group--sm input[type=checkbox] + label:before {
   margin-top: 0;
 }

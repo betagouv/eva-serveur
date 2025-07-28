@@ -39,4 +39,20 @@ module EvaluationHelper
   def place_du_marche
     restitution_pour_situation(Situation::PLACE_DU_MARCHE)
   end
+
+  COULEURS_BADGES_POSITIONNEMENT = {
+    profil1: "fr-badge--orange-terre-battue",
+    profil2: "fr-badge--orange-terre-battue",
+    profil3: "fr-badge--blue-cumulus",
+    profil4: "fr-badge--green-emeraude",
+    profil4_plus: "fr-badge--green-emeraude",
+    profil_4h: "fr-badge--green-emeraude",
+    profil_4h_plus: "fr-badge--green-emeraude",
+    profil_4h_plus_plus: "fr-badge--green-emeraude",
+    profil_aberrant: "fr-badge--green-emeraude"
+  }.freeze
+
+  def couleur_badges_positionnement(valeur)
+    COULEURS_BADGES_POSITIONNEMENT[valeur&.to_sym] || "fr-badge--grey-950"
+  end
 end

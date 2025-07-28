@@ -1,7 +1,0 @@
-fr:
-  tableau:
-    actions:
-      voir: "Voir"
-      modifier: "Modifier"
-      supprimer: "Supprimer"
-      confirmation: "Voulez-vous supprimer ?"

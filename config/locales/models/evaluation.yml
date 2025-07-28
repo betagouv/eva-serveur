@@ -65,17 +65,18 @@ fr:
             profil_4h_plus: Profil 4+
             profil_4h_plus_plus: Profil 4++
             profil_aberrant: Aberrant
-            indetermine: Indéterminé
+            indetermine: Pas de résultat
           positionnement_niveau_numeratie:
             profil1: Profil 1
             profil2: Profil 2
             profil3: Profil 3
             profil4: Profil 4
+            profil4_plus: Profil 4+
             profil_4h: Profil 4
             profil_4h_plus: Profil 4+
             profil_4h_plus_plus: Profil 4++
             profil_aberrant: Aberrant
-            indetermine: Indéterminé
+            indetermine: Pas de résultat
           niveau_anlci_numeratie:
             profil1: Profil 1
             profil2: Profil 2

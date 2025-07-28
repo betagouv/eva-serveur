@@ -3,27 +3,25 @@
     <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
       <% evaluation.created_at.strftime("%d/%m/%Y") %>
     <%end %>
+
     <% tableau.colonne(titre: "Littératie") do |evaluation|%>
-      <% if  evaluation.positionnement_niveau_litteratie.blank? %>
-        <%= render BadgeComponent.new(
-          contenu: "Non testé",
-          html_class: "",
-          display_icon: false
-        ) %>
-      <% else %>
-        <% evaluation.positionnement_niveau_litteratie %>
-      <% end %>
-    <%end %>
+      <% niveau_litteratie = evaluation.positionnement_niveau_litteratie %>
+
+      <%= render BadgeComponent.new(
+        contenu: niveau_litteratie,
+        html_class: couleur_badges_positionnement(niveau_litteratie),
+        display_icon: false
+      ) %>
+    <% end %>
+
     <% tableau.colonne(titre: "Numératie") do |evaluation|%>
-    <% if  evaluation.positionnement_niveau_numeratie.blank? %>
-        <%= render BadgeComponent.new(
-          contenu: "Non testé",
-          html_class: "",
-          display_icon: false
-        ) %>
-      <% else %>
-        <% evaluation.positionnement_niveau_numeratie %>
-      <% end %>
-    <%end %>
+      <% niveau_numeratie = evaluation.positionnement_niveau_numeratie %>
+
+      <%= render BadgeComponent.new(
+        contenu: niveau_numeratie,
+        html_class: couleur_badges_positionnement(niveau_numeratie),
+        display_icon: false
+      ) %>
+    <% end %>
   <% end %>
 <% end %>

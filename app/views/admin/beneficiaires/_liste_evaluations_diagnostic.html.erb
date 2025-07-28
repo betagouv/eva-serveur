@@ -6,5 +6,12 @@
     <% tableau.colonne(titre: Evaluation.human_attribute_name("campagne")) do |evaluation|%>
       <% evaluation.campagne.display_name %>
     <%end %>
+    <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
+      <%= render MenuActionsComponent.new(
+        { label: t("tableau.actions.voir"), url: admin_evaluation_path(evaluation) },
+        { label: t("tableau.actions.modifier"), url: edit_admin_evaluation_path(evaluation) },
+        { label: t("tableau.actions.supprimer"), url: admin_evaluation_path(evaluation), method: :delete, data: { confirm: t("tableau.actions.confirmation") } }
+      ) %>
+    <% end %>
   <% end %>
 <% end %>

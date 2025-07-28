@@ -6,9 +6,10 @@
 
     <% tableau.colonne(titre: "Littératie") do |evaluation|%>
       <% niveau_litteratie = evaluation.positionnement_niveau_litteratie %>
+      <% contenu = traduit_niveau(evaluation, :positionnement_niveau_litteratie) %>
 
       <%= render BadgeComponent.new(
-        contenu: niveau_litteratie,
+        contenu: contenu,
         html_class: couleur_badges_positionnement(niveau_litteratie),
         display_icon: false
       ) %>
@@ -16,9 +17,10 @@
 
     <% tableau.colonne(titre: "Numératie") do |evaluation|%>
       <% niveau_numeratie = evaluation.positionnement_niveau_numeratie %>
+      <% contenu = traduit_niveau(evaluation, :positionnement_niveau_numeratie) %>
 
       <%= render BadgeComponent.new(
-        contenu: niveau_numeratie,
+        contenu: contenu,
         html_class: couleur_badges_positionnement(niveau_numeratie),
         display_icon: false
       ) %>

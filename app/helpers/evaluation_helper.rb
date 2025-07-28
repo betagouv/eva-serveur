@@ -55,4 +55,12 @@ module EvaluationHelper
   def couleur_badges_positionnement(valeur)
     COULEURS_BADGES_POSITIONNEMENT[valeur&.to_sym] || "fr-badge--grey-950"
   end
+
+  def traduit_niveau(evaluation, interpretation)
+    scope = "activerecord.attributes.evaluation.interpretations"
+    niveau = evaluation.send(interpretation)
+    return "Non testé" if niveau.blank?
+
+    t("#{interpretation}.#{niveau}", scope: scope)
+  end
 end

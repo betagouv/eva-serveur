@@ -109,8 +109,6 @@
     display: inline-block;
     max-width: calc(#{ $largeur-panel - ($padding * 2) });
     font-weight: 400;
-    color: white;
-    background-color: $eva_main_blue;
   }
   .champ-recherche {
     width: 100%;

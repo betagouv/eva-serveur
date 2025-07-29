@@ -4,8 +4,7 @@ require 'rails_helper'
 
 describe 'Admin - Campagne', type: :feature do
   let(:structure_conseiller) { create :structure_locale }
-  let(:compte_conseiller) { create :compte_admin, structure: structure_conseiller }
-  let!(:compte_connecte) { connecte(compte_conseiller) }
+  let!(:compte_connecte) { connecte(create :compte_admin, structure: structure_conseiller) }
 
   describe 'index' do
     let!(:ma_campagne) do
@@ -74,7 +73,7 @@ describe 'Admin - Campagne', type: :feature do
 
     context 'en superadmin' do
       before do
-        compte_conseiller.update(role: 'superadmin')
+        compte_connecte.update(role: 'superadmin')
         visit new_admin_campagne_path
         fill_in :campagne_libelle, with: 'Belfort, pack demandeur'
         fill_in :campagne_code, with: 'CODESUPERADMIN'
@@ -90,7 +89,7 @@ describe 'Admin - Campagne', type: :feature do
         it do
           campagne = Campagne.order(:created_at).last
           expect(campagne.code).to eq 'CODESUPERADMIN'
-          expect(campagne.compte).to eq compte_conseiller
+          expect(campagne.compte).to eq compte_connecte
 
           situations_configurations = campagne.situations_configurations.includes(:situation)
           expect(situations_configurations[0].situation).to eq situation_inventaire
@@ -127,7 +126,7 @@ describe 'Admin - Campagne', type: :feature do
           campagne = Campagne.order(:created_at).last
           expect(campagne.libelle).to eq 'Belfort, pack demandeur'
           expect(campagne.code).to eq 'CDI45312'
-          expect(campagne.compte).to eq compte_conseiller
+          expect(campagne.compte).to eq compte_connecte
           within('.panel-programme') do
             expect(page).to have_content parcours_type_complet.libelle
           end
@@ -167,7 +166,7 @@ describe 'Admin - Campagne', type: :feature do
 
     context 'en superadmin' do
       before do
-        compte_conseiller.update(role: 'superadmin')
+        compte_connecte.update(role: 'superadmin')
         visit edit_admin_campagne_path(campagne)
       end
 
@@ -191,12 +190,16 @@ describe 'Admin - Campagne', type: :feature do
     end
   end
 
-  describe 'autorisation comptes' do
-    let(:mon_collegue) { create :compte_admin, nom: "Martin", structure: compte_connecte.structure }
-    let!(:ma_campagne) { create :campagne, compte: compte_connecte, privee: true }
+  describe "autorisation accès privés" do
+    let(:mon_collegue) do
+      create :compte_conseiller, nom: "Martin",
+             structure: compte_connecte.structure
+    end
+    let!(:ma_campagne) { create :campagne, compte: compte_connecte }
 
-    context "en tant propriétaire de ma campagne" do
+    context "quand la campagne est privée" do
       before do
+        ma_campagne.update(privee: true)
         ma_campagne.campagne_compte_autorisations.create!(compte_id: mon_collegue.id)
         visit admin_campagne_path(ma_campagne.reload)
       end
@@ -208,10 +211,31 @@ describe 'Admin - Campagne', type: :feature do
         expect(page).not_to have_content(mon_collegue.nom)
         expect(ma_campagne.reload.campagne_compte_autorisations).to be_empty
       end
+
+      context "quand mon collègue consulte la campagne" do
+        before do
+          deconnecte()
+          connecte(mon_collegue)
+          visit admin_campagne_path(ma_campagne.reload)
+        end
+
+        it "il voit qu'il y est autorisé" do
+          expect(page).to have_css('#acces_prives_sidebar_section')
+          expect(page).to have_content(mon_collegue.nom)
+          expect(page).not_to have_css('#acces_prives_sidebar_section .lien-supprimer')
+        end
+      end
+    end
+
+    context "quand la campagne n'est pas privée" do
+      it "n'affiche pas la sidebar" do
+        visit admin_campagne_path(ma_campagne.reload)
+        expect(page).not_to have_css('#acces_prives_sidebar_section')
+      end
     end
   end
 
-  describe 'suppression' do
+  describe "suppression" do
     let!(:campagne) do
       autre_compte_conseiller = create :compte_admin, email: 'orga@eva.fr'
       create :campagne, libelle: 'Rouen 30 mars', code: 'A5ROUEN', compte: autre_compte_conseiller

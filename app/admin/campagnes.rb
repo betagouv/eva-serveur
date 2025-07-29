@@ -70,15 +70,16 @@ class: "bouton-disabled")
   end
 
   sidebar :acces_prives, only: :show,
-    if: proc { !resource.campagne_compte_autorisations.empty? ||
-               can?(:autoriser_compte, resource) } do
+    if: proc { (resource.campagne_compte_autorisations.present? ||
+                can?(:autoriser_compte, resource)) &&
+               resource.privee } do
     resource.campagne_compte_autorisations.each do |autorisation|
       url = revoquer_compte_admin_campagne_path(
         resource,
         compte_id: autorisation.compte.id)
       render(Tag.new(autorisation.compte.display_name,
                      classes: "bleu-france",
-                     supprimable: can?(:revoquer_compte, Campagne),
+                     supprimable: can?(:revoquer_compte, resource),
                      url: url))
     end
     render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)

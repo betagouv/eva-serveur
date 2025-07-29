@@ -4,7 +4,7 @@ class TableauComponent < ViewComponent::Base
     @colonnes = []
   end
 
-  def colonne(titre: nil, td_class: nil, &block)
+  def colonne(titre: nil, td_class: "", &block)
     @colonnes << { titre: titre, td_class: td_class, block: block }
   end
 

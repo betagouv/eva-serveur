@@ -68,13 +68,7 @@ class AbilityUtilisateur
   end
 
   def droit_evenement(compte)
-    cannot %i[update create], Evenement
-
-    @session_ids ||= Partie.where("comptes.structure_id" => compte.structure_id)
-                           .joins(evaluation: { campagne: :compte }).pluck(:session_id)
-    can :read, Evenement, Evenement.where(session_id: @session_ids) do |e|
-      @session_ids.include?(e.session_id)
-    end
+    cannot %i[update create destroy], Evenement
   end
 
   def droit_restitution(compte)

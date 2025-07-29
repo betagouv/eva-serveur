@@ -15,6 +15,6 @@ class BadgeComponent < ViewComponent::Base
   end
 
   def display_icon_class
-    @display_icon ? "" : "fr-badge--no-icon"
+    @display_icon ? nil : "fr-badge--no-icon"
   end
 end

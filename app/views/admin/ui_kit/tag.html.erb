@@ -8,19 +8,14 @@
   <h2>Tag simple</h2>
   <%= render Tag.new("Important") %>
 
-  <h2>Tag supprimable</h2>
-  <%= render Tag.new("À supprimer", supprimable: true, url: "#") %>
-
   <h2>Tag avec classes personnalisées</h2>
-  <%= render Tag.new(
-        "Personnalisé",
-      ) %>
+  <%= render Tag.new("gris", classes: "grey") %>
+  <%= render Tag.new("rouge", classes: "red") %>
+  <%= render Tag.new("vert", classes: "green") %>
+  <%= render Tag.new("bleu-france", classes: "bleu-france") %>
 
-  <h2>Tag avec lien</h2>
-  <%= render Tag.new(
-        "Cliquable",
-        url: "#"
-      ) %>
+  <h2>Tag supprimable (la croix est blanche, ça marche mieux avec les fonds foncés)</h2>
+  <%= render Tag.new("À supprimer", classes: "bleu-france", supprimable: true, url: "javascript:alert('vous avez cliqué le lien supprimer');") %>
 
   <h2>Différents types de tags</h2>
   <div class="fr-mb-2w">

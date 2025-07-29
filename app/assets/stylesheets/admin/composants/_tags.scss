@@ -20,6 +20,10 @@
   &.grey {
     @include tag-couleur($grey-425, $grey-950);
   }
+
+  &.bleu-france {
+    @include tag-couleur($grey-1000, $blue-france-sun-113);
+  }
 }
 
 @mixin tag-couleur-majuscule($couleur-principale, $couleur-principale-legere) {
@@ -46,6 +50,10 @@
     position: absolute;
     right: 0.5rem;
     background-image: none;
+
+    &:active {
+      background-color: transparent;
+    }
 
     img {
       vertical-align: baseline;

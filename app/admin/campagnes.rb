@@ -65,7 +65,7 @@ class: "bouton-disabled")
 
   member_action :revoquer_compte, method: :patch do
     CampagneCompteAutorisation
-      .find_by(campagne_id: resource.id, compte_id: params["compte_id"])&.destroy
+      .find_by(campagne_id: resource.id, compte_id: params["compte_id"])&.really_destroy!
     redirect_to request.referer
   end
 

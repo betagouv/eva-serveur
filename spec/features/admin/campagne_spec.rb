@@ -210,6 +210,7 @@ describe 'Admin - Campagne', type: :feature do
         end
         expect(page).not_to have_content(mon_collegue.nom)
         expect(ma_campagne.reload.campagne_compte_autorisations).to be_empty
+        expect(CampagneCompteAutorisation.only_deleted).to be_empty
       end
 
       context "quand mon collègue consulte la campagne" do

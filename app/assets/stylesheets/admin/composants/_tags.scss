@@ -36,12 +36,17 @@
   background-color: $couleur-principale-legere;
 }
 
-.status_tag {
+.status_tag { // tags active admin
   @include tag();
   font-weight: normal;
   text-transform: unset;
   letter-spacing: unset;
   white-space: nowrap;
+
+  &.no, &.yes {
+    border: 1px solid $couleur-texte;
+  }
+
 }
 
 .tag {

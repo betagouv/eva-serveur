@@ -25,11 +25,17 @@ class AbilityUtilisateur
   private
 
   def droit_campagne(compte)
-    can %i[create duplique], Campagne if can_create_campagne?(compte)
-    can %i[update read], Campagne,
-      campagnes_publique_de_la_structure(compte) if compte.validation_acceptee?
     can %i[read update autoriser_compte revoquer_compte destroy], Campagne, compte_id: compte.id
+    can %i[create duplique], Campagne if can_create_campagne?(compte)
+    can %i[read], Campagne, campagne_compte_autorisations: { compte_id: compte.id }, privee: true
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
+    return unless compte.validation_acceptee?
+
+    can %i[update read], Campagne, campagnes_publique_de_la_structure(compte)
+    if compte.admin?
+      can %i[read update autoriser_compte revoquer_compte destroy], Campagne,
+          campagnes_de_la_structure(compte)
+    end
   end
 
   def droits_generiques(compte)
@@ -40,7 +46,12 @@ class AbilityUtilisateur
   def droit_evaluation(compte)
     cannot :create, Evaluation
     can :read, Evaluation, responsable_suivi_id: compte.id
-    can %i[read destroy], Evaluation, campagne: { compte_id: compte.id }
+    can %i[read destroy mise_en_action
+           supprimer_responsable_suivi ajouter_responsable_suivi],
+        Evaluation, campagne: { compte_id: compte.id }
+    can %i[read mise_en_action
+           supprimer_responsable_suivi ajouter_responsable_suivi],
+        Evaluation, campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     return if compte.structure_id.blank?
 
     if compte.validation_acceptee?
@@ -51,8 +62,8 @@ class AbilityUtilisateur
     end
 
     if compte.admin?
-      can %i[update destroy], Evaluation,
-          campagne: campagnes_publique_de_la_structure(compte)
+      can %i[read update destroy], Evaluation,
+          campagne: campagnes_de_la_structure(compte)
     end
   end
 
@@ -67,6 +78,7 @@ class AbilityUtilisateur
   end
 
   def droit_restitution(compte)
+    can :manage, Restitution::Base, campagne: { compte_id: compte.id }
     can :manage, Restitution::Base, campagne: campagnes_publique_de_la_structure(compte)
   end
 
@@ -103,10 +115,14 @@ class AbilityUtilisateur
     cannot(:read, AnnonceGenerale)
     cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
-    cannot(%i[supprimer_responsable_suivi ajouter_responsable_suivi
+    cannot(%i[mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification],
            Evaluation)
     cannot(%i[autoriser_compte revoquer_compte], Campagne)
+  end
+
+  def campagnes_de_la_structure(compte)
+    { compte: { structure_id: compte.structure_id } }
   end
 
   def campagnes_publique_de_la_structure(compte)

@@ -173,13 +173,14 @@ describe Ability do
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
       let(:pas_collegue) { compte_conseiller }
-      let(:campagne_collegue) { create :campagne, compte: mon_collegue }
+      let(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
 
       it { is_expected.to be_able_to(:read, mon_collegue) }
       it { is_expected.to be_able_to(:update, mon_collegue) }
       it { is_expected.to be_able_to(:edit_role, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, evaluation_collegue) }
+      it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:autoriser, mon_collegue) }
       it { is_expected.to be_able_to(:refuser, mon_collegue) }
       it { is_expected.to be_able_to(:verifier, mon_collegue) }
@@ -232,22 +233,24 @@ describe Ability do
   end
 
   context 'Compte conseiller' do
-    let(:compte)                    { compte_conseiller }
-    let!(:campagne_conseiller)    { create :campagne, compte: compte }
-    let(:evaluation_conseiller)   { create :evaluation, campagne: campagne_conseiller }
-    let(:situation)                 { create :situation_inventaire }
+    let(:compte) { compte_conseiller }
+    let(:mon_collegue) { create :compte_conseiller, structure: structure_avec_admin }
+    let!(:campagne_privee) { create :campagne, compte: compte, privee: true }
+    let!(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
+    let(:evaluation_conseiller) { create :evaluation, campagne: campagne_privee }
+    let(:evaluation_autre_conseiller) { create :evaluation, campagne: campagne_collegue }
+    let(:situation)             { create :situation_inventaire }
     let!(:evenement_superadmin) { create :evenement, partie: partie_superadmin }
     let!(:partie_superadmin) do
       create :partie, evaluation: evaluation_superadmin, situation: situation
     end
 
-    let!(:evenement_conseiller) { create :evenement, partie: partie_conseiller }
     let!(:partie_conseiller) do
       create :partie, evaluation: evaluation_conseiller, situation: situation
     end
 
     it 'avec une campagne qui a des évaluations' do
-      expect(subject).to be_able_to(:destroy, campagne_conseiller)
+      expect(subject).to be_able_to(:destroy, campagne_privee)
     end
 
     it { is_expected.not_to be_able_to(:manage, :all) }
@@ -270,6 +273,7 @@ describe Ability do
     it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation_conseiller) }
     it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation_conseiller) }
     it { is_expected.not_to be_able_to(%i[read destroy], evaluation_superadmin) }
+    it { is_expected.not_to be_able_to(%i[read], campagne_collegue) }
     it { is_expected.not_to be_able_to(:read, Evenement.new) }
     it { is_expected.not_to be_able_to(:read, evenement_superadmin) }
     it { is_expected.not_to be_able_to(:read, SourceAide.new) }
@@ -288,7 +292,7 @@ describe Ability do
     it { is_expected.not_to be_able_to(:destroy, campagne_superadmin) }
     it { is_expected.to be_able_to(:read, Questionnaire.new) }
     it { is_expected.to be_able_to(:read, Situation.new) }
-    it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_conseiller, nil)) }
+    it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_privee, nil)) }
     it { is_expected.to be_able_to(:read, Actualite.new) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Aide', {})) }
     it { is_expected.to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Dashboard', {})) }
@@ -318,14 +322,25 @@ describe Ability do
       it { is_expected.to be_able_to(:duplique, Campagne) }
     end
 
-    context 'peut consulter les campagnes de ma structure' do
-      let(:mon_collegue) { create :compte, structure: compte_conseiller.structure }
-      let(:campagne_collegue) { create :campagne, compte: mon_collegue }
+    context "quand j'ai accès à la campagne privé d'un autre conseiller" do
+      before do
+        campagne_collegue.campagne_compte_autorisations.create!(compte_id: compte.id)
+      end
+
+      it { is_expected.to be_able_to(%i[read], campagne_collegue) }
+      it { is_expected.to be_able_to(%i[read], evaluation_autre_conseiller) }
+    end
+
+    context 'peut consulter les campagnes publiques de ma structure' do
       let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
       let!(:partie_collegue) do
         create :partie, evaluation: evaluation_collegue, situation: situation
       end
       let(:evenement_collegue) { create :evenement, partie: partie_collegue }
+
+      before do
+        campagne_collegue.update(privee: false)
+      end
 
       it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue) }

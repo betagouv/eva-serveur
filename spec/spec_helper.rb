@@ -65,6 +65,10 @@ RSpec.configure do |config|
     compte
   end
 
+  def deconnecte
+    find("#logout a").click
+  end
+
   def connecte_email(email:, password: nil)
     visit new_compte_session_path
     fill_in :compte_email, with: email

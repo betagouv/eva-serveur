@@ -78,8 +78,4 @@
   &.evolution {
     @include tag-couleur-majuscule($success-425, $success-950)
   }
-
-  &.no, &.yes {
-    border-color: $couleur-texte;
-  }
 }

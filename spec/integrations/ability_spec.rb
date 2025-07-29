@@ -36,7 +36,7 @@ describe Ability do
 
     it { is_expected.to be_able_to(%i[read destroy update], Evaluation.new) }
     it { is_expected.not_to be_able_to(%i[create], Evaluation.new) }
-    it { is_expected.not_to be_able_to(%i[create update], Evenement.new) }
+    it { is_expected.not_to be_able_to(%i[create update destroy], Evenement.new) }
     it { is_expected.to be_able_to(:read, Evenement.new) }
     it { is_expected.to be_able_to(:manage, Situation.new) }
     it { is_expected.to be_able_to(:manage, Campagne.new) }
@@ -282,7 +282,6 @@ describe Ability do
     it { is_expected.not_to be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read mise_en_action destroy], evaluation_conseiller) }
-    it { is_expected.to be_able_to(:read, evenement_conseiller) }
 
     it do
       expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte destroy],
@@ -336,7 +335,6 @@ describe Ability do
       let!(:partie_collegue) do
         create :partie, evaluation: evaluation_collegue, situation: situation
       end
-      let(:evenement_collegue) { create :evenement, partie: partie_collegue }
 
       before do
         campagne_collegue.update(privee: false)
@@ -346,7 +344,6 @@ describe Ability do
       it { is_expected.to be_able_to(:read, evaluation_collegue) }
       it { is_expected.not_to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
-      it { is_expected.to be_able_to(:read, evenement_collegue) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
     end
 

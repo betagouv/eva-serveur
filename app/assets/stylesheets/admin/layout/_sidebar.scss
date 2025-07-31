@@ -2,15 +2,41 @@
   display: none;
 }
 
+#responsable_de_suivi_sidebar_section, #acces_prives_sidebar_section {
+  .panel_contents {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    $largeur-panel: 18.125rem;
+    $padding: 1rem;
+    @include tronque();
+    display: inline-block;
+    max-width: calc(#{ $largeur-panel - ($padding * 2) });
+    font-weight: 400;
+  }
+  .champ-recherche {
+    width: 100%;
+  }
+  .bouton-icone-plus {
+    &::before {
+      content: asset-data-url('plus.svg');
+      margin-right: 4px;
+    }
+  }
+  input {
+    height: 1.625rem;
+  }
+}
+
 .sidebar {
   .sidebar_section.panel {
     margin-bottom: 0.5rem;
 
     &.action-items-sidebar {
-      @include annule-carte;
-      @include panel-gris();
-
-      background: var(--color-background-default, #FFF);      
+      background: var(--color-background-default, #FFF);
       /* dsfr/shadow-sm */
       box-shadow: 0px 2px 6px 0px rgba(0, 0, 18, 0.16);
     }

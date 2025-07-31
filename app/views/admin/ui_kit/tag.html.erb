@@ -12,10 +12,10 @@
   <%= render Tag.new("gris", classes: "grey") %>
   <%= render Tag.new("rouge", classes: "red") %>
   <%= render Tag.new("vert", classes: "green") %>
-  <%= render Tag.new("bleu-france", classes: "bleu-france") %>
+  <%= render Tag.new("bleu", classes: "bleu") %>
 
-  <h2>Tag supprimable (la croix est blanche, ça marche mieux avec les fonds foncés)</h2>
-  <%= render Tag.new("À supprimer", classes: "bleu-france", supprimable: true, url: "javascript:alert('vous avez cliqué le lien supprimer');") %>
+  <h2>Tag supprimable (la couleur de la croix nécessite d'utiliser le bleu)</h2>
+  <%= render Tag.new("À supprimer", classes: "bleu", supprimable: true, url: "javascript:alert('vous avez cliqué le lien supprimer');") %>
 
   <h2>Différents types de tags</h2>
   <div class="fr-mb-2w">

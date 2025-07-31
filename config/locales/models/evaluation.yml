@@ -34,6 +34,7 @@ fr:
         beneficiaire: Bénéficiaire
         responsable_suivi: Responsable de suivi
         interpretations:
+          non_teste: Non testé
           synthese_competences_de_base:
             socle_clea: supérieur
             ni_ni: intermédiaire

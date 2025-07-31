@@ -59,8 +59,31 @@ module EvaluationHelper
   def traduit_niveau(evaluation, interpretation)
     scope = "activerecord.attributes.evaluation.interpretations"
     niveau = evaluation.send(interpretation)
-    return "Non testé" if niveau.blank?
+    return t("#{interpretation}.indetermine", scope: scope) if niveau.blank?
 
     t("#{interpretation}.#{niveau}", scope: scope)
+  end
+
+  def badge_positionnement(evaluation, competence)
+    if evaluation.campagne.avec_positionnement?(competence)
+      niveau = evaluation.send("positionnement_niveau_#{competence}")
+      contenu = traduit_niveau(evaluation, :"positionnement_niveau_#{competence}")
+    else
+      niveau = nil
+      contenu = t("activerecord.attributes.evaluation.interpretations.non_teste")
+    end
+
+    construit_badge(contenu, niveau)
+  end
+
+  private
+
+  def construit_badge(contenu, niveau)
+    render BadgeComponent.new(
+      contenu: contenu,
+      html_class: couleur_badges_positionnement(niveau),
+      display_icon: false,
+      taille: "sm"
+    )
   end
 end

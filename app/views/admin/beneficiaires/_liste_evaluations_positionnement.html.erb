@@ -4,29 +4,14 @@
       <% evaluation.created_at.strftime("%d/%m/%Y") %>
     <%end %>
 
-    <% tableau.colonne(titre: "Littératie") do |evaluation|%>
-      <% niveau_litteratie = evaluation.positionnement_niveau_litteratie %>
-      <% contenu = traduit_niveau(evaluation, :positionnement_niveau_litteratie) %>
-
-      <%= render BadgeComponent.new(
-        contenu: contenu,
-        html_class: couleur_badges_positionnement(niveau_litteratie),
-        display_icon: false,
-        taille: "sm"
-      ) %>
+    <% tableau.colonne(titre: t(".litteratie")) do |evaluation| %>
+      <%= badge_positionnement(evaluation, :litteratie) %>
     <% end %>
 
-    <% tableau.colonne(titre: "Numératie") do |evaluation|%>
-      <% niveau_numeratie = evaluation.positionnement_niveau_numeratie %>
-      <% contenu = traduit_niveau(evaluation, :positionnement_niveau_numeratie) %>
-
-      <%= render BadgeComponent.new(
-        contenu: contenu,
-        html_class: couleur_badges_positionnement(niveau_numeratie),
-        display_icon: false,
-        taille: "sm"
-      ) %>
+    <% tableau.colonne(titre: t(".numeratie")) do |evaluation| %>
+      <%= badge_positionnement(evaluation, :numeratie) %>
     <% end %>
+
     <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
       <%= render MenuActionsComponent.new(
         { label: t("admin.evaluations.index.voir"), url: admin_evaluation_path(evaluation) },

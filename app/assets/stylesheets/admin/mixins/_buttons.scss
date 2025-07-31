@@ -7,7 +7,7 @@
   &, &:link, &:visited {
     background-image: none;
   }
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   cursor: pointer;
   font-family: $font-texte;

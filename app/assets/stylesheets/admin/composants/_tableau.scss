@@ -1,6 +1,8 @@
-.tableau-boutons-action {
-  direction: rtl;
+.fr-table__content td.tableau-boutons-action {
+  text-align: right;
+}
 
+.tableau-boutons-action {
   .menu-actions {
     @include menu-actions();
 

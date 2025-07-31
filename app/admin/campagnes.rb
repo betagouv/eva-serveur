@@ -78,7 +78,7 @@ class: "bouton-disabled")
         resource,
         compte_id: autorisation.compte.id)
       render(Tag.new(autorisation.compte.display_name,
-                     classes: "bleu-france",
+                     classes: "bleu",
                      supprimable: can?(:revoquer_compte, resource),
                      url: url))
     end

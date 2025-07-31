@@ -99,27 +99,3 @@
     margin-top: 2rem;
   }
 }
-
-#responsable_de_suivi_sidebar_section, #acces_prives_sidebar_section {
-  @include panel-gris();
-  .tag {
-    $largeur-panel: 18.125rem;
-    $padding: 1rem;
-    @include tronque();
-    display: inline-block;
-    max-width: calc(#{ $largeur-panel - ($padding * 2) });
-    font-weight: 400;
-  }
-  .champ-recherche {
-    width: 100%;
-  }
-  .bouton-icone-plus {
-    &::before {
-      content: asset-data-url('plus.svg');
-      margin-right: 4px;
-    }
-  }
-  input {
-    height: 1.625rem;
-  }
-}

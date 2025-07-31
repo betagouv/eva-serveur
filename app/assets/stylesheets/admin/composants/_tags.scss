@@ -21,8 +21,8 @@
     @include tag-couleur($grey-425, $grey-950);
   }
 
-  &.bleu-france {
-    @include tag-couleur($grey-1000, $blue-france-sun-113);
+  &.bleu {
+    @include tag-couleur(var(--text-label-blue-cumulus), var(--background-contrast-blue-cumulus));
   }
 }
 

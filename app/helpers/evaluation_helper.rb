@@ -81,7 +81,7 @@ module EvaluationHelper
   def construit_badge(contenu, niveau)
     render BadgeComponent.new(
       contenu: contenu,
-      html_class: couleur_badges_positionnement(niveau),
+      class_couleur: couleur_badges_positionnement(niveau),
       display_icon: false,
       taille: "sm"
     )

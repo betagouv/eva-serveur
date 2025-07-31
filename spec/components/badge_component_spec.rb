@@ -6,14 +6,14 @@ describe BadgeComponent, type: :component do
   subject(:component) do
     described_class.new(
       contenu: contenu,
-      html_class: html_class,
+      class_couleur: class_couleur,
       display_icon: display_icon,
       taille: taille
     )
   end
 
   let(:contenu) { "Nouveau" }
-  let(:html_class) { "fr-badge--success" }
+  let(:class_couleur) { "fr-badge--success" }
   let(:display_icon) { false }
   let(:taille) { nil }
 
@@ -46,7 +46,7 @@ describe BadgeComponent, type: :component do
   end
 
   context "quand html_class est vide" do
-    let(:html_class) { "" }
+    let(:class_couleur) { "" }
 
     it "rend un badge sans la classe spécifique" do
       render_inline(component)

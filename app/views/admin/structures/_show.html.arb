@@ -23,7 +23,7 @@ div class: "row" do
                 contenu: traduction_autorisation_creation_campagne(
                   resource.autorisation_creation_campagne
                 ),
-                html_class: badge_class(structure.autorisation_creation_campagne))
+                class_couleur: badge_class(structure.autorisation_creation_campagne))
               )
             end
             row :region

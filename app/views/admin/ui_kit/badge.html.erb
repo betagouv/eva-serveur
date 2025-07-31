@@ -10,7 +10,7 @@
   <div class="fr-mb-3w">Taille par defaut (md):
     <%= render BadgeComponent.new(
       contenu: "Nouveau",
-      html_class: "fr-badge--success",
+      class_couleur: "fr-badge--success",
       display_icon: true
     ) %>
   </div>
@@ -18,7 +18,7 @@
   <div class="fr-mb-2w">Taille sm:
     <%= render BadgeComponent.new(
       contenu: "Nouveau",
-      html_class: "fr-badge--success",
+      class_couleur: "fr-badge--success",
       display_icon: true,
       taille: "sm"
     ) %>
@@ -29,7 +29,7 @@
   <div class="fr-mb-3w">Taille par defaut (md):
     <%= render BadgeComponent.new(
       contenu: "Terminé",
-      html_class: "fr-badge--info",
+      class_couleur: "fr-badge--info",
       display_icon: false
     ) %>
   </div>
@@ -37,7 +37,7 @@
   <div class="fr-mb-3w">Taille sm:
     <%= render BadgeComponent.new(
       contenu: "Terminé",
-      html_class: "fr-badge--info",
+      class_couleur: "fr-badge--info",
       display_icon: false,
       taille: "sm"
     ) %>
@@ -45,15 +45,15 @@
 
   <h2>Différents types</h2>
   <div class="fr-mb-2w">
-    <%= render BadgeComponent.new(contenu: "Succès", html_class: "fr-badge--success", display_icon: true) %>
+    <%= render BadgeComponent.new(contenu: "Succès", class_couleur: "fr-badge--success", display_icon: true) %>
   </div>
   <div class="fr-mb-2w">
-    <%= render BadgeComponent.new(contenu: "Erreur", html_class: "fr-badge--error", display_icon: true) %>
+    <%= render BadgeComponent.new(contenu: "Erreur", class_couleur: "fr-badge--error", display_icon: true) %>
   </div>
   <div class="fr-mb-2w">
-    <%= render BadgeComponent.new(contenu: "Info", html_class: "fr-badge--info", display_icon: true) %>
+    <%= render BadgeComponent.new(contenu: "Info", class_couleur: "fr-badge--info", display_icon: true) %>
   </div>
   <div class="fr-mb-2w">
-    <%= render BadgeComponent.new(contenu: "Warning", html_class: "fr-badge--warning", display_icon: true) %>
+    <%= render BadgeComponent.new(contenu: "Warning", class_couleur: "fr-badge--warning", display_icon: true) %>
   </div>
 </div> 

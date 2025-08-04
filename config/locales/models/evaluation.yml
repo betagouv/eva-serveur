@@ -108,7 +108,7 @@ fr:
         campagne: Campagne
         created_at: Date
         nom: Nom
-        code_personnel: Code personnel
+        code_beneficiaire: Code bénéficiaire
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global
         niveau_cefr: Niveau CEFR (diagnostic)

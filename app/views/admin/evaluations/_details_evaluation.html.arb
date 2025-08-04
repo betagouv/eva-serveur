@@ -9,10 +9,10 @@ div id: "evaluation__details", class: "row" do
         div class: "col col-6 card-informations" do
           div class: "row" do
             div class: "col-1" do
-              span Beneficiaire.human_attribute_name("code_personnel")
+              span Beneficiaire.human_attribute_name("code_beneficiaire")
             end
             div class: "col col-2" do
-              para auto_link(resource.beneficiaire, resource.beneficiaire.code_personnel),
+              para auto_link(resource.beneficiaire, resource.beneficiaire.code_beneficiaire),
               class: "restitution-p"
             end
           end

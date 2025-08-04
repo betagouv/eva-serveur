@@ -11,9 +11,9 @@ div class: "page-beneficiaire" do
   end
 
   render CartePartageCodeComponent.new(
-    libelle_code: Beneficiaire.human_attribute_name("code_personnel"),
-    code: beneficiaire.code_personnel,
-    url: url_beneficiaire(beneficiaire.code_personnel),
+    libelle_code: Beneficiaire.human_attribute_name("code_beneficiaire"),
+    code: beneficiaire.code_beneficiaire,
+    url: url_beneficiaire(beneficiaire.code_beneficiaire),
     description: I18n.t("admin.beneficiaires.show.carte_partage_code.description")
   )
 

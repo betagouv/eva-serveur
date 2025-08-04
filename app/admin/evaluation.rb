@@ -73,7 +73,7 @@ ActiveAdmin.register Evaluation do
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
     column :nom
-    column("code_personnel") { |evaluation| evaluation.beneficiaire&.code_personnel }
+    column("code_beneficiaire") { |evaluation| evaluation.beneficiaire&.code_beneficiaire }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
     end

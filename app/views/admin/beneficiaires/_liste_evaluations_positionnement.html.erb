@@ -1,5 +1,5 @@
 <%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
-  <%= render TableauComponent.new(collection: beneficiaire.evaluations_positionnement.order(created_at: :desc)) do |tableau| %>
+  <%= render TableauComponent.new(collection: beneficiaire.evaluations_positionnement.order(created_at: :desc), selectionnable: true) do |tableau| %>
     <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
       <% evaluation.created_at.strftime("%d/%m/%Y") %>
     <%end %>

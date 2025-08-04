@@ -5,6 +5,11 @@
         <table id="table-0">
           <thead>
             <tr style="border-bottom-color: $grey-200;">
+              <% if @selectionnable %>
+                <th class="fr-cell--fixed" role="columnheader">
+                  <span class="fr-sr-only">Sélectionner</span>
+                </th>
+              <% end %>
               <% colonnes.each do |colonne| %>
                 <th><%= colonne[:titre] %></th>
               <% end %>
@@ -13,6 +18,14 @@
           <tbody>
             <% collection.each_with_index do |item, index| %>
               <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>">
+                <% if @selectionnable %>
+                  <th class="fr-cell--fixed" scope="row">
+                    <div class='fr-checkbox-group fr-checkbox-group--sm'>
+                      <input name='row-select' id='table-select-checkbox--<%= index %>' type='checkbox'>
+                      <label class='fr-label' for='table-select-checkbox--<%= index %>'> Sélectionner la ligne <%= index + 1 %> </label>
+                    </div>
+                  </th>
+                <% end %>
                 <% colonnes.each do |colonne| %>
                   <%= tag.td(class: colonne[:td_class].presence) do %>
                     <%= view_context.capture(item, &colonne[:block]) %>

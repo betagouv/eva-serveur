@@ -48,7 +48,7 @@ module Api
     end
 
     def permit_params
-      params.permit(:id, :nom, :code_personnel, :code_campagne, :terminee_le, :debutee_le,
+      params.permit(:id, :nom, :code_beneficiaire, :code_campagne, :terminee_le, :debutee_le,
                     :beneficiaire_id, conditions_passation_attributes:
                     %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
                     donnee_sociodemographique_attributes:
@@ -74,16 +74,16 @@ module Api
     end
 
     def traite_beneficiaire
-      if @evaluation_params[:code_personnel].present?
-        traite_avec_code_personnel
+      if @evaluation_params[:code_beneficiaire].present?
+        traite_avec_code_beneficiaire
       elsif @evaluation_params[:nom].present?
         construit_beneficiaire_attributes
       end
     end
 
-    def traite_avec_code_personnel
-      code = @evaluation_params.delete(:code_personnel)
-      beneficiaire = Beneficiaire.find_by(code_personnel: code)
+    def traite_avec_code_beneficiaire
+      code = @evaluation_params.delete(:code_beneficiaire)
+      beneficiaire = Beneficiaire.find_by(code_beneficiaire: code)
 
       return unless beneficiaire
 
@@ -93,7 +93,7 @@ module Api
 
     def construit_beneficiaire_attributes
       @evaluation_params[:beneficiaire_attributes] = { nom: @evaluation_params[:nom] }
-      @evaluation_params.delete(:code_personnel)
+      @evaluation_params.delete(:code_beneficiaire)
     end
   end
 end

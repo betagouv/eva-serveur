@@ -85,8 +85,8 @@ describe 'Evaluation', type: :request do
         end
       end
 
-      context 'quand le code personnel est inconnu' do
-        let(:payload_invalide) { { nom: '', code_personnel: '1234567890' } }
+      context 'quand le code bénéficiaire est inconnu' do
+        let(:payload_invalide) { { nom: '', code_beneficiaire: '1234567890' } }
 
         before { post '/api/evaluations', params: payload_invalide }
 
@@ -98,12 +98,12 @@ describe 'Evaluation', type: :request do
         end
       end
 
-      context 'quand le code personnel est connu' do
+      context 'quand le code bénéficiaire est connu' do
         let(:beneficiaire) { create :beneficiaire }
         let(:date) { Time.zone.local(2021, 10, 4) }
         let(:payload_valide) do
           {
-            code_personnel: beneficiaire.code_personnel,
+            code_beneficiaire: beneficiaire.code_beneficiaire,
             nom: '',
             code_campagne: 'ETE19',
             debutee_le: date.iso8601,

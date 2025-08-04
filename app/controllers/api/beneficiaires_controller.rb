@@ -9,7 +9,7 @@ module Api
     private
 
     def trouve_beneficiaire
-      @beneficiaire = Beneficiaire.find_by!(code_personnel: params[:code_personnel])
+      @beneficiaire = Beneficiaire.find_by!(code_beneficiaire: params[:code_beneficiaire])
     end
   end
 end

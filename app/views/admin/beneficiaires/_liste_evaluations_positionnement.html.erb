@@ -1,23 +1,45 @@
 <%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
-  <%= render TableauComponent.new(collection: beneficiaire.evaluations_positionnement.order(created_at: :desc), selectionnable: true) do |tableau| %>
-    <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
-      <% evaluation.created_at.strftime("%d/%m/%Y") %>
-    <%end %>
+  <div class="liste-evaluations-positionnement">
+    <div class="liste-evaluations-positionnement__actions">
+      <div class="liste-evaluations-positionnement__nombre-element-selectionnes"></div>
+      <div class="liste-evaluations-positionnement__actions__comparer">
+        <%= render BoutonComponent.new("#", type: :secondary, id: "comparer-evaluation", disabled: true) do %>
+          <span class='fr-icon-line-chart-line fr-icon--sm' aria-hidden='true'></span> 
+          Comparer
+        <% end %>
+      </div>
+    </div>
 
-    <% tableau.colonne(titre: t(".litteratie")) do |evaluation| %>
-      <%= badge_positionnement(evaluation, :litteratie) %>
-    <% end %>
+    <%= render TableauComponent.new(
+      collection: beneficiaire.evaluations_positionnement.order(created_at: :desc),
+      selectionnable: true,
+      class: "liste-evaluations-positionnement__tableau"
+    ) do |tableau| %>
+      <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
+        <% evaluation.created_at.strftime("%d/%m/%Y") %>
+      <% end %>
 
-    <% tableau.colonne(titre: t(".numeratie")) do |evaluation| %>
-      <%= badge_positionnement(evaluation, :numeratie) %>
-    <% end %>
+      <% tableau.colonne(titre: t(".litteratie")) do |evaluation| %>
+        <% a_fait_litteratie = evaluation.campagne.avec_positionnement?(:litteratie) %>
+        <div data-litteratie="<%= a_fait_litteratie %>">
+          <%= badge_positionnement(evaluation, :litteratie) %>
+        </div>
+      <% end %>
 
-    <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
-      <%= render MenuActionsComponent.new(
-        { label: t("admin.evaluations.index.voir"), url: admin_evaluation_path(evaluation) },
-        { label: t("admin.evaluations.index.modifier"), url: edit_admin_evaluation_path(evaluation) },
-        { label: t("admin.evaluations.index.supprimer"), url: admin_evaluation_path(evaluation), method: :delete, data: { confirm: t("admin.evaluations.index.confirmation_suppression") } }
-      ) %>
+      <% tableau.colonne(titre: t(".numeratie")) do |evaluation| %>
+        <% a_fait_numeratie = evaluation.campagne.avec_positionnement?(:numeratie) %>
+        <div data-numeratie="<%= a_fait_numeratie %>">
+          <%= badge_positionnement(evaluation, :numeratie) %>
+        </div>
+      <% end %>
+
+      <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
+        <%= render MenuActionsComponent.new(
+          { label: t("admin.evaluations.index.voir"), url: admin_evaluation_path(evaluation) },
+          { label: t("admin.evaluations.index.modifier"), url: edit_admin_evaluation_path(evaluation) },
+          { label: t("admin.evaluations.index.supprimer"), url: admin_evaluation_path(evaluation), method: :delete, data: { confirm: t("admin.evaluations.index.confirmation_suppression") } }
+        ) %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

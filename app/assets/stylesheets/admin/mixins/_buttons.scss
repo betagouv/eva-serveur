@@ -16,11 +16,12 @@
   transition: all 150ms ease-out;
   width: fit-content;
   height: fit-content;
+  margin: 0; // form button applique un margin de 3px à droite
 
   border: 1px solid;
 
   &:disabled, &:disabled:hover {
-    cursor: default;
+    cursor: not-allowed;
     color: $grey-625;
     background-color: $grey-925;
     border-color: $grey-925;

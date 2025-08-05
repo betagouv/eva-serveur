@@ -10,7 +10,6 @@ class BoutonComponent < ViewComponent::Base
   SECONDARY_CLASSES = %w[
     bouton-secondaire
     grand-bouton
-    text-primary
   ].freeze
   DESACTIVE_CLASSES = %w[
     bouton

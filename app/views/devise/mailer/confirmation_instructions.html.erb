@@ -8,7 +8,9 @@
   <p style="font-weight: 600;">Pour des raisons de sécurité, nous avons besoin que vous confirmiez votre adresse email en cliquant sur le bouton ci-dessous : </p>
 
   <div class="text-center" style="margin: 2rem 0;">
-    <%= render(BoutonComponent.new("Je confirme mon adresse email", url_confirmation)) %>
+    <%= render(BoutonComponent.new(url_confirmation)) do %>
+      Je confirme mon adresse email
+    <% end %>
   </div>
 
   <p style="font-size: 12px;">

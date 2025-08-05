@@ -24,8 +24,7 @@ class BoutonComponent < ViewComponent::Base
     desactive: DESACTIVE_CLASSES
   }.freeze
 
-  def initialize(body, url, type: :primary, **params)
-    @body = body
+  def initialize(url, type: :primary, **params)
     @url = url
     @type = type
     @params = params

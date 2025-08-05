@@ -1,1 +1,3 @@
-<%= link_to @body, @url, @params %>
+<%= button_to @url, @params do %>
+  <% content %>
+<% end %>

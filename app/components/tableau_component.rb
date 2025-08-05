@@ -1,8 +1,9 @@
 class TableauComponent < ViewComponent::Base
-  def initialize(collection:, selectionnable: false)
+  def initialize(collection:, selectionnable: false, **params)
     @collection = collection
     @colonnes = []
     @selectionnable = selectionnable
+    @params = params
   end
 
   def colonne(titre: nil, td_class: "", &block)

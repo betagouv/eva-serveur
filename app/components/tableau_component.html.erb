@@ -1,4 +1,4 @@
-<div class="fr-table fr-table--no-caption fr-m-0" id="table-0-component" data-fr-js-table="true">
+<div class="fr-table fr-table--no-caption fr-m-0 <%= @params[:class] %>" id="table-0-component" data-fr-js-table="true">
   <div class="fr-table__wrapper">
     <div class="fr-table__container">
       <div class="fr-table__content">
@@ -17,7 +17,7 @@
           </thead>
           <tbody>
             <% collection.each_with_index do |item, index| %>
-              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>">
+              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>" data-id="<%= item&.id %>">
                 <% if @selectionnable %>
                   <th class="fr-cell--fixed" scope="row">
                     <div class='fr-checkbox-group fr-checkbox-group--sm'>

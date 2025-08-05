@@ -1,0 +1,16 @@
+.liste-evaluations-positionnement {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-6v;
+}
+
+.liste-evaluations-positionnement__nombre-element-selectionnes {
+  display: flex;
+  align-items: center;
+}
+
+.liste-evaluations-positionnement__actions {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}

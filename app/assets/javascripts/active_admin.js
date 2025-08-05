@@ -19,6 +19,7 @@
 //= require evaluation
 //= require simple_mde
 //= require modal_verification
+//= require comparer_evaluations_positionnement
 
 //= require chartkick
 //= require Chart.bundle

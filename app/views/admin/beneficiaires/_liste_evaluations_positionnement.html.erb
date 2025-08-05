@@ -3,7 +3,7 @@
     <div class="liste-evaluations-positionnement__actions">
       <div class="liste-evaluations-positionnement__nombre-element-selectionnes"></div>
       <div class="liste-evaluations-positionnement__actions__comparer">
-        <%= render BoutonComponent.new("#", type: :secondary, id: "comparer-evaluation", disabled: true) do %>
+        <%= render BoutonComponent.new("#", type: :secondary, tag: :button, id: "comparer-evaluation", disabled: true) do %>
           <span class='fr-icon-line-chart-line fr-icon--sm' aria-hidden='true'></span> 
           Comparer
         <% end %>

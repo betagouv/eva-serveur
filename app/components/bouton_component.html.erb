@@ -1,3 +1,9 @@
-<%= button_to @url, @params do %>
-  <% content %>
+<% if @tag == :a %>
+  <%= link_to @url, @params do %>
+    <% content %>
+  <% end %>
+<% else %>
+  <%= button_to @url, @params do %>
+    <% content %>
+  <% end %>
 <% end %>

@@ -17,15 +17,17 @@ elsif prise_en_main.en_cours?
                locals: { campagne: campagnes.first }
         div class: "d-flex w-100 justify-content-end" do
           if prise_en_main.etape_en_cours == PriseEnMain::ETAPES.last
-            render BoutonComponent.new(t("admin.dashboard.prise_en_main.terminer"),
-                                       quitter_mode_tutoriel_admin_compte_path(current_compte),
+            render BoutonComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :primary,
-                                       method: :patch)
+                                       method: :patch) do
+               text_node t("admin.dashboard.prise_en_main.terminer")
+            end
           elsif current_compte.structure_id.present?
-            render BoutonComponent.new(t("admin.dashboard.prise_en_main.quitter"),
-                                       quitter_mode_tutoriel_admin_compte_path(current_compte),
+            render BoutonComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
                                        type: :secondary,
-                                       method: :patch)
+                                       method: :patch) do
+              text_node t("admin.dashboard.prise_en_main.quitter")
+            end
           end
         end
       end

@@ -6,20 +6,28 @@
   <h1>Démo BoutonComponent</h1>
 
   <h2>Bouton primaire</h2>
-  <%= render BoutonComponent.new("Bouton Primaire", "#", type: :primary) %>
+  <%= render BoutonComponent.new("#", type: :primary) do %>
+    Bouton Primaire
+  <% end %>
 
   <h2>Bouton secondaire</h2>
-  <%= render BoutonComponent.new("Bouton Secondaire", "#", type: :secondary) %>
+  <%= render BoutonComponent.new("#", type: :secondary) do %>
+    Bouton Secondaire
+  <% end %>
 
   <h2>Bouton désactivé</h2>
-  <%= render BoutonComponent.new("Bouton Désactivé", "#", type: :desactive) %>
+  <%= render BoutonComponent.new("#", type: :desactive) do %>
+    Bouton Désactivé
+  <% end %>
+
 
   <h2>Avec paramètres supplémentaires</h2>
   <%= render BoutonComponent.new(
-        "Bouton avec ID",
         "#",
         type: :primary,
         id: "mon-bouton",
         data: { test: "value" }
-      ) %>
+      ) do %>
+    Bouton avec ID
+  <% end %>
 </div> 

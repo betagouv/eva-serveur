@@ -8,6 +8,14 @@ FactoryBot.define do
     parcours_type
     type_programme { :diagnostic }
 
+    trait :numeratie do
+      situations_configurations { build_list(:situation_configuration, 1, :numeratie) }
+    end
+
+    trait :litteratie do
+      situations_configurations { build_list(:situation_configuration, 1, :litteratie) }
+    end
+
     trait :avec_situations_configurations do
       situations_configurations { build_list(:situation_configuration, 1) }
     end

@@ -100,8 +100,6 @@ module Restitution
       restitutions.reverse.find { |restitution| restitution.situation.nom_technique == nom }
     end
 
-    private
-
     def litteratie
       @litteratie ||= selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
     end

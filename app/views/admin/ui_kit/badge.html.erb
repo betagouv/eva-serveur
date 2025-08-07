@@ -43,6 +43,25 @@
     ) %>
   </div>
 
+  <h2>Badge::Profil</h2>
+
+  <div class="fr-mb-3w">Badge pour les profils des compétences:
+    <%= render Badge::ProfilComponent.new(
+      :profil1,
+      :numeratie
+    ) %>
+    <%= render Badge::ProfilComponent.new(
+      :profil_4h_plus,
+      :numeratie
+    ) %>
+    <pre>
+      <code>
+        # Badge::ProfilComponent.new(niveau, competence)
+        &lt;%= render Badge::ProfilComponent.new(:profil_4h_plus, :numeratie) %&gt;
+      </code>
+    </pre>
+  </div>
+
   <h2>Différents types</h2>
   <div class="fr-mb-2w">
     <%= render BadgeComponent.new(contenu: "Succès", class_couleur: "fr-badge--success", display_icon: true) %>

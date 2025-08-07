@@ -28,15 +28,12 @@ describe EvaluationHelper do
       before do
         allow(campagne).to receive(:avec_positionnement?).with(:litteratie).and_return(true)
         allow(evaluation).to receive(:positionnement_niveau_litteratie).and_return("profil1")
-        allow(helper).to receive(:traduit_niveau)
-          .with(evaluation, :positionnement_niveau_litteratie)
-          .and_return("Profil 1")
       end
 
       it "construit un badge avec le contenu traduit et le niveau" do
         helper.badge_positionnement(evaluation, :litteratie)
 
-        expect(helper).to have_received(:construit_badge).with("Profil 1", "profil1")
+        expect(helper).to have_received(:construit_badge).with("profil1", :litteratie)
       end
     end
 
@@ -48,7 +45,7 @@ describe EvaluationHelper do
       it "construit un badge avec 'Non testé' et niveau nil" do
         helper.badge_positionnement(evaluation, :numeratie)
 
-        expect(helper).to have_received(:construit_badge).with("Non testé", nil)
+        expect(helper).to have_received(:construit_badge).with(nil, :numeratie)
       end
     end
   end

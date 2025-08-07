@@ -40,50 +40,19 @@ module EvaluationHelper
     restitution_pour_situation(Situation::PLACE_DU_MARCHE)
   end
 
-  COULEURS_BADGES_POSITIONNEMENT = {
-    profil1: "fr-badge--orange-terre-battue",
-    profil2: "fr-badge--orange-terre-battue",
-    profil3: "fr-badge--blue-cumulus",
-    profil4: "fr-badge--green-emeraude",
-    profil4_plus: "fr-badge--green-emeraude",
-    profil_4h: "fr-badge--green-emeraude",
-    profil_4h_plus: "fr-badge--green-emeraude",
-    profil_4h_plus_plus: "fr-badge--green-emeraude",
-    profil_aberrant: "fr-badge--green-emeraude"
-  }.freeze
-
-  def couleur_badges_positionnement(valeur)
-    COULEURS_BADGES_POSITIONNEMENT[valeur&.to_sym] || "fr-badge--grey-950"
-  end
-
-  def traduit_niveau(evaluation, interpretation)
-    scope = "activerecord.attributes.evaluation.interpretations"
-    niveau = evaluation.send(interpretation)
-    return t("#{interpretation}.indetermine", scope: scope) if niveau.blank?
-
-    t("#{interpretation}.#{niveau}", scope: scope)
-  end
-
   def badge_positionnement(evaluation, competence)
     if evaluation.campagne.avec_positionnement?(competence)
       niveau = evaluation.send("positionnement_niveau_#{competence}")
-      contenu = traduit_niveau(evaluation, :"positionnement_niveau_#{competence}")
     else
       niveau = nil
-      contenu = t("activerecord.attributes.evaluation.interpretations.non_teste")
     end
 
-    construit_badge(contenu, niveau)
+    construit_badge(niveau, competence)
   end
 
   private
 
-  def construit_badge(contenu, niveau)
-    render BadgeComponent.new(
-      contenu: contenu,
-      class_couleur: couleur_badges_positionnement(niveau),
-      display_icon: false,
-      taille: "sm"
-    )
+  def construit_badge(niveau, competence)
+    render(Badge::ProfilComponent.new(niveau, competence))
   end
 end

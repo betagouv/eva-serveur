@@ -1,0 +1,5 @@
+fr:
+  admin:
+    comparaison:
+      errors:
+        limite_evaluations: "Vous ne pouvez pas comparer plus de 2 évaluations pour la compétence Numératie et plus de 2 évaluations pour la compétence Littératie"

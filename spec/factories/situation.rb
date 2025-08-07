@@ -50,12 +50,14 @@ FactoryBot.define do
       nom_technique { 'plan_de_la_ville' }
     end
 
-    factory :situation_cafe_de_la_place do
+    factory :situation_cafe_de_la_place,
+      aliases: [ :situation_litteratie ] do
       libelle { 'Café de la place' }
       nom_technique { 'cafe_de_la_place' }
     end
 
-    factory :situation_place_du_marche do
+    factory :situation_place_du_marche,
+        aliases: [ :situation_numeratie ] do
       libelle { 'Place du marché' }
       nom_technique { 'place_du_marche' }
     end

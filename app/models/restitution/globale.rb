@@ -108,6 +108,8 @@ module Restitution
       @numeratie ||= selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
     end
 
+    private
+
     def extraie_competences_depuis_restitutions
       moyenne_competences.each_with_object([]) do |(competence, niveaux), memo|
         memo << [ competence, niveaux.sum.fdiv(niveaux.size) ]

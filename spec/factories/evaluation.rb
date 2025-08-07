@@ -43,5 +43,13 @@ FactoryBot.define do
     trait :positionnement do
       association :campagne, factory: [ :campagne, :avec_parcours_positionnement ]
     end
+
+    trait :numeratie do
+      association :campagne, factory: [ :campagne, :numeratie ]
+    end
+
+    trait :litteratie do
+      association :campagne, factory: [ :campagne, :litteratie ]
+    end
   end
 end

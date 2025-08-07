@@ -40,4 +40,14 @@
         pourcentage_reussite: 0
       ) %>
   <br>
+
+  <h2>Barre sans légende</h2>
+  <%= render BarreSegmenteeComponent.new(
+        nombre_questions_reussies: 5,
+        nombre_questions_echecs: 2,
+        nombre_questions_non_passees: 3,
+        pourcentage_reussite: 50,
+        avec_legende: false
+      ) %>
+  <br>
 </div> 

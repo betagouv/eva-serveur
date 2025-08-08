@@ -1,5 +1,6 @@
 <%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
   <div class="liste-evaluations-positionnement">
+    <div>Vous ne pouvez pas sélectionner plus de 2 fois une même compétence</div>
     <div class="liste-evaluations-positionnement__actions">
       <div class="liste-evaluations-positionnement__nombre-element-selectionnes"></div>
       <div class="liste-evaluations-positionnement__actions__comparer">

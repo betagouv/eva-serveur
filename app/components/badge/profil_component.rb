@@ -39,7 +39,7 @@ class Badge::ProfilComponent < ViewComponent::Base
 
   def traduit_niveau
     scope = "activerecord.attributes.evaluation.interpretations"
-    return t(".non_teste", scope: scope) if @niveau.blank?
+    return t("non_teste", scope: scope) if @niveau.blank?
 
     interpretation = "positionnement_niveau_#{@competence}".to_sym
 

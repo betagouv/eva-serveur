@@ -7,6 +7,10 @@ $barre-segmentee-non-passee: $grey-850;
   max-width: 100%;
 }
 
+.barre-segmentee p {
+  margin: 0;
+}
+
 .barre-segmentee__legende {
   display: inline-block;
   color: $grey-425;

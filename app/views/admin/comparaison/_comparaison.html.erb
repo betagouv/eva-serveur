@@ -130,7 +130,7 @@
                       ) %>
                     </td>
                     <td>
-                      <% if sous_competences_1 %>
+                      <% if sous_competences_1 && sous_competences_1[sous_competence] %>
                         <%= render BarreSegmenteeComponent.new(
                           nombre_questions_reussies: sous_competences_1[sous_competence].nombre_questions_reussies,
                           nombre_questions_echecs: sous_competences_1[sous_competence].nombre_questions_echecs,

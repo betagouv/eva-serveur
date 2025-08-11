@@ -49,8 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       updateHiddenInputs(); // Update hidden input fields with selected IDs
 
-      evaluationSelectedText.textContent = selectedEvaluationIds.length > 0 ?
-        `${selectedEvaluationIds.length} évaluation${selectedEvaluationIds.length > 1 ? 's' : ''} sélectionnée${selectedEvaluationIds.length > 1 ? 's' : ''}` : '';
+      console.log("compareButton.dataset", evaluationSelectedText.dataset)
+      if (selectedEvaluationIds.length > 0) {
+        evaluationSelectedText.textContent =`${selectedEvaluationIds.length} ${evaluationSelectedText.dataset['1EvaluationSelectionnee']}`
+      } else {
+        evaluationSelectedText.textContent =`${selectedEvaluationIds.length} ${evaluationSelectedText.dataset['nEvaluationsSelectionnees']}`
+      }
 
       checkboxes.forEach(checkbox => {
         const row = checkbox.closest('tr');

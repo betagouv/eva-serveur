@@ -19,7 +19,7 @@ ActiveAdmin.register Beneficiaire do
 
     LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner).call
 
-    redirect_to collection_path,
+    redirect_to admin_beneficiaire_path(lien.beneficiaire),
         notice: "Les évaluations ont été transférées vers le bénéficiaire le plus ancien."
   end
 

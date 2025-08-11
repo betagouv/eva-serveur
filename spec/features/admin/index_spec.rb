@@ -14,17 +14,17 @@ describe 'Index', type: :feature do
   end
 
   it 'Render page 404' do
-    visit '/pro/404'
+    visit '/404'
     expect(page).to have_content "La page demandée n'existe pas."
   end
 
   it 'Render page 500' do
-    visit '/pro/500'
+    visit '/500'
     expect(page).to have_content 'Une erreur est survenue'
   end
 
   it 'Render page 422' do
-    visit '/pro/422'
+    visit '/422'
     expect(page).to have_content 'Veuillez réessayer'
   end
 end

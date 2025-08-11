@@ -11,6 +11,11 @@ fr:
         created_at: "Date"
       liste_evaluations_positionnement:
         titre-evaluation-positionnement: "Évaluations de positionnement"
+        indication: Vous ne pouvez pas sélectionner plus de 2 fois une même compétence
+        1-evaluation-selectionnee: évaluation sélectionnée
+        n-evaluations-selectionnees: évaluations sélectionnées
         created_at: "Date"
         litteratie: "Littératie"
         numeratie: "Numératie"
+        action:
+          comparer: Comparer

@@ -3,7 +3,7 @@
 Tarteaucitron est un gestionnaire de tags RGPD
 https://tarteaucitron.io/fr/
 
-Nous maintenont cette dépendence dans notre git dans le répertoire `public/pro/tarteaucitron`
+Nous maintenont cette dépendence dans notre git dans le répertoire `public/tarteaucitron`
 
 ## Mise à jour
 

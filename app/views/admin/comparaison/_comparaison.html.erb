@@ -33,7 +33,7 @@
               </thead>
               <tbody>
                 <tr id="table-litteratie-row-key-1" data-row-key="1">
-                  <th scope="row"> Profil </th>
+                  <th scope="row"> Profil général </th>
                   <td> <%= render(Badge::ProfilComponent.new(profil_0, competence)) %> </td>
                   <td>
                     <% if evaluation_litteratie_1 %>
@@ -87,7 +87,7 @@
     
     <% evaluation_numeratie_1 = numeratie[1] %>
     <% restitution_numeratie_1 = numeratie[1] %>
-    <%= render PanelComponent.new(titre: "Littératie", classes: "panel--beneficiaire") do %>
+    <%= render PanelComponent.new(titre: "Numératie", classes: "panel--beneficiaire") do %>
       <div class="fr-table fr-m-0" id="table-numeratie-component">
       <div class="fr-table__wrapper">
         <div class="fr-table__container">
@@ -103,7 +103,7 @@
               </thead>
               <tbody>
                 <tr id="table-numeratie-row-key-1" data-row-key="1">
-                  <th scope="row"> Profil </th>
+                  <th scope="row"> Profil général </th>
                   <td> <%= render(Badge::ProfilComponent.new(profil_0, competence)) %> </td>
                   <td>
                     <% if evaluation_numeratie_1 %>

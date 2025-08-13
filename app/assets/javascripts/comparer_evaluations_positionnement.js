@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const compareButton = document.getElementById('comparer-evaluation');
     const evaluationSelectedText = document.querySelector('.liste-evaluations-positionnement__nombre-element-selectionnes');
     const formElement = compareButton.closest('form'); // Assuming the button is inside a form
-    
+
     function updateHiddenInputs() {
       // Remove existing hidden inputs
       formElement.querySelectorAll('input[name="evaluation_ids[]"]').forEach(input => input.remove());
@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       updateHiddenInputs(); // Update hidden input fields with selected IDs
 
-      console.log("compareButton.dataset", evaluationSelectedText.dataset)
       if (selectedEvaluationIds.length > 0) {
         evaluationSelectedText.textContent =`${selectedEvaluationIds.length} ${evaluationSelectedText.dataset['1EvaluationSelectionnee']}`
       } else {

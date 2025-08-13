@@ -1,8 +1,8 @@
 <%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
   <div class="liste-evaluations-positionnement">
-    <div><%= t(".indication") %></div>
+    <p class="fr-m-0"><%= t(".indication") %></p>
     <div class="liste-evaluations-positionnement__actions">
-      <div class="liste-evaluations-positionnement__nombre-element-selectionnes"></div>
+      <p class="liste-evaluations-positionnement__nombre-element-selectionnes fr-m-0"></p>
       <div class="liste-evaluations-positionnement__actions__comparer">
         <%= render BoutonComponent.new(
           admin_beneficiaire_comparaison_path(beneficiaire),

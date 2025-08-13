@@ -1,14 +1,14 @@
 <div class="card carte-partage-code">
   <div class="carte-partage-code__informations">
-    <div class="carte-partage-code__description">
+    <p class="carte-partage-code__description fr-m-0">
       <%= @description %>
-    </div>
+    </p>
 
     <div class="carte-partage-code__code-lignes">
       <div class="carte-partage-code__code-ligne">
-        <div class="carte-partage-code__information-libelle">
+        <label class="carte-partage-code__information-libelle">
           <%= @libelle_code %>
-        </div>
+        </label>
         <div class="carte-partage-code__information-valeur">
           <%= render CodeComponent.new(@code) %>
           <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_code"), texte: @code) %>
@@ -17,9 +17,9 @@
 
       <% if @url %>
         <div class="carte-partage-code__code-ligne">
-          <div class="carte-partage-code__information-libelle">
+          <label class="carte-partage-code__information-libelle">
             URL
-          </div>
+          </label>
           <div class="carte-partage-code__information-valeur">
             <div class="url">
               <%= link_to @url, @url, target: "_blank", rel: "noopener" %>

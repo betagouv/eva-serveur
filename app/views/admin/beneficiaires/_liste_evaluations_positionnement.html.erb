@@ -2,11 +2,7 @@
   <div class="liste-evaluations-positionnement">
     <div><%= t(".indication") %></div>
     <div class="liste-evaluations-positionnement__actions">
-      <div
-        class="liste-evaluations-positionnement__nombre-element-selectionnes"
-        data-1-evaluation-selectionnee="<%= t(".1-evaluation-selectionnee") %>"
-        data-n-evaluations-selectionnees="<%= t(".n-evaluations-selectionnees") %>"
-        ></div>
+      <div class="liste-evaluations-positionnement__nombre-element-selectionnes"></div>
       <div class="liste-evaluations-positionnement__actions__comparer">
         <%= render BoutonComponent.new(
           admin_beneficiaire_comparaison_path(beneficiaire),

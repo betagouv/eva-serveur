@@ -22,27 +22,21 @@ module Restitution
       }
     }.freeze
 
-    SCORES_CLEA = {
-      "2.1" => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
-                 nombre_questions_reussies: 0,
-                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      "2.2" => { pourcentage_reussite: 0, seuil: 50, nombre_questions_repondues: 0,
-                 nombre_questions_reussies: 0,
-                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      "2.3" => { pourcentage_reussite: 0, seuil: 75, nombre_questions_repondues: 0,
-                 nombre_questions_reussies: 0,
-                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      "2.4" => { pourcentage_reussite: 0, seuil: 100, nombre_questions_repondues: 0,
-                 nombre_questions_reussies: 0,
-                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 },
-      "2.5" => { pourcentage_reussite: 0, seuil: 66, nombre_questions_repondues: 0,
-                 nombre_questions_reussies: 0,
-                 nombre_questions_echecs: 0, nombre_questions_non_passees: 0 }
+    SEUILS_CLEA = {
+      "2.1" => 75,
+      "2.2" => 50,
+      "2.3" => 75,
+      "2.4" => 100,
+      "2.5" => 66
     }.freeze
 
     SEUIL_MINIMUM = 70
 
     def initialize(campagne, evenements) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
+      @score_clea = {}
+      SEUILS_CLEA.each_key do |code|
+        @score_clea[code] = {}
+      end
       @campagne = campagne
       @evenements = evenements
       @evenements_place_du_marche = evenements.map { |e| EvenementPlaceDuMarche.new e }
@@ -64,23 +58,23 @@ module Restitution
     end
 
     def calcule_pourcentage_reussite_competence_clea # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-      SCORES_CLEA.each_key do |code|
-        SCORES_CLEA[code][:criteres] = []
+      SEUILS_CLEA.each_key do |code|
+        @score_clea[code][:criteres] = []
         Metacompetence::CORRESPONDANCES_CODECLEA[code].each_key do |sous_code|
           calcule_pourcentage_reussite_critere_clea(code, sous_code)
         end
         eq_pour_code = evenements_questions_pour_code(code)
-        SCORES_CLEA[code][:nombre_total_questions] = eq_pour_code.size
-        SCORES_CLEA[code][:nombre_questions_repondues] = eq_pour_code.select(&:a_ete_repondue?).size
+        @score_clea[code][:nombre_total_questions] = eq_pour_code.size
+        @score_clea[code][:nombre_questions_repondues] = eq_pour_code.select(&:a_ete_repondue?).size
         pourcentage = EvenementQuestion.pourcentage_pour_groupe(eq_pour_code)
-        SCORES_CLEA[code][:pourcentage_reussite] = pourcentage
+        @score_clea[code][:pourcentage_reussite] = pourcentage
       end
     end
 
     def calcule_pourcentage_reussite_critere_clea(code, sous_code)
       eq_pour_code = evenements_questions_pour_code(sous_code)
 
-      SCORES_CLEA[code][:criteres] << creer_critere_numeratie(eq_pour_code, sous_code)
+      @score_clea[code][:criteres] << creer_critere_numeratie(eq_pour_code, sous_code)
     end
 
     def pourcentage_de_reussite_pour(niveau)
@@ -151,20 +145,20 @@ module Restitution
       eq_pour_code = evenements_questions_pour_code(code)
       Restitution::SousCompetence::Numeratie.new(
         succes: succes?(code),
-        pourcentage_reussite: SCORES_CLEA[code][:pourcentage_reussite],
-        nombre_questions_repondues: SCORES_CLEA[code][:nombre_questions_repondues],
-        nombre_total_questions: SCORES_CLEA[code][:nombre_total_questions],
+        pourcentage_reussite: @score_clea[code][:pourcentage_reussite],
+        nombre_questions_repondues: @score_clea[code][:nombre_questions_repondues],
+        nombre_total_questions: @score_clea[code][:nombre_total_questions],
         nombre_questions_reussies: nombre_questions_reussies_par_sous_domaine(eq_pour_code),
         nombre_questions_echecs: nombre_questions_echecs_par_sous_domaine(eq_pour_code),
         nombre_questions_non_passees: nombre_questions_non_repondues_par_sous_domaine(eq_pour_code),
-        criteres: SCORES_CLEA[code][:criteres]
+        criteres: @score_clea[code][:criteres]
       )
     end
 
     def succes?(code_clea)
-      return false if SCORES_CLEA[code_clea][:pourcentage_reussite].nil?
+      return false if @score_clea[code_clea][:pourcentage_reussite].nil?
 
-      SCORES_CLEA[code_clea][:pourcentage_reussite] >= SCORES_CLEA[code_clea][:seuil]
+      @score_clea[code_clea][:pourcentage_reussite] >= SEUILS_CLEA[code_clea]
     end
 
     def evenements_groupes_cleas
@@ -198,7 +192,7 @@ module Restitution
 
     def calculer_nombres_questions_par_sous_domaine(&block)
       resultats = Hash.new(0)
-      SCORES_CLEA.each_key do |code|
+      SEUILS_CLEA.each_key do |code|
         eq_pour_code = evenements_questions_pour_code(code)
         resultats[code] = eq_pour_code.count(&block)
       end

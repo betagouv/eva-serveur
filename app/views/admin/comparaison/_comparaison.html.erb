@@ -84,9 +84,7 @@
       <% profil_1 = restitution_numeratie_1 ? restitution_numeratie_1.profil_numeratie : "indetermine" %>
       <% sous_competences_1 = restitution_numeratie_1.competences_numeratie %>
     <% end %>
-    
-    <% evaluation_numeratie_1 = numeratie[1] %>
-    <% restitution_numeratie_1 = numeratie[1] %>
+
     <%= render PanelComponent.new(titre: "Numératie", classes: "panel--beneficiaire") do %>
       <div class="fr-table fr-m-0" id="table-numeratie-component">
       <div class="fr-table__wrapper">

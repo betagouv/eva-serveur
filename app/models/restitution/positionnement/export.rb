@@ -19,9 +19,10 @@ module Restitution
 
       def nom_du_fichier
         evaluation = @partie.evaluation
-        code_de_campagne = evaluation.campagne.code.parameterize
-        nom_de_levaluation = evaluation.nom.parameterize.first(15)
-        nom_fichier_horodate("#{nom_de_levaluation}-#{code_de_campagne}", "xls")
+        date_debut = evaluation.debutee_le.strftime("%Y%m%d%H%M%S")
+        nom = evaluation.beneficiaire.nom.parameterize.first(25)
+        code_de_campagne = evaluation.campagne.code
+        "#{date_debut}-#{nom}-#{code_de_campagne}.xls"
       end
 
       private

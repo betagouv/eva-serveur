@@ -8,11 +8,12 @@ describe 'Evaluation', type: :request do
   end
 
   describe 'API' do
+    let(:date) { Time.zone.local(2021, 10, 4) }
+
     describe 'POST /evaluations' do
       let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
 
       context 'Création quand une requête est valide' do
-        let(:date) { Time.zone.local(2021, 10, 4) }
         let(:payload_valide_avec_campagne) do
           {
             nom: 'Roger',
@@ -39,7 +40,6 @@ describe 'Evaluation', type: :request do
         it do
           evaluation = Evaluation.last
           expect(evaluation.campagne).to eq campagne_ete19
-          expect(evaluation.nom).to eq 'Roger'
           expect(evaluation.debutee_le).to eq date
           expect(evaluation.beneficiaire.nom).to eq 'Roger'
 
@@ -71,22 +71,21 @@ describe 'Evaluation', type: :request do
       end
 
       context 'quand le code campagne est inconnu' do
-        let(:payload_invalide) { { nom: '', code_campagne: 'ETE190' } }
+        let(:payload_invalide) { { nom: 'toto', code_campagne: 'INCONNU' } }
 
         before { post '/api/evaluations', params: payload_invalide }
 
         it 'retourne une 422' do
           json = response.parsed_body
-          expect(json.keys.sort).to eq %w[beneficiaire campagne code_campagne debutee_le nom]
-          expect(json.values.sort).to eq [ [ "Code inconnu" ], [ "doit exister" ],
-                                          [ 'doit être présente' ],
-                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
+          expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le]
+          expect(json.values.sort).to eq [ [ "Code inconnu" ], [ "doit être présente" ],
+                                           [ "doit être rempli(e)" ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
 
       context 'quand le code bénéficiaire est inconnu' do
-        let(:payload_invalide) { { nom: '', code_beneficiaire: '1234567890' } }
+        let(:payload_invalide) { { code_beneficiaire: '1234567890' } }
 
         before { post '/api/evaluations', params: payload_invalide }
 
@@ -100,11 +99,9 @@ describe 'Evaluation', type: :request do
 
       context 'quand le code bénéficiaire est connu' do
         let(:beneficiaire) { create :beneficiaire }
-        let(:date) { Time.zone.local(2021, 10, 4) }
         let(:payload_valide) do
           {
             code_beneficiaire: beneficiaire.code_beneficiaire,
-            nom: '',
             code_campagne: 'ETE19',
             debutee_le: date.iso8601,
             conditions_passation_attributes: {
@@ -137,9 +134,9 @@ describe 'Evaluation', type: :request do
 
         it 'retourne une 422' do
           json = response.parsed_body
-          expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
+          expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le]
           expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
-                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
+                                           [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -151,9 +148,9 @@ describe 'Evaluation', type: :request do
 
         it 'retourne une 422' do
           json = response.parsed_body
-          expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le nom]
+          expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le]
           expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
-                                          [ 'doit être rempli' ], [ 'doit être rempli(e)' ] ]
+                                           [ 'doit être rempli(e)' ] ]
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -181,7 +178,6 @@ describe 'Evaluation', type: :request do
       end
 
       context 'avec de multiple mise à jour' do
-        let(:date) { Time.zone.local(2021, 10, 4) }
         let(:params) do
           {
             conditions_passation_attributes: {
@@ -223,30 +219,28 @@ describe 'Evaluation', type: :request do
       end
 
       context 'avec un seul patch' do
-        before { patch "/api/evaluations/#{evaluation.id}", params: params }
+        it "Met à jour la date de fin avec une requête valide" do
+          patch "/api/evaluations/#{evaluation.id}", params: { terminee_le: date.iso8601 }
 
-        context 'Met à jour email et téléphone avec une requête valide' do
-          let(:date) { Time.zone.local(2021, 10, 4) }
-          let(:params) do
-            { email: 'coucou-a-jour@eva.fr',
-              telephone: '01 02 03 04 05',
-              terminee_le: date.iso8601 }
-          end
-
-          it do
-            evaluation.reload
-            expect(evaluation.terminee_le).to eq date
-            expect(response).to have_http_status(:ok)
-          end
+          evaluation.reload
+          expect(evaluation.terminee_le).to eq date
+          expect(response).to have_http_status(:ok)
         end
 
-        context 'requête invalide' do
-          let(:params) { { nom: '' } }
+        it "rejete une requête invalide" do
+          evaluation.update(debutee_le: date)
 
-          it do
-            expect(evaluation.reload.nom).to eq 'James'
-            expect(response).to have_http_status(:unprocessable_entity)
-          end
+          patch "/api/evaluations/#{evaluation.id}", params: { debutee_le: '' }
+
+          expect(evaluation.reload.debutee_le).to eq date
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+        it "Ne permet pas la modification du nom" do
+          patch "/api/evaluations/#{evaluation.id}", params: { nom: 'nouveau nom' }
+
+          expect(evaluation.reload.beneficiaire.nom).to eq "Roger"
+          expect(response).to have_http_status(:ok)
         end
       end
     end

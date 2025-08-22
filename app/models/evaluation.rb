@@ -27,7 +27,7 @@ class Evaluation < ApplicationRecord
   has_many :parties, dependent: :destroy
 
   before_validation :trouve_campagne_depuis_code
-  validates :nom, :debutee_le, :statut, presence: true
+  validates :debutee_le, :statut, presence: true
   validate :code_campagne_connu
 
   accepts_nested_attributes_for :conditions_passation
@@ -73,7 +73,7 @@ class Evaluation < ApplicationRecord
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
   def display_name
-    beneficiaire.nom
+    "#{beneficiaire.nom} - #{I18n.l(debutee_le, format: :avec_heure)}"
   end
 
   def anonyme?

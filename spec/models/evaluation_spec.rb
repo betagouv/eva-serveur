@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe Evaluation do
-  it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :debutee_le }
   it { is_expected.to validate_presence_of :statut }
   it { is_expected.to belong_to :campagne }
@@ -219,6 +218,18 @@ describe Evaluation do
       expect(evaluation.beneficiaires_possibles).to include(evaluation.beneficiaire)
       expect(evaluation.beneficiaires_possibles).to include(autre_evaluation.beneficiaire)
       expect(evaluation.beneficiaires_possibles).not_to include(eval_autre_structure.beneficiaire)
+    end
+  end
+
+  describe "#display_name" do
+    let(:compte) { create :compte_admin }
+    let(:campagne) { create :campagne, compte: compte }
+    let(:beneficiaire) { create :beneficiaire, nom: "Toto Martin" }
+    let(:evaluation) { create :evaluation, beneficiaire: beneficiaire, campagne: campagne }
+
+    it "retourne le nom du bénéficiaire et la date" do
+      evaluation.debutee_le = Time.zone.local(2023, 1, 10, 12, 1, 0)
+      expect(evaluation.display_name).to eq("Toto Martin - 10 jan. 2023, 12:01")
     end
   end
 end

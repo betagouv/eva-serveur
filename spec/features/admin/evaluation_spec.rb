@@ -185,7 +185,7 @@ describe 'Admin - Evaluation', type: :feature do
         let(:restitution_globale) do
           double(Restitution::Globale,
                  date: DateTime.now,
-                 utilisateur: 'Roger',
+                 beneficiaire: 'Roger',
                  efficience: 5,
                  restitutions: [ restitution ])
         end
@@ -388,7 +388,7 @@ describe 'Admin - Evaluation', type: :feature do
   end
 
   describe 'Edition' do
-    let(:evaluation) { create :evaluation, campagne: ma_campagne, nom: 'Ancien nom' }
+    let(:evaluation) { create :evaluation, campagne: ma_campagne }
     let!(:mon_collegue) do
       create :compte_admin, structure: mon_compte.structure, prenom: 'Liam', nom: 'Mercier'
     end
@@ -405,23 +405,21 @@ describe 'Admin - Evaluation', type: :feature do
       before do
         connecte(mon_compte)
         visit edit_admin_evaluation_path(evaluation)
-        fill_in :evaluation_nom, with: 'Nouveau Nom'
       end
 
-      context 'en changeant de campagne' do
+      context "peut changer de campagne" do
         it do
           within('#evaluation_campagne_input') { select 'Campagne autre structure' }
           click_on 'Enregistrer'
-          expect(evaluation.reload.nom).to eq 'Nouveau Nom'
-          expect(evaluation.campagne.libelle).to eq 'Campagne autre structure'
+          expect(evaluation.reload.campagne.libelle).to eq 'Campagne autre structure'
         end
       end
 
-      context 'sans mettre de campagne' do
+      context "ne peut pas enregistrer sans campagne" do
         it do
           within('#evaluation_campagne_input') { select '' }
           click_on 'Enregistrer'
-          expect(evaluation.reload.nom).to eq 'Ancien nom'
+          expect(evaluation.reload.campagne.libelle).to eq ma_campagne.libelle
         end
       end
 

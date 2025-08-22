@@ -8,7 +8,7 @@ ActiveAdmin.register Evaluation do
 
   config.sort_order = "created_at_desc"
 
-  filter :nom
+  filter :beneficiaire
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },
@@ -72,8 +72,8 @@ ActiveAdmin.register Evaluation do
     column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
-    column :nom
-    column("code_beneficiaire") { |evaluation| evaluation.beneficiaire&.code_beneficiaire }
+    column("nom_beneficiaire") { |evaluation| evaluation.beneficiaire.nom }
+    column("code_beneficiaire") { |evaluation| evaluation.beneficiaire.code_beneficiaire }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
     end

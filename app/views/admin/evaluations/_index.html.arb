@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 context.instance_eval do
-  column(:nom) do |evaluation|
-    render partial: "nom_evaluation", locals: { evaluation: evaluation }
+  column :beneficiaire do |evaluation|
+    render partial: "beneficiaire", locals: { evaluation: evaluation }
   end
 
   column :campagne do |evaluation|

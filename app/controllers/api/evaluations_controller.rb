@@ -48,11 +48,15 @@ module Api
     end
 
     def permit_params
-      params.permit(:id, :nom, :code_beneficiaire, :code_campagne, :terminee_le, :debutee_le,
-                    :beneficiaire_id, conditions_passation_attributes:
-                    %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
-                    donnee_sociodemographique_attributes:
-                    %i[age genre dernier_niveau_etude derniere_situation])
+      permitted_params = [ :id, :code_beneficiaire, :code_campagne, :terminee_le, :debutee_le,
+                         :beneficiaire_id, conditions_passation_attributes:
+                         %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
+                         donnee_sociodemographique_attributes:
+                         %i[age genre dernier_niveau_etude derniere_situation] ]
+
+      permitted_params << :nom if params[:id].blank?
+
+      params.permit(permitted_params)
     end
 
     def retrouve_ids_nested_attributes

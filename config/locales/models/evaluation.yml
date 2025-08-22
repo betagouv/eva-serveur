@@ -16,6 +16,7 @@ fr:
         other: Évaluations
     attributes:
       evaluation:
+        beneficiaire: Bénéficiaire
         created_at: Créée le
         debutee_le: Date
         terminee_le: Terminée le
@@ -24,7 +25,6 @@ fr:
         updated_at: Mise à jour le
         libelle: Libellé
         telephone: Téléphone
-        nom: Nom
         email: Email
         temps_total: Temps total
         complete: Complète
@@ -107,7 +107,7 @@ fr:
         structure: Structure
         campagne: Campagne
         created_at: Date
-        nom: Nom
+        nom_beneficiaire: Nom bénéficiaire
         code_beneficiaire: Code bénéficiaire
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global

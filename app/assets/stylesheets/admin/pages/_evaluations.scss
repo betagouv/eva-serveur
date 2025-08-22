@@ -30,11 +30,11 @@
     }
   }
 
-  .evaluation__code-personnel {
+  .evaluation__code-beneficiaire {
     margin-left: 1.75rem;
   }
 
-  .evaluation__code-personnel, .evaluation__parcours-type, .evaluation__created_at {
+  .evaluation__code-beneficiaire, .evaluation__parcours-type, .evaluation__created_at {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;
@@ -72,7 +72,7 @@
     height: 2.875rem;
     justify-content: space-between;
   }
-  .col-nom {
+  .col-beneficiaire {
     .ellipse {
       margin-right: .75rem;
     }

@@ -86,7 +86,7 @@ module Restitution
     end
 
     def display_name
-      "#{evaluation.nom} - #{situation.libelle}"
+      "#{evaluation.display_name} - #{situation.libelle}"
     end
 
     private

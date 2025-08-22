@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.id evaluation.id
-json.nom evaluation.nom
+json.nom evaluation.beneficiaire.nom
 json.campagne_id evaluation.campagne_id
 json.debutee_le evaluation.debutee_le
 json.terminee_le evaluation.terminee_le

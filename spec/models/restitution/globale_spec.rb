@@ -9,11 +9,12 @@ describe Restitution::Globale do
   end
   let(:evaluation) { double }
 
-  describe "#utilisateur retourne le nom de l'évaluation" do
+  describe "#beneficiaire retourne le nom du bénéficiaire" do
     let(:restitutions) { [ double ] }
-    let(:evaluation) { double(nom: 'Jean Bon') }
+    let(:beneficiaire) { double(nom: 'Jean Bon') }
+    let(:evaluation) { double(beneficiaire: beneficiaire) }
 
-    it { expect(restitution_globale.utilisateur).to eq('Jean Bon') }
+    it { expect(restitution_globale.beneficiaire).to eq('Jean Bon') }
   end
 
   describe "#date retourne la date de l'évaluation" do

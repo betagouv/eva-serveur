@@ -22,8 +22,8 @@ module Restitution
       @evaluation.update interpretations.merge(completude: restitution_complete)
     end
 
-    def utilisateur
-      evaluation.nom
+    def beneficiaire
+      evaluation.beneficiaire.nom
     end
 
     def date

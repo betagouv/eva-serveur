@@ -16,7 +16,8 @@ describe Restitution::Positionnement::Export do
   let(:questions) { [ question1, question2 ] }
   let(:questionnaire) { create :questionnaire, questions: questions }
   let(:campagne) { create :campagne, code: 'CODE123' }
-  let(:evaluation) { create :evaluation, campagne: campagne }
+  let(:date_debut_evaluation) { Time.zone.local(2021, 1, 2, 8, 2, 4) }
+  let(:evaluation) { create :evaluation, campagne: campagne, debutee_le: date_debut_evaluation }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   before do
@@ -251,7 +252,7 @@ describe Restitution::Positionnement::Export do
 
     it "genere le nom du fichier en fonction de l'évaluation" do
       Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
-        expect(response_service.nom_du_fichier).to eq('20250228010203-roger-code123.xls')
+        expect(response_service.nom_du_fichier).to eq('20210102080204-roger-CODE123.xls')
       end
     end
   end

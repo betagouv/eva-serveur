@@ -2,8 +2,12 @@
 
 class Compte < ApplicationRecord
   DELAI_RELANCE_NON_ACTIVATION = 30.days
-  ROLES = %w[superadmin admin charge_mission_regionale conseiller compte_generique].freeze
-  ROLES_STRUCTURE = %w[admin conseiller].freeze
+  ROLES = %w[conseiller admin charge_mission_regionale superadmin compte_generique].freeze
+  AIDES_ROLES = {
+    "conseiller" => I18n.t("activerecord.attributes.compte.aide_roles.conseiller"),
+    "admin" => I18n.t("activerecord.attributes.compte.aide_roles.admin")
+  }.freeze
+  ROLES_STRUCTURE = %w[conseiller admin].freeze
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
 

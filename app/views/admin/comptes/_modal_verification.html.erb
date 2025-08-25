@@ -10,11 +10,14 @@
             Choisissez un rôle :
           </legend>
 
-          <% collection_roles.each do |libelle, role| %>
+          <% roles_avec_description.each do |libelle, role, description| %>
             <div class="fr-fieldset__element">
               <div class="fr-radio-group fr-radio-group--sm">
                 <%= f.radio_button :role, role, id: "role_#{role}_#{compte.id}" %>
                 <%= f.label :role, libelle, class: "fr-label", for: "role_#{role}_#{compte.id}" %>
+                <% if description.present? %>
+                <p class="fr-mb-0 fr-ml-3w fr-hint-text"><%= description %></p>
+                <% end %>
               </div>
             </div>
           <% end %>

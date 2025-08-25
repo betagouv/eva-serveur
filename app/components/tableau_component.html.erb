@@ -18,13 +18,13 @@
           <tbody>
             <% collection.each_with_index do |item, index| %>
               <%
-                data_id = if item.class.method_defined? :id
+                data_id = if item.respond_to?(:id)
                   item.id
                 else
                   index
                 end
                %>
-              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>" data-id="<%= item&.id %>">
+              <tr id="table-0-row-key-<%= index + 1 %>" data-row-key="<%= index + 1 %>" data-id="<%= data_id %>">
                 <% if @selectionnable %>
                   <th class="fr-cell--fixed" scope="row">
                     <div class='fr-checkbox-group fr-checkbox-group--sm'>

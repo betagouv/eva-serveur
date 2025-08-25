@@ -150,7 +150,7 @@ ActiveAdmin.register Compte do
 
   controller do
     before_action :trouve_comptes, only: :index
-    helper_method :peut_modifier_mot_de_passe?, :collection_roles
+    helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
@@ -183,6 +183,9 @@ ActiveAdmin.register Compte do
       resource.update(role: params[:role]) if params[:role].present?
     end
 
+    def roles_avec_description
+      collection_roles.map { |libelle, role| [ libelle, role, Compte::AIDES_ROLES[role] ] }
+    end
 
     def collection_roles
       roles = current_compte.superadmin? ? Compte::ROLES : Compte::ROLES_STRUCTURE

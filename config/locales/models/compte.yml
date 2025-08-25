@@ -39,6 +39,9 @@ fr:
           admin: Admin
           conseiller: Conseiller
           compte_generique: Compte générique
+        aide_roles:
+          conseiller: Ce rôle dispose de permissions de base. Il peut consulter les données de la structure, mais ne peut modifier que les éléments (campagnes, évaluations) dont il est propriétaire.
+          admin: Ce rôle dispose de permissions étendues. Il peut consulter et modifier tous les éléments de la structure (campagnes, évaluations, comptes). Il est chargé de valider les demandes de rattachement à sa structure.
         statut_validation: Accès
         statuts_validation:
           en_attente: En attente

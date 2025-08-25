@@ -21,9 +21,9 @@ fr:
       corps: |
         ### Bonjour %{prenom_admin},
 
-        Votre collègue %{prenom} %{nom} souhaite utiliser eva pour ses prochains accompagnements.
+        %{prenom} %{nom} souhaite utiliser eva pour ses prochains accompagnements.
 
-        Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien d'une personne de « %{structure} ».
+        Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien d'une personne qui travaille pour « %{structure} ».
 
         Pour valider son accès, vous pouvez retrouver sa demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
 

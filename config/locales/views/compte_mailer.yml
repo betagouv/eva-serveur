@@ -21,18 +21,16 @@ fr:
       corps: |
         ### Bonjour %{prenom_admin},
 
-        Votre collègue %{prenom} %{nom} souhaite utiliser eva pour ses prochains accompagnements.
+        %{prenom} %{nom} souhaite utiliser eva pour ses prochains accompagnements.
 
-        Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien d'une personne de « %{structure} ».
+        Pour des raisons de sécurité, vous devez confirmer qu'il s'agit bien d'une personne qui travaille pour « %{structure} ».
 
-        Pour valider ce compte :
+        Pour valider son accès, vous pouvez retrouver sa demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
 
-          - cliquez sur le lien suivant ;
-          - cliquez sur « autoriser » ou « refuser » dans la section des comptes en attente.
+        => <a href="%{url_validation}" target="_blank">Valider son accès</a>
 
-        -> [Valider ce compte](%{url_validation})
 
-        Vous avez reçu ce message parce que vous avez actuellement le rôle d’administrateur de cette structure.
+        Vous avez reçu ce message parce que vous avez actuellement le rôle d'administrateur de cette structure.
     relance:
       objet: "%{prenom}, quelques ressources pour vous aider à réaliser vos premières évaluations"
       intro: |

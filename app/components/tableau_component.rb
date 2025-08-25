@@ -14,6 +14,14 @@ class TableauComponent < ViewComponent::Base
     content if content.present?
   end
 
+  def data_id(item, index)
+    if item.respond_to?(:id)
+      item.id
+    else
+      "id_inconnu"
+    end
+  end
+
   private
 
   attr_reader :collection, :colonnes

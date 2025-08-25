@@ -76,13 +76,13 @@
     <% evaluation_numeratie_0 = numeratie[0] %>
     <% restitution_numeratie_0 = comparaison.restitutions_numeratie[0].numeratie %>
     <% profil_0 = restitution_numeratie_0 ? restitution_numeratie_0.profil_numeratie : "indetermine" %>
-    <% sous_competences_0 = restitution_numeratie_0.competences_numeratie %>
+    <% sous_competences_0 = restitution_numeratie_0 ? restitution_numeratie_0.competences_numeratie : [] %>
 
     <% evaluation_numeratie_1 = numeratie[1] %>
     <% if evaluation_numeratie_1 %>
       <% restitution_numeratie_1 = comparaison.restitutions_numeratie[1].numeratie %>
       <% profil_1 = restitution_numeratie_1 ? restitution_numeratie_1.profil_numeratie : "indetermine" %>
-      <% sous_competences_1 = restitution_numeratie_1.competences_numeratie %>
+      <% sous_competences_1 = restitution_numeratie_1 ? restitution_numeratie_1.competences_numeratie : [] %>
     <% end %>
 
     <%= render PanelComponent.new(titre: "Numératie", classes: "panel--beneficiaire") do %>

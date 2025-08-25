@@ -10,7 +10,7 @@ fr:
 
         ##Accès à l'interface conseiller de votre structure :
 
-        - URL de connexion : [%{url_connexion}](%{url_connexion})
+        - URL de connexion : <a href="%{url_connexion}" target="_blank">`%{url_connexion}`</a>
 
         - Votre identifiant est votre adresse email : **%{email}**
 
@@ -27,7 +27,7 @@ fr:
 
         Pour valider son accès, vous pouvez retrouver sa demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
 
-        => <a href="%{url_validation}" target="_blank">Valider son accès</a>
+        => <a href="%{lien_autorisation}" target="_blank">Valider son accès</a>
 
 
         Vous avez reçu ce message parce que vous avez actuellement le rôle d'administrateur de cette structure.
@@ -45,7 +45,7 @@ fr:
 
         ### Vous souhaitez essayer eva ? Découvrir les jeux, les réaliser puis visualiser les résultats ?
 
-        Connectez vous à votre compte [ici](%{url_connexion}) et créez votre campagne test.
+        Connectez vous à votre compte <a href="%{url_connexion}" target="_blank">ici</a> et créez votre campagne test.
       x_personnes_utilisent_eva:
         zero: ""
         one: "Vous êtes la seule personne de votre structure à avoir créé son compte."
@@ -57,7 +57,7 @@ fr:
 
         ### Vous avez besoin de plus d'informations ?
 
-        Découvrez notre [rubrique Aide](%{lien_rubrique_aide}) depuis votre
+        Découvrez notre <a href="%{lien_rubrique_aide}" target="_blank">rubrique Aide</a> depuis votre
         espace professionnel
 
         ### Vous rencontrez un problème de connexion ou d'utilisation ?<br>Vous avez des questions ou des remarques ?
@@ -82,7 +82,9 @@ fr:
       nom_prenom_compte: |
         %{prenom_compte} %{nom_compte}
       contenu: |
-        Pour valider ou refuser leur accès, cliquez [ici](%{lien_autorisation}).
+        Pour valider leurs accès, vous pouvez retrouver leur demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
+
+        => <a href="%{lien_autorisation}" target="_blank">Valider les accès</a>
 
         En tant que premier utilisateur eva de votre structure, vous êtes actuellement identifié
         comme référent(e) pour la validation de tous les comptes de votre structure. Si vous pensez 

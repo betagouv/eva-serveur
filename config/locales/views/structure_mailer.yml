@@ -10,7 +10,7 @@ fr:
 
         Pour cela faites leur suivre ce message ou envoyez leur le lien d'inscription suivant :
 
-        [%{url_inscription}](%{url_inscription})
+        <a href="%{url_inscription}" target="_blank">`%{url_inscription}`</a>
     relance_creation_campagne:
       objet: Eva - Et si vous testiez les compétences avec des jeux ?
       corps: |

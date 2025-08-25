@@ -1,0 +1,65 @@
+<% litteratie = comparaison.evaluations_litteratie %>
+<% if litteratie.present? %>
+  <% competence = :litteratie %>
+
+  <% evaluation_litteratie_0 = litteratie[0] %>
+  <% profil_0 = profil_litteratie(comparaison, 0) %>
+  <% sous_competences_0 = sous_competences_litteratie(comparaison, 0) %>
+
+  <% evaluation_litteratie_1 = litteratie[1] %>
+  <% if evaluation_litteratie_1 %>
+    <% profil_1 = profil_litteratie(comparaison, 1) %>
+    <% sous_competences_1 = sous_competences_litteratie(comparaison, 1) %>
+  <% end %>
+
+  <%= render PanelComponent.new(titre: "Littératie", classes: "panel--beneficiaire") do %>
+    <div class="fr-table fr-m-0" id="table-litteratie-component">
+    <div class="fr-table__wrapper">
+      <div class="fr-table__container">
+        <div class="fr-table__content">
+          <table id="table-7">
+            <thead>
+              <tr>
+                <th role="columnheader">
+                </th>
+                <th> <%= I18n.l(evaluation_litteratie_0.debutee_le, format: :sans_heure) %> </th>
+                <th> <%= evaluation_litteratie_1 ? I18n.l(evaluation_litteratie_1.debutee_le, format: :sans_heure) : "-" %> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="table-litteratie-row-key-1" data-row-key="1">
+                <th scope="row"> Profil général </th>
+                <td> <%= render(Badge::ProfilComponent.new(profil_0, competence)) %> </td>
+                <td>
+                  <% if evaluation_litteratie_1 %>
+                    <%= render(Badge::ProfilComponent.new(profil_1, competence)) %>
+                  <% else %>
+                    -
+                  <% end %>
+                </td>
+              </tr>
+              <% index = 1 %>
+              <% sous_competences_0.each do |sous_competence, objet_sous_competence|%>
+                <% index += 1 %>
+                <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
+                  <th scope="row">
+                    <%= I18n.t("admin.evaluations.positionnement.sous_competences.litteratie.#{sous_competence}.titre") %>
+                  </th>
+                  <td> <%= render(Badge::ProfilComponent.new(sous_competences_0[sous_competence].profil, competence)) %> </td>
+                  <td>
+                    <% if sous_competences_1 %>
+                      <%= render(Badge::ProfilComponent.new(sous_competences_1[sous_competence].profil, competence)) %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>

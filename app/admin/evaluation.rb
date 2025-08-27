@@ -8,7 +8,13 @@ ActiveAdmin.register Evaluation do
 
   config.sort_order = "created_at_desc"
 
-  filter :beneficiaire
+  filter :beneficiaire_id,
+         as: :search_select_filter,
+         url: proc { admin_beneficiaires_path },
+         fields: %i[nom code_beneficiaire],
+         display_name: "nom",
+         minimum_input_length: 2,
+         order_by: "nom_asc"
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },

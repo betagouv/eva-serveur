@@ -69,6 +69,9 @@ class Evaluation < ApplicationRecord
     joins(campagne: :parcours_type)
     .where(parcours_type: { type_de_programme: type })
   }
+  scope :sans_type_de_programme, -> {
+    left_joins(:campagne).where(campagne: { parcours_type_id: nil })
+  }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 

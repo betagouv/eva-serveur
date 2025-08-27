@@ -23,7 +23,18 @@ div class: "page-beneficiaire" do
   end
 
   if beneficiaire.evaluations_diagnostic.present?
-    render partial: "admin/beneficiaires/liste_evaluations_diagnostic",
-        locals: { beneficiaire: beneficiaire }
+    render partial: "admin/beneficiaires/liste_evaluations",
+        locals: {
+            titre: t(".titre-evaluation-diagnostic"),
+            collection: beneficiaire.evaluations_diagnostic
+            }
+  end
+
+  if beneficiaire.evaluations_sans_type_de_programme.present?
+    render partial: "admin/beneficiaires/liste_evaluations",
+        locals: {
+            titre: t(".titre-evaluation-autre"),
+            collection: beneficiaire.evaluations_sans_type_de_programme
+            }
   end
 end

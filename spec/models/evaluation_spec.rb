@@ -99,6 +99,25 @@ describe Evaluation do
         expect(resultats).to include(evaluation_positionnement)
       end
     end
+
+    describe '.sans_type_de_programme' do
+      let(:campagne_sans_type) { create :campagne }
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+      let!(:evaluation_sans_type_de_programme) { create(:evaluation, campagne: campagne_sans_type) }
+
+      before do
+        campagne_sans_type.update(parcours_type: nil)
+      end
+
+      it 'retourne uniquement les évaluations de type diagnostic' do
+        resultats = described_class.sans_type_de_programme()
+
+        expect(resultats).not_to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_positionnement)
+        expect(resultats).to include(evaluation_sans_type_de_programme)
+      end
+    end
   end
 
   describe '#responsables_suivi' do

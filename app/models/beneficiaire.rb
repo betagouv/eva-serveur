@@ -13,7 +13,7 @@ class Beneficiaire < ApplicationRecord
   scope :par_date_creation_asc, -> { order(created_at: :asc) }
   scope :sauf_pour, ->(id) { where.not(id: id) }
 
-  delegate :diagnostic, :positionnement, to: :evaluations, prefix: true
+  delegate :diagnostic, :positionnement, :sans_type_de_programme, to: :evaluations, prefix: true
 
   def anonyme?
     anonymise_le.present?

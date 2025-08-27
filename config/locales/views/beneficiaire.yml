@@ -6,8 +6,9 @@ fr:
         beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         carte_partage_code:
           description: "Pour rattacher d'autres évaluations à ce bénéficiaire, utilisez ce code :"
-      liste_evaluations_diagnostic:
-        titre-evaluation-diagnostic: "Évaluations de diagnostic"
+        titre-evaluation-diagnostic: Évaluations de diagnostic
+        titre-evaluation-autre: Évaluations
+      liste_evaluations:
         created_at: "Date"
       liste_evaluations_positionnement:
         titre-evaluation-positionnement: "Évaluations de positionnement"

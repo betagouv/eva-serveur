@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Beneficiaire do
   filter :nom
+  filter :code_beneficiaire
   filter :created_at
   config.sort_order = "created_at_desc"
   config.batch_actions = true
@@ -46,6 +47,7 @@ ActiveAdmin.register Beneficiaire do
     column :nom do |beneficiaire|
       render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
     end
+    column :code_beneficiaire
     column :created_at
     actions
   end

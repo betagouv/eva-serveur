@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Beneficiaire do
+  permit_params :nom
+
   filter :nom
   filter :code_beneficiaire
   filter :created_at
@@ -23,8 +25,6 @@ ActiveAdmin.register Beneficiaire do
     redirect_to admin_beneficiaire_path(lien.beneficiaire),
         notice: "Les évaluations ont été transférées vers le bénéficiaire le plus ancien."
   end
-
-  permit_params :nom
 
   before_action only: :show do
     flash.now[:beneficiaire_anonyme] = t(".beneficiaire_anonyme") if resource.anonyme?

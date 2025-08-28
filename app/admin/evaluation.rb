@@ -13,7 +13,7 @@ ActiveAdmin.register Evaluation do
          as: :search_select_filter,
          url: proc { admin_beneficiaires_path },
          fields: %i[nom code_beneficiaire],
-         display_name: "nom",
+         display_name: "display_name",
          minimum_input_length: 2,
          order_by: "nom_asc"
   filter :campagne_id,

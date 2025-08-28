@@ -20,7 +20,7 @@ class Beneficiaire < ApplicationRecord
   end
 
   def display_name
-    nom
+    "#{nom} - #{code_beneficiaire}"
   end
 
   def genere_code_beneficiaire_unique

@@ -12,7 +12,9 @@ module ComparaisonEvaluationsHelper
 
   def sous_competences_litteratie(comparaison, numero_evaluation)
     restitution_litteratie = restitution_litteratie(comparaison, numero_evaluation)
-    restitution_litteratie ? restitution_litteratie.competences_litteratie : []
+    return {} if restitution_litteratie.parcours_haut != ::Competence::NIVEAU_INDETERMINE
+
+    restitution_litteratie ? restitution_litteratie.competences_litteratie : {}
   end
 
   def restitution_numeratie(comparaison, numero_evaluation)
@@ -26,6 +28,6 @@ module ComparaisonEvaluationsHelper
 
   def sous_competences_numeratie(comparaison, numero_evaluation)
     restitution_numeratie = restitution_numeratie(comparaison, numero_evaluation)
-    restitution_numeratie ? restitution_numeratie.competences_numeratie : []
+    restitution_numeratie ? restitution_numeratie.competences_numeratie : {}
   end
 end

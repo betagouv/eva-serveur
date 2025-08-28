@@ -9,6 +9,7 @@ ActiveAdmin.register Evaluation do
   config.sort_order = "created_at_desc"
 
   filter :beneficiaire_id,
+         label: Evaluation.human_attribute_name("beneficiaire"),
          as: :search_select_filter,
          url: proc { admin_beneficiaires_path },
          fields: %i[nom code_beneficiaire],
@@ -24,6 +25,7 @@ ActiveAdmin.register Evaluation do
          order_by: "libelle_asc"
   filter :created_at
   filter :responsable_suivi_id,
+         label: Evaluation.human_attribute_name("responsable_suivi"),
          as: :search_select_filter,
          url: proc { admin_comptes_path },
          fields: %i[email nom prenom],

@@ -1,9 +1,8 @@
 
-<%= dsfr_modal(title: "<span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Demande d'accès".html_safe, html_attributes: { id: "fr-modal-#{compte.id}" }) do %>
+<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}" }) do %>
   <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
     <div class="modal-role-utilisateur">
-      <p><strong><%= compte.display_name %></strong> a demandé un accès à la structure <%= current_compte.structure.nom %></p>
-
+      <%= md t(".introduction", compte: compte.display_name, structure: current_compte.structure.nom) %>
       <div class="fr-select-group fr-mb-4">
         <fieldset class="fr-fieldset" id="role-selection" aria-labelledby="role-selection-legend">
           <legend class="fr-fieldset__legend fr-fieldset__legend--regular" id="role-selection-legend">

@@ -1,6 +1,17 @@
 fr:
   layouts:
     mailer:
+      aide_admin: |
+        -
+
+        Vous avez reçu ce message parce que vous êtes titulaire d’un compte
+        « admin » sur eva, ce qui vous identifie comme référent(e) dans votre
+        structure pour la validation des comptes.
+
+        Si vous pensez que ce n’est pas à vous de valider les nouveaux comptes
+        qui se rattachent à votre structure, vous pouvez transférer le rôle
+        « admin » à un autre compte de votre structure (dans le menu
+        « Comptes » avec l’option « Modifier » un compte).
       aide_conseiller: |
         -
 

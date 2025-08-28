@@ -28,9 +28,6 @@ fr:
         Pour valider son accès, vous pouvez retrouver sa demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
 
         => <a href="%{lien_autorisation}" target="_blank">Valider son accès</a>
-
-
-        Vous avez reçu ce message parce que vous avez actuellement le rôle d'administrateur de cette structure.
     relance:
       objet: "%{prenom}, quelques ressources pour vous aider à réaliser vos premières évaluations"
       intro: |
@@ -64,7 +61,7 @@ fr:
 
         Ecrivez à cette adresse [%{email_support}](mailto:%{email_support}) et
         notre équipe vous répondra dans les plus brefs délais !
-    comptes_a_autoriser: 
+    comptes_a_autoriser:
       objet: |
         Simplifiez l’utilisation d’eva pour vos collègues : validez leur compte en 1 clic
       intro : |
@@ -82,12 +79,7 @@ fr:
       nom_prenom_compte: |
         %{prenom_compte} %{nom_compte}
       contenu: |
-        Pour valider leurs accès, vous pouvez retrouver leur demande en suivant le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
+        Pour valider leurs accès, vous pouvez retrouver leur demande en suivant
+        le lien ci-dessous. Cliquez ensuite sur le bouton « Vérifier ».
 
         => <a href="%{lien_autorisation}" target="_blank">Valider les accès</a>
-
-        En tant que premier utilisateur eva de votre structure, vous êtes actuellement identifié
-        comme référent(e) pour la validation de tous les comptes de votre structure. Si vous pensez 
-        que ce n’est pas à vous de distribuer les autorisations d’utilisation, merci d’envoyer un mail à
-        [%{email_support}](mailto:%{email_support}) en précisant les coordonnées de la personne à contacter.
-

@@ -5,5 +5,5 @@
     <li><%= md t(".nom_prenom_compte", prenom_compte: compte.prenom, nom_compte: compte.nom) %></li>
 <% end %>
 </ul>
-<%= md t(".contenu", lien_autorisation: admin_comptes_url,
-                     email_support: Eva::EMAIL_SUPPORT) %>
+<%= md t(".contenu", lien_autorisation: admin_comptes_url) %>
+<%= md t("layouts.mailer.aide_admin") %>

@@ -1,5 +1,7 @@
 .en-tete-page {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-image: asset-url('vague.svg');
   background-size: cover;
   background-position: bottom;
@@ -9,36 +11,66 @@
   position: static;
   top: 0;
   padding: 2.25rem $padding-pdf;
+}
 
-  .eva-logo {
-    margin-right: 1.5rem;
-  }
+.en-tete-page__identite {
+  display: inline-flex;
+  align-items: center;
+  gap: $dsfr-spacing-6v;
+}
 
-  .contexte {
-    text-align: right;
-  }
+.en-tete-page__eva-logo {
+  width: 3rem;
+}
 
-  .structure, .date-restitution {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.125rem;
-  }
+.en-tete-page__identite-beneficiaire {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
 
-  .structure {
-    color: #FBF9FA;
-    font-size: 1.4rem;
-    line-height: 1;
-  }
+.en-tete-page__nom-beneficiaire {
+  font-family: $font-titre;
+  color: #fff;
+  font-size: 1.125rem;
+  vertical-align: bottom;
+  font-weight: bold;
+}
 
-  .date-restitution {
-    color: $eva_bluegrey;
-  }
+.en-tete-page__code-beneficiaire {
+  color: #FFF;
+  /* Body/XS - Texte mention/Maj */
+  @include dsfr-texte-xs();
+  font-weight: 600;
+  text-transform: uppercase;
+}
 
-  .nom-evalue {
-    font-family: $font-titre;
-    color: #FBF9FA;
-    font-size: 2rem;
-    vertical-align: bottom;
-    font-weight: bold;
-  }
+.en-tete-page__structure, .en-tete-page__date-restitution {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.125rem;
+}
+
+.en-tete-page__contexte {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
+
+.en-tete-page__structure {
+  color: $eva_light;
+  @include dsfr-texte-sm();
+}
+
+.en-tete-page__date-restitution {
+  color: $eva_bluegrey;
+  font-family: $font-titre;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }

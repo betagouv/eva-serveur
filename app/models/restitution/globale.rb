@@ -26,6 +26,10 @@ module Restitution
       evaluation.beneficiaire.nom
     end
 
+    def code_beneficiaire
+      evaluation.beneficiaire.code_beneficiaire
+    end
+
     def date
       evaluation.created_at
     end

@@ -1,0 +1,17 @@
+<div class="en-tete-page">
+  <div class="en-tete-page__identite">
+    <%= image_tag "eva-logo.svg", alt: "logo EVA", class: "en-tete-page__eva-logo" %>
+    <div class="en-tete-page__identite-beneficiaire">
+      <div class="en-tete-page__nom-beneficiaire"><%= restitution_globale.beneficiaire %></div>
+      <div class="en-tete-page__code-beneficiaire"><%= restitution_globale.code_beneficiaire %></div>
+    </div>
+  </div>
+  <div class="en-tete-page__contexte">
+    <div class="en-tete-page__date-restitution pt-2">
+      <%= l restitution_globale.date, format: :avec_heure %>
+    </div>
+    <div class="en-tete-page__structure">
+      <span><%= restitution_globale.structure %></span>
+    </div>
+  </div>
+</div>

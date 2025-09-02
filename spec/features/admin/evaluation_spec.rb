@@ -186,6 +186,7 @@ describe 'Admin - Evaluation', type: :feature do
           double(Restitution::Globale,
                  date: DateTime.now,
                  beneficiaire: 'Roger',
+                 code_beneficiaire: 'ROG1234',
                  efficience: 5,
                  restitutions: [ restitution ])
         end

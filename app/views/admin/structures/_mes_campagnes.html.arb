@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-div class: "bloc-mes-campagnes" do
+div class: "bloc-mes-campagnes fr-mt-8v" do
   h3 "Campagnes"
   if campagnes.present?
     table_for campagnes, class: "index_table" do

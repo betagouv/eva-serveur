@@ -1,7 +1,10 @@
 <% url = new_compte_registration_url(structure_id: resource.id) %>
 <% if current_compte.au_moins_admin? %>
-<div id='bloc-membres'>
-  <h3><%= t(".titre") %></h3>
+  <div id="bloc-membres" class="fr-mt-8v">
+    <div class="titre-panel-avec-bouton">
+      <h3><%= t(".titre") %></h3>
+      <%= link_to t(".voir_membres"), admin_comptes_path("q[structure_id_eq]": resource.id) %>
+    </div>
     <div class="panel panel-invitation">
       <div class="container-instructions">
         <div class="panel-invitation-message">

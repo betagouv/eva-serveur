@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: "bloc-apercu" do
-  div class: "bloc-apercu-header" do
+  div class: "titre-panel-avec-bouton" do
     h3 t(".titre")
     text_node link_to t(".action"), admin_campagnes_path
   end

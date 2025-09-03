@@ -23,24 +23,6 @@
       }
     }
 
-    &-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.875rem;
-
-      h3 {
-        @include titre-carte;
-        margin-bottom: 0;
-      }
-
-      > a {
-        @include bouton-primaire;
-        @include grand-bouton;
-        display: inline-block;
-      }
-    }
-
     .campagnes-liste {
       color: $eva_dark_blue_grey;
       .liste-entete {
@@ -156,7 +138,7 @@
       }
     }
 
-    .bloc-apercu-header {
+    .titre-panel-avec-bouton {
       box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
       border-radius: .5rem .5rem 0 0;
     }
@@ -198,12 +180,6 @@
 
     .qcm {
       position: absolute;
-    }
-  }
-
-  .bloc-evaluations {
-    .bloc-apercu-header {
-      margin-bottom: .875rem;
     }
   }
 

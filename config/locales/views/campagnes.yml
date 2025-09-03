@@ -25,6 +25,7 @@ fr:
           Le libellé d'une campagne permet de retrouver facilement vos évaluations.
 
           **Attention** : il est également visible par les bénéficiaires pendant l'évaluation.
+        titre_compte: Propriétaire de la campagne
         configuration_avancee: Configuration avancée
       votre_code_campagne:
         explication_code: |

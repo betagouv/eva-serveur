@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 render "form_script"
+
+mode = resource.new_record? ? "new" : "edit"
 div class: "nouvelle-campagne" do
   div class: "row" do
     div class: "offset-1 col-4" do
-      titre = resource.new_record? ? "new" : "edit"
-      h1 t("active_admin.resources.campagne.#{titre}_model")
+      h1 t("active_admin.resources.campagne.#{mode}_model")
       div class: "panel" do
         div class: "panel__description" do
           md t(".explication_campagne")
@@ -14,7 +15,7 @@ div class: "nouvelle-campagne" do
 
       active_admin_form_for [ :admin, resource ] do |f|
         f.semantic_errors
-        if resource.new_record?
+        if mode == "new"
           h2 "Programme"
           div id: "zone-choix-type-programme" do
             div class: "panel" do
@@ -80,9 +81,18 @@ div class: "nouvelle-campagne" do
           end
         end
 
-        if current_compte.superadmin?
+        if current_compte.admin? && mode == "edit"
+          h2 t(".titre_compte")
           div class: "panel" do
-            h2 t(".configuration_avancee")
+            f.inputs do
+              f.input :compte, collection: comptes_structure
+            end
+          end
+        end
+
+        if current_compte.superadmin?
+          h2 t(".configuration_avancee")
+          div class: "panel" do
             f.inputs do
               f.input :compte
               f.input :code

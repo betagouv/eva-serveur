@@ -20,6 +20,23 @@ body.logged_out #content_wrapper #active_admin_content {
   }
 }
 
+.titre-panel-avec-bouton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.875rem;
+
+  h3 {
+    @include titre-carte;
+    margin-bottom: 0;
+  }
+
+  > a {
+    @include bouton-primaire;
+    @include grand-bouton;
+  }
+}
+
 .admin_dashboard {
   .panel {
     h3 {

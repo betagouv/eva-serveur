@@ -20,7 +20,7 @@
 }
 
 .en-tete-page__eva-logo {
-  width: 3rem;
+  width: 75px;
 }
 
 .en-tete-page__identite-beneficiaire {
@@ -32,45 +32,31 @@
 }
 
 .en-tete-page__nom-beneficiaire {
-  font-family: $font-titre;
-  color: #fff;
-  font-size: 1.125rem;
-  vertical-align: bottom;
-  font-weight: bold;
+  color: $grey-1000;
+  @include pdf-texte-xl();
 }
 
 .en-tete-page__code-beneficiaire {
-  color: #FFF;
-  /* Body/XS - Texte mention/Maj */
-  @include dsfr-texte-xs();
-  font-weight: 600;
+  color: $eva_bluegrey;
+  @include pdf-texte-lg();
   text-transform: uppercase;
-}
-
-.en-tete-page__structure, .en-tete-page__date-restitution {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1.125rem;
 }
 
 .en-tete-page__contexte {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: $dsfr-spacing-1v;
 }
 
-.en-tete-page__structure {
-  color: $eva_light;
-  @include dsfr-texte-sm();
+.en-tete-page__date-restitution {
+  color: $grey-1000;
+  @include pdf-texte-xl();
 }
 
-.en-tete-page__date-restitution {
+.en-tete-page__structure {
   color: $eva_bluegrey;
-  font-family: $font-titre;
-  font-size: 0.625rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  @include pdf-texte-lg();
 }
+

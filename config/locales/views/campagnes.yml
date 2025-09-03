@@ -62,3 +62,9 @@ fr:
       situation:
         autopositionnement: Autopositionnement
         redaction: Exercice de rédaction
+      aide_acces_prives:
+        acces_par_defaut: |
+          Cette campagne est privée, seuls le compte propriétaire et les « admins » de la structure peuvent la voir.
+
+          Vous pouvez autoriser des personnes supplémentaires.
+        titre_ajouter: "Autres Autorisations :"

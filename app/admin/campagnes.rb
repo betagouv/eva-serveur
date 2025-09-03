@@ -73,6 +73,7 @@ class: "bouton-disabled")
     if: proc { (resource.campagne_compte_autorisations.present? ||
                 can?(:autoriser_compte, resource)) &&
                resource.privee } do
+    render "aide_acces_prives"
     resource.campagne_compte_autorisations.each do |autorisation|
       url = revoquer_compte_admin_campagne_path(
         resource,

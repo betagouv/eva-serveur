@@ -1,3 +1,4 @@
+<%# frozen_string_literal: true %>
 
 <%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}" }) do %>
   <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>

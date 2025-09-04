@@ -1,3 +1,4 @@
+<%# frozen_string_literal: true %>
 <% if illustration.attached? %>
   <%= link_to cdn_for(illustration), target: "_blank", rel: "noopener", class: "pas-souligne" do %>
     <%= image_tag cdn_for(illustration), class: "image-preview", alt: illustration.filename %>

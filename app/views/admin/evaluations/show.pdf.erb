@@ -1,3 +1,4 @@
+<%# frozen_string_literal: true %>
 <% class_css = campagne_avec_positionnement?(:litteratie) ? "litteratie" : "numeratie" %>
 <div>
   <%= render partial: "admin/evaluations/restitution_globale", locals: { restitution_globale: restitution_globale, pdf: true } %>

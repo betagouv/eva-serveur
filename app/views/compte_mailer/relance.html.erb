@@ -1,3 +1,4 @@
+<%# frozen_string_literal: true %>
 <%= md t(".intro", prenom: @compte.prenom,
                    delai_relance: distance_of_time_in_words(Compte::DELAI_RELANCE_NON_ACTIVATION),
                    cible_evaluation: @cible_evaluation,

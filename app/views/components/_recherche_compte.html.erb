@@ -1,3 +1,4 @@
+<%# frozen_string_literal: true %>
 <button class="bouton-secondaire petit-bouton bouton-icone-plus"><%= t(".#{locals[:translation_scope]}.action") %></button>
 <%= form_with id: locals[:form_id], url: locals[:form_url], class: "hidden" do |f| %>
     <label class="sr-only" for="<%= locals[:autocomplete_id] %>"><%= t(".#{locals[:translation_scope]}.libelle_champ_recherche") %></label>

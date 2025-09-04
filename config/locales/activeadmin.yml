@@ -79,7 +79,7 @@ fr:
       filters: Rechercher
       autres_actualites: Les autres actualités sur eva
       action_items: Gestion
-      acces_prives: Accès privés
+      acces_prives: Accès privé
       responsable_de_suivi: Responsable de suivi
     scopes:
       sans_campagne: Sans campagne 🙈

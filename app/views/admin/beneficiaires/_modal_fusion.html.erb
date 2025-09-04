@@ -1,0 +1,21 @@
+<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-fusionner" }) do %>
+  <div class="modal-fusionner">
+    <%= form_with url: batch_action_admin_beneficiaires_path, method: :post, local: true, id: "fusion-form" do |f| %>
+      <div class= "liste-beneficiaires-fusion"style="padding-bottom: 60px">
+        <p> <%= t(".instruction") %> </p>
+        <ul id="liste-elements-a-fusionner"></ul>
+        <p> <%= t(".pour_fusion") %> <span class="fr-text--bold" id="beneficiaire-rattache"></span>. </p>
+      </div>
+
+      <%= hidden_field_tag :batch_action, "fusionner" %>      
+      <%= hidden_field_tag :batch_action_inputs, "{}" %>
+      
+      <div id="hidden-ids-container"></div>
+      
+      <div class="fr-modal__footer">
+        <button type="button" class="fr-btn bouton-secondaire" data-dismiss="modal"><%= t(".annuler") %></button>
+        <button type="submit" class="fr-btn" id="confirmer-fusion"><%= t(".confirmer") %></button>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -109,7 +109,7 @@ class AbilityUtilisateur
     can(%i[update], compte)
     cannot(:read, AnnonceGenerale)
     cannot(:read, SourceAide)
-    cannot(:lier, Beneficiaire)
+    cannot(:fusionner, Beneficiaire)
     cannot(%i[mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification],
            Evaluation)

@@ -18,7 +18,7 @@ fr:
     batch_actions:
       action_label: "%{title}"
       labels:
-        lier: Lier les bénéficiaires sélectionnés
+        fusionner: Fusionner les bénéficiaires
         destroy: Supprimer les bénéficiaires sélectionnés
 
     resources:

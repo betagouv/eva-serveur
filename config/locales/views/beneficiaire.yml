@@ -1,6 +1,17 @@
 fr:
   admin:
     beneficiaires:
+      modal_fusion:
+        titre:  <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Récapitulatif de fusion
+        instruction: "En cliquant sur \"Confirmer\", vous validez la fusion des comptes suivants :"
+        pour_fusion: "Après la fusion, toutes les évaluations seront rattachées au bénéficiaire"
+        confirmer: Confirmer
+        annuler: Annuler
+      fusion:
+        errors:
+          alert: "Sélectionnez au moins deux bénéficiaires pour les fusionner."
+        success:
+          notice: "Les évaluations ont été rassemblées dans le bénéficiaire %{beneficiaire_nom}."
       show:
         info: Vous pouvez consulter ici toutes les passations de ce bénéficiaire.
         beneficiaire_anonyme: "Ce bénéficiaire est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."

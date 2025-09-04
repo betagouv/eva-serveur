@@ -106,6 +106,7 @@ class AbilityUtilisateur
   def droits_cmr
     can :read, :all
     cannot(%i[update create destroy], :all)
+    can(%i[update], compte)
     cannot(:read, AnnonceGenerale)
     cannot(:read, SourceAide)
     cannot(:lier, Beneficiaire)

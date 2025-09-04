@@ -107,8 +107,8 @@ class AbilityUtilisateur
     can :read, :all
     cannot(%i[update create destroy], :all)
     cannot(:read, AnnonceGenerale)
-    cannot(:read, Beneficiaire)
     cannot(:read, SourceAide)
+    cannot(:lier, Beneficiaire)
     cannot(%i[mise_en_action supprimer_responsable_suivi ajouter_responsable_suivi
               renseigner_qualification],
            Evaluation)

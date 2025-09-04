@@ -159,7 +159,8 @@ describe Ability do
     it { is_expected.not_to be_able_to(%i[create update destroy], Actualite) }
     it { is_expected.not_to be_able_to(:read, AnnonceGenerale) }
     it { is_expected.not_to be_able_to(:read, SourceAide) }
-    it { is_expected.not_to be_able_to(:read, Beneficiaire) }
+    it { is_expected.to be_able_to(:read, Beneficiaire) }
+    it { is_expected.not_to be_able_to(:lier, Beneficiaire) }
     it { is_expected.not_to be_able_to(:supprimer_responsable_suivi, Evaluation) }
     it { is_expected.not_to be_able_to(:renseigner_qualification, Evaluation) }
     it { is_expected.not_to be_able_to(:ajouter_responsable_suivi, Evaluation) }

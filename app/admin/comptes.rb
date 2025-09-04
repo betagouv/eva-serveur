@@ -26,7 +26,7 @@ ActiveAdmin.register Compte do
          display_name: "display_name",
          minimum_input_length: 2,
          order_by: "nom_asc",
-         if: proc { can? :manage, Compte }
+         if: proc { current_compte.anlci? }
   filter :role,
          as: :select,
          collection: proc { collection_roles }

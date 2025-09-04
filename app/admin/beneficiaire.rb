@@ -20,7 +20,8 @@ ActiveAdmin.register Beneficiaire do
     beneficiaire = beneficiaires.par_date_creation_asc.first
     beneficiaires_a_fusionner = beneficiaires.sauf_pour(beneficiaire.id)
 
-    LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner).call
+    lien = LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner)
+    lien.call
 
     redirect_to admin_beneficiaire_path(lien.beneficiaire),
         notice: "Les évaluations ont été transférées vers le bénéficiaire le plus ancien."

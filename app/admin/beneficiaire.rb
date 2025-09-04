@@ -13,7 +13,7 @@ ActiveAdmin.register Beneficiaire do
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
     if beneficiaires.size < 2
-      redirect_to collection_path, alert: "Sélectionnez au moins deux bénéficiaires pour les lier."
+      redirect_to collection_path, alert: "Sélectionnez au moins deux bénéficiaires pour les fusionner."
       next
     end
 
@@ -23,8 +23,8 @@ ActiveAdmin.register Beneficiaire do
     lien = LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner)
     lien.call
 
-    redirect_to admin_beneficiaire_path(lien.beneficiaire),
-        notice: "Les évaluations ont été transférées vers le bénéficiaire le plus ancien."
+    redirect_to admin_beneficiaire_path(beneficiaire),
+        notice: "Les évaluations ont été transférées vers le bénéficiaire #{beneficiaire.nom}."
   end
 
   before_action only: :show do

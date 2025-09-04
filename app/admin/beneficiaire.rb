@@ -9,7 +9,7 @@ ActiveAdmin.register Beneficiaire do
   config.sort_order = "created_at_desc"
   config.batch_actions = true
 
-  batch_action :lier do |beneficiaire_ids|
+  batch_action :lier, if: proc { can?(:lier, Beneficiaire) } do |beneficiaire_ids|
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
     if beneficiaires.size < 2
@@ -44,7 +44,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index do
-    selectable_column
+    selectable_column if can?(:lier, Beneficiaire)
     column :nom do |beneficiaire|
       render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
     end

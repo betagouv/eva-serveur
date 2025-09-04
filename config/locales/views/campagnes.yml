@@ -64,7 +64,5 @@ fr:
         redaction: Exercice de rédaction
       aide_acces_prives:
         acces_par_defaut: |
-          Cette campagne est privée, seuls le compte propriétaire et les « admins » de la structure peuvent la voir.
-
-          Vous pouvez autoriser des personnes supplémentaires.
-        titre_ajouter: "Autres Autorisations :"
+          Cette campagne est privée, seuls le compte propriétaire, les « admins » de la structure et les personnes autorisées ci-dessous peuvent la voir.
+        titre_ajouter: "Autres autorisations :"

@@ -102,6 +102,7 @@ a.pas-souligne {
 }
 button.fr-link--close.fr-link {
   border: none;
+  box-shadow: none;
 }
 
 button.fr-link--close.fr-link:hover {
@@ -117,6 +118,17 @@ button.fr-link--close.fr-link:hover {
   align-items: center;
   gap: $dsfr-spacing-4v;
   align-self: stretch;
+}
+
+.fr-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.fr-modal.fr-modal--opened {
+  display: flex; 
 }
 
 .fr-btn {

@@ -9,11 +9,12 @@ ActiveAdmin.register Beneficiaire do
   config.sort_order = "created_at_desc"
   config.batch_actions = true
 
-  batch_action :lier, if: proc { can?(:lier, Beneficiaire) } do |beneficiaire_ids|
+  batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
     if beneficiaires.size < 2
-      redirect_to collection_path, alert: "Sélectionnez au moins deux bénéficiaires pour les lier."
+      redirect_to collection_path,
+      alert: "Sélectionnez au moins deux bénéficiaires pour les fusionner."
       next
     end
 
@@ -23,8 +24,8 @@ ActiveAdmin.register Beneficiaire do
     lien = LienBeneficiaires.new(beneficiaire, beneficiaires_a_fusionner)
     lien.call
 
-    redirect_to admin_beneficiaire_path(lien.beneficiaire),
-        notice: "Les évaluations ont été transférées vers le bénéficiaire le plus ancien."
+    redirect_to admin_beneficiaire_path(beneficiaire),
+      notice: "Les évaluations ont été transférées vers le bénéficiaire #{beneficiaire.nom}."
   end
 
   before_action only: :show do
@@ -44,12 +45,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index do
-    selectable_column if can?(:lier, Beneficiaire)
-    column :nom do |beneficiaire|
-      render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
-    end
-    column :code_beneficiaire
-    column :created_at
-    actions
+    render partial: "admin/beneficiaires/modal_fusion"
+    render "index", context: self
   end
 end

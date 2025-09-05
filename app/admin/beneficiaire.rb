@@ -13,7 +13,8 @@ ActiveAdmin.register Beneficiaire do
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 
     if beneficiaires.size < 2
-      redirect_to collection_path, alert: "Sélectionnez au moins deux bénéficiaires pour les fusionner."
+      redirect_to collection_path,
+      alert: "Sélectionnez au moins deux bénéficiaires pour les fusionner."
       next
     end
 
@@ -24,7 +25,7 @@ ActiveAdmin.register Beneficiaire do
     lien.call
 
     redirect_to admin_beneficiaire_path(beneficiaire),
-        notice: "Les évaluations ont été transférées vers le bénéficiaire #{beneficiaire.nom}."
+      notice: "Les évaluations ont été transférées vers le bénéficiaire #{beneficiaire.nom}."
   end
 
   before_action only: :show do
@@ -44,12 +45,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index do
-    selectable_column if can?(:fusionner, Beneficiaire)
-    column :nom do |beneficiaire|
-      render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
-    end
-    column :code_beneficiaire
-    column :created_at
-    actions
+    render partial: "admin/beneficiaires/modal_fusion"
+    render "index", context: self
   end
 end

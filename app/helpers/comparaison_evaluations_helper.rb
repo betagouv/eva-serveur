@@ -12,9 +12,10 @@ module ComparaisonEvaluationsHelper
 
   def sous_competences_litteratie(comparaison, numero_evaluation)
     restitution_litteratie = restitution_litteratie(comparaison, numero_evaluation)
+    return {} if restitution_litteratie.nil?
     return {} if restitution_litteratie.parcours_haut != ::Competence::NIVEAU_INDETERMINE
 
-    restitution_litteratie ? restitution_litteratie.competences_litteratie : {}
+    restitution_litteratie.competences_litteratie
   end
 
   def restitution_numeratie(comparaison, numero_evaluation)

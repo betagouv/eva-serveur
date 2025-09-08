@@ -12,6 +12,7 @@ $padding-pdf: 5rem;
 @import 'dsfr';
 
 @import "admin/pages/restitution_globale/base";
+@import "admin/pages/comparaison";
 @import "admin/bg";
 @import "admin/composants/alert_interpreter_resultats";
 @import "admin/composants/litteratie";
@@ -46,6 +47,18 @@ $padding-pdf: 5rem;
       line-height: 1.3;
     }
   }
+}
+
+.page-pdf {
+  @include adaptation-pdf();
+  width: 100%;
+}
+
+.page-pdf__contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem $padding-pdf;
 }
 
 .evaluation__restitution-globale {
@@ -142,4 +155,14 @@ $padding-pdf: 5rem;
       height: 5rem;
     }
   }
+}
+
+.page-comparaison {
+  gap: 0;
+}
+.page-comparaison__min-column:nth-child(1) {
+  min-width: 300px;
+}
+.page-comparaison__min-column:nth-child(2), .page-comparaison__min-column:nth-child(3) {
+  min-width: 274px;
 }

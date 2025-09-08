@@ -1,0 +1,17 @@
+<% pdf = true %>
+
+<div class="page-pdf page adaptation-pdf page-comparaison">
+  <%= render Pdf::EntetePageComponent.new(
+    nom_beneficiaire: beneficiaire.nom,
+    code_beneficiaire: beneficiaire.code_beneficiaire
+  ) %>
+  <div class="page-pdf__contenu">
+    <h1 class="page-comparaison__titre">Comparaison des résultats</h1>
+    <%= render partial: "comparaison_litteratie",
+               locals: { comparaison: comparaison, pdf: pdf } %>
+
+    <%= render partial: "comparaison_numeratie",
+               locals: { comparaison: comparaison, pdf: pdf } %>
+  </div>
+  <%= render Pdf::PiedPageComponent.new %>
+</div>

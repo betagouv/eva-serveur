@@ -3,7 +3,7 @@ fr:
     beneficiaires:
       modal_fusion:
         titre:  <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Récapitulatif de fusion
-        instruction: "En cliquant sur \"Confirmer\", vous validez la fusion des bénéficiaires suivants :"
+        instruction: "Cliquez sur « Confirmer » pour fusionner les bénéficiaires suivants :"
         pour_fusion: "Après la fusion, toutes les évaluations seront rattachées au bénéficiaire"
         confirmer: Confirmer
         annuler: Annuler

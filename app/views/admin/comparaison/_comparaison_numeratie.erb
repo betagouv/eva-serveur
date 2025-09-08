@@ -1,3 +1,5 @@
+<% pdf ||= false %>
+
 <% numeratie = comparaison.evaluations_numeratie %>
 <% if numeratie.present? %>
   <% competence = :numeratie %>
@@ -12,30 +14,41 @@
     <% sous_competences_1 = sous_competences_numeratie(comparaison, 0) %>
   <% end %>
 
+  <% classes_additionnels = "fr-table--no-scroll" if pdf %>
   <%= render PanelComponent.new(titre: "Numératie", classes: "panel--beneficiaire") do %>
-    <div class="fr-table fr-m-0" id="table-numeratie-component">
+    <div class="fr-table fr-m-0 <%= classes_additionnels %>" id="table-numeratie-component">
     <div class="fr-table__wrapper">
       <div class="fr-table__container">
         <div class="fr-table__content">
           <table id="table-7">
             <thead>
               <tr>
-                <th role="columnheader">
+                <th class="page-comparaison__min-column" role="columnheader">
                 </th>
-                <th> <%= I18n.l(evaluation_numeratie_0.debutee_le, format: :sans_heure) %> </th>
-                <th style="min-width: 33%;"> <%= evaluation_numeratie_1 ? I18n.l(evaluation_numeratie_1.debutee_le, format: :sans_heure) : "-" %> </th>
+                <th class="page-comparaison__min-column">
+                  <%= I18n.l(evaluation_numeratie_0.debutee_le, format: :sans_heure) %>
+                </th>
+                <th class="page-comparaison__min-column">
+                  <%= evaluation_numeratie_1 ? I18n.l(evaluation_numeratie_1.debutee_le, format: :sans_heure) : "-" %>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr id="table-numeratie-row-key-1" data-row-key="1">
                 <th scope="row"> Profil général </th>
-                <td> <%= render(Badge::ProfilComponent.new(profil_0, competence)) %> </td>
                 <td>
-                  <% if evaluation_numeratie_1 %>
-                    <%= render(Badge::ProfilComponent.new(profil_1, competence)) %>
-                  <% else %>
-                    -
-                  <% end %>
+                  <div class="page-comparaison__container-badge">
+                    <%= render(Badge::ProfilComponent.new(profil_0, competence)) %>
+                  </div>
+                </td>
+                <td>
+                  <div class="page-comparaison__container-badge">
+                    <% if evaluation_numeratie_1 %>
+                      <%= render(Badge::ProfilComponent.new(profil_1, competence)) %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </div>
                 </td>
               </tr>
               <% index = 1 %>

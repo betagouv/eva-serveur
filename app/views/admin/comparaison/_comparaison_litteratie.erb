@@ -2,7 +2,7 @@
 
 <% competence = :litteratie %>
 <% sous_competences = [ :lecture, :comprehension, :production ] %>
-<% tableau = tableau_comparaison_litteratie(comparaison) %>
+<% tableau = comparaison.tableau_comparaison(competence) %>
 <% classes_additionnels = "fr-table--no-scroll" if pdf %>
 
 <% if tableau.present? %>

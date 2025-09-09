@@ -1,22 +1,11 @@
 <% pdf ||= false %>
 
-<% numeratie = comparaison.evaluations_numeratie %>
-<% if numeratie.present? %>
-  <% competence = :numeratie %>
+<% competence = :numeratie %>
+<% sous_competences = [:"2_1", :"2_2", :"2_3", :"2_4", :"2_5"]%>
+<% tableau = tableau_comparaison_numeratie(comparaison) %>
+<% classes_additionnels = "fr-table--no-scroll" if pdf %>
 
-  <% numero_evaluation = 0 %>
-  <% evaluation_numeratie_0 = numeratie[numero_evaluation] %>
-  <% profil_0 = profil_numeratie(comparaison, numero_evaluation) %>
-  <% sous_competences_0 = sous_competences_numeratie(comparaison, numero_evaluation) %>
-
-  <% numero_evaluation = 1 %>
-  <% evaluation_numeratie_1 = numeratie[numero_evaluation] %>
-  <% if evaluation_numeratie_1 %>
-    <% profil_1 = profil_numeratie(comparaison, numero_evaluation) %>
-    <% sous_competences_1 = sous_competences_numeratie(comparaison, numero_evaluation) %>
-  <% end %>
-
-  <% classes_additionnels = "fr-table--no-scroll" if pdf %>
+<% if tableau.present? %>
   <%= render PanelComponent.new(titre: "Numératie", classes: "panel--beneficiaire") do %>
     <div class="fr-table fr-m-0 <%= classes_additionnels %>" id="table-numeratie-component">
     <div class="fr-table__wrapper">
@@ -27,61 +16,51 @@
               <tr>
                 <th class="page-comparaison__min-column" role="columnheader">
                 </th>
-                <th class="page-comparaison__min-column">
-                  <%= I18n.l(evaluation_numeratie_0.debutee_le, format: :sans_heure) %>
-                </th>
-                <th class="page-comparaison__min-column">
-                  <%= evaluation_numeratie_1 ? I18n.l(evaluation_numeratie_1.debutee_le, format: :sans_heure) : "-" %>
-                </th>
+
+                <% 2.times do |i| %>
+                  <th class="page-comparaison__min-column">
+                    <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
+                  </th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
               <tr id="table-numeratie-row-key-1" data-row-key="1">
                 <th scope="row"> Profil général </th>
-                <td>
-                  <div class="page-comparaison__container-badge">
-                    <%= render(Badge::ProfilComponent.new(profil_0, competence)) %>
-                  </div>
-                </td>
-                <td>
-                  <div class="page-comparaison__container-badge">
-                    <% if evaluation_numeratie_1 %>
-                      <%= render(Badge::ProfilComponent.new(profil_1, competence)) %>
-                    <% else %>
-                      -
-                    <% end %>
-                  </div>
-                </td>
+                <% 2.times do |i| %>
+                  <td>
+                    <div class="page-comparaison__container-badge">
+                      <% if tableau[i][:profil] %>
+                        <%= render(Badge::ProfilComponent.new(tableau[i][:profil], competence)) %>
+                      <% else %>
+                        -
+                      <% end %>
+                    </div>
+                  </td>
+                <% end %>
               </tr>
               <% index = 1 %>
-              <% sous_competences_0.each do |sous_competence, objet_sous_competence|%>
+              <% sous_competences.each do |sous_competence, objet_sous_competence|%>
                 <% index += 1 %>
                 <tr id="table-numeratie-row-key-<%= index %>" data-row-key="<%= index %>">
                   <th scope="row">
                     <%= I18n.t("admin.evaluations.positionnement.sous_competences.numeratie.#{sous_competence}.titre") %>
                   </th>
-                  <td>
-                    <%= render BarreSegmenteeComponent.new(
-                      nombre_questions_reussies: sous_competences_0[sous_competence].nombre_questions_reussies,
-                      nombre_questions_echecs: sous_competences_0[sous_competence].nombre_questions_echecs,
-                      nombre_questions_non_passees: sous_competences_0[sous_competence].nombre_questions_non_passees,
-                      pourcentage_reussite: sous_competences_0[sous_competence].pourcentage_reussite,
-                      avec_legende: false
-                    ) %>
-                  </td>
-                  <td>
-                    <% if sous_competences_1 && sous_competences_1[sous_competence] %>
-                      <%= render BarreSegmenteeComponent.new(
-                        nombre_questions_reussies: sous_competences_1[sous_competence].nombre_questions_reussies,
-                        nombre_questions_echecs: sous_competences_1[sous_competence].nombre_questions_echecs,
-                        nombre_questions_non_passees: sous_competences_1[sous_competence].nombre_questions_non_passees,
-                        pourcentage_reussite: sous_competences_1[sous_competence].pourcentage_reussite,
-                        avec_legende: false
-                      ) %>
-                    <% else %>
-                      -
-                    <% end %>
-                  </td>
+                  <% 2.times do |i| %>
+                    <td>
+                      <% if tableau[i][:sous_competences] && tableau[i][:sous_competences][sous_competence] %>
+                        <%= render BarreSegmenteeComponent.new(
+                          nombre_questions_reussies: tableau[i][:sous_competences][sous_competence].nombre_questions_reussies,
+                          nombre_questions_echecs: tableau[i][:sous_competences][sous_competence].nombre_questions_echecs,
+                          nombre_questions_non_passees: tableau[i][:sous_competences][sous_competence].nombre_questions_non_passees,
+                          pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite,
+                          avec_legende: false
+                        ) %>
+                      <% else %>
+                        -
+                      <% end %>
+                    </td>
+                  <% end %>
                 </tr>
               <% end %>
             </tbody>

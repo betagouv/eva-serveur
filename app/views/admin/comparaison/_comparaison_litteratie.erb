@@ -1,22 +1,11 @@
 <% pdf ||= false %>
 
-<% litteratie = comparaison.evaluations_litteratie %>
-<% if litteratie.present? %>
-  <% competence = :litteratie %>
+<% competence = :litteratie %>
+<% sous_competences = [ :lecture, :comprehension, :production ] %>
+<% tableau = tableau_comparaison_litteratie(comparaison) %>
+<% classes_additionnels = "fr-table--no-scroll" if pdf %>
 
-  <% numero_evaluation = 0 %>
-  <% evaluation_litteratie_0 = litteratie[numero_evaluation] %>
-  <% profil_0 = profil_litteratie(comparaison, numero_evaluation) %>
-  <% sous_competences_0 = sous_competences_litteratie(comparaison, numero_evaluation) %>
-
-  <% numero_evaluation = 1 %>
-  <% evaluation_litteratie_1 = litteratie[numero_evaluation] %>
-  <% if evaluation_litteratie_1 %>
-    <% profil_1 = profil_litteratie(comparaison, numero_evaluation) %>
-    <% sous_competences_1 = sous_competences_litteratie(comparaison, numero_evaluation) %>
-  <% end %>
-
-  <% classes_additionnels = "fr-table--no-scroll" if pdf %>
+<% if tableau.present? %>
   <%= render PanelComponent.new(titre: "Littératie", classes: "panel--beneficiaire") do %>
     <div class="fr-table fr-m-0 <%= classes_additionnels %>" id="table-litteratie-component">
     <div class="fr-table__wrapper">
@@ -25,59 +14,49 @@
           <table id="table-7">
             <thead>
               <tr>
-              <th class="page-comparaison__min-column" role="columnheader">
-                </th>
-                <th class="page-comparaison__min-column">
-                  <%= I18n.l(evaluation_litteratie_0.debutee_le, format: :sans_heure) %>
-                </th>
-                <th class="page-comparaison__min-column">
-                  <%= evaluation_litteratie_1 ? I18n.l(evaluation_litteratie_1.debutee_le, format: :sans_heure) : "-" %>
-                </th>
+                <th class="page-comparaison__min-column" role="columnheader"></th>
+
+                <% 2.times do |i| %>
+                  <th class="page-comparaison__min-column">
+                    <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
+                  </th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
               <tr id="table-litteratie-row-key-1" data-row-key="1">
                 <th scope="row"> Profil général </th>
-                <td>
-                  <div class="page-comparaison__container-badge">
-                    <%= render(Badge::ProfilComponent.new(profil_0, competence)) %>
-                  </div>
-                </td>
-                <td>
-                  <div class="page-comparaison__container-badge">
-                    <% if evaluation_litteratie_1 %>
-                      <%= render(Badge::ProfilComponent.new(profil_1, competence)) %>
-                    <% else %>
-                      -
-                    <% end %>
-                  </div>
-                </td>
+
+                <% 2.times do |i| %>
+                  <td>
+                    <div class="page-comparaison__container-badge">
+                      <% if tableau[i][:profil] %>
+                        <%= render(Badge::ProfilComponent.new(tableau[i][:profil], competence)) %>
+                      <% else %>
+                        -
+                      <% end %>
+                    </div>
+                  </td>
+                <% end %>
               </tr>
               <% index = 1 %>
-              <% [ :lecture, :comprehension, :production ].each do |sous_competence|%>
+              <% sous_competences.each do |sous_competence|%>
                 <% index += 1 %>
                 <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
                   <th scope="row">
                     <%= I18n.t("admin.evaluations.positionnement.sous_competences.litteratie.#{sous_competence}.titre") %>
                   </th>
-                  <td>
-                    <div class="page-comparaison__container-badge">
-                      <% if sous_competences_0 && sous_competences_0[sous_competence] %>
-                        <%= render(Badge::ProfilComponent.new(sous_competences_0[sous_competence].profil, competence)) %>
-                      <% else %>
-                        -
-                      <% end %>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="page-comparaison__container-badge">
-                      <% if sous_competences_1 && sous_competences_1[sous_competence] %>
-                        <%= render(Badge::ProfilComponent.new(sous_competences_1[sous_competence].profil, competence)) %>
-                      <% else %>
-                        -
-                      <% end %>
-                    </div>
-                  </td>
+                  <% 2.times do |i| %>
+                    <td>
+                      <div class="page-comparaison__container-badge">
+                        <% if tableau[i][:sous_competences] && tableau[i][:sous_competences][sous_competence] %>
+                          <%= render(Badge::ProfilComponent.new(tableau[i][:sous_competences][sous_competence].profil, competence)) %>
+                        <% else %>
+                          -
+                        <% end %>
+                      </div>
+                    </td>
+                  <% end %>
                 </tr>
               <% end %>
             </tbody>

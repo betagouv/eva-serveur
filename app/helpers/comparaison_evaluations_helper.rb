@@ -1,40 +1,38 @@
 # frozen_string_literal: true
 
 module ComparaisonEvaluationsHelper
-  def tableau_comparaison_litteratie(comparaison)
+  def tableau_comparaison(comparaison, type)
     tableau = []
-    evaluations = comparaison.evaluations_litteratie
+    evaluations = type == :litteratie ? comparaison.evaluations_litteratie : comparaison.evaluations_numeratie
     return tableau if evaluations.blank?
 
     2.times do |numero_evaluation|
       evaluation = evaluations[numero_evaluation]
-      profil = evaluation ? profil_litteratie(comparaison, numero_evaluation) : nil
-      sous_competences = evaluation ? sous_competences_litteratie(comparaison, numero_evaluation) : nil
+
+      if type == :litteratie
+        profil = evaluation ? profil_litteratie(comparaison, numero_evaluation) : nil
+        sous_competences = evaluation ? sous_competences_litteratie(comparaison, numero_evaluation) : nil
+      elsif type == :numeratie
+        profil = evaluation ? profil_numeratie(comparaison, numero_evaluation) : nil
+        sous_competences = evaluation ? sous_competences_numeratie(comparaison, numero_evaluation) : nil
+      end
+
       tableau << {
         evaluation: evaluation,
         profil: profil,
         sous_competences: sous_competences
       }
     end
+
     tableau
   end
 
-  def tableau_comparaison_numeratie(comparaison)
-    tableau = []
-    evaluations = comparaison.evaluations_numeratie
-    return tableau if evaluations.blank?
+  def tableau_comparaison_litteratie(comparaison)
+    tableau_comparaison(comparaison, :litteratie)
+  end
 
-    2.times do |numero_evaluation|
-      evaluation = evaluations[numero_evaluation]
-      profil = evaluation ? profil_numeratie(comparaison, numero_evaluation) : nil
-      sous_competences = evaluation ? sous_competences_numeratie(comparaison, numero_evaluation) : nil
-      tableau << {
-        evaluation: evaluation,
-        profil: profil,
-        sous_competences: sous_competences
-      }
-    end
-    tableau
+  def tableau_comparaison_numeratie(comparaison)
+    tableau_comparaison(comparaison, :numeratie)
   end
 
   def restitution_litteratie(comparaison, numero_evaluation)

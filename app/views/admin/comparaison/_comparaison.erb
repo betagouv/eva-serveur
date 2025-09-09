@@ -1,12 +1,8 @@
 <% pdf ||= false %>
-
-<% competence = :litteratie %>
-<% sous_competences = Restitution::SousCompetence::Litteratie::LISTE %>
-<% tableau = comparaison.tableau_comparaison(competence) %>
 <% classes_additionnels = "fr-table--no-scroll" if pdf %>
 
 <% if tableau.present? %>
-  <%= render PanelComponent.new(titre: "Littératie", classes: "panel--beneficiaire") do %>
+  <%= render PanelComponent.new(titre: titre, classes: "panel--beneficiaire") do %>
     <div class="fr-table fr-m-0 <%= classes_additionnels %>" id="table-litteratie-component">
     <div class="fr-table__wrapper">
       <div class="fr-table__container">
@@ -44,13 +40,23 @@
                 <% index += 1 %>
                 <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
                   <th scope="row">
-                    <%= I18n.t("admin.evaluations.positionnement.sous_competences.litteratie.#{sous_competence}.titre") %>
+                    <%= I18n.t("admin.evaluations.positionnement.sous_competences.#{competence}.#{sous_competence}.titre") %>
                   </th>
                   <% 2.times do |i| %>
                     <td>
                       <div class="page-comparaison__container-badge">
                         <% if tableau[i][:sous_competences] && tableau[i][:sous_competences][sous_competence] %>
-                          <%= render(Badge::ProfilComponent.new(tableau[i][:sous_competences][sous_competence].profil, competence)) %>
+                          <% if competence == :litteratie %>
+                            <%= render(Badge::ProfilComponent.new(tableau[i][:sous_competences][sous_competence].profil, competence)) %>
+                          <% elsif competence == :numeratie %>
+                            <%= render BarreSegmenteeComponent.new(
+                              nombre_questions_reussies: tableau[i][:sous_competences][sous_competence].nombre_questions_reussies,
+                              nombre_questions_echecs: tableau[i][:sous_competences][sous_competence].nombre_questions_echecs,
+                              nombre_questions_non_passees: tableau[i][:sous_competences][sous_competence].nombre_questions_non_passees,
+                              pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite,
+                              avec_legende: false
+                            ) %>
+                          <% end %>
                         <% else %>
                           -
                         <% end %>

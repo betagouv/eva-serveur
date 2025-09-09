@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Comparaison" do
       redirect_to admin_beneficiaire_path(beneficiaire)
     end
 
-    render partial: "comparaison", locals: { comparaison: comparaison }
+    render partial: "show", locals: { comparaison: comparaison }
   end
 
   page_action :download_pdf, method: :get do

@@ -7,11 +7,23 @@
   ) %>
   <div class="page-pdf__contenu">
     <h1 class="page-comparaison__titre">Comparaison des résultats</h1>
-    <%= render partial: "comparaison_litteratie",
-               locals: { comparaison: comparaison, pdf: pdf } %>
 
-    <%= render partial: "comparaison_numeratie",
-               locals: { comparaison: comparaison, pdf: pdf } %>
+    <%= render partial: "comparaison",
+            locals: {
+              pdf: true,
+              titre: "Littératie",
+              competence: :litteratie,
+              sous_competences: Restitution::SousCompetence::Litteratie::LISTE,
+              tableau: comparaison.tableau_comparaison(:litteratie)
+            } %>
+    <%= render partial: "comparaison",
+              locals: {
+                pdf: true,
+                titre: "Numératie",
+                competence: :numeratie,
+                sous_competences: Restitution::SousCompetence::Numeratie::LISTE,
+                tableau: comparaison.tableau_comparaison(:numeratie)
+              } %>
   </div>
   <%= render Pdf::PiedPageComponent.new %>
 </div>

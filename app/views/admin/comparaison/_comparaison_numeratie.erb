@@ -1,7 +1,7 @@
 <% pdf ||= false %>
 
 <% competence = :numeratie %>
-<% sous_competences = [:"2_1", :"2_2", :"2_3", :"2_4", :"2_5"]%>
+<% sous_competences = Restitution::SousCompetence::Numeratie::LISTE %>
 <% tableau = comparaison.tableau_comparaison(competence) %>
 <% classes_additionnels = "fr-table--no-scroll" if pdf %>
 

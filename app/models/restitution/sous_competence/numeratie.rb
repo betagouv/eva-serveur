@@ -3,6 +3,8 @@
 module Restitution
   module SousCompetence
     class Numeratie
+      LISTE = [:"2_1", :"2_2", :"2_3", :"2_4", :"2_5"]
+
       include ActiveModel::Model
       include ActiveModel::Attributes
 

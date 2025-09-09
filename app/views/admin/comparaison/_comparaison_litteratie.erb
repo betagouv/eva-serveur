@@ -1,7 +1,7 @@
 <% pdf ||= false %>
 
 <% competence = :litteratie %>
-<% sous_competences = [ :lecture, :comprehension, :production ] %>
+<% sous_competences = Restitution::SousCompetence::Litteratie::LISTE %>
 <% tableau = comparaison.tableau_comparaison(competence) %>
 <% classes_additionnels = "fr-table--no-scroll" if pdf %>
 

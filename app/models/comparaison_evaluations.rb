@@ -47,9 +47,9 @@ class ComparaisonEvaluations
       evaluation = evaluations[numero_evaluation]
 
       profil, sous_competences = if type == :litteratie
-        [profil_litteratie(numero_evaluation), sous_competences_litteratie(numero_evaluation)]
+        [ profil_litteratie(numero_evaluation), sous_competences_litteratie(numero_evaluation) ]
       else
-        [profil_numeratie(numero_evaluation), sous_competences_numeratie(numero_evaluation)]
+        [ profil_numeratie(numero_evaluation), sous_competences_numeratie(numero_evaluation) ]
       end
 
       tableau << {

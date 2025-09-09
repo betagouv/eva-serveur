@@ -4,14 +4,16 @@
 <% if numeratie.present? %>
   <% competence = :numeratie %>
 
-  <% evaluation_numeratie_0 = numeratie[0] %>
-  <% profil_0 = profil_numeratie(comparaison, 0) %>
-  <% sous_competences_0 = sous_competences_numeratie(comparaison, 0) %>
+  <% numero_evaluation = 0 %>
+  <% evaluation_numeratie_0 = numeratie[numero_evaluation] %>
+  <% profil_0 = profil_numeratie(comparaison, numero_evaluation) %>
+  <% sous_competences_0 = sous_competences_numeratie(comparaison, numero_evaluation) %>
 
-  <% evaluation_numeratie_1 = numeratie[1] %>
+  <% numero_evaluation = 1 %>
+  <% evaluation_numeratie_1 = numeratie[numero_evaluation] %>
   <% if evaluation_numeratie_1 %>
-    <% profil_1 = profil_numeratie(comparaison, 0) %>
-    <% sous_competences_1 = sous_competences_numeratie(comparaison, 0) %>
+    <% profil_1 = profil_numeratie(comparaison, numero_evaluation) %>
+    <% sous_competences_1 = sous_competences_numeratie(comparaison, numero_evaluation) %>
   <% end %>
 
   <% classes_additionnels = "fr-table--no-scroll" if pdf %>

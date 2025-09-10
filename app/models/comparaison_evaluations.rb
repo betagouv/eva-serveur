@@ -1,8 +1,8 @@
 class ComparaisonEvaluations
   def initialize(evaluations)
     @comparateurs = {
-      numeratie: Numeratie.new(evaluations),
-      litteratie: Litteratie.new(evaluations)
+      numeratie: Comparateur.new(evaluations, AdaptateurNumeratie.new),
+      litteratie: Comparateur.new(evaluations, AdaptateurLitteratie.new)
     }
   end
 
@@ -17,22 +17,12 @@ class ComparaisonEvaluations
   class Comparateur
     MAX_EVALUATION_PAR_TYPE = 2
 
-    def initialize(evaluations, type)
+    def initialize(evaluations, adaptateur_type)
+      @adaptateur_type = adaptateur_type
+
       @evaluations = evaluations.select do |evaluation|
-        evaluation.campagne.avec_positionnement?(type)
+        evaluation.campagne.avec_positionnement?(@adaptateur_type.type)
       end.sort_by(&:debutee_le)
-    end
-
-    def extrait_restitution(restitution_globale)
-      raise NotImplementedError
-    end
-
-    def profil(restitution)
-      raise NotImplementedError
-    end
-
-    def sous_competences(restitution)
-      raise NotImplementedError
     end
 
     def valid?
@@ -42,7 +32,7 @@ class ComparaisonEvaluations
     def restitutions
       @evaluations.map do |evaluation|
         restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
-        extrait_restitution(restitution_globale)
+        @adaptateur_type.extrait_restitution(restitution_globale)
       end
     end
 
@@ -63,8 +53,8 @@ class ComparaisonEvaluations
       return { evaluation: evaluation } if restitutions[numero_evaluation].blank?
 
       restitution = restitutions[numero_evaluation]
-      profil = restitution ? profil(restitution) : ::Competence::NIVEAU_INDETERMINE
-      sous_competences = restitution ? sous_competences(restitution) : {}
+      profil = restitution ? @adaptateur_type.profil(restitution) : ::Competence::NIVEAU_INDETERMINE
+      sous_competences = restitution ? @adaptateur_type.sous_competences(restitution) : {}
 
       {
         evaluation: evaluation,
@@ -74,9 +64,9 @@ class ComparaisonEvaluations
     end
   end
 
-  class Litteratie < Comparateur
-    def initialize(evaluations)
-      super(evaluations, :litteratie)
+  class AdaptateurLitteratie
+    def type
+      :litteratie
     end
 
     def extrait_restitution(restitution_globale)
@@ -94,9 +84,9 @@ class ComparaisonEvaluations
     end
   end
 
-  class Numeratie < Comparateur
-    def initialize(evaluations)
-      super(evaluations, :numeratie)
+  class AdaptateurNumeratie
+    def type
+      :numeratie
     end
 
     def extrait_restitution(restitution_globale)

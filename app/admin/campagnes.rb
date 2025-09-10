@@ -25,7 +25,7 @@ ActiveAdmin.register Campagne do
   filter :created_at
 
   action_item :nouvelle_campagne_disabled, only: :index,
-              if: proc { !can?(:create, Campagne) &&
+              if: proc { current_compte.structure_id.present? && !can?(:create, Campagne) &&
                          !current_compte.structure.autorisation_creation_campagne? } do
     div class: "fr-mb-2v" do
       link_to(I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"), "#",

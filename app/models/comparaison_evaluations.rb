@@ -1,103 +1,114 @@
 class ComparaisonEvaluations
   def initialize(evaluations)
-    @evaluations = evaluations
-  end
-
-  def valid?
-    return false if evaluations_numeratie.count > 2
-    return false if evaluations_litteratie.count > 2
-
-    true
-  end
-
-  def restitutions_numeratie
-    @restitutions_numeratie ||= evaluations_numeratie.map do |evaluation|
-      FabriqueRestitution.restitution_globale(evaluation)
-    end
-  end
-
-  def restitutions_litteratie
-    @restitutions_litteratie ||= evaluations_litteratie.map do |evaluation|
-      FabriqueRestitution.restitution_globale(evaluation)
-    end
-  end
-
-  def evaluations_numeratie
-    @evaluations_numeratie ||= begin
-      @evaluations.select do |evaluation|
-        evaluation.campagne.avec_positionnement?(:numeratie)
-      end.sort_by(&:debutee_le)
-    end
-  end
-
-  def evaluations_litteratie
-    @evaluations_litteratie ||= begin
-      @evaluations.select do |evaluation|
-        evaluation.campagne.avec_positionnement?(:litteratie)
-      end.sort_by(&:debutee_le)
-    end
-  end
-
-  def tableau_comparaison(type)
-    tableau = []
-    evaluations = type == :litteratie ? evaluations_litteratie : evaluations_numeratie
-    return tableau if evaluations.blank?
-
-    2.times do |numero_evaluation|
-      evaluation = evaluations[numero_evaluation]
-
-      tableau << construit_ligne_tableau(type, evaluation, numero_evaluation)
-    end
-
-    tableau
-  end
-
-  private
-
-  def construit_ligne_tableau(type, evaluation, numero_evaluation)
-    if restitutions_litteratie[numero_evaluation]
-      profil, sous_competences = if type == :litteratie
-        [ profil_litteratie(numero_evaluation), sous_competences_litteratie(numero_evaluation) ]
-      else
-        [ profil_numeratie(numero_evaluation), sous_competences_numeratie(numero_evaluation) ]
-      end
-    end
-
-    {
-      evaluation: evaluation,
-      profil: restitutions_litteratie[numero_evaluation] ? profil : nil,
-      sous_competences: restitutions_litteratie[numero_evaluation] ? sous_competences : nil
+    @comparateurs = {
+      numeratie: Numeratie.new(evaluations),
+      litteratie: Litteratie.new(evaluations)
     }
   end
 
-  def restitution_litteratie(numero_evaluation)
-    restitutions_litteratie[numero_evaluation].litteratie
+  def valid?
+    @comparateurs[:numeratie].valid? && @comparateurs[:litteratie].valid?
   end
 
-  def profil_litteratie(numero_evaluation)
-    restitution = restitution_litteratie(numero_evaluation)
-    restitution ? restitution.niveau_litteratie : "indetermine"
+  def tableau_comparaison(type)
+    @comparateurs[type].tableau_comparaison
   end
 
-  def sous_competences_litteratie(numero_evaluation)
-    restitution = restitution_litteratie(numero_evaluation)
-    return {} if restitution.nil?
-    return {} if restitution.parcours_haut != ::Competence::NIVEAU_INDETERMINE
+  class Comparateur
+    MAX_EVALUATION_PAR_TYPE = 2
 
-    restitution.competences_litteratie
+    def initialize(evaluations, type)
+      @evaluations = evaluations.select do |evaluation|
+        evaluation.campagne.avec_positionnement?(type)
+      end.sort_by(&:debutee_le)
+    end
+
+    def extrait_restitution(restitution_globale)
+      raise NotImplementedError
+    end
+
+    def profil(restitution)
+      raise NotImplementedError
+    end
+
+    def sous_competences(restitution)
+      raise NotImplementedError
+    end
+
+    def valid?
+      @evaluations.count <= MAX_EVALUATION_PAR_TYPE
+    end
+
+    def restitutions
+      @evaluations.map do |evaluation|
+        restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
+        extrait_restitution(restitution_globale)
+      end
+    end
+
+    def tableau_comparaison
+      tableau = []
+      return tableau if @evaluations.blank?
+
+      MAX_EVALUATION_PAR_TYPE.times do |numero_evaluation|
+        evaluation = @evaluations[numero_evaluation]
+
+        tableau << construit_ligne_tableau(evaluation, numero_evaluation)
+      end
+
+      tableau
+    end
+
+    def construit_ligne_tableau(evaluation, numero_evaluation)
+      return { evaluation: evaluation } if restitutions[numero_evaluation].blank?
+
+      restitution = restitutions[numero_evaluation]
+      profil = restitution ? profil(restitution) : ::Competence::NIVEAU_INDETERMINE
+      sous_competences = restitution ? sous_competences(restitution) : {}
+
+      {
+        evaluation: evaluation,
+        profil: profil,
+        sous_competences: sous_competences
+      }
+    end
   end
 
-  def restitution_numeratie(numero_evaluation)
-    restitutions_numeratie[numero_evaluation].numeratie
+  class Litteratie < Comparateur
+    def initialize(evaluations)
+      super(evaluations, :litteratie)
+    end
+
+    def extrait_restitution(restitution_globale)
+      restitution_globale.litteratie
+    end
+
+    def profil(restitution)
+      restitution.niveau_litteratie
+    end
+
+    def sous_competences(restitution)
+      return {} if restitution.parcours_haut != ::Competence::NIVEAU_INDETERMINE
+
+      restitution.competences_litteratie
+    end
   end
 
-  def profil_numeratie(numero_evaluation)
-    restitution = restitution_numeratie(numero_evaluation)
-    restitution ? restitution.profil_numeratie : "indetermine"
-  end
+  class Numeratie < Comparateur
+    def initialize(evaluations)
+      super(evaluations, :numeratie)
+    end
 
-  def sous_competences_numeratie(numero_evaluation)
-    restitution = restitution_numeratie(numero_evaluation)
-    restitution ? restitution.competences_numeratie : {}
+    def extrait_restitution(restitution_globale)
+      restitution_globale.numeratie
+    end
+
+    def profil(restitution)
+      restitution.profil_numeratie
+    end
+
+    def sous_competences(restitution)
+      restitution.competences_numeratie
+    end
   end
 end

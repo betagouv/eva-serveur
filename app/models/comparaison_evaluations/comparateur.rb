@@ -1,39 +1,34 @@
 class ComparaisonEvaluations::Comparateur
   MAX_EVALUATION_PAR_TYPE = 2
 
-  def initialize(evaluations, adaptateur_type)
+  def initialize(evaluations_restitutions, adaptateur_type)
     @adaptateur_type = adaptateur_type
 
-    @evaluations = evaluations.select do |evaluation|
-      evaluation.campagne.avec_positionnement?(@adaptateur_type.type)
-    end.sort_by(&:debutee_le)
+    @evaluations_restitutions = evaluations_restitutions.select do |evaluation_restitution|
+      evaluation_restitution[0].campagne.avec_positionnement?(@adaptateur_type.type)
+    end.sort { |er| er[0].debutee_le }
   end
 
   def valid?
-    @evaluations.count <= MAX_EVALUATION_PAR_TYPE
-  end
-
-  def restitutions
-    @restitutions ||= @evaluations.map do |evaluation|
-      restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
-      @adaptateur_type.extrait_restitution(restitution_globale)
-    end
+    @evaluations_restitutions.count <= MAX_EVALUATION_PAR_TYPE
   end
 
   def tableau_comparaison
-    return [] if @evaluations.blank?
+    return [] if @evaluations_restitutions.blank?
 
     MAX_EVALUATION_PAR_TYPE.times.map do |numero_evaluation|
-      evaluation = @evaluations[numero_evaluation]
-      restitution = restitutions[numero_evaluation]
+      evaluation_restitution = @evaluations_restitutions[numero_evaluation]
 
-      construit_ligne_tableau(evaluation, restitution)
+      construit_ligne_tableau(evaluation_restitution)
     end
   end
 
-  def construit_ligne_tableau(evaluation, restitution)
-    return { evaluation: evaluation } if restitution.blank?
+  def construit_ligne_tableau(evaluation_restitution)
+    return { evaluation: nil } if evaluation_restitution.blank?
 
+    evaluation = evaluation_restitution[0]
+
+    restitution = @adaptateur_type.extrait_restitution(evaluation_restitution[1])
     profil = restitution ? @adaptateur_type.profil(restitution) : ::Competence::NIVEAU_INDETERMINE
     sous_competences = restitution ? @adaptateur_type.sous_competences(restitution) : {}
 

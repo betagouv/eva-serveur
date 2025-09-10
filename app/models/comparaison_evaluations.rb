@@ -46,25 +46,29 @@ class ComparaisonEvaluations
     2.times do |numero_evaluation|
       evaluation = evaluations[numero_evaluation]
 
-      if restitutions_litteratie[numero_evaluation]
-        profil, sous_competences = if type == :litteratie
-          [ profil_litteratie(numero_evaluation), sous_competences_litteratie(numero_evaluation) ]
-        else
-          [ profil_numeratie(numero_evaluation), sous_competences_numeratie(numero_evaluation) ]
-        end
-      end
-
-      tableau << {
-        evaluation: evaluation,
-        profil: restitutions_litteratie[numero_evaluation] ? profil : nil,
-        sous_competences: restitutions_litteratie[numero_evaluation] ? sous_competences : nil
-      }
+      tableau << construit_ligne_tableau(type, evaluation, numero_evaluation)
     end
 
     tableau
   end
 
   private
+
+  def construit_ligne_tableau(type, evaluation, numero_evaluation)
+    if restitutions_litteratie[numero_evaluation]
+      profil, sous_competences = if type == :litteratie
+        [ profil_litteratie(numero_evaluation), sous_competences_litteratie(numero_evaluation) ]
+      else
+        [ profil_numeratie(numero_evaluation), sous_competences_numeratie(numero_evaluation) ]
+      end
+    end
+
+    {
+      evaluation: evaluation,
+      profil: restitutions_litteratie[numero_evaluation] ? profil : nil,
+      sous_competences: restitutions_litteratie[numero_evaluation] ? sous_competences : nil
+    }
+  end
 
   def restitution_litteratie(numero_evaluation)
     restitutions_litteratie[numero_evaluation].litteratie

@@ -39,7 +39,7 @@ class Compte < ApplicationRecord
 
   accepts_nested_attributes_for :structure
 
-  scope :de_la_structure, ->(structure) { where(structure: structure) }
+  scope :de_la_structure, ->(structure) { structure ? where(structure: structure) : none }
 
   def display_name
     nom_complet.presence || email

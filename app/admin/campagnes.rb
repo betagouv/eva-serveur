@@ -161,7 +161,7 @@ campagne_privee: campagne.privee))
     end
 
     def comptes_structure
-      @compte_structure ||= Compte.de_la_structure(resource.compte.structure).order(:prenom, :nom)
+      @compte_structure ||= Compte.de_la_structure(resource.compte&.structure).order(:prenom, :nom)
     end
   end
 end

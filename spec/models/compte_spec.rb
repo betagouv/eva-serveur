@@ -255,4 +255,33 @@ describe Compte do
       end
     end
   end
+
+  describe '.de_la_structure' do
+    let!(:structure1) { create :structure_locale }
+    let!(:structure2) { create :structure_locale }
+    let!(:compte1) { create :compte_admin, structure: structure1 }
+    let!(:compte2) { create :compte_conseiller, structure: structure1 }
+    let!(:compte3) { create :compte_admin, structure: structure2 }
+    let!(:compte_sans_structure) do
+      create :compte_conseiller, statut_validation: "en_attente", structure: nil
+    end
+
+    context 'avec une structure valide' do
+      it 'retourne tous les comptes de cette structure' do
+        comptes = described_class.de_la_structure(structure1)
+
+        expect(comptes).to include(compte1, compte2)
+        expect(comptes).not_to include(compte3)
+      end
+    end
+
+    context 'avec une structure nil' do
+      it 'retourne un ensemble vide' do
+        comptes = described_class.de_la_structure(nil)
+
+        expect(comptes).to be_empty
+        expect(comptes.count).to eq(0)
+      end
+    end
+  end
 end

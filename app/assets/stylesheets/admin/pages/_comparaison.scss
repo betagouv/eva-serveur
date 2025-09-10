@@ -8,8 +8,17 @@
   margin-bottom: 0;
 }
 
+.page-comparaison__tableau table {
+  width: 100% !important;
+  table-layout: fixed;
+}
+
 .page-comparaison__min-column {
   min-width: 19rem;
+}
+
+.page-comparaison__min-column:nth-child(1) {
+  width: 20rem;
 }
 
 .page-comparaison__container-badge {

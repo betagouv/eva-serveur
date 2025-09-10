@@ -160,9 +160,3 @@ $padding-pdf: 5rem;
 .page-comparaison {
   gap: 0;
 }
-.page-comparaison__min-column:nth-child(1) {
-  min-width: 300px;
-}
-.page-comparaison__min-column:nth-child(2), .page-comparaison__min-column:nth-child(3) {
-  min-width: 274px;
-}

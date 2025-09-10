@@ -9,6 +9,8 @@ ActiveAdmin.register Beneficiaire do
   config.sort_order = "created_at_desc"
   config.batch_actions = true
 
+  batch_action :destroy, false
+
   batch_action :fusionner, if: proc { can?(:fusionner, Beneficiaire) } do |beneficiaire_ids|
     beneficiaires = Beneficiaire.where(id: beneficiaire_ids)
 

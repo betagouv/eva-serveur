@@ -36,6 +36,8 @@ describe Ability do
 
     it { is_expected.to be_able_to(%i[read destroy update], Evaluation.new) }
     it { is_expected.not_to be_able_to(%i[create], Evaluation.new) }
+    it { is_expected.to be_able_to(:destroy, Beneficiaire.new) }
+    it { is_expected.not_to be_able_to(:destroy, evaluation_superadmin.beneficiaire) }
     it { is_expected.not_to be_able_to(%i[create update destroy], Evenement.new) }
     it { is_expected.to be_able_to(:read, Evenement.new) }
     it { is_expected.to be_able_to(:manage, Situation.new) }
@@ -170,6 +172,8 @@ describe Ability do
     let(:compte) { create :compte_admin }
 
     it { is_expected.to be_able_to(:create, Compte.new) }
+    it { is_expected.to be_able_to(:create, Beneficiaire) }
+    it { is_expected.to be_able_to(:update, compte.structure) }
 
     context 'peut gérer mes collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
@@ -187,9 +191,8 @@ describe Ability do
       it { is_expected.to be_able_to(:verifier, mon_collegue) }
       it { is_expected.to be_able_to(:destroy, mon_collegue) }
       it { is_expected.not_to be_able_to(:destroy, pas_collegue) }
-      it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
-      context 'quand un compte est admin' do
+      context 'quand un collegue est admin' do
         before { mon_collegue.update(role: :admin) }
 
         it { is_expected.not_to be_able_to(:refuser, mon_collegue) }
@@ -197,16 +200,19 @@ describe Ability do
       end
     end
 
-    it { is_expected.to be_able_to(:update, compte.structure) }
-
     context 'peut gérer les évaluations de ma structure' do
       let(:ma_campagne) { create :campagne, compte: compte }
       let(:evaluation) { create :evaluation, campagne: ma_campagne }
+      let(:beneficiaire_vide) { create :beneficiaire }
 
       it { is_expected.to be_able_to(:update, evaluation) }
+      it { is_expected.to be_able_to(:fusionner, Beneficiaire) }
       it { is_expected.to be_able_to(:supprimer_responsable_suivi, evaluation) }
       it { is_expected.to be_able_to(:ajouter_responsable_suivi, evaluation) }
       it { is_expected.to be_able_to(:renseigner_qualification, evaluation) }
+      it { is_expected.to be_able_to(%i[read update], evaluation.beneficiaire) }
+      it { is_expected.to be_able_to(:destroy, beneficiaire_vide) }
+      it { is_expected.not_to be_able_to(:destroy, evaluation.beneficiaire) }
     end
   end
 
@@ -250,6 +256,8 @@ describe Ability do
       create :partie, evaluation: evaluation_conseiller, situation: situation
     end
 
+    it { is_expected.not_to be_able_to(:destroy, Beneficiaire) }
+
     it 'avec une campagne qui a des évaluations' do
       expect(subject).to be_able_to(:destroy, campagne_privee)
     end
@@ -283,6 +291,7 @@ describe Ability do
     it { is_expected.not_to be_able_to(:update, create(:compte)) }
     it { is_expected.to be_able_to(:read, Question.new) }
     it { is_expected.to be_able_to(%i[read mise_en_action destroy], evaluation_conseiller) }
+    it { is_expected.to be_able_to(%i[read], evaluation_conseiller.beneficiaire) }
 
     it do
       expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte destroy],
@@ -301,8 +310,6 @@ describe Ability do
       expect(subject).not_to be_able_to(:read,
                                         ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
     }
-
-    it { is_expected.not_to be_able_to(:read, Beneficiaire) }
 
     context "quand la structure n'autorise pas la création de campagne" do
       before do
@@ -327,8 +334,15 @@ describe Ability do
         campagne_collegue.campagne_compte_autorisations.create!(compte_id: compte.id)
       end
 
-      it { is_expected.to be_able_to(%i[read], campagne_collegue) }
-      it { is_expected.to be_able_to(%i[read], evaluation_autre_conseiller) }
+      it { is_expected.to be_able_to(:read, campagne_collegue) }
+      it { is_expected.to be_able_to(:read, evaluation_autre_conseiller) }
+      it { is_expected.to be_able_to(:read, evaluation_autre_conseiller.beneficiaire) }
+    end
+
+    context "quand je n'ai pas accès à la campagne privé d'un autre conseiller" do
+      it { is_expected.not_to be_able_to(:read, campagne_collegue) }
+      it { is_expected.not_to be_able_to(:read, evaluation_autre_conseiller) }
+      it { is_expected.not_to be_able_to(:read, evaluation_autre_conseiller.beneficiaire) }
     end
 
     context 'peut consulter les campagnes publiques de ma structure' do
@@ -343,6 +357,7 @@ describe Ability do
 
       it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue) }
+      it { is_expected.to be_able_to(:read, evaluation_collegue.beneficiaire) }
       it { is_expected.not_to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, mon_collegue) }

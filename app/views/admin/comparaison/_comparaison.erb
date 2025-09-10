@@ -1,9 +1,6 @@
-<% pdf ||= false %>
-<% classes_additionnels = "fr-table--no-scroll" if pdf %>
-
 <% if tableau.present? %>
   <%= render PanelComponent.new(titre: titre, classes: "panel--beneficiaire") do %>
-    <div class="fr-table fr-m-0 <%= classes_additionnels %>" id="table-litteratie-component">
+    <div class="fr-table fr-m-0 fr-table--no-scroll page-comparaison__tableau" id="table-litteratie-component">
     <div class="fr-table__wrapper">
       <div class="fr-table__container">
         <div class="fr-table__content">
@@ -13,7 +10,7 @@
                 <th class="page-comparaison__min-column" role="columnheader"></th>
 
                 <% 2.times do |i| %>
-                  <th class="page-comparaison__min-column">
+                  <th class="page-comparaison__min-column fr-cell--center">
                     <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
                   </th>
                 <% end %>

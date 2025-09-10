@@ -1,5 +1,3 @@
-<% pdf = true %>
-
 <div class="page-pdf page adaptation-pdf page-comparaison">
   <%= render Pdf::EntetePageComponent.new(
     nom_beneficiaire: beneficiaire.nom,
@@ -10,7 +8,6 @@
 
     <%= render partial: "comparaison",
             locals: {
-              pdf: true,
               titre: "Littératie",
               competence: :litteratie,
               sous_competences: Restitution::SousCompetence::Litteratie::LISTE,
@@ -18,7 +15,6 @@
             } %>
     <%= render partial: "comparaison",
               locals: {
-                pdf: true,
                 titre: "Numératie",
                 competence: :numeratie,
                 sous_competences: Restitution::SousCompetence::Numeratie::LISTE,

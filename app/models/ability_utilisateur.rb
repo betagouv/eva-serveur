@@ -7,9 +7,10 @@ class AbilityUtilisateur
   def initialize(compte)
     @compte = compte
 
-    droits_generiques compte
+    droits_superadmin compte
     droit_campagne compte
     droit_evaluation compte
+    droit_beneficiaire compte
     droit_evenement compte
     droit_restitution compte
     droit_compte compte
@@ -24,11 +25,16 @@ class AbilityUtilisateur
 
   private
 
+  def droits_superadmin(compte)
+    can :manage, :all if compte.superadmin?
+  end
+
   def droit_campagne(compte)
+    cannot :destroy, Campagne
+    can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
     can %i[read update autoriser_compte revoquer_compte destroy], Campagne, compte_id: compte.id
     can %i[create duplique], Campagne if can_create_campagne?(compte)
     can %i[read], Campagne, campagne_compte_autorisations: { compte_id: compte.id }, privee: true
-    can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
     return unless compte.validation_acceptee?
 
     can %i[update read], Campagne, campagnes_publique_de_la_structure(compte)
@@ -36,11 +42,6 @@ class AbilityUtilisateur
       can %i[read update autoriser_compte revoquer_compte destroy], Campagne,
           campagnes_de_la_structure(compte)
     end
-  end
-
-  def droits_generiques(compte)
-    can :manage, :all if compte.superadmin?
-    cannot :destroy, Campagne
   end
 
   def droit_evaluation(compte)
@@ -64,6 +65,33 @@ class AbilityUtilisateur
     if compte.admin?
       can %i[read update destroy], Evaluation,
           campagne: campagnes_de_la_structure(compte)
+    end
+  end
+
+  def droit_beneficiaire(compte)
+    cannot(:destroy, Beneficiaire)
+    can(:destroy, Beneficiaire) { |b| b.evaluations.empty? } if compte.au_moins_admin?
+    can :read, Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
+    can :read, Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }
+    can :read, Beneficiaire, evaluations: {
+      campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
+    }
+    can :fusionner, Beneficiaire if compte.au_moins_admin?
+    droit_benenficiaire_structure(compte) if compte.structure_id.present?
+  end
+
+  def droit_benenficiaire_structure(compte)
+    if compte.validation_acceptee?
+      can :read, Beneficiaire, evaluations: {
+        campagne: campagnes_publique_de_la_structure(compte)
+      }
+    end
+
+    if compte.admin?
+      can :create, Beneficiaire
+      can %i[read update], Beneficiaire, evaluations: {
+        campagne: campagnes_de_la_structure(compte)
+      }
     end
   end
 

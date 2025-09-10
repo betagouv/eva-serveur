@@ -14,29 +14,26 @@ class ComparaisonEvaluations::Comparateur
   end
 
   def restitutions
-    @evaluations.map do |evaluation|
+    @restitutions ||= @evaluations.map do |evaluation|
       restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
       @adaptateur_type.extrait_restitution(restitution_globale)
     end
   end
 
   def tableau_comparaison
-    tableau = []
-    return tableau if @evaluations.blank?
+    return [] if @evaluations.blank?
 
-    MAX_EVALUATION_PAR_TYPE.times do |numero_evaluation|
+    MAX_EVALUATION_PAR_TYPE.times.map do |numero_evaluation|
       evaluation = @evaluations[numero_evaluation]
+      restitution = restitutions[numero_evaluation]
 
-      tableau << construit_ligne_tableau(evaluation, numero_evaluation)
+      construit_ligne_tableau(evaluation, restitution)
     end
-
-    tableau
   end
 
-  def construit_ligne_tableau(evaluation, numero_evaluation)
-    return { evaluation: evaluation } if restitutions[numero_evaluation].blank?
+  def construit_ligne_tableau(evaluation, restitution)
+    return { evaluation: evaluation } if restitution.blank?
 
-    restitution = restitutions[numero_evaluation]
     profil = restitution ? @adaptateur_type.profil(restitution) : ::Competence::NIVEAU_INDETERMINE
     sous_competences = restitution ? @adaptateur_type.sous_competences(restitution) : {}
 

@@ -370,6 +370,7 @@ GEM
     mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
+    mutex_m (0.3.0)
     nenv (0.3.0)
     net-http (0.6.0)
       uri
@@ -754,6 +755,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.2)
   mailjet
+  mutex_m
   paranoia
   pdf-reader
   pg (~> 1.0)

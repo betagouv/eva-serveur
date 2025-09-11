@@ -107,6 +107,7 @@ group :test do
   gem "capybara"
   gem "factory_bot_rails"
   gem "launchy"
+  gem "mutex_m"
   gem "pdf-reader"
   gem "shoulda-matchers"
   gem "timecop"

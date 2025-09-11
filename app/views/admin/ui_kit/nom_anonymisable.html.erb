@@ -11,10 +11,10 @@
 
   <h2>Exemple d'utilisation</h2>
   <div class="fr-mb-2w">
-    <%= render NomAnonymisableComponent.new("Jean Dupont") %>
+    <%= render NomAnonymisableComponent.new(Beneficiaire.new(nom: "Jean Dupont", anonymise_le: 5.years.ago)) %>
   </div>
-  
+
   <div class="fr-mb-2w">
-    <%= render NomAnonymisableComponent.new("Marie Martin") %>
+    <%= render NomAnonymisableComponent.new(Beneficiaire.new(nom: "Marie Martin")) %>
   </div>
-</div> 
+</div>

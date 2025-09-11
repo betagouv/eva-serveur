@@ -43,7 +43,7 @@ ActiveAdmin.register_page "Dashboard" do
     end
 
     def recupere_evaluations
-      @evaluations = Evaluation.tableau_de_bord(current_ability).limit(10)
+      @evaluations = Evaluation.tableau_de_bord(current_ability).includes(:beneficiaire).limit(10)
     end
 
     def recupere_evaluations_sans_mise_en_action

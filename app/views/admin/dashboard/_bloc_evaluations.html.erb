@@ -15,7 +15,7 @@
       <div class='col'>
         <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
           <div class='col d-flex'>
-            <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation) %></span>
+            <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation.beneficiaire) %></span>
           </div>
           <div class='col'>
             <span class='carte__pastille-place-holder'>

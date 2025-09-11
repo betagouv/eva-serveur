@@ -1,39 +1,34 @@
 class ComparaisonEvaluations::Comparateur
   MAX_EVALUATION_PAR_TYPE = 2
 
-  def initialize(evaluations, adaptateur_type)
+  def initialize(restitutions_globales, adaptateur_type)
     @adaptateur_type = adaptateur_type
 
-    @evaluations = evaluations.select do |evaluation|
-      evaluation.campagne.avec_positionnement?(@adaptateur_type.type)
-    end.sort_by(&:debutee_le)
+    @restitutions_globales = restitutions_globales.select do |restitution|
+      restitution.evaluation.campagne.avec_positionnement?(@adaptateur_type.type)
+    end
   end
 
   def valid?
-    @evaluations.count <= MAX_EVALUATION_PAR_TYPE
-  end
-
-  def restitutions
-    @restitutions ||= @evaluations.map do |evaluation|
-      restitution_globale = FabriqueRestitution.restitution_globale(evaluation)
-      @adaptateur_type.extrait_restitution(restitution_globale)
-    end
+    @restitutions_globales.count <= MAX_EVALUATION_PAR_TYPE
   end
 
   def tableau_comparaison
-    return [] if @evaluations.blank?
+    return [] if @restitutions_globales.blank?
 
     MAX_EVALUATION_PAR_TYPE.times.map do |numero_evaluation|
-      evaluation = @evaluations[numero_evaluation]
-      restitution = restitutions[numero_evaluation]
+      restitution_globale = @restitutions_globales[numero_evaluation]
 
-      construit_ligne_tableau(evaluation, restitution)
+      construit_ligne_tableau(restitution_globale)
     end
   end
 
-  def construit_ligne_tableau(evaluation, restitution)
-    return { evaluation: evaluation } if restitution.blank?
+  def construit_ligne_tableau(restitution_globale)
+    return { evaluation: nil } if restitution_globale.blank?
 
+    evaluation = restitution_globale.evaluation
+
+    restitution = @adaptateur_type.extrait_restitution(restitution_globale)
     profil = restitution ? @adaptateur_type.profil(restitution) : ::Competence::NIVEAU_INDETERMINE
     sous_competences = restitution ? @adaptateur_type.sous_competences(restitution) : {}
 

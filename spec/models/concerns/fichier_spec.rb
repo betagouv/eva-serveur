@@ -17,4 +17,11 @@ describe Fichier do
       end
     end
   end
+
+  describe '#nom_fichier_date' do
+    it 'genere un nom de fichier date' do
+      expect(test_class.new.nom_fichier_date(Date.new(2025, 2, 28), 'titre', 'extention'))
+        .to eq('20250228-titre.extention')
+    end
+  end
 end

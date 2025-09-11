@@ -134,6 +134,8 @@ ActiveAdmin.register Evaluation do
   end
 
   controller do
+    include Fichier
+
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
@@ -157,13 +159,15 @@ ActiveAdmin.register Evaluation do
         flash[:error] = t(".erreur_generation_pdf")
         redirect_to admin_evaluation_path(resource)
       else
-        send_file(pdf_path, filename: "#{resource.nom}.pdf", type: "application/pdf",
-                            disposition: disposition)
+        envoyer_fichier(pdf_path)
       end
     end
 
-    def disposition
-      Rails.env.development? ? "inline" : "attachment"
+    def envoyer_fichier(pdf_path)
+      send_file(pdf_path,
+                filename: nom_fichier_date(resource.debutee_le, resource.beneficiaire.nom, "pdf"),
+                type: "application/pdf",
+                disposition: Rails.env.development? ? "inline" : "attachment")
     end
 
     def destroy

@@ -355,12 +355,14 @@ describe Ability do
         campagne_collegue.update(privee: false)
       end
 
-      it { is_expected.to be_able_to(:read, campagne_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue) }
       it { is_expected.to be_able_to(:read, evaluation_collegue.beneficiaire) }
       it { is_expected.not_to be_able_to(:destroy, evaluation_collegue) }
       it { is_expected.to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil)) }
       it { is_expected.to be_able_to(:read, mon_collegue) }
+      it { is_expected.to be_able_to(:read, campagne_collegue) }
+      it { is_expected.not_to be_able_to(%i[update destroy], campagne_collegue) }
+      it { is_expected.not_to be_able_to(%i[autoriser_compte revoquer_compte], campagne_collegue) }
     end
 
     context 'pour un compte en attente' do

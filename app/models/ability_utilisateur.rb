@@ -37,7 +37,7 @@ class AbilityUtilisateur
     can %i[read], Campagne, campagne_compte_autorisations: { compte_id: compte.id }, privee: true
     return unless compte.validation_acceptee?
 
-    can %i[update read], Campagne, campagnes_publique_de_la_structure(compte)
+    can %i[read], Campagne, campagnes_publique_de_la_structure(compte)
     if compte.admin?
       can %i[read update autoriser_compte revoquer_compte destroy], Campagne,
           campagnes_de_la_structure(compte)

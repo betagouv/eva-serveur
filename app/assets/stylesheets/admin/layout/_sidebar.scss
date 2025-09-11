@@ -54,6 +54,10 @@
       gap: .5rem;
       flex-wrap: wrap;
 
+      & > *:empty {
+        display: none;
+      }
+
       a {
         @include bouton-secondaire;
         @include petit-bouton;

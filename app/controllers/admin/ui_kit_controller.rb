@@ -16,7 +16,7 @@ module Admin
     def ellipse; end
     def lien; end
     def mise_en_avant; end
-    # def nom_anonymisable; end commenté pour le moment car besoin d'une resource
+    def nom_anonymisable; end
     def pastille; end
     # def qcm; end commenté pour le moment car besoin d'une resource
     def recherche_structure; end

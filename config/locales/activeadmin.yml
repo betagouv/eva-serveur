@@ -48,7 +48,7 @@ fr:
         new:
           title: Rejoindre la structure
           instruction: Merci de renseigner vos informations.
-          description: Nous enverons un email à la personne admininstratrice de votre structure pour qu'elle vous autorise l'accès complet.
+          description: Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.
           nouvelle_structure_html: Si vous ne trouvez pas votre structure, <a href="%{lien}">enregistrez-la ici</a>
       passwords:
         edit:

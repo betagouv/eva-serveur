@@ -1,3 +1,9 @@
+a:focus {
+  .card.carte-liste {
+    background-color: $eva_main_light;
+  }
+}
+
 .card {
   @include carte-avec-ombre;
   margin-bottom: 1.5rem;

@@ -10,8 +10,9 @@
     </p>
   </div>
 
+  <ul class="m-0 p-0">
   <% evaluations.each do |evaluation| %>
-    <div class="row w-100 no-gutters d-flex align-items-center position-relative">
+    <li class="row w-100 no-gutters d-flex align-items-center position-relative pb-0">
       <div class='col'>
         <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
           <div class='col d-flex'>
@@ -33,6 +34,7 @@
           <%= render(PastilleComponent.new(tooltip_content: t("components.pastille.illettrisme_potentiel"), couleur: "alerte")) %>
         <% end %>
       </div>
-    </div>
+    </li>
   <% end %>
+  </ul>
 </div>

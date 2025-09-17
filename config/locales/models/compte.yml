@@ -83,6 +83,7 @@ fr:
     cgu_tool_tip: "Veuillez accepter les CGU"
     information_cgu: "Les conditions générales d'utilisation sont consultables ici :"
     demande_acceptation: "Veuillez en prendre connaissance et les accepter pour pouvoir vous inscrire."
+    mot_de_passe_email: Votre mot de passe ne doit pas être identique à votre adresse email.
     regles_mot_de_passe: Votre mot de passe doit comporter au moins %{longueur_mot_de_passe} caractères.
     regles_mot_de_passe_anlci: |
       Votre mot de passe doit contenir au moins 12 caractères dont une majuscule, une minuscule, un chiffre et un symbole.

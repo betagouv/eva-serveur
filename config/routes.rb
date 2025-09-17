@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "pro_connect/callback" => "pro_connect#callback"
   get "demo" => "demo#show"
   post "demo/connect" => "demo#connect"
+  get "cgu" => redirect("#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/")
 
   ActiveAdmin.routes(self)
   get '/admin/structures/:id', to: 'structures#show'
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :controle_syntheses_restitutions, only: :index
-    
+
     # UI Kit routes
     get '/ui_kit', to: 'ui_kit#index'
     get '/ui_kit/mise_en_avant', to: 'ui_kit#mise_en_avant'
@@ -60,7 +61,7 @@ Rails.application.routes.draw do
     get '/ui_kit/tableau', to: 'ui_kit#tableau'
     get '/ui_kit/tag', to: 'ui_kit#tag'
     get '/ui_kit/toggle', to: 'ui_kit#toggle'
-    
+
     namespace :positionnement do
       resources :parties do
         resource :reponses, only: [:show], defaults: { format: 'xls' }

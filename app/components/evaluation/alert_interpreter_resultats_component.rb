@@ -6,7 +6,7 @@ class Evaluation
       @badges = %i[profil1 profil2 profil3 profil4 profil4_plus]
       @scope = "admin.restitutions.numeratie"
       @scope_badge = "admin.restitutions.references"
-      @lien = "https://eva.anlci.gouv.fr/les-referentiels-devaluation/"
+      @lien = "#{ENV['URL_SITE_VITRINE']}/les-referentiels-devaluation/"
     end
   end
 end

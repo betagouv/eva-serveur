@@ -9,10 +9,17 @@ $largeur_nom: 10.25rem;
     }
     .carte__pastille-place-holder {
       margin-right: 1rem;
-      width: 1rem;
     }
   }
   .carte__pastille {
     left: $largeur_nom + 1rem;
+    width: 1.6rem;
+    justify-content: center;
+    box-shadow: none;
+    background: none;
+
+    &:hover {
+      background: none;
+    }
   }
 }

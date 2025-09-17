@@ -5,6 +5,8 @@
   font-size: 0.875rem;
 
   &.carte-liste {
+    display: flex;
+    align-items: center;
     @include texte-xs;
     color: $couleur-texte;
     padding: 0 1rem;

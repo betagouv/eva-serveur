@@ -29,7 +29,7 @@
           </div>
         <% end %>
       </div>
-      <div class='col-0 position-absolute carte__pastille'>
+      <div class='col-0 position-absolute card carte-liste carte__pastille'>
         <% if evaluation.illettrisme_potentiel? %>
           <%= render(PastilleComponent.new(tooltip_content: t("components.pastille.illettrisme_potentiel"), couleur: "alerte")) %>
         <% end %>

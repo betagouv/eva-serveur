@@ -105,7 +105,7 @@ campagne_privee: campagne.privee))
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation do |campagne|
       l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
     end
-    column :compte if can?(:manage, Compte)
+    column :compte
     column :created_at
     actions
   end

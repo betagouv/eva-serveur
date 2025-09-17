@@ -1,4 +1,4 @@
-<div id="<%= @ressource.id %>" class="carte__conteneur position-relative">
+<li id="<%= @ressource.id %>" class="carte__conteneur position-relative pb-0">
   <div class="card carte-liste d-flex align-items-center <%= @carte_deroulee ? "carte--deroulee" : "" %>">
     <div class="row w-100 no-gutters d-flex justify-content-between align-items-center">
       <div class='col d-flex'>
@@ -8,4 +8,4 @@
     </div>
   </div>
   <%= content %>
-</div>
+</li>

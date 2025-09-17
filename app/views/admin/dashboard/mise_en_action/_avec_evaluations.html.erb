@@ -13,7 +13,7 @@
         <span id="question-diagnostics"><%= md(t(".question")) %></span>
       </div>
     </div>
-    <div class='liste'>
+    <ul class='mb-0'>
       <% evaluations.each_with_index do |evaluation, index| %>
         <%= render(CarteMiseEnAction.new(evaluation,
                                          carte_deroulee: mise_en_action_avec_qualification?(evaluation))) do %>
@@ -27,7 +27,7 @@
                              priorite: evaluations.size - index.to_i)) %>
         <% end %>
       <% end %>
-    </div>
+    </ul>
     <%= render "components/banniere_solutions_illettrisme", asterisque: false %>
   </div>
 </div>

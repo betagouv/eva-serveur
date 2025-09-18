@@ -165,7 +165,7 @@ ActiveAdmin.register Evaluation do
 
     def envoyer_fichier(pdf_path)
       send_file(pdf_path,
-                filename: nom_fichier_date(resource.debutee_le, resource.beneficiaire.nom, "pdf"),
+                filename: nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf"),
                 type: "application/pdf",
                 disposition: Rails.env.development? ? "inline" : "attachment")
     end

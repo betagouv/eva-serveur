@@ -72,6 +72,24 @@ class Evaluation < ApplicationRecord
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
+  def self.reponses_redaction_pour_evaluations(evaluation_ids)
+    question_redaction_id = Question.find_by(nom_technique: QuestionSaisie::QUESTION_REDACTION)&.id
+    return {} if question_redaction_id.nil?
+
+    reponses_redaction = joins(parties: :evenements)
+      .where(id: evaluation_ids)
+      .where(evenements: { nom: Restitution::MetriquesHelper::EVENEMENT[:REPONSE] })
+      .where("evenements.donnees ->> 'question' = ?", question_redaction_id)
+      .where("evenements.donnees ->> 'reponse' IS NOT NULL")
+      .where("evenements.donnees ->> 'reponse' != ''")
+      .select("evaluations.id as evaluation_id, evenements.donnees ->> 'reponse' as reponse")
+      .order("evaluations.id, evenements.created_at")
+
+    reponses_redaction
+      .group_by(&:evaluation_id)
+      .transform_values { |reponses| reponses.map(&:reponse) }
+  end
+
   def display_name
     "#{beneficiaire.nom} - #{I18n.l(debutee_le, format: :avec_heure)}"
   end

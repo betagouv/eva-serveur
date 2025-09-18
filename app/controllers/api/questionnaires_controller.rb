@@ -40,7 +40,7 @@ module Api
 
     def includes_association(type)
       association_to_include = %i[reponses] if type == QuestionSaisie.to_s
-      association_to_include = %i[choix] if type == QuestionQcm.to_s
+      association_to_include = { choix: :audio_attachment } if type == QuestionQcm.to_s
 
       default_question_includes = [
         { transcription_intitule: { audio_attachment: :blob } },

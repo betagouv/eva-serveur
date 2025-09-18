@@ -244,10 +244,6 @@ fr:
         restitution_tri: Restitution de la situation tri
         pieces_bien_placees: Pièces bien placées
         pieces_mal_placees: Pièces mal placées
-      restitution_questions:
-        restitution_questions: Restitution des questions
-        question: Question
-        reponse: Réponse
       restitution_metriques:
         restitution_metriques: Restitution des métriques
         temps_total: Temps total passé dans la situation

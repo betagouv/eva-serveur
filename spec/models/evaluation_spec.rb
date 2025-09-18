@@ -232,4 +232,63 @@ describe Evaluation do
       expect(evaluation.display_name).to eq("Toto Martin - 10 jan. 2023, 12:01")
     end
   end
+
+  describe ".reponses_redaction_pour_evaluations" do
+    let!(:question_redaction) { create :question_saisie, nom_technique: QuestionSaisie::QUESTION_REDACTION }
+    let!(:autre_question) { create :question_saisie }
+    let!(:evaluation1) { create :evaluation }
+    let!(:evaluation2) { create :evaluation }
+    let!(:evaluation3) { create :evaluation }
+
+    let!(:situation) { create :situation_livraison }
+
+    let!(:partie1) { create :partie, evaluation: evaluation1, situation: situation }
+    let!(:partie2) { create :partie, evaluation: evaluation2, situation: situation }
+    let!(:partie3) { create :partie, evaluation: evaluation3, situation: situation }
+
+    before do
+      create :evenement_reponse, partie: partie1,
+             donnees: { "question" => question_redaction.id, "reponse" => "Première réponse" }
+      create :evenement_reponse, partie: partie1,
+             donnees: { "question" => question_redaction.id, "reponse" => "Deuxième réponse" }
+
+      create :evenement_reponse, partie: partie2,
+             donnees: { "question" => question_redaction.id, "reponse" => "Réponse eval2" }
+
+      create :evenement_reponse, partie: partie2,
+             donnees: { "question" => question_redaction.id, "reponse" => "" }
+
+      create :evenement_reponse, partie: partie2,
+             donnees: { "question" => question_redaction.id, "reponse" => nil }
+
+      create :evenement_reponse, partie: partie2,
+             donnees: { "question" => autre_question.id, "reponse" => "Autre réponse" }
+    end
+
+    it "retourne les réponses de rédaction groupées par évaluation" do
+      evaluation_ids = [ evaluation1.id, evaluation2.id, evaluation3.id ]
+
+      result = described_class.reponses_redaction_pour_evaluations(evaluation_ids)
+
+      expect(result[evaluation1.id]).to contain_exactly("Première réponse", "Deuxième réponse")
+      expect(result[evaluation2.id]).to contain_exactly("Réponse eval2")
+      expect(result[evaluation3.id]).to be_nil
+      expect(result.keys).to contain_exactly(evaluation1.id, evaluation2.id)
+    end
+
+    it "retourne un hash vide quand aucune évaluation ne correspond" do
+      result = described_class.reponses_redaction_pour_evaluations([])
+
+      expect(result).to eq({})
+    end
+
+    it "retourne un hash vide quand la question n'existe pas" do
+      question_redaction.destroy!
+      evaluation_ids = [ evaluation1.id, evaluation2.id ]
+
+      result = described_class.reponses_redaction_pour_evaluations(evaluation_ids)
+
+      expect(result).to eq({})
+    end
+  end
 end

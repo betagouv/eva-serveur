@@ -4,7 +4,7 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }
 
-  includes :responsable_suivi, campagne: [ :parcours_type ]
+  includes :responsable_suivi, :beneficiaire, campagne: [ :parcours_type ]
 
   config.sort_order = "created_at_desc"
 
@@ -103,6 +103,19 @@ ActiveAdmin.register Evaluation do
           I18n.t("active_admin.export.limite_atteinte", limite: Evaluation::LIMITE_EXPORT_XLS)
         ]
         @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
+      end
+
+      evaluation_ids = @collection.pluck(:id)
+      @reponses_redaction_par_evaluation = Evaluation
+        .reponses_redaction_pour_evaluations(evaluation_ids)
+      @max_reponses_redaction = @reponses_redaction_par_evaluation.values.map(&:length).max || 0
+
+      # Ajout dynamique des colonnes pour les réponses de rédaction
+      (1..@max_reponses_redaction).each do |index|
+        column("reponse_redaction") do |evaluation|
+          reponses = @reponses_redaction_par_evaluation[evaluation.id] || []
+          reponses[index - 1]
+        end
       end
     end
   end

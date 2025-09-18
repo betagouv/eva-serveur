@@ -243,6 +243,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_04_125210) do
     t.string "session_id"
     t.integer "position"
     t.datetime "deleted_at"
+    t.index "((donnees ->> 'question'::text))", name: "index_evenements_on_donnees_question"
+    t.index "nom, ((donnees ->> 'question'::text))", name: "index_evenements_on_nom_and_donnees_question"
     t.index ["deleted_at"], name: "index_evenements_on_deleted_at"
     t.index ["position"], name: "index_evenements_on_position"
     t.index ["session_id", "position"], name: "index_evenements_on_session_id_and_position"

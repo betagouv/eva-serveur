@@ -73,21 +73,51 @@ class Evaluation < ApplicationRecord
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
   def self.reponses_redaction_pour_evaluations(evaluation_ids)
-    question_redaction_id = Question.find_by(nom_technique: QuestionSaisie::QUESTION_REDACTION)&.id
-    return {} if question_redaction_id.nil?
+    question_redaction_id = find_question_redaction_id
+    return {} if question_redaction_id.nil? || evaluation_ids.empty?
 
-    reponses_redaction = joins(parties: :evenements)
-      .where(id: evaluation_ids)
-      .where(evenements: { nom: Restitution::MetriquesHelper::EVENEMENT[:REPONSE] })
-      .where("evenements.donnees ->> 'question' = ?", question_redaction_id)
-      .where("evenements.donnees ->> 'reponse' IS NOT NULL")
-      .where("evenements.donnees ->> 'reponse' != ''")
-      .select("evaluations.id as evaluation_id, evenements.donnees ->> 'reponse' as reponse")
-      .order("evaluations.id, evenements.created_at")
+    reponses_redaction = executer_requete_reponses_redaction(evaluation_ids, question_redaction_id)
+    grouper_reponses_par_evaluation(reponses_redaction)
+  end
 
+  private_class_method def self.find_question_redaction_id
+    Question.find_by(nom_technique: QuestionSaisie::QUESTION_REDACTION)&.id
+  end
+
+  private_class_method def self.executer_requete_reponses_redaction(evaluation_ids,
+question_redaction_id)
+    evaluation_ids_sql = evaluation_ids.map { |id| connection.quote(id) }.join(",")
+    sql_params = [ Restitution::MetriquesHelper::EVENEMENT[:REPONSE], question_redaction_id ]
+
+    connection.select_all(
+      sanitize_sql_array([ sql_reponses_redaction(evaluation_ids_sql) ] + sql_params))
+  end
+
+  private_class_method def self.sql_reponses_redaction(evaluation_ids_sql)
+    <<~SQL.squish
+      SELECT
+        p.evaluation_id,
+        e.donnees ->> 'reponse' as reponse,
+        e.created_at
+      FROM (
+        SELECT parties.session_id, parties.evaluation_id
+        FROM parties
+        WHERE parties.deleted_at IS NULL
+          AND parties.evaluation_id IN (#{evaluation_ids_sql})
+      ) as p
+      INNER JOIN evenements e ON e.session_id = p.session_id AND e.deleted_at IS NULL
+      WHERE e.nom = ?
+        AND e.donnees ->> 'question' = ?
+        AND e.donnees ->> 'reponse' IS NOT NULL
+        AND e.donnees ->> 'reponse' != ''
+      ORDER BY p.evaluation_id, e.created_at
+    SQL
+  end
+
+  private_class_method def self.grouper_reponses_par_evaluation(reponses_redaction)
     reponses_redaction
-      .group_by(&:evaluation_id)
-      .transform_values { |reponses| reponses.map(&:reponse) }
+      .group_by { |row| row["evaluation_id"] }
+      .transform_values { |reponses| reponses.map { |r| r["reponse"] } }
   end
 
   def display_name

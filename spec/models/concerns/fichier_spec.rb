@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 describe Fichier do
   let(:test_class) do
@@ -9,19 +9,20 @@ describe Fichier do
     end
   end
 
-  describe '#nom_fichier_horodate' do
-    it 'genere un nom de fichier horodaté' do
+  describe "#nom_fichier_horodate" do
+    it "genere un nom de fichier horodaté" do
       Timecop.freeze(Time.zone.local(2025, 2, 28, 1, 2, 3)) do
-        expect(test_class.new.nom_fichier_horodate('titre', 'extention'))
-          .to eq('20250228010203-titre.extention')
+        expect(test_class.new.nom_fichier_horodate("titre", "extention"))
+          .to eq("20250228010203-titre.extention")
       end
     end
   end
 
-  describe '#nom_fichier_date' do
-    it 'genere un nom de fichier date' do
-      expect(test_class.new.nom_fichier_date(Date.new(2025, 2, 28), 'titre', 'extention'))
-        .to eq('20250228-titre.extention')
+  describe "#nom_fichier" do
+    it "genere un nom de fichier avec la date et l'heure par défaut" do
+      expect(test_class.new.nom_fichier(
+        Time.zone.local(2025, 2, 28, 12, 05, 06), "titre", "extention"))
+        .to eq("20250228-1205-titre.extention")
     end
   end
 end

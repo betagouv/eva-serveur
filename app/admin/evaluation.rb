@@ -4,7 +4,7 @@ ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }
 
-  includes :responsable_suivi, :beneficiaire, campagne: [ :parcours_type ]
+  includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
 
   config.sort_order = "created_at_desc"
 
@@ -96,6 +96,14 @@ ActiveAdmin.register Evaluation do
     column(:positionnement_niveau_numeratie) do |evaluation|
       trad_niveau(evaluation, :positionnement_niveau_numeratie)
     end
+    column("reponses_redaction") do |evaluation|
+      @reponses_redaction_par_evaluation ||= Evaluation
+        .reponses_redaction_pour_evaluations(collection.pluck(:id))
+      reponses = @reponses_redaction_par_evaluation[evaluation.id] || []
+      reponses.map.with_index(1) do |reponse, index|
+        "Rédaction #{index} :\n#{reponse}"
+      end.join("\n-----\n")
+    end
 
     before_filter do |sheet|
       if @collection.count > Evaluation::LIMITE_EXPORT_XLS
@@ -104,19 +112,7 @@ ActiveAdmin.register Evaluation do
         ]
         @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
       end
-
-      evaluation_ids = @collection.pluck(:id)
-      @reponses_redaction_par_evaluation = Evaluation
-        .reponses_redaction_pour_evaluations(evaluation_ids)
-      @max_reponses_redaction = @reponses_redaction_par_evaluation.values.map(&:length).max || 0
-
-      # Ajout dynamique des colonnes pour les réponses de rédaction
-      (1..@max_reponses_redaction).each do |index|
-        column("reponse_redaction") do |evaluation|
-          reponses = @reponses_redaction_par_evaluation[evaluation.id] || []
-          reponses[index - 1]
-        end
-      end
+      @reponses_redaction_par_evaluation = nil
     end
   end
 

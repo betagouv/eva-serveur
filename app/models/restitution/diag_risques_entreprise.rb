@@ -2,6 +2,5 @@
 
 module Restitution
   class DiagRisquesEntreprise < Base
-
   end
 end

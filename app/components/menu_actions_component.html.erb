@@ -1,15 +1,18 @@
-<div class="menu-actions">  
+<div class="menu-actions">
   <div class="table_actions">
     <% @actions.each do |action| %>
-      <%= link_to(
-            action[:label],
-            action[:url],
-            {
-              method: action[:method],
-              data: action[:data],
-              class: action[:class]
-            }.compact
-          ) %>
+
+      <% if can?(action[:type], @ressource) %>
+        <%= link_to(
+              action[:label],
+              send(action[:url], @ressource),
+              {
+                method: action[:method],
+                data: action[:data],
+                class: action[:class]
+              }.compact
+            ) %>
+      <% end %>
     <% end %>
   </div>
 </div>

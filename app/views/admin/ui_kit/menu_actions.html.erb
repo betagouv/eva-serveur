@@ -4,15 +4,15 @@
   </div>
 
   <h1>Démo MenuActionsComponent</h1>
-  
+
   <table>
     <tbody>
       <tr>
         <td class="col-actions bouton-menu-actions">
-          <%= render MenuActionsComponent.new(
-              { label: t(".option_1"), url: "#" },
-              { label: t(".option_2"), url: "#" },
-              { label: t(".option_3"), url: "#", method: :delete, data: { confirm: t(".option_suppression") } }
+          <%= render MenuActionsComponent.new("#",
+              { label: t(".option_1"), url: :p },
+              { label: t(".option_2"), url: :p },
+              { label: t(".option_3"), url: :p, method: :delete, data: { confirm: t(".option_suppression") } }
             ) %>
         </td>
       </tr>

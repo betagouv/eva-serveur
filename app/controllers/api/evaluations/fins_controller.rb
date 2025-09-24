@@ -7,7 +7,8 @@ module Api
         @competences = []
 
         evaluation = Evaluation.find(params[:evaluation_id])
-        evaluation.update terminee_le: DateTime.now
+        terminee_le = params[:terminee_le]&.to_datetime || DateTime.now
+        evaluation.update terminee_le: terminee_le
 
         return unless evaluation.campagne.affiche_competences_fortes?
 

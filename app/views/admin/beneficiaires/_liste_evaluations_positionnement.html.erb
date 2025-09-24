@@ -43,10 +43,10 @@
       <% end %>
 
       <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
-        <%= render MenuActionsComponent.new(
-          { label: t("admin.evaluations.index.voir"), url: admin_evaluation_path(evaluation) },
-          { label: t("admin.evaluations.index.modifier"), url: edit_admin_evaluation_path(evaluation) },
-          { label: t("admin.evaluations.index.supprimer"), url: admin_evaluation_path(evaluation), method: :delete, data: { confirm: t("admin.evaluations.index.confirmation_suppression") } }
+        <%= render MenuActionsComponent.new(evaluation,
+          { label: t("admin.evaluations.index.voir"), type: :read, url: :admin_evaluation_path },
+          { label: t("admin.evaluations.index.modifier"), type: :edit, url: :edit_admin_evaluation_path },
+          { label: t("admin.evaluations.index.supprimer"), type: :destroy, url: :admin_evaluation_path, method: :delete, data: { confirm: t("admin.evaluations.index.confirmation_suppression") } }
         ) %>
       <% end %>
     <% end %>

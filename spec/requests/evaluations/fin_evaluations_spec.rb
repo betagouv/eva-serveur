@@ -16,11 +16,28 @@ describe 'Fin Evaluation API', type: :request do
     before { campagne.situations_configurations.create situation: situation_inventaire }
 
     context 'met à jour la date de fin' do
-      before { post "/api/evaluations/#{evaluation.id}/fin" }
+      context "sans paramètre terminee_le (dépreciée)" do
+        it 'utilise DateTime.now par défaut' do
+          date_figee = DateTime.new(2024, 3, 10, 15, 45)
+          Timecop.freeze(date_figee) do
+            post "/api/evaluations/#{evaluation.id}/fin"
 
-      it do
-        expect(evaluation.reload.terminee_le).not_to eql(nil)
-        expect(response).to have_http_status(:ok)
+            expect(evaluation.reload.terminee_le).to eq(date_figee)
+            expect(response).to have_http_status(:ok)
+          end
+        end
+      end
+
+      context 'avec un paramètre terminee_le' do
+        let(:date_fin_custom) { DateTime.new(2024, 1, 15, 14, 30) }
+
+        it 'utilise la valeur fournie' do
+          post "/api/evaluations/#{evaluation.id}/fin",
+               params: { terminee_le: date_fin_custom.iso8601 }
+
+          expect(evaluation.reload.terminee_le).to eq(date_fin_custom)
+          expect(response).to have_http_status(:ok)
+        end
       end
     end
 

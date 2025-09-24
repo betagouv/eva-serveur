@@ -136,6 +136,12 @@ L'api est accessible au point `/api`
 
 `POST /api/evaluations/:id/fin`
 
+```json
+{
+  "terminee_le":"2021-10-03T22:15:24+02:00"
+}
+```
+
 **Réponse**
 
 ```json

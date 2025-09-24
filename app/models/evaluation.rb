@@ -17,6 +17,22 @@ class Evaluation < ApplicationRecord
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
   SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
 
+  ACTIONS = {
+    LIRE: { label: I18n.t("admin.evaluations.index.voir"),
+            type: :read,
+            url: :admin_evaluation_path },
+    EDITER: { label: I18n.t("admin.evaluations.index.modifier"),
+              type: :edit,
+              url: :edit_admin_evaluation_path
+    },
+    SUPPRIMER: { label: I18n.t("admin.evaluations.index.supprimer"),
+                 type: :destroy,
+                 url: :admin_evaluation_path,
+                 method: :delete,
+                 data: { confirm: I18n.t("admin.evaluations.index.confirmation_suppression") }
+    }
+  }.freeze
+
   belongs_to :campagne
   belongs_to :beneficiaire
   belongs_to :responsable_suivi, optional: true, class_name: "Compte"

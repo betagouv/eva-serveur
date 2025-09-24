@@ -5,3 +5,4 @@ fr:
   actions:
     copier_url: "Copier l'URL"
     copier_code: "Copier le code"
+    aucune_action_autorisee: "Aucune action autorisée"

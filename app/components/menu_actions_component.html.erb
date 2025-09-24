@@ -1,7 +1,9 @@
 <div class="menu-actions">
   <div class="table_actions">
+    <% if @actions.none? { |action| can?(action[:type], @ressource) } %>
+      <%= link_to(t("actions.aucune_action_autorisee"), "#", class: "bouton-disabled", tabindex: "-1") %>
+    <% end %>
     <% @actions.each do |action| %>
-
       <% if can?(action[:type], @ressource) %>
         <%= link_to(
               action[:label],

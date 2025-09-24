@@ -1,7 +1,7 @@
 <%= render MenuActionsComponent.new(evaluation,
-  { label: t("admin.evaluations.index.voir"), type: :read, url: :admin_evaluation_path },
-  { label: t("admin.evaluations.index.modifier"), type: :edit, url: :edit_admin_evaluation_path },
-  { label: t("admin.evaluations.index.supprimer"), type: :destroy, url: :admin_evaluation_path, method: :delete, data: { confirm: t("admin.evaluations.index.confirmation_suppression") } }
+  Evaluation::ACTIONS[:LIRE],
+  Evaluation::ACTIONS[:EDITER],
+  Evaluation::ACTIONS[:SUPPRIMER]
 ) %>
 <%= render partial: "components/bouton_menu_actions" %>
 <div class="evaluation__created_at"><%= l(evaluation.created_at) %></div>

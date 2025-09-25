@@ -17,7 +17,9 @@ describe Restitution::Positionnement::Export do
   let(:questionnaire) { create :questionnaire, questions: questions }
   let(:campagne) { create :campagne, code: 'CODE123' }
   let(:date_debut_evaluation) { Time.zone.local(2021, 1, 2, 8, 2, 4) }
-  let(:evaluation) { create :evaluation, campagne: campagne, debutee_le: date_debut_evaluation }
+  let(:beneficiaire) { create :beneficiaire, nom: "Roger" }
+  let(:evaluation) { create :evaluation, campagne: campagne, debutee_le: date_debut_evaluation,
+                            beneficiaire: beneficiaire }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   before do

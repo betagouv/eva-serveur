@@ -18,11 +18,11 @@ describe NettoyageComptesStructureDemoJob, type: :job do
                              statut_validation: :en_attente
     campagne = create :campagne, compte: compte_existant
     beneficiaire = create :beneficiaire, nom: 'nom'
-    create :evaluation, nom: 'eval1', campagne: campagne, beneficiaire: beneficiaire
-    create :evaluation, nom: 'eval4', campagne: campagne, beneficiaire: beneficiaire,
+    create :evaluation, campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, campagne: campagne, beneficiaire: beneficiaire,
                         deleted_at: Time.zone.now
-    create :evaluation, nom: 'eval2', campagne: campagne, beneficiaire: beneficiaire
-    create :evaluation, nom: 'eval3', campagne: campagne, deleted_at: Time.zone.now
+    create :evaluation, campagne: campagne, beneficiaire: beneficiaire
+    create :evaluation, campagne: campagne, deleted_at: Time.zone.now
     create :campagne, libelle: 'c supprimée', compte: compte_existant, deleted_at: Time.zone.now
 
     described_class.perform_now

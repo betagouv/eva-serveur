@@ -123,7 +123,6 @@ describe 'Evaluation', type: :request do
         it 'retourne une 201' do
           expect(response).to have_http_status(:created)
           expect(Evaluation.last.beneficiaire).to eq beneficiaire
-          expect(Evaluation.last.nom).to eq beneficiaire.nom
         end
       end
 
@@ -157,7 +156,8 @@ describe 'Evaluation', type: :request do
     end
 
     describe 'PATCH /evaluations/:id' do
-      let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', nom: 'James' }
+      let!(:beneficiaire) { create :beneficiaire, nom: 'Roger' }
+      let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', beneficiaire: beneficiaire }
 
       context 'quand une requête est invalide pour un enum de données sociodémographiques' do
         let(:params) do

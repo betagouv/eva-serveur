@@ -6,7 +6,7 @@ module Anonymisation
       @model = model
     end
 
-    def anonymise(_nouveau_nom = nil)
+    def anonymise
       yield(@model)
       @model.anonymise_le = Time.current
       @model.save!

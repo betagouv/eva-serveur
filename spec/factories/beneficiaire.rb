@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :beneficiaire do
-    nom { 'Roger' }
+    sequence(:nom) { |n| "Roger #{n}" }
   end
 end

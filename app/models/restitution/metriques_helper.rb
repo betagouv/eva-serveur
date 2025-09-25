@@ -15,7 +15,8 @@ module Restitution
 
       def filtre_evenements_reponses(evenements)
         evenements.select do |evenement|
-          evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE] && yield(evenement)
+          evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE] &&
+            (block_given? ? yield(evenement) : true)
         end
       end
 

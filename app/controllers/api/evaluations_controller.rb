@@ -54,8 +54,6 @@ module Api
                          donnee_sociodemographique_attributes:
                          %i[age genre dernier_niveau_etude derniere_situation] ]
 
-      permitted_params << :nom if params[:id].blank?
-
       params.permit(permitted_params)
     end
 
@@ -80,8 +78,8 @@ module Api
     def traite_beneficiaire
       if @evaluation_params[:code_beneficiaire].present?
         traite_avec_code_beneficiaire
-      elsif @evaluation_params[:nom].present?
-        construit_beneficiaire_attributes
+      elsif params[:nom].present? && params[:id].blank?
+        construit_beneficiaire_attributes(params[:nom])
       end
     end
 
@@ -92,11 +90,10 @@ module Api
       return unless beneficiaire
 
       @evaluation_params[:beneficiaire_id] = beneficiaire.id
-      @evaluation_params[:nom] = beneficiaire.nom
     end
 
-    def construit_beneficiaire_attributes
-      @evaluation_params[:beneficiaire_attributes] = { nom: @evaluation_params[:nom] }
+    def construit_beneficiaire_attributes(nom)
+      @evaluation_params[:beneficiaire_attributes] = { nom: nom }
       @evaluation_params.delete(:code_beneficiaire)
     end
   end

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Admin - Restitution', type: :feature do
-  let(:evaluation) { create :evaluation, nom: 'John Doe' }
+  let(:evaluation) { create :evaluation }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   before { se_connecter_comme_superadmin }

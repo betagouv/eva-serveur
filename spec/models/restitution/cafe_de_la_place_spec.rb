@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Restitution::CafeDeLaPlace do
-  let(:evaluation) { create :evaluation, nom: 'Test' }
+  let(:evaluation) { create :evaluation }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
   let(:situation) { create :situation }
   let(:campagne) { build :campagne }

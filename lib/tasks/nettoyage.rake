@@ -3,6 +3,12 @@
 require "rake_logger"
 
 namespace :nettoyage do
+  def collecte_email(domaine)
+    Compte.where("email LIKE ?", "%@#{domaine}").to_h do |compte|
+      [ compte.email.split("@").first, compte ]
+    end
+  end
+
   def anonymise_evaluations
     puts "\n-- anonymise les évaluations --"
     Evaluation.find_each do |evaluation|
@@ -201,6 +207,30 @@ where "evenementsParGroup" > 1')
 
       nombre_evenements -= 1
       logger.info "Il reste #{nombre_evenements} événements en double"
+    end
+  end
+
+  desc "migre les adresses pole-emploi.fr"
+  task migrer_pole_emploi: :environment do
+    logger = RakeLogger.logger
+
+    adresses_pole_emploi = collecte_email("pole-emploi.fr")
+    adresses_france_travail = collecte_email("francetravail.fr")
+
+    cles_communes = adresses_pole_emploi.keys & adresses_france_travail.keys
+    logger.info "Nombre de clés communes: #{cles_communes.count}"
+
+    cles_communes.each do |cle|
+      compte_pe = adresses_pole_emploi[cle]
+      compte_ft = adresses_france_travail[cle]
+      logger.info "analyse du compte : #{compte_pe.email}"
+      logger.info "nombre de campagnes : #{Campagne.where(compte: compte_pe).count}"
+      logger.info "Structure pe : #{compte_pe.structure.nom}"
+      logger.info "Structure ft : #{compte_ft.structure&.nom}"
+      if compte_pe.structure == compte_ft.structure
+        Campagne.where(compte: compte_pe).update_all(compte_id: compte_ft.id)
+        compte_pe.destroy if Campagne.where(compte: compte_pe).empty?
+      end
     end
   end
 end

@@ -2,9 +2,9 @@
 
 module Anonymisation
   class Beneficiaire < Anonymisation::Base
-    def anonymise(nouveau_nom = nil)
+    def anonymise
       super do |beneficiaire|
-        beneficiaire.nom = nouveau_nom.presence || FFaker::NameFR.name
+        beneficiaire.nom = FFaker::NameFR.name
       end
     end
   end

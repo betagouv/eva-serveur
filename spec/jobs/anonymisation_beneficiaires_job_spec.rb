@@ -45,8 +45,6 @@ describe AnonymisationBeneficiairesJob, type: :job do
       expect(autre_evaluation_ancienne.anonymise_le).to eq date_anonymisation
 
       expect(beneficiaire.nom).to eq 'nom généré'
-      expect(ancienne_evaluation.nom).to eq 'nom généré'
-      expect(autre_evaluation_ancienne.nom).to eq 'nom généré'
     end
   end
 

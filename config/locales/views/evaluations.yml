@@ -159,6 +159,9 @@ fr:
             Vous réussissez **assez bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester focalisé·e sur une tâche, mais vous pouvez vous déconcentrer face à la difficulté et la distraction. Il peut aussi être difficile pour vous d'être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous améliorer, parlez-en à votre conseiller·e !
           stanine3: |
             Vous parvenez **très bien** à rester attentif·ve et concentré·e en situation de travail. Vous êtes capable de rester concentré·e sur une tâche pendant longtemps malgré la difficulté et la distraction. Aussi, vous savez être attentif·ve à plusieurs choses en même temps. Vous pouvez donc vous adapter rapidement à de nombreux métiers du BTP, de l’Industrie, et de la Surveillance, bravo !
+        pourcentage_risque:
+          nom: "Pourcentage de risque"
+          titre: "Pourcentage de risque"
       details_evaluation:
         titre: Détails de l'évaluation
         titre_menu_lateral: Détails de l'évaluation
@@ -199,6 +202,8 @@ fr:
           restitution_globale: Restitution globale
         evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
+      mesure_des_risques:
+        titre: "Mesure des risques"
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       redaction: Rédaction

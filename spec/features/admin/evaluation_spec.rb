@@ -200,6 +200,7 @@ describe 'Admin - Evaluation', type: :feature do
           allow(restitution_globale).to receive(:synthese_diagnostic)
           allow(restitution_globale).to receive(:synthese_positionnement_litteratie)
           allow(restitution_globale).to receive(:synthese_positionnement_numeratie)
+          allow(restitution_globale).to receive(:diag_risques_entreprise)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
           allow(restitution_globale).to receive(:selectionne_derniere_restitution)

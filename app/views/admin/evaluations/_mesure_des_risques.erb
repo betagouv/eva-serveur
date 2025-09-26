@@ -1,0 +1,23 @@
+<% pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"] %>
+
+<% classes = if pourcentage_risque <= 10
+    [ "fr-callout--green-emeraude" ]
+ elsif pourcentage_risque <= 50
+    [ "fr-callout--blue-cumulus" ]
+ else
+    [ "fr-callout--pink-macaron" ]
+  end
+%>
+
+<div id="diag-risques-entrerpise">
+  <h2 class="evaluation__titre"><%= t(".titre") %></h2>
+  <div class="panel">
+    <div class="fr-pl-4w fr-pr-4w">
+      <%= render MiseEnAvantComponent.new(
+        titre: "Votre taux de risque est de #{pourcentage_risque}%",
+        description: "Compte tenu de vos réponses, vous avez plus de #{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.",
+        classes: classes.push("fr-mb-0")
+      ) %>
+    </div>
+  </div>
+</div>

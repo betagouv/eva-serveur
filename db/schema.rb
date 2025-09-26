@@ -286,6 +286,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_25_152637) do
     t.uuid "evaluation_id"
     t.uuid "situation_id"
     t.datetime "deleted_at"
+    t.jsonb "synthese", default: {}, null: false
+    t.jsonb "competences", default: {}, null: false
+    t.jsonb "competences_de_base", default: {}, null: false
     t.index ["deleted_at"], name: "index_parties_on_deleted_at"
     t.index ["evaluation_id"], name: "index_parties_on_evaluation_id"
     t.index ["session_id"], name: "index_parties_on_session_id", unique: true

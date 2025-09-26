@@ -111,6 +111,10 @@ module Restitution
       @numeratie ||= selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
     end
 
+    def diag_risques_entreprise
+      @diag_risques_entreprise ||= selectionne_derniere_restitution(Situation::DIAG_RISQUES_ENTREPRISE)
+    end
+
     private
 
     def extraie_competences_depuis_restitutions

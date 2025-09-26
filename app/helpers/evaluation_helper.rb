@@ -32,6 +32,10 @@ module EvaluationHelper
     effectuee_avec_remediation?(ressource) || non_effectuee_avec_difficulte?(ressource)
   end
 
+  def diag_risques_entreprise
+    restitution_pour_situation(Situation::DIAG_RISQUES_ENTREPRISE)
+  end
+
   def cafe_de_la_place
     restitution_pour_situation(Situation::CAFE_DE_LA_PLACE)
   end

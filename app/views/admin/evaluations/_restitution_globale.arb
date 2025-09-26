@@ -88,6 +88,12 @@ div class: "evaluation__restitution-globale #{class_css}" do
     )
   end
 
+  diag_risques_entreprise = restitution_globale.diag_risques_entreprise
+  if diag_risques_entreprise
+    render partial: "mesure_des_risques",
+locals: { diagnostic_risques: diag_risques_entreprise, pdf: pdf }
+  end
+
   render Evaluation::AnnexeDiagnosticComponent.new(
     restitution_globale: restitution_globale
   ) if pdf && resource.campagne.avec_diagnostic?

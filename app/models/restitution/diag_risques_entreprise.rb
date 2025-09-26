@@ -2,18 +2,14 @@
 
 module Restitution
   class DiagRisquesEntreprise < Base
-    METRIQUES = {
-      "pourcentage_risque" => {
-        "type" => :nombre,
-        "instance" => Restitution::Entreprises::PourcentageRisque.new
+    def synthese
+      {
+        pourcentage_risque: calcule_pourcentage_risque
       }
-    }
+    end
 
-    METRIQUES.each_key do |metrique|
-      define_method metrique do
-        METRIQUES[metrique]["instance"]
-          .calcule(@evenements)
-      end
+    def calcule_pourcentage_risque
+      Restitution::Entreprises::PourcentageRisque.new.calcule(@evenements)
     end
   end
 end

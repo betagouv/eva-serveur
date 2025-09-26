@@ -1,4 +1,4 @@
-<div class="<%= [ "fr-callout", ("fr-icon-#{@icone}" if @icone) ].compact.join(" ") %>" <%= tag.attributes(@html_attributes) %>>
+<div class="<%= [ "fr-callout", ("fr-icon-#{@icone}" if @icone) ].push(@classes).flatten.compact.join(" ") %>" <%= tag.attributes(@html_attributes) %>>
   <h3 class="fr-callout__title"><%= @titre %></h3>
 
   <% if @description.present? %>

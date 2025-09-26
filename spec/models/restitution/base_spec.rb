@@ -105,4 +105,33 @@ describe Restitution::Base do
       expect(restitution.score).to be_nil
     end
   end
+
+  describe '#persiste' do
+    let(:evenements) do
+      [
+        build(:evenement_demarrage, session_id: partie.session_id)
+      ]
+    end
+
+    before do
+      allow(restitution).to receive_messages(
+        calcule_metriques: { metric1: 10, metric2: 20 },
+        competences_de_base: { competence1: 30 },
+        competences: { competence2: 40 },
+        synthese: { synthese_key: 'synthese_value' }
+      )
+
+      restitution.instance_variable_set(:@partie, partie)
+    end
+
+    it 'updates the partie with calculated metrics, competencies, and synthesis' do
+      restitution.persiste
+
+      partie.reload
+      expect(partie.synthese).to eq({ "synthese_key" => 'synthese_value' })
+      expect(partie.competences).to eq({ "competence2" => 40 })
+      expect(partie.competences_de_base).to eq({ "competence1" => 30 })
+      expect(partie.metriques).to eq({ "metric1" => 10, "metric2" => 20 })
+    end
+  end
 end

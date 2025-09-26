@@ -31,14 +31,23 @@ module Restitution
     end
 
     def persiste
+      metriques = calcule_metriques
+      partie.update(
+        metriques: metriques,
+        competences_de_base: competences_de_base,
+        competences: competences,
+        synthese: synthese
+      )
+    end
+
+    def calcule_metriques
       nom_restitution = self.class.name
-      return unless nom_restitution.constantize.const_defined?("METRIQUES")
+      return {} unless nom_restitution.constantize.const_defined?("METRIQUES")
 
       dictionnaire_metriques = "#{nom_restitution}::METRIQUES".constantize
-      metriques = dictionnaire_metriques.keys.index_with do |nom_metrique|
+      dictionnaire_metriques.keys.index_with do |nom_metrique|
         public_send(nom_metrique)
       end
-      partie.update(metriques: metriques)
     end
 
     def supprimer

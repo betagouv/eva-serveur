@@ -77,10 +77,10 @@ class AbilityUtilisateur
       campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     }
     can :fusionner, Beneficiaire if compte.au_moins_admin?
-    droit_benenficiaire_structure(compte) if compte.structure_id.present?
+    droit_beneficiaire_structure(compte) if compte.structure_id.present?
   end
 
-  def droit_benenficiaire_structure(compte)
+  def droit_beneficiaire_structure(compte)
     if compte.validation_acceptee?
       can :read, Beneficiaire, evaluations: {
         campagne: campagnes_publique_de_la_structure(compte)

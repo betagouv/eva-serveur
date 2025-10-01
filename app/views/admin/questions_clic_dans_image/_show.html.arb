@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 panel "Détails de la question" do
   attributes_table_for question_clic_dans_image do
     row :id

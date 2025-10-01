@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 donnee_sociodemographique = resource.donnee_sociodemographique
 
 h3 t(".#{categorie}"), class: "categorie"

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BarreSegmenteeComponent < ViewComponent::Base
   def initialize(nombre_questions_reussies:, nombre_questions_echecs:,
                  nombre_questions_non_passees:, pourcentage_reussite:

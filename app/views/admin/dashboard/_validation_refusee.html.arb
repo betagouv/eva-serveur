@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 h3 t(".titre"), class: "titre"
 
 div class: "panel" do

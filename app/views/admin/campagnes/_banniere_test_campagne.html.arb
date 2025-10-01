@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "card__banner card__banner--green d-flex justify-content-between align-items-center" do
   div class: "d-flex align-items-end" do
     image_tag "avatar_bienvenue.png", class: "banner__icone", alt: ""

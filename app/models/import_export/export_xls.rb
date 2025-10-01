@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ImportExport
   class ExportXls
     attr_reader :workbook, :export, :onglets

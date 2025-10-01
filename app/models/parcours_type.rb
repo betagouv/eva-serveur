@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ParcoursType < ApplicationRecord
   self.implicit_order_column = "created_at"
   TYPES_DE_PROGRAMME = %i[diagnostic positionnement].freeze

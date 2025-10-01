@@ -1,3 +1,1 @@
-# frozen_string_literal: true
-
 button class: "bouton bouton-menu", tabindex: -1, aria: { label: t(".label") }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvenementEvacob < SimpleDelegator
   PREFIX_QUESTIONS = {
     orientation: "LO",

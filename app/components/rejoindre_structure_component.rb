@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RejoindreStructureComponent < ViewComponent::Base
   def initialize(structure, current_compte)
     @structure = structure

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register StructureLocale do
   menu parent: "Terrain", if: proc { current_compte.anlci? }
   actions :all

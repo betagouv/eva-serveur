@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CompteHelper
   def traduis_acces(statut_validation, role)
     statut_humain = Compte.human_enum_name(:statut_validation, statut_validation)

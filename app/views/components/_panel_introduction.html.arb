@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "panel panel-introduction" do
   div class: "introduction-consigne" do
     md text

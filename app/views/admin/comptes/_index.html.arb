@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 context.instance_eval do
   column :prenom do |compte|
     link_to compte.prenom, admin_compte_path(compte)

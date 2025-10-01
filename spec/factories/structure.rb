@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Geocoder::Lookup::Test.set_default_stub(
   [
     {

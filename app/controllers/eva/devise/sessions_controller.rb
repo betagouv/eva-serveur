@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController

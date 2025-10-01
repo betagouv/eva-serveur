@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "evaluations-sans-mise-en-action panel p-0 border border-orange" do
   if evaluations.present?
     render "admin/dashboard/mise_en_action/avec_evaluations", evaluations: evaluations

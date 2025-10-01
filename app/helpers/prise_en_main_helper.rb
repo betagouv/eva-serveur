@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module PriseEnMainHelper
   def statut_etape(etape, etape_en_cours)
     index_etape = PriseEnMain::ETAPES.find_index(etape)

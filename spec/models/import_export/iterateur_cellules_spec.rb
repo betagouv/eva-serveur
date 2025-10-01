@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 describe ImportExport::IterateurCellules do
   it "permet de parcours les cellues d'une ligne dans l'ordre" do
     iterateur = described_class.new([ 1, 2, 3 ])

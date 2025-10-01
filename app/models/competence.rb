@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Competence
   NIVEAU_4 = 4
   NIVEAU_3 = 3

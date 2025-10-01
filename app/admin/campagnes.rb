@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register Campagne do
   menu priority: 3, if: proc { current_compte.structure_id.present? && can?(:read, Campagne) }
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Evaluation < ApplicationRecord
   # Nb max d'évaluations que l'on peut télécharger dans le fichier XLS fixé de manière arbitraire
   # en fonction de ce que l'on est capable d'exporter en un temps raisonnable.

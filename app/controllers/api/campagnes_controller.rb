@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   class CampagnesController < Api::BaseController
     before_action :trouve_et_verifie_campagne, :preload_questions

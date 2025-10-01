@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 niveaux_competences = restitution_globale.niveaux_competences
 
 h2 t(".titre"), class: "evaluation__titre"

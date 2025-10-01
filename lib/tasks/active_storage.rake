@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :active_storage do
   desc "Supprime complètement tous les fichiers attachés des modèles (destroy)"
   task destroy_attachments: :environment do

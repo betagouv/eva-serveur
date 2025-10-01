@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register Evenement do
   config.sort_order = "date_desc"
   belongs_to :campagne

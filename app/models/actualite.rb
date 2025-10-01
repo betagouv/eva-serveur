@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Actualite < ApplicationRecord
   has_one_attached :illustration
   enum :categorie, { blog: 0, assistance: 1, evolution: 2 }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'active_admin/batch_actions/views/selection_cells'
 
 module ActiveAdmin

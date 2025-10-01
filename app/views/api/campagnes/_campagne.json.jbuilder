@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.libelle campagne.libelle
 json.code campagne.code
 json.situations campagne.situations_configurations,

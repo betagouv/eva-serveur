@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "pied-page" do
   render pre_pied_page if defined?(pre_pied_page)
   div Eva::EMAIL_CONTACT, class: "contact"

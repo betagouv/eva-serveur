@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvenementSecurite < SimpleDelegator
   BONNE_QUALIFICATION = "bonne"
   IDENTIFICATION_POSITIVE = "oui"

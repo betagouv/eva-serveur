@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "autopositionnement questionnaire" do
   h3 t(".questionnaire-auto-positionnement"), class: "categorie"
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|

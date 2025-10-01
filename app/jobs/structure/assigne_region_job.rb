@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Structure
   class AssigneRegionJob < ApplicationJob
     queue_as :default

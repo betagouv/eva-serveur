@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class QuestionSaisie < Question
   QUESTION_REDACTION = "redaction_note"
   QUESTION_TYPE = "QuestionSaisie"

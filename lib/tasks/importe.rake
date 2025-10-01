@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "importeur_commentaires"
 require "importeur_telephone"
 

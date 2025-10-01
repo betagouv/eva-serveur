@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvenementMaintenance < SimpleDelegator
   EVENEMENT = {
     NON_MOT: "non-mot",

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class Controle
     class AttentionConcentration < Restitution::Competence::Base

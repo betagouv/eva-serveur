@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # rubocop:disable Rails/ApplicationController
 class ErreursController < ActionController::Base
   # rubocop:enable Rails/ApplicationController

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ReferentielAnlciComponent < ViewComponent::Base
   include ApplicationHelper
 

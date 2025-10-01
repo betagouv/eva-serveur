@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ReinitialiseCompteDemoJob < ApplicationJob
   include StructureHelper
   queue_as :default

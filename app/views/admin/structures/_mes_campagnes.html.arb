@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "bloc-mes-campagnes fr-mt-8v" do
   h3 "Campagnes", class: "fr-mb-0"
   if campagnes.present?

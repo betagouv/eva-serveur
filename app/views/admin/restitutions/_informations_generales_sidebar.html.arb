@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 attributes_table_for resource do
   row Evaluation.human_attribute_name("beneficiaire") do |restitution|
     restitution.evaluation.beneficiaire.nom

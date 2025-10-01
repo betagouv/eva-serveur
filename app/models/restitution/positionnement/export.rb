@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   module Positionnement
     class Export < ::ImportExport::ExportXls

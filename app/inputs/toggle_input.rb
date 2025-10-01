@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ToggleInput < Formtastic::Inputs::BooleanInput
   def to_html
     input_wrapping do

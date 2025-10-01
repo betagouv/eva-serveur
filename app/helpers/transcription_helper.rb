@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module TranscriptionHelper
   def tag_audio(transcription)
     return if transcription.nil? || !transcription.audio.attached?

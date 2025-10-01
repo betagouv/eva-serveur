@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ImportExport
   class ImportXls
     class Error < StandardError; end

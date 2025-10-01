@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register Evaluation do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
   menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }

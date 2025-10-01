@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ImportExport
   class IterateurCellules
     def initialize(cellules)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 render partial: "admin/questions/input_illustration_base",
        locals: {
          f: f,

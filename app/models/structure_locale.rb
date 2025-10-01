@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class StructureLocale < Structure
   TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[

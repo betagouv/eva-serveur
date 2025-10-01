@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 describe 'nettoyage:supprime_evenements_apres_la_fin' do

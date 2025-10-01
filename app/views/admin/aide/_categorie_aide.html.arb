@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 h3 t("activerecord.attributes.source_aide.titres_categories.#{categorie}"),
    id: categorie,
    class: "aide_titre"

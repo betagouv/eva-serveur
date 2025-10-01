@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class Controle
     class ComprehensionConsigne < Restitution::Competence::Base

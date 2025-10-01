@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # spec/components/barre_segmentee_component_spec.rb
 require 'rails_helper'
 

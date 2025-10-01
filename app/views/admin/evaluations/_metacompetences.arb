@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 restitution_globale.interpretations_niveau2(categorie).each do |competence_niveau|
   competence = competence_niveau.keys.first
   niveau = competence_niveau[competence]

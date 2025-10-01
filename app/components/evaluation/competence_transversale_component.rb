@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Evaluation
   class CompetenceTransversaleComponent < ViewComponent::Base
     include MarkdownHelper

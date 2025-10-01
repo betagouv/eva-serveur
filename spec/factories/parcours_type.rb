@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :parcours_type do
     sequence(:libelle) { |n| "Parcours type ##{n}" }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MiseEnAvantComponent < ViewComponent::Base
   def initialize(titre:, description: nil, icone: nil,
     classes: [], bouton_label: nil, bouton_attributes: {},

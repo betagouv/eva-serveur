@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 RSpec::Matchers.define :evalue_a do |expected|
   match do |actual|
     actual.niveau == expected

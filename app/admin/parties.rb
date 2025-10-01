@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register Partie do
   belongs_to :situation
   includes evaluation: [ :beneficiaire, :campagne ]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register ParcoursType do
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 

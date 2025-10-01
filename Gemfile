@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ruby File.read(File.dirname(__FILE__) + "/.tool-versions")[/ruby \K.+/] || fail
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }

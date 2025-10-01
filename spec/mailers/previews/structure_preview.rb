@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Preview all emails at http://localhost:3000/rails/mailers/structure
 class StructurePreview < ActionMailer::Preview
   def nouvelle_structure

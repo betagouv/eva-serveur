@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 describe ImportExport::Questions::Import::QuestionSousConsigne do

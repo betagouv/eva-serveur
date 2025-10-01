@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Compte < ApplicationRecord
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   ROLES = %w[conseiller admin charge_mission_regionale superadmin compte_generique].freeze

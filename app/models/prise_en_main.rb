@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PriseEnMain
   ETAPES = %w[rejoindre_structure creation_campagne test_campagne confirmation_email passations
               fin].freeze

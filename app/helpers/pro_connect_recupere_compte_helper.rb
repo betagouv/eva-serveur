@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ProConnectRecupereCompteHelper
   class << self
     def cree_ou_recupere_compte(user_info)

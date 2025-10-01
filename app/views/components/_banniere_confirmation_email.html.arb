@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-erreur" do
   case demande
   when :nouvelle_inscription

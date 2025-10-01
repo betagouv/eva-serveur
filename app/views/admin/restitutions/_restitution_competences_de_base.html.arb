@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 panel t(".titre") do
   return if resource.competences_de_base.empty?
 

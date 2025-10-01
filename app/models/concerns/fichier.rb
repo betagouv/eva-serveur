@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Fichier
   extend ActiveSupport::Concern
   def nom_fichier_horodate(titre, extension)

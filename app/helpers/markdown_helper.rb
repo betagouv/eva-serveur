@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module MarkdownHelper
   def md(contenu)
     return "" if contenu.nil?

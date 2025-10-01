@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Comptes
   module EnvoieEmails
     extend ActiveSupport::Concern

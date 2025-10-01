@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class Inventaire
     class Rapidite < Restitution::Competence::Base

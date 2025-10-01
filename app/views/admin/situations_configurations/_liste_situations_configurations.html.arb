@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if can?(:manage, Compte)
   reorderable_table_for situations_configurations do
     column :situation

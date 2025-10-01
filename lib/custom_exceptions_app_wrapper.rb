@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CustomExceptionsAppWrapper
   def initialize(exceptions_app:)
     @exceptions_app = exceptions_app

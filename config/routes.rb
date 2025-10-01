@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  authenticate :compte, ->(o) { ! o.superadmin? } do
+    get '/sidekiq', to: 'erreurs#forbidden'
+  end
+
   root to: redirect('/admin/dashboard')
 
   resource :nouvelle_structure, only: [:create, :show]

@@ -29,6 +29,8 @@ fr:
         voir_membres: Voir la liste
       mes_campagnes:
         voir: Voir
+        pas_de_campagne: Pas de campagne à afficher pour le moment. Pour créer une campagne, rendez-vous sur %{lien}.
+        nom_lien: cette page
     structures_locales:
       form:
         titre:

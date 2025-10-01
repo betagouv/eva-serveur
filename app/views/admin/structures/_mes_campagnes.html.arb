@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 div class: "bloc-mes-campagnes fr-mt-8v" do
-  h3 "Campagnes", class: "mb-0"
+  h3 "Campagnes", class: "fr-mb-0"
   if campagnes.present?
     table_for campagnes, class: "index_table p-0" do
       column :libelle do |campagne|
@@ -19,11 +19,8 @@ div class: "bloc-mes-campagnes fr-mt-8v" do
       end
     end
   else
-    div "Pas de campagne à afficher pour le moment. Pour créer une campagne, rendez-vous sur ",
-        class: "panel" do
-      span do
-        link_to "cette page.", new_admin_campagne_path
-      end
+    para class: "panel fr-mt-4v" do
+        t(".pas_de_campagne", lien: link_to(t(".nom_lien"), new_admin_campagne_path)).html_safe
     end
   end
 end

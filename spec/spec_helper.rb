@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'capybara/rspec'
 require 'webmock/rspec'
 require_relative '../app/decorators/evenement_maintenance'

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Metacompetence
   CORRESPONDANCES_CODECLEA = {
     "2.1" => {

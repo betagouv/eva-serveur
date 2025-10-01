@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Evaluation
   class SyntheseDiagnosticComponent < ViewComponent::Base
     def initialize(params = {})

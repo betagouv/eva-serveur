@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PasswordValidator < ActiveModel::Validator
   def validate(compte)
     valeur = compte.password

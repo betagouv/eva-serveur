@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Anonymisation
   class Evaluation < Anonymisation::Base
     def anonymise

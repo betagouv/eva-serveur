@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "mon-compte row" do
   div class: "offset-1 col-4" do
     if current_compte == compte

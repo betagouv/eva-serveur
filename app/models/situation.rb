@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Situation < ApplicationRecord
   BIENVENUE = "bienvenue"
   CAFE_DE_LA_PLACE = "cafe_de_la_place"

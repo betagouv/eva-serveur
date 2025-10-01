@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class DonneeSociodemographique < ApplicationRecord
   belongs_to :evaluation
 

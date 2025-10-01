@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   CHAMPS_AUDIO = %i[intitule modalite_reponse consigne].freeze

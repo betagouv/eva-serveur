@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Chartkick.options = {
   colors: [
     'rgba(110, 133, 253, 1)',

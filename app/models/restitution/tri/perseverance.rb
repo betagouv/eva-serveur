@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class Tri
     class Perseverance < Restitution::Competence::Base

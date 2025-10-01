@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ImportExport
   class OngletXls
     attr_reader :sheet

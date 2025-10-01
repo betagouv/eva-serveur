@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :choix do
     nom_technique { 'nom_technique_choix' }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvenementObjetsTrouves < SimpleDelegator
   def metacompetence
     donnees["metacompetence"]

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ProConnectController < ApplicationController
   def auth
     session[:pc_state] = Digest::SHA256.hexdigest("ProConnect - #{SecureRandom.hex(32)}")

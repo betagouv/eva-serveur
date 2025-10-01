@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 f.has_many :transcriptions, allow_destroy: false, new_record: false, heading: false do |t|
   t.input :id, as: :hidden
   t.input :ecrit, label: t(".label.#{transcription_categorie}"), input_html: { rows: 4 }

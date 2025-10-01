@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "metadonnees" do
   div class: "donnee" do
     span "Publié dans :", class: "label"

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 f.has_many :situations_configurations, allow_destroy: true do |c|
   c.input :id, as: :hidden
   c.input :situation

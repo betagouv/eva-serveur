@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Evaluation
   class NumeratieComponent < ViewComponent::Base
     def initialize(restitution_globale:, place_du_marche:)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div id: "evaluation__details", class: "row" do
   div class: "col col-6 mx-auto evaluation__details--panel" do
     h1 render NomAnonymisableComponent.new(resource.beneficiaire)

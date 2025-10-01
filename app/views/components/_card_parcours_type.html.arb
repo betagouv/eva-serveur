@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div id: "card-parcours-type" do
   div class: "carte" do
     if parcours_type.present?

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 scope = "admin.restitutions.restitution_colonnes"
 
 panel t(".restitution_metriques") do

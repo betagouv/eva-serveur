@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Ability < AbilityUtilisateur
   def initialize(compte)
     if compte.validation_refusee?

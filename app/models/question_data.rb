@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class QuestionData < StaticRecord::Base
   self.chemin_data = "questions/*.yml"
 

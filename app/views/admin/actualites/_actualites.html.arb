@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "actualites" do
   actualites.each do |actualite|
     div class: "actualite" do

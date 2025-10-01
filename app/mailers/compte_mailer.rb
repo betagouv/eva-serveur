@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CompteMailer < ApplicationMailer
   def nouveau_compte
     @compte = params[:compte]

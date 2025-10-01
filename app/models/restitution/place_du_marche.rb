@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative "../../decorators/evenement_place_du_marche"
 
 module Restitution

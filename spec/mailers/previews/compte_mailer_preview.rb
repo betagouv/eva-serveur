@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Preview all emails at http://localhost:3000/rails/mailers/compte_mailer
 class CompteMailerPreview < ActionMailer::Preview
   def nouveau_compte

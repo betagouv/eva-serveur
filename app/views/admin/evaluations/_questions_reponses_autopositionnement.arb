@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "autopositionnement" do
   questions_et_reponses_standard = bienvenue.questions_et_reponses(:standard)
   div class: "row question-standard" do

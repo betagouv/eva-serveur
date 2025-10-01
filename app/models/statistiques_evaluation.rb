@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class StatistiquesEvaluation
   attr_reader :temps_total
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Badge::ProfilComponent < ViewComponent::Base
   COULEURS_BADGES_POSITIONNEMENT = {
     profil1: "fr-badge--orange-terre-battue",

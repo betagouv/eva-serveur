@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "row" do
   render "admin/evaluations/competence_niveau1",
          competence: "litteratie",

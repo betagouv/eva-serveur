@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GeolocHelper
   class << self
     def cherche_region(code_postal)

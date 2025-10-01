@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 div class: "bloc-apercu" do
   div class: "titre-panel-avec-bouton" do
     h3 t(".titre")

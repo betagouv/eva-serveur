@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class ScoresNiveau1
     METACOMPETENCES_LITTERATIE = %i[score_ccf score_syntaxe_orthographe score_memorisation].freeze

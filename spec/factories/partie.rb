@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :partie do
     session_id { SecureRandom.uuid }

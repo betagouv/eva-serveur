@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 shared_context 'import' do
   include ActionDispatch::TestProcess::FixtureFile
 

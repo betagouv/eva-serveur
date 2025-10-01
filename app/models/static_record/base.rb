@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module StaticRecord
   ##
   # Cette classe est une classe générique qui s'inspire de ActiveRecord::Base

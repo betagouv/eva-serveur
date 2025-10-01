@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AnonymisationBeneficiairesJob < ApplicationJob
   queue_as :default
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   class BeneficiairesController < Api::BaseController
     before_action :trouve_beneficiaire

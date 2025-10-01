@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ErreurHelper
   def erreurs_generales(erreurs, champs_affiches)
     champs_non_affiches(erreurs.messages.keys, champs_affiches).map do |champ|

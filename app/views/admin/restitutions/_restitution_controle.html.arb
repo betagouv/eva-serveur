@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 panel t(".restitution_controle") do
   attributes_table_for restitution do
     row t(".pieces_bien_placees"), &:nombre_bien_placees

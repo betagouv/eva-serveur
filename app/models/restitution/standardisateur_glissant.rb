@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class StandardisateurGlissant < Standardisateur
     def initialize(metriques, collect_metriques, standards_figes = nil)

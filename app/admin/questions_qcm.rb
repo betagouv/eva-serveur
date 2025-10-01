@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register QuestionQcm do
   before_action :set_question, only: %i[update]
 

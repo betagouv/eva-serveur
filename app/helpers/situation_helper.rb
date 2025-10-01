@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module SituationHelper
   def situation_illustration(situation, couleur_bord: nil)
     return unless situation.illustration.attached?

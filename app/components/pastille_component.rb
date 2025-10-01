@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PastilleComponent < ViewComponent::Base
   def initialize(etiquette: nil, tooltip_content: nil, couleur: nil)
     @etiquette = etiquette

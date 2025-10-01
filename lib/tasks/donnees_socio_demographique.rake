@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require "rake_logger"
 
 namespace :donnees_socio_demographique do

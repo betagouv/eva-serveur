@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BadgeComponent < ViewComponent::Base
   def initialize(contenu:, class_couleur:, display_icon: false, taille: nil)
     @contenu = contenu

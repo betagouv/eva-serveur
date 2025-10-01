@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class EvenementQuestion
   def initialize(question:, evenement: nil)
     @evenement = evenement || Evenement.new(donnees: {})

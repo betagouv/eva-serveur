@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class QuestionClicDansImage < Question
   CLASS_BONNE_REPONSE = "bonne-reponse"
   QUESTION_TYPE = "QuestionClicDansImage"

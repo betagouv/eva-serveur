@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Choix < ApplicationRecord
   has_one_attached :illustration
 

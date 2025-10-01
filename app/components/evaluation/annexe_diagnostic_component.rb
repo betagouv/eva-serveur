@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Evaluation
   class AnnexeDiagnosticComponent < ViewComponent::Base
     def initialize(restitution_globale:)

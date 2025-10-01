@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RelanceStructureSansCampagneJob < ApplicationJob
   queue_as :default
 

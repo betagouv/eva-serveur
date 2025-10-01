@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class QuestionGlisserDeposer < Question
   QUESTION_TYPE = "QuestionGlisserDeposer"
   has_many :reponses, -> { order(position: :asc) },

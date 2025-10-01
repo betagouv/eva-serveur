@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ProConnectHelper
   PC_CLIENT_ID = ENV.fetch("PRO_CONNECT_CLIENT_ID", nil)
   PC_CLIENT_SECRET = ENV.fetch("PRO_CONNECT_CLIENT_SECRET", nil)

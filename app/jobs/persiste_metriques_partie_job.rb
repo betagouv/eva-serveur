@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PersisteMetriquesPartieJob < ApplicationJob
   queue_as :default
 

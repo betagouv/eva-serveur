@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module CampagneHelper
   def collection_parcours_type(liste_parcours_type)
     liste_parcours_type.map do |parcours_type|

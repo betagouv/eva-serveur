@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 questionnaire = situation_configuration.questionnaire_utile&.nom_technique
 
 div class: "campagne-situation d-flex align-items-center" do

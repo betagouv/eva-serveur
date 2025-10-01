@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 ActiveAdmin.register QuestionSousConsigne do
   menu parent: "Parcours", if: proc { current_compte.superadmin? }
 

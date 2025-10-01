@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class Tri
     class ComprehensionConsigne < Restitution::Competence::Base

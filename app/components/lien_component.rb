@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class LienComponent < ViewComponent::Base
   def initialize(body, url, externe: false, aria: nil)
     @body = body

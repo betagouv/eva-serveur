@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RelanceUtilisateurPourNonActivationJob < ApplicationJob
   queue_as :default
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AbilityUtilisateur
   include CanCan::Ability
   attr_reader :compte

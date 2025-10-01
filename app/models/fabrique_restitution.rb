@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FabriqueRestitution
   class << self
     def instancie(partie)

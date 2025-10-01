@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Transcription < ApplicationRecord
   has_one_attached :audio
 

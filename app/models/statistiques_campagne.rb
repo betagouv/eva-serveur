@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class StatistiquesCampagne
   attr_reader :temps_min, :temps_max, :temps_moyen
 

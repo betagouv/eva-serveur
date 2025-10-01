@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 unless restitution.questions_redaction.empty?
   h4 t(".situation", situation: situation_libelle), class: "situation-redaction mb-3"
   restitution.questions_redaction.each do |question, reponse|

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RechercheStructureComponent < ViewComponent::Base
   def initialize(recherche_url: nil, current_compte: nil,
                  ville_ou_code_postal: nil, code_postal: nil)

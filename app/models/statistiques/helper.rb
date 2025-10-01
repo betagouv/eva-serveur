@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Statistiques
   class Helper
     class << self

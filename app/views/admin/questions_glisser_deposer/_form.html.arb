@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 active_admin_form_for [ :admin, resource ] do |f|
   f.semantic_errors
   f.inputs do

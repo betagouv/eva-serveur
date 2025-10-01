@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Restitution
   class ScoresNiveau2
     METRIQUES_ILLETTRISME = %i[score_ccf

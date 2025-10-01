@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 HealthCheck.setup do |config|
   # on souhaite avoir l'url /healthcheck/all.json
   config.uri = '/healthcheck'

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module StructureHelper
   def traduction_type_structure(type_structure)
     I18n.t(

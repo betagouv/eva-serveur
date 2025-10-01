@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 shared_context 'export' do
   subject(:response_service) do
     response_service = described_class.new(

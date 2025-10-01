@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Structure < ApplicationRecord
   has_ancestry
   acts_as_paranoid

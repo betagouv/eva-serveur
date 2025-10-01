@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :stats do
   desc "Extrait les données pour la bascule vers un algorithme figé"
   task niveau_1_et2: :environment do

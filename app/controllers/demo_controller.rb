@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class DemoController < ApplicationController
   layout "active_admin_logged_out"
   helper ::ActiveAdmin::ViewHelpers

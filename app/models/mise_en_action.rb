@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MiseEnAction < ApplicationRecord
   REMEDIATIONS = %w[formation_competences_de_base formation_metier
                     dispositif_remobilisation levee_freins_peripheriques

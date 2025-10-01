@@ -15,8 +15,8 @@
     <div class="panel">
       <div class="fr-pl-4w fr-pr-4w">
         <%= render MiseEnAvantComponent.new(
-          titre: "Votre taux de risque est de #{pourcentage_risque}%",
-          description: "Compte tenu de vos réponses, vous avez plus de #{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.",
+          titre: t(".callout.titre", pourcentage_risque: pourcentage_risque),
+          description: t(".callout.description", pourcentage_risque: pourcentage_risque),
           classes: classes.push("fr-mb-0")
         ) %>
       </div>

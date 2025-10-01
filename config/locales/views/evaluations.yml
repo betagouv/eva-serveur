@@ -204,6 +204,9 @@ fr:
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
       mesure_des_risques:
         titre: "Mesure des risques"
+        callout:
+          titre: Votre taux de risque est de %{pourcentage_risque}%
+          description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       redaction: Rédaction

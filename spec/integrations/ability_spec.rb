@@ -256,7 +256,6 @@ describe Ability do
       create :partie, evaluation: evaluation_conseiller, situation: situation
     end
 
-    it { is_expected.not_to be_able_to(:destroy, Beneficiaire) }
 
     it 'avec une campagne qui a des évaluations' do
       expect(subject).to be_able_to(:destroy, campagne_privee)
@@ -266,11 +265,12 @@ describe Ability do
 
     it do
       expect(subject).to be_able_to(:read,
-                                    ActiveAdmin::Page,
-                                    name: 'Dashboard',
-                                    namespace_name: 'admin')
+      ActiveAdmin::Page,
+      name: 'Dashboard',
+      namespace_name: 'admin')
     end
 
+    it { is_expected.not_to be_able_to(:destroy, Beneficiaire) }
     it { is_expected.not_to be_able_to(:manage, Compte.new) }
     it { is_expected.not_to be_able_to(:manage, Structure.new) }
     it { is_expected.not_to be_able_to(%i[destroy create update], Situation.new) }

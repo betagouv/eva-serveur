@@ -20,7 +20,7 @@
     </div>
 
     <%= render TableauComponent.new(
-      collection: beneficiaire.evaluations_positionnement.order(created_at: :desc),
+      collection: evaluations_positionnement,
       selectionnable: true,
       class: "liste-evaluations-positionnement__tableau"
     ) do |tableau| %>

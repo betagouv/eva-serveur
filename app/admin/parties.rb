@@ -17,7 +17,7 @@ ActiveAdmin.register Partie do
   filter :evaluation_id,
          as: :search_select_filter,
          url: proc { admin_evaluations_path },
-         fields: %i[nom email telephone],
+         fields: %i[nom],
          display_name: "nom",
          minimum_input_length: 2,
          order_by: "nom_asc"

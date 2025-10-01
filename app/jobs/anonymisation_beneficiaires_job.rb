@@ -6,9 +6,6 @@ class AnonymisationBeneficiairesJob < ApplicationJob
   def perform
     beneficiaires_a_annonymiser.find_each do |beneficiaire|
       Anonymisation::Beneficiaire.new(beneficiaire).anonymise
-      beneficiaire.evaluations.each do |evaluation|
-        Anonymisation::Evaluation.new(evaluation).anonymise
-      end
     end
   end
 

@@ -85,13 +85,10 @@ L'api est accessible au point `/api`
 
 ```json
 {
-  "anonymise_le": null,
   "campagne_id": "09209dea-0fa7-40ea-aba8-cbadc1957f4d",
   "created_at": "2021-10-08T09:27:09.754+02:00",
-  "email": null,
   "id": "51b4b749-7ac2-40b4-b8f8-b8c9e5663c69",
   "nom": "Roger",
-  "telephone": null,
   "debutee_le": "2021-10-03T22:15:24.000+02:00",
   "terminee_le": "2021-10-03T22:25:24.000+02:00",
   "updated_at": "2021-10-08T09:27:09.754+02:00"
@@ -118,7 +115,6 @@ L'api est accessible au point `/api`
 
 ```json
 {
-  "anonymise_le": "2021-10-06T17:04:49.780+02:00",
   "campagne_id": "09209dea-0fa7-40ea-aba8-cbadc1957f4d",
   "created_at": "2021-10-03T20:51:18.490+02:00",
   "id": "569cdc17-554d-4227-acfe-1d5d3a4afdbc",

@@ -7,14 +7,6 @@ namespace :nettoyage do
     end
   end
 
-  def anonymise_evaluations
-    puts "\n-- anonymise les évaluations --"
-    Evaluation.find_each do |evaluation|
-      print "."
-      Anonymisation::Evaluation.new(evaluation).anonymise
-    end
-  end
-
   def anonymise_comptes
     puts "\n-- anonymise les comptes --"
     Compte.find_each do |compte|
@@ -46,7 +38,6 @@ namespace :nettoyage do
   task anonymise: :environment do
     return if Rails.env.production?
 
-    anonymise_evaluations
     anonymise_comptes
     anonymise_campagnes
     anonymise_structures

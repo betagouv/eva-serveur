@@ -73,7 +73,7 @@ class Evaluation < ApplicationRecord
     joins(campagne: { compte: :structure })
       .where(campagnes: { comptes: { structure_id: structures } })
   }
-  scope :non_anonymes, -> { where(anonymise_le: nil) }
+  scope :non_anonymes, -> { joins(:beneficiaire).where(beneficiaires: { anonymise_le: nil }) }
   scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
@@ -85,6 +85,8 @@ class Evaluation < ApplicationRecord
   }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
+
+  delegate :anonyme?, to: :beneficiaire
 
   def self.reponses_redaction_pour_evaluations(evaluation_ids)
     question_redaction_id = find_question_redaction_id
@@ -136,10 +138,6 @@ question_redaction_id)
 
   def display_name
     "#{beneficiaire.nom} - #{I18n.l(debutee_le, format: :avec_heure)}"
-  end
-
-  def anonyme?
-    anonymise_le.present?
   end
 
   def responsables_suivi

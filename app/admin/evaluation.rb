@@ -112,6 +112,9 @@ ActiveAdmin.register Evaluation do
         ]
         @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
       end
+    end
+
+    after_filter do |sheet|
       @reponses_redaction_par_evaluation = nil
     end
   end

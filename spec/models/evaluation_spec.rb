@@ -47,8 +47,10 @@ describe Evaluation do
     end
 
     describe '.non_anonymes' do
-      let(:evaluation_anonyme) { create :evaluation, anonymise_le: Time.zone.today }
-      let(:evaluation_non_anonyme) { create :evaluation, anonymise_le: nil }
+      let(:beneficiaire) { create :beneficiaire, anonymise_le: Time.zone.today }
+      let(:beneficiaire_non_anonyme) { create :beneficiaire, anonymise_le: nil }
+      let(:evaluation_anonyme) { create :evaluation, beneficiaire: beneficiaire }
+      let(:evaluation_non_anonyme) { create :evaluation, beneficiaire: beneficiaire_non_anonyme }
 
       it 'retourne les évaluations qui ne sont pas anonymisées' do
         expect(described_class.non_anonymes).to eq [ evaluation_non_anonyme ]

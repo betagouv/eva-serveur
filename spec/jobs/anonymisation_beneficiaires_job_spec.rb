@@ -12,13 +12,7 @@ describe AnonymisationBeneficiairesJob, type: :job do
 
       described_class.perform_now
 
-      beneficiaire.reload
-      ancienne_evaluation.reload
-      evaluation_recente.reload
-
-      expect(beneficiaire.anonymise_le).to be_nil
-      expect(ancienne_evaluation.anonymise_le).to be_nil
-      expect(evaluation_recente.anonymise_le).to be_nil
+      expect(beneficiaire.reload.anonymise_le).to be_nil
     end
   end
 
@@ -39,9 +33,6 @@ describe AnonymisationBeneficiairesJob, type: :job do
       autre_evaluation_ancienne.reload
 
       expect(beneficiaire.anonymise_le).to eq date_anonymisation
-      expect(ancienne_evaluation.anonymise_le).to eq date_anonymisation
-      expect(autre_evaluation_ancienne.anonymise_le).to eq date_anonymisation
-
       expect(beneficiaire.nom).to eq 'nom généré'
     end
   end
@@ -49,24 +40,12 @@ describe AnonymisationBeneficiairesJob, type: :job do
   it "n'anonymise pas les bénéficiaires déjà annonymisé" do
     date_anonymisation = Time.zone.local(2025, 1, 2, 12, 0, 0)
     Timecop.freeze(date_anonymisation) do
-      annonymisiation_existante = Time.zone.local(2024, 1, 1, 0, 0, 0)
-      beneficiaire = create :beneficiaire, nom: 'nom', anonymise_le: annonymisiation_existante
-      ancienne_evaluation = create :evaluation, created_at: Date.new(2019, 1, 1),
-                                                beneficiaire: beneficiaire,
-                                                anonymise_le: annonymisiation_existante
-      evaluation_recente = create :evaluation, created_at: Date.new(2019, 1, 1),
-                                               beneficiaire: beneficiaire,
-                                               anonymise_le: annonymisiation_existante
+      annonymisation_existante = Time.zone.local(2024, 1, 1, 0, 0, 0)
+      beneficiaire = create :beneficiaire, nom: 'nom', anonymise_le: annonymisation_existante
 
       described_class.perform_now
 
-      beneficiaire.reload
-      ancienne_evaluation.reload
-      evaluation_recente.reload
-
-      expect(beneficiaire.anonymise_le).to eq annonymisiation_existante
-      expect(ancienne_evaluation.anonymise_le).to eq annonymisiation_existante
-      expect(evaluation_recente.anonymise_le).to eq annonymisiation_existante
+      expect(beneficiaire.reload.anonymise_le).to eq annonymisation_existante
     end
   end
 end

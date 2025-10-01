@@ -155,7 +155,7 @@ describe 'Evaluation', type: :request do
 
     describe 'PATCH /evaluations/:id' do
       let!(:beneficiaire) { create :beneficiaire, nom: 'Roger' }
-      let!(:evaluation) { create :evaluation, email: 'monemail@eva.fr', beneficiaire: beneficiaire }
+      let!(:evaluation) { create :evaluation, beneficiaire: beneficiaire }
 
       context 'quand une requête est invalide pour un enum de données sociodémographiques' do
         let(:params) do

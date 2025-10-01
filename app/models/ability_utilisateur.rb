@@ -45,6 +45,7 @@ class AbilityUtilisateur
   end
 
   def droit_evaluation(compte)
+    can :read, ActiveAdmin::Page, name: "Comparaison"
     cannot :create, Evaluation
     can :read, Evaluation, responsable_suivi_id: compte.id
     can %i[read destroy mise_en_action
@@ -71,7 +72,6 @@ class AbilityUtilisateur
   def droit_beneficiaire(compte)
     cannot(:destroy, Beneficiaire)
     can(:destroy, Beneficiaire) { |b| b.evaluations.empty? } if compte.au_moins_admin?
-
     can :read, Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
     can :read, Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }
     can :read, Beneficiaire, evaluations: {

@@ -51,4 +51,39 @@ ActiveAdmin.register Beneficiaire do
     render "admin/beneficiaires/modal_fusion"
     render "index", context: self
   end
+
+  controller do
+    before_action :evaluations_positionnement, only: :show
+    before_action :evaluations_diagnostic, only: :show
+
+    def find_resource
+      scoped_collection.includes(
+                         evaluations: {
+                           campagne: [
+                             :situations_configurations,
+                             :campagne_compte_autorisations,
+                             :compte
+                           ]
+                         }
+                       )
+                       .where(id: params[:id])
+                       .first!
+    end
+
+    def evaluations_accessibles
+      @evaluations_accessibles ||= resource.evaluations.accessible_by(current_ability)
+    end
+
+    def evaluations_positionnement
+      @evaluations_positionnement ||= evaluations_accessibles.positionnement
+                                                             .includes([ :campagne ])
+                                                             .order(created_at: :desc)
+    end
+
+    def evaluations_diagnostic
+      @evaluations_diagnostic ||= evaluations_accessibles.diagnostic
+                                                         .includes([ :campagne ])
+                                                         .order(created_at: :desc)
+    end
+  end
 end

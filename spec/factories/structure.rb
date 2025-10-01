@@ -13,6 +13,7 @@ FactoryBot.define do
     sequence(:nom) { |n| "structure #{n}" }
     type_structure { 'mission_locale' }
     code_postal { '75012' }
+    type { 'StructureLocale' }
 
     trait :avec_admin do
       after(:create) do |structure|
@@ -20,7 +21,11 @@ FactoryBot.define do
       end
     end
 
-    factory :structure_locale, class: StructureLocale.to_s
-    factory :structure_administrative, class: StructureAdministrative.to_s
+    factory :structure_locale, class: StructureLocale.to_s do
+      type { 'StructureLocale' }
+    end
+    factory :structure_administrative, class: StructureAdministrative.to_s do
+      type { 'StructureAdministrative' }
+    end
   end
 end

@@ -70,6 +70,10 @@ ActiveAdmin.register Beneficiaire do
                        .first!
     end
 
+    def scoped_collection
+      end_of_association_chain.includes(evaluations: { campagne: :compte })
+    end
+
     def evaluations_accessibles
       @evaluations_accessibles ||= resource.evaluations.accessible_by(current_ability)
     end

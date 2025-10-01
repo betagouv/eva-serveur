@@ -5,6 +5,10 @@ fr:
       retour-accueil: Retour à l'accueil
   erreurs:
     erreur:
+      403:
+        title: 403
+        titre: Erreur 403
+        description: Vous n'êtes pas autorisés à accéder à cette page.
       404:
         title: 404
         titre: Erreur 404

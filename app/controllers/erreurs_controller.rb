@@ -9,6 +9,10 @@ class ErreursController < ActionController::Base
     render "erreur", formats: :html, status: :not_found
   end
 
+  def forbidden
+    render "erreur", formats: :html, status: :forbidden
+  end
+
   def internal_serveur_error
     render "erreur", formats: :html, status: :internal_server_error
   end

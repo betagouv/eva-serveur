@@ -1,7 +1,8 @@
 <div class="page-pdf page adaptation-pdf page-comparaison">
   <%= render Pdf::EntetePageComponent.new(
     nom_beneficiaire: beneficiaire.nom,
-    code_beneficiaire: beneficiaire.code_beneficiaire
+    code_beneficiaire: beneficiaire.code_beneficiaire,
+    structure: structure.nom
   ) %>
   <div class="page-pdf__contenu">
     <h1 class="page-comparaison__titre">Comparaison des résultats</h1>

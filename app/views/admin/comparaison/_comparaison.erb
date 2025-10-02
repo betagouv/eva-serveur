@@ -7,10 +7,9 @@
           <table id="table-7">
             <thead>
               <tr>
-                <th class="page-comparaison__min-column" role="columnheader"></th>
-
+                <th scope="col" class="page-comparaison__min-column">Profil général</th>
                 <% 2.times do |i| %>
-                  <th class="page-comparaison__min-column fr-cell--center">
+                  <th scope="col" class="page-comparaison__min-column fr-cell--center">
                     <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
                   </th>
                 <% end %>
@@ -18,8 +17,7 @@
             </thead>
             <tbody>
               <tr id="table-litteratie-row-key-1" data-row-key="1">
-                <th scope="row"> Profil général </th>
-
+                <th scope="row">Profil général</th>
                 <% 2.times do |i| %>
                   <td>
                     <div class="page-comparaison__container-badge">

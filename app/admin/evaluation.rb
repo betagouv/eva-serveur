@@ -164,7 +164,8 @@ ActiveAdmin.register Evaluation do
       html_content = render_to_string(template: "admin/evaluations/show", layout: "application",
                                       locals: { resource: resource })
 
-      pdf_path = Html2Pdf.genere_pdf_depuis_html(html_content)
+      pdf_path = Pdf::Generator.generate(html_content)
+
       if pdf_path == false
         flash[:error] = t(".erreur_generation_pdf")
         redirect_to admin_evaluation_path(resource)

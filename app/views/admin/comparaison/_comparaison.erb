@@ -7,19 +7,17 @@
           <table id="table-7">
             <thead>
               <tr>
-                <th scope="col" class="page-comparaison__min-column">Profil général</th>
+                <th class="page-comparaison__min-column" role="columnheader"></th>
                 <% 2.times do |i| %>
-                  <th scope="col" class="page-comparaison__min-column fr-cell--center">
+                  <th class="page-comparaison__min-column fr-cell--center">
                     <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
                   </th>
                 <% end %>
               </tr>
-            </thead>
-            <tbody>
-              <tr id="table-litteratie-row-key-1" data-row-key="1">
-                <th scope="row">Profil général</th>
+              <tr>
+                <th class="page-comparaison__min-column" role="columnheader">Profil général</th>
                 <% 2.times do |i| %>
-                  <td>
+                  <th class="page-comparaison__min-column fr-cell--center">
                     <div class="page-comparaison__container-badge">
                       <% if tableau[i][:profil] %>
                         <%= render(Badge::ProfilComponent.new(tableau[i][:profil], competence)) %>
@@ -27,9 +25,11 @@
                         -
                       <% end %>
                     </div>
-                  </td>
+                  </th>
                 <% end %>
               </tr>
+            </thead>
+            <tbody>
               <% index = 1 %>
               <% sous_competences.each do |sous_competence|%>
                 <% index += 1 %>

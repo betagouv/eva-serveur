@@ -9,10 +9,14 @@
   <% if @date.present? || @structure.present? %>
     <div class="en-tete-page__contexte">
       <div class="en-tete-page__date-restitution">
-        <%= l @date, format: :avec_heure %>
+        <% if @date.present? %>
+          <%= l @date, format: :avec_heure %>
+        <% end %>
       </div>
       <div class="en-tete-page__structure">
-        <span><%= @structure %></span>
+        <% if @structure.present? %>
+          <span><%= @structure %></span>
+        <% end %>
       </div>
     </div>
   <% end %>

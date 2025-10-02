@@ -15,7 +15,7 @@ ActiveAdmin.register_page "Comparaison" do
     html_content = render_to_string(
       template: "admin/comparaison/pdf",
       layout: "application",
-      locals: { comparaison: comparaison, beneficiaire: beneficiaire }
+      locals: { comparaison: comparaison, beneficiaire: beneficiaire, structure: structure }
     )
 
     pdf_path = Html2Pdf.genere_pdf_depuis_html(html_content)
@@ -29,14 +29,26 @@ ActiveAdmin.register_page "Comparaison" do
   end
 
   controller do
-    helper_method :comparaison
+    helper_method :comparaison, :structure
+
+    def evaluations
+      @evaluations ||= Evaluation.where(id: params[:evaluation_ids])
+                            .includes(campagne: { situations_configurations: :situation })
+    end
 
     def comparaison
       @comparaison ||= begin
-        evaluations = Evaluation.where(id: params[:evaluation_ids])
-                              .includes(campagne: { situations_configurations: :situation })
         ComparaisonEvaluations.new(evaluations)
       end
+    end
+
+    def structure
+      compte_id = Campagne.joins(:evaluations)
+                         .where(evaluations: evaluations)
+                         .select(:compte_id)
+      structure_id = Compte.where(id: compte_id)
+                           .select(:structure_id)
+      Structure.find structure_id
     end
 
     def disposition

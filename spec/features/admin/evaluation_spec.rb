@@ -281,7 +281,7 @@ describe 'Admin - Evaluation', type: :feature do
 
           it 'erreur timeout à la génération du pdf' do
             allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
-            expect(Html2Pdf).to receive(:genere_pdf_depuis_html).and_return(false)
+            expect(Pdf::Generator).to receive(:genere).and_return(false)
             visit admin_evaluation_path(mon_evaluation, format: :pdf)
             expect(page).to have_content 'La génération du PDF a échoué. Veuillez réessayer dans un moment'
           end

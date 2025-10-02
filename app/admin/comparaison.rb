@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Comparaison" do
       locals: { comparaison: comparaison, beneficiaire: beneficiaire, structure: structure }
     )
 
-    pdf_path = Html2Pdf.genere_pdf_depuis_html(html_content)
+    pdf_path = Pdf::Generator.generate(html_content)
     if pdf_path == false
       flash[:error] = t(".erreur_generation_pdf")
       redirect_to admin_beneficiaire_comparaison_path(evaluation_ids: params[:evaluation_ids])

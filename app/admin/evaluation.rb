@@ -95,12 +95,10 @@ ActiveAdmin.register Evaluation do
       trad_niveau(evaluation, :positionnement_niveau_numeratie)
     end
     column("reponses_redaction") do |evaluation|
-      @reponses_redaction_par_evaluation ||= Evaluation
-        .reponses_redaction_pour_evaluations(collection.pluck(:id))
-      reponses = @reponses_redaction_par_evaluation[evaluation.id] || []
-      reponses.map.with_index(1) do |reponse, index|
-        "Rédaction #{index} :\n#{reponse}"
-      end.join("\n-----\n")
+      evaluation.redactions
+        &.map
+        &.with_index(1) { |reponse, index| "Rédaction #{index} :\n#{reponse}" }
+        &.join("\n-----\n")
     end
 
     before_filter do |sheet|
@@ -110,10 +108,6 @@ ActiveAdmin.register Evaluation do
         ]
         @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
       end
-    end
-
-    after_filter do |sheet|
-      @reponses_redaction_par_evaluation = nil
     end
   end
 

@@ -254,17 +254,26 @@ describe Restitution::Globale do
 
   describe '#persiste' do
     let(:restitutions) { [] }
-    let(:interpretations) { { synthese_competences_de_base: 'illettrisme_potentiel' } }
+    let(:redactions) { [ "Elle est tombée", "Elle a glissé puis est tombée" ] }
+    let(:champs_persistes) { {
+      synthese_competences_de_base: 'illettrisme_potentiel',
+      completude: :complete,
+      redactions: redactions
+    } }
     let(:completude) { double }
 
     before do
-      allow(restitution_globale).to receive(:interpretations).and_return(interpretations)
+      allow(evaluation).to receive(:id).and_return("un id")
+      allow(restitution_globale).to receive(:interpretations)
+        .and_return({ synthese_competences_de_base: 'illettrisme_potentiel' })
       allow(completude).to receive(:calcule).and_return(:complete)
       allow(Restitution::Completude).to receive(:new).and_return(completude)
+      allow(Evaluation).to receive(:reponses_redaction_pour_evaluations)
+        .with([ evaluation.id ]).and_return({ evaluation.id => redactions })
     end
 
     it do
-      expect(evaluation).to receive(:update).with(interpretations.merge(completude: :complete))
+      expect(evaluation).to receive(:update).with(champs_persistes)
       restitution_globale.persiste
     end
   end

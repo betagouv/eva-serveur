@@ -17,7 +17,11 @@ module Restitution
 
     def persiste
       restitution_complete = Restitution::Completude.new(evaluation, restitutions).calcule
-      @evaluation.update interpretations.merge(completude: restitution_complete)
+      redactions = Evaluation.reponses_redaction_pour_evaluations([ evaluation.id ])[evaluation.id]
+      @evaluation.update interpretations.merge(
+        completude: restitution_complete,
+        redactions: redactions
+      )
     end
 
     def beneficiaire

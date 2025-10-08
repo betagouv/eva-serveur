@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_01_145843) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_08_130855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -222,6 +222,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_01_145843) do
     t.uuid "responsable_suivi_id"
     t.string "positionnement_niveau_litteratie"
     t.string "positionnement_niveau_numeratie"
+    t.jsonb "redactions"
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
     t.index ["deleted_at"], name: "index_evaluations_on_deleted_at"

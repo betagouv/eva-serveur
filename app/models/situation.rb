@@ -4,6 +4,7 @@ class Situation < ApplicationRecord
   PLAN_DE_LA_VILLE = "plan_de_la_ville"
   PLACE_DU_MARCHE = "place_du_marche"
   DIAG_RISQUES_ENTREPRISE = "diag_risques_entreprise"
+  EVALUATION_IMPACT_GENERAL = "evaluation_impact_general"
   COULEURS_BORDURES = [ "#6E85FD", "#82ABE8", "#8FC6DA", "#9FD9C9", "#ABCE8F", "#DFBC78", "#FBAF55",
                        "#FD8554", "#FD5965", "#FD586D" ].freeze
 

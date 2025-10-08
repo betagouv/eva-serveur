@@ -1,0 +1,13 @@
+<div id="evaluation-impact-general" class="fr-mb-6w">
+  <h2 class="evaluation__titre"><%= t(".titre") %></h2>
+
+  <div class="panel">
+    <div class="fr-pl-4w fr-pr-4w">
+      <p><%= t(".incomplet.description") %></p>
+      <% url = evaluation_impact_general.lien_poursuivre_evaluation_impact %>
+      <%= render BoutonComponent.new(url, type: :primary) do %>
+        <%= t(".incomplet.action") %>
+      <% end %>
+    </div>
+  </div>
+</div>

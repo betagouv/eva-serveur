@@ -83,3 +83,11 @@ RSpec/DescribeClass:
 
 Lint/DuplicateMethods:
   Enabled: true
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/integrations/ability_spec.rb
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/integrations/ability_spec.rb

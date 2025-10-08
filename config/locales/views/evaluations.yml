@@ -207,6 +207,11 @@ fr:
         callout:
           titre: Votre taux de risque est de %{pourcentage_risque}%
           description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
+      mesure_des_impacts:
+        titre: "Mesure des impacts"
+        incomplet:
+          description: Complétez le questionnaire pour approfondir le diagnostic
+          action: Continuer le diagnostic
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       redaction: Rédaction

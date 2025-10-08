@@ -43,7 +43,7 @@ class AbilityUtilisateur
   end
 
   def droit_evaluation(compte)
-    can :read, ActiveAdmin::Page, name: "Comparaison"
+    can %i[read download_pdf], ActiveAdmin::Page, name: "Comparaison"
     cannot :create, Evaluation
     can :read, Evaluation, responsable_suivi_id: compte.id
     can %i[read destroy mise_en_action

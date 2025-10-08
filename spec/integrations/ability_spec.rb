@@ -275,6 +275,12 @@ describe Ability do
                                     name: 'Comparaison')
     end
 
+    it do
+      expect(subject).to be_able_to(:download_pdf,
+                                    ActiveAdmin::Page,
+                                    name: 'Comparaison')
+    end
+
     it { is_expected.not_to be_able_to(:manage, Compte.new) }
     it { is_expected.not_to be_able_to(:manage, Structure.new) }
     it { is_expected.not_to be_able_to(%i[destroy create update], Situation.new) }

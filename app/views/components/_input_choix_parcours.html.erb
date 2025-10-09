@@ -1,7 +1,8 @@
 <div class="choix-item" tabindex="0">
-  <h4 class='choix-item__titre'>
-    <%= parcours_type.libelle %>
-  </h4>
+  <p class='choix-item__titre'>
+    <span class="sr-only"><%= t("admin.campagnes.form.choix_parcours") %> : <%= parcours_type.libelle %></span>
+    <span aria-hidden="true"><%= parcours_type.libelle %></span>
+  </p>
 
   <div class="choix-item__description">
     <%= md(parcours_type.description) %>

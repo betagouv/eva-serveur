@@ -10,8 +10,6 @@ fr:
         updated_at: Mis à jour le
         nom: Nom
         financeur: Financeur
-        financeur_true: Oui
-        financeur_false: Non
     errors:
       models:
         opco:

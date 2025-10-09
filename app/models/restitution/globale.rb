@@ -117,6 +117,10 @@ module Restitution
       @diag_risques_entreprise ||= selectionne_derniere_restitution(Situation::DIAG_RISQUES_ENTREPRISE)
     end
 
+    def evaluation_impact_general
+      @evaluation_impact_general ||= selectionne_derniere_restitution(Situation::EVALUATION_IMPACT_GENERAL)
+    end
+
     private
 
     def extraie_competences_depuis_restitutions

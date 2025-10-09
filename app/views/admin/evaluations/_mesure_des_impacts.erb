@@ -1,13 +1,19 @@
+<% complet = evaluation_impact_general.present? %>
+
 <div id="evaluation-impact-general" class="fr-mb-6w">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
 
   <div class="panel">
     <div class="fr-pl-4w fr-pr-4w">
-      <p><%= t(".incomplet.description") %></p>
+      <% if complet %>
+        <p class="fr-mb-0"><%= t(".complet.description") %></p>
+      <% else %>
+        <p><%= t(".incomplet.description") %></p>
 
-      <% url = "#{ENV['URL_EVA_ENTREPRISES']}/evaluation-impact?evaluation_id=#{params[:id]}" %>
-      <%= render BoutonComponent.new(url, type: :primary) do %>
-        <%= t(".incomplet.action") %>
+        <% url = "#{ENV['URL_EVA_ENTREPRISES']}/evaluation-impact?evaluation_id=#{params[:id]}" %>
+        <%= render BoutonComponent.new(url, type: :primary) do %>
+          <%= t(".incomplet.action") %>
+        <% end %>
       <% end %>
     </div>
   </div>

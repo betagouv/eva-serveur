@@ -97,7 +97,9 @@ ActiveAdmin.register Evaluation do
     column("reponses_redaction") do |evaluation|
       evaluation.redactions
         &.map
-        &.with_index(1) { |reponse, index| "Rédaction #{index} :\n#{reponse}" }
+        &.with_index(1) { |reponse, index|
+          I18n.t("active_admin.xls.evaluation.redaction", index: index, reponse: reponse)
+        }
         &.join("\n-----\n")
     end
 

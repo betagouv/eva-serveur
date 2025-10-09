@@ -116,3 +116,6 @@ fr:
         positionnement_niveau_litteratie: Positionnement Littératie
         positionnement_niveau_numeratie: Positionnement Numératie
         reponses_redaction: Réponses rédaction
+        redaction: |
+          Rédaction %{index} :
+          %{reponse}

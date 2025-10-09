@@ -97,7 +97,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
   end
 
   evaluation_impact_general = restitution_globale.evaluation_impact_general
-  if evaluation_impact_general && pourcentage_risque
+  if pourcentage_risque
     render partial: "mesure_des_impacts",
 locals: { evaluation_impact_general: evaluation_impact_general, pdf: pdf }
   end

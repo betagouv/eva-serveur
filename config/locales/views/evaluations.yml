@@ -209,6 +209,8 @@ fr:
           description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
       mesure_des_impacts:
         titre: "Mesure des impacts"
+        complet:
+          description: Le questionnaire est terminé
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic
           action: Continuer le diagnostic

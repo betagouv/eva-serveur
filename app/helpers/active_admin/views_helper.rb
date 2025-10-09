@@ -6,5 +6,6 @@ module ActiveAdmin
     include PriseEnMainHelper
     include TranscriptionHelper
     include QuestionHelper
+    include OpcoHelper
   end
 end

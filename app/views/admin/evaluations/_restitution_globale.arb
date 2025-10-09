@@ -91,15 +91,18 @@ div class: "evaluation__restitution-globale #{class_css}" do
   if diag_risques_entreprise
     pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
     if pourcentage_risque
-      render partial: "mesure_des_risques",
-  locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
+      render(
+        partial: "mesure_des_risques",
+        locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
+      )
     end
   end
 
-  evaluation_impact_general = restitution_globale.evaluation_impact_general
   if pourcentage_risque
-    render partial: "mesure_des_impacts",
-locals: { evaluation_impact_general: evaluation_impact_general, pdf: pdf }
+    render(
+      partial: "mesure_des_impacts",
+      locals: { pdf: pdf }
+    )
   end
 
   render Evaluation::AnnexeDiagnosticComponent.new(

@@ -1,11 +1,12 @@
 <div class="choix-item" tabindex="0">
   <div class='choix-item__container'>
-    <h4 class='choix-item__titre'>
-      <%= t(".#{situation}.nom") %> ·
+    <p class='choix-item__titre'>
+      <span class="sr-only"><%= t("admin.campagnes.form.module_optionnel") %> : <%= t(".#{situation}.nom") %></span>
+      <span aria-hidden="true"><%= t(".#{situation}.nom") %> ·</span>
       <span class="choix-item__duree">
         Durée moyenne : <%= t(".#{situation}.duree_moyenne") %>
       </span>
-    </h4>
+    </p>
 
     <div class="choix-item__description">
       <%= t(".#{situation}.description") %>

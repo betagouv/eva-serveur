@@ -21,6 +21,7 @@ fr:
         personnalisation: Personnalisation
         explication_personnalisation: |
           Les modules suivants sont optionnels. Vous pouvez les intégrer dans votre programme d’évaluation pour compléter les parcours sélectionnés.
+        module_optionnel: Module optionnel
         explication_libelle: |
           Le libellé d'une campagne permet de retrouver facilement vos évaluations.
 

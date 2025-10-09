@@ -87,8 +87,12 @@
   }
 
   .nouvelle-campagne {
-    h3 {
+    .fieldset-title span {
       @include h3();
+      @include titre();
+      border: none;
+      background: none;
+      padding: 0;
       margin-bottom: 1rem;
     }
 

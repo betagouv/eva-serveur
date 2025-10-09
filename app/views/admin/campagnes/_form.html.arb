@@ -17,8 +17,8 @@ div class: "nouvelle-campagne" do
           h2 "Programme"
           div id: "zone-choix-type-programme" do
             div class: "panel" do
-              h3 t(".choix_type_programme")
-              f.inputs class: "input-choix input-choix-type-programme" do
+              f.inputs class: "input-choix input-choix-type-programme",
+                       name: t(".choix_type_programme") do
                 f.input :type_programme,
                         as: :radio,
                         collection: collection_types_programme,
@@ -30,18 +30,17 @@ div class: "nouvelle-campagne" do
           div id: "zone-choix-parcours",
               class: f.object.type_programme.present? ? "" : "hidden" do
             div class: "panel" do
-              h3 t(".choix_parcours")
-              div class: "panel__description description--secondaire" do
-                md t(".explication_choix_programme")
-              end
-
               ParcoursType::TYPES_DE_PROGRAMME.each do |type_programme|
                 classes_type_programme = type_programme.to_s
                 if f.object.type_programme != type_programme.to_s
                   classes_type_programme += " hidden"
                 end
                 div class: classes_type_programme do
-                  f.inputs class: "input-choix input-choix-option-parcours-type" do
+                  f.inputs class: "input-choix input-choix-option-parcours-type",
+                           name: t(".choix_parcours") do
+                    div class: "panel__description description--secondaire" do
+                      md t(".explication_choix_programme")
+                    end
                     collection = collection_parcours_type(parcours_type.send(type_programme))
                     f.input :parcours_type, as: :radio,
                                             collection: collection,
@@ -57,9 +56,9 @@ div class: "nouvelle-campagne" do
               class: f.object.parcours_type_id.present? ? "" : "hidden" do
             h2 t(".personnalisation")
             div class: "panel" do
-              para t(".explication_personnalisation"),
-                   class: "panel__description description--secondaire"
               f.inputs class: "input-choix input-choix-option-personnalisation" do
+                para t(".explication_personnalisation"),
+                     class: "panel__description description--secondaire"
                 f.input :options_personnalisation,
                         as: :check_boxes,
                         collection: collection_options_personnalisation,

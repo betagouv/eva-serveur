@@ -1,15 +1,15 @@
 <div class="choix-item" tabindex="0">
   <div class="choix-item__icone">
     <% if programme == :diagnostic %>
-      <%= inline_svg_tag "icone_diagnostic.svg", class: "icone-pin" %>
+      <%= inline_svg_tag "icone_diagnostic.svg", class: "icone-pin", aria_hidden: "true" %>
     <% elsif programme == :positionnement %>
-      <%= inline_svg_tag "icone_positionnement.svg", class: "icone-loupe" %>
+      <%= inline_svg_tag "icone_positionnement.svg", class: "icone-loupe", aria_hidden: "true" %>
     <% end %>
   </div>
-
-  <h4 class='choix-item__titre'>
-    <%= t(".#{programme}.libelle") %>
-  </h4>
+  <p class="choix-item__titre">
+    <span class="sr-only"><%= t("admin.campagnes.form.choix_type_programme") %> : <%= t(".#{programme}.libelle") %></span>
+    <span aria-hidden="true"><%= t(".#{programme}.libelle") %></span>
+  </p>
   <div class="choix-item__description">
     <%= md(t(".#{programme}.description")) %>
   </div>

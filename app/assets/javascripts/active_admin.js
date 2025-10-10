@@ -12,6 +12,7 @@
 //= require autocomplete_recherche
 //= require filtres_dates
 //= require form_toggle_submit
+//= require toggle_usage_structure
 //= require menu_mobile
 //= require bouton_menu_actions
 //= require cgu

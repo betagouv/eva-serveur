@@ -7,6 +7,7 @@ div class: "panel nouvelle_structure" do
       f.input :nom
       f.input :type_structure, as: :select, collection: collection_types_structures
       f.input :usage, as: :radio, collection: StructureLocale::USAGE
+      f.input :opco, as: :select, collection: Opco.all, input_html: { id: "opco_field" }
       f.input :code_postal
       f.input :siret
       if can?(:manage, Compte)

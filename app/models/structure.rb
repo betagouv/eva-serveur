@@ -1,6 +1,7 @@
 class Structure < ApplicationRecord
   has_ancestry
   acts_as_paranoid
+  belongs_to :opco, optional: true
 
   alias structure_referente parent
   alias structure_referente= parent=

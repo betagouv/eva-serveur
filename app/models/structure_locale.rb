@@ -38,7 +38,7 @@ class StructureLocale < Structure
     service_insertion_collectivite: "usagers"
   }.freeze
 
-  USAGE = ["Eva: bénéficiaires", "Eva: entreprises"].freeze
+  USAGE = [ "Eva: bénéficiaires", "Eva: entreprises" ].freeze
 
   validates :code_postal, :type_structure, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }

@@ -3,7 +3,7 @@ ActiveAdmin.register StructureLocale do
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
-                :autorisation_creation_campagne
+                :autorisation_creation_campagne, :usage, :opco_id
 
   filter :nom
   filter :type_structure,

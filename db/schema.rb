@@ -205,8 +205,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_10_132454) do
   end
 
   create_table "evaluations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "campagne_id"
     t.datetime "terminee_le"
     t.datetime "debutee_le"
@@ -311,8 +311,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_10_132454) do
 
   create_table "questionnaires_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.uuid "questionnaire_id"
     t.uuid "question_id"
     t.datetime "deleted_at"
@@ -322,8 +322,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_10_132454) do
   end
 
   create_table "questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "type"
     t.string "description"
     t.string "reponse_placeholder"
@@ -395,7 +395,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_10_132454) do
     t.float "longitude"
     t.string "type_structure"
     t.string "region"
-    t.datetime "anonymise_le"
+    t.datetime "anonymise_le", precision: nil
     t.string "type"
     t.datetime "deleted_at"
     t.string "ancestry", null: false, collation: "C"

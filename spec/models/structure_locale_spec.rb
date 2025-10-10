@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 describe StructureLocale, type: :model do
-  it { is_expected.to validate_presence_of(:code_postal) }
-  it { is_expected.to validate_presence_of(:type_structure) }
-  it { is_expected.to validate_numericality_of(:code_postal) }
-  it { is_expected.to validate_length_of(:code_postal).is_equal_to(5) }
+  describe 'validations' do
+    it do
+     expect(subject).to validate_presence_of(:code_postal)
+     expect(subject).to validate_presence_of(:type_structure)
+     expect(subject).to validate_numericality_of(:code_postal)
+     expect(subject).to validate_length_of(:code_postal).is_equal_to(5)
+        end
+  end
 
   it do
     types_structures = %w[
@@ -32,6 +36,8 @@ describe StructureLocale, type: :model do
   end
 
   describe '#usage' do
-    it { is_expected.to validate_inclusion_of(:usage).in_array(%w["Eva: bénéficiaires" "Eva: entreprises"]) }
+    it {
+ expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",
+"Eva: entreprises" ]) }
   end
 end

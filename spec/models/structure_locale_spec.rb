@@ -30,4 +30,8 @@ describe StructureLocale, type: :model do
                             .display_name).to eql('eva - 75012')
     end
   end
+
+  describe '#usage' do
+    it { is_expected.to validate_inclusion_of(:usage).in_array(%w["Eva: bénéficiaires" "Eva: entreprises"]) }
+  end
 end

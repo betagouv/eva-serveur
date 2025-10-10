@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_10_093557) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.text "body"
     t.string "resource_type"
     t.string "author_type"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "resource_id"
     t.uuid "author_id"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "active_storage_attachments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.uuid "blob_id"
     t.uuid "record_id"
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -70,8 +70,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "annonce_generales", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "texte"
     t.boolean "afficher"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "beneficiaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -98,12 +98,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "campagnes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "compte_id"
     t.boolean "affiche_competences_fortes", default: true
     t.uuid "parcours_type_id"
-    t.datetime "anonymise_le"
+    t.datetime "anonymise_le", precision: nil
     t.datetime "deleted_at"
     t.boolean "active", default: true
     t.boolean "privee", default: false
@@ -118,8 +118,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "choix", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "intitule"
     t.integer "type_choix"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "position"
     t.uuid "question_id"
     t.string "nom_technique"
@@ -131,10 +131,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "role", default: "conseiller"
     t.uuid "structure_id"
     t.integer "statut_validation", default: 0
@@ -142,14 +142,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.string "prenom"
     t.string "telephone"
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "anonymise_le"
+    t.datetime "anonymise_le", precision: nil
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.datetime "deleted_at"
     t.boolean "mode_tutoriel", default: true
@@ -208,8 +208,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.uuid "campagne_id"
-    t.datetime "terminee_le"
-    t.datetime "debutee_le"
+    t.datetime "terminee_le", precision: nil
+    t.datetime "debutee_le", precision: nil
     t.string "synthese_competences_de_base"
     t.string "niveau_cefr"
     t.string "niveau_cnef"
@@ -234,9 +234,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "evenements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.jsonb "donnees", default: "{}", null: false
-    t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "date", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "session_id"
     t.integer "position"
     t.datetime "deleted_at"
@@ -272,8 +272,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.string "libelle"
     t.string "nom_technique"
     t.string "duree_moyenne"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.text "description"
     t.string "type_de_programme"
     t.datetime "deleted_at"
@@ -285,8 +285,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "parties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "session_id"
     t.jsonb "metriques", default: {}, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "evaluation_id"
     t.uuid "situation_id"
     t.datetime "deleted_at"
@@ -301,8 +301,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
 
   create_table "questionnaires", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "nom_technique"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_questionnaires_on_deleted_at"
@@ -348,8 +348,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
   create_table "situations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.string "nom_technique"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "questionnaire_id"
     t.uuid "questionnaire_entrainement_id"
     t.datetime "deleted_at"
@@ -362,8 +362,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
 
   create_table "situations_configurations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.uuid "campagne_id"
     t.uuid "situation_id"
     t.uuid "questionnaire_id"
@@ -381,16 +381,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.string "url"
     t.integer "categorie"
     t.integer "type_document"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position", default: 0
   end
 
   create_table "structures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.string "code_postal"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
     t.string "type_structure"
@@ -401,11 +401,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_09_110003) do
     t.string "ancestry", null: false, collation: "C"
     t.string "siret"
     t.boolean "autorisation_creation_campagne", default: true
+    t.string "usage", default: "Eva: bénéficiaires"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
     t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true, where: "(deleted_at IS NULL)"
     t.index ["type"], name: "index_structures_on_type"
+    t.index ["usage"], name: "index_structures_on_usage"
   end
 
   create_table "transcriptions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

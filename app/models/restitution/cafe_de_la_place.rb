@@ -81,6 +81,7 @@ module Restitution
 
       parcours_bas
     end
+    alias_method :profil, :niveau_litteratie
 
     def synthese
       {

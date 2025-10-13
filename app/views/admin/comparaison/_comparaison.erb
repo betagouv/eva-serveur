@@ -19,7 +19,7 @@
                   <% 2.times do |i| %>
                     <th class="page-comparaison__min-column fr-cell--center">
                       <div class="page-comparaison__container-badge">
-                        <% if competence == :numeratie && tableau[i][:restitution].incomplet? %>
+                        <% if competence == :numeratie && tableau[i][:restitution]&.incomplet? %>
                           <%= render(Evaluation::IconeIncompleteComponent.new) %>
                         <% end %>
                         <% if tableau[i][:profil] %>

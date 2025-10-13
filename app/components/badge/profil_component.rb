@@ -40,9 +40,6 @@ class Badge::ProfilComponent < ViewComponent::Base
     return t("non_teste", scope: scope) if @niveau.blank?
 
     interpretation = "positionnement_niveau_#{@competence}".to_sym
-
-    return t("#{interpretation}.indetermine", scope: scope) if @niveau.blank?
-
     t("#{interpretation}.#{@niveau}", scope: scope)
   end
 end

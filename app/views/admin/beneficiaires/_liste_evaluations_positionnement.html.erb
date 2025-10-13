@@ -31,17 +31,17 @@
       <% tableau.colonne(titre: t(".litteratie")) do |restitution| %>
         <% a_fait_litteratie = restitution.evaluation.campagne.avec_positionnement?(:litteratie) %>
         <div data-litteratie="<%= a_fait_litteratie %>">
-          <%= badge_positionnement(restitution.evaluation, :litteratie) %>
+          <%= render(Badge::ProfilComponent.new(restitution.litteratie&.profil, :litteratie)) %>
         </div>
       <% end %>
 
       <% tableau.colonne(titre: t(".numeratie")) do |restitution| %>
         <% a_fait_numeratie = restitution.evaluation.campagne.avec_positionnement?(:numeratie) %>
         <div data-numeratie="<%= a_fait_numeratie %>">
-          <% if restitution.numeratie.incomplet? %>
+          <% if restitution.numeratie&.incomplet? %>
             <%= render(Evaluation::IconeIncompleteComponent.new()) %>
           <% end %>
-          <%= render(Badge::ProfilComponent.new(restitution.numeratie.profil, :numeratie)) %>
+          <%= render(Badge::ProfilComponent.new(restitution.numeratie&.profil, :numeratie)) %>
         </div>
       <% end %>
 

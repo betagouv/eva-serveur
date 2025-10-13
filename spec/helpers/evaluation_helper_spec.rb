@@ -13,38 +13,4 @@ describe EvaluationHelper do
       expect(niveau_bas?(:profil_autre)).to be false
     end
   end
-
-  describe "#badge_positionnement" do
-    let(:campagne) { instance_double(Campagne) }
-    let(:evaluation) { instance_double(Evaluation, campagne: campagne) }
-
-    before do
-      allow(helper).to receive(:construit_badge).and_return("<fr-badge />".html_safe)
-    end
-
-    context "quand la campagne a un positionnement pour la compétence" do
-      before do
-        allow(campagne).to receive(:avec_positionnement?).with(:litteratie).and_return(true)
-        allow(evaluation).to receive(:positionnement_niveau_litteratie).and_return("profil1")
-      end
-
-      it "construit un badge avec le contenu traduit et le niveau" do
-        helper.badge_positionnement(evaluation, :litteratie)
-
-        expect(helper).to have_received(:construit_badge).with("profil1", :litteratie)
-      end
-    end
-
-    context "quand la campagne n’a pas de positionnement pour la compétence" do
-      before do
-        allow(campagne).to receive(:avec_positionnement?).with(:numeratie).and_return(false)
-      end
-
-      it "construit un badge avec 'Non testé' et niveau nil" do
-        helper.badge_positionnement(evaluation, :numeratie)
-
-        expect(helper).to have_received(:construit_badge).with(nil, :numeratie)
-      end
-    end
-  end
 end

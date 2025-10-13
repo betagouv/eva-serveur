@@ -41,20 +41,4 @@ module EvaluationHelper
   def place_du_marche
     restitution_pour_situation(Situation::PLACE_DU_MARCHE)
   end
-
-  def badge_positionnement(evaluation, competence)
-    if evaluation.campagne.avec_positionnement?(competence)
-      niveau = evaluation.send("positionnement_niveau_#{competence}")
-    else
-      niveau = nil
-    end
-
-    construit_badge(niveau, competence)
-  end
-
-  private
-
-  def construit_badge(niveau, competence)
-    render(Badge::ProfilComponent.new(niveau, competence))
-  end
 end

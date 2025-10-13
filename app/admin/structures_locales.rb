@@ -96,6 +96,7 @@ ActiveAdmin.register StructureLocale do
         if @current_compte.structure.blank?
           success.html do
             @current_compte.rejoindre_structure(resource)
+            CampagneCreateur.new(resource, @current_compte).cree_campagne_opco!
             redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")
           end
         end

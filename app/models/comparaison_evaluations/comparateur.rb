@@ -34,6 +34,7 @@ class ComparaisonEvaluations::Comparateur
 
     {
       evaluation: evaluation,
+      restitution: restitution,
       profil: profil,
       sous_competences: sous_competences
     }

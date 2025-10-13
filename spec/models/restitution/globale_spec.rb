@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe Restitution::Globale do
+  let(:restitutions) { [ double ] }
+  let(:evaluation) { double }
+
   let(:restitution_globale) do
     described_class.new restitutions: restitutions,
                         evaluation: evaluation
   end
-  let(:evaluation) { double }
 
   describe "#beneficiaire retourne le nom du bénéficiaire" do
     let(:restitutions) { [ double ] }
@@ -275,6 +277,14 @@ describe Restitution::Globale do
     it do
       expect(evaluation).to receive(:update).with(champs_persistes)
       restitution_globale.persiste
+    end
+  end
+
+  describe '#id' do
+    let(:evaluation) { double(id: 1) }
+
+    it "retourne l'id de l'évaluation" do
+      expect(restitution_globale.id).to eq 1
     end
   end
 end

@@ -20,30 +20,33 @@
     </div>
 
     <%= render TableauComponent.new(
-      collection: evaluations_positionnement,
+      collection: restitutions_positionnement,
       selectionnable: true,
       class: "liste-evaluations-positionnement__tableau"
     ) do |tableau| %>
-      <% tableau.colonne(titre: t(".created_at")) do |evaluation|%>
-        <% evaluation.created_at.strftime("%d/%m/%Y") %>
+      <% tableau.colonne(titre: t(".created_at")) do |restitution|%>
+        <% restitution.evaluation.created_at.strftime("%d/%m/%Y") %>
       <% end %>
 
-      <% tableau.colonne(titre: t(".litteratie")) do |evaluation| %>
-        <% a_fait_litteratie = evaluation.campagne.avec_positionnement?(:litteratie) %>
+      <% tableau.colonne(titre: t(".litteratie")) do |restitution| %>
+        <% a_fait_litteratie = restitution.evaluation.campagne.avec_positionnement?(:litteratie) %>
         <div data-litteratie="<%= a_fait_litteratie %>">
-          <%= badge_positionnement(evaluation, :litteratie) %>
+          <%= badge_positionnement(restitution.evaluation, :litteratie) %>
         </div>
       <% end %>
 
-      <% tableau.colonne(titre: t(".numeratie")) do |evaluation| %>
-        <% a_fait_numeratie = evaluation.campagne.avec_positionnement?(:numeratie) %>
+      <% tableau.colonne(titre: t(".numeratie")) do |restitution| %>
+        <% a_fait_numeratie = restitution.evaluation.campagne.avec_positionnement?(:numeratie) %>
         <div data-numeratie="<%= a_fait_numeratie %>">
-          <%= badge_positionnement(evaluation, :numeratie) %>
+          <% if restitution.numeratie.incomplet? %>
+            <%= render(Evaluation::IconeIncompleteComponent.new()) %>
+          <% end %>
+          <%= render(Badge::ProfilComponent.new(restitution.numeratie.profil, :numeratie)) %>
         </div>
       <% end %>
 
-      <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
-        <%= render MenuActionsComponent.new(evaluation,
+      <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |restitution| %>
+        <%= render MenuActionsComponent.new(restitution.evaluation,
           Evaluation::ACTIONS[:LIRE],
           Evaluation::ACTIONS[:EDITER],
           Evaluation::ACTIONS[:SUPPRIMER]
@@ -51,4 +54,5 @@
       <% end %>
     <% end %>
   </div>
+  <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
 <% end %>

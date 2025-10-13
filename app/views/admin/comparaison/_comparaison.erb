@@ -1,69 +1,75 @@
 <% if tableau.present? %>
   <%= render PanelComponent.new(titre: titre, classes: "panel--beneficiaire") do %>
     <div class="fr-table fr-m-0 fr-table--no-scroll page-comparaison__tableau" id="table-litteratie-component">
-    <div class="fr-table__wrapper">
-      <div class="fr-table__container">
-        <div class="fr-table__content">
-          <table id="table-7">
-            <thead>
-              <tr>
-                <th class="page-comparaison__min-column" role="columnheader"></th>
-                <% 2.times do |i| %>
-                  <th class="page-comparaison__min-column fr-cell--center">
-                    <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
-                  </th>
-                <% end %>
-              </tr>
-              <tr>
-                <th class="page-comparaison__min-column" role="columnheader">Profil général</th>
-                <% 2.times do |i| %>
-                  <th class="page-comparaison__min-column fr-cell--center">
-                    <div class="page-comparaison__container-badge">
-                      <% if tableau[i][:profil] %>
-                        <%= render(Badge::ProfilComponent.new(tableau[i][:profil], competence)) %>
-                      <% else %>
-                        -
-                      <% end %>
-                    </div>
-                  </th>
-                <% end %>
-              </tr>
-            </thead>
-            <tbody>
-              <% index = 1 %>
-              <% sous_competences.each do |sous_competence|%>
-                <% index += 1 %>
-                <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
-                  <th scope="row">
-                    <%= I18n.t("admin.evaluations.positionnement.sous_competences.#{competence}.#{sous_competence}.titre") %>
-                  </th>
+      <div class="fr-table__wrapper">
+        <div class="fr-table__container">
+          <div class="fr-table__content">
+            <table id="table-7">
+              <thead>
+                <tr>
+                  <th class="page-comparaison__min-column" role="columnheader"></th>
                   <% 2.times do |i| %>
-                    <td>
+                    <th class="page-comparaison__min-column fr-cell--center">
+                      <%= tableau[i][:evaluation] ? I18n.l(tableau[i][:evaluation].debutee_le, format: :sans_heure) : "-" %>
+                    </th>
+                  <% end %>
+                </tr>
+                <tr>
+                  <th class="page-comparaison__min-column" role="columnheader">Profil général</th>
+                  <% 2.times do |i| %>
+                    <th class="page-comparaison__min-column fr-cell--center">
                       <div class="page-comparaison__container-badge">
-                        <% if tableau[i][:sous_competences] && tableau[i][:sous_competences][sous_competence] %>
-                          <% if competence == :litteratie %>
-                            <%= render(Badge::ProfilComponent.new(tableau[i][:sous_competences][sous_competence].profil, competence)) %>
-                          <% elsif competence == :numeratie %>
-                            <%= render BarreSegmenteeComponent.new(
-                              nombre_questions_reussies: tableau[i][:sous_competences][sous_competence].nombre_questions_reussies,
-                              nombre_questions_echecs: tableau[i][:sous_competences][sous_competence].nombre_questions_echecs,
-                              nombre_questions_non_passees: tableau[i][:sous_competences][sous_competence].nombre_questions_non_passees,
-                              pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite,
-                            ) %>
-                          <% end %>
+                        <% if competence == :numeratie && tableau[i][:restitution].incomplet? %>
+                          <%= render(Evaluation::IconeIncompleteComponent.new) %>
+                        <% end %>
+                        <% if tableau[i][:profil] %>
+                          <%= render(Badge::ProfilComponent.new(tableau[i][:profil], competence)) %>
                         <% else %>
                           -
                         <% end %>
                       </div>
-                    </td>
+                    </th>
                   <% end %>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% index = 1 %>
+                <% sous_competences.each do |sous_competence|%>
+                  <% index += 1 %>
+                  <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
+                    <th scope="row">
+                      <%= I18n.t("admin.evaluations.positionnement.sous_competences.#{competence}.#{sous_competence}.titre") %>
+                    </th>
+                    <% 2.times do |i| %>
+                      <td>
+                        <div class="page-comparaison__container-badge">
+                          <% if tableau[i][:sous_competences] && tableau[i][:sous_competences][sous_competence] %>
+                            <% if competence == :litteratie %>
+                              <%= render(Badge::ProfilComponent.new(tableau[i][:sous_competences][sous_competence].profil, competence)) %>
+                            <% elsif competence == :numeratie %>
+                              <%= render BarreSegmenteeComponent.new(
+                                nombre_questions_reussies: tableau[i][:sous_competences][sous_competence].nombre_questions_reussies,
+                                nombre_questions_echecs: tableau[i][:sous_competences][sous_competence].nombre_questions_echecs,
+                                nombre_questions_non_passees: tableau[i][:sous_competences][sous_competence].nombre_questions_non_passees,
+                                pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite,
+                              ) %>
+                            <% end %>
+                          <% else %>
+                            -
+                          <% end %>
+                        </div>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <% if competence == :numeratie %>
+      <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
+    <% end %>
   <% end %>
 <% end %>

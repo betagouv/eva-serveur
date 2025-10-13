@@ -15,11 +15,11 @@ div class: "page-beneficiaire" do
     description: I18n.t("admin.beneficiaires.show.carte_partage_code.description")
   )
 
-  if evaluations_positionnement.present?
+  if restitutions_positionnement.present?
     render partial: "admin/beneficiaires/liste_evaluations_positionnement",
            locals: {
              beneficiaire: beneficiaire,
-             evaluations_positionnement: evaluations_positionnement
+             restitutions_positionnement: restitutions_positionnement
            }
   end
 

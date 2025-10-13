@@ -108,6 +108,11 @@ module Restitution
 
       Competence::ProfilEvacob.new(self, "profil_numeratie", niveau_numeratie).profil_numeratie
     end
+    alias_method :profil, :profil_numeratie
+
+    def incomplet?
+      profil_numeratie != ::Competence::NIVEAU_INDETERMINE && !termine?
+    end
 
     def a_passe_des_questions_de_rattrapage?
       evenements_rattrapage = MetriquesHelper

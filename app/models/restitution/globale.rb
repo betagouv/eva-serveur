@@ -3,6 +3,7 @@ module Restitution
     attr_reader :evaluation, :restitutions,
                 NIVEAU_INDETERMINE = :indetermine
 
+    delegate :id, to: :evaluation
     delegate :moyennes_metriques, :ecarts_types_metriques,
              to: :scores_niveau2_standardises, prefix: :niveau2
     delegate :moyennes_metriques, :ecarts_types_metriques, to: :scores_niveau1_standardises,

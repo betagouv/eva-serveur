@@ -387,4 +387,38 @@ describe Restitution::PlaceDuMarche do
       end
     end
   end
+
+  describe '#incomplet?' do
+    context 'quand le profil est indéterminé' do
+      before do
+        allow(restitution).to receive(:profil_numeratie).and_return(Competence::NIVEAU_INDETERMINE)
+      end
+
+      it 'retourne false' do
+        expect(restitution.incomplet?).to be false
+      end
+    end
+
+    context "quand le profil est déterminé et l'évaluation est terminée" do
+      before do
+        allow(restitution).to receive_messages(profil_numeratie: Competence::PROFIL_1,
+termine?: true)
+      end
+
+      it 'retourne false' do
+        expect(restitution.incomplet?).to be false
+      end
+    end
+
+    context "quand le profil est déterminé et l'évaluation n'est pas terminée" do
+      before do
+        allow(restitution).to receive_messages(profil_numeratie: Competence::PROFIL_1,
+termine?: false)
+      end
+
+      it 'retourne true' do
+        expect(restitution.incomplet?).to be true
+      end
+    end
+  end
 end

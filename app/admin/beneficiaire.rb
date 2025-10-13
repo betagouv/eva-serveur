@@ -51,7 +51,7 @@ ActiveAdmin.register Beneficiaire do
   end
 
   controller do
-    before_action :evaluations_positionnement, only: :show
+    before_action :restitutions_positionnement, only: :show
     before_action :evaluations_diagnostic, only: :show
 
     def find_resource
@@ -72,6 +72,20 @@ ActiveAdmin.register Beneficiaire do
       end_of_association_chain.includes(evaluations: { campagne: :compte })
     end
 
+    def restitutions_positionnement
+      @restitutions_positionnement ||= evaluations_positionnement.map do |evaluation|
+        FabriqueRestitution.restitution_globale(evaluation)
+      end
+    end
+
+    def evaluations_diagnostic
+      @evaluations_diagnostic ||= evaluations_accessibles.diagnostic
+      .includes([ :campagne ])
+      .order(created_at: :desc)
+    end
+
+    private
+
     def evaluations_accessibles
       @evaluations_accessibles ||= resource.evaluations.accessible_by(current_ability)
     end
@@ -80,12 +94,6 @@ ActiveAdmin.register Beneficiaire do
       @evaluations_positionnement ||= evaluations_accessibles.positionnement
                                                              .includes([ :campagne ])
                                                              .order(created_at: :desc)
-    end
-
-    def evaluations_diagnostic
-      @evaluations_diagnostic ||= evaluations_accessibles.diagnostic
-                                                         .includes([ :campagne ])
-                                                         .order(created_at: :desc)
     end
   end
 end

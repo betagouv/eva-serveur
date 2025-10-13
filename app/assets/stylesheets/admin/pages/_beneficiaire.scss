@@ -9,3 +9,11 @@
     font-size: $dsfr-font-size-4xl;
   }
 }
+
+.liste-evaluations-positionnement__tableau {
+  td div {
+    display: flex;
+    gap: $dsfr-spacing-1v;
+    align-items: center;
+  }
+}

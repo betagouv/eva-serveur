@@ -55,4 +55,8 @@ class StructureLocale < Structure
   def cible_evaluation
     CIBLE_EVALUATION[type_structure&.to_sym] || "bénéficiaires"
   end
+
+  def eva_entreprises?
+    type_structure == "entreprise" && usage == "Eva: entreprises"
+  end
 end

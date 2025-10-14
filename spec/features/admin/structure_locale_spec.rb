@@ -35,11 +35,13 @@ role: :conseiller
     end
 
     describe 'create' do
-      before { visit new_admin_structure_locale_path }
-
-      it { expect(page).to have_link('Annuler') }
+      it do
+        visit new_admin_structure_locale_path
+        expect(page).to have_link('Annuler')
+      end
 
       it 'créé une structure local si on rempli tous les champs' do
+        visit new_admin_structure_locale_path
         fill_in :structure_locale_nom, with: 'Captive'
         select 'Mission locale'
         fill_in :structure_locale_code_postal, with: '92100'
@@ -49,6 +51,22 @@ role: :conseiller
         expect(structure.nom).to eq 'Captive'
         expect(structure.type_structure).to eq 'mission_locale'
         expect(structure.code_postal).to eq '92100'
+      end
+
+      it "crée une structure Entreprise" do
+        create(:opco, nom: 'mon opco')
+        create(:parcours_type, nom_technique: "eva-entreprise-monopco")
+        visit new_admin_structure_locale_path
+        fill_in :structure_locale_nom, with: 'Entreprise test'
+        select 'Entreprise'
+        choose 'Eva: entreprises'
+        select 'mon opco'
+        fill_in :structure_locale_code_postal, with: '92100'
+        click_on 'Créer une structure'
+
+        structure = Structure.order(:created_at).last
+        expect(structure.nom).to eq 'Entreprise test'
+        expect(Campagne.count).to eq 1
       end
     end
 

@@ -41,14 +41,11 @@ describe CampagneCreateur, type: :model do
     end
 
     context "quand le parcours type n'existe pas" do
-      it "ne crée pas de campagne" do
+      it do
         expect do
           createur.cree_campagne_opco!
-        end.not_to change(Campagne, :count)
-      end
-
-      it "retourne nil" do
-        expect(createur.cree_campagne_opco!).to be_nil
+        end.to raise_error(ActiveRecord::RecordNotFound)
+        expect(Campagne.count).to eq 0
       end
     end
 

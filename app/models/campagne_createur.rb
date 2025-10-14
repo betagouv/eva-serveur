@@ -24,10 +24,8 @@ class CampagneCreateur
   end
 
   def trouve_parcours_type
-    return nil unless @structure.opco
-
     nom_technique = genere_nom_technique_parcours
-    ParcoursType.find_by(nom_technique: nom_technique)
+    ParcoursType.find_by!(nom_technique: nom_technique)
   end
 
   def genere_nom_technique_parcours

@@ -92,15 +92,33 @@ ActiveAdmin.register StructureLocale do
     end
 
     def create
-      create! do |success, _failure|
-        if @current_compte.structure.blank?
-          success.html do
-            @current_compte.rejoindre_structure(resource)
-            CampagneCreateur.new(resource, @current_compte).cree_campagne_opco!
-            redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")
-          end
+      @structure_locale = StructureLocale.new(permitted_params[:structure_locale])
+
+      if sauvegarde_et_cree_campagne
+        if current_compte.structure.blank?
+          rejoint_structure_et_redirige
+        else
+          redirect_to admin_structure_locale_path(@structure_locale),
+notice: I18n.t("active_admin.create_model", model: StructureLocale.model_name.human)
         end
+      else
+        render :new
       end
+    end
+
+    private
+
+    def sauvegarde_et_cree_campagne
+      ActiveRecord::Base.transaction do
+        resultat = @structure_locale.save
+        CampagneCreateur.new(@structure_locale, current_compte).cree_campagne_opco!
+        resultat
+      end
+    end
+
+    def rejoint_structure_et_redirige
+      current_compte.rejoindre_structure(@structure_locale)
+      redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")
     end
   end
 end

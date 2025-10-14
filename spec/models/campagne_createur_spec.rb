@@ -5,6 +5,7 @@ describe CampagneCreateur, type: :model do
   let(:opco) { create(:opco, :constructys) }
   let(:structure_entreprise) do
     create(:structure_locale,
+           nom: "ma super structure",
            type_structure: "entreprise",
            usage: "Eva: entreprises",
            opco: opco)
@@ -28,7 +29,7 @@ describe CampagneCreateur, type: :model do
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last
-        expect(campagne.libelle).to eq("Diagnostic des risques")
+        expect(campagne.libelle).to eq("Diagnostic des risques : ma super structure")
         expect(campagne.compte).to eq(compte)
         expect(campagne.parcours_type).to eq(parcours_type)
       end

@@ -98,8 +98,7 @@ ActiveAdmin.register StructureLocale do
         if current_compte.structure.blank?
           rejoint_structure_et_redirige
         else
-          redirect_to admin_structure_locale_path(@structure_locale),
-notice: I18n.t("active_admin.create_model", model: StructureLocale.model_name.human)
+          redirect_to admin_structure_locale_path(@structure_locale)
         end
       else
         render :new

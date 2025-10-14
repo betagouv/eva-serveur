@@ -42,7 +42,7 @@ class CampagneCreateur
 
   def cree_campagne(parcours_type)
     campagne = Campagne.new(
-      libelle: NOM_CAMPAGNE_PAR_DEFAUT,
+      libelle: libelle_campagne,
       compte: @compte,
       parcours_type: parcours_type,
       type_programme: parcours_type.type_de_programme
@@ -50,5 +50,9 @@ class CampagneCreateur
 
     campagne.save!
     campagne
+  end
+
+  def libelle_campagne
+    "#{NOM_CAMPAGNE_PAR_DEFAUT} : #{@structure.nom}"
   end
 end

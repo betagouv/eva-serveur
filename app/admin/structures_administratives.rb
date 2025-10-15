@@ -1,5 +1,7 @@
 ActiveAdmin.register StructureAdministrative do
-  menu parent: I18n.t(".menu_structure"), if: proc { current_compte.anlci? }
+  menu parent: I18n.t(".menu_structure"), if: proc {
+    current_compte.anlci? || current_compte.administratif?
+  }
 
   permit_params :nom, :parent_id, :siret
 

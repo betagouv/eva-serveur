@@ -118,8 +118,14 @@ class AbilityUtilisateur
   end
 
   def droit_structure(compte)
-    can :read, Structure, id: compte.structure_id if compte.validation_acceptee?
-    can :update, Structure, id: compte.structure_id if compte.admin?
+    if compte.validation_acceptee?
+      structure_ids = compte.admin? ? compte.structure.subtree_ids : compte.structure_id
+      can :read, Structure, id: structure_ids
+    end
+    if compte.admin?
+      structure_ids = compte.structure.subtree_ids
+      can :update, Structure, id: structure_ids
+    end
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
     return if compte.structure_id.present?
 

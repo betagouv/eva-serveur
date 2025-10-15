@@ -104,7 +104,10 @@ class AbilityUtilisateur
   end
 
   def droit_compte(compte)
-    can :read, Compte, structure_id: compte.structure_id if compte.validation_acceptee?
+    if compte.validation_acceptee?
+      structure_ids = compte.admin? ? compte.structure.subtree_ids : compte.structure_id
+      can :read, Compte, structure_id: structure_ids
+    end
     can %i[read update], compte
     can :rejoindre_structure, compte
     can :accepter_cgu, compte
@@ -154,16 +157,19 @@ class AbilityUtilisateur
   def comptes_generiques_ou_comptes_admin(compte)
     return unless compte.admin? || compte.compte_generique?
 
+    structure_ids = compte.structure.subtree_ids
     can :create, Compte
-    can :update, Compte, structure_id: compte.structure_id
-    can :edit_role, Compte, structure_id: compte.structure_id
+    can :update, Compte, structure_id: structure_ids
+    can :edit_role, Compte, structure_id: structure_ids
     cannot :edit_role, compte if compte.compte_generique?
-    can :destroy, Compte, structure_id: compte.structure_id, role: %i[conseiller]
+    can :destroy, Compte, structure_id: structure_ids, role: %i[conseiller]
   end
 
   def droits_validation_comptes(compte)
-    can %i[autoriser refuser verifier], Compte,
-structure_id: compte.structure_id if compte.au_moins_admin?
+    if compte.au_moins_admin?
+      structure_ids = compte.structure.subtree_ids
+      can %i[autoriser refuser verifier], Compte, structure_id: structure_ids
+    end
     cannot :refuser, Compte, &:au_moins_admin?
   end
 

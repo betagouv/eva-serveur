@@ -244,6 +244,32 @@ describe Ability do
     end
   end
 
+  context 'Compte admin de structure administrative' do
+    let(:structure_administrative) { create :structure_administrative }
+    let(:compte) { create :compte_admin, structure: structure_administrative }
+    let(:beneficiaire) { create :beneficiaire }
+
+    it 'ne peut pas créer de compte' do
+      expect(subject).not_to be_able_to(:create, Compte.new)
+    end
+
+    it 'ne peut pas créer de bénéficiaire' do
+      expect(subject).not_to be_able_to(:create, Beneficiaire.new)
+    end
+
+    it 'ne peut pas modifier de bénéficiaire' do
+      expect(subject).not_to be_able_to(:update, beneficiaire)
+    end
+
+    it 'ne peut pas fusionner de bénéficiaire' do
+      expect(subject).not_to be_able_to(:fusionner, beneficiaire)
+    end
+
+    it 'ne peut pas supprimer de bénéficiaire' do
+      expect(subject).not_to be_able_to(:destroy, beneficiaire)
+    end
+  end
+
   context 'Compte générique' do
     let(:compte) { create :compte_generique, structure: structure_avec_admin }
 

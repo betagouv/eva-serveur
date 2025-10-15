@@ -69,14 +69,18 @@ class AbilityUtilisateur
 
   def droit_beneficiaire(compte)
     cannot(:destroy, Beneficiaire)
-    can(:destroy, Beneficiaire) { |b| b.evaluations.empty? } if compte.au_moins_admin?
     can :read, Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
     can :read, Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }
     can :read, Beneficiaire, evaluations: {
       campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     }
-    can :fusionner, Beneficiaire if compte.au_moins_admin?
+    droit_beneficiaire_admin if compte.au_moins_admin? && !compte.administratif?
     droit_beneficiaire_structure(compte) if compte.structure_id.present?
+  end
+
+  def droit_beneficiaire_admin
+    can(:destroy, Beneficiaire) { |b| b.evaluations.empty? }
+    can :fusionner, Beneficiaire
   end
 
   def droit_beneficiaire_structure(compte)
@@ -86,7 +90,7 @@ class AbilityUtilisateur
       }
     end
 
-    if compte.admin?
+    if compte.admin? && !compte.administratif?
       can :create, Beneficiaire
       can %i[read update], Beneficiaire, evaluations: {
         campagne: campagnes_de_la_structure(compte)
@@ -164,7 +168,7 @@ class AbilityUtilisateur
     return unless compte.admin? || compte.compte_generique?
 
     structure_ids = compte.structure.subtree_ids
-    can :create, Compte
+    can :create, Compte unless compte.administratif?
     can :update, Compte, structure_id: structure_ids
     can :edit_role, Compte, structure_id: structure_ids
     cannot :edit_role, compte if compte.compte_generique?

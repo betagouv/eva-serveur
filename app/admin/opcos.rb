@@ -1,5 +1,5 @@
 ActiveAdmin.register Opco do
-  menu parent: "Terrain", if: proc { current_compte.superadmin? }
+  menu parent: I18n.t(".menu_structure"), if: proc { current_compte.superadmin? }
 
   permit_params :nom, :financeur
 

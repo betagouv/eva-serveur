@@ -1,5 +1,5 @@
 ActiveAdmin.register StructureAdministrative do
-  menu parent: "Terrain", if: proc { current_compte.anlci? }
+  menu parent: I18n.t(".menu_structure"), if: proc { current_compte.anlci? }
 
   permit_params :nom, :parent_id, :siret
 

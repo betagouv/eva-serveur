@@ -184,6 +184,8 @@ class AbilityUtilisateur
   end
 
   def can_create_campagne?(compte)
+    return false if compte.administratif?
+
     compte.structure&.autorisation_creation_campagne || compte.admin? || compte.superadmin?
   end
 end

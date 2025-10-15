@@ -268,6 +268,10 @@ describe Ability do
     it 'ne peut pas supprimer de bénéficiaire' do
       expect(subject).not_to be_able_to(:destroy, beneficiaire)
     end
+
+    it 'ne peut pas créer de campagne' do
+      expect(subject).not_to be_able_to(:create, Campagne.new)
+    end
   end
 
   context 'Compte générique' do

@@ -23,7 +23,7 @@ ActiveAdmin.register StructureAdministrative do
   form partial: "form"
 
   controller do
-    before_action :trouve_campagnes, :trouve_structures_dependantes, only: :show
+    before_action :trouve_campagnes, only: :show
 
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)
@@ -31,12 +31,6 @@ ActiveAdmin.register StructureAdministrative do
 
     def statistiques_structure
       StatistiquesStructure.new(resource).nombre_evaluations_des_12_derniers_mois
-    end
-
-    def trouve_structures_dependantes
-      return unless current_compte.anlci?
-
-      @structures_dependantes = Structure.where(structure_referente: resource)
     end
   end
 end

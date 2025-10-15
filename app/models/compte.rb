@@ -55,6 +55,10 @@ class Compte < ApplicationRecord
     ANLCI_ROLES.include?(role)
   end
 
+  def administratif?
+    structure.instance_of?(StructureAdministrative)
+  end
+
   def au_moins_admin?
     ADMIN_ROLES.include?(role)
   end

@@ -97,6 +97,28 @@ describe Compte do
     it { expect(described_class.new(role: 'conseiller').au_moins_admin?).to be(false) }
   end
 
+  describe '#administratif?' do
+    context 'quand le compte appartient à une structure administrative' do
+      let(:structure_administrative) { StructureAdministrative.new }
+      let(:compte) { described_class.new(role: 'admin', structure: structure_administrative) }
+
+      it { expect(compte.administratif?).to be(true) }
+    end
+
+    context 'quand le compte appartient à une structure locale' do
+      let(:structure_locale) { StructureLocale.new }
+      let(:compte) { described_class.new(role: 'admin', structure: structure_locale) }
+
+      it { expect(compte.administratif?).to be(false) }
+    end
+
+    context 'quand le compte n\'a pas de structure' do
+      let(:compte) { described_class.new(role: 'admin', structure: nil) }
+
+      it { expect(compte.administratif?).to be(false) }
+    end
+  end
+
   describe '#rejoindre_structure' do
     let(:structure) { Structure.new }
     let(:compte) { described_class.new statut_validation: nil, role: nil }

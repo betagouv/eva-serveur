@@ -144,7 +144,7 @@ class AbilityUtilisateur
   end
 
   def campagnes_de_la_structure(compte)
-    { compte: { structure_id: compte.structure_id } }
+    { compte: { structure_id: compte.structure.subtree_ids } }
   end
 
   def campagnes_publique_de_la_structure(compte)

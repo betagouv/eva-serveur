@@ -123,6 +123,37 @@ describe CampagneCreateur, type: :model do
         expect(campagne.parcours_type).to eq(parcours_type_sante)
       end
     end
+
+    context "quand l'OPCO n'est pas financeur" do
+      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
+      let(:structure_opco_non_financeur) do
+        create(:structure_locale,
+               type_structure: "entreprise",
+               usage: "Eva: entreprises",
+               opco: opco_non_financeur)
+      end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
+      let(:createur_non_financeur) { described_class.new(structure_opco_non_financeur, compte) }
+
+      before { parcours_type_generique }
+
+      it "crée une campagne avec le parcours type générique" do
+        expect do
+          createur_non_financeur.cree_campagne_opco!
+        end.to change(Campagne, :count).by(1)
+
+        campagne = Campagne.last
+        expect(campagne.libelle).to eq(
+          "Diagnostic des risques : #{structure_opco_non_financeur.nom}"
+        )
+        expect(campagne.parcours_type).to eq(parcours_type_generique)
+      end
+    end
   end
 
   describe "#genere_nom_technique_parcours (private)" do
@@ -141,11 +172,20 @@ describe CampagneCreateur, type: :model do
     end
 
     context "avec un nom d'OPCO contenant des caractères spéciaux" do
-      let(:opco) { create(:opco, nom: "OPCO Mobilités") }
+      let(:opco) { create(:opco, :opco_mobilites) }
 
       it "génère le bon nom technique en normalisant les caractères" do
         nom_technique = createur.send(:genere_nom_technique_parcours)
         expect(nom_technique).to eq("eva-entreprise-opcomobilites")
+      end
+    end
+
+    context "quand l'OPCO n'est pas financeur" do
+      let(:opco) { create(:opco, :opco_non_financeur) }
+
+      it "génère le nom technique générique" do
+        nom_technique = createur.send(:genere_nom_technique_parcours)
+        expect(nom_technique).to eq("eva-entreprise")
       end
     end
   end

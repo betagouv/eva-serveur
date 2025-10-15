@@ -1,14 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Compte do
   it do
     expect(subject).to define_enum_for(:role)
       .with_values(
-        superadmin: 'superadmin',
-        charge_mission_regionale: 'charge_mission_regionale',
-        admin: 'admin',
-        conseiller: 'conseiller',
-        compte_generique: 'compte_generique'
+        superadmin: "superadmin",
+        charge_mission_regionale: "charge_mission_regionale",
+        admin: "admin",
+        conseiller: "conseiller",
+        compte_generique: "compte_generique"
       )
       .backed_by_column_of_type(:string)
   end
@@ -18,13 +18,13 @@ describe Compte do
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :prenom }
 
-  context 'quand un compte a été soft-delete' do
+  context "quand un compte a été soft-delete" do
     let(:compte) do
-      build :compte, email: 'mon-email-supprime@example.com'
+      build :compte, email: "mon-email-supprime@example.com"
     end
 
     before do
-      autre_compte = create :compte, email: 'mon-email-supprime@example.com'
+      autre_compte = create :compte, email: "mon-email-supprime@example.com"
       autre_compte.destroy
     end
 
@@ -39,26 +39,26 @@ describe Compte do
       .with_prefix(:validation)
   end
 
-  it { expect(described_class.new(prenom: 'Pepa', nom: 'Pig').display_name).to eql('Pepa Pig') }
-  it { expect(described_class.new.display_name).to eql('') }
+  it { expect(described_class.new(prenom: "Pepa", nom: "Pig").display_name).to eql("Pepa Pig") }
+  it { expect(described_class.new.display_name).to eql("") }
 
   it do
-    expect(described_class.new(email: 'pepa@france5.fr').display_name)
-      .to eql('pepa@france5.fr')
+    expect(described_class.new(email: "pepa@france5.fr").display_name)
+      .to eql("pepa@france5.fr")
   end
 
   it do
-    expect(described_class.new(nom: 'Pig', email: 'pepa@france5.fr').display_name)
-      .to eql('Pig')
+    expect(described_class.new(nom: "Pig", email: "pepa@france5.fr").display_name)
+      .to eql("Pig")
   end
 
   it do
-    expect(described_class.new(prenom: 'Pepa', nom: 'Pig', email: 'pepa@france5.fr').display_name)
-      .to eql('Pepa Pig')
+    expect(described_class.new(prenom: "Pepa", nom: "Pig", email: "pepa@france5.fr").display_name)
+      .to eql("Pepa Pig")
   end
 
   describe "validation DNS de l'email" do
-    let(:compte) { described_class.new email: 'email@example.com' }
+    let(:compte) { described_class.new email: "email@example.com" }
 
     before do
       allow(compte).to receive(:email_changed?).and_return(true)
@@ -73,11 +73,11 @@ describe Compte do
 
     context "quand l'email est invalide" do
       before do
-        allow(Truemail).to receive(:valid?).with('email@example.com').and_return(false)
+        allow(Truemail).to receive(:valid?).with("email@example.com").and_return(false)
         compte.valid?
       end
 
-      it { expect(compte.errors[:email]).to include(I18n.t('errors.messages.invalid')) }
+      it { expect(compte.errors[:email]).to include(I18n.t("errors.messages.invalid")) }
     end
 
     context "quand l'email du compte n'est pas modifié" do
@@ -86,40 +86,40 @@ describe Compte do
         compte.valid?
       end
 
-      it { expect(Truemail).not_to have_received(:valid?).with('email@example.com') }
+      it { expect(Truemail).not_to have_received(:valid?).with("email@example.com") }
     end
   end
 
-  describe '#au_moins_admin?' do
-    it { expect(described_class.new(role: 'superadmin').au_moins_admin?).to be(true) }
-    it { expect(described_class.new(role: 'admin').au_moins_admin?).to be(true) }
-    it { expect(described_class.new(role: 'compte_generique').au_moins_admin?).to be(true) }
-    it { expect(described_class.new(role: 'conseiller').au_moins_admin?).to be(false) }
+  describe "#au_moins_admin?" do
+    it { expect(described_class.new(role: "superadmin").au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: "admin").au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: "compte_generique").au_moins_admin?).to be(true) }
+    it { expect(described_class.new(role: "conseiller").au_moins_admin?).to be(false) }
   end
 
-  describe '#administratif?' do
-    context 'quand le compte appartient à une structure administrative' do
+  describe "#administratif?" do
+    context "quand le compte appartient à une structure administrative" do
       let(:structure_administrative) { StructureAdministrative.new }
-      let(:compte) { described_class.new(role: 'admin', structure: structure_administrative) }
+      let(:compte) { described_class.new(role: "admin", structure: structure_administrative) }
 
       it { expect(compte.administratif?).to be(true) }
     end
 
-    context 'quand le compte appartient à une structure locale' do
+    context "quand le compte appartient à une structure locale" do
       let(:structure_locale) { StructureLocale.new }
-      let(:compte) { described_class.new(role: 'admin', structure: structure_locale) }
+      let(:compte) { described_class.new(role: "admin", structure: structure_locale) }
 
       it { expect(compte.administratif?).to be(false) }
     end
 
-    context 'quand le compte n\'a pas de structure' do
-      let(:compte) { described_class.new(role: 'admin', structure: nil) }
+    context "quand le compte n'a pas de structure" do
+      let(:compte) { described_class.new(role: "admin", structure: nil) }
 
       it { expect(compte.administratif?).to be(false) }
     end
   end
 
-  describe '#rejoindre_structure' do
+  describe "#rejoindre_structure" do
     let(:structure) { Structure.new }
     let(:compte) { described_class.new statut_validation: nil, role: nil }
 
@@ -129,16 +129,16 @@ describe Compte do
     end
 
     it { expect(compte.structure).to eql(structure) }
-    it { expect(compte.statut_validation).to eql('en_attente') }
-    it { expect(compte.role).to eql('conseiller') }
+    it { expect(compte.statut_validation).to eql("en_attente") }
+    it { expect(compte.role).to eql("conseiller") }
   end
 
   describe "verifie le statut s'il n'y a pas de structure" do
-    context 'Quand il y a une de structure' do
+    context "Quand il y a une de structure" do
       let(:structure) { Structure.new }
-      let(:compte) { described_class.new role: 'admin', structure: structure }
+      let(:compte) { described_class.new role: "admin", structure: structure }
 
-      context 'quand le statut est accepté' do
+      context "quand le statut est accepté" do
         before do
           compte.statut_validation = :acceptee
         end
@@ -151,14 +151,14 @@ describe Compte do
     end
 
     context "Quand il n'y a pas de structure" do
-      let(:compte) { described_class.new role: 'conseiller', structure: nil }
+      let(:compte) { described_class.new role: "conseiller", structure: nil }
 
-      context 'quand le statut est accepté' do
+      context "quand le statut est accepté" do
         before do
           compte.statut_validation = :acceptee
         end
 
-        it 'il signal une erreur' do
+        it "il signal une erreur" do
           compte.valid?
           expect(compte.errors[:statut_validation])
             .to include "doit être 'en attente' s'il n'y a pas de structure"
@@ -170,14 +170,14 @@ describe Compte do
           compte.role = :admin
         end
 
-        it 'il signal une erreur' do
+        it "il signal une erreur" do
           compte.valid?
           expect(compte.errors[:role])
             .to include "doit être 'conseiller' s'il n'y a pas de structure"
         end
       end
 
-      context 'quand le statut est en_attente et le role conseiller' do
+      context "quand le statut est en_attente et le role conseiller" do
         before do
           compte.statut_validation = :en_attente
         end
@@ -192,15 +192,15 @@ describe Compte do
 
   describe "verifie la présence d'un admin" do
     let(:structure) { Structure.new }
-    let(:compte) { described_class.new role: 'admin', structure: structure }
+    let(:compte) { described_class.new role: "admin", structure: structure }
 
-    context 'quand il y a un autre admins dans la structure' do
+    context "quand il y a un autre admins dans la structure" do
       before do
         allow(compte).to receive(:autres_admins?).and_return(true)
       end
 
-      it 'retire les droits à un admin' do
-        compte.role = 'conseiller'
+      it "retire les droits à un admin" do
+        compte.role = "conseiller"
         compte.valid?
         expect(compte.errors[:role]).to be_blank
       end
@@ -211,17 +211,17 @@ describe Compte do
         allow(compte).to receive(:autres_admins?).and_return(false)
       end
 
-      it 'ne peut pas retirer les droits de cet admin' do
-        compte.role = 'conseiller'
+      it "ne peut pas retirer les droits de cet admin" do
+        compte.role = "conseiller"
         compte.valid?
-        expect(compte.errors[:role]).to include 'La structure doit avoir au moins un administrateur'
+        expect(compte.errors[:role]).to include "La structure doit avoir au moins un administrateur"
       end
 
-      it 'ne peut pas refuser cet admin' do
-        compte.statut_validation = 'refusee'
+      it "ne peut pas refuser cet admin" do
+        compte.statut_validation = "refusee"
         compte.valid?
         expect(compte.errors[:statut_validation])
-          .to include 'La structure doit avoir au moins un administrateur autorisé'
+          .to include "La structure doit avoir au moins un administrateur autorisé"
       end
     end
 
@@ -230,16 +230,16 @@ describe Compte do
         allow(compte).to receive(:autres_admins?).and_return(false)
       end
 
-      it 'ajoute un admin' do
-        compte.role = 'admin'
+      it "ajoute un admin" do
+        compte.role = "admin"
         compte.valid?
         expect(compte.errors[:role]).to be_blank
       end
     end
 
     context "Quand le compte n'a pas de structure" do
-      it 'le compte peut avoir un rôle de conseiller' do
-        compte.role = 'conseiller'
+      it "le compte peut avoir un rôle de conseiller" do
+        compte.role = "conseiller"
         compte.structure = nil
         compte.valid?
         expect(compte.errors[:role]).to be_blank
@@ -247,19 +247,19 @@ describe Compte do
     end
   end
 
-  describe '#assigne_role_admin_si_pas_d_admin' do
+  describe "#assigne_role_admin_si_pas_d_admin" do
     let(:structure) { Structure.new }
-    let(:compte) { described_class.new role: 'conseiller' }
+    let(:compte) { described_class.new role: "conseiller" }
 
-    context 'quand il y a un autre admins dans la structure' do
+    context "quand il y a un autre admins dans la structure" do
       before do
         allow(compte).to receive(:autres_admins?).and_return(true)
       end
 
       it "n'assigne pas le role admin" do
         compte.assigne_role_admin_si_pas_d_admin
-        expect(compte.role).to eq 'conseiller'
-        expect(compte.statut_validation).to eq 'en_attente'
+        expect(compte.role).to eq "conseiller"
+        expect(compte.statut_validation).to eq "en_attente"
       end
     end
 
@@ -268,15 +268,15 @@ describe Compte do
         allow(compte).to receive(:autres_admins?).and_return(false)
       end
 
-      it 'assigne le role admin' do
+      it "assigne le role admin" do
         compte.assigne_role_admin_si_pas_d_admin
-        expect(compte.role).to eq 'admin'
-        expect(compte.statut_validation).to eq 'acceptee'
+        expect(compte.role).to eq "admin"
+        expect(compte.statut_validation).to eq "acceptee"
       end
     end
   end
 
-  describe '.de_la_structure' do
+  describe ".de_la_structure" do
     let!(:structure1) { create :structure_locale }
     let!(:structure2) { create :structure_locale }
     let!(:compte1) { create :compte_admin, structure: structure1 }
@@ -286,8 +286,8 @@ describe Compte do
       create :compte_conseiller, statut_validation: "en_attente", structure: nil
     end
 
-    context 'avec une structure valide' do
-      it 'retourne tous les comptes de cette structure' do
+    context "avec une structure valide" do
+      it "retourne tous les comptes de cette structure" do
         comptes = described_class.de_la_structure(structure1)
 
         expect(comptes).to include(compte1, compte2)
@@ -295,8 +295,8 @@ describe Compte do
       end
     end
 
-    context 'avec une structure nil' do
-      it 'retourne un ensemble vide' do
+    context "avec une structure nil" do
+      it "retourne un ensemble vide" do
         comptes = described_class.de_la_structure(nil)
 
         expect(comptes).to be_empty

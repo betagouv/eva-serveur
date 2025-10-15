@@ -185,6 +185,30 @@ describe Ability do
       end
     end
 
+    context 'peut gérer les comptes des sous-structures' do
+      let(:structure_fille) { create :structure_locale, :avec_admin, structure_referente: compte.structure }
+      let(:compte_sous_structure) { create :compte, role: :conseiller, structure: structure_fille }
+      let(:campagne_sous_structure) { create :campagne, compte: compte_sous_structure, privee: true }
+      let(:evaluation_sous_structure) { create :evaluation, campagne: campagne_sous_structure }
+
+      before do
+        # Force la création de la structure fille
+        structure_fille
+      end
+
+      it do
+        expect(subject).to be_able_to(:read, compte_sous_structure)
+        expect(subject).to be_able_to(:update, compte_sous_structure)
+        expect(subject).to be_able_to(:edit_role, compte_sous_structure)
+        expect(subject).to be_able_to(:read, campagne_sous_structure)
+        expect(subject).to be_able_to(:update, campagne_sous_structure)
+        expect(subject).to be_able_to(:destroy, evaluation_sous_structure)
+        expect(subject).to be_able_to(:autoriser, compte_sous_structure)
+        expect(subject).to be_able_to(:refuser, compte_sous_structure)
+        expect(subject).to be_able_to(:verifier, compte_sous_structure)
+      end
+    end
+
     context 'peut gérer les évaluations de ma structure' do
       let(:ma_campagne) { create :campagne, compte: compte }
       let(:evaluation) { create :evaluation, campagne: ma_campagne }

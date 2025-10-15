@@ -1,5 +1,6 @@
 class CampagneCreateur
   NOM_CAMPAGNE_PAR_DEFAUT = "Diagnostic des risques"
+  NOM_TECHNIQUE_GENERIQUE = "eva-entreprise"
 
   def initialize(structure, compte)
     @structure = structure
@@ -29,15 +30,22 @@ class CampagneCreateur
   end
 
   def genere_nom_technique_parcours
-    # Convertit le nom de l'OPCO en format slug
-    opco_slug = @structure.opco.nom
-                          .unicode_normalize(:nfkd)
-                          .encode("ASCII", replace: "")
-                          .downcase
-                          .gsub(/[^a-z0-9\s-]/, "")
-                          .gsub(/\s+/, "")
+    return NOM_TECHNIQUE_GENERIQUE unless opco_financeur?
 
-    "eva-entreprise-#{opco_slug}"
+    "#{NOM_TECHNIQUE_GENERIQUE}-#{slugifie_nom_opco}"
+  end
+
+  def opco_financeur?
+    @structure.opco.financeur?
+  end
+
+  def slugifie_nom_opco
+    @structure.opco.nom
+              .unicode_normalize(:nfkd)
+              .encode("ASCII", replace: "")
+              .downcase
+              .gsub(/[^a-z0-9\s-]/, "")
+              .gsub(/\s+/, "")
   end
 
   def cree_campagne(parcours_type)

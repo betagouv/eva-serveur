@@ -1,0 +1,4 @@
+fr:
+  evaluation:
+    notice_incomplete_component:
+      description: "Évaluation incomplète : cela peut avoir un impact sur la fiabilité des résultats"

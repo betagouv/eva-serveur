@@ -1,4 +1,4 @@
-<p class="evaluation-notice-incomplete">
+<p class="evaluation-notice-incomplete" aria-hidden="true">
   <%= render(Evaluation::IconeIncompleteComponent.new()) %>
-  Évaluation incomplète : cela peut avoir un impact sur la fiabilité des résultats
+  <%= t(".description") %>
 </p>

@@ -1,3 +1,5 @@
+<% doit_afficher_notice = false %>
+
 <% if tableau.present? %>
   <%= render PanelComponent.new(titre: titre, classes: "panel--beneficiaire") do %>
     <div class="fr-table fr-m-0 fr-table--no-scroll page-comparaison__tableau" id="table-litteratie-component">
@@ -20,6 +22,7 @@
                     <th class="page-comparaison__min-column fr-cell--center">
                       <div class="page-comparaison__container-badge">
                         <% if competence == :numeratie && tableau[i][:restitution]&.incomplet? %>
+                          <% doit_afficher_notice = true %>
                           <%= render(Evaluation::IconeIncompleteComponent.new) %>
                         <% end %>
                         <% if tableau[i][:profil] %>
@@ -68,7 +71,7 @@
         </div>
       </div>
     </div>
-    <% if competence == :numeratie %>
+    <% if competence == :numeratie && doit_afficher_notice %>
       <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
     <% end %>
   <% end %>

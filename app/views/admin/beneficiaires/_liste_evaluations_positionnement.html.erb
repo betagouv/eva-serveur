@@ -1,3 +1,5 @@
+<% doit_afficher_notice = false %>
+
 <%= render PanelComponent.new(titre: t(".titre-evaluation-positionnement"), classes: "panel--beneficiaire") do %>
   <div class="liste-evaluations-positionnement">
     <p class="fr-m-0"><%= t(".indication") %></p>
@@ -39,6 +41,7 @@
         <% a_fait_numeratie = restitution.evaluation.campagne.avec_positionnement?(:numeratie) %>
         <div data-numeratie="<%= a_fait_numeratie %>">
           <% if restitution.numeratie&.incomplet? %>
+            <% doit_afficher_notice = true %>
             <%= render(Evaluation::IconeIncompleteComponent.new()) %>
           <% end %>
           <%= render(Badge::ProfilComponent.new(restitution.numeratie&.profil, :numeratie)) %>
@@ -54,5 +57,7 @@
       <% end %>
     <% end %>
   </div>
-  <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
+  <% if doit_afficher_notice %>
+    <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
+  <% end %>
 <% end %>

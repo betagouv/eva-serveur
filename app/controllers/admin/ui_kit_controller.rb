@@ -12,6 +12,7 @@ module Admin
     def carte_partage_code; end
     def code; end
     def ellipse; end
+    def evaluation_incomplete; end
     def lien; end
     def mise_en_avant; end
     def nom_anonymisable; end

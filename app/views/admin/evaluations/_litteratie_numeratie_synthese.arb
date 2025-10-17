@@ -9,7 +9,8 @@ div class: "synthese-illettrisme #{synthese}" do
       if synthese.present?
         md t("description", scope: scope)
       else
-        md t("admin.restitutions.score_non_calcule")
+        md t("admin.restitutions.score_non_calcule",
+             lien: t("admin.restitutions.lien_pas_de_score"))
       end
     end
   end

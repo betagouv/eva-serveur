@@ -9,7 +9,7 @@ restitution_globale.interpretations_niveau2(categorie).each do |competence_nivea
     if niveau.present?
       md t(niveau, scope: scope)
     else
-      md t("admin.restitutions.pas_de_score")
+      md t("admin.restitutions.pas_de_score", lien: t("admin.restitutions.lien_pas_de_score"))
     end
   end
 end

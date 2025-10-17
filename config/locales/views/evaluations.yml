@@ -314,9 +314,15 @@ fr:
         valeur_utilisateur: Valeur du bénéficiaire
         moyenne: Moyenne
         ecart_type: Écart type
+      score_non_calcule: |
+        ### Votre score n'a pas pu être calculé.
+
+        Les raisons peuvent être trouvées ici :  
+        <a href="%{lien}" target="_blank">%{lien}</a>
       pas_de_score: |
-        Votre score n'a pas pu être calculé, les raisons peuvent être trouvées ici :
-        [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
+        Votre score n'a pas pu être calculé, les raisons peuvent être trouvées ici :  
+        <a href="%{lien}" target="_blank">%{lien}</a>
+      lien_pas_de_score: https://eva.anlci.gouv.fr/eva-sans-score
       interpretations_niveau2:
         score_ccf:
           titre: Connaissance et compréhension du français
@@ -360,12 +366,6 @@ fr:
             - Manipulation des chiffres et des nombres
             - Orientation visuo-spatiale
             - Réalisation d’une suite de calculs mathématiques
-
-      score_non_calcule: |
-        ### Votre score n'a pas pu être calculé.
-
-        Les raisons peuvent être trouvées ici :  
-        [https://l.incubateur.net/eva-sans-score](https://l.incubateur.net/eva-sans-score)
       references:
         ordre: '(par ordre croissant)'
         francais: 'Français :'
@@ -390,7 +390,7 @@ fr:
           Les restitutions eva sont basées sur les référentiels de l'Agence Nationale de Lutte Contre l'Illettrisme d'évaluation du français et des mathématiques.
         explications-lien: |
           Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :  
-          <a href="https://l.incubateur.net/eva-referentiel/" target="_blank">https://l.incubateur.net/eva-referentiel/</a>
+          <a href="https://eva.anlci.gouv.fr/les-referentiels-devaluation/" target="_blank">https://eva.anlci.gouv.fr/les-referentiels-devaluation/</a>
       cefr:
         alt_icone: ''
         titre: Vos compétences en français et mathématiques

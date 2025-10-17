@@ -42,10 +42,9 @@ fr:
             **Les évaluations eva permettent de mettre en évidence les situations d’illettrisme. Vous retrouverez ici les bénéficiaires concernés.**
 
             Nos équipes peuvent vous aider dans cette démarche d’accompagnement.
-
+          presentation_pistes: |
             Voici les pistes de solutions disponibles dans votre région  
-            (ateliers, formations, ré-orientations, accompagnement social…) :  
-            <a href="https://l.incubateur.net/eva-orientation" target="_blank">https://l.incubateur.net/eva-orientation</a>
+            (ateliers, formations, ré-orientations, accompagnement social…) :
         avec_evaluations:
           titre: Diagnostics d’illettrisme potentiel
           action: "Voir tout"

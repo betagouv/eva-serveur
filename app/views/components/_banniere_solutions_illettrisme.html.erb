@@ -4,7 +4,7 @@
     <% if asterisque %>
       <span id="asterisque">*</span>
     <% end %>
-    <%= t(".description") %>
-    <a href="<%= t(".lien") %>" target="_blank"><%= t(".lien") %></a>
+    <%= t(".description") %><br/>
+    <%= render LienComponent.new(t(".lien"), t(".lien"), externe: true) %>
   </div>
 </div>

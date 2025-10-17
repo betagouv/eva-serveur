@@ -6,5 +6,11 @@ div class: "contenu-sans-evaluations" do
   div image_tag "panneaux.svg", class: "illustration", alt: ""
   div class: "description" do
     text_node md t(".description")
+    para do
+        text_node t(".presentation_pistes")
+        br
+        texte_lien = t("components.banniere_solutions_illettrisme.lien")
+        render LienComponent.new(texte_lien, texte_lien, externe: true)
+    end
   end
 end

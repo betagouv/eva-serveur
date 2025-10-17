@@ -17,7 +17,7 @@ div class: "col" do
     if niveau.present?
       md t("#{niveau}.description", scope: scope)
     else
-      md t("admin.restitutions.pas_de_score")
+      md t("admin.restitutions.pas_de_score", lien: t("admin.restitutions.lien_pas_de_score"))
     end
   end
 end

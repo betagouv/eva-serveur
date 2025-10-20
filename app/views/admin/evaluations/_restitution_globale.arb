@@ -107,11 +107,17 @@ div class: "evaluation__restitution-globale #{class_css}" do
   end
 
   render Evaluation::AnnexeDiagnosticComponent.new(
-    restitution_globale: restitution_globale
+    nom_beneficiaire: restitution_globale.beneficiaire,
+    code_beneficiaire: restitution_globale.code_beneficiaire,
+    date: restitution_globale.date,
+    structure: restitution_globale.structure
   ) if pdf && resource.campagne.avec_diagnostic?
 
   render Evaluation::AnnexePositionnementComponent.new(
-    restitution_globale: restitution_globale
+    nom_beneficiaire: restitution_globale.beneficiaire,
+    code_beneficiaire: restitution_globale.code_beneficiaire,
+    date: restitution_globale.date,
+    structure: restitution_globale.structure
   ) if pdf && (
     campagne_avec_positionnement?(:litteratie) || campagne_avec_positionnement?(:numeratie)
   )

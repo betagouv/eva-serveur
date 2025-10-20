@@ -1,9 +1,11 @@
+<% entete_page_args = {
+  nom_beneficiaire: beneficiaire.nom,
+  code_beneficiaire: beneficiaire.code_beneficiaire,
+  structure: structure.nom
+} %>
+
 <div class="page-pdf page adaptation-pdf page-comparaison">
-  <%= render Pdf::EntetePageComponent.new(
-    nom_beneficiaire: beneficiaire.nom,
-    code_beneficiaire: beneficiaire.code_beneficiaire,
-    structure: structure.nom
-  ) %>
+  <%= render Pdf::EntetePageComponent.new(**entete_page_args) %>
   <div class="page-pdf__contenu">
     <h1 class="page-comparaison__titre">Comparaison des résultats</h1>
 
@@ -24,3 +26,7 @@
   </div>
   <%= render Pdf::PiedPageComponent.new %>
 </div>
+
+<%= render Evaluation::AnnexePositionnementComponent.new(
+  **entete_page_args
+) %>

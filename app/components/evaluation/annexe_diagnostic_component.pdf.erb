@@ -1,10 +1,10 @@
 <div id="annexe_restitution" class="page adaptation-pdf annexe_restitution">
-  <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+  <%= render Pdf::EntetePageComponent.new(**@entete_page_args) %>
 
   <div class="content">
     <h2 class="text-center my-4 evaluation__titre"><%= t(".titre") %></h2>
     <div class="annexe_restitution__introduction annexe_restitution__introduction--diagnostic">
-      <%= t(".introduction") %>
+      <%= md t(".introduction") %>
       <div class="row">
         <div class="col">
           <div class="annexe_restitution__encadre">
@@ -69,5 +69,5 @@
     <%= render Evaluation::AlertAnnexeComponent.new %>
   </div>
 
-  <%= render "pied_page" %>
+  <%= render "admin/evaluations/pied_page" %>
 </div>

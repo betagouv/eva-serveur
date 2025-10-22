@@ -125,7 +125,7 @@ campagne_privee: campagne.privee))
   form partial: "form"
 
   controller do
-    helper_method :comptes_structure
+    helper_method :comptes_structure, :comptes_structures_filles
 
     before_action :assigne_valeurs_par_defaut, only: %i[new create]
     before_action :parcours_type, only: %i[new create edit update]
@@ -153,7 +153,7 @@ campagne_privee: campagne.privee))
 
     def assigne_valeurs_par_defaut
       params[:campagne] ||= {}
-      params[:campagne][:compte_id] ||= current_compte.id
+      params[:campagne][:compte_id] ||= current_compte.id unless current_compte.administratif?
     end
 
     def parcours_type
@@ -166,6 +166,15 @@ campagne_privee: campagne.privee))
                                      .includes([ :questionnaire,
                                                 { situation: %i[questionnaire
                                                                 illustration_attachment] } ])
+    end
+
+    def comptes_structures_filles
+      return Compte.none unless current_compte.structure
+
+      structures_locales_filles = current_compte.structure.children
+                                                .where(type: StructureLocale.name)
+      @comptes_structures_filles ||= Compte.where(structure: structures_locales_filles).order(
+:prenom, :nom)
     end
 
     def comptes_structure

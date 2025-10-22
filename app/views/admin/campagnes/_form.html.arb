@@ -79,7 +79,14 @@ div class: "nouvelle-campagne" do
           end
         end
 
-        if current_compte.admin? && mode == "edit"
+        if current_compte.administratif?
+          h2 t(".titre_compte")
+          div class: "panel" do
+            f.inputs do
+              f.input :compte, collection: comptes_structures_filles
+            end
+          end
+        elsif current_compte.admin? && mode == "edit"
           h2 t(".titre_compte")
           div class: "panel" do
             f.inputs do

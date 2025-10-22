@@ -3,8 +3,8 @@ ActiveAdmin.register Actualite do
 
   permit_params :titre, :contenu, :categorie, :illustration
 
-  filter :titre
-  filter :contenu
+  filter :titre, filters: [ :contains_unaccent, :eq ]
+  filter :contenu, filters: [ :contains_unaccent, :eq ]
   filter :created_at
 
   config.sort_order = "created_at_desc"

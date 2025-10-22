@@ -1,7 +1,7 @@
 ActiveAdmin.register Beneficiaire do
   permit_params :nom
 
-  filter :nom
+  filter :nom, filters: [:contains_unaccent, :eq]
   filter :code_beneficiaire
   filter :created_at
   config.sort_order = "created_at_desc"

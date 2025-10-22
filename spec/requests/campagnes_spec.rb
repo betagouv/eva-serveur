@@ -57,6 +57,14 @@ describe 'Campagne request', type: :request do
         expect(resultat['code']).to eq('ETE21')
       end
 
+      context "quand on passe l'id de la campagne" do
+        it "retourne une 200" do
+          get "/api/campagnes/#{campagne.id}"
+
+          expect(response).to have_http_status(:ok)
+        end
+      end
+
       context "quand la campagne n'existe pas" do
         it "retourne une 404" do
           code_inconnue = 'INCONNUE'

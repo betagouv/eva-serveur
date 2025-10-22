@@ -1,0 +1,4 @@
+fr:
+  ransack:
+    predicates:
+      contains_unaccent: "Contient"

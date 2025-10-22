@@ -7,7 +7,8 @@ module Api
     private
 
     def trouve_et_verifie_campagne
-      @campagne = Campagne.par_code(params[:code_campagne]).take!
+      @campagne = Campagne.par_code(params[:code_campagne])
+                          .or(Campagne.where(id: params[:code_campagne])).take!
 
       unless @campagne.active?
         render json: { error: I18n.t(".errors.campagne_inactive") }, status: :forbidden

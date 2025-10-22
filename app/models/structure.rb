@@ -1,4 +1,6 @@
 class Structure < ApplicationRecord
+  include RechercheSansAccent
+
   has_ancestry
   acts_as_paranoid
   belongs_to :opco, optional: true
@@ -71,6 +73,10 @@ class Structure < ApplicationRecord
   }
 
   alias_attribute :display_name, :nom
+
+  def self.ransack_unaccent_attributes
+    %w[nom]
+  end
 
   def effectif
     Compte.where(structure: self).count

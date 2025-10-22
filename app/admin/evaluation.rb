@@ -14,6 +14,16 @@ ActiveAdmin.register Evaluation do
          display_name: "display_name",
          minimum_input_length: 2,
          order_by: "nom_asc"
+  filter :campagne_compte_structure_id,
+         as: :search_select_filter,
+         url: proc { admin_structures_locales_path },
+         fields: %i[nom code_postal],
+         display_name: "display_name",
+         minimum_input_length: 2,
+         order_by: "nom_asc",
+         label: proc { StructureLocale.model_name.human },
+         method_model: StructureLocale,
+         if: proc { current_compte.anlci? || current_compte.administratif? }
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },

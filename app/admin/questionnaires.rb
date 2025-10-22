@@ -6,7 +6,7 @@ ActiveAdmin.register Questionnaire do
   permit_params :libelle, :nom_technique,
                 questionnaires_questions_attributes: %i[id question_id _destroy]
 
-  filter :libelle
+  filter :libelle, filters: [ :contains_unaccent, :eq ]
   filter :questions
 
   member_action :export_questions, method: :get

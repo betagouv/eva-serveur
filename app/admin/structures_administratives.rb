@@ -5,7 +5,7 @@ ActiveAdmin.register StructureAdministrative do
 
   permit_params :nom, :parent_id, :siret
 
-  filter :nom
+  filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :created_at
 
   index do

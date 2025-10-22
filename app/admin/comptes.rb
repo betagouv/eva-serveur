@@ -9,8 +9,8 @@ ActiveAdmin.register Compte do
   config.sort_order = "created_at_desc"
 
   filter :email
-  filter :nom
-  filter :prenom
+  filter :nom, filters: [ :contains_unaccent, :eq ]
+  filter :prenom, filters: [ :contains_unaccent, :eq ]
   filter :statut_validation,
          as: :select,
          collection: Compte.statuts_validation.map { |v, id|

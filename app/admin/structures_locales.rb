@@ -7,7 +7,7 @@ ActiveAdmin.register StructureLocale do
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
                 :autorisation_creation_campagne, :usage, :opco_id
 
-  filter :nom
+  filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :type_structure,
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures

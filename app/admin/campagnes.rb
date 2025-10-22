@@ -10,7 +10,7 @@ ActiveAdmin.register Campagne do
 
   includes :parcours_type
 
-  filter :libelle
+  filter :libelle, filters: [ :contains_unaccent, :eq ]
   filter :code
   filter :compte_id,
          as: :search_select_filter,

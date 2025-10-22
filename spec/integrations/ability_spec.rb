@@ -269,8 +269,8 @@ describe Ability do
       expect(subject).not_to be_able_to(:destroy, beneficiaire)
     end
 
-    it 'ne peut pas créer de campagne' do
-      expect(subject).not_to be_able_to(:create, Campagne.new)
+    it 'peut créer une campagne' do
+      expect(subject).to be_able_to(:create, Campagne.new)
     end
   end
 

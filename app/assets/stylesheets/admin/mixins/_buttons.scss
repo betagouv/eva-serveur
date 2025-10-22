@@ -4,7 +4,7 @@
 }
 
 @mixin base-boutons() {
-  &, &:link, &:visited {
+  &, &:link, &:visited, &:active {
     background-image: none;
   }
   display: inline-flex;
@@ -52,7 +52,7 @@
   color: $eva_light;
   border-color: $eva_main_blue;
   background-color: $eva_main_blue;
-  &:not(.disabled):hover {
+  &:not(.disabled):hover, &:not(.disabled):active {
     border-color: $blue-france-sun-113-hover;
     background-color: $blue-france-sun-113-hover;
   }
@@ -69,7 +69,7 @@
   border-color: $eva_main_blue;
   background-color: $grey-1000;
   box-shadow: none;
-  &:not(.disabled):hover {
+  &:not(.disabled):hover, &:not(.disabled):active {
     filter: brightness(96%);
     text-shadow: none;
     box-shadow: none;
@@ -82,7 +82,7 @@
   @include bouton-secondaire;
   border-color: $grey-900;
 
-  &:hover {
+  &:hover, &:active {
     background-color: $grey-1000-hover;
   }
 }

@@ -19,9 +19,6 @@ form input[type="submit"].bouton-secondaire {
   @include grand-bouton;
 }
 
-form input[type="submit"].bouton-secondaire:not(.disabled):hover {
-  @include bouton-secondaire
-}
 .has_many_container a.button {
   @include bouton-primaire;
   @include petit-bouton;
@@ -29,7 +26,7 @@ form input[type="submit"].bouton-secondaire:not(.disabled):hover {
 form input[type="submit"]:not(.disabled),
 form button:not(.disabled),
 .has_many_container a.button:not(.disabled) {
-  &:hover {
+  &:hover, &:active {
     background-image: none;
   }
 }
@@ -38,23 +35,19 @@ form fieldset.actions li.cancel a,
 .action-secondaire {
   @include bouton-primaire();
   @include grand-bouton;
-  &, &:link, &:visited {
+  &, &:link, &:visited, &:active {
     color: $eva_main_blue;
   }
   font-size: .7rem;
   margin-right: 0;
   border-color: $eva_main_blue;
   background-color: $grey-1000;
-  &:not(.disabled):hover {
+  &:not(.disabled):hover, &:not(.disabled):active {
     filter: brightness(96%);
     border-color: $eva_main_blue;
     background-color: $grey-1000;
-  }
-}
-form.filter_form a.clear_filters_btn:not(.disabled),
-form fieldset.actions li.cancel a:not(.disabled) {
-  &:hover {
     background-image: none;
+    box-shadow: none;
   }
 }
 

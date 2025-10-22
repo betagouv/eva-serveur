@@ -57,4 +57,66 @@ describe Beneficiaire do
       it { expect(beneficiaire.code_beneficiaire).to eq 'MAT8080' }
     end
   end
+
+  describe ".ransack" do
+    let!(:beneficiaire_avec_accents) { create(:beneficiaire, nom: "José García") }
+    let!(:beneficiaire_sans_accents) { create(:beneficiaire, nom: "Pierre Dupont") }
+
+    context "avec des paramètres Hash" do
+      it "transforme nom_cont en nom_contains_unaccent" do
+        resultats = described_class.ransack(nom_cont: "Jose").result
+        expect(resultats).to include(beneficiaire_avec_accents)
+      end
+
+      it "recherche sans tenir compte des accents dans les deux sens" do
+        # Recherche sans accent trouve avec accent
+        resultats = described_class.ransack(nom_cont: "Jose").result
+        expect(resultats).to include(beneficiaire_avec_accents)
+
+        # Recherche avec accent trouve sans accent
+        resultats = described_class.ransack(nom_cont: "Piérre").result
+        expect(resultats).to include(beneficiaire_sans_accents)
+      end
+
+      it "ne transforme pas les autres paramètres" do
+        code_partiel = beneficiaire_avec_accents.code_beneficiaire[0..2]
+        resultats = described_class.ransack(code_beneficiaire_cont: code_partiel).result
+        expect(resultats).to include(beneficiaire_avec_accents)
+      end
+    end
+
+    context "avec des paramètres imbriqués (groupings)" do
+      it "transforme récursivement les paramètres imbriqués" do
+        params = {
+          groupings: [
+            {
+              m: "or",
+              nom_cont: "Jose",
+              code_beneficiaire_cont: "test"
+            }
+          ],
+          combinator: "and"
+        }
+        resultats = described_class.ransack(params).result
+        expect(resultats).to include(beneficiaire_avec_accents)
+      end
+    end
+
+    context "avec ActionController::Parameters" do
+      it "convertit et transforme les paramètres" do
+        params = ActionController::Parameters.new(
+          groupings: {
+            "0" => {
+              m: "or",
+              nom_cont: "Jose",
+              code_beneficiaire_cont: "test"
+            }
+          },
+          combinator: "and"
+        )
+        resultats = described_class.ransack(params).result
+        expect(resultats).to include(beneficiaire_avec_accents)
+      end
+    end
+  end
 end

@@ -13,6 +13,39 @@ class Beneficiaire < ApplicationRecord
 
   delegate :diagnostic, :positionnement, to: :evaluations, prefix: true
 
+  def self.ransack(params = {}, options = {})
+    if params.is_a?(Hash)
+      transformed_params = transform_ransack_params(params)
+      super(transformed_params, options)
+    elsif params.is_a?(ActionController::Parameters)
+      hash_params = params.to_unsafe_h
+      transformed_params = transform_ransack_params(hash_params)
+      super(transformed_params, options)
+    else
+      super(params, options)
+    end
+  end
+
+  def self.transform_ransack_params(params)
+    params.transform_keys do |key|
+      key_str = key.to_s
+      if key_str == "nom_cont"
+        "nom_contains_unaccent"
+      else
+        key
+      end
+    end.transform_values do |value|
+      case value
+      when Hash
+        transform_ransack_params(value)
+      when Array
+        value.map { |v| v.is_a?(Hash) ? transform_ransack_params(v) : v }
+      else
+        value
+      end
+    end
+  end
+
   def anonyme?
     anonymise_le.present?
   end

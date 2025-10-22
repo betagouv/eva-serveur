@@ -242,6 +242,20 @@ describe 'Evaluation', type: :request do
         end
       end
     end
+
+    describe 'GET /evaluations/:id' do
+      let!(:beneficiaire) { create :beneficiaire, nom: 'Roger' }
+      let!(:evaluation) { create :evaluation, beneficiaire: beneficiaire }
+
+      before do
+        get "/api/evaluations/#{evaluation.id}"
+      end
+
+      it do
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include evaluation.id.to_s
+      end
+    end
   end
 
   describe 'member_action' do

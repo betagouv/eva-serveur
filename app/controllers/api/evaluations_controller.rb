@@ -12,6 +12,13 @@ module Api
       end
     end
 
+    def show
+      @evaluation = Evaluation.find(evaluation_params[:id])
+
+      render partial: "evaluation",
+             locals: { evaluation: @evaluation }
+    end
+
     def update
       ActiveRecord::Base.transaction do
         @evaluation = Evaluation.find(evaluation_params[:id])

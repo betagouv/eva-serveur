@@ -2,7 +2,8 @@ class FabriqueRestitution
   class << self
     def instancie(partie)
       evenements = Evenement.where(partie: partie.session_id).order(:position).order(:date)
-      situation_nom_technique = partie.situation.nom_technique.underscore.camelize
+      situation_nom_technique = partie.situation.nom_technique.split("__").first.underscore.camelize
+
       classe_restitution = "Restitution::#{situation_nom_technique}".constantize
       classe_restitution.new(partie.campagne, evenements)
     end

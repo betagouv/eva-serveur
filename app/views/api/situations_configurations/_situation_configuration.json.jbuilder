@@ -1,6 +1,7 @@
 json.id situation_configuration.situation_id
 json.libelle situation_configuration.libelle
 json.nom_technique situation_configuration.nom_technique
+json.nom_technique_sans_variant situation_configuration.nom_technique_sans_variant
 
 questionnaire = situation_configuration.questionnaire_utile
 json.questionnaire_id questionnaire&.id

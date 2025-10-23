@@ -234,6 +234,7 @@ Contenu:
       "id": "569cdc17-554d-4227-acfe-1d5d3a4afdbc",
       "libelle": "Tri",
       "nom_technique": "tri",
+      "nom_technique_sans_variant": "tri",
       "questionnaire_id": "f958d99d-4adb-455b-8d85-c7e89ab7025c",
       "questions:": [
         {

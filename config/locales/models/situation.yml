@@ -5,6 +5,12 @@ fr:
         created_at: Créée le
         updated_at: Mise à jour le
         libelle: Libellé
+    errors:
+      models:
+        situation:
+          attributes:
+            nom_technique:
+              invalid: "ne doit pas contenir de tirets. Utilisez des _ à la place."
   formtastic:
     actions:
       situation:

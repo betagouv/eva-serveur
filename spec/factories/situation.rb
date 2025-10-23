@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :situation do
     libelle { 'Situation demo' }
-    nom_technique { 'situation_demo' }
+    sequence(:nom_technique) { |n| "situation_demo__#{n}" }
 
     factory :situation_inventaire do
       libelle { 'Inventaire' }

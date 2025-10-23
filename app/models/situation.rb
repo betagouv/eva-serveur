@@ -1,4 +1,6 @@
 class Situation < ApplicationRecord
+  include AvecNomTechnique
+
   BIENVENUE = "bienvenue"
   CAFE_DE_LA_PLACE = "cafe_de_la_place"
   PLAN_DE_LA_VILLE = "plan_de_la_ville"
@@ -15,7 +17,6 @@ class Situation < ApplicationRecord
   SITUATIONS_POSITIONNEMENT = SITUATIONS_NUMERATIE + SITUATIONS_LITTERATIE
 
   validates :libelle, presence: true
-  validates :nom_technique, presence: true, uniqueness: true
   validate :nom_technique_ne_doit_pas_contenir_de_tirets
 
   has_one_attached :illustration

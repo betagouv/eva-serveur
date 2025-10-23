@@ -1,4 +1,6 @@
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  include AvecNomTechnique
+
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   CHAMPS_AUDIO = %i[intitule modalite_reponse consigne].freeze
 
@@ -18,8 +20,7 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :illustration,
             blob: { content_type: ApplicationController.helpers.illustration_content_types }
 
-  validates :libelle, :nom_technique, presence: true
-  validates :nom_technique, uniqueness: true
+  validates :libelle, presence: true
   has_many :transcriptions, dependent: :destroy
   has_one :transcription_intitule, lambda {
                                      where(categorie: :intitule)
@@ -51,9 +52,6 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     QuestionData.find_by(nom_technique: nom_technique_sans_variant)
   end
 
-  def nom_technique_sans_variant
-    nom_technique.split("__").first
-  end
   delegate :score, :metacompetence, to: :question_data, allow_nil: true
 
   def display_name

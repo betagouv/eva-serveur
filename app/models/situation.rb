@@ -16,6 +16,7 @@ class Situation < ApplicationRecord
 
   validates :libelle, presence: true
   validates :nom_technique, presence: true, uniqueness: true
+  validate :nom_technique_ne_doit_pas_contenir_de_tirets
 
   has_one_attached :illustration
   belongs_to :questionnaire, optional: true
@@ -55,5 +56,13 @@ class Situation < ApplicationRecord
 
   def competences_transversales?
     SITUATIONS_COMPETENCES_TRANSVERSALES.include?(nom_technique)
+  end
+
+  private
+
+  def nom_technique_ne_doit_pas_contenir_de_tirets
+    if nom_technique.present? && nom_technique.include?("-")
+      errors.add(:nom_technique, "ne doit pas contenir de tirets")
+    end
   end
 end

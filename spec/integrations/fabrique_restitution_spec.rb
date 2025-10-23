@@ -42,11 +42,13 @@ describe FabriqueRestitution do
         end
       end
 
-      context "pour une situation 'diag-risques-entreprise'" do
-        let(:situation) { create :situation, nom_technique: "Diag-risques-entreprise" }
+      context "pour une situation dont le nom technique contient un variant" do
+        let(:situation) do
+          create :situation, nom_technique: "evaluation_impact_general__constructys"
+        end
 
         it do
-          expect(described_class.instancie(partie).class).to eq(Restitution::DiagRisquesEntreprise)
+          expect(described_class.instancie(partie).class).to eq(Restitution::EvaluationImpactGeneral)
         end
       end
     end

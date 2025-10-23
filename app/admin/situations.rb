@@ -14,7 +14,7 @@ ActiveAdmin.register Situation do
     f.semantic_errors
     inputs do
       f.input :libelle
-      f.input :nom_technique
+      f.input :nom_technique, hint: t("admin.situations.hints.nom_technique")
       f.input :illustration, as: :file
       f.input :description, as: :text
       f.input :questionnaire

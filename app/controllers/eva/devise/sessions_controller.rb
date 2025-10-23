@@ -18,7 +18,7 @@ module Eva
         code = params[:code]&.upcase
         campagne = code.present? && Campagne.par_code(code)
         if campagne.present?
-          redirect_to url_campagne(code), allow_other_host: true
+          redirect_to url_campagne(campagne), allow_other_host: true
         else
           code_erreur = t("active_admin.devise.login.evaluations.code_invalide")
           redirect_to new_compte_session_path(code: code, code_erreur: code_erreur)

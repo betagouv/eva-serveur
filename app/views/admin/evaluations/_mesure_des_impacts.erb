@@ -10,7 +10,7 @@
       <% else %>
         <p><%= t(".incomplet.description") %></p>
 
-        <% url = "#{ENV['URL_EVA_ENTREPRISES']}/evaluation-impact?evaluation_id=#{params[:id]}" %>
+        <% url = "#{URL_EVA_ENTREPRISES}/evaluation-impact?evaluation_id=#{params[:id]}" %>
         <%= render BoutonComponent.new(url, type: :primary) do %>
           <%= t(".incomplet.action") %>
         <% end %>

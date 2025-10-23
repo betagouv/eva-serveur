@@ -12,7 +12,6 @@ describe Eva::Devise::SessionsController, type: :controller do
         }
 
         allow(controller).to receive(:url_campagne)
-          .with('CODECAMPAGNE')
           .and_return('URL_CAMPAGNE')
 
         @request.env['devise.mapping'] = Devise.mappings[:compte]

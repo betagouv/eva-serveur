@@ -13,6 +13,7 @@ fr:
         types_de_programme:
           diagnostic : Diagnostic
           positionnement: Positionnement
+          diagnostic_entreprise: Diagnostic Entreprise
         created_at: créé le
         updated_at: Mis à jour le
   formtastic:

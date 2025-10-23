@@ -15,7 +15,7 @@ module CampagneHelper
   end
 
   def collection_types_programme
-    ParcoursType::TYPES_DE_PROGRAMME.map do |type_programme|
+    ParcoursType.types_programmes_eva.map do |type_programme|
       [ label_type_programme(type_programme), type_programme ]
     end
   end
@@ -35,8 +35,10 @@ module CampagneHelper
            locals: { programme: programme }
   end
 
-  def url_campagne(code)
-    Addressable::URI.escape("#{URL_CLIENT}?code=#{code}")
+  def url_campagne(campagne)
+    base_url = URL_CLIENT
+    base_url = URL_EVA_ENTREPRISES if campagne.parcours_type&.diagnostic_entreprise?
+    Addressable::URI.escape("#{base_url}?code=#{campagne.code}")
   end
 
   def parcours_type_libelle(campagne)

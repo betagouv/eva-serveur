@@ -30,7 +30,8 @@ div class: "nouvelle-campagne" do
           div id: "zone-choix-parcours",
               class: f.object.type_programme.present? ? "" : "hidden" do
             div class: "panel" do
-              ParcoursType::TYPES_DE_PROGRAMME.each do |type_programme|
+              types_programmes = ParcoursType.types_programmes_eva
+              types_programmes.each do |type_programme|
                 classes_type_programme = type_programme.to_s
                 if f.object.type_programme != type_programme.to_s
                   classes_type_programme += " hidden"

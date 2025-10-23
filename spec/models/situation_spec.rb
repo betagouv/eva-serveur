@@ -14,7 +14,9 @@ RSpec.describe Situation, type: :model do
 
       it 'is not valid' do
         expect(subject).not_to be_valid
-        expect(subject.errors[:nom_technique]).to include("ne doit pas contenir de tirets")
+        expect(subject.errors[:nom_technique]).to include(
+          "ne doit pas contenir de tirets. Utilisez des _ à la place."
+        )
       end
     end
 

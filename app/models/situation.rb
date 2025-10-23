@@ -62,8 +62,6 @@ class Situation < ApplicationRecord
   private
 
   def nom_technique_ne_doit_pas_contenir_de_tirets
-    if nom_technique.present? && nom_technique.include?("-")
-      errors.add(:nom_technique, "ne doit pas contenir de tirets")
-    end
+    errors.add(:nom_technique, :invalid) if nom_technique.present? && nom_technique.include?("-")
   end
 end

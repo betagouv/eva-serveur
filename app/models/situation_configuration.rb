@@ -2,7 +2,8 @@ class SituationConfiguration < ApplicationRecord
   belongs_to :situation
   belongs_to :questionnaire, optional: true
 
-  delegate :libelle, :nom_technique, :questionnaire_entrainement_id, to: :situation
+  delegate :libelle, :nom_technique, :nom_technique_sans_variant, :questionnaire_entrainement_id,
+to: :situation
   delegate :livraison_sans_redaction?, to: :situation, allow_nil: true
   delegate :bienvenue?, to: :situation, allow_nil: true
 

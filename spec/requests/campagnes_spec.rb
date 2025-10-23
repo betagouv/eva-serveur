@@ -126,6 +126,7 @@ describe 'Campagne request', type: :request do
           premiere_situation = reponse_json['situations'][0]
           expect(premiere_situation['libelle']).to eql('Livraison')
           expect(premiere_situation['nom_technique']).to eql('livraison')
+          expect(premiere_situation['nom_technique_sans_variant']).to eql('livraison')
           expect(premiere_situation['id']).to eql(situation_livraison.id)
           expect(premiere_situation['questionnaire_id']).to eql(questionnaire.id)
           expect(premiere_situation['questions'][0]['intitule'])

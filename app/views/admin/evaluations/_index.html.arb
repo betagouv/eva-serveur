@@ -10,7 +10,12 @@ context.instance_eval do
                   class: "evaluation__campagne"),
           class: "d-flex align-items-center"
       parcours_type = campagne.parcours_type
-      div parcours_type.display_name, class: "evaluation__parcours-type" if parcours_type.present?
+      if parcours_type.present? && !current_compte.administratif?
+        div parcours_type.display_name, class: "evaluation__parcours-type"
+      end
+      if current_compte.anlci? || current_compte.administratif?
+        div evaluation.campagne.structure.display_name, class: "evaluation__parcours-type"
+      end
     end
   end
   column :created_at do |evaluation|

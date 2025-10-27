@@ -24,9 +24,14 @@ module Ransack
           arel_attribute = arel_table[ransack_attribute.name]
 
           unaccent_column = Arel::Nodes::NamedFunction.new("unaccent", [arel_attribute])
-          unaccent_value = Arel::Nodes::NamedFunction.new("unaccent", [Arel::Nodes.build_quoted(formatted_value)])
+          replace_column = Arel::Nodes::NamedFunction.new("REPLACE",
+            [unaccent_column, Arel::Nodes.build_quoted("-"), Arel::Nodes.build_quoted(" ")])
 
-          return unaccent_column.matches(unaccent_value)
+          unaccent_value = Arel::Nodes::NamedFunction.new("unaccent", [Arel::Nodes.build_quoted(formatted_value)])
+          replace_value = Arel::Nodes::NamedFunction.new("REPLACE",
+            [unaccent_value, Arel::Nodes.build_quoted("-"), Arel::Nodes.build_quoted(" ")])
+
+          return replace_column.matches(replace_value)
         end
 
         original_arel_predicate(*args)

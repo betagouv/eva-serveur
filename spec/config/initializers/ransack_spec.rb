@@ -36,6 +36,20 @@ describe "Ransack initializer", type: :model do
       expect(resultats).to be_empty
     end
 
+    it "trouve les résultats en ignorant les tirets" do
+      beneficiaire_avec_tiret = create(:beneficiaire, nom: "Anne-Sophie")
+
+      resultats = Beneficiaire.ransack(nom_contains_unaccent: "Anne Sophie").result
+      expect(resultats).to include(beneficiaire_avec_tiret)
+    end
+
+    it "trouve les résultats quand on cherche avec un tiret alors que la donnée n'en a pas" do
+      beneficiaire_sans_tiret = create(:beneficiaire, nom: "Anne Sophie")
+
+      resultats = Beneficiaire.ransack(nom_contains_unaccent: "Anne-Sophie").result
+      expect(resultats).to include(beneficiaire_sans_tiret)
+    end
+
     context "recherche avec le paramètre cont transformé en contains_unaccent" do
       it "trouve les bénéficiaires en utilisant nom_cont sans tenir compte des accents" do
         # Simule le comportement du search_select_filter qui utilise _cont

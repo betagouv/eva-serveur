@@ -60,19 +60,22 @@ structure: structure_administrative_fille }
       let!(:admin_independante) { create :compte_admin, structure: structure_independante }
       let!(:compte_independant) {
  create :compte_conseiller, nom: "Moreau", prenom: "Claire", structure: structure_independante }
+      let!(:compte_refuse) { create :compte_conseiller, :refusee, nom: "Refuse", prenom: "Paul",
+                                    structure: structure_locale_fille }
 
       before do
         sign_in compte_admin_administratif
         get :new
       end
 
-      it "retourne uniquement les comptes des structures locales filles du compte connecté" do
+      it "retourne uniquement les comptes des SF locales, non refusé, du compte connecté" do
         comptes = controller.send(:comptes_structures_filles)
 
         expect(comptes).to include(compte_locale_fille)
         expect(comptes).not_to include(compte_admin_fille)
         expect(comptes).not_to include(compte_independant)
         expect(comptes).not_to include(compte_admin_administratif)
+        expect(comptes).not_to include(compte_refuse)
       end
     end
 

@@ -82,7 +82,7 @@ ActiveAdmin.register Compte do
       f.input :email
       f.input :telephone
       f.input :role, as: :select, collection: collection_roles if can?(:edit_role, f.object)
-      if can? :manage, Compte
+      if can?(:manage, Compte) || current_compte.administratif?
         f.input :structure
       else
         f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }

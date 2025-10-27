@@ -282,6 +282,10 @@ describe Ability do
 
       expect(subject).to be_able_to(:read, evaluation_structure_fille.beneficiaire)
     end
+
+    it 'ne peut pas dupliquer de campagne' do
+      expect(subject).not_to be_able_to(:duplique, Campagne.new)
+    end
   end
 
   context 'Compte générique' do

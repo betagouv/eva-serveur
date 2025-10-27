@@ -15,7 +15,7 @@ class PasswordValidator < ActiveModel::Validator
   end
 
   def valide_robustesse(compte, valeur)
-    if compte.anlci?
+    if compte.anlci? || compte.administratif?
       unless PasswordValidator.est_avec_12_maj_min_num_et_symbol?(valeur)
         compte.errors.add(:password, I18n.t(".creation_compte.regles_mot_de_passe_anlci"))
       end

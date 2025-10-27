@@ -48,6 +48,22 @@ describe PasswordValidator do
       end
     end
 
+    context "compte de structure administrative" do
+      it "quand le mot de passe contient bien des majuscule, minuscule, chiffre et symbol" do
+        compte = Compte.new(password: "aA345678912$", role: :admin,
+                            structure: StructureAdministrative.new)
+        described_class.new.validate(compte)
+        expect(compte.errors.include?(:password)).to be false
+      end
+
+      it "quand le mot de passe ne contient pas de majuscule" do
+        compte = Compte.new(password: "aa345678912$", role: :admin,
+                            structure: StructureAdministrative.new)
+        described_class.new.validate(compte)
+        expect(compte.errors.include?(:password)).to be true
+      end
+    end
+
     context "compte standard, non anlci" do
       it "Erreur si la taille est inférieur a 8 caracteres" do
         %i[conseiller admin compte_generique].each do |role|

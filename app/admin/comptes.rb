@@ -24,7 +24,7 @@ ActiveAdmin.register Compte do
          display_name: "display_name",
          minimum_input_length: 2,
          order_by: "nom_asc",
-         if: proc { current_compte.anlci? }
+         if: proc { current_compte.anlci? || current_compte.administratif? }
   filter :role,
          as: :select,
          collection: proc { collection_roles }

@@ -113,6 +113,7 @@ campagne_privee: campagne.privee))
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation do |campagne|
       l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
     end
+    column :structure if current_compte.anlci? || current_compte.administratif?
     column :compte
     column :created_at
     actions
@@ -144,7 +145,13 @@ campagne_privee: campagne.privee))
 
     def scoped_collection
       collection = end_of_association_chain.avec_nombre_evaluations_et_derniere_evaluation
-      can?(:manage, Compte) ? collection.includes(:compte) : collection
+      if can?(:manage, Compte) && action_name == "index"
+        collection.includes(compte: :structure)
+      elsif can?(:manage, Compte)
+        collection.includes(:compte)
+      else
+        collection
+      end
     end
 
     def find_resource

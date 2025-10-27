@@ -272,6 +272,16 @@ describe Ability do
     it 'peut créer une campagne' do
       expect(subject).to be_able_to(:create, Campagne.new)
     end
+
+    it 'peut voir les bénéficiaires des campagnes des structures filles' do
+      structure_locale_fille = create :structure_locale,
+                                      structure_referente: structure_administrative
+      compte_structure_fille = create :compte_admin, structure: structure_locale_fille
+      campagne_structure_fille = create :campagne, compte: compte_structure_fille
+      evaluation_structure_fille = create :evaluation, campagne: campagne_structure_fille
+
+      expect(subject).to be_able_to(:read, evaluation_structure_fille.beneficiaire)
+    end
   end
 
   context 'Compte générique' do

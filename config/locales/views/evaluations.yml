@@ -209,8 +209,34 @@ fr:
           description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
       mesure_des_impacts:
         titre: "Mesure des impacts"
-        complet:
-          description: Le questionnaire est terminé
+        performence_collective:
+          callout:
+            titre:
+              faible: Votre performence collective est faible
+              moyen: Votre performence collective est moyenne
+              fort: Votre performence collective est forte
+              tres_fort: Votre performence collective est très forte
+        agilite_organisationnelle:
+          callout:
+            titre:
+              faible: Votre agilité organisationelle est faible
+              moyen: Votre agilité organisationelle est moyenne
+              fort: Votre agilité organisationelle est forte
+              tres_fort: Votre agilité organisationelle est très forte
+        securite_qualite:
+          callout:
+            titre:
+              faible: Votre sécurité - qualité est faible
+              moyen: Votre sécurité - qualité est moyenne
+              fort: Votre sécurité - qualité est forte
+              tres_fort: Votre sécurité - qualité est très forte
+        mobilite_professionnelle:
+          callout:
+            titre:
+              faible: Votre mobilité professionnelle est faible
+              moyen: Votre mobilité professionnelle est moyenne
+              fort: Votre mobilité professionnelle est forte
+              tres_fort: Votre mobilité professionnelle est très forte
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic
           action: Continuer le diagnostic

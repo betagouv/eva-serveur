@@ -6,6 +6,7 @@ ActiveAdmin.register Evenement do
   filter :partie_situation_nom_technique, label: "Situation",
                                           as: :select,
                                           collection: proc { Situation.pluck(:nom_technique) }
+  filter :nom
   filter :date
 
   colonnes_evenement = proc do

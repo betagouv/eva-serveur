@@ -58,7 +58,7 @@ MOBILITE_PROFESSIONNELLE_PAR_SEUIL)
           return if evenements_reponse.blank?
 
           evenements_reponse = evenements_reponse.select { |e|
- questions.include?(e.donnees["question"]) }
+ questions.include?(e.question_nom_technique_sans_variant) }
           total = evenements_reponse&.sum { |e| score_impact(e) }
 
           seuils.each do |seuil, interpretation|

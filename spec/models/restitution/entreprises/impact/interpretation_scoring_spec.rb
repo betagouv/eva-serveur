@@ -86,5 +86,24 @@ donnees: { question: "q4", score_cout: 10, score_numerique: 10, score_strategies
         expect(resultat).to eq(:tres_fort)
       end
     end
+
+    context 'quand les questions sont des variants' do
+      let(:evenements_reponses) do
+        [
+          build(:evenement_reponse,
+donnees: { question: "q1__variant", score_cout: 3, score_numerique: 2, score_strategies: 0 }),
+          build(:evenement_reponse,
+donnees: { question: "q2__variant", score_cout: 0, score_numerique: 2, score_strategies: 3 }),
+          build(:evenement_reponse,
+donnees: { question: "q3__variant", score_cout: 3, score_numerique: 2, score_strategies: 0 }),
+          build(:evenement_reponse,
+donnees: { question: "q4__variant", score_cout: 10, score_numerique: 10, score_strategies: 10 })
+        ]
+      end
+
+      it "retourne faible" do
+        expect(resultat).to eq(:faible)
+      end
+    end
   end
 end

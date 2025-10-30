@@ -10,7 +10,7 @@ module Restitution
           0 => :faible
         }.freeze
 
-        def calcule_performence_collective(evenements)
+        def calcule_performance_collective(evenements)
           calcule(evenements, PERFORMANCE_COLLECTIVE_PAR_SEUIL)
         end
 

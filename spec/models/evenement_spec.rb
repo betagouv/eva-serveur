@@ -109,4 +109,24 @@ describe Evenement, type: :model do
       expect(result).to be_nil
     end
   end
+
+  describe '#question_nom_technique_sans_variant' do
+    subject { described_class.new(donnees: donnees) }
+
+    context "quand le nom technique de la question contient un variant" do
+      let(:donnees) { { 'question' => 'question__variant' } }
+
+      it "retourne le nom technique sans le variant" do
+        expect(subject.question_nom_technique_sans_variant).to eq('question')
+      end
+    end
+
+    context "quand le nom technique de la question ne contient pas de variant" do
+      let(:donnees) { { 'question' => 'question' } }
+
+      it "retourne le nom technique" do
+        expect(subject.question_nom_technique_sans_variant).to eq('question')
+      end
+    end
+  end
 end

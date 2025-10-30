@@ -19,6 +19,10 @@ class Evenement < ApplicationRecord
     donnees["question"]
   end
 
+  def question_nom_technique_sans_variant
+    question_nom_technique.split("__").first
+  end
+
   def fin_situation?
     nom == "finSituation"
   end

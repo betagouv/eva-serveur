@@ -237,6 +237,27 @@ fr:
               moyen: Votre mobilité professionnelle est moyenne
               fort: Votre mobilité professionnelle est forte
               tres_fort: Votre mobilité professionnelle est très forte
+        score_cout:
+          callout:
+            titre:
+              faible: "Impact sur les coûts : Faible"
+              moyen: "Impact sur les coûts : Moyen"
+              fort: "Impact sur les coûts : Fort"
+              tres_fort: "Impact sur les coûts : Très fort"
+        score_strategie:
+          callout:
+            titre:
+              faible: "Impact sur les stratégies : Faible"
+              moyen: "Impact sur les stratégies : Moyen"
+              fort: "Impact sur les stratégies : Fort"
+              tres_fort: "Impact sur les stratégies : Très fort"
+        score_numerique:
+          callout:
+            titre:
+              faible: "Impact sur le numérique : Faible"
+              moyen: "Impact sur le numérique : Moyen"
+              fort: "Impact sur le numérique : Fort"
+              tres_fort: "Impact sur le numérique : Très fort"
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic
           action: Continuer le diagnostic

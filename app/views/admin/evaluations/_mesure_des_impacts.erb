@@ -30,6 +30,30 @@
             ) %>
           </div>
         <% end %>
+
+        <% interpretations = [
+          :score_cout,
+          :score_strategie,
+          :score_numerique
+        ] %>
+        <% interpretations.each do |interpretation| %>
+          <% resultat = evaluation_impact_general.synthese[interpretation] %>
+          <% classes = if resultat == :tres_fort || resultat == :fort
+              [ "fr-callout--green-emeraude" ]
+ elsif resultat == :moyen
+              [ "fr-callout--blue-cumulus" ]
+ else
+              [ "fr-callout--pink-macaron" ]
+            end
+          %>
+
+          <div class="fr-mb-4w">
+            <%= render MiseEnAvantComponent.new(
+              titre: t(".#{interpretation}.callout.titre.#{resultat}"),
+              classes: classes.push("fr-mb-0")
+            ) %>
+          </div>
+        <% end %>
       <% else %>
         <p><%= t(".incomplet.description") %></p>
 

@@ -6,7 +6,10 @@ describe Restitution::Entreprises::Impact::InterpretationScoring do
     let(:evenements) do
       [ build(:evenement_demarrage) ] + evenements_reponses
     end
-    let(:resultat) { described_class.new.calcule(evenements, seuils) }
+    let(:resultat) { described_class.new.calcule(evenements, questions, seuils) }
+    let(:questions) do
+      evenements_reponses.first(3).map(&:donnees).map { |d| d["question"] }
+    end
 
     context 'quand le score est entre 0 et 4' do
       let(:evenements_reponses) do
@@ -18,7 +21,7 @@ donnees: { question: "q2", score_cout: 0, score_numerique: 0, score_strategies: 
           build(:evenement_reponse,
 donnees: { question: "q3", score_cout: 0, score_numerique: 0, score_strategies: 0 }),
           build(:evenement_reponse,
-donnees: { question: "q4", score_cout: 0, score_numerique: 0, score_strategies: 0 })
+donnees: { question: "q4", score_cout: 10, score_numerique: 10, score_strategies: 10 })
         ]
       end
 
@@ -37,7 +40,7 @@ donnees: { question: "q2", score_cout: 0, score_numerique: 0, score_strategies: 
           build(:evenement_reponse,
 donnees: { question: "q3", score_cout: 0, score_numerique: 0, score_strategies: 0 }),
           build(:evenement_reponse,
-donnees: { question: "q4", score_cout: 0, score_numerique: 0, score_strategies: 0 })
+donnees: { question: "q4", score_cout: 10, score_numerique: 10, score_strategies: 10 })
         ]
       end
 
@@ -56,7 +59,7 @@ donnees: { question: "q2", score_cout: 0, score_numerique: 2, score_strategies: 
           build(:evenement_reponse,
 donnees: { question: "q3", score_cout: 0, score_numerique: 0, score_strategies: 0 }),
           build(:evenement_reponse,
-donnees: { question: "q4", score_cout: 0, score_numerique: 0, score_strategies: 0 })
+donnees: { question: "q4", score_cout: 10, score_numerique: 10, score_strategies: 10 })
         ]
       end
 
@@ -75,7 +78,7 @@ donnees: { question: "q2", score_cout: 0, score_numerique: 2, score_strategies: 
           build(:evenement_reponse,
 donnees: { question: "q3", score_cout: 3, score_numerique: 2, score_strategies: 0 }),
           build(:evenement_reponse,
-donnees: { question: "q4", score_cout: 0, score_numerique: 0, score_strategies: 0 })
+donnees: { question: "q4", score_cout: 10, score_numerique: 10, score_strategies: 10 })
         ]
       end
 

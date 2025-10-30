@@ -209,13 +209,13 @@ fr:
           description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
       mesure_des_impacts:
         titre: "Mesure des impacts"
-        performence_collective:
+        performance_collective:
           callout:
             titre:
-              faible: Votre performence collective est faible
-              moyen: Votre performence collective est moyenne
-              fort: Votre performence collective est forte
-              tres_fort: Votre performence collective est très forte
+              faible: Votre performance collective est faible
+              moyen: Votre performance collective est moyenne
+              fort: Votre performance collective est forte
+              tres_fort: Votre performance collective est très forte
         agilite_organisationnelle:
           callout:
             titre:

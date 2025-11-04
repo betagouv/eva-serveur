@@ -119,4 +119,23 @@ structure: structure_administrative_fille }
       end
     end
   end
+
+  describe 'GET #play' do
+    let(:compte) { create(:compte) }
+    let(:campagne) { create(:campagne, code: 'ABC123') }
+    let(:url) { "https://eva-entreprise.fr?token=monToken" }
+
+    before do
+      sign_in compte
+      allow(LanceurCampagne).to receive(:url).with(campagne, compte).and_return(url)
+      get :play, params: { id: campagne.id }
+    end
+
+    it 'redirige vers le jeu' do
+      expect(response).to have_http_status(:redirect)
+
+      redirected_url = response.location
+      expect(redirected_url).to eq(url)
+    end
+  end
 end

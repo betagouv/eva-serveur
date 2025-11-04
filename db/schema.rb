@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_23_095330) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_04_145922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -82,7 +82,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_23_095330) do
     t.datetime "anonymise_le"
     t.datetime "deleted_at"
     t.string "code_beneficiaire"
+    t.uuid "compte_id"
     t.index ["code_beneficiaire"], name: "index_beneficiaires_on_code_beneficiaire", unique: true
+    t.index ["compte_id"], name: "index_beneficiaires_on_compte_id"
     t.index ["deleted_at"], name: "index_beneficiaires_on_deleted_at"
   end
 
@@ -424,6 +426,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_23_095330) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "active_storage_blobs_id"
+  add_foreign_key "beneficiaires", "comptes"
   add_foreign_key "campagnes", "comptes"
   add_foreign_key "choix", "questions", on_delete: :cascade
   add_foreign_key "comptes", "structures"

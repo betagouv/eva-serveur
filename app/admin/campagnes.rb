@@ -77,6 +77,10 @@ class: "bouton-disabled")
     redirect_to request.referer
   end
 
+  member_action :play, method: :get do
+    redirect_to LanceurCampagne.url(resource, current_compte), allow_other_host: true
+  end
+
   sidebar :acces_prives, only: :show,
     if: proc { (resource.campagne_compte_autorisations.present? ||
                 can?(:autoriser_compte, resource)) &&

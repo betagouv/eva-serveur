@@ -35,12 +35,6 @@ module CampagneHelper
            locals: { programme: programme }
   end
 
-  def url_campagne(campagne)
-    base_url = URL_CLIENT
-    base_url = URL_EVA_ENTREPRISES if campagne.parcours_type&.diagnostic_entreprise?
-    Addressable::URI.escape("#{base_url}?code=#{campagne.code}")
-  end
-
   def parcours_type_libelle(campagne)
     if campagne.parcours_type.nil?
       I18n.t("components.card_parcours_type.parcours_personnalise.libelle")

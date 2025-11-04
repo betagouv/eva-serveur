@@ -366,7 +366,7 @@ describe Ability do
       expect(subject).to be_able_to(:read, Question.new)
       expect(subject).to be_able_to(%i[read mise_en_action destroy], evaluation_conseiller)
       expect(subject).to be_able_to(%i[read], evaluation_conseiller.beneficiaire)
-      expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte destroy],
+      expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte play destroy],
                                     Campagne.new(compte: compte))
       expect(subject).not_to be_able_to(:destroy, campagne_superadmin)
       expect(subject).to be_able_to(:read, Questionnaire.new)

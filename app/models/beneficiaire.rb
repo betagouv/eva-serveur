@@ -1,6 +1,7 @@
 class Beneficiaire < ApplicationRecord
   include RechercheSansAccent
 
+  belongs_to :compte, optional: true
   has_many :evaluations, dependent: :destroy
   validates :nom, presence: true
   validates :code_beneficiaire, presence: true, format: { with: /\A[A-Z0-9]+\z/ },
@@ -29,11 +30,18 @@ class Beneficiaire < ApplicationRecord
 
   def genere_code_beneficiaire_unique
     return if self[:code_beneficiaire].present?
+    return if nom.blank?
 
     loop do
-      trois_premiere_lettre_du_nom = nom.parameterize.upcase.gsub(/[^A-Z]/, "").first(3)
-      self[:code_beneficiaire] = trois_premiere_lettre_du_nom + GenerateurAleatoire.nombres(4).to_s
+      self[:code_beneficiaire] = genere_code_a_partir_du_nom
       break if Beneficiaire.where(code_beneficiaire: self[:code_beneficiaire]).none?
     end
+  end
+
+  private
+
+  def genere_code_a_partir_du_nom
+    trois_premiere_lettre_du_nom = nom.parameterize.upcase.gsub(/[^A-Z]/, "").first(3)
+    trois_premiere_lettre_du_nom + GenerateurAleatoire.nombres(4).to_s
   end
 end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Beneficiaire do
+  it { is_expected.to belong_to(:compte).optional }
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_uniqueness_of(:code_beneficiaire).case_insensitive }
   it { is_expected.to allow_value('ABC1234').for(:code_beneficiaire) }

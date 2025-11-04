@@ -11,12 +11,13 @@ describe Eva::Devise::SessionsController, type: :controller do
           code: 'codecampagne'
         }
 
-        allow(controller).to receive(:url_campagne)
-          .and_return('URL_CAMPAGNE')
+        url = "https://eva-jeu.fr"
+        allow(LanceurCampagne).to receive(:url)
+          .and_return(url)
 
         @request.env['devise.mapping'] = Devise.mappings[:compte]
         post :connexion_espace_jeu, params: params
-        expect(response).to redirect_to('URL_CAMPAGNE')
+        expect(response).to redirect_to(url)
       end
     end
 

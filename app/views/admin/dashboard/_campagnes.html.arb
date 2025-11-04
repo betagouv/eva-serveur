@@ -17,7 +17,7 @@ div class: "bloc-apercu" do
       end
     end
     campagnes.each do |campagne|
-      url = url_campagne(campagne)
+      url = play_admin_campagne_path(campagne)
       div class: "campagne" do
         text_node link_to campagne.libelle, admin_campagne_path(campagne),
                           class: "campagne-libelle", id: campagne.id

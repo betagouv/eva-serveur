@@ -178,8 +178,7 @@ campagne_privee: campagne.privee))
     def comptes_structures_filles
       return Compte.none unless current_compte.structure
 
-      structures_locales_filles = current_compte.structure.children
-                                                .where(type: StructureLocale.name)
+      structures_locales_filles = current_compte.structure.structures_locales_filles
       @comptes_structures_filles ||= Compte.where(structure: structures_locales_filles)
                                            .where.not(statut_validation: :refusee)
                                            .order(:prenom, :nom)

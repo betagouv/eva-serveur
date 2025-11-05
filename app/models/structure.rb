@@ -72,7 +72,13 @@ class Structure < ApplicationRecord
               MAX(evaluations.created_at) AS date_derniere_evaluation')
   }
 
+  scope :structures_locales, -> { where(type: StructureLocale.name) }
+
   alias_attribute :display_name, :nom
+
+  def structures_locales_filles
+    children.structures_locales
+  end
 
   def self.ransack_unaccent_attributes
     %w[nom]

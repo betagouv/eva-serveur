@@ -82,11 +82,7 @@ ActiveAdmin.register Compte do
       f.input :email
       f.input :telephone
       f.input :role, as: :select, collection: collection_roles if can?(:edit_role, f.object)
-      if can?(:manage, Compte) || current_compte.administratif?
-        f.input :structure
-      else
-        f.input :structure_id, as: :hidden, input_html: { value: current_compte.structure_id }
-      end
+      champ_structure(f)
       if current_compte.au_moins_admin? && compte != current_compte
         f.input :statut_validation, as: :radio
       end
@@ -148,7 +144,8 @@ ActiveAdmin.register Compte do
 
   controller do
     before_action :trouve_comptes, only: :index
-    helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description
+    helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description,
+                  :structure_par_defaut, :champ_structure
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
@@ -193,6 +190,23 @@ ActiveAdmin.register Compte do
     def trouve_comptes
       comptes = Compte.de_la_structure(current_compte.structure).order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente
+    end
+
+    def structure_par_defaut
+      @structure_par_defaut ||= resource.structure || current_compte.structure
+    end
+
+    def champ_structure(form)
+      if can?(:manage, Compte)
+        form.input :structure
+      else
+        if current_compte.administratif?
+          form.input :structure, collection: [ structure_par_defaut ],
+                                 selected: structure_par_defaut&.id,
+                                 input_html: { disabled: true }
+        end
+        form.input :structure_id, as: :hidden, input_html: { value: structure_par_defaut&.id }
+      end
     end
   end
 

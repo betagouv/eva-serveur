@@ -34,7 +34,8 @@ form fieldset.inputs {
   max-width: 70%;
 }
 
-.panel form fieldset.inputs, form .panel fieldset.inputs {
+.panel form fieldset.inputs,
+form .panel fieldset.inputs {
   max-width: 100%;
 }
 
@@ -47,9 +48,11 @@ form {
     legend span {
       box-shadow: none;
     }
+
     &.inputs {
       background-color: $eva_light;
     }
+
     legend span {
       font-family: $font-titre;
       text-shadow: none;
@@ -57,7 +60,7 @@ form {
       background: $eva_bluegrey;
     }
 
-    > ol > li {
+    >ol>li {
       padding: 0;
       margin-bottom: 1rem;
 
@@ -77,8 +80,9 @@ form {
         text-transform: none;
         font-weight: normal;
         color: $couleur-texte;
+
         abbr[title] {
-          text-decoration:none;
+          text-decoration: none;
           color: $couleur-accent-erreur;
         }
       }
@@ -94,7 +98,7 @@ form {
         position: relative;
 
         &::before {
-          background-image: linear-gradient(0deg,$error-425,$error-425);
+          background-image: linear-gradient(0deg, $error-425, $error-425);
           background-position: 0 0;
           background-repeat: no-repeat;
           background-size: .125rem 100%;
@@ -121,6 +125,7 @@ form {
         textarea {
           border: 1px solid $eva_red;
         }
+
         label {
           color: $eva_red;
         }
@@ -148,6 +153,7 @@ form {
           width: var(--icon-size);
         }
       }
+
       p.inline-hints {
         @include hint();
 
@@ -156,33 +162,44 @@ form {
         }
       }
     }
+
     select {
       appearance: none;
       position: relative;
       padding-left: .5rem;
       padding-right: 2rem;
     }
+
     li.select {
       position: relative;
 
-      &::after {
-        content: '';
-        color: $eva_main_blue;
-        right: 0.7rem;
-        top: 2.4rem;
-        position: absolute;
-        pointer-events: none;
-        background-image: asset-data-url('fleche_select.svg');
-        height: 1rem;
-        width: 1rem;
+      .select2-container--default {
+        &::after {
+          content: '';
+          color: $eva_main_blue;
+          right: 0.7rem;
+          top: 0.5rem;
+          position: absolute;
+          pointer-events: none;
+          background-image: asset-data-url('fleche_select.svg');
+          height: 1rem;
+          width: 1rem;
+        }
+
+        &.select2-container--disabled::after {
+          opacity: 0.3;
+        }
       }
+
       .select2-selection__arrow {
         display: none;
       }
+
       .select2-selection__clear {
         margin-right: .7rem;
       }
     }
+
     &.actions {
       margin-top: 1rem;
 
@@ -190,6 +207,7 @@ form {
         width: 100%;
       }
     }
+
     p {
       margin-bottom: 1rem;
     }
@@ -232,6 +250,7 @@ form {
 form:not(.filter_form) .select2-container {
   width: 100% !important;
 }
+
 .select2 {
   &-container {
     max-width: 100%;
@@ -241,19 +260,24 @@ form:not(.filter_form) .select2-container {
       height: 2.5rem;
     }
   }
+
   &-results__option {
     color: $couleur-texte;
+
     &:focus {
       border: 1px solid $eva_main_blue;
       @include ombre();
     }
   }
 }
+
 .select2-container--default .select2-selection--single {
   border-color: $eva_bluegrey;
+
   .select2-selection__arrow b {
     border-color: $eva_main_blue transparent transparent transparent;
   }
+
   .select2-selection__rendered {
     color: $couleur-texte;
   }

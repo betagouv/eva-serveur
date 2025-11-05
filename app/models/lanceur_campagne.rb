@@ -7,9 +7,11 @@ class LanceurCampagne
 
   def url
     base_url = URL_CLIENT
-    base_url = URL_EVA_ENTREPRISES if @campagne.parcours_type&.diagnostic_entreprise?
+    base_url = URL_EVA_ENTREPRISES if campagne_entreprise?
     addressable_uri = "#{base_url}?code=#{@campagne.code}"
-    addressable_uri += "&beneficiaire_id=#{@beneficiaire.id}" if @beneficiaire
+    if @beneficiaire && campagne_entreprise?
+      addressable_uri += "&beneficiaire_id=#{@beneficiaire.id}"
+    end
     Addressable::URI.escape(addressable_uri)
   end
 
@@ -18,6 +20,10 @@ class LanceurCampagne
   end
 
   private
+
+  def campagne_entreprise?
+    @campagne.parcours_type&.diagnostic_entreprise?
+  end
 
   def retrouve_ou_cree_beneficiaire
     Beneficiaire.where(compte: @compte).first_or_create do |beneficiaire|

@@ -6,7 +6,7 @@
     <%= render CartePartageCodeComponent.new(
       libelle_code: Campagne.human_attribute_name("code"),
       code: @campagne.code,
-      url: play_admin_campagne_path(@campagne),
+      url: LanceurCampagne.url(@campagne, current_compte),
       description: t(".explication_code")) do |component| %>
       <% component.with_footer do %>
         <div class="row m-0">

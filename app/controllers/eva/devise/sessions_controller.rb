@@ -16,7 +16,7 @@ module Eva
 
       def connexion_espace_jeu
         code = params[:code]&.upcase
-        campagne = Campagne.par_code(code) if code.present?
+        campagne = Campagne.par_code(code).first if code.present?
         if campagne.present?
           redirect_to LanceurCampagne.url(campagne), allow_other_host: true
         else

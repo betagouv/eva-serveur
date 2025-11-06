@@ -12,7 +12,8 @@ describe Eva::Devise::SessionsController, type: :controller do
         }
 
         url = "https://eva-jeu.fr"
-        allow(LanceurCampagne).to receive(:url)
+        expect(LanceurCampagne).to receive(:url)
+          .with(campagne)
           .and_return(url)
 
         @request.env['devise.mapping'] = Devise.mappings[:compte]

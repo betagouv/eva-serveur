@@ -377,6 +377,7 @@ describe Ability do
       expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Dashboard', {}))
       expect(subject).not_to be_able_to(:read,
                                         ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+      expect(subject).to be_able_to(:fusionner, Beneficiaire)
     end
 
     context "quand la structure n'autorise pas la création de campagne" do

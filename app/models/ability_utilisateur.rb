@@ -92,6 +92,7 @@ compte_id: compte.id
       can :read, Beneficiaire, evaluations: {
         campagne: campagnes_publique_de_la_structure(compte)
       }
+      can :fusionner, Beneficiaire unless compte.administratif?
     end
 
     if compte.admin?

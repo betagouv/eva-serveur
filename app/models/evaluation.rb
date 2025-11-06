@@ -64,11 +64,6 @@ class Evaluation < ApplicationRecord
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
   enum :statut, { a_suivre: 0, suivi_en_cours: 1, suivi_effectue: 2 }
 
-  scope :des_12_derniers_mois, lambda {
-    dernier_mois_complete = 1.month.ago.end_of_month
-    il_y_a_12_mois = (dernier_mois_complete - 11.months).beginning_of_month
-    where(created_at: il_y_a_12_mois..dernier_mois_complete)
-  }
   scope :pour_les_structures, lambda { |structures|
     joins(campagne: { compte: :structure })
       .where(campagnes: { comptes: { structure_id: structures } })

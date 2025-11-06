@@ -18,12 +18,10 @@ fr:
       statistiques:
         titre: Statistiques
         description:
-          sous_titre: Nombre d'évaluations effectuées par structure sur les 12 derniers mois glissants.
-          repartition_evaluations: Répartition des niveaux d'illettrisme
           correlation_donnees_illettrisme: Corrélation entre le niveau d'illettrisme et les données sociodémographiques
       membres:
         titre: Membres de la structure
-        invitation:  |
+        invitation: |
           Pour inviter une personne à rejoindre cette structure,
           vous pouvez lui envoyer le lien suivant :
         voir_membres: Voir la liste
@@ -57,7 +55,7 @@ fr:
       placeholders:
         structure:
           nom: Mission locale de Montpellier
-          code_postal: '34000'
+          code_postal: "34000"
       compte:
         titre: Votre compte
       actions:

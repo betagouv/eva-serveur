@@ -76,10 +76,6 @@ class Structure < ApplicationRecord
 
   alias_attribute :display_name, :nom
 
-  def structures_locales_filles
-    children.structures_locales
-  end
-
   def self.ransack_unaccent_attributes
     %w[nom]
   end

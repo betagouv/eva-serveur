@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeBatchActionFusion() {
   const fusionButtons = document.querySelectorAll('.batch_action[data-action="fusionner"]');
-  
+
   fusionButtons.forEach(button => {
     button.addEventListener('click', handleFusionButtonClick);
   });
@@ -19,12 +19,12 @@ function handleFusionButtonClick(event) {
   event.stopImmediatePropagation();
 
   const checkedBoxes = getSelectedBeneficiaires();
-  
+
   if (!validateSelection(checkedBoxes)) return;
 
   const beneficiaires = extractBeneficiairesData(checkedBoxes);
   const sortedBeneficiaires = sortBeneficiairesByDate(beneficiaires);
-  
+
   updateModalContent(sortedBeneficiaires);
   openModal();
 }
@@ -47,7 +47,7 @@ function extractBeneficiairesData(checkedBoxes) {
     return {
       id: checkbox.value,
       nom: extractNomFromRow(row),
-      dateText: extractDateFromRow(row)
+      dateISO8601: extractDateFromRow(row)
     };
   });
 }
@@ -59,16 +59,21 @@ function extractNomFromRow(row) {
 
 function extractDateFromRow(row) {
   if (!row) return '';
-  return row.querySelector('.col-created_at')?.textContent.trim() || '';
+  const dateCell = row.querySelector('.col-created_at span[data-created-at]');
+  return dateCell?.dataset.createdAt || '';
 }
 
 function sortBeneficiairesByDate(beneficiaires) {
-  return [...beneficiaires].sort((a, b) => a.dateText.localeCompare(b.dateText));
+  return [...beneficiaires].sort((a, b) => {
+    if (a.dateISO8601 < b.dateISO8601) return -1;
+    if (a.dateISO8601 > b.dateISO8601) return 1;
+    return 0;
+  });
 }
 
 function updateModalContent(beneficiaires) {
   const modal = document.getElementById('fr-modal-fusionner');
-  
+
   // Mettre à jour la liste
   const listeElements = document.getElementById('liste-elements-a-fusionner');
   listeElements.innerHTML = '';
@@ -77,30 +82,30 @@ function updateModalContent(beneficiaires) {
     li.textContent = b.nom;
     listeElements.appendChild(li);
   });
-  
+
   // Mettre à jour le bénéficiaire de rattachement
   const rattacheElement = document.getElementById('beneficiaire-rattache');
   rattacheElement.textContent = beneficiaires[0].nom;
-  
+
   // Stocker les IDs
   modal.dataset.ids = beneficiaires.map(b => b.id).join(',');
 }
 
 function openModal() {
   const modal = document.getElementById('fr-modal-fusionner');
-  
+
   if (typeof modal.showModal === 'function') {
     modal.showModal();
   } else {
     modal.style.display = 'block';
   }
-  
+
   modal.classList.add('fr-modal--opened');
 }
 
 function initializeFormSubmission(modal) {
   const form = document.getElementById('fusion-form');
-  
+
   form.addEventListener('submit', function(event) {
     prepareHiddenInputs(modal);
   });
@@ -109,9 +114,9 @@ function initializeFormSubmission(modal) {
 function prepareHiddenInputs(modal) {
   const ids = modal.dataset.ids.split(',');
   const container = document.getElementById('hidden-ids-container');
-  
+
   container.innerHTML = '';
-  
+
   ids.forEach(id => {
     const input = createHiddenInput('collection_selection[]', id);
     container.appendChild(input);

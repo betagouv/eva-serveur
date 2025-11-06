@@ -34,8 +34,9 @@ div class: "row" do
 
       render "admin/structures/membres"
 
-      render partial: "admin/structures/mes_campagnes",
-             locals: { campagnes: campagnes }
+      if resource.is_a?(StructureLocale)
+        render partial: "admin/structures/mes_campagnes", locals: { campagnes: campagnes }
+      end
     end
   end
 end

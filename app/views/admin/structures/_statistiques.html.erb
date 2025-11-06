@@ -1,42 +1,16 @@
 <% statistique = StatistiquesStructure.new(resource) %>
 
 <h3><%= t(".titre")%></h3>
+<div class="panel">
 <% if resource.instance_of?(StructureAdministrative) %>
-  <p class="statistiques__description"><%= t(".description.sous_titre") %></p>
-  <div class="panel">
-   <% evaluations = statistique.nombre_evaluations_des_12_derniers_mois %>
-   <% if evaluations.present? %>
-     <%= column_chart evaluations, legend: "bottom" %>
-   <% else %>
-     Pas d'évaluation à afficher pour le moment
-   <% end %>
-  </div>
-
-  <p class="statistiques__description"><%= t(".description.repartition_evaluations") %></p>
-  <div class="panel">
-   <% evaluations = statistique.repartition_evaluations %>
-   <% if evaluations.present? %>
-     <%= pie_chart evaluations, library: {
-       plugins: {
-         legend: {
-           position: "right",
-           align: "start",
-         }
-       }
-     } %>
-   <% else %>
-     Pas de diagnostic à afficher pour le moment
-   <% end %>
-  </div>
   <iframe
     src="<%= statistique.url_structure_administrative %>"
     frameborder="0"
     width="100%"
     height="950"
     allowtransparency
-></iframe>
- <% else %>
-  <div class="panel">
+  ></iframe>
+<% else %>
    <iframe
        src="<%= statistique.url_structure_locale %>"
        frameborder="0"
@@ -44,8 +18,8 @@
        height="950"
        allowtransparency
    ></iframe>
-  </div>
- <% end %>
+<% end %>
+</div>
 
 <% if current_compte.anlci? %>
   <p class="statistiques__description"><%= t(".description.correlation_donnees_illettrisme") %></p>

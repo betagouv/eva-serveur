@@ -30,9 +30,5 @@ ActiveAdmin.register StructureAdministrative do
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)
     end
-
-    def statistiques_structure
-      StatistiquesStructure.new(resource).nombre_evaluations_des_12_derniers_mois
-    end
   end
 end

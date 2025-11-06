@@ -59,4 +59,12 @@ class StructureLocale < Structure
   def eva_entreprises?
     type_structure == "entreprise" && usage == "Eva: entreprises"
   end
+
+  def metabase_dashboard
+    23
+  end
+
+  def metabase_query_params
+    { "id" => [ id ] }
+  end
 end

@@ -5,25 +5,10 @@ class StatistiquesStructure
     @structure = structure
   end
 
-  def url_structure_administrative
+  def url
     payload = {
-      resource: { dashboard: 53 },
-      params: {
-        "structures" => @structure.structures_locales_filles.pluck(:id)
-      },
-      exp: 10.minutes.from_now.to_i
-    }
-    token = ::JWT.encode payload, ENV.fetch("METABASE_SECRET_KEY", nil)
-
-    "#{ENV.fetch('METABASE_SITE_URL', nil)}/embed/dashboard/#{token}#bordered=false&titled=false"
-  end
-
-  def url_structure_locale
-    payload = {
-      resource: { dashboard: 23 },
-      params: {
-        "id" => [ @structure.id ]
-      },
+      resource: { dashboard: @structure.metabase_dashboard },
+      params: @structure.metabase_query_params,
       exp: 10.minutes.from_now.to_i
     }
     token = ::JWT.encode payload, ENV.fetch("METABASE_SECRET_KEY", nil)

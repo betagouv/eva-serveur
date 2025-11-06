@@ -2,23 +2,13 @@
 
 <h3><%= t(".titre")%></h3>
 <div class="panel">
-<% if resource.instance_of?(StructureAdministrative) %>
   <iframe
-    src="<%= statistique.url_structure_administrative %>"
+    src="<%= statistique.url %>"
     frameborder="0"
     width="100%"
     height="950"
     allowtransparency
   ></iframe>
-<% else %>
-   <iframe
-       src="<%= statistique.url_structure_locale %>"
-       frameborder="0"
-       width="100%"
-       height="950"
-       allowtransparency
-   ></iframe>
-<% end %>
 </div>
 
 <% if current_compte.anlci? %>

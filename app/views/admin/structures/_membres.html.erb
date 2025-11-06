@@ -4,15 +4,17 @@
     <h3><%= t(".titre") %></h3>
     <%= link_to t(".voir_membres"), admin_comptes_path("q[structure_id_eq]": resource.id) %>
   </div>
-  <div class="panel panel-invitation">
-    <div class="container-instructions">
-      <div class="panel-invitation-message">
-        <%= md t(".invitation") %>
+  <% if resource.is_a?(StructureLocale) %>
+    <div class="panel panel-invitation">
+      <div class="container-instructions">
+        <div class="panel-invitation-message">
+          <%= md t(".invitation") %>
+        </div>
+        <div>
+          <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_url"), texte: url, style: "white-space: nowrap") %>
+        </div>
       </div>
-      <div>
-        <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_url"), texte: url, style: "white-space: nowrap") %>
-      </div>
+      <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
     </div>
-    <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
-  </div>
+  <% end %>
 </div>

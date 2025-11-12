@@ -2,15 +2,15 @@ class LanceurCampagne
   def initialize(campagne, compte = nil)
     @campagne = campagne
     @compte = compte
-    @beneficiaire = retrouve_ou_cree_beneficiaire if @compte
   end
 
   def url
     base_url = URL_CLIENT
     base_url = URL_EVA_ENTREPRISES if campagne_entreprise?
     addressable_uri = "#{base_url}?code=#{@campagne.code}"
-    if @beneficiaire && campagne_entreprise?
-      addressable_uri += "&beneficiaire_id=#{@beneficiaire.id}"
+    if @compte && campagne_entreprise?
+      beneficiaire = retrouve_ou_cree_beneficiaire
+      addressable_uri += "&beneficiaire_id=#{beneficiaire.id}"
     end
     Addressable::URI.escape(addressable_uri)
   end

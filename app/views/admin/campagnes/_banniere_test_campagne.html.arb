@@ -8,7 +8,7 @@ div class: "card__banner card__banner--green d-flex justify-content-between alig
     end
     div class: "card__banner--green__button" do
       render BoutonComponent.new(LanceurCampagne.url(campagne,
-current_compte)).with_content(t(".bouton"))
+        current_compte)).with_content(t(".bouton"))
     end
   end
 end

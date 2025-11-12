@@ -39,4 +39,60 @@ describe LanceurCampagne do
       expect(described_class.url(campagne)).to eq(lanceur_campagne.url)
     end
   end
+
+  describe "création du bénéficiaire" do
+    let(:compte) { create(:compte) }
+
+    context "quand la campagne est de type diagnostic_entreprise" do
+      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
+      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
+
+      it "crée un bénéficiaire lors de la génération de l'URL" do
+        expect {
+          described_class.url(campagne, compte)
+        }.to change(Beneficiaire, :count).by(1)
+      end
+
+      it "associe le bénéficiaire au compte" do
+        lanceur = described_class.url(campagne, compte)
+        beneficiaire = Beneficiaire.find_by(compte: compte)
+        expect(beneficiaire).to be_present
+        expect(beneficiaire.nom).to eq(compte.nom_complet)
+      end
+    end
+
+    context "quand la campagne n'est pas de type diagnostic_entreprise" do
+      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic) }
+      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
+
+      it "ne crée pas de bénéficiaire lors de la génération de l'URL" do
+        expect {
+          described_class.url(campagne, compte)
+        }.not_to change(Beneficiaire, :count)
+      end
+    end
+
+    context "quand aucun compte n'est fourni" do
+      let(:compte) { nil }
+      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
+      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
+
+      it "ne crée pas de bénéficiaire" do
+        expect {
+          described_class.url(campagne, compte)
+        }.not_to change(Beneficiaire, :count)
+      end
+    end
+
+    context "quand la campagne n'a pas de parcours_type" do
+      let(:campagne) { instance_double(Campagne, code: "1234", parcours_type: nil) }
+      let(:compte) { create(:compte) }
+
+      it "ne crée pas de bénéficiaire et ne provoque pas d'erreur" do
+        expect {
+          described_class.url(campagne, compte)
+        }.not_to change(Beneficiaire, :count)
+      end
+    end
+  end
 end

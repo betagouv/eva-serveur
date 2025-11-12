@@ -18,7 +18,7 @@ describe Beneficiaire do
       end
 
       it do
-        expect(beneficiaire.code_beneficiaire).to eq 'MAT1234'
+        expect(beneficiaire.code_beneficiaire).to eq 'MAT01234'
       end
     end
 
@@ -31,7 +31,7 @@ describe Beneficiaire do
       end
 
       it do
-        expect(beneficiaire.code_beneficiaire).to eq 'ELI1234'
+        expect(beneficiaire.code_beneficiaire).to eq 'ELI01234'
       end
     end
 
@@ -44,18 +44,31 @@ describe Beneficiaire do
       end
 
       it do
-        expect(beneficiaire.code_beneficiaire).to eq 'ETL1234'
+        expect(beneficiaire.code_beneficiaire).to eq 'ETL01234'
+      end
+    end
+
+    context "quand le nom comporte seulement deux lettres" do
+      let(:beneficiaire) { described_class.new nom: "Yo" }
+
+      before do
+        allow(GenerateurAleatoire).to receive(:nombres).and_return(12345)
+        beneficiaire.genere_code_beneficiaire_unique
+      end
+
+      it do
+        expect(beneficiaire.code_beneficiaire).to eq 'XYO12345'
       end
     end
 
     context 'quand le code_beneficiaire est déjà présent' do
       before do
-        _beneficiaire_existant = create(:beneficiaire, code_beneficiaire: 'MAT1234')
-        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234).and_return(8080)
+        _beneficiaire_existant = create(:beneficiaire, code_beneficiaire: 'MAT01234')
+        allow(GenerateurAleatoire).to receive(:nombres).and_return(1234)
         beneficiaire.genere_code_beneficiaire_unique
       end
 
-      it { expect(beneficiaire.code_beneficiaire).to eq 'MAT8080' }
+      it { expect(beneficiaire.code_beneficiaire).to eq 'MAT01235' }
     end
   end
 

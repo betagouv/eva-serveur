@@ -1,7 +1,7 @@
 class AjouteCodePourBeneficiairesExistant < ActiveRecord::Migration[7.2]
   def up
-    Beneficiaire.where(code_personnel: nil).find_each do |beneficiaire|
-      beneficiaire.genere_code_personnel_unique
+    Beneficiaire.where(code_beneficiaire: nil).find_each do |beneficiaire|
+      beneficiaire.genere_code_beneficiaire_unique
       beneficiaire.save(validate: false)
     end
   end

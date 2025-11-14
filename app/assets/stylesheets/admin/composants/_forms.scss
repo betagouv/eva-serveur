@@ -173,12 +173,12 @@ form {
     li.select {
       position: relative;
 
-      .select2-container--default {
+      .select2-container--default,
+      &.fleche-select {
         &::after {
           content: '';
           color: $eva_main_blue;
           right: 0.7rem;
-          top: 0.5rem;
           position: absolute;
           pointer-events: none;
           background-image: asset-data-url('fleche_select.svg');
@@ -189,6 +189,14 @@ form {
         &.select2-container--disabled::after {
           opacity: 0.3;
         }
+      }
+
+      .select2-container--default::after {
+        top: 0.5rem;
+      }
+
+      &.fleche-select::after {
+        top: 2.4rem;
       }
 
       .select2-selection__arrow {

@@ -34,7 +34,8 @@
       <%= structure.inputs do %>
         <% structure.object.code_postal = params[:code_postal]&.delete("^0-9") if structure.object.code_postal.blank? %>
         <%= structure.input :nom, placeholder: t(".placeholders.structure.nom") %>
-        <%= structure.input :type_structure, as: :select, collection: collection_types_structures %>
+        <%= structure.input :type_structure, as: :select, collection: collection_types_structures,
+                            wrapper_html: { class: "fleche-select" } %>
         <%= structure.input :code_postal, placeholder: t(".placeholders.structure.code_postal") %>
         <%= structure.input :siret %>
       <% end %>

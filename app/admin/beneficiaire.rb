@@ -1,4 +1,6 @@
 ActiveAdmin.register Beneficiaire do
+  menu if: proc { !current_compte.utilisateur_entreprise? }
+
   permit_params :nom
 
   filter :nom, filters: [ :contains_unaccent, :eq ]

@@ -76,6 +76,10 @@ class Structure < ApplicationRecord
 
   alias_attribute :display_name, :nom
 
+  def eva_entreprises?
+    false
+  end
+
   def self.ransack_unaccent_attributes
     %w[nom]
   end

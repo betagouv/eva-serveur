@@ -119,6 +119,38 @@ describe Compte do
     end
   end
 
+  describe "#utilisateur_entreprise?" do
+    subject(:utilisateur_entreprise?) { compte.utilisateur_entreprise? }
+
+    context "quand la structure est une entreprise Eva" do
+      let(:structure) do
+        build(:structure_locale,
+              type_structure: "entreprise",
+              usage: "Eva: entreprises")
+      end
+      let(:compte) { build(:compte, structure: structure) }
+
+      it { expect(utilisateur_entreprise?).to be(true) }
+    end
+
+    context "quand la structure n'est pas une entreprise Eva" do
+      let(:structure) do
+        build(:structure_locale,
+              type_structure: "mission_locale",
+              usage: "Eva: bénéficiaires")
+      end
+      let(:compte) { build(:compte, structure: structure) }
+
+      it { expect(utilisateur_entreprise?).to be(false) }
+    end
+
+    context "quand le compte n'a pas de structure" do
+      let(:compte) { build(:compte, structure: nil) }
+
+      it { expect(utilisateur_entreprise?).to be(false) }
+    end
+  end
+
   describe "#rejoindre_structure" do
     let(:structure) { Structure.new }
     let(:compte) { described_class.new statut_validation: nil, role: nil }

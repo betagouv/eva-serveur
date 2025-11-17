@@ -1,5 +1,10 @@
 ActiveAdmin.register Campagne do
-  menu priority: 3, if: proc { current_compte.structure_id.present? && can?(:read, Campagne) }
+  menu priority: 3,
+       if: proc {
+         current_compte.structure_id.present? &&
+         can?(:read, Campagne) &&
+         !current_compte.utilisateur_entreprise?
+       }
 
   permit_params :libelle, :code, :compte, :active, :privee,
                 :compte_id, :affiche_competences_fortes, :parcours_type_id, :type_programme,

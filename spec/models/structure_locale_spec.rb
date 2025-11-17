@@ -52,5 +52,10 @@ describe StructureLocale, type: :model do
       structure = described_class.new(type_structure: "mission_locale", usage: "Eva: bénéficiaires")
       it { expect(structure).not_to be_eva_entreprises }
     end
+
+    context 'quand le type est entreprise mais l\'usage est bénéficiaires' do
+      structure = described_class.new(type_structure: "entreprise", usage: "Eva: bénéficiaires")
+      it { expect(structure).not_to be_eva_entreprises }
+    end
   end
 end

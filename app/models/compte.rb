@@ -59,6 +59,10 @@ class Compte < ApplicationRecord
     structure.instance_of?(StructureAdministrative)
   end
 
+  def utilisateur_entreprise?
+    !!structure&.eva_entreprises?
+  end
+
   def au_moins_admin?
     ADMIN_ROLES.include?(role)
   end

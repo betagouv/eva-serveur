@@ -38,6 +38,12 @@
                             wrapper_html: { class: "fleche-select" } %>
         <%= structure.input :code_postal, placeholder: t(".placeholders.structure.code_postal") %>
         <%= structure.input :siret, required: true %>
+        <p>
+          <%= link_to "Retrouver votre SIRET sur L'Annuaire des Entreprises",
+                      "https://annuaire-entreprises.data.gouv.fr/",
+                      target: "_blank",
+                      rel: "noopener noreferrer" %>
+        </p>
       <% end %>
     </div>
   <% end %>

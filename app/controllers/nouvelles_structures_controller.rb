@@ -9,8 +9,7 @@ class NouvellesStructuresController < ApplicationController
 
   def create
     @compte = Compte.new compte_parametres
-    valide_siret_obligatoire
-    return render :show unless @compte.structure.errors.empty?
+    @compte.structure.siret_obligatoire = true
 
     if verify_recaptcha(model: @compte) && @compte.save
       envoie_emails
@@ -28,15 +27,6 @@ class NouvellesStructuresController < ApplicationController
     parametres.merge!(statut_validation: :acceptee, role: "admin")
     parametres[:structure_attributes].merge!(type: StructureLocale.name)
     parametres
-  end
-
-  def valide_siret_obligatoire
-    return if @compte.structure.nil?
-
-    if @compte.structure.siret.blank?
-      @compte.structure.errors.add(:siret, :blank)
-      @compte.errors.add(:base, :structure_invalide)
-    end
   end
 
   def envoie_emails

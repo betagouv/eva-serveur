@@ -7,12 +7,15 @@ class Structure < ApplicationRecord
 
   alias structure_referente parent
   alias structure_referente= parent=
+  attr_accessor :siret_obligatoire
+
   validates :nom, presence: true
   validates :nom, uniqueness: {
     case_sensitive: false,
     scope: :code_postal
   }
   validates :siret, numericality: { only_integer: true, allow_blank: true }
+  validates :siret, presence: true, if: :siret_obligatoire
   validate :verifie_siret_ou_siren
 
   auto_strip_attributes :nom, squish: true

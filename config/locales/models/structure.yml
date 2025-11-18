@@ -8,7 +8,7 @@ fr:
               taken: Cette structure existe
             siret:
               blank: doit être rempli
-              invalid: Le numéro est invalide
+              invalid: SIRET invalide
     models:
       structure_administrative:
         one: Structure administrative
@@ -75,7 +75,6 @@ fr:
         delete_model: Supprimer
         new_model: Créer une structure
         edit_model: Modifier
-        delete_model: Supprimer
       structure_administrative:
         <<: *active_admin_structure
       structure_locale:

@@ -45,6 +45,7 @@ role: :conseiller
         fill_in :structure_locale_nom, with: 'Captive'
         select 'Mission locale'
         fill_in :structure_locale_code_postal, with: '92100'
+        fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'
 
         structure = Structure.order(:created_at).last
@@ -62,6 +63,7 @@ role: :conseiller
         choose 'Eva: entreprises'
         select 'mon opco'
         fill_in :structure_locale_code_postal, with: '92100'
+        fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'
 
         structure = Structure.order(:created_at).last
@@ -103,6 +105,7 @@ role: :conseiller
         fill_in :structure_locale_nom, with: 'Captive'
         select 'Mission locale'
         fill_in :structure_locale_code_postal, with: '92100'
+        fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'
 
         structure = Structure.order(:created_at).last

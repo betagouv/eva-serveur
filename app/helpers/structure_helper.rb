@@ -16,6 +16,7 @@ module StructureHelper
       StructureLocale.where(nom: Eva::STRUCTURE_DEMO).first_or_create do |s|
         s.type_structure = :autre
         s.code_postal = "69003"
+        s.siret = "12345678901234"
       end
     end
   end

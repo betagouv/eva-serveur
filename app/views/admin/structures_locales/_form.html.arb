@@ -11,7 +11,13 @@ div class: "panel nouvelle_structure" do
         f.input :opco, as: :select, collection: Opco.all, input_html: { id: "opco_field" }
       end
       f.input :code_postal
-      f.input :siret
+      f.input :siret, required: resource.new_record?
+      para do
+        text_node link_to "Retrouver votre SIRET sur L'Annuaire des Entreprises",
+                          "https://annuaire-entreprises.data.gouv.fr/",
+                          target: "_blank",
+                          rel: "noopener noreferrer"
+      end
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end

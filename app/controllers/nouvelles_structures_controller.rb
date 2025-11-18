@@ -9,8 +9,6 @@ class NouvellesStructuresController < ApplicationController
 
   def create
     @compte = Compte.new compte_parametres
-    @compte.structure.siret_obligatoire = true
-
     if verify_recaptcha(model: @compte) && @compte.save
       envoie_emails
       sign_in @compte

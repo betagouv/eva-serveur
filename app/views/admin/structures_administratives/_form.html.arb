@@ -1,6 +1,13 @@
 active_admin_form_for [ :admin, resource ] do |f|
   f.inputs do
     f.input :nom
+    f.input :siret, required: resource.new_record?
+    para do
+      text_node link_to "Retrouver votre SIRET sur L'Annuaire des Entreprises",
+                        "https://annuaire-entreprises.data.gouv.fr/",
+                        target: "_blank",
+                        rel: "noopener noreferrer"
+    end
     if can?(:manage, Compte)
       f.input :parent_id, as: :select, collection: StructureAdministrative.all
     end

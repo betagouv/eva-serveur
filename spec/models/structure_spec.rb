@@ -126,41 +126,81 @@ describe Structure, type: :model do
       it { expect(structure.errors[:siret]).to be_blank }
     end
 
-    context 'quand il est un siret valide avec des espaces' do
-      let(:structure) { build :structure, siret: '1234567890 1234' }
+    describe 'pour une nouvelle structure' do
+      context 'quand il est un siret valide avec des espaces (14 chiffres)' do
+        let(:structure) { build :structure, siret: '1234567890 1234' }
 
-      before { structure.valid? }
+        before { structure.valid? }
 
-      it do
-        expect(structure.errors[:siret]).to be_blank
-        expect(structure.siret).to eq('12345678901234')
+        it do
+          expect(structure.errors[:siret]).to be_blank
+          expect(structure.siret).to eq('12345678901234')
+        end
+      end
+
+      context 'quand il est un siret valide (14 chiffres)' do
+        let(:structure) { build :structure, siret: '12345678901234' }
+
+        before { structure.valid? }
+
+        it { expect(structure.errors[:siret]).to be_blank }
+      end
+
+      context 'quand il est un siren (9 chiffres)' do
+        let(:structure) { build :structure, siret: '123456789' }
+
+        before { structure.valid? }
+
+        it do
+          expect(structure.errors[:siret])
+            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+        end
+      end
+
+      context 'quand il est invalide (pas 14 chiffres)' do
+        let(:structure) { build :structure, siret: '12345678' }
+
+        before { structure.valid? }
+
+        it do
+          expect(structure.errors[:siret])
+            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+        end
       end
     end
 
-    context 'quand il est un siret valide (14 chiffres)' do
-      let(:structure) { build :structure, siret: '12345678901234' }
+    describe 'pour une structure existante' do
+      # On crée la structure avec un SIRET valide (14 chiffres)
+      let(:structure) { create :structure, siret: '12345678901234' }
 
-      before { structure.valid? }
+      context 'quand on modifie avec un siren valide (9 chiffres)' do
+        before do
+          structure.siret = '987654321'
+          structure.valid?
+        end
 
-      it { expect(structure.errors[:siret]).to be_blank }
-    end
+        it { expect(structure.errors[:siret]).to be_blank }
+      end
 
-    context 'quand il est un siren valide (9 chiffres)' do
-      let(:structure) { build :structure, siret: '123456789' }
+      context 'quand on modifie avec un siret valide (14 chiffres)' do
+        before do
+          structure.siret = '98765432101234'
+          structure.valid?
+        end
 
-      before { structure.valid? }
+        it { expect(structure.errors[:siret]).to be_blank }
+      end
 
-      it { expect(structure.errors[:siret]).to be_blank }
-    end
+      context 'quand on modifie avec un siret invalide' do
+        before do
+          structure.siret = '12345678'
+          structure.valid?
+        end
 
-    context 'quand il est invalide' do
-      let(:structure) { build :structure, siret: '12345678' }
-
-      before { structure.valid? }
-
-      it do
-        expect(structure.errors[:siret])
-          .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+        it do
+          expect(structure.errors[:siret])
+            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+        end
       end
     end
   end

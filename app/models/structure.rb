@@ -100,9 +100,21 @@ class Structure < ApplicationRecord
 
   def verifie_siret_ou_siren
     return if siret.blank?
-    return if [ 14, 9 ].include?(siret.size)
 
-    errors.add(:siret, :invalid)
+    # Pour les nouvelles structures, on accepte uniquement le SIRET (14 chiffres)
+    # On ne va faire de validation de l'algo de Luhn
+    # On fera une vérification plus tard avec un point d'api
+    # La poste ne respecte pas l'algo de luhn pour son siret.
+    if new_record?
+      return if siret.size == 14
+
+      errors.add(:siret, :invalid)
+    else
+      # Pour les structures existantes, on garde l'ancienne validation (SIREN ou SIRET)
+      return if [ 14, 9 ].include?(siret.size)
+
+      errors.add(:siret, :invalid)
+    end
   end
 
   def retire_espaces_siret

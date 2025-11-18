@@ -47,6 +47,7 @@ describe 'Admin - Structure administrative', type: :feature do
     before do
       visit new_admin_structure_administrative_path
       fill_in :structure_administrative_nom, with: 'Eva'
+      fill_in :structure_administrative_siret, with: '12345678901234'
       click_on 'Créer une structure'
     end
 

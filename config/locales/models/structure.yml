@@ -7,6 +7,7 @@ fr:
             nom:
               taken: Cette structure existe
             siret:
+              blank: doit être rempli
               invalid: Le numéro est invalide
     models:
       structure_administrative:

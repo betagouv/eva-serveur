@@ -15,6 +15,7 @@ describe 'Nouvelle Structure', type: :feature do
       fill_in :compte_structure_attributes_nom, with: 'Mission Locale Nice'
       select 'Mission locale'
       fill_in :compte_structure_attributes_code_postal, with: '06000'
+      fill_in :compte_structure_attributes_siret, with: '12345678901234'
     end
 
     it 'créé stucture et compte' do
@@ -32,6 +33,7 @@ describe 'Nouvelle Structure', type: :feature do
       expect(structure.nom).to eq('Mission Locale Nice')
       expect(structure.type_structure).to eq('mission_locale')
       expect(structure.code_postal).to eq('06000')
+      expect(structure.siret).to eq('12345678901234')
 
       expect(compte.structure_id).to eq(structure.id)
       expect(compte.validation_acceptee?).to be(true)
@@ -46,6 +48,31 @@ describe 'Nouvelle Structure', type: :feature do
 
     it 'ne remplie pas tous les champs' do
       click_on 'Valider la création de mon compte'
+    end
+  end
+
+  context "quand le siret n'est pas renseigné" do
+    before do
+      visit nouvelle_structure_path
+      fill_in :compte_prenom, with: 'Jimmy'
+      fill_in :compte_nom, with: 'Endriques'
+      fill_in :compte_telephone, with: '02 03 04 05 06'
+      fill_in :compte_email, with: 'jeanmarc@structure.fr'
+      fill_in :compte_password, with: 'billyjoel'
+      fill_in :compte_password_confirmation, with: 'billyjoel'
+      fill_in :compte_structure_attributes_nom, with: 'Mission Locale Nice'
+      select 'Mission locale'
+      fill_in :compte_structure_attributes_code_postal, with: '06000'
+    end
+
+    it 'affiche une erreur et ne crée pas la structure' do
+      expect do
+        click_on 'Valider la création de mon compte'
+      end.not_to change(StructureLocale, :count)
+
+      message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.blank")
+      expect(page).to have_content(message_erreur)
+      expect(page).to have_current_path(nouvelle_structure_path)
     end
   end
 end

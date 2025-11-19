@@ -38,7 +38,6 @@ fr:
             **Veuillez vérifier les informations saisies avant de valider cette création.**
             Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
           siret_hint: Il est composé de 14 chiffres
-          siret_lien: Retrouver votre SIRET sur L'Annuaire des Entreprises
     structures_locales:
       form:
         titre:
@@ -48,7 +47,6 @@ fr:
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
         siret_hint: Il est composé de 14 chiffres
-        siret_lien: Retrouver votre SIRET sur L'Annuaire des Entreprises
   nouvelles_structures:
     modal_mise_en_garde:
       titre: Mise en garde
@@ -61,12 +59,14 @@ fr:
     show:
       title: Créer une nouvelle structure
       titre: Rejoindre eva
+      annuaire_siret:
+        description: Retrouver votre SIRET sur L'Annuaire des Entreprises
+        url: "https://annuaire-entreprises.data.gouv.fr/"
       structure:
         titre: Votre structure
         description: Où travaillez vous ?
         siret_label: SIRET de l'organisation que vous représentez
         siret_hint: Il est composé de 14 chiffres
-        siret_lien: Retrouver votre SIRET sur L'Annuaire des Entreprises
       placeholders:
         structure:
           nom: Mission locale de Montpellier

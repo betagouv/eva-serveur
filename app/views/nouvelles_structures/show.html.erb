@@ -42,10 +42,10 @@
                             required: true,
                             hint: t("nouvelles_structures.show.structure.siret_hint") %>
         <p>
-          <%= link_to t("nouvelles_structures.show.structure.siret_lien"),
-                      "https://annuaire-entreprises.data.gouv.fr/",
-                      target: "_blank",
-                      rel: "noopener noreferrer" %>
+        <%= render LienComponent.new(
+          t(".annuaire_siret.description"),
+          t(".annuaire_siret.url"),
+          externe: true) %>
         </p>
       <% end %>
     </div>

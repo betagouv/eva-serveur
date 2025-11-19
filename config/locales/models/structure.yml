@@ -22,7 +22,7 @@ fr:
         updated_at: Mise à jour le
         nom: Nom de structure
         code_postal: Code Postal
-        siret: Siret ou Siren
+        siret: SIRET de l'organisation que vous représentez
         region: Région
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente

@@ -39,6 +39,16 @@ fr:
             Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
           siret_hint: Il est composé de 14 chiffres
           siret_lien: Retrouver votre SIRET sur L'Annuaire des Entreprises
+    structures_locales:
+      form:
+        titre:
+          nouveau: Création d'une nouvelle structure
+          modification: Modification de la structure
+        verifier_information_structure: |
+          **Veuillez vérifier les informations saisies avant de valider cette création.**
+          Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
+        siret_hint: Il est composé de 14 chiffres
+        siret_lien: Retrouver votre SIRET sur L'Annuaire des Entreprises
   nouvelles_structures:
     modal_mise_en_garde:
       titre: Mise en garde

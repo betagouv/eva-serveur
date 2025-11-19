@@ -145,7 +145,8 @@ ActiveAdmin.register Compte do
   controller do
     before_action :trouve_comptes, only: :index
     helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description,
-                  :structure_par_defaut, :champ_structure
+                  :structure_par_defaut, :champ_structure, :structures_filles,
+                  :compte_a_des_campagnes?
 
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
@@ -196,16 +197,34 @@ ActiveAdmin.register Compte do
       @structure_par_defaut ||= resource.structure || current_compte.structure
     end
 
+    def structures_filles
+      return [] unless current_compte.structure
+
+      current_compte.structure.structures_locales_filles
+    end
+
+    def compte_a_des_campagnes?
+      resource.persisted? && Campagne.exists?(compte_id: resource.id)
+    end
+
     def champ_structure(form)
       if can?(:manage, Compte)
         form.input :structure
       else
         if current_compte.administratif?
-          form.input :structure, collection: [ structure_par_defaut ],
-                                 selected: structure_par_defaut&.id,
-                                 input_html: { disabled: true }
+          if compte_a_des_campagnes?
+            form.input :structure, collection: [ structure_par_defaut ],
+                                   selected: structure_par_defaut&.id,
+                                   input_html: { disabled: true },
+                                   hint: I18n.t("admin.comptes.form.structure_disabled_avec_campagnes")
+            form.input :structure_id, as: :hidden, input_html: { value: structure_par_defaut&.id }
+          else
+            form.input :structure, collection: structures_filles,
+                                   selected: structure_par_defaut&.id
+          end
+        else
+          form.input :structure_id, as: :hidden, input_html: { value: structure_par_defaut&.id }
         end
-        form.input :structure_id, as: :hidden, input_html: { value: structure_par_defaut&.id }
       end
     end
   end

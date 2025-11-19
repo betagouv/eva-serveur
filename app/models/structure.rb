@@ -91,6 +91,10 @@ class Structure < ApplicationRecord
     Compte.where(structure: self).count
   end
 
+  def admins
+    Compte.where(structure: self, role: Compte::ADMIN_ROLES, statut_validation: :acceptee)
+  end
+
   def programme_email_relance
     RelanceStructureSansCampagneJob
       .set(wait: 7.days)

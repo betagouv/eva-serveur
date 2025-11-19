@@ -23,7 +23,7 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validate :verifie_etat_si_structure_manquante
   validates :nom, :prenom, presence: { on: :create }
-  validate :verifie_dns_email, :structure_a_un_admin
+  validate :verifie_dns_email, :structure_a_un_admin, :structure_de_depart_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
 
@@ -47,10 +47,6 @@ class Compte < ApplicationRecord
     [ prenom, nom ].compact_blank.join(" ")
   end
 
-  def find_admins
-    Compte.where(structure: structure, role: ADMIN_ROLES, statut_validation: :acceptee)
-  end
-
   def anlci?
     ANLCI_ROLES.include?(role)
   end
@@ -68,7 +64,7 @@ class Compte < ApplicationRecord
   end
 
   def assigne_role_admin_si_pas_d_admin
-    return if autres_admins?
+    return if autres_admins?(structure)
 
     self.role = :admin
     self.statut_validation = :acceptee
@@ -116,16 +112,33 @@ class Compte < ApplicationRecord
   def structure_a_un_admin
     return if structure.nil?
     return if au_moins_admin? && !validation_refusee?
-    return if autres_admins?
+    return if autres_admins?(structure)
 
-    if au_moins_admin? && validation_refusee?
-      errors.add(:statut_validation, :structure_doit_avoir_un_admin)
-    else
-      errors.add(:role, :structure_doit_avoir_un_admin)
-    end
+    ajoute_erreur_admin
   end
 
-  def autres_admins?
-    find_admins.where.not(id: id).count >= 1
+  def structure_de_depart_a_un_admin
+    return unless quitte_structure?
+
+    ancienne_structure = Structure.find_by(id: structure_id_was)
+    return if autres_admins?(ancienne_structure)
+
+    errors.add(:structure, :refus_depart_structure, nom_structure: ancienne_structure.nom)
+  end
+
+  def quitte_structure?
+    persisted? && structure_id_changed? && structure_id_was.present?
+  end
+
+  def autres_admins?(structure)
+    structure.admins.where.not(id: id).count >= 1
+  end
+
+  def ajoute_erreur_admin
+    if au_moins_admin? && validation_refusee?
+      errors.add(:statut_validation, :structure_doit_avoir_un_admin, nom_structure: structure.nom)
+    else
+      errors.add(:role, :structure_doit_avoir_un_admin, nom_structure: structure.nom)
+    end
   end
 end

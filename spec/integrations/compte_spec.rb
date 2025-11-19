@@ -67,6 +67,16 @@ describe Compte, type: :integration do
         end.to have_enqueued_mail(CompteMailer, :alerte_admin).exactly(0)
       end
 
+      it "Quand le compte est en attente mais n'a pas de structure" do
+        expect do
+          create :compte_conseiller,
+                 structure: nil,
+                 statut_validation: :en_attente,
+                 confirmed_at: Time.zone.now,
+                 email_bienvenue_envoye: false
+        end.to have_enqueued_mail(CompteMailer, :alerte_admin).exactly(0)
+      end
+
       it 'Quand le statut est en attente' do
         expect do
           create :compte_conseiller,
@@ -115,29 +125,6 @@ describe Compte, type: :integration do
                    email_bienvenue_envoye: false
           end.to have_enqueued_job(RelanceUtilisateurPourNonActivationJob).exactly(0)
         end
-      end
-    end
-  end
-
-  describe '#find_admins' do
-    let(:structure) { create :structure_locale }
-    let(:compte) { create :compte_conseiller, structure: structure }
-
-    context 'avec des admins' do
-      let!(:compte_admin) { create :compte_admin, structure: structure }
-      let!(:compte_admin2) { create :compte_admin, structure: structure }
-      let!(:compte_admin_refuse) { create :compte_admin, :refusee, structure: structure }
-      let!(:compte_superadmin) { create :compte_superadmin, structure: structure }
-      let(:autre_structure) { create :structure }
-      let!(:autre_admin) { create :compte_admin, structure: autre_structure }
-
-      it "trouve les admins d'un compte" do
-        expect(compte.find_admins.count).to be(3)
-      end
-
-      it "quand le compte n'a pas de structure, retourne une liste vide" do
-        compte.update(statut_validation: :en_attente, structure: nil)
-        expect(compte.find_admins.count).to be(0)
       end
     end
   end

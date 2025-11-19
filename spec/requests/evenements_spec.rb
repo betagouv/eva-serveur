@@ -50,7 +50,7 @@ describe 'Evenement API', type: :request do
 
       it 'retourne une 422' do
         expect(response.body).to eq '["Date client doit être rempli(e)"]'
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
   end

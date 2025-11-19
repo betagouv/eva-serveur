@@ -77,7 +77,7 @@ module Api
 
     def retourne_erreur(evaluation)
       evaluation.errors.delete(:'beneficiaire.nom')
-      render json: evaluation.errors, status: :unprocessable_entity
+      render json: evaluation.errors, status: :unprocessable_content
     end
 
     def traite_beneficiaire

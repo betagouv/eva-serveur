@@ -10,7 +10,7 @@ module Api
           render json: {}, status: :created
         else
           render json: { message: I18n.t("admin.evaluations.inconnue") },
-                 status: :unprocessable_entity
+                 status: :unprocessable_content
         end
       end
 

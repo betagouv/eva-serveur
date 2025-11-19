@@ -223,37 +223,18 @@ describe Compte do
   end
 
   describe "verifie la présence d'un admin" do
-    let(:structure) { Structure.new }
-    let(:compte) { described_class.new role: "admin", structure: structure }
+    let(:structure) { Structure.new(nom: "Ma Structure") }
+    let(:compte) { described_class.new structure: structure }
 
     context "quand il y a un autre admins dans la structure" do
       before do
         allow(compte).to receive(:autres_admins?).and_return(true)
       end
 
-      it "retire les droits à un admin" do
+      it "peut ajouter un conseiller" do
         compte.role = "conseiller"
         compte.valid?
         expect(compte.errors[:role]).to be_blank
-      end
-    end
-
-    context "quand il n'y a qu'un admin dans la structure" do
-      before do
-        allow(compte).to receive(:autres_admins?).and_return(false)
-      end
-
-      it "ne peut pas retirer les droits de cet admin" do
-        compte.role = "conseiller"
-        compte.valid?
-        expect(compte.errors[:role]).to include "La structure doit avoir au moins un administrateur"
-      end
-
-      it "ne peut pas refuser cet admin" do
-        compte.statut_validation = "refusee"
-        compte.valid?
-        expect(compte.errors[:statut_validation])
-          .to include "La structure doit avoir au moins un administrateur autorisé"
       end
     end
 
@@ -267,6 +248,22 @@ describe Compte do
         compte.valid?
         expect(compte.errors[:role]).to be_blank
       end
+
+      it "refuse d'ajouter un simple conseiller" do
+        compte.role = "conseiller"
+        compte.valid?
+        expect(compte.errors[:role])
+          .to include "La structure « Ma Structure » doit avoir au moins un administrateur"
+      end
+
+      it "ne peut pas ajouter un compte refusé" do
+        compte.role = "admin"
+        compte.statut_validation = "refusee"
+        compte.valid?
+        expect(compte.errors[:role]).to be_blank
+        expect(compte.errors[:statut_validation])
+          .to include "La structure doit avoir au moins un administrateur autorisé"
+      end
     end
 
     context "Quand le compte n'a pas de structure" do
@@ -275,6 +272,20 @@ describe Compte do
         compte.structure = nil
         compte.valid?
         expect(compte.errors[:role]).to be_blank
+      end
+    end
+
+    context "quand le compte change de structure" do
+      let(:structure) { create :structure, nom: "structure de départ" }
+      let(:compte) { create :compte, role: :admin, structure: structure }
+      let(:nouvelle_structure) { create :structure, :avec_admin }
+
+      it "affiche une erreur sur le champ structure" do
+        compte.structure = nouvelle_structure
+        compte.valid?
+
+        expect(compte.errors[:structure][0])
+          .to include "Impossible de quiter la structure « structure de départ »"
       end
     end
   end

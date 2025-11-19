@@ -27,7 +27,7 @@ module Comptes
     end
 
     def alerte_admins(compte)
-      compte.find_admins.each do |admin|
+      compte.structure.admins.each do |admin|
         CompteMailer.with(compte: compte, compte_admin: admin)
                     .alerte_admin
                     .deliver_later

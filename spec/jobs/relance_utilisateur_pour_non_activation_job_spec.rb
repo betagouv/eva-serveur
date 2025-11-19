@@ -34,11 +34,8 @@ describe RelanceUtilisateurPourNonActivationJob, type: :job do
   end
 
   context 'quand le compte a une campagne sans passations et pas de structure' do
+    let(:compte)  { create :compte_conseiller, statut_validation: :en_attente, structure_id: nil }
     let(:campagne) { create :campagne, compte: compte }
-
-    before do
-      compte.update(role: :conseiller, statut_validation: :en_attente, structure_id: nil)
-    end
 
     it 'ne fais rien' do
       expect do

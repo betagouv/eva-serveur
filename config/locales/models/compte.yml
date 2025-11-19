@@ -55,9 +55,11 @@ fr:
               structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur autorisé
               doit_etre_en_attente_si_structure_vide: doit être 'en attente' s'il n'y a pas de structure
             role:
-              structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur
+              structure_doit_avoir_un_admin: La structure « %{nom_structure} » doit avoir au moins un administrateur
               doit_etre_conseiller_si_structure_vide: doit être 'conseiller' s'il n'y a pas de structure
               inclusion: n'est pas inclus dans la liste
+            structure:
+              refus_depart_structure: Impossible de quiter la structure « %{nom_structure} » car ce compte est le seul admin
   formtastic:
     actions:
       compte:

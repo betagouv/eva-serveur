@@ -411,4 +411,19 @@ describe Structure, type: :model do
       end
     end
   end
+
+  describe '#admins' do
+    let(:structure) { create :structure_locale }
+    let(:compte) { create :compte_conseiller, structure: structure }
+    let!(:compte_admin) { create :compte_admin, nom: "admin 1", structure: structure }
+    let!(:compte_admin2) { create :compte_admin, nom: "admin 2", structure: structure }
+    let!(:compte_admin_refuse) { create :compte_admin, :refusee, structure: structure }
+    let!(:compte_superadmin) { create :compte_superadmin, nom: "superadmin",  structure: structure }
+    let(:autre_structure) { create :structure }
+    let!(:autre_admin) { create :compte_admin, structure: autre_structure }
+
+    it "trouve les admins d'une structure" do
+      expect(structure.admins.pluck(:nom)).to contain_exactly("admin 1", "admin 2", "superadmin")
+    end
+  end
 end

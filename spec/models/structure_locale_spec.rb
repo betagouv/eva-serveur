@@ -36,25 +36,34 @@ describe StructureLocale, type: :model do
   end
 
   describe '#usage' do
-    it {
- expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",
-"Eva: entreprises" ]) }
+    it do
+      expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",
+                                                                   "Eva: entreprises" ])
+    end
   end
 
   describe '#eva_entreprises?' do
     context 'quand la structure est une entreprise' do
-      structure = described_class.new(type_structure: "entreprise", usage: "Eva: entreprises")
+      let(:structure) do
+        described_class.new(type_structure: "entreprise", usage: "Eva: entreprises")
+      end
 
       it { expect(structure).to be_eva_entreprises }
     end
 
     context 'quand la structure n\'est pas une entreprise' do
-      structure = described_class.new(type_structure: "mission_locale", usage: "Eva: bénéficiaires")
+      let(:structure) do
+        described_class.new(type_structure: "mission_locale", usage: "Eva: bénéficiaires")
+      end
+
       it { expect(structure).not_to be_eva_entreprises }
     end
 
     context 'quand le type est entreprise mais l\'usage est bénéficiaires' do
-      structure = described_class.new(type_structure: "entreprise", usage: "Eva: bénéficiaires")
+      let(:structure) do
+        described_class.new(type_structure: "entreprise", usage: "Eva: bénéficiaires")
+      end
+
       it { expect(structure).not_to be_eva_entreprises }
     end
   end

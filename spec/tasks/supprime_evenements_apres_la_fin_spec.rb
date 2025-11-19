@@ -32,7 +32,7 @@ describe 'nettoyage:supprime_evenements_apres_la_fin' do
   end
 
   context 'avec un événement au même moment que la fin' do
-    une_date = DateTime.new(2020, 5, 1, 12, 0, 1.0)
+    let(:une_date) { DateTime.new(2020, 5, 1, 12, 0, 1.0) }
     let!(:evenements) do
       [ create(:evenement_fin_situation, partie: partie, date: une_date),
        create(:evenement_piece_bien_placee, partie: partie, date: une_date) ]

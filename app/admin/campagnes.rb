@@ -42,7 +42,7 @@ ActiveAdmin.register Campagne do
                          !current_compte.structure.autorisation_creation_campagne? } do
     div class: "fr-mb-2v" do
       link_to(I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled"), "#",
-class: "bouton-disabled")
+          class: "bouton-disabled")
     end
     span I18n.t("admin.campagnes.action_items.nouvelle_campagne_disabled_explication"),
   class: "fr-text--xs text-grey-425"
@@ -118,7 +118,9 @@ campagne_privee: campagne.privee))
     column :date_derniere_evaluation, sortable: :date_derniere_evaluation do |campagne|
       l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
     end
-    column :structure if current_compte.anlci? || current_compte.administratif?
+    if current_compte.anlci? || current_compte.administratif?
+      column :structure, sortable: "structures.nom"
+    end
     column :compte
     column :created_at
     actions
@@ -151,7 +153,9 @@ campagne_privee: campagne.privee))
     def scoped_collection
       collection = end_of_association_chain.avec_nombre_evaluations_et_derniere_evaluation
       if can?(:manage, Compte) && action_name == "index"
-        collection.includes(compte: :structure)
+        collection.left_joins(compte: :structure)
+                  .includes(compte: :structure)
+                  .group("comptes.id", "structures.id")
       elsif can?(:manage, Compte)
         collection.includes(:compte)
       else

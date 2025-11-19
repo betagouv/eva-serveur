@@ -108,11 +108,10 @@ describe 'Nouvelle Structure', type: :feature do
   end
 
   context "quand le SIRET est valide selon l'API SIRENE" do
-    let(:verificateur) { instance_double(VerificateurSiret) }
-
     before do
-      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
-      allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+      # Surcharge le mock global du client SIRENE pour ce test
+      # Le mock global retourne true par défaut, donc on peut le laisser tel quel
+      # ou s'assurer qu'il est bien configuré
 
       visit nouvelle_structure_path
       fill_in :compte_prenom, with: 'Jimmy'

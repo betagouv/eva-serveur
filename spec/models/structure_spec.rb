@@ -206,21 +206,14 @@ describe Structure, type: :model do
   end
 
   describe "vérification SIRET via API SIRENE" do
-    let(:verificateur) { instance_double(VerificateurSiret) }
     let(:structure) { build(:structure, siret: "12345678901234") }
-
-    before do
-      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
-    end
 
     context "à la création d'une nouvelle structure" do
       context "quand le SIRET est valide" do
-        before do
-          allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
-        end
+        # Le mock global du client SIRENE retourne true par défaut
 
         it "vérifie le SIRET et met à jour le statut" do
-          structure.save
+          expect(structure.save).to be true
           expect(structure.statut_siret).to eq("vérifié")
           expect(structure.date_verification_siret).to be_present
         end
@@ -232,12 +225,16 @@ describe Structure, type: :model do
 
       context "quand le SIRET est invalide" do
         before do
-          allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+          # Surcharge le mock global du client SIRENE pour retourner false
+          client_sirene = instance_double(Sirene::Client)
+          allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+          allow(client_sirene).to receive(:verifie_siret).and_return(false)
         end
 
         it "ajoute une erreur sur le SIRET" do
           structure.save
-          expect(structure.errors[:siret]).to include(I18n.t("activerecord.errors.models.structure.attributes.siret.invalid"))
+          message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
+          expect(structure.errors[:siret]).to include(message_erreur)
         end
 
         it "ne permet pas la création de la structure" do
@@ -253,22 +250,27 @@ describe Structure, type: :model do
 
     context "lors de la mise à jour d'une structure existante" do
       context "quand la structure a un SIRET vérifié" do
-        let(:structure) { create(:structure, siret: "12345678901234", statut_siret: "vérifié", date_verification_siret: 1.day.ago) }
+        let!(:structure) do
+          # On crée la structure avec le mock global qui retourne true
+          structure = create(:structure, siret: "12345678901234")
+          structure.update_columns(statut_siret: "vérifié", date_verification_siret: 1.day.ago)
+          structure
+        end
 
         context "quand le nouveau SIRET est valide" do
           before do
-            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+            # Le mock global du client SIRENE retourne true par défaut
             structure.siret = "98765432101234"
           end
 
-        it "vérifie le nouveau SIRET" do
-          structure.save
-          expect(VerificateurSiret).to have_received(:new).at_least(:once)
-        end
+          it "vérifie le nouveau SIRET" do
+            structure.save
+            expect(Sirene::Client).to have_received(:new).at_least(:once)
+          end
 
           it "met à jour le statut et la date" do
             freeze_time = Time.zone.parse("2024-01-15 10:00:00")
-            travel_to freeze_time do
+            Timecop.freeze(freeze_time) do
               structure.save
               expect(structure.statut_siret).to eq("vérifié")
               expect(structure.date_verification_siret).to eq(freeze_time)
@@ -282,13 +284,17 @@ describe Structure, type: :model do
 
         context "quand le nouveau SIRET est invalide" do
           before do
-            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+            # Surcharge le mock global du client SIRENE pour retourner false
+            client_sirene = instance_double(Sirene::Client)
+            allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+            allow(client_sirene).to receive(:verifie_siret).and_return(false)
             structure.siret = "98765432101234"
           end
 
           it "ajoute une erreur sur le SIRET" do
             structure.save
-            expect(structure.errors[:siret]).to include(I18n.t("activerecord.errors.models.structure.attributes.siret.invalid"))
+            message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
+            expect(structure.errors[:siret]).to include(message_erreur)
           end
 
           it "ne permet pas la mise à jour" do
@@ -298,17 +304,22 @@ describe Structure, type: :model do
       end
 
       context "quand la structure n'a pas de SIRET vérifié" do
-        let(:structure) { create(:structure, siret: "12345678901234", statut_siret: nil) }
+        let!(:structure) do
+          # On crée la structure avec le mock global qui retourne true
+          structure = create(:structure, siret: "12345678901234")
+          structure.update_columns(statut_siret: nil, date_verification_siret: nil)
+          structure
+        end
 
         context "quand le nouveau SIRET est valide" do
           before do
-            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+            # Le mock global du client SIRENE retourne true par défaut
             structure.siret = "98765432101234"
           end
 
           it "vérifie le SIRET" do
             structure.save
-            expect(VerificateurSiret).to have_received(:new).at_least(:once)
+            expect(Sirene::Client).to have_received(:new).at_least(:once)
           end
 
           it "met à jour le statut et la date" do
@@ -324,7 +335,10 @@ describe Structure, type: :model do
 
         context "quand le nouveau SIRET est invalide" do
           before do
-            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+            # Surcharge le mock global du client SIRENE pour retourner false
+            client_sirene = instance_double(Sirene::Client)
+            allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+            allow(client_sirene).to receive(:verifie_siret).and_return(false)
             structure.siret = "98765432101234"
           end
 
@@ -341,12 +355,23 @@ describe Structure, type: :model do
     end
 
     context "quand le SIRET n'est pas modifié" do
-      let(:structure) { create(:structure, siret: "12345678901234", statut_siret: "vérifié") }
+      let!(:structure) do
+        # On crée la structure avec le mock global qui retourne true
+        structure = create(:structure, siret: "12345678901234")
+        structure.update_columns(statut_siret: "vérifié", date_verification_siret: 1.day.ago)
+        structure
+      end
+
+      before do
+        # Réinitialise les mocks pour ce test spécifique
+        RSpec::Mocks.space.proxy_for(Sirene::Client).reset
+        allow(Sirene::Client).to receive(:new).and_call_original
+      end
 
       it "ne relance pas la vérification" do
         structure.nom = "Nouveau nom"
         structure.save
-        expect(VerificateurSiret).not_to have_received(:new)
+        expect(Sirene::Client).not_to have_received(:new)
       end
     end
   end

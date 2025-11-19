@@ -28,4 +28,3 @@ module Sirene
     end
   end
 end
-

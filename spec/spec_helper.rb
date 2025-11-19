@@ -36,6 +36,12 @@ RSpec.configure do |config|
     reponse = Typhoeus::Response.new
     allow(reponse).to receive(:success?).and_return(false)
     allow(Typhoeus).to receive(:get).and_return(reponse)
+
+    # Mock par défaut pour la vérification SIRET via API SIRENE :
+    # considère tous les SIRETs comme valides
+    client_sirene = instance_double(Sirene::Client)
+    allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+    allow(client_sirene).to receive(:verifie_siret).and_return(true)
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will

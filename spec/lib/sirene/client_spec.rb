@@ -6,6 +6,12 @@ RSpec.describe Sirene::Client, type: :lib do
     let(:client) { described_class.new }
     let(:url) { "https://api.insee.fr/entreprises/sirene/V3.11/siret/#{siret}" }
 
+    before do
+      # Réinitialise les mocks globaux pour ces tests
+      RSpec::Mocks.space.proxy_for(Typhoeus).reset
+      RSpec::Mocks.space.proxy_for(described_class).reset
+    end
+
     context "quand le SIRET est trouvé dans l'API SIRENE" do
       let(:reponse_api) do
         {
@@ -20,54 +26,68 @@ RSpec.describe Sirene::Client, type: :lib do
 
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive(:success?).and_return(true)
-        allow(tr).to receive(:body).and_return(reponse_api.to_json)
-        expect(Typhoeus).to receive(:get).with(url, hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))).and_return(tr)
+        allow(tr).to receive_messages(success?: true, body: reponse_api.to_json)
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+        ).and_return(tr)
       end
 
       it "retourne true" do
         expect(client.verifie_siret(siret)).to be true
+        expect(Typhoeus).to have_received(:get)
       end
     end
 
     context "quand le SIRET n'est pas trouvé dans l'API SIRENE" do
+      let(:reponse_erreur) do
+        { "header" => { "statut" => 404, "message" => "Aucun établissement trouvé" } }
+      end
+
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive(:success?).and_return(false)
-        allow(tr).to receive(:code).and_return(404)
-        allow(tr).to receive(:body).and_return({ "header" => { "statut" => 404, "message" => "Aucun établissement trouvé" } }.to_json)
-        expect(Typhoeus).to receive(:get).with(url, hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))).and_return(tr)
+        allow(tr).to receive_messages(success?: false, code: 404, body: reponse_erreur.to_json)
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+        ).and_return(tr)
       end
 
       it "retourne false" do
         expect(client.verifie_siret(siret)).to be false
+        expect(Typhoeus).to have_received(:get)
       end
     end
 
     context "quand l'API retourne une erreur serveur" do
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive(:success?).and_return(false)
-        allow(tr).to receive(:code).and_return(500)
-        allow(tr).to receive(:body).and_return("Internal Server Error")
-        expect(Typhoeus).to receive(:get).with(url, hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))).and_return(tr)
+        allow(tr).to receive_messages(success?: false, code: 500, body: "Internal Server Error")
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+        ).and_return(tr)
       end
 
       it "retourne false" do
         expect(client.verifie_siret(siret)).to be false
+        expect(Typhoeus).to have_received(:get)
       end
     end
 
     context "quand l'API timeout" do
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive(:success?).and_return(false)
-        allow(tr).to receive(:timed_out?).and_return(true)
-        expect(Typhoeus).to receive(:get).with(url, hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))).and_return(tr)
+        allow(tr).to receive_messages(success?: false, timed_out?: true)
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+        ).and_return(tr)
       end
 
       it "retourne false" do
         expect(client.verifie_siret(siret)).to be false
+        expect(Typhoeus).to have_received(:get)
       end
     end
 
@@ -79,4 +99,3 @@ RSpec.describe Sirene::Client, type: :lib do
     end
   end
 end
-

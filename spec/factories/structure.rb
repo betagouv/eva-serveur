@@ -14,6 +14,7 @@ FactoryBot.define do
     siret { '12345678901234' }
     type { 'StructureLocale' }
 
+
     trait :avec_admin do
       after(:create) do |structure|
         create(:compte_admin, structure: structure)

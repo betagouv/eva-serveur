@@ -60,6 +60,12 @@ div class: "row" do
                 structure.children
               end
             end
+            if current_compte.superadmin?
+              row :statut_siret
+              row :date_verification_siret do
+                structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
+              end
+            end
           end
         end
       end

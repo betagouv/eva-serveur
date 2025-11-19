@@ -204,4 +204,150 @@ describe Structure, type: :model do
       end
     end
   end
+
+  describe "vérification SIRET via API SIRENE" do
+    let(:verificateur) { instance_double(VerificateurSiret) }
+    let(:structure) { build(:structure, siret: "12345678901234") }
+
+    before do
+      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
+    end
+
+    context "à la création d'une nouvelle structure" do
+      context "quand le SIRET est valide" do
+        before do
+          allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+        end
+
+        it "vérifie le SIRET et met à jour le statut" do
+          structure.save
+          expect(structure.statut_siret).to eq("vérifié")
+          expect(structure.date_verification_siret).to be_present
+        end
+
+        it "permet la création de la structure" do
+          expect(structure.save).to be true
+        end
+      end
+
+      context "quand le SIRET est invalide" do
+        before do
+          allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+        end
+
+        it "ajoute une erreur sur le SIRET" do
+          structure.save
+          expect(structure.errors[:siret]).to include(I18n.t("activerecord.errors.models.structure.attributes.siret.invalid"))
+        end
+
+        it "ne permet pas la création de la structure" do
+          expect(structure.save).to be false
+        end
+
+        it "ne met pas à jour le statut SIRET" do
+          structure.save
+          expect(structure.statut_siret).to be_nil
+        end
+      end
+    end
+
+    context "lors de la mise à jour d'une structure existante" do
+      context "quand la structure a un SIRET vérifié" do
+        let(:structure) { create(:structure, siret: "12345678901234", statut_siret: "vérifié", date_verification_siret: 1.day.ago) }
+
+        context "quand le nouveau SIRET est valide" do
+          before do
+            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+            structure.siret = "98765432101234"
+          end
+
+        it "vérifie le nouveau SIRET" do
+          structure.save
+          expect(VerificateurSiret).to have_received(:new).at_least(:once)
+        end
+
+          it "met à jour le statut et la date" do
+            freeze_time = Time.zone.parse("2024-01-15 10:00:00")
+            travel_to freeze_time do
+              structure.save
+              expect(structure.statut_siret).to eq("vérifié")
+              expect(structure.date_verification_siret).to eq(freeze_time)
+            end
+          end
+
+          it "permet la mise à jour" do
+            expect(structure.save).to be true
+          end
+        end
+
+        context "quand le nouveau SIRET est invalide" do
+          before do
+            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+            structure.siret = "98765432101234"
+          end
+
+          it "ajoute une erreur sur le SIRET" do
+            structure.save
+            expect(structure.errors[:siret]).to include(I18n.t("activerecord.errors.models.structure.attributes.siret.invalid"))
+          end
+
+          it "ne permet pas la mise à jour" do
+            expect(structure.save).to be false
+          end
+        end
+      end
+
+      context "quand la structure n'a pas de SIRET vérifié" do
+        let(:structure) { create(:structure, siret: "12345678901234", statut_siret: nil) }
+
+        context "quand le nouveau SIRET est valide" do
+          before do
+            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+            structure.siret = "98765432101234"
+          end
+
+          it "vérifie le SIRET" do
+            structure.save
+            expect(VerificateurSiret).to have_received(:new).at_least(:once)
+          end
+
+          it "met à jour le statut et la date" do
+            structure.save
+            expect(structure.statut_siret).to eq("vérifié")
+            expect(structure.date_verification_siret).to be_present
+          end
+
+          it "permet la mise à jour même si le SIRET n'est pas vérifié" do
+            expect(structure.save).to be true
+          end
+        end
+
+        context "quand le nouveau SIRET est invalide" do
+          before do
+            allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+            structure.siret = "98765432101234"
+          end
+
+          it "ne bloque pas la mise à jour" do
+            expect(structure.save).to be true
+          end
+
+          it "ne met pas à jour le statut SIRET" do
+            structure.save
+            expect(structure.statut_siret).to be_nil
+          end
+        end
+      end
+    end
+
+    context "quand le SIRET n'est pas modifié" do
+      let(:structure) { create(:structure, siret: "12345678901234", statut_siret: "vérifié") }
+
+      it "ne relance pas la vérification" do
+        structure.nom = "Nouveau nom"
+        structure.save
+        expect(VerificateurSiret).not_to have_received(:new)
+      end
+    end
+  end
 end

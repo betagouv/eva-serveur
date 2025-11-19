@@ -75,4 +75,66 @@ describe 'Nouvelle Structure', type: :feature do
       expect(page).to have_current_path(nouvelle_structure_path)
     end
   end
+
+  context "quand le SIRET est invalide selon l'API SIRENE" do
+    let(:verificateur) { instance_double(VerificateurSiret) }
+
+    before do
+      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
+      allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+
+      visit nouvelle_structure_path
+      fill_in :compte_prenom, with: 'Jimmy'
+      fill_in :compte_nom, with: 'Endriques'
+      fill_in :compte_telephone, with: '02 03 04 05 06'
+      fill_in :compte_email, with: 'jeanmarc@structure.fr'
+      fill_in :compte_password, with: 'billyjoel'
+      fill_in :compte_password_confirmation, with: 'billyjoel'
+      fill_in :compte_structure_attributes_nom, with: 'Mission Locale Nice'
+      select 'Mission locale'
+      fill_in :compte_structure_attributes_code_postal, with: '06000'
+      fill_in :compte_structure_attributes_siret, with: '12345678901234'
+    end
+
+    it 'affiche une erreur et ne crée pas la structure' do
+      expect do
+        click_on 'Valider la création de mon compte'
+      end.not_to change(StructureLocale, :count)
+
+      message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
+      expect(page).to have_content(message_erreur)
+      expect(page).to have_current_path(nouvelle_structure_path)
+    end
+  end
+
+  context "quand le SIRET est valide selon l'API SIRENE" do
+    let(:verificateur) { instance_double(VerificateurSiret) }
+
+    before do
+      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
+      allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(true)
+
+      visit nouvelle_structure_path
+      fill_in :compte_prenom, with: 'Jimmy'
+      fill_in :compte_nom, with: 'Endriques'
+      fill_in :compte_telephone, with: '02 03 04 05 06'
+      fill_in :compte_email, with: 'jeanmarc@structure.fr'
+      fill_in :compte_password, with: 'billyjoel'
+      fill_in :compte_password_confirmation, with: 'billyjoel'
+      fill_in :compte_structure_attributes_nom, with: 'Mission Locale Nice'
+      select 'Mission locale'
+      fill_in :compte_structure_attributes_code_postal, with: '06000'
+      fill_in :compte_structure_attributes_siret, with: '12345678901234'
+    end
+
+    it 'créé la structure avec le statut SIRET vérifié' do
+      expect do
+        click_on 'Valider la création de mon compte'
+      end.to change(StructureLocale, :count)
+
+      structure = Structure.order(:created_at).last
+      expect(structure.statut_siret).to eq("vérifié")
+      expect(structure.date_verification_siret).to be_present
+    end
+  end
 end

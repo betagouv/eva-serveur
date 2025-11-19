@@ -22,7 +22,7 @@ RSpec.describe VerificateurSiret, type: :model do
 
       it "met à jour la date de vérification" do
         freeze_time = Time.zone.parse("2024-01-15 10:00:00")
-        travel_to freeze_time do
+        Timecop.freeze(freeze_time) do
           verificateur.verifie_et_met_a_jour
           expect(structure.date_verification_siret).to eq(freeze_time)
         end
@@ -63,4 +63,3 @@ RSpec.describe VerificateurSiret, type: :model do
     end
   end
 end
-

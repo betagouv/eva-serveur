@@ -3,7 +3,7 @@ active_admin_form_for [ :admin, resource ] do |f|
     f.input :nom
     f.input :siret,
             required: resource.new_record?,
-            hint: t("structures.form.siret_hint")
+            hint: t("admin.structures.structures_locales.form.siret_hint")
     para do
       text_node link_to t("admin.structures.structures_locales.form.siret_lien"),
                         "https://annuaire-entreprises.data.gouv.fr/",

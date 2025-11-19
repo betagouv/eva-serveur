@@ -40,4 +40,8 @@ module StructureHelper
   def traduction_autorisation_creation_campagne(autorisation_creation_campagne)
     I18n.t("activerecord.attributes.structure.autorisation_creation_campagne_#{autorisation_creation_campagne}") # rubocop:disable Layout/LineLength
   end
+
+  def format_statut_siret(statut_siret)
+    I18n.t("activerecord.attributes.structure.statut_siret_#{statut_siret}")
+  end
 end

@@ -132,7 +132,7 @@ describe 'Nouvelle Structure', type: :feature do
       end.to change(StructureLocale, :count)
 
       structure = Structure.order(:created_at).last
-      expect(structure.statut_siret).to eq("vérifié")
+      expect(structure.statut_siret).to be true
       expect(structure.date_verification_siret).to be_present
     end
   end

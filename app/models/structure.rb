@@ -128,10 +128,12 @@ class Structure < ApplicationRecord
     return if siret.blank?
     return unless doit_verifier_siret?
 
+    statut_initial = statut_siret
+
     verificateur = VerificateurSiret.new(self)
     siret_valide = verificateur.verifie_et_met_a_jour
 
-    return if siret_valide || !verification_bloquante?
+    return if siret_valide || !verification_bloquante?(statut_initial)
 
     errors.add(:siret, :invalid)
   end
@@ -140,12 +142,12 @@ class Structure < ApplicationRecord
     return true if new_record?
     return false unless siret_changed?
 
-    statut_siret == "vérifié" || statut_siret.nil?
+    true
   end
 
-  def verification_bloquante?
+  def verification_bloquante?(statut_initial = nil)
     return true if new_record?
 
-    statut_siret == "vérifié"
+    (statut_initial || statut_siret) == true
   end
 end

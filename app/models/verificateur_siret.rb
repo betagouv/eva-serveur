@@ -10,8 +10,11 @@ class VerificateurSiret
     siret_valide = client.verifie_siret(@structure.siret)
 
     if siret_valide
-      @structure.statut_siret = "vérifié"
+      @structure.statut_siret = true
       @structure.date_verification_siret = Time.current
+    else
+      @structure.statut_siret = false
+      @structure.date_verification_siret = nil
     end
 
     siret_valide

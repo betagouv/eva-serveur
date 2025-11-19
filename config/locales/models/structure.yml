@@ -24,6 +24,8 @@ fr:
         code_postal: Code Postal
         siret: SIRET de l'organisation que vous représentez
         statut_siret: Statut SIRET
+        statut_siret_true: vérifié
+        statut_siret_false: non vérifié
         date_verification_siret: Date vérification SIRET
         region: Région
         date_derniere_evaluation: Dernière évaluation

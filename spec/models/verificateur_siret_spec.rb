@@ -15,9 +15,9 @@ RSpec.describe VerificateurSiret, type: :model do
         allow(client_sirene).to receive(:verifie_siret).with("12345678901234").and_return(true)
       end
 
-      it "met à jour le statut SIRET à 'vérifié'" do
+      it "met à jour le statut SIRET à true" do
         verificateur.verifie_et_met_a_jour
-        expect(structure.statut_siret).to eq("vérifié")
+        expect(structure.statut_siret).to be true
       end
 
       it "met à jour la date de vérification" do
@@ -40,7 +40,7 @@ RSpec.describe VerificateurSiret, type: :model do
 
       it "ne met pas à jour le statut SIRET" do
         verificateur.verifie_et_met_a_jour
-        expect(structure.statut_siret).to be_nil
+        expect(structure.statut_siret).to be false
       end
 
       it "ne met pas à jour la date de vérification" do

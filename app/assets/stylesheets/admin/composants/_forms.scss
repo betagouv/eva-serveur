@@ -168,6 +168,12 @@ form {
       position: relative;
       padding-left: .5rem;
       padding-right: 2rem;
+
+      &:disabled,
+      &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
     }
 
     li.select {
@@ -184,10 +190,6 @@ form {
           background-image: asset-data-url('fleche_select.svg');
           height: 1rem;
           width: 1rem;
-        }
-
-        &.select2-container--disabled::after {
-          opacity: 0.3;
         }
       }
 
@@ -288,5 +290,14 @@ form:not(.filter_form) .select2-container {
 
   .select2-selection__rendered {
     color: $couleur-texte;
+  }
+}
+
+.select2-container--default.select2-container--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+
+  .select2-selection--single {
+    cursor: not-allowed;
   }
 }

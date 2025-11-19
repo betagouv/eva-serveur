@@ -406,7 +406,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_19_094304) do
     t.boolean "autorisation_creation_campagne", default: true
     t.string "usage", default: "Eva: bénéficiaires"
     t.uuid "opco_id"
-    t.string "statut_siret"
+    t.boolean "statut_siret"
     t.datetime "date_verification_siret"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"

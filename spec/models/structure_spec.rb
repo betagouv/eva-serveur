@@ -214,7 +214,7 @@ describe Structure, type: :model do
 
         it "vérifie le SIRET et met à jour le statut" do
           expect(structure.save).to be true
-          expect(structure.statut_siret).to eq("vérifié")
+          expect(structure.statut_siret).to be true
           expect(structure.date_verification_siret).to be_present
         end
 
@@ -243,7 +243,7 @@ describe Structure, type: :model do
 
         it "ne met pas à jour le statut SIRET" do
           structure.save
-          expect(structure.statut_siret).to be_nil
+          expect(structure.statut_siret).to be false
         end
       end
     end
@@ -253,7 +253,7 @@ describe Structure, type: :model do
         let!(:structure) do
           # On crée la structure avec le mock global qui retourne true
           structure = create(:structure, siret: "12345678901234")
-          structure.update_columns(statut_siret: "vérifié", date_verification_siret: 1.day.ago)
+          structure.update_columns(statut_siret: true, date_verification_siret: 1.day.ago)
           structure
         end
 
@@ -272,7 +272,7 @@ describe Structure, type: :model do
             freeze_time = Time.zone.parse("2024-01-15 10:00:00")
             Timecop.freeze(freeze_time) do
               structure.save
-              expect(structure.statut_siret).to eq("vérifié")
+              expect(structure.statut_siret).to be true
               expect(structure.date_verification_siret).to eq(freeze_time)
             end
           end
@@ -307,7 +307,7 @@ describe Structure, type: :model do
         let!(:structure) do
           # On crée la structure avec le mock global qui retourne true
           structure = create(:structure, siret: "12345678901234")
-          structure.update_columns(statut_siret: nil, date_verification_siret: nil)
+          structure.update_columns(statut_siret: false, date_verification_siret: nil)
           structure
         end
 
@@ -324,7 +324,7 @@ describe Structure, type: :model do
 
           it "met à jour le statut et la date" do
             structure.save
-            expect(structure.statut_siret).to eq("vérifié")
+            expect(structure.statut_siret).to be true
             expect(structure.date_verification_siret).to be_present
           end
 
@@ -348,7 +348,7 @@ describe Structure, type: :model do
 
           it "ne met pas à jour le statut SIRET" do
             structure.save
-            expect(structure.statut_siret).to be_nil
+            expect(structure.statut_siret).to be false
           end
         end
       end
@@ -358,7 +358,7 @@ describe Structure, type: :model do
       let!(:structure) do
         # On crée la structure avec le mock global qui retourne true
         structure = create(:structure, siret: "12345678901234")
-        structure.update_columns(statut_siret: "vérifié", date_verification_siret: 1.day.ago)
+        structure.update_columns(statut_siret: true, date_verification_siret: 1.day.ago)
         structure
       end
 

@@ -61,7 +61,9 @@ div class: "row" do
               end
             end
             if current_compte.superadmin?
-              row :statut_siret
+              row :statut_siret do
+                format_statut_siret(structure.statut_siret)
+              end
               row :date_verification_siret do
                 structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
               end

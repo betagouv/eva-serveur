@@ -28,6 +28,7 @@ class Structure < ApplicationRecord
   end
 
   before_validation :retire_espaces_siret
+  before_validation :verifie_siret_si_necessaire
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
   after_create :programme_email_relance
 
@@ -121,5 +122,30 @@ class Structure < ApplicationRecord
     return if siret.blank?
 
     self.siret = siret.gsub(/[[:space:]]/, "")
+  end
+
+  def verifie_siret_si_necessaire
+    return if siret.blank?
+    return unless doit_verifier_siret?
+
+    verificateur = VerificateurSiret.new(self)
+    siret_valide = verificateur.verifie_et_met_a_jour
+
+    return if siret_valide || !verification_bloquante?
+
+    errors.add(:siret, :invalid)
+  end
+
+  def doit_verifier_siret?
+    return true if new_record?
+    return false unless siret_changed?
+
+    statut_siret == "vérifié" || statut_siret.nil?
+  end
+
+  def verification_bloquante?
+    return true if new_record?
+
+    statut_siret == "vérifié"
   end
 end

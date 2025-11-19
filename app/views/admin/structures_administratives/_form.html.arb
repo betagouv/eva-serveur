@@ -5,10 +5,11 @@ active_admin_form_for [ :admin, resource ] do |f|
             required: resource.new_record?,
             hint: t("admin.structures.structures_locales.form.siret_hint")
     para do
-      text_node link_to t("admin.structures.structures_locales.form.siret_lien"),
-                        "https://annuaire-entreprises.data.gouv.fr/",
-                        target: "_blank",
-                        rel: "noopener noreferrer"
+      render LienComponent.new(
+        t("nouvelles_structures.show.annuaire_siret.description"),
+        t("nouvelles_structures.show.annuaire_siret.url"),
+        externe: true
+      )
     end
     if can?(:manage, Compte)
       f.input :parent_id, as: :select, collection: StructureAdministrative.all

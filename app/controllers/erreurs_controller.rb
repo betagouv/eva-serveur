@@ -16,6 +16,6 @@ class ErreursController < ActionController::Base
   end
 
   def unprocessable_entity
-    render "erreur", formats: :html, status: :unprocessable_entity
+    render "erreur", formats: :html, status: :unprocessable_content
   end
 end

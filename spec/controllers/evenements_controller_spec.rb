@@ -6,7 +6,7 @@ describe Api::EvenementsController, type: :controller do
     let(:situation) { create :situation_inventaire }
 
     context "quand la création de l'évènement échoue" do
-      it 'renvoie une erreur unprocessable_entity' do
+      it 'renvoie une erreur unprocessable_content' do
         params = {
           date: 1_551_111_089_238,
           nom: nil,
@@ -18,7 +18,7 @@ describe Api::EvenementsController, type: :controller do
         }
 
         post :create, params: params
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

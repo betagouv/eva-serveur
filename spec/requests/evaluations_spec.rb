@@ -78,7 +78,7 @@ describe 'Evaluation', type: :request do
           expect(json.keys.sort).to eq %w[campagne code_campagne debutee_le]
           expect(json.values.sort).to eq [ [ "Code inconnu" ], [ "doit être présente" ],
                                            [ "doit être rempli(e)" ] ]
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 
@@ -91,7 +91,7 @@ describe 'Evaluation', type: :request do
           json = response.parsed_body
           expect(json.keys).to include "beneficiaire"
           expect(json.values).to include [ "doit exister" ]
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 
@@ -134,7 +134,7 @@ describe 'Evaluation', type: :request do
           expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le]
           expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
                                            [ 'doit être rempli(e)' ] ]
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
 
@@ -148,7 +148,7 @@ describe 'Evaluation', type: :request do
           expect(json.keys.sort).to eq %w[beneficiaire campagne debutee_le]
           expect(json.values.sort).to eq [ [ 'doit exister' ], [ 'doit être présente' ],
                                            [ 'doit être rempli(e)' ] ]
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
     end
@@ -231,7 +231,7 @@ describe 'Evaluation', type: :request do
           patch "/api/evaluations/#{evaluation.id}", params: { debutee_le: '' }
 
           expect(evaluation.reload.debutee_le).to eq date
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it "Ne permet pas la modification du nom" do

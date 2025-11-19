@@ -8,7 +8,7 @@ module Api
       elsif evenement.persisted?
         render json: evenement, status: :created
       else
-        render json: evenement.errors.full_messages, status: :unprocessable_entity
+        render json: evenement.errors.full_messages, status: :unprocessable_content
       end
     end
 

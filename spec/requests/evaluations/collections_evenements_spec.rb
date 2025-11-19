@@ -46,7 +46,7 @@ describe 'API Collections Evenements', type: :request do
         post '/api/evaluations/evaluation_inconnue/collections_evenements',
              params: donnees_evenements
         expect(response.body).to eq '{"message":"Évaluation non trouvée"}'
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
     end
 

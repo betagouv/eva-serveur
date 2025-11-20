@@ -7,7 +7,9 @@
     line-height: 1.375rem;
     font-weight: bold;
 
-    &, &:link, &:visited {
+    &,
+    &:link,
+    &:visited {
       background-image: none;
     }
 
@@ -26,7 +28,9 @@
     width: $largeur_colonne_campagne;
     @include texte-lg();
 
-    &, &:link, &:visited {
+    &,
+    &:link,
+    &:visited {
       color: $eva_dark_blue_grey;
       background-image: none;
     }
@@ -44,7 +48,9 @@
     font-style: normal;
     font-weight: 400;
 
-    a, a:link, a:visited {
+    a,
+    a:link,
+    a:visited {
       color: $eva_dark_blue_grey;
       font-weight: 600;
     }
@@ -65,6 +71,7 @@
 
   .menu-actions {
     @include menu-actions();
+
     .table_actions {
       left: calc(100% - 2rem);
       top: 2rem;
@@ -72,26 +79,35 @@
   }
 }
 
-#index_table_evaluations, #index_table_evaluations_beneficiaire {
+#index_table_evaluations,
+#index_table_evaluations_beneficiaire {
   $padding-horizontal: 0.625rem;
-  thead th { padding: 0 $padding-horizontal .5rem; }
+
+  thead th {
+    padding: 0 $padding-horizontal .5rem;
+  }
+
   tbody tr {
     min-height: 4.5rem;
   }
+
   .cellule {
     display: flex;
     flex-direction: column;
     height: 2.875rem;
     justify-content: space-between;
   }
+
   .col-beneficiaire {
     .ellipse {
       margin-right: .75rem;
     }
   }
+
   td:first-child {
     padding-left: 1rem;
   }
+
   td:last-child {
     padding-right: 1rem;
     display: flex;
@@ -99,6 +115,7 @@
     align-items: flex-end;
     height: 4.5rem;
   }
+
   td {
     padding: .75rem $padding-horizontal;
   }
@@ -106,7 +123,8 @@
   @include bloc-evaluation();
 }
 
-.show, .admin_evaluations {
+.show,
+.admin_evaluations {
   .menu-sidebar {
     margin-top: 2rem;
   }

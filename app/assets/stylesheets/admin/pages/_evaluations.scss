@@ -18,10 +18,12 @@
     }
   }
 
+  $largeur_colonne_campagne: 28.75rem;
+
   .evaluation__campagne {
     font-weight: 600;
     @include tronque();
-    width: 28.75rem;
+    width: $largeur_colonne_campagne;
     @include texte-lg();
 
     &, &:link, &:visited {
@@ -34,7 +36,9 @@
     margin-left: 1.75rem;
   }
 
-  .evaluation__code-beneficiaire, .evaluation__parcours-type, .evaluation__created_at {
+  .evaluation__code-beneficiaire,
+  .evaluation__campagne-sous-titre,
+  .evaluation__created_at {
     color: $eva_dark_blue_grey;
     @include texte-xs();
     font-style: normal;
@@ -44,6 +48,14 @@
       color: $eva_dark_blue_grey;
       font-weight: 600;
     }
+  }
+
+  .evaluation__campagne-sous-titre {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: $largeur_colonne_campagne;
+    line-height: normal;
   }
 
   .evaluation__created_at {

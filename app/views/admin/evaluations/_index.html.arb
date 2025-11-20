@@ -11,10 +11,10 @@ context.instance_eval do
           class: "d-flex align-items-center"
       parcours_type = campagne.parcours_type
       if parcours_type.present? && !current_compte.administratif?
-        div parcours_type.display_name, class: "evaluation__parcours-type"
+        div parcours_type.display_name, class: "evaluation__campagne-sous-titre"
       end
       if current_compte.anlci? || current_compte.administratif?
-        div evaluation.campagne.structure.display_name, class: "evaluation__parcours-type"
+        div evaluation.campagne.structure.display_name, class: "evaluation__campagne-sous-titre"
       end
     end
   end

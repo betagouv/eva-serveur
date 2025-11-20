@@ -37,11 +37,19 @@ RSpec.configure do |config|
     allow(reponse).to receive(:success?).and_return(false)
     allow(Typhoeus).to receive(:get).and_return(reponse)
 
-    # Mock par défaut pour la vérification SIRET via API SIRENE :
-    # considère tous les SIRETs comme valides
-    client_sirene = instance_double(Sirene::Client)
-    allow(Sirene::Client).to receive(:new).and_return(client_sirene)
-    allow(client_sirene).to receive(:verifie_siret).and_return(true)
+    # Mock par défaut pour la mise à jour SIRET via API SIRENE :
+    # considère tous les SIRETs comme valides et met à jour la structure
+    allow(MiseAJourSiret).to receive(:new) do |structure|
+      mise_a_jour = instance_double(MiseAJourSiret)
+      allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
+        structure.statut_siret = true
+        structure.date_verification_siret = Time.current
+        structure.code_naf = "53.10Z"
+        structure.idcc = [ "5516", "9999" ]
+        true
+      end
+      mise_a_jour
+    end
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will

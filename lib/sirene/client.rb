@@ -2,19 +2,18 @@ module Sirene
   class Client
     BASE_URL = ENV.fetch("SIRENE_API_URL").freeze
 
-    def verifie_siret(siret)
-      return false if siret.blank?
+    def recherche(siret)
+      return nil if siret.blank?
 
       url = "#{BASE_URL}/search?q=#{siret}"
       reponse = Typhoeus.get(url, headers: headers)
 
-      return false unless reponse.success?
+      return nil unless reponse.success?
 
-      donnees = JSON.parse(reponse.body)
-      siret_trouve?(donnees, siret)
+      JSON.parse(reponse.body)
     rescue JSON::ParserError, StandardError => e
-      Rails.logger.error("Erreur lors de la vérification SIRET #{siret}: #{e.message}")
-      false
+      Rails.logger.error("Erreur lors de la recherche SIRET #{siret}: #{e.message}")
+      nil
     end
 
     private
@@ -23,17 +22,6 @@ module Sirene
       {
         "Accept" => "application/json"
       }
-    end
-
-    def siret_trouve?(donnees, siret_recherche)
-      return false if donnees["results"].blank?
-
-      donnees["results"].any? do |resultat|
-        # Vérifier dans le siège
-        resultat.dig("siege", "siret") == siret_recherche ||
-          # Vérifier dans les établissements correspondants
-          resultat.dig("matching_etablissements")&.any? { |etab| etab["siret"] == siret_recherche }
-      end
     end
   end
 end

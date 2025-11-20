@@ -1,16 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Sirene::Client, type: :lib do
+describe Sirene::Client, type: :lib do
   describe "#verifie_siret" do
     let(:siret) { "35600000050439" }
     let(:client) { described_class.new }
-    let(:api_url) { "https://recherche-entreprises.api.gouv.fr/search?q=" }
-    let(:url) { "#{api_url}#{siret}" }
+    let(:api_url) { ENV.fetch("SIRENE_API_URL") }
+    let(:url) { "#{api_url}/search?q=#{siret}" }
 
     before do
-      # Stub la constante BASE_URL pour utiliser l'URL de test
-      stub_const("Sirene::Client::BASE_URL", api_url)
-      # Réinitialise les mocks globaux pour ces tests
       RSpec::Mocks.space.proxy_for(Typhoeus).reset
       RSpec::Mocks.space.proxy_for(described_class).reset
     end

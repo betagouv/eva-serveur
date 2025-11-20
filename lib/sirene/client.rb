@@ -5,7 +5,7 @@ module Sirene
     def verifie_siret(siret)
       return false if siret.blank?
 
-      url = "#{BASE_URL}#{siret}"
+      url = "#{BASE_URL}/search?q=#{siret}"
       reponse = Typhoeus.get(url, headers: headers)
 
       return false unless reponse.success?

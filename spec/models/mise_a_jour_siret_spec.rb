@@ -1,0 +1,156 @@
+require "rails_helper"
+
+RSpec.describe MiseAJourSiret, type: :model do
+  describe "#verifie_et_met_a_jour" do
+    let(:structure) { build(:structure, siret: "12345678901234") }
+    let(:client_sirene) { instance_double(Sirene::Client) }
+    let(:mise_a_jour) { described_class.new(structure) }
+
+    before do
+      # Réinitialise les mocks globaux pour ces tests
+      RSpec::Mocks.space.proxy_for(described_class).reset
+      RSpec::Mocks.space.proxy_for(Sirene::Client).reset
+      allow(Sirene::Client).to receive(:new).and_return(client_sirene)
+    end
+
+    context "quand le SIRET est valide" do
+      let(:donnees_api) do
+        {
+          "results" => [
+            {
+              "siren" => "123456789",
+              "nom_complet" => "ENTREPRISE TEST",
+              "activite_principale" => "53.10Z",
+              "siege" => {
+                "siret" => "12345678901234"
+              },
+              "matching_etablissements" => [],
+              "complements" => {
+                "liste_idcc" => [ "5516", "9999" ]
+              }
+            }
+          ],
+          "total_results" => 1
+        }
+      end
+
+      before do
+        allow(client_sirene).to receive(:recherche).with("12345678901234").and_return(donnees_api)
+      end
+
+      it "met à jour le statut SIRET à true" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.statut_siret).to be true
+      end
+
+      it "met à jour la date de vérification" do
+        freeze_time = Time.zone.parse("2024-01-15 10:00:00")
+        Timecop.freeze(freeze_time) do
+          mise_a_jour.verifie_et_met_a_jour
+          expect(structure.date_verification_siret).to eq(freeze_time)
+        end
+      end
+
+      it "met à jour le code NAF et les IDCC" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_naf).to eq("53.10Z")
+        expect(structure.idcc).to eq([ "5516", "9999" ])
+      end
+
+      it "retourne true" do
+        expect(mise_a_jour.verifie_et_met_a_jour).to be true
+      end
+    end
+
+    context "quand le SIRET est invalide" do
+      before do
+        allow(client_sirene).to receive(:recherche).with("12345678901234").and_return(nil)
+      end
+
+      it "met le statut SIRET à false" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.statut_siret).to be false
+      end
+
+      it "ne met pas à jour la date de vérification" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.date_verification_siret).to be_nil
+      end
+
+      it "ne met pas à jour le code NAF et les IDCC" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_naf).to be_nil
+        expect(structure.idcc).to eq([])
+      end
+
+      it "retourne false" do
+        expect(mise_a_jour.verifie_et_met_a_jour).to be false
+      end
+    end
+
+    context "quand le SIRET n'est pas trouvé dans les résultats" do
+      let(:donnees_api) do
+        {
+          "results" => [
+            {
+              "siren" => "123456789",
+              "nom_complet" => "AUTRE ENTREPRISE",
+              "siege" => {
+                "siret" => "98765432109876"
+              }
+            }
+          ],
+          "total_results" => 1
+        }
+      end
+
+      before do
+        allow(client_sirene).to receive(:recherche).with("12345678901234").and_return(donnees_api)
+      end
+
+      it "ne met pas à jour le statut SIRET" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.statut_siret).to be false
+      end
+    end
+
+    context "quand le SIRET est valide mais sans IDCC" do
+      let(:donnees_api) do
+        {
+          "results" => [
+            {
+              "siren" => "123456789",
+              "nom_complet" => "ENTREPRISE TEST",
+              "activite_principale" => "53.10Z",
+              "siege" => {
+                "siret" => "12345678901234"
+              },
+              "matching_etablissements" => [],
+              "complements" => {}
+            }
+          ],
+          "total_results" => 1
+        }
+      end
+
+      before do
+        allow(client_sirene).to receive(:recherche).with("12345678901234").and_return(donnees_api)
+      end
+
+      it "met à jour le code NAF et un tableau vide pour IDCC" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_naf).to eq("53.10Z")
+        expect(structure.idcc).to eq([])
+      end
+    end
+
+    context "quand le SIRET est vide" do
+      let(:structure) { build(:structure, siret: nil) }
+
+      it "retourne false sans appeler l'API" do
+        expect(client_sirene).not_to receive(:recherche)
+        expect(mise_a_jour.verifie_et_met_a_jour).to be false
+      end
+    end
+  end
+end

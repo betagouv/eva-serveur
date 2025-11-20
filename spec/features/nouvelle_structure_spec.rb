@@ -77,11 +77,11 @@ describe 'Nouvelle Structure', type: :feature do
   end
 
   context "quand le SIRET est invalide selon l'API SIRENE" do
-    let(:verificateur) { instance_double(VerificateurSiret) }
+    let(:mise_a_jour) { instance_double(MiseAJourSiret) }
 
     before do
-      allow(VerificateurSiret).to receive(:new).and_return(verificateur)
-      allow(verificateur).to receive(:verifie_et_met_a_jour).and_return(false)
+      allow(MiseAJourSiret).to receive(:new).and_return(mise_a_jour)
+      allow(mise_a_jour).to receive(:verifie_et_met_a_jour).and_return(false)
 
       visit nouvelle_structure_path
       fill_in :compte_prenom, with: 'Jimmy'

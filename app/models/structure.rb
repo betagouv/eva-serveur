@@ -130,8 +130,8 @@ class Structure < ApplicationRecord
 
     statut_initial = statut_siret
 
-    verificateur = VerificateurSiret.new(self)
-    siret_valide = verificateur.verifie_et_met_a_jour
+    mise_a_jour = MiseAJourSiret.new(self)
+    siret_valide = mise_a_jour.verifie_et_met_a_jour
 
     return if siret_valide || !verification_bloquante?(statut_initial)
 

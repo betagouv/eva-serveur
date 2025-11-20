@@ -1,17 +1,17 @@
 module Sirene
   class Client
-    BASE_URL = "https://api.insee.fr/entreprises/sirene/V3.11".freeze
+    BASE_URL = ENV.fetch("SIRENE_API_URL", nil).freeze
 
     def verifie_siret(siret)
       return false if siret.blank?
 
-      url = "#{BASE_URL}/siret/#{siret}"
+      url = "#{BASE_URL}#{siret}"
       reponse = Typhoeus.get(url, headers: headers)
 
       return false unless reponse.success?
 
       donnees = JSON.parse(reponse.body)
-      donnees["etablissement"].present?
+      siret_trouve?(donnees, siret)
     rescue JSON::ParserError, StandardError => e
       Rails.logger.error("Erreur lors de la vérification SIRET #{siret}: #{e.message}")
       false
@@ -20,11 +20,20 @@ module Sirene
     private
 
     def headers
-      token = ENV["SIRENE_API_TOKEN"] || ""
       {
-        "Authorization" => "Bearer #{token}",
         "Accept" => "application/json"
       }
+    end
+
+    def siret_trouve?(donnees, siret_recherche)
+      return false if donnees["results"].blank?
+
+      donnees["results"].any? do |resultat|
+        # Vérifier dans le siège
+        resultat.dig("siege", "siret") == siret_recherche ||
+          # Vérifier dans les établissements correspondants
+          resultat.dig("matching_etablissements")&.any? { |etab| etab["siret"] == siret_recherche }
+      end
     end
   end
 end

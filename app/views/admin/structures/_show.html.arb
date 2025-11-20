@@ -18,6 +18,17 @@ div class: "row" do
             row :opco if structure.usage == "Eva: entreprises"
             row :code_postal
             row :siret
+            if current_compte.superadmin?
+              row :statut_siret do
+                render BadgeComponent.new(
+                  contenu: format_statut_siret(structure.statut_siret),
+                  class_couleur: structure.statut_siret ? "fr-badge--green-emeraude" : ""
+                )
+              end
+              row :date_verification_siret do
+                structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
+              end
+            end
             row :autorisation_creation_campagne do
               render(BadgeComponent.new(
                 contenu: traduction_autorisation_creation_campagne(
@@ -58,14 +69,6 @@ div class: "row" do
             if structure.instance_of?(StructureAdministrative)
               row :structures_dependantes do
                 structure.children
-              end
-            end
-            if current_compte.superadmin?
-              row :statut_siret do
-                format_statut_siret(structure.statut_siret)
-              end
-              row :date_verification_siret do
-                structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
               end
             end
           end

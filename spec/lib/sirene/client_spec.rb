@@ -2,25 +2,41 @@ require "rails_helper"
 
 RSpec.describe Sirene::Client, type: :lib do
   describe "#verifie_siret" do
-    let(:siret) { "12345678901234" }
+    let(:siret) { "35600000050439" }
     let(:client) { described_class.new }
-    let(:url) { "https://api.insee.fr/entreprises/sirene/V3.11/siret/#{siret}" }
+    let(:api_url) { "https://recherche-entreprises.api.gouv.fr/search?q=" }
+    let(:url) { "#{api_url}#{siret}" }
 
     before do
+      # Stub la constante BASE_URL pour utiliser l'URL de test
+      stub_const("Sirene::Client::BASE_URL", api_url)
       # Réinitialise les mocks globaux pour ces tests
       RSpec::Mocks.space.proxy_for(Typhoeus).reset
       RSpec::Mocks.space.proxy_for(described_class).reset
     end
 
-    context "quand le SIRET est trouvé dans l'API SIRENE" do
+    context "quand le SIRET est trouvé dans l'API (dans matching_etablissements)" do
       let(:reponse_api) do
         {
-          "etablissement" => {
-            "siret" => siret,
-            "uniteLegale" => {
-              "denominationUniteLegale" => "Entreprise Test"
+          "results" => [
+            {
+              "siren" => "356000000",
+              "nom_complet" => "LA POSTE",
+              "siege" => {
+                "siret" => "35600000000048"
+              },
+              "matching_etablissements" => [
+                {
+                  "siret" => siret,
+                  "adresse" => "243 BOULEVARD JEAN JAURES 92100 BOULOGNE-BILLANCOURT"
+                }
+              ]
             }
-          }
+          ],
+          "total_results" => 1,
+          "page" => 1,
+          "per_page" => 10,
+          "total_pages" => 1
         }
       end
 
@@ -29,7 +45,7 @@ RSpec.describe Sirene::Client, type: :lib do
         allow(tr).to receive_messages(success?: true, body: reponse_api.to_json)
         allow(Typhoeus).to receive(:get).with(
           url,
-          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+          hash_including(headers: hash_including("Accept" => "application/json"))
         ).and_return(tr)
       end
 
@@ -39,17 +55,59 @@ RSpec.describe Sirene::Client, type: :lib do
       end
     end
 
-    context "quand le SIRET n'est pas trouvé dans l'API SIRENE" do
-      let(:reponse_erreur) do
-        { "header" => { "statut" => 404, "message" => "Aucun établissement trouvé" } }
+    context "quand le SIRET est trouvé dans l'API (dans siege)" do
+      let(:reponse_api) do
+        {
+          "results" => [
+            {
+              "siren" => "356000000",
+              "nom_complet" => "LA POSTE",
+              "siege" => {
+                "siret" => siret,
+                "adresse" => "9 RUE DU COLONEL PIERRE AVIA 75015 PARIS"
+              },
+              "matching_etablissements" => []
+            }
+          ],
+          "total_results" => 1,
+          "page" => 1,
+          "per_page" => 10,
+          "total_pages" => 1
+        }
       end
 
       before do
         tr = Typhoeus::Response.new
-        allow(tr).to receive_messages(success?: false, code: 404, body: reponse_erreur.to_json)
+        allow(tr).to receive_messages(success?: true, body: reponse_api.to_json)
         allow(Typhoeus).to receive(:get).with(
           url,
-          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+          hash_including(headers: hash_including("Accept" => "application/json"))
+        ).and_return(tr)
+      end
+
+      it "retourne true" do
+        expect(client.verifie_siret(siret)).to be true
+        expect(Typhoeus).to have_received(:get)
+      end
+    end
+
+    context "quand le SIRET n'est pas trouvé dans l'API" do
+      let(:reponse_api) do
+        {
+          "results" => [],
+          "total_results" => 0,
+          "page" => 1,
+          "per_page" => 10,
+          "total_pages" => 0
+        }
+      end
+
+      before do
+        tr = Typhoeus::Response.new
+        allow(tr).to receive_messages(success?: true, body: reponse_api.to_json)
+        allow(Typhoeus).to receive(:get).with(
+          url,
+          hash_including(headers: hash_including("Accept" => "application/json"))
         ).and_return(tr)
       end
 
@@ -65,7 +123,7 @@ RSpec.describe Sirene::Client, type: :lib do
         allow(tr).to receive_messages(success?: false, code: 500, body: "Internal Server Error")
         allow(Typhoeus).to receive(:get).with(
           url,
-          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+          hash_including(headers: hash_including("Accept" => "application/json"))
         ).and_return(tr)
       end
 
@@ -81,7 +139,7 @@ RSpec.describe Sirene::Client, type: :lib do
         allow(tr).to receive_messages(success?: false, timed_out?: true)
         allow(Typhoeus).to receive(:get).with(
           url,
-          hash_including(headers: hash_including("Authorization" => match(/^Bearer /)))
+          hash_including(headers: hash_including("Accept" => "application/json"))
         ).and_return(tr)
       end
 

@@ -41,7 +41,8 @@ RSpec.configure do |config|
     # considère tous les SIRETs comme valides
     client_sirene = instance_double(Sirene::Client)
     allow(Sirene::Client).to receive(:new).and_return(client_sirene)
-    allow(client_sirene).to receive(:verifie_siret).and_return(true)
+    allow(client_sirene).to receive_messages(verifie_siret: true,
+recupere_donnees_etablissement: { code_naf: "16.10A", idcc: "8432" })
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will

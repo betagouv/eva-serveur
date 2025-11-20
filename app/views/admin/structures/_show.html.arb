@@ -67,6 +67,10 @@ div class: "row" do
               row :date_verification_siret do
                 structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
               end
+              if structure.statut_siret
+                row :code_naf
+                row :idcc
+              end
             end
           end
         end

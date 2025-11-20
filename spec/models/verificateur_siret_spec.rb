@@ -11,8 +11,13 @@ RSpec.describe VerificateurSiret, type: :model do
     end
 
     context "quand le SIRET est valide" do
+      let(:donnees_etablissement) { { code_naf: "16.10A", idcc: "8432" } }
+
       before do
         allow(client_sirene).to receive(:verifie_siret).with("12345678901234").and_return(true)
+        allow(client_sirene).to receive(:recupere_donnees_etablissement)
+          .with("12345678901234")
+          .and_return(donnees_etablissement)
       end
 
       it "met à jour le statut SIRET à true" do
@@ -28,8 +33,64 @@ RSpec.describe VerificateurSiret, type: :model do
         end
       end
 
+      it "récupère et stocke le code NAF" do
+        verificateur.verifie_et_met_a_jour
+        expect(structure.code_naf).to eq("16.10A")
+      end
+
+      it "récupère et stocke l'IDCC" do
+        verificateur.verifie_et_met_a_jour
+        expect(structure.idcc).to eq("8432")
+      end
+
       it "retourne true" do
         expect(verificateur.verifie_et_met_a_jour).to be true
+      end
+    end
+
+    context "quand le code NAF est manquant" do
+      let(:donnees_etablissement) { { code_naf: nil, idcc: "8432" } }
+
+      before do
+        allow(client_sirene).to receive(:verifie_siret).with("12345678901234").and_return(true)
+        allow(client_sirene).to receive(:recupere_donnees_etablissement)
+          .with("12345678901234")
+          .and_return(donnees_etablissement)
+      end
+
+      it "lève une erreur" do
+        expect { verificateur.verifie_et_met_a_jour }
+          .to raise_error(/Données incomplètes de l'API SIRENE/)
+      end
+    end
+
+    context "quand l'IDCC est manquant" do
+      let(:donnees_etablissement) { { code_naf: "16.10A", idcc: nil } }
+
+      before do
+        allow(client_sirene).to receive(:verifie_siret).with("12345678901234").and_return(true)
+        allow(client_sirene).to receive(:recupere_donnees_etablissement)
+          .with("12345678901234")
+          .and_return(donnees_etablissement)
+      end
+
+      it "lève une erreur" do
+        expect { verificateur.verifie_et_met_a_jour }
+          .to raise_error(/Données incomplètes de l'API SIRENE/)
+      end
+    end
+
+    context "quand les données de l'établissement ne peuvent pas être récupérées" do
+      before do
+        allow(client_sirene).to receive(:verifie_siret).with("12345678901234").and_return(true)
+        allow(client_sirene).to receive(:recupere_donnees_etablissement)
+          .with("12345678901234")
+          .and_return(nil)
+      end
+
+      it "lève une erreur" do
+        expect { verificateur.verifie_et_met_a_jour }
+          .to raise_error(/Impossible de récupérer les données de l'établissement/)
       end
     end
 

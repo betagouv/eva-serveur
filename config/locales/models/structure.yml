@@ -27,6 +27,8 @@ fr:
         statut_siret_true: vérifié
         statut_siret_false: non vérifié
         date_verification_siret: Date vérification SIRET
+        code_naf: Code NAF/APE
+        idcc: Convention collective
         region: Région
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente

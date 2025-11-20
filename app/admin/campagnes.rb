@@ -119,7 +119,7 @@ campagne_privee: campagne.privee))
       l(campagne.date_derniere_evaluation, format: :sans_heure) if campagne.date_derniere_evaluation
     end
     if current_compte.anlci? || current_compte.administratif?
-      column :structure, sortable: "structures.nom"
+      column :structure, sortable: "lower_structures.nom"
     end
     column :compte
     column :created_at
@@ -152,7 +152,7 @@ campagne_privee: campagne.privee))
 
     def scoped_collection
       collection = end_of_association_chain.avec_nombre_evaluations_et_derniere_evaluation
-      if can?(:manage, Compte) && action_name == "index"
+      if (current_compte.anlci? || current_compte.administratif?) && action_name == "index"
         collection.left_joins(compte: :structure)
                   .includes(compte: :structure)
                   .group("comptes.id", "structures.id")

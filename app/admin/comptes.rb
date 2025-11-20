@@ -23,7 +23,7 @@ ActiveAdmin.register Compte do
          fields: %i[nom code_postal],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "nom_asc",
+         order_by: "lower_nom_asc",
          if: proc { current_compte.anlci? || current_compte.administratif? }
   filter :role,
          as: :select,

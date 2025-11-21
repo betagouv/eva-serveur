@@ -16,6 +16,7 @@ class Structure < ApplicationRecord
   }
   validates :siret, numericality: { only_integer: true, allow_blank: true }
   validates :siret, presence: true, on: :create
+  validates :siret, uniqueness: true, allow_blank: true
   validate :verifie_siret_ou_siren
 
   auto_strip_attributes :nom, squish: true

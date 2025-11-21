@@ -9,6 +9,7 @@ fr:
             siret:
               blank: doit être rempli
               invalid: SIRET invalide
+              taken: Ce SIRET est déjà utilisé.
     models:
       structure_administrative:
         one: Structure administrative

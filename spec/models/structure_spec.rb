@@ -412,6 +412,37 @@ describe Structure, type: :model do
     end
   end
 
+  describe 'unicité du SIRET' do
+    context 'quand un SIRET identique existe avec des espaces' do
+      # Test spécifique pour vérifier que la normalisation des espaces fonctionne
+      # avant la validation d'unicité
+      let!(:structure_existante) { create :structure, siret: '83386447300016' }
+      let(:nouvelle_structure) { build :structure, siret: '833 864 473 00016' }
+
+      before { nouvelle_structure.valid? }
+
+      it 'ajoute une erreur après normalisation' do
+        message_erreur = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
+        expect(nouvelle_structure.errors[:siret]).to include(message_erreur)
+      end
+    end
+
+    context 'avec des structures soft-deleted' do
+      # Test spécifique pour vérifier que acts_as_paranoid exclut les structures
+      # supprimées de la validation d'unicité
+      let!(:structure_supprimee) do
+        structure = create :structure, siret: '83386447300016'
+        structure.destroy
+        structure
+      end
+      let(:nouvelle_structure) { build :structure, siret: '83386447300016' }
+
+      it 'ne bloque pas la création (les structures supprimées sont exclues)' do
+        expect(nouvelle_structure.save).to be true
+      end
+    end
+  end
+
   describe '#admins' do
     let(:structure) { create :structure_locale }
     let(:compte) { create :compte_conseiller, structure: structure }

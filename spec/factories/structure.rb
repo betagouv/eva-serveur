@@ -11,7 +11,7 @@ FactoryBot.define do
     sequence(:nom) { |n| "structure #{n}" }
     type_structure { 'mission_locale' }
     code_postal { '75012' }
-    siret { '12345678901234' }
+    sequence(:siret) { |n| format('%014d', n) }
     type { 'StructureLocale' }
 
 

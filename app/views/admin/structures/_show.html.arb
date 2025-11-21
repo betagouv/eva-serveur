@@ -28,6 +28,10 @@ div class: "row" do
               row :date_verification_siret do
                 structure.date_verification_siret&.strftime("%d/%m/%Y %H:%M")
               end
+              row :code_naf
+              row :idcc do
+                structure.idcc.join(", ")
+              end
             end
             row :autorisation_creation_campagne do
               render(BadgeComponent.new(

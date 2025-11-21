@@ -6,10 +6,7 @@ div class: "panel nouvelle_structure" do
       f.object.code_postal = params[:code_postal]&.delete("^0-9") if f.object.code_postal.blank?
       f.input :nom
       f.input :type_structure, as: :select, collection: collection_types_structures
-      if can?(:manage, Compte)
-        f.input :usage, as: :radio, collection: StructureLocale::USAGE
-        f.input :opco, as: :select, collection: Opco.all, input_html: { id: "opco_field" }
-      end
+      f.input :usage, as: :radio, collection: StructureLocale::USAGE if can?(:manage, Compte)
       f.input :code_postal
       f.input :siret,
               required: resource.new_record?,

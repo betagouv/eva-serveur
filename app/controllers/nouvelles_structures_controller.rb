@@ -10,6 +10,7 @@ class NouvellesStructuresController < ApplicationController
   def create
     @compte = Compte.new compte_parametres
     if verify_recaptcha(model: @compte) && @compte.save
+      AffiliationOpcoService.new(@compte.structure).affilie_opcos
       envoie_emails
       sign_in @compte
       redirect_to admin_dashboard_path, notice: I18n.t("nouvelle_structure.bienvenue")

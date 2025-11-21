@@ -426,4 +426,34 @@ describe Structure, type: :model do
       expect(structure.admins.pluck(:nom)).to contain_exactly("admin 1", "admin 2", "superadmin")
     end
   end
+
+  describe "relations OPCO" do
+    let(:structure) { create(:structure_locale) }
+    let(:opco1) { create(:opco, nom: "OPCO 1") }
+    let(:opco2) { create(:opco, nom: "OPCO 2") }
+
+    it "peut avoir plusieurs OPCOs" do
+      structure.opcos << [ opco1, opco2 ]
+
+      expect(structure.opcos.count).to eq(2)
+      expect(structure.opcos.to_a).to contain_exactly(opco1, opco2)
+    end
+
+    it "peut supprimer un OPCO" do
+      structure.opcos << [ opco1, opco2 ]
+      structure.opcos.delete(opco1)
+
+      expect(structure.opcos.count).to eq(1)
+      expect(structure.opcos.first).to eq(opco2)
+    end
+
+    it "supprime les affiliations quand la structure est supprimée" do
+      structure.opcos << opco1
+      structure_id = structure.id
+
+      structure.destroy
+
+      expect(StructureOpco.where(structure_id: structure_id)).to be_empty
+    end
+  end
 end

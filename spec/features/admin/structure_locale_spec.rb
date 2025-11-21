@@ -55,19 +55,32 @@ role: :conseiller
       end
 
       it "crée une structure Entreprise" do
-        create(:opco, nom: 'mon opco')
-        create(:parcours_type, nom_technique: "eva-entreprise-monopco")
+        opco = create(:opco, nom: 'OPCO Mobilité', financeur: true)
+        create(:parcours_type, nom_technique: "eva-entreprise-opcomobilite")
+        # Mocker MiseAJourSiret pour retourner un IDCC qui correspond à OPCO Mobilité (IDCC 3)
+        allow(MiseAJourSiret).to receive(:new) do |structure|
+          mise_a_jour = instance_double(MiseAJourSiret)
+          allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
+            structure.statut_siret = true
+            structure.date_verification_siret = Time.current
+            structure.code_naf = "53.10Z"
+            structure.idcc = [ "3" ] # IDCC qui correspond à OPCO Mobilité dans le mapping
+            true
+          end
+          mise_a_jour
+        end
+
         visit new_admin_structure_locale_path
         fill_in :structure_locale_nom, with: 'Entreprise test'
         select 'Entreprise'
         choose 'Eva: entreprises'
-        select 'mon opco'
         fill_in :structure_locale_code_postal, with: '92100'
         fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'
 
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq 'Entreprise test'
+        expect(structure.opcos).to include(opco)
         expect(Campagne.count).to eq 1
       end
     end

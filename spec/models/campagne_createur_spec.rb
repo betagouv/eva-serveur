@@ -4,11 +4,12 @@ describe CampagneCreateur, type: :model do
   let(:compte) { create(:compte_admin) }
   let(:opco) { create(:opco, :constructys) }
   let(:structure_entreprise) do
-    create(:structure_locale,
-           nom: "ma super structure",
-           type_structure: "entreprise",
-           usage: "Eva: entreprises",
-           opco: opco)
+    structure = create(:structure_locale,
+                       nom: "ma super structure",
+                       type_structure: "entreprise",
+                       usage: "Eva: entreprises")
+    structure.opcos << opco
+    structure
   end
   let(:parcours_type) do
     create(:parcours_type,
@@ -52,10 +53,11 @@ describe CampagneCreateur, type: :model do
 
     context "quand la structure n'est pas de type entreprise" do
       let(:structure_non_entreprise) do
-        create(:structure_locale,
-               type_structure: "mission_locale",
-               usage: "Eva: entreprises",
-               opco: opco)
+        structure = create(:structure_locale,
+                           type_structure: "mission_locale",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco
+        structure
       end
       let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }
 
@@ -68,10 +70,11 @@ describe CampagneCreateur, type: :model do
 
     context "quand l'usage n'est pas Eva: entreprises" do
       let(:structure_mauvais_usage) do
-        create(:structure_locale,
-               type_structure: "entreprise",
-               usage: "Eva: bénéficiaires",
-               opco: opco)
+        structure = create(:structure_locale,
+                           type_structure: "entreprise",
+                           usage: "Eva: bénéficiaires")
+        structure.opcos << opco
+        structure
       end
       let(:createur_mauvais_usage) { described_class.new(structure_mauvais_usage, compte) }
 
@@ -86,8 +89,7 @@ describe CampagneCreateur, type: :model do
       let(:structure_sans_opco) do
         create(:structure_locale,
                type_structure: "entreprise",
-               usage: "Eva: entreprises",
-               opco: nil)
+               usage: "Eva: entreprises")
       end
       let(:createur_sans_opco) { described_class.new(structure_sans_opco, compte) }
 
@@ -101,10 +103,11 @@ describe CampagneCreateur, type: :model do
     context "avec différents OPCOs" do
       let(:opco_sante) { create(:opco, :opco_sante) }
       let(:structure_opco_sante) do
-        create(:structure_locale,
-               type_structure: "entreprise",
-               usage: "Eva: entreprises",
-               opco: opco_sante)
+        structure = create(:structure_locale,
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco_sante
+        structure
       end
       let(:parcours_type_sante) do
         create(:parcours_type,
@@ -127,10 +130,11 @@ describe CampagneCreateur, type: :model do
     context "quand l'OPCO n'est pas financeur" do
       let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
       let(:structure_opco_non_financeur) do
-        create(:structure_locale,
-               type_structure: "entreprise",
-               usage: "Eva: entreprises",
-               opco: opco_non_financeur)
+        structure = create(:structure_locale,
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco_non_financeur
+        structure
       end
       let(:parcours_type_generique) do
         create(:parcours_type,
@@ -164,6 +168,14 @@ describe CampagneCreateur, type: :model do
 
     context "avec OPCO Santé" do
       let(:opco) { create(:opco, :opco_sante) }
+      let(:structure_entreprise) do
+        structure = create(:structure_locale,
+                           nom: "ma super structure",
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco
+        structure
+      end
 
       it "génère le bon nom technique en supprimant les espaces et accents" do
         nom_technique = createur.send(:genere_nom_technique_parcours)
@@ -173,6 +185,14 @@ describe CampagneCreateur, type: :model do
 
     context "avec un nom d'OPCO contenant des caractères spéciaux" do
       let(:opco) { create(:opco, :opco_mobilites) }
+      let(:structure_entreprise) do
+        structure = create(:structure_locale,
+                           nom: "ma super structure",
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco
+        structure
+      end
 
       it "génère le bon nom technique en normalisant les caractères" do
         nom_technique = createur.send(:genere_nom_technique_parcours)
@@ -182,10 +202,82 @@ describe CampagneCreateur, type: :model do
 
     context "quand l'OPCO n'est pas financeur" do
       let(:opco) { create(:opco, :opco_non_financeur) }
+      let(:structure_entreprise) do
+        structure = create(:structure_locale,
+                           nom: "ma super structure",
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << opco
+        structure
+      end
 
       it "génère le nom technique générique" do
         nom_technique = createur.send(:genere_nom_technique_parcours)
         expect(nom_technique).to eq("eva-entreprise")
+      end
+    end
+
+    context "quand la structure a plusieurs OPCOs" do
+      let(:opco_financeur) { create(:opco, nom: "OPCO Financeur", financeur: true) }
+      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
+      let(:structure_multi_opco) do
+        structure = create(:structure_locale,
+                           nom: "structure multi-opco",
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << [ opco_non_financeur, opco_financeur ]
+        structure
+      end
+      let(:parcours_type_financeur) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise-opcofinanceur",
+               libelle: "Eva entreprises OPCO Financeur",
+               type_de_programme: :diagnostic)
+      end
+      let(:createur_multi) { described_class.new(structure_multi_opco, compte) }
+
+      before { parcours_type_financeur }
+
+      it "utilise le premier OPCO financeur" do
+        premier_opco = createur_multi.send(:premier_opco_financeur)
+        expect(premier_opco).to eq(opco_financeur)
+      end
+
+      it "crée une campagne avec le parcours type du financeur" do
+        campagne = createur_multi.cree_campagne_opco!
+        expect(campagne.parcours_type).to eq(parcours_type_financeur)
+      end
+    end
+
+    context "quand la structure a plusieurs OPCOs mais aucun financeur" do
+      let(:opco1) { create(:opco, nom: "OPCO 1", financeur: false) }
+      let(:opco2) { create(:opco, nom: "OPCO 2", financeur: false) }
+      let(:structure_multi_non_financeur) do
+        structure = create(:structure_locale,
+                           nom: "structure multi-opco",
+                           type_structure: "entreprise",
+                           usage: "Eva: entreprises")
+        structure.opcos << [ opco1, opco2 ]
+        structure
+      end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
+      let(:createur_multi) { described_class.new(structure_multi_non_financeur, compte) }
+
+      before { parcours_type_generique }
+
+      it "utilise le premier OPCO" do
+        premier_opco = createur_multi.send(:premier_opco_financeur)
+        expect(premier_opco).to eq(opco1)
+      end
+
+      it "crée une campagne avec le parcours type générique" do
+        campagne = createur_multi.cree_campagne_opco!
+        expect(campagne.parcours_type).to eq(parcours_type_generique)
       end
     end
   end

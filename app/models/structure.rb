@@ -3,7 +3,8 @@ class Structure < ApplicationRecord
 
   has_ancestry
   acts_as_paranoid
-  belongs_to :opco, optional: true
+  has_many :structure_opcos, dependent: :destroy
+  has_many :opcos, through: :structure_opcos
 
   alias structure_referente parent
   alias structure_referente= parent=

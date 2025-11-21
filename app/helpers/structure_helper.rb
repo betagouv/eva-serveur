@@ -42,6 +42,8 @@ module StructureHelper
   end
 
   def format_statut_siret(statut_siret)
+    return I18n.t("activerecord.attributes.structure.statut_siret_false") if statut_siret.nil?
+
     I18n.t("activerecord.attributes.structure.statut_siret_#{statut_siret}")
   end
 end

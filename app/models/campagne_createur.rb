@@ -21,7 +21,7 @@ class CampagneCreateur
   def doit_creer_campagne?
     @structure.is_a?(StructureLocale) &&
       @structure.eva_entreprises? &&
-      @structure.opco.present?
+      @structure.opcos.any?
   end
 
   def trouve_parcours_type
@@ -36,16 +36,20 @@ class CampagneCreateur
   end
 
   def opco_financeur?
-    @structure.opco.financeur?
+    premier_opco_financeur&.financeur? || false
   end
 
   def slugifie_nom_opco
-    @structure.opco.nom
-              .unicode_normalize(:nfkd)
-              .encode("ASCII", replace: "")
-              .downcase
-              .gsub(/[^a-z0-9\s-]/, "")
-              .gsub(/\s+/, "")
+    premier_opco_financeur&.nom
+              &.unicode_normalize(:nfkd)
+              &.encode("ASCII", replace: "")
+              &.downcase
+              &.gsub(/[^a-z0-9\s-]/, "")
+              &.gsub(/\s+/, "") || ""
+  end
+
+  def premier_opco_financeur
+    @premier_opco_financeur ||= @structure.opcos.find(&:financeur?) || @structure.opcos.first
   end
 
   def cree_campagne(parcours_type)

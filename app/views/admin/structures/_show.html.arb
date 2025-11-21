@@ -15,7 +15,15 @@ div class: "row" do
               traduction_type_structure(structure.type_structure)
             end
             row :usage
-            row :opco if structure.usage == "Eva: entreprises"
+            if structure.usage == "Eva: entreprises"
+              row "OPCO(s)" do
+                if structure.opcos.any?
+                  structure.opcos.map(&:nom).join(", ")
+                else
+                  "Aucun OPCO rattaché"
+                end
+              end
+            end
             row :code_postal
             row :siret
             if current_compte.superadmin?

@@ -5,7 +5,7 @@ ActiveAdmin.register StructureLocale do
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
-                :autorisation_creation_campagne, :usage, :opco_id
+                :autorisation_creation_campagne, :usage
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :type_structure,
@@ -112,7 +112,10 @@ ActiveAdmin.register StructureLocale do
     def sauvegarde_et_cree_campagne
       ActiveRecord::Base.transaction do
         resultat = @structure_locale.save
-        CampagneCreateur.new(@structure_locale, current_compte).cree_campagne_opco!
+        if resultat
+          AffiliationOpcoService.new(@structure_locale).affilie_opcos
+          CampagneCreateur.new(@structure_locale, current_compte).cree_campagne_opco!
+        end
         resultat
       end
     end

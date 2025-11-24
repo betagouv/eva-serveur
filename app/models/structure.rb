@@ -18,6 +18,7 @@ class Structure < ApplicationRecord
   validates :siret, presence: true, on: :create
   validates :siret, uniqueness: true, allow_blank: true
   validate :verifie_siret_ou_siren
+  validate :ne_peut_pas_supprimer_siret
 
   auto_strip_attributes :nom, squish: true
 
@@ -155,5 +156,13 @@ class Structure < ApplicationRecord
     return true if new_record?
 
     (statut_initial || statut_siret) == true
+  end
+
+  def ne_peut_pas_supprimer_siret
+    return if new_record?
+    return if siret.present?
+    return unless siret_was.present?
+
+    errors.add(:siret, :cannot_be_removed)
   end
 end

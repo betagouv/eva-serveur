@@ -55,7 +55,7 @@ role: :conseiller
       end
 
       it "crée une structure Entreprise" do
-        opco = create(:opco, nom: 'OPCO Mobilité', financeur: true)
+        opco = create(:opco, nom: 'OPCO Mobilité', financeur: true, idcc: [ '3' ])
         create(:parcours_type, nom_technique: "eva-entreprise-opcomobilite")
         # Mocker MiseAJourSiret pour retourner un IDCC qui correspond à OPCO Mobilité (IDCC 3)
         allow(MiseAJourSiret).to receive(:new) do |structure|

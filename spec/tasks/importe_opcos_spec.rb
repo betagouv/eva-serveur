@@ -4,7 +4,7 @@ require 'roo'
 describe 'importe:opcos' do
   include_context 'rake'
   let(:logger) { RakeLogger.logger }
-  let(:chemin_fichier) { Rails.root.join('docs', 'tableau-correspondance-opco.xlsx') }
+  let(:chemin_fichier) { Rails.root.join('config', 'data', 'tableau-correspondance-opco.xlsx') }
 
   before do
     allow(logger).to receive(:info)

@@ -3,7 +3,7 @@ require "roo"
 
 class ImporteurOpcos
   def importe
-    chemin_fichier = Rails.root.join("docs", "tableau-correspondance-opco.xlsx")
+    chemin_fichier = Rails.root.join("config", "data", "tableau-correspondance-opco.xlsx")
     unless File.exist?(chemin_fichier)
       RakeLogger.logger.error("Fichier Excel introuvable : #{chemin_fichier}")
       exit 1

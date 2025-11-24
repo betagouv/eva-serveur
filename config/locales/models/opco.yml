@@ -10,6 +10,7 @@ fr:
         updated_at: Mis à jour le
         nom: Nom
         financeur: Financeur
+        idcc: Convention(s) collective(s)
     errors:
       models:
         opco:
@@ -24,6 +25,9 @@ fr:
     placeholders:
       opco:
         nom: OPCO Nom
+    hints:
+      opco:
+        nom: Ce nom est utilisé lors de l'import pour le mapping des conventions collectives. Assurez-vous d'utiliser exactement le même nom que dans le fichier Excel ou de le remplacer avant un futur import.
   active_admin:
     resources:
       opco:

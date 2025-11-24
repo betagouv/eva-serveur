@@ -1,5 +1,6 @@
 require "importeur_commentaires"
 require "importeur_telephone"
+require "importeur_opcos"
 
 namespace :importe do
   desc "Importe les commentaires Airtable"
@@ -37,6 +38,14 @@ namespace :importe do
       nb_importe += 1
     end
     RakeLogger.logger.info "Importés : #{nb_importe} / #{nb_ligne}"
+  end
+
+  desc "Importe les Opcos depuis le fichier Excel de correspondance"
+  task opcos: :environment do
+    require "rake_logger"
+    require "roo"
+
+    ImporteurOpcos.new.importe
   end
 
   choix = [

@@ -17,7 +17,7 @@ ActiveAdmin.register Opco do
 
   form do |f|
     f.inputs do
-      f.input :nom
+      f.input :nom, hint: I18n.t("formtastic.hints.opco.nom")
       f.input :financeur, as: :toggle
     end
     f.actions

@@ -30,6 +30,7 @@ fr:
         statut_siret_false: non vérifié
         date_verification_siret: Date vérification SIRET
         region: Région
+        idcc: Convention(s) collective(s)
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente
         parent_id: Structure référente
@@ -39,7 +40,7 @@ fr:
         autorisation_creation_campagne_true: Autorisé
         autorisation_creation_campagne_false: Interdit
         type_structure:
-          one: 'Type de structure'
+          one: "Type de structure"
           non_communique: Non communiqué
           AFPA: AFPA
           apprentissage: Apprentissage (CFA, CMA, lycée, etc.)
@@ -70,7 +71,7 @@ fr:
     placeholders:
       structure: &placeholders_structure
         nom: Mission locale de Montpellier
-        code_postal: '34000'
+        code_postal: "34000"
       structure_administrative:
         <<: *placeholders_structure
       structure_locale:

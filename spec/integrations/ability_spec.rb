@@ -152,7 +152,7 @@ describe Ability do
 
     it do
       expect(subject).to be_able_to(:create, Compte.new)
-      expect(subject).to be_able_to(:create, Beneficiaire)
+      expect(subject).not_to be_able_to(:create, Beneficiaire)
       expect(subject).to be_able_to(:update, compte.structure)
     end
 

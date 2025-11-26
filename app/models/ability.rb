@@ -1,5 +1,7 @@
 class Ability < AbilityUtilisateur
   def initialize(compte)
+    return unless compte
+
     if compte.validation_refusee?
       droits_comptes_refuses compte
     else

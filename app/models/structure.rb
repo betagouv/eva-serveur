@@ -133,6 +133,7 @@ class Structure < ApplicationRecord
 
   def verifie_siret_si_necessaire
     return if siret.blank?
+    return unless structure_locale?
     return unless doit_verifier_siret?
 
     statut_initial = statut_siret
@@ -143,6 +144,10 @@ class Structure < ApplicationRecord
     return if siret_valide || !verification_bloquante?(statut_initial)
 
     errors.add(:siret, :invalid)
+  end
+
+  def structure_locale?
+    type == StructureLocale.name || is_a?(StructureLocale)
   end
 
   def doit_verifier_siret?

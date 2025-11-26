@@ -107,6 +107,18 @@ ActiveAdmin.register StructureLocale do
       end
     end
 
+    def update
+      @structure_locale = resource
+
+      if @structure_locale.update(permitted_params[:structure_locale])
+        AffiliationOpcoService.new(@structure_locale).affilie_opcos
+        redirect_to admin_structure_locale_path(@structure_locale),
+notice: "Structure mise à jour avec succès"
+      else
+        render :edit
+      end
+    end
+
     private
 
     def sauvegarde_et_cree_campagne

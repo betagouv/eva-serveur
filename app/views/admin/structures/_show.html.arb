@@ -40,6 +40,8 @@ div class: "row" do
               row :idcc do
                 structure.idcc.join(", ")
               end
+              row :raison_sociale
+              row :adresse
             end
             row :autorisation_creation_campagne do
               render(BadgeComponent.new(

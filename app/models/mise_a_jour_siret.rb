@@ -29,14 +29,14 @@ class MiseAJourSiret
     if siret_valide
       @structure.statut_siret = true
       @structure.date_verification_siret = Time.current
-      met_a_jour_naf_idcc(donnees_api)
+      met_a_jour_donnees_sirene(donnees_api)
     else
       @structure.statut_siret = false
       @structure.date_verification_siret = nil
     end
   end
 
-  def met_a_jour_naf_idcc(donnees_api)
+  def met_a_jour_donnees_sirene(donnees_api)
     return if donnees_api.blank?
 
     resultat = donnees_api["results"]&.first
@@ -44,6 +44,22 @@ class MiseAJourSiret
 
     @structure.code_naf = resultat["activite_principale"]
     @structure.idcc = resultat.dig("complements", "liste_idcc") || []
+    @structure.raison_sociale = resultat["nom_raison_sociale"] || resultat["nom_complet"]
+    @structure.adresse = recupere_adresse(resultat)
+  end
+
+  def recupere_adresse(resultat)
+    siret_recherche = @structure.siret
+
+    # Vérifier si c'est le siège
+    return resultat.dig("siege", "adresse") if resultat.dig("siege", "siret") == siret_recherche
+
+    # Chercher dans les établissements correspondants
+    etablissement = resultat.dig("matching_etablissements")&.find do |etab|
+      etab["siret"] == siret_recherche
+    end
+
+    etablissement&.dig("adresse")
   end
 
   def siret_trouve?(donnees, siret_recherche)

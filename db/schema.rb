@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_20_120003) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_20_120004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -420,6 +420,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_20_120003) do
     t.datetime "date_verification_siret"
     t.string "code_naf"
     t.string "idcc", default: [], array: true
+    t.string "raison_sociale"
+    t.text "adresse"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"

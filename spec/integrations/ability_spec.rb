@@ -524,4 +524,15 @@ describe Ability do
       expect(subject).not_to be_able_to(:update, compte)
     end
   end
+
+  context 'Sans compte (utilisateur non connecté)' do
+    let(:compte) { nil }
+
+    it "ne génère pas d'erreur et n'autorise rien" do
+      expect { ability }.not_to raise_error
+      expect(subject).not_to be_able_to(:read, Campagne)
+      expect(subject).not_to be_able_to(:read, Evaluation)
+      expect(subject).not_to be_able_to(:manage, :all)
+    end
+  end
 end

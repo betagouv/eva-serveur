@@ -96,7 +96,6 @@ compte_id: compte.id
     end
 
     if compte.admin?
-      can :create, Beneficiaire unless compte.administratif?
       can %i[read update], Beneficiaire, evaluations: {
         campagne: campagnes_de_la_structure(compte)
       }

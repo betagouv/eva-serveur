@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :choix do
-    nom_technique { 'nom_technique_choix' }
+    sequence(:nom_technique) { |n| "choix-#{n}" }
 
     trait :bon do
       type_choix { :bon }

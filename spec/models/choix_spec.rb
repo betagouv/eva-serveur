@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Choix, type: :model do
   it { is_expected.to validate_presence_of :type_choix }
   it { is_expected.to validate_presence_of :nom_technique }
+  it { is_expected.to validate_uniqueness_of(:nom_technique).scoped_to(:question_id) }
   it { is_expected.to have_one_attached(:audio) }
   it { is_expected.to have_one_attached(:illustration) }
 

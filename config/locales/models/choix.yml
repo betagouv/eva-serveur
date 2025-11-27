@@ -7,6 +7,13 @@ fr:
         intitule: Intitulé
         type_choix: Bon/Mauvais/Abstention?
         position_client: Position de la proposition
+        nom_technique: Nom technique
+    errors:
+      models:
+        choix:
+          attributes:
+            nom_technique:
+              taken: "est déjà utilisé pour cette question"
   formtastic:
     actions:
       choix:

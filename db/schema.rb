@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_20_120004) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_20_120005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_20_120004) do
     t.uuid "question_id"
     t.string "nom_technique"
     t.integer "position_client"
+    t.index ["nom_technique", "question_id"], name: "index_choix_on_nom_technique_and_question_id", unique: true
     t.index ["question_id"], name: "index_choix_on_question_id"
   end
 

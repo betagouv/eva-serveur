@@ -86,6 +86,12 @@ function updateModalContent(beneficiaires) {
   // Mettre à jour le bénéficiaire de rattachement
   const rattacheElement = document.getElementById('beneficiaire-rattache');
   rattacheElement.textContent = beneficiaires[0].nom;
+  
+  // Mettre à jour le bénéficiaire dans l'alerte
+  const rattacheAlertElement = document.getElementById('beneficiaire-rattache-alert');
+  if (rattacheAlertElement) {
+    rattacheAlertElement.textContent = beneficiaires[0].nom;
+  }
 
   // Stocker les IDs
   modal.dataset.ids = beneficiaires.map(b => b.id).join(',');

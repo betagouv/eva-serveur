@@ -14,7 +14,7 @@
               tableau: comparaison.tableau_comparaison(:numeratie)
             } %>
 
-  <% route = admin_beneficiaire_comparaison_download_pdf_path(evaluation_ids: params[:evaluation_ids], format: :pdf) %>
+  <% route = admin_comparaison_download_pdf_path(beneficiaire_id: beneficiaire.id, evaluation_ids: params[:evaluation_ids], format: :pdf) %>
   <div class="fr-tile fr-tile--download fr-enlarge-link" id="tile-6735">
     <div class="fr-tile__body">
         <div class="fr-tile__content">

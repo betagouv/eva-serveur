@@ -7,13 +7,13 @@
       <p class="liste-evaluations-positionnement__nombre-element-selectionnes fr-m-0"></p>
       <div class="liste-evaluations-positionnement__actions__comparer">
         <%= render BoutonComponent.new(
-          admin_beneficiaire_comparaison_path(beneficiaire),
+          admin_comparaison_path(beneficiaire_id: resource.id),
           type: :secondary,
           tag: :button,
           method: :get,
           id: "comparer-evaluation",
           disabled: true,
-          "data-base-url": admin_beneficiaire_comparaison_path(beneficiaire)
+          "data-base-url": admin_comparaison_path(beneficiaire_id: resource.id)
         ) do %>
           <span class='fr-icon-line-chart-line fr-icon--sm' aria-hidden='true'></span> 
           <%= t(".action.comparer") %>

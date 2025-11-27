@@ -14,8 +14,8 @@ describe 'Admin - Comparaison', type: :feature do
 
   describe 'index' do
     before do
-      visit(admin_beneficiaire_comparaison_path(
-        beneficiaire, evaluation_ids: evaluations.map(&:id)
+      visit(admin_comparaison_path(
+        beneficiaire_id: beneficiaire.id, evaluation_ids: evaluations.map(&:id)
       ))
     end
 

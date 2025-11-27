@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Comparaison" do
-  belongs_to :beneficiaire
+  menu false
 
   content title: "Comparer les évaluations" do
     if !comparaison.valid?
@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Comparaison" do
       redirect_to admin_beneficiaire_path(beneficiaire)
     end
 
-    render partial: "show", locals: { comparaison: comparaison }
+    render partial: "show", locals: { comparaison: comparaison, beneficiaire: beneficiaire }
   end
 
   page_action :download_pdf, method: :get do
@@ -21,7 +21,8 @@ ActiveAdmin.register_page "Comparaison" do
     pdf_path = Pdf::Generator.generate(html_content)
     if pdf_path == false
       flash[:error] = t(".erreur_generation_pdf")
-      redirect_to admin_beneficiaire_comparaison_path(evaluation_ids: params[:evaluation_ids])
+      redirect_to admin_comparaison_path(beneficiaire_id: beneficiaire.id,
+evaluation_ids: params[:evaluation_ids])
     else
       send_file(pdf_path, filename: "#{beneficiaire.nom.parameterize}.pdf", type: "application/pdf",
                           disposition: disposition)
@@ -29,7 +30,7 @@ ActiveAdmin.register_page "Comparaison" do
   end
 
   controller do
-    helper_method :comparaison, :structure
+    helper_method :comparaison, :structure, :beneficiaire
 
     def evaluations
       @evaluations ||= Evaluation.where(id: params[:evaluation_ids])
@@ -53,6 +54,16 @@ ActiveAdmin.register_page "Comparaison" do
 
     def disposition
       Rails.env.development? ? "inline" : "attachment"
+    end
+
+    def beneficiaire
+      @beneficiaire ||= begin
+        if params[:beneficiaire_id].present?
+          Beneficiaire.find params[:beneficiaire_id]
+        elsif evaluations.any? && (first_evaluation = evaluations.first)
+          first_evaluation.beneficiaire
+        end
+      end
     end
   end
 end

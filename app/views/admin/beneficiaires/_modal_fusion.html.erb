@@ -5,6 +5,10 @@
         <p> <%= t(".instruction") %> </p>
         <ul id="liste-elements-a-fusionner"></ul>
         <p> <%= t(".pour_fusion") %> <span class="fr-text--bold" id="beneficiaire-rattache"></span>. </p>
+        <%= dsfr_alert(type: :warning, html_attributes: { class: "alert-incomplete" }) do %>
+          <%= t(".alert_fusion", nom: content_tag(:span, "", class: "fr-text--bold", id: "beneficiaire-rattache-alert")).html_safe %>
+        <% end %>
+        
       </div>
 
       <%= hidden_field_tag :batch_action, "fusionner" %>

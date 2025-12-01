@@ -23,15 +23,37 @@ fr:
         incitation_creation_compte_personnel: |
           Pour des questions relatives au RGPD ainsi que pour plus de fluidité, les accompagnants qui utilisent eva doivent maintenant créer des comptes individuels.</br>
           <strong>Nous vous demandons de bien vouloir <a href="%{lien}">créer votre compte en suivant ce lien</a>.</strong> Rassurez-vous, votre compte sera bien rattaché à votre structure.
-      bloc_actualites:
-        titre: Les actualités sur eva
+      eva:
+        bloc_actualites:
+          titre: Les actualités sur eva
+        bloc_evaluations:
+          titre: Vos dernières évaluations
+          voir_tout: 'Voir toutes les évaluations'
+          legende_sr: "Légende : Les pastilles oranges indiquent les"
+          legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
+        campagnes:
+          titre: Vos campagnes
+          action: Gérer mes campagnes
+          entete-libelle: Libellé
+          entete-code: Code campagne
+          entete-url: URL
+      eva_pro:
+        bloc_questionnaires_entreprise:
+          titre: Vos questionnaires
+          description: "Créé le %{date}"
+          bouton_passer: "Passer le questionnaire"
+        bloc_resultats_entreprise:
+          titre: Vos résultats
+          voir_tout: 'Voir'
+          bouton_voir: "Voir"
+        bloc_actualites_entreprise:
+          titre: Les actualités sur eva
+          voir_tout: 'Voir toutes les actualités'
+        message_incitation_premier_questionnaire:
+          message: |
+            Vous n'avez pas encore de résultat. Passez votre premier questionnaire pour commencer votre évaluation.
       actualite:
         action: Lire
-      bloc_evaluations:
-        titre: Vos dernières évaluations
-        voir_tout: 'Voir toutes les évaluations'
-        legende_sr: "Légende : Les pastilles oranges indiquent les"
-        legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
       evaluation:
         action: Voir
       mise_en_action:
@@ -53,12 +75,6 @@ fr:
             besoin d’accompagnement.
           question: |
             **Avez-vous été en mesure de les orienter vers une solution adaptée ?**
-      campagnes:
-        titre: Vos campagnes
-        action: Gérer mes campagnes
-        entete-libelle: Libellé
-        entete-code: Code campagne
-        entete-url: URL
       prise_en_main:
         titre: Bienvenue sur eva !
         quitter: Quitter le tutoriel
@@ -80,4 +96,7 @@ fr:
           Votre compte a été refusé. Vous ne pouvez donc pas utiliser la plateforme.
 
           Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter par mail à [%{email}](mailto:%{email}).
-
+      bienvenue_entreprise:
+        titre: Bienvenue sur eva Pro !
+        premier_questionnaire_titre: Passez votre premier questionnaire !
+        premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés. 

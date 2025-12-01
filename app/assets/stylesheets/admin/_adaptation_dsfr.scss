@@ -148,3 +148,23 @@ button.fr-link--close.fr-link:hover {
 a.fr-btn {
   color: $eva_light !important;
 }
+
+// Fix pour fr-card__end : espacement du bouton dans les cards DSFR
+.fr-card__end {
+  padding-bottom: 1.5rem;
+  margin-top: auto;
+}
+
+// S'assurer que le titre de la card est en noir
+.fr-card__title {
+  color: $eva_dark_blue_grey;
+  
+  .fr-card__link {
+    color: $eva_dark_blue_grey;
+    
+    &:hover {
+      color: $eva_dark_blue_grey;
+    }
+  }
+}
+

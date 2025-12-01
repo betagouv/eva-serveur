@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     # get '/ui_kit/bouton_ajouter_une_structure', to: 'ui_kit#bouton_ajouter_une_structure'
     get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
     get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
+    get '/ui_kit/card', to: 'ui_kit#card'
     get '/ui_kit/carte', to: 'ui_kit#carte'
     # get '/ui_kit/carte_mise_en_action', to: 'ui_kit#carte_mise_en_action'
     get '/ui_kit/carte_partage_code', to: 'ui_kit#carte_partage_code'

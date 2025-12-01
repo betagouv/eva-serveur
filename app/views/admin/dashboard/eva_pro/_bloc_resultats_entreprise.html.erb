@@ -1,0 +1,25 @@
+<div class='bloc-resultats-entreprise bloc-apercu'>
+  <div class='bloc-apercu-wrapper'>
+    <div class="titre-panel-avec-bouton fr-mb-3v">
+      <h3><%= t(".titre") %></h3>
+      <%= link_to t(".voir_tout"), admin_evaluations_path %>
+    </div>
+  </div>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <% evaluations.each do |evaluation| %>
+      <div class="fr-col fr-col-md-12">
+        <% url = admin_evaluation_path(evaluation) %>
+        <%= render CardComponent.new(
+          titre: "#{evaluation.campagne.libelle} : #{l(evaluation.debutee_le, format: :long)}",
+          description: nil,
+          bouton_label: t(".bouton_voir"),
+          bouton_url: url,
+          bouton_attributes: { target: "_blank", rel: "noopener" }
+        ) do %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

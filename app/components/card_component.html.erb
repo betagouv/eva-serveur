@@ -1,0 +1,36 @@
+<div class="<%= card_classes %>" <%= tag.attributes(@html_attributes) %>>
+  <div class="fr-card__body">
+    <div class="fr-card__content">
+      <% if @titre.present? %>
+        <h3 class="fr-card__title">
+          <% if titre_avec_lien? %>
+            <%= link_to @titre, @url, class: "fr-card__link" %>
+          <% else %>
+            <%= @titre %>
+          <% end %>
+        </h3>
+      <% end %>
+
+      <% if @description.present? %>
+        <p class="fr-card__desc"><%= @description %></p>
+      <% end %>
+
+      <%= content %>
+    </div>
+
+    <% if has_bouton? %>
+      <div class="fr-card__end">
+        <%= link_to @bouton_label, @bouton_url, { class: "fr-btn" }.merge(@bouton_attributes) %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if has_image? %>
+    <div class="fr-card__header">
+      <div class="fr-card__img">
+        <%= image_tag @image_url, class: "fr-responsive-img", alt: @image_alt %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

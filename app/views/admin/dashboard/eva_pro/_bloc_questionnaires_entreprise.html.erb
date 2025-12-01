@@ -1,0 +1,23 @@
+<div class='bloc-questionnaires-entreprise bloc-apercu'>
+  <div class='bloc-apercu-wrapper'>
+    <div class="titre-panel-avec-bouton fr-mb-3v">
+      <h3><%= t(".titre") %></h3>
+    </div>
+  </div>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <% campagnes.each do |campagne| %>
+      <div class="fr-col fr-col-md-12">
+        <% url = LanceurCampagne.url(campagne, current_compte) %>
+        <%= render CardComponent.new(
+          titre: campagne.libelle,
+          description: t(".description", date: l(campagne.created_at, format: :long)),
+          bouton_label: t(".bouton_passer"),
+          bouton_url: url,
+          bouton_attributes: { target: "_blank", rel: "noopener" }
+        ) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

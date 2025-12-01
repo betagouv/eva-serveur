@@ -4,12 +4,21 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-    render partial: "dashboard",
-           locals: {
-             evaluations: evaluations,
-             actualites: actualites,
-             campagnes: campagnes
-           }
+    if current_compte.utilisateur_entreprise?
+      render partial: "tableau_de_bord_eva_pro",
+             locals: {
+               campagnes: campagnes_entreprise,
+               evaluations: evaluations_entreprise,
+               actualites: actualites
+             }
+    else
+      render partial: "tableau_de_bord_eva",
+             locals: {
+               evaluations: evaluations,
+               actualites: actualites,
+               campagnes: campagnes
+             }
+    end
   end
 
   controller do
@@ -20,7 +29,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
                   :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente,
-                  :recupere_evaluations_sans_mise_en_action
+                  :recupere_evaluations_sans_mise_en_action, :recupere_donnees_entreprise
 
     private
 
@@ -70,6 +79,26 @@ ActiveAdmin.register_page "Dashboard" do
         statut_validation: :en_attente,
         structure_id: current_compte.structure_id
       )
+    end
+
+    def recupere_donnees_entreprise
+      return unless current_compte.utilisateur_entreprise?
+
+      @campagnes_entreprise = Campagne.accessible_by(current_ability)
+                                    .order(created_at: :desc)
+                                    .limit(10)
+      @evaluations_entreprise = Evaluation.accessible_by(current_ability)
+                                         .includes(:beneficiaire, :campagne)
+                                         .order(created_at: :desc)
+                                         .limit(10)
+    end
+
+    def campagnes_entreprise
+      @campagnes_entreprise ||= []
+    end
+
+    def evaluations_entreprise
+      @evaluations_entreprise ||= []
     end
   end
 end

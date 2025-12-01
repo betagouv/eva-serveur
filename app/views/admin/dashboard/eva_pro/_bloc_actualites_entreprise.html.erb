@@ -1,0 +1,42 @@
+<div class="bloc-actualites-entreprise bloc-apercu">
+  <div class="titre-panel-avec-bouton">
+    <h3><%= t(".titre") %></h3>
+    <%= link_to t(".voir_tout"), admin_actualites_path %>
+  </div>
+
+  <div class='row'>
+    <div class='col derniere-actualite'>
+      <%= render(CarteComponent.new([ :admin, actualites.first ])) do %>
+      <% actualite = actualites.first %>
+        <% if actualite.illustration.attached? %>
+          <div class='carte__illustration w-100' style="background-image: url('<%= cdn_for(actualite.illustration) %>');">
+          </div>
+        <% end %>
+        <div class='carte__texte d-flex'>
+          <div class='entete'>
+            <%= render(Tag.new(t("categories.#{actualite.categorie}", scope: "activerecord.attributes.actualite"),
+            classes: "tag-categorie #{actualite.categorie}")) %>
+          </div>
+          <span class='carte__titre'><%= actualite.titre %></span>
+          <span><%= l actualite.created_at, format: :avec_heure %></span>
+        </div>
+      <% end %>
+    </div>
+    <div class='col liste-actualites'>
+      <% actualites[1, 5].each do |actualite| %>
+        <%= render(CarteComponent.new([ :admin, actualite ])) do %>
+          <div class="col d-flex align-items-center">
+            <div class="carte__entete">
+              <%= render(Tag.new(t("categories.#{actualite.categorie}", scope: "activerecord.attributes.actualite"),
+                                 classes: "tag-categorie #{actualite.categorie}")) %>
+            </div>
+            <span class='carte__texte'><%= actualite.titre %></span>
+          </div>
+          <div class='col d-flex justify-content-end align-items-center'>
+            <span><%= l actualite.created_at, format: :sans_heure %></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

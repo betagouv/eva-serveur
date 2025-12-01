@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo CardComponent</h1>
+
+  <h2>Card simple avec titre</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card avec titre et description</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card avec titre, description et bouton</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        bouton_label: "Action",
+        bouton_url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card avec image</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        image_url: "/img/placeholder.16x9.png",
+        image_alt: "Image de démonstration",
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Variantes de taille</h2>
+  
+  <h3>Card SM (petite)</h3>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte SM",
+        description: "Description de la carte SM",
+        size: :sm,
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h3>Card MD (moyenne - par défaut)</h3>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte MD",
+        description: "Description de la carte MD",
+        size: :md,
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h3>Card LG (grande)</h3>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte LG",
+        description: "Description de la carte LG",
+        size: :lg,
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Exemple d'utilisation dans une grille</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Carte 1",
+        description: "Description de la première carte",
+        url: "#"
+      ) %>
+    </div>
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Carte 2",
+        description: "Description de la deuxième carte",
+        url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card complète (titre, description, image, bouton)</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte complète",
+        description: "Description de la carte avec tous les éléments",
+        image_url: "/img/placeholder.16x9.png",
+        image_alt: "Image de démonstration",
+        bouton_label: "Action",
+        bouton_url: "#"
+      ) %>
+    </div>
+  </div>
+</div>
+

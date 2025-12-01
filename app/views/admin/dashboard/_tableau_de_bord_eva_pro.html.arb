@@ -1,0 +1,60 @@
+if current_compte.email == Eva::EMAIL_DEMO
+  div class: "panel" do
+    md t("admin.dashboard.alerte_compte_demo")
+  end
+end
+
+if current_compte.validation_refusee?
+  render "validation_refusee"
+elsif current_compte.validation_en_attente?
+  render "validation_necessaire"
+end
+
+section class: "bienvenue-entreprise section-tableau-bord-eva-pro" do
+  h2 t("admin.dashboard.bienvenue_entreprise.titre")
+  div do
+    render(MiseEnAvantComponent.new(
+      titre: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire_titre"),
+      description: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire")
+    )) if evaluations.blank?
+  end
+end
+
+if campagnes.present?
+  section class: "section-questionnaires section-tableau-bord-eva-pro" do
+    columns do
+      render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
+locals: { campagnes: campagnes }
+    end
+  end
+end
+
+if evaluations.present?
+  section class: "section-resultats section-tableau-bord-eva-pro" do
+    columns do
+      render partial: "admin/dashboard/eva_pro/bloc_resultats_entreprise",
+locals: { evaluations: evaluations }
+    end
+  end
+else
+  section class: "section-message-incitation section-tableau-bord-eva-pro" do
+    columns do
+      render partial: "admin/dashboard/eva_pro/message_incitation_premier_questionnaire"
+    end
+  end
+end
+
+if actualites.present?
+  section class: "section-actualites section-tableau-bord-eva-pro" do
+    columns do
+      render partial: "admin/dashboard/eva_pro/bloc_actualites_entreprise",
+locals: { actualites: actualites }
+    end
+  end
+end
+
+if !current_compte.cgu_acceptees?
+  render "modal_confirmation_cgu"
+elsif comptes_en_attente.present? && can?(:autoriser, Compte)
+  render "modal_validation_comptes_en_attente"
+end

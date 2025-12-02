@@ -477,6 +477,48 @@ describe Structure, type: :model do
         expect(nouvelle_structure.save).to be true
       end
     end
+
+    context 'quand le SIRET est invalide ET déjà utilisé' do
+      context 'avec un SIRET trop court (8 chiffres) qui existe déjà' do
+        let!(:structure_existante) do
+          structure = build(:structure, siret: '12345678')
+          structure.save(validate: false)
+          structure
+        end
+        let(:nouvelle_structure) { build :structure, siret: '12345678' }
+
+        before { nouvelle_structure.valid? }
+
+        it 'affiche uniquement le message "invalid", pas le message d\'unicité' do
+          message_invalid = I18n.t('activerecord.errors.models.structure.attributes.siret.invalid')
+          message_taken = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
+
+          expect(nouvelle_structure.errors[:siret]).to include(message_invalid)
+          expect(nouvelle_structure.errors[:siret]).not_to include(message_taken)
+          expect(nouvelle_structure.errors[:siret].size).to eq(1)
+        end
+      end
+
+      context 'avec un SIRET de 9 chiffres (interdit pour nouvelle structure) qui existe déjà' do
+        let!(:structure_existante) do
+          structure = build(:structure, siret: '123456789')
+          structure.save(validate: false)
+          structure
+        end
+        let(:nouvelle_structure) { build :structure, siret: '123456789' }
+
+        before { nouvelle_structure.valid? }
+
+        it 'affiche uniquement le message "invalid", pas le message d\'unicité' do
+          message_invalid = I18n.t('activerecord.errors.models.structure.attributes.siret.invalid')
+          message_taken = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
+
+          expect(nouvelle_structure.errors[:siret]).to include(message_invalid)
+          expect(nouvelle_structure.errors[:siret]).not_to include(message_taken)
+          expect(nouvelle_structure.errors[:siret].size).to eq(1)
+        end
+      end
+    end
   end
 
   describe '#admins' do

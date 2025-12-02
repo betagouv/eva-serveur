@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo CarteV2Component</h1>
+
+  <div>
+    <h2>Carte simple</h2>
+    <%= render CarteV2Component.new do %>
+      <div>Contenu de la carte</div>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Carte avec un titre</h2>
+    <%= render CarteV2Component.new(titre: "Mon titre") do %>
+      <div>Contenu de la carte</div>
+    <% end %>
+  </div>
+</div> 

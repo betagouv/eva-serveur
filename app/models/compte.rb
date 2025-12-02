@@ -9,6 +9,25 @@ class Compte < ApplicationRecord
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
 
+  FONCTIONS = [
+    "assistante_ou_assistant_social",
+    "chargee_ou_charge_de_formation",
+    "cheffe_ou_chef_de_projet",
+    "conseillere_ou_conseiller_emploi_formation_insertion",
+    "consultante_ou_consultant",
+    "coordinatrice_ou_coordinateur_pedagogique",
+    "directrice_ou_directeur",
+    "educatrice_ou_educateur",
+    "enseignante_ou_enseignant_de_l_education_nationale",
+    "formatrice_ou_formateur",
+    "psychologue_ou_medecin_du_travail",
+    "referente_ou_referent_handicap",
+    "responsable_conseillere_ou_conseiller_rh",
+    "responsable_conseillere_ou_conseiller_rse",
+    "volontaire_service_civique",
+    "autre"
+  ].freeze
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :trackable,
@@ -26,6 +45,8 @@ class Compte < ApplicationRecord
   validate :verifie_dns_email, :structure_a_un_admin, :structure_de_depart_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
+  validates :fonction, inclusion: { in: FONCTIONS }, allow_blank: true
+  validate :verifie_fonction_obligatoire_si_pro_connect
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
@@ -140,5 +161,11 @@ class Compte < ApplicationRecord
     else
       errors.add(:role, :structure_doit_avoir_un_admin, nom_structure: structure.nom)
     end
+  end
+
+  def verifie_fonction_obligatoire_si_pro_connect
+    return if id_pro_connect.blank?
+
+    errors.add(:fonction, :blank) if fonction.blank?
   end
 end

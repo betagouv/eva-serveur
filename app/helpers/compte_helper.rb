@@ -8,4 +8,16 @@ module CompteHelper
       "#{statut_humain}"
     end
   end
+
+  def traduction_fonction(fonction)
+    I18n.t(
+      "activerecord.attributes.compte.fonctions.#{fonction}"
+    )
+  end
+
+  def collection_fonctions
+    Compte::FONCTIONS.map do |fonction|
+      [ traduction_fonction(fonction), fonction ]
+    end
+  end
 end

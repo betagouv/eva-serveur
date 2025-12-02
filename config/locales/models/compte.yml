@@ -47,6 +47,24 @@ fr:
           en_attente: En attente
           acceptee: Autorisé
           refusee: Refusé
+        service_departement: Service/Département
+        fonctions:
+          assistante_ou_assistant_social: Assistante ou assistant social
+          chargee_ou_charge_de_formation: Chargée ou chargé de formation
+          cheffe_ou_chef_de_projet: Cheffe ou chef de projet
+          conseillere_ou_conseiller_emploi_formation_insertion: Conseillère ou conseiller emploi / formation / insertion
+          consultante_ou_consultant: Consultante ou consultant
+          coordinatrice_ou_coordinateur_pedagogique: Coordinatrice ou coordinateur pédagogique
+          directrice_ou_directeur: Directrice ou directeur
+          educatrice_ou_educateur: Éducatrice ou éducateur
+          enseignante_ou_enseignant_de_l_education_nationale: Enseignante ou enseignant de l’Éducation Nationale
+          formatrice_ou_formateur: Formatrice ou formateur
+          psychologue_ou_medecin_du_travail: Psychologue ou médecin du travail
+          referente_ou_referent_handicap: Référente ou référent handicap
+          responsable_conseillere_ou_conseiller_rh: Responsable, conseillère ou conseiller RH
+          responsable_conseillere_ou_conseiller_rse: Responsable, conseillère ou conseiller RSE
+          volontaire_service_civique: Volontaire service civique
+          autre: Autre
     errors:
       models:
         compte:
@@ -55,11 +73,13 @@ fr:
               structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur autorisé
               doit_etre_en_attente_si_structure_vide: doit être 'en attente' s'il n'y a pas de structure
             role:
-              structure_doit_avoir_un_admin: La structure « %{nom_structure} » doit avoir au moins un administrateur
+              structure_doit_avoir_un_admin: La structure « %{nom_structure} » doit avoir au moins un administrateur
               doit_etre_conseiller_si_structure_vide: doit être 'conseiller' s'il n'y a pas de structure
               inclusion: n'est pas inclus dans la liste
+            fonction:
+              blank: doit être rempli
             structure:
-              refus_depart_structure: Impossible de quiter la structure « %{nom_structure} » car ce compte est le seul admin
+              refus_depart_structure: Impossible de quiter la structure « %{nom_structure} » car ce compte est le seul admin
   formtastic:
     actions:
       compte:

@@ -81,6 +81,21 @@ RSpec.configure do |config|
     find("#logout a").click
   end
 
+  def inscription_pro_connect(compte = create(:compte_pro_connect))
+    tokens = {
+      "id_token" => "id_token",
+      "access_token" => "access_token"
+    }
+    # rubocop:disable RSpec/AnyInstance
+    allow_any_instance_of(ProConnectController).to receive(:correct_state?).and_return(true)
+    # rubocop:enable RSpec/AnyInstance
+    allow(ProConnectHelper).to receive_messages(recupere_tokens: tokens, verifie: true,
+compte: compte)
+
+    visit pro_connect_callback_path(code: 'code', state: 'state')
+    compte
+  end
+
   def connecte_email(email:, password: nil)
     visit new_compte_session_path
     fill_in :compte_email, with: email

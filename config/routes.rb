@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   root to: redirect('/admin/dashboard')
 
   resource :nouvelle_structure, only: [:create, :show]
+  resource :informations_compte, only: [:update, :show], controller: 'inscription/informations_compte'
   resources :structures, only: :index
 
   namespace :admin do

@@ -1,0 +1,48 @@
+
+<% content_for :title, t(".titre") %>
+<% content_for :titre do %>
+  <%= t(".titre") -%>
+<% end %>
+<% content_for :sous_titre do %>
+  <%= t(".sous_titre") -%>
+<% end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<div class="page-informations-compte">
+  <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
+    <%= semantic_form_for @compte, url: informations_compte_path do |compte| %>
+      <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :fonction, :service_departement ]) %>
+      
+      <%= compte.inputs do %>
+        <div class="fr-grid-row fr-grid-row--gutters">
+          <div class="fr-col-12 fr-col-lg-6">
+            <%= compte.input :nom, required: true %>
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
+            <%= compte.input :prenom, required: true %>
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
+            <%= compte.input :email, required: true %>
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
+            <%= compte.input :fonction, as: :select, collection: collection_fonctions, wrapper_html: { class: "fleche-select" }, required: true %>
+          </div>
+          <div class="fr-col-12">
+            <%= compte.input :service_departement %>
+          </div>
+          <div class="fr-col-12">
+            <%= compte.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
+            <div class="indication-champs-obligatoires">* Champs obligatoires</div>
+          </div>
+          <div class="fr-col-12">
+            <%= compte.action :submit, label: t(".valider"), button_html: { class: "valider-compte-bouton" }, wrapper_html: { class: "valider-compte-bouton-containeur" } %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end%>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', cgu_activation_submit);
+</script>

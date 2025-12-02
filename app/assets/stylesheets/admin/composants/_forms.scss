@@ -24,6 +24,52 @@
   font-style: normal;
 }
 
+@mixin asterisk() {
+  text-decoration: none !important;
+  color: $couleur-accent-erreur;
+}
+
+@mixin label() {
+  line-height: 1.875rem;
+  font-size: 1rem;
+  width: 100%;
+  padding-right: .75rem;
+  text-transform: none;
+  font-weight: normal;
+  color: $couleur-texte;
+
+  abbr[title] {
+    @include asterisk()
+  }
+}
+label { @include label() }
+
+@mixin inline-errors() {
+  color: $eva_red;
+  margin: 0.3em 0 0 0;
+  font-weight: normal;
+  font-size: .75rem;
+  margin-top: 1rem;
+
+  &::before {
+    --icon-size: 1rem;
+    mask-image: asset-data-url('icone_erreur.svg');
+    background-color: currentColor;
+    content: "";
+    display: inline-block;
+    flex: 0 0 auto;
+    height: var(--icon-size);
+    margin-right: .25rem;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    vertical-align: calc((.75em - var(--icon-size))*.5);
+    width: var(--icon-size);
+  }
+}
+.inline-errors {
+  @include inline-errors();
+}
+
 input::placeholder {
   color: $grey-425;
   font-style: italic;
@@ -73,18 +119,7 @@ form {
       }
 
       label {
-        line-height: 1.875rem;
-        font-size: 1rem;
-        width: 100%;
-        padding-right: .75rem;
-        text-transform: none;
-        font-weight: normal;
-        color: $couleur-texte;
-
-        abbr[title] {
-          text-decoration: none;
-          color: $couleur-accent-erreur;
-        }
+        @include label()
       }
 
       &.boolean label {
@@ -128,29 +163,6 @@ form {
 
         label {
           color: $eva_red;
-        }
-      }
-
-      p.inline-errors {
-        color: $eva_red;
-        margin: 0.3em 0 0 0;
-        font-weight: normal;
-        font-size: .75rem;
-        margin-top: 1rem;
-
-        &::before {
-          --icon-size: 1rem;
-          mask-image: asset-data-url('icone_erreur.svg');
-          background-color: currentColor;
-          content: "";
-          display: inline-block;
-          flex: 0 0 auto;
-          height: var(--icon-size);
-          margin-right: .25rem;
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-          vertical-align: calc((.75em - var(--icon-size))*.5);
-          width: var(--icon-size);
         }
       }
 
@@ -301,3 +313,4 @@ form:not(.filter_form) .select2-container {
     cursor: not-allowed;
   }
 }
+

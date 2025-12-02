@@ -1,4 +1,6 @@
 class Compte < ApplicationRecord
+  include EtapeInscription
+
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   ROLES = %w[conseiller admin charge_mission_regionale superadmin compte_generique].freeze
   AIDES_ROLES = {
@@ -46,6 +48,7 @@ class Compte < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
   validates :fonction, inclusion: { in: FONCTIONS }, allow_blank: true
+
   validate :verifie_fonction_obligatoire_si_pro_connect
 
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
@@ -165,6 +168,7 @@ class Compte < ApplicationRecord
 
   def verifie_fonction_obligatoire_si_pro_connect
     return if id_pro_connect.blank?
+    return if !etape_inscription_preinscription?
 
     errors.add(:fonction, :blank) if fonction.blank?
   end

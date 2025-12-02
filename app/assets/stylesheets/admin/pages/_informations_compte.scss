@@ -1,0 +1,29 @@
+// Reset the form style
+@mixin reset-form {
+  fieldset.inputs {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  form li {
+    list-style: none !important;
+  }
+}
+
+.page-informations-compte {
+  @include reset-form();
+}
+
+.page-informations-compte .indication-champs-obligatoires {
+  @include texte-xs();
+  color: $couleur-accent-erreur;
+}
+
+.page-informations-compte .valider-compte-bouton-containeur {
+  width: 100%;
+}
+
+.page-informations-compte .valider-compte-bouton {
+  @include grand-bouton();
+  width: 100% !important;
+}

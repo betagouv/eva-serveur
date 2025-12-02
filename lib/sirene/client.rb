@@ -1,6 +1,6 @@
 module Sirene
   class Client
-    BASE_URL = ENV.fetch("SIRENE_API_URL").freeze
+    BASE_URL = ENV.fetch("SIRENE_API_URL")
 
     def recherche(siret)
       return nil if siret.blank?

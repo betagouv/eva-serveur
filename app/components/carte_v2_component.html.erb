@@ -1,0 +1,10 @@
+<div class="carte-v2">
+  <% if @titre.present? %>
+    <div class="carte-v2__header">
+      <div class="carte-v2__title"><%= @titre %></div>
+    </div>
+  <% end %>
+  <div class="carte-v2__content">
+    <%= content %>
+  </div>  
+</div>

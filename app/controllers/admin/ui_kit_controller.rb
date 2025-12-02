@@ -9,6 +9,7 @@ module Admin
     def barre_segmentee; end
     def card; end
     def carte; end
+    def carte_v2; end
     # def carte_mise_en_action; end commenté pour le moment car besoin d'une resource
     def carte_partage_code; end
     def code; end

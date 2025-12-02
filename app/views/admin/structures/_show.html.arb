@@ -14,7 +14,7 @@ div class: "row" do
             row :type_structure do
               traduction_type_structure(structure.type_structure)
             end
-            row :usage
+            row :usage if current_compte.superadmin?
             if structure.usage == "Eva: entreprises"
               row "OPCO(s)" do
                 if structure.opcos.any?

@@ -47,6 +47,7 @@ module ProConnectRecupereCompteHelper
       )
       compte.password = SecureRandom.uuid if compte.encrypted_password.blank?
       compte.save!
+      compte.assigne_preinscription
       compte
     end
   end

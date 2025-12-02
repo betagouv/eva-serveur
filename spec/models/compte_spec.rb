@@ -356,7 +356,8 @@ describe Compte do
               nom: "Dupont",
               prenom: "Jean",
               email: "jean.dupont@example.com",
-              statut_validation: :en_attente
+              statut_validation: :en_attente,
+              etape_inscription: :preinscription
       end
 
       context "quand la fonction est vide" do
@@ -377,6 +378,17 @@ describe Compte do
         end
 
         it "n'a pas d'erreur sur le champ fonction" do
+          expect(compte.errors[:fonction]).to be_blank
+        end
+      end
+
+      context "quand l'étape d'inscription est : nouveau" do
+        before do
+          compte.etape_inscription = "nouveau"
+          compte.valid?
+        end
+
+        it "signale une erreur sur le champ fonction" do
           expect(compte.errors[:fonction]).to be_blank
         end
       end

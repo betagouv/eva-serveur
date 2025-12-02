@@ -14,7 +14,9 @@ class ProConnectController < ApplicationController
     echec_login and return if compte.blank?
 
     session[:pc_logout_token] = tokens["id_token"]
-    sign_in_and_redirect compte, scope: :compte
+    sign_in compte, scope: :compte
+    path = compte.doit_completer_inscription? ? informations_compte_path : admin_dashboard_path
+    redirect_to path
   end
 
   def lit_tokens(tokens)

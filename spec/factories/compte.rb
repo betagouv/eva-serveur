@@ -9,6 +9,7 @@ FactoryBot.define do
     cgu_acceptees { true }
     email_bienvenue_envoye { true }
     structure factory: :structure_locale
+    etape_inscription { :complet }
 
     trait :structure_avec_admin do
       structure { create(:structure, :avec_admin) }
@@ -37,6 +38,17 @@ FactoryBot.define do
     end
     factory :compte_generique do
       role { 'compte_generique' }
+    end
+
+    factory :compte_pro_connect do
+      role { 'conseiller' }
+      structure { nil }
+      statut_validation { :en_attente }
+      id_pro_connect { 'id_pro_connect_123' }
+      siret_pro_connect { '13002526500013' }
+      etape_inscription { 'nouveau' }
+
+      after(:create, &:assigne_preinscription)
     end
   end
 

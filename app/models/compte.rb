@@ -49,8 +49,6 @@ class Compte < ApplicationRecord
   validates_with PasswordValidator, fields: [ :password ]
   validates :fonction, inclusion: { in: FONCTIONS }, allow_blank: true
 
-  validate :verifie_fonction_obligatoire_si_pro_connect
-
   auto_strip_attributes :email, :nom, :prenom, :telephone, squish: true
 
   enum :statut_validation, { en_attente: 0, acceptee: 1, refusee: 2 }, prefix: :validation
@@ -164,12 +162,5 @@ class Compte < ApplicationRecord
     else
       errors.add(:role, :structure_doit_avoir_un_admin, nom_structure: structure.nom)
     end
-  end
-
-  def verifie_fonction_obligatoire_si_pro_connect
-    return if id_pro_connect.blank?
-    return if !etape_inscription_preinscription?
-
-    errors.add(:fonction, :blank) if fonction.blank?
   end
 end

@@ -21,14 +21,14 @@
           <div class="fr-col-12 fr-col-lg-6">
             <%= compte.input :prenom, required: true %>
           </div>
-          <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-col-12">
             <%= compte.input :email, required: true %>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <%= compte.input :fonction, as: :select, collection: collection_fonctions, wrapper_html: { class: "fleche-select" }, required: true %>
-          </div>
-          <div class="fr-col-12">
             <%= compte.input :service_departement %>
+          </div>
+          <div class="fr-col-12 fr-col-lg-6">
+            <%= compte.input :fonction, as: :select, collection: collection_fonctions, wrapper_html: { class: "fleche-select" } %>
           </div>
           <div class="fr-col-12">
             <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>

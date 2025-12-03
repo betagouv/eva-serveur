@@ -178,5 +178,16 @@ describe ProConnectRecupereCompteHelper do
         end
       end
     end
+
+    context "une structure existe avec le siret pro connect" do
+      let(:siret) { '13002526500013' }
+      let!(:structure) { create :structure, :avec_admin, siret: siret }
+
+      it do
+        compte = described_class.cree_ou_recupere_compte(user_info(email))
+        expect(compte).not_to be_nil
+        expect(compte.structure_id).to eq(structure.id)
+      end
+    end
   end
 end

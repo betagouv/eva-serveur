@@ -45,10 +45,20 @@ module ProConnectRecupereCompteHelper
         siret_pro_connect: user_info["siret"],
         confirmed_at: compte.confirmed_at || Time.zone.now
       )
+      compte = assigne_structure_compte(compte, user_info)
       compte.password = SecureRandom.uuid if compte.encrypted_password.blank?
       compte.save!
       compte.assigne_preinscription
       compte
+    end
+
+    def assigne_structure_compte(compte, user_info)
+      structure = cherche_structure_avec_siret_pro_connect(user_info["siret"])
+      compte.structure = structure if structure.present?
+    end
+
+    def cherche_structure_avec_siret_pro_connect(siret)
+      Structure.find_by(siret: siret)
     end
   end
 end

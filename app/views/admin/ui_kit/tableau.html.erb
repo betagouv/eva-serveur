@@ -40,4 +40,20 @@
       <% end %>
     <% end %>
   </div>
+
+  <div class="fr-mb-6w">
+    <h2>Tableau avec colonne multiline</h2>
+    <p class="fr-text--sm">La colonne "Description" utilise le paramètre <code>multiline: true</code> pour permettre le retour à la ligne automatique du texte long.</p>
+    <%= render TableauComponent.new(collection: mes_infos) do |tableau| %>
+      <% tableau.colonne(titre: "Date") do |evaluation|%>
+        <% evaluation[:created_at].strftime("%d/%m/%Y") %>
+      <%end %>
+      <% tableau.colonne(titre: "Colonne avec un nom long", multiline: true) do |evaluation|%>
+        <% evaluation[:nom] %>
+      <%end %>
+      <% tableau.colonne(titre: "Description", multiline: true) do |evaluation| %>
+        Ceci est une très longue description qui devrait se couper automatiquement sur plusieurs lignes grâce au paramètre multiline de DSFR
+      <% end %>
+    <% end %>
+  </div>
 </div>

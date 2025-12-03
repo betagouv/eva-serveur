@@ -11,7 +11,9 @@
                 </th>
               <% end %>
               <% colonnes.each do |colonne| %>
-                <th><%= colonne[:titre] %></th>
+                <%= tag.th(class: (colonne[:multiline] ? "fr-cell--multiline" : nil)) do %>
+                  <%= colonne[:titre] %>
+                <% end %>
               <% end %>
             </tr>
           </thead>
@@ -27,7 +29,8 @@
                   </th>
                 <% end %>
                 <% colonnes.each do |colonne| %>
-                  <%= tag.td(class: colonne[:td_class].presence) do %>
+                  <% classes = [colonne[:td_class].presence, (colonne[:multiline] ? "fr-cell--multiline" : nil)].compact.join(" ") %>
+                  <%= tag.td(class: classes.presence) do %>
                     <%= view_context.capture(item, &colonne[:block]) %>
                   <% end %>
                 <% end %>

@@ -31,7 +31,7 @@ describe 'Création de compte conseiller', type: :feature do
       fill_in :compte_email, with: 'monemail@eva.fr'
       fill_in :compte_password, with: 'Pass5678'
       fill_in :compte_password_confirmation, with: 'Pass5678'
-      check("J’accepte les conditions générales d’utilisation d’eva", allow_label_click: true)
+      check("J’accepte les conditions générales d’utilisation", allow_label_click: true)
     end
 
     it do

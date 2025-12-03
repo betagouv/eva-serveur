@@ -261,8 +261,8 @@ describe Ability do
       expect(subject).not_to be_able_to(:update, beneficiaire)
     end
 
-    it 'ne peut pas fusionner de bénéficiaire' do
-      expect(subject).not_to be_able_to(:fusionner, beneficiaire)
+    it 'peut fusionner de bénéficiaire' do
+      expect(subject).to be_able_to(:fusionner, beneficiaire)
     end
 
     it 'ne peut pas supprimer de bénéficiaire' do

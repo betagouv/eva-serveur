@@ -10,7 +10,7 @@
 
 <div class="page-informations-compte">
   <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
-    <%= semantic_form_for @compte, url: informations_compte_path do |compte| %>
+    <%= semantic_form_for @compte, url: inscription_informations_compte_path do |compte| %>
       <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :fonction, :service_departement ]) %>
       
       <%= compte.inputs do %>

@@ -1,6 +1,7 @@
-class Inscription::InformationsCompteController < ApplicationController
+class Inscription::InformationsComptesController < ApplicationController
   layout "active_admin_logged_out"
   helper ::ActiveAdmin::ViewHelpers
+  include EtapeInscriptionHelper
 
   def show
     @compte = current_compte
@@ -8,8 +9,9 @@ class Inscription::InformationsCompteController < ApplicationController
 
   def update
     @compte = current_compte
-    if @compte.update(compte_parametres.merge(etape_inscription: :complet))
-      redirect_to admin_recherche_structure_path
+    @compte.termine_preinscription!
+    if @compte.update(compte_parametres)
+      redirige_vers_etape_inscription(@compte)
     else
       render :show
     end

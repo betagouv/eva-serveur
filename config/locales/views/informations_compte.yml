@@ -1,8 +1,17 @@
 fr:
   inscription:
-    informations_compte:
+    informations_comptes:
       show:
         titre: Informations personnelles
         sous_titre: Complétez votre inscription.
         titre_carte: Créez votre compte professionnel
         valider: Valider
+    structures:
+      show:
+        titre: Vous avez rejoins la structure existante dans eva !
+        sous_titre: Vérifiez que les informations correspondent bien à votre structure.
+        rejoindre: Rejoindre
+        ce_nest_pas_ma_structure: Ce n'est pas ma structure
+        alert:
+          titre: Accès à votre structure
+          message: S’il s’agit bien de votre structure, vous pouvez la rejoindre. Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.

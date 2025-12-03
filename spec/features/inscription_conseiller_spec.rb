@@ -67,12 +67,15 @@ describe 'Création de compte conseiller', type: :feature do
   end
 
   context 'quand le conseiller se connecte par ProConnect' do
+    let(:siret) { '11111111111111' }
     let!(:compte_pro_connect) do
       create(
         :compte_pro_connect,
         email: 'conseiller@example.fr',
         prenom: 'Jean',
         nom: 'Dupont',
+        siret_pro_connect: siret,
+        structure: nil
       )
     end
 
@@ -82,7 +85,7 @@ describe 'Création de compte conseiller', type: :feature do
 
     it 'permet de compléter ses informations' do
       # Vérifie qu'on est bien sur la page d'informations de compte
-      expect(page).to have_current_path(informations_compte_path)
+      expect(page).to have_current_path(inscription_informations_compte_path)
       expect(page).to have_content('Informations personnelles')
 
       # Vérifie que les champs sont pré-remplis avec les infos ProConnect
@@ -105,7 +108,31 @@ describe 'Création de compte conseiller', type: :feature do
       )
       expect(compte_pro_connect.service_departement).to eq('Service RH')
       expect(compte_pro_connect.cgu_acceptees).to be true
-      expect(compte_pro_connect.etape_inscription).to eq "complet"
+      expect(compte_pro_connect.etape_inscription).to eq "recherche_structure"
+    end
+
+    context "quand le siret pro connect correspond à une structure"   do
+      let(:siret) { '13002526500013' }
+      let!(:structure_avec_admin) {
+ create :structure_locale, :avec_admin, nom: 'Ma structure avec admin', siret: siret }
+      let!(:compte_pro_connect) do
+        create(
+          :compte_pro_connect,
+          email: 'conseiller@example.fr',
+          prenom: 'Jean',
+          nom: 'Dupont',
+          siret_pro_connect: siret,
+          structure: structure_avec_admin
+        )
+      end
+
+      it "redirige vers la page d'assignation de structure" do
+        select 'Conseillère ou conseiller emploi / formation / insertion', from: 'Fonction'
+        fill_in 'Service/Département', with: 'Service RH'
+        check 'compte_cgu_acceptees'
+        click_on 'Valider'
+        expect(page).to have_current_path(inscription_structure_path)
+      end
     end
   end
 end

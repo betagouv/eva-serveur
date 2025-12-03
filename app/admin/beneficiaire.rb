@@ -82,7 +82,7 @@ ActiveAdmin.register Beneficiaire do
                            campagne: [
                              :situations_configurations,
                              :campagne_compte_autorisations,
-                             :compte
+                             { compte: :structure }
                            ]
                          }
                        )
@@ -91,7 +91,7 @@ ActiveAdmin.register Beneficiaire do
     end
 
     def scoped_collection
-      end_of_association_chain.includes(evaluations: { campagne: :compte })
+      end_of_association_chain
     end
 
     def restitutions_positionnement
@@ -102,8 +102,7 @@ ActiveAdmin.register Beneficiaire do
 
     def evaluations_diagnostic
       @evaluations_diagnostic ||= evaluations_accessibles.diagnostic
-      .includes([ :campagne ])
-      .order(created_at: :desc)
+                                                         .order(created_at: :desc)
     end
 
     private
@@ -114,7 +113,6 @@ ActiveAdmin.register Beneficiaire do
 
     def evaluations_positionnement
       @evaluations_positionnement ||= evaluations_accessibles.positionnement
-                                                             .includes([ :campagne ])
                                                              .order(created_at: :desc)
     end
   end

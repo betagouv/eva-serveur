@@ -2,24 +2,28 @@ require 'rails_helper'
 
 describe 'Admin - Bénéficiaires', type: :feature do
   describe 'show' do
-    context "quand le bénéficiaire n'a pas accès" do
+    context "quand le conseiller n'a pas accès" do
       let!(:conseiller) { create :compte_conseiller, :structure_avec_admin }
+      let!(:autre_conseiller) { create :compte_conseiller, :structure_avec_admin }
       let!(:beneficiaire) { create :beneficiaire }
+      let!(:campagne_visible) {
+        create :campagne, :avec_parcours_positionnement, compte: conseiller }
+      let!(:autre_campagne) {
+        create :campagne, :avec_parcours_positionnement, compte: autre_conseiller }
       let!(:evaluation_visible) do
         create(
           :evaluation,
-          :positionnement,
           beneficiaire: beneficiaire,
-          responsable_suivi_id: conseiller.id
+          campagne: campagne_visible
         )
       end
       let!(:evaluation_non_visible) do
-        create(:evaluation, :positionnement, beneficiaire: beneficiaire)
+        create(:evaluation, :positionnement, beneficiaire: beneficiaire, campagne: autre_campagne)
       end
 
       before { connecte(conseiller) }
 
-      it "le conseiller voit uniquement les évaluations dont il a accès" do
+      it "le conseiller voit uniquement les évaluations auxquelles il a accès" do
         visit admin_beneficiaire_path(beneficiaire)
 
         expect(page).to have_css("[data-id='#{evaluation_visible.id}']")

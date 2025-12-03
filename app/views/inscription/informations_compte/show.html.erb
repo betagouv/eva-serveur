@@ -31,6 +31,7 @@
             <%= compte.input :service_departement %>
           </div>
           <div class="fr-col-12">
+            <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>
             <%= compte.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
             <div class="indication-champs-obligatoires">* Champs obligatoires</div>
           </div>

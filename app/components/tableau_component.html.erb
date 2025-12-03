@@ -29,7 +29,7 @@
                   </th>
                 <% end %>
                 <% colonnes.each do |colonne| %>
-                  <% classes = [colonne[:td_class].presence, (colonne[:multiline] ? "fr-cell--multiline" : nil)].compact.join(" ") %>
+                  <% classes = [ colonne[:td_class].presence, (colonne[:multiline] ? "fr-cell--multiline" : nil) ].compact.join(" ") %>
                   <%= tag.td(class: classes.presence) do %>
                     <%= view_context.capture(item, &colonne[:block]) %>
                   <% end %>

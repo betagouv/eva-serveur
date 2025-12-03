@@ -1,0 +1,25 @@
+.page-inscription-structure {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  gap: 3rem;
+
+  .fr-alert {
+    background-color: $grey-1000;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+  }
+
+  form fieldset.inputs {
+    padding-top: 0 !important;
+    max-width: none !important;
+  }
+
+  .inscription-structure__actions-droite {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

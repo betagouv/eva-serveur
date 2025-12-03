@@ -1,4 +1,6 @@
 class ProConnectController < ApplicationController
+  include EtapeInscriptionHelper
+
   def auth
     session[:pc_state] = Digest::SHA256.hexdigest("ProConnect - #{SecureRandom.hex(32)}")
     session[:pc_nonce] = Digest::SHA256.hexdigest("ProConnect - #{SecureRandom.hex(32)}")
@@ -15,8 +17,7 @@ class ProConnectController < ApplicationController
 
     session[:pc_logout_token] = tokens["id_token"]
     sign_in compte, scope: :compte
-    path = compte.doit_completer_inscription? ? informations_compte_path : admin_dashboard_path
-    redirect_to path
+    redirige_vers_etape_inscription(compte)
   end
 
   def lit_tokens(tokens)

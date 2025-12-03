@@ -7,4 +7,12 @@ module OpcoHelper
       taille: "sm"
     )
   end
+
+  def affiche_opcos(structure)
+    if structure.opcos.any?
+      structure.opcos.map(&:nom).join(", ")
+    else
+      "Aucun OPCO rattaché"
+    end
+  end
 end

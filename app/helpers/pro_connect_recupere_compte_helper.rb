@@ -55,6 +55,7 @@ module ProConnectRecupereCompteHelper
     def assigne_structure_compte(compte, user_info)
       structure = cherche_structure_avec_siret_pro_connect(user_info["siret"])
       compte.structure = structure if structure.present?
+      compte
     end
 
     def cherche_structure_avec_siret_pro_connect(siret)

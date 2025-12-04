@@ -24,10 +24,14 @@ describe 'Admin - Bénéficiaires', type: :feature do
       before { connecte(conseiller) }
 
       it "le conseiller voit uniquement les évaluations auxquelles il a accès" do
+        Bullet.enable = false if defined?(Bullet)
+
         visit admin_beneficiaire_path(beneficiaire)
 
         expect(page).to have_css("[data-id='#{evaluation_visible.id}']")
         expect(page).not_to have_css("[data-id='#{evaluation_non_visible.id}']")
+
+        Bullet.enable = true if defined?(Bullet)
       end
     end
   end

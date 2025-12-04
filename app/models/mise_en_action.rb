@@ -11,18 +11,10 @@ class MiseEnAction < ApplicationRecord
   validates :evaluation_id, uniqueness: true
   validates :effectuee, absence: false, inclusion: { in: [ true, false ] }
 
-  before_save :enregistre_date
-
   enum :remediation, REMEDIATIONS.zip(REMEDIATIONS).to_h, suffix: true
   enum :difficulte, DIFFICULTES.zip(DIFFICULTES).to_h, suffix: true
 
   acts_as_paranoid
-
-  def enregistre_date
-    return unless repondue_le.nil?
-
-    self.repondue_le = Time.zone.now
-  end
 
   def effectuee_avec_remediation?
     effectuee && remediation.present?

@@ -84,17 +84,50 @@ describe Evaluation do
   end
 
   describe '#enregistre_mise_en_action' do
+    let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
+
     context 'lorsque la mise en action existe déjà' do
-      let(:date_mise_en_action) { Time.zone.local(2022, 1, 1, 12, 0, 0) }
+      let(:ancienne_date) { Time.zone.local(2022, 1, 1, 10, 0, 0) }
       let!(:evaluation) do
-        create :evaluation, :avec_mise_en_action, repondue_le: date_mise_en_action
+        create :evaluation, :avec_mise_en_action, repondue_le: ancienne_date
       end
 
-      before { evaluation.enregistre_mise_en_action(false) }
+      context "avec une remediation" do
+        before do
+          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
+          Timecop.freeze(date_du_jour) do
+            evaluation.enregistre_mise_en_action(false)
+          end
+          evaluation.reload
+        end
 
-      it 'met à jour la réponse mais pas la date de mise en action' do
-        expect(evaluation.reload.mise_en_action.effectuee).to be false
-        expect(evaluation.reload.mise_en_action.repondue_le).to eq date_mise_en_action
+        it 'met à jour la réponse et la date de reponse' do
+          expect(evaluation.mise_en_action.effectuee).to be false
+          expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
+        end
+
+        it 'efface la remediation' do
+          expect(evaluation.mise_en_action.remediation).to be_nil
+        end
+      end
+
+      context "avec une difficulté" do
+        before do
+          evaluation.mise_en_action.update(effectuee: false, difficulte: :freins_peripheriques)
+          Timecop.freeze(date_du_jour) do
+            evaluation.enregistre_mise_en_action(true)
+          end
+          evaluation.reload
+        end
+
+        it 'met à jour la réponse mais pas la date de mise en action' do
+          expect(evaluation.mise_en_action.effectuee).to be true
+          expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
+        end
+
+        it 'efface la difficulté' do
+          expect(evaluation.mise_en_action.difficulte).to be_nil
+        end
       end
     end
 
@@ -102,7 +135,6 @@ describe Evaluation do
       let!(:evaluation) { create :evaluation }
 
       it 'créé et enregistre true en réponse' do
-        date_du_jour = Time.zone.local(2023, 1, 1, 12, 0, 0)
         Timecop.freeze(date_du_jour) do
           evaluation.enregistre_mise_en_action(true)
         end
@@ -111,8 +143,11 @@ describe Evaluation do
       end
 
       it 'créé et enregistre false en réponse' do
-        evaluation.enregistre_mise_en_action(false)
+        Timecop.freeze(date_du_jour) do
+          evaluation.enregistre_mise_en_action(false)
+        end
         expect(evaluation.mise_en_action.effectuee).to be false
+        expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
       end
     end
   end

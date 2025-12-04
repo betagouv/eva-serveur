@@ -236,10 +236,22 @@ describe Ability do
         expect(subject).to be_able_to(:fusionner, Beneficiaire)
         expect(subject).to be_able_to(:supprimer_responsable_suivi, evaluation)
         expect(subject).to be_able_to(:ajouter_responsable_suivi, evaluation)
+        expect(subject).to be_able_to(:mise_en_action, evaluation)
         expect(subject).to be_able_to(:renseigner_qualification, evaluation)
         expect(subject).to be_able_to(%i[read update], evaluation.beneficiaire)
         expect(subject).to be_able_to(:destroy, beneficiaire_vide)
         expect(subject).not_to be_able_to(:destroy, evaluation.beneficiaire)
+      end
+    end
+
+    context 'peut gérer les mise en actions des campagnes privés des collègues' do
+      let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
+      let(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
+      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
+
+      it do
+        expect(subject).to be_able_to(:mise_en_action, evaluation_collegue)
+        expect(subject).to be_able_to(:renseigner_qualification, evaluation_collegue)
       end
     end
   end
@@ -273,18 +285,26 @@ describe Ability do
       expect(subject).to be_able_to(:create, Campagne.new)
     end
 
-    it 'peut voir les bénéficiaires des campagnes des structures filles' do
-      structure_locale_fille = create :structure_locale,
-                                      structure_referente: structure_administrative
-      compte_structure_fille = create :compte_admin, structure: structure_locale_fille
-      campagne_structure_fille = create :campagne, compte: compte_structure_fille
-      evaluation_structure_fille = create :evaluation, campagne: campagne_structure_fille
-
-      expect(subject).to be_able_to(:read, evaluation_structure_fille.beneficiaire)
-    end
-
     it 'ne peut pas dupliquer de campagne' do
       expect(subject).not_to be_able_to(:duplique, Campagne.new)
+    end
+
+    context "avec des structures filles" do
+      let!(:structure_locale_fille) do
+        create :structure_locale, structure_referente: structure_administrative
+      end
+      let!(:compte_structure_fille) { create :compte_admin, structure: structure_locale_fille }
+      let!(:campagne_structure_fille) { create :campagne, compte: compte_structure_fille }
+      let!(:evaluation_structure_fille) { create :evaluation, campagne: campagne_structure_fille }
+
+      it 'peut voir les bénéficiaires des campagnes des structures filles' do
+        expect(subject).to be_able_to(:read, evaluation_structure_fille.beneficiaire)
+      end
+
+      it 'peut faire des mises en action sur les évaluations des structures filles' do
+        expect(subject).to be_able_to(:mise_en_action, evaluation_structure_fille)
+        expect(subject).to be_able_to(:renseigner_qualification, evaluation_structure_fille)
+      end
     end
   end
 

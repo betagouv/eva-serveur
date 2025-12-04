@@ -5,7 +5,27 @@ ActiveAdmin.register Beneficiaire do
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :code_beneficiaire
+  filter :evaluations_campagne_compte_structure_id,
+         as: :search_select_filter,
+         url: proc { admin_structures_path },
+         fields: %i[nom code_postal],
+         display_name: "display_name",
+         minimum_input_length: 2,
+         order_by: "lower_nom_asc",
+         label: proc { Structure.model_name.human },
+         method_model: Structure,
+         if: proc { current_compte.anlci? || current_compte.administratif? }
+  filter :evaluations_campagne_id,
+         as: :search_select_filter,
+         url: proc { admin_campagnes_path },
+         fields: %i[libelle code],
+         display_name: "libelle",
+         minimum_input_length: 2,
+         order_by: "libelle_asc",
+         label: proc { Campagne.model_name.human },
+         method_model: Campagne
   filter :created_at
+
   config.sort_order = "created_at_desc"
   config.batch_actions = true
 

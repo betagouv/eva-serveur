@@ -87,7 +87,7 @@ class BooleanInput < Formtastic::Inputs::BooleanInput
   end
 
   def has_errors?
-    object && object.errors[method].present?
+    object && object.respond_to?(:errors) && object.errors[method].present?
   end
 
   def errors

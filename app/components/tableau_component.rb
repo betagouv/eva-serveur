@@ -6,8 +6,8 @@ class TableauComponent < ViewComponent::Base
     @params = params
   end
 
-  def colonne(titre: nil, td_class: "", &block)
-    @colonnes << { titre: titre, td_class: td_class, block: block }
+  def colonne(titre: nil, td_class: "", multiline: false, &block)
+    @colonnes << { titre: titre, td_class: td_class, multiline: multiline, block: block }
   end
 
   def before_render

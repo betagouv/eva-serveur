@@ -30,6 +30,10 @@
         <% restitution.evaluation.created_at.strftime("%d/%m/%Y") %>
       <% end %>
 
+      <% tableau.colonne(titre: Structure.model_name.human, multiline: true) do |restitution| %>
+        <% restitution.evaluation.campagne.compte.structure&.nom %>
+      <% end %>
+
       <% tableau.colonne(titre: t(".litteratie")) do |restitution| %>
         <% a_fait_litteratie = restitution.evaluation.campagne.avec_positionnement?(:litteratie) %>
         <div data-litteratie="<%= a_fait_litteratie %>">

@@ -157,9 +157,16 @@ question_redaction_id)
                           .includes(:mise_en_action)
   end
 
-  def enregistre_mise_en_action(reponse)
+  def enregistre_mise_en_action(effectuee)
     mise_en_action = MiseEnAction.find_or_initialize_by(evaluation: self)
-    mise_en_action.effectuee = reponse
+    mise_en_action.effectuee = effectuee
+    mise_en_action.repondue_le = Time.zone.now
+
+    if effectuee
+      mise_en_action.difficulte = nil
+    else
+      mise_en_action.remediation = nil
+    end
     mise_en_action.save
   end
 

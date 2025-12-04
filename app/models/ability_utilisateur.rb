@@ -66,7 +66,7 @@ compte_id: compte.id
     end
 
     if compte.admin?
-      can %i[read update destroy], Evaluation,
+      can %i[read update destroy mise_en_action renseigner_qualification], Evaluation,
           campagne: campagnes_de_la_structure(compte)
     end
   end

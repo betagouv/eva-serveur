@@ -129,6 +129,10 @@ form {
         padding-left: 0;
       }
 
+      p.inline-errors {
+        @include inline-errors();
+      }
+
       &.error {
         position: relative;
 

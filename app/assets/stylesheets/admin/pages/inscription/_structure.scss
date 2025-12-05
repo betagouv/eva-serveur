@@ -16,6 +16,13 @@
   form fieldset.inputs {
     padding-top: 0 !important;
     max-width: none !important;
+    background-color: transparent !important;
+
+    ol {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
   }
 
   .inscription-structure__actions-droite {

@@ -24,7 +24,7 @@ complet].freeze
   def termine_preinscription!
     return if !etape_inscription_preinscription?
 
-    if structure.nil?
+    if siret_pro_connect.blank?
       self.etape_inscription = "recherche_structure"
     else
       self.etape_inscription = "assignation_structure"

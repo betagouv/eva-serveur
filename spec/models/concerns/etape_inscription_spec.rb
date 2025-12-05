@@ -6,7 +6,7 @@ describe EtapeInscription do
       include ActiveModel::Model
       include EtapeInscription
 
-      attr_accessor :etape_inscription, :structure, :id_pro_connect
+      attr_accessor :etape_inscription, :structure, :id_pro_connect, :siret_pro_connect
 
       def update(attributes)
         attributes.each do |key, value|
@@ -39,18 +39,24 @@ describe EtapeInscription do
     end
 
     context "quand l'étape est preinscription" do
-      context "et que la structure est nil" do
+      context "et que le siret_pro_connect est blank" do
         it "change l'étape à 'recherche_structure'" do
-          objet = test_class.new(etape_inscription: "preinscription", structure: nil)
+          objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: nil)
+          objet.termine_preinscription!
+          expect(objet.etape_inscription).to eq("recherche_structure")
+        end
+
+        it "change l'étape à 'recherche_structure' quand siret_pro_connect est une chaîne vide" do
+          objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: "")
           objet.termine_preinscription!
           expect(objet.etape_inscription).to eq("recherche_structure")
         end
       end
 
-      context "et que la structure est présente" do
+      context "et que le siret_pro_connect est présent" do
         it "change l'étape à 'assignation_structure'" do
-          structure = instance_double(Structure)
-          objet = test_class.new(etape_inscription: "preinscription", structure: structure)
+          objet = test_class.new(etape_inscription: "preinscription",
+siret_pro_connect: "13002526500013")
           objet.termine_preinscription!
           expect(objet.etape_inscription).to eq("assignation_structure")
         end

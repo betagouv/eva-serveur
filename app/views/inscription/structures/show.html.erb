@@ -8,52 +8,112 @@
 <% end %>
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
+<% persisted = @structure.persisted? %>
+
 <div class="page-inscription-structure">
-  <%= dsfr_alert(type: :info, title: t(".alert.titre")) do %>
-    <%= t(".alert.message") %>
+  <% if persisted %>
+    <%# Structure existante : rejoindre %>
+    <%= dsfr_alert(type: :info, title: t(".alert.titre")) do %>
+      <%= t(".alert.message") %>
+    <% end %>
+  <% else %>
+    <%# Nouvelle structure : créer %>
+    <%= dsfr_alert(type: :info, title: t(".alert_creation.titre")) do %>
+      <%= t(".alert_creation.message") %>
+    <% end %>
   <% end %>
 
-  <%= semantic_form_for @compte, url: inscription_structure_path do |compte| %>
-    <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, []) %>
-    
-    <%= compte.inputs do %>
-      <%= render CarteV2Component.new do %>
-        <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
-          <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-            <div class="fr-text--sm fr-text--bold fr-mb-2v">SIRET</div>
-            <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.siret %></div>
+  <% if persisted %>
+    <%= semantic_form_for @compte, url: inscription_structure_path do |form| %>
+      <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, []) %>
+      
+      <%= form.inputs do %>
+        <%= render CarteV2Component.new do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">SIRET</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.siret %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">Raison sociale</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.nom %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">Type de structure</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= traduction_type_structure(@structure.type_structure) %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">Adresse</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.adresse %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">OPCO</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= affiche_opcos @structure %></div>
+            </div>
           </div>
-          <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-            <div class="fr-text--sm fr-text--bold fr-mb-2v">Raison sociale</div>
-            <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.nom %></div>
-          </div>
-          <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-            <div class="fr-text--sm fr-text--bold fr-mb-2v">Type de structure</div>
-            <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= traduction_type_structure(@structure.type_structure) %></div>
-          </div>
-          <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-            <div class="fr-text--sm fr-text--bold fr-mb-2v">Adresse</div>
-            <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.adresse %></div>
-          </div>
-          <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-            <div class="fr-text--sm fr-text--bold fr-mb-2v">OPCO</div>
-            <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= affiche_opcos @structure %></div>
-          </div>
-        </div>
-        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-          <div class="fr-col-12 fr-col-md-6">
-            <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch, params: { action_type: "recherche" }) do %>
-              <%= t(".ce_nest_pas_ma_structure") %>
-            <% end %>
-          </div>
-          <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
-            <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :primary, name: "commit", value: "rejoindre", method: :patch, params: { action_type: "rejoindre" }) do %>
-              <%= t(".rejoindre") %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
 
+        <%= render CarteV2Component.new do %>
+          <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+            <div class="fr-col-12 fr-col-md-6">
+              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch, params: { action_type: "recherche" }) do %>
+                <%= t(".ce_nest_pas_ma_structure") %>
+              <% end %>
+            </div>
+            <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
+              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :primary, name: "commit", value: "rejoindre", method: :patch, params: { action_type: "rejoindre" }) do %>
+                <%= t(".rejoindre") %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= semantic_form_for @structure, url: inscription_structure_path, method: :patch do |form| %>
+      <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, [ :raison_sociale ]) %>
+      <%= form.hidden_field :action_type, value: "creer" %>
+      
+      <%= form.inputs do %>
+        <%= render CarteV2Component.new do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">SIRET</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.siret %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">Raison sociale</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.raison_sociale %></div>
+            </div>
+            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
+              <div class="fr-text--sm fr-text--bold fr-mb-2v">Adresse</div>
+              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.adresse %></div>
+            </div>
+          </div>
+        <% end %>
+
+        <%= render CarteV2Component.new do %>
+          <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
+            <div class="fr-col-12">
+              <%= form.input :nom, label: t(".nom_structure_label"), input_html: { class: "fr-input" } %>
+            </div>
+            <div class="fr-col-12">
+              <%= form.input :type_structure, as: :select, collection: collection_types_structures, include_blank: t(".choisir_type"), label: t(".type_structure_label"), input_html: { class: "fr-select" } %>
+            </div>
+          </div>
+
+          <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+            <div class="fr-col-12 fr-col-md-6">
+              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch, params: { action_type: "recherche" }) do %>
+                <%= t(".ce_nest_pas_ma_structure") %>
+              <% end %>
+            </div>
+            <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
+              <%= form.submit t(".creer_structure"), class: "fr-btn fr-btn--primary" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>

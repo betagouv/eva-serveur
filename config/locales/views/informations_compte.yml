@@ -12,6 +12,14 @@ fr:
         sous_titre: Vérifiez que les informations correspondent bien à votre structure.
         rejoindre: Rejoindre
         ce_nest_pas_ma_structure: Ce n'est pas ma structure
+        creer_structure: Créer ma structure
+        nom_structure_label: Nom de la structure
+        type_structure_label: Type de structure
+        code_postal_label: Code postal
+        choisir_type: Choisir un type de structure
         alert:
           titre: Accès à votre structure
-          message: S’il s’agit bien de votre structure, vous pouvez la rejoindre. Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.
+          message: S'il s'agit bien de votre structure, vous pouvez la rejoindre. Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.
+        alert_creation:
+          titre: Création de votre structure
+          message: Vous êtes sur le point de créer une nouvelle structure dans eva, associée à votre compte. Cette opération vous désignera comme administrateur ou administratrice de cette structure et vous aurez ainsi la responsabilité d'accepter ou refuser les comptes désirant rejoindre cette structure par la suite.

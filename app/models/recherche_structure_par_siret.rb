@@ -1,24 +1,16 @@
 class RechercheStructureParSiret
-  def initialize(compte, siret)
-    @compte = compte
+  def initialize(siret)
     @siret = siret
   end
 
   def call
-    return @compte if @siret.blank?
+    return nil if @siret.blank?
 
-    # Cherche une structure existante avec le SIRET
     structure_existante = cherche_structure_avec_siret(@siret)
 
-    if structure_existante.present?
-      @compte.structure = structure_existante
-    else
-      # Crée une structure temporaire pré-remplie via l'API Sirene
-      structure_temporaire = cree_structure_temporaire
-      @compte.structure = structure_temporaire if structure_temporaire.present?
-    end
+    return structure_existante if structure_existante.present?
 
-    @compte
+    structure_temporaire = cree_structure_temporaire_via_api_sirene
   end
 
   private
@@ -27,10 +19,11 @@ class RechercheStructureParSiret
     Structure.find_by(siret: siret)
   end
 
-  def cree_structure_temporaire
+  def cree_structure_temporaire_via_api_sirene
     structure = StructureLocale.new(
       siret: @siret,
-      usage: "Eva: bénéficiaires"
+      usage: "Eva: bénéficiaires",
+      type_structure: StructureLocale::TYPE_NON_COMMUNIQUE
     )
 
     mise_a_jour = MiseAJourSiret.new(structure)

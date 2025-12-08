@@ -1,0 +1,62 @@
+<% content_for :title, t(".titre") %>
+<% content_for :titre do %>
+  <%= t(".titre") -%>
+<% end %>
+<% content_for :sous_titre do %>
+  <%= t(".sous_titre") -%>
+<% end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<div class="page-recherche-structure">
+  <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
+    <%= form_with url: inscription_recherche_structure_path, method: :patch, local: true do |f| %>
+      <% if flash[:error].present? %>
+        <div class="fr-alert fr-alert--error fr-mb-4v" role="alert">
+          <p class="fr-alert__title"><%= flash[:error] %></p>
+        </div>
+      <% end %>
+
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12">
+          <div class="fr-input-group">
+            <%= f.label :siret, t(".label_siret"), class: "fr-label" %>
+            <div class="fr-hint-text"><%= t(".hint_siret") %></div>
+            <%= f.text_field :siret, 
+                value: @siret,
+                class: "fr-input",
+                pattern: "[0-9\\s]{14,20}",
+                placeholder: "12345678901234",
+                required: true,
+                autocomplete: "off" %>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-mt-2v">
+          <%= link_to t(".lien_annuaire"), 
+              "https://annuaire-entreprises.data.gouv.fr/?mtm_campaign=proconnect",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              class: "fr-link fr-link--icon-right fr-icon-external-link-line" %>
+        </div>
+      </div>
+
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-6v">
+        <div class="fr-col-12 fr-col-md-6">
+          <%= render BoutonComponent.new(
+                inscription_informations_compte_path,
+                type: :secondary,
+                tag: :a
+              ) do %>
+            <%= t(".bouton_retour") %>
+          <% end %>
+        </div>
+        <div class="fr-col-12 fr-col-md-6 inscription-recherche-structure__actions-droite">
+          <%= f.submit t(".bouton_valider"), class: "fr-btn fr-btn--primary" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
+
+

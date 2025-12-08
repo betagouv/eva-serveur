@@ -23,3 +23,22 @@ fr:
         alert_creation:
           titre: Création de votre structure
           message: Vous êtes sur le point de créer une nouvelle structure dans eva, associée à votre compte. Cette opération vous désignera comme administrateur ou administratrice de cette structure et vous aurez ainsi la responsabilité d'accepter ou refuser les comptes désirant rejoindre cette structure par la suite.
+    recherche_structures:
+      show:
+        titre: Dans quelle structure travaillez-vous ?
+        sous_titre: Dans un premier temps, merci de regarder si votre structure est déjà enregistrée.
+        titre_carte: Rechercher ma structure
+        label_siret: Indiquez le numéro de SIRET de votre structure
+        hint_siret: Il est composé de 14 chiffres
+        lien_annuaire: Retrouver votre SIRET sur l'Annuaire des Entreprises
+        bouton_retour: Retour
+        bouton_valider: Valider
+        erreur_siret_obligatoire: Le numéro de SIRET est obligatoire.
+        erreur_siret_invalide: Le numéro de SIRET doit être composé de 14 chiffres.
+        erreur_structure_non_trouvee: Aucune structure n'a été trouvée avec ce numéro de SIRET. Veuillez vérifier le numéro saisi.
+        erreur_generique: Une erreur est survenue lors de la recherche. Veuillez réessayer.
+      update:
+        erreur_siret_obligatoire: Le numéro de SIRET est obligatoire
+        erreur_siret_invalide: Le numéro de SIRET doit être composé de 14 chiffres
+        erreur_structure_non_trouvee: Aucune structure n'a été trouvée avec ce numéro de SIRET. Veuillez vérifier le numéro saisi.
+        erreur_generique: Une erreur est survenue lors de la recherche. Veuillez réessayer.

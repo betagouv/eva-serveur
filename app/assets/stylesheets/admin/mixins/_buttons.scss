@@ -36,6 +36,7 @@
 
 @mixin grand-bouton() {
   font-size: 0.875rem;
+  line-height: 1.5rem;
   padding: 0.5rem 1rem;
   border-radius: 2.875rem;
 }
@@ -67,7 +68,6 @@
   @include base-boutons();
   color: $eva_main_blue;
   border-color: $eva_main_blue;
-  background-color: $grey-1000;
   box-shadow: none;
   &:not(.disabled):hover, &:not(.disabled):active {
     filter: brightness(96%);

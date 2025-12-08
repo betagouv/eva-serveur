@@ -32,8 +32,8 @@ class Inscription::StructuresController < ApplicationController
   def prepare_structure_si_necessaire
     return if @structure.present? || @compte.siret_pro_connect.blank?
 
-    @compte = RechercheStructureParSiret.new(@compte, @compte.siret_pro_connect).call
-    @structure = @compte.structure
+    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+    @compte.structure = @structure
   end
 
   def determine_action_type
@@ -56,13 +56,15 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def creer_nouvelle_structure
-    resultat = CreeStructureProConnect.new(@compte, structure_params).call
+    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
 
-    if resultat[:success]
-      @compte = resultat[:compte]
+    @compte.structure = @structure
+    @compte.assigne_role_admin_si_pas_d_admin
+    @compte.etape_inscription = :complet
+
+    if @compte.save
       redirige_vers_etape_inscription(@compte)
     else
-      @structure = resultat[:structure]
       render :show
     end
   end

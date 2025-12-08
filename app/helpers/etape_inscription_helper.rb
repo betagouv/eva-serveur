@@ -12,7 +12,7 @@ module EtapeInscriptionHelper
     when "preinscription"
       inscription_informations_compte_path
     when "recherche_structure"
-      admin_recherche_structure_path
+      inscription_recherche_structure_path
     when "assignation_structure"
       inscription_structure_path
     when "complet"

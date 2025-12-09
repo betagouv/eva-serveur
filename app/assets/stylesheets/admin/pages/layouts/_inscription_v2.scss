@@ -1,0 +1,48 @@
+body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
+  width: 100%;
+  padding: 0;
+}
+
+.inscription_v2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.inscription_v2__sidebar {
+  width: 100%;
+  max-width: 320px;
+  background: $eva_main_blue image-url('vagues-verticales-secondaire.svg') no-repeat top center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 2rem;
+}
+
+.inscription_v2__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inscription_v2__content__inner {
+  width: 100%;
+  max-width: 662px;
+}
+
+.inscription_v2__sidebar-titre {
+  font-family: $font-titre;
+  color: $grey-50;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.inscription_v2__sidebar-sous-titre {
+  color: $grey-50;
+  @include texte();
+  font-weight: 400 !important;
+}
+
+

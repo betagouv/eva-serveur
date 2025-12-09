@@ -72,7 +72,7 @@ body.logged_in {
   }
 }
 
-body.logged_out {
+body.logged_out:not(.page_inscription_v2) #wrapper {
   .flashes {
     width: 90%;
     margin: auto;

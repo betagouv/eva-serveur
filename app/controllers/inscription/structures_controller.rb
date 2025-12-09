@@ -1,7 +1,7 @@
 class Inscription::StructuresController < ApplicationController
   before_action :set_compte_and_structure
 
-  layout "active_admin_logged_out"
+  layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
 
@@ -39,7 +39,8 @@ class Inscription::StructuresController < ApplicationController
   def determine_action_type
     params.dig(:structure_locale, :action_type) ||
       params.dig(:structure, :action_type) ||
-      params[:action_type]
+      params[:action_type] ||
+      params[:commit]
   end
 
   def redirige_vers_recherche_structure
@@ -58,11 +59,11 @@ class Inscription::StructuresController < ApplicationController
   def creer_nouvelle_structure
     @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
 
-    @compte.structure = @structure
-    @compte.assigne_role_admin_si_pas_d_admin
+    @structure.assign_attributes(structure_params)
+    @compte.rejoindre_structure(@structure)
     @compte.etape_inscription = :complet
 
-    if @compte.save
+    if @compte.save && @structure.save
       redirige_vers_etape_inscription(@compte)
     else
       render :show

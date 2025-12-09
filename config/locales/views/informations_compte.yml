@@ -8,8 +8,11 @@ fr:
         valider: Valider
     structures:
       show:
-        titre: Vous avez rejoins la structure existante dans eva !
-        sous_titre: Vérifiez que les informations correspondent bien à votre structure.
+        creer:
+          titre: Création de votre structure
+        rejoindre_structure:
+          titre: Vous avez rejoins la structure existante dans eva !
+          sous_titre: Vérifiez que les informations correspondent bien à votre structure.
         rejoindre: Rejoindre
         ce_nest_pas_ma_structure: Ce n'est pas ma structure
         creer_structure: Créer ma structure

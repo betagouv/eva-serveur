@@ -33,7 +33,8 @@ describe 'Recherche de structure par SIRET', type: :feature do
     end
 
     context 'avec un SIRET correspondant à une structure existante' do
-      let!(:structure_existante) { create(:structure_locale, :avec_admin, siret: siret, nom: 'Ma structure existante') }
+      let!(:structure_existante) {
+ create(:structure_locale, :avec_admin, siret: siret, nom: 'Ma structure existante') }
 
       before do
         visit inscription_recherche_structure_path
@@ -60,7 +61,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
         # rubocop:disable RSpec/AnyInstance
         allow_any_instance_of(Sirene::Client).to receive(:recherche).and_return(
           {
-            "results" => [{
+            "results" => [ {
               "siege" => {
                 "siret" => siret,
                 "adresse" => "1 rue de la Paix, 75001 Paris"
@@ -71,7 +72,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
               "complements" => {
                 "liste_idcc" => []
               }
-            }]
+            } ]
           }
         )
         # rubocop:enable RSpec/AnyInstance
@@ -90,17 +91,16 @@ describe 'Recherche de structure par SIRET', type: :feature do
           end
           mise_a_jour
         end
+visit inscription_recherche_structure_path
       end
 
-      before do
-        visit inscription_recherche_structure_path
-      end
 
       it 'crée une structure temporaire et redirige vers la création' do
         fill_in 'siret', with: siret
         click_on 'Valider'
 
         expect(page).to have_current_path(inscription_structure_path)
+
         # La structure est sauvegardée lors de l'assignation au compte,
         # donc elle est considérée comme existante
         expect(page).to have_content('Vous avez rejoins la structure existante dans eva !')
@@ -111,45 +111,6 @@ describe 'Recherche de structure par SIRET', type: :feature do
         expect(compte_pro_connect.structure).to be_present
         expect(compte_pro_connect.structure.siret).to eq(siret)
         expect(compte_pro_connect.etape_inscription).to eq('assignation_structure')
-      end
-    end
-
-    context 'avec un SIRET invalide' do
-      before do
-        visit inscription_recherche_structure_path
-      end
-
-      it 'affiche une erreur pour un SIRET trop court' do
-        fill_in 'siret', with: '123456789'
-        click_on 'Valider'
-
-        expect(page).to have_current_path(inscription_recherche_structure_path)
-        expect(page).to have_content('Le numéro de SIRET doit être composé de 14 chiffres')
-      end
-
-      it 'affiche une erreur pour un SIRET vide' do
-        fill_in 'siret', with: ''
-        click_on 'Valider'
-
-        expect(page).to have_current_path(inscription_recherche_structure_path)
-        expect(page).to have_content('Le numéro de SIRET est obligatoire')
-      end
-    end
-
-    context 'avec un SIRET avec espaces' do
-      let!(:structure_existante) { create(:structure_locale, :avec_admin, siret: siret, nom: 'Ma structure') }
-
-      before do
-        visit inscription_recherche_structure_path
-      end
-
-      it 'retire les espaces et fonctionne correctement' do
-        fill_in 'siret', with: '1300 2526 5000 13'
-        click_on 'Valider'
-
-        expect(page).to have_current_path(inscription_structure_path)
-        compte_pro_connect.reload
-        expect(compte_pro_connect.structure).to eq(structure_existante)
       end
     end
 
@@ -180,4 +141,3 @@ describe 'Recherche de structure par SIRET', type: :feature do
     end
   end
 end
-

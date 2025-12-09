@@ -1,5 +1,5 @@
 class Inscription::InformationsComptesController < ApplicationController
-  layout "active_admin_logged_out"
+  layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
 

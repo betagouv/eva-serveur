@@ -2,7 +2,7 @@ class Inscription::RechercheStructuresController < ApplicationController
   before_action :set_compte
   before_action :verifie_etape_inscription
 
-  layout "active_admin_logged_out"
+  layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
 
@@ -11,50 +11,13 @@ class Inscription::RechercheStructuresController < ApplicationController
   end
 
   def update
-    siret = params[:siret]&.strip
-
-    if siret.blank?
-      @siret = siret
-      flash.now[:error] = t(".erreur_siret_obligatoire")
-      render :show
-      return
-    end
-
-    # Retire les espaces du SIRET
-    siret = siret.gsub(/[[:space:]]/, "")
-
-    # Valide le format (14 chiffres)
-    unless siret.match?(/\A\d{14}\z/)
-      @siret = params[:siret]
-      flash.now[:error] = t(".erreur_siret_invalide")
-      render :show
-      return
-    end
-
-    structure = RechercheStructureParSiret.new(siret).call
-
-    if structure.present?
-      @compte.structure = structure
-      @compte.assigne_role_admin_si_pas_d_admin
-      @compte.etape_inscription = :assignation_structure
-      if @compte.save
-        redirige_vers_etape_inscription(@compte)
-      else
-        @siret = params[:siret]
-        flash.now[:error] = t(".erreur_generique")
-        render :show
-      end
+    if assigne_structure_pour_compte
+      redirige_vers_etape_inscription(@compte)
     else
       @siret = params[:siret]
       flash.now[:error] = t(".erreur_structure_non_trouvee")
       render :show
     end
-  rescue StandardError => e
-    Rails.logger.error("Erreur lors de la recherche de structure par SIRET: #{e.message}")
-    Rails.logger.error(e.backtrace.join("\n"))
-    @siret = params[:siret]
-    flash.now[:error] = t(".erreur_generique")
-    render :show
   end
 
   private
@@ -68,5 +31,16 @@ class Inscription::RechercheStructuresController < ApplicationController
 
     redirect_to admin_dashboard_path
   end
-end
 
+  def assigne_structure_pour_compte
+    siret = params[:siret]&.strip
+
+    structure = RechercheStructureParSiret.new(siret).call
+
+    return false if structure.blank?
+
+    @compte.rejoindre_structure(structure)
+    @compte.etape_inscription = :assignation_structure
+    @compte.save
+  end
+end

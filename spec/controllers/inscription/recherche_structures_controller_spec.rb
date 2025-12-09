@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Inscription::RechercheStructuresController, type: :controller do
-  let(:compte) { create(:compte_pro_connect, etape_inscription: 'recherche_structure', structure: nil) }
+  let(:compte) {
+ create(:compte_pro_connect, etape_inscription: 'recherche_structure', structure: nil) }
 
   before do
     sign_in compte
@@ -28,6 +29,15 @@ describe Inscription::RechercheStructuresController, type: :controller do
   describe 'PATCH update' do
     let(:siret) { '13002526500013' }
 
+    context "quand le compte n'est pas en étape recherche_structure" do
+      let(:compte) { create(:compte_pro_connect, etape_inscription: 'complet') }
+
+      it 'redirige vers le dashboard' do
+        patch :update, params: { siret: siret }
+        expect(response).to redirect_to(admin_dashboard_path)
+      end
+    end
+
     context 'avec un SIRET valide et structure existante' do
       let!(:structure) { create(:structure_locale, siret: siret) }
 
@@ -43,9 +53,10 @@ describe Inscription::RechercheStructuresController, type: :controller do
     context 'avec un SIRET valide et structure non existante' do
       before do
         # Mock de l'API Sirene pour que MiseAJourSiret fonctionne correctement
+        # rubocop:disable RSpec/AnyInstance
         allow_any_instance_of(Sirene::Client).to receive(:recherche).and_return(
           {
-            "results" => [{
+            "results" => [ {
               "siege" => {
                 "siret" => siret,
                 "adresse" => "1 rue de la Paix, 75001 Paris"
@@ -56,11 +67,12 @@ describe Inscription::RechercheStructuresController, type: :controller do
               "complements" => {
                 "liste_idcc" => []
               }
-            }]
+            } ]
           }
         )
-
+        # rubocop:enable RSpec/AnyInstance
         # Mock MiseAJourSiret pour définir raison_sociale et adresse
+        # rubocop:disable RSpec/AnyInstance
         allow(MiseAJourSiret).to receive(:new) do |structure|
           mise_a_jour = instance_double(MiseAJourSiret)
           allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
@@ -74,6 +86,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
           end
           mise_a_jour
         end
+        # rubocop:enable RSpec/AnyInstance
       end
 
       it 'crée une structure temporaire et redirige' do
@@ -93,45 +106,5 @@ describe Inscription::RechercheStructuresController, type: :controller do
         expect(response).to have_http_status(:success)
       end
     end
-
-    context 'avec un SIRET invalide (moins de 14 chiffres)' do
-      it 'affiche une erreur' do
-        patch :update, params: { siret: '123456789' }
-        expect(flash[:error]).to be_present
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context 'avec un SIRET invalide (plus de 14 chiffres)' do
-      it 'affiche une erreur' do
-        patch :update, params: { siret: '123456789012345' }
-        expect(flash[:error]).to be_present
-        expect(response).to have_http_status(:success)
-      end
-    end
-
-    context 'avec un SIRET avec espaces' do
-      let!(:structure) { create(:structure_locale, siret: siret) }
-
-      it 'retire les espaces et fonctionne correctement' do
-        patch :update, params: { siret: '1300 2526 5000 13' }
-        compte.reload
-        expect(compte.structure).to eq(structure)
-        expect(response).to redirect_to(inscription_structure_path)
-      end
-    end
-
-    context 'quand la recherche échoue' do
-      before do
-        allow_any_instance_of(RechercheStructureParSiret).to receive(:call).and_raise(StandardError.new('Erreur API'))
-      end
-
-      it 'affiche une erreur générique' do
-        patch :update, params: { siret: siret }
-        expect(flash[:error]).to be_present
-        expect(response).to have_http_status(:success)
-      end
-    end
   end
 end
-

@@ -2,7 +2,7 @@
   display: flex;
   justify-items: center;
   flex-direction: column;
-  gap: 3rem;
+  gap: 1.5rem;
 
   .fr-alert {
     background-color: $grey-1000;
@@ -22,7 +22,7 @@
     ol {
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 1.5rem;
     }
   }
 

@@ -1,14 +1,15 @@
-
-<% content_for :title, t(".titre") %>
-<% content_for :titre do %>
-  <%= t(".titre") -%>
-<% end %>
-<% content_for :sous_titre do %>
-  <%= t(".sous_titre") -%>
-<% end %>
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <% persisted = @structure.persisted? %>
+
+<% if persisted %>
+  <% content_for :title, t(".rejoindre_structure.titre") %>
+  <% content_for :titre, t(".rejoindre_structure.titre") %>
+  <% content_for :sous_titre, t(".rejoindre_structure.sous_titre") %>
+<% else %>
+  <% content_for :title, t(".creer.titre") %>
+  <% content_for :titre, t(".creer.titre") %>
+<% end %>
 
 <div class="page-inscription-structure">
   <% if persisted %>
@@ -53,20 +54,18 @@
           </div>
         <% end %>
 
-        <%= render CarteV2Component.new do %>
-          <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-            <div class="fr-col-12 fr-col-md-6">
-              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch, params: { action_type: "recherche" }) do %>
-                <%= t(".ce_nest_pas_ma_structure") %>
-              <% end %>
-            </div>
-            <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
-              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :primary, name: "commit", value: "rejoindre", method: :patch, params: { action_type: "rejoindre" }) do %>
-                <%= t(".rejoindre") %>
-              <% end %>
-            </div>
+        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+          <div class="fr-col-12 fr-col-md-6">
+            <%= render BoutonComponent.new(inscription_structure_path(action_type: "recherche"), tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch) do %>
+              <%= t(".ce_nest_pas_ma_structure") %>
+            <% end %>
           </div>
-        <% end %>
+          <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
+            <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :primary, name: "commit", value: "rejoindre", method: :patch, params: { action_type: "rejoindre" }) do %>
+              <%= t(".rejoindre") %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
     <% end %>
   <% else %>
@@ -101,18 +100,18 @@
               <%= form.input :type_structure, as: :select, collection: collection_types_structures, include_blank: t(".choisir_type"), label: t(".type_structure_label"), input_html: { class: "fr-select" } %>
             </div>
           </div>
-
-          <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-            <div class="fr-col-12 fr-col-md-6">
-              <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch, params: { action_type: "recherche" }) do %>
-                <%= t(".ce_nest_pas_ma_structure") %>
-              <% end %>
-            </div>
-            <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
-              <%= form.submit t(".creer_structure"), class: "fr-btn fr-btn--primary" %>
-            </div>
-          </div>
         <% end %>
+
+        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
+          <div class="fr-col-12 fr-col-md-6">
+            <%= render BoutonComponent.new(inscription_structure_path(action_type: "recherche"), tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch) do %>
+              <%= t(".ce_nest_pas_ma_structure") %>
+            <% end %>
+          </div>
+          <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
+            <%= form.submit t(".creer_structure"), class: "fr-btn fr-btn--primary" %>
+          </div>
+        </div>
       <% end %>
     <% end %>
   <% end %>

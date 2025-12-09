@@ -28,24 +28,6 @@ body.logged_out {
     }
   }
 
-  #wrapper {
-    flex-direction: column;
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-    &::before {
-      content: '';
-      background: $eva_main_blue image-url('vagues-verticales.svg') no-repeat top center;
-      height: 100%;
-      display: block;
-      position: absolute;
-      top: 0;
-      width: $largeur-colonne;
-      left: 50%;
-      margin-left: -$largeur-colonne/2;
-    }
-  }
-
   #content_wrapper {
     position: relative;
     padding-top: 2rem;
@@ -268,7 +250,6 @@ body.logged_out {
 
   #footer-principal {
     box-sizing: border-box;
-    padding: 1rem 1.875rem 0 1.875rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -294,6 +275,29 @@ body.logged_out {
     margin-bottom: 1.5rem;
     p {
       margin-bottom: 1rem;
+    }
+  }
+  
+  #wrapper {
+    flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+  }
+}
+
+body.logged_out:not(.page_inscription_v2) {
+  #wrapper {
+    &::before {
+      content: '';
+      background: $eva_main_blue image-url('vagues-verticales.svg') no-repeat top center;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      width: $largeur-colonne;
+      left: 50%;
+      margin-left: -$largeur-colonne/2;
     }
   }
 }

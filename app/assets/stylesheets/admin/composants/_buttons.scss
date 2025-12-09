@@ -34,7 +34,6 @@ form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .action-secondaire {
   @include bouton-primaire();
-  @include grand-bouton;
   &, &:link, &:visited, &:active {
     color: $eva_main_blue;
   }
@@ -80,6 +79,7 @@ button.bouton, a.bouton, .bouton {
 
   &.bouton-menu {
     @include bouton-tertiaire-sans-contour;
+    background-color: $grey-1000;
     height: 32px;
     width: 32px;
     min-width: 32px;

@@ -176,11 +176,7 @@ body.logged_out {
           @include bouton-primaire;
           @include grand-bouton;
           display: inline-flex;
-          height: 2rem;
-          border-radius: 2.875rem;
           align-items: center;
-          font-size: 0.875rem;
-          padding: 0 0.94rem;
         }
       }
     }

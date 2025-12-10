@@ -49,6 +49,10 @@ form fieldset.actions li.cancel a,
   }
 }
 
+.action-secondaire {
+  @include grand-bouton;
+}
+
 button,
 form button:not(.disabled):hover,
 button:not(.disabled):hover {

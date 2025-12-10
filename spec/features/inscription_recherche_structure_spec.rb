@@ -45,7 +45,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
         click_on 'Valider'
 
         expect(page).to have_current_path(inscription_structure_path)
-        expect(page).to have_content('Vous avez rejoins la structure existante dans eva !')
+        expect(page).to have_content('Rejoindre une structure existante')
         expect(page).to have_content(siret)
         expect(page).to have_content('Ma structure existante')
 
@@ -103,7 +103,7 @@ visit inscription_recherche_structure_path
 
         # La structure est sauvegardée lors de l'assignation au compte,
         # donc elle est considérée comme existante
-        expect(page).to have_content('Vous avez rejoins la structure existante dans eva !')
+        expect(page).to have_content('Rejoindre une structure existante')
         expect(page).to have_content(siret)
         expect(page).to have_content('Entreprise Test')
 

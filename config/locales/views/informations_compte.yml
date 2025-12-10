@@ -11,7 +11,7 @@ fr:
         creer:
           titre: Création de votre structure
         rejoindre_structure:
-          titre: Vous avez rejoins la structure existante dans eva !
+          titre: Rejoindre une structure existante
           sous_titre: Vérifiez que les informations correspondent bien à votre structure.
         rejoindre: Rejoindre
         ce_nest_pas_ma_structure: Ce n'est pas ma structure

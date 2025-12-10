@@ -124,7 +124,8 @@ ActiveAdmin.register Evaluation do
   end
 
   member_action :mise_en_action, method: :put do
-    resource.enregistre_mise_en_action(params[:mise_en_action_effectuee])
+    effectuee = params[:mise_en_action_effectuee]  == "true"
+    resource.enregistre_mise_en_action(effectuee)
   end
 
   member_action :supprimer_responsable_suivi, method: :patch do

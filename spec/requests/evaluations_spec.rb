@@ -287,6 +287,24 @@ describe 'Evaluation', type: :request do
       end
     end
 
+    describe '#mise_en_action' do
+      let!(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
+
+      it "enregistre la mise en action non effectuee alors qu'elle l'était avec une remediation" do
+        evaluation.mise_en_action.update(remediation: :formation_metier)
+
+        expect do
+          put mise_en_action_admin_evaluation_path(evaluation),
+              params: { mise_en_action_effectuee: false }
+        end.not_to change(MiseEnAction, :count)
+
+        mise_en_action = evaluation.reload.mise_en_action
+        expect(mise_en_action.effectuee).to be false
+        expect(mise_en_action.repondue_le).not_to be_nil
+        expect(mise_en_action.remediation).to be_nil
+      end
+    end
+
     describe '#renseigner_qualification' do
       let(:evaluation) { create :evaluation, :avec_mise_en_action, campagne: ma_campagne }
       let(:remediation) { 'formation_metier' }

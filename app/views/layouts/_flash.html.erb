@@ -1,0 +1,13 @@
+<div class="flashes">
+  <% flash_messages.each do |type, message| %>
+    <% dsfr_type = case type.to_s
+                   when "success" then :success
+                   when "error", "alert", "recaptcha_error" then :error
+                   when "warning", "annonce_generale", "compte_generique", "evaluation_anonyme", "beneficiaire_anonyme" then :warning
+                   else :info
+                   end %>
+    <%= dsfr_alert(type: dsfr_type, html_attributes: { class: "fr-mb-4v" }) do %>
+      <%= message %>
+    <% end %>
+  <% end %>
+</div>

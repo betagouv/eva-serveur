@@ -10,11 +10,7 @@
   </div>
   <div class="inscription_v2__content">
     <div class="inscription_v2__content__inner">
-      <div class="flashes">
-        <% flash_messages.each do |type, message| %>
-          <%= content_tag :div, message, class: "flash flash_#{type}" %>
-        <% end %>
-      </div>
+      <%= render partial: "layouts/flash" %>
       <div id="active_admin_content">
         <%= yield %>
       </div>

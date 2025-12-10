@@ -9,12 +9,6 @@
 
 <div class="page-recherche-structure">
   <%= form_with url: inscription_recherche_structure_path, method: :patch, local: true do |f| %>
-    <% if flash[:error].present? %>
-      <div class="fr-alert fr-alert--error fr-mb-4v" role="alert">
-        <p class="fr-alert__title"><%= flash[:error] %></p>
-      </div>
-    <% end %>
-
     <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12">

@@ -75,6 +75,10 @@ a.pas-souligne {
   margin-bottom: 4px;
 }
 
+.fr-alert p:last-child {
+  margin-bottom: 0;
+}
+
 .fr-toggle__label {
   display: flex !important;
 }

@@ -27,7 +27,7 @@
   <% if persisted %>
     <%= semantic_form_for @compte, url: inscription_structure_path do |form| %>
       <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, []) %>
-      
+
       <%= form.inputs do %>
         <%= render CarteV2Component.new do %>
           <div class="fr-grid-row fr-grid-row--gutters">

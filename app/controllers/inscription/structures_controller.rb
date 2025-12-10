@@ -17,7 +17,7 @@ class Inscription::StructuresController < ApplicationController
       redirige_vers_recherche_structure
     when "rejoindre"
       rejoindre_structure_existante
-    when "creer"
+    when "creer", "Créer ma structure"
       creer_nouvelle_structure
     end
   end
@@ -37,10 +37,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def determine_action_type
-    params.dig(:structure_locale, :action_type) ||
-      params.dig(:structure, :action_type) ||
-      params[:action_type] ||
-      params[:commit]
+    params[:commit]
   end
 
   def redirige_vers_recherche_structure

@@ -37,6 +37,7 @@ form fieldset.actions li.cancel a,
   &, &:link, &:visited, &:active {
     color: $eva_main_blue;
   }
+  height: auto;
   margin-right: 0;
   border-color: $eva_main_blue;
   background-color: $grey-1000;

@@ -4,7 +4,7 @@
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
 
   <div class="panel">
-    <div class="fr-pl-4w fr-pr-4w">
+    <div class="fr-pl-4w fr-pr-4w evaluation-impact-general__resultats">
       <% if complet %>
         <% interpretations = [
           :performance_collective,
@@ -23,12 +23,10 @@
             end
           %>
 
-          <div class="fr-mb-4w">
-            <%= render MiseEnAvantComponent.new(
-              titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-              classes: classes.push("fr-mb-0")
-            ) %>
-          </div>
+          <%= render MiseEnAvantComponent.new(
+            titre: t(".#{interpretation}.callout.titre.#{resultat}"),
+            classes: classes.push("fr-mb-0")
+          ) %>
         <% end %>
 
         <% interpretations = [
@@ -47,12 +45,10 @@
             end
           %>
 
-          <div class="fr-mb-4w">
-            <%= render MiseEnAvantComponent.new(
-              titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-              classes: classes.push("fr-mb-0")
-            ) %>
-          </div>
+          <%= render MiseEnAvantComponent.new(
+            titre: t(".#{interpretation}.callout.titre.#{resultat}"),
+            classes: classes.push("fr-mb-0")
+          ) %>
         <% end %>
       <% else %>
         <p><%= t(".incomplet.description") %></p>

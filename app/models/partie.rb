@@ -9,6 +9,11 @@ class Partie < ApplicationRecord
 
   acts_as_paranoid
 
+  scope :situation_avec_nom_technique, ->(nom_technique) do
+    situations = Situation.par_nom_technique(nom_technique).select(:id)
+    where(situation_id: situations)
+  end
+
   def display_name
     session_id
   end

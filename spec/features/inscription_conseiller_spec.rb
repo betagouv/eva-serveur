@@ -138,8 +138,7 @@ describe 'Création de compte conseiller', type: :feature do
           email: 'conseiller@example.fr',
           prenom: 'Jean',
           nom: 'Dupont',
-          siret_pro_connect: siret,
-          structure: structure_avec_admin
+          siret_pro_connect: siret
         )
       end
 
@@ -150,6 +149,11 @@ describe 'Création de compte conseiller', type: :feature do
         click_on 'Valider'
         expect(page).to have_current_path(inscription_structure_path)
         expect(page).to have_content('Rejoindre')
+
+        click_on 'Rejoindre'
+        compte_pro_connect.reload
+        expect(compte_pro_connect.structure).to eq structure_avec_admin
+        expect(compte_pro_connect.etape_inscription).to eq('complet')
       end
     end
 

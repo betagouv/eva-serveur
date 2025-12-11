@@ -46,6 +46,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def rejoindre_structure_existante
+    prepare_structure_si_necessaire
     if @compte.update(etape_inscription: :complet)
       redirige_vers_etape_inscription(@compte)
     else

@@ -10,7 +10,7 @@ fr:
           Si vous avez besoin d'aide,
           rendez-vous [ici](%{lien_aide})
       form:
-        structure_disabled_avec_campagnes: La structure ne peut pas être modifiée car ce compte a des campagnes. Attribuez ses campagnes à un autre compte avant.
-      modal_verification:
+        structure_disabled_avec_campagnes: Modification impossible car ce compte a des campagnes. Ré-attribuez ses campagnes à un autre compte.
+        modal_verification:
         titre: <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Demande d'accès
         introduction: "**%{compte}** a demandé un accès à la structure « %{structure} »"

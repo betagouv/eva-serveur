@@ -14,18 +14,10 @@
         ] %>
         <% interpretations.each do |interpretation| %>
           <% resultat = evaluation_impact_general.synthese[interpretation] %>
-          <% classes = if resultat == :tres_fort || resultat == :fort
-              [ "fr-callout--pink-macaron" ]
- elsif resultat == :moyen
-              [ "fr-callout--blue-cumulus" ]
- else
-              [ "fr-callout--green-emeraude" ]
-            end
-          %>
 
-          <%= render MiseEnAvantComponent.new(
+          <%= render Evaluation::MesureImpactCalloutComponent.new(
             titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-            classes: classes.push("fr-mb-0")
+            resultat: resultat
           ) %>
         <% end %>
 
@@ -36,18 +28,10 @@
         ] %>
         <% interpretations.each do |interpretation| %>
           <% resultat = evaluation_impact_general.synthese[interpretation] %>
-          <% classes = if resultat == :tres_fort || resultat == :fort
-              [ "fr-callout--pink-macaron" ]
- elsif resultat == :moyen
-              [ "fr-callout--blue-cumulus" ]
- else
-              [ "fr-callout--green-emeraude" ]
-            end
-          %>
 
-          <%= render MiseEnAvantComponent.new(
+          <%= render Evaluation::MesureImpactCalloutComponent.new(
             titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-            classes: classes.push("fr-mb-0")
+            resultat: resultat
           ) %>
         <% end %>
       <% else %>

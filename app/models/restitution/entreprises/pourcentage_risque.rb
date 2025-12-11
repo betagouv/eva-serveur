@@ -20,6 +20,7 @@ module Restitution
         POURCENTAGE_RISQUE_PAR_SEUIL.each do |pourcentage_risque, seuil|
           return pourcentage_risque if pourcentage <= seuil
         end
+        POURCENTAGE_RISQUE_PAR_SEUIL.keys.last
       end
     end
   end

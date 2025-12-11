@@ -15,11 +15,11 @@
         <% interpretations.each do |interpretation| %>
           <% resultat = evaluation_impact_general.synthese[interpretation] %>
           <% classes = if resultat == :tres_fort || resultat == :fort
-              [ "fr-callout--green-emeraude" ]
+              [ "fr-callout--pink-macaron" ]
  elsif resultat == :moyen
               [ "fr-callout--blue-cumulus" ]
  else
-              [ "fr-callout--pink-macaron" ]
+              [ "fr-callout--green-emeraude" ]
             end
           %>
 
@@ -39,11 +39,11 @@
         <% interpretations.each do |interpretation| %>
           <% resultat = evaluation_impact_general.synthese[interpretation] %>
           <% classes = if resultat == :tres_fort || resultat == :fort
-              [ "fr-callout--green-emeraude" ]
+              [ "fr-callout--pink-macaron" ]
  elsif resultat == :moyen
               [ "fr-callout--blue-cumulus" ]
  else
-              [ "fr-callout--pink-macaron" ]
+              [ "fr-callout--green-emeraude" ]
             end
           %>
 

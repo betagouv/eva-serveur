@@ -66,5 +66,21 @@ describe Restitution::Entreprises::PourcentageRisque do
         expect(resultat).to eq(75)
       end
     end
+
+    # si le questionnaire a été customisé
+    context 'quand le score est supérieur à 33' do
+      let(:evenements_reponses) do
+        [
+          build(:evenement_reponse, donnees: { question: "q1", score: 10 }),
+          build(:evenement_reponse, donnees: { question: "q2", score: 10 }),
+          build(:evenement_reponse, donnees: { question: "q3", score: 10 }),
+          build(:evenement_reponse, donnees: { question: "q4", score: 10 })
+        ]
+      end
+
+      it "retourne 75%" do
+        expect(resultat).to eq(75)
+      end
+    end
   end
 end

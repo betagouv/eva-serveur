@@ -49,7 +49,7 @@ form fieldset.actions li.cancel a,
     box-shadow: none;
   }
 }
-
+form fieldset.actions li.bouton-annuler a,
 .action-secondaire {
   @include grand-bouton;
 }

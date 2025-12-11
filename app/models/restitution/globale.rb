@@ -103,7 +103,7 @@ module Restitution
     end
 
     def selectionne_derniere_restitution(nom)
-      restitutions.reverse.find { |restitution| restitution.situation.nom_technique == nom }
+      restitutions.reverse.find { |restitution| restitution.situation.a_pour_nom_technique?(nom) }
     end
 
     def litteratie

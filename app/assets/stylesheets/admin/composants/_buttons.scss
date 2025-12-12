@@ -21,7 +21,7 @@ form input[type="submit"].bouton-secondaire {
 
 .has_many_container a.button {
   @include bouton-primaire;
-  @include petit-bouton;
+  @include tres-petit-bouton;
 }
 form input[type="submit"]:not(.disabled),
 form button:not(.disabled),
@@ -107,12 +107,16 @@ button.bouton, a.bouton, .bouton {
     cursor: unset;
   }
 }
-.petit-bouton {
-  @include petit-bouton;
+.tres-petit-bouton {
+  @include tres-petit-bouton;
 }
 
 .grand-bouton {
   @include grand-bouton;
+}
+
+.petit-bouton {
+  @include petit-bouton;
 }
 
 .bouton-disabled {

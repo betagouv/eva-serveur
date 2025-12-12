@@ -3,15 +3,12 @@ class BoutonComponent < ViewComponent::Base
 
   PRIMARY_CLASSES = %w[
     bouton
-    grand-bouton
   ].freeze
   SECONDARY_CLASSES = %w[
     bouton-secondaire
-    grand-bouton
   ].freeze
   DESACTIVE_CLASSES = %w[
     bouton
-    grand-bouton
     bouton--desactive
   ].freeze
 
@@ -21,13 +18,20 @@ class BoutonComponent < ViewComponent::Base
     desactive: DESACTIVE_CLASSES
   }.freeze
 
-  def initialize(url, type: :primary, tag: :a, **params)
+  BUTTON_SIZE_MAPPINGS = {
+    xs: "tres-petit-bouton",
+    sm: "petit-bouton",
+    md: "grand-bouton"
+  }.freeze
+
+  def initialize(url, type: :primary, tag: :a, size: :md, **params)
     @url = url
     @type = type
     @tag = tag
+    @size = size
     @params = params
     @params[:class] ||= ""
-    @params[:class] += " #{classes}"
+    @params[:class] += " #{classes} #{BUTTON_SIZE_MAPPINGS[@size]}"
   end
 
   def classes

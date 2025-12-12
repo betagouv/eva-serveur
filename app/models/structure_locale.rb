@@ -1,4 +1,6 @@
 class StructureLocale < Structure
+  include AvecUsage
+
   TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[
     AFPA
@@ -38,13 +40,10 @@ class StructureLocale < Structure
     service_insertion_collectivite: "usagers"
   }.freeze
 
-  USAGE = [ "Eva: bénéficiaires", "Eva: entreprises" ].freeze
-
-  validates :code_postal, :type_structure, presence: true
+  validates :code_postal, :type_structure, :usage, presence: true
   validates :type_structure, inclusion: { in: (TYPES_STRUCTURES + [ TYPE_NON_COMMUNIQUE ]) }
   validates :code_postal, numericality: { only_integer: true }, length: { is: 5 },
                           unless: proc { |s| s.code_postal == TYPE_NON_COMMUNIQUE }
-  validates :usage, inclusion: { in: USAGE }
 
   auto_strip_attributes :code_postal, delete_whitespaces: true
 

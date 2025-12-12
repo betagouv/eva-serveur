@@ -4,6 +4,11 @@
       <div class="carte-v2__title"><%= @titre %></div>
     </div>
   <% end %>
+  <% if @image.present? %>
+    <div class="carte-v2__image">
+      <%= image_tag @image, alt: t(".image_alt") %>
+    </div>
+  <% end %>
   <div class="carte-v2__content">
     <%= content %>
   </div>  

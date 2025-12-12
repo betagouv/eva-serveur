@@ -1,8 +1,15 @@
 module EtapeInscription
   extend ActiveSupport::Concern
 
-  ETAPES_INSCRIPTION = %w[nouveau preinscription recherche_structure assignation_structure
-complet].freeze
+  ETAPES_INSCRIPTION =
+    %w[
+      nouveau
+      preinscription
+      selection_usage
+      recherche_structure
+      assignation_structure
+      complet
+    ].freeze
 
   included do
     validates :etape_inscription, inclusion: { in: ETAPES_INSCRIPTION }, if: -> {
@@ -24,11 +31,7 @@ complet].freeze
   def termine_preinscription!
     return if !etape_inscription_preinscription?
 
-    if siret_pro_connect.blank?
-      self.etape_inscription = "recherche_structure"
-    else
-      self.etape_inscription = "assignation_structure"
-    end
+    self.etape_inscription = "selection_usage"
   end
 
   def assigne_preinscription

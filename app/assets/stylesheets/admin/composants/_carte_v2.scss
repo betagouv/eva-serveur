@@ -14,6 +14,11 @@
     color: white;
   }
 
+  &__image img {
+    width: 100%;
+    object-fit: cover;
+  }
+
   &__content {
     padding: 1.5rem;
   }

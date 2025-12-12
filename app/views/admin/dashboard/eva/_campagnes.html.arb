@@ -30,7 +30,7 @@ div class: "bloc-apercu" do
             texte: url,
             aria: { describedby: campagne.id }
           )
-          text_node link_to "Jouer", url, class: "bouton-secondaire petit-bouton",
+          text_node link_to "Jouer", url, class: "bouton-secondaire tres-petit-bouton",
                                           target: "_blank", rel: "noopener",
                                           aria: { describedby: campagne.id }
         end

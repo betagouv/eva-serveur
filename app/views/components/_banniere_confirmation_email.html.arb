@@ -11,7 +11,7 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
         div do
           link_to t("action", scope: scope),
                   new_confirmation_path(current_compte, email: current_compte.email_a_confirmer),
-                  class: "bouton petit-bouton bouton-carte-principal text-center"
+                  class: "bouton tres-petit-bouton bouton-carte-principal text-center"
         end
       end
     end
@@ -26,7 +26,7 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
         div do
           link_to t(".renvoyer_email"),
                   new_confirmation_path(compte, email: compte.email_a_confirmer),
-                  class: "bouton petit-bouton bouton-carte-principal text-center"
+                  class: "bouton tres-petit-bouton bouton-carte-principal text-center"
         end
       end
     end
@@ -38,7 +38,7 @@ div class: "card__banner card__banner--alert w-100 d-flex align-items-center bg-
       div do
         link_to t(".renvoyer_email"),
                 new_confirmation_path(compte, email: compte.email_a_confirmer),
-                class: "bouton petit-bouton bouton-carte-principal text-center"
+                class: "bouton tres-petit-bouton bouton-carte-principal text-center"
       end
     end
   end

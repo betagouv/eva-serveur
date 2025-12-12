@@ -15,10 +15,10 @@
   <% classe_reponse_oui = evaluation.a_mise_en_action? && evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
   <% classe_reponse_non = evaluation.a_mise_en_action? && !evaluation.mise_en_action.effectuee? ? " bouton--actif" : "" %>
   <div data-reponse="vide" class="actions mise-en-action <%= classe_reponse_en_attente %>">
-    <button type="button" class="bouton-secondaire petit-bouton reponse-mise-en-action<%= classe_reponse_oui %>" data-reponse="true" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
+    <button type="button" class="bouton-secondaire tres-petit-bouton reponse-mise-en-action<%= classe_reponse_oui %>" data-reponse="true" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
       <%= t(".bouton_oui") %>
     </button>
-    <button type="button" class="bouton-secondaire petit-bouton reponse-mise-en-action<%= classe_reponse_non %>" data-reponse="false" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
+    <button type="button" class="bouton-secondaire tres-petit-bouton reponse-mise-en-action<%= classe_reponse_non %>" data-reponse="false" aria-describedby="question-diagnostics nom-<%= evaluation.id %>" aria-expanded="false">
       <%= t(".bouton_non") %>
     </button>
   </div>

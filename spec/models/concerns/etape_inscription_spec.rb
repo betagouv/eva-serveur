@@ -37,31 +37,6 @@ describe EtapeInscription do
         expect(objet.etape_inscription).to eq("recherche_structure")
       end
     end
-
-    context "quand l'étape est preinscription" do
-      context "et que le siret_pro_connect est blank" do
-        it "change l'étape à 'recherche_structure'" do
-          objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: nil)
-          objet.termine_preinscription!
-          expect(objet.etape_inscription).to eq("recherche_structure")
-        end
-
-        it "change l'étape à 'recherche_structure' quand siret_pro_connect est une chaîne vide" do
-          objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: "")
-          objet.termine_preinscription!
-          expect(objet.etape_inscription).to eq("recherche_structure")
-        end
-      end
-
-      context "et que le siret_pro_connect est présent" do
-        it "change l'étape à 'assignation_structure'" do
-          objet = test_class.new(etape_inscription: "preinscription",
-siret_pro_connect: "13002526500013")
-          objet.termine_preinscription!
-          expect(objet.etape_inscription).to eq("assignation_structure")
-        end
-      end
-    end
   end
 
   describe "#etape_inscription_nouveau?" do

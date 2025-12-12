@@ -6,8 +6,9 @@ class FabriqueStructure
     structure.assign_attributes(attributs_structure)
 
     # Si l'usage est "Eva: entreprises", forcer type_structure = "entreprise"
-    structure.type_structure = "entreprise" if structure.eva_entreprises?
+    structure.type_structure = "entreprise" if structure.usage == AvecUsage::USAGE_ENTREPRISES
 
     structure.save
+    structure
   end
 end

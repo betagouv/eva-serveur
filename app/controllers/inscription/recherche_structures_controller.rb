@@ -11,7 +11,7 @@ class Inscription::RechercheStructuresController < ApplicationController
   end
 
   def update
-    if assigne_structure_pour_compte
+    if assigne_siret_pour_compte
       redirige_vers_etape_inscription(@compte)
     else
       @siret = params[:siret]
@@ -32,14 +32,14 @@ class Inscription::RechercheStructuresController < ApplicationController
     redirect_to admin_dashboard_path
   end
 
-  def assigne_structure_pour_compte
+  def assigne_siret_pour_compte
     siret = params[:siret]&.strip
 
     structure = RechercheStructureParSiret.new(siret).call
 
     return false if structure.blank?
 
-    @compte.rejoindre_structure(structure)
+    @compte.siret_pro_connect = siret
     @compte.etape_inscription = :assignation_structure
     @compte.save
   end

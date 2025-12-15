@@ -18,7 +18,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
     inscription_pro_connect(compte_pro_connect)
   end
 
-  context 'quand le compte n\'a pas de SIRET ProConnect' do
+  context "quand le compte n'a pas de SIRET ProConnect" do
     before do
       # On visite directement la page car le compte est déjà en étape recherche_structure
       visit inscription_recherche_structure_path
@@ -33,8 +33,9 @@ describe 'Recherche de structure par SIRET', type: :feature do
     end
 
     context 'avec un SIRET correspondant à une structure existante' do
-      let!(:structure_existante) {
- create(:structure_locale, :avec_admin, siret: siret, nom: 'Ma structure existante') }
+      let!(:structure_existante) do
+        create(:structure_locale, :avec_admin, siret: siret, nom: 'Ma structure existante')
+      end
 
       before do
         visit inscription_recherche_structure_path
@@ -50,8 +51,13 @@ describe 'Recherche de structure par SIRET', type: :feature do
         expect(page).to have_content('Ma structure existante')
 
         compte_pro_connect.reload
-        expect(compte_pro_connect.structure).to eq(structure_existante)
+        expect(compte_pro_connect.siret_pro_connect).to eq(siret)
         expect(compte_pro_connect.etape_inscription).to eq('assignation_structure')
+
+        click_on 'Rejoindre'
+
+        compte_pro_connect.reload
+        expect(compte_pro_connect.structure).to eq(structure_existante)
       end
     end
 
@@ -103,13 +109,11 @@ visit inscription_recherche_structure_path
 
         # La structure est sauvegardée lors de l'assignation au compte,
         # donc elle est considérée comme existante
-        expect(page).to have_content('Rejoindre une structure existante')
+        expect(page).to have_content('Création de votre structure')
         expect(page).to have_content(siret)
         expect(page).to have_content('Entreprise Test')
 
         compte_pro_connect.reload
-        expect(compte_pro_connect.structure).to be_present
-        expect(compte_pro_connect.structure.siret).to eq(siret)
         expect(compte_pro_connect.etape_inscription).to eq('assignation_structure')
       end
     end

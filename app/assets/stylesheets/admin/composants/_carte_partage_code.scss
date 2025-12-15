@@ -1,8 +1,6 @@
 .carte-partage-code {
   border: 2px solid $success-425;
   margin-bottom: 0;
-  font-size: .875rem;
-  line-height: 1.5rem;
 }
 
 .carte-partage-code__informations {
@@ -35,4 +33,9 @@
   justify-content: space-between;
   width: 100%;
   align-items: center;
+}
+
+.carte-partage-code, .carte-partage-code__information-libelle, .carte-partage-code__information-valeur {
+  font-size: .875rem;
+  line-height: 1.5rem;
 }

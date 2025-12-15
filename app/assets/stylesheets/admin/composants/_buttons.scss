@@ -33,10 +33,14 @@ form button:not(.disabled),
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .action-secondaire {
-  @include bouton-secondaire();
+  @include bouton-primaire();
   &, &:link, &:visited, &:active {
     color: $eva_main_blue;
   }
+  height: auto;
+  margin-right: 0;
+  border-color: $eva_main_blue;
+  background-color: $grey-1000;
   &:not(.disabled):hover, &:not(.disabled):active {
     filter: brightness(96%);
     border-color: $eva_main_blue;

@@ -140,8 +140,7 @@ describe 'Création de compte conseiller', type: :feature do
     context "quand le siret pro connect correspond à une structure existante" do
       let(:siret) { '13002526500013' }
       let!(:structure_avec_admin) {
- create :structure_locale, :avec_admin, nom: 'Ma structure avec admin', siret: siret,
-usage: AvecUsage::USAGE_ENTREPRISES }
+ create :structure_locale, :avec_admin, nom: 'Ma structure avec admin', siret: siret }
       let!(:compte_pro_connect) do
         create(
           :compte_pro_connect,
@@ -271,10 +270,7 @@ usage: AvecUsage::USAGE_ENTREPRISES }
 
         # Sélectionne l'usage "Questionnaires"
         expect(page).to have_current_path(inscription_selection_usage_path)
-        # trouve le bouton Continuer ici dans la div questionnaires
-        within('.questionnaires') do
-          click_on 'Continuer ici'
-        end
+        all('button', text: 'Continuer ici').last.click
 
         expect(page).to have_current_path(inscription_structure_path)
 
@@ -291,9 +287,9 @@ usage: AvecUsage::USAGE_ENTREPRISES }
         compte_pro_connect.reload
 
         # L'usage "Eva: entreprises" doit forcer type_structure = "entreprise"
+        expect(nouvelle_structure.type_structure).to eq('entreprise')
         expect(nouvelle_structure.usage).to eq("Eva: entreprises")
         expect(compte_pro_connect.usage).to eq("Eva: entreprises")
-        expect(nouvelle_structure.type_structure).to eq('entreprise')
       end
     end
   end

@@ -117,8 +117,7 @@ a.grand-bouton {
   @include grand-bouton;
 }
 
-.petit-bouton,
-form input[type="submit"].petit-bouton {
+.petit-bouton {
   @include petit-bouton;
 }
 

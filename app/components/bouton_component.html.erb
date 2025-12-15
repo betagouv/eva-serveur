@@ -2,8 +2,6 @@
   <%= link_to @url, @params do %>
     <% content %>
   <% end %>
-<% elsif @tag == :submit %>
-  <%= submit_tag @url, @params.merge(type: "submit", name: "commit", value: content.strip) %>
 <% else %>
   <%= button_to @url, @params do %>
     <% content %>

@@ -60,7 +60,7 @@
 
         .action-simple {
           @include bouton-secondaire;
-          @include tres-petit-bouton;
+          @include petit-bouton;
           margin-left: -1.5rem;
         }
       }

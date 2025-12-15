@@ -39,7 +39,7 @@
 
     .action {
       @include bouton-secondaire;
-      @include tres-petit-bouton;
+      @include petit-bouton;
       height: 1.5rem;
       display: flex;
       justify-content: center;

@@ -49,13 +49,6 @@
 }
 
 @mixin petit-bouton() {
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 2.875rem;
-}
-
-@mixin tres-petit-bouton() {
   @include texte-xs();
   padding: .25rem .5rem;
   border-radius: 0.25rem;
@@ -170,7 +163,7 @@
 
 @mixin bouton-action() {
   @include bouton-secondaire;
-  @include tres-petit-bouton;
+  @include petit-bouton;
   height: 1.5rem;
   display: flex;
   justify-content: center;

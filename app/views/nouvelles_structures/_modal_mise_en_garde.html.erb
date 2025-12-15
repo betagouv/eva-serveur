@@ -7,10 +7,10 @@
           <p><%= md t(".message")%></p>
         </div>
         <div class='actions'>
-          <%= link_to t(".bouton_retour"), "javascript:history.back()", class: "bouton-secondaire tres-petit-bouton" %>
+          <%= link_to t(".bouton_retour"), "javascript:history.back()", class: "bouton-secondaire petit-bouton" %>
           <%= link_to t(".bouton"),
             url_for(params.permit(:code_postal)),
-            class: "bouton tres-petit-bouton" %>
+            class: "bouton petit-bouton" %>
         </div>
       </div>
     </div>

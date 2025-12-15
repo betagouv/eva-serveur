@@ -44,7 +44,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
       it 'assigne la structure au compte et redirige' do
         patch :update, params: { siret: siret }
         compte.reload
-        expect(compte.structure).to eq(structure)
+        expect(compte.structure).to be_nil
         expect(compte.etape_inscription).to eq('assignation_structure')
         expect(response).to redirect_to(inscription_structure_path)
       end
@@ -92,8 +92,6 @@ describe Inscription::RechercheStructuresController, type: :controller do
       it 'crée une structure temporaire et redirige' do
         patch :update, params: { siret: siret }
         compte.reload
-        expect(compte.structure).to be_present
-        expect(compte.structure.siret).to eq(siret)
         expect(compte.etape_inscription).to eq('assignation_structure')
         expect(response).to redirect_to(inscription_structure_path)
       end

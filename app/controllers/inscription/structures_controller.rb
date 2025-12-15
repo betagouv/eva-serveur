@@ -26,7 +26,7 @@ class Inscription::StructuresController < ApplicationController
 
   def set_compte_and_structure
     @compte = current_compte
-    @structure = @compte.structure
+    @structure = @compte&.structure
   end
 
   def prepare_structure_si_necessaire

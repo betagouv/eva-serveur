@@ -1,0 +1,5 @@
+fr:
+  layouts:
+    inscription_v2:
+      bouton_deconnexion: Me déconnecter
+      icone_bouton_deconnexion: "Icône de bouton de retour arrière"

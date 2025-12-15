@@ -39,4 +39,11 @@
       ) do %>
     Bouton avec ID
   <% end %>
+
+  <h2>Bouton primaire avec icone</h2>
+  <%= render BoutonComponent.new("#", type: :primary) do %>
+    <span class="fr-icon fr-icon--sm fr-icon-arrow-go-back-line" aria-label="Icône de bouton de retour arrière"></span>
+    Bouton Primaire
+  <% end %>
 </div> 
+

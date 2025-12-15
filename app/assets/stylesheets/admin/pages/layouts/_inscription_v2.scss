@@ -15,6 +15,7 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   background-size: cover;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 6rem 2rem;
 }
 
@@ -45,4 +46,9 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   font-weight: 400 !important;
 }
 
+.inscription_v2__sidebar-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 

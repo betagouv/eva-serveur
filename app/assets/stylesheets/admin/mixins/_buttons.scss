@@ -32,6 +32,12 @@
   &:focus {
     @include focus();
   }
+
+  .fr-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @mixin grand-bouton() {
@@ -39,6 +45,7 @@
   line-height: 1.5rem;
   padding: 0.5rem 1rem;
   border-radius: 2.875rem;
+  gap: $dsfr-spacing-2v;
 }
 
 @mixin petit-bouton() {
@@ -75,6 +82,7 @@
   @include base-boutons();
   color: $eva_main_blue;
   border-color: $eva_main_blue;
+  background-color: $grey-1000;
   box-shadow: none;
   &:not(.disabled):hover, &:not(.disabled):active {
     filter: brightness(96%);

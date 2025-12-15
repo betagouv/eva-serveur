@@ -108,7 +108,8 @@ button.bouton, a.bouton, .bouton {
   @include tres-petit-bouton;
 }
 
-.grand-bouton {
+.grand-bouton,
+a.grand-bouton {
   @include grand-bouton;
 }
 

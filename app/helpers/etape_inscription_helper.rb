@@ -11,8 +11,6 @@ module EtapeInscriptionHelper
       new_compte_registration_path
     when "preinscription"
       inscription_informations_compte_path
-    when "selection_usage"
-      inscription_selection_usage_path
     when "recherche_structure"
       inscription_recherche_structure_path
     when "assignation_structure"

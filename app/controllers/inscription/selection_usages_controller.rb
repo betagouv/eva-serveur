@@ -26,7 +26,7 @@ class Inscription::SelectionUsagesController < ApplicationController
   end
 
   def verifie_etape_inscription
-    return if @compte&.etape_inscription == "selection_usage"
+    return if @compte&.etape_inscription == "recherche_structure"
 
     redirect_to admin_dashboard_path
   end

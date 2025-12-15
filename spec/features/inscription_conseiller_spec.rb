@@ -115,14 +115,6 @@ describe 'Création de compte conseiller', type: :feature do
       check 'compte_cgu_acceptees'
       click_on 'Valider'
 
-      # Après preinscription, on est redirigé vers la page de sélection d'usage
-      expect(page).to have_current_path(inscription_selection_usage_path)
-      expect(page).to have_content('Campagnes de jeu')
-      expect(page).to have_content('Questionnaires')
-
-      # Sélectionne l'usage "Campagnes de jeu"
-      click_on 'Continuer ici', match: :first
-
       # Avec un SIRET, on est redirigé vers la page de création de structure
       expect(page).to have_current_path(inscription_structure_path)
 
@@ -133,7 +125,6 @@ describe 'Création de compte conseiller', type: :feature do
       )
       expect(compte_pro_connect.service_departement).to eq('Service RH')
       expect(compte_pro_connect.cgu_acceptees).to be true
-      expect(compte_pro_connect.usage).to eq "Eva: bénéficiaires"
       expect(compte_pro_connect.etape_inscription).to eq "assignation_structure"
     end
 
@@ -156,19 +147,12 @@ describe 'Création de compte conseiller', type: :feature do
         fill_in 'Service/Département', with: 'Service RH'
         check 'compte_cgu_acceptees'
         click_on 'Valider'
-
-        # Sélectionne l'usage
-        expect(page).to have_current_path(inscription_selection_usage_path)
-        click_on 'Continuer ici', match: :first
-
         expect(page).to have_current_path(inscription_structure_path)
         expect(page).to have_content('Rejoindre')
 
         click_on 'Rejoindre'
         compte_pro_connect.reload
         expect(compte_pro_connect.structure).to eq structure_avec_admin
-        # L'usage du compte ne doit pas être assigné à la structure existante
-        expect(structure_avec_admin.usage).not_to eq(compte_pro_connect.usage)
         expect(compte_pro_connect.etape_inscription).to eq('complet')
       end
     end
@@ -215,10 +199,6 @@ describe 'Création de compte conseiller', type: :feature do
         check 'compte_cgu_acceptees'
         click_on 'Valider'
 
-        # Sélectionne l'usage
-        expect(page).to have_current_path(inscription_selection_usage_path)
-        click_on 'Continuer ici', match: :first
-
         expect(page).to have_current_path(inscription_structure_path)
         expect(page).to have_content('Création de votre structure')
         expect(page).to have_content(siret)
@@ -226,15 +206,11 @@ describe 'Création de compte conseiller', type: :feature do
         expect(page).to have_button('Créer ma structure')
       end
 
-      it "permet de créer la structure avec l'usage du compte" do
+      it "permet de créer la structure" do
         select 'Conseillère ou conseiller emploi / formation / insertion', from: 'Fonction'
         fill_in 'Service/Département', with: 'Service RH'
         check 'compte_cgu_acceptees'
         click_on 'Valider'
-
-        # Sélectionne l'usage "Campagnes de jeu"
-        expect(page).to have_current_path(inscription_selection_usage_path)
-        click_on 'Continuer ici', match: :first
 
         expect(page).to have_current_path(inscription_structure_path)
 
@@ -257,39 +233,6 @@ describe 'Création de compte conseiller', type: :feature do
         expect(compte_pro_connect.structure).to eq(nouvelle_structure)
         expect(compte_pro_connect.role).to eq('admin')
         expect(compte_pro_connect.etape_inscription).to eq('complet')
-        # L'usage du compte doit être assigné à la structure créée
-        expect(nouvelle_structure.usage).to eq(compte_pro_connect.usage)
-        expect(nouvelle_structure.usage).to eq("Eva: bénéficiaires")
-      end
-
-      it "permet de créer une structure entreprise avec l'usage Questionnaires" do
-        select 'Conseillère ou conseiller emploi / formation / insertion', from: 'Fonction'
-        fill_in 'Service/Département', with: 'Service RH'
-        check 'compte_cgu_acceptees'
-        click_on 'Valider'
-
-        # Sélectionne l'usage "Questionnaires"
-        expect(page).to have_current_path(inscription_selection_usage_path)
-        all('button', text: 'Continuer ici').last.click
-
-        expect(page).to have_current_path(inscription_structure_path)
-
-        fill_in 'Nom de la structure', with: 'Ma Structure Entreprise'
-        select 'Mission locale', from: 'Type de structure'
-
-        expect do
-          click_on 'Créer ma structure'
-        end.to change(Structure, :count).by(1)
-
-        expect(page).to have_current_path(admin_dashboard_path)
-
-        nouvelle_structure = Structure.last
-        compte_pro_connect.reload
-
-        # L'usage "Eva: entreprises" doit forcer type_structure = "entreprise"
-        expect(nouvelle_structure.type_structure).to eq('entreprise')
-        expect(nouvelle_structure.usage).to eq("Eva: entreprises")
-        expect(compte_pro_connect.usage).to eq("Eva: entreprises")
       end
     end
   end

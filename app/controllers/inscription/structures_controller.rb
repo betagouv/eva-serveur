@@ -55,22 +55,16 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def creer_nouvelle_structure
-    ActiveRecord::Base.transaction do
-      @structure = FabriqueStructure.cree_depuis_siret(
-        @compte.siret_pro_connect,
-        structure_params.merge(usage: @compte.usage).compact
-      )
+    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
 
-      return render :show if @structure.blank?
+    @structure.assign_attributes(structure_params)
+    @compte.rejoindre_structure(@structure)
+    @compte.etape_inscription = :complet
 
-      @compte.rejoindre_structure(@structure)
-      @compte.etape_inscription = :complet
-
-      if @compte.save
-        redirige_vers_etape_inscription(@compte)
-      else
-        render :show
-      end
+    if @compte.save && @structure.save
+      redirige_vers_etape_inscription(@compte)
+    else
+      render :show
     end
   end
 

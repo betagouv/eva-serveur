@@ -50,6 +50,7 @@ form fieldset.actions li.cancel a,
   }
 }
 form fieldset.actions li.bouton-annuler a,
+form fieldset.actions li.cancel a,
 .action-secondaire {
   @include grand-bouton;
 }

@@ -28,17 +28,10 @@ active_admin_form_for [ :admin, resource ] do |f|
     r.input :position_client
     r.input :type_choix, as: :hidden, input_html: { value: :bon }
     label = r.object.illustration.attached? ? t(".label_illustration") : true
-    hint =
-      if r.object.illustration.attached?
-        image_tag(cdn_for(r.object.illustration),
-                  alt: r.object.illustration.filename)
-      else
-        t(".hint")
-      end
-    r.input :illustration, as: :file,
+    r.input :illustration, as: :image_file,
                            label: label,
                            input_html: { accept: illustration_content_types.join(",") },
-                           hint: hint
+                           hint: t(".hint")
   end
   f.actions do
     f.action :submit

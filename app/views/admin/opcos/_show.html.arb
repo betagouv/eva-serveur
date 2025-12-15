@@ -1,0 +1,19 @@
+attributes_table_for opco do
+  row :nom
+  row :financeur
+  row :logo do
+    if opco.logo.attached?
+      link_to cdn_for(opco.logo), target: "_blank", rel: "noopener" do
+        image_tag(cdn_for(opco.logo.variant(:defaut)),
+                  alt: opco.logo.filename,
+                  class: "image-preview")
+      end
+    else
+      span "Aucun logo"
+    end
+  end
+  row :financeur do |opco|
+    badge_financeur(opco)
+  end
+  row :created_at
+end

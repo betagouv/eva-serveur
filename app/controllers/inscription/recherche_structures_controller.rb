@@ -1,6 +1,5 @@
 class Inscription::RechercheStructuresController < ApplicationController
-  before_action :set_compte
-  before_action :verifie_etape_inscription
+  before_action :set_compte, :verifie_compte_connecte, :verifie_etape_inscription
 
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers

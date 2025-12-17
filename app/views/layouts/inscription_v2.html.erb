@@ -11,10 +11,10 @@
     </div>
     <div class="inscription_v2__sidebar-footer">
       <%= render BoutonComponent.new(
-        destroy_compte_session_path,
+        pro_connect_logout_path,
         type: :secondary,
         tag: :button,
-        method: :delete
+        method: :get
       ) do %>
         <span class="fr-icon fr-icon--sm fr-icon-arrow-go-back-line" aria-label="<%= t(".icone_bouton_deconnexion") %>"></span>
         <%= t(".bouton_deconnexion") %>

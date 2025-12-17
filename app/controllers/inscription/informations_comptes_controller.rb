@@ -2,13 +2,12 @@ class Inscription::InformationsComptesController < ApplicationController
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper
+  before_action :set_compte, :verifie_compte_connecte
 
   def show
-    @compte = current_compte
   end
 
   def update
-    @compte = current_compte
     @compte.termine_preinscription!
     if @compte.update(compte_parametres)
       redirige_vers_etape_inscription(@compte)
@@ -22,5 +21,9 @@ class Inscription::InformationsComptesController < ApplicationController
   def compte_parametres
     parametres = params.require(:compte).permit(:nom, :prenom, :email, :fonction,
 :service_departement, :cgu_acceptees)
+  end
+
+  def set_compte
+    @compte = current_compte
   end
 end

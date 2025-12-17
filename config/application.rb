@@ -39,6 +39,7 @@ module EvaServeur
     config.middleware.use ActionDispatch::Flash
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use Rack::Attack
     config.exceptions_app = CustomExceptionsAppWrapper.new(exceptions_app: routes)
 
     config.generators do |g|

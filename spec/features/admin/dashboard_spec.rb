@@ -185,4 +185,81 @@ describe 'Dashboard', type: :feature do
       )
     end
   end
+
+  context "quand le compte a un siret_pro_connect et doit compléter l'inscription" do
+    context "quand l'étape d'inscription est 'preinscription'" do
+      let!(:compte) do
+        create :compte_superadmin,
+               structure: ma_structure,
+               siret_pro_connect: '13002526500013',
+               etape_inscription: 'preinscription',
+               cgu_acceptees: true
+      end
+
+      it "redirige vers la page d'informations du compte" do
+        visit admin_path
+        expect(page).to have_current_path(inscription_informations_compte_path)
+      end
+    end
+
+    context "quand l'étape d'inscription est 'recherche_structure'" do
+      let!(:compte) do
+        create :compte_superadmin,
+               structure: ma_structure,
+               siret_pro_connect: '13002526500013',
+               etape_inscription: 'recherche_structure',
+               cgu_acceptees: true
+      end
+
+      it "redirige vers la page de recherche de structure" do
+        visit admin_path
+        expect(page).to have_current_path(inscription_recherche_structure_path)
+      end
+    end
+
+    context "quand l'étape d'inscription est 'assignation_structure'" do
+      let!(:compte) do
+        create :compte_superadmin,
+               structure: ma_structure,
+               siret_pro_connect: '13002526500013',
+               etape_inscription: 'assignation_structure',
+               cgu_acceptees: true
+      end
+
+      it "redirige vers la page d'assignation de structure" do
+        visit admin_path
+        expect(page).to have_current_path(inscription_structure_path)
+      end
+    end
+  end
+
+  context "quand le compte n'a pas de siret_pro_connect" do
+    let!(:compte) do
+      create :compte_superadmin,
+             structure: ma_structure,
+             siret_pro_connect: nil,
+             etape_inscription: 'preinscription',
+             cgu_acceptees: true
+    end
+
+    it "n'effectue pas de redirection" do
+      visit admin_path
+      expect(page).to have_current_path(admin_dashboard_path)
+    end
+  end
+
+  context "quand le compte a un siret_pro_connect mais l'inscription est complète" do
+    let!(:compte) do
+      create :compte_superadmin,
+             structure: ma_structure,
+             siret_pro_connect: '13002526500013',
+             etape_inscription: 'complet',
+             cgu_acceptees: true
+    end
+
+    it "n'effectue pas de redirection" do
+      visit admin_path
+      expect(page).to have_current_path(admin_dashboard_path)
+    end
+  end
 end

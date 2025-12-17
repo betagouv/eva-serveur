@@ -22,16 +22,25 @@ ActiveAdmin.register_page "Dashboard" do
   end
 
   controller do
+    include EtapeInscriptionHelper
     before_action do
       flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe if annonce.present?
       message_incitation_compte_personnel
     end
 
-    before_action :recupere_support, :recupere_evaluations, :recupere_actualites,
-                  :recupere_campagnes, :recupere_prise_en_main, :comptes_en_attente,
-                  :recupere_evaluations_sans_mise_en_action, :recupere_donnees_entreprise
+    before_action :redirige_vers_inscription, :recupere_support, :recupere_evaluations,
+                  :recupere_actualites, :recupere_campagnes, :recupere_prise_en_main,
+                  :comptes_en_attente, :recupere_evaluations_sans_mise_en_action,
+                  :recupere_donnees_entreprise
 
     private
+
+    def redirige_vers_inscription
+      return if current_compte.siret_pro_connect.blank?
+      return if !current_compte.doit_completer_inscription?
+
+      redirige_vers_etape_inscription(current_compte)
+    end
 
     def annonce
       @annonce ||= AnnonceGenerale.order(created_at: :desc).find_by(afficher: true)

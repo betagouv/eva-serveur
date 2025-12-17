@@ -15,6 +15,12 @@ class ApplicationController < ActionController::Base
     redirect_to admin_validation_necessaire_path
   end
 
+  def verifie_compte_connecte
+    return if current_compte.present?
+
+    redirect_to new_compte_session_path
+  end
+
   private
 
   def configure_permitted_parameters

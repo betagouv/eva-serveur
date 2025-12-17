@@ -1,6 +1,5 @@
 class Inscription::StructuresController < ApplicationController
-  before_action :set_compte_and_structure
-
+  before_action :set_compte_and_structure, :verifie_compte_connecte
   layout "inscription_v2"
   helper ::ActiveAdmin::ViewHelpers
   include EtapeInscriptionHelper

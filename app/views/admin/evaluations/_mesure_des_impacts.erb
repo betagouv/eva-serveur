@@ -2,38 +2,21 @@
 
 <div id="evaluation-impact-general" class="fr-mb-6w">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
-
-  <div class="panel">
+  <div class="panel fr-pb-0">
     <div class="fr-pl-4w fr-pr-4w evaluation-impact-general__resultats">
+
       <% if complet %>
-        <% interpretations = [
+        <% synthese = evaluation_impact_general.synthese %>
+        <% interpretations_impact = [
           :performance_collective,
           :agilite_organisationnelle,
           :securite_qualite,
           :mobilite_professionnelle
         ] %>
-        <% interpretations.each do |interpretation| %>
-          <% resultat = evaluation_impact_general.synthese[interpretation] %>
 
-          <%= render Evaluation::MesureImpactCalloutComponent.new(
-            titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-            resultat: resultat
-          ) %>
-        <% end %>
-
-        <% interpretations = [
-          :score_cout,
-          :score_strategie,
-          :score_numerique
-        ] %>
-        <% interpretations.each do |interpretation| %>
-          <% resultat = evaluation_impact_general.synthese[interpretation] %>
-
-          <%= render Evaluation::MesureImpactCalloutComponent.new(
-            titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-            resultat: resultat
-          ) %>
-        <% end %>
+        <%= render partial: "admin/evaluations/mesure_des_impacts_chart",
+                   locals: { synthese: synthese, interpretations_impact: interpretations_impact } %>
+        
       <% else %>
         <p><%= t(".incomplet.description") %></p>
 
@@ -43,5 +26,33 @@
         <% end %>
       <% end %>
     </div>
+    <div class="fr-pl-4w fr-pr-4w fr-pb-4v fr-pt-4v evaluation-impact-general__definitions">
+      <%= render partial: "admin/evaluations/mesure_des_impacts_definitions" %>
+    </div>
   </div>
+  <div class="panel">
+      <% if complet %>
+      <% interpretations_callout = [
+        :score_cout,
+        :score_strategie,
+        :score_numerique
+      ] %>
+      <% if interpretations_callout.any? %>
+          <div class="fr-pl-4w fr-pr-4w fr-mt-4w evaluation-impact-general__resultats">
+            <div class="impact-callouts">
+              <% interpretations_callout.each do |interpretation| %>
+                <% resultat = synthese[interpretation] %>
+
+                <%= render Evaluation::MesureImpactCalloutComponent.new(
+                  titre: t(".#{interpretation}.callout.titre.#{resultat}"),
+                  resultat: resultat,
+                  classes: [ "impact-callouts__item" ]
+                ) %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>

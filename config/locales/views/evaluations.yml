@@ -208,7 +208,54 @@ fr:
           titre: Votre taux de risque est de %{pourcentage_risque}%
           description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
       mesure_des_impacts:
-        titre: "Mesure des impacts"
+        titre: "Impacts"
+        chart:
+          aria_label: "Niveau d'impact par thématique"
+        labels:
+          performance_collective: "Performance collective"
+          agilite_organisationnelle: "Agilité organisationnelle"
+          securite_qualite: "Sécurité et qualité"
+          mobilite_professionnelle: "Mobilité professionnelle"
+        levels:
+          faible: "Faible"
+          moyen: "Moyen"
+          fort: "Fort"
+          tres_fort: "Très fort"
+        descriptions:
+          performance_collective:
+            faible: "Les difficultés en compétences de base n'ont pas d'impact significatif sur la performance de votre organisation."
+            moyen: "Le manque de compétences de base de vos effectifs occasionne quelques freins pour le fonctionnement optimal de votre organisation collective du travail."
+            fort: "Le manque de compétences de base de vos agents ou salariés a des impacts importants sur la performance de vos collectifs de travail (perte de temps collective)."
+            tres_fort: "Le manque de compétences de base de vos agents ou salariés est source de dysfonctionnements très importants qui altèrent la performance de vos collectifs de travail."
+          agilite_organisationnelle:
+            faible: "Les difficultés en compétences de base de vos effectifs n'ont aucune incidence sur la capacité de vos collectifs à évoluer dans le temps."
+            moyen: "Le manque de compétences de base de vos effectifs peut entraver vos projets d'évolution technologique ou organisationnelle, soyez vigilants dans l'évolution de la capacité de chacun à suivre le mouvement."
+            fort: "Le déficit en compétences de base de vos effectifs freine la capacité de votre organisation à être agile."
+            tres_fort: "Les difficultés importantes en compétences de base entraînent des blocages et des incapacités à évoluer dans vos pratiques et votre organisation."
+          securite_qualite:
+            faible: "Les difficultés en compétences de base n'occasionnent aucun risque sécuritaire ou règlementaire."
+            moyen: "Le manque de compétences de base de vos effectifs questionne la capacité de votre organisation à respecter les processus de travail, les règles et les consignes."
+            fort: "Le déficit en compétences de base de vos effectifs ne permet pas de garantir le respect des règles et consignes de travail occasionnant des insatisfactions tant internes qu'externes."
+            tres_fort: "Les difficultés importantes en compétences de base font prendre des risques importants à votre organisation (sécurité des personnes et des données en particulier)."
+          mobilite_professionnelle:
+            faible: "Les difficultés en compétences de base de vos effectifs n'ont pas d'impact sur la performance sociale de votre organisation et la gestion RH."
+            moyen: "Le manque de compétences de base de vos salariés ou agents peut expliquer une partie du niveau d'absentéisme de vos effectifs."
+            fort: "Le déficit en compétences de base de vos effectifs a des répercussions sur vos indicateurs de performance sociale (absentéisme, niveau de masse salariale en particulier)."
+            tres_fort: "Les difficultés importantes en compétences de base dégradent fortement vos indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale)."
+        definitions:
+          titre: "Définitions"
+          performance_collective:
+            titre: "Performance collective"
+            description: "Cet indicateur reflète l’impact de l’illettrisme sur la performance globale de l’entreprise, en termes de qualité, de productivité, de coopération et d’efficacité opérationnelle."
+          agilite_organisationnelle:
+            titre: "Agilité organisationnelle"
+            description: "Cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
+          securite_qualite:
+            titre: "Sécurité et qualité"
+            description: "Cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+          mobilite_professionnelle:
+            titre: "Mobilité professionnelle"
+            description: "Cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
         performance_collective:
           callout:
             titre:

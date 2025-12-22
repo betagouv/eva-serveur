@@ -1,0 +1,22 @@
+<div class="fr-stepper">
+  <h2 class="fr-stepper__title">
+    <%= titre_impact %>
+    <span class="fr-stepper__state">
+      <%= label_interpretation %>
+    </span>
+  </h2>
+  <div class="barre-segmentee">
+    <div class="barre-segmentee__graphique" aria-label="<%= t("admin.evaluations.mesure_des_impacts.chart.aria_label") %>">
+      <% if nombre_reussies.positive? %>
+        <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--impact" style="width: <%= pourcentage_questions(nombre_reussies) %>%"></div>
+      <% end %>
+      <% if nombre_non_passees.positive? %>
+        <div class="barre-segmentee__graphique-element barre-segmentee__graphique-element--non-passee" style="width: <%= pourcentage_questions(nombre_non_passees) %>%"></div>
+      <% end %>
+    </div>
+  </div>
+  <p class="fr-stepper__details">
+    <span class="fr-text--bold">Pourquoi :</span> <%= description %>
+  </p>
+</div>
+

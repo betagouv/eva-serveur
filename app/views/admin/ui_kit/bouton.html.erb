@@ -3,34 +3,103 @@
     <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
   </div>
 
-  <h1>Démo BoutonComponent</h1>
+  <h1 class="fr-h1 fr-mt-6w">Démo BoutonComponent</h1>
 
-  <h2>Bouton primaire</h2>
-  <%= render BoutonComponent.new("#", type: :primary) do %>
-    Bouton Primaire
-  <% end %>
+  <h2 class="fr-h2 fr-mt-6w">Bouton primaire MD - États</h2>
+  <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Défaut</span>
+      <%= render BoutonComponent.new("#", type: :primary, size: :md) do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Hover</span>
+      <%= render BoutonComponent.new("#", type: :primary, size: :md, class: "bouton-hover-demo") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Cliqué</span>
+      <%= render BoutonComponent.new("#", type: :primary, size: :md, class: "bouton--actif") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Désactivé</span>
+      <%= render BoutonComponent.new("#", type: :desactive, size: :md) do %>
+        Libellé
+      <% end %>
+    </div>
+  </div>
 
-  <h2>Bouton secondaire</h2>
-  <%= render BoutonComponent.new("#", type: :secondary) do %>
-    Bouton Secondaire
-  <% end %>
+  <h2 class="fr-h2 fr-mt-6w">Bouton secondaire MD - États</h2>
+  <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Défaut</span>
+      <%= render BoutonComponent.new("#", type: :secondary, size: :md) do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Hover</span>
+      <%= render BoutonComponent.new("#", type: :secondary, size: :md, class: "bouton-secondaire-hover-demo") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Cliqué</span>
+      <%= render BoutonComponent.new("#", type: :secondary, size: :md, class: "bouton--actif") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Désactivé</span>
+      <%= render BoutonComponent.new("#", type: :secondary, size: :md, class: "bouton--desactive") do %>
+        Libellé
+      <% end %>
+    </div>
+  </div>
 
-  <h2>Bouton désactivé</h2>
-  <%= render BoutonComponent.new("#", type: :desactive) do %>
-    Bouton Désactivé
-  <% end %>
+  <h2 class="fr-h2 fr-mt-6w">Bouton tertiaire MD - États</h2>
+  <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Défaut</span>
+      <%= render BoutonComponent.new("#", type: :tertiary, size: :md) do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Hover</span>
+      <%= render BoutonComponent.new("#", type: :tertiary, size: :md, class: "bouton-tertiaire-hover-demo") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Cliqué</span>
+      <%= render BoutonComponent.new("#", type: :tertiary, size: :md, class: "bouton--actif") do %>
+        Libellé
+      <% end %>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 12px; color: #666;">Désactivé</span>
+      <%= render BoutonComponent.new("#", type: :tertiary, size: :md, class: "bouton--desactive") do %>
+        Libellé
+      <% end %>
+    </div>
+  </div>
 
-  <h2>Petit Bouton (sm)</h2>
+  <h2 class="fr-mt-6w">Petit Bouton (sm)</h2>
   <%= render BoutonComponent.new("#", type: :primary, size: :sm) do %>
     Petit Bouton
   <% end %>
 
-  <h2>Très petit Bouton (xs)</h2>
+  <h2 class="fr-h2 fr-mt-6w">Très petit Bouton (xs)</h2>
   <%= render BoutonComponent.new("#", type: :primary, size: :xs) do %>
     Très petit Bouton
   <% end %>
 
-  <h2>Avec paramètres supplémentaires</h2>
+  <h2 class="fr-h2 fr-mt-6w">Avec paramètres supplémentaires</h2>
   <%= render BoutonComponent.new(
         "#",
         type: :primary,
@@ -40,7 +109,7 @@
     Bouton avec ID
   <% end %>
 
-  <h2>Bouton primaire avec icone</h2>
+  <h2 class="fr-h2 fr-mt-6w">Bouton primaire avec icone</h2>
   <%= render BoutonComponent.new("#", type: :primary) do %>
     <span class="fr-icon fr-icon--sm fr-icon-arrow-go-back-line" aria-label="Icône de bouton de retour arrière"></span>
     Bouton Primaire

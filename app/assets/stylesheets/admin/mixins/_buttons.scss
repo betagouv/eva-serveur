@@ -42,9 +42,10 @@
 
 @mixin grand-bouton() {
   font-size: 0.875rem;
-  line-height: 1.5rem;
+  line-height: 1.714rem;
+  font-weight: 500;
   padding: 0.5rem 1rem;
-  border-radius: 2.875rem;
+  border-radius: 2rem;
   gap: $dsfr-spacing-2v;
 }
 
@@ -64,13 +65,35 @@
 
 @mixin bouton-primaire() {
   @include base-boutons();
-  color: $eva_light;
-  border-color: $eva_main_blue;
-  background-color: $eva_main_blue;
-  &:not(.disabled):hover, &:not(.disabled):active {
+  color: $blue-france-975;
+  border-color: $blue-france-sun-113;
+  background-color: $blue-france-sun-113;
+  border-radius: 2rem;
+  
+  // État Hover
+  &:not(.disabled):not(.bouton--actif):hover {
     border-color: $blue-france-sun-113-hover;
     background-color: $blue-france-sun-113-hover;
+    color: $blue-france-975;
   }
+  
+  // État Cliqué (active)
+  &:not(.disabled):active,
+  &.bouton--actif {
+    border-color: $blue-france-sun-113-active;
+    background-color: $blue-france-sun-113-active;
+    color: $blue-france-975;
+  }
+  
+  // État Désactivé
+  &:disabled,
+  &.bouton--desactive {
+    cursor: not-allowed;
+    color: $grey-625;
+    background-color: $grey-925;
+    border-color: $grey-925;
+  }
+  
   &:disabled:hover {
     color: $grey-625;
     background-color: $grey-925;
@@ -80,25 +103,91 @@
 
 @mixin bouton-secondaire() {
   @include base-boutons();
-  color: $eva_main_blue;
-  border-color: $eva_main_blue;
-  background-color: $grey-1000;
+  color: $blue-france-sun-113;
+  border-color: $blue-france-sun-113;
+  background-color: transparent;
+  border-radius: 2rem;
   box-shadow: none;
-  &:not(.disabled):hover, &:not(.disabled):active {
-    filter: brightness(96%);
+  
+  // État Hover
+  &:not(.disabled):not(.bouton--actif):hover {
+    border-color: $blue-france-sun-113;
+    background-color: rgba(0, 0, 0, 0.04);
+    color: $blue-france-sun-113;
     text-shadow: none;
     box-shadow: none;
     background-image: none;
-    background-color: #FFFFFF;
+  }
+  
+  // État Cliqué (active)
+  &:not(.disabled):active,
+  &.bouton--actif {
+    border-color: $blue-france-sun-113;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: $blue-france-sun-113;
+    text-shadow: none;
+    box-shadow: none;
+    background-image: none;
+  }
+  
+  // État Désactivé
+  &:disabled,
+  &.bouton--desactive {
+    cursor: not-allowed;
+    border-color: $grey-925;
+    color: $grey-625;
+    background-color: transparent;
+  }
+  
+  &:disabled:hover {
+    border-color: $grey-925;
+    color: $grey-625;
+    background-color: transparent;
   }
 }
 
 @mixin bouton-tertiaire {
-  @include bouton-secondaire;
+  @include base-boutons();
+  color: $blue-france-sun-113;
   border-color: $grey-900;
-
-  &:hover, &:active {
-    background-color: $grey-1000-hover;
+  background-color: transparent;
+  border-radius: 2rem;
+  box-shadow: none;
+  
+  // État Hover
+  &:not(.disabled):not(.bouton--actif):hover {
+    border-color: $grey-900;
+    background-color: rgba(0, 0, 0, 0.04);
+    color: $blue-france-sun-113;
+    text-shadow: none;
+    box-shadow: none;
+    background-image: none;
+  }
+  
+  // État Cliqué (active)
+  &:not(.disabled):active,
+  &.bouton--actif {
+    border-color: $grey-900;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: $blue-france-sun-113;
+    text-shadow: none;
+    box-shadow: none;
+    background-image: none;
+  }
+  
+  // État Désactivé
+  &:disabled,
+  &.bouton--desactive {
+    cursor: not-allowed;
+    border-color: $grey-925;
+    color: $grey-625;
+    background-color: transparent;
+  }
+  
+  &:disabled:hover {
+    border-color: $grey-925;
+    color: $grey-625;
+    background-color: transparent;
   }
 }
 

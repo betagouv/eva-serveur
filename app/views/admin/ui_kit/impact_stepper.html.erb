@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo ImpactStepperComponent</h1>
+
+  <h2>Impact Faible</h2>
+  <%= render ImpactStepperComponent.new(
+        interpretation: :performance_collective,
+        niveau: :faible,
+        icone: "fr-icon-team-line"
+      ) %>
+  <br>
+
+  <h2>Impact Moyen</h2>
+  <%= render ImpactStepperComponent.new(
+        interpretation: :agilite_organisationnelle,
+        niveau: :moyen,
+        icone: "fr-icon-flashlight-line"
+      ) %>
+  <br>
+
+  <h2>Impact Fort</h2>
+  <%= render ImpactStepperComponent.new(
+        interpretation: :securite_qualite,
+        niveau: :fort,
+        icone: "fr-icon-shield-line"
+      ) %>
+  <br>
+
+  <h2>Impact Très Fort</h2>
+  <%= render ImpactStepperComponent.new(
+        interpretation: :mobilite_professionnelle,
+        niveau: :tres_fort,
+        icone: "fr-icon-trophy-line"
+      ) %>
+  <br>
+
+  <h2>Sans icône</h2>
+  <%= render ImpactStepperComponent.new(
+        interpretation: :performance_collective,
+        niveau: :fort,
+        icone: nil
+      ) %>
+</div>
+

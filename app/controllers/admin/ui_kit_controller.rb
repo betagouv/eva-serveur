@@ -7,6 +7,7 @@ module Admin
     # def bouton_ajouter_une_structure; end commenté pour le moment car besoin d'une resource
     def bouton_copier; end
     def barre_segmentee; end
+    def impact_stepper; end
     def card; end
     def carte; end
     def carte_v2; end

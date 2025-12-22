@@ -71,6 +71,8 @@ button.bouton, a.bouton, .bouton {
 
   &.bouton--actif, &.bouton--actif:hover {
     background-color: $blue-france-sun-113-active;
+    border-color: $blue-france-sun-113-active;
+    color: $blue-france-975;
     cursor: unset;
   }
 
@@ -104,8 +106,19 @@ button.bouton, a.bouton, .bouton {
   @include bouton-secondaire;
 
   &.bouton--actif, &.bouton--actif:hover {
-    filter: brightness(92%);
+    border-color: $blue-france-sun-113;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: $blue-france-sun-113;
     cursor: unset;
+  }
+  
+  &.bouton--desactive {
+    pointer-events: none;
+    &, &:link, :visited {
+      color: $grey-625;
+    }
+    border-color: $grey-925;
+    background-color: transparent;
   }
 }
 .tres-petit-bouton {
@@ -128,4 +141,43 @@ form input[type="submit"].petit-bouton {
 
 .bouton-actions {
   @include bouton-action;
+}
+
+// Classe pour simuler l'état hover dans l'UI-kit
+.bouton-hover-demo {
+  border-color: $blue-france-sun-113-hover !important;
+  background-color: $blue-france-sun-113-hover !important;
+  color: $blue-france-975 !important;
+}
+
+.bouton-secondaire-hover-demo {
+  border-color: $blue-france-sun-113 !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: $blue-france-sun-113 !important;
+}
+
+.bouton-tertiaire {
+  @include bouton-tertiaire;
+
+  &.bouton--actif, &.bouton--actif:hover {
+    border-color: $grey-900;
+    background-color: rgba(0, 0, 0, 0.08);
+    color: $blue-france-sun-113;
+    cursor: unset;
+  }
+  
+  &.bouton--desactive {
+    pointer-events: none;
+    &, &:link, :visited {
+      color: $grey-625;
+    }
+    border-color: $grey-925;
+    background-color: transparent;
+  }
+}
+
+.bouton-tertiaire-hover-demo {
+  border-color: $grey-900 !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: $blue-france-sun-113 !important;
 }

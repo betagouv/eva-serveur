@@ -7,6 +7,9 @@ class BoutonComponent < ViewComponent::Base
   SECONDARY_CLASSES = %w[
     bouton-secondaire
   ].freeze
+  TERTIARY_CLASSES = %w[
+    bouton-tertiaire
+  ].freeze
   DESACTIVE_CLASSES = %w[
     bouton
     bouton--desactive
@@ -15,6 +18,7 @@ class BoutonComponent < ViewComponent::Base
   BUTTON_TYPE_MAPPINGS = {
     primary: PRIMARY_CLASSES,
     secondary: SECONDARY_CLASSES,
+    tertiary: TERTIARY_CLASSES,
     desactive: DESACTIVE_CLASSES
   }.freeze
 

@@ -36,3 +36,15 @@ h6 {
   @include titre;
   @include h6;
 }
+
+.body-sm {
+  @include body-sm;
+}
+
+.h6-xxs {
+  @include h6-xxs;
+}
+
+.body-xs {
+  @include body-xs;
+}

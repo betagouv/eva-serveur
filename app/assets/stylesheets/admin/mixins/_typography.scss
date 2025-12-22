@@ -50,3 +50,30 @@
   font-weight: 700;
   line-height: 28px;
 }
+
+@mixin body-sm() {
+  color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+  font-family: var(--Body-SM---Texte-dtail-Font, "Work Sans");
+  font-size: var(--Body-SM---Texte-dtail-Size, 14px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Body-SM---Texte-dtail-Line-Height, 24px);
+}
+
+@mixin h6-xxs() {
+  color: var(--light-decisions-text-text-title-grey, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: var(--Titres-H6---XXS-Size, 20px);
+  font-style: normal;
+  font-weight: 700;
+  line-height: var(--Titres-H6---XXS-Line-Height, 28px);
+}
+
+@mixin body-xs() {
+  color: var(--light-decisions-text-text-mention-grey, #666);
+  font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
+  font-size: var(--Body-XS---Texte-mention-Size, 12px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Body-XS---Texte-mention-Line-Height, 20px);
+}

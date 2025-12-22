@@ -1,0 +1,18 @@
+<div class="impact-steppers">
+  <% interpretations_impact.each do |interpretation| %>
+    <% resultat = synthese[interpretation] %>
+    <% 
+      icone = case interpretation
+      when :performance_collective then "fr-icon-team-line"
+      when :agilite_organisationnelle then "fr-icon-flashlight-line"
+      when :securite_qualite then "fr-icon-shield-line"
+      when :mobilite_professionnelle then "fr-icon-trophy-line"
+      end
+    %>
+    <%= render ImpactStepperComponent.new(
+          interpretation: interpretation,
+          niveau: resultat,
+          icone: icone
+        ) %>
+  <% end %>
+</div>

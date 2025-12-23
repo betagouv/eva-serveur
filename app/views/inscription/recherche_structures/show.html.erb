@@ -12,24 +12,22 @@
     <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12">
-          <div class="fr-input-group">
-            <%= f.label :siret, t(".label_siret"), class: "fr-label" %>
-            <div class="fr-hint-text"><%= t(".hint_siret") %></div>
-            <%= f.text_field :siret, 
-                value: @siret,
-                class: "fr-input",
-                pattern: "[0-9\\s]{14,20}",
-                placeholder: "12345678901234",
-                required: true,
-                autocomplete: "off" %>
-          </div>
-        </div>
-        <div class="fr-col-12">
-          <%= link_to t(".lien_annuaire"), 
-              "https://annuaire-entreprises.data.gouv.fr/?mtm_campaign=proconnect",
-              target: "_blank",
-              rel: "noopener noreferrer",
-              class: "fr-link fr-link--icon-right fr-icon-external-link-line" %>
+          <%= render InputComponent.new(
+            id: "siret",
+            label: t(".label_siret"),
+            hint: t(".hint_siret"),
+            form: f,
+            method: :siret,
+            type: "text",
+            value: @siret,
+            pattern: "[0-9\\s]{14,20}",
+            placeholder: "12345678901234",
+            required: true,
+            autocomplete: "off",
+            link_text: t(".lien_annuaire"),
+            link_url: "https://annuaire-entreprises.data.gouv.fr/?mtm_campaign=proconnect",
+            link_html: { target: "_blank", rel: "noopener noreferrer" }
+          ) %>
         </div>
       </div>
     <% end %>

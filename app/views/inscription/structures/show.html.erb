@@ -94,7 +94,13 @@
         <%= render CarteV2Component.new do %>
           <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
             <div class="fr-col-12">
-              <%= form.input :nom, label: t(".nom_structure_label"), input_html: { class: "fr-input" } %>
+              <%= render InputComponent.new(
+                id: "structure_nom",
+                label: t(".nom_structure_label"),
+                form: form,
+                method: :nom,
+                type: "text"
+              ) %>
             </div>
             <div class="fr-col-12">
               <%= form.input :type_structure, as: :select, collection: collection_types_structures, include_blank: t(".choisir_type"), label: t(".type_structure_label"), input_html: { class: "fr-select" } %>

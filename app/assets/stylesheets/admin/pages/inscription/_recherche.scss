@@ -1,3 +1,6 @@
-.page-recherche-structure .inscription-recherche-structure__actions-droite {
-  text-align: right;
+.page-recherche-structure .recherche-structure-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
 }

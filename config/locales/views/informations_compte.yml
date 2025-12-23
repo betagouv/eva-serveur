@@ -4,8 +4,18 @@ fr:
       show:
         titre: Informations personnelles
         sous_titre: Complétez votre inscription.
-        titre_carte: Confirmez vos informations
+        titre_carte: Informations personnelles
+        sous_titre_carte: "Les champs notés * sont obligatoires."
         valider: Valider
+        continuer: Continuer
+        quitter: Quitter
+        label_nom: Nom
+        label_prenom: Prénom
+        label_email: Adresse e-mail
+        hint_email: Cette adresse est utilisée pour les échanges liés à votre compte.
+        label_fonction: Fonction
+        label_service_departement: Service
+        hint_service_departement: "Exemple : logistique, marketing, ressources humaines"
     selection_usages:
       show:
         titre: Créez un compte qui vous ressemble

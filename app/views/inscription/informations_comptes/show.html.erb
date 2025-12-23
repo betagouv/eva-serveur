@@ -9,26 +9,25 @@
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <div class="page-informations-compte">
-  <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
+  <%= render CarteV2Component.new(titre: t(".titre_carte"), sous_titre: t(".sous_titre_carte")) do %>
     <%= semantic_form_for @compte, url: inscription_informations_compte_path do |compte| %>
       <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :fonction, :service_departement ]) %>
-      
       <%= compte.inputs do %>
         <div class="fr-grid-row fr-grid-row--gutters">
-          <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_nom",
-              label: t("activerecord.attributes.compte.nom"),
+              label: t(".label_nom"),
               form: compte,
               method: :nom,
               type: "text",
               required: true
             ) %>
           </div>
-          <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_prenom",
-              label: t("activerecord.attributes.compte.prenom"),
+              label: t(".label_prenom"),
               form: compte,
               method: :prenom,
               type: "text",
@@ -38,26 +37,28 @@
           <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_email",
-              label: t("activerecord.attributes.compte.email"),
+              label: t(".label_email"),
+              hint: t(".hint_email"),
               form: compte,
               method: :email,
               type: "email",
               required: true
             ) %>
           </div>
-          <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_service_departement",
-              label: t("activerecord.attributes.compte.service_departement"),
+              label: t(".label_service_departement"),
+              hint: t(".hint_service_departement"),
               form: compte,
               method: :service_departement,
               type: "text"
             ) %>
           </div>
-          <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_fonction",
-              label: t("activerecord.attributes.compte.fonction"),
+              label: t(".label_fonction"),
               form: compte,
               method: :fonction,
               as: :select,
@@ -66,12 +67,15 @@
             ) %>
           </div>
           <div class="fr-col-12">
-            <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>
-            <%= compte.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
-            <div class="indication-champs-obligatoires">* Champs obligatoires</div>
+            <%= compte.input :cgu_acceptees, label: raw("J'accepte les&nbsp;" + link_to("conditions générales d'utilisation d'eva", cgu_path, target: "_blank", rel: "noopener noreferrer").to_s), required: true %>
           </div>
           <div class="fr-col-12">
-            <%= compte.action :submit, label: t(".valider"), button_html: { class: "valider-compte-bouton" }, wrapper_html: { class: "valider-compte-bouton-containeur" } %>
+            <div class="informations-compte-actions">
+              <%= button_to pro_connect_logout_path, method: :get, class: "bouton-tertiaire grand-bouton informations-compte-quitter", form: { style: "display: inline;" } do %>
+                <%= t(".quitter") %>
+              <% end %>
+              <%= submit_tag t(".continuer"), class: "bouton grand-bouton valider-compte-bouton disabled", disabled: true %>
+            </div>
           </div>
         </div>
       <% end %>

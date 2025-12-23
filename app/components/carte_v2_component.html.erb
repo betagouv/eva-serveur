@@ -7,6 +7,9 @@
       <%= image_tag @image, alt: t(".image_alt") %>
     </div>
   <% end %>
+  <% if @sous_titre.present? %>
+    <p class="carte-v2__sous-titre"><%= @sous_titre %></p>
+  <% end %>
   <div class="carte-v2__content">
     <%= content %>
   </div>  

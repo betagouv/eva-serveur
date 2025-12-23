@@ -19,11 +19,21 @@
   color: $couleur-accent-erreur;
 }
 
-.page-informations-compte .valider-compte-bouton-containeur {
+.page-informations-compte .informations-compte-champs-obligatoires {
+  @include body-xs-mention();
+}
+
+.page-informations-compte .informations-compte-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
   width: 100%;
 }
 
 .page-informations-compte .valider-compte-bouton {
   @include grand-bouton();
-  width: 100% !important;
+}
+
+.page-informations-compte label[for="compte_cgu_acceptees"] abbr[title] {
+  color: #000;
 }

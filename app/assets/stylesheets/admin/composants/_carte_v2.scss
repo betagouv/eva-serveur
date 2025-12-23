@@ -16,6 +16,12 @@
     align-self: flex-start;
   }
 
+  &__sous-titre {
+    @include body-xs-mention();
+    margin: 0;
+    align-self: flex-start;
+  }
+
   &__image img {
     width: 100%;
     object-fit: cover;

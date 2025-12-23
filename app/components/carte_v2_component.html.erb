@@ -1,8 +1,6 @@
 <div class="carte-v2 <%= @classes %>">
   <% if @titre.present? %>
-    <div class="carte-v2__header">
-      <div class="carte-v2__title"><%= @titre %></div>
-    </div>
+    <h5 class="carte-v2__title"><%= @titre %></h5>
   <% end %>
   <% if @image.present? %>
     <div class="carte-v2__image">

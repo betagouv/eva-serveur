@@ -1,19 +1,24 @@
 .carte-v2 {
   display: flex;
   flex-direction: column;
-  border: 1px solid $grey-900;
-  border-radius: $dsfr-radius-md;
-  background-color: white;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
+  padding: var(--Space-7W, 56px) 102px;
+  border: 1px solid var(--color-border-default, #DDD);
+  background: var(--color-background-default-grey, #FFF);
   overflow: hidden;
 
-  &__header {
-    background-color: var(--background-active-blue-france);
-    padding: 1.375rem 1.5rem;
-  }
-
   &__title {
-    @include h6();
-    color: white;
+    color: var(--color-text-title, #161616);
+    font-family: var(--Titres-Font, Quicksand);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    margin: 0;
+    align-self: flex-start;
   }
 
   &__image img {
@@ -22,7 +27,6 @@
   }
 
   &__content {
-    padding: 1.5rem;
     height: 100%;
   }
 }

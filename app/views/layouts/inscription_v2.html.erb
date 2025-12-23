@@ -4,23 +4,7 @@
 
 <% content_for :content_block do %>
   <div class="inscription_v2__sidebar">
-    <div class="inscription_v2__sidebar-menu" %>
-      <h1 class="inscription_v2__sidebar-titre"><%= yield :titre %></h1>
-      <% if yield(:sous_titre).present? %>
-        <h2 class="inscription_v2__sidebar-sous-titre"><%= yield :sous_titre %></h2>
-      <% end %>
-    </div>
-    <div class="inscription_v2__sidebar-footer">
-      <%= render BoutonComponent.new(
-        pro_connect_logout_path,
-        type: :secondary,
-        tag: :button,
-        method: :get
-      ) do %>
-        <span class="fr-icon fr-icon--sm fr-icon-arrow-go-back-line" aria-label="<%= t(".icone_bouton_deconnexion") %>"></span>
-        <%= t(".bouton_deconnexion") %>
-      <% end %>
-    </div>
+    <%= image_tag "eva-logo-bleu.svg", alt: "Eva", class: "inscription_v2__sidebar-logo" %>
   </div>
   <div class="inscription_v2__content">
     <div class="inscription_v2__content__inner">

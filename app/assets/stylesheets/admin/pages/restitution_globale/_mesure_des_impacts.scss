@@ -18,45 +18,7 @@
 // Steppers d'impact
 .impact-steppers {
   display: grid;
-  gap: $dsfr-spacing-4v;
-}
-
-.impact-steppers .fr-stepper__title {
-  @include h6-xxs;
-}
-
-.impact-steppers .fr-stepper__state {
-  display: inline-flex;
-  align-items: center;
-  gap: $dsfr-spacing-1v;
-
-  .fr-icon-sm {
-    color: $blue-france-sun-113;
-    width: 12px;
-    height: 12px;
-    font-size: 12px;
-  }
-
-  > *:not(.fr-icon-sm) {
-    @include body-sm;
-  }
-}
-
-.impact-steppers .fr-stepper .barre-segmentee {
-  margin-top: $dsfr-spacing-2v;
-  margin-bottom: 0;
-}
-
-.impact-steppers .fr-stepper .barre-segmentee__graphique {
-  margin-top: 0;
-}
-
-.impact-steppers .fr-stepper .barre-segmentee__graphique-element.barre-segmentee__graphique-element--impact {
-  background-color: #000091 !important;
-}
-
-.impact-steppers .fr-stepper__details {
-  @include body-xs;
+  gap: $dsfr-spacing-8v;
 }
 
 // Callouts d'impact

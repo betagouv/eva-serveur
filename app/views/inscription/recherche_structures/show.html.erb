@@ -29,22 +29,20 @@
             link_html: { target: "_blank", rel: "noopener noreferrer" }
           ) %>
         </div>
-      </div>
-    <% end %>
-
-    <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-mt-6v">
-      <div class="fr-col-12 fr-col-md-6 fr-pt-0 fr-pb-0">
-        <%= render BoutonComponent.new(
+        <div class="fr-col-12">
+          <div class="recherche-structure-actions">
+            <%= render BoutonComponent.new(
               inscription_informations_compte_path,
-              type: :secondary,
+              type: :tertiary,
+              size: :md,
               tag: :a
             ) do %>
-          <%= t(".bouton_retour") %>
-        <% end %>
+              <%= t(".bouton_retour") %>
+            <% end %>
+            <%= f.submit t(".bouton_valider"), class: "bouton grand-bouton recherche-structure-submit disabled", id: "recherche-structure-submit", disabled: true %>
+          </div>
+        </div>
       </div>
-      <div class="fr-col-12 fr-col-md-6 fr-pt-0 fr-pb-0 inscription-recherche-structure__actions-droite">
-        <%= f.submit t(".bouton_valider"), class: "fr-btn fr-btn--primary" %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

@@ -44,12 +44,12 @@ fr:
       show:
         titre: Dans quelle structure travaillez-vous ?
         sous_titre: Dans un premier temps, merci de regarder si votre structure est déjà enregistrée.
-        titre_carte: Rechercher ma structure
-        label_siret: Indiquez le numéro de SIRET de votre structure
-        hint_siret: Il est composé de 14 chiffres
-        lien_annuaire: Retrouver votre SIRET sur l'Annuaire des Entreprises
-        bouton_retour: Retour
-        bouton_valider: Valider
+        titre_carte: Identification de la structure
+        label_siret: Numéro SIRET
+        hint_siret: Le numéro SIRET est composé de 14 chiffres
+        lien_annuaire: Retrouver votre numéro SIRET sur L’Annuaire des Entreprises 
+        bouton_retour: Précédent
+        bouton_valider: Continuer
         erreur_siret_obligatoire: Le numéro de SIRET est obligatoire.
         erreur_siret_invalide: Le numéro de SIRET doit être composé de 14 chiffres.
         erreur_structure_non_trouvee: Aucune structure n'a été trouvée avec ce numéro de SIRET. Veuillez vérifier le numéro saisi.

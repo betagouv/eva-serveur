@@ -16,6 +16,7 @@
 //= require menu_mobile
 //= require bouton_menu_actions
 //= require cgu
+//= require recherche_structure
 //= require clipboard
 //= require evaluation
 //= require simple_mde

@@ -114,6 +114,37 @@
     </div>
   </div>
 
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie select (liste déroulante)</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "select-hint",
+      label: "Libellé pour liste déroulante",
+      hint: "Texte de description additionnel",
+      collection: [
+        [ "Option 1", "1" ],
+        [ "Option 2", "2" ],
+        [ "Option 3", "3" ]
+      ],
+      include_blank: "Sélectionner une option"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Select requis</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "select-required",
+      label: "Libellé pour liste déroulante",
+      hint: "Ce champ est obligatoire",
+      collection: [
+        [ "Option 1", "1" ],
+        [ "Option 2", "2" ],
+        [ "Option 3", "3" ]
+      ],
+      include_blank: "Sélectionner une option",
+      required: true
+    ) %>
+  </div>
+
   <h2 class="fr-h2 fr-mt-6w">Utilisation avec form builder</h2>
   <div style="max-width: 600px;">
     <%= form_with url: "#", local: true do |f| %>

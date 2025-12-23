@@ -55,7 +55,15 @@
             ) %>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <%= compte.input :fonction, as: :select, collection: collection_fonctions, wrapper_html: { class: "fleche-select" } %>
+            <%= render InputComponent.new(
+              id: "compte_fonction",
+              label: t("activerecord.attributes.compte.fonction"),
+              form: compte,
+              method: :fonction,
+              as: :select,
+              collection: collection_fonctions,
+              include_blank: nil
+            ) %>
           </div>
           <div class="fr-col-12">
             <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>

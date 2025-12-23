@@ -17,3 +17,12 @@
   text-underline-position: from-font;
 }
 
+.fr-input-group,
+.fr-select-group {
+  .fr-label {
+    abbr[title] {
+      color: $couleur-texte !important;
+    }
+  }
+}
+

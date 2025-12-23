@@ -16,7 +16,7 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 6rem 2rem;
+  padding-top: 3.5rem;
 }
 
 .inscription_v2__content {
@@ -44,6 +44,13 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   color: $grey-50;
   @include texte();
   font-weight: 400 !important;
+}
+
+.inscription_v2__sidebar-logo {
+  align-self: center;
+  width: 6rem;
+  height: 5.125rem;
+  aspect-ratio: 48/41;
 }
 
 .inscription_v2__sidebar-footer {

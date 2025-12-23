@@ -52,7 +52,9 @@
       </div>
     <% end %>
   </div>
-  <%= render partial: "components/footer" %>
+  <% unless content_for?(:hide_footer) %>
+    <%= render partial: "components/footer" %>
+  <% end %>
 </div>
 </body>
 </html>

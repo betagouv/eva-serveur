@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1 class="fr-h1 fr-mt-6w">Démo InputComponent</h1>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie simple</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "text-input",
+      label: "Libellé champ de saisie",
+      hint: "Texte de description additionnel"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec placeholder</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "text-input-placeholder",
+      label: "Libellé champ de saisie",
+      hint: "Texte de description additionnel",
+      placeholder: "Exemple de placeholder"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie requis</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "text-input-required",
+      label: "Libellé champ de saisie",
+      hint: "Ce champ est obligatoire",
+      required: true
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec valeur</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "text-input-value",
+      label: "Libellé champ de saisie",
+      value: "Valeur pré-remplie"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec pattern (SIRET)</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "siret-input",
+      label: "Numéro SIRET",
+      hint: "14 chiffres",
+      placeholder: "12345678901234",
+      pattern: "[0-9\\s]{14,20}",
+      required: true,
+      autocomplete: "off"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec lien</h2>
+  <div style="max-width: 600px;">
+    <%= render InputComponent.new(
+      id: "siret-input-link",
+      label: "Numéro SIRET",
+      hint: "Le numéro SIRET est composé de 14 chiffres",
+      placeholder: "12345678901234",
+      pattern: "[0-9\\s]{14,20}",
+      required: true,
+      autocomplete: "off",
+      link_text: "Retrouver votre numéro SIRET sur L'Annuaire des Entreprises",
+      link_url: "https://annuaire-entreprises.data.gouv.fr/?mtm_campaign=proconnect",
+      link_html: { target: "_blank", rel: "noopener noreferrer" }
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Différents types d'input</h2>
+  <div style="max-width: 600px; display: flex; flex-direction: column; gap: 2rem;">
+    <div>
+      <h3 class="fr-h3">Email</h3>
+      <%= render InputComponent.new(
+        id: "email-input",
+        label: "Adresse email",
+        type: "email",
+        placeholder: "exemple@email.fr"
+      ) %>
+    </div>
+
+    <div>
+      <h3 class="fr-h3">Mot de passe</h3>
+      <%= render InputComponent.new(
+        id: "password-input",
+        label: "Mot de passe",
+        type: "password"
+      ) %>
+    </div>
+
+    <div>
+      <h3 class="fr-h3">Téléphone</h3>
+      <%= render InputComponent.new(
+        id: "tel-input",
+        label: "Numéro de téléphone",
+        type: "tel",
+        placeholder: "01 23 45 67 89"
+      ) %>
+    </div>
+
+    <div>
+      <h3 class="fr-h3">Nombre</h3>
+      <%= render InputComponent.new(
+        id: "number-input",
+        label: "Nombre",
+        type: "number",
+        placeholder: "123"
+      ) %>
+    </div>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Utilisation avec form builder</h2>
+  <div style="max-width: 600px;">
+    <%= form_with url: "#", local: true do |f| %>
+      <%= render InputComponent.new(
+        id: "form-siret",
+        label: "Numéro SIRET",
+        hint: "14 chiffres",
+        form: f,
+        method: :siret,
+        type: "text",
+        placeholder: "12345678901234",
+        pattern: "[0-9\\s]{14,20}",
+        required: true,
+        autocomplete: "off"
+      ) %>
+    <% end %>
+  </div>
+</div>
+

@@ -23,27 +23,53 @@ class InputComponent < ViewComponent::Base
     input_html: {},
     **html_options
   )
+    assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern, autocomplete)
+    assign_form_attributes(form, method, name)
+    assign_button_attributes(button_text, button_type, button_action)
+    assign_link_attributes(link_text, link_url, link_html)
+    @input_html = input_html
+    @html_options = html_options
+  end
+
+  private
+
+  def assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern, autocomplete)
     @id = id
     @label = label
     @hint = hint
-    @form = form
-    @method = method
-    @name = name || (form && method ? nil : id)
     @value = value
     @type = type
     @placeholder = placeholder
     @required = required
     @pattern = pattern
     @autocomplete = autocomplete
+  end
+
+  def assign_form_attributes(form, method, name)
+    @form = form
+    @method = method
+    @name = name || compute_default_name
+  end
+
+  def assign_button_attributes(button_text, button_type, button_action)
     @button_text = button_text
-    @button_type = button_type # :button ou :action
+    @button_type = button_type
     @button_action = button_action
+  end
+
+  def assign_link_attributes(link_text, link_url, link_html)
     @link_text = link_text
     @link_url = link_url
     @link_html = link_html
-    @input_html = input_html
-    @html_options = html_options
   end
+
+  def compute_default_name
+    return nil if @form.present? && @method.present?
+
+    @id
+  end
+
+  public
 
   def input_id
     if use_form_builder?
@@ -70,7 +96,7 @@ class InputComponent < ViewComponent::Base
   end
 
   def input_wrap_classes
-    classes = ["fr-input-wrap"]
+    classes = [ "fr-input-wrap" ]
     classes << "fr-input-wrap--addon" if has_addon?
     classes.join(" ")
   end
@@ -116,7 +142,7 @@ class InputComponent < ViewComponent::Base
   end
 
   def button_classes
-    classes = ["fr-btn"]
+    classes = [ "fr-btn" ]
     classes << "bouton-action" if has_action_button?
     classes.join(" ")
   end
@@ -124,5 +150,29 @@ class InputComponent < ViewComponent::Base
   def has_link?
     @link_text.present? && @link_url.present?
   end
-end
 
+  def has_errors?
+    return false unless use_form_builder?
+    return false unless @form.object.respond_to?(:errors)
+
+    @form.object.errors[@method].present?
+  end
+
+  def errors
+    return [] unless has_errors?
+    @form.object.errors[@method]
+  end
+
+  def error_html
+    return "" unless has_errors?
+    errors.map { |error|
+      "<p class=\"fr-message fr-message--error\">#{error}</p>"
+    }.join.html_safe
+  end
+
+  def input_group_classes
+    classes = [ "fr-input-group" ]
+    classes << "fr-input-group--error" if has_errors?
+    classes.join(" ")
+  end
+end

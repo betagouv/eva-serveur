@@ -16,16 +16,43 @@
       <%= compte.inputs do %>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-12 fr-col-lg-6">
-            <%= compte.input :nom, required: true %>
+            <%= render InputComponent.new(
+              id: "compte_nom",
+              label: t("activerecord.attributes.compte.nom"),
+              form: compte,
+              method: :nom,
+              type: "text",
+              required: true
+            ) %>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <%= compte.input :prenom, required: true %>
+            <%= render InputComponent.new(
+              id: "compte_prenom",
+              label: t("activerecord.attributes.compte.prenom"),
+              form: compte,
+              method: :prenom,
+              type: "text",
+              required: true
+            ) %>
           </div>
           <div class="fr-col-12">
-            <%= compte.input :email, required: true %>
+            <%= render InputComponent.new(
+              id: "compte_email",
+              label: t("activerecord.attributes.compte.email"),
+              form: compte,
+              method: :email,
+              type: "email",
+              required: true
+            ) %>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
-            <%= compte.input :service_departement %>
+            <%= render InputComponent.new(
+              id: "compte_service_departement",
+              label: t("activerecord.attributes.compte.service_departement"),
+              form: compte,
+              method: :service_departement,
+              type: "text"
+            ) %>
           </div>
           <div class="fr-col-12 fr-col-lg-6">
             <%= compte.input :fonction, as: :select, collection: collection_fonctions, wrapper_html: { class: "fleche-select" } %>

@@ -1,4 +1,4 @@
-<div class="fr-input-group" <%= tag.attributes(@html_options) %>>
+<div class="<%= input_group_classes %>" <%= tag.attributes(@html_options) %>>
   <label class="fr-label" for="<%= input_id %>">
     <%= @label %>
     <% if @hint.present? %>
@@ -26,6 +26,7 @@
   <% end %>
   
   <div class="fr-messages-group" id="<%= messages_id %>" aria-live="polite">
+    <%= error_html %>
   </div>
   
   <% if has_link? %>

@@ -1,0 +1,19 @@
+.input-component__link {
+  margin-top: 1rem; // 16px
+}
+
+.input-component__link-text {
+  color: var(--color-text-action-high-blue-france, #000091);
+  font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
+  font-size: var(--Body-MD---Texte-standard-Size, 16px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Body-MD---Texte-standard-Line-Height, 24px); /* 150% */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+

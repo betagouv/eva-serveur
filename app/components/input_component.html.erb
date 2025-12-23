@@ -1,0 +1,37 @@
+<div class="fr-input-group" <%= tag.attributes(@html_options) %>>
+  <label class="fr-label" for="<%= input_id %>">
+    <%= @label %>
+    <% if @hint.present? %>
+      <span class="fr-hint-text"><%= @hint %></span>
+    <% end %>
+  </label>
+  
+  <% if has_button? %>
+    <div class="<%= input_wrap_classes %>">
+      <% if use_form_builder? %>
+        <%= @form.public_send(form_builder_method, @method, input_attributes) %>
+      <% else %>
+        <%= tag.input(**input_attributes) %>
+      <% end %>
+      <button type="button" class="<%= button_classes %>"<%= " data-action='#{@button_action}'" if @button_action.present? %>>
+        <%= @button_text %>
+      </button>
+    </div>
+  <% else %>
+    <% if use_form_builder? %>
+      <%= @form.public_send(form_builder_method, @method, input_attributes) %>
+    <% else %>
+      <%= tag.input(**input_attributes) %>
+    <% end %>
+  <% end %>
+  
+  <div class="fr-messages-group" id="<%= messages_id %>" aria-live="polite">
+  </div>
+  
+  <% if has_link? %>
+    <div class="input-component__link">
+      <%= link_to @link_text, @link_url, { class: "input-component__link-text" }.merge(@link_html) %>
+    </div>
+  <% end %>
+</div>
+

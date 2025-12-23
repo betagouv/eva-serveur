@@ -28,5 +28,6 @@ module Admin
     def statut_campagne; end
     def tag; end
     def toggle; end
+    def input; end
   end
 end

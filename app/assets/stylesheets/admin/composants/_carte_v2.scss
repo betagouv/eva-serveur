@@ -11,12 +11,7 @@
   overflow: hidden;
 
   &__title {
-    color: var(--color-text-title, #161616);
-    font-family: var(--Titres-Font, Quicksand);
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
+    @include h5-xs-desktop();
     margin: 0;
     align-self: flex-start;
   }

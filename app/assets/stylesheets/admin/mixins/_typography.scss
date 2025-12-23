@@ -69,6 +69,15 @@
   line-height: var(--Titres-H6---XXS-Line-Height, 28px);
 }
 
+@mixin h5-xs-desktop() {
+  color: var(--color-text-title, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 127.273% */
+}
+
 @mixin body-xs() {
   color: var(--light-decisions-text-text-mention-grey, #666);
   font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");

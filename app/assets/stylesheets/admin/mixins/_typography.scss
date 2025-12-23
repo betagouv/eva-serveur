@@ -95,3 +95,12 @@
   font-weight: 600;
   line-height: var(--Body-XS---Texte-mention-Line-Height, 20px);
 }
+
+@mixin body-xs-mention() {
+  color: var(--color-text-mention, #666);
+  font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
+  font-size: var(--Body-XS---Texte-mention-Size, 12px);
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--Body-XS---Texte-mention-Line-Height, 20px); /* 166.667% */
+}

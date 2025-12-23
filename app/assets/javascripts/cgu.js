@@ -1,5 +1,5 @@
 function activation_bouton_submit(cgu_acceptees) {
-  let bouton_submit = $('input[type="submit"]')
+  let bouton_submit = $('.valider-compte-bouton')
   if(cgu_acceptees) {
     bouton_submit.removeClass('disabled');
     bouton_submit.removeAttr('disabled');

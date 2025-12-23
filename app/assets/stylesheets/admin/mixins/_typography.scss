@@ -77,3 +77,12 @@
   font-weight: 400;
   line-height: var(--Body-XS---Texte-mention-Line-Height, 20px);
 }
+
+@mixin body-xs-semibold() {
+  color: var(--light-decisions-text-text-mention-grey, #666);
+  font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
+  font-size: var(--Body-XS---Texte-mention-Size, 12px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Body-XS---Texte-mention-Line-Height, 20px);
+}

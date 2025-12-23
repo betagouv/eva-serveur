@@ -1,10 +1,12 @@
-<div class="fr-stepper">
-  <h2 class="fr-stepper__title">
-    <%= titre_impact %>
-    <span class="fr-stepper__state">
+<div class="indicateur_impact">
+  <div class="etape_courante">
+    <div class="etape_courante__titre">
       <%= label_interpretation %>
-    </span>
-  </h2>
+    </div>
+    <div class="etape_courante_indicateur">
+      <%= titre_impact %>
+    </div>
+  </div>
   <div class="barre-segmentee">
     <div class="barre-segmentee__graphique" aria-label="<%= t("admin.evaluations.mesure_des_impacts.chart.aria_label") %>">
       <% if nombre_reussies.positive? %>
@@ -15,8 +17,9 @@
       <% end %>
     </div>
   </div>
-  <p class="fr-stepper__details">
-    <span class="fr-text--bold">Pourquoi :</span> <%= description %>
-  </p>
+  <div class="explication">
+    <div class="explication__pourquoi">Pourquoi&nbsp;:</div>
+    <div class="explication__description"><%= description %></div>
+  </div>
 </div>
 

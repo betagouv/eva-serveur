@@ -103,7 +103,16 @@
               ) %>
             </div>
             <div class="fr-col-12">
-              <%= form.input :type_structure, as: :select, collection: collection_types_structures, include_blank: t(".choisir_type"), label: t(".type_structure_label"), input_html: { class: "fr-select" } %>
+              <%= render InputComponent.new(
+                id: "structure_type_structure",
+                label: t(".type_structure_label"),
+                form: form,
+                method: :type_structure,
+                as: :select,
+                collection: collection_types_structures,
+                include_blank: t(".choisir_type"),
+                required: true
+              ) %>
             </div>
           </div>
         <% end %>

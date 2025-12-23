@@ -21,19 +21,25 @@ class InputComponent < ViewComponent::Base
     form: nil,
     method: nil,
     input_html: {},
+    as: nil,
+    collection: nil,
+    include_blank: nil,
     **html_options
   )
-    assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern, autocomplete)
+    assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern,
+autocomplete)
     assign_form_attributes(form, method, name)
     assign_button_attributes(button_text, button_type, button_action)
     assign_link_attributes(link_text, link_url, link_html)
+    assign_select_attributes(as, collection, include_blank)
     @input_html = input_html
     @html_options = html_options
   end
 
   private
 
-  def assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern, autocomplete)
+  def assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern,
+autocomplete)
     @id = id
     @label = label
     @hint = hint
@@ -61,6 +67,12 @@ class InputComponent < ViewComponent::Base
     @link_text = link_text
     @link_url = link_url
     @link_html = link_html
+  end
+
+  def assign_select_attributes(as, collection, include_blank)
+    @as = as
+    @collection = collection
+    @include_blank = include_blank
   end
 
   def compute_default_name
@@ -171,8 +183,96 @@ class InputComponent < ViewComponent::Base
   end
 
   def input_group_classes
-    classes = [ "fr-input-group" ]
-    classes << "fr-input-group--error" if has_errors?
+    if is_select?
+      classes = [ "fr-select-group" ]
+      classes << "fr-select-group--error" if has_errors?
+    else
+      classes = [ "fr-input-group" ]
+      classes << "fr-input-group--error" if has_errors?
+    end
     classes.join(" ")
   end
+
+  def is_required?
+    return @required if @required == true || @required == false
+    return false unless use_form_builder?
+
+    # Vérifier si Formtastic considère le champ comme requis
+    return false unless @form.respond_to?(:required?)
+
+    @form.required?(@method)
+  end
+
+  def required_asterisk
+    return "" unless is_required?
+
+    tag.abbr("*", title: "required")
+  end
+
+  def is_select?
+    @as == :select || @collection.present?
+  end
+
+  def select_attributes
+    attrs = {
+      class: "fr-select",
+      id: input_id,
+      "aria-describedby" => messages_id
+    }
+    attrs[:name] = @name if @name.present?
+    attrs[:required] = true if @required
+    attrs.merge!(@input_html)
+    attrs
+  end
+
+  def render_select_field
+    if use_form_builder?
+      render_select_with_form_builder
+    else
+      render_select_without_form_builder
+    end
+  end
+
+  private
+
+  def render_select_with_form_builder
+    @form.select(@method, @collection, { include_blank: @include_blank, selected: @value },
+select_attributes)
+  end
+
+  def render_select_without_form_builder
+    options = build_select_options
+    tag.select(safe_join(options), **select_attributes)
+  end
+
+  def build_select_options
+    options = []
+    options << build_blank_option if @include_blank.present?
+    options.concat(build_collection_options)
+    options
+  end
+
+  def build_blank_option
+    tag.option(@include_blank, value: "", selected: @value.blank?, disabled: true, hidden: true)
+  end
+
+  def build_collection_options
+    return [] unless @collection.present?
+
+    @collection.map do |option|
+      text, value = extract_option_text_and_value(option)
+      selected = option_selected?(value)
+      tag.option(text, value: value, selected: selected)
+    end
+  end
+
+  def extract_option_text_and_value(option)
+    option.is_a?(Array) ? option : [ option, option ]
+  end
+
+  def option_selected?(value)
+    @value.present? && (@value.to_s == value.to_s)
+  end
+
+  public
 end

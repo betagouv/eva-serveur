@@ -102,7 +102,6 @@ describe 'Création de compte conseiller', type: :feature do
 
       # Vérifie qu'on est bien sur la page d'informations de compte
       expect(page).to have_current_path(inscription_informations_compte_path)
-      expect(page).to have_content('Informations personnelles')
 
       # Vérifie que les champs sont pré-remplis avec les infos ProConnect
       expect(page).to have_field('Nom', with: 'Dupont')

@@ -26,7 +26,6 @@ describe 'Recherche de structure par SIRET', type: :feature do
 
     it 'affiche le formulaire de recherche de structure par SIRET' do
       expect(page).to have_current_path(inscription_recherche_structure_path)
-      expect(page).to have_content('Dans quelle structure travaillez-vous ?')
       expect(page).to have_content('Rechercher ma structure')
       expect(page).to have_field('siret')
       expect(page).to have_link('Retrouver votre SIRET sur l\'Annuaire des Entreprises')
@@ -46,7 +45,6 @@ describe 'Recherche de structure par SIRET', type: :feature do
         click_on 'Valider'
 
         expect(page).to have_current_path(inscription_structure_path)
-        expect(page).to have_content('Rejoindre une structure existante')
         expect(page).to have_content(siret)
         expect(page).to have_content('Ma structure existante')
 

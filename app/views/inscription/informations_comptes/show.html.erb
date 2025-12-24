@@ -72,7 +72,7 @@
           </div>
           <div class="fr-col-12">
             <div class="informations-compte-actions">
-              <%= button_to pro_connect_logout_path, method: :get, class: "bouton-tertiaire grand-bouton informations-compte-quitter", form: { style: "display: inline;" } do %>
+              <%= link_to pro_connect_logout_path, class: "bouton-tertiaire grand-bouton informations-compte-quitter" do %>
                 <%= t(".quitter") %>
               <% end %>
               <%= submit_tag t(".continuer"), class: "bouton grand-bouton valider-compte-bouton disabled", disabled: true %>

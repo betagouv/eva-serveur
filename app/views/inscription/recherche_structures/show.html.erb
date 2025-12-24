@@ -8,6 +8,7 @@
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <div class="page-recherche-structure">
+  <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
   <%= form_with url: inscription_recherche_structure_path, method: :patch, local: true do |f| %>
     <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
       <div class="fr-grid-row fr-grid-row--gutters">

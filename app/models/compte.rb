@@ -2,6 +2,8 @@ class Compte < ApplicationRecord
   include EtapeInscription
   include AvecUsage
 
+  attr_accessor :structure_confirmee
+
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   ROLES = %w[conseiller admin charge_mission_regionale superadmin compte_generique].freeze
   AIDES_ROLES = {

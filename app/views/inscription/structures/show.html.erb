@@ -15,9 +15,6 @@
   <% if persisted %>
     <%# Structure existante : rejoindre %>
     <%= render TexteIntroComponent.new(titre: t(".titre_intro_presente"), texte: t(".sous_titre_intro_presente")) %>
-    <%= dsfr_alert(type: :info, title: t(".alert.titre")) do %>
-      <%= t(".alert.message") %>
-    <% end %>
   <% else %>
     <%= render TexteIntroComponent.new(titre: t(".titre_intro_non_presente"), texte: t(".sous_titre_intro_non_presente")) %>
     <%# Nouvelle structure : créer %>
@@ -31,43 +28,32 @@
       <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, []) %>
 
       <%= form.inputs do %>
-        <%= render CarteV2Component.new do %>
-          <div class="fr-grid-row fr-grid-row--gutters">
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">SIRET</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.siret %></div>
+        <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
+          <div class="structure-content-wrapper">
+            <div class="structure-info-card">
+              <div class="structure-info-card__info">
+                <span class="structure-info-card__label">• Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
+              </div>
+              <div class="structure-info-card__info">
+                <span class="structure-info-card__label">• Dénomination :</span> <span class="structure-info-card__value"><%= @structure.nom %></span>
+              </div>
+              <div class="structure-info-card__info">
+                <span class="structure-info-card__label">• Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
+              </div>
             </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">Raison sociale</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.nom %></div>
-            </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">Type de structure</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= traduction_type_structure(@structure.type_structure) %></div>
-            </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">Adresse</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.adresse %></div>
-            </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">OPCO</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= affiche_opcos @structure %></div>
+
+            <%= form.input :structure_confirmee, as: :boolean, label: t(".confirme_structure"), required: false %>
+
+            <p class="structure-confirmation-mention">
+              <%= t(".mention_acces") %>
+            </p>
+
+            <div class="informations-compte-actions">
+              <%= form.button t(".ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
+              <%= form.button t(".rejoindre"), type: :submit, name: "commit", value: "rejoindre", class: "bouton grand-bouton", id: "rejoindre-structure-btn", disabled: true %>
             </div>
           </div>
         <% end %>
-
-        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-          <div class="fr-col-12 fr-col-md-6">
-            <%= render BoutonComponent.new(inscription_structure_path(action_type: "recherche"), tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch) do %>
-              <%= t(".ce_nest_pas_ma_structure") %>
-            <% end %>
-          </div>
-          <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
-            <%= render BoutonComponent.new(inscription_structure_path, tag: :button, type: :primary, name: "commit", value: "rejoindre", method: :patch, params: { action_type: "rejoindre" }) do %>
-              <%= t(".rejoindre") %>
-            <% end %>
-          </div>
-        </div>
       <% end %>
     <% end %>
   <% else %>
@@ -133,3 +119,29 @@
     <% end %>
   <% end %>
 </div>
+
+<% if persisted %>
+<script>
+  function activation_bouton_rejoindre(structure_confirmee) {
+    let bouton_rejoindre = document.getElementById('rejoindre-structure-btn');
+    if (structure_confirmee) {
+      bouton_rejoindre.classList.remove('disabled');
+      bouton_rejoindre.removeAttribute('disabled');
+    } else {
+      bouton_rejoindre.classList.add('disabled');
+      bouton_rejoindre.setAttribute('disabled', 'disabled');
+    }
+  }
+
+  function structure_confirmation_submit() {
+    let structure_confirmee = document.getElementById('compte_structure_confirmee').checked;
+    activation_bouton_rejoindre(structure_confirmee);
+    
+    document.getElementById('compte_structure_confirmee').addEventListener('change', function() {
+      activation_bouton_rejoindre(this.checked);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', structure_confirmation_submit);
+</script>
+<% end %>

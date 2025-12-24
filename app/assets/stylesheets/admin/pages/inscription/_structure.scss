@@ -31,4 +31,56 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .structure-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--Space-3W, 24px);
+  }
+
+  .structure-info-card {
+    display: flex;
+    padding: var(--Space-3W, 24px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    border: 1px solid var(--color-border-default, #DDD);
+    background: var(--color-background-alt, #F6F6F6);
+
+    &__info {
+      margin: 0;
+    }
+
+    &__label {
+      color: var(--color-text-base, #3A3A3A);
+      font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
+      font-size: var(--Body-MD---Texte-standard-Size, 16px);
+      font-style: normal;
+      font-weight: 600;
+      line-height: var(--Body-MD---Texte-standard-Line-Height, 24px); /* 150% */
+    }
+
+    &__value {
+      color: var(--color-text-base, #3A3A3A);
+      font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
+      font-size: var(--Body-MD---Texte-standard-Size, 16px);
+      font-style: normal;
+      font-weight: 400;
+      line-height: var(--Body-MD---Texte-standard-Line-Height, 24px);
+    }
+  }
+
+  .structure-confirmation-mention {
+    @include body-xs-mention();
+    margin: 0;
+  }
+
+  .informations-compte-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 100%;
+  }
 }

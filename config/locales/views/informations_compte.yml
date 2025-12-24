@@ -38,14 +38,17 @@ fr:
         sous_titre_intro_non_presente: "Nous avons trouvé les informations administratives correspondant à ce numéro SIRET. Pour utiliser ce service, cette structure doit d’abord être créée."
         titre_intro_presente: Rejoindre une structure existante
         sous_titre_intro_presente: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de votre organisation."
+        titre_carte: Structure trouvée
         creer:
           titre: Création de votre structure
         rejoindre_structure:
           titre: Rejoindre une structure existante
           sous_titre: Vérifiez que les informations correspondent bien à votre structure.
-        rejoindre: Rejoindre
-        ce_nest_pas_ma_structure: Ce n'est pas ma structure
+        rejoindre: Rejoindre la structure
+        ce_nest_pas_ma_structure: Ce n'est pas la bonne structure
         creer_structure: Créer ma structure
+        confirme_structure: Je confirme qu'il s'agit de la structure pour laquelle je travaille
+        mention_acces: Vous aurez un accès immédiat au service, avec des fonctionnalités limitées. L'accès complet sera activé après validation par l'administrateur ou l'administratrice.
         nom_structure_label: Nom de la structure
         type_structure_label: Type de structure
         code_postal_label: Code postal

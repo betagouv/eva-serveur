@@ -117,3 +117,12 @@
   @include dsfr-texte-xl();
   line-height: 32px; /* 160% */
 }
+
+@mixin body-md-semibold() {
+  color: var(--color-text-base, #3A3A3A);
+  font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
+  font-size: var(--Body-MD---Texte-standard-Size, 16px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Body-MD---Texte-standard-Line-Height, 24px); /* 150% */
+}

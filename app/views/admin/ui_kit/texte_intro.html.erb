@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1 class="fr-h1 fr-mt-6w">Démo TexteIntroComponent</h1>
+
+  <h2 class="fr-h2 fr-mt-6w">Composant complet avec titre et texte</h2>
+  <div style="max-width: 800px;">
+    <%= render TexteIntroComponent.new(
+      titre: "Bienvenue sur Eva",
+      texte: "Eva est une plateforme d'évaluation des compétences clés en situation professionnelle. Elle permet d'identifier les besoins de formation et d'accompagnement."
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Composant avec titre uniquement</h2>
+  <div style="max-width: 800px;">
+    <%= render TexteIntroComponent.new(
+      titre: "Titre seul"
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Composant avec texte uniquement</h2>
+  <div style="max-width: 800px;">
+    <%= render TexteIntroComponent.new(
+      texte: "Texte d'introduction sans titre. Ce composant permet d'afficher un texte d'introduction avec un style cohérent avec le design system."
+    ) %>
+  </div>
+
+  <h2 class="fr-h2 fr-mt-6w">Composant avec classes personnalisées</h2>
+  <div style="max-width: 800px;">
+    <%= render TexteIntroComponent.new(
+      titre: "Titre avec classe personnalisée",
+      texte: "Ce composant peut recevoir des classes CSS supplémentaires pour s'adapter à différents contextes.",
+      classes: "ma-classe-custom"
+    ) %>
+  </div>
+</div>
+

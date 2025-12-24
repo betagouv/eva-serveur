@@ -1,0 +1,9 @@
+<div class="texte-intro <%= @classes %>">
+  <% if @titre.present? %>
+    <h2 class="texte-intro__titre"><%= @titre %></h2>
+  <% end %>
+  <% if @texte.present? %>
+    <p class="texte-intro__texte"><%= @texte %></p>
+  <% end %>
+</div>
+

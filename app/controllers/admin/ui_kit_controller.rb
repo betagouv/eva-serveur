@@ -27,6 +27,7 @@ module Admin
     # def sous_competence; end commenté pour le moment car pas assez unitaire
     def statut_campagne; end
     def tag; end
+    def texte_intro; end
     def toggle; end
     def input; end
   end

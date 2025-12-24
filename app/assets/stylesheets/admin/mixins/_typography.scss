@@ -104,3 +104,16 @@
   font-weight: 400;
   line-height: var(--Body-XS---Texte-mention-Line-Height, 20px); /* 166.667% */
 }
+
+@mixin h2-lg() {
+  color: var(--color-text-title, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+  @include dsfr-titre-lg();
+}
+
+@mixin body-xl() {
+  color: var(--color-text-base, #3A3A3A);
+  font-family: var(--Body-LG---Texte-article-Font, "Work Sans");
+  @include dsfr-texte-xl();
+  line-height: 32px; /* 160% */
+}

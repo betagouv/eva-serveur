@@ -56,6 +56,8 @@ fr:
       show:
         titre: Dans quelle structure travaillez-vous ?
         sous_titre: Dans un premier temps, merci de regarder si votre structure est déjà enregistrée.
+        titre_intro: Votre structure de rattachement
+        sous_titre_intro: "Pour pouvoir utiliser ce service, vous devez être rattaché à une structure. Il s’agit de celle pour laquelle vous intervenez (association, organisme, entreprise…)."
         titre_carte: Identification de la structure
         label_siret: Numéro SIRET
         hint_siret: Le numéro SIRET est composé de 14 chiffres

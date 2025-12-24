@@ -34,6 +34,10 @@ fr:
         bouton_continuer: Continuer ici
     structures:
       show:
+        titre_intro_non_presente: Votre structure n’est pas encore présente
+        sous_titre_intro_non_presente: "Nous avons trouvé les informations administratives correspondant à ce numéro SIRET. Pour utiliser ce service, cette structure doit d’abord être créée."
+        titre_intro_presente: Rejoindre une structure existante
+        sous_titre_intro_presente: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de votre organisation."
         creer:
           titre: Création de votre structure
         rejoindre_structure:

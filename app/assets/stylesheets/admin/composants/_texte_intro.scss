@@ -5,9 +5,15 @@
   gap: var(--Space-3W, 24px);
   align-self: stretch;
 
+  h2.texte-intro__titre,
   &__titre {
     @include h2-lg();
     margin: 0;
+    font-size: var(--Titres-H2---LG-Size, 32px) !important;
+    font-weight: 700 !important;
+    line-height: var(--Titres-H2---LG-Line-Height, 40px) !important;
+    font-family: var(--Titres-Font, Quicksand) !important;
+    color: var(--color-text-title, #161616) !important;
   }
 
   &__texte {

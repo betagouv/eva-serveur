@@ -4,6 +4,8 @@ fr:
       show:
         titre: Informations personnelles
         sous_titre: Complétez votre inscription.
+        titre_intro: Confirmez vos informations personnelles
+        sous_titre_intro: Pour pouvoir utiliser ce service, nous avons besoin de compléter certaines informations. Cette étape vous permet de les vérifier avant de poursuivre.
         titre_carte: Informations personnelles
         sous_titre_carte: "Les champs notés * sont obligatoires."
         valider: Valider

@@ -12,6 +12,11 @@
 
 .page-informations-compte {
   @include reset-form();
+  display: flex;
+  width: 792px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-7W, 56px);
 }
 
 .page-informations-compte .indication-champs-obligatoires {

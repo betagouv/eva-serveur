@@ -14,10 +14,12 @@
 <div class="page-inscription-structure">
   <% if persisted %>
     <%# Structure existante : rejoindre %>
+    <%= render TexteIntroComponent.new(titre: t(".titre_intro_presente"), texte: t(".sous_titre_intro_presente")) %>
     <%= dsfr_alert(type: :info, title: t(".alert.titre")) do %>
       <%= t(".alert.message") %>
     <% end %>
   <% else %>
+    <%= render TexteIntroComponent.new(titre: t(".titre_intro_non_presente"), texte: t(".sous_titre_intro_non_presente")) %>
     <%# Nouvelle structure : créer %>
     <%= dsfr_alert(type: :info, title: t(".alert_creation.titre")) do %>
       <%= t(".alert_creation.message") %>

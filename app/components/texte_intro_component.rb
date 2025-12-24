@@ -7,4 +7,3 @@ class TexteIntroComponent < ViewComponent::Base
     @classes = classes
   end
 end
-

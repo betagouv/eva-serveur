@@ -61,6 +61,10 @@ jobs:
           name: Rubocop
           command: bundle exec rubocop
 
+      - run:
+          name: Lint translations (espaces insécables)
+          command: bundle exec rake translations:lint
+
       # Run rspec in parallel
       - run:
           name: Run rspec in parallel

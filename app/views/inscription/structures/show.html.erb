@@ -92,28 +92,42 @@
               <% end %>
             </p>
 
-            <div class="fr-grid-row fr-grid-row--gutters">
-              <div class="fr-col-12">
-                <%= render InputComponent.new(
-                  id: "structure_nom",
-                  label: t(".nom_structure_label"),
-                  form: form,
-                  method: :nom,
-                  type: "text"
-                ) %>
+            <div class="structure-parametrage-section">
+              <h5 class="structure-parametrage-section__titre"><%= t(".titre_parametrage") %></h5>
+              
+              <p class="structure-parametrage-section__mention-champs">
+                <%= t(".mention_champs_obligatoires") %>
+              </p>
+
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-12">
+                  <%= render InputComponent.new(
+                    id: "structure_nom",
+                    label: t(".nom_structure_label"),
+                    form: form,
+                    method: :nom,
+                    type: "text",
+                    hint: t(".hint_nom_structure"),
+                    required: true
+                  ) %>
+                </div>
+                <div class="fr-col-12">
+                  <%= render InputComponent.new(
+                    id: "structure_type_structure",
+                    label: t(".type_structure_label"),
+                    form: form,
+                    method: :type_structure,
+                    as: :select,
+                    collection: collection_types_structures,
+                    include_blank: t(".choisir_type"),
+                    required: true
+                  ) %>
+                </div>
               </div>
-              <div class="fr-col-12">
-                <%= render InputComponent.new(
-                  id: "structure_type_structure",
-                  label: t(".type_structure_label"),
-                  form: form,
-                  method: :type_structure,
-                  as: :select,
-                  collection: collection_types_structures,
-                  include_blank: t(".choisir_type"),
-                  required: true
-                ) %>
-              </div>
+
+              <p class="structure-parametrage-section__mention-admin">
+                <%= t(".mention_creation") %>
+              </p>
             </div>
 
             <div class="informations-compte-actions">

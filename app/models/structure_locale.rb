@@ -1,6 +1,8 @@
 class StructureLocale < Structure
   include AvecUsage
 
+  attr_accessor :structure_confirmee
+
   TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[
     AFPA

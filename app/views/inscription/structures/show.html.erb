@@ -18,9 +18,6 @@
   <% else %>
     <%= render TexteIntroComponent.new(titre: t(".titre_intro_non_presente"), texte: t(".sous_titre_intro_non_presente")) %>
     <%# Nouvelle structure : créer %>
-    <%= dsfr_alert(type: :info, title: t(".alert_creation.titre")) do %>
-      <%= t(".alert_creation.message") %>
-    <% end %>
   <% end %>
 
   <% if persisted %>
@@ -31,21 +28,27 @@
         <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
           <div class="structure-content-wrapper">
             <div class="structure-info-card">
-              <div class="structure-info-card__info">
-                <span class="structure-info-card__label">• Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
-              </div>
-              <div class="structure-info-card__info">
-                <span class="structure-info-card__label">• Dénomination :</span> <span class="structure-info-card__value"><%= @structure.nom %></span>
-              </div>
-              <div class="structure-info-card__info">
-                <span class="structure-info-card__label">• Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
-              </div>
+              <ul class="structure-info-card__list">
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
+                </li>
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Dénomination :</span> <span class="structure-info-card__value"><%= @structure.nom %></span>
+                </li>
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
+                </li>
+              </ul>
             </div>
 
             <%= form.input :structure_confirmee, as: :boolean, label: t(".confirme_structure"), required: false %>
 
             <p class="structure-confirmation-mention">
               <%= t(".mention_acces") %>
+              <%= link_to inscription_structure_path(action_type: "recherche"), class: "lien-avec-fleche" do %>
+                <span class="fr-icon fr-icon-arrow-right-line" aria-hidden="true"></span>
+                <%= t(".ce_nest_pas_ma_structure") %>
+              <% end %>
             </p>
 
             <div class="informations-compte-actions">
@@ -62,91 +65,74 @@
       <%= form.hidden_field :action_type, value: "creer" %>
       
       <%= form.inputs do %>
-        <%= render CarteV2Component.new do %>
-          <div class="fr-grid-row fr-grid-row--gutters">
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">SIRET</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.siret %></div>
+        <%= render CarteV2Component.new(titre: t(".titre_carte_non_trouvee")) do %>
+          <div class="structure-content-wrapper">
+            <%= "Vérifiez que ces informations correspondent bien à votre structure :" %>
+            <div class="structure-info-card">
+              <ul class="structure-info-card__list">
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
+                </li>
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Raison sociale :</span> <span class="structure-info-card__value"><%= @structure.raison_sociale %></span>
+                </li>
+                <li class="structure-info-card__info">
+                  <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
+                </li>
+              </ul>
             </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">Raison sociale</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.raison_sociale %></div>
+
+            <%= form.input :structure_confirmee, as: :boolean, label: t(".confirme_structure"), required: false %>
+
+            <p class="structure-creation-text">
+              <%= t(".texte_creation") %> <br>
+              <%= link_to inscription_structure_path(action_type: "recherche"), class: "lien-avec-fleche" do %>
+                <span class="fr-icon fr-icon-arrow-right-line" aria-hidden="true"></span>
+                <%= t(".ce_nest_pas_ma_structure") %>
+              <% end %>
+            </p>
+
+            <div class="fr-grid-row fr-grid-row--gutters">
+              <div class="fr-col-12">
+                <%= render InputComponent.new(
+                  id: "structure_nom",
+                  label: t(".nom_structure_label"),
+                  form: form,
+                  method: :nom,
+                  type: "text"
+                ) %>
+              </div>
+              <div class="fr-col-12">
+                <%= render InputComponent.new(
+                  id: "structure_type_structure",
+                  label: t(".type_structure_label"),
+                  form: form,
+                  method: :type_structure,
+                  as: :select,
+                  collection: collection_types_structures,
+                  include_blank: t(".choisir_type"),
+                  required: true
+                ) %>
+              </div>
             </div>
-            <div class="fr-col-12 fr-col-md-4 fr-mb-4v">
-              <div class="fr-text--sm fr-text--bold fr-mb-2v">Adresse</div>
-              <div class="fr-mb-0 fr-text--sm fr-mt-1v"><%= @structure.adresse %></div>
+
+            <div class="informations-compte-actions">
+              <%= form.button t(".ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
+              <%= form.submit t(".creer_structure"), class: "bouton grand-bouton", id: "creer-structure-btn", disabled: true %>
             </div>
           </div>
         <% end %>
-
-        <%= render CarteV2Component.new do %>
-          <div class="fr-grid-row fr-grid-row--gutters fr-mb-4v">
-            <div class="fr-col-12">
-              <%= render InputComponent.new(
-                id: "structure_nom",
-                label: t(".nom_structure_label"),
-                form: form,
-                method: :nom,
-                type: "text"
-              ) %>
-            </div>
-            <div class="fr-col-12">
-              <%= render InputComponent.new(
-                id: "structure_type_structure",
-                label: t(".type_structure_label"),
-                form: form,
-                method: :type_structure,
-                as: :select,
-                collection: collection_types_structures,
-                include_blank: t(".choisir_type"),
-                required: true
-              ) %>
-            </div>
-          </div>
-
-          <p class="structure-confirmation-mention">
-            <%= t(".mention_creation") %>
-          </p>
-
-        <% end %>
-
-        <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--middle">
-          <div class="fr-col-12 fr-col-md-6">
-            <%= render BoutonComponent.new(inscription_structure_path(action_type: "recherche"), tag: :button, type: :secondary, name: "commit", value: "recherche", method: :patch) do %>
-              <%= t(".ce_nest_pas_ma_structure") %>
-            <% end %>
-          </div>
-          <div class="fr-col-12 fr-col-md-6 inscription-structure__actions-droite">
-            <%= form.submit t(".creer_structure"), class: "fr-btn fr-btn--primary" %>
-          </div>
-        </div>
       <% end %>
     <% end %>
   <% end %>
 </div>
 
-<% if persisted %>
 <script>
-  function activation_bouton_rejoindre(structure_confirmee) {
-    let bouton_rejoindre = document.getElementById('rejoindre-structure-btn');
-    if (structure_confirmee) {
-      bouton_rejoindre.classList.remove('disabled');
-      bouton_rejoindre.removeAttribute('disabled');
-    } else {
-      bouton_rejoindre.classList.add('disabled');
-      bouton_rejoindre.setAttribute('disabled', 'disabled');
-    }
-  }
-
-  function structure_confirmation_submit() {
-    let structure_confirmee = document.getElementById('compte_structure_confirmee').checked;
-    activation_bouton_rejoindre(structure_confirmee);
-    
-    document.getElementById('compte_structure_confirmee').addEventListener('change', function() {
-      activation_bouton_rejoindre(this.checked);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', structure_confirmation_submit);
+  document.addEventListener('DOMContentLoaded', function() {
+    <% if persisted %>
+      structure_confirmation_submit();
+    <% else %>
+      structure_creation_confirmation_submit();
+    <% end %>
+  });
 </script>
-<% end %>

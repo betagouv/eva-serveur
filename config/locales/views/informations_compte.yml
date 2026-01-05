@@ -54,7 +54,10 @@ fr:
         titre_carte_non_trouvee: Informations administratives trouvées
         nom_structure_label: Nom de la structure
         type_structure_label: Type de structure
-        mention_creation: Créer la structure vous attribuera le rôle d’administrateur.
+        mention_creation: Créer la structure vous attribuera le rôle d'administrateur.
+        titre_parametrage: Paramétrage
+        mention_champs_obligatoires: Les champs notés * sont obligatoires.
+        hint_nom_structure: Le nom officiel est proposé par défaut. Vous pouvez le modifier pour utiliser un nom plus courant.
         code_postal_label: Code postal
         choisir_type: Choisir un type de structure
         alert:

@@ -104,4 +104,25 @@
     gap: 1rem;
     width: 100%;
   }
+
+  .structure-parametrage-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--Space-3W, 24px);
+
+    &__titre {
+      @include h5-xs();
+      margin: 0;
+    }
+
+    &__mention-champs {
+      @include body-xs-mention();
+      margin: 0;
+    }
+
+    &__mention-admin {
+      @include body-xs-mention();
+      margin: 0;
+    }
+  }
 }

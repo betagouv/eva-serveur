@@ -135,3 +135,12 @@
   font-weight: 400;
   line-height: var(--Body-SM---Texte-dtail-Line-Height, 24px); /* 171.429% */
 }
+
+@mixin h5-xs() {
+  color: var(--color-text-title, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 127.273% */
+}

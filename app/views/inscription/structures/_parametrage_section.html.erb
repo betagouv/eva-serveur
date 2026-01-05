@@ -1,0 +1,38 @@
+<div class="structure-parametrage-section">
+  <h5 class="structure-parametrage-section__titre"><%= t("inscription.structures.show.titre_parametrage") %></h5>
+  
+  <p class="structure-parametrage-section__mention-champs">
+    <%= t("inscription.structures.show.mention_champs_obligatoires") %>
+  </p>
+
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col-12">
+      <%= render InputComponent.new(
+        id: "structure_nom",
+        label: t("inscription.structures.show.nom_structure_label"),
+        form: form,
+        method: :nom,
+        type: "text",
+        hint: t("inscription.structures.show.hint_nom_structure"),
+        required: true
+      ) %>
+    </div>
+    <div class="fr-col-12">
+      <%= render InputComponent.new(
+        id: "structure_type_structure",
+        label: t("inscription.structures.show.type_structure_label"),
+        form: form,
+        method: :type_structure,
+        as: :select,
+        collection: collection_types_structures,
+        include_blank: t("inscription.structures.show.choisir_type"),
+        required: true
+      ) %>
+    </div>
+  </div>
+
+  <p class="structure-parametrage-section__mention-admin">
+    <%= t("inscription.structures.show.mention_creation") %>
+  </p>
+</div>
+

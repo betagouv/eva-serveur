@@ -60,21 +60,19 @@
     }
 
     &__label {
-      color: var(--color-text-base, #3A3A3A);
-      font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
-      font-size: var(--Body-MD---Texte-standard-Size, 16px);
-      font-style: normal;
-      font-weight: 600;
-      line-height: var(--Body-MD---Texte-standard-Line-Height, 24px); /* 150% */
+      @include body-md-semibold();
     }
 
     &__value {
-      color: var(--color-text-base, #3A3A3A);
-      font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
-      font-size: var(--Body-MD---Texte-standard-Size, 16px);
-      font-style: normal;
+      @include body-md-semibold();
       font-weight: 400;
-      line-height: var(--Body-MD---Texte-standard-Line-Height, 24px);
+    }
+
+    &__mention-opco {
+      @include body-xs-mention();
+      color: var(--color-text-base, #3A3A3A);
+      margin: 0;
+      margin-top: 10px;
     }
   }
 

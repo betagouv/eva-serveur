@@ -60,6 +60,9 @@ fr:
         hint_nom_structure: Le nom officiel est proposé par défaut. Vous pouvez le modifier pour utiliser un nom plus courant.
         code_postal_label: Code postal
         choisir_type: Choisir un type de structure
+        opco_non_identifie: Non identifié
+        mention_opco_detecte: OPCO détecté automatiquement. Vous pourrez le modifier si nécessaire.
+        mention_opco_non_detecte: Aucun OPCO n'a été détecté automatiquement. Vous pourrez le renseigner manuellement.
         alert:
           titre: Accès à votre structure
           message: S'il s'agit bien de votre structure, vous pouvez la rejoindre. Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.

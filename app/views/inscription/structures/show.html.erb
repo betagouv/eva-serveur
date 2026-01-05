@@ -3,141 +3,21 @@
 <% persisted = @structure.persisted? %>
 
 <% if persisted %>
-  <% content_for :title, t(".rejoindre_structure.titre") %>
-  <% content_for :titre, t(".rejoindre_structure.titre") %>
-  <% content_for :sous_titre, t(".rejoindre_structure.sous_titre") %>
+  <% content_for :title, t("inscription.structures.show.rejoindre_structure.titre") %>
+  <% content_for :titre, t("inscription.structures.show.rejoindre_structure.titre") %>
+  <% content_for :sous_titre, t("inscription.structures.show.rejoindre_structure.sous_titre") %>
 <% else %>
-  <% content_for :title, t(".creer.titre") %>
-  <% content_for :titre, t(".creer.titre") %>
+  <% content_for :title, t("inscription.structures.show.creer.titre") %>
+  <% content_for :titre, t("inscription.structures.show.creer.titre") %>
 <% end %>
 
 <div class="page-inscription-structure">
   <% if persisted %>
-    <%# Structure existante : rejoindre %>
-    <%= render TexteIntroComponent.new(titre: t(".titre_intro_presente"), texte: t(".sous_titre_intro_presente")) %>
+    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.titre_intro_presente"), texte: t("inscription.structures.show.sous_titre_intro_presente")) %>
+    <%= render "form_rejoindre" %>
   <% else %>
-    <%= render TexteIntroComponent.new(titre: t(".titre_intro_non_presente"), texte: t(".sous_titre_intro_non_presente")) %>
-    <%# Nouvelle structure : créer %>
-  <% end %>
-
-  <% if persisted %>
-    <%= semantic_form_for @compte, url: inscription_structure_path do |form| %>
-      <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, []) %>
-
-      <%= form.inputs do %>
-        <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
-          <div class="structure-content-wrapper">
-            <div class="structure-info-card">
-              <ul class="structure-info-card__list">
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
-                </li>
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Dénomination :</span> <span class="structure-info-card__value"><%= @structure.nom %></span>
-                </li>
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
-                </li>
-              </ul>
-            </div>
-
-            <%= form.input :structure_confirmee, as: :boolean, label: t(".confirme_structure"), required: false %>
-
-            <p class="structure-confirmation-mention">
-              <%= t(".mention_acces") %>
-              <%= link_to inscription_structure_path(action_type: "recherche"), class: "lien-avec-fleche" do %>
-                <span class="fr-icon fr-icon-arrow-right-line" aria-hidden="true"></span>
-                <%= t(".ce_nest_pas_ma_structure") %>
-              <% end %>
-            </p>
-
-            <div class="informations-compte-actions">
-              <%= form.button t(".ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
-              <%= form.button t(".rejoindre"), type: :submit, name: "commit", value: "rejoindre", class: "bouton grand-bouton", id: "rejoindre-structure-btn", disabled: true %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%= semantic_form_for @structure, url: inscription_structure_path, method: :patch do |form| %>
-      <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, [ :raison_sociale ]) %>
-      <%= form.hidden_field :action_type, value: "creer" %>
-      
-      <%= form.inputs do %>
-        <%= render CarteV2Component.new(titre: t(".titre_carte_non_trouvee")) do %>
-          <div class="structure-content-wrapper">
-            <%= "Vérifiez que ces informations correspondent bien à votre structure :" %>
-            <div class="structure-info-card">
-              <ul class="structure-info-card__list">
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Numéro SIRET :</span> <span class="structure-info-card__value"><%= @structure.siret %></span>
-                </li>
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Raison sociale :</span> <span class="structure-info-card__value"><%= @structure.raison_sociale %></span>
-                </li>
-                <li class="structure-info-card__info">
-                  <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= @structure.adresse %></span>
-                </li>
-              </ul>
-            </div>
-
-            <%= form.input :structure_confirmee, as: :boolean, label: t(".confirme_structure"), required: false %>
-
-            <p class="structure-creation-text">
-              <%= t(".texte_creation") %> <br>
-              <%= link_to inscription_structure_path(action_type: "recherche"), class: "lien-avec-fleche" do %>
-                <span class="fr-icon fr-icon-arrow-right-line" aria-hidden="true"></span>
-                <%= t(".ce_nest_pas_ma_structure") %>
-              <% end %>
-            </p>
-
-            <div class="structure-parametrage-section">
-              <h5 class="structure-parametrage-section__titre"><%= t(".titre_parametrage") %></h5>
-              
-              <p class="structure-parametrage-section__mention-champs">
-                <%= t(".mention_champs_obligatoires") %>
-              </p>
-
-              <div class="fr-grid-row fr-grid-row--gutters">
-                <div class="fr-col-12">
-                  <%= render InputComponent.new(
-                    id: "structure_nom",
-                    label: t(".nom_structure_label"),
-                    form: form,
-                    method: :nom,
-                    type: "text",
-                    hint: t(".hint_nom_structure"),
-                    required: true
-                  ) %>
-                </div>
-                <div class="fr-col-12">
-                  <%= render InputComponent.new(
-                    id: "structure_type_structure",
-                    label: t(".type_structure_label"),
-                    form: form,
-                    method: :type_structure,
-                    as: :select,
-                    collection: collection_types_structures,
-                    include_blank: t(".choisir_type"),
-                    required: true
-                  ) %>
-                </div>
-              </div>
-
-              <p class="structure-parametrage-section__mention-admin">
-                <%= t(".mention_creation") %>
-              </p>
-            </div>
-
-            <div class="informations-compte-actions">
-              <%= form.button t(".ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
-              <%= form.submit t(".creer_structure"), class: "bouton grand-bouton", id: "creer-structure-btn", disabled: true %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.titre_intro_non_presente"), texte: t("inscription.structures.show.sous_titre_intro_non_presente")) %>
+    <%= render "form_creer" %>
   <% end %>
 </div>
 

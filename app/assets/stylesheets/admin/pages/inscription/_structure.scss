@@ -49,6 +49,12 @@
     border: 1px solid var(--color-border-default, #DDD);
     background: var(--color-background-alt, #F6F6F6);
 
+    &__list {
+      list-style: disc;
+      padding-left: 1.5em;
+      width: 100%;
+    }
+
     &__info {
       margin: 0;
     }
@@ -75,6 +81,21 @@
   .structure-confirmation-mention {
     @include body-xs-mention();
     margin: 0;
+  }
+
+  .structure-creation-text {
+    @include body-sm-base();
+    margin: 0;
+
+    .lien-avec-fleche {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .fr-icon {
+        margin: 0;
+      }
+    }
   }
 
   .informations-compte-actions {

@@ -49,6 +49,9 @@ fr:
         creer_structure: Créer ma structure
         confirme_structure: Je confirme qu'il s'agit de la structure pour laquelle je travaille
         mention_acces: Vous aurez un accès immédiat au service, avec des fonctionnalités limitées. L'accès complet sera activé après validation par l'administrateur ou l'administratrice.
+        texte_creation: Ce n’est pas le cas ?
+        lien_annuaire: Ce n’est pas la bonne structure
+        titre_carte_non_trouvee: Informations administratives trouvées
         nom_structure_label: Nom de la structure
         type_structure_label: Type de structure
         mention_creation: Créer la structure vous attribuera le rôle d’administrateur.

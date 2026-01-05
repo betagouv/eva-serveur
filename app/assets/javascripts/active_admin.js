@@ -24,6 +24,7 @@
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require adaptateur_dsfr
+//= require structure_confirmation
 
 //= require chartkick
 //= require Chart.bundle

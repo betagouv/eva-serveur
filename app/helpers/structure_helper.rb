@@ -11,6 +11,10 @@ module StructureHelper
     end
   end
 
+  def collection_opcos
+    Opco.order(:nom).map { |opco| [ opco.nom, opco.id ] }
+  end
+
   def cree_structure_demo
     StructureLocale.transaction do
       StructureLocale.where(nom: Eva::STRUCTURE_DEMO).first_or_create do |s|

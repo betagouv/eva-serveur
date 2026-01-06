@@ -12,47 +12,72 @@ siret_pro_connect: "13002526500013") }
 
   describe "GET show" do
     context "quand la structure n'est pas encore préparée" do
-      before do
-        # Mock RechercheStructureParSiret
-        structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
-        allow(RechercheStructureParSiret).to receive(:new).and_return(
-          instance_double(RechercheStructureParSiret, call: structure)
-        )
+      context "avec une structure temporaire (non persistée)" do
+        before do
+          # Mock RechercheStructureParSiret pour retourner une structure non persistée
+          structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
+          allow(RechercheStructureParSiret).to receive(:new).and_return(
+            instance_double(RechercheStructureParSiret, call: structure)
+          )
+        end
+
+        it "prépare la structure mais n'appelle pas le service d'affiliation OPCO" do
+          expect(AffiliationOpcoService).not_to receive(:new)
+
+          get :show
+
+          expect(response).to have_http_status(:success)
+        end
       end
 
-      it "prépare la structure et appelle le service d'affiliation OPCO" do
-        service_double = instance_double(AffiliationOpcoService)
-        allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
-        allow(service_double).to receive(:affilie_opcos)
+      context "avec une structure existante (persistée)" do
+        let!(:structure_existante) {
+ create(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
 
-        get :show
+        before do
+          # Mock RechercheStructureParSiret pour retourner une structure persistée
+          allow(RechercheStructureParSiret).to receive(:new).and_return(
+            instance_double(RechercheStructureParSiret, call: structure_existante)
+          )
+        end
 
-        expect(AffiliationOpcoService).to have_received(:new)
-        expect(service_double).to have_received(:affilie_opcos)
-        expect(response).to have_http_status(:success)
+        it "prépare la structure et appelle le service d'affiliation OPCO" do
+          service_double = instance_double(AffiliationOpcoService)
+          allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
+          allow(service_double).to receive(:affilie_opcos)
+
+          get :show
+
+          expect(AffiliationOpcoService).to have_received(:new).with(structure_existante)
+          expect(service_double).to have_received(:affilie_opcos)
+          expect(response).to have_http_status(:success)
+        end
       end
     end
 
     context "quand la structure est déjà préparée" do
-      let!(:structure) { create(:structure_locale, siret: compte.siret_pro_connect) }
+      let!(:structure) { create(:structure_locale, :avec_admin, siret: "13002526500013", idcc: [ "3" ]) }
+      let(:compte_avec_structure) {
+        create(:compte_pro_connect, etape_inscription: "assignation_structure",
+        siret_pro_connect: "13002526500013", structure: structure) }
 
       before do
-        compte.update(structure: structure)
-        compte.reload
-        # S'assurer que current_compte retourne le compte avec la structure chargée
-        compte.structure # Force le chargement de la structure
-        allow(controller).to receive(:current_compte).and_return(compte)
+        sign_in compte_avec_structure
         # Empêcher RechercheStructureParSiret d'être appelé
         allow(RechercheStructureParSiret).to receive(:new).and_return(
           instance_double(RechercheStructureParSiret, call: nil)
         )
       end
 
-      it "n'appelle pas le service d'affiliation OPCO" do
-        expect(AffiliationOpcoService).not_to receive(:new)
+      it "appelle le service d'affiliation OPCO car la structure est persistée" do
+        service_double = instance_double(AffiliationOpcoService)
+        allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
+        allow(service_double).to receive(:affilie_opcos)
 
         get :show
 
+        expect(AffiliationOpcoService).to have_received(:new).with(structure)
+        expect(service_double).to have_received(:affilie_opcos)
         expect(response).to have_http_status(:success)
       end
     end

@@ -36,10 +36,9 @@ class Inscription::StructuresController < ApplicationController
       @compte.structure = @structure
     end
 
-    # Affiliation OPCO automatique si la structure est persistée et a des IDCC
-    if @structure.present? && @structure.persisted?
-      AffiliationOpcoService.new(@structure).affilie_opcos
-    end
+    # Affiliation OPCO automatique si la structure a des IDCC
+    # Le service gère maintenant les structures non persistées
+    AffiliationOpcoService.new(@structure).affilie_opcos if @structure.present?
   end
 
   def determine_action_type

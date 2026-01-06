@@ -21,11 +21,15 @@ siret_pro_connect: "13002526500013") }
           )
         end
 
-        it "prépare la structure mais n'appelle pas le service d'affiliation OPCO" do
-          expect(AffiliationOpcoService).not_to receive(:new)
+        it "prépare la structure et appelle le service d'affiliation OPCO (même non persistée)" do
+          service_double = instance_double(AffiliationOpcoService)
+          allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
+          allow(service_double).to receive(:affilie_opcos)
 
           get :show
 
+          expect(AffiliationOpcoService).to have_received(:new)
+          expect(service_double).to have_received(:affilie_opcos)
           expect(response).to have_http_status(:success)
         end
       end

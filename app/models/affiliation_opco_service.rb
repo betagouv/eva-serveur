@@ -10,8 +10,18 @@ class AffiliationOpcoService
     return if opcos_trouves.empty?
 
     opcos_trouves.each do |opco|
-      @structure.structure_opcos.find_or_create_by(opco: opco)
+      if @structure.persisted?
+        @structure.structure_opcos.find_or_create_by(opco: opco)
+      else
+        # Pour les structures non persistées, on construit les associations
+        # Elles seront sauvegardées quand la structure sera sauvegardée
+        @structure.structure_opcos.build(opco: opco) unless opco_deja_associe?(opco)
+      end
     end
+  end
+
+  def opco_deja_associe?(opco)
+    @structure.structure_opcos.any? { |so| so.opco_id == opco.id }
   end
 
   private

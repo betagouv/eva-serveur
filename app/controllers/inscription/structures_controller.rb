@@ -32,6 +32,7 @@ class Inscription::StructuresController < ApplicationController
     return if @structure.present? || @compte.siret_pro_connect.blank?
 
     @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+    AffiliationOpcoService.new(@structure).affilie_opcos if @structure.present?
     @compte.structure = @structure
   end
 
@@ -57,6 +58,8 @@ class Inscription::StructuresController < ApplicationController
     ActiveRecord::Base.transaction do
       @structure = cree_structure_avec_params
       return render :show if @structure.blank?
+
+      AffiliationOpcoService.new(@structure).affilie_opcos
 
       associe_opcos_si_present
       finalise_inscription_compte

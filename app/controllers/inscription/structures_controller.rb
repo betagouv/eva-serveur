@@ -29,11 +29,15 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def prepare_structure_si_necessaire
-    return if @structure.present? || @compte.siret_pro_connect.blank?
+    return if @compte.siret_pro_connect.blank?
 
-    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+    if @structure.blank?
+      @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+      @compte.structure = @structure
+    end
+
+    # Affiliation OPCO automatique si la structure a des IDCC
     AffiliationOpcoService.new(@structure).affilie_opcos if @structure.present?
-    @compte.structure = @structure
   end
 
   def determine_action_type

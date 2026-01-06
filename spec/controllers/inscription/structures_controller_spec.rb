@@ -56,7 +56,8 @@ siret_pro_connect: "13002526500013") }
     end
 
     context "quand la structure est déjà préparée" do
-      let!(:structure) { create(:structure_locale, :avec_admin, siret: "13002526500013", idcc: [ "3" ]) }
+      let!(:structure) {
+ create(:structure_locale, :avec_admin, siret: "13002526500013", idcc: [ "3" ]) }
       let(:compte_avec_structure) {
         create(:compte_pro_connect, etape_inscription: "assignation_structure",
         siret_pro_connect: "13002526500013", structure: structure) }

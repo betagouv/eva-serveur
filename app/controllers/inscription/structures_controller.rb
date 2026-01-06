@@ -55,26 +55,46 @@ class Inscription::StructuresController < ApplicationController
 
   def creer_nouvelle_structure
     ActiveRecord::Base.transaction do
-      @structure = FabriqueStructure.cree_depuis_siret(
-        @compte.siret_pro_connect,
-        structure_params.merge(usage: @compte.usage).compact
-      )
-
+      @structure = cree_structure_avec_params
       return render :show if @structure.blank?
 
-      @compte.rejoindre_structure(@structure)
-      @compte.etape_inscription = :complet
+      associe_opcos_si_present
+      finalise_inscription_compte
+    end
+  end
 
-      if @compte.save
-        redirige_vers_etape_inscription(@compte)
-      else
-        render :show
-      end
+  def cree_structure_avec_params
+    FabriqueStructure.cree_depuis_siret(
+      @compte.siret_pro_connect,
+      structure_params.merge(usage: @compte.usage).compact
+    )
+  end
+
+  def associe_opcos_si_present
+    return unless opco_ids_params.present?
+
+    @structure.opco_ids = opco_ids_params
+    @structure.save
+  end
+
+  def finalise_inscription_compte
+    @compte.rejoindre_structure(@structure)
+    @compte.etape_inscription = :complet
+
+    if @compte.save
+      redirige_vers_etape_inscription(@compte)
+    else
+      render :show
     end
   end
 
   def structure_params
     param_key = params[:structure].present? ? :structure : :structure_locale
     params.require(param_key).permit(:nom, :type_structure)
+  end
+
+  def opco_ids_params
+    param_key = params[:structure].present? ? :structure : :structure_locale
+    params.dig(param_key, :opco_ids)&.reject(&:blank?)
   end
 end

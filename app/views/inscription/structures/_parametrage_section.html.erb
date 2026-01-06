@@ -29,6 +29,18 @@
         required: true
       ) %>
     </div>
+    <div class="fr-col-12">
+      <%= render InputComponent.new(
+        id: "structure_opco_ids",
+        label: t("inscription.structures.show.opco_label"),
+        form: form,
+        method: :opco_ids,
+        collection: collection_opcos,
+        include_blank: true,
+        required: true
+      ) %>
+      <%= link_to "Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", target: "_blank", class: "fr-link" %>
+    </div>
   </div>
 
   <p class="structure-parametrage-section__mention-admin">

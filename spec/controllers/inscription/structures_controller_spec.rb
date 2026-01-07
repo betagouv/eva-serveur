@@ -123,18 +123,17 @@ siret_pro_connect: "13002526500013") }
         expect(service_double).to have_received(:affilie_opcos)
       end
 
-      context "quand l'utilisateur sélectionne des OPCOs" do
+      context "quand l'utilisateur sélectionne un OPCO" do
         let!(:opco1) { create(:opco, nom: "OPCO 1") }
-        let!(:opco2) { create(:opco, nom: "OPCO 2") }
 
-        it "associe les OPCOs sélectionnés après l'affiliation automatique" do
+        it "associe l'OPCO sélectionné après l'affiliation automatique" do
           patch :update, params: {
-            structure: structure_params.merge(opco_ids: [ opco1.id, opco2.id ]),
+            structure: structure_params.merge(opco_id: opco1.id),
             commit: "creer"
           }
 
           structure_creée.reload
-          expect(structure_creée.opcos).to contain_exactly(opco1, opco2)
+          expect(structure_creée.opcos).to contain_exactly(opco1)
         end
       end
     end

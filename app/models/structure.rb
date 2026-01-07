@@ -9,6 +9,18 @@ class Structure < ApplicationRecord
   alias structure_referente parent
   alias structure_referente= parent=
 
+  def opco_id
+    opco_ids.first
+  end
+
+  def opco_id=(id)
+    if id.present?
+      self.opco_ids = [ id ]
+    else
+      self.opco_ids = []
+    end
+  end
+
   validates :nom, presence: true
   validates :nom, uniqueness: {
     case_sensitive: false,

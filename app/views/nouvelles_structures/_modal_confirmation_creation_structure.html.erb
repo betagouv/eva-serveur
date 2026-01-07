@@ -1,0 +1,36 @@
+<% id_modal = "fr-modal-confirmation-creation-structure" %>
+
+<%= dsfr_modal(
+  title: t(".titre"),
+  html_attributes: { id: id_modal }
+) do |component| %>
+  <div>
+    <%= md t(".message") %>
+  </div>
+  
+  <% component.with_button do %>
+    <%= render BoutonComponent.new(
+      "#",
+      type: :primary,
+      tag: :submit,
+      size: :md,
+      id: "confirmer-creation-structure",
+      "data-form": "form-creation-structure",
+      data: { disable_with: false } 
+    ) do %>
+      <%= t(".creer_structure") %>
+    <% end %>
+  <% end %>
+  <% component.with_button do %>
+    <%= render BoutonComponent.new(
+      "#",
+      type: :secondary,
+      tag: :button,
+      size: :md,
+      "aria-controls": id_modal
+    ) do %>
+      <%= t(".annuler") %>
+    <% end %>
+  <% end %>
+<% end %>
+

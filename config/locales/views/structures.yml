@@ -56,6 +56,27 @@ fr:
         Si vous n'êtes pas sûr d'être habilité à prendre cette responsabilité, veuillez prendre contact préalablement avec votre responsable hiérarchique.
       bouton_retour: Annuler
       bouton: Créer ma structure
+    modal_confirmation_creation_structure:
+      titre: Créer la structure
+      message: |
+        Vous êtes sur le point de créer une nouvelle structure dans eva, associée à votre compte.
+        <br><br>
+
+        En la créant, vous en deviendrez **l’administrateur ou l’administratrice**.
+
+        Ce rôle vous permet notamment de :
+
+        <br>
+
+        - gérer les informations ;
+        - accepter ou refuser les demandes de rattachement d’autres utilisateurs.
+
+
+        <br>
+
+        Si vous n’êtes pas habilité à assumer ce rôle, nous vous invitons à ne pas poursuivre et à vous rapprocher de votre responsable hiérarchique.
+      annuler: Annuler
+      creer_structure: Confirmer la création
     show:
       title: Créer une nouvelle structure
       titre: Rejoindre eva

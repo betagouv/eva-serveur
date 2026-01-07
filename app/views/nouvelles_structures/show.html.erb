@@ -7,10 +7,7 @@
 <% end %>
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
-<% if params[:mise_en_garde] == "affiche" %>
-  <%= render "modal_mise_en_garde" %>
-<% end %>
-<%= semantic_form_for @compte, url: nouvelle_structure_path do |compte| %>
+<%= semantic_form_for @compte, url: nouvelle_structure_path, html: { id: "form-creation-structure" } do |compte| %>
   <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :telephone, :email, :password, :password_confirmation, :"structure.nom", :"structure.code_postal", :"structure.type_structure", :"structure.siret" ]) %>
   <%= compte.semantic_fields_for :structure do |structure| %>
     <div class="panel">
@@ -59,11 +56,26 @@
   </div>
   <div class="panel">
     <%= md t(".actions.validation", email_contact: Eva::EMAIL_CONTACT) %>
+    <%= render "modal_confirmation_creation_structure" %>
     <%= compte.actions do %>
-      <%= compte.action :submit, label: t(".creer_structure"), wrapper_html: { class: "d-flex justify-content-end" } %>
+      <div class="d-flex justify-content-end">
+        <%= render BoutonComponent.new(
+          "#",
+          type: :primary,
+          tag: :button,
+          size: :md,
+          "data-fr-opened": false,
+          "data-fr-js-modal-button": true,
+          "aria-controls": "fr-modal-confirmation-creation-structure",
+        ) do %>
+          <%= t(".creer_structure") %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 <% end %>
+
+
 <script>
   document.addEventListener('DOMContentLoaded', cgu_activation_submit);
 </script>

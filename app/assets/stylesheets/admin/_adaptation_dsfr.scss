@@ -118,11 +118,8 @@ button.fr-link--close.fr-link:hover {
 
 .fr-modal__footer {
   display: flex;
-  padding: $dsfr-spacing-12v $dsfr-spacing-0 $dsfr-spacing-8v $dsfr-spacing-0;
-  justify-content: flex-end;
-  align-items: center;
-  gap: $dsfr-spacing-4v;
-  align-self: stretch;
+  padding-top: $dsfr-spacing-8v;
+  margin: 0;
 }
 
 .fr-modal {
@@ -134,6 +131,26 @@ button.fr-link--close.fr-link:hover {
 
 .fr-modal.fr-modal--opened {
   display: flex; 
+}
+
+.fr-modal__content ul {
+  list-style-type: var(--ul-type);
+  padding: 0;
+  padding-inline-start: var(--ul-start);
+}
+
+.body.logged_out #wrapper .fr-modal__content ul li, 
+.fr-modal__content ul li {
+  float: none;
+  --xl-base: calc(var(--xl-size) * 0.9);
+  padding-bottom: var(--li-bottom);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.fr-modal__footer .fr-btns-group {
+  gap: 1rem;
+  margin: 0;
 }
 
 .fr-btn {

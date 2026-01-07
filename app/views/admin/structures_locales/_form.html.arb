@@ -1,7 +1,6 @@
-render partial: "nouvelles_structures/modal_mise_en_garde" if params[:mise_en_garde] == "affiche"
 div class: "panel nouvelle_structure" do
   h2 t(resource.new_record? ? ".titre.nouveau" : ".titre.modification")
-  active_admin_form_for [ :admin, resource ] do |f|
+  active_admin_form_for [ :admin, resource ], html: { id: "form-creation-structure" } do |f|
     f.inputs do
       f.object.code_postal = params[:code_postal]&.delete("^0-9") if f.object.code_postal.blank?
       f.input :nom
@@ -25,8 +24,16 @@ div class: "panel nouvelle_structure" do
     end
     text_node md t(".verifier_information_structure", email_contact: Eva::EMAIL_CONTACT)
     f.actions do
-      f.action :submit
+      f.action :submit, button_html: {
+        type: "button",
+        "data-fr-opened": "false",
+        "aria-controls": "fr-modal-confirmation-creation-structure"
+      } if resource.new_record?
+      f.action :submit unless resource.new_record?
       annulation_formulaire(f) if current_compte.structure.present?
     end
+  end
+  if resource.new_record?
+    render partial: "nouvelles_structures/modal_confirmation_creation_structure"
   end
 end

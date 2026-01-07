@@ -5,7 +5,7 @@
 <% elsif @tag == :submit %>
   <%= submit_tag @url, @params.merge(type: "submit", name: "commit", value: content.strip) %>
 <% else %>
-  <%= button_to @url, @params do %>
+  <%= button_tag @params.merge(type: "button") do %>
     <% content %>
   <% end %>
 <% end %>

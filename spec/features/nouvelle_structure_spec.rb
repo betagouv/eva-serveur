@@ -3,6 +3,57 @@ require 'rails_helper'
 describe 'Nouvelle Structure', type: :feature do
   let!(:parcours_type_complet) { create :parcours_type, :complet }
 
+  def extract_field_value(field)
+    case field.tag_name
+    when 'input'
+      return nil if field[:type] == 'checkbox' && !field.checked?
+      return nil if field[:type] == 'radio' && !field.checked?
+
+      field[:value]
+    when 'select'
+      field.value
+    when 'textarea'
+      field.value
+    end
+  end
+
+  def parse_field_name(field_name)
+    field_name.match(/\A(\w+)(?:\[(\w+)\])?(?:\[(\w+)\])?\z/)
+  end
+
+  def set_nested_value(form_params, keys, value)
+    current = form_params
+    keys[0..-2].each do |key|
+      current[key] ||= {}
+      current = current[key]
+    end
+    current[keys.last] = value
+  end
+
+  def add_nested_param(form_params, field_name, value)
+    name_parts = parse_field_name(field_name)
+    return form_params[field_name] = value unless name_parts
+
+    keys = [ name_parts[1], name_parts[2], name_parts[3] ].compact
+    set_nested_value(form_params, keys, value)
+  end
+
+  def submit_nouvelle_structure_form
+    form = find('#form-creation-structure')
+    form_params = {}
+
+    form.all('input, select, textarea', visible: :all).each do |field|
+      next if field[:name].blank? || field[:type] == 'submit'
+
+      value = extract_field_value(field)
+      next if value.nil? || value.blank?
+
+      add_nested_param(form_params, field[:name], value)
+    end
+
+    page.driver.submit :post, nouvelle_structure_path, form_params
+  end
+
   context 'quand le formulaire est complété' do
     before do
       visit nouvelle_structure_path
@@ -20,7 +71,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     it 'créé stucture et compte' do
       expect do
-        click_on 'Valider la création de mon compte'
+        submit_nouvelle_structure_form
       end.to change(StructureLocale, :count)
         .and change(Compte, :count)
 
@@ -47,7 +98,7 @@ describe 'Nouvelle Structure', type: :feature do
     before { visit nouvelle_structure_path }
 
     it 'ne remplie pas tous les champs' do
-      click_on 'Valider la création de mon compte'
+      submit_nouvelle_structure_form
     end
   end
 
@@ -67,7 +118,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     it 'affiche une erreur et ne crée pas la structure' do
       expect do
-        click_on 'Valider la création de mon compte'
+        submit_nouvelle_structure_form
       end.not_to change(StructureLocale, :count)
 
       message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.blank")
@@ -98,7 +149,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     it 'affiche une erreur et ne crée pas la structure' do
       expect do
-        click_on 'Valider la création de mon compte'
+        submit_nouvelle_structure_form
       end.not_to change(StructureLocale, :count)
 
       message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
@@ -128,7 +179,7 @@ describe 'Nouvelle Structure', type: :feature do
 
     it 'créé la structure avec le statut SIRET vérifié' do
       expect do
-        click_on 'Valider la création de mon compte'
+        submit_nouvelle_structure_form
       end.to change(StructureLocale, :count)
 
       structure = Structure.order(:created_at).last

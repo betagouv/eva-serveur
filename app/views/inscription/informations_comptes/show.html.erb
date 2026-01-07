@@ -68,13 +68,12 @@
             ) %>
           </div>
           <div class="fr-col-12">
-            <%= compte.input :cgu_acceptees, label: raw("J'accepte les&nbsp;" + link_to("conditions générales d'utilisation d'eva", cgu_path, target: "_blank", rel: "noopener noreferrer").to_s), required: true %>
+            <% cgu_lien = capture { render LienComponent.new("conditions générales d'utilisation d'eva", cgu_path, externe: true) } %>
+            <%= compte.input :cgu_acceptees, label: raw("J'accepte les&nbsp;" + cgu_lien), required: true %>
           </div>
           <div class="fr-col-12">
             <div class="informations-compte-actions">
-              <%= link_to pro_connect_logout_path, class: "bouton-tertiaire grand-bouton informations-compte-quitter" do %>
-                <%= t(".quitter") %>
-              <% end %>
+              <%= render LienComponent.new(t(".quitter"), pro_connect_logout_path, class: "bouton-tertiaire grand-bouton informations-compte-quitter") %>
               <%= submit_tag t(".continuer"), class: "bouton grand-bouton valider-compte-bouton disabled", disabled: true %>
             </div>
           </div>

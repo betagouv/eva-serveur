@@ -1,4 +1,12 @@
 module StructureHelper
+  def opcos_associes(structure)
+    if structure.persisted?
+      structure.opcos
+    else
+      # Pour les structures non persistées, on accède aux OPCOs via structure_opcos
+      structure.structure_opcos.map(&:opco).compact
+    end
+  end
   def traduction_type_structure(type_structure)
     I18n.t(
       "activerecord.attributes.structure.type_structure.#{type_structure}"

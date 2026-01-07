@@ -17,8 +17,8 @@
     </li>
     <li class="structure-info-card__info">
       <span class="structure-info-card__label">OPCO :</span> <span class="structure-info-card__value">
-        <% if structure.opcos.any? %>
-          <%= structure.opcos.map(&:nom).join(", ") %>
+        <% if opcos_associes(structure).any? %>
+          <%= opcos_associes(structure).map(&:nom).join(", ") %>
         <% else %>
           <%= t("inscription.structures.show.opco_non_identifie") %>
         <% end %>
@@ -26,7 +26,7 @@
     </li>
   </ul>
   <p class="structure-info-card__mention-opco">
-    <% if structure.opcos.any? %>
+    <% if opcos_associes(structure).any? %>
       <%= t("inscription.structures.show.mention_opco_detecte") %>
     <% else %>
       <%= t("inscription.structures.show.mention_opco_non_detecte") %>

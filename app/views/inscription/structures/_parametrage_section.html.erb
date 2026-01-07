@@ -36,11 +36,10 @@
         form: form,
         method: :opco_id,
         collection: collection_opcos,
-        include_blank: true,
         required: true,
         value: opco_id_associe(form.object)
       ) %>
-      <%= link_to "Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", target: "_blank", class: "fr-link" %>
+      <%= render LienComponent.new("Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", externe: true) %>
     </div>
   </div>
 

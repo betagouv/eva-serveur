@@ -7,6 +7,13 @@ module StructureHelper
       structure.structure_opcos.map(&:opco).compact
     end
   end
+
+  def adresse_ou_code_postal(structure)
+    return structure.adresse if structure.adresse.present?
+    return structure.code_postal if structure.code_postal.present?
+
+    nil
+  end
   def traduction_type_structure(type_structure)
     I18n.t(
       "activerecord.attributes.structure.type_structure.#{type_structure}"

@@ -12,5 +12,6 @@ fr:
       form:
         structure_disabled_avec_campagnes: Modification impossible car ce compte a des campagnes. Ré-attribuez ses campagnes à un autre compte.
         modal_verification:
+      modal_verification:
         titre: <span class='fr-icon-arrow-right-line' aria-hidden='true'></span> Demande d'accès
         introduction: "**%{compte}** a demandé un accès à la structure « %{structure} »"

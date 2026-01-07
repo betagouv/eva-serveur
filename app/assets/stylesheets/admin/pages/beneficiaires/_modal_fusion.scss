@@ -15,12 +15,3 @@
   line-height: $dsfr-line-height-md;
   margin-bottom: 0.5rem;
 }
-
-#fr-modal-fusionner {
-  background-color: transparent;
-}
-
-#fr-modal-fusionner::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-

@@ -99,14 +99,36 @@ function updateModalContent(beneficiaires) {
 
 function openModal() {
   const modal = document.getElementById('fr-modal-fusionner');
+  const dsfrModal = window.dsfr(modal).modal;
 
-  if (typeof modal.showModal === 'function') {
-    modal.showModal();
-  } else {
-    modal.style.display = 'block';
-  }
+  dsfrModal.disclose();
 
-  modal.classList.add('fr-modal--opened');
+  resizeModal(modal);
+}
+
+function resizeModal(modal) {
+  requestAnimationFrame(() => {
+    const modalBody = modal.querySelector('.fr-modal__body');
+    const modalContent = modal.querySelector('.fr-modal__content');
+    const modalHeader = modal.querySelector('.fr-modal__header');
+    const modalFooter = modal.querySelector('.fr-modal__footer');
+    if (!modalBody) return;
+
+    const contentPadding = modalContent
+      ? getComputedStyle(modalContent)
+      : { paddingTop: '0', paddingBottom: '0' };
+
+    const paddingTop = parseFloat(contentPadding.paddingTop) || 0;
+    const paddingBottom = parseFloat(contentPadding.paddingBottom) || 0;
+    const headerHeight = modalHeader?.offsetHeight || 0;
+    const footerHeight = modalFooter?.offsetHeight || 0;
+
+    // On retire header + footer + padding pour laisser uniquement l'espace du corps.
+    const availableHeight = window.innerHeight - headerHeight - footerHeight - paddingTop - paddingBottom - 24; // 24px de marge visuelle
+    const maxHeight = `${Math.max(0, availableHeight)}px`;
+
+    modalBody.style.maxHeight = maxHeight;
+  });
 }
 
 function initializeFormSubmission(modal) {

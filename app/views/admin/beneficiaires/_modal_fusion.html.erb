@@ -1,7 +1,12 @@
-<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-fusionner" }) do %>
+<% id_modal = "fr-modal-fusionner" %>
+
+<%= dsfr_modal(
+  title: t(".titre").html_safe,
+  html_attributes: { id: id_modal }
+) do |component| %>
   <div class="modal-fusionner">
     <%= form_with url: batch_action_admin_beneficiaires_path, method: :post, local: true, id: "fusion-form" do |f| %>
-      <div class= "liste-beneficiaires-fusion"style="padding-bottom: 60px">
+      <div class= "liste-beneficiaires-fusion">
         <p> <%= t(".instruction") %> </p>
         <ul id="liste-elements-a-fusionner"></ul>
         <p> <%= t(".pour_fusion") %> <span class="fr-text--bold" id="beneficiaire-rattache"></span>. </p>
@@ -16,10 +21,30 @@
 
       <div id="hidden-ids-container"></div>
 
-      <div class="fr-modal__footer">
-        <button type="button" class="fr-btn bouton-secondaire" data-dismiss="modal"><%= t(".annuler") %></button>
-        <button type="submit" class="fr-btn" id="confirmer-fusion"><%= t(".confirmer") %></button>
-      </div>
     <% end %>
   </div>
+
+  <% component.with_button do %>
+    <%= render BoutonComponent.new(
+      "#",
+      type: :primary,
+      tag: :submit,
+      size: :md,
+      id: "confirmer-fusion",
+      data: { disable_with: false } 
+    ) do %>
+      <%= t(".confirmer") %>
+    <% end %>
+  <% end %>
+  <% component.with_button do %>
+    <%= render BoutonComponent.new(
+      "#",
+      type: :secondary,
+      tag: :button,
+      size: :md,
+      "aria-controls": id_modal
+    ) do %>
+      <%= t(".annuler") %>
+    <% end %>
+  <% end %>
 <% end %>

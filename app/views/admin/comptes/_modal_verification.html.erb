@@ -1,10 +1,10 @@
 
-<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}" }) do %>
+<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: "fr-modal-verification" }) do %>
   <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
     <div class="modal-role-utilisateur">
       <%= md t(".introduction", compte: compte.display_name, structure: current_compte.structure.nom) %>
-      <div class="fr-select-group fr-mb-4">
-        <fieldset class="fr-fieldset" id="role-selection" aria-labelledby="role-selection-legend">
+      <div class="fr-select-group fr-mb-0">
+        <fieldset class="fr-fieldset fr-mb-0" id="role-selection" aria-labelledby="role-selection-legend">
           <legend class="fr-fieldset__legend fr-fieldset__legend--regular" id="role-selection-legend">
             Choisissez un rôle :
           </legend>

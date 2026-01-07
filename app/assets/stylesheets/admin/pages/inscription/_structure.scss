@@ -79,6 +79,19 @@
   .structure-confirmation-mention {
     @include body-xs-mention();
     margin: 0;
+
+    .lien-avec-fleche {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .arrow-right-16 {
+        width: 16px;
+        height: 16px;
+        display: block;
+        flex-shrink: 0;
+      }
+    }
   }
 
   .structure-creation-text {
@@ -90,8 +103,11 @@
       align-items: center;
       gap: 0.5rem;
 
-      .fr-icon {
-        margin: 0;
+      .arrow-right-16 {
+        width: 16px;
+        height: 16px;
+        display: block;
+        flex-shrink: 0;
       }
     }
   }

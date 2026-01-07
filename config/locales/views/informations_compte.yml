@@ -17,14 +17,14 @@ fr:
         hint_email: Cette adresse est utilisée pour les échanges liés à votre compte.
         label_fonction: Fonction
         label_service_departement: Service
-        hint_service_departement: "Exemple : logistique, marketing, ressources humaines"
+        hint_service_departement: "Exemple : logistique, marketing, ressources humaines"
     selection_usages:
       show:
         titre: Créez un compte qui vous ressemble
         sous_titre: eva s’adapte à vos besoins professionnels
         description: En fonction de votre choix, l’accès aux modules et aux ressources sera optimisé pour répondre à vos attentes.
-        titre_principal: Quel sera votre usage ?
-        sous_titre_principal: "Choisissez votre objectif principal :"
+        titre_principal: Quel sera votre usage ?
+        sous_titre_principal: "Choisissez votre objectif principal :"
         campagnes_jeu:
           titre: Campagnes de jeu
           description: "Identifier les besoins des personnes en difficulté : repérer les compétences à soutenir, accompagner vos bénéficiaires avec précision."
@@ -49,7 +49,7 @@ fr:
         creer_structure: Créer ma structure
         confirme_structure: Je confirme qu'il s'agit de la structure pour laquelle je travaille
         mention_acces: Vous aurez un accès immédiat au service, avec des fonctionnalités limitées. L'accès complet sera activé après validation par l'administrateur ou l'administratrice.
-        texte_creation: Ce n’est pas le cas ?
+        texte_creation: Ce n’est pas le cas ?
         lien_annuaire: Ce n’est pas la bonne structure
         titre_carte_non_trouvee: Informations administratives trouvées
         nom_structure_label: Nom de la structure
@@ -73,14 +73,14 @@ fr:
           message: Vous êtes sur le point de créer une nouvelle structure dans eva, associée à votre compte. Cette opération vous désignera comme administrateur ou administratrice de cette structure et vous aurez ainsi la responsabilité d'accepter ou refuser les comptes désirant rejoindre cette structure par la suite.
     recherche_structures:
       show:
-        titre: Dans quelle structure travaillez-vous ?
+        titre: Dans quelle structure travaillez-vous ?
         sous_titre: Dans un premier temps, merci de regarder si votre structure est déjà enregistrée.
         titre_intro: Votre structure de rattachement
         sous_titre_intro: "Pour pouvoir utiliser ce service, vous devez être rattaché à une structure. Il s’agit de celle pour laquelle vous intervenez (association, organisme, entreprise…)."
         titre_carte: Identification de la structure
         label_siret: Numéro SIRET
         hint_siret: Le numéro SIRET est composé de 14 chiffres
-        lien_annuaire: Retrouver votre numéro SIRET sur L’Annuaire des Entreprises 
+        lien_annuaire: Retrouver votre numéro SIRET sur L’Annuaire des Entreprises
         bouton_retour: Précédent
         bouton_valider: Continuer
         erreur_siret_obligatoire: Le numéro de SIRET est obligatoire.

@@ -35,7 +35,7 @@ describe StructureMailer, type: :mailer do
 
       expect(email.from).to eql([ Eva::EMAIL_CONTACT ])
       expect(email.to).to eql([ 'debut@test.com' ])
-      expect(email.subject).to eql('Eva - Et si vous testiez les compétences avec des jeux ?')
+      expect(email.subject).to eql('Eva - Et si vous testiez les compétences avec des jeux ?')
       expect(email.body).to include('Paule')
       expect(email.body).to include('Ma Super Structure - 75012')
       expect(email.body).to include('Créez votre première campagne')

@@ -36,8 +36,9 @@
         form: form,
         method: :opco_ids,
         collection: collection_opcos,
-        include_blank: true,
-        required: true
+        required: true,
+        value: opco_ids_associes(form.object),
+        input_html: { multiple: true }
       ) %>
       <%= link_to "Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", target: "_blank", class: "fr-link" %>
     </div>

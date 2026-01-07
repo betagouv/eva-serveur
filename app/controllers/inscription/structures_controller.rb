@@ -38,7 +38,13 @@ class Inscription::StructuresController < ApplicationController
 
     # Affiliation OPCO automatique si la structure a des IDCC
     # Le service gère maintenant les structures non persistées
-    AffiliationOpcoService.new(@structure).affilie_opcos if @structure.present?
+    if @structure.present?
+      AffiliationOpcoService.new(@structure).affilie_opcos
+      # Pour les structures non persistées, assigner les opco_ids pour le formulaire
+      unless @structure.persisted?
+        @structure.opco_ids = @structure.structure_opcos.map { |so| so.opco&.id }.compact
+      end
+    end
   end
 
   def determine_action_type

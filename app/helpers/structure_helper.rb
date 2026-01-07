@@ -8,6 +8,15 @@ module StructureHelper
     end
   end
 
+  def opco_ids_associes(structure)
+    if structure.persisted?
+      structure.opco_ids
+    else
+      # Pour les structures non persistées, on récupère les IDs depuis structure_opcos
+      structure.structure_opcos.map { |so| so.opco&.id }.compact
+    end
+  end
+
   def adresse_ou_code_postal(structure)
     return structure.adresse if structure.adresse.present?
     return structure.code_postal if structure.code_postal.present?

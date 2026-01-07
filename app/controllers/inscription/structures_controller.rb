@@ -31,20 +31,27 @@ class Inscription::StructuresController < ApplicationController
   def prepare_structure_si_necessaire
     return if @compte.siret_pro_connect.blank?
 
-    if @structure.blank?
-      @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
-      @compte.structure = @structure
-    end
+    recherche_et_assigne_structure
+    affilie_et_prepare_opcos
+  end
 
-    # Affiliation OPCO automatique si la structure a des IDCC
-    # Le service gère maintenant les structures non persistées
-    if @structure.present?
-      AffiliationOpcoService.new(@structure).affilie_opcos
-      # Pour les structures non persistées, assigner les opco_ids pour le formulaire
-      unless @structure.persisted?
-        @structure.opco_ids = @structure.structure_opcos.map { |so| so.opco&.id }.compact
-      end
-    end
+  def recherche_et_assigne_structure
+    return if @structure.present?
+
+    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+    @compte.structure = @structure
+  end
+
+  def affilie_et_prepare_opcos
+    return unless @structure.present?
+
+    AffiliationOpcoService.new(@structure).affilie_opcos
+    assigne_opco_ids_pour_formulaire unless @structure.persisted?
+  end
+
+  def assigne_opco_ids_pour_formulaire
+    opco_ids = @structure.structure_opcos.map { |so| so.opco&.id }.compact
+    @structure.opco_id = opco_ids.first if opco_ids.any?
   end
 
   def determine_action_type
@@ -85,9 +92,9 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def associe_opcos_si_present
-    return unless opco_ids_params.present?
+    return unless opco_id_params.present?
 
-    @structure.opco_ids = opco_ids_params
+    @structure.opco_id = opco_id_params
     @structure.save
   end
 
@@ -104,11 +111,11 @@ class Inscription::StructuresController < ApplicationController
 
   def structure_params
     param_key = params[:structure].present? ? :structure : :structure_locale
-    params.require(param_key).permit(:nom, :type_structure)
+    params.require(param_key).permit(:nom, :type_structure, :opco_id)
   end
 
-  def opco_ids_params
+  def opco_id_params
     param_key = params[:structure].present? ? :structure : :structure_locale
-    params.dig(param_key, :opco_ids)&.reject(&:blank?)
+    params.dig(param_key, :opco_id)&.presence
   end
 end

@@ -17,6 +17,11 @@ module StructureHelper
     end
   end
 
+  def opco_id_associe(structure)
+    opco_ids = opco_ids_associes(structure)
+    opco_ids.first
+  end
+
   def adresse_ou_code_postal(structure)
     return structure.adresse if structure.adresse.present?
     return structure.code_postal if structure.code_postal.present?

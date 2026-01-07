@@ -31,14 +31,14 @@
     </div>
     <div class="fr-col-12">
       <%= render InputComponent.new(
-        id: "structure_opco_ids",
+        id: "structure_opco_id",
         label: t("inscription.structures.show.opco_label"),
         form: form,
-        method: :opco_ids,
+        method: :opco_id,
         collection: collection_opcos,
+        include_blank: true,
         required: true,
-        value: opco_ids_associes(form.object),
-        input_html: { multiple: true }
+        value: opco_id_associe(form.object)
       ) %>
       <%= link_to "Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", target: "_blank", class: "fr-link" %>
     </div>

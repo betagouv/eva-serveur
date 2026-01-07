@@ -564,5 +564,72 @@ describe Structure, type: :model do
 
       expect(StructureOpco.where(structure_id: structure_id)).to be_empty
     end
+
+    describe "#opco_id" do
+      context "quand la structure a un OPCO" do
+        before { structure.opcos << opco1 }
+
+        it "retourne l'ID du premier OPCO" do
+          expect(structure.opco_id).to eq(opco1.id)
+        end
+      end
+
+      context "quand la structure a plusieurs OPCOs" do
+        before { structure.opcos << [ opco1, opco2 ] }
+
+        it "retourne l'ID du premier OPCO" do
+          expect(structure.opco_id).to eq(opco1.id)
+        end
+      end
+
+      context "quand la structure n'a pas d'OPCO" do
+        it "retourne nil" do
+          expect(structure.opco_id).to be_nil
+        end
+      end
+    end
+
+    describe "#opco_id=" do
+      context "quand on assigne un ID d'OPCO valide" do
+        it "associe l'OPCO à la structure" do
+          structure.opco_id = opco1.id
+          structure.save
+
+          expect(structure.opcos.count).to eq(1)
+          expect(structure.opcos.first).to eq(opco1)
+        end
+
+        it "remplace les OPCOs existants" do
+          structure.opcos << opco2
+          structure.opco_id = opco1.id
+          structure.save
+
+          expect(structure.opcos.count).to eq(1)
+          expect(structure.opcos.first).to eq(opco1)
+        end
+      end
+
+      context "quand on assigne nil" do
+        before { structure.opcos << opco1 }
+
+        it "supprime tous les OPCOs" do
+          structure.opco_id = nil
+          structure.save
+
+          expect(structure.opcos.count).to eq(0)
+        end
+      end
+
+      context "quand on assigne une chaîne vide" do
+        before { structure.opcos << opco1 }
+
+        it "supprime tous les OPCOs" do
+          structure.opco_id = ""
+          structure.save
+
+          expect(structure.opcos.count).to eq(0)
+        end
+      end
+    end
   end
 end

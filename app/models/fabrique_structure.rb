@@ -1,9 +1,10 @@
 class FabriqueStructure
-  def self.cree_depuis_siret(siret, attributs_structure = {})
+  def self.cree_depuis_siret(siret, attributs_structure = {}, validation_inscription: false)
     structure = RechercheStructureParSiret.new(siret).call
     return nil if structure.blank?
 
     structure.assign_attributes(attributs_structure)
+    structure.validation_inscription = validation_inscription
 
     # Si l'usage est "Eva: entreprises", forcer type_structure = "entreprise"
     structure.type_structure = "entreprise" if structure.usage == AvecUsage::USAGE_ENTREPRISES

@@ -9,6 +9,8 @@ class Structure < ApplicationRecord
   alias structure_referente parent
   alias structure_referente= parent=
 
+  attr_accessor :validation_inscription
+
   def opco_id
     opco_ids.first
   end
@@ -31,6 +33,7 @@ class Structure < ApplicationRecord
   validate :verifie_siret_ou_siren
   validates :siret, uniqueness: true, allow_blank: true, unless: -> { errors[:siret].any? }
   validate :ne_peut_pas_supprimer_siret
+  validate :doit_avoir_un_opco, if: :validation_inscription
 
   auto_strip_attributes :nom, squish: true
 
@@ -181,5 +184,11 @@ class Structure < ApplicationRecord
     return unless siret_was.present?
 
     errors.add(:siret, :cannot_be_removed)
+  end
+
+  def doit_avoir_un_opco
+    return if opcos.any?
+
+    errors.add(:opco_id, :must_be_present)
   end
 end

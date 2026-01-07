@@ -87,13 +87,15 @@ class Inscription::StructuresController < ApplicationController
   def cree_structure_avec_params
     FabriqueStructure.cree_depuis_siret(
       @compte.siret_pro_connect,
-      structure_params.merge(usage: @compte.usage).compact
+      structure_params.merge(usage: @compte.usage).compact,
+      validation_inscription: true
     )
   end
 
   def associe_opcos_si_present
     return unless opco_id_params.present?
 
+    @structure.validation_inscription = true
     @structure.opco_id = opco_id_params
     @structure.save
   end

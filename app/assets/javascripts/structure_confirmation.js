@@ -21,6 +21,8 @@ function structure_confirmation_submit() {
   checkbox.addEventListener('change', function() {
     activation_bouton_rejoindre(this.checked);
   });
+
+  initStructureFormLinks();
 }
 
 function activation_bouton_creer(structure_confirmee) {
@@ -34,6 +36,31 @@ function activation_bouton_creer(structure_confirmee) {
     bouton_creer.classList.add('disabled');
     bouton_creer.setAttribute('disabled', 'disabled');
   }
+}
+
+// Gérer la soumission du formulaire via les liens avec data-submit-form
+function initStructureFormLinks() {
+  document.querySelectorAll('a[data-submit-form]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var form = this.closest('form');
+      if (form) {
+        // Créer un input hidden pour le commit
+        var commitInput = document.createElement('input');
+        commitInput.type = 'hidden';
+        commitInput.name = 'commit';
+        commitInput.value = this.dataset.commit;
+        form.appendChild(commitInput);
+
+        // Changer l'action du formulaire si nécessaire
+        if (this.dataset.formaction) {
+          form.action = this.dataset.formaction;
+        }
+
+        form.submit();
+      }
+    });
+  });
 }
 
 function structure_creation_confirmation_submit() {
@@ -67,5 +94,7 @@ function structure_creation_confirmation_submit() {
   checkbox.addEventListener('change', function() {
     activation_bouton_creer(this.checked);
   });
+
+  initStructureFormLinks();
 }
 

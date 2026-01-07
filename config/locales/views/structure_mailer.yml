@@ -12,7 +12,7 @@ fr:
 
         <a href="%{url_inscription}" target="_blank">`%{url_inscription}`</a>
     relance_creation_campagne:
-      objet: Eva - Et si vous testiez les compétences avec des jeux ?
+      objet: Eva - Et si vous testiez les compétences avec des jeux ?
       corps: |
         ### Bonjour %{prenom},
 

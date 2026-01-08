@@ -10,10 +10,6 @@
 
         <p class="structure-confirmation-mention">
           <%= t("inscription.structures.show.mention_acces") %>
-          <%= render LienComponent.new("#", class: "lien-avec-fleche", data: { submit_form: true, commit: "recherche", formaction: inscription_structure_path(action_type: "recherche") }) do %>
-            <%= image_tag "arrow-right-16.svg", alt: "", class: "arrow-right-16", aria_hidden: true %>
-            <%= t("inscription.structures.show.ce_nest_pas_ma_structure") %>
-          <% end %>
         </p>
 
         <div class="informations-compte-actions">

@@ -16,7 +16,7 @@ class Inscription::StructuresController < ApplicationController
       redirige_vers_recherche_structure
     when "rejoindre"
       rejoindre_structure_existante
-    when "creer", "Créer ma structure"
+    when "creer", "Créer ma structure", "Confirmer la création"
       creer_nouvelle_structure
     end
   end

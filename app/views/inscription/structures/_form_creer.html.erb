@@ -20,9 +20,24 @@
 
         <%= render "parametrage_section", form: form %>
 
+        <%= render "nouvelles_structures/modal_confirmation_creation_structure" %>
+
         <div class="informations-compte-actions">
           <%= form.button t("inscription.structures.show.ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
-          <%= form.submit t("inscription.structures.show.creer_structure"), class: "bouton grand-bouton", id: "creer-structure-btn", disabled: true %>
+          <%#= form.submit t("inscription.structures.show.creer_structure"), class: "bouton grand-bouton", id: "creer-structure-btn", disabled: true %>
+          <%= render BoutonComponent.new(
+              "#",
+              type: :primary,
+              tag: :button,
+              size: :md,
+              id: "creer-structure-btn",
+              disabled: true,
+              "data-fr-opened": false,
+              "data-fr-js-modal-button": true,
+              "aria-controls": "fr-modal-confirmation-creation-structure",
+            ) do %>
+            <%= t("inscription.structures.show.creer_structure") %>
+          <% end %>
         </div>
       </div>
     <% end %>

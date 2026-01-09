@@ -209,24 +209,29 @@ ActiveAdmin.register Compte do
 
     def champ_structure(form)
       return form.input :structure if can?(:manage, Compte)
-      return champ_structure_administratif(form) if current_compte.administratif?
+      return champ_structure_lecture_seule(form) if resource.administratif?
+      return champ_structure_structure_fille(form) if current_compte.administratif?
 
       champ_structure_hidden(form)
     end
 
-    def champ_structure_administratif(form)
+    def champ_structure_structure_fille(form)
       if compte_a_des_campagnes?
-        champ_structure_avec_campagnes(form)
+        champ_structure_lecture_seule(form,
+          hint: I18n.t("admin.comptes.form.structure_disabled_avec_campagnes"))
       else
         form.input :structure, collection: structures_filles, selected: structure_par_defaut&.id
       end
     end
 
-    def champ_structure_avec_campagnes(form)
-      form.input :structure, collection: [ structure_par_defaut ],
-                             selected: structure_par_defaut&.id,
-                             input_html: { disabled: true },
-                             hint: I18n.t("admin.comptes.form.structure_disabled_avec_campagnes")
+    def champ_structure_lecture_seule(form, hint: nil)
+      options = {
+        collection: [ structure_par_defaut ],
+        selected: structure_par_defaut&.id,
+        input_html: { disabled: true }
+      }
+      options[:hint] = hint if hint
+      form.input :structure, **options
       champ_structure_hidden(form)
     end
 

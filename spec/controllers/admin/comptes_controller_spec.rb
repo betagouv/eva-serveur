@@ -82,6 +82,18 @@ describe Admin::ComptesController, type: :controller do
           expect(response.body).to include(structure_locale_fille.nom)
         end
       end
+
+      context "lors de l'édition d'un compte appartenant à la structure administrative" do
+        let(:compte_existant) { create :compte_conseiller, structure: structure_administrative }
+
+        before { get :edit, params: { id: compte_existant.id } }
+
+        it "le champ structure est visible mais non éditable" do
+          expect(response.body).to include('id="compte_structure_input"')
+          expect(response.body).to include(structure_administrative.nom)
+          expect(response.body).to include('disabled="disabled"')
+        end
+      end
     end
   end
 end

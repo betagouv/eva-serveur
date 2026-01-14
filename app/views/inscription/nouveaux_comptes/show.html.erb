@@ -1,0 +1,115 @@
+<% content_for :title, t(".titre") %>
+<% content_for :titre do %>
+  <%= t(".titre") -%>
+<% end %>
+<% content_for :sous_titre do %>
+  <%= t(".sous_titre") -%>
+<% end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<% content_for :classes_body, "page-nouveau-compte-body" %>
+<div class="page-nouveau-compte page-informations-compte">
+  <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
+
+  <%= render CarteV2Component.new(classes: "page-nouveau-compte-card") do %>
+    <div class="page-nouveau-compte-section--proconnect">
+      <h2 class="proconnect-titre"><%= t(".proconnect_titre") %></h2>
+      <p class="proconnect-texte"><%= t(".proconnect_description") %></p>
+      <div class="bouton-action bouton-action--centre">
+        <div class='pro-connect-group'>
+          <%= link_to pro_connect_auth_path, class: "btn-pro-connect" do %>
+            <span class="pro-connect__login">S’identifier avec</span>
+            <span class="pro-connect__brand">ProConnect</span>
+          <% end %>
+          <div>
+            <%= render LienComponent.new(t(".proconnect_aide"), "https://www.proconnect.gouv.fr/", externe: true) %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-nouveau-compte-separateur">
+      <div class="separateur-ligne">
+        <%= image_tag "separateur.svg", alt: "" %>
+      </div>
+      <p class="separateur-texte"><%= t(".ou") %></p>
+      <div class="separateur-ligne">
+        <%= image_tag "separateur.svg", alt: "" %>
+      </div>
+    </div>
+
+    <div class="page-nouveau-compte-section--identifiant">
+      <h2 class="identifiant-titre"><%= t(".identifiant_titre") %></h2>
+      <p class="identifiant-description"><%= t(".identifiant_description") %></p>
+
+      <%= semantic_form_for @compte, url: inscription_nouveau_compte_path, html: { id: "nouveau-compte-form" } do |compte| %>
+        <%= compte.semantic_errors *champs_non_affiches(
+          compte.object.errors.messages.keys,
+          [ :prenom, :nom, :email, :telephone, :password, :password_confirmation, :fonction, :service_departement ]
+        ) %>
+
+        <%= compte.inputs do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "compte_email",
+                label: t(".label_email"),
+                hint: t(".hint_email"),
+                form: compte,
+                method: :email,
+                type: "email",
+                required: true,
+                autocomplete: "email"
+              ) %>
+            </div>
+
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "compte_password",
+                label: t(".label_password"),
+                hint: t(".hint_password"),
+                form: compte,
+                method: :password,
+                type: "password",
+                required: true,
+                autocomplete: "new-password"
+              ) %>
+            </div>
+
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "compte_password_confirmation",
+                label: t(".label_password_confirmation"),
+                form: compte,
+                method: :password_confirmation,
+                type: "password",
+                required: true,
+                autocomplete: "new-password"
+              ) %>
+            </div>
+
+            <div class="fr-col-12">
+              <% cgu_lien = capture { render LienComponent.new(t(".label_cgu_lien"), cgu_path, externe: true) } %>
+              <%= compte.input :cgu_acceptees, label: raw(t(".label_cgu", cgu_lien: cgu_lien)), required: true %>
+            </div>
+
+            <div class="fr-col-12">
+              <div class="informations-compte-actions">
+                <%= render BoutonComponent.new(
+                  new_compte_session_path,
+                  type: :tertiary,
+                  size: :md,
+                  tag: :a,
+                  class: "bouton-tertiaire"
+                ) do %>
+                  <%= t(".bouton_annuler") %>
+                <% end %>
+                <%= submit_tag t(".bouton_creer"), class: "bouton grand-bouton valider-compte-bouton disabled", id: "creer-compte-bouton", data: { initial_disabled: true } %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

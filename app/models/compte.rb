@@ -46,7 +46,7 @@ class Compte < ApplicationRecord
   enum :role, ROLES.zip(ROLES).to_h
   validates :statut_validation, presence: true
   validate :verifie_etat_si_structure_manquante
-  validates :nom, :prenom, presence: { on: :create }
+  validates :nom, :prenom, presence: { on: :create, unless: :peut_sauter_presence_identite? }
   validate :verifie_dns_email, :structure_a_un_admin, :structure_de_depart_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
@@ -132,6 +132,10 @@ class Compte < ApplicationRecord
     return if Truemail.valid?(email)
 
     errors.add(:email, :invalid)
+  end
+
+  def peut_sauter_presence_identite?
+    etape_inscription_preinscription?
   end
 
   def structure_a_un_admin

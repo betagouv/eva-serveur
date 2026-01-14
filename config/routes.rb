@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resource :nouvelle_structure, only: [:create, :show]
   namespace :inscription do
+    resource :nouveau_compte, only: [:show, :create], controller: "nouveaux_comptes"
     resource :informations_compte, only: [:show, :update]
     resource :selection_usage, only: [:show, :update]
     resource :structure, only: [:show, :update]

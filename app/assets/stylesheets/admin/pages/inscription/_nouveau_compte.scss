@@ -1,0 +1,111 @@
+// Styles pour la page d'entrée inscription (choix ProConnect ou identifiant)
+.page-nouveau-compte-card .carte-v2__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Space-3W, 24px);
+}
+.page-nouveau-compte-section--proconnect {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+
+  .proconnect-titre { @include h5-xs(); margin: 0; }
+  .proconnect-texte { @include body-sm-base(); margin: 0; }
+}
+
+.page-nouveau-compte-separateur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  .separateur-ligne {
+    display: flex;
+    height: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    svg {
+      height: 1px;
+      width: 100%;
+      fill: #dddddd;
+    }
+  }
+
+  .separateur-texte {
+    @include body-sm-base();
+    font-weight: 700;
+    color: #3A3A3A;
+    margin: 0;
+  }
+}
+
+.page-nouveau-compte-section--identifiant {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
+}
+
+.page-nouveau-compte-section--identifiant .identifiant-titre {
+  @include h5-xs(); margin: 0;
+}
+
+.page-nouveau-compte-section--identifiant .identifiant-description {
+  @include body-sm-base(); margin: 0;
+}
+
+.page-nouveau-compte .inputs li {
+  list-style: none;
+  padding: 0;
+}
+
+.page-nouveau-compte .bouton-proconnect {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #000091;
+  color: #f5f5fe;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+
+  &:hover {
+    background: lighten(#000091, 3%);
+  }
+}
+
+.page-nouveau-compte .lien-aide {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.page-nouveau-compte .informations-compte-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.page-nouveau-compte .bouton-tertiaire {
+  @include bouton-tertiaire();
+}
+
+.page-nouveau-compte .valider-compte-bouton {
+  @include grand-bouton();
+}
+
+.page-nouveau-compte .mention-format {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #4B5563;
+  margin-bottom: 12px;
+}

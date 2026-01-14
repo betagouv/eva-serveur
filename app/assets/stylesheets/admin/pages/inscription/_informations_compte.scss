@@ -19,6 +19,15 @@
   gap: var(--Space-7W, 56px);
 }
 
+.page-nouveau-compte {
+  @include reset-form();
+  display: flex;
+  width: 792px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-7W, 56px);
+}
+
 .page-informations-compte .indication-champs-obligatoires {
   @include texte-xs();
   color: $couleur-accent-erreur;
@@ -40,5 +49,20 @@
 }
 
 .page-informations-compte label[for="compte_cgu_acceptees"] abbr[title] {
+  color: #000;
+}
+
+.page-nouveau-compte .informations-compte-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+}
+
+.page-nouveau-compte .valider-compte-bouton {
+  @include grand-bouton();
+}
+
+.page-nouveau-compte label[for="compte_cgu_acceptees"] abbr[title] {
   color: #000;
 }

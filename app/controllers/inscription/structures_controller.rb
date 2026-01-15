@@ -16,6 +16,8 @@ class Inscription::StructuresController < ApplicationController
       redirige_vers_recherche_structure
     when "rejoindre"
       rejoindre_structure_existante
+    when "confirmer_infos", "Confirmer"
+      confirme_infos_structure
     when "creer", "Créer ma structure", "Confirmer la création"
       creer_nouvelle_structure
     end
@@ -72,6 +74,15 @@ class Inscription::StructuresController < ApplicationController
     end
   end
 
+  def confirme_infos_structure
+    if structure_confirmee_params == "1"
+      redirect_to inscription_structure_path(etape: "parametrage")
+    else
+      @structure.errors.add(:structure_confirmee, :must_be_checked)
+      render :show
+    end
+  end
+
   def creer_nouvelle_structure
     ActiveRecord::Base.transaction do
       @structure = cree_structure_avec_params
@@ -119,5 +130,10 @@ class Inscription::StructuresController < ApplicationController
   def opco_id_params
     param_key = params[:structure].present? ? :structure : :structure_locale
     params.dig(param_key, :opco_id)&.presence
+  end
+
+  def structure_confirmee_params
+    param_key = params[:structure].present? ? :structure : :structure_locale
+    params.dig(param_key, :structure_confirmee)
   end
 end

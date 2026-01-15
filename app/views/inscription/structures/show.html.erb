@@ -1,23 +1,32 @@
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <% persisted = @structure.persisted? %>
+<% etape = params[:etape] || (persisted ? nil : "confirmation") %>
 
 <% if persisted %>
   <% content_for :title, t("inscription.structures.show.rejoindre_structure.titre") %>
   <% content_for :titre, t("inscription.structures.show.rejoindre_structure.titre") %>
   <% content_for :sous_titre, t("inscription.structures.show.rejoindre_structure.sous_titre") %>
+<% elsif etape == "parametrage" %>
+  <% content_for :title, t("inscription.structures.show.parametrage.titre") %>
+  <% content_for :titre, t("inscription.structures.show.parametrage.titre") %>
+  <% content_for :sous_titre, t("inscription.structures.show.parametrage.sous_titre") %>
 <% else %>
-  <% content_for :title, t("inscription.structures.show.creer.titre") %>
-  <% content_for :titre, t("inscription.structures.show.creer.titre") %>
+  <% content_for :title, t("inscription.structures.show.confirmation.titre") %>
+  <% content_for :titre, t("inscription.structures.show.confirmation.titre") %>
+  <% content_for :sous_titre, t("inscription.structures.show.confirmation.sous_titre") %>
 <% end %>
 
 <div class="page-inscription-structure">
   <% if persisted %>
     <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.titre_intro_presente"), texte: t("inscription.structures.show.sous_titre_intro_presente")) %>
     <%= render "form_rejoindre" %>
-  <% else %>
-    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.titre_intro_non_presente"), texte: t("inscription.structures.show.sous_titre_intro_non_presente")) %>
+  <% elsif etape == "parametrage" %>
+    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.parametrage.titre"), texte: t("inscription.structures.show.parametrage.sous_titre")) %>
     <%= render "form_creer" %>
+  <% else %>
+    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.confirmation.titre"), texte: t("inscription.structures.show.confirmation.sous_titre")) %>
+    <%= render "form_confirmation" %>
   <% end %>
 </div>
 
@@ -25,6 +34,8 @@
   document.addEventListener('DOMContentLoaded', function() {
     <% if persisted %>
       structure_confirmation_submit();
+    <% elsif etape == "parametrage" %>
+      structure_creation_parametrage_submit();
     <% else %>
       structure_creation_confirmation_submit();
     <% end %>

@@ -34,7 +34,11 @@ fr:
         bouton_continuer: Continuer ici
     structures:
       show:
-        titre_intro_non_presente: Votre structure n’est pas encore présente
+        titre_intro_non_presente: Votre structure n'est pas encore présente
+        verifiez_infos: "Vérifiez que ces informations correspondent bien à votre structure :"
+        confirmer: Confirmer
+        retour: Retour
+        titre_parametrage: Paramétrage de votre structure
         sous_titre_intro_non_presente: "Nous avons trouvé les informations administratives correspondant à ce numéro SIRET. Pour utiliser ce service, cette structure doit d’abord être créée."
         titre_intro_presente: Rejoindre une structure existante
         sous_titre_intro_presente: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de votre organisation."
@@ -43,7 +47,13 @@ fr:
           titre: Création de votre structure
         rejoindre_structure:
           titre: Rejoindre une structure existante
-          sous_titre: Vérifiez que les informations correspondent bien à votre structure.
+          sous_titre: Pour utiliser le service, nous avons besoin de compléter quelques informations sur votre structure.
+        parametrage:
+          titre: Créer la structure
+          sous_titre: "Les champs notés * sont obligatoires."
+        confirmation:
+          titre: Structure identifiée
+          sous_titre: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de la structure pour laquelle vous travaillez."
         rejoindre: Rejoindre la structure
         ce_nest_pas_ma_structure: Ce n'est pas la bonne structure
         creer_structure: Créer ma structure
@@ -55,9 +65,9 @@ fr:
         nom_structure_label: Nom de la structure
         type_structure_label: Type de structure
         mention_creation: Créer la structure vous attribuera le rôle d'administrateur.
-        titre_parametrage: Paramétrage
         mention_champs_obligatoires: Les champs notés * sont obligatoires.
         hint_nom_structure: Le nom officiel est proposé par défaut. Vous pouvez le modifier pour utiliser un nom plus courant.
+        hint_opco: Détecté automatiquement. À vérifier ou à compléter si nécessaire.
         code_postal_label: Code postal
         choisir_type: Choisir un type de structure
         opco_label: OPCO

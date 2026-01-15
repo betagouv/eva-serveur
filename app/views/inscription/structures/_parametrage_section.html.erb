@@ -1,10 +1,4 @@
-<div class="structure-parametrage-section">
-  <h5 class="structure-parametrage-section__titre"><%= t("inscription.structures.show.titre_parametrage") %></h5>
-  
-  <p class="structure-parametrage-section__mention-champs">
-    <%= t("inscription.structures.show.mention_champs_obligatoires") %>
-  </p>
-
+<div class="structure-parametrage-section">  
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col-12">
       <%= render InputComponent.new(
@@ -14,7 +8,8 @@
         method: :nom,
         type: "text",
         hint: t("inscription.structures.show.hint_nom_structure"),
-        required: true
+        required: true,
+        value: form.object.nom.presence || form.object.raison_sociale
       ) %>
     </div>
     <div class="fr-col-12">
@@ -38,6 +33,7 @@
         collection: collection_opcos,
         required: true,
         value: opco_id_associe(form.object)
+        hint: t("inscription.structures.show.hint_opco")
       ) %>
       <%= render LienComponent.new("Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", externe: true) %>
     </div>

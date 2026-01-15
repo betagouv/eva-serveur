@@ -1,0 +1,27 @@
+<%= semantic_form_for @structure, url: inscription_structure_path, method: :patch do |form| %>
+  <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, [ :raison_sociale ]) %>
+  <%= form.hidden_field :action_type, value: "confirmer_infos" %>
+  
+  <%= form.inputs do %>
+    <%= render CarteV2Component.new(titre: t("inscription.structures.show.titre_carte_non_trouvee")) do %>
+      <div class="structure-content-wrapper">
+        <p><%= t("inscription.structures.show.verifiez_infos") %></p>
+        <%= render "structure_info_card", structure: @structure %>
+
+        <%= form.input :structure_confirmee, as: :boolean, label: t("inscription.structures.show.confirme_structure"), required: false %>
+
+        <p class="structure-creation-text">
+          <%= render LienComponent.new("#", class: "lien-avec-fleche", data: { submit_form: true, commit: "recherche", formaction: inscription_structure_path(action_type: "recherche") }) do %>
+            <%= image_tag "arrow-right-16.svg", alt: "", class: "arrow-right-16", aria_hidden: true %>
+            <%= t("inscription.structures.show.ce_nest_pas_ma_structure") %>
+          <% end %>
+        </p>
+
+        <div class="informations-compte-actions">
+          <%= form.button t("inscription.structures.show.ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
+          <%= form.button t("inscription.structures.show.confirmer"), type: :submit, name: "commit", value: "confirmer_infos", class: "bouton grand-bouton", id: "confirmer-infos-btn", disabled: true %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

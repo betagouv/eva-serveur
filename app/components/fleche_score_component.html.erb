@@ -1,0 +1,18 @@
+<div class="<%= css_classes %>">
+  <div class="score-fleche__conteneur">
+    <p class="score-fleche__lettre"><%= @score %></p>
+  </div>
+  <div class="score-fleche__pointe">
+    <% if active? %>
+      <svg class="score-fleche__svg score-fleche__svg--active" xmlns="http://www.w3.org/2000/svg" width="28" height="52" viewBox="0 0 28 52" fill="none" aria-hidden="true" focusable="false">
+        <path d="M28 26L2 52V26V0L28 26Z" fill="currentColor"/>
+        <path d="M2 50L26 26" stroke="var(--light-decisions-border-border-plain-grey, #3A3A3A)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M2 2L26 26" stroke="var(--light-decisions-border-border-plain-grey, #3A3A3A)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    <% else %>
+      <svg class="score-fleche__svg score-fleche__svg--inactive" xmlns="http://www.w3.org/2000/svg" width="16" height="32" viewBox="0 0 16 32" fill="none" aria-hidden="true" focusable="false">
+        <path d="M0 32V0L16 16L0 32Z" fill="currentColor"/>
+      </svg>
+    <% end %>
+  </div>
+</div>

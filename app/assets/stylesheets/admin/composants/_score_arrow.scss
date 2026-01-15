@@ -1,0 +1,176 @@
+.score-fleche {
+  --score-arrow-color: #00A95F;
+  display: flex;
+  width: 264px;
+  align-items: center;
+  gap: var(--Space-000, 0);
+
+  &__conteneur {
+    display: flex;
+    padding: var(--Space-1V, 4px) var(--Space-1W, 8px);
+    align-items: center;
+    flex: 1 0 0;
+  }
+
+  &__lettre {
+    @include body-sm-semibold();
+    text-align: center;
+    margin: 0;
+  }
+
+  &__pointe {
+    width: 16px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  &__svg {
+    width: 16px;
+    height: 32px;
+    color: var(--score-arrow-color);
+    fill: var(--score-arrow-color);
+  }
+
+  &__svg--inactive {
+    height: 32px;
+    width: 16px;
+  }
+
+  &__svg--active {
+    width: 26px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+
+  &--inactive {
+    .score-fleche__conteneur {
+      padding: var(--Space-1V, 4px) var(--Space-1W, 8px);
+      background: var(--score-arrow-color);
+    }
+
+    &.score-fleche--blue {
+      &.score-fleche--b,
+      &.score-fleche--c,
+      &.score-fleche--d {
+        .score-fleche__lettre {
+          color: var(--light-decisions-text-text-inverted-grey, #FFF);
+        }
+      }
+    }
+  }
+
+  &--active {
+    .score-fleche__conteneur {
+      background: var(--score-arrow-color);
+      border-bottom: 4px solid var(--light-decisions-border-border-plain-grey, #3A3A3A);
+      border-left: 4px solid var(--light-decisions-border-border-plain-grey, #3A3A3A);
+      border-top: 4px solid var(--light-decisions-border-border-plain-grey, #3A3A3A);
+      padding: var(--Space-1W, 8px) var(--Space-3V, 12px);
+      height: 50px;
+    }
+
+    .score-fleche__lettre {
+      color: var(--light-decisions-text-text-label-grey, #161616);
+      text-align: center;
+      @include h3-md-desktop();
+    }
+
+    .score-fleche__pointe {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: -2;
+    }
+
+    &.score-fleche--blue {
+      &.score-fleche--b,
+      &.score-fleche--c,
+      &.score-fleche--d {
+        .score-fleche__lettre {
+          color: var(--light-decisions-text-text-inverted-grey, #FFF);
+        }
+      }
+    }
+  }
+
+  &--color {
+    &.score-fleche--a {
+      --score-arrow-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
+    }
+
+    &.score-fleche--b {
+      --score-arrow-color: var(--light-options-illustration-color-850-default-green-emeraude-850, #B0F7CB);
+    }
+
+    &.score-fleche--c {
+      --score-arrow-color: var(--light-options-illustration-color-850-default-yellow-tournesol-850, #EFCB3A);
+    }
+
+    &.score-fleche--d {
+      --score-arrow-color: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
+    }
+  }
+
+  &--blue {
+    &.score-fleche--a {
+      --score-arrow-color: var(--graphique-bleu-graph-4, #DBDAFC);
+    }
+
+    &.score-fleche--b {
+      --score-arrow-color: var(--graphique-bleu-graph-3, #7E7DB7);
+    }
+
+    &.score-fleche--c {
+      --score-arrow-color: var(--graphique-bleu-graph-2, #383783);
+    }
+
+    &.score-fleche--d {
+      --score-arrow-color: var(--graphique-bleu-graph-1, #00005B);
+    }
+  }
+}
+
+.score-arrows-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.score-arrows-stack--active-a {
+  .score-fleche--a { width: 125px; }
+  .score-fleche--b { width: 182px; }
+  .score-fleche--c { width: 218px; }
+  .score-fleche--d { width: 254px; }
+}
+
+.score-arrows-stack--active-b {
+  .score-fleche--a { width: 126px; }
+  .score-fleche--b { width: 162px; }
+  .score-fleche--c { width: 218px; }
+  .score-fleche--d { width: 254px; }
+}
+
+.score-arrows-stack--active-c {
+  .score-fleche--a { width: 126px; }
+  .score-fleche--b { width: 162px; }
+  .score-fleche--c { width: 198px; }
+  .score-fleche--d { width: 254px; }
+}
+
+.score-arrows-stack--active-d {
+  .score-fleche--a { width: 136px; }
+  .score-fleche--b { width: 172px; }
+  .score-fleche--c { width: 208px; }
+  .score-fleche--d { width: 244px; }
+}
+
+.score-arrows-layout {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 24px;
+}

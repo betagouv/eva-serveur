@@ -71,6 +71,7 @@ Rails.application.routes.draw do
     get '/ui_kit/recherche_structure', to: 'ui_kit#recherche_structure'
     get '/ui_kit/referentiel_anlci', to: 'ui_kit#referentiel_anlci'
     get '/ui_kit/rejoindre_structure', to: 'ui_kit#rejoindre_structure'
+    get '/ui_kit/score_arrows', to: 'ui_kit#score_arrows'
     # get '/ui_kit/sous_competence', to: 'ui_kit#sous_competence'
     get '/ui_kit/statut_campagne', to: 'ui_kit#statut_campagne'
     get '/ui_kit/tableau', to: 'ui_kit#tableau'

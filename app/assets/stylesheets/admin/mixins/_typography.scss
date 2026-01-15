@@ -153,3 +153,11 @@
   font-weight: 700;
   line-height: 28px; /* 127.273% */
 }
+
+@mixin score-arrow-text() {
+  font-family: Quicksand;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}

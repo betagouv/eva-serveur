@@ -35,7 +35,7 @@ fr:
     structures:
       show:
         titre_intro_non_presente: Votre structure n'est pas encore présente
-        verifiez_infos: "Vérifiez que ces informations correspondent bien à votre structure :"
+        verifiez_infos: "Vérifiez que ces informations correspondent bien à votre structure :"
         confirmer: Confirmer
         retour: Retour
         titre_parametrage: Paramétrage de votre structure

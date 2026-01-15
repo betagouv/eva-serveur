@@ -15,22 +15,6 @@
     <li class="structure-info-card__info">
       <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= adresse_ou_code_postal(structure) %></span>
     </li>
-    <li class="structure-info-card__info">
-      <span class="structure-info-card__label">OPCO :</span> <span class="structure-info-card__value">
-        <% if opcos_associes(structure).any? %>
-          <%= opcos_associes(structure).map(&:nom).join(", ") %>
-        <% else %>
-          <%= t("inscription.structures.show.opco_non_identifie") %>
-        <% end %>
-      </span>
-    </li>
   </ul>
-  <p class="structure-info-card__mention-opco">
-    <% if opcos_associes(structure).any? %>
-      <%= t("inscription.structures.show.mention_opco_detecte") %>
-    <% else %>
-      <%= t("inscription.structures.show.mention_opco_non_detecte") %>
-    <% end %>
-  </p>
 </div>
 

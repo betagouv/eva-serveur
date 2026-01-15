@@ -38,6 +38,19 @@ function activation_bouton_creer(structure_confirmee) {
   }
 }
 
+function activation_bouton_confirmer(structure_confirmee) {
+  let bouton_confirmer = document.getElementById('confirmer-infos-btn');
+  if (!bouton_confirmer) return;
+  
+  if (structure_confirmee) {
+    bouton_confirmer.classList.remove('disabled');
+    bouton_confirmer.removeAttribute('disabled');
+  } else {
+    bouton_confirmer.classList.add('disabled');
+    bouton_confirmer.setAttribute('disabled', 'disabled');
+  }
+}
+
 // Gérer la soumission du formulaire via les liens avec data-submit-form
 function initStructureFormLinks() {
   document.querySelectorAll('a[data-submit-form]').forEach(function(link) {
@@ -89,12 +102,15 @@ function structure_creation_confirmation_submit() {
   }
   
   let structure_confirmee = checkbox.checked;
-  activation_bouton_creer(structure_confirmee);
+  activation_bouton_confirmer(structure_confirmee);
   
   checkbox.addEventListener('change', function() {
-    activation_bouton_creer(this.checked);
+    activation_bouton_confirmer(this.checked);
   });
 
   initStructureFormLinks();
 }
 
+function structure_creation_parametrage_submit() {
+  initStructureFormLinks();
+}

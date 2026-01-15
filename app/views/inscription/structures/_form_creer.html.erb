@@ -3,35 +3,21 @@
   <%= form.hidden_field :action_type, value: "creer" %>
   
   <%= form.inputs do %>
-    <%= render CarteV2Component.new(titre: t("inscription.structures.show.titre_carte_non_trouvee")) do %>
+    <%= render CarteV2Component.new(titre: t("inscription.structures.show.titre_parametrage"), sous_titre: t("inscription.structures.show.mention_champs_obligatoires")) do %>
       <div class="structure-content-wrapper">
-        <%= "Vérifiez que ces informations correspondent bien à votre structure :" %>
-        <%= render "structure_info_card", structure: @structure %>
-
-        <%= form.input :structure_confirmee, as: :boolean, label: t("inscription.structures.show.confirme_structure"), required: false %>
-
-        <p class="structure-creation-text">
-          <%= t("inscription.structures.show.texte_creation") %> <br>
-          <%= render LienComponent.new("#", class: "lien-avec-fleche", data: { submit_form: true, commit: "recherche", formaction: inscription_structure_path(action_type: "recherche") }) do %>
-            <%= image_tag "arrow-right-16.svg", alt: "", class: "arrow-right-16", aria_hidden: true %>
-            <%= t("inscription.structures.show.ce_nest_pas_ma_structure") %>
-          <% end %>
-        </p>
-
         <%= render "parametrage_section", form: form %>
 
         <%= render "nouvelles_structures/modal_confirmation_creation_structure" %>
 
         <div class="informations-compte-actions">
-          <%= form.button t("inscription.structures.show.ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
-          <%#= form.submit t("inscription.structures.show.creer_structure"), class: "bouton grand-bouton", id: "creer-structure-btn", disabled: true %>
+          <%= link_to t("inscription.structures.show.retour"), inscription_structure_path(etape: "confirmation"), class: "bouton-tertiaire grand-bouton" %>
           <%= render BoutonComponent.new(
               "#",
               type: :primary,
               tag: :button,
               size: :md,
               id: "creer-structure-btn",
-              disabled: true,
+              disabled: false,
               "data-fr-opened": false,
               "data-fr-js-modal-button": true,
               "aria-controls": "fr-modal-confirmation-creation-structure",

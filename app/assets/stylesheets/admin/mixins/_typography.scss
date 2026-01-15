@@ -60,6 +60,11 @@
   line-height: var(--Body-SM---Texte-dtail-Line-Height, 24px);
 }
 
+@mixin body-sm-semibold() {
+  @include body-sm();
+  font-weight: 600;
+}
+
 @mixin h6-xxs() {
   color: var(--light-decisions-text-text-title-grey, #161616);
   font-family: var(--Titres-Font, Quicksand);
@@ -152,4 +157,12 @@
   font-style: normal;
   font-weight: 700;
   line-height: 28px; /* 127.273% */
+}
+
+@mixin h3-md-desktop() {
+  font-family: Quicksand;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
 }

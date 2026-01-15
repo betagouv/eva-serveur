@@ -24,6 +24,7 @@ module Admin
     def recherche_structure; end
     def referentiel_anlci; end
     def rejoindre_structure; end
+    def score_arrows; end
     # def sous_competence; end commenté pour le moment car pas assez unitaire
     def statut_campagne; end
     def tag; end

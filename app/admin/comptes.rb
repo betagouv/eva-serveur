@@ -57,7 +57,7 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:inactives)
   filtrer_par_activation_structure(:abandonnistes)
 
-  index do
+  index download_links: -> { %i[xls] } do
     render "mise_en_avant_comptes_en_attente"
     render "index", context: self
   end
@@ -97,18 +97,29 @@ ActiveAdmin.register Compte do
     end
   end
 
-  csv do
-    column :prenom
+  xls(i18n_scope: %i[activerecord attributes compte], header_format: { weight: :bold }) do
+    whitelist
+    column(:structure) { |c| c.structure&.nom }
     column :nom
+    column :prenom
     column :email
     column :telephone
-    column :statut_validation
-    if can? :manage, Compte
-      column :role
-      column(:structure) { |c| c.structure.nom }
-      column(:type_structure) { |c| c.structure.type_structure }
-      column(:code_postal) { |c| c.structure.code_postal }
-      column(:region) { |c| c.structure.region }
+    column(:role) { |c| Compte.human_enum_name(:role, c.role) }
+    column(:statut_validation) do |c|
+      Compte.human_enum_name(:statut_validation, c.statut_validation)
+    end
+    column :fonction
+    column :service_departement
+    column :created_at
+    column :current_sign_in_at
+
+    before_filter do |sheet|
+      if @collection.count > ImportExport::ExportXls::NOMBRE_MAX_LIGNES
+        sheet << [
+          I18n.t("active_admin.export.limite_atteinte", limite: ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
+        ]
+        @collection = @collection.limit!(ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
+      end
     end
   end
 

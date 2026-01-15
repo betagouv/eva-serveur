@@ -114,11 +114,11 @@ ActiveAdmin.register Evaluation do
     end
 
     before_filter do |sheet|
-      if @collection.count > Evaluation::LIMITE_EXPORT_XLS
+      if @collection.count > ImportExport::ExportXls::NOMBRE_MAX_LIGNES
         sheet << [
-          I18n.t("active_admin.export.limite_atteinte", limite: Evaluation::LIMITE_EXPORT_XLS)
+          I18n.t("active_admin.export.limite_atteinte", limite: ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
         ]
-        @collection = @collection.limit!(Evaluation::LIMITE_EXPORT_XLS)
+        @collection = @collection.limit!(ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
       end
     end
   end

@@ -1,5 +1,7 @@
 module ImportExport
   class ExportXls
+    NOMBRE_MAX_LIGNES = 3000
+
     attr_reader :workbook, :export, :onglets
 
     WORKSHEET_DONNEES = "Données"

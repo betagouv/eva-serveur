@@ -31,6 +31,7 @@ fr:
         prenom: Prénom
         nom: Nom
         email: Email
+        fonction: Fonction
         telephone: Téléphone
         role: Rôle
         roles:
@@ -47,6 +48,7 @@ fr:
           en_attente: En attente
           acceptee: Autorisé
           refusee: Refusé
+        structure: Structure
         service_departement: Service/Département
         fonctions:
           assistante_ou_assistant_social: Assistante ou assistant social

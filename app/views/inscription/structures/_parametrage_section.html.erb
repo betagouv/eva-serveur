@@ -32,7 +32,7 @@
         method: :opco_id,
         collection: collection_opcos,
         required: true,
-        value: opco_id_associe(form.object)
+        value: opco_id_associe(form.object),
         hint: t("inscription.structures.show.hint_opco")
       ) %>
       <%= render LienComponent.new("Trouver mon OPCO sur France Compétences", "https://quel-est-mon-opco.francecompetences.fr/unavailable", externe: true) %>

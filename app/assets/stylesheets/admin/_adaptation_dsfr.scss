@@ -105,6 +105,11 @@ a.pas-souligne {
 .fr-modal__content {
   margin-bottom: 0 !important;
 }
+
+.fr-modal__body {
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+}
 button.fr-link--close.fr-link {
   border: none;
   box-shadow: none;

@@ -69,6 +69,10 @@ button:not(.disabled):hover {
 button.bouton, a.bouton, .bouton {
   @include bouton-primaire;
 
+  &, &:hover, &:active {
+    font-weight: 500;
+  }
+
   &.bouton--actif, &.bouton--actif:hover {
     background-color: $blue-france-sun-113-active;
     border-color: $blue-france-sun-113-active;
@@ -126,8 +130,13 @@ button.bouton, a.bouton, .bouton {
 }
 
 .grand-bouton,
-a.grand-bouton {
+a.grand-bouton,
+button.grand-bouton {
   @include grand-bouton;
+
+  &, &:hover, &:active {
+    font-weight: 500;
+  }
 }
 
 .petit-bouton,

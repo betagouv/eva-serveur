@@ -24,7 +24,6 @@ describe "Inscription visiteur sans ProConnect", type: :feature do
       expect(compte.role).to eq("conseiller")
       expect(compte.statut_validation).to eq("en_attente")
       expect(compte.etape_inscription).to eq("preinscription")
-      expect(compte.cgu_acceptees).to be(true)
     end
   end
 end

@@ -65,6 +65,17 @@ button:not(.disabled):hover {
   background-color: $grey-1000;
 }
 
+button.bouton,
+button.bouton-tertiaire,
+button.bouton-secondaire,
+form button.bouton:not(.disabled),
+form button.bouton-tertiaire:not(.disabled),
+form button.bouton-secondaire:not(.disabled) {
+  &, &:hover, &:active {
+    font-weight: 500;
+  }
+}
+
 
 button.bouton, a.bouton, .bouton {
   @include bouton-primaire;

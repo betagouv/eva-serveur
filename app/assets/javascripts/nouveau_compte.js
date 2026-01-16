@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
     'compte_password_confirmation'
   ];
   const submitButton = document.getElementById('creer-compte-bouton');
-  const cguCheckbox = document.getElementById('compte_cgu_acceptees');
 
   function champsObligatoiresRemplis() {
     return requiredFieldIds.every(function(id) {
@@ -21,16 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function activeBoutonSiPret() {
-    const enable = champsObligatoiresRemplis() && motsDePasseIdentiques() && cguCheckbox && cguCheckbox.checked;
+    const enable = champsObligatoiresRemplis() && motsDePasseIdentiques();
     if (!submitButton) { return; }
 
     submitButton.disabled = !enable;
     submitButton.classList.toggle('disabled', !enable);
-    if (!enable) {
-      submitButton.title = I18n.t('creation_compte.cgu_tool_tip');
-    } else {
-      submitButton.removeAttribute('title');
-    }
   }
 
   requiredFieldIds.forEach(function(id) {
@@ -39,10 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
       el.addEventListener('input', activeBoutonSiPret);
     }
   });
-
-  if (cguCheckbox) {
-    cguCheckbox.addEventListener('change', activeBoutonSiPret);
-  }
 
   if (submitButton && submitButton.dataset.initialDisabled) {
     submitButton.disabled = true;

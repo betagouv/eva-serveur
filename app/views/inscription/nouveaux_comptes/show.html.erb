@@ -89,11 +89,6 @@
             </div>
 
             <div class="fr-col-12">
-              <% cgu_lien = capture { render LienComponent.new(t(".label_cgu_lien"), cgu_path, externe: true) } %>
-              <%= compte.input :cgu_acceptees, label: raw(t(".label_cgu", cgu_lien: cgu_lien)), required: true %>
-            </div>
-
-            <div class="fr-col-12">
               <div class="informations-compte-actions">
                 <%= render BoutonComponent.new(
                   new_compte_session_path,

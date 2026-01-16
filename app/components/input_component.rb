@@ -206,7 +206,7 @@ autocomplete)
   def required_asterisk
     return "" unless is_required?
 
-    tag.abbr("*", title: "required")
+    safe_join([ " ", tag.abbr("*", title: "required") ])
   end
 
   def is_select?

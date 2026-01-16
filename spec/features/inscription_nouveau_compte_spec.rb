@@ -13,7 +13,6 @@ describe "Inscription visiteur sans ProConnect", type: :feature do
       fill_in "compte_email", with: email
       fill_in "compte_password", with: "Password78901$"
       fill_in "compte_password_confirmation", with: "Password78901$"
-      find("#compte_cgu_acceptees").click
 
       click_on "Créer mon compte"
 

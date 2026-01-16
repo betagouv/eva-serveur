@@ -124,6 +124,10 @@
     flex-direction: column;
     gap: var(--Space-3W, 24px);
 
+    &__opco-link {
+      @include body-md-base();
+    }
+
     &__titre {
       @include h5-xs();
       margin: 0;

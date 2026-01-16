@@ -86,7 +86,7 @@ class Inscription::StructuresController < ApplicationController
   def creer_nouvelle_structure
     ActiveRecord::Base.transaction do
       @structure = cree_structure_avec_params
-      return render :show if @structure.blank?
+      return render_parametrage if @structure.blank?
 
       AffiliationOpcoService.new(@structure).affilie_opcos
 
@@ -118,7 +118,7 @@ class Inscription::StructuresController < ApplicationController
     if @compte.save
       redirige_vers_etape_inscription(@compte)
     else
-      render :show
+      render_parametrage
     end
   end
 
@@ -135,5 +135,10 @@ class Inscription::StructuresController < ApplicationController
   def structure_confirmee_params
     param_key = params[:structure].present? ? :structure : :structure_locale
     params.dig(param_key, :structure_confirmee)
+  end
+
+  def render_parametrage
+    params[:etape] = "parametrage"
+    render :show
   end
 end

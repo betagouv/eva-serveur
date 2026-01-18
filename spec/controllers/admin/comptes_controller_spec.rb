@@ -3,6 +3,37 @@ require 'rails_helper'
 describe Admin::ComptesController, type: :controller do
   render_views
 
+  describe "export JSON" do
+    let(:structure) { create :structure_locale }
+    let!(:compte_connecte) { create :compte_admin, structure: structure }
+    let!(:compte) do
+      create :compte_conseiller,
+             structure: structure,
+             email: "jean.dupont@exemple.fr",
+             nom: "Dupont",
+             prenom: "Jean"
+    end
+
+    before do
+      sign_in compte_connecte
+    end
+
+    it "retourne les comptes au format JSON avec uniquement les champs autorisés" do
+      get :index, format: :json
+
+      expect(response).to be_successful
+      expect(response.content_type).to include("application/json")
+
+      resultat = response.parsed_body
+      compte_json = resultat.find { |c| c["id"] == compte.id }
+
+      expect(compte_json.keys).to match_array(%w[id email nom prenom display_name])
+      expect(compte_json["email"]).to eq("jean.dupont@exemple.fr")
+      expect(compte_json["nom"]).to eq("Dupont")
+      expect(compte_json["prenom"]).to eq("Jean")
+    end
+  end
+
   describe "form structure_id" do
     context "pour un compte de structure locale" do
       let(:structure_locale) { create :structure_locale }

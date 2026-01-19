@@ -112,5 +112,49 @@ function structure_creation_confirmation_submit() {
 }
 
 function structure_creation_parametrage_submit() {
+  initStructureParametrageFormState();
   initStructureFormLinks();
+}
+
+function initStructureParametrageFormState() {
+  const form = document.querySelector('form[action*="inscription/structure"]');
+  if (!form) return;
+
+  const requiredFields = [
+    form.querySelector('input[name$="[nom]"]'),
+    form.querySelector('select[name$="[type_structure]"]'),
+    form.querySelector('select[name$="[opco_id]"]')
+  ];
+
+  const boutonCreer = document.getElementById('creer-structure-btn');
+  const boutonConfirmer = document.getElementById('confirmer-creation-structure');
+
+  function champRempli(element) {
+    if (!element) return false;
+    return element.value && element.value.trim().length > 0;
+  }
+
+  function formulaireComplet() {
+    const champsOk = requiredFields.every(function(field) {
+      return champRempli(field);
+    });
+    return champsOk;
+  }
+
+  function majBoutons() {
+    const enable = formulaireComplet();
+    [ boutonCreer, boutonConfirmer ].forEach(function(button) {
+      if (!button) return;
+      button.disabled = !enable;
+      button.classList.toggle('disabled', !enable);
+    });
+  }
+
+  requiredFields.forEach(function(field) {
+    if (!field) return;
+    field.addEventListener('input', majBoutons);
+    field.addEventListener('change', majBoutons);
+  });
+
+  majBoutons();
 }

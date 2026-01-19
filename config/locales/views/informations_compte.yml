@@ -15,6 +15,8 @@ fr:
         label_prenom: Prénom
         label_email: Adresse e-mail
         hint_email: Cette adresse est utilisée pour les échanges liés à votre compte.
+        label_telephone: Téléphone
+        hint_telephone: "Format attendu : (+33) 1 22 33 44 55"
         label_fonction: Fonction
         label_service_departement: Service
         hint_service_departement: "Exemple : logistique, marketing, ressources humaines"

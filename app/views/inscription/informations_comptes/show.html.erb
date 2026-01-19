@@ -12,7 +12,7 @@
   <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
   <%= render CarteV2Component.new(titre: t(".titre_carte"), sous_titre: t(".sous_titre_carte")) do %>
     <%= semantic_form_for @compte, url: inscription_informations_compte_path do |compte| %>
-      <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :fonction, :service_departement ]) %>
+      <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :telephone, :fonction, :service_departement ]) %>
       <%= compte.inputs do %>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-12">
@@ -46,6 +46,18 @@
               required: true
             ) %>
           </div>
+          <div class="fr-col-12">
+            <%= render InputComponent.new(
+              id: "compte_telephone",
+              label: t(".label_telephone"),
+              hint: t(".hint_telephone"),
+              form: compte,
+              method: :telephone,
+              type: "tel",
+              required: true
+            ) %>
+          </div>
+          
           <div class="fr-col-12">
             <%= render InputComponent.new(
               id: "compte_service_departement",

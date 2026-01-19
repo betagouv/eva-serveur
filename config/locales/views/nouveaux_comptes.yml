@@ -12,7 +12,7 @@ fr:
         ou: OU
         identifiant_titre: Se créer un compte en choisissant un identifiant
         identifiant_description: Cette option vous permet de créer un compte avec une adresse e-mail et un mot de passe, si vous n’utilisez pas ProConnect.
-        label_email: Adresse e-mail
+        label_email: Adresse e-mail professionnelle
         hint_email: "Format attendu : nom@domaine.fr"
         label_password: Mot de passe
         hint_password: Votre mot de passe doit comporter au moins 8 caractères

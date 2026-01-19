@@ -126,6 +126,7 @@
 
     &__opco-link {
       @include body-md-base();
+      @include lien-non-dsfr();
     }
 
     &__titre {

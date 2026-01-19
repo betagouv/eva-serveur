@@ -18,6 +18,24 @@ describe Compte do
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :prenom }
 
+  describe "validation des informations personnelles" do
+    let(:compte) { build(:compte, nom: nil, prenom: nil) }
+
+    before do
+      allow(compte).to receive(:email_changed?).and_return(true)
+      allow(Truemail).to receive(:valid?).and_return(true)
+    end
+
+    context "quand le formulaire est soumis sans nom ni prénom" do
+      it "refuse la validation car cette étape ne contrôlait pas la présence" do
+        compte.valid?(:informations_compte)
+
+        expect(compte.errors[:nom]).to include(I18n.t("errors.messages.blank"))
+        expect(compte.errors[:prenom]).to include(I18n.t("errors.messages.blank"))
+      end
+    end
+  end
+
   context "quand un compte a été soft-delete" do
     let(:compte) do
       build :compte, email: "mon-email-supprime@example.com"

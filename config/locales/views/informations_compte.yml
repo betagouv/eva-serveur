@@ -5,7 +5,7 @@ fr:
         titre: Informations personnelles
         sous_titre: Complétez votre inscription.
         titre_intro: Confirmez vos informations personnelles
-        sous_titre_intro: Pour pouvoir utiliser ce service, nous avons besoin de compléter certaines informations. Cette étape vous permet de les vérifier avant de poursuivre.
+        sous_titre_intro: Certaines informations sont nécessaires pour utiliser le service. Merci de les vérifier et de les compléter si besoin avant de poursuivre.
         titre_carte: Informations personnelles
         sous_titre_carte: "Les champs notés * sont obligatoires."
         valider: Valider
@@ -14,7 +14,7 @@ fr:
         label_nom: Nom
         label_prenom: Prénom
         label_email: Adresse e-mail
-        hint_email: Cette adresse est utilisée pour les échanges liés à votre compte.
+        hint_email: "Pour vous connecter ou pour les échanges liés à votre compte. Format attendu : nom@domaine.fr"
         label_telephone: Téléphone
         hint_telephone: "Format attendu : (+33) 1 22 33 44 55"
         label_fonction: Fonction
@@ -38,7 +38,7 @@ fr:
       show:
         titre_intro_non_presente: Votre structure n'est pas encore présente
         verifiez_infos: "Vérifiez que ces informations correspondent bien à votre structure :"
-        confirmer: Confirmer
+        confirmer: Continuer
         retour: Retour
         titre_parametrage: Paramétrage de votre structure
         sous_titre_intro_non_presente: "Nous avons trouvé les informations administratives correspondant à ce numéro SIRET. Pour utiliser ce service, cette structure doit d’abord être créée."

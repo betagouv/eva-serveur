@@ -47,6 +47,8 @@ class Compte < ApplicationRecord
   validates :statut_validation, presence: true
   validate :verifie_etat_si_structure_manquante
   validates :nom, :prenom, presence: { on: :create, unless: :peut_sauter_presence_identite? }
+  validates :nom, :prenom, presence: { on: :informations_compte,
+                                        unless: :peut_sauter_presence_identite? }
   validate :verifie_dns_email, :structure_a_un_admin, :structure_de_depart_a_un_admin
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]

@@ -92,7 +92,14 @@ class ImporteurOpcos
   def normalise_idcc(idcc)
     return nil if idcc.blank?
 
-    # Convertir en string et supprimer les espaces
-    idcc.to_s.strip
+    str = idcc.to_s.strip
+    # Excel/Roo renvoie les cellules numériques comme Integer (ex. 0843 -> 843),
+    # ce qui supprime le 0 initial. On repasse en 4 chiffres (format IDCC) pour restaurer 0843.
+    if idcc.is_a?(Numeric) && idcc == idcc.to_i
+      str = idcc.to_i.to_s.rjust(4, "0")
+    elsif str.match?(/\A\d+\z/)
+      str = str.rjust(4, "0")
+    end
+    str.presence
   end
 end

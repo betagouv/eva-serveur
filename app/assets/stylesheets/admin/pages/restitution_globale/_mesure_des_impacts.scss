@@ -10,7 +10,7 @@
 }
 
 .evaluation-impact-general__definitions {
-  background-color: var(--color-background-alt-blue, #F5F5FE);
+  background-color: $blue-france-975;
   padding: $dsfr-spacing-4v;
   margin-top: $dsfr-spacing-4v;
 }
@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   gap: $dsfr-spacing-6v;
-  background-color: var(--color-background-alt-blue, #F5F5FE);
+  background-color: $blue-france-975;
 }
 
 .impact-definitions__title {
@@ -75,5 +75,96 @@
   @include dsfr-texte-md;
   font-weight: 400;
   color: $grey-200;
+  margin: 0;
+}
+
+// Coûts
+.couts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+}
+
+.couts__titre {
+  margin: 0;
+}
+
+.couts__graphiques {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
+}
+
+.couts__graphiques-titre {
+  @include h6-xxs();
+  margin: 0;
+}
+
+.couts__colonnes {
+  display: flex;
+  align-items: center;
+  gap: var(--Space-6W, 48px);
+  align-self: stretch;
+}
+
+.couts__colonne {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  flex: 1 0 0;
+}
+
+.couts__pile-fleches {
+  display: flex;
+  padding: var(--Space-3W, 24px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-2W, 16px);
+  align-self: stretch;
+  border: 1px solid $grey-900;
+}
+
+.couts__titre-graphique {
+  @include body-lg-semibold();
+  color: $grey-200;
+  margin: 0;
+}
+
+.couts__graphique {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1W, 8px);
+  align-self: stretch;
+}
+
+.couts__mention {
+  @include body-xs-mention();
+  margin: 0;
+}
+
+.couts__explication {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1V, 4px);
+  align-self: stretch;
+}
+
+.couts__explication-titre {
+  @include body-md-semibold();
+  margin: 0;
+}
+
+.couts__explication-texte {
+  @include body-md-base();
+}
+
+.couts__question {
   margin: 0;
 }

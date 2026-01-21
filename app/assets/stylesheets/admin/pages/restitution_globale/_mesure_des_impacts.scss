@@ -90,6 +90,12 @@
   margin: 0;
 }
 
+.couts__mise-en-avant {
+  .fr-callout{
+    margin-bottom: 0 !important;
+  }
+}
+
 .couts__graphiques {
   display: flex;
   flex-direction: column;

@@ -55,7 +55,7 @@ role: :conseiller
       end
 
       it "crée une structure Entreprise" do
-        opco = create(:opco, nom: 'OPCO Mobilité', financeur: true, idcc: [ '3' ])
+        opco = create(:opco, nom: 'OPCO Mobilité', financeur: true, idcc: [ "0003" ])
         create(:parcours_type, nom_technique: "eva-entreprise-opcomobilite")
         # Mocker MiseAJourSiret pour retourner un IDCC qui correspond à OPCO Mobilité (IDCC 3)
         allow(MiseAJourSiret).to receive(:new) do |structure|
@@ -64,7 +64,7 @@ role: :conseiller
             structure.statut_siret = true
             structure.date_verification_siret = Time.current
             structure.code_naf = "53.10Z"
-            structure.idcc = [ "3" ] # IDCC qui correspond à OPCO Mobilité dans le mapping
+            structure.idcc = [ "3" ] # IDCC 3, normalise 0003 dans le service -> OPCO Mobilité
             true
           end
           mise_a_jour

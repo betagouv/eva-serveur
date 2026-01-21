@@ -44,18 +44,18 @@ describe 'importe:opcos' do
         allow(sheet).to receive(:row).with(6).and_return([ 'N.A', 'OPCO Test 2' ])
       end
 
-      it 'crée les Opcos avec leurs IDCC' do
+      it 'crée les Opcos avec leurs IDCC (normalisés à 4 chiffres)' do
         expect do
           subject.invoke
         end.to change(Opco, :count).by(2)
 
         opco_mobilite = Opco.find_by(nom: 'OPCO Mobilité')
         expect(opco_mobilite).to be_present
-        expect(opco_mobilite.idcc).to contain_exactly('3', '16')
+        expect(opco_mobilite.idcc).to contain_exactly('0003', '0016')
 
         opco_2i = Opco.find_by(nom: 'OPCO 2i')
         expect(opco_2i).to be_present
-        expect(opco_2i.idcc).to contain_exactly('18')
+        expect(opco_2i.idcc).to contain_exactly('0018')
       end
 
       it 'ignore les IDCC na et N.A' do
@@ -89,7 +89,7 @@ describe 'importe:opcos' do
         end.not_to change(Opco, :count)
 
         opco_existant.reload
-        expect(opco_existant.idcc).to contain_exactly('3', '16')
+        expect(opco_existant.idcc).to contain_exactly('0003', '0016')
       end
 
       it 'log les informations de mise à jour' do
@@ -112,7 +112,23 @@ describe 'importe:opcos' do
         subject.invoke
 
         opco_mobilite = Opco.find_by(nom: 'OPCO Mobilité')
-        expect(opco_mobilite.idcc).to contain_exactly('3', '16')
+        expect(opco_mobilite.idcc).to contain_exactly('0003', '0016')
+      end
+    end
+
+    context "quand Excel renvoie un IDCC numérique (ex. 0843 → 843), le 0 initial est restauré" do
+      before do
+        allow(sheet).to receive(:last_row).and_return(2)
+        # 843 (Integer) simule une cellule Excel numérique : Roo supprime le 0 initial
+        allow(sheet).to receive(:row).with(2).and_return([ 843, "OPCO Test 0843" ])
+      end
+
+      it "stocke l'IDCC en 0843 et non 843" do
+        subject.invoke
+
+        opco = Opco.find_by(nom: "OPCO Test 0843")
+        expect(opco).to be_present
+        expect(opco.idcc).to contain_exactly("0843")
       end
     end
 

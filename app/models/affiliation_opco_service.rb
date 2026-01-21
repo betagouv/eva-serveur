@@ -42,7 +42,10 @@ class AffiliationOpcoService
   def normalise_idcc(idcc)
     return nil if idcc.blank?
 
-    # Convertir en string et supprimer les espaces
-    idcc.to_s.strip
+    str = idcc.to_s.strip
+    # Pour la comparaison avec les IDCC des Opcos (stockés en 4 chiffres après import),
+    # on padde les codes purement numériques à 4 chiffres (ex. "3" -> "0003", "843" -> "0843").
+    str = str.rjust(4, "0") if str.match?(/\A\d+\z/)
+    str
   end
 end

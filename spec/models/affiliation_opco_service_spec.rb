@@ -5,11 +5,11 @@ describe AffiliationOpcoService, type: :model do
   let(:idcc_values) { [] }
   let(:service) { described_class.new(structure) }
 
-  # Créer les OPCOs de test avec leurs IDCC
-  let!(:opco_mobilite) { create(:opco, nom: "OPCO Mobilité", idcc: [ "3", "16" ]) }
-  let!(:opco_2i) { create(:opco, nom: "OPCO 2i", idcc: [ "18" ]) }
-  let!(:opco_sante) { create(:opco, nom: "OPCO Santé", idcc: [ "29" ]) }
-  let!(:opco_commerce) { create(:opco, nom: "OPCO Commerce", idcc: [ "43" ]) }
+  # Créer les OPCOs de test avec leurs IDCC (format 4 chiffres, aligné avec l'import)
+  let!(:opco_mobilite) { create(:opco, nom: "OPCO Mobilité", idcc: [ "0003", "0016" ]) }
+  let!(:opco_2i) { create(:opco, nom: "OPCO 2i", idcc: [ "0018" ]) }
+  let!(:opco_sante) { create(:opco, nom: "OPCO Santé", idcc: [ "0029" ]) }
+  let!(:opco_commerce) { create(:opco, nom: "OPCO Commerce", idcc: [ "0043" ]) }
 
   describe "#affilie_opcos" do
     context "quand la structure a des IDCC valides" do
@@ -108,19 +108,24 @@ describe AffiliationOpcoService, type: :model do
   end
 
   describe "#normalise_idcc (private)" do
-    it "convertit un entier en string" do
+    it "convertit un entier en string et padde à 4 chiffres" do
       idcc_normalise = service.send(:normalise_idcc, 3)
-      expect(idcc_normalise).to eq("3")
+      expect(idcc_normalise).to eq("0003")
     end
 
-    it "convertit une string en string" do
+    it "convertit une string numérique et padde à 4 chiffres" do
       idcc_normalise = service.send(:normalise_idcc, "3")
-      expect(idcc_normalise).to eq("3")
+      expect(idcc_normalise).to eq("0003")
     end
 
-    it "supprime les espaces" do
+    it "supprime les espaces et padde à 4 chiffres" do
       idcc_normalise = service.send(:normalise_idcc, " 3 ")
-      expect(idcc_normalise).to eq("3")
+      expect(idcc_normalise).to eq("0003")
+    end
+
+    it "préserve un IDCC 0843 (4 chiffres) pour la correspondance avec l'import" do
+      idcc_normalise = service.send(:normalise_idcc, "843")
+      expect(idcc_normalise).to eq("0843")
     end
 
     it "retourne nil pour nil" do
@@ -130,7 +135,6 @@ describe AffiliationOpcoService, type: :model do
 
     it "retourne nil pour une string vide" do
       idcc_normalise = service.send(:normalise_idcc, "")
-      # "" devient "" après strip, mais blank? retourne true, donc normalise_idcc retourne nil
       expect(idcc_normalise).to be_nil
     end
   end

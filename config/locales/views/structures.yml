@@ -55,7 +55,7 @@ fr:
 
         Si vous n'êtes pas sûr d'être habilité à prendre cette responsabilité, veuillez prendre contact préalablement avec votre responsable hiérarchique.
       bouton_retour: Annuler
-      bouton: Créer ma structure
+      bouton: Créer la structure
     modal_confirmation_creation_structure:
       titre: Créer la structure
       message: |

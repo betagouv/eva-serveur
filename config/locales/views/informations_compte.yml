@@ -4,7 +4,7 @@ fr:
       show:
         titre: Informations personnelles
         sous_titre: Complétez votre inscription.
-        titre_intro: Confirmez vos informations personnelles
+        titre_intro: Renseignez vos informations personnelles
         sous_titre_intro: Certaines informations sont nécessaires pour utiliser le service. Merci de les vérifier et de les compléter si besoin avant de poursuivre.
         titre_carte: Informations personnelles
         sous_titre_carte: "Les champs notés * sont obligatoires."
@@ -18,6 +18,7 @@ fr:
         label_telephone: Téléphone
         hint_telephone: "Format attendu : (+33) 1 22 33 44 55"
         label_fonction: Fonction
+        selectionner_une_option: Sélectionner une option
         label_service_departement: Service
         hint_service_departement: "Exemple : logistique, marketing, ressources humaines"
     selection_usages:
@@ -52,13 +53,13 @@ fr:
           sous_titre: Pour utiliser le service, nous avons besoin de compléter quelques informations sur votre structure.
         parametrage:
           titre: Créer la structure
-          sous_titre: "Les champs notés * sont obligatoires."
+          sous_titre: "Pour utiliser le service, nous avons besoin de compléter quelques informations sur votre structure."
         confirmation:
           titre: Structure identifiée
           sous_titre: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de la structure pour laquelle vous travaillez."
         rejoindre: Rejoindre la structure
         ce_nest_pas_ma_structure: Ce n'est pas la bonne structure
-        creer_structure: Créer ma structure
+        creer_structure: Créer la structure
         confirme_structure: Je confirme qu'il s'agit de la structure pour laquelle je travaille
         mention_acces: Vous aurez un accès immédiat au service, avec des fonctionnalités limitées. L'accès complet sera activé après validation par l'administrateur ou l'administratrice.
         texte_creation: Ce n’est pas le cas ?
@@ -72,7 +73,8 @@ fr:
         hint_opco: Détecté automatiquement. À vérifier ou à compléter si nécessaire.
         code_postal_label: Code postal
         choisir_type: Choisir un type de structure
-        opco_label: OPCO
+        opco_label: Opérateur de compétences
+        choisir_opco: Choisir un opérateur de compétences
         choisir_opcos: Choisir un ou plusieurs OPCOs
         opco_non_identifie: Non identifié
         mention_opco_detecte: OPCO détecté automatiquement. Vous pourrez le modifier si nécessaire.

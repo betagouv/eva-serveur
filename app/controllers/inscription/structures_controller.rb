@@ -18,7 +18,7 @@ class Inscription::StructuresController < ApplicationController
       rejoindre_structure_existante
     when "confirmer_infos", "Confirmer"
       confirme_infos_structure
-    when "creer", "Créer ma structure", "Confirmer la création"
+    when "creer", "Créer la structure", "Confirmer la création"
       creer_nouvelle_structure
     end
   end

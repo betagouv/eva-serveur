@@ -308,6 +308,41 @@ fr:
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic
           action: Continuer le diagnostic
+        impact_couts:
+          contenu_cout:
+            texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
+            titre:
+              a: "Coûts : 1% de votre masse salariale"
+              b: "Coûts : 2% de votre masse salariale"
+              c: "Coûts : 3 à 4% de votre masse salariale"
+              d: "Coûts : 5 à 6% de votre masse salariale"
+            suite:
+              a: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
+              b: "À 2 %, les effets commencent à se faire sentir. Une démarche préventive permettrait de réduire rapidement ces coûts et d'éviter qu'ils ne s'installent. Assurez vous que des stratégies de dissimulation ou de contournement des difficultés ne viennent pas à terme perturber votre organisation et sa capacité à évoluer."
+              c: "Les coûts sont importants. Les erreurs, retards et ajustements permanents pèsent clairement sur la qualité, la performance et l'organisation du travail."
+              d: "Les coûts sont très élevés. L'action corrective coûte moins cher que la situation actuelle : intervenir devient un levier immédiat d'économies et de performance."
+          explications_strategies:
+            titre:
+              a: "Palier A"
+              b: "Palier B : évitement"
+              c: "Palier C : déni & dissimulation"
+              d: "Palier D : glissement de fonction et délégation"
+            texte:
+              a: "Peu de stratégies de contournement observées"
+              b: "Je contourne la tâche, ce n'est pas ma faute, j'adapte la consigne."
+              c: "Je n'ai pas de difficulté ; Je préfère le téléphone aux mails, c'est plus humain ; Je donne des prétextes pour ne pas faire."
+              d: "Je ne fais pas. Un autre fait à ma place."
+          explications_numerique:
+            titre:
+              a: "Palier A"
+              b: "Palier B"
+              c: "Palier C"
+              d: "Palier D"
+            texte:
+              a: "Usage satisfaisant et adaptatif des compétences numériques de base"
+              b: "Usage des compétences numériques de base courant"
+              c: "Usage des compétences numériques de base fragile"
+              d: "Usage des compétences numériques de base dépendant du collectif"
     restitutions:
       reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
       redaction: Rédaction

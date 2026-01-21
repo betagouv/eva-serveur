@@ -67,6 +67,7 @@
       border-top: 4px solid var(--light-decisions-border-border-plain-grey, #3A3A3A);
       padding: var(--Space-1W, 8px) var(--Space-3V, 12px);
       height: 50px;
+      margin-right: -2px !important;
     }
 
     .score-fleche__lettre {
@@ -79,7 +80,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-left: -2;
+      margin-left: -2 !important;
     }
 
     &.score-fleche--blue {

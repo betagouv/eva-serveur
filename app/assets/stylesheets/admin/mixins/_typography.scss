@@ -166,3 +166,11 @@
   font-weight: 700;
   line-height: 36px;
 }
+
+@mixin body-lg-semibold() {
+  font-family: var(--Body-LG---Texte-article-Font, "Work Sans");
+  font-size: var(--Body-LG---Texte-article-Size, 18px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Body-LG---Texte-article-Line-Height, 28px);
+}

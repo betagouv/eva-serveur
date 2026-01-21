@@ -30,28 +30,10 @@
       <%= render partial: "admin/evaluations/mesure_des_impacts_definitions" %>
     </div>
   </div>
+  <h2 class="evaluation__titre">Coûts</h2>
   <div class="panel">
-      <% if complet %>
-      <% interpretations_callout = [
-        :score_cout,
-        :score_strategie,
-        :score_numerique
-      ] %>
-      <% if interpretations_callout.any? %>
-          <div class="fr-pl-4w fr-pr-4w fr-mt-4w evaluation-impact-general__resultats">
-            <div class="impact-callouts">
-              <% interpretations_callout.each do |interpretation| %>
-                <% resultat = synthese[interpretation] %>
-
-                <%= render Evaluation::MesureImpactCalloutComponent.new(
-                  titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-                  resultat: resultat,
-                  classes: [ "impact-callouts__item" ]
-                ) %>
-              <% end %>
-            </div>
-          </div>
-      <% end %>
+    <% if complet %>
+      <%= render "impact_couts", synthese: synthese %>
     <% end %>
   </div>
 

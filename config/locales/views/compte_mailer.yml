@@ -14,7 +14,7 @@ fr:
 
         - Votre identifiant est votre adresse email : **%{email}**
 
-        - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
+        - Mot de passe : c'est le mot de passe que vous avez choisi précédemment.
           Il est personnel, ne le communiquez pas à vos collègues.
     alerte_admin:
       objet: Validez l'accès eva à « %{structure} » de vos collègues
@@ -63,14 +63,14 @@ fr:
         notre équipe vous répondra dans les plus brefs délais !
     comptes_a_autoriser:
       objet: |
-        Simplifiez l’utilisation d’eva pour vos collègues : validez leur compte en 1 clic
-      intro : |
+        Simplifiez l’utilisation d’eva pour vos collègues : validez leur compte en 1 clic
+      intro: |
         ### Bonjour %{prenom_admin},
 
-        Merci d’utiliser eva, nous espérons que cet outil numérique facilite vos accompagnements. 
+        Merci d’utiliser eva, nous espérons que cet outil numérique facilite vos accompagnements.
 
 
-        eva est gratuit et libre d’accès pour tous les membres de votre structure à condition que 
+        eva est gratuit et libre d’accès pour tous les membres de votre structure à condition que
         vous ayez préalablement validé leur accès.
 
         Aujourd’hui, certains collègues de votre structure « %{structure} » souhaitent utiliser eva, et

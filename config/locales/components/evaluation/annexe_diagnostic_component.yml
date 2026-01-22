@@ -2,11 +2,11 @@ fr:
   evaluation:
     annexe_diagnostic_component:
       titre: |
-        Diagnostic : référentiels de compétences et interprétation des évaluations Eva
+        Diagnostic : référentiels de compétences et interprétation des évaluations Eva
       introduction: |
         Ce parcours permet d’évaluer les compétences de base en français et en mathématiques.
 
-        Les résultats s’appuient sur les référentiels suivants :
+        Les résultats s’appuient sur les référentiels suivants :
       titre_interprétation: Points de vigilance sur l’interprétation des résultats
       interprétation_1: |
         Les résultats peuvent être influencés par les conditions de passation (fatigue, stress, matériel, accompagnement...)
@@ -15,7 +15,7 @@ fr:
       interprétation_3: |
         Des biais peuvent exister selon la familiarité avec les formats numériques
       interprétation_4: |
-        Il est recommandé de croiser les résultats avec l’observation terrain et un échange avec la personne évaluée pour affiner l’analyse. 
+        Il est recommandé de croiser les résultats avec l’observation terrain et un échange avec la personne évaluée pour affiner l’analyse.
       restitution_francais_titre: |
         Français
       restitution_francais: |

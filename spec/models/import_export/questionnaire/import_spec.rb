@@ -59,7 +59,7 @@ describe ImportExport::Questionnaire::Import do
     end
 
     it "retourne les messages d'erreur" do
-      message = 'Erreur de validation à la ligne 0 : Nom technique est déjà utilisé(e)'
+      message = 'Erreur de validation à la ligne 0 : Nom technique est déjà utilisé(e)'
 
       expect do
         service.import_from_xls(file)

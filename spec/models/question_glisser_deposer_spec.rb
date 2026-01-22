@@ -29,7 +29,7 @@ describe QuestionGlisserDeposer, type: :model do
                                           description illustration modalite_reponse type
                                           reponsesNonClassees zone_depot_url consigne_audio
                                           intitule_audio demarrage_audio_modalite_reponse
-                                          orientation])
+                                          orientation passable])
       expect(json['type']).to eql('glisser-deposer')
       expect(json['modalite_reponse']).to eql(modalite.ecrit)
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(

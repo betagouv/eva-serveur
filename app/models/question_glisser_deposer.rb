@@ -43,7 +43,7 @@ class QuestionGlisserDeposer < Question
 
   def base_json
     slice(:id, :nom_technique, :description, :demarrage_audio_modalite_reponse,
-          :score, :metacompetence).tap do |json|
+          :score, :metacompetence, :passable).tap do |json|
       json["type"] = "glisser-deposer"
       json["illustration"] = illustration_url
       json["modalite_reponse"] = transcription_modalite_reponse&.ecrit

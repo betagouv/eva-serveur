@@ -1,4 +1,6 @@
 fr:
+  questions:
+    passable_hint: Quand une question est passable, le bénéficiaire peut cocher la case « je ne sais pas » sinon cette case n'est pas affichée.
   admin:
     questions:
       hints:
@@ -6,7 +8,7 @@ fr:
           Pour créer un variant, suivez la nomenclature de type N1Pse1__variant pour que la question hérite automatiquement de la métacompétence de la question N1Pse1
       input_illustration_base:
         illustration:
-          hint: 'La taille de l’image rendue est de 1008x566.'
+          hint: "La taille de l’image rendue est de 1008x566."
         supprimer_illustration: Supprimer l'illustration actuelle
         format_fichier_zone_cliquable: L'un des éléments cliquables doit contenir la classe css `bonne-reponse`
         format_fichier_zone_depot: |

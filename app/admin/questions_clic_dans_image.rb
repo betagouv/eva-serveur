@@ -3,7 +3,7 @@ ActiveAdmin.register QuestionClicDansImage do
 
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :description,
+  permit_params :libelle, :nom_technique, :description, :passable,
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
                 :image_au_clic,

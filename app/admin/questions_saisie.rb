@@ -2,7 +2,7 @@ ActiveAdmin.register QuestionSaisie do
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :message,
-                :suffix_reponse, :description, :reponse_placeholder, :type_saisie, :aide,
+                :suffix_reponse, :description, :reponse_placeholder, :type_saisie, :passable, :aide,
                 :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
                 :demarrage_audio_modalite_reponse,

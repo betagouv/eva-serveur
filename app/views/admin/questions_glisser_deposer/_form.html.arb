@@ -3,6 +3,11 @@ active_admin_form_for [ :admin, resource ] do |f|
   f.inputs do
     render partial: "admin/questions/base_form", locals: { f: f }
     f.input :description
+    render partial: "admin/questions/input_checkbox_avec_hint", locals: {
+      f: f,
+      attribute: :passable,
+      hint: t("questions.passable_hint")
+    }
     render partial: "admin/questions/input_illustration", locals: { f: f }
     render partial: "admin/questions/input_illustration_base",
            locals: {

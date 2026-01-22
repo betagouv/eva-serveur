@@ -3,10 +3,10 @@ ActiveAdmin.register QuestionGlisserDeposer do
 
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
-  permit_params :libelle, :nom_technique, :description, :illustration, :supprimer_illustration,
-                :supprimer_audio_modalite_reponse, :supprimer_audio_intitule,
-                :supprimer_zone_depot, :zone_depot, :supprimer_audio_consigne,
-                :demarrage_audio_modalite_reponse, :orientation,
+  permit_params :libelle, :nom_technique, :description, :passable, :illustration,
+                :supprimer_illustration, :supprimer_audio_modalite_reponse,
+                :supprimer_audio_intitule, :supprimer_zone_depot, :zone_depot,
+                :supprimer_audio_consigne, :demarrage_audio_modalite_reponse, :orientation,
                 transcriptions_attributes: %i[id categorie ecrit audio _destroy],
                 reponses_attributes: %i[id illustration intitule position type_choix position_client
                                         nom_technique _destroy]

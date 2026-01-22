@@ -40,6 +40,7 @@ fr:
         illustration: Image de fond de la question
         type_qcm: Type QCM
         demarrage_audio_modalite_reponse: Lire l'audio de la consigne en premier
+        passable: Passable
       question_saisie:
         type_saisie: Type de saisie
         suffix_reponse: Suffix de la réponse

@@ -161,18 +161,185 @@ L'api est accessible au point `/api`
 
 **Réponse**
 
+Retourne un tableau de questions. Les champs retournés dépendent du type de question.
+
+#### Champs audio communs à tous les types
+
+| Champ | Description |
+|-------|-------------|
+| `audio_url` | URL de l'audio principal (intitulé si complet, sinon modalité de réponse) |
+| `consigne_audio` | URL de l'audio de la consigne |
+| `intitule_audio` | URL de l'audio de l'intitulé (uniquement si l'intitulé n'est pas complet) |
+
+#### Type `qcm`
+
 ```json
-[
-  {
-    "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
-    "type": "qcm",
-    "intitule": "Ma question",
-    "description": "Ma description",
-    "passable": true,
-    "choix": []
-  }
-]
+{
+  "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
+  "type": "qcm",
+  "nom_technique": "N1Pse1",
+  "type_qcm": "standard",
+  "intitule": "Ma question",
+  "description": "Ma description",
+  "modalite_reponse": "Sélectionnez une réponse",
+  "illustration": "https://example.com/image.jpg",
+  "metacompetence": "numeratie",
+  "score": 1,
+  "passable": true,
+  "demarrage_audio_modalite_reponse": false,
+  "audio_url": "https://example.com/audio.mp3",
+  "consigne_audio": "https://example.com/consigne.mp3",
+  "choix": [
+    {
+      "id": "a1b2c3d4-...",
+      "nom_technique": "N1Pse1R1",
+      "intitule": "Réponse 1",
+      "type_choix": "bon",
+      "position": 1,
+      "audio_url": "https://example.com/choix.mp3"
+    }
+  ]
+}
 ```
+
+| Champ | Description |
+|-------|-------------|
+| `type_qcm` | Type de QCM : `standard` ou `jauge` |
+| `choix` | Tableau des choix de réponses |
+| `choix[].type_choix` | Type du choix : `bon` ou `mauvais` |
+
+#### Type `saisie`
+
+```json
+{
+  "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
+  "type": "saisie",
+  "nom_technique": "N1Pse2",
+  "sous_type": "numerique",
+  "intitule": "Ma question",
+  "description": "Ma description",
+  "modalite_reponse": "Entrez votre réponse",
+  "illustration": "https://example.com/image.jpg",
+  "metacompetence": "numeratie",
+  "score": 1,
+  "passable": true,
+  "demarrage_audio_modalite_reponse": false,
+  "placeholder": "0,00",
+  "suffix_reponse": "€",
+  "aide": "Aide contextuelle",
+  "texte_a_trous": null,
+  "max_length": 6,
+  "audio_url": "https://example.com/audio.mp3",
+  "reponses": [
+    {
+      "nom_technique": "N1Pse2R1",
+      "intitule": "42",
+      "type_choix": "bon"
+    }
+  ]
+}
+```
+
+| Champ | Description |
+|-------|-------------|
+| `sous_type` | Type de saisie : `redaction`, `numerique`, `texte`, `nombre_avec_virgule` |
+| `placeholder` | Texte indicatif dans le champ de saisie |
+| `suffix_reponse` | Suffixe affiché après la réponse (ex: €, kg) |
+| `texte_a_trous` | Texte avec des trous à compléter |
+| `max_length` | Longueur maximale de la saisie (6 pour `nombre_avec_virgule`) |
+| `reponses` | Tableau des réponses attendues |
+
+#### Type `clic-dans-image`
+
+```json
+{
+  "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
+  "type": "clic-dans-image",
+  "nom_technique": "N1Pse3",
+  "intitule": "Ma question",
+  "description": "Ma description",
+  "modalite_reponse": "Cliquez sur la bonne zone",
+  "illustration": "https://example.com/image.jpg",
+  "zone_cliquable_url": "https://example.com/zone.svg",
+  "image_au_clic_url": "https://example.com/feedback.svg",
+  "metacompetence": "numeratie",
+  "score": 1,
+  "passable": true,
+  "demarrage_audio_modalite_reponse": false,
+  "audio_url": "https://example.com/audio.mp3"
+}
+```
+
+| Champ | Description |
+|-------|-------------|
+| `zone_cliquable_url` | URL du SVG contenant les zones cliquables (avec classe `bonne-reponse`) |
+| `image_au_clic_url` | URL du SVG affiché après le clic |
+
+#### Type `clic-sur-mots`
+
+```json
+{
+  "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
+  "type": "clic-sur-mots",
+  "nom_technique": "N1Pse4",
+  "intitule": "Ma question",
+  "description": "Ma description",
+  "modalite_reponse": "Cliquez sur les mots corrects",
+  "illustration": "https://example.com/image.jpg",
+  "texte_cliquable": "Le [mot1](#bonne-reponse) est correct",
+  "reponse": {
+    "bonne_reponse": ["mot1", "mot2"]
+  },
+  "metacompetence": "litteratie",
+  "score": 1,
+  "passable": true,
+  "demarrage_audio_modalite_reponse": false,
+  "audio_url": "https://example.com/audio.mp3"
+}
+```
+
+| Champ | Description |
+|-------|-------------|
+| `texte_cliquable` | Texte en markdown avec les mots cliquables marqués `[mot](#bonne-reponse)` |
+| `reponse.bonne_reponse` | Tableau des mots considérés comme bonnes réponses |
+
+#### Type `glisser-deposer`
+
+```json
+{
+  "id": "d5e892ff-6747-4e21-ad60-2f3255ffb314",
+  "type": "glisser-deposer",
+  "nom_technique": "N1Pse5",
+  "intitule": "Ma question",
+  "description": "Ma description",
+  "modalite_reponse": "Glissez les éléments",
+  "illustration": "https://example.com/image.jpg",
+  "zone_depot_url": "https://example.com/zones.svg",
+  "orientation": "horizontal",
+  "metacompetence": "numeratie",
+  "score": 1,
+  "passable": true,
+  "demarrage_audio_modalite_reponse": false,
+  "audio_url": "https://example.com/audio.mp3",
+  "reponsesNonClassees": [
+    {
+      "id": "a1b2c3d4-...",
+      "nom_technique": "N1Pse5R1",
+      "intitule": "Élément 1",
+      "position": 1,
+      "position_client": "zone-depot--N1Pse5R1",
+      "illustration": "https://example.com/element.jpg"
+    }
+  ]
+}
+```
+
+| Champ | Description |
+|-------|-------------|
+| `zone_depot_url` | URL du SVG contenant les zones de dépôt (avec classes `zone-depot zone-depot--{nom_technique}`) |
+| `orientation` | Orientation des éléments : `vertical` ou `horizontal` |
+| `reponsesNonClassees` | Tableau des éléments à glisser-déposer |
+| `reponsesNonClassees[].position_client` | Position cible de l'élément |
 
 ### Crée un événement
 

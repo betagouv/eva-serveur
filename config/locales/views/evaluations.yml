@@ -2,20 +2,20 @@ fr:
   admin:
     evaluations:
       telechargement_reponses:
-        cta: 'Télécharger le détail des réponses'
+        cta: "Télécharger le détail des réponses"
       index:
-        confirmation_suppression: 'Voulez-vous vraiment supprimer cette évaluation ?'
+        confirmation_suppression: "Voulez-vous vraiment supprimer cette évaluation ?"
         supprimer: Supprimer
         modifier: Modifier
         voir: Voir
-      inconnue: 'Évaluation non trouvée'
+      inconnue: "Évaluation non trouvée"
       commun: &commun
         efficience: Efficience
         nombre_erreurs: "Nombre d'erreurs"
         duree: Durée de passation
       autopositionnement: &autopositionnement
-        questionnaire-auto-positionnement: 'Questionnaire d’auto-positionnement'
-        non_renseigne: 'Non renseigné'
+        questionnaire-auto-positionnement: "Questionnaire d’auto-positionnement"
+        non_renseigne: "Non renseigné"
         appareils: Usage du numérique
         sante: Santé
       questions_reponses_autopositionnement:
@@ -27,7 +27,7 @@ fr:
         scolarite: Scolarité
       controle:
         <<: *commun
-        nombre_trop_tard: 'Nombre de trop tard'
+        nombre_trop_tard: "Nombre de trop tard"
         arret_au: "Arrêt au .. / 60"
       inventaire:
         <<: *commun
@@ -42,7 +42,7 @@ fr:
           *Pour un premier diagnostic des compétences numériques de base, rendez-vous sur :  
           [https://pix.fr/abc-diag/](https://pix.fr/abc-diag/)*
       questions:
-        situation: 'Situation %{situation}'
+        situation: "Situation %{situation}"
         abstention: Ne sait pas
         bon: Correct
         mauvais: Erreur
@@ -61,7 +61,7 @@ fr:
         prise_en_main:
           titre: Compétences numériques
           titre_menu_lateral: Compétences numériques
-        legende_titre: 'Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers'
+        legende_titre: "Les compétences transversales sont des compétences que l’on retrouve dans de nombreux métiers"
       restitution_competence:
         indetermine: non obs.
         1: 1
@@ -252,7 +252,7 @@ fr:
             description: "Cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
           securite_qualite:
             titre: "Sécurité et qualité"
-            description: "Cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+            description: "Cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
           mobilite_professionnelle:
             titre: "Mobilité professionnelle"
             description: "Cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
@@ -287,24 +287,24 @@ fr:
         score_cout:
           callout:
             titre:
-              faible: "Impact sur les coûts : Faible"
-              moyen: "Impact sur les coûts : Moyen"
-              fort: "Impact sur les coûts : Fort"
-              tres_fort: "Impact sur les coûts : Très fort"
+              faible: "Impact sur les coûts : Faible"
+              moyen: "Impact sur les coûts : Moyen"
+              fort: "Impact sur les coûts : Fort"
+              tres_fort: "Impact sur les coûts : Très fort"
         score_strategie:
           callout:
             titre:
-              faible: "Impact sur les stratégies : Faible"
-              moyen: "Impact sur les stratégies : Moyen"
-              fort: "Impact sur les stratégies : Fort"
-              tres_fort: "Impact sur les stratégies : Très fort"
+              faible: "Impact sur les stratégies : Faible"
+              moyen: "Impact sur les stratégies : Moyen"
+              fort: "Impact sur les stratégies : Fort"
+              tres_fort: "Impact sur les stratégies : Très fort"
         score_numerique:
           callout:
             titre:
-              faible: "Impact sur le numérique : Faible"
-              moyen: "Impact sur le numérique : Moyen"
-              fort: "Impact sur le numérique : Fort"
-              tres_fort: "Impact sur le numérique : Très fort"
+              faible: "Impact sur le numérique : Faible"
+              moyen: "Impact sur le numérique : Moyen"
+              fort: "Impact sur le numérique : Fort"
+              tres_fort: "Impact sur le numérique : Très fort"
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic
           action: Continuer le diagnostic
@@ -312,21 +312,21 @@ fr:
           contenu_cout:
             texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
             titre:
-              a: "Coûts : 1% de votre masse salariale"
-              b: "Coûts : 2% de votre masse salariale"
-              c: "Coûts : 3 à 4% de votre masse salariale"
-              d: "Coûts : 5 à 6% de votre masse salariale"
+              a: "Coûts : 1% de votre masse salariale"
+              b: "Coûts : 2% de votre masse salariale"
+              c: "Coûts : 3 à 4% de votre masse salariale"
+              d: "Coûts : 5 à 6% de votre masse salariale"
             suite:
               a: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
               b: "À 2 %, les effets commencent à se faire sentir. Une démarche préventive permettrait de réduire rapidement ces coûts et d'éviter qu'ils ne s'installent. Assurez vous que des stratégies de dissimulation ou de contournement des difficultés ne viennent pas à terme perturber votre organisation et sa capacité à évoluer."
               c: "Les coûts sont importants. Les erreurs, retards et ajustements permanents pèsent clairement sur la qualité, la performance et l'organisation du travail."
-              d: "Les coûts sont très élevés. L'action corrective coûte moins cher que la situation actuelle : intervenir devient un levier immédiat d'économies et de performance."
+              d: "Les coûts sont très élevés. L'action corrective coûte moins cher que la situation actuelle : intervenir devient un levier immédiat d'économies et de performance."
           explications_strategies:
             titre:
-              a: "Palier A"
-              b: "Palier B : évitement"
-              c: "Palier C : déni & dissimulation"
-              d: "Palier D : glissement de fonction et délégation"
+              a: "Palier A"
+              b: "Palier B : évitement"
+              c: "Palier C : déni & dissimulation"
+              d: "Palier D : glissement de fonction et délégation"
             texte:
               a: "Peu de stratégies de contournement observées"
               b: "Je contourne la tâche, ce n'est pas ma faute, j'adapte la consigne."
@@ -334,17 +334,17 @@ fr:
               d: "Je ne fais pas. Un autre fait à ma place."
           explications_numerique:
             titre:
-              a: "Palier A"
-              b: "Palier B"
-              c: "Palier C"
-              d: "Palier D"
+              a: "Palier A"
+              b: "Palier B"
+              c: "Palier C"
+              d: "Palier D"
             texte:
               a: "Usage satisfaisant et adaptatif des compétences numériques de base"
               b: "Usage des compétences numériques de base courant"
               c: "Usage des compétences numériques de base fragile"
               d: "Usage des compétences numériques de base dépendant du collectif"
     restitutions:
-      reponse_expression_ecrite: 'Votre réponse à la question « %{question} »'
+      reponse_expression_ecrite: "Votre réponse à la question « %{question} »"
       redaction: Rédaction
       aide_interpretation_expression_ecrite: |
         Outils d’analyse pour la communication écrite :
@@ -413,14 +413,14 @@ fr:
         temps_moyen_non_mots: Temps moyen de réponse correcte non-mots (en secondes)
         temps_moyen_mots_francais: Temps moyen de réponse correcte mot français (en secondes)
         nombre_bonnes_reponses_mot_français: Nombre de bonnes réponses (mot français)
-        score_orientation: 'Score orientation'
-        score_lecture: 'Score lecture'
-        score_comprehension: 'Score compréhension'
-        score_production: 'Score production de texte'
-        score_hpar: 'Score hpar'
-        score_hgac: 'Score hgac'
-        score_hcvf: 'Score hcvf'
-        score_hpfb: 'Score hpfb'
+        score_orientation: "Score orientation"
+        score_lecture: "Score lecture"
+        score_comprehension: "Score compréhension"
+        score_production: "Score production de texte"
+        score_hpar: "Score hpar"
+        score_hgac: "Score hgac"
+        score_hcvf: "Score hcvf"
+        score_hpfb: "Score hpfb"
 
         nombre_bonnes_reponses_numeratie: Nombre de bonnes réponses Numératie
         nombre_reponses: Nombre de réponses
@@ -496,9 +496,9 @@ fr:
             - Orientation visuo-spatiale
             - Réalisation d’une suite de calculs mathématiques
       references:
-        ordre: '(par ordre croissant)'
-        francais: 'Français :'
-        mathematiques: 'Mathématiques :'
+        ordre: "(par ordre croissant)"
+        francais: "Français :"
+        mathematiques: "Mathématiques :"
         pre_A1: Niveau pre A1
         A1: Niveau A1
         A2: Niveau A2
@@ -521,10 +521,10 @@ fr:
           Le détail de l’utilisation de ces référentiels et des conditions d’interprétation est disponible ici :  
           <a href="https://eva.anlci.gouv.fr/les-referentiels-devaluation/" target="_blank">https://eva.anlci.gouv.fr/les-referentiels-devaluation/</a>
       cefr:
-        alt_icone: ''
+        alt_icone: ""
         titre: Vos compétences en français et mathématiques
         titre_menu_lateral: Français et Mathématiques
-        niveau: 'Niveau %{niveau}'
+        niveau: "Niveau %{niveau}"
         litteratie:
           titre: Français
           pre_A1:
@@ -540,7 +540,7 @@ fr:
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           B1:
-            description:  |
+            description: |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
         numeratie:
@@ -562,7 +562,7 @@ fr:
               Votre score indique que vous maîtrisez tout à fait les mathématiques de base, bravo !
               **La maîtrise des mathématiques est une compétence importante pour se former et accéder à de nombreux emplois, profitez-en !**
         socle_clea:
-          alt_icone: ''
+          alt_icone: ""
           description: |
             ### Certification Cléa indiquée
 
@@ -570,13 +570,13 @@ fr:
 
             **Nous vous conseillons d’échanger avec votre conseiller ou votre conseillère de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
         ni_ni:
-          alt_icone: ''
+          alt_icone: ""
           description: |
             ### Vos compétences peuvent encore être améliorées
 
             Vos compétences en français et mathématiques sont en partie acquises mais certaines pourraient être améliorées pour garantir votre autonomie.
         illettrisme_potentiel:
-          alt_icone: ''
+          alt_icone: ""
           description: |
             ### Formation vivement recommandée
 
@@ -604,15 +604,15 @@ fr:
               Votre score indique que votre maîtrise du français est correcte mais pourrait être améliorée pour vous faciliter l’accès à des formations ou à un emploi.
               **Nous vous conseillons de participer à une formation que votre conseiller sera à même de vous proposer pour améliorer et certifier vos compétences en français !**
           profil4:
-            description:  |
+            description: |
               Votre score indique que votre maîtrise du français est suffisante pour vous adapter sans difficulté à un nouvel environnement professionnel.
               **Nous vous conseillons de renforcer vos compétences en français de votre propre initiative ou en participant à une formation que votre conseiller.e sera à même de vous proposer.**
           profil4_plus:
-            description:  |
+            description: |
               Votre score indique que vous maîtrisez tout à fait le français, bravo !
               **La maîtrise du français est une compétence très utile pour se former et accéder à de nombreux emplois, profitez-en !**
           profil4_plus_plus:
-            description:  |
+            description: |
               **Certification Cléa indiquée**
               Votre score indique que vous pouvez vous adapter à tout emploi ou toute formation qui demanderait une bonne maîtrise de la langue française et des mathématiques.
               **Nous vous conseillons d’échanger avec votre conseiller de la formation Cléa Certif’Pro à laquelle vous pourriez prétendre !**
@@ -656,4 +656,4 @@ fr:
           Pour en savoir plus sur ces référentiels et les conditions d’interprétation des résultats :
         alert_incomplete:
           titre: Évaluation incomplète
-          body: Vous n’avez pas terminé ou vous avez interrompu votre parcours sur eva. Cela peut avoir un impact sur la fiabilité des résultats ci-dessous. 
+          body: Vous n’avez pas terminé ou vous avez interrompu votre parcours sur eva. Cela peut avoir un impact sur la fiabilité des résultats ci-dessous.

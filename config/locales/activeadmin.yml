@@ -59,7 +59,7 @@ fr:
       change_password:
         title: Changez votre mot de passe
       reset_password:
-        token_invalide: 'Veuillez vérifier de nouveau l’email reçu.'
+        token_invalide: "Veuillez vérifier de nouveau l’email reçu."
         saisir_a_nouveau: Si vous souhaitez recevoir de nouveau cet email, merci de saisir votre adresse ci-dessous.
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
@@ -88,4 +88,4 @@ fr:
       non_activees: Non activées 🐤
       actives: Actives ❤️
       inactives: Inactives 😴
-      abandonnistes : Abandonnistes 💔
+      abandonnistes: Abandonnistes 💔

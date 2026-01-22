@@ -14,9 +14,9 @@ fr:
         label_nom: Nom
         label_prenom: Prénom
         label_email: Adresse e-mail professionnelle
-        hint_email: "Pour vous connecter ou pour les échanges liés à votre compte. Format attendu : nom@domaine.fr"
+        hint_email: "Pour vous connecter ou pour les échanges liés à votre compte. Format attendu : nom@domaine.fr"
         label_telephone: Téléphone
-        hint_telephone: "Format attendu : (+33) 1 22 33 44 55"
+        hint_telephone: "Format attendu : (+33) 1 22 33 44 55"
         label_fonction: Fonction
         selectionner_une_option: Sélectionner une option
         label_service_departement: Service

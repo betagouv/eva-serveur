@@ -11,7 +11,7 @@ fr:
         duree_moyenne: Durée moyenne
         type_de_programme: Type de programme
         types_de_programme:
-          diagnostic : Diagnostic
+          diagnostic: Diagnostic
           positionnement: Positionnement
           diagnostic_entreprise: Diagnostic Entreprise
         created_at: créé le

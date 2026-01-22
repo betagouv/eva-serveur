@@ -10,10 +10,10 @@ fr:
 
         **Attention !** N'utilisez pas ce compte pour faire des évaluations avec vos bénéficiaires.
       modal_confirmation_cgu:
-        titre : "Conditions Générales d'Utilisation"
+        titre: "Conditions Générales d'Utilisation"
         information_cgu: "Les conditions générales d’utilisation du service eva sont consultables ici :"
-        demande_acceptation: 'Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva.'
-        bouton_acceptation_cgu: 'J’ai lu et j’accepte les CGU'
+        demande_acceptation: "Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva."
+        bouton_acceptation_cgu: "J’ai lu et j’accepte les CGU"
       modal_validation_comptes_en_attente:
         annuler: Plus tard
         info_comptes_en_attente: |
@@ -28,8 +28,8 @@ fr:
           titre: Les actualités sur eva
         bloc_evaluations:
           titre: Vos dernières évaluations
-          voir_tout: 'Voir toutes les évaluations'
-          legende_sr: "Légende : Les pastilles oranges indiquent les"
+          voir_tout: "Voir toutes les évaluations"
+          legende_sr: "Légende : Les pastilles oranges indiquent les"
           legende_info: "Évaluations contenant un diagnostic d'illettrisme potentiel"
         campagnes:
           titre: Vos campagnes
@@ -44,11 +44,11 @@ fr:
           bouton_passer: "Passer le questionnaire"
         bloc_resultats_entreprise:
           titre: Vos résultats
-          voir_tout: 'Voir'
+          voir_tout: "Voir"
           bouton_voir: "Voir"
         bloc_actualites_entreprise:
           titre: Les actualités sur eva
-          voir_tout: 'Voir toutes les actualités'
+          voir_tout: "Voir toutes les actualités"
         message_incitation_premier_questionnaire:
           message: |
             Vous n'avez pas encore de résultat. Passez votre premier questionnaire pour commencer votre évaluation.
@@ -82,14 +82,14 @@ fr:
       validation_necessaire:
         titre: Bienvenue sur eva !
         description: |
-            Vous n'êtes qu'à deux clics d'utiliser eva.
+          Vous n'êtes qu'à deux clics d'utiliser eva.
 
-            Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'eva pour votre structure.
-            Elle va bientôt vous permettre d'utiliser eva.
+          Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'eva pour votre structure.
+          Elle va bientôt vous permettre d'utiliser eva.
 
-            Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
+          Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
 
-            Vous pensez que cette personne est momentanément absente ? Vous pouvez contacter %{prenom} au %{telephone} ou par mail à [%{email}](mailto:%{email}).
+          Vous pensez que cette personne est momentanément absente ? Vous pouvez contacter %{prenom} au %{telephone} ou par mail à [%{email}](mailto:%{email}).
       validation_refusee:
         titre: Votre compte est refusé.
         description: |
@@ -99,4 +99,4 @@ fr:
       bienvenue_entreprise:
         titre: Bienvenue sur eva Pro !
         premier_questionnaire_titre: Passez votre premier questionnaire !
-        premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés. 
+        premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.

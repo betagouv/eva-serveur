@@ -31,7 +31,7 @@ class QuestionSaisie < Question
 
   def base_json
     slice(:id, :nom_technique, :suffix_reponse, :description, :metacompetence,
-          :demarrage_audio_modalite_reponse, :illustration, :aide, :score).tap do |json|
+          :demarrage_audio_modalite_reponse, :illustration, :aide, :score, :passable).tap do |json|
       json.merge!(base_attributes)
     end
   end

@@ -168,6 +168,7 @@ L'api est accessible au point `/api`
     "type": "qcm",
     "intitule": "Ma question",
     "description": "Ma description",
+    "passable": true,
     "choix": []
   }
 ]

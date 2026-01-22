@@ -5,6 +5,7 @@ panel "Détails de la question" do
     row :categorie
     row :nom_technique
     row :description
+    row :passable
     row :metacompetence
     row :illustration do
       render partial: "admin/questions/show_illustration",

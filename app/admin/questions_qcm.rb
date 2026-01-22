@@ -4,7 +4,7 @@ ActiveAdmin.register QuestionQcm do
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :description,
-                :type_qcm, :illustration, :supprimer_illustration,
+                :type_qcm, :passable, :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,
                 :demarrage_audio_modalite_reponse,
                 :supprimer_audio_modalite_reponse, :supprimer_audio_consigne,

@@ -2,7 +2,7 @@ ActiveAdmin.register QuestionClicDansTexte do
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
   permit_params :categorie, :libelle, :nom_technique, :message,
-                :suffix_reponse, :description, :reponse_placeholder,
+                :suffix_reponse, :description, :passable, :reponse_placeholder,
                 :illustration, :supprimer_illustration, :texte_sur_illustration,
                 :supprimer_audio_intitule,
                 :demarrage_audio_modalite_reponse,

@@ -24,13 +24,13 @@ describe CampagneCreateur, type: :model do
     context "quand toutes les conditions sont réunies" do
       before { parcours_type } # Créer le parcours type
 
-      it "crée une campagne avec le nom par défaut" do
+      it "crée une campagne avec le nom par défaut incluant l'OPCO" do
         expect do
           createur.cree_campagne_opco!
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last
-        expect(campagne.libelle).to eq("Diagnostic des risques : ma super structure")
+        expect(campagne.libelle).to eq("Diagnostic des risques : ma super structure (Constructys)")
         expect(campagne.compte).to eq(compte)
         expect(campagne.parcours_type).to eq(parcours_type)
       end
@@ -278,6 +278,100 @@ describe CampagneCreateur, type: :model do
       it "crée une campagne avec le parcours type générique" do
         campagne = createur_multi.cree_campagne_opco!
         expect(campagne.parcours_type).to eq(parcours_type_generique)
+      end
+    end
+  end
+
+  describe "quand le compte passé n'appartient pas à la structure" do
+    let(:autre_structure) { create(:structure_locale) }
+    let(:compte_autre_structure) { create(:compte_admin, structure: autre_structure) }
+    let(:compte_structure) { create(:compte_admin, structure: structure_entreprise) }
+    let(:parcours_type) do
+      create(:parcours_type,
+             nom_technique: "eva-entreprise-constructys",
+             libelle: "Eva entreprises Constructys",
+             type_de_programme: :diagnostic)
+    end
+
+    before { parcours_type }
+
+    context "quand la structure a un admin" do
+      before { compte_structure }
+
+      it "utilise le premier admin de la structure plutôt que le compte passé" do
+        createur = described_class.new(structure_entreprise, compte_autre_structure)
+        campagne = createur.cree_campagne_opco!
+
+        expect(campagne.compte).to eq(compte_structure)
+        expect(campagne.compte.structure_id).to eq(structure_entreprise.id)
+      end
+    end
+
+    context "quand la structure n'a pas d'admin" do
+      it "utilise le compte passé en fallback" do
+        createur = described_class.new(structure_entreprise, compte_autre_structure)
+        campagne = createur.cree_campagne_opco!
+
+        expect(campagne.compte).to eq(compte_autre_structure)
+      end
+    end
+  end
+
+  describe "création idempotente" do
+    let(:parcours_type) do
+      create(:parcours_type,
+             nom_technique: "eva-entreprise-constructys",
+             libelle: "Eva entreprises Constructys",
+             type_de_programme: :diagnostic)
+    end
+
+    before { parcours_type }
+
+    it "ne crée pas de doublon si la campagne existe déjà" do
+      createur = described_class.new(structure_entreprise, compte)
+
+      # Première création
+      expect do
+        createur.cree_campagne_opco!
+      end.to change(Campagne, :count).by(1)
+
+      # Deuxième création - ne doit pas créer de doublon
+      expect do
+        createur.cree_campagne_opco!
+      end.not_to change(Campagne, :count)
+    end
+
+    context "avec OPCO financeur" do
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
+
+      before { parcours_type_generique }
+
+      it "crée les deux campagnes (générique et spécifique) et ne crée pas de doublons" do
+        createur = described_class.new(structure_entreprise, compte)
+
+        # Première création - doit créer les 2 campagnes
+        expect do
+          createur.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
+
+        # Deuxième création - ne doit pas créer de doublons
+        expect do
+          createur.cree_campagne_opco!
+        end.not_to change(Campagne, :count)
+
+        # Vérifier que les deux campagnes existent
+        campagnes =
+          Campagne.joins(:compte).where(comptes: { structure_id: structure_entreprise.id })
+        expect(campagnes.count).to eq(2)
+        expect(campagnes.pluck(:parcours_type_id)).to contain_exactly(
+          parcours_type.id,
+          parcours_type_generique.id
+        )
       end
     end
   end

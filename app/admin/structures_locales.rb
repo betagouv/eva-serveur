@@ -112,6 +112,7 @@ ActiveAdmin.register StructureLocale do
 
       if @structure_locale.update(permitted_params[:structure_locale])
         AffiliationOpcoService.new(@structure_locale).affilie_opcos
+        CampagneCreateur.new(@structure_locale, current_compte).cree_campagne_opco!
         redirect_to admin_structure_locale_path(@structure_locale),
 notice: "Structure mise à jour avec succès"
       else

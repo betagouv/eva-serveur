@@ -1,0 +1,15 @@
+<% content_for :classes_body, "page_connexion_v2" %>
+<% content_for :classes_conteneur, "connexion_v2" %>
+
+<% content_for :content_block do %>
+  <div class="connexion_v2__content">
+    <div class="connexion_v2__content__inner">
+      <%= render partial: "layouts/flash" %>
+      <div id="active_admin_content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: "layouts/active_admin_logged_out_structure" %>

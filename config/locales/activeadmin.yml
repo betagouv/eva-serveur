@@ -13,11 +13,27 @@ fr:
         mot_de_passe_faible: Votre mot de passe n'est pas conforme aux nouvelles exigences de sécurité. Un mail de réinitialisation vous a été envoyé, veuillez suivre ses instructions pour définir un nouveau mot de passe. N'hésitez pas à contacter le support si vous rencontrez des difficultés.
   active_admin:
     devise:
+      email:
+        title: Identifiant
+      password:
+        title: Mot de passe
+      links:
+        forgot_your_password: Mot de passe oublié ?
       sessions:
         new:
+          bienvenue: Bienvenue !
           pro-connect:
+            titre: Se connecter avec ProConnect
+            description: ProConnect est la solution d'authentification de l'État qui simplifie l'accès de tous les professionnels à ses services numériques.
+            bouton-identifier: S'identifier avec
+            bouton-brand: ProConnect
             transition: OU
-            libelle-lien-pro-connect: Qu’est-ce que ProConnect ?
+            libelle-lien-pro-connect: Qu'est-ce que ProConnect ?
+          compte:
+            titre: Se connecter avec son compte
+            hint-email: "Format attendu : nom@domaine.com"
+            pas-de-compte: Vous n'avez pas de compte ?
+            creer-compte: Créer un compte
           eva-login:
             titre: J'ai déjà un compte conseiller
             connexion: Se connecter avec un compte eva
@@ -25,6 +41,7 @@ fr:
               Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
             retour: Annuler
       login:
+        submit: Se connecter
         bienvenue: Bienvenue sur eva
         title: Authentification
         titre: Espace Pro

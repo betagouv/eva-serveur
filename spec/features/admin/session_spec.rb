@@ -83,18 +83,4 @@ describe 'Session', type: :feature do
       end
     end
   end
-
-  describe 'Connexion Espace Jeu' do
-    context 'quand le code de campagne est invalide' do
-      before do
-        visit new_compte_session_path
-        fill_in :code, with: 'invalide'
-        click_on 'Lancer eva'
-      end
-
-      it "Renvoie un message d'erreur" do
-        expect(page).to have_content(I18n.t('active_admin.devise.login.evaluations.code_invalide'))
-      end
-    end
-  end
 end

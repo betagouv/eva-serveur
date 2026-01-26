@@ -1,3 +1,8 @@
+body.logged_out #content_wrapper.conteneur-elargi.connexion_v2 {
+  width: 100%;
+  padding: 0;
+}
+
 .page_connexion_v2 {
   background-color: white !important;
 }
@@ -10,5 +15,7 @@
 
 .connexion_v2__content__inner {
   width: 100%;
-  max-width: 792px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

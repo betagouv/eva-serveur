@@ -1,0 +1,29 @@
+<div class="nouvelle-session__demonstration">
+  <div class="nouvelle-session__demonstration-container">
+    <div class="nouvelle-session__demonstration-content">
+      <div class="nouvelle-session__demonstration-image">
+        <%= image_tag "demonstration-illustration.svg", alt: t("active_admin.devise.sessions.new.demonstration.titre") %>
+      </div>
+      <h4 class="nouvelle-session__demonstration-titre"><%= t("active_admin.devise.sessions.new.demonstration.titre") %></h4>
+      <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.description") %></p>
+      <div class="nouvelle-session__demonstration-liste">
+        <ul>
+          <% t("active_admin.devise.sessions.new.demonstration.liste_items").each do |item_key| %>
+            <li class="nouvelle-session__demonstration-liste-item">
+              <span class="nouvelle-session__demonstration-liste-item-icone"></span>
+              <span class="nouvelle-session__demonstration-liste-item-texte"><%= t("active_admin.devise.sessions.new.demonstration.#{item_key}") %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="nouvelle-session__demonstration-bouton">
+        <%= render BoutonComponent.new("https://prepro.eva.anlci.gouv.fr/demo", type: :secondary, size: :md) do %>
+          <%= t("active_admin.devise.sessions.new.demonstration.bouton") %>
+          <span class="fr-icon fr-icon--sm fr-icon-arrow-right-line" aria-label="<%= t("active_admin.devise.sessions.new.demonstration.bouton") %>"></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="nouvelle-session__demonstration-vagues">
+  </div>
+</div>

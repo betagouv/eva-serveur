@@ -1,14 +1,8 @@
 <% content_for :title, t("active_admin.devise.login.title") %>
 <% content_for :titre, t("active_admin.devise.login.titre") %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <div class="nouvelle-session">
   <%= render partial: "active_admin/devise/sessions/partials/connexion" %>
+  <%= render partial: "active_admin/devise/sessions/partials/demonstration" %>
 </div>
-<script>
-  function basculer_login_eva() {
-    $(".espace-connexion").toggleClass("hidden");
-    $(".espace-connexion").find('#compte_email').select();
-    $(".espace-inscription").toggleClass("hidden");
-    $(".espace-pro-connect").toggleClass("hidden");
-  }
-</script>

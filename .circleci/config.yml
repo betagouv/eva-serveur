@@ -4,8 +4,9 @@ orbs:
 jobs:
   build:
     parallelism: 1
+    resource_class: medium+
     docker:
-      - image: cimg/ruby:3.4.7-browsers
+      - image: cimg/ruby:3.4.8-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -35,7 +36,7 @@ jobs:
 
       - run:
           name: Bundle Install
-          command: bundle check || bundle install --without production
+          command: bundle config set --local without production && bundle check || bundle install
 
       # Store bundle cache
       - save_cache:

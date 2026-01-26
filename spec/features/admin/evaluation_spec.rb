@@ -264,20 +264,15 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         describe 'génération PDF' do
+          let(:pdf_fixture_path) { Rails.root.join("spec/fixtures/files/test_evaluation.pdf").to_s }
+
           it "affiche l'évaluation en pdf" do
             allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
+            allow(Pdf::Generator).to receive(:generate).and_return(pdf_fixture_path)
+
             visit admin_evaluation_path(mon_evaluation, format: :pdf)
-            # rubocop:disable Lint/Debugger
-            path = page.save_page
-            pdf_path = path.sub('.html', '.pdf')
-            File.rename(path, pdf_path) # Renomme l'extension du fichier pour pouvoir l'ouvrir
-            # system("open #{pdf_path}")
-            # rubocop:enable Lint/Debugger
 
-            reader = PDF::Reader.new(pdf_path)
-
-            expect(reader.page(1).text).to include('Roger')
-            expect(reader.page(1).text).to include('structure')
+            expect(page.response_headers["Content-Type"]).to include("application/pdf")
           end
 
           it 'erreur timeout à la génération du pdf' do

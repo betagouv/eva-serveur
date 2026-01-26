@@ -159,6 +159,14 @@
   line-height: 28px; /* 127.273% */
 }
 
+@mixin h4-sm() {
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
 @mixin h3-md-desktop() {
   font-family: Quicksand;
   font-size: 28px;

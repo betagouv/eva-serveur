@@ -1,6 +1,7 @@
 module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController
+      layout "connexion_v2"
       include CampagneHelper
 
       before_action :check_compte_confirmation, only: :create

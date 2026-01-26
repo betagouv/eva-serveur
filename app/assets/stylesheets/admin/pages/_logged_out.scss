@@ -282,7 +282,7 @@ body.logged_out {
   }
 }
 
-body.logged_out:not(.page_inscription_v2) {
+body.logged_out:not(.page_inscription_v2) :not(.page_connexion_v2) {
   #wrapper {
     &::before {
       content: '';

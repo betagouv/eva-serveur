@@ -1,0 +1,100 @@
+<div class="nouvelle-session__connexion">
+
+  <div class="nouvelle-session__connexion-container">
+    <%= image_tag "eva-logo-bleu.svg", alt: "Eva", class: "nouvelle-session__logo" %>
+    <%= render TexteIntroComponent.new(titre: t("active_admin.devise.sessions.new.bienvenue")) %>
+    <div class="nouvelle-session__connexion-content">
+      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.pro-connect.titre") %></h5>
+      <p class="nouvelle-session__connexion-description">
+        <%= t("active_admin.devise.sessions.new.pro-connect.description") %>
+      </p>
+      <div class='pro-connect-group'>
+        <%= link_to pro_connect_auth_path, class: "btn-pro-connect" do %>
+          <span class="pro-connect__login"><%= t("active_admin.devise.sessions.new.pro-connect.bouton-identifier") %></span>
+          <span class="pro-connect__brand"><%= t("active_admin.devise.sessions.new.pro-connect.bouton-brand") %></span>
+        <% end %>
+        <div>
+          <%= render LienComponent.new(t("active_admin.devise.sessions.new.pro-connect.libelle-lien-pro-connect"), "https://www.proconnect.gouv.fr/", externe: true, class: "nouvelle-session__connexion-lien-proconnect") %>
+        </div>
+      </div>
+    </div>
+    <div class="page-nouvelle-session-separateur">
+      <div class="separateur-ligne">
+        <%= image_tag "separateur.svg", alt: "" %>
+      </div>
+      <p class="separateur-texte"><%= t("active_admin.devise.sessions.new.pro-connect.transition") %></p>
+      <div class="separateur-ligne">
+        <%= image_tag "separateur.svg", alt: "" %>
+      </div>
+    </div>
+    <div class="nouvelle-session__connexion-content">
+      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.titre") %></h5>
+      
+      <% scope = Devise::Mapping.find_scope!(resource_name) %>
+      <%= semantic_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f| %>
+        <%= f.semantic_errors *f.object.errors.messages.keys %>
+
+        <%= f.inputs do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12 connexion_v2__inputs-group">
+              <% resource.class.authentication_keys.each_with_index do |key, index| %>
+                <div class="connexion_v2__input-wrapper">
+                  <%= render InputComponent.new(
+                    id: "#{resource_name}_#{key}",
+                    label: t("active_admin.devise.#{key}.title"),
+                    form: f,
+                    method: key,
+                    hint: t("active_admin.devise.sessions.new.compte.hint-email"),
+                    type: "email",
+                    autocomplete: "email",
+                    input_html: { autofocus: index.zero? && !params.key?(:code_erreur) }
+                  ) %>
+                </div>
+              <% end %>
+
+              <div class="connexion_v2__input-wrapper">
+                <%= render InputComponent.new(
+                  id: "#{resource_name}_password",
+                  label: t("active_admin.devise.password.title"),
+                  form: f,
+                  method: :password,
+                  type: "password",
+                  autocomplete: "current-password"
+                ) %>
+              </div>
+            </div>
+
+            <div class="fr-col-12 no-padding-top">
+              <div class="liens-partages">
+                <%= render partial: "active_admin/devise/shared/links" %>
+              </div>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="fr-col-12" style="font-size: 14px;">
+                <%= f.input :remember_me, label: t("activerecord.attributes.compte.remember_me"), as: :boolean %>
+              </div>
+            <% end %>
+
+            <div class="fr-col-12 no-padding-bottom">
+              <div class="informations-compte-actions">
+                <%= f.submit t("active_admin.devise.login.submit"), class: "bouton grand-bouton connexion_v2__bouton-full-width" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="page-nouvelle-session-separateur">
+      <%= image_tag "separateur_full_width.svg", alt: "" %>
+    </div>
+    <div class="nouvelle-session__connexion-content">
+      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.pas-de-compte") %></h5>
+      <div class="informations-compte-actions">
+        <%= render BoutonComponent.new(inscription_nouveau_compte_path, type: :secondary, tag: :a, size: :md, class: "connexion_v2__bouton-full-width") do %>
+          <%= t("active_admin.devise.sessions.new.compte.creer-compte") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

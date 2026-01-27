@@ -17,37 +17,61 @@ describe CampagneCreateur, type: :model do
            libelle: "Eva entreprises Constructys",
            type_de_programme: :diagnostic)
   end
+  let(:parcours_type_generique) do
+    create(:parcours_type,
+           nom_technique: "eva-entreprise",
+           libelle: "Eva entreprises",
+           type_de_programme: :diagnostic)
+  end
 
   let(:createur) { described_class.new(structure_entreprise, compte) }
 
   describe "#cree_campagne_opco!" do
     context "quand toutes les conditions sont réunies" do
-      before { parcours_type } # Créer le parcours type
-
-      it "crée une campagne avec le nom par défaut" do
-        expect do
-          createur.cree_campagne_opco!
-        end.to change(Campagne, :count).by(1)
-
-        campagne = Campagne.last
-        expect(campagne.libelle).to eq("Diagnostic des risques : ma super structure")
-        expect(campagne.compte).to eq(compte)
-        expect(campagne.parcours_type).to eq(parcours_type)
+      before do
+        parcours_type
+        parcours_type_generique
       end
 
-      it "associe le type de programme du parcours type" do
-        campagne = createur.cree_campagne_opco!
+      it "crée deux campagnes : une spécifique et une générique" do
+        expect do
+          createur.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
 
-        expect(campagne.type_programme).to eq("diagnostic")
+        campagnes = Campagne.last(2)
+        campagne_specifique = campagnes.find { |c| c.parcours_type == parcours_type }
+        campagne_generique = campagnes.find { |c| c.parcours_type == parcours_type_generique }
+
+        expect(campagne_specifique.libelle).to eq("Diagnostic des risques : ma super structure")
+        expect(campagne_specifique.compte).to eq(compte)
+        expect(campagne_specifique.parcours_type).to eq(parcours_type)
+
+        expect(campagne_generique.libelle).to eq("Diagnostic standard evapro")
+        expect(campagne_generique.compte).to eq(compte)
+        expect(campagne_generique.parcours_type).to eq(parcours_type_generique)
       end
     end
 
-    context "quand le parcours type n'existe pas" do
+    context "quand le parcours type spécifique n'existe pas" do
+      before { parcours_type_generique }
+
       it do
         expect do
           createur.cree_campagne_opco!
         end.to raise_error(ActiveRecord::RecordNotFound)
         expect(Campagne.count).to eq 0
+      end
+    end
+
+    context "quand le parcours type générique n'existe pas" do
+      before { parcours_type }
+
+      it "crée la première campagne puis lève une erreur" do
+        expect do
+          createur.cree_campagne_opco!
+        end.to raise_error(ActiveRecord::RecordNotFound)
+        # La première campagne est créée avant l'erreur sur la deuxième
+        expect(Campagne.count).to eq 1
       end
     end
 
@@ -115,15 +139,32 @@ describe CampagneCreateur, type: :model do
                libelle: "Eva entreprises OPCO Santé",
                type_de_programme: :diagnostic)
       end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
       let(:createur_sante) { described_class.new(structure_opco_sante, compte) }
 
-      before { parcours_type_sante }
+      before do
+        parcours_type_sante
+        parcours_type_generique
+      end
 
-      it "trouve le bon parcours type en fonction de l'OPCO" do
-        campagne = createur_sante.cree_campagne_opco!
+      it "trouve le bon parcours type en fonction de l'OPCO et crée deux campagnes" do
+        expect do
+          createur_sante.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
 
-        expect(campagne).to be_present
-        expect(campagne.parcours_type).to eq(parcours_type_sante)
+        campagnes = Campagne.last(2)
+        campagne_specifique = campagnes.find { |c| c.parcours_type == parcours_type_sante }
+        campagne_generique = campagnes.find { |c| c.parcours_type == parcours_type_generique }
+
+        expect(campagne_specifique).to be_present
+        expect(campagne_specifique.parcours_type).to eq(parcours_type_sante)
+        expect(campagne_generique).to be_present
+        expect(campagne_generique.parcours_type).to eq(parcours_type_generique)
       end
     end
 
@@ -146,16 +187,21 @@ describe CampagneCreateur, type: :model do
 
       before { parcours_type_generique }
 
-      it "crée une campagne avec le parcours type générique" do
+      it "crée deux campagnes avec le parcours type générique" do
         expect do
           createur_non_financeur.cree_campagne_opco!
-        end.to change(Campagne, :count).by(1)
+        end.to change(Campagne, :count).by(2)
 
-        campagne = Campagne.last
-        expect(campagne.libelle).to eq(
+        campagnes = Campagne.last(2)
+        campagne_specifique = campagnes.find { |c| c.libelle.include?("Diagnostic des risques") }
+        campagne_generique = campagnes.find { |c| c.libelle == "Diagnostic standard evapro" }
+
+        expect(campagne_specifique.libelle).to eq(
           "Diagnostic des risques : #{structure_opco_non_financeur.nom}"
         )
-        expect(campagne.parcours_type).to eq(parcours_type_generique)
+        expect(campagne_specifique.parcours_type).to eq(parcours_type_generique)
+        expect(campagne_generique.libelle).to eq("Diagnostic standard evapro")
+        expect(campagne_generique.parcours_type).to eq(parcours_type_generique)
       end
     end
   end
@@ -234,18 +280,35 @@ describe CampagneCreateur, type: :model do
                libelle: "Eva entreprises OPCO Financeur",
                type_de_programme: :diagnostic)
       end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
       let(:createur_multi) { described_class.new(structure_multi_opco, compte) }
 
-      before { parcours_type_financeur }
+      before do
+        parcours_type_financeur
+        parcours_type_generique
+      end
 
       it "utilise le premier OPCO financeur" do
         premier_opco = createur_multi.send(:premier_opco_financeur)
         expect(premier_opco).to eq(opco_financeur)
       end
 
-      it "crée une campagne avec le parcours type du financeur" do
-        campagne = createur_multi.cree_campagne_opco!
-        expect(campagne.parcours_type).to eq(parcours_type_financeur)
+      it "crée deux campagnes : une avec le parcours type du financeur et une générique" do
+        expect do
+          createur_multi.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
+
+        campagnes = Campagne.last(2)
+        campagne_specifique = campagnes.find { |c| c.parcours_type == parcours_type_financeur }
+        campagne_generique = campagnes.find { |c| c.parcours_type == parcours_type_generique }
+
+        expect(campagne_specifique.parcours_type).to eq(parcours_type_financeur)
+        expect(campagne_generique.parcours_type).to eq(parcours_type_generique)
       end
     end
 
@@ -275,9 +338,17 @@ describe CampagneCreateur, type: :model do
         expect(premier_opco).to eq(opco1)
       end
 
-      it "crée une campagne avec le parcours type générique" do
-        campagne = createur_multi.cree_campagne_opco!
-        expect(campagne.parcours_type).to eq(parcours_type_generique)
+      it "crée deux campagnes avec le parcours type générique" do
+        expect do
+          createur_multi.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
+
+        campagnes = Campagne.last(2)
+        campagne_specifique = campagnes.find { |c| c.libelle.include?("Diagnostic des risques") }
+        campagne_generique = campagnes.find { |c| c.libelle == "Diagnostic standard evapro" }
+
+        expect(campagne_specifique.parcours_type).to eq(parcours_type_generique)
+        expect(campagne_generique.parcours_type).to eq(parcours_type_generique)
       end
     end
   end

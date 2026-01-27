@@ -57,6 +57,7 @@ role: :conseiller
       it "crée une structure Entreprise" do
         opco = create(:opco, nom: 'OPCO Mobilité', financeur: true, idcc: [ "0003" ])
         create(:parcours_type, nom_technique: "eva-entreprise-opcomobilite")
+        create(:parcours_type, nom_technique: "eva-entreprise", libelle: "Eva entreprises")
         # Mocker MiseAJourSiret pour retourner un IDCC qui correspond à OPCO Mobilité (IDCC 3)
         allow(MiseAJourSiret).to receive(:new) do |structure|
           mise_a_jour = instance_double(MiseAJourSiret)
@@ -81,7 +82,7 @@ role: :conseiller
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq 'Entreprise test'
         expect(structure.opcos).to include(opco)
-        expect(Campagne.count).to eq 1
+        expect(Campagne.count).to eq 2
       end
     end
 

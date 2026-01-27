@@ -10,8 +10,8 @@
       <div class="fr-col fr-col-md-12">
         <% url = LanceurCampagne.url(campagne, current_compte) %>
         <%= render CardComponent.new(
-          titre: campagne.libelle,
-          description: t(".description", date: l(campagne.created_at, format: :long)),
+          titre: campagne.parcours_type.libelle,
+          description: campagne.parcours_type.description,
           bouton_label: t(".bouton_passer"),
           bouton_url: url,
           bouton_attributes: { target: "_blank", rel: "noopener" }

@@ -67,4 +67,54 @@ describe StructureLocale, type: :model do
       it { expect(structure).not_to be_eva_entreprises }
     end
   end
+
+  describe '#affecte_usage_entreprise_si_necessaire' do
+    context 'quand le type_structure est entreprise et usage est vide' do
+      let(:structure) do
+        described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
+                            type_structure: "entreprise", usage: nil)
+      end
+
+      it "affecte l'usage 'Eva: entreprises'" do
+        structure.affecte_usage_entreprise_si_necessaire
+        expect(structure.usage).to eq("Eva: entreprises")
+      end
+    end
+
+    context 'quand le type_structure est entreprise et usage est déjà "Eva: entreprises"' do
+      let(:structure) do
+        described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
+                            type_structure: "entreprise", usage: "Eva: entreprises")
+      end
+
+      it "ne modifie pas l'usage existant" do
+        structure.affecte_usage_entreprise_si_necessaire
+        expect(structure.usage).to eq("Eva: entreprises")
+      end
+    end
+
+    context 'quand le type_structure est entreprise et usage est "Eva: bénéficiaires"' do
+      let(:structure) do
+        described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
+                            type_structure: "entreprise", usage: "Eva: bénéficiaires")
+      end
+
+      it "force l'usage à 'Eva: entreprises'" do
+        structure.affecte_usage_entreprise_si_necessaire
+        expect(structure.usage).to eq("Eva: entreprises")
+      end
+    end
+
+    context 'quand le type_structure n\'est pas entreprise' do
+      let(:structure) do
+        described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
+                            type_structure: "mission_locale", usage: nil)
+      end
+
+      it "ne modifie pas l'usage" do
+        structure.affecte_usage_entreprise_si_necessaire
+        expect(structure.usage).to be_nil
+      end
+    end
+  end
 end

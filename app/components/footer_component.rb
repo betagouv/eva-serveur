@@ -1,14 +1,25 @@
 # frozen_string_literal: true
 
 class FooterComponent < ViewComponent::Base
-  def initialize(avec_partenaires: true, partenaires: [], liens_navigation: nil, description: nil)
+  def initialize(avec_partenaires: true, partenaires: [], liens_navigation: nil, description: nil, opco: nil)
     @avec_partenaires = avec_partenaires
     @partenaires = partenaires
     @liens_navigation = liens_navigation || liens_navigation_par_defaut
     @description = description || description_par_defaut
+    @opco_param = opco
   end
 
   attr_reader :avec_partenaires, :partenaires, :liens_navigation, :description
+
+  def opco
+    return @opco if defined?(@opco)
+
+    @opco = @opco_param
+    @opco ||= opco_de_la_structure if view_context.present?
+    @opco
+  end
+
+  private
 
   def liens_gouvernementaux
     [
@@ -27,8 +38,6 @@ class FooterComponent < ViewComponent::Base
       { texte: "Accessibilité", url: "#" }
     ]
   end
-
-  private
 
   def liens_navigation_par_defaut
     [
@@ -69,6 +78,16 @@ class FooterComponent < ViewComponent::Base
 
   def description_par_defaut
     I18n.t("footer.description_par_defaut")
+  end
+
+  def opco_de_la_structure
+    return nil unless view_context.respond_to?(:current_compte)
+
+    compte = view_context.current_compte
+    return nil unless compte&.structure.present?
+
+    structure = compte.structure
+    structure.opcos.find(&:financeur?) || structure.opcos.first
   end
 
   def partenaires_par_defaut

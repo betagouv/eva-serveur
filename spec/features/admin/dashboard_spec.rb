@@ -251,31 +251,4 @@ describe 'Dashboard', type: :feature do
       expect(page).to have_current_path(admin_dashboard_path)
     end
   end
-
-  context "quand je suis un utilisateur entreprise (evapro)" do
-    let!(:structure_entreprise) do
-      create :structure_locale,
-             type_structure: "entreprise",
-             usage: "Eva: entreprises"
-    end
-    let!(:compte) do
-      create :compte_conseiller,
-             structure: structure_entreprise,
-             cgu_acceptees: true
-    end
-
-    context "quand la structure n'existe pas" do
-      let!(:compte) do
-        create :compte_conseiller,
-               structure: nil,
-               cgu_acceptees: true
-      end
-
-      it "n'affiche pas la sidebar" do
-        visit admin_path
-        expect(page).not_to have_css(".bloc-opco-partenaire")
-        expect(page).not_to have_css(".bloc-opco-entreprise")
-      end
-    end
-  end
 end

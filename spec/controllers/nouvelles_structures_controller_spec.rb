@@ -47,6 +47,21 @@ describe NouvellesStructuresController, type: :controller do
         post :create, params: { compte: compte_params }
         expect(response).to redirect_to(admin_dashboard_path)
       end
+
+      context "quand le type_structure est entreprise et usage n'est pas fourni" do
+        let(:compte_params_entreprise) do
+          compte_params.deep_merge(structure_attributes: { type_structure: "entreprise",
+usage: nil })
+        end
+
+        it "affecte l'usage 'Eva: entreprises' à la structure" do
+          post :create, params: { compte: compte_params_entreprise }
+
+          structure = Compte.last.structure
+          expect(structure.type_structure).to eq("entreprise")
+          expect(structure.usage).to eq("Eva: entreprises")
+        end
+      end
     end
 
     context "avec des paramètres invalides" do

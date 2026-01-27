@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo HeaderComponent</h1>
+
+  <h2>Header déconnecté</h2>
+  <div class="fr-mb-5w">
+    <%= render HeaderComponent.new(logo: "logo-anlci.svg", logo_alt: "ANLCI", titre: "eva") %>
+  </div>
+</div>

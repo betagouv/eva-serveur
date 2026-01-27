@@ -16,6 +16,7 @@ module Admin
     def code; end
     def ellipse; end
     def evaluation_incomplete; end
+    def header; end
     def lien; end
     def mise_en_avant; end
     def nom_anonymisable; end

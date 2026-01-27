@@ -35,11 +35,6 @@
   gap: 24px;
   align-self: stretch;
   
-  .fr-label {
-    @include body-sm();
-    color: var(--text-label-grey);
-  }
-  
   .informations-compte-actions {
     width: 100%;
   }

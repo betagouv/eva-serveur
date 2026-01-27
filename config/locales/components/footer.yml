@@ -1,0 +1,41 @@
+fr:
+  footer:
+    description: Le service eva est géré par l'Agence Nationale de Lutte contre l'Illettrisme (ANLCI). Le volet Evapro a été développé grâce aux recherches de M. Pascal Moulette.
+    description_par_defaut: "eva est un service numérique de l'ANLCI permettant d'évaluer les compétences de base en littératie et numératie."
+    navigation:
+      decouvrir_eva: "Découvrir eva"
+      un_service_anlci: "Un service de l'ANLCI"
+      illettrisme_france: "L'illettrisme en France"
+      parcours_competences: "Parcours et compétences"
+      cas_usages: "Cas d'usages"
+      reperer_difficultes: "Repérer les difficultés"
+      positionner_competences: "Positionner les compétences"
+      ressources: "Ressources"
+      supports: "Supports"
+      faq: "FAQ"
+      formation_presentation: "Formation et présentation"
+      en_savoir_plus: "En savoir plus"
+      contact: "Contact"
+      equipe: "L'équipe"
+      code_source: "Code source"
+    brand:
+      republique: "République"
+      francaise: "Française"
+      retour_accueil_title: "Retour à l'accueil du site - Eva - République Française"
+    content:
+      info_gouv_title: "info.gouv.fr - nouvelle fenêtre"
+      service_public_title: "service-public.gouv.fr - nouvelle fenêtre"
+      legifrance_title: "legifrance.gouv.fr - nouvelle fenêtre"
+      data_gouv_title: "data.gouv.fr - nouvelle fenêtre"
+    partners:
+      titre: "Nos partenaires"
+    logo_france_relance: "France Relance"
+    logo_union_europeenne: "Union Européenne"
+    bottom:
+      accessibilite: "Accessibilité : partiellement conforme"
+      mentions_legales: "Mentions légales"
+      donnees_personnelles: "Données personnelles"
+      gestion_cookies: "Gestion des cookies"
+      licence_text: "Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont proposés sous"
+      licence_etalab: "licence etalab-2.0"
+      licence_title: "Licence etalab - nouvelle fenêtre"

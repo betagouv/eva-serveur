@@ -1,3 +1,10 @@
+@mixin lien-dsfr {
+  --hover-tint: var(--idle);
+  --active-tint: var(--active);
+  color: inherit;
+  text-decoration: var(--text-decoration);
+}
+
 #header {
   h1 a, ul.tabs > li a {
     background-image: none;
@@ -199,3 +206,24 @@ a.fr-btn {
   margin-bottom: $dsfr-spacing-0 !important;
 }
 
+.fr-footer a {
+  @include lien-dsfr;
+}
+
+.fr-footer__partners-main {
+  gap: $dsfr-spacing-8v;
+}
+
+.fr-footer__partners .fr-footer__logo {
+  box-shadow: none;
+}
+
+body.logged_out h3.fr-footer__top-cat {
+  color: var(--text-title-grey);
+  display: block;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin: 0 0 .75rem;
+  text-align: left;
+}

@@ -1,19 +1,3 @@
 <% sponsors = local_assigns.fetch :sponsors, true %>
-<footer id="footer-principal">
-  <% if sponsors %>
-    <div class="footer__ligne"></div>
-    <p class="footer__a-propos"><%= t("active_admin.footer").html_safe %></p>
-    <div class="footer__logos">
-      <div class="logos__groupe">
-        <%= image_tag "logo_ministere_travail.svg", alt: "Ministere du travail, de l'emploi et de l'insertion",
-                      class: "logo-ministere-travail" %>
-        <%= image_tag "logo_anlci.svg", alt: t("logo_anlci"),
-                      class: "logo-eva" %>
-      </div>
-      <div class="logos__groupe">
-        <%= image_tag "logo_france_relance.svg", alt: "France relance" %>
-        <%= image_tag "logo_union_europeenne.png", alt: "Union européenne" %>
-      </div>
-    </div>
-  <% end %>
-</footer>
+
+<%= render FooterComponent.new avec_partenaires: sponsors %>

@@ -41,7 +41,10 @@ describe 'Structures', type: :feature do
 
         it 'affiche le block Gestion car il y a une action de modification possible' do
           visit admin_structure_locale_path(compte.structure_id)
-          expect(page).to have_content 'Gestion'
+
+          within '#action_items_sidebar_section' do
+            expect(page).to have_content 'Gestion'
+          end
         end
       end
 
@@ -50,7 +53,7 @@ describe 'Structures', type: :feature do
 
         it "n'affiche pas le block Gestion car il n'y a pas d'action possible" do
           visit admin_structure_locale_path(compte.structure_id)
-          expect(page).not_to have_content 'Gestion'
+          expect(page).not_to have_css('#action_items_sidebar_section')
         end
       end
     end

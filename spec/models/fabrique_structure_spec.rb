@@ -13,38 +13,6 @@ describe FabriqueStructure, type: :model do
       )
     end
 
-    context "quand le type_structure est entreprise et usage est vide" do
-      let(:attributs_structure) { { type_structure: "entreprise", usage: nil } }
-
-      it "affecte l'usage 'Eva: entreprises' à la structure" do
-        structure = described_class.cree_depuis_siret(siret, attributs_structure)
-
-        expect(structure.usage).to eq("Eva: entreprises")
-        expect(structure.type_structure).to eq("entreprise")
-      end
-    end
-
-    context "quand le type_structure est entreprise et usage est 'Eva: bénéficiaires'" do
-      let(:attributs_structure) { { type_structure: "entreprise", usage: "Eva: bénéficiaires" } }
-
-      it "force l'usage à 'Eva: entreprises'" do
-        structure = described_class.cree_depuis_siret(siret, attributs_structure)
-
-        expect(structure.usage).to eq("Eva: entreprises")
-        expect(structure.type_structure).to eq("entreprise")
-      end
-    end
-
-    context "quand le type_structure est entreprise et usage est déjà 'Eva: entreprises'" do
-      let(:attributs_structure) { { type_structure: "entreprise", usage: "Eva: entreprises" } }
-
-      it "ne modifie pas l'usage existant" do
-        structure = described_class.cree_depuis_siret(siret, attributs_structure)
-
-        expect(structure.usage).to eq("Eva: entreprises")
-        expect(structure.type_structure).to eq("entreprise")
-      end
-    end
 
     context "quand le type_structure n'est pas entreprise" do
       let(:attributs_structure) { { type_structure: "mission_locale", usage: nil } }

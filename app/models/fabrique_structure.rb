@@ -7,7 +7,6 @@ class FabriqueStructure
     structure.validation_inscription = validation_inscription
 
     structure.type_structure = "entreprise" if structure.usage == AvecUsage::USAGE_ENTREPRISES
-    structure.affecte_usage_entreprise_si_necessaire if structure.is_a?(StructureLocale)
 
     structure.save
     structure

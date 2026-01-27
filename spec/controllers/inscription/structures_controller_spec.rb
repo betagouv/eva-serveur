@@ -104,9 +104,6 @@ siret_pro_connect: "13002526500013") }
         # Mock FabriqueStructure pour retourner une structure avec IDCC
         allow(FabriqueStructure).to receive(:cree_depuis_siret) do |siret, params|
           structure_creée.assign_attributes(params) if params.present?
-          if structure_creée.is_a?(StructureLocale)
-            structure_creée.affecte_usage_entreprise_si_necessaire
-          end
           # S'assurer que l'IDCC est bien défini avant la sauvegarde
           structure_creée.idcc = [ "3" ] unless structure_creée.idcc.present?
           structure_creée.save!

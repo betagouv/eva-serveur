@@ -89,8 +89,6 @@ class Inscription::StructuresController < ApplicationController
       return render_parametrage if @structure.blank?
 
       @structure.affecte_usage_entreprise_si_necessaire if @structure.is_a?(StructureLocale)
-      CampagneCreateur.new(@structure,
-@compte).cree_campagne_opco! if @compte.present? && @structure.eva_entreprises?
 
       AffiliationOpcoService.new(@structure).affilie_opcos
 
@@ -120,6 +118,7 @@ class Inscription::StructuresController < ApplicationController
     @compte.etape_inscription = :complet
 
     if @compte.save
+      CampagneCreateur.new(@structure, @compte).cree_campagne_opco! if @structure.eva_entreprises?
       redirige_vers_etape_inscription(@compte)
     else
       render_parametrage

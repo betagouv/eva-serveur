@@ -88,6 +88,10 @@ class Inscription::StructuresController < ApplicationController
       @structure = cree_structure_avec_params
       return render_parametrage if @structure.blank?
 
+      @structure.affecte_usage_entreprise_si_necessaire if @structure.is_a?(StructureLocale)
+      CampagneCreateur.new(@structure,
+@compte).cree_campagne_opco! if @compte.present? && @structure.eva_entreprises?
+
       AffiliationOpcoService.new(@structure).affilie_opcos
 
       associe_opcos_si_present

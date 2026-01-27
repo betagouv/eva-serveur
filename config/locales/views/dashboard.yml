@@ -100,3 +100,9 @@ fr:
         titre: Bienvenue sur eva Pro !
         premier_questionnaire_titre: Passez votre premier questionnaire !
         premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.
+      sidebar:
+        opco_partenaire:
+          titre: En partenariat avec
+        opco_entreprise:
+          titre: Entreprise
+          inviter: Inviter mes collègues

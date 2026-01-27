@@ -98,12 +98,27 @@
         <% if @avec_partenaires %>
           <div class="fr-footer__partners">
             <h2 class="fr-footer__partners-title"><%= t("footer.partners.titre") %></h2>
-            <div class="fr-footer__partners-logos">
-              <div class="fr-footer__partners-main">
-                <% partenaires_par_defaut.each do |partenaire| %>
-                  <a class="fr-footer__partners-link" href="<%= partenaire[:url] %>" target="_blank" rel="noopener external">
-                    <%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
-                  </a>
+            <div class="fr-footer__partners-flex">
+              <div class="fr-footer__partners-logos">
+                <div class="fr-footer__partners-main">
+                  <% partenaires_par_defaut.each do |partenaire| %>
+                    <a class="fr-footer__partners-link" href="<%= partenaire[:url] %>" target="_blank" rel="noopener external">
+                      <%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
+                    </a>
+                  <% end %>
+                </div>
+                <% if @partenaires.present? %>
+                  <div class="fr-footer__partners-sub">
+                    <ul>
+                      <% @partenaires.drop(2).each do |partenaire| %>
+                        <li>
+                          <a class="fr-footer__partners-link" href="<%= partenaire[:url] || "" %>" <%= partenaire[:url] ? 'target="_blank" rel="noopener external"'.html_safe : "" %>>
+                            <%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
+                          </a>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
                 <% end %>
               </div>
               <% if @partenaires.present? %>

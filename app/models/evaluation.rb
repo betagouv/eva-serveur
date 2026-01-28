@@ -176,6 +176,13 @@ question_redaction_id)
       positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?
   end
 
+  def opco_financeur
+    structure = campagne&.compte&.structure
+    return if structure.blank?
+
+    structure.opcos.find(&:financeur?) || structure.opcos.first
+  end
+
   private
 
   def trouve_campagne_depuis_code

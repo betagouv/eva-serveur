@@ -69,19 +69,22 @@ ActiveAdmin.register Evaluation do
 
   form partial: "form"
 
-  sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
-    render(Tag.new(resource.responsable_suivi.display_name,
-                   classes: "bleu",
-                   supprimable: can?(:supprimer_responsable_suivi, Evaluation),
-                   url: supprimer_responsable_suivi_admin_evaluation_path(resource)))
+  # sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
+  #   render(Tag.new(resource.responsable_suivi.display_name,
+  #                  classes: "bleu",
+  #                  supprimable: can?(:supprimer_responsable_suivi, Evaluation),
+  #                  url: supprimer_responsable_suivi_admin_evaluation_path(resource)))
+  # end
+
+  # sidebar :responsable_de_suivi, only: :show, if: proc {
+  #      resource.responsable_suivi.blank? and can?(:ajouter_responsable_suivi, Evaluation) } do
+  #   render "recherche_responsable_suivi"
+  # end
+
+  sidebar " ", class: "menu-sidebar", only: :show do
+    render "opco_financeur", opco: resource.opco_financeur, evaluation: resource
   end
 
-  sidebar :responsable_de_suivi, only: :show, if: proc {
-       resource.responsable_suivi.blank? and can?(:ajouter_responsable_suivi, Evaluation) } do
-    render "recherche_responsable_suivi"
-  end
-
-  sidebar :menu, class: "menu-sidebar", only: :show
 
   xls(i18n_scope: %i[active_admin xls evaluation], header_format: { weight: :bold }) do
     whitelist

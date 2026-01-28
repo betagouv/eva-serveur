@@ -9,7 +9,7 @@
       border: none;
 
       .modal-body {
-        padding: 0rem;
+        padding: 0;
         padding-left: 1rem;
       }
 
@@ -27,7 +27,7 @@
 }
 
 .modal-backdrop {
-  background-color: rgb(255,255,255);
+  background-color: rgb(255 255 255);
   &.show {
     opacity: 0.9;
   }

@@ -1,5 +1,6 @@
 .aide__contact {
-  @include carte-avec-ombre();
+  @include carte-avec-ombre;
+
   padding: 1rem 1.5rem;
   margin-bottom: 3.75rem;
   position: relative;
@@ -16,7 +17,8 @@
       width: 46.20%;
     }
     &__support {
-      @include carte-avec-ombre();
+      @include carte-avec-ombre;
+
       width: 42%;
       padding: 1rem 1.5rem;
       position: absolute;

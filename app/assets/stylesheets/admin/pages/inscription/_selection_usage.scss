@@ -19,6 +19,7 @@
 
   .page-selection-usage__carte__titre {
     color: $eva_main_blue;
-    @include h3();
+
+    @include h3;
   }
 }

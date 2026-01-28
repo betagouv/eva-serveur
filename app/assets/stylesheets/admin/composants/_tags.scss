@@ -1,5 +1,6 @@
 @mixin tag() {
-  @include texte();
+  @include texte;
+
   white-space: nowrap;
   padding: .25rem .5rem;
   text-align: center;
@@ -28,6 +29,7 @@
 
 @mixin tag-couleur-majuscule($couleur-principale, $couleur-principale-legere) {
   @include tag-couleur($couleur-principale, $couleur-principale-legere);
+
   text-transform: uppercase;
 }
 
@@ -37,7 +39,8 @@
 }
 
 .status_tag { // tags active admin
-  @include tag();
+  @include tag;
+
   font-weight: normal;
   text-transform: unset;
   letter-spacing: unset;
@@ -50,7 +53,7 @@
 }
 
 .tag {
-  @include tag();
+  @include tag;
   .lien-supprimer {
     position: absolute;
     right: 0.5rem;

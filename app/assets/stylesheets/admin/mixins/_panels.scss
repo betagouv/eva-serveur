@@ -12,12 +12,14 @@
   background-color: $grey-1000;
   padding: 1rem 2.25rem 1rem 3.5rem;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgb(0 0 0 / 20%);
 
   &::before {
     content: "";
-    background-color: currentColor;
+    background-color: currentcolor;
+
     --icon-size: 1.5rem;
+
     color: $grey-1000;
     display: inline-block;
     height: var(--icon-size);
@@ -26,7 +28,7 @@
     mask-size: 100% 100%;
     position: absolute;
     top: 0;
-    vertical-align: calc((.75em - var(--icon-size))*.5);
+    vertical-align: calc((.75em - var(--icon-size)) * .5);
     width: var(--icon-size);
   }
 }

@@ -4,7 +4,7 @@
 
 .supprime-espace-derniere-balise {
   *:last-child{
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 }
 
@@ -27,7 +27,7 @@
   height: 1px;
   width: 1px;
   padding: 0;
-  margin: -1px;
+  margin: -0.0625rem;
   overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

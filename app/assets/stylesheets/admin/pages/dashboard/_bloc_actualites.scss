@@ -7,7 +7,6 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-
       overflow: hidden;
       height: 8rem;
       img {
@@ -37,6 +36,7 @@
       }
       .carte__texte {
         @include texte;
+
         margin-right: .75rem;
       }
     }

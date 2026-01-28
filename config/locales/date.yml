@@ -10,4 +10,5 @@ fr:
     formats:
       <<: *formats
       avec_heure: "%d %b %Y, %H:%M"
+      avec_heure_mois_complet: "%d %B %Y, %H:%M"
       default: "%d %b %Y, %H:%M"

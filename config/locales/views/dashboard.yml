@@ -42,6 +42,8 @@ fr:
           titre: Vos questionnaires
           description: "Créé le %{date}"
           bouton_passer: "Passer le questionnaire"
+          evapro_description: "Pour évaluer les risques d'illettrisme dans votre entreprise, commencez par répondre à un questionnaire."
+          evapro_description_2: "Cela prend environ 10 minutes. Vous pourrez ensuite inviter d'autres collaborateurs."
         bloc_resultats_entreprise:
           titre: Vos résultats
           voir_tout: "Voir"
@@ -97,7 +99,7 @@ fr:
 
           Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter par mail à [%{email}](mailto:%{email}).
       bienvenue_entreprise:
-        titre: Bienvenue sur eva Pro !
+        titre: Bienvenue sur evapro
         premier_questionnaire_titre: Passez votre premier questionnaire !
         premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.
       sidebar:

@@ -79,6 +79,14 @@ class Campagne < ApplicationRecord
     end
   end
 
+  def evapro_generique?
+    parcours_type.nom_technique == "eva-entreprise"
+  end
+
+  def evapro_opco?
+    parcours_type.nom_technique.start_with?("eva-entreprise-")
+  end
+
   private
 
   def configuration_inclus?

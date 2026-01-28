@@ -8,7 +8,6 @@
   }
 
   .section-tableau-bord-eva-pro {
-    margin-bottom: $dsfr-spacing-14v;
     width: 100%;
   }
 
@@ -319,6 +318,35 @@
   .bloc-opco-entreprise {
     &__bouton {
       @include bouton-primaire;
+    }
+  }
+
+  .bloc-questionnaires-entreprise {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+    &__grid {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+    &__description {
+      @include body-xl;
+      margin: 0;
+    }
+    &__description_2 {
+      @include body-md-base;
+      margin: 0;
+    }
+  }
+
+  .bienvenue-entreprise {
+    &__titre {
+      @include h2-lg;
+      margin: 0;
     }
   }
 }

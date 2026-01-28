@@ -82,7 +82,7 @@ role: :conseiller
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq 'Entreprise test'
         expect(structure.opcos).to include(opco)
-        expect(Campagne.count).to eq 2
+        expect(Campagne.count).to eq 1
       end
     end
 

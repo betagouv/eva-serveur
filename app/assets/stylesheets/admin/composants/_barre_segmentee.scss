@@ -13,7 +13,9 @@ $barre-segmentee-non-passee: $grey-850;
 .barre-segmentee__legende {
   display: inline-block;
   color: $grey-425;
+
   @include dsfr-texte-xs;
+
   white-space: break-spaces;
 }
 
@@ -45,5 +47,6 @@ $barre-segmentee-non-passee: $grey-850;
 
 .barre-segmentee__score {
   color: $grey-50;
+
   @include dsfr-texte-sm;
 }

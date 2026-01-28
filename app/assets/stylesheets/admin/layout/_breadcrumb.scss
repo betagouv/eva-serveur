@@ -21,7 +21,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-family: $font-titre;
+
       @include h2;
+
       color: $grey-50;
     }
 

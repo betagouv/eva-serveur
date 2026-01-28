@@ -11,7 +11,8 @@
 }
 
 .page-informations-compte {
-  @include reset-form();
+  @include reset-form;
+
   display: flex;
   width: 792px;
   flex-direction: column;
@@ -20,7 +21,8 @@
 }
 
 .page-nouveau-compte {
-  @include reset-form();
+  @include reset-form;
+
   display: flex;
   width: 792px;
   flex-direction: column;
@@ -29,12 +31,13 @@
 }
 
 .page-informations-compte .indication-champs-obligatoires {
-  @include texte-xs();
+  @include texte-xs;
+
   color: $couleur-accent-erreur;
 }
 
 .page-informations-compte .informations-compte-champs-obligatoires {
-  @include body-xs-mention();
+  @include body-xs-mention;
 }
 
 .page-informations-compte .informations-compte-actions {
@@ -45,7 +48,7 @@
 }
 
 .page-informations-compte .valider-compte-bouton {
-  @include grand-bouton();
+  @include grand-bouton;
 }
 
 .page-informations-compte label[for="compte_cgu_acceptees"] abbr[title] {
@@ -61,7 +64,7 @@
 }
 
 .page-nouveau-compte .valider-compte-bouton {
-  @include grand-bouton();
+  @include grand-bouton;
 }
 
 .page-nouveau-compte label[for="compte_cgu_acceptees"] abbr[title] {

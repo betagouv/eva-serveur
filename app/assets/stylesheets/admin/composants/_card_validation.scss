@@ -1,5 +1,6 @@
 .card-validation {
-  @include carte-avec-ombre();
+  @include carte-avec-ombre;
+
   padding: 0.75rem 1.5rem;
   margin-bottom: .5rem;
   display: flex;
@@ -40,6 +41,7 @@
     .action {
       @include bouton-secondaire;
       @include tres-petit-bouton;
+
       height: 1.5rem;
       display: flex;
       justify-content: center;

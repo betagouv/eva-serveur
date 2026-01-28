@@ -41,7 +41,7 @@
         color: $eva_dark_blue_grey;
       }
       .menu-actions {
-        @include menu-actions();
+        @include menu-actions;
         .table_actions {
           left: 9rem;
           top: 1.5rem;
@@ -61,6 +61,7 @@
         .action-simple {
           @include bouton-secondaire;
           @include tres-petit-bouton;
+
           margin-left: -1.5rem;
         }
       }

@@ -1,16 +1,12 @@
 $grid-columns: 8;
 $grid-gutter-width: 1.25rem;
-
 $padding-pdf: 5rem;
 
 @import "bootstrap";
-
 @import "admin/variables";
 @import "admin/mixins";
 @import "admin/typography";
-
 @import 'dsfr';
-
 @import "admin/pages/restitution_globale/base";
 @import "admin/pages/comparaison";
 @import "admin/bg";
@@ -23,11 +19,9 @@ $padding-pdf: 5rem;
 @import "admin/composants/barre_segmentee";
 @import "admin/composants/sous_competence";
 @import "admin/composants/alert_incomplete";
-
 @import "pdf/fonts";
 @import "pdf/utilities";
 @import "pdf/typographies";
-
 @import "pdf/components/numeratie_component";
 @import "pdf/components/entete_page";
 @import "pdf/components/pied_page";
@@ -36,7 +30,6 @@ $padding-pdf: 5rem;
 
 * {
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
   text-underline-offset: 10%;
 }
 
@@ -52,7 +45,8 @@ $padding-pdf: 5rem;
 }
 
 .page-pdf {
-  @include adaptation-pdf();
+  @include adaptation-pdf;
+
   width: 100%;
 }
 
@@ -64,7 +58,7 @@ $padding-pdf: 5rem;
 }
 
 .evaluation__restitution-globale {
-  @include adaptation-pdf();
+  @include adaptation-pdf;
 
   width: 100%;
 
@@ -90,7 +84,7 @@ $padding-pdf: 5rem;
     }
 
     .intitule-question {
-      margin-top: 1.5rem; // centrage par coïncidence
+      margin-top: 1.5rem; /* centrage par coïncidence */
     }
 
     .jauge {
@@ -113,8 +107,11 @@ $padding-pdf: 5rem;
   }
 
   .recommandation-anlci {
+    padding: 1rem 0 0;
+    border-bottom: 0;
+
     img {
-      margin-top: 1.5rem; // centrage par coïncidence
+      margin-top: 1.5rem; /* centrage par coïncidence */
     }
   }
 
@@ -136,11 +133,6 @@ $padding-pdf: 5rem;
   .situation-redaction {
     font-size: 1.3rem;
     border: 0;
-  }
-
-  .recommandation-anlci {
-    padding: 1rem 0 0;
-    border-bottom: 0;
   }
 
   .page-litteratie {

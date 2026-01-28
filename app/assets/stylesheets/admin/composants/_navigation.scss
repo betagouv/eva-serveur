@@ -1,8 +1,9 @@
 .fr-header--logged-in {
   .fr-nav__link {
     color: var(--light-decisions-text-text-action-high-grey, #161616);
-    font-family: "Marianne";
-    @include dsfr-texte-sm();
+    font-family: Marianne, sans-serif;
+
+    @include dsfr-texte-sm;
   }
 
   .fr-nav__link:hover,

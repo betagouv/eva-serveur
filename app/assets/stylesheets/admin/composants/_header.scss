@@ -21,7 +21,7 @@
     }
   }
 
-  /* Fix pour le header pour le passage en mode mobile*/
+  /* Fix pour le header pour le passage en mode mobile */
 
   .fr-header__brand {
     background: transparent;
@@ -40,8 +40,7 @@
 
     .fr-btns-group {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-flow: row wrap;
       gap: 0 !important;
 
       >li,

@@ -98,10 +98,10 @@
 
 .diagnostique-contenu {
   display: flex;
-  padding: 24px;
+  padding: $dsfr-spacing-6v;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: $dsfr-spacing-3v;
   align-self: stretch;
 }
 
@@ -109,7 +109,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: $dsfr-spacing-2v;
   align-self: stretch;
 }
 
@@ -124,12 +124,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: $dsfr-spacing-2v;
   align-self: stretch;
 }
 
 .diagnostique-contenu__titre {
   @include h6-xxs-desktop;
+
   color: var(--light-decisions-text-text-title-grey, #161616);
   margin: 0;
 }
@@ -138,13 +139,14 @@
   overflow: hidden;
   color: var(--light-decisions-text-text-default-grey, #3A3A3A);
   text-overflow: ellipsis;
+
   @include body-md-base;
 }
 
 .diagnostique-contenu__action {
   display: flex;
-  padding-top: 8px;
+  padding-top: $dsfr-spacing-2v;
   align-items: flex-start;
-  gap: 16px;
+  gap: $dsfr-spacing-4v;
   align-self: stretch;
 }

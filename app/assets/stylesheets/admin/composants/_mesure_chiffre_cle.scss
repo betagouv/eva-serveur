@@ -23,6 +23,7 @@
 }
 
 .mesure-chiffre-cle__explication-label {
-  @include body-sm();
+  @include body-sm;
+
   margin: 0;
 }

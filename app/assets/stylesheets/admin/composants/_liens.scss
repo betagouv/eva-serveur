@@ -15,7 +15,7 @@
 }
 
 #login a.lien-retour, a.lien-retour {
-  @include texte-xs();
+  @include texte-xs;
 
   align-items: center;
   display: flex;
@@ -41,5 +41,5 @@
 }
 
 .lien-secondaire {
-  @include lien-secondaire();
+  @include lien-secondaire;
 }

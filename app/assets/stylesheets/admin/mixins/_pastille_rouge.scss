@@ -1,6 +1,7 @@
 @mixin pastille_rouge {
   background-color: $error-950;
   border-radius: 4px;
+  /* stylelint-disable-next-line */
   padding: 2px 4px;
   margin-right: 2.875rem;
   color: $error-425;
@@ -10,7 +11,7 @@
   font-style: italic;
   position: relative;
 
-  &:after {
+  &::after {
     content: '';
     display: inline-block;
     vertical-align: middle;

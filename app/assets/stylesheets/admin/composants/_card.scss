@@ -6,6 +6,7 @@ a:focus {
 
 .card {
   @include carte-avec-ombre;
+
   margin-bottom: 1.5rem;
   overflow: hidden;
   font-size: 0.875rem;
@@ -13,7 +14,9 @@ a:focus {
   &.carte-liste {
     display: flex;
     align-items: center;
+
     @include texte-xs;
+
     color: $couleur-texte;
     padding: 0 1rem;
     min-height: 3rem;
@@ -46,6 +49,7 @@ a:focus {
     }
     &--green {
       $banner-padding: 1.5rem;
+
       padding: $banner-padding;
       gap: 2rem;
       background-color: $success-950;

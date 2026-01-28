@@ -1,0 +1,47 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {},
+  "overrides": [
+    {
+      "files": [
+        "app/assets/stylesheets/**/*.scss"
+      ],
+      "rules": {
+        "declaration-property-value-disallowed-list": {
+          "/^margin/": [
+            "/(?<!var\\([^)]*)(?!1px)\\d+px/"
+          ],
+          "/^padding/": [
+            "/(?<!var\\([^)]*)(?!1px)\\d+px/"
+          ]
+        },
+        "scss/double-slash-comment-empty-line-before": null,
+        "scss/comment-no-empty": null,
+        "selector-id-pattern": null,
+        "selector-class-pattern": null,
+        "scss/dollar-variable-pattern": null,
+        "rule-empty-line-before": null,
+        "custom-property-pattern": null,
+        "no-descending-specificity": null,
+        "no-invalid-position-at-import-rule": null,
+        "scss/at-mixin-pattern": null,
+        "no-duplicate-at-import-rules": null,
+        "scss/no-global-function-names": null,
+        "media-feature-range-notation": null,
+        "alpha-value-notation": null,
+        "color-function-notation": null
+      }
+    },
+    {
+      "files": [
+        "app/assets/stylesheets/admin/_adaptation_dsfr.scss"
+      ],
+      "rules": {
+        "declaration-block-no-shorthand-property-overrides": null
+      }
+    }
+  ]
+}
+

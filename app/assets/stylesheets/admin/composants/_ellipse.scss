@@ -24,7 +24,7 @@ $largeur-tick: .75rem;
 
 button.ellipse {
   &:hover {
-    @include couleur-ellipse();
+    @include couleur-ellipse;
   }
 
 }
@@ -37,7 +37,8 @@ button.ellipse {
   flex-shrink: 0;
   border: none;
   padding: 0;
-  @include couleur-ellipse();
+
+  @include couleur-ellipse;
 
   &.ellipse-a-cocher {
     width: $taille-ellipse;

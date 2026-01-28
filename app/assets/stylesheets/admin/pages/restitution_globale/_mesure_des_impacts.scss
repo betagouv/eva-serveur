@@ -39,7 +39,8 @@
 }
 
 .indicateur-impact__details-titre {
-  @include body-sm-semibold();
+  @include body-sm-semibold;
+
   color: var(--light-decisions-text-text-title-grey, #161616);
 }
 
@@ -96,7 +97,8 @@
 }
 
 .couts__graphiques-titre {
-  @include h6-xxs();
+  @include h6-xxs;
+
   margin: 0;
 }
 
@@ -128,7 +130,8 @@
 }
 
 .couts__titre-graphique {
-  @include body-lg-semibold();
+  @include body-lg-semibold;
+
   color: $grey-200;
   margin: 0;
 }
@@ -142,7 +145,8 @@
 }
 
 .couts__mention {
-  @include body-xs-mention();
+  @include body-xs-mention;
+
   margin: 0;
 }
 
@@ -155,12 +159,13 @@
 }
 
 .couts__explication-titre {
-  @include body-md-semibold();
+  @include body-md-semibold;
+
   margin: 0;
 }
 
 .couts__explication-texte {
-  @include body-md-base();
+  @include body-md-base;
 }
 
 .couts__question {

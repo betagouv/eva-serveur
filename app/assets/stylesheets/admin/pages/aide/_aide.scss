@@ -1,6 +1,7 @@
 .aide {
-  $grid-columns:      8;
+  $grid-columns: 8;
   $grid-gutter-width: 1.25rem;
+
   @import "../../../bootstrap_grid";
 
   .aide_titre {

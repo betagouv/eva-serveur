@@ -9,11 +9,13 @@
     <% campagnes.each do |campagne| %>
       <div class="fr-col fr-col-md-12">
         <% url = LanceurCampagne.url(campagne, current_compte) %>
-        <%= render CardComponent.new(
+        <%= render CardDiagnostiqueComponent.new(
           titre: campagne.parcours_type.libelle,
           description: campagne.parcours_type.description,
-          bouton_label: t(".bouton_passer"),
+          precision_detail: "Recommandé car votre entreprise dépend de l’opérateur de compétences #{opco.nom}.",
+          bouton_label: "Lancer le diagnostic ->",
           bouton_url: url,
+          opco: opco,
           bouton_attributes: { target: "_blank", rel: "noopener" }
         ) %>
       </div>

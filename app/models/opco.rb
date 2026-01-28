@@ -1,5 +1,6 @@
 class Opco < ApplicationRecord
   validates :nom, presence: true
+  scope :financeurs, -> { where(financeur: true) }
 
   has_one_attached :logo do |attachable|
     attachable.variant :defaut,

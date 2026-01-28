@@ -33,7 +33,7 @@
     </div>
 
     <div class="diagnostique-contenu__action">
-      <%= render BoutonComponent.new(@bouton_url, type: bouton_type, **@bouton_attributes) do %>
+      <%= render BoutonComponent.new(@bouton_url, type: :primary, **@bouton_attributes) do %>
         <%= @bouton_label %>
       <% end %>
     </div>

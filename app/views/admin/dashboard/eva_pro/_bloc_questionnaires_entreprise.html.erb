@@ -1,21 +1,17 @@
 <div class='bloc-questionnaires-entreprise bloc-apercu'>
-  <div class='bloc-apercu-wrapper'>
-    <div class="titre-panel-avec-bouton fr-mb-3v">
-      <h3><%= t(".titre") %></h3>
-    </div>
-  </div>
-
-  <div class="fr-grid-row fr-grid-row--gutters">
+  <p class="bloc-questionnaires-entreprise__description"><%= t(".evapro_description") %></p>
+  <p class="bloc-questionnaires-entreprise__description_2"><%= t(".evapro_description_2") %></p>
+  <div class="bloc-questionnaires-entreprise__grid">
     <% campagnes.each do |campagne| %>
-      <div class="fr-col fr-col-md-12">
+      <div class="bloc-questionnaires-entreprise__item">
         <% url = LanceurCampagne.url(campagne, current_compte) %>
         <%= render CardDiagnostiqueComponent.new(
           titre: campagne.parcours_type.libelle,
           description: campagne.parcours_type.description,
           precision_detail: "Recommandé car votre entreprise dépend de l’opérateur de compétences #{opco.nom}.",
-          bouton_label: "Lancer le diagnostic ->",
+          bouton_label: "Lancer le diagnostic",
           bouton_url: url,
-          opco: opco,
+          opco: campagne.evapro_opco? ? opco : nil,
           bouton_attributes: { target: "_blank", rel: "noopener" }
         ) %>
       </div>

@@ -13,13 +13,7 @@ end
 div class: "tableau-bord-layout" do
   div class: "tableau-bord-contenu-principal" do
     section class: "bienvenue-entreprise section-tableau-bord-eva-pro" do
-      h2 t("admin.dashboard.bienvenue_entreprise.titre")
-      div do
-        render(MiseEnAvantComponent.new(
-          titre: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire_titre"),
-          description: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire")
-        )) if evaluations.blank?
-      end
+      h2 t("admin.dashboard.bienvenue_entreprise.titre"), class: "bienvenue-entreprise__titre"
     end
 
     if campagnes.present?
@@ -27,30 +21,6 @@ div class: "tableau-bord-layout" do
         columns do
           render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
 locals: { campagnes: campagnes, opco: opco }
-        end
-      end
-    end
-
-    if evaluations.present?
-      section class: "section-resultats section-tableau-bord-eva-pro" do
-        columns do
-          render partial: "admin/dashboard/eva_pro/bloc_resultats_entreprise",
-locals: { evaluations: evaluations }
-        end
-      end
-    else
-      section class: "section-message-incitation section-tableau-bord-eva-pro" do
-        columns do
-          render partial: "admin/dashboard/eva_pro/message_incitation_premier_questionnaire"
-        end
-      end
-    end
-
-    if actualites.present?
-      section class: "section-actualites section-tableau-bord-eva-pro" do
-        columns do
-          render partial: "admin/dashboard/eva_pro/bloc_actualites_entreprise",
-locals: { actualites: actualites }
         end
       end
     end

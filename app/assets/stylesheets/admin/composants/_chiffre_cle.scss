@@ -1,0 +1,56 @@
+:root {
+  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
+  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-emeraude-975, #E3FDEB);
+}
+
+.chiffre-cle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.5rem;
+  position: relative;
+  background-color: var(--chiffre-cle-background-color);
+}
+
+.chiffre-cle__a-tres-bon {
+  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
+  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-emeraude-975, #E3FDEB)
+}
+
+.chiffre-cle__b-bon {
+  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-tilleul-verveine-main-707, #B7A73F);
+  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-tilleul-verveine-975, #FEF7DA);
+}
+
+.chiffre-cle__c-moyen {
+  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
+  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-orange-terre-battue-975, #FEF4F2);
+}
+
+.chiffre-cle__d-mauvais {
+  --chiffre-cle-border-color: var(--light-options-illustration-color-sun-default-pink-tuile-sun-425, #A94645);
+  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-pink-tuile-975, #FEF4F3);
+}
+
+.chiffre-cle__bordure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.5rem;
+  height: 100%;
+  background-color: var(--chiffre-cle-border-color);
+}
+
+.chiffre-cle__prefixe {
+  @include texte-sm-regular();
+}
+
+.chiffre-cle__chiffre {
+  @include h2-lg();  
+}
+
+.chiffre-cle__suffixe {
+  @include texte-sm-regular();
+}
+

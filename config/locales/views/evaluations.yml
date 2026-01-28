@@ -1,6 +1,16 @@
 fr:
   admin:
     evaluations:
+      bilan_evapro:
+        titre: "Bilan : votre situation"
+        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."
+        opco_financeur_titre: "Votre opérateur de compétences peut vous aider :"
+        opco_financeur_logo_alt: "Logo de %{nom}"
+      aller_plus_loin:
+        titre: "Aller plus loin"
+        image_alt: "Focus incoutournable"
+        explication: "« Les Incontournables » constituent une boite à outils à destination des entreprises, OPCO et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
+        lien_texte: "www.bao-incontournables.fr"
       telechargement_reponses:
         cta: "Télécharger le détail des réponses"
       index:

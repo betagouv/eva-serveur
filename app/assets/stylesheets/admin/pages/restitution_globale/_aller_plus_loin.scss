@@ -1,0 +1,37 @@
+.evaluation-aller-plus-loin {
+}
+
+.focus-incoutournable {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--Space-3W, 1.5rem);
+  align-self: stretch;
+  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+}
+
+.focus-incoutournable__media {
+  display: flex;
+  width: var(--Grille-3-colonnes, 282px);
+  padding: var(--Space-3W, 24px);
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.focus-incoutournable__media-image {
+  mix-blend-mode: luminosity;
+  width: 100%;
+}
+
+.focus-incoutournable__explication {
+  display: flex;
+  padding: var(--Space-3W, 24px) var(--Space-2W, 16px);
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+  @include texte-sm-regular();
+}
+
+.focus-incoutournable__explication a {
+  @include texte-sm-regular();
+  color: $couleur-texte;
+}

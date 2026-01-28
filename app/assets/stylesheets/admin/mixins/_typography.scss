@@ -206,3 +206,11 @@
   font-weight: 600;
   line-height: 24px;
 }
+
+@mixin texte-xl-semibold() {
+  font-family: "Work Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}

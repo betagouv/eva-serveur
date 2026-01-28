@@ -214,3 +214,11 @@
   font-weight: 600;
   line-height: 32px;
 }
+
+@mixin h6-xxs-desktop() {
+  font-family: Marianne;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}

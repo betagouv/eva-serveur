@@ -1,6 +1,7 @@
 fr:
   footer:
-    description: Le service eva est géré par l'Agence Nationale de Lutte contre l'Illettrisme (ANLCI). Le volet Evapro a été développé grâce aux recherches de M. Pascal Moulette.
+    description: |
+      Le service eva est géré par l'Agence Nationale de Lutte contre l'Illettrisme (ANLCI). Evapro a été développé avec l’appui de Pascal Moulette, chercheur à Coactis - Université Lyon 2.
     description_par_defaut: "eva est un service numérique de l'ANLCI permettant d'évaluer les compétences de base en littératie et numératie."
     navigation:
       decouvrir_eva: "Découvrir eva"

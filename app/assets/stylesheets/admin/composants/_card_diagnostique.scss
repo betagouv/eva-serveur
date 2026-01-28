@@ -42,6 +42,11 @@
   align-items: center;
   flex-shrink: 0;
   aspect-ratio: 51/28;
+  img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+  }
 }
 
 .diagnostique-media__logos-evapro {

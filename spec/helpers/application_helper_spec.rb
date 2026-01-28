@@ -66,4 +66,95 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe '#partenaires_opcos_financeurs' do
+    context 'quand le compte est nil' do
+      it 'retourne une liste vide' do
+        expect(helper.partenaires_opcos_financeurs(nil)).to eq([])
+      end
+    end
+
+    context 'quand le compte n\'a pas de structure' do
+      let(:compte) { create(:compte_pro_connect) }
+
+      it 'retourne une liste vide' do
+        expect(helper.partenaires_opcos_financeurs(compte)).to eq([])
+      end
+    end
+
+    context 'quand la structure n\'a pas d\'opcos' do
+      let(:compte) { create(:compte) }
+
+      it 'retourne une liste vide' do
+        expect(helper.partenaires_opcos_financeurs(compte)).to eq([])
+      end
+    end
+
+    context 'quand la structure a des opcos mais aucun financeur' do
+      let(:compte) { create(:compte) }
+      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
+
+      before do
+        compte.structure.opcos << opco_non_financeur
+      end
+
+      it 'retourne une liste vide' do
+        expect(helper.partenaires_opcos_financeurs(compte)).to eq([])
+      end
+    end
+
+    context 'quand la structure a un opco financeur sans logo' do
+      let(:compte) { create(:compte) }
+      let(:opco_financeur) { create(:opco, financeur: true, nom: 'OPCO Financeur') }
+
+      before do
+        compte.structure.opcos << opco_financeur
+      end
+
+      it 'retourne une liste vide' do
+        expect(helper.partenaires_opcos_financeurs(compte)).to eq([])
+      end
+    end
+
+    context 'quand la structure a un opco financeur avec logo' do
+      let(:compte) { create(:compte) }
+      let(:opco_financeur) { create(:opco, financeur: true, nom: 'OPCO Financeur', url: 'https://example.com') }
+      let(:logo_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'programme_tele.png'), 'image/png') }
+
+      before do
+        compte.structure.opcos << opco_financeur
+        opco_financeur.logo.attach(logo_file)
+      end
+
+      it 'retourne un tableau avec les informations du partenaire' do
+        resultat = helper.partenaires_opcos_financeurs(compte)
+
+        expect(resultat).to be_an(Array)
+        expect(resultat.length).to eq(1)
+        expect(resultat.first).to include(:logo, :nom, :url)
+        expect(resultat.first[:nom]).to eq('OPCO Financeur')
+        expect(resultat.first[:url]).to eq('https://example.com')
+        expect(resultat.first[:logo]).to be_present
+      end
+    end
+
+    context 'quand la structure a plusieurs opcos dont un financeur' do
+      let(:compte) { create(:compte) }
+      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
+      let(:opco_financeur) { create(:opco, financeur: true, nom: 'OPCO Financeur', url: 'https://example.com') }
+      let(:logo_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'programme_tele.png'), 'image/png') }
+
+      before do
+        compte.structure.opcos << [ opco_non_financeur, opco_financeur ]
+        opco_financeur.logo.attach(logo_file)
+      end
+
+      it 'retourne uniquement l\'opco financeur' do
+        resultat = helper.partenaires_opcos_financeurs(compte)
+
+        expect(resultat.length).to eq(1)
+        expect(resultat.first[:nom]).to eq('OPCO Financeur')
+      end
+    end
+  end
 end

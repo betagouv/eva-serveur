@@ -28,6 +28,8 @@ class FooterComponent < ViewComponent::Base
     ]
   end
 
+  private
+
   def liens_navigation_par_defaut
     [
       {

@@ -8,8 +8,8 @@
         <%= render CardDiagnostiqueComponent.new(
           titre: campagne.parcours_type.libelle,
           description: campagne.parcours_type.description,
-          precision_detail: "Recommandé car votre entreprise dépend de l’opérateur de compétences #{opco.nom}.",
-          bouton_label: "Lancer le diagnostic",
+          precision_detail: t(".precision_detail", opco_nom: opco.nom),
+          bouton_label: t(".bouton_label"),
           bouton_url: url,
           opco: campagne.evapro_opco? ? opco : nil,
           bouton_attributes: { target: "_blank", rel: "noopener" }
@@ -18,4 +18,3 @@
     <% end %>
   </div>
 </div>
-

@@ -4,7 +4,13 @@
 <% content_for :content_block do %>
   <div class="connexion_v2__content">
     <div class="connexion_v2__content__inner">
-      <%= render HeaderComponent.new(logo: "logo-anlci.svg", logo_alt: "ANLCI", titre: "eva") %>
+      <%= render HeaderComponent.new(
+          logo: "logo-anlci.svg",
+          logo_alt: "ANLCI",
+          logo_url: "https://eva.anlci.gouv.fr/",
+          titre: "eva.anlci.gouv.fr",
+          tagline: "Un service public numérique de l’ANLCI"
+          ) %>
       <%= render partial: "layouts/flash" %>
       <div id="active_admin_content">
         <%= yield %>

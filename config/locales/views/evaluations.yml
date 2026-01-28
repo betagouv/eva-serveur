@@ -197,10 +197,17 @@ fr:
           scores_litteratie_numeratie: Scores litteratie et numératie
           scores_meta_competences: Scores meta-compétences
           niveaux_competences_transversales: Niveaux compétences transversales
+      sidebar:
+        opco_partenaire:
+          titre: En partenariat avec
+        details:
+          par: Par
+          date: Date
+          questionnaire: Questionnaire
       show:
         titre:
           restitution_globale: Restitution globale
-        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
+        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
       mesure_des_risques:
         titre: "Mesure des risques"

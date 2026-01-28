@@ -1,0 +1,27 @@
+<div class="evaluation-sidebar__container">
+  <% if opco.present? && opco.financeur? %>
+    <div class="evaluation-sidebar__bloc evaluation-sidebar__bloc-opco-background">
+      <h3 class="evaluation-sidebar__bloc-opco-partenaire__titre"><%= t("admin.evaluations.sidebar.opco_partenaire.titre") %></h3>
+      <% if opco.logo.attached? %>
+        <%= image_tag cdn_for(opco.logo.variant(:defaut)),
+                      alt: opco.nom,
+                      class: "bloc-opco-partenaire__logo" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="evaluation-sidebar__bloc">
+    <div class="evaluation-sidebar__bloc-evaluation__details">
+      <h3><%= t("admin.evaluations.sidebar.details.par") %></h3>
+      <p><%= evaluation.beneficiaire.nom %></p>
+    </div>
+    <div class="evaluation-sidebar__bloc-evaluation__details">
+      <h3><%= t("admin.evaluations.sidebar.details.date") %></h3>
+      <p><%= I18n.l(evaluation.debutee_le, format: :avec_heure_mois_complet) %></p>
+    </div>
+    <div class="evaluation-sidebar__bloc-evaluation__details">
+      <h3><%= t("admin.evaluations.sidebar.details.questionnaire") %></h3>
+      <p><%= evaluation.campagne.parcours_type.libelle %></p>
+    </div>
+  </div>
+</div>

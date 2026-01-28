@@ -89,6 +89,7 @@
 @import 'admin/pages/dashboard/bloc_actualites';
 @import 'admin/pages/erreurs';
 @import 'admin/pages/evaluations';
+@import 'admin/pages/evaluation/sidebar';
 @import 'admin/pages/inscription/informations_compte';
 @import 'admin/pages/inscription/recherche';
 @import 'admin/pages/inscription/selection_usage';
@@ -124,7 +125,7 @@ body {
   @include texte();
   font-family: $font-texte;
   color: $couleur-texte;
-  background-color: $eva_light;
+  background-color: white;
   overflow-x: hidden;
 
   // initialisation du line-height des titres équivalente à la configuration d'active admin initiale pour éviter une regression du design

@@ -216,6 +216,7 @@ a.fr-btn {
 
 .fr-footer__partners .fr-footer__logo {
   box-shadow: none;
+  background-color: transparent;
 }
 
 body.logged_out h3.fr-footer__top-cat {
@@ -234,5 +235,4 @@ body.logged_out h2.fr-footer__partners-title {
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.5rem;
-  text-align: center;
 }

@@ -24,8 +24,4 @@ class CardDiagnostiqueComponent < ViewComponent::Base
   def opco?
     @opco.present?
   end
-
-  def bouton_type
-    opco? ? :primary : :tertiary
-  end
 end

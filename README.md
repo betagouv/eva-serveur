@@ -51,6 +51,23 @@ Avant de pouvoir commencer des tests utilisateurs, il vous faut créer une campa
 ### Lancer les tests
 `bundle exec rake spec` ou `guard`
 
+### Lancer le lint CSS/SCSS
+
+Le projet utilise `stylelint` pour vérifier les fichiers SCSS sous `app/assets/stylesheets`.
+
+Commandes :
+
+```bash
+# Vérifier les erreurs
+npm run lint:css
+
+# Corriger automatiquement les erreurs corrigeables
+npm run lint:css:fix
+```
+
+Règle importante : **il est interdit d’utiliser des valeurs en `px` pour les propriétés `margin`, `margin-*`, `padding` et `padding-*`**.  
+Utiliser à la place les variables de spacing existantes (en `rem` ou issues du DSFR).
+
 ### Espace d'administration
 accessible à l'url `/admin`, un compte admin est créé avec l'execution du seed. À ce jour le compte créé est `administrateur@exemple.com` avec le mot de passe `password` (pour le développement seulement bien sûr ;-))
 

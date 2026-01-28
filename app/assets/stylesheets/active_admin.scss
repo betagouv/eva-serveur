@@ -1,5 +1,4 @@
 @import 'activeadmin_addons/all';
-
 @import 'accessible-autocomplete.min';
 
 // Active Admin's got SASS!
@@ -79,7 +78,7 @@
 @import 'admin/layout/main_structure';
 @import 'admin/layout/sidebar';
 
-//PAGES
+// PAGES
 @import 'admin/pages/aide/aide';
 @import 'admin/pages/aide/contact';
 @import 'admin/pages/aide/sources_aide';
@@ -122,7 +121,8 @@
 //   .status_tag { background: #6090DB; }
 
 body {
-  @include texte();
+  @include texte;
+
   font-family: $font-texte;
   color: $couleur-texte;
   background-color: white;

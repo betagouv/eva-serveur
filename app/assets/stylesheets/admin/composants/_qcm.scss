@@ -2,7 +2,7 @@
   border: none;
   background-color: $grey-950;
   padding: 1rem;
-  border-radius: 0px 0px 1rem 1rem;
+  border-radius: 0 0 1rem 1rem;
 
   li {
     margin-top: 0.25rem;
@@ -16,7 +16,7 @@
 
   input:checked + .tag { @include tag-couleur($success-425, $success-950); }
   input:hover:not(:checked) + .tag, input:focus + .tag {
-    @include focus();
+    @include focus;
   }
 
   .tag {

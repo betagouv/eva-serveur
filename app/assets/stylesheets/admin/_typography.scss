@@ -1,6 +1,7 @@
 h1 {
   @include titre;
   @include h1;
+
   color: $eva_main_blue;
   margin-bottom: 2rem;
 }
@@ -12,21 +13,25 @@ h1 {
 h2 {
   @include titre;
   @include h2;
+
   margin-bottom: 1rem;
 }
 
 h3 {
   @include titre-carte;
+
   margin-bottom: 1rem;
 }
 
 h4 {
   @include titre;
+
   font-size: 1.125rem;
 }
 
 h5 {
   @include titre;
+
   font-size: 1rem;
   line-height: 1.25rem;
   margin-bottom: 1rem;

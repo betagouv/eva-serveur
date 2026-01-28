@@ -7,20 +7,26 @@
     border-bottom-right-radius: 0.5rem;
   }
 }
+
 @mixin annule-carte {
   box-shadow: none;
   background: none;
   padding: 0;
 }
+
 @mixin carte-avec-ombre {
-  @include carte();
-  @include ombre();
+  @include carte;
+  @include ombre;
 }
+
 @mixin carte-avec-bordure {
-  @include carte();
+  @include carte;
+
   border: 1px solid $eva_bluegrey;
 }
+
 @mixin carte-grise {
-  @include carte();
+  @include carte;
+
   background: $eva_bluegrey;
 }

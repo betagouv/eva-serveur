@@ -60,24 +60,27 @@
     }
 
     &__label {
-      @include body-md-semibold();
+      @include body-md-semibold;
     }
 
     &__value {
-      @include body-md-semibold();
+      @include body-md-semibold;
+
       font-weight: 400;
     }
 
     &__mention-opco {
-      @include body-xs-mention();
+      @include body-xs-mention;
+
       color: var(--color-text-base, #3A3A3A);
       margin: 0;
-      margin-top: 10px;
+      margin-top: 0.625rem;
     }
   }
 
   .structure-confirmation-mention {
-    @include body-xs-mention();
+    @include body-xs-mention;
+
     margin: 0;
 
     .lien-avec-fleche {
@@ -95,7 +98,8 @@
   }
 
   .structure-creation-text {
-    @include body-sm-base();
+    @include body-sm-base;
+
     margin: 0;
 
     .lien-avec-fleche {
@@ -125,17 +129,20 @@
     gap: var(--Space-3W, 24px);
 
     &__titre {
-      @include h5-xs();
+      @include h5-xs;
+
       margin: 0;
     }
 
     &__mention-champs {
-      @include body-xs-mention();
+      @include body-xs-mention;
+
       margin: 0;
     }
 
     &__mention-admin {
-      @include body-xs-mention();
+      @include body-xs-mention;
+
       margin: 0;
     }
   }

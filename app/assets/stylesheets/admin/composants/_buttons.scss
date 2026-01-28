@@ -33,10 +33,11 @@ form button:not(.disabled),
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .action-secondaire {
-  @include bouton-primaire();
+  @include bouton-primaire;
   &, &:link, &:visited, &:active {
     color: $eva_main_blue;
   }
+
   height: auto;
   margin-right: 0;
   border-color: $eva_main_blue;
@@ -96,19 +97,20 @@ button.bouton, a.bouton, .bouton {
     &, &:link, :visited {
       color: $grey-625;
     }
+
     background-color: $grey-925;
     border-color: $grey-925;
   }
 
   &.bouton-menu {
     @include bouton-tertiaire-sans-contour;
+
     background-color: $grey-1000;
     height: 32px;
     width: 32px;
     min-width: 32px;
     margin: 0;
     padding: 0;
-
     align-items: center;
 
     &::before {
@@ -122,7 +124,7 @@ button.bouton, a.bouton, .bouton {
 
   &.bouton--actif, &.bouton--actif:hover {
     border-color: $blue-france-sun-113;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgb(0 0 0 / 8%);
     color: $blue-france-sun-113;
     cursor: unset;
   }
@@ -132,6 +134,7 @@ button.bouton, a.bouton, .bouton {
     &, &:link, :visited {
       color: $grey-625;
     }
+
     border-color: $grey-925;
     background-color: transparent;
   }
@@ -172,7 +175,7 @@ form input[type="submit"].petit-bouton {
 
 .bouton-secondaire-hover-demo {
   border-color: $blue-france-sun-113 !important;
-  background-color: rgba(0, 0, 0, 0.04) !important;
+  background-color: rgb(0 0 0 / 4%) !important;
   color: $blue-france-sun-113 !important;
 }
 
@@ -181,7 +184,7 @@ form input[type="submit"].petit-bouton {
 
   &.bouton--actif, &.bouton--actif:hover {
     border-color: $grey-900;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgb(0 0 0 / 8%);
     color: $blue-france-sun-113;
     cursor: unset;
   }
@@ -191,6 +194,7 @@ form input[type="submit"].petit-bouton {
     &, &:link, :visited {
       color: $grey-625;
     }
+
     border-color: $grey-925;
     background-color: transparent;
   }
@@ -198,6 +202,6 @@ form input[type="submit"].petit-bouton {
 
 .bouton-tertiaire-hover-demo {
   border-color: $grey-900 !important;
-  background-color: rgba(0, 0, 0, 0.04) !important;
+  background-color: rgb(0 0 0 / 4%) !important;
   color: $blue-france-sun-113 !important;
 }

@@ -5,19 +5,21 @@
   align-items: flex-start;
   gap: var(--Space-3W, 24px);
   align-self: stretch;
-  padding: var(--Space-7W, 56px) 102px;
+  padding: var(--Space-7W, 56px) 6.375rem;
   border: 1px solid var(--color-border-default, #DDD);
   background: var(--color-background-default-grey, #FFF);
   overflow: hidden;
 
   &__title {
-    @include h5-xs-desktop();
+    @include h5-xs-desktop;
+
     margin: 0;
     align-self: flex-start;
   }
 
   &__sous-titre {
-    @include body-xs-mention();
+    @include body-xs-mention;
+
     margin: 0;
     align-self: flex-start;
   }

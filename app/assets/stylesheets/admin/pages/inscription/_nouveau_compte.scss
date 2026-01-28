@@ -11,8 +11,8 @@
   gap: 24px;
   align-self: stretch;
 
-  .proconnect-titre { @include h5-xs(); margin: 0; }
-  .proconnect-texte { @include body-sm-base(); margin: 0; }
+  .proconnect-titre { @include h5-xs; margin: 0; }
+  .proconnect-texte { @include body-sm-base; margin: 0; }
 }
 
 .page-nouveau-compte-separateur {
@@ -33,12 +33,13 @@
     svg {
       height: 1px;
       width: 100%;
-      fill: #dddddd;
+      fill: #ddd;
     }
   }
 
   .separateur-texte {
-    @include body-sm-base();
+    @include body-sm-base;
+
     font-weight: 700;
     color: #3A3A3A;
     margin: 0;
@@ -54,11 +55,15 @@
 }
 
 .page-nouveau-compte-section--identifiant .identifiant-titre {
-  @include h5-xs(); margin: 0;
+  @include h5-xs;
+
+ margin: 0;
 }
 
 .page-nouveau-compte-section--identifiant .identifiant-description {
-  @include body-sm-base(); margin: 0;
+  @include body-sm-base;
+
+ margin: 0;
 }
 
 .page-nouveau-compte .inputs li {
@@ -69,7 +74,7 @@
 .page-nouveau-compte .bouton-proconnect {
   display: inline-flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: $dsfr-spacing-3v $dsfr-spacing-4v;
   border-radius: 8px;
   background: #000091;
   color: #f5f5fe;
@@ -83,7 +88,7 @@
 }
 
 .page-nouveau-compte .lien-aide {
-  margin-top: 8px;
+  margin-top: $dsfr-spacing-2v;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -96,16 +101,16 @@
 }
 
 .page-nouveau-compte .bouton-tertiaire {
-  @include bouton-tertiaire();
+  @include bouton-tertiaire;
 }
 
 .page-nouveau-compte .valider-compte-bouton {
-  @include grand-bouton();
+  @include grand-bouton;
 }
 
 .page-nouveau-compte .mention-format {
   font-size: 12px;
   line-height: 1.4;
   color: #4B5563;
-  margin-bottom: 12px;
+  margin-bottom: $dsfr-spacing-3v;
 }

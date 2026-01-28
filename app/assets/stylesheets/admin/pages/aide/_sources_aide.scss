@@ -5,7 +5,8 @@
   margin-bottom: 3rem;
 
   .source_aide {
-    @include carte-avec-ombre();
+    @include carte-avec-ombre;
+
     display: flex;
     padding: 1.5rem;
     color: $couleur-texte;
@@ -38,6 +39,7 @@
     .action {
       @include bouton-secondaire;
       @include tres-petit-bouton;
+
       position: absolute;
       right: 1.5rem;
       bottom: 1.5rem;

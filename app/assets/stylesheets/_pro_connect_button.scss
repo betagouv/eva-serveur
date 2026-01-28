@@ -3,7 +3,7 @@
   font-family: Marianne,arial,sans-serif;
   font-size: 1rem;
   line-height: 1.5rem;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
 
   .btn-pro-connect {
     background-color: #000091;
@@ -58,7 +58,7 @@
 }
 
 .btn-pro-connect:focus, .btn-pro-connect:focus-visible {
-  @include focus();
+  @include focus;
 }
 
 .btn-pro-connect:focus:not(:focus-visible) {

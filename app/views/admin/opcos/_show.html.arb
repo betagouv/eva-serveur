@@ -16,6 +16,7 @@ attributes_table_for opco do
     badge_financeur(opco)
   end
   row :telephone
+  row :email
   row :url
   row :created_at
 end

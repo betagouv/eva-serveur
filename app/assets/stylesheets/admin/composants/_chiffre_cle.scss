@@ -43,14 +43,14 @@
 }
 
 .chiffre-cle__prefixe {
-  @include texte-sm-regular();
+  @include texte-sm-regular;
 }
 
 .chiffre-cle__chiffre {
-  @include h2-lg();  
+  @include h2-lg;  
 }
 
 .chiffre-cle__suffixe {
-  @include texte-sm-regular();
+  @include texte-sm-regular;
 }
 

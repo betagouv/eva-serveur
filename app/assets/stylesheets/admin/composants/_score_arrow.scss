@@ -1,5 +1,6 @@
 .score-fleche {
   --score-arrow-color: #00A95F;
+
   display: flex;
   width: 264px;
   align-items: center;
@@ -13,7 +14,8 @@
   }
 
   &__lettre {
-    @include body-sm-semibold();
+    @include body-sm-semibold;
+
     text-align: center;
     margin: 0;
   }
@@ -68,6 +70,7 @@
       border-top: 4px solid var(--light-decisions-border-border-plain-grey, #3A3A3A);
       padding: var(--Space-1W, 8px) var(--Space-3V, 12px);
       height: 50px;
+      /* stylelint-disable-next-line */
       margin-right: -2px !important;
       border-radius: 0 5px 5px 0;
     }
@@ -75,7 +78,8 @@
     .score-fleche__lettre {
       color: var(--light-decisions-text-text-label-grey, #161616);
       text-align: center;
-      @include h3-md-desktop();
+
+      @include h3-md-desktop;
     }
 
     .score-fleche__pointe {
@@ -216,8 +220,7 @@
 .score-arrows-layout {
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   align-items: flex-start;
   align-content: flex-start;
   gap: 24px;

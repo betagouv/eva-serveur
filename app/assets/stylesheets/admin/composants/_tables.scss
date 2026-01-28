@@ -41,7 +41,8 @@ table.index_table {
   tbody {
     tr {
       border-radius: 0.5rem;
-      @include ombre();
+
+      @include ombre;
 
       &.even, &.odd {
         td {
@@ -52,7 +53,6 @@ table.index_table {
       td {
         height: 3.1rem;
         line-height: 1.2;
-        border-bottom: 0;
         vertical-align: middle;
         border-top: 1px solid $eva_bluegrey;
         border-bottom: 1px solid $eva_bluegrey;
@@ -77,7 +77,7 @@ table.index_table {
           color: $eva_main_blue;
         }
         &.col-actions {
-          @include menu-actions();
+          @include menu-actions;
         }
         &.col-illustration {
           line-height: 0;

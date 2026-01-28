@@ -61,18 +61,21 @@
   }
   
   .liens-partages a {
-    @include body-md-base();
+    @include body-md-base;
+
     color: var(--light-decisions-text-text-action-high-blue-france, #000091);
   }
 }
 
 .nouvelle-session__connexion-titre {
-  @include h5-xs();
+  @include h5-xs;
+
   margin: 0;
 }
 
 .nouvelle-session__connexion-description {
-  @include body-sm();
+  @include body-sm;
+
   color: $couleur-texte;
   margin: 0;
 }
@@ -101,12 +104,13 @@
       height: 1px;
       width: 100%;
       max-width: 169px;
-      fill: #dddddd;
+      fill: #ddd;
     }
   }
 
   .separateur-texte {
-    @include body-sm-base();
+    @include body-sm-base;
+
     font-weight: 700;
     color: #3A3A3A;
     margin: 0;

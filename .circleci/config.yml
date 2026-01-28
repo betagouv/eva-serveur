@@ -24,6 +24,10 @@ jobs:
       - browser-tools/install-browser-tools
       - checkout
 
+      - run:
+          name: Install npm dependencies
+          command: npm ci || npm install
+
       # Which version of bundler?
       - run:
           name: Which bundler?
@@ -61,6 +65,10 @@ jobs:
       - run:
           name: Rubocop
           command: bundle exec rubocop
+
+      - run:
+          name: Stylelint (CSS/SCSS)
+          command: npm run lint:css
 
       # Run rspec in parallel
       - run:

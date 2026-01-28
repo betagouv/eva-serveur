@@ -1,6 +1,7 @@
 @mixin lien-dsfr {
   --hover-tint: var(--idle);
   --active-tint: var(--active);
+
   color: inherit;
   text-decoration: var(--text-decoration);
 }
@@ -74,7 +75,6 @@ body.logged_in.evapro_admin {
 // Fix conflit entre l'accordeon et les boutons
 .fr-accordion__btn {
   font-family: $font-titre;
-
   border-radius: unset;
   border-color: unset;
   border-top-color: unset;
@@ -86,7 +86,7 @@ body.logged_in.evapro_admin {
     font-weight: bold !important;
   }
 
-  &:not(.disabled):hover, &:not(.disabled):hover {
+  &:not(.disabled):hover {
     font-weight: 500;
     background-color: var(--hover-tint);
   }
@@ -98,7 +98,7 @@ body.logged_in.evapro_admin {
   }
 
   &:-moz-focusring { // pour contrer le normalize d'activeadmin
-    @include focus();
+    @include focus;
   }
 }
 
@@ -113,7 +113,7 @@ body.logged_in.evapro_admin {
 }
 
 .fr-alert__title {
-  margin-bottom: 4px;
+  margin-bottom: $dsfr-spacing-1v;
 }
 
 .fr-alert p:last-child {
@@ -139,7 +139,7 @@ body.logged_in.evapro_admin {
   background-color: $grey-950;
 }
 
-.fr-fieldset__element .fr-checkbox-group--sm input[type=checkbox] + label:before {
+.fr-fieldset__element .fr-checkbox-group--sm input[type="checkbox"] + label::before {
   margin-top: 0;
 }
 
@@ -188,7 +188,9 @@ button.fr-link--close.fr-link:hover {
 .body.logged_out #wrapper .fr-modal__content ul li, 
 .fr-modal__content ul li {
   float: none;
+
   --xl-base: calc(var(--xl-size) * 0.9);
+
   padding-bottom: var(--li-bottom);
   font-size: 1rem;
   line-height: 1.5rem;
@@ -200,17 +202,15 @@ button.fr-link--close.fr-link:hover {
 }
 
 body.logged_in:not(.evapro_admin) .fr-btn {
-  @include grand-bouton();
-  @include bouton-primaire();
+  @include grand-bouton;
+  @include bouton-primaire;
   &.bouton-secondaire {
-    @include bouton-secondaire();
+    @include bouton-secondaire;
   }
   
   &:disabled {
     @include bouton-disabled;
   }
-
-
 }
 
 body.logged_in:not(.evapro_admin) a.fr-btn {
@@ -223,7 +223,7 @@ body.evapro_admin a:visited:not(.fr-btn) {
   text-decoration: none;
 }
 
-body.evapro_admin .fr-btn:not(.fr-btn--secondary):not(.fr-btn--tertiary) {
+body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
   color: var(--text-inverted-blue-france);
 }
 
@@ -286,7 +286,9 @@ body.logged_in h3.fr-footer__top-cat {
 body.logged_out h2.fr-footer__partners-title,
 body.logged_in h2.fr-footer__partners-title {
   font-family: $font-texte;
+
   --title-spacing: 0 0 0.75rem 0;
+
   color: var(--text-default-grey);
   flex-basis: 100%;
   font-size: .875rem;

@@ -2,12 +2,13 @@
   &.show {
     #active_admin_content.with_sidebar {
       #main_content_wrapper #main_content {
-        margin-right: 465px;
+        margin-right: 29.0625rem;
       }
       #sidebar {
         width: 445px;
-        margin-left: -445px;
+        margin-left: -27.8125rem;
       }
+
       @media (max-width: 854px) {
         #main_content_wrapper #main_content {
           margin-right: 0;
@@ -23,7 +24,8 @@
       color: $couleur-texte;
 
       .titre {
-        @include titre();
+        @include titre;
+
         font-size: 2.25rem;
         margin-bottom: 2rem;
       }
@@ -31,14 +33,17 @@
       .illustration {
         img {
           width: 100%;
-          @include carte-avec-ombre();
+
+          @include carte-avec-ombre;
         }
+
         margin-bottom: 2rem;
       }
 
       .contenu {
         @include make-col(3, 5);
         @include make-col-offset(1, 5);
+
         padding: 0 .625rem;
 
         img, iframe, blockquote {
@@ -61,7 +66,8 @@
 
     .details-actualite {
       .metadonnees {
-        @include carte-avec-ombre();
+        @include carte-avec-ombre;
+
         padding: 1.5rem;
         margin-bottom: 1.5rem;
         display: flex;

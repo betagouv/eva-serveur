@@ -16,7 +16,8 @@
   background: var(--eva-pro-score-item-bg);
 
   &__lettre {
-    @include body-xs();
+    @include body-xs;
+
     color: var(--light-decisions-text-text-label-grey, #161616);
   }
 
@@ -45,7 +46,8 @@
     border: 2px solid var(--dark-decisions-border-border-action-high-grey, #FFF);
 
     .eva-pro-score-item__lettre {
-      @include texte-md-bold();
+      @include texte-md-bold;
+
       color: var(--light-decisions-text-text-label-grey, #161616);
     }
   }

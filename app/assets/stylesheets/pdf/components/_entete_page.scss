@@ -33,12 +33,15 @@
 
 .en-tete-page__nom-beneficiaire {
   color: $grey-1000;
-  @include pdf-texte-xl();
+
+  @include pdf-texte-xl;
 }
 
 .en-tete-page__code-beneficiaire {
   color: $eva_bluegrey;
-  @include pdf-texte-lg();
+
+  @include pdf-texte-lg;
+
   text-transform: uppercase;
 }
 
@@ -52,11 +55,13 @@
 
 .en-tete-page__date-restitution {
   color: $grey-1000;
-  @include pdf-texte-xl();
+
+  @include pdf-texte-xl;
 }
 
 .en-tete-page__structure {
   color: $eva_bluegrey;
-  @include pdf-texte-lg();
+
+  @include pdf-texte-lg;
 }
 

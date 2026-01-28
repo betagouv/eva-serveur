@@ -6,6 +6,7 @@
   .evaluation-evapro__titre {
     margin-bottom: 0;
     color: var(--light-decisions-text-text-title-grey, #161616);
-    @include h2-lg();
+
+    @include h2-lg;
   }
 }

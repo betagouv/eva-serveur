@@ -3,6 +3,7 @@ module Admin
     def index; end
 
     def badge; end
+    def bilan_eva_pro; end
     def bouton; end
     # def bouton_ajouter_une_structure; end commenté pour le moment car besoin d'une resource
     def bouton_copier; end
@@ -13,6 +14,7 @@ module Admin
     def carte_v2; end
     # def carte_mise_en_action; end commenté pour le moment car besoin d'une resource
     def carte_partage_code; end
+    def chiffre_cle; end
     def code; end
     def ellipse; end
     def evaluation_incomplete; end

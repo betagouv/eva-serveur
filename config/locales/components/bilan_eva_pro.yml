@@ -1,0 +1,25 @@
+fr:
+  bilan_eva_pro:
+    prefixe: "Votre situation"
+    chiffre_cle:
+      A - Très bon: "Rassurante"
+      B - Bon: "À surveiller"
+      C - Moyen: "Préoccupante"
+      D - Mauvais: "Critique"
+    explication:
+      A - Très bon: |
+        Votre évaluation révèle que le risque de présence de difficultés avec les compétences est faible dans votre organisation.
+        
+        La situation est globalement satisfaisante. Il est toutefois important de rester attentif et de poursuivre les actions déjà en place.
+      B - Bon: |
+        Votre évaluation révèle que le risque de présence de difficultés avec les compétences de base est limité dans votre organisation.
+        
+        Une démarche préventive est néanmoins conseillée, car des fragilités peuvent apparaître ou s’accentuer avec le temps.
+      C - Moyen: |
+        Votre évaluation révèle que le risque de présence de difficultés avec les compétences est réel dans votre organisation.
+        
+        Il est important de mettre en place des actions pour prévenir l’aggravation des difficultés et accompagner les personnes concernées.
+      D - Mauvais: |
+        Votre évaluation révèle que le risque de présence de difficultés avec les compétences est élevé dans votre organisation.
+        
+        Il est urgent d’agir pour identifier les besoins, mettre en place des actions adaptées et accompagner les personnes concernées.

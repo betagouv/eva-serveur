@@ -1,0 +1,8 @@
+<div class="bilan-eva-pro bilan-eva-pro__<%= palier_css_class %>">
+  <div class="bilan-eva-pro__chiffre-cle">
+    <%= render ChiffreCleComponent.new(palier: palier, chiffre: I18n.t("bilan_eva_pro.chiffre_cle.#{palier}"), prefixe: I18n.t("bilan_eva_pro.prefixe")) %>
+  </div>
+  <div class="bilan-eva-pro__explication">
+    <%= md I18n.t("bilan_eva_pro.explication.#{palier}") %>
+  </div>
+</div>

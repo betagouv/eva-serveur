@@ -8,26 +8,28 @@
   position: relative;
 }
 
-.nouvelle-session__demonstration-vagues {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 31.25rem;
-  width: 100%;
-  background-image: url("vagues-demo.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-}
-
 .nouvelle-session__demonstration-container {
   display: flex;
-  max-width: 36.75rem;
-  padding-top: var(--Space-15W, 7.5rem);
+  max-width: var(--Grille-6-colonnes, 36.75rem);
+  padding-top: var(--Space-12W, 6rem);
   flex-direction: column;
   align-items: center;
   gap: var(--Space-3W, 1.5rem);
   flex: 1 0 0;
+  align-self: stretch;
+}
+
+.nouvelle-session__demonstration-body {
+  display: flex;
+  width: var(--Grille-4-colonnes, 23.875rem);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--Space-5W, 2.5rem);
+}
+
+.nouvelle-session__demonstration-logo {
+  display: flex;
+  align-items: center;
   align-self: stretch;
 }
 
@@ -97,4 +99,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nouvelle-session__demonstration-vagues {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 27.25rem;
+  width: 100%;
+  background-image: url("vagues-demo.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
 }

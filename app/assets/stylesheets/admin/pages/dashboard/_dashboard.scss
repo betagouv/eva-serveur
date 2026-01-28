@@ -269,6 +269,11 @@
     align-self: stretch;
     border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
     background: var(--light-decisions-background-background-alt-grey, #F6F6F6);
+    img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
   }
 
   .bloc-opco-partenaire__titre {
@@ -279,11 +284,11 @@
 
   .bloc-opco-partenaire__logo {
     display: flex;
-    width: 102px;
     height: 56px;
     justify-content: center;
     align-items: center;
     aspect-ratio: 51/28;
+    object-fit: contain;
   }
 
   .bloc-opco-entreprise {

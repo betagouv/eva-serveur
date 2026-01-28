@@ -1,7 +1,7 @@
 ActiveAdmin.register Opco do
   menu parent: I18n.t(".menu_structure"), if: proc { current_compte.superadmin? }
 
-  permit_params :nom, :financeur, :logo
+  permit_params :nom, :financeur, :logo, :telephone, :url
 
   filter :nom
   filter :financeur
@@ -33,6 +33,8 @@ ActiveAdmin.register Opco do
       f.input :nom, hint: I18n.t("formtastic.hints.opco.nom")
       f.input :financeur, as: :toggle
       f.input :logo, as: :image_file
+      f.input :telephone
+      f.input :url
     end
     f.actions
   end

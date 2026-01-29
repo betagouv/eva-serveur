@@ -11,4 +11,8 @@ class Opco < ApplicationRecord
   def display_name
     nom
   end
+
+  def logo_url
+    cdn_for(logo)
+  end
 end

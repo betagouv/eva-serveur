@@ -180,7 +180,7 @@ question_redaction_id)
     structure = campagne&.compte&.structure
     return if structure.blank?
 
-    structure.opcos.find(&:financeur?) || structure.opcos.first
+    structure.opco_financeur
   end
 
   private

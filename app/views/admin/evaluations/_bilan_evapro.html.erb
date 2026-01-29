@@ -9,7 +9,9 @@
       <h3 class="evaluation-bilan-evapro__opco-financeur-titre"><%= t(".opco_financeur_titre") %></h3>
 
       <div class="evaluation-bilan-evapro__opco-financeur">
-        <%= image_tag opco_financeur.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: t(".opco_financeur_logo_alt", nom: opco_financeur.nom) %>
+        <% if opco_financeur.logo.attached? %>
+          <%= image_tag opco_financeur.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: t(".opco_financeur_logo_alt", nom: opco_financeur.nom) %>
+        <% end %>
         <div class="evaluation-bilan-evapro__opco-financeur-details">
           <% if opco_financeur.telephone %>
             <p><%= opco_financeur.telephone %></p>

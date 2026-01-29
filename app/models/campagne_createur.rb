@@ -54,6 +54,8 @@ class CampagneCreateur
               &.gsub(/\s+/, "") || ""
   end
 
+  # Retourne l'OPCO financeur s'il existe (il ne devrait y en avoir qu'un seul),
+  # sinon retourne nil.
   def premier_opco_financeur
     @premier_opco_financeur ||= @structure.opco_financeur
   end

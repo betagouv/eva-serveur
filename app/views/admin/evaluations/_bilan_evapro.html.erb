@@ -5,22 +5,22 @@
   
     <p class="evaluation-bilan-evapro__explication"><%= t(".explication") %></p>
 
-    <% if opco_financeur %>
-      <h3 class="evaluation-bilan-evapro__opco-financeur-titre"><%= t(".opco_financeur_titre") %></h3>
+    <% if opco %>
+      <h3 class="evaluation-bilan-evapro__opco-financeur-titre"><%= t(".opco_titre") %></h3>
 
       <div class="evaluation-bilan-evapro__opco-financeur">
-        <% if opco_financeur.logo.attached? %>
-          <%= image_tag opco_financeur.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: t(".opco_financeur_logo_alt", nom: opco_financeur.nom) %>
+        <% if opco.logo.attached? %>
+          <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: t(".opco_logo_alt", nom: opco.nom) %>
         <% end %>
         <div class="evaluation-bilan-evapro__opco-financeur-details">
-          <% if opco_financeur.telephone %>
-            <p><%= opco_financeur.telephone %></p>
+          <% if opco.telephone %>
+            <p><%= opco.telephone %></p>
           <% end %>
-          <% if opco_financeur.email %>
-            <p><%= opco_financeur.email %></p>
+          <% if opco.email %>
+            <p><%= opco.email %></p>
           <% end %>
-          <% if opco_financeur.url %>
-            <p><%= link_to humanize_url(opco_financeur.url), opco_financeur.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
+          <% if opco.url %>
+            <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
           <% end %>
         </div>
       </div>

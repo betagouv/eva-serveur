@@ -1,9 +1,8 @@
-
-<header role="banner" class="fr-header" id="header-2">
+<header role="banner" class="fr-header">
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">
-        <div class="fr-header__brand fr-enlarge-link">
+        <div class="fr-header__brand">
           <div class="fr-header__brand-top">
             <div class="fr-header__logo">
               <p class="fr-logo"> République<br>française </p>
@@ -13,19 +12,31 @@
                 <img class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
               </a>
             </div>
-            <div class="fr-header__navbar">
-              <button data-fr-opened="false" aria-controls="header-menu" title="Menu" type="button" id="header-menu-btn" class="fr-btn--menu fr-btn">Menu</button>
-            </div>
           </div>
-          <% if @titre.present? %>
-          <div class="fr-header__service">
-            <p class="fr-header__service-title" style="margin: 0;"> <%= @titre %> </p>
+          <% if affiche_titre? %>
+            <div class="fr-header__service">
+              <p class="fr-header__service-title" style="margin: 0;"> <%= @titre %> </p>
               <% if @tagline.present? %>
                 <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
               <% end %>
             </div>
           <% end %>
         </div>
+        <% if affiche_actions_connexion? %>
+          <div class="fr-header__tools">
+            <div class="fr-header__tools-links">
+              <ul class="fr-btns-group">
+                <% @actions.each do |action| %>
+                  <li>
+                    <a href="<%= action[:url] %>" class="<%= [ action[:icon_class], action[:button_class] ].compact.join(" ") %>">
+                      <%= action[:label] %>
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

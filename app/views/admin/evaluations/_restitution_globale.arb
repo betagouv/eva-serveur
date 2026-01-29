@@ -1,6 +1,8 @@
 class_css = campagne_avec_positionnement?(:litteratie) ? "litteratie" : "numeratie"
 div class: "evaluation__restitution-globale #{class_css}" do
-  render "deroulement_passation" unless resource.campagne.parcours_type.blank? || pdf
+  unless resource.campagne.parcours_type.blank? || pdf || resource.opco_financeur
+    render "deroulement_passation"
+  end
 
   if bienvenue
     render(

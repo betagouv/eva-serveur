@@ -1,7 +1,7 @@
 div class: "evaluation" do
   div class: "row" do
     div class: "col-8" do
-      render "details_evaluation"
+      render "details_evaluation" unless resource.opco_financeur
       render "restitution_globale", pdf: false
       render "panel_administration" if can?(:manage, Compte)
     end

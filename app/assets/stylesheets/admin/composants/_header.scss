@@ -1,0 +1,35 @@
+.fr-header {
+	.fr-header__tools-links {
+		.fr-btn  {
+			align-items: center;
+			background-color: var(--background-action-high-blue-france);
+			color: #000091;
+			display: inline-flex;
+			flex-direction: row;
+			font-size: 1rem;
+			font-weight: 500;
+			line-height: 1.5rem;
+			min-height: 2.5rem;
+			padding: .5rem 1rem;
+			width: -moz-fit-content;
+			width: fit-content;
+			border-radius: 0;
+		}
+
+		.fr-btn--tertiary {
+			--hover: inherit;
+			--active: inherit;
+			background-color: transparent;
+			border-color: var(--border-default-grey) !important;
+			border: 1px;
+			box-shadow: inset 0 0 0 1px var(--border-default-grey) !important;
+			color: #000091 !important;
+			
+			&:hover {
+				background-color: var(--hover-tint) !important;
+			}
+		}
+	}
+
+	
+}

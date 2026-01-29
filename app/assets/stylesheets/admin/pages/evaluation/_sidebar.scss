@@ -1,3 +1,15 @@
+
+body.admin_evaluations.show {
+  .sidebar {
+    border-left: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+    width: 305px !important;
+  }
+  .menu-sidebar {
+    margin-top: 0;
+  }
+}
+
+// .show .menu-sidebar, .admin_evaluations 
 .evaluation-sidebar__container {
   display: flex;
   flex-direction: column;
@@ -16,6 +28,7 @@
     width: auto;
     height: 56px;
     object-fit: contain;
+    aspect-ratio: 51 / 28;
   }
 
   p {
@@ -25,7 +38,7 @@
 
 .evaluation-sidebar__bloc {
   display: flex;
-  width: 16.125rem;
+  width: 257px;
   padding: var(--Space-3W, 1.5rem);
   flex-direction: column;
   justify-content: center;

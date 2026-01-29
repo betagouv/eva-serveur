@@ -19,6 +19,7 @@ class Campagne < ApplicationRecord
   validates_associated :situations_configurations
   validate :libelle_unique_pour_structure
   delegate :structure_code_postal, :structure, to: :compte
+  delegate :opco_financeur, to: :structure
   auto_strip_attributes :libelle, :code, squish: true
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 

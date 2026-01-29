@@ -149,6 +149,21 @@ describe 'Campagne request', type: :request do
           expect(troisieme_situation['questions_entrainement']).to be_nil
         end
       end
+
+      context 'quand la campagne a un opco financeur' do
+        let(:opco_financeur) { create :opco, :constructys }
+        let(:structure) { create :structure, opcos: [ opco_financeur ] }
+        let(:compte) { create :compte, structure: structure }
+        let(:campagne) { create :campagne, compte: compte, code: 'ETE21' }
+
+        it "retourne l'opco financeur" do
+          get '/api/campagnes/ete21'
+
+          expect(response).to have_http_status(:ok)
+          resultat = response.parsed_body
+          expect(resultat['opco_financeur']['nom']).to eq('Constructys')
+        end
+      end
     end
   end
 end

@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_compte.utilisateur_entreprise?
       structure = current_compte.structure
-      opco_financeur = structure&.opcos&.find(&:financeur?) || structure&.opcos&.first
+      opco_financeur = structure&.opco_financeur
 
       render partial: "tableau_de_bord_eva_pro",
              locals: {

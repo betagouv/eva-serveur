@@ -55,7 +55,7 @@ class CampagneCreateur
   end
 
   def premier_opco_financeur
-    @premier_opco_financeur ||= @structure.opcos.find(&:financeur?) || @structure.opcos.first
+    @premier_opco_financeur ||= @structure.opco_financeur
   end
 
   def cree_campagne(parcours_type, libelle: libelle_campagne)

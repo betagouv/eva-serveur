@@ -221,7 +221,7 @@ a.fr-btn {
 
 body.logged_out h3.fr-footer__top-cat,
 body.logged_in h3.fr-footer__top-cat {
-  font-family: Marianne, arial, sans-serif;
+  font-family: $font-texte;
   color: var(--text-title-grey);
   display: block;
   font-size: .75rem;
@@ -232,7 +232,7 @@ body.logged_in h3.fr-footer__top-cat {
 }
 body.logged_out h2.fr-footer__partners-title,
 body.logged_in h2.fr-footer__partners-title {
-  font-family: Marianne, arial, sans-serif;
+  font-family: $font-texte;
   --title-spacing: 0 0 0.75rem 0;
   color: var(--text-default-grey);
   flex-basis: 100%;

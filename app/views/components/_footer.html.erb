@@ -1,6 +1,5 @@
 <% sponsors = local_assigns.fetch :sponsors, true %>
 
-<% partenaires = respond_to?(:current_compte) && current_compte.present? ? 
-[ StructureOpco.opco_financeur_pour_structure_id(current_compte.structure_id) ].compact : [] %>
+<% partenaires = respond_to?(:current_compte) && current_compte.present? ? partenaires_opcos_financeurs(current_compte) : [] %>
 
 <%= render FooterComponent.new avec_partenaires: sponsors, partenaires: partenaires %>

@@ -1,11 +1,22 @@
 <% content_for :classes_body, " page_inscription_v2" %>
 <% content_for :classes_conteneur, " inscription_v2" %>
-<% content_for :hide_footer, true %>
 
-<% content_for :content_block do %>
-  <div class="inscription_v2__sidebar">
-    <%= image_tag "eva-logo-bleu.svg", alt: "Eva", class: "inscription_v2__sidebar-logo" %>
-  </div>
+<%= render HeaderComponent.new(
+  logo: "logo-anlci.svg",
+  logo_alt: "ANLCI",
+  logo_url: "/",
+  titre: "Paramétrage de votre compte",
+  current_compte: current_compte,
+  actions: [
+    {
+      url: pro_connect_logout_path,
+      label: "Déconnexion",
+      icon_class: "fr-icon-logout-box-r-line",
+      button_class: "fr-btn fr-btn--tertiary",
+    }
+  ]
+) %>
+<% content_for :content_block do %> 
   <div class="inscription_v2__content">
     <div class="inscription_v2__content__inner">
       <%= render partial: "layouts/flash" %>

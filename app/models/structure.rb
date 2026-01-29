@@ -120,7 +120,7 @@ class Structure < ApplicationRecord
   end
 
   def opco_financeur
-    opcos.find(&:financeur?) || opcos.first
+    opcos.find(&:financeur?)
   end
 
   private

@@ -279,9 +279,9 @@ parcours_type_constructys_nmc)
 
       before { parcours_type_generique }
 
-      it "utilise le premier OPCO" do
+      it "retourne nil car aucun OPCO n'est financeur" do
         premier_opco = createur_multi.send(:premier_opco_financeur)
-        expect(premier_opco).to eq(opco1)
+        expect(premier_opco).to be_nil
       end
 
       it "crée uniquement la campagne générique" do

@@ -123,6 +123,10 @@ class Structure < ApplicationRecord
     opcos.find(&:financeur?)
   end
 
+  def opco
+    opcos.first
+  end
+
   private
 
   def verifie_siret_ou_siren

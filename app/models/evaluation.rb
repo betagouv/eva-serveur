@@ -183,6 +183,13 @@ question_redaction_id)
     structure.opco_financeur
   end
 
+  def opco
+    structure = campagne&.compte&.structure
+    return if structure.blank?
+
+    structure.opco
+  end
+
   private
 
   def trouve_campagne_depuis_code

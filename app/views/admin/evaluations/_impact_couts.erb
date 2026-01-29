@@ -4,14 +4,13 @@
 <% resultat_strategie_lettre = lettre_score_strategie(synthese) %>
 <% resultat_numerique_lettre = lettre_score_numerique(synthese) %>
 <div class="fr-pl-4w fr-pr-4w couts">
-  <% if contenu_cout.present? %>
+  <% if synthese[:score_cout] && contenu_cout.present? %>
     <div class="couts__mise-en-avant">
       <%= render Evaluation::MesureImpactCalloutComponent.new(
         titre: contenu_cout[:titre],
         resultat: synthese[:score_cout].to_sym
       ) do %>
         <p class="fr-callout__text"><%= contenu_cout[:texte] %></p>
-        
       <% end %>
     </div>
     <p class="fr-callout__text fr-mb-0"><%= contenu_cout[:suite] %></p>

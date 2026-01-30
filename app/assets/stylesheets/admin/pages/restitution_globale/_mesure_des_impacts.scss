@@ -9,12 +9,6 @@
   gap: $dsfr-spacing-8v;
 }
 
-.evaluation-impact-general__definitions {
-  background-color: $blue-france-975;
-  padding: $dsfr-spacing-4v;
-  margin-top: $dsfr-spacing-4v;
-}
-
 // Steppers d'impact
 .impact-steppers {
   display: grid;
@@ -28,53 +22,6 @@
 }
 
 .impact-callouts__item {
-  margin: 0;
-}
-
-// Définitions d'impact
-.impact-definitions {
-  display: flex;
-  flex-direction: column;
-  gap: $dsfr-spacing-6v;
-  background-color: $blue-france-975;
-}
-
-.impact-definitions__title {
-  @include dsfr-texte-md;
-  font-weight: 700;
-  color: $grey-200;
-  margin: 0;
-}
-
-.impact-definitions__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $dsfr-spacing-6v;
-}
-
-.impact-definition__heading {
-  display: flex;
-  align-items: center;
-  gap: $dsfr-spacing-1v;
-  margin: 0 0 $dsfr-spacing-1v 0;
-}
-
-.impact-definition__icon {
-  color: $blue-france-sun-113;
-  flex-shrink: 0;
-}
-
-.impact-definition__title {
-  @include dsfr-texte-md;
-  font-weight: 600;
-  color: $grey-200;
-  margin: 0;
-}
-
-.impact-definition__description {
-  @include dsfr-texte-md;
-  font-weight: 400;
-  color: $grey-200;
   margin: 0;
 }
 

@@ -32,6 +32,8 @@ class Evaluation < ApplicationRecord
   belongs_to :beneficiaire
   belongs_to :responsable_suivi, optional: true, class_name: "Compte"
 
+  delegate :structure, to: :campagne
+
   has_one :conditions_passation, dependent: :destroy
   has_one :donnee_sociodemographique, dependent: :destroy
   has_one :mise_en_action, dependent: :destroy
@@ -188,6 +190,10 @@ question_redaction_id)
     return if structure.blank?
 
     structure.opco
+  end
+
+  def evaluation_evapro?
+    campagne.parcours_type.type_de_programme == "diagnostic_entreprise"
   end
 
   private

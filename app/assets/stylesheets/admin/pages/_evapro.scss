@@ -1,0 +1,6 @@
+.evaluation-evapro {
+  .evaluation-evapro__titre {
+    color: var(--light-decisions-text-text-title-grey, #161616);
+    @include h2-lg();
+  }
+}

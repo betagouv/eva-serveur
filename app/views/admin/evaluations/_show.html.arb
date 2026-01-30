@@ -1,9 +1,11 @@
-div class: "evaluation" do
-  div class: "row" do
-    div class: "col-8" do
-      render "details_evaluation"
-      render "restitution_globale", pdf: false
-      render "panel_administration" if can?(:manage, Compte)
+if resource.evaluation_evapro?
+  render "evaluation_evapro"
+else
+  div class: "evaluation" do
+    div class: "row" do
+      div class: "col-8" do
+        render "evaluation_eva"
+      end
     end
   end
 end

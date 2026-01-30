@@ -1,5 +1,5 @@
 .fr-header {
-  .fr-header__tools-links {
+  .tools-links {
     .fr-btn  {
       align-items: center;
       background-color: var(--background-action-high-blue-france);
@@ -43,7 +43,10 @@
     z-index: auto;
   }
 
-  .fr-header__tools-links {
-    display: unset;
+  .tools-links {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    justify-content: flex-end;
   }
 }

@@ -4,7 +4,7 @@ fr:
       show:
         titre: Créez votre compte eva
         sous_titre: Accedez au parcours d'onboarding
-        titre_intro: Bienvenue sur eva
+        titre_intro: Créer un compte
         sous_titre_intro: Choisissez votre mode de création de compte pour accéder au service eva. Vous pourrez compléter votre profil par la suite.
         proconnect_titre: Se créer un compte avec ProConnect
         proconnect_description: ProConnect est la solution d’authentification de l’État qui simplifie l’accès de tous les professionnels à ses services numériques.

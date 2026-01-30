@@ -1,4 +1,6 @@
 class Opco < ApplicationRecord
+  has_many :structures, dependent: :nullify
+
   validates :nom, presence: true
   scope :financeurs, -> { where(financeur: true) }
 

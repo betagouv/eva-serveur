@@ -3,25 +3,12 @@ class Structure < ApplicationRecord
 
   has_ancestry
   acts_as_paranoid
-  has_many :structure_opcos, dependent: :destroy, autosave: true
-  has_many :opcos, through: :structure_opcos
+  belongs_to :opco, optional: true
 
   alias structure_referente parent
   alias structure_referente= parent=
 
   attr_accessor :validation_inscription
-
-  def opco_id
-    opco_ids.first
-  end
-
-  def opco_id=(id)
-    if id.present?
-      self.opco_ids = [ id ]
-    else
-      self.opco_ids = []
-    end
-  end
 
   validates :nom, presence: true
   validates :nom, uniqueness: {
@@ -120,11 +107,13 @@ class Structure < ApplicationRecord
   end
 
   def opco_financeur
-    opcos.find(&:financeur?)
+    opco&.financeur? ? opco : nil
   end
 
-  def opco
-    opcos.first
+  # Compatibilité : une structure n'a plus qu'un seul OPCO (belongs_to :opco).
+  # Retourne une relation pour les appels restants à .opcos (ex. footer, vues).
+  def opcos
+    opco.present? ? Opco.where(id: opco_id) : Opco.none
   end
 
   private
@@ -195,7 +184,7 @@ class Structure < ApplicationRecord
   end
 
   def doit_avoir_un_opco
-    return if opcos.any?
+    return if opco.present?
 
     errors.add(:opco_id, :must_be_present)
   end

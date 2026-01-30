@@ -1,4 +1,5 @@
-<div id="evaluation-bilan-evapro">
+<% opco = local_assigns[:opco] || local_assigns[:opco_financeur] %>
+<div id="evaluation-bilan-evapro" class="fr-mb-6w">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <div class="evaluation-bilan-evapro__contenu">
     <%= render(BilanEvaProComponent.new(palier: diag_risques_entreprise.palier)) %>

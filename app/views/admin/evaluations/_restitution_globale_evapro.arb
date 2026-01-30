@@ -1,0 +1,53 @@
+div class: "evaluation-evapro" do
+  h1 titre_evaluation(evaluation), class: "evaluation-evapro__titre"
+  diag_risques_entreprise = restitution_globale.diag_risques_entreprise
+  pourcentage_risque = nil
+  if diag_risques_entreprise
+    pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
+    if pourcentage_risque
+      render(
+        partial: "mesure_des_risques",
+        locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
+      )
+    end
+  end
+
+  if pourcentage_risque
+    evaluation_impact_general = restitution_globale.evaluation_impact_general
+    render(
+      partial: "mesure_des_impacts",
+      locals: { evaluation_impact_general: evaluation_impact_general, pdf: pdf }
+    )
+  end
+
+  if diag_risques_entreprise && pdf == false
+    render(
+      partial: "bilan_evapro",
+      locals: {
+        diag_risques_entreprise: diag_risques_entreprise,
+        opco_financeur: restitution_globale.evaluation.opco_financeur,
+        pdf: pdf
+      }
+    )
+
+    render(
+      partial: "aller_plus_loin",
+    )
+  end
+
+  render Evaluation::AnnexeDiagnosticComponent.new(
+    nom_beneficiaire: restitution_globale.beneficiaire,
+    code_beneficiaire: restitution_globale.code_beneficiaire,
+    date: restitution_globale.date,
+    structure: restitution_globale.structure
+  ) if pdf && resource.campagne.avec_diagnostic?
+
+  render Evaluation::AnnexePositionnementComponent.new(
+    nom_beneficiaire: restitution_globale.beneficiaire,
+    code_beneficiaire: restitution_globale.code_beneficiaire,
+    date: restitution_globale.date,
+    structure: restitution_globale.structure
+  ) if pdf && (
+    campagne_avec_positionnement?(:litteratie) || campagne_avec_positionnement?(:numeratie)
+  )
+end

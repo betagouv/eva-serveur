@@ -44,7 +44,6 @@ fr:
           bouton_passer: "Passer le questionnaire"
           evapro_description: "Pour évaluer les risques d'illettrisme dans votre entreprise, commencez par répondre à un questionnaire."
           evapro_description_2: "Cela prend environ 10 minutes. Vous pourrez ensuite inviter d'autres collaborateurs."
-          precision_detail: "Recommandé car votre entreprise dépend de l'opérateur de compétences %{opco_nom}."
           bouton_label: "Lancer le diagnostic"
         bloc_resultats_entreprise:
           titre: Vos résultats

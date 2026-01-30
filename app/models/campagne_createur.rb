@@ -27,7 +27,7 @@ class CampagneCreateur
   end
 
   def cree_campagnes_opco_financeur
-    parcours_types = trouve_parcours_types_opco_financeur
+    parcours_types = ParcoursType.pour_opco(premier_opco_financeur)
     return if parcours_types.empty?
 
     parcours_types.each do |parcours_type|
@@ -36,22 +36,8 @@ class CampagneCreateur
     end
   end
 
-  def trouve_parcours_types_opco_financeur
-    prefixe_nom_technique = "#{NOM_TECHNIQUE_GENERIQUE}-#{slugifie_nom_opco}"
-    ParcoursType.where("nom_technique LIKE ?", "#{prefixe_nom_technique}%")
-  end
-
   def opco_financeur?
     premier_opco_financeur&.financeur? || false
-  end
-
-  def slugifie_nom_opco
-    premier_opco_financeur&.nom
-              &.unicode_normalize(:nfkd)
-              &.encode("ASCII", replace: "")
-              &.downcase
-              &.gsub(/[^a-z0-9\s-]/, "")
-              &.gsub(/\s+/, "") || ""
   end
 
   # Retourne l'OPCO financeur s'il existe (il ne devrait y en avoir qu'un seul),
@@ -73,8 +59,8 @@ class CampagneCreateur
   end
 
   def cree_campagne_generique(nom_technique)
-    parcours_type = ParcoursType.find_by!(nom_technique: nom_technique)
-    cree_campagne(parcours_type, libelle: "#{NOM_CAMPAGNE_GENERIQUE}")
+    parcours_type = ParcoursType.find_evapro_generique!
+    cree_campagne(parcours_type, libelle: NOM_CAMPAGNE_GENERIQUE)
   end
 
   def libelle_campagne

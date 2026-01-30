@@ -11,6 +11,19 @@ fr:
         image_alt: "Focus incoutournable"
         explication: "« Les Incontournables » constituent une boite à outils à destination des entreprises, OPCO et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
         lien_texte: "www.bao-incontournables.fr"
+        titre_definitions: "Définitions des impacts"
+        performance_collective:
+          titre: "Performance collective : "
+          description: "cet indicateur reflète l’impact de l’illettrisme sur la performance globale de l’entreprise, en termes de qualité, de productivité, de coopération et d’efficacité opérationnelle."
+        agilite_organisationnelle:
+          titre: "Agilité organisationnelle : "
+          description: "cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
+        securite_qualite:
+          titre: "Sécurité et qualité : "
+          description: "cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+        mobilite_professionnelle:
+          titre: "Mobilité professionnelle : "
+          description: "cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
       telechargement_reponses:
         cta: "Télécharger le détail des réponses"
       index:

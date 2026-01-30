@@ -25,7 +25,7 @@ div class: "evaluation-evapro" do
       partial: "bilan_evapro",
       locals: {
         diag_risques_entreprise: diag_risques_entreprise,
-        opco_financeur: restitution_globale.evaluation.opco_financeur,
+        opco: restitution_globale.evaluation.opco_financeur,
         pdf: pdf
       }
     )

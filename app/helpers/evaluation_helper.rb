@@ -85,4 +85,12 @@ module EvaluationHelper
   def lettre_score_numerique(synthese)
     score_to_lettre(synthese[:score_numerique])
   end
+
+  def titre_evaluation(evaluation)
+    if evaluation.opco_financeur
+      evaluation.structure&.nom
+    else
+      render NomAnonymisableComponent.new(evaluation.beneficiaire)
+    end
+  end
 end

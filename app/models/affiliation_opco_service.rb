@@ -1,27 +1,24 @@
+# frozen_string_literal: true
+
 class AffiliationOpcoService
   def initialize(structure)
     @structure = structure
   end
 
+  def opcos_possibles
+    trouve_opcos_par_idcc
+  end
+
   def affilie_opcos
     return if @structure.idcc.blank?
 
-    opcos_trouves = trouve_opcos_par_idcc
-    return if opcos_trouves.empty?
+    opcos = opcos_possibles
+    return if opcos.empty?
+    return if @structure.opco_id.present?
+    return unless opcos.size == 1
 
-    opcos_trouves.each do |opco|
-      if @structure.persisted?
-        @structure.structure_opcos.find_or_create_by(opco: opco)
-      else
-        # Pour les structures non persistées, on construit les associations
-        # Elles seront sauvegardées quand la structure sera sauvegardée
-        @structure.structure_opcos.build(opco: opco) unless opco_deja_associe?(opco)
-      end
-    end
-  end
-
-  def opco_deja_associe?(opco)
-    @structure.structure_opcos.any? { |so| so.opco_id == opco.id }
+    @structure.opco_id = opcos.first.id
+    @structure.save if @structure.persisted?
   end
 
   private

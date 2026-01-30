@@ -8,7 +8,6 @@
         <%= render CardDiagnostiqueComponent.new(
           titre: campagne.parcours_type.libelle,
           description: campagne.parcours_type.description,
-          precision_detail: t(".precision_detail", opco_nom: opco.nom),
           bouton_label: t(".bouton_label"),
           bouton_url: url,
           opco: campagne.evapro_opco? ? opco : nil,

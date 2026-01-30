@@ -52,8 +52,8 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def assigne_opco_ids_pour_formulaire
-    opco_ids = @structure.structure_opcos.map { |so| so.opco&.id }.compact
-    @structure.opco_id = opco_ids.first if opco_ids.any?
+    opcos = AffiliationOpcoService.new(@structure).opcos_possibles
+    @structure.opco_id = opcos.first.id if opcos.size == 1
   end
 
   def determine_action_type

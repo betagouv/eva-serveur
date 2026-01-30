@@ -4,7 +4,6 @@ class CardDiagnostiqueComponent < ViewComponent::Base
   def initialize(
     titre:,
     description: nil,
-    precision_detail: nil,
     bouton_label:,
     bouton_url:,
     opco: nil,
@@ -13,7 +12,6 @@ class CardDiagnostiqueComponent < ViewComponent::Base
   )
     @titre = titre
     @description = description
-    @precision_detail = precision_detail
     @bouton_label = bouton_label
     @bouton_url = bouton_url
     @opco = opco

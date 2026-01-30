@@ -12,6 +12,15 @@ class Opco < ApplicationRecord
     nom
   end
 
+  def slug
+    nom
+      &.unicode_normalize(:nfkd)
+      &.encode("ASCII", replace: "")
+      &.downcase
+      &.gsub(/[^a-z0-9\s-]/, "")
+      &.gsub(/\s+/, "") || ""
+  end
+
   def logo_url
     cdn_for(logo)
   end

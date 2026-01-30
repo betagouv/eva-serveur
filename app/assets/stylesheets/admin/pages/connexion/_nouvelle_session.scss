@@ -5,12 +5,18 @@
   width: 100%;
 }
 
+
+
 .nouvelle-session__connexion {
   display: flex;
   padding: 0 var(--Space-3V, 12px);
   flex-direction: column;
   align-items: flex-end;
   flex: 1 0 0;
+
+  .flashes {
+    padding: 16px;
+  }
 }
 
 .nouvelle-session__connexion-container {

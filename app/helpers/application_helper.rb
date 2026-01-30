@@ -49,7 +49,7 @@ module ApplicationHelper
   def partenaires_opcos_financeurs(compte)
     return [] if compte.blank?
 
-    opco_financeur = StructureOpco.opco_financeur_pour_structure_id(compte.structure_id)
+    opco_financeur = compte.structure&.opco_financeur
 
     return [] unless opco_financeur.present? && opco_financeur.logo.attached?
 

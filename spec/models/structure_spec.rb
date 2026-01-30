@@ -536,48 +536,42 @@ describe Structure, type: :model do
     end
   end
 
-  describe "relations OPCO" do
+  describe "relation OPCO" do
     let(:structure) { create(:structure_locale) }
     let(:opco1) { create(:opco, nom: "OPCO 1") }
     let(:opco2) { create(:opco, nom: "OPCO 2") }
 
-    it "peut avoir plusieurs OPCOs" do
-      structure.opcos << [ opco1, opco2 ]
+    it "peut avoir un seul OPCO" do
+      structure.opco = opco1
+      structure.save
 
-      expect(structure.opcos.count).to eq(2)
-      expect(structure.opcos.to_a).to contain_exactly(opco1, opco2)
+      expect(structure.reload.opco).to eq(opco1)
+      expect(structure.opco_id).to eq(opco1.id)
     end
 
-    it "peut supprimer un OPCO" do
-      structure.opcos << [ opco1, opco2 ]
-      structure.opcos.delete(opco1)
+    it "peut remplacer l'OPCO" do
+      structure.update!(opco: opco1)
+      structure.opco = opco2
+      structure.save
 
-      expect(structure.opcos.count).to eq(1)
-      expect(structure.opcos.first).to eq(opco2)
+      expect(structure.reload.opco).to eq(opco2)
     end
 
-    it "supprime les affiliations quand la structure est supprimée" do
-      structure.opcos << opco1
+    it "supprime la référence OPCO quand la structure est supprimée (opco reste)" do
+      structure.update!(opco: opco1)
       structure_id = structure.id
 
       structure.destroy
 
-      expect(StructureOpco.where(structure_id: structure_id)).to be_empty
+      expect(described_class.find_by(id: structure_id)).to be_nil
+      expect(Opco.find(opco1.id)).to eq(opco1)
     end
 
     describe "#opco_id" do
       context "quand la structure a un OPCO" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "retourne l'ID du premier OPCO" do
-          expect(structure.opco_id).to eq(opco1.id)
-        end
-      end
-
-      context "quand la structure a plusieurs OPCOs" do
-        before { structure.opcos << [ opco1, opco2 ] }
-
-        it "retourne l'ID du premier OPCO" do
+        it "retourne l'ID de l'OPCO" do
           expect(structure.opco_id).to eq(opco1.id)
         end
       end
@@ -595,39 +589,59 @@ describe Structure, type: :model do
           structure.opco_id = opco1.id
           structure.save
 
-          expect(structure.opcos.count).to eq(1)
-          expect(structure.opcos.first).to eq(opco1)
+          expect(structure.reload.opco).to eq(opco1)
         end
 
-        it "remplace les OPCOs existants" do
-          structure.opcos << opco2
+        it "remplace l'OPCO existant" do
+          structure.update!(opco: opco2)
           structure.opco_id = opco1.id
           structure.save
 
-          expect(structure.opcos.count).to eq(1)
-          expect(structure.opcos.first).to eq(opco1)
+          expect(structure.reload.opco).to eq(opco1)
         end
       end
 
       context "quand on assigne nil" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "supprime tous les OPCOs" do
+        it "supprime l'association OPCO" do
           structure.opco_id = nil
           structure.save
 
-          expect(structure.opcos.count).to eq(0)
+          expect(structure.reload.opco).to be_nil
         end
       end
 
       context "quand on assigne une chaîne vide" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "supprime tous les OPCOs" do
+        it "supprime l'association OPCO" do
           structure.opco_id = ""
           structure.save
 
-          expect(structure.opcos.count).to eq(0)
+          expect(structure.reload.opco).to be_nil
+        end
+      end
+    end
+
+    describe "#opco_financeur" do
+      context "quand l'OPCO est financeur" do
+        let(:opco_financeur) { create(:opco, nom: "Financeur", financeur: true) }
+
+        before { structure.update!(opco: opco_financeur) }
+
+        it "retourne l'OPCO" do
+          expect(structure.opco_financeur).to eq(opco_financeur)
+        end
+      end
+
+      context "quand l'OPCO n'est pas financeur" do
+        let(:opco_non_financeur) { create(:opco, nom: "OPCO non financeur", financeur: false) }
+
+        before { structure.update!(opco: opco_non_financeur) }
+
+        it "retourne nil" do
+          expect(structure.opco_financeur).to be_nil
         end
       end
     end

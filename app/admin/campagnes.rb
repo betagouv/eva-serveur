@@ -180,8 +180,7 @@ campagne_privee: campagne.privee))
       @situations_configurations ||= resource
                                      .situations_configurations
                                      .includes([ :questionnaire,
-                                                { situation: %i[questionnaire
-                                                                illustration_attachment] } ])
+                                                { situation: :illustration_attachment } ])
     end
 
     def comptes_structures_filles

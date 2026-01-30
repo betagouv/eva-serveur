@@ -90,12 +90,12 @@ describe ApplicationHelper do
       end
     end
 
-    context 'quand la structure a des opcos mais aucun financeur' do
+    context 'quand la structure a un opco non financeur' do
       let(:compte) { create(:compte) }
       let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
 
       before do
-        compte.structure.opcos << opco_non_financeur
+        compte.structure.update!(opco: opco_non_financeur)
       end
 
       it 'retourne une liste vide' do
@@ -108,7 +108,7 @@ describe ApplicationHelper do
       let(:opco_financeur) { create(:opco, financeur: true, nom: 'OPCO Financeur') }
 
       before do
-        compte.structure.opcos << opco_financeur
+        compte.structure.update!(opco: opco_financeur)
       end
 
       it 'retourne une liste vide' do
@@ -122,7 +122,7 @@ describe ApplicationHelper do
       let(:logo_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'programme_tele.png'), 'image/png') }
 
       before do
-        compte.structure.opcos << opco_financeur
+        compte.structure.update!(opco: opco_financeur)
         opco_financeur.logo.attach(logo_file)
       end
 
@@ -138,18 +138,17 @@ describe ApplicationHelper do
       end
     end
 
-    context 'quand la structure a plusieurs opcos dont un financeur' do
+    context 'quand la structure a un opco financeur' do
       let(:compte) { create(:compte) }
-      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
       let(:opco_financeur) { create(:opco, financeur: true, nom: 'OPCO Financeur', url: 'https://example.com') }
       let(:logo_file) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'support', 'programme_tele.png'), 'image/png') }
 
       before do
-        compte.structure.opcos << [ opco_non_financeur, opco_financeur ]
+        compte.structure.update!(opco: opco_financeur)
         opco_financeur.logo.attach(logo_file)
       end
 
-      it 'retourne uniquement l\'opco financeur' do
+      it 'retourne l\'opco financeur' do
         resultat = helper.partenaires_opcos_financeurs(compte)
 
         expect(resultat.length).to eq(1)

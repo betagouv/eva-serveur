@@ -43,8 +43,6 @@ class LienComponent < ViewComponent::Base
   end
 
   def content_text
-    # Pour obtenir le texte du contenu pour la description externe
-    # On utilise une version simplifiée si c'est du HTML
     @body || ""
   end
 end

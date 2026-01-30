@@ -77,7 +77,10 @@ ActiveAdmin.register_page "Dashboard" do
     end
 
     def recupere_campagnes
-      @campagnes = Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
+      @campagnes = Campagne.accessible_by(current_ability)
+                          .includes(:parcours_type)
+                          .order(created_at: :desc)
+                          .limit(10)
     end
 
     def recupere_prise_en_main
@@ -99,6 +102,7 @@ ActiveAdmin.register_page "Dashboard" do
       return unless current_compte.utilisateur_entreprise?
 
       @campagnes_entreprise = Campagne.accessible_by(current_ability)
+                                    .includes(:parcours_type)
                                     .order(created_at: :desc)
                                     .limit(10)
       @evaluations_entreprise = Evaluation.accessible_by(current_ability)

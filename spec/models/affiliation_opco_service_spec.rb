@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 describe AffiliationOpcoService, type: :model do
@@ -11,7 +13,7 @@ describe AffiliationOpcoService, type: :model do
   let!(:opco_sante) { create(:opco, nom: "OPCO Santé", idcc: [ "0029" ]) }
   let!(:opco_commerce) { create(:opco, nom: "OPCO Commerce", idcc: [ "0043" ]) }
 
-  describe "#affilie_opcos" do
+  describe "#opcos_possibles" do
     context "quand la structure a des IDCC valides" do
       let(:idcc_values) { [ "3", "18" ] }
 
@@ -19,22 +21,60 @@ describe AffiliationOpcoService, type: :model do
         structure.update_columns(idcc: idcc_values)
       end
 
-      it "affilie les OPCOs correspondants" do
-        expect do
-          service.affilie_opcos
-        end.to change(StructureOpco, :count).by(2)
+      it "retourne les OPCOs correspondants" do
+        opcos = service.opcos_possibles
 
-        structure.reload
-        expect(structure.opcos.to_a).to contain_exactly(opco_mobilite, opco_2i)
+        expect(opcos.to_a).to contain_exactly(opco_mobilite, opco_2i)
+      end
+    end
+
+    context "quand la structure n'a pas d'IDCC" do
+      let(:idcc_values) { [] }
+
+      it "retourne une liste vide" do
+        expect(service.opcos_possibles.to_a).to eq([])
+      end
+    end
+  end
+
+  describe "#affilie_opcos" do
+    context "quand un seul OPCO est possible et la structure n'a pas encore d'OPCO" do
+      let(:idcc_values) { [ "3" ] }
+
+      before do
+        structure.update_columns(idcc: idcc_values)
       end
 
-      it "n'ajoute pas de doublons si appelé plusieurs fois" do
-        service.affilie_opcos
+      it "assigne cet OPCO à la structure" do
         service.affilie_opcos
 
         structure.reload
-        expect(structure.opcos.count).to eq(2)
-        expect(structure.opcos.to_a).to contain_exactly(opco_mobilite, opco_2i)
+        expect(structure.opco_id).to eq(opco_mobilite.id)
+        expect(structure.opco).to eq(opco_mobilite)
+      end
+
+      it "ne change rien si la structure a déjà un OPCO" do
+        structure.update!(opco: opco_commerce)
+        service.affilie_opcos
+
+        structure.reload
+        expect(structure.opco).to eq(opco_commerce)
+      end
+    end
+
+    context "quand plusieurs OPCOs sont possibles" do
+      let(:idcc_values) { [ "3", "18" ] }
+
+      before do
+        structure.update_columns(idcc: idcc_values)
+      end
+
+      it "n'assigne aucun OPCO (l'utilisateur choisit dans le formulaire)" do
+        service.affilie_opcos
+
+        structure.reload
+        expect(structure.opco_id).to be_nil
+        expect(structure.opco).to be_nil
       end
     end
 
@@ -45,64 +85,44 @@ describe AffiliationOpcoService, type: :model do
         structure.update_columns(idcc: idcc_values)
       end
 
-      it "n'affilie l'OPCO qu'une seule fois" do
+      it "assigne cet OPCO une seule fois" do
         service.affilie_opcos
 
         structure.reload
-        expect(structure.opcos.count).to eq(1)
-        expect(structure.opcos.first).to eq(opco_mobilite)
-      end
-    end
-
-    context "quand la structure a trois IDCC différents" do
-      let(:idcc_values) { [ "3", "18", "29" ] }
-
-      before do
-        structure.update_columns(idcc: idcc_values)
-      end
-
-      it "affilie les trois OPCOs correspondants" do
-        service.affilie_opcos
-
-        structure.reload
-        expect(structure.opcos.count).to eq(3)
-        expect(structure.opcos.to_a).to contain_exactly(opco_mobilite, opco_2i, opco_sante)
+        expect(structure.opco).to eq(opco_mobilite)
       end
     end
 
     context "quand la structure n'a pas d'IDCC" do
       let(:idcc_values) { [] }
 
-      it "n'affilie aucun OPCO" do
-        expect do
-          service.affilie_opcos
-        end.not_to change(StructureOpco, :count)
+      it "n'assigne aucun OPCO" do
+        service.affilie_opcos
 
         structure.reload
-        expect(structure.opcos).to be_empty
+        expect(structure.opco).to be_nil
       end
     end
 
     context "quand la structure a un IDCC nil" do
       let(:idcc_values) { nil }
 
-      it "n'affilie aucun OPCO" do
-        expect do
-          service.affilie_opcos
-        end.not_to change(StructureOpco, :count)
+      it "n'assigne aucun OPCO" do
+        service.affilie_opcos
+
+        structure.reload
+        expect(structure.opco).to be_nil
       end
     end
 
     context "quand la structure a un IDCC inexistant" do
       let(:idcc_values) { [ "99999" ] }
 
-      it "n'affilie aucun OPCO" do
-        expect do
-          service.affilie_opcos
-        end.not_to change(StructureOpco, :count)
+      it "n'assigne aucun OPCO" do
+        service.affilie_opcos
 
         structure.reload
-        expect(structure.opcos).to be_empty
+        expect(structure.opco).to be_nil
       end
     end
   end

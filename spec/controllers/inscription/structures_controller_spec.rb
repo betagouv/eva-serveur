@@ -22,13 +22,13 @@ siret_pro_connect: "13002526500013") }
         end
 
         it "prépare la structure et appelle le service d'affiliation OPCO (même non persistée)" do
-          service_double = instance_double(AffiliationOpcoService)
+          service_double = instance_double(AffiliationOpcoService, affilie_opcos: nil,
+opcos_possibles: [])
           allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
-          allow(service_double).to receive(:affilie_opcos)
 
           get :show
 
-          expect(AffiliationOpcoService).to have_received(:new)
+          expect(AffiliationOpcoService).to have_received(:new).at_least(:once)
           expect(service_double).to have_received(:affilie_opcos)
           expect(response).to have_http_status(:success)
         end
@@ -133,7 +133,7 @@ siret_pro_connect: "13002526500013") }
           }
 
           structure_creée.reload
-          expect(structure_creée.opcos).to contain_exactly(opco1)
+          expect(structure_creée.opco).to eq(opco1)
         end
       end
 

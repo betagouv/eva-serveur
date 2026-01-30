@@ -49,8 +49,13 @@ module ApplicationHelper
   def partenaires_opcos_financeurs(compte)
     return [] if compte.blank?
 
-    opco_financeur = compte.structure&.opco_financeur
+    structure = compte.structure
+    return [] if structure.blank?
 
+    # Évite un N+1 (Bullet) quand la structure est chargée sans :opco (ex. footer admin).
+    ActiveRecord::Associations::Preloader.new(records: [ structure ], associations: :opco).call
+
+    opco_financeur = structure.opco_financeur
     return [] unless opco_financeur.present? && opco_financeur.logo.attached?
 
     [ { logo: cdn_for(opco_financeur.logo), nom: opco_financeur.nom, url: opco_financeur.url } ]

@@ -152,7 +152,7 @@ describe 'Campagne request', type: :request do
 
       context 'quand la campagne a un opco financeur' do
         let(:opco_financeur) { create :opco, :constructys }
-        let(:structure) { create :structure, opcos: [ opco_financeur ] }
+        let(:structure) { create :structure_locale, opco: opco_financeur }
         let(:compte) { create :compte, structure: structure }
         let(:campagne) { create :campagne, compte: compte, code: 'ETE21' }
 

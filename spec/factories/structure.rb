@@ -23,6 +23,10 @@ FactoryBot.define do
 
     factory :structure_locale, class: StructureLocale.to_s do
       type { 'StructureLocale' }
+
+      trait :avec_opco do
+        association :opco, factory: :opco
+      end
     end
     factory :structure_administrative, class: StructureAdministrative.to_s do
       type { 'StructureAdministrative' }

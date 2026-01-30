@@ -29,4 +29,22 @@ class ParcoursType < ApplicationRecord
   def option_redaction?
     situations_configurations.map(&:nom_technique).include?("livraison")
   end
+
+  NOM_TECHNIQUE_GENERIQUE = "eva-entreprise"
+  def evapro_generique?
+    nom_technique == NOM_TECHNIQUE_GENERIQUE
+  end
+
+  def evapro_opco?
+    nom_technique.start_with?("eva-entreprise-")
+  end
+
+  def self.pour_opco(opco)
+    prefixe_nom_technique = "#{NOM_TECHNIQUE_GENERIQUE}-#{opco.slug}"
+    where("nom_technique LIKE ?", "#{prefixe_nom_technique}%")
+  end
+
+  def self.find_evapro_generique!
+    find_by!(nom_technique: NOM_TECHNIQUE_GENERIQUE)
+  end
 end

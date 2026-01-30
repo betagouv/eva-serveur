@@ -20,6 +20,7 @@ class Campagne < ApplicationRecord
   validate :libelle_unique_pour_structure
   delegate :structure_code_postal, :structure, to: :compte
   delegate :opco_financeur, to: :structure
+  delegate :evapro_generique?, :evapro_opco?, to: :parcours_type
   auto_strip_attributes :libelle, :code, squish: true
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
@@ -78,14 +79,6 @@ class Campagne < ApplicationRecord
       self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
       break if Campagne.where(code: self[:code]).none?
     end
-  end
-
-  def evapro_generique?
-    parcours_type.nom_technique == "eva-entreprise"
-  end
-
-  def evapro_opco?
-    parcours_type.nom_technique.start_with?("eva-entreprise-")
   end
 
   private

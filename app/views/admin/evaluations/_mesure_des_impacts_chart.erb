@@ -1,18 +1,27 @@
-<div class="impact-steppers">
+<%
+  # Faible = A, Moyen = B, Fort = C, Très fort = D
+  niveau_to_letter = { faible: "A", moyen: "B", fort: "C", tres_fort: "D" }.freeze
+%>
+<div class="indicateur-impact">
   <% interpretations_impact.each do |interpretation| %>
     <% resultat = synthese[interpretation] %>
-    <% 
-      icone = case interpretation
-      when :performance_collective then "fr-icon-team-line"
-      when :agilite_organisationnelle then "fr-icon-flashlight-line"
-      when :securite_qualite then "fr-icon-shield-line"
-      when :mobilite_professionnelle then "fr-icon-trophy-line"
-      end
-    %>
-    <%= render ImpactStepperComponent.new(
-          interpretation: interpretation,
-          niveau: resultat,
-          icone: icone
-        ) %>
+    <% active_letter = resultat ? niveau_to_letter[resultat.to_sym] : nil %>
+    <div class="indicateur-impact__details">
+      <div class="indicateur-impact__details--titre-et-score">
+        <div class="indicateur-impact__details-titre">
+          <%= t("admin.evaluations.mesure_des_impacts.labels.#{interpretation}") %>
+        </div>
+        <% if active_letter %>
+          <div class="indicateur-impact__details-score">
+            <%= render EvaProScoreComponent.new(active_letter:) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="indicateur-impact__details--definition">
+        <% if resultat %>
+          <%= t("admin.evaluations.mesure_des_impacts.descriptions.#{interpretation}.#{resultat}") %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>

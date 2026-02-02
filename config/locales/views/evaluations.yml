@@ -343,10 +343,10 @@ fr:
           contenu_cout:
             texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
             titre:
-              a: "Coûts : 1% de votre masse salariale"
-              b: "Coûts : 2% de votre masse salariale"
-              c: "Coûts : 3 à 4% de votre masse salariale"
-              d: "Coûts : 5 à 6% de votre masse salariale"
+              a: "1%"
+              b: "2%"
+              c: "3 à 4%"
+              d: "5 à 6%"
             suite:
               a: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
               b: "À 2 %, les effets commencent à se faire sentir. Une démarche préventive permettrait de réduire rapidement ces coûts et d'éviter qu'ils ne s'installent. Assurez vous que des stratégies de dissimulation ou de contournement des difficultés ne viennent pas à terme perturber votre organisation et sa capacité à évoluer."

@@ -49,4 +49,15 @@
     gap: .5rem;
     justify-content: flex-end;
   }
+
+  // A supprimer quand on gerera le mobile
+  .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not([class^=fr-btns-group--icon-]):not([class*=" fr-btns-group--icon-"]) .fr-btn[class^=fr-icon-] {
+    font-size: .875rem;
+    line-height: 1.5rem;
+    max-height: none;
+    max-width: 100%;
+    min-height: 2rem;
+    overflow: initial;
+    padding: .25rem .75rem;
+  }
 }

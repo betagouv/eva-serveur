@@ -9,10 +9,54 @@
   gap: $dsfr-spacing-8v;
 }
 
-// Steppers d'impact
-.impact-steppers {
-  display: grid;
-  gap: $dsfr-spacing-8v;
+.indicateur-impact {
+  display: flex;
+  padding: 0 var(--Space-2W, 16px);
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+}
+
+.indicateur-impact__details {
+  display: flex;
+  padding: var(--Space-3V, 12px) 0;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
+  border-top: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.indicateur-impact__details--titre-et-score {
+  display: flex;
+  width: var(--Grille-2-colonnes, 180px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1V, 4px);
+}
+
+.indicateur-impact__details-titre {
+  @include body-sm-semibold();
+  color: var(--light-decisions-text-text-title-grey, #161616);
+}
+
+.indicateur-impact__details-score {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.indicateur-impact__details--definition {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1W, 8px);
+  flex: 1 0 0;
+  align-self: stretch;
 }
 
 // Callouts d'impact

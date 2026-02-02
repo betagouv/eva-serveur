@@ -18,7 +18,7 @@ class EvaProScoreItemComponent < ViewComponent::Base
   end
 
   def css_classes
-    classes = ["eva-pro-score-item", "eva-pro-score-item--#{letter.downcase}"]
+    classes = [ "eva-pro-score-item", "eva-pro-score-item--#{letter.downcase}" ]
     classes << "eva-pro-score-item--active" if active?
     classes.join(" ")
   end

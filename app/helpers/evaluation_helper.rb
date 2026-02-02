@@ -101,10 +101,21 @@ module EvaluationHelper
     SEUILS_PALIERS_RISQUE[seuil_max]
   end
 
+  def palier_score_cout(score_cout)
+    SCORE_COUT_TO_PALIER.fetch(score_cout.to_sym, "D - Mauvais")
+  end
+
   SEUILS_PALIERS_RISQUE = {
     10 => "A - Très bon",
     25 => "B - Bon",
     50 => "C - Moyen",
     100 => "D - Mauvais"
+  }.freeze
+
+  SCORE_COUT_TO_PALIER = {
+    faible: "A - Très bon",
+    moyen: "B - Bon",
+    fort: "C - Moyen",
+    tres_fort: "D - Mauvais"
   }.freeze
 end

@@ -9,13 +9,12 @@
 
 <div id="diag-risques-entrerpise">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
-  <div class="panel">
-    <div class="fr-pl-4w fr-pr-4w">
-      <%= render MiseEnAvantComponent.new(
-        titre: t(".callout.titre", pourcentage_risque: pourcentage_risque),
-        description: t(".callout.description", pourcentage_risque: pourcentage_risque),
-        classes: classes.push("fr-mb-0")
-      ) %>
-    </div>
+  <div>
+    <%= render MiseEnAvantComponent.new(
+      titre: t(".callout.titre", pourcentage_risque: pourcentage_risque),
+      description: t(".callout.description", pourcentage_risque: pourcentage_risque),
+      classes: classes.push("fr-mb-0")
+    ) %>
   </div>
+
 </div>

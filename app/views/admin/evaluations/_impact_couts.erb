@@ -3,7 +3,7 @@
 <% explication_numerique = explication_numerique(synthese) %>
 <% resultat_strategie_lettre = lettre_score_strategie(synthese) %>
 <% resultat_numerique_lettre = lettre_score_numerique(synthese) %>
-<div class="fr-pl-4w fr-pr-4w couts">
+<div class="couts">
   <% if synthese[:score_cout] && contenu_cout.present? %>
     <div class="couts__mise-en-avant">
       <%= render Evaluation::MesureImpactCalloutComponent.new(

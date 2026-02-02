@@ -1,7 +1,8 @@
 niveaux_competences = restitution_globale.niveaux_competences
 
 h2 t(".titre"), class: "evaluation__titre"
-div class: "panel evaluation__administration" do
+
+div class: (eva_pro ? "evaluation__administration" : "panel evaluation__administration") do
   render "informations_complementaires"
 
   if resource.campagne.avec_diagnostic?

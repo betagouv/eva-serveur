@@ -1,2 +1,2 @@
 render "restitution_globale_evapro", pdf: false
-render "panel_administration" if can?(:manage, Compte)
+render "panel_administration", eva_pro: true if can?(:manage, Compte)

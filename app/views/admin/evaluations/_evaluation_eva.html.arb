@@ -1,3 +1,3 @@
 render "details_evaluation"
 render "restitution_globale", pdf: false
-render "panel_administration" if can?(:manage, Compte)
+render "panel_administration", eva_pro: false if can?(:manage, Compte)

@@ -9,6 +9,7 @@ module Admin
     def bouton_copier; end
     def barre_segmentee; end
     def impact_stepper; end
+    def eva_pro_score; end
     def card; end
     def carte; end
     def carte_v2; end

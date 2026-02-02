@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     get '/ui_kit/header', to: 'ui_kit#header'
     get '/ui_kit/lien', to: 'ui_kit#lien'
     get '/ui_kit/menu_actions', to: 'ui_kit#menu_actions'
+    get '/ui_kit/mesure_chiffre_cle', to: 'ui_kit#mesure_chiffre_cle'
     get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
     get '/ui_kit/panel', to: 'ui_kit#panel'
     get '/ui_kit/pastille', to: 'ui_kit#pastille'

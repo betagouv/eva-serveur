@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo MesureChiffreCleComponent</h1>
+
+  <p class="fr-text--lead">
+    Ce composant affiche une mesure avec un chiffre clé et deux paragraphes d'explication selon le palier.
+  </p>
+
+  <h2>Tous les paliers</h2>
+
+  <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+    <div class="fr-mb-5w">
+      <h3>Palier <%= palier_label %></h3>
+      <%= render Evaluation::MesureChiffreCleComponent.new(
+        palier: palier_label,
+        prefixe: "Taux de risque",
+        chiffre: "10 %",
+        explications: {
+          texte: "Exemple de texte d'explication pour le palier #{palier_label}. Ce texte décrit la situation générale.",
+          suite: "Exemple de suite d'explication pour le palier #{palier_label}. Ce texte fournit des recommandations ou des actions à entreprendre."
+        }
+      ) %>
+    </div>
+  <% end %>
+
+  <h2>Exemple avec suffixe</h2>
+
+  <div class="fr-mb-5w">
+    <%= render Evaluation::MesureChiffreCleComponent.new(
+      palier: "A - Très bon",
+      chiffre: "1%",
+      suffixe: "de votre masse salariale",
+      explications: {
+        texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs.",
+        suite: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
+      }
+    ) %>
+  </div>
+
+  <h2>Exemple avec préfixe uniquement</h2>
+
+  <div class="fr-mb-5w">
+    <%= render Evaluation::MesureChiffreCleComponent.new(
+      palier: "B - Bon",
+      prefixe: "Score",
+      chiffre: "75",
+      explications: {
+        texte: "Votre score indique une situation à surveiller.",
+        suite: "Il est recommandé de mettre en place des actions préventives pour éviter que la situation ne se dégrade."
+      }
+    ) %>
+  </div>
+
+  <h2>Exemple sans préfixe ni suffixe</h2>
+
+  <div class="fr-mb-5w">
+    <%= render Evaluation::MesureChiffreCleComponent.new(
+      palier: "C - Moyen",
+      chiffre: "50",
+      explications: {
+        texte: "Votre situation nécessite une attention particulière.",
+        suite: "Des actions correctives sont recommandées pour améliorer la situation."
+      }
+    ) %>
+  </div>
+</div>

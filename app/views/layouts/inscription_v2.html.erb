@@ -5,7 +5,8 @@
   logo: "logo-anlci.svg",
   logo_alt: "ANLCI",
   logo_url: "/",
-  titre: "Paramétrage de votre compte",
+  titre: current_compte.present? ? "Paramétrage de votre compte" : "eva.anlci.gouv.fr",
+  tagline: current_compte.present? ? nil : "Un service public numérique de l'ANLCI",
   current_compte: current_compte,
   actions: [
     {

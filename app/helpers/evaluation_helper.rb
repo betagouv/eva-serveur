@@ -93,4 +93,18 @@ module EvaluationHelper
       render NomAnonymisableComponent.new(evaluation.beneficiaire)
     end
   end
+
+  def palier_pourcentage_risque(pourcentage_risque)
+    seuil_max = SEUILS_PALIERS_RISQUE.keys.find { |seuil| pourcentage_risque <= seuil }
+    return "D - Mauvais" if seuil_max.nil?
+
+    SEUILS_PALIERS_RISQUE[seuil_max]
+  end
+
+  SEUILS_PALIERS_RISQUE = {
+    10 => "A - Très bon",
+    25 => "B - Bon",
+    50 => "C - Moyen",
+    100 => "D - Mauvais"
+  }.freeze
 end

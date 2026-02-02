@@ -233,10 +233,11 @@ fr:
         evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
       mesure_des_risques:
-        titre: "Mesure des risques"
-        callout:
-          titre: Votre taux de risque est de %{pourcentage_risque}%
-          description: Compte tenu de vos réponses, vous avez plus de %{pourcentage_risque}% de risque d’avoir des salariés/agents en situation d’illettrisme et en difficulté dans la maîtrise des compétences numériques ou des compétences de base.
+        titre: "Analyse des risques liés aux compétences de base dans votre organisation"
+        prefixe: "Taux de risque"
+        explication:
+          paragraphe_1: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
+          paragraphe_2: "Ce niveau de risque nécessite une action prioritaire et coordonnée, incluant un diagnostic complémentaire de vos besoins, l'appui de partenaires spécialisés et la mise en place rapide de mesures de sécurisation des situations de travail."
       mesure_des_impacts:
         titre: "Impacts"
         chart:

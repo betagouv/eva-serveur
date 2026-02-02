@@ -142,3 +142,33 @@
 .evaluation__details--panel {
   margin-bottom: $dsfr-spacing-12v;
 }
+
+.evaluation__mesure-des-risques {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: var(--Space-3W, 1.5rem);
+}
+
+.evaluation__chiffre-cle {
+  width: 17.625rem;
+}
+
+.evaluation__chiffre-cle .chiffre-cle {
+  height: 100%;
+}
+
+.evaluation__explication {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-2W, 1rem);
+
+}
+
+.evaluation__explication-label{
+  @include body-sm();
+  margin: 0;
+}

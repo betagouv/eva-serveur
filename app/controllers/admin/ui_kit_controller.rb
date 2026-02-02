@@ -22,6 +22,7 @@ module Admin
     def header; end
     def lien; end
     def mise_en_avant; end
+    def mesure_chiffre_cle; end
     def nom_anonymisable; end
     def pastille; end
     # def qcm; end commenté pour le moment car besoin d'une resource

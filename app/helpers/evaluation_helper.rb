@@ -105,6 +105,10 @@ module EvaluationHelper
     SCORE_COUT_TO_PALIER.fetch(score_cout.to_sym, "D - Mauvais")
   end
 
+  def palier_to_lettre(palier)
+    PALIER_TO_LETTRE.fetch(palier, "d")
+  end
+
   SEUILS_PALIERS_RISQUE = {
     10 => "A - Très bon",
     25 => "B - Bon",
@@ -117,5 +121,12 @@ module EvaluationHelper
     moyen: "B - Bon",
     fort: "C - Moyen",
     tres_fort: "D - Mauvais"
+  }.freeze
+
+  PALIER_TO_LETTRE = {
+    "A - Très bon" => "a",
+    "B - Bon" => "b",
+    "C - Moyen" => "c",
+    "D - Mauvais" => "d"
   }.freeze
 end

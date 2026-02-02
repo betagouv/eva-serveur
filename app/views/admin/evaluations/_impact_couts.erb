@@ -5,23 +5,15 @@
 <% resultat_numerique_lettre = lettre_score_numerique(synthese) %>
 <div class="couts">
   <% if synthese[:score_cout] && contenu_cout.present? %>
-    <div class="evaluation__mesure-des-risques">
-      <div class="evaluation__chiffre-cle">
-        <%= render ChiffreCleComponent.new(
-          palier: palier_score_cout(synthese[:score_cout]),
-          chiffre: contenu_cout[:titre],
-          suffixe: "de votre masse salariale",
-        ) %>
-      </div>
-      <div class="evaluation__explication">
-        <p class="evaluation__explication-label">
-          <%= contenu_cout[:texte] %>
-        </p>
-        <p class="evaluation__explication-label">
-          <%= contenu_cout[:suite] %>
-        </p>
-      </div>
-    </div>
+    <%= render Evaluation::MesureChiffreCleComponent.new(
+      palier: palier_score_cout(synthese[:score_cout]),
+      chiffre: contenu_cout[:titre],
+      suffixe: "de votre masse salariale",
+      explications: {
+        texte: contenu_cout[:texte],
+        suite: contenu_cout[:suite]
+      }
+    ) %>
   <% end %>
 
   <div class="couts__graphiques">

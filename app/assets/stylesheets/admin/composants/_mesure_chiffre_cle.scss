@@ -1,0 +1,28 @@
+.mesure-chiffre-cle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  gap: var(--Space-3W, 1.5rem);
+}
+
+.mesure-chiffre-cle__chiffre-cle {
+  width: 17.625rem;
+}
+
+.mesure-chiffre-cle__chiffre-cle .chiffre-cle {
+  height: 100%;
+}
+
+.mesure-chiffre-cle__explication {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-2W, 1rem);
+}
+
+.mesure-chiffre-cle__explication-label {
+  @include body-sm();
+  margin: 0;
+}

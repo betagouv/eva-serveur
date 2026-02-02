@@ -236,8 +236,16 @@ fr:
         titre: "Analyse des risques liés aux compétences de base dans votre organisation"
         prefixe: "Taux de risque"
         explication:
-          paragraphe_1: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
-          paragraphe_2: "Ce niveau de risque nécessite une action prioritaire et coordonnée, incluant un diagnostic complémentaire de vos besoins, l'appui de partenaires spécialisés et la mise en place rapide de mesures de sécurisation des situations de travail."
+          texte:
+            a: "Vos résultats indiquent que votre organisation ne présente pas, à ce stade, de signes préoccupants en matière de maîtrise des compétences de base. Ce niveau de risque faible ne doit toutefois pas conduire à relâcher votre vigilance."
+            b: "Vos réponses suggèrent que certains salariés ou agents peuvent percevoir l'évolution des exigences professionnelles comme une menace pour leur employabilité."
+            c: "Vos résultats mettent en évidence un risque significatif de présence, au sein de vos équipes, de salariés ou agents ayant des difficultés dans la maîtrise des compétences de base ou se trouvant en situation d'insécurité professionnelle face aux exigences actuelles ou futures (numérique, IA, sécurité, qualité, lean, etc.)."
+            d: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
+          suite:
+            a: "Maintenez une démarche préventive et poursuivez l'accompagnement de la montée en compétences de vos équipes afin d'anticiper les évolutions du travail et les transformations à venir."
+            b: "Nous vous recommandons d'intensifier votre veille interne et de consolider vos actions préventives afin d'éviter que ces fragilités ne s'accentuent. Une analyse régulière des impacts des nouvelles exigences professionnelles sera déterminante."
+            c: "Il est recommandé d'engager rapidement une démarche structurée d'identification des besoins, de sécurisation des parcours et d'adaptation des environnements de travail."
+            d: "Ce niveau de risque nécessite une action prioritaire et coordonnée, incluant un diagnostic complémentaire de vos besoins, l'appui de partenaires spécialisés et la mise en place rapide de mesures de sécurisation des situations de travail."
       mesure_des_impacts:
         titre: "Impacts"
         chart:

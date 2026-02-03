@@ -1,5 +1,6 @@
 div class: "evaluation-evapro" do
   h1 titre_evaluation(evaluation), class: "evaluation-evapro__titre"
+
   diag_risques_entreprise = restitution_globale.diag_risques_entreprise
   pourcentage_risque = nil
   if diag_risques_entreprise
@@ -20,7 +21,7 @@ div class: "evaluation-evapro" do
     )
   end
 
-  if diag_risques_entreprise && pdf == false
+  if diag_risques_entreprise && pdf == false && evaluation_impact_general.present?
     render(
       partial: "bilan_evapro",
       locals: {

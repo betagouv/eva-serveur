@@ -1,2 +1,4 @@
-render "restitution_globale_evapro", pdf: false
-render "panel_administration", eva_pro: true if can?(:manage, Compte)
+div class: "evaluation-evapro" do
+    render "restitution_globale_evapro", pdf: false
+    render "panel_administration", eva_pro: true if can?(:manage, Compte)
+end

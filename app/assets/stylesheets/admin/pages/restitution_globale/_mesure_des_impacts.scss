@@ -102,7 +102,7 @@
 
 .couts__colonnes {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--Space-6W, 48px);
   align-self: stretch;
 }
@@ -113,6 +113,7 @@
   align-items: flex-start;
   gap: var(--Space-3W, 24px);
   flex: 1 0 0;
+  align-self: stretch;
 }
 
 .couts__pile-fleches {
@@ -122,6 +123,7 @@
   align-items: flex-start;
   gap: var(--Space-2W, 16px);
   align-self: stretch;
+  flex: 1 0 0;
   border: 1px solid $grey-900;
 }
 

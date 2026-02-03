@@ -1,9 +1,8 @@
 <% complet = evaluation_impact_general.present? %>
-
 <div id="evaluation-impact-general">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <div class="fr-pb-0">
-    <div class="evaluation-impact-general__resultats fr-mb-4w">
+    <div class="evaluation-impact-general__resultats">
 
       <% if complet %>
         <% synthese = evaluation_impact_general.synthese %>
@@ -27,8 +26,9 @@
       <% end %>
     </div>
   </div>
-  <h2 class="evaluation__titre">Coûts</h2>
+
   <% if complet %>
+    <h2 class="evaluation__titre fr-mt-4w">Coûts</h2>
     <%= render "impact_couts", synthese: synthese %>
   <% end %>
 

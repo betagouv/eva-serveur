@@ -142,3 +142,26 @@
 .evaluation__details--panel {
   margin-bottom: $dsfr-spacing-12v;
 }
+
+
+#evaluation__details,
+.evaluation-evapro {
+  .card-informations {
+    $grid-columns: 3;
+    $grid-gutter-width: 0;
+    @import "../../../bootstrap_grid";
+    // utilisation de la propriété important pour forcer l'import bootstrap à ne pas écraser cette ligne
+
+    .row {
+      margin-bottom: 1.5rem;
+
+      .col:last-child {
+        font-weight: 500;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -3,8 +3,8 @@
 }
 
 // Cacher le bloc "Gestion" uniquement sur la page show d'évaluation
-body.admin_evaluations.show #action_items_sidebar_section,
-body[class*="evaluations"].show #action_items_sidebar_section {
+body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) #action_items_sidebar_section,
+body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #action_items_sidebar_section {
   display: none;
 }
 

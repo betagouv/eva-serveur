@@ -1,5 +1,5 @@
 
-body.admin_evaluations.show {
+body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   .sidebar {
     border-left: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
     width: 305px !important;

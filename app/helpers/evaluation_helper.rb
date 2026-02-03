@@ -86,12 +86,8 @@ module EvaluationHelper
     score_to_lettre(synthese[:score_numerique])
   end
 
-  def titre_evaluation(evaluation)
-    if evaluation.opco_financeur
-      evaluation.structure&.nom
-    else
-      render NomAnonymisableComponent.new(evaluation.beneficiaire)
-    end
+  def titre_evaluation_evapro(evaluation)
+    evaluation.structure&.nom
   end
 
   def palier_pourcentage_risque(pourcentage_risque)

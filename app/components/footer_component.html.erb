@@ -1,147 +1,147 @@
 <footer class="fr-footer" role="contentinfo">
 
-	<div class="fr-footer__top">
-		<div class="fr-container">
-			<div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
-				<div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
-					<h3 class="fr-footer__top-cat">
-						<%= t("footer.navigation.decouvrir_eva") %>
-					</h3>
-					<ul class="fr-footer__top-list">
-						<li>
-							<a href="#{ENV['URL_SITE_VITRINE']}/nos-missions/" rel="noopener external" class="fr-footer__top-link"><%= t("footer.navigation.un_service_anlci") %></a>
-						</li>
-						<li>
+  <div class="fr-footer__top">
+    <div class="fr-container">
+      <div class="fr-grid-row fr-grid-row--start fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
+          <h3 class="fr-footer__top-cat">
+            <%= t("footer.navigation.decouvrir_eva") %>
+          </h3>
+          <ul class="fr-footer__top-list">
+            <li>
+              <a href="#{ENV['URL_SITE_VITRINE']}/nos-missions/" rel="noopener external" class="fr-footer__top-link"><%= t("footer.navigation.un_service_anlci") %></a>
+            </li>
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/lillettrisme-en-france/" rel="noopener external" class="fr-footer__top-link"><%= t("footer.navigation.illettrisme_france") %></a>
-						</li>
-						<li>
+            </li>
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/competences/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.parcours_competences") %></a>
-						</li>
-					</ul>
-				</div>
-				<div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
-					<h3 class="fr-footer__top-cat">
-						<%= t("footer.navigation.cas_usages") %>
-					</h3>
-					<ul class="fr-footer__top-list">
-						<li>
+            </li>
+          </ul>
+        </div>
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
+          <h3 class="fr-footer__top-cat">
+            <%= t("footer.navigation.cas_usages") %>
+          </h3>
+          <ul class="fr-footer__top-list">
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/reperer-les-difficultes/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.reperer_difficultes") %></a>
-						</li>
-						<li>
+            </li>
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/positionner-les-competences/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.positionner_competences") %></a>
-						</li>
-					</ul>
-				</div>
-				<div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
-					<h3 class="fr-footer__top-cat">
-						<%= t("footer.navigation.ressources") %>
-					</h3>
-					<ul class="fr-footer__top-list">
-						<li>
+            </li>
+          </ul>
+        </div>
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
+          <h3 class="fr-footer__top-cat">
+            <%= t("footer.navigation.ressources") %>
+          </h3>
+          <ul class="fr-footer__top-list">
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/centre-daide/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.supports") %></a>
-						</li>
-						<li>
+            </li>
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/faq/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.faq") %></a>
-						</li>
-						<li>
+            </li>
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/formation-et-presentation/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.formation_presentation") %></a>
-						</li>
-					</ul>
-				</div>
-				<div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
-					<h3 class="fr-footer__top-cat">
-						<%= t("footer.navigation.en_savoir_plus") %>
-					</h3>
-					<ul class="fr-footer__top-list">
-						<li>
+            </li>
+          </ul>
+        </div>
+        <div class="fr-col-12 fr-col-sm-3 fr-col-md-3">
+          <h3 class="fr-footer__top-cat">
+            <%= t("footer.navigation.en_savoir_plus") %>
+          </h3>
+          <ul class="fr-footer__top-list">
+            <li>
               <a href="#{ENV['URL_SITE_VITRINE']}/contact/" class="fr-footer__top-link" rel="noopener external"><%= t("footer.navigation.contact") %></a>
-						</li>
-						<li>
-							<a href="https://beta.gouv.fr/startups/eva.html" target="_blank" rel="noopener external" class="fr-footer__top-link"><%= t("footer.navigation.equipe") %></a>
-						</li>
-						<li>
-							<a href="https://github.com/betagouv/eva-serveur" class="fr-footer__top-link" target="_blank" rel="noopener external"><%= t("footer.navigation.code_source") %></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="fr-container">
-		<div class="fr-footer__body">
-			<div class="fr-footer__brand fr-enlarge-link">
-				<p class="fr-logo">
-					<%= t("footer.brand.republique") %>
-					<br><%= t("footer.brand.francaise") %>
-				</p>
-				<a title="<%= t("footer.brand.retour_accueil_title") %>" href="/" class="fr-footer__brand-link">
-					<%= image_tag "logo_anlci.svg", alt: t("logo_anlci"), class: "fr-footer__logo", style: "width:10rem;" %>
-				</a>
-			</div>
-			<div class="fr-footer__content">
-				<p class="fr-footer__content-desc"><%= t("footer.description") %></p>
-				<ul class="fr-footer__content-list">
-					<li class="fr-footer__content-item">
-						<a title="<%= t("footer.content.info_gouv_title") %>" href="https://info.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">info.gouv.fr</a>
-					</li>
-					<li class="fr-footer__content-item">
-						<a title="<%= t("footer.content.service_public_title") %>" href="https://service-public.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">service-public.gouv.fr</a>
-					</li>
-					<li class="fr-footer__content-item">
-						<a title="<%= t("footer.content.legifrance_title") %>" href="https://legifrance.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">legifrance.gouv.fr</a>
-					</li>
-					<li class="fr-footer__content-item">
-						<a title="<%= t("footer.content.data_gouv_title") %>" href="https://data.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">data.gouv.fr</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<% if @avec_partenaires %>
-			<div class="fr-footer__partners">
-				<h2 class="fr-footer__partners-title"><%= t("footer.partners.titre") %></h2>
-				<div class="fr-footer__partners-logos">
-					<div class="fr-footer__partners-main">
-						<% partenaires_par_defaut.each do |partenaire| %>
-							<a class="fr-footer__partners-link" href="<%= partenaire[:url] %>" target="_blank" rel="noopener external">
-								<%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
-							</a>
-						<% end %>
-					</div>
-					<% if @partenaires.present? %>
-						<div class="fr-footer__partners-sub">
-							<ul>
-								<% @partenaires.each do |partenaire| %>
-									<li>
-										<a class="fr-footer__partners-link" href="<%= partenaire[:url] || "" %>" <%= partenaire[:url] ? 'target="_blank" rel="noopener external"'.html_safe : "" %>>
-											<%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
-										</a>
-									</li>
-								<% end %>
-							</ul>
-						</div>
-					<% end %>
-				</div>
-			</div>
-		<% end %>
-		<div class="fr-footer__bottom">
-			<ul class="fr-footer__bottom-list" style="margin-bottom: 0;">
-				<li class="fr-footer__bottom-item">
+            </li>
+            <li>
+              <a href="https://beta.gouv.fr/startups/eva.html" target="_blank" rel="noopener external" class="fr-footer__top-link"><%= t("footer.navigation.equipe") %></a>
+            </li>
+            <li>
+              <a href="https://github.com/betagouv/eva-serveur" class="fr-footer__top-link" target="_blank" rel="noopener external"><%= t("footer.navigation.code_source") %></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-container">
+    <div class="fr-footer__body">
+      <div class="fr-footer__brand fr-enlarge-link">
+        <p class="fr-logo">
+        <%= t("footer.brand.republique") %>
+        <br><%= t("footer.brand.francaise") %>
+        </p>
+        <a title="<%= t("footer.brand.retour_accueil_title") %>" href="/" class="fr-footer__brand-link">
+          <%= image_tag "logo_anlci.svg", alt: t("logo_anlci"), class: "fr-footer__logo", style: "width:10rem;" %>
+        </a>
+      </div>
+      <div class="fr-footer__content">
+        <p class="fr-footer__content-desc"><%= t("footer.description") %></p>
+        <ul class="fr-footer__content-list">
+          <li class="fr-footer__content-item">
+            <a title="<%= t("footer.content.info_gouv_title") %>" href="https://info.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">info.gouv.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+            <a title="<%= t("footer.content.service_public_title") %>" href="https://service-public.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">service-public.gouv.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+            <a title="<%= t("footer.content.legifrance_title") %>" href="https://legifrance.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">legifrance.gouv.fr</a>
+          </li>
+          <li class="fr-footer__content-item">
+            <a title="<%= t("footer.content.data_gouv_title") %>" href="https://data.gouv.fr" target="_blank" rel="noopener external" class="fr-footer__content-link">data.gouv.fr</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <% if @avec_partenaires %>
+      <div class="fr-footer__partners">
+        <h2 class="fr-footer__partners-title"><%= t("footer.partners.titre") %></h2>
+        <div class="fr-footer__partners-logos">
+          <div class="fr-footer__partners-main">
+            <% partenaires_par_defaut.each do |partenaire| %>
+              <a class="fr-footer__partners-link" href="<%= partenaire[:url] %>" target="_blank" rel="noopener external">
+                <%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
+              </a>
+            <% end %>
+          </div>
+          <% if @partenaires.present? %>
+            <div class="fr-footer__partners-sub">
+              <ul>
+                <% @partenaires.each do |partenaire| %>
+                  <li>
+                    <a class="fr-footer__partners-link" href="<%= partenaire[:url] || "" %>" <%= partenaire[:url] ? 'target="_blank" rel="noopener external"'.html_safe : "" %>>
+                      <%= image_tag partenaire[:logo], alt: partenaire[:nom], class: "fr-footer__logo", style: "height: 5.625rem;" %>
+                    </a>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="fr-footer__bottom">
+      <ul class="fr-footer__bottom-list" style="margin-bottom: 0;">
+        <li class="fr-footer__bottom-item">
           <a href="#{ENV['URL_SITE_VITRINE']}/declaration-daccessibilite/" class="fr-footer__bottom-link" rel="noopener external"><%= t("footer.bottom.accessibilite") %></a>
-				</li>
-				<li class="fr-footer__bottom-item">
+        </li>
+        <li class="fr-footer__bottom-item">
           <a href="#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/" class="fr-footer__bottom-link" rel="noopener external"><%= t("footer.bottom.mentions_legales") %></a>
-				</li>
-				<li class="fr-footer__bottom-item">
+        </li>
+        <li class="fr-footer__bottom-item">
           <a href="#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/" class="fr-footer__bottom-link" rel="noopener external"><%= t("footer.bottom.donnees_personnelles") %></a>
-				</li>
-				<li class="fr-footer__bottom-item">
-					<a href="#tarteaucitron" class="fr-footer__bottom-link"><%= t("footer.bottom.gestion_cookies") %></a>
-				</li>
-			</ul>
-			<div class="fr-footer__bottom-copy">
-				<p><%= t("footer.bottom.licence_text") %> <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" rel="noopener external" title="<%= t("footer.bottom.licence_title") %>"><%= t("footer.bottom.licence_etalab") %></a>
-				</p>
-			</div>
-		</div>
-	</div>
+        </li>
+        <li class="fr-footer__bottom-item">
+          <a href="#tarteaucitron" class="fr-footer__bottom-link"><%= t("footer.bottom.gestion_cookies") %></a>
+        </li>
+      </ul>
+      <div class="fr-footer__bottom-copy">
+        <p><%= t("footer.bottom.licence_text") %> <a href="https://github.com/etalab/licence-ouverte/blob/master/LO.md" rel="noopener external" title="<%= t("footer.bottom.licence_title") %>"><%= t("footer.bottom.licence_etalab") %></a>
+        </p>
+      </div>
+    </div>
+  </div>
 </footer>

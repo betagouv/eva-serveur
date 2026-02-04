@@ -11,7 +11,7 @@
 
         <div class="evaluation-bilan-evapro__opco-financeur">
           <% if opco.logo.attached? %>
-            <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: t(".opco_logo_alt", nom: opco.nom) %>
+            <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
           <% end %>
           <div class="evaluation-bilan-evapro__opco-financeur-details">
             <% if opco.telephone %>

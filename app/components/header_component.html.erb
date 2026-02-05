@@ -1,4 +1,4 @@
-<header role="banner" class="fr-header">
+<header role="banner" class="fr-header <%= "fr-header--logged-in" if @current_compte.present? %>">
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">
@@ -27,7 +27,7 @@
             <!-- la classe initiale est fr-header__tools-links, elle a ete remplacee pour le moment parce qu'elle cree une erreur js et empeche d'ouvrir n'importe qu'elle modal -->
             <div class="tools-links">
               <ul class="fr-btns-group">
-                <% @actions.each do |action| %>
+                <% actions.each do |action| %>
                   <li>
                     <a href="<%= action[:url] %>" class="<%= [ action[:icon_class], action[:button_class] ].compact.join(" ") %>">
                       <%= action[:label] %>
@@ -41,4 +41,11 @@
       </div>
     </div>
   </div>
+  <% if affiche_navigation? %>
+    <div class="fr-header__menu">
+      <div class="fr-container">
+        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+      </div>
+    </div>
+  <% end %>
 </header>

@@ -28,7 +28,7 @@ class BoutonComponent < ViewComponent::Base
     md: "grand-bouton"
   }.freeze
 
-  BUTTON_TAG_MAPPINGS = %i[a submit button].freeze
+  BUTTON_TAG_MAPPINGS = %i[a submit button button_with_form].freeze
 
   def initialize(url, type: :primary, tag: :a, size: :md, **params)
     unless BUTTON_TAG_MAPPINGS.include?(tag)

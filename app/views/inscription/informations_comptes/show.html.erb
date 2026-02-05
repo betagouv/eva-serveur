@@ -79,7 +79,7 @@
             ) %>
           </div>
           <div class="fr-col-12">
-            <% cgu_lien = capture { render LienComponent.new("conditions générales d'utilisation d'eva", cgu_path, externe: true) } %>
+            <% cgu_lien = capture { render LienComponent.new("conditions générales d'utilisation d'eva", cgu_path, nouvelle_fenetre: true) } %>
             <%= compte.input :cgu_acceptees, label: raw("J'accepte les&nbsp;" + cgu_lien), required: true %>
           </div>
           <div class="fr-col-12">

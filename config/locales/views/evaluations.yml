@@ -2,13 +2,13 @@ fr:
   admin:
     evaluations:
       bilan_evapro:
-        titre: "Bilan : votre situation"
-        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."
+        titre: "Bilan : votre situation"
+        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."
         opco_titre: "Votre opérateur de compétences peut vous aider :"
       aller_plus_loin:
         titre: "Aller plus loin"
         image_alt: "Focus incoutournable"
-        explication: "« Les Incontournables » constituent une boite à outils à destination des entreprises, OPCO et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
+        explication: "« Les Incontournables » constituent une boite à outils à destination des entreprises, OPCO et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
         lien_texte: "www.bao-incontournables.fr"
         titre_definitions: "Définitions des impacts"
         performance_collective:
@@ -19,7 +19,7 @@ fr:
           description: "cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
         securite_qualite:
           titre: "Sécurité et qualité : "
-          description: "cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+          description: "cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
         mobilite_professionnelle:
           titre: "Mobilité professionnelle : "
           description: "cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
@@ -229,7 +229,7 @@ fr:
       show:
         titre:
           restitution_globale: Restitution globale
-        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
+        evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
       mesure_des_risques:
         titre: "Analyse des risques liés aux compétences de base dans votre organisation"
@@ -239,7 +239,7 @@ fr:
             a: "Vos résultats indiquent que votre organisation ne présente pas, à ce stade, de signes préoccupants en matière de maîtrise des compétences de base. Ce niveau de risque faible ne doit toutefois pas conduire à relâcher votre vigilance."
             b: "Vos réponses suggèrent que certains salariés ou agents peuvent percevoir l'évolution des exigences professionnelles comme une menace pour leur employabilité."
             c: "Vos résultats mettent en évidence un risque significatif de présence, au sein de vos équipes, de salariés ou agents ayant des difficultés dans la maîtrise des compétences de base ou se trouvant en situation d'insécurité professionnelle face aux exigences actuelles ou futures (numérique, IA, sécurité, qualité, lean, etc.)."
-            d: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
+            d: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
           suite:
             a: "Maintenez une démarche préventive et poursuivez l'accompagnement de la montée en compétences de vos équipes afin d'anticiper les évolutions du travail et les transformations à venir."
             b: "Nous vous recommandons d'intensifier votre veille interne et de consolider vos actions préventives afin d'éviter que ces fragilités ne s'accentuent. Une analyse régulière des impacts des nouvelles exigences professionnelles sera déterminante."

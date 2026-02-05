@@ -37,6 +37,40 @@ a.pas-souligne {
   z-index: 99; // nécessaire pour positionner au dessus du breadcumb en version mobile
 }
 
+// Evapro admin: ajustements layout DSFR dans ActiveAdmin
+body.logged_in.evapro_admin {
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  .fr-header .fr-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  // Annule la contrainte de largeur du header AA
+  .header {
+    max-width: none;
+    margin: 0;
+  }
+
+  #title_bar {
+    display: none;
+  }
+
+  #title_bar,
+  #active_admin_content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 // Fix conflit entre l'accordeon et les boutons
 .fr-accordion__btn {
   font-family: $font-titre;

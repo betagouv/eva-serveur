@@ -38,7 +38,7 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.supports"), "#{ENV['URL_SITE_VITRINE']}/centre-daide/", externe: true, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.supports"), "#{ENV['URL_SITE_VITRINE']}/supports/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
               <%= render LienComponent.new(t("footer.navigation.faq"), "#{ENV['URL_SITE_VITRINE']}/faq/", externe: true, class: "fr-footer__top-link") %>
@@ -125,11 +125,11 @@
     <% end %>
     <div class="fr-footer__bottom">
       <ul class="fr-footer__bottom-list" style="margin-bottom: 0;">
-        <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.accessibilite"), "#{ENV['URL_SITE_VITRINE']}/declaration-daccessibilite/", externe: true, class: "fr-footer__bottom-link") %>
+        <li class="fr-footer__bottom-item fr-footer__bottom-link">
+          <%= t("footer.bottom.accessibilite") %>
         </li>
         <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.mentions_legales"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: true, class: "fr-footer__bottom-link") %>
+          <%= render LienComponent.new(t("footer.bottom.mentions_legales"), "#{ENV['URL_SITE_VITRINE']}/mentions-legales/", externe: true, class: "fr-footer__bottom-link") %>
         </li>
         <li class="fr-footer__bottom-item">
           <%= render LienComponent.new(t("footer.bottom.donnees_personnelles"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: true, class: "fr-footer__bottom-link") %>

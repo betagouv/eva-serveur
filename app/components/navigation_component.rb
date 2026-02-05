@@ -44,7 +44,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def comptes_link
-    { label: "Compte", url: helpers.admin_comptes_path,
+    { label: "Comptes", url: helpers.admin_comptes_path,
       current: current_page?(helpers.admin_comptes_path) }
   end
 

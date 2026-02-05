@@ -8,7 +8,7 @@ active_admin_form_for [ :admin, resource ] do |f|
       render LienComponent.new(
         t("nouvelles_structures.show.annuaire_siret.description"),
         t("nouvelles_structures.show.annuaire_siret.url"),
-        externe: true
+        nouvelle_fenetre: true
       )
     end
     if can?(:manage, Compte)

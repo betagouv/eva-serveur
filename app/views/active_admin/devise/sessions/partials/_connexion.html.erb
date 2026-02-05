@@ -13,7 +13,8 @@
           <span class="pro-connect__brand"><%= t("active_admin.devise.sessions.new.pro-connect.bouton-brand") %></span>
         <% end %>
         <div>
-          <%= render LienComponent.new(t("active_admin.devise.sessions.new.pro-connect.libelle-lien-pro-connect"), "https://www.proconnect.gouv.fr/", externe: true, class: "nouvelle-session__connexion-lien-proconnect") %>
+          <%= render LienComponent.new(t("active_admin.devise.sessions.new.pro-connect.libelle-lien-pro-connect"), "https://www.proconnect.gouv.fr/",
+                                       nouvelle_fenetre: true, class: "nouvelle-session__connexion-lien-proconnect") %>
         </div>
       </div>
     </div>
@@ -28,7 +29,7 @@
     </div>
     <div class="nouvelle-session__connexion-content">
       <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.titre") %></h5>
-      
+
       <% scope = Devise::Mapping.find_scope!(resource_name) %>
       <%= semantic_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f| %>
         <%= f.semantic_errors *f.object.errors.messages.keys %>

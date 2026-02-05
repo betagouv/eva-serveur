@@ -39,10 +39,8 @@
                             required: true,
                             hint: t("nouvelles_structures.show.structure.siret_hint") %>
         <p>
-        <%= render LienComponent.new(
-          t(".annuaire_siret.description"),
-          t(".annuaire_siret.url"),
-          externe: true) %>
+        <%= render LienComponent.new(t(".annuaire_siret.description"), t(".annuaire_siret.url"),
+                                     nouvelle_fenetre: true) %>
         </p>
       <% end %>
     </div>

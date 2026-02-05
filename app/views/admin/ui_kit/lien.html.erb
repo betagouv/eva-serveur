@@ -9,10 +9,13 @@
   <%= render LienComponent.new("Accueil", "/") %>
 
   <h2>Lien externe</h2>
+  <%= render LienComponent.new("Site officiel", "https://www.example.com", externe: true) %>
+
+  <h2>Lien externe s'ouvrant dans une nouvelle fenetre</h2>
   <%= render LienComponent.new(
         "Site officiel",
         "https://www.example.com",
-        externe: true
+        nouvelle_fenetre: true
       ) %>
 
   <h2>Lien avec aria-label</h2>
@@ -22,11 +25,11 @@
         aria: { label: "En savoir plus sur cette fonctionnalité" }
       ) %>
 
-  <h2>Lien externe avec aria-label</h2>
+  <h2>Lien nouvelle fenêtre avec aria-label</h2>
   <%= render LienComponent.new(
         "Documentation",
         "https://docs.example.com",
-        externe: true,
+        nouvelle_fenetre: true,
         aria: { label: "Documentation externe" }
       ) %>
 </div> 

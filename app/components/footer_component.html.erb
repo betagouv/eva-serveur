@@ -9,13 +9,13 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.un_service_anlci"), "#{ENV['URL_SITE_VITRINE']}/nos-missions/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.un_service_anlci"), "#{ENV['URL_SITE_VITRINE']}/nos-missions/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.illettrisme_france"), "#{ENV['URL_SITE_VITRINE']}/lillettrisme-en-france/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.illettrisme_france"), "#{ENV['URL_SITE_VITRINE']}/lillettrisme-en-france/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.parcours_competences"), "#{ENV['URL_SITE_VITRINE']}/competences/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.parcours_competences"), "#{ENV['URL_SITE_VITRINE']}/competences/", externe: true, class: "fr-footer__top-link") %>
             </li>
           </ul>
         </div>
@@ -25,10 +25,10 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.reperer_difficultes"), "#{ENV['URL_SITE_VITRINE']}/reperer-les-difficultes/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.reperer_difficultes"), "#{ENV['URL_SITE_VITRINE']}/reperer-les-difficultes/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.positionner_competences"), "#{ENV['URL_SITE_VITRINE']}/positionner-les-competences/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.positionner_competences"), "#{ENV['URL_SITE_VITRINE']}/positionner-les-competences/", externe: true, class: "fr-footer__top-link") %>
             </li>
           </ul>
         </div>
@@ -38,13 +38,13 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.supports"), "#{ENV['URL_SITE_VITRINE']}/centre-daide/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.supports"), "#{ENV['URL_SITE_VITRINE']}/centre-daide/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.faq"), "#{ENV['URL_SITE_VITRINE']}/faq/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.faq"), "#{ENV['URL_SITE_VITRINE']}/faq/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.formation_presentation"), "#{ENV['URL_SITE_VITRINE']}/formation-et-presentation/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.formation_presentation"), "#{ENV['URL_SITE_VITRINE']}/formation-et-presentation/", externe: true, class: "fr-footer__top-link") %>
             </li>
           </ul>
         </div>
@@ -54,13 +54,13 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.contact"), "#{ENV['URL_SITE_VITRINE']}/contact/", externe: false, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.contact"), "#{ENV['URL_SITE_VITRINE']}/contact/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.equipe"), "https://beta.gouv.fr/startups/eva.html", externe: true, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.equipe"), "https://beta.gouv.fr/startups/eva.html", nouvelle_fenetre: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.code_source"), "https://github.com/betagouv/eva-serveur", externe: true, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.code_source"), "https://github.com/betagouv/eva-serveur", nouvelle_fenetre: true, class: "fr-footer__top-link") %>
             </li>
           </ul>
         </div>
@@ -82,16 +82,16 @@
         <p class="fr-footer__content-desc"><%= t("footer.description") %></p>
         <ul class="fr-footer__content-list">
           <li class="fr-footer__content-item">
-            <%= render LienComponent.new("info.gouv.fr", "https://info.gouv.fr", externe: true, class: "fr-footer__content-link") %>
+            <%= render LienComponent.new("info.gouv.fr", "https://info.gouv.fr", nouvelle_fenetre: true, class: "fr-footer__content-link") %>
           </li>
           <li class="fr-footer__content-item">
-            <%= render LienComponent.new("service-public.gouv.fr", "https://service-public.gouv.fr", externe: true, class: "fr-footer__content-link") %>
+            <%= render LienComponent.new("service-public.gouv.fr", "https://service-public.gouv.fr", nouvelle_fenetre: true, class: "fr-footer__content-link") %>
           </li>
           <li class="fr-footer__content-item">
-            <%= render LienComponent.new("legifrance.gouv.fr", "https://legifrance.gouv.fr", externe: true, class: "fr-footer__content-link") %>
+            <%= render LienComponent.new("legifrance.gouv.fr", "https://legifrance.gouv.fr", nouvelle_fenetre: true, class: "fr-footer__content-link") %>
           </li>
           <li class="fr-footer__content-item">
-            <%= render LienComponent.new("data.gouv.fr", "https://data.gouv.fr", externe: true, class: "fr-footer__content-link") %>
+            <%= render LienComponent.new("data.gouv.fr", "https://data.gouv.fr", nouvelle_fenetre: true, class: "fr-footer__content-link") %>
           </li>
         </ul>
       </div>
@@ -126,21 +126,21 @@
     <div class="fr-footer__bottom">
       <ul class="fr-footer__bottom-list" style="margin-bottom: 0;">
         <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.accessibilite"), "#{ENV['URL_SITE_VITRINE']}/declaration-daccessibilite/", externe: false, class: "fr-footer__bottom-link") %>
+          <%= render LienComponent.new(t("footer.bottom.accessibilite"), "#{ENV['URL_SITE_VITRINE']}/declaration-daccessibilite/", externe: true, class: "fr-footer__bottom-link") %>
         </li>
         <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.mentions_legales"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: false, class: "fr-footer__bottom-link") %>
+          <%= render LienComponent.new(t("footer.bottom.mentions_legales"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: true, class: "fr-footer__bottom-link") %>
         </li>
         <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.donnees_personnelles"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: false, class: "fr-footer__bottom-link") %>
+          <%= render LienComponent.new(t("footer.bottom.donnees_personnelles"), "#{ENV['URL_SITE_VITRINE']}/condition-generales-dutilisation/", externe: true, class: "fr-footer__bottom-link") %>
         </li>
         <li class="fr-footer__bottom-item">
-          <%= render LienComponent.new(t("footer.bottom.gestion_cookies"), "#tarteaucitron", externe: false, class: "fr-footer__bottom-link", role: "button") %>
+          <%= render LienComponent.new(t("footer.bottom.gestion_cookies"), "#tarteaucitron", externe: true, class: "fr-footer__bottom-link", role: "button") %>
         </li>
       </ul>
       <div class="fr-footer__bottom-copy">
         <p><%= t("footer.bottom.licence_text") %>
-          <%= render LienComponent.new(t("footer.bottom.licence_etalab"), "https://github.com/etalab/licence-ouverte/blob/master/LO.md", externe: true) %>
+          <%= render LienComponent.new(t("footer.bottom.licence_etalab"), "https://github.com/etalab/licence-ouverte/blob/master/LO.md", nouvelle_fenetre: true) %>
         </p>
       </div>
     </div>

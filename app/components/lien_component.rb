@@ -19,7 +19,7 @@ class LienComponent < ViewComponent::Base
       description = description_extern(aria[:label])
       @params[:aria][:label] = description
     end
-    @params = @params.merge({ target: "_blank", title: description, rel: "noopener" })
+    @params = @params.merge({ target: "_blank", title: description, rel: "noopener external" })
   end
 
   def merge_html_options

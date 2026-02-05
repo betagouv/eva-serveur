@@ -2,7 +2,7 @@
 
 class HeaderComponent < ViewComponent::Base
   def initialize(logo:, logo_alt:, titre: nil, tagline: nil, logo_url: nil, current_compte: nil,
-actions: nil, nav_links: nil)
+actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     @logo = logo
     @logo_alt = logo_alt
     @logo_url = logo_url
@@ -11,6 +11,8 @@ actions: nil, nav_links: nil)
     @current_compte = current_compte
     @actions = actions
     @nav_links = nav_links
+    @logged_in = logged_in
+    @show_navigation = show_navigation
   end
 
   def affiche_actions_connexion?
@@ -22,7 +24,16 @@ actions: nil, nav_links: nil)
   end
 
   def affiche_navigation?
+    return false if @show_navigation == false
+    return true if @show_navigation == true
+
     @nav_links.present? || current_compte_present?
+  end
+
+  def logged_in?
+    return @logged_in if [ true, false ].include?(@logged_in)
+
+    @current_compte.present?
   end
 
   def actions

@@ -8,6 +8,8 @@
   titre: current_compte.present? ? "Paramétrage de votre compte" : "eva.anlci.gouv.fr",
   tagline: current_compte.present? ? nil : "Un service public numérique de l'ANLCI",
   current_compte: current_compte,
+  logged_in: false,
+  show_navigation: false,
   actions: [
     {
       url: pro_connect_logout_path,

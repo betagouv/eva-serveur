@@ -79,6 +79,22 @@ class Evaluation < ApplicationRecord
   }
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
+  scope :pour_structure, lambda { |structure|
+    return none if structure.blank?
+
+    joins(campagne: :compte).where(comptes: { structure_id: structure.id })
+  }
+  scope :avec_reponse, lambda {
+    joins(parties: :evenements)
+      .merge(Evenement.reponses)
+      .where(
+        "(evenements.donnees ->> 'reponse' IS NOT NULL" \
+        " AND evenements.donnees ->> 'reponse' != '')" \
+        " OR (evenements.donnees ->> 'reponseIntitule' IS NOT NULL" \
+        " AND evenements.donnees ->> 'reponseIntitule' != '')"
+      )
+      .distinct
+  }
 
   delegate :anonyme?, to: :beneficiaire
 
@@ -88,6 +104,10 @@ class Evaluation < ApplicationRecord
 
     reponses_redaction = executer_requete_reponses_redaction(evaluation_ids, question_redaction_id)
     grouper_reponses_par_evaluation(reponses_redaction)
+  end
+
+  def self.au_moins_une_reponse_pour_structure?(structure)
+    pour_structure(structure).avec_reponse.exists?
   end
 
   private_class_method def self.find_question_redaction_id

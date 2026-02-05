@@ -101,6 +101,12 @@ fr:
           Si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter par mail à [%{email}](mailto:%{email}).
       bienvenue_entreprise:
         titre: Bienvenue sur evapro
+        titre_tableau_de_bord: Tableau de bord
+        intro_apres_premiere_reponse_paragraphe_1: |
+          Vous avez terminé votre questionnaire. Les éléments ci-dessous s'appuient sur les réponses déjà collectées pour votre entreprise.
+        intro_apres_premiere_reponse_paragraphe_2: |
+          Pour obtenir une vision plus fiable de la situation de votre entreprise, invitez d'autres collègues à répondre. Nous recommandons 3 à 5 répondants.
+        inviter_collegues_bouton: "Inviter mes collègues à répondre"
         premier_questionnaire_titre: Passez votre premier questionnaire !
         premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.
       sidebar:

@@ -7,6 +7,8 @@ ActiveAdmin.register_page "Dashboard" do
     if current_compte.utilisateur_entreprise?
       structure = current_compte.structure
       opco_financeur = structure&.opco_financeur
+      premiere_reponse_complete =
+        Evaluation.au_moins_une_reponse_pour_structure?(structure)
 
       render partial: "tableau_de_bord_eva_pro",
              locals: {
@@ -14,7 +16,8 @@ ActiveAdmin.register_page "Dashboard" do
                evaluations: evaluations_entreprise,
                actualites: actualites,
                opco: opco_financeur,
-               structure: structure
+               structure: structure,
+               premiere_reponse_complete: premiere_reponse_complete
              }
     else
       render partial: "tableau_de_bord_eva",

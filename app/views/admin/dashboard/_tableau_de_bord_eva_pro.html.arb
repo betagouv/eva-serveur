@@ -12,9 +12,11 @@ end
 
 div class: "tableau-bord-layout" do
   div class: "tableau-bord-contenu-principal" do
-    section class: "bienvenue-entreprise section-tableau-bord-eva-pro" do
-      h2 t("admin.dashboard.bienvenue_entreprise.titre"), class: "bienvenue-entreprise__titre"
-    end
+    render partial: "admin/dashboard/eva_pro/bienvenue_entreprise",
+           locals: {
+             premiere_reponse_complete: premiere_reponse_complete,
+             structure: structure
+           }
 
     if campagnes.present?
       section class: "section-questionnaires section-tableau-bord-eva-pro" do

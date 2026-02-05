@@ -43,7 +43,7 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     if current_compte_present?
       items << {
         url: helpers.admin_compte_path(@current_compte),
-        label: current_compte.nom_complet,
+        label: @current_compte.nom_complet,
         icon_class: "fr-icon-account-circle-line",
         button_class: "fr-btn fr-btn--tertiary"
       }

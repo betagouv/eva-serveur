@@ -8,7 +8,15 @@
   }
 
   .section-tableau-bord-eva-pro {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+
+    .bienvenue-entreprise__titre {
+      margin-bottom: 1rem;
+    }
   }
 
   .tableau-bord-layout {
@@ -351,6 +359,18 @@
   .bienvenue-entreprise {
     &__titre {
       @include h2-lg;
+      margin: 0;
+    }
+    &__suite {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+    &__texte {
+      color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+      @include body-md-base;
       margin: 0;
     }
   }

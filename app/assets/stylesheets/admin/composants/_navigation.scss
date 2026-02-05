@@ -1,0 +1,18 @@
+.fr-header--logged-in {
+  .fr-nav__link {
+    color: var(--light-decisions-text-text-action-high-grey, #161616);
+    font-family: "Marianne";
+    @include dsfr-texte-sm();
+  }
+
+  .fr-nav__link:hover,
+  .fr-nav__link:active {
+    background-color: transparent;
+    color: var(--light-decisions-text-text-active-blue-france, #000091) !important;
+  }
+
+  .fr-nav__link[aria-current="page"] {
+    color: var(--light-decisions-text-text-active-blue-france, #000091) !important;
+    border-bottom: 2px solid var(--light-decisions-border-border-active-blue-france, #000091);
+  }
+}

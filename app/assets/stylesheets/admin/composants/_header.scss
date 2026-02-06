@@ -8,11 +8,15 @@
     }
     .fr-header__operator{
       display: flex;
-      width: 128px;
-      height: 39.462px;
       justify-content: center;
       align-items: center;
-      aspect-ratio: 128.00 / 39.46;
+
+      img {
+        width: 8rem;
+        height: 2.4664rem;
+        aspect-ratio: 128.00 / 39.46;
+        object-fit: contain;
+      }
     }
   }
 

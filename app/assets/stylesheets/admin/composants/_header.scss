@@ -21,34 +21,34 @@
   }
 
   .tools-links {
-    .fr-btn  {
-      align-items: center;
-      background-color: var(--background-action-high-blue-france);
-      color: $eva_main_blue;
-      display: inline-flex;
-      flex-direction: row;
-      font-weight: 500;
-      @include dsfr-texte-md();
-      min-height: $dsfr-spacing-10v;
-      padding: $dsfr-spacing-2v $dsfr-spacing-4v;
-      width: -moz-fit-content;
-      width: fit-content;
-      border-radius: 0;
-    }
+    // .fr-btn  {
+    //   align-items: center;
+    //   background-color: var(--background-action-high-blue-france);
+    //   color: $eva_main_blue;
+    //   display: inline-flex;
+    //   flex-direction: row;
+    //   font-weight: 500;
+    //   @include dsfr-texte-md();
+    //   min-height: $dsfr-spacing-10v;
+    //   padding: $dsfr-spacing-2v $dsfr-spacing-4v;
+    //   width: -moz-fit-content;
+    //   width: fit-content;
+    //   border-radius: 0;
+    // }
 
-    .fr-btn--tertiary {
-      --hover: inherit;
-      --active: inherit;
-      background-color: transparent;
-      border-color: var(--border-default-grey) !important;
-      border: 1px;
-      box-shadow: inset 0 0 0 1px var(--border-default-grey) !important;
-      color: $eva_main_blue !important;
+    // .fr-btn--tertiary {
+    //   --hover: inherit;
+    //   --active: inherit;
+    //   background-color: transparent;
+    //   border-color: var(--border-default-grey) !important;
+    //   border: 1px;
+    //   box-shadow: inset 0 0 0 1px var(--border-default-grey) !important;
+    //   color: $eva_main_blue !important;
       
-      &:hover {
-        background-color: var(--hover-tint) !important;
-      }
-    }
+    //   &:hover {
+    //     background-color: var(--hover-tint) !important;
+    //   }
+    // }
   }
 
 
@@ -84,12 +84,12 @@
   }
 
   // A supprimer quand on gerera le mobile
-  .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not([class^=fr-btns-group--icon-]):not([class*=" fr-btns-group--icon-"]) .fr-btn[class^=fr-icon-] {
-    @include dsfr-texte-sm();
-    max-height: none;
-    max-width: 100%;
-    min-height: $dsfr-spacing-8v;
-    overflow: initial;
-    padding: $dsfr-spacing-1v $dsfr-spacing-3v;
-  }
+  // .fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg):not([class^=fr-btns-group--icon-]):not([class*=" fr-btns-group--icon-"]) .fr-btn[class^=fr-icon-] {
+  //   @include dsfr-texte-sm();
+  //   max-height: none;
+  //   max-width: 100%;
+  //   min-height: $dsfr-spacing-8v;
+  //   overflow: initial;
+  //   padding: $dsfr-spacing-1v $dsfr-spacing-3v;
+  // }
 }

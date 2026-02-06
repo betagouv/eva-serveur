@@ -29,9 +29,14 @@
               <ul class="fr-btns-group">
                 <% actions.each do |action| %>
                   <li>
-                    <a href="<%= action[:url] %>" class="<%= [ action[:icon_class], action[:button_class] ].compact.join(" ") %>">
+                    <%= render BoutonDsfrComponent.new(
+                      action[:url],
+                      type: bouton_type_for(action),
+                      tag: :a,
+                      class: action[:icon_class]
+                    ) do %>
                       <%= action[:label] %>
-                    </a>
+                    <% end %>
                   </li>
                 <% end %>
               </ul>

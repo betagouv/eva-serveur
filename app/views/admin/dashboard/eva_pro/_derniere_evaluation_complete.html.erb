@@ -41,7 +41,7 @@
           ) %>
         </div>
       </div>
-      <%= render BoutonComponent.new(admin_evaluation_path(derniere_evaluation_complete), type: :secondary) do %>
+      <%= render BoutonDsfrComponent.new(admin_evaluation_path(derniere_evaluation_complete), type: :secondary) do %>
         <%= t("admin.dashboard.derniere_reponse_complete.consulter_diagnostique") %>
       <% end %>
     </section>

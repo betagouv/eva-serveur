@@ -65,6 +65,20 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     items
   end
 
+  def bouton_type_for(action)
+    return action[:type] if action[:type].present?
+    return action[:button_type] if action[:button_type].present?
+
+    case action[:button_class].to_s
+    when /fr-btn--secondary/
+      :secondary
+    when /fr-btn--tertiary/
+      :tertiary
+    else
+      :primary
+    end
+  end
+
   private
 
   def current_compte_present?

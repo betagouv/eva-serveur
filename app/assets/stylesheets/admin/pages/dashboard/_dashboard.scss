@@ -49,6 +49,26 @@
     }
   }
 
+  .cinq-dernieres-evaluations {
+    .cinq-dernieres-evaluations__titre {
+      @include h5-xs();
+      margin: 0;
+    }
+
+    .cinq-dernieres-evaluations__texte {
+      @include body-md-base();
+      margin: 0;
+    }
+
+    .cinq-dernieres-evaluations__tableau {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      align-self: stretch;
+      width: 100%;
+    }
+  }
+
   .tableau-bord-layout {
     display: flex;
     width: 1200px;

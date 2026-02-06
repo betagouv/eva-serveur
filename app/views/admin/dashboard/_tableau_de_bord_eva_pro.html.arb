@@ -24,6 +24,11 @@ div class: "tableau-bord-layout" do
              restitution_globale: restitution_globale
            }
 
+    render partial: "admin/dashboard/eva_pro/cinq_dernieres_evaluations",
+           locals: {
+             evaluations: evaluations
+           }
+
     if campagnes.present?
       section class: "section-questionnaires section-tableau-bord-eva-pro" do
         columns do

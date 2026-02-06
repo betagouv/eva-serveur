@@ -116,6 +116,15 @@ fr:
         couts_prefixe: Coûts
         couts_suffixe: de votre masse salariale
         consulter_diagnostique: Consulter les résultats détaillés
+      cinq_dernieres_evaluations:
+        titre: Réponses collectées
+        texte: Chaque réponse correspond à une évaluation individuelle. Plus vous collectez de réponses, plus le diagnostic est fiable.
+        voir_tout: Voir l’ensemble des réponses
+        voir_detail: Voir le détail
+        colonne_par: Par
+        colonne_date: Date
+        colonne_taux_risque: Taux de risque
+        colonne_couts: Coûts
       sidebar:
         opco_partenaire:
           titre: En partenariat avec

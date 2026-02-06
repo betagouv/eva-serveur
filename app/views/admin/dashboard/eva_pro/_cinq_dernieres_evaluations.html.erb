@@ -32,7 +32,7 @@
           <% end %>
         <% end %>
         <% tableau.colonne do |evaluation| %>
-          <%= render LienComponent.new(admin_evaluation_path(evaluation)) do %>
+        <%= render LienComponent.new(nil, admin_evaluation_path(evaluation)) do %>
             <%= t("admin.dashboard.cinq_dernieres_evaluations.voir_detail") %>
             <span class="fr-icon-arrow-right-line fr-icon--sm" aria-hidden="true"></span>
           <% end %>

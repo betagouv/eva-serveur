@@ -199,7 +199,7 @@ button.fr-link--close.fr-link:hover {
   margin: 0;
 }
 
-.fr-btn {
+body:not(.evapro_admin) .fr-btn {
   @include grand-bouton();
   @include bouton-primaire();
   &.bouton-secondaire {
@@ -213,8 +213,23 @@ button.fr-link--close.fr-link:hover {
 
 }
 
-a.fr-btn {
+body:not(.evapro_admin) a.fr-btn {
   color: $eva_light !important;
+}
+
+body.evapro_admin a:not(.fr-btn),
+body.evapro_admin a:link:not(.fr-btn),
+body.evapro_admin a:visited:not(.fr-btn) {
+  text-decoration: none;
+}
+
+body.evapro_admin .fr-btn:not(.fr-btn--secondary):not(.fr-btn--tertiary) {
+  color: var(--text-inverted-blue-france);
+}
+
+body.evapro_admin .fr-btn--secondary,
+body.evapro_admin .fr-btn--tertiary {
+  color: var(--light-decisions-text-text-action-high-blue-france, #000091);
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR

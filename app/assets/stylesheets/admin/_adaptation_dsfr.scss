@@ -232,6 +232,10 @@ body.evapro_admin .fr-btn--tertiary {
   color: var(--light-decisions-text-text-action-high-blue-france, #000091);
 }
 
+body.evapro_admin .fr-btn--tertiary:hover {
+  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+}
+
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR
 .fr-card__end {
   padding-bottom: 1.5rem;

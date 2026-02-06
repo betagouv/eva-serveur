@@ -19,6 +19,36 @@
     }
   }
 
+  .derniere-reponse-complete {
+    .derniere-reponse-complete__titre {
+      @include h5-xs();
+      margin: 0;
+    }
+
+    .derniere-reponse-complete__texte {
+      @include body-md-base();
+      margin: 0;
+    }
+
+    .derniere-reponse-complete__diagnostique {
+      display: flex;
+      align-items: stretch;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+
+    .derniere-reponse-complete__diagnostique-item {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+    }
+
+    .derniere-reponse-complete__diagnostique-item .chiffre-cle {
+      width: 100%;
+      flex: 1;
+    }
+  }
+
   .tableau-bord-layout {
     display: flex;
     width: 1200px;

@@ -18,6 +18,12 @@ div class: "tableau-bord-layout" do
              structure: structure
            }
 
+    render partial: "admin/dashboard/eva_pro/derniere_evaluation_complete",
+           locals: {
+             derniere_evaluation_complete: derniere_evaluation_complete,
+             restitution_globale: restitution_globale
+           }
+
     if campagnes.present?
       section class: "section-questionnaires section-tableau-bord-eva-pro" do
         columns do

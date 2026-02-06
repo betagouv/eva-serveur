@@ -113,6 +113,17 @@
     }
   }
 
+  .bloc-questionnaires-entreprise {
+    &__titre {
+      @include h5-xs();
+      margin: 0;
+    }
+    &__texte {
+      @include body-md-base();
+      margin: 0;
+    }
+  }
+
   .bloc-apercu {
     &-wrapper {
       margin-bottom: 1rem;

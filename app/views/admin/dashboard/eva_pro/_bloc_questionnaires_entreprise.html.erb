@@ -1,6 +1,15 @@
-<div class='bloc-questionnaires-entreprise bloc-apercu'>
-  <p class="bloc-questionnaires-entreprise__description"><%= t(".evapro_description") %></p>
-  <p class="bloc-questionnaires-entreprise__description_2"><%= t(".evapro_description_2") %></p>
+<section class="bloc-questionnaires-entreprise section-tableau-bord-eva-pro">
+  <% if premiere_reponse_complete %>
+    <h3 class="bloc-questionnaires-entreprise__titre">
+      <%= t("admin.dashboard.eva_pro.bloc_questionnaires_entreprise.titre_relancer_questionnaire") %>
+    </h3>
+    <p class="bloc-questionnaires-entreprise__texte">
+      <%= t("admin.dashboard.eva_pro.bloc_questionnaires_entreprise.texte_relancer_questionnaire") %>
+    </p>
+  <% else %>
+    <p class="bloc-questionnaires-entreprise__description"><%= t(".evapro_description") %></p>
+    <p class="bloc-questionnaires-entreprise__description_2"><%= t(".evapro_description_2") %></p>
+  <% end %>
   <div class="bloc-questionnaires-entreprise__grid">
     <% campagnes.each do |campagne| %>
       <div class="bloc-questionnaires-entreprise__item">
@@ -16,4 +25,4 @@
       </div>
     <% end %>
   </div>
-</div>
+</section>

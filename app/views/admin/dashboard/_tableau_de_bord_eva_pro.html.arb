@@ -29,14 +29,9 @@ div class: "tableau-bord-layout" do
              evaluations: evaluations
            }
 
-    if campagnes.present?
-      section class: "section-questionnaires section-tableau-bord-eva-pro" do
-        columns do
-          render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
-locals: { campagnes: campagnes, opco: opco }
-        end
-      end
-    end
+    render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
+           locals: { campagnes: campagnes, opco: opco,
+premiere_reponse_complete: premiere_reponse_complete }
   end
 
   if structure.present?

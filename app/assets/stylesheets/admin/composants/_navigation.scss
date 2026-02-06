@@ -7,12 +7,12 @@
 
   .fr-nav__link:hover,
   .fr-nav__link:active {
-    background-color: transparent;
+    background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
     color: var(--light-decisions-text-text-active-blue-france, #000091) !important;
   }
 
   .fr-nav__link[aria-current="page"] {
     color: var(--light-decisions-text-text-active-blue-france, #000091) !important;
-    border-bottom: 2px solid var(--light-decisions-border-border-active-blue-france, #000091);
+    border-bottom: 1px solid var(--light-decisions-border-border-active-blue-france, #000091);
   }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="fr-container">
   <div class="fr-mb-3w">
     <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
   </div>
@@ -7,6 +7,20 @@
 
   <h2>Header déconnecté</h2>
   <div class="fr-mb-5w">
-    <%= render HeaderComponent.new(logo: "logo-anlci.svg", logo_alt: "ANLCI", titre: "eva") %>
+    <%= render HeaderComponent.new(
+      titre: t("header.titre"),
+      tagline: t("header.tagline"),
+      logged_in: false,
+      show_navigation: false
+    ) %>
+  </div>
+
+  <h2>Header Evapro</h2>
+  <div class="fr-mb-5w">
+    <%= render HeaderComponent.new(
+      logo: "logo-evapro.png",
+      logo_alt: "EvaPro",
+      current_compte: (respond_to?(:current_compte) ? current_compte : nil)
+    ) %>
   </div>
 </div>

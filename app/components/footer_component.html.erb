@@ -9,10 +9,10 @@
           </h3>
           <ul class="fr-footer__top-list">
             <li>
-              <%= render LienComponent.new(t("footer.navigation.un_service_anlci"), "#{ENV['URL_SITE_VITRINE']}/nos-missions/", externe: true, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.site_vitrine"), "#{ENV['URL_SITE_VITRINE']}", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
-              <%= render LienComponent.new(t("footer.navigation.illettrisme_france"), "#{ENV['URL_SITE_VITRINE']}/lillettrisme-en-france/", externe: true, class: "fr-footer__top-link") %>
+              <%= render LienComponent.new(t("footer.navigation.un_service_anlci"), "#{ENV['URL_SITE_VITRINE']}/nos-missions/", externe: true, class: "fr-footer__top-link") %>
             </li>
             <li>
               <%= render LienComponent.new(t("footer.navigation.parcours_competences"), "#{ENV['URL_SITE_VITRINE']}/competences/", externe: true, class: "fr-footer__top-link") %>
@@ -70,11 +70,8 @@
   <div class="fr-container">
     <div class="fr-footer__body">
       <div class="fr-footer__brand fr-enlarge-link">
-        <p class="fr-logo">
-        <%= t("footer.brand.republique") %>
-        <br><%= t("footer.brand.francaise") %>
-        </p>
-        <a title="<%= t("footer.brand.retour_accueil_title") %>" href="/" class="fr-footer__brand-link">
+        <p class="fr-logo"> République<br>française </p>
+        <a title="<%= t("logo_anlci") %>" href="https://anlci.gouv.fr" class="fr-footer__brand-link">
           <%= image_tag "logo_anlci.svg", alt: t("logo_anlci"), class: "fr-footer__logo", style: "width:10rem;" %>
         </a>
       </div>

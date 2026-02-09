@@ -6,12 +6,12 @@ fr:
     navigation:
       decouvrir_eva: "Découvrir eva"
       un_service_anlci: "Un service de l'ANLCI"
-      illettrisme_france: "L'illettrisme en France"
       parcours_competences: "Parcours et compétences"
       cas_usages: "Cas d'usages"
       reperer_difficultes: "Repérer les difficultés"
       positionner_competences: "Positionner les compétences"
       ressources: "Ressources"
+      site_vitrine: "eva.anlci.gouv.fr"
       supports: "Supports"
       faq: "FAQ"
       formation_presentation: "Formation et présentation"
@@ -19,10 +19,6 @@ fr:
       contact: "Contact"
       equipe: "L'équipe"
       code_source: "Code source"
-    brand:
-      republique: "République"
-      francaise: "Française"
-      retour_accueil_title: "Retour à l'accueil du site - Eva - République Française"
     partners:
       titre: "Nos partenaires"
     logo_france_relance: "France Relance"

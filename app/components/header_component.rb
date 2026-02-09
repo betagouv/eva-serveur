@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class HeaderComponent < ViewComponent::Base
-  def initialize(logo:, logo_alt:, titre: nil, tagline: nil, logo_url: nil, current_compte: nil,
+  def initialize(logo: nil, logo_alt: nil, titre: nil, tagline: nil, current_compte: nil,
 actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     @logo = logo
     @logo_alt = logo_alt
-    @logo_url = logo_url
     @titre = titre
     @tagline = tagline
     @current_compte = current_compte
@@ -17,6 +16,10 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
 
   def affiche_actions_connexion?
     @current_compte.present? && actions.any?
+  end
+
+  def affiche_logo?
+    @logo.present?
   end
 
   def affiche_titre?

@@ -10,24 +10,6 @@ class FooterComponent < ViewComponent::Base
 
   attr_reader :avec_partenaires, :partenaires, :liens_navigation, :description
 
-  def liens_gouvernementaux
-    [
-      { texte: "info.gouv.fr", url: "https://www.info.gouv.fr", externe: true },
-      { texte: "service-public.fr", url: "https://www.service-public.fr", externe: true },
-      { texte: "legifrance.gouv.fr", url: "https://www.legifrance.gouv.fr", externe: true },
-      { texte: "data.gouv.fr", url: "https://www.data.gouv.fr", externe: true }
-    ]
-  end
-
-  def liens_legaux
-    [
-      { texte: "Mentions légales", url: "#" },
-      { texte: "Données personnelles", url: "#" },
-      { texte: "Gestion des cookies", url: "#" },
-      { texte: "Accessibilité", url: "#" }
-    ]
-  end
-
   private
 
   def liens_navigation_par_defaut

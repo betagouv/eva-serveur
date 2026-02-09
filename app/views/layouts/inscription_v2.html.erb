@@ -2,11 +2,8 @@
 <% content_for :classes_conteneur, " inscription_v2" %>
 
 <%= render HeaderComponent.new(
-  logo: "logo-anlci.svg",
-  logo_alt: "ANLCI",
-  logo_url: "/",
-  titre: current_compte.present? ? "Paramétrage de votre compte" : "eva.anlci.gouv.fr",
-  tagline: current_compte.present? ? nil : "Un service public numérique de l'ANLCI",
+  titre: t("header.titre"),
+  tagline: t("header.tagline"),
   current_compte: current_compte,
   logged_in: false,
   show_navigation: false,

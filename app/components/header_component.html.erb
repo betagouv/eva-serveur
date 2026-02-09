@@ -2,16 +2,18 @@
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">
-        <div class="fr-header__brand">
+        <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
             <div class="fr-header__logo">
               <p class="fr-logo"> République<br>française </p>
             </div>
-            <div class="fr-header__operator">
-              <a href="<%= @logo_url %>" title="<%= @logo_alt %>">
-                <img class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
-              </a>
-            </div>
+            <% if affiche_logo? %>
+              <div class="fr-header__operator">
+                <a href="/" title="<%= t("header.title_lien_logo", logo_alt: @logo_alt) %>">
+                  <img class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
+                </a>
+              </div>
+            <% end %>
           </div>
           <% if affiche_titre? %>
             <div class="fr-header__service">

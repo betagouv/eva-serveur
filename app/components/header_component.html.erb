@@ -36,7 +36,13 @@
         </div>
         <% if affiche_actions_connexion? %>
           <div class="fr-header__tools">
-            <div class="fr-header__tools-links">
+            <button class="fr-btn fr-btn--menu fr-header__menu-btn"
+                    aria-controls="header-menu"
+                    aria-expanded="false">
+              Menu
+            </button>
+            <!-- la classe initiale est fr-header__tools-links, elle a ete remplacee pour le moment parce qu'elle cree une erreur js et empeche d'ouvrir n'importe qu'elle modal -->
+            <div class="tools-links">
               <ul class="fr-btns-group">
                 <% actions.each do |action| %>
                   <li>
@@ -57,18 +63,27 @@
       </div>
     </div>
   </div>
-  <% if affiche_actions_connexion? || affiche_navigation? %>
-    <!-- Ici pour l'instant, on ne met pas la class fr-modal à cause d'un conflit avec les autres fr-modal de la page. par exemple : fr-modal-confirmation-creation-structure-->
-    <div class="fr-header__menu" id="modal-header-menu">
+  <% if affiche_navigation? %>
+    <div class="fr-header__menu fr-collapse" id="header-menu">
       <div class="fr-container">
-        <!-- en commentaite car il manque fr-modal --
-        <button class="fr-btn fr-btn--close" aria-controls="modal-header-menu" title="Fermer">
-          Fermer
-        </button>
-        -->
-        <div class="fr-header__menu-links"></div>
-        <% if affiche_navigation? %>
-          <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+        <% if affiche_actions_connexion? %>
+          <div class="fr-header__menu-links">
+            <ul class="fr-btns-group fr-btns-group--sm">
+              <% actions.each do |action| %>
+                <li>
+                  <%= render BoutonDsfrComponent.new(
+                    action[:url],
+                    type: bouton_type_for(action),
+                    tag: :a,
+                    class: action[:icon_class]
+                  ) do %>
+                    <%= action[:label] %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
       </div>
     </div>

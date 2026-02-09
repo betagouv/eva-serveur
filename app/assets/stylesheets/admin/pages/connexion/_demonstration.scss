@@ -115,3 +115,26 @@
   background-size: cover;
   background-position: top;
 }
+
+@media (max-width: 48rem) {
+  .nouvelle-session__demonstration-body {
+    padding: var(--Space-3V, 12px);
+  }
+
+  .nouvelle-session__demonstration-content {
+    width: 100%;
+  }
+
+  .nouvelle-session__demonstration-vagues {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 100vw;
+    height: 24rem;
+  }
+
+  .nouvelle-session__demonstration-container {
+    padding-bottom: 0 !important;
+  }
+
+}

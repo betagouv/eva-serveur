@@ -308,3 +308,35 @@ body.logged_in h2.fr-footer__partners-title {
     margin-bottom: 0;
   }
 }
+
+@media (max-width: 48rem) {
+  .fr-footer__top .fr-grid-row {
+    flex-direction: column;
+  }
+
+  .fr-footer__top .fr-col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .fr-footer__top-list {
+    margin-bottom: 1.5rem;
+  }
+
+  .fr-footer__body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .fr-footer__partners-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--Space-2W, 16px);
+  }
+
+  .fr-footer__bottom-item {
+    margin-right: 0;
+  }
+}

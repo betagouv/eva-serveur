@@ -5,6 +5,35 @@
   width: 100%;
 }
 
+@media (max-width: 48rem) {
+  body.logged_out.page_connexion_v2 .nouvelle-session,
+  body.logged_out .nouvelle-session {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    width: 100%;
+  }
+
+  body.logged_out.page_connexion_v2 .nouvelle-session__connexion,
+  body.logged_out.page_connexion_v2 .nouvelle-session__demonstration,
+  body.logged_out .nouvelle-session__connexion,
+  body.logged_out .nouvelle-session__demonstration {
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 auto;
+  }
+
+  body.logged_out.page_connexion_v2 .nouvelle-session__connexion-container,
+  body.logged_out.page_connexion_v2 .nouvelle-session__demonstration-container,
+  body.logged_out .nouvelle-session__connexion-container,
+  body.logged_out .nouvelle-session__demonstration-container {
+    max-width: none;
+    width: 100%;
+    padding: var(--Space-3V, 12px);
+  }
+}
+
 
 
 .nouvelle-session__connexion {

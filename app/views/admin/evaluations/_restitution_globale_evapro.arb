@@ -1,5 +1,9 @@
 div class: "evaluation-evapro" do
   h1 titre_evaluation_evapro(evaluation), class: "evaluation-evapro__titre"
+  if !pdf
+    url = admin_evaluation_path(evaluation, format: :pdf)
+    render(BoutonComponent.new(url, type: :primary, size: :xs).with_content("Exporter"))
+  end
   diag_risques_entreprise = restitution_globale.diag_risques_entreprise
   pourcentage_risque = nil
   if diag_risques_entreprise
@@ -20,7 +24,7 @@ div class: "evaluation-evapro" do
     )
   end
 
-  if diag_risques_entreprise && pdf == false && evaluation_impact_general.present?
+  if diag_risques_entreprise && evaluation_impact_general.present?
     render(
       partial: "bilan_evapro",
       locals: {

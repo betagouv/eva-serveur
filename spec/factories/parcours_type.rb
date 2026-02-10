@@ -53,5 +53,9 @@ FactoryBot.define do
     trait :positionnement do
       type_de_programme { :positionnement }
     end
+
+    trait :evapro do
+      type_de_programme { :diagnostic_entreprise }
+    end
   end
 end

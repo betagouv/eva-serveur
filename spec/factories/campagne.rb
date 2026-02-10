@@ -25,5 +25,9 @@ FactoryBot.define do
     trait :avec_parcours_positionnement do
       association :parcours_type, factory: [ :parcours_type, :positionnement ]
     end
+
+    trait :avec_parcours_evapro do
+      association :parcours_type, factory: [ :parcours_type, :evapro ]
+    end
   end
 end

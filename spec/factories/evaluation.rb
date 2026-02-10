@@ -48,5 +48,9 @@ FactoryBot.define do
     trait :litteratie do
       association :campagne, factory: [ :campagne, :litteratie ]
     end
+
+    trait :evapro do
+      association :campagne, factory: [ :campagne, :avec_parcours_evapro ]
+    end
   end
 end

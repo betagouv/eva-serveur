@@ -29,7 +29,7 @@ module Pdf
     end
 
     def self.debug_mode?
-      ENV["DEBUG_PDF"].present? && Rails.env.development?
+      ENV["DEBUG_PDF"].present? && ENV["DEBUG_PDF"] == "true" && Rails.env.development?
     end
   end
 end

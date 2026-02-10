@@ -219,20 +219,27 @@ body.logged_in:not(.evapro_admin) a.fr-btn {
 
 body.evapro_admin a:not(.fr-btn),
 body.evapro_admin a:link:not(.fr-btn),
-body.evapro_admin a:visited:not(.fr-btn) {
+body.evapro_admin a:visited:not(.fr-btn),
+.evapro_admin a:not(.fr-btn),
+.evapro_admin a:link:not(.fr-btn),
+.evapro_admin a:visited:not(.fr-btn) {
   text-decoration: none;
 }
 
-body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary),
+.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
   color: var(--text-inverted-blue-france);
 }
 
 body.evapro_admin .fr-btn--secondary,
-body.evapro_admin .fr-btn--tertiary {
+body.evapro_admin .fr-btn--tertiary,
+.evapro_admin .fr-btn--secondary,
+.evapro_admin .fr-btn--tertiary {
   color: var(--light-decisions-text-text-action-high-blue-france, #000091);
 }
 
-body.evapro_admin .fr-btn--tertiary:hover {
+body.evapro_admin .fr-btn--tertiary:hover,
+.evapro_admin .fr-btn--tertiary:hover {
   background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
 }
 

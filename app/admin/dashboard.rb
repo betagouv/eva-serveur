@@ -9,6 +9,7 @@ ActiveAdmin.register_page "Dashboard" do
              locals: eva_pro_locals(
                campagnes: campagnes_entreprise,
                evaluations: evaluations_entreprise,
+               cinq_dernieres_evaluations_completes: cinq_dernieres_evaluations_completes,
                actualites: actualites,
                compte: current_compte,
                ability: current_ability
@@ -95,13 +96,28 @@ ActiveAdmin.register_page "Dashboard" do
     def recupere_donnees_entreprise
       return unless current_compte.utilisateur_entreprise?
 
-      @campagnes_entreprise = Campagne.accessible_by(current_ability)
-                                    .order(created_at: :desc)
-                                    .limit(10)
-      @evaluations_entreprise = Evaluation.accessible_by(current_ability)
-                                         .includes(:beneficiaire, :campagne)
-                                         .order(created_at: :desc)
-                                         .limit(10)
+      @campagnes_entreprise = campagnes_entreprise_scope
+      @evaluations_entreprise = evaluations_entreprise_scope
+      @cinq_dernieres_evaluations_completes = cinq_dernieres_evaluations_completes_scope
+    end
+
+    def campagnes_entreprise_scope
+      Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
+    end
+
+    def evaluations_entreprise_scope
+      Evaluation.accessible_by(current_ability)
+                .includes(:beneficiaire, :campagne)
+                .order(created_at: :desc)
+                .limit(10)
+    end
+
+    def cinq_dernieres_evaluations_completes_scope
+      Evaluation.accessible_by(current_ability)
+                .complete
+                .includes(:beneficiaire, :campagne)
+                .order(created_at: :desc)
+                .limit(5)
     end
 
     def campagnes_entreprise
@@ -110,6 +126,10 @@ ActiveAdmin.register_page "Dashboard" do
 
     def evaluations_entreprise
       @evaluations_entreprise ||= []
+    end
+
+    def cinq_dernieres_evaluations_completes
+      @cinq_dernieres_evaluations_completes ||= []
     end
 
     def opco_financeur

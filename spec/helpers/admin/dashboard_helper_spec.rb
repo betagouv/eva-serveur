@@ -30,9 +30,11 @@ RSpec.describe Admin::DashboardHelper do
       end
 
       it "retourne les locals avec la restitution" do
+        cinq_completes = [ instance_double(Evaluation) ]
         result = helper.eva_pro_locals(
           campagnes: campagnes,
           evaluations: evaluations,
+          cinq_dernieres_evaluations_completes: cinq_completes,
           actualites: actualites,
           compte: compte,
           ability: ability
@@ -41,6 +43,7 @@ RSpec.describe Admin::DashboardHelper do
         expect(result).to include(
           campagnes: campagnes,
           evaluations: evaluations,
+          cinq_dernieres_evaluations_completes: cinq_completes,
           actualites: actualites,
           opco: opco_financeur,
           structure: structure,
@@ -62,6 +65,7 @@ RSpec.describe Admin::DashboardHelper do
         result = helper.eva_pro_locals(
           campagnes: campagnes,
           evaluations: evaluations,
+          cinq_dernieres_evaluations_completes: [],
           actualites: actualites,
           compte: compte,
           ability: ability

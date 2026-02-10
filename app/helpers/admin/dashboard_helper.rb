@@ -2,7 +2,8 @@ module Admin
   module DashboardHelper
     include EvaluationHelper
 
-    def eva_pro_locals(campagnes:, evaluations:, actualites:, compte:, ability:)
+    def eva_pro_locals(campagnes:, evaluations:, cinq_dernieres_evaluations_completes:,
+actualites:, compte:, ability:)
       structure = compte.structure
       opco_financeur = structure&.opco_financeur
       premiere_reponse_complete =
@@ -17,6 +18,7 @@ module Admin
       {
         campagnes: campagnes,
         evaluations: evaluations,
+        cinq_dernieres_evaluations_completes: cinq_dernieres_evaluations_completes,
         actualites: actualites,
         opco: opco_financeur,
         structure: structure,

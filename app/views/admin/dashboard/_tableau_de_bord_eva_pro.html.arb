@@ -26,7 +26,7 @@ div class: "tableau-bord-layout" do
 
     render partial: "admin/dashboard/eva_pro/cinq_dernieres_evaluations",
            locals: {
-             evaluations: evaluations
+             evaluations: cinq_dernieres_evaluations_completes
            }
 
     render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",

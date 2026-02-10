@@ -1,0 +1,32 @@
+<div class="container evapro_admin">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1 class="fr-h1 fr-mt-6w">BoutonDsfrComponent</h1>
+  <p class="fr-text--lead">
+    Composant ViewComponent qui génère un lien ou un bouton avec les classes DSFR.
+  </p>
+
+  <div class="fr-mb-4w" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+    <%= render BoutonDsfrComponent.new("#", type: :primary) do %>
+      Primaire MD
+    <% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary) do %>
+      Secondaire MD
+    <% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary) do %>
+      Tertiaire MD
+    <% end %>
+  </div>
+  <div class="fr-mb-4w" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+    <%= render BoutonDsfrComponent.new("#", type: :primary, size: :sm) do %>
+      Primaire SM
+    <% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, size: :sm) do %>
+      Secondaire SM
+    <% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, size: :sm) do %>
+      Tertiaire SM
+    <% end %>
+</div>

@@ -1,48 +1,5 @@
 .fr-header {
   &.fr-header--logged-in {
-    background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
-
-    .fr-header__operator {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 8rem;
-        height: 2.4664rem;
-        aspect-ratio: 128.00 / 39.46;
-        object-fit: contain;
-      }
-    }
-  }
-
-  /* Fix pour le header pour le passage en mode mobile */
-
-  .fr-header__brand {
-    background: transparent;
-    filter: none;
-    padding-left: 0;
-    padding-right: 0;
-    width: auto;
-    z-index: auto;
-  }
-
-  .tools-links {
-    display: flex;
-    flex-direction: row;
-    gap: $dsfr-spacing-2v;
-    justify-content: flex-end;
-
-    .fr-btns-group {
-      display: flex;
-      flex-flow: row wrap;
-      gap: 0 !important;
-
-      >li,
-      >div {
-        width: auto;
-        max-width: none;
-      }
-    }
+    --background-raised-grey: var(--background-alt-blue-france);
   }
 }

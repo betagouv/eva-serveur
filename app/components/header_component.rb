@@ -18,14 +18,6 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     @current_compte.present? && actions.any?
   end
 
-  def affiche_logo?
-    @logo.present?
-  end
-
-  def affiche_titre?
-    @titre.present?
-  end
-
   def affiche_navigation?
     return false if @show_navigation == false
     return true if @show_navigation == true

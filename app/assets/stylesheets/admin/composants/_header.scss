@@ -8,3 +8,25 @@
 .fr-header__menu .fr-btn--close {
   border-radius: 0;
 }
+
+.fr-header.header-evapro {
+  border: 0 !important;
+  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+  filter: none !important;
+
+  .fr-responsive-img {
+    width: 128px;
+  }
+
+  .fr-header__service:before {
+    content: none;
+  }
+
+  .fr-header__brand:after {
+    content: none;
+  }
+
+  .fr-link--sm[target=_blank] {
+    text-decoration: none;
+  }
+}

@@ -23,4 +23,9 @@
       current_compte: (respond_to?(:current_compte) ? current_compte : nil)
     ) %>
   </div>
+
+  <h2>Header EvaPro</h2>
+  <div class="fr-mb-5w">
+    <%= render Pdf::HeaderEvaproComponent.new(date: Date.new(2025, 12, 12), beneficiaire: "Jean Dupond") %>
+  </div>
 </div>

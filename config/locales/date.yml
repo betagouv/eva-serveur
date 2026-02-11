@@ -6,6 +6,7 @@ fr:
     formats: &formats
       sans_heure: "%d %b %Y"
       default: "%d %b %Y"
+      short: "%d/%m/%Y"
   time:
     formats:
       <<: *formats

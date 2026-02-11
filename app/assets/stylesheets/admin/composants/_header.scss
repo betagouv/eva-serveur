@@ -1,13 +1,117 @@
 .fr-header {
   &.fr-header--logged-in {
-    --background-raised-grey: var(--background-alt-blue-france);
+    background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+
+    .fr-header__body,
+    .fr-header__menu {
+      background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+    }
+
+    .fr-header__operator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 8rem;
+        height: 2.4664rem;
+        aspect-ratio: 128.00 / 39.46;
+        object-fit: contain;
+      }
+    }
+  }
+
+  /* Bloc marque : logo République française + opérateur (ANLCI) */
+  .fr-header__logo {
+    display: flex;
+    padding-right: 16px;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Corriger l’alignement : le ::before du .fr-logo (icône Marianne) a un margin-bottom DSFR qui décale les deux logos */
+  .fr-header__logo .fr-logo::before {
+    margin-bottom: 0;
+  }
+
+  /* Logo et bouton Déconnexion / burger aux extrémités */
+  .fr-header__body-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fr-header__brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    flex: 1 1 0;
+    min-width: 0;
+    background: transparent;
+    filter: none;
+    padding-left: 0;
+    padding-right: 0;
+    width: auto;
+    z-index: auto;
+  }
+
+  /* Titre (ex. Paramétrage) juste à côté des logos, pas à droite */
+  .fr-header__service {
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .fr-header__tools-links,
+  .fr-header__navbar {
+    flex-shrink: 0;
+  }
+
+  .fr-header__tools-links {
+    display: flex;
+    flex-direction: row;
+    gap: $dsfr-spacing-2v;
+    justify-content: flex-end;
+
+    .fr-btns-group {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 0 !important;
+
+      > li,
+      > div {
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
+
+  .fr-header__navbar {
+    display: none;
   }
 
   .fr-header__menu-btn {
     display: none;
   }
 
+  /* brand-top : uniquement les deux logos (et burger en mobile), pas toute la largeur */
+  .fr-header__brand-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 16px;
+  }
+
   @media (max-width: 48rem) {
+    // En mobile : le container du header ne doit pas dépasser la largeur de l'écran
+    // (sinon le bouton burger sort du viewport)
+    .fr-header__body .fr-container {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
     body.logged_out & {
       background: var(--light-decisions-background-background-raised-grey, #FFF);
 
@@ -37,13 +141,6 @@
         justify-content: space-between;
         align-items: center;
         align-self: stretch;
-      }
-
-      .fr-header__brand-both {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex: 1 0 0;
       }
 
       .fr-header__logo {
@@ -113,12 +210,55 @@
       }
     }
 
+    .fr-header__navbar {
+      display: flex;
+    }
+
     .fr-header__menu-btn {
       display: inline-flex;
     }
 
-    .tools-links {
+    .fr-header__tools-links {
       display: none;
+    }
+
+    .fr-header__menu .fr-container {
+      pointer-events: all;
+      padding: 1rem;
+    }
+  }
+
+  // Contenu de la modale menu : toujours visible quand la modale est ouverte
+  .fr-header__menu.fr-modal--opened .fr-header__menu-links {
+    display: block;
+  }
+
+  .fr-header__menu .fr-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  // Bouton Menu burger et Fermer carrés dans la modale
+  .fr-header__menu-btn,
+  .fr-header__menu .fr-btn--close {
+    border-radius: 0;
+  }
+
+  // Afficher icône + libellé pour les boutons du menu (ex. Déconnexion), alignés à gauche
+  .fr-header__menu-links .fr-btns-group {
+    justify-content: flex-start;
+  }
+
+  .fr-header__menu-links .fr-btns-group .fr-btn,
+  .fr-header__menu-links .fr-btns-group .fr-btn[class*="fr-icon-"] {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: auto;
+    justify-content: flex-start;
+
+    &[class*="fr-icon-"]::before {
+      margin-right: 0.5rem;
     }
   }
 }

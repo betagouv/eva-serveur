@@ -63,11 +63,13 @@
         text-align: center;
       }
     }
+    
+    .carte-v2 {
+      padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+    }
   }
 
-  .carte-v2 {
-    padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
-  }
+
 }
 
 .page-informations-compte .indication-champs-obligatoires {

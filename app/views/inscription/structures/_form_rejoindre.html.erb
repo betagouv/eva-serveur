@@ -13,8 +13,25 @@
         </p>
 
         <div class="informations-compte-actions">
-          <%= form.button t("inscription.structures.show.ce_nest_pas_ma_structure"), type: :submit, name: "commit", value: "recherche", class: "bouton-tertiaire grand-bouton", formaction: inscription_structure_path(action_type: "recherche") %>
-          <%= form.button t("inscription.structures.show.rejoindre"), type: :submit, name: "commit", value: "rejoindre", class: "bouton grand-bouton", id: "rejoindre-structure-btn", disabled: true %>
+          <%= render BoutonDsfrComponent.new(
+            t("inscription.structures.show.ce_nest_pas_ma_structure"),
+            type: :tertiary,
+            tag: :submit,
+            submit_value: "recherche",
+            formaction: inscription_structure_path(action_type: "recherche")
+          ) do %>
+            <%= t("inscription.structures.show.ce_nest_pas_ma_structure") %>
+          <% end %>
+          <%= render BoutonDsfrComponent.new(
+            t("inscription.structures.show.rejoindre"),
+            type: :primary,
+            tag: :submit,
+            submit_value: "rejoindre",
+            id: "rejoindre-structure-btn",
+            disabled: true
+          ) do %>
+            <%= t("inscription.structures.show.rejoindre") %>
+          <% end %>
         </div>
       </div>
     <% end %>

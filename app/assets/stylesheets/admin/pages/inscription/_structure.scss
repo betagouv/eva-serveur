@@ -5,6 +5,28 @@
   gap: 1.5rem;
   gap: 56px !important;
 
+  @media (max-width: 48rem) {
+    gap: 1.5rem !important;
+  }
+
+  .texte-intro {
+    @media (max-width: 48rem) {
+      align-items: flex-start !important;
+    }
+  }
+
+  .carte-v2 {
+    @media (max-width: 48rem) {
+      padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+    }
+  }
+
+  form {
+    @media (max-width: 48rem) {
+      margin-bottom: -1rem !important;
+    }
+  }
+
   .fr-alert {
     background-color: $grey-1000;
   }
@@ -121,6 +143,25 @@
     justify-content: flex-end;
     gap: 1rem;
     width: 100%;
+  }
+
+  .informations-compte-actions .fr-btn {
+    border-radius: 0;
+  }
+
+  @media (max-width: 48rem) {
+    .informations-compte-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .fr-btn {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+        justify-content: center;
+        text-align: center;
+      }
+    }
   }
 
   .structure-parametrage-section {

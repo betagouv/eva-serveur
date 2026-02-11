@@ -8,7 +8,7 @@
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
 <% content_for :classes_body, "page-nouveau-compte-body" %>
-<div class="page-nouveau-compte page-informations-compte">
+<div class="page-nouveau-compte">
   <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
 
   <%= render CarteV2Component.new(classes: "page-nouveau-compte-card") do %>
@@ -90,16 +90,19 @@
 
             <div class="fr-col-12">
               <div class="informations-compte-actions">
-                <%= render BoutonComponent.new(
-                  new_compte_session_path,
-                  type: :tertiary,
-                  size: :md,
-                  tag: :a,
-                  class: "bouton-tertiaire"
-                ) do %>
+                <%= render BoutonDsfrComponent.new(new_compte_session_path, type: :tertiary) do %>
                   <%= t(".bouton_annuler") %>
                 <% end %>
-                <%= submit_tag t(".bouton_creer"), class: "bouton grand-bouton valider-compte-bouton disabled", id: "creer-compte-bouton", data: { initial_disabled: true } %>
+                <%= render BoutonDsfrComponent.new(
+                  t(".bouton_creer"),
+                  type: :primary,
+                  tag: :submit,
+                  id: "creer-compte-bouton",
+                  class: "valider-compte-bouton disabled",
+                  data: { initial_disabled: true }
+                ) do %>
+                  <%= t(".bouton_creer") %>
+                <% end %>
               </div>
             </div>
           </div>

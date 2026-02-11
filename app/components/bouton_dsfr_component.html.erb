@@ -3,7 +3,11 @@
     <% content %>
   <% end %>
 <% elsif @tag == :submit %>
-  <%= submit_tag @url, @params.merge(type: "submit", name: "commit", value: (content || @url).to_s.strip) %>
+  <% submit_value = @params.delete(:submit_value) %>
+  <% opts = @params.merge(type: "submit", name: "commit", value: (submit_value || (content || @url).to_s.strip)) %>
+  <%= button_tag opts do %>
+    <%= content || @url %>
+  <% end %>
 <% elsif @tag == :button_with_form %>
   <%= button_to @url, @params do %>
     <% content %>

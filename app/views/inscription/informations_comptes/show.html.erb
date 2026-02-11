@@ -84,8 +84,20 @@
           </div>
           <div class="fr-col-12">
             <div class="informations-compte-actions">
-              <%= render LienComponent.new(t(".quitter"), pro_connect_logout_path, class: "bouton-tertiaire grand-bouton informations-compte-quitter") %>
-              <%= submit_tag t(".continuer"), class: "bouton grand-bouton valider-compte-bouton disabled", disabled: true %>
+              <%= render BoutonDsfrComponent.new(pro_connect_logout_path, type: :tertiary) do %>
+                <%= t(".quitter") %>
+              <% end %>
+              <%= render BoutonDsfrComponent.new(
+                t(".continuer"),
+                type: :primary,
+                tag: :submit,
+                id: "valider-compte-bouton",
+                class: "valider-compte-bouton disabled",
+                disabled: true,
+                data: { initial_disabled: true }
+              ) do %>
+                <%= t(".continuer") %>
+              <% end %>
             </div>
           </div>
         </div>

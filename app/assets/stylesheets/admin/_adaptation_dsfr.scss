@@ -175,6 +175,14 @@ button.fr-link--close.fr-link:hover {
   z-index: 9999;
 }
 
+@media (max-width: 48rem) {
+  .fr-modal>.fr-container {
+    pointer-events: none;
+    position: fixed;
+    top: 8rem;
+  }
+}
+
 .fr-modal.fr-modal--opened {
   display: flex; 
 }
@@ -199,6 +207,25 @@ button.fr-link--close.fr-link:hover {
 .fr-modal__footer .fr-btns-group {
   gap: 1rem;
   margin: 0;
+}
+
+// Boutons DSFR dans les modales (hors body.evapro_admin / body.logged_in)
+.fr-modal.evapro_admin .fr-btn {
+  @include grand-bouton;
+  border-radius: 0;
+}
+
+.fr-modal.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+  color: var(--text-inverted-blue-france);
+}
+
+.fr-modal.evapro_admin .fr-btn--secondary,
+.fr-modal.evapro_admin .fr-btn--tertiary {
+  color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+}
+
+.fr-modal.evapro_admin .fr-btn--tertiary:hover {
+  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
 }
 
 body.logged_in:not(.evapro_admin) .fr-btn {

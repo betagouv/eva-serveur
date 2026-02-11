@@ -1,4 +1,4 @@
-<header role="banner" class="fr-header <%= "fr-header--logged-in" if logged_in? %>">
+<header role="banner" class="fr-header <%= "fr-header--logged-in" if logged_in? %> <%= @classes&.join(" ") %>">
   <div class="fr-header__body">
     <div class="fr-container">
       <div class="fr-header__body-row">

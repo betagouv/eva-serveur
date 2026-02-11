@@ -2,7 +2,7 @@
 
 class HeaderComponent < ViewComponent::Base
   def initialize(logo: nil, logo_alt: nil, titre: nil, tagline: nil, current_compte: nil,
-actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
+actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil)
     @logo = logo
     @logo_alt = logo_alt
     @titre = titre
@@ -12,6 +12,7 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil)
     @nav_links = nav_links
     @logged_in = logged_in
     @show_navigation = show_navigation
+    @classes = classes
   end
 
   def affiche_actions_connexion?

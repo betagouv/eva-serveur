@@ -1,9 +1,8 @@
 <% complet = evaluation_impact_general.present? %>
-
-<div id="evaluation-impact-general" class="fr-mb-6w">
+<div id="evaluation-impact-general">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
-  <div class="panel fr-pb-0">
-    <div class="fr-pl-4w fr-pr-4w evaluation-impact-general__resultats">
+  <div class="fr-pb-0">
+    <div class="evaluation-impact-general__resultats">
 
       <% if complet %>
         <% synthese = evaluation_impact_general.synthese %>
@@ -26,33 +25,11 @@
         <% end %>
       <% end %>
     </div>
-    <div class="fr-pl-4w fr-pr-4w fr-pb-4v fr-pt-4v evaluation-impact-general__definitions">
-      <%= render partial: "admin/evaluations/mesure_des_impacts_definitions" %>
-    </div>
   </div>
-  <div class="panel">
-      <% if complet %>
-      <% interpretations_callout = [
-        :score_cout,
-        :score_strategie,
-        :score_numerique
-      ] %>
-      <% if interpretations_callout.any? %>
-          <div class="fr-pl-4w fr-pr-4w fr-mt-4w evaluation-impact-general__resultats">
-            <div class="impact-callouts">
-              <% interpretations_callout.each do |interpretation| %>
-                <% resultat = synthese[interpretation] %>
 
-                <%= render Evaluation::MesureImpactCalloutComponent.new(
-                  titre: t(".#{interpretation}.callout.titre.#{resultat}"),
-                  resultat: resultat,
-                  classes: [ "impact-callouts__item" ]
-                ) %>
-              <% end %>
-            </div>
-          </div>
-      <% end %>
-    <% end %>
-  </div>
+  <% if complet %>
+    <h2 class="evaluation__titre fr-mt-4w">Coûts</h2>
+    <%= render "impact_couts", synthese: synthese %>
+  <% end %>
 
 </div>

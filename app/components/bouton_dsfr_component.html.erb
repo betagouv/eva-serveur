@@ -1,0 +1,15 @@
+<% if @tag == :a %>
+  <%= link_to @url, @params do %>
+    <% content %>
+  <% end %>
+<% elsif @tag == :submit %>
+  <%= submit_tag @url, @params.merge(type: "submit", name: "commit", value: (content || @url).to_s.strip) %>
+<% elsif @tag == :button_with_form %>
+  <%= button_to @url, @params do %>
+    <% content %>
+  <% end %>
+<% else %>
+  <%= button_tag @params.merge(type: "button") do %>
+    <% content %>
+  <% end %>
+<% end %>

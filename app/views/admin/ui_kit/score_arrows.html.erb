@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo ScoreArrows</h1>
+
+  <h2>Scores ABCD - Couleurs et Bleus</h2>
+
+  <h3>Couleurs</h3>
+  <div class="score-arrows-layout fr-mb-3w">
+    <% %w[a b c d].each do |score| %>
+      <%= render PileFlechesScoreComponent.new(theme: :color, active_score: score) %>
+    <% end %>
+  </div>
+
+  <h3>Bleus</h3>
+  <div class="score-arrows-layout fr-mb-3w">
+    <% %w[a b c d].each do |score| %>
+      <%= render PileFlechesScoreComponent.new(theme: :blue, active_score: score) %>
+    <% end %>
+  </div>
+
+  <h2>Couleurs et Bleus</h2>
+
+  <div class="fr-mb-3w">
+    <h3>Colorés - Inactifs</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% %w[a b c d].each do |score| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render FlecheScoreComponent.new(score: score, theme: :color, active: false) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="fr-mb-3w">
+    <h3>Colorés - Actifs</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% %w[a b c d].each do |score| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render FlecheScoreComponent.new(score: score, theme: :color, active: true) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="fr-mb-3w">
+    <h3>Bleus - Inactifs</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% %w[a b c d].each do |score| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render FlecheScoreComponent.new(score: score, theme: :blue, active: false) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="fr-mb-3w">
+    <h3>Bleus - Actifs</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% %w[a b c d].each do |score| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render FlecheScoreComponent.new(score: score, theme: :blue, active: true) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

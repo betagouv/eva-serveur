@@ -12,6 +12,7 @@
       }
     }
   }
+
   /* fin reset style */
 
   input { display: none; }
@@ -54,7 +55,9 @@
   .choix-item {
     height: 100%;
     padding: 1rem;
-    @include carte-avec-bordure();
+
+    @include carte-avec-bordure;
+
     cursor: pointer;
     transition: background-color,border-color,box-shadow, color .2s;
     user-select: none;
@@ -62,17 +65,19 @@
     flex-direction: column;
 
     &__titre {
-      @include titre();
+      @include titre;
+
       font-size: .875rem;
       line-height: 1.125rem;
       margin-bottom: .625rem;
     }
     &__duree, &__description {
-      @include texte-xs();
+      @include texte-xs;
+
       font-weight: normal;
       margin: 0;
       p {
-        @include texte-xs();
+        @include texte-xs;
       }
       ul {
         list-style: disc;

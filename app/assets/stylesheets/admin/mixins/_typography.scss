@@ -5,9 +5,11 @@
   color: $grey_50;
   margin: 0;
 }
+
 @mixin titre-carte() {
-  @include annule-carte();
-  @include titre();
+  @include annule-carte;
+  @include titre;
+
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
   border: 0;
@@ -60,6 +62,12 @@
   line-height: var(--Body-SM---Texte-dtail-Line-Height, 24px);
 }
 
+@mixin body-sm-semibold() {
+  @include body-sm;
+
+  font-weight: 600;
+}
+
 @mixin h6-xxs() {
   color: var(--light-decisions-text-text-title-grey, #161616);
   font-family: var(--Titres-Font, Quicksand);
@@ -108,13 +116,16 @@
 @mixin h2-lg() {
   color: var(--color-text-title, #161616);
   font-family: var(--Titres-Font, Quicksand);
-  @include dsfr-titre-lg();
+
+  @include dsfr-titre-lg;
 }
 
 @mixin body-xl() {
   color: var(--color-text-base, #3A3A3A);
   font-family: var(--Body-LG---Texte-article-Font, "Work Sans");
-  @include dsfr-texte-xl();
+
+  @include dsfr-texte-xl;
+
   line-height: 32px; /* 160% */
 }
 
@@ -152,4 +163,68 @@
   font-style: normal;
   font-weight: 700;
   line-height: 28px; /* 127.273% */
+}
+
+@mixin h4-sm() {
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+@mixin h3-md-desktop() {
+  font-family: Quicksand, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+@mixin body-lg-semibold() {
+  font-family: var(--Body-LG---Texte-article-Font, "Work Sans");
+  font-size: var(--Body-LG---Texte-article-Size, 18px);
+  font-style: normal;
+  font-weight: 600;
+  line-height: var(--Body-LG---Texte-article-Line-Height, 28px);
+}
+
+@mixin texte-md-bold() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin texte-sm-regular() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin texte-sm-bold() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin texte-xl-semibold() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+@mixin h6-xxs-desktop() {
+  font-family: Marianne, sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
 }

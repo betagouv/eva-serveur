@@ -23,7 +23,7 @@ fr:
         titre: Membres de la structure
         invitation: |
           Pour inviter une personne à rejoindre cette structure,
-          vous pouvez lui envoyer le lien suivant :
+          vous pouvez lui envoyer le lien suivant :
         voir_membres: Voir la liste
       mes_campagnes:
         voir: Voir
@@ -36,7 +36,7 @@ fr:
             modification: Modification de la structure
           verifier_information_structure: |
             **Veuillez vérifier les informations saisies avant de valider cette création.**
-            Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
+            Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
           siret_hint: Il est composé de 14 chiffres
     structures_locales:
       form:
@@ -55,7 +55,7 @@ fr:
 
         Si vous n'êtes pas sûr d'être habilité à prendre cette responsabilité, veuillez prendre contact préalablement avec votre responsable hiérarchique.
       bouton_retour: Annuler
-      bouton: Créer ma structure
+      bouton: Créer la structure
     modal_confirmation_creation_structure:
       titre: Créer la structure
       message: |
@@ -64,10 +64,10 @@ fr:
 
         En la créant, vous en deviendrez **l’administrateur ou l’administratrice**.
 
-        Ce rôle vous permet notamment de :
+        Ce rôle vous permet notamment de :
 
 
-        - gérer les informations ;
+        - gérer les informations ;
         - accepter ou refuser les demandes de rattachement d’autres utilisateurs.
 
         <br>

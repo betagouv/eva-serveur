@@ -119,6 +119,14 @@ class Structure < ApplicationRecord
       .perform_later(id)
   end
 
+  def opco_financeur
+    opcos.find(&:financeur?)
+  end
+
+  def opco
+    opcos.first
+  end
+
   private
 
   def verifie_siret_ou_siren

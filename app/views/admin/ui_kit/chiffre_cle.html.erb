@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo ChiffreCleComponent</h1>
+
+  <p class="fr-text--lead">
+    Ce composant affiche un chiffre clé avec un préfixe et/ou un suffixe optionnel, selon différents paliers.
+  </p>
+
+  <h2>Tous les paliers</h2>
+
+  <div class="fr-mb-5w">
+    <h3>Avec préfixe et chiffre</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render ChiffreCleComponent.new(
+                palier: palier_label,
+                chiffre: "42",
+                prefixe: "Votre situation"
+              ) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="fr-mb-5w">
+    <h3>Avec préfixe, chiffre et suffixe</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render ChiffreCleComponent.new(
+                palier: palier_label,
+                chiffre: "75",
+                prefixe: "Score",
+                suffixe: "%"
+              ) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="fr-mb-5w">
+    <h3>Chiffre seul</h3>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-3">
+          <%= render ChiffreCleComponent.new(
+                palier: palier_label,
+                chiffre: "100"
+              ) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <h2>Exemples avec les libellés du bilan Eva Pro</h2>
+
+  <div class="fr-mb-5w">
+    <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+      <div class="fr-mb-3w">
+        <h3>Palier <%= palier_label %></h3>
+        <%= render ChiffreCleComponent.new(
+              palier: palier_label,
+              chiffre: I18n.t("bilan_eva_pro.chiffre_cle.#{palier_label}"),
+              prefixe: I18n.t("bilan_eva_pro.prefixe")
+            ) %>
+      </div>
+    <% end %>
+  </div>
+</div>

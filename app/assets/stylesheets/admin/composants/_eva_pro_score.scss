@@ -1,0 +1,62 @@
+// ============================================================================
+// Composant EvaProScore - Paliers A, B, C, D
+// ============================================================================
+
+// --- EvaProScoreItemComponent ---
+
+.eva-pro-score-item {
+  --eva-pro-score-item-bg: var(--light-options-illustration-color-850-default-green-emeraude-850, #6FE49D);
+
+  display: flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--eva-pro-score-item-bg);
+
+  &__lettre {
+    @include body-xs;
+
+    color: var(--light-decisions-text-text-label-grey, #161616);
+  }
+
+  // Variantes couleur par lettre
+  &--a {
+    --eva-pro-score-item-bg: var(--light-options-illustration-color-850-default-green-emeraude-850, #6FE49D);
+  }
+
+  &--b {
+    --eva-pro-score-item-bg: var(--light-options-illustration-color-925-default-green-tilleul-verveine-925, #FBE769);
+  }
+
+  &--c {
+    --eva-pro-score-item-bg: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
+  }
+
+  &--d {
+    --eva-pro-score-item-bg: var(--light-options-illustration-color-main-default-pink-tuile-main-556, #CE614A);
+  }
+
+  // Variante active
+  &--active {
+    width: 1.5rem;
+    height: 1.75rem;
+    border-radius: var(--Radius-SM, 4px);
+    border: 2px solid var(--dark-decisions-border-border-action-high-grey, #FFF);
+
+    .eva-pro-score-item__lettre {
+      @include texte-md-bold;
+
+      color: var(--light-decisions-text-text-label-grey, #161616);
+    }
+  }
+}
+
+// --- EvaProScoreComponent ---
+
+.eva-pro-score {
+  display: flex;
+  width: 5.25rem;
+  align-items: center;
+}

@@ -1,6 +1,7 @@
 .admin_dashboard {
   $grid-columns: 8;
   $grid-gutter-width: 1.25rem;
+
   @import "../../../bootstrap_grid";
 
   .section-evaluations, .section-actualites {
@@ -8,7 +9,113 @@
   }
 
   .section-tableau-bord-eva-pro {
-    margin-bottom: $dsfr-spacing-14v;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+
+    .bienvenue-entreprise__titre {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .derniere-reponse-complete {
+    .derniere-reponse-complete__titre {
+      @include h5-xs;
+
+      margin: 0;
+    }
+
+    .derniere-reponse-complete__texte {
+      @include body-md-base;
+
+      margin: 0;
+    }
+
+    .derniere-reponse-complete__diagnostique {
+      display: flex;
+      align-items: stretch;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+
+    .derniere-reponse-complete__diagnostique-item {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+    }
+
+    .derniere-reponse-complete__diagnostique-item .chiffre-cle {
+      width: 100%;
+      flex: 1;
+    }
+  }
+
+  .cinq-dernieres-evaluations {
+    .cinq-dernieres-evaluations__titre {
+      @include h5-xs;
+
+      margin: 0;
+    }
+
+    .cinq-dernieres-evaluations__texte {
+      @include body-md-base;
+
+      margin: 0;
+    }
+
+    .cinq-dernieres-evaluations__tableau {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      align-self: stretch;
+      width: 100%;
+    }
+  }
+
+  .tableau-bord-layout {
+    display: flex;
+    width: 1200px;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+
+    .tableau-bord-contenu-principal {
+      display: flex;
+      padding: var(--Space-3W, 24px) 0 var(--Space-7W, 56px) 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--Space-5W, 40px);
+      flex: 1 0 0;
+    }
+
+    .tableau-bord-sidebar {
+      display: flex;
+      width: 282px;
+      padding: var(--Space-3W, 24px) 0 var(--Space-7W, 56px) 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--Space-4W, 32px);
+      flex-shrink: 0;
+      align-self: stretch;
+      border-left: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+    }
+
+    @media (max-width: 1200px) {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+
+      .tableau-bord-sidebar {
+        flex: 1;
+        position: static;
+        width: 100%;
+      }
+    }
   }
 
   .bloc-apercu {
@@ -19,7 +126,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0rem 0.5rem;
+        padding: 0 0.5rem;
         margin: 0;
         gap: 1rem;
         height: 2rem;
@@ -47,7 +154,8 @@
         }
       }
       .campagne {
-        @include carte-avec-ombre();
+        @include carte-avec-ombre;
+
         padding: 0.7rem 1rem;
         margin-bottom: 0.5rem;
         display: flex;
@@ -92,20 +200,16 @@
   .evaluations-sans-mise-en-action {
     box-shadow: none;
 
-    .contenu-avec-evaluations {
-      background-color: $blue-france-950;
-      padding-bottom: 0.5rem;
-    }
 
     .card {
       box-shadow: none;
 
       &.carte--deroulee {
         border-radius: .5rem .5rem 0 0;
-        box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+        box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
 
         & ~ .qcm {
-          box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+          box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
         }
       }
     }
@@ -119,7 +223,7 @@
         a {
           display: flex;
           align-items: center;
-          &:after {
+          &::after {
             content: '';
             width: 1.5rem;
             height: 1.5rem;
@@ -133,18 +237,18 @@
         background-color: white;
         .carte__nom a {
           color: $eva_main_blue;
-          &:after {
+          &::after {
             display: inline-block;
           }
         }
       }
       .mise-en-action {
-        @include texte()
+        @include texte
       }
     }
 
     .titre-panel-avec-bouton {
-      box-shadow: 0px 0px 8px rgba(30, 65, 106, 0.25);
+      box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
       border-radius: .5rem .5rem 0 0;
     }
 
@@ -153,6 +257,8 @@
     }
 
     .contenu-avec-evaluations {
+      background-color: $blue-france-950;
+      padding-bottom: 0.5rem;
       border-radius: 0.5rem;
 
       .banniere-solutions-illettrisme {
@@ -199,5 +305,146 @@
 
   .actions {
     gap: .25rem;
+  }
+
+  // Sidebar OPCO
+  #sidebar {
+    width: 282px;
+  }
+
+  .tableau-bord-sidebar-container {
+    display: flex;
+    padding-left: var(--Space-3W, 24px);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-4W, 32px);
+    align-self: stretch;
+  }
+
+  .bloc-opco-partenaire {
+    display: flex;
+    padding: var(--Space-3W, 24px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--Space-2W, 16px);
+    align-self: stretch;
+    border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+    background: var(--light-decisions-background-background-alt-grey, #F6F6F6);
+    img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  .bloc-opco-partenaire__titre {
+    color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+
+    @include texte-md-bold;
+
+    margin: 0;
+  }
+
+  .bloc-opco-partenaire__logo {
+    display: flex;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 51/28;
+    object-fit: contain;
+  }
+
+  .bloc-opco-entreprise {
+    display: flex;
+    padding: var(--Space-3W, 24px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--Space-2W, 16px);
+    align-self: stretch;
+    border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+
+    &__bouton {
+      @include bouton-primaire;
+    }
+  }
+  .bloc-opco-entreprise__details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+  }
+
+  .bloc-opco-entreprise__titre {
+    color: var(--light-decisions-text-text-mention-grey, #666);
+
+    @include texte-md-bold;
+
+    margin: 0;
+  }
+
+  .bloc-opco-entreprise__nom {
+    color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+
+    @include texte-sm-regular;
+
+    margin: 0;
+  }
+
+  .bloc-questionnaires-entreprise {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+    &__grid {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+    &__description {
+      @include body-xl;
+
+      margin: 0;
+    }
+    &__description_2 {
+      @include body-md-base;
+
+      margin: 0;
+    }
+    &__titre {
+      @include h5-xs;
+
+      margin: 0;
+    }
+    &__texte {
+      @include body-md-base;
+
+      margin: 0;
+    }
+  }
+
+  .bienvenue-entreprise {
+    &__titre {
+      @include h2-lg;
+
+      margin: 0;
+    }
+    &__suite {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--Space-3W, 24px);
+      align-self: stretch;
+    }
+    &__texte {
+      color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+
+      @include body-md-base;
+
+      margin: 0;
+    }
   }
 }

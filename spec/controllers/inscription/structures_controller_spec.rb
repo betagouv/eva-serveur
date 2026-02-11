@@ -136,6 +136,20 @@ siret_pro_connect: "13002526500013") }
           expect(structure_creée.opcos).to contain_exactly(opco1)
         end
       end
+
+      context "quand le type_structure est entreprise" do
+        let(:structure_params_entreprise) do
+          structure_params.merge(type_structure: "entreprise")
+        end
+
+        it "affecte l'usage 'Eva: entreprises' à la structure" do
+          patch :update, params: { structure: structure_params_entreprise, commit: "creer" }
+
+          structure_creée.reload
+          expect(structure_creée.type_structure).to eq("entreprise")
+          expect(structure_creée.usage).to eq("Eva: entreprises")
+        end
+      end
     end
 
     context "quand l'action est 'rejoindre'" do

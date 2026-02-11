@@ -1,0 +1,31 @@
+<div id="evaluation-bilan-evapro">
+  <% if diag_risques_entreprise.palier.present? %>
+    <% palier = diag_risques_entreprise.palier %>
+    <h2 class="evaluation__titre"><%= t(".titre") %></h2>
+    <div class="evaluation-bilan-evapro__contenu">
+      <%= render(BilanEvaProComponent.new(palier: palier)) %>
+      <p class="evaluation-bilan-evapro__explication"><%= t(".explication") %></p>
+
+      <% if opco %>
+        <h3 class="evaluation-bilan-evapro__opco-financeur-titre"><%= t(".opco_titre") %></h3>
+
+        <div class="evaluation-bilan-evapro__opco-financeur">
+          <% if opco.logo.attached? %>
+            <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
+          <% end %>
+          <div class="evaluation-bilan-evapro__opco-financeur-details">
+            <% if opco.telephone %>
+              <p><%= opco.telephone %></p>
+            <% end %>
+            <% if opco.email %>
+              <p><%= opco.email %></p>
+            <% end %>
+            <% if opco.url %>
+              <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

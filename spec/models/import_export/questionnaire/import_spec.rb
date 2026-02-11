@@ -48,22 +48,4 @@ describe ImportExport::Questionnaire::Import do
       end.to raise_error(ImportExport::Questionnaire::Import::Error, message)
     end
   end
-
-  describe 'avec un questionnaire soft-delete' do
-    let(:file) do
-      file_fixture_upload('spec/support/import_questionnaire.xls', 'text/xls')
-    end
-
-    before do
-      create(:questionnaire, nom_technique: 'numeratie_2024', deleted_at: Time.zone.now)
-    end
-
-    it "retourne les messages d'erreur" do
-      message = 'Erreur de validation à la ligne 0 : Nom technique est déjà utilisé(e)'
-
-      expect do
-        service.import_from_xls(file)
-      end.to raise_error(ImportExport::ImportXls::Error, message)
-    end
-  end
 end

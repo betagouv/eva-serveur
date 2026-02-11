@@ -1,0 +1,23 @@
+<section class="bienvenue-entreprise section-tableau-bord-eva-pro">
+  <% if premiere_reponse_complete %>
+    <h2 class="bienvenue-entreprise__titre">
+      <%= t("admin.dashboard.bienvenue_entreprise.titre_tableau_de_bord") %>
+    </h2>
+    <div class="bienvenue-entreprise__suite">
+      <p class="bienvenue-entreprise__texte">
+        <%= t("admin.dashboard.bienvenue_entreprise.intro_apres_premiere_reponse_paragraphe_1") %>
+      </p>
+      <p class="bienvenue-entreprise__texte">
+        <%= t("admin.dashboard.bienvenue_entreprise.intro_apres_premiere_reponse_paragraphe_2") %>
+      </p>
+      <%= render BoutonDsfrComponent.new(admin_structure_locale_path(structure, anchor: "bloc-membres"),
+                                         type: :primary) do %>
+        <%= t("admin.dashboard.bienvenue_entreprise.inviter_collegues_bouton") %>
+      <% end %>
+    </div>
+  <% else %>
+    <h2 class="bienvenue-entreprise__titre">
+      <%= t("admin.dashboard.bienvenue_entreprise.titre") %>
+    </h2>
+  <% end %>
+</section>

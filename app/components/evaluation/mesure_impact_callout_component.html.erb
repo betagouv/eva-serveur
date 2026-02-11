@@ -1,4 +1,6 @@
 <%= render MiseEnAvantComponent.new(
   titre: @titre,
   classes: @classes
-) %>
+) do %>
+  <%= content %>
+<% end %>

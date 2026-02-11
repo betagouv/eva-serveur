@@ -1,0 +1,16 @@
+<%# Layout evapro - même approche que connexion_v2 et inscription_v2 %>
+<% content_for :classes_body, " evapro_admin" %>
+<% content_for :classes_conteneur, " evapro_admin" %>
+
+<% content_for :content_block do %>
+  <div class="evapro_admin__content">
+    <div class="evapro_admin__content__inner">
+      <%= render partial: "layouts/flash" %>
+      <div id="active_admin_content">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: "layouts/active_admin_evapro_structure" %>

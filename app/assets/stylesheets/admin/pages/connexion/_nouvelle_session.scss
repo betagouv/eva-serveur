@@ -1,0 +1,136 @@
+.nouvelle-session {
+  display: flex;
+  align-items: stretch;
+  align-self: stretch;
+  width: 100%;
+}
+
+
+
+.nouvelle-session__connexion {
+  display: flex;
+  padding: 0 var(--Space-3V, 12px);
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 1 0 0;
+
+  .flashes {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}
+
+.nouvelle-session__connexion-container {
+  display: flex;
+  max-width: 588px;
+  padding: var(--Space-12W, 6rem) 6.375rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-3W, 1.5rem);
+  align-self: flex-end
+}
+
+.nouvelle-session__logo {
+  width: 47px;
+  height: 40px;
+}
+
+.nouvelle-session__connexion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+  
+  .informations-compte-actions {
+    width: 100%;
+  }
+  
+  .connexion_v2__inputs-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .connexion_v2__input-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .liens-partages a {
+    @include body-md-base;
+
+    color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+  }
+}
+
+.nouvelle-session__connexion-titre {
+  @include h5-xs;
+
+  margin: 0;
+}
+
+.nouvelle-session__connexion-description {
+  @include body-sm;
+
+  color: $couleur-texte;
+  margin: 0;
+}
+
+.nouvelle-session__connexion-lien-proconnect {
+  font-size: 14px;
+}
+
+.page-nouvelle-session-separateur {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+
+  .separateur-ligne {
+    display: flex;
+    height: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 1 0 0;
+
+    svg,
+    img {
+      height: 1px;
+      width: 100%;
+      max-width: 169px;
+      fill: #ddd;
+    }
+  }
+
+  .separateur-texte {
+    @include body-sm-base;
+
+    font-weight: 700;
+    color: #3A3A3A;
+    margin: 0;
+  }
+}
+
+.connexion_v2__bouton-full-width,
+.connexion_v2__bouton-full-width.bouton,
+.connexion_v2__bouton-full-width.bouton-secondaire,
+.connexion_v2__bouton-full-width.grand-bouton,
+a.connexion_v2__bouton-full-width,
+a.connexion_v2__bouton-full-width.bouton,
+a.connexion_v2__bouton-full-width.bouton-secondaire {
+  width: 100% !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}

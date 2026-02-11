@@ -49,6 +49,14 @@ class StructureLocale < Structure
 
   auto_strip_attributes :code_postal, delete_whitespaces: true
 
+  def affecte_usage_entreprise_si_necessaire
+    return unless ENV["ACTIVE_EVAPRO"].present?
+    return unless type_structure == "entreprise"
+    return if eva_entreprises?
+
+    self.usage = AvecUsage::USAGE_ENTREPRISES
+  end
+
   def display_name
     "#{nom} - #{code_postal}"
   end

@@ -1,0 +1,18 @@
+<div class="mesure-chiffre-cle">
+  <div class="mesure-chiffre-cle__chiffre-cle">
+    <%= render ChiffreCleComponent.new(
+      palier: palier,
+      prefixe: prefixe,
+      chiffre: chiffre,
+      suffixe: suffixe
+    ) %>
+  </div>
+  <div class="mesure-chiffre-cle__explication">
+    <p class="mesure-chiffre-cle__explication-label">
+      <%= texte %>
+    </p>
+    <p class="mesure-chiffre-cle__explication-label">
+      <%= suite %>
+    </p>
+  </div>
+</div>

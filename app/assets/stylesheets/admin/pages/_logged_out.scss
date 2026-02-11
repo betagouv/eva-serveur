@@ -19,6 +19,7 @@ body.logged_out {
 
   h3 {
     @include titre-carte;
+
     font-size: 1.25rem;
     line-height: 1.5rem;
     margin-bottom: 1.25rem;
@@ -111,7 +112,7 @@ body.logged_out {
         }
       }
       form {
-        .actions input[type=submit] {
+        .actions input[type="submit"] {
           margin-right: 0;
         }
         label abbr {
@@ -141,16 +142,14 @@ body.logged_out {
           }
         }
       }
-      .panel {
-        &--evaluation, &--connexion {
-          .bouton-action {
-            display: flex;
-            justify-content: flex-end;
-          }
+      .panel--evaluation, .panel--connexion {
+        .bouton-action {
+          display: flex;
+          justify-content: flex-end;
+        }
 
-          .bouton-action--centre {
-            justify-content: center;
-          }
+        .bouton-action--centre {
+          justify-content: center;
         }
       }
     }
@@ -175,6 +174,7 @@ body.logged_out {
         .action-principale {
           @include bouton-primaire;
           @include grand-bouton;
+
           display: inline-flex;
           align-items: center;
         }
@@ -184,7 +184,7 @@ body.logged_out {
     .espace-pro-connect {
       &-transition {
         margin: 2rem;
-        font-family: "Quicksand";
+        font-family: Quicksand, sans-serif;
         font-weight: bold;
         font-size: 1.125rem;
         text-align: center;
@@ -194,6 +194,7 @@ body.logged_out {
         .actions {
           @include bouton-primaire;
           @include grand-bouton;
+
           display: inline-flex;
           height: 3.625rem;
           align-items: center;
@@ -239,7 +240,7 @@ body.logged_out {
     justify-content: flex-end;
     gap: 0.625rem;
 
-    input[type=submit] {
+    input[type="submit"] {
       margin: 0;
     }
   }
@@ -268,6 +269,7 @@ body.logged_out {
     &--consigne {
       font-weight: 600;
     }
+
     margin-bottom: 1.5rem;
     p {
       margin-bottom: 1rem;
@@ -282,7 +284,7 @@ body.logged_out {
   }
 }
 
-body.logged_out:not(.page_inscription_v2) {
+body.logged_out:not(.page_inscription_v2) :not(.page_connexion_v2) {
   #wrapper {
     &::before {
       content: '';
@@ -293,7 +295,7 @@ body.logged_out:not(.page_inscription_v2) {
       top: 0;
       width: $largeur-colonne;
       left: 50%;
-      margin-left: -$largeur-colonne/2;
+      margin-left: -$largeur-colonne / 2;
     }
   }
 }

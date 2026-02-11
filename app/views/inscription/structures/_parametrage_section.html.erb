@@ -33,19 +33,13 @@
         collection: collection_opcos,
         required: true,
         value: opco_id_associe(form.object),
-        hint: t("inscription.structures.show.hint_opco")
-      ) %>
-      <%= render LienComponent.new(
-        "Trouver mon OPCO sur France Compétences",
-        "https://quel-est-mon-opco.francecompetences.fr/unavailable",
-        externe: true,
-        class: "structure-parametrage-section__opco-link"
+        hint: t("inscription.structures.show.hint_opco"),
+        include_blank: t("inscription.structures.show.choisir_opco"),
+        link_text: "Trouver mon Opérateur de compétences sur France Compétences",
+        link_url: "https://quel-est-mon-opco.francecompetences.fr/",
+        link_html: { target: "_blank", rel: "noopener noreferrer" }
       ) %>
     </div>
   </div>
-
-  <p class="structure-parametrage-section__mention-admin">
-    <%= t("inscription.structures.show.mention_creation") %>
-  </p>
 </div>
 

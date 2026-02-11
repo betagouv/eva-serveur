@@ -1,6 +1,7 @@
 .admin_campagnes {
   $grid-columns: 8;
   $grid-gutter-width: 1.25rem;
+
   @import "../../bootstrap_grid";
 
   td.col, th.col {
@@ -88,8 +89,9 @@
 
   .nouvelle-campagne {
     .fieldset-title span {
-      @include h3();
-      @include titre();
+      @include h3;
+      @include titre;
+
       border: none;
       background: none;
       padding: 0;
@@ -116,7 +118,7 @@
     }
   }
 
-//ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
+// ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
 
   form fieldset.actions {
     margin-top: 2rem;
@@ -129,8 +131,8 @@
       margin-bottom: 0;
     }
     .bouton-annuler a {
-      @include bouton-secondaire();
-      @include grand-bouton();
+      @include bouton-secondaire;
+      @include grand-bouton;
     }
 
     input {
@@ -146,6 +148,7 @@
 }
 
 .campagne--titre {
-  @include dsfr-titre-xl();
+  @include dsfr-titre-xl;
+
   margin: 0;
 }

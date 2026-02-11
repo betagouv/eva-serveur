@@ -31,7 +31,7 @@ describe QuestionClicDansImage, type: :model do
       expect(json.keys)
         .to match_array(%w[description id intitule audio_url nom_technique type illustration
                            modalite_reponse zone_cliquable_url image_au_clic_url consigne_audio
-                           score metacompetence demarrage_audio_modalite_reponse])
+                           score metacompetence demarrage_audio_modalite_reponse passable])
       expect(json['type']).to eql('clic-dans-image')
       expect(json['intitule']).to eql('Mon Intitulé')
       expect(json['illustration']).to eql(Rails.application.routes.url_helpers.url_for(

@@ -1,5 +1,6 @@
 .bouton-menu-mobile {
   @include bouton-tertiaire-sans-contour;
+
   display: none;
   flex-direction: column;
   align-items: center;
@@ -17,19 +18,19 @@
     transition: all 0.3s ease;
   }
 
-  &:hover {
-    span {
-      background-color: $blue-france-sun-113;
-    }
+  &:hover:not(.disabled, .bouton--actif) {
+    background-color: color-mix(in srgb, $blue-france-sun-113 70%, white);
   }
 
   &.active {
     span:nth-child(1) {
       transform: rotate(45deg);
     }
+
     span:nth-child(2) {
       opacity: 0;
     }
+
     span:nth-child(3) {
       transform: rotate(-45deg);
       margin-top: -1rem;
@@ -43,44 +44,47 @@
   }
 
   $largeur_menu: 15rem;
+
   #header ul#tabs.tabs {
     display: none;
 
     &:focus-within {
       display: block;
     }
+
     position: absolute;
     top: 60px;
     left: 0;
     width: $largeur_menu;
     background: #fff;
     filter: drop-shadow(var(--overlap-shadow));
-
     padding: 0;
+
     li {
       display: block;
       margin: 0;
       padding: 0;
 
-      &.has_nested > a:after {
-        -webkit-mask-image: asset-url('fleche-menu.svg');
+      &.has_nested>a::after {
         mask-image: asset-url('fleche-menu.svg');
+
         $icon-size: 1rem;
-        background-color: currentColor;
+
+        background-color: currentcolor;
         transform: rotate(-90deg);
         margin-left: auto;
         content: "";
         display: inline-block;
         height: $icon-size;
         margin-right: 0;
-        -webkit-mask-size: 100% 100%;
         mask-size: 100% 100%;
-        vertical-align: calc((.75em - $icon-size)*.5);
+        vertical-align: calc((.75em - $icon-size) * .5);
         width: $icon-size;
       }
 
       a {
         @include bouton-tertiaire-sans-contour;
+
         justify-content: left;
         box-shadow: 0 calc(-1rem - 1px) 0 -1rem $grey-900;
         width: 100%;
@@ -91,7 +95,8 @@
         z-index: 2;
       }
 
-      ul { // sous-menus
+      ul {
+        // sous-menus
         border-radius: 0;
         left: $largeur_menu;
         top: 0;
@@ -105,6 +110,7 @@
         }
       }
     }
+
     li:first-child a {
       box-shadow: none;
     }

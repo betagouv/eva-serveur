@@ -1,21 +1,16 @@
-<% classes = if pourcentage_risque <= 10
-    [ "fr-callout--green-emeraude" ]
- elsif pourcentage_risque <= 25
-    [ "fr-callout--blue-cumulus" ]
- else
-    [ "fr-callout--pink-macaron" ]
-  end
+<%
+  palier = palier_pourcentage_risque(pourcentage_risque)
+  lettre = palier_to_lettre(palier)
 %>
-
 <div id="diag-risques-entrerpise">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
-  <div class="panel">
-    <div class="fr-pl-4w fr-pr-4w">
-      <%= render MiseEnAvantComponent.new(
-        titre: t(".callout.titre", pourcentage_risque: pourcentage_risque),
-        description: t(".callout.description", pourcentage_risque: pourcentage_risque),
-        classes: classes.push("fr-mb-0")
-      ) %>
-    </div>
-  </div>
+  <%= render Evaluation::MesureChiffreCleComponent.new(
+    palier: palier,
+    prefixe: t(".prefixe"),
+    chiffre: "#{pourcentage_risque} %",
+    explications: {
+      texte: t(".explication.texte.#{lettre}"),
+      suite: t(".explication.suite.#{lettre}")
+    }
+  ) %>
 </div>

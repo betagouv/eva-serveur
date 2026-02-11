@@ -17,37 +17,43 @@ describe CampagneCreateur, type: :model do
            libelle: "Eva entreprises Constructys",
            type_de_programme: :diagnostic)
   end
+  let(:parcours_type_generique) do
+    create(:parcours_type,
+           nom_technique: "eva-entreprise",
+           libelle: "Eva entreprises",
+           type_de_programme: :diagnostic)
+  end
 
   let(:createur) { described_class.new(structure_entreprise, compte) }
 
   describe "#cree_campagne_opco!" do
     context "quand toutes les conditions sont réunies" do
-      before { parcours_type } # Créer le parcours type
+      before do
+        parcours_type
+        parcours_type_generique
+      end
 
-      it "crée une campagne avec le nom par défaut" do
+      it "crée uniquement la campagne spécifique (pas de générique)" do
         expect do
           createur.cree_campagne_opco!
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last
-        expect(campagne.libelle).to eq("Diagnostic des risques : ma super structure")
+        expect(campagne.libelle).to eq(
+          "Diagnostic des risques : ma super structure - #{parcours_type.libelle}"
+        )
         expect(campagne.compte).to eq(compte)
         expect(campagne.parcours_type).to eq(parcours_type)
       end
-
-      it "associe le type de programme du parcours type" do
-        campagne = createur.cree_campagne_opco!
-
-        expect(campagne.type_programme).to eq("diagnostic")
-      end
     end
 
-    context "quand le parcours type n'existe pas" do
-      it do
+    context "quand aucun parcours type spécifique n'existe" do
+      before { parcours_type_generique }
+
+      it "ne crée aucune campagne" do
         expect do
           createur.cree_campagne_opco!
-        end.to raise_error(ActiveRecord::RecordNotFound)
-        expect(Campagne.count).to eq 0
+        end.not_to change(Campagne, :count)
       end
     end
 
@@ -115,14 +121,25 @@ describe CampagneCreateur, type: :model do
                libelle: "Eva entreprises OPCO Santé",
                type_de_programme: :diagnostic)
       end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
       let(:createur_sante) { described_class.new(structure_opco_sante, compte) }
 
-      before { parcours_type_sante }
+      before do
+        parcours_type_sante
+        parcours_type_generique
+      end
 
-      it "trouve le bon parcours type en fonction de l'OPCO" do
-        campagne = createur_sante.cree_campagne_opco!
+      it "trouve le bon parcours type et crée uniquement la campagne spécifique" do
+        expect do
+          createur_sante.cree_campagne_opco!
+        end.to change(Campagne, :count).by(1)
 
-        expect(campagne).to be_present
+        campagne = Campagne.last
         expect(campagne.parcours_type).to eq(parcours_type_sante)
       end
     end
@@ -146,74 +163,53 @@ describe CampagneCreateur, type: :model do
 
       before { parcours_type_generique }
 
-      it "crée une campagne avec le parcours type générique" do
+      it "crée uniquement la campagne générique" do
         expect do
           createur_non_financeur.cree_campagne_opco!
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last
-        expect(campagne.libelle).to eq(
-          "Diagnostic des risques : #{structure_opco_non_financeur.nom}"
-        )
+        expect(campagne.libelle).to eq("Diagnostic standard evapro")
         expect(campagne.parcours_type).to eq(parcours_type_generique)
       end
     end
-  end
 
-  describe "#genere_nom_technique_parcours (private)" do
-    it "génère le bon nom technique pour Constructys" do
-      nom_technique = createur.send(:genere_nom_technique_parcours)
-      expect(nom_technique).to eq("eva-entreprise-constructys")
-    end
-
-    context "avec OPCO Santé" do
-      let(:opco) { create(:opco, :opco_sante) }
-      let(:structure_entreprise) do
-        structure = create(:structure_locale,
-                           nom: "ma super structure",
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco
-        structure
+    context "quand il existe plusieurs parcours types pour le même OPCO" do
+      let(:parcours_type_constructys_nmc) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise-constructys-nmc",
+               libelle: "Eva entreprises Constructys NMC",
+               type_de_programme: :diagnostic)
       end
 
-      it "génère le bon nom technique en supprimant les espaces et accents" do
-        nom_technique = createur.send(:genere_nom_technique_parcours)
-        expect(nom_technique).to eq("eva-entreprise-opcosante")
-      end
-    end
-
-    context "avec un nom d'OPCO contenant des caractères spéciaux" do
-      let(:opco) { create(:opco, :opco_mobilites) }
-      let(:structure_entreprise) do
-        structure = create(:structure_locale,
-                           nom: "ma super structure",
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco
-        structure
+      before do
+        parcours_type
+        parcours_type_constructys_nmc
       end
 
-      it "génère le bon nom technique en normalisant les caractères" do
-        nom_technique = createur.send(:genere_nom_technique_parcours)
-        expect(nom_technique).to eq("eva-entreprise-opcomobilites")
-      end
-    end
+      it "crée une campagne pour chaque parcours type trouvé" do
+        expect do
+          createur.cree_campagne_opco!
+        end.to change(Campagne, :count).by(2)
 
-    context "quand l'OPCO n'est pas financeur" do
-      let(:opco) { create(:opco, :opco_non_financeur) }
-      let(:structure_entreprise) do
-        structure = create(:structure_locale,
-                           nom: "ma super structure",
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco
-        structure
-      end
+        campagnes = Campagne.last(2)
+        parcours_types_crees = campagnes.map(&:parcours_type)
 
-      it "génère le nom technique générique" do
-        nom_technique = createur.send(:genere_nom_technique_parcours)
-        expect(nom_technique).to eq("eva-entreprise")
+        expect(parcours_types_crees).to contain_exactly(parcours_type,
+parcours_type_constructys_nmc)
+        campagne_constructys = campagnes.find { |c| c.parcours_type == parcours_type }
+        campagne_constructys_nmc = campagnes.find { |c|
+ c.parcours_type == parcours_type_constructys_nmc }
+
+        expect(campagne_constructys.libelle).to eq(
+          "Diagnostic des risques : ma super structure - #{parcours_type.libelle}"
+        )
+        expect(campagne_constructys_nmc.libelle).to eq(
+          "Diagnostic des risques : ma super structure - #{parcours_type_constructys_nmc.libelle}"
+        )
+        campagnes.each do |campagne|
+          expect(campagne.compte).to eq(compte)
+        end
       end
     end
 
@@ -234,17 +230,30 @@ describe CampagneCreateur, type: :model do
                libelle: "Eva entreprises OPCO Financeur",
                type_de_programme: :diagnostic)
       end
+      let(:parcours_type_generique) do
+        create(:parcours_type,
+               nom_technique: "eva-entreprise",
+               libelle: "Eva entreprises",
+               type_de_programme: :diagnostic)
+      end
       let(:createur_multi) { described_class.new(structure_multi_opco, compte) }
 
-      before { parcours_type_financeur }
+      before do
+        parcours_type_financeur
+        parcours_type_generique
+      end
 
       it "utilise le premier OPCO financeur" do
         premier_opco = createur_multi.send(:premier_opco_financeur)
         expect(premier_opco).to eq(opco_financeur)
       end
 
-      it "crée une campagne avec le parcours type du financeur" do
-        campagne = createur_multi.cree_campagne_opco!
+      it "crée uniquement la campagne avec le parcours type du financeur (pas de générique)" do
+        expect do
+          createur_multi.cree_campagne_opco!
+        end.to change(Campagne, :count).by(1)
+
+        campagne = Campagne.last
         expect(campagne.parcours_type).to eq(parcours_type_financeur)
       end
     end
@@ -270,13 +279,18 @@ describe CampagneCreateur, type: :model do
 
       before { parcours_type_generique }
 
-      it "utilise le premier OPCO" do
+      it "retourne nil car aucun OPCO n'est financeur" do
         premier_opco = createur_multi.send(:premier_opco_financeur)
-        expect(premier_opco).to eq(opco1)
+        expect(premier_opco).to be_nil
       end
 
-      it "crée une campagne avec le parcours type générique" do
-        campagne = createur_multi.cree_campagne_opco!
+      it "crée uniquement la campagne générique" do
+        expect do
+          createur_multi.cree_campagne_opco!
+        end.to change(Campagne, :count).by(1)
+
+        campagne = Campagne.last
+        expect(campagne.libelle).to eq("Diagnostic standard evapro")
         expect(campagne.parcours_type).to eq(parcours_type_generique)
       end
     end

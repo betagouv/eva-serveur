@@ -14,7 +14,7 @@ div class: "panel nouvelle_structure" do
         render LienComponent.new(
           t("nouvelles_structures.show.annuaire_siret.description"),
           t("nouvelles_structures.show.annuaire_siret.url"),
-          externe: true
+          nouvelle_fenetre: true
         )
       end
       if can?(:manage, Compte)

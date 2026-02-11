@@ -1,5 +1,4 @@
 @import 'activeadmin_addons/all';
-
 @import 'accessible-autocomplete.min';
 
 // Active Admin's got SASS!
@@ -26,6 +25,8 @@
 @import 'admin/composants/forms';
 @import "admin/composants/liens";
 @import 'admin/composants/buttons';
+@import 'admin/composants/header';
+@import 'admin/composants/navigation';
 @import 'admin/composants/tags';
 @import 'admin/composants/input_choix';
 @import 'admin/composants/input_choix_parcours';
@@ -38,6 +39,7 @@
 @import 'admin/composants/card';
 @import 'admin/composants/card_validation';
 @import "admin/composants/card_parcours_type";
+@import "admin/composants/card_diagnostique";
 @import 'admin/composants/carte_partage_code';
 @import "admin/composants/carte_prise_en_main";
 @import 'admin/composants/carte_v2';
@@ -60,7 +62,12 @@
 @import "admin/composants/evaluation/notice_incomplete";
 @import "admin/composants/barre_segmentee";
 @import "admin/composants/impact_stepper";
+@import "admin/composants/eva_pro_score";
+@import "admin/composants/score_arrow";
 @import 'admin/composants/alert_incomplete';
+@import 'admin/composants/chiffre_cle';
+@import 'admin/composants/bilan_evapro';
+@import 'admin/composants/mesure_chiffre_cle';
 @import 'admin/composants/sidebar/parametres';
 @import 'admin/composants/dropdown';
 @import 'admin/composants/tableau';
@@ -78,7 +85,7 @@
 @import 'admin/layout/main_structure';
 @import 'admin/layout/sidebar';
 
-//PAGES
+// PAGES
 @import 'admin/pages/aide/aide';
 @import 'admin/pages/aide/contact';
 @import 'admin/pages/aide/sources_aide';
@@ -88,11 +95,14 @@
 @import 'admin/pages/dashboard/bloc_actualites';
 @import 'admin/pages/erreurs';
 @import 'admin/pages/evaluations';
+@import 'admin/pages/evaluation/sidebar';
 @import 'admin/pages/inscription/informations_compte';
 @import 'admin/pages/inscription/recherche';
 @import 'admin/pages/inscription/selection_usage';
 @import 'admin/pages/inscription/structure';
 @import 'admin/pages/inscription/nouveau_compte';
+@import 'admin/pages/connexion/nouvelle_session';
+@import 'admin/pages/connexion/demonstration';
 @import 'admin/pages/logged_out';
 @import 'admin/pages/actualites';
 @import 'admin/pages/actualite';
@@ -107,20 +117,25 @@
 @import 'admin/pages/restitution_globale/numeratie';
 @import 'admin/pages/restitution_globale/deroulement';
 @import 'admin/pages/restitution_globale/mesure_des_impacts';
+@import 'admin/pages/restitution_globale/bilan_evapro';
+@import 'admin/pages/restitution_globale/aller_plus_loin';
 @import 'admin/pages/layouts/inscription_v2';
+@import 'admin/pages/layouts/connexion_v2';
 @import 'admin/pages/login/structures';
 @import 'admin/pages/opcos';
 @import 'admin/pages/question';
+@import 'admin/pages/evapro';
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
 
 body {
-  @include texte();
+  @include texte;
+
   font-family: $font-texte;
   color: $couleur-texte;
-  background-color: $eva_light;
+  background-color: white;
   overflow-x: hidden;
 
   // initialisation du line-height des titres équivalente à la configuration d'active admin initiale pour éviter une regression du design

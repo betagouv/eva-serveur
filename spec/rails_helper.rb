@@ -2,6 +2,7 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 ENV['SIRENE_API_URL'] ||= 'https://api.sirene.test'
+ENV['ACTIVE_EVAPRO'] ||= 'true'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
@@ -35,7 +36,7 @@ ActiveJob::Base.queue_adapter = :test
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  puts e.to_s.strip
+  warn e.to_s.strip
   exit 1
 end
 RSpec.configure do |config|

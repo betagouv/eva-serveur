@@ -65,6 +65,65 @@ describe Evaluation do
         expect(resultats).to include(evaluation_positionnement)
       end
     end
+
+    describe ".pour_structure" do
+      let(:structure) { create :structure }
+      let(:autre_structure) { create :structure }
+      let(:campagne) { create :campagne, compte: create(:compte, structure: structure) }
+      let(:autre_campagne) { create :campagne, compte: create(:compte, structure: autre_structure) }
+      let!(:evaluation_structure) { create :evaluation, campagne: campagne }
+      let!(:evaluation_autre_structure) { create :evaluation, campagne: autre_campagne }
+
+      context "quand la structure est présente" do
+        it "retourne les évaluations de la structure" do
+          expect(described_class.pour_structure(structure)).to contain_exactly(evaluation_structure)
+        end
+      end
+
+      context "quand la structure est absente" do
+        it "retourne une relation vide" do
+          expect(described_class.pour_structure(nil)).to be_empty
+        end
+      end
+    end
+
+    describe ".avec_reponse" do
+      let!(:evaluation_avec_reponse) { create :evaluation }
+      let!(:evaluation_avec_reponse_intitule) { create :evaluation }
+      let!(:evaluation_sans_reponse) { create :evaluation }
+
+      let!(:situation) { create :situation_livraison }
+      let!(:partie_avec_reponse) do
+        create :partie, evaluation: evaluation_avec_reponse, situation: situation
+      end
+      let!(:partie_avec_reponse_intitule) do
+        create :partie, evaluation: evaluation_avec_reponse_intitule, situation: situation
+      end
+      let!(:partie_sans_reponse) do
+        create :partie, evaluation: evaluation_sans_reponse, situation: situation
+      end
+
+      before do
+        create :evenement_reponse, partie: partie_avec_reponse, donnees: { "reponse" => "ok" }
+        create :evenement_reponse, partie: partie_avec_reponse, donnees: { "reponse" => "autre" }
+        create :evenement_reponse,
+               partie: partie_avec_reponse_intitule,
+               donnees: { "reponseIntitule" => "intitulé", "reponse" => "" }
+        create :evenement_reponse, partie: partie_sans_reponse, donnees: { "reponse" => "" }
+        create :evenement_reponse, partie: partie_sans_reponse,
+donnees: { "reponseIntitule" => nil }
+        create :evenement, partie: partie_sans_reponse, donnees: { "reponse" => "ok" }
+      end
+
+      context "quand des réponses non vides existent" do
+        it "retourne les évaluations qui ont au moins une réponse" do
+          expect(described_class.avec_reponse).to contain_exactly(
+            evaluation_avec_reponse,
+            evaluation_avec_reponse_intitule
+          )
+        end
+      end
+    end
   end
 
   describe '#responsables_suivi' do

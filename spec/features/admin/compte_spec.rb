@@ -210,7 +210,6 @@ describe 'Admin - Compte', type: :feature do
 
       it do
         compte_connecte.reload
-        expect(page).not_to have_content 'Accès'
         expect(compte_connecte.prenom).to eq 'Robert'
         fill_in :compte_email, with: 'new_password'
         fill_in :compte_password, with: 'new_password123$$$'

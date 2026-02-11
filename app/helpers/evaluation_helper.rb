@@ -41,4 +41,88 @@ module EvaluationHelper
   def place_du_marche
     restitution_pour_situation(Situation::PLACE_DU_MARCHE)
   end
+
+  def score_to_lettre(score)
+    {
+      "faible" => "a",
+      "moyen" => "b",
+      "fort" => "c",
+      "tres_fort" => "d"
+    }.fetch(score.to_s, score.to_s)
+  end
+
+  def contenu_cout(synthese)
+    lettre = score_to_lettre(synthese[:score_cout])
+    {
+      titre: t("admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.titre.#{lettre}"),
+      texte: t("admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.texte"),
+      suite: t("admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.suite.#{lettre}")
+    }
+  end
+
+  def explication_strategie(synthese)
+    lettre = score_to_lettre(synthese[:score_strategie])
+    base_path = "admin.evaluations.mesure_des_impacts.impact_couts.explications_strategies"
+    {
+      titre: t("#{base_path}.titre.#{lettre}"),
+      texte: t("#{base_path}.texte.#{lettre}")
+    }
+  end
+
+  def explication_numerique(synthese)
+    lettre = score_to_lettre(synthese[:score_numerique])
+    base_path = "admin.evaluations.mesure_des_impacts.impact_couts.explications_numerique"
+    {
+      titre: t("#{base_path}.titre.#{lettre}"),
+      texte: t("#{base_path}.texte.#{lettre}")
+    }
+  end
+
+  def lettre_score_strategie(synthese)
+    score_to_lettre(synthese[:score_strategie])
+  end
+
+  def lettre_score_numerique(synthese)
+    score_to_lettre(synthese[:score_numerique])
+  end
+
+  def titre_evaluation_evapro(evaluation)
+    evaluation.structure&.nom
+  end
+
+  def palier_pourcentage_risque(pourcentage_risque)
+    seuil_max = SEUILS_PALIERS_RISQUE.keys.find { |seuil| pourcentage_risque <= seuil }
+    return "D - Mauvais" if seuil_max.nil?
+
+    SEUILS_PALIERS_RISQUE[seuil_max]
+  end
+
+  def palier_score_cout(score_cout)
+    SCORE_COUT_TO_PALIER.fetch(score_cout.to_sym, "D - Mauvais")
+  end
+
+  def palier_to_lettre(palier)
+    PALIER_TO_LETTRE.fetch(palier, "d")
+  end
+
+  SEUILS_PALIERS_RISQUE = {
+    10 => "A - Très bon",
+    25 => "B - Bon",
+    50 => "C - Moyen",
+    100 => "D - Mauvais"
+  }.freeze
+
+  SCORE_COUT_TO_PALIER = {
+    faible: "A - Très bon",
+    moyen: "B - Bon",
+    fort: "C - Moyen",
+    tres_fort: "D - Mauvais"
+  }.freeze
+
+  PALIER_TO_LETTRE = {
+    "A - Très bon" => "a",
+    "B - Bon" => "b",
+    "C - Moyen" => "c",
+    "D - Mauvais" => "d"
+  }.freeze
 end

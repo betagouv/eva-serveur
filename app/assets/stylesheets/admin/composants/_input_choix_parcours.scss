@@ -24,12 +24,14 @@
 
   input:checked + .choix-item .checkbox-option-personnalisation {
     --data-uri-svg: url('check.svg');
+
     background-color: white;
   }
 }
 
 .checkbox-option-personnalisation {
   --data-uri-svg: none;
+
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 0.25rem;

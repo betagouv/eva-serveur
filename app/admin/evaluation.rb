@@ -69,7 +69,13 @@ ActiveAdmin.register Evaluation do
 
   form partial: "form"
 
-  sidebar :responsable_de_suivi, only: :show, if: proc { resource.responsable_suivi.present? } do
+  sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evaluation_evapro? } do
+    render "opco_financeur", opco: resource.opco_financeur, evaluation: resource
+  end
+
+  sidebar :responsable_de_suivi, only: :show, if: proc {
+    !resource.evaluation_evapro? && resource.responsable_suivi.present?
+  } do
     render(Tag.new(resource.responsable_suivi.display_name,
                    classes: "bleu",
                    supprimable: can?(:supprimer_responsable_suivi, Evaluation),
@@ -77,11 +83,21 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-       resource.responsable_suivi.blank? and can?(:ajouter_responsable_suivi, Evaluation) } do
+    !resource.evaluation_evapro? &&
+      resource.responsable_suivi.blank? &&
+      can?(:ajouter_responsable_suivi, Evaluation)
+  } do
     render "recherche_responsable_suivi"
   end
 
-  sidebar :menu, class: "menu-sidebar", only: :show
+  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evaluation_evapro? }
+
+  member_action :supprimer_responsable_suivi, method: :patch do
+    resource.update(responsable_suivi: nil)
+    redirect_to request.referer
+  end
+
+
 
   xls(i18n_scope: %i[active_admin xls evaluation], header_format: { weight: :bold }) do
     whitelist
@@ -128,10 +144,6 @@ ActiveAdmin.register Evaluation do
     resource.enregistre_mise_en_action(effectuee)
   end
 
-  member_action :supprimer_responsable_suivi, method: :patch do
-    resource.update(responsable_suivi: nil)
-    redirect_to request.referer
-  end
 
   member_action :ajouter_responsable_suivi, method: :post do
     responsable = Compte.find_by(id: params["responsable_suivi_id"])

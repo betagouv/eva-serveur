@@ -23,7 +23,7 @@ const onIntersection = (entries) => {
 document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver(onIntersection);
   document.querySelectorAll('.menu-transverse ul li a').forEach(el => {
-    section = document.querySelector(el.hash);
+    const section = document.querySelector(el.hash);
     if(section) {
       observer.observe(section);
       sections.push(el.hash);

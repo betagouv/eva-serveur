@@ -10,7 +10,7 @@ div class: "contenu-sans-evaluations" do
         text_node t(".presentation_pistes")
         br
         texte_lien = t("components.banniere_solutions_illettrisme.lien")
-        render LienComponent.new(texte_lien, texte_lien, externe: true)
+        render LienComponent.new(texte_lien, texte_lien, nouvelle_fenetre: true)
     end
   end
 end

@@ -1,3 +1,7 @@
+body.page_inscription_v2 {
+  background-color: white !important;
+}
+
 body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   width: 100%;
   padding: 0;
@@ -6,17 +10,7 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
 .inscription_v2 {
   display: flex;
   flex-direction: row;
-}
-
-.inscription_v2__sidebar {
-  width: 100%;
-  max-width: 320px;
-  background: $eva_main_blue image-url('vagues-verticales-secondaire.svg') no-repeat top center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 3.5rem;
+  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
 }
 
 .inscription_v2__content {
@@ -44,7 +38,9 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
 
 .inscription_v2__sidebar-sous-titre {
   color: $grey-50;
-  @include texte();
+
+  @include texte;
+
   font-weight: 400 !important;
 }
 

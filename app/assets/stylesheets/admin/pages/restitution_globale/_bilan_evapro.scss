@@ -1,0 +1,37 @@
+.evaluation-bilan-evapro__contenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--Space-3W, 1.5rem);
+
+  p {
+    margin: 0;
+  }
+}
+
+.evaluation-bilan-evapro__explication {
+  @include texte-sm-regular;
+}
+
+.evaluation-bilan-evapro__opco-financeur {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--Space-3W, 1.5rem);
+}
+
+.panel > h3.evaluation-bilan-evapro__opco-financeur-titre {
+  @include texte-xl-semibold;
+
+  margin: 0;
+}
+
+.evaluation-bilan-evapro__opco-financeur-logo {
+  height: 4rem;
+}
+
+.evaluation-bilan-evapro__opco-financeur-details p, .evaluation-bilan-evapro__opco-financeur-details a {
+  color: $couleur-texte;
+
+  @include texte-sm-regular;
+}

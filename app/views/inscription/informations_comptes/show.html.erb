@@ -12,7 +12,7 @@
   <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
   <%= render CarteV2Component.new(titre: t(".titre_carte"), sous_titre: t(".sous_titre_carte")) do %>
     <%= semantic_form_for @compte, url: inscription_informations_compte_path do |compte| %>
-      <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :fonction, :service_departement ]) %>
+      <%= compte.semantic_errors *champs_non_affiches(compte.object.errors.messages.keys, [ :prenom, :nom, :email, :telephone, :fonction, :service_departement ]) %>
       <%= compte.inputs do %>
         <div class="fr-grid-row fr-grid-row--gutters">
           <div class="fr-col-12">
@@ -48,6 +48,17 @@
           </div>
           <div class="fr-col-12">
             <%= render InputComponent.new(
+              id: "compte_telephone",
+              label: t(".label_telephone"),
+              hint: t(".hint_telephone"),
+              form: compte,
+              method: :telephone,
+              type: "tel"
+            ) %>
+          </div>
+          
+          <div class="fr-col-12">
+            <%= render InputComponent.new(
               id: "compte_service_departement",
               label: t(".label_service_departement"),
               hint: t(".hint_service_departement"),
@@ -64,11 +75,11 @@
               method: :fonction,
               as: :select,
               collection: collection_fonctions,
-              include_blank: nil
+              include_blank: t(".selectionner_une_option")
             ) %>
           </div>
           <div class="fr-col-12">
-            <% cgu_lien = capture { render LienComponent.new("conditions générales d'utilisation d'eva", cgu_path, externe: true) } %>
+            <% cgu_lien = capture { render LienComponent.new("conditions générales d'utilisation d'eva", cgu_path, nouvelle_fenetre: true) } %>
             <%= compte.input :cgu_acceptees, label: raw("J'accepte les&nbsp;" + cgu_lien), required: true %>
           </div>
           <div class="fr-col-12">

@@ -13,18 +13,46 @@ fr:
         mot_de_passe_faible: Votre mot de passe n'est pas conforme aux nouvelles exigences de sécurité. Un mail de réinitialisation vous a été envoyé, veuillez suivre ses instructions pour définir un nouveau mot de passe. N'hésitez pas à contacter le support si vous rencontrez des difficultés.
   active_admin:
     devise:
+      email:
+        title: Identifiant
+      password:
+        title: Mot de passe
+      links:
+        forgot_your_password: Mot de passe oublié ?
       sessions:
         new:
+          bienvenue: Bienvenue !
           pro-connect:
+            titre: Se connecter avec ProConnect
+            description: ProConnect est la solution d'authentification de l'État qui simplifie l'accès de tous les professionnels à ses services numériques.
+            bouton-identifier: S'identifier avec
+            bouton-brand: ProConnect
             transition: OU
-            libelle-lien-pro-connect: Qu’est-ce que ProConnect ?
+            libelle-lien-pro-connect: Qu'est-ce que ProConnect ?
+          compte:
+            titre: Se connecter avec son compte
+            hint-email: "Format attendu : nom@domaine.com"
+            pas-de-compte: Vous n'avez pas de compte ?
+            creer-compte: Créer un compte
           eva-login:
             titre: J'ai déjà un compte conseiller
             connexion: Se connecter avec un compte eva
             description: |
               Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
             retour: Annuler
+          demonstration:
+            titre: Mode démonstration
+            description: Découvrez toutes les fonctionnalités sans créer de compte. Explorez l'interface et testez les outils en toute liberté.
+            liste_items:
+              - acces_complet
+              - aucune_inscription
+              - donnees_prechargees
+            acces_complet: Accès complet aux fonctionnalités
+            aucune_inscription: Aucune inscription requise
+            donnees_prechargees: Données de démonstration pré-chargées
+            bouton: Essayer la démo
       login:
+        submit: Se connecter
         bienvenue: Bienvenue sur eva
         title: Authentification
         titre: Espace Pro
@@ -59,7 +87,7 @@ fr:
       change_password:
         title: Changez votre mot de passe
       reset_password:
-        token_invalide: 'Veuillez vérifier de nouveau l’email reçu.'
+        token_invalide: "Veuillez vérifier de nouveau l’email reçu."
         saisir_a_nouveau: Si vous souhaitez recevoir de nouveau cet email, merci de saisir votre adresse ci-dessous.
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
@@ -81,11 +109,10 @@ fr:
       autres_actualites: Les autres actualités sur eva
       action_items: Gestion
       acces_prives: Accès privé
-      responsable_de_suivi: Responsable de suivi
     scopes:
       sans_campagne: Sans campagne 🙈
       pas_vraiment_utilisatrices: Pas vraiment utilisatrices ☃️
       non_activees: Non activées 🐤
       actives: Actives ❤️
       inactives: Inactives 😴
-      abandonnistes : Abandonnistes 💔
+      abandonnistes: Abandonnistes 💔

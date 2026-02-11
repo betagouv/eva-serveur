@@ -1,7 +1,5 @@
 body.logged_in {
   #wrapper {
-    max-width: $container;
-    margin: 0 auto;
     position: relative;
   }
   &::before,
@@ -20,5 +18,10 @@ body.logged_in {
   &::after {
     top: 64px;
     background-color: $eva_bluegrey;
+  }
+
+  .header, #title_bar, #active_admin_content {
+    max-width: $container;
+    margin: 0 auto;
   }
 }

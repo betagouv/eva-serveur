@@ -34,7 +34,7 @@ describe QuestionSaisie, type: :model do
                                           description illustration modalite_reponse type sous_type
                                           placeholder reponses texte_a_trous consigne_audio
                                           demarrage_audio_modalite_reponse aide score
-                                          metacompetence max_length])
+                                          metacompetence max_length passable])
       expect(json['type']).to eql('saisie')
       expect(json['sous_type']).to eql('texte')
       expect(json['placeholder']).to eql('écrivez ici')

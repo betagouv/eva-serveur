@@ -6,18 +6,21 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_compte.utilisateur_entreprise?
       render partial: "tableau_de_bord_eva_pro",
-             locals: {
+             locals: eva_pro_locals(
                campagnes: campagnes_entreprise,
                evaluations: evaluations_entreprise,
-               actualites: actualites
-             }
+               cinq_dernieres_evaluations_completes: cinq_dernieres_evaluations_completes,
+               actualites: actualites,
+               compte: current_compte,
+               ability: current_ability
+             )
     else
       render partial: "tableau_de_bord_eva",
-             locals: {
+             locals: eva_locals(
                evaluations: evaluations,
                actualites: actualites,
                campagnes: campagnes
-             }
+             )
     end
   end
 
@@ -93,13 +96,28 @@ ActiveAdmin.register_page "Dashboard" do
     def recupere_donnees_entreprise
       return unless current_compte.utilisateur_entreprise?
 
-      @campagnes_entreprise = Campagne.accessible_by(current_ability)
-                                    .order(created_at: :desc)
-                                    .limit(10)
-      @evaluations_entreprise = Evaluation.accessible_by(current_ability)
-                                         .includes(:beneficiaire, :campagne)
-                                         .order(created_at: :desc)
-                                         .limit(10)
+      @campagnes_entreprise = campagnes_entreprise_scope
+      @evaluations_entreprise = evaluations_entreprise_scope
+      @cinq_dernieres_evaluations_completes = cinq_dernieres_evaluations_completes_scope
+    end
+
+    def campagnes_entreprise_scope
+      Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
+    end
+
+    def evaluations_entreprise_scope
+      Evaluation.accessible_by(current_ability)
+                .includes(:beneficiaire, :campagne)
+                .order(created_at: :desc)
+                .limit(10)
+    end
+
+    def cinq_dernieres_evaluations_completes_scope
+      Evaluation.accessible_by(current_ability)
+                .complete
+                .includes(:beneficiaire, :campagne)
+                .order(created_at: :desc)
+                .limit(5)
     end
 
     def campagnes_entreprise
@@ -108,6 +126,17 @@ ActiveAdmin.register_page "Dashboard" do
 
     def evaluations_entreprise
       @evaluations_entreprise ||= []
+    end
+
+    def cinq_dernieres_evaluations_completes
+      @cinq_dernieres_evaluations_completes ||= []
+    end
+
+    def opco_financeur
+      return nil unless current_compte.structure.present?
+
+      structure = current_compte.structure
+      @opco_financeur ||= structure.opcos.find(&:financeur?) || structure.opcos.first
     end
   end
 end

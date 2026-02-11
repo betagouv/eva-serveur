@@ -1,0 +1,11 @@
+model_name = f.object.class.name.underscore
+li class: "boolean input optional", id: "#{model_name}_#{attribute}_input" do
+  insert_tag Arbre::HTML::Label do
+    insert_tag Arbre::HTML::Input, type: "hidden", name: "#{model_name}[#{attribute}]", value: "0"
+    insert_tag Arbre::HTML::Input, type: "checkbox", name: "#{model_name}[#{attribute}]",
+      id: "#{model_name}_#{attribute}", value: "1",
+      checked: f.object.send(attribute) ? "checked" : nil
+    text_node " #{f.object.class.human_attribute_name(attribute)}"
+  end
+  para hint, class: "inline-hints"
+end

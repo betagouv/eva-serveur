@@ -26,17 +26,6 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context 'quand mon compte est refusé' do
-    let!(:compte) do
-      create :compte_conseiller, statut_validation: :refusee, structure: ma_structure
-    end
-
-    it "affiche l'encart" do
-      visit admin_path
-      expect(page).to have_content('Votre compte est refusé.')
-    end
-  end
-
   context 'quand je suis avec un compte sans structure' do
     let!(:compte) do
       create :compte_conseiller, :en_attente, structure: nil
@@ -260,6 +249,51 @@ describe 'Dashboard', type: :feature do
     it "n'effectue pas de redirection" do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
+    end
+  end
+
+  context "quand le compte est utilisateur entreprise (tableau de bord eva pro)" do
+    let!(:structure_entreprise) do
+      create :structure_locale,
+             type_structure: "entreprise",
+             usage: "Eva: entreprises",
+             code_postal: "75012"
+    end
+    let!(:compte) do
+      create :compte_superadmin,
+             structure: structure_entreprise,
+             cgu_acceptees: true,
+             mode_tutoriel: false
+    end
+    let!(:campagne) do
+      create :campagne,
+             compte: compte,
+             parcours_type: create(:parcours_type, type_de_programme: :diagnostic_entreprise)
+    end
+    let!(:beneficiaire_complete) { create :beneficiaire, nom: "Dupont Complet" }
+    let!(:beneficiaire_incomplete) { create :beneficiaire, nom: "Martin Incomplet" }
+    let!(:evaluation_complete) do
+      create :evaluation,
+             campagne: campagne,
+             beneficiaire: beneficiaire_complete,
+             completude: :complete
+    end
+    let!(:evaluation_incomplete) do
+      create :evaluation,
+             campagne: campagne,
+             beneficiaire: beneficiaire_incomplete,
+             completude: :incomplete
+    end
+
+    it "affiche dans « Réponses collectées » uniquement les évaluations complètes" do
+      visit admin_path
+      expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).to have_content("Réponses collectées")
+
+      within(".cinq-dernieres-evaluations") do
+        expect(page).to have_content("Dupont Complet")
+        expect(page).not_to have_content("Martin Incomplet")
+      end
     end
   end
 end

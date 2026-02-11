@@ -1,0 +1,49 @@
+<% if restitution_globale.present? && derniere_evaluation_complete.present? %>
+  <% diag_risques_entreprise = restitution_globale.diag_risques_entreprise %>
+  <% synthese_impact = restitution_globale.evaluation_impact_general&.synthese %>
+  <% pourcentage_risque = diag_risques_entreprise&.synthese&.dig(:pourcentage_risque) %>
+  <% score_cout = synthese_impact&.dig(:score_cout) %>
+  <% palier_risque = pourcentage_risque ? palier_pourcentage_risque(pourcentage_risque) : nil %>
+  <% palier_cout = score_cout ? palier_score_cout(score_cout) : nil %>
+  <% palier_situation = diag_risques_entreprise&.palier %>
+  <% contenu_cout = synthese_impact.present? ? contenu_cout(synthese_impact) : nil %>
+
+  <% if palier_risque.present? && palier_cout.present? && palier_situation.present? &&
+        contenu_cout.present? %>
+    <section class="derniere-reponse-complete section-tableau-bord-eva-pro">
+      <h3 class="derniere-reponse-complete__titre">
+        <%= t("admin.dashboard.derniere_reponse_complete.titre") %>
+      </h3>
+      <p class="derniere-reponse-complete__texte">
+        <%= t("admin.dashboard.derniere_reponse_complete.texte") %>
+      </p>
+      <div class="derniere-reponse-complete__diagnostique">
+        <div class="derniere-reponse-complete__diagnostique-item">
+          <%= render ChiffreCleComponent.new(
+            palier: palier_risque,
+            prefixe: t("admin.dashboard.derniere_reponse_complete.risque_prefixe"),
+            chiffre: "#{pourcentage_risque} %"
+          ) %>
+        </div>
+        <div class="derniere-reponse-complete__diagnostique-item">
+          <%= render ChiffreCleComponent.new(
+            palier: palier_cout,
+            prefixe: t("admin.dashboard.derniere_reponse_complete.couts_prefixe"),
+            chiffre: contenu_cout[:titre],
+            suffixe: t("admin.dashboard.derniere_reponse_complete.couts_suffixe")
+          ) %>
+        </div>
+        <div class="derniere-reponse-complete__diagnostique-item">
+          <%= render ChiffreCleComponent.new(
+            palier: palier_situation,
+            prefixe: t("bilan_eva_pro.prefixe"),
+            chiffre: t("bilan_eva_pro.chiffre_cle.#{palier_situation}")
+          ) %>
+        </div>
+      </div>
+      <%= render BoutonDsfrComponent.new(admin_evaluation_path(derniere_evaluation_complete), type: :secondary) do %>
+        <%= t("admin.dashboard.derniere_reponse_complete.consulter_diagnostique") %>
+      <% end %>
+    </section>
+  <% end %>
+<% end %>

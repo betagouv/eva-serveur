@@ -18,7 +18,7 @@ class Inscription::StructuresController < ApplicationController
       rejoindre_structure_existante
     when "confirmer_infos", "Confirmer"
       confirme_infos_structure
-    when "creer", "Créer ma structure", "Confirmer la création"
+    when "creer", "Créer la structure", "Confirmer la création"
       creer_nouvelle_structure
     end
   end
@@ -88,6 +88,8 @@ class Inscription::StructuresController < ApplicationController
       @structure = cree_structure_avec_params
       return render_parametrage if @structure.blank?
 
+      @structure.affecte_usage_entreprise_si_necessaire if @structure.is_a?(StructureLocale)
+
       AffiliationOpcoService.new(@structure).affilie_opcos
 
       associe_opcos_si_present
@@ -116,6 +118,7 @@ class Inscription::StructuresController < ApplicationController
     @compte.etape_inscription = :complet
 
     if @compte.save
+      CampagneCreateur.new(@structure, @compte).cree_campagne_opco! if @structure.eva_entreprises?
       redirige_vers_etape_inscription(@compte)
     else
       render_parametrage

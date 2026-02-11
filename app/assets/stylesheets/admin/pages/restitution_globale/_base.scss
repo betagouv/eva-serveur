@@ -22,7 +22,7 @@
 
   #competence-numerique {
     .panel {
-      padding: 2rem 0rem;
+      padding: 2rem 0;
     }
   }
 
@@ -45,10 +45,11 @@
       a {
         color: $eva_dark_blue_grey;
       }
+
       padding-top: 0.125rem;
       p {
         margin-top: 0.875rem;
-        margin-bottom: 0rem;
+        margin-bottom: 0;
       }
     }
   }
@@ -89,7 +90,7 @@
     .puce {
       position: absolute;
       top: 50%;
-      margin-top: -14px;
+      margin-top: -0.875rem;
       width: 28px;
       line-height: 28px;
       background-color: $eva_main_blue;
@@ -106,7 +107,7 @@
 
     .categorie {
       font-size: 1.3rem;
-      margin: 0 0 2rem 0;
+      margin: 0 0 2rem;
     }
 
     .reponse {
@@ -207,7 +208,7 @@
   .synthese-illettrisme {
     color: $eva_dark_blue_grey;
     border-radius: 2rem;
-    padding: 2rem 2rem;
+    padding: 2rem;
     margin: 0 5rem 2rem;
     background-color: $grey-1000-hover;
 
@@ -217,18 +218,16 @@
 
     .col {
       padding-left: 1.375rem;
+
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
 
     h3 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
       margin-top: 0;
-    }
-
-    .col {
-      p:last-child {
-        margin-bottom: 0;
-      }
     }
 
     &.illettrisme_potentiel {
@@ -254,6 +253,7 @@
       }
     }
   }
+
   @media (max-width: 768px) {
     .synthese-illettrisme {
       margin-left: 2rem;
@@ -309,7 +309,7 @@
 
   .aide-redaction {
     position: relative;
-    padding: 2rem 2rem;
+    padding: 2rem;
     border: 1px solid $info-425;
     box-sizing: border-box;
     border-radius: 1.8rem;
@@ -380,7 +380,7 @@
 
     h3 {
       color: $grey-50;
-      margin: 0 0 .5rem 0;
+      margin: 0 0 .5rem;
       font-size: 1rem;
     }
   }
@@ -395,11 +395,17 @@
   margin-bottom: 0;
 }
 
+.evaluation-evapro .evaluation__administration {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
 .niveau-competence-base {
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
   display: inline-block;
+  /* stylelint-disable-next-line */
   margin: 0 5px;
 
   &.niveau-indetermine { border: 2px solid $couleur-niveau-indetermine; }

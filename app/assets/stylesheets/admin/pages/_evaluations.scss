@@ -1,6 +1,7 @@
 @mixin bloc-evaluation() {
   .evaluation__nom {
-    @include tronque();
+    @include tronque;
+
     width: 15.25rem;
     font-family: $font-titre;
     font-size: 1.125rem;
@@ -24,9 +25,12 @@
 
   .evaluation__campagne {
     font-weight: 600;
-    @include tronque();
+
+    @include tronque;
+
     width: $largeur_colonne_campagne;
-    @include texte-lg();
+
+    @include texte-lg;
 
     &,
     &:link,
@@ -44,7 +48,9 @@
   .evaluation__campagne-sous-titre,
   .evaluation__created_at {
     color: $eva_dark_blue_grey;
-    @include texte-xs();
+
+    @include texte-xs;
+
     font-style: normal;
     font-weight: 400;
 
@@ -70,7 +76,7 @@
   }
 
   .menu-actions {
-    @include menu-actions();
+    @include menu-actions;
 
     .table_actions {
       left: calc(100% - 2rem);
@@ -120,7 +126,7 @@
     padding: .75rem $padding-horizontal;
   }
 
-  @include bloc-evaluation();
+  @include bloc-evaluation;
 }
 
 .show,

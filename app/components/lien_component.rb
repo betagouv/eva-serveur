@@ -1,25 +1,25 @@
 class LienComponent < ViewComponent::Base
-  def initialize(body = nil, url = nil, externe: false, aria: nil, data: nil, class: nil,
-**html_options)
+  def initialize(body = nil, url = nil, externe: false, nouvelle_fenetre: false,
+                 aria: nil, data: nil, class: nil, **html_options)
     @body = body
     @url = url
-    @externe = externe
     @params = { aria: aria&.dup || {} }
     @data = data || {}
     @class = binding.local_variable_get(:class)
     @html_options = html_options
 
-    ajoute_params_externe(body, aria) if externe
+    @params = @params.merge({ rel: "noopener external"  }) if externe
+    ajoute_params_nouvelle_fenetre(body, aria) if nouvelle_fenetre
     merge_html_options
   end
 
-  def ajoute_params_externe(body, aria)
+  def ajoute_params_nouvelle_fenetre(body, aria)
     description = description_extern(body || content_text)
     if aria.present? && aria[:label].present?
       description = description_extern(aria[:label])
       @params[:aria][:label] = description
     end
-    @params = @params.merge({ target: "_blank", title: description, rel: "noopener" })
+    @params = @params.merge({ target: "_blank", title: description, rel: "noopener external" })
   end
 
   def merge_html_options

@@ -46,6 +46,16 @@ module ApplicationHelper
     %w[image/png image/jpeg image/webp].freeze
   end
 
+  def partenaires_opcos_financeurs(compte)
+    return [] if compte.blank?
+
+    opco_financeur = StructureOpco.opco_financeur_pour_structure_id(compte.structure_id)
+
+    return [] unless opco_financeur.present? && opco_financeur.logo.attached?
+
+    [ { logo: cdn_for(opco_financeur.logo), nom: opco_financeur.nom, url: opco_financeur.url } ]
+  end
+
   private
 
   def svg_with_class(svg_content, css_class)

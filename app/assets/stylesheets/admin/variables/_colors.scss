@@ -24,12 +24,12 @@ $success-200: #0E7C47;
 // Couleurs rouges (erreur)
 $error-975: #FFF1F1;
 $error-950: #FFE9E9; // déjà dans ton fichier
-$error-800: #FF9999;
-$error-700: #FF6666;
-$error-600: #FF3333;
+$error-800: #F99;
+$error-700: #F66;
+$error-600: #F33;
 $error-525: #E61919;
 $error-300: #B20000;
-$error-100: #660000;
+$error-100: #600;
 
 // Couleurs jaunes (avertissement)
 $warning-975: #FFF5E6;
@@ -50,14 +50,13 @@ $info-100: #0F3D91;
 
 // Couleurs gris (complément)
 $grey-975: #F7F7F7;
-$grey-800: #BBBBBB;
+$grey-800: #BBB;
 $grey-775: #AFAFAF;
 $grey-700: #A0A0A0;
 $grey-600: #7F7F7F;
 $grey-500: #5E5E5E;
 $grey-300: #2E2E2E;
 $grey-100: #0F0F0F;
-
 $green-tilleul-verveine-975: #F5FBEF;
 $green-tilleul-verveine-850: #CFE5B6;
 $green-bourgeon-850: #B8E986;
@@ -67,7 +66,7 @@ $pink-macaron-850: #FFC0CB;
 $beige-gris-galet-850: #D8D8D8;
 $brown-cafe-creme-850: #C5A47E;
 $yellow-tournesol-100: #40310C;
-$orange-terre-battue-625: #CC6633;
+$orange-terre-battue-625: #C63;
 $blue-france-sun-113: #000091;
 $blue-france-sun-113-hover: #1212FF;
 $blue-france-sun-113-active: #2323FF;
@@ -86,14 +85,14 @@ $warning-425: #B34000;
 $warning-425-hover: #FF6218;
 $error-950: #FFE9E9;
 $error-425: #CE0500;
-$grey-1000: #FFFFFF;
+$grey-1000: #FFF;
 $grey-1000-hover: #F6F6F6;
-$grey-950: #EEEEEE;
-$grey-900: #DDDDDD;
+$grey-950: #EEE;
+$grey-900: #DDD;
 $grey-925: #E5E5E5;
 $grey-850: #CECECE;
 $grey-625: #929292;
-$grey-425: #666666;
+$grey-425: #666;
 $grey-200: #3A3A3A;
 $grey-50: #161616;
 $yellow-tournesol-950: #FEECC2;
@@ -116,7 +115,6 @@ $eva_less_dark: $grey-425;
 $eva_dark_blue_grey: $grey-200;
 $eva_bluegrey: $blue-france-950;
 $eva_light: #FBF9FA;
-
 $couleur-texte: $grey-200;
 $couleur-texte-light: $eva_less_dark;
 $couleur-liens: $eva_main_blue;
@@ -127,7 +125,6 @@ $couleur-niveau-indetermine: $eva_bluegrey;
 $couleur-niveau-1: $couleur-legere-accent-validation;
 $couleur-niveau-2: $couleur-warning;
 $couleur-niveau-3: $couleur-accent-erreur;
-
 $theme-colors: (
   "primary": $eva_main_blue,
   "warning": $couleur-warning,

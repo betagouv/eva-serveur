@@ -1,0 +1,23 @@
+<div id="evaluation-aller-plus-loin" class="evaluation-aller-plus-loin">
+  <h2 class="evaluation__titre-section"><%= t(".titre") %></h2>
+  <div>
+    <div class="focus-incoutournable">
+      <div class="focus-incoutournable__media">
+        <%= image_tag "les-incontournables.png", class: "focus-incoutournable__media-image", alt: t(".image_alt") %>
+      </div>
+      <div class="focus-incoutournable__explication">
+        <%= t(".explication") %>
+
+        <br><br>
+        <%= link_to t(".lien_texte"), "https://www.bao-incontournables.fr", class: "fr-link fr-link--sm", target: "_blank" %>
+      </div>
+    </div>
+    
+  </div>
+  <div class="definitions-impacts__titre"><%= t(".titre_definitions") %></div>
+
+  <p class="definitions-impacts__texte"><strong><%=t(".performance_collective.titre")%></strong><%=t(".performance_collective.description")%></p>
+  <p class="definitions-impacts__texte"><strong><%=t(".agilite_organisationnelle.titre")%></strong><%=t(".agilite_organisationnelle.description")%></p>
+  <p class="definitions-impacts__texte"><strong><%=t(".securite_qualite.titre")%></strong><%=t(".securite_qualite.description")%></p>
+  <p class="definitions-impacts__texte"><strong><%=t(".mobilite_professionnelle.titre")%></strong><%=t(".mobilite_professionnelle.description")%></p>
+</div>

@@ -10,7 +10,7 @@ class QuestionClicDansTexte < Question
 
   def base_json
     slice(:id, :nom_technique, :description, :illustration,
-          :demarrage_audio_modalite_reponse, :score, :metacompetence).tap do |json|
+          :demarrage_audio_modalite_reponse, :score, :metacompetence, :passable).tap do |json|
       json["type"] = "clic-sur-mots"
       json["illustration"] = illustration_url
       json["description"] = description

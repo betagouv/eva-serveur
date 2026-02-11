@@ -9,7 +9,8 @@ class Inscription::InformationsComptesController < ApplicationController
 
   def update
     @compte.termine_preinscription!
-    if @compte.update(compte_parametres)
+    @compte.assign_attributes(compte_parametres)
+    if @compte.save(context: :informations_compte)
       redirige_vers_etape_inscription(@compte)
     else
       render :show

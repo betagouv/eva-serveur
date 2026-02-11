@@ -6,19 +6,57 @@
 .evaluation-impact-general__resultats {
   display: flex;
   flex-direction: column;
-  gap: $dsfr-spacing-8v;
 }
 
-.evaluation-impact-general__definitions {
-  background-color: var(--color-background-alt-blue, #F5F5FE);
-  padding: $dsfr-spacing-4v;
-  margin-top: $dsfr-spacing-4v;
+.indicateur-impact {
+  display: flex;
+  padding: 0 var(--Space-2W, 16px);
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
 }
 
-// Steppers d'impact
-.impact-steppers {
-  display: grid;
-  gap: $dsfr-spacing-8v;
+.indicateur-impact__details {
+  display: flex;
+  padding: var(--Space-3V, 12px) 0;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
+  border-top: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.indicateur-impact__details--titre-et-score {
+  display: flex;
+  width: var(--Grille-2-colonnes, 180px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1V, 4px);
+}
+
+.indicateur-impact__details-titre {
+  @include body-sm-semibold;
+
+  color: var(--light-decisions-text-text-title-grey, #161616);
+}
+
+.indicateur-impact__details-score {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+}
+
+.indicateur-impact__details--definition {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1W, 8px);
+  flex: 1 0 0;
+  align-self: stretch;
 }
 
 // Callouts d'impact
@@ -31,49 +69,111 @@
   margin: 0;
 }
 
-// Définitions d'impact
-.impact-definitions {
+// Coûts
+.couts {
   display: flex;
   flex-direction: column;
-  gap: $dsfr-spacing-6v;
-  background-color: var(--color-background-alt-blue, #F5F5FE);
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
 }
 
-.impact-definitions__title {
-  @include dsfr-texte-md;
-  font-weight: 700;
-  color: $grey-200;
+.couts__titre {
   margin: 0;
 }
 
-.impact-definitions__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: $dsfr-spacing-6v;
+.couts__mise-en-avant {
+  .fr-callout{
+    margin-bottom: 0 !important;
+  }
 }
 
-.impact-definition__heading {
+.couts__graphiques {
   display: flex;
-  align-items: center;
-  gap: $dsfr-spacing-1v;
-  margin: 0 0 $dsfr-spacing-1v 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  align-self: stretch;
 }
 
-.impact-definition__icon {
-  color: $blue-france-sun-113;
-  flex-shrink: 0;
+.couts__graphiques-titre {
+  @include h6-xxs;
+
+  margin: 0;
 }
 
-.impact-definition__title {
-  @include dsfr-texte-md;
-  font-weight: 600;
+.couts__colonnes {
+  display: flex;
+  align-items: stretch;
+  gap: var(--Space-6W, 48px);
+  align-self: stretch;
+}
+
+.couts__colonne {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-3W, 24px);
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.couts__pile-fleches {
+  display: flex;
+  padding: var(--Space-3W, 24px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-2W, 16px);
+  align-self: stretch;
+  flex: 1 0 0;
+  border: 1px solid $grey-900;
+}
+
+.couts__titre-graphique {
+  @include body-lg-semibold;
+
   color: $grey-200;
   margin: 0;
 }
 
-.impact-definition__description {
-  @include dsfr-texte-md;
-  font-weight: 400;
-  color: $grey-200;
+.couts__graphique {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1W, 8px);
+  align-self: stretch;
+}
+
+.couts__mention {
+  @include body-xs-mention;
+
   margin: 0;
+}
+
+.couts__explication {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-1V, 4px);
+  align-self: stretch;
+}
+
+.couts__explication-titre {
+  @include body-md-semibold;
+
+  margin: 0;
+}
+
+.couts__explication-texte {
+  @include body-md-base;
+}
+
+.couts__question {
+  margin: 0;
+}
+
+.evaluation-impact-general {
+  p {
+    margin-bottom: 0 !important;
+  }
 }

@@ -1,0 +1,18 @@
+<div class="chiffre-cle chiffre-cle__<%= @palier %>">
+  <div class="chiffre-cle__bordure"></div>
+  <% if @prefixe.present? %>
+    <div class="chiffre-cle__prefixe">
+      <%= @prefixe %>
+    </div>
+  <% end %>
+  <% if @chiffre.present? %>
+    <div class="chiffre-cle__chiffre">
+      <%= @chiffre %>
+    </div>
+  <% end %>
+  <% if @suffixe.present? %>
+    <div class="chiffre-cle__suffixe">
+      <%= @suffixe %>
+    </div>
+  <% end %>
+</div>

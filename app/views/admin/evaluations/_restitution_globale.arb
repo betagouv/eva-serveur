@@ -106,6 +106,21 @@ div class: "evaluation__restitution-globale #{class_css}" do
     )
   end
 
+  if diag_risques_entreprise && pdf == false
+    render(
+      partial: "bilan_evapro",
+      locals: {
+        diag_risques_entreprise: diag_risques_entreprise,
+        opco: restitution_globale.evaluation.opco,
+        pdf: pdf
+      }
+    )
+
+    render(
+      partial: "aller_plus_loin",
+    )
+  end
+
   render Evaluation::AnnexeDiagnosticComponent.new(
     nom_beneficiaire: restitution_globale.beneficiaire,
     code_beneficiaire: restitution_globale.code_beneficiaire,

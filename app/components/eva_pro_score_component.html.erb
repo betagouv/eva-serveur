@@ -1,0 +1,5 @@
+<div class="eva-pro-score" role="img" aria-label="Evaproscore palier <%= @active_letter %>">
+  <% items.each do |item| %>
+    <%= render EvaProScoreItemComponent.new(letter: item[:letter], active: item[:active]) %>
+  <% end %>
+</div>

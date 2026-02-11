@@ -45,7 +45,7 @@ class QuestionClicDansImage < Question
 
   def base_json
     slice(:id, :nom_technique, :demarrage_audio_modalite_reponse, :score,
-          :metacompetence).tap do |json|
+          :metacompetence, :passable).tap do |json|
       json["type"] = "clic-dans-image"
       json["illustration"] = illustration_url
       json["description"] = description

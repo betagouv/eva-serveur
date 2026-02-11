@@ -1,0 +1,41 @@
+<div class="diagnostique" <%= tag.attributes(@html_attributes) %>>
+  <div class="diagnostique-media">
+    <div class="diagnostique-media__logos">
+      <% if opco? %>
+        <div class="diagnostique-media__logos-opco">
+          <% if @opco.logo.attached? %>
+            <%= image_tag helpers.cdn_for(@opco.logo.variant(:defaut)), alt: @opco.nom, class: "diagnostique-media__logo-opco" %>
+          <% end %>
+        </div>
+        <div class="diagnostique-media__logos-evapro">
+          <div class="diagnostique-media__logos-evapro-image">
+            <%= image_tag "logo-evapro.png", alt: "EvaPro", class: "diagnostique-media__logos-evapro-image-png" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="diagnostique-media__logos-evapro-generique">
+          <div class="diagnostique-media__logos-evapro-generique-image">
+            <%= image_tag "logo-evapro.png", alt: "EvaPro", class: "diagnostique-media__logos-evapro-generique-image-png" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="diagnostique-contenu">
+    <div class="diagnostique-contenu__corps">
+      <% if @titre.present? %>
+        <h6 class="diagnostique-contenu__titre"><%= @titre %></h6>
+      <% end %>
+      <% if @description.present? %>
+        <p class="diagnostique-contenu__description"><%= @description %></p>
+      <% end %>
+    </div>
+
+    <div class="diagnostique-contenu__action">
+      <%= render BoutonDsfrComponent.new(@bouton_url, type: :primary, **@bouton_attributes, size: :sm) do %>
+        <%= @bouton_label %>
+      <% end %>
+    </div>
+  </div>
+</div>

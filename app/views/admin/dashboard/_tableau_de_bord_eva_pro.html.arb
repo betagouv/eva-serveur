@@ -10,45 +10,39 @@ elsif current_compte.validation_en_attente?
   render "validation_necessaire"
 end
 
-section class: "bienvenue-entreprise section-tableau-bord-eva-pro" do
-  h2 t("admin.dashboard.bienvenue_entreprise.titre")
-  div do
-    render(MiseEnAvantComponent.new(
-      titre: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire_titre"),
-      description: t("admin.dashboard.bienvenue_entreprise.premier_questionnaire")
-    )) if evaluations.blank?
-  end
-end
+div class: "tableau-bord-layout" do
+  div class: "tableau-bord-contenu-principal" do
+    render partial: "admin/dashboard/eva_pro/bienvenue_entreprise",
+           locals: {
+             premiere_reponse_complete: premiere_reponse_complete,
+             structure: structure
+           }
 
-if campagnes.present?
-  section class: "section-questionnaires section-tableau-bord-eva-pro" do
-    columns do
-      render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
-locals: { campagnes: campagnes }
-    end
-  end
-end
+    render partial: "admin/dashboard/eva_pro/derniere_evaluation_complete",
+           locals: {
+             derniere_evaluation_complete: derniere_evaluation_complete,
+             restitution_globale: restitution_globale
+           }
 
-if evaluations.present?
-  section class: "section-resultats section-tableau-bord-eva-pro" do
-    columns do
-      render partial: "admin/dashboard/eva_pro/bloc_resultats_entreprise",
-locals: { evaluations: evaluations }
-    end
-  end
-else
-  section class: "section-message-incitation section-tableau-bord-eva-pro" do
-    columns do
-      render partial: "admin/dashboard/eva_pro/message_incitation_premier_questionnaire"
-    end
-  end
-end
+    render partial: "admin/dashboard/eva_pro/cinq_dernieres_evaluations",
+           locals: {
+             evaluations: cinq_dernieres_evaluations_completes
+           }
 
-if actualites.present?
-  section class: "section-actualites section-tableau-bord-eva-pro" do
-    columns do
-      render partial: "admin/dashboard/eva_pro/bloc_actualites_entreprise",
-locals: { actualites: actualites }
+    render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
+           locals: { campagnes: campagnes, opco: opco,
+premiere_reponse_complete: premiere_reponse_complete }
+  end
+
+  if structure.present?
+    div class: "tableau-bord-sidebar" do
+      section class: "section-opco section-tableau-bord-eva-pro" do
+        render partial: "admin/dashboard/eva_pro/sidebar_opco",
+               locals: {
+                 opco: opco,
+                 structure: structure
+               }
+      end
     end
   end
 end

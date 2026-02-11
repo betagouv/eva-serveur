@@ -3,6 +3,6 @@ fr:
     import_xls:
       erreurs:
         telechargement_impossible: "Impossible de télécharger le fichier à l'URL %{url}"
-        validation: "Erreur de validation à la ligne %{numero} : %{message}"
+        validation: "Erreur de validation à la ligne %{numero} : %{message}"
         mauvais_format: |
-          Le fichier n'est pas au bon format. Il doit contenir les colonnes dans l'ordre suivant : %{headers}
+          Le fichier n'est pas au bon format. Il doit contenir les colonnes dans l'ordre suivant : %{headers}

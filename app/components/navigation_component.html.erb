@@ -1,0 +1,12 @@
+<nav class="fr-nav" role="navigation" aria-label="Menu principal">
+  <ul class="fr-nav__list">
+    <% links.each do |link| %>
+      <% aria_current = aria_current(link) %>
+      <li class="fr-nav__item">
+        <a class="fr-nav__link" href="<%= link[:url] %>" target="_self" <%= "aria-current=\"#{aria_current}\"".html_safe if aria_current %>>
+          <%= link[:label] %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>

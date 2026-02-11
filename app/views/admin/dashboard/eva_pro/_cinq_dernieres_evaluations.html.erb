@@ -1,0 +1,46 @@
+<% if evaluations.present? %>
+  <section class="cinq-dernieres-evaluations section-tableau-bord-eva-pro">
+    <h3 class="cinq-dernieres-evaluations__titre">
+      <%= t("admin.dashboard.cinq_dernieres_evaluations.titre") %>
+    </h3>
+    <p class="cinq-dernieres-evaluations__texte">
+      <%= t("admin.dashboard.cinq_dernieres_evaluations.texte") %>
+    </p>
+    <div class="cinq-dernieres-evaluations__tableau">
+      <%= render TableauComponent.new(collection: Array(evaluations).first(5)) do |tableau| %>
+        <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_par"),
+                           multiline: true) do |evaluation| %>
+          <% evaluation.beneficiaire&.nom %>
+        <% end %>
+        <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_date")) do |evaluation| %>
+          <% evaluation.created_at.strftime("%d/%m/%Y") %>
+        <% end %>
+        <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_taux_risque")) do |evaluation| %>
+          <% lettre_risque = lettre_risque_pour(evaluation) %>
+          <% if lettre_risque.present? %>
+            <%= render EvaProScoreComponent.new(active_letter: lettre_risque) %>
+          <% else %>
+            -
+          <% end %>
+        <% end %>
+        <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_couts")) do |evaluation| %>
+          <% lettre_couts = lettre_couts_pour(evaluation) %>
+          <% if lettre_couts.present? %>
+            <%= render EvaProScoreComponent.new(active_letter: lettre_couts) %>
+          <% else %>
+            -
+          <% end %>
+        <% end %>
+        <% tableau.colonne do |evaluation| %>
+        <%= render LienComponent.new(nil, admin_evaluation_path(evaluation)) do %>
+            <%= t("admin.dashboard.cinq_dernieres_evaluations.voir_detail") %>
+            <span class="fr-icon-arrow-right-line fr-icon--sm" aria-hidden="true"></span>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render BoutonDsfrComponent.new(admin_evaluations_path, type: :secondary) do %>
+      <%= t("admin.dashboard.cinq_dernieres_evaluations.voir_tout") %>
+    <% end %>
+  </section>
+<% end %>

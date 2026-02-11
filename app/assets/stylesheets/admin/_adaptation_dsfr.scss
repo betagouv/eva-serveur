@@ -367,3 +367,28 @@ body.logged_in h2.fr-footer__partners-title {
     margin-right: 0;
   }
 }
+
+// En mobile : éviter tout dépassement horizontal (header + contenu)
+@media (max-width: 48rem) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .fr-header .fr-container,
+  .fr-header__body .fr-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #active_admin_content,
+  #title_bar {
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  #wrapper {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}

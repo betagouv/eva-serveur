@@ -12,12 +12,25 @@
                 <a href="/" title="<%= t("header.title_lien_logo", logo_alt: @logo_alt) %>">
                   <img style="max-width:10rem;" class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
                 </a>
+              <% end %>
+            </div>
+            <% if affiche_navigation? || affiche_actions_connexion? %>
+              <div class="fr-header__navbar">
+                <button class="fr-btn fr-btn--menu fr-header__menu-btn"
+                        type="button"
+                        id="header-menu-btn"
+                        data-fr-opened="false"
+                        aria-controls="header-menu"
+                        aria-expanded="false"
+                        title="Menu">
+                  Menu
+                </button>
               </div>
             <% end %>
           </div>
           <% if @titre.present? %>
             <div class="fr-header__service">
-              <p class="fr-header__service-title" style="margin: 0;"> <%= @titre %> </p>
+              <p class="fr-header__service-title" style="margin: 0;"><%= @titre %></p>
               <% if @tagline.present? %>
                 <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
               <% end %>
@@ -35,41 +48,8 @@
           <% end %>
         </div>
         <% if affiche_actions_connexion? %>
-          <div class="fr-header__tools">
-            <button class="fr-btn fr-btn--menu fr-header__menu-btn"
-                    aria-controls="header-menu"
-                    aria-expanded="false">
-              Menu
-            </button>
-            <!-- la classe initiale est fr-header__tools-links, elle a ete remplacee pour le moment parce qu'elle cree une erreur js et empeche d'ouvrir n'importe qu'elle modal -->
-            <div class="tools-links">
-              <ul class="fr-btns-group">
-                <% actions.each do |action| %>
-                  <li>
-                    <%= render BoutonDsfrComponent.new(
-                      action[:url],
-                      type: bouton_type_for(action),
-                      tag: :a,
-                      class: action[:icon_class]
-                    ) do %>
-                      <%= action[:label] %>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <% if affiche_navigation? %>
-    <div class="fr-header__menu fr-collapse" id="header-menu">
-      <div class="fr-container">
-        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
-        <% if affiche_actions_connexion? %>
-          <div class="fr-header__menu-links">
-            <ul class="fr-btns-group fr-btns-group--sm">
+          <div class="fr-header__tools-links">
+            <ul class="fr-btns-group">
               <% actions.each do |action| %>
                 <li>
                   <%= render BoutonDsfrComponent.new(
@@ -84,6 +64,34 @@
               <% end %>
             </ul>
           </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if affiche_navigation? || affiche_actions_connexion? %>
+    <div class="fr-header__menu fr-modal" id="header-menu" aria-labelledby="header-menu-btn">
+      <div class="fr-container">
+        <button type="button" class="fr-btn fr-btn--close" aria-controls="header-menu" title="Fermer">Fermer</button>
+        <% if affiche_actions_connexion? %>
+          <div class="fr-header__menu-links">
+            <ul class="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left">
+              <% actions.each do |action| %>
+                <li>
+                  <%= render BoutonDsfrComponent.new(
+                    action[:url],
+                    type: bouton_type_for(action),
+                    tag: :a,
+                    class: action[:icon_class]
+                  ) do %>
+                    <%= action[:label] %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <% if affiche_navigation? %>
+          <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
         <% end %>
       </div>
     </div>

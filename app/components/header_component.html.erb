@@ -7,15 +7,15 @@
             <div class="fr-header__logo">
               <p class="fr-logo"> République<br>française </p>
             </div>
-            <% if affiche_logo? %>
+            <% if @logo.present? %>
               <div class="fr-header__operator">
                 <a href="/" title="<%= t("header.title_lien_logo", logo_alt: @logo_alt) %>">
-                  <img class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
+                  <img style="max-width:10rem;" class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
                 </a>
               </div>
             <% end %>
           </div>
-          <% if affiche_titre? %>
+          <% if @titre.present? %>
             <div class="fr-header__service">
               <p class="fr-header__service-title" style="margin: 0;"> <%= @titre %> </p>
               <% if @tagline.present? %>
@@ -23,11 +23,20 @@
               <% end %>
             </div>
           <% end %>
+          <% if affiche_actions_connexion? || affiche_navigation? %>
+            <div class="fr-header__navbar">
+              <button type="button" class="fr-btn fr-btn--menu"
+                                    data-fr-opened="false"
+                                    aria-controls="modal-header-menu"
+                                    title="Menu">
+                Menu
+              </button>
+            </div>
+          <% end %>
         </div>
         <% if affiche_actions_connexion? %>
           <div class="fr-header__tools">
-            <!-- la classe initiale est fr-header__tools-links, elle a ete remplacee pour le moment parce qu'elle cree une erreur js et empeche d'ouvrir n'importe qu'elle modal -->
-            <div class="tools-links">
+            <div class="fr-header__tools-links">
               <ul class="fr-btns-group">
                 <% actions.each do |action| %>
                   <li>
@@ -48,10 +57,19 @@
       </div>
     </div>
   </div>
-  <% if affiche_navigation? %>
-    <div class="fr-header__menu">
+  <% if affiche_actions_connexion? || affiche_navigation? %>
+    <!-- Ici pour l'instant, on ne met pas la class fr-modal à cause d'un conflit avec les autres fr-modal de la page. par exemple : fr-modal-confirmation-creation-structure-->
+    <div class="fr-header__menu" id="modal-header-menu">
       <div class="fr-container">
-        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+        <!-- en commentaite car il manque fr-modal --
+        <button class="fr-btn fr-btn--close" aria-controls="modal-header-menu" title="Fermer">
+          Fermer
+        </button>
+        -->
+        <div class="fr-header__menu-links"></div>
+        <% if affiche_navigation? %>
+          <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+        <% end %>
       </div>
     </div>
   <% end %>

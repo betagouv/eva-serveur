@@ -10,18 +10,18 @@
         <%= render "nouvelles_structures/modal_confirmation_creation_structure" %>
 
         <div class="informations-compte-actions">
-          <%= link_to t("inscription.structures.show.retour"), inscription_structure_path(etape: "confirmation"), class: "bouton-tertiaire grand-bouton" %>
-          <%= render BoutonComponent.new(
-              "#",
-              type: :primary,
-              tag: :button,
-              size: :md,
-              id: "creer-structure-btn",
-              disabled: false,
-              "data-fr-opened": false,
-              "data-fr-js-modal-button": true,
-              "aria-controls": "fr-modal-confirmation-creation-structure",
-            ) do %>
+          <%= render BoutonDsfrComponent.new(inscription_structure_path(etape: "confirmation"), type: :tertiary) do %>
+            <%= t("inscription.structures.show.retour") %>
+          <% end %>
+          <%= render BoutonDsfrComponent.new(
+            "#",
+            type: :primary,
+            tag: :button,
+            id: "creer-structure-btn",
+            "data-fr-opened": false,
+            "data-fr-js-modal-button": true,
+            "aria-controls": "fr-modal-confirmation-creation-structure"
+          ) do %>
             <%= t("inscription.structures.show.creer_structure") %>
           <% end %>
         </div>

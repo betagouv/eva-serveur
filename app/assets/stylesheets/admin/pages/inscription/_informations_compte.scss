@@ -14,20 +14,60 @@
   @include reset-form;
 
   display: flex;
-  width: 792px;
+  width: 100%;
+  max-width: 49.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--Space-7W, 56px);
+
+  @media (max-width: 48rem) {
+    padding: var(--Space-5W, 40px) var(--Space-2W, 16px);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+    
+  }
 }
 
 .page-nouveau-compte {
   @include reset-form;
 
   display: flex;
-  width: 792px;
+  width: 100%;
+  max-width: 49.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--Space-7W, 56px);
+
+  @media (max-width: 48rem) {
+    padding: 0 !important;
+  }
+}
+
+.page-informations-compte {
+  @media (max-width: 48rem) {
+    padding: 0 !important;
+  }
+
+  @media (max-width: 48rem) {
+    .informations-compte-actions {
+      flex-direction: column;
+      align-items: stretch;
+
+      .fr-btn {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  }
+
+  .carte-v2 {
+    padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+  }
 }
 
 .page-informations-compte .indication-champs-obligatoires {
@@ -47,7 +87,11 @@
   width: 100%;
 }
 
-.page-informations-compte .valider-compte-bouton {
+.page-informations-compte .informations-compte-actions .fr-btn {
+  border-radius: 0;
+}
+
+.page-informations-compte .valider-compte-bouton:not(.fr-btn) {
   @include grand-bouton;
 }
 

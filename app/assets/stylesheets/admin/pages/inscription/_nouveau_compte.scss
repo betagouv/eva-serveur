@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: var(--Space-3W, 24px);
 }
+
 .page-nouveau-compte-section--proconnect {
   display: flex;
   flex-direction: column;
@@ -104,8 +105,14 @@
   @include bouton-tertiaire;
 }
 
-.page-nouveau-compte .valider-compte-bouton {
+// Ne pas appliquer grand-bouton au bouton DSFR : il garde son style natif
+.page-nouveau-compte .valider-compte-bouton:not(.fr-btn) {
   @include grand-bouton;
+}
+
+// Aligner le style des deux boutons (Annuler + Créer) : même radius que le design system
+.page-nouveau-compte .informations-compte-actions .fr-btn {
+  border-radius: 0;
 }
 
 .page-nouveau-compte .mention-format {
@@ -113,4 +120,66 @@
   line-height: 1.4;
   color: #4B5563;
   margin-bottom: $dsfr-spacing-3v;
+}
+
+@media (max-width: 48rem) {
+  .page-nouveau-compte-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-5W, 40px);
+    align-self: stretch;
+  }
+
+  .page-nouveau-compte-card .carte-v2__content {
+    display: flex;
+    padding: var(--Space-5W, 40px) var(--Space-2W, 16px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+  }
+
+  .carte-v2 {
+    padding: 0 !important;
+  }
+
+  .page-nouveau-compte-section--proconnect {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+  }
+
+  .page-nouveau-compte-separateur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--Space-3V, 12px);
+    align-self: stretch;
+  }
+
+  .page-nouveau-compte-section--identifiant {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--Space-3W, 24px);
+    align-self: stretch;
+  }
+
+  .page-nouveau-compte .informations-compte-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+
+    .fr-btn {
+      width: 100%;
+      max-width: none;
+      box-sizing: border-box;
+      justify-content: center;
+      text-align: center;
+    }
+  }
 }

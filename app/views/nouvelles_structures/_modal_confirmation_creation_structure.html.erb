@@ -2,31 +2,30 @@
 
 <%= dsfr_modal(
   title: t(".titre"),
-  html_attributes: { id: id_modal }
+  html_attributes: { id: id_modal, class: "evapro_admin" }
 ) do |component| %>
   <div>
     <%= md t(".message") %>
   </div>
   
   <% component.with_button do %>
-    <%= render BoutonComponent.new(
-      "#",
+    <%= render BoutonDsfrComponent.new(
+      t(".creer_structure"),
       type: :primary,
       tag: :submit,
-      size: :md,
       id: "confirmer-creation-structure",
-      "data-form": "form-creation-structure",
-      data: { disable_with: false } 
+      form: "form-creation-structure",
+      class: "disabled",
+      disabled: true
     ) do %>
       <%= t(".creer_structure") %>
     <% end %>
   <% end %>
   <% component.with_button do %>
-    <%= render BoutonComponent.new(
+    <%= render BoutonDsfrComponent.new(
       "#",
       type: :secondary,
       tag: :button,
-      size: :md,
       "aria-controls": id_modal
     ) do %>
       <%= t(".annuler") %>

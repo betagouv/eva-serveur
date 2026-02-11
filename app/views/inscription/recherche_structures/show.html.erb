@@ -33,15 +33,19 @@
         </div>
         <div class="fr-col-12">
           <div class="recherche-structure-actions">
-            <%= render BoutonComponent.new(
-              inscription_informations_compte_path,
-              type: :tertiary,
-              size: :md,
-              tag: :a
-            ) do %>
+            <%= render BoutonDsfrComponent.new(inscription_informations_compte_path, type: :tertiary) do %>
               <%= t(".bouton_retour") %>
             <% end %>
-            <%= f.submit t(".bouton_valider"), class: "bouton grand-bouton recherche-structure-submit disabled", id: "recherche-structure-submit", disabled: true %>
+            <%= render BoutonDsfrComponent.new(
+              t(".bouton_valider"),
+              type: :primary,
+              tag: :submit,
+              id: "recherche-structure-submit",
+              class: "recherche-structure-submit disabled",
+              disabled: true
+            ) do %>
+              <%= t(".bouton_valider") %>
+            <% end %>
           </div>
         </div>
       </div>

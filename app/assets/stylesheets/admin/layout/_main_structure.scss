@@ -2,11 +2,6 @@
   padding: .5rem 0;
   #main_content_wrapper {
     max-width: 100vw;
-
-    #main_content {
-      // Je sais pas comment le faire propre que pour eva pro, je le remettrai après la démo du 30/01
-      // margin-top: 2.5rem;
-    }
   }
 }
 
@@ -16,3 +11,15 @@ body.logged_in {
     align-items: stretch;
   }
 }
+
+// Layout spécifique Evapro : exclut le dashboard EvaPro.
+body.logged_in.evapro_admin:not(.admin_dashboard) #active_admin_content #main_content_wrapper #main_content,
+body.logged_in.admin_evaluations #active_admin_content #main_content_wrapper #main_content {
+  display: flex;
+  padding: var(--Space-4W, 32px) 0 var(--Space-7W, 56px) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-8W, 64px);
+  flex: 1 0 0;
+}
+

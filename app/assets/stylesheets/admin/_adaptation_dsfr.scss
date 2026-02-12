@@ -181,6 +181,13 @@ button.fr-link--close.fr-link:hover {
     position: fixed;
     top: 8rem;
   }
+  
+  .fr-header__menu.fr-modal > .fr-container {
+    pointer-events: none;
+    position: fixed;
+    top: 0 !important;
+  }
+
 }
 
 .fr-modal.fr-modal--opened {

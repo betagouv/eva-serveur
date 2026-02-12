@@ -1,4 +1,4 @@
-<%= semantic_form_for @structure, url: inscription_structure_path, method: :patch do |form| %>
+<%= semantic_form_for @structure, url: inscription_structure_path, method: :patch, html: { id: "form-creation-structure" } do |form| %>
   <%= form.semantic_errors *champs_non_affiches(form.object.errors.messages.keys, [ :raison_sociale ]) %>
   <%= form.hidden_field :action_type, value: "creer" %>
   
@@ -18,9 +18,7 @@
             type: :primary,
             tag: :button,
             id: "creer-structure-btn",
-            "data-fr-opened": false,
-            "data-fr-js-modal-button": true,
-            "aria-controls": "fr-modal-confirmation-creation-structure"
+            "data-modal-target": "fr-modal-confirmation-creation-structure"
           ) do %>
             <%= t("inscription.structures.show.creer_structure") %>
           <% end %>

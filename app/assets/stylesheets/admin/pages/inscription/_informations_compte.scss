@@ -43,6 +43,12 @@
   @media (max-width: 48rem) {
     padding: 0 !important;
   }
+  
+  .texte-intro {
+    @media (max-width: 48rem) {
+      align-items: flex-start !important;
+    }
+  }
 }
 
 .page-informations-compte {
@@ -52,7 +58,7 @@
 
   @media (max-width: 48rem) {
     .informations-compte-actions {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: stretch;
 
       .fr-btn {

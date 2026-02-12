@@ -1,8 +1,12 @@
 class SiretInput < Formtastic::Inputs::StringInput
+  ANNUAIRE_SIRET_URL = "https://annuaire-entreprises.data.gouv.fr/"
+  ANNUAIRE_SIRET_URL_CAMPAGNE_PRO_CONNECT = "#{ANNUAIRE_SIRET_URL}?mtm_campaign=proconnect"
+
   def initialize(builder, template, object, object_name, method, options)
     super
     @options[:hint] ||= I18n.t("formtastic.inputs.siret.hint")
   end
+
   def to_html
     input_wrapping do
       label_html <<
@@ -33,7 +37,7 @@ class SiretInput < Formtastic::Inputs::StringInput
       template.content_tag(:p) do
         template.render LienComponent.new(
           I18n.t("formtastic.inputs.siret.lien.description"),
-          I18n.t("formtastic.inputs.siret.lien.url"),
+          ANNUAIRE_SIRET_URL,
           nouvelle_fenetre: true
         )
       end

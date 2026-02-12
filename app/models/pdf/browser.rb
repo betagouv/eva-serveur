@@ -3,7 +3,7 @@ require "puppeteer"
 module Pdf
   class Browser
     A4_VIEWPORT = Puppeteer::Viewport.new(width: 1008, height: 1488)
-    A4_WINDOW_SIZE = "--window-size=1920,1080"
+    A4_WINDOW_SIZE = "--window-size=1008,1488"
 
     def self.instance
       @browser ||= Puppeteer.launch(**puppeteer_options)

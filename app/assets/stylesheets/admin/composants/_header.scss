@@ -18,15 +18,15 @@
     width: 128px;
   }
 
-  .fr-header__service:before {
+  .fr-header__service::before {
     content: none;
   }
 
-  .fr-header__brand:after {
+  .fr-header__brand::after {
     content: none;
   }
 
-  .fr-link--sm[target=_blank] {
+  .fr-link--sm[target="_blank"] {
     text-decoration: none;
   }
 }

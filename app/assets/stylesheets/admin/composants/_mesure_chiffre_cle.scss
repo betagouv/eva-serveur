@@ -26,4 +26,8 @@
   @include body-sm;
 
   margin: 0;
+
+  @media print {
+    @include texte-md-regular;
+  }
 }

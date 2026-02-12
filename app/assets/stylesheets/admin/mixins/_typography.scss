@@ -68,6 +68,51 @@
   font-weight: 600;
 }
 
+@mixin h1-xl() {
+  font-family: Quicksand, sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 48px; /* 120% */
+}
+
+@mixin h2-lg() {
+  color: var(--color-text-title, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+
+  @include dsfr-titre-lg;
+}
+
+@mixin h3-md-desktop() {
+  font-family: Quicksand, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+@mixin h4-sm() {
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+@mixin h5-xs() {
+  color: var(--color-text-title, #161616);
+  font-family: var(--Titres-Font, Quicksand);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 127.273% */
+}
+
+/* @deprecated */
+@mixin h5-xs-desktop() {
+  @include h5-xs;
+}
+
 @mixin h6-xxs() {
   color: var(--light-decisions-text-text-title-grey, #161616);
   font-family: var(--Titres-Font, Quicksand);
@@ -77,13 +122,9 @@
   line-height: var(--Titres-H6---XXS-Line-Height, 28px);
 }
 
-@mixin h5-xs-desktop() {
-  color: var(--color-text-title, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px; /* 127.273% */
+/* @deprecated */
+@mixin h6-xxs-desktop() {
+  @include h6-xxs;
 }
 
 @mixin body-xs() {
@@ -111,13 +152,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: var(--Body-XS---Texte-mention-Line-Height, 20px); /* 166.667% */
-}
-
-@mixin h2-lg() {
-  color: var(--color-text-title, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-
-  @include dsfr-titre-lg;
 }
 
 @mixin body-xl() {
@@ -156,31 +190,6 @@
   line-height: var(--Body-SM---Texte-dtail-Line-Height, 24px); /* 171.429% */
 }
 
-@mixin h5-xs() {
-  color: var(--color-text-title, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px; /* 127.273% */
-}
-
-@mixin h4-sm() {
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 2rem;
-}
-
-@mixin h3-md-desktop() {
-  font-family: Quicksand, sans-serif;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-}
-
 @mixin body-lg-semibold() {
   font-family: var(--Body-LG---Texte-article-Font, "Work Sans");
   font-size: var(--Body-LG---Texte-article-Size, 18px);
@@ -189,13 +198,6 @@
   line-height: var(--Body-LG---Texte-article-Line-Height, 28px);
 }
 
-@mixin texte-md-bold() {
-  font-family: "Work Sans", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-}
 
 @mixin texte-sm-regular() {
   font-family: "Work Sans", sans-serif;
@@ -213,18 +215,34 @@
   line-height: 24px;
 }
 
+@mixin texte-md-regular() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+@mixin texte-md-bold() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@mixin texte-lg-regular() {
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+
 @mixin texte-xl-semibold() {
   font-family: "Work Sans", sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 32px;
-}
-
-@mixin h6-xxs-desktop() {
-  font-family: Marianne, sans-serif;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px;
 }

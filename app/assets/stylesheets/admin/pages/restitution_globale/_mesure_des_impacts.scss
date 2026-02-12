@@ -36,12 +36,21 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--Space-1V, 4px);
+
+  @media print {
+    width: 215px;
+  }
 }
 
 .indicateur-impact__details-titre {
   @include body-sm-semibold;
 
+  display: flex;
   color: var(--light-decisions-text-text-title-grey, #161616);
+
+  @media print {
+    @include body-md-semibold;
+  }
 }
 
 .indicateur-impact__details-score {

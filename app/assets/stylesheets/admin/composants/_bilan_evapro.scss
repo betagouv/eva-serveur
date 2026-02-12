@@ -47,4 +47,8 @@
 
 .bilan-eva-pro__explication p {
   margin: 0;
+
+  @media print {
+    @include texte-lg-regular;
+  }
 }

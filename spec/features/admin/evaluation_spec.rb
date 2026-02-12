@@ -266,8 +266,11 @@ describe 'Admin - Evaluation', type: :feature do
         describe 'génération PDF' do
           let(:pdf_fixture_path) { Rails.root.join("spec/fixtures/files/test_evaluation.pdf").to_s }
 
+          before do
+            allow(restitution_globale).to receive_messages(interpretations_niveau2: [], evaluation: mon_evaluation)
+          end
+
           it "affiche l'évaluation en pdf" do
-            allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
             allow(Pdf::Generator).to receive(:generate).and_return(pdf_fixture_path)
 
             visit admin_evaluation_path(mon_evaluation, format: :pdf)
@@ -276,9 +279,10 @@ describe 'Admin - Evaluation', type: :feature do
           end
 
           it 'erreur timeout à la génération du pdf' do
-            allow(restitution_globale).to receive(:interpretations_niveau2).and_return([])
             expect(Pdf::Generator).to receive(:generate).and_return(false)
+
             visit admin_evaluation_path(mon_evaluation, format: :pdf)
+
             expect(page).to have_content 'La génération du PDF a échoué. Veuillez réessayer dans un moment'
           end
         end

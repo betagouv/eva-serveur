@@ -11,6 +11,7 @@ $padding-pdf: 5rem;
 @import "admin/pages/comparaison";
 @import "admin/bg";
 @import "admin/composants/alert_interpreter_resultats";
+@import 'admin/composants/header';
 @import "admin/composants/litteratie";
 @import "admin/composants/referentiel_anlci";
 @import "admin/composants/evaluation/table_criteres";
@@ -19,12 +20,15 @@ $padding-pdf: 5rem;
 @import "admin/composants/barre_segmentee";
 @import "admin/composants/sous_competence";
 @import "admin/composants/alert_incomplete";
+@import "admin/composants/eva_pro_score";
+@import "admin/composants/score_arrow";
 @import 'admin/composants/chiffre_cle';
 @import 'admin/composants/bilan_evapro';
 @import 'admin/composants/mesure_chiffre_cle';
 @import 'admin/pages/restitution_globale/mesure_des_impacts';
 @import 'admin/pages/restitution_globale/bilan_evapro';
 @import 'admin/pages/restitution_globale/aller_plus_loin';
+@import 'admin/pages/evapro';
 @import "pdf/fonts";
 @import "pdf/utilities";
 @import "pdf/typographies";
@@ -33,10 +37,25 @@ $padding-pdf: 5rem;
 @import "pdf/components/pied_page";
 @import "pdf/components/alert_incomplete";
 @import "pdf/components/annexe_positionnement";
+@import "pdf/pages/resittuation_evapro";
 
 * {
   box-sizing: border-box;
   text-underline-offset: 10%;
+}
+
+html {
+  -webkit-font-smoothing: auto !important;
+  -moz-osx-font-smoothing: auto !important;
+}
+
+body {
+  @include texte;
+
+  font-family: $font-texte;
+  color: $couleur-texte;
+  background-color: white;
+  overflow-x: hidden;
 }
 
 // Cette mixin adapte le style des anciens PDF (avant la numératie)
@@ -56,7 +75,11 @@ $padding-pdf: 5rem;
   width: 100%;
 }
 
-.page-pdf__contenu {
+.fr-header__logo .fr-logo::before {
+  filter: opacity(1) !important;
+}
+
+.page__contenu {
   display: flex;
   flex-direction: column;
   gap: 3rem;

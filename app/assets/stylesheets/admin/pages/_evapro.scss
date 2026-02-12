@@ -1,12 +1,22 @@
-.evaluation-evapro {
+.evaluation-evapro, .evaluation-evapro .page, .evaluation-evapro .page__contenu {
   display: flex;
   flex-direction: column;
   gap: var(--Space-7W, 3.5rem);
 
+  @media print {
+    gap: var(--Space-4W, 1.5rem);
+  }
+    
   .evaluation-evapro__titre {
     margin-bottom: 0;
     color: var(--light-decisions-text-text-title-grey, #161616);
 
     @include h2-lg;
+  }
+
+  .evaluation-evapro__titre-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
   }
 }

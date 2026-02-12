@@ -78,7 +78,14 @@
 
             <div class="fr-col-12 no-padding-bottom">
               <div class="informations-compte-actions">
-                <%= f.submit t("active_admin.devise.login.submit"), class: "bouton grand-bouton connexion_v2__bouton-full-width" %>
+                <%= render BoutonDsfrComponent.new(
+                  t("active_admin.devise.login.submit"),
+                  type: :primary,
+                  tag: :submit,
+                  class: "connexion_v2__bouton-full-width"
+                ) do %>
+                  <%= t("active_admin.devise.login.submit") %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -91,7 +98,7 @@
     <div class="nouvelle-session__connexion-content">
       <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.pas-de-compte") %></h5>
       <div class="informations-compte-actions">
-        <%= render BoutonComponent.new(inscription_nouveau_compte_path, type: :secondary, tag: :a, size: :md, class: "connexion_v2__bouton-full-width") do %>
+        <%= render BoutonDsfrComponent.new(inscription_nouveau_compte_path, type: :secondary, tag: :a, size: :md, class: "connexion_v2__bouton-full-width") do %>
           <%= t("active_admin.devise.sessions.new.compte.creer-compte") %>
         <% end %>
       </div>

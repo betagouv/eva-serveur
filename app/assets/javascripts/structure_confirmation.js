@@ -129,6 +129,56 @@ function initStructureParametrageFormState() {
   const boutonCreer = document.getElementById('creer-structure-btn');
   const boutonConfirmer = document.getElementById('confirmer-creation-structure');
 
+  function getModalFromButton(button) {
+    if (!button) return null;
+    const modalId = button.dataset.modalTarget || button.getAttribute('aria-controls');
+    if (!modalId) return null;
+    return document.getElementById(modalId);
+  }
+
+  function ouvrirModal(modal) {
+    if (!modal) return;
+    modal.classList.add('fr-modal--opened');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function fermerModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('fr-modal--opened');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  function initModalFallbackControls(modal, openerButton) {
+    if (!modal || modal.dataset.fallbackBound === 'true') return;
+    modal.dataset.fallbackBound = 'true';
+
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        fermerModal(modal);
+      }
+    }, true);
+
+    modal.querySelectorAll('[aria-controls="' + modal.id + '"]').forEach(function(closeTrigger) {
+      closeTrigger.addEventListener('click', function(event) {
+        if (closeTrigger.type === 'submit') return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        fermerModal(modal);
+        if (openerButton) openerButton.focus();
+      }, true);
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.classList.contains('fr-modal--opened')) {
+        event.preventDefault();
+        fermerModal(modal);
+        if (openerButton) openerButton.focus();
+      }
+    });
+  }
+
   function champRempli(element) {
     if (!element) return false;
     return element.value && element.value.trim().length > 0;
@@ -155,6 +205,18 @@ function initStructureParametrageFormState() {
     field.addEventListener('input', majBoutons);
     field.addEventListener('change', majBoutons);
   });
+
+  if (boutonCreer) {
+    const modal = getModalFromButton(boutonCreer);
+    initModalFallbackControls(modal, boutonCreer);
+
+    boutonCreer.addEventListener('click', function(event) {
+      if (boutonCreer.disabled) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      ouvrirModal(modal);
+    });
+  }
 
   majBoutons();
 }

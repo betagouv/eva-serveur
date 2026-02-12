@@ -27,7 +27,7 @@
 
   @media (max-width: 48rem) {
     .recherche-structure-actions {
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: stretch;
 
       .fr-btn {

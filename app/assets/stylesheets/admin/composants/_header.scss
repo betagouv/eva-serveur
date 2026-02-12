@@ -29,6 +29,19 @@
     content: none;
   }
 
+  .fr-header__body-row, .fr-header__brand {
+    justify-content: flex-start;
+  }
+
+  .fr-header__brand-top {
+    width: auto;
+  }
+
+  .fr-header__brand {
+    background: none;
+    filter: none;
+  }
+
   .fr-header__brand::after {
     content: none;
   }

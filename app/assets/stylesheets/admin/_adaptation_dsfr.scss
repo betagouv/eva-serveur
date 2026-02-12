@@ -7,19 +7,26 @@
 }
 
 #header {
-  h1 a, ul.tabs > li a {
+
+  h1 a,
+  ul.tabs>li a {
     background-image: none;
   }
 }
+
 ul {
   list-style-type: var(--ul-type);
   padding-left: var(--ul-start);
   margin: var(--text-spacing);
 }
-ol > li::marker {
+
+ol>li::marker {
   content: none;
 }
-a, a:link, a:visited {
+
+a,
+a:link,
+a:visited {
   text-decoration: none;
 }
 
@@ -28,10 +35,11 @@ a.pas-souligne {
 }
 
 .tarteaucitronSelfLink {
-    background-image: none;
-    &::after {
-      display: none;
-    }
+  background-image: none;
+
+  &::after {
+    display: none;
+  }
 }
 
 .fr-skiplinks {
@@ -40,6 +48,7 @@ a.pas-souligne {
 
 // Evapro admin: ajustements layout DSFR dans ActiveAdmin
 body.logged_in.evapro_admin {
+
   &::before,
   &::after {
     display: none;
@@ -82,7 +91,8 @@ body.logged_in.evapro_admin {
   border-bottom-color: unset;
   border: unset;
 
-  &, &:not(.disabled):hover {
+  &,
+  &:not(.disabled):hover {
     font-weight: bold !important;
   }
 
@@ -91,13 +101,15 @@ body.logged_in.evapro_admin {
     background-color: var(--hover-tint);
   }
 
-  &:active, &:not(.disabled):active {
+  &:active,
+  &:not(.disabled):active {
     background-color: var(--active-tint);
     box-shadow: unset;
     background-image: unset;
   }
 
-  &:-moz-focusring { // pour contrer le normalize d'activeadmin
+  &:-moz-focusring {
+    // pour contrer le normalize d'activeadmin
     @include focus;
   }
 }
@@ -139,7 +151,7 @@ body.logged_in.evapro_admin {
   background-color: $grey-950;
 }
 
-.fr-fieldset__element .fr-checkbox-group--sm input[type="checkbox"] + label::before {
+.fr-fieldset__element .fr-checkbox-group--sm input[type="checkbox"]+label::before {
   margin-top: 0;
 }
 
@@ -151,6 +163,7 @@ body.logged_in.evapro_admin {
   max-height: calc(100vh - 6rem);
   overflow-y: auto;
 }
+
 button.fr-link--close.fr-link {
   border: none;
   box-shadow: none;
@@ -158,7 +171,7 @@ button.fr-link--close.fr-link {
 
 button.fr-link--close.fr-link:hover {
   background-color: $grey-1000-hover;
-  cursor: pointer;  
+  cursor: pointer;
   border-radius: 0;
 }
 
@@ -181,8 +194,8 @@ button.fr-link--close.fr-link:hover {
     position: fixed;
     top: 8rem;
   }
-  
-  .fr-header__menu.fr-modal > .fr-container {
+
+  .fr-header__menu.fr-modal>.fr-container {
     pointer-events: none;
     position: fixed;
     top: 0 !important;
@@ -191,7 +204,7 @@ button.fr-link--close.fr-link:hover {
 }
 
 .fr-modal.fr-modal--opened {
-  display: flex; 
+  display: flex;
 }
 
 .fr-modal__content ul {
@@ -239,10 +252,11 @@ body.logged_out #wrapper .fr-modal__content ul li,
 body.logged_in:not(.evapro_admin) .fr-btn {
   @include grand-bouton;
   @include bouton-primaire;
+
   &.bouton-secondaire {
     @include bouton-secondaire;
   }
-  
+
   &:disabled {
     @include bouton-disabled;
   }
@@ -298,10 +312,10 @@ form input[type="button"].fr-btn:not(.disabled):hover {
 // S'assurer que le titre de la card est en noir
 .fr-card__title {
   color: $eva_dark_blue_grey;
-  
+
   .fr-card__link {
     color: $eva_dark_blue_grey;
-    
+
     &:hover {
       color: $eva_dark_blue_grey;
     }
@@ -336,6 +350,7 @@ body.logged_in h3.fr-footer__top-cat {
   margin: 0 0 .75rem;
   text-align: left;
 }
+
 body.logged_out h2.fr-footer__partners-title,
 body.logged_in h2.fr-footer__partners-title {
   font-family: $font-texte;

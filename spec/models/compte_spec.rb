@@ -18,6 +18,23 @@ describe Compte do
   it { is_expected.to validate_presence_of :nom }
   it { is_expected.to validate_presence_of :prenom }
 
+  describe "validation du SIRET" do
+    context "quand le SIRET est valide" do
+      it "accepte la validation" do
+        compte = build(:compte, siret_pro_connect: "12345678901234")
+        expect(compte.valid?).to be(true)
+      end
+    end
+
+    context "quand le SIRET est invalide" do
+      it "refuse la validation" do
+        compte = build(:compte, siret_pro_connect: "123456789012345")
+        expect(compte.valid?).to be(false)
+        expect(compte.errors[:siret_pro_connect]).to include(I18n.t("errors.messages.invalid"))
+      end
+    end
+  end
+
   describe "validation des informations personnelles" do
     let(:compte) { build(:compte, nom: nil, prenom: nil) }
 

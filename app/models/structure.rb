@@ -1,12 +1,15 @@
 class Structure < ApplicationRecord
   include RechercheSansAccent
+  include ValidationSiret
+  # Pour les nouvelles structures, on accepte uniquement le SIRET (14 chiffres)
+  # Pour les structures existantes, on garde l'ancienne validation (SIREN ou SIRET).
+  validate :validation_siret, if: :new_record?
+  validate :validation_siret_ou_siren, if: :persisted?
 
   has_ancestry
   acts_as_paranoid
   has_many :structure_opcos, dependent: :destroy, autosave: true
   has_many :opcos, through: :structure_opcos
-
-  normalizes :siret, with: ->(siret) { siret.to_s.gsub(/\s+/, "") }
 
   alias structure_referente parent
   alias structure_referente= parent=
@@ -32,7 +35,6 @@ class Structure < ApplicationRecord
   }
   validates :siret, numericality: { only_integer: true, allow_blank: true }
   validates :siret, presence: true, on: :create
-  validate :verifie_siret_ou_siren
   validates :siret, uniqueness: true, allow_blank: true, unless: -> { errors[:siret].any? }
   validate :ne_peut_pas_supprimer_siret
   validate :doit_avoir_un_opco, if: :validation_inscription
@@ -47,7 +49,6 @@ class Structure < ApplicationRecord
     end
   end
 
-  before_validation :retire_espaces_siret
   before_validation :verifie_siret_si_necessaire
   after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
   after_create :programme_email_relance
@@ -130,42 +131,6 @@ class Structure < ApplicationRecord
   end
 
   private
-
-  def verifie_siret_ou_siren
-    return if siret.blank?
-
-    # On vérifie d'abord que le SIRET/SIREN ne contient que des chiffres
-    unless siret_contient_seulement_des_chiffres?
-      errors.add(:siret, :invalid)
-      return
-    end
-
-    # Pour les nouvelles structures, on accepte uniquement le SIRET (14 chiffres)
-    # On ne va faire de validation de l'algo de Luhn
-    # On fera une vérification plus tard avec un point d'api
-    # La poste ne respecte pas l'algo de luhn pour son siret.
-    if new_record?
-      return if siret.size == 14
-
-      errors.add(:siret, :invalid)
-    else
-      # Pour les structures existantes, on garde l'ancienne validation (SIREN ou SIRET)
-      return if [ 14, 9 ].include?(siret.size)
-
-      errors.add(:siret, :invalid)
-    end
-  end
-
-  def siret_contient_seulement_des_chiffres?
-    siret.match?(/\A\d+\z/)
-  end
-
-  def retire_espaces_siret
-    return if siret.blank?
-
-    self.siret = siret.gsub(/[[:space:]]/, "")
-  end
-
   def verifie_siret_si_necessaire
     return if siret.blank?
     return unless structure_locale?

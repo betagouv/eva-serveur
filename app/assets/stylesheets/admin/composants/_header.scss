@@ -4,6 +4,13 @@
   }
 }
 
+.fr-header__body-row,
+.fr-header__brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .fr-header__menu-btn,
 .fr-header__menu .fr-btn--close {
   border-radius: 0;

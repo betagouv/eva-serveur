@@ -13,7 +13,7 @@ beneficiaire: evaluation.beneficiaire.nom))
         h1 titre_evaluation_evapro(evaluation), class: "evaluation-evapro__titre"
         if !pdf
           url = admin_evaluation_path(evaluation, format: :pdf)
-          render(BoutonComponent.new(url, type: :primary, size: :xs).with_content("Exporter"))
+          render(BoutonDsfrComponent.new(url, type: :primary, size: :sm).with_content("Exporter"))
         end
       end
 

@@ -6,6 +6,8 @@ class Structure < ApplicationRecord
   has_many :structure_opcos, dependent: :destroy, autosave: true
   has_many :opcos, through: :structure_opcos
 
+  normalizes :siret, with: ->(siret) { siret.to_s.gsub(/\s+/, "") }
+
   alias structure_referente parent
   alias structure_referente= parent=
 
@@ -132,6 +134,12 @@ class Structure < ApplicationRecord
   def verifie_siret_ou_siren
     return if siret.blank?
 
+    # On vérifie d'abord que le SIRET/SIREN ne contient que des chiffres
+    unless siret_contient_seulement_des_chiffres?
+      errors.add(:siret, :invalid)
+      return
+    end
+
     # Pour les nouvelles structures, on accepte uniquement le SIRET (14 chiffres)
     # On ne va faire de validation de l'algo de Luhn
     # On fera une vérification plus tard avec un point d'api
@@ -146,6 +154,10 @@ class Structure < ApplicationRecord
 
       errors.add(:siret, :invalid)
     end
+  end
+
+  def siret_contient_seulement_des_chiffres?
+    siret.match?(/\A\d+\z/)
   end
 
   def retire_espaces_siret

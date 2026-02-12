@@ -1,5 +1,5 @@
 <%= render HeaderComponent.new(
-  titre: t("header.titre"),
-  tagline: t("header.tagline"),
+  logo: "logo-evapro.png",
+  logo_alt: "EvaPro",
   current_compte: (respond_to?(:current_compte) ? current_compte : nil)
 ) %>

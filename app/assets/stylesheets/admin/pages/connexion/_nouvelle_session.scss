@@ -16,12 +16,13 @@
   }
 
   body.logged_out.page_connexion_v2 .nouvelle-session__connexion,
-  body.logged_out.page_connexion_v2 .nouvelle-session__demonstration,
+  body.logged_out.page_connexion_v2,
   body.logged_out .nouvelle-session__connexion,
-  body.logged_out .nouvelle-session__demonstration {
+  body.logged_out  {
     width: 100%;
     max-width: 100%;
     flex: 0 0 auto;
+    padding-bottom: var(--Space-5W, 40px);
   }
 
   body.logged_out.page_connexion_v2 .nouvelle-session__connexion-container,

@@ -147,24 +147,21 @@
 }
 
 .connexion_v2__bouton-full-width,
-.connexion_v2__bouton-full-width.bouton,
-.connexion_v2__bouton-full-width.bouton-secondaire,
-.connexion_v2__bouton-full-width.grand-bouton,
-a.connexion_v2__bouton-full-width,
-a.connexion_v2__bouton-full-width.bouton,
-a.connexion_v2__bouton-full-width.bouton-secondaire {
+a.connexion_v2__bouton-full-width {
   width: 100% !important;
   justify-content: center;
   text-align: center;
+}
+
+body.logged_out button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+  appearance: none;
+  background-image: none !important;
 }
 
 // Sur la page de connexion, certains styles legacy d'ActiveAdmin
 // peuvent écraser le rendu DSFR des <button>. On réapplique ici
 // explicitement le style DSFR pour le bouton primaire de soumission.
 body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: none !important;
   background-color: var(--background-action-high-blue-france) !important;
   border-radius: 0;
   box-shadow: inset 0 -2px 0 0 var(--border-action-high-blue-france);
@@ -177,12 +174,6 @@ body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:
 
 body.logged_out.page_connexion_v2 button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary):active {
   background-color: var(--background-action-high-blue-france-active) !important;
-}
-
-body.logged_out button.connexion_v2__bouton-full-width.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: none !important;
 }
 
 .no-padding-bottom {

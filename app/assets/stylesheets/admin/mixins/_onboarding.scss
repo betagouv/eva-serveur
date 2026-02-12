@@ -1,0 +1,24 @@
+@mixin onboarding-form-reset {
+  fieldset.inputs {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  form li {
+    list-style: none !important;
+  }
+}
+
+@mixin onboarding-actions-mobile($direction: column-reverse) {
+  flex-direction: $direction;
+  align-items: stretch;
+  width: 100%;
+
+  .fr-btn {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+  }
+}

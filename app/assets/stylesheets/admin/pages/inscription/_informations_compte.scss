@@ -1,17 +1,5 @@
-// Reset the form style
-@mixin reset-form {
-  fieldset.inputs {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  form li {
-    list-style: none !important;
-  }
-}
-
 .page-informations-compte {
-  @include reset-form;
+  @include onboarding-form-reset;
 
   display: flex;
   width: 100%;
@@ -21,61 +9,20 @@
   gap: var(--Space-7W, 56px);
 
   @media (max-width: 48rem) {
-    padding: var(--Space-5W, 40px) var(--Space-2W, 16px);
+    padding: 0 !important;
     flex-direction: column;
     align-items: center;
     gap: var(--Space-3W, 24px);
     align-self: stretch;
-    
-  }
-}
 
-.page-nouveau-compte {
-  @include reset-form;
-
-  display: flex;
-  width: 100%;
-  max-width: 49.5rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--Space-7W, 56px);
-
-  @media (max-width: 48rem) {
-    padding: 0 !important;
-  }
-  
-  .texte-intro {
-    @media (max-width: 48rem) {
-      align-items: flex-start !important;
-    }
-  }
-}
-
-.page-informations-compte {
-  @media (max-width: 48rem) {
-    padding: 0 !important;
-  }
-
-  @media (max-width: 48rem) {
     .informations-compte-actions {
-      flex-direction: column-reverse;
-      align-items: stretch;
-
-      .fr-btn {
-        width: 100%;
-        max-width: none;
-        box-sizing: border-box;
-        justify-content: center;
-        text-align: center;
-      }
+      @include onboarding-actions-mobile;
     }
-    
+
     .carte-v2 {
       padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
     }
   }
-
-
 }
 
 .page-informations-compte .indication-champs-obligatoires {
@@ -104,22 +51,6 @@
 }
 
 .page-informations-compte label[for="compte_cgu_acceptees"] abbr[title] {
-  color: #000;
-  margin-left: 0.25rem;
-}
-
-.page-nouveau-compte .informations-compte-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  width: 100%;
-}
-
-.page-nouveau-compte .valider-compte-bouton {
-  @include grand-bouton;
-}
-
-.page-nouveau-compte label[for="compte_cgu_acceptees"] abbr[title] {
   color: #000;
   margin-left: 0.25rem;
 }

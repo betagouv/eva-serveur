@@ -5,13 +5,13 @@
         <div class="fr-header__brand fr-enlarge-link">
           <div class="fr-header__brand-top">
             <div class="fr-header__logo">
-              <p class="fr-logo"> République<br>française </p>
+              <a href="/" title="<%= t("header.title_lien_logo", logo_alt: @logo_alt) %>">
+                <p class="fr-logo"> République<br>française </p>
+              </a>
             </div>
             <% if @logo.present? %>
               <div class="fr-header__operator">
-                <a href="/" title="<%= t("header.title_lien_logo", logo_alt: @logo_alt) %>">
-                  <img style="max-width:10rem;" class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
-                </a>
+                <img style="max-width:10rem;" class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
               </div>
             <% end %>
           </div>

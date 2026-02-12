@@ -200,7 +200,7 @@ button.fr-link--close.fr-link:hover {
   padding-inline-start: var(--ul-start);
 }
 
-.body.logged_out #wrapper .fr-modal__content ul li, 
+body.logged_out #wrapper .fr-modal__content ul li,
 .fr-modal__content ul li {
   float: none;
 
@@ -219,6 +219,7 @@ button.fr-link--close.fr-link:hover {
 // Boutons DSFR dans les modales (hors body.evapro_admin / body.logged_in)
 .fr-modal.evapro_admin .fr-btn {
   @include grand-bouton;
+
   border-radius: 0;
 }
 

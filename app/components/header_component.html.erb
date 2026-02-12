@@ -26,7 +26,6 @@
             <% if affiche_navigation? || affiche_actions_connexion? %>
               <div class="fr-header__navbar">
                 <button class="fr-btn fr-btn--menu fr-header__menu-btn"
-                        style="border-radius: 0;"
                         type="button"
                         id="header-menu-btn"
                         data-fr-opened="false"
@@ -62,7 +61,7 @@
   <% if affiche_navigation? || affiche_actions_connexion? %>
     <div class="fr-header__menu fr-modal" id="header-menu" aria-labelledby="header-menu-btn">
       <div class="fr-container">
-        <button type="button" class="fr-btn fr-btn--close" style="border-radius: 0;" aria-controls="header-menu" title="Fermer">Fermer</button>
+        <button type="button" class="fr-btn fr-btn--close" aria-controls="header-menu" title="Fermer">Fermer</button>
         <% if affiche_actions_connexion? %>
           <div class="fr-header__menu-links">
             <ul class="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left">

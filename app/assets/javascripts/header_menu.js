@@ -35,9 +35,11 @@
 
     var closeBtn = menu.querySelector(".fr-btn--close");
     if (closeBtn) {
-      closeBtn.addEventListener("click", function () {
+      closeBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
         closeMenu(menu, btn);
-      });
+      }, true);
     }
 
     menu.addEventListener("click", function (e) {

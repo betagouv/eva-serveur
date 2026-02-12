@@ -21,9 +21,12 @@
           </ul>
         </div>
         <div class="nouvelle-session__demonstration-bouton">
-          <%= render BoutonComponent.new(demo_path, type: :secondary, size: :md) do %>
+          <%= render BoutonDsfrComponent.new(
+            demo_path,
+            type: :secondary,
+            class: "fr-icon-arrow-right-line fr-btn--icon-right"
+          ) do %>
             <%= t("active_admin.devise.sessions.new.demonstration.bouton") %>
-            <span class="fr-icon fr-icon--sm fr-icon-arrow-right-line" aria-label="<%= t("active_admin.devise.sessions.new.demonstration.bouton") %>"></span>
           <% end %>
         </div>
       </div>

@@ -27,16 +27,7 @@
 
   @media (max-width: 48rem) {
     .recherche-structure-actions {
-      flex-direction: column-reverse;
-      align-items: stretch;
-
-      .fr-btn {
-        width: 100%;
-        max-width: none;
-        box-sizing: border-box;
-        justify-content: center;
-        text-align: center;
-      }
+      @include onboarding-actions-mobile;
     }
   }
 }

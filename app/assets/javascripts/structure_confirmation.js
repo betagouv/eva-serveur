@@ -1,14 +1,12 @@
+function toggleDisabledState(button, enabled) {
+  if (!button) return;
+  button.disabled = !enabled;
+  button.classList.toggle('disabled', !enabled);
+}
+
 function activation_bouton_rejoindre(structure_confirmee) {
   let bouton_rejoindre = document.getElementById('rejoindre-structure-btn');
-  if (!bouton_rejoindre) return;
-  
-  if (structure_confirmee) {
-    bouton_rejoindre.classList.remove('disabled');
-    bouton_rejoindre.removeAttribute('disabled');
-  } else {
-    bouton_rejoindre.classList.add('disabled');
-    bouton_rejoindre.setAttribute('disabled', 'disabled');
-  }
+  toggleDisabledState(bouton_rejoindre, structure_confirmee);
 }
 
 function structure_confirmation_submit() {
@@ -25,30 +23,9 @@ function structure_confirmation_submit() {
   initStructureFormLinks();
 }
 
-function activation_bouton_creer(structure_confirmee) {
-  let bouton_creer = document.getElementById('creer-structure-btn');
-  if (!bouton_creer) return;
-  
-  if (structure_confirmee) {
-    bouton_creer.classList.remove('disabled');
-    bouton_creer.removeAttribute('disabled');
-  } else {
-    bouton_creer.classList.add('disabled');
-    bouton_creer.setAttribute('disabled', 'disabled');
-  }
-}
-
 function activation_bouton_confirmer(structure_confirmee) {
   let bouton_confirmer = document.getElementById('confirmer-infos-btn');
-  if (!bouton_confirmer) return;
-  
-  if (structure_confirmee) {
-    bouton_confirmer.classList.remove('disabled');
-    bouton_confirmer.removeAttribute('disabled');
-  } else {
-    bouton_confirmer.classList.add('disabled');
-    bouton_confirmer.setAttribute('disabled', 'disabled');
-  }
+  toggleDisabledState(bouton_confirmer, structure_confirmee);
 }
 
 // Gérer la soumission du formulaire via les liens avec data-submit-form
@@ -194,9 +171,7 @@ function initStructureParametrageFormState() {
   function majBoutons() {
     const enable = formulaireComplet();
     [ boutonCreer, boutonConfirmer ].forEach(function(button) {
-      if (!button) return;
-      button.disabled = !enable;
-      button.classList.toggle('disabled', !enable);
+      toggleDisabledState(button, enable);
     });
   }
 

@@ -1,4 +1,25 @@
 // Styles pour la page d'entrée inscription (choix ProConnect ou identifiant)
+.page-nouveau-compte {
+  @include onboarding-form-reset;
+
+  display: flex;
+  width: 100%;
+  max-width: 49.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Space-7W, 56px);
+
+  @media (max-width: 48rem) {
+    padding: 0 !important;
+  }
+
+  .texte-intro {
+    @media (max-width: 48rem) {
+      align-items: flex-start !important;
+    }
+  }
+}
+
 .page-nouveau-compte-card .carte-v2__content {
   display: flex;
   flex-direction: column;
@@ -58,18 +79,13 @@
 .page-nouveau-compte-section--identifiant .identifiant-titre {
   @include h5-xs;
 
- margin: 0;
+  margin: 0;
 }
 
 .page-nouveau-compte-section--identifiant .identifiant-description {
   @include body-sm-base;
 
- margin: 0;
-}
-
-.page-nouveau-compte .inputs li {
-  list-style: none;
-  padding: 0;
+  margin: 0;
 }
 
 .page-nouveau-compte .bouton-proconnect {
@@ -122,6 +138,11 @@
   margin-bottom: $dsfr-spacing-3v;
 }
 
+.page-nouveau-compte label[for="compte_cgu_acceptees"] abbr[title] {
+  color: #000;
+  margin-left: 0.25rem;
+}
+
 @media (max-width: 48rem) {
   .page-nouveau-compte-card {
     display: flex;
@@ -170,16 +191,6 @@
   }
 
   .page-nouveau-compte .informations-compte-actions {
-    flex-direction: column-reverse;
-    align-items: stretch;
-    width: 100%;
-
-    .fr-btn {
-      width: 100%;
-      max-width: none;
-      box-sizing: border-box;
-      justify-content: center;
-      text-align: center;
-    }
+    @include onboarding-actions-mobile;
   }
 }

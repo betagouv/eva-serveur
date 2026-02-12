@@ -22,6 +22,10 @@
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     @media (max-width: 48rem) {
       margin-bottom: -1rem !important;
     }
@@ -31,12 +35,6 @@
     background-color: $grey-1000;
   }
   
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
   form fieldset.inputs {
     padding-top: 0 !important;
     max-width: none !important;
@@ -151,16 +149,7 @@
 
   @media (max-width: 48rem) {
     .informations-compte-actions {
-      flex-direction: column-reverse;
-      align-items: stretch;
-
-      .fr-btn {
-        width: 100%;
-        max-width: none;
-        box-sizing: border-box;
-        justify-content: center;
-        text-align: center;
-      }
+      @include onboarding-actions-mobile;
     }
   }
 

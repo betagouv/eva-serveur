@@ -1,0 +1,8 @@
+fr:
+  formtastic:
+    inputs:
+      siret:
+        hint: Il est composé de 14 chiffres
+        lien: 
+          description: Retrouver votre SIRET sur L'Annuaire des Entreprises
+          url: "https://annuaire-entreprises.data.gouv.fr/"

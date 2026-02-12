@@ -37,7 +37,6 @@ fr:
           verifier_information_structure: |
             **Veuillez vérifier les informations saisies avant de valider cette création.**
             Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
-          siret_hint: Il est composé de 14 chiffres
     structures_locales:
       form:
         titre:
@@ -46,7 +45,6 @@ fr:
         verifier_information_structure: |
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
-        siret_hint: Il est composé de 14 chiffres
   nouvelles_structures:
     modal_mise_en_garde:
       titre: Mise en garde

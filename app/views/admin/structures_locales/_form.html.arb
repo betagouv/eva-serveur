@@ -9,14 +9,8 @@ div class: "panel nouvelle_structure" do
       f.input :code_postal
       f.input :siret,
               required: resource.new_record?,
-              hint: t("admin.structures.structures_locales.form.siret_hint")
-      para do
-        render LienComponent.new(
-          t("nouvelles_structures.show.annuaire_siret.description"),
-          t("nouvelles_structures.show.annuaire_siret.url"),
-          nouvelle_fenetre: true
-        )
-      end
+              as: :siret
+
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all
       end

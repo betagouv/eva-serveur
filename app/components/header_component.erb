@@ -56,6 +56,9 @@
           </div>
         <% end %>
       </div>
+      <% if affiche_navigation? %>
+        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+      <% end %>
     </div>
   </div>
   <% if affiche_navigation? || affiche_actions_connexion? %>
@@ -80,9 +83,7 @@
             </ul>
           </div>
         <% end %>
-        <% if affiche_navigation? %>
-          <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
-        <% end %>
+
       </div>
     </div>
   <% end %>

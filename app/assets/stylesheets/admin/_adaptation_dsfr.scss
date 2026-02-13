@@ -278,6 +278,17 @@ body.evapro_admin .fr-btn--tertiary:hover,
   background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
 }
 
+// Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
+form button.fr-btn:not(.disabled):hover,
+form input[type="submit"].fr-btn:not(.disabled):hover,
+form input[type="button"].fr-btn:not(.disabled):hover {
+  &.fr-btn--primary,
+  &:not(.fr-btn--secondary, .fr-btn--tertiary) {
+    background-color: $blue-france-sun-113-hover;
+    border-color: $blue-france-sun-113-hover;
+  }
+}
+
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR
 .fr-card__end {
   padding-bottom: 1.5rem;

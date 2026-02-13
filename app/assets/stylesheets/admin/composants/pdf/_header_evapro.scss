@@ -1,0 +1,30 @@
+.fr-header.header-pdf-evapro {
+  border: 0 !important;
+  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+  filter: none !important;
+
+  .fr-responsive-img {
+    width: 128px;
+  }
+
+  .fr-header__service::before {
+    content: none;
+  }
+
+  .fr-header__body-row, .fr-header__brand {
+    justify-content: flex-start;
+  }
+
+  .fr-header__brand-top {
+    width: auto;
+  }
+
+  .fr-header__brand {
+    background: none;
+    filter: none;
+  }
+
+  .fr-header__brand::after {
+    content: none;
+  }
+}

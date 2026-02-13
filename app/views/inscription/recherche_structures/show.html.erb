@@ -13,22 +13,14 @@
     <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12">
-          <%= render InputComponent.new(
+          <%= render SiretInputComponent.new(
             id: "siret",
             label: t(".label_siret"),
             hint: t(".hint_siret"),
             form: f,
             method: :siret,
-            type: "text",
             value: @siret,
-            pattern: "[0-9\\s]{14}",
-            placeholder: "12345678901234",
-            input_html: { maxlength: 14 },
-            required: true,
-            autocomplete: "off",
-            link_text: t(".lien_annuaire"),
-            link_url: SiretInput::ANNUAIRE_SIRET_URL_CAMPAGNE_PRO_CONNECT,
-            link_html: { target: "_blank", rel: "noopener noreferrer" }
+            link_text: t(".lien_annuaire")
           ) %>
         </div>
         <div class="fr-col-12">

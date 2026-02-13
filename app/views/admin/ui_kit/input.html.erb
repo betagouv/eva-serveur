@@ -56,20 +56,13 @@
     ) %>
   </div>
 
-  <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec lien</h2>
+  <h2 class="fr-h2 fr-mt-6w">Champ SIRET avec lien (SiretInputComponent)</h2>
   <div style="max-width: 600px;">
-    <%= render InputComponent.new(
+    <%= render SiretInputComponent.new(
       id: "siret-input-link",
       label: "Numéro SIRET",
       hint: "Le numéro SIRET est composé de 14 chiffres",
-      placeholder: "12345678901234",
-      pattern: "[0-9\\s]{14}",
-      input_html: { maxlength: 14 },
-      required: true,
-      autocomplete: "off",
-      link_text: "Retrouver votre numéro SIRET sur L'Annuaire des Entreprises",
-      link_url: SiretInput::ANNUAIRE_SIRET_URL_CAMPAGNE_PRO_CONNECT,
-      link_html: { target: "_blank", rel: "noopener noreferrer" }
+      link_text: "Retrouver votre numéro SIRET sur L'Annuaire des Entreprises"
     ) %>
   </div>
 
@@ -146,20 +139,15 @@
     ) %>
   </div>
 
-  <h2 class="fr-h2 fr-mt-6w">Utilisation avec form builder</h2>
+  <h2 class="fr-h2 fr-mt-6w">Utilisation avec form builder (SiretInputComponent)</h2>
   <div style="max-width: 600px;">
     <%= form_with url: "#", local: true do |f| %>
-      <%= render InputComponent.new(
+      <%= render SiretInputComponent.new(
         id: "form-siret",
         label: "Numéro SIRET",
         hint: "14 chiffres",
         form: f,
-        method: :siret,
-        type: "text",
-        placeholder: "12345678901234",
-        pattern: "[0-9\\s]{14,20}",
-        required: true,
-        autocomplete: "off"
+        method: :siret
       ) %>
     <% end %>
   </div>

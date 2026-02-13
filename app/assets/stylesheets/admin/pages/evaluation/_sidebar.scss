@@ -40,7 +40,7 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
 
 .evaluation-sidebar__bloc {
   display: flex;
-  width: 257px;
+  width: 100%;
   padding: var(--Space-3W, 1.5rem);
   flex-direction: column;
   justify-content: center;

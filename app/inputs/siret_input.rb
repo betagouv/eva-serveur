@@ -26,10 +26,37 @@ class SiretInput < Formtastic::Inputs::StringInput
   end
 
   def input_html_options_with_constraints
-    html = input_html_options.dup
-    html[:maxlength] ||= 14
-    html[:pattern] ||= "[0-9\\s]{14}"
-    html
+    input_html_options.dup.tap do |html|
+      html.merge!(siret_input_html_attributes)
+      value = formatted_siret_value
+      html[:value] = value if value.present?
+    end
+  end
+
+  def siret_input_html_attributes
+    {
+      "data-siret-input" => "true",
+      maxlength: 18, # 14 chiffres + 4 espaces (format 3-3-3-5)
+      inputmode: "numeric",
+      autocomplete: "off",
+      pattern: "[0-9\\s]*",
+      placeholder: "123 456 789 01234"
+    }
+  end
+
+  def formatted_siret_value
+    return nil unless object.respond_to?(method)
+
+    raw = object.public_send(method)
+    format_siret_display(raw) if raw.present?
+  end
+
+  def format_siret_display(raw)
+    digits = raw.to_s.gsub(/\D/, "")[0, 14]
+    return "" if digits.blank?
+
+    # Format 3-3-3-5 : 123 456 789 01234
+    [ digits[0, 3], digits[3, 3], digits[6, 3], digits[9, 5] ].reject(&:empty?).join(" ")
   end
 
   def annuaire_siret_link_html

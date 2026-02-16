@@ -29,4 +29,10 @@
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, size: :sm) do %>
       Tertiaire SM
     <% end %>
+  </div>
+  <div class="fr-mb-4w" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+    <%= render BoutonDsfrComponent.new("#", type: :primary, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>
+      avec icone
+    <% end %>
+  </div>
 </div>

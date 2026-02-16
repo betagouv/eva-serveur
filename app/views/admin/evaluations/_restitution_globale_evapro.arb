@@ -1,5 +1,8 @@
 diag_risques_entreprise = restitution_globale.diag_risques_entreprise
 pourcentage_risque = nil
+if diag_risques_entreprise
+  pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
+end
 evaluation_impact_general = nil
 
 div class: "evaluation-evapro" do
@@ -18,14 +21,11 @@ class: "fr-icon-download-line fr-btn--icon-left").with_content("Exporter"))
         end
       end
 
-      if diag_risques_entreprise
-        pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
-        if pourcentage_risque
-          render(
-            partial: "mesure_des_risques",
-            locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
-          )
-        end
+      if diag_risques_entreprise && pourcentage_risque
+        render(
+          partial: "mesure_des_risques",
+          locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
+        )
       end
 
       if pourcentage_risque

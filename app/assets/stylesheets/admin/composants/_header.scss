@@ -1,6 +1,7 @@
 .fr-header {
   &.fr-header--logged-in {
     --background-raised-grey: var(--background-alt-blue-france);
+    --background-raised-grey-hover: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
   }
 }
 

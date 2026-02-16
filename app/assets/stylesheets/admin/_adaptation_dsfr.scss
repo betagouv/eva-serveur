@@ -236,10 +236,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
   border-radius: 0;
 }
 
-.fr-modal.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
-  color: var(--text-inverted-blue-france);
-}
-
 .fr-modal.evapro_admin .fr-btn--secondary,
 .fr-modal.evapro_admin .fr-btn--tertiary {
   color: var(--light-decisions-text-text-action-high-blue-france, #000091);
@@ -275,8 +271,9 @@ body.evapro_admin a:visited:not(.fr-btn),
   text-decoration: none;
 }
 
-body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary),
-.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
+body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close),
+.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close),
+.fr-modal.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary) {
   color: var(--text-inverted-blue-france);
 }
 
@@ -296,6 +293,7 @@ body.evapro_admin .fr-btn--tertiary:hover,
 form button.fr-btn:not(.disabled):hover,
 form input[type="submit"].fr-btn:not(.disabled):hover,
 form input[type="button"].fr-btn:not(.disabled):hover {
+
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary) {
     background-color: $blue-france-sun-113-hover;

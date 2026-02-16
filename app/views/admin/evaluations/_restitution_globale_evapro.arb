@@ -65,7 +65,7 @@ beneficiaire: evaluation.beneficiaire.nom))
           partial: "bilan_evapro",
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
-            opco: restitution_globale.evaluation.opco_financeur,
+            opco: restitution_globale.evaluation.opco,
             pdf: pdf
           }
         )

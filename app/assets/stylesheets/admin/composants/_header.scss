@@ -9,3 +9,12 @@
 .fr-header__menu .fr-btn--close {
   border-radius: 0;
 }
+
+// Réactiver les clics dans le menu burger (déconnexion, nav, etc.).
+// _adaptation_dsfr met « pointer-events: none » sur .fr-modal > .fr-container en mobile,
+// ce qui fait que les liens ne reçoivent pas le clic et la modale se ferme.
+@media (max-width: 48rem) {
+  .fr-header .fr-header__menu.fr-modal > .fr-container {
+    pointer-events: auto;
+  }
+}

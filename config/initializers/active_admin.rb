@@ -255,6 +255,7 @@ ActiveAdmin.setup do |config|
   # To change the default utility navigation to show a link to your website & a logout btn
   #
   config.namespace :admin do |admin|
+    admin.meta_tags = { viewport: "width=device-width, initial-scale=1" }
     admin.build_menu :utility_navigation do |menu|
       menu.add id: 'utility_nom', label: proc{ current_compte.nom_complet }, url: proc{ admin_compte_path(current_compte) }, priority: 0
       menu.add id: 'utility_email--non-confirme',

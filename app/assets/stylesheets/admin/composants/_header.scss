@@ -17,4 +17,36 @@
   .fr-header .fr-header__menu.fr-modal > .fr-container {
     pointer-events: auto;
   }
+
+  .fr-header__logo .fr-logo {
+    margin: 0;
+  }
+
+  .fr-header__navbar {
+    margin-right: 0;
+  }
 }
+// En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
+// Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.
+@media (min-width: 62em) {
+  .fr-header .fr-header__menu.fr-modal {
+    display: block;
+  }
+}
+
+// Réactiver les clics dans le menu burger (déconnexion, nav, etc.).
+// _adaptation_dsfr met « pointer-events: none » sur .fr-modal > .fr-container en mobile,
+// ce qui fait que les liens ne reçoivent pas le clic et la modale se ferme.
+@media (max-width: 48rem) {
+  .fr-header .fr-header__menu.fr-modal > .fr-container {
+    pointer-events: auto;
+  }
+}
+
+// En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
+// Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.
+// @media (min-width: 62em) {
+//   .fr-header .fr-header__menu.fr-modal {
+//     display: block;
+//   }
+// }

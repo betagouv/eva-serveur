@@ -102,6 +102,14 @@
       border-left: 1px solid var(--border-default-grey);
     }
 
+    .bloc-questionnaires-entreprise__chapo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $dsfr-spacing-3w;
+      align-self: stretch;
+    }
+
     @media (max-width: 1200px) {
       width: 100%;
       max-width: 1200px;
@@ -114,6 +122,12 @@
         flex: 1;
         position: static;
         width: 100%;
+      }
+    }
+
+    @media (max-width: 48rem) {
+      .tableau-bord-sidebar {
+        padding-bottom: 0;
       }
     }
   }
@@ -446,5 +460,69 @@
 
       margin: 0;
     }
+  }
+
+  @media (max-width: 48rem) {
+    .tableau-bord-layout {
+      display: flex;
+      padding: $dsfr-spacing-2w $dsfr-spacing-2w $dsfr-spacing-5w $dsfr-spacing-2w;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $dsfr-spacing-5w;
+      align-self: stretch;
+    }
+
+    .tableau-bord-contenu-principal {
+      padding-bottom: 0;
+    }
+
+    .bloc-questionnaires-entreprise {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $dsfr-spacing-5w;
+      align-self: stretch;
+    }
+
+    .bloc-questionnaires-entreprise__grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: $dsfr-spacing-3w;
+      align-self: stretch;
+    }
+
+    .bloc-questionnaires-entreprise__chapo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+      align-self: stretch;
+    }
+
+    .bloc-questionnaires-entreprise__description_2 {
+      @include corps-de-texte-xl-regular;
+    }
+
+    .tableau-bord-sidebar {
+      display: flex;
+      padding: $dsfr-spacing-4w $dsfr-spacing-3v;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $dsfr-spacing-3w;
+      border-left: none !important;
+      border-top: 1px solid $grey-900;
+    }
+  }
+}
+
+@media (max-width: 48rem) {
+  .admin_dashboard .tableau-bord-sidebar-container {
+    padding-left: 0;
+  }
+
+  .admin_dashboard .tableau-bord-layout .tableau-bord-contenu-principal {
+    padding-bottom: 0;
   }
 }

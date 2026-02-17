@@ -7,8 +7,10 @@
       <%= t("admin.dashboard.eva_pro.bloc_questionnaires_entreprise.texte_relancer_questionnaire") %>
     </p>
   <% else %>
-    <p class="bloc-questionnaires-entreprise__description"><%= t(".evapro_description") %></p>
-    <p class="bloc-questionnaires-entreprise__description_2"><%= t(".evapro_description_2") %></p>
+    <div class="bloc-questionnaires-entreprise__chapo">
+      <p class="bloc-questionnaires-entreprise__description"><%= t(".evapro_description") %></p>
+      <p class="bloc-questionnaires-entreprise__description_2"><%= t(".evapro_description_2") %></p>
+    </div>
   <% end %>
   <div class="bloc-questionnaires-entreprise__grid">
     <% campagnes.each do |campagne| %>

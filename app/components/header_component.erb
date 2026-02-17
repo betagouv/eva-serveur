@@ -61,15 +61,15 @@
           </div>
         <% end %>
       </div>
-      <% if affiche_navigation? %>
-        <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
-      <% end %>
     </div>
   </div>
   <% if affiche_navigation? || affiche_actions_connexion? %>
     <div class="fr-header__menu fr-modal" id="header-menu" aria-labelledby="header-menu-btn">
       <div class="fr-container">
         <button type="button" class="fr-btn fr-btn--close" aria-controls="header-menu" title="Fermer">Fermer</button>
+        <% if affiche_navigation? %>
+          <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
+        <% end %>
         <% if affiche_actions_connexion? %>
           <div class="fr-header__menu-links">
             <ul class="fr-btns-group fr-btns-group--sm fr-btns-group--icon-left">

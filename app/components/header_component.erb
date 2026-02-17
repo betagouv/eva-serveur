@@ -14,15 +14,6 @@
                 <img style="max-width:10rem;" class="fr-responsive-img" src="<%= image_path @logo %>" alt="<%= @logo_alt %>" />
               </div>
             <% end %>
-          </div>
-          <% if @titre.present? %>
-            <div class="fr-header__service">
-              <p class="fr-header__service-title" style="margin: 0;"><%= @titre %></p>
-              <% if @tagline.present? %>
-                <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
-              <% end %>
-            </div>
-          <% end %>
             <% if affiche_navigation? || affiche_actions_connexion? %>
               <div class="fr-header__navbar">
                 <button class="fr-btn fr-btn--menu fr-header__menu-btn"
@@ -36,6 +27,15 @@
                 </button>
               </div>
             <% end %>
+          </div>
+          <% if @titre.present? %>
+            <div class="fr-header__service">
+              <p class="fr-header__service-title" style="margin: 0;"><%= @titre %></p>
+              <% if @tagline.present? %>
+                <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <% if affiche_actions_connexion? %>
           <div class="fr-header__tools fr-header__tools-links">

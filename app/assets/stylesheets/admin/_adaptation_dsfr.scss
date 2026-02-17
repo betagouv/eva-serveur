@@ -401,7 +401,8 @@ body.logged_in h2.fr-footer__partners-title {
 }
 
 // En mobile : éviter tout dépassement horizontal (header + contenu)
-@media (max-width: 48rem) {
+// Forcer toute la chaîne de conteneurs de la page en pleine largeur
+@media (max-width: 62em) {
   body {
     overflow-x: hidden;
   }
@@ -410,17 +411,24 @@ body.logged_in h2.fr-footer__partners-title {
   .fr-header__body .fr-container {
     width: 100% !important;
     max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     box-sizing: border-box;
   }
 
+  .header,
+  #wrapper,
+  #content_wrapper,
+  .evapro_admin__content,
+  .evapro_admin__content__inner,
   #active_admin_content,
   #title_bar {
     max-width: 100% !important;
+    width: 100%;
     box-sizing: border-box;
   }
 
   #wrapper {
-    max-width: 100%;
     overflow-x: hidden;
   }
 }

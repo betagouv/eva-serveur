@@ -174,6 +174,7 @@ ActiveAdmin.register Compte do
     end
 
     def update_resource(object, attributes)
+      object.force_deplacement_structure = true if current_compte.superadmin?
       update_method = if attributes.first[:password].present?
                         :update
       else

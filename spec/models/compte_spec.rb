@@ -323,6 +323,19 @@ describe Compte do
           .to include "Impossible de quiter la structure « structure de départ »"
       end
     end
+
+    context "déplacement du dernier admin d'une structure" do
+      let(:structure) { create :structure, nom: "structure de départ" }
+      let(:compte) { create :compte, role: :admin, structure: structure }
+      let(:nouvelle_structure) { create :structure, :avec_admin }
+
+      it "on peut forcer le déplacement si necessaire" do
+        compte.structure = nouvelle_structure
+        compte.force_deplacement_structure = true
+
+        expect(compte).to be_valid
+      end
+    end
   end
 
   describe "#assigne_role_admin_si_pas_d_admin" do

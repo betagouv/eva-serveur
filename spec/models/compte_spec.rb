@@ -395,4 +395,18 @@ describe Compte do
       end
     end
   end
+
+  describe "#destroy" do
+    it "supprime les campagne_compte_autorisations associées" do
+      admin = create :compte_admin
+      compte = create :compte_conseiller, structure: admin.structure
+      campagne = create :campagne, compte: admin
+      autorisation = CampagneCompteAutorisation.create!(campagne_id: campagne.id,
+                                                        compte_id: compte.id)
+
+      compte.destroy
+      expect(CampagneCompteAutorisation
+        .only_deleted.find(autorisation.id).deleted_at).not_to be_nil
+    end
+  end
 end

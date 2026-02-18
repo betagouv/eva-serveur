@@ -65,6 +65,7 @@ class Compte < ApplicationRecord
   delegate :code_postal, to: :structure, prefix: true
 
   belongs_to :structure, optional: true
+  has_many :campagne_compte_autorisations, dependent: :destroy
 
   accepts_nested_attributes_for :structure
 

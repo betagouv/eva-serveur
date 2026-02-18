@@ -346,7 +346,7 @@ describe 'Admin - Evaluation', type: :feature do
       it do
         find("#action_items_sidebar_section a[href='#{admin_evaluation_path(evaluation)}']").click
         expect(evaluation.reload.deleted?).to be true
-        expect(page.current_url).to eql(admin_campagne_url(ma_campagne))
+        expect(page.current_url).to eql(admin_evaluations_url)
       end
     end
   end

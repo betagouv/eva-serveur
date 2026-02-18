@@ -199,7 +199,14 @@ ActiveAdmin.register Evaluation do
     end
 
     def destroy
-      destroy!(location: admin_campagne_path(resource.campagne))
+      location = if request.referer&.include?("?")
+                   request.referer
+      elsif request.referer&.include?(admin_beneficiaire_path(resource.beneficiaire))
+                   request.referer
+      else
+                   admin_evaluations_path
+      end
+      destroy!(location: location)
     end
 
     before_action only: :show do

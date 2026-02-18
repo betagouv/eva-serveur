@@ -226,6 +226,20 @@ describe 'Admin - Campagne', type: :feature do
       end
     end
 
+    context "quand une autorisation référence un compte supprimé (autorisation orpheline)" do
+      before do
+        ma_campagne.update(privee: true)
+        autorisation = CampagneCompteAutorisation.new(campagne_id: ma_campagne.id,
+                                                     compte_id: SecureRandom.uuid)
+        autorisation.save!(validate: false)
+        visit admin_campagne_path(ma_campagne.reload)
+      end
+
+      it "affiche la page sans erreur" do
+        expect(page).to have_http_status(200)
+      end
+    end
+
     context "quand la campagne n'est pas privée" do
       it "n'affiche pas la sidebar" do
         visit admin_campagne_path(ma_campagne.reload)

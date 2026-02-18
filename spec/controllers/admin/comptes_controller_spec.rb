@@ -58,6 +58,26 @@ describe Admin::ComptesController, type: :controller do
     end
   end
 
+  describe "Changement de structure par un superadmin" do
+    let(:structure_superadmin) { create :structure_locale }
+    let(:structure_origine) { create :structure_locale }
+    let(:structure_destination) { create :structure_locale }
+    let!(:superadmin) { create :compte_superadmin, structure: structure_superadmin }
+
+    before { sign_in superadmin }
+
+    it "peut déplacer le dernier admin d'une structure" do
+      dernier_admin = create :compte_admin, structure: structure_origine
+
+      put :update, params: {
+        id: dernier_admin.id,
+        compte: { structure_id: structure_destination.id }
+      }
+
+      expect(dernier_admin.reload.structure).to eq(structure_destination)
+    end
+  end
+
   describe "form structure_id" do
     context "pour un compte de structure locale" do
       let(:structure_locale) { create :structure_locale }

@@ -5,7 +5,7 @@ class Compte < ApplicationRecord
   validation_siret_column :siret_pro_connect
   validate :validation_siret
 
-  attr_accessor :structure_confirmee
+  attr_accessor :structure_confirmee, :force_deplacement_structure
 
   DELAI_RELANCE_NON_ACTIVATION = 30.days
   ROLES = %w[conseiller admin charge_mission_regionale superadmin compte_generique].freeze
@@ -52,7 +52,8 @@ class Compte < ApplicationRecord
   validates :nom, :prenom, presence: { on: :create, unless: :peut_sauter_presence_identite? }
   validates :nom, :prenom, presence: { on: :informations_compte,
                                         unless: :peut_sauter_presence_identite? }
-  validate :verifie_dns_email, :structure_a_un_admin, :structure_de_depart_a_un_admin
+  validate :verifie_dns_email, :structure_a_un_admin
+  validate :structure_de_depart_a_un_admin, unless: :force_deplacement_structure
   validates :email, uniqueness: { case_sensitive: false }
   validates_with PasswordValidator, fields: [ :password ]
   validates :fonction, inclusion: { in: FONCTIONS }, allow_blank: true

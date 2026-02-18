@@ -87,7 +87,7 @@ ActiveAdmin.register Campagne do
                 can?(:autoriser_compte, resource)) &&
                resource.privee } do
     render "aide_acces_prives"
-    resource.campagne_compte_autorisations.each do |autorisation|
+    resource.campagne_compte_autorisations.joins(:compte).each do |autorisation|
       url = revoquer_compte_admin_campagne_path(
         resource,
         compte_id: autorisation.compte.id)

@@ -34,6 +34,30 @@ describe Admin::ComptesController, type: :controller do
     end
   end
 
+  describe "suppression" do
+    let(:structure) { create :structure_locale }
+    let!(:compte_connecte) { create :compte_admin, structure: structure }
+    let!(:compte_a_supprimer) { create :compte_conseiller, structure: structure }
+
+    before { sign_in compte_connecte }
+
+    it "redirige vers la liste avec les filtres préservés" do
+      referer = admin_comptes_path(q: { email_contains: "test" })
+      request.headers["HTTP_REFERER"] = referer
+      delete :destroy, params: { id: compte_a_supprimer.id }
+
+      expect(response).to redirect_to(referer)
+    end
+
+    it "redirige vers la liste depuis la page show" do
+      referer = admin_compte_path(compte_a_supprimer)
+      request.headers["HTTP_REFERER"] = referer
+      delete :destroy, params: { id: compte_a_supprimer.id }
+
+      expect(response).to redirect_to(admin_comptes_path)
+    end
+  end
+
   describe "form structure_id" do
     context "pour un compte de structure locale" do
       let(:structure_locale) { create :structure_locale }

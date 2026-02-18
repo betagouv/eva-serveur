@@ -159,6 +159,20 @@ ActiveAdmin.register Compte do
                   :structure_par_defaut, :champ_structure, :structures_filles,
                   :compte_a_des_campagnes?
 
+    def destroy
+      destroy! do |format|
+        format.html { redirect_to redirection_apres_suppression }
+      end
+    end
+
+    def redirection_apres_suppression
+      if request.referer&.include?("?")
+        request.referer
+      else
+        collection_path
+      end
+    end
+
     def update_resource(object, attributes)
       update_method = if attributes.first[:password].present?
                         :update

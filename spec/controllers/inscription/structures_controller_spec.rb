@@ -133,7 +133,7 @@ siret_pro_connect: "13002526500013") }
           }
 
           structure_creée.reload
-          expect(structure_creée.opcos).to contain_exactly(opco1)
+          expect(structure_creée.opco).to eq(opco1)
         end
       end
 

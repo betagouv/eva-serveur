@@ -4,12 +4,11 @@ describe CampagneCreateur, type: :model do
   let(:compte) { create(:compte_admin) }
   let(:opco) { create(:opco, :constructys) }
   let(:structure_entreprise) do
-    structure = create(:structure_locale,
-                       nom: "ma super structure",
-                       type_structure: "entreprise",
-                       usage: "Eva: entreprises")
-    structure.opcos << opco
-    structure
+    create(:structure_locale,
+           nom: "ma super structure",
+           type_structure: "entreprise",
+           usage: "Eva: entreprises",
+           opco: opco)
   end
   let(:parcours_type) do
     create(:parcours_type,
@@ -59,11 +58,10 @@ describe CampagneCreateur, type: :model do
 
     context "quand la structure n'est pas de type entreprise" do
       let(:structure_non_entreprise) do
-        structure = create(:structure_locale,
-                           type_structure: "mission_locale",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco
-        structure
+        create(:structure_locale,
+               type_structure: "mission_locale",
+               usage: "Eva: entreprises",
+               opco: opco)
       end
       let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }
 
@@ -76,11 +74,10 @@ describe CampagneCreateur, type: :model do
 
     context "quand l'usage n'est pas Eva: entreprises" do
       let(:structure_mauvais_usage) do
-        structure = create(:structure_locale,
-                           type_structure: "entreprise",
-                           usage: "Eva: bénéficiaires")
-        structure.opcos << opco
-        structure
+        create(:structure_locale,
+               type_structure: "entreprise",
+               usage: "Eva: bénéficiaires",
+               opco: opco)
       end
       let(:createur_mauvais_usage) { described_class.new(structure_mauvais_usage, compte) }
 
@@ -109,11 +106,10 @@ describe CampagneCreateur, type: :model do
     context "avec différents OPCOs" do
       let(:opco_sante) { create(:opco, :opco_sante) }
       let(:structure_opco_sante) do
-        structure = create(:structure_locale,
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco_sante
-        structure
+        create(:structure_locale,
+               type_structure: "entreprise",
+               usage: "Eva: entreprises",
+               opco: opco_sante)
       end
       let(:parcours_type_sante) do
         create(:parcours_type,
@@ -147,11 +143,10 @@ describe CampagneCreateur, type: :model do
     context "quand l'OPCO n'est pas financeur" do
       let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
       let(:structure_opco_non_financeur) do
-        structure = create(:structure_locale,
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << opco_non_financeur
-        structure
+        create(:structure_locale,
+               type_structure: "entreprise",
+               usage: "Eva: entreprises",
+               opco: opco_non_financeur)
       end
       let(:parcours_type_generique) do
         create(:parcours_type,
@@ -213,16 +208,14 @@ parcours_type_constructys_nmc)
       end
     end
 
-    context "quand la structure a plusieurs OPCOs" do
+    context "quand la structure a un OPCO financeur" do
       let(:opco_financeur) { create(:opco, nom: "OPCO Financeur", financeur: true) }
-      let(:opco_non_financeur) { create(:opco, :opco_non_financeur) }
-      let(:structure_multi_opco) do
-        structure = create(:structure_locale,
-                           nom: "structure multi-opco",
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << [ opco_non_financeur, opco_financeur ]
-        structure
+      let(:structure_opco_financeur) do
+        create(:structure_locale,
+               nom: "structure opco financeur",
+               type_structure: "entreprise",
+               usage: "Eva: entreprises",
+               opco: opco_financeur)
       end
       let(:parcours_type_financeur) do
         create(:parcours_type,
@@ -236,21 +229,21 @@ parcours_type_constructys_nmc)
                libelle: "Eva entreprises",
                type_de_programme: :diagnostic)
       end
-      let(:createur_multi) { described_class.new(structure_multi_opco, compte) }
+      let(:createur_financeur) { described_class.new(structure_opco_financeur, compte) }
 
       before do
         parcours_type_financeur
         parcours_type_generique
       end
 
-      it "utilise le premier OPCO financeur" do
-        premier_opco = createur_multi.send(:premier_opco_financeur)
+      it "utilise l'OPCO financeur" do
+        premier_opco = createur_financeur.send(:premier_opco_financeur)
         expect(premier_opco).to eq(opco_financeur)
       end
 
       it "crée uniquement la campagne avec le parcours type du financeur (pas de générique)" do
         expect do
-          createur_multi.cree_campagne_opco!
+          createur_financeur.cree_campagne_opco!
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last
@@ -258,16 +251,14 @@ parcours_type_constructys_nmc)
       end
     end
 
-    context "quand la structure a plusieurs OPCOs mais aucun financeur" do
+    context "quand la structure a un OPCO non financeur" do
       let(:opco1) { create(:opco, nom: "OPCO 1", financeur: false) }
-      let(:opco2) { create(:opco, nom: "OPCO 2", financeur: false) }
-      let(:structure_multi_non_financeur) do
-        structure = create(:structure_locale,
-                           nom: "structure multi-opco",
-                           type_structure: "entreprise",
-                           usage: "Eva: entreprises")
-        structure.opcos << [ opco1, opco2 ]
-        structure
+      let(:structure_non_financeur) do
+        create(:structure_locale,
+               nom: "structure opco non financeur",
+               type_structure: "entreprise",
+               usage: "Eva: entreprises",
+               opco: opco1)
       end
       let(:parcours_type_generique) do
         create(:parcours_type,
@@ -275,18 +266,18 @@ parcours_type_constructys_nmc)
                libelle: "Eva entreprises",
                type_de_programme: :diagnostic)
       end
-      let(:createur_multi) { described_class.new(structure_multi_non_financeur, compte) }
+      let(:createur_non_financeur) { described_class.new(structure_non_financeur, compte) }
 
       before { parcours_type_generique }
 
-      it "retourne nil car aucun OPCO n'est financeur" do
-        premier_opco = createur_multi.send(:premier_opco_financeur)
+      it "retourne nil pour opco_financeur car l'OPCO n'est pas financeur" do
+        premier_opco = createur_non_financeur.send(:premier_opco_financeur)
         expect(premier_opco).to be_nil
       end
 
       it "crée uniquement la campagne générique" do
         expect do
-          createur_multi.cree_campagne_opco!
+          createur_non_financeur.cree_campagne_opco!
         end.to change(Campagne, :count).by(1)
 
         campagne = Campagne.last

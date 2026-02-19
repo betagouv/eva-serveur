@@ -546,48 +546,23 @@ describe Structure, type: :model do
     end
   end
 
-  describe "relations OPCO" do
+  describe "relation OPCO" do
     let(:structure) { create(:structure_locale) }
     let(:opco1) { create(:opco, nom: "OPCO 1") }
     let(:opco2) { create(:opco, nom: "OPCO 2") }
 
-    it "peut avoir plusieurs OPCOs" do
-      structure.opcos << [ opco1, opco2 ]
+    it "a au plus un OPCO (belongs_to :opco)" do
+      structure.update!(opco: opco1)
 
-      expect(structure.opcos.count).to eq(2)
-      expect(structure.opcos.to_a).to contain_exactly(opco1, opco2)
-    end
-
-    it "peut supprimer un OPCO" do
-      structure.opcos << [ opco1, opco2 ]
-      structure.opcos.delete(opco1)
-
-      expect(structure.opcos.count).to eq(1)
-      expect(structure.opcos.first).to eq(opco2)
-    end
-
-    it "supprime les affiliations quand la structure est supprimée" do
-      structure.opcos << opco1
-      structure_id = structure.id
-
-      structure.destroy
-
-      expect(StructureOpco.where(structure_id: structure_id)).to be_empty
+      expect(structure.opco).to eq(opco1)
+      expect(structure.opco_id).to eq(opco1.id)
     end
 
     describe "#opco_id" do
       context "quand la structure a un OPCO" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "retourne l'ID du premier OPCO" do
-          expect(structure.opco_id).to eq(opco1.id)
-        end
-      end
-
-      context "quand la structure a plusieurs OPCOs" do
-        before { structure.opcos << [ opco1, opco2 ] }
-
-        it "retourne l'ID du premier OPCO" do
+        it "retourne l'ID de l'OPCO" do
           expect(structure.opco_id).to eq(opco1.id)
         end
       end
@@ -605,40 +580,54 @@ describe Structure, type: :model do
           structure.opco_id = opco1.id
           structure.save
 
-          expect(structure.opcos.count).to eq(1)
-          expect(structure.opcos.first).to eq(opco1)
+          expect(structure.reload.opco).to eq(opco1)
         end
 
-        it "remplace les OPCOs existants" do
-          structure.opcos << opco2
+        it "remplace l'OPCO existant" do
+          structure.update!(opco: opco2)
           structure.opco_id = opco1.id
           structure.save
 
-          expect(structure.opcos.count).to eq(1)
-          expect(structure.opcos.first).to eq(opco1)
+          expect(structure.reload.opco).to eq(opco1)
         end
       end
 
       context "quand on assigne nil" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "supprime tous les OPCOs" do
+        it "détache l'OPCO" do
           structure.opco_id = nil
           structure.save
 
-          expect(structure.opcos.count).to eq(0)
+          expect(structure.reload.opco).to be_nil
         end
       end
 
       context "quand on assigne une chaîne vide" do
-        before { structure.opcos << opco1 }
+        before { structure.update!(opco: opco1) }
 
-        it "supprime tous les OPCOs" do
+        it "détache l'OPCO" do
           structure.opco_id = ""
           structure.save
 
-          expect(structure.opcos.count).to eq(0)
+          expect(structure.reload.opco).to be_nil
         end
+      end
+    end
+
+    describe "#opco_financeur" do
+      it "retourne l'OPCO quand il est financeur" do
+        opco1.update!(financeur: true)
+        structure.update!(opco: opco1)
+
+        expect(structure.opco_financeur).to eq(opco1)
+      end
+
+      it "retourne nil quand l'OPCO n'est pas financeur" do
+        opco1.update!(financeur: false)
+        structure.update!(opco: opco1)
+
+        expect(structure.opco_financeur).to be_nil
       end
     end
   end

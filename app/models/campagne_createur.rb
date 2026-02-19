@@ -23,7 +23,7 @@ class CampagneCreateur
   def doit_creer_campagne?
     @structure.is_a?(StructureLocale) &&
       @structure.eva_entreprises? &&
-      @structure.opcos.any?
+      @structure.opco.present?
   end
 
   def cree_campagnes_opco_financeur

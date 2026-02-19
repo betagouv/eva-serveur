@@ -3,6 +3,8 @@ class Questionnaire < ApplicationRecord
 
   LIVRAISON_SANS_REDACTION = "livraison_sans_redaction"
   LIVRAISON_AVEC_REDACTION = "livraison_expression_ecrite"
+  SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE = "sociodemographique_autopositionnement_sante"
+  SOCIODEMOGRAPHIQUE_SANTE = "sociodemographique_sante"
   SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT = "sociodemographique_autopositionnement"
   SOCIODEMOGRAPHIQUE = "sociodemographique"
   AUTOPOSITIONNEMENT = "autopositionnement"
@@ -22,13 +24,6 @@ class Questionnaire < ApplicationRecord
     libelle
   end
 
-  def self.livraison_avec_redaction
-    find_by(nom_technique: LIVRAISON_AVEC_REDACTION)
-  end
-
-  def self.bienvenue_avec_autopositionnement
-    find_by(nom_technique: SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT)
-  end
 
   def livraison_sans_redaction?
     nom_technique == Questionnaire::LIVRAISON_SANS_REDACTION

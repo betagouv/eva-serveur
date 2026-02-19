@@ -1,7 +1,7 @@
 require "generateur_aleatoire"
 
 class Campagne < ApplicationRecord
-  PERSONNALISATION = %w[plan_de_la_ville autopositionnement redaction].freeze
+  PERSONNALISATION = %w[plan_de_la_ville autopositionnement questionnaire_sante redaction].freeze
 
   acts_as_paranoid
 
@@ -118,11 +118,21 @@ class Campagne < ApplicationRecord
 
   def questionnaire_id(situation_configuration)
     if situation_configuration.livraison_sans_redaction? && option_incluse?("redaction")
-      Questionnaire.livraison_avec_redaction.id
-    elsif situation_configuration.bienvenue? && option_incluse?("autopositionnement")
-      Questionnaire.bienvenue_avec_autopositionnement.id
+      Questionnaire.find_by(nom_technique: Questionnaire::LIVRAISON_AVEC_REDACTION).id
+    elsif situation_configuration.bienvenue?
+      questionnaire_id_pour_bienvenue
     else
       situation_configuration.questionnaire_id
+    end
+  end
+
+  def questionnaire_id_pour_bienvenue
+    if option_incluse?("autopositionnement") && option_incluse?("questionnaire_sante")
+      Questionnaire.find_by(nom_technique: Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE).id
+    elsif option_incluse?("autopositionnement")
+      Questionnaire.find_by(nom_technique: Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT).id
+    elsif option_incluse?("questionnaire_sante")
+      Questionnaire.find_by(nom_technique: Questionnaire::SOCIODEMOGRAPHIQUE_SANTE).id
     end
   end
 

@@ -62,6 +62,7 @@ fr:
           description: Activez ou rendez cette campagne privée.
       situation:
         autopositionnement: Autopositionnement
+        sante: Santé
         redaction: Exercice de rédaction
       aide_acces_prives:
         acces_par_defaut: |

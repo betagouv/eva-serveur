@@ -1,15 +1,15 @@
 <div class="choix-item" tabindex="0">
   <div class='choix-item__container'>
     <p class='choix-item__titre'>
-      <span class="sr-only"><%= t("admin.campagnes.form.module_optionnel") %> : <%= t(".#{situation}.nom") %></span>
-      <span aria-hidden="true"><%= t(".#{situation}.nom") %> ·</span>
+      <span class="sr-only"><%= t("admin.campagnes.form.module_optionnel") %> : <%= t(".#{option}.nom") %></span>
+      <span aria-hidden="true"><%= t(".#{option}.nom") %> ·</span>
       <span class="choix-item__duree">
-        Durée moyenne : <%= t(".#{situation}.duree_moyenne") %>
+        Durée moyenne : <%= t(".#{option}.duree_moyenne") %>
       </span>
     </p>
 
     <div class="choix-item__description">
-      <%= t(".#{situation}.description") %>
+      <%= t(".#{option}.description") %>
     </div>
   </div>
   <div class="checkbox-option-personnalisation-container">

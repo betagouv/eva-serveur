@@ -8,36 +8,41 @@ fr:
           Ce module permet, en amont des évaluations, de vérifier la capacité des bénéficiaires à utiliser l’outil informatique (ordinateur ou tablette), en particulier la manipulation du clavier, de la souris et de l’écran tactile.
       autopositionnement:
         nom: Auto-positionnement
-        duree_moyenne: 6mn
+        duree_moyenne: 3mn
         description: |
-          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences, et de récolter des informations personnelles qui peuvent impacter les résultats de l’évaluation (troubles visuels ou auditifs, troubles dys, etc.)
+          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences.
+      questionnaire_sante:
+        nom: Questions de santé
+        duree_moyenne: 3mn
+        description: |
+          Ce questionnaire permet de récolter des informations personnelles qui peuvent impacter les résultats de l’évaluation (troubles visuels ou auditifs, troubles dys, etc.)
       redaction:
         nom: Production écrite
         duree_moyenne: 6mn
         description: |
           Ce module propose aux bénéficiaires de décrire brièvement à l’écrit une scène quotidienne afin de permettre aux accompagnants d’évaluer leur niveau en expression écrite.
     input_type_programme:
-        diagnostic:
-          libelle: Diagnostic
-          description: |
-            Des parcours ludiques et rapides pour disposer d’une vue d’ensemble et valoriser les compétences maîtrisées.
-            À proposer en début de parcours d’accompagnement.
+      diagnostic:
+        libelle: Diagnostic
+        description: |
+          Des parcours ludiques et rapides pour disposer d’une vue d’ensemble et valoriser les compétences maîtrisées.
+          À proposer en début de parcours d’accompagnement.
 
-            N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
-        positionnement:
-          libelle: Positionnement
-          description: |
-            Des parcours adaptatifs pour un bilan approfondi de la maîtrise des compétences de base.
-            À proposer lors du positionnement ou en début de formation.
+          N. B. : la restitution ne propose pas le détail des items réussis ou échoués.
+      positionnement:
+        libelle: Positionnement
+        description: |
+          Des parcours adaptatifs pour un bilan approfondi de la maîtrise des compétences de base.
+          À proposer lors du positionnement ou en début de formation.
 
-            N. B. : la restitution propose un détail des items réussis ou échoués.
+          N. B. : la restitution propose un détail des items réussis ou échoués.
     banniere_confirmation_email:
       renvoyer_email: Renvoyer l’email de confirmation
       modification_email:
-        email_envoye_a: 'Un email de confirmation a été envoyé à :'
+        email_envoye_a: "Un email de confirmation a été envoyé à :"
         demande_effectuee: |
-            Une demande de modification d’email a été effectuée.<br>
-            La modification ne sera effective qu’une fois l’email confirmé.
+          Une demande de modification d’email a été effectuée.<br>
+          La modification ne sera effective qu’une fois l’email confirmé.
       confirmation_autre_compte:
         email_non_confirme: L'email de ce compte n'a pas été confirmé.
     card_parcours_type:
@@ -51,12 +56,12 @@ fr:
         Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :
       lien: https://eva.anlci.gouv.fr/eva-orientation
     reponse_mise_en_action:
-        bouton_oui: Oui
-        bouton_non: Non
+      bouton_oui: Oui
+      bouton_non: Non
     modification_mise_en_action:
-        modifier_reponse: Modifier votre réponse
-        reponse_true_html: <strong>Oui</strong> vous avez trouvé une solution
-        reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
+      modifier_reponse: Modifier votre réponse
+      reponse_true_html: <strong>Oui</strong> vous avez trouvé une solution
+      reponse_false_html: <strong>Non</strong> vous n'avez pas trouvé de solution
     prise_en_main:
       titre: Bienvenue sur eva !
       succes: (étape complétée)
@@ -103,6 +108,6 @@ fr:
             Bravo ! Vous avez terminé ce tutoriel
 
             Nos équipes restent à votre disposition :  
-            - via <a href="mailto:%{email}" class="text-primary">%{email}</a>  
+            - via <a href="mailto:%{email}" class="text-primary">%{email}</a>
     pastille:
       illettrisme_potentiel: Illettrisme potentiel

@@ -7,11 +7,16 @@ div class: "campagne-situation d-flex align-items-center" do
   div class: "situation__texte" do
     div class: "d-flex mb-2" do
       h5 situation_configuration.situation.libelle
-      case questionnaire
-      when Questionnaire::LIVRAISON_AVEC_REDACTION
-        render(Tag.new("+ #{t('.redaction')}", classes: "tag-categorie green"))
-      when Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT
-        render(Tag.new("+ #{t('.autopositionnement')}", classes: "tag-categorie green"))
+      if questionnaire == Questionnaire::LIVRAISON_AVEC_REDACTION
+        render(Tag.new("+ #{t('.redaction')}", classes: "ml-1 tag-categorie green"))
+      end
+      if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT ||
+        questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
+        render(Tag.new("+ #{t('.autopositionnement')}", classes: "ml-1 tag-categorie green"))
+      end
+      if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_SANTE ||
+        questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
+        render(Tag.new("+ #{t('.sante')}", classes: "ml-1 tag-categorie green"))
       end
     end
     para situation_configuration.situation.description

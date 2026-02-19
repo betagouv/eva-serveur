@@ -22,6 +22,12 @@ describe Campagne, type: :integration do
     let!(:questionnaire_socio_auto) do
       create :questionnaire, :sociodemographique_autopositionnement
     end
+    let!(:questionnaire_socio_sante) do
+      create :questionnaire, :sociodemographique_sante
+    end
+    let!(:questionnaire_socio_auto_sante) do
+      create :questionnaire, :sociodemographique_autopositionnement_sante
+    end
     let!(:bienvenue) { create :situation_bienvenue }
     let!(:situation_livraison) do
       create :situation_livraison, questionnaire: questionnaire_sans_livraison
@@ -110,6 +116,48 @@ describe Campagne, type: :integration do
           expect(situations_configurations[0].situation.nom_technique).to eq 'bienvenue'
           questionnaire = situations_configurations[0].questionnaire
           expect(questionnaire).to eq questionnaire_socio_auto
+        end
+      end
+
+      context "pour la selection du questionnaire de santé" do
+        let(:options_personnalisation) { %w[questionnaire_sante] }
+        let(:parcours_type) do
+          parcours = create :parcours_type
+          parcours.situations_configurations.create situation: bienvenue, position: 1
+          parcours
+        end
+
+        it 'utilise le questionnaire sociodemographique_sante' do
+          expect { campagne }.to change(described_class, :count).by(1)
+
+          campagne.reload
+
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations.count).to eq 1
+          expect(situations_configurations[0].situation.nom_technique).to eq 'bienvenue'
+          questionnaire = situations_configurations[0].questionnaire
+          expect(questionnaire).to eq questionnaire_socio_sante
+        end
+      end
+
+      context "pour la selection du questionnaire d'autopositionnement et de santé" do
+        let(:options_personnalisation) { %w[autopositionnement questionnaire_sante] }
+        let(:parcours_type) do
+          parcours = create :parcours_type
+          parcours.situations_configurations.create situation: bienvenue, position: 1
+          parcours
+        end
+
+        it 'utilise le questionnaire sociodemographique_autopositionnement_sante' do
+          expect { campagne }.to change(described_class, :count).by(1)
+
+          campagne.reload
+
+          situations_configurations = campagne.situations_configurations.includes(:situation)
+          expect(situations_configurations.count).to eq 1
+          expect(situations_configurations[0].situation.nom_technique).to eq 'bienvenue'
+          questionnaire = situations_configurations[0].questionnaire
+          expect(questionnaire).to eq questionnaire_socio_auto_sante
         end
       end
     end

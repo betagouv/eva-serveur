@@ -13,6 +13,16 @@ FactoryBot.define do
       nom_technique { Questionnaire::LIVRAISON_SANS_REDACTION }
     end
 
+    trait :sociodemographique_autopositionnement_sante do
+      libelle { 'Sociodémographique et autopositionnement' }
+      nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE }
+    end
+
+    trait :sociodemographique_sante do
+      libelle { 'Sociodémographique et sante' }
+      nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE_SANTE }
+    end
+
     trait :sociodemographique_autopositionnement do
       libelle { 'Sociodémographique et autopositionnement' }
       nom_technique { Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT }

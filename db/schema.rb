@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_11_120000) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_19_120003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -399,16 +399,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_11_120000) do
     t.integer "position", default: 0
   end
 
-  create_table "structure_opcos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "structure_id", null: false
-    t.uuid "opco_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["opco_id"], name: "index_structure_opcos_on_opco_id"
-    t.index ["structure_id", "opco_id"], name: "index_structure_opcos_on_structure_id_and_opco_id", unique: true
-    t.index ["structure_id"], name: "index_structure_opcos_on_structure_id"
-  end
-
   create_table "structures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "nom"
     t.string "code_postal"
@@ -431,8 +421,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_11_120000) do
     t.string "idcc", default: [], array: true
     t.string "raison_sociale"
     t.text "adresse"
+    t.uuid "opco_id"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
+    t.index ["opco_id"], name: "index_structures_on_opco_id"
     t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
     t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true, where: "(deleted_at IS NULL)"
     t.index ["type"], name: "index_structures_on_type"
@@ -468,7 +460,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_11_120000) do
   add_foreign_key "situations", "questionnaires"
   add_foreign_key "situations", "questionnaires", column: "questionnaire_entrainement_id"
   add_foreign_key "situations_configurations", "campagnes"
-  add_foreign_key "structure_opcos", "opcos", on_delete: :cascade
-  add_foreign_key "structure_opcos", "structures", on_delete: :cascade
+  add_foreign_key "structures", "opcos"
   add_foreign_key "transcriptions", "questions"
 end

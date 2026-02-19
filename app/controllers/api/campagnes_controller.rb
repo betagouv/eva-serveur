@@ -21,7 +21,7 @@ module Api
     def precharge_inclusions
       questions_incluses = %i[questionnaires_questions questions]
       @campagne = @campagne.class.includes(
-        compte: { structure: :opcos },
+        compte: { structure: :opco },
         situations_configurations: [
           { questionnaire: questions_incluses },
           { situation: [

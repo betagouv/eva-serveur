@@ -21,6 +21,6 @@
     "lint:css:fix": "stylelint \"app/assets/stylesheets/**/*.scss\" --fix"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "^1.13.0"
+    "@gouvfr/dsfr": "^1.14.2"
   }
 }

@@ -11,6 +11,8 @@ fr:
         nom: Nom
         financeur: Financeur
         idcc: Convention(s) collective(s)
+        url_contact: Url liste de contacts
+        url: Url site
     errors:
       models:
         opco:

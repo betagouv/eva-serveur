@@ -1,7 +1,7 @@
 ActiveAdmin.register Opco do
   menu parent: I18n.t(".menu_structure"), if: proc { current_compte.superadmin? }
 
-  permit_params :nom, :financeur, :logo, :telephone, :url, :email
+  permit_params :nom, :financeur, :logo, :telephone, :url, :email, :url_contact
 
   filter :nom
   filter :financeur
@@ -36,6 +36,7 @@ ActiveAdmin.register Opco do
       f.input :telephone
       f.input :email
       f.input :url
+      f.input :url_contact
     end
     f.actions
   end

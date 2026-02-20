@@ -1,12 +1,4 @@
 module StructureHelper
-  def opcos_associes(structure)
-    [ structure.opco ].compact
-  end
-
-  def opco_ids_associes(structure)
-    [ structure.opco_id ].compact
-  end
-
   def opco_id_associe(structure)
     structure.opco_id
   end

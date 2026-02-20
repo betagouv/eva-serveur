@@ -48,11 +48,6 @@ class Inscription::StructuresController < ApplicationController
     return unless @structure.present?
 
     AffiliationOpcoService.new(@structure).affilie_opcos
-    assigne_opco_ids_pour_formulaire unless @structure.persisted?
-  end
-
-  def assigne_opco_ids_pour_formulaire
-    # AffiliationOpcoService a déjà pré-rempli @structure.opco_id quand un seul OPCO est trouvé
   end
 
   def determine_action_type

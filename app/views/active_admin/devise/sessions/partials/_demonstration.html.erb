@@ -10,16 +10,8 @@
         </div>
         <h4 class="nouvelle-session__demonstration-titre"><%= t("active_admin.devise.sessions.new.demonstration.titre") %></h4>
         <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.description") %></p>
-        <div class="nouvelle-session__demonstration-liste">
-          <ul>
-            <% t("active_admin.devise.sessions.new.demonstration.liste_items").each do |item_key| %>
-              <li class="nouvelle-session__demonstration-liste-item">
-                <span class="nouvelle-session__demonstration-liste-item-icone"></span>
-                <span class="nouvelle-session__demonstration-liste-item-texte"><%= t("active_admin.devise.sessions.new.demonstration.#{item_key}") %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
+        <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.eva") %></p>
+        <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.evapro") %></p>
         <div class="nouvelle-session__demonstration-bouton">
           <%= render BoutonDsfrComponent.new(
             demo_path,

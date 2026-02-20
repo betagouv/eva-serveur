@@ -41,16 +41,11 @@ fr:
               Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
             retour: Annuler
           demonstration:
-            titre: Mode démonstration
-            description: Découvrez toutes les fonctionnalités sans créer de compte. Explorez l'interface et testez les outils en toute liberté.
-            liste_items:
-              - acces_complet
-              - aucune_inscription
-              - donnees_prechargees
-            acces_complet: Accès complet aux fonctionnalités
-            aucune_inscription: Aucune inscription requise
-            donnees_prechargees: Données de démonstration pré-chargées
-            bouton: Essayer la démo
+            titre: Découvrez les services
+            description: Découvrez ou testez eva et evapro, avant de créer votre compte.
+            eva: "Eva :  Testez l’ensemble des fonctionnalités dans une interface de démonstration, réinitialisée quotidiennement. "
+            evapro: "Evapro : Découvrez le service en 5 minutes avec les tutoriels vidéo."
+            bouton: Découvrir
       login:
         submit: Se connecter
         bienvenue: Bienvenue sur eva

@@ -13,7 +13,23 @@
   @include texte-sm-regular;
 }
 
+.evaluation-bilan-evapro__opco-financeur-contacts {
+  display: flex;
+  flex-direction: row;
+  gap: $dsfr-spacing-6v;
+  align-items: center;
+}
+
 .evaluation-bilan-evapro__opco-financeur {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--Space-3W, 1.5rem);
+  width: var(--Grille-4-colonnes, 23.875rem);
+  flex-shrink: 0;
+}
+
+.evaluation-bilan-evapro__opco-financeur-annuaire {
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -8,22 +8,31 @@
 
       <% if opco %>
         <h3 class="evaluation-bilan-evapro__opco-financeur-titre"><%= t(".opco_titre") %></h3>
-
-        <div class="evaluation-bilan-evapro__opco-financeur">
-          <% if opco.logo.attached? %>
-            <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
-          <% end %>
-          <div class="evaluation-bilan-evapro__opco-financeur-details">
-            <% if opco.telephone %>
-              <p><%= opco.telephone %></p>
+        <div class="evaluation-bilan-evapro__opco-financeur-contacts">
+          <div class="evaluation-bilan-evapro__opco-financeur">
+            <% if opco.logo.attached? %>
+              <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
             <% end %>
-            <% if opco.email %>
-              <p><%= opco.email %></p>
-            <% end %>
-            <% if opco.url %>
-              <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
-            <% end %>
+            <div class="evaluation-bilan-evapro__opco-financeur-details">
+              <% if opco.telephone %>
+                <p><%= opco.telephone %></p>
+              <% end %>
+              <% if opco.email %>
+                <p><%= opco.email %></p>
+              <% end %>
+              <% if opco.url %>
+                <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
+              <% end %>
+            </div>
           </div>
+          <% if opco.url_contact.present? %>
+            <div class="evaluation-bilan-evapro__opco-financeur-annuaire">
+              <div class="evaluation-bilan-evapro__opco-financeur-details">
+                  <p>Retrouvez la liste des conseillers de votre opérateur de compétences pour identifier le contact près de chez vous :</p>
+                  <p><%= link_to humanize_url(opco.url_contact), opco.url_contact, class: "fr-link fr-link--sm", target: "_blank" %></p>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     <% end %>

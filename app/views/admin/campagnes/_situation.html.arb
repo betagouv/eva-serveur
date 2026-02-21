@@ -1,12 +1,14 @@
 questionnaire = situation_configuration.questionnaire_utile&.nom_technique
 
-div class: "campagne-situation d-flex align-items-center" do
+li class: "campagne-situation d-flex align-items-center" do
   div do
     situation_illustration(situation_configuration.situation, couleur_bord: couleur)
   end
   div class: "situation__texte" do
     div class: "d-flex mb-2" do
-      h5 situation_configuration.situation.libelle
+      h3 class: "fr-text--bold fr-text--md fr-mb-0" do
+        situation_configuration.situation.libelle
+      end
       if questionnaire == Questionnaire::LIVRAISON_AVEC_REDACTION
         render(Tag.new("+ #{t('.redaction')}", classes: "ml-1 tag-categorie green"))
       end

@@ -4,7 +4,8 @@
 
   @import "../../bootstrap_grid";
 
-  td.col, th.col {
+  td.col,
+  th.col {
     padding: .625rem .75rem;
   }
 
@@ -17,32 +18,32 @@
       font-size: 0.875rem;
       margin-bottom: 0;
 
-      > ul {
+      >ul {
         margin-bottom: 0;
       }
     }
+
     .card-informations {
       padding: 1.5rem;
     }
+
     .campagne {
       width: 100%;
 
       table {
         margin-bottom: 1rem;
       }
+
       &-situation {
         margin-top: 1.5rem;
         gap: 1rem;
+
         .commentaire {
           font-style: italic;
           color: $eva_green;
         }
+
         .situation__texte {
-          h5 {
-            margin-bottom: 0;
-            margin-right: .5rem;
-            align-self: center;
-          }
           p {
             font-style: italic;
             margin-bottom: 0;
@@ -50,15 +51,19 @@
         }
       }
     }
+
     .attributes_table {
       table {
+
         th,
         td {
           border: 0;
         }
+
         td {
           font-weight: 500;
         }
+
         th {
           width: auto;
           vertical-align: bottom;
@@ -70,6 +75,7 @@
         }
       }
     }
+
     table {
       margin-bottom: 0;
     }
@@ -100,15 +106,19 @@
 
     .panel__description {
       font-style: italic;
+
       p {
         margin-bottom: 1rem;
       }
     }
+
     .description--secondaire {
       color: $eva_dark_blue_grey;
     }
 
-    fieldset.inputs, fieldset.input-choix, fieldset.choices {
+    fieldset.inputs,
+    fieldset.input-choix,
+    fieldset.choices {
       background-color: $grey-1000;
 
       input[type="text"],
@@ -118,7 +128,7 @@
     }
   }
 
-// ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
+  // ci-dessous--> A uniformiser plus tard sur tous les boutons actions de l'admin: app/assets/stylesheets/admin/composants/_buttons.scss
 
   form fieldset.actions {
     margin-top: 2rem;
@@ -127,9 +137,11 @@
       display: flex;
       justify-content: space-between;
     }
+
     li {
       margin-bottom: 0;
     }
+
     .bouton-annuler a {
       @include bouton-secondaire;
       @include grand-bouton;

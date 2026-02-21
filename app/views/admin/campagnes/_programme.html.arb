@@ -2,12 +2,16 @@ div do
   h2 t(".titre")
 
   div class: "panel panel-programme" do
-    render "components/card_parcours_type", parcours_type: campagne.parcours_type
+    section render "components/card_parcours_type", parcours_type: campagne.parcours_type
 
-    situations_configurations.each_with_index do |situation_configuration, i|
-      render partial: "situation",
-            locals: { situation_configuration: situation_configuration,
-                      couleur: Situation::COULEURS_BORDURES[i] }
+    section do
+      ul class: "fr-pl-0" do
+        situations_configurations.each_with_index do |situation_configuration, i|
+          render partial: "situation",
+                locals: { situation_configuration: situation_configuration,
+                          couleur: Situation::COULEURS_BORDURES[i] }
+        end
+      end
     end
   end
 end

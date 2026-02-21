@@ -67,6 +67,10 @@ jobs:
           command: bundle exec rubocop
 
       - run:
+          name: Lint typographie des locales
+          command: bundle exec rake locale_typography
+
+      - run:
           name: Stylelint (CSS/SCSS)
           command: npm run lint:css
 

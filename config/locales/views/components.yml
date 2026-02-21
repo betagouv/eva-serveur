@@ -96,7 +96,7 @@ fr:
           titre: Organisez 4 passations
           description: "[Organisez une session eva](%{lien}), et faites au moins 4 passations. Vous pouvez les consulter dans la section « *Vos dernières évaluations* » ci-dessous."
           passations_restantes: |
-            **Il vous reste %{passations_restantes} à faire pour valider cette étape !**
+            **Il vous reste %{passations_restantes} à faire pour valider cette étape !**
         fin:
           titre: Vous êtes prêt à utiliser eva
           description: |

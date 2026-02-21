@@ -117,5 +117,5 @@ fr:
         positionnement_niveau_numeratie: Positionnement Numératie
         reponses_redaction: Réponses rédaction
         redaction: |
-          Rédaction %{index} :
+          Rédaction %{index} :
           %{reponse}

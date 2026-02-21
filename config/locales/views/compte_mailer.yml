@@ -73,7 +73,7 @@ fr:
         eva est gratuit et libre d’accès pour tous les membres de votre structure à condition que
         vous ayez préalablement validé leur accès.
 
-        Aujourd’hui, certains collègues de votre structure « %{structure} » souhaitent utiliser eva, et
+        Aujourd’hui, certains collègues de votre structure « %{structure} » souhaitent utiliser eva, et
         nous avons besoin de vous pour valider qu’ils sont bien habilités à accéder au compte eva
         de votre structure
       nom_prenom_compte: |

@@ -47,7 +47,7 @@ fr:
           Afin de rattacher vos bénéficiaires à cette campagne,
           vous pouvez partager le code ou l’URL suivante.
         titre_panel_parcours: Parcours choisi
-        nouvelle_campagne: Félicitations ! Votre campagne a bien été créée.
+        nouvelle_campagne: "Félicitations ! Votre campagne a bien été créée."
       programme:
         titre: Programme
       action_items:
@@ -56,7 +56,7 @@ fr:
           one: Consulter 1 évaluation
           other: Consulter %{count} évaluations
         nouvelle_campagne_disabled: Nouvelle campagne
-        nouvelle_campagne_disabled_explication: La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes.
+        nouvelle_campagne_disabled_explication: "La création de nouvelles campagnes a été désactivée par le compte « admin » de votre structure. Vous pouvez utiliser une des campagnes existantes."
         dupliquer: Dupliquer
         parametres:
           description: Activez ou rendez cette campagne privée.

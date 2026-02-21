@@ -8,7 +8,7 @@ fr:
         sous_titre_intro: Choisissez votre mode de création de compte pour accéder au service eva. Vous pourrez compléter votre profil par la suite.
         proconnect_titre: Se créer un compte avec ProConnect
         proconnect_description: ProConnect est la solution d’authentification de l’État qui simplifie l’accès de tous les professionnels à ses services numériques.
-        proconnect_aide: Qu'est-ce que ProConnect ?
+        proconnect_aide: "Qu'est-ce que ProConnect ?"
         ou: OU
         identifiant_titre: Se créer un compte en choisissant un identifiant
         identifiant_description: Cette option vous permet de créer un compte avec une adresse e-mail et un mot de passe, si vous n’utilisez pas ProConnect.

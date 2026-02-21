@@ -18,21 +18,21 @@ fr:
       password:
         title: Mot de passe
       links:
-        forgot_your_password: Mot de passe oublié ?
+        forgot_your_password: "Mot de passe oublié ?"
       sessions:
         new:
-          bienvenue: Bienvenue !
+          bienvenue: "Bienvenue !"
           pro-connect:
             titre: Se connecter avec ProConnect
             description: ProConnect est la solution d'authentification de l'État qui simplifie l'accès de tous les professionnels à ses services numériques.
             bouton-identifier: S'identifier avec
             bouton-brand: ProConnect
             transition: OU
-            libelle-lien-pro-connect: Qu'est-ce que ProConnect ?
+            libelle-lien-pro-connect: "Qu'est-ce que ProConnect ?"
           compte:
             titre: Se connecter avec son compte
-            hint-email: "Format attendu : nom@domaine.com"
-            pas-de-compte: Vous n'avez pas de compte ?
+            hint-email: "Format attendu : nom@domaine.com"
+            pas-de-compte: "Vous n'avez pas de compte ?"
             creer-compte: Créer un compte
           eva-login:
             titre: J'ai déjà un compte conseiller

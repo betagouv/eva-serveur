@@ -23,11 +23,11 @@
 }
 
 .mesure-chiffre-cle__explication-label {
-  @include body-sm;
+  @include corps-de-texte-sm-regular;
 
   margin: 0;
 
   @media print {
-    @include texte-md-regular;
+    @include corps-de-texte-md-regular;
   }
 }

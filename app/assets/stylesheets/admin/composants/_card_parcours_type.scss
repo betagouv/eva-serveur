@@ -1,7 +1,7 @@
 #card-parcours-type {
   .carte {
     @include carte-grise;
-    @include texte-xs;
+    @include corps-de-texte-xs-regular;
 
     padding: 1rem;
     color: $eva-dark;

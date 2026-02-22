@@ -43,7 +43,7 @@ h6 {
 }
 
 .body-sm {
-  @include body-sm;
+  @include corps-de-texte-sm-regular;
 }
 
 .h6-xxs {
@@ -51,5 +51,5 @@ h6 {
 }
 
 .body-xs {
-  @include body-xs;
+  @include corps-de-texte-xs-regular;
 }

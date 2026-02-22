@@ -59,7 +59,7 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
 .inscription_v2__sidebar-sous-titre {
   color: $grey-50;
 
-  @include texte;
+  @include corps-de-texte-sm-regular;
 
   font-weight: 400 !important;
 }

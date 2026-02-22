@@ -20,7 +20,7 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   h3 {
     color: var(--light-decisions-text-text-default-grey, #3A3A3A);
 
-    @include texte-md-bold;
+    @include corps-de-texte-md-bold;
 
     text-transform: none;
     margin: 0;
@@ -57,12 +57,12 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   h3 {
     color: var(--light-decisions-text-text-mention-grey, #666);
 
-    @include texte-sm-bold;
+    @include corps-de-texte-sm-bold;
   }
 
   p {
     color: var(--light-decisions-text-text-default-grey, #3A3A3A);
 
-    @include texte-sm-regular;
+    @include corps-de-texte-sm-regular;
   }
 }

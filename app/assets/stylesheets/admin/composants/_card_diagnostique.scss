@@ -140,7 +140,7 @@
   color: var(--light-decisions-text-text-default-grey, #3A3A3A);
   text-overflow: ellipsis;
 
-  @include body-md-base;
+  @include corps-de-texte-md-regular;
 }
 
 .diagnostique-contenu__action {

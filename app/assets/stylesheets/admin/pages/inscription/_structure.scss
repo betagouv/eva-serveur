@@ -80,17 +80,17 @@
     }
 
     &__label {
-      @include body-md-semibold;
+      @include corps-de-texte-md-bold;
     }
 
     &__value {
-      @include body-md-semibold;
+      @include corps-de-texte-md-bold;
 
       font-weight: 400;
     }
 
     &__mention-opco {
-      @include body-xs-mention;
+      @include corps-de-texte-xs-regular;
 
       color: var(--color-text-base, #3A3A3A);
       margin: 0;
@@ -99,7 +99,7 @@
   }
 
   .structure-confirmation-mention {
-    @include body-xs-mention;
+    @include corps-de-texte-xs-regular;
 
     margin: 0;
 
@@ -118,7 +118,7 @@
   }
 
   .structure-creation-text {
-    @include body-sm-base;
+    @include corps-de-texte-sm-regular;
 
     margin: 0;
 
@@ -165,13 +165,13 @@
     }
 
     &__mention-champs {
-      @include body-xs-mention;
+      @include corps-de-texte-xs-regular;
 
       margin: 0;
     }
 
     &__mention-admin {
-      @include body-xs-mention;
+      @include corps-de-texte-xs-regular;
 
       margin: 0;
     }

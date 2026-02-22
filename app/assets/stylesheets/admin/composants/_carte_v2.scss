@@ -18,7 +18,7 @@
   }
 
   &__sous-titre {
-    @include body-xs-mention;
+    @include corps-de-texte-xs-regular;
 
     margin: 0;
     align-self: flex-start;

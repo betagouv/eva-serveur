@@ -72,12 +72,12 @@
       margin-bottom: .625rem;
     }
     &__duree, &__description {
-      @include texte-xs;
+      @include corps-de-texte-xs-regular;
 
       font-weight: normal;
       margin: 0;
       p {
-        @include texte-xs;
+        @include corps-de-texte-xs-regular;
       }
       ul {
         list-style: disc;

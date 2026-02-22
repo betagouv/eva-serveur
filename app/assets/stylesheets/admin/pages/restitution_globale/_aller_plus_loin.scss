@@ -44,17 +44,17 @@
   align-items: flex-start;
   flex: 1 0 0;
 
-  @include texte-sm-regular;
+  @include corps-de-texte-sm-regular;
 }
 
 .focus-incoutournable__explication a {
-  @include texte-sm-regular;
+  @include corps-de-texte-sm-regular;
 
   color: $couleur-texte;
 }
 
 .definitions-impacts__titre {
-  @include body-lg-semibold;
+  @include corps-de-texte-lg-bold;
 
   color: var(--light-decisions-text-text-title-grey, #161616);
 
@@ -66,11 +66,11 @@
 .definitions-impacts__texte {
   margin-bottom: 0;
 
-  @include texte-sm-regular;
+  @include corps-de-texte-sm-regular;
 
   color: var(--light-decisions-text-text-default-grey, #3A3A3A);
 
   @media print {
-    @include texte-md-regular;
+    @include corps-de-texte-md-regular;
   }
 }

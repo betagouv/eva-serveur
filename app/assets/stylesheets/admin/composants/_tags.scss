@@ -1,5 +1,5 @@
 @mixin tag() {
-  @include texte;
+  @include corps-de-texte-sm-regular;
 
   white-space: nowrap;
   padding: .25rem .5rem;

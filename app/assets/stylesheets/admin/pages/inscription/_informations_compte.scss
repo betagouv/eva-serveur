@@ -26,13 +26,13 @@
 }
 
 .page-informations-compte .indication-champs-obligatoires {
-  @include texte-xs;
+  @include corps-de-texte-xs-regular;
 
   color: $couleur-accent-erreur;
 }
 
 .page-informations-compte .informations-compte-champs-obligatoires {
-  @include body-xs-mention;
+  @include corps-de-texte-xs-regular;
 }
 
 .page-informations-compte .informations-compte-actions {

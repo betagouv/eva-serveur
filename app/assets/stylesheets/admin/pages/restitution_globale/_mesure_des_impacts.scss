@@ -43,13 +43,13 @@
 }
 
 .indicateur-impact__details-titre {
-  @include body-sm-semibold;
+  @include corps-de-texte-sm-bold;
 
   display: flex;
   color: var(--light-decisions-text-text-title-grey, #161616);
 
   @media print {
-    @include body-md-semibold;
+    @include corps-de-texte-md-bold;
   }
 }
 
@@ -139,7 +139,7 @@
 }
 
 .couts__titre-graphique {
-  @include body-lg-semibold;
+  @include corps-de-texte-lg-bold;
 
   color: $grey-200;
   margin: 0;
@@ -154,7 +154,7 @@
 }
 
 .couts__mention {
-  @include body-xs-mention;
+  @include corps-de-texte-xs-regular;
 
   margin: 0;
 }
@@ -168,13 +168,13 @@
 }
 
 .couts__explication-titre {
-  @include body-md-semibold;
+  @include corps-de-texte-md-bold;
 
   margin: 0;
 }
 
 .couts__explication-texte {
-  @include body-md-base;
+  @include corps-de-texte-md-regular;
 }
 
 .couts__question {

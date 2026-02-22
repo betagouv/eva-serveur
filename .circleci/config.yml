@@ -1,9 +1,20 @@
 version: 2.1
+
 orbs:
   browser-tools: circleci/browser-tools@1.5.3
-jobs:
-  build:
-    parallelism: 1
+
+executors:
+  ruby-executor:
+    resource_class: medium+
+    docker:
+      - image: cimg/ruby:3.4.8-node
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
+
+  ruby-with-database-executor:
     resource_class: medium+
     docker:
       - image: cimg/ruby:3.4.8-browsers
@@ -20,52 +31,71 @@ jobs:
           POSTGRES_DB: rails_blog
           POSTGRES_PASSWORD: ""
       - image: cimg/redis:6.2
+
+jobs:
+  build:
+    executor: ruby-executor
     steps:
-      - browser-tools/install-browser-tools
       - checkout
-
-      - run:
-          name: Install npm dependencies
-          command: npm ci || npm install
-
-      # Which version of bundler?
       - run:
           name: Which bundler?
           command: bundle -v
-
-      # Restore bundle cache
       - restore_cache:
           keys:
             - rails-bundle-{{ checksum "Gemfile.lock" }}
-
+            - rails-bundle-
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package-lock.json" }}
+            - node-modules-
+      - run:
+          name: Install npm dependencies
+          command: npm ci || npm install
       - run:
           name: Bundle Install
           command: bundle config set --local without production && bundle check || bundle install
-
-      # Store bundle cache
       - save_cache:
           key: rails-bundle-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+      - save_cache:
+          key: node-modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
+  seed:
+    executor: ruby-with-database-executor
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
       - run:
-          name: Database setup
-          command: bin/rails db:create db:schema:load --trace
-
+          name: Install libvips
+          command: timeout 2m sudo apt-get update && sudo apt-get install -y libvips
       - run:
-          name: DB Seed
-          command: |
-            bin/rails db:create db:migrate --trace
-            bin/rails db:seed --trace
+          name: Database setup and seed
+          command: bin/rails db:create db:schema:load db:seed --trace
 
+  rubocop:
+    executor: ruby-executor
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           name: Rubocop
           command: bundle exec rubocop
 
+  stylelint:
+    executor: ruby-executor
+    steps:
+      - attach_workspace:
+          at: .
       - run:
           name: Lint typographie des locales
           command: bundle exec rake locale_typography
@@ -74,12 +104,50 @@ jobs:
           name: Stylelint (CSS/SCSS)
           command: npm run lint:css
 
-      # Run rspec in parallel
+  rspec:
+    executor: ruby-with-database-executor
+    parallelism: 4
+    steps:
+      - attach_workspace:
+          at: .
+      - browser-tools/install-browser-tools
+      - run:
+          name: Install libvips
+          command: timeout 2m sudo apt-get update && sudo apt-get install -y libvips
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create db:schema:load --trace
       - run:
           name: Run rspec in parallel
           command: |
+            mkdir -p test_results
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
+                              --out test_results/rspec-${CIRCLE_NODE_INDEX}.xml \
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - store_test_results:
+          path: test_results
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - seed:
+          requires:
+            - build
+      - rubocop:
+          requires:
+            - build
+      - stylelint:
+          requires:
+            - build
+      - rspec:
+          requires:
+            - seed
+            - rubocop
+            - stylelint

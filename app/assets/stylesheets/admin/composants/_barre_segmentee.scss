@@ -14,7 +14,7 @@ $barre-segmentee-non-passee: $grey-850;
   display: inline-block;
   color: $grey-425;
 
-  @include dsfr-texte-xs;
+  @include corps-de-texte-xs-regular;
 
   white-space: break-spaces;
 }
@@ -48,5 +48,5 @@ $barre-segmentee-non-passee: $grey-850;
 .barre-segmentee__score {
   color: $grey-50;
 
-  @include dsfr-texte-sm;
+  @include corps-de-texte-sm-regular;
 }

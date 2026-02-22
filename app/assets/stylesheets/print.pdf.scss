@@ -51,7 +51,7 @@ html {
 }
 
 body {
-  @include texte;
+  @include corps-de-texte-sm-regular;
 
   font-family: $font-texte;
   color: $couleur-texte;

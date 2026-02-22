@@ -49,6 +49,6 @@
   margin: 0;
 
   @media print {
-    @include texte-lg-regular;
+    @include corps-de-texte-lg-regular;
   }
 }

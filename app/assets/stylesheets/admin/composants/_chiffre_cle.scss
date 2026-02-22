@@ -43,7 +43,7 @@
 }
 
 .chiffre-cle__prefixe {
-  @include texte-sm-regular;
+  @include corps-de-texte-sm-regular;
 }
 
 .chiffre-cle__chiffre {
@@ -51,6 +51,6 @@
 }
 
 .chiffre-cle__suffixe {
-  @include texte-sm-regular;
+  @include corps-de-texte-sm-regular;
 }
 

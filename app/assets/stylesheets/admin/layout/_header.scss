@@ -1,6 +1,6 @@
 /* HEADER */
 #header {
-  @include texte-xs;
+  @include corps-de-texte-xs-regular;
 
   display: flex;
   height: 64px;
@@ -29,7 +29,7 @@
   a:link {
     color: $grey-1000;
 
-    @include texte-xs;
+    @include corps-de-texte-xs-regular;
   }
   ul.tabs {
     display: block;
@@ -222,7 +222,7 @@
       &_email,
       &_email--non-confirme,
       &_structure_courante {
-        @include texte-xs;
+        @include corps-de-texte-xs-regular;
 
         font-style: italic;
       }

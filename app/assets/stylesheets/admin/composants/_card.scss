@@ -15,7 +15,7 @@ a:focus {
     display: flex;
     align-items: center;
 
-    @include texte-xs;
+    @include corps-de-texte-xs-regular;
 
     color: $couleur-texte;
     padding: 0 1rem;

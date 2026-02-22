@@ -91,7 +91,7 @@
   }
   
   .liens-partages a {
-    @include body-md-base;
+    @include corps-de-texte-md-regular;
 
     color: var(--light-decisions-text-text-action-high-blue-france, #000091);
   }
@@ -104,7 +104,7 @@
 }
 
 .nouvelle-session__connexion-description {
-  @include body-sm;
+  @include corps-de-texte-sm-regular;
 
   color: $couleur-texte;
   margin: 0;
@@ -139,7 +139,7 @@
   }
 
   .separateur-texte {
-    @include body-sm-base;
+    @include corps-de-texte-sm-regular;
 
     font-weight: 700;
     color: #3A3A3A;

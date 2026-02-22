@@ -54,7 +54,7 @@
 }
 
 .nouvelle-session__demonstration-description {
-  @include body-sm;
+  @include corps-de-texte-sm-regular;
 
   color: $grey-100;
   margin: 0;

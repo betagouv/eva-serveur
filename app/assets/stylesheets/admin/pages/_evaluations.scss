@@ -30,7 +30,7 @@
 
     width: $largeur_colonne_campagne;
 
-    @include texte-lg;
+    @include corps-de-texte-md-regular;
 
     &,
     &:link,
@@ -49,7 +49,7 @@
   .evaluation__created_at {
     color: $eva_dark_blue_grey;
 
-    @include texte-xs;
+    @include corps-de-texte-xs-regular;
 
     font-style: normal;
     font-weight: 400;

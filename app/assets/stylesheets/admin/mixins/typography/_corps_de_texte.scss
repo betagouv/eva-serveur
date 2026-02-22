@@ -1,0 +1,181 @@
+// =============================================================================
+// Corps de texte DSFR — mixins typographiques
+// =============================================================================
+// Tailles : XL (chapô 20px), LG (texte article 18px), MD (texte standard 16px),
+//          SM (texte détail 14px), XS (texte mention 12px)
+// Font-family : $font-texte (variables/admin/variables/_fonts.scss)
+// =============================================================================
+
+// --- XS — Texte mention (12px, line-height 20px) -----------------------------
+
+@mixin corps-de-texte-xs-base() {
+  font-family: $font-texte;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+@mixin corps-de-texte-xs-regular() {
+  @include corps-de-texte-xs-base;
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-xs-bold() {
+  @include corps-de-texte-xs-base;
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+@mixin corps-de-texte-xs-italic() {
+  @include corps-de-texte-xs-base;
+
+  font-style: italic;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-xs-souligne() {
+  @include corps-de-texte-xs-base;
+
+  font-style: normal;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+@mixin corps-de-texte-xs-maj() {
+  @include corps-de-texte-xs-base;
+
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+// --- SM — Texte détail (14px, line-height 24px) -------------------------------
+
+@mixin corps-de-texte-sm-base() {
+  font-family: $font-texte;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+@mixin corps-de-texte-sm-regular() {
+  @include corps-de-texte-sm-base;
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-sm-medium() {
+  @include corps-de-texte-sm-base;
+
+  font-style: normal;
+  font-weight: 500;
+}
+
+@mixin corps-de-texte-sm-bold() {
+  @include corps-de-texte-sm-base;
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+@mixin corps-de-texte-sm-maj() {
+  @include corps-de-texte-sm-base;
+
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+// --- MD — Texte standard (16px, line-height 24px) -----------------------------
+
+@mixin corps-de-texte-md-base() {
+  font-family: $font-texte;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin corps-de-texte-md-regular() {
+  @include corps-de-texte-md-base;
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-md-medium() {
+  @include corps-de-texte-md-base;
+
+  font-style: normal;
+  font-weight: 500;
+}
+
+@mixin corps-de-texte-md-bold() {
+  @include corps-de-texte-md-base;
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+@mixin corps-de-texte-md-italic() {
+  @include corps-de-texte-md-base;
+
+  font-style: italic;
+  font-weight: 400;
+}
+
+// --- LG — Texte article (18px, line-height 28px) -------------------------------
+
+@mixin corps-de-texte-lg-base() {
+  font-family: $font-texte;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@mixin corps-de-texte-lg-regular() {
+  @include corps-de-texte-lg-base;
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-lg-medium() {
+  @include corps-de-texte-lg-base;
+
+  font-style: normal;
+  font-weight: 500;
+}
+
+@mixin corps-de-texte-lg-bold() {
+  @include corps-de-texte-lg-base;
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+// --- XL — Chapô (20px, line-height 32px) --------------------------------------
+
+@mixin corps-de-texte-xl-base() {
+  font-family: $font-texte;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+@mixin corps-de-texte-xl-regular() {
+  @include corps-de-texte-xl-base;
+
+  font-style: normal;
+  font-weight: 400;
+}
+
+@mixin corps-de-texte-xl-bold() {
+  @include corps-de-texte-xl-base;
+
+  font-style: normal;
+  font-weight: 600;
+}
+
+// Utilitaire (conservé pour usage existant)
+.text-xs {
+  @include corps-de-texte-xs-regular;
+}

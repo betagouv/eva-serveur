@@ -3,7 +3,7 @@
     color: var(--light-decisions-text-text-action-high-grey, #161616);
     font-family: Marianne, sans-serif;
 
-    @include dsfr-texte-sm;
+    @include corps-de-texte-sm-regular;
   }
 
   .fr-nav__link:hover,

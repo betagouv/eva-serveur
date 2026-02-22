@@ -33,7 +33,7 @@
   gap: 24px;
   align-self: stretch;
 
-  .proconnect-titre { @include h5-xs; margin: 0; }
+  .proconnect-titre { @include titre-h5; margin: 0; }
   .proconnect-texte { @include corps-de-texte-sm-regular; margin: 0; }
 }
 
@@ -77,7 +77,7 @@
 }
 
 .page-nouveau-compte-section--identifiant .identifiant-titre {
-  @include h5-xs;
+  @include titre-h5;
 
   margin: 0;
 }

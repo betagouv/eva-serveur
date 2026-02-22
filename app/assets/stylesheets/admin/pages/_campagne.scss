@@ -89,7 +89,7 @@
 
   .nouvelle-campagne {
     .fieldset-title span {
-      @include h3;
+      @include titre-h3;
       @include titre;
 
       border: none;
@@ -148,7 +148,7 @@
 }
 
 .campagne--titre {
-  @include dsfr-titre-xl;
+  @include titre-h1;
 
   margin: 0;
 }

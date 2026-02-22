@@ -79,7 +79,7 @@
       color: var(--light-decisions-text-text-label-grey, #161616);
       text-align: center;
 
-      @include h3-md-desktop;
+      @include titre-h3;
     }
 
     .score-fleche__pointe {

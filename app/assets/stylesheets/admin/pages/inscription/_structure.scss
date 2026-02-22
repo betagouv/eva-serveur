@@ -159,7 +159,7 @@
     gap: var(--Space-3W, 24px);
 
     &__titre {
-      @include h5-xs;
+      @include titre-h5;
 
       margin: 0;
     }

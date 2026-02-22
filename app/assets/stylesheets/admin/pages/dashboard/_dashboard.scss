@@ -22,7 +22,7 @@
 
   .derniere-reponse-complete {
     .derniere-reponse-complete__titre {
-      @include h5-xs;
+      @include titre-h5;
 
       margin: 0;
     }
@@ -54,7 +54,7 @@
 
   .cinq-dernieres-evaluations {
     .cinq-dernieres-evaluations__titre {
-      @include h5-xs;
+      @include titre-h5;
 
       margin: 0;
     }
@@ -415,7 +415,7 @@
       margin: 0;
     }
     &__titre {
-      @include h5-xs;
+      @include titre-h5;
 
       margin: 0;
     }
@@ -428,7 +428,7 @@
 
   .bienvenue-entreprise {
     &__titre {
-      @include h2-lg;
+      @include titre-h2;
 
       margin: 0;
     }

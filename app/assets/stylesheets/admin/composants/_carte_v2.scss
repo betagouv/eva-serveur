@@ -11,7 +11,7 @@
   overflow: hidden;
 
   &__title {
-    @include h5-xs-desktop;
+    @include titre-h5;
 
     margin: 0;
     align-self: flex-start;

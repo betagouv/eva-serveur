@@ -59,7 +59,7 @@
   color: var(--light-decisions-text-text-title-grey, #161616);
 
   @media print {
-    @include h5-xs;
+    @include titre-h5;
   }
 }
 

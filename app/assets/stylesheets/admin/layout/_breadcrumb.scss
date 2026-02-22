@@ -22,7 +22,7 @@
       text-overflow: ellipsis;
       font-family: $font-titre;
 
-      @include h2;
+      @include titre-h2;
 
       color: $grey-50;
     }

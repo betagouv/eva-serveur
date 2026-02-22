@@ -129,7 +129,7 @@
 }
 
 .diagnostique-contenu__titre {
-  @include h6-xxs-desktop;
+  @include titre-h6;
 
   color: var(--light-decisions-text-text-title-grey, #161616);
   margin: 0;

@@ -48,7 +48,7 @@
 .nouvelle-session__demonstration-titre {
   color: $blue-france-sun-113;
 
-  @include h4-sm;
+  @include titre-h4;
 
   margin: 0;
 }

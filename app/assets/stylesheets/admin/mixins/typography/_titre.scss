@@ -1,135 +1,180 @@
-@mixin titre() {
+// =============================================================================
+// Titres DSFR — mixins typographiques
+// =============================================================================
+// Tailles H1–H6 : --1-titres--- (desktop / mobile)
+// Titres alternatifs : --0-titres-alternatifs--- (affichage grands titres)
+// Font-family : $font-titre (variables/admin/variables/_fonts.scss)
+// Breakpoint desktop : 48.0625rem (769px), mobile par défaut
+// =============================================================================
+
+$titre-breakpoint-desktop: 48.0625rem; // 769px
+
+// --- Base titre (famille, graisse, style) -------------------------------------
+
+@mixin titre-base() {
   font-family: $font-titre;
-  font-weight: bold;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@mixin titre() {
+  @include titre-base;
+
   text-shadow: none;
-  color: $grey_50;
+  color: $grey-50;
   margin: 0;
 }
+
+// --- Titres sémantiques H1–H6 (DSFR --1-titres---) ---------------------------
+
+// H1 — x-l : desktop 40px, mobile 32px
+@mixin titre-h1() {
+  @include titre-base;
+
+  font-size: 32px;
+  line-height: 40px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+// H2 — l-g : desktop 32px, mobile 28px
+@mixin titre-h2() {
+  @include titre-base;
+
+  font-size: 28px;
+  line-height: 36px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+// H3 — m-d : desktop 28px, mobile 24px
+@mixin titre-h3() {
+  @include titre-base;
+
+  font-size: 24px;
+  line-height: 32px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+// H4 — s-m : desktop 24px, mobile 22px
+@mixin titre-h4() {
+  @include titre-base;
+
+  font-size: 22px;
+  line-height: 28px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+// H5 — x-s : desktop 22px, mobile 20px
+@mixin titre-h5() {
+  @include titre-base;
+
+  font-size: 20px;
+  line-height: 28px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 22px;
+    line-height: 28px;
+  }
+}
+
+// H6 — x-x-s : desktop 20px, mobile 18px
+@mixin titre-h6() {
+  @include titre-base;
+
+  font-size: 18px;
+  line-height: 24px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+// --- Titres alternatifs (DSFR --0-titres-alternatifs---) ---------------------
+
+@mixin titre-alternatif-xl() {
+  @include titre-base;
+
+  font-size: 72px;
+  line-height: 86px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 80px;
+    line-height: 96px;
+  }
+}
+
+@mixin titre-alternatif-lg() {
+  @include titre-base;
+
+  font-size: 64px;
+  line-height: 77px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 72px;
+    line-height: 86px;
+  }
+}
+
+@mixin titre-alternatif-md() {
+  @include titre-base;
+
+  font-size: 56px;
+  line-height: 67px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 64px;
+    line-height: 77px;
+  }
+}
+
+@mixin titre-alternatif-sm() {
+  @include titre-base;
+
+  font-size: 48px;
+  line-height: 58px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 56px;
+    line-height: 67px;
+  }
+}
+
+@mixin titre-alternatif-xs() {
+  @include titre-base;
+
+  font-size: 40px;
+  line-height: 48px;
+
+  @media (min-width: $titre-breakpoint-desktop) {
+    font-size: 48px;
+    line-height: 58px;
+  }
+}
+
+// --- Titre carte (contexte carte, réutilise annule-carte) --------------------
 
 @mixin titre-carte() {
   @include annule-carte;
   @include titre;
+  @include titre-h4; // s-m : 24px desktop / 22px mobile
 
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
   border: 0;
 }
 
-@mixin h1() {
-  font-size: 2.25rem;
-  line-height: 2.813rem;
-}
-
-@mixin h2() {
-  font-size: 1.5rem;
-  line-height: 1.875rem;
-}
-
-@mixin h3() {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-@mixin h6() {
-  font-family: $font-titre;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px;
-}
-
-@mixin h1-xl() {
-  font-family: Quicksand, sans-serif;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px; /* 120% */
-}
-
-@mixin h2-lg() {
-  color: var(--color-text-title, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-
-  @include dsfr-titre-lg;
-}
-
-@mixin h3-md-desktop() {
-  font-family: Quicksand, sans-serif;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-}
-
-@mixin h4-sm() {
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 2rem;
-}
-
-@mixin h5-xs() {
-  color: var(--color-text-title, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: 22px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px; /* 127.273% */
-}
-
-/* @deprecated */
-@mixin h5-xs-desktop() {
-  @include h5-xs;
-}
-
-@mixin h6-xxs() {
-  color: var(--light-decisions-text-text-title-grey, #161616);
-  font-family: var(--Titres-Font, Quicksand);
-  font-size: var(--Titres-H6---XXS-Size, 20px);
-  font-style: normal;
-  font-weight: 700;
-  line-height: var(--Titres-H6---XXS-Line-Height, 28px);
-}
-
-/* @deprecated */
-@mixin h6-xxs-desktop() {
-  @include h6-xxs;
-}
-
-
-// Taille "titre"
-@mixin dsfr-titre-sm() {
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 32px;
-}
-
-@mixin dsfr-titre-md() {
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-}
-
-@mixin dsfr-titre-lg() {
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px;
-}
-
-@mixin dsfr-titre-xl() {
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 48px;
-}
-
-@mixin dsfr-titre-2xl() {
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 56px;
-}

@@ -7,7 +7,7 @@
 
   h2.texte-intro__titre,
   &__titre {
-    @include h2-lg;
+    @include titre-h2;
 
     margin: 0;
     font-size: var(--Titres-H2---LG-Size, 32px) !important;

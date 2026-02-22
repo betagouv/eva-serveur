@@ -1,6 +1,6 @@
 h1 {
   @include titre;
-  @include h1;
+  @include titre-h1;
 
   color: $eva_main_blue;
   margin-bottom: 2rem;
@@ -8,11 +8,11 @@ h1 {
 
 // h2 et h3 ont le même font-size de 1.5rem
 // notre h3 devrait donc faire 1.25rem
-// utiliser la mixin @include h3() en attendant un refactoring complet des h3
+// utiliser @include titre-h3 pour les h3
 
 h2 {
   @include titre;
-  @include h2;
+  @include titre-h2;
 
   margin-bottom: 1rem;
 }
@@ -39,7 +39,7 @@ h5 {
 
 h6 {
   @include titre;
-  @include h6;
+  @include titre-h6;
 }
 
 .body-sm {
@@ -47,7 +47,7 @@ h6 {
 }
 
 .h6-xxs {
-  @include h6-xxs;
+  @include titre-h6;
 }
 
 .body-xs {

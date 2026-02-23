@@ -1,16 +1,16 @@
 .evaluation-evapro, .evaluation-evapro .page, .evaluation-evapro .page__contenu {
   display: flex;
   flex-direction: column;
-  gap: var(--Space-7W, 3.5rem);
+  gap: $dsfr-spacing-7w;
   width: 100%;
 
   @media print {
-    gap: var(--Space-4W, 1.5rem);
+    gap: $dsfr-spacing-4w;
   }
     
   .evaluation-evapro__titre {
     margin-bottom: 0;
-    color: var(--light-decisions-text-text-title-grey, #161616);
+    color: var(--text-title-grey);
 
     @include titre-h2;
   }

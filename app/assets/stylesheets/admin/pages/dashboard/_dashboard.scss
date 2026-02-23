@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
 
     .bienvenue-entreprise__titre {
@@ -36,7 +36,7 @@
     .derniere-reponse-complete__diagnostique {
       display: flex;
       align-items: stretch;
-      gap: var(--Space-3W, 24px);
+      gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
 
@@ -79,27 +79,27 @@
     width: 1200px;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
 
     .tableau-bord-contenu-principal {
       display: flex;
-      padding: var(--Space-4W, 32px) 0 var(--Space-7W, 56px) 0;
+      padding: $dsfr-spacing-4w 0 $dsfr-spacing-7w 0;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--Space-5W, 40px);
+      gap: $dsfr-spacing-5w;
       flex: 1 0 0;
     }
 
     .tableau-bord-sidebar {
       display: flex;
       width: 282px;
-      padding: var(--Space-3W, 24px) 0 var(--Space-7W, 56px) 0;
+      padding: $dsfr-spacing-3w 0 $dsfr-spacing-7w 0;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--Space-4W, 32px);
+      gap: $dsfr-spacing-4w;
       flex-shrink: 0;
       align-self: stretch;
-      border-left: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+      border-left: 1px solid var(--border-default-grey);
     }
 
     @media (max-width: 1200px) {
@@ -314,23 +314,23 @@
 
   .tableau-bord-sidebar-container {
     display: flex;
-    padding-left: var(--Space-3W, 24px);
+    padding-left: $dsfr-spacing-3w;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-4W, 32px);
+    gap: $dsfr-spacing-4w;
     align-self: stretch;
   }
 
   .bloc-opco-partenaire {
     display: flex;
-    padding: var(--Space-3W, 24px);
+    padding: $dsfr-spacing-3w;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--Space-2W, 16px);
+    gap: $dsfr-spacing-2w;
     align-self: stretch;
-    border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
-    background: var(--light-decisions-background-background-alt-grey, #F6F6F6);
+    border: 1px solid var(--border-default-grey);
+    background: var(--background-alt-grey);
     img {
       height: 56px;
       width: auto;
@@ -339,7 +339,7 @@
   }
 
   .bloc-opco-partenaire__titre {
-    color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+    color: var(--text-default-grey);
 
     @include corps-de-texte-md-bold;
 
@@ -357,13 +357,13 @@
 
   .bloc-opco-entreprise {
     display: flex;
-    padding: var(--Space-3W, 24px);
+    padding: $dsfr-spacing-3w;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--Space-2W, 16px);
+    gap: $dsfr-spacing-2w;
     align-self: stretch;
-    border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+    border: 1px solid var(--border-default-grey);
 
     &__bouton {
       @include bouton-primaire;
@@ -377,7 +377,7 @@
   }
 
   .bloc-opco-entreprise__titre {
-    color: var(--light-decisions-text-text-mention-grey, #666);
+    color: var(--text-mention-grey);
 
     @include corps-de-texte-md-bold;
 
@@ -385,7 +385,7 @@
   }
 
   .bloc-opco-entreprise__nom {
-    color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+    color: var(--text-default-grey);
 
     @include corps-de-texte-sm-regular;
 
@@ -396,12 +396,12 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
     &__grid {
       display: flex;
       align-items: flex-start;
-      gap: var(--Space-3W, 24px);
+      gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
     &__description {
@@ -436,11 +436,11 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--Space-3W, 24px);
+      gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
     &__texte {
-      color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+      color: var(--text-default-grey);
 
       @include corps-de-texte-md-regular;
 

@@ -15,3 +15,14 @@ $dsfr-spacing-14v: 3.5rem; // 56px
 $dsfr-spacing-16v: 4rem; // 64px
 $dsfr-spacing-20v: 5rem; // 80px
 $dsfr-spacing-24v: 6rem; // 96px
+
+// Alias DSFR Space-*W et Space-*V (équivalents en rem)
+$dsfr-spacing-1w: $dsfr-spacing-2v;   // 8px
+$dsfr-spacing-2w: $dsfr-spacing-4v;   // 16px
+$dsfr-spacing-3w: $dsfr-spacing-6v;   // 24px / 1.5rem
+$dsfr-spacing-4w: $dsfr-spacing-8v;   // 32px
+$dsfr-spacing-5w: $dsfr-spacing-10v;  // 40px
+$dsfr-spacing-6w: $dsfr-spacing-12v;  // 48px
+$dsfr-spacing-7w: $dsfr-spacing-14v;  // 56px
+$dsfr-spacing-8w: $dsfr-spacing-16v;  // 64px
+$dsfr-spacing-12w: $dsfr-spacing-24v; // 6rem

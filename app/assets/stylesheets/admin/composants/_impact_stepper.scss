@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3V, 12px);
+  gap: $dsfr-spacing-3v;
   align-self: stretch;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .etape_courante__titre {
-  color: var(--light-decisions-text-text-title-grey, #161616);
+  color: var(--text-title-grey);
   font-family: var(--Titres-Font, Quicksand);
   font-size: var(--Titres-H6---XXS-Size, 20px);
   font-style: normal;
@@ -28,7 +28,7 @@
 }
 
 .etape_courante_indicateur {
-  color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+  color: var(--text-default-grey);
   font-family: var(--Body-SM---Texte-dtail-Font, "Work Sans");
   font-size: var(--Body-SM---Texte-dtail-Size, 14px);
   font-style: normal;
@@ -44,7 +44,7 @@
 }
 
 .explication__pourquoi {
-  color: var(--light-decisions-text-text-mention-grey, #666);
+  color: var(--text-mention-grey);
   font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
   font-size: var(--Body-XS---Texte-mention-Size, 12px);
   font-style: normal;
@@ -53,7 +53,7 @@
 }
 
 .explication__description {
-  color: var(--light-decisions-text-text-mention-grey, #666);
+  color: var(--text-mention-grey);
   font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
   font-size: var(--Body-XS---Texte-mention-Size, 12px);
   font-style: normal;

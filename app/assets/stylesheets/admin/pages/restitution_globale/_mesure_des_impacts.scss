@@ -10,20 +10,20 @@
 
 .indicateur-impact {
   display: flex;
-  padding: 0 var(--Space-2W, 16px);
+  padding: 0 $dsfr-spacing-2w;
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+  border: 1px solid var(--border-default-grey);
 }
 
 .indicateur-impact__details {
   display: flex;
-  padding: var(--Space-3V, 12px) 0;
+  padding: $dsfr-spacing-3v 0;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
   align-self: stretch;
-  border-top: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+  border-top: 1px solid var(--border-default-grey);
 
   &:first-child {
     border-top: none;
@@ -35,7 +35,7 @@
   width: var(--Grille-2-colonnes, 180px);
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-1V, 4px);
+  gap: $dsfr-spacing-1v;
 
   @media print {
     width: 215px;
@@ -46,7 +46,7 @@
   @include corps-de-texte-sm-bold;
 
   display: flex;
-  color: var(--light-decisions-text-text-title-grey, #161616);
+  color: var(--text-title-grey);
 
   @media print {
     @include corps-de-texte-md-bold;
@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-1W, 8px);
+  gap: $dsfr-spacing-1w;
   flex: 1 0 0;
   align-self: stretch;
 }
@@ -83,7 +83,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
 }
 
 .couts__titre {
@@ -101,7 +101,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
   align-self: stretch;
 }
 
@@ -114,7 +114,7 @@
 .couts__colonnes {
   display: flex;
   align-items: stretch;
-  gap: var(--Space-6W, 48px);
+  gap: $dsfr-spacing-6w;
   align-self: stretch;
 }
 
@@ -122,17 +122,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
   flex: 1 0 0;
   align-self: stretch;
 }
 
 .couts__pile-fleches {
   display: flex;
-  padding: var(--Space-3W, 24px);
+  padding: $dsfr-spacing-3w;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-2W, 16px);
+  gap: $dsfr-spacing-2w;
   align-self: stretch;
   flex: 1 0 0;
   border: 1px solid $grey-900;
@@ -149,7 +149,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-1W, 8px);
+  gap: $dsfr-spacing-1w;
   align-self: stretch;
 }
 
@@ -163,7 +163,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-1V, 4px);
+  gap: $dsfr-spacing-1v;
   align-self: stretch;
 }
 

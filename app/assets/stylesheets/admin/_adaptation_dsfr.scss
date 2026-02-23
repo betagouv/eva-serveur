@@ -238,11 +238,11 @@ body.logged_out #wrapper .fr-modal__content ul li,
 
 .fr-modal.evapro_admin .fr-btn--secondary,
 .fr-modal.evapro_admin .fr-btn--tertiary {
-  color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+  color: var(--text-action-high-blue-france);
 }
 
 .fr-modal.evapro_admin .fr-btn--tertiary:hover {
-  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+  background: var(--background-raised-grey-hover);
 }
 
 body.logged_in:not(.evapro_admin) .fr-btn {
@@ -281,12 +281,12 @@ body.evapro_admin .fr-btn--secondary,
 body.evapro_admin .fr-btn--tertiary,
 .evapro_admin .fr-btn--secondary,
 .evapro_admin .fr-btn--tertiary {
-  color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+  color: var(--text-action-high-blue-france);
 }
 
 body.evapro_admin .fr-btn--tertiary:hover,
 .evapro_admin .fr-btn--tertiary:hover {
-  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+  background: var(--background-raised-grey-hover);
 }
 
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
@@ -392,7 +392,7 @@ body.logged_in h2.fr-footer__partners-title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--Space-2W, 16px);
+    gap: $dsfr-spacing-2w;
   }
 
   .fr-footer__bottom-item {

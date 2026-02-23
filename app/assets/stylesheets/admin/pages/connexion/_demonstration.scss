@@ -1,7 +1,7 @@
 .nouvelle-session__demonstration {
   background-color: var(--color-background-alt-blue, #F5F5FE);
   display: flex;
-  padding: 0 var(--Space-3V, 0.75rem);
+  padding: 0 $dsfr-spacing-3v;
   flex-direction: column;
   align-items: flex-start;
   flex: 1 0 0;
@@ -11,10 +11,10 @@
 .nouvelle-session__demonstration-container {
   display: flex;
   max-width: var(--Grille-6-colonnes, 36.75rem);
-  padding-top: var(--Space-12W, 6rem);
+  padding-top: $dsfr-spacing-12w;
   flex-direction: column;
   align-items: center;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
   flex: 1 0 0;
   align-self: stretch;
 }
@@ -24,7 +24,7 @@
   width: var(--Grille-4-colonnes, 23.875rem);
   flex-direction: column;
   align-items: center;
-  gap: var(--Space-5W, 2.5rem);
+  gap: $dsfr-spacing-5w;
 }
 
 .nouvelle-session__demonstration-logo {
@@ -80,7 +80,7 @@
 
 @media (max-width: 48rem) {
   .nouvelle-session__demonstration-body {
-    padding: var(--Space-3V, 12px);
+    padding: $dsfr-spacing-3v;
   }
 
   .nouvelle-session__demonstration-content {

@@ -5,7 +5,7 @@
 // --- EvaProScoreItemComponent ---
 
 .eva-pro-score-item {
-  --eva-pro-score-item-bg: var(--light-options-illustration-color-850-default-green-emeraude-850, #6FE49D);
+  --eva-pro-score-item-bg: var(--green-emeraude-850-200);
 
   display: flex;
   width: 1.25rem;
@@ -18,24 +18,24 @@
   &__lettre {
     @include corps-de-texte-xs-regular;
 
-    color: var(--light-decisions-text-text-label-grey, #161616);
+    color: var(--text-label-grey);
   }
 
   // Variantes couleur par lettre
   &--a {
-    --eva-pro-score-item-bg: var(--light-options-illustration-color-850-default-green-emeraude-850, #6FE49D);
+    --eva-pro-score-item-bg: var(--green-emeraude-850-200);
   }
 
   &--b {
-    --eva-pro-score-item-bg: var(--light-options-illustration-color-925-default-green-tilleul-verveine-925, #FBE769);
+    --eva-pro-score-item-bg: var(--green-tilleul-verveine-925-125);
   }
 
   &--c {
-    --eva-pro-score-item-bg: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
+    --eva-pro-score-item-bg: var(--orange-terre-battue-main-645);
   }
 
   &--d {
-    --eva-pro-score-item-bg: var(--light-options-illustration-color-main-default-pink-tuile-main-556, #CE614A);
+    --eva-pro-score-item-bg: var(--pink-tuile-main-556);
   }
 
   // Variante active
@@ -48,7 +48,7 @@
     .eva-pro-score-item__lettre {
       @include corps-de-texte-md-bold;
 
-      color: var(--light-decisions-text-text-label-grey, #161616);
+      color: var(--text-label-grey);
     }
   }
 }

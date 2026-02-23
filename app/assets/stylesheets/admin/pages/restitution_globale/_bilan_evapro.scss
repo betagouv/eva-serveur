@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
 
   p {
     margin: 0;
@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
   width: var(--Grille-4-colonnes, 23.875rem);
   flex-shrink: 0;
 }
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
 }
 
 .panel > h3.evaluation-bilan-evapro__opco-financeur-titre {

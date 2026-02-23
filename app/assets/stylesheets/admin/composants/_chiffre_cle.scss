@@ -1,6 +1,6 @@
 :root {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
-  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-emeraude-975, #E3FDEB);
+  --chiffre-cle-border-color: var(--green-emeraude-main-632);
+  --chiffre-cle-background-color: var(--green-emeraude-975-75);
 }
 
 .chiffre-cle {
@@ -14,23 +14,23 @@
 }
 
 .chiffre-cle__a-tres-bon {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
-  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-emeraude-975, #E3FDEB)
+  --chiffre-cle-border-color: var(--green-emeraude-main-632);
+  --chiffre-cle-background-color: var(--green-emeraude-975-75);
 }
 
 .chiffre-cle__b-bon {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-tilleul-verveine-main-707, #B7A73F);
-  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-green-tilleul-verveine-975, #FEF7DA);
+  --chiffre-cle-border-color: var(--green-tilleul-verveine-main-707);
+  --chiffre-cle-background-color: var(--green-tilleul-verveine-975-75);
 }
 
 .chiffre-cle__c-moyen {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
-  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-orange-terre-battue-975, #FEF4F2);
+  --chiffre-cle-border-color: var(--orange-terre-battue-main-645);
+  --chiffre-cle-background-color: var(--orange-terre-battue-975-75);
 }
 
 .chiffre-cle__d-mauvais {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-sun-default-pink-tuile-sun-425, #A94645);
-  --chiffre-cle-background-color: var(--light-options-illustration-color-975-default-pink-tuile-975, #FEF4F3);
+  --chiffre-cle-border-color: var(--pink-tuile-sun-425-moon-750);
+  --chiffre-cle-background-color: var(--pink-tuile-975-75);
 }
 
 .chiffre-cle__bordure {

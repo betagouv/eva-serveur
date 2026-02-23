@@ -17,7 +17,7 @@
 
   .carte-v2 {
     @media (max-width: 48rem) {
-      padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+      padding: $dsfr-spacing-5w $dsfr-spacing-2w !important;
     }
   }
 
@@ -55,12 +55,12 @@
   .structure-content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
   }
 
   .structure-info-card {
     display: flex;
-    padding: var(--Space-3W, 24px);
+    padding: $dsfr-spacing-3w;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -156,7 +156,7 @@
   .structure-parametrage-section {
     display: flex;
     flex-direction: column;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
 
     &__titre {
       @include titre-h5;

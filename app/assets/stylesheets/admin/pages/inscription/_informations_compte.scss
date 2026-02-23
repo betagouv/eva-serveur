@@ -6,13 +6,13 @@
   max-width: 49.5rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-7W, 56px);
+  gap: $dsfr-spacing-7w;
 
   @media (max-width: 48rem) {
     padding: 0 !important;
     flex-direction: column;
     align-items: center;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
 
     .informations-compte-actions {
@@ -20,7 +20,7 @@
     }
 
     .carte-v2 {
-      padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+      padding: $dsfr-spacing-5w $dsfr-spacing-2w !important;
     }
   }
 }

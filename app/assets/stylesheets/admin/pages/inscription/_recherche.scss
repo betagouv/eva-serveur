@@ -16,7 +16,7 @@
 
   .carte-v2 {
     @media (max-width: 48rem) {
-      padding: var(--Space-5W, 40px) var(--Space-2W, 16px) !important;
+      padding: $dsfr-spacing-5w $dsfr-spacing-2w !important;
     }
     .form {
       @media (max-width: 48rem) {

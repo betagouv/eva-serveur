@@ -10,7 +10,7 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
 .inscription_v2 {
   display: flex;
   flex-direction: row;
-  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+  background: var(--background-alt-blue-france);
 }
 
 .inscription_v2__content {
@@ -33,11 +33,11 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
 
     .texte-intro {
       display: flex;
-      padding: var(--Space-5W, 40px) var(--Space-2W, 16px);
+      padding: $dsfr-spacing-5w $dsfr-spacing-2w;
       padding-bottom: 0;
       flex-direction: column;
       align-items: center;
-      gap: var(--Space-3W, 24px);
+      gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
   }

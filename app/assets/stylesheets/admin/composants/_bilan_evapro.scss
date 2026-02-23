@@ -1,5 +1,5 @@
 :root {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
+  --chiffre-cle-border-color: var(--green-emeraude-main-632);
 }
 
 .bilan-eva-pro {
@@ -7,25 +7,25 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
   border: 1px solid var(--chiffre-cle-border-color);
   border-left: none;
 }
 
 .bilan-eva-pro__a-tres-bon {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-emeraude-main-632, #00A95F);
+  --chiffre-cle-border-color: var(--green-emeraude-main-632);
 }
 
 .bilan-eva-pro__b-bon {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-green-tilleul-verveine-main-707, #B7A73F);
+  --chiffre-cle-border-color: var(--green-tilleul-verveine-main-707);
 }
 
 .bilan-eva-pro__c-moyen {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-main-default-orange-terre-battue-main-645, #E4794A);
+  --chiffre-cle-border-color: var(--orange-terre-battue-main-645);
 }
 
 .bilan-eva-pro__d-mauvais {
-  --chiffre-cle-border-color: var(--light-options-illustration-color-sun-default-pink-tuile-sun-425, #A94645);
+  --chiffre-cle-border-color: var(--pink-tuile-sun-425-moon-750);
 }
 
 .bilan-eva-pro__chiffre-cle {
@@ -39,10 +39,10 @@
 .bilan-eva-pro__explication {
   flex: 1;
   display: flex;
-  padding: var(--Space-2W, 16px) var(--Space-2W, 16px) var(--Space-2W, 16px) 0;
+  padding: $dsfr-spacing-2w $dsfr-spacing-2w $dsfr-spacing-2w 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-2W, 16px);
+  gap: $dsfr-spacing-2w;
 }
 
 .bilan-eva-pro__explication p {

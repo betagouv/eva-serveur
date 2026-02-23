@@ -7,7 +7,7 @@
   max-width: 49.5rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-7W, 56px);
+  gap: $dsfr-spacing-7w;
 
   @media (max-width: 48rem) {
     padding: 0 !important;
@@ -23,7 +23,7 @@
 .page-nouveau-compte-card .carte-v2__content {
   display: flex;
   flex-direction: column;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
 }
 
 .page-nouveau-compte-section--proconnect {
@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
   align-self: stretch;
 }
 
@@ -148,17 +148,17 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-5W, 40px);
+    gap: $dsfr-spacing-5w;
     align-self: stretch;
   }
 
   .page-nouveau-compte-card .carte-v2__content {
     display: flex;
-    padding: var(--Space-5W, 40px) var(--Space-2W, 16px);
+    padding: $dsfr-spacing-5w $dsfr-spacing-2w;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
   }
 
@@ -170,7 +170,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
   }
 
@@ -178,7 +178,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--Space-3V, 12px);
+    gap: $dsfr-spacing-3v;
     align-self: stretch;
   }
 
@@ -186,7 +186,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--Space-3W, 24px);
+    gap: $dsfr-spacing-3w;
     align-self: stretch;
   }
 

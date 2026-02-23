@@ -22,7 +22,7 @@
     width: 100%;
     max-width: 100%;
     flex: 0 0 auto;
-    padding-bottom: var(--Space-5W, 40px);
+    padding-bottom: $dsfr-spacing-5w;
   }
 
   body.logged_out.page_connexion_v2 .nouvelle-session__connexion-container,
@@ -31,7 +31,7 @@
   body.logged_out .nouvelle-session__demonstration-container {
     max-width: none;
     width: 100%;
-    padding: var(--Space-3V, 12px);
+    padding: $dsfr-spacing-3v;
   }
 }
 
@@ -39,7 +39,7 @@
 
 .nouvelle-session__connexion {
   display: flex;
-  padding: 0 var(--Space-3V, 12px);
+  padding: 0 $dsfr-spacing-3v;
   flex-direction: column;
   align-items: flex-end;
   flex: 1 0 0;
@@ -54,10 +54,10 @@
 .nouvelle-session__connexion-container {
   display: flex;
   max-width: 588px;
-  padding: var(--Space-12W, 6rem) 6.375rem;
+  padding: $dsfr-spacing-12w 6.375rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
   align-self: flex-end
 }
 
@@ -93,7 +93,7 @@
   .liens-partages a {
     @include corps-de-texte-md-regular;
 
-    color: var(--light-decisions-text-text-action-high-blue-france, #000091);
+    color: var(--text-action-high-blue-france);
   }
 }
 

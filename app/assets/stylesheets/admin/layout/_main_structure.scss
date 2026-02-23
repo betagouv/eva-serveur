@@ -16,10 +16,10 @@ body.logged_in {
 body.logged_in.evapro_admin:not(.admin_dashboard) #active_admin_content #main_content_wrapper #main_content,
 body.logged_in.admin_evaluations #active_admin_content #main_content_wrapper #main_content {
   display: flex;
-  padding: var(--Space-4W, 32px) 0 var(--Space-7W, 56px) 0;
+  padding: $dsfr-spacing-4w 0 $dsfr-spacing-7w 0;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-8W, 64px);
+  gap: $dsfr-spacing-8w;
   flex: 1 0 0;
 }
 

@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: var(--Space-3W, 24px);
+  gap: $dsfr-spacing-3w;
   align-self: stretch;
-  padding: var(--Space-7W, 56px) 6.375rem;
+  padding: $dsfr-spacing-7w 6.375rem;
   border: 1px solid var(--color-border-default, #DDD);
   background: var(--color-background-default-grey, #FFF);
   overflow: hidden;

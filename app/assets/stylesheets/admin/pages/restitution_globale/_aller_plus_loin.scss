@@ -2,32 +2,32 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
 }
 
 .definitions-impacts__groupe-termes-definis {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
 
   @media print {
-    gap: var(--Space-2W, 1rem);
+    gap: $dsfr-spacing-2w;
   }
 }
 
 .focus-incoutournable {
   display: flex;
   align-items: flex-start;
-  gap: var(--Space-3W, 1.5rem);
+  gap: $dsfr-spacing-3w;
   align-self: stretch;
-  background: var(--light-decisions-background-background-alt-blue-france, #F5F5FE);
+  background: var(--background-alt-blue-france);
 }
 
 .focus-incoutournable__media {
   display: flex;
   width: var(--Grille-3-colonnes, 282px);
-  padding: var(--Space-3W, 24px);
+  padding: $dsfr-spacing-3w;
   flex-direction: column;
   align-items: flex-start;
 }
@@ -39,7 +39,7 @@
 
 .focus-incoutournable__explication {
   display: flex;
-  padding: var(--Space-3W, 24px) var(--Space-2W, 16px);
+  padding: $dsfr-spacing-3w $dsfr-spacing-2w;
   flex-direction: column;
   align-items: flex-start;
   flex: 1 0 0;
@@ -56,7 +56,7 @@
 .definitions-impacts__titre {
   @include corps-de-texte-lg-bold;
 
-  color: var(--light-decisions-text-text-title-grey, #161616);
+  color: var(--text-title-grey);
 
   @media print {
     @include titre-h5;
@@ -68,7 +68,7 @@
 
   @include corps-de-texte-sm-regular;
 
-  color: var(--light-decisions-text-text-default-grey, #3A3A3A);
+  color: var(--text-default-grey);
 
   @media print {
     @include corps-de-texte-md-regular;

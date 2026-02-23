@@ -14,13 +14,13 @@
               <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
             <% end %>
             <div class="evaluation-bilan-evapro__opco-financeur-details">
-              <% if opco.telephone %>
+              <% if opco.telephone.present? %>
                 <p><%= opco.telephone %></p>
               <% end %>
-              <% if opco.email %>
+              <% if opco.email.present? %>
                 <p><%= opco.email %></p>
               <% end %>
-              <% if opco.url %>
+              <% if opco.url.present? %>
                 <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
               <% end %>
             </div>

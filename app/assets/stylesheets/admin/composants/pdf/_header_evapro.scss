@@ -7,6 +7,14 @@
     width: 128px;
   }
 
+  .fr-header__service-title {
+    @include titre-h2;
+  }
+
+  .fr-header__service-tagline {
+    @include corps-de-texte-xl-regular;
+  }
+
   .fr-header__service::before {
     content: none;
   }
@@ -26,5 +34,11 @@
 
   .fr-header__brand::after {
     content: none;
+  }
+
+  .fr-header__service {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
   }
 }

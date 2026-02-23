@@ -8,16 +8,25 @@ evaluation_impact_general = nil
 div class: "evaluation-evapro" do
   div class: "page page__evapro adaptation-pdf" do
     if pdf
-      render(Pdf::HeaderEvaproComponent.new(date: evaluation.debutee_le,
-beneficiaire: evaluation.beneficiaire.nom))
+      render(Pdf::HeaderEvaproComponent.new(
+        date: evaluation.debutee_le,
+        beneficiaire: evaluation.beneficiaire.nom,
+        structure: restitution_globale.evaluation.structure
+      ))
     end
     div class: "page__contenu" do
-      div class: "evaluation-evapro__titre-container" do
-        h1 titre_evaluation_evapro(evaluation), class: "evaluation-evapro__titre"
-        if !pdf && pourcentage_risque
-          url = admin_evaluation_path(evaluation, format: :pdf)
-          render(BoutonDsfrComponent.new(url, type: :primary, size: :sm,
-class: "fr-icon-download-line fr-btn--icon-left").with_content("Exporter"))
+      if !pdf
+        div class: "evaluation-evapro__titre-container" do
+          h1 titre_evaluation_evapro(evaluation), class: "evaluation-evapro__titre"
+          if pourcentage_risque
+            url = admin_evaluation_path(evaluation, format: :pdf)
+            render(BoutonDsfrComponent.new(
+              url,
+              type: :primary,
+              size: :sm,
+              class: "fr-icon-download-line fr-btn--icon-left").with_content("Exporter")
+            )
+          end
         end
       end
 
@@ -57,8 +66,11 @@ class: "fr-icon-download-line fr-btn--icon-left").with_content("Exporter"))
   if diag_risques_entreprise && evaluation_impact_general.present?
     div class: "page page__evapro adaptation-pdf" do
       if pdf
-        render(Pdf::HeaderEvaproComponent.new(date: evaluation.debutee_le,
-beneficiaire: evaluation.beneficiaire.nom))
+        render(Pdf::HeaderEvaproComponent.new(
+          date: evaluation.debutee_le,
+          beneficiaire: evaluation.beneficiaire.nom,
+          structure: restitution_globale.evaluation.structure
+        ))
       end
       div class: "page__contenu" do
         render(

@@ -30,9 +30,14 @@
           </div>
           <% if @titre.present? %>
             <div class="fr-header__service">
-              <p class="fr-header__service-title" style="margin: 0;"><%= @titre %></p>
-              <% if @tagline.present? %>
-                <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
+              <div>
+                <p class="fr-header__service-title" style="margin: 0;"><%= @titre %></p>
+                <% if @tagline.present? %>
+                  <p class="fr-header__service-tagline" style="margin: 0;"><%= @tagline %></p>
+                <% end %>
+              </div>
+              <% if service_image? %>
+                <%= service_image %>
               <% end %>
             </div>
           <% end %>

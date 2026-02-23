@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class HeaderComponent < ViewComponent::Base
+  renders_one :service_image
+
   def initialize(logo: nil, logo_alt: nil, titre: nil, tagline: nil, current_compte: nil,
-actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil)
+                 actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil)
     @logo = logo
     @logo_alt = logo_alt
     @titre = titre
@@ -20,6 +22,7 @@ actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil
   end
 
   def affiche_navigation?
+    puts "show_navigation: #{@show_navigation}"
     return false if @show_navigation == false
     return true if @show_navigation == true
 

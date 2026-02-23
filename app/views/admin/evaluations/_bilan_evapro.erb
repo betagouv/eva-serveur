@@ -21,7 +21,9 @@
                 <p><%= opco.email %></p>
               <% end %>
               <% if opco.url.present? %>
-                <p><%= link_to humanize_url(opco.url), opco.url, class: "fr-link fr-link--sm", target: "_blank" %></p>
+                <p>
+                  <%= render LienComponent.new(humanize_url(opco.url), opco.url, externe: true, nouvelle_fenetre: true, class: "fr-link fr-link--sm") %>
+                </p>
               <% end %>
             </div>
           </div>

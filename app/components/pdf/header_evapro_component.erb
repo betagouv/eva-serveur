@@ -1,7 +1,17 @@
 <%= render(HeaderComponent.new(
   logo: "logo-evapro.png",
   logo_alt: "EvaPro",
-  titre: "L'illettrisme en entreprise",
+  titre: @structure.nom,
   tagline: "le #{l(@date, format: :short)} par #{@beneficiaire}",
   classes: [ "header-pdf-evapro" ]
-)) %>
+)) do |c| %>
+  <% if @opco.present? %>
+    <% c.with_service_image do %>
+      <%= image_tag(
+        cdn_for(@opco.logo.variant(:defaut)),
+        alt: @opco.nom,
+        height: 57
+      ) %>
+    <% end %>
+  <% end %>
+<% end %>

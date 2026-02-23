@@ -1,0 +1,25 @@
+active_admin_form_for [ :admin, resource ] do |f|
+  f.semantic_errors
+  f.inputs do
+    f.input :prenom
+    f.input :nom
+    f.input :email
+    f.input :telephone
+    f.input :role, as: :select, collection: collection_roles if can?(:edit_role, f.object)
+    champ_structure(f)
+    f.input :fonction, as: :select, collection: collection_fonctions
+    f.input :service_departement
+
+    if current_compte.au_moins_admin? && compte != current_compte
+      f.input :statut_validation, as: :radio
+    end
+    if peut_modifier_mot_de_passe?
+      f.input :password, hint: resource.persisted? ? t(".aide_mot_de_passe") : ""
+      f.input :password_confirmation
+    end
+  end
+  f.actions do
+    f.action :submit
+    annulation_formulaire(f)
+  end
+end

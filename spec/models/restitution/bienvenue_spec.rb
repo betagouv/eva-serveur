@@ -117,34 +117,54 @@ describe Restitution::Bienvenue do
   describe '#inclus_autopositionnement?' do
     let(:evaluation) { create :evaluation, campagne: campagne }
 
+    before do
+      allow(campagne).to receive(:questionnaire_pour).and_return(questionnaire)
+    end
+
     context 'avec le questionnaire autopositionnement' do
       let(:questionnaire) { create :questionnaire, :autopositionnement }
 
-      before do
-        allow(campagne).to receive(:questionnaire_pour).and_return(questionnaire)
-      end
-
-      it 'retourne true' do
-        expect(restitution.inclus_autopositionnement?).to be true
-      end
+      it { expect(restitution.inclus_autopositionnement?).to be true }
     end
 
     context 'avec un questionnaire sociodemographique_autopositionnement' do
       let(:questionnaire) { create :questionnaire, :sociodemographique_autopositionnement }
 
-      before do
-        allow(campagne).to receive(:questionnaire_pour).and_return(questionnaire)
-      end
+      it { expect(restitution.inclus_autopositionnement?).to be true }
+    end
 
-      it 'retourne true' do
-        expect(restitution.inclus_autopositionnement?).to be true
-      end
+    context 'avec un questionnaire sociodemographique_autopositionnement_sante' do
+      let(:questionnaire) { create :questionnaire, :sociodemographique_autopositionnement_sante }
+
+      it { expect(restitution.inclus_autopositionnement?).to be true }
     end
 
     context 'avec une autre questionnaire' do
-      it 'retourne false' do
-        expect(restitution.inclus_autopositionnement?).to be false
-      end
+      it { expect(restitution.inclus_autopositionnement?).to be false }
+    end
+  end
+
+  describe '#inclus_sante?' do
+    let(:evaluation) { create :evaluation, campagne: campagne }
+
+    before do
+      allow(campagne).to receive(:questionnaire_pour).and_return(questionnaire)
+    end
+
+    context 'avec un questionnaire sociodemographique_sante' do
+      let(:questionnaire) { create :questionnaire, :sociodemographique_sante }
+
+      it { expect(restitution.inclus_sante?).to be true }
+    end
+
+    context 'avec un questionnaire sociodemographique_autopositionnement_sante' do
+      let(:questionnaire) { create :questionnaire, :sociodemographique_autopositionnement_sante }
+
+      it { expect(restitution.inclus_sante?).to be true }
+    end
+
+    context 'avec une autre questionnaire' do
+      it { expect(restitution.inclus_sante?).to be false }
     end
   end
 

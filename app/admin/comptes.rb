@@ -2,7 +2,7 @@ ActiveAdmin.register Compte do
   menu if: proc { current_compte.structure_id.present? && can?(:read, Compte) }
   permit_params :email, :password, :password_confirmation, :role, :structure_id,
                 :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel,
-                :cgu_acceptees, :usage
+                :cgu_acceptees, :usage, :fonction, :service_departement
 
   includes :structure
 
@@ -75,27 +75,7 @@ ActiveAdmin.register Compte do
           only: :index,
           if: -> { params[:stats] && can?(:manage, Compte) }
 
-  form do |f|
-    f.inputs do
-      f.input :prenom
-      f.input :nom
-      f.input :email
-      f.input :telephone
-      f.input :role, as: :select, collection: collection_roles if can?(:edit_role, f.object)
-      champ_structure(f)
-      if current_compte.au_moins_admin? && compte != current_compte
-        f.input :statut_validation, as: :radio
-      end
-      if peut_modifier_mot_de_passe?
-        f.input :password, hint: resource.persisted? ? t(".aide_mot_de_passe") : ""
-        f.input :password_confirmation
-      end
-    end
-    f.actions do
-      f.action :submit
-      annulation_formulaire(f)
-    end
-  end
+  form partial: "form"
 
   xls(i18n_scope: %i[activerecord attributes compte], header_format: { weight: :bold }) do
     whitelist

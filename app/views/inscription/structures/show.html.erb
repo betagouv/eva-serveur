@@ -11,6 +11,10 @@
   <% content_for :title, t("inscription.structures.show.parametrage.titre") %>
   <% content_for :titre, t("inscription.structures.show.parametrage.titre") %>
   <% content_for :sous_titre, t("inscription.structures.show.parametrage.sous_titre") %>
+<% elsif etape == "usage" %>
+  <% content_for :title, t("inscription.structures.show.usage.titre") %>
+  <% content_for :titre, t("inscription.structures.show.usage.titre") %>
+  <% content_for :sous_titre, t("inscription.structures.show.usage.sous_titre") %>
 <% else %>
   <% content_for :title, t("inscription.structures.show.confirmation.titre") %>
   <% content_for :titre, t("inscription.structures.show.confirmation.titre") %>
@@ -24,6 +28,9 @@
   <% elsif etape == "parametrage" %>
     <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.parametrage.titre"), texte: t("inscription.structures.show.parametrage.sous_titre")) %>
     <%= render "form_creer" %>
+  <% elsif etape == "usage" %>
+    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.usage.titre_intro"), texte: t("inscription.structures.show.usage.texte_intro")) %>
+    <%= render "form_usage" %>
   <% else %>
     <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.confirmation.titre"), texte: t("inscription.structures.show.confirmation.sous_titre")) %>
     <%= render "form_confirmation" %>
@@ -36,6 +43,7 @@
       structure_confirmation_submit();
     <% elsif etape == "parametrage" %>
       structure_creation_parametrage_submit();
+    <% elsif etape == "usage" %>
     <% else %>
       structure_creation_confirmation_submit();
     <% end %>

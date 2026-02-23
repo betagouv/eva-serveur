@@ -1,0 +1,23 @@
+<div class="structure-content-wrapper">
+  <div class="card-usage-wrapper">
+    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "form-usage-card" } do |f| %>
+      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_BENEFICIAIRES %>
+      <%= render CardUsageComponent.new(
+        titre: t("inscription.structures.show.usage.eva.titre"),
+        description: t("inscription.structures.show.usage.eva.description"),
+        submit_value: "creer_avec_usage",
+        aria_label: t("inscription.structures.show.usage.bouton_choisir")
+      ) %>
+    <% end %>
+    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "form-usage-card" } do |f| %>
+      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_ENTREPRISES %>
+      <%= render CardUsageComponent.new(
+        titre: t("inscription.structures.show.usage.evapro.titre"),
+        description: t("inscription.structures.show.usage.evapro.description"),
+        image: "logo-evapro.png",
+        submit_value: "creer_avec_usage",
+        aria_label: t("inscription.structures.show.usage.bouton_choisir")
+      ) %>
+    <% end %>
+  </div>
+</div>

@@ -66,6 +66,14 @@ describe StructureLocale, type: :model do
 
       it { expect(structure).not_to be_eva_entreprises }
     end
+
+    context "quand le type n'est pas entreprise mais l'usage est entreprises" do
+      let(:structure) do
+        described_class.new(type_structure: "mission_locale", usage: "Eva: entreprises")
+      end
+
+      it { expect(structure).to be_eva_entreprises }
+    end
   end
 
   describe "#affecte_usage_entreprise_si_necessaire" do

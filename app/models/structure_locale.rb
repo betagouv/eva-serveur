@@ -66,7 +66,7 @@ class StructureLocale < Structure
   end
 
   def eva_entreprises?
-    type_structure == "entreprise" && usage == "Eva: entreprises"
+    usage == AvecUsage::USAGE_ENTREPRISES
   end
 
   def metabase_dashboard

@@ -56,11 +56,11 @@ describe CampagneCreateur, type: :model do
       end
     end
 
-    context "quand la structure n'est pas de type entreprise" do
+    context "quand la structure n'est pas de type entreprise et l'usage est bénéficiaires" do
       let(:structure_non_entreprise) do
         create(:structure_locale,
                type_structure: "mission_locale",
-               usage: "Eva: entreprises",
+               usage: "Eva: bénéficiaires",
                opco: opco)
       end
       let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }

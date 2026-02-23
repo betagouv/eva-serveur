@@ -57,6 +57,18 @@ fr:
         confirmation:
           titre: Structure identifiée
           sous_titre: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de la structure pour laquelle vous travaillez."
+        usage:
+          titre: "Quel est votre objectif\u202F?"
+          sous_titre: "Choisissez l'usage qui correspond le mieux à votre besoin actuel."
+          titre_intro: "Quel est votre objectif\u202F?"
+          texte_intro: "Choisissez l'usage qui correspond le mieux à votre besoin actuel. Vous pourrez faire évoluer ce choix par la suite."
+          bouton_choisir: "Choisir"
+          eva:
+            titre: "Évaluer les compétences de base des bénéficiaires"
+            description: "Accompagnez les usagers de manière adaptée. Testez la maîtrise du français et des mathématiques et valorisez les compétences professionnelles."
+          evapro:
+            titre: "Évaluer les organisations"
+            description: "Estimez les risques liés au défaut de maîtrise des compétences de base dans votre organisation. Découvrez les accompagnements proposés par votre opérateur de compétences."
         rejoindre: Rejoindre la structure
         ce_nest_pas_ma_structure: Ce n'est pas la bonne structure
         creer_structure: Créer la structure

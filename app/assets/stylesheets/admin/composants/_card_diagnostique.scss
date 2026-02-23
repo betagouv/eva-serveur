@@ -1,6 +1,6 @@
 .diagnostique {
   display: flex;
-  width: 282px;
+  width: 17.625rem;
   flex-direction: column;
   align-items: flex-start;
   border: 1px solid var(--border-default-grey);
@@ -19,13 +19,13 @@
   display: flex;
   align-items: flex-start;
   position: absolute;
-  left: 12px;
-  top: 12px;
+  left: 0.75rem;
+  top: 0.75rem;
 }
 
 .diagnostique-media__logos {
   display: flex;
-  height: 158.625px;
+  height: 9.914rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -36,14 +36,14 @@
 
 .diagnostique-media__logos-opco {
   display: flex;
-  width: 102px;
-  height: 56px;
+  width: 6.375rem;
+  height: 3.5rem;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   aspect-ratio: 51/28;
   img {
-    height: 56px;
+    height: 3.5rem;
     width: auto;
     object-fit: contain;
   }
@@ -54,29 +54,29 @@
   flex-direction: column;
   align-items: flex-end;
   position: absolute;
-  right: 12px;
-  bottom: 11.625px;
+  right: 0.75rem;
+  bottom: 0.727rem;
 }
 
 .diagnostique-media__logos-evapro-image {
   display: flex;
-  width: 51px;
-  height: 15.723px;
+  width: 3.1875rem;
+  height: 0.9827rem;
   justify-content: center;
   align-items: center;
   aspect-ratio: 51.00/15.72;
 }
 
 .diagnostique-media__logos-evapro-image-png {
-  width: 51px;
-  height: 15.723px;
+  width: 3.1875rem;
+  height: 0.9827rem;
   flex-shrink: 0;
 }
 
 .diagnostique-media__logos-evapro-generique {
   display: flex;
-  width: 102px;
-  height: 56px;
+  width: 6.375rem;
+  height: 3.5rem;
   justify-content: center;
   align-items: center;
   aspect-ratio: 51.00/15.72;
@@ -84,15 +84,15 @@
 
 .diagnostique-media__logos-evapro-generique-image {
   display: flex;
-  width: 102px;
-  height: 56px;
+  width: 6.375rem;
+  height: 3.5rem;
   justify-content: center;
   align-items: center;
   aspect-ratio: 51.00/15.72;
 }
 
 .diagnostique-media__logos-evapro-generique-image-png {
-  width: 102px;
+  width: 6.375rem;
   flex-shrink: 0;
 }
 
@@ -116,7 +116,7 @@
 .diagnostique-contenu__precision-detail {
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 0.5rem;
   align-self: stretch;
 }
 

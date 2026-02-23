@@ -58,6 +58,25 @@
     gap: $dsfr-spacing-3w;
   }
 
+  .card-usage-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 0 6.375rem;
+    justify-content: center;
+    align-items: stretch;
+    gap: $dsfr-spacing-3w;
+    align-self: stretch;
+
+    .form-usage-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-usage {
+      flex: 1;
+    }
+  }
+
   .structure-info-card {
     display: flex;
     padding: $dsfr-spacing-3w;

@@ -6,6 +6,8 @@ class Inscription::StructuresController < ApplicationController
 
   def show
     prepare_structure_si_necessaire
+    redirect_to inscription_structure_path(etape: "parametrage") if etape_usage_sans_session?
+    preremplir_parametrage_depuis_session if etape_parametrage_avec_session?
   end
 
   def update
@@ -19,7 +21,9 @@ class Inscription::StructuresController < ApplicationController
     when "confirmer_infos", "Confirmer"
       confirme_infos_structure
     when "creer", "Créer la structure", "Confirmer la création"
-      creer_nouvelle_structure
+      redirige_vers_usage_ou_creer
+    when "creer_avec_usage"
+      creer_avec_usage_choisi
     end
   end
 
@@ -77,6 +81,44 @@ class Inscription::StructuresController < ApplicationController
     end
   end
 
+  def redirige_vers_usage_ou_creer
+    if structure_params[:type_structure] != "entreprise"
+      session[:structure_params_inscription] = structure_params.to_h
+      redirect_to inscription_structure_path(etape: "usage")
+    else
+      @compte.usage = AvecUsage::USAGE_ENTREPRISES
+      creer_nouvelle_structure
+    end
+  end
+
+  def creer_avec_usage_choisi
+    session_params = recupere_session_params_inscription
+    return redirect_to inscription_structure_path(etape: "parametrage") if session_params.blank?
+    return redirige_vers_usage_avec_session(session_params) unless usage_inscription_valide?
+
+    prepare_creation_structure_avec_usage(session_params)
+    creer_nouvelle_structure
+  end
+
+  def recupere_session_params_inscription
+    session.delete(:structure_params_inscription)
+  end
+
+  def usage_inscription_valide?
+    usage = params.dig(:structure_locale, :usage).presence || params[:usage]
+    AvecUsage::USAGE.include?(usage)
+  end
+
+  def redirige_vers_usage_avec_session(session_params)
+    session[:structure_params_inscription] = session_params
+    redirect_to inscription_structure_path(etape: "usage")
+  end
+
+  def prepare_creation_structure_avec_usage(session_params)
+    @compte.usage = params.dig(:structure_locale, :usage).presence || params[:usage]
+    params[:structure_locale] = (params[:structure_locale] || {}).merge(session_params)
+  end
+
   def creer_nouvelle_structure
     ActiveRecord::Base.transaction do
       @structure = cree_structure_avec_params
@@ -121,7 +163,7 @@ class Inscription::StructuresController < ApplicationController
 
   def structure_params
     param_key = params[:structure].present? ? :structure : :structure_locale
-    params.require(param_key).permit(:nom, :type_structure, :opco_id)
+    params.require(param_key).permit(:nom, :type_structure, :opco_id, :usage)
   end
 
   def opco_id_params
@@ -137,5 +179,17 @@ class Inscription::StructuresController < ApplicationController
   def render_parametrage
     params[:etape] = "parametrage"
     render :show
+  end
+
+  def etape_usage_sans_session?
+    params[:etape] == "usage" && session[:structure_params_inscription].blank?
+  end
+
+  def etape_parametrage_avec_session?
+    params[:etape] == "parametrage" && session[:structure_params_inscription].present?
+  end
+
+  def preremplir_parametrage_depuis_session
+    @structure&.assign_attributes(session[:structure_params_inscription])
   end
 end

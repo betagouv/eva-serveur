@@ -1,6 +1,6 @@
 h1 {
   @include titre;
-  @include titre-h1;
+  @include ancien-titre-h1;
 
   color: $eva_main_blue;
   margin-bottom: 2rem;
@@ -12,7 +12,7 @@ h1 {
 
 h2 {
   @include titre;
-  @include titre-h2;
+  @include ancien-titre-h2;
 
   margin-bottom: 1rem;
 }
@@ -39,7 +39,7 @@ h5 {
 
 h6 {
   @include titre;
-  @include titre-h6;
+  @include ancien-titre-h6;
 }
 
 .body-sm {

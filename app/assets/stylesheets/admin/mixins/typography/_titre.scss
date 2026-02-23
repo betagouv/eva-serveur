@@ -178,3 +178,27 @@ $titre-breakpoint-desktop: 48.0625rem; // 769px
   border: 0;
 }
 
+// --- Ancien Titre -------------------------------------------------------------
+
+@mixin ancien-titre-h1() {
+  font-size: 2.25rem;
+  line-height: 2.813rem;
+}
+
+@mixin ancien-titre-h2() {
+  font-size: 1.5rem;
+  line-height: 1.875rem;
+}
+
+@mixin ancien-titre-h3() {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+@mixin ancien-titre-h6() {
+  font-family: $font-titre;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+}

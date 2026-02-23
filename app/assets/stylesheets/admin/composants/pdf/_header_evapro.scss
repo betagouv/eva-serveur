@@ -30,6 +30,7 @@
   .fr-header__brand {
     background: none;
     filter: none;
+    width: 100%;
   }
 
   .fr-header__brand::after {
@@ -40,5 +41,6 @@
     display: flex;
     flex: 1;
     justify-content: space-between;
+    align-items: center;
   }
 }

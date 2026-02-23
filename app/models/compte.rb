@@ -121,6 +121,10 @@ class Compte < ApplicationRecord
     save
   end
 
+  def inscription_pro_connect?
+    id_pro_connect.present?
+  end
+
   private
 
   def verifie_etat_si_structure_manquante

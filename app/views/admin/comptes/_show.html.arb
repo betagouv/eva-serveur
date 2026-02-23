@@ -28,6 +28,7 @@ div class: "mon-compte row" do
             end
           end
           row :telephone
+          row :id_pro_connect if compte.inscription_pro_connect? && current_compte.superadmin?
           row :role do
             Compte.human_enum_name(:role, compte.role)
           end
@@ -39,6 +40,10 @@ div class: "mon-compte row" do
     div class: "panel" do
       attributes_table_for compte do
         row :structure
+        row :fonction do
+          Compte.human_enum_name(:fonction, compte.fonction)
+        end
+        row :service_departement
         row :statut_validation do
           Compte.human_enum_name(:statut_validation, compte.statut_validation)
         end

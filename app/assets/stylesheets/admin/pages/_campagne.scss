@@ -89,7 +89,7 @@
 
   .nouvelle-campagne {
     .fieldset-title span {
-      @include titre-h3;
+      @include ancien-titre-h3;
       @include titre;
 
       border: none;

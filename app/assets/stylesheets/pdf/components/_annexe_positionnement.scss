@@ -52,7 +52,7 @@
   }
 
   h3 {
-    @include titre-h6;
+    @include ancien-titre-h6;
   }
 }
 
@@ -60,7 +60,7 @@
   width: 100%;
 
   .fr-alert__title {
-    @include titre-h6;
+    @include ancien-titre-h6;
 
     margin-bottom: 0;
   }

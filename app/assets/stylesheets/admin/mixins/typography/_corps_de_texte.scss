@@ -1,17 +1,17 @@
 // =============================================================================
 // Corps de texte DSFR — mixins typographiques
 // =============================================================================
-// Tailles : XL (chapô 20px), LG (texte article 18px), MD (texte standard 16px),
-//          SM (texte détail 14px), XS (texte mention 12px)
+// Tailles : XL (chapô 1.25rem), LG (texte article 1.125rem), MD (texte standard 1rem),
+//          SM (texte détail 0.875rem), XS (texte mention 0.75rem)
 // Font-family : $font-texte (variables/admin/variables/_fonts.scss)
 // =============================================================================
 
-// --- XS — Texte mention (12px, line-height 20px) -----------------------------
+// --- XS — Texte mention (0.75rem, line-height 1.25rem) -----------------------------
 
 @mixin corps-de-texte-xs-base() {
   font-family: $font-texte;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
 }
 
 @mixin corps-de-texte-xs-regular() {
@@ -51,12 +51,12 @@
   text-transform: uppercase;
 }
 
-// --- SM — Texte détail (14px, line-height 24px) -------------------------------
+// --- SM — Texte détail (0.875rem, line-height 1.5rem) -------------------------------
 
 @mixin corps-de-texte-sm-base() {
   font-family: $font-texte;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
 }
 
 @mixin corps-de-texte-sm-regular() {
@@ -88,12 +88,12 @@
   text-transform: uppercase;
 }
 
-// --- MD — Texte standard (16px, line-height 24px) -----------------------------
+// --- MD — Texte standard (1rem, line-height 1.5rem) -----------------------------
 
 @mixin corps-de-texte-md-base() {
   font-family: $font-texte;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 @mixin corps-de-texte-md-regular() {
@@ -124,12 +124,12 @@
   font-weight: 400;
 }
 
-// --- LG — Texte article (18px, line-height 28px) -------------------------------
+// --- LG — Texte article (1.125rem, line-height 1.75rem) -------------------------------
 
 @mixin corps-de-texte-lg-base() {
   font-family: $font-texte;
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 @mixin corps-de-texte-lg-regular() {
@@ -153,12 +153,12 @@
   font-weight: 600;
 }
 
-// --- XL — Chapô (20px, line-height 32px) --------------------------------------
+// --- XL — Chapô (1.25rem, line-height 2rem) --------------------------------------
 
 @mixin corps-de-texte-xl-base() {
   font-family: $font-texte;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 1.25rem;
+  line-height: 2rem;
 }
 
 @mixin corps-de-texte-xl-regular() {

@@ -175,12 +175,12 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context "quand le compte a un siret_pro_connect et doit compléter l'inscription" do
+  context "quand le compte n'a pas d'id_pro_connect et doit compléter l'inscription" do
     context "quand l'étape d'inscription est 'preinscription'" do
       let!(:compte) do
         create :compte_superadmin,
                structure: ma_structure,
-               siret_pro_connect: '13002526500013',
+               id_pro_connect: nil,
                etape_inscription: 'preinscription',
                cgu_acceptees: true
       end
@@ -195,7 +195,7 @@ describe 'Dashboard', type: :feature do
       let!(:compte) do
         create :compte_superadmin,
                structure: ma_structure,
-               siret_pro_connect: '13002526500013',
+               id_pro_connect: nil,
                etape_inscription: 'recherche_structure',
                cgu_acceptees: true
       end
@@ -210,7 +210,7 @@ describe 'Dashboard', type: :feature do
       let!(:compte) do
         create :compte_superadmin,
                structure: ma_structure,
-               siret_pro_connect: '13002526500013',
+               id_pro_connect: nil,
                etape_inscription: 'assignation_structure',
                cgu_acceptees: true
       end
@@ -222,12 +222,12 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context "quand le compte n'a pas de siret_pro_connect" do
+  context "quand le compte a un id_pro_connect" do
     let!(:compte) do
       create :compte_superadmin,
              structure: ma_structure,
-             siret_pro_connect: nil,
              etape_inscription: 'preinscription',
+             id_pro_connect: 'id_pro_connect_123',
              cgu_acceptees: true
     end
 
@@ -237,11 +237,11 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context "quand le compte a un siret_pro_connect mais l'inscription est complète" do
+  context "quand le compte a un id_pro_connect mais l'inscription est complète" do
     let!(:compte) do
       create :compte_superadmin,
              structure: ma_structure,
-             siret_pro_connect: '13002526500013',
+             id_pro_connect: '13002526500013',
              etape_inscription: 'complet',
              cgu_acceptees: true
     end

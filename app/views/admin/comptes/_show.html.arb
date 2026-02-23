@@ -41,11 +41,12 @@ div class: "mon-compte row" do
       attributes_table_for compte do
         row :structure
         row :fonction do
-          Compte.human_enum_name(:fonction, compte.fonction)
+          Compte.human_enum_name(:fonction, compte.fonction) if compte.fonction.present?
         end
         row :service_departement
         row :statut_validation do
-          Compte.human_enum_name(:statut_validation, compte.statut_validation)
+          Compte.human_enum_name(:statut_validation,
+compte.statut_validation) if compte.statut_validation.present?
         end
       end
     end

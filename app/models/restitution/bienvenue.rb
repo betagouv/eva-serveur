@@ -36,8 +36,14 @@ module Restitution
     end
 
     def inclus_autopositionnement?
-      [ Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
+      [ Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE,
+       Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT,
        Questionnaire::AUTOPOSITIONNEMENT ].include?(questionnaire)
+    end
+
+    def inclus_sante?
+      [ Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE,
+       Questionnaire::SOCIODEMOGRAPHIQUE_SANTE ].include?(questionnaire)
     end
 
     def questionnaires_questions_pour(categorie)

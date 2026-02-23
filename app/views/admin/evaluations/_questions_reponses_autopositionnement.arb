@@ -8,16 +8,16 @@ div class: "autopositionnement" do
       render partial: "donnees_sociodemographiques", locals: { categorie: "scolarite" }
     end
   end
-  if bienvenue.inclus_autopositionnement?
+  if bienvenue.inclus_sante?
     div class: "row question-standard" do
       div class: "col" do
-        render partial: "autopositionnement", locals: {
+        render partial: "sante", locals: {
           categorie: "appareils",
           questions_reponses: questions_et_reponses_standard
         }
       end
       div class: "col" do
-        render partial: "autopositionnement", locals: {
+        render partial: "sante", locals: {
           categorie: "sante",
           questions_reponses: questions_et_reponses_standard
         }

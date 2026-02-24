@@ -11,7 +11,7 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
   div class: "panel panel--avec-references" do
     div class: "row no-gutters recommandation-anlci marges-page" do
       div class: "col-auto" do
-        image_tag "logo_anlci.svg", class: "pr-5", alt: t("logo_anlci")
+        image_tag "logo/anlci.svg", class: "pr-5", alt: t("logo_anlci")
       end
       div class: "col" do
         md t("recommandation", scope: "admin.restitutions.anlci")

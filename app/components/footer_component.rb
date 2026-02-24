@@ -56,12 +56,12 @@ class FooterComponent < ViewComponent::Base
   def partenaires_par_defaut
     [
       {
-        logo: "logo_france_relance.svg",
+        logo: "logo/france_relance.svg",
         nom: I18n.t("footer.logo_france_relance"),
         url: "https://www.economie.gouv.fr/plan-national-relance-resilience-pnrr"
       },
       {
-        logo: "logo_union_europeenne.png",
+        logo: "logo/union_europeenne.png",
         nom: I18n.t("footer.logo_union_europeenne"),
         url: "https://next-generation-eu.europa.eu"
       }

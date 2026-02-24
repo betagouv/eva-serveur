@@ -36,26 +36,6 @@ actualites:, compte:, ability:)
       }
     end
 
-    private
-
-    def derniere_evaluation_complete(structure, ability)
-      parcours_type_ids =
-        ParcoursType.where(type_de_programme: "diagnostic_entreprise").select(:id)
-
-      Evaluation.accessible_by(ability)
-                .pour_structure(structure)
-                .avec_reponse
-                .where(campagnes: { parcours_type_id: parcours_type_ids })
-                .order(created_at: :desc)
-                .first
-    end
-
-    def restitution_globale_pour(evaluation)
-      @restitution_globale_pour ||= {}
-      @restitution_globale_pour[evaluation.id] ||=
-        FabriqueRestitution.restitution_globale(evaluation)
-    end
-
     def lettre_risque_pour(evaluation)
       pourcentage_risque =
         restitution_globale_pour(evaluation)
@@ -78,6 +58,26 @@ actualites:, compte:, ability:)
 
       palier = palier_score_cout(score_cout)
       palier_to_lettre(palier).upcase
+    end
+
+    private
+
+    def derniere_evaluation_complete(structure, ability)
+      parcours_type_ids =
+        ParcoursType.where(type_de_programme: "diagnostic_entreprise").select(:id)
+
+      Evaluation.accessible_by(ability)
+                .pour_structure(structure)
+                .avec_reponse
+                .where(campagnes: { parcours_type_id: parcours_type_ids })
+                .order(created_at: :desc)
+                .first
+    end
+
+    def restitution_globale_pour(evaluation)
+      @restitution_globale_pour ||= {}
+      @restitution_globale_pour[evaluation.id] ||=
+        FabriqueRestitution.restitution_globale(evaluation)
     end
   end
 end

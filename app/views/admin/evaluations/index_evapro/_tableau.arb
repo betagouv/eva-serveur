@@ -1,0 +1,37 @@
+div class: "tableau-evaluations-evapro" do
+  h2 class: "tableau-evaluations-evapro__titre" do
+    t("admin.evaluations.index_evapro.titre")
+  end
+  div class: "tableau-evaluations-evapro__texte" do
+    t("admin.evaluations.index_evapro.texte")
+  end
+
+  context.instance_eval do
+    column t("admin.evaluations.index_evapro.colonne_par"),
+sortable: "beneficiaires.nom" do |evaluation|
+      evaluation.beneficiaire&.nom
+    end
+    column t("admin.evaluations.index_evapro.colonne_date"), sortable: :created_at do |evaluation|
+      evaluation.created_at.strftime("%d/%m/%Y")
+    end
+    column t("admin.evaluations.index_evapro.colonne_taux_risque") do |evaluation|
+      lettre_risque = lettre_risque_pour(evaluation)
+      if lettre_risque.present?
+        render EvaProScoreComponent.new(active_letter: lettre_risque)
+      else
+        "-"
+      end
+    end
+    column t("admin.evaluations.index_evapro.colonne_couts") do |evaluation|
+      lettre_couts = lettre_couts_pour(evaluation)
+      if lettre_couts.present?
+        render EvaProScoreComponent.new(active_letter: lettre_couts)
+      else
+        "-"
+      end
+    end
+    column do |evaluation|
+      render partial: "admin/evaluations/index_evapro/lien", locals: { evaluation: evaluation }
+    end
+  end
+end

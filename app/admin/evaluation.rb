@@ -47,8 +47,9 @@ ActiveAdmin.register Evaluation do
          },
          if: proc { current_compte.superadmin? }
 
-  scope proc { I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true, if: proc {
- !current_compte.utilisateur_entreprise? }
+         scope proc {
+ I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true, if: proc {
+          !current_compte.utilisateur_entreprise? }
   scope proc {
           render(PastilleComponent.new(
                    couleur: "alerte",
@@ -64,7 +65,8 @@ ActiveAdmin.register Evaluation do
   end
 
   index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
-        row_class: ->(elem) { "anonyme" if elem.anonyme? } do
+        row_class: ->(elem) { "anonyme" if elem.anonyme? },
+        compte_evapro: proc { current_compte.utilisateur_entreprise? } do
     render "index", context: self
   end
 
@@ -94,13 +96,13 @@ ActiveAdmin.register Evaluation do
   sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evaluation_evapro? }
 
   sidebar " ", class: "menu-sidebar evaluation-evapro", only: :index, if: proc {
- current_compte.utilisateur_entreprise? } do
-        render partial: "admin/evaluations/index_evapro/sidebar_opco",
-              locals: {
-                opco: opco_financeur,
-                structure: structure
-              }
-  end
+    current_compte.utilisateur_entreprise? } do
+           render partial: "admin/evaluations/index_evapro/sidebar_opco",
+                 locals: {
+                   opco: opco_financeur,
+                   structure: structure
+                 }
+     end
 
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
@@ -173,6 +175,7 @@ ActiveAdmin.register Evaluation do
   controller do
     include Fichier
     before_action :disable_filters_for_pro, only: :index
+
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
@@ -234,7 +237,6 @@ ActiveAdmin.register Evaluation do
     def structure
       current_compte.structure
     end
-
     private
 
     def find_resource

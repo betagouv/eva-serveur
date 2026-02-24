@@ -1,0 +1,48 @@
+.dsfr-table-active-admin.table.index_table tbody tr {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.dsfr-table-active-admin table.index_table thead th {
+  padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+  font-weight: 700;
+  line-height: inherit;
+}
+
+.dsfr-table-active-admin table.index_table thead tr {
+  border-bottom: 1px solid var(--border-default-grey);
+}
+
+.dsfr-table-active-admin table {
+  border: 1px solid $grey-625;
+}
+
+.dsfr-table-active-admin table.index_table tbody tr {
+  border-radius: inherit;
+  box-shadow: none;
+  border-bottom: 1px solid $grey-625;
+}
+
+.dsfr-table-active-admin table.index_table tbody tr td:first-child {
+    font-weight: 600;
+    border-left: none;
+    padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+  }
+
+.dsfr-table-active-admin table.index_table tbody tr td:last-child {
+  border-right: none;
+  padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+}
+
+.dsfr-table-active-admin table.index_table tbody tr td {
+  padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+  background-image: none;
+  border-top: none;
+  border-bottom: none;
+  height: inherit;
+  line-height: inherit;
+}
+
+.dsfr-table-active-admin table thead {
+  background-color: var(--background-alt-grey);
+}

@@ -1,0 +1,33 @@
+.tableau-evaluations-evapro {
+  display: flex;
+  padding-bottom: $dsfr-spacing-3w;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: $dsfr-spacing-3w;
+
+  .tableau-evaluations-evapro__titre {
+    @include titre-h2;
+
+    color: var(--text-default-grey);
+    margin: 0;
+  }
+
+  .tableau-evaluations-evapro__texte {
+    @include corps-de-texte-sm-regular;
+
+    color: var(--text-default-grey);
+  }
+}
+
+body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wrapper #main_content {
+  gap: 0;
+  margin-right: 13.5rem;
+}
+
+.admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
+  width: 100%;
+}
+
+.admin_evaluations.index.evapro_admin #active_admin_content #sidebar {
+  margin-left: -11.938rem;
+}

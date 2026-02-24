@@ -189,7 +189,9 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def etape_usage_sans_session?
-    params[:etape] == "usage" && (!etape_usage_inscription_active? || session[:structure_params_inscription].blank?)
+    params[:etape] == "usage" && (
+      !etape_usage_inscription_active? || session[:structure_params_inscription].blank?
+    )
   end
 
   def etape_usage_inscription_active?

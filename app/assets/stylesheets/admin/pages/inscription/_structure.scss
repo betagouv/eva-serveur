@@ -77,6 +77,21 @@
     }
   }
 
+  @media (max-width: 48rem) {
+    .card-usage-wrapper {
+      display: flex;
+      padding: 0 $dsfr-spacing-2w;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+     
+
+    form {
+      margin-bottom: inherit !important;
+    }
+  }
+  }
+
   .structure-info-card {
     display: flex;
     padding: $dsfr-spacing-3w;

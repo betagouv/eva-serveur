@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Inscription::RechercheStructuresController, type: :controller do
+  render_views
+
   let(:compte) {
  create(:compte_pro_connect, etape_inscription: 'recherche_structure', structure: nil) }
 
@@ -97,11 +99,22 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
     end
 
-    context 'avec un SIRET vide' do
-      it 'affiche une erreur' do
-        patch :update, params: { siret: '' }
-        expect(flash[:error]).to be_present
+    context 'avec un SIRET invalide (format)' do
+      it 'reste sur la page et affiche une erreur sur le champ sans flash structure non trouvée' do
+        patch :update, params: { compte: { siret_pro_connect: "123" } }
         expect(response).to have_http_status(:success)
+        expect(response).not_to redirect_to(inscription_structure_path)
+        expect(flash[:error]).to be_blank
+        expect(response.body).to include("fr-message--error")
+        expect(response.body).to include("SIRET invalide.")
+      end
+    end
+
+    context 'avec un SIRET vide' do
+      it 'reste sur la page et affiche une erreur sur le champ' do
+        patch :update, params: { compte: { siret_pro_connect: "" } }
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("fr-message--error")
       end
     end
   end

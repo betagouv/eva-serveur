@@ -22,6 +22,13 @@ module ValidationSiret
     end
   end
 
+  # Execute la normalisation puis la validation SIRET sans appeler valid? sur tout le modele.
+  # Utilise par le controleur d'inscription pour valider uniquement le SIRET avant l'appel API.
+  def validate_siret_format
+    normalize_siret
+    validation_siret
+  end
+
   private
 
   def siret_column

@@ -182,6 +182,12 @@ autocomplete)
     }.join.html_safe
   end
 
+  def label_classes
+    classes = [ "fr-label" ]
+    classes << "fr-label--error" if has_errors?
+    classes.join(" ")
+  end
+
   def input_group_classes
     if is_select?
       classes = [ "fr-select-group" ]

@@ -6,20 +6,32 @@ class Inscription::RechercheStructuresController < ApplicationController
   include EtapeInscriptionHelper
 
   def show
-    @siret = params[:siret]
   end
 
   def update
-    if assigne_siret_pour_compte
+    valide_siret_et_remplir_erreurs
+    if @compte.errors[:siret_pro_connect].present?
+      render :show
+      return
+    end
+    if assigne_siret_pour_compte(@compte.siret_pro_connect)
       redirige_vers_etape_inscription(@compte)
     else
-      @siret = params[:siret]
-      flash.now[:error] = t(".erreur_structure_non_trouvee")
       render :show
     end
   end
 
   private
+
+  def valide_siret_et_remplir_erreurs
+    siret = siret_param.to_s.strip
+    @compte.siret_pro_connect = siret
+    if siret.blank?
+      @compte.errors.add(:siret_pro_connect, :invalid)
+    else
+      @compte.validate_siret_format
+    end
+  end
 
   def set_compte
     @compte = current_compte
@@ -31,12 +43,21 @@ class Inscription::RechercheStructuresController < ApplicationController
     redirect_to admin_dashboard_path
   end
 
-  def assigne_siret_pour_compte
-    siret = params[:siret]&.strip
+  def siret_param
+    params[:compte]&.dig(:siret_pro_connect).presence || params[:siret]
+  end
 
+  def assigne_siret_pour_compte(siret)
     structure = RechercheStructureParSiret.new(siret).call
 
     return false if structure.blank?
+
+    # Structure temporaire rejetee par l'API Sirene : erreur sur le champ
+    # a cette etape au lieu de laisser l'utilisateur arriver sur "Creer la structure".
+    if structure.new_record? && structure.statut_siret == false
+      @compte.errors.add(:siret_pro_connect, :invalid)
+      return false
+    end
 
     @compte.siret_pro_connect = siret
     @compte.etape_inscription = :assignation_structure

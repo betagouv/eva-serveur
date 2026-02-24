@@ -34,8 +34,7 @@ describe 'Création de compte conseiller', type: :feature do
       check("J’accepte les conditions générales d’utilisation", allow_label_click: true)
     end
 
-    it "crée un compte",
-      skip: "Test commenté car la creation de compte n'est plus gérée par le controller" do
+    it "crée un compte" do
       expect do
         click_on "S'inscrire"
       end.to change(Compte, :count).by(1)
@@ -59,8 +58,7 @@ describe 'Création de compte conseiller', type: :feature do
       fill_in :compte_password_confirmation, with: 'Pass5678'
     end
 
-    it 'donne le role admin',
-    skip: "Test commenté car la creation de compte n'est plus gérée par le controller" do
+    it 'donne le role admin' do
       click_on "S'inscrire"
       nouveau_compte = Compte.find_by email: 'monemail@eva.fr'
       expect(nouveau_compte.validation_en_attente?).to be false

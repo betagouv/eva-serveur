@@ -5,7 +5,7 @@ div class: "aide__contact" do
   end
   div class: "contact__support" do
     div class: "support__titre" do
-      text_node image_tag "eva-logo-dark.svg", class: "support__logo", alt: ""
+      text_node image_tag "logo/eva-dark.svg", class: "support__logo", alt: ""
       h4 t(".support.titre")
     end
     div do

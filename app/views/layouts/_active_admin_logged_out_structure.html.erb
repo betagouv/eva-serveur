@@ -37,7 +37,7 @@
       <%= yield :content_block %>
     <% else %>
       <div class="groupe-titres">
-        <%= image_tag "eva-logo-bleu.svg", class: "logo-eva", alt: t("active_admin.devise.login.bienvenue")%>
+        <%= image_tag "logo/eva-bleu.svg", class: "logo-eva", alt: t("active_admin.devise.login.bienvenue")%>
         <h1><%= yield :titre %></h1>
         <% if yield(:sous_titre).present? %>
           <h2><%= yield :sous_titre %></h2>

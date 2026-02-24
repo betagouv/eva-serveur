@@ -93,6 +93,15 @@ ActiveAdmin.register Evaluation do
 
   sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evaluation_evapro? }
 
+  sidebar " ", class: "menu-sidebar evaluation-evapro", only: :index, if: proc {
+ current_compte.utilisateur_entreprise? } do
+        render partial: "admin/evaluations/index_evapro/sidebar_opco",
+              locals: {
+                opco: opco_financeur,
+                structure: structure
+              }
+  end
+
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
     redirect_to request.referer
@@ -169,7 +178,7 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :comptes_externes_possibles
+                  :comptes_externes_possibles, :opco_financeur, :structure
 
     def show
       show! do |format|
@@ -216,6 +225,14 @@ ActiveAdmin.register Evaluation do
 
     before_action only: :show do
       flash.now[:evaluation_anonyme] = t(".evaluation_anonyme") if resource.anonyme?
+    end
+
+    def opco_financeur
+      @opco_financeur ||= current_compte.structure&.opco_financeur
+    end
+
+    def structure
+      current_compte.structure
     end
 
     private

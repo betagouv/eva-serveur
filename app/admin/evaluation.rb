@@ -47,13 +47,14 @@ ActiveAdmin.register Evaluation do
          },
          if: proc { current_compte.superadmin? }
 
-  scope proc { I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true
+  scope proc { I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true, if: proc {
+ !current_compte.utilisateur_entreprise? }
   scope proc {
           render(PastilleComponent.new(
                    couleur: "alerte",
                    etiquette: I18n.t("components.pastille.illettrisme_potentiel")
                  ))
-        }, :illettrisme_potentiel
+        }, :illettrisme_potentiel, if: proc { !current_compte.utilisateur_entreprise? }
 
   show do
     params[:parties_selectionnees] =

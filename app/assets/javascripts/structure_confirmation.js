@@ -93,6 +93,10 @@ function structure_creation_parametrage_submit() {
   initStructureFormLinks();
 }
 
+function structure_usage_submit() {
+  initStructureFormLinks();
+}
+
 function initStructureParametrageFormState() {
   const form = document.querySelector('form[action*="inscription/structure"]');
   if (!form) return;

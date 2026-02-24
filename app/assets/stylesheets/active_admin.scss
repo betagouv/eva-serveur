@@ -22,6 +22,7 @@
 @import 'admin/composants/filtres';
 @import 'admin/composants/panel';
 @import 'admin/composants/tables';
+@import 'admin/composants/active_admin_tableau_dsfr';
 @import 'admin/composants/forms';
 @import "admin/composants/liens";
 @import 'admin/composants/buttons';
@@ -99,6 +100,7 @@
 @import 'admin/pages/erreurs';
 @import 'admin/pages/evaluations';
 @import 'admin/pages/evaluation/sidebar';
+@import 'admin/pages/evaluation/index_evapro';
 @import 'admin/pages/inscription/informations_compte';
 @import 'admin/pages/inscription/recherche';
 @import 'admin/pages/inscription/structure';

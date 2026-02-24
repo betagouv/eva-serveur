@@ -71,6 +71,8 @@ fr:
       models:
         compte:
           attributes:
+            siret_pro_connect:
+              invalid: SIRET invalide.
             statut_validation:
               structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur autorisé
               doit_etre_en_attente_si_structure_vide: doit être 'en attente' s'il n'y a pas de structure

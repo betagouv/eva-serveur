@@ -9,7 +9,7 @@
 
 <div class="page-recherche-structure">
   <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
-  <%= form_with url: inscription_recherche_structure_path, method: :patch, local: true do |f| %>
+  <%= form_with model: @compte, url: inscription_recherche_structure_path, method: :patch, local: true do |f| %>
     <%= render CarteV2Component.new(titre: t(".titre_carte")) do %>
       <div class="fr-grid-row fr-grid-row--gutters">
         <div class="fr-col-12">
@@ -18,10 +18,16 @@
             label: t(".label_siret"),
             hint: t(".hint_siret"),
             form: f,
-            method: :siret,
-            value: @siret,
-            link_text: t(".lien_annuaire")
+            method: :siret_pro_connect,
+            link_text: t(".lien_annuaire"),
+            input_html: { id: "siret" }
           ) %>
+        </div>
+        <div class="fr-col-12">
+          <%= tag.p(class: "recherche-structure__mention") do %>
+            <%= t(".mention_support_texte") %>
+            <%= link_to t(".mention_support_email"), "mailto:#{t('.mention_support_email')}", class: "recherche-structure__mention-email" %>
+          <% end %>
         </div>
         <div class="fr-col-12">
           <div class="recherche-structure-actions">

@@ -1,5 +1,5 @@
 <div class="<%= input_group_classes %>" <%= tag.attributes(@html_options) %>>
-  <label class="fr-label" for="<%= input_id %>">
+  <label class="<%= label_classes %>" for="<%= input_id %>">
     <%= @label %><%= required_asterisk %>
     <% if @hint.present? %>
       <span class="fr-hint-text"><%= @hint %></span>

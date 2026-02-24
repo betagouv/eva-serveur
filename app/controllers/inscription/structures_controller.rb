@@ -23,7 +23,11 @@ class Inscription::StructuresController < ApplicationController
     when "creer", "Créer la structure", "Confirmer la création"
       redirige_vers_usage_ou_creer
     when "creer_avec_usage"
-      creer_avec_usage_choisi
+      if etape_usage_inscription_active?
+        creer_avec_usage_choisi
+      else
+        redirect_to inscription_structure_path(etape: "parametrage")
+      end
     end
   end
 
@@ -82,11 +86,14 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def redirige_vers_usage_ou_creer
-    if structure_params[:type_structure] != "entreprise"
+    if structure_params[:type_structure] == "entreprise"
+      @compte.usage = AvecUsage::USAGE_ENTREPRISES
+      creer_nouvelle_structure
+    elsif etape_usage_inscription_active?
       session[:structure_params_inscription] = structure_params.to_h
       redirect_to inscription_structure_path(etape: "usage")
     else
-      @compte.usage = AvecUsage::USAGE_ENTREPRISES
+      @compte.usage = AvecUsage::USAGE_BENEFICIAIRES
       creer_nouvelle_structure
     end
   end
@@ -182,7 +189,11 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def etape_usage_sans_session?
-    params[:etape] == "usage" && session[:structure_params_inscription].blank?
+    params[:etape] == "usage" && (!etape_usage_inscription_active? || session[:structure_params_inscription].blank?)
+  end
+
+  def etape_usage_inscription_active?
+    ENV["ETAPE_USAGE_INSCRIPTION"].present?
   end
 
   def etape_parametrage_avec_session?

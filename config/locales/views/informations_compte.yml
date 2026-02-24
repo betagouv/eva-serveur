@@ -21,20 +21,6 @@ fr:
         selectionner_une_option: Sélectionner une option
         label_service_departement: Service
         hint_service_departement: "Exemple : logistique, marketing, ressources humaines"
-    selection_usages:
-      show:
-        titre: Créez un compte qui vous ressemble
-        sous_titre: eva s’adapte à vos besoins professionnels
-        description: En fonction de votre choix, l’accès aux modules et aux ressources sera optimisé pour répondre à vos attentes.
-        titre_principal: Quel sera votre usage ?
-        sous_titre_principal: "Choisissez votre objectif principal :"
-        campagnes_jeu:
-          titre: Campagnes de jeu
-          description: "Identifier les besoins des personnes en difficulté : repérer les compétences à soutenir, accompagner vos bénéficiaires avec précision."
-        questionnaires:
-          titre: Questionnaires
-          description: "Mesurer les risques d’illettrisme dans votre structure : évaluer globalement les compétences «socle» dans votre organisation pour mieux orienter vos démarches."
-        bouton_continuer: Continuer ici
     structures:
       show:
         titre_intro_non_presente: Votre structure n'est pas encore présente

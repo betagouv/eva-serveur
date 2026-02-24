@@ -11,21 +11,6 @@ siret_pro_connect: "13002526500013") }
   end
 
   describe "GET show" do
-    context "quand l'étape est 'usage' et la session ne contient pas les params d'inscription" do
-      before do
-        structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
-        allow(RechercheStructureParSiret).to receive(:new).and_return(
-          instance_double(RechercheStructureParSiret, call: structure)
-        )
-      end
-
-      it "redirige vers l'étape parametrage" do
-        get :show, params: { etape: "usage" }
-
-        expect(response).to redirect_to(inscription_structure_path(etape: "parametrage"))
-      end
-    end
-
     context "quand la structure n'est pas encore préparée" do
       context "avec une structure temporaire (non persistée)" do
         before do
@@ -70,6 +55,45 @@ siret_pro_connect: "13002526500013") }
           expect(AffiliationOpcoService).to have_received(:new).with(structure_existante)
           expect(service_double).to have_received(:affilie_opcos)
           expect(response).to have_http_status(:success)
+        end
+      end
+    end
+
+    context "quand l'étape est 'usage'" do
+      context "avec le feature flip désactivé" do
+        it "redirige vers l'étape parametrage (pas d'étape usage)" do
+          get :show, params: { etape: "usage" }
+
+          expect(response).to redirect_to(inscription_structure_path(etape: "parametrage"))
+        end
+      end
+
+      context "avec le feature flip activé" do
+        before { ENV["ETAPE_USAGE_INSCRIPTION"] = "true" }
+        after { ENV.delete("ETAPE_USAGE_INSCRIPTION") }
+
+        context "sans session (params structure en session)" do
+          it "redirige vers l'étape parametrage" do
+            get :show, params: { etape: "usage" }
+
+            expect(response).to redirect_to(inscription_structure_path(etape: "parametrage"))
+          end
+        end
+
+        context "avec session (params structure en session)" do
+          before do
+            allow(RechercheStructureParSiret).to receive(:new).and_return(
+              instance_double(RechercheStructureParSiret, call: nil)
+            )
+            session[:structure_params_inscription] =
+{ "nom" => "Test", "type_structure" => "mission_locale" }
+          end
+
+          it "affiche la page de choix d'usage (200)" do
+            get :show, params: { etape: "usage" }
+
+            expect(response).to have_http_status(:success)
+          end
         end
       end
     end
@@ -170,33 +194,52 @@ siret_pro_connect: "13002526500013") }
       end
 
       context "quand le type_structure n'est pas entreprise" do
-        it "redirige vers l'étape usage et enregistre les params en session" do
-          patch :update, params: {
-            structure_locale: structure_params.merge(opco_id: opco.id),
-            commit: "Confirmer la création"
-          }
+        context "avec le feature flip étape usage activé" do
+          before { ENV["ETAPE_USAGE_INSCRIPTION"] = "true" }
+          after { ENV.delete("ETAPE_USAGE_INSCRIPTION") }
 
-          expect(response).to redirect_to(inscription_structure_path(etape: "usage"))
-          expect(session[:structure_params_inscription]).to include(
-            "nom" => "Ma Structure",
-            "type_structure" => "mission_locale"
-          )
-          expect(session[:structure_params_inscription]["opco_id"]).to eq(opco.id.to_s)
+          it "redirige vers l'étape usage et enregistre les params en session" do
+            patch :update, params: {
+              structure_locale: structure_params.merge(opco_id: opco.id),
+              commit: "Confirmer la création"
+            }
+
+            expect(response).to redirect_to(inscription_structure_path(etape: "usage"))
+            expect(session[:structure_params_inscription]).to include(
+              "nom" => "Ma Structure",
+              "type_structure" => "mission_locale"
+            )
+            expect(session[:structure_params_inscription]["opco_id"]).to eq(opco.id.to_s)
+          end
+        end
+
+        context "avec le feature flip étape usage désactivé" do
+          it "crée la structure directement avec l'usage bénéficiaires (sans étape usage)" do
+            patch :update, params: {
+              structure_locale: structure_params.merge(opco_id: opco.id),
+              commit: "Confirmer la création"
+            }
+
+            structure_creée.reload
+            expect(structure_creée.usage).to eq(AvecUsage::USAGE_BENEFICIAIRES)
+            expect(response).to redirect_to(admin_dashboard_path)
+          end
         end
       end
     end
 
     context "quand l'action est 'creer_avec_usage'" do
-      let(:params_inscription) do
-        { "nom" => "Ma Structure", "type_structure" => "mission_locale", "opco_id" => opco.id.to_s }
-      end
-      let(:structure_creée) do
-        build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
-      end
+      let(:structure_creée) {
+        build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
 
       before do
-        allow(FabriqueStructure).to receive(:cree_depuis_siret) do |siret, attrs|
-          structure_creée.assign_attributes(attrs) if attrs.present?
+        session[:structure_params_inscription] = {
+          "nom" => "Ma Structure",
+          "type_structure" => "mission_locale",
+          "opco_id" => opco.id.to_s
+        }
+        allow(FabriqueStructure).to receive(:cree_depuis_siret) do |siret, params|
+          structure_creée.assign_attributes(params) if params.present?
           structure_creée.idcc = [ "3" ] unless structure_creée.idcc.present?
           structure_creée.save!
           structure_creée.reload
@@ -204,7 +247,7 @@ siret_pro_connect: "13002526500013") }
         end
       end
 
-      context "sans session (params d'inscription manquants)" do
+      context "avec le feature flip désactivé" do
         it "redirige vers l'étape parametrage" do
           patch :update, params: {
             structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
@@ -215,40 +258,30 @@ siret_pro_connect: "13002526500013") }
         end
       end
 
-      context "avec usage Eva: bénéficiaires" do
-        before { session[:structure_params_inscription] = params_inscription }
+      context "avec le feature flip activé" do
+        before { ENV["ETAPE_USAGE_INSCRIPTION"] = "true" }
+        after { ENV.delete("ETAPE_USAGE_INSCRIPTION") }
 
-        it "crée la structure avec l'usage bénéficiaires et ne crée pas de campagnes" do
-          campagne_createur = instance_double(CampagneCreateur, cree_campagne_opco!: true)
-          allow(CampagneCreateur).to receive(:new).and_return(campagne_createur)
-
+        it "crée la structure avec l'usage bénéficiaires et redirige vers le dashboard" do
           patch :update, params: {
-            structure_locale: params_inscription.merge(usage: AvecUsage::USAGE_BENEFICIAIRES),
+            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
             commit: "creer_avec_usage"
           }
 
           structure_creée.reload
           expect(structure_creée.usage).to eq(AvecUsage::USAGE_BENEFICIAIRES)
-          expect(CampagneCreateur).not_to have_received(:new)
+          expect(response).to redirect_to(admin_dashboard_path)
         end
-      end
 
-      context "avec usage Eva: entreprises" do
-        before { session[:structure_params_inscription] = params_inscription }
-
-        it "crée la structure avec l'usage entreprises et déclenche la création de campagnes" do
-          campagne_createur = instance_double(CampagneCreateur, cree_campagne_opco!: true)
-          allow(CampagneCreateur).to receive(:new).and_return(campagne_createur)
-
+        it "crée la structure avec l'usage entreprises et redirige vers le dashboard" do
           patch :update, params: {
-            structure_locale: params_inscription.merge(usage: AvecUsage::USAGE_ENTREPRISES),
+            structure_locale: { usage: AvecUsage::USAGE_ENTREPRISES },
             commit: "creer_avec_usage"
           }
 
           structure_creée.reload
           expect(structure_creée.usage).to eq(AvecUsage::USAGE_ENTREPRISES)
-          expect(CampagneCreateur).to have_received(:new).with(structure_creée, compte)
-          expect(campagne_createur).to have_received(:cree_campagne_opco!)
+          expect(response).to redirect_to(admin_dashboard_path)
         end
       end
     end

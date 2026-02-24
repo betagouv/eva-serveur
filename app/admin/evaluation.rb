@@ -163,7 +163,7 @@ ActiveAdmin.register Evaluation do
 
   controller do
     include Fichier
-
+    before_action :disable_filters_for_pro, only: :index
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
@@ -176,6 +176,10 @@ ActiveAdmin.register Evaluation do
         format.html
         format.pdf { render_pdf }
       end
+    end
+
+    def disable_filters_for_pro
+      active_admin_config.filters = false if current_compte.utilisateur_entreprise?
     end
 
     def render_pdf

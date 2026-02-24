@@ -133,9 +133,7 @@ ActiveAdmin.register_page "Dashboard" do
     end
 
     def opco_financeur
-      return nil unless current_compte.structure.present?
-
-      @opco_financeur ||= current_compte.structure.opco
+      @opco_financeur ||= current_compte.structure&.opco_financeur
     end
   end
 end

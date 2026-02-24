@@ -69,8 +69,7 @@ describe 'Nouvelle Structure', type: :feature do
       fill_in :compte_structure_attributes_siret, with: '12345678901234'
     end
 
-    it 'créé stucture et compte',
-    skip: "Test commenté car la creation de compte n'est plus gérée par le controller"  do
+    it 'créé stucture et compte'  do
       expect do
         submit_nouvelle_structure_form
       end.to change(StructureLocale, :count)
@@ -179,8 +178,7 @@ describe 'Nouvelle Structure', type: :feature do
     end
 
 
-    it 'créé la structure avec le statut SIRET vérifié',
-    skip: "Test commenté car la creation de compte n'est plus gérée par le controller" do
+    it 'créé la structure avec le statut SIRET vérifié' do
       expect do
         submit_nouvelle_structure_form
       end.to change(StructureLocale, :count)

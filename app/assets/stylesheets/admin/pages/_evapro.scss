@@ -21,3 +21,9 @@
     align-items: flex-start;
   }
 }
+
+body.admin_evaluations.index #active_admin_content .evaluation-evapro,
+body.admin_evaluations.index #active_admin_content .evaluation-evapro .page,
+body.admin_evaluations.index #active_admin_content .evaluation-evapro .page__contenu {
+  gap: 0;
+}

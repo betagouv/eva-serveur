@@ -9,6 +9,16 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   }
 }
 
+body.admin_evaluations.index #active_admin_content:has(.evaluation-evapro) {
+  .sidebar {
+    border-left: 1px solid var(--border-default-grey);
+    width: 305px !important;
+  }
+  .menu-sidebar {
+    margin-top: 0;
+  }
+}
+
 // .show .menu-sidebar, .admin_evaluations 
 .evaluation-sidebar__container {
   display: flex;
@@ -57,7 +67,7 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   h3 {
     color: var(--text-mention-grey);
 
-    @include corps-de-texte-sm-bold;
+    @include corps-de-texte-md-bold;
   }
 
   p {

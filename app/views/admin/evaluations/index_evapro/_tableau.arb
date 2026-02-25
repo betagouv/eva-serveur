@@ -15,16 +15,16 @@ sortable: "beneficiaires.nom" do |evaluation|
       evaluation.created_at.strftime("%d/%m/%Y")
     end
     column t("admin.evaluations.index_evapro.colonne_taux_risque") do |evaluation|
-      lettre_risque = lettre_risque_pour(evaluation)
-      if lettre_risque.present?
+      if evaluation.complete?
+        lettre_risque = lettre_risque_pour(evaluation)
         render EvaProScoreComponent.new(active_letter: lettre_risque)
       else
         "-"
       end
     end
     column t("admin.evaluations.index_evapro.colonne_couts") do |evaluation|
-      lettre_couts = lettre_couts_pour(evaluation)
-      if lettre_couts.present?
+      if evaluation.complete?
+        lettre_couts = lettre_couts_pour(evaluation)
         render EvaProScoreComponent.new(active_letter: lettre_couts)
       else
         "-"

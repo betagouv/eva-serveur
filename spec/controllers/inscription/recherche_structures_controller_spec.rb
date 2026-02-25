@@ -52,6 +52,20 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
     end
 
+    context "avec un SIRET non reconnu par l'API mais existant dans EVA" do
+      let!(:structure_existante) do
+        create(:structure_locale, siret: siret, statut_siret: false)
+      end
+
+      it "assigne la structure au compte et redirige sans message d'erreur API" do
+        patch :update, params: { siret: siret }
+        compte.reload
+        expect(compte.etape_inscription).to eq("assignation_structure")
+        expect(response).to redirect_to(inscription_structure_path)
+        expect(compte.errors[:siret_pro_connect]).to be_empty
+      end
+    end
+
     context 'avec un SIRET valide et structure non existante' do
       before do
         # Mock de l'API Sirene pour que MiseAJourSiret fonctionne correctement

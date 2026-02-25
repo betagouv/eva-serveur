@@ -1,6 +1,8 @@
+# Recherche d'une structure par SIRET lors de l'embarquement.
+# Priorité : 1) recherche en base EVA, 2) appel à l'API officielle uniquement si non trouvé.
 class RechercheStructureParSiret
   def initialize(siret)
-    @siret = siret
+    @siret = normalise_siret(siret)
   end
 
   def call
@@ -15,8 +17,16 @@ class RechercheStructureParSiret
 
   private
 
+  def normalise_siret(siret)
+    return nil if siret.blank?
+
+    siret.to_s.gsub(/\s+/, "")
+  end
+
   def cherche_structure_avec_siret(siret)
-    Structure.find_by(siret: siret)
+    # En cas de doublon (même SIRET en base), on prend la première structure (créée en premier).
+    # Ce cas va etre gérer dans un prochain ticket
+    Structure.where(siret: siret).order(:id).first
   end
 
   def cree_structure_temporaire_via_api_sirene

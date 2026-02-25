@@ -80,5 +80,4 @@ class MiseAJourSiret
 
     etablissement&.dig("adresse")
   end
-
 end

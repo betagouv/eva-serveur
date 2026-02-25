@@ -13,7 +13,8 @@ ActiveAdmin.register Evaluation do
          fields: %i[nom code_beneficiaire],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "nom_asc"
+         order_by: "nom_asc",
+         if: proc { !current_compte.utilisateur_entreprise? }
   filter :campagne_compte_structure_id,
          as: :search_select_filter,
          url: proc { admin_structures_locales_path },
@@ -23,15 +24,17 @@ ActiveAdmin.register Evaluation do
          order_by: "nom_asc",
          label: proc { StructureLocale.model_name.human },
          method_model: StructureLocale,
-         if: proc { current_compte.anlci? || current_compte.administratif? }
+         if: proc {
+ current_compte.anlci? || current_compte.administratif? && !current_compte.utilisateur_entreprise? }
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },
          fields: %i[libelle code],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "libelle_asc"
-  filter :created_at
+         order_by: "libelle_asc",
+         if: proc { !current_compte.utilisateur_entreprise? }
+  filter :created_at, if: proc { !current_compte.utilisateur_entreprise? }
   filter :responsable_suivi_id,
          label: Evaluation.human_attribute_name("responsable_suivi"),
          as: :search_select_filter,
@@ -39,13 +42,14 @@ ActiveAdmin.register Evaluation do
          fields: %i[email nom prenom],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "email_asc"
+         order_by: "email_asc",
+         if: proc { !current_compte.utilisateur_entreprise? }
   filter :statut,
          as: :select,
          collection: Evaluation.statuts.map { |v, id|
            [ Evaluation.human_enum_name(:statut, v), id ]
          },
-         if: proc { current_compte.superadmin? }
+         if: proc { current_compte.superadmin? && !current_compte.utilisateur_entreprise? }
 
          scope proc {
  I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true, if: proc {
@@ -174,7 +178,6 @@ ActiveAdmin.register Evaluation do
 
   controller do
     include Fichier
-    before_action :disable_filters_for_pro, only: :index
 
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
@@ -188,10 +191,6 @@ ActiveAdmin.register Evaluation do
         format.html
         format.pdf { render_pdf }
       end
-    end
-
-    def disable_filters_for_pro
-      active_admin_config.filters = false if current_compte.utilisateur_entreprise?
     end
 
     def render_pdf

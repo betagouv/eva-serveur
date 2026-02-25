@@ -1,0 +1,17 @@
+.blank_slate_custom {
+  text-align: start;
+  gap: $dsfr-spacing-3w;
+  display: flex;
+  flex-direction: column;
+}
+
+.blank_slate_custom__titre {
+  @include titre-h2;
+
+    color: var(--text-default-grey);
+    margin: 0;
+}
+
+.blank_slate_custom__sous-titre {
+  @include corps-de-texte-md-bold;
+}

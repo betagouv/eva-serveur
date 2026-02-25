@@ -1,6 +1,10 @@
 fr:
   admin:
     evaluations:
+      blank_slate:
+        titre: "Évaluations"
+        sous_titre: "Aucune évaluation pour le moment"
+        texte: "Les évaluations réalisées au sein de votre structure apparaîtront ici."
       bilan_evapro:
         titre: "Bilan : votre situation"
         explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."

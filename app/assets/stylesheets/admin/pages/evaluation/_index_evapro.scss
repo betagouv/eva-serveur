@@ -35,3 +35,7 @@ body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wr
 .admin_evaluations.index.evapro_admin #active_admin_content #sidebar {
   margin-left: -11.938rem;
 }
+
+.admin_evaluations.index.evapro_admin #active_admin_content #sidebar #filters_sidebar_section {
+  display: none;
+}

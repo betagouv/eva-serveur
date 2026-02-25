@@ -22,18 +22,37 @@ class MiseAJourSiret
   def verifie(donnees_api)
     return false if donnees_api.blank?
 
-    siret_trouve?(donnees_api, @structure.siret)
+    etablissement = etablissement_correspondant(donnees_api)
+    return false if etablissement.blank?
+
+    if etablissement["etat_administratif"] == "F"
+      @structure.siret_ferme = true if @structure.respond_to?(:siret_ferme=)
+      return false
+    end
+
+    true
   end
 
   def met_a_jour(siret_valide, donnees_api)
     if siret_valide
       @structure.statut_siret = true
       @structure.date_verification_siret = Time.current
+      @structure.siret_ferme = false if @structure.respond_to?(:siret_ferme=)
       met_a_jour_donnees_sirene(donnees_api)
     else
       @structure.statut_siret = false
       @structure.date_verification_siret = nil
     end
+  end
+
+  def etablissement_correspondant(donnees_api)
+    siret_recherche = @structure.siret
+    resultat = donnees_api["results"]&.first
+    return nil if resultat.blank?
+
+    return resultat["siege"] if resultat.dig("siege", "siret") == siret_recherche
+
+    resultat.dig("matching_etablissements")&.find { |etab| etab["siret"] == siret_recherche }
   end
 
   def met_a_jour_donnees_sirene(donnees_api)
@@ -62,14 +81,4 @@ class MiseAJourSiret
     etablissement&.dig("adresse")
   end
 
-  def siret_trouve?(donnees, siret_recherche)
-    return false if donnees["results"].blank?
-
-    donnees["results"].any? do |resultat|
-      # Vérifier dans le siège
-      resultat.dig("siege", "siret") == siret_recherche ||
-        # Vérifier dans les établissements correspondants
-        resultat.dig("matching_etablissements")&.any? { |etab| etab["siret"] == siret_recherche }
-    end
-  end
 end

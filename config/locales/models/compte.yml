@@ -73,6 +73,7 @@ fr:
           attributes:
             siret_pro_connect:
               invalid: SIRET invalide.
+              siret_ferme: "Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure."
             statut_validation:
               structure_doit_avoir_un_admin: La structure doit avoir au moins un administrateur autorisé
               doit_etre_en_attente_si_structure_vide: doit être 'en attente' s'il n'y a pas de structure

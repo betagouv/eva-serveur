@@ -1,7 +1,7 @@
 class StructureLocale < Structure
   include AvecUsage
 
-  attr_accessor :structure_confirmee
+  attr_accessor :structure_confirmee, :siret_ferme
 
   TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[

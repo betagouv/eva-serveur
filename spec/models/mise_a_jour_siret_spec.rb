@@ -128,6 +128,46 @@ RSpec.describe MiseAJourSiret, type: :model do
       end
     end
 
+    context "quand le SIRET est trouvé mais déclaré fermé par l'API (etat_administratif F)" do
+      let(:structure) { build(:structure_locale, siret: "45132137600035") }
+      let(:donnees_api) do
+        {
+          "results" => [
+            {
+              "siren" => "451321376",
+              "nom_complet" => "CARREFOUR STATIONS SERVICE",
+              "siege" => {
+                "siret" => "45132137600019",
+                "etat_administratif" => "A"
+              },
+              "matching_etablissements" => [
+                {
+                  "siret" => "45132137600035",
+                  "etat_administratif" => "F",
+                  "adresse" => "CC GALERIE 96 AU 102 AV ST OUEN 75018 PARIS"
+                }
+              ]
+            }
+          ],
+          "total_results" => 1
+        }
+      end
+
+      before do
+        allow(client_sirene).to receive(:recherche).with("45132137600035").and_return(donnees_api)
+      end
+
+      it "met le statut SIRET à false et marque la structure comme siret_ferme pour bloquer la création" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.statut_siret).to be false
+        expect(structure.siret_ferme).to be true
+      end
+
+      it "retourne false" do
+        expect(mise_a_jour.verifie_et_met_a_jour).to be false
+      end
+    end
+
     context "quand le SIRET est valide mais sans IDCC" do
       let(:donnees_api) do
         {

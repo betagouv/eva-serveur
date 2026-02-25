@@ -99,6 +99,29 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
     end
 
+    context "avec un SIRET déclaré fermé par l'API" do
+      let(:siret_ferme) { "45132137600035" }
+
+      before do
+        allow(MiseAJourSiret).to receive(:new) do |structure|
+          mise_a_jour = instance_double(MiseAJourSiret)
+          allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
+            structure.statut_siret = false
+            structure.siret_ferme = true
+            false
+          end
+          mise_a_jour
+        end
+      end
+
+      it "reste sur la page et affiche le message d'erreur spécifique SIRET fermé" do
+        patch :update, params: { compte: { siret_pro_connect: siret_ferme } }
+        expect(response).to have_http_status(:success)
+        expect(response).not_to redirect_to(inscription_structure_path)
+        expect(response.body).to include("Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure.")
+      end
+    end
+
     context 'avec un SIRET invalide (format)' do
       it 'reste sur la page et affiche une erreur sur le champ sans flash structure non trouvée' do
         patch :update, params: { compte: { siret_pro_connect: "123" } }

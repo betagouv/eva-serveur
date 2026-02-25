@@ -55,7 +55,8 @@ class Inscription::RechercheStructuresController < ApplicationController
     # Structure temporaire rejetee par l'API Sirene : erreur sur le champ
     # a cette etape au lieu de laisser l'utilisateur arriver sur "Creer la structure".
     if structure.new_record? && structure.statut_siret == false
-      erreur = structure.respond_to?(:siret_ferme) && structure.siret_ferme ? :siret_ferme : :invalid
+      siret_ferme = structure.respond_to?(:siret_ferme) && structure.siret_ferme
+      erreur = siret_ferme ? :siret_ferme : :invalid
       @compte.errors.add(:siret_pro_connect, erreur)
       return false
     end

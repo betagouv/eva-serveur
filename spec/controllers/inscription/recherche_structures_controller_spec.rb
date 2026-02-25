@@ -118,7 +118,10 @@ describe Inscription::RechercheStructuresController, type: :controller do
         patch :update, params: { compte: { siret_pro_connect: siret_ferme } }
         expect(response).to have_http_status(:success)
         expect(response).not_to redirect_to(inscription_structure_path)
-        expect(response.body).to include("Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure.")
+        message = I18n.t(
+          "activerecord.errors.models.compte.attributes.siret_pro_connect.siret_ferme"
+        )
+        expect(response.body).to include(message)
       end
     end
 

@@ -157,7 +157,7 @@ RSpec.describe MiseAJourSiret, type: :model do
         allow(client_sirene).to receive(:recherche).with("45132137600035").and_return(donnees_api)
       end
 
-      it "met le statut SIRET à false et marque la structure comme siret_ferme pour bloquer la création" do
+      it "met le statut SIRET à false et marque siret_ferme pour bloquer la création" do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.statut_siret).to be false
         expect(structure.siret_ferme).to be true

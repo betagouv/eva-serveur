@@ -1,3 +1,18 @@
+.admin_evaluations.index.evapro_admin #active_admin_content.with_sidebar #sidebar  {
+  width: 305px;
+  border-left: 1px solid var(--border-default-grey);
+  
+  @media screen and (max-width: 854px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .sidebar_section {
+    @media screen and (max-width: 854px) {
+      display: block;
+    }
+  }
+}
 
 body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
   .sidebar {
@@ -10,10 +25,6 @@ body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) {
 }
 
 body.admin_evaluations.index #active_admin_content:has(.evaluation-evapro) {
-  .sidebar {
-    border-left: 1px solid var(--border-default-grey);
-    width: 305px !important;
-  }
   .menu-sidebar {
     margin-top: 0;
   }
@@ -26,6 +37,9 @@ body.admin_evaluations.index #active_admin_content:has(.evaluation-evapro) {
   gap: $dsfr-spacing-4w;
   padding-left: $dsfr-spacing-3w;
 
+  @media screen and (max-width: 854px) {
+    padding-right: $dsfr-spacing-3w;
+  }
 
   h3 {
     color: var(--text-default-grey);

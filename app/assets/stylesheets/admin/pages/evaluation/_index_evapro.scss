@@ -22,6 +22,10 @@
 body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wrapper #main_content {
   gap: 0;
   margin-right: 13.5rem;
+
+  @media screen and (max-width: 854px) {
+    margin-right: 0;
+  }
 }
 
 .admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {

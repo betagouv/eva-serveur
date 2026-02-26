@@ -166,3 +166,14 @@
     }
   }
 }
+
+@media (max-width: 48rem) {
+  .evaluation-evapro {
+    display: flex;
+    padding: 0 $dsfr-spacing-2w;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $dsfr-spacing-5w;
+    align-self: stretch;
+  }
+}

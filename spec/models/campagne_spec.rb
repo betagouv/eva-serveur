@@ -166,6 +166,31 @@ describe Campagne, type: :model do
 
       it { expect(campagne.code).to eq '123' }
     end
+
+    context "code postal 'non_communique' (structure SIRET sans code postal)" do
+      before do
+        allow(compte).to receive(:structure_code_postal).and_return "non_communique"
+        campagne.genere_code_unique
+      end
+
+      it "génère un code conforme (majuscules et chiffres uniquement) et la campagne est valide" do
+        expect(campagne.code).to match(/\A[A-Z0-9]+\z/)
+        expect(campagne.code).to eq "XXXNONCOMMUNIQUE"
+        expect(campagne).to be_valid
+      end
+    end
+
+    context "quand le code postal contient des caractères invalides (espaces, tirets)" do
+      before do
+        allow(compte).to receive(:structure_code_postal).and_return "75-001"
+        campagne.genere_code_unique
+      end
+
+      it "normalise le suffixe pour ne garder que majuscules et chiffres" do
+        expect(campagne.code).to match(/\A[A-Z0-9]+\z/)
+        expect(campagne.code).to eq "XXX75001"
+      end
+    end
   end
 
   describe 'validations: unicité du libellé pour une structure' do

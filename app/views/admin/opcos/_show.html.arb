@@ -19,5 +19,12 @@ attributes_table_for opco do
   row :email
   row :url
   row :url_contact
+  row :idcc do |opco|
+    if opco.idcc.any?
+      opco.idcc.join(", ")
+    else
+      "Aucun IDCC"
+    end
+  end
   row :created_at
 end

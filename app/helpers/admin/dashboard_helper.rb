@@ -8,11 +8,10 @@ actualites:, compte:, ability:)
       opco_financeur = structure&.opco_financeur
       premiere_reponse_complete =
         Evaluation.au_moins_une_reponse_pour_structure?(structure)
-      derniere_evaluation_complete =
-        derniere_evaluation_complete(structure, ability)
+      derniere_eval = derniere_evaluation_complete(structure, ability)
 
-      restitution_globale = if derniere_evaluation_complete.present?
-                              FabriqueRestitution.restitution_globale(derniere_evaluation_complete)
+      restitution_globale = if derniere_eval.present?
+                              FabriqueRestitution.restitution_globale(derniere_eval)
       end
 
       {
@@ -23,7 +22,7 @@ actualites:, compte:, ability:)
         opco: opco_financeur,
         structure: structure,
         premiere_reponse_complete: premiere_reponse_complete,
-        derniere_evaluation_complete: derniere_evaluation_complete,
+        derniere_evaluation_complete: derniere_eval,
         restitution_globale: restitution_globale
       }
     end
@@ -70,6 +69,7 @@ actualites:, compte:, ability:)
                 .pour_structure(structure)
                 .avec_reponse
                 .where(campagnes: { parcours_type_id: parcours_type_ids })
+                .where(completude: :complete)
                 .order(created_at: :desc)
                 .first
     end

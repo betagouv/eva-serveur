@@ -117,6 +117,7 @@ fr:
         risque_prefixe: Taux de risque
         couts_prefixe: Coûts
         couts_suffixe: de votre masse salariale
+        couts_non_disponible: Non disponible
         consulter_diagnostique: Consulter les résultats détaillés
       cinq_dernieres_evaluations:
         titre: Réponses collectées

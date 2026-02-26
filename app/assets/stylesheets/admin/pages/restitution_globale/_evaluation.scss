@@ -176,4 +176,53 @@
     gap: $dsfr-spacing-5w;
     align-self: stretch;
   }
+
+  .evaluation-evapro .evaluation-evapro__titre-container,
+  .evaluation-evapro .page .evaluation-evapro__titre-container,
+  .evaluation-evapro .page__contenu .evaluation-evapro__titre-container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: $dsfr-spacing-3w;
+  }
+
+  .evaluation-evapro,
+  .evaluation-evapro .page,
+  .evaluation-evapro .page__contenu {
+    gap: $dsfr-spacing-5w !important;
+  }
+
+  .mesure-chiffre-cle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $dsfr-spacing-3w;
+  }
+
+  .mesure-chiffre-cle__chiffre-cle {
+    width: 100%;
+  }
+
+  .indicateur-impact__details {
+    flex-direction: column;
+  }
+
+  .couts__colonnes {
+    flex-direction: column;
+  }
+
+  .bilan-eva-pro {
+    flex-direction: column;
+    border-left: 1px solid var(--chiffre-cle-border-color);
+  }
+
+  .bilan-eva-pro__chiffre-cle {
+    width: 100%;
+  }
+
+  .bilan-eva-pro__explication {
+    padding: $dsfr-spacing-2w;
+  }
+
+  .focus-incoutournable {
+    flex-direction: column;
+  }
 }

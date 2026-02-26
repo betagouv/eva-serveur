@@ -76,12 +76,17 @@ class Campagne < ApplicationRecord
     return if compte.blank?
 
     loop do
-      self[:code] = GenerateurAleatoire.majuscules(3) + structure_code_postal
+      self[:code] = GenerateurAleatoire.majuscules(3) + suffixe_code_campagne
       break if Campagne.where(code: self[:code]).none?
     end
   end
 
   private
+
+  def suffixe_code_campagne
+    suffixe = structure_code_postal.to_s.upcase.gsub(/[^A-Z0-9]/, "")
+    suffixe.present? ? suffixe : GenerateurAleatoire.nombres(5).to_s
+  end
 
   def configuration_inclus?
     situations_configurations.any? do |configuration|

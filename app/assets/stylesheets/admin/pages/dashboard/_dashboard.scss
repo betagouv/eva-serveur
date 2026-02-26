@@ -38,6 +38,10 @@
       align-items: stretch;
       gap: $dsfr-spacing-3w;
       align-self: stretch;
+
+      @media (max-width: 48rem) {
+        flex-direction: column;
+      }
     }
 
     .derniere-reponse-complete__diagnostique-item {
@@ -71,6 +75,17 @@
       align-items: stretch;
       align-self: stretch;
       width: 100%;
+    }
+
+    @media (max-width: 48rem) {
+      .cinq-dernieres-evaluations__tableau {
+        .fr-table .fr-table__content table {
+          thead tr th:nth-child(n + 3),
+          tbody tr td:nth-child(n + 3) {
+            display: none !important;
+          }
+        }
+      }
     }
   }
 

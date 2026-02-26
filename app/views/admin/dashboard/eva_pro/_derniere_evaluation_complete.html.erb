@@ -1,15 +1,20 @@
 <% if restitution_globale.present? && derniere_evaluation_complete.present? %>
   <% diag_risques_entreprise = restitution_globale.diag_risques_entreprise %>
-  <% synthese_impact = restitution_globale.evaluation_impact_general&.synthese %>
-  <% pourcentage_risque = diag_risques_entreprise&.synthese&.dig(:pourcentage_risque) %>
-  <% score_cout = synthese_impact&.dig(:score_cout) %>
-  <% palier_risque = pourcentage_risque ? palier_pourcentage_risque(pourcentage_risque) : nil %>
-  <% palier_cout = score_cout ? palier_score_cout(score_cout) : nil %>
+  <% evaluation_impact_general = restitution_globale.evaluation_impact_general %>
+  <% synthese_diag = diag_risques_entreprise&.partie&.synthese %>
+  <% pourcentage_risque_raw = synthese_diag&.dig("pourcentage_risque") || synthese_diag&.dig(:pourcentage_risque) || diag_risques_entreprise&.synthese&.dig(:pourcentage_risque) %>
+  <% pourcentage_risque = pourcentage_risque_raw.nil? ? nil : pourcentage_risque_raw.to_i %>
+  <% synthese_impact = evaluation_impact_general&.synthese %>
+  <% synthese_impact_partie = evaluation_impact_general&.partie&.synthese %>
+  <% score_cout = synthese_impact&.dig(:score_cout) || synthese_impact_partie&.dig("score_cout") || synthese_impact_partie&.dig(:score_cout) %>
+  <% palier_risque = pourcentage_risque.present? ? palier_pourcentage_risque(pourcentage_risque) : nil %>
+  <% palier_cout = score_cout.present? ? palier_score_cout(score_cout.to_s.to_sym) : nil %>
   <% palier_situation = diag_risques_entreprise&.palier %>
-  <% contenu_cout = synthese_impact.present? ? contenu_cout(synthese_impact) : nil %>
+  <% synthese_pour_cout = (synthese_impact || synthese_impact_partie&.symbolize_keys || {}).merge(score_cout: score_cout) %>
+  <% contenu_cout = score_cout.present? ? contenu_cout(synthese_pour_cout) : nil %>
+  <% afficher_bloc = palier_risque.present? && palier_situation.present? %>
 
-  <% if palier_risque.present? && palier_cout.present? && palier_situation.present? &&
-        contenu_cout.present? %>
+  <% if afficher_bloc %>
     <section class="derniere-reponse-complete section-tableau-bord-eva-pro">
       <h3 class="derniere-reponse-complete__titre">
         <%= t("admin.dashboard.derniere_reponse_complete.titre") %>
@@ -25,14 +30,24 @@
             chiffre: "#{pourcentage_risque} %"
           ) %>
         </div>
-        <div class="derniere-reponse-complete__diagnostique-item">
-          <%= render ChiffreCleComponent.new(
-            palier: palier_cout,
-            prefixe: t("admin.dashboard.derniere_reponse_complete.couts_prefixe"),
-            chiffre: contenu_cout[:titre],
-            suffixe: t("admin.dashboard.derniere_reponse_complete.couts_suffixe")
-          ) %>
-        </div>
+        <% if palier_cout.present? && contenu_cout.present? %>
+          <div class="derniere-reponse-complete__diagnostique-item">
+            <%= render ChiffreCleComponent.new(
+              palier: palier_cout,
+              prefixe: t("admin.dashboard.derniere_reponse_complete.couts_prefixe"),
+              chiffre: contenu_cout[:titre],
+              suffixe: t("admin.dashboard.derniere_reponse_complete.couts_suffixe")
+            ) %>
+          </div>
+        <% else %>
+          <div class="derniere-reponse-complete__diagnostique-item">
+            <%= render ChiffreCleComponent.new(
+              palier: "C - Moyen",
+              prefixe: t("admin.dashboard.derniere_reponse_complete.couts_prefixe"),
+              chiffre: t("admin.dashboard.derniere_reponse_complete.couts_non_disponible")
+            ) %>
+          </div>
+        <% end %>
         <div class="derniere-reponse-complete__diagnostique-item">
           <%= render ChiffreCleComponent.new(
             palier: palier_situation,

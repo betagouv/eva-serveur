@@ -100,8 +100,12 @@ RSpec.describe Admin::DashboardHelper do
     let(:ability) { Ability.new(compte) }
     let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
     let(:campagne) { create(:campagne, compte: compte, parcours_type: parcours_type) }
-    let(:evaluation_old) { create(:evaluation, campagne: campagne, created_at: 2.days.ago) }
-    let(:evaluation_new) { create(:evaluation, campagne: campagne, created_at: 1.day.ago) }
+    let(:evaluation_old) do
+      create(:evaluation, campagne: campagne, created_at: 2.days.ago, completude: :incomplete)
+    end
+    let(:evaluation_new) do
+      create(:evaluation, campagne: campagne, created_at: 1.day.ago, completude: :complete)
+    end
 
     before do
       allow(Evaluation).to receive(:accessible_by).with(ability).and_return(Evaluation)
@@ -116,7 +120,7 @@ RSpec.describe Admin::DashboardHelper do
     end
 
     context "avec plusieurs evaluations repondues" do
-      it "retourne la plus recente" do
+      it "retourne la plus recente parmi celles dont la completude est complete" do
         result = helper.send(:derniere_evaluation_complete, structure, ability)
 
         expect(result).to eq(evaluation_new)

@@ -15,7 +15,13 @@
       <p class="bloc-opco-entreprise__nom"><%= structure.nom %></p>
     </div>
     <% if structure.is_a?(StructureLocale) %>
-      <%= render BoutonDsfrComponent.new(admin_structure_locale_path(structure, anchor: "bloc-membres"), type: :tertiary, size: :sm) do %>
+      <%= render BoutonDsfrComponent.new(
+        "#",
+        type: :tertiary,
+        size: :sm,
+        "data-fr-opened": "false",
+        "aria-controls": "fr-modal-invitation-#{structure.id}"
+      ) do %>
         <%= t("admin.dashboard.sidebar.opco_entreprise.inviter") %>
       <% end %>
     <% end %>

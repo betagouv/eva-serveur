@@ -10,8 +10,12 @@
       <p class="bienvenue-entreprise__texte">
         <%= t("admin.dashboard.bienvenue_entreprise.intro_apres_premiere_reponse_paragraphe_2") %>
       </p>
-      <%= render BoutonDsfrComponent.new(admin_structure_locale_path(structure, anchor: "bloc-membres"),
-                                         type: :primary) do %>
+      <%= render BoutonDsfrComponent.new(
+        "#",
+        type: :primary,
+        "data-fr-opened": "false",
+        "aria-controls": "fr-modal-invitation-#{structure.id}"
+      ) do %>
         <%= t("admin.dashboard.bienvenue_entreprise.inviter_collegues_bouton") %>
       <% end %>
     </div>

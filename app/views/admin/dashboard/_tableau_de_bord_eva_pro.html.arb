@@ -47,6 +47,10 @@ premiere_reponse_complete: premiere_reponse_complete }
   end
 end
 
+if structure.is_a?(StructureLocale)
+  render partial: "admin/structures/modal_invitation", locals: { structure: structure }
+end
+
 if !current_compte.cgu_acceptees?
   render "modal_confirmation_cgu"
 elsif comptes_en_attente.present? && can?(:autoriser, Compte)

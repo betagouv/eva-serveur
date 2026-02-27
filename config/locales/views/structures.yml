@@ -23,7 +23,19 @@ fr:
         titre: Membres de la structure
         invitation: |
           Pour inviter une personne à rejoindre cette structure,
-          vous pouvez lui envoyer le lien suivant :
+          vous pouvez lui envoyer une invitation\u00a0:
+        envoyer_invitation: Envoyer une invitation
+        invitation_envoyee: Invitation envoyée à %{email}.
+        invitation_non_autorisee: Vous n'êtes pas autorisé à envoyer une invitation pour cette structure.
+        email_invalide: Veuillez saisir une adresse e-mail valide.
+        modal:
+          titre: Inviter quelqu’un
+          description: Saisissez ou collez une adresse e-mail ci-dessous pour inviter un nouveau membre à votre structure. Un e-mail d’invitation lui sera directement envoyé.
+          email_label: Adresse e-mail
+          message_label: Message (optionnel)
+          message_hint: Ajouter une note à votre message
+          copier_lien: Copier le lien d'invitation
+          envoyer: Envoyer l'invitation
         voir_membres: Voir la liste
       mes_campagnes:
         voir: Voir

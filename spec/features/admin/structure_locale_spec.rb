@@ -32,6 +32,21 @@ role: :conseiller
           expect(page).to have_content message
         end
       end
+
+      describe "invitation d'un collègue" do
+        it "affiche la modale d'invitation et envoie la demande" do
+          expect(page).to have_link("Envoyer une invitation")
+          expect(page).to have_selector("*", text: "Inviter quelqu’un", visible: :all)
+
+          fill_in "invitation_email", with: "invite@eva.fr", visible: :all
+          fill_in "invitation_message_#{structure.id}", with: "Bienvenue dans l'équipe.",
+visible: :all
+
+          find("button", text: "Envoyer l'invitation", visible: :all).click
+
+          expect(page).to have_content("Invitation envoyée à invite@eva.fr.")
+        end
+      end
     end
 
     describe 'create' do

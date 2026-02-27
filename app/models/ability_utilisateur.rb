@@ -126,20 +126,32 @@ compte_id: compte.id
   end
 
   def droit_structure(compte)
-    if compte.validation_acceptee?
-      structure_ids = compte.admin? ? compte.structure.subtree_ids : compte.structure_id
-      can :read, Structure, id: structure_ids
-    end
-    if compte.admin?
-      structure_ids = compte.structure.subtree_ids
-      can :update, Structure, id: structure_ids
-    end
+    droit_structure_lecture_et_update(compte)
+    droit_structure_invitation(compte)
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
     return if compte.structure_id.present?
 
     can :read, ActiveAdmin::Page, name: "recherche_structure",
                                   namespace_name: "admin"
     can :create, StructureLocale
+  end
+
+  def droit_structure_lecture_et_update(compte)
+    if compte.validation_acceptee?
+      structure_ids = compte.admin? ? compte.structure.subtree_ids : compte.structure_id
+      can :read, Structure, id: structure_ids
+    end
+    return unless compte.admin?
+
+    structure_ids = compte.structure.subtree_ids
+    can :update, Structure, id: structure_ids
+  end
+
+  def droit_structure_invitation(compte)
+    return unless (compte.admin? || compte.conseiller?) && compte.structure_id.present?
+
+    structure_ids = compte.admin? ? compte.structure.subtree_ids : [ compte.structure_id ]
+    can :envoyer_invitation, StructureLocale, id: structure_ids
   end
 
   def droit_actualite(compte)

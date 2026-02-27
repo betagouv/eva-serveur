@@ -107,6 +107,7 @@ describe Ability do
       let!(:structure) { create :structure_locale }
 
       it { expect(subject).to be_able_to(:destroy, structure) }
+      it { expect(subject).to be_able_to(:envoyer_invitation, structure) }
 
       context 'avec un compte rattaché' do
         let!(:compte) { create :compte, structure: structure }
@@ -223,6 +224,11 @@ describe Ability do
       it do
         expect(subject).to be_able_to(:read, structure_fille)
         expect(subject).to be_able_to(:update, structure_fille)
+      end
+
+      it 'peut envoyer une invitation pour sa structure et pour les structures filles' do
+        expect(subject).to be_able_to(:envoyer_invitation, compte.structure)
+        expect(subject).to be_able_to(:envoyer_invitation, structure_fille)
       end
     end
 
@@ -497,6 +503,20 @@ describe Ability do
         expect(subject).not_to be_able_to(:verifier, mon_collegue)
         expect(subject).not_to be_able_to(:autoriser, mon_collegue)
         expect(subject).not_to be_able_to(:refuser, mon_collegue)
+      end
+    end
+
+    context "peut envoyer une invitation uniquement pour sa structure" do
+      let(:ma_structure) { create :structure_locale, :avec_admin }
+      let(:compte) { create :compte_conseiller, structure: ma_structure }
+      let(:autre_structure) { create :structure_locale, :avec_admin }
+
+      it "peut envoyer une invitation pour sa propre structure" do
+        expect(subject).to be_able_to(:envoyer_invitation, ma_structure)
+      end
+
+      it "ne peut pas envoyer une invitation pour une autre structure" do
+        expect(subject).not_to be_able_to(:envoyer_invitation, autre_structure)
       end
     end
   end

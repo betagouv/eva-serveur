@@ -25,6 +25,10 @@
   .fr-header__navbar {
     margin-right: 0;
   }
+
+  .fr-header__body-row {
+    margin: 0 !important;
+  }
 }
 // En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
 // Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.

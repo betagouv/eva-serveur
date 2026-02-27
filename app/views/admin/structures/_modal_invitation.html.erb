@@ -1,0 +1,67 @@
+<% id_modal = "fr-modal-invitation-#{structure.id}" %>
+<% lien_invitation = new_compte_registration_url(structure_id: structure.id) %>
+<% form_id = "invitation-form-#{structure.id}" %>
+
+<%= dsfr_modal(
+  title: t("admin.structures.membres.modal.titre"),
+  html_attributes: { id: id_modal, class: "fr-modal-invitation evapro_admin" }
+) do |component| %>
+  <div class="contenu-modale">
+    <div class="contenu">
+      <%= form_with url: envoyer_invitation_admin_structure_locale_path(structure),
+                    method: :post,
+                    local: true,
+                    scope: :invitation,
+                    html: { id: form_id } do |f| %>
+        <p class="invitation-modal-description">
+          <%= t("admin.structures.membres.modal.description") %>
+        </p>
+
+        <%= render InputComponent.new(
+          id: "invitation_email_#{structure.id}",
+          form: f,
+          method: :email,
+          type: "email",
+          label: t("admin.structures.membres.modal.email_label"),
+          required: true
+        ) %>
+
+        <div class="fr-input-group">
+          <label class="fr-label" for="invitation_message_<%= structure.id %>">
+            <%= t("admin.structures.membres.modal.message_label") %>
+            <span class="fr-hint-text"><%= t("admin.structures.membres.modal.message_hint") %></span>
+          </label>
+          <%= f.text_area :message,
+                          id: "invitation_message_#{structure.id}",
+                          class: "fr-input",
+                          rows: 4 %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% component.with_button do %>
+    <%= render BoutonDsfrComponent.new(
+      t("admin.structures.membres.modal.envoyer"),
+      type: :primary,
+      tag: :submit,
+      form: form_id
+    ) do %>
+      <span class="fr-icon-send-plane-fill" aria-hidden="true"></span>
+      <%= t("admin.structures.membres.modal.envoyer") %>
+    <% end %>
+  <% end %>
+
+  <% component.with_button do %>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      type: :tertiary,
+      tag: :button,
+      class: "copier-coller",
+      data: { clipboard_text: lien_invitation }
+    ) do %>
+      <span class="fr-icon-links-fill" aria-hidden="true"></span>
+      <%= t("admin.structures.membres.modal.copier_lien") %>
+    <% end %>
+  <% end %>
+<% end %>

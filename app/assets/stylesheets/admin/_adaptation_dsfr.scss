@@ -245,6 +245,67 @@ body.logged_out #wrapper .fr-modal__content ul li,
   background: var(--background-raised-grey-hover);
 }
 
+.fr-modal-invitation {
+  .fr-modal__body {
+    width: 49.5rem;
+  }
+
+  @media (max-width: 48rem) {
+    .fr-modal__body {
+      width: 100%;
+    }
+  }
+
+  .fr-modal__title {
+    @include titre-h4;
+
+    color: var(--text-title-grey);
+  }
+
+  .contenu-modale {
+    display: flex;
+    padding: 1rem 0 6.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .contenu {
+    display: flex;
+    padding-bottom: 4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+  }
+
+  .invitation-modal-description {
+    @include corps-de-texte-md-regular;
+
+    color: var(--text-label-grey);
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  .fr-modal__footer {
+    display: flex;
+    width: 100%;
+    max-width: 49.5rem;
+    padding: 2rem 2rem 2rem 0;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--border-default-grey);
+    background: var(--background-lifted-grey);
+  }
+
+  .fr-modal__footer .fr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
 body.logged_in:not(.evapro_admin) .fr-btn {
   @include grand-bouton;
   @include bouton-primaire;

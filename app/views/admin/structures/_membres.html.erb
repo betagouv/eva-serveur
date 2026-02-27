@@ -1,4 +1,3 @@
-<% url = new_compte_registration_url(structure_id: resource.id) %>
 <div id="bloc-membres" class="fr-mt-8v">
   <div class="titre-panel-avec-bouton">
     <h3><%= t(".titre") %></h3>
@@ -11,10 +10,17 @@
           <%= md t(".invitation") %>
         </div>
         <div>
-          <%= render BoutonCopierComponent.new(libelle: I18n.t("actions.copier_url"), texte: url, style: "white-space: nowrap") %>
+          <%= render BoutonDsfrComponent.new(
+            "#",
+            type: :primary,
+            "data-fr-opened": "false",
+            "aria-controls": "fr-modal-invitation-#{resource.id}"
+          ) do %>
+            <%= t(".envoyer_invitation") %>
+          <% end %>
         </div>
       </div>
-      <a class="panel-invitation-lien" target="_blank" href="<%= url %>"><%= url %></a>
     </div>
+    <%= render "admin/structures/modal_invitation", structure: resource %>
   <% end %>
 </div>

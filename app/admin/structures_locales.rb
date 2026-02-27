@@ -80,6 +80,33 @@ ActiveAdmin.register StructureLocale do
     render partial: "admin/structures/show", locals: { structure: resource }
   end
 
+  member_action :envoyer_invitation, method: :post do
+    unless compte_autorise_pour_invitation?
+      redirect_back fallback_location: admin_structure_locale_path(resource),
+                    alert: I18n.t("admin.structures.membres.invitation_non_autorisee")
+      next
+    end
+
+    email = invitation_params[:email].to_s.strip
+    message_personnalise = invitation_params[:message].to_s.strip
+
+    unless email.match?(URI::MailTo::EMAIL_REGEXP)
+      redirect_back fallback_location: admin_structure_locale_path(resource),
+                    alert: I18n.t("admin.structures.membres.email_invalide")
+      next
+    end
+
+    StructureMailer.with(
+      invitant: current_compte,
+      structure: resource,
+      email_destinataire: email,
+      message_personnalise: message_personnalise
+    ).invitation_structure.deliver_later
+
+    redirect_back fallback_location: admin_structure_locale_path(resource),
+                  notice: I18n.t("admin.structures.membres.invitation_envoyee", email: email)
+  end
+
   form partial: "form"
 
   controller do
@@ -120,6 +147,28 @@ notice: "Structure mise à jour avec succès"
     end
 
     private
+
+    def invitation_params
+      params.fetch(:invitation, ActionController::Parameters.new).permit(:email, :message)
+    end
+
+    def compte_autorise_pour_invitation?
+      return true if current_compte.superadmin?
+      return false if current_compte.structure.blank?
+
+      structure_ids = structure_ids_autorises_pour_invitation
+      compte_role_autorise = current_compte.admin? || current_compte.conseiller?
+
+      compte_role_autorise && structure_ids.include?(resource.id)
+    end
+
+    def structure_ids_autorises_pour_invitation
+      if current_compte.admin?
+        current_compte.structure.subtree_ids
+      else
+        [ current_compte.structure_id ]
+      end
+    end
 
     def sauvegarde_et_cree_campagne
       ActiveRecord::Base.transaction do

@@ -1,5 +1,14 @@
 fr:
   structure_mailer:
+    invitation_structure:
+      objet: Vous êtes invité(e) à rejoindre %{structure}
+      corps: |
+        ### Bonjour,
+
+        %{invitant} vous invite à rejoindre %{structure} sur EVA.
+      cta: |
+        Pour accepter l’invitation et accéder à la structure, cliquez sur le lien ci-dessous\u00a0:
+      bouton: Rejoindre la structure
     nouvelle_structure:
       objet: Création de « %{structure} »
       corps: |

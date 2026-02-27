@@ -1,0 +1,17 @@
+<%= md t(".corps",
+         invitant: @invitant.display_name,
+         structure: @structure.display_name) %>
+
+<% if @message_personnalise.present? %>
+  <p><%= @message_personnalise %></p>
+<% end %>
+
+<%= md t(".cta") %>
+
+<p>
+  <a href="<%= @lien_invitation %>" target="_blank" class="bouton"><%= t(".bouton") %></a>
+</p>
+
+<p>
+  <a href="<%= @lien_invitation %>" target="_blank"><%= @lien_invitation %></a>
+</p>

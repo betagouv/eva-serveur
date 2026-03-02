@@ -304,6 +304,18 @@ body.logged_out #wrapper .fr-modal__content ul li,
     align-items: center;
     gap: 0.5rem;
   }
+
+  .fr-modal__footer .fr-btn--primary:not(.disabled):hover,
+  .fr-modal__footer button.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .disabled):hover {
+    background-color: $blue-france-sun-113-hover;
+    border-color: $blue-france-sun-113-hover;
+  }
+
+  .fr-modal__footer .fr-btn--primary:not(.disabled):active,
+  .fr-modal__footer button.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .disabled):active {
+    background-color: $blue-france-sun-113-active;
+    border-color: $blue-france-sun-113-active;
+  }
 }
 
 body.logged_in:not(.evapro_admin) .fr-btn {

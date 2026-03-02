@@ -13,7 +13,7 @@ class Structure < ApplicationRecord
   alias structure_referente parent
   alias structure_referente= parent=
 
-  attr_accessor :validation_inscription
+  attr_accessor :validation_inscription, :current_ability
 
   validates :nom, presence: true
   validates :nom, uniqueness: {
@@ -22,7 +22,7 @@ class Structure < ApplicationRecord
   }
   validates :siret, numericality: { only_integer: true, allow_blank: true }
   validates :siret, presence: true, on: :create
-  validates :siret, uniqueness: true, allow_blank: true, unless: -> { errors[:siret].any? }
+  validate :siret_uniqueness_unless_superadmin
   validate :ne_peut_pas_supprimer_siret
   validate :doit_avoir_un_opco, if: :validation_inscription
 
@@ -86,6 +86,14 @@ class Structure < ApplicationRecord
   scope :structures_locales, -> { where(type: StructureLocale.name) }
 
   alias_attribute :display_name, :nom
+
+  def siret_uniqueness_unless_superadmin
+    return if siret.blank?
+    return if errors[:siret].any?
+    return if current_ability&.can?(:bypass_siret_uniqueness, self)
+
+    errors.add(:siret, :taken) if Structure.where.not(id: id).exists?(siret: siret)
+  end
 
   def eva_entreprises?
     false

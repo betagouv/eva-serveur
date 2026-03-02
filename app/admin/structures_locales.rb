@@ -122,6 +122,7 @@ ActiveAdmin.register StructureLocale do
 
     def create
       @structure_locale = StructureLocale.new(permitted_params[:structure_locale])
+      @structure_locale.current_ability = current_ability
 
       if sauvegarde_et_cree_campagne
         if current_compte.structure.blank?
@@ -136,6 +137,7 @@ ActiveAdmin.register StructureLocale do
 
     def update
       @structure_locale = resource
+      @structure_locale.current_ability = current_ability
 
       if @structure_locale.update(permitted_params[:structure_locale])
         AffiliationOpcoService.new(@structure_locale).affilie_opcos

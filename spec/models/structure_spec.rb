@@ -529,6 +529,35 @@ describe Structure, type: :model do
         end
       end
     end
+
+    context 'quand le bypass est activé via current_ability' do
+      let!(:structure_existante) do
+        structure = build(:structure, siret: '12345678901234')
+        structure.save(validate: false)
+        structure
+      end
+
+      let(:nouvelle_structure) { build(:structure, siret: '12345678901234') }
+
+      before do
+        stub_ability = instance_double(Ability)
+        allow(stub_ability).to receive(:can?).with(:bypass_siret_uniqueness,
+                                                   nouvelle_structure).and_return(true)
+
+        nouvelle_structure.current_ability = stub_ability
+        nouvelle_structure.valid?
+      end
+
+
+      it 'ignore la validation d’unicité et ne renvoie pas d’erreur :taken' do
+        message_taken = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
+        expect(nouvelle_structure.errors[:siret]).not_to include(message_taken)
+      end
+
+      it 'la structure reste valide' do
+        expect(nouvelle_structure).to be_valid
+      end
+    end
   end
 
   describe '#admins' do

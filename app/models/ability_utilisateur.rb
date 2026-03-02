@@ -25,7 +25,10 @@ class AbilityUtilisateur
   private
 
   def droits_superadmin(compte)
-    can :manage, :all if compte.superadmin?
+    if compte.superadmin?
+      can :manage, :all
+      can :bypass_uniqueness_siret, Structure
+    end
   end
 
   def droit_campagne(compte)

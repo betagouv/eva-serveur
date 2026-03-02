@@ -99,14 +99,31 @@ visible: :all
         expect(structure.opco).to eq(opco)
         expect(Campagne.count).to eq 1
       end
+
+      it 'permet de créer une structure avec un même SIRET deja affecté' do
+        create :structure_locale, siret: '12345678901234'
+        visit new_admin_structure_locale_path
+
+        fill_in :structure_locale_nom, with: 'Nouvelle structure'
+        select 'Mission locale'
+        fill_in :structure_locale_code_postal, with: '75012'
+        fill_in :structure_locale_siret, with: '12345678901234'
+        click_on 'Créer une structure'
+
+        nouvelle_structure = Structure.order(:created_at).last
+        expect(nouvelle_structure.nom).to eq 'Nouvelle structure'
+        expect(nouvelle_structure.siret).to eq '12345678901234'
+      end
     end
 
     describe 'modification' do
       before do
-        structure = create :structure_locale
+        create :structure_locale, siret: '12345678901234'
+        structure = create :structure_locale, siret: '12345678901225'
         visit edit_admin_structure_locale_path(structure)
         fill_in :structure_locale_nom, with: 'Captive'
         select 'Mission locale'
+        fill_in :structure_locale_siret, with: '12345678901234'
         fill_in :structure_locale_code_postal, with: '92100'
         click_on 'Modifier'
       end
@@ -116,6 +133,32 @@ visible: :all
         expect(structure.nom).to eq 'Captive'
         expect(structure.type_structure).to eq 'mission_locale'
         expect(structure.code_postal).to eq '92100'
+      end
+    end
+  end
+
+  describe 'en tant que admin' do
+    let!(:structure) { create :structure_locale, siret: '12345678901234' }
+    let!(:compte_admin) { create :compte_admin, structure: structure }
+
+    before { connecte(compte_admin) }
+
+    describe 'create' do
+      it 'ne permet pas de créer une structure avec un même SIRET deja affecté' do
+        visit new_admin_structure_locale_path
+
+        expect(page).to have_content "Vous n'êtes pas autorisé à exécuter cette action"
+      end
+    end
+
+    describe 'update' do
+      it 'ne permet pas de modifier une structure avec un même SIRET deja affecté' do
+        create :structure_locale, siret: '12345678901212'
+        visit edit_admin_structure_locale_path(structure)
+        fill_in :structure_locale_siret, with: '12345678901212'
+        click_on 'Modifier'
+
+        expect(page).to have_content "Ce SIRET est déjà utilisé"
       end
     end
   end

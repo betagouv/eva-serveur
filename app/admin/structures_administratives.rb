@@ -30,5 +30,29 @@ ActiveAdmin.register StructureAdministrative do
     def trouve_campagnes
       @campagnes = Campagne.de_la_structure(resource)
     end
+
+    def create
+      @structure_administrative = StructureAdministrative.new(
+          permitted_params[:structure_administrative]
+        )
+      @structure_administrative.current_ability = current_ability
+
+      if @structure_administrative.save
+        redirect_to admin_structure_administrative_path(@structure_administrative)
+      else
+        render :new
+      end
+    end
+
+    def update
+      @structure_administrative = resource
+      @structure_administrative.current_ability = current_ability
+
+      if @structure_administrative.update(permitted_params[:structure_administrative])
+        redirect_to admin_structure_administrative_path(@structure_administrative)
+      else
+        render :edit
+      end
+    end
   end
 end

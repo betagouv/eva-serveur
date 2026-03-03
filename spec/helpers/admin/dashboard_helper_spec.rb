@@ -189,4 +189,74 @@ RSpec.describe Admin::DashboardHelper do
       end
     end
   end
+
+  describe "#afficher_lettre_risque" do
+    let(:evaluation) { instance_double(Evaluation) }
+
+    context "quand la lettre est présente et evaluation complète" do
+      it "render le composant" do
+        allow(helper).to receive(:lettre_risque_pour).and_return("A")
+        allow(evaluation).to receive(:complete?).and_return(true)
+
+        expect(helper).to receive(:render).with(
+          instance_of(EvaProScoreComponent)
+        )
+
+        helper.afficher_lettre_risque(evaluation)
+      end
+    end
+
+    context "quand la lettre est absente" do
+      it "retourne '-'" do
+        allow(helper).to receive(:lettre_risque_pour).and_return(nil)
+        allow(evaluation).to receive(:complete?).and_return(true)
+
+        expect(helper.afficher_lettre_risque(evaluation)).to eq("-")
+      end
+    end
+
+    context "quand evaluation n'est pas complète" do
+      it "retourne '-'" do
+        allow(helper).to receive(:lettre_risque_pour).and_return("A")
+        allow(evaluation).to receive(:complete?).and_return(false)
+
+        expect(helper.afficher_lettre_risque(evaluation)).to eq("-")
+      end
+    end
+  end
+
+  describe "#afficher_lettre_cout" do
+    let(:evaluation) { instance_double(Evaluation) }
+
+    context "quand la lettre est présente et evaluation complète" do
+      it "render le composant" do
+        allow(helper).to receive(:lettre_couts_pour).and_return("A")
+        allow(evaluation).to receive(:complete?).and_return(true)
+
+        expect(helper).to receive(:render).with(
+          instance_of(EvaProScoreComponent)
+        )
+
+        helper.afficher_lettre_cout(evaluation)
+      end
+    end
+
+    context "quand la lettre est absente" do
+      it "retourne '-'" do
+        allow(helper).to receive(:lettre_couts_pour).and_return(nil)
+        allow(evaluation).to receive(:complete?).and_return(true)
+
+        expect(helper.afficher_lettre_cout(evaluation)).to eq("-")
+      end
+    end
+
+    context "quand evaluation n'est pas complète" do
+      it "retourne '-'" do
+        allow(helper).to receive(:lettre_couts_pour).and_return("A")
+        allow(evaluation).to receive(:complete?).and_return(false)
+
+        expect(helper.afficher_lettre_cout(evaluation)).to eq("-")
+      end
+    end
+  end
 end

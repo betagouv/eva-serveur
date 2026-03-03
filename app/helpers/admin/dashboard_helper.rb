@@ -59,6 +59,24 @@ actualites:, compte:, ability:)
       palier_to_lettre(palier).upcase
     end
 
+    def afficher_lettre_cout(evaluation)
+      lettre_couts = lettre_couts_pour(evaluation)
+      if lettre_couts.present? && evaluation.complete?
+        render EvaProScoreComponent.new(active_letter: lettre_couts)
+      else
+        "-"
+      end
+    end
+
+    def afficher_lettre_risque(evaluation)
+      lettre_risque = lettre_risque_pour(evaluation)
+      if lettre_risque.present? && evaluation.complete?
+        render EvaProScoreComponent.new(active_letter: lettre_risque)
+      else
+        "-"
+      end
+    end
+
     private
 
     def derniere_evaluation_complete(structure, ability)

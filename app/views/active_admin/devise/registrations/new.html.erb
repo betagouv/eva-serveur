@@ -24,6 +24,7 @@
                               as: resource_name,
                               url: send(:"#{Devise::Mapping.find_scope!(resource_name)}_registration_path"),
                               html: { id: "registration_new" }) do |f| %>
+      <%= hidden_field_tag :invitation_token, @invitation&.token %>
       <%= f.inputs do %>
         <%= f.input :structure_id, as: :hidden %>
         <%= f.input :prenom %>

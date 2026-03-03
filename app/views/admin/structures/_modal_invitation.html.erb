@@ -1,5 +1,4 @@
 <% id_modal = "fr-modal-invitation-#{structure.id}" %>
-<% lien_invitation = new_compte_registration_url(structure_id: structure.id) %>
 <% form_id = "invitation-form-#{structure.id}" %>
 
 <%= dsfr_modal(
@@ -53,15 +52,13 @@
   <% end %>
 
   <% component.with_button do %>
-    <%= render BoutonDsfrComponent.new(
-      "#",
-      type: :tertiary,
-      tag: :button,
-      class: "copier-coller",
-      data: { clipboard_text: lien_invitation }
-    ) do %>
+    <%= button_tag type: "button",
+                   class: "fr-btn fr-btn--tertiary copier-lien-invitation",
+                   data: {
+                     copier_lien_url: copier_lien_admin_structure_locale_path(structure)
+                   } do %>
       <span class="fr-icon-links-fill" aria-hidden="true"></span>
-      <%= t("admin.structures.membres.modal.copier_lien") %>
+      <span class="copier-lien-invitation__label"><%= t("admin.structures.membres.modal.copier_lien") %></span>
     <% end %>
   <% end %>
 <% end %>

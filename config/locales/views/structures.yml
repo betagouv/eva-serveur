@@ -30,7 +30,7 @@ fr:
         email_invalide: Veuillez saisir une adresse e-mail valide.
         modal:
           titre: Inviter quelqu’un
-          description: Saisissez ou collez une adresse e-mail ci-dessous pour inviter un nouveau membre à votre structure. Un e-mail d’invitation lui sera directement envoyé.
+          description: Saisissez ou collez une adresse e-mail ci-dessous pour inviter un nouveau membre à rejoindre votre structure. Un e-mail d’invitation lui sera directement envoyé.
           email_label: Adresse e-mail
           message_label: Message (optionnel)
           message_hint: Ajouter une note à votre message

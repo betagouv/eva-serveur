@@ -31,7 +31,7 @@ body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wr
 .admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
   width: 100%;
 
-  @media (max-width: 48rem) {
+  @media (max-width: 768px) {
     .fr-table .fr-table__content table {
       thead tr th:nth-child(n + 3):not(:last-child),
       tbody tr td:nth-child(n + 3):not(:last-child) {
@@ -41,7 +41,7 @@ body.index.admin_evaluations.evapro_admin #active_admin_content #main_content_wr
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .admin_evaluations.index.evapro_admin #active_admin_content #main_content_wrapper #main_content .paginated_collection {
     padding-left: 1rem;
     padding-right: 1rem;

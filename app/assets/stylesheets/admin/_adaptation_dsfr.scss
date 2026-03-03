@@ -188,7 +188,7 @@ button.fr-link--close.fr-link:hover {
   z-index: 9999;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .fr-modal>.fr-container {
     pointer-events: none;
     position: fixed;
@@ -250,7 +250,7 @@ body.logged_out #wrapper .fr-modal__content ul li,
     width: 49.5rem;
   }
 
-  @media (max-width: 48rem) {
+  @media (max-width: 768px) {
     .fr-modal__body {
       width: 100%;
     }
@@ -268,6 +268,12 @@ body.logged_out #wrapper .fr-modal__content ul li,
     flex-direction: column;
     align-items: flex-end;
     gap: 1rem;
+  }
+
+  @media (max-width: 1280px) {
+    .contenu-modale {
+      padding-bottom: 1rem;
+    }
   }
 
   .contenu {
@@ -441,7 +447,7 @@ body.logged_in h2.fr-footer__partners-title {
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .fr-footer__top .fr-grid-row {
     flex-direction: column;
   }

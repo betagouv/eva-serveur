@@ -32,17 +32,17 @@
   }
 
   .carte-v2 {
-    @media (max-width: 48rem) {
+    @media (max-width: 768px) {
       padding: $dsfr-spacing-5w $dsfr-spacing-2w !important;
     }
     .form {
-      @media (max-width: 48rem) {
+      @media (max-width: 768px) {
         margin-bottom: 0;
       }
     }
   }
 
-  @media (max-width: 48rem) {
+  @media (max-width: 768px) {
     .recherche-structure-actions {
       @include onboarding-actions-mobile;
     }

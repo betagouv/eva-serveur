@@ -25,13 +25,18 @@
 
 .dsfr-table-active-admin table.index_table tbody tr td:first-child {
     font-weight: 600;
-    border-left: none;
+    border-left: 1px solid $grey-625;
     padding: $dsfr-spacing-1w $dsfr-spacing-2w;
   }
 
 .dsfr-table-active-admin table.index_table tbody tr td:last-child {
-  border-right: none;
+  border-right: 1px solid $grey-625;
   padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+}
+
+.dsfr-table-active-admin table thead {
+  background-color: var(--background-alt-grey);
+  position: inherit;
 }
 
 .dsfr-table-active-admin table.index_table tbody tr td {
@@ -43,6 +48,7 @@
   line-height: inherit;
 }
 
-.dsfr-table-active-admin table thead {
-  background-color: var(--background-alt-grey);
+.dsfr-table-active-admin table.index_table th a:visited,
+.dsfr-table-active-admin table.index_table th a:link {
+  display: inline;
 }

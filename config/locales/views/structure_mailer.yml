@@ -7,7 +7,7 @@ fr:
 
         %{invitant} vous invite à rejoindre %{structure} sur EVA.
       cta: |
-        Pour accepter l’invitation et accéder à la structure, cliquez sur le lien ci-dessous\u00a0:
+        Pour accepter l’invitation et accéder à la structure, cliquez sur le lien ci-dessous :
       bouton: Rejoindre la structure
     nouvelle_structure:
       objet: Création de « %{structure} »

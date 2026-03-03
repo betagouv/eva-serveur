@@ -55,7 +55,7 @@ fr:
           bouton_choisir: "Choisir"
           eva:
             titre: "Évaluer les usagers"
-            description: "Identifier les personnes en difficulté\u00A0: repérer les compétences à consolider, accompagner vos bénéficiaires de manière adaptée."
+            description: "Identifier les personnes en difficulté : repérer les compétences à consolider, accompagner vos bénéficiaires de manière adaptée."
           evapro:
             titre: "Évaluer les organisations"
             description: "Estimer les risques  liés au défaut de maîtrise des compétences de base dans mon organisation."
@@ -99,7 +99,7 @@ fr:
         lien_annuaire: Retrouver votre numéro SIRET sur L’Annuaire des Entreprises
         bouton_retour: Précédent
         bouton_valider: Continuer
-        mention_support_texte: "Vous rencontrez des difficultés pour votre structure (international, consortium, antenne, etc.)\u00A0? Contactez le support eva\u00A0:"
+        mention_support_texte: "Vous rencontrez des difficultés pour votre structure (international, consortium, antenne, etc.) ? Contactez le support eva :"
         mention_support_email: eva@anlci.gouv.fr
         erreur_siret_obligatoire: Le numéro de SIRET est obligatoire.
         erreur_siret_invalide: Le numéro de SIRET doit être composé de 14 chiffres.

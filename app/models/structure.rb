@@ -84,7 +84,7 @@ class Structure < ApplicationRecord
   }
 
   scope :structures_locales, -> { where(type: StructureLocale.name) }
-
+  scope :avec_meme_siret_que, ->(siret) { where(siret: siret) }
   alias_attribute :display_name, :nom
 
   def siret_uniqueness_unless_superadmin

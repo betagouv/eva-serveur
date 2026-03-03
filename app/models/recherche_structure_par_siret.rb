@@ -24,9 +24,9 @@ class RechercheStructureParSiret
   end
 
   def cherche_structure_avec_siret(siret)
-    # En cas de doublon (même SIRET en base), on prend la première structure (créée en premier).
-    # Ce cas va etre gérer dans un prochain ticket
-    Structure.where(siret: siret).order(:id).first
+    Structure.avec_meme_siret_que(siret)
+             .order(:id)
+             .first
   end
 
   def cree_structure_temporaire_via_api_sirene

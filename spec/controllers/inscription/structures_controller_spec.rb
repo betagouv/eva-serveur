@@ -287,7 +287,8 @@ siret_pro_connect: "13002526500013") }
     end
 
     context "quand l'action est 'rejoindre'" do
-      let!(:structure) { create(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
+      let!(:structure) {
+ create(:structure_locale, :avec_admin, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
 
       before do
         compte.update(structure: structure)
@@ -302,6 +303,26 @@ siret_pro_connect: "13002526500013") }
 
         expect(AffiliationOpcoService).to have_received(:new)
         expect(service_double).to have_received(:affilie_opcos)
+      end
+
+      context "quand il n'y a qu'une seule structure avec ce SIRET" do
+        let!(:structure) { create(:structure_locale, :avec_admin, siret: compte.siret_pro_connect) }
+
+        it "rejoint automatiquement la structure existante" do
+          patch :update, params: { commit: "rejoindre" }
+
+          compte.reload
+          expect(compte.etape_inscription).to eq("complet")
+          expect(compte.structure).to eq(structure)
+        end
+      end
+
+      context "quand la structure sélectionnée est invalide" do
+        it "affiche un flash alert" do
+          patch :update, params: { commit: "rejoindre", compte: { structure_id: "invalide" } }
+
+          expect(flash.now[:alert]).to eq(I18n.t("inscription.structures.show.structure_invalide"))
+        end
       end
     end
   end

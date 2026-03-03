@@ -23,7 +23,7 @@ fr:
         titre: Membres de la structure
         invitation: |
           Pour inviter une personne à rejoindre cette structure,
-          vous pouvez lui envoyer une invitation\u00a0:
+          vous pouvez lui envoyer une invitation :
         envoyer_invitation: Envoyer une invitation
         invitation_envoyee: Invitation envoyée à %{email}.
         invitation_non_autorisee: Vous n'êtes pas autorisé à envoyer une invitation pour cette structure.

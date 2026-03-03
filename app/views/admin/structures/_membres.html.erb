@@ -5,14 +5,15 @@
   </div>
   <% if resource.is_a?(StructureLocale) %>
     <div class="panel panel-invitation">
-      <div class="container-instructions">
+      <div class="container-instructions flex-column">
         <div class="panel-invitation-message">
           <%= md t(".invitation") %>
         </div>
         <div>
-          <%= render BoutonDsfrComponent.new(
+          <%= render BoutonComponent.new(
             "#",
-            type: :primary,
+            type: :secondary,
+            size: :xs,
             "data-fr-opened": "false",
             "aria-controls": "fr-modal-invitation-#{resource.id}"
           ) do %>

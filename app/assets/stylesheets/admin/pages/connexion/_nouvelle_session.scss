@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   body.logged_out.page_connexion_v2 .nouvelle-session,
   body.logged_out .nouvelle-session {
     display: flex;

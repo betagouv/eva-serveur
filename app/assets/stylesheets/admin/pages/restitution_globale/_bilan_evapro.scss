@@ -36,12 +36,6 @@
   gap: $dsfr-spacing-3w;
 }
 
-.panel > h3.evaluation-bilan-evapro__opco-financeur-titre {
-  @include corps-de-texte-xl-bold;
-
-  margin: 0;
-}
-
 .evaluation-bilan-evapro__opco-financeur-logo {
   height: 4rem;
 }

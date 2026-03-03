@@ -660,4 +660,32 @@ describe Structure, type: :model do
       end
     end
   end
+
+  describe '#avec_meme_siret_que' do
+    let(:structure1) { create(:structure, siret: siret_1) }
+    let(:structure2) do
+      structure = build(:structure, siret: siret_2)
+      structure.save(validate: false)
+      structure
+    end
+
+    context 'quand les structures ont le même SIRET' do
+      let(:siret_1) { '12345678901234' }
+      let(:siret_2) { '12345678901234' }
+
+      it {
+        expect(described_class.avec_meme_siret_que(structure1.siret)).to include(structure1,
+structure2)
+      }
+    end
+
+    context 'quand les structures ont des SIRET différents' do
+      let(:siret_1) { '12345678901234' }
+      let(:siret_2) { '12345678901235' }
+
+      it {
+        expect(described_class.avec_meme_siret_que(structure1.siret)).to include(structure1)
+      }
+    end
+  end
 end

@@ -6,6 +6,7 @@ class Inscription::StructuresController < ApplicationController
 
   def show
     prepare_structure_si_necessaire
+    recupere_structures_avec_meme_siret_si_necessaire
     redirect_to inscription_structure_path(etape: "parametrage") if etape_usage_sans_session?
     preremplir_parametrage_depuis_session if etape_parametrage_avec_session?
   end
@@ -45,6 +46,13 @@ class Inscription::StructuresController < ApplicationController
     affilie_et_prepare_opcos
   end
 
+  def recupere_structures_avec_meme_siret_si_necessaire
+    return if @structure.blank?
+
+    @structures_meme_siret = Structure.avec_meme_siret_que(@structure.siret)
+                                      .order(:id)
+  end
+
   def recherche_et_assigne_structure
     return if @structure.present?
 
@@ -69,11 +77,25 @@ class Inscription::StructuresController < ApplicationController
 
   def rejoindre_structure_existante
     prepare_structure_si_necessaire
-    if @compte.update(etape_inscription: :complet)
+    structure = structure_selectionnee
+
+    return render_structure_invalide unless structure
+
+    if @compte.update(etape_inscription: :complet, structure_id: structure.id)
       redirige_vers_etape_inscription(@compte)
     else
       render :show
     end
+  end
+
+  def structure_selectionnee
+    Structure.avec_meme_siret_que(@structure.siret)
+             .find_by(id: params.dig(:compte, :structure_id).presence || @structure.id)
+  end
+
+  def render_structure_invalide
+    flash.now[:alert] = t("inscription.structures.show.structure_invalide")
+    render :show
   end
 
   def confirme_infos_structure

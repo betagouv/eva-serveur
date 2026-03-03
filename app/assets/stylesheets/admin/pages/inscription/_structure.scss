@@ -52,10 +52,56 @@
     justify-content: flex-end;
   }
 
+  .structure-content-wrapper-container {
+    display: flex;
+    flex-direction: column;
+    gap: $dsfr-spacing-7w;
+  }
   .structure-content-wrapper {
     display: flex;
     flex-direction: column;
     gap: $dsfr-spacing-3w;
+  }
+
+  .carte-v2__sous-titre {
+    margin: 0;
+
+    @include corps-de-texte-md-regular;
+  }
+
+  .structure-content-wrapper-siret {
+    display: flex;
+    flex-direction: column;
+    gap: $dsfr-spacing-2w;
+
+    .fr-fieldset__element {
+      margin: 0;
+      padding: 0;
+
+      .fr-label {
+        @include corps-de-texte-sm-medium;
+      }
+    }
+  }
+
+  .structure-content-wrapper-siret_titre_container {
+    display: flex;
+    flex-direction: column;
+    gap: $dsfr-spacing-1w;
+  }
+  
+  .structure-content-wrapper-siret_titre {
+    @include corps-de-texte-md-regular;
+
+    margin: 0;
+    color: $grey-50;
+  }
+
+  .structure-content-wrapper-siret_texte {
+    @include corps-de-texte-xs-regular;
+
+    color: $grey-425;
+    margin: 0;
   }
 
   .card-usage-wrapper {

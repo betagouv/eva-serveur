@@ -44,22 +44,22 @@ describe StructureMailer, type: :mailer do
   end
 
   describe "#invitation_structure" do
-    let(:id) { SecureRandom.uuid }
-    let(:structure) { StructureLocale.new nom: "Ma Super Structure", id: id, code_postal: "75012" }
+    let(:structure) { create(:structure_locale, nom: "Ma Super Structure", code_postal: "75012") }
     let(:invitant) {
- Compte.new prenom: "Camille", nom: "Martin", email: "camille@test.com", structure: structure }
+ create(:compte, prenom: "Camille", nom: "Martin", email: "camille@test.com",
+structure: structure) }
+    let(:invitation) do
+      create(:invitation,
+             structure: structure,
+             invitant: invitant,
+             email_destinataire: "invite@test.com",
+             message_personnalise: "Bienvenue dans l'équipe.")
+    end
 
     context "quand un message personnalisé est fourni" do
-      let(:mail) do
-        described_class.with(
-          invitant: invitant,
-          structure: structure,
-          email_destinataire: "invite@test.com",
-          message_personnalise: "Bienvenue dans l'équipe."
-        ).invitation_structure
-      end
+      let(:mail) { described_class.with(invitation: invitation).invitation_structure }
 
-      it "envoie un email d'invitation complet" do
+      it "envoie un email d'invitation complet avec lien à usage unique" do
         assert_emails 1 do
           mail.deliver_now
         end
@@ -72,19 +72,19 @@ describe StructureMailer, type: :mailer do
         )
         expect(mail.body).to include("Bienvenue dans l&#39;équipe.")
         expect(mail.body).to include("Rejoindre la structure")
-        expect(mail.body).to include("http://test.com/admin/sign_up?structure_id=#{id}")
+        expect(mail.body).to include("invitation_token=#{invitation.token}")
       end
     end
 
     context "quand aucun message personnalisé n'est fourni" do
-      let(:mail) do
-        described_class.with(
-          invitant: invitant,
-          structure: structure,
-          email_destinataire: "invite@test.com",
-          message_personnalise: ""
-        ).invitation_structure
+      let(:invitation_sans_message) do
+        create(:invitation,
+               structure: structure,
+               invitant: invitant,
+               email_destinataire: "invite@test.com",
+               message_personnalise: nil)
       end
+      let(:mail) { described_class.with(invitation: invitation_sans_message).invitation_structure }
 
       it "n'affiche pas de paragraphe de message personnalisé" do
         mail.deliver_now

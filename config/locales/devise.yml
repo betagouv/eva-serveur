@@ -2,6 +2,8 @@ fr:
   devise:
     confirmations:
       confirmed: Merci ! Votre adresse email a bien été validée.
+    registrations:
+      invitation_invalide_ou_deja_utilisee: "Ce lien d'invitation n'est pas valide ou a déjà été utilisé."
     mailer:
       confirmation_instructions:
         subject: "Confirmez votre adresse email"

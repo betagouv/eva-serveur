@@ -96,15 +96,29 @@ ActiveAdmin.register StructureLocale do
       next
     end
 
-    StructureMailer.with(
-      invitant: current_compte,
-      structure: resource,
+    invitation = resource.invitations.create!(
       email_destinataire: email,
+      invitant: current_compte,
       message_personnalise: message_personnalise
-    ).invitation_structure.deliver_later
+    )
+    StructureMailer.with(invitation: invitation).invitation_structure.deliver_later
 
     redirect_back fallback_location: admin_structure_locale_path(resource),
                   notice: I18n.t("admin.structures.membres.invitation_envoyee", email: email)
+  end
+
+  member_action :copier_lien, method: :post do
+    unless compte_autorise_pour_invitation?
+      render json: { error: I18n.t("admin.structures.membres.invitation_non_autorisee") },
+status: :forbidden
+      return
+    end
+
+    invitation = resource.invitations.create!(
+      invitant: current_compte
+    )
+    url = new_compte_registration_url(invitation_token: invitation.token)
+    render json: { url: url }
   end
 
   form partial: "form"

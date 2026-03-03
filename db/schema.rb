@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_20_143846) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_03_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -256,6 +256,22 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_20_143846) do
     t.index ["session_id"], name: "index_evenements_on_session_id"
   end
 
+  create_table "invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "token", null: false
+    t.uuid "structure_id", null: false
+    t.string "email_destinataire"
+    t.uuid "invitant_id", null: false
+    t.string "statut", default: "en_cours", null: false
+    t.uuid "compte_id"
+    t.text "message_personnalise"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["compte_id"], name: "index_invitations_on_compte_id"
+    t.index ["invitant_id"], name: "index_invitations_on_invitant_id"
+    t.index ["structure_id"], name: "index_invitations_on_structure_id"
+    t.index ["token"], name: "index_invitations_on_token", unique: true
+  end
+
   create_table "mises_en_action", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "effectuee", null: false
     t.datetime "repondue_le"
@@ -453,6 +469,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_20_143846) do
   add_foreign_key "evaluations", "campagnes"
   add_foreign_key "evaluations", "comptes", column: "responsable_suivi_id"
   add_foreign_key "evenements", "parties", column: "session_id", primary_key: "session_id", on_delete: :cascade
+  add_foreign_key "invitations", "comptes"
+  add_foreign_key "invitations", "comptes", column: "invitant_id"
+  add_foreign_key "invitations", "structures"
   add_foreign_key "mises_en_action", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "situations", on_delete: :cascade

@@ -1,12 +1,13 @@
 class StructureMailer < ApplicationMailer
   def invitation_structure
-    @invitant = params[:invitant]
-    @structure = params[:structure]
-    @message_personnalise = params[:message_personnalise]
-    @lien_invitation = new_compte_registration_url(structure_id: @structure.id)
+    @invitation = params[:invitation]
+    @invitant = @invitation.invitant
+    @structure = @invitation.structure
+    @message_personnalise = @invitation.message_personnalise
+    @lien_invitation = new_compte_registration_url(invitation_token: @invitation.token)
 
     mail(
-      to: params[:email_destinataire],
+      to: @invitation.email_destinataire,
       subject: t(".objet", structure: @structure.display_name)
     )
   end

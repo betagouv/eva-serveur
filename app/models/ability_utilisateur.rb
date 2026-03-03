@@ -154,7 +154,7 @@ compte_id: compte.id
     return unless (compte.admin? || compte.conseiller?) && compte.structure_id.present?
 
     structure_ids = compte.admin? ? compte.structure.subtree_ids : [ compte.structure_id ]
-    can :envoyer_invitation, StructureLocale, id: structure_ids
+    can %i[envoyer_invitation copier_lien], StructureLocale, id: structure_ids
   end
 
   def droit_actualite(compte)

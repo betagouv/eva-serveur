@@ -22,7 +22,6 @@ class HeaderComponent < ViewComponent::Base
   end
 
   def affiche_navigation?
-    puts "show_navigation: #{@show_navigation}"
     return false if @show_navigation == false
     return true if @show_navigation == true
 

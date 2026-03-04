@@ -10,10 +10,15 @@
   function formatFrenchPhone(digits) {
     if (digits.length === 0) return "";
     let national = digits;
-    if (digits.length >= 11 && digits.startsWith("33")) {
+    if (digits.length === 11 && digits.startsWith("33")) {
       national = digits.slice(2, 11);
     } else if (digits.length >= 10 && digits.startsWith("0")) {
       national = digits.slice(1, 10);
+    } else if (digits.length === 9 && digits.startsWith("0")) {
+      // Saisie incomplète (0 + 8 chiffres) : ne pas formater pour permettre d’ajouter le 10ᵉ chiffre
+      return digits;
+    } else if (digits.startsWith("33")) {
+      return digits;
     } else if (digits.length > 9) {
       national = digits.slice(0, 9);
     }

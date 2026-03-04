@@ -40,7 +40,7 @@ class NavigationComponent < ViewComponent::Base
 
   def evaluations_link
     { label: "Évaluations", url: helpers.admin_evaluations_path,
-      current: current_page?(helpers.admin_evaluations_path) }
+      current: evaluations_current? }
   end
 
   def comptes_link
@@ -55,6 +55,11 @@ class NavigationComponent < ViewComponent::Base
 
   def dashboard_current?
     current_page?(helpers.admin_root_path) || helpers.params[:controller] == "admin/dashboard"
+  end
+
+  def evaluations_current?
+    current_page?(helpers.admin_evaluations_path) ||
+      (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
   end
 
   def current_page?(path)

@@ -18,6 +18,7 @@
 //= require bouton_menu_actions
 //= require cgu
 //= require siret_input
+//= require code_postal_input
 //= require recherche_structure
 //= require clipboard
 //= require evaluation

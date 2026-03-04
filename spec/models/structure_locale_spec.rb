@@ -35,6 +35,26 @@ describe StructureLocale, type: :model do
     end
   end
 
+  describe "#code_postal_manquant?" do
+    context "quand code_postal est blank" do
+      let(:structure) { described_class.new(code_postal: nil) }
+
+      it { expect(structure).to be_code_postal_manquant }
+    end
+
+    context "quand code_postal est TYPE_NON_COMMUNIQUE" do
+      let(:structure) { described_class.new(code_postal: described_class::TYPE_NON_COMMUNIQUE) }
+
+      it { expect(structure).to be_code_postal_manquant }
+    end
+
+    context "quand code_postal est un code à 5 chiffres" do
+      let(:structure) { described_class.new(code_postal: "75012") }
+
+      it { expect(structure).not_to be_code_postal_manquant }
+    end
+  end
+
   describe '#usage' do
     it do
       expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",

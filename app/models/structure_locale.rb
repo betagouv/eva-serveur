@@ -49,6 +49,10 @@ class StructureLocale < Structure
 
   auto_strip_attributes :code_postal, delete_whitespaces: true
 
+  def code_postal_manquant?
+    code_postal.blank? || code_postal == TYPE_NON_COMMUNIQUE
+  end
+
   def affecte_usage_entreprise_si_necessaire
     return unless ENV["ACTIVE_EVAPRO"].present?
     return unless type_structure == "entreprise"

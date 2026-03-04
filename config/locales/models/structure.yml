@@ -56,6 +56,7 @@ fr:
           cap_emploi: Cap emploi
           CRIA: CRIA
           e2c: École de la 2e chance
+          etablissement_public_sante: Etablissement public de santé
           entreprise: Entreprise
           GRETA: GRETA
           mission_locale: Mission locale
@@ -63,7 +64,7 @@ fr:
           PJJ_UEAJ: PJJ/UEAJ
           orientation_scolaire: Orientation scolaire
           france_travail: France Travail
-          service_insertion_collectivite: Service d'insertion collectivité
+          service_insertion_collectivite: Collectivité
           SIAE: SIAE
           SMA: SMA
           SMV: SMV

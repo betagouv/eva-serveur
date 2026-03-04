@@ -44,4 +44,34 @@ describe CampagneDuplicateur, type: :model do
       end
     end
   end
+
+  context 'quand le libellé est toujours en conflit' do
+    it 'réessaie 5 fois puis lève une erreur' do
+      tentatives = 0
+      allow(duplicateur).to receive(:libelle_copie_unique) do
+        tentatives += 1
+        # Je triche un peu en retournant cette exception ici, mais c'est plus facile que de
+        # de mocker Campagne.save!
+        raise ActiveRecord::RecordNotUnique
+      end
+
+      expect { duplicateur.duplique! }.to raise_error(ActiveRecord::RecordNotUnique)
+      expect(tentatives).to eq(CampagneDuplicateur::MAX_REESSAIS)
+    end
+  end
+
+  describe '#libelle_copie_unique' do
+    context "quand plusieurs copie existent déjà" do
+      before do
+        create(:campagne, libelle: "#{campagne.libelle} - copie")
+        create(:campagne, libelle: "#{campagne.libelle} - copie 10")
+        create(:campagne, libelle: "#{campagne.libelle} - copie 2")
+        create(:campagne, libelle: "#{campagne.libelle} - copie 11 annexe")
+      end
+
+      it "retourne le libellé avec l'index max plus 1" do
+        expect(duplicateur.send(:libelle_copie_unique)).to eq("#{campagne.libelle} - copie 11")
+      end
+    end
+  end
 end

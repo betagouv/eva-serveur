@@ -211,6 +211,21 @@ siret_pro_connect: "13002526500013") }
             )
             expect(session[:structure_params_inscription]["opco_id"]).to eq(opco.id.to_s)
           end
+
+          it "enregistre email_contact et telephone dans la session" do
+            patch :update, params: {
+              structure_locale: structure_params.merge(
+                opco_id: opco.id,
+                email_contact: "contact@structure.fr",
+                telephone: "01 22 33 44 55"
+              ),
+              commit: "Confirmer la création"
+            }
+
+            expect(session[:structure_params_inscription]["email_contact"])
+              .to eq("contact@structure.fr")
+            expect(session[:structure_params_inscription]["telephone"]).to eq("01 22 33 44 55")
+          end
         end
 
         context "avec le feature flip étape usage désactivé" do
@@ -320,6 +335,32 @@ siret_pro_connect: "13002526500013") }
 
           structure_creée.reload
           expect(structure_creée.code_postal).to eq("75001")
+        end
+      end
+
+      context "quand la session contient email_contact et telephone" do
+        before do
+          ENV["ETAPE_USAGE_INSCRIPTION"] = "true"
+          session[:structure_params_inscription] = {
+            "nom" => "Ma Structure",
+            "type_structure" => "mission_locale",
+            "opco_id" => opco.id.to_s,
+            "email_contact" => "contact@structure.fr",
+            "telephone" => "(+33) 1 22 33 44 55"
+          }
+        end
+
+        after { ENV.delete("ETAPE_USAGE_INSCRIPTION") }
+
+        it "crée la structure avec les champs contact" do
+          patch :update, params: {
+            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            commit: "creer_avec_usage"
+          }
+
+          structure_creée.reload
+          expect(structure_creée.email_contact).to eq("contact@structure.fr")
+          expect(structure_creée.telephone).to eq("(+33) 1 22 33 44 55")
         end
       end
     end

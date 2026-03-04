@@ -5,7 +5,7 @@ ActiveAdmin.register StructureLocale do
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
-                :autorisation_creation_campagne, :usage
+                :autorisation_creation_campagne, :usage, :email_contact, :telephone
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :type_structure,

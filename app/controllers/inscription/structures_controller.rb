@@ -192,7 +192,8 @@ class Inscription::StructuresController < ApplicationController
 
   def structure_params
     param_key = params[:structure].present? ? :structure : :structure_locale
-    params.require(param_key).permit(:nom, :type_structure, :opco_id, :usage, :code_postal)
+    params.require(param_key).permit(:nom, :type_structure, :opco_id, :usage, :code_postal,
+                                 :email_contact, :telephone)
   end
 
   def opco_id_params

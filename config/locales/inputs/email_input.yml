@@ -1,0 +1,5 @@
+fr:
+  formtastic:
+    inputs:
+      email:
+        hint: "Format attendu : nom@domaine.fr"

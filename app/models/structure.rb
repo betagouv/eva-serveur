@@ -26,8 +26,11 @@ class Structure < ApplicationRecord
   validate :siret_uniqueness_unless_superadmin
   validate :ne_peut_pas_supprimer_siret
   validate :doit_avoir_un_opco, if: :validation_inscription
+  validates :email_contact, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+  validates :telephone, format: { with: /\A[\d\s+()\-]+\z/ }, length: { maximum: 20 },
+allow_blank: true
 
-  auto_strip_attributes :nom, squish: true
+  auto_strip_attributes :nom, :email_contact, :telephone, squish: true
 
   geocoded_by :code_postal, state: :region, params: { countrycodes: "fr" } do |obj, resultats|
     if (resultat = resultats.first)

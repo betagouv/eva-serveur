@@ -284,6 +284,44 @@ siret_pro_connect: "13002526500013") }
           expect(response).to redirect_to(admin_dashboard_path)
         end
       end
+
+      context "quand la structure a code_postal manquant et l'utilisateur saisit un code" do
+        let(:structure_creée) do
+          build(:structure_locale,
+                siret: compte.siret_pro_connect,
+                idcc: [ "3" ],
+                code_postal: StructureLocale::TYPE_NON_COMMUNIQUE)
+        end
+
+        before do
+          ENV["ETAPE_USAGE_INSCRIPTION"] = "true"
+          session[:structure_params_inscription] = {
+            "nom" => "Ma Structure",
+            "type_structure" => "mission_locale",
+            "opco_id" => opco.id.to_s,
+            "code_postal" => "75001"
+          }
+          allow(FabriqueStructure).to receive(:cree_depuis_siret) do |siret, params|
+            structure_creée.assign_attributes(params) if params.present?
+            structure_creée.idcc = [ "3" ] unless structure_creée.idcc.present?
+            structure_creée.save!
+            structure_creée.reload
+            structure_creée
+          end
+        end
+
+        after { ENV.delete("ETAPE_USAGE_INSCRIPTION") }
+
+        it "crée la structure avec le code postal saisi manuellement" do
+          patch :update, params: {
+            structure_locale: { usage: AvecUsage::USAGE_BENEFICIAIRES },
+            commit: "creer_avec_usage"
+          }
+
+          structure_creée.reload
+          expect(structure_creée.code_postal).to eq("75001")
+        end
+      end
     end
 
     context "quand l'action est 'rejoindre'" do

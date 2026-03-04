@@ -74,6 +74,7 @@ fr:
         hint_nom_structure: Le nom officiel est proposé par défaut. Vous pouvez le modifier pour utiliser un nom plus courant.
         hint_opco: Détecté automatiquement. À vérifier ou à compléter si nécessaire.
         code_postal_label: Code postal
+        code_postal_hint: "Format attendu : 5 chiffres"
         choisir_type: Choisir un type de structure
         opco_label: Opérateur de compétences
         choisir_opco: Choisir un opérateur de compétences

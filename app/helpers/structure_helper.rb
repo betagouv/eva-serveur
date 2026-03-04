@@ -9,6 +9,11 @@ module StructureHelper
 
     nil
   end
+
+  def structure_necessite_saisie_code_postal?(structure)
+    structure.is_a?(StructureLocale) && structure.code_postal_manquant?
+  end
+
   def traduction_type_structure(type_structure)
     I18n.t(
       "activerecord.attributes.structure.type_structure.#{type_structure}"

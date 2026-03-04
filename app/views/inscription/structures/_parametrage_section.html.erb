@@ -12,6 +12,19 @@
         value: form.object.nom.presence || form.object.raison_sociale
       ) %>
     </div>
+    <% if structure_necessite_saisie_code_postal?(form.object) %>
+      <div class="fr-col-12">
+        <%= render CodePostalInputComponent.new(
+          id: "structure_code_postal",
+          label: t("inscription.structures.show.code_postal_label"),
+          hint: t("inscription.structures.show.code_postal_hint"),
+          form: form,
+          method: :code_postal,
+          value: form.object.code_postal,
+          required: true
+        ) %>
+      </div>
+    <% end %>
     <div class="fr-col-12">
       <%= render InputComponent.new(
         id: "structure_type_structure",

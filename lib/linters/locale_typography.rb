@@ -2,7 +2,9 @@
 
 module Linters
   # Verifie les regles typographiques francaises dans les fichiers de traduction YAML :
-  # - espace insecable (U+00A0 ou U+202F) avant : ! ?
+  # rubocop:disable Style/AsciiComments
+  # - espace insecable ( ) avant : ! ?
+  # rubocop:enable Style/AsciiComments
   # - espace insecable apres guillemet ouvrant et avant guillemet fermant
   class LocaleTypography
     NORMAL_SPACE = "\u0020"
@@ -49,7 +51,7 @@ module Linters
 
     def report_header(count, io)
       io.puts "Typographie des locales : #{count} violation(s) trouvee(s)."
-      io.puts "Utilisez des espaces insecables (U+00A0 ou U+202F) avant : ! ?, apres « et avant »."
+      io.puts "Utilisez des espaces insecables ( ) avant : ! ?, apres « et avant »."
       io.puts
     end
 
@@ -87,7 +89,7 @@ module Linters
     def check_space_before_punctuation(str, file, key_path, violations)
       str.scan(/#{Regexp.escape(NORMAL_SPACE)}([!?:])/) do
         punct = Regexp.last_match(1)
-        msg = "Espace normal avant « #{punct} » ; utiliser un espace insecable (U+00A0 ou U+202F)."
+        msg = "Espace normal avant « #{punct} » ; utiliser un espace insecable ( )."
         violations << Violation.new(
           file: file,
           key_path: key_path,

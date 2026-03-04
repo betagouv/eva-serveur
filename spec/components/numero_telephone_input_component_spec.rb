@@ -64,5 +64,14 @@ describe NumeroTelephoneInputComponent, type: :component do
         expect(options[:value]).to be_nil
       end
     end
+
+    context "quand value est 064700365 (9 chiffres commençant par 0, saisie incomplète)" do
+      let(:value) { "064700365" }
+
+      it "ne formate pas pour permettre d’ajouter le 10ᵉ chiffre" do
+        options = component.instance_variable_get(:@input_component_options)
+        expect(options[:value]).to eq("064700365")
+      end
+    end
   end
 end

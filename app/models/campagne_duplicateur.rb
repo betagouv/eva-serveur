@@ -4,14 +4,23 @@ class CampagneDuplicateur
     @current_compte = current_compte
   end
 
+  MAX_REESSAIS = 5
+
   def duplique!
-    @campagne_dupliquee = @campagne.dup
-    assigne_libelle_copie
-    assigne_type_programme
-    reset_code
-    duplique_situations_configurations
-    assigne_compte_id
-    @campagne_dupliquee.save!
+    essai = 0
+    begin
+      @campagne_dupliquee = @campagne.dup
+      assigne_libelle_copie
+      assigne_type_programme
+      reset_code
+      duplique_situations_configurations
+      assigne_compte_id
+      @campagne_dupliquee.save!
+    rescue ActiveRecord::RecordNotUnique
+      essai += 1
+      retry if essai < MAX_REESSAIS
+      raise
+    end
     @campagne_dupliquee
   end
 
@@ -52,10 +61,10 @@ class CampagneDuplicateur
 
     return base unless existants.include?(base)
 
-    max_suffix = existants.map do |libelle|
-      libelle.match(/ - copie(?: (\d+))?$/)&.captures&.first&.to_i || 1
-    end.max
+    suffixes = existants.map do |libelle|
+      libelle.match(/ - copie (\d+)$/)&.captures&.first&.to_i || 1
+    end
 
-    "#{base} #{max_suffix + 1}"
+    "#{base} #{suffixes.max + 1}"
   end
 end

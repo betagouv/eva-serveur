@@ -10,6 +10,7 @@ class StructureLocale < Structure
     cap_emploi
     CRIA
     e2c
+    etablissement_public_sante
     entreprise
     GRETA
     mission_locale

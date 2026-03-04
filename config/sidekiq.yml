@@ -31,6 +31,11 @@
       class: NettoyageComptesStructureDemoJob
       description: Efface les comptes en attente dans la structure de démo ANLCI
       enabled: true
+    purge_comptes_supprimes_job:
+      cron: '0 3 1 * *'
+      class: PurgeComptesSupprimesJob
+      description: Supprime définitivement les comptes supprimés sans évaluation et leurs campagnes (job exécuté le 1er de chaque mois)
+      enabled: true
     redimensionne_illustrations_job:
       class: RedimensionneIllustrationsJob
       description: Redimensionne les illustrations des questions

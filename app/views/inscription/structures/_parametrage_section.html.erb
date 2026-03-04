@@ -53,6 +53,28 @@
         link_html: { target: "_blank", rel: "noopener noreferrer" }
       ) %>
     </div>
+    <div class="fr-col-12">
+      <%= render EmailInputComponent.new(
+        id: "structure_email_contact",
+        label: t("inscription.structures.show.email_contact_label"),
+        hint: t("inscription.structures.show.email_contact_hint"),
+        form: form,
+        method: :email_contact,
+        value: form.object.email_contact,
+        required: false
+      ) %>
+    </div>
+    <div class="fr-col-12">
+      <%= render NumeroTelephoneInputComponent.new(
+        id: "structure_telephone",
+        label: t("inscription.structures.show.telephone_label"),
+        hint: t("inscription.structures.show.telephone_hint"),
+        form: form,
+        method: :telephone,
+        value: form.object.telephone,
+        required: false
+      ) %>
+    </div>
   </div>
 </div>
 

@@ -10,6 +10,8 @@ div class: "panel nouvelle_structure" do
       f.input :siret,
               required: resource.new_record?,
               as: :siret
+      f.input :email_contact, as: :email, required: false
+      f.input :telephone, as: :numero_telephone, required: false
 
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all

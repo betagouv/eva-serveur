@@ -661,6 +661,44 @@ describe Structure, type: :model do
     end
   end
 
+  describe "champs contact (email_contact, telephone)" do
+    context "email_contact" do
+      it "accepte un email valide" do
+        structure = build(:structure, email_contact: "contact@structure.fr")
+        expect(structure).to be_valid
+      end
+
+      it "accepte blank" do
+        structure = build(:structure, email_contact: nil)
+        expect(structure).to be_valid
+      end
+
+      it "refuse un format invalide" do
+        structure = build(:structure, email_contact: "pas-un-email")
+        expect(structure).not_to be_valid
+        expect(structure.errors[:email_contact]).to be_present
+      end
+    end
+
+    context "telephone" do
+      it "accepte un numéro avec chiffres et espaces" do
+        structure = build(:structure, telephone: "(+33) 1 22 33 44 55")
+        expect(structure).to be_valid
+      end
+
+      it "accepte blank" do
+        structure = build(:structure, telephone: nil)
+        expect(structure).to be_valid
+      end
+
+      it "refuse des caractères non autorisés" do
+        structure = build(:structure, telephone: "06ab123456")
+        expect(structure).not_to be_valid
+        expect(structure.errors[:telephone]).to be_present
+      end
+    end
+  end
+
   describe '#avec_meme_siret_que' do
     let(:structure1) { create(:structure, siret: siret_1) }
     let(:structure2) do

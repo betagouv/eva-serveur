@@ -82,9 +82,9 @@ fr:
         opco_non_identifie: Non identifié
         mention_opco_detecte: Opérateur de compétences détecté automatiquement. Vous pourrez le modifier si nécessaire.
         mention_opco_non_detecte: Aucun opérateur de compétences n'a été détecté automatiquement. Vous pourrez le renseigner manuellement.
-        email_contact_label: Adresse électronique
+        email_contact_label: Adresse email de contact
         email_contact_hint: "Format attendu : nom@domaine.fr"
-        telephone_label: Numéro de téléphone
+        telephone_label: Téléphone de l'accueil
         telephone_hint: "Format attendu : (+33) 1 22 33 44 55"
         alert:
           titre: Accès à votre structure

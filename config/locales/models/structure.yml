@@ -46,8 +46,8 @@ fr:
         autorisation_creation_campagne_false: Interdit
         raison_sociale: Raison sociale
         adresse: Adresse
-        email_contact: Adresse électronique
-        telephone: Numéro de téléphone
+        email_contact: Adresse email de contact
+        telephone: Téléphone de l'accueil
         type_structure:
           one: "Type de structure"
           non_communique: Non communiqué

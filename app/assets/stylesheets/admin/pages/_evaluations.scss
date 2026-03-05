@@ -24,13 +24,14 @@
   $largeur_colonne_campagne: 28.75rem;
 
   .evaluation__campagne {
-    font-weight: 600;
-
     @include tronque;
 
     width: $largeur_colonne_campagne;
 
     @include corps-de-texte-md-regular;
+
+    font-weight: 600;
+    line-height: 1;
 
     &,
     &:link,

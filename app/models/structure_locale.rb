@@ -11,6 +11,8 @@ class StructureLocale < Structure
     CRIA
     e2c
     etablissement_public_sante
+    etablissement_fph
+    etablissement_prive
     entreprise
     GRETA
     mission_locale

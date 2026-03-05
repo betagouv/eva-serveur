@@ -19,8 +19,10 @@ class Compte < ApplicationRecord
 
   FONCTIONS = [
     "assistante_ou_assistant_social",
+    "assistant_admin",
     "chargee_ou_charge_de_formation",
     "cheffe_ou_chef_de_projet",
+    "chef_d_equipe",
     "conseillere_ou_conseiller_emploi_formation_insertion",
     "consultante_ou_consultant",
     "coordinatrice_ou_coordinateur_pedagogique",
@@ -28,8 +30,10 @@ class Compte < ApplicationRecord
     "educatrice_ou_educateur",
     "enseignante_ou_enseignant_de_l_education_nationale",
     "formatrice_ou_formateur",
+    "manager",
     "psychologue_ou_medecin_du_travail",
     "referente_ou_referent_handicap",
+    "representant_du_personnel",
     "responsable_conseillere_ou_conseiller_rh",
     "responsable_conseillere_ou_conseiller_rse",
     "volontaire_service_civique",

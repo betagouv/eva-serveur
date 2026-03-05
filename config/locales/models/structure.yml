@@ -63,6 +63,8 @@ fr:
           mission_locale: Mission locale
           organisme_formation: Organisme de formation
           PJJ_UEAJ: PJJ/UEAJ
+          etablissement_fph: Etablissement FPH
+          etablissement_prive: Etablissement (sanitaire, social, médicosocial) privé
           orientation_scolaire: Orientation scolaire
           france_travail: France Travail
           service_insertion_collectivite: Collectivité

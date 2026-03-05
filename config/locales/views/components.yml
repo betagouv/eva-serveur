@@ -7,10 +7,10 @@ fr:
         description: |
           Ce module permet, en amont des évaluations, de vérifier la capacité des bénéficiaires à utiliser l’outil informatique (ordinateur ou tablette), en particulier la manipulation du clavier, de la souris et de l’écran tactile.
       autopositionnement:
-        nom: Auto-positionnement
+        nom: Auto-positionnement des compétences transversales
         duree_moyenne: 3mn
         description: |
-          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences.
+          Ce questionnaire permet de connaître la perception que les bénéficiaires ont de leurs compétences transversales.
       questionnaire_sante:
         nom: Questions de santé
         duree_moyenne: 3mn

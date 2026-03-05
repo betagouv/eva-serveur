@@ -11,7 +11,7 @@
 @mixin corps-de-texte-xs-base() {
   font-family: $font-texte;
   font-size: 0.75rem;
-  line-height: 1.25rem;
+  line-height: 1rem; // Le DSFR défini 1.25rem, mais pour l'instant sur eva on reste à 1rem pour ne pas casser le header historique
 }
 
 @mixin corps-de-texte-xs-regular() {

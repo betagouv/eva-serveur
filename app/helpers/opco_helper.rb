@@ -9,6 +9,6 @@ module OpcoHelper
   end
 
   def affiche_opcos(structure)
-    structure.opco&.nom || "Aucun OPCO rattaché"
+    structure.opco&.nom || "Aucun opérateur de compétences rattaché"
   end
 end

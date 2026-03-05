@@ -16,7 +16,7 @@ div class: "row" do
             end
             if current_compte.superadmin?
               row :usage
-              row "OPCO(s)" do
+              row :opco do
                 affiche_opcos(structure)
               end
             end

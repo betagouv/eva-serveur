@@ -2,8 +2,8 @@ fr:
   activerecord:
     models:
       opco:
-        one: OPCO
-        other: OPCO
+        one: Opérateur de compétences
+        other: Opérateurs de compétences
     attributes:
       opco:
         created_at: Créé le
@@ -22,18 +22,18 @@ fr:
   formtastic:
     actions:
       opco:
-        create: Créer un OPCO
+        create: Créer un opérateur de compétences
         update: Modifier
     placeholders:
       opco:
-        nom: OPCO Nom
+        nom: Nom de l'opérateur de compétences
     hints:
       opco:
         nom: Ce nom est utilisé lors de l'import pour le mapping des conventions collectives. Assurez-vous d'utiliser exactement le même nom que dans le fichier Excel ou de le remplacer avant un futur import.
   active_admin:
     resources:
       opco:
-        new_model: Créer un OPCO
+        new_model: Créer un opérateur de compétences
         edit_model: Modifier
         delete_model: Supprimer
 

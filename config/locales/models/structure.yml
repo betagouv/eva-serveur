@@ -32,6 +32,7 @@ fr:
         statut_siret: Statut SIRET
         statut_siret_true: vérifié
         statut_siret_false: non vérifié
+        opco: Opérateur de compétences
         date_verification_siret: Date vérification SIRET
         region: Région
         idcc: Convention(s) collective(s)

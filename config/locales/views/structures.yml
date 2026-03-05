@@ -69,19 +69,20 @@ fr:
     modal_confirmation_creation_structure:
       titre: Créer la structure
       message: |
-        Vous allez créer une nouvelle structure dans EVA et la rattacher à votre compte afin de poursuivre le diagnostic pour votre organisation.
+        Vous êtes sur le point de créer une nouvelle structure dans eva, associée à votre compte.
         <br><br>
 
-        En validant, vous serez identifié(e) comme **administrateur** de cette structure. Vous pourrez alors :
+        En la créant, vous en deviendrez **l’administrateur ou l’administratrice**.
 
-        - mettre à jour les informations nécessaires au bon déroulement du diagnostic ;
-        - gérer les demandes de rattachement d’autres utilisateurs.
-        <br><br>
-        
-        Cette organisation pourra être modifiée ultérieurement si nécessaire.
-        <br><br>
+        Ce rôle vous permet notamment de :
 
-        En cas de doute sur votre habilitation, nous vous invitons à vous rapprocher de votre responsable avant de continuer.
+
+        - gérer les informations ;
+        - accepter ou refuser les demandes de rattachement d’autres utilisateurs.
+
+        <br>
+
+        Si vous n’êtes pas habilité à assumer ce rôle, nous vous invitons à ne pas poursuivre et à vous rapprocher de votre responsable hiérarchique.
       annuler: Annuler
       creer_structure: Confirmer la création
     show:

@@ -52,8 +52,10 @@ fr:
         service_departement: Service/Département
         fonctions:
           assistante_ou_assistant_social: Assistante ou assistant social
+          assistant_admin: Assistant administratif
           chargee_ou_charge_de_formation: Chargée ou chargé de formation
           cheffe_ou_chef_de_projet: Cheffe ou chef de projet
+          chef_d_equipe: Chef d'équipe
           conseillere_ou_conseiller_emploi_formation_insertion: Conseillère ou conseiller emploi / formation / insertion
           consultante_ou_consultant: Consultante ou consultant
           coordinatrice_ou_coordinateur_pedagogique: Coordinatrice ou coordinateur pédagogique
@@ -61,8 +63,10 @@ fr:
           educatrice_ou_educateur: Éducatrice ou éducateur
           enseignante_ou_enseignant_de_l_education_nationale: Enseignante ou enseignant de l’Éducation Nationale
           formatrice_ou_formateur: Formatrice ou formateur
+          manager: Manager
           psychologue_ou_medecin_du_travail: Psychologue ou médecin du travail
           referente_ou_referent_handicap: Référente ou référent handicap
+          representant_du_personnel: Représentant du personnel
           responsable_conseillere_ou_conseiller_rh: Responsable, conseillère ou conseiller RH
           responsable_conseillere_ou_conseiller_rse: Responsable, conseillère ou conseiller RSE
           volontaire_service_civique: Volontaire service civique

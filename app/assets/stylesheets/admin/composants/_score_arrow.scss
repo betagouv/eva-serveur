@@ -2,7 +2,7 @@
   --score-arrow-color: #00A95F;
 
   display: flex;
-  width: 264px;
+  width: 16.5rem;
   align-items: center;
   gap: $dsfr-spacing-0;
 
@@ -21,26 +21,26 @@
   }
 
   &__pointe {
-    width: 16px;
-    height: 32px;
+    width: 1rem;
+    height: 2rem;
     flex-shrink: 0;
   }
 
   &__svg {
-    width: 16px;
-    height: 32px;
+    width: 1rem;
+    height: 2rem;
     color: var(--score-arrow-color);
     fill: var(--score-arrow-color);
   }
 
   &__svg--inactive {
-    height: 32px;
-    width: 16px;
+    height: 2rem;
+    width: 1rem;
   }
 
   &__svg--active {
-    width: 26px;
-    height: 52px;
+    width: 1.625rem;
+    height: 3.25rem;
     flex-shrink: 0;
   }
 
@@ -65,14 +65,14 @@
   &--active {
     .score-fleche__conteneur {
       background: var(--score-arrow-color);
-      border-bottom: 4px solid var(--border-plain-grey);
-      border-left: 4px solid var(--border-plain-grey);
-      border-top: 4px solid var(--border-plain-grey);
+      border-bottom: 0.25rem solid var(--border-plain-grey);
+      border-left: 0.25rem solid var(--border-plain-grey);
+      border-top: 0.25rem solid var(--border-plain-grey);
       padding: $dsfr-spacing-1w $dsfr-spacing-3v;
-      height: 50px;
+      height: 3.125rem;
       /* stylelint-disable-next-line */
-      margin-right: -2px !important;
-      border-radius: 0 5px 5px 0;
+      margin-right: -0.125rem !important;
+      border-radius: 0 0.3125rem 0.3125rem 0;
     }
 
     .score-fleche__lettre {
@@ -86,7 +86,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-left: -2 !important;
+      margin-left: -0.125rem !important;
     }
 
     &.score-fleche--blue {
@@ -142,78 +142,78 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .score-arrows-stack--active-a {
   .score-fleche--a {
-    width: 125px;
+    width: 7.8125rem;
   }
 
   .score-fleche--b {
-    width: 182px;
+    width: 11.375rem;
   }
 
   .score-fleche--c {
-    width: 218px;
+    width: 13.625rem;
   }
 
   .score-fleche--d {
-    width: 254px;
+    width: 15.875rem;
   }
 }
 
 .score-arrows-stack--active-b {
   .score-fleche--a {
-    width: 126px;
+    width: 7.875rem;
   }
 
   .score-fleche--b {
-    width: 162px;
+    width: 10.125rem;
   }
 
   .score-fleche--c {
-    width: 218px;
+    width: 13.625rem;
   }
 
   .score-fleche--d {
-    width: 254px;
+    width: 15.875rem;
   }
 }
 
 .score-arrows-stack--active-c {
   .score-fleche--a {
-    width: 126px;
+    width: 7.875rem;
   }
 
   .score-fleche--b {
-    width: 162px;
+    width: 10.125rem;
   }
 
   .score-fleche--c {
-    width: 198px;
+    width: 12.375rem;
   }
 
   .score-fleche--d {
-    width: 254px;
+    width: 15.875rem;
   }
 }
 
 .score-arrows-stack--active-d {
   .score-fleche--a {
-    width: 136px;
+    width: 8.5rem;
   }
 
   .score-fleche--b {
-    width: 172px;
+    width: 10.75rem;
   }
 
   .score-fleche--c {
-    width: 208px;
+    width: 13rem;
   }
 
   .score-fleche--d {
-    width: 244px;
+    width: 15.25rem;
   }
 }
 
@@ -223,5 +223,5 @@
   flex-flow: row wrap;
   align-items: flex-start;
   align-content: flex-start;
-  gap: 24px;
+  gap: 1.5rem;
 }

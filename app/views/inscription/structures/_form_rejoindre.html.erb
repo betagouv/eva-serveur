@@ -17,7 +17,6 @@
                 <div class="fr-radio-group fr-radio-group--sm">
                   <%= form.radio_button :structure_id, structure.id, id: "structure_#{structure.id}" %>
                   <%= form.label :structure_id, structure.nom.upcase, class: "fr-label", for: "structure_#{structure.id}" %>
-                  <p class="fr-mb-0 fr-ml-3w fr-hint-text"><%= structure.adresse %></p>
                 </div>
               </div>
             <% end %>

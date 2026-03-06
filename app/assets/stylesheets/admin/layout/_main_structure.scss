@@ -13,6 +13,12 @@ body.logged_in {
   }
 }
 
+body.logged_in.evapro_admin {
+  #active_admin_content {
+    padding-left: 1rem;
+  }
+}
+
 // Layout spécifique Evapro : exclut le dashboard EvaPro.
 body.logged_in.evapro_admin:not(.admin_dashboard) #active_admin_content #main_content_wrapper #main_content,
 body.logged_in.evapro_admin.admin_evaluations #active_admin_content #main_content_wrapper #main_content {

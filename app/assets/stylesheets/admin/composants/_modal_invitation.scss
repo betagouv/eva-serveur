@@ -1,0 +1,32 @@
+.fr-modal-invitation {
+  .contenu-modale {
+    display: flex;
+    padding: 1rem 0 6.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  @media (max-width: 1280px) {
+    .contenu-modale {
+      padding-bottom: 1rem;
+    }
+  }
+
+  .contenu {
+    display: flex;
+    padding-bottom: 4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+  }
+
+  .invitation-modal-description {
+    @include corps-de-texte-md-regular;
+
+    color: var(--text-label-grey);
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+}

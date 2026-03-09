@@ -8,7 +8,8 @@ fr:
       bilan_evapro:
         titre: "Bilan : votre situation"
         explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."
-        opco_titre: "Votre opérateur de compétences peut vous aider :"
+        opco_titre: "Et ensuite ? Contactez votre opérateur de compétences"
+        opco_sous_titre: "Votre opérateur de compétences peut vous aider à identifier les solutions adaptées pour mettre en place des actions concrètes."
       aller_plus_loin:
         titre: "Aller plus loin"
         image_alt: "Focus incoutournable"

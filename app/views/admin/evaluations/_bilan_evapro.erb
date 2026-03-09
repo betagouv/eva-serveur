@@ -7,7 +7,8 @@
       <p class="evaluation-bilan-evapro__explication"><%= t(".explication") %></p>
 
       <% if opco %>
-        <h2 class="evaluation__titre"><%= t(".opco_titre") %></h2>
+        <h2 class="evaluation-bilan-evapro__titre-opco"><%= t(".opco_titre") %></h2>
+        <p class="evaluation-bilan-evapro__sous-titre-opco"><%= t(".opco_sous_titre") %></p>
         <div class="evaluation-bilan-evapro__opco-financeur-contacts">
           <div class="evaluation-bilan-evapro__opco-financeur">
             <% if opco.logo.attached? %>

@@ -1,3 +1,11 @@
+.evaluation-bilan-evapro__titre-opco {
+  margin: 0;
+}
+
+.evaluation-bilan-evapro__sous-titre-opco {
+  @include corps-de-texte-sm-regular;
+  color: $couleur-texte;
+}
 .evaluation-bilan-evapro__contenu {
   display: flex;
   flex-direction: column;
@@ -18,6 +26,8 @@
   flex-direction: row;
   gap: $dsfr-spacing-6v;
   align-items: center;
+  padding: $dsfr-spacing-2w;
+  border: 1px solid $grey-900;
 }
 
 .evaluation-bilan-evapro__opco-financeur {

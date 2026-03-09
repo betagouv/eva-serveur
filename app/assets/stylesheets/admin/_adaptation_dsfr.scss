@@ -199,10 +199,18 @@ button.fr-link--close.fr-link:hover {
     top: 0 !important;
   }
 
+  .fr-modal-invitation.fr-modal--opened > .fr-container {
+    pointer-events: auto;
+  }
 }
 
 .fr-modal.fr-modal--opened {
-  display: flex;
+  display: flex !important;
+}
+
+// Select2 dropdown au-dessus des modales, il se mettait derrière la modale..
+.select2-container--open {
+  z-index: 100001 !important;
 }
 
 .fr-modal__content ul {

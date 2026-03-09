@@ -46,6 +46,20 @@ visible: :all
 
           expect(page).to have_content("Invitation envoyée à invite@eva.fr.")
         end
+
+        it "permet de choisir le rôle attribué à l'invité et crée l'invitation avec ce rôle" do
+          expect(page).to have_link("Envoyer une invitation")
+          click_link "Envoyer une invitation"
+
+          fill_in "invitation_email", with: "admin-invite@eva.fr", visible: :all
+          select "Administrateur", from: "invitation_role_#{structure.id}", visible: :all
+          find("button", text: "Envoyer l'invitation", visible: :all).click
+
+          expect(page).to have_content("Invitation envoyée à admin-invite@eva.fr.")
+          invitation = Invitation.find_by(email_destinataire: "admin-invite@eva.fr")
+          expect(invitation).to be_present
+          expect(invitation.role).to eq("admin")
+        end
       end
     end
 

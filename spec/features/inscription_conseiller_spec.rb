@@ -96,6 +96,34 @@ describe 'Création de compte conseiller', type: :feature do
     end
   end
 
+  context "avec une invitation au rôle Administrateur" do
+    let!(:invitation) do
+      create(:invitation, structure: structure,
+invitant: create(:compte_admin, structure: structure), role: "admin")
+    end
+
+    before do
+      visit new_compte_registration_path(invitation_token: invitation.token)
+      fill_in :compte_prenom, with: "Paul"
+      fill_in :compte_nom, with: "Dupont"
+      fill_in :compte_email, with: "admin-invite@eva.fr"
+      fill_in :compte_password, with: "Pass5678"
+      fill_in :compte_password_confirmation, with: "Pass5678"
+      check("compte_cgu_acceptees", allow_label_click: true)
+    end
+
+    it "crée un compte avec le rôle admin choisi lors de l'invitation" do
+      expect do
+        click_on "S'inscrire"
+      end.to change(Compte, :count).by(1)
+
+      nouveau_compte = Compte.find_by email: "admin-invite@eva.fr"
+      expect(nouveau_compte.role).to eq "admin"
+      expect(nouveau_compte.structure).to eq structure
+      expect(nouveau_compte.validation_acceptee?).to be true
+    end
+  end
+
   context "lien d'invitation invalide ou déjà utilisé" do
     it "redirige avec un message d'erreur quand le token est inconnu" do
       visit new_compte_registration_path(invitation_token: "token-inexistant")

@@ -2,6 +2,7 @@
 
 class Invitation < ApplicationRecord
   STATUTS = %w[en_cours acceptee annulee].freeze
+  ROLES = Compte::ROLES_STRUCTURE
 
   belongs_to :structure
   belongs_to :invitant, class_name: "Compte"
@@ -9,6 +10,7 @@ class Invitation < ApplicationRecord
 
   validates :token, presence: true, uniqueness: true
   validates :statut, inclusion: { in: STATUTS }
+  validates :role, inclusion: { in: ROLES }
 
   before_validation :generate_token, on: :create
 
@@ -26,6 +28,10 @@ class Invitation < ApplicationRecord
 
   def marquer_acceptee!(compte)
     update!(statut: "acceptee", compte: compte)
+  end
+
+  def role_pour_compte
+    role.presence || "conseiller"
   end
 
   private

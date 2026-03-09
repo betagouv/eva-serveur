@@ -57,39 +57,52 @@ describe CompteMailer, type: :mailer do
   end
 
   describe 'relance' do
-    let(:structure) { StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012' }
     let(:compte) { Compte.new prenom: 'Paule', email: 'debut@test.com', structure: structure }
     let(:mail) { described_class.with(compte: compte).relance }
 
-    it 'renders the headers' do
-      expect(mail.subject).to eq(
-        'Paule, quelques ressources pour vous aider à réaliser vos premières évaluations'
-      )
-      expect(mail.to).to eq([ 'debut@test.com' ])
-      expect(mail.from).to eql([ Eva::EMAIL_CONTACT ])
-    end
+    context "pour un compte d'une stucture administrative" do
+      let(:structure) do
+        StructureAdministrative.new nom: 'Ma Structure administrative', code_postal: '75012'
+      end
 
-    context "pour une structure de type inconnue" do
-      before { structure.type_structure = nil }
-
-      it "affiche la cible d'évaluation par defaut" do
-        expect(mail.body).to include "bénéficiaires"
+      it "n'envoi pas de mail de relance" do
+        expect(mail.message).to be_a(ActionMailer::Base::NullMail)
       end
     end
 
-    context "pour une structure de type autre" do
-      before { structure.type_structure = "autre" }
+    context "pour un compte d'une stucture locale" do
+      let(:structure) { StructureLocale.new nom: 'Ma Super Structure', code_postal: '75012' }
 
-      it "affiche la cible d'évaluation par defaut" do
-        expect(mail.body).to include "bénéficiaires"
+      it 'renders the headers' do
+        expect(mail.subject).to eq(
+          'Paule, quelques ressources pour vous aider à réaliser vos premières évaluations'
+        )
+        expect(mail.to).to eq([ 'debut@test.com' ])
+        expect(mail.from).to eql([ Eva::EMAIL_CONTACT ])
       end
-    end
 
-    context "pour une structure de type SMA" do
-      before { structure.type_structure = "SMA" }
+      context "pour une structure de type inconnue" do
+        before { structure.type_structure = nil }
 
-      it "affiche la cible d'évaluation" do
-        expect(mail.body).to include "jeunes"
+        it "affiche la cible d'évaluation par defaut" do
+          expect(mail.body).to include "bénéficiaires"
+        end
+      end
+
+      context "pour une structure de type autre" do
+        before { structure.type_structure = "autre" }
+
+        it "affiche la cible d'évaluation par defaut" do
+          expect(mail.body).to include "bénéficiaires"
+        end
+      end
+
+      context "pour une structure de type SMA" do
+        before { structure.type_structure = "SMA" }
+
+        it "affiche la cible d'évaluation" do
+          expect(mail.body).to include "jeunes"
+        end
       end
     end
   end

@@ -3,8 +3,9 @@
 }
 
 .evaluation-bilan-evapro__sous-titre-opco {
-  @include corps-de-texte-sm-regular;
   color: $couleur-texte;
+
+  @include corps-de-texte-sm-regular;
 }
 .evaluation-bilan-evapro__contenu {
   display: flex;

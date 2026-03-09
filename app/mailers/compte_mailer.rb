@@ -14,6 +14,8 @@ class CompteMailer < ApplicationMailer
 
   def relance
     @compte = params[:compte]
+    return if @compte.administratif?
+
     structure = @compte.structure
     @cible_evaluation = structure.cible_evaluation
     @effectif = structure.effectif

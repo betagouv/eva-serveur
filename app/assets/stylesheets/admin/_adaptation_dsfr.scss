@@ -153,32 +153,6 @@ body.logged_in.evapro_admin {
   margin-top: 0;
 }
 
-.fr-modal__content {
-  margin-bottom: 0 !important;
-}
-
-.fr-modal__body {
-  max-height: calc(100vh - 6rem);
-  overflow-y: auto;
-}
-
-button.fr-link--close.fr-link {
-  border: none;
-  box-shadow: none;
-}
-
-button.fr-link--close.fr-link:hover {
-  background-color: $grey-1000-hover;
-  cursor: pointer;
-  border-radius: 0;
-}
-
-.fr-modal__footer {
-  display: flex;
-  padding-top: $dsfr-spacing-8v;
-  margin: 0;
-}
-
 .fr-modal {
   position: fixed;
   inset: 0;
@@ -230,11 +204,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
   line-height: 1.5rem;
 }
 
-.fr-modal__footer .fr-btns-group {
-  gap: 1rem;
-  margin: 0;
-}
-
 // Boutons DSFR dans les modales (hors body.evapro_admin / body.logged_in)
 .fr-modal.evapro_admin .fr-btn {
   @include grand-bouton;
@@ -249,85 +218,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
 
 .fr-modal.evapro_admin .fr-btn--tertiary:hover {
   background: var(--background-raised-grey-hover);
-}
-
-.fr-modal-invitation {
-  .fr-modal__body {
-    width: 49.5rem;
-  }
-
-  @media (max-width: 768px) {
-    .fr-modal__body {
-      width: 100%;
-    }
-  }
-
-  .fr-modal__title {
-    @include titre-h4;
-
-    color: var(--text-title-grey);
-  }
-
-  .contenu-modale {
-    display: flex;
-    padding: 1rem 0 6.5rem;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1rem;
-  }
-
-  @media (max-width: 1280px) {
-    .contenu-modale {
-      padding-bottom: 1rem;
-    }
-  }
-
-  .contenu {
-    display: flex;
-    padding-bottom: 4rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    align-self: stretch;
-  }
-
-  .invitation-modal-description {
-    @include corps-de-texte-md-regular;
-
-    color: var(--text-label-grey);
-    margin: 0;
-    padding-bottom: 1rem;
-  }
-
-  .fr-modal__footer {
-    display: flex;
-    width: 100%;
-    max-width: 49.5rem;
-    padding: 2rem 2rem 2rem 0;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
-    border-top: 1px solid var(--border-default-grey);
-    background: var(--background-lifted-grey);
-  }
-
-  .fr-modal__footer .fr-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .fr-modal__footer .fr-btn--primary:not(.disabled):hover,
-  .fr-modal__footer button.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .disabled):hover {
-    background-color: $blue-france-sun-113-hover;
-    border-color: $blue-france-sun-113-hover;
-  }
-
-  .fr-modal__footer .fr-btn--primary:not(.disabled):active,
-  .fr-modal__footer button.fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .disabled):active {
-    background-color: $blue-france-sun-113-active;
-    border-color: $blue-france-sun-113-active;
-  }
 }
 
 body.logged_in:not(.evapro_admin) .fr-btn {

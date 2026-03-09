@@ -42,7 +42,7 @@ fr:
           titre: Vos questionnaires
           description: "Créé le %{date}"
           bouton_passer: "Passer le questionnaire"
-          evapro_description: "Pour mesurer les risques, d’identifier les enjeux liés aux compétences de base et anticiper les actions adaptées au sein de votre entreprise, commencez par répondre à un questionnaire."
+          evapro_description: "Pour mesurer les risques, identifier les enjeux liés aux compétences de base et anticiper les actions adaptées au sein de votre entreprise, commencez par répondre à un questionnaire."
           evapro_description_2: "Cela prend environ 10 minutes. Vous pourrez ensuite inviter d'autres collaborateurs."
           titre_relancer_questionnaire: "Relancer un nouveau diagnostic"
           texte_relancer_questionnaire: "Si vous le souhaitez, vous pouvez à nouveau répondre au questionnaire."

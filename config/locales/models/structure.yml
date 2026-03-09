@@ -11,8 +11,8 @@ fr:
               invalid: SIRET invalide
               taken: Ce SIRET est déjà utilisé.
               cannot_be_removed: ne peut pas être supprimé
-            opco_id:
-              must_be_present: doit être renseigné
+            email_contact:
+              invalid: "n'est pas valide"
             opco_id:
               must_be_present: doit être renseigné
     models:

@@ -678,6 +678,32 @@ describe Structure, type: :model do
         expect(structure).not_to be_valid
         expect(structure.errors[:email_contact]).to be_present
       end
+
+      context "validation Truemail (vérification DNS / boîte mail)" do
+        let(:structure) { build(:structure, email_contact: "contact@structure.fr") }
+
+        before do
+          allow(structure).to receive(:email_contact_changed?).and_return(true)
+          allow(Truemail).to receive(:valid?).and_return(true)
+        end
+
+        it "n'ajoute pas d'erreur quand Truemail valide l'email" do
+          structure.valid?
+          expect(structure.errors[:email_contact]).to be_blank
+        end
+
+        it "ajoute une erreur quand Truemail invalide l'email" do
+          allow(Truemail).to receive(:valid?).with("contact@structure.fr").and_return(false)
+          structure.valid?
+          expect(structure.errors[:email_contact]).to be_present
+        end
+
+        it "ne appelle pas Truemail quand l'email n'a pas changé" do
+          allow(structure).to receive(:email_contact_changed?).and_return(false)
+          structure.valid?
+          expect(Truemail).not_to have_received(:valid?).with("contact@structure.fr")
+        end
+      end
     end
 
     context "telephone" do

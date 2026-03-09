@@ -27,6 +27,7 @@ class Structure < ApplicationRecord
   validate :ne_peut_pas_supprimer_siret
   validate :doit_avoir_un_opco, if: :validation_inscription
   validates :email_contact, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
+  validate :verifie_dns_email_contact
   validates :telephone, format: { with: /\A[\d\s+()\-]+\z/ }, length: { maximum: 20 },
 allow_blank: true
 
@@ -170,5 +171,13 @@ allow_blank: true
     return if opco.present?
 
     errors.add(:opco_id, :must_be_present)
+  end
+
+  def verifie_dns_email_contact
+    return if email_contact.blank?
+    return unless email_contact_changed?
+    return if Truemail.valid?(email_contact)
+
+    errors.add(:email_contact, :invalid)
   end
 end

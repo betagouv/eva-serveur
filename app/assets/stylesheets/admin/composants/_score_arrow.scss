@@ -11,6 +11,10 @@
     padding: $dsfr-spacing-1v $dsfr-spacing-1w;
     align-items: center;
     flex: 1 0 0;
+
+    @media print {
+      border-radius: 0 2px 2px 0;
+    }
   }
 
   &__lettre {
@@ -24,6 +28,10 @@
     width: 1rem;
     height: 2rem;
     flex-shrink: 0;
+
+    @media print {
+      margin-left: -1px;
+    }
   }
 
   &__svg {

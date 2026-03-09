@@ -69,7 +69,7 @@ module Eva
       def compte_parametres_invitation
         compte_parametres.merge(
           structure_id: @invitation.structure_id,
-          role: "conseiller",
+          role: @invitation.role_pour_compte,
           statut_validation: "acceptee"
         )
       end

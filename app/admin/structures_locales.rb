@@ -99,7 +99,8 @@ ActiveAdmin.register StructureLocale do
     invitation = resource.invitations.create!(
       email_destinataire: email,
       invitant: current_compte,
-      message_personnalise: message_personnalise
+      message_personnalise: message_personnalise,
+      role: invitation_params[:role].presence || "conseiller"
     )
     StructureMailer.with(invitation: invitation).invitation_structure.deliver_later
 
@@ -165,7 +166,7 @@ notice: "Structure mise à jour avec succès"
     private
 
     def invitation_params
-      params.fetch(:invitation, ActionController::Parameters.new).permit(:email, :message)
+      params.fetch(:invitation, ActionController::Parameters.new).permit(:email, :message, :role)
     end
 
     def compte_autorise_pour_invitation?

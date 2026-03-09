@@ -20,11 +20,17 @@
   function openWithFallback(modal) {
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
+    if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
+      modal.setAttribute("open", "");
+    }
   }
 
   function closeWithFallback(modal) {
     modal.classList.remove(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "true");
+    if (modal.tagName === "DIALOG") {
+      modal.removeAttribute("open");
+    }
   }
 
   function openModal(modal) {

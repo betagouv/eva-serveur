@@ -32,6 +32,11 @@ fr:
           titre: Inviter quelqu’un
           description: Saisissez ou collez une adresse e-mail ci-dessous pour inviter un nouveau membre à rejoindre votre structure. Un e-mail d’invitation lui sera directement envoyé.
           email_label: Adresse e-mail
+          role_label: Rôle
+          role_placeholder: Sélectionner un rôle
+          roles:
+            admin: Administrateur
+            conseiller: Conseiller
           message_label: Message (optionnel)
           message_hint: Ajouter une note à votre message
           copier_lien: Copier le lien d'invitation

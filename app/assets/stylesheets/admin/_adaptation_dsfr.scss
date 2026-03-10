@@ -211,6 +211,12 @@ body.logged_out #wrapper .fr-modal__content ul li,
   border-radius: 0;
 }
 
+// Lien/bouton fermer de la modale : garder l’arrondi à 0 (éviter le style DSFR par défaut)
+.fr-modal.evapro_admin .fr-modal__header .fr-link--close,
+.fr-modal.evapro_admin .fr-link--close.fr-link {
+  border-radius: 0 !important;
+}
+
 .fr-modal.evapro_admin .fr-btn--secondary,
 .fr-modal.evapro_admin .fr-btn--tertiary {
   color: var(--text-action-high-blue-france);
@@ -267,7 +273,10 @@ body.evapro_admin .fr-btn--tertiary:hover,
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
 form button.fr-btn:not(.disabled):hover,
 form input[type="submit"].fr-btn:not(.disabled):hover,
-form input[type="button"].fr-btn:not(.disabled):hover {
+form input[type="button"].fr-btn:not(.disabled):hover,
+// Boutons avec attribut form= (hors du formulaire, ex. modale invitation)
+.fr-modal.evapro_admin button.fr-btn:not(.disabled):hover,
+.fr-modal.evapro_admin input[type="submit"].fr-btn:not(.disabled):hover {
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary) {

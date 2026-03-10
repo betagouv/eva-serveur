@@ -17,11 +17,11 @@
       <div class="bloc-questionnaires-entreprise__item">
         <% url = LanceurCampagne.url(campagne, current_compte) %>
         <%= render CardDiagnostiqueComponent.new(
-          titre: campagne.parcours_type.libelle,
-          description: campagne.parcours_type.description,
+          titre: parcours_type_libelle(campagne),
+          description: parcours_type_description(campagne),
           bouton_label: t(".bouton_label"),
           bouton_url: url,
-          opco: campagne.evapro_opco? ? opco : nil,
+          opco: campagne.parcours_type&.evapro_opco? ? opco : nil,
           bouton_attributes: { target: "_blank", rel: "noopener" }
         ) %>
       </div>

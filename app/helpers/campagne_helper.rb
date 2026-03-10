@@ -42,4 +42,12 @@ module CampagneHelper
       campagne.parcours_type.libelle
     end
   end
+
+  def parcours_type_description(campagne)
+    if campagne.parcours_type.nil?
+      ""
+    else
+      campagne.parcours_type.description
+    end
+  end
 end

@@ -238,8 +238,7 @@ ActiveAdmin.setup do |config|
   config.register_javascript '/tarteaucitron/tarteaucitron.js'
   config.register_javascript 'tarteaucitron-init.js'
   config.register_javascript 'hotjar.js'
-  config.register_javascript 'matomo.js'
-  config.register_javascript 'crisp.js'
+  config.register_javascript 'plausible.js'
   config.register_javascript "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
   config.register_stylesheet "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
   config.register_javascript '/dsfr/dsfr.nomodule.min.js'

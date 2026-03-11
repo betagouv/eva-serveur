@@ -1,5 +1,0 @@
-<% if ENV['MATOMO_ID'].present? %>
-tarteaucitron.user.matomoHost = 'https://stats.data.gouv.fr/';
-tarteaucitron.user.matomoId = <%= ENV['MATOMO_ID'] %>;
-(tarteaucitron.job = tarteaucitron.job || []).push('matomohightrack');
-<% end %>

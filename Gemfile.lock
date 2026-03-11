@@ -1,6 +1,8 @@
 GEM
   remote: https://rails-assets.org/
   specs:
+    html-attributes-utils (1.0.2)
+      activesupport (>= 6.1.4.4)
     rails-assets-clipboard (2.0.11)
 
 GEM
@@ -231,8 +233,8 @@ GEM
       addressable (~> 2.8)
     drb (2.2.3)
     dsfr-assets (1.14.3)
-    dsfr-view-components (2.2.0)
-      dsfr-assets (~> 1.13)
+    dsfr-view-components (4.1.3)
+      dsfr-assets (>= 1.13.2, < 1.15)
       html-attributes-utils (~> 1)
       view_component (~> 3)
     erb (6.0.1)
@@ -323,8 +325,6 @@ GEM
     herb (0.8.8-x86_64-darwin)
     herb (0.8.8-x86_64-linux-gnu)
     herb (0.8.8-x86_64-linux-musl)
-    html-attributes-utils (1.0.2)
-      activesupport (>= 6.1.4.4)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.2)
@@ -808,7 +808,7 @@ DEPENDENCIES
   devise-i18n
   down
   dsfr-assets (~> 1.13)
-  dsfr-view-components (~> 2.0)
+  dsfr-view-components (= 4.1.3)
   factory_bot_rails
   ffaker
   foreman

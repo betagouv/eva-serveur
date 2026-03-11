@@ -20,5 +20,6 @@ function utilise_date_picker_du_dsfr(filtre) {
 
 document.addEventListener('DOMContentLoaded', () => {
   utilise_date_picker_du_dsfr(document.getElementById('q_created_at_input'));
+  utilise_date_picker_du_dsfr(document.getElementById('q_debutee_le_input'));
 });
 

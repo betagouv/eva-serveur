@@ -34,7 +34,7 @@ ActiveAdmin.register Evaluation do
          minimum_input_length: 2,
          order_by: "libelle_asc",
          if: proc { !current_compte.utilisateur_entreprise? }
-  filter :created_at, if: proc { !current_compte.utilisateur_entreprise? }
+  filter :debutee_le, if: proc { !current_compte.utilisateur_entreprise? }
   filter :responsable_suivi_id,
          label: Evaluation.human_attribute_name("responsable_suivi"),
          as: :search_select_filter,
@@ -71,7 +71,7 @@ ActiveAdmin.register Evaluation do
   index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
         row_class: ->(elem) { "anonyme" if elem.anonyme? },
         compte_evapro: proc { current_compte.utilisateur_entreprise? } do
-    render "index", context: self
+      render "index", context: self
   end
 
   form partial: "form"
@@ -117,7 +117,7 @@ ActiveAdmin.register Evaluation do
     whitelist
     column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
-    column(:created_at) { |evaluation| I18n.l(evaluation.created_at, format: :sans_heure) }
+    column(:debutee_le) { |evaluation| I18n.l(evaluation.debutee_le, format: :sans_heure) }
     column("nom_beneficiaire") { |evaluation| evaluation.beneficiaire.nom }
     column("code_beneficiaire") { |evaluation| evaluation.beneficiaire.code_beneficiaire }
     column(:completude) do |evaluation|

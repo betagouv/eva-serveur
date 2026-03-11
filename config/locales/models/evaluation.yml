@@ -104,7 +104,7 @@ fr:
       evaluation:
         structure: Structure
         campagne: Campagne
-        created_at: Date
+        debutee_le: Date
         nom_beneficiaire: Nom bénéficiaire
         code_beneficiaire: Code bénéficiaire
         completude: Passation complète ?

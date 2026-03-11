@@ -335,7 +335,7 @@ describe Ability do
     let(:compte) { create :compte_conseiller, :en_attente, structure: nil }
 
     it do
-      expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+      expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, "recherche_structure", {}))
       expect(subject).to be_able_to(:create, StructureLocale.new)
     end
   end
@@ -522,7 +522,10 @@ describe Ability do
   end
 
   context 'Compte en attente de validation' do
-    let!(:compte) { create :compte_conseiller, :en_attente, structure: structure_avec_admin }
+    let!(:compte) do
+      create :compte_conseiller, :en_attente, :exempte_restriction_acces_attente,
+             structure: structure_avec_admin
+    end
     let!(:ma_campagne) { create :campagne, compte: compte }
     let!(:mon_evaluation) { create :evaluation, campagne: ma_campagne }
 
@@ -540,6 +543,22 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, autre_evaluation)
       expect(subject).not_to be_able_to(:destroy, autre_evaluation)
       expect(subject).not_to be_able_to(:read, compte.structure)
+    end
+  end
+
+  context 'Compte en attente (soumis à restriction)' do
+    let!(:compte) do
+      create :compte_conseiller, :en_attente, structure: structure_avec_admin,
+             exempte_restriction_acces_attente: false
+    end
+
+    it "a les mêmes droits que un compte refusé (Dashboard et son compte uniquement)" do
+      expect(subject).to be_able_to(:read, compte)
+      expect(subject).to be_able_to(:update, compte)
+      expect(subject).to be_able_to(:accepter_cgu, compte)
+      expect(subject).not_to be_able_to(:read, Campagne)
+      expect(subject).not_to be_able_to(:read, Actualite)
+      expect(subject).not_to be_able_to(:read, Evaluation)
     end
   end
 

@@ -23,6 +23,9 @@ FactoryBot.define do
     trait :refusee do
       statut_validation { :refusee }
     end
+    trait :exempte_restriction_acces_attente do
+      exempte_restriction_acces_attente { true }
+    end
 
     factory :compte_superadmin do
       role { 'superadmin' }

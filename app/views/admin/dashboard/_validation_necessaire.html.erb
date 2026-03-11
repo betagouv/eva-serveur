@@ -1,0 +1,11 @@
+<section class="bienvenue-entreprise section-tableau-bord-eva-pro">
+  <h2 class="bienvenue-entreprise__titre">
+    <%= t("admin.dashboard.bienvenue_entreprise.titre") %>
+  </h2>
+  <%= render DsfrComponent::CalloutComponent.new(
+    title: t("admin.dashboard.compte_en_attente_approbation.titre"),
+    icon_name: :none
+  ) do %>
+    <%= md t("admin.dashboard.compte_en_attente_approbation.description") %>
+  <% end %>
+</section>

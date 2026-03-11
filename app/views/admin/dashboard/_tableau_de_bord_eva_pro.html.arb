@@ -8,9 +8,8 @@ if current_compte.validation_refusee?
   render "validation_refusee"
 elsif current_compte.validation_en_attente?
   render "validation_necessaire"
-end
-
-div class: "tableau-bord-layout" do
+else
+  div class: "tableau-bord-layout" do
   div class: "tableau-bord-contenu-principal" do
     render partial: "admin/dashboard/eva_pro/bienvenue_entreprise",
            locals: {
@@ -34,18 +33,21 @@ div class: "tableau-bord-layout" do
 premiere_reponse_complete: premiere_reponse_complete }
   end
 
-  if structure.present?
-    div class: "tableau-bord-sidebar" do
-      section class: "section-opco section-tableau-bord-eva-pro" do
-        render partial: "admin/dashboard/eva_pro/sidebar_opco",
-               locals: {
-                 opco: opco,
-                 structure: structure
-               }
+    if structure.present?
+      div class: "tableau-bord-sidebar" do
+        section class: "section-opco section-tableau-bord-eva-pro" do
+          render partial: "admin/dashboard/eva_pro/sidebar_opco",
+                locals: {
+                  opco: opco,
+                  structure: structure
+                }
+        end
       end
     end
   end
 end
+
+
 
 if structure.is_a?(StructureLocale)
   render partial: "admin/structures/modal_invitation", locals: { structure: structure }

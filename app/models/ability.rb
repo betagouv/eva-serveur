@@ -4,6 +4,8 @@ class Ability < AbilityUtilisateur
 
     if compte.validation_refusee?
       droits_comptes_refuses compte
+    elsif compte_en_attente_restreint?(compte)
+      droits_comptes_en_attente_restreints compte
     else
       super
       droits_applicatifs
@@ -58,5 +60,16 @@ class Ability < AbilityUtilisateur
   def droits_comptes_refuses(compte)
     can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
     can %i[update read accepter_cgu], compte
+  end
+
+  def droits_comptes_en_attente_restreints(compte)
+    can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
+    can %i[update read accepter_cgu], compte
+  end
+
+  def compte_en_attente_restreint?(compte)
+    compte.validation_en_attente? &&
+      !compte.exempte_restriction_acces_attente? &&
+      compte.structure_id.present?
   end
 end

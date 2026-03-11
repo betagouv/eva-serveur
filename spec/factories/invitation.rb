@@ -6,7 +6,7 @@ FactoryBot.define do
     association :invitant, factory: :compte_admin
     email_destinataire { "invite@test.com" }
     statut { "en_cours" }
-    role { "conseiller" }
+    role { Compte::ROLE_PAR_DEFAUT }
 
     trait :acceptee do
       statut { "acceptee" }

@@ -199,4 +199,25 @@ visible: :all
       end
     end
   end
+
+  describe "en tant que conseiller (modal d'invitation sans choix de rôle)" do
+    let!(:structure) { create :structure_locale, :avec_admin, nom: "Structure conseiller" }
+    let!(:compte_conseiller) { create :compte_conseiller, structure: structure }
+
+    before { connecte(compte_conseiller) }
+
+    it "n'affiche pas le select de rôle et crée l'invitation avec le rôle conseiller" do
+      visit admin_structure_locale_path(structure)
+      expect(page).to have_link("Envoyer une invitation")
+      click_link "Envoyer une invitation"
+      expect(page).not_to have_selector("select[id*='invitation_role']", visible: :all)
+      fill_in "invitation_email", with: "invite-conseiller@eva.fr", visible: :all
+      find("button", text: "Envoyer l'invitation", visible: :all).click
+      expect(page).to have_content("Invitation envoyée à invite-conseiller@eva.fr.")
+      invitation = Invitation.find_by(email_destinataire: "invite-conseiller@eva.fr")
+      expect(invitation).to be_present
+      expect(invitation.role).to eq("conseiller")
+      expect(invitation.invitant).to eq(compte_conseiller)
+    end
+  end
 end

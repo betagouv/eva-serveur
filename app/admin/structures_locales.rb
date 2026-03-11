@@ -81,31 +81,7 @@ ActiveAdmin.register StructureLocale do
   end
 
   member_action :envoyer_invitation, method: :post do
-    unless compte_autorise_pour_invitation?
-      redirect_back fallback_location: admin_structure_locale_path(resource),
-                    alert: I18n.t("admin.structures.membres.invitation_non_autorisee")
-      next
-    end
-
-    email = invitation_params[:email].to_s.strip
-    message_personnalise = invitation_params[:message].to_s.strip
-
-    unless email.match?(URI::MailTo::EMAIL_REGEXP)
-      redirect_back fallback_location: admin_structure_locale_path(resource),
-                    alert: I18n.t("admin.structures.membres.email_invalide")
-      next
-    end
-
-    invitation = resource.invitations.create!(
-      email_destinataire: email,
-      invitant: current_compte,
-      message_personnalise: message_personnalise,
-      role: invitation_params[:role].presence || "conseiller"
-    )
-    StructureMailer.with(invitation: invitation).invitation_structure.deliver_later
-
-    redirect_back fallback_location: admin_structure_locale_path(resource),
-                  notice: I18n.t("admin.structures.membres.invitation_envoyee", email: email)
+    envoyer_invitation_et_rediriger
   end
 
   member_action :copier_lien, method: :post do
@@ -116,7 +92,8 @@ status: :forbidden
     end
 
     invitation = resource.invitations.create!(
-      invitant: current_compte
+      invitant: current_compte,
+      role: Compte::ROLE_PAR_DEFAUT
     )
     url = new_compte_registration_url(invitation_token: invitation.token)
     render json: { url: url }
@@ -164,6 +141,29 @@ notice: "Structure mise à jour avec succès"
     end
 
     private
+
+    def envoyer_invitation_et_rediriger
+      result = EnvoiInvitationService.new(
+        structure: resource,
+        invitant: current_compte,
+        email: invitation_params[:email],
+        message: invitation_params[:message],
+        role: invitation_params[:role].presence
+      ).call
+
+      redirect_apres_envoi_invitation(result)
+    end
+
+    def redirect_apres_envoi_invitation(result)
+      fallback = admin_structure_locale_path(resource)
+      if result.success?
+        notice = I18n.t("admin.structures.membres.invitation_envoyee", email: result.email)
+        redirect_back fallback_location: fallback, notice: notice
+      else
+        alert = I18n.t("admin.structures.membres.#{result.error}")
+        redirect_back fallback_location: fallback, alert: alert
+      end
+    end
 
     def invitation_params
       params.fetch(:invitation, ActionController::Parameters.new).permit(:email, :message, :role)

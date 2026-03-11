@@ -14,6 +14,7 @@ class Compte < ApplicationRecord
     "admin" => I18n.t("activerecord.attributes.compte.aide_roles.admin")
   }.freeze
   ROLES_STRUCTURE = %w[conseiller admin].freeze
+  ROLE_PAR_DEFAUT = "conseiller"
   ADMIN_ROLES = %w[superadmin admin compte_generique].freeze
   ANLCI_ROLES = %w[superadmin charge_mission_regionale].freeze
 

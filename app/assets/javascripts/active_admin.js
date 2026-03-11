@@ -25,6 +25,7 @@
 //= require evaluation
 //= require simple_mde
 //= require modal_verification
+//= require modal_verification_ouverture_evapro
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require structure_confirmation

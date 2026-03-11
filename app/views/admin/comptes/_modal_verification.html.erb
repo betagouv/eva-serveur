@@ -1,5 +1,10 @@
 
-<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: "fr-modal-verification" }) do %>
+<%
+  usage_evapro = current_compte.structure&.eva_entreprises?
+  modal_classes = "fr-modal-verification"
+  modal_classes += " evapro_admin" if usage_evapro
+%>
+<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: modal_classes }) do %>
   <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
     <div class="modal-role-utilisateur">
       <%= md t(".introduction", compte: compte.display_name, structure: current_compte.structure.nom) %>
@@ -26,7 +31,7 @@
       </div>
 
       <div class="fr-modal__footer">
-        <button type="submit" name="decision" value="Refuser" class="fr-btn bouton-secondaire">
+        <button type="submit" name="decision" value="Refuser" class="fr-btn fr-btn--secondary bouton-secondaire">
           Refuser
         </button>
         <button type="submit" name="decision" value="Autoriser" class="fr-btn fr-m-0" id="valider-modal-verification">

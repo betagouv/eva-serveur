@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :configure_permitted_parameters, if: :active_admin_devise_controller?
+  before_action :bloque_acces_si_compte_en_attente
   helper_method :annulation_formulaire
 
   def current_ability
@@ -22,6 +23,24 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def bloque_acces_si_compte_en_attente
+    return if active_admin_devise_controller?
+    return if current_compte.blank?
+    return unless current_compte.acces_plateforme_bloque?
+
+    zone = zone_du_chemin(request.path)
+    return if current_ability.can?(:access_zone, zone)
+
+    redirect_to admin_dashboard_path
+  end
+
+  def zone_du_chemin(path)
+    return :admin if path.start_with?("/admin")
+    return :inscription if path.start_with?("/inscription")
+
+    :plateforme
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[structure_id prenom nom telephone])

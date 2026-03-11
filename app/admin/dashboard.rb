@@ -4,7 +4,9 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-    if current_compte.utilisateur_entreprise?
+    if current_compte.acces_plateforme_bloque?
+      render partial: "validation_necessaire"
+    elsif current_compte.utilisateur_entreprise?
       render partial: "tableau_de_bord_eva_pro",
              locals: eva_pro_locals(
                campagnes: campagnes_entreprise,

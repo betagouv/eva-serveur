@@ -84,14 +84,11 @@ fr:
         titre: Bienvenue sur eva !
         quitter: Quitter le tutoriel
         terminer: Fermer le tutoriel
-      validation_necessaire:
-        titre: "Compte en attente d'approbation"
+"Compte en attente d'approbation"
         description: |
-          Vous n'êtes deux clics d'utiliser Eva. Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'Eva pour votre structure. Elle va bientôt vous permettre d'utiliser Eva. Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle. Vous pensez que cette personne est momentanément absente ?
+          Vous n'êtes deux clics d'utiliser Eva. Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'Eva pour votre structure. Elle va bientôt vous permettre d'utiliser Eva. Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle. Vous pensez que cette personne est momentanément absente ?
 
-          Vous pouvez contacter le support : par téléphone au [06 50 84 32 36](tel:+33650843236) ou par mail à [eva@anlci.gouv.fr](mailto:eva@anlci.gouv.fr).
-
-      validation_refusee:
+          Vous pouvez contacter le support : par téléphone au **06 50 84 32 36** ou par mail à **eva@anlci.gouv.fr**
         titre: Votre compte est refusé.
         description: |
           Votre compte a été refusé. Vous ne pouvez donc pas utiliser la plateforme.

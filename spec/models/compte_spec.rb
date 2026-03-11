@@ -410,4 +410,67 @@ describe Compte do
         .only_deleted.find(autorisation.id).deleted_at).not_to be_nil
     end
   end
+
+  describe "#active_for_authentication?" do
+    context "quand le compte est accepté et confirmé" do
+      it "est actif" do
+        compte = build(:compte_conseiller,
+                       statut_validation: :acceptee,
+                       confirmed_at: Time.zone.now)
+
+        expect(compte.active_for_authentication?).to be(true)
+      end
+    end
+
+    context "quand le compte est en attente" do
+      it "est actif (peut se connecter et voir la page en attente)" do
+        compte = build(:compte_conseiller,
+                       statut_validation: :en_attente,
+                       confirmed_at: Time.zone.now,
+                       created_at: 1.day.ago)
+
+        expect(compte.active_for_authentication?).to be(true)
+      end
+    end
+
+    context "quand le compte est refusé" do
+      it "n'est pas actif" do
+        compte = build(:compte_conseiller,
+                       statut_validation: :refusee,
+                       confirmed_at: Time.zone.now)
+
+        expect(compte.active_for_authentication?).to be(false)
+      end
+    end
+  end
+
+  describe "#acces_plateforme_bloque?" do
+    context "quand le compte est en attente" do
+      it "retourne true" do
+        compte = build(:compte_conseiller, statut_validation: :en_attente)
+
+        expect(compte.acces_plateforme_bloque?).to be(true)
+      end
+    end
+
+    context "quand le compte est accepté" do
+      it "retourne false" do
+        compte = build(:compte_conseiller, statut_validation: :acceptee)
+
+        expect(compte.acces_plateforme_bloque?).to be(false)
+      end
+    end
+  end
+
+  describe "#inactive_message" do
+    context "quand le compte est en attente" do
+      it "retourne le message d'attente d'approbation" do
+        compte = build(:compte_conseiller,
+                       statut_validation: :en_attente,
+                       confirmed_at: Time.zone.now)
+
+        expect(compte.inactive_message).to eq(:pending_approval)
+      end
+    end
+  end
 end

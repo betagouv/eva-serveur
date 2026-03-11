@@ -3,6 +3,8 @@ fr:
     confirmations:
       confirmed: Merci ! Votre adresse email a bien été validée.
     registrations:
+      signed_up_but_pending_approval: Votre compte a été créé. Il est en attente d'approbation par un administrateur.
+    registrations:
       invitation_invalide_ou_deja_utilisee: "Ce lien d'invitation n'est pas valide ou a déjà été utilisé."
     mailer:
       confirmation_instructions:

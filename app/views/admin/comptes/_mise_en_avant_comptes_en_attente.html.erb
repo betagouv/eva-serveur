@@ -2,8 +2,9 @@
   <div class='liste-membres'>
     <% @comptes_en_attente.each do |compte| %>
       <% if can?(:verifier, compte) %>
+        <% modal_id = "fr-modal-#{compte.id}" %>
         <% bouton_label = "Vérifier" %>
-        <% bouton_attributes = { "data-fr-opened": "false", "aria-controls": "fr-modal-#{compte.id}" } %>
+        <% bouton_attributes = { "data-ouvre-modal-verification": modal_id, "aria-controls": modal_id } %>
 
         <%= render MiseEnAvantComponent.new(
               titre: "#{compte.display_name} a fait une demande d'accès",

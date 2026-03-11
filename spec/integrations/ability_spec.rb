@@ -556,6 +556,28 @@ describe Ability do
     end
   end
 
+  describe "accès par zone (access_zone)" do
+    context "compte en attente" do
+      let(:compte) { create :compte_conseiller, :en_attente, structure: structure_avec_admin }
+
+      it "peut accéder aux zones admin et inscription uniquement" do
+        expect(subject).to be_able_to(:access_zone, :admin)
+        expect(subject).to be_able_to(:access_zone, :inscription)
+        expect(subject).not_to be_able_to(:access_zone, :plateforme)
+      end
+    end
+
+    context "compte accepté" do
+      let(:compte) { compte_conseiller }
+
+      it "peut accéder à toutes les zones" do
+        expect(subject).to be_able_to(:access_zone, :admin)
+        expect(subject).to be_able_to(:access_zone, :inscription)
+        expect(subject).to be_able_to(:access_zone, :plateforme)
+      end
+    end
+  end
+
   context 'Compte de démo' do
     let!(:compte) { create :compte_conseiller, :structure_avec_admin, email: Eva::EMAIL_DEMO }
 

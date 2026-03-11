@@ -4,13 +4,28 @@ class Ability < AbilityUtilisateur
 
     if compte.validation_refusee?
       droits_comptes_refuses compte
+    elsif compte.validation_en_attente?
+      super
+      droits_comptes_en_attente(compte)
     else
       super
       droits_applicatifs
+      droits_acces_zones_plateforme
     end
   end
 
   private
+
+  def droits_comptes_en_attente(_compte)
+    can :access_zone, :admin
+    can :access_zone, :inscription
+  end
+
+  def droits_acces_zones_plateforme
+    can :access_zone, :admin
+    can :access_zone, :inscription
+    can :access_zone, :plateforme
+  end
 
   def droits_applicatifs
     droit_situation

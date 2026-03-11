@@ -4,7 +4,8 @@
   <% end %>
 <% elsif @tag == :submit %>
   <% submit_value = @params.delete(:submit_value) %>
-  <% opts = @params.merge(type: "submit", name: "commit", value: (submit_value || (content || @url).to_s.strip)) %>
+  <% submit_name = @params.delete(:submit_name) || "commit" %>
+  <% opts = @params.merge(type: "submit", name: submit_name, value: (submit_value || (content || @url).to_s.strip)) %>
   <%= button_tag opts do %>
     <%= content || @url %>
   <% end %>

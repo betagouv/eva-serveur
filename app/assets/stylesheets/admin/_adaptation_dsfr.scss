@@ -225,7 +225,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
 .fr-modal.evapro_admin .fr-btn--tertiary:hover {
   background: var(--background-raised-grey-hover);
 }
-
 body.logged_in:not(.evapro_admin) .fr-btn {
   @include grand-bouton;
   @include bouton-primaire;
@@ -270,11 +269,10 @@ body.evapro_admin .fr-btn--tertiary:hover,
   background: var(--background-raised-grey-hover);
 }
 
-// Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
+// Annule le hover gris Active Admin pour les boutons DSFR
 form button.fr-btn:not(.disabled):hover,
 form input[type="submit"].fr-btn:not(.disabled):hover,
 form input[type="button"].fr-btn:not(.disabled):hover,
-// Boutons avec attribut form= (hors du formulaire, ex. modale invitation)
 .fr-modal.evapro_admin button.fr-btn:not(.disabled):hover,
 .fr-modal.evapro_admin input[type="submit"].fr-btn:not(.disabled):hover {
 

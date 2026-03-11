@@ -31,10 +31,9 @@ describe 'Dashboard', type: :feature do
       create :compte_conseiller, :en_attente, structure: nil
     end
 
-    it 'Affiche le tutoriel sans le bouton quitter' do
+    it "affiche le message de compte en attente d'approbation" do
       visit admin_path
-      expect(page).to have_content('Débutez eva')
-      expect(page).not_to have_content('Quitter le tutoriel')
+      expect(page).to have_content("Compte en attente d'approbation")
     end
   end
 
@@ -148,10 +147,10 @@ describe 'Dashboard', type: :feature do
       end
 
       it do
-        expect(page).to have_content("Elle va bientôt vous permettre d'utiliser eva")
-        infos_support =
-          'contacter Véronique au 06 01 02 03 04 ou par mail à eva@anlci.gouv.fr'
-        expect(page).to have_content infos_support
+        expect(page).to have_content(/Elle va bientôt vous permettre d'utiliser eva/i)
+        expect(page).to have_content(
+          "par téléphone au 06 50 84 32 36 ou par mail à eva@anlci.gouv.fr"
+        )
       end
     end
   end

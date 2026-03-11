@@ -42,9 +42,9 @@ module Eva
 
         compte = Compte.find_by(email: params[:compte][:email]&.strip)
 
-        return if compte.blank?
+        return if compte.blank? || compte.active_for_authentication?
 
-        redirect_to new_compte_confirmation_path unless compte.active_for_authentication?
+        redirect_to new_compte_confirmation_path
       end
 
       def est_mot_de_passe_conforme(compte)

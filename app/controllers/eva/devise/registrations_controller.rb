@@ -58,6 +58,7 @@ module Eva
 
       def create_sans_invitation
         @compte = Compte.new(compte_parametres)
+        @compte.statut_validation = :en_attente
         @compte.assigne_role_admin_si_pas_d_admin
         if enregistre_compte?
           sign_in_et_redirige
@@ -70,7 +71,7 @@ module Eva
         compte_parametres.merge(
           structure_id: @invitation.structure_id,
           role: @invitation.role_pour_compte,
-          statut_validation: "acceptee"
+          statut_validation: statut_validation_pour_invitation
         )
       end
 
@@ -81,6 +82,14 @@ module Eva
       def sign_in_et_redirige
         sign_in @compte
         redirect_to admin_dashboard_path, notice: I18n.t("devise.registrations.signed_up")
+      end
+
+      def statut_validation_pour_invitation
+        if @invitation.invitant.au_moins_admin?
+          "acceptee"
+        else
+          "en_attente"
+        end
       end
     end
   end

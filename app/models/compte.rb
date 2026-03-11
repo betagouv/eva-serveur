@@ -129,6 +129,20 @@ class Compte < ApplicationRecord
     id_pro_connect.present?
   end
 
+  def acces_plateforme_bloque?
+    validation_en_attente?
+  end
+
+  def active_for_authentication?
+    super && !validation_refusee?
+  end
+
+  def inactive_message
+    return :pending_approval if validation_en_attente?
+
+    super
+  end
+
   private
 
   def verifie_etat_si_structure_manquante

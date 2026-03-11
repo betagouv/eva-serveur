@@ -10,38 +10,40 @@ elsif current_compte.validation_en_attente?
   render "validation_necessaire"
 end
 
-div class: "tableau-bord-layout" do
-  div class: "tableau-bord-contenu-principal" do
-    render partial: "admin/dashboard/eva_pro/bienvenue_entreprise",
-           locals: {
-             premiere_reponse_complete: premiere_reponse_complete,
-             structure: structure
-           }
+if current_compte.validation_acceptee?
+  div class: "tableau-bord-layout" do
+    div class: "tableau-bord-contenu-principal" do
+      render partial: "admin/dashboard/eva_pro/bienvenue_entreprise",
+            locals: {
+              premiere_reponse_complete: premiere_reponse_complete,
+              structure: structure
+            }
 
-    render partial: "admin/dashboard/eva_pro/derniere_evaluation_complete",
-           locals: {
-             derniere_evaluation_complete: derniere_evaluation_complete,
-             restitution_globale: restitution_globale
-           }
+      render partial: "admin/dashboard/eva_pro/derniere_evaluation_complete",
+            locals: {
+              derniere_evaluation_complete: derniere_evaluation_complete,
+              restitution_globale: restitution_globale
+            }
 
-    render partial: "admin/dashboard/eva_pro/cinq_dernieres_evaluations",
-           locals: {
-             evaluations: cinq_dernieres_evaluations_completes
-           }
+      render partial: "admin/dashboard/eva_pro/cinq_dernieres_evaluations",
+            locals: {
+              evaluations: cinq_dernieres_evaluations_completes
+            }
 
-    render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
-           locals: { campagnes: campagnes, opco: opco,
-premiere_reponse_complete: premiere_reponse_complete }
-  end
+      render partial: "admin/dashboard/eva_pro/bloc_questionnaires_entreprise",
+            locals: { campagnes: campagnes, opco: opco,
+  premiere_reponse_complete: premiere_reponse_complete }
+    end
 
-  if structure.present?
-    div class: "tableau-bord-sidebar" do
-      section class: "section-opco section-tableau-bord-eva-pro" do
-        render partial: "admin/dashboard/eva_pro/sidebar_opco",
-               locals: {
-                 opco: opco,
-                 structure: structure
-               }
+    if structure.present?
+      div class: "tableau-bord-sidebar" do
+        section class: "section-opco section-tableau-bord-eva-pro" do
+          render partial: "admin/dashboard/eva_pro/sidebar_opco",
+                locals: {
+                  opco: opco,
+                  structure: structure
+                }
+        end
       end
     end
   end

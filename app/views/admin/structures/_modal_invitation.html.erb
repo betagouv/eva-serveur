@@ -25,19 +25,21 @@
           required: true
         ) %>
 
-        <div class="fr-select-group">
-          <label class="fr-label" for="invitation_role_<%= structure.id %>">
-            <%= t("admin.structures.membres.modal.role_label") %>
-          </label>
-          <%= f.select :role,
-                       options_for_select(
-                         Compte::ROLES_STRUCTURE.map { |r| [ t("admin.structures.membres.modal.roles.#{r}"), r ] },
-                         nil
-                       ),
-                       { include_blank: t("admin.structures.membres.modal.role_placeholder") },
-                       id: "invitation_role_#{structure.id}",
-                       class: "fr-select" %>
-        </div>
+        <% if current_compte.au_moins_admin? %>
+          <div class="fr-select-group">
+            <label class="fr-label" for="invitation_role_<%= structure.id %>">
+              <%= t("admin.structures.membres.modal.role_label") %>
+            </label>
+            <%= f.select :role,
+                         options_for_select(
+                           Compte::ROLES_STRUCTURE.map { |r| [ t("admin.structures.membres.modal.roles.#{r}"), r ] },
+                           nil
+                         ),
+                         { include_blank: t("admin.structures.membres.modal.role_placeholder") },
+                         id: "invitation_role_#{structure.id}",
+                         class: "fr-select" %>
+          </div>
+        <% end %>
 
         <div class="fr-input-group">
           <label class="fr-label" for="invitation_message_<%= structure.id %>">

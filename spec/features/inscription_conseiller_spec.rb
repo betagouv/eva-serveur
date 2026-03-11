@@ -124,6 +124,38 @@ invitant: create(:compte_admin, structure: structure), role: "admin")
     end
   end
 
+  context "avec une invitation envoyée par un conseiller" do
+    let!(:conseiller_invitant) { create(:compte_conseiller, structure: structure) }
+    let!(:invitation) do
+      create(:invitation, structure: structure, invitant: conseiller_invitant, role: "conseiller")
+    end
+
+    before do
+      visit new_compte_registration_path(invitation_token: invitation.token)
+      fill_in :compte_prenom, with: "Marie"
+      fill_in :compte_nom, with: "Martin"
+      fill_in :compte_email, with: "invitee-conseiller@eva.fr"
+      fill_in :compte_password, with: "Pass5678"
+      fill_in :compte_password_confirmation, with: "Pass5678"
+      check("compte_cgu_acceptees", allow_label_click: true)
+    end
+
+    it "crée un compte en attente quand l'invitation est envoyée par un conseiller" do
+      expect do
+        click_on "S'inscrire"
+      end.to change(Compte, :count).by(1)
+
+      nouveau_compte = Compte.find_by email: "invitee-conseiller@eva.fr"
+      expect(nouveau_compte.validation_en_attente?).to be true
+      expect(nouveau_compte.role).to eq "conseiller"
+      expect(nouveau_compte.structure).to eq structure
+
+      invitation.reload
+      expect(invitation.statut).to eq "acceptee"
+      expect(invitation.compte_id).to eq nouveau_compte.id
+    end
+  end
+
   context "lien d'invitation invalide ou déjà utilisé" do
     it "redirige avec un message d'erreur quand le token est inconnu" do
       visit new_compte_registration_path(invitation_token: "token-inexistant")

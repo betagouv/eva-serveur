@@ -31,7 +31,7 @@ class Invitation < ApplicationRecord
   end
 
   def role_pour_compte
-    role.presence || "conseiller"
+    role.presence || Compte::ROLE_PAR_DEFAUT
   end
 
   private

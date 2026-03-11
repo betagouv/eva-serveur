@@ -70,8 +70,12 @@ module Eva
         compte_parametres.merge(
           structure_id: @invitation.structure_id,
           role: @invitation.role_pour_compte,
-          statut_validation: "acceptee"
+          statut_validation: invitant_autorise_validation_directe? ? "acceptee" : "en_attente"
         )
+      end
+
+      def invitant_autorise_validation_directe?
+        @invitation.invitant.au_moins_admin?
       end
 
       def enregistre_compte?

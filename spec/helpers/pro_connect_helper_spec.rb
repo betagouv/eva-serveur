@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 describe ProConnectHelper do
-  let(:email) { 'toto@eva.beta.gouv.fr' }
-  let(:ancien_email) { 'autre@eva.beta.gouv.fr' }
-  let(:aujourdhui) { Time.zone.local(2023, 1, 10, 12, 0, 0) }
-  let(:hier) { Time.zone.local(2023, 1, 9, 12, 0, 0) }
-
   describe '#logout' do
     it "construit l'url de deconnexion et nettoie la session" do
       stub_const('::ProConnectHelper::PC_BASE_URL', 'https://PC_HOST')

@@ -1,9 +1,9 @@
 require "rake_logger"
 
 COMPTES = {
-  "superadmin@beta.gouv.fr" => { prenom: "super", nom: "admin", role: "superadmin" },
-  "admin@beta.gouv.fr" => { prenom: "admin", nom: "admin", role: "admin" },
-  "conseiller@beta.gouv.fr" => { prenom: "conseiller", nom: "conseiller", role: "conseiller" }
+  "superadmin@eva.anlci.gouv.fr" => { prenom: "super", nom: "admin", role: "superadmin" },
+  "admin@eva.anlci.gouv.fr" => { prenom: "admin", nom: "admin", role: "admin" },
+  "conseiller@eva.anlci.gouv.fr" => { prenom: "conseiller", nom: "conseiller", role: "conseiller" }
 }.freeze
 
 namespace :reviewapp do
@@ -31,9 +31,9 @@ namespace :reviewapp do
   def cree_campagne(code, libelle, questionnaire)
     campagne = Campagne.find_or_create_by(code: code,
                                           libelle: libelle) do |c|
-      c.compte = Compte.find_by(email: "superadmin@beta.gouv.fr")
-      c.parcours_type = ParcoursType.find_by(nom_technique: "competences_de_base")
-      c.type_programme = "test"
+        c.compte = Compte.find_by(email: "superadmin@eva.anlci.gouv.fr")
+        c.parcours_type = ParcoursType.find_by(nom_technique: "competences_de_base")
+        c.type_programme = "test"
     end
     configure_questionnaire(campagne, questionnaire)
   end

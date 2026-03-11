@@ -85,8 +85,6 @@ fr:
         saisir_a_nouveau: Si vous souhaitez recevoir de nouveau cet email, merci de saisir votre adresse ci-dessous.
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
-    footer: |
-      Ce site est créé avec <span aria-hidden="true">❤️</span><span class="sr-only">amour</span> par <a href="https://beta.gouv.fr/startups/eva.html" target="_blank" title="l'équipe - nouvelle fenêtre">l'équipe</a> eva - Le <a href="https://github.com/betagouv/eva-serveur" target="_blank" title="le code source - nouvelle fenêtre">code source</a> est libre - <a href="#tarteaucitron" title="ouvrir les préférences de Cookies">Cookies</a> - <a href="/cgu/" target="_blank" title="CGU - nouvelle fenêtre">CGU</a>
     menu_connexion:
       compte: Voir mon compte
       structure: Voir ma structure

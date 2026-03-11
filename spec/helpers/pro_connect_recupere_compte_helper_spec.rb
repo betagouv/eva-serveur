@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe ProConnectRecupereCompteHelper do
-  let(:email) { 'toto@eva.beta.gouv.fr' }
-  let(:ancien_email) { 'autre@eva.beta.gouv.fr' }
+  let(:email) { 'toto@eva.fr' }
+  let(:ancien_email) { 'autre@eva.fr' }
   let(:aujourdhui) { Time.zone.local(2023, 1, 10, 12, 0, 0) }
   let(:hier) { Time.zone.local(2023, 1, 9, 12, 0, 0) }
 
@@ -63,7 +63,7 @@ describe ProConnectRecupereCompteHelper do
 
       it do
         Timecop.freeze(aujourdhui) do
-          compte = described_class.cree_ou_recupere_compte(user_info('toto@eva.beta.gouv.FR'))
+          compte = described_class.cree_ou_recupere_compte(user_info('toto@eva.FR'))
           expect(compte).not_to be_nil
           expect(compte.email).to eq(email)
           expect(compte.confirmed_at).to eq(aujourdhui)

@@ -166,6 +166,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_11_120000) do
     t.string "service_departement"
     t.string "etape_inscription", default: "nouveau"
     t.string "usage"
+    t.boolean "exempte_restriction_acces_attente", default: false, null: false
     t.index ["confirmation_token"], name: "index_comptes_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_comptes_on_deleted_at"
     t.index ["email"], name: "index_comptes_on_email", unique: true, where: "(deleted_at IS NULL)"

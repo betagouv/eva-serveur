@@ -149,7 +149,7 @@ describe 'Dashboard', type: :feature do
 
       it do
         expect(page).to have_content("Elle va bientôt vous permettre d'utiliser Eva")
-        expect(page).to have_content("06 50 84 32 36")
+        expect(page).to have_content("06 01 02 03 04")
         expect(page).to have_content("eva@anlci.gouv.fr")
       end
     end

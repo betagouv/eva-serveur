@@ -1,8 +1,8 @@
 <%= render DsfrComponent::CalloutComponent.new(
-  title: t("admin.dashboard.compte_en_attente_approbation.titre"),
+  title: t(".titre"),
   icon_name: :none
 ) do %>
-  <%= md t("admin.dashboard.compte_en_attente_approbation.description",
+  <%= md t(".description",
            telephone: @support&.telephone,
            telephone_digits: @support&.telephone.to_s.gsub(/\D/, ""),
            email: @support&.email) %>

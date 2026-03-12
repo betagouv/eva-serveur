@@ -1,5 +1,9 @@
 attributes_table_for opco do
   row :nom
+  row :nom_parcours_type do |opco|
+    noms = suggestions_nom_parcours_type_evapro(opco)
+    noms.map { |nom| tag.code(nom) }.join(tag.br).html_safe
+  end
   row :financeur
   row :logo do
     if opco.logo.attached?

@@ -11,4 +11,9 @@ module OpcoHelper
   def affiche_opcos(structure)
     structure.opco&.nom || "Aucun opérateur de compétences rattaché"
   end
+
+  def suggestions_nom_parcours_type_evapro(opco)
+    prefix = "#{ParcoursType::PREFIX_NOM_TECHNIQUE_EVAPRO}-#{opco.slug}"
+    [prefix, "#{prefix}__nom"]
+  end
 end

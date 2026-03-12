@@ -1,6 +1,7 @@
 class ParcoursType < ApplicationRecord
   self.implicit_order_column = "created_at"
   TYPES_DE_PROGRAMME = %i[diagnostic positionnement diagnostic_entreprise].freeze
+  PREFIX_NOM_TECHNIQUE_EVAPRO = "evapro"
 
   validates :libelle, :duree_moyenne, presence: true
   validates :nom_technique, presence: true, uniqueness: true
@@ -30,21 +31,20 @@ class ParcoursType < ApplicationRecord
     situations_configurations.map(&:nom_technique).include?("livraison")
   end
 
-  NOM_TECHNIQUE_GENERIQUE = "eva-entreprise"
   def evapro_generique?
-    nom_technique == NOM_TECHNIQUE_GENERIQUE
+    nom_technique == "#{PREFIX_NOM_TECHNIQUE_EVAPRO}"
   end
 
   def evapro_opco?
-    nom_technique.start_with?("eva-entreprise-")
+    nom_technique.start_with?("#{PREFIX_NOM_TECHNIQUE_EVAPRO}-")
   end
 
   def self.pour_opco(opco)
-    prefixe_nom_technique = "#{NOM_TECHNIQUE_GENERIQUE}-#{opco.slug}"
+    prefixe_nom_technique = "#{PREFIX_NOM_TECHNIQUE_EVAPRO}-#{opco.slug}"
     where("nom_technique LIKE ?", "#{prefixe_nom_technique}%")
   end
 
   def self.find_evapro_generique!
-    find_by!(nom_technique: NOM_TECHNIQUE_GENERIQUE)
+    find_by!(nom_technique: "#{PREFIX_NOM_TECHNIQUE_EVAPRO}")
   end
 end

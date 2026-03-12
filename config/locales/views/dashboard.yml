@@ -85,17 +85,6 @@ fr:
         quitter: Quitter le tutoriel
         terminer: Fermer le tutoriel
       validation_necessaire:
-        titre: Bienvenue sur eva !
-        description: |
-          Vous n'êtes qu'à deux clics d'utiliser eva.
-
-          Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'eva pour votre structure.
-          Elle va bientôt vous permettre d'utiliser eva.
-
-          Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
-
-          Vous pensez que cette personne est momentanément absente ? Vous pouvez contacter %{prenom} au %{telephone} ou par mail à [%{email}](mailto:%{email}).
-      compte_en_attente_approbation:
         titre: "Compte en attente d'approbation"
         description: |
           Vous n'êtes qu'à deux clics d'utiliser Eva. Nous venons d'envoyer un message électronique à la personne qui gère les premières passations d'Eva pour votre structure. Elle va bientôt vous permettre d'utiliser Eva.

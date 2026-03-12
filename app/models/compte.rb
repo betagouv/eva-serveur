@@ -133,7 +133,7 @@ class Compte < ApplicationRecord
   private
 
   def verifie_etat_si_structure_manquante
-    return if structure.present?
+    return if structure.present? || deleted?
 
     unless validation_en_attente?
       errors.add(:statut_validation,

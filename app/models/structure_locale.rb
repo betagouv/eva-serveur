@@ -10,16 +10,15 @@ class StructureLocale < Structure
     cap_emploi
     CRIA
     e2c
-    etablissement_public_sante
-    etablissement_fph
-    etablissement_prive
     entreprise
+    etablissement_prive
+    etablissement_public_sante
+    france_travail
     GRETA
     mission_locale
     organisme_formation
     orientation_scolaire
     PJJ_UEAJ
-    france_travail
     service_insertion_collectivite
     SIAE
     SMA

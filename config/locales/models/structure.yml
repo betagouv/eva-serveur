@@ -55,19 +55,18 @@ fr:
           apprentissage: Apprentissage (CFA, CMA, lycée, etc.)
           autre: Autre
           cap_emploi: Cap emploi
+          service_insertion_collectivite: Collectivité
           CRIA: CRIA
           e2c: École de la 2e chance
-          etablissement_public_sante: Etablissement public de santé
           entreprise: Entreprise
+          etablissement_prive: Etablissement (sanitaire, social, médicosocial) privé
+          etablissement_public_sante: Etablissement public de santé
+          france_travail: France Travail
           GRETA: GRETA
           mission_locale: Mission locale
           organisme_formation: Organisme de formation
-          PJJ_UEAJ: PJJ/UEAJ
-          etablissement_fph: Etablissement FPH
-          etablissement_prive: Etablissement (sanitaire, social, médicosocial) privé
           orientation_scolaire: Orientation scolaire
-          france_travail: France Travail
-          service_insertion_collectivite: Collectivité
+          PJJ_UEAJ: PJJ/UEAJ
           SIAE: SIAE
           SMA: SMA
           SMV: SMV

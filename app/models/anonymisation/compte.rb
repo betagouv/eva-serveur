@@ -5,7 +5,7 @@ module Anonymisation
         compte.prenom = FFaker::NameFR.first_name
         compte.nom = FFaker::NameFR.last_name
         prefix_email = "#{compte.prenom.parameterize}.#{compte.nom.parameterize}.#{rand(999)}"
-        compte.email = "#{prefix_email}@anonyme.fr"
+        compte.email = "#{prefix_email}@anlci.gouv.fr"
         efface_donnees_personnelles(compte)
         compte.skip_reconfirmation!
       end

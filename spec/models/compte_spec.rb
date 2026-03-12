@@ -231,6 +231,12 @@ describe Compte do
           expect(compte.errors[:statut_validation])
             .to include "doit être 'en attente' s'il n'y a pas de structure"
         end
+
+        it "ne signal pas d'erreur si le compte est supprimé" do
+          compte.deleted_at = Time.current
+          compte.valid?
+          expect(compte.errors[:statut_validation]).to be_blank
+        end
       end
 
       context "quand le role n'est pas conseiller" do
@@ -242,6 +248,12 @@ describe Compte do
           compte.valid?
           expect(compte.errors[:role])
             .to include "doit être 'conseiller' s'il n'y a pas de structure"
+        end
+
+        it "ne signal pas d'erreur si le compte est supprimé" do
+          compte.deleted_at = Time.current
+          compte.valid?
+          expect(compte.errors[:statut_validation]).to be_blank
         end
       end
 

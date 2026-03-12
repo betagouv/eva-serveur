@@ -2,8 +2,10 @@ class PurgeComptesSupprimesJob < ApplicationJob
   queue_as :default
 
   def perform
-    purge_comptes_sans_evaluations
-    anonymise_comptes_avec_evaluations
+    nb_anonymises = anonymise_comptes_avec_evaluations
+    nb_purges = purge_comptes_sans_evaluations
+    Rails.logger
+      .info("[PurgeComptesSupprimesJob] #{nb_purges} supprimé(s), #{nb_anonymises} anonymisé(s)")
   end
 
   private
@@ -16,16 +18,23 @@ class PurgeComptesSupprimesJob < ApplicationJob
   end
 
   def purge_comptes_sans_evaluations
+    count = 0
     Compte.only_deleted.where.not(id: ids_comptes_avec_evaluations).find_each do |compte|
+      Evaluation.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
       Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
       compte.really_destroy!
+      count += 1
     end
+    count
   end
 
   def anonymise_comptes_avec_evaluations
+    count = 0
     Compte.only_deleted.where(anonymise_le: nil).where(id: ids_comptes_avec_evaluations)
       .find_each do |compte|
         Anonymisation::Compte.new(compte).anonymise
+        count += 1
     end
+    count
   end
 end

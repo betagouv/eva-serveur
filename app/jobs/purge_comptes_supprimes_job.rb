@@ -20,7 +20,7 @@ class PurgeComptesSupprimesJob < ApplicationJob
   def purge_comptes_sans_evaluations
     count = 0
     Compte.only_deleted.where.not(id: ids_comptes_avec_evaluations).find_each do |compte|
-      Evaluation.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
+      Evaluation.with_deleted.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
       Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
       compte.really_destroy!
       count += 1

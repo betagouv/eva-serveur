@@ -63,4 +63,14 @@ describe PurgeComptesSupprimesJob, type: :job do
     expect(Compte.with_deleted.find_by(id: compte.id)).to be_nil
     expect(evaluation.reload.responsable_suivi).to be_nil
   end
+
+  it "detruit un compte supprimé responsable de suivi d'une évaluation supprimé et retire ce lien" do
+    compte = create :compte_conseiller, structure: structure, deleted_at: Time.zone.now
+    evaluation = create :evaluation, responsable_suivi: compte, deleted_at: Time.zone.now
+
+    described_class.perform_now
+
+    expect(Compte.with_deleted.find_by(id: compte.id)).to be_nil
+    expect(evaluation.reload.responsable_suivi).to be_nil
+  end
 end

@@ -1,4 +1,4 @@
 <% if ENV['PLAUSIBLE_DOMAINE'].present? %>
-tarteaucitron.user.plausibleDomain = <%= ENV['PLAUSIBLE_DOMAINE'] %>;
+tarteaucitron.user.plausibleDomain = "<%= ENV['PLAUSIBLE_DOMAINE'] %>";
 (tarteaucitron.job = tarteaucitron.job || []).push('plausible');
 <% end %>

@@ -103,7 +103,7 @@ fr:
           Si vous savez qui est cette personne, n'hésitez pas à vous rapprocher d'elle.
 
           Vous pensez que cette personne est momentanément absente ?
-          Vous pouvez contacter le support : par téléphone au [06 50 84 32 36](tel:0650843236) ou par mail à [eva@anlci.gouv.fr](mailto:eva@anlci.gouv.fr)
+          Vous pouvez contacter le support : par téléphone au [%{telephone}](tel:%{telephone_digits}) ou par mail à [%{email}](mailto:%{email})
       validation_refusee:
         titre: Votre compte est refusé.
         description: |

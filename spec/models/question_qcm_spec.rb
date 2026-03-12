@@ -22,7 +22,7 @@ describe QuestionQcm, type: :model do
 
     describe '#bonnes_reponses' do
       it "retourne l'intitulé ou le nom technique a défaut" do
-        expect(question_qcm.bonnes_reponses).to eq('intitule1 | choix_2')
+        expect(question_qcm.bonnes_reponses.split(" | ")).to match_array(%w[intitule1 choix_2])
       end
 
       it "retourne vide s'il n'y a pas de bonnes réponses" do

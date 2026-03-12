@@ -32,7 +32,8 @@ class QuestionQcm < Question
   end
 
   def bonnes_reponses
-    choix.where(type_choix: :bon).map { |c| c.intitule.presence || c.nom_technique }.join(" | ")
+    Choix.where(question_id: id, type_choix: :bon).order(:position, :id).map { |c|
+ c.intitule.presence || c.nom_technique }.join(" | ")
   end
 
   def self.preload_assocations_pour_as_json

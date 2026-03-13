@@ -1,11 +1,4 @@
 GEM
-  remote: https://rails-assets.org/
-  specs:
-    html-attributes-utils (1.0.2)
-      activesupport (>= 6.1.4.4)
-    rails-assets-clipboard (2.0.11)
-
-GEM
   remote: https://rubygems.org/
   specs:
     Ascii85 (2.0.1)
@@ -325,6 +318,8 @@ GEM
     herb (0.8.8-x86_64-darwin)
     herb (0.8.8-x86_64-linux-gnu)
     herb (0.8.8-x86_64-linux-musl)
+    html-attributes-utils (1.0.2)
+      activesupport (>= 6.1.4.4)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.2)
@@ -837,7 +832,6 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rails (~> 7.2.0)
-  rails-assets-clipboard!
   rails-erd
   rails-i18n
   recaptcha (~> 5.16)

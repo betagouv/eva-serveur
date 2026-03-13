@@ -70,10 +70,6 @@ gem "puppeteer-ruby"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[windows jruby]
 
-source "https://rails-assets.org" do
-  gem "rails-assets-clipboard"
-end
-
 group :development, :test do
   gem "bullet"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

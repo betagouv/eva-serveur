@@ -21,7 +21,7 @@
 //= require code_postal_input
 //= require numero_telephone_input
 //= require recherche_structure
-//= require clipboard
+//= require vendor/clipboard.min
 //= require evaluation
 //= require simple_mde
 //= require modal_verification

@@ -158,6 +158,7 @@ class Compte < ApplicationRecord
     return if structure.nil?
     return if au_moins_admin? && !validation_refusee?
     return if autres_admins?(structure)
+    return if deleted?
 
     ajoute_erreur_admin
   end

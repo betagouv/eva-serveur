@@ -304,6 +304,13 @@ describe Compte do
           .to include "La structure « Ma Structure » doit avoir au moins un administrateur"
       end
 
+      it "peut supprimer un conseiller" do
+        compte.role = "conseiller"
+        compte.deleted_at = Time.current
+        compte.valid?
+        expect(compte.errors[:role]).to be_blank
+      end
+
       it "ne peut pas ajouter un compte refusé" do
         compte.role = "admin"
         compte.statut_validation = "refusee"

@@ -13,12 +13,16 @@ fr:
         idcc: Convention(s) collective(s)
         url_contact: Url liste de contacts
         url: Url site
+        url_offre_services: "Url de l'offre de service"
+        visuel_offre_services: "Visuel de l'offre de service (32x9)"
     errors:
       models:
         opco:
           attributes:
             nom:
               blank: Le nom ne peut pas être vide
+            url_offre_services:
+              invalid: n'est pas une URL valide (http ou https)
   formtastic:
     actions:
       opco:
@@ -30,6 +34,7 @@ fr:
     hints:
       opco:
         nom: Ce nom est utilisé lors de l'import pour le mapping des conventions collectives. Assurez-vous d'utiliser exactement le même nom que dans le fichier Excel ou de le remplacer avant un futur import.
+        visuel_offre_services: "Formats acceptés : jpg, png, svg, webp."
   active_admin:
     resources:
       opco:

@@ -9,30 +9,50 @@
       <% if opco %>
         <h2 class="evaluation-bilan-evapro__titre-opco"><%= t(".opco_titre") %></h2>
         <p class="evaluation-bilan-evapro__sous-titre-opco"><%= t(".opco_sous_titre") %></p>
-        <div class="evaluation-bilan-evapro__opco-financeur-contacts">
-          <div class="evaluation-bilan-evapro__opco-financeur">
-            <% if opco.logo.attached? %>
-              <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
-            <% end %>
-            <div class="evaluation-bilan-evapro__opco-financeur-details">
-              <% if opco.telephone.present? %>
-                <p><%= opco.telephone %></p>
+        <div class="evaluation-bilan-evapro__contacter-opco">
+          <div class="evaluation-bilan-evapro__coordonnees">
+            <div class="evaluation-bilan-evapro__opco-financeur">
+              <% if opco.logo.attached? %>
+                <%= image_tag opco.logo, class: "evaluation-bilan-evapro__opco-financeur-logo", alt: opco.nom %>
               <% end %>
-              <% if opco.email.present? %>
-                <p><%= opco.email %></p>
-              <% end %>
-              <% if opco.url.present? %>
-                <p>
-                  <%= render LienComponent.new(humanize_url(opco.url), opco.url, externe: true, nouvelle_fenetre: true, class: "fr-link fr-link--sm") %>
-                </p>
-              <% end %>
-            </div>
-          </div>
-          <% if opco.url_contact.present? %>
-            <div class="evaluation-bilan-evapro__opco-financeur-annuaire">
               <div class="evaluation-bilan-evapro__opco-financeur-details">
+                <% if opco.telephone.present? %>
+                  <p><%= opco.telephone %></p>
+                <% end %>
+                <% if opco.email.present? %>
+                  <p><%= opco.email %></p>
+                <% end %>
+                <% if opco.url.present? %>
+                  <p>
+                    <%= render LienComponent.new(humanize_url(opco.url), opco.url, externe: true, nouvelle_fenetre: true, class: "fr-link fr-link--sm") %>
+                  </p>
+                <% end %>
+              </div>
+            </div>
+            <% if opco.url_contact.present? %>
+              <div class="evaluation-bilan-evapro__opco-financeur-annuaire">
+                <div class="evaluation-bilan-evapro__opco-financeur-details">
                   <p>Retrouvez la liste des conseillers de votre opérateur de compétences pour identifier le contact près de chez vous :</p>
                   <p><%= link_to humanize_url(opco.url_contact), opco.url_contact, class: "fr-link fr-link--sm", target: "_blank" %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <% if opco.visuel_offre_services.attached? || opco.url_offre_services.present? %>
+            <div class="evaluation-bilan-evapro__annuaire">
+              <div class="evaluation-bilan-evapro__offre-services-frame">
+                <% if opco.visuel_offre_services.attached? %>
+                  <% visuel = opco.visuel_offre_services.variant(:offre_services) %>
+                    <%= image_tag visuel, class: "evaluation-bilan-evapro__opco-offre-services-visuel", alt: t(".offre_services_titre", nom: opco.nom) %>
+                <% end %>
+                <div class="evaluation-bilan-evapro__offre-services-texte">
+                  <p class="evaluation-bilan-evapro__opco-offre-services-titre"><%= t(".offre_services_titre", nom: opco.nom) %></p>
+                  <% if opco.url_offre_services.present? %>
+                    <p>
+                      <%= render LienComponent.new(humanize_url(opco.url_offre_services), opco.url_offre_services, externe: true, nouvelle_fenetre: true, class: "fr-link fr-link--sm") %>
+                    </p>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>

@@ -22,13 +22,38 @@
   @include corps-de-texte-sm-regular;
 }
 
-.evaluation-bilan-evapro__opco-financeur-contacts {
+.evaluation-bilan-evapro__contacter-opco {
   display: flex;
-  flex-direction: row;
-  gap: $dsfr-spacing-6v;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: $dsfr-spacing-2w;
-  border: 1px solid $grey-900;
+}
+
+.evaluation-bilan-evapro__coordonnees {
+  display: flex;
+  flex-direction: column;
+  gap: $dsfr-spacing-3w;
+}
+
+.evaluation-bilan-evapro__annuaire {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.evaluation-bilan-evapro__offre-services-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1w;
+}
+
+.evaluation-bilan-evapro__offre-services-texte {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .evaluation-bilan-evapro__opco-financeur {
@@ -54,5 +79,27 @@
 .evaluation-bilan-evapro__opco-financeur-details p, .evaluation-bilan-evapro__opco-financeur-details a {
   color: $couleur-texte;
 
+  @include corps-de-texte-sm-regular;
+}
+
+.evaluation-bilan-evapro__opco-offre-services-visuel-link {
+  display: block;
+  line-height: 0;
+}
+
+.evaluation-bilan-evapro__opco-offre-services-visuel {
+  width: 320px;
+  height: 90px;
+  object-fit: cover;
+  display: block;
+}
+
+.evaluation-bilan-evapro__opco-offre-services-titre {
+  color: $couleur-texte;
+
+  @include corps-de-texte-sm-regular;
+}
+
+.evaluation-bilan-evapro__offre-services-frame .fr-link {
   @include corps-de-texte-sm-regular;
 }

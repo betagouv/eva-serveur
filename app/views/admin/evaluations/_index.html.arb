@@ -1,5 +1,7 @@
 if current_compte.utilisateur_entreprise?
-  render partial: "admin/evaluations/index_evapro/tableau", locals: { context: context }
+  render partial: "admin/evaluations/index_evapro/tableau",
+         locals: { context: context,
+syntheses_evapro_par_evaluation_id: syntheses_evapro_par_evaluation_id }
 else
   context.instance_eval do
     column :beneficiaire do |evaluation|

@@ -1,3 +1,4 @@
+vue = self
 div class: "tableau-evaluations-evapro" do
   h2 class: "tableau-evaluations-evapro__titre" do
     t("admin.evaluations.index_evapro.titre")
@@ -15,10 +16,12 @@ sortable: "beneficiaires.nom" do |evaluation|
       evaluation.created_at.strftime("%d/%m/%Y")
     end
     column t("admin.evaluations.index_evapro.colonne_taux_risque") do |evaluation|
-      afficher_lettre_risque(evaluation)
+      Admin::DashboardHelper.instance_method(:afficher_lettre_risque_index_evapro).bind(vue).call(
+evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
     end
     column t("admin.evaluations.index_evapro.colonne_couts") do |evaluation|
-      afficher_lettre_cout(evaluation)
+      Admin::DashboardHelper.instance_method(:afficher_lettre_cout_index_evapro).bind(vue).call(
+evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
     end
     column do |evaluation|
       render partial: "admin/evaluations/index_evapro/lien", locals: { evaluation: evaluation }

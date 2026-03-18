@@ -184,7 +184,10 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :comptes_externes_possibles, :opco_financeur, :structure
+                  :comptes_externes_possibles, :opco_financeur, :structure,
+                  :syntheses_evapro_par_evaluation_id
+
+    before_action :remplir_syntheses_evapro_pour_index, only: :index
 
     def show
       show! do |format|
@@ -236,7 +239,18 @@ ActiveAdmin.register Evaluation do
     def structure
       current_compte.structure
     end
+
+    def syntheses_evapro_par_evaluation_id
+      @syntheses_evapro_par_evaluation_id || {}
+    end
+
     private
+
+    def remplir_syntheses_evapro_pour_index
+      return unless current_compte.utilisateur_entreprise?
+
+      @syntheses_evapro_par_evaluation_id = SynthesesEvaproPourIndex.pour(collection)
+    end
 
     def find_resource
       scoped_collection.where(id: params[:id])

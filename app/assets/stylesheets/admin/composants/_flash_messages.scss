@@ -24,7 +24,7 @@ body.logged_in {
   .flashes {
     display: flex;
     flex-direction: column-reverse;
-    max-width: 77rem;
+    max-width: $container;
     margin: 0 auto;
   }
 

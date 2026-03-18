@@ -21,5 +21,14 @@ describe Api::Evaluations::FinsController do
 
       expect(evaluation.reload.terminee_le).to eq(Time.zone.local(2026, 3, 18, 14, 30, 0))
     end
+
+    it "enregistre terminee_le à maintenant quand il n'est pas passé (déprécié)" do
+      now = Time.zone.now
+      Timecop.freeze(now) do
+        post :create, params: { evaluation_id: evaluation.id }
+
+        expect(evaluation.reload.terminee_le).to be_within(1.second).of(now)
+      end
+    end
   end
 end

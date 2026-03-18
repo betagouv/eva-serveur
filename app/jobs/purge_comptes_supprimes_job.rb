@@ -19,7 +19,8 @@ class PurgeComptesSupprimesJob < ApplicationJob
 
   def purge_comptes_sans_evaluations
     count = 0
-    Compte.only_deleted.where.not(id: ids_comptes_avec_evaluations).find_each do |compte|
+    Compte.only_deleted.where.not(id: ids_comptes_avec_evaluations)
+          .where(deleted_at: ..1.month.ago).find_each do |compte|
       Evaluation.with_deleted.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
       Beneficiaire.with_deleted.where(compte: compte).update_all(compte_id: nil)
       Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
@@ -32,7 +33,7 @@ class PurgeComptesSupprimesJob < ApplicationJob
   def anonymise_comptes_avec_evaluations
     count = 0
     Compte.only_deleted.where(anonymise_le: nil).where(id: ids_comptes_avec_evaluations)
-      .find_each do |compte|
+          .where(deleted_at: ..1.month.ago).find_each do |compte|
         Anonymisation::Compte.new(compte).anonymise
         count += 1
     end

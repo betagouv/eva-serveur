@@ -35,32 +35,39 @@ actualites:, compte:, ability:)
       }
     end
 
-    def lettre_risque_pour(evaluation)
-      pourcentage_risque =
-        restitution_globale_pour(evaluation)
-          .diag_risques_entreprise
-          &.synthese
-          &.dig(:pourcentage_risque)
+    def lettre_risque_pour(evaluation, synthese_evapro = nil)
+      pourcentage_risque = if synthese_evapro.present?
+                            synthese_evapro[:pourcentage_risque]
+      else
+                            restitution_globale_pour(evaluation)
+                              .diag_risques_entreprise
+                              &.synthese
+                              &.dig(:pourcentage_risque)
+      end
       return if pourcentage_risque.blank?
 
       palier = palier_pourcentage_risque(pourcentage_risque)
       palier_to_lettre(palier).upcase
     end
 
-    def lettre_couts_pour(evaluation)
-      score_cout =
-        restitution_globale_pour(evaluation)
-          .evaluation_impact_general
-          &.synthese
-          &.dig(:score_cout)
+    def lettre_couts_pour(evaluation, synthese_evapro = nil)
+      score_cout = if synthese_evapro.present?
+                     synthese_evapro[:score_cout]
+      else
+                     restitution_globale_pour(evaluation)
+                       .evaluation_impact_general
+                       &.synthese
+                       &.dig(:score_cout)
+      end
       return if score_cout.blank?
 
       palier = palier_score_cout(score_cout)
       palier_to_lettre(palier).upcase
     end
 
-    def afficher_lettre_cout(evaluation)
-      lettre_couts = lettre_couts_pour(evaluation)
+    def afficher_lettre_cout(evaluation, synthese_evapro = nil)
+      synthese_evapro ||= synthese_evapro_pour(evaluation)
+      lettre_couts = lettre_couts_pour(evaluation, synthese_evapro)
       if lettre_couts.present? && evaluation.complete?
         render EvaProScoreComponent.new(active_letter: lettre_couts)
       else
@@ -68,8 +75,9 @@ actualites:, compte:, ability:)
       end
     end
 
-    def afficher_lettre_risque(evaluation)
-      lettre_risque = lettre_risque_pour(evaluation)
+    def afficher_lettre_risque(evaluation, synthese_evapro = nil)
+      synthese_evapro ||= synthese_evapro_pour(evaluation)
+      lettre_risque = lettre_risque_pour(evaluation, synthese_evapro)
       if lettre_risque.present? && evaluation.complete?
         render EvaProScoreComponent.new(active_letter: lettre_risque)
       else
@@ -77,7 +85,33 @@ actualites:, compte:, ability:)
       end
     end
 
+    def afficher_lettre_risque_index_evapro(evaluation, synthese_evapro)
+      lettre_risque = Admin::DashboardHelper.instance_method(:lettre_risque_pour).bind(self).call(
+evaluation, synthese_evapro)
+      if lettre_risque.present? && evaluation.complete?
+        render EvaProScoreComponent.new(active_letter: lettre_risque)
+      else
+        "-"
+      end
+    end
+
+    def afficher_lettre_cout_index_evapro(evaluation, synthese_evapro)
+      lettre_couts = Admin::DashboardHelper.instance_method(:lettre_couts_pour).bind(self).call(
+evaluation, synthese_evapro)
+      if lettre_couts.present? && evaluation.complete?
+        render EvaProScoreComponent.new(active_letter: lettre_couts)
+      else
+        "-"
+      end
+    end
+
     private
+
+    def synthese_evapro_pour(evaluation)
+      return nil unless respond_to?(:syntheses_evapro_par_evaluation_id, true)
+
+      syntheses_evapro_par_evaluation_id&.[](evaluation.id)
+    end
 
     def derniere_evaluation_complete(structure, ability)
       parcours_type_ids =

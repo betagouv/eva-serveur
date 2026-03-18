@@ -157,6 +157,33 @@ RSpec.describe Admin::DashboardHelper do
         expect(helper.send(:lettre_risque_pour, evaluation)).to be_nil
       end
     end
+
+    context "quand synthese_evapro est fourni (index sans fabrique)" do
+      let(:synthese) { {} }
+      let(:synthese_evapro) { { pourcentage_risque: 25 } }
+
+      before do
+        allow(helper).to receive(:palier_pourcentage_risque).with(25).and_return("B - Bon")
+        allow(helper).to receive(:palier_to_lettre).with("B - Bon").and_return("b")
+      end
+
+      it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do
+        expect(helper).not_to receive(:restitution_globale_pour)
+
+        expect(helper.send(:lettre_risque_pour, evaluation, synthese_evapro)).to eq("B")
+      end
+    end
+
+    context "quand synthese_evapro est fourni avec pourcentage_risque nil" do
+      let(:synthese) { {} }
+      let(:synthese_evapro) { { pourcentage_risque: nil, score_cout: "fort" } }
+
+      it "retourne nil sans appeler la fabrique" do
+        expect(helper).not_to receive(:restitution_globale_pour)
+
+        expect(helper.send(:lettre_risque_pour, evaluation, synthese_evapro)).to be_nil
+      end
+    end
   end
 
   describe "#lettre_couts_pour" do
@@ -186,6 +213,33 @@ RSpec.describe Admin::DashboardHelper do
 
       it "retourne nil" do
         expect(helper.send(:lettre_couts_pour, evaluation)).to be_nil
+      end
+    end
+
+    context "quand synthese_evapro est fourni (index sans fabrique)" do
+      let(:synthese) { {} }
+      let(:synthese_evapro) { { score_cout: "faible" } }
+
+      before do
+        allow(helper).to receive(:palier_score_cout).with("faible").and_return("A - Très bon")
+        allow(helper).to receive(:palier_to_lettre).with("A - Très bon").and_return("a")
+      end
+
+      it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do
+        expect(helper).not_to receive(:restitution_globale_pour)
+
+        expect(helper.send(:lettre_couts_pour, evaluation, synthese_evapro)).to eq("A")
+      end
+    end
+
+    context "quand synthese_evapro est fourni avec score_cout nil" do
+      let(:synthese) { {} }
+      let(:synthese_evapro) { { pourcentage_risque: 10, score_cout: nil } }
+
+      it "retourne nil sans appeler la fabrique" do
+        expect(helper).not_to receive(:restitution_globale_pour)
+
+        expect(helper.send(:lettre_couts_pour, evaluation, synthese_evapro)).to be_nil
       end
     end
   end
@@ -223,6 +277,19 @@ RSpec.describe Admin::DashboardHelper do
         expect(helper.afficher_lettre_risque(evaluation)).to eq("-")
       end
     end
+
+    context "quand synthese_evapro est fourni" do
+      let(:synthese_evapro) { { pourcentage_risque: 10 } }
+
+      it "passe synthese_evapro à lettre_risque_pour" do
+        allow(evaluation).to receive(:complete?).and_return(true)
+        expect(helper).to receive(:lettre_risque_pour).with(evaluation,
+synthese_evapro).and_return("A")
+        expect(helper).to receive(:render).with(instance_of(EvaProScoreComponent))
+
+        helper.afficher_lettre_risque(evaluation, synthese_evapro)
+      end
+    end
   end
 
   describe "#afficher_lettre_cout" do
@@ -256,6 +323,19 @@ RSpec.describe Admin::DashboardHelper do
         allow(evaluation).to receive(:complete?).and_return(false)
 
         expect(helper.afficher_lettre_cout(evaluation)).to eq("-")
+      end
+    end
+
+    context "quand synthese_evapro est fourni" do
+      let(:synthese_evapro) { { score_cout: "moyen" } }
+
+      it "passe synthese_evapro à lettre_couts_pour" do
+        allow(evaluation).to receive(:complete?).and_return(true)
+        expect(helper).to receive(:lettre_couts_pour).with(evaluation,
+synthese_evapro).and_return("B")
+        expect(helper).to receive(:render).with(instance_of(EvaProScoreComponent))
+
+        helper.afficher_lettre_cout(evaluation, synthese_evapro)
       end
     end
   end

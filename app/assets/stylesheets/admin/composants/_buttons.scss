@@ -14,6 +14,7 @@ form input[type="submit"] {
   @include bouton-primaire;
   @include grand-bouton;
 }
+
 form input[type="submit"].bouton-secondaire {
   @include bouton-secondaire;
   @include grand-bouton;
@@ -23,33 +24,32 @@ form input[type="submit"].bouton-secondaire {
   @include bouton-primaire;
   @include tres-petit-bouton;
 }
+
 form input[type="submit"]:not(.disabled),
 form button:not(.disabled),
 .has_many_container a.button:not(.disabled) {
-  &:hover, &:active {
+
+  &:hover,
+  &:active {
     background-image: none;
   }
 }
+
 form.filter_form a.clear_filters_btn,
 form fieldset.actions li.cancel a,
 .action-secondaire {
-  @include bouton-primaire;
-  &, &:link, &:visited, &:active {
-    color: $eva_main_blue;
-  }
+  @include bouton-secondaire;
 
   height: auto;
-  margin-right: 0;
-  border-color: $eva_main_blue;
-  background-color: $grey-1000;
-  &:not(.disabled):hover, &:not(.disabled):active {
-    filter: brightness(96%);
-    border-color: $eva_main_blue;
-    background-color: $grey-1000;
-    background-image: none;
-    box-shadow: none;
+
+  &,
+  &:link,
+  &:visited,
+  &:active {
+    color: $eva_main_blue;
   }
 }
+
 form fieldset.actions li.bouton-annuler a,
 form fieldset.actions li.cancel a,
 .action-secondaire {
@@ -72,20 +72,28 @@ button.bouton-secondaire,
 form button.bouton:not(.disabled),
 form button.bouton-tertiaire:not(.disabled),
 form button.bouton-secondaire:not(.disabled) {
-  &, &:hover, &:active {
+
+  &,
+  &:hover,
+  &:active {
     font-weight: 500;
   }
 }
 
 
-button.bouton, a.bouton, .bouton {
+button.bouton,
+a.bouton,
+.bouton {
   @include bouton-primaire;
 
-  &, &:hover, &:active {
+  &,
+  &:hover,
+  &:active {
     font-weight: 500;
   }
 
-  &.bouton--actif, &.bouton--actif:hover {
+  &.bouton--actif,
+  &.bouton--actif:hover {
     background-color: $blue-france-sun-113-active;
     border-color: $blue-france-sun-113-active;
     color: $blue-france-975;
@@ -94,7 +102,10 @@ button.bouton, a.bouton, .bouton {
 
   &.bouton--desactive {
     pointer-events: none;
-    &, &:link, :visited {
+
+    &,
+    &:link,
+    :visited {
       color: $grey-625;
     }
 
@@ -122,16 +133,20 @@ button.bouton, a.bouton, .bouton {
 .bouton-secondaire {
   @include bouton-secondaire;
 
-  &.bouton--actif, &.bouton--actif:hover {
+  &.bouton--actif,
+  &.bouton--actif:hover {
     border-color: $blue-france-sun-113;
     background-color: rgba(0, 0, 0, 0.08);
     color: $blue-france-sun-113;
     cursor: unset;
   }
-  
+
   &.bouton--desactive {
     pointer-events: none;
-    &, &:link, :visited {
+
+    &,
+    &:link,
+    :visited {
       color: $grey-625;
     }
 
@@ -139,6 +154,7 @@ button.bouton, a.bouton, .bouton {
     background-color: transparent;
   }
 }
+
 .tres-petit-bouton {
   @include tres-petit-bouton;
 }
@@ -148,7 +164,9 @@ a.grand-bouton,
 button.grand-bouton {
   @include grand-bouton;
 
-  &, &:hover, &:active {
+  &,
+  &:hover,
+  &:active {
     font-weight: 500;
   }
 }
@@ -182,16 +200,20 @@ form input[type="submit"].petit-bouton {
 .bouton-tertiaire {
   @include bouton-tertiaire;
 
-  &.bouton--actif, &.bouton--actif:hover {
+  &.bouton--actif,
+  &.bouton--actif:hover {
     border-color: $grey-900;
     background-color: rgba(0, 0, 0, 0.08);
     color: $blue-france-sun-113;
     cursor: unset;
   }
-  
+
   &.bouton--desactive {
     pointer-events: none;
-    &, &:link, :visited {
+
+    &,
+    &:link,
+    :visited {
       color: $grey-625;
     }
 

@@ -21,9 +21,7 @@ class PurgeComptesSupprimesJob < ApplicationJob
     count = 0
     Compte.only_deleted.where.not(id: ids_comptes_avec_evaluations)
           .where(deleted_at: ..1.month.ago).find_each do |compte|
-      Evaluation.with_deleted.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
-      Beneficiaire.with_deleted.where(compte: compte).update_all(compte_id: nil)
-      Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
+      prepare_destruction compte
       compte.really_destroy!
       count += 1
     end
@@ -38,5 +36,13 @@ class PurgeComptesSupprimesJob < ApplicationJob
         count += 1
     end
     count
+  end
+
+  private
+
+  def prepare_destruction(compte)
+    Evaluation.with_deleted.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
+    Beneficiaire.with_deleted.where(compte: compte).update_all(compte_id: nil)
+    Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
   end
 end

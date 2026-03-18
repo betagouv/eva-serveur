@@ -14,7 +14,7 @@ describe PurgeComptesSupprimesJob, type: :job do
       expect(Campagne.with_deleted.where(compte_id: compte.id)).to be_empty
     end
 
-    it 'ne detruit pas un compte supprimé depuis moins d\'un mois' do
+    it "ne detruit pas un compte supprimé depuis moins d'un mois" do
       compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago + 1.day
 
       described_class.perform_now
@@ -81,7 +81,7 @@ describe PurgeComptesSupprimesJob, type: :job do
       expect(beneficiaire.reload.compte).to be_nil
     end
 
-    it "detruit un compte supprimé responsable de suivi d'une évaluation supprimé et retire ce lien" do
+    it "detruit un compte responsable de suivi d'une évaluation supprimé et retire ce lien" do
       compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
       evaluation = create :evaluation, responsable_suivi: compte, deleted_at: 1.month.ago
 

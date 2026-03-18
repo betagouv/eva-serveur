@@ -26,29 +26,39 @@ class NavigationComponent < ViewComponent::Base
       evaluations_link,
       comptes_link,
       aide_link
-    ]
+    ].compact
   end
 
   def dashboard_link
+    return unless can_read_dashboard?
+
     { label: "Tableau de bord", url: helpers.admin_root_path, current: dashboard_current? }
   end
 
   def actualites_link
+    return unless can?(:read, Actualite)
+
     { label: "Actualités", url: helpers.admin_actualites_path,
       current: current_page?(helpers.admin_actualites_path) }
   end
 
   def evaluations_link
+    return unless can?(:read, Evaluation)
+
     { label: "Évaluations", url: helpers.admin_evaluations_path,
       current: evaluations_current? }
   end
 
   def comptes_link
+    return unless can?(:read, Compte)
+
     { label: "Comptes", url: helpers.admin_comptes_path,
       current: current_page?(helpers.admin_comptes_path) }
   end
 
   def aide_link
+    return unless can_read_aide?
+
     { label: "Aide", url: helpers.admin_aide_path,
       current: current_page?(helpers.admin_aide_path) }
   end
@@ -60,6 +70,21 @@ class NavigationComponent < ViewComponent::Base
   def evaluations_current?
     current_page?(helpers.admin_evaluations_path) ||
       (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
+  end
+
+  def can_read_dashboard?
+    can?(:read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin")
+  end
+
+  def can_read_aide?
+    can?(:read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin") &&
+      can?(:read, SourceAide)
+  end
+
+  def can?(action, subject, *extra_args)
+    return false unless @current_compte.present?
+
+    Ability.new(@current_compte).can?(action, subject, *extra_args)
   end
 
   def current_page?(path)

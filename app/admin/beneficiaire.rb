@@ -1,5 +1,9 @@
 ActiveAdmin.register Beneficiaire do
-  menu if: proc { current_compte.structure_id.present? && !current_compte.utilisateur_entreprise? }
+  menu if: proc {
+    current_compte.structure_id.present? &&
+      !current_compte.utilisateur_entreprise? &&
+      can?(:read, Beneficiaire)
+  }
 
   permit_params :nom
 

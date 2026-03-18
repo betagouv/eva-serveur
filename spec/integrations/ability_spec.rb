@@ -385,7 +385,6 @@ describe Ability do
       expect(subject).not_to be_able_to(%i[read], campagne_collegue)
       expect(subject).not_to be_able_to(:read, Evenement.new)
       expect(subject).not_to be_able_to(:read, evenement_superadmin)
-      expect(subject).not_to be_able_to(:read, SourceAide.new)
       expect(subject).not_to be_able_to(:update, compte.structure)
       expect(subject).to be_able_to(:update, compte)
       expect(subject).not_to be_able_to(:update, create(:compte))
@@ -546,18 +545,24 @@ describe Ability do
     end
   end
 
-  context 'Compte en attente (soumis à restriction)' do
+  context 'Compte en attente (soumis à restriction) - nouveau compte' do
     let!(:compte) do
       create :compte_conseiller, :en_attente, structure: structure_avec_admin,
-             exempte_restriction_acces_attente: false
+             exempte_restriction_acces_attente: false,
+             etape_inscription: "nouveau"
     end
 
-    it "a les mêmes droits que un compte refusé (Dashboard et son compte uniquement)" do
+    it "peut accéder aux ressources d'information (Actualités, Aide) mais pas aux autres menus" do
       expect(subject).to be_able_to(:read, compte)
       expect(subject).to be_able_to(:update, compte)
       expect(subject).to be_able_to(:accepter_cgu, compte)
       expect(subject).not_to be_able_to(:read, Campagne)
-      expect(subject).not_to be_able_to(:read, Actualite)
+      expect(subject).to be_able_to(:read, Actualite)
+      expect(subject).to be_able_to(:read, SourceAide)
+      expect(subject).to be_able_to(:read,
+                                    ActiveAdmin::Page,
+                                    name: 'Aide',
+                                    namespace_name: 'admin')
       expect(subject).not_to be_able_to(:read, Evaluation)
     end
   end

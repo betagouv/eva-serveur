@@ -37,30 +37,10 @@ class HeaderComponent < ViewComponent::Base
   def actions
     return @actions if @actions
 
-    items = []
-    if current_compte_present?
-      items << {
-        url: helpers.admin_compte_path(@current_compte),
-        label: @current_compte.nom_complet,
-        icon_class: "fr-icon-account-circle-line",
-        button_class: "fr-btn fr-btn--tertiary"
-      }
-    end
-    if current_compte_present? && current_structure.present?
-      items << {
-        url: helpers.polymorphic_path([ :admin, current_structure ]),
-        label: "Ma structure",
-        icon_class: "fr-icon-building-line",
-        button_class: "fr-btn fr-btn--tertiary"
-      }
-    end
-    items << {
-      url: helpers.pro_connect_logout_path,
-      label: "Déconnexion",
-      icon_class: "fr-icon-logout-box-r-line",
-      button_class: "fr-btn fr-btn--tertiary"
-    }
-    items
+    return [ logout_action ] unless current_compte_present?
+
+    items = [ mon_compte_action, ma_structure_action, logout_action ]
+    items.compact
   end
 
   def bouton_type_for(action)
@@ -85,5 +65,41 @@ class HeaderComponent < ViewComponent::Base
 
   def current_structure
     @current_compte&.structure
+  end
+
+  def mon_compte_action
+    {
+      url: helpers.admin_compte_path(@current_compte),
+      label: @current_compte.nom_complet,
+      icon_class: "fr-icon-account-circle-line",
+      button_class: "fr-btn fr-btn--tertiary"
+    }
+  end
+
+  def ma_structure_action
+    return unless current_structure.present?
+    return unless can?(:read, current_structure)
+
+    {
+      url: helpers.polymorphic_path([ :admin, current_structure ]),
+      label: "Ma structure",
+      icon_class: "fr-icon-building-line",
+      button_class: "fr-btn fr-btn--tertiary"
+    }
+  end
+
+  def logout_action
+    {
+      url: helpers.pro_connect_logout_path,
+      label: "Déconnexion",
+      icon_class: "fr-icon-logout-box-r-line",
+      button_class: "fr-btn fr-btn--tertiary"
+    }
+  end
+
+  def can?(action, subject, *extra_args)
+    return false unless @current_compte.present?
+
+    Ability.new(@current_compte).can?(action, subject, *extra_args)
   end
 end

@@ -55,6 +55,7 @@ class Ability < AbilityUtilisateur
   def droit_page
     can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
     can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
+    can :read, SourceAide unless compte&.charge_mission_regionale?
   end
 
   def droits_comptes_refuses(compte)
@@ -64,12 +65,16 @@ class Ability < AbilityUtilisateur
 
   def droits_comptes_en_attente_restreints(compte)
     can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
+    can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
+    can :read, Actualite
+    can :read, SourceAide
     can %i[update read accepter_cgu], compte
   end
 
   def compte_en_attente_restreint?(compte)
     compte.validation_en_attente? &&
       !compte.exempte_restriction_acces_attente? &&
+      compte.doit_completer_inscription? &&
       compte.structure_id.present?
   end
 end

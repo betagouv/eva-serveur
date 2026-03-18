@@ -33,7 +33,7 @@ describe 'Dashboard', type: :feature do
 
     it 'Affiche le tutoriel sans le bouton quitter' do
       visit admin_path
-      expect(page).to have_content('Débutez eva')
+      expect(page).not_to have_content('Débutez eva')
       expect(page).not_to have_content('Quitter le tutoriel')
     end
   end

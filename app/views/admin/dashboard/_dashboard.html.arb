@@ -6,7 +6,9 @@ end
 
 if current_compte.validation_refusee?
   render "validation_refusee"
-elsif prise_en_main.en_cours? && !current_compte.administratif?
+elsif prise_en_main.en_cours? &&
+    current_compte.validation_acceptee? &&
+    !current_compte.administratif?
   section class: "mb-5" do
     div class: "row" do
       div class: "col-6 offset-1" do

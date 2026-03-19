@@ -90,6 +90,8 @@ fr:
       structure: Voir ma structure
       statistiques: Voir les statistiques
       logout: Déconnexion
+    campagnes:
+      blank_slate_link: Créez en une
     resource:
       index:
         stats: Afficher les statistiques

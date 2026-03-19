@@ -56,9 +56,9 @@ form fieldset.actions li.cancel a,
   @include grand-bouton;
 }
 
-button:not(:where(.fr-btn)),
-form button:not(.disabled, :where(.fr-btn)):hover,
-button:not(.disabled, :where(.fr-btn)):hover {
+button,
+form button:not(.disabled):hover,
+button:not(.disabled):hover {
   text-shadow: none;
   font-weight: normal;
   box-shadow: none;

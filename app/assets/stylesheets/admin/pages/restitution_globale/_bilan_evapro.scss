@@ -33,13 +33,16 @@
   display: flex;
   flex-direction: column;
   gap: $dsfr-spacing-3w;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .evaluation-bilan-evapro__annuaire {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  flex-shrink: 0;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .evaluation-bilan-evapro__offre-services-frame {
@@ -47,6 +50,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: $dsfr-spacing-1w;
+  max-width: 20rem;
 }
 
 .evaluation-bilan-evapro__offre-services-texte {
@@ -54,6 +58,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
 }
 
 .evaluation-bilan-evapro__opco-financeur {
@@ -102,4 +107,8 @@
 
 .evaluation-bilan-evapro__offre-services-frame .fr-link {
   @include corps-de-texte-sm-regular;
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }

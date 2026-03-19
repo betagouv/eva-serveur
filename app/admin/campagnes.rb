@@ -99,18 +99,20 @@ ActiveAdmin.register Campagne do
     render "components/recherche_comptes_structure" if can?(:autoriser_compte, resource)
   end
 
-  index do
-    column :libelle do |campagne|
-      div class: "contenu-libelle" do
-        div do
-          div link_to(campagne.libelle, admin_campagne_path(campagne))
-          div parcours_type_libelle(campagne), class: "text-xs"
+  index blank_slate_link: proc {
+    link_to(I18n.t("active_admin.campagnes.blank_slate_link"), new_resource_path)
+  } do
+      column :libelle do |campagne|
+        div class: "contenu-libelle" do
+          div do
+            div link_to(campagne.libelle, admin_campagne_path(campagne))
+            div parcours_type_libelle(campagne), class: "text-xs"
+          end
+          div do
+            render(StatutCampagneComponent.new(campagne_active: campagne.active,
+              campagne_privee: campagne.privee))
+          end
         end
-        div do
-          render(StatutCampagneComponent.new(campagne_active: campagne.active,
-campagne_privee: campagne.privee))
-        end
-      end
     end
     column :code
     column :nombre_evaluations, class: "col-nombre_evaluations text-right",

@@ -77,3 +77,19 @@ body.logged_out #content_wrapper.conteneur-elargi.inscription_v2 {
   align-items: center;
 }
 
+// Onboarding logged-out: forcer les états DSFR du bouton tertiaire
+// (ex: "Ce n'est pas ma structure" dans form_rejoindre)
+// car certains styles globaux ActiveAdmin peuvent sinon appliquer un fond gris.
+body.page_inscription_v2 .inscription_v2 .fr-btn--tertiary {
+  background-color: transparent !important;
+  color: var(--text-action-high-blue-france) !important;
+}
+
+body.page_inscription_v2 .inscription_v2 .fr-btn--tertiary:hover,
+body.page_inscription_v2 .inscription_v2 .fr-btn--tertiary:focus,
+body.page_inscription_v2 .inscription_v2 .fr-btn--tertiary:active {
+  color: var(--text-action-high-blue-france) !important;
+  background-color: var(--background-raised-grey-hover) !important;
+  font-weight: 500 !important;
+}
+

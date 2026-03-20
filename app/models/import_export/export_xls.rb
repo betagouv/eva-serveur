@@ -1,6 +1,6 @@
 module ImportExport
   class ExportXls
-    NOMBRE_MAX_LIGNES = 3000
+    NOMBRE_MAX_LIGNES = ENV.fetch("EXPORT_XLS_NOMBRE_MAX_LIGNES", 3000).to_i
 
     attr_reader :workbook, :export, :onglets
 

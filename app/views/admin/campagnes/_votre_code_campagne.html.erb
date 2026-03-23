@@ -1,7 +1,7 @@
 <%# frozen_string_literal: true %>
 
-<div id="votre_code_campagne" class="row">
-  <div class="col mx-auto">
+<div id="votre_code_campagne" class="fr-grid-row">
+  <div class="fr-col-12 fr-col-md-10" style="margin-left: auto; margin-right: auto;">
     <h2>Votre code campagne</h2>
     <%= render CartePartageCodeComponent.new(
       libelle_code: Campagne.human_attribute_name("code"),
@@ -9,7 +9,7 @@
       url: LanceurCampagne.url(@campagne, current_compte),
       description: t(".explication_code")) do |component| %>
       <% component.with_footer do %>
-        <div class="row m-0">
+        <div class="fr-grid-row fr-m-0">
           <%= render "banniere_test_campagne" %>
         </div>
       <% end %>

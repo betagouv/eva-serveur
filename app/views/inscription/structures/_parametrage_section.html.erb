@@ -8,8 +8,7 @@
         method: :nom,
         type: "text",
         hint: t("inscription.structures.show.hint_nom_structure"),
-        required: true,
-        value: form.object.nom.presence || form.object.raison_sociale
+        required: true
       ) %>
     </div>
     <% if structure_necessite_saisie_code_postal?(form.object) %>

@@ -17,13 +17,13 @@
             niveau_litteratie: @niveau_cefr,
             niveau_numeratie: @niveau_cnef,
             referentiel: "cefr" %>
-      <div class="row">
-        <div class="col-auto badge"></div>
-        <div class="col">
+      <div class="fr-grid-row">
+        <div class="fr-col-12 fr-col-md-1 badge"></div>
+        <div class="fr-col-12 fr-col-md-5">
           <%= render "metacompetences", categorie: :litteratie %>
         </div>
-        <div class="col-auto badge"></div>
-        <div class="col">
+        <div class="fr-col-12 fr-col-md-1 badge"></div>
+        <div class="fr-col-12 fr-col-md-5">
           <%= render "metacompetences", categorie: :numeratie %>
         </div>
       </div>

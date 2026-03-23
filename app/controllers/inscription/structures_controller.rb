@@ -8,6 +8,10 @@ class Inscription::StructuresController < ApplicationController
     prepare_show_context
     redirect_to inscription_structure_path(etape: "parametrage") if etape_usage_sans_session?
     preremplir_parametrage_depuis_session if etape_parametrage_avec_session?
+    if params[:etape] == "parametrage"
+      @structure&.nom = nil
+      @structure&.raison_sociale = nil
+    end
   end
 
   def update

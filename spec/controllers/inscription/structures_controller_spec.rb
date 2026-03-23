@@ -15,7 +15,8 @@ siret_pro_connect: "13002526500013") }
       context "avec une structure temporaire (non persistée)" do
         before do
           # Mock RechercheStructureParSiret pour retourner une structure non persistée
-          structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
+          structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ],
+nom: "Nom de la structure", raison_sociale: "Entreprise Test")
           allow(RechercheStructureParSiret).to receive(:new).and_return(
             instance_double(RechercheStructureParSiret, call: structure)
           )
@@ -31,6 +32,18 @@ siret_pro_connect: "13002526500013") }
           expect(AffiliationOpcoService).to have_received(:new)
           expect(service_double).to have_received(:affilie_opcos)
           expect(response).to have_http_status(:success)
+        end
+
+        it "ne pré-remplit pas le nom de la structure en GET parametrage" do
+          service_double = instance_double(AffiliationOpcoService)
+          allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
+          allow(service_double).to receive(:affilie_opcos)
+
+          get :show, params: { etape: "parametrage" }
+
+          expect(response).to have_http_status(:success)
+          expect(response.body).not_to include('value="Entreprise Test"')
+          expect(response.body).not_to include('value="Nom de la structure"')
         end
       end
 

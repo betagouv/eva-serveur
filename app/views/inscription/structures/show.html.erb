@@ -1,6 +1,6 @@
 <% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
 
-<% persisted = @structure.persisted? %>
+<% persisted = @structure&.persisted? %>
 <% etape = params[:etape] || (persisted ? nil : "confirmation") %>
 
 <% if persisted %>

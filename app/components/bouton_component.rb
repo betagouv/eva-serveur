@@ -23,7 +23,6 @@ class BoutonComponent < ViewComponent::Base
   }.freeze
 
   BUTTON_SIZE_MAPPINGS = {
-    xs: "tres-petit-bouton",
     sm: "petit-bouton",
     md: "grand-bouton"
   }.freeze

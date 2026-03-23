@@ -37,7 +37,7 @@ div id: "evaluation__details", class: "row" do
                     parties_selectionnees: params[:parties_selectionnees],
                     format: :pdf
                   },
-                  class: "mt-2 bouton grand-bouton", target: "_blank", rel: "noopener")
+                  class: "mt-2 fr-btn fr-btn--md", target: "_blank", rel: "noopener")
         end
       end
       unless resource.complete?

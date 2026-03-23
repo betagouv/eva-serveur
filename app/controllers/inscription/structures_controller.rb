@@ -5,8 +5,7 @@ class Inscription::StructuresController < ApplicationController
   include EtapeInscriptionHelper
 
   def show
-    prepare_structure_si_necessaire
-    recupere_structures_avec_meme_siret_si_necessaire
+    prepare_show_context
     redirect_to inscription_structure_path(etape: "parametrage") if etape_usage_sans_session?
     preremplir_parametrage_depuis_session if etape_parametrage_avec_session?
   end
@@ -67,7 +66,18 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def determine_action_type
-    params[:commit]
+    action = params[:action_type].presence || params[:commit].to_s
+
+    return "recherche" if action == "recherche"
+    if action == "rejoindre" || action == I18n.t("inscription.structures.show.rejoindre")
+      return "rejoindre"
+    end
+    return "confirmer_infos" if [ "confirmer_infos", "Confirmer" ].include?(action)
+    return "creer_avec_usage" if action == "creer_avec_usage"
+
+    return "creer" if [ "creer", "Créer la structure", "Confirmer la création" ].include?(action)
+
+    nil
   end
 
   def redirige_vers_recherche_structure
@@ -76,7 +86,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def rejoindre_structure_existante
-    prepare_structure_si_necessaire
+    prepare_show_context
     structure = structure_selectionnee
 
     return render_structure_invalide unless structure
@@ -84,18 +94,20 @@ class Inscription::StructuresController < ApplicationController
     if @compte.update(etape_inscription: :complet, structure_id: structure.id)
       redirige_vers_etape_inscription(@compte)
     else
-      render :show
+      render_show
     end
   end
 
   def structure_selectionnee
+    return nil if @structure.blank?
+
     Structure.avec_meme_siret_que(@structure.siret)
              .find_by(id: params.dig(:compte, :structure_id).presence || @structure.id)
   end
 
   def render_structure_invalide
     flash.now[:alert] = t("inscription.structures.show.structure_invalide")
-    render :show
+    render_show
   end
 
   def confirme_infos_structure
@@ -103,7 +115,7 @@ class Inscription::StructuresController < ApplicationController
       redirect_to inscription_structure_path(etape: "parametrage")
     else
       @structure.errors.add(:structure_confirmee, :must_be_checked)
-      render :show
+      render_show
     end
   end
 
@@ -208,7 +220,18 @@ class Inscription::StructuresController < ApplicationController
 
   def render_parametrage
     params[:etape] = "parametrage"
+    prepare_show_context
     render :show
+  end
+
+  def render_show
+    prepare_show_context
+    render :show
+  end
+
+  def prepare_show_context
+    prepare_structure_si_necessaire
+    recupere_structures_avec_meme_siret_si_necessaire
   end
 
   def etape_usage_sans_session?

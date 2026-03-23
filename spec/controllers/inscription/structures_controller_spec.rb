@@ -366,6 +366,8 @@ siret_pro_connect: "13002526500013") }
     end
 
     context "quand l'action est 'rejoindre'" do
+      render_views
+
       let!(:structure) {
  create(:structure_locale, :avec_admin, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
 
@@ -397,10 +399,24 @@ siret_pro_connect: "13002526500013") }
       end
 
       context "quand la structure sélectionnée est invalide" do
-        it "affiche un flash alert" do
+        it "re-render la page sans 500 et affiche un flash alert" do
           patch :update, params: { commit: "rejoindre", compte: { structure_id: "invalide" } }
 
+          expect(response).to have_http_status(:success)
           expect(flash.now[:alert]).to eq(I18n.t("inscription.structures.show.structure_invalide"))
+        end
+      end
+
+      context "quand la mise à jour du compte échoue" do
+        it "re-render la page sans erreur serveur" do
+          allow(controller).to receive(:current_compte).and_return(compte)
+          allow(compte).to receive(:update).with(etape_inscription: :complet,
+structure_id: structure.id)
+                                         .and_return(false)
+
+          patch :update, params: { commit: "rejoindre" }
+
+          expect(response).to have_http_status(:success)
         end
       end
     end

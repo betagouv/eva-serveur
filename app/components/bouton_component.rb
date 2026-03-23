@@ -2,13 +2,13 @@ class BoutonComponent < ViewComponent::Base
   attr_accessor :type
 
   PRIMARY_CLASSES = %w[
-    bouton
+    fr-btn
   ].freeze
   SECONDARY_CLASSES = %w[
-    bouton-secondaire
+    fr-btn fr-btn--secondary
   ].freeze
   TERTIARY_CLASSES = %w[
-    bouton-tertiaire
+    fr-btn fr-btn--tertiary
   ].freeze
   DESACTIVE_CLASSES = %w[
     bouton
@@ -23,8 +23,8 @@ class BoutonComponent < ViewComponent::Base
   }.freeze
 
   BUTTON_SIZE_MAPPINGS = {
-    sm: "petit-bouton",
-    md: "grand-bouton"
+    sm: "fr-btn--sm",
+    md: "fr-btn--md"
   }.freeze
 
   BUTTON_TAG_MAPPINGS = %i[a submit button button_with_form].freeze

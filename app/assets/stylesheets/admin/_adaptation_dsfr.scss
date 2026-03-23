@@ -226,23 +226,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
   background: var(--background-raised-grey-hover);
 }
 
-body.logged_in:not(.evapro_admin) .fr-btn {
-  @include grand-bouton;
-  @include bouton-primaire;
-
-  &.bouton-secondaire {
-    @include bouton-secondaire;
-  }
-
-  &:disabled {
-    @include bouton-disabled;
-  }
-}
-
-body.logged_in:not(.evapro_admin) a.fr-btn {
-  color: $eva_light !important;
-}
-
 body.evapro_admin a:not(.fr-btn),
 body.evapro_admin a:link:not(.fr-btn),
 body.evapro_admin a:visited:not(.fr-btn),
@@ -415,4 +398,22 @@ body.logged_in h2.fr-footer__partners-title {
   #wrapper {
     overflow-x: hidden;
   }
+}
+
+a.fr-btn,
+a.fr-btn:link,
+a.fr-btn:visited,
+a.fr-btn:active {
+  color: #F5F5FE;
+}
+
+a.fr-btn.fr-btn--secondary,
+a.fr-btn.fr-btn--secondary:link,
+a.fr-btn.fr-btn--secondary:visited,
+a.fr-btn.fr-btn--secondary:active,
+a.fr-btn.fr-btn--tertiary,
+a.fr-btn.fr-btn--tertiary:link,
+a.fr-btn.fr-btn--tertiary:visited,
+a.fr-btn.fr-btn--tertiary:active {
+  color: $blue-france-sun-113;
 }

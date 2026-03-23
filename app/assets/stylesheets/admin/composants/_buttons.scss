@@ -22,7 +22,7 @@ form input[type="submit"].bouton-secondaire {
 
 .has_many_container a.button {
   @include bouton-primaire;
-  @include tres-petit-bouton;
+  @include petit-bouton;
 }
 
 form input[type="submit"]:not(.disabled),
@@ -153,10 +153,6 @@ a.bouton,
     border-color: $grey-925;
     background-color: transparent;
   }
-}
-
-.tres-petit-bouton {
-  @include tres-petit-bouton;
 }
 
 .grand-bouton,

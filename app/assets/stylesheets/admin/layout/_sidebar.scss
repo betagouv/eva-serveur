@@ -69,7 +69,7 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
 
       a {
         @include bouton-secondaire;
-        @include tres-petit-bouton;
+        @include petit-bouton;
       }
     }
   }

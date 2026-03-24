@@ -287,4 +287,42 @@ describe Restitution::Globale do
       expect(restitution_globale.id).to eq 1
     end
   end
+
+  describe "#diag_risques_entreprise" do
+    let(:restitution_classique) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: false))
+    end
+    let(:restitution_evapro_ancienne) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+    end
+    let(:restitution_evapro_recente) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+    end
+    let(:restitutions) do
+      [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]
+    end
+
+    it "retourne la dernière restitution de la situation diagnostic entreprise" do
+      expect(restitution_globale.diag_risques_entreprise).to eq(restitution_evapro_recente)
+    end
+  end
+
+  describe "#evaluation_impact_general" do
+    let(:restitution_classique) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: false))
+    end
+    let(:restitution_evapro_ancienne) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+    end
+    let(:restitution_evapro_recente) do
+      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+    end
+    let(:restitutions) do
+      [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]
+    end
+
+    it "retourne la dernière restitution de la situation impact général" do
+      expect(restitution_globale.evaluation_impact_general).to eq(restitution_evapro_recente)
+    end
+  end
 end

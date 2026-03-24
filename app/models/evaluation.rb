@@ -212,8 +212,16 @@ question_redaction_id)
     structure.opco
   end
 
+  def context
+    @context ||= Context.new(self)
+  end
+
   def evaluation_evapro?
-    campagne.parcours_type.type_de_programme == "diagnostic_entreprise"
+    context.pro?
+  end
+
+  def evapro?
+    context.pro?
   end
 
   private

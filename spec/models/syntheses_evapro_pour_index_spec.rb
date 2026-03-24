@@ -88,5 +88,34 @@ RSpec.describe SynthesesEvaproPourIndex do
         expect(resultat[evaluation.id]).to eq(pourcentage_risque: 10, score_cout: "moyen")
       end
     end
+
+    context "avec plusieurs évaluations de la collection" do
+      let(:autre_evaluation) { create(:evaluation) }
+      let(:collection) { Evaluation.where(id: [ evaluation.id, autre_evaluation.id ]) }
+      let(:situation_diag) do
+        create(:situation, nom_technique: Situation::DIAG_RISQUES_ENTREPRISE)
+      end
+      let(:situation_impact) do
+        create(:situation, nom_technique: Situation::EVALUATION_IMPACT_GENERAL)
+      end
+
+      before do
+        create(:partie,
+               evaluation: evaluation,
+               situation: situation_diag,
+               synthese: { "pourcentage_risque" => 34 })
+        create(:partie,
+               evaluation: autre_evaluation,
+               situation: situation_impact,
+               synthese: { "score_cout" => "faible" })
+      end
+
+      it "retourne les synthèses pour chaque évaluation sans mélange" do
+        resultat = described_class.pour(collection)
+
+        expect(resultat[evaluation.id]).to eq(pourcentage_risque: 34, score_cout: nil)
+        expect(resultat[autre_evaluation.id]).to eq(pourcentage_risque: nil, score_cout: "faible")
+      end
+    end
   end
 end

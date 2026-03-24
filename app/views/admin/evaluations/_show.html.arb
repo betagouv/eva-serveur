@@ -1,4 +1,4 @@
-if resource.evaluation_evapro?
+if resource.evapro?
   render "evaluation_evapro"
 else
   div class: "evaluation" do

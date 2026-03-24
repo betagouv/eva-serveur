@@ -82,6 +82,19 @@ form button.bouton-secondaire:not(.disabled) {
 }
 
 
+.bouton--desactive {
+  pointer-events: none;
+
+  &,
+  &:link,
+  :visited {
+    color: $grey-625;
+  }
+
+  background-color: $grey-925;
+  border-color: $grey-925;
+}
+
 button.bouton,
 a.bouton,
 .bouton {

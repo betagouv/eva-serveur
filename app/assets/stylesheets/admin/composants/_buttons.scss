@@ -8,6 +8,13 @@ form fieldset.actions li.cancel a,
   text-shadow: none;
   border: none;
   background: none;
+  border-radius: 0;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  border-radius: 0;
 }
 
 form input[type="submit"] {
@@ -194,19 +201,6 @@ form input[type="submit"].petit-bouton {
   @include bouton-action;
 }
 
-// Classe pour simuler l'état hover dans l'UI-kit
-.bouton-hover-demo {
-  border-color: $blue-france-sun-113-hover !important;
-  background-color: $blue-france-sun-113-hover !important;
-  color: $blue-france-975 !important;
-}
-
-.bouton-secondaire-hover-demo {
-  border-color: $blue-france-sun-113 !important;
-  background-color: rgba(0, 0, 0, 0.04) !important;
-  color: $blue-france-sun-113 !important;
-}
-
 .bouton-tertiaire {
   @include bouton-tertiaire;
 
@@ -232,8 +226,22 @@ form input[type="submit"].petit-bouton {
   }
 }
 
-.bouton-tertiaire-hover-demo {
+// Classe pour simuler l'état hover dans l'UI-kit
+.bouton-primaire-demo {
+  border-color: $blue-france-sun-113-hover !important;
+  background-color: $blue-france-sun-113-hover !important;
+  color: $blue-france-975 !important;
+}
+
+.bouton-secondaire-demo {
+  border-color: $blue-france-sun-113 !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  color: $blue-france-sun-113 !important;
+}
+
+.bouton-tertiaire-demo {
   border-color: $grey-900 !important;
   background-color: rgba(0, 0, 0, 0.04) !important;
   color: $blue-france-sun-113 !important;
 }
+

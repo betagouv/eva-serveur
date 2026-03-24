@@ -20,7 +20,7 @@
         <p><%= t(".incomplet.description") %></p>
 
         <% url = "#{URL_EVA_ENTREPRISES}/evaluation-impact?evaluation_id=#{params[:id]}" %>
-        <%= render BoutonComponent.new(url, type: :primary) do %>
+        <%= render BoutonDsfrComponent.new(url, type: :primary) do %>
           <%= t(".incomplet.action") %>
         <% end %>
       <% end %>

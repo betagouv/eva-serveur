@@ -6,7 +6,7 @@
     <div class="liste-evaluations-positionnement__actions">
       <p class="liste-evaluations-positionnement__nombre-element-selectionnes fr-m-0"></p>
       <div class="liste-evaluations-positionnement__actions__comparer">
-        <%= render BoutonComponent.new(
+        <%= render BoutonDsfrComponent.new(
           admin_comparaison_path(beneficiaire_id: resource.id),
           type: :secondary,
           tag: :button_with_form,

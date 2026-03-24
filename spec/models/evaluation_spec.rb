@@ -124,6 +124,60 @@ donnees: { "reponseIntitule" => nil }
         end
       end
     end
+
+    describe ".diagnostic" do
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+
+      it "retourne uniquement les évaluations du programme diagnostic (hors Eva Pro)" do
+        resultats = described_class.diagnostic
+
+        expect(resultats).to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_positionnement)
+        expect(resultats).not_to include(evaluation_evapro)
+      end
+    end
+
+    describe ".positionnement" do
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+
+      it "retourne uniquement les évaluations du programme positionnement" do
+        resultats = described_class.positionnement
+
+        expect(resultats).to include(evaluation_positionnement)
+        expect(resultats).not_to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_evapro)
+      end
+    end
+  end
+
+  describe "#evaluation_evapro?" do
+    context "quand l'évaluation est rattachée à un parcours diagnostic entreprise" do
+      let(:evaluation) { create(:evaluation, :evapro) }
+
+      it "retourne true" do
+        expect(evaluation.evaluation_evapro?).to be(true)
+      end
+    end
+
+    context "quand l'évaluation est rattachée à un parcours diagnostic bénéficiaire" do
+      let(:evaluation) { create(:evaluation, :diagnostic) }
+
+      it "retourne false" do
+        expect(evaluation.evaluation_evapro?).to be(false)
+      end
+    end
+
+    context "quand l'évaluation est rattachée à un parcours positionnement" do
+      let(:evaluation) { create(:evaluation, :positionnement) }
+
+      it "retourne false" do
+        expect(evaluation.evaluation_evapro?).to be(false)
+      end
+    end
   end
 
   describe '#responsables_suivi' do

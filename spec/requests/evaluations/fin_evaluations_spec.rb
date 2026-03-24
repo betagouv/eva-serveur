@@ -47,6 +47,17 @@ describe 'Fin Evaluation API', type: :request do
       end
     end
 
+    context "quand l'évaluation est Eva Pro" do
+      let(:evaluation) { create(:evaluation, :evapro, campagne: campagne) }
+
+      before { post "/api/evaluations/#{evaluation.id}/fin" }
+
+      it "conserve le contrat API de fin d'évaluation" do
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body.keys).to include("competences_fortes")
+      end
+    end
+
     context 'retourne aucune compétences avec une évaluation sans compétences identifiées' do
       before { post "/api/evaluations/#{evaluation.id}/fin" }
 

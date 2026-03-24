@@ -16,6 +16,25 @@ describe 'Admin - Evaluation', type: :feature do
   describe '#show' do
     before { connecte(mon_compte) }
 
+    context "branche d'affichage Eva vs Eva Pro" do
+      let(:evaluation_eva) { create(:evaluation, campagne: ma_campagne) }
+      let(:campagne_evapro) { create(:campagne, :avec_parcours_evapro, compte: mon_compte) }
+      let(:evaluation_evapro) { create(:evaluation, campagne: campagne_evapro) }
+
+      it "affiche la vue Eva classique pour une évaluation bénéficiaire" do
+        visit admin_evaluation_path(evaluation_eva)
+
+        expect(page).to have_css(".evaluation__restitution-globale")
+        expect(page).not_to have_css(".evaluation-evapro")
+      end
+
+      it "affiche la vue Eva Pro pour un diagnostic entreprise" do
+        visit admin_evaluation_path(evaluation_evapro)
+
+        expect(page).to have_css(".evaluation-evapro")
+      end
+    end
+
     context 'situation plan de la ville' do
       let!(:mon_evaluation_plan_de_la_ville) { create :evaluation, campagne: campagne }
       let!(:partie) do

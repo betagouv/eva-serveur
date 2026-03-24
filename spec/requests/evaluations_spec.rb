@@ -10,6 +10,7 @@ describe 'Evaluation', type: :request do
 
     describe 'POST /evaluations' do
       let!(:campagne_ete19) { create :campagne, code: 'ETE19' }
+      let!(:campagne_evapro) { create :campagne, :avec_parcours_evapro, code: "EVAPRO1" }
 
       context 'Création quand une requête est valide' do
         let(:payload_valide_avec_campagne) do
@@ -151,6 +152,27 @@ describe 'Evaluation', type: :request do
           expect(response).to have_http_status(:unprocessable_content)
         end
       end
+
+      context "quand la campagne est de type diagnostic entreprise (Eva Pro)" do
+        let(:payload_valide_evapro) do
+          {
+            nom: "Aline",
+            code_campagne: "EVAPRO1",
+            debutee_le: date.iso8601
+          }
+        end
+
+        before { post "/api/evaluations", params: payload_valide_evapro }
+
+        it "crée l'évaluation et conserve le contrat de réponse API" do
+          evaluation = Evaluation.last
+
+          expect(response).to have_http_status(:created)
+          expect(response.parsed_body).to include("id" => evaluation.id)
+          expect(evaluation.evaluation_evapro?).to be(true)
+          expect(evaluation.beneficiaire.nom).to eq("Aline")
+        end
+      end
     end
 
     describe 'PATCH /evaluations/:id' do
@@ -254,6 +276,23 @@ describe 'Evaluation', type: :request do
       it do
         expect(response).to have_http_status(:ok)
         expect(response.body).to include evaluation.id.to_s
+      end
+
+      context "quand l'évaluation appartient à une campagne Eva Pro" do
+        let!(:evaluation_evapro) { create(:evaluation, :evapro, beneficiaire: beneficiaire) }
+
+        before do
+          get "/api/evaluations/#{evaluation_evapro.id}"
+        end
+
+        it "retourne la même structure de payload qu'une évaluation classique" do
+          json = response.parsed_body
+
+          expect(response).to have_http_status(:ok)
+          expect(json.keys).to include("id", "nom", "campagne_id", "debutee_le", "terminee_le")
+          expect(json["id"]).to eq(evaluation_evapro.id)
+          expect(json["nom"]).to eq("Roger")
+        end
       end
     end
   end

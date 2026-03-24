@@ -1,18 +1,19 @@
 class BoutonComponent < ViewComponent::Base
   attr_accessor :type
-
   PRIMARY_CLASSES = %w[
     fr-btn
   ].freeze
   SECONDARY_CLASSES = %w[
-    fr-btn fr-btn--secondary
+    fr-btn
+    fr-btn--secondary
   ].freeze
   TERTIARY_CLASSES = %w[
-    fr-btn fr-btn--tertiary
+    fr-btn
+    fr-btn--tertiary
   ].freeze
   DESACTIVE_CLASSES = %w[
-    bouton
-    bouton--desactive
+    fr-btn
+    fr-btn--disabled
   ].freeze
 
   BUTTON_TYPE_MAPPINGS = {

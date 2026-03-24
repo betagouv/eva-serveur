@@ -241,19 +241,57 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   color: var(--text-inverted-blue-france);
 }
 
-body.evapro_admin .fr-btn--secondary,
-body.evapro_admin .fr-btn--tertiary,
-.evapro_admin .fr-btn--secondary,
-.evapro_admin .fr-btn--tertiary {
+// .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close) {
+//   color: var(--text-inverted-blue-france);
+// }
+
+.fr-btn--secondary,
+.fr-btn--tertiary {
   color: var(--text-action-high-blue-france);
 }
 
-body.evapro_admin .fr-btn--tertiary:hover,
-.evapro_admin .fr-btn--tertiary:hover {
-  background: var(--background-raised-grey-hover);
+// Baseline globale pour tous les boutons HTML (hors règles modales spécifiques)
+button,
+input[type="submit"],
+input[type="button"] {
+  appearance: none;
+  background-image: none;
+  text-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  line-height: 1.5rem;
+}
+
+// Baseline DSFR explicite pour éviter les surcharges ActiveAdmin
+button.fr-btn,
+input[type="submit"].fr-btn,
+input[type="button"].fr-btn {
+  appearance: none;
+  background-image: none;
+  text-shadow: none;
+  box-shadow: none;
+  font-weight: 500;
+  border-radius: 0;
+  line-height: 1.5rem;
+}
+
+// Etats explicites par variante pour button/submit DSFR
+button.fr-btn.fr-btn--secondary,
+input[type="submit"].fr-btn.fr-btn--secondary,
+input[type="button"].fr-btn.fr-btn--secondary {
+  border: 1px solid var(--light-decisions-border-border-action-high-blue-france, #000091);
+}
+
+button.fr-btn.fr-btn--tertiary,
+input[type="submit"].fr-btn.fr-btn--tertiary,
+input[type="button"].fr-btn.fr-btn--tertiary {
+  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
 }
 
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
+button.fr-btn:not(.disabled):hover,
+input[type="submit"].fr-btn:not(.disabled):hover,
+input[type="button"].fr-btn:not(.disabled):hover,
 form button.fr-btn:not(.disabled):hover,
 form input[type="submit"].fr-btn:not(.disabled):hover,
 form input[type="button"].fr-btn:not(.disabled):hover,
@@ -263,9 +301,37 @@ form input[type="button"].fr-btn:not(.disabled):hover,
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary) {
-    background-color: $blue-france-sun-113-hover;
-    border-color: $blue-france-sun-113-hover;
+    background: var(--light-decisions-background-background-action-high-blue-france-hover, #1212FF);
+    border-color: var(--light-decisions-background-background-action-high-blue-france-hover, #1212FF);
+    color: var(--text-inverted-blue-france);
   }
+}
+
+button.fr-btn.fr-btn--secondary:not(.disabled):hover,
+input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled):hover,
+input[type="button"].fr-btn.fr-btn--secondary:not(.disabled):hover {
+  border: 1px solid var(--light-decisions-border-border-action-high-blue-france, #000091);
+  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+}
+
+button.fr-btn.fr-btn--tertiary:not(.disabled):hover,
+input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled):hover,
+input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled):hover {
+  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+}
+
+button.fr-btn:not(.disabled):active,
+input[type="submit"].fr-btn:not(.disabled):active,
+input[type="button"].fr-btn:not(.disabled):active {
+  background-image: none;
+  box-shadow: none;
+}
+
+button.fr-btn:disabled,
+input[type="submit"].fr-btn:disabled,
+input[type="button"].fr-btn:disabled {
+  cursor: not-allowed;
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR
@@ -416,4 +482,11 @@ a.fr-btn.fr-btn--tertiary:link,
 a.fr-btn.fr-btn--tertiary:visited,
 a.fr-btn.fr-btn--tertiary:active {
   color: $blue-france-sun-113;
+}
+
+// Etat actif conservé pendant la migration des classes legacy JS.
+.fr-btn.bouton--actif {
+  border-color: $blue-france-sun-113-active;
+  background-color: $blue-france-sun-113-active;
+  color: $blue-france-975;
 }

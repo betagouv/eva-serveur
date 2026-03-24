@@ -32,8 +32,13 @@ div class: "carte-prise-en-main" do
             span md t("etapes.#{etape_en_cours}.question",
                       scope: scope)
           end
-          text_node link_to(t("etapes.#{etape_en_cours}.action", scope: scope), lien_action,
-                            options)
+          render(
+            BoutonComponent.new(
+              lien_action,
+              type: :primary,
+              size: :sm
+            ).with_content(t("etapes.#{etape_en_cours}.action", scope: scope))
+          )
         end
       end
     end

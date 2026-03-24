@@ -2,7 +2,9 @@
   <div class='bloc-apercu-wrapper'>
     <div class="titre-panel-avec-bouton fr-mb-3v">
       <h3><%= t(".titre") %></h3>
-      <%= link_to t(".voir_tout"), admin_evaluations_path %>
+      <%= render(BoutonComponent.new(admin_evaluations_path, type: :primary, size: :md)) do %>
+        <%= t(".voir_tout") %>
+      <% end %>
     </div>
 
     <p class="evaluation-legende" aria-label="<%= t(".legende_sr") %>">

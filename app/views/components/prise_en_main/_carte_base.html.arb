@@ -33,7 +33,7 @@ div class: "carte-prise-en-main" do
                       scope: scope)
           end
           render(
-            BoutonComponent.new(
+            BoutonDsfrComponent.new(
               lien_action,
               type: :primary,
               size: :sm

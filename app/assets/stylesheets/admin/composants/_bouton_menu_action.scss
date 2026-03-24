@@ -1,0 +1,22 @@
+button.bouton,
+a.bouton,
+.bouton {
+  &.bouton-menu {
+    @include bouton-tertiaire-sans-contour;
+
+    background-color: $grey-1000;
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    line-height: 0;
+
+    &::before {
+      content: asset-data-url('icones/trois_points.svg');
+    }
+  }
+}

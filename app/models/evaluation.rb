@@ -199,17 +199,11 @@ question_redaction_id)
   end
 
   def opco_financeur
-    structure = campagne&.compte&.structure
-    return if structure.blank?
-
-    structure.opco_financeur
+    diagnostic_pro&.opco_financeur
   end
 
   def opco
-    structure = campagne&.compte&.structure
-    return if structure.blank?
-
-    structure.opco
+    diagnostic_pro&.opco
   end
 
   def context
@@ -230,6 +224,12 @@ question_redaction_id)
     else
       Evaluations::PassationBeneficiaire.new(self)
     end
+  end
+
+  def diagnostic_pro
+    return unless evapro?
+
+    @diagnostic_pro ||= Evaluations::DiagnosticPro.new(self)
   end
 
   private

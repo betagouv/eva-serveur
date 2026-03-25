@@ -3,6 +3,26 @@
 require "rails_helper"
 
 RSpec.describe Evaluations::DiagnosticPro do
+  describe "#opco" do
+    it "retourne l'opco de la structure de la campagne" do
+      opco = double
+      structure = double(opco: opco, opco_financeur: double)
+      compte = double(structure: structure)
+      campagne = double(compte: compte)
+      evaluation = double(campagne: campagne)
+
+      expect(described_class.new(evaluation).opco).to eq(opco)
+    end
+
+    it "retourne nil quand la structure est absente" do
+      compte = double(structure: nil)
+      campagne = double(compte: compte)
+      evaluation = double(campagne: campagne)
+
+      expect(described_class.new(evaluation).opco).to be_nil
+    end
+  end
+
   describe "#with_restitution_globale" do
     it "expose les données dérivées du diagnostic entreprise via un objet testable" do
       diag = double(partie: double(synthese: { "pourcentage_risque" => 25 }))

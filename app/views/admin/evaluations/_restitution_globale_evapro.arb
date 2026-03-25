@@ -1,4 +1,4 @@
-diagnostic_pro = evaluation.diagnostic_pro.with_restitution_globale(restitution_globale)
+diagnostic_pro = evaluation.diagnostic_pro.avec_restitution_globale(restitution_globale)
 diag_risques_entreprise = diagnostic_pro.diag_risques_entreprise
 pourcentage_risque = diagnostic_pro.pourcentage_risque
 evaluation_impact_general = nil

@@ -8,7 +8,7 @@ module Evaluations
       end
 
       def a_mise_en_action?
-        @evaluation.a_mise_en_action?
+        @evaluation.mise_en_action.present?
       end
 
       def effectuee_avec_remediation?

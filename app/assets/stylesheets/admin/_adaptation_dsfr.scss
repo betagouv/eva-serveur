@@ -217,15 +217,11 @@ button.fr-link--close {
   text-shadow: none;
   box-shadow: none;
   font-weight: 400;
+  border: none;
 }
 button.fr-link--close:not(.disabled):hover {
   background: transparent;
 }
-// Lien/bouton fermer de la modale : garder l’arrondi à 0 (éviter le style DSFR par défaut)
-// .fr-modal.evapro_admin .fr-modal__header .fr-link--close,
-// .fr-modal.evapro_admin .fr-link--close.fr-link {
-//   border-radius: 0 !important;
-// }
 
 .fr-modal.evapro_admin .fr-btn--secondary,
 .fr-modal.evapro_admin .fr-btn--tertiary {
@@ -277,13 +273,6 @@ button.fr-btn * {
   font-family: inherit;
 }
 
-// Etats explicites par variante pour button/submit DSFR
-button.fr-btn.fr-btn--secondary,
-input[type="submit"].fr-btn.fr-btn--secondary,
-input[type="button"].fr-btn.fr-btn--secondary {
-  border: 1px solid var(--light-decisions-border-border-action-high-blue-france, #000091);
-}
-
 button.fr-btn.fr-btn--tertiary,
 input[type="submit"].fr-btn.fr-btn--tertiary,
 input[type="button"].fr-btn.fr-btn--tertiary {
@@ -333,7 +322,7 @@ input[type="button"].fr-btn:not(.disabled):active {
 button.fr-btn:disabled,
 input[type="submit"].fr-btn:disabled,
 input[type="button"].fr-btn:disabled {
-  cursor: not-allowed;
+  border-color: transparent;
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR

@@ -117,20 +117,6 @@
   gap: 12px;
 }
 
-.page-nouveau-compte .bouton-tertiaire {
-  @include bouton-tertiaire;
-}
-
-// Ne pas appliquer grand-bouton au bouton DSFR : il garde son style natif
-.page-nouveau-compte .valider-compte-bouton:not(.fr-btn) {
-  @include grand-bouton;
-}
-
-// Aligner le style des deux boutons (Annuler + Créer) : même radius que le design system
-.page-nouveau-compte .informations-compte-actions .fr-btn {
-  border-radius: 0;
-}
-
 .page-nouveau-compte .mention-format {
   font-size: 12px;
   line-height: 1.4;

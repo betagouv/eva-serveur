@@ -276,7 +276,7 @@ button.fr-btn * {
 button.fr-btn.fr-btn--tertiary,
 input[type="submit"].fr-btn.fr-btn--tertiary,
 input[type="button"].fr-btn.fr-btn--tertiary {
-  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
+  border: 1px solid $grey-900;
 }
 
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
@@ -292,8 +292,8 @@ form input[type="button"].fr-btn:not(.disabled):hover,
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary) {
-    background: var(--light-decisions-background-background-action-high-blue-france-hover, #1212FF);
-    border-color: var(--light-decisions-background-background-action-high-blue-france-hover, #1212FF);
+    background: $blue-france-sun-113-hover;
+    border-color: $blue-france-sun-113-hover;
     color: var(--text-inverted-blue-france);
   }
 }
@@ -301,15 +301,15 @@ form input[type="button"].fr-btn:not(.disabled):hover,
 button.fr-btn.fr-btn--secondary:not(.disabled):hover,
 input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled):hover,
 input[type="button"].fr-btn.fr-btn--secondary:not(.disabled):hover {
-  border: 1px solid var(--light-decisions-border-border-action-high-blue-france, #000091);
-  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+  border: 1px solid $blue-france-sun-113;
+  background: rgba(0, 0, 0, 0.04);
 }
 
 button.fr-btn.fr-btn--tertiary:not(.disabled):hover,
 input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled):hover,
 input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled):hover {
-  border: 1px solid var(--light-decisions-border-border-default-grey, #DDD);
-  background: var(--light-decisions-background-background-transparent-hover, rgba(0, 0, 0, 0.04));
+  border: 1px solid $grey-900;
+  background: rgba(0, 0, 0, 0.04);
 }
 
 button.fr-btn:not(.disabled):active,

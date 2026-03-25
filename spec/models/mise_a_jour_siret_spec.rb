@@ -24,7 +24,8 @@ RSpec.describe MiseAJourSiret, type: :model do
               "activite_principale" => "53.10Z",
               "siege" => {
                 "siret" => "12345678901234",
-                "adresse" => "123 RUE DE LA REPUBLIQUE 75001 PARIS"
+                "adresse" => "123 RUE DE LA REPUBLIQUE 75001 PARIS",
+                "code_postal" => "75001"
               },
               "matching_etablissements" => [],
               "complements" => {
@@ -65,6 +66,11 @@ RSpec.describe MiseAJourSiret, type: :model do
         expect(structure.adresse).to eq("123 RUE DE LA REPUBLIQUE 75001 PARIS")
       end
 
+      it "met à jour le code postal" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_postal).to eq("75001")
+      end
+
       it "retourne true" do
         expect(mise_a_jour.verifie_et_met_a_jour).to be true
       end
@@ -95,6 +101,11 @@ RSpec.describe MiseAJourSiret, type: :model do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.raison_sociale).to be_nil
         expect(structure.adresse).to be_nil
+      end
+
+      it "ne met pas à jour le code postal" do
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_postal).to eq("75012")
       end
 
       it "retourne false" do
@@ -144,7 +155,8 @@ RSpec.describe MiseAJourSiret, type: :model do
                 {
                   "siret" => "45132137600035",
                   "etat_administratif" => "F",
-                  "adresse" => "CC GALERIE 96 AU 102 AV ST OUEN 75018 PARIS"
+                  "adresse" => "CC GALERIE 96 AU 102 AV ST OUEN 75018 PARIS",
+                  "code_postal" => "75018"
                 }
               ]
             }
@@ -215,7 +227,8 @@ RSpec.describe MiseAJourSiret, type: :model do
               "matching_etablissements" => [
                 {
                   "siret" => "12345678901234",
-                  "adresse" => "456 AVENUE DES CHAMPS 69000 LYON"
+                  "adresse" => "456 AVENUE DES CHAMPS 69000 LYON",
+                  "code_postal" => "69000"
                 }
               ],
               "complements" => {
@@ -235,6 +248,7 @@ RSpec.describe MiseAJourSiret, type: :model do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.raison_sociale).to eq("ENTREPRISE TEST")
         expect(structure.adresse).to eq("456 AVENUE DES CHAMPS 69000 LYON")
+        expect(structure.code_postal).to eq("69000")
       end
     end
 
@@ -268,6 +282,7 @@ RSpec.describe MiseAJourSiret, type: :model do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.raison_sociale).to eq("ENTREPRISE TEST")
         expect(structure.adresse).to be_nil
+        expect(structure.code_postal).to eq(StructureLocale::TYPE_NON_COMMUNIQUE)
       end
     end
 

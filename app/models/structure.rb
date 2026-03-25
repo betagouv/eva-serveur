@@ -134,8 +134,7 @@ allow_blank: true
 
     statut_initial = statut_siret
 
-    mise_a_jour = MiseAJourSiret.new(self)
-    siret_valide = mise_a_jour.verifie_et_met_a_jour
+    siret_valide = MiseAJourSiret.new(self).verifie_et_met_a_jour
 
     return if siret_valide || !verification_bloquante?(statut_initial)
 

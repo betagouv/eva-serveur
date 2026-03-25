@@ -39,16 +39,7 @@ class RechercheStructureParSiret
     mise_a_jour = MiseAJourSiret.new(structure)
     mise_a_jour.verifie_et_met_a_jour
     structure.nom = structure.raison_sociale if structure.raison_sociale.present?
-    structure.code_postal = extrait_code_postal(structure.adresse) || StructureLocale::TYPE_NON_COMMUNIQUE
 
     structure
-  end
-
-  def extrait_code_postal(adresse)
-    return nil if adresse.blank?
-
-    # Extrait le code postal de l'adresse (format : 5 chiffres)
-    match = adresse.match(/\b(\d{5})\b/)
-    match ? match[1] : nil
   end
 end

@@ -1,17 +1,11 @@
-<% complet = evaluation_impact_general.present? %>
 <div id="evaluation-impact-general">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <div class="fr-pb-0">
     <div class="evaluation-impact-general__resultats">
 
-      <% if complet %>
-        <% synthese = evaluation_impact_general.synthese %>
-        <% interpretations_impact = [
-          :performance_collective,
-          :agilite_organisationnelle,
-          :securite_qualite,
-          :mobilite_professionnelle
-        ] %>
+      <% if impacts_presenter.complet? %>
+        <% synthese = impacts_presenter.synthese %>
+        <% interpretations_impact = impacts_presenter.interpretations %>
 
         <%= render partial: "admin/evaluations/mesure_des_impacts_chart",
                    locals: { synthese: synthese, interpretations_impact: interpretations_impact } %>
@@ -19,8 +13,8 @@
       <% else %>
         <p><%= t(".incomplet.description") %></p>
 
-        <% url = "#{URL_EVA_ENTREPRISES}/evaluation-impact?evaluation_id=#{params[:id]}" %>
-        <%= render BoutonDsfrComponent.new(url, type: :primary) do %>
+        <% url = impacts_presenter.incomplet_url(URL_EVA_ENTREPRISES) %>
+        <%= render BoutonComponent.new(url, type: :primary) do %>
           <%= t(".incomplet.action") %>
         <% end %>
       <% end %>

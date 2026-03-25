@@ -1,6 +1,6 @@
 <div id="evaluation-bilan-evapro">
-  <% if diag_risques_entreprise.palier.present? %>
-    <% palier = diag_risques_entreprise.palier %>
+  <% if palier_risque.present? %>
+    <% palier = palier_risque %>
     <h2 class="evaluation__titre"><%= t(".titre") %></h2>
     <div class="evaluation-bilan-evapro__contenu">
       <%= render(BilanEvaProComponent.new(palier: palier)) %>

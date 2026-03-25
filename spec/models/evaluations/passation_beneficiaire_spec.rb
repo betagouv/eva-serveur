@@ -8,5 +8,12 @@ RSpec.describe Evaluations::PassationBeneficiaire do
       expect(described_class.new(double).evapro?).to be(false)
     end
   end
-end
 
+  describe "#a_mise_en_action?" do
+    it "délègue à l'évaluation" do
+      evaluation = instance_double(Evaluation, a_mise_en_action?: true)
+
+      expect(described_class.new(evaluation).a_mise_en_action?).to be(true)
+    end
+  end
+end

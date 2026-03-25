@@ -46,8 +46,11 @@ actualites:, compte:, ability:)
       end
       return if pourcentage_risque.blank?
 
-      palier = palier_pourcentage_risque(pourcentage_risque)
-      palier_to_lettre(palier).upcase
+      palier = Evaluations::DiagnosticPro::RisquesPresenter.new(
+        pourcentage_risque: pourcentage_risque.to_i
+      ).palier
+
+      Evaluations::DiagnosticPro::RisquesPresenter::PALIER_TO_LETTRE.fetch(palier, "d").upcase
     end
 
     def lettre_couts_pour(evaluation, synthese_evapro = nil)
@@ -61,8 +64,12 @@ actualites:, compte:, ability:)
       end
       return if score_cout.blank?
 
-      palier = palier_score_cout(score_cout)
-      palier_to_lettre(palier).upcase
+      palier = Evaluations::DiagnosticPro::CoutsPresenter.new(
+        synthese: { score_cout: score_cout },
+        i18n: I18n
+      ).palier_score_cout(score_cout)
+
+      Evaluations::DiagnosticPro::RisquesPresenter::PALIER_TO_LETTRE.fetch(palier, "d").upcase
     end
 
     def afficher_lettre_cout(evaluation, synthese_evapro = nil)

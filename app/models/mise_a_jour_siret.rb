@@ -64,20 +64,18 @@ class MiseAJourSiret
     @structure.code_naf = resultat["activite_principale"]
     @structure.idcc = resultat.dig("complements", "liste_idcc") || []
     @structure.raison_sociale = resultat["nom_raison_sociale"] || resultat["nom_complet"]
-    @structure.adresse = recupere_adresse(resultat)
+    etablissement = cherche_etablissement(resultat)
+    @structure.adresse = etablissement&.dig("adresse")
+    @structure.code_postal = etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
   end
 
-  def recupere_adresse(resultat)
+  def cherche_etablissement(resultat)
     siret_recherche = @structure.siret
 
-    # Vérifier si c'est le siège
-    return resultat.dig("siege", "adresse") if resultat.dig("siege", "siret") == siret_recherche
+    return resultat.dig("siege") if resultat.dig("siege", "siret") == siret_recherche
 
-    # Chercher dans les établissements correspondants
-    etablissement = resultat.dig("matching_etablissements")&.find do |etab|
+    resultat.dig("matching_etablissements")&.find do |etab|
       etab["siret"] == siret_recherche
     end
-
-    etablissement&.dig("adresse")
   end
 end

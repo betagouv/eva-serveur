@@ -2,8 +2,9 @@ require "rails_helper"
 
 describe Inscription::StructuresController, type: :controller do
   let(:compte) {
- create(:compte_pro_connect, etape_inscription: "assignation_structure", structure: nil,
-siret_pro_connect: "13002526500013") }
+    create(:compte_pro_connect, etape_inscription: "assignation_structure", structure: nil,
+      siret_pro_connect: "13002526500013")
+  }
   let(:opco) { create(:opco, nom: "OPCO Test", idcc: [ "3" ]) }
 
   before do
@@ -16,7 +17,7 @@ siret_pro_connect: "13002526500013") }
         before do
           # Mock RechercheStructureParSiret pour retourner une structure non persistée
           structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ],
-nom: "Nom de la structure", raison_sociale: "Entreprise Test")
+            nom: "Nom de la structure", raison_sociale: "Entreprise Test")
           allow(RechercheStructureParSiret).to receive(:new).and_return(
             instance_double(RechercheStructureParSiret, call: structure)
           )
@@ -49,7 +50,8 @@ nom: "Nom de la structure", raison_sociale: "Entreprise Test")
 
       context "avec une structure existante (persistée)" do
         let!(:structure_existante) {
- create(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
+          create(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
+        }
 
         before do
           # Mock RechercheStructureParSiret pour retourner une structure persistée

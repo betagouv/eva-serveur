@@ -192,10 +192,6 @@ question_redaction_id)
     @context ||= Context.new(self)
   end
 
-  def evaluation_evapro?
-    context.pro?
-  end
-
   def evapro?
     context.pro?
   end

@@ -154,12 +154,12 @@ donnees: { "reponseIntitule" => nil }
     end
   end
 
-  describe "#evaluation_evapro?" do
+  describe "#evapro?" do
     context "quand l'évaluation est rattachée à un parcours diagnostic entreprise" do
       let(:evaluation) { create(:evaluation, :evapro) }
 
       it "retourne true" do
-        expect(evaluation.evaluation_evapro?).to be(true)
+        expect(evaluation.evapro?).to be(true)
       end
     end
 
@@ -167,7 +167,7 @@ donnees: { "reponseIntitule" => nil }
       let(:evaluation) { create(:evaluation, :diagnostic) }
 
       it "retourne false" do
-        expect(evaluation.evaluation_evapro?).to be(false)
+        expect(evaluation.evapro?).to be(false)
       end
     end
 
@@ -175,7 +175,7 @@ donnees: { "reponseIntitule" => nil }
       let(:evaluation) { create(:evaluation, :positionnement) }
 
       it "retourne false" do
-        expect(evaluation.evaluation_evapro?).to be(false)
+        expect(evaluation.evapro?).to be(false)
       end
     end
   end

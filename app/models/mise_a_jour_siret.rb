@@ -64,9 +64,15 @@ class MiseAJourSiret
     @structure.code_naf = resultat["activite_principale"]
     @structure.idcc = resultat.dig("complements", "liste_idcc") || []
     @structure.raison_sociale = resultat["nom_raison_sociale"] || resultat["nom_complet"]
+    met_a_jour_localisation(resultat)
+  end
+
+  def met_a_jour_localisation(resultat)
     etablissement = cherche_etablissement(resultat)
     @structure.adresse = etablissement&.dig("adresse")
-    @structure.code_postal = etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
+    unless @structure.code_postal_changed?
+      @structure.code_postal = etablissement&.dig("code_postal") || StructureLocale::TYPE_NON_COMMUNIQUE
+    end
   end
 
   def cherche_etablissement(resultat)

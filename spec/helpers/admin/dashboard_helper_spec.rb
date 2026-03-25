@@ -141,8 +141,10 @@ RSpec.describe Admin::DashboardHelper do
       let(:synthese) { { pourcentage_risque: 50 } }
 
       before do
-        allow(helper).to receive(:palier_pourcentage_risque).with(50).and_return("C - Moyen")
-        allow(helper).to receive(:palier_to_lettre).with("C - Moyen").and_return("c")
+        allow(Evaluations::DiagnosticPro::RisquesPresenter)
+          .to receive(:new).with(pourcentage_risque: 50)
+          .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
+palier: "C - Moyen"))
       end
 
       it "retourne la lettre du palier en majuscule" do
@@ -163,8 +165,10 @@ RSpec.describe Admin::DashboardHelper do
       let(:synthese_evapro) { { pourcentage_risque: 25 } }
 
       before do
-        allow(helper).to receive(:palier_pourcentage_risque).with(25).and_return("B - Bon")
-        allow(helper).to receive(:palier_to_lettre).with("B - Bon").and_return("b")
+        allow(Evaluations::DiagnosticPro::RisquesPresenter)
+          .to receive(:new).with(pourcentage_risque: 25)
+          .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
+palier: "B - Bon"))
       end
 
       it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do
@@ -199,8 +203,11 @@ RSpec.describe Admin::DashboardHelper do
       let(:synthese) { { score_cout: "fort" } }
 
       before do
-        allow(helper).to receive(:palier_score_cout).with("fort").and_return("D - Mauvais")
-        allow(helper).to receive(:palier_to_lettre).with("D - Mauvais").and_return("d")
+        allow(Evaluations::DiagnosticPro::CoutsPresenter)
+          .to receive(:new).and_return(
+            instance_double(Evaluations::DiagnosticPro::CoutsPresenter,
+palier_score_cout: "D - Mauvais")
+          )
       end
 
       it "retourne la lettre du palier en majuscule" do
@@ -221,8 +228,11 @@ RSpec.describe Admin::DashboardHelper do
       let(:synthese_evapro) { { score_cout: "faible" } }
 
       before do
-        allow(helper).to receive(:palier_score_cout).with("faible").and_return("A - Très bon")
-        allow(helper).to receive(:palier_to_lettre).with("A - Très bon").and_return("a")
+        allow(Evaluations::DiagnosticPro::CoutsPresenter)
+          .to receive(:new).and_return(
+            instance_double(Evaluations::DiagnosticPro::CoutsPresenter,
+palier_score_cout: "A - Très bon")
+          )
       end
 
       it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do

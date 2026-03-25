@@ -77,7 +77,9 @@ ActiveAdmin.register Evaluation do
   form partial: "form"
 
   sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evapro? } do
-    render "opco_financeur", opco: resource.opco_financeur, evaluation: resource
+    render "opco_financeur",
+           opco: resource.diagnostic_pro&.opco_financeur,
+           evaluation: resource
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {

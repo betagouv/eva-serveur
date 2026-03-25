@@ -7,11 +7,13 @@
   <% synthese_impact = evaluation_impact_general&.synthese %>
   <% synthese_impact_partie = evaluation_impact_general&.partie&.synthese %>
   <% score_cout = synthese_impact&.dig(:score_cout) || synthese_impact_partie&.dig("score_cout") || synthese_impact_partie&.dig(:score_cout) %>
-  <% palier_risque = pourcentage_risque.present? ? palier_pourcentage_risque(pourcentage_risque) : nil %>
-  <% palier_cout = score_cout.present? ? palier_score_cout(score_cout.to_s.to_sym) : nil %>
+  <% risques_presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage_risque) %>
+  <% palier_risque = pourcentage_risque.present? ? risques_presenter.palier : nil %>
+  <% couts_presenter = Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: { score_cout: score_cout }, i18n: self) %>
+  <% palier_cout = score_cout.present? ? couts_presenter.palier_score_cout(score_cout.to_s) : nil %>
   <% palier_situation = diag_risques_entreprise&.palier %>
   <% synthese_pour_cout = (synthese_impact || synthese_impact_partie&.symbolize_keys || {}).merge(score_cout: score_cout) %>
-  <% contenu_cout = score_cout.present? ? contenu_cout(synthese_pour_cout) : nil %>
+  <% contenu_cout = score_cout.present? ? Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: synthese_pour_cout, i18n: self).contenu_cout : nil %>
   <% afficher_bloc = palier_risque.present? && palier_situation.present? %>
 
   <% if afficher_bloc %>

@@ -62,7 +62,7 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
       display: flex;
       gap: .5rem;
       flex-wrap: wrap;
-
+      
       & > *:empty {
         display: none;
       }

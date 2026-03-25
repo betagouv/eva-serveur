@@ -21,6 +21,17 @@
     .buttons {
       margin-top: 1rem;
       display: flex;
+      gap: 0.4rem;
+
+      input[type="submit"] {
+        @include petit-bouton;
+        @include bouton-primaire;
+      }
+      
+      a {
+        @include petit-bouton;
+        @include bouton-secondaire;
+      }
     }
 
     .filter_form_field {

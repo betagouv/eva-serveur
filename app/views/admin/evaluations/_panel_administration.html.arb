@@ -81,6 +81,13 @@ div class: (eva_pro ? "evaluation__administration" : "panel evaluation__administ
                      )
       end
     end
-    div submit_tag "Valider la sélection"
+    render BoutonDsfrComponent.new(
+      "Valider la sélection",
+      type: :primary,
+      size: :sm,
+      tag: :submit
+    ) do
+      "Valider la sélection"
+    end
   end
 end

@@ -22,13 +22,6 @@
   margin: 0; // form button applique un margin de 3px à droite
   border: 1px solid;
 
-  &:disabled, &:disabled:hover {
-    cursor: not-allowed;
-    color: $grey-625;
-    background-color: $grey-925;
-    border-color: $grey-925;
-  }
-
   &:focus {
     @include focus;
   }
@@ -51,6 +44,7 @@
 
 @mixin petit-bouton() {
   font-size: 0.875rem;
+  font-weight: 500;
   line-height: 1.5rem;
   padding: 0.25rem 0.75rem;
   border-radius: 0;
@@ -83,6 +77,7 @@
   &.bouton--desactive {
     cursor: not-allowed;
     color: $grey-625;
+    text-shadow:none;
     background-color: $grey-925;
     border-color: $grey-925;
   }

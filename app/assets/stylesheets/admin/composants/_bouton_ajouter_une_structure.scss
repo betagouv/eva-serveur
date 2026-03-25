@@ -2,9 +2,4 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 2rem;
-
-  a {
-    @include bouton-primaire;
-    @include grand-bouton;
-  }
 }

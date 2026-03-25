@@ -224,6 +224,14 @@ question_redaction_id)
     context.pro?
   end
 
+  def usage
+    if evapro?
+      Evaluations::DiagnosticPro.new(self)
+    else
+      Evaluations::PassationBeneficiaire.new(self)
+    end
+  end
+
   private
 
   def trouve_campagne_depuis_code

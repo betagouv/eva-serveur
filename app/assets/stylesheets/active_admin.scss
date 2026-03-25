@@ -224,12 +224,12 @@ li a.has_many_remove, li a.has_many_remove:link, li a.has_many_remove:visited, l
   @include bouton-primaire;
 }
 
-a.button:not(.disabled):hover, a.button:link:not(.disabled):hover, a.button:visited:not(.disabled):hover, input[type=submit]:not(.disabled):hover, input[type=button]:not(.disabled):hover, button:not(.disabled):hover {
+a.button:not(.disabled):hover, a.button:link:not(.disabled):hover, a.button:visited:not(.disabled):hover, input[type="submit"]:not(.disabled):hover, input[type="button"]:not(.disabled):hover, button:not(.disabled):hover {
   background-image: none;
   box-shadow: none;
 }
 
-a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:visited:not(.disabled):active, input[type=submit]:not(.disabled):active, input[type=button]:not(.disabled):active, button:not(.disabled):active {
+a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:visited:not(.disabled):active, input[type="submit"]:not(.disabled):active, input[type="button"]:not(.disabled):active, button:not(.disabled):active {
   background-image: none !important;
   box-shadow: none !important;
 }

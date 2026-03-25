@@ -241,38 +241,30 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   color: var(--text-inverted-blue-france);
 }
 
-// .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--menu, .fr-btn--close) {
-//   color: var(--text-inverted-blue-france);
-// }
-
 .fr-btn--secondary,
 .fr-btn--tertiary {
   color: var(--text-action-high-blue-france);
 }
 
-// Baseline globale pour tous les boutons HTML (hors règles modales spécifiques)
 button,
-input[type="submit"],
-input[type="button"] {
-  appearance: none;
-  background-image: none;
-  text-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  line-height: 1.5rem;
-}
-
-// Baseline DSFR explicite pour éviter les surcharges ActiveAdmin
 button.fr-btn,
+input[type="submit"],
 input[type="submit"].fr-btn,
+input[type="button"],
 input[type="button"].fr-btn {
   appearance: none;
   background-image: none;
   text-shadow: none;
   box-shadow: none;
   font-weight: 500;
+  font-family: $font-texte;
   border-radius: 0;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
+}
+
+button *,
+button.fr-btn * {
+  font-family: inherit;
 }
 
 // Etats explicites par variante pour button/submit DSFR

@@ -201,3 +201,35 @@ img {
     margin: 0;
   }
 }
+
+// Surcharges des boutons Active Admin pour DSFR
+form input[type="submit"] {
+  @include petit-bouton;
+  @include bouton-primaire;
+
+  &:not(.disabled, .bouton--actif):hover {
+    background-image: none;
+    box-shadow: none;
+  }
+}
+
+form fieldset.actions li.cancel a {
+  @include petit-bouton;
+  @include bouton-secondaire;
+}
+
+li a.has_many_add, li a.has_many_add:link, li a.has_many_add:visited, li a.has_many_add:active,
+li a.has_many_remove, li a.has_many_remove:link, li a.has_many_remove:visited, li a.has_many_remove:active {
+  @include petit-bouton;
+  @include bouton-primaire;
+}
+
+a.button:not(.disabled):hover, a.button:link:not(.disabled):hover, a.button:visited:not(.disabled):hover, input[type=submit]:not(.disabled):hover, input[type=button]:not(.disabled):hover, button:not(.disabled):hover {
+  background-image: none;
+  box-shadow: none;
+}
+
+a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:visited:not(.disabled):active, input[type=submit]:not(.disabled):active, input[type=button]:not(.disabled):active, button:not(.disabled):active {
+  background-image: none !important;
+  box-shadow: none !important;
+}

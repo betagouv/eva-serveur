@@ -60,16 +60,16 @@
       t("admin.structures.membres.modal.envoyer"),
       type: :primary,
       tag: :submit,
-      form: form_id
+      form: form_id,
+      class: "fr-icon-send-plane-fill"
     ) do %>
-      <span class="fr-icon-send-plane-fill" aria-hidden="true"></span>
       <%= t("admin.structures.membres.modal.envoyer") %>
     <% end %>
   <% end %>
 
   <% component.with_button do %>
     <%= button_tag type: "button",
-                   class: "fr-btn fr-btn--tertiary copier-lien-invitation",
+                   class: "fr-btn fr-btn--primary copier-lien-invitation",
                    data: {
                      copier_lien_url: copier_lien_admin_structure_locale_path(structure)
                    } do %>

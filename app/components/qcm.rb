@@ -1,6 +1,4 @@
 class Qcm < ViewComponent::Base
-  include EvaluationHelper
-
   def initialize(ressource, questionnaire, qcm_affiche: true, priorite: nil)
     @ressource = ressource
     @questionnaire = questionnaire

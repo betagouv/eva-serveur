@@ -1,7 +1,5 @@
 module Admin
   module DashboardHelper
-    include EvaluationHelper
-
     def eva_pro_locals(campagnes:, evaluations:, cinq_dernieres_evaluations_completes:,
 actualites:, compte:, ability:)
       structure = compte.structure
@@ -36,14 +34,12 @@ actualites:, compte:, ability:)
     end
 
     def lettre_risque_pour(evaluation, synthese_evapro = nil)
-      pourcentage_risque = if synthese_evapro.present?
-                            synthese_evapro[:pourcentage_risque]
-      else
-                            restitution_globale_pour(evaluation)
-                              .diag_risques_entreprise
-                              &.synthese
-                              &.dig(:pourcentage_risque)
-      end
+      pourcentage_risque =
+        if synthese_evapro.present?
+          synthese_evapro[:pourcentage_risque]
+        else
+          pourcentage_risque_via_diagnostic_pro(evaluation)
+        end
       return if pourcentage_risque.blank?
 
       palier = Evaluations::DiagnosticPro::RisquesPresenter.new(
@@ -54,14 +50,12 @@ actualites:, compte:, ability:)
     end
 
     def lettre_couts_pour(evaluation, synthese_evapro = nil)
-      score_cout = if synthese_evapro.present?
-                     synthese_evapro[:score_cout]
-      else
-                     restitution_globale_pour(evaluation)
-                       .evaluation_impact_general
-                       &.synthese
-                       &.dig(:score_cout)
-      end
+      score_cout =
+        if synthese_evapro.present?
+          synthese_evapro[:score_cout]
+        else
+          score_cout_via_diagnostic_pro(evaluation)
+        end
       return if score_cout.blank?
 
       palier = Evaluations::DiagnosticPro::CoutsPresenter.new(
@@ -137,6 +131,18 @@ evaluation, synthese_evapro)
       @restitution_globale_pour ||= {}
       @restitution_globale_pour[evaluation.id] ||=
         FabriqueRestitution.restitution_globale(evaluation)
+    end
+
+    def pourcentage_risque_via_diagnostic_pro(evaluation)
+      rg = restitution_globale_pour(evaluation)
+      rest_pro = evaluation.diagnostic_pro&.avec_restitution_globale(rg)
+      rest_pro&.pourcentage_risque
+    end
+
+    def score_cout_via_diagnostic_pro(evaluation)
+      rg = restitution_globale_pour(evaluation)
+      rest_pro = evaluation.diagnostic_pro&.avec_restitution_globale(rg)
+      rest_pro&.synthese_impact_general&.dig(:score_cout)
     end
   end
 end

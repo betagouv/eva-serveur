@@ -10,10 +10,16 @@ RSpec.describe Evaluations::PassationBeneficiaire do
   end
 
   describe "#a_mise_en_action?" do
-    it "délègue à l'évaluation" do
-      evaluation = instance_double(Evaluation, a_mise_en_action?: true)
+    it "retourne true lorsqu'une mise en action est associée à l'évaluation" do
+      evaluation = create(:evaluation, :avec_mise_en_action)
 
       expect(described_class.new(evaluation).a_mise_en_action?).to be(true)
+    end
+
+    it "retourne false lorsqu'aucune mise en action n'est associée" do
+      evaluation = create(:evaluation)
+
+      expect(described_class.new(evaluation).a_mise_en_action?).to be(false)
     end
   end
 end

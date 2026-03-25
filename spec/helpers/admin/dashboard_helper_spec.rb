@@ -130,21 +130,27 @@ RSpec.describe Admin::DashboardHelper do
 
   describe "#lettre_risque_pour" do
     let(:evaluation) { instance_double(Evaluation, id: 1) }
-    let(:diag_risques) { instance_double(Restitution::DiagRisquesEntreprise, synthese: synthese) }
-    let(:restitution) { instance_double(Restitution::Globale, diag_risques_entreprise: diag_risques) }
+    let(:restitution) { instance_double(Restitution::Globale) }
+    let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
     before do
       allow(helper).to receive(:restitution_globale_pour).with(evaluation).and_return(restitution)
     end
 
     context "quand le pourcentage de risque est disponible" do
-      let(:synthese) { { pourcentage_risque: 50 } }
+      let(:restitution_pro) do
+        instance_double(Evaluations::DiagnosticPro::Restitution, pourcentage_risque: 50)
+      end
 
       before do
+        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
+        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+          restitution_pro
+        )
         allow(Evaluations::DiagnosticPro::RisquesPresenter)
           .to receive(:new).with(pourcentage_risque: 50)
           .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
-palier: "C - Moyen"))
+                                      palier: "C - Moyen"))
       end
 
       it "retourne la lettre du palier en majuscule" do
@@ -153,7 +159,16 @@ palier: "C - Moyen"))
     end
 
     context "quand le pourcentage de risque est absent" do
-      let(:synthese) { { pourcentage_risque: nil } }
+      let(:restitution_pro) do
+        instance_double(Evaluations::DiagnosticPro::Restitution, pourcentage_risque: nil)
+      end
+
+      before do
+        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
+        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+          restitution_pro
+        )
+      end
 
       it "retourne nil" do
         expect(helper.send(:lettre_risque_pour, evaluation)).to be_nil
@@ -161,7 +176,6 @@ palier: "C - Moyen"))
     end
 
     context "quand synthese_evapro est fourni (index sans fabrique)" do
-      let(:synthese) { {} }
       let(:synthese_evapro) { { pourcentage_risque: 25 } }
 
       before do
@@ -179,7 +193,6 @@ palier: "B - Bon"))
     end
 
     context "quand synthese_evapro est fourni avec pourcentage_risque nil" do
-      let(:synthese) { {} }
       let(:synthese_evapro) { { pourcentage_risque: nil, score_cout: "fort" } }
 
       it "retourne nil sans appeler la fabrique" do
@@ -192,21 +205,28 @@ palier: "B - Bon"))
 
   describe "#lettre_couts_pour" do
     let(:evaluation) { instance_double(Evaluation, id: 1) }
-    let(:impact_general) { instance_double(Restitution::EvaluationImpactGeneral, synthese: synthese) }
-    let(:restitution) { instance_double(Restitution::Globale, evaluation_impact_general: impact_general) }
+    let(:restitution) { instance_double(Restitution::Globale) }
+    let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
     before do
       allow(helper).to receive(:restitution_globale_pour).with(evaluation).and_return(restitution)
     end
 
     context "quand le score cout est disponible" do
-      let(:synthese) { { score_cout: "fort" } }
+      let(:restitution_pro) do
+        instance_double(Evaluations::DiagnosticPro::Restitution,
+                        synthese_impact_general: { score_cout: "fort" })
+      end
 
       before do
+        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
+        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+          restitution_pro
+        )
         allow(Evaluations::DiagnosticPro::CoutsPresenter)
           .to receive(:new).and_return(
             instance_double(Evaluations::DiagnosticPro::CoutsPresenter,
-palier_score_cout: "D - Mauvais")
+                            palier_score_cout: "D - Mauvais")
           )
       end
 
@@ -216,7 +236,17 @@ palier_score_cout: "D - Mauvais")
     end
 
     context "quand le score cout est absent" do
-      let(:synthese) { { score_cout: nil } }
+      let(:restitution_pro) do
+        instance_double(Evaluations::DiagnosticPro::Restitution,
+                        synthese_impact_general: { score_cout: nil })
+      end
+
+      before do
+        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
+        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+          restitution_pro
+        )
+      end
 
       it "retourne nil" do
         expect(helper.send(:lettre_couts_pour, evaluation)).to be_nil
@@ -224,7 +254,6 @@ palier_score_cout: "D - Mauvais")
     end
 
     context "quand synthese_evapro est fourni (index sans fabrique)" do
-      let(:synthese) { {} }
       let(:synthese_evapro) { { score_cout: "faible" } }
 
       before do
@@ -243,7 +272,6 @@ palier_score_cout: "A - Très bon")
     end
 
     context "quand synthese_evapro est fourni avec score_cout nil" do
-      let(:synthese) { {} }
       let(:synthese_evapro) { { pourcentage_risque: 10, score_cout: nil } }
 
       it "retourne nil sans appeler la fabrique" do

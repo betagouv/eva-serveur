@@ -2,7 +2,12 @@ require "rails_helper"
 
 RSpec.describe MiseAJourSiret, type: :model do
   describe "#verifie_et_met_a_jour" do
-    let(:structure) { build(:structure, siret: "12345678901234") }
+    let(:structure) do
+      ## on simule la création d'une structure en base, sans la créer vraiment
+      structure = build(:structure, siret: "12345678901234")
+      structure.clear_changes_information
+      structure
+    end
     let(:client_sirene) { instance_double(Sirene::Client) }
     let(:mise_a_jour) { described_class.new(structure) }
 
@@ -69,6 +74,12 @@ RSpec.describe MiseAJourSiret, type: :model do
       it "met à jour le code postal" do
         mise_a_jour.verifie_et_met_a_jour
         expect(structure.code_postal).to eq("75001")
+      end
+
+      it "ne met pas à jour le code postal si il a déjà été modifié" do
+        structure.code_postal = "69001"
+        mise_a_jour.verifie_et_met_a_jour
+        expect(structure.code_postal).to eq("69001")
       end
 
       it "retourne true" do

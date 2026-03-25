@@ -33,9 +33,9 @@ class ApplicationController < ActionController::Base
 
   def annulation_formulaire(form)
     if resource.new_record?
-      form.cancel_link({ action: "index" }, {}, { class: "cancel fr-btn fr-btn--secondary" })
+      form.cancel_link({ action: "index" }, {}, { class: "cancel bouton-annuler" })
     else
-      form.cancel_link({ action: "show" }, {}, { class: "cancel fr-btn fr-btn--secondary" })
+      form.cancel_link({ action: "show" }, {}, { class: "cancel bouton-annuler" })
     end
   end
 end

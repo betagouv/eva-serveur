@@ -169,7 +169,7 @@ describe 'Evaluation', type: :request do
 
           expect(response).to have_http_status(:created)
           expect(response.parsed_body).to include("id" => evaluation.id)
-          expect(evaluation.evaluation_evapro?).to be(true)
+          expect(evaluation.evapro?).to be(true)
           expect(evaluation.beneficiaire.nom).to eq("Aline")
         end
       end

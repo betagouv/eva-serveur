@@ -48,18 +48,14 @@ RSpec.describe Evaluation::Context do
   end
 
   describe "cohérence avec Evaluation" do
-    it "aligne evaluation_evapro?, evapro? et context.pro?" do
+    it "aligne evapro? et context.pro?" do
       evapro_eval = create(:evaluation, :evapro)
       beneficiaire_eval = create(:evaluation, :diagnostic)
 
-      expect(evapro_eval.evaluation_evapro?).to eq(evapro_eval.context.pro?)
       expect(evapro_eval.evapro?).to eq(evapro_eval.context.pro?)
-      expect(evapro_eval.evaluation_evapro?).to be(true)
       expect(evapro_eval.evapro?).to be(true)
 
-      expect(beneficiaire_eval.evaluation_evapro?).to eq(beneficiaire_eval.context.pro?)
       expect(beneficiaire_eval.evapro?).to eq(beneficiaire_eval.context.pro?)
-      expect(beneficiaire_eval.evaluation_evapro?).to be(false)
       expect(beneficiaire_eval.evapro?).to be(false)
     end
   end

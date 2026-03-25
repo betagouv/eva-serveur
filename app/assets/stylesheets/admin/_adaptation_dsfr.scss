@@ -211,11 +211,21 @@ body.logged_out #wrapper .fr-modal__content ul li,
   border-radius: 0;
 }
 
-// Lien/bouton fermer de la modale : garder l’arrondi à 0 (éviter le style DSFR par défaut)
-.fr-modal.evapro_admin .fr-modal__header .fr-link--close,
-.fr-modal.evapro_admin .fr-link--close.fr-link {
-  border-radius: 0 !important;
+button.fr-link--close {
+  border-radius: 0;
+  background: transparent;
+  text-shadow: none;
+  box-shadow: none;
+  font-weight: 400;
 }
+button.fr-link--close:not(.disabled):hover {
+  background: transparent;
+}
+// Lien/bouton fermer de la modale : garder l’arrondi à 0 (éviter le style DSFR par défaut)
+// .fr-modal.evapro_admin .fr-modal__header .fr-link--close,
+// .fr-modal.evapro_admin .fr-link--close.fr-link {
+//   border-radius: 0 !important;
+// }
 
 .fr-modal.evapro_admin .fr-btn--secondary,
 .fr-modal.evapro_admin .fr-btn--tertiary {

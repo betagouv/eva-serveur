@@ -1,8 +1,6 @@
-diag_risques_entreprise = restitution_globale.diag_risques_entreprise
-pourcentage_risque = nil
-if diag_risques_entreprise
-  pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
-end
+diagnostic_pro = evaluation.usage.with_restitution_globale(restitution_globale)
+diag_risques_entreprise = diagnostic_pro.diag_risques_entreprise
+pourcentage_risque = diagnostic_pro.pourcentage_risque
 evaluation_impact_general = nil
 
 div class: "evaluation-evapro" do
@@ -38,8 +36,8 @@ div class: "evaluation-evapro" do
       end
 
       if pourcentage_risque
-        evaluation_impact_general = restitution_globale.evaluation_impact_general
-        complet = evaluation_impact_general.present?
+        evaluation_impact_general = diagnostic_pro.evaluation_impact_general
+        complet = diagnostic_pro.complet?
         render(
           partial: "mesure_des_impacts",
           locals: {
@@ -53,7 +51,7 @@ div class: "evaluation-evapro" do
           render(
             partial: "impact_couts",
             locals: {
-              synthese: evaluation_impact_general.synthese,
+              synthese: diagnostic_pro.synthese_impact_general,
               pdf: pdf,
               complet: complet
             }
@@ -63,7 +61,7 @@ div class: "evaluation-evapro" do
     end
   end
 
-  if diag_risques_entreprise && evaluation_impact_general.present?
+  if diagnostic_pro.affiche_bilan?
     div class: "page page__evapro adaptation-pdf" do
       if pdf
         render(Pdf::HeaderEvaproComponent.new(

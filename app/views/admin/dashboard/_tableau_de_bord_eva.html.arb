@@ -20,6 +20,7 @@ elsif prise_en_main.en_cours? &&
             render(
               BoutonDsfrComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
                                   type: :primary,
+                                  size: :md,
                                   method: :patch)
                              .with_content(t("admin.dashboard.prise_en_main.terminer"))
             )
@@ -27,6 +28,7 @@ elsif prise_en_main.en_cours? &&
             render(
               BoutonDsfrComponent.new(quitter_mode_tutoriel_admin_compte_path(current_compte),
                                   type: :secondary,
+                                  size: :md,
                                   method: :patch)
                              .with_content(t("admin.dashboard.prise_en_main.quitter"))
             )

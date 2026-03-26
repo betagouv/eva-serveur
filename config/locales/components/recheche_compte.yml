@@ -4,7 +4,7 @@ fr:
       placeholder: Nom ou email
       responsable_suivi:
         libelle_champ_recherche: rechercher un responsable de suivi
-        action: Ajouter un responsable de suivi
+        action: Ajouter un responsable
       campagne_compte_autorisations:
         libelle_champ_recherche: rechercher un ou une collègue
         action: Autoriser une autre personne

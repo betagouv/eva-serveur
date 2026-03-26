@@ -1,0 +1,5 @@
+<%= render HeaderComponent.new(
+  logo: "logo/eva-bleu.svg",
+  logo_alt: "EVA",
+  current_compte: (respond_to?(:current_compte) ? current_compte : nil)
+) %>

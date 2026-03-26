@@ -49,4 +49,34 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).not_to have_link("Aide")
     end
   end
+
+  context "quand le compte est superadmin" do
+    let(:compte) { create(:compte_superadmin, :acceptee, :structure_avec_admin) }
+
+    it "affiche la navigation EVA complète avec les groupes déroulants" do
+      render_inline(component)
+
+      expect(page).to have_link("Tableau de bord", href: "/admin")
+      expect(page).to have_link("Actualités")
+      expect(page).to have_link("Campagnes")
+      expect(page).to have_link("Évaluations")
+      expect(page).to have_link("Bénéficiaires")
+      expect(page).to have_link("Comptes")
+      expect(page).to have_link("Aide")
+
+      expect(page).to have_button("Accompagnement")
+      expect(page).to have_link("Sources d'aide")
+      expect(page).to have_link("Annonces générales")
+
+      expect(page).to have_button("Parcours")
+      expect(page).to have_link("Parcours")
+      expect(page).to have_link("Questionnaires")
+      expect(page).to have_link("Situations")
+
+      expect(page).to have_button("Structures")
+      expect(page).to have_link("Structures locales")
+      expect(page).to have_link("Structures administratives")
+      expect(page).to have_link("Opcos")
+    end
+  end
 end

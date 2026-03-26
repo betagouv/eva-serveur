@@ -1,4 +1,22 @@
 .fr-header--logged-in {
+  // Isoler la navigation DSFR des styles legacy ActiveAdmin appliqués aux listes du #header.
+  .fr-nav__list,
+  .fr-menu__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: none;
+  }
+
+  .fr-nav__item,
+  .fr-menu__list > li {
+    float: none;
+    position: static;
+    top: auto;
+    left: auto;
+  }
+
+  .fr-nav__btn,
   .fr-nav__link {
     color: var(--text-action-high-grey);
     font-family: Marianne, sans-serif;
@@ -6,9 +24,42 @@
     @include corps-de-texte-sm-regular;
   }
 
+  .fr-nav__btn {
+    background: transparent;
+    background-image: none;
+    text-shadow: none;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    display: inline-flex;
+    font-weight: 500;
+    line-height: 1.5rem;
+    margin-right: 0;
+    padding: .75rem 1rem;
+  }
+
+  .fr-nav__btn:hover,
+  .fr-nav__btn:active,
   .fr-nav__link:hover,
   .fr-nav__link:active {
     background: var(--background-raised-grey-hover);
     color: var(--text-active-blue-france) !important;
+  }
+
+  .fr-nav__btn:not(.disabled):hover,
+  .fr-nav__btn:not(.disabled):active {
+    background-image: none;
+    box-shadow: none;
+  }
+
+  .fr-menu__list .fr-nav__link {
+    pointer-events: auto;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
   }
 }

@@ -84,4 +84,30 @@ RSpec.describe Opco, type: :model do
       end
     end
   end
+
+  describe "normalisation de idcc" do
+    it "retire les valeurs vides et déduplique les IDCC saisis via plusieurs champs" do
+      opco = build(:opco, idcc: [ "0843", "0843", " ", "", "1486" ])
+
+      opco.validate
+
+      expect(opco.idcc).to eq([ "0843", "1486" ])
+    end
+
+    it "normalise la saisie texte séparée par des virgules depuis le formulaire" do
+      opco = build(:opco, idcc_texte: "0843, 1486, 0843, ")
+
+      opco.validate
+
+      expect(opco.idcc).to eq([ "0843", "1486" ])
+    end
+
+    it "garde un tableau vide quand le champ texte est vide" do
+      opco = build(:opco, idcc_texte: "")
+
+      opco.validate
+
+      expect(opco.idcc).to eq([])
+    end
+  end
 end

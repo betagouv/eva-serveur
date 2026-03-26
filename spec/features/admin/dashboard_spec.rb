@@ -92,7 +92,7 @@ describe 'Dashboard', type: :feature do
 
       it "redirige vers la page de renvoi des instructions avec l'email pré-rempli" do
         visit admin_path
-        click_on 'Renvoyer les instructions de confirmation'
+        click_on 'Renvoyer les instructions'
 
         expect(page).to have_current_path(
           new_compte_confirmation_path(email: compte.email_a_confirmer)

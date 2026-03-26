@@ -6,121 +6,143 @@
   <h1 class="fr-h1 fr-mt-6w">Démo BoutonDsfrComponent</h1>
   <h2 class="fr-h2 fr-mt-6w">Tag a (défaut)</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>
+      Libellé
+    <% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Tag button_with_form</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :md, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :md, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :md, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :md, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :md, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :md, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :md, method: :get) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :md, method: :get, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :md, method: :get, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :md, method: :get, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Tag button_tag</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(3, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
-    <span></span><span>Default</span><span>Icône gauche</span><span>Icône droite</span>
+  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+    <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
     <span>MD</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :md) do %>Libellé<% end %>
-    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :md, class: "bouton-icone-plus fr-icon-add-line fr-btn--icon-left") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :md, class: "bouton--actif") do %>Libellé<% end %>
+    <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :md, class: "fr-icon-checkbox-line fr-btn--icon-left") do %>Libellé<% end %>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :md, class: "fr-icon-arrow-right-line fr-btn--icon-right") do %>Libellé<% end %>
   </div>
 

@@ -26,7 +26,7 @@ fr:
   formtastic:
     actions:
       opco:
-        create: Créer un OPCO
+        create: Créer un opérateur de compétences
         update: Modifier
     placeholders:
       opco:
@@ -42,7 +42,7 @@ fr:
   active_admin:
     resources:
       opco:
-        new_model: Créer un OPCO
+        new_model: Créer un opérateur de compétences
         edit_model: Modifier
         delete_model: Supprimer
 

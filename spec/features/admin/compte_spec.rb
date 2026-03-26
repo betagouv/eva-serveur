@@ -296,7 +296,7 @@ describe 'Admin - Compte', type: :feature do
         it { expect(page).to have_content(/Confirmez votre adresse email/) }
 
         it 'redirige vers la page de renvoi des instructions avec mon adresse email pré-rempli' do
-          click_on 'Renvoyer les instructions de confirmation'
+          click_on 'Renvoyer les instructions'
 
           expect(page).to have_current_path(
             new_compte_confirmation_path(email: compte_connecte.email_a_confirmer)

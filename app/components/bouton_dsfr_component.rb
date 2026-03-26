@@ -3,6 +3,7 @@ class BoutonDsfrComponent < ViewComponent::Base
 
   PRIMARY_CLASSES = %w[
     fr-btn
+    fr-btn--primary
   ].freeze
   SECONDARY_CLASSES = %w[
     fr-btn
@@ -25,9 +26,8 @@ class BoutonDsfrComponent < ViewComponent::Base
   }.freeze
 
   BUTTON_SIZE_MAPPINGS = {
-    xs: "fr-btn--sm",
     sm: "fr-btn--sm",
-    md: nil
+    md: "fr-btn--md"
   }.freeze
 
   BUTTON_TAG_MAPPINGS = %i[a submit button button_with_form].freeze

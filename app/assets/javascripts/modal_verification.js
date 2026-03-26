@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = () => {
       const isChecked = [...radios].some(radio => radio.checked);
       btnValider.disabled = !isChecked;
+      btnValider.classList.toggle("disabled", !isChecked);
     };
 
     radios.forEach(radio => {

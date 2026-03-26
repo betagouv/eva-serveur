@@ -47,6 +47,7 @@
   padding: 0.5rem 1rem;
   border-radius: 0;
   gap: $dsfr-spacing-2v;
+  max-height: 2.5rem !important;
 }
 
 @mixin petit-bouton() {
@@ -55,6 +56,7 @@
   line-height: 1.5rem;
   padding: 0.25rem 0.75rem;
   border-radius: 0;
+  max-height: 2rem !important;
 }
 
 @mixin bouton-primaire() {

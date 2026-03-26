@@ -28,12 +28,7 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
   .champ-recherche {
     width: 100%;
   }
-  .bouton-icone-plus {
-    &::before {
-      content: asset-data-url('plus.svg');
-      margin-right: $dsfr-spacing-1v;
-    }
-  }
+  
   input {
     height: 1.625rem;
   }

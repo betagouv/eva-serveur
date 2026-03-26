@@ -90,6 +90,7 @@ body.logged_in.evapro_admin {
   border-right-color: unset;
   border-bottom-color: unset;
   border: unset;
+  background-color: transparent;
 
   &,
   &:not(.disabled):hover {
@@ -258,6 +259,14 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   color: var(--text-action-high-blue-france);
 }
 
+.fr-btn--sm, .bouton-annuler {
+  max-height: 2rem !important;
+}
+
+.fr-btn--md {
+  max-height: 2.5rem !important;
+}
+
 button,
 button.fr-btn,
 input[type="submit"],
@@ -271,12 +280,18 @@ input[type="button"].fr-btn {
   font-weight: 500;
   font-family: $font-texte;
   border-radius: 0;
-  line-height: 1.75rem;
+  min-width: fit-content;
 }
 
 button *,
 button.fr-btn * {
   font-family: inherit;
+}
+
+button.fr-btn.fr-btn--secondary,
+input[type="submit"].fr-btn.fr-btn--secondary,
+input[type="button"].fr-btn.fr-btn--secondary {
+  border: 1px solid $blue-france-sun-113;
 }
 
 button.fr-btn.fr-btn--tertiary,
@@ -481,9 +496,19 @@ a.fr-btn.fr-btn--tertiary:active {
   color: $blue-france-sun-113;
 }
 
-// Etat actif conservé pendant la migration des classes legacy JS.
-.fr-btn.bouton--actif {
-  border-color: $blue-france-sun-113-active;
-  background-color: $blue-france-sun-113-active;
-  color: $blue-france-975;
+.fr-btn--secondary.bouton--actif,
+.fr-btn--tertiary.bouton--actif {
+  background: rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+.fr-btn--primary.bouton--actif{
+  background: $blue-france-sun-113-active;
+
+  &:hover {
+    background: $blue-france-sun-113-active;
+  }
 }

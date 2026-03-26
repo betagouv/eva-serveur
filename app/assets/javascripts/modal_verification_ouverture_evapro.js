@@ -1,6 +1,8 @@
 /**
- * Ouverture de la modale de vérification de compte (Autoriser/Refuser) en EVAPRO uniquement.
- * En EVA, le comportement par défaut (DSFR ou autre) est conservé.
+ * Ouverture de la modale de vérification de compte (Autoriser/Refuser).
+ * Le lien « Vérifier » (aria-controls) et le rendu `<dialog class="fr-modal">` ne sont pas
+ * reliés automatiquement par le bundle DSFR chargé dans ActiveAdmin : même logique que
+ * invitation_modal.js (déplacement au body à l’ouverture, classe fr-modal--opened, etc.).
  */
 (function() {
   var OPENED_CLASS = "fr-modal--opened";
@@ -8,10 +10,6 @@
   var VERIFICATION_MODAL_ID_PREFIX = "fr-modal-";
   var INVITATION_MODAL_ID_PREFIX = "fr-modal-invitation-";
   var VERIFIER_LINK_REGEX = /\/comptes\/(\d+)\/verifier/;
-
-  function isEvaproAdmin() {
-    return document.body && document.body.classList.contains("evapro_admin");
-  }
 
   function isVerificationModalId(id) {
     return id && id.indexOf(VERIFICATION_MODAL_ID_PREFIX) === 0 &&
@@ -107,9 +105,7 @@
     });
   }
 
-  function initVerificationModalEvapro() {
-    if (!isEvaproAdmin()) return;
-
+  function initVerificationModal() {
     bindEscapeHandler();
 
     document.addEventListener("click", function(event) {
@@ -143,5 +139,5 @@
     }, true);
   }
 
-  document.addEventListener("DOMContentLoaded", initVerificationModalEvapro);
+  document.addEventListener("DOMContentLoaded", initVerificationModal);
 })();

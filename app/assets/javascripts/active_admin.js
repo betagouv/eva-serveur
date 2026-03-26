@@ -1,4 +1,5 @@
 //= require active_admin/base
+//= require accordion_positionnement
 //= require activeadmin_addons/all
 //= require actions_groupees
 //= require liens_evitement

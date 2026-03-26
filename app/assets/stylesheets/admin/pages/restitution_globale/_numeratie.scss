@@ -14,6 +14,13 @@
 
   .sous-competence__critere-accordion {
     margin-top: 0;
+    // Au-dessus d’éventuels calques (header / modales) qui captent les clics
+    position: relative;
+    z-index: 2;
+
+    .fr-accordion__btn {
+      pointer-events: auto;
+    }
   }
 
   .panel {

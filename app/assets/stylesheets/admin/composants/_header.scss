@@ -59,25 +59,21 @@ body.logged_in.dsfr-dropdown-open #title_bar {
 }
 // En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
 // Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.
+// Quand la modale n’est pas ouverte, il faut annuler position/inset/z-index de .fr-modal
+// (sinon fixed + inset:0 + z-index:9999 recouvre toute la page et bloque les clics
+// sur le contenu : accordéon du tableau DSFR, liens, etc.).
 @media (min-width: 62em) {
-  .fr-header .fr-header__menu.fr-modal {
+  .fr-header .fr-header__menu.fr-modal:not(.fr-modal--opened) {
     display: block;
+    // Le bundle DSFR applique .fr-modal { position: fixed; inset: 0; z-index: 9999 } :
+    // sans !important, une couche plein écran peut rester au-dessus du contenu (#wrapper).
+    position: static !important;
+    inset: auto !important;
+    z-index: auto !important;
+    pointer-events: none;
   }
-}
 
-// Réactiver les clics dans le menu burger (déconnexion, nav, etc.).
-// _adaptation_dsfr met « pointer-events: none » sur .fr-modal > .fr-container en mobile,
-// ce qui fait que les liens ne reçoivent pas le clic et la modale se ferme.
-@media (max-width: 768px) {
-  .fr-header .fr-header__menu.fr-modal > .fr-container {
+  .fr-header .fr-header__menu.fr-modal:not(.fr-modal--opened) > .fr-container {
     pointer-events: auto;
   }
 }
-
-// En desktop, le menu (nav + liens) s’affiche comme barre sous le header.
-// Sans ça, .fr-modal { display: none } dans _adaptation_dsfr.scss le garde masqué.
-// @media (min-width: 62em) {
-//   .fr-header .fr-header__menu.fr-modal {
-//     display: block;
-//   }
-// }

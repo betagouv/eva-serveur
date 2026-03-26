@@ -22,9 +22,9 @@ class Structure < ApplicationRecord
     scope: :code_postal
   }
   validates :siret, numericality: { only_integer: true, allow_blank: true }
-  validates :siret, presence: true, on: :create
-  validate :siret_uniqueness_unless_superadmin
-  validate :ne_peut_pas_supprimer_siret
+  validates :siret, presence: true, on: :create, unless: :superadmin_courant?
+  validate :siret_uniqueness, unless: :superadmin_courant?
+  validate :ne_peut_pas_supprimer_siret, unless: :superadmin_courant?
   validate :doit_avoir_un_opco, if: :validation_inscription
   validates :email_contact, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validate :verifie_dns_email_contact
@@ -92,10 +92,13 @@ allow_blank: true
   scope :avec_meme_siret_que, ->(siret) { where(siret: siret) }
   alias_attribute :display_name, :nom
 
-  def siret_uniqueness_unless_superadmin
+  def superadmin_courant?
+    current_ability&.compte&.superadmin?
+  end
+
+  def siret_uniqueness
     return if siret.blank?
     return if errors[:siret].any?
-    return if current_ability&.can?(:bypass_siret_uniqueness, self)
 
     errors.add(:siret, :taken) if Structure.where.not(id: id).exists?(siret: siret)
   end

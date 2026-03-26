@@ -71,6 +71,12 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_button("Parcours")
       expect(page).to have_link("Parcours", visible: :all)
       expect(page).to have_link("Questionnaires", visible: :all)
+      expect(page).to have_link("Questions QCM", visible: :all)
+      expect(page).to have_link("Questions clic dans image", visible: :all)
+      expect(page).to have_link("Questions clic dans texte", visible: :all)
+      expect(page).to have_link("Questions glisser déposer", visible: :all)
+      expect(page).to have_link("Questions saisie", visible: :all)
+      expect(page).to have_link("Questions sous consigne", visible: :all)
       expect(page).to have_link("Situations", visible: :all)
 
       expect(page).to have_button("Structures")

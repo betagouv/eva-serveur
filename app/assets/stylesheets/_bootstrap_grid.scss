@@ -1,3 +1,6 @@
+@import "bootstrap/mixins";
+@import "bootstrap/grid";
+
 // reset Bootstrap pour ActiveAdmin
 tr.row {
   display: revert;

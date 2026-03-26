@@ -1,6 +1,6 @@
 <div class="aide">
-  <div class="fr-grid-row">
-    <div class="contenu_aide fr-col-12 fr-col-md-8">
+  <div class="row">
+    <div class="contenu_aide col-8">
       <%= render partial: "contact" %>
       <% sources_par_categorie.each do |categorie, sources| %>
         <%= render partial: "categorie_aide", locals: {

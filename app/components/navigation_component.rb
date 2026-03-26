@@ -100,6 +100,12 @@ class NavigationComponent < ViewComponent::Base
     links = [
       parcours_types_link,
       questionnaires_link,
+      questions_qcm_link,
+      questions_clic_dans_image_link,
+      questions_clic_dans_texte_link,
+      questions_glisser_deposer_link,
+      questions_saisie_link,
+      questions_sous_consigne_link,
       situations_link
     ].compact
     return if links.empty?
@@ -151,6 +157,68 @@ class NavigationComponent < ViewComponent::Base
 
     { label: "Situations", url: helpers.admin_situations_path,
       current: current_page?(helpers.admin_situations_path) || controller_matches?("admin/situations") }
+  end
+
+  def questions_qcm_link
+    return unless can?(:manage, Compte)
+
+    { label: "Questions QCM", url: helpers.admin_question_qcms_path,
+      current: current_page?(helpers.admin_question_qcms_path) || controller_matches?("admin/question_qcms") }
+  end
+
+  def questions_clic_dans_image_link
+    return unless can?(:manage, Compte)
+
+    {
+      label: "Questions clic dans image",
+      url: helpers.admin_questions_clic_dans_image_path,
+      current: current_page?(helpers.admin_questions_clic_dans_image_path) ||
+        controller_matches?("admin/questions_clic_dans_image")
+    }
+  end
+
+  def questions_clic_dans_texte_link
+    return unless can?(:manage, Compte)
+
+    {
+      label: "Questions clic dans texte",
+      url: helpers.admin_questions_clic_dans_texte_path,
+      current: current_page?(helpers.admin_questions_clic_dans_texte_path) ||
+        controller_matches?("admin/questions_clic_dans_texte")
+    }
+  end
+
+  def questions_glisser_deposer_link
+    return unless can?(:manage, Compte)
+
+    {
+      label: "Questions glisser déposer",
+      url: helpers.admin_questions_glisser_deposer_path,
+      current: current_page?(helpers.admin_questions_glisser_deposer_path) ||
+        controller_matches?("admin/questions_glisser_deposer")
+    }
+  end
+
+  def questions_saisie_link
+    return unless can?(:manage, Compte)
+
+    {
+      label: "Questions saisie",
+      url: helpers.admin_questions_saisies_path,
+      current: current_page?(helpers.admin_questions_saisies_path) ||
+        controller_matches?("admin/questions_saisies")
+    }
+  end
+
+  def questions_sous_consigne_link
+    return unless superadmin?
+
+    {
+      label: "Questions sous consigne",
+      url: helpers.admin_question_sous_consignes_path,
+      current: current_page?(helpers.admin_question_sous_consignes_path) ||
+        controller_matches?("admin/question_sous_consignes")
+    }
   end
 
   def structures_locales_link

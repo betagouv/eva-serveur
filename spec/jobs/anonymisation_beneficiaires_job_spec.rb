@@ -5,9 +5,9 @@ describe AnonymisationBeneficiairesJob, type: :job do
     date_anonymisation = Time.zone.local(2025, 1, 2, 12, 0, 0)
     Timecop.freeze(date_anonymisation) do
       beneficiaire = create :beneficiaire, nom: 'nom'
-      ancienne_evaluation = create :evaluation, created_at: Date.new(2020, 1, 1),
+      ancienne_evaluation = create :evaluation, created_at: Time.zone.local(2020, 1, 1),
                                                 beneficiaire: beneficiaire
-      evaluation_recente = create :evaluation, created_at: Date.new(2020, 1, 3),
+      evaluation_recente = create :evaluation, created_at: Time.zone.local(2020, 1, 3),
                                                beneficiaire: beneficiaire
 
       described_class.perform_now
@@ -21,16 +21,32 @@ describe AnonymisationBeneficiairesJob, type: :job do
     Timecop.freeze(date_anonymisation) do
       expect(FFaker::NameFR).to receive(:name).and_return('nom généré')
       beneficiaire = create :beneficiaire, nom: 'nom'
-      ancienne_evaluation = create :evaluation, created_at: Date.new(2020, 1, 1),
+      ancienne_evaluation = create :evaluation, created_at: Time.zone.local(2020, 1, 1),
                                                 beneficiaire: beneficiaire
-      autre_evaluation_ancienne = create :evaluation, created_at: Date.new(2019, 1, 1),
+      autre_evaluation_ancienne = create :evaluation, created_at: Time.zone.local(2019, 1, 1),
                                                       beneficiaire: beneficiaire
 
       described_class.perform_now
 
       beneficiaire.reload
-      ancienne_evaluation.reload
-      autre_evaluation_ancienne.reload
+
+      expect(beneficiaire.anonymise_le).to eq date_anonymisation
+      expect(beneficiaire.nom).to eq 'nom généré'
+    end
+  end
+
+  it "anonymise les bénéficiaires même supprimés" do
+    date_anonymisation = Time.zone.local(2025, 1, 2, 12, 0, 0)
+    Timecop.freeze(date_anonymisation) do
+      expect(FFaker::NameFR).to receive(:name).and_return('nom généré')
+
+      beneficiaire = create :beneficiaire, nom: 'nom', deleted_at: date_anonymisation - 1.days
+      ancienne_evaluation = create :evaluation, created_at: Time.zone.local(2020, 1, 1),
+                                                beneficiaire: beneficiaire
+
+      described_class.perform_now
+
+      beneficiaire.reload
 
       expect(beneficiaire.anonymise_le).to eq date_anonymisation
       expect(beneficiaire.nom).to eq 'nom généré'

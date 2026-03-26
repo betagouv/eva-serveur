@@ -13,10 +13,11 @@ class AnonymisationBeneficiairesJob < ApplicationJob
 
   def beneficiaires_a_annonymiser
     Beneficiaire
+      .with_deleted
       .select("beneficiaires.*")
       .where(anonymise_le: nil)
       .joins(:evaluations).group("beneficiaires.id").having(
-        "MAX(evaluations.created_at) < ?", ANNEES_CONSERVEES.year.ago
+        "MAX(evaluations.created_at) < ?", ANNEES_CONSERVEES.years.ago
       )
   end
 end

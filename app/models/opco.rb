@@ -15,6 +15,10 @@ class Opco < ApplicationRecord
                        preprocessed: true
   end
 
+  attr_accessor :supprimer_visuel_offre_services
+
+  after_update :supprime_visuel_offre_services
+
   def display_name
     nom
   end
@@ -33,6 +37,20 @@ class Opco < ApplicationRecord
   end
 
   private
+
+  def supprime_visuel_offre_services
+    visuel_offre_services.purge_later if supprime_visuel_offre_services?
+  end
+
+  def supprime_visuel_offre_services?
+    visuel_offre_services.attached? &&
+      supprimer_visuel_offre_services == "1" &&
+      !nouveau_visuel_offre_services?
+  end
+
+  def nouveau_visuel_offre_services?
+    attachment_changes && attachment_changes["visuel_offre_services"].present?
+  end
 
   def url_offre_services_doit_etre_une_url_http_ou_https
     return if url_offre_services.blank?

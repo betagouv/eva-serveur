@@ -2,7 +2,7 @@ ActiveAdmin.register Opco do
   menu parent: I18n.t(".menu_structure"), if: proc { current_compte.superadmin? }
 
   permit_params :nom, :financeur, :logo, :telephone, :url, :email, :url_contact,
-                :visuel_offre_services, :url_offre_services
+                :visuel_offre_services, :supprimer_visuel_offre_services, :url_offre_services
 
   filter :nom
   filter :financeur
@@ -39,8 +39,7 @@ ActiveAdmin.register Opco do
       f.input :url
       f.input :url_contact
       f.input :url_offre_services
-      f.input :visuel_offre_services, as: :image_file,
-hint: I18n.t("formtastic.hints.opco.visuel_offre_services")
+      render partial: "admin/opcos/form_visuel_offre_services", locals: { f: f }
     end
     f.actions
   end

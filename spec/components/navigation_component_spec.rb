@@ -65,18 +65,18 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Aide")
 
       expect(page).to have_button("Accompagnement")
-      expect(page).to have_link("Sources d'aide")
-      expect(page).to have_link("Annonces générales")
+      expect(page).to have_link("Sources d'aide", visible: :all)
+      expect(page).to have_link("Annonces générales", visible: :all)
 
       expect(page).to have_button("Parcours")
-      expect(page).to have_link("Parcours")
-      expect(page).to have_link("Questionnaires")
-      expect(page).to have_link("Situations")
+      expect(page).to have_link("Parcours", visible: :all)
+      expect(page).to have_link("Questionnaires", visible: :all)
+      expect(page).to have_link("Situations", visible: :all)
 
       expect(page).to have_button("Structures")
-      expect(page).to have_link("Structures locales")
-      expect(page).to have_link("Structures administratives")
-      expect(page).to have_link("Opcos")
+      expect(page).to have_link("Structures locales", visible: :all)
+      expect(page).to have_link("Structures administratives", visible: :all)
+      expect(page).to have_link("Opcos", visible: :all)
     end
   end
 end

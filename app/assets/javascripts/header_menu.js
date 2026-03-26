@@ -69,9 +69,8 @@
 
       var otherPanel = document.getElementById(otherId);
       if (otherPanel) {
-        otherPanel.classList.remove(COLLAPSE_OPENED_CLASS);
+        syncSubMenuState(otherBtn, otherPanel, false);
       }
-      otherBtn.setAttribute("aria-expanded", "false");
     });
   }
 
@@ -79,6 +78,8 @@
     var titleBar = document.getElementById("title_bar");
 
     if (expanded) {
+      panel.hidden = false;
+      panel.setAttribute("aria-hidden", "false");
       panel.classList.add(COLLAPSE_OPENED_CLASS);
       panel.classList.remove("fr-collapsing");
       panel.style.pointerEvents = "auto";
@@ -88,6 +89,8 @@
       }
       button.setAttribute("aria-expanded", "true");
     } else {
+      panel.hidden = true;
+      panel.setAttribute("aria-hidden", "true");
       panel.classList.remove(COLLAPSE_OPENED_CLASS);
       panel.classList.remove("fr-collapsing");
       panel.style.pointerEvents = "";

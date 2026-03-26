@@ -234,14 +234,19 @@ describe Structure, type: :model do
       context 'quand on essaie de mettre le SIRET à nil' do
         before do
           structure.siret = nil
-          structure.valid?
         end
 
         it do
+          structure.valid?
           message_erreur = I18n.t(
             'activerecord.errors.models.structure.attributes.siret.cannot_be_removed'
           )
           expect(structure.errors[:siret]).to include(message_erreur)
+        end
+
+        it "c'est accepté pour l'annonymisation" do
+          structure.anonymise_le = Time.zone.now
+          expect(structure.save).to be true
         end
 
         it 'ne permet pas la mise à jour' do

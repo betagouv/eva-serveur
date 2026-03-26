@@ -15,6 +15,7 @@ describe Anonymisation::Structure, type: :integration do
       expect(structure.anonymise_le).not_to be_nil
       expect(structure.code_postal).to eql('45300')
       expect(structure.nom).not_to eq 'Mission locale Pithiviers'
+      expect(structure.siret).to be_nil
     end
   end
 

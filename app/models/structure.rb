@@ -159,6 +159,7 @@ allow_blank: true
   end
 
   def ne_peut_pas_supprimer_siret
+    return if anonymise_le.present?
     return if new_record?
     return if siret.present?
     return unless siret_was.present?

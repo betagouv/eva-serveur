@@ -20,7 +20,7 @@ body.logged_in {
     background-color: $eva_bluegrey;
   }
 
-  .header, #title_bar, #active_admin_content {
+  #title_bar, #active_admin_content {
     max-width: $container;
     margin: 0 auto;
   }

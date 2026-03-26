@@ -2,12 +2,13 @@ module ActiveAdmin
   module Views
     module HeaderEvaproOverride
       def build(namespace, menu)
-        if helpers.respond_to?(:current_compte) &&
-            helpers.current_compte&.structure&.eva_entreprises?
-          render partial: "components/header"
-        else
-          super
-        end
+        return super unless helpers.respond_to?(:current_compte)
+
+        current_compte = helpers.current_compte
+        return super unless current_compte.present?
+
+        partial = current_compte.structure&.eva_entreprises? ? "components/header" : "components/header_eva"
+        render partial: partial
       end
     end
   end

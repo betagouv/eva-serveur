@@ -5,6 +5,21 @@
   }
 }
 
+// Garder le header DSFR au-dessus du title bar ActiveAdmin
+#header:has(.fr-header) {
+  position: relative;
+  z-index: 20;
+}
+
+body.logged_in #title_bar {
+  position: relative;
+  z-index: 10;
+}
+
+body.logged_in.dsfr-dropdown-open #title_bar {
+  pointer-events: none;
+}
+
 .fr-header__menu-btn,
 .fr-header__menu .fr-btn--close {
   border-radius: 0;

@@ -1,12 +1,39 @@
 <nav class="fr-nav" role="navigation" aria-label="Menu principal">
   <ul class="fr-nav__list">
     <% links.each do |link| %>
-      <% aria_current = aria_current(link) %>
-      <li class="fr-nav__item">
-        <a class="fr-nav__link" href="<%= link[:url] %>" target="_self" <%= "aria-current=\"#{aria_current}\"".html_safe if aria_current %>>
-          <%= link[:label] %>
-        </a>
-      </li>
+      <% if link[:links].present? %>
+        <% menu_id = "header-menu-#{link[:key]}" %>
+        <li class="fr-nav__item">
+          <button class="fr-nav__btn"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="<%= menu_id %>">
+            <%= link[:label] %>
+          </button>
+          <div class="fr-collapse fr-menu" id="<%= menu_id %>">
+            <ul class="fr-menu__list">
+              <% link[:links].each do |child_link| %>
+                <% child_aria_current = aria_current(child_link) %>
+                <li>
+                  <a class="fr-nav__link"
+                     href="<%= child_link[:url] %>"
+                     target="_self"
+                     <%= "aria-current=\"#{child_aria_current}\"".html_safe if child_aria_current %>>
+                    <%= child_link[:label] %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </li>
+      <% else %>
+        <% aria_current = aria_current(link) %>
+        <li class="fr-nav__item">
+          <a class="fr-nav__link" href="<%= link[:url] %>" target="_self" <%= "aria-current=\"#{aria_current}\"".html_safe if aria_current %>>
+            <%= link[:label] %>
+          </a>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </nav>

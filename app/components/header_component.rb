@@ -4,7 +4,8 @@ class HeaderComponent < ViewComponent::Base
   renders_one :service_image
 
   def initialize(logo: nil, logo_alt: nil, titre: nil, tagline: nil, current_compte: nil,
-                 actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil)
+                 actions: nil, nav_links: nil, logged_in: nil, show_navigation: nil, classes: nil,
+                 logo_class: nil)
     @logo = logo
     @logo_alt = logo_alt
     @titre = titre
@@ -15,6 +16,7 @@ class HeaderComponent < ViewComponent::Base
     @logged_in = logged_in
     @show_navigation = show_navigation
     @classes = classes
+    @logo_class = logo_class
   end
 
   def affiche_actions_connexion?

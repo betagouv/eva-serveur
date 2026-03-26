@@ -3,6 +3,14 @@
     --background-raised-grey: var(--background-alt-blue-france);
     --background-raised-grey-hover: var(--grey-1000-75-hover);
   }
+
+  &.header-eva .header-eva__logo {
+    width: 49px;
+    aspect-ratio: 7 / 6;
+    max-width: none !important;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 // Garder le header DSFR au-dessus du title bar ActiveAdmin

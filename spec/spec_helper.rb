@@ -78,7 +78,14 @@ RSpec.configure do |config|
   end
 
   def deconnecte
-    find("#logout a").click
+    return find("#logout a").click if page.has_css?("#logout a", wait: 0)
+    return click_link("Déconnexion", match: :first) if page.has_link?("Déconnexion", wait: 0)
+
+    liens_deconnexion = all("a", text: "Déconnexion", visible: :all)
+    lien_visible = liens_deconnexion.find(&:visible?) || liens_deconnexion.first
+    raise Capybara::ElementNotFound, "Unable to find logout link" unless lien_visible
+
+    lien_visible.click
   end
 
   def inscription_pro_connect(compte = create(:compte_pro_connect))

@@ -5,7 +5,7 @@
         <% menu_id = "header-menu-#{link[:key]}" %>
         <% group_current = aria_current(link) %>
         <li class="fr-nav__item">
-          <button class="<%= ["fr-nav__btn", ("fr-nav__btn--current" if group_current)].compact.join(" ") %>"
+          <button class="<%= [ "fr-nav__btn", ("fr-nav__btn--current" if group_current) ].compact.join(" ") %>"
                   type="button"
                   aria-expanded="false"
                   aria-controls="<%= menu_id %>"

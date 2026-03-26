@@ -59,8 +59,12 @@ class NavigationComponent < ViewComponent::Base
     return if utilisateur_entreprise?
     return unless can?(:read, Campagne)
 
-    { label: "Campagnes", url: helpers.admin_campagnes_path,
-      current: current_page?(helpers.admin_campagnes_path) || controller_matches?("admin/campagnes") }
+    {
+      label: "Campagnes",
+      url: helpers.admin_campagnes_path,
+      current: current_page?(helpers.admin_campagnes_path) ||
+        controller_matches?("admin/campagnes")
+    }
   end
 
   def beneficiaires_link
@@ -68,8 +72,12 @@ class NavigationComponent < ViewComponent::Base
     return if utilisateur_entreprise?
     return unless can?(:read, Beneficiaire)
 
-    { label: "Bénéficiaires", url: helpers.admin_beneficiaires_path,
-      current: current_page?(helpers.admin_beneficiaires_path) || controller_matches?("admin/beneficiaires") }
+    {
+      label: "Bénéficiaires",
+      url: helpers.admin_beneficiaires_path,
+      current: current_page?(helpers.admin_beneficiaires_path) ||
+        controller_matches?("admin/beneficiaires")
+    }
   end
 
   def comptes_link
@@ -127,43 +135,67 @@ class NavigationComponent < ViewComponent::Base
   def source_aides_link
     return unless can?(:read, SourceAide)
 
-    { label: "Sources d'aide", url: helpers.admin_source_aides_path,
-      current: current_page?(helpers.admin_source_aides_path) || controller_matches?("admin/source_aides") }
+    {
+      label: "Sources d'aide",
+      url: helpers.admin_source_aides_path,
+      current: current_page?(helpers.admin_source_aides_path) ||
+        controller_matches?("admin/source_aides")
+    }
   end
 
   def annonce_generales_link
     return unless can?(:read, AnnonceGenerale)
 
-    { label: "Annonces générales", url: helpers.admin_annonce_generales_path,
-      current: current_page?(helpers.admin_annonce_generales_path) || controller_matches?("admin/annonce_generales") }
+    {
+      label: "Annonces générales",
+      url: helpers.admin_annonce_generales_path,
+      current: current_page?(helpers.admin_annonce_generales_path) ||
+        controller_matches?("admin/annonce_generales")
+    }
   end
 
   def parcours_types_link
     return unless can?(:manage, Compte)
 
-    { label: "Parcours", url: helpers.admin_parcours_type_index_path,
-      current: current_page?(helpers.admin_parcours_type_index_path) || controller_matches?("admin/parcours_types") }
+    {
+      label: "Parcours",
+      url: helpers.admin_parcours_type_index_path,
+      current: current_page?(helpers.admin_parcours_type_index_path) ||
+        controller_matches?("admin/parcours_types")
+    }
   end
 
   def questionnaires_link
     return unless can?(:manage, Compte)
 
-    { label: "Questionnaires", url: helpers.admin_questionnaires_path,
-      current: current_page?(helpers.admin_questionnaires_path) || controller_matches?("admin/questionnaires") }
+    {
+      label: "Questionnaires",
+      url: helpers.admin_questionnaires_path,
+      current: current_page?(helpers.admin_questionnaires_path) ||
+        controller_matches?("admin/questionnaires")
+    }
   end
 
   def situations_link
     return unless can?(:manage, Compte)
 
-    { label: "Situations", url: helpers.admin_situations_path,
-      current: current_page?(helpers.admin_situations_path) || controller_matches?("admin/situations") }
+    {
+      label: "Situations",
+      url: helpers.admin_situations_path,
+      current: current_page?(helpers.admin_situations_path) ||
+        controller_matches?("admin/situations")
+    }
   end
 
   def questions_qcm_link
     return unless can?(:manage, Compte)
 
-    { label: "Questions QCM", url: helpers.admin_question_qcms_path,
-      current: current_page?(helpers.admin_question_qcms_path) || controller_matches?("admin/question_qcms") }
+    {
+      label: "Questions QCM",
+      url: helpers.admin_question_qcms_path,
+      current: current_page?(helpers.admin_question_qcms_path) ||
+        controller_matches?("admin/question_qcms")
+    }
   end
 
   def questions_clic_dans_image_link
@@ -224,8 +256,12 @@ class NavigationComponent < ViewComponent::Base
   def structures_locales_link
     return unless anlci_or_administratif?
 
-    { label: "Structures locales", url: helpers.admin_structures_locales_path,
-      current: current_page?(helpers.admin_structures_locales_path) || controller_matches?("admin/structures_locales") }
+    {
+      label: "Structures locales",
+      url: helpers.admin_structures_locales_path,
+      current: current_page?(helpers.admin_structures_locales_path) ||
+        controller_matches?("admin/structures_locales")
+    }
   end
 
   def structures_administratives_link

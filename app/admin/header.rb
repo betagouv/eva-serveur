@@ -7,7 +7,12 @@ module ActiveAdmin
         current_compte = helpers.current_compte
         return super unless current_compte.present?
 
-        partial = current_compte.structure&.eva_entreprises? ? "components/header" : "components/header_eva"
+        partial =
+          if current_compte.structure&.eva_entreprises?
+            "components/header"
+          else
+            "components/header_eva"
+          end
         render partial: partial
       end
     end

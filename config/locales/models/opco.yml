@@ -14,7 +14,7 @@ fr:
         url_contact: Url liste de contacts
         url: Url site
         url_offre_services: "Url de l'offre de service"
-        visuel_offre_services: "Visuel de l'offre de service (32x9)"
+        visuel_offre_services: "Visuel de l'offre de service (32×9)"
     errors:
       models:
         opco:
@@ -31,10 +31,13 @@ fr:
     placeholders:
       opco:
         nom: Nom de l'opérateur de compétences
+    labels:
+      opco:
+        supprimer_visuel_offre_services: "Retirer le visuel actuel"
     hints:
       opco:
         nom: Ce nom est utilisé lors de l'import pour le mapping des conventions collectives. Assurez-vous d'utiliser exactement le même nom que dans le fichier Excel ou de le remplacer avant un futur import.
-        visuel_offre_services: "Formats acceptés : jpg, png, svg, webp."
+        visuel_offre_services: "Un seul fichier possible. Formats acceptés : jpg, png, svg, webp."
   active_admin:
     resources:
       opco:

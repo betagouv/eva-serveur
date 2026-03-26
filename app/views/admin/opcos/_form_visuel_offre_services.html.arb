@@ -1,0 +1,13 @@
+f.input :visuel_offre_services,
+        as: :image_file,
+        hint: I18n.t("formtastic.hints.opco.visuel_offre_services"),
+        input_html: { multiple: false }
+
+if f.object.visuel_offre_services.attached? && f.object.errors[:visuel_offre_services].blank?
+  f.input :supprimer_visuel_offre_services,
+          as: :boolean,
+          label: (
+            "<span class=\"fr-icon-delete-line\" aria-hidden=\"true\"></span> ".html_safe +
+              I18n.t("formtastic.labels.opco.supprimer_visuel_offre_services")
+          )
+end

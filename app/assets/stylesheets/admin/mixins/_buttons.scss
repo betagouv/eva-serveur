@@ -42,21 +42,23 @@
 
 @mixin grand-bouton() {
   font-size: 0.875rem;
-  line-height: 1.5rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 0;
   gap: $dsfr-spacing-2v;
-  max-height: 2.5rem !important;
+  min-height: 2.5rem !important;
+  align-self: flex-start;
+  line-height: normal;
 }
 
 @mixin petit-bouton() {
   font-size: 0.875rem;
   font-weight: 500;
-  line-height: 1.5rem;
   padding: 0.25rem 0.75rem;
   border-radius: 0;
-  max-height: 2rem !important;
+  align-self: flex-start;
+  min-height: 2rem !important;
+  line-height: normal;
 }
 
 @mixin bouton-primaire() {
@@ -253,6 +255,10 @@
   pointer-events: none;
   border: 1px solid $grey-425 !important;
   color: $grey-425 !important;
+
+  &:hover {
+    background-color: $grey-925 !important;
+  }
 }
 
 @mixin bouton-action() {

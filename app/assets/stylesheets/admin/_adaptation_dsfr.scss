@@ -259,12 +259,17 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   color: var(--text-action-high-blue-france);
 }
 
-.fr-btn--sm, .bouton-annuler {
-  max-height: 2rem !important;
-}
+.fr-btn--sm,
+.bouton-annuler {
+  align-self: flex-start; 
+  min-height: 2rem;
+  line-height: normal;
+};
 
 .fr-btn--md {
-  max-height: 2.5rem !important;
+  align-self: flex-start; 
+  min-height: 2.5rem;
+  line-height: normal;
 }
 
 button,

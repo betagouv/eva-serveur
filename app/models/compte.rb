@@ -96,6 +96,14 @@ class Compte < ApplicationRecord
     !!structure&.eva_entreprises?
   end
 
+  # Aligné sur Ability : profil restreint tant que la validation structure n'est pas finalisée.
+  def en_attente_restreint?
+    validation_en_attente? &&
+      !exempte_restriction_acces_attente? &&
+      doit_completer_inscription? &&
+      structure_id.present?
+  end
+
   def au_moins_admin?
     ADMIN_ROLES.include?(role)
   end

@@ -48,6 +48,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def evaluations_link
+    return if en_attente_restreint?
     return unless can?(:read, Evaluation)
 
     { label: "Évaluations", url: helpers.admin_evaluations_path,
@@ -55,6 +56,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def campagnes_link
+    return if en_attente_restreint?
     return unless current_compte_structure_present?
     return if utilisateur_entreprise?
     return unless can?(:read, Campagne)
@@ -68,6 +70,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def beneficiaires_link
+    return if en_attente_restreint?
     return unless current_compte_structure_present?
     return if utilisateur_entreprise?
     return unless can?(:read, Beneficiaire)
@@ -81,6 +84,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def comptes_link
+    return if en_attente_restreint?
     return unless can?(:read, Compte)
 
     { label: "Comptes", url: helpers.admin_comptes_path,
@@ -105,6 +109,8 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def parcours_group
+    return if en_attente_restreint?
+
     links = [
       parcours_types_link,
       questionnaires_link,
@@ -122,6 +128,8 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def structures_group
+    return if en_attente_restreint?
+
     links = [
       structures_locales_link,
       structures_administratives_link,
@@ -323,6 +331,10 @@ class NavigationComponent < ViewComponent::Base
 
   def superadmin?
     @current_compte&.superadmin?
+  end
+
+  def en_attente_restreint?
+    @current_compte&.en_attente_restreint?
   end
 
   def can?(action, subject, *extra_args)

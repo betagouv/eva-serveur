@@ -187,6 +187,39 @@ describe Compte do
     end
   end
 
+  describe "#en_attente_restreint?" do
+    let(:structure) { create(:structure_locale, :avec_admin) }
+
+    it "est vrai lorsque le compte correspond au profil restreint (aligné Ability)" do
+      compte = create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure,
+        etape_inscription: "nouveau",
+        exempte_restriction_acces_attente: false
+      )
+
+      expect(compte.en_attente_restreint?).to be(true)
+    end
+
+    it "est faux lorsque la restriction accès attente est levée" do
+      compte = create(
+        :compte_conseiller,
+        :en_attente,
+        :exempte_restriction_acces_attente,
+        structure: structure
+      )
+
+      expect(compte.en_attente_restreint?).to be(false)
+    end
+
+    it "est faux lorsque le compte est accepté" do
+      compte = create(:compte_conseiller, :acceptee, structure: structure)
+
+      expect(compte.en_attente_restreint?).to be(false)
+    end
+  end
+
   describe "#rejoindre_structure" do
     let(:structure) { Structure.new }
     let(:compte) { described_class.new statut_validation: nil, role: nil }

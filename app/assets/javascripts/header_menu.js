@@ -94,19 +94,26 @@
       panel.classList.remove(COLLAPSE_OPENED_CLASS);
       panel.classList.remove("fr-collapsing");
       panel.style.pointerEvents = "";
-      var hasOpenDropdown = document.querySelector(".fr-nav__btn[aria-expanded='true']");
+      // Mettre à jour aria-expanded avant le querySelector : sinon le bouton
+      // courant est encore « true » et dsfr-dropdown-open ne disparaît jamais.
+      button.setAttribute("aria-expanded", "false");
+      var hasOpenDropdown = document.querySelector(
+        ".fr-header .fr-nav .fr-nav__btn[aria-expanded='true']"
+      );
       if (!hasOpenDropdown) {
         document.body.classList.remove("dsfr-dropdown-open");
       }
       if (titleBar && !hasOpenDropdown) {
         titleBar.style.pointerEvents = "";
       }
-      button.setAttribute("aria-expanded", "false");
     }
   }
 
   function initNavigationDropdowns() {
-    var buttons = document.querySelectorAll(".fr-nav__btn[aria-controls]");
+    var nav = document.querySelector(".fr-header .fr-nav");
+    if (!nav) return;
+
+    var buttons = nav.querySelectorAll(".fr-nav__btn[aria-controls]");
     if (!buttons.length) return;
 
     buttons.forEach(function (button) {

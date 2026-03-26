@@ -175,7 +175,11 @@ body.logged_in.evapro_admin {
     top: 0 !important;
   }
 
-  .fr-modal-invitation.fr-modal--opened > .fr-container {
+  // Réactiver les clics dans le panneau quand une modale de contenu est ouverte
+  // (invitation structure, vérification comptes en attente, etc.). Sans ça, le
+  // `pointer-events: none` sur `.fr-modal > .fr-container` bloque boutons et formulaires.
+  // Exclure le menu burger header : son `.fr-container` doit rester géré à part.
+  .fr-modal.fr-modal--opened:not(.fr-header__menu) > .fr-container {
     pointer-events: auto;
   }
 }

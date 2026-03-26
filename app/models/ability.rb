@@ -4,7 +4,7 @@ class Ability < AbilityUtilisateur
 
     if compte.validation_refusee?
       droits_comptes_refuses compte
-    elsif compte_en_attente_restreint?(compte)
+    elsif compte.en_attente_restreint?
       droits_comptes_en_attente_restreints compte
     else
       super
@@ -69,12 +69,5 @@ class Ability < AbilityUtilisateur
     can :read, Actualite
     can :read, SourceAide
     can %i[update read accepter_cgu], compte
-  end
-
-  def compte_en_attente_restreint?(compte)
-    compte.validation_en_attente? &&
-      !compte.exempte_restriction_acces_attente? &&
-      compte.doit_completer_inscription? &&
-      compte.structure_id.present?
   end
 end

@@ -109,8 +109,9 @@
   
   // État Hover
   &:not(.disabled, .bouton--actif):hover {
+    @include light-decisions-background-transparent-hover;
+
     border-color: $blue-france-sun-113;
-    background-color: rgba(0, 0, 0, 0.04);
     color: $blue-france-sun-113;
     text-shadow: none;
     box-shadow: none;
@@ -154,8 +155,9 @@
   
   // État Hover
   &:not(.disabled, .bouton--actif):hover {
+    @include light-decisions-background-transparent-hover;
+
     border-color: $grey-900;
-    background-color: rgba(0, 0, 0, 0.04);
     color: $blue-france-sun-113;
     text-shadow: none;
     box-shadow: none;
@@ -274,3 +276,6 @@
   font-size: .75rem;
 }
 
+@mixin light-decisions-background-transparent-hover() {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}

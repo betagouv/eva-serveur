@@ -132,6 +132,20 @@
       modal = document.getElementById(modalId);
       if (!modal) return;
 
+      // Même aria-controls que le lien « Vérifier » : le bouton « Fermer » du DSFR et les
+      // boutons secondaires (ex. Annuler fusion) sont *dans* la modale — sinon ce handler
+      // (phase capture) rappelle openModal au lieu de fermer.
+      var dejaOuverte =
+        modal.classList.contains(OPENED_CLASS) ||
+        (modal.tagName === "DIALOG" && modal.open);
+      if (dejaOuverte && modal.contains(found.trigger)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        bindCloseHandlers(modal);
+        closeModal(modal);
+        return;
+      }
+
       event.preventDefault();
       event.stopImmediatePropagation();
       bindCloseHandlers(modal);

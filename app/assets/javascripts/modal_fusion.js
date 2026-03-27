@@ -1,160 +1,177 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('fr-modal-fusionner');
-  if (!modal) return;
+(function() {
+  var MODAL_ID = "fr-modal-fusionner";
+  var OPENED_CLASS = "fr-modal--opened";
 
-  initializeBatchActionFusion();
-  initializeFormSubmission(modal);
-});
-
-function initializeBatchActionFusion() {
-  const fusionButtons = document.querySelectorAll('.batch_action[data-action="fusionner"]');
-
-  fusionButtons.forEach(button => {
-    button.addEventListener('click', handleFusionButtonClick);
-  });
-}
-
-function handleFusionButtonClick(event) {
-  event.preventDefault();
-  event.stopImmediatePropagation();
-
-  const checkedBoxes = getSelectedBeneficiaires();
-
-  if (!validateSelection(checkedBoxes)) return;
-
-  const beneficiaires = extractBeneficiairesData(checkedBoxes);
-  const sortedBeneficiaires = sortBeneficiairesByDate(beneficiaires);
-
-  updateModalContent(sortedBeneficiaires);
-  openModal();
-}
-
-function getSelectedBeneficiaires() {
-  return document.querySelectorAll('input.batch-actions-resource-selection:checked');
-}
-
-function validateSelection(checkedBoxes) {
-  if (checkedBoxes.length < 2) {
-    alert("Sélectionnez au moins deux bénéficiaires pour les fusionner.");
-    return false;
-  }
-  return true;
-}
-
-function extractBeneficiairesData(checkedBoxes) {
-  return Array.from(checkedBoxes).map(checkbox => {
-    const row = checkbox.closest('tr');
-    return {
-      id: checkbox.value,
-      nom: extractNomFromRow(row),
-      dateISO8601: extractDateFromRow(row)
-    };
-  });
-}
-
-function extractNomFromRow(row) {
-  if (!row) return "Inconnu";
-  return row.querySelector('td:nth-child(2)')?.textContent.trim() || "Inconnu";
-}
-
-function extractDateFromRow(row) {
-  if (!row) return '';
-  const dateCell = row.querySelector('.col-created_at span[data-created-at]');
-  return dateCell?.dataset.createdAt || '';
-}
-
-function sortBeneficiairesByDate(beneficiaires) {
-  return [...beneficiaires].sort((a, b) => {
-    if (a.dateISO8601 < b.dateISO8601) return -1;
-    if (a.dateISO8601 > b.dateISO8601) return 1;
-    return 0;
-  });
-}
-
-function updateModalContent(beneficiaires) {
-  const modal = document.getElementById('fr-modal-fusionner');
-
-  // Mettre à jour la liste
-  const listeElements = document.getElementById('liste-elements-a-fusionner');
-  listeElements.innerHTML = '';
-  beneficiaires.forEach(b => {
-    const li = document.createElement('li');
-    li.textContent = b.nom;
-    listeElements.appendChild(li);
-  });
-
-  // Mettre à jour le bénéficiaire de rattachement
-  const rattacheElement = document.getElementById('beneficiaire-rattache');
-  rattacheElement.textContent = beneficiaires[0].nom;
-  
-  // Mettre à jour le bénéficiaire dans l'alerte
-  const rattacheAlertElement = document.getElementById('beneficiaire-rattache-alert');
-  if (rattacheAlertElement) {
-    rattacheAlertElement.textContent = beneficiaires[0].nom;
+  function elementFromEventTarget(target) {
+    if (!target) return null;
+    if (target.nodeType === Node.TEXT_NODE) return target.parentElement;
+    return target;
   }
 
-  // Stocker les IDs
-  modal.dataset.ids = beneficiaires.map(b => b.id).join(',');
-}
+  function findFusionBatchLink(target) {
+    var el = elementFromEventTarget(target);
+    if (!el || !el.closest) return null;
+    return el.closest("a.batch_action[data-action=\"fusionner\"]");
+  }
 
-function openModal() {
-  const modal = document.getElementById('fr-modal-fusionner');
-  const dsfrModal = window.dsfr(modal).modal;
+  function openFusionModal(modal) {
+    if (!modal) return;
 
-  dsfrModal.disclose();
+    if (modal.parentNode !== document.body) {
+      document.body.appendChild(modal);
+    }
 
-  resizeModal(modal);
-}
+    // Même stratégie que modal_verification_ouverture_evapro / invitation_modal :
+    // ne pas dépendre de window.dsfr (instance parfois absente ou non enregistrée).
+    modal.classList.add(OPENED_CLASS);
+    modal.setAttribute("aria-hidden", "false");
+    if (modal.tagName === "DIALOG") {
+      if (typeof modal.showModal === "function") {
+        try {
+          modal.showModal();
+        } catch (e) {
+          if (!modal.hasAttribute("open")) {
+            modal.setAttribute("open", "");
+          }
+        }
+      } else if (!modal.hasAttribute("open")) {
+        modal.setAttribute("open", "");
+      }
+    }
+  }
 
-function resizeModal(modal) {
-  requestAnimationFrame(() => {
-    const modalBody = modal.querySelector('.fr-modal__body');
-    const modalContent = modal.querySelector('.fr-modal__content');
-    const modalHeader = modal.querySelector('.fr-modal__header');
-    const modalFooter = modal.querySelector('.fr-modal__footer');
-    if (!modalBody) return;
+  function handleFusionClick(event) {
+    var link = findFusionBatchLink(event.target);
+    if (!link) return;
 
-    const contentPadding = modalContent
-      ? getComputedStyle(modalContent)
-      : { paddingTop: '0', paddingBottom: '0' };
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
 
-    const paddingTop = parseFloat(contentPadding.paddingTop) || 0;
-    const paddingBottom = parseFloat(contentPadding.paddingBottom) || 0;
-    const headerHeight = modalHeader?.offsetHeight || 0;
-    const footerHeight = modalFooter?.offsetHeight || 0;
+    var modal = document.getElementById(MODAL_ID);
+    if (!modal) return;
 
-    // On retire header + footer + padding pour laisser uniquement l'espace du corps.
-    const availableHeight = window.innerHeight - headerHeight - footerHeight - paddingTop - paddingBottom - 24; // 24px de marge visuelle
-    const maxHeight = `${Math.max(0, availableHeight)}px`;
+    var checkedBoxes = document.querySelectorAll(
+      "input.batch-actions-resource-selection:checked"
+    );
 
-    modalBody.style.maxHeight = maxHeight;
-  });
-}
+    if (checkedBoxes.length < 2) {
+      window.alert("Sélectionnez au moins deux bénéficiaires pour les fusionner.");
+      return;
+    }
 
-function initializeFormSubmission(modal) {
-  const form = document.getElementById('fusion-form');
+    var beneficiaires = extractBeneficiairesData(checkedBoxes);
+    var sortedBeneficiaires = sortBeneficiairesByDate(beneficiaires);
 
-  form.addEventListener('submit', function(event) {
-    prepareHiddenInputs(modal);
-  });
-}
+    updateModalContent(modal, sortedBeneficiaires);
+    openFusionModal(modal);
+    resizeModal(modal);
+  }
 
-function prepareHiddenInputs(modal) {
-  const ids = modal.dataset.ids.split(',');
-  const container = document.getElementById('hidden-ids-container');
+  function extractBeneficiairesData(checkedBoxes) {
+    return Array.from(checkedBoxes).map(function(checkbox) {
+      var row = checkbox.closest("tr");
+      return {
+        id: checkbox.value,
+        nom: extractNomFromRow(row),
+        dateISO8601: extractDateFromRow(row)
+      };
+    });
+  }
 
-  container.innerHTML = '';
+  function extractNomFromRow(row) {
+    if (!row) return "Inconnu";
+    var cell = row.querySelector("td:nth-child(2)");
+    return (cell && cell.textContent.trim()) || "Inconnu";
+  }
 
-  ids.forEach(id => {
-    const input = createHiddenInput('collection_selection[]', id);
-    container.appendChild(input);
-  });
-}
+  function extractDateFromRow(row) {
+    if (!row) return "";
+    var dateCell = row.querySelector(".col-created_at span[data-created-at]");
+    return (dateCell && dateCell.dataset.createdAt) || "";
+  }
 
-function createHiddenInput(name, value) {
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = name;
-  input.value = value;
-  return input;
-}
+  function sortBeneficiairesByDate(beneficiaires) {
+    return beneficiaires.slice().sort(function(a, b) {
+      if (a.dateISO8601 < b.dateISO8601) return -1;
+      if (a.dateISO8601 > b.dateISO8601) return 1;
+      return 0;
+    });
+  }
+
+  function updateModalContent(modal, beneficiaires) {
+    var listeElements = document.getElementById("liste-elements-a-fusionner");
+    listeElements.innerHTML = "";
+    beneficiaires.forEach(function(b) {
+      var li = document.createElement("li");
+      li.textContent = b.nom;
+      listeElements.appendChild(li);
+    });
+
+    var rattacheElement = document.getElementById("beneficiaire-rattache");
+    rattacheElement.textContent = beneficiaires[0].nom;
+
+    var rattacheAlertElement = document.getElementById("beneficiaire-rattache-alert");
+    if (rattacheAlertElement) {
+      rattacheAlertElement.textContent = beneficiaires[0].nom;
+    }
+
+    modal.dataset.ids = beneficiaires.map(function(b) {
+      return b.id;
+    }).join(",");
+  }
+
+  function resizeModal(modal) {
+    window.requestAnimationFrame(function() {
+      var modalBody = modal.querySelector(".fr-modal__body");
+      var modalContent = modal.querySelector(".fr-modal__content");
+      var modalHeader = modal.querySelector(".fr-modal__header");
+      var modalFooter = modal.querySelector(".fr-modal__footer");
+      if (!modalBody) return;
+
+      var contentPadding = modalContent
+        ? window.getComputedStyle(modalContent)
+        : { paddingTop: "0", paddingBottom: "0" };
+
+      var paddingTop = parseFloat(contentPadding.paddingTop) || 0;
+      var paddingBottom = parseFloat(contentPadding.paddingBottom) || 0;
+      var headerHeight = modalHeader ? modalHeader.offsetHeight : 0;
+      var footerHeight = modalFooter ? modalFooter.offsetHeight : 0;
+
+      var availableHeight =
+        window.innerHeight - headerHeight - footerHeight - paddingTop - paddingBottom - 24;
+      modalBody.style.maxHeight = Math.max(0, availableHeight) + "px";
+    });
+  }
+
+  function prepareHiddenInputs(modal) {
+    var ids = modal.dataset.ids.split(",");
+    var container = document.getElementById("hidden-ids-container");
+
+    container.innerHTML = "";
+
+    ids.forEach(function(id) {
+      var input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "collection_selection[]";
+      input.value = id;
+      container.appendChild(input);
+    });
+  }
+
+  function init() {
+    var modal = document.getElementById(MODAL_ID);
+    if (!modal) return;
+
+    document.addEventListener("click", handleFusionClick, true);
+
+    var form = document.getElementById("fusion-form");
+    if (form) {
+      form.addEventListener("submit", function() {
+        prepareHiddenInputs(modal);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();

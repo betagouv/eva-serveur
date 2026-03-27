@@ -74,21 +74,89 @@ describe AbilityUtilisateur do
     end
   end
 
-  describe "bypass_uniqueness_siret" do
+  describe "bypass de l'unicité du siret" do
     context "quand le compte est superadmin" do
       let(:structure) { create(:structure_locale) }
       let(:compte) { create(:compte, role: :superadmin) }
 
-      it "peut bypass l'unicité du siret" do
-        expect(ability).to be_able_to(:bypass_uniqueness_siret, structure)
+      it "peut créer une structure avec un siret déjà utilisé" do
+        nouvelle_structure = build(:structure, siret: structure.siret)
+        nouvelle_structure.current_ability = ability
+
+        nouvelle_structure.valid?
+
+        message_taken = I18n.t("activerecord.errors.models.structure.attributes.siret.taken")
+        expect(nouvelle_structure.errors[:siret]).not_to include(message_taken)
       end
     end
 
     context "quand le compte est admin" do
       let(:compte) { create(:compte, role: :admin) }
 
-      it "ne peut pas bypass l'unicité du siret" do
-        expect(ability).not_to be_able_to(:bypass_uniqueness_siret, structure)
+      it "ne peut pas créer une structure avec un siret déjà utilisé" do
+        nouvelle_structure = build(:structure, siret: structure.siret)
+        nouvelle_structure.current_ability = ability
+
+        nouvelle_structure.valid?
+
+        message_taken = I18n.t("activerecord.errors.models.structure.attributes.siret.taken")
+        expect(nouvelle_structure.errors[:siret]).to include(message_taken)
+      end
+    end
+  end
+
+  describe "création et modification de structure sans siret" do
+    context "quand le compte est superadmin" do
+      let(:compte) { create(:compte, role: :superadmin) }
+
+      it "peut créer une structure sans siret" do
+        structure = build(:structure, siret: nil)
+        structure.current_ability = ability
+
+        structure.valid?
+
+        message_blank = I18n.t("activerecord.errors.models.structure.attributes.siret.blank")
+        expect(structure.errors[:siret]).not_to include(message_blank)
+      end
+
+      it "peut supprimer le siret d'une structure existante" do
+        structure = create(:structure)
+        structure.siret = nil
+        structure.current_ability = ability
+
+        structure.valid?
+
+        message_cannot_be_removed = I18n.t(
+          "activerecord.errors.models.structure.attributes.siret.cannot_be_removed"
+        )
+        expect(structure.errors[:siret]).not_to include(message_cannot_be_removed)
+      end
+    end
+
+    context "quand le compte est admin" do
+      let(:compte) { create(:compte, role: :admin) }
+
+      it "ne peut pas créer une structure sans siret" do
+        structure = build(:structure, siret: nil)
+        structure.current_ability = ability
+
+        structure.valid?
+
+        message_blank = I18n.t("activerecord.errors.models.structure.attributes.siret.blank")
+        expect(structure.errors[:siret]).to include(message_blank)
+      end
+
+      it "ne peut pas supprimer le siret d'une structure existante" do
+        structure = create(:structure)
+        structure.siret = nil
+        structure.current_ability = ability
+
+        structure.valid?
+
+        message_cannot_be_removed = I18n.t(
+          "activerecord.errors.models.structure.attributes.siret.cannot_be_removed"
+        )
+        expect(structure.errors[:siret]).to include(message_cannot_be_removed)
       end
     end
   end

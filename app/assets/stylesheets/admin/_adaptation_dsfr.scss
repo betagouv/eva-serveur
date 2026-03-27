@@ -254,11 +254,6 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   color: var(--text-inverted-blue-france);
 }
 
-.fr-btn--secondary,
-.fr-btn--tertiary {
-  color: var(--text-action-high-blue-france);
-}
-
 .fr-btn--sm,
 .bouton-annuler {
   align-self: flex-start; 
@@ -324,18 +319,31 @@ form input[type="button"].fr-btn:not(.disabled):hover,
   }
 }
 
-button.fr-btn.fr-btn--secondary:not(.disabled):hover,
-input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled):hover,
-input[type="button"].fr-btn.fr-btn--secondary:not(.disabled):hover {
-  border: 1px solid $blue-france-sun-113;
-  background: rgba(0, 0, 0, 0.04);
+.fr-btn--secondary,
+.fr-btn--tertiary {
+  color: var(--text-action-high-blue-france);
 }
 
-button.fr-btn.fr-btn--tertiary:not(.disabled):hover,
-input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled):hover,
-input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled):hover {
+.fr-btn--secondary:not(.disabled, .bouton--actif):hover {
+  @include light-decisions-background-transparent-hover;
+}
+
+.fr-btn--tertiary:not(.disabled, .bouton--actif):hover {
+  @include light-decisions-background-transparent-hover;
+}
+
+button.fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover {
+  border: 1px solid $blue-france-sun-113;
+  background-image: none;
+}
+
+button.fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
+input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
+input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover {
   border: 1px solid $grey-900;
-  background: rgba(0, 0, 0, 0.04);
+  background-image: none;
 }
 
 button.fr-btn:not(.disabled):active,

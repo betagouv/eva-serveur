@@ -60,6 +60,7 @@
       t("admin.structures.membres.modal.envoyer"),
       type: :primary,
       tag: :submit,
+      size: :md,
       form: form_id,
       class: "fr-icon-send-plane-fill"
     ) do %>
@@ -68,12 +69,16 @@
   <% end %>
 
   <% component.with_button do %>
-    <%= button_tag type: "button",
-                   class: "fr-btn fr-btn--primary copier-lien-invitation",
-                   data: {
-                     copier_lien_url: copier_lien_admin_structure_locale_path(structure)
-                   } do %>
-      <span class="fr-icon-links-fill" aria-hidden="true"></span>
+    <%= render BoutonDsfrComponent.new(
+      "#",
+      type: :secondary,
+      tag: :button,
+      size: :md,
+      class: "copier-lien-invitation fr-icon-links-fill fr-btn--icon-left",
+      data: {
+        copier_lien_url: copier_lien_admin_structure_locale_path(structure)
+      }
+    ) do %>
       <span class="copier-lien-invitation__label"><%= t("admin.structures.membres.modal.copier_lien") %></span>
     <% end %>
   <% end %>

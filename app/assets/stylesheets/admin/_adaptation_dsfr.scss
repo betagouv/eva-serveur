@@ -263,13 +263,13 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
 .bouton-annuler {
   align-self: flex-start; 
   min-height: 2rem;
-  line-height: normal;
+  line-height: normal !important;
 };
 
 .fr-btn--md {
   align-self: flex-start; 
   min-height: 2.5rem;
-  line-height: normal;
+  line-height: normal !important;
 }
 
 button,

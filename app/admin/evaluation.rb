@@ -76,12 +76,14 @@ ActiveAdmin.register Evaluation do
 
   form partial: "form"
 
-  sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evaluation_evapro? } do
-    render "opco_financeur", opco: resource.opco_financeur, evaluation: resource
+  sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evapro? } do
+    render "opco_financeur",
+           opco: resource.diagnostic_pro&.opco_financeur,
+           evaluation: resource
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    !resource.evaluation_evapro? && resource.responsable_suivi.present?
+    !resource.evapro? && resource.responsable_suivi.present?
   } do
     render(Tag.new(resource.responsable_suivi.display_name,
                    classes: "bleu",
@@ -90,14 +92,14 @@ ActiveAdmin.register Evaluation do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    !resource.evaluation_evapro? &&
+    !resource.evapro? &&
       resource.responsable_suivi.blank? &&
       can?(:ajouter_responsable_suivi, Evaluation)
   } do
     render "recherche_responsable_suivi"
   end
 
-  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evaluation_evapro? }
+  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evapro? }
 
   sidebar " ", class: "menu-sidebar evaluation-evapro", only: :index, if: proc {
     current_compte.utilisateur_entreprise? } do
@@ -155,7 +157,7 @@ ActiveAdmin.register Evaluation do
 
   member_action :mise_en_action, method: :put do
     effectuee = params[:mise_en_action_effectuee]  == "true"
-    resource.enregistre_mise_en_action(effectuee)
+    resource.passation_beneficiaire&.enregistre_mise_en_action(effectuee)
   end
 
 

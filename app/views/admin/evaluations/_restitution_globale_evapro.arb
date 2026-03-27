@@ -1,8 +1,6 @@
-diag_risques_entreprise = restitution_globale.diag_risques_entreprise
-pourcentage_risque = nil
-if diag_risques_entreprise
-  pourcentage_risque = diag_risques_entreprise.partie.synthese["pourcentage_risque"]
-end
+diagnostic_pro = evaluation.diagnostic_pro.avec_restitution_globale(restitution_globale)
+diag_risques_entreprise = diagnostic_pro.diag_risques_entreprise
+pourcentage_risque = diagnostic_pro.pourcentage_risque
 evaluation_impact_general = nil
 
 div class: "evaluation-evapro" do
@@ -17,7 +15,7 @@ div class: "evaluation-evapro" do
     div class: "page__contenu" do
       if !pdf
         div class: "evaluation-evapro__titre-container" do
-          h1 titre_evaluation_evapro(evaluation), class: "evaluation-evapro__titre"
+          h1 evaluation.diagnostic_pro.titre, class: "evaluation-evapro__titre"
           if pourcentage_risque
             url = admin_evaluation_path(evaluation, format: :pdf)
             render(BoutonDsfrComponent.new(
@@ -31,29 +29,37 @@ div class: "evaluation-evapro" do
       end
 
       if diag_risques_entreprise && pourcentage_risque
+        risques_presenter = diagnostic_pro.risques_presenter
         render(
           partial: "mesure_des_risques",
-          locals: { pourcentage_risque: pourcentage_risque, pdf: pdf }
+          locals: { risques_presenter: risques_presenter, pdf: pdf }
         )
       end
 
       if pourcentage_risque
-        evaluation_impact_general = restitution_globale.evaluation_impact_general
-        complet = evaluation_impact_general.present?
+        evaluation_impact_general = diagnostic_pro.evaluation_impact_general
+        complet = diagnostic_pro.complet?
+        impacts_presenter = diagnostic_pro.impacts_presenter(evaluation_id: evaluation.id)
         render(
           partial: "mesure_des_impacts",
           locals: {
             evaluation_impact_general: evaluation_impact_general,
+            impacts_presenter: impacts_presenter,
             pdf: pdf,
             complet: complet
           }
         )
 
         if complet
+          couts_presenter = diagnostic_pro.couts_presenter(
+            synthese: diagnostic_pro.synthese_impact_general,
+            i18n: self
+          )
           render(
             partial: "impact_couts",
             locals: {
-              synthese: evaluation_impact_general.synthese,
+              synthese: diagnostic_pro.synthese_impact_general,
+              couts_presenter: couts_presenter,
               pdf: pdf,
               complet: complet
             }
@@ -63,7 +69,7 @@ div class: "evaluation-evapro" do
     end
   end
 
-  if diag_risques_entreprise && evaluation_impact_general.present?
+  if diagnostic_pro.affiche_bilan?
     div class: "page page__evapro adaptation-pdf" do
       if pdf
         render(Pdf::HeaderEvaproComponent.new(
@@ -77,7 +83,8 @@ div class: "evaluation-evapro" do
           partial: "bilan_evapro",
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
-            opco: restitution_globale.evaluation.opco,
+            palier_risque: diagnostic_pro.palier_risque,
+            opco: evaluation.diagnostic_pro.opco,
             pdf: pdf
           }
         )

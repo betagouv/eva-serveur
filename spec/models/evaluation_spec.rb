@@ -124,6 +124,60 @@ donnees: { "reponseIntitule" => nil }
         end
       end
     end
+
+    describe ".diagnostic" do
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+
+      it "retourne uniquement les évaluations du programme diagnostic (hors Eva Pro)" do
+        resultats = described_class.diagnostic
+
+        expect(resultats).to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_positionnement)
+        expect(resultats).not_to include(evaluation_evapro)
+      end
+    end
+
+    describe ".positionnement" do
+      let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
+      let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
+      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+
+      it "retourne uniquement les évaluations du programme positionnement" do
+        resultats = described_class.positionnement
+
+        expect(resultats).to include(evaluation_positionnement)
+        expect(resultats).not_to include(evaluation_diagnostic)
+        expect(resultats).not_to include(evaluation_evapro)
+      end
+    end
+  end
+
+  describe "#evapro?" do
+    context "quand l'évaluation est rattachée à un parcours diagnostic entreprise" do
+      let(:evaluation) { create(:evaluation, :evapro) }
+
+      it "retourne true" do
+        expect(evaluation.evapro?).to be(true)
+      end
+    end
+
+    context "quand l'évaluation est rattachée à un parcours diagnostic bénéficiaire" do
+      let(:evaluation) { create(:evaluation, :diagnostic) }
+
+      it "retourne false" do
+        expect(evaluation.evapro?).to be(false)
+      end
+    end
+
+    context "quand l'évaluation est rattachée à un parcours positionnement" do
+      let(:evaluation) { create(:evaluation, :positionnement) }
+
+      it "retourne false" do
+        expect(evaluation.evapro?).to be(false)
+      end
+    end
   end
 
   describe '#responsables_suivi' do
@@ -139,131 +193,6 @@ donnees: { "reponseIntitule" => nil }
 
     it "retourne les responsables de suivi possible pour l'évaluation" do
       expect(evaluation.responsables_suivi).to contain_exactly(compte1, compte2)
-    end
-  end
-
-  describe '#enregistre_mise_en_action' do
-    let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
-
-    context 'lorsque la mise en action existe déjà' do
-      let(:ancienne_date) { Time.zone.local(2022, 1, 1, 10, 0, 0) }
-      let!(:evaluation) do
-        create :evaluation, :avec_mise_en_action, repondue_le: ancienne_date
-      end
-
-      context "avec une remediation" do
-        before do
-          evaluation.mise_en_action.update(effectuee: true, remediation: :formation_metier)
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(false)
-          end
-          evaluation.reload
-        end
-
-        it 'met à jour la réponse et la date de reponse' do
-          expect(evaluation.mise_en_action.effectuee).to be false
-          expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
-        end
-
-        it 'efface la remediation' do
-          expect(evaluation.mise_en_action.remediation).to be_nil
-        end
-      end
-
-      context "avec une difficulté" do
-        before do
-          evaluation.mise_en_action.update(effectuee: false, difficulte: :freins_peripheriques)
-          Timecop.freeze(date_du_jour) do
-            evaluation.enregistre_mise_en_action(true)
-          end
-          evaluation.reload
-        end
-
-        it 'met à jour la réponse mais pas la date de mise en action' do
-          expect(evaluation.mise_en_action.effectuee).to be true
-          expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
-        end
-
-        it 'efface la difficulté' do
-          expect(evaluation.mise_en_action.difficulte).to be_nil
-        end
-      end
-    end
-
-    context "quand il n'y a pas de mise en action associée" do
-      let!(:evaluation) { create :evaluation }
-
-      it 'créé et enregistre true en réponse' do
-        Timecop.freeze(date_du_jour) do
-          evaluation.enregistre_mise_en_action(true)
-        end
-        expect(evaluation.mise_en_action.effectuee).to be true
-        expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
-      end
-
-      it 'créé et enregistre false en réponse' do
-        Timecop.freeze(date_du_jour) do
-          evaluation.enregistre_mise_en_action(false)
-        end
-        expect(evaluation.mise_en_action.effectuee).to be false
-        expect(evaluation.mise_en_action.repondue_le).to eq date_du_jour
-      end
-    end
-  end
-
-  describe '#a_mise_en_action?' do
-    context "quand aucune mise en action n'est associée à l'évaluation" do
-      let!(:evaluation) { create :evaluation }
-
-      it { expect(evaluation.a_mise_en_action?).to be false }
-    end
-
-    context "quand une mise en action est associée à l'évaluation" do
-      context 'quand la mise en action a été effectué' do
-        let!(:evaluation) { create :evaluation, :avec_mise_en_action }
-
-        it { expect(evaluation.a_mise_en_action?).to be true }
-      end
-
-      context "quand la mise en action n'a pas été effectué" do
-        let!(:evaluation) { create :evaluation, :avec_mise_en_action, effectuee: false }
-
-        it { expect(evaluation.reload.a_mise_en_action?).to be true }
-      end
-    end
-  end
-
-  describe '#tableau_de_bord_mises_en_action' do
-    let(:compte_admin) { create :compte_admin }
-    let(:campagne) { create :campagne, compte: compte_admin }
-    let!(:evaluation_sans_mise_en_action) do
-      create :evaluation,
-             synthese_competences_de_base: :illettrisme_potentiel,
-             completude: 'complete',
-             campagne: campagne
-    end
-    let!(:evaluation_sans_difficulte) do
-      create :evaluation, :avec_mise_en_action,
-             effectuee: false,
-             synthese_competences_de_base: :illettrisme_potentiel,
-             campagne: campagne
-    end
-    let!(:evaluation_ni_ni) do
-      create :evaluation, synthese_competences_de_base: :ni_ni, campagne: campagne
-    end
-    let!(:evaluation_sans_dispositif) do
-      create :evaluation, :avec_mise_en_action,
-             synthese_competences_de_base: :illettrisme_potentiel,
-             campagne: campagne
-    end
-    let!(:evaluation_autre_compte) do
-      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel
-    end
-
-    it 'retourne les évaluations de mises en action pour le tableau de bord' do
-      ability = Ability.new(compte_admin)
-      expect(described_class.tableau_de_bord_mises_en_action(ability).pluck(:id))
-        .to eq [ evaluation_sans_mise_en_action.id ]
     end
   end
 

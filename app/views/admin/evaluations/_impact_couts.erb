@@ -1,15 +1,16 @@
-<% contenu_cout = contenu_cout(synthese) %>
-<% explication_strategie = explication_strategie(synthese) %>
-<% explication_numerique = explication_numerique(synthese) %>
-<% resultat_strategie_lettre = lettre_score_strategie(synthese) %>
-<% resultat_numerique_lettre = lettre_score_numerique(synthese) %>
+<% couts_presenter ||= evaluation.diagnostic_pro.avec_restitution_globale(restitution_globale).couts_presenter(synthese: synthese, i18n: self) %>
+<% contenu_cout = couts_presenter.contenu_cout %>
+<% explication_strategie = couts_presenter.explication_strategie %>
+<% explication_numerique = couts_presenter.explication_numerique %>
+<% resultat_strategie_lettre = couts_presenter.lettre_score_strategie %>
+<% resultat_numerique_lettre = couts_presenter.lettre_score_numerique %>
 
 <div id="evaluation-impact-couts">
   <h2 class="evaluation__titre">Coûts</h2>
   <div class="couts">
     <% if synthese[:score_cout] && contenu_cout.present? %>
       <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: palier_score_cout(synthese[:score_cout]),
+        palier: couts_presenter.palier_score_cout(synthese[:score_cout]),
         chiffre: contenu_cout[:titre],
         suffixe: "de votre masse salariale",
         explications: {

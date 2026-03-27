@@ -167,30 +167,12 @@ question_redaction_id)
     accessible_by(ability).non_anonymes.order(created_at: :desc)
   end
 
-  def self.tableau_de_bord_mises_en_action(ability)
-    accessible_by(ability).illettrisme_potentiel
-                          .sans_mise_en_action
-                          .competences_de_base_completes
-                          .non_anonymes
-                          .order(created_at: :desc)
-                          .includes(:mise_en_action)
-  end
-
   def enregistre_mise_en_action(effectuee)
-    mise_en_action = MiseEnAction.find_or_initialize_by(evaluation: self)
-    mise_en_action.effectuee = effectuee
-    mise_en_action.repondue_le = Time.zone.now
-
-    if effectuee
-      mise_en_action.difficulte = nil
-    else
-      mise_en_action.remediation = nil
-    end
-    mise_en_action.save
+    passation_beneficiaire&.enregistre_mise_en_action(effectuee)
   end
 
   def a_mise_en_action?
-    @a_mise_en_action ||= mise_en_action.present?
+    passation_beneficiaire&.a_mise_en_action? == true
   end
 
   def illettrisme_potentiel?
@@ -199,21 +181,39 @@ question_redaction_id)
   end
 
   def opco_financeur
-    structure = campagne&.compte&.structure
-    return if structure.blank?
-
-    structure.opco_financeur
+    diagnostic_pro&.opco_financeur
   end
 
   def opco
-    structure = campagne&.compte&.structure
-    return if structure.blank?
-
-    structure.opco
+    diagnostic_pro&.opco
   end
 
-  def evaluation_evapro?
-    campagne.parcours_type.type_de_programme == "diagnostic_entreprise"
+  def context
+    @context ||= Context.new(self)
+  end
+
+  def evapro?
+    context.pro?
+  end
+
+  def usage
+    if evapro?
+      Evaluations::DiagnosticPro.new(self)
+    else
+      passation_beneficiaire
+    end
+  end
+
+  def passation_beneficiaire
+    return if evapro?
+
+    @passation_beneficiaire ||= Evaluations::PassationBeneficiaire.new(self)
+  end
+
+  def diagnostic_pro
+    return unless evapro?
+
+    @diagnostic_pro ||= Evaluations::DiagnosticPro.new(self)
   end
 
   private

@@ -1,16 +1,12 @@
-<%
-  palier = palier_pourcentage_risque(pourcentage_risque)
-  lettre = palier_to_lettre(palier)
-%>
 <div id="diag-risques-entrerpise">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <%= render Evaluation::MesureChiffreCleComponent.new(
-    palier: palier,
+    palier: risques_presenter.palier,
     prefixe: t(".prefixe"),
-    chiffre: "#{pourcentage_risque} %",
+    chiffre: "#{risques_presenter.pourcentage_risque} %",
     explications: {
-      texte: t(".explication.texte.#{lettre}"),
-      suite: t(".explication.suite.#{lettre}")
+      texte: t(".explication.texte.#{risques_presenter.lettre}"),
+      suite: t(".explication.suite.#{risques_presenter.lettre}")
     }
   ) %>
 </div>

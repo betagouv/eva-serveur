@@ -4,6 +4,7 @@ class Opco < ApplicationRecord
   scope :financeurs, -> { where(financeur: true) }
   before_validation :normalise_idcc
   has_many :opco_parcours_types, dependent: :destroy
+  has_many :parcours_types, through: :opco_parcours_types
 
   accepts_nested_attributes_for :opco_parcours_types, allow_destroy: true
 

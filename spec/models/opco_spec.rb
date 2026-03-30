@@ -6,6 +6,7 @@ RSpec.describe Opco, type: :model do
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to have_one_attached(:logo) }
   it { is_expected.to have_one_attached(:visuel_offre_services) }
+  it { is_expected.to have_many(:opco_parcours_types).dependent(:destroy) }
 
   describe "#supprime_visuel_offre_services" do
     let(:opco) { create(:opco) }

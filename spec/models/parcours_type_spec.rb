@@ -5,6 +5,7 @@ describe ParcoursType, type: :model do
   it { is_expected.to validate_presence_of :duree_moyenne }
   it { is_expected.to validate_presence_of :nom_technique }
   it { is_expected.to validate_uniqueness_of :nom_technique }
+  it { is_expected.to have_many(:opco_parcours_types).dependent(:destroy) }
 
   it 'retourne false lorsque la configuration du parcours type ne contient pas la livraison' do
     parcours_type_sans_livraison = create :parcours_type

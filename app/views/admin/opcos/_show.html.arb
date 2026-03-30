@@ -32,16 +32,18 @@ fallback: "Aucun visuel")
   row :created_at
 end
 
-panel "Parcours types associés" do
-  parcours_types = opco.parcours_types.order(:libelle)
+if current_compte.superadmin?
+  panel "Parcours types associés" do
+    parcours_types = opco.parcours_types.order(:libelle)
 
-  if parcours_types.any?
-    table_for parcours_types do
-      column :libelle do |parcours_type|
-        link_to parcours_type.libelle, admin_parcours_type_path(parcours_type)
+    if parcours_types.any?
+      table_for parcours_types do
+        column :libelle do |parcours_type|
+          link_to parcours_type.libelle, admin_parcours_type_path(parcours_type)
+        end
       end
+    else
+      span "Aucun parcours type associé"
     end
-  else
-    span "Aucun parcours type associé"
   end
 end

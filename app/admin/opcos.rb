@@ -3,7 +3,10 @@ ActiveAdmin.register Opco do
 
   permit_params :nom, :financeur, :logo, :telephone, :url, :email, :url_contact,
                 :visuel_offre_services, :supprimer_visuel_offre_services, :url_offre_services,
-                :idcc_texte
+                :idcc_texte,
+                opco_parcours_types_attributes: [
+                  :id, :parcours_type_id, :_destroy
+                ]
 
   filter :nom
   filter :financeur
@@ -46,6 +49,18 @@ ActiveAdmin.register Opco do
               hint: I18n.t("formtastic.hints.opco.idcc")
       f.input :url_offre_services
       render partial: "admin/opcos/form_visuel_offre_services", locals: { f: f }
+      f.has_many :opco_parcours_types, heading: "Ajouter des parcours types",
+                                       new_record: "Ajouter un parcours type",
+                                       allow_destroy: true do |opco_parcours_type|
+        erreurs_parcours_type = opco_parcours_type.object
+                                                  .errors
+                                                  .full_messages_for(:parcours_type_id)
+
+        opco_parcours_type.input :parcours_type_id,
+                                 as: :select,
+                                 collection: ParcoursType.order(:libelle),
+                                 error: erreurs_parcours_type.presence
+      end
     end
     f.actions
   end

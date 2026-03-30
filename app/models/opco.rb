@@ -3,6 +3,9 @@ class Opco < ApplicationRecord
   validate :url_offre_services_doit_etre_une_url_http_ou_https
   scope :financeurs, -> { where(financeur: true) }
   before_validation :normalise_idcc
+  has_many :opco_parcours_types, dependent: :destroy
+
+  accepts_nested_attributes_for :opco_parcours_types, allow_destroy: true
 
   has_one_attached :logo do |attachable|
     attachable.variant :defaut,

@@ -8,6 +8,7 @@ class ParcoursType < ApplicationRecord
   has_many :situations_configurations, lambda {
                                          order(position: :asc)
                                        }, dependent: :destroy
+  has_many :opco_parcours_types, dependent: :destroy
   accepts_nested_attributes_for :situations_configurations, allow_destroy: true
 
   enum :type_de_programme, TYPES_DE_PROGRAMME.zip(TYPES_DE_PROGRAMME.map(&:to_s)).to_h

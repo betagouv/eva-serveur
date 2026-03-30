@@ -23,6 +23,10 @@ fr:
               blank: Le nom ne peut pas être vide
             url_offre_services:
               invalid: n'est pas une URL valide (http ou https)
+        opco_parcours_type:
+          attributes:
+            parcours_type_id:
+              deja_associe_a_cet_opco: Ce parcours type est déjà associé à cet OPCO
   formtastic:
     actions:
       opco:

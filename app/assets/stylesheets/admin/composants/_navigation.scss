@@ -33,8 +33,13 @@
   .fr-nav__btn:active,
   .fr-nav__link:hover,
   .fr-nav__link:active {
-    background: var(--background-raised-grey-hover);
+    @include light-decisions-background-transparent-hover;
+
     color: var(--text-active-blue-france) !important;
+  }
+
+  .fr-enlarge-link:hover {
+    @include light-decisions-background-transparent-hover;
   }
 
   .fr-nav__btn:not(.disabled):hover,

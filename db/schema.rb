@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_12_120001) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_30_130653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -300,6 +300,15 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_12_120001) do
     t.string "url_offre_services"
   end
 
+  create_table "opcos_parcours_type", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "opco_id", null: false
+    t.uuid "parcours_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["opco_id"], name: "index_opcos_parcours_type_on_opco_id"
+    t.index ["parcours_type_id"], name: "index_opcos_parcours_type_on_parcours_type_id"
+  end
+
   create_table "parcours_type", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "libelle"
     t.string "nom_technique"
@@ -478,6 +487,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_12_120001) do
   add_foreign_key "invitations", "comptes", column: "invitant_id"
   add_foreign_key "invitations", "structures"
   add_foreign_key "mises_en_action", "evaluations", on_delete: :cascade
+  add_foreign_key "opcos_parcours_type", "opcos"
+  add_foreign_key "opcos_parcours_type", "parcours_type"
   add_foreign_key "parties", "evaluations", on_delete: :cascade
   add_foreign_key "parties", "situations", on_delete: :cascade
   add_foreign_key "questionnaires_questions", "questionnaires"

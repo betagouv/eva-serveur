@@ -20,7 +20,7 @@
             <% end %>
             <% if affiche_navigation? || affiche_actions_connexion? %>
               <div class="fr-header__navbar">
-                <button class="fr-btn fr-btn--menu fr-header__menu-btn"
+                <button class="fr-btn fr-btn--menu fr-btn--secondary fr-header__menu-btn"
                         type="button"
                         id="header-menu-btn"
                         data-fr-opened="false"
@@ -70,7 +70,7 @@
   <% if affiche_navigation? || affiche_actions_connexion? %>
     <div class="fr-header__menu fr-modal" id="header-menu" aria-labelledby="header-menu-btn">
       <div class="fr-container">
-        <button type="button" class="fr-btn fr-btn--close" aria-controls="header-menu" title="Fermer">Fermer</button>
+        <button type="button" class="fr-btn fr-btn--close fr-btn--tertiary" aria-controls="header-menu" title="Fermer">Fermer</button>
         <% if affiche_navigation? %>
           <%= render NavigationComponent.new(links: @nav_links, current_compte: @current_compte) %>
         <% end %>

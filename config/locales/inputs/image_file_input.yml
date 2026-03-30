@@ -1,0 +1,5 @@
+fr:
+  formtastic:
+    inputs:
+      image_file:
+        retirer_fichier_selectionne: Retirer le fichier sélectionné

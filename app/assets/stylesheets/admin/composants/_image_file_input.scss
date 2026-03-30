@@ -1,0 +1,23 @@
+.image-file-input-with-clear {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.image-file-input-with-clear .fr-upload[type="file"] {
+  flex: 1 1 18rem;
+  min-width: 18rem;
+  max-width: 100%;
+}
+
+.image-file-input-with-clear__btn {
+  flex-shrink: 0;
+}
+
+// DSFR applique une mise en page "upload group" qui peut aligner le champ à droite.
+// Dans ActiveAdmin, on veut conserver un layout vertical (label + hint + champ en dessous).
+li.image_file.fr-upload-group {
+  display: block;
+}

@@ -26,8 +26,10 @@ describe ImageFileInput, type: :input do
       it "enveloppe le champ fichier dans un conteneur avec bouton masqué" do
         expect(html).to have_css(".image-file-input-with-clear")
         expect(html).to have_css(".image-file-input-with-clear input.fr-upload[type='file']")
-        expect(html).to have_css("button.image-file-input-with-clear__btn[type='button']", visible: :all)
-        expect(html).to have_css("button[aria-label='Retirer le fichier sélectionné']", visible: :all)
+        expect(html).to have_css("button.image-file-input-with-clear__btn[type='button']",
+visible: :all)
+        expect(html).to have_css("button[aria-label='Retirer le fichier sélectionné']",
+visible: :all)
         expect(html).to have_css("button[data-image-file-clear]", visible: :all)
         bouton = html.find("button.image-file-input-with-clear__btn", visible: :all)
         expect(bouton[:hidden]).to be_present

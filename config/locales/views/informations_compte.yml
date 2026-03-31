@@ -30,7 +30,7 @@ fr:
         titre_parametrage: Paramétrage
         sous_titre_intro_non_presente: "Nous avons trouvé les informations administratives correspondant à ce numéro SIRET. Pour utiliser ce service, cette structure doit d’abord être créée."
         titre_intro_presente: Rejoindre une structure existante
-        sous_titre_intro_presente: "Nous avons trouvé une structure correspondant à ce numéro SIRET. Vérifiez qu’il s’agit bien de votre organisation."
+        sous_titre_intro_presente: "Nous avons trouvé une structure correspondant à vos informations. Vérifiez qu’il s’agit bien de votre organisation."
         titre_carte: Informations administratives trouvées
         sous_titre_carte: "Vérifiez que ces informations correspondent bien à votre structure :"
         titre_siret_multiple: Plusieurs structures sont associées à ce SIRET
@@ -40,7 +40,7 @@ fr:
           titre: Création de votre structure
         rejoindre_structure:
           titre: Rejoindre une structure existante
-          sous_titre: Pour utiliser le service, nous avons besoin de compléter quelques informations sur votre structure.
+          sous_titre: "Nous avons trouvé une structure correspondant à vos informations. Vérifiez qu’il s’agit bien de votre organisation."
         parametrage:
           titre: Créer la structure
           sous_titre: "Pour utiliser le service, nous avons besoin de compléter quelques informations sur votre structure."

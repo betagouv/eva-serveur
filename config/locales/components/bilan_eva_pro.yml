@@ -1,11 +1,11 @@
 fr:
   bilan_eva_pro:
-    prefixe: "Votre situation"
+    prefixe: "Recommandation"
     chiffre_cle:
-      A - Très bon: "Rassurante"
-      B - Bon: "À surveiller"
-      C - Moyen: "Préoccupante"
-      D - Mauvais: "Critique"
+      A - Très bon: "Vigilance"
+      B - Bon: "Prévention"
+      C - Moyen: "Priorisation"
+      D - Mauvais: "Action rapide"
     explication:
       A - Très bon: |
         Votre évaluation révèle que le risque de présence de difficultés avec les compétences est faible dans votre organisation.

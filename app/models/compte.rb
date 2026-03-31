@@ -138,6 +138,12 @@ class Compte < ApplicationRecord
     id_pro_connect.present?
   end
 
+  def cree_via_invitation_acceptee?
+    return false unless persisted?
+
+    Invitation.acceptee.exists?(compte_id: id)
+  end
+
   private
 
   def verifie_etat_si_structure_manquante

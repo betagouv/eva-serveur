@@ -11,12 +11,14 @@
 <div class="page-nouveau-compte">
   <% if @invitation.present? %>
     <div class="fr-mb-4w">
-      <%= render MiseEnAvantComponent.new(
-            titre: t(".invitation_mise_en_avant_titre", nom_structure: @invitation.structure.display_name),
-            description: t(".invitation_mise_en_avant_description"),
-            icone: "information-line",
-            classes: [ "fr-mb-0" ]
-          ) %>
+      <%= dsfr_alert(
+            type: :info,
+            title: t(".invitation_alerte_titre", nom_structure: @invitation.structure.display_name),
+            close_button: true,
+            html_attributes: { class: "fr-mb-0" }
+          ) do %>
+        <%= t(".invitation_alerte_description") %>
+      <% end %>
     </div>
   <% end %>
 
@@ -71,8 +73,7 @@
                 method: :email,
                 type: "email",
                 required: true,
-                autocomplete: "email",
-                input_html: @invitation.present? ? { readonly: true } : {}
+                autocomplete: "email"
               ) %>
             </div>
 

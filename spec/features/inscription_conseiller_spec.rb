@@ -68,21 +68,29 @@ describe 'Création de compte conseiller', type: :feature do
 
   context "redirection de l'ancien lien d'inscription Devise vers l'embarquement v2" do
     let!(:invitation) do
-      create(:invitation, structure: structure, invitant: create(:compte_admin, structure: structure),
-                         email_destinataire: "redirect-test@eva.fr")
+      invitant = create(:compte_admin, structure: structure)
+      create(:invitation,
+             structure: structure,
+             invitant: invitant,
+             email_destinataire: "redirect-test@eva.fr")
     end
 
     it "redirige vers inscription/nouveau_compte avec le token" do
       visit new_compte_registration_path(invitation_token: invitation.token)
-      expect(page).to have_current_path(inscription_nouveau_compte_path(invitation_token: invitation.token),
-                                         ignore_query: false)
+      expect(page).to have_current_path(
+        inscription_nouveau_compte_path(invitation_token: invitation.token),
+        ignore_query: false
+      )
     end
   end
 
   context "avec un lien d'invitation (token à usage unique)" do
     let!(:invitation) do
-      create(:invitation, structure: structure, invitant: create(:compte_admin, structure: structure),
-                         email_destinataire: "monemail-invitation@eva.fr")
+      invitant = create(:compte_admin, structure: structure)
+      create(:invitation,
+             structure: structure,
+             invitant: invitant,
+             email_destinataire: "monemail-invitation@eva.fr")
     end
 
     before do

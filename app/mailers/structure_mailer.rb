@@ -4,7 +4,7 @@ class StructureMailer < ApplicationMailer
     @invitant = @invitation.invitant
     @structure = @invitation.structure
     @message_personnalise = @invitation.message_personnalise
-    @lien_invitation = new_compte_registration_url(invitation_token: @invitation.token)
+    @lien_invitation = inscription_nouveau_compte_url(invitation_token: @invitation.token)
 
     mail(
       to: @invitation.email_destinataire,

@@ -2,6 +2,12 @@ module Eva
   module Devise
     class RegistrationsController < ActiveAdmin::Devise::RegistrationsController
       def new
+        if params[:invitation_token].present?
+          redirect_to inscription_nouveau_compte_path(invitation_token: params[:invitation_token]),
+                      status: :see_other
+          return
+        end
+
         structure = structure_pour_inscription
         return if performed?
         return redirect_to structures_path unless structure
@@ -46,12 +52,17 @@ module Eva
         charge_et_valide_invitation
         return if performed?
 
-        @compte = Compte.new(compte_parametres_invitation)
-        if enregistre_compte?
-          @invitation.marquer_acceptee!(@compte)
-          sign_in_et_redirige
+        resultat = CreationCompteDepuisInvitationService.new(
+          invitation: @invitation,
+          parametres_compte: compte_parametres,
+          verification_recaptcha: ->(c) { verify_recaptcha(model: c) }
+        ).appeler
+
+        if resultat.succes
+          @compte = resultat.compte
+          sign_in_et_redirige_inscription
         else
-          self.resource = @compte
+          self.resource = resultat.compte
           render :new
         end
       end
@@ -66,18 +77,6 @@ module Eva
         end
       end
 
-      def compte_parametres_invitation
-        compte_parametres.merge(
-          structure_id: @invitation.structure_id,
-          role: @invitation.role_pour_compte,
-          statut_validation: invitant_autorise_validation_directe? ? "acceptee" : "en_attente"
-        )
-      end
-
-      def invitant_autorise_validation_directe?
-        @invitation.invitant.au_moins_admin?
-      end
-
       def enregistre_compte?
         verify_recaptcha(model: @compte) && @compte.save
       end
@@ -85,6 +84,12 @@ module Eva
       def sign_in_et_redirige
         sign_in @compte
         redirect_to admin_dashboard_path, notice: I18n.t("devise.registrations.signed_up")
+      end
+
+      def sign_in_et_redirige_inscription
+        sign_in @compte
+        redirect_to inscription_informations_compte_path,
+                    notice: I18n.t("devise.registrations.signed_up")
       end
     end
   end

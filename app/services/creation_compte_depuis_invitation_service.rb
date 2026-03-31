@@ -23,7 +23,8 @@ class CreationCompteDepuisInvitationService
 
   def construire_compte
     attrs = @parametres_compte.to_h.symbolize_keys
-    attrs[:email] = @invitation.email_destinataire.to_s.strip.downcase
+    email_saisi = attrs[:email].to_s.strip.downcase
+    attrs[:email] = email_saisi.presence || @invitation.email_destinataire.to_s.strip.downcase
     Compte.new(attrs.merge(attributs_invitation))
   end
 

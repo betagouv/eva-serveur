@@ -78,6 +78,23 @@ describe Compte do
   it { expect(described_class.new(prenom: "Pepa", nom: "Pig").display_name).to eql("Pepa Pig") }
   it { expect(described_class.new.display_name).to eql("") }
 
+  describe "#cree_via_invitation_acceptee?" do
+    it "retourne false sans compte persisté" do
+      expect(build(:compte)).not_to be_cree_via_invitation_acceptee
+    end
+
+    it "retourne false sans invitation acceptée liée" do
+      expect(create(:compte)).not_to be_cree_via_invitation_acceptee
+    end
+
+    it "retourne vrai lorsqu'une invitation acceptée référence le compte" do
+      compte = create(:compte)
+      create(:invitation, :acceptee, compte: compte, structure: create(:structure_locale),
+             invitant: create(:compte_admin))
+      expect(compte.reload).to be_cree_via_invitation_acceptee
+    end
+  end
+
   it do
     expect(described_class.new(email: "pepa@france5.fr").display_name)
       .to eql("pepa@france5.fr")

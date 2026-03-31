@@ -20,7 +20,7 @@ class Inscription::InformationsComptesController < ApplicationController
   private
 
   def compte_parametres
-    parametres = params.require(:compte).permit(:nom, :prenom, :email, :fonction,
+    params.require(:compte).permit(:nom, :prenom, :email, :fonction,
 :service_departement, :cgu_acceptees)
   end
 

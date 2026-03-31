@@ -283,6 +283,21 @@ input[type="button"].fr-btn {
   min-width: fit-content;
 }
 
+// Le DSFR masque le libellé du bouton fermer des alertes via max-width + overflow ;
+// min-width: fit-content ci-dessus gagne sur max-width et affiche « Masquer le message » en entier.
+.fr-alert .fr-btn--close {
+  min-width: unset;
+  border: none;
+  box-shadow: none;
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    border: none;
+    box-shadow: none;
+  }
+}
+
 button *,
 button.fr-btn * {
   font-family: inherit;
@@ -312,7 +327,7 @@ form input[type="button"].fr-btn:not(.disabled):hover,
 .fr-modal.evapro_admin input[type="submit"].fr-btn:not(.disabled):hover {
 
   &.fr-btn--primary,
-  &:not(.fr-btn--secondary, .fr-btn--tertiary) {
+  &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--close) {
     background: $blue-france-sun-113-hover;
     border-color: $blue-france-sun-113-hover;
     color: var(--text-inverted-blue-france);

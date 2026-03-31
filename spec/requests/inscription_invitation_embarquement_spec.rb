@@ -12,7 +12,7 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
   end
 
   before do
-    allow_any_instance_of(Inscription::NouveauxComptesController).to receive(:verify_recaptcha).and_return(true)
+    allow(Recaptcha).to receive(:skip_env?).and_return(true)
   end
 
   it "mène au tableau de bord après confirmation de la structure proposée" do
@@ -44,6 +44,7 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
 
     compte.reload
     expect(compte.etape_inscription).to eq("assignation_structure")
+    expect(response.body).not_to include(I18n.t("inscription.structures.show.mention_acces"))
 
     patch inscription_structure_path, params: {
       compte: {

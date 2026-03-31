@@ -21,5 +21,5 @@ fr:
         label_cgu: "J'accepte les %{cgu_lien}"
         bouton_creer: Créer mon compte
         bouton_annuler: Annuler
-        invitation_mise_en_avant_titre: Vous avez été invité(e) à rejoindre %{nom_structure}
-        invitation_mise_en_avant_description: Remplissez les informations demandées pour accéder à votre espace. Cela ne prend que quelques minutes.
+        invitation_alerte_titre: Vous avez été invité(e) à rejoindre %{nom_structure}
+        invitation_alerte_description: Remplissez les informations demandées pour accéder à votre espace. Cela ne prend que quelques minutes.

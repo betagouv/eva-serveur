@@ -1,4 +1,4 @@
-# Construit l'objet des syntheses Eva Pro (taux de risque, couts) pour l'index
+# Construit l'objet des syntheses Eva Pro pour l'index (et l'export XLS)
 # des evaluations, a partir des parties deja persistees (sans FabriqueRestitution).
 class SynthesesEvaproPourIndex
   def self.pour(collection)
@@ -30,7 +30,13 @@ class SynthesesEvaproPourIndex
   end
 
   def initialise_resultat
-    ids_evaluations.index_with { |_| { pourcentage_risque: nil, score_cout: nil } }
+    ids_evaluations.index_with do |_|
+      {
+        pourcentage_risque: nil,
+        score_cout: nil,
+        synthese_impact: {}
+      }
+    end
   end
 
   def ajoute_synthese_si_pertinent(partie, resultat)
@@ -38,12 +44,25 @@ class SynthesesEvaproPourIndex
     return unless situation_evapro?(nom_situation)
 
     ligne = resultat[partie.evaluation_id]
+    return if ligne.nil?
 
-    if diag_risques?(nom_situation) && ligne[:pourcentage_risque].nil?
-      ligne[:pourcentage_risque] = extrait_pourcentage_risque(partie)
-    elsif evaluation_impact_general?(nom_situation) && ligne[:score_cout].nil?
-      ligne[:score_cout] = extrait_score_cout(partie)
-    end
+    ajoute_pourcentage_risque_si_necessaire(ligne, nom_situation, partie)
+    ajoute_synthese_impact_si_necessaire(ligne, nom_situation, partie)
+  end
+
+  def ajoute_pourcentage_risque_si_necessaire(ligne, nom_situation, partie)
+    return unless diag_risques?(nom_situation)
+    return unless ligne[:pourcentage_risque].nil?
+
+    ligne[:pourcentage_risque] = extrait_pourcentage_risque(partie)
+  end
+
+  def ajoute_synthese_impact_si_necessaire(ligne, nom_situation, partie)
+    return unless evaluation_impact_general?(nom_situation)
+    return unless ligne[:synthese_impact].blank?
+
+    ligne[:synthese_impact] = extrait_synthese_impact(partie)
+    ligne[:score_cout] = extrait_score_cout(partie)
   end
 
   def situation_evapro?(nom_situation)
@@ -66,5 +85,9 @@ class SynthesesEvaproPourIndex
   def extrait_score_cout(partie)
     synthese = partie.synthese || {}
     (synthese["score_cout"] || synthese[:score_cout])&.to_s
+  end
+
+  def extrait_synthese_impact(partie)
+    (partie.synthese || {}).with_indifferent_access
   end
 end

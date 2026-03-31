@@ -105,7 +105,8 @@ fr:
         structure: Structure
         campagne: Campagne
         debutee_le: Date
-        nom_beneficiaire: Nom bénéficiaire
+        nom_beneficiaire: Bénéficiaire
+        par: Par
         code_beneficiaire: Code bénéficiaire
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global
@@ -116,6 +117,13 @@ fr:
         positionnement_niveau_litteratie: Positionnement Littératie
         positionnement_niveau_numeratie: Positionnement Numératie
         reponses_redaction: Réponses rédaction
+        taux_risque: Taux de risque
+        performance_collective: Performance collective
+        agilite_organisationnelle: Agilité organisationnelle
+        securite_qualite: Sécurité et qualité
+        mobilite_professionnelle: Mobilité professionnelle
+        score_cout: Coûts
+        bilan_situation: Bilan de votre situation
         redaction: |
           Rédaction %{index} :
           %{reponse}

@@ -166,7 +166,7 @@ class NavigationComponent < ViewComponent::Base
     return unless can?(:manage, Compte)
 
     {
-      label: "Parcours",
+      label: "Parcours type",
       url: helpers.admin_parcours_type_index_path,
       current: current_page?(helpers.admin_parcours_type_index_path) ||
         controller_matches?("admin/parcours_types")

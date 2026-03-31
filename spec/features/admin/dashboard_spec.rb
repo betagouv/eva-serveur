@@ -222,6 +222,22 @@ describe 'Dashboard', type: :feature do
         expect(page).to have_current_path(inscription_structure_path)
       end
     end
+
+    context "quand l'étape est assignation_structure avec une structure déjà rattachée" do
+      let!(:compte) do
+        create :compte_conseiller,
+               structure: ma_structure,
+               id_pro_connect: nil,
+               statut_validation: :acceptee,
+               etape_inscription: "assignation_structure",
+               cgu_acceptees: true
+      end
+
+      it "redirige vers la page de confirmation de rattachement" do
+        visit admin_path
+        expect(page).to have_current_path(inscription_structure_path)
+      end
+    end
   end
 
   context "quand le compte a un id_pro_connect" do

@@ -6,7 +6,7 @@ describe EtapeInscription do
       include ActiveModel::Model
       include EtapeInscription
 
-      attr_accessor :etape_inscription, :structure, :id_pro_connect, :siret_pro_connect
+      attr_accessor :etape_inscription, :structure, :id_pro_connect, :siret_pro_connect, :id
 
       def update(attributes)
         attributes.each do |key, value|
@@ -35,6 +35,29 @@ describe EtapeInscription do
         objet = test_class.new(etape_inscription: "recherche_structure")
         objet.termine_preinscription!
         expect(objet.etape_inscription).to eq("recherche_structure")
+      end
+    end
+
+    context "quand l'étape est 'preinscription'" do
+      it "dirige vers assignation_structure si une invitation acceptée existe pour le compte" do
+        objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: nil, id: 9)
+        allow(Invitation).to receive(:exists?).with(compte_id: 9, statut: "acceptee").and_return(true)
+        objet.termine_preinscription!
+        expect(objet.etape_inscription).to eq("assignation_structure")
+      end
+
+      it "dirige vers recherche_structure sans siret ni invitation acceptée" do
+        objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: nil, id: 9)
+        allow(Invitation).to receive(:exists?).with(compte_id: 9, statut: "acceptee").and_return(false)
+        objet.termine_preinscription!
+        expect(objet.etape_inscription).to eq("recherche_structure")
+      end
+
+      it "dirige vers assignation_structure lorsque le siret est renseigné" do
+        objet = test_class.new(etape_inscription: "preinscription", siret_pro_connect: "123", id: 9)
+        allow(Invitation).to receive(:exists?).with(compte_id: 9, statut: "acceptee").and_return(false)
+        objet.termine_preinscription!
+        expect(objet.etape_inscription).to eq("assignation_structure")
       end
     end
   end

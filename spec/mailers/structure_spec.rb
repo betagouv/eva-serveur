@@ -72,6 +72,7 @@ structure: structure) }
         )
         expect(mail.body).to include("Bienvenue dans l&#39;équipe.")
         expect(mail.body).to include("Rejoindre la structure")
+        expect(mail.body).to include("/inscription/nouveau_compte")
         expect(mail.body).to include("invitation_token=#{invitation.token}")
       end
     end

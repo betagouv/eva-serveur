@@ -9,6 +9,17 @@
 
 <% content_for :classes_body, "page-nouveau-compte-body" %>
 <div class="page-nouveau-compte">
+  <% if @invitation.present? %>
+    <div class="fr-mb-4w">
+      <%= render MiseEnAvantComponent.new(
+            titre: t(".invitation_mise_en_avant_titre", nom_structure: @invitation.structure.display_name),
+            description: t(".invitation_mise_en_avant_description"),
+            icone: "information-line",
+            classes: [ "fr-mb-0" ]
+          ) %>
+    </div>
+  <% end %>
+
   <%= render TexteIntroComponent.new(titre: t(".titre_intro"), texte: t(".sous_titre_intro")) %>
 
   <%= render CarteV2Component.new(classes: "page-nouveau-compte-card") do %>
@@ -43,6 +54,7 @@
       <p class="identifiant-description"><%= t(".identifiant_description") %></p>
 
       <%= semantic_form_for @compte, url: inscription_nouveau_compte_path, html: { id: "nouveau-compte-form" } do |compte| %>
+        <%= hidden_field_tag :invitation_token, @invitation.token if @invitation.present? %>
         <%= compte.semantic_errors *champs_non_affiches(
           compte.object.errors.messages.keys,
           [ :prenom, :nom, :email, :telephone, :password, :password_confirmation, :fonction, :service_departement ]
@@ -59,7 +71,8 @@
                 method: :email,
                 type: "email",
                 required: true,
-                autocomplete: "email"
+                autocomplete: "email",
+                input_html: @invitation.present? ? { readonly: true } : {}
               ) %>
             </div>
 
@@ -89,6 +102,9 @@
             </div>
 
             <div class="fr-col-12">
+              <% if @invitation.present? %>
+                <%= recaptcha_tags %>
+              <% end %>
               <div class="informations-compte-actions">
                 <%= render BoutonDsfrComponent.new(new_compte_session_path, type: :tertiary) do %>
                   <%= t(".bouton_annuler") %>

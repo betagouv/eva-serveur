@@ -95,7 +95,7 @@ status: :forbidden
       invitant: current_compte,
       role: Compte::ROLE_PAR_DEFAUT
     )
-    url = new_compte_registration_url(invitation_token: invitation.token)
+    url = inscription_nouveau_compte_url(invitation_token: invitation.token)
     render json: { url: url }
   end
 

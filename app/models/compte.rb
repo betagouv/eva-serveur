@@ -142,6 +142,7 @@ class Compte < ApplicationRecord
 
   def verifie_etat_si_structure_manquante
     return if structure.present? || deleted?
+    return if etape_inscription.in?(%w[recherche_structure assignation_structure])
 
     unless validation_en_attente?
       errors.add(:statut_validation,

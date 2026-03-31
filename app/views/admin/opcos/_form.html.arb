@@ -1,0 +1,33 @@
+active_admin_form_for [ :admin, resource ] do |f|
+  f.inputs do
+    f.input :nom, hint: I18n.t("formtastic.hints.opco.nom")
+    f.input :financeur, as: :toggle
+    f.input :logo, as: :image_file
+    f.input :telephone
+    f.input :email
+    f.input :url
+    f.input :url_contact
+    f.object.idcc_texte = f.object.idcc.join(", ")
+    f.input :idcc_texte,
+            label: Opco.human_attribute_name(:idcc),
+            as: :string,
+            hint: I18n.t("formtastic.hints.opco.idcc")
+    f.input :url_offre_services
+    render partial: "admin/opcos/form_visuel_offre_services", locals: { f: f }
+    if current_compte.superadmin?
+      f.has_many :opco_parcours_types, heading: "Ajouter des parcours types",
+                                       new_record: "Ajouter un parcours type",
+                                       allow_destroy: true do |opco_parcours_type|
+        erreurs_parcours_type = opco_parcours_type.object
+                                                  .errors
+                                                  .full_messages_for(:parcours_type_id)
+
+        opco_parcours_type.input :parcours_type_id,
+                                 as: :select,
+                                 collection: ParcoursType.order(:libelle),
+                                 error: erreurs_parcours_type.presence
+      end
+    end
+  end
+  f.actions
+end

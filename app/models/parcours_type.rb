@@ -40,11 +40,6 @@ class ParcoursType < ApplicationRecord
     nom_technique.start_with?("eva-entreprise-")
   end
 
-  def self.pour_opco(opco)
-    prefixe_nom_technique = "#{NOM_TECHNIQUE_GENERIQUE}-#{opco.slug}"
-    where("nom_technique LIKE ?", "#{prefixe_nom_technique}%")
-  end
-
   def self.find_evapro_generique!
     find_by!(nom_technique: NOM_TECHNIQUE_GENERIQUE)
   end

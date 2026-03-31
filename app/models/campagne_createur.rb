@@ -27,7 +27,7 @@ class CampagneCreateur
   end
 
   def cree_campagnes_opco_financeur
-    parcours_types = ParcoursType.pour_opco(premier_opco_financeur)
+    parcours_types = premier_opco_financeur.parcours_types
     return if parcours_types.empty?
 
     parcours_types.each do |parcours_type|

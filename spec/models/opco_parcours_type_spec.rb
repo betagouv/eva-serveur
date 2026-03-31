@@ -15,10 +15,12 @@ describe OpcoParcoursType, type: :model do
 
     it "retourne un message explicite quand l'association existe déjà" do
       doublon = build(:opco_parcours_type, opco: opco, parcours_type: parcours_type)
+      message = "activerecord.errors.models.opco_parcours_type." \
+                        "attributes.parcours_type_id.deja_associe_a_cet_opco"
 
       expect(doublon).not_to be_valid
       expect(doublon.errors[:parcours_type_id]).to include(
-        I18n.t("activerecord.errors.models.opco_parcours_type.attributes.parcours_type_id.deja_associe_a_cet_opco")
+        I18n.t(message)
       )
     end
 

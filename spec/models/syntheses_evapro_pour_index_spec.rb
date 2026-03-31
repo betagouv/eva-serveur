@@ -20,7 +20,11 @@ RSpec.describe SynthesesEvaproPourIndex do
         resultat = described_class.pour(collection)
 
         expect(resultat.keys).to eq([ evaluation.id ])
-        expect(resultat[evaluation.id]).to eq(pourcentage_risque: nil, score_cout: nil)
+        expect(resultat[evaluation.id]).to eq(
+          pourcentage_risque: nil,
+          score_cout: nil,
+          synthese_impact: {}
+        )
       end
     end
 
@@ -40,6 +44,7 @@ RSpec.describe SynthesesEvaproPourIndex do
 
         expect(resultat[evaluation.id][:pourcentage_risque]).to eq(25)
         expect(resultat[evaluation.id][:score_cout]).to be_nil
+        expect(resultat[evaluation.id][:synthese_impact]).to eq({})
       end
     end
 
@@ -51,14 +56,26 @@ RSpec.describe SynthesesEvaproPourIndex do
         create(:partie,
                evaluation: evaluation,
                situation: situation_impact,
-               synthese: { "score_cout" => "fort" })
+               synthese: {
+                 "score_cout" => "fort",
+                 "performance_collective" => "faible",
+                 "agilite_organisationnelle" => "moyen",
+                 "securite_qualite" => "fort",
+                 "mobilite_professionnelle" => "tres_fort"
+               })
       end
 
-      it "remplit score_cout pour cette évaluation" do
+      it "remplit score_cout et les impacts pour cette évaluation" do
         resultat = described_class.pour(collection)
 
         expect(resultat[evaluation.id][:pourcentage_risque]).to be_nil
         expect(resultat[evaluation.id][:score_cout]).to eq("fort")
+        expect(resultat[evaluation.id][:synthese_impact]).to include(
+          "performance_collective" => "faible",
+          "agilite_organisationnelle" => "moyen",
+          "securite_qualite" => "fort",
+          "mobilite_professionnelle" => "tres_fort"
+        )
       end
     end
 
@@ -79,13 +96,23 @@ RSpec.describe SynthesesEvaproPourIndex do
         create(:partie,
                evaluation: evaluation,
                situation: situation_impact,
-               synthese: { "score_cout" => "moyen" })
+               synthese: {
+                 "score_cout" => "moyen",
+                 "performance_collective" => "fort"
+               })
       end
 
       it "retourne les deux indicateurs pour l’évaluation" do
         resultat = described_class.pour(collection)
 
-        expect(resultat[evaluation.id]).to eq(pourcentage_risque: 10, score_cout: "moyen")
+        expect(resultat[evaluation.id]).to eq(
+          pourcentage_risque: 10,
+          score_cout: "moyen",
+          synthese_impact: {
+            "score_cout" => "moyen",
+            "performance_collective" => "fort"
+          }.with_indifferent_access
+        )
       end
     end
   end

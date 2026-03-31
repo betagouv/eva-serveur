@@ -119,6 +119,7 @@ ActiveAdmin.register Evaluation do
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:debutee_le) { |evaluation| I18n.l(evaluation.debutee_le, format: :sans_heure) }
     column("nom_beneficiaire") { |evaluation| evaluation.beneficiaire.nom }
+    column("par") { |evaluation| evaluation.beneficiaire.nom }
     column("code_beneficiaire") { |evaluation| evaluation.beneficiaire.code_beneficiaire }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
@@ -128,12 +129,10 @@ ActiveAdmin.register Evaluation do
     column(:niveau_cnef) { |evaluation| trad_niveau(evaluation, :niveau_cnef) }
     column(:niveau_anlci_litteratie) { |e| trad_niveau(e, :niveau_anlci_litteratie) }
     column(:niveau_anlci_numeratie) { |e| trad_niveau(e, :niveau_anlci_numeratie) }
-    column(:positionnement_niveau_litteratie) do |evaluation|
-      trad_niveau(evaluation, :positionnement_niveau_litteratie)
-    end
-    column(:positionnement_niveau_numeratie) do |evaluation|
-      trad_niveau(evaluation, :positionnement_niveau_numeratie)
-    end
+    column(:positionnement_niveau_litteratie) { |e|
+      trad_niveau(e, :positionnement_niveau_litteratie) }
+    column(:positionnement_niveau_numeratie) { |e|
+      trad_niveau(e, :positionnement_niveau_numeratie) }
     column("reponses_redaction") do |evaluation|
       evaluation.redactions
         &.map
@@ -142,14 +141,19 @@ ActiveAdmin.register Evaluation do
         }
         &.join("\n-----\n")
     end
+    column("taux_risque") { |e| taux_risque_pour_xls(e) }
+    column("performance_collective") { |e| impact_evapro_pour_xls(e, :performance_collective) }
+    column("agilite_organisationnelle") { |e|
+      impact_evapro_pour_xls(e, :agilite_organisationnelle) }
+    column("securite_qualite") { |e| impact_evapro_pour_xls(e, :securite_qualite) }
+    column("mobilite_professionnelle") { |e| impact_evapro_pour_xls(e, :mobilite_professionnelle) }
+    column("score_cout") { |e| score_cout_pour_xls(e) }
+    column("bilan_situation") { |e| recommandation_risque_pour_xls(e) }
 
     before_filter do |sheet|
-      if @collection.count > ImportExport::ExportXls::NOMBRE_MAX_LIGNES
-        sheet << [
-          I18n.t("active_admin.export.limite_atteinte", limite: ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
-        ]
-        @collection = @collection.limit!(ImportExport::ExportXls::NOMBRE_MAX_LIGNES)
-      end
+      xls_configuration = Admin::Evaluations::XlsConfiguration.new
+      xls_configuration.masquer_colonnes_non_visibles(sheet: sheet, compte: current_compte)
+      xls_configuration.appliquer_limite!(sheet: sheet, collection: @collection)
     end
   end
 
@@ -178,6 +182,7 @@ ActiveAdmin.register Evaluation do
 
   controller do
     include Fichier
+    include Admin::DashboardHelper
 
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
@@ -185,7 +190,9 @@ ActiveAdmin.register Evaluation do
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
                   :comptes_externes_possibles, :opco_financeur, :structure,
-                  :syntheses_evapro_par_evaluation_id
+                  :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
+                  :recommandation_risque_pour_xls,
+                  :impact_evapro_pour_xls, :score_cout_pour_xls
 
     before_action :remplir_syntheses_evapro_pour_index, only: :index
 
@@ -241,15 +248,63 @@ ActiveAdmin.register Evaluation do
     end
 
     def syntheses_evapro_par_evaluation_id
-      @syntheses_evapro_par_evaluation_id || {}
+      return {} unless current_compte.utilisateur_entreprise?
+
+      @syntheses_evapro_par_evaluation_id ||= SynthesesEvaproPourIndex.pour(collection)
     end
 
     private
+
+    def taux_risque_pour_xls(evaluation)
+      pourcentage = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :pourcentage_risque)
+      pourcentage.present? ? "#{pourcentage} %" : nil
+    end
+
+    def recommandation_risque_pour_xls(evaluation)
+      lettre_risque = lettre_risque_pour(evaluation, synthese_evapro_pour_xls(evaluation))
+      return if lettre_risque.blank?
+
+      palier = {
+        "A" => "A - Très bon",
+        "B" => "B - Bon",
+        "C" => "C - Moyen",
+        "D" => "D - Mauvais"
+      }[lettre_risque]
+      return if palier.blank?
+
+      I18n.t(palier, scope: "bilan_eva_pro.chiffre_cle")
+    end
+
+    def impact_evapro_pour_xls(evaluation, cle)
+      niveau = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :synthese_impact, cle)
+      return if niveau.blank?
+
+      lettre = score_to_lettre(niveau).upcase
+      return if lettre.blank?
+
+      lettre
+    end
+
+    def score_cout_pour_xls(evaluation)
+      lettre_cout = lettre_couts_pour(evaluation, synthese_evapro_pour_xls(evaluation))
+      return if lettre_cout.blank?
+
+      I18n.t(lettre_cout.downcase,
+             scope: "admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.titre")
+    end
 
     def remplir_syntheses_evapro_pour_index
       return unless current_compte.utilisateur_entreprise?
 
       @syntheses_evapro_par_evaluation_id = SynthesesEvaproPourIndex.pour(collection)
+    end
+
+    def synthese_evapro_pour_xls(evaluation)
+      synthese_evapro = syntheses_evapro_par_evaluation_id[evaluation.id] || {}
+      {
+        pourcentage_risque: synthese_evapro[:pourcentage_risque],
+        score_cout: synthese_evapro[:score_cout]
+      }
     end
 
     def find_resource

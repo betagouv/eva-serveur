@@ -39,9 +39,9 @@ ActiveAdmin.register_page "Dashboard" do
     private
 
     def redirige_vers_inscription
-      return if current_compte.structure_id.present?
-      return if current_compte.inscription_pro_connect?
       return if !current_compte.doit_completer_inscription?
+      return if current_compte.structure_id.present? && current_compte.etape_inscription_nouveau?
+      return if current_compte.inscription_pro_connect?
 
       redirige_vers_etape_inscription(current_compte)
     end

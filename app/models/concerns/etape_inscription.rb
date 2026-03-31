@@ -30,7 +30,9 @@ module EtapeInscription
   def termine_preinscription!
     return if !etape_inscription_preinscription?
 
-    if siret_pro_connect.blank?
+    if Invitation.exists?(compte_id: id, statut: "acceptee")
+      self.etape_inscription = "assignation_structure"
+    elsif siret_pro_connect.blank?
       self.etape_inscription = "recherche_structure"
     else
       self.etape_inscription = "assignation_structure"

@@ -19,6 +19,8 @@ fr:
       models:
         opco:
           attributes:
+            base:
+              parcours_types_blank: "Vous devez ajouter au moins un parcours type"
             nom:
               blank: Le nom ne peut pas être vide
             url_offre_services:

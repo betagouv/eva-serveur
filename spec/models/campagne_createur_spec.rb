@@ -22,6 +22,7 @@ describe CampagneCreateur, type: :model do
         end
 
         before do
+          opco.opco_parcours_types.destroy_all
           create(:opco_parcours_type, opco: opco, parcours_type: parcours_type_associe)
           create(:parcours_type, nom_technique: "eva-entreprise", libelle: "Eva entreprises")
         end
@@ -45,6 +46,7 @@ describe CampagneCreateur, type: :model do
  create(:parcours_type, libelle: "Parcours B", type_de_programme: :diagnostic) }
 
         before do
+          opco.opco_parcours_types.destroy_all
           create(:opco_parcours_type, opco: opco, parcours_type: parcours_type_1)
           create(:opco_parcours_type, opco: opco, parcours_type: parcours_type_2)
         end
@@ -86,6 +88,7 @@ parcours_type_2)
     context "quand la campagne ne doit pas être créée" do
       context "avec un OPCO financeur sans parcours type associé" do
         it "ne crée aucune campagne" do
+          opco.opco_parcours_types.destroy_all
           expect { createur.cree_campagne_opco! }.not_to change(Campagne, :count)
         end
       end
@@ -144,6 +147,7 @@ parcours_type_2)
         let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }
 
         it "ne crée aucune campagne" do
+          opco.opco_parcours_types.destroy_all
           expect { createur_non_entreprise.cree_campagne_opco! }.not_to change(Campagne, :count)
         end
       end
@@ -158,6 +162,7 @@ parcours_type_2)
         let(:createur_ineligible) { described_class.new(structure_ineligible, compte) }
 
         it "ne crée aucune campagne" do
+          opco.opco_parcours_types.destroy_all
           expect { createur_ineligible.cree_campagne_opco! }.not_to change(Campagne, :count)
         end
       end

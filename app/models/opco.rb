@@ -1,5 +1,6 @@
 class Opco < ApplicationRecord
   validates :nom, presence: true
+  validate :doit_avoir_au_moins_un_parcours_type
   validate :url_offre_services_doit_etre_une_url_http_ou_https
   scope :financeurs, -> { where(financeur: true) }
   before_validation :normalise_idcc
@@ -66,6 +67,12 @@ class Opco < ApplicationRecord
     errors.add(:url_offre_services, :invalid)
   rescue URI::InvalidURIError
     errors.add(:url_offre_services, :invalid)
+  end
+
+  def doit_avoir_au_moins_un_parcours_type
+    parcours_types = opco_parcours_types.reject(&:marked_for_destruction?)
+
+    errors.add(:base, :parcours_types_blank) if parcours_types.empty?
   end
 
   def normalise_idcc

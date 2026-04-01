@@ -281,7 +281,8 @@ ActiveAdmin.register Evaluation do
       niveau = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :synthese_impact, cle)
       return if niveau.blank?
 
-      lettre = score_to_lettre(niveau).upcase
+      lettre = ::Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: {}, i18n: I18n)
+        .score_to_lettre(niveau).upcase
       return if lettre.blank?
 
       lettre

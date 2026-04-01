@@ -85,8 +85,6 @@ visible: :all
 
       it "crée une structure Entreprise" do
         opco = create(:opco, nom: 'OPCO Mobilité', financeur: true, idcc: [ "0003" ])
-        parcours_type = create(:parcours_type, nom_technique: "eva-entreprise-opcomobilite")
-        create(:opco_parcours_type, opco: opco, parcours_type: parcours_type)
         # Mocker MiseAJourSiret pour retourner un IDCC qui correspond à OPCO Mobilité (IDCC 3)
         allow(MiseAJourSiret).to receive(:new) do |structure|
           mise_a_jour = instance_double(MiseAJourSiret)

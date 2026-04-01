@@ -140,8 +140,16 @@ RSpec.describe SynthesesEvaproPourIndex do
       it "retourne les synthèses pour chaque évaluation sans mélange" do
         resultat = described_class.pour(collection)
 
-        expect(resultat[evaluation.id]).to eq(pourcentage_risque: 34, score_cout: nil)
-        expect(resultat[autre_evaluation.id]).to eq(pourcentage_risque: nil, score_cout: "faible")
+        expect(resultat[evaluation.id]).to eq(
+          pourcentage_risque: 34,
+          score_cout: nil,
+          synthese_impact: {}
+        )
+        expect(resultat[autre_evaluation.id]).to eq(
+          pourcentage_risque: nil,
+          score_cout: "faible",
+          synthese_impact: { "score_cout" => "faible" }.with_indifferent_access
+        )
       end
     end
   end

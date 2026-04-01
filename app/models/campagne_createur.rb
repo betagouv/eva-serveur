@@ -1,7 +1,5 @@
 class CampagneCreateur
   NOM_CAMPAGNE_PAR_DEFAUT = "Diagnostic des risques"
-  NOM_CAMPAGNE_GENERIQUE = "Diagnostic standard evapro"
-  NOM_TECHNIQUE_GENERIQUE = "eva-entreprise"
 
   def initialize(structure, compte)
     @structure = structure
@@ -11,11 +9,7 @@ class CampagneCreateur
   def cree_campagne_opco!
     return unless doit_creer_campagne?
 
-    if opco_financeur?
-      cree_campagnes_opco_financeur
-    else
-      cree_campagne_generique(NOM_TECHNIQUE_GENERIQUE)
-    end
+    cree_campagnes_opco_financeur
   end
 
   private
@@ -36,14 +30,10 @@ class CampagneCreateur
     end
   end
 
-  def opco_financeur?
-    premier_opco_financeur&.financeur? || false
-  end
-
   # Retourne l'OPCO financeur s'il existe (il ne devrait y en avoir qu'un seul),
   # sinon retourne nil.
   def premier_opco_financeur
-    @premier_opco_financeur ||= @structure.opco_financeur
+    @premier_opco_financeur ||= @structure.opco
   end
 
   def cree_campagne(parcours_type, libelle: libelle_campagne)
@@ -56,11 +46,6 @@ class CampagneCreateur
 
     campagne.save!
     campagne
-  end
-
-  def cree_campagne_generique(nom_technique)
-    parcours_type = ParcoursType.find_evapro_generique!
-    cree_campagne(parcours_type, libelle: NOM_CAMPAGNE_GENERIQUE)
   end
 
   def libelle_campagne

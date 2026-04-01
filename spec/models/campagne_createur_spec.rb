@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe CampagneCreateur, type: :model do
   let(:compte) { create(:compte_admin) }
-  let(:opco) { create(:opco, nom: "Constructys", financeur: true) }
+  let(:opco) { create(:opco, nom: "Constructys") }
   let(:structure_entreprise) do
     create(:structure_locale,
            nom: "ma super structure",
@@ -39,11 +39,13 @@ describe CampagneCreateur, type: :model do
         end
       end
 
-      context "avec un OPCO financeur et plusieurs parcours types associés" do
-        let(:parcours_type_1) {
- create(:parcours_type, libelle: "Parcours A", type_de_programme: :diagnostic) }
-        let(:parcours_type_2) {
- create(:parcours_type, libelle: "Parcours B", type_de_programme: :diagnostic) }
+      context "avec un OPCO et plusieurs parcours types associés" do
+        let(:parcours_type_1) do
+          create(:parcours_type, libelle: "Parcours A", type_de_programme: :diagnostic)
+        end
+        let(:parcours_type_2) do
+          create(:parcours_type, libelle: "Parcours B", type_de_programme: :diagnostic)
+        end
 
         before do
           opco.opco_parcours_types.destroy_all
@@ -56,7 +58,7 @@ describe CampagneCreateur, type: :model do
 
           campagnes = Campagne.last(2)
           expect(campagnes.map(&:parcours_type)).to contain_exactly(parcours_type_1,
-parcours_type_2)
+                  parcours_type_2)
           expect(campagnes.map(&:compte).uniq).to eq([ compte ])
           expect(campagnes.map(&:libelle)).to contain_exactly(
             "Diagnostic des risques : ma super structure - #{parcours_type_1.libelle}",
@@ -65,28 +67,16 @@ parcours_type_2)
         end
       end
 
-      context "avec un OPCO non financeur" do
-        let(:opco) { create(:opco, nom: "OPCO non financeur", financeur: false) }
-        let!(:parcours_type_generique) do
-          create(:parcours_type,
-                 nom_technique: "eva-entreprise",
-                 libelle: "Eva entreprises",
-                 type_de_programme: :diagnostic)
-        end
-
-        it "crée uniquement la campagne générique" do
-          expect { createur.cree_campagne_opco! }.to change(Campagne, :count).by(1)
-
-          campagne = Campagne.last
-          expect(campagne.parcours_type).to eq(parcours_type_generique)
-          expect(campagne.compte).to eq(compte)
-          expect(campagne.libelle).to eq("Diagnostic standard evapro")
+      context "avec un OPCO sans parcours type associé" do
+        it "ne crée aucune campagne" do
+          opco.opco_parcours_types.destroy_all
+          expect { createur.cree_campagne_opco! }.not_to change(Campagne, :count)
         end
       end
     end
 
     context "quand la campagne ne doit pas être créée" do
-      context "avec un OPCO financeur sans parcours type associé" do
+      context "avec un OPCO sans parcours type associé" do
         it "ne crée aucune campagne" do
           opco.opco_parcours_types.destroy_all
           expect { createur.cree_campagne_opco! }.not_to change(Campagne, :count)

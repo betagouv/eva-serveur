@@ -12,6 +12,7 @@ RSpec.describe Opco, type: :model do
   describe "validation parcours_types" do
     it "est invalide sans parcours type associé" do
       opco = build(:opco)
+      opco.opco_parcours_types.clear
 
       expect(opco).not_to be_valid
       expect(opco.errors[:base]).to include(

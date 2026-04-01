@@ -9,6 +9,24 @@ RSpec.describe Opco, type: :model do
   it { is_expected.to have_many(:opco_parcours_types).dependent(:destroy) }
   it { is_expected.to have_many(:parcours_types).through(:opco_parcours_types) }
 
+  describe "validation parcours_types" do
+    it "est invalide sans parcours type associé" do
+      opco = build(:opco)
+
+      expect(opco).not_to be_valid
+      expect(opco.errors[:base]).to include(
+        I18n.t("activerecord.errors.models.opco.attributes.base.parcours_types_blank")
+      )
+    end
+
+    it "est valide avec au moins un parcours type associé" do
+      opco = build(:opco)
+      opco.parcours_types << create(:parcours_type)
+
+      expect(opco).to be_valid
+    end
+  end
+
   describe "#supprime_visuel_offre_services" do
     let(:opco) { create(:opco) }
 

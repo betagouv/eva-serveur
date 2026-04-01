@@ -1,4 +1,6 @@
 active_admin_form_for [ :admin, resource ] do |f|
+  f.semantic_errors(:base)
+
   f.inputs do
     f.input :nom, hint: I18n.t("formtastic.hints.opco.nom")
     f.input :financeur, as: :toggle

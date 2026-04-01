@@ -3,6 +3,14 @@ FactoryBot.define do
     sequence(:nom) { |n| "OPCO #{n}" }
     financeur { true }
 
+    after(:build) do |opco|
+      if opco.opco_parcours_types.empty?
+        opco.opco_parcours_types.build(
+          parcours_type: build(:parcours_type)
+        )
+      end
+    end
+
     trait :constructys do
       nom { "Constructys" }
     end

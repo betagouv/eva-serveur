@@ -429,6 +429,7 @@
     align-self: stretch;
     &__grid {
       display: flex;
+      flex-wrap: wrap;
       align-items: flex-start;
       gap: $dsfr-spacing-3w;
       align-self: stretch;

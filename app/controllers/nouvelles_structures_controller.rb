@@ -10,7 +10,7 @@ class NouvellesStructuresController < ApplicationController
   def create
     @compte = Compte.new compte_parametres
     @compte.structure&.affecte_usage_entreprise_si_necessaire
-    if @compte.save
+    if verify_recaptcha(model: @compte) && @compte.save
       AffiliationOpcoService.new(@compte.structure).affilie_opcos
       envoie_emails
       sign_in @compte

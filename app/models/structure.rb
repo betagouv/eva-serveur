@@ -99,6 +99,7 @@ allow_blank: true
   def siret_uniqueness
     return if siret.blank?
     return if errors[:siret].any?
+    return if persisted? && !siret_changed?
 
     errors.add(:siret, :taken) if Structure.where.not(id: id).exists?(siret: siret)
   end

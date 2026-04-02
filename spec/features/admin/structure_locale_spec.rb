@@ -181,6 +181,16 @@ visible: :all
         expect(page).to have_content "ne peut pas être supprimé"
         expect(structure.reload.siret).to eq '12345678901234'
       end
+
+      it 'permet de modifier le nom même si son SIRET est en doublon avec une autre structure' do
+        doublon = build(:structure_locale, siret: '12345678901234')
+        doublon.save(validate: false)
+        visit edit_admin_structure_locale_path(structure)
+        fill_in :structure_locale_nom, with: 'Nouveau nom'
+        click_on 'Modifier'
+
+        expect(structure.reload.nom).to eq 'Nouveau nom'
+      end
     end
   end
 
@@ -199,7 +209,6 @@ visible: :all
 
       expect(structure_sans_siret.reload.nom).to eq 'Nouveau nom'
     end
-
   end
 
   describe 'avec un compte sans structure' do

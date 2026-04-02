@@ -315,9 +315,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def can_read_aide?
-    return false unless can?(:read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin")
-
-    en_attente_restreint? || can?(:read, SourceAide)
+    can?(:read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin")
   end
 
   def current_compte_structure_present?

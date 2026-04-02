@@ -2,7 +2,7 @@
  * Ouverture de la modale de vérification de compte (Autoriser/Refuser).
  * Le lien « Vérifier » (aria-controls) et le rendu `<dialog class="fr-modal">` ne sont pas
  * reliés automatiquement par le bundle DSFR chargé dans ActiveAdmin : même logique que
- * invitation_modal.js (déplacement au body à l’ouverture, classe fr-modal--opened, etc.).
+ * invitation_modal.js (déplacement au body au chargement, classe fr-modal--opened, attribut open).
  */
 (function() {
   var OPENED_CLASS = "fr-modal--opened";
@@ -48,12 +48,8 @@
     }
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
-    if (modal.tagName === "DIALOG") {
-      if (typeof modal.showModal === "function") {
-        modal.showModal();
-      } else if (!modal.hasAttribute("open")) {
-        modal.setAttribute("open", "");
-      }
+    if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
+      modal.setAttribute("open", "");
     }
   }
 
@@ -62,11 +58,7 @@
     modal.classList.remove(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "true");
     if (modal.tagName === "DIALOG") {
-      if (typeof modal.close === "function") {
-        modal.close();
-      } else {
-        modal.removeAttribute("open");
-      }
+      modal.removeAttribute("open");
     }
   }
 
@@ -107,6 +99,12 @@
 
   function initVerificationModal() {
     bindEscapeHandler();
+
+    document.querySelectorAll(".fr-modal.fr-modal-verification").forEach(function(modal) {
+      document.body.appendChild(modal);
+      modal.setAttribute("aria-hidden", "true");
+      bindCloseHandlers(modal);
+    });
 
     document.addEventListener("click", function(event) {
       var modalId = null;

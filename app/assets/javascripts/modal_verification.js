@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".fr-modal").forEach(modal => {
+  document.querySelectorAll(".fr-modal.fr-modal-verification").forEach(modal => {
     const btnValider = modal.querySelector(".fr-btn[name='decision'][value='Autoriser']");
     if (!btnValider) return;
 

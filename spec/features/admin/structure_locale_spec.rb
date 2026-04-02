@@ -172,7 +172,34 @@ visible: :all
 
         expect(page).to have_content "Ce SIRET est déjà utilisé"
       end
+
+      it 'ne permet pas de supprimer le SIRET de sa structure' do
+        visit edit_admin_structure_locale_path(structure)
+        fill_in :structure_locale_siret, with: ''
+        click_on 'Modifier'
+
+        expect(page).to have_content "ne peut pas être supprimé"
+        expect(structure.reload.siret).to eq '12345678901234'
+      end
     end
+  end
+
+  describe 'en tant que admin avec une structure sans siret' do
+    let!(:structure_sans_siret) do
+      create(:structure_locale).tap { |s| s.update_column(:siret, nil) }
+    end
+    let!(:compte_admin_sans_siret) { create :compte_admin, structure: structure_sans_siret }
+
+    before { connecte(compte_admin_sans_siret) }
+
+    it 'permet de modifier le nom sans renseigner de SIRET' do
+      visit edit_admin_structure_locale_path(structure_sans_siret)
+      fill_in :structure_locale_nom, with: 'Nouveau nom'
+      click_on 'Modifier'
+
+      expect(structure_sans_siret.reload.nom).to eq 'Nouveau nom'
+    end
+
   end
 
   describe 'avec un compte sans structure' do

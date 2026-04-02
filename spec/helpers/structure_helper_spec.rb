@@ -34,4 +34,41 @@ describe StructureHelper do
       end
     end
   end
+
+  describe "#siret_requis?" do
+    let(:ability_admin) { Ability.new(create(:compte_admin)) }
+    let(:ability_superadmin) { Ability.new(create(:compte_superadmin)) }
+
+    context "nouvelle structure" do
+      let(:structure) { StructureLocale.new }
+
+      it "retourne true pour un admin" do
+        expect(helper.siret_requis?(structure, ability_admin)).to be(true)
+      end
+
+      it "retourne false pour un superadmin" do
+        expect(helper.siret_requis?(structure, ability_superadmin)).to be(false)
+      end
+    end
+
+    context "structure existante avec un siret" do
+      let(:structure) { build_stubbed(:structure_locale, siret: '12345678901234') }
+
+      it "retourne true pour un admin" do
+        expect(helper.siret_requis?(structure, ability_admin)).to be(true)
+      end
+
+      it "retourne false pour un superadmin" do
+        expect(helper.siret_requis?(structure, ability_superadmin)).to be(false)
+      end
+    end
+
+    context "structure existante sans siret" do
+      let(:structure) { build_stubbed(:structure_locale, siret: nil) }
+
+      it "retourne false pour un admin" do
+        expect(helper.siret_requis?(structure, ability_admin)).to be(false)
+      end
+    end
+  end
 end

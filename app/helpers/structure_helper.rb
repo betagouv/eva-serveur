@@ -60,6 +60,12 @@ module StructureHelper
     I18n.t("activerecord.attributes.structure.autorisation_creation_campagne_#{autorisation_creation_campagne}") # rubocop:disable Layout/LineLength
   end
 
+  def siret_requis?(structure, ability)
+    return false if ability.can?(:manage, Compte)
+
+    structure.new_record? || structure.siret.present?
+  end
+
   def format_statut_siret(statut_siret)
     return I18n.t("activerecord.attributes.structure.statut_siret_false") if statut_siret.nil?
 

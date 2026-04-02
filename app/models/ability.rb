@@ -55,7 +55,6 @@ class Ability < AbilityUtilisateur
   def droit_page
     can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
     can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
-    can :read, SourceAide unless compte&.charge_mission_regionale?
   end
 
   def droits_comptes_refuses(compte)

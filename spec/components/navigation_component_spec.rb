@@ -14,6 +14,8 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Évaluations")
       expect(page).to have_link("Comptes")
       expect(page).to have_link("Aide")
+      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_link("Sources d'aide", visible: :all)
     end
   end
 
@@ -49,11 +51,13 @@ RSpec.describe NavigationComponent, type: :component do
   context "quand le compte est charge_mission_regionale" do
     let(:compte) { create(:compte_charge_mission_regionale, :acceptee, :structure_avec_admin) }
 
-    it "n'affiche pas le lien Aide (lecture SourceAide interdite)" do
+    it "affiche le lien Aide mais pas le menu Accompagnement" do
       render_inline(component)
 
       expect(page).to have_link("Tableau de bord", href: "/admin")
-      expect(page).not_to have_link("Aide")
+      expect(page).to have_link("Aide")
+      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_link("Sources d'aide", visible: :all)
     end
   end
 

@@ -155,6 +155,7 @@ describe Ability do
       expect(subject).to be_able_to(:create, Compte.new)
       expect(subject).not_to be_able_to(:create, Beneficiaire)
       expect(subject).to be_able_to(:update, compte.structure)
+      expect(subject).not_to be_able_to(:read, SourceAide)
     end
 
     context 'peut gérer mes collègues' do
@@ -402,6 +403,7 @@ describe Ability do
       expect(subject).to be_able_to(:read, ActiveAdmin::Page.new(:admin, 'Dashboard', {}))
       expect(subject).not_to be_able_to(:read,
                                         ActiveAdmin::Page.new(:admin, 'recherche_structure', {}))
+      expect(subject).not_to be_able_to(:read, SourceAide)
       expect(subject).to be_able_to(:fusionner, Beneficiaire)
     end
 

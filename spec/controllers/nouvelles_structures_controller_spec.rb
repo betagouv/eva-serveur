@@ -20,6 +20,11 @@ describe NouvellesStructuresController, type: :controller do
   end
 
   describe "POST #create" do
+    before do
+      # Mock recaptcha pour tous les tests
+      allow(controller).to receive(:verify_recaptcha).and_return(true)
+    end
+
     context "avec des paramètres valides" do
       it "crée un compte et une structure" do
         expect do

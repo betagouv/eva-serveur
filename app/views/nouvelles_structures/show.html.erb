@@ -46,6 +46,7 @@
       <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte", locals: { scope: "creation_compte" } %>
       <%= compte.input :cgu_acceptees, label: t("creation_compte.cgu_acceptees"), required: true %>
     <% end %>
+    <%= recaptcha_tags %>
   </div>
   <div class="panel">
     <%= md t(".actions.validation", email_contact: Eva::EMAIL_CONTACT) %>

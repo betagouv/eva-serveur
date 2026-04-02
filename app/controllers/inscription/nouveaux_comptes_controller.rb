@@ -71,8 +71,7 @@ class Inscription::NouveauxComptesController < ApplicationController
   def appelle_creation_compte_invitation
     CreationCompteDepuisInvitationService.new(
       invitation: @invitation,
-      parametres_compte: compte_parametres,
-      verification_recaptcha: ->(c) { verify_recaptcha(model: c) }
+      parametres_compte: compte_parametres
     ).appeler
   end
 

@@ -3,8 +3,6 @@ class DemoController < ApplicationController
   helper ::ActiveAdmin::ViewHelpers
 
   def connect
-    echec_captcha and return unless verify_recaptcha
-
     compte = Compte.find_by(email: Eva::EMAIL_DEMO)
     echec_login and return if compte.blank?
 

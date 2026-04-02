@@ -103,9 +103,6 @@
             </div>
 
             <div class="fr-col-12">
-              <% if @invitation.present? %>
-                <%= recaptcha_tags %>
-              <% end %>
               <div class="informations-compte-actions">
                 <%= render BoutonDsfrComponent.new(new_compte_session_path, type: :tertiary) do %>
                   <%= t(".bouton_annuler") %>

@@ -17,7 +17,6 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
   end
 
   before do
-    allow(Recaptcha).to receive(:skip_env?).and_return(true)
   end
 
   # rubocop:disable RSpec/ExampleLength -- multi-step inscription request flow

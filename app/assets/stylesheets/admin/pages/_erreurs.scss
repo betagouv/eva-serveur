@@ -27,7 +27,7 @@ body.erreurs {
 
         .message-accueil {
           color: $couleur-texte;
-          font-family: Quicksand, sans-serif;
+          font-family: $font-titre;
           font-size: 3rem;
           font-weight: 700;
           line-height: normal;
@@ -35,7 +35,7 @@ body.erreurs {
 
         h1 {
           color: $eva_dark_blue_grey;
-          font-family: "Work Sans", sans-serif;
+          font-family: $font-texte;
           font-size: 1rem;
           font-weight: 400;
           margin: 1rem 0 0;

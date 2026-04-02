@@ -20,7 +20,7 @@
 
 .etape_courante__titre {
   color: var(--text-title-grey);
-  font-family: var(--Titres-Font, Quicksand);
+  font-family: $font-titre;
   font-size: var(--Titres-H6---XXS-Size, 20px);
   font-style: normal;
   font-weight: 700;
@@ -29,7 +29,7 @@
 
 .etape_courante_indicateur {
   color: var(--text-default-grey);
-  font-family: var(--Body-SM---Texte-dtail-Font, "Work Sans");
+  font-family: $font-texte;
   font-size: var(--Body-SM---Texte-dtail-Size, 14px);
   font-style: normal;
   font-weight: 400;
@@ -45,7 +45,7 @@
 
 .explication__pourquoi {
   color: var(--text-mention-grey);
-  font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
+  font-family: $font-texte;
   font-size: var(--Body-XS---Texte-mention-Size, 12px);
   font-style: normal;
   font-weight: 600;
@@ -54,7 +54,7 @@
 
 .explication__description {
   color: var(--text-mention-grey);
-  font-family: var(--Body-XS---Texte-mention-Font, "Work Sans");
+  font-family: $font-texte;
   font-size: var(--Body-XS---Texte-mention-Size, 12px);
   font-style: normal;
   font-weight: 400;

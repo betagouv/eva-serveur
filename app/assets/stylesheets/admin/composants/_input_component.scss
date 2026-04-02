@@ -4,7 +4,7 @@
 
 .input-component__link-text {
   color: var(--color-text-action-high-blue-france, #000091);
-  font-family: var(--Body-MD---Texte-standard-Font, "Work Sans");
+  font-family: $font-texte;
   font-size: var(--Body-MD---Texte-standard-Size, 16px);
   font-style: normal;
   font-weight: 400;

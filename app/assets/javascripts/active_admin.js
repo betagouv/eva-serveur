@@ -52,5 +52,5 @@ document.addEventListener('DOMContentLoaded', () => {
   $('[data-toggle="tooltip"]').tooltip();
 });
 
-Chart.defaults.font.family = 'Work Sans';
+Chart.defaults.font.family = 'Marianne';
 Chart.defaults.font.size = 14;

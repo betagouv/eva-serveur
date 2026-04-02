@@ -77,7 +77,7 @@ module Eva
       end
 
       def enregistre_compte?
-        @compte.save
+        verify_recaptcha(model: @compte) && @compte.save
       end
 
       def sign_in_et_redirige

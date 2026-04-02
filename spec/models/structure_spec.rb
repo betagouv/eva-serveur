@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 describe Structure, type: :model do
+  describe "dependent invitations" do
+    it "supprime les invitations quand la structure est supprimée" do
+      structure = create(:structure_locale, :avec_admin)
+      invitation = create(
+        :invitation,
+        structure: structure,
+        invitant: create(:compte_admin, structure: structure)
+      )
+
+      expect { structure.destroy }.not_to raise_error
+      expect(Invitation.where(id: invitation.id)).not_to exist
+    end
+  end
+
   it { is_expected.to validate_presence_of(:nom) }
   it { is_expected.to validate_uniqueness_of(:nom).scoped_to(:code_postal).case_insensitive }
   it { is_expected.to validate_numericality_of(:siret) }

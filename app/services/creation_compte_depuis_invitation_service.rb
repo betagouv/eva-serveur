@@ -29,12 +29,14 @@ class CreationCompteDepuisInvitationService
   end
 
   def attributs_invitation
-    siret = @invitation.structure&.siret
     {
       structure_id: @invitation.structure_id,
       role: @invitation.role_pour_compte,
       statut_validation: invitant_autorise_validation_directe? ? :acceptee : :en_attente,
-      siret_pro_connect: siret.present? ? siret.to_s : nil
+      # Dans le parcours invitation, la structure est déjà connue (structure_id).
+      # Remplir siret_pro_connect ici déclenche des branches du flow inscription prévues
+      # pour la recherche/création de structure par SIRET et peut bloquer l'utilisateur.
+      siret_pro_connect: nil
     }
   end
 

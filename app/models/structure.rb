@@ -9,7 +9,7 @@ class Structure < ApplicationRecord
   has_ancestry
   acts_as_paranoid
   belongs_to :opco, optional: true
-  has_many :invitations, dependent: :nullify
+  has_many :invitations, dependent: :destroy
 
   alias structure_referente parent
   alias structure_referente= parent=

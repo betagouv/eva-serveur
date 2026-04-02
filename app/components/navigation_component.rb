@@ -99,6 +99,8 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def accompagnement_group
+    return if en_attente_restreint?
+
     links = [
       source_aides_link,
       annonce_generales_link

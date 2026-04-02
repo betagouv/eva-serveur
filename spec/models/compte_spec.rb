@@ -235,6 +235,29 @@ describe Compte do
 
       expect(compte.en_attente_restreint?).to be(false)
     end
+
+    it "est vrai lorsque l'inscription est terminée mais la validation structure est encore en attente" do
+      compte = create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure,
+        etape_inscription: "complet",
+        exempte_restriction_acces_attente: false
+      )
+
+      expect(compte.en_attente_restreint?).to be(true)
+    end
+
+    it "est faux lorsque le compte n'a pas encore de structure (parcours inscription)" do
+      compte = create(
+        :compte_conseiller,
+        :en_attente,
+        structure: nil,
+        etape_inscription: "recherche_structure"
+      )
+
+      expect(compte.en_attente_restreint?).to be(false)
+    end
   end
 
   describe "#rejoindre_structure" do

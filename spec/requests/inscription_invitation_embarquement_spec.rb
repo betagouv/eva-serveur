@@ -12,7 +12,6 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
   end
 
   before do
-    allow(Recaptcha).to receive(:skip_env?).and_return(true)
   end
 
   it "mène au tableau de bord après confirmation de la structure proposée" do

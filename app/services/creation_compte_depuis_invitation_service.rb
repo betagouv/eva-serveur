@@ -3,16 +3,14 @@
 class CreationCompteDepuisInvitationService
   Resultat = Struct.new(:compte, :succes, keyword_init: true)
 
-  def initialize(invitation:, parametres_compte:, verification_recaptcha:)
+  def initialize(invitation:, parametres_compte:)
     @invitation = invitation
     @parametres_compte = parametres_compte
-    @verification_recaptcha = verification_recaptcha
   end
 
   def appeler
     compte = construire_compte
     compte.assigne_preinscription
-    return Resultat.new(compte: compte, succes: false) unless @verification_recaptcha.call(compte)
     return Resultat.new(compte: compte, succes: false) unless compte.save
 
     @invitation.marquer_acceptee!(compte)

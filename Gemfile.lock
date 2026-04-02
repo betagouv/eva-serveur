@@ -574,7 +574,6 @@ GEM
       erb
       psych (>= 4.0.0)
       tsort
-    recaptcha (5.21.1)
     recipient_interceptor (0.3.3)
       mail
     redcarpet (3.6.1)
@@ -836,7 +835,6 @@ DEPENDENCIES
   rails (~> 7.2.3.1)
   rails-erd
   rails-i18n
-  recaptcha (~> 5.16)
   recipient_interceptor
   redcarpet
   redis

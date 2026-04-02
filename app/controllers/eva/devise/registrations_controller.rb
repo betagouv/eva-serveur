@@ -54,8 +54,7 @@ module Eva
 
         resultat = CreationCompteDepuisInvitationService.new(
           invitation: @invitation,
-          parametres_compte: compte_parametres,
-          verification_recaptcha: ->(c) { verify_recaptcha(model: c) }
+          parametres_compte: compte_parametres
         ).appeler
 
         if resultat.succes
@@ -78,7 +77,7 @@ module Eva
       end
 
       def enregistre_compte?
-        verify_recaptcha(model: @compte) && @compte.save
+        @compte.save
       end
 
       def sign_in_et_redirige

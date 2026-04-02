@@ -227,7 +227,7 @@ button.fr-link--close {
   border: none;
 }
 button.fr-link--close:not(.disabled):hover {
-  background: transparent;
+  @include light-decisions-background-transparent-hover;
 }
 
 .fr-modal.evapro_admin .fr-btn--secondary,

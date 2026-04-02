@@ -5,39 +5,43 @@
   modal_classes += " evapro_admin" if usage_evapro
 %>
 <%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: modal_classes }) do %>
-  <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
-    <div class="modal-role-utilisateur">
-      <%= md t(".introduction", compte: compte.display_name, structure: current_compte.structure.nom) %>
-      <div class="fr-select-group fr-mb-0">
-        <fieldset class="fr-fieldset fr-mb-0" id="role-selection" aria-labelledby="role-selection-legend">
-          <legend class="fr-fieldset__legend fr-fieldset__legend--regular" id="role-selection-legend">
-            Choisissez un rôle :
-          </legend>
+  <div class="contenu-modale">
+    <div class="contenu">
+      <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>
+        <div class="modal-role-utilisateur">
+          <%= md t(".introduction", compte: compte.display_name, structure: current_compte.structure.nom) %>
+          <div class="fr-select-group fr-mb-0">
+            <fieldset class="fr-fieldset fr-mb-0" id="role-selection" aria-labelledby="role-selection-legend">
+              <legend class="fr-fieldset__legend fr-fieldset__legend--regular" id="role-selection-legend">
+                Choisissez un rôle :
+              </legend>
 
-          <% roles_avec_description.each do |libelle, role, description| %>
-            <div class="fr-fieldset__element">
-              <div class="fr-radio-group fr-radio-group--sm">
-                <%= f.radio_button :role, role, id: "role_#{role}_#{compte.id}" %>
-                <%= f.label :role, libelle, class: "fr-label", for: "role_#{role}_#{compte.id}" %>
-                <% if description.present? %>
-                <p class="fr-mb-0 fr-ml-3w fr-hint-text"><%= description %></p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+              <% roles_avec_description.each do |libelle, role, description| %>
+                <div class="fr-fieldset__element">
+                  <div class="fr-radio-group fr-radio-group--sm">
+                    <%= f.radio_button :role, role, id: "role_#{role}_#{compte.id}" %>
+                    <%= f.label :role, libelle, class: "fr-label", for: "role_#{role}_#{compte.id}" %>
+                    <% if description.present? %>
+                    <p class="fr-mb-0 fr-ml-3w fr-hint-text"><%= description %></p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
 
-          <div class="fr-messages-group" id="role-selection-messages" aria-live="assertive"></div>
-        </fieldset>
-      </div>
+              <div class="fr-messages-group" id="role-selection-messages" aria-live="assertive"></div>
+            </fieldset>
+          </div>
+        </div>
 
-      <div class="fr-modal__footer">
-        <button type="submit" name="decision" value="Refuser" class="fr-btn fr-btn--sm fr-btn--secondary">
-          Refuser
-        </button>
-        <button type="submit" name="decision" value="Autoriser" disabled class="disabled fr-btn fr-btn--sm fr-btn--primary" id="valider-modal-verification">
-          Autoriser
-        </button>
-      </div>
+        <div class="fr-modal__footer">
+          <button type="submit" name="decision" value="Refuser" class="fr-btn fr-btn--md fr-btn--secondary">
+            Refuser
+          </button>
+          <button type="submit" name="decision" value="Autoriser" disabled class="disabled fr-btn fr-btn--md fr-btn--primary" id="valider-modal-verification-<%= compte.id %>">
+            Autoriser
+          </button>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 <% end %>

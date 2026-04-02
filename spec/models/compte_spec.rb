@@ -236,7 +236,8 @@ describe Compte do
       expect(compte.en_attente_restreint?).to be(false)
     end
 
-    it "est vrai lorsque l'inscription est terminée mais la validation structure est encore en attente" do
+    it "est vrai lorsque l'inscription est terminée mais la validation structure " \
+       "est encore en attente" do
       compte = create(
         :compte_conseiller,
         :en_attente,

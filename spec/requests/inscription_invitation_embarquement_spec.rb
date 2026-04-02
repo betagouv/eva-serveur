@@ -11,9 +11,6 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
            email_destinataire: "invite.embarquement@eva.fr")
   end
 
-  before do
-  end
-
   it "mène au tableau de bord après confirmation de la structure proposée" do
     post inscription_nouveau_compte_path, params: {
       invitation_token: invitation.token,

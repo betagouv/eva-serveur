@@ -288,7 +288,7 @@ class NavigationComponent < ViewComponent::Base
   def opcos_link
     return unless superadmin?
 
-    { label: "Opcos", url: helpers.admin_opcos_path,
+    { label: "Opérateurs de compétences", url: helpers.admin_opcos_path,
       current: current_page?(helpers.admin_opcos_path) || controller_matches?("admin/opcos") }
   end
 
@@ -315,8 +315,9 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def can_read_aide?
-    can?(:read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin") &&
-      can?(:read, SourceAide)
+    return false unless can?(:read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin")
+
+    en_attente_restreint? || can?(:read, SourceAide)
   end
 
   def current_compte_structure_present?

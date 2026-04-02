@@ -16,9 +16,6 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
            email_destinataire: "invite.autre.structure@eva.fr")
   end
 
-  before do
-  end
-
   # rubocop:disable RSpec/ExampleLength -- multi-step inscription request flow
   it "permet de saisir un autre SIRET et de rejoindre la structure trouvée" do
     post inscription_nouveau_compte_path, params: {

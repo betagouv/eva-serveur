@@ -97,8 +97,8 @@ class Compte < ApplicationRecord
   end
 
   # Aligné sur Ability : profil restreint tant que la validation structure n'est pas finalisée.
-  # Sans structure, on laisse le parcours inscription / création de structure (Ability : branche complète).
-  # Inscription terminée (étape complet) mais toujours en attente de validation : navigation réduite.
+  # Sans structure : parcours inscription / création de structure (Ability : branche complète).
+  # Inscription terminée (étape complet) mais validation en attente : navigation réduite.
   def en_attente_restreint?
     return false if structure_id.blank?
 

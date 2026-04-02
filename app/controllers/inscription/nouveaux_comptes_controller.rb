@@ -41,7 +41,7 @@ class Inscription::NouveauxComptesController < ApplicationController
     @invitation = Invitation.find_by(token: params[:invitation_token])
     return if @invitation&.utilisable?
 
-    redirect_to root_path,
+    redirect_to structures_path,
                 alert: I18n.t("devise.registrations.invitation_invalide_ou_deja_utilisee")
   end
 
@@ -64,7 +64,7 @@ class Inscription::NouveauxComptesController < ApplicationController
   end
 
   def redirect_si_invitation_invalide
-    redirect_to root_path,
+    redirect_to structures_path,
                 alert: I18n.t("devise.registrations.invitation_invalide_ou_deja_utilisee")
   end
 

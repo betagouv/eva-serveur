@@ -67,7 +67,6 @@ class Ability < AbilityUtilisateur
     can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
     can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
     can :read, Actualite
-    can :read, SourceAide
     can %i[update read accepter_cgu], compte
   end
 end

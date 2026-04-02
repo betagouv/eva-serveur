@@ -34,7 +34,8 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Tableau de bord", href: "/admin")
       expect(page).to have_link("Aide")
       expect(page).to have_link("Actualités")
-      expect(page).to have_link("Sources d'aide", visible: :all)
+      expect(page).not_to have_link("Sources d'aide", visible: :all)
+      expect(page).not_to have_button("Accompagnement")
       expect(page).not_to have_link("Évaluations")
       expect(page).not_to have_link("Comptes")
       expect(page).not_to have_link("Campagnes")
@@ -86,7 +87,7 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_button("Structures")
       expect(page).to have_link("Structures locales", visible: :all)
       expect(page).to have_link("Structures administratives", visible: :all)
-      expect(page).to have_link("Opcos", visible: :all)
+      expect(page).to have_link("Opérateurs de compétences", visible: :all)
     end
   end
 end

@@ -558,7 +558,7 @@ describe Ability do
       expect(subject).to be_able_to(:accepter_cgu, compte)
       expect(subject).not_to be_able_to(:read, Campagne)
       expect(subject).to be_able_to(:read, Actualite)
-      expect(subject).to be_able_to(:read, SourceAide)
+      expect(subject).not_to be_able_to(:read, SourceAide)
       expect(subject).to be_able_to(:read,
                                     ActiveAdmin::Page,
                                     name: 'Aide',

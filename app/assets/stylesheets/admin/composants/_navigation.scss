@@ -19,7 +19,7 @@
   .fr-nav__btn,
   .fr-nav__link {
     color: var(--text-action-high-grey);
-    font-family: Marianne, sans-serif;
+    font-family: $font-texte;
 
     @include corps-de-texte-sm-regular;
   }

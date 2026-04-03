@@ -1,15 +1,11 @@
-// Modale DSFR « comptes en attente » : pas de sélecteurs Bootstrap (.modal, etc.).
-// Forcer l’affichage : sans attribut `open`, les navigateurs appliquent souvent
-// `dialog:not([open]) { display: none !important }`, ce qui masque la modale malgré le DSFR.
-.fr-modal-validation-comptes.fr-modal.fr-modal--opened {
+.fr-modal-dashboard-evapro.fr-modal.fr-modal--opened {
   display: flex !important;
   visibility: inherit !important;
   opacity: 1 !important;
-  // Équivalent de l’ancien .modal-backdrop (Bootstrap) : voile blanc ~90 %.
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.fr-modal-validation-comptes {
+.fr-modal-dashboard-evapro {
   .fr-modal__header {
     display: none;
   }
@@ -47,22 +43,19 @@
     padding-right: 0;
   }
 
-  .fr-modal-validation-comptes__actions {
+  .fr-modal-dashboard-evapro__actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 0.5rem;
   }
 
-  // _adaptation_dsfr impose `grand-bouton` (min-height 2.5rem !important) sur tous les
-  // `.fr-modal.evapro_admin .fr-btn`, ce qui annule le `fr-btn--sm` du composant.
   &.fr-modal.evapro_admin .fr-btn.fr-btn--sm {
     @include petit-bouton;
   }
 }
 
-// Verrouillage du scroll : classe posée sur <html> par modal_validation_comptes_en_attente.js
-html.fr-modal-validation-comptes--scroll-locked,
-html.fr-modal-validation-comptes--scroll-locked body {
+html.fr-modal-dashboard-evapro--scroll-locked,
+html.fr-modal-dashboard-evapro--scroll-locked body {
   overflow: hidden !important;
 }

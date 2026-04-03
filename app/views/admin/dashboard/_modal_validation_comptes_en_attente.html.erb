@@ -5,7 +5,7 @@
   opened: true,
   html_attributes: {
     id: id_modal,
-    class: "fr-modal-validation-comptes evapro_admin",
+    class: "fr-modal-validation-comptes fr-modal-dashboard-evapro evapro_admin",
     "aria-hidden": "false",
     open: true,
     "data-fr-concealing-backdrop": "false"
@@ -15,7 +15,7 @@
     <div class="message">
       <%= md t(".info_comptes_en_attente") %>
     </div>
-    <div class="fr-modal-validation-comptes__actions">
+    <div class="fr-modal-dashboard-evapro__actions">
       <%= render BoutonDsfrComponent.new(
         "#",
         type: :secondary,

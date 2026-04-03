@@ -32,7 +32,8 @@
 //= require modal_fusion
 //= require structure_confirmation
 //= require invitation_modal
-//= require modal_validation_comptes_en_attente
+//= require modal_accessibilite_dashboard
+//= require modal_dashboard_dsfr
 //= require nouveau_compte
 
 //= require chartkick

@@ -10,11 +10,14 @@
   var VERIFICATION_MODAL_ID_PREFIX = "fr-modal-";
   var INVITATION_MODAL_ID_PREFIX = "fr-modal-invitation-";
   var VERIFIER_LINK_REGEX = /\/comptes\/(\d+)\/verifier/;
-  var VALIDATION_COMPTES_ATTENTE_MODAL_ID = "fr-modal-validation-comptes-en-attente";
+  var DASHBOARD_DSFR_MODAL_IDS = [
+    "fr-modal-validation-comptes-en-attente",
+    "fr-modal-confirmation-cgu"
+  ];
 
   function isVerificationModalId(id) {
     if (!id) return false;
-    if (id === VALIDATION_COMPTES_ATTENTE_MODAL_ID) return false;
+    if (DASHBOARD_DSFR_MODAL_IDS.indexOf(id) !== -1) return false;
     return id.indexOf(VERIFICATION_MODAL_ID_PREFIX) === 0 &&
       id.indexOf(INVITATION_MODAL_ID_PREFIX) !== 0;
   }

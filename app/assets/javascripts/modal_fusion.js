@@ -1,6 +1,33 @@
 (function() {
   var MODAL_ID = "fr-modal-fusionner";
+  var FORM_ID = "fusion-form";
   var OPENED_CLASS = "fr-modal--opened";
+
+  /** Batch ActiveAdmin englobe la page : un second formulaire dans le HTML serait ignoré ; #fusion-form est créé ici sur body, champs reliés via attribut form. */
+  function ensureFusionFormDom(modal) {
+    if (document.getElementById(FORM_ID)) return;
+
+    var action = modal.dataset.fusionBatchAction;
+    if (!action) return;
+
+    var form = document.createElement("form");
+    form.id = FORM_ID;
+    form.method = "post";
+    form.action = action;
+    form.setAttribute("data-turbo", "false");
+    form.style.display = "none";
+
+    var meta = document.querySelector('meta[name="csrf-token"]');
+    if (meta) {
+      var tok = document.createElement("input");
+      tok.type = "hidden";
+      tok.name = "authenticity_token";
+      tok.value = meta.getAttribute("content") || "";
+      form.appendChild(tok);
+    }
+
+    document.body.appendChild(form);
+  }
 
   function elementFromEventTarget(target) {
     if (!target) return null;
@@ -21,11 +48,7 @@
       document.body.appendChild(modal);
     }
 
-    // Même stratégie que modal_verification_ouverture_evapro / invitation_modal :
-    // ne pas dépendre de window.dsfr ; n'utiliser surtout pas showModal().
-    // showModal() place le <dialog> dans la top layer du navigateur : si la fermeture
-    // ne passe que par le CSS DSFR sans dialog.close(), un voile invisible bloque
-    // tous les clics sur la page.
+    // Comme invitation_modal / modal_verification : pas showModal() (top layer native non fermée par le DSFR).
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
     if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
@@ -110,7 +133,6 @@
 
     updateModalContent(modal, sortedBeneficiaires);
     openFusionModal(modal);
-    resizeModal(modal);
   }
 
   function extractBeneficiairesData(checkedBoxes) {
@@ -166,32 +188,12 @@
     }).join(",");
   }
 
-  function resizeModal(modal) {
-    window.requestAnimationFrame(function() {
-      var modalBody = modal.querySelector(".fr-modal__body");
-      var modalContent = modal.querySelector(".fr-modal__content");
-      var modalHeader = modal.querySelector(".fr-modal__header");
-      var modalFooter = modal.querySelector(".fr-modal__footer");
-      if (!modalBody) return;
-
-      var contentPadding = modalContent
-        ? window.getComputedStyle(modalContent)
-        : { paddingTop: "0", paddingBottom: "0" };
-
-      var paddingTop = parseFloat(contentPadding.paddingTop) || 0;
-      var paddingBottom = parseFloat(contentPadding.paddingBottom) || 0;
-      var headerHeight = modalHeader ? modalHeader.offsetHeight : 0;
-      var footerHeight = modalFooter ? modalFooter.offsetHeight : 0;
-
-      var availableHeight =
-        window.innerHeight - headerHeight - footerHeight - paddingTop - paddingBottom - 24;
-      modalBody.style.maxHeight = Math.max(0, availableHeight) + "px";
-    });
-  }
-
   function prepareHiddenInputs(modal) {
-    var ids = modal.dataset.ids.split(",");
+    var ids = (modal.dataset.ids || "").split(",").filter(function(id) {
+      return id.length > 0;
+    });
     var container = document.getElementById("hidden-ids-container");
+    if (!container) return;
 
     container.innerHTML = "";
 
@@ -200,6 +202,7 @@
       input.type = "hidden";
       input.name = "collection_selection[]";
       input.value = id;
+      input.setAttribute("form", FORM_ID);
       container.appendChild(input);
     });
   }
@@ -209,13 +212,14 @@
     if (!modal) return;
 
     document.body.appendChild(modal);
+    ensureFusionFormDom(modal);
     modal.setAttribute("aria-hidden", "true");
     bindFusionCloseHandlers(modal);
     bindFusionEscapeHandler();
 
     document.addEventListener("click", handleFusionClick, true);
 
-    var form = document.getElementById("fusion-form");
+    var form = document.getElementById(FORM_ID);
     if (form) {
       form.addEventListener("submit", function() {
         prepareHiddenInputs(modal);

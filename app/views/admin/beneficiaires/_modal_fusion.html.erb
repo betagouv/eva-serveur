@@ -31,13 +31,12 @@
 
   <% component.with_button do %>
     <%= render BoutonDsfrComponent.new(
-      "#",
+      t(".confirmer"),
       type: :primary,
       tag: :submit,
       size: :md,
       id: "confirmer-fusion",
       form: form_id,
-      data: { disable_with: false }
     ) do %>
       <%= t(".confirmer") %>
     <% end %>

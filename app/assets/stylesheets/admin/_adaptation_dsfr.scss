@@ -228,6 +228,8 @@ button.fr-link--close {
 }
 button.fr-link--close:not(.disabled):hover {
   @include light-decisions-background-transparent-hover;
+
+  background-image: none;
 }
 
 .fr-modal.evapro_admin .fr-btn--secondary,

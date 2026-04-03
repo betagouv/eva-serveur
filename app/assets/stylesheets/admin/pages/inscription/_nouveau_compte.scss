@@ -18,6 +18,19 @@
       align-items: flex-start !important;
     }
   }
+
+  .page-nouveau-compte-alerte-invitation {
+    .fr-alert__title {
+      margin-bottom: 0.25rem;
+    }
+
+    .fr-alert__title .page-nouveau-compte-alerte-invitation__structure {
+      font-weight: 400;
+    }
+    p {
+      margin-bottom: 0.25rem;
+    }
+  }
 }
 
 .page-nouveau-compte-card .carte-v2__content {

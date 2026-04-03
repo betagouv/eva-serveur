@@ -13,9 +13,17 @@
     <div class="fr-mb-4w">
       <%= dsfr_alert(
             type: :info,
-            title: t(".invitation_alerte_titre", nom_structure: @invitation.structure.display_name),
+            title: safe_join(
+              [
+                h(t(".invitation_alerte_titre_intro")),
+                tag.span(class: "page-nouveau-compte-alerte-invitation__structure") do
+                  @invitation.structure.display_name
+                end
+              ],
+              tag.br
+            ),
             close_button: true,
-            html_attributes: { class: "fr-mb-0" }
+            html_attributes: { class: "fr-mb-0 page-nouveau-compte-alerte-invitation" }
           ) do %>
         <%= t(".invitation_alerte_description") %>
       <% end %>

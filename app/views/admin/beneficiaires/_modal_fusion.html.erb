@@ -1,27 +1,30 @@
 <% id_modal = "fr-modal-fusionner" %>
+<% form_id = "fusion-form" %>
 
 <%= dsfr_modal(
   title: t(".titre").html_safe,
-  html_attributes: { id: id_modal }
+  html_attributes: { id: id_modal, class: "fr-modal-fusion evapro_admin" }
 ) do |component| %>
-  <div class="modal-fusionner">
-    <%= form_with url: batch_action_admin_beneficiaires_path, method: :post, local: true, id: "fusion-form" do |f| %>
-      <div class= "liste-beneficiaires-fusion">
-        <p> <%= t(".instruction") %> </p>
-        <ul id="liste-elements-a-fusionner"></ul>
-        <p> <%= t(".pour_fusion") %> <span class="fr-text--bold" id="beneficiaire-rattache"></span>. </p>
-        <%= dsfr_alert(type: :warning, html_attributes: { class: "alert-incomplete" }) do %>
-          <%= t(".alert_fusion", nom: content_tag(:span, "", class: "fr-text--bold", id: "beneficiaire-rattache-alert")).html_safe %>
-        <% end %>
-        
-      </div>
+  <div class="contenu-modale">
+    <div class="contenu">
+      <%= form_with url: batch_action_admin_beneficiaires_path, method: :post, local: true, id: form_id do |f| %>
+        <div class="modal-fusionner">
+          <div class="liste-beneficiaires-fusion">
+            <p> <%= t(".instruction") %> </p>
+            <ul id="liste-elements-a-fusionner"></ul>
+            <p> <%= t(".pour_fusion") %> <span class="fr-text--bold" id="beneficiaire-rattache"></span>. </p>
+            <%= dsfr_alert(type: :warning, html_attributes: { class: "alert-incomplete" }) do %>
+              <%= t(".alert_fusion", nom: content_tag(:span, "", class: "fr-text--bold", id: "beneficiaire-rattache-alert")).html_safe %>
+            <% end %>
+          </div>
+        </div>
 
-      <%= hidden_field_tag :batch_action, "fusionner" %>
-      <%= hidden_field_tag :batch_action_inputs, "{}" %>
+        <%= hidden_field_tag :batch_action, "fusionner" %>
+        <%= hidden_field_tag :batch_action_inputs, "{}" %>
 
-      <div id="hidden-ids-container"></div>
-
-    <% end %>
+        <div id="hidden-ids-container"></div>
+      <% end %>
+    </div>
   </div>
 
   <% component.with_button do %>

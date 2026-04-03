@@ -22,22 +22,67 @@
     }
 
     // Même stratégie que modal_verification_ouverture_evapro / invitation_modal :
-    // ne pas dépendre de window.dsfr (instance parfois absente ou non enregistrée).
+    // ne pas dépendre de window.dsfr ; n'utiliser surtout pas showModal().
+    // showModal() place le <dialog> dans la top layer du navigateur : si la fermeture
+    // ne passe que par le CSS DSFR sans dialog.close(), un voile invisible bloque
+    // tous les clics sur la page.
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
+    if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
+      modal.setAttribute("open", "");
+    }
+  }
+
+  function closeFusionModal(modal) {
+    if (!modal) return;
+    modal.classList.remove(OPENED_CLASS);
+    modal.setAttribute("aria-hidden", "true");
     if (modal.tagName === "DIALOG") {
-      if (typeof modal.showModal === "function") {
+      if (typeof modal.close === "function") {
         try {
-          modal.showModal();
+          modal.close();
         } catch (e) {
-          if (!modal.hasAttribute("open")) {
-            modal.setAttribute("open", "");
-          }
+          modal.removeAttribute("open");
         }
-      } else if (!modal.hasAttribute("open")) {
-        modal.setAttribute("open", "");
+      } else {
+        modal.removeAttribute("open");
       }
     }
+  }
+
+  function bindFusionCloseHandlers(modal) {
+    if (!modal || modal.dataset.fusionModalBound === "true") return;
+    modal.dataset.fusionModalBound = "true";
+
+    modal.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        event.preventDefault();
+        closeFusionModal(modal);
+      }
+    });
+
+    var selectors =
+      '[aria-controls="' + modal.id + '"], .fr-link--close, .fr-btn--close';
+    modal.querySelectorAll(selectors).forEach(function(trigger) {
+      trigger.addEventListener("click", function(event) {
+        if (trigger.type === "submit") return;
+        event.preventDefault();
+        closeFusionModal(modal);
+      });
+    });
+  }
+
+  function bindFusionEscapeHandler() {
+    if (document.body.dataset.fusionModalEscapeBound === "true") return;
+    document.body.dataset.fusionModalEscapeBound = "true";
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key !== "Escape") return;
+      var modal = document.getElementById(MODAL_ID);
+      if (modal && modal.classList.contains(OPENED_CLASS)) {
+        closeFusionModal(modal);
+      }
+    });
   }
 
   function handleFusionClick(event) {
@@ -162,6 +207,11 @@
   function init() {
     var modal = document.getElementById(MODAL_ID);
     if (!modal) return;
+
+    document.body.appendChild(modal);
+    modal.setAttribute("aria-hidden", "true");
+    bindFusionCloseHandlers(modal);
+    bindFusionEscapeHandler();
 
     document.addEventListener("click", handleFusionClick, true);
 

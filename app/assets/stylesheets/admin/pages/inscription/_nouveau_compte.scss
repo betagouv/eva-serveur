@@ -30,6 +30,10 @@
     p {
       margin-bottom: 0.25rem;
     }
+
+    .page-nouveau-compte-alerte-invitation__structure {
+      @include corps-de-texte-lg-regular;
+    }
   }
 }
 

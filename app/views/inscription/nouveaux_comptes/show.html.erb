@@ -10,22 +10,16 @@
 <% content_for :classes_body, "page-nouveau-compte-body" %>
 <div class="page-nouveau-compte">
   <% if @invitation.present? %>
-    <div class="fr-mb-4w">
+    <div class="fr-mb-4w", style="width: 100%;">
       <%= dsfr_alert(
             type: :info,
-            title: safe_join(
-              [
-                h(t(".invitation_alerte_titre_intro")),
-                tag.span(class: "page-nouveau-compte-alerte-invitation__structure") do
-                  @invitation.structure.display_name
-                end
-              ],
-              tag.br
-            ),
-            close_button: true,
+            title: t(".invitation_alerte_titre_intro"),
             html_attributes: { class: "fr-mb-0 page-nouveau-compte-alerte-invitation" }
           ) do %>
-        <%= t(".invitation_alerte_description") %>
+        <p class="page-nouveau-compte-alerte-invitation__structure">
+          <%= @invitation.structure&.display_name %><br>
+          <%= @invitation.structure&.adresse %>
+        </p>
       <% end %>
     </div>
   <% end %>

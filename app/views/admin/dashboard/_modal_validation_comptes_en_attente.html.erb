@@ -1,15 +1,39 @@
-<div class="modal" id="validation-comptes-en-attente" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content fr-alert fr-alert--warning">
-      <div class="modal-body">
-        <div class='message'>
-          <%= md t(".info_comptes_en_attente") %>
-        </div>
-        <div class='actions'>
-          <a class="fr-btn fr-btn--secondary fr-btn--sm" href="#" data-dismiss="modal"><%= t(".annuler") %></a>
-          <%= link_to "Voir les demandes", admin_comptes_path, class: "fr-btn fr-btn--sm" %>
-        </div>
-      </div>
+<% id_modal = "fr-modal-validation-comptes-en-attente" %>
+
+<%= dsfr_modal(
+  title: t(".titre"),
+  opened: true,
+  html_attributes: {
+    id: id_modal,
+    class: "fr-modal-validation-comptes evapro_admin",
+    "aria-hidden": "false",
+    open: true,
+    "data-fr-concealing-backdrop": "false"
+  }
+) do |component| %>
+  <div class="fr-alert fr-alert--warning">
+    <div class="message">
+      <%= md t(".info_comptes_en_attente") %>
+    </div>
+    <div class="fr-modal-validation-comptes__actions">
+      <%= render BoutonDsfrComponent.new(
+        "#",
+        type: :secondary,
+        tag: :button,
+        size: :sm,
+        "aria-controls": id_modal
+      ) do %>
+        <%= t(".annuler") %>
+      <% end %>
+
+      <%= render BoutonDsfrComponent.new(
+        admin_comptes_path,
+        type: :primary,
+        tag: :a,
+        size: :sm
+      ) do %>
+        <%= t(".voir_les_demandes") %>
+      <% end %>
     </div>
   </div>
-</div>
+<% end %>

@@ -32,6 +32,7 @@
 //= require modal_fusion
 //= require structure_confirmation
 //= require invitation_modal
+//= require modal_validation_comptes_en_attente
 //= require nouveau_compte
 
 //= require chartkick
@@ -43,7 +44,6 @@ jQuery.datetimepicker.setLocale('fr');
 I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('#validation-comptes-en-attente').modal();
   $('.modal--static').modal({
     backdrop: 'static',
     keyboard: false

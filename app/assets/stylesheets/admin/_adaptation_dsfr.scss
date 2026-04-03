@@ -306,13 +306,15 @@ button.fr-btn * {
 button.fr-btn.fr-btn--secondary,
 input[type="submit"].fr-btn.fr-btn--secondary,
 input[type="button"].fr-btn.fr-btn--secondary {
-  border: 1px solid $blue-france-sun-113;
+  border: none;
+  box-shadow: inset 0 0 0 1px $blue-france-sun-113;
 }
 
 button.fr-btn.fr-btn--tertiary,
 input[type="submit"].fr-btn.fr-btn--tertiary,
 input[type="button"].fr-btn.fr-btn--tertiary {
-  border: 1px solid $grey-900;
+  border: none;
+  box-shadow: inset 0 0 0 1px $grey-900;
 }
 
 // Annule le hover gris Active Admin (form input/button) pour les boutons DSFR
@@ -350,14 +352,16 @@ form input[type="button"].fr-btn:not(.disabled):hover,
 button.fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
 input[type="submit"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover,
 input[type="button"].fr-btn.fr-btn--secondary:not(.disabled, .bouton--actif):hover {
-  border: 1px solid $blue-france-sun-113;
+  border: none;
+  box-shadow: inset 0 0 0 1px $blue-france-sun-113;
   background-image: none;
 }
 
 button.fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
 input[type="submit"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover,
 input[type="button"].fr-btn.fr-btn--tertiary:not(.disabled, .bouton--actif):hover {
-  border: 1px solid $grey-900;
+  border: none;
+  box-shadow: inset 0 0 0 1px $grey-900;
   background-image: none;
 }
 
@@ -368,10 +372,19 @@ input[type="button"].fr-btn:not(.disabled):active {
   box-shadow: none;
 }
 
+button.fr-btn:not(.disabled),
+input[type="submit"].fr-btn:not(.disabled),
+input[type="button"].fr-btn:not(.disabled) {
+  background-image: none;
+  border: none;
+}
+
 button.fr-btn:disabled,
 input[type="submit"].fr-btn:disabled,
 input[type="button"].fr-btn:disabled {
-  border-color: transparent;
+  box-shadow: none;
+  background-image: none;
+  border: none;
 }
 
 // Fix pour fr-card__end : espacement du bouton dans les cards DSFR
@@ -531,6 +544,16 @@ a.fr-btn.fr-btn--tertiary:active {
   &:hover {
     background: rgba(0, 0, 0, 0.08) !important;
   }
+}
+
+.fr-btn--secondary.bouton--actif:hover {
+  border: none;
+  box-shadow: inset 0 0 0 1px $blue-france-sun-113;
+}
+
+.fr-btn--tertiary.bouton--actif:hover {
+  border: none;
+  box-shadow: inset 0 0 0 1px $grey-900;
 }
 
 .fr-btn--primary.bouton--actif{

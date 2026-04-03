@@ -44,6 +44,7 @@ class Inscription::StructuresController < ApplicationController
 
   def prepare_structure_si_necessaire
     return if @compte.siret_pro_connect.blank?
+    return if @compte.cree_via_invitation_acceptee? && @compte.structure.present?
 
     recherche_et_assigne_structure
     affilie_et_prepare_opcos
@@ -188,6 +189,9 @@ class Inscription::StructuresController < ApplicationController
 
   def associe_opcos_si_present
     return unless opco_id_params.present?
+
+    opco_id = opco_id_params.to_s
+    return if @structure.opco_id.present? && @structure.opco_id.to_s == opco_id
 
     @structure.validation_inscription = true
     @structure.opco_id = opco_id_params

@@ -97,9 +97,7 @@ allow_blank: true
   end
 
   def siret_uniqueness
-    return if siret.blank?
-    return if errors[:siret].any?
-    return if persisted? && !siret_changed?
+    return if ignorer_verification_unicite_siret?
 
     errors.add(:siret, :taken) if Structure.where.not(id: id).exists?(siret: siret)
   end
@@ -131,6 +129,18 @@ allow_blank: true
   end
 
   private
+
+  # Si le SIRET n'a pas changé, ne pas re-vérifier l'unicité : des doublons historiques
+  # peuvent exister ; une re-validation bloquerait toute sauvegarde (ex. compte + nested).
+  def ignorer_verification_unicite_siret?
+    return true if siret.blank?
+    return true if errors[:siret].any?
+    return true if current_ability&.can?(:bypass_siret_uniqueness, self)
+    return true if persisted? && !siret_changed?
+
+    false
+  end
+
   def verifie_siret_si_necessaire
     return if siret.blank?
     return unless structure_locale?

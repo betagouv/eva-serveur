@@ -12,6 +12,37 @@ describe Inscription::StructuresController, type: :controller do
   end
 
   describe "GET show" do
+    context "compte issu d'une invitation acceptée avec structure déjà associée" do
+      let!(:structure_invitee) do
+        create(:structure_locale, :avec_admin, siret: "13002526500013")
+      end
+      let(:compte_invitation) do
+        create(:compte_conseiller,
+               structure: structure_invitee,
+               etape_inscription: "assignation_structure",
+               siret_pro_connect: "13002526500013",
+               statut_validation: :en_attente)
+      end
+
+      before do
+        create(:invitation, :acceptee, compte: compte_invitation, structure: structure_invitee,
+               invitant: create(:compte_admin, structure: structure_invitee))
+        sign_in compte_invitation
+        allow(RechercheStructureParSiret).to receive(:new).and_call_original
+      end
+
+      it "ne prépare pas la structure via affiliation OPCO (parcours invitation)" do
+        service_double = instance_double(AffiliationOpcoService)
+        allow(AffiliationOpcoService).to receive(:new).and_return(service_double)
+        allow(service_double).to receive(:affilie_opcos)
+
+        get :show
+
+        expect(AffiliationOpcoService).not_to have_received(:new)
+        expect(response).to have_http_status(:success)
+      end
+    end
+
     context "quand la structure n'est pas encore préparée" do
       context "avec une structure temporaire (non persistée)" do
         before do
@@ -434,6 +465,23 @@ structure_id: structure.id)
           expect(response).to have_http_status(:success)
         end
       end
+    end
+  end
+
+  describe "#associe_opcos_si_present" do
+    let(:opco) { create(:opco, nom: "OPCO Test", idcc: [ "3" ]) }
+    let(:structure) do
+      create(:structure_locale, opco: opco, siret: "13002526500013", idcc: [ "3" ])
+    end
+
+    before do
+      controller.instance_variable_set(:@structure, structure)
+    end
+
+    it "ne sauvegarde pas lorsque l'opco_id demandé est déjà celui de la structure" do
+      allow(controller).to receive(:opco_id_params).and_return(opco.id.to_s)
+      expect(structure).not_to receive(:save)
+      controller.send(:associe_opcos_si_present)
     end
   end
 end

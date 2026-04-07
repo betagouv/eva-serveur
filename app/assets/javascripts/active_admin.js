@@ -45,10 +45,6 @@ jQuery.datetimepicker.setLocale('fr');
 I18n.locale = 'fr';
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('.modal--static').modal({
-    backdrop: 'static',
-    keyboard: false
-  });
   new ClipboardJS('.copier-coller');
   $('[data-toggle="tooltip"]').tooltip();
 });

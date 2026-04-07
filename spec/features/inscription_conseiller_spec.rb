@@ -178,21 +178,23 @@ describe 'Création de compte conseiller', type: :feature do
   context "lien d'invitation invalide ou déjà utilisé" do
     it "redirige avec un message d'erreur quand le token est inconnu" do
       visit inscription_nouveau_compte_path(invitation_token: "token-inexistant")
-      expect(page).to have_current_path(structures_path)
-      expect(page).to have_content("n'est pas valide ou a déjà été utilisé")
+      expect(page).to have_current_path(inscription_invitation_invalide_path)
+      expect(page).to have_content("n’est pas valide ou a déjà été utilisé")
+      expect(page).to have_link("Aller à l’accueil pour se connecter",
+href: new_compte_session_path)
     end
 
     it "redirige avec un message d'erreur quand l'invitation est déjà acceptée" do
       invitation = create(:invitation, :acceptee, structure: structure)
       visit inscription_nouveau_compte_path(invitation_token: invitation.token)
-      expect(page).to have_current_path(structures_path)
-      expect(page).to have_content("n'est pas valide ou a déjà été utilisé")
+      expect(page).to have_current_path(inscription_invitation_invalide_path)
+      expect(page).to have_content("n’est pas valide ou a déjà été utilisé")
     end
 
     it "redirige depuis l'ancien URL Devise quand le token est inconnu" do
       visit new_compte_registration_path(invitation_token: "token-inexistant")
-      expect(page).to have_current_path(structures_path)
-      expect(page).to have_content("n'est pas valide ou a déjà été utilisé")
+      expect(page).to have_current_path(inscription_invitation_invalide_path)
+      expect(page).to have_content("n’est pas valide ou a déjà été utilisé")
     end
   end
 end

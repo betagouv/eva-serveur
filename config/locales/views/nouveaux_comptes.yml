@@ -23,3 +23,10 @@ fr:
         bouton_annuler: Annuler
         invitation_alerte_titre_intro: Invitation à rejoindre une structure
         invitation_alerte_description: Remplissez les informations demandées pour accéder à votre espace. Cela ne prend que quelques minutes.
+    invitations:
+      invalide:
+        titre: Invitation créer un compte
+        sous_titre: ""
+        alerte_titre: Ce lien d’invitation n’est pas valide ou a déjà été utilisé
+        alerte_texte: Vous avez sûrement déjà créé un compte avec ce lien d’invitation. Si ce n’est pas le cas, contactez un référent de votre structure.
+        lien_accueil: Aller à l’accueil pour se connecter

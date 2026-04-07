@@ -1,0 +1,22 @@
+<% content_for :title, t(".titre") %>
+<% content_for :titre do %>
+  <%= t(".titre") -%>
+<% end %>
+<% content_for :sous_titre do %>
+  <%= t(".sous_titre") -%>
+<% end %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<div class="fr-mt-6w fr-mb-6w">
+  <%= dsfr_alert(type: :error, title: t(".alerte_titre")) do %>
+    <p><%= t(".alerte_texte") %></p>
+  <% end %>
+
+  <div class="fr-mt-4w" style="text-align: center;">
+    <%= render LienComponent.new(
+      t(".lien_accueil"),
+      new_compte_session_path,
+      class: "fr-link fr-icon-arrow-left-line fr-link--icon-left"
+    ) %>
+  </div>
+</div>

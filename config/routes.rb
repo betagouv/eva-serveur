@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resource :informations_compte, only: [:show, :update]
     resource :structure, only: [:show, :update]
     resource :recherche_structure, only: [:show, :update], controller: "recherche_structures"
+    get :invitation_invalide, to: "invitations#invalide"
   end
   resources :structures, only: :index
 

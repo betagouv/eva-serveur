@@ -44,8 +44,7 @@ module Eva
         @invitation = Invitation.find_by(token: params[:invitation_token])
         return if @invitation&.utilisable?
 
-        redirect_to structures_path,
-                    alert: I18n.t("devise.registrations.invitation_invalide_ou_deja_utilisee")
+        redirect_to inscription_invitation_invalide_path
       end
 
       def create_avec_invitation

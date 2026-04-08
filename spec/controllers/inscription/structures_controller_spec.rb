@@ -230,12 +230,12 @@ describe Inscription::StructuresController, type: :controller do
           structure_params.merge(type_structure: "entreprise")
         end
 
-        it "affecte l'usage 'Eva: entreprises' à la structure" do
+        it "affecte l'usage 'EVAPRO' à la structure" do
           patch :update, params: { structure: structure_params_entreprise, commit: "creer" }
 
           structure_creée.reload
           expect(structure_creée.type_structure).to eq("entreprise")
-          expect(structure_creée.usage).to eq("Eva: entreprises")
+          expect(structure_creée.usage).to eq("EVAPRO")
         end
       end
 
@@ -336,12 +336,12 @@ describe Inscription::StructuresController, type: :controller do
 
         it "crée la structure avec l'usage entreprises et redirige vers le dashboard" do
           patch :update, params: {
-            structure_locale: { usage: AvecUsage::USAGE_ENTREPRISES },
+            structure_locale: { usage: AvecUsage::USAGE_EVAPRO },
             commit: "creer_avec_usage"
           }
 
           structure_creée.reload
-          expect(structure_creée.usage).to eq(AvecUsage::USAGE_ENTREPRISES)
+          expect(structure_creée.usage).to eq(AvecUsage::USAGE_EVAPRO)
           expect(response).to redirect_to(admin_dashboard_path)
         end
       end

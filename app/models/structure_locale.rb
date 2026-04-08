@@ -58,9 +58,9 @@ class StructureLocale < Structure
   def affecte_usage_entreprise_si_necessaire
     return unless ENV["ACTIVE_EVAPRO"].present?
     return unless type_structure == "entreprise"
-    return if eva_entreprises?
+    return if evapro?
 
-    self.usage = AvecUsage::USAGE_ENTREPRISES
+    self.usage = AvecUsage::USAGE_EVAPRO
   end
 
   def display_name
@@ -71,9 +71,10 @@ class StructureLocale < Structure
     CIBLE_EVALUATION[type_structure&.to_sym] || "bénéficiaires"
   end
 
-  def eva_entreprises?
-    usage == AvecUsage::USAGE_ENTREPRISES
+  def evapro?
+    usage == AvecUsage::USAGE_EVAPRO
   end
+  alias_method :eva_entreprises?, :evapro?
 
   def metabase_dashboard
     23

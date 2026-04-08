@@ -58,17 +58,17 @@ describe StructureLocale, type: :model do
   describe '#usage' do
     it do
       expect(subject).to validate_inclusion_of(:usage).in_array([ "Eva: bénéficiaires",
-                                                                   "Eva: entreprises" ])
+                                                                   "EVAPRO" ])
     end
   end
 
-  describe '#eva_entreprises?' do
+  describe '#evapro?' do
     context 'quand la structure est une entreprise' do
       let(:structure) do
-        described_class.new(type_structure: "entreprise", usage: "Eva: entreprises")
+        described_class.new(type_structure: "entreprise", usage: "EVAPRO")
       end
 
-      it { expect(structure).to be_eva_entreprises }
+      it { expect(structure).to be_evapro }
     end
 
     context 'quand la structure n\'est pas une entreprise' do
@@ -76,7 +76,7 @@ describe StructureLocale, type: :model do
         described_class.new(type_structure: "mission_locale", usage: "Eva: bénéficiaires")
       end
 
-      it { expect(structure).not_to be_eva_entreprises }
+      it { expect(structure).not_to be_evapro }
     end
 
     context 'quand le type est entreprise mais l\'usage est bénéficiaires' do
@@ -84,15 +84,15 @@ describe StructureLocale, type: :model do
         described_class.new(type_structure: "entreprise", usage: "Eva: bénéficiaires")
       end
 
-      it { expect(structure).not_to be_eva_entreprises }
+      it { expect(structure).not_to be_evapro }
     end
 
     context "quand le type n'est pas entreprise mais l'usage est entreprises" do
       let(:structure) do
-        described_class.new(type_structure: "mission_locale", usage: "Eva: entreprises")
+        described_class.new(type_structure: "mission_locale", usage: "EVAPRO")
       end
 
-      it { expect(structure).to be_eva_entreprises }
+      it { expect(structure).to be_evapro }
     end
   end
 
@@ -120,21 +120,21 @@ describe StructureLocale, type: :model do
                               type_structure: "entreprise", usage: nil)
         end
 
-        it "affecte l'usage 'Eva: entreprises'" do
+        it "affecte l'usage 'EVAPRO'" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("Eva: entreprises")
+          expect(structure.usage).to eq("EVAPRO")
         end
       end
 
-      context 'quand le type_structure est entreprise et usage est déjà "Eva: entreprises"' do
+      context 'quand le type_structure est entreprise et usage est déjà "EVAPRO"' do
         let(:structure) do
           described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
-                              type_structure: "entreprise", usage: "Eva: entreprises")
+                              type_structure: "entreprise", usage: "EVAPRO")
         end
 
         it "ne modifie pas l'usage existant" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("Eva: entreprises")
+          expect(structure.usage).to eq("EVAPRO")
         end
       end
 
@@ -144,9 +144,21 @@ describe StructureLocale, type: :model do
                               type_structure: "entreprise", usage: "Eva: bénéficiaires")
         end
 
-        it "force l'usage à 'Eva: entreprises'" do
+        it "force l'usage à 'EVAPRO'" do
           structure.affecte_usage_entreprise_si_necessaire
-          expect(structure.usage).to eq("Eva: entreprises")
+          expect(structure.usage).to eq("EVAPRO")
+        end
+      end
+
+      context 'quand la valeur historique "Eva: entreprises" est encore présente' do
+        let(:structure) do
+          described_class.new(nom: "Test", code_postal: "75012", siret: "12345678901234",
+                              type_structure: "entreprise", usage: "Eva: entreprises")
+        end
+
+        it "normalise l'usage vers EVAPRO" do
+          structure.affecte_usage_entreprise_si_necessaire
+          expect(structure.usage).to eq("EVAPRO")
         end
       end
 

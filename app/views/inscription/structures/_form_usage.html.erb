@@ -10,7 +10,7 @@
       ) %>
     <% end %>
     <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "form-usage-card" } do |f| %>
-      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_ENTREPRISES %>
+      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_EVAPRO %>
       <%= render CardUsageComponent.new(
         titre: t("inscription.structures.show.usage.evapro.titre"),
         description: t("inscription.structures.show.usage.evapro.description"),

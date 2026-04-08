@@ -179,7 +179,7 @@ describe Compte do
       let(:structure) do
         build(:structure_locale,
               type_structure: "entreprise",
-              usage: "Eva: entreprises")
+              usage: "EVAPRO")
       end
       let(:compte) { build(:compte, structure: structure) }
 

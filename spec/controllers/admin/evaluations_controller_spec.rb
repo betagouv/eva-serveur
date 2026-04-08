@@ -5,7 +5,7 @@ describe Admin::EvaluationsController, type: :controller do
     let(:structure) do
       create(:structure_locale,
              type_structure: "entreprise",
-             usage: AvecUsage::USAGE_ENTREPRISES)
+             usage: AvecUsage::USAGE_EVAPRO)
     end
     let(:compte_connecte) { create(:compte_admin, structure: structure) }
     let(:campagne) { create(:campagne, compte: compte_connecte) }

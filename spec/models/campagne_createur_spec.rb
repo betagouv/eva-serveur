@@ -7,7 +7,7 @@ describe CampagneCreateur, type: :model do
     create(:structure_locale,
            nom: "ma super structure",
            type_structure: "entreprise",
-           usage: "Eva: entreprises",
+           usage: "EVAPRO",
            opco: opco)
   end
   let(:createur) { described_class.new(structure_entreprise, compte) }
@@ -87,7 +87,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_sans_opco) do
           create(:structure_locale,
                  type_structure: "entreprise",
-                 usage: "Eva: entreprises",
+                 usage: "EVAPRO",
                  opco: nil)
         end
         let(:createur_sans_opco) { described_class.new(structure_sans_opco, compte) }
@@ -97,7 +97,7 @@ describe CampagneCreateur, type: :model do
         end
       end
 
-      context "quand l'usage n'est pas Eva: entreprises" do
+      context "quand l'usage n'est pas EVAPRO" do
         let(:structure_mauvais_usage) do
           create(:structure_locale,
                  type_structure: "entreprise",
@@ -115,7 +115,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_administrative) do
           create(:structure_administrative,
                  type_structure: "entreprise",
-                 usage: "Eva: entreprises",
+                 usage: "EVAPRO",
                  opco: opco)
         end
         let(:createur_structure_administrative) {
@@ -131,7 +131,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_non_entreprise) do
         create(:structure_locale,
                  type_structure: "mission_locale",
-                 usage: "Eva: entreprises",
+                 usage: "EVAPRO",
                  opco: opco)
         end
         let(:createur_non_entreprise) { described_class.new(structure_non_entreprise, compte) }
@@ -146,7 +146,7 @@ describe CampagneCreateur, type: :model do
         let(:structure_ineligible) do
           create(:structure_locale,
                type_structure: "mission_locale",
-               usage: "Eva: entreprises",
+               usage: "EVAPRO",
                  opco: opco)
         end
         let(:createur_ineligible) { described_class.new(structure_ineligible, compte) }

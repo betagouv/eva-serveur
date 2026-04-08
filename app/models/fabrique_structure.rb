@@ -6,7 +6,7 @@ class FabriqueStructure
     structure.assign_attributes(attributs_structure)
     structure.validation_inscription = validation_inscription
 
-    structure.type_structure = "entreprise" if structure.usage == AvecUsage::USAGE_ENTREPRISES
+    structure.type_structure = "entreprise" if structure.usage == AvecUsage::USAGE_EVAPRO
 
     structure.save
     structure

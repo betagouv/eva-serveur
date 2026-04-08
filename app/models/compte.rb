@@ -93,7 +93,7 @@ class Compte < ApplicationRecord
   end
 
   def utilisateur_entreprise?
-    !!structure&.eva_entreprises?
+    !!structure&.evapro?
   end
 
   # Aligné sur Ability : profil restreint tant que la validation structure n'est pas finalisée.

@@ -63,8 +63,10 @@ div class: "row" do
 end
 div class: "row" do
   div class: "col-6" do
-    section id: "bloc-statistiques" do
-      render partial: "admin/structures/statistiques"
+    unless structure.evapro?
+      section id: "bloc-statistiques" do
+        render partial: "admin/structures/statistiques"
+      end
     end
 
     if can?(:manage, Compte)

@@ -55,7 +55,7 @@ div class: "row" do
 
       render "admin/structures/membres"
 
-      if resource.is_a?(StructureLocale)
+      if resource.is_a?(StructureLocale) && !resource.evapro?
         render partial: "admin/structures/mes_campagnes", locals: { campagnes: campagnes }
       end
     end

@@ -16,7 +16,7 @@
   }
 }
 
-.focus-incoutournable {
+.focus-incontournable {
   display: flex;
   align-items: flex-start;
   gap: $dsfr-spacing-3w;
@@ -24,7 +24,7 @@
   background: var(--background-alt-blue-france);
 }
 
-.focus-incoutournable__media {
+.focus-incontournable__media {
   display: flex;
   width: var(--Grille-3-colonnes, 282px);
   padding: $dsfr-spacing-3w;
@@ -32,12 +32,11 @@
   align-items: flex-start;
 }
 
-.focus-incoutournable__media-image {
-  mix-blend-mode: luminosity;
+.focus-incontournable__media-image {
   width: 100%;
 }
 
-.focus-incoutournable__explication {
+.focus-incontournable__explication {
   display: flex;
   padding: $dsfr-spacing-3w $dsfr-spacing-2w;
   flex-direction: column;
@@ -47,7 +46,7 @@
   @include corps-de-texte-sm-regular;
 }
 
-.focus-incoutournable__explication a {
+.focus-incontournable__explication a {
   @include corps-de-texte-sm-regular;
 
   color: $couleur-texte;

@@ -96,8 +96,8 @@ group :development do
   gem "spring", "~> 3.0"
   gem "spring-commands-rspec"
 
-  gem "ruby-lsp", "~> 0.22.1"
-  gem "ruby-lsp-rails", "~> 0.3.27"
+  gem "ruby-lsp", "~> 0.26.9"
+  gem "ruby-lsp-rails", "~> 0.4.8"
 end
 
 group :test do

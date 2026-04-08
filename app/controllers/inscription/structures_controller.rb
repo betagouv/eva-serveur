@@ -126,7 +126,7 @@ class Inscription::StructuresController < ApplicationController
 
   def redirige_vers_usage_ou_creer
     if structure_params[:type_structure] == "entreprise"
-      @compte.usage = AvecUsage::USAGE_ENTREPRISES
+      @compte.usage = AvecUsage::USAGE_EVAPRO
       creer_nouvelle_structure
     elsif etape_usage_inscription_active?
       session[:structure_params_inscription] = structure_params.to_h
@@ -203,7 +203,7 @@ class Inscription::StructuresController < ApplicationController
     @compte.etape_inscription = :complet
 
     if @compte.save
-      CampagneCreateur.new(@structure, @compte).cree_campagne_opco! if @structure.eva_entreprises?
+      CampagneCreateur.new(@structure, @compte).cree_campagne_opco! if @structure.evapro?
       redirige_vers_etape_inscription(@compte)
     else
       render_parametrage

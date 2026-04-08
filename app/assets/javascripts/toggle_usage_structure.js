@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (usageRadios.length > 0 && opcoFieldWrapper) {
     function toggleOpcoField() {
       const selectedUsage = document.querySelector('input[name="structure_locale[usage]"]:checked')?.value;
-      if (selectedUsage === 'Eva: entreprises') {
+      if (selectedUsage === 'EVAPRO') {
         opcoFieldWrapper.style.display = '';
       } else {
         opcoFieldWrapper.style.display = 'none';

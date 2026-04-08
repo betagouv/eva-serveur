@@ -101,7 +101,7 @@ visible: :all
         visit new_admin_structure_locale_path
         fill_in :structure_locale_nom, with: 'Entreprise test'
         select 'Entreprise'
-        choose 'Eva: entreprises'
+        choose 'EVAPRO'
         fill_in :structure_locale_code_postal, with: '92100'
         fill_in :structure_locale_siret, with: '12345678901234'
         click_on 'Créer une structure'

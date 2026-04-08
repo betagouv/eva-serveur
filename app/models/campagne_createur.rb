@@ -16,7 +16,7 @@ class CampagneCreateur
 
   def doit_creer_campagne?
     @structure.is_a?(StructureLocale) &&
-      @structure.eva_entreprises? &&
+      @structure.evapro? &&
       @structure.opco.present?
   end
 

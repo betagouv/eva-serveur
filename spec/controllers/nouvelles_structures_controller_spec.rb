@@ -13,7 +13,7 @@ describe NouvellesStructuresController, type: :controller do
         code_postal: "75001",
         siret: "12345678901234",
         type_structure: "entreprise",
-        usage: "Eva: entreprises",
+        usage: "EVAPRO",
         idcc: [ "3", "18" ]
       }
     }
@@ -54,12 +54,12 @@ describe NouvellesStructuresController, type: :controller do
 usage: nil })
         end
 
-        it "affecte l'usage 'Eva: entreprises' à la structure" do
+        it "affecte l'usage 'EVAPRO' à la structure" do
           post :create, params: { compte: compte_params_entreprise }
 
           structure = Compte.last.structure
           expect(structure.type_structure).to eq("entreprise")
-          expect(structure.usage).to eq("Eva: entreprises")
+          expect(structure.usage).to eq("EVAPRO")
         end
       end
     end

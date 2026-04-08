@@ -102,9 +102,10 @@ allow_blank: true
     errors.add(:siret, :taken) if Structure.where.not(id: id).exists?(siret: siret)
   end
 
-  def eva_entreprises?
+  def evapro?
     false
   end
+  alias_method :eva_entreprises?, :evapro?
 
   def self.ransack_unaccent_attributes
     %w[nom]

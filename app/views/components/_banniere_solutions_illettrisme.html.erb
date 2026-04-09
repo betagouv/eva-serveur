@@ -5,6 +5,8 @@
       <span id="asterisque">*</span>
     <% end %>
     <%= t(".description") %><br/>
-    <%= render LienComponent.new(t(".lien"), t(".lien"), nouvelle_fenetre: true) %>
+    <% code_commune = current_compte.structure&.code_commune %>
+    <% lien = code_commune.present? ? t(".lien_commune", code_commune: code_commune) : t(".lien") %>
+    <%= render LienComponent.new(t(".lien"), lien, nouvelle_fenetre: true) %>
   </div>
 </div>

@@ -47,6 +47,7 @@ div class: "row" do
                 class_couleur: badge_class(structure.autorisation_creation_campagne))
               )
             end
+            row :code_commune
             row :region
           end
           row :created_at

@@ -35,6 +35,7 @@ fr:
         opco: Opérateur de compétences
         date_verification_siret: Date vérification SIRET
         region: Région
+        code_commune: Code (INSEE) de la commune
         idcc: Convention(s) collective(s)
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente

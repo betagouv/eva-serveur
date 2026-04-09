@@ -37,12 +37,15 @@ describe Structure, type: :model do
     end
   end
 
-  def mock_geo_api(departement, code_region, region)
+  def mock_geo_api(code_postal, code_commune, departement, code_region, region)
     mock_reponse_typhoeus("https://geo.api.gouv.fr/departements/#{departement}",
                           { codeRegion: code_region })
 
     mock_reponse_typhoeus("https://geo.api.gouv.fr/regions/#{code_region}",
                           { nom: region })
+
+    mock_reponse_typhoeus("https://geo.api.gouv.fr/communes?codePostal=#{code_postal}",
+                          [ { code: code_commune } ])
   end
 
   describe 'géolocalisation à la validation' do
@@ -53,7 +56,7 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '75012', [ { 'coordinates' => [ 40.7143528, -74.0059731 ] } ]
         )
-        mock_geo_api(75, 11, 'Île-de-France')
+        mock_geo_api("75012", "75123", 75, 11, 'Île-de-France')
         structure.valid?
       end
 
@@ -61,6 +64,7 @@ describe Structure, type: :model do
         expect(structure.latitude).to be(40.7143528)
         expect(structure.longitude).to be(-74.0059731)
         expect(structure.region).to eql('Île-de-France')
+        expect(structure.code_commune).to eql("75123")
       end
 
       it { expect(described_class.geocoder_options[:params]).to include(countrycodes: 'fr') }
@@ -77,7 +81,7 @@ describe Structure, type: :model do
             }
           ]
         )
-        mock_geo_api(988, 988, 'Nouvelle-Calédonie')
+        mock_geo_api("98850", "", 988, 988, 'Nouvelle-Calédonie')
         structure.valid?
       end
 
@@ -93,7 +97,7 @@ describe Structure, type: :model do
         Geocoder::Lookup::Test.add_stub(
           '20090', [ { 'coordinates' => [ 41.9333, 8.7507 ] } ]
         )
-        mock_geo_api('2A', 94, 'Corse')
+        mock_geo_api("20090", "", '2A', 94, 'Corse')
         structure.valid?
       end
 
@@ -102,8 +106,9 @@ describe Structure, type: :model do
       end
     end
 
-    context 'quand ma structure a déjà une région' do
-      let(:structure) { described_class.new code_postal: '20114', region: 'Corse' }
+    context 'quand ma structure a déjà une région et un code commune' do
+      let(:structure) {
+ described_class.new code_postal: '20114', region: 'Corse', code_commune: '12123' }
 
       before do
         structure.code_postal = '61000'
@@ -114,12 +119,13 @@ describe Structure, type: :model do
             }
           ]
         )
-        mock_geo_api(61, 28, 'Normandie')
+        mock_geo_api("61000", "61123", 61, 28, 'Normandie')
         structure.valid?
       end
 
-      it 'lui attribue la nouvelle région' do
+      it 'écrase les anciennes valeurs' do
         expect(structure.region).to eql('Normandie')
+        expect(structure.code_commune).to eql("61123")
       end
     end
   end

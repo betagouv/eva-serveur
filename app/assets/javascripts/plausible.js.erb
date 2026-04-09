@@ -1,4 +1,9 @@
 <% if ENV['PLAUSIBLE_DOMAINE'].present? %>
 tarteaucitron.user.plausibleDomain = "<%= ENV['PLAUSIBLE_DOMAINE'] %>";
+tarteaucitron.services.plausible.js = function () {
+  "use strict";
+  if (tarteaucitron.user.plausibleDomain === undefined) { return; }
+  tarteaucitron.addScript('https://plausible.io/js/script.outbound-links.js', '', '', '', 'data-domain', tarteaucitron.user.plausibleDomain);
+};
 (tarteaucitron.job = tarteaucitron.job || []).push('plausible');
 <% end %>

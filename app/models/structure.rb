@@ -36,6 +36,7 @@ allow_blank: true
   geocoded_by :code_postal, state: :region, params: { countrycodes: "fr" } do |obj, resultats|
     if (resultat = resultats.first)
       obj.region = GeolocHelper.cherche_region(obj.code_postal)
+      obj.code_commune = GeolocHelper.cherche_code_commune(obj.code_postal)
       obj.latitude = resultat.latitude
       obj.longitude = resultat.longitude
     end

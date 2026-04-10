@@ -25,7 +25,8 @@
   @include corps-de-texte-xs-base;
 
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.25rem;
 }
 
 @mixin corps-de-texte-xs-italic() {

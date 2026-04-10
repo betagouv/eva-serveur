@@ -5,6 +5,11 @@
   gap: $dsfr-spacing-3w;
 }
 
+.evaluation-aller-plus-loin__les-incontournables {
+  background: var(--background-alt-blue-france);
+  padding-bottom: $dsfr-spacing-3w;
+}
+
 .definitions-impacts__groupe-termes-definis {
   display: flex;
   flex-direction: column;
@@ -21,7 +26,6 @@
   align-items: flex-start;
   gap: $dsfr-spacing-3w;
   align-self: stretch;
-  background: var(--background-alt-blue-france);
 }
 
 .focus-incontournable__media {
@@ -52,6 +56,124 @@
   color: $couleur-texte;
 }
 
+.incontournables-etapes__titre {
+  margin: 0;
+
+  @include corps-de-texte-lg-bold;
+
+  color: var(--text-title-grey);
+}
+
+.incontournables-etapes {
+  display: flex;
+  width: 55.875rem;
+  flex-direction: column;
+  align-items: center;
+  gap: $dsfr-spacing-1w;
+  flex: 1 0 0;
+}
+
+.incontournables-etapes__rangee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $dsfr-spacing-1w;
+  align-self: stretch;
+
+  @media print {
+    gap: $dsfr-spacing-2v;
+  }
+}
+
+.illustrinfo {
+  display: flex;
+  width: 13.3125rem;
+  height: 7.875rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: $dsfr-spacing-2v;
+  gap: $dsfr-spacing-1w;
+  border-radius: $dsfr-radius-lg;
+  background: #DCE2E7;
+}
+
+.illustrinfo-body {
+  display: flex;
+  width: 11.5rem;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1w;
+  flex-shrink: 0;
+}
+
+.illustration {
+  width: 4.25rem;
+  height: 3.25rem;
+  flex-shrink: 0;
+}
+
+.illustrinfo .droite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+  min-width: 0;
+}
+
+.illustrinfo .numero {
+  margin: 0;
+
+  @include titre-h2;
+}
+
+.illustrinfo .titre {
+  margin: 0;
+  min-width: 7.1875rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+
+  @include corps-de-texte-xs-bold;
+}
+
+.illustrinfo--01 {
+  background: #DCE2E7;
+  color: #3272AD;
+}
+
+.illustrinfo--02 {
+  background: #F1E5E1;
+  color: #F79676;
+}
+
+.illustrinfo--03 {
+  background: #F1E5E1;
+  color: #F05757;
+}
+
+.illustrinfo--04 {
+  background: #E5E9DF;
+  color: #7EAB42;
+}
+
+.illustrinfo--05 {
+  background: #EBE6E1;
+  color: #F1A131;
+}
+
+.illustrinfo--06 {
+  background: #EDE4EA;
+  color: #D077B4;
+}
+
+.illustrinfo--07 {
+  background: #F0E7DF;
+  color: #F1A131;
+}
+
+.illustrinfo--08 {
+  background: #E1E8EB;
+  color: #61B7CC;
+}
+
 .definitions-impacts__titre {
   @include corps-de-texte-lg-bold;
 
@@ -71,5 +193,15 @@
 
   @media print {
     @include corps-de-texte-md-regular;
+  }
+}
+
+@media (max-width: 48rem) {
+  .incontournables-etapes__rangee {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-incontournable {
+    flex-direction: column;
   }
 }

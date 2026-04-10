@@ -1,19 +1,107 @@
 <div id="evaluation-aller-plus-loin" class="evaluation-aller-plus-loin">
   <h2 class="evaluation__titre mb-0"><%= t(".titre") %></h2>
-  <div>
-    <div class="focus-incontournable">
-      <div class="focus-incontournable__media">
-        <%= image_tag "les-incontournables.png", class: "focus-incontournable__media-image", alt: t(".image_alt") %>
-      </div>
-      <div class="focus-incontournable__explication">
-        <%= t(".explication") %>
+  <div class="evaluation-aller-plus-loin__les-incontournables">
+    <div>
+      <div class="focus-incontournable">
+        <div class="focus-incontournable__media">
+          <%= image_tag "les-incontournables.png", class: "focus-incontournable__media-image", alt: t(".image_alt") %>
+        </div>
+        <div class="focus-incontournable__explication">
+          <%= t(".explication") %>
 
-        <br><br>
-        <%= link_to t(".lien_texte"), "https://www.bao-incontournables.fr", class: "fr-link fr-link--sm", target: "_blank" %>
+          <br><br>
+          <%= link_to t(".lien_texte"), "https://www.bao-incontournables.fr", class: "fr-link fr-link--sm", target: "_blank" %>
+        </div>
       </div>
     </div>
-    
+    <h3 class="incontournables-etapes__titre text-center pb-3"><%= t(".titre_etapes") %></h3>
+    <div class="incontournables-etapes">    
+      <div class="incontournables-etapes__rangee">
+        <div class="illustrinfo illustrinfo--01">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/jinforme 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "01", titre: t(".etapes.informe")) %>
+            <div class="droite">
+              <div class="numero">01</div>
+              <div class="titre"><%= t(".etapes.informe") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--02">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/jimplique 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "02", titre: t(".etapes.implique")) %>
+            <div class="droite">
+              <div class="numero">02</div>
+              <div class="titre"><%= t(".etapes.implique") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--03">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/je-repere-et-jidentiie 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "03", titre: t(".etapes.repere")) %>
+            <div class="droite">
+              <div class="numero">03</div>
+              <div class="titre"><%= t(".etapes.repere") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--04">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/jelabore-mon-plan 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "04", titre: t(".etapes.plan_actions")) %>
+            <div class="droite">
+              <div class="numero">04</div>
+              <div class="titre"><%= t(".etapes.plan_actions") %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="incontournables-etapes__rangee">
+        <div class="illustrinfo illustrinfo--05">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/je-passe-commande 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "05", titre: t(".etapes.passe_commande")) %>
+            <div class="droite">
+              <div class="numero">05</div>
+              <div class="titre"><%= t(".etapes.passe_commande") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--06">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/je-forme-des-salaries 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "06", titre: t(".etapes.co_construis")) %>
+            <div class="droite">
+              <div class="numero">06</div>
+              <div class="titre"><%= t(".etapes.co_construis") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--07">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/je-co-construis 1.svg", class: "illustration", alt: t(".image_alt_etape", numero: "07", titre: t(".etapes.forme_salaries")) %>
+            <div class="droite">
+              <div class="numero">07</div>
+              <div class="titre"><%= t(".etapes.forme_salaries") %></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="illustrinfo illustrinfo--08">
+          <div class="illustrinfo-body">
+            <%= image_tag "incontournables/illustration.svg", class: "illustration", alt: t(".image_alt_etape", numero: "08", titre: t(".etapes.evalue_projet")) %>
+            <div class="droite">
+              <div class="numero">08</div>
+              <div class="titre"><%= t(".etapes.evalue_projet") %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <div class="definitions-impacts__titre"><%= t(".titre_definitions") %></div>
 
   <div class="definitions-impacts__groupe-termes-definis">

@@ -204,6 +204,42 @@
   }
 }
 
+// PDF : la grille desktop est limitée par max-width ; la page PDF est souvent plus large,
+// ce qui laisse une bande vide à droite. On étire le bloc et les cartes sur toute la largeur utile.
+@media print {
+  .evaluation-aller-plus-loin__les-incontournables {
+    width: 100%;
+    max-width: none;
+  }
+
+  .incontournables-etapes {
+    max-width: none;
+    width: 100%;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .incontournables-etapes__rangee {
+    justify-content: space-between;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .illustrinfo {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    min-height: 7.875rem;
+  }
+
+  .illustrinfo-body {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 48rem) {
   .evaluation-aller-plus-loin__les-incontournables {
     padding: $dsfr-spacing-2w $dsfr-spacing-1w;

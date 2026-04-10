@@ -15,8 +15,19 @@ fr:
       aller_plus_loin:
         titre: "Aller plus loin"
         image_alt: "Focus incontournable"
+        image_alt_etape: "Illustration étape %{numero} : %{titre}"
         explication: "« Les Incontournables » constituent une boite à outils à destination des entreprises, opérateur de compétences et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
         lien_texte: "www.bao-incontournables.fr"
+        titre_etapes: "Les 8 étapes"
+        etapes:
+          informe: "Je m’informe"
+          implique: "J’implique"
+          repere: "Je repère et j’identifie les besoins"
+          plan_actions: "J’élabore mon plan d’actions"
+          passe_commande: "Je passe commande ou je réponds à la commande"
+          co_construis: "Je co-construis l’offre de formation"
+          forme_salaries: "Je forme les salariés"
+          evalue_projet: "J’évalue le projet"
         titre_definitions: "Définitions des impacts"
         performance_collective:
           titre: "Performance collective : "

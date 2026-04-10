@@ -6,6 +6,8 @@
 }
 
 .evaluation-aller-plus-loin__les-incontournables {
+  width: 100%;
+  min-width: 0;
   background: var(--background-alt-blue-france);
   padding-bottom: $dsfr-spacing-3w;
 }
@@ -23,6 +25,8 @@
 
 .focus-incontournable {
   display: flex;
+  width: 100%;
+  min-width: 0;
   align-items: flex-start;
   gap: $dsfr-spacing-3w;
   align-self: stretch;
@@ -42,10 +46,12 @@
 
 .focus-incontournable__explication {
   display: flex;
+  min-width: 0;
   padding: $dsfr-spacing-3w $dsfr-spacing-2w;
   flex-direction: column;
   align-items: flex-start;
   flex: 1 0 0;
+  overflow-wrap: anywhere;
 
   @include corps-de-texte-sm-regular;
 }
@@ -66,10 +72,12 @@
 
 .incontournables-etapes {
   display: flex;
-  width: 55.875rem;
+  width: 100%;
+  max-width: 55.875rem;
   flex-direction: column;
   align-items: center;
   gap: $dsfr-spacing-1w;
+  padding: 0.5rem;
   flex: 1 0 0;
 }
 
@@ -197,8 +205,42 @@
 }
 
 @media (max-width: 48rem) {
+  .evaluation-aller-plus-loin__les-incontournables {
+    padding: $dsfr-spacing-2w $dsfr-spacing-1w;
+  }
+
+  .focus-incontournable__media {
+    width: 100%;
+    max-width: 17.625rem;
+  }
+
+  .focus-incontournable__explication {
+    width: 100%;
+    padding: $dsfr-spacing-2w;
+  }
+
   .incontournables-etapes__rangee {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .incontournables-etapes {
+    width: 100%;
+    max-width: none;
+  }
+
+  .illustrinfo {
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .illustrinfo-body {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .illustrinfo .titre {
+    min-width: 0;
   }
 
   .focus-incontournable {

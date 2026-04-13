@@ -8,8 +8,8 @@
     "fr-modal-confirmation-cgu",
     "fr-modal-validation-comptes-en-attente"
   ];
-  var gestionAccessibiliteModalesDashboard = window.GestionAccessibiliteModalesDashboard;
-  if (!gestionAccessibiliteModalesDashboard) return;
+  var gestionAccessibiliteModales = window.GestionAccessibiliteModales;
+  if (!gestionAccessibiliteModales) return;
 
   function moveModalToBody(modal) {
     if (!modal || modal.parentNode === document.body) return;
@@ -19,12 +19,12 @@
   function forceModalOpen(modal) {
     if (!modal) return;
     moveModalToBody(modal);
-    gestionAccessibiliteModalesDashboard.openModal(modal);
+    gestionAccessibiliteModales.openModal(modal);
   }
 
   function closeModal(modal) {
     if (!modal) return;
-    gestionAccessibiliteModalesDashboard.closeModal(modal);
+    gestionAccessibiliteModales.closeModal(modal);
   }
 
   function bindModal(modal) {
@@ -57,7 +57,7 @@
   }
 
   function init() {
-    gestionAccessibiliteModalesDashboard.bindKeyboardHandler();
+    gestionAccessibiliteModales.bindKeyboardHandler();
 
     var modals = [];
     MODAL_IDS.forEach(function(id) {

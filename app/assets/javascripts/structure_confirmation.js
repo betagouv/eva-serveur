@@ -119,12 +119,25 @@ function initStructureParametrageFormState() {
 
   function ouvrirModal(modal) {
     if (!modal) return;
+    if (modal.parentNode !== document.body) {
+      document.body.appendChild(modal);
+    }
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.openModal(modal);
+      return;
+    }
     modal.classList.add('fr-modal--opened');
     modal.setAttribute('aria-hidden', 'false');
   }
 
   function fermerModal(modal) {
     if (!modal) return;
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.closeModal(modal);
+      return;
+    }
     modal.classList.remove('fr-modal--opened');
     modal.setAttribute('aria-hidden', 'true');
   }
@@ -149,14 +162,6 @@ function initStructureParametrageFormState() {
         fermerModal(modal);
         if (openerButton) openerButton.focus();
       }, true);
-    });
-
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && modal.classList.contains('fr-modal--opened')) {
-        event.preventDefault();
-        fermerModal(modal);
-        if (openerButton) openerButton.focus();
-      }
     });
   }
 

@@ -52,6 +52,11 @@
     if (modal.parentNode !== document.body) {
       document.body.appendChild(modal);
     }
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.openModal(modal);
+      return;
+    }
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
     if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
@@ -61,6 +66,11 @@
 
   function closeModal(modal) {
     if (!modal) return;
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.closeModal(modal);
+      return;
+    }
     modal.classList.remove(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "true");
     if (modal.tagName === "DIALOG") {
@@ -89,23 +99,7 @@
     });
   }
 
-  function bindEscapeHandler() {
-    if (document.body.dataset.verificationEvaproEscapeBound === "true") return;
-    document.body.dataset.verificationEvaproEscapeBound = "true";
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key !== "Escape") return;
-      document.querySelectorAll(".fr-modal." + OPENED_CLASS).forEach(function(modal) {
-        if (isVerificationModalId(modal.id)) {
-          closeModal(modal);
-        }
-      });
-    });
-  }
-
   function initVerificationModal() {
-    bindEscapeHandler();
-
     document.querySelectorAll(".fr-modal.fr-modal-verification").forEach(function(modal) {
       document.body.appendChild(modal);
       modal.setAttribute("aria-hidden", "true");

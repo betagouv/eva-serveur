@@ -144,6 +144,22 @@
     });
   }
 
+  function focusFirstInModal(modal) {
+    requestAnimationFrame(function() {
+      if (!modal || activeModal !== modal) return;
+      var focusables = getFocusableElements(modal);
+      if (focusables.length > 0) {
+        focusables[0].focus();
+        return;
+      }
+      var modalBody = modal.querySelector(".fr-modal__body") || modal;
+      if (!modalBody.hasAttribute("tabindex")) {
+        modalBody.setAttribute("tabindex", "-1");
+      }
+      modalBody.focus();
+    });
+  }
+
   function openModal(modal) {
     if (!modal) return;
     if (activeModal && activeModal !== modal) {
@@ -155,9 +171,10 @@
     activeModal = modal;
     setPageInert(modal, true);
     setPageScrollLocked(true);
+    focusFirstInModal(modal);
   }
 
-  window.GestionAccessibiliteModalesDashboard = {
+  window.GestionAccessibiliteModales = {
     OPENED_CLASS: OPENED_CLASS,
     bindKeyboardHandler: bindKeyboardHandler,
     openModal: openModal,
@@ -169,4 +186,6 @@
       closeActiveModal();
     }
   };
+
+  bindKeyboardHandler();
 })(window);

@@ -1,6 +1,10 @@
 (function() {
   var OPENED_CLASS = "fr-modal--opened";
 
+  function gestion() {
+    return window.GestionAccessibiliteModales;
+  }
+
   function isInvitationTrigger(element) {
     if (!element) return false;
     if (!element.hasAttribute("data-fr-opened")) return false;
@@ -18,6 +22,11 @@
   }
 
   function openWithFallback(modal) {
+    var g = gestion();
+    if (g) {
+      g.openModal(modal);
+      return;
+    }
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
     if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
@@ -26,6 +35,11 @@
   }
 
   function closeWithFallback(modal) {
+    var g = gestion();
+    if (g) {
+      g.closeModal(modal);
+      return;
+    }
     modal.classList.remove(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "true");
     if (modal.tagName === "DIALOG") {
@@ -61,22 +75,7 @@
     });
   }
 
-  function bindEscapeHandler() {
-    if (document.body.dataset.invitationEscapeBound === "true") return;
-    document.body.dataset.invitationEscapeBound = "true";
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key !== "Escape") return;
-
-      document.querySelectorAll('.fr-modal[id^="fr-modal-invitation-"].' + OPENED_CLASS).forEach(function(modal) {
-        closeModal(modal);
-      });
-    });
-  }
-
   function initInvitationModal() {
-    bindEscapeHandler();
-
     document.querySelectorAll('.fr-modal[id^="fr-modal-invitation-"]').forEach(function(modal) {
       // Place modal at document root to avoid stacking/overflow issues.
       document.body.appendChild(modal);

@@ -48,7 +48,11 @@
       document.body.appendChild(modal);
     }
 
-    // Comme invitation_modal / modal_verification : pas showModal() (top layer native non fermée par le DSFR).
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.openModal(modal);
+      return;
+    }
     modal.classList.add(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "false");
     if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
@@ -58,6 +62,11 @@
 
   function closeFusionModal(modal) {
     if (!modal) return;
+    var gestion = window.GestionAccessibiliteModales;
+    if (gestion) {
+      gestion.closeModal(modal);
+      return;
+    }
     modal.classList.remove(OPENED_CLASS);
     modal.setAttribute("aria-hidden", "true");
     if (modal.tagName === "DIALOG") {
@@ -92,19 +101,6 @@
         event.preventDefault();
         closeFusionModal(modal);
       });
-    });
-  }
-
-  function bindFusionEscapeHandler() {
-    if (document.body.dataset.fusionModalEscapeBound === "true") return;
-    document.body.dataset.fusionModalEscapeBound = "true";
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key !== "Escape") return;
-      var modal = document.getElementById(MODAL_ID);
-      if (modal && modal.classList.contains(OPENED_CLASS)) {
-        closeFusionModal(modal);
-      }
     });
   }
 
@@ -215,7 +211,6 @@
     ensureFusionFormDom(modal);
     modal.setAttribute("aria-hidden", "true");
     bindFusionCloseHandlers(modal);
-    bindFusionEscapeHandler();
 
     document.addEventListener("click", handleFusionClick, true);
 

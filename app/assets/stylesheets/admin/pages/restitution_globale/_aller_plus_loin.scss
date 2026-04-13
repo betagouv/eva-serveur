@@ -224,6 +224,7 @@
   }
 
   .incontournables-etapes__rangee {
+    flex-wrap: nowrap;
     justify-content: space-between;
     width: 100%;
     align-items: stretch;
@@ -244,7 +245,7 @@
   }
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .evaluation-aller-plus-loin__les-incontournables {
     padding: $dsfr-spacing-2w $dsfr-spacing-1w;
   }
@@ -288,7 +289,9 @@
   }
 }
 
-@media (min-width: 48.0625rem) and (max-width: 64rem) {
+// Tablette uniquement : en print/PDF la largeur de page tombe souvent dans cette plage ;
+// sans `screen`, la grille 2 colonnes s'appliquait au PDF à la place des 4 cartes par rangée.
+@media screen and (min-width: 769px) and (max-width: 1024px) {
   .incontournables-etapes__rangee {
     flex-wrap: wrap;
     justify-content: center;

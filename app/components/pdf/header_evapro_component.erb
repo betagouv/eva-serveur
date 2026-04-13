@@ -5,7 +5,7 @@
   tagline: "le #{l(@date, format: :short)} par #{@beneficiaire}",
   classes: [ "header-pdf-evapro" ]
 )) do |c| %>
-  <% if @opco.present? %>
+  <% if @opco.present? && @opco.financeur?%>
     <% c.with_service_image do %>
       <%= image_tag(
         cdn_for(@opco.logo.variant(:defaut)),

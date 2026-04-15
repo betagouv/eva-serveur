@@ -24,4 +24,13 @@ body.logged_in {
     max-width: $container;
     margin: 0 auto;
   }
+
+  // Eva admin: ajustements des marges entre le Header et le Footer
+  #title_bar {
+    margin-top: 2rem;
+  }
+
+  #active_admin_content {
+    margin-bottom: 3.5rem;
+  }
 }

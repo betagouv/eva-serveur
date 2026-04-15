@@ -136,3 +136,9 @@
     margin-top: 2rem;
   }
 }
+// EvaPro admin: ajustements des marges entre le Header et le Footer pour index évaluations
+// qui utilise la sidebar ActiveAdmin. 
+body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}

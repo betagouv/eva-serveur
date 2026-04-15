@@ -36,6 +36,10 @@ class GeolocHelper
     end
 
     def departement(code_postal)
+      if code_postal == StructureLocale::TYPE_NON_COMMUNIQUE
+        return StructureLocale::TYPE_NON_COMMUNIQUE
+      end
+
       departement = code_postal.match(/^97|^98/) ? code_postal[0, 3] : code_postal[0, 2]
       departement = "2A" if departement == "20"
       departement

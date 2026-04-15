@@ -6,11 +6,12 @@ describe Structure::AssigneRegionJob, type: :job do
   before do
     structure.update(region: nil)
 
-    mock_reponse_typhoeus('https://geo.api.gouv.fr/departements/92',
-                          { codeRegion: 11 })
-
-    mock_reponse_typhoeus('https://geo.api.gouv.fr/regions/11',
-                          { nom: 'Île-de-France' })
+    mock_reponse_typhoeus(
+      'https://geo.api.gouv.fr/communes?codePostal=92100&fields=code,centre,region',
+      [ { code: '92012',
+          centre: { type: 'Point', coordinates: [ 2.2380, 48.8979 ] },
+          region: { nom: 'Île-de-France' } } ]
+    )
 
     described_class.perform_now
   end

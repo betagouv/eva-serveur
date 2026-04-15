@@ -1,6 +1,5 @@
 class PriseEnMain
-  ETAPES = %w[rejoindre_structure creation_campagne test_campagne confirmation_email passations
-              fin].freeze
+  ETAPES = %w[creation_campagne test_campagne confirmation_email passations fin].freeze
 
   def initialize(compte:, nombre_campagnes:, nombre_evaluations:)
     @compte = compte
@@ -9,7 +8,6 @@ class PriseEnMain
   end
 
   def etape_en_cours
-    return "rejoindre_structure" if @compte.structure.nil?
     return "creation_campagne" if @nombre_campagnes.zero?
     return "test_campagne" if @nombre_evaluations.zero?
     return "confirmation_email" unless @compte.confirmed?
@@ -23,7 +21,7 @@ class PriseEnMain
   end
 
   def en_cours?
-    @compte.mode_tutoriel? || @compte.structure.blank?
+    @compte.mode_tutoriel?
   end
 
   def nombre_passations_restantes

@@ -4,6 +4,10 @@ ActiveAdmin.register Compte do
                 :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel,
                 :cgu_acceptees, :usage, :fonction, :service_departement
 
+  # before_create do |compte|
+  #   compte.etape_inscription = "complet"
+  # end
+
   includes :structure
 
   config.sort_order = "created_at_desc"

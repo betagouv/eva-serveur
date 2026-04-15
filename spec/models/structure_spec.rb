@@ -56,8 +56,6 @@ describe Structure, type: :model do
       end
 
       it do
-        expect(structure.latitude).to be(48.8566)
-        expect(structure.longitude).to be(2.3522)
         expect(structure.region).to eql('Île-de-France')
         expect(structure.code_commune).to eql("75123")
       end

@@ -433,8 +433,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_05_151143) do
     t.string "code_postal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "latitude"
-    t.float "longitude"
     t.string "type_structure"
     t.string "region"
     t.datetime "anonymise_le", precision: nil
@@ -456,9 +454,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_05_151143) do
     t.string "code_commune"
     t.index ["ancestry"], name: "index_structures_on_ancestry"
     t.index ["deleted_at"], name: "index_structures_on_deleted_at"
-    t.index ["opco_id"], name: "index_structures_on_opco_id"
-    t.index ["latitude", "longitude"], name: "index_structures_on_latitude_and_longitude"
     t.index ["nom", "code_postal"], name: "index_structures_on_nom_and_code_postal", unique: true, where: "(deleted_at IS NULL)"
+    t.index ["opco_id"], name: "index_structures_on_opco_id"
     t.index ["type"], name: "index_structures_on_type"
     t.index ["usage"], name: "index_structures_on_usage"
   end

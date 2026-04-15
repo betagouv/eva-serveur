@@ -8,7 +8,7 @@ namespace :structure do
   task reassigne_region_corse: :environment do
     structures = Structure.where(region: "Corse").where("code_postal LIKE ?", "21%")
     structures.find_each do |structure|
-      structure.geocode
+      structure.send(:geocodifie)
       structure.save
       puts "assigne région \"#{structure.region}\" pour #{structure.nom}"
     end

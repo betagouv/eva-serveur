@@ -39,8 +39,6 @@ Rails.application.routes.draw do
     resource :recherche_structure, only: [:show, :update], controller: "recherche_structures"
     get :invitation_invalide, to: "invitations#invalide"
   end
-  resources :structures, only: :index
-
   namespace :admin do
     resources :controle_syntheses_restitutions, only: :index
 

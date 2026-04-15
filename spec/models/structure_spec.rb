@@ -37,15 +37,17 @@ describe Structure, type: :model do
     end
   end
 
-  def mock_geo_api(code_postal, code_commune, departement, code_region, region)
+  def mock_geo_api(code_postal, code_commune, departement, code_region, region, lat: 48.0, lon: 2.0)
     mock_reponse_typhoeus("https://geo.api.gouv.fr/departements/#{departement}",
                           { codeRegion: code_region })
 
     mock_reponse_typhoeus("https://geo.api.gouv.fr/regions/#{code_region}",
                           { nom: region })
 
-    mock_reponse_typhoeus("https://geo.api.gouv.fr/communes?codePostal=#{code_postal}",
-                          [ { code: code_commune } ])
+    mock_reponse_typhoeus(
+      "https://geo.api.gouv.fr/communes?codePostal=#{code_postal}&fields=code,centre",
+      [ { code: code_commune, centre: { type: 'Point', coordinates: [ lon, lat ] } } ]
+    )
   end
 
   describe 'géolocalisation à la validation' do
@@ -53,34 +55,22 @@ describe Structure, type: :model do
       let(:structure) { described_class.new code_postal: '75012' }
 
       before do
-        Geocoder::Lookup::Test.add_stub(
-          '75012', [ { 'coordinates' => [ 40.7143528, -74.0059731 ] } ]
-        )
-        mock_geo_api("75012", "75123", 75, 11, 'Île-de-France')
+        mock_geo_api("75012", "75123", 75, 11, 'Île-de-France', lat: 48.8566, lon: 2.3522)
         structure.valid?
       end
 
       it do
-        expect(structure.latitude).to be(40.7143528)
-        expect(structure.longitude).to be(-74.0059731)
+        expect(structure.latitude).to be(48.8566)
+        expect(structure.longitude).to be(2.3522)
         expect(structure.region).to eql('Île-de-France')
         expect(structure.code_commune).to eql("75123")
       end
-
-      it { expect(described_class.geocoder_options[:params]).to include(countrycodes: 'fr') }
     end
 
     describe 'si ma structure a un code postal commençant par 988' do
       let(:structure) { described_class.new code_postal: '98850' }
 
       before do
-        Geocoder::Lookup::Test.add_stub(
-          '98850', [
-            {
-              'coordinates' => [ 47.3129, 120.0596 ]
-            }
-          ]
-        )
         mock_geo_api("98850", "", 988, 988, 'Nouvelle-Calédonie')
         structure.valid?
       end
@@ -94,9 +84,6 @@ describe Structure, type: :model do
       let(:structure) { described_class.new code_postal: '20090' }
 
       before do
-        Geocoder::Lookup::Test.add_stub(
-          '20090', [ { 'coordinates' => [ 41.9333, 8.7507 ] } ]
-        )
         mock_geo_api("20090", "", '2A', 94, 'Corse')
         structure.valid?
       end
@@ -112,13 +99,6 @@ describe Structure, type: :model do
 
       before do
         structure.code_postal = '61000'
-        Geocoder::Lookup::Test.add_stub(
-          '61000', [
-            {
-              'coordinates' => [ 48.4310232, 0.0922579 ]
-            }
-          ]
-        )
         mock_geo_api("61000", "61123", 61, 28, 'Normandie')
         structure.valid?
       end

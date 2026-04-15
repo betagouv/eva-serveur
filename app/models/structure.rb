@@ -33,17 +33,8 @@ allow_blank: true
 
   auto_strip_attributes :nom, :email_contact, :telephone, squish: true
 
-  geocoded_by :code_postal, state: :region, params: { countrycodes: "fr" } do |obj, resultats|
-    if (resultat = resultats.first)
-      obj.region = GeolocHelper.cherche_region(obj.code_postal)
-      obj.code_commune = GeolocHelper.cherche_code_commune(obj.code_postal)
-      obj.latitude = resultat.latitude
-      obj.longitude = resultat.longitude
-    end
-  end
-
   before_validation :verifie_siret_si_necessaire
-  after_validation :geocode, if: ->(s) { s.code_postal.present? and s.code_postal_changed? }
+  after_validation :geocodifie, if: ->(s) { s.code_postal.present? && s.code_postal_changed? }
   after_create :programme_email_relance
 
   scope :joins_evaluations_et_groupe, lambda {
@@ -195,5 +186,16 @@ allow_blank: true
     return if Truemail.valid?(email_contact)
 
     errors.add(:email_contact, :invalid)
+  end
+
+  def geocodifie
+    self.region       = GeolocHelper.cherche_region(code_postal)
+
+    commune = GeolocHelper.cherche_commune(code_postal)
+    return unless commune
+
+    self.code_commune = commune[:code_commune]
+    self.latitude     = commune[:latitude]
+    self.longitude    = commune[:longitude]
   end
 end

@@ -4,9 +4,13 @@ ActiveAdmin.register Compte do
                 :statut_validation, :prenom, :nom, :telephone, :mode_tutoriel,
                 :cgu_acceptees, :usage, :fonction, :service_departement
 
-  # before_create do |compte|
-  #   compte.etape_inscription = "complet"
-  # end
+  before_create do |compte|
+    if compte.structure.nil?
+      compte.etape_inscription = "recherche_structure"
+    else
+      compte.etape_inscription = "complet"
+    end
+  end
 
   includes :structure
 

@@ -1,12 +1,4 @@
 fr:
-  structures:
-    index:
-      title: Rechercher ma structure
-      titre: Bienvenue !
-      description: |
-        **Vous souhaitez créer un compte conseiller eva.**
-        Dans un premier temps merci de regarder si votre structure est déjà enregistrée.
-      description_lien_retour: Retour à la recherche de structure
   admin:
     structures:
       show:

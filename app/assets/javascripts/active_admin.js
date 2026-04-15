@@ -11,7 +11,6 @@
 //= require popper
 //= require bootstrap
 //= require aide
-//= require autocomplete_recherche
 //= require filtres_dates
 //= require form_toggle_submit
 //= require toggle_usage_structure

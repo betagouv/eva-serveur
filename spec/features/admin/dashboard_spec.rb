@@ -336,7 +336,7 @@ describe 'Dashboard', type: :feature do
       visit admin_path
 
       expect(page).to have_link("Inviter mes collègues")
-      expect(page).to have_selector("*", text: "Inviter quelqu’un", visible: :all)
+      expect(page).to have_selector("*", text: "Inviter quelqu'un", visible: :all)
       expect(page).to have_field("invitation_email", visible: :all)
     end
   end

@@ -8,8 +8,8 @@ describe 'Création de compte conseiller', type: :feature do
       visit new_compte_registration_path
     end
 
-    it "redirige l'utilisateur vers la page pour trouver une structure" do
-      expect(page).to have_current_path(structures_path)
+    it "redirige l'utilisateur vers la page de connexion" do
+      expect(page).to have_current_path(new_compte_session_path)
     end
   end
 
@@ -18,8 +18,8 @@ describe 'Création de compte conseiller', type: :feature do
       visit new_compte_registration_path(structure_id: 'random')
     end
 
-    it "redirige l'utilisateur vers la page pour trouver une structure" do
-      expect(page).to have_current_path(structures_path)
+    it "redirige l'utilisateur vers la page de connexion" do
+      expect(page).to have_current_path(new_compte_session_path)
     end
   end
 

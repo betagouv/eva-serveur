@@ -10,7 +10,7 @@ module Eva
 
         structure = structure_pour_inscription
         return if performed?
-        return redirect_to structures_path unless structure
+        return redirect_to new_compte_session_path unless structure
 
         super { |resource| resource.structure = structure }
       end

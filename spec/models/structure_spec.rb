@@ -106,6 +106,32 @@ describe Structure, type: :model do
     end
   end
 
+  describe '#code_commune' do
+    context 'quand le code commune est absent' do
+      let(:structure) { create :structure, code_postal: '75012' }
+
+      before do
+        structure.update_columns(code_commune: nil)
+        mock_geo_api('75012', '75056', 'Île-de-France', lat: 48.8566, lon: 2.3522)
+      end
+
+      it 'géolocalise et sauvegarde avant de retourner le code commune' do
+        expect(structure).to receive(:geocodifie).once.and_call_original
+        expect(structure.code_commune).to eql('75056')
+        expect(structure.reload.code_commune).to eql('75056')
+      end
+    end
+
+    context 'quand le code commune est déjà présent' do
+      let(:structure) { create :structure, code_commune: '75056' }
+
+      it 'le retourne sans appeler geocodifie' do
+        expect(structure).not_to receive(:geocodifie)
+        expect(structure.code_commune).to eql('75056')
+      end
+    end
+  end
+
   describe 'à la création' do
     it 'programme un mail de relance' do
       expect { create :structure }

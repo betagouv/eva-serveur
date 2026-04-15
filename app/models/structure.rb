@@ -88,6 +88,14 @@ allow_blank: true
   scope :avec_meme_siret_que, ->(siret) { where(siret: siret) }
   alias_attribute :display_name, :nom
 
+  def code_commune
+    if super.nil? && code_postal.present?
+      geocodifie
+      save
+    end
+    super
+  end
+
   def superadmin_courant?
     current_ability&.compte&.superadmin?
   end

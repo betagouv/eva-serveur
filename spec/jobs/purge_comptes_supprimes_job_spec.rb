@@ -71,6 +71,26 @@ describe PurgeComptesSupprimesJob, type: :job do
       expect(beneficiaire.reload.compte).to be_nil
     end
 
+    it "détruit un compte supprimé, invitant d'une invitation et détruit l'invitation" do
+      compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
+      invitation = create :invitation, invitant: compte, structure: structure
+
+      described_class.perform_now
+
+      expect(Compte.with_deleted.find_by(id: compte.id)).to be_nil
+      expect(Invitation.find_by(id: invitation.id)).to be_nil
+    end
+
+    it "détruit un compte supprimé, invité dans une invitation et détruit l'invitation" do
+      compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
+      invitation = create :invitation, :acceptee, compte: compte, structure: structure
+
+      described_class.perform_now
+
+      expect(Compte.with_deleted.find_by(id: compte.id)).to be_nil
+      expect(Invitation.find_by(id: invitation.id)).to be_nil
+    end
+
     it 'detruit un compte supprimé référencé par un bénéficiaire supprimé et retire ce lien' do
       compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
       beneficiaire = create :beneficiaire, compte: compte, deleted_at: 1.month.ago

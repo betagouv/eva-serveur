@@ -49,20 +49,29 @@ describe GeolocHelper, type: :model do
     end
   end
 
-  describe '.cherche_code_commune' do
-    it { expect(described_class.cherche_code_commune(nil)).to be_nil }
+  describe '.cherche_commune' do
+    it { expect(described_class.cherche_commune(nil)).to be_nil }
 
-    it "retourne le code commune d'un code postal" do
-      mock_reponse_typhoeus('https://geo.api.gouv.fr/communes?codePostal=45300',
-                            [ { code: '45273', nom: 'Pithiviers' } ])
+    it "retourne le code commune et les coordonnées d'un code postal" do
+      mock_reponse_typhoeus(
+        'https://geo.api.gouv.fr/communes?codePostal=45300&fields=code,centre',
+        [ { code: '45273', centre: { type: 'Point', coordinates: [ 2.17, 48.17 ] } } ]
+      )
 
-      expect(described_class.cherche_code_commune('45300')).to eql('45273')
+      expect(described_class.cherche_commune('45300')).to eql({
+        code_commune: '45273',
+        latitude: 48.17,
+        longitude: 2.17
+      })
     end
 
     it 'retourne nil quand le code postal ne correspond à aucune commune' do
-      mock_reponse_typhoeus('https://geo.api.gouv.fr/communes?codePostal=99999', [])
+      mock_reponse_typhoeus(
+        'https://geo.api.gouv.fr/communes?codePostal=99999&fields=code,centre',
+        []
+      )
 
-      expect(described_class.cherche_code_commune('99999')).to be_nil
+      expect(described_class.cherche_commune('99999')).to be_nil
     end
   end
 end

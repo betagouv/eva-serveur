@@ -13,16 +13,24 @@ class GeolocHelper
       cherche_nom_region(code_region)
     end
 
-    def cherche_code_commune(code_postal)
+    def cherche_commune(code_postal)
       return if code_postal.nil?
 
-      reponse = Typhoeus.get("https://geo.api.gouv.fr/communes?codePostal=#{code_postal}")
+      reponse = Typhoeus.get("https://geo.api.gouv.fr/communes?codePostal=#{code_postal}&fields=code,centre")
       unless reponse.success?
-        journalise_erreur(reponse, "recherche du code commune du code postal #{code_postal}")
+        journalise_erreur(reponse, "recherche de la commune du code postal #{code_postal}")
         return
       end
 
-      JSON.parse(reponse.body).first&.fetch("code")
+      commune = JSON.parse(reponse.body).first
+      return unless commune
+
+      coordonnees = commune.dig("centre", "coordinates")
+      {
+        code_commune: commune["code"],
+        latitude: coordonnees&.[](1),
+        longitude: coordonnees&.[](0)
+      }
     end
 
     def cherche_nom_region(code_region)

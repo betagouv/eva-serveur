@@ -67,11 +67,6 @@ fr:
           campagne: Code campagne
           bouton: Lancer eva
           code_invalide: "Le code saisi n'est pas correct. Saisissez-le à nouveau, ou demandez de l'aide à la personne qui vous accompagne."
-      registrations:
-        new:
-          title: Rejoindre la structure
-          instruction: Merci de renseigner vos informations.
-          description: Nous enverrons un e-mail à la personne administratrice de votre structure pour qu'elle vous autorise l'accès complet.
       passwords:
         edit:
           consigne: Saisissez et confirmez votre nouveau mot de passe ci-dessous.

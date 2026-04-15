@@ -2,6 +2,25 @@
 
 <% if tableau.present? %>
   <%= render PanelComponent.new(titre: titre, classes: "panel--beneficiaire") do %>
+    <% paragraphes = if competence == :litteratie
+                      paragraphes_litteratie(tableau)
+ elsif competence == :numeratie
+                      paragraphes_numeratie(tableau)
+ else
+                      []
+                    end %>
+
+    <% if paragraphes.any? %>
+      <div class="page-comparaison__textes-profils">
+        <% paragraphes.each do |paragraphe| %>
+          <p class="page-comparaison__texte-profil">
+            Au <strong><%= paragraphe[:date] %></strong>
+            <%= paragraphe[:texte] %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="fr-table fr-m-0 fr-table--no-scroll page-comparaison__tableau" id="table-litteratie-component">
       <div class="fr-table__wrapper">
         <div class="fr-table__container">
@@ -37,7 +56,7 @@
               </thead>
               <tbody>
                 <% index = 1 %>
-                <% sous_competences.each do |sous_competence|%>
+                <% sous_competences.each do |sous_competence| %>
                   <% index += 1 %>
                   <tr id="table-litteratie-row-key-<%= index %>" data-row-key="<%= index %>">
                     <th scope="row">
@@ -54,7 +73,7 @@
                                 nombre_questions_reussies: tableau[i][:sous_competences][sous_competence].nombre_questions_reussies,
                                 nombre_questions_echecs: tableau[i][:sous_competences][sous_competence].nombre_questions_echecs,
                                 nombre_questions_non_passees: tableau[i][:sous_competences][sous_competence].nombre_questions_non_passees,
-                                pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite,
+                                pourcentage_reussite: tableau[i][:sous_competences][sous_competence].pourcentage_reussite
                               ) %>
                             <% end %>
                           <% else %>
@@ -71,8 +90,9 @@
         </div>
       </div>
     </div>
+
     <% if competence == :numeratie && doit_afficher_notice %>
-      <%= render(Evaluation::NoticeIncompleteComponent.new()) %>
+      <%= render(Evaluation::NoticeIncompleteComponent.new) %>
     <% end %>
   <% end %>
 <% end %>

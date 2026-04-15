@@ -79,6 +79,12 @@ body.logged_in.evapro_admin {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+  
+  // EvaPro admin: ajustements des marges entre le Header et le Footer pour les vues non custo
+  #active_admin_content.with_sidebar {
+    margin-top: 2rem !important;
+    margin-bottom: 3.5rem !important;
+  }
 }
 
 // Fix conflit entre l'accordeon et les boutons

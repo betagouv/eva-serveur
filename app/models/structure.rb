@@ -33,6 +33,10 @@ allow_blank: true
 
   auto_strip_attributes :nom, :email_contact, :telephone, squish: true
 
+  # Nécessaire uniquement pour le scope .near (recherche par proximité).
+  # La géolocalisation elle-même est gérée par #geocodifie via geo.api.gouv.fr.
+  geocoded_by :adresse, latitude: :latitude, longitude: :longitude
+
   before_validation :verifie_siret_si_necessaire
   after_validation :geocodifie, if: ->(s) { s.code_postal.present? && s.code_postal_changed? }
   after_create :programme_email_relance

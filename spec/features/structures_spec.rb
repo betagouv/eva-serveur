@@ -17,9 +17,12 @@ describe 'Structures', type: :feature do
 
   describe "#index liste les structures proche d'un code postal" do
     before do
-      create :structure_locale, nom: 'MILO Paris 12eme', code_postal: '75012'
-      create :structure_locale, nom: 'MILO Paris 13eme', code_postal: '75013'
-      create :structure_locale, nom: 'MILO Lyon', code_postal: '69000'
+      create :structure_locale, nom: 'MILO Paris 12eme', code_postal: '75012',
+             latitude: 40.7143528, longitude: -74.0059731
+      create :structure_locale, nom: 'MILO Paris 13eme', code_postal: '75013',
+             latitude: 40.7143529, longitude: -74.0059730
+      create :structure_locale, nom: 'MILO Lyon', code_postal: '69000',
+             latitude: 45.7632404, longitude: 4.8338496
     end
 
     it do

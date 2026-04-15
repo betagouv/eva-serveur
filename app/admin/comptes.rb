@@ -105,7 +105,7 @@ ActiveAdmin.register Compte do
 
   member_action :rejoindre_structure, method: :patch do
     structure = Structure.find_by id: params[:structure_id]
-    return redirect_to admin_recherche_structure_path unless structure
+    return redirect_to admin_dashboard_path unless structure
 
     resource.rejoindre_structure(structure)
     redirect_to admin_dashboard_path

@@ -89,7 +89,26 @@ describe 'Admin - Compte', type: :feature do
           fill_in :compte_password_confirmation, with: 'billyJoel123$$$'
           click_on 'Créer un compte'
         end.to change(Compte, :count)
-        expect(Compte.last.structure).to eq ma_structure
+        compte = Compte.last
+        expect(compte.structure).to eq ma_structure
+        expect(compte.etape_inscription).to eq 'complet'
+      end
+    end
+
+    describe 'Ajouter un nouveau sans structure' do
+      it do
+        visit new_admin_compte_path
+        expect do
+          fill_in :compte_prenom, with: 'Jane'
+          fill_in :compte_nom, with: 'Doe'
+          fill_in :compte_email, with: 'jeanmarc@exemple.fr'
+          fill_in :compte_password, with: 'billyJoel123$$$'
+          fill_in :compte_password_confirmation, with: 'billyJoel123$$$'
+          click_on 'Créer un compte'
+        end.to change(Compte, :count)
+        compte = Compte.last
+        expect(compte.structure).to be_nil
+        expect(compte.etape_inscription).to eq 'recherche_structure'
       end
     end
 
@@ -141,6 +160,7 @@ describe 'Admin - Compte', type: :feature do
         compte_cree = Compte.last
         expect(compte_cree.structure).to eq ma_structure
         expect(compte_cree.role).to eq 'conseiller'
+        expect(compte_cree.etape_inscription).to eq 'complet'
       end
     end
 

@@ -37,16 +37,12 @@ describe Structure, type: :model do
     end
   end
 
-  def mock_geo_api(code_postal, code_commune, departement, code_region, region, lat: 48.0, lon: 2.0)
-    mock_reponse_typhoeus("https://geo.api.gouv.fr/departements/#{departement}",
-                          { codeRegion: code_region })
-
-    mock_reponse_typhoeus("https://geo.api.gouv.fr/regions/#{code_region}",
-                          { nom: region })
-
+  def mock_geo_api(code_postal, code_commune, region, lat: 48.0, lon: 2.0)
     mock_reponse_typhoeus(
-      "https://geo.api.gouv.fr/communes?codePostal=#{code_postal}&fields=code,centre",
-      [ { code: code_commune, centre: { type: 'Point', coordinates: [ lon, lat ] } } ]
+      "https://geo.api.gouv.fr/communes?codePostal=#{code_postal}&fields=code,centre,region",
+      [ { code: code_commune,
+          centre: { type: 'Point', coordinates: [ lon, lat ] },
+          region: { nom: region } } ]
     )
   end
 
@@ -55,7 +51,7 @@ describe Structure, type: :model do
       let(:structure) { described_class.new code_postal: '75012' }
 
       before do
-        mock_geo_api("75012", "75123", 75, 11, 'Île-de-France', lat: 48.8566, lon: 2.3522)
+        mock_geo_api("75012", "75123", 'Île-de-France', lat: 48.8566, lon: 2.3522)
         structure.valid?
       end
 
@@ -71,7 +67,7 @@ describe Structure, type: :model do
       let(:structure) { described_class.new code_postal: '98850' }
 
       before do
-        mock_geo_api("98850", "", 988, 988, 'Nouvelle-Calédonie')
+        mock_geo_api("98850", "", 'Nouvelle-Calédonie')
         structure.valid?
       end
 
@@ -84,7 +80,7 @@ describe Structure, type: :model do
       let(:structure) { described_class.new code_postal: '20090' }
 
       before do
-        mock_geo_api("20090", "", '2A', 94, 'Corse')
+        mock_geo_api("20090", "", 'Corse')
         structure.valid?
       end
 
@@ -99,7 +95,7 @@ describe Structure, type: :model do
 
       before do
         structure.code_postal = '61000'
-        mock_geo_api("61000", "61123", 61, 28, 'Normandie')
+        mock_geo_api("61000", "61123", 'Normandie')
         structure.valid?
       end
 

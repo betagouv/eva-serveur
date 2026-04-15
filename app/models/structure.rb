@@ -189,11 +189,10 @@ allow_blank: true
   end
 
   def geocodifie
-    self.region       = GeolocHelper.cherche_region(code_postal)
-
     commune = GeolocHelper.cherche_commune(code_postal)
     return unless commune
 
+    self.region       = commune[:region]
     self.code_commune = commune[:code_commune]
     self.latitude     = commune[:latitude]
     self.longitude    = commune[:longitude]

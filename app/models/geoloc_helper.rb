@@ -15,8 +15,6 @@ class GeolocHelper
       coordonnees = commune.dig("centre", "coordinates")
       {
         code_commune: commune["code"],
-        latitude: coordonnees&.[](1),
-        longitude: coordonnees&.[](0),
         region: commune.dig("region", "nom")
       }
     end

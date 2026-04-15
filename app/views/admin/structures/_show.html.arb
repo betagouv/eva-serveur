@@ -82,8 +82,6 @@ div class: "page-structure" do
         panel "Administration" do
           attributes_table_for structure do
             row :id
-            row :latitude
-            row :longitude
             row :updated_at
             row :structure_referente
             if structure.instance_of?(StructureAdministrative)

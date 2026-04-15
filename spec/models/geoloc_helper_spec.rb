@@ -4,7 +4,7 @@ describe GeolocHelper, type: :model do
   describe '.cherche_commune' do
     it { expect(described_class.cherche_commune(nil)).to be_nil }
 
-    it "retourne le code commune, les coordonnées et la région d'un code postal" do
+    it "retourne le code commune et la région d'un code postal" do
       mock_reponse_typhoeus(
         'https://geo.api.gouv.fr/communes?codePostal=45300&fields=code,centre,region',
         [ { code: '45273',
@@ -14,8 +14,6 @@ describe GeolocHelper, type: :model do
 
       expect(described_class.cherche_commune('45300')).to eql({
         code_commune: '45273',
-        latitude: 48.17,
-        longitude: 2.17,
         region: 'Centre-Val de Loire'
       })
     end

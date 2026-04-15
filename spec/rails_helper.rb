@@ -86,6 +86,4 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-Geocoder.configure(lookup: :test, ip_lookup: :test)
-
 require 'support/comparateur_niveau_restitution'

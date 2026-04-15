@@ -7,7 +7,7 @@
       <div class="structure-content-wrapper">
         <%= render "parametrage_section", form: form %>
 
-        <%= render "nouvelles_structures/modal_confirmation_creation_structure" %>
+        <%= render "modal_confirmation_creation_structure" %>
 
         <div class="informations-compte-actions">
           <%= render BoutonDsfrComponent.new(inscription_structure_path(etape: "confirmation"), type: :tertiary) do %>

@@ -184,3 +184,17 @@ body {
 .page-comparaison {
   gap: 0;
 }
+
+// Le style du pdf comparaison est legerement modifié suite a l'ajout des textes des profils.
+// Dans un prochain ticket, le header passera a celui du DSFR. Donc plus de place sur le doc.
+// On pourra alors supprimer cette partie du style pour avoir les marges par defaut.
+.page-pdf.page-comparaison {
+  .page-comparaison__textes-profils {
+    margin-bottom: 0.9rem;
+  }
+
+  .page__contenu {
+    gap: 1.5rem;
+    padding: 1rem 3rem;
+  }
+}

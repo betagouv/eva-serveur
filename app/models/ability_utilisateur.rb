@@ -117,7 +117,6 @@ compte_id: compte.id
       can :read, Compte, structure_id: structure_ids
     end
     can %i[read update], compte
-    can :rejoindre_structure, compte
     can :accepter_cgu, compte
     comptes_generiques_ou_comptes_admin(compte)
     droits_validation_comptes(compte)

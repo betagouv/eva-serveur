@@ -27,9 +27,7 @@ module Admin
     def nom_anonymisable; end
     def pastille; end
     # def qcm; end commenté pour le moment car besoin d'une resource
-    def recherche_structure; end
     def referentiel_anlci; end
-    def rejoindre_structure; end
     def score_arrows; end
     # def sous_competence; end commenté pour le moment car pas assez unitaire
     def statut_campagne; end

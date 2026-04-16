@@ -1,0 +1,59 @@
+<div id="annexe_positionnement_eva" class="page page-numeratie adaptation-pdf annexe_restitution">
+  <%= render Pdf::HeaderEvaComparaisonComponent.new(
+    nom_beneficiaire: @entete_page_args[:nom_beneficiaire],
+    code_beneficiaire: @entete_page_args[:code_beneficiaire]
+  ) %>
+
+  <div class="annexe_restitution-eva__content content">
+    <h2 class="annexe_restitution-eva__titre"><%= t(".titre") %></h2>
+    <div class="annexe_restitution__introduction">
+      <div class="annexe_restitution-eva__introduction-text">
+        <%= md t(".introduction") %>
+      </div>
+      <div class="annexe_restitution__blocs">
+        <div class="annexe_restitution__bloc">
+          <div class="annexe_restitution__encadre">
+            <div class="annexe_restitution__encadre--body">
+              <h3 class="annexe_restitution-eva__encadre--body--titre"><%= t(".restitution_litteratie_titre") %></h3>
+              <%= t(".restitution_litteratie") %>
+            </div>
+            <div class="annexe_restitution__badges">
+              <% @badges_litteratie.each do |badge| %>
+                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+                                  class: "badge-references",
+                                  alt: t(badge, scope: @scope_badge) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="annexe_restitution__bloc">
+          <div class="annexe_restitution__encadre">
+            <div class="annexe_restitution__encadre--body">
+              <h3 class="annexe_restitution-eva__encadre--body--titre"><%= t(".restitution_numeratie_titre") %></h3>
+              <%= t(".restitution_numeratie") %>
+            </div>
+            <div class="annexe_restitution__badges">
+              <% @badges_numeratie.each do |badge| %>
+                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+                                  class: "badge-references",
+                                  alt: t(badge, scope: @scope_badge) %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annexe_restitution__liste-interpretation">
+      <h3 class="annexe_restitution__titre"><%= t(".titre_interprétation") %></h3>
+      <ul>
+        <li><%= t(".interprétation_1") %></li>
+        <li><%= t(".interprétation_2") %></li>
+        <li><%= t(".interprétation_3") %></li>
+        <li><%= t(".interprétation_4") %></li>
+      </ul>
+    </div>
+
+    <%= render Evaluation::AlertAnnexeComponent.new %>
+  </div>
+</div>

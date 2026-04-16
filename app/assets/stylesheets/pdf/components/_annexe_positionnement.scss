@@ -41,8 +41,24 @@
   margin-bottom: $dsfr-spacing-2v;
 }
 
+.annexe_restitution-eva__encadre--body--titre {
+  @include titre-h6;
+}
+
 .annexe_restitution__titre {
   margin-bottom: $dsfr-spacing-6v;
+}
+
+.annexe_restitution-eva__titre {
+  @include titre-h3;
+
+  color: $grey-50;
+}
+
+.annexe_restitution-eva__introduction-text {
+  p {
+    @include corps-de-texte-sm-regular;
+  }
 }
 
 #annexe_restitution {
@@ -94,4 +110,9 @@ a {
 
 .annexe_restitution__liste-interpretation--diagnostic {
   margin-bottom: $dsfr-spacing-12v;
+}
+
+.annexe_restitution-eva__content {
+  gap: 2rem !important;
+  padding-top: 2.75rem !important;
 }

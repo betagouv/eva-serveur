@@ -93,6 +93,14 @@ div class: "evaluation__restitution-globale #{class_css}" do
     structure: restitution_globale.structure
   ) if pdf && resource.campagne.avec_diagnostic?
 
+  # Ce composant est utilisé uniquement dans le PDF.
+  # Un nouveau composant Evaluation::AnnexePositionnementEvaComponent a été créé
+  # avec le design DSFR. Au moment du retravail du design de ce pdf, il faudra
+  # supprimer ce composant et utiliser le nouveau. Ce qui implique
+  # de supprimer les fichiers suivants :
+  # - evaluation/annexe_positionnement_component.yml
+  # - annexe_positionnement_component.rb
+  # - annexe_positionnement_component.pdf.erb
   render Evaluation::AnnexePositionnementComponent.new(
     nom_beneficiaire: restitution_globale.beneficiaire,
     code_beneficiaire: restitution_globale.code_beneficiaire,

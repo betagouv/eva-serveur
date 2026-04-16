@@ -26,6 +26,7 @@ $padding-pdf: 5rem;
 @import 'admin/composants/bilan_evapro';
 @import 'admin/composants/mesure_chiffre_cle';
 @import 'admin/composants/pdf/header_evapro';
+@import 'admin/composants/pdf/header_eva';
 @import 'admin/pages/restitution_globale/mesure_des_impacts';
 @import 'admin/pages/restitution_globale/bilan_evapro';
 @import 'admin/pages/restitution_globale/aller_plus_loin';
@@ -183,18 +184,25 @@ body {
 
 .page-comparaison {
   gap: 0;
-}
 
-// Le style du pdf comparaison est legerement modifié suite a l'ajout des textes des profils.
-// Dans un prochain ticket, le header passera a celui du DSFR. Donc plus de place sur le doc.
-// On pourra alors supprimer cette partie du style pour avoir les marges par defaut.
-.page-pdf.page-comparaison {
-  .page-comparaison__textes-profils {
-    margin-bottom: 0.9rem;
+  .panel--beneficiaire {
+    h2 {
+      @include titre-h4;
+
+      margin-bottom: 1.75rem;
+    }
+  }
+
+  .page-comparaison__titre {
+    @include titre-h3;
   }
 
   .page__contenu {
-    gap: 1.5rem;
-    padding: 1rem 3rem;
+    padding-top: 2.75rem;
+    gap: 2rem;
+  }
+
+  .page-comparaison__texte-profil {
+    margin-bottom: 1.75rem;
   }
 }

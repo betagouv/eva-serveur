@@ -49,7 +49,6 @@ Rails.application.routes.draw do
     get '/ui_kit/bilan_eva_pro', to: 'ui_kit#bilan_eva_pro'
     get '/ui_kit/bouton', to: 'ui_kit#bouton'
     get '/ui_kit/boutons_dsfr', to: 'ui_kit#boutons_dsfr'
-    # get '/ui_kit/bouton_ajouter_une_structure', to: 'ui_kit#bouton_ajouter_une_structure'
     get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
     get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
     get '/ui_kit/impact_stepper', to: 'ui_kit#impact_stepper'

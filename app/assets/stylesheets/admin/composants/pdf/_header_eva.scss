@@ -1,0 +1,55 @@
+.fr-header.header-pdf-eva {
+  padding: 0 4rem;
+  border: 0 !important;
+  background: var(--background-alt-blue-france);
+  filter: none !important;
+
+  .header-eva__logo {
+    width: 49px;
+    aspect-ratio: 7 / 6;
+    max-width: none !important;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .fr-link {
+    text-decoration: none !important;
+  }
+
+  .fr-header__service-title {
+    @include titre-h2;
+  }
+
+  .fr-header__service-tagline {
+    @include corps-de-texte-xl-regular;
+  }
+
+  .fr-header__service::before {
+    content: none;
+  }
+
+  .fr-header__body-row, .fr-header__brand {
+    justify-content: flex-start;
+  }
+
+  .fr-header__brand-top {
+    width: auto;
+  }
+
+  .fr-header__brand {
+    background: none;
+    filter: none;
+    width: 100%;
+  }
+
+  .fr-header__brand::after {
+    content: none;
+  }
+
+  .fr-header__service {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

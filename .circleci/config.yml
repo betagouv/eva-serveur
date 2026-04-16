@@ -77,7 +77,7 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: Install libvips
-          command: timeout 4m sudo apt-get update && sudo apt-get install -y libvips
+          command: timeout 10m sudo apt-get update && sudo apt-get install -y libvips
       - run:
           name: Database setup and seed
           command: bin/rails db:create db:schema:load db:seed --trace

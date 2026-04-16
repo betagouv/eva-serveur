@@ -111,14 +111,6 @@ ActiveAdmin.register Compte do
     end
   end
 
-  member_action :rejoindre_structure, method: :patch do
-    structure = Structure.find_by id: params[:structure_id]
-    return redirect_to admin_dashboard_path unless structure
-
-    resource.rejoindre_structure(structure)
-    redirect_to admin_dashboard_path
-  end
-
   member_action :accepter_cgu, method: :patch do
     resource.update!(cgu_acceptees: true)
     redirect_to admin_dashboard_path

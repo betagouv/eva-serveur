@@ -6,7 +6,6 @@ module Admin
     def bilan_eva_pro; end
     def bouton; end
     def boutons_dsfr; end
-    # def bouton_ajouter_une_structure; end commenté pour le moment car besoin d'une resource
     def bouton_copier; end
     def barre_segmentee; end
     def impact_stepper; end

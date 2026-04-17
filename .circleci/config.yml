@@ -75,9 +75,23 @@ jobs:
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - restore_cache:
+          keys:
+            - vips-cache-v1
       - run:
           name: Install libvips
-          command: timeout 10m sudo apt-get update && sudo apt-get install -y libvips
+          command: |
+            if [ ! -f "/usr/lib/x86_64-linux-gnu/libvips.so.42" ]; then
+              sudo apt-get update
+              sudo apt-get install -y libvips
+            fi
+      - save_cache:
+          key: vips-cache-v1
+          paths:
+            - /usr/lib/x86_64-linux-gnu/libvips.so.42
+            - /usr/lib/x86_64-linux-gnu/libvips.so.42.14.1
+            - /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42
+            - /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42.14.1
       - run:
           name: Database setup and seed
           command: bin/rails db:create db:schema:load db:seed --trace
@@ -99,7 +113,6 @@ jobs:
       - run:
           name: Lint typographie des locales
           command: bundle exec rake locale_typography
-
       - run:
           name: Stylelint (CSS/SCSS)
           command: npm run lint:css
@@ -111,9 +124,23 @@ jobs:
       - attach_workspace:
           at: .
       - browser-tools/install-browser-tools
+      - restore_cache:
+          keys:
+            - vips-cache-v1
       - run:
           name: Install libvips
-          command: timeout 2m sudo apt-get update && sudo apt-get install -y libvips
+          command: |
+            if [ ! -f "/usr/lib/x86_64-linux-gnu/libvips.so.42" ]; then
+              sudo apt-get update
+              sudo timeout 2m apt-get install -y libvips
+            fi
+      - save_cache:
+          key: vips-cache-v1
+          paths:
+            - /usr/lib/x86_64-linux-gnu/libvips.so.42
+            - /usr/lib/x86_64-linux-gnu/libvips.so.42.14.1
+            - /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42
+            - /usr/lib/x86_64-linux-gnu/libvips-cpp.so.42.14.1
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m

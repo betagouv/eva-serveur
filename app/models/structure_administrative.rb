@@ -1,4 +1,9 @@
 class StructureAdministrative < Structure
+  include AvecUsage
+
+  validates :usage, presence: true
+  validates :opco, presence: true, if: :evapro?
+
   def metabase_dashboard
     53
   end

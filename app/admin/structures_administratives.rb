@@ -3,7 +3,7 @@ ActiveAdmin.register StructureAdministrative do
     current_compte.anlci? || current_compte.administratif?
   }
 
-  permit_params :nom, :parent_id, :siret
+  permit_params :nom, :parent_id, :siret, :usage, :opco_id
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :created_at

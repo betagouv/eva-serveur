@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Admin - Structure administrative', type: :feature do
   context 'en tant que superadmin' do
     let(:compte_superadmin) { create(:compte_superadmin) }
+    let!(:opco) { create(:opco, nom: "OPCO Test") }
     let!(:structure) {
           create :structure_administrative, :avec_admin, nom: 'Ma structure',
   siret: '12345678901234'
@@ -49,6 +50,13 @@ role: :conseiller
     end
 
     describe 'création' do
+      it "propose uniquement les usages Eva bénéficiaires et EVAPRO" do
+        visit new_admin_structure_administrative_path
+
+        usages = all("input[name='structure_administrative[usage]']", visible: :all).map(&:value)
+        expect(usages).to contain_exactly(AvecUsage::USAGE_BENEFICIAIRES, AvecUsage::USAGE_EVAPRO)
+      end
+
       it 'permet de créer une structure avec le même SIRET' do
         visit new_admin_structure_administrative_path
 
@@ -59,6 +67,22 @@ role: :conseiller
         structure = Structure.order(:created_at).last
         expect(structure.nom).to eq 'Nouvelle structure'
         expect(structure.siret).to eq '12345678901234'
+        expect(structure.usage).to eq AvecUsage::USAGE_BENEFICIAIRES
+      end
+
+      it "permet de créer une structure EVAPRO rattachée à un OPCO" do
+        visit new_admin_structure_administrative_path
+
+        fill_in :structure_administrative_nom, with: "Nouvelle structure EVAPRO"
+        fill_in :structure_administrative_siret, with: "12345678901231"
+        find("input[name='structure_administrative[usage]'][value='EVAPRO']").choose
+        find("#opco_field", visible: :all).find("option", text: opco.nom).select_option
+        click_on "Créer une structure"
+
+        structure = Structure.order(:created_at).last
+        expect(structure.nom).to eq "Nouvelle structure EVAPRO"
+        expect(structure.usage).to eq AvecUsage::USAGE_EVAPRO
+        expect(structure.opco).to eq(opco)
       end
     end
 

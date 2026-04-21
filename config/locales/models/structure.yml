@@ -33,6 +33,7 @@ fr:
         statut_siret_true: vérifié
         statut_siret_false: non vérifié
         opco: Opérateur de compétences
+        opco_id: Opérateur de compétences
         date_verification_siret: Date vérification SIRET
         region: Région
         code_commune: Code (INSEE) de la commune
@@ -84,6 +85,7 @@ fr:
       structure: &placeholders_structure
         nom: Mission locale de Montpellier
         code_postal: "34000"
+        opco_id: Sélectionnez une option
       structure_administrative:
         <<: *placeholders_structure
       structure_locale:

@@ -37,7 +37,8 @@
                          ),
                          { include_blank: t("admin.structures.membres.modal.role_placeholder") },
                          id: "invitation_role_#{structure.id}",
-                         class: "fr-select" %>
+                         class: "fr-select",
+                         data: { placeholder: t("admin.structures.membres.modal.role_placeholder") } %>
           </div>
         <% end %>
 

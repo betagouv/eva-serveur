@@ -6,6 +6,8 @@ class Ability < AbilityUtilisateur
       droits_comptes_refuses compte
     elsif compte.en_attente_restreint?
       droits_comptes_en_attente_restreints compte
+    elsif compte.vue_opco_active?
+      droits_comptes_opco_restreints compte
     else
       super
       droits_applicatifs
@@ -67,5 +69,16 @@ class Ability < AbilityUtilisateur
     can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
     can :read, Actualite
     can %i[update read accepter_cgu], compte
+  end
+
+  def droits_comptes_opco_restreints(compte)
+    can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: "admin"
+    can :read, ActiveAdmin::Page, name: "Aide", namespace_name: "admin"
+    can :read, Actualite
+    can %i[read update accepter_cgu], compte
+    can :read, Structure, id: compte.structure_id
+    return unless compte.admin?
+
+    can :read, Compte, structure_id: compte.structure.subtree_ids
   end
 end

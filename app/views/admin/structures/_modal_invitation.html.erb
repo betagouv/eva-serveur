@@ -29,6 +29,7 @@
           <div class="fr-select-group">
             <label class="fr-label" for="invitation_role_<%= structure.id %>">
               <%= t("admin.structures.membres.modal.role_label") %>
+              <abbr title="required">*</abbr>
             </label>
             <%= f.select :role,
                          options_for_select(

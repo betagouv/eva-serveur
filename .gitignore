@@ -46,6 +46,7 @@ dump.rdb
 /public/javascripts
 /public/dsfr
 /public/tarteaucitron
+/public/assets/
 
 node_modules/
 .DS_Store

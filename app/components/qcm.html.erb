@@ -1,8 +1,8 @@
 <div class="qcm w-100 <%= "questions-#{@questionnaire.nom}" %> <%= @qcm_affiche ? "" : "hidden" %>" style="z-index: <%= @priorite %>;">
   <form>
-    <fieldset class="mb-0">
+    <fieldset class="fr-mb-0">
       <legend><%= @questionnaire.question %></legend>
-      <ul class="mt-3 p-0">
+      <ul class="fr-mt-3v fr-p-0">
         <% @questionnaire.reponses.each_value do |option| %>
           <li>
             <label>
@@ -13,7 +13,7 @@
         <% end %>
       </ul>
     </fieldset>
-    <div class="mt-3 d-flex justify-content-end">
+    <div class="fr-mt-3v d-flex justify-content-end">
       <button type="button" class="fr-btn fr-btn--secondary fr-btn--sm bouton-fermer mr-1">
         <%= t(".action_fermer") %>
       </button>

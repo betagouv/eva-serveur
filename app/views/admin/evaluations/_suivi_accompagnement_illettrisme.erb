@@ -2,7 +2,7 @@
 <% reponse = mise_en_action_presenter.a_mise_en_action? && mise_en_action_presenter.mise_en_action_avec_qualification? ? "card__banner--succes" : "card__banner--en-attente" %>
 
 <div class="card__banner card__banner--illettrisme <%= reponse %>">
-  <div class= 'container d-flex py-3 px-4'>
+  <div class= 'container d-flex fr-py-3v fr-px-4v'>
     <div class='d-flex align-items-center justify-content-center' aria-hidden="true">
       <%= inline_svg_tag "banner_icone_question.svg", class: "card__banner__icone" %>
     </div>
@@ -20,7 +20,7 @@
           MiseEnAction::Questionnaire.new(:difficulte),
           qcm_affiche: mise_en_action_presenter.non_effectuee_sans_difficulte?)) %>
   </div>
-  <div class= 'container py-3 px-4 container--asterisque'>
+  <div class= 'container fr-py-3v fr-px-4v container--asterisque'>
     <%= render "components/banniere_solutions_illettrisme", asterisque: true %>
   </div>
 </div>

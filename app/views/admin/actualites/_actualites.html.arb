@@ -1,15 +1,15 @@
 div class: "actualites" do
   actualites.each do |actualite|
     div class: "actualite" do
-      div class: "conteneur" do
+      div class: "actualite__conteneur" do
         if actualite.illustration.attached?
-          div class: "illustration" do
+          div class: "actualite__illustration" do
             link_to admin_actualite_path(actualite), aria: { describedby: actualite.id } do
               image_tag cdn_for(actualite.illustration), alt: t(".action.lire")
             end
           end
         end
-        div class: "contenu" do
+        div class: "actualite__contenu" do
           render(Tag.new(
                    t(actualite.categorie,
                      scope: "activerecord.attributes.actualite.categories"),

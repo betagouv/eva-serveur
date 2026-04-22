@@ -1,0 +1,56 @@
+// Flexbox utilities (not available in DSFR)
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+// Width utilities (not available in DSFR)
+.w-100 {
+  width: 100%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+// Text utilities (not available in DSFR)
+.text-center {
+  text-align: center;
+}
+
+// Display utilities (not available in DSFR)
+.hidden {
+  display: none;
+}
+
+// Position utilities (not available in DSFR)
+.position-relative {
+  position: relative;
+}

@@ -13,7 +13,7 @@
         <span id="question-diagnostics"><%= md(t(".question")) %></span>
       </div>
     </div>
-    <ul class='mb-0'>
+    <ul class='fr-mb-0'>
       <% evaluations.each_with_index do |evaluation, index| %>
         <% mise_en_action_presenter = evaluation.usage.mise_en_action_presenter %>
         <%= render(CarteMiseEnAction.new(evaluation,

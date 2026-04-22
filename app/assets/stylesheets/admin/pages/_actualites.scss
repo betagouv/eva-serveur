@@ -10,18 +10,12 @@
       page-break-inside: avoid;
       break-inside: avoid;
 
-      .conteneur {
+      .actualite__conteneur {
         @include carte-avec-ombre;
+
+        overflow: hidden;
       }
-      .illustration {
-        height: 145px;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-      }
-      .contenu {
+      .actualite__contenu {
         padding: 1rem;
         position: relative;
       }
@@ -66,5 +60,15 @@
         }
       }
     }
+  }
+}
+
+.actualite__illustration {
+  width: 100%;
+  height: 145px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

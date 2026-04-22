@@ -30,7 +30,7 @@
         margin-bottom: 2rem;
       }
 
-      .illustration {
+      .actualite__illustration {
         img {
           width: 100%;
 
@@ -40,7 +40,7 @@
         margin-bottom: 2rem;
       }
 
-      .contenu {
+      .actualite__contenu {
         @include make-col(3, 5);
         @include make-col-offset(1, 5);
 

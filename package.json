@@ -16,11 +16,15 @@
     "copie-dsfr-icons": "cp -r node_modules/@gouvfr/dsfr/dist/icons/* public/dsfr/icons/",
     "copie-dsfr-js": "cp -r node_modules/@gouvfr/dsfr/dist/dsfr/dsfr.nomodule.min.js public/dsfr/dsfr.nomodule.min.js",
     "copie-dsfr": "npm run nettoie-dsfr && npm run cree-dsfr-dossiers && npm run copie-dsfr-css && npm run copie-dsfr-polices && npm run copie-dsfr-icons && npm run copie-dsfr-js",
-    "postinstall": "npm run copie-dsfr",
+    "nettoie-tarteaucitron": "rm -rf public/tarteaucitron",
+    "cree-tarteaucitron-dossier": "mkdir -p public/tarteaucitron",
+    "copie-tarteaucitron": "npm run nettoie-tarteaucitron && npm run cree-tarteaucitron-dossier && cp -r node_modules/tarteaucitronjs/* public/tarteaucitron/",
+    "postinstall": "npm run copie-dsfr && npm run copie-tarteaucitron",
     "lint:css": "stylelint \"app/assets/stylesheets/**/*.scss\"",
     "lint:css:fix": "stylelint \"app/assets/stylesheets/**/*.scss\" --fix"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "^1.14.2"
+    "@gouvfr/dsfr": "^1.14.2",
+    "tarteaucitronjs": "^1.32.0"
   }
 }

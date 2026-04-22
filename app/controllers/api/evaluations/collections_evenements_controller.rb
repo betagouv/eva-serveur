@@ -2,7 +2,7 @@ module Api
   module Evaluations
     class CollectionsEvenementsController < Api::BaseController
       def create
-        if Evaluation.exists?(permit_params[:evaluation_id])
+        if Evaluation.where(id: permit_params[:evaluation_id]).exists?
           PersisteCollectionEvenementsJob.perform_later(
             permit_params[:evaluation_id],
             permit_params[:evenements]

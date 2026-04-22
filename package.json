@@ -19,12 +19,16 @@
     "nettoie-tarteaucitron": "rm -rf public/tarteaucitron",
     "cree-tarteaucitron-dossier": "mkdir -p public/tarteaucitron",
     "copie-tarteaucitron": "npm run nettoie-tarteaucitron && npm run cree-tarteaucitron-dossier && cp -r node_modules/tarteaucitronjs/* public/tarteaucitron/",
-    "postinstall": "npm run copie-dsfr && npm run copie-tarteaucitron",
+    "nettoie-i18n": "rm -rf public/javascripts/i18n.js",
+    "cree-i18n-dossier": "mkdir -p public/javascripts",
+    "copie-i18n": "npm run nettoie-i18n && npm run cree-i18n-dossier && cp node_modules/i18n-js/dist/browser/index.js public/javascripts/i18n.js",
+    "postinstall": "npm run copie-dsfr && npm run copie-tarteaucitron && npm run copie-i18n",
     "lint:css": "stylelint \"app/assets/stylesheets/**/*.scss\"",
     "lint:css:fix": "stylelint \"app/assets/stylesheets/**/*.scss\" --fix"
   },
   "dependencies": {
     "@gouvfr/dsfr": "^1.14.2",
+    "i18n-js": "^4.5.3",
     "tarteaucitronjs": "^1.32.0"
   }
 }

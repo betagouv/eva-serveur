@@ -94,4 +94,59 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Opérateurs de compétences", visible: :all)
     end
   end
+
+  context "quand le compte est un employé OPCO non admin" do
+    let(:opco) { create(:opco) }
+    let(:structure) do
+      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let(:compte) { create(:compte_conseiller, :acceptee, structure: structure) }
+
+    it "affiche uniquement la navigation OPCO restreinte" do
+      render_inline(component)
+
+      expect(page).to have_link("Tableau de bord", href: "/admin")
+      expect(page).to have_link("Actualités")
+      expect(page).to have_link("Aide")
+      expect(page).not_to have_link("Comptes")
+      expect(page).not_to have_link("Évaluations")
+      expect(page).not_to have_link("Campagnes")
+      expect(page).not_to have_link("Bénéficiaires")
+      expect(page).not_to have_button("Accompagnement")
+      expect(page).not_to have_button("Parcours")
+      expect(page).not_to have_button("Structures")
+    end
+  end
+
+  context "quand le compte est un employé OPCO admin" do
+    let(:opco) { create(:opco) }
+    let(:structure) do
+      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let(:compte) { create(:compte_admin, :acceptee, structure: structure) }
+
+    it "affiche le lien Comptes" do
+      render_inline(component)
+
+      expect(page).to have_link("Tableau de bord", href: "/admin")
+      expect(page).to have_link("Actualités")
+      expect(page).to have_link("Aide")
+      expect(page).to have_link("Comptes")
+      expect(page).not_to have_link("Évaluations")
+      expect(page).not_to have_link("Campagnes")
+      expect(page).not_to have_link("Bénéficiaires")
+    end
+  end
+
+  context "quand la structure n'est pas OPCO" do
+    let(:compte) { create(:compte_admin, :acceptee, :structure_avec_admin) }
+
+    it "n'active pas la navigation OPCO" do
+      render_inline(component)
+
+      expect(page).to have_link("Comptes")
+      expect(page).to have_link("Évaluations")
+      expect(page).to have_link("Campagnes")
+    end
+  end
 end

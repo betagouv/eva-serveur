@@ -1,6 +1,22 @@
 require "rails_helper"
 
 describe Admin::EvaluationsController, type: :controller do
+  describe "GET #index avec un compte OPCO restreint" do
+    let(:opco) { create(:opco) }
+    let(:structure) do
+      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let(:compte_connecte) { create(:compte_conseiller, :acceptee, structure: structure) }
+
+    before { sign_in compte_connecte }
+
+    it "refuse l'accès à la page des évaluations" do
+      get :index
+
+      expect(response).to have_http_status(:redirect)
+    end
+  end
+
   describe "GET #index en tant qu'utilisateur entreprise (Eva Pro)" do
     let(:structure) do
       create(:structure_locale,

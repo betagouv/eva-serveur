@@ -20,6 +20,8 @@ class NavigationComponent < ViewComponent::Base
   private
 
   def default_links
+    return opco_links if vue_opco_active?
+
     [
       dashboard_link,
       actualites_link,
@@ -30,6 +32,15 @@ class NavigationComponent < ViewComponent::Base
       comptes_link,
       parcours_group,
       structures_group,
+      aide_link
+    ].compact
+  end
+
+  def opco_links
+    [
+      dashboard_link,
+      actualites_link,
+      opco_comptes_link,
       aide_link
     ].compact
   end
@@ -85,6 +96,14 @@ class NavigationComponent < ViewComponent::Base
 
   def comptes_link
     return if en_attente_restreint?
+    return unless can?(:read, Compte)
+
+    { label: "Comptes", url: helpers.admin_comptes_path,
+      current: current_page?(helpers.admin_comptes_path) }
+  end
+
+  def opco_comptes_link
+    return unless @current_compte&.admin?
     return unless can?(:read, Compte)
 
     { label: "Comptes", url: helpers.admin_comptes_path,
@@ -336,6 +355,10 @@ class NavigationComponent < ViewComponent::Base
 
   def en_attente_restreint?
     @current_compte&.en_attente_restreint?
+  end
+
+  def vue_opco_active?
+    @current_compte&.vue_opco_active?
   end
 
   def can?(action, subject, *extra_args)

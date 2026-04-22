@@ -96,6 +96,12 @@ class Compte < ApplicationRecord
     !!structure&.evapro?
   end
 
+  def vue_opco_active?
+    structure.is_a?(StructureAdministrative) &&
+      structure.evapro? &&
+      structure.opco.present?
+  end
+
   # Aligné sur Ability : profil restreint tant que la validation structure n'est pas finalisée.
   # Sans structure : parcours inscription / création de structure (Ability : branche complète).
   # Inscription terminée (étape complet) mais validation en attente : navigation réduite.

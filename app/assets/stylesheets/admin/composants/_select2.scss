@@ -1,4 +1,6 @@
 .select2.select2-container--default {
+  padding-top: 0.5rem;
+
   .select2-selection { 
     padding-top: 0;
     padding-bottom: 0;
@@ -11,7 +13,11 @@
 
   .select2-selection__rendered {
     width: 100%;
-    padding-left: 16px;
+    padding-left: 1rem;
+  }
+
+  .select2-selection--single .select2-selection__arrow {
+    top: auto;
   }
 }
 

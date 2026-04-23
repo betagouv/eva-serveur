@@ -1,5 +1,5 @@
 div class: "mon-compte row" do
-  div class: "offset-1 col-4" do
+  div class: "offset-md-1 col-12 col-md-4" do
     if current_compte == compte
       h2 t(".titre", prenom: compte.prenom), class: "titre-entete-page"
 

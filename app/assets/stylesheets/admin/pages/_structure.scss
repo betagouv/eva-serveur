@@ -109,3 +109,15 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .admin_structures, .admin_structures_locales, .admin_structures_administratives {
+    &.show {
+      .bloc-structure-infos {
+        .titre-entete-page {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}

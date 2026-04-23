@@ -270,6 +270,34 @@ describe 'Dashboard', type: :feature do
     end
   end
 
+  context "quand le compte a la vue OPCO" do
+    let(:opco) { create(:opco) }
+    let(:structure_opco) do
+      create(:structure_administrative, usage: "EVAPRO", opco: opco)
+    end
+    let(:dashboard_id) { "61" }
+    let!(:compte) do
+      create :compte_superadmin,
+             structure: structure_opco,
+             cgu_acceptees: true,
+             mode_tutoriel: false
+    end
+
+    before do
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("METABASE_SITE_URL").and_return("http://metabase.example")
+      allow(ENV).to receive(:[]).with("METABASE_SECRET_KEY").and_return("secret")
+      allow(ENV).to receive(:[]).with("METABASE_OPCO_DASHBOARD_ID").and_return(dashboard_id)
+    end
+
+    it "affiche l'iframe metabase du tableau de bord opco" do
+      visit admin_path
+
+      expect(page).to have_css("iframe[src*='http://metabase.example/embed/dashboard/']")
+      expect(page).not_to have_content("Aucun tableau de bord n'est configuré pour votre OPCO.")
+    end
+  end
+
   context "quand le compte est utilisateur entreprise (tableau de bord eva pro)" do
     let!(:structure_entreprise) do
       create :structure_locale,

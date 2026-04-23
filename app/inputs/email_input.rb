@@ -9,8 +9,7 @@ class EmailInput < Formtastic::Inputs::StringInput
   def to_html
     input_wrapping do
       label_html <<
-        email_input_html <<
-        error_html
+        email_input_html
     end
   end
 

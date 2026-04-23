@@ -34,3 +34,12 @@ body.logged_in {
     margin-bottom: 3.5rem;
   }
 }
+
+@media (max-width: 854px) {
+  body.logged_in {
+    #title_bar {
+      margin-top: 1rem;
+      padding: 0 1rem;
+    }
+  }
+}

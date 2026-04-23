@@ -10,8 +10,14 @@ body.logged_in {
   #active_admin_content {
     display: flex;
     align-items: stretch;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 854px) {
+  body.logged_in {
+    #active_admin_content {
+      max-width: $container;
+    }
   }
 }
 

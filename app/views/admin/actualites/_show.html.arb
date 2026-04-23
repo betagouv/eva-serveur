@@ -5,9 +5,7 @@ div class: "actualite-complete" do
     image_tag cdn_for(actualite.illustration), alt: "" if actualite.illustration.attached?
   end
 
-  div class: "row" do
-    div class: "actualite__contenu" do
-      md actualite.contenu
-    end
+  div class: "actualite__contenu" do
+    md actualite.contenu
   end
 end

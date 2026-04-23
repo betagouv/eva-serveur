@@ -61,6 +61,46 @@ visible: :all
           expect(invitation.role).to eq("admin")
         end
       end
+
+      describe "blocs statistiques" do
+        context "quand la structure locale n'est pas EVAPRO" do
+          let!(:structure) do
+            create(
+              :structure_locale,
+              :avec_admin,
+              nom: "Structure locale beneficiaires",
+              type_structure: "mission_locale",
+              usage: AvecUsage::USAGE_BENEFICIAIRES
+            )
+          end
+
+          it "affiche le bloc statistiques standard et pas le bloc opco" do
+            visit admin_structure_locale_path(structure)
+
+            expect(page).to have_css("#bloc-statistiques")
+            expect(page).not_to have_css("#bloc-statistiques-opco")
+          end
+        end
+
+        context "quand la structure locale est EVAPRO" do
+          let!(:structure) do
+            create(
+              :structure_locale,
+              :avec_admin,
+              nom: "Structure locale EVAPRO",
+              type_structure: "entreprise",
+              usage: AvecUsage::USAGE_EVAPRO
+            )
+          end
+
+          it "n'affiche aucun des deux blocs statistiques" do
+            visit admin_structure_locale_path(structure)
+
+            expect(page).not_to have_css("#bloc-statistiques")
+            expect(page).not_to have_css("#bloc-statistiques-opco")
+          end
+        end
+      end
     end
 
     describe 'create' do

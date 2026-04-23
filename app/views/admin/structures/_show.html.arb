@@ -72,6 +72,12 @@ div class: "row" do
 end
 div class: "row" do
   div class: "col-6" do
+    if resource.est_une_structure_ocpo?
+      section id: "bloc-statistiques-opco" do
+        h2 "Statistiques"
+        render partial: "admin/dashboard/metabase_dashboard_opco", locals: { opco: resource.opco }
+      end
+    end
     unless structure.evapro?
       section id: "bloc-statistiques" do
         render partial: "admin/structures/statistiques"

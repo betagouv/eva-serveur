@@ -111,6 +111,10 @@ allow_blank: true
   end
   alias_method :eva_entreprises?, :evapro?
 
+  def est_une_structure_ocpo?
+    is_a?(StructureAdministrative) && opco.present? && evapro?
+  end
+
   def self.ransack_unaccent_attributes
     %w[nom]
   end

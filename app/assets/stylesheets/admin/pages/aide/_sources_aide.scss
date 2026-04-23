@@ -46,3 +46,9 @@
     }
   }
 }
+
+@media (max-width: 854px) {
+  .sources_aide {
+    grid-template-columns: auto;
+  }
+}

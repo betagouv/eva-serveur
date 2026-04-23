@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
       function toggleOpcoField() {
         const selectedUsage = document.querySelector(`input[name="${modelName}[usage]"]:checked`)?.value;
         const evaproSelected = selectedUsage === 'EVAPRO';
+
+        if (evaproSelected && parentField) {
+          parentField.value = '';
+        }
+        if (!evaproSelected && opcoField) {
+          opcoField.value = '';
+          opcoField.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
         if (opcoFieldWrapper) {
           opcoFieldWrapper.style.display = evaproSelected ? '' : 'none';
         }

@@ -102,13 +102,13 @@ RSpec.describe NavigationComponent, type: :component do
     end
     let(:compte) { create(:compte_conseiller, :acceptee, structure: structure) }
 
-    it "affiche uniquement la navigation OPCO restreinte" do
+    it "affiche la navigation OPCO avec le lien Comptes" do
       render_inline(component)
 
       expect(page).to have_link("Tableau de bord", href: "/admin")
       expect(page).to have_link("Actualités")
       expect(page).to have_link("Aide")
-      expect(page).not_to have_link("Comptes")
+      expect(page).to have_link("Comptes")
       expect(page).not_to have_link("Évaluations")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")

@@ -171,4 +171,59 @@ describe Admin::ComptesController, type: :controller do
       end
     end
   end
+
+  describe "liste comptes OPCO" do
+    let(:opco) { create(:opco) }
+    let(:structure_opco) do
+      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let(:structure_meme_opco) do
+      create(:structure_locale, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let!(:compte_opco) do
+      create(:compte_conseiller, structure: structure_opco, prenom: "Visible")
+    end
+    let!(:compte_hors_opco) do
+      create(:compte_conseiller, structure: structure_meme_opco, prenom: "Invisible")
+    end
+    let!(:compte_connecte) { create(:compte_admin, :acceptee, structure: structure_opco) }
+
+    before { sign_in compte_connecte }
+
+    it "n'affiche que les comptes de sa structure" do
+      get :index
+
+      expect(response).to be_successful
+      expect(response.body).to include("Visible")
+      expect(response.body).not_to include("Invisible")
+    end
+  end
+
+  describe "liste comptes OPCO conseiller" do
+    let(:opco) { create(:opco) }
+    let(:structure_opco) do
+      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let(:autre_structure_meme_opco) do
+      create(:structure_locale, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    end
+    let!(:compte_meme_structure) do
+      create(:compte_conseiller, structure: structure_opco, prenom: "VisibleConseiller")
+    end
+    let!(:compte_meme_opco_autre_structure) do
+      create(:compte_conseiller, structure: autre_structure_meme_opco,
+prenom: "InvisibleConseiller")
+    end
+    let!(:compte_connecte) { create(:compte_conseiller, :acceptee, structure: structure_opco) }
+
+    before { sign_in compte_connecte }
+
+    it "n'affiche que les comptes de sa structure" do
+      get :index
+
+      expect(response).to be_successful
+      expect(response.body).to include("VisibleConseiller")
+      expect(response.body).not_to include("InvisibleConseiller")
+    end
+  end
 end

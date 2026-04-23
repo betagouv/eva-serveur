@@ -77,8 +77,9 @@ class Ability < AbilityUtilisateur
     can :read, Actualite
     can %i[read update accepter_cgu], compte
     can :read, Structure, id: compte.structure_id
-    return unless compte.admin?
-
-    can :read, Compte, structure_id: compte.structure.subtree_ids
+    structure_ids = compte.admin? ? compte.structure.subtree_ids : [ compte.structure_id ]
+    can %i[envoyer_invitation copier_lien], StructureLocale, id: structure_ids
+    can %i[envoyer_invitation copier_lien], StructureAdministrative, id: structure_ids
+    can :read, Compte, structure_id: compte.structure_id
   end
 end

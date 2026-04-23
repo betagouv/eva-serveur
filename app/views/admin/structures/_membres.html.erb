@@ -3,7 +3,7 @@
     <h3><%= t(".titre") %></h3>
     <%= link_to t(".voir_membres"), admin_comptes_path("q[structure_id_eq]": resource.id) %>
   </div>
-  <% if resource.is_a?(StructureLocale) %>
+  <% if resource.is_a?(StructureLocale) || (resource.is_a?(StructureAdministrative) && resource.opco.present?) %>
     <div class="panel panel-invitation">
       <div class="container-instructions flex-column">
         <div class="panel-invitation-message">

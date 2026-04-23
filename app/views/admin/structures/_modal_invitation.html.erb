@@ -1,5 +1,15 @@
 <% id_modal = "fr-modal-invitation-#{structure.id}" %>
 <% form_id = "invitation-form-#{structure.id}" %>
+<% invitation_url = if structure.is_a?(StructureAdministrative)
+  envoyer_invitation_admin_structure_administrative_path(structure)
+ else
+  envoyer_invitation_admin_structure_locale_path(structure)
+end %>
+<% copier_lien_url = if structure.is_a?(StructureAdministrative)
+  copier_lien_admin_structure_administrative_path(structure)
+ else
+  copier_lien_admin_structure_locale_path(structure)
+end %>
 
 <%= dsfr_modal(
   title: t("admin.structures.membres.modal.titre"),
@@ -7,7 +17,7 @@
 ) do |component| %>
   <div class="contenu-modale">
     <div class="contenu">
-      <%= form_with url: envoyer_invitation_admin_structure_locale_path(structure),
+      <%= form_with url: invitation_url,
                     method: :post,
                     local: true,
                     scope: :invitation,
@@ -78,7 +88,7 @@
       size: :md,
       class: "copier-lien-invitation fr-icon-links-fill fr-btn--icon-left",
       data: {
-        copier_lien_url: copier_lien_admin_structure_locale_path(structure)
+        copier_lien_url: copier_lien_url
       }
     ) do %>
       <span class="copier-lien-invitation__label"><%= t("admin.structures.membres.modal.copier_lien") %></span>

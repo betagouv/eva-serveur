@@ -14,7 +14,7 @@
       <h3 class="bloc-opco-entreprise__titre"><%= t("admin.dashboard.sidebar.opco_entreprise.titre") %></h3>
       <p class="bloc-opco-entreprise__nom"><%= structure.nom %></p>
     </div>
-    <% if structure.is_a?(StructureLocale) %>
+    <% if structure.is_a?(StructureLocale) || (structure.is_a?(StructureAdministrative) && structure.opco.present?) %>
       <%= render BoutonDsfrComponent.new(
         "#",
         type: :tertiary,
@@ -24,6 +24,7 @@
       ) do %>
         <%= t("admin.dashboard.sidebar.opco_entreprise.inviter") %>
       <% end %>
+      <%= render "admin/structures/modal_invitation", structure: structure %>
     <% end %>
   </div>
 </div>

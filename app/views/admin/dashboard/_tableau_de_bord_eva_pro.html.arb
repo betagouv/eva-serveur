@@ -49,7 +49,8 @@ end
 
 
 
-if structure.is_a?(StructureLocale)
+if structure.is_a?(StructureLocale) ||
+   (structure.is_a?(StructureAdministrative) && structure.opco.present?)
   render partial: "admin/structures/modal_invitation", locals: { structure: structure }
 end
 

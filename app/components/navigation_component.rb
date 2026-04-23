@@ -103,7 +103,6 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def opco_comptes_link
-    return unless @current_compte&.admin?
     return unless can?(:read, Compte)
 
     { label: "Comptes", url: helpers.admin_comptes_path,

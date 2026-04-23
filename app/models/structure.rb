@@ -195,6 +195,7 @@ allow_blank: true
   def verifie_dns_email_contact
     return if email_contact.blank?
     return unless email_contact_changed?
+    return unless email_contact.match?(URI::MailTo::EMAIL_REGEXP)
     return if Truemail.valid?(email_contact)
 
     errors.add(:email_contact, :invalid)

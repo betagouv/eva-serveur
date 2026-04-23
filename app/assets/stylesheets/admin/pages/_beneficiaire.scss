@@ -17,3 +17,10 @@
     align-items: center;
   }
 }
+
+@media (max-width: 768px) {
+  .page-beneficiaire {
+    padding: 0 1rem;
+    gap: $dsfr-spacing-4v;
+  }
+}

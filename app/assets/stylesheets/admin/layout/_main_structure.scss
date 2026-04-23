@@ -10,12 +10,8 @@ body.logged_in {
   #active_admin_content {
     display: flex;
     align-items: stretch;
-  }
-}
-
-body.logged_in.evapro_admin {
-  #active_admin_content {
     padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 

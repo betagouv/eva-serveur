@@ -1,0 +1,43 @@
+if current_compte.email == Eva::EMAIL_DEMO
+  div class: "panel" do
+    md t("admin.dashboard.alerte_compte_demo")
+  end
+end
+
+if current_compte.validation_refusee?
+  render "validation_refusee"
+elsif current_compte.validation_en_attente?
+  render "validation_necessaire"
+else
+  div class: "tableau-bord-layout" do
+    div class: "tableau-bord-contenu-principal" do
+      h2 class: "bienvenue-entreprise__titre" do
+        t("admin.dashboard.bienvenue_entreprise.titre_tableau_de_bord")
+      end
+      render partial: "admin/dashboard/metabase_dashboard_opco",
+             locals: { opco: opco }
+    end
+
+    if structure.present?
+      div class: "tableau-bord-sidebar" do
+        section class: "section-opco section-tableau-bord-eva-pro" do
+          render partial: "admin/dashboard/opco/sidebar_opco",
+                locals: {
+                  opco: opco,
+                  structure: structure
+                }
+        end
+      end
+    end
+  end
+end
+
+if structure.is_a?(StructureAdministrative) && structure.opco.present?
+  render partial: "admin/structures/modal_invitation", locals: { structure: structure }
+end
+
+if !current_compte.cgu_acceptees?
+  render "modal_confirmation_cgu"
+elsif comptes_en_attente.present? && can?(:autoriser, Compte)
+  render "modal_validation_comptes_en_attente"
+end

@@ -42,6 +42,10 @@ class Opco < ApplicationRecord
     cdn_for(logo)
   end
 
+  def nombre_structures_locales
+    StructureLocale.where(opco_id: id).count
+  end
+
   private
 
   def supprime_visuel_offre_services

@@ -1,7 +1,5 @@
 <% statistiques_opco = StatistiquesOpco.new(opco_id: opco&.id) %>
 
-<p><%= t("admin.dashboard.metabase_opco.titre") %></p>
-
 <iframe
   src="<%= statistiques_opco.url %>"
   frameborder="0"

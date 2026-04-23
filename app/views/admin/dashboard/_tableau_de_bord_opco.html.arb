@@ -9,11 +9,12 @@ if current_compte.validation_refusee?
 elsif current_compte.validation_en_attente?
   render "validation_necessaire"
 else
-  div class: "tableau-bord-layout" do
+  div class: "tableau-bord-layout", id: "bloc-statistiques-dashboard-opco" do
     div class: "tableau-bord-contenu-principal" do
       h2 class: "bienvenue-entreprise__titre" do
         t("admin.dashboard.bienvenue_entreprise.titre_tableau_de_bord")
       end
+      span t("admin.dashboard.metabase_opco.titre")
       render partial: "admin/dashboard/metabase_dashboard_opco",
              locals: { opco: opco }
     end
@@ -32,7 +33,7 @@ else
   end
 end
 
-if structure.is_a?(StructureAdministrative) && structure.opco.present?
+if structure.est_une_structure_ocpo?
   render partial: "admin/structures/modal_invitation", locals: { structure: structure }
 end
 

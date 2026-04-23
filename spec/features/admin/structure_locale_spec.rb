@@ -68,9 +68,7 @@ visible: :all
             create(
               :structure_locale,
               :avec_admin,
-              nom: "Structure locale beneficiaires",
-              type_structure: "mission_locale",
-              usage: AvecUsage::USAGE_BENEFICIAIRES
+              :beneficiaire
             )
           end
 
@@ -87,9 +85,7 @@ visible: :all
             create(
               :structure_locale,
               :avec_admin,
-              nom: "Structure locale EVAPRO",
-              type_structure: "entreprise",
-              usage: AvecUsage::USAGE_EVAPRO
+              :eva_pro
             )
           end
 
@@ -99,6 +95,14 @@ visible: :all
             expect(page).not_to have_css("#bloc-statistiques")
             expect(page).not_to have_css("#bloc-statistiques-opco")
           end
+        end
+      end
+
+      describe "bloc membres - invitation" do
+        it "affiche le bouton envoyer une invitation" do
+          visit admin_structure_locale_path(structure)
+
+          expect(page).to have_content("Envoyer une invitation")
         end
       end
     end

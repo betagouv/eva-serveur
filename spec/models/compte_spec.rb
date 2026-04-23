@@ -179,8 +179,7 @@ describe Compte do
       let(:structure) do
         build(
           :structure_administrative,
-          usage: AvecUsage::USAGE_EVAPRO,
-          opco: build_stubbed(:opco)
+          :eva_pro
         )
       end
 
@@ -193,7 +192,7 @@ describe Compte do
       let(:structure) do
         build(
           :structure_administrative,
-          usage: AvecUsage::USAGE_BENEFICIAIRES
+          :beneficiaire
         )
       end
 

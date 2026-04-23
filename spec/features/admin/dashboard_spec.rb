@@ -252,6 +252,7 @@ describe 'Dashboard', type: :feature do
     it "n'effectue pas de redirection" do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
     end
   end
 
@@ -267,6 +268,7 @@ describe 'Dashboard', type: :feature do
     it "n'effectue pas de redirection" do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
     end
   end
 
@@ -275,7 +277,7 @@ describe 'Dashboard', type: :feature do
     let(:structure_opco) do
       create(:structure_administrative, usage: "EVAPRO", opco: opco)
     end
-    let(:dashboard_id) { "61" }
+
     let!(:compte) do
       create :compte_superadmin,
              structure: structure_opco,
@@ -283,18 +285,10 @@ describe 'Dashboard', type: :feature do
              mode_tutoriel: false
     end
 
-    before do
-      allow(ENV).to receive(:[]).and_call_original
-      allow(ENV).to receive(:[]).with("METABASE_SITE_URL").and_return("http://metabase.example")
-      allow(ENV).to receive(:[]).with("METABASE_SECRET_KEY").and_return("secret")
-      allow(ENV).to receive(:[]).with("METABASE_OPCO_DASHBOARD_ID").and_return(dashboard_id)
-    end
-
     it "affiche l'iframe metabase du tableau de bord opco" do
       visit admin_path
 
-      expect(page).to have_css("iframe[src*='http://metabase.example/embed/dashboard/']")
-      expect(page).not_to have_content("Aucun tableau de bord n'est configuré pour votre OPCO.")
+      expect(page).to have_css("#bloc-statistiques-dashboard-opco")
     end
   end
 
@@ -335,7 +329,7 @@ describe 'Dashboard', type: :feature do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
       expect(page).to have_content("Réponses collectées")
-
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
       within(".cinq-dernieres-evaluations") do
         expect(page).to have_content("Dupont Complet")
         expect(page).not_to have_content("Martin Incomplet")

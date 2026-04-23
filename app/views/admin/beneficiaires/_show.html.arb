@@ -1,6 +1,6 @@
 div class: "page-beneficiaire" do
   div class: "row" do
-    div class: "offset-2 col-8" do
+    div class: "offset-md-2 col-md-8" do
       h2 render NomAnonymisableComponent.new(beneficiaire)
       para class: "panel" do
         t(".info")

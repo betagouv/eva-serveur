@@ -47,6 +47,48 @@ role: :conseiller
 
         it { expect(page).to have_content structure.nom }
       end
+
+      describe 'bloc statistiques OPCO' do
+        context "quand la structure est EVAPRO et rattachée à un opco" do
+          let!(:structure) do
+            create(
+              :structure_administrative,
+              :avec_admin,
+              nom: "Structure EVAPRO",
+              siret: "12345678901235",
+              usage: AvecUsage::USAGE_EVAPRO,
+              opco: opco
+            )
+          end
+
+          it "affiche la section Statistiques avec le dashboard metabase opco" do
+            visit admin_structure_administrative_path(structure)
+
+            expect(page).to have_css("#bloc-statistiques-opco")
+            expect(page).not_to have_css("#bloc-statistiques")
+          end
+        end
+
+        context "quand la structure n'est pas EVAPRO" do
+          let!(:structure) do
+            create(
+              :structure_administrative,
+              :avec_admin,
+              nom: "Structure beneficiaires",
+              siret: "12345678901236",
+              usage: AvecUsage::USAGE_BENEFICIAIRES,
+              opco: opco
+            )
+          end
+
+          it "n'affiche pas le dashboard metabase opco" do
+            visit admin_structure_administrative_path(structure)
+
+            expect(page).not_to have_css("#bloc-statistiques-opco")
+            expect(page).to have_css("#bloc-statistiques")
+          end
+        end
+      end
     end
 
     describe 'création' do

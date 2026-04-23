@@ -114,6 +114,9 @@ jobs:
           name: Lint typographie des locales
           command: bundle exec rake locale_typography
       - run:
+          name: Lint utilisation de OPCO dans les locales
+          command: bundle exec rake locale_opco
+      - run:
           name: Stylelint (CSS/SCSS)
           command: npm run lint:css
 

@@ -1,14 +1,12 @@
-<div class="cellule">
+<div class="evaluation__cellule">
   <div class="d-flex align-items-center">
-    <% if presence_pastille? %>
-     <%= render(PastilleComponent.new(
-                   couleur: evaluation.illettrisme_potentiel? ? "alerte" : "",
+    <% if presence_pastille? && evaluation.illettrisme_potentiel? %>
+      <%= render(PastilleComponent.new(
+                   couleur: "alerte",
                    tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
-         ))%>
+                 )) %>
     <% end %>
-    <%= link_to admin_evaluation_path(evaluation), class: "evaluation__nom" do %>
-      <%= render(NomAnonymisableComponent.new(evaluation.beneficiaire)) %>
-    <% end %>
+    <%= render(NomAnonymisableComponent.new(evaluation.beneficiaire)) %>
   </div>
   <div class= "evaluation__code-beneficiaire <%= presence_pastille? ? "" : "ml-0" %>">
     <%= evaluation.beneficiaire.code_beneficiaire %>

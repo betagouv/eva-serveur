@@ -86,7 +86,8 @@
   }
 }
 
-#index_table_evaluations,
+// Je n'arrive pas a savoir si ceci est encore utilisé quelque part
+// mais je laisse le code pour le moment (Avec la mixin)
 #index_table_evaluations_beneficiaire {
   $padding-horizontal: 0.625rem;
 
@@ -141,4 +142,81 @@
 body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
+}
+
+.admin_evaluations.active_admin.logged_in.index table.index_table {
+  td .evaluation__cellule {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  td .evaluation__code-beneficiaire {
+    font-weight: 400;
+  }
+
+  td .evaluation__campagne {
+    font-weight: 600;
+  }
+
+  @mixin colonne-fixe($width) {
+    width: $width !important;
+    min-width: $width !important;
+    max-width: $width !important;
+    overflow: hidden;
+  }
+
+  th.evaluation__col-beneficiaire,
+  td.evaluation__col-beneficiaire {
+    @include colonne-fixe(196px);
+
+    .nom-anonymisable {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+
+      .icone-anonyme {
+        flex-shrink: 0;
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      span {
+        @include tronque;
+
+        min-width: 0;
+        flex: 1 1 auto;
+      }
+    }
+  }
+
+  th.evaluation__col-campagne,
+  td.evaluation__col-campagne {
+    @include colonne-fixe(240px);
+
+    .evaluation__campagne,
+    .evaluation__campagne-sous-titre {
+      @include tronque;
+
+      display: block;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+  }
+
+  th.evaluation__col-campagne--sans-structure,
+  td.evaluation__col-campagne--sans-structure {
+    @include colonne-fixe(418px);
+  }
+
+  th.evaluation__col-structure,
+  td.evaluation__col-structure {
+    @include colonne-fixe(209px);
+    @include tronque;
+  }
 }

@@ -3,28 +3,36 @@ if current_compte.utilisateur_entreprise?
          locals: { context: context,
 syntheses_evapro_par_evaluation_id: syntheses_evapro_par_evaluation_id }
 else
+
   context.instance_eval do
-    column :beneficiaire do |evaluation|
+    column :beneficiaire, class: "evaluation__col-beneficiaire" do |evaluation|
       render partial: "beneficiaire", locals: { evaluation: evaluation }
     end
 
-    column :campagne do |evaluation|
+    if affiche_colonne_structure?
+      column :structure, class: "evaluation__col-structure" do |evaluation|
+        evaluation.campagne.structure.display_name
+      end
+    end
+
+    column :campagne, class: classes_colonne_campagne(affiche_colonne_structure?) do |evaluation|
       campagne = evaluation.campagne
-      div class: "cellule" do
-        div link_to(campagne.display_name, admin_campagne_path(campagne),
-                    class: "evaluation__campagne"),
-            class: "d-flex align-items-center"
+      div class: "evaluation__cellule" do
+        div campagne.display_name, class: "evaluation__campagne"
         parcours_type = campagne.parcours_type
-        if parcours_type.present? && !current_compte.administratif?
-          div parcours_type.display_name, class: "evaluation__campagne-sous-titre"
-        end
-        if current_compte.anlci? || current_compte.administratif?
-          div evaluation.campagne.structure.display_name, class: "evaluation__campagne-sous-titre"
+        if affiche_sous_titre_campagne?(parcours_type)
+          div parcours_type.display_name,
+class: "evaluation__campagne-sous-titre"
         end
       end
     end
+
     column :debutee_le do |evaluation|
-      render partial: "actions_et_date", locals: { evaluation: evaluation }
+      evaluation.debutee_le.strftime("%d/%m/%Y")
+    end
+
+    column "" do |evaluation|
+      render partial: "admin/evaluations/index_evapro/lien", locals: { evaluation: evaluation }
     end
   end
 end

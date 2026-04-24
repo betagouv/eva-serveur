@@ -1,7 +1,0 @@
-<%= render MenuActionsComponent.new(evaluation,
-  Evaluation::ACTIONS[:LIRE],
-  Evaluation::ACTIONS[:EDITER],
-  Evaluation::ACTIONS[:SUPPRIMER]
-) %>
-<%= render partial: "components/bouton_menu_actions" %>
-<div class="evaluation__created_at"><%= l(evaluation.debutee_le) %></div>

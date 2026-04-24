@@ -231,7 +231,7 @@ GEM
       dsfr-assets (>= 1.13.2, < 1.15)
       html-attributes-utils (~> 1)
       view_component (~> 3)
-    erb (6.0.2)
+    erb (6.0.4)
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo

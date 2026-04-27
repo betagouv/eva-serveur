@@ -1,6 +1,5 @@
 function trouve_le_menu(bouton) {
-  let parent_commun = bouton.closest('tr, .contenu');
-  return parent_commun.querySelector('.table_actions')
+  return bouton.parentElement.querySelector('.table_actions')
 }
 
 function deplace_menu(bouton_menu, menu) {

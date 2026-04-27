@@ -144,6 +144,14 @@ body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
   margin-bottom: 0 !important;
 }
 
+// Ce padding override celui de @tables.scss
+// Une fois qu'on aura passé les tableau en DSFR, on pourra supprimer cette règle.
+body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
+  .index_as_table {
+    padding-right: 0 !important;
+  }
+}
+
 .admin_evaluations.active_admin.logged_in.index table.index_table {
   td .evaluation__cellule {
     display: flex;

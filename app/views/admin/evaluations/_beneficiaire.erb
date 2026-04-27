@@ -8,7 +8,7 @@
     <% end %>
     <%= render(NomAnonymisableComponent.new(evaluation.beneficiaire)) %>
   </div>
-  <div class= "evaluation__code-beneficiaire <%= presence_pastille? ? "" : "ml-0" %>">
+  <div class= "evaluation__code-beneficiaire <%= presence_pastille? ? "" : "fr-ml-0" %>">
     <%= evaluation.beneficiaire.code_beneficiaire %>
   </div>
 </div>

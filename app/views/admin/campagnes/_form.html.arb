@@ -3,7 +3,7 @@ render "form_script"
 mode = resource.new_record? ? "new" : "edit"
 div class: "nouvelle-campagne" do
   div class: "row" do
-    div class: "offset-1 col-4" do
+    div class: "offset-md-1 col-12 col-md-4" do
       h1 t("active_admin.resources.campagne.#{mode}_model")
       div class: "panel" do
         div class: "panel__description" do

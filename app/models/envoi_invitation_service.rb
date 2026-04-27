@@ -7,6 +7,19 @@ class EnvoiInvitationService
     end
   end
 
+  def self.autorise_invitation?(structure:, invitant:)
+    return true if invitant.superadmin?
+    return false if invitant.structure.blank?
+    return false unless invitant.admin? || invitant.conseiller?
+
+    structure_ids_autorises = if invitant.admin?
+      invitant.structure.subtree_ids
+    else
+      [ invitant.structure_id ]
+    end
+    structure_ids_autorises.include?(structure.id)
+  end
+
   def initialize(structure:, invitant:, email:, message: "", role: nil)
     @structure = structure
     @invitant = invitant
@@ -32,12 +45,7 @@ class EnvoiInvitationService
   private
 
   def autorise?
-    return true if @invitant.superadmin?
-    return false if @invitant.structure.blank?
-
-    structure_ids = @invitant.admin? ? @invitant.structure.subtree_ids : [ @invitant.structure_id ]
-    compte_role_autorise = @invitant.admin? || @invitant.conseiller?
-    compte_role_autorise && structure_ids.include?(@structure.id)
+    self.class.autorise_invitation?(structure: @structure, invitant: @invitant)
   end
 
   def email_valide?

@@ -7,6 +7,8 @@ ActiveAdmin.register Actualite do
   filter :contenu, filters: [ :contains_unaccent, :eq ]
   filter :created_at
 
+  includes :illustration_attachment
+
   config.sort_order = "created_at_desc"
 
   form do |f|

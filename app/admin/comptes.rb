@@ -135,6 +135,12 @@ ActiveAdmin.register Compte do
 
   controller do
     before_action :trouve_comptes, only: :index
+    def scoped_collection
+      return super unless action_name == "index"
+
+      comptes_du_perimetre
+    end
+
     helper_method :peut_modifier_mot_de_passe?, :collection_roles, :roles_avec_description,
                   :structure_par_defaut, :champ_structure, :structures_filles,
                   :compte_a_des_campagnes?
@@ -195,8 +201,17 @@ ActiveAdmin.register Compte do
     end
 
     def trouve_comptes
-      comptes = Compte.de_la_structure(current_compte.structure).order(:prenom, :nom)
+      comptes = comptes_du_perimetre.order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente
+    end
+
+    def comptes_du_perimetre
+      return Compte.none if current_compte.structure.blank?
+      if current_compte.vue_opco_active?
+        Compte.where(structure_id: current_compte.structure_id)
+      else
+        Compte.de_la_structure(current_compte.structure)
+      end
     end
 
     def structure_par_defaut

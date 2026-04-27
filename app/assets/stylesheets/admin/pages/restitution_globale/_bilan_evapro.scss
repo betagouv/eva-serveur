@@ -27,6 +27,11 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: $dsfr-spacing-2w;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $dsfr-spacing-3w;
+  }
 }
 
 .evaluation-bilan-evapro__coordonnees {
@@ -35,6 +40,10 @@
   gap: $dsfr-spacing-3w;
   flex: 1 1 0;
   min-width: 0;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 }
 
 .evaluation-bilan-evapro__annuaire {

@@ -4,10 +4,10 @@ module ActiveAdmin
   module Views
     module IndexAsTableOverride
       def build(page_presenter, collection)
-        eva_pro_presenter = page_presenter[:compte_evapro]
-        presenter_compte_evapro = eva_pro_presenter && instance_exec(&eva_pro_presenter)
+        dsfr_table_presenter = page_presenter[:dsfr_table]
+        presenter_dsfr_table = dsfr_table_presenter && instance_exec(&dsfr_table_presenter)
 
-        return super unless presenter_compte_evapro
+        return super unless presenter_dsfr_table
 
         div class: wrapper_classes(page_presenter), data: { fr_js_table: true } do
           nested_div("fr-table__wrapper") do

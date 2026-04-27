@@ -252,6 +252,7 @@ describe 'Dashboard', type: :feature do
     it "n'effectue pas de redirection" do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
     end
   end
 
@@ -267,6 +268,27 @@ describe 'Dashboard', type: :feature do
     it "n'effectue pas de redirection" do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
+    end
+  end
+
+  context "quand le compte a la vue OPCO" do
+    let(:opco) { create(:opco) }
+    let(:structure_opco) do
+      create(:structure_administrative, usage: "EVAPRO", opco: opco)
+    end
+
+    let!(:compte) do
+      create :compte_superadmin,
+             structure: structure_opco,
+             cgu_acceptees: true,
+             mode_tutoriel: false
+    end
+
+    it "affiche l'iframe metabase du tableau de bord opco" do
+      visit admin_path
+
+      expect(page).to have_css("#bloc-statistiques-dashboard-opco")
     end
   end
 
@@ -307,7 +329,7 @@ describe 'Dashboard', type: :feature do
       visit admin_path
       expect(page).to have_current_path(admin_dashboard_path)
       expect(page).to have_content("Réponses collectées")
-
+      expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
       within(".cinq-dernieres-evaluations") do
         expect(page).to have_content("Dupont Complet")
         expect(page).not_to have_content("Martin Incomplet")

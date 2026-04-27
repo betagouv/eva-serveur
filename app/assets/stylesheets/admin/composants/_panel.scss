@@ -80,6 +80,12 @@ body.logged_out #content_wrapper #active_admin_content {
   }
 }
 
+@media (max-width: 768px) {
+  .introduction-image {
+    display: none;
+  }
+}
+
 .panel-component {
   display: flex;
   flex-direction: column;

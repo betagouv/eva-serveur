@@ -117,7 +117,13 @@ form {
       }
 
       label {
-        @include label
+        @include label;
+
+        padding-bottom: .5rem;
+      }
+
+      &.radio fieldset ol {
+        padding-left: 0;
       }
 
       &.boolean label {

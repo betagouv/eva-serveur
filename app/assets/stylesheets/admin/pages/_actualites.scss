@@ -72,3 +72,15 @@
     object-fit: cover;
   }
 }
+
+@media (max-width: 854px) {
+  .admin_actualites {
+    &.index {
+      .actualites {
+        padding: 1rem;
+        columns: 1 auto;
+        column-gap: 1.25rem;
+      }
+    }
+  }
+}

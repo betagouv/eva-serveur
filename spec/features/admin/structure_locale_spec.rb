@@ -61,6 +61,50 @@ visible: :all
           expect(invitation.role).to eq("admin")
         end
       end
+
+      describe "blocs statistiques" do
+        context "quand la structure locale n'est pas EVAPRO" do
+          let!(:structure) do
+            create(
+              :structure_locale,
+              :avec_admin,
+              :beneficiaire
+            )
+          end
+
+          it "affiche le bloc statistiques standard et pas le bloc opco" do
+            visit admin_structure_locale_path(structure)
+
+            expect(page).to have_css("#bloc-statistiques")
+            expect(page).not_to have_css("#bloc-statistiques-opco")
+          end
+        end
+
+        context "quand la structure locale est EVAPRO" do
+          let!(:structure) do
+            create(
+              :structure_locale,
+              :avec_admin,
+              :eva_pro
+            )
+          end
+
+          it "n'affiche aucun des deux blocs statistiques" do
+            visit admin_structure_locale_path(structure)
+
+            expect(page).not_to have_css("#bloc-statistiques")
+            expect(page).not_to have_css("#bloc-statistiques-opco")
+          end
+        end
+      end
+
+      describe "bloc membres - invitation" do
+        it "affiche le bouton envoyer une invitation" do
+          visit admin_structure_locale_path(structure)
+
+          expect(page).to have_content("Envoyer une invitation")
+        end
+      end
     end
 
     describe 'create' do

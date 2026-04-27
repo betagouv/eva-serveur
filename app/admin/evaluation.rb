@@ -70,7 +70,7 @@ ActiveAdmin.register Evaluation do
 
   index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
         row_class: ->(elem) { "anonyme" if elem.anonyme? },
-        compte_evapro: proc { current_compte.utilisateur_entreprise? } do
+        dsfr_table: proc { true } do
       render "index", context: self
   end
 

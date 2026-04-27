@@ -616,6 +616,50 @@ describe Structure, type: :model do
     end
   end
 
+  describe '#est_une_structure_ocpo?' do
+    let(:opco) { build_stubbed(:opco) }
+
+    context 'quand la structure est administrative, a un opco et est evapro' do
+      let(:structure) { build_stubbed(:structure_administrative, opco: opco) }
+
+      before { allow(structure).to receive(:evapro?).and_return(true) }
+
+      it 'retourne true' do
+        expect(structure.est_une_structure_ocpo?).to be true
+      end
+    end
+
+    context "quand la structure est administrative mais n'a pas d'opco" do
+      let(:structure) { build_stubbed(:structure_administrative, opco: nil) }
+
+      before { allow(structure).to receive(:evapro?).and_return(true) }
+
+      it 'retourne false' do
+        expect(structure.est_une_structure_ocpo?).to be false
+      end
+    end
+
+    context "quand la structure est administrative avec opco mais n'est pas evapro" do
+      let(:structure) { build_stubbed(:structure_administrative, opco: opco) }
+
+      before { allow(structure).to receive(:evapro?).and_return(false) }
+
+      it 'retourne false' do
+        expect(structure.est_une_structure_ocpo?).to be false
+      end
+    end
+
+    context "quand la structure n'est pas administrative meme avec un opco" do
+      let(:structure) { build_stubbed(:structure_locale, opco: opco) }
+
+      before { allow(structure).to receive(:evapro?).and_return(true) }
+
+      it 'retourne false' do
+        expect(structure.est_une_structure_ocpo?).to be false
+      end
+    end
+  end
+
   describe "relation OPCO" do
     let(:structure) { create(:structure_locale) }
     let(:opco1) { create(:opco, nom: "OPCO 1") }
@@ -718,6 +762,18 @@ describe Structure, type: :model do
         structure = build(:structure, email_contact: "pas-un-email")
         expect(structure).not_to be_valid
         expect(structure.errors[:email_contact]).to be_present
+      end
+
+      it "n'ajoute qu'une erreur invalid pour un format invalide et ne vérifie pas le DNS" do
+        structure = build(:structure, email_contact: "pas-un-email")
+        allow(structure).to receive(:email_contact_changed?).and_return(true)
+
+        structure.valid?
+
+        invalid_errors = structure.errors.details[:email_contact].count { |error|
+ error[:error] == :invalid }
+        expect(invalid_errors).to eq(1)
+        expect(Truemail).not_to have_received(:valid?).with("pas-un-email")
       end
 
       context "validation Truemail (vérification DNS / boîte mail)" do

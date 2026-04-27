@@ -30,4 +30,39 @@ opco: create(:opco))
       expect(structure).to be_valid
     end
   end
+
+  describe "nettoyage des champs selon l'usage" do
+    it "supprime la structure référente quand l'usage passe en EVAPRO" do
+      structure_referente = create(:structure_administrative)
+      opco = create(:opco)
+      structure = create(
+        :structure_administrative,
+        usage: AvecUsage::USAGE_BENEFICIAIRES,
+        parent: structure_referente
+      )
+
+      structure.update!(usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+
+      expect(structure.reload.parent_id).to be_nil
+      expect(structure.opco).to eq(opco)
+    end
+
+    it "supprime l'opco quand l'usage passe en Eva: bénéficiaires" do
+      opco = create(:opco)
+      structure_referente = create(:structure_administrative)
+      structure = create(
+        :structure_administrative,
+        usage: AvecUsage::USAGE_EVAPRO,
+        opco: opco
+      )
+
+      structure.update!(
+        usage: AvecUsage::USAGE_BENEFICIAIRES,
+        parent: structure_referente
+      )
+
+      expect(structure.reload.opco_id).to be_nil
+      expect(structure.parent).to eq(structure_referente)
+    end
+  end
 end

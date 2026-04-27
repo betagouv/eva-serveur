@@ -13,9 +13,11 @@ body.logged_in {
   }
 }
 
-body.logged_in.evapro_admin {
-  #active_admin_content {
-    padding-left: 1rem;
+@media (max-width: 854px) {
+  body.logged_in {
+    #active_admin_content {
+      max-width: $container;
+    }
   }
 }
 

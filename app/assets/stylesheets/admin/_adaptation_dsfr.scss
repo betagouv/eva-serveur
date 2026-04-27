@@ -173,7 +173,7 @@ body.logged_in.evapro_admin {
   .fr-modal>.fr-container {
     pointer-events: none;
     position: fixed;
-    top: 8rem;
+    top: 2rem;
   }
 
   .fr-header__menu.fr-modal>.fr-container {
@@ -517,7 +517,7 @@ body.logged_in h2.fr-footer__partners-title {
   .evapro_admin__content__inner,
   #active_admin_content,
   #title_bar {
-    max-width: 100% !important;
+    max-width: 100vw !important;
     width: 100%;
     box-sizing: border-box;
   }

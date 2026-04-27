@@ -111,6 +111,8 @@ fr:
         inviter_collegues_bouton: "Inviter mes collègues à répondre"
         premier_questionnaire_titre: "Passez votre premier questionnaire !"
         premier_questionnaire: Vous n’avez rempli aucun questionnaire pour le moment. Passez un premier questionnaire, puis accéder à vos résultats personnalisés.
+      metabase_opco:
+        titre: Bienvenue dans votre espace
       derniere_reponse_complete:
         titre: Résultats de votre entreprise
         texte: Basés sur votre dernière réponse.

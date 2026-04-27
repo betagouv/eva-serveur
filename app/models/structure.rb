@@ -111,6 +111,10 @@ allow_blank: true
   end
   alias_method :eva_entreprises?, :evapro?
 
+  def est_une_structure_ocpo?
+    is_a?(StructureAdministrative) && opco.present? && evapro?
+  end
+
   def self.ransack_unaccent_attributes
     %w[nom]
   end
@@ -195,6 +199,7 @@ allow_blank: true
   def verifie_dns_email_contact
     return if email_contact.blank?
     return unless email_contact_changed?
+    return unless email_contact.match?(URI::MailTo::EMAIL_REGEXP)
     return if Truemail.valid?(email_contact)
 
     errors.add(:email_contact, :invalid)

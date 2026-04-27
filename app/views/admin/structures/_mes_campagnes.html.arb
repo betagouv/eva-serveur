@@ -1,7 +1,7 @@
 div class: "bloc-mes-campagnes fr-mt-8v" do
   h3 "Campagnes", class: "fr-mb-0"
   if campagnes.present?
-    table_for campagnes, class: "index_table p-0" do
+    table_for campagnes, class: "bloc-mes-campagnes__table index_table p-0" do
       column :libelle do |campagne|
         link_to campagne.libelle, admin_campagne_path(campagne)
       end

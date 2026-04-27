@@ -2,6 +2,10 @@
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);
+
+    @media (max-width: 768px) {
+      margin: 0;
+    }
   }
 
   .nouvelle_structure {
@@ -107,5 +111,24 @@
         }
       }
     }
+  }
+}
+
+.page-structure {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+}
+
+.bloc-mes-campagnes__table {
+  @media (max-width: 768px) {
+    display: block;
+    overflow-x: auto;
   }
 }

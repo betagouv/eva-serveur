@@ -27,6 +27,7 @@ require 'view_component/test_helpers'
 #
 Rails.root.glob('spec/support/shared_contexts/*.rb').sort.each { |f| require f }
 Rails.root.glob('spec/support/static_record/*.rb').each { |f| require f }
+require 'support/capybara'
 
 Sidekiq::Testing.fake!
 ActiveJob::Base.queue_adapter = :test

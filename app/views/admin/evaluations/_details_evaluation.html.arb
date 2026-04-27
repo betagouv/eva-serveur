@@ -1,5 +1,5 @@
 div id: "evaluation__details", class: "row" do
-  div class: "col col-6 mx-auto evaluation__details--panel" do
+  div class: "col col-6 fr-mx-auto evaluation__details--panel" do
     h1 render NomAnonymisableComponent.new(resource.beneficiaire)
     h2 t(".titre"), class: "titre"
     div class: "card carte__conteneur", id: resource.id.to_s do

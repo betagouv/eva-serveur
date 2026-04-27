@@ -14,7 +14,7 @@
 
   <ul class="fr-m-0 fr-p-0">
   <% evaluations.each do |evaluation| %>
-    <li class="row w-100 no-gutters d-flex align-items-center position-relative pb-0">
+    <li class="row w-100 no-gutters d-flex align-items-center position-relative fr-pb-0">
       <div class='col'>
         <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
           <div class='col d-flex'>

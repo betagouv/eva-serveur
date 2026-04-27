@@ -1,5 +1,3 @@
-require "zip"
-
 ActiveAdmin.register Questionnaire do
   menu parent: "Parcours", if: proc { can? :manage, Compte }
 
@@ -7,7 +5,15 @@ ActiveAdmin.register Questionnaire do
                 questionnaires_questions_attributes: %i[id question_id _destroy]
 
   filter :libelle, filters: [ :contains_unaccent, :eq ]
-  filter :questions
+  filter :questions_id,
+         as: :search_select_filter,
+         label: "Question",
+         url: proc { admin_questions_path },
+         fields: %i[libelle nom_technique],
+         display_name: "display_name",
+         method_model: Question,
+         minimum_input_length: 2,
+         order_by: "libelle_asc"
 
   member_action :export_questions, method: :get
 

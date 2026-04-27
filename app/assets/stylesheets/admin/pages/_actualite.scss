@@ -30,7 +30,7 @@
         margin-bottom: 2rem;
       }
 
-      .actualite__illustration {
+      .actualite-complete__illustration {
         img {
           width: 100%;
 
@@ -88,7 +88,7 @@
   }
 }
 
-.actualite__contenu {
+.actualite-complete__contenu {
   @include make-col(3, 5);
   @include make-col-offset(1, 5);
 
@@ -103,10 +103,8 @@
   a {
     color: $eva_main_blue;
   }
-}
 
-@media (max-width: 768px) {
-  .actualite__contenu {
+  @media (max-width: 768px) {
     flex: 1;
     max-width: 100%;
     margin: 0;

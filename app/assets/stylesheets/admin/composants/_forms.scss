@@ -117,7 +117,9 @@ form {
       }
 
       label {
-        @include label
+        @include label;
+
+        padding-bottom: .5rem;
       }
 
       &.boolean label {

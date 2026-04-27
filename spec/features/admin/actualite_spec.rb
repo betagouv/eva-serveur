@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin - Actualités', type: :feature, js: true do
+describe 'Admin - Actualités', :js, type: :feature do
   let(:compte) { create :compte_superadmin }
 
   before do
@@ -8,7 +8,7 @@ describe 'Admin - Actualités', type: :feature, js: true do
     connecte(compte)
   end
 
-  fit "ouvre le menu d'actions au clic sur le bouton menu" do
+  it "ouvre le menu d'actions au clic sur le bouton menu" do
     visit admin_actualites_path
 
     expect(page).to have_css('.actualite .bouton-menu')

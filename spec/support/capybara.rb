@@ -16,12 +16,12 @@ Capybara.default_max_wait_time = 5
 WebMock.disable_net_connect!(allow_localhost: true)
 
 RSpec.configure do |config|
-  config.before(:each, type: :feature, js: true) do
+  config.before(:each, :js, type: :feature) do
     @original_asset_host = ActionController::Base.asset_host
     ActionController::Base.asset_host = nil
   end
 
-  config.after(:each, type: :feature, js: true) do
+  config.after(:each, :js, type: :feature) do
     ActionController::Base.asset_host = @original_asset_host
   end
 end

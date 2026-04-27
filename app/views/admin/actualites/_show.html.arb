@@ -1,11 +1,11 @@
 div class: "actualite-complete" do
   h1 actualite.titre
 
-  div class: "actualite__illustration" do
+  div class: "actualite-complete__illustration" do
     image_tag cdn_for(actualite.illustration), alt: "" if actualite.illustration.attached?
   end
 
-  div class: "actualite__contenu" do
+  div class: "actualite-complete__contenu" do
     md actualite.contenu
   end
 end

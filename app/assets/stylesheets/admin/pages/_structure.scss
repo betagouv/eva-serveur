@@ -110,14 +110,21 @@
   }
 }
 
-@media (max-width: 768px) {
-  .admin_structures, .admin_structures_locales, .admin_structures_administratives {
-    &.show {
-      .bloc-structure-infos {
-        .titre-entete-page {
-          max-width: 100%;
-        }
-      }
-    }
+.page-structure {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+}
+
+.bloc-mes-campagnes__table {
+  @media (max-width: 768px) {
+    display: block;
+    overflow-x: auto;
   }
 }

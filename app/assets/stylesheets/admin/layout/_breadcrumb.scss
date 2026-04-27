@@ -45,6 +45,10 @@
   }
 }
 
+.breadcrumb a:hover {
+  text-decoration: none; // désactive le style d'activeadmin
+}
+
 @media (max-width: 768px) {
   #title_bar #titlebar_left #page_title {
     max-width: 100%;

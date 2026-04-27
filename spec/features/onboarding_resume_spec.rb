@@ -20,4 +20,12 @@ describe "Reprise d'onboarding après reconnexion", type: :feature do
 
     expect(page).to have_current_path(inscription_recherche_structure_path)
   end
+
+  it "redirige aussi un compte ProConnect sans structure vers l'étape en cours" do
+    compte.update!(id_pro_connect: "pro-connect-123")
+
+    connecte_email email: compte.email, password: "Password78901$"
+
+    expect(page).to have_current_path(inscription_recherche_structure_path)
+  end
 end

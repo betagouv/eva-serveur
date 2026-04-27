@@ -240,18 +240,19 @@ describe 'Dashboard', type: :feature do
     end
   end
 
-  context "quand le compte a un id_pro_connect" do
+  context "quand le compte a un id_pro_connect et une inscription incomplète sans structure" do
     let!(:compte) do
       create :compte_conseiller,
-             structure: ma_structure,
+             structure: nil,
+             statut_validation: :en_attente,
              etape_inscription: 'preinscription',
              id_pro_connect: 'id_pro_connect_123',
              cgu_acceptees: true
     end
 
-    it "n'effectue pas de redirection" do
+    it "redirige vers la reprise d'inscription" do
       visit admin_path
-      expect(page).to have_current_path(admin_dashboard_path)
+      expect(page).to have_current_path(inscription_informations_compte_path)
       expect(page).not_to have_css("#bloc-statistiques-dashboard-opco")
     end
   end

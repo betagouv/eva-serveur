@@ -233,3 +233,7 @@ a.button:not(.disabled):active, a.button:link:not(.disabled):active, a.button:vi
   background-image: none !important;
   box-shadow: none !important;
 }
+
+.comments form.active_admin_comment {
+  margin-left: 0; // désactive la marge à gauche d'activeadmin
+}

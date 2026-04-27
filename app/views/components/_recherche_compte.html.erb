@@ -3,7 +3,7 @@
 <% end %>
 
 <%= form_with id: locals[:form_id], url: locals[:form_url], class: "hidden" do |f| %>
-    <label class="sr-only" for="<%= locals[:autocomplete_id] %>"><%= t(".#{locals[:translation_scope]}.libelle_champ_recherche") %></label>
+    <label class="fr-sr-only" for="<%= locals[:autocomplete_id] %>"><%= t(".#{locals[:translation_scope]}.libelle_champ_recherche") %></label>
   <div id="<%= locals[:container_id] %>" class="champ-recherche" ></div>
   <%= f.hidden_field locals[:hidden_field_name] %>
 <% end %>

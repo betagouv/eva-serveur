@@ -55,7 +55,7 @@ div class: "carte-prise-en-main" do
           render(EllipseComponent.new(statut))
           para class: "m-0 progression__etape text-#{statut}" do
             text_node t("etapes.progression.#{etape}", scope: scope)
-            span t(statut, scope: scope), class: "sr-only"
+            span t(statut, scope: scope), class: "fr-sr-only"
           end
         end
       end

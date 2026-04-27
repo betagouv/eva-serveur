@@ -66,6 +66,14 @@
   gap: $dsfr-spacing-1w;
   flex: 1 0 0;
   align-self: stretch;
+
+  @media print {
+    font-size: 0.875rem;
+
+    p {
+      font-size: 0.875rem;
+    }
+  }
 }
 
 // Callouts d'impact

@@ -106,6 +106,7 @@ group :test do
   gem "launchy"
   gem "mutex_m"
   gem "pdf-reader"
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "timecop"
   gem "webmock"

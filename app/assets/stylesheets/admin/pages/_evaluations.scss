@@ -220,3 +220,28 @@ body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
     @include tronque;
   }
 }
+
+@media (max-width: 854px) {
+  body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
+    #title_bar #titlebar_left {
+      padding: 1rem 1.5rem;
+    }
+    #active_admin_content.with_sidebar #main_content_wrapper #main_content {
+      padding: 1rem 1.5rem;
+    }
+
+    .fr-table__container {
+      border: 1px solid $grey-625;
+    }
+    .fr-table.dsfr-table-active-admin table {
+      border: 0; // évite une 2e bordure qui casse visuellement
+    }
+    
+    .dsfr-table-active-admin table.index_table tbody tr td:first-child {
+      border-left: none !important;
+    }
+    .dsfr-table-active-admin table.index_table tbody tr td:last-child {
+      border-right: none !important;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+fr:
+  activerecord:
+    errors:
+      models:
+        transcription:
+          attributes:
+            audio:
+              content_type: "doit être un fichier MP3 ou MP4"

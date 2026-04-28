@@ -1,18 +1,10 @@
 class Transcription < ApplicationRecord
   has_one_attached :audio
 
-  validate :audio_type
-
   AUDIOS_CONTENT_TYPES = [ "audio/mpeg", "audio/mp4" ].freeze
 
   enum :categorie, { intitule: 0, modalite_reponse: 1, consigne: 2 }
-
-  def audio_type
-    return unless audio.attached? && !audio.content_type.in?(AUDIOS_CONTENT_TYPES)
-
-    errors.add(:audio, "doit être un fichier MP3 ou MP4")
-    audio.purge
-  end
+  validates :audio, blob: { content_type: AUDIOS_CONTENT_TYPES }
 
   def audio_url
     cdn_for(audio)

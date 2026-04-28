@@ -6,3 +6,4 @@ fr:
           attributes:
             audio:
               content_type: "doit être un fichier MP3 ou MP4"
+              invalid_extension: "doit avoir une extension valide (.mp3, .mp4)"

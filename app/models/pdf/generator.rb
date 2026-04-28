@@ -23,6 +23,12 @@ module Pdf
       page = browser.new_page
       page.viewport = Pdf::Browser::A4_VIEWPORT
       page.set_content(html_content, wait_until: "networkidle2")
+      # décommenter pour voir le contenu de la page en local
+      # page.set_content(
+      #   html_content,
+      #   wait_until: "load",
+      #   timeout: 60_000
+      # )
       pause_pdf if Pdf::Browser.debug_mode?
       page
     end

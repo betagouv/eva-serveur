@@ -10,6 +10,10 @@
   min-width: 0;
   background: var(--background-alt-blue-france);
   padding-bottom: $dsfr-spacing-3w;
+
+  @media print {
+    padding-bottom: 0;
+  }
 }
 
 .definitions-impacts__groupe-termes-definis {
@@ -106,6 +110,10 @@
   gap: $dsfr-spacing-1w;
   border-radius: $dsfr-radius-lg;
   background: #DCE2E7;
+
+  @media print {
+    height: 6rem !important;
+  }
 }
 
 .illustrinfo-body {
@@ -205,7 +213,7 @@
   color: var(--text-default-grey);
 
   @media print {
-    @include corps-de-texte-md-regular;
+    font-size: 0.875rem;
   }
 }
 
@@ -236,8 +244,8 @@
     width: auto;
     min-width: 0;
     max-width: none;
-    height: auto;
-    min-height: 7.875rem;
+    height: 6rem !important;
+    min-height: 6rem;
   }
 
   .illustrinfo-body {

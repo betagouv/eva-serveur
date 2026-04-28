@@ -18,7 +18,7 @@ ActiveAdmin.register QuestionClicDansImage do
 
   form partial: "form"
 
-  index do
+  index dsfr_table: proc { true } do
     column :libelle do |q|
       link_to q.libelle, admin_question_clic_dans_image_path(q)
     end

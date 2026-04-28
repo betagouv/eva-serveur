@@ -11,7 +11,7 @@ ActiveAdmin.register Opco do
   filter :nom
   filter :financeur
 
-  index do
+  index dsfr_table: proc { true } do
     column :nom do |opco|
       libelle = opco.nom
       if opco.logo.attached?

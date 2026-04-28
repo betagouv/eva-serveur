@@ -101,7 +101,7 @@ ActiveAdmin.register Campagne do
 
   index blank_slate_link: proc {
     link_to(I18n.t("active_admin.campagnes.blank_slate_link"), new_resource_path)
-  } do
+  }, dsfr_table: proc { true } do
       column :libelle do |campagne|
         div class: "contenu-libelle" do
           div do

@@ -13,7 +13,7 @@ ActiveAdmin.register ParcoursType do
 
   form partial: "form"
 
-  index do
+  index dsfr_table: proc { true } do
     column :libelle do |pt|
       link_to pt.libelle, admin_parcours_type_path(pt)
     end

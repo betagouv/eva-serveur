@@ -20,7 +20,7 @@ ActiveAdmin.register Evenement do
     column(:created_at)
   end
 
-  index do
+  index dsfr_table: proc { true } do
     instance_eval(&colonnes_evenement)
     actions
   end

@@ -57,7 +57,7 @@ ActiveAdmin.register Compte do
   filtrer_par_activation_structure(:inactives)
   filtrer_par_activation_structure(:abandonnistes)
 
-  index download_links: -> { %i[json xls] } do
+  index download_links: -> { %i[json xls] }, dsfr_table: proc { true } do
     render "mise_en_avant_comptes_en_attente"
     render "index", context: self
   end

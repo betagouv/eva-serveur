@@ -58,7 +58,7 @@ ActiveAdmin.register Questionnaire do
     end
   end
 
-  index do
+  index dsfr_table: proc { true } do
     column :libelle do |q|
       link_to q.libelle, admin_questionnaire_path(q)
     end

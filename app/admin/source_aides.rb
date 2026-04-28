@@ -7,7 +7,7 @@ ActiveAdmin.register SourceAide do
   filter :categorie, as: :select
   filter :description
 
-  index do
+  index dsfr_table: proc { true } do
     column :titre do |sa|
       link_to sa.titre, admin_source_aide_path(sa)
     end

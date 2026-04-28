@@ -8,7 +8,7 @@ ActiveAdmin.register StructureAdministrative do
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :created_at
 
-  index do
+  index dsfr_table: proc { true } do
     column :nom do |sa|
       link_to sa.nom, admin_structure_administrative_path(sa)
     end

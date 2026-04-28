@@ -26,7 +26,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
     link_to "Exporter la question en XLS", admin_question_export_xls_path(question_id: params[:id])
   end
 
-  index do
+  index dsfr_table: proc { true } do
     column :libelle do |q|
       link_to q.libelle, admin_question_glisser_deposer_path(q)
     end

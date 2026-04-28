@@ -24,7 +24,7 @@ ActiveAdmin.register Partie do
   filter :session_id
   filter :created_at
 
-  index pagination_total: false do
+  index pagination_total: false, dsfr_table: proc { true } do
     column :evaluation
     column :metriques
     column :created_at

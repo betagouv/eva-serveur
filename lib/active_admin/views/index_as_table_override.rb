@@ -44,10 +44,15 @@ module ActiveAdmin
       end
 
       def build_table(collection, page_presenter)
-        table_for collection, table_options(page_presenter, "table-0") do |t|
+        table_for collection, table_options(page_presenter, table_dom_id) do |t|
           table_config_block = page_presenter.block || default_table
           instance_exec(t, &table_config_block)
         end
+      end
+
+      def table_dom_id
+        route_key = active_admin_config.resource_name.route_key
+        "index_table_#{route_key}"
       end
 
       def nested_div(classes, &block)

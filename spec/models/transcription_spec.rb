@@ -31,6 +31,73 @@ RSpec.describe Transcription, type: :model do
     end
   end
 
+  describe "#audio_extension" do
+    let(:transcription) { described_class.new }
+
+    context "quand aucun audio n'est attaché" do
+      it "n'ajoute pas d'erreur" do
+        transcription.valid?
+
+        expect(transcription.errors[:audio]).to be_empty
+      end
+    end
+
+    context "quand l'extension est .mp3" do
+      it "est valide" do
+        transcription.audio.attach(
+          io: Rails.root.join("spec/support/alcoolique.mp3").open,
+          filename: "audio.mp3",
+          content_type: "audio/mpeg"
+        )
+
+        expect(transcription).to be_valid
+        expect(transcription.errors[:audio]).to be_empty
+      end
+    end
+
+    context "quand l'extension est en majuscule (.MP3)" do
+      it "est valide (downcase appliqué)" do
+        transcription.audio.attach(
+          io: Rails.root.join("spec/support/alcoolique.mp3").open,
+          filename: "audio.MP3",
+          content_type: "audio/mpeg"
+        )
+
+        expect(transcription).to be_valid
+        expect(transcription.errors[:audio]).to be_empty
+      end
+    end
+
+    context "quand le fichier n'a pas d'extension" do
+      it "est invalide sur invalid_extension" do
+        transcription.audio.attach(
+          io: Rails.root.join("spec/support/alcoolique.mp3").open,
+          filename: "audio_sans_extension",
+          content_type: "audio/mpeg"
+        )
+
+        expect(transcription).not_to be_valid
+        expect(transcription.errors.details[:audio]).to include(error: :invalid_extension)
+        expect(transcription.errors[:audio]).to include(
+              "doit avoir une extension valide (.mp3, .mp4)"
+              )
+      end
+    end
+
+    context "quand l'extension n'est pas autorisée (.wav)" do
+      it "est invalide sur invalid_extension" do
+        transcription.audio.attach(
+          io: Rails.root.join("spec/support/alcoolique.mp3").open,
+          filename: "audio.wav",
+          content_type: "audio/mpeg"
+        )
+
+        expect(transcription).not_to be_valid
+        expect(transcription.errors.details[:audio]).to include(error: :invalid_extension)
+      end
+    end
+  end
+
   describe '.complete?' do
     let(:transcription) { described_class.new }
 

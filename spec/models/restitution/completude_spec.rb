@@ -6,7 +6,7 @@ describe Restitution::Completude do
   end
 
   describe '#calcule' do
-    let(:evaluation) { double(campagne_id: SecureRandom.uuid) }
+    let(:evaluation) { double(campagne_id: SecureRandom.uuid, evapro?: false) }
     let(:bienvenue) { Situation.new id: SecureRandom.uuid }
     let(:plan_de_la_ville) { Situation.new id: SecureRandom.uuid }
     let(:controle) { Situation.new id: SecureRandom.uuid }
@@ -186,6 +186,129 @@ describe Restitution::Completude do
         end
 
         it { expect(completude.calcule).to eq :incomplete }
+      end
+    end
+
+    describe "quand l'evaluation est Evapro" do
+      let(:restitutions) { [] }
+      let(:evaluation) { double(campagne_id: SecureRandom.uuid, evapro?: true) }
+
+      let(:situation_diag) do
+        instance_double(Situation).tap do |s|
+          allow(s).to receive(:a_pour_nom_technique?)
+            .with(Situation::DIAG_RISQUES_ENTREPRISE)
+            .and_return(true)
+          allow(s).to receive(:a_pour_nom_technique?)
+            .with(Situation::EVALUATION_IMPACT_GENERAL)
+            .and_return(false)
+        end
+      end
+
+      let(:situation_impact) do
+        instance_double(Situation).tap do |s|
+          allow(s).to receive(:a_pour_nom_technique?)
+            .with(Situation::DIAG_RISQUES_ENTREPRISE)
+            .and_return(false)
+          allow(s).to receive(:a_pour_nom_technique?)
+            .with(Situation::EVALUATION_IMPACT_GENERAL)
+            .and_return(true)
+        end
+      end
+
+      let(:diag_restitution) do
+        double(situation: situation_diag, synthese: diag_synthese)
+      end
+
+      let(:impact_restitution) do
+        double(situation: situation_impact, synthese: impact_synthese)
+      end
+
+      let(:restitutions) { [ diag_restitution, impact_restitution ] }
+
+      context 'si pourcentage_risque, score_cout et toutes les metriques impact sont presents' do
+        let(:diag_synthese) { { pourcentage_risque: 25 } }
+        let(:impact_synthese) do
+          {
+            score_cout: 'moyen',
+            performance_collective: :faible,
+            agilite_organisationnelle: :moyen,
+            securite_qualite: :fort,
+            mobilite_professionnelle: :tres_fort
+          }
+        end
+
+        it 'retourne complete' do
+          expect(described_class.new(evaluation, restitutions).calcule).to eq(:complete)
+        end
+      end
+
+      context 'si pourcentage_risque manque' do
+        let(:diag_synthese) { { pourcentage_risque: nil } }
+        let(:impact_synthese) do
+          {
+            score_cout: 'moyen',
+            performance_collective: :faible,
+            agilite_organisationnelle: :moyen,
+            securite_qualite: :fort,
+            mobilite_professionnelle: :tres_fort
+          }
+        end
+
+        it 'retourne incomplete' do
+          expect(described_class.new(evaluation, restitutions).calcule).to eq(:incomplete)
+        end
+      end
+
+      context 'si score_cout manque' do
+        let(:diag_synthese) { { pourcentage_risque: 25 } }
+        let(:impact_synthese) do
+          {
+            score_cout: nil,
+            performance_collective: :faible,
+            agilite_organisationnelle: :moyen,
+            securite_qualite: :fort,
+            mobilite_professionnelle: :tres_fort
+          }
+        end
+
+        it 'retourne incomplete' do
+          expect(described_class.new(evaluation, restitutions).calcule).to eq(:incomplete)
+        end
+      end
+
+      context 'si une metrique impact manque' do
+        let(:diag_synthese) { { pourcentage_risque: 25 } }
+        let(:impact_synthese) do
+          {
+            score_cout: 'moyen',
+            performance_collective: :faible,
+            agilite_organisationnelle: nil,
+            securite_qualite: :fort,
+            mobilite_professionnelle: :tres_fort
+          }
+        end
+
+        it 'retourne incomplete' do
+          expect(described_class.new(evaluation, restitutions).calcule).to eq(:incomplete)
+        end
+      end
+
+      context 'si diag ou impact restitution manque' do
+        let(:diag_synthese) { nil }
+        let(:impact_synthese) do
+          {
+            score_cout: 'moyen',
+            performance_collective: :faible,
+            agilite_organisationnelle: :moyen,
+            securite_qualite: :fort,
+            mobilite_professionnelle: :tres_fort
+          }
+        end
+
+        it 'retourne incomplete' do
+          restitutions = [ diag_restitution ].compact
+          expect(described_class.new(evaluation, restitutions).calcule).to eq(:incomplete)
+        end
       end
     end
   end

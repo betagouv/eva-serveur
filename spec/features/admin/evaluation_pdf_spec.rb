@@ -90,15 +90,37 @@ describe 'Admin - Evaluation PDF', type: :feature do
       let(:campagne_evapro) { create(:campagne, :avec_parcours_evapro, compte: mon_compte) }
       let(:evaluation_evapro) { create(:evaluation, campagne: campagne_evapro) }
       let(:pdf_fixture_path) { Rails.root.join('spec/fixtures/files/test_evaluation.pdf').to_s }
-
-      it 'génère une restitution Evapro en pdf' do
-        diag_risques_entreprise = instance_double(
+      let(:evenements_risque) do
+        [ instance_double(Evenement, nom: "reponse", donnees: { "score" => 10 }) ]
+      end
+      let(:evenements_impact) do
+        [
+          instance_double(
+            Evenement,
+            nom: "reponse",
+            donnees: {
+              "score_cout" => 12,
+              "score_strategies" => 9,
+              "score_numerique" => 10
+            }
+          )
+        ]
+      end
+      let(:diag_risques_entreprise) do
+        instance_double(
           Restitution::DiagRisquesEntreprise,
-          partie: instance_double(Partie, synthese: { 'pourcentage_risque' => 20 }),
+          partie: instance_double(
+            Partie,
+            synthese: { 'pourcentage_risque' => 20 },
+            evenements: evenements_risque
+          ),
           palier: 'B - Bon'
         )
-        evaluation_impact_general = instance_double(
+      end
+      let(:evaluation_impact_general) do
+        instance_double(
           Restitution::EvaluationImpactGeneral,
+          partie: instance_double(Partie, evenements: evenements_impact),
           synthese: {
             performance_collective: :moyen,
             agilite_organisationnelle: :moyen,
@@ -109,17 +131,22 @@ describe 'Admin - Evaluation PDF', type: :feature do
             score_numerique: :moyen
           }
         )
-        restitution_globale = instance_double(
+      end
+      let(:restitution_globale) do
+        instance_double(
           Restitution::Globale,
           evaluation: evaluation_evapro,
           diag_risques_entreprise: diag_risques_entreprise,
           evaluation_impact_general: evaluation_impact_general
         )
+      end
 
+      before do
         allow(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
-
         allow(Pdf::Generator).to receive(:generate).and_return(pdf_fixture_path)
+      end
 
+      it 'génère une restitution Evapro en pdf' do
         visit admin_evaluation_path(evaluation_evapro, format: :pdf)
 
         expect(page.response_headers['Content-Type']).to include('application/pdf')

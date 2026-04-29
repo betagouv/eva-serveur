@@ -7,6 +7,18 @@ class StructurePreview < ActionMailer::Preview
     StructureMailer.with(structure: structure, compte: compte).nouvelle_structure
   end
 
+  def invitation_structure
+    structure = Structure.first
+    invitant = Compte.where(structure: structure).first
+    invitation = Invitation.new(
+      structure: structure,
+      invitant: invitant,
+      email_destinataire: "invite@example.com",
+      token: "preview-token"
+    )
+    StructureMailer.with(invitation: invitation).invitation_structure
+  end
+
   def relance_creation_campagne
     structure = StructureLocale.new id: SecureRandom.uuid, nom: 'Ma structure',
                                     code_postal: '92100', type_structure: 'mission_locale'

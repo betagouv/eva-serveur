@@ -15,6 +15,15 @@ module Evaluations
         diag_risques_entreprise&.palier
       end
 
+      def palier_bilan
+        return unless affiche_bilan?
+
+        BilanConsolideCalculator.new(
+          diag_risques_entreprise: diag_risques_entreprise,
+          evaluation_impact_general: evaluation_impact_general
+        ).palier
+      end
+
       def affiche_bilan_risque?
         palier_risque.present?
       end

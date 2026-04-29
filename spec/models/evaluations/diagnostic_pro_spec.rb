@@ -25,8 +25,18 @@ RSpec.describe Evaluations::DiagnosticPro do
 
   describe "#avec_restitution_globale" do
     it "expose les données dérivées du diagnostic entreprise via un objet testable" do
-      diag = double(partie: double(synthese: { "pourcentage_risque" => 25 }), palier: "B - Bon")
-      impact = double(synthese: { score_cout: "moyen" })
+      diag = double(
+        partie: double(synthese: { "pourcentage_risque" => 25 }, evenements: []),
+        palier: "B - Bon"
+      )
+      impact = double(
+        synthese: {
+          score_cout: "moyen",
+          score_strategie: "fort",
+          score_numerique: "faible"
+        },
+        partie: double(evenements: [])
+      )
 
       restitution_globale = double(
         diag_risques_entreprise: diag,
@@ -37,9 +47,14 @@ RSpec.describe Evaluations::DiagnosticPro do
 
       expect(presenter.pourcentage_risque).to eq(25)
       expect(presenter.palier_risque).to eq("B - Bon")
+      expect(presenter.palier_bilan).to eq("A - Très bon")
       expect(presenter.affiche_bilan_risque?).to be(true)
       expect(presenter.complet?).to be(true)
-      expect(presenter.synthese_impact_general).to eq(score_cout: "moyen")
+      expect(presenter.synthese_impact_general).to eq(
+        score_cout: "moyen",
+        score_strategie: "fort",
+        score_numerique: "faible"
+      )
       expect(presenter.affiche_bilan?).to be(true)
     end
 
@@ -48,6 +63,7 @@ RSpec.describe Evaluations::DiagnosticPro do
       presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
 
       expect(presenter.pourcentage_risque).to be_nil
+      expect(presenter.palier_bilan).to be_nil
       expect(presenter.complet?).to be(false)
       expect(presenter.synthese_impact_general).to be_nil
       expect(presenter.affiche_bilan?).to be(false)

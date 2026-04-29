@@ -3,23 +3,13 @@ require 'rails_helper'
 describe 'Création de compte conseiller', type: :feature do
   let!(:structure) { create :structure_locale, :avec_admin, nom: 'Ma structure' }
 
-  context 'sans structure précisée' do
+  context "sans token d'invitation" do
     before do
       visit new_compte_registration_path
     end
 
-    it "redirige l'utilisateur vers la page de connexion" do
-      expect(page).to have_current_path(new_compte_session_path)
-    end
-  end
-
-  context "avec un id de structure incorrecte dans l'url" do
-    before do
-      visit new_compte_registration_path(structure_id: 'random')
-    end
-
-    it "redirige l'utilisateur vers la page de connexion" do
-      expect(page).to have_current_path(new_compte_session_path)
+    it "redirige l'utilisateur vers la page de création de compte" do
+      expect(page).to have_current_path(inscription_nouveau_compte_path)
     end
   end
 

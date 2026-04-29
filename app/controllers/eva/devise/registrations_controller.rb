@@ -5,14 +5,9 @@ module Eva
         if params[:invitation_token].present?
           redirect_to inscription_nouveau_compte_path(invitation_token: params[:invitation_token]),
                       status: :see_other
-          return
+        else
+          redirect_to inscription_nouveau_compte_path
         end
-
-        structure = structure_pour_inscription
-        return if performed?
-        return redirect_to inscription_recherche_structure_path unless structure
-
-        super { |resource| resource.structure = structure }
       end
 
       def create
@@ -28,17 +23,6 @@ module Eva
       end
 
       private
-
-      def structure_pour_inscription
-        if params[:invitation_token].present?
-          charge_et_valide_invitation
-          return if performed?
-
-          @invitation.structure
-        else
-          Structure.find_by(id: params[:structure_id])
-        end
-      end
 
       def charge_et_valide_invitation
         @invitation = Invitation.find_by(token: params[:invitation_token])

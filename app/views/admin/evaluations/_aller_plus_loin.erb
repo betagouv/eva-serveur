@@ -7,14 +7,11 @@
           <%= image_tag "les-incontournables.png", class: "focus-incontournable__media-image", alt: t(".image_alt") %>
         </div>
         <div class="focus-incontournable__explication">
-          <%= t(".explication") %>
-
-          <br><br>
+          <p class="focus-incontournable__explication-texte"><%= t(".explication_html") %></p>
           <%= link_to t(".lien_texte"), "https://www.bao-incontournables.fr", class: "fr-link fr-link--sm", target: "_blank" %>
         </div>
       </div>
     </div>
-    <h3 class="incontournables-etapes__titre text-center fr-pb-3v"><%= t(".titre_etapes") %></h3>
     <div class="incontournables-etapes">    
       <div class="incontournables-etapes__rangee">
         <div class="illustrinfo illustrinfo--01">

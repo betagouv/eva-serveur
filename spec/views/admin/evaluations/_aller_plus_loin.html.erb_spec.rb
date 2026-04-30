@@ -8,7 +8,6 @@ describe 'admin/evaluations/_aller_plus_loin.html.erb' do
     cartes = fragment.css('.incontournables-etapes .illustrinfo')
     rangees = fragment.css('.incontournables-etapes .incontournables-etapes__rangee')
 
-    expect(rendered).to include(I18n.t('admin.evaluations.aller_plus_loin.titre_etapes'))
     expect(rangees.size).to eq(2)
     expect(rangees.map { |rangee| rangee.css('.illustrinfo').size }).to eq([ 4, 4 ])
     expect(cartes.size).to eq(8)

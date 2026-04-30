@@ -8,7 +8,6 @@
 .evaluation-aller-plus-loin__les-incontournables {
   width: 100%;
   min-width: 0;
-  background: var(--background-alt-blue-france);
   padding-bottom: $dsfr-spacing-3w;
 
   @media print {
@@ -54,24 +53,21 @@
   padding: $dsfr-spacing-3w $dsfr-spacing-2w;
   flex-direction: column;
   align-items: flex-start;
+  gap: 12px;
   flex: 1 0 0;
   overflow-wrap: anywhere;
 
   @include corps-de-texte-sm-regular;
 }
 
+.focus-incontournable__explication-texte {
+  margin: 0;
+}
+
 .focus-incontournable__explication a {
   @include corps-de-texte-sm-regular;
 
   color: $couleur-texte;
-}
-
-.incontournables-etapes__titre {
-  margin: 0;
-
-  @include corps-de-texte-lg-bold;
-
-  color: var(--text-title-grey);
 }
 
 .incontournables-etapes {

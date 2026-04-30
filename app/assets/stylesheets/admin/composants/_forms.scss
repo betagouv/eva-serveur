@@ -94,7 +94,8 @@ form {
     
     &.inputs {
       max-width: 600px;
-      background-color: $eva_light;
+      background: transparent;
+      border-radius: 0;
     }
 
     legend span {

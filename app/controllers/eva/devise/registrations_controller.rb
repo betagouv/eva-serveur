@@ -5,6 +5,8 @@ module Eva
         if params[:invitation_token].present?
           redirect_to inscription_nouveau_compte_path(invitation_token: params[:invitation_token]),
                       status: :see_other
+        elsif params[:structure_id].present?
+          redirect_to inscription_nouveau_compte_path(structure_id: params[:structure_id])
         else
           redirect_to inscription_nouveau_compte_path
         end

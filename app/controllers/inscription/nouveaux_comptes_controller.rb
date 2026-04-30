@@ -9,18 +9,13 @@ class Inscription::NouveauxComptesController < ApplicationController
       return if performed?
     end
 
-    if current_compte&.doit_completer_inscription?
-      redirige_vers_etape_inscription(current_compte)
-      return
-    end
+    verifie_current_compte
+    return if performed?
 
-    if current_compte.present?
-      redirect_to admin_dashboard_path
-      return
-    end
-
+    @structure = Structure.find(params[:structure_id]) if params[:structure_id].present?
     @compte = Compte.new(email: @invitation&.email_destinataire)
   end
+
 
   def create
     if current_compte.present?
@@ -37,15 +32,22 @@ class Inscription::NouveauxComptesController < ApplicationController
 
   private
 
+  def verifie_current_compte
+    redirige_vers_etape_inscription(current_compte) if current_compte&.doit_completer_inscription?
+
+    redirect_to admin_dashboard_path if current_compte.present?
+  end
+
   def charge_invitation_ou_redirect
     @invitation = Invitation.find_by(token: params[:invitation_token])
-    return if @invitation&.utilisable?
+    return redirect_to(inscription_invitation_invalide_path) unless @invitation&.utilisable?
 
-    redirect_to inscription_invitation_invalide_path
+    @structure = @invitation.structure
   end
 
   def create_sans_invitation
-    @compte = Compte.new(compte_parametres.merge(role: :conseiller, statut_validation: :en_attente))
+    @compte = Compte.new(compte_parametres.merge(role: :conseiller, statut_validation: :en_attente,
+                                                 structure_id: params[:structure_id].presence))
     @compte.assigne_preinscription
     if @compte.save
       sign_in(@compte)
@@ -57,13 +59,9 @@ class Inscription::NouveauxComptesController < ApplicationController
 
   def create_avec_invitation
     @invitation = Invitation.find_by(token: params[:invitation_token])
-    return redirect_si_invitation_invalide unless @invitation&.utilisable?
+    return redirect_to inscription_invitation_invalide_path unless @invitation&.utilisable?
 
     traiter_resultat_creation_invitation(appelle_creation_compte_invitation)
-  end
-
-  def redirect_si_invitation_invalide
-    redirect_to inscription_invitation_invalide_path
   end
 
   def appelle_creation_compte_invitation

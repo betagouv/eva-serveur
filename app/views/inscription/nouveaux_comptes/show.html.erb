@@ -9,7 +9,7 @@
 
 <% content_for :classes_body, "page-nouveau-compte-body" %>
 <div class="page-nouveau-compte">
-  <% if @invitation.present? %>
+  <% if @structure.present? %>
     <div class="fr-mb-4w", style="width: 100%;">
       <%= dsfr_alert(
             type: :info,
@@ -17,8 +17,8 @@
             html_attributes: { class: "fr-mb-0 page-nouveau-compte-alerte-invitation" }
           ) do %>
         <p class="page-nouveau-compte-alerte-invitation__structure">
-          <%= @invitation.structure&.display_name %><br>
-          <%= @invitation.structure&.adresse %>
+          <%= @structure&.display_name %><br>
+          <%= @structure&.adresse %>
         </p>
       <% end %>
     </div>
@@ -59,6 +59,7 @@
 
       <%= semantic_form_for @compte, url: inscription_nouveau_compte_path, html: { id: "nouveau-compte-form" } do |compte| %>
         <%= hidden_field_tag :invitation_token, @invitation.token if @invitation.present? %>
+        <%= hidden_field_tag :structure_id, params[:structure_id] if params[:structure_id].present? %>
         <%= compte.semantic_errors *champs_non_affiches(
           compte.object.errors.messages.keys,
           [ :prenom, :nom, :email, :telephone, :password, :password_confirmation, :fonction, :service_departement ]

@@ -6,6 +6,10 @@ class Inscription::RechercheStructuresController < ApplicationController
   include EtapeInscriptionHelper
 
   def show
+    if @compte.structure.present?
+      @compte.update(etape_inscription: :assignation_structure)
+      redirige_vers_etape_inscription(@compte)
+    end
   end
 
   def update

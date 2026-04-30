@@ -115,6 +115,27 @@ describe Ability do
         it { expect(subject).not_to be_able_to(:destroy, structure) }
       end
     end
+
+    it "peut lire les comptes d'une structure administrative non OPCO " \
+       "et de ses structures filles" do
+      structure_admin_non_opco = create(
+        :structure_administrative,
+        :beneficiaire,
+        opco: nil
+      )
+      structure_fille = create(
+        :structure_locale,
+        :avec_admin,
+        :beneficiaire,
+        structure_referente: structure_admin_non_opco,
+        opco: nil
+      )
+      compte_admin_non_opco = create(:compte_admin, structure: structure_admin_non_opco)
+      compte_structure_fille = create(:compte_conseiller, structure: structure_fille)
+
+      expect(subject).to be_able_to(:read, compte_admin_non_opco)
+      expect(subject).to be_able_to(:read, compte_structure_fille)
+    end
   end
 
   context 'Compte CMR' do
@@ -264,7 +285,9 @@ describe Ability do
   end
 
   context 'Compte admin de structure administrative' do
-    let(:structure_administrative) { create :structure_administrative }
+    let(:structure_administrative) do
+      create(:structure_administrative, :beneficiaire, opco: nil)
+    end
     let(:compte) { create :compte_admin, structure: structure_administrative }
     let(:beneficiaire) { create :beneficiaire }
 
@@ -298,11 +321,18 @@ describe Ability do
 
     context "avec des structures filles" do
       let!(:structure_locale_fille) do
-        create :structure_locale, structure_referente: structure_administrative
+        create :structure_locale,
+               :beneficiaire,
+               structure_referente: structure_administrative,
+               opco: nil
       end
       let!(:compte_structure_fille) { create :compte_admin, structure: structure_locale_fille }
       let!(:campagne_structure_fille) { create :campagne, compte: compte_structure_fille }
       let!(:evaluation_structure_fille) { create :evaluation, campagne: campagne_structure_fille }
+
+      it "peut lire les comptes des structures filles pour une structure administrative non OPCO" do
+        expect(subject).to be_able_to(:read, compte_structure_fille)
+      end
 
       it 'peut voir les bénéficiaires des campagnes des structures filles' do
         expect(subject).to be_able_to(:read, evaluation_structure_fille.beneficiaire)

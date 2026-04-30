@@ -49,7 +49,16 @@ structure: autre_structure_meme_opco)
     context "avec un compte OPCO admin" do
       let(:compte) { create(:compte_admin, :acceptee, structure: structure_opco) }
 
-      it "autorise la lecture des comptes de sa structure et refuse les autres" do
+      it "autorise la lecture des comptes de sa structure et de ses structures filles, " \
+         "et refuse les autres" do
+        structure_fille = create(
+          :structure_locale,
+          :avec_admin,
+          usage: AvecUsage::USAGE_EVAPRO,
+          opco: opco,
+          structure_referente: structure_opco
+        )
+        compte_structure_fille = create(:compte_conseiller, :acceptee, structure: structure_fille)
         autre_structure_meme_opco = create(
           :structure_administrative,
           :avec_admin,
@@ -64,8 +73,12 @@ structure: autre_structure_meme_opco)
         compte_meme_structure = create(:compte_conseiller, :acceptee, structure: structure_opco)
 
         expect(ability.can?(:read, compte_meme_structure)).to be(true)
+        expect(ability.can?(:read, compte_structure_fille)).to be(true)
         expect(ability.can?(:read, compte_meme_opco)).to be(false)
         expect(ability.can?(:read, compte_hors_opco)).to be(false)
+        expect(ability.can?(:envoyer_invitation, structure_fille)).to be(true)
+        expect(ability.can?(:copier_lien, structure_fille)).to be(true)
+        expect(ability.can?(:envoyer_invitation, autre_structure_meme_opco)).to be(false)
       end
     end
   end

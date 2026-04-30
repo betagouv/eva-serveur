@@ -207,11 +207,17 @@ ActiveAdmin.register Compte do
 
     def comptes_du_perimetre
       return Compte.none if current_compte.structure.blank?
-      if current_compte.vue_opco_active?
-        Compte.where(structure_id: current_compte.structure_id)
-      else
-        Compte.de_la_structure(current_compte.structure)
-      end
+      return Compte.all if can?(:manage, Compte)
+
+      return Compte.de_la_structure(current_compte.structure) unless current_compte.vue_opco_active?
+
+      Compte.where(structure_id: structure_ids_pour_vue_opco)
+    end
+
+    def structure_ids_pour_vue_opco
+      return current_compte.structure_id unless current_compte.admin?
+
+      current_compte.structure.subtree_ids
     end
 
     def structure_par_defaut

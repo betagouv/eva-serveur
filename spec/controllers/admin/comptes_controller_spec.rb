@@ -177,24 +177,37 @@ describe Admin::ComptesController, type: :controller do
     let(:structure_opco) do
       create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
     end
-    let(:structure_meme_opco) do
+    let(:structure_fille_opco) do
+      create(
+        :structure_locale,
+        :avec_admin,
+        usage: AvecUsage::USAGE_EVAPRO,
+        opco: opco,
+        structure_referente: structure_opco
+      )
+    end
+    let(:autre_structure_meme_opco) do
       create(:structure_locale, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
     end
     let!(:compte_opco) do
       create(:compte_conseiller, structure: structure_opco, prenom: "Visible")
     end
+    let!(:compte_structure_fille) do
+      create(:compte_conseiller, structure: structure_fille_opco, prenom: "VisibleFille")
+    end
     let!(:compte_hors_opco) do
-      create(:compte_conseiller, structure: structure_meme_opco, prenom: "Invisible")
+      create(:compte_conseiller, structure: autre_structure_meme_opco, prenom: "Invisible")
     end
     let!(:compte_connecte) { create(:compte_admin, :acceptee, structure: structure_opco) }
 
     before { sign_in compte_connecte }
 
-    it "n'affiche que les comptes de sa structure" do
+    it "affiche les comptes de sa structure et de ses structures filles" do
       get :index
 
       expect(response).to be_successful
       expect(response.body).to include("Visible")
+      expect(response.body).to include("VisibleFille")
       expect(response.body).not_to include("Invisible")
     end
   end
@@ -224,6 +237,29 @@ prenom: "InvisibleConseiller")
       expect(response).to be_successful
       expect(response.body).to include("VisibleConseiller")
       expect(response.body).not_to include("InvisibleConseiller")
+    end
+  end
+
+  describe "liste comptes superadmin" do
+    let(:structure_superadmin) { create(:structure_locale) }
+    let!(:superadmin) { create(:compte_superadmin, structure: structure_superadmin) }
+    let(:structure_cible) { create(:structure_locale, :avec_admin) }
+    let!(:compte_structure_cible) do
+      create(:compte_conseiller, structure: structure_cible, prenom: "VisibleSuperadmin")
+    end
+    let(:structure_hors_cible) { create(:structure_locale, :avec_admin) }
+    let!(:compte_hors_cible) do
+      create(:compte_conseiller, structure: structure_hors_cible, prenom: "InvisibleSuperadmin")
+    end
+
+    before { sign_in superadmin }
+
+    it "affiche les comptes de la structure filtrée même hors parenté" do
+      get :index, params: { q: { structure_id_eq: structure_cible.id } }
+
+      expect(response).to be_successful
+      expect(response.body).to include("VisibleSuperadmin")
+      expect(response.body).not_to include("InvisibleSuperadmin")
     end
   end
 end

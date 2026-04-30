@@ -18,6 +18,20 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
     end
 
+    context 'quand le compte a déjà une structure' do
+      let(:compte) do
+        create(:compte_pro_connect, etape_inscription: 'recherche_structure',
+                                    structure: create(:structure_locale, :avec_admin))
+      end
+
+      it "passe directement à l'étape assignation_structure" do
+        get :show
+        compte.reload
+        expect(compte.etape_inscription).to eq("assignation_structure")
+        expect(response).to redirect_to(inscription_structure_path)
+      end
+    end
+
     context 'quand le compte n\'est pas en étape recherche_structure' do
       let(:compte) { create(:compte_pro_connect, etape_inscription: 'complet') }
 

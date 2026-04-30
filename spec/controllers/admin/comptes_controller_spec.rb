@@ -262,4 +262,28 @@ prenom: "InvisibleConseiller")
       expect(response.body).not_to include("InvisibleSuperadmin")
     end
   end
+
+  describe "liste comptes CMR" do
+    let(:structure_cmr) { create(:structure_locale, :avec_admin) }
+    let(:autre_structure) { create(:structure_locale, :avec_admin) }
+    let!(:compte_cmr) do
+      create(:compte_charge_mission_regionale, :acceptee, structure: structure_cmr)
+    end
+    let!(:compte_structure_cmr) do
+      create(:compte_conseiller, :acceptee, structure: structure_cmr, prenom: "VisibleCMR")
+    end
+    let!(:compte_autre_structure) do
+      create(:compte_conseiller, :acceptee, structure: autre_structure, prenom: "VisibleAutre")
+    end
+
+    before { sign_in compte_cmr }
+
+    it "affiche les comptes de toutes les structures en lecture" do
+      get :index
+
+      expect(response).to be_successful
+      expect(response.body).to include("VisibleCMR")
+      expect(response.body).to include("VisibleAutre")
+    end
+  end
 end

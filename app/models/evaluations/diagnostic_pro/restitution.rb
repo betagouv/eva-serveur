@@ -16,7 +16,7 @@ module Evaluations
       end
 
       def palier_bilan
-        return unless affiche_bilan?
+        return if !@restitution_globale.evaluation.complete?
 
         BilanConsolideCalculator.new(
           diag_risques_entreprise: diag_risques_entreprise,
@@ -62,10 +62,6 @@ module Evaluations
         return unless complet?
 
         evaluation_impact_general.synthese
-      end
-
-      def affiche_bilan?
-        diag_risques_entreprise.present? && evaluation_impact_general.present?
       end
     end
   end

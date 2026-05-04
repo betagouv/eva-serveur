@@ -40,7 +40,8 @@ RSpec.describe Evaluations::DiagnosticPro do
 
       restitution_globale = double(
         diag_risques_entreprise: diag,
-        evaluation_impact_general: impact
+        evaluation_impact_general: impact,
+        evaluation: double(complete?: true)
       )
 
       presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
@@ -55,18 +56,17 @@ RSpec.describe Evaluations::DiagnosticPro do
         score_strategie: "fort",
         score_numerique: "faible"
       )
-      expect(presenter.affiche_bilan?).to be(true)
     end
 
     it "garde pourcentage_risque à nil quand le diagnostic risques est absent" do
-      restitution_globale = double(diag_risques_entreprise: nil, evaluation_impact_general: nil)
+      restitution_globale = double(diag_risques_entreprise: nil, evaluation_impact_general: nil,
+evaluation: double(complete?: false))
       presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
 
       expect(presenter.pourcentage_risque).to be_nil
       expect(presenter.palier_bilan).to be_nil
       expect(presenter.complet?).to be(false)
       expect(presenter.synthese_impact_general).to be_nil
-      expect(presenter.affiche_bilan?).to be(false)
     end
   end
 

@@ -38,19 +38,17 @@ div class: "evaluation-evapro" do
 
       if pourcentage_risque
         evaluation_impact_general = diagnostic_pro.evaluation_impact_general
-        complet = diagnostic_pro.complet?
         impacts_presenter = diagnostic_pro.impacts_presenter(evaluation_id: evaluation.id)
         render(
           partial: "mesure_des_impacts",
           locals: {
             evaluation_impact_general: evaluation_impact_general,
             impacts_presenter: impacts_presenter,
-            pdf: pdf,
-            complet: complet
+            pdf: pdf
           }
         )
 
-        if complet
+        if evaluation.complete?
           couts_presenter = diagnostic_pro.couts_presenter(
             synthese: diagnostic_pro.synthese_impact_general,
             i18n: self
@@ -60,8 +58,14 @@ div class: "evaluation-evapro" do
             locals: {
               synthese: diagnostic_pro.synthese_impact_general,
               couts_presenter: couts_presenter,
-              pdf: pdf,
-              complet: complet
+              pdf: pdf
+            }
+          )
+        else
+          render(
+            partial: "continuer_evaluation_evapro",
+            locals: {
+              impacts_presenter: impacts_presenter
             }
           )
         end
@@ -69,7 +73,7 @@ div class: "evaluation-evapro" do
     end
   end
 
-  if diagnostic_pro.affiche_bilan?
+  if evaluation.complete?
     div class: "page page__evapro adaptation-pdf" do
       if pdf
         render(Pdf::HeaderEvaproComponent.new(

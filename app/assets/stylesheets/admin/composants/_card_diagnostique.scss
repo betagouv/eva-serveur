@@ -1,6 +1,9 @@
 .diagnostique {
   display: flex;
-  width: 17.625rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 17.625rem;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
   border: 1px solid var(--border-default-grey);
@@ -98,6 +101,8 @@
 
 .diagnostique-contenu {
   display: flex;
+  flex: 1;
+  height: 100%;
   padding: $dsfr-spacing-6v;
   flex-direction: column;
   align-items: flex-start;
@@ -145,6 +150,7 @@
 
 .diagnostique-contenu__action {
   display: flex;
+  margin-top: auto;
   padding-top: $dsfr-spacing-2v;
   align-items: flex-start;
   gap: $dsfr-spacing-4v;

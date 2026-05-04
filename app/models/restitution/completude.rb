@@ -13,8 +13,6 @@ module Restitution
       :complete
     end
 
-    private
-
     def competences_evapro?
       return true if !@evaluation.evapro?
 

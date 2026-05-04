@@ -368,9 +368,6 @@ fr:
               moyen: "Impact sur le numérique : Moyen"
               fort: "Impact sur le numérique : Fort"
               tres_fort: "Impact sur le numérique : Très fort"
-        incomplet:
-          description: Complétez le questionnaire pour approfondir le diagnostic
-          action: Continuer le diagnostic
         impact_couts:
           contenu_cout:
             texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
@@ -406,6 +403,10 @@ fr:
               b: "Usage des compétences numériques de base courant"
               c: "Usage des compétences numériques de base fragile"
               d: "Usage des compétences numériques de base dépendant du collectif"
+      continuer_evaluation_evapro:
+        incomplet:
+          description: Complétez le questionnaire pour approfondir le diagnostic
+          action: Continuer le diagnostic
     restitutions:
       reponse_expression_ecrite: "Votre réponse à la question « %{question} »"
       redaction: Rédaction

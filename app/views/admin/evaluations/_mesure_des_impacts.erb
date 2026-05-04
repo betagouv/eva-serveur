@@ -1,23 +1,17 @@
-<div id="evaluation-impact-general">
-  <h2 class="evaluation__titre"><%= t(".titre") %></h2>
-  <div class="fr-pb-0">
-    <div class="evaluation-impact-general__resultats">
+<% if impacts_presenter.complet? %>
+  <% synthese = impacts_presenter.synthese %>
+  <% interpretations_impact = impacts_presenter.interpretations %>
 
-      <% if impacts_presenter.complet? %>
-        <% synthese = impacts_presenter.synthese %>
-        <% interpretations_impact = impacts_presenter.interpretations %>
+  <% if synthese.values.compact.present? %>
+    <div id="evaluation-impact-general">
+      <h2 class="evaluation__titre"><%= t(".titre") %></h2>
+      <div class="fr-pb-0">
+        <div class="evaluation-impact-general__resultats">
 
-        <%= render partial: "admin/evaluations/mesure_des_impacts_chart",
-                   locals: { synthese: synthese, interpretations_impact: interpretations_impact } %>
-        
-      <% else %>
-        <p><%= t(".incomplet.description") %></p>
-
-        <% url = impacts_presenter.incomplet_url(URL_EVA_ENTREPRISES) %>
-        <%= render BoutonComponent.new(url, type: :primary) do %>
-          <%= t(".incomplet.action") %>
-        <% end %>
-      <% end %>
+          <%= render partial: "admin/evaluations/mesure_des_impacts_chart",
+                      locals: { synthese: synthese, interpretations_impact: interpretations_impact } %>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

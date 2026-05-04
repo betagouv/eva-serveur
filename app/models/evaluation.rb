@@ -11,6 +11,8 @@ class Evaluation < ApplicationRecord
                           competences_transversales_incompletes complete].freeze
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
   SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
+  SITUATION_COMPETENCES_EVAPRO = [ Situation::DIAG_RISQUES_ENTREPRISE,
+Situation::EVALUATION_IMPACT_GENERAL ].freeze
 
   ACTIONS = {
     LIRE: { label: I18n.t("admin.evaluations.index.voir"),

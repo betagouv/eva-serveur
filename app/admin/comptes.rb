@@ -196,8 +196,13 @@ ActiveAdmin.register Compte do
     end
 
     def trouve_comptes
-      comptes = scoped_collection.order(:prenom, :nom)
+      comptes = collection_filtree.order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente
+    end
+
+    def collection_filtree
+      search = scoped_collection.ransack(params[:q])
+      search.result
     end
 
     def structure_par_defaut

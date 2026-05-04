@@ -261,6 +261,27 @@ prenom: "InvisibleConseiller")
       expect(response.body).to include("VisibleSuperadmin")
       expect(response.body).not_to include("InvisibleSuperadmin")
     end
+
+    it "n'affiche que les comptes en attente de la structure filtrée" do
+      compte_en_attente_cible = create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure_cible,
+        email: "attente.cible@example.org"
+      )
+      create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure_hors_cible,
+        email: "attente.hors-cible@example.org"
+      )
+
+      get :index, params: { q: { structure_id_eq: structure_cible.id } }
+
+      expect(response).to be_successful
+      expect(response.body).to include(compte_en_attente_cible.email)
+      expect(response.body).not_to include("attente.hors-cible@example.org")
+    end
   end
 
   describe "liste comptes CMR" do

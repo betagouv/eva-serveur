@@ -68,7 +68,7 @@ div class: "page-structure" do
     if resource.est_une_structure_ocpo?
       section id: "bloc-statistiques-opco" do
         h2 "Statistiques"
-        render partial: "admin/dashboard/metabase_dashboard_opco", locals: { opco: resource.opco }
+        render partial: "admin/dashboard/metabase_dashboard_opco", locals: { resource: resource }
       end
     end
     unless resource.instance_of?(StructureOpco) || resource.evapro?

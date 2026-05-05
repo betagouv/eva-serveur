@@ -1,4 +1,4 @@
-<% statistiques_opco = StatistiquesOpco.new(opco_id: opco&.id) %>
+<% statistiques_opco = StatistiquesStructure.new(resource) %>
 
 <iframe
   src="<%= statistiques_opco.url %>"

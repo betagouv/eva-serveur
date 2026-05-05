@@ -16,7 +16,7 @@ else
       end
       span t("admin.dashboard.metabase_opco.titre")
       render partial: "admin/dashboard/metabase_dashboard_opco",
-             locals: { opco: opco }
+             locals: { resource: structure }
     end
 
     if structure.present?

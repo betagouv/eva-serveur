@@ -3,6 +3,8 @@ ActiveAdmin.register StructureOpco do
     current_compte.anlci? || current_compte.administratif?
   }
 
+  permit_params :nom, :siret, :opco_id
+
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :created_at
 
@@ -39,7 +41,33 @@ ActiveAdmin.register StructureOpco do
     render json: { url: url }
   end
 
+  form partial: "form"
+
   controller do
+    def create
+      @structure_opco = StructureOpco.new(
+          permitted_params[:structure_opco]
+        )
+      @structure_opco.current_ability = current_ability
+
+      if @structure_opco.save
+        redirect_to admin_structure_opco_path(@structure_opco)
+      else
+        render :new
+      end
+    end
+
+    def update
+      @structure_opco = resource
+      @structure_opco.current_ability = current_ability
+
+      if @structure_opco.update(permitted_params[:structure_opco])
+        redirect_to admin_structure_opco_path(@structure_opco)
+      else
+        render :edit
+      end
+    end
+
     private
 
     def envoyer_invitation_et_rediriger

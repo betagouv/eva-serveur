@@ -1,0 +1,18 @@
+active_admin_form_for [ :admin, resource ] do |f|
+  f.inputs do
+    f.input :nom
+    f.input :siret,
+            as: :siret,
+            required: resource.new_record?,
+            hint: t("admin.structures.structures_locales.form.siret_hint")
+    f.input :opco_id, as: :select,
+            collection: Opco.order(:nom).map { |opco| [ opco.nom, opco.id ] },
+            include_blank: t("formtastic.placeholders.structure.opco_id"),
+            label_html: { id: "opco_label" },
+            required: true
+  end
+  f.actions do
+    f.action :submit
+    annulation_formulaire(f)
+  end
+end

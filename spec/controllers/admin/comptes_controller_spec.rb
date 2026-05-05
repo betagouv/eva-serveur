@@ -285,25 +285,29 @@ prenom: "InvisibleConseiller")
       expect(response.body).not_to include("InvisibleSuperadmin")
     end
 
-    it "n'affiche que les comptes en attente de la structure filtrée" do
-      compte_en_attente_cible = create(
+    it "garde les comptes en attente de sa structure même avec un filtre table" do
+      compte_en_attente_structure_superadmin = create(
         :compte_conseiller,
         :en_attente,
-        structure: structure_cible,
-        email: "attente.cible@example.org"
+        structure: structure_superadmin,
+        email: "attente.superadmin.filtre@example.org"
       )
       create(
         :compte_conseiller,
         :en_attente,
-        structure: structure_hors_cible,
-        email: "attente.hors-cible@example.org"
+        structure: structure_cible,
+        email: "attente.structure.filtree@example.org"
       )
 
       get :index, params: { q: { structure_id_eq: structure_cible.id } }
 
       expect(response).to be_successful
-      expect(response.body).to include(compte_en_attente_cible.email)
-      expect(response.body).not_to include("attente.hors-cible@example.org")
+      bloc_mises_en_avant = Nokogiri::HTML(response.body).at_css("#bloc-mises-en-avant")
+      expect(bloc_mises_en_avant).to be_present
+      expect(bloc_mises_en_avant.text).to include(compte_en_attente_structure_superadmin.email)
+      expect(bloc_mises_en_avant.text).not_to include("attente.structure.filtree@example.org")
+      expect(response.body).to include("VisibleSuperadmin")
+      expect(response.body).not_to include("InvisibleSuperadmin")
     end
   end
 

@@ -196,16 +196,9 @@ ActiveAdmin.register Compte do
     end
 
     def trouve_comptes
-      comptes = collection_filtree.order(:prenom, :nom)
-      @comptes_en_attente = comptes.validation_en_attente
-      if current_compte.superadmin? && params.dig(:q, :structure_id_eq).blank?
-        @comptes_en_attente = @comptes_en_attente.where(structure_id: current_compte.structure_id)
-      end
-    end
-
-    def collection_filtree
-      search = scoped_collection.ransack(params[:q])
-      search.result
+      @comptes_en_attente = Compte.where(structure_id: current_compte.structure_id)
+                                  .validation_en_attente
+                                  .order(:prenom, :nom)
     end
 
     def structure_par_defaut

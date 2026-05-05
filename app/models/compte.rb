@@ -96,10 +96,8 @@ class Compte < ApplicationRecord
     !!structure&.evapro?
   end
 
-  def vue_opco_active?
-    structure.is_a?(StructureAdministrative) &&
-      structure.evapro? &&
-      structure.opco.present?
+  def utilisateur_opco?
+    structure.is_a?(StructureOpco)
   end
 
   # Aligné sur Ability : profil restreint tant que la validation structure n'est pas finalisée.

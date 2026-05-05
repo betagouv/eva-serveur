@@ -6,7 +6,7 @@ class Ability < AbilityUtilisateur
       droits_comptes_refuses compte
     elsif compte.en_attente_restreint?
       droits_comptes_en_attente_restreints compte
-    elsif compte.vue_opco_active?
+    elsif compte.utilisateur_opco?
       droits_comptes_opco_restreints compte
     else
       super

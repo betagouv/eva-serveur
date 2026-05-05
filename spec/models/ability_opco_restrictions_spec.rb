@@ -60,10 +60,8 @@ structure: autre_structure_meme_opco)
         )
         compte_structure_fille = create(:compte_conseiller, :acceptee, structure: structure_fille)
         autre_structure_meme_opco = create(
-          :structure_administrative,
-          :avec_admin,
-          usage: AvecUsage::USAGE_EVAPRO,
-          opco: opco
+          :structure_opco,
+          :avec_admin
         )
         compte_meme_opco = create(:compte_conseiller, :acceptee,
 structure: autre_structure_meme_opco)

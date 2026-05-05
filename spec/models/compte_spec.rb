@@ -172,32 +172,23 @@ describe Compte do
     end
   end
 
-  describe "#vue_opco_active?" do
+  describe "#utilisateur_opco?" do
     let(:compte) { build(:compte, structure: structure) }
 
-    context "quand la structure est une structure ocpo" do
-      let(:structure) do
-        build(
-          :structure_administrative,
-          :eva_pro
-        )
-      end
+    context "quand le type de la structure est une structure Opco" do
+      let(:structure) { build(:structure_opco) }
 
       it "retourne true" do
-        expect(compte.vue_opco_active?).to be(true)
+        expect(compte.utilisateur_opco?).to be(true)
       end
     end
 
-    context "quand la structure n'est pas une structure ocpo" do
-      let(:structure) do
-        build(
-          :structure_administrative,
-          :beneficiaire
-        )
-      end
+    context "quand la structure n'est pas de type Opco" do
+      let(:structure) { build(:structure_administrative) }
+
 
       it "retourne false" do
-        expect(compte.vue_opco_active?).to be(false)
+        expect(compte.utilisateur_opco?).to be(false)
       end
     end
 
@@ -205,7 +196,7 @@ describe Compte do
       let(:structure) { nil }
 
       it "retourne false" do
-        expect(compte.vue_opco_active?).to be(false)
+        expect(compte.utilisateur_opco?).to be(false)
       end
     end
   end

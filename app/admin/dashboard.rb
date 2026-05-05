@@ -4,7 +4,7 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-    if current_compte.vue_opco_active?
+    if current_compte.utilisateur_opco?
       render partial: "tableau_de_bord_opco",
       locals: { structure: current_compte.structure, opco: current_compte.structure&.opco }
     elsif current_compte.utilisateur_entreprise?

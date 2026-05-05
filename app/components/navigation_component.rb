@@ -20,7 +20,7 @@ class NavigationComponent < ViewComponent::Base
   private
 
   def default_links
-    return opco_links if vue_opco_active?
+    return opco_links if utilisateur_opco?
 
     [
       dashboard_link,
@@ -368,8 +368,8 @@ class NavigationComponent < ViewComponent::Base
     @current_compte&.en_attente_restreint?
   end
 
-  def vue_opco_active?
-    @current_compte&.vue_opco_active?
+  def utilisateur_opco?
+    @current_compte&.utilisateur_opco?
   end
 
   def can?(action, subject, *extra_args)

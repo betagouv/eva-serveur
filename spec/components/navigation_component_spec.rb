@@ -64,42 +64,48 @@ RSpec.describe NavigationComponent, type: :component do
   context "quand le compte est superadmin" do
     let(:compte) { create(:compte_superadmin, :acceptee, :structure_avec_admin) }
 
-    it "affiche la navigation EVA complète avec les groupes déroulants" do
-      render_inline(component)
+    context "affiche la navigation EVA complète avec les groupes déroulants" do
+      before { render_inline(component) }
 
-      expect(page).to have_link("Tableau de bord", href: "/admin")
-      expect(page).to have_link("Actualités")
-      expect(page).to have_link("Campagnes")
-      expect(page).to have_link("Évaluations")
-      expect(page).to have_link("Bénéficiaires")
+      it "affiche les liens de navigation principaux" do
+        expect(page).to have_link("Tableau de bord", href: "/admin")
+        expect(page).to have_link("Actualités")
+        expect(page).to have_link("Campagnes")
+        expect(page).to have_link("Évaluations")
+        expect(page).to have_link("Bénéficiaires")
+      end
 
-      expect(page).to have_button("Accompagnement")
-      expect(page).to have_link("Sources d'aide", visible: :all)
-      expect(page).to have_link("Annonces générales", visible: :all)
+      it "affiche les liens de navigation Accompagnement" do
+        expect(page).to have_button("Accompagnement")
+        expect(page).to have_link("Sources d'aide", visible: :all)
+        expect(page).to have_link("Annonces générales", visible: :all)
+      end
 
-      expect(page).to have_button("Parcours")
-      expect(page).to have_link("Parcours", visible: :all)
-      expect(page).to have_link("Questionnaires", visible: :all)
-      expect(page).to have_link("Questions QCM", visible: :all)
-      expect(page).to have_link("Questions clic dans image", visible: :all)
-      expect(page).to have_link("Questions clic dans texte", visible: :all)
-      expect(page).to have_link("Questions glisser déposer", visible: :all)
-      expect(page).to have_link("Questions saisie", visible: :all)
-      expect(page).to have_link("Questions sous consigne", visible: :all)
-      expect(page).to have_link("Situations", visible: :all)
+      it "affiche les liens de navigation Parcours" do
+        expect(page).to have_button("Parcours")
+        expect(page).to have_link("Parcours", visible: :all)
+        expect(page).to have_link("Questionnaires", visible: :all)
+        expect(page).to have_link("Questions QCM", visible: :all)
+        expect(page).to have_link("Questions clic dans image", visible: :all)
+        expect(page).to have_link("Questions clic dans texte", visible: :all)
+        expect(page).to have_link("Questions glisser déposer", visible: :all)
+        expect(page).to have_link("Questions saisie", visible: :all)
+        expect(page).to have_link("Questions sous consigne", visible: :all)
+        expect(page).to have_link("Situations", visible: :all)
+      end
 
-      expect(page).to have_button("Structures")
-      expect(page).to have_link("Structures locales", visible: :all)
-      expect(page).to have_link("Structures administratives", visible: :all)
-      expect(page).to have_link("Opérateurs de compétences", visible: :all)
+      it "affiche les liens de navigation Structures" do
+        expect(page).to have_button("Structures")
+        expect(page).to have_link("Structures locales", visible: :all)
+        expect(page).to have_link("Structures administratives", visible: :all)
+        expect(page).to have_link("Structures opérateurs de compétences", visible: :all)
+        expect(page).to have_link("Opérateurs de compétences", visible: :all)
+      end
     end
   end
 
   context "quand le compte est un employé OPCO non admin" do
-    let(:opco) { create(:opco) }
-    let(:structure) do
-      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
-    end
+    let(:structure) { create(:structure_opco, :avec_admin) }
     let(:compte) { create(:compte_conseiller, :acceptee, structure: structure) }
 
     it "affiche la navigation OPCO avec le lien Comptes" do
@@ -119,10 +125,7 @@ RSpec.describe NavigationComponent, type: :component do
   end
 
   context "quand le compte est un employé OPCO admin" do
-    let(:opco) { create(:opco) }
-    let(:structure) do
-      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
-    end
+    let(:structure) { create(:structure_opco, :avec_admin) }
     let(:compte) { create(:compte_admin, :acceptee, structure: structure) }
 
     it "affiche le lien Comptes" do

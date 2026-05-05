@@ -20,6 +20,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'parcours_type', 'parcours_type'
   inflect.irregular 'structure_locale', 'structures_locales'
   inflect.irregular 'structure_administrative', 'structures_administratives'
+  inflect.irregular 'structure_opco', 'structures_opcos'
   inflect.irregular 'partie', 'parties'
   inflect.irregular 'donnee_sociodemographique', 'donnees_sociodemographiques'
   inflect.irregular 'type_de_programme', 'types_de_programme'

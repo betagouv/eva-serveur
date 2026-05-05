@@ -48,5 +48,9 @@ FactoryBot.define do
         usage { AvecUsage::USAGE_BENEFICIAIRES }
       end
     end
+
+    factory :structure_opco, class: StructureOpco.to_s do
+      type { 'StructureOpco' }
+    end
   end
 end

@@ -198,6 +198,9 @@ ActiveAdmin.register Compte do
     def trouve_comptes
       comptes = collection_filtree.order(:prenom, :nom)
       @comptes_en_attente = comptes.validation_en_attente
+      if current_compte.superadmin? && params.dig(:q, :structure_id_eq).blank?
+        @comptes_en_attente = @comptes_en_attente.where(structure_id: current_compte.structure_id)
+      end
     end
 
     def collection_filtree

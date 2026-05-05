@@ -153,6 +153,7 @@ class NavigationComponent < ViewComponent::Base
     links = [
       structures_locales_link,
       structures_administratives_link,
+      structures_opcos_link,
       opcos_link
     ].compact
     return if links.empty?
@@ -300,6 +301,17 @@ class NavigationComponent < ViewComponent::Base
       url: helpers.admin_structures_administratives_path,
       current: current_page?(helpers.admin_structures_administratives_path) ||
         controller_matches?("admin/structures_administratives")
+    }
+  end
+
+    def structures_opcos_link
+    return unless anlci_or_administratif?
+
+    {
+      label: "Structures opérateurs de compétences",
+      url: helpers.admin_structures_opcos_path,
+      current: current_page?(helpers.admin_structures_opcos_path) ||
+        controller_matches?("admin/structures_opcos")
     }
   end
 

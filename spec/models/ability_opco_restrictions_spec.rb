@@ -5,7 +5,7 @@ RSpec.describe Ability do
 
   let(:opco) { create(:opco) }
   let(:structure_opco) do
-    create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    create(:structure_opco, :avec_admin, opco: opco)
   end
 
   describe "droits OPCO restreints" do

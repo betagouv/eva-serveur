@@ -51,6 +51,7 @@ FactoryBot.define do
 
     factory :structure_opco, class: StructureOpco.to_s do
       type { 'StructureOpco' }
+      association :opco
     end
   end
 end

@@ -1,4 +1,4 @@
-.admin_structures, .admin_structures_locales, .admin_structures_administratives {
+.admin_structures, .admin_structures_locales, .admin_structures_administratives, .admin_structures_opcos {
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);

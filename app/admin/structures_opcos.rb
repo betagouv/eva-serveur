@@ -15,4 +15,62 @@ ActiveAdmin.register StructureOpco do
     end
     actions
   end
+
+  show do
+    render partial: "admin/structures/show", locals: { structure: resource }
+  end
+
+  member_action :envoyer_invitation, method: :post do
+    envoyer_invitation_et_rediriger
+  end
+
+  member_action :copier_lien, method: :post do
+    unless compte_autorise_pour_invitation?
+      render json: { error: I18n.t("admin.structures.membres.invitation_non_autorisee") },
+      status: :forbidden
+      return
+    end
+
+    invitation = resource.invitations.create!(
+      invitant: current_compte,
+      role: Compte::ROLE_PAR_DEFAUT
+    )
+    url = inscription_nouveau_compte_url(invitation_token: invitation.token)
+    render json: { url: url }
+  end
+
+  controller do
+    private
+
+    def envoyer_invitation_et_rediriger
+      result = EnvoiInvitationService.new(
+        structure: resource,
+        invitant: current_compte,
+        email: invitation_params[:email],
+        message: invitation_params[:message],
+        role: invitation_params[:role].presence
+      ).call
+
+      redirect_apres_envoi_invitation(result)
+    end
+
+    def redirect_apres_envoi_invitation(result)
+      fallback = admin_structure_opco_path(resource)
+      if result.success?
+        notice = I18n.t("admin.structures.membres.invitation_envoyee", email: result.email)
+        redirect_back fallback_location: fallback, notice: notice
+      else
+        alert = I18n.t("admin.structures.membres.#{result.error}")
+        redirect_back fallback_location: fallback, alert: alert
+      end
+    end
+
+    def invitation_params
+      params.fetch(:invitation, ActionController::Parameters.new).permit(:email, :message, :role)
+    end
+
+    def compte_autorise_pour_invitation?
+      EnvoiInvitationService.autorise_invitation?(structure: resource, invitant: current_compte)
+    end
+  end
 end

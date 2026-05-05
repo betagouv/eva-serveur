@@ -22,6 +22,9 @@ fr:
       structure_locale:
         one: Structure locale
         other: Structures locales
+      structure_opco:
+        one: Structure opérateur de compétences
+        other: Structures opérateur de compétences
     attributes:
       structure:
         created_at: Créée le
@@ -81,6 +84,8 @@ fr:
         <<: *actions_structure
       structure_locale:
         <<: *actions_structure
+      structure_opco:
+        <<: *actions_structure
     placeholders:
       structure: &placeholders_structure
         nom: Mission locale de Montpellier
@@ -89,6 +94,8 @@ fr:
       structure_administrative:
         <<: *placeholders_structure
       structure_locale:
+        <<: *placeholders_structure
+      structure_opco:
         <<: *placeholders_structure
   active_admin:
     resources:
@@ -99,4 +106,6 @@ fr:
       structure_administrative:
         <<: *active_admin_structure
       structure_locale:
+        <<: *active_admin_structure
+      structure_opco:
         <<: *active_admin_structure

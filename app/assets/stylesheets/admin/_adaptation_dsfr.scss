@@ -231,6 +231,11 @@ button.fr-link--close {
   box-shadow: none;
   font-weight: 400;
   border: none;
+
+  &:-moz-focusring,
+  &:focus-visible {
+    @include focus;
+  }
 }
 button.fr-link--close:not(.disabled):hover {
   @include light-decisions-background-transparent-hover;
@@ -273,6 +278,13 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
   align-self: flex-start; 
   min-height: 2.5rem;
   line-height: normal !important;
+}
+
+.fr-btn {
+  &:-moz-focusring,
+  &:focus-visible {
+    @include focus;
+  }
 }
 
 button,

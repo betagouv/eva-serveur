@@ -27,6 +27,11 @@
   .fr-nav__btn {
     background: transparent;
     border: 0;
+
+    &:-moz-focusring,
+    &:focus-visible {
+      @include focus;
+    }
   }
 
   .fr-nav__btn:hover,

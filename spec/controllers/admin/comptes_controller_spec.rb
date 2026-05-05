@@ -254,6 +254,29 @@ prenom: "InvisibleConseiller")
 
     before { sign_in superadmin }
 
+    it "n'affiche que les comptes en attente de sa structure par défaut" do
+      compte_en_attente_structure_superadmin = create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure_superadmin,
+        email: "attente.superadmin@example.org"
+      )
+      create(
+        :compte_conseiller,
+        :en_attente,
+        structure: structure_hors_cible,
+        email: "attente.autre-structure@example.org"
+      )
+
+      get :index
+
+      expect(response).to be_successful
+      bloc_mises_en_avant = Nokogiri::HTML(response.body).at_css("#bloc-mises-en-avant")
+      expect(bloc_mises_en_avant).to be_present
+      expect(bloc_mises_en_avant.text).to include(compte_en_attente_structure_superadmin.email)
+      expect(bloc_mises_en_avant.text).not_to include("attente.autre-structure@example.org")
+    end
+
     it "affiche les comptes de la structure filtrée même hors parenté" do
       get :index, params: { q: { structure_id_eq: structure_cible.id } }
 

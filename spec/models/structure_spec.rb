@@ -619,40 +619,16 @@ describe Structure, type: :model do
   describe '#est_une_structure_ocpo?' do
     let(:opco) { build_stubbed(:opco) }
 
-    context 'quand la structure est administrative, a un opco et est evapro' do
-      let(:structure) { build_stubbed(:structure_administrative, opco: opco) }
-
-      before { allow(structure).to receive(:evapro?).and_return(true) }
+    context 'quand la structure a un type Ocpco' do
+      let(:structure) { build_stubbed(:structure_opco, opco: opco) }
 
       it 'retourne true' do
         expect(structure.est_une_structure_ocpo?).to be true
       end
     end
 
-    context "quand la structure est administrative mais n'a pas d'opco" do
-      let(:structure) { build_stubbed(:structure_administrative, opco: nil) }
-
-      before { allow(structure).to receive(:evapro?).and_return(true) }
-
-      it 'retourne false' do
-        expect(structure.est_une_structure_ocpo?).to be false
-      end
-    end
-
-    context "quand la structure est administrative avec opco mais n'est pas evapro" do
-      let(:structure) { build_stubbed(:structure_administrative, opco: opco) }
-
-      before { allow(structure).to receive(:evapro?).and_return(false) }
-
-      it 'retourne false' do
-        expect(structure.est_une_structure_ocpo?).to be false
-      end
-    end
-
-    context "quand la structure n'est pas administrative meme avec un opco" do
-      let(:structure) { build_stubbed(:structure_locale, opco: opco) }
-
-      before { allow(structure).to receive(:evapro?).and_return(true) }
+    context "quand la structure a un autre type" do
+      let(:structure) { build_stubbed(:structure_administrative) }
 
       it 'retourne false' do
         expect(structure.est_une_structure_ocpo?).to be false

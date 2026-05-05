@@ -79,7 +79,7 @@ class Ability < AbilityUtilisateur
     can :read, Structure, id: compte.structure_id
     structure_ids = compte.admin? ? compte.structure.subtree_ids : [ compte.structure_id ]
     can %i[envoyer_invitation copier_lien], StructureLocale, id: structure_ids
-    can %i[envoyer_invitation copier_lien], StructureAdministrative, id: structure_ids
+    can %i[envoyer_invitation copier_lien], StructureOpco, id: structure_ids
     can :read, Compte, structure_id: structure_ids
   end
 end

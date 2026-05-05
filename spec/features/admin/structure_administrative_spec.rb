@@ -48,73 +48,34 @@ role: :conseiller
         it { expect(page).to have_content structure.nom }
       end
 
-      describe 'bloc statistiques OPCO' do
-        context "quand la structure est EVAPRO et rattachée à un opco" do
-          let!(:structure) do
-            create(
-              :structure_administrative,
-              :avec_admin,
-              :eva_pro
-            )
-          end
-
-          it "affiche la section Statistiques avec le dashboard metabase opco" do
-            visit admin_structure_administrative_path(structure)
-
-            expect(page).to have_css("#bloc-statistiques-opco")
-            expect(page).not_to have_css("#bloc-statistiques")
-          end
+      context 'bloc statistiques OPCO' do
+        let!(:structure) do
+          create(
+            :structure_administrative,
+            :avec_admin
+          )
         end
 
-        context "quand la structure n'est pas EVAPRO" do
-          let!(:structure) do
-            create(
-              :structure_administrative,
-              :avec_admin,
-              :beneficiaire
-            )
-          end
+        it "affiche le dashboard metabase" do
+          visit admin_structure_administrative_path(structure)
 
-          it "n'affiche pas le dashboard metabase opco" do
-            visit admin_structure_administrative_path(structure)
-
-            expect(page).not_to have_css("#bloc-statistiques-opco")
-            expect(page).to have_css("#bloc-statistiques")
-          end
+          expect(page).not_to have_css("#bloc-statistiques-opco")
+          expect(page).to have_css("#bloc-statistiques")
         end
       end
 
-      describe "bloc membres - invitation" do
-        context "quand la structure est ocpo" do
+      context "bloc membres - invitation" do
           let!(:structure) do
             create(
               :structure_administrative,
-              :avec_admin,
-              :eva_pro
+              :avec_admin
             )
           end
 
-          it "affiche le bouton envoyer une invitation" do
-            visit admin_structure_administrative_path(structure)
+        it "n'affiche pas le bouton envoyer une invitation" do
+          visit admin_structure_administrative_path(structure)
 
-            expect(page).to have_content("Envoyer une invitation")
-          end
-        end
-
-        context "quand la structure administrative n'est pas ocpo" do
-          let!(:structure) do
-            create(
-              :structure_administrative,
-              :avec_admin,
-              :beneficiaire
-            )
-          end
-
-          it "n'affiche pas le bouton envoyer une invitation" do
-            visit admin_structure_administrative_path(structure)
-
-            expect(page).not_to have_content("Envoyer une invitation")
-          end
+          expect(page).not_to have_content("Envoyer une invitation")
         end
       end
     end

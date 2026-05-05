@@ -1,12 +1,12 @@
 <% id_modal = "fr-modal-invitation-#{structure.id}" %>
 <% form_id = "invitation-form-#{structure.id}" %>
-<% invitation_url = if structure.is_a?(StructureAdministrative)
-  envoyer_invitation_admin_structure_administrative_path(structure)
+<% invitation_url = if structure.is_a?(StructureOpco)
+  envoyer_invitation_admin_structure_opco_path(structure)
  else
   envoyer_invitation_admin_structure_locale_path(structure)
 end %>
-<% copier_lien_url = if structure.is_a?(StructureAdministrative)
-  copier_lien_admin_structure_administrative_path(structure)
+<% copier_lien_url = if structure.is_a?(StructureOpco)
+  copier_lien_admin_structure_opco_path(structure)
  else
   copier_lien_admin_structure_locale_path(structure)
 end %>

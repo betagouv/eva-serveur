@@ -11,11 +11,14 @@ describe 'Admin - Actualités', :js, type: :feature do
   it "ouvre le menu d'actions au clic sur le bouton menu" do
     visit admin_actualites_path
 
-    expect(page).to have_css('.actualite .bouton-menu')
-    expect(page).not_to have_css('.actualite .table_actions.montrer')
+    expect(page).to have_css(".actualite", text: "Une actualité de test")
+    within(".actualite", text: "Une actualité de test") do
+      expect(page).to have_css(".bouton-menu", visible: :all)
+      expect(page).not_to have_css(".table_actions.montrer", visible: :all)
 
-    find('.actualite .bouton-menu').click
+      find(".bouton-menu", visible: :all).click
 
-    expect(page).to have_css('.actualite .table_actions.montrer')
+      expect(page).to have_css(".table_actions.montrer", visible: :all)
+    end
   end
 end

@@ -118,11 +118,7 @@ describe Ability do
 
     it "peut lire les comptes d'une structure administrative non OPCO " \
        "et de ses structures filles" do
-      structure_admin_non_opco = create(
-        :structure_administrative,
-        :beneficiaire,
-        opco: nil
-      )
+      structure_admin_non_opco = create(:structure_opco)
       structure_fille = create(
         :structure_locale,
         :avec_admin,
@@ -285,9 +281,7 @@ describe Ability do
   end
 
   context 'Compte admin de structure administrative' do
-    let(:structure_administrative) do
-      create(:structure_administrative, :beneficiaire, opco: nil)
-    end
+    let(:structure_administrative) { create(:structure_administrative) }
     let(:compte) { create :compte_admin, structure: structure_administrative }
     let(:beneficiaire) { create :beneficiaire }
 

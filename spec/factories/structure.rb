@@ -38,15 +38,6 @@ FactoryBot.define do
 
     factory :structure_administrative, class: StructureAdministrative.to_s do
       type { 'StructureAdministrative' }
-
-      trait :eva_pro do
-        usage { AvecUsage::USAGE_EVAPRO }
-        association :opco
-      end
-
-      trait :beneficiaire do
-        usage { AvecUsage::USAGE_BENEFICIAIRES }
-      end
     end
 
     factory :structure_opco, class: StructureOpco.to_s do

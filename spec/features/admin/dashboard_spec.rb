@@ -272,10 +272,7 @@ describe 'Dashboard', type: :feature do
   end
 
   context "quand le compte a la vue OPCO" do
-    let(:opco) { create(:opco) }
-    let(:structure_opco) do
-      create(:structure_administrative, usage: "EVAPRO", opco: opco)
-    end
+    let(:structure_opco) { create(:structure_opco) }
 
     let!(:compte) do
       create :compte_superadmin,

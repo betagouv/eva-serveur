@@ -1,68 +1,39 @@
 require "rails_helper"
 
 RSpec.describe StructureAdministrative, type: :model do
-  describe "validations usage/opco" do
-    it "est invalide sans usage" do
-      structure = build(:structure_administrative, usage: nil)
+  describe "#structures_locales_filles" do
+    let(:structure) { create(:structure_administrative) }
 
-      expect(structure).not_to be_valid
-      expect(structure.errors[:usage]).to be_present
+    it "retourne les enfants de type StructureLocale" do
+      structure_locale = create(:structure_locale, parent: structure)
+
+      expect(structure.structures_locales_filles).to contain_exactly(structure_locale)
     end
 
-    it "est invalide avec un usage hors liste" do
-      structure = build(:structure_administrative, usage: "AUTRE_USAGE")
+    it "exclut les enfants qui ne sont pas des StructureLocale" do
+      create(:structure_administrative, parent: structure)
 
-      expect(structure).not_to be_valid
-      expect(structure.errors[:usage]).to be_present
+      expect(structure.structures_locales_filles).to be_empty
     end
 
-    it "requiert un opco en usage EVAPRO" do
-      structure = build(:structure_administrative, usage: AvecUsage::USAGE_EVAPRO, opco: nil)
-
-      expect(structure).not_to be_valid
-      expect(structure.errors[:opco]).to be_present
-    end
-
-    it "accepte EVAPRO quand un opco est présent" do
-      structure = build(:structure_administrative, usage: AvecUsage::USAGE_EVAPRO,
-opco: create(:opco))
-
-      expect(structure).to be_valid
+    it "retourne une collection vide si aucun enfant" do
+      expect(structure.structures_locales_filles).to be_empty
     end
   end
 
-  describe "nettoyage des champs selon l'usage" do
-    it "supprime la structure référente quand l'usage passe en EVAPRO" do
-      structure_referente = create(:structure_administrative)
-      opco = create(:opco)
-      structure = create(
-        :structure_administrative,
-        usage: AvecUsage::USAGE_BENEFICIAIRES,
-        parent: structure_referente
-      )
+  describe "#metabase_query_params" do
+    let(:structure) { create(:structure_administrative) }
 
-      structure.update!(usage: AvecUsage::USAGE_EVAPRO, opco: opco)
+    it "retourne un hash avec les ids des structures locales filles" do
+      structure_locale = create(:structure_locale, parent: structure)
 
-      expect(structure.reload.parent_id).to be_nil
-      expect(structure.opco).to eq(opco)
+      expect(structure.metabase_query_params).to eq({ "structures" => [ structure_locale.id ] })
     end
 
-    it "supprime l'opco quand l'usage passe en Eva: bénéficiaires" do
-      opco = create(:opco)
-      structure_referente = create(:structure_administrative)
-      structure = create(
-        :structure_administrative,
-        usage: AvecUsage::USAGE_EVAPRO,
-        opco: opco
-      )
+    it "retourne un hash avec une liste vide si aucune structure locale fille" do
+      create(:structure_administrative, parent: structure)
 
-      structure.update!(
-        usage: AvecUsage::USAGE_BENEFICIAIRES,
-        parent: structure_referente
-      )
-
-      expect(structure.reload.opco_id).to be_nil
-      expect(structure.parent).to eq(structure_referente)
+      expect(structure.metabase_query_params).to eq({ "structures" => [] })
     end
   end
 end

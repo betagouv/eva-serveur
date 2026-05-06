@@ -2,10 +2,7 @@ require "rails_helper"
 
 describe Admin::EvaluationsController, type: :controller do
   describe "GET #index avec un compte OPCO restreint" do
-    let(:opco) { create(:opco) }
-    let(:structure) do
-      create(:structure_administrative, :avec_admin, usage: AvecUsage::USAGE_EVAPRO, opco: opco)
-    end
+    let(:structure) { create(:structure_opco, :avec_admin) }
     let(:compte_connecte) { create(:compte_conseiller, :acceptee, structure: structure) }
 
     before { sign_in compte_connecte }

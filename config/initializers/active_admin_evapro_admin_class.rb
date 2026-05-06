@@ -15,7 +15,7 @@ module ActiveAdminEvaproAdminClass
     current_compte = if respond_to?(:controller) && controller.respond_to?(:current_compte)
       controller.current_compte
     end
-    @__evapro_admin_layout = current_compte&.structure&.evapro?
+    @__evapro_admin_layout = current_compte&.utilisateur_entreprise? || current_compte&.utilisateur_opco?
   end
 end
 

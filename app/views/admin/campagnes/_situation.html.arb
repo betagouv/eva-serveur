@@ -5,7 +5,7 @@ li class: "campagne-situation d-flex align-items-center" do
     situation_illustration(situation_configuration.situation, couleur_bord: couleur)
   end
   div class: "situation__texte" do
-    div class: "d-flex mb-2" do
+    div class: "d-flex fr-mb-2" do
       h3 class: "fr-text--bold fr-text--md fr-mb-0" do
         situation_configuration.situation.libelle
       end

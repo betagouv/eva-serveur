@@ -37,7 +37,7 @@ div id: "evaluation__details", class: "row" do
                     parties_selectionnees: params[:parties_selectionnees],
                     format: :pdf
                   },
-                  class: "mt-2 fr-btn fr-btn--md",
+                  class: "fr-mt-2 fr-btn fr-btn--md",
                   style: "margin: auto;",
                   target: "_blank",
                   rel: "noopener")

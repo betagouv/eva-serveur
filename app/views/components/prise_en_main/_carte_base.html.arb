@@ -27,7 +27,8 @@ div class: "carte-prise-en-main" do
       end
       if lien_action
         alignement = etape_en_cours == "confirmation_email" ? "between" : "end"
-        div class: "carte__action d-flex justify-content-#{alignement} align-items-center mt-6" do
+        div_class = "carte__action d-flex justify-content-#{alignement} align-items-center fr-mt-6"
+        div class: div_class do
           if etape_en_cours == "confirmation_email"
             span md t("etapes.#{etape_en_cours}.question",
                       scope: scope)

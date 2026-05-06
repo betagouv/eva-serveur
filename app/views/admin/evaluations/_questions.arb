@@ -1,8 +1,8 @@
 unless restitution.questions_redaction.empty?
-  h4 t(".situation", situation: situation_libelle), class: "situation-redaction mb-3"
+  h4 t(".situation", situation: situation_libelle), class: "situation-redaction fr-mb-3"
   restitution.questions_redaction.each do |question, reponse|
-    div class: "row mb-3" do
-      div class: "col-8 mb-4" do
+    div class: "row fr-mb-3" do
+      div class: "col-8 fr-mb-4" do
         h5 t("admin.restitutions.reponse_expression_ecrite", question: question.libelle),
            class: "titre-redaction"
       end
@@ -11,16 +11,16 @@ unless restitution.questions_redaction.empty?
       span class: "crochet-aide-redaction" do
         image_tag "crochet-aide-redaction.svg", alt: ""
       end
-      div class: "col-4 mb-5" do
-        div simple_format(reponse), class: "my-2 note-redaction" do
+      div class: "col-4 fr-mb-5" do
+        div simple_format(reponse), class: "fr-my-2 note-redaction" do
           span class: "image-redaction" do
             image_tag "redaction.svg", alt: t("admin.restitutions.redaction")
           end
         end
       end
-      div class: "col-4 mb-5" do
+      div class: "col-4 fr-mb-5" do
         div class: "aide-redaction-container" do
-          div class: "my-2 aide-redaction" do
+          div class: "fr-my-2 aide-redaction" do
             div md t("admin.restitutions.aide_interpretation_expression_ecrite")
             span class: "image-redaction" do
               image_tag "aide-redaction.svg", alt: ""

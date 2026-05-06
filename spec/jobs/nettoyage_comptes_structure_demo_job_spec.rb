@@ -36,7 +36,25 @@ describe NettoyageComptesStructureDemoJob, type: :job do
     expect(comptes_pas_en_attente.with_deleted.count).to eq(1)
   end
 
-  it 'Ne supprime le comptes nouveau.anlci@yopmail.fr' do
+  it 'Supprime les invitations référençant le compte en attente (invitant ou compte)' do
+    structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
+    create :compte_admin, structure: structure
+    compte_en_attente = create :compte_conseiller,
+                               structure: structure,
+                               statut_validation: :en_attente
+    autre_compte = create :compte_conseiller, structure: structure
+    create :invitation, structure: structure, invitant: compte_en_attente
+    create :invitation, :acceptee, structure: structure,
+                                   invitant: autre_compte,
+                                   compte: compte_en_attente
+
+    described_class.perform_now
+
+    expect(Invitation.count).to eq(0)
+    expect(Compte.with_deleted.where(id: compte_en_attente.id).count).to eq(0)
+  end
+
+  it 'Ne supprime pas le compte nouveau.anlci@yopmail.fr' do
     structure = create :structure_locale, nom: Eva::STRUCTURE_DEMO
     create :compte_admin, structure: structure
     create :compte_conseiller, structure: structure,

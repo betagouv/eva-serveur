@@ -11,6 +11,7 @@ class NettoyageComptesStructureDemoJob < ApplicationJob
       next if compte.email == Eva::EMAIL_DEMO_EN_ATTENTE
 
       ActiveRecord::Base.transaction { vide_compte compte }
+      Invitation.where(invitant: compte).or(Invitation.where(compte: compte)).delete_all
       compte.really_destroy!
     end
   end

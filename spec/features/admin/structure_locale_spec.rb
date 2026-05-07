@@ -10,6 +10,21 @@ describe 'Admin - Structure locale', type: :feature do
       before { visit admin_structures_locales_path }
 
       it { expect(page).to have_content 'Ma structure' }
+
+      describe 'filtre par siret' do
+        let!(:structure_avec_siret) {
+          create :structure_locale, nom: 'Structure SIRET', siret: '85170326400024'
+        }
+        let!(:autre_structure) { create :structure_locale, nom: 'Autre structure' }
+
+        it 'trouve une structure en saisissant le siret avec des espaces' do
+          fill_in 'q[siret_cont]', with: '851 703 264 00024'
+          click_on 'Filtrer'
+
+          expect(page).to have_content 'Structure SIRET'
+          expect(page).not_to have_content 'Autre structure'
+        end
+      end
     end
 
     describe 'show' do
@@ -18,7 +33,7 @@ describe 'Admin - Structure locale', type: :feature do
       end
       let!(:compte) do
         create :compte, structure: structure, statut_validation: statut_validation,
-role: :conseiller
+               role: :conseiller
       end
       let(:statut_validation) { :en_attente }
 
@@ -40,7 +55,7 @@ role: :conseiller
 
           fill_in "invitation_email", with: "invite@eva.fr", visible: :all
           fill_in "invitation_message_#{structure.id}", with: "Bienvenue dans l'équipe.",
-visible: :all
+                  visible: :all
 
           find("button", text: "Envoyer l'invitation", visible: :all).click
 

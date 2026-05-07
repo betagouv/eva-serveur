@@ -18,19 +18,11 @@ describe SiretInput, type: :input do
   describe "#formatted_siret_value" do
     subject(:formatted_siret_value) { input.send(:formatted_siret_value) }
 
-    context "quand le siret est brut" do
-      let(:value) { "12345678901234" }
-
-      it "utilise le formatage partagé" do
-        expect(formatted_siret_value).to eq("123 456 789 01234")
-      end
-    end
-
-    context "quand le siret est partiel" do
+    context "quand le siret est présent" do
       let(:value) { "1234" }
 
-      it "ne lève pas d'exception" do
-        expect { formatted_siret_value }.not_to raise_error
+      it "délègue à FormatageSiretHelper" do
+        expect(FormatageSiretHelper).to receive(:formater_siret).with("1234").and_return("123 4")
         expect(formatted_siret_value).to eq("123 4")
       end
     end
@@ -38,7 +30,8 @@ describe SiretInput, type: :input do
     context "quand le siret est vide" do
       let(:value) { nil }
 
-      it "retourne nil" do
+      it "ne délègue pas le formatage" do
+        expect(FormatageSiretHelper).not_to receive(:formater_siret)
         expect(formatted_siret_value).to be_nil
       end
     end

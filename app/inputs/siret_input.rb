@@ -48,7 +48,7 @@ class SiretInput < Formtastic::Inputs::StringInput
     return nil unless object.respond_to?(method)
 
     raw = object.public_send(method)
-    FormatageSiret.formater(raw) if raw.present?
+    FormatageSiretHelper.formater_siret(raw) if raw.present?
   end
 
   def annuaire_siret_link_html

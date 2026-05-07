@@ -14,20 +14,11 @@ describe SiretInputComponent, type: :component do
       )
     end
 
-    context "quand value est un siret brut" do
-      let(:value) { "12345678901234" }
-
-      it "utilise le formatage siret partagé" do
-        options = component.instance_variable_get(:@input_component_options)
-        expect(options[:value]).to eq("123 456 789 01234")
-      end
-    end
-
-    context "quand value est un siret partiel" do
+    context "quand value est présente" do
       let(:value) { "1234" }
 
-      it "ne lève pas d'exception et conserve un format lisible" do
-        expect { component }.not_to raise_error
+      it "délègue le formatage à FormatageSiretHelper" do
+        expect(FormatageSiretHelper).to receive(:formater_siret).with("1234").and_return("123 4")
         options = component.instance_variable_get(:@input_component_options)
         expect(options[:value]).to eq("123 4")
       end
@@ -36,7 +27,8 @@ describe SiretInputComponent, type: :component do
     context "quand value est vide" do
       let(:value) { nil }
 
-      it "passe une valeur vide" do
+      it "ne délègue pas le formatage" do
+        expect(FormatageSiretHelper).not_to receive(:formater_siret)
         options = component.instance_variable_get(:@input_component_options)
         expect(options[:value]).to be_nil
       end

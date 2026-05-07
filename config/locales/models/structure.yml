@@ -31,7 +31,7 @@ fr:
         updated_at: Mise à jour le
         nom: Nom de structure
         code_postal: Code Postal
-        siret: SIRET de l'organisation que vous représentez
+        siret: SIRET
         statut_siret: Statut SIRET
         statut_siret_true: vérifié
         statut_siret_false: non vérifié

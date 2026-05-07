@@ -12,6 +12,7 @@ ActiveAdmin.register StructureLocale do
          as: :select,
          collection: ApplicationController.helpers.collection_types_structures
   filter :code_postal
+  filter :siret
   filter :region,
          as: :select,
          collection: proc { Structure.distinct.order(:region).pluck(:region) }

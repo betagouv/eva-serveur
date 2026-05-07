@@ -22,7 +22,7 @@
             <% end %>
           </div>
         <% end %>
-        
+
         <%= form.input :structure_confirmee, as: :boolean, label: t("inscription.structures.show.confirme_structure"), required: false %>
         <% unless @compte.cree_via_invitation_acceptee? %>
           <p class="structure-confirmation-mention fr-mt-2w"><%= t("inscription.structures.show.mention_acces") %></p>

@@ -115,6 +115,10 @@ allow_blank: true
     %w[nom]
   end
 
+  ransacker :siret, formatter: proc { |v| v.to_s.gsub(/\s+/, "") } do |parent|
+    parent.table[:siret]
+  end
+
   def effectif
     Compte.where(structure: self).count
   end

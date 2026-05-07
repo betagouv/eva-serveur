@@ -48,15 +48,7 @@ class SiretInput < Formtastic::Inputs::StringInput
     return nil unless object.respond_to?(method)
 
     raw = object.public_send(method)
-    format_siret_display(raw) if raw.present?
-  end
-
-  def format_siret_display(raw)
-    digits = raw.to_s.gsub(/\D/, "")[0, 14]
-    return "" if digits.blank?
-
-    # Format 3-3-3-5 : 123 456 789 01234
-    [ digits[0, 3], digits[3, 3], digits[6, 3], digits[9, 5] ].reject(&:empty?).join(" ")
+    FormatageSiret.formater(raw) if raw.present?
   end
 
   def annuaire_siret_link_html

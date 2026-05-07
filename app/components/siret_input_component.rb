@@ -28,7 +28,7 @@ class SiretInputComponent < ViewComponent::Base
       hint: hint,
       form: form,
       method: method,
-      value: value.present? ? format_siret_display(value) : nil,
+      value: value.present? ? FormatageSiret.formater(value) : nil,
       type: "text",
       required: required,
       placeholder: "123 456 789 01234",
@@ -39,16 +39,6 @@ class SiretInputComponent < ViewComponent::Base
     }
     @input_component_options = base.merge(input_component_options)
     @input_component_options[:input_html] =
-siret_input_html.merge(@input_component_options[:input_html] || {})
-  end
-
-  private
-
-  def format_siret_display(raw)
-    digits = raw.to_s.gsub(/\D/, "")[0, 14]
-    return "" if digits.blank?
-
-    # Format 3-3-3-5 : 123 456 789 01234
-    [ digits[0, 3], digits[3, 3], digits[6, 3], digits[9, 5] ].reject(&:empty?).join(" ")
+      siret_input_html.merge(@input_component_options[:input_html] || {})
   end
 end

@@ -10,15 +10,15 @@ li class: "campagne-situation d-flex align-items-center" do
         situation_configuration.situation.libelle
       end
       if questionnaire == Questionnaire::LIVRAISON_AVEC_REDACTION
-        render(Tag.new("+ #{t('.redaction')}", classes: "ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.redaction')}", classes: "fr-ml-1 tag-categorie green"))
       end
       if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT ||
         questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
-        render(Tag.new("+ #{t('.autopositionnement')}", classes: "ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.autopositionnement')}", classes: "fr-ml-1 tag-categorie green"))
       end
       if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_SANTE ||
         questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
-        render(Tag.new("+ #{t('.sante')}", classes: "ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.sante')}", classes: "fr-ml-1 tag-categorie green"))
       end
     end
     para situation_configuration.situation.description

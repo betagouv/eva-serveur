@@ -27,7 +27,7 @@
     "lint:css:fix": "stylelint \"app/assets/stylesheets/**/*.scss\" --fix"
   },
   "dependencies": {
-    "@gouvfr/dsfr": "^1.14.2",
+    "@gouvfr/dsfr": "^1.14.4",
     "i18n-js": "^4.5.3",
     "tarteaucitronjs": "^1.32.0"
   }

@@ -128,6 +128,7 @@ compte_id: compte.id
     droit_structure_lecture_et_update(compte)
     droit_structure_invitation(compte)
     cannot(:destroy, Structure) { |s| Compte.exists?(structure: s) }
+    cannot %i[read update create destroy], StructureOpco if compte.administratif?
     return if compte.structure_id.present?
 
     can :read, ActiveAdmin::Page, name: "recherche_structure",

@@ -111,4 +111,27 @@ describe 'Admin - Structure Operateur de competence' do
       end
     end
   end
+
+  context 'en tant qu\'admin de structure administrative' do
+    let(:structure_administrative) { create(:structure_administrative) }
+    let!(:compte_admin) { create(:compte_admin, structure: structure_administrative) }
+
+    before { connecte(compte_admin) }
+
+    describe 'index' do
+      it 'ne peut pas accéder à la liste des structures opco' do
+        visit admin_structures_opcos_path
+        expect(page).to have_content "Vous n'êtes pas autorisé à exécuter cette action"
+      end
+    end
+
+    describe 'show' do
+      let!(:structure_opco) { create(:structure_opco) }
+
+      it 'ne peut pas accéder au detail d\'une structure opco' do
+        visit admin_structure_opco_path(structure_opco)
+        expect(page).to have_content "Vous n'êtes pas autorisé à exécuter cette action"
+      end
+    end
+  end
 end

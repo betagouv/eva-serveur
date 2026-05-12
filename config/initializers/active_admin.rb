@@ -241,7 +241,8 @@ ActiveAdmin.setup do |config|
   config.register_javascript 'plausible.js'
   config.register_javascript "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"
   config.register_stylesheet "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
-  config.register_javascript '/dsfr/dsfr.nomodule.min.js'
+  config.register_javascript '/dsfr/dsfr.module.min.js', type: "module"
+  config.register_javascript '/dsfr/dsfr.nomodule.min.js', nomodule: true
 
   # == CSV options
   #

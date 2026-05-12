@@ -305,7 +305,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
     def structures_opcos_link
-    return unless anlci_or_administratif?
+    return unless anlci?
 
     {
       label: "Structures opérateurs de compétences",
@@ -358,6 +358,10 @@ class NavigationComponent < ViewComponent::Base
 
   def anlci_or_administratif?
     @current_compte&.anlci? || @current_compte&.administratif?
+  end
+
+  def anlci?
+    @current_compte&.anlci?
   end
 
   def superadmin?

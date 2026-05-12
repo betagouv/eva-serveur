@@ -1,6 +1,6 @@
 ActiveAdmin.register StructureOpco do
   menu parent: I18n.t(".menu_structure"), if: proc {
-    current_compte.anlci? || current_compte.administratif?
+    current_compte.anlci?
   }
 
   permit_params :nom, :siret, :opco_id

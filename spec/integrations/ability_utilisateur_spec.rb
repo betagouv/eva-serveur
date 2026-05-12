@@ -71,6 +71,14 @@ describe AbilityUtilisateur do
       it "peut modifier les campagnes des structures filles" do
         expect(autorisations_admin_administratif).to be_able_to(:update, campagne_fille)
       end
+
+      it "n'a aucun droit sur les structures opco" do
+        structure_opco = create(:structure_opco)
+        expect(autorisations_admin_administratif).not_to be_able_to(:read, structure_opco)
+        expect(autorisations_admin_administratif).not_to be_able_to(:update, structure_opco)
+        expect(autorisations_admin_administratif).not_to be_able_to(:create, structure_opco)
+        expect(autorisations_admin_administratif).not_to be_able_to(:destroy, structure_opco)
+      end
     end
   end
 

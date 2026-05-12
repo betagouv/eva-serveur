@@ -14,7 +14,6 @@
 //= require filtres_dates
 //= require form_toggle_submit
 //= require toggle_usage_structure
-//= require header_menu
 //= require bouton_menu_actions
 //= require cgu
 //= require siret_input

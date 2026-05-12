@@ -12,7 +12,7 @@
                   <%= "aria-current=\"#{group_current}\"".html_safe if group_current %>>
             <%= link[:label] %>
           </button>
-          <div class="fr-collapse fr-menu" id="<%= menu_id %>" hidden aria-hidden="true">
+          <div class="fr-collapse fr-menu" id="<%= menu_id %>" aria-hidden="true">
             <ul class="fr-menu__list">
               <% link[:links].each do |child_link| %>
                 <% child_aria_current = aria_current(child_link) %>

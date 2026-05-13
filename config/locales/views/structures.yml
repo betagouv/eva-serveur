@@ -31,7 +31,6 @@ fr:
             conseiller: Conseiller
           message_label: Message (optionnel)
           message_hint: Ajouter une note à votre message
-          copier_lien: Copier le lien d'invitation
           envoyer: Envoyer l'invitation
         voir_membres: Voir la liste
       mes_campagnes:

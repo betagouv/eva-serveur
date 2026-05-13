@@ -85,21 +85,6 @@ ActiveAdmin.register StructureLocale do
     envoyer_invitation_et_rediriger
   end
 
-  member_action :copier_lien, method: :post do
-    unless compte_autorise_pour_invitation?
-      render json: { error: I18n.t("admin.structures.membres.invitation_non_autorisee") },
-status: :forbidden
-      return
-    end
-
-    invitation = resource.invitations.create!(
-      invitant: current_compte,
-      role: Compte::ROLE_PAR_DEFAUT
-    )
-    url = inscription_nouveau_compte_url(invitation_token: invitation.token)
-    render json: { url: url }
-  end
-
   form partial: "form"
 
   controller do

@@ -45,10 +45,10 @@ class SiretInput < Formtastic::Inputs::StringInput
   end
 
   def formatted_siret_value
-    return nil unless object.respond_to?(method)
+    return unless object.respond_to?(method)
 
     raw = object.public_send(method)
-    FormatageSiretHelper.formater_siret(raw) if raw.present?
+    FormatageSiretHelper.formater_siret(raw)
   end
 
   def annuaire_siret_link_html

@@ -6,11 +6,15 @@ ActiveAdmin.register StructureOpco do
   permit_params :nom, :siret, :opco_id
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
+  filter :siret
   filter :created_at
 
   index dsfr_table: proc { true } do
     column :nom do |structure|
       link_to structure.nom, admin_structure_opco_path(structure)
+    end
+    column :siret do |structure|
+      FormatageSiretHelper.formater_siret(structure.siret)
     end
     column :created_at do |structure|
       l(structure.created_at, format: :sans_heure)

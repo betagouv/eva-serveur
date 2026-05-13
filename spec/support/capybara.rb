@@ -12,7 +12,7 @@ end
 
 Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.default_max_wait_time = 5
-Capybara.server = :puma, { Silent: true }
+Capybara.server = :puma, { Silent: true, Threads: '1:1' }
 
 WebMock.disable_net_connect!(allow_localhost: true)
 

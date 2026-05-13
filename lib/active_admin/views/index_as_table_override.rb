@@ -9,6 +9,8 @@ module ActiveAdmin
 
         return super unless presenter_dsfr_table
 
+        instance_exec(&page_presenter[:content_before]) if page_presenter[:content_before]
+
         div class: wrapper_classes(page_presenter), data: { fr_js_table: true } do
           nested_div("fr-table__wrapper") do
             nested_div("fr-table__container") do

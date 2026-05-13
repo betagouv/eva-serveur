@@ -25,7 +25,6 @@ module ActiveAdmin
       def wrapper_classes(page_presenter)
         [
           "fr-table",
-          "fr-table--no-caption",
           "fr-m-0",
           "dsfr-table-active-admin",
           page_presenter[:class]

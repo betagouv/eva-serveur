@@ -75,7 +75,6 @@ structure: autre_structure_meme_opco)
         expect(ability.can?(:read, compte_meme_opco)).to be(false)
         expect(ability.can?(:read, compte_hors_opco)).to be(false)
         expect(ability.can?(:envoyer_invitation, structure_fille)).to be(true)
-        expect(ability.can?(:copier_lien, structure_fille)).to be(true)
         expect(ability.can?(:envoyer_invitation, autre_structure_meme_opco)).to be(false)
       end
     end

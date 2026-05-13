@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class CardDiagnostiqueComponent < ViewComponent::Base
+  # Rails `truncate` compte la longueur totale incluant l'omission.
+  OMISSION = "…"
+  DESCRIPTION_TRUNCATE_AT = 75 + OMISSION.length
+
   def initialize(
     titre:,
     description: nil,
@@ -21,5 +25,11 @@ class CardDiagnostiqueComponent < ViewComponent::Base
 
   def opco?
     @opco.present?
+  end
+
+  def description_affichee
+    return if @description.blank?
+
+    @description.to_s.truncate(DESCRIPTION_TRUNCATE_AT, omission: OMISSION)
   end
 end

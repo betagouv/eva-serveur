@@ -71,8 +71,8 @@ ActiveAdmin.register Beneficiaire do
     render partial: "show"
   end
 
-  index dsfr_table: proc { true } do
-    render "admin/beneficiaires/modal_fusion"
+  index dsfr_table: proc { true },
+        content_before: proc { render "admin/beneficiaires/modal_fusion" } do
     render "index", context: self
   end
 

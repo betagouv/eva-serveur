@@ -28,7 +28,7 @@ class SiretInputComponent < ViewComponent::Base
       hint: hint,
       form: form,
       method: method,
-      value: value.present? ? FormatageSiretHelper.formater_siret(value) : nil,
+      value: FormatageSiretHelper.formater_siret(value),
       type: "text",
       required: required,
       placeholder: "123 456 789 01234",

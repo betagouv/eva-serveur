@@ -6,11 +6,15 @@ ActiveAdmin.register StructureAdministrative do
   permit_params :nom, :parent_id, :siret
 
   filter :nom, filters: [ :contains_unaccent, :eq ]
+  filter :siret
   filter :created_at
 
   index dsfr_table: proc { true } do
     column :nom do |sa|
       link_to sa.nom, admin_structure_administrative_path(sa)
+    end
+    column :siret do |structure|
+      FormatageSiretHelper.formater_siret(structure.siret)
     end
     column :created_at do |structure|
       l(structure.created_at, format: :sans_heure)

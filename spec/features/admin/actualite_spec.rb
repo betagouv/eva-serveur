@@ -10,7 +10,6 @@ describe 'Admin - Actualités', :js, type: :feature do
 
   it "ouvre le menu d'actions au clic sur le bouton menu" do
     visit admin_actualites_path
-    page.find(".actualite", text: "Une actualité de test")
 
     expect(page).to have_css(".actualite", text: "Une actualité de test")
     within(".actualite", text: "Une actualité de test") do
@@ -18,7 +17,6 @@ describe 'Admin - Actualités', :js, type: :feature do
       expect(page).not_to have_css(".table_actions.montrer", visible: :all)
 
       find(".bouton-menu", visible: :all).click
-      sleep 0.25
 
       expect(page).to have_css(".table_actions.montrer", visible: :all)
     end

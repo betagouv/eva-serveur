@@ -10,7 +10,7 @@ div class: "referentiel_anlci bg-information" do
           div(class: "col texte-explications") { md t("explications-cefr", scope: scope) }
         end
       end
-      div class: "row pl-2 pb-3 pt-3 align-items-center" do
+      div class: "row fr-pl-2v fr-pb-4v fr-pt-4v align-items-center" do
         div class: "col-auto" do
           div t("francais", scope: scope)
           div t("ordre", scope: scope), class: "ordre"

@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def rapport_colonne_class
-    "col-4 fr-px-5 fr-mb-4"
+    "col-4 fr-px-12v fr-mb-6v"
   end
 
   def inline_svg_content(attachment, options = {})

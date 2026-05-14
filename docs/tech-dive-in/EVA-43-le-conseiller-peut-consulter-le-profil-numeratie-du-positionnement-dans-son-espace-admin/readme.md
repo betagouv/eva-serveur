@@ -173,7 +173,7 @@ end
       render 'entete_page', restitution_globale: restitution_globale
 
       if pdf
-        h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center fr-mt-5 fr-mb-4'
+        h2 t('titre', scope: 'admin.restitutions.numeratie'), class: 'text-center fr-mt-12v fr-mb-6v'
       else
         h2 t('titre', scope: 'admin.restitutions.numeratie'),
            class: titre_avec_aide_illettrisme.to_s

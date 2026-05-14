@@ -3,7 +3,7 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
     render "admin/evaluations/eva/entete_page", restitution_globale: restitution_globale
 
     h2 t("titre", scope: "admin.restitutions.anlci"),
-       class: "text-center fr-mt-5 fr-mb-4 evaluation__titre"
+       class: "text-center fr-mt-12v fr-mb-6v evaluation__titre"
   else
     h2 t("titre", scope: "admin.restitutions.anlci"), class: "evaluation__titre"
   end
@@ -11,7 +11,7 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
   div class: "panel panel--avec-references" do
     div class: "row no-gutters recommandation-anlci marges-page" do
       div class: "col-auto" do
-        image_tag "logo/anlci.svg", class: "pr-5", alt: t("logo_anlci")
+        image_tag "logo/anlci.svg", class: "fr-pr-12v", alt: t("logo_anlci")
       end
       div class: "col" do
         md t("recommandation", scope: "admin.restitutions.anlci")

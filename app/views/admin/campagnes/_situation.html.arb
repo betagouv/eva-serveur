@@ -5,20 +5,20 @@ li class: "campagne-situation d-flex align-items-center" do
     situation_illustration(situation_configuration.situation, couleur_bord: couleur)
   end
   div class: "situation__texte" do
-    div class: "d-flex fr-mb-2" do
+    div class: "d-flex fr-mb-2v" do
       h3 class: "fr-text--bold fr-text--md fr-mb-0" do
         situation_configuration.situation.libelle
       end
       if questionnaire == Questionnaire::LIVRAISON_AVEC_REDACTION
-        render(Tag.new("+ #{t('.redaction')}", classes: "fr-ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.redaction')}", classes: "fr-ml-1v tag-categorie green"))
       end
       if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT ||
         questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
-        render(Tag.new("+ #{t('.autopositionnement')}", classes: "fr-ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.autopositionnement')}", classes: "fr-ml-1v tag-categorie green"))
       end
       if questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_SANTE ||
         questionnaire == Questionnaire::SOCIODEMOGRAPHIQUE_AUTOPOSITIONNEMENT_SANTE
-        render(Tag.new("+ #{t('.sante')}", classes: "fr-ml-1 tag-categorie green"))
+        render(Tag.new("+ #{t('.sante')}", classes: "fr-ml-1v tag-categorie green"))
       end
     end
     para situation_configuration.situation.description

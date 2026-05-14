@@ -18,7 +18,7 @@ div class: "evaluation__restitution-globale #{class_css}" do
 
       if pdf
         h2 t(:titre, scope: [ :admin, :evaluations, :restitution_globale, :prise_en_main ]),
-class: "text-center fr-mt-5 fr-mb-4 evaluation__titre"
+class: "text-center fr-mt-12v fr-mb-6v evaluation__titre"
       else
         h2 t(:titre, scope: [ :admin, :evaluations, :restitution_globale, :prise_en_main ]),
 class: "evaluation__titre"
@@ -66,7 +66,7 @@ class: "evaluation__titre"
 
       if pdf
         h2 t("titre", scope: "admin.restitutions.litteratie"),
-           class: "text-center fr-mt-5 fr-mb-4 evaluation__titre"
+           class: "text-center fr-mt-12v fr-mb-6v evaluation__titre"
       else
         h2 t("titre", scope: "admin.restitutions.litteratie"), class: "evaluation__titre"
       end

@@ -9,7 +9,7 @@ div class: "col-auto badge" do
   end
 end
 div class: "col" do
-  h3 class: "restitution-h3 fr-mb-3 fr-mt-0" do
+  h3 class: "restitution-h3 fr-mb-4v fr-mt-0" do
     div t(:titre, scope: scope)
   end
 

@@ -2,7 +2,7 @@
 <% reponse = mise_en_action_presenter.a_mise_en_action? && mise_en_action_presenter.mise_en_action_avec_qualification? ? "card__banner--succes" : "card__banner--en-attente" %>
 
 <div class="card__banner card__banner--illettrisme <%= reponse %>">
-  <div class= 'container d-flex fr-py-3v fr-px-4v'>
+  <div class= 'container d-flex fr-py-4v fr-px-6v'>
     <div class='d-flex align-items-center justify-content-center' aria-hidden="true">
       <%= inline_svg_tag "banner_icone_question.svg", class: "card__banner__icone" %>
     </div>

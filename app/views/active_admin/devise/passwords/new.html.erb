@@ -1,26 +1,77 @@
-<div id="active_admin_content">
-  <% content_for :titre do %>
-    <%= t("active_admin.devise.reset_password.title") -%>
-  <% end %>
-  <div id="login" class="panel">
-    <%= link_to t("active_admin.devise.login.lien_retour"),
-                new_compte_session_path,
-                class: "lien-retour",
-                aria: { label: t("active_admin.devise.login.description_lien_retour") } %>
-    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [ :email ] } %>
-    <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-      if params[:token_invalide]
-        para para t("active_admin.devise.reset_password.token_invalide")
-        br
-        para t("active_admin.devise.reset_password.saisir_a_nouveau")
-        br
-      end
-      f.inputs do
-        f.input :email
-      end
-      f.actions do
-        f.action :submit, label: t("active_admin.devise.reset_password.submit"), button_html: { value: t("active_admin.devise.reset_password.submit") }
-      end
-    end %>
+<% content_for :title, @reset_password.page_title %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<div class="page-reset-password <%= @reset_password.wrapper_modifier_class %>">
+  <div class="page-informations-compte">
+    <% if @reset_password.invalid_link? %>
+      <div class="page-reset-password__alert-band">
+        <%= dsfr_alert(type: :error, title: t("active_admin.devise.reset_password.invalid_link.alert_titre"), html_attributes: { class: "fr-mb-0v page-reset-password__alert" }) do %>
+          <%= t("active_admin.devise.reset_password.invalid_link.alert_description") %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @reset_password.request_email? %>
+      <%= render TexteIntroComponent.new(
+        titre: @reset_password.t_email(:titre_intro),
+        texte: @reset_password.t_email(:sous_titre_intro)
+      ) %>
+    <% end %>
+
+    <%= render CarteV2Component.new(
+      titre: @reset_password.t_email(:titre_carte),
+      sous_titre: @reset_password.t_email(:sous_titre_carte)
+    ) do %>
+      <%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, id: "reset-password-email-form" }) do |f| %>
+        <%= f.semantic_errors *champs_non_affiches(f.object.errors.messages.keys, [ :email ]) %>
+        <%= f.inputs do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "#{resource_name}_email",
+                label: @reset_password.t_email(:email_label),
+                hint: @reset_password.t_email(:hint_email),
+                form: f,
+                method: :email,
+                type: "email",
+                required: true,
+                autocomplete: "email"
+              ) %>
+            </div>
+            <div class="fr-col-12">
+              <div class="informations-compte-actions">
+                <%= render BoutonDsfrComponent.new(
+                  new_compte_session_path,
+                  type: :secondary,
+                  tag: :a,
+                  class: "page-reset-password__bouton-annuler"
+                ) do %>
+                  <%= @reset_password.t_email(:annuler) %>
+                <% end %>
+                <%= render BoutonDsfrComponent.new(
+                  @reset_password.t_email(:submit),
+                  type: :primary,
+                  tag: :submit,
+                  id: @reset_password.email_submit_button_id,
+                  class: "page-reset-password__bouton-principal",
+                  disabled: true,
+                  data: { initial_disabled: true }
+                ) do %>
+                  <%= @reset_password.t_email(:submit) %>
+                <% end %>
+              </div>
+            </div>
+            <% if @reset_password.invalid_link? %>
+              <div class="fr-col-12">
+                <%= link_to t("active_admin.devise.reset_password.invalid_link.lien_accueil"),
+                            new_compte_session_path,
+                            class: "page-reset-password__lien-accueil fr-link",
+                            aria: { label: t("active_admin.devise.reset_password.invalid_link.lien_accueil_description") } %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>

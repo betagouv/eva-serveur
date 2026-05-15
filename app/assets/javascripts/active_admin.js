@@ -32,6 +32,7 @@
 //= require invitation_modal
 //= require modal_dashboard_dsfr
 //= require nouveau_compte
+//= require reset_password
 
 //= require chartkick
 //= require Chart.bundle

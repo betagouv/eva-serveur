@@ -54,3 +54,42 @@
   color: #000;
   margin-left: 0.25rem;
 }
+
+.page-reset-password {
+  @include onboarding-form-reset;
+
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  gap: $dsfr-spacing-7w;
+}
+
+// Alerte alignée sur la même largeur que la carte (colonne onboarding)
+.page-informations-compte .page-reset-password__alert-band {
+  width: 100%;
+  align-self: stretch;
+
+  .fr-alert,
+  .page-reset-password__alert {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.page-reset-password__champs-obligatoires {
+  @include corps-de-texte-xs-regular;
+
+  margin: 0 0 $dsfr-spacing-3w;
+}
+
+.page-reset-password__lien-accueil {
+  margin-top: $dsfr-spacing-3w;
+}
+
+.page-reset-password .informations-compte-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+}

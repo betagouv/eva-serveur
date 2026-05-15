@@ -1,31 +1,27 @@
 module Eva
   module Devise
     class PasswordsController < ActiveAdmin::Devise::PasswordsController
+      layout "inscription_v2"
+
       # rubocop:disable Rails/LexicallyScopedActionFilter
-      before_action :validate_reset_password_token, only: :edit
-      before_action :trouve_regles_mot_de_passe, only: :edit
+      before_action :assign_reset_password_context, only: %i[new edit create]
+      before_action :redirect_si_token_invalide, only: :edit
       # rubocop:enable Rails/LexicallyScopedActionFilter
 
       private
 
-      def trouve_regles_mot_de_passe
-        @regles_mot_de_passe = compte&.anlci? ? "regles_mot_de_passe_anlci" : "regles_mot_de_passe"
+      def assign_reset_password_context
+        @reset_password = ResetPassword::PageContext.new(
+          action_name: action_name,
+          token_invalide: params[:token_invalide],
+          reset_password_token: params[:reset_password_token],
+          resource_class: resource_class
+        )
       end
 
-      def validate_reset_password_token
-        return if compte&.reset_password_period_valid?
-
-        flash[:error] = t("active_admin.devise.passwords.edit.token_invalide")
-        redirect_to new_compte_password_path(token_invalide: true)
-      end
-
-      def compte
-        @compte ||= resource_class
-                    .find_by(reset_password_token: ::Devise.token_generator.digest(
-                      resource_class,
-                      :reset_password_token,
-                      params[:reset_password_token]
-                    ))
+      def redirect_si_token_invalide
+        path = @reset_password.redirect_path_si_token_invalide
+        redirect_to path if path
       end
     end
   end

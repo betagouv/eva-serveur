@@ -17,6 +17,8 @@ fr:
         title: Identifiant
       password:
         title: Mot de passe
+      password_confirmation:
+        title: Confirmation du mot de passe
       links:
         forgot_your_password: "Mot de passe oublié ?"
       sessions:
@@ -70,13 +72,40 @@ fr:
       passwords:
         edit:
           consigne: Saisissez et confirmez votre nouveau mot de passe ci-dessous.
+          alert_titre: Changez votre mot de passe
+          alert_description: Vous avez fait une demande de changement de mot de passe.
+          titre_carte: Saisissez et confirmez votre nouveau mot de passe
+          champs_obligatoires: Les champs notés * sont obligatoires.
+          hint_password: Votre mot de passe doit comporter au moins 8 caractères.
+          hint_password_anlci: Au moins 12 caractères, une majuscule, une minuscule, un chiffre et un symbole.
           token_invalide: Votre lien de réinitialisation n’est pas valide.
-          submit: Valider mon nouveau mot de passe
+          annuler: Annuler
+          submit: Valider mon mot de passe
       change_password:
         title: Changez votre mot de passe
       reset_password:
-        token_invalide: "Veuillez vérifier de nouveau l’email reçu."
-        saisir_a_nouveau: Si vous souhaitez recevoir de nouveau cet email, merci de saisir votre adresse ci-dessous.
+        request_email:
+          title: Vous avez oublié votre mot de passe ?
+          titre_intro: Vous avez oublié votre mot de passe ?
+          sous_titre_intro: Si vous avez oublié votre mot de passe, votre compte n’est pas perdu.
+          titre_carte: Réinitialiser son mot de passe
+          sous_titre_carte: En inscrivant l’adresse e-mail de votre compte Eva, vous recevrez un e-mail afin de réinitialiser votre mot de passe.
+          email_label: Adresse e-mail
+          hint_email: "Format attendu : nom@domaine.fr"
+          annuler: Annuler
+          submit: "Envoyer l'e-mail"
+        invalid_link:
+          title: Veuillez vérifier de nouveau l’email reçu
+          alert_titre: Votre lien de réinitialisation n’est pas valide
+          alert_description: Vous avez sûrement déjà utilisé ce lien. Si ce n’est pas le cas, contactez un référent de votre structure ou le support.
+          titre_carte: Veuillez vérifier de nouveau l’email reçu
+          sous_titre_carte: Si vous souhaitez recevoir de nouveau cet email, merci de saisir votre adresse ci-dessous.
+          email_label: Adresse e-mail professionnelle
+          hint_email: "Format attendu : nom@domaine.fr"
+          annuler: Annuler
+          submit: "Envoyer l'e-mail"
+          lien_accueil: ← Aller à l’accueil pour se connecter
+          lien_accueil_description: Aller à l’accueil pour se connecter
     export:
       limite_atteinte: "L'export est limité à %{limite} lignes, les lignes supplémentaires n'ont pas été exportées. Vous pouvez utiliser les filtres pour réduire le nombre de lignes que vous voulez exporter"
     menu_connexion:

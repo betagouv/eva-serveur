@@ -1,27 +1,74 @@
-<div id="active_admin_content">
-  <% content_for :titre do %>
-    <%= t("active_admin.devise.change_password.title") -%>
-  <% end %>
-  <div id="login" class="panel">
-    <%= link_to t("active_admin.devise.login.lien_retour"),
-                new_compte_session_path,
-                class: "lien-retour",
-                aria: { label: t("active_admin.devise.login.description_lien_retour") } %>
-    <div class='mot-de-passe-instruction'>
-      <p class='mot-de-passe-instruction--consigne'><%= t(".consigne") %></p>
-      <p><%= t(@regles_mot_de_passe, scope: "creation_compte", longueur_mot_de_passe: Devise.password_length.first)%></p>
+<% content_for :title, @reset_password.page_title %>
+<% content_for :classes_conteneur do "conteneur-elargi conteneur-invisible" end %>
+
+<div class="page-reset-password <%= @reset_password.wrapper_modifier_class %>">
+  <div class="page-informations-compte">
+    <div class="page-reset-password__alert-band">
+      <%= dsfr_alert(type: :info, title: t("active_admin.devise.passwords.edit.alert_titre"), html_attributes: { class: "fr-mb-0v page-reset-password__alert" }) do %>
+        <%= t("active_admin.devise.passwords.edit.alert_description") %>
+      <% end %>
     </div>
-    <%= render partial: "active_admin/devise/shared/messages_erreurs_generales", resource: resource, locals: { champs_affiches: [ :password, :password_confirmation ] } %>
-    <%= active_admin_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-      f.inputs do
-        f.input :reset_password_token, as: :hidden, input_html: { value: resource.reset_password_token }
-        f.input :password
-        f.input :password_confirmation, required: true, wrapper_html: { class: "libelle-long" }
-      end
-      f.actions do
-        f.action :submit, label: t("active_admin.devise.passwords.edit.submit")
-      end
-    end
-    %>
+
+    <%= render CarteV2Component.new(
+      titre: t("active_admin.devise.passwords.edit.titre_carte"),
+      sous_titre: nil
+    ) do %>
+      <p class="carte-v2__sous-titre"><%= t(@reset_password.regles_mot_de_passe_cle, scope: "creation_compte", longueur_mot_de_passe: Devise.password_length.first) %></p>
+      <p class="page-reset-password__champs-obligatoires"><%= t("active_admin.devise.passwords.edit.champs_obligatoires") %></p>
+
+      <%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, id: "reset-password-edit-form" }) do |f| %>
+        <%= f.semantic_errors *champs_non_affiches(f.object.errors.messages.keys, [ :password, :password_confirmation ]) %>
+        <%= f.inputs do %>
+          <div class="fr-grid-row fr-grid-row--gutters">
+            <%= f.hidden_field :reset_password_token, value: resource.reset_password_token %>
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "#{resource_name}_password",
+                label: t("active_admin.devise.password.title"),
+                hint: @reset_password.hint_mot_de_passe,
+                form: f,
+                method: :password,
+                type: "password",
+                required: true,
+                autocomplete: "new-password"
+              ) %>
+            </div>
+            <div class="fr-col-12">
+              <%= render InputComponent.new(
+                id: "#{resource_name}_password_confirmation",
+                label: t("active_admin.devise.password_confirmation.title"),
+                form: f,
+                method: :password_confirmation,
+                type: "password",
+                required: true,
+                autocomplete: "new-password"
+              ) %>
+            </div>
+            <div class="fr-col-12">
+              <div class="informations-compte-actions">
+                <%= render BoutonDsfrComponent.new(
+                  new_compte_session_path,
+                  type: :secondary,
+                  tag: :a,
+                  class: "page-reset-password__bouton-annuler"
+                ) do %>
+                  <%= t("active_admin.devise.passwords.edit.annuler") %>
+                <% end %>
+                <%= render BoutonDsfrComponent.new(
+                  t("active_admin.devise.passwords.edit.submit"),
+                  type: :primary,
+                  tag: :submit,
+                  id: "reset-password-submit",
+                  class: "page-reset-password__bouton-principal",
+                  data: { initial_disabled: true }
+                ) do %>
+                  <%= t("active_admin.devise.passwords.edit.submit") %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>

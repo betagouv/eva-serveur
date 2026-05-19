@@ -61,17 +61,18 @@
                 <% end %>
               </div>
             </div>
-            <% if @reset_password.invalid_link? %>
-              <div class="fr-col-12">
-                <%= link_to t("active_admin.devise.reset_password.invalid_link.lien_accueil"),
-                            new_compte_session_path,
-                            class: "page-reset-password__lien-accueil fr-link",
-                            aria: { label: t("active_admin.devise.reset_password.invalid_link.lien_accueil_description") } %>
-              </div>
-            <% end %>
           </div>
         <% end %>
       <% end %>
+    <% end %>
+
+    <% if @reset_password.invalid_link? %>
+      <div class="page-reset-password__lien-accueil-wrapper">
+        <%= link_to t("active_admin.devise.reset_password.invalid_link.lien_accueil"),
+                    new_compte_session_path,
+                    class: "page-reset-password__lien-accueil fr-link",
+                    aria: { label: t("active_admin.devise.reset_password.invalid_link.lien_accueil_description") } %>
+      </div>
     <% end %>
   </div>
 </div>

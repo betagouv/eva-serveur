@@ -83,8 +83,10 @@
   margin: 0 0 $dsfr-spacing-3w;
 }
 
-.page-reset-password__lien-accueil {
+.page-reset-password__lien-accueil-wrapper {
   margin-top: $dsfr-spacing-3w;
+  text-align: center;
+  width: 100%;
 }
 
 .page-reset-password .informations-compte-actions {

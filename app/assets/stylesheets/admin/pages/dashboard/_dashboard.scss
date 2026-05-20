@@ -39,7 +39,7 @@
       gap: $dsfr-spacing-3w;
       align-self: stretch;
 
-      @media (max-width: 768px) {
+      @media (max-width: 48em) {
         flex-direction: column;
       }
     }
@@ -77,7 +77,7 @@
       width: 100%;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48em) {
       .cinq-dernieres-evaluations__tableau {
         .fr-table .fr-table__content table {
           thead tr th:nth-child(n + 3),
@@ -130,7 +130,7 @@
       max-width: 1200px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48em) {
       flex-direction: column;
 
       .tableau-bord-sidebar {
@@ -140,7 +140,7 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 48em) {
       .tableau-bord-sidebar {
         padding-bottom: 0;
       }
@@ -483,7 +483,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 48em) {
     .tableau-bord-layout {
       display: flex;
       padding: $dsfr-spacing-2w $dsfr-spacing-2w $dsfr-spacing-5w $dsfr-spacing-2w;
@@ -538,7 +538,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .admin_dashboard .tableau-bord-sidebar-container {
     padding-left: 0;
   }

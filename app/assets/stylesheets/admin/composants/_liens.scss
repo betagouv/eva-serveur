@@ -1,5 +1,8 @@
 @mixin lien-non-dsfr($color: $eva_main_blue) {
-  &, &:link, &:visited {
+
+  &,
+  &:link,
+  &:visited {
     text-decoration: underline;
     background-image: none;
     color: $color;
@@ -8,38 +11,4 @@
   &:hover {
     text-decoration: none;
   }
-}
-
-@mixin lien-secondaire() {
-  @include lien-non-dsfr($couleur-texte);
-}
-
-#login a.lien-retour, a.lien-retour {
-  @include corps-de-texte-xs-regular;
-
-  align-items: center;
-  display: flex;
-  border: none;
-  padding: .25rem .5rem;
-
-  &, &:link, &:visited {
-    color: $couleur-texte;
-    background-image: none;
-    margin-bottom: 1rem;
-  }
-
-  &::before {
-    content: asset-data-url('icones/fleche_gauche.svg');
-    margin-right: .5rem;
-    // fix alignement vertical
-    line-height: 0px;
-  }
-
-  &:hover {
-    background-color: $grey-1000-hover;
-  }
-}
-
-.lien-secondaire {
-  @include lien-secondaire;
 }

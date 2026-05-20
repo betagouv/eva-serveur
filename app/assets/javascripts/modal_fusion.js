@@ -1,7 +1,17 @@
 (function() {
   var MODAL_ID = "fr-modal-fusionner";
   var FORM_ID = "fusion-form";
-  var OPENED_CLASS = "fr-modal--opened";
+
+  function dsfrModal(modal) {
+    if (!modal || !window.dsfr) return null;
+    var instance = window.dsfr(modal);
+    return instance && instance.modal ? instance.modal : null;
+  }
+
+  function discloseModal(modal) {
+    var modalInstance = dsfrModal(modal);
+    if (modalInstance) modalInstance.disclose();
+  }
 
   /** Batch ActiveAdmin englobe la page : un second formulaire dans le HTML serait ignoré ; #fusion-form est créé ici sur body, champs reliés via attribut form. */
   function ensureFusionFormDom(modal) {
@@ -41,69 +51,6 @@
     return el.closest("a.batch_action[data-action=\"fusionner\"]");
   }
 
-  function openFusionModal(modal) {
-    if (!modal) return;
-
-    if (modal.parentNode !== document.body) {
-      document.body.appendChild(modal);
-    }
-
-    var gestion = window.GestionAccessibiliteModales;
-    if (gestion) {
-      gestion.openModal(modal);
-      return;
-    }
-    modal.classList.add(OPENED_CLASS);
-    modal.setAttribute("aria-hidden", "false");
-    if (modal.tagName === "DIALOG" && !modal.hasAttribute("open")) {
-      modal.setAttribute("open", "");
-    }
-  }
-
-  function closeFusionModal(modal) {
-    if (!modal) return;
-    var gestion = window.GestionAccessibiliteModales;
-    if (gestion) {
-      gestion.closeModal(modal);
-      return;
-    }
-    modal.classList.remove(OPENED_CLASS);
-    modal.setAttribute("aria-hidden", "true");
-    if (modal.tagName === "DIALOG") {
-      if (typeof modal.close === "function") {
-        try {
-          modal.close();
-        } catch (e) {
-          modal.removeAttribute("open");
-        }
-      } else {
-        modal.removeAttribute("open");
-      }
-    }
-  }
-
-  function bindFusionCloseHandlers(modal) {
-    if (!modal || modal.dataset.fusionModalBound === "true") return;
-    modal.dataset.fusionModalBound = "true";
-
-    modal.addEventListener("click", function(event) {
-      if (event.target === modal) {
-        event.preventDefault();
-        closeFusionModal(modal);
-      }
-    });
-
-    var selectors =
-      '[aria-controls="' + modal.id + '"], .fr-link--close, .fr-btn--close';
-    modal.querySelectorAll(selectors).forEach(function(trigger) {
-      trigger.addEventListener("click", function(event) {
-        if (trigger.type === "submit") return;
-        event.preventDefault();
-        closeFusionModal(modal);
-      });
-    });
-  }
-
   function handleFusionClick(event) {
     var link = findFusionBatchLink(event.target);
     if (!link) return;
@@ -128,7 +75,7 @@
     var sortedBeneficiaires = sortBeneficiairesByDate(beneficiaires);
 
     updateModalContent(modal, sortedBeneficiaires);
-    openFusionModal(modal);
+    discloseModal(modal);
   }
 
   function extractBeneficiairesData(checkedBoxes) {
@@ -207,10 +154,7 @@
     var modal = document.getElementById(MODAL_ID);
     if (!modal) return;
 
-    document.body.appendChild(modal);
     ensureFusionFormDom(modal);
-    modal.setAttribute("aria-hidden", "true");
-    bindFusionCloseHandlers(modal);
 
     document.addEventListener("click", handleFusionClick, true);
 

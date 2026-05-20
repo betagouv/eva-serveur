@@ -1,4 +1,13 @@
 <% id_modal = "fr-modal-validation-comptes-en-attente" %>
+<%# Déclencheur hors <dialog> : le ModalsGroup DSFR exige un bouton primaire data-fr-opened="true"
+    pour isInitiallyDisclosed ; sinon getIndex(-1) referme toutes les modales au chargement. %>
+<button type="button"
+        class="fr-btn fr-sr-only"
+        data-fr-opened="true"
+        aria-controls="<%= id_modal %>"
+        tabindex="-1">
+  <%= t(".ouverture_initiale_libelle_bouton") %>
+</button>
 
 <%= dsfr_modal(
   title: t(".titre"),
@@ -6,8 +15,6 @@
   html_attributes: {
     id: id_modal,
     class: "fr-modal-validation-comptes fr-modal-dashboard-evapro evapro_admin",
-    "aria-hidden": "false",
-    open: true,
     "data-fr-concealing-backdrop": "false"
   }
 ) do |component| %>

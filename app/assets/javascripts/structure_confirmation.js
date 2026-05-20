@@ -12,10 +12,10 @@ function activation_bouton_rejoindre(structure_confirmee) {
 function structure_confirmation_submit() {
   let checkbox = document.getElementById('compte_structure_confirmee');
   if (!checkbox) return;
-  
+
   let structure_confirmee = checkbox.checked;
   activation_bouton_rejoindre(structure_confirmee);
-  
+
   checkbox.addEventListener('change', function() {
     activation_bouton_rejoindre(this.checked);
   });
@@ -61,26 +61,26 @@ function structure_creation_confirmation_submit() {
     console.error('Formulaire de structure non trouvé');
     return;
   }
-  
+
   // Chercher toutes les checkboxes dans le formulaire et trouver celle avec structure_confirmee
   let checkboxes = form.querySelectorAll('input[type="checkbox"]');
   let checkbox = null;
-  
+
   for (let cb of checkboxes) {
     if (cb.name && cb.name.includes('structure_confirmee')) {
       checkbox = cb;
       break;
     }
   }
-  
+
   if (!checkbox) {
     console.error('Checkbox structure_confirmee non trouvée dans le formulaire');
     return;
   }
-  
+
   let structure_confirmee = checkbox.checked;
   activation_bouton_confirmer(structure_confirmee);
-  
+
   checkbox.addEventListener('change', function() {
     activation_bouton_confirmer(this.checked);
   });
@@ -110,61 +110,6 @@ function initStructureParametrageFormState() {
   const boutonCreer = document.getElementById('creer-structure-btn');
   const boutonConfirmer = document.getElementById('confirmer-creation-structure');
 
-  function getModalFromButton(button) {
-    if (!button) return null;
-    const modalId = button.dataset.modalTarget || button.getAttribute('aria-controls');
-    if (!modalId) return null;
-    return document.getElementById(modalId);
-  }
-
-  function ouvrirModal(modal) {
-    if (!modal) return;
-    if (modal.parentNode !== document.body) {
-      document.body.appendChild(modal);
-    }
-    var gestion = window.GestionAccessibiliteModales;
-    if (gestion) {
-      gestion.openModal(modal);
-      return;
-    }
-    modal.classList.add('fr-modal--opened');
-    modal.setAttribute('aria-hidden', 'false');
-  }
-
-  function fermerModal(modal) {
-    if (!modal) return;
-    var gestion = window.GestionAccessibiliteModales;
-    if (gestion) {
-      gestion.closeModal(modal);
-      return;
-    }
-    modal.classList.remove('fr-modal--opened');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  function initModalFallbackControls(modal, openerButton) {
-    if (!modal || modal.dataset.fallbackBound === 'true') return;
-    modal.dataset.fallbackBound = 'true';
-
-    modal.addEventListener('click', function(event) {
-      if (event.target === modal) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        fermerModal(modal);
-      }
-    }, true);
-
-    modal.querySelectorAll('[aria-controls="' + modal.id + '"]').forEach(function(closeTrigger) {
-      closeTrigger.addEventListener('click', function(event) {
-        if (closeTrigger.type === 'submit') return;
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        fermerModal(modal);
-        if (openerButton) openerButton.focus();
-      }, true);
-    });
-  }
-
   function champRempli(element) {
     if (!element) return false;
     return element.value && element.value.trim().length > 0;
@@ -189,18 +134,6 @@ function initStructureParametrageFormState() {
     field.addEventListener('input', majBoutons);
     field.addEventListener('change', majBoutons);
   });
-
-  if (boutonCreer) {
-    const modal = getModalFromButton(boutonCreer);
-    initModalFallbackControls(modal, boutonCreer);
-
-    boutonCreer.addEventListener('click', function(event) {
-      if (boutonCreer.disabled) return;
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      ouvrirModal(modal);
-    });
-  }
 
   majBoutons();
 }

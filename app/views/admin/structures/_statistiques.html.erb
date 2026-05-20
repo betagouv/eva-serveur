@@ -1,15 +1,17 @@
 <% statistique = StatistiquesStructure.new(resource) %>
 
-<h3><%= t(".titre")%></h3>
-<div class="panel">
-  <iframe
-    src="<%= statistique.url %>"
-    frameborder="0"
-    width="100%"
-    height="950"
-    allowtransparency
-  ></iframe>
-</div>
+<% if statistique.url %>
+  <h3><%= t(".titre")%></h3>
+  <div class="panel">
+    <iframe
+      src="<%= statistique.url %>"
+      frameborder="0"
+      width="100%"
+      height="950"
+      allowtransparency
+    ></iframe>
+  </div>
+<% end %>
 
 <% if current_compte.anlci? %>
   <p class="statistiques__description"><%= t(".description.correlation_donnees_illettrisme") %></p>

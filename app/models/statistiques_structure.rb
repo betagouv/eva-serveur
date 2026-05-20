@@ -6,12 +6,15 @@ class StatistiquesStructure
   end
 
   def url
+    secret_key = ENV.fetch("METABASE_SECRET_KEY", nil)
+    return unless secret_key
+
     payload = {
       resource: { dashboard: @structure.metabase_dashboard },
       params: @structure.metabase_query_params,
       exp: 10.minutes.from_now.to_i
     }
-    token = ::JWT.encode payload, ENV.fetch("METABASE_SECRET_KEY", nil)
+    token = ::JWT.encode payload, secret_key
 
     "#{ENV.fetch('METABASE_SITE_URL', nil)}/embed/dashboard/#{token}#bordered=false&titled=false"
   end

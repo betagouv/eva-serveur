@@ -35,7 +35,8 @@ describe 'Admin - Structure Operateur de competence' do
           visit admin_structure_opco_path(structure)
 
           expect(page).to have_css("#bloc-statistiques")
-          expect(page).not_to have_content(I18n.t("admin.structures.statistiques.description.correlation_donnees_illettrisme"))
+          expect(page).not_to have_content(
+            I18n.t("admin.structures.statistiques.description.correlation_donnees_illettrisme"))
         end
       end
 

@@ -1,10 +1,12 @@
 <% statistiques_opco = StatistiquesStructure.new(resource) %>
 
-<iframe
-  src="<%= statistiques_opco.url %>"
-  frameborder="0"
-  width="100%"
-  height="950"
-  allowtransparency
-></iframe>
+<% if statistiques_opco.url %>
+  <iframe
+    src="<%= statistiques_opco.url %>"
+    frameborder="0"
+    width="100%"
+    height="950"
+    allowtransparency
+  ></iframe>
+<% end %>
 

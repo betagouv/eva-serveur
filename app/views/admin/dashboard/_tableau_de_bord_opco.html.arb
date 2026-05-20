@@ -15,8 +15,7 @@ else
         t("admin.dashboard.bienvenue_entreprise.titre_tableau_de_bord")
       end
       span t("admin.dashboard.metabase_opco.titre")
-      render partial: "admin/dashboard/metabase_dashboard_opco",
-             locals: { resource: structure }
+      render StatistiquesStructureMetabaseComponent.new(structure: structure)
     end
 
     if structure.present?

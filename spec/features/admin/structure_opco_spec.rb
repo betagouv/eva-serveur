@@ -34,8 +34,8 @@ describe 'Admin - Structure Operateur de competence' do
         it "affiche la section Statistiques avec le dashboard metabase opco" do
           visit admin_structure_opco_path(structure)
 
-          expect(page).to have_css("#bloc-statistiques-opco")
-          expect(page).not_to have_css("#bloc-statistiques")
+          expect(page).to have_css("#bloc-statistiques")
+          expect(page).not_to have_content(I18n.t("admin.structures.statistiques.description.correlation_donnees_illettrisme"))
         end
       end
 

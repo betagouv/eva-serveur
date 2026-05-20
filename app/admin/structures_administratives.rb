@@ -1,7 +1,5 @@
 ActiveAdmin.register StructureAdministrative do
-  menu parent: I18n.t(".menu_structure"), if: proc {
-    current_compte.anlci? || current_compte.administratif?
-  }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :nom, :parent_id, :siret
 

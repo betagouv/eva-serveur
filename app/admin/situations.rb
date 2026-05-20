@@ -1,5 +1,5 @@
 ActiveAdmin.register Situation do
-  menu parent: "Parcours", if: proc { can? :manage, Compte }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :libelle, :nom_technique, :questionnaire_id, :questionnaire_entrainement_id,
                 :description, :illustration

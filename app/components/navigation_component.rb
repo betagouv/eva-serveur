@@ -121,7 +121,8 @@ class NavigationComponent < ViewComponent::Base
 
     links = [
       source_aides_link,
-      annonce_generales_link
+      annonce_generales_link,
+      opcos_link
     ].compact
     return if links.empty?
 
@@ -153,8 +154,7 @@ class NavigationComponent < ViewComponent::Base
     links = [
       structures_locales_link,
       structures_administratives_link,
-      structures_opcos_link,
-      opcos_link
+      structures_opcos_link
     ].compact
     return if links.empty?
 

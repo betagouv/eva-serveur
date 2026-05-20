@@ -1,5 +1,5 @@
 ActiveAdmin.register AnnonceGenerale do
-  menu parent: "Accompagnement"
+  # La position dans le menu est gérée par NavigationComponent
 
   config.sort_order = "created_at_desc"
 

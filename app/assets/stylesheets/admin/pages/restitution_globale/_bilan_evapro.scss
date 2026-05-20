@@ -28,7 +28,7 @@
   align-items: flex-start;
   padding: $dsfr-spacing-2w;
 
-  @media (max-width: 768px) {
+  @media (max-width: 48em) {
     flex-direction: column;
     gap: $dsfr-spacing-3w;
   }
@@ -41,7 +41,7 @@
   flex: 1 1 0;
   min-width: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 48em) {
     max-width: 100%;
   }
 }

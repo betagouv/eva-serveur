@@ -169,7 +169,7 @@ body.logged_in.evapro_admin {
   z-index: 9999;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .fr-modal>.fr-container {
     pointer-events: none;
     position: fixed;
@@ -474,7 +474,7 @@ body.logged_in h2.fr-footer__partners-title {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
   .fr-footer__top .fr-grid-row {
     flex-direction: column;
   }

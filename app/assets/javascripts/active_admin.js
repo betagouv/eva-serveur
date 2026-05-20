@@ -23,14 +23,11 @@
 //= require vendor/clipboard.min
 //= require evaluation
 //= require simple_mde
-//= require modal_accessibilite
 //= require modal_verification
-//= require modal_verification_ouverture_evapro
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require structure_confirmation
-//= require invitation_modal
-//= require modal_dashboard_dsfr
+//= require invitation_copier_lien
 //= require nouveau_compte
 //= require reset_password
 

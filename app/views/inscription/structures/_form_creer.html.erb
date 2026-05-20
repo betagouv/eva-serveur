@@ -7,8 +7,6 @@
       <div class="structure-content-wrapper">
         <%= render "parametrage_section", form: form %>
 
-        <%= render "modal_confirmation_creation_structure" %>
-
         <div class="informations-compte-actions">
           <%= render BoutonDsfrComponent.new(inscription_structure_path(etape: "confirmation"), type: :tertiary) do %>
             <%= t("inscription.structures.show.retour") %>
@@ -19,7 +17,7 @@
             tag: :button,
             id: "creer-structure-btn",
             "data-fr-opened": "false",
-            "data-modal-target": "fr-modal-confirmation-creation-structure"
+            "aria-controls": "fr-modal-confirmation-creation-structure"
           ) do %>
             <%= t("inscription.structures.show.creer_structure") %>
           <% end %>
@@ -29,3 +27,4 @@
   <% end %>
 <% end %>
 
+<%= render "modal_confirmation_creation_structure" %>

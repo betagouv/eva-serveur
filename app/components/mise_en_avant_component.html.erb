@@ -6,7 +6,7 @@
   <% end %>
 
   <% if @bouton_label.present? %>
-    <%= link_to @bouton_label, "#", { class: "fr-btn" }.merge(@bouton_attributes) %>
+    <%= button_tag @bouton_label, { type: "button", class: "fr-btn" }.merge(@bouton_attributes) %>
   <% end %>
 
   <%= content %>

@@ -60,8 +60,3 @@
     @include petit-bouton;
   }
 }
-
-html.fr-modal-dashboard-evapro--scroll-locked,
-html.fr-modal-dashboard-evapro--scroll-locked body {
-  overflow: hidden !important;
-}

@@ -10,11 +10,13 @@
               description: compte.email,
               bouton_label: bouton_label,
               bouton_attributes: bouton_attributes
-            ) do %>
-
-          <%= render "admin/comptes/modal_verification", compte: compte %>
-        <% end %>
+            ) %>
       <% end %>
     <% end %>
   </div>
+  <% @comptes_en_attente.each do |compte| %>
+    <% if can?(:verifier, compte) %>
+      <%= render "admin/comptes/modal_verification", compte: compte %>
+    <% end %>
+  <% end %>
 </div>

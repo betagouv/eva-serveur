@@ -14,8 +14,10 @@ fr:
         information_cgu: "Les conditions générales d’utilisation du service eva sont consultables ici :"
         demande_acceptation: "Nous vous invitons à en prendre connaissance et à les accepter pour pouvoir continuer à utiliser eva."
         bouton_acceptation_cgu: "J’ai lu et j’accepte les CGU"
+        ouverture_initiale_libelle_bouton: "Ouverture automatique de la fenêtre des conditions générales d’utilisation"
       modal_validation_comptes_en_attente:
         titre: Demandes d'accès en attente de validation
+        ouverture_initiale_libelle_bouton: "Ouverture automatique de la fenêtre des demandes d’accès en attente"
         annuler: Plus tard
         voir_les_demandes: Voir les demandes
         info_comptes_en_attente: |

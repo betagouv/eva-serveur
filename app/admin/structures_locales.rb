@@ -1,7 +1,5 @@
 ActiveAdmin.register StructureLocale do
-  menu parent: I18n.t(".menu_structure"), if: proc {
-    current_compte.anlci? || current_compte.administratif?
-  }
+  # La position dans le menu est gérée par NavigationComponent
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,

@@ -1,5 +1,5 @@
 ActiveAdmin.register Opco do
-  menu parent: I18n.t(".menu_structure"), if: proc { current_compte.superadmin? }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :nom, :financeur, :logo, :telephone, :url, :email, :url_contact,
                 :visuel_offre_services, :supprimer_visuel_offre_services, :url_offre_services,

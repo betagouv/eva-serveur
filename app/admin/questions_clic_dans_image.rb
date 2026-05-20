@@ -1,7 +1,7 @@
 ActiveAdmin.register QuestionClicDansImage do
   before_action :set_question, only: %i[update]
 
-  menu parent: "Parcours", if: proc { can? :manage, Compte }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :libelle, :nom_technique, :description, :passable,
                 :illustration, :supprimer_illustration,

@@ -1,5 +1,5 @@
 ActiveAdmin.register QuestionSousConsigne do
-  menu parent: "Parcours", if: proc { current_compte.superadmin? }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :libelle, :nom_technique, :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,

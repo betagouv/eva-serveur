@@ -1,7 +1,5 @@
 ActiveAdmin.register StructureOpco do
-  menu parent: I18n.t(".menu_structure"), if: proc {
-    current_compte.anlci?
-  }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :nom, :siret, :opco_id
 

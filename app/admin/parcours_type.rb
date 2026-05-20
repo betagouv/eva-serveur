@@ -1,5 +1,5 @@
 ActiveAdmin.register ParcoursType do
-  menu parent: "Parcours", if: proc { can? :manage, Compte }
+  # La position dans le menu est gérée par NavigationComponent
 
   permit_params :libelle, :actif, :position, :nom_technique,
                 :duree_moyenne, :description, :type_de_programme,

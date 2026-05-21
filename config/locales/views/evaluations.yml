@@ -19,6 +19,7 @@ fr:
         explication_html: "<strong>« Les Incontournables »</strong> constituent une boite à outils à destination des entreprises, opérateur de compétences et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
         lien_texte: "www.bao-incontournables.fr"
         etapes:
+          en_savoir_plus: "En savoir plus"
           informe: "Je m’informe"
           implique: "J’implique"
           repere: "Je repère et j’identifie les besoins"

@@ -1,0 +1,103 @@
+// Carte étape « Les Incontournables » (restitution EVA Pro)
+// Couleurs : variables --incontournables-card-bg / --incontournables-card-color sur la racine
+
+.incontournables-card {
+  display: flex;
+  padding: 0.5rem 1rem;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1 0 0;
+  min-width: 0;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background: var(--incontournables-card-bg);
+  color: var(--incontournables-card-color);
+}
+
+.incontournables-card__numero {
+  display: flex;
+  min-height: 2.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  margin: 0;
+  color: var(--incontournables-card-color);
+
+  @include titre-base;
+
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 3rem;
+}
+
+.incontournables-card__titre {
+  display: flex;
+  // Hauteur fixe sur 2 lignes (corps-de-texte-sm : line-height 1.5rem) pour que
+  // l’illustration commence à la même hauteur sur toutes les cartes d’une rangée.
+  min-height: calc(2 * 1.5rem);
+  flex-direction: column;
+  align-self: stretch;
+  margin: 0;
+  color: var(--incontournables-card-color);
+  overflow-wrap: anywhere;
+
+  @include corps-de-texte-sm-bold;
+}
+
+.incontournables-card__illustration {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 10.5rem;
+  align-self: stretch;
+  align-items: center;
+}
+
+.incontournables-card__illustration--svg {
+  width: 8.2222rem;
+  height: 5.859rem;
+  aspect-ratio: 131.56 / 93.74;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.incontournables-card__en-savoir-plus {
+  align-self: stretch;
+  margin-top: auto;
+  color: var(--incontournables-card-color);
+  text-align: start;
+}
+
+.incontournables-card__en-savoir-plus-texte {
+  @include corps-de-texte-xs-regular;
+
+  line-height: 1.75rem;
+  color: var(--incontournables-card-color);
+}
+
+.incontournables-etapes__rangee .incontournables-card {
+  flex: 1 1 calc((100% - (3 * #{$dsfr-spacing-1w})) / 4);
+  max-width: 13.3125rem;
+  align-self: stretch;
+}
+
+@media print {
+  .incontournables-etapes__rangee .incontournables-card {
+    flex: 1 1 0;
+    max-width: none;
+  }
+}
+
+@media (max-width: 48em) {
+  .incontournables-etapes__rangee .incontournables-card {
+    width: 100%;
+    max-width: 22rem;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .incontournables-etapes__rangee .incontournables-card {
+    flex: 0 1 calc((100% - #{$dsfr-spacing-1w}) / 2);
+    max-width: none;
+  }
+}

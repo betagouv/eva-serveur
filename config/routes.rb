@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
     get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
     get '/ui_kit/impact_stepper', to: 'ui_kit#impact_stepper'
+    get '/ui_kit/incontournables_etape_card', to: 'ui_kit#incontournables_etape_card'
     get '/ui_kit/eva_pro_score', to: 'ui_kit#eva_pro_score'
     get '/ui_kit/card', to: 'ui_kit#card'
     get '/ui_kit/carte', to: 'ui_kit#carte'

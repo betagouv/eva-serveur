@@ -1,0 +1,8 @@
+div id: "evaluation__deroulement" do
+  h2 t(:titre, scope: [ :admin, :evaluations, :deroulement_passation ]), class: "evaluation__titre"
+  div class: "panel panel-parcours" do
+    h3 t(:titre, scope: [ :admin, :evaluations, :deroulement_passation, :parcours ]),
+class: ".restitution-h3"
+    render "components/card_parcours_type", parcours_type: resource.campagne.parcours_type
+  end
+end

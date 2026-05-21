@@ -1,10 +1,10 @@
 if resource.evapro?
-  render "evaluation_evapro"
+  render partial: "admin/evaluations/evapro/evaluation_evapro"
 else
   div class: "evaluation" do
     div class: "row" do
       div class: "col-8" do
-        render "evaluation_eva"
+        render partial: "admin/evaluations/eva/evaluation_eva"
       end
     end
   end

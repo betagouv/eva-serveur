@@ -31,7 +31,7 @@ div class: "evaluation-evapro" do
       if diag_risques_entreprise && pourcentage_risque
         risques_presenter = diagnostic_pro.risques_presenter
         render(
-          partial: "mesure_des_risques",
+          partial: "admin/evaluations/evapro/mesure_des_risques",
           locals: { risques_presenter: risques_presenter, pdf: pdf }
         )
       end
@@ -40,7 +40,7 @@ div class: "evaluation-evapro" do
         evaluation_impact_general = diagnostic_pro.evaluation_impact_general
         impacts_presenter = diagnostic_pro.impacts_presenter(evaluation_id: evaluation.id)
         render(
-          partial: "mesure_des_impacts",
+          partial: "admin/evaluations/evapro/mesure_des_impacts",
           locals: {
             evaluation_impact_general: evaluation_impact_general,
             impacts_presenter: impacts_presenter,
@@ -54,7 +54,7 @@ div class: "evaluation-evapro" do
             i18n: self
           )
           render(
-            partial: "impact_couts",
+            partial: "admin/evaluations/evapro/impact_couts",
             locals: {
               synthese: diagnostic_pro.synthese_impact_general,
               couts_presenter: couts_presenter,
@@ -63,7 +63,7 @@ div class: "evaluation-evapro" do
           )
         else
           render(
-            partial: "continuer_evaluation_evapro",
+            partial: "admin/evaluations/evapro/continuer_evaluation_evapro",
             locals: {
               impacts_presenter: impacts_presenter
             }
@@ -84,7 +84,7 @@ div class: "evaluation-evapro" do
       end
       div class: "page__contenu" do
         render(
-          partial: "bilan_evapro",
+          partial: "admin/evaluations/evapro/bilan_evapro",
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
             palier_bilan: diagnostic_pro.palier_bilan,
@@ -94,7 +94,7 @@ div class: "evaluation-evapro" do
         )
 
         render(
-          partial: "aller_plus_loin",
+          partial: "admin/evaluations/evapro/aller_plus_loin",
         )
       end
     end

@@ -1,7 +1,7 @@
 <% @sous_competences = @sous_competences&.to_a %>
 
 <div class="page page-numeratie">
-  <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+  <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
   <div class="content">
     <h2 class="text-center evaluation__titre"><%= t("titre", scope: "admin.restitutions.numeratie") %></h2>
@@ -23,12 +23,12 @@
     <% end %>
   </div>
 
-  <%= render "pied_page" %>
+  <%= render "admin/evaluations/eva/pied_page" %>
 </div>
 
 <% if @sous_competences %>
   <div class="page page-numeratie">
-    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content">
       <% @sous_competences[2..4].each do |sous_competence| %>
@@ -36,11 +36,11 @@
       <% end %>
     </div>
 
-    <%= render "pied_page" %>
+    <%= render "admin/evaluations/eva/pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
       <h2 class="evaluation__titre"><%= t("titre_details", scope: "admin.restitutions.numeratie") %></h2>
@@ -57,11 +57,11 @@
       <% end %>
     </div>
 
-    <%= render "pied_page" %>
+    <%= render "admin/evaluations/eva/pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
       <% @sous_competences[2..3].each do |sous_competence| %>
@@ -77,11 +77,11 @@
       <% end %>
     </div>
 
-    <%= render "pied_page" %>
+    <%= render "admin/evaluations/eva/pied_page" %>
   </div>
 
   <div class="page page-numeratie">
-    <%= render "admin/evaluations/entete_page", restitution_globale: @restitution_globale %>
+    <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
     <div class="content liste-criteres">
       <% @sous_competences[4..4].each do |sous_competence| %>
@@ -97,6 +97,6 @@
       <% end %>
     </div>
 
-    <%= render "pied_page" %>
+    <%= render "admin/evaluations/eva/pied_page" %>
   </div>
 <% end %>

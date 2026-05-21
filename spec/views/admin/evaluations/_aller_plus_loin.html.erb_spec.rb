@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'admin/evaluations/_aller_plus_loin.html.erb' do
+describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
   it "affiche les 8 etapes des incontournables dans l'ordre" do
-    render partial: 'admin/evaluations/aller_plus_loin'
+    render partial: 'admin/evaluations/evapro/aller_plus_loin'
 
     fragment = Nokogiri::HTML.fragment(rendered)
     cartes = fragment.css('.incontournables-etapes .illustrinfo')

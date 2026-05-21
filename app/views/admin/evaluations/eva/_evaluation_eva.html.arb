@@ -1,0 +1,3 @@
+render "admin/evaluations/eva/details_evaluation"
+render "admin/evaluations/eva/restitution_globale", pdf: false
+render "admin/evaluations/panel_administration", eva_pro: false if can?(:manage, Compte)

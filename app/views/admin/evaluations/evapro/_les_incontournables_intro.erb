@@ -1,0 +1,12 @@
+<% apl = [  :admin, :evaluations, :aller_plus_loin  ] %>
+<div>
+  <div class="focus-incontournable">
+    <div class="focus-incontournable__media">
+      <%= image_tag "les-incontournables.png", class: "focus-incontournable__media-image", alt: t(:image_alt, scope: apl) %>
+    </div>
+    <div class="focus-incontournable__explication">
+      <p class="focus-incontournable__explication-texte"><%= t(:explication_html, scope: apl) %></p>
+      <%= link_to t(:lien_texte, scope: apl), "https://www.bao-incontournables.fr", class: "fr-link fr-link--sm", target: "_blank" %>
+    </div>
+  </div>
+</div>

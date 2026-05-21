@@ -1,8 +1,0 @@
-<div class="continuer-evaluation-evapro">
-  <p><%= t(".incomplet.description") %></p>
-
-  <% url = impacts_presenter.incomplet_url(URL_EVA_ENTREPRISES) %>
-  <%= render BoutonDsfrComponent.new(url, type: :primary) do %>
-    <%= t(".incomplet.action") %>
-  <% end %>
-</div>

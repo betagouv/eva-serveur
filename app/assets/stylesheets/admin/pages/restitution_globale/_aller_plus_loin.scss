@@ -1,3 +1,5 @@
+@import 'admin/composants/incontournables_etape_card';
+
 .evaluation-aller-plus-loin {
   display: flex;
   flex-direction: column;
@@ -84,111 +86,13 @@
 .incontournables-etapes__rangee {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   gap: $dsfr-spacing-1w;
   align-self: stretch;
 
   @media print {
     gap: $dsfr-spacing-2v;
   }
-}
-
-.illustrinfo {
-  display: flex;
-  width: auto;
-  flex: 1 1 calc((100% - (3 * #{$dsfr-spacing-1w})) / 4);
-  min-width: 0;
-  max-width: 13.3125rem;
-  height: 7.875rem;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: $dsfr-spacing-2v;
-  gap: $dsfr-spacing-1w;
-  border-radius: $dsfr-radius-lg;
-  background: #DCE2E7;
-
-  @media print {
-    height: 6rem !important;
-  }
-}
-
-.illustrinfo-body {
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  gap: $dsfr-spacing-1w;
-  min-width: 0;
-  padding-left: $dsfr-spacing-1w;
-  padding-right: $dsfr-spacing-1w;
-}
-
-.aller-plus-loin__illustration {
-  width: 4.25rem;
-  height: 3.25rem;
-  flex-shrink: 0;
-}
-
-.illustrinfo .droite {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: $dsfr-spacing-1v;
-  min-width: 0;
-}
-
-.illustrinfo .numero {
-  margin: 0;
-
-  @include titre-h2;
-}
-
-.illustrinfo .titre {
-  margin: 0;
-  min-width: 0;
-  white-space: normal;
-  overflow-wrap: anywhere;
-
-  @include corps-de-texte-xs-bold;
-}
-
-.illustrinfo--01 {
-  background: #DCE2E7;
-  color: #3272AD;
-}
-
-.illustrinfo--02 {
-  background: #F1E5E1;
-  color: #F79676;
-}
-
-.illustrinfo--03 {
-  background: #F1E5E1;
-  color: #F05757;
-}
-
-.illustrinfo--04 {
-  background: #E5E9DF;
-  color: #7EAB42;
-}
-
-.illustrinfo--05 {
-  background: #EBE6E1;
-  color: #F1A131;
-}
-
-.illustrinfo--06 {
-  background: #EDE4EA;
-  color: #D077B4;
-}
-
-.illustrinfo--07 {
-  background: #F0E7DF;
-  color: #F1A131;
-}
-
-.illustrinfo--08 {
-  background: #E1E8EB;
-  color: #61B7CC;
 }
 
 .definitions-impacts__titre {
@@ -234,20 +138,6 @@
     width: 100%;
     align-items: stretch;
   }
-
-  .illustrinfo {
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
-    max-width: none;
-    height: 6rem !important;
-    min-height: 6rem;
-  }
-
-  .illustrinfo-body {
-    width: 100%;
-    min-width: 0;
-  }
 }
 
 @media (max-width: 48em) {
@@ -275,20 +165,6 @@
     max-width: none;
   }
 
-  .illustrinfo {
-    width: 100%;
-    max-width: 22rem;
-  }
-
-  .illustrinfo-body {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .illustrinfo .titre {
-    min-width: 0;
-  }
-
   .focus-incontournable {
     flex-direction: column;
   }
@@ -300,10 +176,5 @@
   .incontournables-etapes__rangee {
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .illustrinfo {
-    flex: 0 1 calc((100% - #{$dsfr-spacing-1w}) / 2);
-    max-width: none;
   }
 }

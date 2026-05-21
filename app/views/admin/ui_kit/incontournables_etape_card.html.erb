@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo IncontournablesEtapeCardComponent</h1>
+
+  <p class="fr-text--lead">
+    Carte utilisée pour les 8 étapes des « Incontournables » dans la restitution EVA Pro (numéro, titre, illustration, libellé « En savoir plus », couleurs via variables CSS). La carte entière sera cliquable dans un second temps.
+  </p>
+
+  <h2 class="fr-mt-5w">Exemple isolé</h2>
+
+  <div class="fr-grid-row fr-grid-row--gutters fr-mb-5w">
+    <div class="fr-col-12 fr-col-md-3">
+      <%= render IncontournablesEtapeCardComponent.new(
+            numero: "01",
+            titre: I18n.t("admin.evaluations.aller_plus_loin.etapes.informe"),
+            image_path: "incontournables/jinforme 1.svg",
+            couleur_texte: "#3272AD",
+            couleur_fond: "#DCE2E7",
+            image_alt: I18n.t(
+              "admin.evaluations.aller_plus_loin.image_alt_etape",
+              numero: "01",
+              titre: I18n.t("admin.evaluations.aller_plus_loin.etapes.informe")
+            )
+          ) %>
+    </div>
+  </div>
+
+  <h2>Grille des 8 étapes (comme sur la restitution)</h2>
+
+  <%= render "admin/evaluations/evapro/les_incontournables_etapes" %>
+</div>

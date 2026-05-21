@@ -1,0 +1,10 @@
+<div class="incontournables-card" style="<%= card_style %>">
+  <div class="incontournables-card__numero"><%= @numero %></div>
+  <p class="incontournables-card__titre"><%= @titre %></p>
+  <div class="incontournables-card__illustration">
+    <%= image_tag @image_path, class: "incontournables-card__illustration--svg", alt: @image_alt %>
+  </div>
+  <div class="incontournables-card__en-savoir-plus">
+    <span class="incontournables-card__en-savoir-plus-texte"><%= en_savoir_plus_label %></span>
+  </div>
+</div>

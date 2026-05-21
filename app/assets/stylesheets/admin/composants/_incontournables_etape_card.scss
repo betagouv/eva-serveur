@@ -112,9 +112,119 @@ a.incontournables-card {
   align-self: stretch;
 }
 
+// Carte compacte réservée au rendu PDF (locals `pdf: true`)
+// Largeur flexible dans la rangée : 4 cartes côte à côte (pas de 16rem fixe qui provoque un wrap 3+1).
+.incontournables-etapes__rangee .incontournables-card.incontournables-card--pdf {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+}
+
+.incontournables-card.incontournables-card--pdf {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  min-height: 0;
+  height: auto;
+  padding: 0.25rem 0.375rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  background: var(--incontournables-card-bg);
+  color: var(--incontournables-card-color);
+
+  &:hover {
+    border-color: transparent;
+  }
+}
+
+.incontournables-card--pdf__conteneur {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: flex-start;
+  gap: $dsfr-spacing-1v;
+}
+
+.incontournables-card--pdf__conteneur--illustration {
+  display: flex;
+  flex-shrink: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: auto;
+  max-width: 5rem;
+  min-width: 0;
+  height: 3.75rem;
+  max-height: 3.75rem;
+
+  img {
+    align-self: flex-start;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.incontournables-card--pdf__conteneur--textes {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.0625rem;
+  min-width: 0;
+}
+
+.incontournables-card--pdf__conteneur--textes-numero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  color: var(--incontournables-card-color);
+
+  @include titre-h3;
+
+  // Compact PDF : moins de hauteur tout en restant lisible.
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+}
+
+.incontournables-card--pdf__conteneur--textes-titre {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 100%;
+  margin: 0;
+  color: var(--incontournables-card-color);
+  overflow-wrap: anywhere;
+
+  @include corps-de-texte-xs-bold;
+
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 700;
+}
+
 @media print {
   .incontournables-etapes__rangee .incontournables-card {
     flex: 1 1 0;
+    max-width: none;
+  }
+
+  .incontournables-etapes__rangee .incontournables-card.incontournables-card--pdf {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
     max-width: none;
   }
 }
@@ -124,11 +234,25 @@ a.incontournables-card {
     width: 100%;
     max-width: 22rem;
   }
+
+  .incontournables-etapes__rangee .incontournables-card.incontournables-card--pdf {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+  }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .incontournables-etapes__rangee .incontournables-card {
     flex: 0 1 calc((100% - #{$dsfr-spacing-1w}) / 2);
+    max-width: none;
+  }
+
+  .incontournables-etapes__rangee .incontournables-card.incontournables-card--pdf {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
     max-width: none;
   }
 }

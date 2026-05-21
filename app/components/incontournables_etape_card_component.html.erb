@@ -1,14 +1,28 @@
-<%= link_to @url,
-             class: "incontournables-card fr-raw-link",
-             style: card_style,
-             target: "_blank",
-             rel: "noopener noreferrer" do %>
-  <div class="incontournables-card__numero"><%= @numero %></div>
-  <p class="incontournables-card__titre"><%= @titre %></p>
-  <div class="incontournables-card__illustration">
-    <%= image_tag @image_path, class: "incontournables-card__illustration--svg", alt: @image_alt %>
+<% if @pdf %>
+  <div class="incontournables-card incontournables-card--pdf" style="<%= card_style %>">
+    <div class="incontournables-card--pdf__conteneur">
+      <div class="incontournables-card--pdf__conteneur--illustration">
+        <%= image_tag @image_path, alt: @image_alt %>
+      </div>
+      <div class="incontournables-card--pdf__conteneur--textes">
+        <div class="incontournables-card--pdf__conteneur--textes-numero"><%= @numero %></div>
+        <div class="incontournables-card--pdf__conteneur--textes-titre"><%= @titre %></div>
+      </div>
+    </div>
   </div>
-  <div class="incontournables-card__en-savoir-plus">
-    <span class="incontournables-card__en-savoir-plus-texte"><%= en_savoir_plus_label %></span>
-  </div>
+<% else %>
+  <%= link_to @url,
+               class: "incontournables-card fr-raw-link",
+               style: card_style,
+               target: "_blank",
+               rel: "noopener noreferrer" do %>
+    <div class="incontournables-card__numero"><%= @numero %></div>
+    <p class="incontournables-card__titre"><%= @titre %></p>
+    <div class="incontournables-card__illustration">
+      <%= image_tag @image_path, class: "incontournables-card__illustration--svg", alt: @image_alt %>
+    </div>
+    <div class="incontournables-card__en-savoir-plus">
+      <span class="incontournables-card__en-savoir-plus-texte"><%= en_savoir_plus_label %></span>
+    </div>
+  <% end %>
 <% end %>

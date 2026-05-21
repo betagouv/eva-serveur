@@ -3,12 +3,6 @@
 require 'rails_helper'
 
 describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
-  before { render partial: 'admin/evaluations/evapro/aller_plus_loin' }
-
-  let(:fragment) { Nokogiri::HTML.fragment(rendered) }
-  let(:cartes) { fragment.css('.incontournables-etapes .incontournables-card') }
-  let(:rangees) { fragment.css('.incontournables-etapes .incontournables-etapes__rangee') }
-
   let(:urls_incontournables_bao) do
     b = 'https://www.bao-incontournables.fr'
     [
@@ -31,6 +25,12 @@ describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
   end
 
   it "affiche les 8 etapes des incontournables dans l'ordre" do
+    render partial: 'admin/evaluations/evapro/aller_plus_loin'
+
+    fragment = Nokogiri::HTML.fragment(rendered)
+    cartes = fragment.css('.incontournables-etapes .incontournables-card')
+    rangees = fragment.css('.incontournables-etapes .incontournables-etapes__rangee')
+
     expect(rangees.size).to eq(2)
     expect(rangees.map { |rangee| rangee.css('.incontournables-card').size }).to eq([ 4, 4 ])
     expect(cartes.size).to eq(8)
@@ -50,5 +50,23 @@ describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
     expect(premiere['target']).to eq('_blank')
     expect(premiere['rel']).to eq('noopener noreferrer')
     expect(cartes.map { |c| c['href'] }).to eq(urls_incontournables_bao)
+  end
+
+  it "en PDF, affiche les cartes compactes sans lien" do
+    render partial: "admin/evaluations/evapro/aller_plus_loin", locals: { pdf: true }
+
+    fragment_pdf = Nokogiri::HTML.fragment(rendered)
+    cartes_pdf = fragment_pdf.css(".incontournables-etapes .incontournables-card")
+
+    expect(cartes_pdf.size).to eq(8)
+    expect(fragment_pdf.css("a.incontournables-card")).to be_empty
+    expect(cartes_pdf.map { |c| c["href"] }.compact).to eq([])
+    expect(cartes_pdf.first["class"]).to include("incontournables-card--pdf")
+    numero = cartes_pdf.first.at_css(".incontournables-card--pdf__conteneur--textes-numero")
+    expect(numero.text.strip).to eq("01")
+    titre = cartes_pdf.first.at_css(".incontournables-card--pdf__conteneur--textes-titre")
+    expect(titre.text.strip).to eq(
+      I18n.t(:informe, scope: %i[admin evaluations aller_plus_loin etapes])
+    )
   end
 end

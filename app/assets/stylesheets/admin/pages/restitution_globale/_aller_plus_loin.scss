@@ -129,14 +129,16 @@
     max-width: none;
     width: 100%;
     align-items: stretch;
-    padding: 0.5rem ;
+    padding: 0;
+    gap: $dsfr-spacing-1v;
   }
 
   .incontournables-etapes__rangee {
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
     width: 100%;
     align-items: stretch;
+    gap: $dsfr-spacing-1v;
   }
 }
 

@@ -78,7 +78,8 @@
             couleur_texte: carte[:couleur_texte],
             couleur_fond: carte[:couleur_fond],
             image_alt: t(:image_alt_etape, scope: apl, numero: carte[:numero], titre: titre),
-            url: carte[:url]
+            url: carte[:url],
+            pdf: local_assigns.fetch(:pdf, false)
           ) %>
     <% end %>
   </div>
@@ -93,7 +94,8 @@
             couleur_texte: carte[:couleur_texte],
             couleur_fond: carte[:couleur_fond],
             image_alt: t(:image_alt_etape, scope: apl, numero: carte[:numero], titre: titre),
-            url: carte[:url]
+            url: carte[:url],
+            pdf: local_assigns.fetch(:pdf, false)
           ) %>
     <% end %>
   </div>

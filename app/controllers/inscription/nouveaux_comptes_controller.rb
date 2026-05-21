@@ -33,9 +33,11 @@ class Inscription::NouveauxComptesController < ApplicationController
   private
 
   def verifie_current_compte
-    redirige_vers_etape_inscription(current_compte) if current_compte&.doit_completer_inscription?
-
-    redirect_to admin_dashboard_path if current_compte.present?
+    if current_compte&.doit_completer_inscription?
+      redirige_vers_etape_inscription(current_compte)
+    elsif current_compte.present?
+      redirect_to admin_dashboard_path
+    end
   end
 
   def charge_invitation_ou_redirect

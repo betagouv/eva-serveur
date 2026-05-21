@@ -24,6 +24,6 @@ evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
 evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
   end
   column do |evaluation|
-    render partial: "admin/evaluations/index_evapro/lien", locals: { evaluation: evaluation }
+    render partial: "admin/evaluations/evapro/index_evapro/lien", locals: { evaluation: evaluation }
   end
 end

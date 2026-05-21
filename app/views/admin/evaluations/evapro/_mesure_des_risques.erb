@@ -1,0 +1,12 @@
+<div id="diag-risques-entrerpise">
+  <h2 class="evaluation__titre"><%= t(:titre, scope: [  :admin, :evaluations, :mesure_des_risques  ]) %></h2>
+  <%= render Evaluation::MesureChiffreCleComponent.new(
+    palier: risques_presenter.palier,
+    prefixe: t(:prefixe, scope: [  :admin, :evaluations, :mesure_des_risques  ]),
+    chiffre: "#{risques_presenter.pourcentage_risque} %",
+    explications: {
+      texte: t("explication.texte.#{risques_presenter.lettre}", scope: [  :admin, :evaluations, :mesure_des_risques  ]),
+      suite: t("explication.suite.#{risques_presenter.lettre}", scope: [  :admin, :evaluations, :mesure_des_risques  ])
+    }
+  ) %>
+</div>

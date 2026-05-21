@@ -77,7 +77,7 @@ ActiveAdmin.register Evaluation do
   form partial: "form"
 
   sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evapro? } do
-    render "opco_financeur",
+    render "admin/evaluations/evapro/opco_financeur",
            opco: resource.diagnostic_pro&.opco_financeur,
            evaluation: resource
   end
@@ -96,14 +96,16 @@ ActiveAdmin.register Evaluation do
       resource.responsable_suivi.blank? &&
       can?(:ajouter_responsable_suivi, Evaluation)
   } do
-    render "recherche_responsable_suivi"
+    render "admin/evaluations/eva/recherche_responsable_suivi"
   end
 
-  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evapro? }
+  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evapro? } do
+    render "admin/evaluations/eva/menu_sidebar"
+  end
 
   sidebar " ", class: "menu-sidebar evaluation-evapro", only: :index, if: proc {
     current_compte.utilisateur_entreprise? } do
-           render partial: "admin/evaluations/index_evapro/sidebar_opco",
+           render partial: "admin/evaluations/evapro/index_evapro/sidebar_opco",
                  locals: {
                    opco: opco_financeur,
                    structure: structure

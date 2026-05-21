@@ -1,9 +1,9 @@
 div class: "row" do
-  render "admin/evaluations/competence_niveau1",
+  render "admin/evaluations/eva/competence_niveau1",
          competence: "litteratie",
          niveau: niveau_litteratie,
          referentiel: referentiel
-  render "admin/evaluations/competence_niveau1",
+  render "admin/evaluations/eva/competence_niveau1",
          competence: "numeratie",
          niveau: niveau_numeratie,
          referentiel: referentiel

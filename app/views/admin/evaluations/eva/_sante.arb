@@ -1,4 +1,5 @@
-h3 t(".#{categorie}"), class: "categorie"
+h3 t(categorie.to_sym, scope: [ :admin, :evaluations, :questions_reponses_autopositionnement ]),
+class: "categorie"
 questions_reponses.each do |question, reponse|
   if question.categorie == categorie
     div question.transcription_intitule&.ecrit

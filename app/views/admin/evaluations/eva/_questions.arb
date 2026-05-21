@@ -1,5 +1,6 @@
 unless restitution.questions_redaction.empty?
-  h4 t(".situation", situation: situation_libelle), class: "situation-redaction fr-mb-3"
+  h4 t(:situation, scope: [ :admin, :evaluations, :questions ], situation: situation_libelle),
+class: "situation-redaction fr-mb-3"
   restitution.questions_redaction.each do |question, reponse|
     div class: "row fr-mb-3" do
       div class: "col-8 fr-mb-4" do

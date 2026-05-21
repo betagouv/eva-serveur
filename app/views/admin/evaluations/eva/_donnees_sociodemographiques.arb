@@ -1,6 +1,7 @@
 donnee_sociodemographique = resource.donnee_sociodemographique
 
-h3 t(".#{categorie}"), class: "categorie"
+h3 t(categorie.to_sym, scope: [ :admin, :evaluations, :donnees_sociodemographiques ]),
+class: "categorie"
 
 bienvenue.questionnaires_questions_pour(categorie).each do |config|
   div config.question.transcription_intitule&.ecrit

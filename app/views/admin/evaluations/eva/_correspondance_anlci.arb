@@ -1,6 +1,6 @@
 div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci" do
   if pdf
-    render "entete_page", restitution_globale: restitution_globale
+    render "admin/evaluations/eva/entete_page", restitution_globale: restitution_globale
 
     h2 t("titre", scope: "admin.restitutions.anlci"),
        class: "text-center fr-mt-5 fr-mb-4 evaluation__titre"
@@ -18,7 +18,7 @@ div id: "correspondance_anlci", class: "page adaptation-pdf correspondance_anlci
       end
     end
     div class: "marges-page litteratie-numeratie-niveau1-anlci" do
-      render "litteratie_numeratie_niveau1",
+      render "admin/evaluations/eva/litteratie_numeratie_niveau1",
              niveau_litteratie: resource.niveau_anlci_litteratie,
              niveau_numeratie: resource.niveau_anlci_numeratie,
              referentiel: "anlci"

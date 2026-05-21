@@ -1,5 +1,5 @@
 <div id="competences_transversales" class="page adaptation-pdf competences_transversales">
-  <%= render "entete_page", restitution_globale: @restitution_globale %>
+  <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
 
   <h2 class="text-center fr-my-4v evaluation__titre"><%= t(".titre") %></h2>
   <% unless @completude_competences_transversales %>
@@ -23,6 +23,6 @@
       </div>
     </div>
 
-    <%= render "pied_page" %>
+    <%= render "admin/evaluations/eva/pied_page" %>
   </div>
 </div>

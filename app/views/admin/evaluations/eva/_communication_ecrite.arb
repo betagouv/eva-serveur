@@ -3,7 +3,7 @@ if mes_avec_redaction_de_notes.present?
     mes_avec_redaction_de_notes.each do |restitution|
       situation = restitution.situation
 
-      render "questions", {
+      render "admin/evaluations/eva/questions", {
         restitution: restitution,
         situation_libelle: situation.libelle
       }

@@ -1,0 +1,87 @@
+<% apl = [  :admin, :evaluations, :aller_plus_loin  ] %>
+<% etapes = [  *apl, :etapes  ] %>
+<div class="incontournables-etapes">
+  <div class="incontournables-etapes__rangee">
+    <div class="illustrinfo illustrinfo--01">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/jinforme 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "01", titre: t(:informe, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">01</div>
+          <div class="titre"><%= t(:informe, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--02">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/jimplique 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "02", titre: t(:implique, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">02</div>
+          <div class="titre"><%= t(:implique, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--03">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/je-repere-et-jidentiie 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "03", titre: t(:repere, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">03</div>
+          <div class="titre"><%= t(:repere, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--04">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/jelabore-mon-plan 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "04", titre: t(:plan_actions, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">04</div>
+          <div class="titre"><%= t(:plan_actions, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="incontournables-etapes__rangee">
+    <div class="illustrinfo illustrinfo--05">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/je-passe-commande 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "05", titre: t(:passe_commande, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">05</div>
+          <div class="titre"><%= t(:passe_commande, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--06">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/je-forme-des-salaries 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "06", titre: t(:co_construis, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">06</div>
+          <div class="titre"><%= t(:co_construis, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--07">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/je-co-construis 1.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "07", titre: t(:forme_salaries, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">07</div>
+          <div class="titre"><%= t(:forme_salaries, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="illustrinfo illustrinfo--08">
+      <div class="illustrinfo-body">
+        <%= image_tag "incontournables/illustration.svg", class: "aller-plus-loin__illustration", alt: t(:image_alt_etape, scope: apl, numero: "08", titre: t(:evalue_projet, scope: etapes)) %>
+        <div class="droite">
+          <div class="numero">08</div>
+          <div class="titre"><%= t(:evalue_projet, scope: etapes) %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

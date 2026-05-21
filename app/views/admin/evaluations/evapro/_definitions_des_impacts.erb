@@ -1,0 +1,9 @@
+<% apl = [  :admin, :evaluations, :aller_plus_loin  ] %>
+<div class="definitions-impacts__titre"><%= t(:titre_definitions, scope: apl) %></div>
+
+<div class="definitions-impacts__groupe-termes-definis">
+  <p class="definitions-impacts__texte"><strong><%= t(:titre, scope: [  *apl, :performance_collective  ]) %></strong><%= t(:description, scope: [  *apl, :performance_collective  ]) %></p>
+  <p class="definitions-impacts__texte"><strong><%= t(:titre, scope: [  *apl, :agilite_organisationnelle  ]) %></strong><%= t(:description, scope: [  *apl, :agilite_organisationnelle  ]) %></p>
+  <p class="definitions-impacts__texte"><strong><%= t(:titre, scope: [  *apl, :securite_qualite  ]) %></strong><%= t(:description, scope: [  *apl, :securite_qualite  ]) %></p>
+  <p class="definitions-impacts__texte"><strong><%= t(:titre, scope: [  *apl, :mobilite_professionnelle  ]) %></strong><%= t(:description, scope: [  *apl, :mobilite_professionnelle  ]) %></p>
+</div>

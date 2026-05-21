@@ -6,7 +6,7 @@
   <h1>Démo IncontournablesEtapeCardComponent</h1>
 
   <p class="fr-text--lead">
-    Carte utilisée pour les 8 étapes des « Incontournables » dans la restitution EVA Pro (numéro, titre, illustration, libellé « En savoir plus », couleurs via variables CSS). La carte entière sera cliquable dans un second temps.
+    Carte utilisée pour les 8 étapes des « Incontournables » dans la restitution EVA Pro (numéro, titre, illustration, libellé « En savoir plus », couleurs via variables CSS). La carte entière est un lien vers la page BAO de l’étape.
   </p>
 
   <h2 class="fr-mt-5w">Exemple isolé</h2>
@@ -23,7 +23,8 @@
               "admin.evaluations.aller_plus_loin.image_alt_etape",
               numero: "01",
               titre: I18n.t("admin.evaluations.aller_plus_loin.etapes.informe")
-            )
+            ),
+            url: "https://www.bao-incontournables.fr/etape-1-informer/"
           ) %>
     </div>
   </div>

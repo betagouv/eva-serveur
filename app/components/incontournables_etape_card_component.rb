@@ -7,7 +7,8 @@ class IncontournablesEtapeCardComponent < ViewComponent::Base
     image_path:,
     couleur_texte:,
     couleur_fond:,
-    image_alt:
+    image_alt:,
+    url:
   )
     @numero = numero
     @titre = titre
@@ -15,6 +16,7 @@ class IncontournablesEtapeCardComponent < ViewComponent::Base
     @couleur_texte = couleur_texte
     @couleur_fond = couleur_fond
     @image_alt = image_alt
+    @url = url
   end
 
   def card_style

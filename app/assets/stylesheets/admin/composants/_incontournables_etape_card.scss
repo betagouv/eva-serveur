@@ -19,6 +19,26 @@
   }
 }
 
+// `fr-raw-link` : neutralise le soulignement DSFR sur `[href]` et l’icône `[target=_blank]::after`
+// (variables `--underline-img` / `--external-link-content`, cf. dsfr.main.css).
+a.incontournables-card {
+  text-decoration: none;
+  cursor: pointer;
+  outline-offset: 0.25rem;
+
+  &:visited {
+    color: var(--incontournables-card-color);
+  }
+
+  // Neutralise `a[href]:hover` / `:active` du DSFR (`background-color: var(--hover-tint)`).
+  @media (hover: hover) and (pointer: fine) {
+    &[href]:hover,
+    &[href]:active {
+      background-color: var(--incontournables-card-bg);
+    }
+  }
+}
+
 .incontournables-card__numero {
   display: flex;
   min-height: 2.5rem;

@@ -42,31 +42,32 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :controle_syntheses_restitutions, only: :index
 
-    # UI Kit routes
+    # UI Kit routes (ordre alphabétique du chemin sous /ui_kit)
     get '/ui_kit', to: 'ui_kit#index'
-    get '/ui_kit/mise_en_avant', to: 'ui_kit#mise_en_avant'
     get '/ui_kit/badge', to: 'ui_kit#badge'
+    get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
     get '/ui_kit/bilan_eva_pro', to: 'ui_kit#bilan_eva_pro'
     get '/ui_kit/bouton', to: 'ui_kit#bouton'
-    get '/ui_kit/boutons_dsfr', to: 'ui_kit#boutons_dsfr'
     get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
-    get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
-    get '/ui_kit/impact_stepper', to: 'ui_kit#impact_stepper'
-    get '/ui_kit/incontournables_etape_card', to: 'ui_kit#incontournables_etape_card'
-    get '/ui_kit/eva_pro_score', to: 'ui_kit#eva_pro_score'
+    get '/ui_kit/boutons_dsfr', to: 'ui_kit#boutons_dsfr'
     get '/ui_kit/card', to: 'ui_kit#card'
     get '/ui_kit/carte', to: 'ui_kit#carte'
-    get '/ui_kit/carte_v2', to: 'ui_kit#carte_v2'
     # get '/ui_kit/carte_mise_en_action', to: 'ui_kit#carte_mise_en_action'
     get '/ui_kit/carte_partage_code', to: 'ui_kit#carte_partage_code'
+    get '/ui_kit/carte_v2', to: 'ui_kit#carte_v2'
     get '/ui_kit/chiffre_cle', to: 'ui_kit#chiffre_cle'
     get '/ui_kit/code', to: 'ui_kit#code'
     get '/ui_kit/ellipse', to: 'ui_kit#ellipse'
     get '/ui_kit/evaluation_incomplete', to: 'ui_kit#evaluation_incomplete'
+    get '/ui_kit/eva_pro_score', to: 'ui_kit#eva_pro_score'
     get '/ui_kit/header', to: 'ui_kit#header'
+    get '/ui_kit/impact_stepper', to: 'ui_kit#impact_stepper'
+    get '/ui_kit/incontournables_etape_card', to: 'ui_kit#incontournables_etape_card'
+    get '/ui_kit/input', to: 'ui_kit#input'
     get '/ui_kit/lien', to: 'ui_kit#lien'
     get '/ui_kit/menu_actions', to: 'ui_kit#menu_actions'
     get '/ui_kit/mesure_chiffre_cle', to: 'ui_kit#mesure_chiffre_cle'
+    get '/ui_kit/mise_en_avant', to: 'ui_kit#mise_en_avant'
     get '/ui_kit/nom_anonymisable', to: 'ui_kit#nom_anonymisable'
     get '/ui_kit/panel', to: 'ui_kit#panel'
     get '/ui_kit/pastille', to: 'ui_kit#pastille'
@@ -79,7 +80,6 @@ Rails.application.routes.draw do
     get '/ui_kit/tag', to: 'ui_kit#tag'
     get '/ui_kit/texte_intro', to: 'ui_kit#texte_intro'
     get '/ui_kit/toggle', to: 'ui_kit#toggle'
-    get '/ui_kit/input', to: 'ui_kit#input'
 
     namespace :positionnement do
       resources :parties do

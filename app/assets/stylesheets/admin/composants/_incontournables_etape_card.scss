@@ -12,6 +12,11 @@
   border: 1px solid transparent;
   background: var(--incontournables-card-bg);
   color: var(--incontournables-card-color);
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--incontournables-card-color);
+  }
 }
 
 .incontournables-card__numero {
@@ -59,6 +64,12 @@
   aspect-ratio: 131.56 / 93.74;
   flex-shrink: 0;
   object-fit: contain;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.incontournables-card:hover .incontournables-card__illustration--svg {
+  transform: scale(1.1);
 }
 
 .incontournables-card__en-savoir-plus {

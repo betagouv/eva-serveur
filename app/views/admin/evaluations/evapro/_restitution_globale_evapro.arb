@@ -95,6 +95,7 @@ div class: "evaluation-evapro" do
 
         render(
           partial: "admin/evaluations/evapro/aller_plus_loin",
+          locals: { pdf: pdf }
         )
       end
     end

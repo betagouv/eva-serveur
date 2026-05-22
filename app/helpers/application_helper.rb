@@ -20,10 +20,6 @@ module ApplicationHelper
     "#{signe}#{heure_minutes_secondes.map { |t| t.to_s.rjust(2, '0') }.join(':')}"
   end
 
-  def rapport_colonne_class
-    "col-4 fr-px-12v fr-mb-6v"
-  end
-
   def inline_svg_content(attachment, options = {})
     return unless attachment.attached?
 

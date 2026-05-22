@@ -25,7 +25,7 @@ ActiveAdmin.register Actualite do
     end
   end
 
-  index dsfr_table: proc { true } do
+  index do
     render partial: "actualites", locals: { actualites: actualites }
   end
 

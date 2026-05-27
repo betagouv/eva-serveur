@@ -20,7 +20,7 @@ RSpec.describe CreationCompteDepuisInvitationService do
       expect(result.succes).to be(true)
       expect(result.compte).to be_persisted
       expect(result.compte.structure).to eq(structure)
-      expect(result.compte.siret_pro_connect).to be_nil
+      expect(result.compte.siret).to be_nil
     end
   end
 end

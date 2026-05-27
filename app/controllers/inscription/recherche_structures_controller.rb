@@ -14,11 +14,11 @@ class Inscription::RechercheStructuresController < ApplicationController
 
   def update
     valide_siret_et_remplir_erreurs
-    if @compte.errors[:siret_pro_connect].present?
+    if @compte.errors[:siret].present?
       render :show
       return
     end
-    if assigne_siret_pour_compte(@compte.siret_pro_connect)
+    if assigne_siret_pour_compte(@compte.siret)
       redirige_vers_etape_inscription(@compte)
     else
       render :show
@@ -29,9 +29,9 @@ class Inscription::RechercheStructuresController < ApplicationController
 
   def valide_siret_et_remplir_erreurs
     siret = siret_param.to_s.strip
-    @compte.siret_pro_connect = siret
+    @compte.siret = siret
     if siret.blank?
-      @compte.errors.add(:siret_pro_connect, :invalid)
+      @compte.errors.add(:siret, :invalid)
     else
       @compte.validate_siret_format
     end
@@ -48,7 +48,7 @@ class Inscription::RechercheStructuresController < ApplicationController
   end
 
   def siret_param
-    params[:compte]&.dig(:siret_pro_connect).presence || params[:siret]
+    params[:compte]&.dig(:siret).presence || params[:siret]
   end
 
   def assigne_siret_pour_compte(siret)
@@ -61,11 +61,11 @@ class Inscription::RechercheStructuresController < ApplicationController
     if structure.new_record? && structure.statut_siret == false
       siret_ferme = structure.respond_to?(:siret_ferme) && structure.siret_ferme
       erreur = siret_ferme ? :siret_ferme : :invalid
-      @compte.errors.add(:siret_pro_connect, erreur)
+      @compte.errors.add(:siret, erreur)
       return false
     end
 
-    @compte.siret_pro_connect = siret
+    @compte.siret = siret
     @compte.etape_inscription = :assignation_structure
     @compte.save
   end

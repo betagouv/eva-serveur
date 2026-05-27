@@ -10,7 +10,7 @@ describe "Reprise d'onboarding après reconnexion", type: :feature do
       role: :conseiller,
       statut_validation: :en_attente,
       etape_inscription: :recherche_structure,
-      siret_pro_connect: "13002526500013",
+      siret: "13002526500013",
       cgu_acceptees: true
     )
   end

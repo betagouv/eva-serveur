@@ -8,7 +8,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
       email: 'conseiller@example.fr',
       prenom: 'Jean',
       nom: 'Dupont',
-      siret_pro_connect: nil, # Pas de SIRET dans ProConnect
+      siret: nil,
       structure: nil,
       etape_inscription: 'recherche_structure'
     )
@@ -18,7 +18,7 @@ describe 'Recherche de structure par SIRET', type: :feature do
     inscription_pro_connect(compte_pro_connect)
   end
 
-  context "quand le compte n'a pas de SIRET ProConnect" do
+  context "quand le compte n'a pas de SIRET" do
     before do
       # On visite directement la page car le compte est déjà en étape recherche_structure
       visit inscription_recherche_structure_path
@@ -30,16 +30,10 @@ describe 'Recherche de structure par SIRET', type: :feature do
       expect(page).to have_field('siret')
     end
 
-    context 'bouton Retour' do
-      before do
-        visit inscription_recherche_structure_path
-      end
+    it "permet de revenir à l'étape précédente" do
+      click_on 'Précédent'
 
-      it 'permet de revenir à l\'étape précédente' do
-        click_on 'Précédent'
-
-        expect(page).to have_current_path(inscription_informations_compte_path)
-      end
+      expect(page).to have_current_path(inscription_informations_compte_path)
     end
   end
 end

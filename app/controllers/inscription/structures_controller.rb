@@ -43,7 +43,7 @@ class Inscription::StructuresController < ApplicationController
   end
 
   def prepare_structure_si_necessaire
-    return if @compte.siret_pro_connect.blank?
+    return if @compte.siret.blank?
     return if @compte.cree_via_invitation_acceptee? && @compte.structure.present?
 
     recherche_et_assigne_structure
@@ -60,7 +60,7 @@ class Inscription::StructuresController < ApplicationController
   def recherche_et_assigne_structure
     return if @structure.present?
 
-    @structure = RechercheStructureParSiret.new(@compte.siret_pro_connect).call
+    @structure = RechercheStructureParSiret.new(@compte.siret).call
     @compte.structure = @structure
   end
 
@@ -181,7 +181,7 @@ class Inscription::StructuresController < ApplicationController
 
   def cree_structure_avec_params
     FabriqueStructure.cree_depuis_siret(
-      @compte.siret_pro_connect,
+      @compte.siret,
       structure_params.merge(usage: @compte.usage).compact,
       validation_inscription: true
     )

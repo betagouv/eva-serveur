@@ -2,7 +2,7 @@ class Compte < ApplicationRecord
   include EtapeInscription
   include AvecUsage
   include ValidationSiret
-  validation_siret_column :siret_pro_connect
+  validation_siret_column :siret
   validate :validation_siret
 
   attr_accessor :structure_confirmee, :force_deplacement_structure

@@ -13,8 +13,11 @@
   border-bottom: 1px solid var(--border-default-grey);
 }
 
+// Une seule bordure extérieure sur le container DSFR (scroll horizontal) : évite le double cadre
+// visible au scroll quand le <table> a aussi une bordure.
+
 .dsfr-table-active-admin table {
-  border: 1px solid $grey-625;
+  border: 0;
 }
 
 .dsfr-table-active-admin table.index_table tbody tr {
@@ -24,13 +27,13 @@
 }
 
 .dsfr-table-active-admin table.index_table tbody tr td:first-child {
-    font-weight: 600;
-    border-left: 1px solid $grey-625;
-    padding: $dsfr-spacing-1w $dsfr-spacing-2w;
-  }
+  font-weight: 600;
+  border-left: none;
+  padding: $dsfr-spacing-1w $dsfr-spacing-2w;
+}
 
 .dsfr-table-active-admin table.index_table tbody tr td:last-child {
-  border-right: 1px solid $grey-625;
+  border-right: none;
   padding: $dsfr-spacing-1w $dsfr-spacing-2w;
 }
 

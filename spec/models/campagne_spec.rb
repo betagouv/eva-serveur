@@ -134,61 +134,70 @@ describe Campagne, type: :model do
     let(:compte) { create :compte }
     let(:campagne) { build :campagne, compte: compte, code: nil }
 
-    before do
-      allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'
-    end
-
-    context 'genere un code avec le code postal de la structure' do
-      before do
-        allow(compte).to receive(:structure_code_postal).and_return '75012'
-        campagne.genere_code_unique
-      end
-
-      it do
-        expect(campagne.code).to eq 'XXX75012'
-      end
-    end
-
-    context "quand il n'y a pas de compte" do
-      before do
-        campagne.compte = nil
-        campagne.genere_code_unique
-      end
-
-      it { expect(campagne.code).to be_nil }
-    end
-
     context 'quand le code est déjà présent' do
       before do
-        campagne.code = '123'
+        campagne.code = 'CODE_DEJA_PRESENT'
         campagne.genere_code_unique
       end
 
-      it { expect(campagne.code).to eq '123' }
+      it { expect(campagne.code).to eq 'CODE_DEJA_PRESENT' }
     end
 
-    context "code postal 'non_communique' (structure SIRET sans code postal)" do
+    context "Ne permet pas de générer des codes problématiques" do
       before do
-        allow(compte).to receive(:structure_code_postal).and_return "non_communique"
+        allow(compte).to receive(:structure_code_postal).and_return '75012'
+        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return('LOL', 'GAG', 'XXX')
         campagne.genere_code_unique
       end
 
-      it "génère un code conforme (majuscules et chiffres uniquement) et la campagne est valide" do
-        expect(campagne.code).to match(/\A[A-Z0-9]+\z/)
-        expect(campagne.code).to eq "XXXNONCOMMUNIQUE"
-        expect(campagne).to be_valid
-      end
+      it { expect(campagne.code).to eq 'XXX75012' }
     end
 
-    context "quand le code postal contient des caractères invalides (espaces, tirets)" do
+    context "Mock le générateur alléatoire" do
       before do
-        allow(compte).to receive(:structure_code_postal).and_return "75-001"
-        campagne.genere_code_unique
+        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'
+        allow(GenerateurAleatoire).to receive(:nombres).with(5).and_return 'NNNNN'
       end
 
-      it "normalise le suffixe pour ne garder que majuscules et chiffres" do
-        expect(campagne.code).to match(/\A[A-Z0-9]+\z/)
-        expect(campagne.code).to eq "XXX75001"
+      context 'genere un code avec le code postal de la structure' do
+        before do
+          allow(compte).to receive(:structure_code_postal).and_return '75012'
+          campagne.genere_code_unique
+        end
+
+        it { expect(campagne.code).to eq 'XXX75012' }
+      end
+
+      context "quand il n'y a pas de compte" do
+        before do
+          campagne.compte = nil
+          campagne.genere_code_unique
+        end
+
+        it { expect(campagne.code).to be_nil }
+      end
+
+      context "code postal 'non_communique' (structure SIRET sans code postal)" do
+        before do
+          allow(compte).to receive(:structure_code_postal).and_return "non_communique"
+          campagne.genere_code_unique
+        end
+
+        it "génère un code conforme et la campagne est valide" do
+          expect(campagne.code).to eq "XXXNNNNN"
+          expect(campagne).to be_valid
+        end
+      end
+
+      context "quand le code postal contient des caractères invalides (espaces, tirets)" do
+        before do
+          allow(compte).to receive(:structure_code_postal).and_return "75-001"
+          campagne.genere_code_unique
+        end
+
+        it "normalise le suffixe pour ne garder que les chiffres" do
+          expect(campagne.code).to eq "XXX75001"
+        end
       end
     end
   end

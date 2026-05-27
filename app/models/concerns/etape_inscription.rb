@@ -32,7 +32,7 @@ module EtapeInscription
 
     if Invitation.exists?(compte_id: id, statut: "acceptee")
       self.etape_inscription = "assignation_structure"
-    elsif siret_pro_connect.blank?
+    elsif siret.blank?
       self.etape_inscription = "recherche_structure"
     else
       self.etape_inscription = "assignation_structure"

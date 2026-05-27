@@ -21,17 +21,17 @@ describe Compte do
   describe "validation du SIRET" do
     context "quand le SIRET est valide" do
       it "accepte la validation" do
-        compte = build(:compte, siret_pro_connect: "12345678901234")
+        compte = build(:compte, siret: "12345678901234")
         expect(compte.valid?).to be(true)
       end
     end
 
     context "quand le SIRET est invalide" do
       it "refuse la validation" do
-        compte = build(:compte, siret_pro_connect: "123456789012345")
+        compte = build(:compte, siret: "123456789012345")
         expect(compte.valid?).to be(false)
-        message = I18n.t("activerecord.errors.models.compte.attributes.siret_pro_connect.invalid")
-        expect(compte.errors[:siret_pro_connect]).to include(message)
+        message = I18n.t("activerecord.errors.models.compte.attributes.siret.invalid")
+        expect(compte.errors[:siret]).to include(message)
       end
     end
   end

@@ -3,7 +3,7 @@ require "rails_helper"
 describe Inscription::StructuresController, type: :controller do
   let(:compte) {
     create(:compte_pro_connect, etape_inscription: "assignation_structure", structure: nil,
-      siret_pro_connect: "13002526500013")
+      siret: "13002526500013")
   }
   let(:opco) { create(:opco, nom: "OPCO Test", idcc: [ "3" ]) }
 
@@ -20,7 +20,7 @@ describe Inscription::StructuresController, type: :controller do
         create(:compte_conseiller,
                structure: structure_invitee,
                etape_inscription: "assignation_structure",
-               siret_pro_connect: "13002526500013",
+               siret: "13002526500013",
                statut_validation: :en_attente)
       end
 
@@ -47,7 +47,7 @@ describe Inscription::StructuresController, type: :controller do
       context "avec une structure temporaire (non persistée)" do
         before do
           # Mock RechercheStructureParSiret pour retourner une structure non persistée
-          structure = build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ],
+          structure = build(:structure_locale, siret: compte.siret, idcc: [ "3" ],
             nom: "Nom de la structure", raison_sociale: "Entreprise Test")
           allow(RechercheStructureParSiret).to receive(:new).and_return(
             instance_double(RechercheStructureParSiret, call: structure)
@@ -81,7 +81,7 @@ describe Inscription::StructuresController, type: :controller do
 
       context "avec une structure existante (persistée)" do
         let!(:structure_existante) {
-          create(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ])
+          create(:structure_locale, siret: compte.siret, idcc: [ "3" ])
         }
 
         before do
@@ -149,7 +149,7 @@ describe Inscription::StructuresController, type: :controller do
  create(:structure_locale, :avec_admin, siret: "13002526500013", idcc: [ "3" ]) }
       let(:compte_avec_structure) {
         create(:compte_pro_connect, etape_inscription: "assignation_structure",
-        siret_pro_connect: "13002526500013", structure: structure) }
+        siret: "13002526500013", structure: structure) }
 
       before do
         sign_in compte_avec_structure
@@ -183,7 +183,7 @@ describe Inscription::StructuresController, type: :controller do
 
     context "quand l'action est 'creer'" do
       let(:structure_creée) {
-        build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
+        build(:structure_locale, siret: compte.siret, idcc: [ "3" ]) }
 
       before do
         # Mock FabriqueStructure pour retourner une structure avec IDCC
@@ -291,7 +291,7 @@ describe Inscription::StructuresController, type: :controller do
 
     context "quand l'action est 'creer_avec_usage'" do
       let(:structure_creée) {
-        build(:structure_locale, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
+        build(:structure_locale, siret: compte.siret, idcc: [ "3" ]) }
 
       before do
         session[:structure_params_inscription] = {
@@ -349,7 +349,7 @@ describe Inscription::StructuresController, type: :controller do
       context "quand la structure a code_postal manquant et l'utilisateur saisit un code" do
         let(:structure_creée) do
           build(:structure_locale,
-                siret: compte.siret_pro_connect,
+                siret: compte.siret,
                 idcc: [ "3" ],
                 code_postal: StructureLocale::TYPE_NON_COMMUNIQUE)
         end
@@ -415,7 +415,7 @@ describe Inscription::StructuresController, type: :controller do
       render_views
 
       let!(:structure) {
- create(:structure_locale, :avec_admin, siret: compte.siret_pro_connect, idcc: [ "3" ]) }
+ create(:structure_locale, :avec_admin, siret: compte.siret, idcc: [ "3" ]) }
 
       before do
         compte.update(structure: structure)
@@ -433,7 +433,7 @@ describe Inscription::StructuresController, type: :controller do
       end
 
       context "quand il n'y a qu'une seule structure avec ce SIRET" do
-        let!(:structure) { create(:structure_locale, :avec_admin, siret: compte.siret_pro_connect) }
+        let!(:structure) { create(:structure_locale, :avec_admin, siret: compte.siret) }
 
         it "rejoint automatiquement la structure existante" do
           patch :update, params: { commit: "rejoindre" }

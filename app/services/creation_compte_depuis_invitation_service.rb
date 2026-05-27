@@ -32,9 +32,9 @@ class CreationCompteDepuisInvitationService
       role: @invitation.role_pour_compte,
       statut_validation: invitant_autorise_validation_directe? ? :acceptee : :en_attente,
       # Dans le parcours invitation, la structure est déjà connue (structure_id).
-      # Remplir siret_pro_connect ici déclenche des branches du flow inscription prévues
+      # Remplir siret ici déclenche des branches du flow inscription prévues
       # pour la recherche/création de structure par SIRET et peut bloquer l'utilisateur.
-      siret_pro_connect: nil
+      siret: nil
     }
   end
 

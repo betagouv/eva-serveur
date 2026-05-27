@@ -76,7 +76,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
         compte.reload
         expect(compte.etape_inscription).to eq("assignation_structure")
         expect(response).to redirect_to(inscription_structure_path)
-        expect(compte.errors[:siret_pro_connect]).to be_empty
+        expect(compte.errors[:siret]).to be_empty
       end
     end
 
@@ -143,11 +143,11 @@ describe Inscription::RechercheStructuresController, type: :controller do
       end
 
       it "reste sur la page et affiche le message d'erreur spécifique SIRET fermé" do
-        patch :update, params: { compte: { siret_pro_connect: siret_ferme } }
+        patch :update, params: { compte: { siret: siret_ferme } }
         expect(response).to have_http_status(:success)
         expect(response).not_to redirect_to(inscription_structure_path)
         message = I18n.t(
-          "activerecord.errors.models.compte.attributes.siret_pro_connect.siret_ferme"
+          "activerecord.errors.models.compte.attributes.siret.siret_ferme"
         )
         expect(response.body).to include(message)
       end
@@ -155,7 +155,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
 
     context 'avec un SIRET invalide (format)' do
       it 'reste sur la page et affiche une erreur sur le champ sans flash structure non trouvée' do
-        patch :update, params: { compte: { siret_pro_connect: "123" } }
+        patch :update, params: { compte: { siret: "123" } }
         expect(response).to have_http_status(:success)
         expect(response).not_to redirect_to(inscription_structure_path)
         expect(flash[:error]).to be_blank
@@ -166,7 +166,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
 
     context 'avec un SIRET vide' do
       it 'reste sur la page et affiche une erreur sur le champ' do
-        patch :update, params: { compte: { siret_pro_connect: "" } }
+        patch :update, params: { compte: { siret: "" } }
         expect(response).to have_http_status(:success)
         expect(response.body).to include("fr-message--error")
       end

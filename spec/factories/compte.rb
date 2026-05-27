@@ -48,7 +48,7 @@ FactoryBot.define do
       structure { nil }
       statut_validation { :en_attente }
       id_pro_connect { 'id_pro_connect_123' }
-      siret_pro_connect { '13002526500013' }
+      siret { '13002526500013' }
       etape_inscription { 'nouveau' }
 
       after(:create, &:assigne_preinscription)

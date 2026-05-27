@@ -50,14 +50,14 @@ RSpec.describe "Invitation : ce n'est pas la bonne structure", type: :request do
     expect(compte.structure_id).to be_nil
 
     patch inscription_recherche_structure_path, params: {
-      compte: { siret_pro_connect: autre_structure.siret.to_s }
+      compte: { siret: autre_structure.siret.to_s }
     }
     expect(response).to redirect_to(inscription_structure_path)
     follow_redirect!
 
     compte.reload
     expect(compte.etape_inscription).to eq("assignation_structure")
-    expect(compte.siret_pro_connect).to eq(autre_structure.siret.to_s)
+    expect(compte.siret).to eq(autre_structure.siret.to_s)
 
     patch inscription_structure_path, params: {
       compte: {

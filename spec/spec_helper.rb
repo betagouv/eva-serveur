@@ -97,7 +97,7 @@ RSpec.configure do |config|
     allow_any_instance_of(ProConnectController).to receive(:correct_state?).and_return(true)
     # rubocop:enable RSpec/AnyInstance
     allow(ProConnectHelper).to receive_messages(recupere_tokens: tokens, verifie: true,
-compte: compte)
+      compte: compte)
 
     visit pro_connect_callback_path(code: 'code', state: 'state')
     compte

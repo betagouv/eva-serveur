@@ -16,6 +16,10 @@ module EtapeInscription
   end
 
   def doit_completer_inscription?
+      if etape_inscription == "complet" && structure_id.blank?
+        update(etape_inscription: "recherche_structure")
+      end
+
     etape_inscription != "complet"
   end
 

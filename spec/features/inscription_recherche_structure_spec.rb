@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Recherche de structure par SIRET', type: :feature do
-  let(:siret) { '13002526500013' }
   let!(:compte_pro_connect) do
     create(
       :compte_pro_connect,

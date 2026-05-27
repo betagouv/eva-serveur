@@ -255,6 +255,22 @@ describe 'Dashboard', type: :feature do
     end
   end
 
+  context "quand l'étape d'inscription est 'complet' mais sans structure" do
+    let!(:compte) do
+      create :compte_conseiller,
+             structure: nil,
+             statut_validation: :en_attente,
+             etape_inscription: "complet",
+             cgu_acceptees: true
+    end
+
+    it "redirige vers la page de recherche de structure" do
+      visit admin_path
+      expect(page).to have_current_path(inscription_recherche_structure_path)
+      expect(compte.reload.etape_inscription).to eq("recherche_structure")
+    end
+  end
+
   context "quand le compte a un id_pro_connect mais l'inscription est complète" do
     let!(:compte) do
       create :compte_conseiller,

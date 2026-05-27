@@ -6,7 +6,7 @@ describe EtapeInscription do
       include ActiveModel::Model
       include EtapeInscription
 
-      attr_accessor :etape_inscription, :structure, :id_pro_connect, :siret, :id
+      attr_accessor :etape_inscription, :structure_id, :siret, :id
 
       def update(attributes)
         attributes.each do |key, value|
@@ -95,8 +95,14 @@ statut: "acceptee").and_return(false)
       expect(objet.doit_completer_inscription?).to be(true)
     end
 
-    it "retourne false quand l'étape est 'complet'" do
+    it "retourne true quand l'étape est 'complet' mais que le compte n'a pas de structure" do
       objet = test_class.new(etape_inscription: "complet")
+      expect(objet.doit_completer_inscription?).to be(true)
+      expect(objet.etape_inscription).to eq("recherche_structure")
+    end
+
+    it "retourne false quand l'étape est 'complet'" do
+      objet = test_class.new(etape_inscription: "complet", structure_id: 'un_id')
       expect(objet.doit_completer_inscription?).to be(false)
     end
   end

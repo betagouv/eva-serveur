@@ -1,4 +1,7 @@
 fr:
+  recherche_compte:
+    no_results: Aucun résultat trouvé
+    assistive_hint: Saisissez un nom ou un email. Quand le résultat de l'autocomplétion est disponible, utilisez les flèches hautes et basses pour passer en revue et la touche entrer pour sélectionner.
   components:
     recherche_compte:
       placeholder: Nom ou email

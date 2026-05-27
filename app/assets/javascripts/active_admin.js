@@ -6,6 +6,7 @@
 //= require liens_evitement
 //= require vendor/select2_locale_fr
 //= require accessible-autocomplete.min
+//= require autocomplete_recherche
 //= require activeadmin_reorderable
 //= require jquery3
 //= require popper

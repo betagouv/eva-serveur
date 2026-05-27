@@ -153,6 +153,17 @@ describe Campagne, type: :model do
       it { expect(campagne.code).to eq 'XXX75012' }
     end
 
+    context "quand le code généré existe déjà en base" do
+      before do
+        allow(compte).to receive(:structure_code_postal).and_return '75012'
+        allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return('AAA', 'BBB')
+        create :campagne, compte: compte, code: 'AAA75012'
+        campagne.genere_code_unique
+      end
+
+      it { expect(campagne.code).to eq 'BBB75012' }
+    end
+
     context "Mock le générateur alléatoire" do
       before do
         allow(GenerateurAleatoire).to receive(:majuscules).with(3).and_return 'XXX'

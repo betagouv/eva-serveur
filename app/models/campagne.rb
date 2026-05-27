@@ -2,6 +2,8 @@ require "generateur_aleatoire"
 
 class Campagne < ApplicationRecord
   PERSONNALISATION = %w[plan_de_la_ville autopositionnement questionnaire_sante redaction].freeze
+  TAILLE_PREFIXES_CODE_CAMPAGNE= 3
+  PREFIXES_CODE_CAMPAGNE_EXCLUS = Set.new(ENV.fetch("PREFIXES_CODE_CAMPAGNE_EXCLUS", "").split)
 
   acts_as_paranoid
 
@@ -76,16 +78,21 @@ class Campagne < ApplicationRecord
     return if compte.blank?
 
     loop do
-      self[:code] = GenerateurAleatoire.majuscules(3) + suffixe_code_campagne
-      break if Campagne.where(code: self[:code]).none?
+      self[:code] =
+GenerateurAleatoire.majuscules(TAILLE_PREFIXES_CODE_CAMPAGNE) + suffixe_code_campagne
+      break if accepte_code(self[:code]) && Campagne.where(code: self[:code]).none?
     end
   end
 
   private
 
+  def accepte_code(code)
+    ! PREFIXES_CODE_CAMPAGNE_EXCLUS.include?(code[0, TAILLE_PREFIXES_CODE_CAMPAGNE])
+  end
+
   def suffixe_code_campagne
-    suffixe = structure_code_postal.to_s.upcase.gsub(/[^A-Z0-9]/, "")
-    suffixe.present? ? suffixe : GenerateurAleatoire.nombres(5).to_s
+    suffixe = structure_code_postal.to_s.gsub(/[^0-9]/, "")
+    suffixe.presence || GenerateurAleatoire.nombres(5).to_s
   end
 
   def configuration_inclus?

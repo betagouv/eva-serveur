@@ -32,4 +32,15 @@ describe ImportExport::Questions::Import::QuestionQcm do
     expect(choix2.audio.attached?).to be true
     expect(choix2.illustration.attached?).to be true
   end
+
+  it 'supprime les choix absents du fichier importé' do
+    service.import_from_xls(file)
+    question = Question.first
+    choix_extra = create(:choix, :mauvais, question_id: question.id, nom_technique: 'ChoixExtra',
+                                           intitule: 'Choix extra')
+
+    service.import_from_xls(file)
+
+    expect(Choix.exists?(id: choix_extra.id)).to be false
+  end
 end

@@ -9,12 +9,10 @@
       <%= render(Evaluation::AlertIncompleteComponent.new) %>
     <% end %>
 
-    <%= render(
-      "litteratie_numeratie_synthese",
-      synthese: @synthese,
-      scope: "admin.evaluations.numeratie.#{@profil}",
-      icone: "icone_profil/icone_#{@profil}.svg"
-    ) %>
+    <%= render "admin/evaluations/eva/litteratie_numeratie_synthese",
+          synthese: @synthese,
+          scope: "admin.evaluations.numeratie.#{@profil}",
+          icone: "icone_profil/icone_#{@profil}.svg" %>
 
     <% if @sous_competences %>
       <% @sous_competences[0..1].each do |sous_competence| %>

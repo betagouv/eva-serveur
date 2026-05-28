@@ -8,7 +8,7 @@ class Evaluation
     end
 
     def url_competence
-      "#{ENV['URL_COMPETENCES']}/#{@competence}/"
+      "#{ENV['URL_SITE_VITRINE']}/#{::Competence::COMPETENCES_TRANSVERSALES[@competence]}/"
     end
   end
 end

@@ -29,13 +29,14 @@ module Competence
   ORGANISATION_METHODE = :organisation_methode
   VIGILANCE_CONTROLE = :vigilance_controle
 
-  COMPETENCES_TRANSVERSALES = [
-    RAPIDITE,
-    COMPARAISON_TRI,
-    ATTENTION_CONCENTRATION,
-    ORGANISATION_METHODE,
-    VIGILANCE_CONTROLE
-  ].freeze
+  # Liste des competences transversales restituées et leur page sur le site vitrine
+  COMPETENCES_TRANSVERSALES = {
+    RAPIDITE => "vitesse-dexecution",
+    COMPARAISON_TRI => "comparaison-et-tri",
+    ATTENTION_CONCENTRATION => "attention-et-concentration",
+    ORGANISATION_METHODE => "organisation-et-methode",
+    VIGILANCE_CONTROLE => "vigilance-et-controle"
+  }.freeze
 
   VOCABULAIRE = :vocabulaire
 end

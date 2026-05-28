@@ -11,9 +11,13 @@ module ImportExport
         def cree_ou_actualise_question(cellules)
           question = super
           question.update!(type_qcm: cellules.suivant)
+          noms_techniques_importes = []
           cree_reponses("choix", cellules) do |data|
+            noms_techniques_importes << data["nom_technique"]
             cree_choix(question, data)
           end
+          question.choix.where.not(nom_technique: noms_techniques_importes).destroy_all
+          question
         end
 
         def cree_choix(question, data)

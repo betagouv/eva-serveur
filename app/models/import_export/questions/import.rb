@@ -52,12 +52,14 @@ module ImportExport
 
       def update_champs_specifiques(question, col); end
 
-      def cree_reponses(type, cellules)
-        extrait_colonnes_reponses(type, cellules).each_value do |data|
-          next if data.values.all?(&:nil?) ## si une ligne de réponse est vide on la saute
+      def cree_reponses(type, cellules, question)
+        noms_techniques = extrait_colonnes_reponses(type, cellules).values.filter_map do |data|
+          next if data["nom_technique"].blank?
 
           yield(data)
+          data["nom_technique"]
         end
+        Choix.where(question_id: question.id).where.not(nom_technique: noms_techniques).destroy_all
       end
 
       def cree_reponse_generique(question_id:, intitule:, nom_technique:, type_choix:,

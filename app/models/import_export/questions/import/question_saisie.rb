@@ -15,14 +15,14 @@ module ImportExport
                            type_saisie: cellules.suivant,
                            texte_a_trous: cellules.suivant,
                            aide: cellules.suivant)
-          cree_reponses("reponse", cellules) do |data|
-            cree_reponse_saisie(question.id, data)
+          cree_reponses("reponse", cellules, question) do |data|
+            cree_reponse_saisie(question, data)
           end
         end
 
-        def cree_reponse_saisie(question_id, data)
+        def cree_reponse_saisie(question, data)
           cree_reponse_generique(
-            question_id: question_id,
+            question_id: question.id,
             intitule: data["intitule"],
             nom_technique: data["nom_technique"],
             type_choix: data["type_choix"]

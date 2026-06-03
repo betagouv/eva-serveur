@@ -23,4 +23,16 @@ describe ImportExport::Questions::Import::QuestionSaisie do
     expect(question.reponses.second.nom_technique).to eq 'reponse2'
     expect(question.reponses.second.type_choix).to eq 'bon'
   end
+
+  it 'supprime les reponses absentes du fichier importé' do
+    service.import_from_xls(file)
+    question = Question.first
+    reponse_extra = create(:choix, :mauvais, question_id: question.id,
+                            nom_technique: 'ReponseExtra',
+                            intitule: 'Reponse extra')
+
+    service.import_from_xls(file)
+
+    expect(Choix.exists?(id: reponse_extra.id)).to be false
+  end
 end

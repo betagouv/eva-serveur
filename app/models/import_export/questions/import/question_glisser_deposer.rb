@@ -12,7 +12,7 @@ module ImportExport
           question = super
           attache_fichier(question.zone_depot, cellules.suivant, "#{cellules.cell(1)}_zone_depot")
           question.update!(orientation: cellules.suivant)
-          cree_reponses("reponse", cellules) do |data|
+          cree_reponses("reponse", cellules, question) do |data|
             cree_reponse(question.id, data)
           end
         end

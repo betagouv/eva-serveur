@@ -209,10 +209,10 @@ form fieldset.actions li.cancel a {
   @include bouton-secondaire;
 }
 
-li a.has_many_add,
-li a.has_many_add:link,
-li a.has_many_add:visited,
-li a.has_many_add:active,
+a.has_many_add,
+a.has_many_add:link,
+a.has_many_add:visited,
+a.has_many_add:active,
 li a.has_many_remove,
 li a.has_many_remove:link,
 li a.has_many_remove:visited,

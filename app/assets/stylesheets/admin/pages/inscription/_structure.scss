@@ -112,11 +112,6 @@
     gap: $dsfr-spacing-3w;
     align-self: stretch;
 
-    .form-usage-card {
-      display: flex;
-      flex-direction: column;
-    }
-
     .card-usage {
       flex: 1;
     }
@@ -124,17 +119,15 @@
 
   @media (max-width: 48em) {
     .card-usage-wrapper {
-      display: flex;
       padding: 0 $dsfr-spacing-2w;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-     
 
-    form {
-      margin-bottom: inherit !important;
+      form {
+        margin-bottom: inherit !important;
+      }
     }
-  }
   }
 
   .structure-info-card {

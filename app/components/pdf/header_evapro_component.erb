@@ -1,6 +1,6 @@
 <%= render(HeaderComponent.new(
   logo: "logo/evapro.png",
-  logo_alt: "EvaPro",
+  logo_alt: t("header.evapro.logo_alt"),
   titre: @structure.nom,
   tagline: "le #{l(@date, format: :short)} par #{@beneficiaire}",
   classes: [ "header-pdf-evapro" ]

@@ -3,3 +3,7 @@ fr:
     titre: Espace Pro
     tagline: pro.eva.anlci.gouv.fr
     title_lien_logo: "Retour à l'accueil du site - %{logo_alt} - République Française"
+    evapro:
+      logo_alt: EvaPro
+    eva:
+      logo_alt: Eva

@@ -1,3 +1,12 @@
+.card-usage-evapro {
+  .card-usage__visuel-16-9 {
+    img {
+      height: 7.5rem;
+      margin-top: 1rem;
+    }
+  }
+}
+
 .card-usage {
   display: flex;
   width: 24rem;
@@ -23,29 +32,6 @@
   align-self: stretch;
   aspect-ratio: 16/9;
   background: var(--beige-gris-galet-975-75, #F9F6F2);
-}
-
-.card-usage__visuel-image-container {
-  width: 4.6875rem;
-  height: 4rem;
-  flex-shrink: 0;
-  aspect-ratio: 75/64;
-  object-fit: contain;
-}
-
-.card-usage__visuel-image {
-  width: 75px;
-  height: 64px;
-  flex-shrink: 0;
-  aspect-ratio: 75/64;
-  fill: var(--text-title-grey);
-}
-
-.card-usage__visuel-image-asset {
-  width: 13rem; // 208px
-  height: 4rem; // 64px
-  flex-shrink: 0;
-  object-fit: contain;
 }
 
 .card-usage__contenu {
@@ -119,6 +105,6 @@
 }
 
 .card-usage__icone-svg {
-  width: 1rem; // 16px
+  width: 1rem;
   height: 1rem;
 }

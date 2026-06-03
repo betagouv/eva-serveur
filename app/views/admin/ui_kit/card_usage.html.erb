@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="fr-mb-3w">
+    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
+  </div>
+
+  <h1>Démo CardUsageComponent</h1>
+
+  <h2>Les cartes d'usage de l'embarquement</h2>
+  <div class="page-inscription-structure">
+    <div class="card-usage-wrapper">
+      <form class="card-usage-eva">
+        <%= render CardUsageComponent.new(
+          titre: t("inscription.structures.show.usage.eva.titre"),
+          description: t("inscription.structures.show.usage.eva.description"),
+          image: "logo/eva-dark.svg",
+          logo_alt: t("header.eva.logo_alt"),
+          submit_value: "creer_avec_usage",
+          aria_label: t("inscription.structures.show.usage.bouton_choisir")
+        ) %>
+      </form>
+      <form class="card-usage-evapro">
+        <%= render CardUsageComponent.new(
+          titre: t("inscription.structures.show.usage.evapro.titre"),
+          description: t("inscription.structures.show.usage.evapro.description"),
+          image: "logo/evapro.svg",
+          logo_alt: t("header.evapro.logo_alt"),
+          submit_value: "creer_avec_usage",
+          aria_label: t("inscription.structures.show.usage.bouton_choisir")
+        ) %>
+      </form>
+    </div>
+  </div>
+</div>

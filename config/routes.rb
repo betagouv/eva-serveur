@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     get '/ui_kit/bouton_copier', to: 'ui_kit#bouton_copier'
     get '/ui_kit/boutons_dsfr', to: 'ui_kit#boutons_dsfr'
     get '/ui_kit/card', to: 'ui_kit#card'
+    get '/ui_kit/card_usage', to: 'ui_kit#card_usage'
     get '/ui_kit/carte', to: 'ui_kit#carte'
     # get '/ui_kit/carte_mise_en_action', to: 'ui_kit#carte_mise_en_action'
     get '/ui_kit/carte_partage_code', to: 'ui_kit#carte_partage_code'

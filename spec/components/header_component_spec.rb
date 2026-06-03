@@ -7,7 +7,7 @@ RSpec.describe HeaderComponent, type: :component do
     render_inline(
       described_class.new(
         logo: "logo/eva-bleu.svg",
-        logo_alt: "EVA",
+        logo_alt: t("header.eva.logo_alt"),
         current_compte: compte,
         actions: []
       )

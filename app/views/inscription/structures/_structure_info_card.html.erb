@@ -1,17 +1,16 @@
 <div class="structure-info-card">
   <ul class="structure-info-card__list">
     <li class="structure-info-card__info">
-      <span class="structure-info-card__label">Numéro SIRET :</span> <span class="structure-info-card__value"><%= structure.siret %></span>
+      <span class="structure-info-card__label"><%= Structure.human_attribute_name(:siret) %> :</span> <span class="structure-info-card__value"><%= formater_siret(structure.siret) %></span>
     </li>
     <li class="structure-info-card__info">
-      <span class="structure-info-card__label">Raison sociale :</span> <span class="structure-info-card__value"><%= structure&.raison_sociale %></span>
+      <span class="structure-info-card__label"><%= Structure.human_attribute_name(:raison_sociale) %> :</span> <span class="structure-info-card__value"><%= structure&.raison_sociale %></span>
     </li>
     <li class="structure-info-card__info">
-      <span class="structure-info-card__label">Dénomination :</span> <span class="structure-info-card__value"><%= structure&.nom %></span>
+      <span class="structure-info-card__label"><%= Structure.human_attribute_name(:nom) %> :</span> <span class="structure-info-card__value"><%= structure&.nom %></span>
     </li>
     <li class="structure-info-card__info">
-      <span class="structure-info-card__label">Adresse :</span> <span class="structure-info-card__value"><%= adresse_ou_code_postal(structure) %></span>
+      <span class="structure-info-card__label"><%= Structure.human_attribute_name(:adresse) %> :</span> <span class="structure-info-card__value"><%= adresse_ou_code_postal(structure) %></span>
     </li>
   </ul>
 </div>
-

@@ -1,11 +1,7 @@
-<%
-  # Faible = A, Moyen = B, Fort = C, Très fort = D
-  niveau_to_letter = { faible: "A", moyen: "B", fort: "C", tres_fort: "D" }.freeze
-%>
 <div class="indicateur-impact">
   <% interpretations_impact.each do |interpretation| %>
     <% resultat = synthese[interpretation] %>
-    <% active_letter = resultat ? niveau_to_letter[resultat.to_sym] : nil %>
+    <% active_letter = Evaluations::DiagnosticPro::SCORE_TO_LETTRE[resultat.to_s] %>
     <div class="indicateur-impact__details">
       <div class="indicateur-impact__details--titre-et-score">
         <div class="indicateur-impact__details-titre">

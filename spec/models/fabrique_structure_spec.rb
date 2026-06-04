@@ -25,6 +25,28 @@ describe FabriqueStructure, type: :model do
       end
     end
 
+    context "quand le type_structure est entreprise avec l'usage EVAPRO" do
+      let(:attributs_structure) { { type_structure: "entreprise", usage: AvecUsage::USAGE_EVAPRO } }
+
+      it "conserve le type_structure entreprise" do
+        structure = described_class.cree_depuis_siret(siret, attributs_structure)
+
+        expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
+        expect(structure.type_structure).to eq("entreprise")
+      end
+    end
+
+    context "quand le type_structure est mission_locale avec l'usage EVAPRO" do
+      let(:attributs_structure) { { type_structure: "mission_locale", usage: AvecUsage::USAGE_EVAPRO } }
+
+      it "conserve le type_structure mission_locale" do
+        structure = described_class.cree_depuis_siret(siret, attributs_structure)
+
+        expect(structure.usage).to eq(AvecUsage::USAGE_EVAPRO)
+        expect(structure.type_structure).to eq("mission_locale")
+      end
+    end
+
     context "quand RechercheStructureParSiret retourne nil" do
       before do
         allow(RechercheStructureParSiret).to receive(:new).with(siret).and_return(

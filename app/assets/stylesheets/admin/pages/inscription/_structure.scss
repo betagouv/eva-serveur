@@ -2,8 +2,7 @@
   display: flex;
   justify-items: center;
   flex-direction: column;
-  gap: 1.5rem;
-  gap: 56px !important;
+  gap: 3.5rem;
 
   @media (max-width: 48em) {
     gap: 1.5rem !important;
@@ -34,7 +33,7 @@
   .fr-alert {
     background-color: $grey-1000;
   }
-  
+
   form fieldset.inputs {
     padding-top: 0 !important;
     max-width: none !important;
@@ -56,6 +55,7 @@
     flex-direction: column;
     gap: $dsfr-spacing-7w;
   }
+
   .structure-content-wrapper {
     display: flex;
     flex-direction: column;
@@ -88,7 +88,7 @@
     flex-direction: column;
     gap: $dsfr-spacing-1w;
   }
-  
+
   .structure-content-wrapper-siret_titre {
     @include corps-de-texte-md-regular;
 
@@ -105,27 +105,67 @@
 
   .card-usage-wrapper {
     display: flex;
-    flex-direction: row;
     padding: 0 6.375rem;
     justify-content: center;
-    align-items: stretch;
-    gap: $dsfr-spacing-3w;
-    align-self: stretch;
 
     .card-usage {
-      flex: 1;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: $dsfr-spacing-3w;
+      align-self: stretch;
+      border: 0;
+      background: transparent;
+
+      .card-usage-evapro {
+        .fr-card__img img {
+          width: 13.5rem;
+          margin-top: 1rem;
+        }
+      }
+
+      .card-usage-eva {
+        .fr-card__img img {
+          width: 4.6875rem;
+        }
+      }
+
+      .fr-card {
+        flex: 1;
+      }
+
+      .fr-enlarge-link:hover .fr-card__header {
+        background-color: var(--beige-gris-galet-975-75-hover);
+      }
+
+      .fr-card__header {
+        display: flex;
+        justify-content: center;
+        width: 24rem;
+        height: 13.5rem; // 16/9
+        background-color: var(--beige-gris-galet-975-75);
+
+        .fr-card__img {
+          justify-content: center;
+          display: flex;
+          align-items: center;
+
+          img {
+            aspect-ratio: unset;
+          }
+        }
+      }
     }
   }
 
   @media (max-width: 48em) {
     .card-usage-wrapper {
       padding: 0 $dsfr-spacing-2w;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
 
-      form {
+      .card-usage {
         margin-bottom: inherit !important;
+        flex-direction: column;
+        align-items: center;
       }
     }
   }

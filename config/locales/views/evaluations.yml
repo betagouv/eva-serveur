@@ -258,19 +258,52 @@ fr:
         evaluation_anonyme: "Cette évaluation est anonyme : le nom du bénéficiaire est fictif et ses informations personnelles ont été supprimées."
         erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
       mesure_des_risques:
-        titre: "Analyse des risques liés aux compétences de base dans votre organisation"
+        titre: "Analyse des risques liés aux compétences de base dans votre structure"
         prefixe: "Taux de risque"
         explication:
           texte:
-            a: "Vos résultats indiquent que votre organisation ne présente pas, à ce stade, de signes préoccupants en matière de maîtrise des compétences de base. Ce niveau de risque faible ne doit toutefois pas conduire à relâcher votre vigilance."
-            b: "Vos réponses suggèrent que certains salariés ou agents peuvent percevoir l'évolution des exigences professionnelles comme une menace pour leur employabilité."
-            c: "Vos résultats mettent en évidence un risque significatif de présence, au sein de vos équipes, de salariés ou agents ayant des difficultés dans la maîtrise des compétences de base ou se trouvant en situation d'insécurité professionnelle face aux exigences actuelles ou futures (numérique, IA, sécurité, qualité, lean, etc.)."
-            d: "Vos réponses révèlent un risque très élevé de présence de salariés ou agents en difficulté avec les compétences de base indispensables dans leurs missions : lire, écrire, compter et cliquer."
+            a: |
+              Vos résultats indiquent que votre structure ne présente pas, à ce
+              stade, de signes préoccupants en matière de maîtrise des
+              compétences de base. Ce niveau de risque ne doit toutefois pas
+              conduire à relâcher votre vigilance.
+            b: |
+              Vos résultats suggèrent l’émergence de premières fragilités :
+              certaines personnes peuvent percevoir l’évolution des exigences
+              professionnelles comme un facteur de difficulté ou d’incertitude.
+            c: |
+              Vos résultats mettent en évidence un risque significatif de
+              présence, au sein de vos équipes, de personnes en difficulté avec
+              les compétences de base ou en situation d’insécurité
+              professionnelle face aux évolutions des exigences (numérique, IA,
+              qualité, sécurité, etc.).
+            d: |
+              Vos résultats révèlent une présence importante de professionnels
+              en difficulté avec les compétences de base indispensables à leurs
+              missions. Ces situations ont des impacts directs sur l’activité,
+              la structure et la performance.
           suite:
-            a: "Maintenez une démarche préventive et poursuivez l'accompagnement de la montée en compétences de vos équipes afin d'anticiper les évolutions du travail et les transformations à venir."
-            b: "Nous vous recommandons d'intensifier votre veille interne et de consolider vos actions préventives afin d'éviter que ces fragilités ne s'accentuent. Une analyse régulière des impacts des nouvelles exigences professionnelles sera déterminante."
-            c: "Il est recommandé d'engager rapidement une démarche structurée d'identification des besoins, de sécurisation des parcours et d'adaptation des environnements de travail."
-            d: "Ce niveau de risque nécessite une action prioritaire et coordonnée, incluant un diagnostic complémentaire de vos besoins, l'appui de partenaires spécialisés et la mise en place rapide de mesures de sécurisation des situations de travail."
+            a: |
+              **Action** :  
+              Maintenez une démarche préventive et poursuivez le développement
+              des compétences afin d’anticiper les évolutions du travail et
+              d'éviter l’apparition de fragilités.
+            b: |
+              **Action** :  
+              Renforcez votre veille interne, sensibilisez les managers et
+              consolidez vos actions préventives afin d’identifier et de
+              traiter ces situations avant leur installation.
+            c: |
+              **Action** :  
+              Engagez rapidement une démarche structurée : identification des
+              besoins, sécurisation des parcours et adaptation des situations
+              de travail.
+            d: |
+              **Action** :  
+              Une intervention immédiate et coordonnée est nécessaire :
+              réalisez un diagnostic approfondi, mobilisez des partenaires
+              spécialisés (OPCO, ANFH, CNFPT, ANLCI…) et déployez sans délai
+              des actions d’accompagnement adaptées.
       mesure_des_impacts:
         titre: "Impacts"
         chart:

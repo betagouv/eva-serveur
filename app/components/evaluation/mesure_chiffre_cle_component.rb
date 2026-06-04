@@ -2,6 +2,8 @@
 
 class Evaluation
   class MesureChiffreCleComponent < ViewComponent::Base
+    include ApplicationHelper
+
     def initialize(palier:, chiffre:, prefixe: nil, suffixe: nil, explications:)
       @palier = palier
       @chiffre = chiffre

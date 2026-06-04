@@ -20,14 +20,14 @@
   flex-direction: column;
   align-items: flex-start;
   gap: $dsfr-spacing-2w;
-}
 
-.mesure-chiffre-cle__explication-label {
-  @include corps-de-texte-sm-regular;
+  p {
+    @include corps-de-texte-sm-regular;
 
-  margin: 0;
+    margin: 0;
 
-  @media print {
-    @include corps-de-texte-md-regular;
+    @media print {
+      @include corps-de-texte-md-regular;
+    }
   }
 }

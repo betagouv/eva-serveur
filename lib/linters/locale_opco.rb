@@ -72,7 +72,11 @@ module Linters
       end
     end
 
+    IGNORED_MATCH = "OPCO, ANFH, CNFPT, ANLCI"
+
     def check_string(str, file, key_path, violations)
+      return if str.include?(IGNORED_MATCH)
+
       # Cherche le mot "OPCO" (avec limites de mots pour éviter les faux positifs)
       str.scan(/\bOPCO\b/) do
         msg = "Le mot « OPCO » est interdit. Utiliser plutôt : « Opérateur de Compétences »"

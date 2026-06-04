@@ -11,16 +11,18 @@
 
   <h2>Tous les paliers</h2>
 
-  <% ChiffreCleComponent::PALIERS.each do |palier_label, _palier_key| %>
+  <% scope = [ :admin, :evaluations, :mesure_des_risques ] %>
+  <% Evaluations::DiagnosticPro::RisquesPresenter::SEUILS_PALIERS_RISQUE.each do |pourcentage, palier_label| %>
+    <% presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage) %>
     <div class="fr-mb-5w">
-      <h3>Palier <%= palier_label %></h3>
+      <h3>Palier <%= presenter.palier %></h3>
       <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: palier_label,
-        prefixe: "Taux de risque",
-        chiffre: "10 %",
+        palier: presenter.palier,
+        prefixe: t(:prefixe, scope: scope),
+        chiffre: "#{pourcentage} %",
         explications: {
-          texte: "Exemple de texte d'explication pour le palier #{palier_label}. Ce texte décrit la situation générale.",
-          suite: "Exemple de suite d'explication pour le palier #{palier_label}. Ce texte fournit des recommandations ou des actions à entreprendre."
+          texte: t("explication.texte.#{presenter.lettre}", scope: scope),
+          suite: t("explication.suite.#{presenter.lettre}", scope: scope)
         }
       ) %>
     </div>

@@ -305,7 +305,7 @@ fr:
               spécialisés (OPCO, ANFH, CNFPT, ANLCI…) et déployez sans délai
               des actions d’accompagnement adaptées.
       mesure_des_impacts:
-        titre: "Impacts"
+        titre: Impacts potentiels dans votre structure
         chart:
           aria_label: "Niveau d'impact par thématique"
         labels:
@@ -320,25 +320,25 @@ fr:
           tres_fort: "Très fort"
         descriptions:
           performance_collective:
-            faible: "Les difficultés en compétences de base n'ont pas d'impact significatif sur la performance de votre organisation."
-            moyen: "Le manque de compétences de base de vos effectifs occasionne quelques freins pour le fonctionnement optimal de votre organisation collective du travail."
-            fort: "Le manque de compétences de base de vos agents ou salariés a des impacts importants sur la performance de vos collectifs de travail (perte de temps collective)."
-            tres_fort: "Le manque de compétences de base de vos agents ou salariés est source de dysfonctionnements très importants qui altèrent la performance de vos collectifs de travail."
+            faible: Pas d’impact significatif sur la performance des collectifs de travail.
+            moyen: Les obstacles à la performance collective peuvent être levés en renforçant les compétences de base de vos équipes.
+            fort: La performance des collectifs de travail est en deçà de son potentiel. Pour la faire progresser, une action déterminée de développement des compétences de base s’impose.
+            tres_fort: Il existe des dysfonctionnements importants dans la performance collective qui nécessitent une action rapide de développement des compétences de base.
           agilite_organisationnelle:
-            faible: "Les difficultés en compétences de base de vos effectifs n'ont aucune incidence sur la capacité de vos collectifs à évoluer dans le temps."
-            moyen: "Le manque de compétences de base de vos effectifs peut entraver vos projets d'évolution technologique ou organisationnelle, soyez vigilants dans l'évolution de la capacité de chacun à suivre le mouvement."
-            fort: "Le déficit en compétences de base de vos effectifs freine la capacité de votre organisation à être agile."
-            tres_fort: "Les difficultés importantes en compétences de base entraînent des blocages et des incapacités à évoluer dans vos pratiques et votre organisation."
+            faible: "Pas d’incidence sur la capacité de vos collectifs à évoluer dans le temps."
+            moyen: "L’accompagnement de vos équipes est nécessaire pour déployer vos projets technologiques ou structurels sans obstacle."
+            fort: "L’agilité de votre structure est limitée. L’engagement d’une action en faveur du développement des compétences de base est de rigueur."
+            tres_fort: "Il existe des blocages à l’évolution de vos pratiques et de votre structure. Il est urgent d’agir."
           securite_qualite:
-            faible: "Les difficultés en compétences de base n'occasionnent aucun risque sécuritaire ou règlementaire."
-            moyen: "Le manque de compétences de base de vos effectifs questionne la capacité de votre organisation à respecter les processus de travail, les règles et les consignes."
-            fort: "Le déficit en compétences de base de vos effectifs ne permet pas de garantir le respect des règles et consignes de travail occasionnant des insatisfactions tant internes qu'externes."
-            tres_fort: "Les difficultés importantes en compétences de base font prendre des risques importants à votre organisation (sécurité des personnes et des données en particulier)."
+            faible: "Pas de risque identifié en l’état actuel. Restez attentif."
+            moyen: "La capacité de votre structure à respecter les cahiers des charges, les règles et les consignes est interrogée."
+            fort: "Le respect des règles et des consignes de travail n’est pas garanti. Cela occasionne des insatisfactions en interne et en externe."
+            tres_fort: "Il existe des risques en matière de sécurité (personnes et données). Il est indispensable de mettre en place un plan d’action."
           mobilite_professionnelle:
-            faible: "Les difficultés en compétences de base de vos effectifs n'ont pas d'impact sur la performance sociale de votre organisation et la gestion RH."
-            moyen: "Le manque de compétences de base de vos salariés ou agents peut expliquer une partie du niveau d'absentéisme de vos effectifs."
-            fort: "Le déficit en compétences de base de vos effectifs a des répercussions sur vos indicateurs de performance sociale (absentéisme, niveau de masse salariale en particulier)."
-            tres_fort: "Les difficultés importantes en compétences de base dégradent fortement vos indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale)."
+            faible: "Pas ou peu d'impact sur la performance sociale de votre structure. Poursuivez votre politique de développement des compétences."
+            moyen: "Le niveau d’absentéisme de votre structure peut être amélioré grâce au développement des compétences de base de vos collaborateurs."
+            fort: "Les répercussions sur les indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale) sont importantes. Un plan de développement des compétences de base est nécessaire."
+            tres_fort: "Les indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale) sont dégradés. Une action volontariste en matière de développement des compétences de base contribuera à leur amélioration."
         definitions:
           titre: "Définitions"
           performance_collective:

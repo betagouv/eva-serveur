@@ -2,6 +2,13 @@
 
 module Evaluations
   class DiagnosticPro
+    SCORE_TO_LETTRE = {
+      "faible" => "a",
+      "moyen" => "b",
+      "fort" => "c",
+      "tres_fort" => "d"
+    }.freeze
+
     attr_reader :evaluation
 
     def initialize(evaluation)

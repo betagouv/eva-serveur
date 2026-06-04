@@ -10,13 +10,6 @@ module Evaluations
         tres_fort: "D - Mauvais"
       }.freeze
 
-      SCORE_TO_LETTRE = {
-        "faible" => "a",
-        "moyen" => "b",
-        "fort" => "c",
-        "tres_fort" => "d"
-      }.freeze
-
       def initialize(synthese:, i18n:)
         @synthese = (synthese || {}).transform_keys(&:to_sym)
         @i18n = i18n

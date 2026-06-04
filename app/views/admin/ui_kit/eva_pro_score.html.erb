@@ -9,7 +9,7 @@
     Composant de paliers Evaproscore (A, B, C, D) pour remplacer l'impact stepper.
   </p>
 
-  <div class="eva-pro-score-uikit" style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start;">
+  <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1rem;">
     <%# EvaProScoreComponent - une ligne par palier actif %>
     <section>
       <h2>Evaproscore</h2>
@@ -45,4 +45,18 @@
       </div>
     </section>
   </div>
+
+  <section>
+  <h2>Utilisation à la restitution des impacts</h2>
+  <div style="max-width: 880px;"> <!-- simulation de la largeur max active admin --!>
+    <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
+      <h3>niveau <%= score %></h3>
+      <% synthese = Evaluations::DiagnosticPro::ImpactsPresenter::INTERPRETATIONS
+        .each_with_object({}) { |interpretation, synthese| synthese[interpretation] = score } %>
+      <%= render partial: "admin/evaluations/evapro/mesure_des_impacts_chart",
+        locals: { synthese: synthese, interpretations_impact: synthese.keys } %>
+    <% end %>
+
+  </div>
+  </section>
 </div>

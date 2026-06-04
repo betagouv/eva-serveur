@@ -342,6 +342,7 @@ describe Inscription::StructuresController, type: :controller do
 
           structure_creée.reload
           expect(structure_creée.usage).to eq(AvecUsage::USAGE_EVAPRO)
+          expect(structure_creée.type_structure).to eq('mission_locale')
           expect(response).to redirect_to(admin_dashboard_path)
         end
       end
@@ -456,9 +457,9 @@ describe Inscription::StructuresController, type: :controller do
       context "quand la mise à jour du compte échoue" do
         it "re-render la page sans erreur serveur" do
           allow(controller).to receive(:current_compte).and_return(compte)
-          allow(compte).to receive(:update).with(etape_inscription: :complet,
-structure_id: structure.id)
-                                         .and_return(false)
+          allow(compte).to receive(:update)
+            .with(etape_inscription: :complet, structure_id: structure.id)
+            .and_return(false)
 
           patch :update, params: { commit: "rejoindre" }
 

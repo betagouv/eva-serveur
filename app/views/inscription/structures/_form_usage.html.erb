@@ -1,26 +1,31 @@
 <div class="structure-content-wrapper">
   <div class="card-usage-wrapper">
-    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "card-usage-eva" } do |f| %>
-      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_BENEFICIAIRES %>
-      <%= render CardUsageComponent.new(
+    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "card-usage" } do |f| %>
+      <%= hidden_field_tag "structure_locale[usage]", "" %>
+      <%= hidden_field_tag "commit", "creer_avec_usage" %>
+      <%= render CardComponent.new(
         titre: t("inscription.structures.show.usage.eva.titre"),
         description: t("inscription.structures.show.usage.eva.description"),
-        image: "logo/eva-dark.svg",
-        logo_alt: t("header.eva.logo_alt"),
-        submit_value: "creer_avec_usage",
-        aria_label: t("inscription.structures.show.usage.bouton_choisir")
+        image_url: "logo/eva-dark.svg",
+        image_alt: t("header.eva.logo_alt"),
+        url: "javascript:choisi('" + AvecUsage::USAGE_BENEFICIAIRES + "')",
+        classes: [ "card-usage-eva" ]
       ) %>
-    <% end %>
-    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "card-usage-evapro" } do |f| %>
-      <%= hidden_field_tag "structure_locale[usage]", AvecUsage::USAGE_EVAPRO %>
-      <%= render CardUsageComponent.new(
+      <%= render CardComponent.new(
         titre: t("inscription.structures.show.usage.evapro.titre"),
         description: t("inscription.structures.show.usage.evapro.description"),
-        image: "logo/evapro.svg",
-        logo_alt: t("header.evapro.logo_alt"),
-        submit_value: "creer_avec_usage",
-        aria_label: t("inscription.structures.show.usage.bouton_choisir")
+        image_url: "logo/evapro.svg",
+        image_alt: t("header.evapro.logo_alt"),
+        url: "javascript:choisi('" + AvecUsage::USAGE_EVAPRO + "')",
+        classes: [ "card-usage-evapro" ]
       ) %>
     <% end %>
   </div>
 </div>
+<script>
+  function choisi(usage) {
+    var form = document.querySelector("form.card-usage");
+    form.querySelector("input[name='structure_locale[usage]']").value = usage;
+    form.requestSubmit();
+  }
+</script>

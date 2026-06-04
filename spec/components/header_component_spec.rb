@@ -7,12 +7,12 @@ RSpec.describe HeaderComponent, type: :component do
     render_inline(
       described_class.new(
         logo: "logo/eva-bleu.svg",
-        logo_alt: t("header.eva.logo_alt"),
+        logo_alt: "alt_logo",
         current_compte: compte,
         actions: []
       )
     )
 
-    expect(page).to have_css("img.fr-responsive-img[alt='EVA']")
+    expect(page).to have_css("img.fr-responsive-img[alt='alt_logo']")
   end
 end

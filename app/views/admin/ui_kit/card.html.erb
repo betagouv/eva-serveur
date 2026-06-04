@@ -52,7 +52,7 @@
   </div>
 
   <h2>Variantes de taille</h2>
-  
+
   <h3>Card SM (petite)</h3>
   <div class="fr-grid-row fr-grid-row--gutters">
     <div class="fr-col fr-col-md-6">
@@ -118,6 +118,30 @@
         bouton_label: "Action",
         bouton_url: "#"
       ) %>
+    </div>
+  </div>
+
+  <h2>Les cartes d'usage de l'embarquement</h2>
+  <div class="page-inscription-structure" style="max-width: 792px;">
+    <div class="card-usage-wrapper">
+      <form class="card-usage">
+        <%= render CardComponent.new(
+          titre: t("inscription.structures.show.usage.eva.titre"),
+          description: t("inscription.structures.show.usage.eva.description"),
+          image_url: "logo/eva-dark.svg",
+          image_alt: t("header.eva.logo_alt"),
+          url: "javascript:alert('eva a été choisi')",
+          classes: [ "card-usage-eva" ]
+        ) %>
+        <%= render CardComponent.new(
+          titre: t("inscription.structures.show.usage.evapro.titre"),
+          description: t("inscription.structures.show.usage.evapro.description"),
+          image_url: "logo/evapro.svg",
+          image_alt: t("header.evapro.logo_alt"),
+          url: "javascript:alert('evapro a été choisi')",
+          classes: [ "card-usage-evapro" ]
+        ) %>
+      </form>
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@ fr:
         texte: "Les évaluations réalisées au sein de votre structure apparaîtront ici."
       bilan_evapro:
         titre: "Bilan : votre situation"
-        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre organisation pour confronter vos résultats au questionnaire."
+        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre structure pour confronter vos résultats au questionnaire."
         opco_titre: "Et ensuite ? Contactez votre opérateur de compétences"
         opco_sous_titre: "Votre opérateur de compétences peut vous aider à identifier les solutions adaptées pour mettre en place des actions concrètes."
         offre_services_titre: "L'offre de services %{nom} :"
@@ -406,29 +406,33 @@ fr:
         impact_couts:
           titre: "Coûts"
           suffixe_masse_salariale: "de votre masse salariale"
-          titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise mon organisation ?"
+          titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise ma structure ?"
           strategies:
             question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
             titre_graphique: "Stratégies de contournement"
             mention_faible: "Stratégie : impact faible"
             mention_fort: "Stratégie : impact fort"
           numerique:
-            question: "Où en est votre organisation dans une logique de transition et reconversion ?"
+            question: "Où en est votre structure dans une logique de transition et reconversion ?"
             titre_graphique: "Compétences numériques de base"
             mention_faible: "Numérique : impact faible"
             mention_fort: "Numérique : impact fort"
           contenu_cout:
-            texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
             titre:
               a: "1%"
               b: "2%"
               c: "3 à 4%"
               d: "5 à 6%"
+            texte:
+              a: Ce pourcentage estime les coûts supportés par la structure lorsque certaines situations de fragilité dans les compétences de base ne sont pas repérées ni prises en compte.
+              b: Ce pourcentage traduit des coûts liés à des besoins en compétences lorsqu’ils sont insuffisamment accompagnés ou pris en compte au travail.
+              c: Ce niveau révèle des coûts significatifs liés à une prise en compte insuffisante des besoins fondamentaux en compétence de base dans la structure.
+              d: Ce niveau révèle des coûts très élevés, consécutifs à des fragilités persistantes et à l’absence de politiques efficaces de développement des compétences de base.
             suite:
-              a: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
-              b: "À 2 %, les effets commencent à se faire sentir. Une démarche préventive permettrait de réduire rapidement ces coûts et d'éviter qu'ils ne s'installent. Assurez vous que des stratégies de dissimulation ou de contournement des difficultés ne viennent pas à terme perturber votre organisation et sa capacité à évoluer."
-              c: "Les coûts sont importants. Les erreurs, retards et ajustements permanents pèsent clairement sur la qualité, la performance et l'organisation du travail."
-              d: "Les coûts sont très élevés. L'action corrective coûte moins cher que la situation actuelle : intervenir devient un levier immédiat d'économies et de performance."
+              a: "À 1 %, les impacts restent contenus, mais une vigilance active demeure nécessaire. Les premières fragilités apparaissent : il est pertinent d’agir dès maintenant pour sécuriser les parcours et anticiper les besoins en compétences."
+              b: "À 2 %, les impacts deviennent perceptibles et les premiers signaux faibles émergent. Il est essentiel de communiquer auprès des managers et de les accompagner pour détecter et traiter ces situations avant qu’elles ne s’installent durablement."
+              c: "Les impacts sur la qualité, la performance et la gestion deviennent significatifs. L’augmentation des erreurs, des ralentissements et des ajustements révèle des dysfonctionnements installés : une démarche structurée et un investissement ciblé dans les compétences de base deviennent indispensables pour rétablir la situation."
+              d: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
           explications_strategies:
             titre:
               a: "Palier A"

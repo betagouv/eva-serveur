@@ -1,16 +1,11 @@
-<% couts_presenter ||= evaluation.diagnostic_pro.avec_restitution_globale(restitution_globale).couts_presenter(synthese: synthese, i18n: self) %>
 <% contenu_cout = couts_presenter.contenu_cout %>
-<% explication_strategie = couts_presenter.explication_strategie %>
-<% explication_numerique = couts_presenter.explication_numerique %>
-<% resultat_strategie_lettre = couts_presenter.lettre_score_strategie %>
-<% resultat_numerique_lettre = couts_presenter.lettre_score_numerique %>
 
 <div id="evaluation-impact-couts">
   <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <div class="couts">
-    <% if synthese[:score_cout] && contenu_cout.present? %>
+    <% if contenu_cout %>
       <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: couts_presenter.palier_score_cout(synthese[:score_cout]),
+        palier: couts_presenter.palier_score_cout,
         chiffre: contenu_cout[:titre],
         suffixe: t(".suffixe_masse_salariale"),
         explications: {
@@ -30,9 +25,11 @@
             <p class="couts__titre-graphique"><%= t(".strategies.titre_graphique") %></p>
             <div class="couts__graphique">
               <p class="couts__mention"><%= t(".strategies.mention_faible") %></p>
+              <% resultat_strategie_lettre = couts_presenter.lettre_score_strategie %>
               <%= render PileFlechesScoreComponent.new(theme: :color, active_score: resultat_strategie_lettre) %>
               <p class="couts__mention"><%= t(".strategies.mention_fort") %></p>
             </div>
+            <% explication_strategie = couts_presenter.explication_strategie %>
             <% if explication_strategie.present? %>
               <div class="couts__explication">
                 <p class="couts__explication-titre"><%= explication_strategie[:titre] %></p>
@@ -48,9 +45,11 @@
             <p class="couts__titre-graphique"><%= t(".numerique.titre_graphique") %></p>
             <div class="couts__graphique">
               <p class="couts__mention"><%= t(".numerique.mention_faible") %></p>
+              <% resultat_numerique_lettre = couts_presenter.lettre_score_numerique %>
               <%= render PileFlechesScoreComponent.new(theme: :blue, active_score: resultat_numerique_lettre) %>
               <p class="couts__mention"><%= t(".numerique.mention_fort") %></p>
             </div>
+            <% explication_numerique = couts_presenter.explication_numerique %>
             <% if explication_numerique.present? %>
               <div class="couts__explication">
                 <p class="couts__explication-titre"><%= explication_numerique[:titre] %></p>

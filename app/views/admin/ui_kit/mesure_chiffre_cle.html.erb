@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="max-width: 882px;">
   <div class="fr-mb-3w">
     <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
   </div>
@@ -9,24 +9,19 @@
     Ce composant affiche une mesure avec un chiffre clé et deux paragraphes d'explication selon le palier.
   </p>
 
-  <h2>Tous les paliers</h2>
+  <h2>Exemple avec prefix</h2>
 
-  <% scope = [ :admin, :evaluations, :mesure_des_risques ] %>
-  <% Evaluations::DiagnosticPro::RisquesPresenter::SEUILS_PALIERS_RISQUE.each do |pourcentage, palier_label| %>
-    <% presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage) %>
-    <div class="fr-mb-5w">
-      <h3>Palier <%= presenter.palier %></h3>
-      <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: presenter.palier,
-        prefixe: t(:prefixe, scope: scope),
-        chiffre: "#{pourcentage} %",
-        explications: {
-          texte: t("explication.texte.#{presenter.lettre}", scope: scope),
-          suite: t("explication.suite.#{presenter.lettre}", scope: scope)
-        }
-      ) %>
-    </div>
-  <% end %>
+  <div class="fr-mb-5w">
+    <%= render Evaluation::MesureChiffreCleComponent.new(
+      palier: "A - Très bon",
+      chiffre: "10%",
+      prefixe: "Taux de risque",
+      explications: {
+        texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs.",
+        suite: "À 1 %, l'impact reste limité. Les quelques difficultés en compétences de base de vos salariés / agents génèrent peu de coûts et n'entravent pas significativement l'activité."
+      }
+    ) %>
+  </div>
 
   <h2>Exemple avec suffixe</h2>
 
@@ -68,4 +63,45 @@
       }
     ) %>
   </div>
+
+  <h2>Tous les risques</h2>
+
+  <% scope = [ :admin, :evaluations, :mesure_des_risques ] %>
+  <% Evaluations::DiagnosticPro::RisquesPresenter::SEUILS_PALIERS_RISQUE.each do |pourcentage, palier_label| %>
+    <% presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage) %>
+    <div class="fr-mb-5w">
+      <h3>Palier <%= presenter.palier %></h3>
+      <%= render Evaluation::MesureChiffreCleComponent.new(
+        palier: presenter.palier,
+        prefixe: t(:prefixe, scope: scope),
+        chiffre: "#{pourcentage} %",
+        explications: {
+          texte: t("explication.texte.#{presenter.lettre}", scope: scope),
+          suite: t("explication.suite.#{presenter.lettre}", scope: scope)
+        }
+      ) %>
+    </div>
+  <% end %>
+
+  <h2>Tous les coûts</h2>
+
+  <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
+    <% presenter = Evaluations::DiagnosticPro::CoutsPresenter.new(
+      synthese: { score_cout: score.to_sym },
+      i18n: self
+    ) %>
+    <% contenu_cout = presenter.contenu_cout %>
+    <div class="fr-mb-5w">
+      <h3>Palier <%= presenter.palier_score_cout %></h3>
+      <%= render Evaluation::MesureChiffreCleComponent.new(
+        palier: presenter.palier_score_cout,
+        chiffre: contenu_cout[:titre],
+        suffixe: t("admin.evaluations.evapro.impact_couts.suffixe_masse_salariale"),
+        explications: {
+          texte: contenu_cout[:texte],
+          suite: contenu_cout[:suite]
+        }
+      ) %>
+    </div>
+  <% end %>
 </div>

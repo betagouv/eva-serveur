@@ -402,7 +402,21 @@ fr:
               moyen: "Impact sur le numérique : Moyen"
               fort: "Impact sur le numérique : Fort"
               tres_fort: "Impact sur le numérique : Très fort"
+      evapro:
         impact_couts:
+          titre: "Coûts"
+          suffixe_masse_salariale: "de votre masse salariale"
+          titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise mon organisation ?"
+          strategies:
+            question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
+            titre_graphique: "Stratégies de contournement"
+            mention_faible: "Stratégie : impact faible"
+            mention_fort: "Stratégie : impact fort"
+          numerique:
+            question: "Où en est votre organisation dans une logique de transition et reconversion ?"
+            titre_graphique: "Compétences numériques de base"
+            mention_faible: "Numérique : impact faible"
+            mention_fort: "Numérique : impact fort"
           contenu_cout:
             texte: "Ce pourcentage de masse salariale est une estimation de ce que coûte à votre organisation le fait de compter des salariés / agents en difficulté avec les compétences de base dans vos effectifs."
             titre:

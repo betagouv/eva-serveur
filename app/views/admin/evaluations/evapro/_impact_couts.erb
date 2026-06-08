@@ -6,13 +6,13 @@
 <% resultat_numerique_lettre = couts_presenter.lettre_score_numerique %>
 
 <div id="evaluation-impact-couts">
-  <h2 class="evaluation__titre">Coûts</h2>
+  <h2 class="evaluation__titre"><%= t(".titre") %></h2>
   <div class="couts">
     <% if synthese[:score_cout] && contenu_cout.present? %>
       <%= render Evaluation::MesureChiffreCleComponent.new(
         palier: couts_presenter.palier_score_cout(synthese[:score_cout]),
         chiffre: contenu_cout[:titre],
-        suffixe: "de votre masse salariale",
+        suffixe: t(".suffixe_masse_salariale"),
         explications: {
           texte: contenu_cout[:texte],
           suite: contenu_cout[:suite]
@@ -21,17 +21,17 @@
     <% end %>
 
     <div class="couts__graphiques">
-      <h3 class="couts__graphiques-titre">Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise mon organisation ?</h3>
+      <h3 class="couts__graphiques-titre"><%= t(".titre_graphiques") %></h3>
 
       <div class="couts__colonnes">
         <div class="couts__colonne">
-          <p class="couts__question">Quelles sont les stratégies de contournement mises en place par vos équipes ?</p>
+          <p class="couts__question"><%= t(".strategies.question") %></p>
           <div class="couts__pile-fleches">
-            <p class="couts__titre-graphique">Stratégies de contournement</p>
+            <p class="couts__titre-graphique"><%= t(".strategies.titre_graphique") %></p>
             <div class="couts__graphique">
-              <p class="couts__mention">Stratégie : impact faible</p>
+              <p class="couts__mention"><%= t(".strategies.mention_faible") %></p>
               <%= render PileFlechesScoreComponent.new(theme: :color, active_score: resultat_strategie_lettre) %>
-              <p class="couts__mention">Stratégie : impact fort</p>
+              <p class="couts__mention"><%= t(".strategies.mention_fort") %></p>
             </div>
             <% if explication_strategie.present? %>
               <div class="couts__explication">
@@ -43,13 +43,13 @@
         </div>
 
         <div class="couts__colonne">
-          <p class="couts__question">Où en est votre organisation dans une logique de transition et reconversion ?</p>
+          <p class="couts__question"><%= t(".numerique.question") %></p>
           <div class="couts__pile-fleches">
-            <p class="couts__titre-graphique">Compétences numériques de base</p>
+            <p class="couts__titre-graphique"><%= t(".numerique.titre_graphique") %></p>
             <div class="couts__graphique">
-              <p class="couts__mention">Numérique : impact faible</p>
+              <p class="couts__mention"><%= t(".numerique.mention_faible") %></p>
               <%= render PileFlechesScoreComponent.new(theme: :blue, active_score: resultat_numerique_lettre) %>
-              <p class="couts__mention">Numérique : impact fort</p>
+              <p class="couts__mention"><%= t(".numerique.mention_fort") %></p>
             </div>
             <% if explication_numerique.present? %>
               <div class="couts__explication">

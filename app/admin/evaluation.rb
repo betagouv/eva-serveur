@@ -295,7 +295,7 @@ ActiveAdmin.register Evaluation do
       return if lettre_cout.blank?
 
       I18n.t(lettre_cout.downcase,
-             scope: "admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.titre")
+             scope: "admin.evaluations.evapro.impact_couts.contenu_cout.titre")
     end
 
     def remplir_syntheses_evapro_pour_index

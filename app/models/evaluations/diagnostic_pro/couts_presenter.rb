@@ -27,18 +27,18 @@ module Evaluations
         lettre = score_to_lettre(@synthese[:score_cout])
         {
           titre: @i18n.t(
-            "admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.titre.#{lettre}"
+            "admin.evaluations.evapro.impact_couts.contenu_cout.titre.#{lettre}"
           ),
-          texte: @i18n.t("admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.texte"),
+          texte: @i18n.t("admin.evaluations.evapro.impact_couts.contenu_cout.texte"),
           suite: @i18n.t(
-            "admin.evaluations.mesure_des_impacts.impact_couts.contenu_cout.suite.#{lettre}"
+            "admin.evaluations.evapro.impact_couts.contenu_cout.suite.#{lettre}"
           )
         }
       end
 
       def explication_strategie
         lettre = score_to_lettre(@synthese[:score_strategie])
-        base_path = "admin.evaluations.mesure_des_impacts.impact_couts.explications_strategies"
+        base_path = "admin.evaluations.evapro.impact_couts.explications_strategies"
         {
           titre: @i18n.t("#{base_path}.titre.#{lettre}"),
           texte: @i18n.t("#{base_path}.texte.#{lettre}")
@@ -47,7 +47,7 @@ module Evaluations
 
       def explication_numerique
         lettre = score_to_lettre(@synthese[:score_numerique])
-        base_path = "admin.evaluations.mesure_des_impacts.impact_couts.explications_numerique"
+        base_path = "admin.evaluations.evapro.impact_couts.explications_numerique"
         {
           titre: @i18n.t("#{base_path}.titre.#{lettre}"),
           texte: @i18n.t("#{base_path}.texte.#{lettre}")

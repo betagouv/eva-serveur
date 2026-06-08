@@ -19,17 +19,19 @@ module Evaluations
         SCORE_TO_LETTRE.fetch(score.to_s, score.to_s)
       end
 
-      def palier_score_cout(score_cout)
-        SCORE_COUT_TO_PALIER.fetch(score_cout.to_s.to_sym, "D - Mauvais")
+      def palier_score_cout
+        SCORE_COUT_TO_PALIER.fetch(@synthese[:score_cout])
       end
 
       def contenu_cout
+        return nil if @synthese[:score_cout].blank?
+
         lettre = score_to_lettre(@synthese[:score_cout])
         {
           titre: @i18n.t(
             "admin.evaluations.evapro.impact_couts.contenu_cout.titre.#{lettre}"
           ),
-          texte: @i18n.t("admin.evaluations.evapro.impact_couts.contenu_cout.texte"),
+          texte: @i18n.t("admin.evaluations.evapro.impact_couts.contenu_cout.texte.#{lettre}"),
           suite: @i18n.t(
             "admin.evaluations.evapro.impact_couts.contenu_cout.suite.#{lettre}"
           )

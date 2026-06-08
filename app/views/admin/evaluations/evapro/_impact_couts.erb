@@ -19,45 +19,18 @@
       <h3 class="couts__graphiques-titre"><%= t(".titre_graphiques") %></h3>
 
       <div class="couts__colonnes">
-        <div class="couts__colonne">
-          <p class="couts__question"><%= t(".strategies.question") %></p>
-          <div class="couts__pile-fleches">
-            <p class="couts__titre-graphique"><%= t(".strategies.titre_graphique") %></p>
-            <div class="couts__graphique">
-              <p class="couts__mention"><%= t(".strategies.mention_faible") %></p>
-              <% resultat_strategie_lettre = couts_presenter.lettre_score_strategie %>
-              <%= render PileFlechesScoreComponent.new(theme: :color, active_score: resultat_strategie_lettre) %>
-              <p class="couts__mention"><%= t(".strategies.mention_fort") %></p>
-            </div>
-            <% explication_strategie = couts_presenter.explication_strategie %>
-            <% if explication_strategie.present? %>
-              <div class="couts__explication">
-                <p class="couts__explication-titre"><%= explication_strategie[:titre] %></p>
-                <p class="couts__explication-texte fr-mb-0"><%= explication_strategie[:texte] %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="couts__colonne">
-          <p class="couts__question"><%= t(".numerique.question") %></p>
-          <div class="couts__pile-fleches">
-            <p class="couts__titre-graphique"><%= t(".numerique.titre_graphique") %></p>
-            <div class="couts__graphique">
-              <p class="couts__mention"><%= t(".numerique.mention_faible") %></p>
-              <% resultat_numerique_lettre = couts_presenter.lettre_score_numerique %>
-              <%= render PileFlechesScoreComponent.new(theme: :blue, active_score: resultat_numerique_lettre) %>
-              <p class="couts__mention"><%= t(".numerique.mention_fort") %></p>
-            </div>
-            <% explication_numerique = couts_presenter.explication_numerique %>
-            <% if explication_numerique.present? %>
-              <div class="couts__explication">
-                <p class="couts__explication-titre"><%= explication_numerique[:titre] %></p>
-                <p class="couts__explication-texte fr-mb-0"><%= explication_numerique[:texte] %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+          indicateur: "strategies",
+          theme: :color,
+          active_score: couts_presenter.lettre_score_strategie,
+          explication: couts_presenter.explication_strategie
+        } %>
+        <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+          indicateur: "numerique",
+          theme: :blue,
+          active_score: couts_presenter.lettre_score_numerique,
+          explication: couts_presenter.explication_numerique
+        } %>
       </div>
     </div>
   </div>

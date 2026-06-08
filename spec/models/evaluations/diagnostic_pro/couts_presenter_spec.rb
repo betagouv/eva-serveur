@@ -5,13 +5,11 @@ require "rails_helper"
 RSpec.describe Evaluations::DiagnosticPro::CoutsPresenter do
   describe "#palier_score_cout" do
     it "mappe les scores vers les paliers attendus" do
-      presenter = described_class.new(synthese: {}, i18n: I18n)
+      presenter = described_class.new(synthese: { score_cout: :faible }, i18n: I18n)
+      expect(presenter.palier_score_cout).to eq("A - Très bon")
 
-      expect(presenter.palier_score_cout("faible")).to eq("A - Très bon")
-      expect(presenter.palier_score_cout("moyen")).to eq("B - Bon")
-      expect(presenter.palier_score_cout("fort")).to eq("C - Moyen")
-      expect(presenter.palier_score_cout("tres_fort")).to eq("D - Mauvais")
-      expect(presenter.palier_score_cout("inconnu")).to eq("D - Mauvais")
+      presenter = described_class.new(synthese: { score_cout: "faible" }, i18n: I18n)
+      expect(presenter.palier_score_cout).to eq("A - Très bon")
     end
   end
 

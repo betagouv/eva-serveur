@@ -61,7 +61,7 @@ actualites:, compte:, ability:)
       palier = ::Evaluations::DiagnosticPro::CoutsPresenter.new(
         synthese: { score_cout: score_cout },
         i18n: I18n
-      ).palier_score_cout(score_cout)
+      ).palier_score_cout
 
       ::Evaluations::DiagnosticPro::RisquesPresenter::PALIER_TO_LETTRE.fetch(palier, "d").upcase
     end

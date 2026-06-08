@@ -99,7 +99,7 @@
 }
 
 .couts__mise-en-avant {
-  .fr-callout{
+  .fr-callout {
     margin-bottom: 0 !important;
   }
 }
@@ -176,13 +176,19 @@
 }
 
 .couts__explication-titre {
-  @include corps-de-texte-md-bold;
+  @include corps-de-texte-md-regular;
 
-  margin: 0;
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .couts__explication-texte {
   @include corps-de-texte-md-regular;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .couts__question {

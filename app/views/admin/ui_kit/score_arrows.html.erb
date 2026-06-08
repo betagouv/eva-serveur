@@ -66,4 +66,27 @@
       <% end %>
     </div>
   </div>
+
+  <h2>Exemple pour les indicateurs des coûts</h2>
+  <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
+    <% presenter = Evaluations::DiagnosticPro::CoutsPresenter.new(
+      synthese: { score_strategie: score.to_sym, score_numerique: score.to_sym },
+      i18n: self
+    ) %>
+    <div class="couts__colonnes fr-mb-4v" style="max-width: 880px">
+      <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+        indicateur: "strategies",
+        theme: :color,
+        active_score: presenter.lettre_score_strategie,
+        explication: presenter.explication_strategie
+      } %>
+      <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+        indicateur: "numerique",
+        theme: :blue,
+        active_score: presenter.lettre_score_numerique,
+        explication: presenter.explication_numerique
+      } %>
+    </div>
+  <% end %>
+
 </div>

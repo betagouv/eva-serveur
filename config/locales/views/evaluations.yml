@@ -404,19 +404,9 @@ fr:
               tres_fort: "Impact sur le numérique : Très fort"
       evapro:
         impact_couts:
-          titre: "Coûts"
+          titre: "Coûts potentiels dans votre structure"
           suffixe_masse_salariale: "de votre masse salariale"
           titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise ma structure ?"
-          strategies:
-            question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
-            titre_graphique: "Stratégies de contournement"
-            mention_faible: "Stratégie : impact faible"
-            mention_fort: "Stratégie : impact fort"
-          numerique:
-            question: "Où en est votre structure dans une logique de transition et reconversion ?"
-            titre_graphique: "Compétences numériques de base"
-            mention_faible: "Numérique : impact faible"
-            mention_fort: "Numérique : impact fort"
           contenu_cout:
             titre:
               a: "1%"
@@ -435,26 +425,45 @@ fr:
               d: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
           explications_strategies:
             titre:
-              a: "Palier A"
-              b: "Palier B : évitement"
-              c: "Palier C : déni & dissimulation"
-              d: "Palier D : glissement de fonction et délégation"
+              a: "**A - Peu de stratégies visibles**"
+              b: "**B - Stratégies ponctuelles**"
+              c: "**C - Stratégies instituées**"
+              d: "**D - Délégation et glissement de fonction**"
             texte:
-              a: "Peu de stratégies de contournement observées"
-              b: "Je contourne la tâche, ce n'est pas ma faute, j'adapte la consigne."
-              c: "Je n'ai pas de difficulté ; Je préfère le téléphone aux mails, c'est plus humain ; Je donne des prétextes pour ne pas faire."
-              d: "Je ne fais pas. Un autre fait à ma place."
+              a: |
+                Les mécanismes d'adaptation existent à peine ou passent inaperçus.
+                Ex. « Ça se passe bien, je n'ai pas de souci particulier. »
+              b: |
+                Certaines situations « à risque » sont contournées de façon occasionnelle.  
+                Ex. « Ce n'est pas urgent, je verrai ça plus tard… De toutes façons ce n'est pas vraiment de ma responsabilité. »
+              c: |
+                Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
+                Ex. « J'aime mieux en parler directement, c'est plus simple. Les mails ce n'est pas mon truc. »
+              d: |
+                L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
+                Ex. « J'en ai parlé à mon collègue, il s'en occupe. Moi je gère autre chose. »
           explications_numerique:
             titre:
-              a: "Palier A"
-              b: "Palier B"
-              c: "Palier C"
-              d: "Palier D"
+              a: "**A** : usage autonome et sécurisé des compétences numériques de base"
+              b: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
+              c: "**C** : usage fragile nécessitant des ajustements fréquents"
+              d: "**D** : usage dépendant, reposant sur le soutien du collectif"
             texte:
-              a: "Usage satisfaisant et adaptatif des compétences numériques de base"
-              b: "Usage des compétences numériques de base courant"
-              c: "Usage des compétences numériques de base fragile"
-              d: "Usage des compétences numériques de base dépendant du collectif"
+              a: ""
+              b: ""
+              c: ""
+              d: ""
+        impact_couts_indicateur:
+          strategies:
+            question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
+            titre_graphique: "Stratégies de contournement"
+            mention_faible: "Stratégie : impact faible"
+            mention_fort: "Stratégie : impact fort"
+          numerique:
+            question: "Où en est votre structure dans une logique de transition et reconversion ?"
+            titre_graphique: "Compétences numériques de base"
+            mention_faible: "Numérique : impact faible"
+            mention_fort: "Numérique : impact fort"
       continuer_evaluation_evapro:
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic

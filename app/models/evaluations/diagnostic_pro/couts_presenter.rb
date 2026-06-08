@@ -20,7 +20,7 @@ module Evaluations
       end
 
       def palier_score_cout
-        SCORE_COUT_TO_PALIER.fetch(@synthese[:score_cout])
+        SCORE_COUT_TO_PALIER.fetch(@synthese[:score_cout].to_s.to_sym)
       end
 
       def contenu_cout
@@ -47,6 +47,10 @@ module Evaluations
         }
       end
 
+      def lettre_score_strategie
+        score_to_lettre(@synthese[:score_strategie])
+      end
+
       def explication_numerique
         lettre = score_to_lettre(@synthese[:score_numerique])
         base_path = "admin.evaluations.evapro.impact_couts.explications_numerique"
@@ -54,10 +58,6 @@ module Evaluations
           titre: @i18n.t("#{base_path}.titre.#{lettre}"),
           texte: @i18n.t("#{base_path}.texte.#{lettre}")
         }
-      end
-
-      def lettre_score_strategie
-        score_to_lettre(@synthese[:score_strategie])
       end
 
       def lettre_score_numerique

@@ -28,7 +28,7 @@ RSpec.describe Admin::EvaluationsController, type: :controller do
     end
 
     it "retourne la recommandation pour le bilan de situation" do
-      expect(controller.send(:recommandation_risque_pour_xls, evaluation)).to eq("Prévention")
+      expect(controller.send(:recommandation_risque_pour_xls, evaluation)).to eq("Anticiper")
     end
 
     it "retourne les lettres d'impact A/B/C/D" do

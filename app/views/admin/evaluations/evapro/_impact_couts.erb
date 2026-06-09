@@ -20,16 +20,14 @@
 
       <div class="couts__colonnes">
         <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
-          indicateur: "strategies",
+          indicateur: :score_strategie,
           theme: :color,
-          active_score: couts_presenter.lettre_score_strategie,
-          explication: couts_presenter.explication_strategie
+          presenter: couts_presenter
         } %>
         <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
-          indicateur: "numerique",
+          indicateur: :score_numerique,
           theme: :blue,
-          active_score: couts_presenter.lettre_score_numerique,
-          explication: couts_presenter.explication_numerique
+          presenter: couts_presenter
         } %>
       </div>
     </div>

@@ -423,47 +423,47 @@ fr:
               b: "À 2 %, les impacts deviennent perceptibles et les premiers signaux faibles émergent. Il est essentiel de communiquer auprès des managers et de les accompagner pour détecter et traiter ces situations avant qu’elles ne s’installent durablement."
               c: "Les impacts sur la qualité, la performance et la gestion deviennent significatifs. L’augmentation des erreurs, des ralentissements et des ajustements révèle des dysfonctionnements installés : une démarche structurée et un investissement ciblé dans les compétences de base deviennent indispensables pour rétablir la situation."
               d: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
-          explications_strategies:
-            titre:
-              a: "**A - Peu de stratégies visibles**"
-              b: "**B - Stratégies ponctuelles**"
-              c: "**C - Stratégies instituées**"
-              d: "**D - Délégation et glissement de fonction**"
-            texte:
-              a: |
-                Les mécanismes d'adaptation existent à peine ou passent inaperçus.
-                Ex. « Ça se passe bien, je n'ai pas de souci particulier. »
-              b: |
-                Certaines situations « à risque » sont contournées de façon occasionnelle.  
-                Ex. « Ce n'est pas urgent, je verrai ça plus tard… De toutes façons ce n'est pas vraiment de ma responsabilité. »
-              c: |
-                Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
-                Ex. « J'aime mieux en parler directement, c'est plus simple. Les mails ce n'est pas mon truc. »
-              d: |
-                L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
-                Ex. « J'en ai parlé à mon collègue, il s'en occupe. Moi je gère autre chose. »
-          explications_numerique:
-            titre:
-              a: "**A** : usage autonome et sécurisé des compétences numériques de base"
-              b: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
-              c: "**C** : usage fragile nécessitant des ajustements fréquents"
-              d: "**D** : usage dépendant, reposant sur le soutien du collectif"
-            texte:
-              a: ""
-              b: ""
-              c: ""
-              d: ""
         impact_couts_indicateur:
-          strategies:
+          score_strategie:
             question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
             titre_graphique: "Stratégies de contournement"
             mention_faible: "Stratégie : impact faible"
             mention_fort: "Stratégie : impact fort"
-          numerique:
+            explication:
+              titre:
+                a: "**A - Peu de stratégies visibles**"
+                b: "**B - Stratégies ponctuelles**"
+                c: "**C - Stratégies instituées**"
+                d: "**D - Délégation et glissement de fonction**"
+              texte:
+                a: |
+                  Les mécanismes d'adaptation existent à peine ou passent inaperçus.
+                  Ex. « Ça se passe bien, je n'ai pas de souci particulier. »
+                b: |
+                  Certaines situations « à risque » sont contournées de façon occasionnelle.  
+                  Ex. « Ce n'est pas urgent, je verrai ça plus tard… De toutes façons ce n'est pas vraiment de ma responsabilité. »
+                c: |
+                  Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
+                  Ex. « J'aime mieux en parler directement, c'est plus simple. Les mails ce n'est pas mon truc. »
+                d: |
+                  L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
+                  Ex. « J'en ai parlé à mon collègue, il s'en occupe. Moi je gère autre chose. »
+          score_numerique:
             question: "Où en est votre structure dans une logique de transition et reconversion ?"
             titre_graphique: "Compétences numériques de base"
             mention_faible: "Numérique : impact faible"
             mention_fort: "Numérique : impact fort"
+            explication:
+              titre:
+                a: "**A** : usage autonome et sécurisé des compétences numériques de base"
+                b: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
+                c: "**C** : usage fragile nécessitant des ajustements fréquents"
+                d: "**D** : usage dépendant, reposant sur le soutien du collectif"
+              texte:
+                a: ""
+                b: ""
+                c: ""
+                d: ""
       continuer_evaluation_evapro:
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic

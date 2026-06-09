@@ -493,7 +493,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (6.6.1)
+    puma (7.2.1)
       nio4r (~> 2.0)
     puppeteer-ruby (0.52.1)
       async (>= 2.35.1, < 3.0)
@@ -831,7 +831,7 @@ DEPENDENCIES
   paranoia
   pdf-reader
   pg (~> 1.0)
-  puma (~> 6.0)
+  puma (~> 7.2)
   puppeteer-ruby
   rack-attack
   rack-cors

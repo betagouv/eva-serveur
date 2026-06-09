@@ -75,16 +75,14 @@
     ) %>
     <div class="couts__colonnes fr-mb-4v" style="max-width: 880px">
       <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
-        indicateur: "strategies",
+        indicateur: :score_strategie,
         theme: :color,
-        active_score: presenter.lettre_score_strategie,
-        explication: presenter.explication_strategie
+        presenter: presenter
       } %>
       <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
-        indicateur: "numerique",
+        indicateur: :score_numerique,
         theme: :blue,
-        active_score: presenter.lettre_score_numerique,
-        explication: presenter.explication_numerique
+        presenter: presenter
       } %>
     </div>
   <% end %>

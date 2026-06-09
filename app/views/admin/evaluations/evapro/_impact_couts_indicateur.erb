@@ -1,17 +1,16 @@
+<% lettre = presenter.lettre(indicateur) %>
 <div class="couts__colonne">
   <p class="couts__question"><%= t(".#{indicateur}.question") %></p>
   <div class="couts__pile-fleches">
     <p class="couts__titre-graphique"><%= t(".#{indicateur}.titre_graphique") %></p>
     <div class="couts__graphique">
       <p class="couts__mention"><%= t(".#{indicateur}.mention_faible") %></p>
-      <%= render PileFlechesScoreComponent.new(theme: theme, active_score: active_score) %>
+      <%= render PileFlechesScoreComponent.new(theme: theme, active_score: lettre) %>
       <p class="couts__mention"><%= t(".#{indicateur}.mention_fort") %></p>
     </div>
-    <% if explication.present? %>
-      <div class="couts__explication">
-        <div class="couts__explication-titre"><%= md(explication[:titre]) %></div>
-        <div class="couts__explication-texte"><%= md(explication[:texte]) %></div>
-      </div>
-    <% end %>
+    <div class="couts__explication">
+      <div class="couts__explication-titre"><%= md(t(".#{indicateur}.explication.titre.#{lettre}")) %></div>
+      <div class="couts__explication-texte"><%= md(t(".#{indicateur}.explication.texte.#{lettre}")) %></div>
+    </div>
   </div>
 </div>

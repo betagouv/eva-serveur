@@ -1,0 +1,10 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "ui_kit" %>
+<% end %>
+
+<% content_for :content do %>
+  <%= render "admin/ui_kit/entete_ui_kit" %>
+  <%= yield %>
+<% end %>
+
+<%= render template: "layouts/application" %>

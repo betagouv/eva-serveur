@@ -1,19 +1,15 @@
 <div class="container">
-  <div class="fr-mb-3w">
-    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
-  </div>
-
   <h1>Démo EvaProScoreComponent</h1>
 
   <p class="fr-text--lead">
     Composant de paliers Evaproscore (A, B, C, D).
   </p>
 
-  <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 1rem;">
+  <div class="uik-flex-sections">
     <%# EvaProScoreComponent - une ligne par palier actif %>
     <section>
       <h2>Evaproscore</h2>
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <div class="uik-flex-col-1">
         <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
           <div>
             <%= render EvaProScoreComponent.new(score:) %>
@@ -25,18 +21,18 @@
     <%# EvaProScoreItemComponent - chaque lettre à chaque état %>
     <section>
       <h2>Evaproscore - États des items</h2>
-      <div style="display: flex; gap: 2rem;">
+      <div class="uik-flex-gap-2">
         <div>
-          <h3 style="font-size: 0.875rem; margin-bottom: 0.5rem;">Inactif</h3>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+          <h3 class="uik-sous-titre">Inactif</h3>
+          <div class="uik-flex-col-sm">
             <% %w[A B C D].each do |letter| %>
               <%= render EvaProScoreItemComponent.new(letter:, active: false) %>
             <% end %>
           </div>
         </div>
         <div>
-          <h3 style="font-size: 0.875rem; margin-bottom: 0.5rem;">Actif</h3>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start;">
+          <h3 class="uik-sous-titre">Actif</h3>
+          <div class="uik-flex-col-sm">
             <% %w[A B C D].each do |letter| %>
               <%= render EvaProScoreItemComponent.new(letter:, active: true) %>
             <% end %>
@@ -48,7 +44,7 @@
 
   <section>
   <h2>Utilisation à la restitution des impacts</h2>
-  <div style="max-width: 880px;"> <!-- simulation de la largeur max active admin --!>
+  <div class="uik-max-active-admin">
     <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
       <h3>niveau <%= score %></h3>
       <% synthese = Evaluations::DiagnosticPro::ImpactsPresenter::INTERPRETATIONS

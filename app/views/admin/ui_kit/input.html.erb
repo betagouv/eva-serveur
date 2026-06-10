@@ -1,12 +1,8 @@
 <div class="container">
-  <div class="fr-mb-3w">
-    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
-  </div>
-
   <h1 class="fr-h1 fr-mt-6w">Démo InputComponent</h1>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie simple</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "text-input",
       label: "Libellé champ de saisie",
@@ -15,7 +11,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec placeholder</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "text-input-placeholder",
       label: "Libellé champ de saisie",
@@ -25,7 +21,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie requis</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "text-input-required",
       label: "Libellé champ de saisie",
@@ -35,7 +31,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec valeur</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "text-input-value",
       label: "Libellé champ de saisie",
@@ -44,7 +40,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie avec pattern (SIRET)</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "siret-input",
       label: "Numéro SIRET",
@@ -57,7 +53,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ SIRET avec lien (SiretInputComponent)</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render SiretInputComponent.new(
       id: "siret-input-link",
       label: "Numéro SIRET",
@@ -67,7 +63,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Différents types d'input</h2>
-  <div style="max-width: 600px; display: flex; flex-direction: column; gap: 2rem;">
+  <div class="uik-max-600 uik-flex-col-2">
     <div>
       <h3 class="fr-h3">Email</h3>
       <%= render InputComponent.new(
@@ -109,7 +105,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Champ de saisie select (liste déroulante)</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "select-hint",
       label: "Libellé pour liste déroulante",
@@ -124,7 +120,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Select requis</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= render InputComponent.new(
       id: "select-required",
       label: "Libellé pour liste déroulante",
@@ -140,7 +136,7 @@
   </div>
 
   <h2 class="fr-h2 fr-mt-6w">Utilisation avec form builder (SiretInputComponent)</h2>
-  <div style="max-width: 600px;">
+  <div class="uik-max-600">
     <%= form_with url: "#", local: true do |f| %>
       <%= render SiretInputComponent.new(
         id: "form-siret",

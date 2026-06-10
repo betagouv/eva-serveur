@@ -1,8 +1,4 @@
 <div class="container">
-  <div class="fr-mb-3w">
-    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
-  </div>
-
   <h1>Démo CarteV2Component</h1>
 
   <div>
@@ -19,7 +15,7 @@
     <% end %>
   </div>
 
-  <div style="max-width: 400px;">
+  <div class="uik-max-400">
     <h2>Carte avec une image</h2>
     <%= render CarteV2Component.new(image: "inscription/campagnes_jeu.png") do %>
       <div>Contenu de la carte</div>

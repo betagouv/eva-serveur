@@ -14,9 +14,9 @@
     <section>
       <h2>Evaproscore</h2>
       <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <% %w[A B C D].each do |active_letter| %>
+        <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
           <div>
-            <%= render EvaProScoreComponent.new(active_letter:) %>
+            <%= render EvaProScoreComponent.new(score:) %>
           </div>
         <% end %>
       </div>

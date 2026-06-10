@@ -5,7 +5,7 @@
   <div class="couts">
     <% if contenu_cout %>
       <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: couts_presenter.palier_score_cout,
+        palier: couts_presenter.lettre(:score_cout),
         chiffre: contenu_cout[:titre],
         suffixe: t(".suffixe_masse_salariale"),
         explications: {

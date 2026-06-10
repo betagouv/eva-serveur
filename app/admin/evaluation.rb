@@ -268,34 +268,21 @@ ActiveAdmin.register Evaluation do
       lettre_risque = lettre_risque_pour(evaluation, synthese_evapro_pour_xls(evaluation))
       return if lettre_risque.blank?
 
-      palier = {
-        "A" => "A - Très bon",
-        "B" => "B - Bon",
-        "C" => "C - Moyen",
-        "D" => "D - Mauvais"
-      }[lettre_risque]
-      return if palier.blank?
-
-      I18n.t(palier, scope: "bilan_eva_pro.chiffre_cle")
+      I18n.t(lettre_risque, scope: "bilan_eva_pro.chiffre_cle")
     end
 
     def impact_evapro_pour_xls(evaluation, cle)
       niveau = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :synthese_impact, cle)
       return if niveau.blank?
 
-      lettre = ::Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: {}, i18n: I18n)
-        .score_to_lettre(niveau).upcase
-      return if lettre.blank?
-
-      lettre
+      ::Evaluations::DiagnosticPro::SCORE_TO_LETTRE.fetch(niveau)
     end
 
     def score_cout_pour_xls(evaluation)
-      lettre_cout = lettre_couts_pour(evaluation, synthese_evapro_pour_xls(evaluation))
-      return if lettre_cout.blank?
+      cout_presenter = cout_presenter_pour(evaluation, synthese_evapro_pour_xls(evaluation))
+      return if cout_presenter.nil?
 
-      I18n.t(lettre_cout.downcase,
-             scope: "admin.evaluations.evapro.impact_couts.contenu_cout.titre")
+      cout_presenter.contenu_cout[:titre]
     end
 
     def remplir_syntheses_evapro_pour_index

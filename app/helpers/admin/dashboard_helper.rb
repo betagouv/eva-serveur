@@ -45,11 +45,9 @@ actualites:, compte:, ability:)
       palier = ::Evaluations::DiagnosticPro::RisquesPresenter.new(
         pourcentage_risque: pourcentage_risque.to_i
       ).palier
-
-      ::Evaluations::DiagnosticPro::RisquesPresenter::PALIER_TO_LETTRE.fetch(palier, "d").upcase
     end
 
-    def lettre_couts_pour(evaluation, synthese_evapro = nil)
+    def cout_presenter_pour(evaluation, synthese_evapro)
       score_cout =
         if synthese_evapro.present?
           synthese_evapro[:score_cout]
@@ -58,19 +56,24 @@ actualites:, compte:, ability:)
         end
       return if score_cout.blank?
 
-      palier = ::Evaluations::DiagnosticPro::CoutsPresenter.new(
+      ::Evaluations::DiagnosticPro::CoutsPresenter.new(
         synthese: { score_cout: score_cout },
         i18n: I18n
-      ).palier_score_cout
+      )
+    end
 
-      ::Evaluations::DiagnosticPro::RisquesPresenter::PALIER_TO_LETTRE.fetch(palier, "d").upcase
+    def lettre_couts_pour(evaluation, synthese_evapro = nil)
+      presenter = cout_presenter_pour(evaluation, synthese_evapro)
+      return if presenter.nil?
+
+      presenter.lettre(:score_cout)
     end
 
     def afficher_lettre_cout(evaluation, synthese_evapro = nil)
       synthese_evapro ||= synthese_evapro_pour(evaluation)
       lettre_couts = lettre_couts_pour(evaluation, synthese_evapro)
       if lettre_couts.present? && evaluation.complete?
-        render EvaProScoreComponent.new(active_letter: lettre_couts)
+        render EvaProScoreComponent.new(score: lettre_couts)
       else
         "-"
       end
@@ -80,7 +83,7 @@ actualites:, compte:, ability:)
       synthese_evapro ||= synthese_evapro_pour(evaluation)
       lettre_risque = lettre_risque_pour(evaluation, synthese_evapro)
       if lettre_risque.present? && evaluation.complete?
-        render EvaProScoreComponent.new(active_letter: lettre_risque)
+        render EvaProScoreComponent.new(score: lettre_risque)
       else
         "-"
       end
@@ -90,7 +93,7 @@ actualites:, compte:, ability:)
       lettre_risque = Admin::DashboardHelper.instance_method(:lettre_risque_pour).bind(self).call(
 evaluation, synthese_evapro)
       if lettre_risque.present? && evaluation.complete?
-        render EvaProScoreComponent.new(active_letter: lettre_risque)
+        render EvaProScoreComponent.new(score: lettre_risque)
       else
         "-"
       end
@@ -100,7 +103,7 @@ evaluation, synthese_evapro)
       lettre_couts = Admin::DashboardHelper.instance_method(:lettre_couts_pour).bind(self).call(
 evaluation, synthese_evapro)
       if lettre_couts.present? && evaluation.complete?
-        render EvaProScoreComponent.new(active_letter: lettre_couts)
+        render EvaProScoreComponent.new(score: lettre_couts)
       else
         "-"
       end

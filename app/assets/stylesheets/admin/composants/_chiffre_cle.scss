@@ -13,22 +13,22 @@
   background-color: var(--chiffre-cle-background-color);
 }
 
-.chiffre-cle__a-tres-bon {
+.chiffre-cle__a {
   --chiffre-cle-border-color: var(--green-emeraude-main-632);
   --chiffre-cle-background-color: var(--green-emeraude-975-75);
 }
 
-.chiffre-cle__b-bon {
+.chiffre-cle__b {
   --chiffre-cle-border-color: var(--green-tilleul-verveine-main-707);
   --chiffre-cle-background-color: var(--green-tilleul-verveine-975-75);
 }
 
-.chiffre-cle__c-moyen {
+.chiffre-cle__c {
   --chiffre-cle-border-color: var(--orange-terre-battue-main-645);
   --chiffre-cle-background-color: var(--orange-terre-battue-975-75);
 }
 
-.chiffre-cle__d-mauvais {
+.chiffre-cle__d {
   --chiffre-cle-border-color: var(--pink-tuile-sun-425-moon-750);
   --chiffre-cle-background-color: var(--pink-tuile-975-75);
 }
@@ -53,4 +53,3 @@
 .chiffre-cle__suffixe {
   @include corps-de-texte-sm-regular;
 }
-

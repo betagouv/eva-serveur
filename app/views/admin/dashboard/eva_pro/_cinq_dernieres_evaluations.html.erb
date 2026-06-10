@@ -18,7 +18,7 @@
         <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_taux_risque")) do |evaluation| %>
           <% lettre_risque = lettre_risque_pour(evaluation) %>
           <% if lettre_risque.present? %>
-            <%= render EvaProScoreComponent.new(active_letter: lettre_risque) %>
+            <%= render EvaProScoreComponent.new(score: lettre_risque) %>
           <% else %>
             -
           <% end %>
@@ -26,7 +26,7 @@
         <% tableau.colonne(titre: t("admin.dashboard.cinq_dernieres_evaluations.colonne_couts")) do |evaluation| %>
           <% lettre_couts = lettre_couts_pour(evaluation) %>
           <% if lettre_couts.present? %>
-            <%= render EvaProScoreComponent.new(active_letter: lettre_couts) %>
+            <%= render EvaProScoreComponent.new(score: lettre_couts) %>
           <% else %>
             -
           <% end %>

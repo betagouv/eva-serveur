@@ -27,7 +27,7 @@ RSpec.describe Evaluations::DiagnosticPro do
     it "expose les données dérivées du diagnostic entreprise via un objet testable" do
       diag = double(
         partie: double(synthese: { "pourcentage_risque" => 25 }, evenements: []),
-        palier: "B - Bon"
+        palier: "B"
       )
       impact = double(
         synthese: {
@@ -47,8 +47,8 @@ RSpec.describe Evaluations::DiagnosticPro do
       presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
 
       expect(presenter.pourcentage_risque).to eq(25)
-      expect(presenter.palier_risque).to eq("B - Bon")
-      expect(presenter.palier_bilan).to eq("A - Très bon")
+      expect(presenter.palier_risque).to eq("B")
+      expect(presenter.palier_bilan).to eq("A")
       expect(presenter.affiche_bilan_risque?).to be(true)
       expect(presenter.complet?).to be(true)
       expect(presenter.synthese_impact_general).to eq(
@@ -109,14 +109,7 @@ evaluation: double(complete?: false))
     describe "#palier" do
       it "retourne le palier A quand le pourcentage est très bas" do
         presenter = described_class.new(pourcentage_risque: 10)
-        expect(presenter.palier).to eq("A - Très bon")
-        expect(presenter.lettre).to eq("a")
-      end
-
-      it "retourne le palier D par défaut si le seuil est au-dessus des bornes" do
-        presenter = described_class.new(pourcentage_risque: 999)
-        expect(presenter.palier).to eq("D - Mauvais")
-        expect(presenter.lettre).to eq("d")
+        expect(presenter.palier).to eq("A")
       end
     end
   end

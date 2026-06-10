@@ -13,7 +13,7 @@
 
   <div class="fr-mb-5w">
     <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "A - Très bon",
+      palier: "A",
       chiffre: "10%",
       prefixe: "Taux de risque",
       explications: {
@@ -27,7 +27,7 @@
 
   <div class="fr-mb-5w">
     <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "A - Très bon",
+      palier: "A",
       chiffre: "1%",
       suffixe: "de votre masse salariale",
       explications: {
@@ -41,7 +41,7 @@
 
   <div class="fr-mb-5w">
     <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "B - Bon",
+      palier: "B",
       prefixe: "Score",
       chiffre: "75",
       explications: {
@@ -55,7 +55,7 @@
 
   <div class="fr-mb-5w">
     <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "C - Moyen",
+      palier: "C",
       chiffre: "50",
       explications: {
         texte: "Votre situation nécessite une attention particulière.",
@@ -76,8 +76,8 @@
         prefixe: t(:prefixe, scope: scope),
         chiffre: "#{pourcentage} %",
         explications: {
-          texte: t("explication.texte.#{presenter.lettre}", scope: scope),
-          suite: t("explication.suite.#{presenter.lettre}", scope: scope)
+          texte: t("explication.texte.#{presenter.palier}", scope: scope),
+          suite: t("explication.suite.#{presenter.palier}", scope: scope)
         }
       ) %>
     </div>
@@ -92,9 +92,9 @@
     ) %>
     <% contenu_cout = presenter.contenu_cout %>
     <div class="fr-mb-5w">
-      <h3>Palier <%= presenter.palier_score_cout %></h3>
+      <h3>Palier <%= presenter.lettre(:score_cout) %></h3>
       <%= render Evaluation::MesureChiffreCleComponent.new(
-        palier: presenter.palier_score_cout,
+        palier: presenter.lettre(:score_cout),
         chiffre: contenu_cout[:titre],
         suffixe: t("admin.evaluations.evapro.impact_couts.suffixe_masse_salariale"),
         explications: {

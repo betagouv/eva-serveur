@@ -13,13 +13,13 @@ module Restitution
     def palier
       case synthese[:pourcentage_risque]
       when 0..10
-        "A - Très bon"
+        "A"
       when 11..25
-        "B - Bon"
+        "B"
       when 26..50
-        "C - Moyen"
+        "C"
       when 51..100
-        "D - Mauvais"
+        "D"
       end
     end
   end

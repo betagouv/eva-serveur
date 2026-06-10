@@ -150,7 +150,7 @@ RSpec.describe Admin::DashboardHelper do
         allow(Evaluations::DiagnosticPro::RisquesPresenter)
           .to receive(:new).with(pourcentage_risque: 50)
           .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
-                                      palier: "C - Moyen"))
+                                      palier: "C"))
       end
 
       it "retourne la lettre du palier en majuscule" do
@@ -182,7 +182,7 @@ RSpec.describe Admin::DashboardHelper do
         allow(Evaluations::DiagnosticPro::RisquesPresenter)
           .to receive(:new).with(pourcentage_risque: 25)
           .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
-palier: "B - Bon"))
+              palier: "B"))
       end
 
       it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do
@@ -223,15 +223,10 @@ palier: "B - Bon"))
         allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
           restitution_pro
         )
-        allow(Evaluations::DiagnosticPro::CoutsPresenter)
-          .to receive(:new).and_return(
-            instance_double(Evaluations::DiagnosticPro::CoutsPresenter,
-                            palier_score_cout: "D - Mauvais")
-          )
       end
 
       it "retourne la lettre du palier en majuscule" do
-        expect(helper.send(:lettre_couts_pour, evaluation)).to eq("D")
+        expect(helper.send(:lettre_couts_pour, evaluation)).to eq("C")
       end
     end
 
@@ -255,14 +250,6 @@ palier: "B - Bon"))
 
     context "quand synthese_evapro est fourni (index sans fabrique)" do
       let(:synthese_evapro) { { score_cout: "faible" } }
-
-      before do
-        allow(Evaluations::DiagnosticPro::CoutsPresenter)
-          .to receive(:new).and_return(
-            instance_double(Evaluations::DiagnosticPro::CoutsPresenter,
-palier_score_cout: "A - Très bon")
-          )
-      end
 
       it "utilise synthese_evapro et ne appelle pas restitution_globale_pour" do
         expect(helper).not_to receive(:restitution_globale_pour)

@@ -2,12 +2,12 @@ fr:
   bilan_eva_pro:
     prefixe: "Recommandation"
     chiffre_cle:
-      A - Très bon: "Surveiller"
-      B - Bon: "Anticiper"
-      C - Moyen: "Mobiliser"
-      D - Mauvais: "Intervenir"
+      A: "Surveiller"
+      B: "Anticiper"
+      C: "Mobiliser"
+      D: "Intervenir"
     explication:
-      A - Très bon: Intégrer la question des compétences de base dans vos projets d’entreprise afin d’identifier les situations à risque et d'éviter les angles morts.
-      B - Bon: Informer de manière proactive les managers et organiser des actions de sensibilisation pour faciliter le repérage des signaux faibles.
-      C - Moyen: Engager les acteurs clés (RH, managers, représentants du personnel, opérateurs de compétences, ANLCI, CRIA) autour d'un projet structuré de développement des compétences de base.
-      D - Mauvais: "Co-construire avec votre opérateur de compétences et/ou le chargé de mission ANLCI de votre région un plan d'action opérationnel : sensibiliser, identifier les besoins et mettre en place un accompagnement adapté."
+      A: Intégrer la question des compétences de base dans vos projets d’entreprise afin d’identifier les situations à risque et d'éviter les angles morts.
+      B: Informer de manière proactive les managers et organiser des actions de sensibilisation pour faciliter le repérage des signaux faibles.
+      C: Engager les acteurs clés (RH, managers, représentants du personnel, opérateurs de compétences, ANLCI, CRIA) autour d'un projet structuré de développement des compétences de base.
+      D: "Co-construire avec votre opérateur de compétences et/ou le chargé de mission ANLCI de votre région un plan d'action opérationnel : sensibiliser, identifier les besoins et mettre en place un accompagnement adapté."

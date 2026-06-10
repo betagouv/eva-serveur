@@ -10,7 +10,7 @@
   <% risques_presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage_risque) %>
   <% palier_risque = pourcentage_risque.present? ? risques_presenter.palier : nil %>
   <% couts_presenter = Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: { score_cout: score_cout }, i18n: self) %>
-  <% palier_cout = score_cout.present? ? couts_presenter.palier_score_cout(score_cout.to_s) : nil %>
+  <% palier_cout = score_cout.present? ? couts_presenter.lettre(:score_cout) : nil %>
   <% palier_situation = diag_risques_entreprise&.palier %>
   <% synthese_pour_cout = (synthese_impact || synthese_impact_partie&.symbolize_keys || {}).merge(score_cout: score_cout) %>
   <% contenu_cout = score_cout.present? ? Evaluations::DiagnosticPro::CoutsPresenter.new(synthese: synthese_pour_cout, i18n: self).contenu_cout : nil %>

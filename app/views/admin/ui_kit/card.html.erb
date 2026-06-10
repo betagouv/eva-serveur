@@ -40,9 +40,24 @@
       <%= render CardComponent.new(
         titre: "Titre de la carte",
         description: "Description de la carte",
-        image_url: "/img/placeholder.16x9.png",
+        image_url: image_path("avatar_salut.png"),
         image_alt: "Image de démonstration",
         url: "#"
+      ) %>
+    </div>
+  </div>
+
+  <h2>Card avec image, horizontale</h2>
+  <div class="fr-grid-row fr-grid-row--gutters">
+    <div class="fr-col fr-col-md-6">
+      <%= render CardComponent.new(
+        titre: "Titre de la carte",
+        description: "Description de la carte",
+        image_url: image_path("avatar_salut.png"),
+        image_alt: "Image de démonstration",
+        url: "#",
+        classes: ["fr-card--horizontal"],
+        size: :sm
       ) %>
     </div>
   </div>
@@ -109,7 +124,7 @@
       <%= render CardComponent.new(
         titre: "Titre de la carte complète",
         description: "Description de la carte avec tous les éléments",
-        image_url: "/img/placeholder.16x9.png",
+        image_url: image_path("avatar_salut.png"),
         image_alt: "Image de démonstration",
         bouton_label: "Action",
         bouton_url: "#"
@@ -119,26 +134,30 @@
 
   <h2>Les cartes d'usage de l'embarquement</h2>
   <div class="page-inscription-structure uik-max-792">
-    <div class="card-usage-wrapper">
-      <form class="card-usage">
-        <%= render CardComponent.new(
-          titre: t("inscription.structures.show.usage.eva.titre"),
-          description: t("inscription.structures.show.usage.eva.description"),
-          image_url: "logo/eva-dark.svg",
-          image_alt: t("header.eva.logo_alt"),
-          url: "javascript:alert('eva a été choisi')",
-          classes: [ "card-usage-eva" ]
-        ) %>
-        <%= render CardComponent.new(
-          titre: t("inscription.structures.show.usage.evapro.titre"),
-          description: t("inscription.structures.show.usage.evapro.description"),
-          image_url: "logo/evapro.svg",
-          image_alt: t("header.evapro.logo_alt"),
-          url: "javascript:alert('evapro a été choisi')",
-          classes: [ "card-usage-evapro" ]
-        ) %>
-      </form>
+    <form>
+      <div class="fr-grid-row fr-grid-row--gutters fr-mb-12v">
+        <div class="fr-col-12 fr-col-sm-6 fr-col-lg-6">
+          <%= render CardComponent.new(
+            titre: t("inscription.structures.show.usage.eva.titre"),
+            description: t("inscription.structures.show.usage.eva.description"),
+            image_url: "logo/eva-card.svg",
+            image_alt: t("header.eva.logo_alt"),
+            url: "javascript:alert('eva a été choisi')",
+            classes: [ "card-avec-logo card-avec-logo--eva" ]
+          ) %>
+        </div>
+        <div class="fr-col-12 fr-col-sm-6 fr-col-lg-6">
+          <%= render CardComponent.new(
+            titre: t("inscription.structures.show.usage.evapro.titre"),
+            description: t("inscription.structures.show.usage.evapro.description"),
+            image_url: "logo/evapro-card.svg",
+            image_alt: t("header.evapro.logo_alt"),
+            url: "javascript:alert('evapro a été choisi')",
+            classes: [ "card-avec-logo card-avec-logo--evapro" ]
+          ) %>
+        </div>
     </div>
+    </form>
   </div>
 </div>
 

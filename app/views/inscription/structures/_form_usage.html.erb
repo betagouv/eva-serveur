@@ -1,26 +1,30 @@
 <div class="structure-content-wrapper">
-  <div class="card-usage-wrapper">
-    <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "card-usage" } do |f| %>
-      <%= hidden_field_tag "structure_locale[usage]", "" %>
-      <%= hidden_field_tag "commit", "creer_avec_usage" %>
-      <%= render CardComponent.new(
-        titre: t("inscription.structures.show.usage.eva.titre"),
-        description: t("inscription.structures.show.usage.eva.description"),
-        image_url: "logo/eva-dark.svg",
-        image_alt: t("header.eva.logo_alt"),
-        url: "javascript:choisi('" + AvecUsage::USAGE_BENEFICIAIRES + "')",
-        classes: [ "card-usage-eva" ]
-      ) %>
-      <%= render CardComponent.new(
-        titre: t("inscription.structures.show.usage.evapro.titre"),
-        description: t("inscription.structures.show.usage.evapro.description"),
-        image_url: "logo/evapro.svg",
-        image_alt: t("header.evapro.logo_alt"),
-        url: "javascript:choisi('" + AvecUsage::USAGE_EVAPRO + "')",
-        classes: [ "card-usage-evapro" ]
-      ) %>
-    <% end %>
-  </div>
+  <%= form_with url: inscription_structure_path, method: :patch, local: true, html: { class: "card-usage" } do |f| %>
+    <div class="fr-grid-row fr-grid-row--gutters fr-mb-12v">
+      <div class="fr-col-12 fr-col-sm-6 fr-col-lg-6">
+        <%= hidden_field_tag "structure_locale[usage]", "" %>
+        <%= hidden_field_tag "commit", "creer_avec_usage" %>
+        <%= render CardComponent.new(
+          titre: t("inscription.structures.show.usage.eva.titre"),
+          description: t("inscription.structures.show.usage.eva.description"),
+          image_url: "logo/eva-card.svg",
+          image_alt: t("header.eva.logo_alt"),
+          url: "javascript:choisi('" + AvecUsage::USAGE_BENEFICIAIRES + "')",
+          classes: [ "card-avec-logo card-avec-logo--eva" ]
+        ) %>
+      </div>
+      <div class="fr-col-12 fr-col-sm-6 fr-col-lg-6">
+        <%= render CardComponent.new(
+          titre: t("inscription.structures.show.usage.evapro.titre"),
+          description: t("inscription.structures.show.usage.evapro.description"),
+          image_url: "logo/evapro-card.svg",
+          image_alt: t("header.evapro.logo_alt"),
+          url: "javascript:choisi('" + AvecUsage::USAGE_EVAPRO + "')",
+          classes: [ "card-avec-logo card-avec-logo--evapro" ]
+        ) %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <script>
   function choisi(usage) {

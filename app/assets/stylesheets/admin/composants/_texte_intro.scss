@@ -17,10 +17,11 @@
     color: var(--color-text-title, #161616) !important;
   }
 
-  &__texte {
+  &__texte p {
     @include corps-de-texte-xl-regular;
 
-    margin: 0;
+    &:last-child {
+      margin: 0;
+    }
   }
 }
-

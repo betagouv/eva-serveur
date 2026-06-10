@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: flex-start;
   flex: 1 0 0;
-  height: 80.4rem;
   position: relative;
 }
 
@@ -28,23 +27,11 @@
   gap: $dsfr-spacing-5w;
 }
 
-.nouvelle-session__demonstration-logo {
-  display: flex;
-  align-items: center;
-  gap: $dsfr-spacing-3w;
-  align-self: stretch;
-}
-
 .nouvelle-session__demonstration-content {
   display: flex;
   width: 23.875rem;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-.nouvelle-session__demonstration-image {
-  width: 18.75rem;
-  align-self: center;
 }
 
 .nouvelle-session__demonstration-titre {
@@ -60,12 +47,6 @@
 
   color: $grey-100;
   margin: 0;
-}
-
-.nouvelle-session__demonstration-bouton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .nouvelle-session__demonstration-vagues {

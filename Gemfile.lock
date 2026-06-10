@@ -662,6 +662,9 @@ GEM
     ruby-ole (1.2.13.1)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
+    ruby-vips (2.3.0)
+      ffi (~> 1.12)
+      logger
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     rufus-scheduler (3.9.2)
@@ -848,6 +851,7 @@ DEPENDENCIES
   rubocop-rspec
   ruby-lsp (~> 0.26.9)
   ruby-lsp-rails (~> 0.4.8)
+  ruby-vips (~> 2.0)
   rubyzip
   sass-rails (>= 6)
   selenium-webdriver

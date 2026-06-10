@@ -7,8 +7,7 @@ class Badge::ProfilComponent < ViewComponent::Base
     profil4_plus: "fr-badge--green-emeraude",
     profil_4h: "fr-badge--green-emeraude",
     profil_4h_plus: "fr-badge--green-emeraude",
-    profil_4h_plus_plus: "fr-badge--green-emeraude",
-    profil_aberrant: "fr-badge--green-emeraude"
+    profil_4h_plus_plus: "fr-badge--green-emeraude"
   }.freeze
 
   ##

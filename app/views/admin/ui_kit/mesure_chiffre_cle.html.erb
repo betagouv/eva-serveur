@@ -33,25 +33,11 @@
     ) %>
   </div>
 
-  <h2>Exemple avec préfixe uniquement</h2>
-
-  <div class="fr-mb-5w">
-    <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "B",
-      prefixe: "Score",
-      chiffre: "75",
-      explications: {
-        texte: "Votre score indique une situation à surveiller.",
-        suite: "Il est recommandé de mettre en place des actions préventives pour éviter que la situation ne se dégrade."
-      }
-    ) %>
-  </div>
-
   <h2>Exemple sans préfixe ni suffixe</h2>
 
   <div class="fr-mb-5w">
     <%= render Evaluation::MesureChiffreCleComponent.new(
-      palier: "C",
+      palier: "A",
       chiffre: "50",
       explications: {
         texte: "Votre situation nécessite une attention particulière.",

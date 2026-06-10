@@ -1,5 +1,7 @@
 module Admin
   class UiKitController < ApplicationController
+    layout "ui_kit"
+
     def index; end
 
     def badge; end

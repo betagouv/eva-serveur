@@ -1,12 +1,8 @@
 <div class="container evapro_admin">
-  <div class="fr-mb-3w">
-    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
-  </div>
-
   <h1 class="fr-h1 fr-mt-6w">Démo BoutonDsfrComponent</h1>
   <h2 class="fr-h2 fr-mt-6w">Tag a (défaut)</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :a, size: :sm) do %>Libellé<% end %>
@@ -23,7 +19,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :a, size: :sm) do %>Libellé<% end %>
@@ -38,7 +34,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :a, size: :sm) do %>Libellé<% end %>
@@ -54,7 +50,7 @@
 
   <h2 class="fr-h2 fr-mt-6w">Tag button_with_form</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
@@ -69,7 +65,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
@@ -86,7 +82,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button_with_form, size: :sm, method: :get) do %>Libellé<% end %>
@@ -102,7 +98,7 @@
 
   <h2 class="fr-h2 fr-mt-6w">Tag button_tag</h2>
   <h3 class="fr-h3 fr-mt-4w">Primaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :primary, tag: :button, size: :sm) do %>Libellé<% end %>
@@ -117,7 +113,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Secondaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :secondary, tag: :button, size: :sm) do %>Libellé<% end %>
@@ -132,7 +128,7 @@
   </div>
 
   <h3 class="fr-h3 fr-mt-4w">Tertiaire</h3>
-  <div style="display: grid; grid-template-columns: 120px repeat(4, minmax(180px, 1fr)); gap: 8px 16px; align-items: center;">
+  <div class="uik-grille-boutons">
     <span></span><span>Default</span><span>Actif</span><span>Icône gauche</span><span>Icône droite</span>
     <span>SM</span>
     <%= render BoutonDsfrComponent.new("#", type: :tertiary, tag: :button, size: :sm) do %>Libellé<% end %>

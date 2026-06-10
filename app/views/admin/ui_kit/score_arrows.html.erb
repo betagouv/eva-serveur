@@ -1,8 +1,4 @@
 <div class="container">
-  <div class="fr-mb-3w">
-    <%= link_to "← Retour à l'index des composants", "/admin/ui_kit", class: "fr-link" %>
-  </div>
-
   <h1>Démo ScoreArrows</h1>
 
   <h2>Scores ABCD - Couleurs et Bleus</h2>
@@ -73,7 +69,7 @@
       synthese: { score_strategie: score.to_sym, score_numerique: score.to_sym },
       i18n: self
     ) %>
-    <div class="couts__colonnes fr-mb-4v" style="max-width: 880px">
+    <div class="couts__colonnes fr-mb-4v uik-max-active-admin">
       <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
         indicateur: :score_strategie,
         theme: :color,

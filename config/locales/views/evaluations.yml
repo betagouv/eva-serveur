@@ -409,10 +409,10 @@ fr:
           titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise ma structure ?"
           contenu_cout:
             titre:
-              faible: "1%"
-              moyen: "2%"
-              fort: "3 à 4%"
-              tres_fort: "5 à 6%"
+              faible: "1 %"
+              moyen: "2 %"
+              fort: "3 à 4 %"
+              tres_fort: "5 à 6 %"
             texte:
               faible: Ce pourcentage estime les coûts supportés par la structure lorsque certaines situations de fragilité dans les compétences de base ne sont pas repérées ni prises en compte.
               moyen: Ce pourcentage traduit des coûts liés à des besoins en compétences lorsqu’ils sont insuffisamment accompagnés ou pris en compte au travail.

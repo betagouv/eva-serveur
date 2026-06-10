@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'admin/campagnes/_programme.html.arb' do
+describe "admin/campagnes/_programme.html.arb" do
   before do
     assign(:campagne, Campagne.new(parcours_type: parcours_type))
     assign(:situations_configurations, [ situation_configuration_maintenance ])
@@ -11,19 +11,19 @@ describe 'admin/campagnes/_programme.html.arb' do
   let(:maintenance) do
     create :situation,
            nom_technique: :maintenance,
-           libelle: 'Maintenance'
+           libelle: "Maintenance"
   end
   let(:situation_configuration_maintenance) { SituationConfiguration.new(situation: maintenance) }
 
-  it { expect(rendered).to match(/Maintenance/) }
+  it { expect(rendered).to include("Maintenance") }
 
-  context 'sans parcours type' do
-    it { expect(rendered).to match(/Parcours personnalisé/) }
+  context "sans parcours type" do
+    it { expect(rendered).to include("Parcours personnalisé") }
   end
 
-  context 'avec parcours_type' do
-    let(:parcours_type) { ParcoursType.new libelle: 'Mon libellé' }
+  context "avec parcours_type" do
+    let(:parcours_type) { ParcoursType.new libelle: "Mon libellé" }
 
-    it { expect(rendered).to match(/Mon libellé/) }
+    it { expect(rendered).to include("Mon libellé") }
   end
 end

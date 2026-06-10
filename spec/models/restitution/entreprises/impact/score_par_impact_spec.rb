@@ -121,4 +121,34 @@ describe Restitution::Entreprises::Impact::ScoreParImpact do
       end
     end
   end
+
+  describe '#calcule_score_strategie' do
+    let(:pourcentage_risque) { 10 }
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        build(:evenement_reponse, donnees: { question: 'q1', score_strategies: 9 })
+      ]
+    end
+
+    it 'retourne moyen quand score_strategies vaut 9' do
+      resultat = described_class.new.calcule_score_strategie(evenements, pourcentage_risque)
+      expect(resultat).to eq(:moyen)
+    end
+  end
+
+  describe '#calcule_score_numerique' do
+    let(:pourcentage_risque) { 10 }
+    let(:evenements) do
+      [
+        build(:evenement_demarrage),
+        build(:evenement_reponse, donnees: { question: 'q1', score_numerique: 10 })
+      ]
+    end
+
+    it 'retourne moyen quand score_numerique vaut 10' do
+      resultat = described_class.new.calcule_score_numerique(evenements, pourcentage_risque)
+      expect(resultat).to eq(:moyen)
+    end
+  end
 end

@@ -3,10 +3,10 @@
 module Evaluations
   class DiagnosticPro
     SCORE_TO_LETTRE = {
-      "faible" => "a",
-      "moyen" => "b",
-      "fort" => "c",
-      "tres_fort" => "d"
+      "faible" => "A",
+      "moyen" => "B",
+      "fort" => "C",
+      "tres_fort" => "D"
     }.freeze
 
     attr_reader :evaluation

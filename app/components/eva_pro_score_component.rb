@@ -3,8 +3,8 @@
 class EvaProScoreComponent < ViewComponent::Base
   LETTERS = %w[A B C D].freeze
 
-  def initialize(active_letter:)
-    @active_letter = active_letter.to_s.upcase
+  def initialize(score:)
+    @active_letter = Evaluations::DiagnosticPro::SCORE_TO_LETTRE.fetch(score.to_s, score)
     raise ArgumentError,
 "active_letter must be A, B, C or D" unless LETTERS.include?(@active_letter)
   end

@@ -11,7 +11,7 @@
 
   <h2>Tous les paliers</h2>
 
-  <% BilanEvaProComponent::PALIERS.each do |palier_label, _palier_key| %>
+  <% %i[A B C D].each do |palier_label, _palier_key| %>
     <div class="fr-mb-5w">
       <h3>Palier <%= palier_label %></h3>
       <%= render BilanEvaProComponent.new(palier: palier_label) %>

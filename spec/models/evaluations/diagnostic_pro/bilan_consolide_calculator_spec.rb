@@ -43,7 +43,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(41)
-      expect(calculator.palier).to eq("A - Très bon")
+      expect(calculator.palier).to eq("A")
     end
 
     it "retourne B pour un score total de 42" do
@@ -56,7 +56,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(42)
-      expect(calculator.palier).to eq("B - Bon")
+      expect(calculator.palier).to eq("B")
     end
 
     it "retourne B pour un score total de 83" do
@@ -69,7 +69,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(83)
-      expect(calculator.palier).to eq("B - Bon")
+      expect(calculator.palier).to eq("B")
     end
 
     it "retourne C pour un score total de 84" do
@@ -82,7 +82,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(84)
-      expect(calculator.palier).to eq("C - Moyen")
+      expect(calculator.palier).to eq("C")
     end
 
     it "retourne C pour un score total de 126" do
@@ -95,7 +95,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(126)
-      expect(calculator.palier).to eq("C - Moyen")
+      expect(calculator.palier).to eq("C")
     end
 
     it "retourne D pour un score total de 127" do
@@ -108,7 +108,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(127)
-      expect(calculator.palier).to eq("D - Mauvais")
+      expect(calculator.palier).to eq("D")
     end
 
     it "retourne D pour un score total de 167" do
@@ -121,7 +121,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(167)
-      expect(calculator.palier).to eq("D - Mauvais")
+      expect(calculator.palier).to eq("D")
     end
 
     it "met a jour le palier quand les scores d'impact augmentent" do
@@ -141,10 +141,10 @@ evenements: risque_events)
       )
 
       expect(baseline.score_total).to eq(42)
-      expect(baseline.palier).to eq("B - Bon")
+      expect(baseline.palier).to eq("B")
 
       expect(with_impacts.score_total).to eq(167)
-      expect(with_impacts.palier).to eq("D - Mauvais")
+      expect(with_impacts.palier).to eq("D")
     end
 
     it "conserve le malus existant quand le risque atteint 75%" do
@@ -157,7 +157,7 @@ evenements: risque_events)
       )
 
       expect(calculator.score_total).to eq(42)
-      expect(calculator.palier).to eq("B - Bon")
+      expect(calculator.palier).to eq("B")
     end
   end
 end

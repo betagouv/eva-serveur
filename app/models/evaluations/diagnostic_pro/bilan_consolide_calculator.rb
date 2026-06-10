@@ -4,10 +4,10 @@ module Evaluations
   class DiagnosticPro
     class BilanConsolideCalculator
       PALIER_PAR_SCORE = {
-        (0..41) => "A - Très bon",
-        (42..83) => "B - Bon",
-        (84..126) => "C - Moyen",
-        (127..167) => "D - Mauvais"
+        (0..41) => "A",
+        (42..83) => "B",
+        (84..126) => "C",
+        (127..167) => "D"
       }.freeze
 
       MALUS_PAR_POURCENTAGE_RISQUE = {

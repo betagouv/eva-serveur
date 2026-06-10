@@ -1,15 +1,14 @@
 <div class="indicateur-impact">
   <% interpretations_impact.each do |interpretation| %>
     <% resultat = synthese[interpretation] %>
-    <% active_letter = Evaluations::DiagnosticPro::SCORE_TO_LETTRE[resultat.to_s] %>
     <div class="indicateur-impact__details">
       <div class="indicateur-impact__details--titre-et-score">
         <div class="indicateur-impact__details-titre">
           <%= t("admin.evaluations.mesure_des_impacts.labels.#{interpretation}") %>
         </div>
-        <% if active_letter %>
+        <% if resultat %>
           <div class="indicateur-impact__details-score">
-            <%= render EvaProScoreComponent.new(active_letter:) %>
+            <%= render EvaProScoreComponent.new(score: resultat) %>
           </div>
         <% end %>
       </div>

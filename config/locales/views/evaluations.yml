@@ -262,43 +262,43 @@ fr:
         prefixe: "Taux de risque"
         explication:
           texte:
-            a: |
+            A: |
               Vos résultats indiquent que votre structure ne présente pas, à ce
               stade, de signes préoccupants en matière de maîtrise des
               compétences de base. Ce niveau de risque ne doit toutefois pas
               conduire à relâcher votre vigilance.
-            b: |
+            B: |
               Vos résultats suggèrent l’émergence de premières fragilités :
               certaines personnes peuvent percevoir l’évolution des exigences
               professionnelles comme un facteur de difficulté ou d’incertitude.
-            c: |
+            C: |
               Vos résultats mettent en évidence un risque significatif de
               présence, au sein de vos équipes, de personnes en difficulté avec
               les compétences de base ou en situation d’insécurité
               professionnelle face aux évolutions des exigences (numérique, IA,
               qualité, sécurité, etc.).
-            d: |
+            D: |
               Vos résultats révèlent une présence importante de professionnels
               en difficulté avec les compétences de base indispensables à leurs
               missions. Ces situations ont des impacts directs sur l’activité,
               la structure et la performance.
           suite:
-            a: |
+            A: |
               **Action** :  
               Maintenez une démarche préventive et poursuivez le développement
               des compétences afin d’anticiper les évolutions du travail et
               d'éviter l’apparition de fragilités.
-            b: |
+            B: |
               **Action** :  
               Renforcez votre veille interne, sensibilisez les managers et
               consolidez vos actions préventives afin d’identifier et de
               traiter ces situations avant leur installation.
-            c: |
+            C: |
               **Action** :  
               Engagez rapidement une démarche structurée : identification des
               besoins, sécurisation des parcours et adaptation des situations
               de travail.
-            d: |
+            D: |
               **Action** :  
               Une intervention immédiate et coordonnée est nécessaire :
               réalisez un diagnostic approfondi, mobilisez des partenaires
@@ -409,20 +409,20 @@ fr:
           titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise ma structure ?"
           contenu_cout:
             titre:
-              a: "1%"
-              b: "2%"
-              c: "3 à 4%"
-              d: "5 à 6%"
+              faible: "1%"
+              moyen: "2%"
+              fort: "3 à 4%"
+              tres_fort: "5 à 6%"
             texte:
-              a: Ce pourcentage estime les coûts supportés par la structure lorsque certaines situations de fragilité dans les compétences de base ne sont pas repérées ni prises en compte.
-              b: Ce pourcentage traduit des coûts liés à des besoins en compétences lorsqu’ils sont insuffisamment accompagnés ou pris en compte au travail.
-              c: Ce niveau révèle des coûts significatifs liés à une prise en compte insuffisante des besoins fondamentaux en compétence de base dans la structure.
-              d: Ce niveau révèle des coûts très élevés, consécutifs à des fragilités persistantes et à l’absence de politiques efficaces de développement des compétences de base.
+              faible: Ce pourcentage estime les coûts supportés par la structure lorsque certaines situations de fragilité dans les compétences de base ne sont pas repérées ni prises en compte.
+              moyen: Ce pourcentage traduit des coûts liés à des besoins en compétences lorsqu’ils sont insuffisamment accompagnés ou pris en compte au travail.
+              fort: Ce niveau révèle des coûts significatifs liés à une prise en compte insuffisante des besoins fondamentaux en compétence de base dans la structure.
+              tres_fort: Ce niveau révèle des coûts très élevés, consécutifs à des fragilités persistantes et à l’absence de politiques efficaces de développement des compétences de base.
             suite:
-              a: "À 1 %, les impacts restent contenus, mais une vigilance active demeure nécessaire. Les premières fragilités apparaissent : il est pertinent d’agir dès maintenant pour sécuriser les parcours et anticiper les besoins en compétences."
-              b: "À 2 %, les impacts deviennent perceptibles et les premiers signaux faibles émergent. Il est essentiel de communiquer auprès des managers et de les accompagner pour détecter et traiter ces situations avant qu’elles ne s’installent durablement."
-              c: "Les impacts sur la qualité, la performance et la gestion deviennent significatifs. L’augmentation des erreurs, des ralentissements et des ajustements révèle des dysfonctionnements installés : une démarche structurée et un investissement ciblé dans les compétences de base deviennent indispensables pour rétablir la situation."
-              d: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
+              faible: "À 1 %, les impacts restent contenus, mais une vigilance active demeure nécessaire. Les premières fragilités apparaissent : il est pertinent d’agir dès maintenant pour sécuriser les parcours et anticiper les besoins en compétences."
+              moyen: "À 2 %, les impacts deviennent perceptibles et les premiers signaux faibles émergent. Il est essentiel de communiquer auprès des managers et de les accompagner pour détecter et traiter ces situations avant qu’elles ne s’installent durablement."
+              fort: "Les impacts sur la qualité, la performance et la gestion deviennent significatifs. L’augmentation des erreurs, des ralentissements et des ajustements révèle des dysfonctionnements installés : une démarche structurée et un investissement ciblé dans les compétences de base deviennent indispensables pour rétablir la situation."
+              tres_fort: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
         impact_couts_indicateur:
           score_strategie:
             question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
@@ -431,21 +431,21 @@ fr:
             mention_fort: "Stratégie : impact fort"
             explication:
               titre:
-                a: "**A - Peu de stratégies visibles**"
-                b: "**B - Stratégies ponctuelles**"
-                c: "**C - Stratégies instituées**"
-                d: "**D - Délégation et glissement de fonction**"
+                A: "**A - Peu de stratégies visibles**"
+                B: "**B - Stratégies ponctuelles**"
+                C: "**C - Stratégies instituées**"
+                D: "**D - Délégation et glissement de fonction**"
               texte:
-                a: |
+                A: |
                   Les mécanismes d'adaptation existent à peine ou passent inaperçus.
                   Ex. « Ça se passe bien, je n'ai pas de souci particulier. »
-                b: |
+                B: |
                   Certaines situations « à risque » sont contournées de façon occasionnelle.  
                   Ex. « Ce n'est pas urgent, je verrai ça plus tard… De toutes façons ce n'est pas vraiment de ma responsabilité. »
-                c: |
+                C: |
                   Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
                   Ex. « J'aime mieux en parler directement, c'est plus simple. Les mails ce n'est pas mon truc. »
-                d: |
+                D: |
                   L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
                   Ex. « J'en ai parlé à mon collègue, il s'en occupe. Moi je gère autre chose. »
           score_numerique:
@@ -455,15 +455,15 @@ fr:
             mention_fort: "Numérique : impact fort"
             explication:
               titre:
-                a: "**A** : usage autonome et sécurisé des compétences numériques de base"
-                b: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
-                c: "**C** : usage fragile nécessitant des ajustements fréquents"
-                d: "**D** : usage dépendant, reposant sur le soutien du collectif"
+                A: "**A** : usage autonome et sécurisé des compétences numériques de base"
+                B: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
+                C: "**C** : usage fragile nécessitant des ajustements fréquents"
+                D: "**D** : usage dépendant, reposant sur le soutien du collectif"
               texte:
-                a: ""
-                b: ""
-                c: ""
-                d: ""
+                A: ""
+                B: ""
+                C: ""
+                D: ""
       continuer_evaluation_evapro:
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic

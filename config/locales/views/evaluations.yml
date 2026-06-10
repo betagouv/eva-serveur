@@ -438,16 +438,12 @@ fr:
               texte:
                 A: |
                   Les mécanismes d'adaptation existent à peine ou passent inaperçus.
-                  Ex. « Ça se passe bien, je n'ai pas de souci particulier. »
                 B: |
-                  Certaines situations « à risque » sont contournées de façon occasionnelle.  
-                  Ex. « Ce n'est pas urgent, je verrai ça plus tard… De toutes façons ce n'est pas vraiment de ma responsabilité. »
+                  Certaines situations « à risque » sont contournées de façon occasionnelle.
                 C: |
                   Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
-                  Ex. « J'aime mieux en parler directement, c'est plus simple. Les mails ce n'est pas mon truc. »
                 D: |
                   L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
-                  Ex. « J'en ai parlé à mon collègue, il s'en occupe. Moi je gère autre chose. »
           score_numerique:
             question: "Où en est votre structure dans une logique de transition et reconversion ?"
             titre_graphique: "Compétences numériques de base"

@@ -42,7 +42,7 @@ RSpec.describe Admin::EvaluationsController, type: :controller do
     end
 
     it "retourne le coût formaté depuis les traductions" do
-      expect(controller.send(:score_cout_pour_xls, evaluation)).to eq("3 à 4%")
+      expect(controller.send(:score_cout_pour_xls, evaluation)).to eq("3 à 4 %")
     end
   end
 end

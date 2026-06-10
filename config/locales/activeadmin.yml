@@ -40,12 +40,14 @@ fr:
             description: |
               Si vous avez déjà un compte eva, vous pouvez vous connecter directement avec ce compte.
             retour: Annuler
+        partials:
           demonstration:
             titre: Découvrez les services
-            description: Découvrez ou testez eva et evapro, avant de créer votre compte.
-            eva: "Eva :  Testez l’ensemble des fonctionnalités dans une interface de démonstration, réinitialisée quotidiennement. "
-            evapro: "Evapro : Découvrez le service en 5 minutes avec les tutoriels vidéo."
-            bouton: Découvrir
+            description: Sur ce portail, l’ANLCI vous propose deux outils distincts. Avant de créer un compte, vous pouvez ci-dessous découvrir et tester ces outils.
+            eva: "Eva : identifier et accompagner de manière adaptée les personnes en difficulté avec les compétences de base."
+            evapro: "Evapro : estimer les risques liés au défaut de maîtrise des compétences de base dans ma structure."
+            titre-carte-eva: Découvrir eva
+            titre-carte-evapro: Découvrir evapro
       login:
         submit: Se connecter
         bienvenue: Bienvenue sur eva

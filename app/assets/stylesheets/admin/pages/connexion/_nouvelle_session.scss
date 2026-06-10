@@ -6,6 +6,7 @@
 }
 
 @media (max-width: 48em) {
+
   body.logged_out.page_connexion_v2 .nouvelle-session,
   body.logged_out .nouvelle-session {
     display: flex;
@@ -18,7 +19,7 @@
   body.logged_out.page_connexion_v2 .nouvelle-session__connexion,
   body.logged_out.page_connexion_v2,
   body.logged_out .nouvelle-session__connexion,
-  body.logged_out  {
+  body.logged_out {
     width: 100%;
     max-width: 100%;
     flex: 0 0 auto;
@@ -67,8 +68,8 @@
 }
 
 .nouvelle-session__logo-evapro {
-  width: 128px;
-  height: 39px;
+  height: 34px;
+  margin-top: 0.7rem;
 }
 
 .nouvelle-session__connexion-content {
@@ -77,24 +78,24 @@
   align-items: flex-start;
   gap: 24px;
   align-self: stretch;
-  
+
   .informations-compte-actions {
     width: 100%;
   }
-  
+
   .connexion_v2__inputs-group {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
   }
-  
+
   .connexion_v2__input-wrapper {
     width: 100%;
     margin: 0;
     padding: 0;
   }
-  
+
   .liens-partages a {
     @include corps-de-texte-md-regular;
 
@@ -105,13 +106,6 @@
 .nouvelle-session__connexion-titre {
   @include titre-h5;
 
-  margin: 0;
-}
-
-.nouvelle-session__connexion-description {
-  @include corps-de-texte-sm-regular;
-
-  color: $couleur-texte;
   margin: 0;
 }
 

@@ -1,30 +1,35 @@
 <div class="nouvelle-session__demonstration">
   <div class="nouvelle-session__demonstration-container">
+    <div class="nouvelle-session__demonstration-vagues"> </div>
     <div class="nouvelle-session__demonstration-body">
-      <div class="nouvelle-session__demonstration-logo">
-        <%= image_tag "logo/eva-bleu.svg", alt: "Eva", class: "nouvelle-session__logo" %>
-        <%= image_tag "logo/evapro.png", alt: "EvaPro", class: "nouvelle-session__logo-evapro" %>
-      </div>
       <div class="nouvelle-session__demonstration-content">
-        <div class="nouvelle-session__demonstration-image">
-          <%= image_tag "demonstration-illustration.svg", alt: t("active_admin.devise.sessions.new.demonstration.titre") %>
-        </div>
-        <h4 class="nouvelle-session__demonstration-titre"><%= t("active_admin.devise.sessions.new.demonstration.titre") %></h4>
-        <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.description") %></p>
-        <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.eva") %></p>
-        <p class="nouvelle-session__connexion-description"><%= t("active_admin.devise.sessions.new.demonstration.evapro") %></p>
-        <div class="nouvelle-session__demonstration-bouton">
-          <%= render BoutonDsfrComponent.new(
-            demo_path,
-            type: :secondary,
-            class: "fr-icon-arrow-right-line fr-btn--icon-right"
-          ) do %>
-            <%= t("active_admin.devise.sessions.new.demonstration.bouton") %>
-          <% end %>
+        <h4 class="nouvelle-session__demonstration-titre"><%= t(".titre") %></h4>
+        <p class="fr-m-0 fr-text--sm"><%= t(".description") %></p>
+        <p class="fr-m-0 fr-text--sm"><%= t(".eva") %></p>
+        <p class="fr-m-0 fr-text--sm"><%= t(".evapro") %></p>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-12v">
+          <div class="fr-col-12 fr-col-sm-6 fr-col-lg-12">
+            <%= render CardComponent.new(
+              titre: t(".titre-carte-eva"),
+              image_url: image_path("logo/eva-card.svg"),
+              image_alt: t("header.eva.logo_alt"),
+              size: :sm,
+              classes: ["fr-card--horizontal card-avec-logo card-avec-logo--eva"],
+              url: demo_path
+            ) %>
+          </div>
+          <div class="fr-col-12 fr-col-sm-6 fr-col-lg-12">
+            <%= render CardComponent.new(
+              titre: t(".titre-carte-evapro"),
+              image_url: image_path("logo/evapro-card.svg"),
+              image_alt: t("header.evapro.logo_alt"),
+              size: :sm,
+              classes: ["fr-card--horizontal card-avec-logo card-avec-logo--evapro"],
+              url: "https://www.anlci.gouv.fr/ressources/evapro/"
+            ) %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="nouvelle-session__demonstration-vagues">
     </div>
   </div>
 </div>

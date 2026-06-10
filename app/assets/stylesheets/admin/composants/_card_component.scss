@@ -1,0 +1,40 @@
+.card-avec-logo {
+  &.fr-card--horizontal {
+    .fr-card__img img {
+      height: 4.5rem;
+    }
+
+    .fr-card__header {
+      height: unset;
+    }
+  }
+
+  .fr-card__img img {
+    height: 7.5rem;
+  }
+
+  &.card-avec-logo--evapro:not(.fr-card--horizontal) img {
+    margin-top: 1rem;
+  }
+
+  .fr-card {
+    flex: 1;
+  }
+
+  &.fr-enlarge-link:hover .fr-card__header {
+    background-color: var(--background-contrast-grey-hover);
+  }
+
+  .fr-card__header {
+    display: flex;
+    height: 13.5rem;
+    justify-content: center;
+    background-color: var(--background-contrast-grey);
+
+    .fr-card__img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

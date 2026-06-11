@@ -48,8 +48,9 @@
 
   <h2>Tous les risques</h2>
 
+  Le composant d'affichage des risques change de couleur en fonction du pourcentage quand il passe un seuil. Cet échan ne dit rien sur la façon de calculer le taux de risque :
   <% scope = [ :admin, :evaluations, :mesure_des_risques ] %>
-  <% Evaluations::DiagnosticPro::RisquesPresenter::SEUILS_PALIERS_RISQUE.each do |pourcentage, palier_label| %>
+  <% [ 10, 11, 25, 26, 50, 51, 75, 100 ].each do |pourcentage| %>
     <% presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage) %>
     <div class="fr-mb-5w">
       <h3>Palier <%= presenter.palier %></h3>

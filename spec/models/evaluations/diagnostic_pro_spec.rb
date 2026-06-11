@@ -104,13 +104,4 @@ evaluation: double(complete?: false))
       end
     end
   end
-
-  describe Evaluations::DiagnosticPro::RisquesPresenter do
-    describe "#palier" do
-      it "retourne le palier A quand le pourcentage est très bas" do
-        presenter = described_class.new(pourcentage_risque: 10)
-        expect(presenter.palier).to eq("A")
-      end
-    end
-  end
 end

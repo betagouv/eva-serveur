@@ -2,6 +2,7 @@ fr:
   demo:
     show:
       title: Connexion démonstration
-      titre: Connexion à la démonstration
+      titre: Connexion à la démonstration d'eva
+      texte: Testez l’ensemble des fonctionnalités d'eva dans une interface de démonstration, réinitialisée quotidiennement.
       submit: Se connecter à la démonstration
       connexion_impossible: La connexion au compte de démo est impossible pour l'instant, veuillez réessayer plus tard.

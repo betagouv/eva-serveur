@@ -8,7 +8,7 @@ body.logged_out {
 
   h2 {
     padding: 0;
-    margin: 0 0 1.125rem;;
+    margin: 0 0 1.125rem;
     font-size: 1.125rem;
     font-family: $font-titre;
     text-shadow: none;
@@ -24,7 +24,8 @@ body.logged_out {
     line-height: 1.5rem;
     margin-bottom: 1.25rem;
     padding: 0;
-    + .description {
+
+    +.description {
       margin-bottom: 0;
     }
   }
@@ -49,12 +50,14 @@ body.logged_out {
         }
       }
     }
+
     &.conteneur-invisible {
       #active_admin_content {
         padding: 0;
         box-shadow: none;
         background: none;
       }
+
       form fieldset legend {
         display: none;
       }
@@ -66,9 +69,11 @@ body.logged_out {
       flex-direction: column;
       align-items: center;
       font-family: $font-titre;
+
       .logo-eva {
         width: 6rem;
       }
+
       h1 {
         color: $grey-50;
         font-size: 1.5rem;
@@ -77,10 +82,12 @@ body.logged_out {
         margin-top: 3rem;
         max-width: 17rem;
         text-align: center;
-        + h2 {
+
+        +h2 {
           margin-top: 1rem;
         }
       }
+
       h2 {
         font-size: 1rem;
       }
@@ -92,14 +99,17 @@ body.logged_out {
       grid-gap: $panels-gap;
       grid-template-rows: 1fr;
       justify-content: center;
+
       .panel {
         width: $panels-largeur;
         max-width: 47vw;
         padding: 0;
         margin-bottom: 0;
+
         .panel-content {
           padding: 1.5rem;
         }
+
         .panel-header {
           display: flex;
           align-items: center;
@@ -111,38 +121,47 @@ body.logged_out {
           margin: 0;
         }
       }
+
       form {
         .actions input[type="submit"] {
           margin-right: 0;
         }
+
         label abbr {
           display: none
         }
       }
+
       .panel--connexion {
         .panel-header {
           background-color: $eva_main_blue;
         }
       }
+
       .panel-description {
         font-style: italic;
         font-size: 0.875rem;
+
         p {
           margin: 0;
         }
       }
+
       .panel--evaluation {
         .panel-header {
           color: $grey-50;
           background-color: $eva-orange;
         }
+
         .panel-content {
           form {
             margin-top: 1rem;
           }
         }
       }
-      .panel--evaluation, .panel--connexion {
+
+      .panel--evaluation,
+      .panel--connexion {
         .bouton-action {
           display: flex;
           justify-content: flex-end;
@@ -208,15 +227,18 @@ body.logged_out {
 
   #login {
     form fieldset {
+
       input[type="text"],
       input[type="email"],
       input[type="password"] {
         width: 100%;
       }
+
       li {
         padding: 0;
       }
     }
+
     a {
       color: $eva_main_blue;
       float: none;
@@ -229,6 +251,7 @@ body.logged_out {
       background-color: $grey-1000;
       margin-bottom: 1rem;
     }
+
     .buttons li,
     .actions li {
       float: right;
@@ -271,31 +294,16 @@ body.logged_out {
     }
 
     margin-bottom: 1.5rem;
+
     p {
       margin-bottom: 1rem;
     }
   }
-  
+
   #wrapper {
     flex-direction: column;
     display: flex;
     min-height: 100vh;
     position: relative;
-  }
-}
-
-body.logged_out:not(.page_inscription_v2) :not(.page_connexion_v2) {
-  #wrapper {
-    &::before {
-      content: '';
-      background: $eva_main_blue image-url('vagues-verticales.svg') no-repeat top center;
-      height: 100%;
-      display: block;
-      position: absolute;
-      top: 0;
-      width: $largeur-colonne;
-      left: 50%;
-      margin-left: -$largeur-colonne / 2;
-    }
   }
 }

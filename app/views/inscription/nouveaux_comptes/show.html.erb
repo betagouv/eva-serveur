@@ -28,7 +28,7 @@
 
   <%= render CarteV2Component.new(classes: "page-nouveau-compte-card") do %>
     <div class="page-nouveau-compte-section--proconnect">
-      <h2 class="proconnect-titre"><%= t(".proconnect_titre") %></h2>
+      <h3 class="proconnect-titre"><%= t(".proconnect_titre") %></h3>
       <p class="proconnect-texte"><%= t(".proconnect_description") %></p>
       <div class="bouton-action bouton-action--centre">
         <div class='pro-connect-group'>
@@ -54,7 +54,7 @@
     </div>
 
     <div class="page-nouveau-compte-section--identifiant">
-      <h2 class="identifiant-titre"><%= t(".identifiant_titre") %></h2>
+      <h3 class="identifiant-titre"><%= t(".identifiant_titre") %></h3>
       <p class="identifiant-description"><%= t(".identifiant_description") %></p>
 
       <%= semantic_form_for @compte, url: inscription_nouveau_compte_path, html: { id: "nouveau-compte-form" } do |compte| %>

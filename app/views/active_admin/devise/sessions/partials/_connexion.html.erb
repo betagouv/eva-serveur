@@ -4,7 +4,7 @@
       <%= render partial: "layouts/flash" %>
     <% end %>
     <div class="nouvelle-session__connexion-content">
-      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.pro-connect.titre") %></h5>
+      <h2 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.pro-connect.titre") %></h2>
       <p class="fr-m-0 fr-text--sm">
         <%= t("active_admin.devise.sessions.new.pro-connect.description") %>
       </p>
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="nouvelle-session__connexion-content">
-      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.titre") %></h5>
+      <h2 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.titre") %></h2>
 
       <% scope = Devise::Mapping.find_scope!(resource_name) %>
       <%= semantic_form_for(resource, as: resource_name, url: send(:"#{scope}_session_path"), html: { id: "session_new" }) do |f| %>
@@ -97,7 +97,7 @@
       <%= image_tag "separateur_full_width.svg", alt: "" %>
     </div>
     <div class="nouvelle-session__connexion-content">
-      <h5 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.pas-de-compte") %></h5>
+      <h2 class="nouvelle-session__connexion-titre"><%= t("active_admin.devise.sessions.new.compte.pas-de-compte") %></h2>
       <div class="informations-compte-actions">
         <%= render BoutonDsfrComponent.new(inscription_nouveau_compte_path, type: :secondary, tag: :a, size: :md, class: "connexion_v2__bouton-full-width") do %>
           <%= t("active_admin.devise.sessions.new.compte.creer-compte") %>

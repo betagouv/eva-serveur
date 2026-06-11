@@ -4,35 +4,35 @@
 <% etape = params[:etape] || (persisted ? nil : "confirmation") %>
 
 <% if persisted %>
-  <% content_for :title, t("inscription.structures.show.rejoindre_structure.titre") %>
-  <% content_for :titre, t("inscription.structures.show.rejoindre_structure.titre") %>
-  <% content_for :sous_titre, t("inscription.structures.show.rejoindre_structure.sous_titre") %>
+  <% content_for :title, t(".rejoindre_structure.titre") %>
+  <% content_for :titre, t(".rejoindre_structure.titre") %>
+  <% content_for :sous_titre, t(".rejoindre_structure.sous_titre") %>
 <% elsif etape == "parametrage" %>
-  <% content_for :title, t("inscription.structures.show.parametrage.titre") %>
-  <% content_for :titre, t("inscription.structures.show.parametrage.titre") %>
-  <% content_for :sous_titre, t("inscription.structures.show.parametrage.sous_titre") %>
+  <% content_for :title, t(".parametrage.titre") %>
+  <% content_for :titre, t(".parametrage.titre") %>
+  <% content_for :sous_titre, t(".parametrage.sous_titre") %>
 <% elsif etape == "usage" %>
-  <% content_for :title, t("inscription.structures.show.usage.titre") %>
-  <% content_for :titre, t("inscription.structures.show.usage.titre") %>
-  <% content_for :sous_titre, t("inscription.structures.show.usage.sous_titre") %>
+  <% content_for :title, t(".usage.titre") %>
+  <% content_for :titre, t(".usage.titre") %>
+  <% content_for :sous_titre, t(".usage.sous_titre") %>
 <% else %>
-  <% content_for :title, t("inscription.structures.show.confirmation.titre") %>
-  <% content_for :titre, t("inscription.structures.show.confirmation.titre") %>
-  <% content_for :sous_titre, t("inscription.structures.show.confirmation.sous_titre") %>
+  <% content_for :title, t(".confirmation.titre") %>
+  <% content_for :titre, t(".confirmation.titre") %>
+  <% content_for :sous_titre, t(".confirmation.sous_titre") %>
 <% end %>
 
 <div class="page-inscription-structure">
   <% if persisted %>
-    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.titre_intro_presente"), texte: t("inscription.structures.show.sous_titre_intro_presente")) %>
+    <%= render TexteIntroComponent.new(titre: t(".titre_intro_presente"), texte: t(".sous_titre_intro_presente")) %>
     <%= render "form_rejoindre" %>
   <% elsif etape == "parametrage" %>
-    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.parametrage.titre"), texte: t("inscription.structures.show.parametrage.sous_titre")) %>
+    <%= render TexteIntroComponent.new(titre: t(".parametrage.titre"), texte: t(".parametrage.sous_titre")) %>
     <%= render "form_creer" %>
   <% elsif etape == "usage" %>
-    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.usage.titre_intro"), texte: t("inscription.structures.show.usage.texte_intro")) %>
+    <%= render TexteIntroComponent.new(titre: t(".usage.titre"), texte: t(".usage.texte_intro")) %>
     <%= render "form_usage" %>
   <% else %>
-    <%= render TexteIntroComponent.new(titre: t("inscription.structures.show.confirmation.titre"), texte: t("inscription.structures.show.confirmation.sous_titre")) %>
+    <%= render TexteIntroComponent.new(titre: t(".confirmation.titre"), texte: t(".confirmation.sous_titre")) %>
     <%= render "form_confirmation" %>
   <% end %>
 </div>

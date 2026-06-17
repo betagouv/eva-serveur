@@ -79,12 +79,12 @@ class SynthesesEvaproPourIndex
 
   def extrait_pourcentage_risque(partie)
     synthese = partie.synthese || {}
-    synthese["pourcentage_risque"] || synthese[:pourcentage_risque]
+    synthese["pourcentage_risque"]
   end
 
   def extrait_score_cout(partie)
     synthese = partie.synthese || {}
-    (synthese["score_cout"] || synthese[:score_cout])&.to_s
+    synthese["score_cout"]&.to_s
   end
 
   def extrait_synthese_impact(partie)

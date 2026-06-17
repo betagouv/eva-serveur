@@ -66,7 +66,7 @@ module Evaluations
         synthese = diag_risques_entreprise&.partie&.synthese
         return if synthese.blank?
 
-        synthese["pourcentage_risque"] || synthese[:pourcentage_risque]
+        synthese["pourcentage_risque"]
       end
 
       def evenements_reponses_risques

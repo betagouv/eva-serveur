@@ -2,7 +2,7 @@ module Restitution
   class DiagRisquesEntreprise < Base
     def synthese
       {
-        pourcentage_risque: calcule_pourcentage_risque
+        "pourcentage_risque" => calcule_pourcentage_risque
       }
     end
 
@@ -11,7 +11,7 @@ module Restitution
     end
 
     def palier
-      case synthese[:pourcentage_risque]
+      case synthese["pourcentage_risque"]
       when 0..10
         "A"
       when 11..25

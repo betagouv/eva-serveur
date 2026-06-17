@@ -160,6 +160,14 @@ evenements: risque_events)
       expect(with_impacts.palier).to eq("D")
     end
 
+    it "couvre tous les paliers de pourcentage_risque dans MALUS_PAR_POURCENTAGE_RISQUE" do
+      paliers = Restitution::Entreprises::PourcentageRisque::POURCENTAGE_RISQUE_PAR_SEUIL.keys
+      paliers.each do |pourcentage|
+        expect(described_class::MALUS_PAR_POURCENTAGE_RISQUE).to have_key(pourcentage),
+          "pas de malus défini pour pourcentage_risque=#{pourcentage}"
+      end
+    end
+
     it "conserve le malus existant quand le risque atteint 75%" do
       calculator = build_calculator(
         score_risque: 33,

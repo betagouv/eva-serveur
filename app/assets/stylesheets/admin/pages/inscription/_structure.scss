@@ -62,12 +62,6 @@
     gap: $dsfr-spacing-3w;
   }
 
-  .carte-v2__sous-titre {
-    margin: 0;
-
-    @include corps-de-texte-md-regular;
-  }
-
   .structure-content-wrapper-siret {
     display: flex;
     flex-direction: column;

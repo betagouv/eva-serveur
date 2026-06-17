@@ -13,7 +13,6 @@
       titre: t("active_admin.devise.passwords.edit.titre_carte"),
       sous_titre: nil
     ) do %>
-      <p class="carte-v2__sous-titre"><%= t(@reset_password.regles_mot_de_passe_cle, scope: "creation_compte", longueur_mot_de_passe: Devise.password_length.first) %></p>
       <p class="page-reset-password__champs-obligatoires"><%= t("active_admin.devise.passwords.edit.champs_obligatoires") %></p>
 
       <%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, id: "reset-password-edit-form" }) do |f| %>

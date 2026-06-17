@@ -44,10 +44,6 @@ module ResetPassword
       new_compte_password_path(token_invalide: true)
     end
 
-    def regles_mot_de_passe_cle
-      compte&.anlci? ? :regles_mot_de_passe_anlci : :regles_mot_de_passe
-    end
-
     def hint_mot_de_passe
       cle = compte&.anlci? ? :hint_password_anlci : :hint_password
       I18n.t(cle, scope: "active_admin.devise.passwords.edit")

@@ -2,6 +2,32 @@
 
 require "rails_helper"
 
+RSpec.describe "Eva::Devise::PasswordsController#update", type: :request do
+  describe "PUT /admin/password" do
+    context "avec un token valide et des mots de passe non conformes" do
+      let!(:compte) { create(:compte) }
+
+      it "réaffiche le formulaire sans erreur NoMethodError sur @reset_password" do
+        raw_token, _hashed = Devise.token_generator.generate(Compte, :reset_password_token)
+        compte.update!(
+          reset_password_token: Devise.token_generator.digest(Compte, :reset_password_token, raw_token),
+          reset_password_sent_at: Time.current
+        )
+
+        put compte_password_path, params: {
+          compte: {
+            reset_password_token: raw_token,
+            password: "court",
+            password_confirmation: "court"
+          }
+        }
+
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+end
+
 RSpec.describe "Eva::Devise::PasswordsController#create", type: :request do
   describe "POST /admin/password" do
     context "avec un email inconnu" do

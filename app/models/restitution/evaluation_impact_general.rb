@@ -46,7 +46,7 @@ pourcentage_risque)
     private
 
     def pourcentage_risque
-      @pourcentage_risque ||= restitution_diag_risques_entreprise.synthese[:pourcentage_risque]
+      @pourcentage_risque ||= restitution_diag_risques_entreprise.synthese["pourcentage_risque"]
     end
 
     def restitution_diag_risques_entreprise

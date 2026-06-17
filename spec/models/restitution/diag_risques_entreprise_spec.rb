@@ -11,7 +11,7 @@ describe Restitution::DiagRisquesEntreprise do
     end
 
     it 'calculates pourcentage_risque and returns it in the synthese hash' do
-      expect(diag_risques_entreprise.synthese[:pourcentage_risque]).to eq(expected_risk_percentage)
+      expect(diag_risques_entreprise.synthese["pourcentage_risque"]).to eq(expected_risk_percentage)
     end
   end
 end

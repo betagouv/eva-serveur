@@ -47,7 +47,7 @@ FactoryBot.define do
       role { 'conseiller' }
       structure { nil }
       statut_validation { :en_attente }
-      id_pro_connect { 'id_pro_connect_123' }
+      sequence(:id_pro_connect) { |n| "id_pro_connect_#{n}" }
       siret { '13002526500013' }
       etape_inscription { 'nouveau' }
 

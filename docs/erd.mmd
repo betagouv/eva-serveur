@@ -1,0 +1,374 @@
+erDiagram
+	direction TB
+	"ActiveAdmin::Comment" {
+		uuid author_id
+		string author_type
+		text body
+		string namespace
+		uuid resource_id
+		string resource_type
+	}
+	"ActiveStorage::Attachment" {
+		uuid blob_id FK
+		string name
+		uuid record_id FK
+		string record_type
+	}
+	"ActiveStorage::Blob" {
+		integer byte_size
+		string checksum
+		string content_type
+		string filename
+		string key
+		text metadata
+		string service_name
+	}
+	"ActiveStorage::VariantRecord" {
+		uuid active_storage_blobs_id
+		integer blob_id FK
+		string variation_digest
+	}
+	Actualite {
+		integer categorie
+		text contenu
+		string titre
+	}
+	AnnonceGenerale {
+		boolean afficher
+		string texte
+	}
+	Beneficiaire {
+		datetime anonymise_le
+		string code_beneficiaire
+		uuid compte_id FK
+		datetime deleted_at
+		string nom
+	}
+	Campagne {
+		boolean active
+		boolean affiche_competences_fortes
+		datetime anonymise_le
+		string code
+		uuid compte_id FK
+		datetime deleted_at
+		string libelle
+		uuid parcours_type_id FK
+		boolean privee
+	}
+	CampagneCompteAutorisation {
+		uuid campagne_id FK
+		uuid compte_id FK
+		datetime deleted_at
+	}
+	Choix {
+		string intitule
+		string nom_technique
+		integer position
+		integer position_client
+		uuid question_id FK
+		integer type_choix
+	}
+	Compte {
+		datetime anonymise_le
+		boolean cgu_acceptees
+		datetime confirmation_sent_at
+		string confirmation_token
+		datetime confirmed_at
+		datetime current_sign_in_at
+		string current_sign_in_ip
+		datetime deleted_at
+		string email
+		boolean email_bienvenue_envoye
+		string encrypted_password
+		string etape_inscription
+		boolean exempte_restriction_acces_attente
+		string fonction
+		string id_inclusion_connect
+		string id_pro_connect
+		datetime last_sign_in_at
+		string last_sign_in_ip
+		boolean mode_tutoriel
+		string nom
+		string prenom
+		datetime remember_created_at
+		datetime reset_password_sent_at
+		string reset_password_token
+		string role
+		string service_departement
+		integer sign_in_count
+		string siret
+		string siret_pro_connect
+		integer statut_validation
+		uuid structure_id FK
+		string telephone
+		string unconfirmed_email
+		string usage
+	}
+	ConditionsPassation {
+		datetime deleted_at
+		uuid evaluation_id FK
+		integer hauteur_fenetre_navigation
+		integer largeur_fenetre_navigation
+		string materiel_utilise
+		string modele_materiel
+		string nom_navigateur
+		string user_agent
+		string version_navigateur
+	}
+	ConnexionDemo {
+	}
+	DonneeSociodemographique {
+		integer age
+		datetime deleted_at
+		string dernier_niveau_etude
+		string derniere_situation
+		uuid evaluation_id FK
+		string genre
+		string langue_maternelle
+		string lieu_scolarite
+	}
+	Evaluation {
+		uuid beneficiaire_id FK
+		uuid campagne_id FK
+		string completude
+		datetime debutee_le
+		datetime deleted_at
+		string niveau_anlci_litteratie
+		string niveau_anlci_numeratie
+		string niveau_cefr
+		string niveau_cnef
+		string positionnement_niveau_litteratie
+		string positionnement_niveau_numeratie
+		jsonb redactions
+		uuid responsable_suivi_id FK
+		integer statut
+		string synthese_competences_de_base
+		datetime terminee_le
+	}
+	Evenement {
+		datetime date
+		datetime deleted_at
+		jsonb donnees
+		string nom
+		integer position
+		string session_id FK
+	}
+	Invitation {
+		uuid compte_id FK
+		string email_destinataire
+		uuid invitant_id FK
+		text message_personnalise
+		string role
+		string statut
+		uuid structure_id FK
+		string token
+	}
+	MiseEnAction {
+		datetime deleted_at
+		string difficulte
+		boolean effectuee
+		uuid evaluation_id FK
+		string remediation
+		datetime repondue_le
+	}
+	Opco {
+		string email
+		boolean financeur
+		string idcc
+		string nom
+		string telephone
+		string url
+		string url_contact
+		string url_offre_services
+	}
+	OpcoParcoursType {
+		uuid opco_id FK
+		uuid parcours_type_id FK
+	}
+	ParcoursType {
+		boolean actif
+		datetime deleted_at
+		text description
+		string duree_moyenne
+		string libelle
+		string nom_technique
+		integer position
+		string type_de_programme
+	}
+	Partie {
+		jsonb competences
+		jsonb competences_de_base
+		datetime deleted_at
+		uuid evaluation_id FK
+		jsonb metriques
+		string session_id FK
+		uuid situation_id FK
+		jsonb synthese
+	}
+	Question {
+		text aide
+		string categorie
+		datetime deleted_at
+		boolean demarrage_audio_modalite_reponse
+		string description
+		string libelle
+		string nom_technique
+		string orientation
+		boolean passable
+		string reponse_placeholder
+		string suffix_reponse
+		text texte_a_trous
+		text texte_sur_illustration
+		string type
+		integer type_qcm
+		integer type_saisie
+	}
+	Questionnaire {
+		datetime deleted_at
+		string libelle
+		string nom_technique
+	}
+	QuestionnaireQuestion {
+		datetime deleted_at
+		integer position
+		uuid question_id FK
+		uuid questionnaire_id FK
+	}
+	Situation {
+		datetime deleted_at
+		text description
+		string libelle
+		string nom_technique
+		uuid questionnaire_entrainement_id FK
+		uuid questionnaire_id FK
+	}
+	SituationConfiguration {
+		uuid campagne_id FK
+		datetime deleted_at
+		uuid parcours_type_id FK
+		integer position
+		uuid questionnaire_id FK
+		uuid situation_id FK
+	}
+	SourceAide {
+		integer categorie
+		text description
+		integer position
+		string titre
+		integer type_document
+		string url
+	}
+	Structure {
+		text adresse
+		string ancestry
+		datetime anonymise_le
+		boolean autorisation_creation_campagne
+		string code_commune
+		string code_naf
+		string code_postal
+		datetime date_verification_siret
+		datetime deleted_at
+		string email_contact
+		string idcc
+		string nom
+		uuid opco_id FK
+		string raison_sociale
+		string region
+		string siret
+		boolean statut_siret
+		string telephone
+		string type
+		string type_structure
+		string usage
+	}
+	Transcription {
+		integer categorie
+		text ecrit
+		uuid question_id FK
+	}
+	"ActiveStorage::VariantRecord" ||--}o "ActiveStorage::Blob" : ""
+	Record ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::VariantRecord" ||--|o "ActiveStorage::Attachment" : ""
+	Actualite ||--|o "ActiveStorage::Attachment" : ""
+	Choix ||--|o "ActiveStorage::Attachment" : ""
+	Opco ||--|o "ActiveStorage::Attachment" : ""
+	Question ||--|o "ActiveStorage::Attachment" : ""
+	QuestionClicDansImage ||--|o "ActiveStorage::Attachment" : ""
+	QuestionGlisserDeposer ||--|o "ActiveStorage::Attachment" : ""
+	Situation ||--|o "ActiveStorage::Attachment" : ""
+	Transcription ||--|o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" ||--}o "ActiveStorage::Attachment" : ""
+	"ActiveStorage::Blob" o|..|o "ActiveStorage::Blob" : ""
+	Transcription o|..|o "ActiveStorage::Blob" : ""
+	Opco ||--}o OpcoParcoursType : ""
+	ParcoursType ||--}o OpcoParcoursType : ""
+	Evaluation ||--|o MiseEnAction : ""
+	Structure ||--}o Invitation : ""
+	StructureAdministrative ||--}o Invitation : ""
+	StructureLocale ||--}o Invitation : ""
+	StructureOpco ||--}o Invitation : ""
+	Compte ||--}o Invitation : ""
+	Evaluation ||--|o DonneeSociodemographique : ""
+	Evaluation ||--|o ConditionsPassation : ""
+	Compte ||--}o CampagneCompteAutorisation : ""
+	Situation ||--}o SituationConfiguration : ""
+	Questionnaire o|--}o SituationConfiguration : ""
+	Question ||--}o QuestionnaireQuestion : ""
+	QuestionClicDansImage ||--}o QuestionnaireQuestion : ""
+	QuestionClicDansTexte ||--}o QuestionnaireQuestion : ""
+	QuestionGlisserDeposer ||--}o QuestionnaireQuestion : ""
+	QuestionQcm ||--}o QuestionnaireQuestion : ""
+	QuestionSaisie ||--}o QuestionnaireQuestion : ""
+	QuestionSousConsigne ||--}o QuestionnaireQuestion : ""
+	Question o|..|o "ActiveStorage::Blob" : ""
+	QuestionClicDansImage o|..|o "ActiveStorage::Blob" : ""
+	QuestionClicDansTexte o|..|o "ActiveStorage::Blob" : ""
+	QuestionGlisserDeposer o|..|o "ActiveStorage::Blob" : ""
+	QuestionQcm o|..|o "ActiveStorage::Blob" : ""
+	QuestionSaisie o|..|o "ActiveStorage::Blob" : ""
+	QuestionSousConsigne o|..|o "ActiveStorage::Blob" : ""
+	Question o|--}o Transcription : ""
+	QuestionClicDansImage o|--}o Transcription : ""
+	QuestionClicDansTexte o|--}o Transcription : ""
+	QuestionGlisserDeposer o|--}o Transcription : ""
+	QuestionQcm o|--}o Transcription : ""
+	QuestionSaisie o|--}o Transcription : ""
+	QuestionSousConsigne o|--}o Transcription : ""
+	Questionnaire o|--}o QuestionnaireQuestion : ""
+	Questionnaire o|..}o Question : ""
+	Questionnaire o|..}o QuestionClicDansImage : ""
+	Questionnaire o|..}o QuestionClicDansTexte : ""
+	Questionnaire o|..}o QuestionGlisserDeposer : ""
+	Questionnaire o|..}o QuestionQcm : ""
+	Questionnaire o|..}o QuestionSaisie : ""
+	Questionnaire o|..}o QuestionSousConsigne : ""
+	Evaluation ||--}o Partie : ""
+	Situation ||--}o Partie : ""
+	Partie ||--}o Evenement : ""
+	ParcoursType o|--}o SituationConfiguration : ""
+	Opco o|..}o ParcoursType : ""
+	Opco o|..|o "ActiveStorage::Blob" : ""
+	Situation o|..|o "ActiveStorage::Blob" : ""
+	Questionnaire o|--}o Situation : ""
+	Campagne ||--}o Evaluation : ""
+	Beneficiaire ||--}o Evaluation : ""
+	Compte o|--}o Evaluation : ""
+	Choix o|..|o "ActiveStorage::Blob" : ""
+	Campagne o|--}o SituationConfiguration : ""
+	Campagne o|--}o CampagneCompteAutorisation : ""
+	Compte ||--}o Campagne : ""
+	ParcoursType ||--}o Campagne : ""
+	Opco o|--}o Structure : ""
+	Opco o|--}o StructureAdministrative : ""
+	Opco o|--}o StructureLocale : ""
+	Opco o|--}o StructureOpco : ""
+	Compte o|--}o Beneficiaire : ""
+	Actualite o|..|o "ActiveStorage::Blob" : ""
+	Structure o|--}o Compte : ""
+	StructureAdministrative o|--}o Compte : ""
+	StructureLocale o|--}o Compte : ""
+	StructureOpco o|--}o Compte : ""
+	QuestionSaisie o|--}o Choix : ""
+	QuestionQcm o|--}o Choix : ""
+	QuestionGlisserDeposer o|--}o Choix : ""

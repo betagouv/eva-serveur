@@ -163,6 +163,20 @@ describe ProConnectRecupereCompteHelper do
       end
     end
 
+    context "race condition : le compte est créé simultanément par une autre requête" do
+      let!(:compte_existant) { create :compte_admin, email: email }
+
+      before do
+        allow(Compte).to receive(:find_or_create_by).and_raise(ActiveRecord::RecordNotUnique)
+      end
+
+      it "récupère le compte existant plutôt que de lever une erreur" do
+        compte = described_class.cree_ou_recupere_compte(user_info(email))
+        expect(compte.id).to eq(compte_existant.id)
+        expect(compte.id_pro_connect).to eq(sub)
+      end
+    end
+
     context 'Il existe un comptes avec un email pole-emploi.fr' do
       let(:email_pe) { 'toto@pole-emploi.fr' }
       let(:email_ft) { 'toto@francetravail.fr' }

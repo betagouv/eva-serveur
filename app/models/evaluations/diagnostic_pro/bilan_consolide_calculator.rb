@@ -23,9 +23,8 @@ module Evaluations
       end
 
       def palier
-        PALIER_PAR_SCORE.each do |interval, niveau|
-          return niveau if interval.cover?(score_total)
-        end
+        _interval, niveau = PALIER_PAR_SCORE.find { |interval, _| interval.cover?(score_total) }
+        niveau || "D"
       end
 
       def score_total

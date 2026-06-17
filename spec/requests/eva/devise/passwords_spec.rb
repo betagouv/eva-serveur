@@ -7,13 +7,13 @@ RSpec.describe "Eva::Devise::PasswordsController#update", type: :request do
     context "avec un token valide et des mots de passe non conformes" do
       let!(:compte) { create(:compte) }
 
-      it "réaffiche le formulaire sans erreur NoMethodError sur @reset_password" do
+      def soumettre_mot_de_passe_invalide(compte)
         raw_token, _hashed = Devise.token_generator.generate(Compte, :reset_password_token)
+        digest = Devise.token_generator.digest(Compte, :reset_password_token, raw_token)
         compte.update!(
-          reset_password_token: Devise.token_generator.digest(Compte, :reset_password_token, raw_token),
+          reset_password_token: digest,
           reset_password_sent_at: Time.current
         )
-
         put compte_password_path, params: {
           compte: {
             reset_password_token: raw_token,
@@ -21,14 +21,26 @@ RSpec.describe "Eva::Devise::PasswordsController#update", type: :request do
             password_confirmation: "court"
           }
         }
+      end
+
+      it "réaffiche le formulaire sans erreur NoMethodError sur @reset_password" do
+        soumettre_mot_de_passe_invalide(compte)
 
         expect(response).to have_http_status(:ok)
       end
+
+      context "avec un superadmin" do
+        let!(:compte) { create(:compte_superadmin) }
+
+        it "affiche le hint ANLCI" do
+          soumettre_mot_de_passe_invalide(compte)
+
+          expect(response.body).to include("générateur de mot de passe fort")
+        end
+      end
     end
   end
-end
 
-RSpec.describe "Eva::Devise::PasswordsController#create", type: :request do
   describe "POST /admin/password" do
     context "avec un email inconnu" do
       it "réaffiche le formulaire avec l'erreur d'email introuvable" do

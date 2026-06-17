@@ -15,7 +15,6 @@ fr:
         label_email: Adresse e-mail professionnelle
         hint_email: "Format attendu : nom@domaine.fr"
         label_password: Mot de passe
-        hint_password: Votre mot de passe doit comporter au moins 8 caractères
         label_password_confirmation: Confirmation du mot de passe
         label_cgu_lien: conditions générales d'utilisation d'eva
         label_cgu: "J'accepte les %{cgu_lien}"

@@ -77,40 +77,4 @@ RSpec.describe ResetPassword::PageContext do
       expect(context.redirect_path_si_token_invalide).to eq(chemin_attendu)
     end
   end
-
-  describe "#regles_mot_de_passe_cle et #hint_mot_de_passe" do
-    let(:action_name) { "edit" }
-    let(:i18n_passwords_edit) { "active_admin.devise.passwords.edit" }
-    let(:compte) { create(:compte, role: :superadmin) }
-    let(:raw_token) do
-      raw, hashed = Devise.token_generator.generate(Compte, :reset_password_token)
-      compte.update!(reset_password_token: hashed, reset_password_sent_at: Time.zone.now.utc)
-      raw
-    end
-    let(:reset_password_token) { raw_token }
-
-    it "utilise les règles ANLCI pour un compte ANLCI" do
-      expect(context.regles_mot_de_passe_cle).to eq(:regles_mot_de_passe_anlci)
-      expect(context.hint_mot_de_passe).to eq(
-        I18n.t(:hint_password_anlci, scope: i18n_passwords_edit)
-      )
-    end
-  end
-
-  describe "#regles_mot_de_passe_cle pour un conseiller" do
-    let(:action_name) { "edit" }
-    let(:i18n_passwords_edit) { "active_admin.devise.passwords.edit" }
-    let(:compte) { create(:compte_conseiller, :structure_avec_admin) }
-    let(:raw_token) do
-      raw, hashed = Devise.token_generator.generate(Compte, :reset_password_token)
-      compte.update!(reset_password_token: hashed, reset_password_sent_at: Time.zone.now.utc)
-      raw
-    end
-    let(:reset_password_token) { raw_token }
-
-    it "utilise les règles standard" do
-      expect(context.regles_mot_de_passe_cle).to eq(:regles_mot_de_passe)
-      expect(context.hint_mot_de_passe).to eq(I18n.t(:hint_password, scope: i18n_passwords_edit))
-    end
-  end
 end

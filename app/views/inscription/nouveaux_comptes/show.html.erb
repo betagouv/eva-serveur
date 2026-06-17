@@ -84,7 +84,7 @@
               <%= render InputComponent.new(
                 id: "compte_password",
                 label: t(".label_password"),
-                hint: t(".hint_password"),
+                hint: t("creation_compte.regles_mot_de_passe", longueur_mot_de_passe: Devise.password_length.first),
                 form: compte,
                 method: :password,
                 type: "password",

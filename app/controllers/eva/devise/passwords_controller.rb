@@ -11,10 +11,12 @@ module Eva
       private
 
       def assign_reset_password_context
+        reset_password_token = params[:reset_password_token] ||
+                               params[resource_name]&.[](:reset_password_token)
         @reset_password = ResetPassword::PageContext.new(
           action_name: action_name,
           token_invalide: params[:token_invalide],
-          reset_password_token: params[:reset_password_token],
+          reset_password_token: reset_password_token,
           resource_class: resource_class
         )
       end

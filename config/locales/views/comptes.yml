@@ -1,6 +1,11 @@
 fr:
   admin:
     comptes:
+      action_items:
+        voir_campagnes:
+          zero: Aucune campagne
+          one: Consulter 1 campagne
+          other: Consulter %{count} campagnes
       show:
         titre: "Bonjour %{prenom} !"
         introduction: |

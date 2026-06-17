@@ -11,10 +11,10 @@ module Evaluations
       }.freeze
 
       MALUS_PAR_POURCENTAGE_RISQUE = {
-        (0..10) => 0,
-        (11..25) => 1,
-        (26..50) => 2,
-        (51..75) => 3
+        10 => 0,
+        25 => 1,
+        50 => 2,
+        75 => 3
       }.freeze
 
       def initialize(diag_risques_entreprise:, evaluation_impact_general:)
@@ -59,11 +59,7 @@ module Evaluations
         pourcentage = pourcentage_risque
         return 0 if pourcentage.nil?
 
-        MALUS_PAR_POURCENTAGE_RISQUE.each do |interval, valeur|
-          return valeur if interval.cover?(pourcentage)
-        end
-
-        0
+        MALUS_PAR_POURCENTAGE_RISQUE[pourcentage]
       end
 
       def pourcentage_risque

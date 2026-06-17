@@ -124,6 +124,19 @@ evenements: risque_events)
       expect(calculator.palier).to eq("D")
     end
 
+    it "retourne D pour un score total supérieur à 167" do
+      calculator = build_calculator(
+        score_risque: 33,
+        pourcentage_risque: 75,
+        score_cout: 51,
+        score_strategie: 35,
+        score_numerique: 40
+      )
+
+      expect(calculator.score_total).to eq(168)
+      expect(calculator.palier).to eq("D")
+    end
+
     it "met a jour le palier quand les scores d'impact augmentent" do
       baseline = build_calculator(
         score_risque: 33,

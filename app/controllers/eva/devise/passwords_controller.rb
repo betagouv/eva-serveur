@@ -4,7 +4,7 @@ module Eva
       layout "inscription_v2"
 
       # rubocop:disable Rails/LexicallyScopedActionFilter
-      before_action :assign_reset_password_context, only: %i[new edit create]
+      before_action :assign_reset_password_context, only: %i[new edit create update]
       before_action :redirect_si_token_invalide, only: :edit
       # rubocop:enable Rails/LexicallyScopedActionFilter
 

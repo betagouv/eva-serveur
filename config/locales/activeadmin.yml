@@ -77,8 +77,6 @@ fr:
           alert_description: Vous avez fait une demande de changement de mot de passe.
           titre_carte: Saisissez et confirmez votre nouveau mot de passe
           champs_obligatoires: Les champs notés * sont obligatoires.
-          hint_password: Votre mot de passe doit comporter au moins 8 caractères.
-          hint_password_anlci: Au moins 12 caractères, une majuscule, une minuscule, un chiffre et un symbole.
           token_invalide: Votre lien de réinitialisation n’est pas valide.
           annuler: Annuler
           submit: Valider mon mot de passe

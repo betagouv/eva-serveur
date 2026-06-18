@@ -1,5 +1,7 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag "ui_kit" %>
+  <%= javascript_include_tag "/dsfr/dsfr.module.min.js", type: "module" %>
+  <%= javascript_include_tag "/dsfr/dsfr.nomodule.min.js", nomodule: true %>
 <% end %>
 
 <% content_for :content do %>

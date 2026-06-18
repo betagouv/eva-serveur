@@ -21,24 +21,22 @@
           <div class="fr-grid-row fr-grid-row--gutters">
             <%= f.hidden_field :reset_password_token, value: resource.reset_password_token %>
             <div class="fr-col-12">
-              <%= render InputComponent.new(
+              <%= render PasswordInputComponent.new(
                 id: "#{resource_name}_password",
                 label: t("active_admin.devise.password.title"),
                 hint: @reset_password.compte.hint_mot_de_passe,
                 form: f,
                 method: :password,
-                type: "password",
                 required: true,
                 autocomplete: "new-password"
               ) %>
             </div>
             <div class="fr-col-12">
-              <%= render InputComponent.new(
+              <%= render PasswordInputComponent.new(
                 id: "#{resource_name}_password_confirmation",
                 label: t("active_admin.devise.password_confirmation.title"),
                 form: f,
                 method: :password_confirmation,
-                type: "password",
                 required: true,
                 autocomplete: "new-password"
               ) %>

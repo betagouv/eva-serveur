@@ -5,7 +5,7 @@
       <span class="fr-hint-text"><%= @hint %></span>
     <% end %>
   </label>
-  
+
   <% if has_button? %>
     <div class="<%= input_wrap_classes %>">
       <% if is_select? %>
@@ -28,11 +28,11 @@
       <%= tag.input(**input_attributes) %>
     <% end %>
   <% end %>
-  
+
   <div class="fr-messages-group" id="<%= messages_id %>" aria-live="polite">
     <%= error_html %>
   </div>
-  
+
   <% if has_link? %>
     <div class="input-component__link">
       <%= link_to @link_text, @link_url, { class: "input-component__link-text" }.merge(@link_html) %>

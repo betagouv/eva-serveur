@@ -71,7 +71,7 @@ describe PasswordValidator do
           described_class.new.validate(compte)
           expect(compte.errors.include?(:password)).to be true
           expect(compte.errors[:password])
-            .to eq [ "Votre mot de passe doit comporter au moins 8 caractères." ]
+            .to eq [ "Il doit comporter au moins 8 caractères." ]
         end
       end
 

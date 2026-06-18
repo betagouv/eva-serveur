@@ -54,12 +54,11 @@
               <% end %>
 
               <div class="connexion_v2__input-wrapper">
-                <%= render InputComponent.new(
+                <%= render PasswordInputComponent.new(
                   id: "#{resource_name}_password",
                   label: t("active_admin.devise.password.title"),
                   form: f,
                   method: :password,
-                  type: "password",
                   autocomplete: "current-password"
                 ) %>
               </div>

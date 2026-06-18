@@ -81,25 +81,23 @@
             </div>
 
             <div class="fr-col-12">
-              <%= render InputComponent.new(
+              <%= render PasswordInputComponent.new(
                 id: "compte_password",
                 label: t(".label_password"),
                 hint: compte.object.hint_mot_de_passe,
                 form: compte,
                 method: :password,
-                type: "password",
                 required: true,
                 autocomplete: "new-password"
               ) %>
             </div>
 
             <div class="fr-col-12">
-              <%= render InputComponent.new(
+              <%= render PasswordInputComponent.new(
                 id: "compte_password_confirmation",
                 label: t(".label_password_confirmation"),
                 form: compte,
                 method: :password_confirmation,
-                type: "password",
                 required: true,
                 autocomplete: "new-password"
               ) %>

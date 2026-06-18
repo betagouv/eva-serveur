@@ -56,10 +56,7 @@
                 <%= render BoutonDsfrComponent.new(
                   t("active_admin.devise.passwords.edit.submit"),
                   type: :primary,
-                  tag: :submit,
-                  id: "reset-password-submit",
-                  class: "page-reset-password__bouton-principal",
-                  data: { initial_disabled: true }
+                  tag: :submit
                 ) do %>
                   <%= t("active_admin.devise.passwords.edit.submit") %>
                 <% end %>

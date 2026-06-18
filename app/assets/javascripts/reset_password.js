@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  setupResetPasswordEditForm();
   setupResetPasswordEmailForms();
 });
 
@@ -34,31 +33,3 @@ function setupResetPasswordEmailForms() {
   });
 }
 
-function setupResetPasswordEditForm() {
-  var submitButton = document.getElementById("reset-password-submit");
-  var passwordInput = document.getElementById("compte_password");
-  var passwordConfirmationInput = document.getElementById("compte_password_confirmation");
-
-  if (!submitButton || !passwordInput || !passwordConfirmationInput) {
-    return;
-  }
-
-  function updateSubmitState() {
-    var passwordPresent = passwordInput.value.trim().length > 0;
-    var confirmationPresent = passwordConfirmationInput.value.trim().length > 0;
-    var passwordsMatch = passwordInput.value === passwordConfirmationInput.value;
-    var enableButton = passwordPresent && confirmationPresent && passwordsMatch;
-
-    submitButton.disabled = !enableButton;
-    submitButton.classList.toggle("disabled", !enableButton);
-  }
-
-  passwordInput.addEventListener("input", updateSubmitState);
-  passwordConfirmationInput.addEventListener("input", updateSubmitState);
-
-  if (submitButton.dataset.initialDisabled) {
-    submitButton.disabled = true;
-  }
-
-  updateSubmitState();
-}

@@ -38,6 +38,16 @@ describe 'Reset mot de passe', type: :feature do
       raw_token
     end
 
+    context "avec un compte superadmin et un token valide" do
+      let(:compte) { create(:compte_superadmin) }
+
+      it "affiche le hint ANLCI indiquant au moins 12 caractères" do
+        visit edit_compte_password_path(compte, reset_password_token: raw_token)
+
+        expect(page).to have_content("doit contenir au moins 12 caractères")
+      end
+    end
+
     context "avec un compte conseiller et un token valide" do
       let(:compte) do
         create(:compte_conseiller, :structure_avec_admin)

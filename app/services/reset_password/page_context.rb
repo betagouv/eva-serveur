@@ -44,11 +44,6 @@ module ResetPassword
       new_compte_password_path(token_invalide: true)
     end
 
-    def hint_mot_de_passe
-      cle = compte&.anlci? ? :regles_mot_de_passe_anlci : :regles_mot_de_passe
-      I18n.t(cle, scope: "creation_compte", longueur_mot_de_passe: PasswordValidator::LONGUEUR_MINIMALE)
-    end
-
     def i18n_scope
       invalid_link? ? "invalid_link" : "request_email"
     end

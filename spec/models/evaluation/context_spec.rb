@@ -27,6 +27,16 @@ RSpec.describe Evaluation::Context do
         expect(described_class.new(evaluation).pro?).to be(false)
       end
     end
+
+    context "quand la campagne n'a pas de parcours_type" do
+      let(:evaluation) { create(:evaluation) }
+
+      before { evaluation.campagne.update_column(:parcours_type_id, nil) }
+
+      it "retourne false" do
+        expect(described_class.new(evaluation).pro?).to be(false)
+      end
+    end
   end
 
   describe "#usage_beneficiaire?" do

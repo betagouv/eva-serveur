@@ -7,7 +7,7 @@ class Evaluation
     end
 
     def pro?
-      @evaluation.campagne.parcours_type.diagnostic_entreprise?
+      @evaluation.campagne.parcours_type&.diagnostic_entreprise? || false
     end
 
     def usage_beneficiaire?

@@ -32,11 +32,6 @@ Le redimentionnement des images est dépendant d'une librairie système : vips
 
 voir [libvips install instructions](https://www.libvips.org/install.html)
 
-#### GraphViz's
-
-Pour la génération du graphique de la structure de la base avec erd
-
-https://graphviz.org/download/
 
 ### Création de la base  
 `rake db:create`
@@ -458,10 +453,9 @@ Contenu:
 
 Un graphique de la structure de la base peut être généré afin de mieux comprendre les intérractions entre les différents modèles.
 
-![](docs/erd.png)
+Le diagramme est visualisable directement sur GitHub : [docs/erd.mmd](docs/erd.mmd)
 
-Pour générer ce graphique:
-- installer la dépendence GraphViz's (voir ci-dessus)
+Pour le régénérer :
 
 `bundle exec rake erd`
 

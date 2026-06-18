@@ -11,9 +11,17 @@ module ProConnectRecupereCompteHelper
       end
       compte ||= Compte.find_or_create_by(email: email)
       actualise_autres_champs_et_sauve(compte, user_info)
+    rescue ActiveRecord::RecordNotUnique
+      recupere_compte_apres_conflit(user_info, email)
     end
 
     private
+
+    def recupere_compte_apres_conflit(user_info, email)
+      Compte.where(id_pro_connect: user_info["sub"]).update_all(id_pro_connect: nil)
+      compte = Compte.find_by!(email: email)
+      actualise_autres_champs_et_sauve(compte, user_info)
+    end
 
     def actualise_email_compte_existant(compte, email)
       compte_existant = Compte.find_by(email: email)

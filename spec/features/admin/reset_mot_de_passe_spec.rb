@@ -38,8 +38,20 @@ describe 'Reset mot de passe', type: :feature do
       raw_token
     end
 
-    context 'avec un token valide (première ouverture du lien)' do
-      it 'affiche l’alerte info et le formulaire de nouveau mot de passe' do
+    context "avec un compte conseiller et un token valide" do
+      let(:compte) do
+        create(:compte_conseiller, :structure_avec_admin)
+      end
+
+      it "affiche le hint indiquant au moins 8 caractères" do
+        visit edit_compte_password_path(compte, reset_password_token: raw_token)
+
+        expect(page).to have_content("doit comporter au moins 8 caractères")
+      end
+    end
+
+    context "avec un token valide (première ouverture du lien)" do
+      it "affiche l’alerte info et le formulaire de nouveau mot de passe" do
         visit edit_compte_password_path(compte, reset_password_token: raw_token)
 
         expect(page).to have_content(I18n.t('active_admin.devise.change_password.title'))

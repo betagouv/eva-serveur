@@ -1,4 +1,6 @@
 class PasswordValidator < ActiveModel::Validator
+  LONGUEUR_MINIMALE = 8
+
   def validate(compte)
     valeur = compte.password
     return if valeur.blank?
@@ -20,9 +22,11 @@ class PasswordValidator < ActiveModel::Validator
         compte.errors.add(:password, I18n.t(".creation_compte.regles_mot_de_passe_anlci"))
       end
     else
-      if valeur.length < 8
+      if valeur.length < LONGUEUR_MINIMALE
         compte.errors.add(
-          :password, I18n.t(".creation_compte.regles_mot_de_passe", longueur_mot_de_passe: 8))
+          :password,
+          I18n.t(".creation_compte.regles_mot_de_passe", longueur_mot_de_passe: LONGUEUR_MINIMALE)
+        )
       end
     end
   end

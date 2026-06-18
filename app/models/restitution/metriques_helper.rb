@@ -12,10 +12,11 @@ module Restitution
       end
 
       def filtre_evenements_reponses(evenements)
-        evenements.select do |evenement|
+        reponses = evenements.select do |evenement|
           evenement.nom == MetriquesHelper::EVENEMENT[:REPONSE] &&
             (block_given? ? yield(evenement) : true)
         end
+        reponses.sort_by(&:position).group_by(&:question_nom_technique).values.map(&:last)
       end
 
       def temps_entre_couples(evenements)

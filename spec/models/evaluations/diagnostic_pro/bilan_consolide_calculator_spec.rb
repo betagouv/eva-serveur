@@ -5,18 +5,15 @@ require "rails_helper"
 RSpec.describe Evaluations::DiagnosticPro::BilanConsolideCalculator do
   def build_calculator(score_risque:, pourcentage_risque:, score_cout:, score_strategie:,
 score_numerique:)
-    risque_events = [ instance_double(Evenement, nom: "reponse",
-donnees: { "score" => score_risque }) ]
+    risque_events = [ build(:evenement_reponse,
+                            donnees: { "question" => "q_risque", "score" => score_risque }) ]
     impact_events = [
-      instance_double(
-        Evenement,
-        nom: "reponse",
-        donnees: {
-          "score_cout" => score_cout,
-          "score_strategies" => score_strategie,
-          "score_numerique" => score_numerique
-        }
-      )
+      build(:evenement_reponse, donnees: {
+              "question" => "q_impact",
+              "score_cout" => score_cout,
+              "score_strategies" => score_strategie,
+              "score_numerique" => score_numerique
+            })
     ]
 
     diag = instance_double(
@@ -166,6 +163,34 @@ evenements: risque_events)
         expect(described_class::MALUS_PAR_POURCENTAGE_RISQUE).to have_key(pourcentage),
           "pas de malus défini pour pourcentage_risque=#{pourcentage}"
       end
+    end
+
+    it "ne la réponse en dernière position quand une question a plusieurs réponses" do
+      premiere_reponse = build(:evenement_reponse, position: 1, donnees: { "question" => "q_cout",
+                                                              "score_cout" => 10,
+                                                              "score_strategies" => 0,
+                                                              "score_numerique" => 0 })
+      derniere_reponse = build(:evenement_reponse, position: 2, donnees: { "question" => "q_cout",
+                                                              "score_cout" => 20,
+                                                              "score_strategies" => 0,
+                                                              "score_numerique" => 0 })
+
+      reponse_risque = build(:evenement_reponse, donnees: { "question" => "q_risque",
+                                                            "score" => 0 })
+      diag = instance_double(
+        Restitution::DiagRisquesEntreprise,
+        partie: instance_double(Partie, synthese: { "pourcentage_risque" => 10 },
+                                        evenements: [ reponse_risque ])
+      )
+      impacts = instance_double(
+        Restitution::EvaluationImpactGeneral,
+        partie: instance_double(Partie, evenements: [ premiere_reponse, derniere_reponse ])
+      )
+
+      calculator = described_class.new(diag_risques_entreprise: diag,
+                                       evaluation_impact_general: impacts)
+
+      expect(calculator.score_total).to eq(20)
     end
 
     it "conserve le malus existant quand le risque atteint 75%" do

@@ -27,7 +27,6 @@
 //= require comparer_evaluations_positionnement
 //= require modal_fusion
 //= require structure_confirmation
-//= require nouveau_compte
 //= require reset_password
 
 //= require chartkick

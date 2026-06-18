@@ -88,6 +88,11 @@ class Compte < ApplicationRecord
     ANLCI_ROLES.include?(role)
   end
 
+  def hint_mot_de_passe
+    cle = anlci? ? :regles_mot_de_passe_anlci : :regles_mot_de_passe
+    I18n.t(cle, scope: "creation_compte", longueur_mot_de_passe: PasswordValidator::LONGUEUR_MINIMALE)
+  end
+
   def administratif?
     structure.instance_of?(StructureAdministrative)
   end

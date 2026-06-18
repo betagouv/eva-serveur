@@ -26,6 +26,12 @@ describe "Inscription visiteur sans ProConnect", type: :feature do
     end
   end
 
+  it "affiche le hint indiquant au moins 8 caractères" do
+    visit inscription_nouveau_compte_path
+
+    expect(page).to have_content("doit comporter au moins 8 caractères")
+  end
+
   context "par defaut" do
     it "crée le compte et lance l'embarquement" do
       visit inscription_nouveau_compte_path

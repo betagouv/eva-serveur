@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class InputComponent < ViewComponent::Base
+class InputComponent < BaseInputComponent
   def initialize(
     id:,
     label:,
@@ -26,9 +26,10 @@ class InputComponent < ViewComponent::Base
     include_blank: nil,
     **html_options
   )
-    assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern,
-autocomplete)
-    assign_form_attributes(form, method, name)
+    super(id: id, label: label, hint: hint, form: form, method: method,
+      required: required, autocomplete: autocomplete)
+    @name = name || (form.present? && method.present? ? nil : id)
+    assign_basic_attributes(value, type, placeholder, pattern)
     assign_button_attributes(button_text, button_type, button_action)
     assign_link_attributes(link_text, link_url, link_html)
     assign_select_attributes(as, collection, include_blank)
@@ -38,23 +39,11 @@ autocomplete)
 
   private
 
-  def assign_basic_attributes(id, label, hint, value, type, placeholder, required, pattern,
-autocomplete)
-    @id = id
-    @label = label
-    @hint = hint
+  def assign_basic_attributes(value, type, placeholder, pattern)
     @value = value
     @type = type
     @placeholder = placeholder
-    @required = required
     @pattern = pattern
-    @autocomplete = autocomplete
-  end
-
-  def assign_form_attributes(form, method, name)
-    @form = form
-    @method = method
-    @name = name || compute_default_name
   end
 
   def assign_button_attributes(button_text, button_type, button_action)
@@ -75,25 +64,7 @@ autocomplete)
     @include_blank = include_blank
   end
 
-  def compute_default_name
-    return nil if @form.present? && @method.present?
-
-    @id
-  end
-
   public
-
-  def input_id
-    if use_form_builder?
-      @form.object_name.present? ? "#{@form.object_name}_#{@method}" : @method.to_s
-    else
-      @id
-    end
-  end
-
-  def messages_id
-    "#{@id}-messages"
-  end
 
   def has_button?
     @button_text.present?
@@ -130,10 +101,6 @@ autocomplete)
     attrs
   end
 
-  def use_form_builder?
-    @form.present? && @method.present?
-  end
-
   def form_builder_method
     case @type
     when "email"
@@ -163,31 +130,6 @@ autocomplete)
     @link_text.present? && @link_url.present?
   end
 
-  def has_errors?
-    return false unless use_form_builder?
-    return false unless @form.object.respond_to?(:errors)
-
-    @form.object.errors[@method].present?
-  end
-
-  def errors
-    return [] unless has_errors?
-    @form.object.errors[@method]
-  end
-
-  def error_html
-    return "" unless has_errors?
-    errors.map { |error|
-      "<p class=\"fr-message fr-message--error\">#{error}</p>"
-    }.join.html_safe
-  end
-
-  def label_classes
-    classes = [ "fr-label" ]
-    classes << "fr-label--error" if has_errors?
-    classes.join(" ")
-  end
-
   def input_group_classes
     if is_select?
       classes = [ "fr-select-group" ]
@@ -197,22 +139,6 @@ autocomplete)
       classes << "fr-input-group--error" if has_errors?
     end
     classes.join(" ")
-  end
-
-  def is_required?
-    return @required if @required == true || @required == false
-    return false unless use_form_builder?
-
-    # Vérifier si Formtastic considère le champ comme requis
-    return false unless @form.respond_to?(:required?)
-
-    @form.required?(@method)
-  end
-
-  def required_asterisk
-    return "" unless is_required?
-
-    safe_join([ " ", tag.abbr("*", title: "required") ])
   end
 
   def is_select?

@@ -69,4 +69,25 @@ describe ImportExport::Questions::Import do
       end.to raise_error(ImportExport::Questions::Import::Error, message)
     end
   end
+
+  describe 'avec de nombreuses erreurs de validation' do
+    let(:file) { instance_double(ActionDispatch::Http::UploadedFile) }
+    let(:nb_erreurs) { ImportExport::Questions::Import::MAX_ERREURS_AFFICHEES + 5 }
+
+    before do
+      allow(service).to receive(:recupere_data)
+      allow(service).to receive(:valide_headers)
+      allow(service).to receive(:importe_ligne)
+        .and_return(Array.new(nb_erreurs) { |i| "Erreur à la ligne #{i}" })
+    end
+
+    it "limite le nombre de messages d'erreur pour éviter le dépassement du cookie de session" do
+      expect { service.import_from_xls(file) }
+        .to raise_error(ImportExport::Questions::Import::Error) do |error|
+          nombre_de_ligne = ImportExport::Questions::Import::MAX_ERREURS_AFFICHEES + 1
+          expect(error.message.lines.count).to eq nombre_de_ligne
+          expect(error.message).to include('autres erreurs')
+        end
+    end
+  end
 end

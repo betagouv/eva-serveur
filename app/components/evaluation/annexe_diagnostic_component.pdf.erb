@@ -14,9 +14,9 @@
             </div>
             <div class="annexe_restitution__badges">
               <% @badges_francais.each do |badge| %>
-                <%= inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
-                                  class: "badge-references",
-                                  alt: t(badge, scope: @scope_badge) %>
+                <%= helpers.inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
+                                         class: "badge-references",
+                                         alt: t(badge, scope: @scope_badge) %>
               <% end %>
             </div>
           </div>
@@ -29,9 +29,9 @@
             </div>
             <div class="annexe_restitution__badges">
               <% @badges_maths.each do |badge| %>
-                <%= inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
-                                  class: "badge-references",
-                                  alt: t(badge, scope: @scope_badge) %>
+                <%= helpers.inline_svg_tag "badges/cefr/#{badge}-referentiel.svg",
+                                         class: "badge-references",
+                                         alt: t(badge, scope: @scope_badge) %>
               <% end %>
             </div>
           </div>
@@ -46,9 +46,9 @@
             </div>
             <div class="annexe_restitution__badges">
               <% @badges_francais_et_maths.each do |badge| %>
-                <%= inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
-                                  class: "badge-references",
-                                  alt: t(badge, scope: @scope_badge) %>
+                <%= helpers.inline_svg_tag "badges/anlci/#{badge}-referentiel.svg",
+                                           class: "badge-references",
+                                           alt: t(badge, scope: @scope_badge) %>
               <% end %>
             </div>
           </div>

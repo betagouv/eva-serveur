@@ -33,6 +33,18 @@ describe ImportExport::Questions::Import::QuestionQcm do
     expect(choix2.illustration.attached?).to be true
   end
 
+  it "ne vole pas les choix d'une autre question lors de la création" do
+    autre_question = create(:question_qcm)
+    choix_existant = create(:choix, :bon, question_id: autre_question.id,
+                                         nom_technique: 'Choix1', intitule: 'Choix1')
+
+    service.import_from_xls(file)
+    question = Question.where.not(id: autre_question.id).first
+
+    expect(choix_existant.reload.question_id).to eq(autre_question.id)
+    expect(question.choix.find_by(nom_technique: 'Choix1')).to be_present
+  end
+
   it 'supprime les choix absents du fichier importé' do
     service.import_from_xls(file)
     question = Question.first

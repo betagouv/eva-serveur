@@ -72,7 +72,10 @@ module ImportExport
 
       def cree_reponse_generique(question_id:, intitule:, nom_technique:, type_choix:,
                                  position_client: nil)
-        choix = Choix.where(nom_technique: nom_technique).first_or_initialize
+        choix = Choix.where(
+          nom_technique: nom_technique,
+          question_id: question_id
+        ).first_or_initialize
         choix.assign_attributes(intitule: intitule, question_id: question_id,
                                 type_choix: type_choix, position_client: position_client)
         choix.save!

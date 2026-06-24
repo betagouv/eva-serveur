@@ -70,6 +70,18 @@ describe ImportExport::Questions::Import do
     end
   end
 
+  describe '#message_erreur_validation' do
+    it "utilise une chaîne vide comme identifiant si le record n'a pas de nom_technique" do
+      transcription = Transcription.new
+      transcription.errors.add(:base, 'une erreur')
+      exception = ActiveRecord::RecordInvalid.new(transcription)
+
+      message = service.send(:message_erreur_validation, exception, 0)
+
+      expect(message).to include('Erreur de validation à la ligne 0  :')
+    end
+  end
+
   describe 'avec de nombreuses erreurs de validation' do
     let(:file) { instance_double(ActionDispatch::Http::UploadedFile) }
     let(:nb_erreurs) { ImportExport::Questions::Import::MAX_ERREURS_AFFICHEES + 5 }

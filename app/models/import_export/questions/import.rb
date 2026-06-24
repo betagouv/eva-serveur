@@ -7,11 +7,19 @@ module ImportExport
         @headers = headers_attendus
       end
 
+      MAX_ERREURS_AFFICHEES = 5
+
       def import_from_xls(file)
         recupere_data(file)
         valide_headers
         errors = importe_ligne(@data)
-        raise Import::Error, errors.join("\n") if errors.any?
+        if errors.any?
+          message = errors.first(MAX_ERREURS_AFFICHEES).join("\n")
+          if errors.count > MAX_ERREURS_AFFICHEES
+            message += "\n... et #{errors.count - MAX_ERREURS_AFFICHEES} autres erreurs"
+          end
+          raise Import::Error, message
+        end
       end
 
       private

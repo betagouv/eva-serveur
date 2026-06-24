@@ -60,7 +60,8 @@ module ImportExport
     def message_erreur_validation(exception, index)
       I18n.t("import_export.import_xls.erreurs.validation",
              numero: index,
-             message: exception.record.errors.full_messages.to_sentence)
+             message: exception.record.errors.full_messages.to_sentence,
+             identifiant: exception.record.try(:nom_technique))
     end
   end
 end

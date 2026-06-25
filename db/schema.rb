@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_17_151736) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_25_143253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -233,12 +233,14 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_17_151736) do
     t.string "positionnement_niveau_litteratie"
     t.string "positionnement_niveau_numeratie"
     t.jsonb "redactions"
+    t.string "type"
     t.index ["beneficiaire_id"], name: "index_evaluations_on_beneficiaire_id"
     t.index ["campagne_id"], name: "index_evaluations_on_campagne_id"
     t.index ["deleted_at"], name: "index_evaluations_on_deleted_at"
     t.index ["responsable_suivi_id"], name: "index_evaluations_on_responsable_suivi_id"
     t.index ["statut"], name: "index_evaluations_on_statut"
     t.index ["synthese_competences_de_base"], name: "index_evaluations_on_synthese_competences_de_base"
+    t.index ["type"], name: "index_evaluations_on_type"
   end
 
   create_table "evenements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

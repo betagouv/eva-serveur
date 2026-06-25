@@ -1,0 +1,2 @@
+class EvaluationEvapro < Evaluation
+end

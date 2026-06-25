@@ -49,12 +49,13 @@ module Api
       @evaluation_params = permit_params
       retrouve_ids_nested_attributes
       traite_beneficiaire
+      @evaluation_params["type"] = "EvaluationEva" if @evaluation_params["type"].blank?
       @evaluation_params
     end
 
     def permit_params
-      permitted_params = [ :id, :code_beneficiaire, :code_campagne, :terminee_le, :debutee_le,
-                         :beneficiaire_id, conditions_passation_attributes:
+      permitted_params = [ :id, :type, :code_beneficiaire, :code_campagne, :terminee_le,
+                           :debutee_le, :beneficiaire_id, conditions_passation_attributes:
                          %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
                          donnee_sociodemographique_attributes:
                          %i[age genre dernier_niveau_etude derniere_situation] ]

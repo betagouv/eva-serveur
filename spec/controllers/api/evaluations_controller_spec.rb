@@ -5,6 +5,24 @@ describe Api::EvaluationsController do
   let(:campagne) { create :campagne, compte: compte }
 
   describe "creation" do
+    context "avec le type EvaluationEvapro" do
+      let(:evaluation_params) do
+        {
+          type: "EvaluationEvapro",
+          nom: "Nom du bénéficiaire",
+          debutee_le: DateTime.current,
+          code_campagne: campagne.code
+        }
+      end
+
+      it "crée bien une EvaluationEvapro" do
+        expect do
+          post :create, params: evaluation_params
+        end.to change(EvaluationEvapro, :count).by(1)
+        expect(response).to have_http_status(:created)
+      end
+    end
+
     context "avec un nom d'évaluation" do
       let(:evaluation_params) do
         {

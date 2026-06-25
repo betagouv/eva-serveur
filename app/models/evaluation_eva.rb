@@ -1,0 +1,2 @@
+class EvaluationEva < Evaluation
+end

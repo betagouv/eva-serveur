@@ -62,7 +62,7 @@ RSpec.describe "Parcours d'embarquement après invitation", type: :request do
     autre_fiche = create(:structure_locale, nom: "Autre fiche historique doublon SIRET",
                                            siret: 999_999_999_999_99)
     autre_fiche.update_columns(siret: structure.siret)
-    expect(Structure.avec_meme_siret_que(structure.siret).count).to eq(2)
+    expect(Structure.where(siret: structure.siret).count).to eq(2)
 
     post inscription_nouveau_compte_path, params: {
       invitation_token: invitation.token,

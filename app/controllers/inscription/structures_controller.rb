@@ -50,13 +50,6 @@ class Inscription::StructuresController < ApplicationController
     affilie_et_prepare_opcos
   end
 
-  def recupere_structures_avec_meme_siret_si_necessaire
-    return if @structure.blank?
-
-    @structures_meme_siret = Structure.avec_meme_siret_que(@structure.siret)
-                                      .order(:id)
-  end
-
   def recherche_et_assigne_structure
     return if @structure.present?
 
@@ -106,8 +99,9 @@ class Inscription::StructuresController < ApplicationController
   def structure_selectionnee
     return nil if @structure.blank?
 
-    Structure.avec_meme_siret_que(@structure.siret)
-             .find_by(id: params.dig(:compte, :structure_id).presence || @structure.id)
+    structure_meme_siret = StructureLocale.pour_inscription(@structure.siret)
+    selected_id = params.dig(:compte, :structure_id).presence
+    structure_meme_siret.find_by(id: selected_id || @structure.id)
   end
 
   def render_structure_invalide
@@ -239,7 +233,9 @@ class Inscription::StructuresController < ApplicationController
 
   def prepare_show_context
     prepare_structure_si_necessaire
-    recupere_structures_avec_meme_siret_si_necessaire
+    if @structure.present?
+      @structures_meme_siret = StructureLocale.pour_inscription(@structure.siret)
+    end
   end
 
   def etape_usage_sans_session?

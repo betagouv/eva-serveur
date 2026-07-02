@@ -3,6 +3,8 @@ class StructureLocale < Structure
 
   attr_accessor :structure_confirmee, :siret_ferme
 
+  scope :pour_inscription, ->(siret) { where(siret: siret).order(:nom, :id) }
+
   TYPE_NON_COMMUNIQUE = "non_communique"
   TYPES_STRUCTURES = %w[
     AFPA

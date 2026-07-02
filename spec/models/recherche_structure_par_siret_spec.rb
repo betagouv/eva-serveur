@@ -29,6 +29,20 @@ RSpec.describe RechercheStructureParSiret, type: :model do
       end
     end
 
+    context "quand seule une structure administrative existe en base pour le SIRET" do
+      let(:siret) { "12345678901234" }
+      let!(:structure_administrative) do
+        ability = AbilityUtilisateur.new(create(:compte_superadmin))
+        build(:structure_administrative, siret: siret, current_ability: ability).tap(&:save!)
+      end
+
+      it "ignore la structure administrative" do
+        resultat = described_class.new(siret).call
+
+        expect(resultat).to be_new_record
+      end
+    end
+
     context "quand le SIRET est saisi avec des espaces" do
       let(:siret_normalise) { "12345678901234" }
       let(:siret_avec_espaces) { "123 456 789 01234" }

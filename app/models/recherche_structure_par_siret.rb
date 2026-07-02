@@ -8,7 +8,7 @@ class RechercheStructureParSiret
   def call
     return nil if @siret.blank?
 
-    structure_existante = cherche_structure_avec_siret(@siret)
+    structure_existante = StructureLocale.pour_inscription(@siret).first
 
     return structure_existante if structure_existante.present?
 
@@ -21,12 +21,6 @@ class RechercheStructureParSiret
     return nil if siret.blank?
 
     siret.to_s.gsub(/\s+/, "")
-  end
-
-  def cherche_structure_avec_siret(siret)
-    Structure.avec_meme_siret_que(siret)
-             .order(:id)
-             .first
   end
 
   def cree_structure_temporaire_via_api_sirene

@@ -174,4 +174,44 @@ describe StructureLocale, type: :model do
         end
     end
   end
+
+  describe '#pour_inscription' do
+    let(:structure1) { create(:structure_locale, siret: siret_1, nom: "B", code_postal: "75000") }
+    let(:structure2) do
+      structure = build(:structure_locale, siret: siret_2, nom: "A", code_postal: "45000")
+      structure.save(validate: false)
+      structure
+    end
+
+    context 'quand les structures ont le même SIRET' do
+      let(:siret_1) { '12345678901234' }
+      let(:siret_2) { '12345678901234' }
+
+      it "retourne toutes les structures, triées par nom" do
+        expect(described_class.pour_inscription(structure1.siret))
+          .to eq([ structure2, structure1 ])
+      end
+
+      context "et le même nom" do
+        before do
+          structure1.update(nom: "Même nom")
+          structure2.update(nom: "Même nom")
+        end
+
+        it "trie par id" do
+          attendu = [ structure1.reload, structure2.reload ].sort_by(&:id)
+          expect(described_class.pour_inscription(siret_1)).to eq(attendu)
+        end
+      end
+    end
+
+    context 'quand les structures ont des SIRET différents' do
+      let(:siret_1) { '12345678901234' }
+      let(:siret_2) { '12345678901235' }
+
+      it "retourne seulement la bonne structure" do
+        expect(described_class.pour_inscription(structure1.siret)).to include(structure1)
+      end
+    end
+  end
 end

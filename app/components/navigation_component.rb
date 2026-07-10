@@ -27,6 +27,7 @@ class NavigationComponent < ViewComponent::Base
       actualites_link,
       campagnes_link,
       evaluations_link,
+      evaluations_evapro_link,
       accompagnement_group,
       beneficiaires_link,
       comptes_link,
@@ -64,6 +65,14 @@ class NavigationComponent < ViewComponent::Base
 
     { label: "Évaluations", url: helpers.admin_evaluations_path,
       current: evaluations_current? }
+  end
+
+  def evaluations_evapro_link
+    return if en_attente_restreint?
+    return unless can?(:read, EvaluationEvapro)
+
+    { label: "Évaluations", url: helpers.admin_evaluation_evapros_path,
+      current: evaluation_evapros_current? }
   end
 
   def campagnes_link
@@ -338,6 +347,11 @@ class NavigationComponent < ViewComponent::Base
   def evaluations_current?
     current_page?(helpers.admin_evaluations_path) ||
       (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
+  end
+
+  def evaluation_evapros_current?
+    current_page?(helpers.admin_evaluation_evapros_path) ||
+      (helpers.params[:controller] == "admin/evaluation_evapros" && helpers.params[:action] == "show")
   end
 
   def can_read_dashboard?

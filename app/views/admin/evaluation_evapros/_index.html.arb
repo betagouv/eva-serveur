@@ -1,0 +1,29 @@
+vue = self
+
+caption do
+  text_node t(".titre")
+  div class: "fr-table__caption__desc" do
+    t(".texte")
+  end
+end
+
+context.instance_eval do
+  column t(".colonne_par"), sortable: "beneficiaires.nom" do |evaluation|
+    evaluation.beneficiaire&.nom
+  end
+  column t(".colonne_date"), sortable: :created_at do |evaluation|
+    evaluation.created_at.strftime("%d/%m/%Y")
+  end
+  column t(".colonne_taux_risque") do |evaluation|
+    Admin::DashboardHelper.instance_method(:afficher_lettre_risque_index_evapro).bind(vue)
+      .call(evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
+  end
+  column t(".colonne_couts") do |evaluation|
+    Admin::DashboardHelper.instance_method(:afficher_lettre_cout_index_evapro).bind(vue)
+      .call(evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
+  end
+  column do |evaluation|
+    render partial: "admin/evaluations/lien",
+      locals: { chemin: admin_evaluation_evapro_path(evaluation) }
+  end
+end

@@ -2,13 +2,8 @@
   display: none;
 }
 
-// Cacher le bloc "Gestion" uniquement sur la page show d'évaluation
-body.admin_evaluations.show #active_admin_content:has(.evaluation-evapro) #action_items_sidebar_section,
-body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #action_items_sidebar_section {
-  display: none;
-}
-
-#responsable_de_suivi_sidebar_section, #acces_prives_sidebar_section {
+#responsable_de_suivi_sidebar_section,
+#acces_prives_sidebar_section {
   .panel_contents {
     display: flex;
     gap: .5rem;
@@ -25,10 +20,11 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
     max-width: calc(#{ $largeur-panel - ($padding * 2) });
     font-weight: 400;
   }
+
   .champ-recherche {
     width: 100%;
   }
-  
+
   input {
     height: 1.625rem;
   }
@@ -37,12 +33,12 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
 .sidebar {
   .sidebar_section.panel {
     margin-bottom: 0.5rem;
+    box-shadow: none;
+    border: 1px solid var(--border-default-grey);
+    border-radius: 0;
 
     &.action-items-sidebar {
       background: var(--color-background-default, #FFF);
-
-      /* dsfr/shadow-sm */
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 18, 0.16);
     }
 
     &.annule-panel {
@@ -57,8 +53,8 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
       display: flex;
       gap: .5rem;
       flex-wrap: wrap;
-      
-      & > *:empty {
+
+      &>*:empty {
         display: none;
       }
 
@@ -89,7 +85,7 @@ body[class*="evaluations"].show #active_admin_content:has(.evaluation-evapro) #a
       align-items: start;
 
       .sidebar_section {
-        width : 100%;
+        width: 100%;
       }
 
       .menu-sidebar {

@@ -1,5 +1,14 @@
 fr:
   admin:
+    evaluation_evapros:
+      index:
+        titre: "Évaluations"
+        texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
+        colonne_par: Par
+        colonne_date: Date
+        colonne_taux_risque: "Taux de risque"
+        colonne_couts: Coûts
+        voir_detail: "Voir le détail"
     evaluations:
       blank_slate:
         titre: "Évaluations"
@@ -48,14 +57,6 @@ fr:
         supprimer: Supprimer
         modifier: Modifier
         voir: Voir
-      index_evapro:
-        titre: "Évaluations"
-        texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
-        colonne_par: Par
-        colonne_date: Date
-        colonne_taux_risque: "Taux de risque"
-        colonne_couts: Coûts
-        voir_detail: "Voir le détail"
       inconnue: "Évaluation non trouvée"
       commun: &commun
         efficience: Efficience

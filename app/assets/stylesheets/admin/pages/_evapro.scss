@@ -1,4 +1,6 @@
-.evaluation-evapro, .evaluation-evapro .page, .evaluation-evapro .page__contenu {
+.evaluation-evapro,
+.evaluation-evapro .page,
+.evaluation-evapro .page__contenu {
   display: flex;
   flex-direction: column;
   gap: $dsfr-spacing-7w;
@@ -7,7 +9,7 @@
   @media print {
     gap: $dsfr-spacing-4w;
   }
-    
+
   .evaluation-evapro__titre {
     margin-bottom: 0;
     color: var(--text-title-grey);
@@ -22,8 +24,8 @@
   }
 }
 
-body.admin_evaluations.index #active_admin_content .evaluation-evapro,
-body.admin_evaluations.index #active_admin_content .evaluation-evapro .page,
-body.admin_evaluations.index #active_admin_content .evaluation-evapro .page__contenu {
+body.admin_evaluation_evapros.index #active_admin_content .evaluation-evapro,
+body.admin_evaluation_evapros.index #active_admin_content .evaluation-evapro .page,
+body.admin_evaluation_evapros.index #active_admin_content .evaluation-evapro .page__contenu {
   gap: 0;
 }

@@ -131,12 +131,13 @@
   @include bloc-evaluation;
 }
 
-.show,
 .admin_evaluations {
-  .menu-sidebar {
+  .sidebar .sidebar_section.panel.menu-sidebar {
     margin-top: 2rem;
+    border: none;
   }
 }
+
 // EvaPro admin: ajustements des marges entre le Header et le Footer pour index évaluations
 // qui utilise la sidebar ActiveAdmin. 
 body.logged_in.evapro_admin.admin_evaluations.index #active_admin_content {
@@ -234,6 +235,7 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
     #title_bar #titlebar_left {
       padding: 1rem 1.5rem;
     }
+
     #active_admin_content.with_sidebar #main_content_wrapper #main_content {
       padding: 1rem 1.5rem;
     }

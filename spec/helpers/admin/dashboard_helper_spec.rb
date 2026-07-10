@@ -129,7 +129,7 @@ RSpec.describe Admin::DashboardHelper do
   end
 
   describe "#lettre_risque_pour" do
-    let(:evaluation) { instance_double(Evaluation, id: 1) }
+    let(:evaluation) { instance_double(EvaluationEvapro, id: 1) }
     let(:restitution) { instance_double(Restitution::Globale) }
     let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
@@ -204,7 +204,7 @@ RSpec.describe Admin::DashboardHelper do
   end
 
   describe "#lettre_couts_pour" do
-    let(:evaluation) { instance_double(Evaluation, id: 1) }
+    let(:evaluation) { instance_double(EvaluationEvapro, id: 1) }
     let(:restitution) { instance_double(Restitution::Globale) }
     let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
@@ -265,102 +265,6 @@ RSpec.describe Admin::DashboardHelper do
         expect(helper).not_to receive(:restitution_globale_pour)
 
         expect(helper.send(:lettre_couts_pour, evaluation, synthese_evapro)).to be_nil
-      end
-    end
-  end
-
-  describe "#afficher_lettre_risque" do
-    let(:evaluation) { instance_double(Evaluation) }
-
-    context "quand la lettre est présente et evaluation complète" do
-      it "render le composant" do
-        allow(helper).to receive(:lettre_risque_pour).and_return("A")
-        allow(evaluation).to receive(:complete?).and_return(true)
-
-        expect(helper).to receive(:render).with(
-          instance_of(EvaProScoreComponent)
-        )
-
-        helper.afficher_lettre_risque(evaluation)
-      end
-    end
-
-    context "quand la lettre est absente" do
-      it "retourne '-'" do
-        allow(helper).to receive(:lettre_risque_pour).and_return(nil)
-        allow(evaluation).to receive(:complete?).and_return(true)
-
-        expect(helper.afficher_lettre_risque(evaluation)).to eq("-")
-      end
-    end
-
-    context "quand evaluation n'est pas complète" do
-      it "retourne '-'" do
-        allow(helper).to receive(:lettre_risque_pour).and_return("A")
-        allow(evaluation).to receive(:complete?).and_return(false)
-
-        expect(helper.afficher_lettre_risque(evaluation)).to eq("-")
-      end
-    end
-
-    context "quand synthese_evapro est fourni" do
-      let(:synthese_evapro) { { pourcentage_risque: 10 } }
-
-      it "passe synthese_evapro à lettre_risque_pour" do
-        allow(evaluation).to receive(:complete?).and_return(true)
-        expect(helper).to receive(:lettre_risque_pour).with(evaluation,
-synthese_evapro).and_return("A")
-        expect(helper).to receive(:render).with(instance_of(EvaProScoreComponent))
-
-        helper.afficher_lettre_risque(evaluation, synthese_evapro)
-      end
-    end
-  end
-
-  describe "#afficher_lettre_cout" do
-    let(:evaluation) { instance_double(Evaluation) }
-
-    context "quand la lettre est présente et evaluation complète" do
-      it "render le composant" do
-        allow(helper).to receive(:lettre_couts_pour).and_return("A")
-        allow(evaluation).to receive(:complete?).and_return(true)
-
-        expect(helper).to receive(:render).with(
-          instance_of(EvaProScoreComponent)
-        )
-
-        helper.afficher_lettre_cout(evaluation)
-      end
-    end
-
-    context "quand la lettre est absente" do
-      it "retourne '-'" do
-        allow(helper).to receive(:lettre_couts_pour).and_return(nil)
-        allow(evaluation).to receive(:complete?).and_return(true)
-
-        expect(helper.afficher_lettre_cout(evaluation)).to eq("-")
-      end
-    end
-
-    context "quand evaluation n'est pas complète" do
-      it "retourne '-'" do
-        allow(helper).to receive(:lettre_couts_pour).and_return("A")
-        allow(evaluation).to receive(:complete?).and_return(false)
-
-        expect(helper.afficher_lettre_cout(evaluation)).to eq("-")
-      end
-    end
-
-    context "quand synthese_evapro est fourni" do
-      let(:synthese_evapro) { { score_cout: "moyen" } }
-
-      it "passe synthese_evapro à lettre_couts_pour" do
-        allow(evaluation).to receive(:complete?).and_return(true)
-        expect(helper).to receive(:lettre_couts_pour).with(evaluation,
-synthese_evapro).and_return("B")
-        expect(helper).to receive(:render).with(instance_of(EvaProScoreComponent))
-
-        helper.afficher_lettre_cout(evaluation, synthese_evapro)
       end
     end
   end

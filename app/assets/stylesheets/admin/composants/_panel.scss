@@ -8,15 +8,16 @@ body.logged_out #content_wrapper #active_admin_content {
 .panel {
   @include carte-avec-ombre;
 
-  padding: 1.5rem;
+  padding: $dsfr-spacing-3w;
   margin-bottom: 1.5rem;
   max-width: 100vw;
 
-  > h3, .titre {
+  >h3,
+  .titre {
     @include titre-carte;
   }
 
-  > div {
+  >div {
     padding: 0;
   }
 }
@@ -33,7 +34,7 @@ body.logged_out #content_wrapper #active_admin_content {
     margin-bottom: 0;
   }
 
-  > a {
+  >a {
     @include bouton-primaire;
     @include grand-bouton;
   }
@@ -103,4 +104,3 @@ body.logged_out #content_wrapper #active_admin_content {
     margin: 0;
   }
 }
-

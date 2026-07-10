@@ -76,10 +76,11 @@ ActiveAdmin.register Evaluation do
 
   form partial: "form"
 
-  sidebar " ", class: "menu-sidebar", only: :show, if: proc { resource.evapro? } do
-    render "admin/evaluations/evapro/opco_financeur",
-           opco: resource.diagnostic_pro&.opco_financeur,
-           evaluation: resource
+  sidebar " ", only: :show, if: proc { resource.evapro? } do
+    render partial: "admin/evaluation_evapros/sidebar_evaluation",
+      locals: {
+        evaluation: resource
+      }
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
@@ -103,11 +104,10 @@ ActiveAdmin.register Evaluation do
     render "admin/evaluations/eva/menu_sidebar"
   end
 
-  sidebar " ", class: "menu-sidebar evaluation-evapro", only: :index, if: proc {
+  sidebar " ", class: "evaluation-evapro", only: :index, if: proc {
     current_compte.utilisateur_entreprise? } do
-           render partial: "admin/evaluations/evapro/index_evapro/sidebar_opco",
+           render partial: "admin/evaluation_evapros/sidebar_structure",
                  locals: {
-                   opco: opco_financeur,
                    structure: structure
                  }
      end

@@ -26,7 +26,7 @@ describe Restitution::Completude do
                                     .and_return([])
       allow(SituationConfiguration)
             .to receive(:ids_situations).with(evaluation.campagne_id,
-                                              Evaluation::SITUATION_COMPETENCES_EVAPRO)
+                                              EvaluationEvapro::SITUATION_COMPETENCES_EVAPRO)
                                         .and_return([])
     end
 
@@ -213,7 +213,7 @@ describe Restitution::Completude do
       before do
         allow(SituationConfiguration)
           .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            Evaluation::SITUATION_COMPETENCES_EVAPRO)
+                                            EvaluationEvapro::SITUATION_COMPETENCES_EVAPRO)
                                       .and_return([ diag_risques_entreprise.id,
 evaluation_impact_general.id ])
       end

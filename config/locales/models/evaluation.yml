@@ -29,7 +29,6 @@ fr:
         incomplete: Incomplète
         competences_transversales_incompletes: Évaluation des compétences transversales incomplète
         competences_de_base_incompletes: Évaluation des compétences de base incomplète
-        beneficiaire: Bénéficiaire
         responsable_suivi: Responsable de suivi
         interpretations:
           non_teste: Non testé
@@ -89,7 +88,7 @@ fr:
           suivi_effectue: Suivi effectué
     scopes:
       evaluation:
-        all: 'Toutes les évaluations'
+        all: "Toutes les évaluations"
   formtastic:
     actions:
       evaluation:
@@ -98,8 +97,11 @@ fr:
   active_admin:
     resources:
       evaluation:
-        delete_model: Supprimer
         edit_model: Modifier
+        delete_model: Supprimer
+      evaluation_evapro:
+        edit_model: Modifier
+        delete_model: Supprimer
     xls:
       evaluation:
         structure: Structure

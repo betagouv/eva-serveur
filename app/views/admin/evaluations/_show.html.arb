@@ -1,5 +1,5 @@
 if resource.evapro?
-  render partial: "admin/evaluations/evapro/evaluation_evapro"
+  render partial: "admin/evaluation_evapros/show"
 else
   div class: "evaluation" do
     div class: "row" do

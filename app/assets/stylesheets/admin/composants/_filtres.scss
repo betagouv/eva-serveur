@@ -4,9 +4,10 @@
       .filter_form_field {
         &.select_and_search {
           input[type='text'] {
-            width: 6.4rem;
+            width: 6.3rem;
           }
         }
+
         &.filter_date_range {
           input:first-of-type {
             margin-bottom: 0.5rem;
@@ -25,7 +26,7 @@
         @include petit-bouton;
         @include bouton-primaire;
       }
-      
+
       a {
         @include petit-bouton;
         @include bouton-secondaire;

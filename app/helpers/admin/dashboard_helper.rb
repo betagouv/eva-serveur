@@ -69,29 +69,9 @@ actualites:, compte:, ability:)
       presenter.lettre(:score_cout)
     end
 
-    def afficher_lettre_cout(evaluation, synthese_evapro = nil)
-      synthese_evapro ||= synthese_evapro_pour(evaluation)
-      lettre_couts = lettre_couts_pour(evaluation, synthese_evapro)
-      if lettre_couts.present? && evaluation.complete?
-        render EvaProScoreComponent.new(score: lettre_couts)
-      else
-        "-"
-      end
-    end
-
-    def afficher_lettre_risque(evaluation, synthese_evapro = nil)
-      synthese_evapro ||= synthese_evapro_pour(evaluation)
-      lettre_risque = lettre_risque_pour(evaluation, synthese_evapro)
-      if lettre_risque.present? && evaluation.complete?
-        render EvaProScoreComponent.new(score: lettre_risque)
-      else
-        "-"
-      end
-    end
-
     def afficher_lettre_risque_index_evapro(evaluation, synthese_evapro)
-      lettre_risque = Admin::DashboardHelper.instance_method(:lettre_risque_pour).bind(self).call(
-evaluation, synthese_evapro)
+      lettre_risque = Admin::DashboardHelper.instance_method(:lettre_risque_pour).bind(self)
+        .call(evaluation, synthese_evapro)
       if lettre_risque.present? && evaluation.complete?
         render EvaProScoreComponent.new(score: lettre_risque)
       else

@@ -1,4 +1,0 @@
-div class: "evaluation-evapro" do
-  render "admin/evaluations/evapro/restitution_globale_evapro", pdf: false
-  render "admin/evaluations/panel_administration", eva_pro: true if can?(:manage, Compte)
-end

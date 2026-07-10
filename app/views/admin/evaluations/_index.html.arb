@@ -1,7 +1,9 @@
 if current_compte.utilisateur_entreprise?
-  render partial: "admin/evaluations/evapro/index_evapro/tableau",
-         locals: { context: context,
-syntheses_evapro_par_evaluation_id: syntheses_evapro_par_evaluation_id }
+  render partial: "admin/evaluation_evapros/index",
+    locals: {
+      context: context,
+      syntheses_evapro_par_evaluation_id: syntheses_evapro_par_evaluation_id
+    }
 else
 
   context.instance_eval do
@@ -22,7 +24,7 @@ else
         parcours_type = campagne.parcours_type
         if affiche_sous_titre_campagne?(parcours_type)
           div parcours_type.display_name,
-class: "evaluation__campagne-sous-titre"
+            class: "evaluation__campagne-sous-titre"
         end
       end
     end
@@ -32,8 +34,8 @@ class: "evaluation__campagne-sous-titre"
     end
 
     column "" do |evaluation|
-      render partial: "admin/evaluations/evapro/index_evapro/lien",
-locals: { evaluation: evaluation }
+      render partial: "admin/evaluations/lien",
+        locals: { chemin: admin_evaluation_path(evaluation) }
     end
   end
 end

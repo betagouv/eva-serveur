@@ -1,4 +1,5 @@
 <div class="evaluation-sidebar__container">
+  <% opco = evaluation.diagnostic_pro&.opco_financeur %>
   <% if opco.present? && opco.financeur? %>
     <div class="evaluation-sidebar__bloc evaluation-sidebar__bloc-opco-background">
       <h3 class="evaluation-sidebar__bloc-opco-partenaire__titre"><%= t("admin.evaluations.sidebar.opco_partenaire.titre") %></h3>
@@ -9,22 +10,19 @@
       <% end %>
     </div>
   <% end %>
+
   <div class="evaluation-sidebar__bloc">
     <div class="evaluation-sidebar__bloc-evaluation__details">
-      <h3><%= t("admin.dashboard.sidebar.opco_entreprise.titre") %></h3>
-      <p><%= structure.nom %></p>
+      <h3><%= t("admin.evaluations.sidebar.details.par") %></h3>
+      <p><%= evaluation.beneficiaire.nom %></p>
     </div>
-    <% if structure.is_a?(StructureLocale) %>
-      <%= render BoutonDsfrComponent.new(
-        "#",
-        type: :tertiary,
-        size: :sm,
-        "data-fr-opened": "false",
-        "aria-controls": "fr-modal-invitation-#{structure.id}"
-      ) do %>
-        <%= t("admin.dashboard.sidebar.opco_entreprise.inviter") %>
-      <% end %>
-      <%= render "admin/structures/modal_invitation", structure: structure %>
-    <% end %>
+    <div class="evaluation-sidebar__bloc-evaluation__details">
+      <h3><%= t("admin.evaluations.sidebar.details.date") %></h3>
+      <p><%= I18n.l(evaluation.debutee_le, format: :avec_heure_mois_complet) %></p>
+    </div>
+    <div class="evaluation-sidebar__bloc-evaluation__details">
+      <h3><%= t("admin.evaluations.sidebar.details.questionnaire") %></h3>
+      <p><%= parcours_type_libelle(evaluation.campagne) %></p>
+    </div>
   </div>
 </div>

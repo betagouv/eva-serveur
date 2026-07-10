@@ -199,11 +199,7 @@ question_redaction_id)
   end
 
   def usage
-    if evapro?
-      Evaluations::DiagnosticPro.new(self)
-    else
-      passation_beneficiaire
-    end
+    passation_beneficiaire if !evapro?
   end
 
   def passation_beneficiaire

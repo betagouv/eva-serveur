@@ -41,7 +41,7 @@ module Restitution
     def ids_situations_evapro
       @ids_situations_evapro ||= SituationConfiguration.ids_situations(
         @evaluation.campagne_id,
-        Evaluation::SITUATION_COMPETENCES_EVAPRO
+        EvaluationEvapro::SITUATION_COMPETENCES_EVAPRO
       )
     end
 

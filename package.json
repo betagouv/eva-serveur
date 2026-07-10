@@ -25,6 +25,6 @@
   "dependencies": {
     "@gouvfr/dsfr": "^1.14.4",
     "i18n-js": "^4.5.3",
-    "tarteaucitronjs": "^1.32.0"
+    "tarteaucitronjs": "^1.33.0"
   }
 }

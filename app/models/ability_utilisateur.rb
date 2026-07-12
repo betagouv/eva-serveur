@@ -49,24 +49,29 @@ compte_id: compte.id
   def droit_evaluation(compte)
     can %i[read download_pdf], ActiveAdmin::Page, name: "Comparaison"
     cannot :create, Evaluation
-    can :read, Evaluation, responsable_suivi_id: compte.id
+    classe_evaluation = compte.utilisateur_entreprise? ? EvaluationEvapro : Evaluation
+    droit_evaluation_class(compte, classe_evaluation)
+  end
+
+  def droit_evaluation_class(compte, classe_evaluation)
+    can :read, classe_evaluation, responsable_suivi_id: compte.id
     can %i[read destroy mise_en_action
            supprimer_responsable_suivi ajouter_responsable_suivi],
-        Evaluation, campagne: { compte_id: compte.id }
+        classe_evaluation, campagne: { compte_id: compte.id }
     can %i[read mise_en_action
            supprimer_responsable_suivi ajouter_responsable_suivi],
-        Evaluation, campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
+        classe_evaluation, campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     return if compte.structure_id.blank?
 
     if compte.validation_acceptee?
       can %i[read mise_en_action supprimer_responsable_suivi
              ajouter_responsable_suivi renseigner_qualification],
-          Evaluation,
+          classe_evaluation,
           campagne: campagnes_publique_de_la_structure(compte)
     end
 
     if compte.admin?
-      can %i[read update destroy mise_en_action renseigner_qualification], Evaluation,
+      can %i[read update destroy mise_en_action renseigner_qualification], classe_evaluation,
           campagne: campagnes_de_la_structure(compte)
     end
   end

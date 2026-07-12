@@ -546,6 +546,28 @@ describe Ability do
     end
   end
 
+  context 'Compte utilisateur entreprise (EvaPro)' do
+    let(:structure_entreprise) { create :structure_locale, :eva_pro }
+    let(:compte) { create :compte_admin, structure: structure_entreprise }
+    let!(:campagne_entreprise) { create :campagne, :avec_parcours_evapro, compte: compte }
+    let!(:evaluation_evapro) do
+      EvaluationEvapro.create!(campagne: campagne_entreprise,
+                                beneficiaire: create(:beneficiaire),
+                                debutee_le: 1.hour.ago)
+    end
+    let!(:evaluation_eva) do
+      create :evaluation, campagne: campagne_entreprise, beneficiaire: create(:beneficiaire)
+    end
+
+    it 'a accès en lecture et en suppression aux EvaluationEvapro de sa structure' do
+      expect(subject).to be_able_to(%i[read destroy], evaluation_evapro)
+    end
+
+    it "n'a pas accès en lecture ni en suppression aux Evaluation (non EvaPro)" do
+      expect(subject).not_to be_able_to(%i[read destroy], evaluation_eva)
+    end
+  end
+
   context 'Compte en attente de validation' do
     let!(:compte) do
       create :compte_conseiller, :en_attente, :exempte_restriction_acces_attente,

@@ -26,8 +26,7 @@ class NavigationComponent < ViewComponent::Base
       dashboard_link,
       actualites_link,
       campagnes_link,
-      evaluations_link,
-      evaluations_evapro_link,
+      evaluations_group,
       accompagnement_group,
       beneficiaires_link,
       comptes_link,
@@ -59,19 +58,37 @@ class NavigationComponent < ViewComponent::Base
       current: current_page?(helpers.admin_actualites_path) }
   end
 
-  def evaluations_link
+  def evaluations_group
     return if en_attente_restreint?
+
+    links = [
+      evaluations_link,
+      evaluations_evapro_link
+    ].compact
+
+    return if links.empty?
+    if links.size == 1
+      menu = links.first
+      menu[:label] = "Évaluations"
+      return menu
+    end
+
+    group_link("Évaluations", "evaluations", links)
+  end
+
+  def evaluations_link
+    return if utilisateur_entreprise? && !superadmin?
     return unless can?(:read, Evaluation)
 
-    { label: "Évaluations", url: helpers.admin_evaluations_path,
+    { label: "Eva", url: helpers.admin_evaluations_path,
       current: evaluations_current? }
   end
 
   def evaluations_evapro_link
-    return if en_attente_restreint?
+    return unless utilisateur_entreprise? || superadmin?
     return unless can?(:read, EvaluationEvapro)
 
-    { label: "Évaluations", url: helpers.admin_evaluation_evapros_path,
+    { label: "Evapro", url: helpers.admin_evaluation_evapros_path,
       current: evaluation_evapros_current? }
   end
 
@@ -346,12 +363,15 @@ class NavigationComponent < ViewComponent::Base
 
   def evaluations_current?
     current_page?(helpers.admin_evaluations_path) ||
-      (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
+    (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
   end
 
   def evaluation_evapros_current?
     current_page?(helpers.admin_evaluation_evapros_path) ||
-      (helpers.params[:controller] == "admin/evaluation_evapros" && helpers.params[:action] == "show")
+    (
+      helpers.params[:controller] == "admin/evaluation_evapros" &&
+      helpers.params[:action] == "show"
+    )
   end
 
   def can_read_dashboard?

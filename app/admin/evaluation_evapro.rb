@@ -92,8 +92,11 @@ ActiveAdmin.register EvaluationEvapro do
     end
 
     def render_pdf
-      html_content = render_to_string(template: "admin/evaluations/show", layout: "application",
-                                      locals: { resource: resource })
+      html_content = render_to_string(
+        template: "admin/evaluation_evapros/show",
+        layout: "application",
+        locals: { resource: resource }
+      )
 
       pdf_path = Pdf::Generator.generate(html_content)
 

@@ -9,7 +9,7 @@ div class: "evaluation-evapro" do
       render(Pdf::HeaderEvaproComponent.new(
         date: evaluation.debutee_le,
         beneficiaire: evaluation.beneficiaire.nom,
-        structure: restitution_globale.evaluation.structure
+        structure: evaluation.structure
       ))
     end
     div class: "page__contenu" do
@@ -17,7 +17,7 @@ div class: "evaluation-evapro" do
         div class: "evaluation-evapro__titre-container" do
           h1 evaluation.diagnostic_pro.titre, class: "evaluation-evapro__titre"
           if pourcentage_risque
-            url = admin_evaluation_path(evaluation, format: :pdf)
+            url = admin_evaluation_evapro_path(evaluation, format: :pdf)
             render(BoutonDsfrComponent.new(
               url,
               type: :primary,

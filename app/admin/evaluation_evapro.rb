@@ -42,7 +42,7 @@ ActiveAdmin.register EvaluationEvapro do
   sidebar " ", only: :index do
     render partial: "sidebar_structure",
       locals: {
-        structure: structure
+        structure: current_compte.structure
       }
   end
 
@@ -76,8 +76,6 @@ ActiveAdmin.register EvaluationEvapro do
 
     helper_method :restitution_globale, :completude, :parties,
                   :restitution_pour_situation, :statistiques,
-                  :campagnes_accessibles, :beneficiaires_possibles,
-                  :comptes_externes_possibles, :structure,
                   :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
                   :recommandation_risque_pour_xls,
                   :impact_evapro_pour_xls, :score_cout_pour_xls
@@ -128,10 +126,6 @@ ActiveAdmin.register EvaluationEvapro do
 
     before_action only: :show do
       flash.now[:evaluation_anonyme] = t(".evaluation_anonyme") if resource.anonyme?
-    end
-
-    def structure
-      current_compte.structure
     end
 
     def syntheses_evapro_par_evaluation_id
@@ -205,18 +199,6 @@ ActiveAdmin.register EvaluationEvapro do
 
     def parties
       Partie.where(evaluation_id: resource).includes(:situation).order(:created_at)
-    end
-
-    def campagnes_accessibles
-      @campagnes_accessibles ||= Campagne.accessible_by(current_ability)
-    end
-
-    def comptes_externes_possibles
-      @comptes_externes_possibles ||= resource.comptes_externes_possibles
-    end
-
-    def beneficiaires_possibles
-      @beneficiaires_possibles ||= resource.beneficiaires_possibles
     end
   end
 end

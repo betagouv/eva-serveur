@@ -1,0 +1,8 @@
+<div class="continuer-evaluation-evapro">
+  <p><%= t(:description, scope: [  :admin, :evaluations_evapro, :continuer_evaluation_evapro, :incomplet  ]) %></p>
+
+  <% url = impacts_presenter.incomplet_url(URL_EVA_ENTREPRISES) %>
+  <%= render BoutonDsfrComponent.new(url, type: :primary) do %>
+    <%= t(:action, scope: [  :admin, :evaluations_evapro, :continuer_evaluation_evapro, :incomplet  ]) %>
+  <% end %>
+</div>

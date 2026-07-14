@@ -88,8 +88,8 @@ class NavigationComponent < ViewComponent::Base
     return unless utilisateur_entreprise? || superadmin?
     return unless can?(:read, EvaluationEvapro)
 
-    { label: "Evapro", url: helpers.admin_evaluation_evapros_path,
-      current: evaluation_evapros_current? }
+    { label: "Evapro", url: helpers.admin_evaluations_evapro_path,
+      current: evaluations_evapro_current? }
   end
 
   def campagnes_link
@@ -366,10 +366,10 @@ class NavigationComponent < ViewComponent::Base
     (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
   end
 
-  def evaluation_evapros_current?
-    current_page?(helpers.admin_evaluation_evapros_path) ||
+  def evaluations_evapro_current?
+    current_page?(helpers.admin_evaluations_evapro_path) ||
     (
-      helpers.params[:controller] == "admin/evaluation_evapros" &&
+      helpers.params[:controller] == "admin/evaluations_evapro" &&
       helpers.params[:action] == "show"
     )
   end

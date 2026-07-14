@@ -1,6 +1,6 @@
 fr:
   admin:
-    evaluation_evapros:
+    evaluations_evapro:
       index:
         titre: "Évaluations"
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."

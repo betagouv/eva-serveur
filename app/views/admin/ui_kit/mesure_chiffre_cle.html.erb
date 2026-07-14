@@ -49,7 +49,7 @@
   <h2>Tous les risques</h2>
 
   Le composant d'affichage des risques change de couleur en fonction du pourcentage quand il passe un seuil. Cet échan ne dit rien sur la façon de calculer le taux de risque :
-  <% scope = [ :admin, :evaluation_evapros, :mesure_des_risques ] %>
+  <% scope = [ :admin, :evaluations_evapro, :mesure_des_risques ] %>
   <% [ 10, 11, 25, 26, 50, 51, 75, 100 ].each do |pourcentage| %>
     <% presenter = Evaluations::DiagnosticPro::RisquesPresenter.new(pourcentage_risque: pourcentage) %>
     <div class="fr-mb-5w">
@@ -79,7 +79,7 @@
       <%= render Evaluation::MesureChiffreCleComponent.new(
         palier: presenter.lettre(:score_cout),
         chiffre: contenu_cout[:titre],
-        suffixe: t("admin.evaluation_evapros.impact_couts.suffixe_masse_salariale"),
+        suffixe: t("admin.evaluations_evapro.impact_couts.suffixe_masse_salariale"),
         explications: {
           texte: contenu_cout[:texte],
           suite: contenu_cout[:suite]

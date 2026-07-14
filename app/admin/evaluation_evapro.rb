@@ -8,7 +8,7 @@ ActiveAdmin.register EvaluationEvapro do
   config.sort_order = "created_at_desc"
 
   filter :beneficiaire_id,
-         label: I18n.t("admin.evaluation_evapros.index.colonne_par"),
+         label: I18n.t("admin.evaluations_evapro.index.colonne_par"),
          as: :search_select_filter,
          url: proc { admin_beneficiaires_path },
          fields: %i[nom],
@@ -93,7 +93,7 @@ ActiveAdmin.register EvaluationEvapro do
 
     def render_pdf
       html_content = render_to_string(
-        template: "admin/evaluation_evapros/show",
+        template: "admin/evaluations_evapro/show",
         layout: "application",
         locals: { resource: resource }
       )

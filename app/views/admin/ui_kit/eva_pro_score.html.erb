@@ -49,7 +49,7 @@
       <h3>niveau <%= score %></h3>
       <% synthese = Evaluations::DiagnosticPro::ImpactsPresenter::INTERPRETATIONS
         .each_with_object({}) { |interpretation, synthese| synthese[interpretation] = score } %>
-      <%= render partial: "admin/evaluations/evapro/mesure_des_impacts_chart",
+      <%= render partial: "admin/evaluation_evapros/mesure_des_impacts_chart",
         locals: { synthese: synthese, interpretations_impact: synthese.keys } %>
     <% end %>
 

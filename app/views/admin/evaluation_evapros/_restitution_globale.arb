@@ -32,7 +32,7 @@ div class: "evaluation-evapro" do
       if diag_risques_entreprise && pourcentage_risque
         risques_presenter = restitution_pro.risques_presenter
         render(
-          partial: "admin/evaluations/evapro/mesure_des_risques",
+          partial: "admin/evaluation_evapros/mesure_des_risques",
           locals: { risques_presenter: risques_presenter, pdf: pdf }
         )
       end
@@ -41,7 +41,7 @@ div class: "evaluation-evapro" do
         evaluation_impact_general = restitution_pro.evaluation_impact_general
         impacts_presenter = restitution_pro.impacts_presenter(evaluation_id: evaluation.id)
         render(
-          partial: "admin/evaluations/evapro/mesure_des_impacts",
+          partial: "admin/evaluation_evapros/mesure_des_impacts",
           locals: {
             evaluation_impact_general: evaluation_impact_general,
             impacts_presenter: impacts_presenter,
@@ -55,12 +55,12 @@ div class: "evaluation-evapro" do
             i18n: self
           )
           render(
-            partial: "admin/evaluations/evapro/impact_couts",
+            partial: "admin/evaluation_evapros/impact_couts",
             locals: { couts_presenter: couts_presenter }
           )
         else
           render(
-            partial: "admin/evaluations/evapro/continuer_evaluation_evapro",
+            partial: "admin/evaluation_evapros/continuer_evaluation_evapro",
             locals: {
               impacts_presenter: impacts_presenter
             }
@@ -81,7 +81,7 @@ div class: "evaluation-evapro" do
       end
       div class: "page__contenu" do
         render(
-          partial: "admin/evaluations/evapro/bilan_evapro",
+          partial: "admin/evaluation_evapros/bilan_evapro",
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
             palier_bilan: restitution_pro.palier_bilan,
@@ -91,7 +91,7 @@ div class: "evaluation-evapro" do
         )
 
         render(
-          partial: "admin/evaluations/evapro/aller_plus_loin",
+          partial: "admin/evaluation_evapros/aller_plus_loin",
           locals: { pdf: pdf }
         )
       end

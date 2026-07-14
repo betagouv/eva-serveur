@@ -19,12 +19,12 @@
       <h3 class="couts__graphiques-titre"><%= t(".titre_graphiques") %></h3>
 
       <div class="couts__colonnes">
-        <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+        <%= render partial: "admin/evaluation_evapros/impact_couts_indicateur", locals: {
           indicateur: :score_strategie,
           theme: :color,
           presenter: couts_presenter
         } %>
-        <%= render partial: "admin/evaluations/evapro/impact_couts_indicateur", locals: {
+        <%= render partial: "admin/evaluation_evapros/impact_couts_indicateur", locals: {
           indicateur: :score_numerique,
           theme: :blue,
           presenter: couts_presenter

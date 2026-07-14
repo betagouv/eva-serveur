@@ -8,7 +8,7 @@ else
 
   context.instance_eval do
     column :beneficiaire, class: "evaluation__col-beneficiaire" do |evaluation|
-      render partial: "admin/evaluations/evapro/beneficiaire", locals: { evaluation: evaluation }
+      render partial: "admin/evaluation_evapros/beneficiaire", locals: { evaluation: evaluation }
     end
 
     if affiche_colonne_structure?

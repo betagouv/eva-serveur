@@ -14,11 +14,11 @@ module Evaluations
         score = @synthese[:score_cout]
         {
           titre: @i18n.t(
-            "admin.evaluation_evapros.impact_couts.contenu_cout.titre.#{score}"
+            "admin.evaluations_evapro.impact_couts.contenu_cout.titre.#{score}"
           ),
-          texte: @i18n.t("admin.evaluation_evapros.impact_couts.contenu_cout.texte.#{score}"),
+          texte: @i18n.t("admin.evaluations_evapro.impact_couts.contenu_cout.texte.#{score}"),
           suite: @i18n.t(
-            "admin.evaluation_evapros.impact_couts.contenu_cout.suite.#{score}"
+            "admin.evaluations_evapro.impact_couts.contenu_cout.suite.#{score}"
           )
         }
       end

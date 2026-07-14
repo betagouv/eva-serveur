@@ -4,11 +4,11 @@
 
   <% if synthese.values.compact.present? %>
     <div id="evaluation-impact-general">
-      <h2 class="evaluation__titre"><%= t(:titre, scope: [  :admin, :evaluation_evapros, :mesure_des_impacts  ]) %></h2>
+      <h2 class="evaluation__titre"><%= t(:titre, scope: [  :admin, :evaluations_evapro, :mesure_des_impacts  ]) %></h2>
       <div class="fr-pb-0">
         <div class="evaluation-impact-general__resultats">
 
-          <%= render partial: "admin/evaluation_evapros/mesure_des_impacts_chart",
+          <%= render partial: "admin/evaluations_evapro/mesure_des_impacts_chart",
                       locals: { synthese: synthese, interpretations_impact: interpretations_impact } %>
         </div>
       </div>

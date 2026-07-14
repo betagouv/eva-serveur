@@ -77,7 +77,7 @@ ActiveAdmin.register Evaluation do
   form partial: "form"
 
   sidebar " ", only: :show, if: proc { resource.evapro? } do
-    render partial: "admin/evaluation_evapros/sidebar_evaluation",
+    render partial: "admin/evaluations_evapro/sidebar_evaluation",
       locals: {
         evaluation: resource
       }
@@ -106,7 +106,7 @@ ActiveAdmin.register Evaluation do
 
   sidebar " ", class: "evaluation-evapro", only: :index, if: proc {
     current_compte.utilisateur_entreprise? } do
-           render partial: "admin/evaluation_evapros/sidebar_structure",
+           render partial: "admin/evaluations_evapro/sidebar_structure",
                  locals: {
                    structure: structure
                  }

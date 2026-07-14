@@ -1,0 +1,5 @@
+<div id="evaluation-aller-plus-loin" class="evaluation-aller-plus-loin">
+  <h2 class="evaluation__titre fr-mb-0"><%= t(:titre, scope: [  :admin, :evaluations_evapro, :aller_plus_loin  ]) %></h2>
+  <%= render "admin/evaluations_evapro/les_incontournables", pdf: local_assigns.fetch(:pdf, false) %>
+  <%= render "admin/evaluations_evapro/definitions_des_impacts" %>
+</div>

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
+describe 'admin/evaluations_evapro/_aller_plus_loin.html.erb' do
   let(:urls_incontournables_bao) do
     b = 'https://www.bao-incontournables.fr'
     [
@@ -18,14 +18,14 @@ describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
   end
 
   def titres_etapes_incontournables
-    scope = %i[admin evaluation_evapros aller_plus_loin etapes]
+    scope = %i[admin evaluations_evapro aller_plus_loin etapes]
     %i[
       informe implique repere plan_actions passe_commande co_construis forme_salaries evalue_projet
     ].map { |cle| I18n.t(cle, scope: scope) }
   end
 
   it "affiche les 8 etapes des incontournables dans l'ordre" do
-    render partial: 'admin/evaluation_evapros/aller_plus_loin'
+    render partial: 'admin/evaluations_evapro/aller_plus_loin'
 
     fragment = Nokogiri::HTML.fragment(rendered)
     cartes = fragment.css('.incontournables-etapes .incontournables-card')
@@ -43,7 +43,7 @@ describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
 
     premiere = cartes.first
     texte = premiere.at_css('.incontournables-card__en-savoir-plus-texte')
-    en_savoir = I18n.t('admin.evaluation_evapros.aller_plus_loin.etapes.en_savoir_plus')
+    en_savoir = I18n.t('admin.evaluations_evapro.aller_plus_loin.etapes.en_savoir_plus')
     expect(texte.text.strip).to eq(en_savoir)
     expect(premiere.at_css('.incontournables-card__en-savoir-plus a')).to be_nil
     expect(premiere['href']).to eq(urls_incontournables_bao.first)
@@ -53,7 +53,7 @@ describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
   end
 
   it "en PDF, affiche les cartes compactes sans lien" do
-    render partial: "admin/evaluation_evapros/aller_plus_loin", locals: { pdf: true }
+    render partial: "admin/evaluations_evapro/aller_plus_loin", locals: { pdf: true }
 
     fragment_pdf = Nokogiri::HTML.fragment(rendered)
     cartes_pdf = fragment_pdf.css(".incontournables-etapes .incontournables-card")
@@ -66,7 +66,7 @@ describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
     expect(numero.text.strip).to eq("01")
     titre = cartes_pdf.first.at_css(".incontournables-card--pdf__conteneur--textes-titre")
     expect(titre.text.strip).to eq(
-      I18n.t(:informe, scope: %i[admin evaluation_evapros aller_plus_loin etapes])
+      I18n.t(:informe, scope: %i[admin evaluations_evapro aller_plus_loin etapes])
     )
   end
 end

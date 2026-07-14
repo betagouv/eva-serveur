@@ -11,14 +11,14 @@
     <div class="fr-col-12 fr-col-md-3">
       <%= render IncontournablesEtapeCardComponent.new(
             numero: "01",
-            titre: I18n.t("admin.evaluation_evapros.aller_plus_loin.etapes.informe"),
+            titre: I18n.t("admin.evaluations_evapro.aller_plus_loin.etapes.informe"),
             image_path: "incontournables/jinforme 1.svg",
             couleur_texte: "#3272AD",
             couleur_fond: "#DCE2E7",
             image_alt: I18n.t(
-              "admin.evaluation_evapros.aller_plus_loin.image_alt_etape",
+              "admin.evaluations_evapro.aller_plus_loin.image_alt_etape",
               numero: "01",
-              titre: I18n.t("admin.evaluation_evapros.aller_plus_loin.etapes.informe")
+              titre: I18n.t("admin.evaluations_evapro.aller_plus_loin.etapes.informe")
             ),
             url: "https://www.bao-incontournables.fr/etape-1-informer/"
           ) %>
@@ -27,5 +27,5 @@
 
   <h2>Grille des 8 étapes (comme sur la restitution)</h2>
 
-  <%= render "admin/evaluation_evapros/les_incontournables_etapes" %>
+  <%= render "admin/evaluations_evapro/les_incontournables_etapes" %>
 </div>

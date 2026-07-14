@@ -26,6 +26,6 @@ class IncontournablesEtapeCardComponent < ViewComponent::Base
   end
 
   def en_savoir_plus_label
-    I18n.t("admin.evaluation_evapros.aller_plus_loin.etapes.en_savoir_plus")
+    I18n.t("admin.evaluations_evapro.aller_plus_loin.etapes.en_savoir_plus")
   end
 end

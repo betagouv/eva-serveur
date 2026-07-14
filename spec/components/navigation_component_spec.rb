@@ -151,7 +151,7 @@ RSpec.describe NavigationComponent, type: :component do
     it "n'affiche que le lien Evapro parmi les évaluations" do
       render_inline(component)
 
-      expect(page).to have_link("Évaluations", href: "/admin/evaluation_evapros")
+      expect(page).to have_link("Évaluations", href: "/admin/evaluations_evapro")
       expect(page).not_to have_link("Eva", visible: :all)
       expect(page).not_to have_link(href: "/admin/evaluations")
       expect(page).not_to have_link("Campagnes")

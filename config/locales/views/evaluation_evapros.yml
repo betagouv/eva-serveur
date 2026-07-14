@@ -1,0 +1,253 @@
+fr:
+  admin:
+    evaluation_evapros:
+      index:
+        titre: "Évaluations"
+        texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
+        colonne_par: Par
+        colonne_date: Date
+        colonne_taux_risque: "Taux de risque"
+        colonne_couts: Coûts
+        voir_detail: "Voir le détail"
+      impact_couts:
+        titre: "Coûts potentiels dans votre structure"
+        suffixe_masse_salariale: "de votre masse salariale"
+        titre_graphiques: "Pourquoi ça me coûte ? Pourquoi ne pas agir pénalise ma structure ?"
+        contenu_cout:
+          titre:
+            faible: "1 %"
+            moyen: "2 %"
+            fort: "3 à 4 %"
+            tres_fort: "5 à 6 %"
+          texte:
+            faible: Ce pourcentage estime les coûts supportés par la structure lorsque certaines situations de fragilité dans les compétences de base ne sont pas repérées ni prises en compte.
+            moyen: Ce pourcentage traduit des coûts liés à des besoins en compétences lorsqu’ils sont insuffisamment accompagnés ou pris en compte au travail.
+            fort: Ce niveau révèle des coûts significatifs liés à une prise en compte insuffisante des besoins fondamentaux en compétence de base dans la structure.
+            tres_fort: Ce niveau révèle des coûts très élevés, consécutifs à des fragilités persistantes et à l’absence de politiques efficaces de développement des compétences de base.
+          suite:
+            faible: "À 1 %, les impacts restent contenus, mais une vigilance active demeure nécessaire. Les premières fragilités apparaissent : il est pertinent d’agir dès maintenant pour sécuriser les parcours et anticiper les besoins en compétences."
+            moyen: "À 2 %, les impacts deviennent perceptibles et les premiers signaux faibles émergent. Il est essentiel de communiquer auprès des managers et de les accompagner pour détecter et traiter ces situations avant qu’elles ne s’installent durablement."
+            fort: "Les impacts sur la qualité, la performance et la gestion deviennent significatifs. L’augmentation des erreurs, des ralentissements et des ajustements révèle des dysfonctionnements installés : une démarche structurée et un investissement ciblé dans les compétences de base deviennent indispensables pour rétablir la situation."
+            tres_fort: "Les dysfonctionnements sont désormais installés et génèrent des coûts durables. L’inaction devient plus pénalisante que l’action : il est impératif d’intervenir sans délai pour restaurer l’efficience, garantir la qualité de service et maîtriser les risques."
+      impact_couts_indicateur:
+        score_strategie:
+          question: "Quelles sont les stratégies de contournement mises en place par vos équipes ?"
+          titre_graphique: "Stratégies de contournement"
+          mention_faible: "Stratégie : impact faible"
+          mention_fort: "Stratégie : impact fort"
+          explication:
+            titre:
+              A: "**A - Peu de stratégies visibles**"
+              B: "**B - Stratégies ponctuelles**"
+              C: "**C - Stratégies instituées**"
+              D: "**D - Délégation et glissement de fonction**"
+            texte:
+              A: |
+                Les mécanismes d'adaptation existent à peine ou passent inaperçus.
+              B: |
+                Certaines situations « à risque » sont contournées de façon occasionnelle.
+              C: |
+                Les contournements et parades deviennent habituels, l'écrit est évité, l'oral est privilégié.
+              D: |
+                L'entourage est sollicité systématiquement pour les tâches impliquant de l'écrit.
+        score_numerique:
+          question: "Où en est votre structure dans une logique de transition et reconversion ?"
+          titre_graphique: "Compétences numériques de base"
+          mention_faible: "Numérique : impact faible"
+          mention_fort: "Numérique : impact fort"
+          explication:
+            titre:
+              A: "**A** : usage autonome et sécurisé des compétences numériques de base"
+              B: "**B** : usage opérationnel mais irrégulier des compétences numériques de base"
+              C: "**C** : usage fragile nécessitant des ajustements fréquents"
+              D: "**D** : usage dépendant, reposant sur le soutien du collectif"
+            texte:
+              A: ""
+              B: ""
+              C: ""
+              D: ""
+      bilan_evapro:
+        titre: "Bilan : votre situation"
+        explication: "Si les résultats vous semblent étonnants ou sont contradictoires entre le taux du risque et le coût : Peut-être devriez-vous parler avec d'autres acteurs de votre structure pour confronter vos résultats au questionnaire."
+        opco_titre: "Et ensuite ? Contactez votre opérateur de compétences"
+        opco_sous_titre: "Votre opérateur de compétences peut vous aider à identifier les solutions adaptées pour mettre en place des actions concrètes."
+        offre_services_titre: "L'offre de services %{nom} :"
+        offre_services_lien: "Accéder à l'offre de services"
+      aller_plus_loin:
+        titre: "Aller plus loin"
+        image_alt: "Focus incontournable"
+        image_alt_etape: "Illustration étape %{numero} : %{titre}"
+        explication_html: "<strong>« Les Incontournables »</strong> constituent une boite à outils à destination des entreprises, opérateur de compétences et organismes de formation pour accompagner les salarié(e)s en difficultés avec les compétences de base vers la formation et sécuriser leur parcours."
+        lien_texte: "www.bao-incontournables.fr"
+        etapes:
+          en_savoir_plus: "En savoir plus"
+          informe: "Je m’informe"
+          implique: "J’implique"
+          repere: "Je repère et j’identifie les besoins"
+          plan_actions: "J’élabore mon plan d’actions"
+          passe_commande: "Je passe commande ou je réponds à la commande"
+          co_construis: "Je co-construis l’offre de formation"
+          forme_salaries: "Je forme les salariés"
+          evalue_projet: "J’évalue le projet"
+        titre_definitions: "Définitions des impacts"
+        performance_collective:
+          titre: "Performance collective : "
+          description: "cet indicateur reflète l’impact de l’illettrisme sur la performance globale de l’entreprise, en termes de qualité, de productivité, de coopération et d’efficacité opérationnelle."
+        agilite_organisationnelle:
+          titre: "Agilité organisationnelle : "
+          description: "cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
+        securite_qualite:
+          titre: "Sécurité et qualité : "
+          description: "cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+        mobilite_professionnelle:
+          titre: "Mobilité professionnelle : "
+          description: "cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
+      mesure_des_risques:
+        titre: "Analyse des risques liés aux compétences de base dans votre structure"
+        prefixe: "Taux de risque"
+        explication:
+          texte:
+            A: |
+              Vos résultats indiquent que votre structure ne présente pas, à ce
+              stade, de signes préoccupants en matière de maîtrise des
+              compétences de base. Ce niveau de risque ne doit toutefois pas
+              conduire à relâcher votre vigilance.
+            B: |
+              Vos résultats suggèrent l’émergence de premières fragilités :
+              certaines personnes peuvent percevoir l’évolution des exigences
+              professionnelles comme un facteur de difficulté ou d’incertitude.
+            C: |
+              Vos résultats mettent en évidence un risque significatif de
+              présence, au sein de vos équipes, de personnes en difficulté avec
+              les compétences de base ou en situation d’insécurité
+              professionnelle face aux évolutions des exigences (numérique, IA,
+              qualité, sécurité, etc.).
+            D: |
+              Vos résultats révèlent une présence importante de professionnels
+              en difficulté avec les compétences de base indispensables à leurs
+              missions. Ces situations ont des impacts directs sur l’activité,
+              la structure et la performance.
+          suite:
+            A: |
+              **Action** :  
+              Maintenez une démarche préventive et poursuivez le développement
+              des compétences afin d’anticiper les évolutions du travail et
+              d'éviter l’apparition de fragilités.
+            B: |
+              **Action** :  
+              Renforcez votre veille interne, sensibilisez les managers et
+              consolidez vos actions préventives afin d’identifier et de
+              traiter ces situations avant leur installation.
+            C: |
+              **Action** :  
+              Engagez rapidement une démarche structurée : identification des
+              besoins, sécurisation des parcours et adaptation des situations
+              de travail.
+            D: |
+              **Action** :  
+              Une intervention immédiate et coordonnée est nécessaire :
+              réalisez un diagnostic approfondi, mobilisez des partenaires
+              spécialisés (OPCO, ANFH, CNFPT, ANLCI…) et déployez sans délai
+              des actions d’accompagnement adaptées.
+      mesure_des_impacts:
+        titre: Impacts potentiels dans votre structure
+        chart:
+          aria_label: "Niveau d'impact par thématique"
+        labels:
+          performance_collective: "Performance collective"
+          agilite_organisationnelle: "Agilité organisationnelle"
+          securite_qualite: "Sécurité et qualité"
+          mobilite_professionnelle: "Mobilité professionnelle"
+        levels:
+          faible: "Faible"
+          moyen: "Moyen"
+          fort: "Fort"
+          tres_fort: "Très fort"
+        descriptions:
+          performance_collective:
+            faible: Pas d’impact significatif sur la performance des collectifs de travail.
+            moyen: Les obstacles à la performance collective peuvent être levés en renforçant les compétences de base de vos équipes.
+            fort: La performance des collectifs de travail est en deçà de son potentiel. Pour la faire progresser, une action déterminée de développement des compétences de base s’impose.
+            tres_fort: Il existe des dysfonctionnements importants dans la performance collective qui nécessitent une action rapide de développement des compétences de base.
+          agilite_organisationnelle:
+            faible: "Pas d’incidence sur la capacité de vos collectifs à évoluer dans le temps."
+            moyen: "L’accompagnement de vos équipes est nécessaire pour déployer vos projets technologiques ou structurels sans obstacle."
+            fort: "L’agilité de votre structure est limitée. L’engagement d’une action en faveur du développement des compétences de base est de rigueur."
+            tres_fort: "Il existe des blocages à l’évolution de vos pratiques et de votre structure. Il est urgent d’agir."
+          securite_qualite:
+            faible: "Pas de risque identifié en l’état actuel. Restez attentif."
+            moyen: "La capacité de votre structure à respecter les cahiers des charges, les règles et les consignes est interrogée."
+            fort: "Le respect des règles et des consignes de travail n’est pas garanti. Cela occasionne des insatisfactions en interne et en externe."
+            tres_fort: "Il existe des risques en matière de sécurité (personnes et données). Il est indispensable de mettre en place un plan d’action."
+          mobilite_professionnelle:
+            faible: "Pas ou peu d'impact sur la performance sociale de votre structure. Poursuivez votre politique de développement des compétences."
+            moyen: "Le niveau d’absentéisme de votre structure peut être amélioré grâce au développement des compétences de base de vos collaborateurs."
+            fort: "Les répercussions sur les indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale) sont importantes. Un plan de développement des compétences de base est nécessaire."
+            tres_fort: "Les indicateurs sociaux (absentéisme, accident du travail, augmentation de la masse salariale) sont dégradés. Une action volontariste en matière de développement des compétences de base contribuera à leur amélioration."
+        definitions:
+          titre: "Définitions"
+          performance_collective:
+            titre: "Performance collective"
+            description: "Cet indicateur reflète l’impact de l’illettrisme sur la performance globale de l’entreprise, en termes de qualité, de productivité, de coopération et d’efficacité opérationnelle."
+          agilite_organisationnelle:
+            titre: "Agilité organisationnelle"
+            description: "Cet indicateur mesure la capacité de l’entreprise à s’adapter aux évolutions (organisation, outils, méthodes) face aux situations d’illettrisme."
+          securite_qualite:
+            titre: "Sécurité et qualité"
+            description: "Cet indicateur évalue les risques pour la sécurité et la qualité liés à l’illettrisme : compréhension des consignes, respect des procédures, usage des équipements et fiabilité des productions."
+          mobilite_professionnelle:
+            titre: "Mobilité professionnelle"
+            description: "Cet indicateur mesure dans quelle mesure l’illettrisme limite les perspectives de mobilité et d’évolution professionnelle des salariés (changement de poste, montée en compétences, reconversion)."
+        performance_collective:
+          callout:
+            titre:
+              faible: Votre performance collective est faible
+              moyen: Votre performance collective est moyenne
+              fort: Votre performance collective est forte
+              tres_fort: Votre performance collective est très forte
+        agilite_organisationnelle:
+          callout:
+            titre:
+              faible: Votre agilité organisationelle est faible
+              moyen: Votre agilité organisationelle est moyenne
+              fort: Votre agilité organisationelle est forte
+              tres_fort: Votre agilité organisationelle est très forte
+        securite_qualite:
+          callout:
+            titre:
+              faible: Votre sécurité - qualité est faible
+              moyen: Votre sécurité - qualité est moyenne
+              fort: Votre sécurité - qualité est forte
+              tres_fort: Votre sécurité - qualité est très forte
+        mobilite_professionnelle:
+          callout:
+            titre:
+              faible: Votre mobilité professionnelle est faible
+              moyen: Votre mobilité professionnelle est moyenne
+              fort: Votre mobilité professionnelle est forte
+              tres_fort: Votre mobilité professionnelle est très forte
+        score_cout:
+          callout:
+            titre:
+              faible: "Impact sur les coûts : Faible"
+              moyen: "Impact sur les coûts : Moyen"
+              fort: "Impact sur les coûts : Fort"
+              tres_fort: "Impact sur les coûts : Très fort"
+        score_strategie:
+          callout:
+            titre:
+              faible: "Impact sur les stratégies : Faible"
+              moyen: "Impact sur les stratégies : Moyen"
+              fort: "Impact sur les stratégies : Fort"
+              tres_fort: "Impact sur les stratégies : Très fort"
+        score_numerique:
+          callout:
+            titre:
+              faible: "Impact sur le numérique : Faible"
+              moyen: "Impact sur le numérique : Moyen"
+              fort: "Impact sur le numérique : Fort"
+              tres_fort: "Impact sur le numérique : Très fort"
+      continuer_evaluation_evapro:
+        incomplet:
+          description: Complétez le questionnaire pour approfondir le diagnostic
+          action: Continuer le diagnostic

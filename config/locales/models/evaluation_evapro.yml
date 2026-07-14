@@ -1,0 +1,6 @@
+fr:
+  active_admin:
+    resources:
+      evaluation_evapro:
+        edit_model: Modifier
+        delete_model: Supprimer

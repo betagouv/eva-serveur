@@ -99,9 +99,6 @@ fr:
       evaluation:
         edit_model: Modifier
         delete_model: Supprimer
-      evaluation_evapro:
-        edit_model: Modifier
-        delete_model: Supprimer
     xls:
       evaluation:
         structure: Structure

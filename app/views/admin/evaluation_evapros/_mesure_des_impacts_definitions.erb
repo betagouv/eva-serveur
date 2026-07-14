@@ -1,7 +1,7 @@
-<% defs = t("admin.evaluations.mesure_des_impacts.definitions", default: {}) %>
+<% defs = t("admin.evaluation_evapros.mesure_des_impacts.definitions", default: {}) %>
 <% if defs.present? %>
   <div class="impact-definitions fr-pt-4v fr-pb-4v">
-    <h2><%= t("admin.evaluations.mesure_des_impacts.definitions.titre") %></h2>
+    <h2><%= t("admin.evaluation_evapros.mesure_des_impacts.definitions.titre") %></h2>
     <div class="impact-definitions__grid">
       <% items = [
         [ :performance_collective, "fr-icon-team-line" ],
@@ -14,9 +14,9 @@
         <div class="impact-definition">
           <p class="impact-definition__heading">
             <span class="<%= icon %> fr-icon-sm impact-definition__icon" aria-hidden="true"></span>
-            <span class="impact-definition__title"><%= t("admin.evaluations.mesure_des_impacts.definitions.#{key}.titre") %></span>
+            <span class="impact-definition__title"><%= t("admin.evaluation_evapros.mesure_des_impacts.definitions.#{key}.titre") %></span>
           </p>
-          <p class="impact-definition__description"><%= t("admin.evaluations.mesure_des_impacts.definitions.#{key}.description") %></p>
+          <p class="impact-definition__description"><%= t("admin.evaluation_evapros.mesure_des_impacts.definitions.#{key}.description") %></p>
         </div>
       <% end %>
     </div>

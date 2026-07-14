@@ -27,7 +27,7 @@ describe IncontournablesEtapeCardComponent, type: :component do
     )
     expect(page).to have_css(
       ".incontournables-card__en-savoir-plus-texte",
-      text: I18n.t("admin.evaluations.aller_plus_loin.etapes.en_savoir_plus")
+      text: I18n.t("admin.evaluation_evapros.aller_plus_loin.etapes.en_savoir_plus")
     )
   end
 

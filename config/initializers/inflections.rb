@@ -14,6 +14,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'choix', 'choix'
   inflect.irregular 'connexion_demo', 'connexions_demo'
   inflect.irregular 'donnee_sociodemographique', 'donnees_sociodemographiques'
+  inflect.irregular 'evaluation_eva', 'evaluations_eva'
   inflect.irregular 'evaluation_evapro', 'evaluations_evapro'
   inflect.irregular 'mise_en_action', 'mises_en_action'
   inflect.irregular 'nouvelle_structure', 'nouvelles_structures'

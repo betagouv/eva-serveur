@@ -1,6 +1,7 @@
-diagnostic_pro = evaluation.diagnostic_pro.avec_restitution_globale(restitution_globale)
-diag_risques_entreprise = diagnostic_pro.diag_risques_entreprise
-pourcentage_risque = diagnostic_pro.pourcentage_risque
+evaluation = restitution_globale.evaluation
+restitution_pro = evaluation.diagnostic_pro.restitution_pro(restitution_globale)
+diag_risques_entreprise = restitution_pro.diag_risques_entreprise
+pourcentage_risque = restitution_pro.pourcentage_risque
 evaluation_impact_general = nil
 
 div class: "evaluation-evapro" do
@@ -29,7 +30,7 @@ div class: "evaluation-evapro" do
       end
 
       if diag_risques_entreprise && pourcentage_risque
-        risques_presenter = diagnostic_pro.risques_presenter
+        risques_presenter = restitution_pro.risques_presenter
         render(
           partial: "admin/evaluations/evapro/mesure_des_risques",
           locals: { risques_presenter: risques_presenter, pdf: pdf }
@@ -37,8 +38,8 @@ div class: "evaluation-evapro" do
       end
 
       if pourcentage_risque
-        evaluation_impact_general = diagnostic_pro.evaluation_impact_general
-        impacts_presenter = diagnostic_pro.impacts_presenter(evaluation_id: evaluation.id)
+        evaluation_impact_general = restitution_pro.evaluation_impact_general
+        impacts_presenter = restitution_pro.impacts_presenter(evaluation_id: evaluation.id)
         render(
           partial: "admin/evaluations/evapro/mesure_des_impacts",
           locals: {
@@ -49,8 +50,8 @@ div class: "evaluation-evapro" do
         )
 
         if evaluation.complete?
-          couts_presenter = diagnostic_pro.couts_presenter(
-            synthese: diagnostic_pro.synthese_impact_general,
+          couts_presenter = restitution_pro.couts_presenter(
+            synthese: restitution_pro.synthese_impact_general,
             i18n: self
           )
           render(
@@ -83,7 +84,7 @@ div class: "evaluation-evapro" do
           partial: "admin/evaluations/evapro/bilan_evapro",
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
-            palier_bilan: diagnostic_pro.palier_bilan,
+            palier_bilan: restitution_pro.palier_bilan,
             opco: evaluation.diagnostic_pro.opco,
             pdf: pdf
           }

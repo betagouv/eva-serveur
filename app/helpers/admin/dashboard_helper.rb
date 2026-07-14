@@ -118,13 +118,13 @@ evaluation, synthese_evapro)
 
     def pourcentage_risque_via_diagnostic_pro(evaluation)
       rg = restitution_globale_pour(evaluation)
-      rest_pro = evaluation.diagnostic_pro&.avec_restitution_globale(rg)
+      rest_pro = evaluation.diagnostic_pro&.restitution_pro(rg)
       rest_pro&.pourcentage_risque
     end
 
     def score_cout_via_diagnostic_pro(evaluation)
       rg = restitution_globale_pour(evaluation)
-      rest_pro = evaluation.diagnostic_pro&.avec_restitution_globale(rg)
+      rest_pro = evaluation.diagnostic_pro&.restitution_pro(rg)
       rest_pro&.synthese_impact_general&.dig(:score_cout)
     end
   end

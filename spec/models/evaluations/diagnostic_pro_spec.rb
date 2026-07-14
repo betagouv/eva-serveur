@@ -23,7 +23,7 @@ RSpec.describe Evaluations::DiagnosticPro do
     end
   end
 
-  describe "#avec_restitution_globale" do
+  describe "#restitution_pro" do
     it "expose les données dérivées du diagnostic entreprise via un objet testable" do
       diag = double(
         partie: double(synthese: { "pourcentage_risque" => 25 }, evenements: []),
@@ -44,7 +44,7 @@ RSpec.describe Evaluations::DiagnosticPro do
         evaluation: double(complete?: true)
       )
 
-      presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
+      presenter = described_class.new(double).restitution_pro(restitution_globale)
 
       expect(presenter.pourcentage_risque).to eq(25)
       expect(presenter.palier_risque).to eq("B")
@@ -61,7 +61,7 @@ RSpec.describe Evaluations::DiagnosticPro do
     it "garde pourcentage_risque à nil quand le diagnostic risques est absent" do
       restitution_globale = double(diag_risques_entreprise: nil, evaluation_impact_general: nil,
 evaluation: double(complete?: false))
-      presenter = described_class.new(double).avec_restitution_globale(restitution_globale)
+      presenter = described_class.new(double).restitution_pro(restitution_globale)
 
       expect(presenter.pourcentage_risque).to be_nil
       expect(presenter.palier_bilan).to be_nil

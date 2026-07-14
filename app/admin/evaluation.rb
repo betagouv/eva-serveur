@@ -76,13 +76,6 @@ ActiveAdmin.register Evaluation do
 
   form partial: "form"
 
-  sidebar " ", only: :show, if: proc { resource.evapro? } do
-    render partial: "admin/evaluations_evapro/sidebar_evaluation",
-      locals: {
-        evaluation: resource
-      }
-  end
-
   sidebar :responsable_de_suivi, only: :show, if: proc {
     !resource.evapro? && resource.responsable_suivi.present?
   } do
@@ -104,13 +97,19 @@ ActiveAdmin.register Evaluation do
     render "admin/evaluations/eva/menu_sidebar"
   end
 
-  sidebar " ", class: "evaluation-evapro", only: :index, if: proc {
-    current_compte.utilisateur_entreprise? } do
-           render partial: "admin/evaluations_evapro/sidebar_structure",
-                 locals: {
-                   structure: structure
-                 }
-     end
+  sidebar " ", only: :show, if: proc { resource.evapro? } do
+    render partial: "admin/evaluations_evapro/sidebar_evaluation",
+      locals: {
+        evaluation: resource
+      }
+  end
+
+  sidebar " ", only: :index, if: proc { current_compte.utilisateur_entreprise? } do
+    render partial: "admin/evaluations_evapro/sidebar_structure",
+      locals: {
+        structure: structure
+      }
+  end
 
   member_action :supprimer_responsable_suivi, method: :patch do
     resource.update(responsable_suivi: nil)
@@ -193,7 +192,7 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :comptes_externes_possibles, :opco_financeur, :structure,
+                  :opco_financeur, :structure,
                   :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
                   :recommandation_risque_pour_xls,
                   :impact_evapro_pour_xls, :score_cout_pour_xls
@@ -361,10 +360,6 @@ ActiveAdmin.register Evaluation do
 
     def responsables_suivi_possibles
       @responsables_suivi_possibles ||= resource.responsables_suivi
-    end
-
-    def comptes_externes_possibles
-      @comptes_externes_possibles ||= resource.comptes_externes_possibles
     end
 
     def beneficiaires_possibles

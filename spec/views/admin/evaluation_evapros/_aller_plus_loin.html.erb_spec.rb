@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
+describe 'admin/evaluation_evapros/_aller_plus_loin.html.erb' do
   let(:urls_incontournables_bao) do
     b = 'https://www.bao-incontournables.fr'
     [
@@ -25,7 +25,7 @@ describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
   end
 
   it "affiche les 8 etapes des incontournables dans l'ordre" do
-    render partial: 'admin/evaluations/evapro/aller_plus_loin'
+    render partial: 'admin/evaluation_evapros/aller_plus_loin'
 
     fragment = Nokogiri::HTML.fragment(rendered)
     cartes = fragment.css('.incontournables-etapes .incontournables-card')
@@ -53,7 +53,7 @@ describe 'admin/evaluations/evapro/_aller_plus_loin.html.erb' do
   end
 
   it "en PDF, affiche les cartes compactes sans lien" do
-    render partial: "admin/evaluations/evapro/aller_plus_loin", locals: { pdf: true }
+    render partial: "admin/evaluation_evapros/aller_plus_loin", locals: { pdf: true }
 
     fragment_pdf = Nokogiri::HTML.fragment(rendered)
     cartes_pdf = fragment_pdf.css(".incontournables-etapes .incontournables-card")

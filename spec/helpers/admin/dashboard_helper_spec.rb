@@ -144,7 +144,7 @@ RSpec.describe Admin::DashboardHelper do
 
       before do
         allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
         allow(Evaluations::DiagnosticPro::RisquesPresenter)
@@ -165,7 +165,7 @@ RSpec.describe Admin::DashboardHelper do
 
       before do
         allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end
@@ -220,7 +220,7 @@ RSpec.describe Admin::DashboardHelper do
 
       before do
         allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end
@@ -238,7 +238,7 @@ RSpec.describe Admin::DashboardHelper do
 
       before do
         allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:avec_restitution_globale).with(restitution).and_return(
+        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end

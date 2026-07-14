@@ -33,7 +33,7 @@ module Evaluations
       structure.opco
     end
 
-    def avec_restitution_globale(restitution_globale)
+    def restitution_pro(restitution_globale)
       Restitution.new(restitution_globale: restitution_globale)
     end
 

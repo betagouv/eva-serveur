@@ -1,7 +1,7 @@
 <% class_css = campagne_avec_positionnement?(:litteratie) ? "litteratie" : "numeratie" %>
 <div>
   <% if restitution_globale.evaluation.evapro? %>
-    <%= render partial: "admin/evaluation_evapros/restitution_globale", locals: { evaluation: resource, pdf: true } %>
+    <%= render partial: "admin/evaluation_evapros/restitution_globale", locals: { restitution_globale: restitution_globale, pdf: true } %>
   <% else %>
     <%= render partial: "admin/evaluations/eva/restitution_globale", locals: { restitution_globale: restitution_globale, pdf: true } %>
   <% end %>

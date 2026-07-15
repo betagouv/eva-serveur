@@ -100,7 +100,7 @@ ActiveAdmin.register EvaluationEvapro do
 
       if pdf_path == false
         flash[:error] = t(".erreur_generation_pdf")
-        redirect_to admin_evaluation_path(resource)
+        redirect_to admin_evaluation_evapro_path(resource)
       else
         envoyer_fichier(pdf_path)
       end
@@ -115,11 +115,11 @@ ActiveAdmin.register EvaluationEvapro do
 
     def destroy
       location = if request.referer&.include?("?")
-                   request.referer
+        request.referer
       elsif request.referer&.include?(admin_beneficiaire_path(resource.beneficiaire))
-                   request.referer
+        request.referer
       else
-                   admin_evaluations_path
+        admin_evaluations_evapro_path
       end
       destroy!(location: location)
     end

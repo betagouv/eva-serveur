@@ -51,10 +51,6 @@ fr:
           titre_relancer_questionnaire: "Relancer un nouveau diagnostic"
           texte_relancer_questionnaire: "Si vous le souhaitez, vous pouvez à nouveau répondre au questionnaire."
           bouton_label: "Lancer le diagnostic"
-        bloc_resultats_entreprise:
-          titre: Vos résultats
-          voir_tout: "Voir"
-          bouton_voir: "Voir"
         bloc_actualites_entreprise:
           titre: Les actualités sur eva
           voir_tout: "Voir toutes les actualités"

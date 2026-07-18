@@ -41,7 +41,8 @@ describe Structure, type: :integration do
 
       context "quand ma structure n'a pas de campagne" do
         it do
-          expect(described_class.pas_vraiment_utilisatrices).not_to include(structure_pas_utilisatrice)
+          expect(described_class.pas_vraiment_utilisatrices)
+            .not_to include(structure_pas_utilisatrice)
         end
       end
     end

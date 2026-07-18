@@ -7,7 +7,8 @@ describe Restitution::Tri::ComprehensionConsigne do
     bien_placees = jouees || 0
     bien_placees -= erreurs if erreurs
     allow(restitution).to receive_messages(termine?: termine, nombre_bien_placees: bien_placees,
-                                           nombre_mal_placees: erreurs, nombre_rejoue_consigne: relectures)
+                                           nombre_mal_placees: erreurs,
+                                           nombre_rejoue_consigne: relectures)
     described_class.new(restitution)
   end
 

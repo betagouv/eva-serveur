@@ -6,7 +6,8 @@ describe Restitution::Controle::Perseverance do
   def pour(termine: nil, nombre_pieces: nil, nombre_bien_placees: nil)
     evenements_pieces = Array.new(nombre_pieces) if nombre_pieces
     allow(restitution).to receive_messages(termine?: termine,
-                                           nombre_bien_placees: nombre_bien_placees, evenements_pieces: evenements_pieces)
+                                           nombre_bien_placees: nombre_bien_placees,
+                                           evenements_pieces: evenements_pieces)
     described_class.new(restitution)
   end
 

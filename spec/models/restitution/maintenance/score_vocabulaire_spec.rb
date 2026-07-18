@@ -35,7 +35,8 @@ describe Restitution::Maintenance::ScoreVocabulaire do
 
       it do
         allow(standardisateur).to receive_messages(
-          moyennes_metriques: { temps_moyen_mots_francais: 2.7 }, ecarts_types_metriques: { temps_moyen_mots_francais: 0.5 }
+          moyennes_metriques: { temps_moyen_mots_francais: 2.7 },
+          ecarts_types_metriques: { temps_moyen_mots_francais: 0.5 }
         )
 
         allow(metrique_score_ccf).to receive(:standardisateur).and_return(standardisateur)

@@ -9,7 +9,8 @@ describe Restitution::Inventaire::Perseverance do
     essai = double
     allow(essai).to receive(:nombre_erreurs).and_return(erreurs)
     allow(restitution).to receive_messages(essais_verifies: [ essai ],
-                                           nombre_essais_validation: nombre_essais, temps_total: secondes)
+                                           nombre_essais_validation: nombre_essais,
+                                           temps_total: secondes)
     described_class.new(restitution)
   end
 

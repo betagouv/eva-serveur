@@ -91,3 +91,6 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - spec/integrations/ability_spec.rb
+
+RSpec/ChangeByZero:
+  NegatedMatcher: not_change

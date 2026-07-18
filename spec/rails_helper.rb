@@ -34,6 +34,8 @@ require 'support/capybara'
 Sidekiq::Testing.fake!
 ActiveJob::Base.queue_adapter = :test
 
+RSpec::Matchers.define_negated_matcher :not_change, :change
+
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin

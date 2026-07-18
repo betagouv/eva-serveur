@@ -21,7 +21,8 @@ describe Restitution::Controle::ComprehensionConsigne do
 
   it 'a réécouté la consigne, a fait des erreurs en triant 10 biscuits et abandon: niveau 1' do
     allow(restitution).to receive_messages(termine?: false, abandon?: true,
-                                           nombre_rejoue_consigne: 1, nombre_loupees: 8, nombre_bien_placees: 1)
+                                           nombre_rejoue_consigne: 1,
+                                           nombre_loupees: 8, nombre_bien_placees: 1)
     expect(
       described_class.new(restitution).niveau
     ).to eql(Competence::NIVEAU_1)

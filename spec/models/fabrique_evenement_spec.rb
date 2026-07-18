@@ -64,8 +64,7 @@ describe FabriqueEvenement do
       it 'crée un évènement' do
         expect do
           described_class.new(parametres).call
-        end.to change(Partie, :count)
-          .by(0)
+        end.to not_change(Partie, :count)
           .and change(Evenement, :count)
           .by(1)
         expect(Evenement.last.partie).to eq partie
@@ -88,10 +87,8 @@ describe FabriqueEvenement do
       it 'ne crée rien' do
         expect do
           expect(described_class.new(parametres_invalide).call).to be_nil
-        end.to change(Partie, :count)
-          .by(0)
-          .and change(Evenement, :count)
-          .by(0)
+        end.to not_change(Partie, :count)
+          .and not_change(Evenement, :count)
       end
     end
 
@@ -113,10 +110,8 @@ describe FabriqueEvenement do
         described_class.new(parametres).call
         expect do
           expect(described_class.new(parametres_invalide).call).to be_nil
-        end.to change(Partie, :count)
-          .by(0)
-          .and change(Evenement, :count)
-          .by(0)
+        end.to not_change(Partie, :count)
+          .and not_change(Evenement, :count)
       end
     end
 
@@ -137,8 +132,7 @@ describe FabriqueEvenement do
           expect(described_class.new(parametres_invalide).call.persisted?).to be false
         end.to change(Partie, :count)
           .by(1)
-          .and change(Evenement, :count)
-          .by(0)
+          .and not_change(Evenement, :count)
       end
 
       it 'ne persiste pas les métriques de la partie' do

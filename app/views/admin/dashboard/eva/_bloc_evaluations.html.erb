@@ -2,7 +2,7 @@
   <div class='bloc-apercu-wrapper'>
     <div class="titre-panel-avec-bouton fr-mb-3v">
       <h3><%= t(".titre") %></h3>
-      <%= render(BoutonDsfrComponent.new(admin_evaluations_path, type: :primary, size: :md)) do %>
+      <%= render(BoutonDsfrComponent.new(admin_evaluations_eva_path, type: :primary, size: :md)) do %>
         <%= t(".voir_tout") %>
       <% end %>
     </div>
@@ -16,7 +16,7 @@
   <% evaluations.each do |evaluation| %>
     <li class="row w-100 no-gutters d-flex align-items-center position-relative fr-pb-0">
       <div class='col'>
-        <%= render(CarteComponent.new(admin_evaluation_path(evaluation))) do %>
+        <%= render(CarteComponent.new(admin_evaluation_eva_path(evaluation))) do %>
           <div class='col d-flex'>
             <span class='carte__nom'><%= render NomAnonymisableComponent.new(evaluation.beneficiaire) %></span>
           </div>

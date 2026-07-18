@@ -1,11 +1,4 @@
 ActiveAdmin.register Campagne do
-  menu priority: 3,
-       if: proc {
-         current_compte.structure_id.present? &&
-         can?(:read, Campagne) &&
-         !current_compte.utilisateur_entreprise?
-       }
-
   permit_params :libelle, :code, :compte, :active, :privee,
                 :compte_id, :affiche_competences_fortes, :parcours_type_id, :type_programme,
                 options_personnalisation: [],
@@ -55,9 +48,15 @@ ActiveAdmin.register Campagne do
   end
 
   action_item :voir_evaluations, only: :show do
+    chemin_evaluations = if resource.parcours_type&.diagnostic_entreprise?
+      admin_evaluations_evapro_path(q: { campagne_id_eq: resource })
+    else
+      admin_evaluations_eva_path(q: { campagne_id_eq: resource })
+    end
+
     link_to I18n.t("admin.campagnes.action_items.voir_evaluations",
            count: Evaluation.where(campagne: resource).count),
-           admin_evaluations_path(q: { campagne_id_eq: resource })
+           chemin_evaluations
   end
 
   action_item :parametres, only: :show, class: "action_item--sidebar-parametres" do

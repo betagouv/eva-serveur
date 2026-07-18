@@ -4,3 +4,17 @@ fr:
       evaluation_evapro:
         edit_model: Modifier
         delete_model: Supprimer
+    xls:
+      evaluation_evapro:
+        structure: Structure
+        campagne: Campagne
+        debutee_le: Date
+        par: Par
+        completude: Passation complète ?
+        taux_risque: Taux de risque
+        performance_collective: Performance collective
+        agilite_organisationnelle: Agilité organisationnelle
+        securite_qualite: Sécurité et qualité
+        mobilite_professionnelle: Mobilité professionnelle
+        score_cout: Coûts
+        bilan_situation: Bilan de votre situation

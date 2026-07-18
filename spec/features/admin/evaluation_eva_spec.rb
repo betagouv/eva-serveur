@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'pdf/reader'
 
-describe 'Admin - Evaluation', type: :feature do
+describe 'Admin - Evaluation eva', type: :feature do
   before { Bullet.enable = false }
 
   after { Bullet.enable = true }
@@ -17,27 +17,18 @@ describe 'Admin - Evaluation', type: :feature do
   describe '#show' do
     before { connecte(mon_compte) }
 
-    context "branche d'affichage Eva vs Eva Pro" do
-      let(:evaluation_eva) { create(:evaluation, campagne: ma_campagne) }
-      let(:campagne_evapro) { create(:campagne, :avec_parcours_evapro, compte: mon_compte) }
-      let(:evaluation_evapro) { create(:evaluation, campagne: campagne_evapro) }
+    context "branche d'affichage Eva" do
+      let(:evaluation_eva) { create(:evaluation, :eva, campagne: ma_campagne) }
 
-      it "affiche la vue Eva classique pour une évaluation bénéficiaire" do
-        visit admin_evaluation_path(evaluation_eva)
+      it "affiche une évaluation eva" do
+        visit admin_evaluation_eva_path(evaluation_eva)
 
         expect(page).to have_css(".evaluation__restitution-globale")
-        expect(page).not_to have_css(".evaluation-evapro")
-      end
-
-      it "affiche la vue Eva Pro pour un diagnostic entreprise" do
-        visit admin_evaluation_path(evaluation_evapro)
-
-        expect(page).to have_css(".evaluation-evapro")
       end
     end
 
     context 'situation plan de la ville' do
-      let!(:mon_evaluation_plan_de_la_ville) { create :evaluation, campagne: campagne }
+      let!(:mon_evaluation_plan_de_la_ville) { create :evaluation, :eva, campagne: campagne }
       let!(:partie) do
         create :partie, situation: plan_de_la_ville, evaluation: mon_evaluation_plan_de_la_ville
       end
@@ -57,7 +48,7 @@ describe 'Admin - Evaluation', type: :feature do
         before do
           create :evenement_demarrage, partie: partie
           create :evenement_fin_situation, partie: partie
-          visit admin_evaluation_path(mon_evaluation_plan_de_la_ville)
+          visit admin_evaluation_eva_path(mon_evaluation_plan_de_la_ville)
         end
 
         it 'affiche une restitution' do
@@ -71,14 +62,14 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it "n'affiche pas de restitution si la situation n'est par terminée" do
-          visit admin_evaluation_path(mon_evaluation_plan_de_la_ville)
+          visit admin_evaluation_eva_path(mon_evaluation_plan_de_la_ville)
           expect(page).not_to have_content 'Maîtrise des fondamentaux de l’informatique'
         end
       end
     end
 
     context 'situation bienvenue' do
-      let!(:mon_evaluation_bienvenue) { create :evaluation, campagne: campagne_bienvenue }
+      let!(:mon_evaluation_bienvenue) { create :evaluation, :eva, campagne: campagne_bienvenue }
       let!(:partie_bienvenue) do
         create :partie, situation: bienvenue, evaluation: mon_evaluation_bienvenue
       end
@@ -99,7 +90,7 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it 'affiche les données données sociodémographqiues par défaut' do
-          visit admin_evaluation_path(mon_evaluation_bienvenue)
+          visit admin_evaluation_eva_path(mon_evaluation_bienvenue)
           expect(page).to have_content 'Situation'
           expect(page).to have_content 'Scolarité'
           expect(page).not_to have_content 'auto-positionnement'
@@ -114,7 +105,7 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it "affiche l'auto_positionnement en plus" do
-          visit admin_evaluation_path(mon_evaluation_bienvenue)
+          visit admin_evaluation_eva_path(mon_evaluation_bienvenue)
           expect(page).to have_content 'auto-positionnement'
           expect(page).to have_content 'Roger'
         end
@@ -122,7 +113,7 @@ describe 'Admin - Evaluation', type: :feature do
     end
 
     context 'situation cafe de la place' do
-      let!(:mon_evaluation_litteratie) { create :evaluation, campagne: campagne }
+      let!(:mon_evaluation_litteratie) { create :evaluation, :eva, campagne: campagne }
       let!(:partie) do
         create :partie, situation: cafe_de_la_place, evaluation: mon_evaluation_litteratie
       end
@@ -136,19 +127,19 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       it "n'affiche pas le bloc litteratie par défaut" do
-        visit admin_evaluation_path(mon_evaluation_litteratie)
+        visit admin_evaluation_eva_path(mon_evaluation_litteratie)
         expect(page).not_to have_content 'Communiquer en français - Littératie'
       end
 
       it 'affiche le bloc litteratie si la situation est présente' do
         campagne.situations_configurations.create situation: cafe_de_la_place
-        visit admin_evaluation_path(mon_evaluation_litteratie)
+        visit admin_evaluation_eva_path(mon_evaluation_litteratie)
         expect(page).to have_content 'Communiquer en français - Littératie'
       end
     end
 
     context 'situation place du marché' do
-      let!(:mon_evaluation_numeratie) { create :evaluation, campagne: campagne }
+      let!(:mon_evaluation_numeratie) { create :evaluation, :eva, campagne: campagne }
       let!(:partie) do
         create :partie, situation: place_du_marche, evaluation: mon_evaluation_numeratie
       end
@@ -164,7 +155,7 @@ describe 'Admin - Evaluation', type: :feature do
       end
 
       it 'affiche le bloc numératie' do
-        visit admin_evaluation_path(mon_evaluation_numeratie)
+        visit admin_evaluation_eva_path(mon_evaluation_numeratie)
         expect(page).to have_http_status(:success)
       end
     end
@@ -173,6 +164,7 @@ describe 'Admin - Evaluation', type: :feature do
       let(:role) { 'admin' }
       let!(:mon_evaluation) do
         create :evaluation,
+               :eva,
                campagne: ma_campagne,
                created_at: 3.days.ago,
                synthese_competences_de_base: :ni_ni
@@ -183,37 +175,39 @@ describe 'Admin - Evaluation', type: :feature do
       let(:restitution) { Restitution::Inventaire.new(ma_campagne, [ evenement ]) }
 
       it "n'affiche pas les situations jouées" do
-        visit admin_evaluation_path(mon_evaluation)
+        visit admin_evaluation_eva_path(mon_evaluation)
         expect(page).not_to have_content 'Selection Situation'
         expect(page).not_to have_content 'Inventaire'
       end
 
       it 'restitution sans auto_positionnement' do
-        visit admin_evaluation_path(mon_evaluation)
+        visit admin_evaluation_eva_path(mon_evaluation)
         expect(page).not_to have_content 'auto-positionnement'
         expect(page).to have_content 'Roger'
       end
 
       it 'restitution sans plan de la ville' do
-        visit admin_evaluation_path(mon_evaluation)
+        visit admin_evaluation_eva_path(mon_evaluation)
         expect(page).not_to have_content 'Maîtrise des fondamentaux de l’informatique'
       end
 
       describe 'en moquant restitution_globale :' do
         let(:restitution_globale) do
-          double(Restitution::Globale,
+          instance_double(Restitution::Globale,
                  date: DateTime.now,
                  beneficiaire: 'Roger',
                  code_beneficiaire: 'ROG1234',
-                 efficience: 5,
                  restitutions: [ restitution ])
         end
 
         before do
           competences = [ [ Competence::ORGANISATION_METHODE, Competence::NIVEAU_4 ] ]
           interpretations = [ [ Competence::ORGANISATION_METHODE, 4.0 ] ]
-          allow(restitution_globale).to receive_messages(niveaux_competences: competences,
-                                                         interpretations_competences_transversales: interpretations, structure: 'structure')
+          allow(restitution_globale).to receive_messages(
+            niveaux_competences: competences,
+            interpretations_competences_transversales: interpretations,
+            structure: 'structure'
+          )
           allow(restitution_globale).to receive(:synthese)
           allow(restitution_globale).to receive(:synthese_diagnostic)
           allow(restitution_globale).to receive(:synthese_positionnement_litteratie)
@@ -232,7 +226,7 @@ describe 'Admin - Evaluation', type: :feature do
 
           it 'affiche deux niveaux différents pour litteratie et numératie CEFR' do
             mon_evaluation.update(niveau_cefr: :A1, niveau_cnef: :X1)
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
             expect(page).to have_xpath("//img[@alt='Niveau A1']")
             expect(page).to have_xpath("//img[@alt='Niveau X1']")
           end
@@ -240,28 +234,28 @@ describe 'Admin - Evaluation', type: :feature do
           it 'affiche deux niveaux différents pour litteratie et numératie ANLCI' do
             mon_evaluation.update(niveau_anlci_litteratie: :profil3,
                                   niveau_anlci_numeratie: :profil4)
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
             expect(page).to have_xpath("//img[@alt='Profil 3']")
             expect(page).to have_xpath("//img[@alt='Profil 4']")
           end
 
           it "affiche que le score n'a pas pu être calculé" do
             mon_evaluation.update(niveau_cefr: nil, niveau_cnef: nil)
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
             expect(page).to have_content "Votre score n'a pas pu être calculé"
           end
 
           it "Socle cléa en cours d'acquisition" do
             allow(restitution_globale).to receive(:synthese_diagnostic)
               .and_return('socle_clea')
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
             expect(page).to have_content 'Certification Cléa indiquée'
           end
 
           it "Potentiellement en situation d'illettrisme" do
             allow(restitution_globale).to receive(:synthese_diagnostic)
               .and_return('illettrisme_potentiel')
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
             expect(page).to have_content 'Formation vivement recommandée'
           end
         end
@@ -274,7 +268,7 @@ describe 'Admin - Evaluation', type: :feature do
             allow(restitution_globale).to receive(:interpretations_niveau2)
               .with(:numeratie)
               .and_return([ { score_numeratie: :palier0 } ])
-            visit admin_evaluation_path(mon_evaluation)
+            visit admin_evaluation_eva_path(mon_evaluation)
 
             expect(page).to have_content 'Connaissance et compréhension du français'
             expect(page).to have_content 'des progrès à faire'
@@ -288,6 +282,7 @@ describe 'Admin - Evaluation', type: :feature do
     context "quand l'evaluation est terminée" do
       let(:evaluation_terminee) do
         create :evaluation,
+               :eva,
                :terminee,
                campagne: ma_campagne
       end
@@ -297,7 +292,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         before do
           mon_compte.update role: role
-          visit admin_evaluation_path evaluation_terminee
+          visit admin_evaluation_eva_path evaluation_terminee
         end
 
         it { expect(page).not_to have_content 'Terminée le' }
@@ -309,7 +304,7 @@ describe 'Admin - Evaluation', type: :feature do
 
         before do
           mon_compte.update role: role
-          visit admin_evaluation_path evaluation_terminee
+          visit admin_evaluation_eva_path evaluation_terminee
         end
 
         it { expect(page).to have_content 'Terminée le' }
@@ -318,13 +313,14 @@ describe 'Admin - Evaluation', type: :feature do
       end
     end
 
-    context "quand l'évaluation est pour un parcours Evacob" do
-      let(:evacob) { create :parcours_type, :evacob }
-      let(:campagne_evacob) { create :campagne, parcours_type: evacob, compte: mon_compte }
-      let(:evaluation) { create :evaluation, campagne: campagne_evacob }
+    context "quand l'évaluation est pour un parcours positionnement" do
+      let(:campagne_positionnement) do
+        create :campagne, :avec_parcours_positionnement, compte: mon_compte
+      end
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne_positionnement }
 
       before do
-        visit admin_evaluation_path(evaluation)
+        visit admin_evaluation_eva_path(evaluation)
       end
 
       it { expect(page).not_to have_content 'Vos compétences en français et mathématiques' }
@@ -332,23 +328,24 @@ describe 'Admin - Evaluation', type: :feature do
     end
 
     describe 'suppression' do
-      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+      let(:evaluation) { create :evaluation, :eva, campagne: ma_campagne }
       let(:situation) { create :situation_tri }
       let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
       let!(:evenement) { create :evenement, partie: partie }
 
-      before { visit admin_evaluation_path(evaluation) }
+      before { visit admin_evaluation_eva_path(evaluation) }
 
       it do
-        find("#action_items_sidebar_section a[href='#{admin_evaluation_path(evaluation)}']").click
+        find("#action_items_sidebar_section a[href='#{admin_evaluation_eva_path(evaluation)}']")
+          .click
         expect(evaluation.reload.deleted?).to be true
-        expect(page.current_url).to eql(admin_evaluations_url)
+        expect(page.current_url).to eql(admin_evaluations_eva_url)
       end
     end
   end
 
   describe 'Edition' do
-    let(:evaluation) { create :evaluation, campagne: ma_campagne }
+    let(:evaluation) { create :evaluation, :eva, campagne: ma_campagne }
     let!(:mon_collegue) do
       create :compte_admin, structure: mon_compte.structure, prenom: 'Liam', nom: 'Mercier'
     end
@@ -364,12 +361,12 @@ describe 'Admin - Evaluation', type: :feature do
 
       before do
         connecte(mon_compte)
-        visit edit_admin_evaluation_path(evaluation)
+        visit edit_admin_evaluation_eva_path(evaluation)
       end
 
       context "peut changer de campagne" do
         it do
-          within('#evaluation_campagne_input') { select 'Campagne autre structure' }
+          within('#evaluation_eva_campagne_input') { select 'Campagne autre structure' }
           click_on 'Enregistrer'
           expect(evaluation.reload.campagne.libelle).to eq 'Campagne autre structure'
         end
@@ -377,7 +374,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       context "ne peut pas enregistrer sans campagne" do
         it do
-          within('#evaluation_campagne_input') { select '' }
+          within('#evaluation_eva_campagne_input') { select '' }
           click_on 'Enregistrer'
           expect(evaluation.reload.campagne.libelle).to eq ma_campagne.libelle
         end
@@ -385,7 +382,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       context 'responsable de suivi' do
         it 'affiche les conseillers de la structure' do
-          within('#evaluation_responsable_suivi_input') do
+          within('#evaluation_eva_responsable_suivi_input') do
             expect(page).not_to have_content('collègue autre structure')
             expect(page).to have_content(mon_compte.nom_complet)
             expect(page).to have_content(mon_collegue.nom_complet)
@@ -393,7 +390,7 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it 'peut modifier le responsable suivi' do
-          within('#evaluation_responsable_suivi_input') do
+          within('#evaluation_eva_responsable_suivi_input') do
             select mon_collegue.nom_complet
           end
           click_on 'Enregistrer'
@@ -409,11 +406,11 @@ describe 'Admin - Evaluation', type: :feature do
 
       before do
         connecte(mon_compte)
-        visit edit_admin_evaluation_path(evaluation)
+        visit edit_admin_evaluation_eva_path(evaluation)
       end
 
       it "me permet de modifier la campagne parmi celles auxquelles j'ai accès" do
-        within('#evaluation_campagne_input') do
+        within('#evaluation_eva_campagne_input') do
           expect(page).not_to have_content('Campagne autre structure')
           select 'Campagne même structure'
         end
@@ -423,7 +420,7 @@ describe 'Admin - Evaluation', type: :feature do
 
       context 'responsable de suivi' do
         it 'affiche uniquement les conseillers de ma structure' do
-          within('#evaluation_responsable_suivi_input') do
+          within('#evaluation_eva_responsable_suivi_input') do
             expect(page).not_to have_content('collègue autre structure')
             expect(page).to have_content(mon_compte.nom_complet)
             expect(page).to have_content(mon_collegue.nom_complet)
@@ -431,7 +428,7 @@ describe 'Admin - Evaluation', type: :feature do
         end
 
         it 'peut modifier le responsable suivi' do
-          within('#evaluation_responsable_suivi_input') do
+          within('#evaluation_eva_responsable_suivi_input') do
             select mon_collegue.nom_complet
           end
           click_on 'Enregistrer'

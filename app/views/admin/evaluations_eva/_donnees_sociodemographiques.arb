@@ -1,6 +1,6 @@
 donnee_sociodemographique = resource.donnee_sociodemographique
 
-h3 t(categorie.to_sym, scope: [ :admin, :evaluations, :donnees_sociodemographiques ]),
+h3 t(categorie.to_sym, scope: [ :admin, :evaluations_eva, :donnees_sociodemographiques ]),
 class: "categorie"
 
 bienvenue.questionnaires_questions_pour(categorie).each do |config|
@@ -9,7 +9,7 @@ bienvenue.questionnaires_questions_pour(categorie).each do |config|
   reponse = if reponse.present?
               config.question.restitue_reponse(reponse)
   else
-              t("admin.evaluations.autopositionnement.non_renseigne")
+              t("admin.evaluations_eva.autopositionnement.non_renseigne")
   end
   div reponse, class: "reponse"
 end

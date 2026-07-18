@@ -156,7 +156,7 @@ donnees: { "reponseIntitule" => nil }
 
   describe "#evapro?" do
     context "quand l'évaluation est rattachée à un parcours diagnostic entreprise" do
-      let(:evaluation) { create(:evaluation, :evapro) }
+      let(:evaluation) { create(:evaluation, :avec_parcours_evapro) }
 
       it "retourne true" do
         expect(evaluation.evapro?).to be(true)

@@ -17,7 +17,7 @@ panel t(".restitution_metriques") do
         valeur = valeurs_colonne[nom_metrique]
         case data["type"]
         when :texte
-          t(valeur, scope: "admin.evaluations.restitution_competence")
+          t(valeur, scope: "admin.evaluations_eva.restitution_competence")
         when :map
           ul do
             valeur&.each do |clef, val|

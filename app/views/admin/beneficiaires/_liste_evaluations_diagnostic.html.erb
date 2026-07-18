@@ -11,9 +11,9 @@
     <%end %>
     <% tableau.colonne(td_class: "col-actions tableau-boutons-action") do |evaluation| %>
         <%= render MenuActionsComponent.new(evaluation,
-          Evaluation::ACTIONS[:LIRE],
-          Evaluation::ACTIONS[:EDITER],
-          Evaluation::ACTIONS[:SUPPRIMER]
+          EvaluationEva::ACTIONS[:LIRE],
+          EvaluationEva::ACTIONS[:EDITER],
+          EvaluationEva::ACTIONS[:SUPPRIMER]
         ) %>
     <% end %>
   <% end %>

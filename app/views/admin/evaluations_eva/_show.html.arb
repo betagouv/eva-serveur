@@ -1,0 +1,9 @@
+div class: "evaluation" do
+  div class: "row" do
+    div class: "col-8" do
+      render "admin/evaluations_eva/details_evaluation"
+      render "admin/evaluations_eva/restitution_globale", pdf: false
+      render "admin/evaluations/panel_administration" if can?(:manage, Compte)
+    end
+  end
+end

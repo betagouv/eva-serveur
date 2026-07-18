@@ -1,4 +1,4 @@
-h3 t(categorie.to_sym, scope: [ :admin, :evaluations, :questions_reponses_autopositionnement ]),
+h3 t(categorie.to_sym, scope: [ :admin, :evaluations_eva, :questions_reponses_autopositionnement ]),
 class: "categorie"
 questions_reponses.each do |question, reponse|
   if question.categorie == categorie

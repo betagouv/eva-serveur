@@ -21,9 +21,9 @@ module Api
           {
             nom_technique: identifiant,
             nom: I18n.t("#{identifiant}.nom",
-                        scope: "admin.evaluations.restitution_competence"),
+                        scope: "admin.evaluations_eva.restitution_competence"),
             description: I18n.t("#{identifiant}.description",
-                                scope: "admin.evaluations.restitution_competence"),
+                                scope: "admin.evaluations_eva.restitution_competence"),
             picto: ActionController::Base.helpers.asset_url("#{identifiant}.svg")
           }
         end

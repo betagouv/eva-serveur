@@ -46,7 +46,7 @@ ActiveAdmin.register EvaluationEvapro do
       }
   end
 
-  xls(i18n_scope: %i[active_admin xls evaluation], header_format: { weight: :bold }) do
+  xls(i18n_scope: %i[active_admin xls evaluation_evapro], header_format: { weight: :bold }) do
     whitelist
     column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }

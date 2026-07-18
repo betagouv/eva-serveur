@@ -2,22 +2,24 @@ div class: "menu menu-transverse" do
   ul do
     li do
       a href: "#evaluation__details" do
-        text_node t("admin.evaluations.details_evaluation.titre_menu_lateral")
+        text_node t("admin.evaluations_eva.details_evaluation.titre_menu_lateral")
       end
     end
     li do
       a href: "#evaluation__deroulement" do
-        text_node t("admin.evaluations.deroulement_passation.titre_menu_lateral")
+        text_node t("admin.evaluations_eva.deroulement_passation.titre_menu_lateral")
       end
     end
     li do
       a href: "#profil" do
-        text_node t("admin.evaluations.restitution_globale.autopositionnement.titre_menu_lateral")
+        text_node t(
+          "admin.evaluations_eva.restitution_globale.autopositionnement.titre_menu_lateral"
+        )
       end
     end
     li do
       a href: "#competence-numerique" do
-        text_node t("admin.evaluations.restitution_globale.prise_en_main.titre_menu_lateral")
+        text_node t("admin.evaluations_eva.restitution_globale.prise_en_main.titre_menu_lateral")
       end
     end
     li do

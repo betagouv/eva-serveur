@@ -1,15 +1,15 @@
 <div id="profil" class="page profil">
-  <%= render "admin/evaluations/eva/entete_page", restitution_globale: @restitution_globale %>
+  <%= render "admin/evaluations_eva/entete_page", restitution_globale: @restitution_globale %>
 
-  <h2 class="evaluation__titre"><%= t("admin.evaluations.restitution_globale.autopositionnement.titre") %></h2>
+  <h2 class="evaluation__titre"><%= t("admin.evaluations_eva.restitution_globale.autopositionnement.titre") %></h2>
   <div class="panel">
     <div class="marges-page">
-      <%= render partial: "admin/evaluations/eva/questions_reponses_autopositionnement", locals: { bienvenue: @bienvenue } %>
+      <%= render partial: "admin/evaluations_eva/questions_reponses_autopositionnement", locals: { bienvenue: @bienvenue } %>
       <% if @bienvenue.inclus_autopositionnement? %>
-        <%= render partial: "admin/evaluations/eva/questionnaire_autopositionnement", locals: { auto_positionnement: @bienvenue } %>
+        <%= render partial: "admin/evaluations_eva/questionnaire_autopositionnement", locals: { auto_positionnement: @bienvenue } %>
       <% end %>
     </div>
 
-    <%= render "admin/evaluations/eva/pied_page" %>
+    <%= render "admin/evaluations_eva/pied_page" %>
   </div>
 </div>

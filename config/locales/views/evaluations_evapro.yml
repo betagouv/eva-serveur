@@ -247,6 +247,13 @@ fr:
               moyen: "Impact sur le numérique : Moyen"
               fort: "Impact sur le numérique : Fort"
               tres_fort: "Impact sur le numérique : Très fort"
+      sidebar:
+        opco_partenaire:
+          titre: En partenariat avec
+        details:
+          par: Par
+          date: Date
+          questionnaire: Questionnaire
       continuer_evaluation_evapro:
         incomplet:
           description: Complétez le questionnaire pour approfondir le diagnostic

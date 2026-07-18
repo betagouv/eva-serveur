@@ -13,12 +13,14 @@ describe 'Admin - Bénéficiaires', type: :feature do
       let!(:evaluation_visible) do
         create(
           :evaluation,
+          :eva,
           beneficiaire: beneficiaire,
           campagne: campagne_visible
         )
       end
       let!(:evaluation_non_visible) do
-        create(:evaluation, :positionnement, beneficiaire: beneficiaire, campagne: autre_campagne)
+        create(:evaluation, :eva, :positionnement, beneficiaire: beneficiaire,
+          campagne: autre_campagne)
       end
 
       before { connecte(conseiller) }
@@ -36,8 +38,8 @@ describe 'Admin - Bénéficiaires', type: :feature do
     end
   end
 
-  describe 'index' do
-    context 'en tant qu\'admin' do
+  describe "index" do
+    context "en tant qu'admin" do
       let!(:structure) { create :structure_locale, :avec_admin }
       let!(:compte_admin) { create :compte_admin, structure: structure }
 

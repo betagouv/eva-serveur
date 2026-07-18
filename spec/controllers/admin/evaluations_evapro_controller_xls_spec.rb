@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Admin::EvaluationsController, type: :controller do
+RSpec.describe Admin::EvaluationsEvaproController, type: :controller do
   describe "mapping XLS Eva Pro" do
     let(:evaluation) { build_stubbed(:evaluation, id: 123) }
 

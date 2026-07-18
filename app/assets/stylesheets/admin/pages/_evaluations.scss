@@ -131,11 +131,9 @@
   @include bloc-evaluation;
 }
 
-.admin_evaluations {
-  .sidebar .sidebar_section.panel.menu-sidebar {
-    margin-top: 2rem;
-    border: none;
-  }
+.sidebar .sidebar_section.panel.menu-sidebar {
+  margin-top: 2rem;
+  border: none;
 }
 
 // EvaPro admin: ajustements des marges entre le Header et le Footer pour index évaluations

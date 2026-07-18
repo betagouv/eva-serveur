@@ -1,0 +1,9 @@
+div class: "prise-en-main row" do
+  div image_tag("souris.svg", alt: ""), class: "col-auto"
+  div class: "col" do
+    h2 t(:titre, scope: [ :admin, :evaluations_eva, :prise_en_main ]), class: "titre"
+    div t(:description, scope: [ :admin, :evaluations_eva, :prise_en_main ]), class: "description"
+    div md(t(:clause_non_responsabilite, scope: [ :admin, :evaluations_eva, :prise_en_main ])),
+class: "clause-non-responsabilite"
+  end
+end

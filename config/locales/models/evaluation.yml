@@ -1,128 +1,19 @@
 fr:
   activerecord:
-    errors:
-      models:
-        evaluation:
-          attributes:
-            nom:
-              blank: doit être rempli
-            campagne:
-              required: doit être présente
-            code_campagne:
-              inconnu: Code inconnu
-    models:
-      evaluation:
-        one: Évaluation
-        other: Évaluations
     attributes:
       evaluation:
         beneficiaire: Bénéficiaire
-        created_at: Créée le
         debutee_le: Date
-        terminee_le: Terminée le
-        anonymisee_le: Anonymisée le
-        mise_en_action_le: Mise en action répondue le
+        created_at: Créée le
         updated_at: Mise à jour le
-        libelle: Libellé
         temps_total: Temps total
+        terminee_le: Terminée le
+        statut: Statut
         complete: Complète
         incomplete: Incomplète
         competences_transversales_incompletes: Évaluation des compétences transversales incomplète
         competences_de_base_incompletes: Évaluation des compétences de base incomplète
-        responsable_suivi: Responsable de suivi
-        interpretations:
-          non_teste: Non testé
-          synthese_competences_de_base:
-            socle_clea: supérieur
-            ni_ni: intermédiaire
-            illettrisme_potentiel: illettrisme potentiel
-            aberrant: Aberrant
-          niveau_cnef:
-            pre_X1: pré-X1
-            X1: X1
-            X2: X2
-            Y1: Y1+
-          niveau_cefr:
-            pre_A1: pré-A1
-            A1: A1
-            A2: A2
-            B1: B1+
-          niveau_anlci_litteratie:
-            profil1: Profil 1
-            profil2: Profil 2
-            profil3: Profil 3
-            profil4: Profil 4
-            profil4_plus: Profil 4+
-            profil4_plus_plus: Profil 4++
-          positionnement_niveau_litteratie:
-            profil1: Profil 1
-            profil2: Profil 2
-            profil3: Profil 3
-            profil4: Profil 4
-            profil_4h: Profil 4
-            profil_4h_plus: Profil 4+
-            profil_4h_plus_plus: Profil 4++
-            profil_aberrant: Aberrant
-            indetermine: Pas de résultat
-          positionnement_niveau_numeratie:
-            profil1: Profil 1
-            profil2: Profil 2
-            profil3: Profil 3
-            profil4: Profil 4
-            profil4_plus: Profil 4+
-            profil_4h: Profil 4
-            profil_4h_plus: Profil 4+
-            profil_4h_plus_plus: Profil 4++
-            profil_aberrant: Aberrant
-            indetermine: Pas de résultat
-          niveau_anlci_numeratie:
-            profil1: Profil 1
-            profil2: Profil 2
-            profil3: Profil 3
-            profil4: Profil 4
-            profil4_plus: Profil 4+
-            profil4_plus_plus: Profil 4++
         statuts:
           a_suivre: À suivre
           suivi_en_cours: Suivi en cours
           suivi_effectue: Suivi effectué
-    scopes:
-      evaluation:
-        all: "Toutes les évaluations"
-  formtastic:
-    actions:
-      evaluation:
-        create: Créer
-        update: Enregistrer
-  active_admin:
-    resources:
-      evaluation:
-        edit_model: Modifier
-        delete_model: Supprimer
-    xls:
-      evaluation:
-        structure: Structure
-        campagne: Campagne
-        debutee_le: Date
-        nom_beneficiaire: Bénéficiaire
-        par: Par
-        code_beneficiaire: Code bénéficiaire
-        completude: Passation complète ?
-        synthese_competences_de_base: Niveau global
-        niveau_cefr: Niveau CEFR (diagnostic)
-        niveau_cnef: Niveau CNEF (diagnostic)
-        niveau_anlci_litteratie: ANLCI Littératie (diagnostic)
-        niveau_anlci_numeratie: ANLCI Numératie (diagnostic)
-        positionnement_niveau_litteratie: Positionnement Littératie
-        positionnement_niveau_numeratie: Positionnement Numératie
-        reponses_redaction: Réponses rédaction
-        taux_risque: Taux de risque
-        performance_collective: Performance collective
-        agilite_organisationnelle: Agilité organisationnelle
-        securite_qualite: Sécurité et qualité
-        mobilite_professionnelle: Mobilité professionnelle
-        score_cout: Coûts
-        bilan_situation: Bilan de votre situation
-        redaction: |
-          Rédaction %{index} :
-          %{reponse}

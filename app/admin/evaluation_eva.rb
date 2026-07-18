@@ -1,6 +1,5 @@
-ActiveAdmin.register Evaluation do
+ActiveAdmin.register EvaluationEva do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
-  menu priority: 4, if: proc { current_compte.structure_id.present? && can?(:read, Evaluation) }
 
   includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
 
@@ -36,7 +35,7 @@ ActiveAdmin.register Evaluation do
          if: proc { !current_compte.utilisateur_entreprise? }
   filter :debutee_le, if: proc { !current_compte.utilisateur_entreprise? }
   filter :responsable_suivi_id,
-         label: Evaluation.human_attribute_name("responsable_suivi"),
+         label: EvaluationEva.human_attribute_name("responsable_suivi"),
          as: :search_select_filter,
          url: proc { admin_comptes_path },
          fields: %i[email nom prenom],
@@ -46,20 +45,19 @@ ActiveAdmin.register Evaluation do
          if: proc { !current_compte.utilisateur_entreprise? }
   filter :statut,
          as: :select,
-         collection: Evaluation.statuts.map { |v, id|
-           [ Evaluation.human_enum_name(:statut, v), id ]
+         collection: EvaluationEva.statuts.map { |v, id|
+           [ EvaluationEva.human_enum_name(:statut, v), id ]
          },
          if: proc { current_compte.superadmin? && !current_compte.utilisateur_entreprise? }
 
-         scope proc {
- I18n.t("activerecord.scopes.evaluation.all") }, :all, default: true, if: proc {
-          !current_compte.utilisateur_entreprise? }
+  scope proc { I18n.t("activerecord.scopes.evaluation_eva.all") }, :all, default: true
+
   scope proc {
-          render(PastilleComponent.new(
-                   couleur: "alerte",
-                   etiquette: I18n.t("components.pastille.illettrisme_potentiel")
-                 ))
-        }, :illettrisme_potentiel, if: proc { !current_compte.utilisateur_entreprise? }
+    render(PastilleComponent.new(
+      couleur: "alerte",
+      etiquette: I18n.t("components.pastille.illettrisme_potentiel")
+    ))
+  }, :illettrisme_potentiel
 
   show do
     params[:parties_selectionnees] =
@@ -82,7 +80,7 @@ ActiveAdmin.register Evaluation do
     render(Tag.new(resource.responsable_suivi.display_name,
                    classes: "bleu",
                    supprimable: can?(:supprimer_responsable_suivi, Evaluation),
-                   url: supprimer_responsable_suivi_admin_evaluation_path(resource)))
+                   url: supprimer_responsable_suivi_admin_evaluation_eva_path(resource)))
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
@@ -90,25 +88,11 @@ ActiveAdmin.register Evaluation do
       resource.responsable_suivi.blank? &&
       can?(:ajouter_responsable_suivi, Evaluation)
   } do
-    render "admin/evaluations/eva/recherche_responsable_suivi"
+    render "admin/evaluations_eva/recherche_responsable_suivi"
   end
 
   sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evapro? } do
-    render "admin/evaluations/eva/menu_sidebar"
-  end
-
-  sidebar " ", only: :show, if: proc { resource.evapro? } do
-    render partial: "admin/evaluations_evapro/sidebar_evaluation",
-      locals: {
-        evaluation: resource
-      }
-  end
-
-  sidebar " ", only: :index, if: proc { current_compte.utilisateur_entreprise? } do
-    render partial: "admin/evaluations_evapro/sidebar_structure",
-      locals: {
-        structure: structure
-      }
+    render "menu_sidebar"
   end
 
   member_action :supprimer_responsable_suivi, method: :patch do
@@ -116,13 +100,12 @@ ActiveAdmin.register Evaluation do
     redirect_to request.referer
   end
 
-  xls(i18n_scope: %i[active_admin xls evaluation], header_format: { weight: :bold }) do
+  xls(i18n_scope: %i[active_admin xls evaluation_eva], header_format: { weight: :bold }) do
     whitelist
     column("structure") { |evaluation| evaluation.campagne&.structure&.nom }
     column(:campagne) { |evaluation| evaluation.campagne&.libelle }
     column(:debutee_le) { |evaluation| I18n.l(evaluation.debutee_le, format: :sans_heure) }
     column("nom_beneficiaire") { |evaluation| evaluation.beneficiaire.nom }
-    column("par") { |evaluation| evaluation.beneficiaire.nom }
     column("code_beneficiaire") { |evaluation| evaluation.beneficiaire.code_beneficiaire }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
@@ -140,22 +123,13 @@ ActiveAdmin.register Evaluation do
       evaluation.redactions
         &.map
         &.with_index(1) { |reponse, index|
-          I18n.t("active_admin.xls.evaluation.redaction", index: index, reponse: reponse)
+          I18n.t("active_admin.xls.evaluation_eva.redaction", index: index, reponse: reponse)
         }
         &.join("\n-----\n")
     end
-    column("taux_risque") { |e| taux_risque_pour_xls(e) }
-    column("performance_collective") { |e| impact_evapro_pour_xls(e, :performance_collective) }
-    column("agilite_organisationnelle") { |e|
-      impact_evapro_pour_xls(e, :agilite_organisationnelle) }
-    column("securite_qualite") { |e| impact_evapro_pour_xls(e, :securite_qualite) }
-    column("mobilite_professionnelle") { |e| impact_evapro_pour_xls(e, :mobilite_professionnelle) }
-    column("score_cout") { |e| score_cout_pour_xls(e) }
-    column("bilan_situation") { |e| recommandation_risque_pour_xls(e) }
 
     before_filter do |sheet|
       xls_configuration = Admin::Evaluations::XlsConfiguration.new
-      xls_configuration.masquer_colonnes_non_visibles(sheet: sheet, compte: current_compte)
       xls_configuration.appliquer_limite!(sheet: sheet, collection: @collection)
     end
   end
@@ -169,7 +143,7 @@ ActiveAdmin.register Evaluation do
   member_action :ajouter_responsable_suivi, method: :post do
     responsable = Compte.find_by(id: params["responsable_suivi_id"])
     resource.update(responsable_suivi: responsable) if responsable.present?
-    redirect_to admin_evaluation_path(resource)
+    redirect_to admin_evaluation_eva_path(resource)
   end
 
   member_action :renseigner_qualification, method: :patch do
@@ -192,12 +166,7 @@ ActiveAdmin.register Evaluation do
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
-                  :opco_financeur, :structure,
-                  :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
-                  :recommandation_risque_pour_xls,
-                  :impact_evapro_pour_xls, :score_cout_pour_xls
-
-    before_action :remplir_syntheses_evapro_pour_index, only: :index
+                  :structure,
 
     def show
       show! do |format|
@@ -207,14 +176,14 @@ ActiveAdmin.register Evaluation do
     end
 
     def render_pdf
-      html_content = render_to_string(template: "admin/evaluations/show", layout: "application",
+      html_content = render_to_string(template: "admin/evaluations_eva/show", layout: "application",
                                       locals: { resource: resource })
 
       pdf_path = Pdf::Generator.generate(html_content)
 
       if pdf_path == false
         flash[:error] = t(".erreur_generation_pdf")
-        redirect_to admin_evaluation_path(resource)
+        redirect_to admin_evaluation_eva_path(resource)
       else
         envoyer_fichier(pdf_path)
       end
@@ -233,7 +202,7 @@ ActiveAdmin.register Evaluation do
       elsif request.referer&.include?(admin_beneficiaire_path(resource.beneficiaire))
                    request.referer
       else
-                   admin_evaluations_path
+                   admin_evaluations_eva_path
       end
       destroy!(location: location)
     end
@@ -242,61 +211,11 @@ ActiveAdmin.register Evaluation do
       flash.now[:evaluation_anonyme] = t(".evaluation_anonyme") if resource.anonyme?
     end
 
-    def opco_financeur
-      @opco_financeur ||= current_compte.structure&.opco_financeur
-    end
-
     def structure
       current_compte.structure
     end
 
-    def syntheses_evapro_par_evaluation_id
-      return {} unless current_compte.utilisateur_entreprise?
-
-      @syntheses_evapro_par_evaluation_id ||= SynthesesEvaproPourIndex.pour(collection)
-    end
-
     private
-
-    def taux_risque_pour_xls(evaluation)
-      pourcentage = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :pourcentage_risque)
-      pourcentage.present? ? "#{pourcentage} %" : nil
-    end
-
-    def recommandation_risque_pour_xls(evaluation)
-      lettre_risque = lettre_risque_pour(evaluation, synthese_evapro_pour_xls(evaluation))
-      return if lettre_risque.blank?
-
-      I18n.t(lettre_risque, scope: "bilan_eva_pro.chiffre_cle")
-    end
-
-    def impact_evapro_pour_xls(evaluation, cle)
-      niveau = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :synthese_impact, cle)
-      return if niveau.blank?
-
-      ::Evaluations::DiagnosticPro::SCORE_TO_LETTRE.fetch(niveau)
-    end
-
-    def score_cout_pour_xls(evaluation)
-      cout_presenter = cout_presenter_pour(evaluation, synthese_evapro_pour_xls(evaluation))
-      return if cout_presenter.nil?
-
-      cout_presenter.contenu_cout[:titre]
-    end
-
-    def remplir_syntheses_evapro_pour_index
-      return unless current_compte.utilisateur_entreprise?
-
-      @syntheses_evapro_par_evaluation_id = SynthesesEvaproPourIndex.pour(collection)
-    end
-
-    def synthese_evapro_pour_xls(evaluation)
-      synthese_evapro = syntheses_evapro_par_evaluation_id[evaluation.id] || {}
-      {
-        pourcentage_risque: synthese_evapro[:pourcentage_risque],
-        score_cout: synthese_evapro[:score_cout]
-      }
-    end
 
     def find_resource
       scoped_collection.where(id: params[:id])
@@ -318,7 +237,7 @@ ActiveAdmin.register Evaluation do
     end
 
     def trad_niveau(evaluation, interpretation)
-      scope = "activerecord.attributes.evaluation.interpretations"
+      scope = "activerecord.attributes.evaluation_eva.interpretations"
       niveau = evaluation.send(interpretation)
       t("#{interpretation}.#{niveau}", scope: scope) if niveau.present?
     end
@@ -331,11 +250,11 @@ ActiveAdmin.register Evaluation do
     end
 
     def campagne_avec_competences_transversales?
-      @evaluation.campagne.avec_competences_transversales?
+      resource.campagne.avec_competences_transversales?
     end
 
     def campagne_avec_positionnement?(competence)
-      @evaluation.campagne.avec_positionnement?(competence)
+      resource.campagne.avec_positionnement?(competence)
     end
 
     def prise_en_main?

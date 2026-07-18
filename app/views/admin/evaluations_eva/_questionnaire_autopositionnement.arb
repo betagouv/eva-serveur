@@ -1,5 +1,5 @@
 div class: "autopositionnement questionnaire" do
-  questionnaire_scope = %i[admin evaluations questionnaire_autopositionnement]
+  questionnaire_scope = %i[admin evaluations_eva questionnaire_autopositionnement]
   h3 t(:"questionnaire-auto-positionnement", scope: questionnaire_scope), class: "categorie"
   auto_positionnement.questions_et_reponses(:jauge).each do |question, reponse|
     div class: "row" do

@@ -11,17 +11,6 @@ FactoryBot.define do
       type_de_programme { :diagnostic }
     end
 
-    trait :evacob do
-      libelle { 'Evacob' }
-      nom_technique { 'evacob' }
-      type_de_programme { :positionnement }
-
-      before(:create) do |parcours_type|
-        situation = create(:situation_cafe_de_la_place)
-        parcours_type.situations_configurations_attributes = [ { situation: situation } ]
-      end
-    end
-
     trait :competences_de_base do
       libelle { 'Parcours compétences de base' }
       nom_technique { 'competences_de_base' }

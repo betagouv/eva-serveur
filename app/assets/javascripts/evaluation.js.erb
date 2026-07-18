@@ -37,8 +37,8 @@ function modifieReponseMiseEnAction(evaluationId) {
   $(`#${evaluationId} .card__banner--illettrisme`).addClass('card__banner--en-attente');
 }
 
-const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_path('ID_EVALUATION') %>";
-const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_path('ID_EVALUATION') %>";
+const chemin_mise_en_action = "<%= Rails.application.routes.url_helpers.mise_en_action_admin_evaluation_eva_path('ID_EVALUATION') %>";
+const chemin_renseigner_qualification = "<%= Rails.application.routes.url_helpers.renseigner_qualification_admin_evaluation_eva_path('ID_EVALUATION') %>";
 
 function enregistreReponseMiseEnAction(evaluationId, bouton) {
   const reponse = bouton.data('reponse');

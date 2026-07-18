@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Admin - Restitution', type: :feature do
-  let(:evaluation) { create :evaluation }
+describe 'Admin - Restitution eva', type: :feature do
+  let(:evaluation) { create :evaluation, :eva }
   let!(:partie) { create :partie, situation: situation, evaluation: evaluation }
 
   before { se_connecter_comme_superadmin }

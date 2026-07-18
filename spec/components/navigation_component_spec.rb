@@ -11,7 +11,7 @@ RSpec.describe NavigationComponent, type: :component do
 
       expect(page).to have_link("Tableau de bord", href: "/admin")
       expect(page).to have_link("Actualités")
-      expect(page).to have_link("Évaluations", href: "/admin/evaluations")
+      expect(page).to have_link("Évaluations", href: "/admin/evaluations_eva")
       expect(page).not_to have_link("Evapro", visible: :all)
       expect(page).to have_link("Comptes")
       expect(page).to have_link("Aide")
@@ -119,6 +119,8 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Aide")
       expect(page).to have_link("Comptes")
       expect(page).not_to have_link("Évaluations")
+      expect(page).not_to have_link(href: "/admin/evaluations_eva")
+      expect(page).not_to have_link(href: "/admin/evaluations_evapro")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")
       expect(page).not_to have_button("Accompagnement")
@@ -139,6 +141,8 @@ RSpec.describe NavigationComponent, type: :component do
       expect(page).to have_link("Aide")
       expect(page).to have_link("Comptes")
       expect(page).not_to have_link("Évaluations")
+      expect(page).not_to have_link(href: "/admin/evaluations_eva")
+      expect(page).not_to have_link(href: "/admin/evaluations_evapro")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")
     end
@@ -153,7 +157,7 @@ RSpec.describe NavigationComponent, type: :component do
 
       expect(page).to have_link("Évaluations", href: "/admin/evaluations_evapro")
       expect(page).not_to have_link("Eva", visible: :all)
-      expect(page).not_to have_link(href: "/admin/evaluations")
+      expect(page).not_to have_link(href: "/admin/evaluations_eva")
       expect(page).not_to have_link("Campagnes")
       expect(page).not_to have_link("Bénéficiaires")
     end
@@ -166,7 +170,7 @@ RSpec.describe NavigationComponent, type: :component do
       render_inline(component)
 
       expect(page).to have_link("Comptes")
-      expect(page).to have_link("Évaluations", href: "/admin/evaluations")
+      expect(page).to have_link("Évaluations", href: "/admin/evaluations_eva")
       expect(page).to have_link("Campagnes")
     end
   end

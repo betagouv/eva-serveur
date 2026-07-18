@@ -4,6 +4,14 @@ FactoryBot.define do
     beneficiaire
     debutee_le { 1.hour.ago }
 
+    trait :eva do
+      type { 'EvaluationEva' }
+    end
+
+    trait :evapro do
+      type { 'EvaluationEvapro' }
+    end
+
     trait :terminee do
       terminee_le { Time.current }
     end
@@ -49,7 +57,7 @@ FactoryBot.define do
       association :campagne, factory: [ :campagne, :litteratie ]
     end
 
-    trait :evapro do
+    trait :avec_parcours_evapro do
       association :campagne, factory: [ :campagne, :avec_parcours_evapro ]
     end
   end

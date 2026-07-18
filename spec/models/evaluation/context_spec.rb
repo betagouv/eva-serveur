@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Evaluation::Context do
   describe "#pro?" do
     context "quand le parcours est diagnostic entreprise (Eva Pro)" do
-      let(:evaluation) { create(:evaluation, :evapro) }
+      let(:evaluation) { create(:evaluation, :avec_parcours_evapro) }
 
       it "retourne true" do
         expect(described_class.new(evaluation).pro?).to be(true)
@@ -41,7 +41,7 @@ RSpec.describe Evaluation::Context do
 
   describe "#usage_beneficiaire?" do
     it "est l'inverse de pro? pour un diagnostic entreprise" do
-      evaluation = create(:evaluation, :evapro)
+      evaluation = create(:evaluation, :avec_parcours_evapro)
       contexte = described_class.new(evaluation)
 
       expect(contexte.usage_beneficiaire?).to be(false)
@@ -59,7 +59,7 @@ RSpec.describe Evaluation::Context do
 
   describe "cohérence avec Evaluation" do
     it "aligne evapro? et context.pro?" do
-      evapro_eval = create(:evaluation, :evapro)
+      evapro_eval = create(:evaluation, :avec_parcours_evapro)
       beneficiaire_eval = create(:evaluation, :diagnostic)
 
       expect(evapro_eval.evapro?).to eq(evapro_eval.context.pro?)

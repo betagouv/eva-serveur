@@ -55,7 +55,7 @@ div class: "panel evaluation__administration" do
           ol do
             niveaux_competences.each do |competence, niveau|
               li span t("#{competence}.nom",
-                        scope: "admin.evaluations.restitution_competence") +
+                        scope: "admin.evaluations_eva.restitution_competence") +
                       ": #{niveau}"
             end
           end

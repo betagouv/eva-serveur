@@ -92,7 +92,7 @@ describe 'Fin Evaluation API', type: :request do
           expect(premiere_competence['nom']).to eql("Vitesse d'exécution")
           expect(premiere_competence['description'])
             .to eql(I18n.t("#{Competence::RAPIDITE}.description",
-                           scope: 'admin.evaluations.restitution_competence'))
+                           scope: 'admin.evaluations_eva.restitution_competence'))
           expect(premiere_competence['description']).not_to start_with('translation missing')
         end
 

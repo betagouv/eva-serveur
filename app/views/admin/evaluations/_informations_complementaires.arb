@@ -53,7 +53,7 @@ div class: "row fr-m-0" do
     if resource.mise_en_action&.repondue_le.present?
       div class: "row" do
         div class: "col col-1" do
-          span Evaluation.human_attribute_name("mise_en_action_le")
+          span EvaluationEva.human_attribute_name("mise_en_action_le")
         end
         div class: "col col-2" do
           span l(resource.mise_en_action.repondue_le, format: :avec_heure)

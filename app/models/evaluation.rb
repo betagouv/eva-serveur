@@ -11,24 +11,10 @@ class Evaluation < ApplicationRecord
                           competences_transversales_incompletes complete].freeze
   SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
   SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
-  SITUATION_COMPETENCES_EVAPRO = [ Situation::DIAG_RISQUES_ENTREPRISE,
-Situation::EVALUATION_IMPACT_GENERAL ].freeze
-
-  ACTIONS = {
-    LIRE: { label: I18n.t("admin.evaluations.index.voir"),
-            type: :read,
-            url: :admin_evaluation_path },
-    EDITER: { label: I18n.t("admin.evaluations.index.modifier"),
-              type: :edit,
-              url: :edit_admin_evaluation_path
-    },
-    SUPPRIMER: { label: I18n.t("admin.evaluations.index.supprimer"),
-                 type: :destroy,
-                 url: :admin_evaluation_path,
-                 method: :delete,
-                 data: { confirm: I18n.t("admin.evaluations.index.confirmation_suppression") }
-    }
-  }.freeze
+  SITUATION_COMPETENCES_EVAPRO = [
+    Situation::DIAG_RISQUES_ENTREPRISE,
+    Situation::EVALUATION_IMPACT_GENERAL
+  ].freeze
 
   belongs_to :campagne
   belongs_to :beneficiaire

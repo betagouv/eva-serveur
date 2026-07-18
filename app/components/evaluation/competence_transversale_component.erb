@@ -1,7 +1,7 @@
 <div class="competence-transversale">
   <div class="informations-competence">
     <h3 id="<%= @competence %>" class="nom-competence">
-      <%= t("#{@competence}.nom", scope: "admin.evaluations.restitution_competence") %>
+      <%= t("#{@competence}.nom", scope: "admin.evaluations_eva.restitution_competence") %>
     </h3>
     <div class="description-competence">
       <div class="jauge">
@@ -13,7 +13,7 @@
         <%= image_tag "#{@competence}.svg", alt: "" %>
       </span>
       <div>
-        <%= md t("#{@competence}.stanine#{@interpretation}", scope: "admin.evaluations.restitution_competence") %>
+        <%= md t("#{@competence}.stanine#{@interpretation}", scope: "admin.evaluations_eva.restitution_competence") %>
       </div>
       <div class="lien-metier">
         <%= image_tag "lien.svg", alt: "", class: "image-lien" %>

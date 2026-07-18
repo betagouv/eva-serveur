@@ -62,7 +62,7 @@ class NavigationComponent < ViewComponent::Base
     return if en_attente_restreint?
 
     links = [
-      evaluations_link,
+      evaluations_eva_link,
       evaluations_evapro_link
     ].compact
 
@@ -76,12 +76,12 @@ class NavigationComponent < ViewComponent::Base
     group_link("Évaluations", "evaluations", links)
   end
 
-  def evaluations_link
+  def evaluations_eva_link
     return if utilisateur_entreprise? && !superadmin?
-    return unless can?(:read, Evaluation)
+    return unless can?(:read, EvaluationEva)
 
-    { label: "Eva", url: helpers.admin_evaluations_path,
-      current: evaluations_current? }
+    { label: "Eva", url: helpers.admin_evaluations_eva_path,
+      current: evaluations_eva_current? }
   end
 
   def evaluations_evapro_link
@@ -361,9 +361,9 @@ class NavigationComponent < ViewComponent::Base
     current_page?(helpers.admin_root_path) || helpers.params[:controller] == "admin/dashboard"
   end
 
-  def evaluations_current?
-    current_page?(helpers.admin_evaluations_path) ||
-    (helpers.params[:controller] == "admin/evaluations" && helpers.params[:action] == "show")
+  def evaluations_eva_current?
+    current_page?(helpers.admin_evaluations_eva_path) ||
+    (helpers.params[:controller] == "admin/evaluations_eva" && helpers.params[:action] == "show")
   end
 
   def evaluations_evapro_current?

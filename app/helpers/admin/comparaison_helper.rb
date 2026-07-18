@@ -70,7 +70,7 @@ profil_reference_source)
     end
 
     def texte_identique(competence, profil_source)
-      cle_profil = "activerecord.attributes.evaluation.interpretations." \
+      cle_profil = "activerecord.attributes.evaluation_eva.interpretations." \
                    "positionnement_niveau_#{competence}.#{profil_source}"
       profil_traduit = I18n.t(
         cle_profil

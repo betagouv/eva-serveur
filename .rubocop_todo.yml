@@ -12,7 +12,6 @@
 # URISchemes: http, https
 Layout/LineLength:
   Exclude:
-    - "spec/features/admin/evaluation_spec.rb"
     - "spec/integrations/structure_spec.rb"
     - "spec/models/restitution/controle/comprehension_consigne_spec.rb"
     - "spec/models/restitution/controle/perseverance_spec.rb"
@@ -180,7 +179,6 @@ RSpec/VariableName:
 RSpec/VerifiedDoubles:
   Exclude:
     - "spec/controllers/structures_controller_spec.rb"
-    - "spec/features/admin/evaluation_spec.rb"
     - "spec/helpers/comparaison_evaluations_helper_spec.rb"
     - "spec/helpers/application_helper_spec.rb"
     - "spec/models/campagne_spec.rb"

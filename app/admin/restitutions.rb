@@ -17,7 +17,12 @@ ActiveAdmin.register Partie, as: "Restitutions" do
     def destroy
       evaluation = resource.evaluation
       resource.supprimer
-      redirect_to admin_evaluation_path(evaluation)
+      chemin_evaluation = if evaluation.is_a?(EvaluationEvapro)
+        admin_evaluation_evapro_path(evaluation)
+      else
+        admin_evaluation_eva_path(evaluation)
+      end
+      redirect_to chemin_evaluation
     end
   end
 

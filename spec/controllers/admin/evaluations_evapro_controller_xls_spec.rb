@@ -6,7 +6,7 @@ RSpec.describe Admin::EvaluationsEvaproController, type: :controller do
 
     before do
       allow(controller).to receive_messages(
-        current_compte: instance_double(Compte, utilisateur_entreprise?: true),
+        current_compte: instance_double(Compte, utilisateur_evapro?: true),
         syntheses_evapro_par_evaluation_id: {
           evaluation.id => {
             pourcentage_risque: 25,

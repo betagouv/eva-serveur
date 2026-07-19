@@ -12,8 +12,7 @@ ActiveAdmin.register EvaluationEva do
          fields: %i[nom code_beneficiaire],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "nom_asc",
-         if: proc { !current_compte.utilisateur_entreprise? }
+         order_by: "nom_asc"
   filter :campagne_compte_structure_id,
          as: :search_select_filter,
          url: proc { admin_structures_locales_path },
@@ -23,17 +22,15 @@ ActiveAdmin.register EvaluationEva do
          order_by: "nom_asc",
          label: proc { StructureLocale.model_name.human },
          method_model: StructureLocale,
-         if: proc {
- current_compte.anlci? || current_compte.administratif? && !current_compte.utilisateur_entreprise? }
+         if: proc { current_compte.anlci? || current_compte.administratif? }
   filter :campagne_id,
          as: :search_select_filter,
          url: proc { admin_campagnes_path },
          fields: %i[libelle code],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "libelle_asc",
-         if: proc { !current_compte.utilisateur_entreprise? }
-  filter :debutee_le, if: proc { !current_compte.utilisateur_entreprise? }
+         order_by: "libelle_asc"
+  filter :debutee_le
   filter :responsable_suivi_id,
          label: EvaluationEva.human_attribute_name("responsable_suivi"),
          as: :search_select_filter,
@@ -41,14 +38,13 @@ ActiveAdmin.register EvaluationEva do
          fields: %i[email nom prenom],
          display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "email_asc",
-         if: proc { !current_compte.utilisateur_entreprise? }
+         order_by: "email_asc"
   filter :statut,
          as: :select,
          collection: EvaluationEva.statuts.map { |v, id|
            [ EvaluationEva.human_enum_name(:statut, v), id ]
          },
-         if: proc { current_compte.superadmin? && !current_compte.utilisateur_entreprise? }
+         if: proc { current_compte.superadmin? }
 
   scope proc { I18n.t("activerecord.scopes.evaluation_eva.all") }, :all, default: true
 
@@ -75,7 +71,7 @@ ActiveAdmin.register EvaluationEva do
   form partial: "form"
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    !resource.evapro? && resource.responsable_suivi.present?
+    resource.responsable_suivi.present?
   } do
     render(Tag.new(resource.responsable_suivi.display_name,
                    classes: "bleu",
@@ -84,14 +80,13 @@ ActiveAdmin.register EvaluationEva do
   end
 
   sidebar :responsable_de_suivi, only: :show, if: proc {
-    !resource.evapro? &&
       resource.responsable_suivi.blank? &&
       can?(:ajouter_responsable_suivi, Evaluation)
   } do
     render "admin/evaluations_eva/recherche_responsable_suivi"
   end
 
-  sidebar :menu, class: "menu-sidebar", only: :show, if: proc { !resource.evapro? } do
+  sidebar :menu, class: "menu-sidebar", only: :show do
     render "menu_sidebar"
   end
 

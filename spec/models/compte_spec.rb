@@ -201,8 +201,8 @@ describe Compte do
     end
   end
 
-  describe "#utilisateur_entreprise?" do
-    subject(:utilisateur_entreprise?) { compte.utilisateur_entreprise? }
+  describe "#utilisateur_evapro?" do
+    subject(:utilisateur_evapro?) { compte.utilisateur_evapro? }
 
     context "quand la structure est une entreprise Eva" do
       let(:structure) do
@@ -212,7 +212,7 @@ describe Compte do
       end
       let(:compte) { build(:compte, structure: structure) }
 
-      it { expect(utilisateur_entreprise?).to be(true) }
+      it { expect(utilisateur_evapro?).to be(true) }
     end
 
     context "quand la structure n'est pas une entreprise Eva" do
@@ -223,13 +223,13 @@ describe Compte do
       end
       let(:compte) { build(:compte, structure: structure) }
 
-      it { expect(utilisateur_entreprise?).to be(false) }
+      it { expect(utilisateur_evapro?).to be(false) }
     end
 
     context "quand le compte n'a pas de structure" do
       let(:compte) { build(:compte, structure: nil) }
 
-      it { expect(utilisateur_entreprise?).to be(false) }
+      it { expect(utilisateur_evapro?).to be(false) }
     end
   end
 

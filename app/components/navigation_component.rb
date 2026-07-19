@@ -77,7 +77,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def evaluations_eva_link
-    return if utilisateur_entreprise? && !superadmin?
+    return if utilisateur_evapro? && !superadmin?
     return unless can?(:read, EvaluationEva)
 
     { label: "Eva", url: helpers.admin_evaluations_eva_path,
@@ -85,7 +85,7 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def evaluations_evapro_link
-    return unless utilisateur_entreprise? || superadmin?
+    return unless utilisateur_evapro? || superadmin?
     return unless can?(:read, EvaluationEvapro)
 
     { label: "Evapro", url: helpers.admin_evaluations_evapro_path,
@@ -95,7 +95,7 @@ class NavigationComponent < ViewComponent::Base
   def campagnes_link
     return if en_attente_restreint?
     return unless current_compte_structure_present?
-    return if utilisateur_entreprise?
+    return if utilisateur_evapro?
     return unless can?(:read, Campagne)
 
     {
@@ -109,7 +109,7 @@ class NavigationComponent < ViewComponent::Base
   def beneficiaires_link
     return if en_attente_restreint?
     return unless current_compte_structure_present?
-    return if utilisateur_entreprise?
+    return if utilisateur_evapro?
     return unless can?(:read, Beneficiaire)
 
     {
@@ -386,8 +386,8 @@ class NavigationComponent < ViewComponent::Base
     @current_compte&.structure_id.present?
   end
 
-  def utilisateur_entreprise?
-    @current_compte&.utilisateur_entreprise?
+  def utilisateur_evapro?
+    @current_compte&.utilisateur_evapro?
   end
 
   def anlci_or_administratif?

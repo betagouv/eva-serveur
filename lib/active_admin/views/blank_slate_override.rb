@@ -24,7 +24,7 @@ module ActiveAdmin
 
       def utilisateur_evapro?
         controller.respond_to?(:current_compte) &&
-          controller.current_compte&.utilisateur_entreprise?
+          controller.current_compte&.utilisateur_evapro?
       end
 
       def blank_slate_texts(resource_key)

@@ -97,7 +97,7 @@ class Compte < ApplicationRecord
     structure.instance_of?(StructureAdministrative)
   end
 
-  def utilisateur_entreprise?
+  def utilisateur_evapro?
     !!structure&.evapro?
   end
 

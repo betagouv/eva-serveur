@@ -8,7 +8,7 @@ module ActiveAdmin
         return super unless current_compte.present?
 
         partial =
-          if current_compte.utilisateur_entreprise? || current_compte.utilisateur_opco?
+          if current_compte.utilisateur_evapro? || current_compte.utilisateur_opco?
             "components/header"
           else
             "components/header_eva"

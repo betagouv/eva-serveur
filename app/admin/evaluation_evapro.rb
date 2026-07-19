@@ -161,8 +161,6 @@ ActiveAdmin.register EvaluationEvapro do
     end
 
     def remplir_syntheses_evapro_pour_index
-      return unless current_compte.utilisateur_entreprise?
-
       @syntheses_evapro_par_evaluation_id = SynthesesEvaproPourIndex.pour(collection)
     end
 

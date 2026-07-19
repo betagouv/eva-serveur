@@ -6,7 +6,7 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_compte.utilisateur_opco?
       render partial: "tableau_de_bord_opco", locals: { structure: current_compte.structure }
-    elsif current_compte.utilisateur_entreprise?
+    elsif current_compte.utilisateur_evapro?
       render partial: "tableau_de_bord_eva_pro",
              locals: eva_pro_locals(
                campagnes: campagnes_entreprise,
@@ -96,7 +96,7 @@ ActiveAdmin.register_page "Dashboard" do
     end
 
     def recupere_donnees_entreprise
-      return unless current_compte.utilisateur_entreprise?
+      return unless current_compte.utilisateur_evapro?
 
       @campagnes_entreprise = campagnes_entreprise_scope
       @evaluations_entreprise = evaluations_entreprise_scope

@@ -2,25 +2,5 @@
   <% if structure.is_a?(StructureLocale) %>
     <%= render "admin/opcos/bloc_opco_partenaire", opco: opco %>
   <% end %>
-  <div class="bloc-opco-entreprise">
-    <div class="bloc-opco-entreprise__details">
-      <h3 class="bloc-opco-entreprise__titre"><%= t("admin.dashboard.sidebar.opco_entreprise.titre") %></h3>
-      <p class="bloc-opco-entreprise__nom"><%= structure.nom %></p>
-      <% if structure.is_a?(StructureOpco) %>
-        <p class="bloc-opco-entreprise__nom"><%= opco.nombre_structures_locales %> entreprises rattachées</p>
-      <% end %>
-    </div>
-    <% if structure.is_a?(StructureOpco) || structure.is_a?(StructureLocale) %>
-      <%= render BoutonDsfrComponent.new(
-        "#",
-        type: :tertiary,
-        size: :sm,
-        "data-fr-opened": "false",
-        "aria-controls": "fr-modal-invitation-#{structure.id}"
-      ) do %>
-        <%= t("admin.dashboard.sidebar.opco_entreprise.inviter") %>
-      <% end %>
-      <%= render "admin/structures/modal_invitation", structure: structure %>
-    <% end %>
-  </div>
+  <%= render "admin/structures/bloc_structure_invitation", structure: structure %>
 </div>

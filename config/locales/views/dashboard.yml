@@ -128,9 +128,3 @@ fr:
         colonne_date: Date
         colonne_taux_risque: Taux de risque
         colonne_couts: Coûts
-      sidebar:
-        opco_partenaire:
-          titre: En partenariat avec
-        opco_entreprise:
-          titre: Entreprise
-          inviter: Inviter mes collègues

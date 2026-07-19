@@ -1,0 +1,33 @@
+.bloc-opco-entreprise {
+  display: flex;
+  padding: $dsfr-spacing-3w;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: $dsfr-spacing-2w;
+  align-self: stretch;
+  border: 1px solid var(--border-default-grey);
+}
+
+.bloc-opco-entreprise__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.bloc-opco-entreprise__titre {
+  color: var(--text-mention-grey);
+
+  @include corps-de-texte-md-bold;
+
+  margin: 0;
+}
+
+.bloc-opco-entreprise__nom {
+  color: var(--text-default-grey);
+
+  @include corps-de-texte-sm-regular;
+
+  margin: 0;
+}

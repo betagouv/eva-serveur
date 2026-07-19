@@ -1,0 +1,9 @@
+fr:
+  admin:
+    structures:
+      bloc_structure_invitation:
+        titre: Entreprise
+        entreprises_rattachees:
+          one: "%{count} entreprise rattachée"
+          other: "%{count} entreprises rattachées"
+        inviter: Inviter mes collègues

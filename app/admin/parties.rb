@@ -14,13 +14,15 @@ ActiveAdmin.register Partie do
     scope.where.not(session_id: session_ids_des_evenements_fin)
   end
 
-  filter :evaluation_id,
+  filter :evaluation_beneficiaire_id,
          as: :search_select_filter,
-         url: proc { admin_evaluations_eva_path },
-         fields: %i[nom],
-         display_name: "nom",
+         url: proc { admin_beneficiaires_path },
+         fields: %i[nom code_beneficiaire],
+         display_name: "display_name",
          minimum_input_length: 2,
-         order_by: "nom_asc"
+         order_by: "nom_asc",
+         label: proc { Beneficiaire.model_name.human },
+         method_model: Beneficiaire
   filter :session_id
   filter :created_at
 

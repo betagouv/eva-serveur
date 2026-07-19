@@ -1,21 +1,4 @@
 <div class="evaluation-sidebar__container">
   <%= render "admin/opcos/bloc_opco_partenaire", opco: structure.opco_financeur %>
-  <div class="evaluation-sidebar__bloc">
-    <div class="evaluation-sidebar__bloc-evaluation__details">
-      <h3><%= t("admin.dashboard.sidebar.opco_entreprise.titre") %></h3>
-      <p><%= structure.nom %></p>
-    </div>
-    <% if structure.is_a?(StructureLocale) %>
-      <%= render BoutonDsfrComponent.new(
-        "#",
-        type: :tertiary,
-        size: :sm,
-        "data-fr-opened": "false",
-        "aria-controls": "fr-modal-invitation-#{structure.id}"
-      ) do %>
-        <%= t("admin.dashboard.sidebar.opco_entreprise.inviter") %>
-      <% end %>
-      <%= render "admin/structures/modal_invitation", structure: structure %>
-    <% end %>
-  </div>
+  <%= render "admin/structures/bloc_structure_invitation", structure: structure %>
 </div>

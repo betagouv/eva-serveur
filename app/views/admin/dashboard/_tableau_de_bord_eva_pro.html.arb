@@ -36,11 +36,8 @@ else
     if structure.present?
       div class: "tableau-bord-sidebar" do
         section class: "section-opco section-tableau-bord-eva-pro" do
-          render partial: "admin/dashboard/sidebar_opco",
-                locals: {
-                  opco: opco,
-                  structure: structure
-                }
+          render partial: "admin/dashboard/sidebar_structure",
+                locals: { structure: structure }
         end
       end
     end

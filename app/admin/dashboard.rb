@@ -5,8 +5,7 @@ ActiveAdmin.register_page "Dashboard" do
 
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_compte.utilisateur_opco?
-      render partial: "tableau_de_bord_opco",
-      locals: { structure: current_compte.structure, opco: current_compte.structure&.opco }
+      render partial: "tableau_de_bord_opco", locals: { structure: current_compte.structure }
     elsif current_compte.utilisateur_entreprise?
       render partial: "tableau_de_bord_eva_pro",
              locals: eva_pro_locals(

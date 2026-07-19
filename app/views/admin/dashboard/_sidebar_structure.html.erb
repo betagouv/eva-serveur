@@ -1,6 +1,6 @@
 <div class="tableau-bord-sidebar-container">
   <% if structure.is_a?(StructureLocale) %>
-    <%= render "admin/opcos/bloc_opco_partenaire", opco: opco %>
+    <%= render "admin/opcos/bloc_opco_partenaire", opco: structure&.opco %>
   <% end %>
   <%= render "admin/structures/bloc_structure_invitation", structure: structure %>
 </div>

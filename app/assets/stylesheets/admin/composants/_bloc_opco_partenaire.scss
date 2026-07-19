@@ -1,0 +1,33 @@
+.bloc-opco-partenaire {
+  display: flex;
+  padding: $dsfr-spacing-3w;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: $dsfr-spacing-2w;
+  align-self: stretch;
+  border: 1px solid var(--border-default-grey);
+  background: var(--background-alt-grey);
+  img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+  }
+}
+
+.bloc-opco-partenaire__titre {
+  color: var(--text-default-grey);
+
+  @include corps-de-texte-md-bold;
+
+  margin: 0;
+}
+
+.bloc-opco-partenaire__logo {
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 51/28;
+  object-fit: contain;
+}

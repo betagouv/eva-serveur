@@ -248,8 +248,6 @@ fr:
               fort: "Impact sur le numérique : Fort"
               tres_fort: "Impact sur le numérique : Très fort"
       sidebar:
-        opco_partenaire:
-          titre: En partenariat avec
         details:
           par: Par
           date: Date

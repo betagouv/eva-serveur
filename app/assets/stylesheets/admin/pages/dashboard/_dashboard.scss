@@ -4,7 +4,8 @@
 
   @import "../../../bootstrap_grid";
 
-  .section-evaluations, .section-actualites {
+  .section-evaluations,
+  .section-actualites {
     margin-bottom: 2.5rem;
   }
 
@@ -80,6 +81,7 @@
     @media (max-width: 48em) {
       .cinq-dernieres-evaluations__tableau {
         .fr-table .fr-table__content table {
+
           thead tr th:nth-child(n + 3),
           tbody tr td:nth-child(n + 3) {
             display: none !important;
@@ -165,23 +167,28 @@
 
     .campagnes-liste {
       color: $eva_dark_blue_grey;
+
       .liste-entete {
         display: flex;
         padding: 0 1rem;
         margin-bottom: 0.75rem;
         font-size: 0.875rem;
+
         .entete {
           &-libelle {
             flex: 2;
           }
+
           &-code {
             flex: 1;
           }
+
           &-url {
             flex: 3;
           }
         }
       }
+
       .campagne {
         @include carte-avec-ombre;
 
@@ -191,10 +198,12 @@
         align-items: center;
         position: relative;
         font-size: 0.875rem;
+
         &-libelle,
         &-code {
           background-image: none;
         }
+
         &-libelle {
           flex: 2;
           font-size: 1rem;
@@ -202,9 +211,11 @@
           font-weight: bold;
           color: $couleur-liens;
         }
+
         &-code {
           flex: 1;
         }
+
         &-url {
           flex: 3;
           display: flex;
@@ -237,7 +248,7 @@
         border-radius: .5rem .5rem 0 0;
         box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
 
-        & ~ .qcm {
+        &~.qcm {
           box-shadow: 0 0 8px rgba(30, 65, 106, 0.25);
         }
       }
@@ -252,6 +263,7 @@
         a {
           display: flex;
           align-items: center;
+
           &::after {
             content: '';
             width: 1.5rem;
@@ -262,15 +274,19 @@
           }
         }
       }
+
       &:hover {
         background-color: white;
+
         .carte__nom a {
           color: $eva_main_blue;
+
           &::after {
             display: inline-block;
           }
         }
       }
+
       .mise-en-action {
         @include corps-de-texte-sm-regular;
       }
@@ -281,8 +297,11 @@
       border-radius: .5rem .5rem 0 0;
     }
 
-    .banniere-solutions-illettrisme, .description {
-      a { color: $couleur-texte }
+    .banniere-solutions-illettrisme,
+    .description {
+      a {
+        color: $couleur-texte
+      }
     }
 
     .contenu-avec-evaluations {
@@ -293,10 +312,14 @@
       .banniere-solutions-illettrisme {
         margin: 1rem 0;
       }
+
       .question {
         margin: 3.438rem 0;
       }
-      p { margin-bottom: 0; }
+
+      p {
+        margin-bottom: 0;
+      }
 
       ul {
         list-style-type: none;
@@ -304,19 +327,25 @@
     }
 
     .contenu-sans-evaluations {
-      .description { padding: 2rem 1rem; }
+      .description {
+        padding: 2rem 1rem;
+      }
+
       .illustration {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
+
       h5 {
         font-size: .875rem;
         line-height: 1.125rem;
       }
+
       p {
         margin-bottom: 1rem
       }
+
       p:last-child {
         margin-bottom: 0;
       }
@@ -350,40 +379,6 @@
     align-self: stretch;
   }
 
-  .bloc-opco-partenaire {
-    display: flex;
-    padding: $dsfr-spacing-3w;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: $dsfr-spacing-2w;
-    align-self: stretch;
-    border: 1px solid var(--border-default-grey);
-    background: var(--background-alt-grey);
-    img {
-      height: 56px;
-      width: auto;
-      object-fit: contain;
-    }
-  }
-
-  .bloc-opco-partenaire__titre {
-    color: var(--text-default-grey);
-
-    @include corps-de-texte-md-bold;
-
-    margin: 0;
-  }
-
-  .bloc-opco-partenaire__logo {
-    display: flex;
-    height: 56px;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 51/28;
-    object-fit: contain;
-  }
-
   .bloc-opco-entreprise {
     display: flex;
     padding: $dsfr-spacing-3w;
@@ -398,6 +393,7 @@
       @include bouton-primaire;
     }
   }
+
   .bloc-opco-entreprise__details {
     display: flex;
     flex-direction: column;
@@ -427,6 +423,7 @@
     align-items: flex-start;
     gap: $dsfr-spacing-3w;
     align-self: stretch;
+
     &__grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, 282px);
@@ -435,25 +432,30 @@
       gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
+
     &__item {
       display: flex;
       min-width: 0;
     }
+
     &__description {
       @include corps-de-texte-xl-regular;
 
       margin: 0;
     }
+
     &__description_2 {
       @include corps-de-texte-md-regular;
 
       margin: 0;
     }
+
     &__titre {
       @include titre-h5;
 
       margin: 0;
     }
+
     &__texte {
       @include corps-de-texte-md-regular;
 
@@ -467,6 +469,7 @@
 
       margin: 0;
     }
+
     &__suite {
       display: flex;
       flex-direction: column;
@@ -474,6 +477,7 @@
       gap: $dsfr-spacing-3w;
       align-self: stretch;
     }
+
     &__texte {
       color: var(--text-default-grey);
 
@@ -547,7 +551,3 @@
     padding-bottom: 0;
   }
 }
-
-  
-  
-  

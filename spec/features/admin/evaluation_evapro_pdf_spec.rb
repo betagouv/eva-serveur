@@ -7,7 +7,8 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
   after { Bullet.enable = true }
 
   let(:role) { 'admin' }
-  let(:mon_compte) { create :compte, role: role }
+  let(:structure_evapro) { create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO) }
+  let(:mon_compte) { create :compte, role: role, structure: structure_evapro }
   let(:parcours_type) { create :parcours_type, :competences_de_base }
   let(:ma_campagne) do
     create :campagne, compte: mon_compte, libelle: 'Paris 2019', code: 'PARIS2019',

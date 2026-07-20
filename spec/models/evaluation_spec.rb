@@ -128,7 +128,7 @@ donnees: { "reponseIntitule" => nil }
     describe ".diagnostic" do
       let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
       let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
-      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+      let!(:evaluation_evapro) { create(:evaluation, :avec_parcours_evapro) }
 
       it "retourne uniquement les évaluations du programme diagnostic (hors Eva Pro)" do
         resultats = described_class.diagnostic
@@ -142,7 +142,7 @@ donnees: { "reponseIntitule" => nil }
     describe ".positionnement" do
       let!(:evaluation_diagnostic) { create(:evaluation, :diagnostic) }
       let!(:evaluation_positionnement) { create(:evaluation, :positionnement) }
-      let!(:evaluation_evapro) { create(:evaluation, :evapro) }
+      let!(:evaluation_evapro) { create(:evaluation, :avec_parcours_evapro) }
 
       it "retourne uniquement les évaluations du programme positionnement" do
         resultats = described_class.positionnement

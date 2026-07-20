@@ -49,7 +49,7 @@ compte_id: compte.id
   def droit_evaluation(compte)
     can %i[read download_pdf], ActiveAdmin::Page, name: "Comparaison"
     cannot :create, Evaluation
-    classe_evaluation = compte.utilisateur_evapro? ? EvaluationEvapro : Evaluation
+    classe_evaluation = compte.utilisateur_evapro? ? EvaluationEvapro : EvaluationEva
     droit_evaluation_class(compte, classe_evaluation)
   end
 

@@ -29,10 +29,6 @@ else
   end
 end
 
-if structure.est_une_structure_ocpo?
-  render partial: "admin/structures/modal_invitation", locals: { structure: structure }
-end
-
 if !current_compte.cgu_acceptees?
   render "modal_confirmation_cgu"
 elsif comptes_en_attente.present? && can?(:autoriser, Compte)

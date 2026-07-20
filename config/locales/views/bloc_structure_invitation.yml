@@ -6,4 +6,3 @@ fr:
         entreprises_rattachees:
           one: "%{count} entreprise rattachée"
           other: "%{count} entreprises rattachées"
-        inviter: Inviter mes collègues

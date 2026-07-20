@@ -6,8 +6,17 @@
   envoyer_invitation_admin_structure_locale_path(structure)
 end %>
 
+<%= render BoutonDsfrComponent.new(
+  "#",
+  type: :secondary,
+  size: :sm,
+  "data-fr-opened": "false",
+  "aria-controls": id_modal
+  ) do %>
+  <%= t(".inviter") %>
+<% end %>
 <%= dsfr_modal(
-  title: t("admin.structures.membres.modal.titre"),
+  title: t(".titre"),
   html_attributes: { id: id_modal, class: "fr-modal-invitation evapro_admin" }
 ) do |component| %>
   <div class="contenu-modale">
@@ -18,7 +27,7 @@ end %>
                     scope: :invitation,
                     html: { id: form_id } do |f| %>
         <p class="invitation-modal-description">
-          <%= t("admin.structures.membres.modal.description") %>
+          <%= t(".description") %>
         </p>
 
         <%= render InputComponent.new(
@@ -26,32 +35,32 @@ end %>
           form: f,
           method: :email,
           type: "email",
-          label: t("admin.structures.membres.modal.email_label"),
+          label: t(".email_label"),
           required: true
         ) %>
 
         <% if current_compte.au_moins_admin? %>
           <div class="fr-select-group">
             <label class="fr-label" for="invitation_role_<%= structure.id %>">
-              <%= t("admin.structures.membres.modal.role_label") %>
+              <%= t(".role_label") %>
               <abbr title="required">*</abbr>
             </label>
             <%= f.select :role,
                          options_for_select(
-                           Compte::ROLES_STRUCTURE.map { |r| [ t("admin.structures.membres.modal.roles.#{r}"), r ] },
+                           Compte::ROLES_STRUCTURE.map { |r| [ t(".roles.#{r}"), r ] },
                            nil
                          ),
-                         { include_blank: t("admin.structures.membres.modal.role_placeholder") },
+                         { include_blank: t(".role_placeholder") },
                          id: "invitation_role_#{structure.id}",
                          class: "fr-select",
-                         data: { placeholder: t("admin.structures.membres.modal.role_placeholder") } %>
+                         data: { placeholder: t(".role_placeholder") } %>
           </div>
         <% end %>
 
         <div class="fr-input-group">
           <label class="fr-label" for="invitation_message_<%= structure.id %>">
-            <%= t("admin.structures.membres.modal.message_label") %>
-            <span class="fr-hint-text"><%= t("admin.structures.membres.modal.message_hint") %></span>
+            <%= t(".message_label") %>
+            <span class="fr-hint-text"><%= t(".message_hint") %></span>
           </label>
           <%= f.text_area :message,
                           id: "invitation_message_#{structure.id}",
@@ -64,14 +73,14 @@ end %>
 
   <% component.with_button do %>
     <%= render BoutonDsfrComponent.new(
-      t("admin.structures.membres.modal.envoyer"),
+      t(".envoyer"),
       type: :primary,
       tag: :submit,
       size: :md,
       form: form_id,
       class: "fr-icon-send-plane-fill"
     ) do %>
-      <%= t("admin.structures.membres.modal.envoyer") %>
+      <%= t(".envoyer") %>
     <% end %>
   <% end %>
 <% end %>

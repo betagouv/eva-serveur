@@ -44,7 +44,7 @@ describe 'Admin - Structure Operateur de competence' do
         it "affiche le bouton envoyer une invitation" do
           visit admin_structure_opco_path(structure)
 
-          expect(page).to have_content("Envoyer une invitation")
+          expect(page).to have_content("Inviter mes collègues")
         end
       end
     end

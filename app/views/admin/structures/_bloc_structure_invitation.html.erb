@@ -9,15 +9,6 @@
     <% end %>
   </div>
   <% if structure.is_a?(StructureOpco) || structure.is_a?(StructureLocale) %>
-    <%= render BoutonDsfrComponent.new(
-      "#",
-      type: :tertiary,
-      size: :sm,
-      "data-fr-opened": "false",
-      "aria-controls": "fr-modal-invitation-#{structure.id}"
-    ) do %>
-      <%= t(".inviter") %>
-    <% end %>
     <%= render "admin/structures/modal_invitation", structure: structure %>
   <% end %>
 </div>

@@ -50,7 +50,7 @@ describe 'Admin - Structure locale', type: :feature do
 
       describe "invitation d'un collègue" do
         it "affiche la modale d'invitation et envoie la demande" do
-          expect(page).to have_link("Envoyer une invitation")
+          expect(page).to have_link("Inviter mes collègues")
           expect(page).to have_selector("*", text: "Inviter quelqu'un", visible: :all)
 
           fill_in "invitation_email", with: "invite@eva.fr", visible: :all
@@ -63,8 +63,8 @@ describe 'Admin - Structure locale', type: :feature do
         end
 
         it "permet de choisir le rôle attribué à l'invité et crée l'invitation avec ce rôle" do
-          expect(page).to have_link("Envoyer une invitation")
-          click_link "Envoyer une invitation"
+          expect(page).to have_link("Inviter mes collègues")
+          click_link "Inviter mes collègues"
 
           fill_in "invitation_email", with: "admin-invite@eva.fr", visible: :all
           select "Administrateur", from: "invitation_role_#{structure.id}", visible: :all
@@ -117,7 +117,7 @@ describe 'Admin - Structure locale', type: :feature do
         it "affiche le bouton envoyer une invitation" do
           visit admin_structure_locale_path(structure)
 
-          expect(page).to have_content("Envoyer une invitation")
+          expect(page).to have_content("Inviter mes collègues")
         end
       end
     end
@@ -301,8 +301,8 @@ describe 'Admin - Structure locale', type: :feature do
 
     it "n'affiche pas le select de rôle et crée l'invitation avec le rôle conseiller" do
       visit admin_structure_locale_path(structure)
-      expect(page).to have_link("Envoyer une invitation")
-      click_link "Envoyer une invitation"
+      expect(page).to have_link("Inviter mes collègues")
+      click_link "Inviter mes collègues"
       expect(page).not_to have_selector("select[id*='invitation_role']", visible: :all)
       fill_in "invitation_email", with: "invite-conseiller@eva.fr", visible: :all
       find("button", text: "Envoyer l'invitation", visible: :all).click

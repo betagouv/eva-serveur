@@ -3,25 +3,16 @@
     <h3><%= t(".titre") %></h3>
     <%= link_to t(".voir_membres"), admin_comptes_path("q[structure_id_eq]": resource.id) %>
   </div>
-  <% if resource.is_a?(StructureLocale) || resource.est_une_structure_ocpo? %>
+  <% if resource.is_a?(StructureOpco) || resource.is_a?(StructureLocale) %>
     <div class="panel panel-invitation">
       <div class="container-instructions flex-column">
         <div class="panel-invitation-message">
           <%= md t(".invitation") %>
         </div>
         <div>
-          <%= render BoutonDsfrComponent.new(
-            "#",
-            type: :secondary,
-            size: :sm,
-            "data-fr-opened": "false",
-            "aria-controls": "fr-modal-invitation-#{resource.id}"
-          ) do %>
-            <%= t(".envoyer_invitation") %>
-          <% end %>
+          <%= render "admin/structures/modal_invitation", structure: resource %>
         </div>
       </div>
     </div>
-    <%= render "admin/structures/modal_invitation", structure: resource %>
   <% end %>
 </div>

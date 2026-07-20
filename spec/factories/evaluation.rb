@@ -5,11 +5,11 @@ FactoryBot.define do
     debutee_le { 1.hour.ago }
 
     trait :eva do
-      type { 'EvaluationEva' }
+      initialize_with { EvaluationEva.new }
     end
 
     trait :evapro do
-      type { 'EvaluationEvapro' }
+      initialize_with { EvaluationEvapro.new }
     end
 
     trait :terminee do

@@ -79,7 +79,7 @@ describe 'Dashboard', type: :feature do
 
     context "j'ai créé une campagne et j'ai fait une évaluation" do
       let!(:campagne) { create :campagne, compte: compte }
-      let!(:evaluation) { create_list :evaluation, 1, campagne: campagne }
+      let!(:evaluation) { create_list :evaluation, 1, :eva, campagne: campagne }
 
       it "affiche l'étape valider son email" do
         visit admin_path
@@ -102,7 +102,7 @@ describe 'Dashboard', type: :feature do
 
     context "après l'étape de confirmation d'email" do
       let!(:campagne) { create :campagne, compte: compte }
-      let!(:evaluation) { create_list :evaluation, 1, campagne: campagne }
+      let!(:evaluation) { create_list :evaluation, 1, :eva, campagne: campagne }
 
       before { compte.update(confirmed_at: Time.zone.today) }
 
@@ -116,7 +116,7 @@ describe 'Dashboard', type: :feature do
 
     context "j'ai déjà créé une campagne et j'ai au moins 4 évaluations" do
       let!(:campagne) { create :campagne, compte: compte }
-      let!(:evaluation) { create_list :evaluation, 4, campagne: campagne }
+      let!(:evaluation) { create_list :evaluation, 4, :eva, campagne: campagne }
 
       before { compte.update(confirmed_at: Time.zone.today) }
 

@@ -77,7 +77,6 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def evaluations_eva_link
-    return if utilisateur_evapro? && !superadmin?
     return unless can?(:read, EvaluationEva)
 
     { label: "Eva", url: helpers.admin_evaluations_eva_path,
@@ -85,7 +84,6 @@ class NavigationComponent < ViewComponent::Base
   end
 
   def evaluations_evapro_link
-    return unless utilisateur_evapro? || superadmin?
     return unless can?(:read, EvaluationEvapro)
 
     { label: "Evapro", url: helpers.admin_evaluations_evapro_path,

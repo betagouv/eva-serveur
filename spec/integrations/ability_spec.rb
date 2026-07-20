@@ -179,7 +179,7 @@ describe Ability do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
       let(:pas_collegue) { compte_conseiller }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
-      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
+      let(:evaluation_collegue) { create :evaluation, :eva, campagne: campagne_collegue }
 
       it do
         expect(subject).to be_able_to(:read, mon_collegue)
@@ -205,12 +205,16 @@ describe Ability do
     end
 
     context 'peut gérer les comptes des sous-structures' do
-      let(:structure_fille) {
-        create :structure_locale, :avec_admin, structure_referente: compte.structure }
+      let(:structure_fille) do
+        create :structure_locale, :avec_admin, structure_referente: compte.structure
+      end
       let(:compte_sous_structure) { create :compte, role: :conseiller, structure: structure_fille }
-      let(:campagne_sous_structure) {
-        create :campagne, compte: compte_sous_structure, privee: true }
-      let(:evaluation_sous_structure) { create :evaluation, campagne: campagne_sous_structure }
+      let(:campagne_sous_structure) do
+        create :campagne, compte: compte_sous_structure, privee: true
+      end
+      let(:evaluation_sous_structure) do
+        create :evaluation, :eva, campagne: campagne_sous_structure
+      end
 
       before do
         # Force la création de la structure fille
@@ -231,8 +235,9 @@ describe Ability do
     end
 
     context 'peut voir et modifier les structures filles' do
-      let(:structure_fille) {
-        create :structure_locale, :avec_admin, structure_referente: compte.structure }
+      let(:structure_fille) do
+        create :structure_locale, :avec_admin, structure_referente: compte.structure
+      end
 
       before do
         # Force la création de la structure fille
@@ -252,7 +257,7 @@ describe Ability do
 
     context 'peut gérer les évaluations de ma structure' do
       let(:ma_campagne) { create :campagne, compte: compte }
-      let(:evaluation) { create :evaluation, campagne: ma_campagne }
+      let(:evaluation) { create :evaluation, :eva, campagne: ma_campagne }
       let(:beneficiaire_vide) { create :beneficiaire }
 
       it do
@@ -271,7 +276,7 @@ describe Ability do
     context 'peut gérer les mise en actions des campagnes privés des collègues' do
       let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
       let(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
-      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
+      let(:evaluation_collegue) { create :evaluation, :eva, campagne: campagne_collegue }
 
       it do
         expect(subject).to be_able_to(:mise_en_action, evaluation_collegue)
@@ -322,9 +327,11 @@ describe Ability do
       end
       let!(:compte_structure_fille) { create :compte_admin, structure: structure_locale_fille }
       let!(:campagne_structure_fille) { create :campagne, compte: compte_structure_fille }
-      let!(:evaluation_structure_fille) { create :evaluation, campagne: campagne_structure_fille }
+      let!(:evaluation_structure_fille) do
+        create :evaluation, :eva, campagne: campagne_structure_fille
+      end
 
-      it "peut lire les comptes des structures filles pour une structure administrative non OPCO" do
+      it "peut lire les comptes des structures filles pour une structure administrative" do
         expect(subject).to be_able_to(:read, compte_structure_fille)
       end
 
@@ -370,8 +377,8 @@ describe Ability do
     let(:mon_collegue) { create :compte_conseiller, structure: structure_avec_admin }
     let!(:campagne_privee) { create :campagne, compte: compte, privee: true }
     let!(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: true }
-    let(:evaluation_conseiller) { create :evaluation, campagne: campagne_privee }
-    let(:evaluation_autre_conseiller) { create :evaluation, campagne: campagne_collegue }
+    let(:evaluation_conseiller) { create :evaluation, :eva, campagne: campagne_privee }
+    let(:evaluation_autre_conseiller) { create :evaluation, :eva, campagne: campagne_collegue }
     let(:situation)             { create :situation_inventaire }
     let!(:evenement_superadmin) { create :evenement, partie: partie_superadmin }
     let!(:partie_superadmin) do
@@ -474,7 +481,7 @@ describe Ability do
     end
 
     context 'peut consulter les campagnes publiques de ma structure' do
-      let(:evaluation_collegue) { create :evaluation, campagne: campagne_collegue }
+      let(:evaluation_collegue) { create :evaluation, :eva, campagne: campagne_collegue }
       let!(:partie_collegue) do
         create :partie, evaluation: evaluation_collegue, situation: situation
       end

@@ -16,9 +16,7 @@ describe Admin::EvaluationsEvaproController, type: :controller do
 
   describe "GET #index" do
     let(:structure) do
-      create(:structure_locale,
-             type_structure: "entreprise",
-             usage: AvecUsage::USAGE_EVAPRO)
+      create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO)
     end
     let(:compte_connecte) { create(:compte_admin, structure: structure) }
     let(:campagne) { create(:campagne, compte: compte_connecte) }
@@ -41,7 +39,9 @@ describe Admin::EvaluationsEvaproController, type: :controller do
   end
 
   describe "suppression" do
-    let(:structure) { create :structure_locale }
+    let(:structure) do
+      create(:structure_locale, usage: AvecUsage::USAGE_EVAPRO)
+    end
     let!(:compte_connecte) { create :compte_admin, structure: structure }
     let(:campagne) { create :campagne, compte: compte_connecte }
     let!(:evaluation) { create :evaluation, :evapro, campagne: campagne }

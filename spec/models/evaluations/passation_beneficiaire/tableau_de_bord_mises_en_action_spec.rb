@@ -7,27 +7,27 @@ RSpec.describe Evaluations::PassationBeneficiaire::TableauDeBordMisesEnAction do
     let(:compte_admin) { create :compte_admin }
     let(:campagne) { create :campagne, compte: compte_admin }
     let!(:evaluation_sans_mise_en_action) do
-      create :evaluation,
+      create :evaluation, :eva,
              synthese_competences_de_base: :illettrisme_potentiel,
              completude: "complete",
              campagne: campagne
     end
     let!(:evaluation_sans_difficulte) do
-      create :evaluation, :avec_mise_en_action,
+      create :evaluation, :eva, :avec_mise_en_action,
              effectuee: false,
              synthese_competences_de_base: :illettrisme_potentiel,
              campagne: campagne
     end
     let!(:evaluation_ni_ni) do
-      create :evaluation, synthese_competences_de_base: :ni_ni, campagne: campagne
+      create :evaluation, :eva, synthese_competences_de_base: :ni_ni, campagne: campagne
     end
     let!(:evaluation_sans_dispositif) do
-      create :evaluation, :avec_mise_en_action,
+      create :evaluation, :eva, :avec_mise_en_action,
              synthese_competences_de_base: :illettrisme_potentiel,
              campagne: campagne
     end
     let!(:evaluation_autre_compte) do
-      create :evaluation, synthese_competences_de_base: :illettrisme_potentiel
+      create :evaluation, :eva, synthese_competences_de_base: :illettrisme_potentiel
     end
 
     it "retourne les évaluations du tableau de bord mises en action pour l'ability" do

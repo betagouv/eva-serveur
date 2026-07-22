@@ -21,7 +21,7 @@
           qcm_affiche: mise_en_action_presenter.non_effectuee_sans_difficulte?)) %>
   </div>
   <div class= 'container fr-py-3v fr-px-4v container--asterisque'>
-    <%= render "components/banniere_solutions_illettrisme", asterisque: true %>
+    <%= render BanniereSolutionsIllettrismeComponent.new(asterisque: true, evaluation: resource) %>
   </div>
 </div>
 

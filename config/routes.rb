@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     # UI Kit routes (ordre alphabétique du chemin sous /ui_kit)
     get '/ui_kit', to: 'ui_kit#index'
     get '/ui_kit/badge', to: 'ui_kit#badge'
+    get '/ui_kit/banniere_solutions_illettrisme', to: 'ui_kit#banniere_solutions_illettrisme'
     get '/ui_kit/barre_segmentee', to: 'ui_kit#barre_segmentee'
     get '/ui_kit/bilan_eva_pro', to: 'ui_kit#bilan_eva_pro'
     get '/ui_kit/bouton', to: 'ui_kit#bouton'

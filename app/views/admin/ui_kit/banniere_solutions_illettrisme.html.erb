@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Démo BanniereSolutionsIllettrismeComponent</h1>
+
+  <h2>Sans évaluation (commune de la structure du compte connecté)</h2>
+  <div class="fr-mb-5w">
+    <%= render BanniereSolutionsIllettrismeComponent.new(
+      current_compte: (respond_to?(:current_compte) ? current_compte : nil)
+    ) %>
+  </div>
+
+  <h2>Avec évaluation (commune de la structure de la campagne de l'évaluation)</h2>
+  <% structure = Structure.new(nom: "Mission locale de Strasbourg", code_commune: "67482") %>
+  <% compte = Compte.new(structure: structure) %>
+  <% campagne = Campagne.new(compte: compte) %>
+  <% evaluation = EvaluationEva.new(campagne: campagne) %>
+  <div class="fr-mb-5w">
+    <%= render BanniereSolutionsIllettrismeComponent.new(
+      evaluation: evaluation,
+      asterisque: true
+    ) %>
+  </div>
+</div>

@@ -5,6 +5,7 @@ module Admin
     def index; end
 
     def badge; end
+    def banniere_solutions_illettrisme; end
     def bilan_eva_pro; end
     def bouton; end
     def boutons_dsfr; end

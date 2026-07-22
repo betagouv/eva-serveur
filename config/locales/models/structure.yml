@@ -64,8 +64,8 @@ fr:
           CRIA: CRIA
           e2c: École de la 2e chance
           entreprise: Entreprise
-          etablissement_prive: Etablissement (sanitaire, social, médicosocial) privé
-          etablissement_public_sante: Etablissement public de santé
+          etablissement_prive: Établissement sanitaire, social, médico-social privé
+          etablissement_public_sante: Établissement sanitaire, social, médico-social public
           france_travail: France Travail
           GRETA: GRETA
           mission_locale: Mission locale

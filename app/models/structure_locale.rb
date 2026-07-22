@@ -10,6 +10,7 @@ class StructureLocale < Structure
     AFPA
     apprentissage
     cap_emploi
+    service_insertion_collectivite
     CRIA
     e2c
     entreprise
@@ -21,7 +22,6 @@ class StructureLocale < Structure
     organisme_formation
     orientation_scolaire
     PJJ_UEAJ
-    service_insertion_collectivite
     SIAE
     SMA
     SMV

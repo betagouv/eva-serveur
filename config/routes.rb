@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     get :invitation_invalide, to: "invitations#invalide"
   end
   namespace :admin do
+    resources :evaluations, only: %i[index show]
     resources :controle_syntheses_restitutions, only: :index
 
     # UI Kit routes (ordre alphabétique du chemin sous /ui_kit)

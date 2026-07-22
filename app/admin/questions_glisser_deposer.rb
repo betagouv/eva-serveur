@@ -1,8 +1,6 @@
 ActiveAdmin.register QuestionGlisserDeposer do
   before_action :set_question, only: %i[update]
 
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :libelle, :nom_technique, :description, :passable, :illustration,
                 :supprimer_illustration, :supprimer_audio_modalite_reponse,
                 :supprimer_audio_intitule, :supprimer_zone_depot, :zone_depot,

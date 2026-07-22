@@ -1,6 +1,4 @@
 ActiveAdmin.register_page "Aide" do
-  menu priority: 99
-
   content do
     render "aide",
            categories: SourceAide.categories.keys,

@@ -1,6 +1,4 @@
 ActiveAdmin.register ParcoursType do
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :libelle, :actif, :position, :nom_technique,
                 :duree_moyenne, :description, :type_de_programme,
                 situations_configurations_attributes: %i[id situation_id questionnaire_id _destroy]

@@ -1,6 +1,4 @@
 ActiveAdmin.register_page "import_xls" do
-  menu false
-
   content title: proc { I18n.t("active_admin.import_xls.title.#{params[:model]}") } do
     render partial: "admin/import_xls/form",
            locals: {

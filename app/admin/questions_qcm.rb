@@ -1,8 +1,6 @@
 ActiveAdmin.register QuestionQcm do
   before_action :set_question, only: %i[update]
 
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :categorie, :libelle, :nom_technique, :description,
                 :type_qcm, :passable, :illustration, :supprimer_illustration,
                 :supprimer_audio_intitule,

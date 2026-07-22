@@ -1,5 +1,4 @@
 ActiveAdmin.register StructureLocale do
-  # La position dans le menu est gérée par NavigationComponent
   actions :all
 
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,

@@ -1,5 +1,4 @@
 ActiveAdmin.register Partie, as: "Restitutions" do
-  menu false
   actions :show, :destroy
 
   controller do

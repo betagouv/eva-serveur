@@ -573,6 +573,10 @@ describe Ability do
     it "n'a pas accès en lecture ni en suppression aux Evaluation (non EvaPro)" do
       expect(subject).not_to be_able_to(%i[read destroy], evaluation_eva)
     end
+
+    it "n'a pas accès en lecture au modèle Beneficiaire" do
+      expect(subject).not_to be_able_to(:read, Beneficiaire)
+    end
   end
 
   context 'Compte en attente de validation' do

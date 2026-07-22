@@ -107,7 +107,6 @@ class NavigationComponent < ViewComponent::Base
   def beneficiaires_link
     return if en_attente_restreint?
     return unless current_compte_structure_present?
-    return if utilisateur_evapro?
     return unless can?(:read, Beneficiaire)
 
     {

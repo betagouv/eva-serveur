@@ -77,6 +77,8 @@ compte_id: compte.id
   end
 
   def droit_beneficiaire(compte)
+    return if compte.utilisateur_evapro?
+
     cannot(:destroy, Beneficiaire)
     can :read, Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
     can :read, Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }

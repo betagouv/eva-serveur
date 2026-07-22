@@ -1,6 +1,4 @@
 ActiveAdmin.register QuestionClicDansTexte do
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :categorie, :libelle, :nom_technique, :message,
                 :suffix_reponse, :description, :passable, :reponse_placeholder,
                 :illustration, :supprimer_illustration, :texte_sur_illustration,

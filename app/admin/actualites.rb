@@ -1,6 +1,4 @@
 ActiveAdmin.register Actualite do
-  menu priority: 2
-
   permit_params :titre, :contenu, :categorie, :illustration
 
   filter :titre, filters: [ :contains_unaccent, :eq ]

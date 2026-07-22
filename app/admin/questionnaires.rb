@@ -1,6 +1,4 @@
 ActiveAdmin.register Questionnaire do
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :libelle, :nom_technique,
                 questionnaires_questions_attributes: %i[id question_id _destroy]
 

@@ -1,6 +1,4 @@
 ActiveAdmin.register Question do
-  menu false
-
   member_action :export_xls, method: :get do
     question = Question.find(params[:id])
     export =

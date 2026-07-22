@@ -1,6 +1,4 @@
 ActiveAdmin.register StructureAdministrative do
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :nom, :parent_id, :siret
 
   filter :nom, filters: [ :contains_unaccent, :eq ]

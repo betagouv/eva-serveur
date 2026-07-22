@@ -1,6 +1,4 @@
 ActiveAdmin.register SourceAide do
-  # La position dans le menu est gérée par NavigationComponent
-
   permit_params :titre, :description, :url, :categorie, :type_document, :position
 
   filter :titre

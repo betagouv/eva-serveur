@@ -243,36 +243,25 @@ describe Restitution::Inventaire do
   end
 
   describe '#version?' do
-    context "si il y a un numéro de version dans l'évènement démarrage" do
-      before do
-        evenements = [
-          build(:evenement_demarrage, donnees: { version: '2' })
-        ]
-        @restitution = described_class.new(campagne, evenements)
-      end
+    let(:restitution) { described_class.new(campagne, evenements) }
 
-      it { expect(@restitution.version?('2')).to be true }
-      it { expect(@restitution.version?('1')).to be false }
+    context "si il y a un numéro de version dans l'évènement démarrage" do
+      let(:evenements) { [ build(:evenement_demarrage, donnees: { version: '2' }) ] }
+
+      it { expect(restitution.version?('2')).to be true }
+      it { expect(restitution.version?('1')).to be false }
     end
 
     context "si il n'y a pas de numéro de version" do
-      before do
-        evenements = [
-          build(:evenement_demarrage, donnees: {})
-        ]
-        @restitution = described_class.new(campagne, evenements)
-      end
+      let(:evenements) { [ build(:evenement_demarrage, donnees: {}) ] }
 
-      it { expect(@restitution.version?(2)).to be false }
+      it { expect(restitution.version?(2)).to be false }
     end
 
     context "si il n'y a pas d'événement démarrage" do
-      before do
-        evenements = []
-        @restitution = described_class.new(campagne, evenements)
-      end
+      let(:evenements) { [] }
 
-      it { expect(@restitution.version?(2)).to be false }
+      it { expect(restitution.version?(2)).to be false }
     end
   end
 end

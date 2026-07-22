@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 describe Restitution::Illettrisme::InterpreteurNiveau1 do
-  let(:interpreteur_score) { double }
-  let(:subject) do
+  subject do
     described_class.new interpreteur_score
   end
+
+  let(:interpreteur_score) { double }
+
 
   describe '#interpretations_cefr' do
     let(:interpretations_cefr) do

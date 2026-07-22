@@ -44,7 +44,7 @@ describe ApplicationHelper do
   end
 
   describe '#cdn_for(fichier)' do
-    let(:fichier) { double('fichier') }
+    let(:fichier) { double }
 
     before do
       allow(ENV).to receive(:fetch).with('PROTOCOLE_SERVEUR').and_return('https')
@@ -54,8 +54,9 @@ describe ApplicationHelper do
     end
 
     context 'en environnement de production' do
+      let(:environnement) { double }
+
       before do
-        environnement = double('env')
         allow(Rails).to receive(:env).and_return(environnement)
         allow(environnement).to receive(:production?).and_return(true)
       end

@@ -577,6 +577,10 @@ describe Ability do
     it "n'a pas accès en lecture au modèle Beneficiaire" do
       expect(subject).not_to be_able_to(:read, Beneficiaire)
     end
+
+    it "n'a pas accès en lecture au modèle Campagne" do
+      expect(subject).not_to be_able_to(:read, Campagne)
+    end
   end
 
   context 'Compte en attente de validation' do

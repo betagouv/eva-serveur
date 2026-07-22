@@ -71,7 +71,6 @@ describe Restitution::Illettrisme::NombreReponses do
       end
 
       context 'ignore les événements non réponse' do
-        let(:evenements) { [] }
         let(:evenements) do
           [ build(:evenement_demarrage),
            build(:evenement_affichage_question_qcm,

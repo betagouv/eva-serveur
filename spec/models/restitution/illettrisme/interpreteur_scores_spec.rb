@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Restitution::Illettrisme::InterpreteurScores do
-  let(:subject) { described_class.new scores_standardises }
+  subject { described_class.new scores_standardises }
 
   context 'pour des compétences de niveau 2' do
     let(:competences) { %i[score_ccf score_memorisation] }

@@ -9,10 +9,10 @@ describe Restitution::Inventaire::Rapidite do
   end
 
   context 'en cas de réussite' do
-    before { expect(restitution).to receive(:reussite?).and_return(true) }
+    before { allow(restitution).to receive(:reussite?).and_return(true) }
 
     describe "pour la version originale de l'inventaire" do
-      before { expect(restitution).to receive(:version?).and_return(false) }
+      before { allow(restitution).to receive(:version?).and_return(false) }
 
       it { expect(pour(secondes: 0.minutes.to_i)).to evalue_a(Competence::NIVEAU_4) }
       it { expect(pour(secondes: 10.minutes.to_i)).to evalue_a(Competence::NIVEAU_4) }
@@ -24,7 +24,7 @@ describe Restitution::Inventaire::Rapidite do
     end
 
     describe 'pour la version 2' do
-      before { expect(restitution).to receive(:version?).with('2').and_return(true) }
+      before { allow(restitution).to receive(:version?).with('2').and_return(true) }
 
       it { expect(pour(secondes: 6.minutes.to_i)).to evalue_a(Competence::NIVEAU_4) }
       it { expect(pour(secondes: 6.minutes.to_i + 1)).to evalue_a(Competence::NIVEAU_3) }

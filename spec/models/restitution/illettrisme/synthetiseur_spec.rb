@@ -74,11 +74,13 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation pre prositionnement' do
-    let(:interpreteur_diagnostic) { double }
-    let(:subject) do
+    subject do
       Restitution::Illettrisme::Synthetiseur::SynthetiseurDiagnostic
         .new interpreteur_diagnostic
     end
+
+    let(:interpreteur_diagnostic) { double }
+
 
     describe '#socle_clea?' do
       context 'Socle Cléa Atteint' do
@@ -171,10 +173,12 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation pré-positionnement' do
-    let(:interpreteur_diagnostic) { double }
-    let(:subject) do
+    subject do
       described_class.new interpreteur_diagnostic, nil, nil
     end
+
+    let(:interpreteur_diagnostic) { double }
+
 
     describe '#positionnement_litteratie' do
       it 'ne retourne rien' do
@@ -184,10 +188,12 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation positionnement Littératie' do
-    let(:interpreteur_positionnement_litteratie) { double }
-    let(:subject) do
+    subject do
       described_class.new nil, interpreteur_positionnement_litteratie, nil
     end
+
+    let(:interpreteur_positionnement_litteratie) { double }
+
 
     describe '#synthese' do
       def synthese(profil)
@@ -210,10 +216,12 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   describe 'Evaluation positionnement Numératie' do
-    let(:interpreteur_numeratie) { double }
-    let(:subject) do
+    subject do
       described_class.new nil, nil, interpreteur_numeratie
     end
+
+    let(:interpreteur_numeratie) { double }
+
 
     describe '#synthese' do
       def synthese(profil)
@@ -234,12 +242,14 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   context 'quand il y a un positionnement et un pré-positionnement' do
-    let(:interpreteur_positionnement) { double }
-    let(:interpreteur_diagnostic) { double }
-    let(:subject) do
+    subject do
       described_class.new interpreteur_diagnostic,
                           interpreteur_positionnement, nil
     end
+
+    let(:interpreteur_positionnement) { double }
+    let(:interpreteur_diagnostic) { double }
+
 
     before do
       allow(interpreteur_positionnement).to receive(:synthese).and_return(
@@ -268,13 +278,15 @@ describe Restitution::Illettrisme::Synthetiseur do
   end
 
   context 'quand il y a un positionnement littératie et numératie' do
-    let(:interpreteur_positionnement) { double }
-    let(:interpreteur_numeratie) { double }
-    let(:subject) do
+    subject do
       described_class.new nil,
                           interpreteur_positionnement,
                           interpreteur_numeratie
     end
+
+    let(:interpreteur_positionnement) { double }
+    let(:interpreteur_numeratie) { double }
+
 
     before do
       allow(interpreteur_positionnement).to receive(:synthese).and_return(

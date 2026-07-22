@@ -16,7 +16,7 @@ describe Eva::Devise::SessionsController, type: :controller do
           .with(campagne)
           .and_return(url)
 
-        @request.env['devise.mapping'] = Devise.mappings[:compte]
+        request.env['devise.mapping'] = Devise.mappings[:compte]
         post :connexion_espace_jeu, params: params
         expect(response).to redirect_to(url)
       end
@@ -24,7 +24,7 @@ describe Eva::Devise::SessionsController, type: :controller do
 
     context 'retourne vers la pae de login' do
       it 'quand on ne passe pas de code campagne' do
-        @request.env['devise.mapping'] = Devise.mappings[:compte]
+        request.env['devise.mapping'] = Devise.mappings[:compte]
         post :connexion_espace_jeu, params: {}
         expect(response).to redirect_to(
           new_compte_session_path(
@@ -34,7 +34,7 @@ describe Eva::Devise::SessionsController, type: :controller do
       end
 
       it 'quand on passe un code campagne vide' do
-        @request.env['devise.mapping'] = Devise.mappings[:compte]
+        request.env['devise.mapping'] = Devise.mappings[:compte]
         post :connexion_espace_jeu, params: {
           code: ''
         }

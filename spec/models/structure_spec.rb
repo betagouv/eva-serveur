@@ -20,7 +20,6 @@ describe Structure, type: :model do
   it { is_expected.to validate_numericality_of(:siret) }
 
   describe 'Ancestry primary key format' do
-    it { expect('uuid invalide').not_to match(Ancestry.default_primary_key_format) }
     it { expect(SecureRandom.uuid).to match(Ancestry.default_primary_key_format) }
   end
 

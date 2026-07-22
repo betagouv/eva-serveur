@@ -1,0 +1,6 @@
+fr:
+  banniere_solutions_illettrisme:
+    description: |
+      Retrouvez ici des pistes de solutions disponibles dans votre région (ateliers, formations, ré-orientations, accompagnement social…) :
+    lien: https://eva.anlci.gouv.fr/rechercher-une-solution-de-remediation
+    lien_commune: https://eva.anlci.gouv.fr/rechercher-une-solution-de-remediation?code_commune=%{code_commune}

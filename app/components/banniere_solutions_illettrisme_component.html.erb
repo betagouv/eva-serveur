@@ -1,0 +1,10 @@
+<div class="banniere-solutions-illettrisme d-flex">
+  <%= image_tag "information.svg", class: "fr-mr-4v", alt: "" unless @asterisque %>
+  <div class="banniere__description font-italic">
+    <% if @asterisque %>
+      <span id="asterisque">*</span>
+    <% end %>
+    <%= t("banniere_solutions_illettrisme.description") %><br/>
+    <%= render LienComponent.new(t("banniere_solutions_illettrisme.lien"), lien, nouvelle_fenetre: true) %>
+  </div>
+</div>

@@ -29,6 +29,6 @@
         <% end %>
       <% end %>
     </ul>
-    <%= render "components/banniere_solutions_illettrisme", asterisque: false %>
+    <%= render BanniereSolutionsIllettrismeComponent.new(current_compte: current_compte) %>
   </div>
 </div>

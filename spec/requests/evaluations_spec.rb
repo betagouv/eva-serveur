@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Evaluation', type: :request do
-  let(:unUserAgent) do
+  let(:un_user_agent) do
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0'
   end
 
@@ -19,7 +19,7 @@ describe 'Evaluation', type: :request do
             code_campagne: 'ETE19',
             debutee_le: date.iso8601,
             conditions_passation_attributes: {
-              user_agent: unUserAgent,
+              user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
             },
@@ -50,7 +50,7 @@ describe 'Evaluation', type: :request do
         it do
           expect(ConditionsPassation.count).to eq 1
           conditions_passation = ConditionsPassation.last
-          expect(conditions_passation.user_agent).to eq unUserAgent
+          expect(conditions_passation.user_agent).to eq un_user_agent
           expect(conditions_passation.materiel_utilise).to eq 'desktop'
           expect(conditions_passation.modele_materiel).to be_nil
           expect(conditions_passation.nom_navigateur).to eq 'Firefox'
@@ -104,7 +104,7 @@ describe 'Evaluation', type: :request do
             code_campagne: 'ETE19',
             debutee_le: date.iso8601,
             conditions_passation_attributes: {
-              user_agent: unUserAgent,
+              user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
             },
@@ -201,7 +201,7 @@ describe 'Evaluation', type: :request do
         let(:params) do
           {
             conditions_passation_attributes: {
-              user_agent: unUserAgent,
+              user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
             },

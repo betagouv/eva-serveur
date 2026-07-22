@@ -53,7 +53,9 @@ describe Restitution::Maintenance::TempsNonMots do
         [
           build(:evenement_demarrage),
           build(:evenement_apparition_mot, donnees: { type: 'non-mot', reponse: 'pasfrancais' },
-                                           date: Time.zone.local(2019, 10, 9, 10, 1, 21, 250_000))
+                                           date: Time.zone.local(2019, 10, 9, 10, 1, 21, 250_000)),
+          build(:evenement_identification_mot,
+                date: Time.zone.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end
 
@@ -68,7 +70,7 @@ describe Restitution::Maintenance::TempsNonMots do
                 donnees: { type: 'non-mot', reponse: 'pasfrancais' },
                 date: Time.zone.local(2019, 10, 9, 10, 1, 21, 250_000)),
           build(:evenement_identification_mot,
-                donnees: { type: 'non-mot', reponse: 'francais' },
+                donnees: { type: 'non-mot' },
                 date: Time.zone.local(2019, 10, 9, 10, 1, 21, 260_000))
         ]
       end

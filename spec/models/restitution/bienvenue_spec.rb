@@ -15,7 +15,6 @@ describe Restitution::Bienvenue do
                           choix: [ choix_france ]
   end
   let(:situation) { create :situation_bienvenue }
-  let(:evenements) { [] }
   let(:questionnaire) { create :questionnaire, questions: [ quel_age, scolarite ] }
   let(:campagne) { Campagne.new }
 

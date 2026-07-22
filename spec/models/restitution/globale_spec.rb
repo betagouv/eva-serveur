@@ -290,13 +290,16 @@ describe Restitution::Globale do
 
   describe "#diag_risques_entreprise" do
     let(:restitution_classique) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: false))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: false))
     end
     let(:restitution_evapro_ancienne) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: true))
     end
     let(:restitution_evapro_recente) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: true))
     end
     let(:restitutions) do
       [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]
@@ -309,13 +312,16 @@ describe Restitution::Globale do
 
   describe "#evaluation_impact_general" do
     let(:restitution_classique) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: false))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: false))
     end
     let(:restitution_evapro_ancienne) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: true))
     end
     let(:restitution_evapro_recente) do
-      double("Restitution", situation: double("Situation", a_pour_nom_technique?: true))
+      instance_double(Restitution::Base,
+        situation: instance_double(Situation, a_pour_nom_technique?: true))
     end
     let(:restitutions) do
       [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]

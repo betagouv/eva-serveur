@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Restitution::CompetencesTransversales::Interpreteur do
-  let(:subject) { described_class.new niveaux_competences }
+  subject { described_class.new niveaux_competences }
 
   context 'pas de competences à interpreter' do
     let(:niveaux_competences) { [] }

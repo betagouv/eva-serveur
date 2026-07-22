@@ -247,7 +247,7 @@ ActiveAdmin.register Compte do
     end
   end
 
-  action_item :voir_campagnes, only: :show do
+  action_item :voir_campagnes, only: :show, if: proc { can?(:read, Campagne) } do
     link_to I18n.t("admin.comptes.action_items.voir_campagnes",
                    count: Campagne.where(compte: resource).count),
             admin_campagnes_path(q: { compte_id_eq: resource.id })

@@ -5,9 +5,8 @@ class AbilityUtilisateur
   def initialize(compte)
     @compte = compte
 
-    droits_superadmin compte
+    droit_superadmin compte
     droit_campagne compte
-    droit_admin_campagne(compte) if compte.admin?
     droit_evaluation compte
     droit_beneficiaire compte
     droit_evenement compte
@@ -18,19 +17,26 @@ class AbilityUtilisateur
     droits_cmr if compte.charge_mission_regionale?
   end
 
+  def droit_campagne(compte)
+    if compte.utilisateur_evapro?
+      droit_campagne_evapro compte
+    else
+      droit_campagne_eva compte
+      droit_admin_campagne_eva(compte) if compte.admin?
+    end
+  end
+
   def can_update_active_pour_campagne?(campagne)
     @compte.au_moins_admin? || campagne.compte_id == @compte.id
   end
 
   private
 
-  def droits_superadmin(compte)
+  def droit_superadmin(compte)
     can :manage, :all if compte.superadmin?
   end
 
-  def droit_campagne(compte)
-    return if compte.utilisateur_evapro?
-
+  def droit_campagne_eva(compte)
     cannot :destroy, Campagne
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
     can %i[read update autoriser_compte revoquer_compte play destroy], Campagne,
@@ -43,11 +49,13 @@ compte_id: compte.id
     can %i[read], Campagne, campagnes_publique_de_la_structure(compte)
   end
 
-  def droit_admin_campagne(compte)
-    return if compte.utilisateur_evapro?
-
+  def droit_admin_campagne_eva(compte)
     can %i[read update autoriser_compte revoquer_compte play destroy], Campagne,
       campagnes_de_la_structure(compte)
+  end
+
+  def droit_campagne_evapro(compte)
+    can %i[read play], Campagne, compte_id: compte.id
   end
 
   def droit_evaluation(compte)

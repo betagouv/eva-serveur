@@ -556,14 +556,14 @@ describe Ability do
   context 'Compte utilisateur entreprise (EvaPro)' do
     let(:structure_entreprise) { create :structure_locale, :eva_pro }
     let(:compte) { create :compte_admin, structure: structure_entreprise }
-    let!(:campagne_entreprise) { create :campagne, :avec_parcours_evapro, compte: compte }
+    let!(:campagne_evapro) { create :campagne, :avec_parcours_evapro, compte: compte }
     let!(:evaluation_evapro) do
-      EvaluationEvapro.create!(campagne: campagne_entreprise,
+      EvaluationEvapro.create!(campagne: campagne_evapro,
                                 beneficiaire: create(:beneficiaire),
                                 debutee_le: 1.hour.ago)
     end
     let!(:evaluation_eva) do
-      create :evaluation, campagne: campagne_entreprise, beneficiaire: create(:beneficiaire)
+      create :evaluation, campagne: campagne_evapro, beneficiaire: create(:beneficiaire)
     end
 
     it 'a accès en lecture et en suppression aux EvaluationEvapro de sa structure' do
@@ -578,8 +578,20 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, Beneficiaire)
     end
 
-    it "n'a pas accès en lecture au modèle Campagne" do
-      expect(subject).not_to be_able_to(:read, Campagne)
+    it "a accès en lecture et en lancement (play) à sa propre campagne" do
+      expect(subject).to be_able_to(%i[read play], campagne_evapro)
+    end
+
+    it "n'a pas accès en modification, suppression, autorisation ou duplication à sa campagne" do
+      expect(subject).not_to be_able_to(
+        %i[update destroy autoriser_compte revoquer_compte duplique],
+        campagne_evapro
+      )
+    end
+
+    it "n'a pas accès en lecture aux campagnes d'une autre structure" do
+      autre_campagne = create :campagne, :avec_parcours_evapro
+      expect(subject).not_to be_able_to(:read, autre_campagne)
     end
   end
 

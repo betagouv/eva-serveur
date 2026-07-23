@@ -1,4 +1,6 @@
 fr:
+  admin:
+    erreur_generation_pdf: La génération du PDF a échoué. Veuillez réessayer dans un moment.
   layouts:
     erreurs:
       message-accueil: Oups…

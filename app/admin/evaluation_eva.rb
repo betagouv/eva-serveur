@@ -64,7 +64,8 @@ ActiveAdmin.register EvaluationEva do
 
   index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
         row_class: ->(elem) { "anonyme" if elem.anonyme? },
-        dsfr_table: proc { true } do
+        dsfr_table: proc { true },
+        class: "fr-table--multiline" do
       render "index", context: self
   end
 

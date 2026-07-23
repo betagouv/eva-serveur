@@ -25,7 +25,7 @@ context.instance_eval do
     evaluation.debutee_le.strftime("%d/%m/%Y")
   end
 
-  column "" do |evaluation|
+  column "", class: "evaluation__colonne_action" do |evaluation|
     render partial: "admin/evaluations/lien",
       locals: { chemin: admin_evaluation_eva_path(evaluation) }
   end

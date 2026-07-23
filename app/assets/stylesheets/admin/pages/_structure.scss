@@ -1,4 +1,8 @@
-.admin_structures, .admin_structures_locales, .admin_structures_administratives, .admin_structures_opcos {
+.admin_structures,
+.admin_structures_locales,
+.admin_structures_administratives,
+.admin_structures_opcos {
+
   // laisse une place à droite du #main_content pour la sidebar même si elle n'est pas là.
   #active_admin_content.without_sidebar #main_content_wrapper #main_content {
     margin-right: $sidebar-width + ($section-padding * 2);
@@ -22,11 +26,13 @@
 
     $largeur_image_entete: 12rem;
     $position_image_entete: 1.5rem;
+
     .bloc-structure-infos {
       .titre-entete-page {
         overflow-wrap: break-word;
         max-width: calc(100% - #{$largeur_image_entete + $position_image_entete});
       }
+
       .panel {
         .introduction-image {
           width: $largeur_image_entete;
@@ -34,7 +40,9 @@
         }
 
         .attributes_table {
-          th, td {
+
+          th,
+          td {
             border: 0;
             font-size: 0.875rem;
           }
@@ -52,6 +60,7 @@
           }
         }
       }
+
       .statistiques__description {
         font-style: italic;
         font-size: 0.875rem;
@@ -67,21 +76,25 @@
         .container-instructions {
           display: flex;
         }
-          &-message, &-lien {
-            font-size: 0.875rem;
-            color: $couleur-texte;
-          }
-          &-message {
-            width: 100%;
 
-            p {
-              margin: 0 1rem 1rem 0;
-            }
+        &-message,
+        &-lien {
+          font-size: 0.875rem;
+          color: $couleur-texte;
+        }
+
+        &-message {
+          width: 100%;
+
+          p {
+            margin: 0 1rem 1rem 0;
           }
+        }
       }
 
       .liste-membres {
         margin-bottom: 2rem;
+
         .sous-titre {
           font-family: $font-texte;
           color: $couleur-texte;
@@ -98,18 +111,35 @@
 
     .bloc-mes-campagnes {
       table {
-        td, th { padding: .625rem .75rem; }
+
+        td,
+        th {
+          padding: .625rem .75rem;
+        }
+
         .col-derniere_evaluation {
           min-width: 7.5rem;
         }
+
         .col-actions {
           background-image: none;
+
           .bouton-menu {
             display: none;
           }
         }
       }
     }
+  }
+}
+
+.admin_structures_locales.index {
+
+  a,
+  a:link,
+  a:visited {
+    white-space: normal;
+    overflow-wrap: normal;
   }
 }
 

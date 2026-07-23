@@ -8,7 +8,6 @@ fr:
         colonne_date: Date
         colonne_taux_risque: "Taux de risque"
         colonne_couts: Coûts
-        voir_detail: "Voir le détail"
       impact_couts:
         titre: "Coûts potentiels dans votre structure"
         suffixe_masse_salariale: "de votre masse salariale"

@@ -6,7 +6,8 @@
                    tooltip_content: I18n.t("components.pastille.illettrisme_potentiel")
                  )) %>
     <% end %>
-    <%= render(NomAnonymisableComponent.new(evaluation.beneficiaire)) %>
+    <%= link_to render(NomAnonymisableComponent.new(evaluation.beneficiaire)),
+                admin_evaluation_eva_path(evaluation) %>
   </div>
   <div class= "evaluation__code-beneficiaire <%= presence_pastille? ? "" : "fr-ml-0" %>">
     <%= evaluation.beneficiaire.code_beneficiaire %>

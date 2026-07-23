@@ -9,7 +9,7 @@ end
 
 context.instance_eval do
   column t(".colonne_par"), sortable: "beneficiaires.nom" do |evaluation|
-    evaluation.beneficiaire&.nom
+    link_to(evaluation.beneficiaire&.nom, admin_evaluation_evapro_path(evaluation))
   end
   column t(".colonne_date"), sortable: :created_at do |evaluation|
     evaluation.created_at.strftime("%d/%m/%Y")

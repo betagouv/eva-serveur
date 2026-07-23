@@ -178,7 +178,7 @@ ActiveAdmin.register EvaluationEva do
       pdf_path = Pdf::Generator.generate(html_content)
 
       if pdf_path == false
-        flash[:error] = t(".erreur_generation_pdf")
+        flash[:error] = t("admin.erreur_generation_pdf")
         redirect_to admin_evaluation_eva_path(resource)
       else
         envoyer_fichier(pdf_path)

@@ -1,8 +1,6 @@
 fr:
   admin:
     comparaison:
-      download_pdf:
-        erreur_generation_pdf: Erreur durant la généraiton du PDF. Veuillez rééssayer
       errors:
         limite_evaluations: "Vous ne pouvez pas comparer plus de 2 évaluations pour la compétence Numératie et plus de 2 évaluations pour la compétence Littératie"
       litteratie:

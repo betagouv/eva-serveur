@@ -20,7 +20,7 @@ ActiveAdmin.register_page "Comparaison" do
 
     pdf_path = Pdf::Generator.generate(html_content)
     if pdf_path == false
-      flash[:error] = t(".erreur_generation_pdf")
+      flash[:error] = t("admin.erreur_generation_pdf")
       redirect_to admin_comparaison_path(beneficiaire_id: beneficiaire.id,
 evaluation_ids: params[:evaluation_ids])
     else

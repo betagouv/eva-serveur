@@ -2,3 +2,5 @@ fr:
   admin:
     evaluations:
       inconnue: "Évaluation non trouvée"
+      lien:
+        voir_detail: "Voir le détail"

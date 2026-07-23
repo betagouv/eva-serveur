@@ -151,7 +151,7 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
   }
 }
 
-.admin_evaluations.active_admin.logged_in.index table.index_table {
+.admin_evaluations_eva.active_admin.logged_in.index table.index_table {
   td .evaluation__cellule {
     display: flex;
     flex-direction: column;
@@ -171,6 +171,10 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
     min-width: $width !important;
     max-width: $width !important;
     overflow: hidden;
+  }
+
+  td.evaluation__colonne_action {
+    text-wrap: nowrap;
   }
 
   th.evaluation__col-beneficiaire,
@@ -219,12 +223,6 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
   th.evaluation__col-campagne--sans-structure,
   td.evaluation__col-campagne--sans-structure {
     @include colonne-fixe(418px);
-  }
-
-  th.evaluation__col-structure,
-  td.evaluation__col-structure {
-    @include colonne-fixe(209px);
-    @include tronque;
   }
 }
 

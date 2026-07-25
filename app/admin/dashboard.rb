@@ -10,14 +10,13 @@ ActiveAdmin.register_page "Dashboard" do
                campagnes: campagnes_entreprise,
                evaluations: evaluations_entreprise,
                cinq_dernieres_evaluations_completes: cinq_dernieres_evaluations_completes,
-               actualites: actualites,
                compte: current_compte,
                ability: current_ability
              )
     else
       render partial: "tableau_de_bord_eva",
              locals: eva_locals(
-               evaluations: evaluations,
+               evaluations: evaluations_eva,
                actualites: actualites,
                campagnes: campagnes
              )
@@ -26,15 +25,18 @@ ActiveAdmin.register_page "Dashboard" do
 
   controller do
     include EtapeInscriptionHelper
+
+    helper_method :evaluations_eva, :evaluations_sans_mise_en_action, :prise_en_main,
+      :campagnes, :campagnes_entreprise, :evaluations_entreprise,
+      :cinq_dernieres_evaluations_completes, :comptes_en_attente,
+      :actualites, :support
+
     before_action do
       flash.now[:annonce_generale] = "<span>#{annonce.texte}</span>".html_safe if annonce.present?
       message_incitation_compte_personnel
     end
 
-    before_action :redirige_vers_inscription, :recupere_support, :recupere_evaluations,
-                  :recupere_actualites, :recupere_campagnes, :recupere_prise_en_main,
-                  :comptes_en_attente, :recupere_evaluations_sans_mise_en_action,
-                  :recupere_donnees_entreprise
+    before_action :redirige_vers_inscription
 
     private
 
@@ -57,79 +59,61 @@ ActiveAdmin.register_page "Dashboard" do
         "<span>#{t('.incitation_creation_compte_personnel', lien: lien)}</span>".html_safe
     end
 
-    def recupere_support
-      @support = Compte.find_by(email: Eva::EMAIL_SUPPORT)
+    def support
+      @support ||= Compte.find_by(email: Eva::EMAIL_SUPPORT)
     end
 
-    def recupere_evaluations
-      @evaluations = Evaluation.tableau_de_bord(current_ability).includes(:beneficiaire).limit(10)
+    def evaluations_eva
+      @evaluations_eva ||=
+        EvaluationEva.tableau_de_bord(current_ability).includes(:beneficiaire).limit(10)
     end
 
-    def recupere_evaluations_sans_mise_en_action
-      @evaluations_sans_mise_en_action =
+    def evaluations_sans_mise_en_action
+      @evaluations_sans_mise_en_action ||=
         Evaluations::PassationBeneficiaire::TableauDeBordMisesEnAction.relation(current_ability).limit(6)
     end
 
-    def recupere_actualites
-      @actualites = Actualite.tableau_de_bord(current_ability).first(6)
+    def actualites
+      @actualites ||= Actualite.tableau_de_bord(current_ability).first(6)
     end
 
-    def recupere_campagnes
+    def campagnes
       @campagnes = Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
     end
 
-    def recupere_prise_en_main
-      @prise_en_main = PriseEnMain.new(
+    def prise_en_main
+      @prise_en_main ||= PriseEnMain.new(
         compte: current_compte,
-        nombre_campagnes: @campagnes.size,
-        nombre_evaluations: @evaluations.size
+        nombre_campagnes: campagnes.size,
+        nombre_evaluations: evaluations_eva.size
       )
     end
 
     def comptes_en_attente
-      @comptes_en_attente = Compte.where(
+      @comptes_en_attente ||= Compte.where(
         statut_validation: :en_attente,
         structure_id: current_compte.structure_id
       )
     end
 
-    def recupere_donnees_entreprise
-      return unless current_compte.utilisateur_evapro?
-
-      @campagnes_entreprise = campagnes_entreprise_scope
-      @evaluations_entreprise = evaluations_entreprise_scope
-      @cinq_dernieres_evaluations_completes = cinq_dernieres_evaluations_completes_scope
+    def campagnes_entreprise
+      @campagnes_entreprise ||=
+        Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
     end
 
-    def campagnes_entreprise_scope
-      Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
-    end
-
-    def evaluations_entreprise_scope
-      Evaluation.accessible_by(current_ability)
+    def evaluations_entreprise
+      @evaluations_entreprise ||= EvaluationEvapro.accessible_by(current_ability)
                 .includes(:beneficiaire, :campagne)
                 .order(created_at: :desc)
                 .limit(10)
     end
 
-    def cinq_dernieres_evaluations_completes_scope
-      Evaluation.accessible_by(current_ability)
+    def cinq_dernieres_evaluations_completes
+      @cinq_dernieres_evaluations_completes ||= EvaluationEvapro.accessible_by(current_ability)
                 .complete
                 .includes(:beneficiaire, :campagne)
                 .order(created_at: :desc)
                 .limit(5)
-    end
-
-    def campagnes_entreprise
-      @campagnes_entreprise ||= []
-    end
-
-    def evaluations_entreprise
-      @evaluations_entreprise ||= []
-    end
-
-    def cinq_dernieres_evaluations_completes
-      @cinq_dernieres_evaluations_completes ||= []
     end
 
     def opco_financeur

@@ -7,7 +7,7 @@
   <% statistique = StatistiquesStructure.new(resource) %>
   <p class="statistiques__description"><%= t(".description.correlation_donnees_illettrisme") %></p>
   <div class="panel">
-    <% Evaluation::SYNTHESES.each do |synthese| %>
+    <% EvaluationEva::SYNTHESES.each do |synthese| %>
       <% next if synthese == "aberrant" %>
       <% donnees_par_synthese = statistique.correlation_entre_niveau_illettrisme_et_genre(synthese) %>
 

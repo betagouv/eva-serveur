@@ -35,7 +35,6 @@ RSpec.describe Admin::DashboardHelper do
           campagnes: campagnes,
           evaluations: evaluations,
           cinq_dernieres_evaluations_completes: cinq_completes,
-          actualites: actualites,
           compte: compte,
           ability: ability
         )
@@ -44,7 +43,6 @@ RSpec.describe Admin::DashboardHelper do
           campagnes: campagnes,
           evaluations: evaluations,
           cinq_dernieres_evaluations_completes: cinq_completes,
-          actualites: actualites,
           opco: opco_financeur,
           structure: structure,
           premiere_reponse_complete: true,
@@ -66,7 +64,6 @@ RSpec.describe Admin::DashboardHelper do
           campagnes: campagnes,
           evaluations: evaluations,
           cinq_dernieres_evaluations_completes: [],
-          actualites: actualites,
           compte: compte,
           ability: ability
         )

@@ -3,7 +3,7 @@
   icon_name: :none
 ) do %>
   <%= md t(".description",
-           telephone: @support&.telephone,
-           telephone_digits: @support&.telephone.to_s.gsub(/\D/, ""),
-           email: @support&.email) %>
+           telephone: support.telephone,
+           telephone_digits: support.telephone.to_s.gsub(/\D/, ""),
+           email: support.email) %>
 <% end %>

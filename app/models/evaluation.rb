@@ -1,5 +1,4 @@
 class Evaluation < ApplicationRecord
-  SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
   NIVEAUX_ANLCI = %w[profil1 profil2 profil3 profil4 profil4_plus profil4_plus_plus].freeze
@@ -35,7 +34,6 @@ class Evaluation < ApplicationRecord
 
   acts_as_paranoid
 
-  enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
   enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true
   enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true
   enum :niveau_anlci_litteratie, NIVEAUX_ANLCI.zip(NIVEAUX_ANLCI).to_h, prefix: true
@@ -52,10 +50,6 @@ class Evaluation < ApplicationRecord
       .where(campagnes: { comptes: { structure_id: structures } })
   }
   scope :non_anonymes, -> { joins(:beneficiaire).where(beneficiaires: { anonymise_le: nil }) }
-  scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
-  scope :competences_de_base_completes, lambda {
-    where(completude: %w[complete competences_transversales_incompletes])
-  }
   scope :pour_beneficiaires, ->(ids) { where(beneficiaire_id: ids) }
   scope :avec_type_de_programme, ->(type) {
     joins(campagne: :parcours_type)
@@ -157,11 +151,6 @@ question_redaction_id)
 
   def a_mise_en_action?
     passation_beneficiaire&.a_mise_en_action? == true
-  end
-
-  def illettrisme_potentiel?
-    synthese_competences_de_base == "illettrisme_potentiel" ||
-      positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?
   end
 
   def opco_financeur

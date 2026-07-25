@@ -4,7 +4,7 @@ module Evaluations
   class PassationBeneficiaire
     class TableauDeBordMisesEnAction
       def self.relation(ability)
-        Evaluation.accessible_by(ability).illettrisme_potentiel
+        EvaluationEva.accessible_by(ability).illettrisme_potentiel
                   .sans_mise_en_action
                   .competences_de_base_completes
                   .non_anonymes

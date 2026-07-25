@@ -51,9 +51,6 @@ fr:
           titre_relancer_questionnaire: "Relancer un nouveau diagnostic"
           texte_relancer_questionnaire: "Si vous le souhaitez, vous pouvez à nouveau répondre au questionnaire."
           bouton_label: "Lancer le diagnostic"
-        bloc_actualites_entreprise:
-          titre: Les actualités sur eva
-          voir_tout: "Voir toutes les actualités"
         message_incitation_premier_questionnaire:
           message: |
             Vous n'avez pas encore de résultat. Passez votre premier questionnaire pour commencer votre évaluation.

@@ -1,5 +1,5 @@
 h3 t(".titre"), class: "titre"
 
 div class: "panel" do
-  md t(".description", email: support&.email)
+  md t(".description", email: Eva::EMAIL_SUPPORT)
 end

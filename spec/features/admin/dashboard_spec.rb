@@ -326,6 +326,7 @@ describe 'Dashboard', type: :feature do
     let!(:beneficiaire_incomplete) { create :beneficiaire, nom: "Martin Incomplet" }
     let!(:evaluation_complete) do
       create :evaluation,
+             :evapro,
              campagne: campagne,
              beneficiaire: beneficiaire_complete,
              completude: :complete

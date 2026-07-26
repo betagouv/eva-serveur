@@ -74,7 +74,7 @@ ActiveAdmin.register EvaluationEvapro do
     include Fichier
     include Admin::DashboardHelper
 
-    helper_method :restitution_globale, :completude, :parties,
+    helper_method :restitution_globale, :parties,
                   :restitution_pour_situation, :statistiques,
                   :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
                   :recommandation_risque_pour_xls,
@@ -185,10 +185,6 @@ ActiveAdmin.register EvaluationEvapro do
     def restitution_globale
       @restitution_globale ||=
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
-    end
-
-    def completude
-      @completude ||= Restitution::Completude.new(resource, restitution_globale.restitutions)
     end
 
     def restitution_pour_situation(situation)

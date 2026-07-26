@@ -212,10 +212,12 @@ describe Restitution::Completude do
 
       before do
         allow(SituationConfiguration)
-          .to receive(:ids_situations).with(evaluation.campagne_id,
-                                            EvaluationEvapro::SITUATION_COMPETENCES_EVAPRO)
-                                      .and_return([ diag_risques_entreprise.id,
-evaluation_impact_general.id ])
+          .to receive(:ids_situations)
+            .with(evaluation.campagne_id, EvaluationEvapro::SITUATION_COMPETENCES_EVAPRO)
+            .and_return([
+              diag_risques_entreprise.id,
+              evaluation_impact_general.id
+            ])
       end
 
       context "quand aucune situations n'a été complétée" do

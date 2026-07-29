@@ -23,7 +23,6 @@ class Evaluation < ApplicationRecord
   acts_as_paranoid
 
   enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
-  enum :statut, { a_suivre: 0, suivi_en_cours: 1, suivi_effectue: 2 }
 
   scope :pour_les_structures, lambda { |structures|
     joins(campagne: { compte: :structure })

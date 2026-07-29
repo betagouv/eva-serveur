@@ -34,33 +34,6 @@ div class: "row fr-m-0" do
         end
       end
     end
-    if resource.respond_to?(:donnee_sociodemographique) && resource.donnee_sociodemographique
-      div class: "row" do
-        div class: "col-1" do
-          span t(".donnees_sociodemographiques")
-        end
-        div class: "col col-2" do
-          span resource.donnee_sociodemographique
-        end
-      end
-    end
-    div class: "row" do
-      div class: "col-1" do
-        span Evaluation.human_attribute_name("statut")
-      end
-      div class: "col col-2" do
-        span Evaluation.human_enum_name(:statut, resource.statut)
-      end
-    end
-    if resource.respond_to?(:mise_en_action) && resource.mise_en_action&.repondue_le.present?
-      div class: "row" do
-        div class: "col col-1" do
-          span EvaluationEva.human_attribute_name("mise_en_action_le")
-        end
-        div class: "col col-2" do
-          span l(resource.mise_en_action.repondue_le, format: :avec_heure)
-        end
-      end
-    end
+    render "admin/evaluations_eva/informations_complementaires" if resource.is_a?(EvaluationEva)
   end
 end

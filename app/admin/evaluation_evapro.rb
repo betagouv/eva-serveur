@@ -1,7 +1,7 @@
 ActiveAdmin.register EvaluationEvapro do
   actions :all, except: [ :edit, :update ]
 
-  permit_params :campagne_id, :nom, :beneficiaire_id, :statut
+  permit_params :campagne_id, :nom, :beneficiaire_id
 
   includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
 

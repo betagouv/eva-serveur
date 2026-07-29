@@ -74,20 +74,6 @@ describe EvaluationEva do
     end
   end
 
-  describe "#a_mise_en_action?" do
-    it "retourne true lorsqu'une mise en action est associée à l'évaluation" do
-      evaluation = create(:evaluation, :eva, :avec_mise_en_action)
-
-      expect(evaluation.a_mise_en_action?).to be(true)
-    end
-
-    it "retourne false lorsqu'aucune mise en action n'est associée" do
-      evaluation = create(:evaluation, :eva)
-
-      expect(evaluation.a_mise_en_action?).to be(false)
-    end
-  end
-
   describe "#enregistre_mise_en_action" do
     let(:date_du_jour) { Time.zone.local(2023, 1, 1, 12, 0, 0) }
 

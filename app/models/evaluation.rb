@@ -114,10 +114,6 @@ question_redaction_id)
     { comptes: { structure_id: campagne&.compte&.structure_id } } })
   end
 
-  def self.tableau_de_bord(ability)
-    accessible_by(ability).non_anonymes.order(created_at: :desc)
-  end
-
   def context
     @context ||= Context.new(self)
   end

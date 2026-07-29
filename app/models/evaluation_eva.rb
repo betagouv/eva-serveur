@@ -70,10 +70,6 @@ class EvaluationEva < Evaluation
     mise_en_action_enregistree.save
   end
 
-  def a_mise_en_action?
-    @a_mise_en_action ||= mise_en_action.present?
-  end
-
   def mise_en_action_presenter
     EvaluationsEva::MiseEnActionPresenter.new(self)
   end

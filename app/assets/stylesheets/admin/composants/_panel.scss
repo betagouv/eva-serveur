@@ -56,6 +56,7 @@ body.logged_out #content_wrapper #active_admin_content {
 
 .panel {
   &.panel-introduction {
+    margin-top: 2rem;
     padding: 1rem 1.5rem;
     display: flex;
     line-height: 1.2;

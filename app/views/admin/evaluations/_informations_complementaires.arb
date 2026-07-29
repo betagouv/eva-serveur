@@ -34,7 +34,7 @@ div class: "row fr-m-0" do
         end
       end
     end
-    if resource.donnee_sociodemographique
+    if resource.respond_to?(:donnee_sociodemographique) && resource.donnee_sociodemographique
       div class: "row" do
         div class: "col-1" do
           span t(".donnees_sociodemographiques")

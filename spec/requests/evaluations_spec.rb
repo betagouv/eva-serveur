@@ -22,12 +22,6 @@ describe 'Evaluation', type: :request do
               user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
-            },
-            donnee_sociodemographique_attributes: {
-              age: 18,
-              genre: 'homme',
-              dernier_niveau_etude: 'college',
-              derniere_situation: 'scolarisation'
             }
           }
         end
@@ -57,15 +51,6 @@ describe 'Evaluation', type: :request do
           expect(conditions_passation.version_navigateur).to eq '104.0'
           expect(conditions_passation.hauteur_fenetre_navigation).to eq 10
           expect(conditions_passation.largeur_fenetre_navigation).to eq 20
-        end
-
-        it do
-          expect(DonneeSociodemographique.count).to eq 1
-          donnee_sociodemographique = DonneeSociodemographique.last
-          expect(donnee_sociodemographique.age).to eq 18
-          expect(donnee_sociodemographique.genre).to eq 'homme'
-          expect(donnee_sociodemographique.dernier_niveau_etude).to eq 'college'
-          expect(donnee_sociodemographique.derniere_situation).to eq 'scolarisation'
         end
       end
 
@@ -107,12 +92,6 @@ describe 'Evaluation', type: :request do
               user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
-            },
-            donnee_sociodemographique_attributes: {
-              age: 18,
-              genre: 'homme',
-              dernier_niveau_etude: 'college',
-              derniere_situation: 'scolarisation'
             }
           }
         end
@@ -179,11 +158,14 @@ describe 'Evaluation', type: :request do
       let!(:beneficiaire) { create :beneficiaire, nom: 'Roger' }
       let!(:evaluation) { create :evaluation, beneficiaire: beneficiaire }
 
-      context 'quand une requête est invalide pour un enum de données sociodémographiques' do
+      context 'quand la requête contient des données sociodémographiques' do
         let(:params) do
           {
             donnee_sociodemographique_attributes: {
-              dernier_niveau_etude: 'invalide'
+              age: 18,
+              genre: 'homme',
+              dernier_niveau_etude: 'college',
+              derniere_situation: 'scolarisation'
             }
           }
         end
@@ -192,7 +174,7 @@ describe 'Evaluation', type: :request do
           patch "/api/evaluations/#{evaluation.id}", params: params
         end
 
-        it 'ignore la requette (comportement par défaut Rails)' do
+        it "ignore les données sociodémographiques (fonctionnalité retirée)" do
           expect(DonneeSociodemographique.count).to eq 0
         end
       end
@@ -204,12 +186,6 @@ describe 'Evaluation', type: :request do
               user_agent: un_user_agent,
               hauteur_fenetre_navigation: 10,
               largeur_fenetre_navigation: 20
-            },
-            donnee_sociodemographique_attributes: {
-              age: 18,
-              genre: 'homme',
-              dernier_niveau_etude: 'college',
-              derniere_situation: 'scolarisation'
             }
           }
         end
@@ -218,9 +194,6 @@ describe 'Evaluation', type: :request do
           {
             conditions_passation_attributes: {
               hauteur_fenetre_navigation: 15
-            },
-            donnee_sociodemographique_attributes: {
-              age: 19
             }
           }
         end
@@ -233,8 +206,6 @@ describe 'Evaluation', type: :request do
         it do
           expect(ConditionsPassation.count).to eq 1
           expect(ConditionsPassation.last.hauteur_fenetre_navigation).to eq 15
-          expect(DonneeSociodemographique.count).to eq 1
-          expect(DonneeSociodemographique.last.age).to eq 19
         end
       end
 
@@ -267,15 +238,22 @@ describe 'Evaluation', type: :request do
 
     describe 'GET /evaluations/:id' do
       let!(:beneficiaire) { create :beneficiaire, nom: 'Roger' }
-      let!(:evaluation) { create :evaluation, beneficiaire: beneficiaire }
 
-      before do
-        get "/api/evaluations/#{evaluation.id}"
-      end
+      context "quand l'évaluation appartient à une campagne Eva" do
+        let!(:evaluation) { create :evaluation, :eva, beneficiaire: beneficiaire }
 
-      it do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include evaluation.id.to_s
+        before do
+          get "/api/evaluations/#{evaluation.id}"
+        end
+
+        it "retourne la structure de payload Eva" do
+          expect(response).to have_http_status(:ok)
+
+          json = response.parsed_body
+          expect(json.keys).to include("id", "nom", "campagne_id", "debutee_le", "terminee_le")
+          expect(json["id"]).to eq(evaluation.id)
+          expect(json["nom"]).to eq("Roger")
+        end
       end
 
       context "quand l'évaluation appartient à une campagne Eva Pro" do
@@ -285,10 +263,10 @@ describe 'Evaluation', type: :request do
           get "/api/evaluations/#{evaluation_evapro.id}"
         end
 
-        it "retourne la même structure de payload qu'une évaluation classique" do
-          json = response.parsed_body
-
+        it "retourne la même structure de payload qu'une évaluation Eva" do
           expect(response).to have_http_status(:ok)
+
+          json = response.parsed_body
           expect(json.keys).to include("id", "nom", "campagne_id", "debutee_le", "terminee_le")
           expect(json["id"]).to eq(evaluation_evapro.id)
           expect(json["nom"]).to eq("Roger")

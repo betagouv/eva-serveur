@@ -4,7 +4,7 @@ describe MiseEnAction, type: :model do
   it { is_expected.to belong_to(:evaluation) }
 
   it do
-    subject.evaluation = create(:evaluation, :avec_mise_en_action)
+    subject.evaluation = create(:evaluation, :eva, :avec_mise_en_action)
     expect(subject).to validate_uniqueness_of(:evaluation_id).case_insensitive
   end
 

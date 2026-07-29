@@ -52,7 +52,7 @@ div class: "row fr-m-0" do
         span Evaluation.human_enum_name(:statut, resource.statut)
       end
     end
-    if resource.mise_en_action&.repondue_le.present?
+    if resource.respond_to?(:mise_en_action) && resource.mise_en_action&.repondue_le.present?
       div class: "row" do
         div class: "col col-1" do
           span EvaluationEva.human_attribute_name("mise_en_action_le")

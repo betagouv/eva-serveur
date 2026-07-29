@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+module EvaluationsEva
+  class TableauDeBordMisesEnAction
+    def self.relation(ability)
+      EvaluationEva.accessible_by(ability).illettrisme_potentiel
+                .sans_mise_en_action
+                .competences_de_base_completes
+                .non_anonymes
+                .order(created_at: :desc)
+                .includes(:mise_en_action)
+    end
+  end
+end

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Evaluations::PassationBeneficiaire::MiseEnActionPresenter do
+RSpec.describe EvaluationsEva::MiseEnActionPresenter do
   describe "#mise_en_action_avec_qualification?" do
     it "retourne true quand la mise en action est effectuée avec remédiation" do
       mise_en_action = instance_double(MiseEnAction, effectuee_avec_remediation?: true)

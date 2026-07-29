@@ -52,4 +52,29 @@ class EvaluationEva < Evaluation
     synthese_competences_de_base == "illettrisme_potentiel" ||
       positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?
   end
+
+  def responsables_suivi
+    Compte.where(structure_id: campagne&.compte&.structure_id).where(statut_validation: :acceptee)
+  end
+
+  def enregistre_mise_en_action(effectuee)
+    mise_en_action_enregistree = MiseEnAction.find_or_initialize_by(evaluation: self)
+    mise_en_action_enregistree.effectuee = effectuee
+    mise_en_action_enregistree.repondue_le = Time.zone.now
+
+    if effectuee
+      mise_en_action_enregistree.difficulte = nil
+    else
+      mise_en_action_enregistree.remediation = nil
+    end
+    mise_en_action_enregistree.save
+  end
+
+  def a_mise_en_action?
+    @a_mise_en_action ||= mise_en_action.present?
+  end
+
+  def mise_en_action_presenter
+    EvaluationsEva::MiseEnActionPresenter.new(self)
+  end
 end

@@ -109,10 +109,6 @@ question_redaction_id)
     "#{beneficiaire.nom} - #{I18n.l(debutee_le, format: :avec_heure)}"
   end
 
-  def responsables_suivi
-    Compte.where(structure_id: campagne&.compte&.structure_id).where(statut_validation: :acceptee)
-  end
-
   def beneficiaires_possibles
     Beneficiaire.joins(evaluations: { campagne: :compte }).where(evaluations: { campagnes:
     { comptes: { structure_id: campagne&.compte&.structure_id } } })
@@ -120,14 +116,6 @@ question_redaction_id)
 
   def self.tableau_de_bord(ability)
     accessible_by(ability).non_anonymes.order(created_at: :desc)
-  end
-
-  def enregistre_mise_en_action(effectuee)
-    passation_beneficiaire&.enregistre_mise_en_action(effectuee)
-  end
-
-  def a_mise_en_action?
-    passation_beneficiaire&.a_mise_en_action? == true
   end
 
   def opco_financeur
@@ -144,16 +132,6 @@ question_redaction_id)
 
   def evapro?
     context.pro?
-  end
-
-  def usage
-    passation_beneficiaire if !evapro?
-  end
-
-  def passation_beneficiaire
-    return if evapro?
-
-    @passation_beneficiaire ||= Evaluations::PassationBeneficiaire.new(self)
   end
 
   def diagnostic_pro

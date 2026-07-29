@@ -64,8 +64,12 @@ ActiveAdmin.register_page "Dashboard" do
     end
 
     def evaluations_eva
-      @evaluations_eva ||=
-        EvaluationEva.tableau_de_bord(current_ability).includes(:beneficiaire).limit(10)
+      @evaluations_eva ||= EvaluationEva
+        .accessible_by(current_ability)
+        .non_anonymes
+        .order(created_at: :desc)
+        .includes(:beneficiaire)
+        .limit(10)
     end
 
     def evaluations_sans_mise_en_action

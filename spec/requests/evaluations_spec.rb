@@ -137,7 +137,8 @@ describe 'Evaluation', type: :request do
           {
             nom: "Aline",
             code_campagne: "EVAPRO1",
-            debutee_le: date.iso8601
+            debutee_le: date.iso8601,
+            type: "EvaluationEvapro"
           }
         end
 
@@ -148,7 +149,7 @@ describe 'Evaluation', type: :request do
 
           expect(response).to have_http_status(:created)
           expect(response.parsed_body).to include("id" => evaluation.id)
-          expect(evaluation.evapro?).to be(true)
+          expect(evaluation).to be_a(EvaluationEvapro)
           expect(evaluation.beneficiaire.nom).to eq("Aline")
         end
       end

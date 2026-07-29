@@ -27,6 +27,8 @@ div class: "page-structure" do
               end
             end
             row :code_postal
+            row :email_contact
+            row :telephone
             if current_compte.superadmin?
               row :statut_siret do
                 render BadgeComponent.new(

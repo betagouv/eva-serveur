@@ -53,7 +53,7 @@ describe PurgeComptesSupprimesJob, type: :job do
 
     it "detruit un compte supprimé responsable de suivi d'une évaluation et retire ce lien" do
       compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
-      evaluation = create :evaluation, responsable_suivi: compte
+      evaluation = create :evaluation, :eva, responsable_suivi: compte
 
       described_class.perform_now
 
@@ -103,7 +103,7 @@ describe PurgeComptesSupprimesJob, type: :job do
 
     it "detruit un compte responsable de suivi d'une évaluation supprimé et retire ce lien" do
       compte = create :compte_conseiller, structure: structure, deleted_at: 1.month.ago
-      evaluation = create :evaluation, responsable_suivi: compte, deleted_at: 1.month.ago
+      evaluation = create :evaluation, :eva, responsable_suivi: compte, deleted_at: 1.month.ago
 
       described_class.perform_now
 

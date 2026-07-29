@@ -24,6 +24,8 @@ class EvaluationEva < Evaluation
     }
   }.freeze
 
+  belongs_to :responsable_suivi, optional: true, class_name: "Compte"
+
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
   enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true
   enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true

@@ -6,7 +6,6 @@ class Evaluation < ApplicationRecord
 
   belongs_to :campagne
   belongs_to :beneficiaire
-  belongs_to :responsable_suivi, optional: true, class_name: "Compte"
 
   delegate :structure, to: :campagne
 

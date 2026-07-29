@@ -41,7 +41,8 @@ class PurgeComptesSupprimesJob < ApplicationJob
   private
 
   def prepare_destruction(compte)
-    Evaluation.with_deleted.where(responsable_suivi: compte).update_all(responsable_suivi_id: nil)
+    EvaluationEva.with_deleted.where(responsable_suivi: compte)
+                 .update_all(responsable_suivi_id: nil)
     Beneficiaire.with_deleted.where(compte: compte).update_all(compte_id: nil)
     Campagne.with_deleted.where(compte: compte).find_each(&:really_destroy!)
     Invitation.where(invitant: compte).or(Invitation.where(compte: compte)).delete_all

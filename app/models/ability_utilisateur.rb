@@ -61,24 +61,22 @@ compte_id: compte.id
   def droit_evaluation(compte)
     can %i[read download_pdf], ActiveAdmin::Page, name: "Comparaison"
     cannot :create, Evaluation
-    classe_evaluation = compte.utilisateur_evapro? ? EvaluationEvapro : EvaluationEva
-    droit_evaluation_class(compte, classe_evaluation)
+    if compte.utilisateur_evapro?
+      droit_evaluation_class(compte, EvaluationEvapro)
+    else
+      droit_evaluation_class(compte, EvaluationEva)
+      droit_responsable_suivi_eva(compte)
+    end
   end
 
   def droit_evaluation_class(compte, classe_evaluation)
-    can :read, classe_evaluation, responsable_suivi_id: compte.id
-    can %i[read destroy mise_en_action
-           supprimer_responsable_suivi ajouter_responsable_suivi],
-        classe_evaluation, campagne: { compte_id: compte.id }
-    can %i[read mise_en_action
-           supprimer_responsable_suivi ajouter_responsable_suivi],
-        classe_evaluation, campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
+    can %i[read destroy mise_en_action], classe_evaluation, campagne: { compte_id: compte.id }
+    can %i[read mise_en_action], classe_evaluation,
+        campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     return if compte.structure_id.blank?
 
     if compte.validation_acceptee?
-      can %i[read mise_en_action supprimer_responsable_suivi
-             ajouter_responsable_suivi renseigner_qualification],
-          classe_evaluation,
+      can %i[read mise_en_action renseigner_qualification], classe_evaluation,
           campagne: campagnes_publique_de_la_structure(compte)
     end
 
@@ -86,6 +84,19 @@ compte_id: compte.id
       can %i[read update destroy mise_en_action renseigner_qualification], classe_evaluation,
           campagne: campagnes_de_la_structure(compte)
     end
+  end
+
+  def droit_responsable_suivi_eva(compte)
+    can :read, EvaluationEva, responsable_suivi_id: compte.id
+    can %i[supprimer_responsable_suivi ajouter_responsable_suivi], EvaluationEva,
+        campagne: { compte_id: compte.id }
+    can %i[supprimer_responsable_suivi ajouter_responsable_suivi], EvaluationEva,
+        campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
+    return if compte.structure_id.blank?
+    return unless compte.validation_acceptee?
+
+    can %i[supprimer_responsable_suivi ajouter_responsable_suivi], EvaluationEva,
+        campagne: campagnes_publique_de_la_structure(compte)
   end
 
   def droit_beneficiaire(compte)

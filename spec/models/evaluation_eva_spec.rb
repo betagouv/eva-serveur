@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe EvaluationEva do
+  it { is_expected.to belong_to(:responsable_suivi).optional }
+
   describe 'scopes' do
     describe '.sans_mise_en_action' do
       let!(:evaluation_avec_mise_en_action) { create :evaluation, :eva, :avec_mise_en_action }

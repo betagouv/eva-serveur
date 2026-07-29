@@ -150,7 +150,7 @@ ActiveAdmin.register EvaluationEvapro do
       niveau = syntheses_evapro_par_evaluation_id.dig(evaluation.id, :synthese_impact, cle)
       return if niveau.blank?
 
-      ::Evaluations::DiagnosticPro::SCORE_TO_LETTRE.fetch(niveau)
+      ::EvaluationEvapro::SCORE_TO_LETTRE.fetch(niveau)
     end
 
     def score_cout_pour_xls(evaluation)

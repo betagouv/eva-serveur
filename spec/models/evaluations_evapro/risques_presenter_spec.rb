@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Evaluations::DiagnosticPro::RisquesPresenter do
+RSpec.describe EvaluationsEvapro::RisquesPresenter do
   describe "#palier" do
     it "retourne le palier A quand le pourcentage est très bas" do
       presenter = described_class.new(pourcentage_risque: 10)

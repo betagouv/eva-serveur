@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Evaluations::DiagnosticPro::BilanConsolideCalculator do
+RSpec.describe EvaluationsEvapro::BilanConsolideCalculator do
   def build_calculator(score_risque:, pourcentage_risque:, score_cout:, score_strategie:,
 score_numerique:)
     risque_events = [ build(:evenement_reponse,

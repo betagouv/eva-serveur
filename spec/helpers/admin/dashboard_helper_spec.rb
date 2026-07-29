@@ -9,7 +9,7 @@ RSpec.describe Admin::DashboardHelper do
     let(:campagnes) { [ instance_double(Campagne) ] }
     let(:evaluations) { [ instance_double(Evaluation) ] }
     let(:actualites) { [ instance_double(Actualite) ] }
-    let(:evaluation) { instance_double(Evaluation, id: 123) }
+    let(:evaluation) { instance_double(EvaluationEvapro, id: 123) }
     let(:restitution) { instance_double(Restitution::Globale) }
 
     before do
@@ -95,13 +95,13 @@ RSpec.describe Admin::DashboardHelper do
     let(:structure) { create(:structure_locale) }
     let(:compte) { create(:compte_admin, structure: structure) }
     let(:ability) { Ability.new(compte) }
-    let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
-    let(:campagne) { create(:campagne, compte: compte, parcours_type: parcours_type) }
+    let(:campagne) { create(:campagne, compte: compte) }
     let(:evaluation_old) do
-      create(:evaluation, campagne: campagne, created_at: 2.days.ago, completude: :incomplete)
+      create(:evaluation, :evapro, campagne: campagne, created_at: 2.days.ago,
+completude: :incomplete)
     end
     let(:evaluation_new) do
-      create(:evaluation, campagne: campagne, created_at: 1.day.ago, completude: :complete)
+      create(:evaluation, :evapro, campagne: campagne, created_at: 1.day.ago, completude: :complete)
     end
 
     before do
@@ -128,7 +128,6 @@ RSpec.describe Admin::DashboardHelper do
   describe "#lettre_risque_pour" do
     let(:evaluation) { instance_double(EvaluationEvapro, id: 1) }
     let(:restitution) { instance_double(Restitution::Globale) }
-    let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
     before do
       allow(helper).to receive(:restitution_globale_pour).with(evaluation).and_return(restitution)
@@ -136,17 +135,16 @@ RSpec.describe Admin::DashboardHelper do
 
     context "quand le pourcentage de risque est disponible" do
       let(:restitution_pro) do
-        instance_double(Evaluations::DiagnosticPro::Restitution, pourcentage_risque: 50)
+        instance_double(EvaluationsEvapro::Restitution, pourcentage_risque: 50)
       end
 
       before do
-        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
+        allow(evaluation).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
-        allow(Evaluations::DiagnosticPro::RisquesPresenter)
+        allow(EvaluationsEvapro::RisquesPresenter)
           .to receive(:new).with(pourcentage_risque: 50)
-          .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
+          .and_return(instance_double(EvaluationsEvapro::RisquesPresenter,
                                       palier: "C"))
       end
 
@@ -157,12 +155,11 @@ RSpec.describe Admin::DashboardHelper do
 
     context "quand le pourcentage de risque est absent" do
       let(:restitution_pro) do
-        instance_double(Evaluations::DiagnosticPro::Restitution, pourcentage_risque: nil)
+        instance_double(EvaluationsEvapro::Restitution, pourcentage_risque: nil)
       end
 
       before do
-        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
+        allow(evaluation).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end
@@ -176,9 +173,9 @@ RSpec.describe Admin::DashboardHelper do
       let(:synthese_evapro) { { pourcentage_risque: 25 } }
 
       before do
-        allow(Evaluations::DiagnosticPro::RisquesPresenter)
+        allow(EvaluationsEvapro::RisquesPresenter)
           .to receive(:new).with(pourcentage_risque: 25)
-          .and_return(instance_double(Evaluations::DiagnosticPro::RisquesPresenter,
+          .and_return(instance_double(EvaluationsEvapro::RisquesPresenter,
               palier: "B"))
       end
 
@@ -203,7 +200,6 @@ RSpec.describe Admin::DashboardHelper do
   describe "#lettre_couts_pour" do
     let(:evaluation) { instance_double(EvaluationEvapro, id: 1) }
     let(:restitution) { instance_double(Restitution::Globale) }
-    let(:diag_pro) { instance_double(Evaluations::DiagnosticPro) }
 
     before do
       allow(helper).to receive(:restitution_globale_pour).with(evaluation).and_return(restitution)
@@ -211,13 +207,12 @@ RSpec.describe Admin::DashboardHelper do
 
     context "quand le score cout est disponible" do
       let(:restitution_pro) do
-        instance_double(Evaluations::DiagnosticPro::Restitution,
+        instance_double(EvaluationsEvapro::Restitution,
                         synthese_impact_general: { score_cout: "fort" })
       end
 
       before do
-        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
+        allow(evaluation).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end
@@ -229,13 +224,12 @@ RSpec.describe Admin::DashboardHelper do
 
     context "quand le score cout est absent" do
       let(:restitution_pro) do
-        instance_double(Evaluations::DiagnosticPro::Restitution,
+        instance_double(EvaluationsEvapro::Restitution,
                         synthese_impact_general: { score_cout: nil })
       end
 
       before do
-        allow(evaluation).to receive(:diagnostic_pro).and_return(diag_pro)
-        allow(diag_pro).to receive(:restitution_pro).with(restitution).and_return(
+        allow(evaluation).to receive(:restitution_pro).with(restitution).and_return(
           restitution_pro
         )
       end

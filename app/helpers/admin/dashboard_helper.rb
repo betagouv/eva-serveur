@@ -43,7 +43,7 @@ module Admin
         end
       return if pourcentage_risque.blank?
 
-      palier = ::Evaluations::DiagnosticPro::RisquesPresenter.new(
+      palier = ::EvaluationsEvapro::RisquesPresenter.new(
         pourcentage_risque: pourcentage_risque.to_i
       ).palier
     end
@@ -57,7 +57,7 @@ module Admin
         end
       return if score_cout.blank?
 
-      ::Evaluations::DiagnosticPro::CoutsPresenter.new(
+      ::EvaluationsEvapro::CoutsPresenter.new(
         synthese: { score_cout: score_cout },
         i18n: I18n
       )
@@ -99,13 +99,9 @@ evaluation, synthese_evapro)
     end
 
     def derniere_evaluation_complete(structure, ability)
-      parcours_type_ids =
-        ParcoursType.where(type_de_programme: "diagnostic_entreprise").select(:id)
-
-      Evaluation.accessible_by(ability)
+      EvaluationEvapro.accessible_by(ability)
                 .pour_structure(structure)
                 .avec_reponse
-                .where(campagnes: { parcours_type_id: parcours_type_ids })
                 .where(completude: :complete)
                 .order(created_at: :desc)
                 .first
@@ -119,13 +115,13 @@ evaluation, synthese_evapro)
 
     def pourcentage_risque_via_diagnostic_pro(evaluation)
       rg = restitution_globale_pour(evaluation)
-      rest_pro = evaluation.diagnostic_pro&.restitution_pro(rg)
+      rest_pro = evaluation.restitution_pro(rg)
       rest_pro&.pourcentage_risque
     end
 
     def score_cout_via_diagnostic_pro(evaluation)
       rg = restitution_globale_pour(evaluation)
-      rest_pro = evaluation.diagnostic_pro&.restitution_pro(rg)
+      rest_pro = evaluation.restitution_pro(rg)
       rest_pro&.synthese_impact_general&.dig(:score_cout)
     end
   end

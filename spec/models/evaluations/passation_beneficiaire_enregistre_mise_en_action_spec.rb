@@ -9,7 +9,7 @@ RSpec.describe Evaluations::PassationBeneficiaire do
     context "lorsque la mise en action existe déjà" do
       let(:ancienne_date) { Time.zone.local(2022, 1, 1, 10, 0, 0) }
       let!(:evaluation) do
-        create :evaluation, :avec_mise_en_action, repondue_le: ancienne_date
+        create :evaluation, :eva, :avec_mise_en_action, repondue_le: ancienne_date
       end
 
       context "avec une remediation" do
@@ -44,7 +44,7 @@ RSpec.describe Evaluations::PassationBeneficiaire do
     end
 
     context "quand il n'y a pas de mise en action associée" do
-      let!(:evaluation) { create :evaluation }
+      let!(:evaluation) { create :evaluation, :eva }
 
       it "crée et enregistre une réponse true" do
         Timecop.freeze(date_du_jour) do

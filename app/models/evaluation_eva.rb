@@ -26,6 +26,9 @@ class EvaluationEva < Evaluation
 
   belongs_to :responsable_suivi, optional: true, class_name: "Compte"
 
+  has_one :mise_en_action, foreign_key: :evaluation_id, dependent: :destroy
+  accepts_nested_attributes_for :mise_en_action
+
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h
   enum :niveau_cefr, NIVEAUX_CEFR.zip(NIVEAUX_CEFR).to_h, prefix: true
   enum :niveau_cnef, NIVEAUX_CNEF.zip(NIVEAUX_CNEF).to_h, prefix: true

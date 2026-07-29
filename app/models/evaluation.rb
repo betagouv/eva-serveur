@@ -34,8 +34,6 @@ class Evaluation < ApplicationRecord
     joins(campagne: :parcours_type)
     .where(parcours_type: { type_de_programme: type })
   }
-  scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
-  scope :positionnement, -> { avec_type_de_programme(:positionnement) }
   scope :pour_structure, lambda { |structure|
     return none if structure.blank?
 

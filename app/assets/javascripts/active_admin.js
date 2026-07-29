@@ -18,7 +18,6 @@
 //= require cgu
 //= require siret_input
 //= require code_postal_input
-//= require numero_telephone_input
 //= require recherche_structure
 //= require vendor/clipboard.min
 //= require evaluation_eva

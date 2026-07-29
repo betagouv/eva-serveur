@@ -68,12 +68,7 @@
       <%= render NumeroTelephoneInputComponent.new(
         id: "structure_telephone",
         label: t("inscription.structures.show.telephone_label"),
-        hint: t("inscription.structures.show.telephone_hint"),
-        form: form,
-        method: :telephone,
-        value: form.object.telephone,
-        required: false,
-        input_html: { placeholder: "" }
+        form: form
       ) %>
     </div>
   </div>

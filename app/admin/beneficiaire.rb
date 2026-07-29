@@ -99,19 +99,20 @@ ActiveAdmin.register Beneficiaire do
     end
 
     def evaluations_diagnostic
-      @evaluations_diagnostic ||= evaluations_accessibles.diagnostic
-                                                         .order(created_at: :desc)
+      @evaluations_diagnostic ||= evaluations_eva_accessibles.diagnostic
+                                                             .order(created_at: :desc)
     end
 
     private
 
-    def evaluations_accessibles
-      @evaluations_accessibles ||= resource.evaluations.accessible_by(current_ability)
+    def evaluations_eva_accessibles
+      @evaluations_eva_accessibles ||=
+        EvaluationEva.accessible_by(current_ability).where(beneficiaire: resource)
     end
 
     def evaluations_positionnement
-      @evaluations_positionnement ||= evaluations_accessibles.positionnement
-                                                             .order(created_at: :desc)
+      @evaluations_positionnement ||= evaluations_eva_accessibles.positionnement
+                                                                 .order(created_at: :desc)
     end
   end
 end

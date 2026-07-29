@@ -18,8 +18,6 @@ class Beneficiaire < ApplicationRecord
   scope :par_date_creation_asc, -> { order(created_at: :asc) }
   scope :sauf_pour, ->(id) { where.not(id: id) }
 
-  delegate :diagnostic, :positionnement, to: :evaluations, prefix: true
-
   def self.ransack_unaccent_attributes
     %w[nom]
   end

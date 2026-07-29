@@ -45,6 +45,8 @@ class EvaluationEva < Evaluation
   scope :competences_de_base_completes, lambda {
     where(completude: %w[complete competences_transversales_incompletes])
   }
+  scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
+  scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
   def illettrisme_potentiel?
     synthese_competences_de_base == "illettrisme_potentiel" ||

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Evaluations::PassationBeneficiaire::TableauDeBordMisesEnAction do
+RSpec.describe EvaluationsEva::TableauDeBordMisesEnAction do
   describe ".relation" do
     let(:compte_admin) { create :compte_admin }
     let(:campagne) { create :campagne, compte: compte_admin }

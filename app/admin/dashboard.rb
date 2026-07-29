@@ -70,7 +70,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     def evaluations_sans_mise_en_action
       @evaluations_sans_mise_en_action ||=
-        Evaluations::PassationBeneficiaire::TableauDeBordMisesEnAction.relation(current_ability).limit(6)
+        EvaluationsEva::TableauDeBordMisesEnAction.relation(current_ability).limit(6)
     end
 
     def actualites

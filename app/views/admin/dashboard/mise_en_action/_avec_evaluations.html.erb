@@ -15,7 +15,7 @@
     </div>
     <ul class='fr-mb-0'>
       <% evaluations.each_with_index do |evaluation, index| %>
-        <% mise_en_action_presenter = evaluation.usage.mise_en_action_presenter %>
+        <% mise_en_action_presenter = evaluation.mise_en_action_presenter %>
         <%= render(CarteMiseEnAction.new(evaluation,
                                          carte_deroulee: mise_en_action_presenter.mise_en_action_avec_qualification?)) do %>
           <%= render(Qcm.new(evaluation,

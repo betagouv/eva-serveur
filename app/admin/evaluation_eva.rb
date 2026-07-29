@@ -132,7 +132,7 @@ ActiveAdmin.register EvaluationEva do
 
   member_action :mise_en_action, method: :put do
     effectuee = params[:mise_en_action_effectuee]  == "true"
-    resource.passation_beneficiaire&.enregistre_mise_en_action(effectuee)
+    resource.enregistre_mise_en_action(effectuee)
   end
 
 

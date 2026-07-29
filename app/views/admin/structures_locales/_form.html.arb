@@ -9,7 +9,11 @@ div class: "panel nouvelle_structure" do
       f.input :code_postal
       f.input :siret, as: :siret, required: siret_requis?(resource, current_ability)
       f.input :email_contact, as: :email, required: false
-      f.input :telephone, as: :numero_telephone, required: false
+      render(NumeroTelephoneInputComponent.new(
+        id: "structure_locale_telephone",
+        label: StructureLocale.human_attribute_name(:telephone),
+        form: f.form_builder
+      ))
 
       if can?(:manage, Compte)
         f.input :parent_id, as: :select, collection: StructureAdministrative.all

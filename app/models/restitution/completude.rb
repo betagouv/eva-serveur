@@ -13,12 +13,6 @@ module Restitution
       :complete
     end
 
-    def competences_evapro?
-      return true if !@evaluation.evapro?
-
-      @competences_evapro ||= completude?(ids_situations_evapro)
-    end
-
     def competences_transversales?
       @competences_transversales ||= completude?(ids_situations_ct)
     end
@@ -35,7 +29,7 @@ module Restitution
     end
 
     def evapro_incomplete?
-      !competences_evapro? && ids_situations_evapro.present?
+      ids_situations_evapro.present? && !completude?(ids_situations_evapro)
     end
 
     def ids_situations_evapro

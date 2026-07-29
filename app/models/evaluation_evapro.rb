@@ -19,10 +19,6 @@ class EvaluationEvapro < Evaluation
     structure&.opco
   end
 
-  def evapro?
-    true
-  end
-
   def restitution_pro(restitution_globale)
     EvaluationsEvapro::Restitution.new(restitution_globale: restitution_globale)
   end

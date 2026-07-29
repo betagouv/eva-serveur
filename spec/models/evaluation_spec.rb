@@ -99,32 +99,6 @@ donnees: { "reponseIntitule" => nil }
     end
   end
 
-  describe "#evapro?" do
-    context "quand l'évaluation est rattachée à un parcours diagnostic entreprise" do
-      let(:evaluation) { create(:evaluation, :avec_parcours_evapro) }
-
-      it "retourne true" do
-        expect(evaluation.evapro?).to be(true)
-      end
-    end
-
-    context "quand l'évaluation est rattachée à un parcours diagnostic bénéficiaire" do
-      let(:evaluation) { create(:evaluation, :diagnostic) }
-
-      it "retourne false" do
-        expect(evaluation.evapro?).to be(false)
-      end
-    end
-
-    context "quand l'évaluation est rattachée à un parcours positionnement" do
-      let(:evaluation) { create(:evaluation, :positionnement) }
-
-      it "retourne false" do
-        expect(evaluation.evapro?).to be(false)
-      end
-    end
-  end
-
   describe '#beneficiaires_possibles' do
     let(:compte) { create :compte_admin }
     let(:campagne) { create :campagne, compte: compte }

@@ -114,14 +114,6 @@ question_redaction_id)
     { comptes: { structure_id: campagne&.compte&.structure_id } } })
   end
 
-  def context
-    @context ||= Context.new(self)
-  end
-
-  def evapro?
-    context.pro?
-  end
-
   private
 
   def trouve_campagne_depuis_code

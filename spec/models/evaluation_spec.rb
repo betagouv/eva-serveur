@@ -7,8 +7,6 @@ describe Evaluation do
   it { is_expected.to accept_nested_attributes_for :beneficiaire }
   it { is_expected.to have_one :conditions_passation }
   it { is_expected.to accept_nested_attributes_for :conditions_passation }
-  it { is_expected.to have_one :donnee_sociodemographique }
-  it { is_expected.to accept_nested_attributes_for :donnee_sociodemographique }
 
   describe 'scopes' do
     describe '.non_anonymes' do

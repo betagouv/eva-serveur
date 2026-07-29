@@ -27,6 +27,7 @@ class EvaluationEva < Evaluation
   belongs_to :responsable_suivi, optional: true, class_name: "Compte"
 
   has_one :mise_en_action, foreign_key: :evaluation_id, dependent: :destroy
+  has_one :donnee_sociodemographique, foreign_key: :evaluation_id, dependent: :destroy
   accepts_nested_attributes_for :mise_en_action
 
   enum :synthese_competences_de_base, SYNTHESES.zip(SYNTHESES).to_h

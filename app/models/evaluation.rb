@@ -10,7 +10,6 @@ class Evaluation < ApplicationRecord
   delegate :structure, to: :campagne
 
   has_one :conditions_passation, dependent: :destroy
-  has_one :donnee_sociodemographique, dependent: :destroy
   has_many :parties, dependent: :destroy
 
   before_validation :trouve_campagne_depuis_code
@@ -18,7 +17,6 @@ class Evaluation < ApplicationRecord
   validate :code_campagne_connu
 
   accepts_nested_attributes_for :conditions_passation
-  accepts_nested_attributes_for :donnee_sociodemographique
   accepts_nested_attributes_for :beneficiaire, update_only: true
   attr_accessor :code_campagne
 

@@ -44,7 +44,7 @@ describe Restitution::Bienvenue do
 
   describe '#persiste' do
     context 'persiste de nouvelles données sociodémographiques' do
-      let(:evaluation) { create :evaluation, campagne: campagne }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
 
       it do
         restitution.persiste
@@ -55,7 +55,9 @@ describe Restitution::Bienvenue do
     end
 
     context 'met à jour les données sociodémographiques' do
-      let(:evaluation) { create :evaluation, :avec_donnee_sociodemographique, campagne: campagne }
+      let(:evaluation) {
+        create :evaluation, :eva, :avec_donnee_sociodemographique, campagne: campagne
+      }
 
       it do
         donnees = evaluation.donnee_sociodemographique
@@ -73,7 +75,9 @@ describe Restitution::Bienvenue do
     end
 
     context 'restaure et met à jour des données sociodémographiques effacées' do
-      let(:evaluation) { create :evaluation, :avec_donnee_sociodemographique, campagne: campagne }
+      let(:evaluation) {
+        create :evaluation, :eva, :avec_donnee_sociodemographique, campagne: campagne
+      }
 
       it do
         donnees = evaluation.donnee_sociodemographique
@@ -90,7 +94,7 @@ describe Restitution::Bienvenue do
 
     context "Cas d'un age avec un entier trop grand" do
       let(:age) { '2147483648' }
-      let(:evaluation) { create :evaluation, campagne: campagne }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
 
       it do
         restitution.persiste
@@ -102,7 +106,7 @@ describe Restitution::Bienvenue do
 
     context "Cas d'un age avec maximum" do
       let(:age) { '2147483647' }
-      let(:evaluation) { create :evaluation, campagne: campagne }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
 
       it do
         restitution.persiste

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe EvaluationEva do
   it { is_expected.to belong_to(:responsable_suivi).optional }
+  it { is_expected.to have_one :donnee_sociodemographique }
 
   describe 'scopes' do
     describe '.sans_mise_en_action' do

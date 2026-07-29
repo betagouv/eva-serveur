@@ -56,16 +56,13 @@ module Api
     def permit_params
       permitted_params = [ :id, :type, :code_beneficiaire, :code_campagne, :terminee_le,
                            :debutee_le, :beneficiaire_id, conditions_passation_attributes:
-                         %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation],
-                         donnee_sociodemographique_attributes:
-                         %i[age genre dernier_niveau_etude derniere_situation] ]
+                         %i[user_agent hauteur_fenetre_navigation largeur_fenetre_navigation] ]
 
       params.permit(permitted_params)
     end
 
     def retrouve_ids_nested_attributes
-      nested_modeles = %i[donnee_sociodemographique
-                          conditions_passation
+      nested_modeles = %i[conditions_passation
                           mises_en_action]
       nested_modeles.each do |nested_model|
         attributs = "#{nested_model}_attributes"

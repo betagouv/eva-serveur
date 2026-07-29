@@ -1,5 +1,5 @@
 evaluation = restitution_globale.evaluation
-restitution_pro = evaluation.diagnostic_pro.restitution_pro(restitution_globale)
+restitution_pro = evaluation.restitution_pro(restitution_globale)
 diag_risques_entreprise = restitution_pro.diag_risques_entreprise
 pourcentage_risque = restitution_pro.pourcentage_risque
 evaluation_impact_general = nil
@@ -16,7 +16,7 @@ div class: "evaluation-evapro" do
     div class: "page__contenu" do
       if !pdf
         div class: "evaluation-evapro__titre-container" do
-          h1 evaluation.diagnostic_pro.titre, class: "evaluation-evapro__titre"
+          h1 evaluation.titre, class: "evaluation-evapro__titre"
           if pourcentage_risque
             url = admin_evaluation_evapro_path(evaluation, format: :pdf)
             render(BoutonDsfrComponent.new(
@@ -85,7 +85,7 @@ div class: "evaluation-evapro" do
           locals: {
             diag_risques_entreprise: diag_risques_entreprise,
             palier_bilan: restitution_pro.palier_bilan,
-            opco: evaluation.diagnostic_pro.opco,
+            opco: evaluation.opco,
             pdf: pdf
           }
         )

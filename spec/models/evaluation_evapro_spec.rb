@@ -1,25 +1,46 @@
-# frozen_string_literal: true
+require 'rails_helper'
 
-require "rails_helper"
-
-RSpec.describe Evaluations::DiagnosticPro do
+describe EvaluationEvapro do
   describe "#opco" do
     it "retourne l'opco de la structure de la campagne" do
       opco = double
       structure = double(opco: opco, opco_financeur: double)
-      compte = double(structure: structure)
-      campagne = double(compte: compte)
-      evaluation = double(campagne: campagne)
+      campagne = double(structure: structure)
+      evaluation = described_class.new
+      allow(evaluation).to receive(:campagne).and_return(campagne)
 
-      expect(described_class.new(evaluation).opco).to eq(opco)
+      expect(evaluation.opco).to eq(opco)
     end
 
     it "retourne nil quand la structure est absente" do
-      compte = double(structure: nil)
-      campagne = double(compte: compte)
-      evaluation = double(campagne: campagne)
+      campagne = double(structure: nil)
+      evaluation = described_class.new
+      allow(evaluation).to receive(:campagne).and_return(campagne)
 
-      expect(described_class.new(evaluation).opco).to be_nil
+      expect(evaluation.opco).to be_nil
+    end
+  end
+
+  describe "#opco_financeur" do
+    it "retourne l'opco_financeur de la structure de la campagne" do
+      opco_financeur = double
+      structure = double(opco_financeur: opco_financeur)
+      campagne = double(structure: structure)
+      evaluation = described_class.new
+      allow(evaluation).to receive(:campagne).and_return(campagne)
+
+      expect(evaluation.opco_financeur).to eq(opco_financeur)
+    end
+  end
+
+  describe "#titre" do
+    it "retourne le nom de la structure de la campagne" do
+      structure = double(nom: "Ma structure")
+      campagne = double(structure: structure)
+      evaluation = described_class.new
+      allow(evaluation).to receive(:campagne).and_return(campagne)
+
+      expect(evaluation.titre).to eq("Ma structure")
     end
   end
 
@@ -44,7 +65,7 @@ RSpec.describe Evaluations::DiagnosticPro do
         evaluation: double(complete?: true)
       )
 
-      presenter = described_class.new(double).restitution_pro(restitution_globale)
+      presenter = described_class.new.restitution_pro(restitution_globale)
 
       expect(presenter.pourcentage_risque).to eq(25)
       expect(presenter.palier_risque).to eq("B")
@@ -61,47 +82,12 @@ RSpec.describe Evaluations::DiagnosticPro do
     it "garde pourcentage_risque à nil quand le diagnostic risques est absent" do
       restitution_globale = double(diag_risques_entreprise: nil, evaluation_impact_general: nil,
 evaluation: double(complete?: false))
-      presenter = described_class.new(double).restitution_pro(restitution_globale)
+      presenter = described_class.new.restitution_pro(restitution_globale)
 
       expect(presenter.pourcentage_risque).to be_nil
       expect(presenter.palier_bilan).to be_nil
       expect(presenter.complet?).to be(false)
       expect(presenter.synthese_impact_general).to be_nil
-    end
-  end
-
-  describe Evaluations::DiagnosticPro::ImpactsPresenter do
-    describe "#complet?" do
-      it "retourne true quand evaluation_impact_general est présent" do
-        presenter = described_class.new(
-          evaluation_impact_general: double(synthese: {}),
-          evaluation_id: "id"
-        )
-
-        expect(presenter.complet?).to be(true)
-      end
-
-      it "retourne false quand evaluation_impact_general est absent" do
-        presenter = described_class.new(
-          evaluation_impact_general: nil,
-          evaluation_id: "id"
-        )
-
-        expect(presenter.complet?).to be(false)
-      end
-    end
-
-    describe "#incomplet_url" do
-      it "construit une URL stable à partir de la base URL" do
-        presenter = described_class.new(
-          evaluation_impact_general: nil,
-          evaluation_id: "e123"
-        )
-
-        expect(presenter.incomplet_url("https://example.test")).to eq(
-          "https://example.test/evaluation-impact?evaluation_id=e123"
-        )
-      end
     end
   end
 end

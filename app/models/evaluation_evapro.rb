@@ -4,19 +4,30 @@ class EvaluationEvapro < Evaluation
     Situation::EVALUATION_IMPACT_GENERAL
   ].freeze
 
+  SCORE_TO_LETTRE = {
+    "faible" => "A",
+    "moyen" => "B",
+    "fort" => "C",
+    "tres_fort" => "D"
+  }.freeze
+
   def opco_financeur
-    diagnostic_pro&.opco_financeur
+    structure&.opco_financeur
   end
 
   def opco
-    diagnostic_pro&.opco
+    structure&.opco
   end
 
   def evapro?
     true
   end
 
-  def diagnostic_pro
-    @diagnostic_pro ||= Evaluations::DiagnosticPro.new(self)
+  def restitution_pro(restitution_globale)
+    EvaluationsEvapro::Restitution.new(restitution_globale: restitution_globale)
+  end
+
+  def titre
+    structure&.nom
   end
 end

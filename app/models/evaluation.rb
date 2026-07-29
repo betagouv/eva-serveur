@@ -118,26 +118,12 @@ question_redaction_id)
     accessible_by(ability).non_anonymes.order(created_at: :desc)
   end
 
-  def opco_financeur
-    diagnostic_pro&.opco_financeur
-  end
-
-  def opco
-    diagnostic_pro&.opco
-  end
-
   def context
     @context ||= Context.new(self)
   end
 
   def evapro?
     context.pro?
-  end
-
-  def diagnostic_pro
-    return unless evapro?
-
-    @diagnostic_pro ||= Evaluations::DiagnosticPro.new(self)
   end
 
   private

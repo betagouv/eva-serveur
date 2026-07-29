@@ -10,7 +10,7 @@
     <section>
       <h2>Evaproscore</h2>
       <div class="uik-flex-col-1">
-        <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
+        <% EvaluationEvapro::SCORE_TO_LETTRE.each_key do |score| %>
           <div>
             <%= render EvaProScoreComponent.new(score:) %>
           </div>
@@ -45,9 +45,9 @@
   <section>
   <h2>Utilisation à la restitution des impacts</h2>
   <div class="uik-max-active-admin">
-    <% Evaluations::DiagnosticPro::SCORE_TO_LETTRE.each_key do |score| %>
+    <% EvaluationEvapro::SCORE_TO_LETTRE.each_key do |score| %>
       <h3>niveau <%= score %></h3>
-      <% synthese = Evaluations::DiagnosticPro::ImpactsPresenter::INTERPRETATIONS
+      <% synthese = EvaluationsEvapro::ImpactsPresenter::INTERPRETATIONS
         .each_with_object({}) { |interpretation, synthese| synthese[interpretation] = score } %>
       <%= render partial: "admin/evaluations_evapro/mesure_des_impacts_chart",
         locals: { synthese: synthese, interpretations_impact: synthese.keys } %>

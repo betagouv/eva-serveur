@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Evaluations::DiagnosticPro::CoutsPresenter do
+RSpec.describe EvaluationsEvapro::CoutsPresenter do
   describe "#lettre" do
     it "mappe les scores vers la lettre" do
       presenter = described_class.new(synthese: { score_cout: :faible }, i18n: I18n)

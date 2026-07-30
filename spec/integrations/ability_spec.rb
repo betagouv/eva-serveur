@@ -579,9 +579,11 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, Beneficiaire)
     end
 
-    it "a accès en lecture au campagne de la structure" do
-      expect(subject).to be_able_to(:read, campagne_evapro)
-      expect(described_class.new(compte_invite)).to be_able_to(:read, campagne_evapro)
+    it "a accès en lancement (jouer) mais pas en lecture au campagne de la structure" do
+      expect(subject).to be_able_to(:jouer, campagne_evapro)
+      expect(subject).not_to be_able_to(:read, campagne_evapro)
+      expect(described_class.new(compte_invite)).to be_able_to(:jouer, campagne_evapro)
+      expect(described_class.new(compte_invite)).not_to be_able_to(:read, campagne_evapro)
     end
 
     it "n'a pas accès en modification, suppression, autorisation ou duplication à sa campagne" do
@@ -591,9 +593,9 @@ describe Ability do
       )
     end
 
-    it "n'a pas accès en lecture aux campagnes d'une autre structure" do
+    it "n'a pas accès en lancement aux campagnes d'une autre structure" do
       autre_campagne = create :campagne, :avec_parcours_evapro
-      expect(subject).not_to be_able_to(:read, autre_campagne)
+      expect(subject).not_to be_able_to(:jouer, autre_campagne)
     end
   end
 

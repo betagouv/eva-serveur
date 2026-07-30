@@ -15,6 +15,6 @@ module AvecUsage
   alias_method :eva_entreprises?, :evapro?
 
   def eva_beneficiaires?
-    usage == "Eva: bénéficiaires"
+    usage == USAGE_BENEFICIAIRES
   end
 end

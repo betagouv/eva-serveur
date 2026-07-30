@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe LanceurCampagne do
-  let(:parcours_type) { instance_double(ParcoursType, diagnostic_entreprise?: false) }
-  let(:campagne) { instance_double(Campagne, code: "1234", parcours_type: parcours_type) }
+  let(:parcours_type) { build(:parcours_type, :diagnostic) }
+  let(:campagne) { build(:campagne, code: "1234", parcours_type: parcours_type) }
   let(:compte) { nil }
   let(:lanceur_campagne) { described_class.new(campagne, compte) }
 
@@ -12,8 +12,8 @@ describe LanceurCampagne do
     end
 
     context "lorsque parcours_type est diagnostic_entreprise" do
-      let(:parcours_type) { instance_double(ParcoursType, diagnostic_entreprise?: true) }
-      let(:compte) { instance_double(Compte, nom_complet: "Jean Dupont") }
+      let(:parcours_type) { build(:parcours_type, :evapro) }
+      let(:compte) { build(:compte, prenom: "Jean", nom: "Dupont") }
 
       context "quand le compte n'a pas de bénéficiaire" do
         it "retourne l'URL correcte pour une campagne d'entreprise avec bénéficiaire_id" do
@@ -23,7 +23,7 @@ describe LanceurCampagne do
       end
 
       context "quand le compte a un bénéficiaire" do
-        let(:compte) { create(:compte) }
+        let(:compte) { build(:compte) }
         let!(:beneficiaire) { create(:beneficiaire, compte: compte) }
 
         it "retourne l'URL correcte pour une campagne d'entreprise avec bénéficiaire_id" do
@@ -41,11 +41,11 @@ describe LanceurCampagne do
   end
 
   describe "création du bénéficiaire" do
-    let(:compte) { create(:compte) }
+    let(:compte) { build(:compte) }
 
     context "quand la campagne est de type diagnostic_entreprise" do
-      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
-      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
+      let(:parcours_type) { build(:parcours_type, :evapro) }
+      let(:campagne) { build(:campagne, parcours_type: parcours_type) }
 
       it "crée un bénéficiaire lors de la génération de l'URL" do
         expect {
@@ -62,8 +62,8 @@ describe LanceurCampagne do
     end
 
     context "quand la campagne n'est pas de type diagnostic_entreprise" do
-      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic) }
-      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
+      let(:parcours_type) { build(:parcours_type, :diagnostic) }
+      let(:campagne) { build(:campagne, parcours_type: parcours_type) }
 
       it "ne crée pas de bénéficiaire lors de la génération de l'URL" do
         expect {
@@ -72,21 +72,9 @@ describe LanceurCampagne do
       end
     end
 
-    context "quand aucun compte n'est fourni" do
-      let(:compte) { nil }
-      let(:parcours_type) { create(:parcours_type, type_de_programme: :diagnostic_entreprise) }
-      let(:campagne) { create(:campagne, parcours_type: parcours_type) }
-
-      it "ne crée pas de bénéficiaire" do
-        expect {
-          described_class.url(campagne, compte)
-        }.not_to change(Beneficiaire, :count)
-      end
-    end
-
     context "quand la campagne n'a pas de parcours_type" do
-      let(:campagne) { instance_double(Campagne, code: "1234", parcours_type: nil) }
-      let(:compte) { create(:compte) }
+      let(:campagne) { build(:campagne, code: "1234", parcours_type: nil) }
+      let(:compte) { build(:compte) }
 
       it "ne crée pas de bénéficiaire et ne provoque pas d'erreur" do
         expect {

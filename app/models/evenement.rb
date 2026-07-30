@@ -8,6 +8,10 @@ class Evenement < ApplicationRecord
 
   acts_as_paranoid
 
+  ransacker :donnees, formatter: proc { |v| v } do |parent|
+    Arel.sql("donnees::text")
+  end
+
   scope :reponses, -> { where(nom: "reponse") }
   scope :groupes_par_questions, lambda {
     select("donnees->>'question' AS question, date, position")

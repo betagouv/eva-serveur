@@ -7,26 +7,36 @@ ActiveAdmin.register Evenement do
                                           as: :select,
                                           collection: proc { Situation.pluck(:nom_technique) }
   filter :nom
+  filter :donnees, as: :string
+  filter :position
   filter :date
 
   colonnes_evenement = proc do
     column(:evaluation) { |e| e.evaluation.display_name }
     column(:situation) { |e| e.situation.display_name }
-    column(:partie) { |e| auto_link(e.partie) }
-    column :nom
-    column :donnees
+  end
+
+  autres_colonnes_evenement = proc do
     column :position
     column(:date)
     column(:created_at)
   end
 
-  index dsfr_table: proc { true } do
+  index dsfr_table: proc { true }, class: "fr-table--multiline" do
     instance_eval(&colonnes_evenement)
+    column(:partie) { |e| auto_link(e.partie) }
+    column :nom
+    column(:donnees) { |e| content_tag(:pre, JSON.pretty_generate(e.donnees)) }
+    instance_eval(&autres_colonnes_evenement)
     actions
   end
 
   csv do
     instance_eval(&colonnes_evenement)
+    column(:partie) { |e| e.partie.id }
+    column :nom
+    column :donnees
+    instance_eval(&autres_colonnes_evenement)
   end
 
   controller do

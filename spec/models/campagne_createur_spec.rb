@@ -34,7 +34,7 @@ describe CampagneCreateur, type: :model do
           expect(campagne.parcours_type).to eq(parcours_type_associe)
           expect(campagne.compte).to eq(compte)
           expect(campagne.libelle).to eq(
-            "Diagnostic des risques : ma super structure - #{parcours_type_associe.libelle}"
+            "Diagnostic : ma super structure"
           )
         end
       end
@@ -61,8 +61,8 @@ describe CampagneCreateur, type: :model do
                   parcours_type_2)
           expect(campagnes.map(&:compte).uniq).to eq([ compte ])
           expect(campagnes.map(&:libelle)).to contain_exactly(
-            "Diagnostic des risques : ma super structure - #{parcours_type_1.libelle}",
-            "Diagnostic des risques : ma super structure - #{parcours_type_2.libelle}"
+            "Diagnostic 1 : ma super structure",
+            "Diagnostic 2 : ma super structure"
           )
         end
       end

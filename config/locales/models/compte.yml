@@ -101,9 +101,6 @@ fr:
         email: claude.dupond@mastructure.fr
         telephone: 01 23 45 67 89
   active_admin:
-    resource:
-      edit:
-        aide_mot_de_passe: Laissez vide si vous ne voulez pas changer le mot de passe
     resources:
       compte:
         new_model: Créer un compte

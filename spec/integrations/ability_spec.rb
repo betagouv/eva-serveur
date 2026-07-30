@@ -423,7 +423,7 @@ describe Ability do
       expect(subject).to be_able_to(:read, Question.new)
       expect(subject).to be_able_to(%i[read mise_en_action destroy], evaluation_conseiller)
       expect(subject).to be_able_to(%i[read], evaluation_conseiller.beneficiaire)
-      expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte play destroy],
+      expect(subject).to be_able_to(%i[read update autoriser_compte revoquer_compte destroy],
                                     Campagne.new(compte: compte))
       expect(subject).not_to be_able_to(:destroy, campagne_superadmin)
       expect(subject).to be_able_to(:read, Questionnaire.new)
@@ -556,6 +556,7 @@ describe Ability do
   context 'Compte utilisateur entreprise (EvaPro)' do
     let(:structure_entreprise) { create :structure_locale, :eva_pro }
     let(:compte) { create :compte_admin, structure: structure_entreprise }
+    let(:compte_invite) { create :compte_conseiller, structure: structure_entreprise }
     let!(:campagne_evapro) { create :campagne, :avec_parcours_evapro, compte: compte }
     let!(:evaluation_evapro) do
       EvaluationEvapro.create!(campagne: campagne_evapro,
@@ -578,8 +579,9 @@ describe Ability do
       expect(subject).not_to be_able_to(:read, Beneficiaire)
     end
 
-    it "a accès en lecture et en lancement (play) à sa propre campagne" do
-      expect(subject).to be_able_to(%i[read play], campagne_evapro)
+    it "a accès en lecture au campagne de la structure" do
+      expect(subject).to be_able_to(:read, campagne_evapro)
+      expect(described_class.new(compte_invite)).to be_able_to(:read, campagne_evapro)
     end
 
     it "n'a pas accès en modification, suppression, autorisation ou duplication à sa campagne" do

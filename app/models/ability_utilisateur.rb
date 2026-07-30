@@ -39,7 +39,7 @@ class AbilityUtilisateur
   def droit_campagne_eva(compte)
     cannot :destroy, Campagne
     can(:destroy, Campagne) { |c| Evaluation.where(campagne: c).empty? }
-    can %i[read update autoriser_compte revoquer_compte play destroy], Campagne,
+    can %i[read update autoriser_compte revoquer_compte destroy], Campagne,
 compte_id: compte.id
     can %i[create duplique], Campagne if can_create_campagne?(compte)
     cannot :duplique, Campagne if compte.administratif?
@@ -50,12 +50,12 @@ compte_id: compte.id
   end
 
   def droit_admin_campagne_eva(compte)
-    can %i[read update autoriser_compte revoquer_compte play destroy], Campagne,
+    can %i[read update autoriser_compte revoquer_compte destroy], Campagne,
       campagnes_de_la_structure(compte)
   end
 
   def droit_campagne_evapro(compte)
-    can %i[read play], Campagne, compte_id: compte.id
+    can %i[read], Campagne, campagnes_de_la_structure(compte)
   end
 
   def droit_evaluation(compte)

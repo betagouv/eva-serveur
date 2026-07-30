@@ -56,6 +56,10 @@ class Campagne < ApplicationRecord
     libelle
   end
 
+  def evapro?
+    parcours_type&.diagnostic_entreprise?
+  end
+
   def questionnaire_pour(situation)
     sc = situations_configurations.find_by(situation: situation)
     sc.present? ? sc.questionnaire_utile : situation.questionnaire

@@ -48,7 +48,7 @@ ActiveAdmin.register Campagne do
   end
 
   action_item :voir_evaluations, only: :show do
-    chemin_evaluations = if resource.parcours_type&.diagnostic_entreprise?
+    chemin_evaluations = if resource.evapro?
       admin_evaluations_evapro_path(q: { campagne_id_eq: resource })
     else
       admin_evaluations_eva_path(q: { campagne_id_eq: resource })

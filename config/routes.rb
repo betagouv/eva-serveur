@@ -7,9 +7,6 @@ Rails.application.routes.draw do
     }
   )
   devise_for :comptes, active_admin_devise_config
-  devise_scope :compte do
-    post '/admin/login/connexion_espace_jeu', to: 'eva/devise/sessions#connexion_espace_jeu', as: 'connexion_espace_jeu'
-  end
   get '/admin', to: redirect('/admin/dashboard')
 
   get "pro_connect/logout" => "pro_connect#logout"

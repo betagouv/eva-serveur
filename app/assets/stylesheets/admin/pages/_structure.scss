@@ -135,11 +135,14 @@
 
 .admin_structures_locales.index {
 
-  a,
-  a:link,
-  a:visited {
-    white-space: normal;
-    overflow-wrap: normal;
+  th {
+
+    a,
+    a:link,
+    a:visited {
+      white-space: normal;
+      overflow-wrap: normal;
+    }
   }
 }
 

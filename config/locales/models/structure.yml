@@ -41,11 +41,11 @@ fr:
         region: Région
         code_commune: Code (INSEE) de la commune
         idcc: Convention(s) collective(s)
+        nombre_evaluations: Nombre d'évaluations
         date_derniere_evaluation: Dernière évaluation
         structure_referente: Structure référente
         parent_id: Structure référente
         structures_dependantes: Structures dépendantes
-        nombre_evaluations: Nombre d'évaluations
         autorisation_creation_campagne: Création de campagne - Conseillers
         autorisation_creation_campagne_true: Autorisé
         autorisation_creation_campagne_false: Interdit

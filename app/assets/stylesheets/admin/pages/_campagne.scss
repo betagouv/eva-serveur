@@ -91,6 +91,16 @@
       flex-direction: column;
       gap: $dsfr-spacing-1v;
     }
+
+    th {
+
+      a,
+      a:link,
+      a:visited {
+        white-space: normal;
+        overflow-wrap: normal;
+      }
+    }
   }
 
   .nouvelle-campagne {
@@ -119,6 +129,7 @@
     fieldset.inputs,
     fieldset.input-choix,
     fieldset.choices {
+
       input[type="text"],
       .select2 {
         width: 100%;

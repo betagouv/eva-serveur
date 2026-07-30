@@ -2,7 +2,6 @@ module Eva
   module Devise
     class SessionsController < ActiveAdmin::Devise::SessionsController
       layout "connexion_v2"
-      include CampagneHelper
 
       before_action :check_compte_confirmation, only: :create
 
@@ -13,17 +12,6 @@ module Eva
         sign_in_avec_message(resource)
         yield resource if block_given?
         respond_with resource, location: after_sign_in_path_for(resource)
-      end
-
-      def connexion_espace_jeu
-        code = params[:code]&.upcase
-        campagne = Campagne.par_code(code).first if code.present?
-        if campagne.present?
-          redirect_to LanceurCampagne.url(campagne), allow_other_host: true
-        else
-          code_erreur = t("active_admin.devise.login.evaluations.code_invalide")
-          redirect_to new_compte_session_path(code: code, code_erreur: code_erreur)
-        end
       end
 
       private

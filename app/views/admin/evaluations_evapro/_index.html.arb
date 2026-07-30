@@ -14,6 +14,11 @@ context.instance_eval do
   column t(".colonne_date"), sortable: :created_at do |evaluation|
     evaluation.created_at.strftime("%d/%m/%Y")
   end
+  if current_compte.anlci? || current_compte.administratif?
+    column t(".colonne_structure") do |evaluation|
+      evaluation.campagne&.structure&.nom
+    end
+  end
   column t(".colonne_taux_risque") do |evaluation|
     Admin::DashboardHelper.instance_method(:afficher_lettre_risque_index_evapro).bind(vue)
       .call(evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
@@ -22,7 +27,7 @@ context.instance_eval do
     Admin::DashboardHelper.instance_method(:afficher_lettre_cout_index_evapro).bind(vue)
       .call(evaluation, syntheses_evapro_par_evaluation_id&.[](evaluation.id))
   end
-  column do |evaluation|
+  column "", class: "evaluation__colonne_action" do |evaluation|
     render partial: "admin/evaluations/lien",
       locals: { chemin: admin_evaluation_evapro_path(evaluation) }
   end

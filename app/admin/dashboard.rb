@@ -102,7 +102,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     def campagnes_entreprise
       @campagnes_entreprise ||=
-        Campagne.accessible_by(current_ability).order(created_at: :desc).limit(10)
+        Campagne.accessible_by(current_ability, :jouer).order(created_at: :desc).limit(10)
     end
 
     def evaluations_entreprise

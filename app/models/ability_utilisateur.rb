@@ -55,7 +55,7 @@ compte_id: compte.id
   end
 
   def droit_campagne_evapro(compte)
-    can %i[read], Campagne, campagnes_de_la_structure(compte)
+    can %i[jouer], Campagne, campagnes_de_la_structure(compte)
   end
 
   def droit_evaluation(compte)

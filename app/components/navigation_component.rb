@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class NavigationComponent < ViewComponent::Base
   def initialize(links: nil, current_compte: nil)
     @links = links
@@ -93,7 +91,6 @@ class NavigationComponent < ViewComponent::Base
   def campagnes_link
     return if en_attente_restreint?
     return unless current_compte_structure_present?
-    return if utilisateur_evapro?
     return unless can?(:read, Campagne)
 
     {

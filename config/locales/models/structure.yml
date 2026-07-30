@@ -61,7 +61,7 @@ fr:
           autre: Autre
           cap_emploi: Cap emploi
           service_insertion_collectivite: Collectivité
-          CRIA: CRIA
+          CRIA: Centre Ressources Illettrisme et Analphabétisme (CRIA)
           e2c: École de la 2e chance
           entreprise: Entreprise
           etablissement_prive: Établissement sanitaire, social, médico-social privé
@@ -71,10 +71,10 @@ fr:
           mission_locale: Mission locale
           organisme_formation: Organisme de formation
           orientation_scolaire: Orientation scolaire
-          PJJ_UEAJ: PJJ/UEAJ
-          SIAE: SIAE
-          SMA: SMA
-          SMV: SMV
+          PJJ_UEAJ: Protection Judiciaire de la Jeunesse (PJJ)
+          SIAE: Structure de l’Insertion par l’Activité Économique (SIAE)
+          SMA: Service Militaire Adapté (SMA)
+          SMV: Service Militaire Volontaire (SMV)
   formtastic:
     actions:
       structure: &actions_structure

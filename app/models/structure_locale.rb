@@ -22,9 +22,9 @@ class StructureLocale < Structure
     organisme_formation
     orientation_scolaire
     PJJ_UEAJ
-    SIAE
     SMA
     SMV
+    SIAE
     autre
   ].freeze
 

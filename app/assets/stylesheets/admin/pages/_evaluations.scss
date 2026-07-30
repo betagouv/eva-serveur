@@ -151,6 +151,13 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
   }
 }
 
+
+table.index_table {
+  td.evaluation__colonne_action {
+    text-wrap: nowrap;
+  }
+}
+
 .admin_evaluations_eva.active_admin.logged_in.index table.index_table {
   td .evaluation__cellule {
     display: flex;
@@ -171,10 +178,6 @@ body.logged_in.active_admin.admin_evaluations.index:not(.evapro_admin) {
     min-width: $width !important;
     max-width: $width !important;
     overflow: hidden;
-  }
-
-  td.evaluation__colonne_action {
-    text-wrap: nowrap;
   }
 
   th.evaluation__col-beneficiaire,

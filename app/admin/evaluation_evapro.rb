@@ -15,6 +15,16 @@ ActiveAdmin.register EvaluationEvapro do
          display_name: "display_name",
          minimum_input_length: 2,
          order_by: "nom_asc"
+  filter :campagne_compte_structure_id,
+         as: :search_select_filter,
+         url: proc { admin_structures_locales_path },
+         fields: %i[nom code_postal],
+         display_name: "display_name",
+         minimum_input_length: 2,
+         order_by: "nom_asc",
+         label: proc { StructureLocale.model_name.human },
+         method_model: StructureLocale,
+         if: proc { current_compte.anlci? || current_compte.administratif? }
   filter :debutee_le
 
   show do
@@ -26,7 +36,7 @@ ActiveAdmin.register EvaluationEvapro do
 
   index download_links: -> { params[:action] == "show" ? %i[pdf] : %i[xls] },
         row_class: ->(elem) { "anonyme" if elem.anonyme? },
-        dsfr_table: proc { true } do
+        dsfr_table: proc { true }, class: "fr-table--multiline" do
       render "index", context: self
   end
 

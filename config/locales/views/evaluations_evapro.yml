@@ -6,6 +6,7 @@ fr:
         texte: "Cette page présente toutes les évaluations réalisées au sein de votre structure, qu'elles soient terminées ou en cours."
         colonne_par: Par
         colonne_date: Date
+        colonne_structure: Structure
         colonne_taux_risque: "Taux de risque"
         colonne_couts: Coûts
       impact_couts:

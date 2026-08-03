@@ -1,11 +1,11 @@
-.fr-modal-dashboard-evapro.fr-modal.fr-modal--opened {
+.fr-modal-ancien-style-eva.fr-modal.fr-modal--opened {
   display: flex !important;
   visibility: inherit !important;
   opacity: 1 !important;
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.fr-modal-dashboard-evapro {
+.fr-modal-ancien-style-eva {
   .fr-modal__header {
     display: none;
   }
@@ -49,7 +49,7 @@
   }
 
 
-  .fr-modal-dashboard-evapro__actions {
+  .fr-modal-ancien-style-eva__actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;

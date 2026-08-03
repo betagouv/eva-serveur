@@ -2,12 +2,12 @@
 
 <%= dsfr_modal(
   title: t(".titre"),
-  html_attributes: { id: id_modal, class: "evapro_admin" }
+  html_attributes: { id: id_modal }
 ) do |component| %>
   <div>
     <%= md t(".message") %>
   </div>
-  
+
   <% component.with_button do %>
     <%= render BoutonDsfrComponent.new(
       t(".creer_structure"),

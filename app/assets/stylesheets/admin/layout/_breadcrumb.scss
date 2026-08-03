@@ -5,6 +5,8 @@
   background-image: none;
   box-shadow: none;
   background-color: unset;
+  margin: $dsfr-spacing-4w auto 0;
+  max-width: $container;
 
   #titlebar_left {
     display: block;
@@ -30,7 +32,8 @@
     .breadcrumb {
       margin-bottom: 0.5rem;
 
-      a, .breadcrumb_sep {
+      a,
+      .breadcrumb_sep {
         color: $couleur-texte;
       }
 

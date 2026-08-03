@@ -1,4 +1,9 @@
 fr:
+  activerecord:
+    models:
+      evaluation_evapro:
+        one: Évaluation
+        other: Évaluations
   active_admin:
     resources:
       evaluation_evapro:

@@ -5,19 +5,32 @@ describe Restitution::Base do
   let(:campagne)    { build(:campagne) }
   let(:restitution) { described_class.new(campagne, evenements) }
   let(:evaluation)  { create :evaluation }
-  let(:situation)   { create :situation_inventaire }
+  let(:situation)   { create :situation_controle }
   let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
 
-  context 'lorsque le dernier événement est stop' do
-    let!(:evenements) do
-      [
-        create(:evenement_piece_bien_placee, partie: partie),
-        create(:evenement_piece_mal_placee, partie: partie),
-        create(:evenement_abandon, partie: partie)
-      ]
+  describe "#abandon?" do
+    context "lorsque l'événement est en dernier" do
+      let!(:evenements) do
+        [
+          create(:evenement_piece_bien_placee, partie: partie),
+          create(:evenement_piece_mal_placee, partie: partie),
+          create(:evenement_abandon, partie: partie)
+        ]
+      end
+
+      it { expect(restitution.abandon?).to be(true) }
     end
 
-    it { expect(restitution.abandon?).to be(true) }
+    context "lorsque l'événement n'est pas en dernier" do
+      let!(:evenements) do
+        [
+          create(:evenement_abandon, partie: partie),
+          create(:evenement_piece_apparition, partie: partie)
+        ]
+      end
+
+      it { expect(restitution.abandon?).to be(true) }
+    end
   end
 
   context 'renvoie le nombre de réécoute de la consigne' do

@@ -29,7 +29,7 @@ module Restitution
       end
 
       def abandon?
-        dernier_evenement.nom == EVENEMENT[:ABANDON]
+        @evenements.any? { |evenement| evenement.nom == EVENEMENT[:ABANDON] }
       end
 
       def termine?

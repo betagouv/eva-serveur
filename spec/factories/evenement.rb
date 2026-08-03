@@ -48,6 +48,10 @@ FactoryBot.define do
       nom { 'abandon' }
     end
 
+    factory :evenement_piece_apparition do
+      nom { 'pieceApparition' }
+    end
+
     factory :evenement_piece_bien_placee do
       nom { 'pieceBienPlacee' }
     end

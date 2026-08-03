@@ -29,4 +29,30 @@ describe Admin::BeneficiairesController, type: :controller do
       expect(beneficiaire_json["code_beneficiaire"]).to eq("ABC123")
     end
   end
+
+  describe "filtre par structure" do
+    let(:structure) { create :structure_locale }
+    let!(:compte) { create :compte_admin, structure: structure }
+    let!(:autre_campagne) { create :campagne, compte: compte }
+    let!(:campagne) { create :campagne, compte: compte }
+    let!(:beneficiaire) { create :beneficiaire }
+    let!(:evaluation) { create :evaluation, campagne: campagne, beneficiaire: beneficiaire }
+    let!(:autre_evaluation) do
+      create :evaluation, campagne: autre_campagne, beneficiaire: beneficiaire
+    end
+
+    before { sign_in compte }
+
+    it "ne retourne pas le bénéficiaire en double quand il a plusieurs évaluations par structure" do
+      get :index, format: :json,
+        params: { q: { evaluations_campagne_compte_structure_id_eq: structure.id } }
+
+      expect(response).to be_successful
+
+      resultat = response.parsed_body
+      occurrences = resultat.select { |b| b["id"] == beneficiaire.id }
+
+      expect(occurrences.size).to eq(1)
+    end
+  end
 end

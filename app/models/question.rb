@@ -66,8 +66,8 @@ class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
     reponse
   end
 
-  def reponses_possibles(); end
-  def bonnes_reponses(); end
+  def reponses_possibles; end
+  def bonnes_reponses; end
 
   def suppressions_audios
     { intitule: supprimer_audio_intitule,

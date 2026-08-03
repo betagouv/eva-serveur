@@ -89,7 +89,7 @@ ActiveAdmin.register Beneficiaire do
     end
 
     def scoped_collection
-      end_of_association_chain
+      end_of_association_chain.distinct
     end
 
     def restitutions_positionnement

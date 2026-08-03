@@ -47,6 +47,7 @@ a.pas-souligne {
 }
 
 body.logged_in {
+
   &::before,
   &::after {
     display: none !important;
@@ -66,24 +67,6 @@ body.logged_in.evapro_admin {
   .header {
     max-width: none;
     margin: 0;
-  }
-
-  #title_bar {
-    display: none;
-  }
-
-  #title_bar,
-  #active_admin_content {
-    max-width: 75rem;
-    margin: 0 auto;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  
-  // EvaPro admin: ajustements des marges entre le Header et le Footer pour les vues non custo
-  #active_admin_content.with_sidebar {
-    margin-top: 2rem !important;
-    margin-bottom: 3.5rem !important;
   }
 }
 
@@ -186,7 +169,7 @@ body.logged_in.evapro_admin {
   // (invitation structure, vérification comptes en attente, etc.). Sans ça, le
   // `pointer-events: none` sur `.fr-modal > .fr-container` bloque boutons et formulaires.
   // Exclure le menu burger header : son `.fr-container` doit rester géré à part.
-  .fr-modal.fr-modal--opened:not(.fr-header__menu) > .fr-container {
+  .fr-modal.fr-modal--opened:not(.fr-header__menu)>.fr-container {
     pointer-events: auto;
   }
 }
@@ -217,13 +200,6 @@ body.logged_out #wrapper .fr-modal__content ul li,
   line-height: 1.5rem;
 }
 
-// Boutons DSFR dans les modales (hors body.evapro_admin / body.logged_in)
-.fr-modal.evapro_admin .fr-btn {
-  @include grand-bouton;
-
-  border-radius: 0;
-}
-
 button.fr-link--close {
   border-radius: 0;
   background: transparent;
@@ -237,19 +213,11 @@ button.fr-link--close {
     @include focus;
   }
 }
+
 button.fr-link--close:not(.disabled):hover {
   @include light-decisions-background-transparent-hover;
 
   background-image: none;
-}
-
-.fr-modal.evapro_admin .fr-btn--secondary,
-.fr-modal.evapro_admin .fr-btn--tertiary {
-  color: var(--text-action-high-blue-france);
-}
-
-.fr-modal.evapro_admin .fr-btn--tertiary:hover {
-  background: var(--background-raised-grey-hover);
 }
 
 body.evapro_admin a:not(.fr-btn),
@@ -269,18 +237,19 @@ body.evapro_admin .fr-btn:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--me
 
 .fr-btn--sm,
 .bouton-annuler {
-  align-self: flex-start; 
+  align-self: flex-start;
   min-height: 2rem;
   line-height: normal !important;
-};
+}
 
 .fr-btn--md {
-  align-self: flex-start; 
+  align-self: flex-start;
   min-height: 2.5rem;
   line-height: normal !important;
 }
 
 .fr-btn {
+
   &:-moz-focusring,
   &:focus-visible {
     @include focus;
@@ -343,10 +312,7 @@ input[type="submit"].fr-btn:not(.disabled):hover,
 input[type="button"].fr-btn:not(.disabled):hover,
 form button.fr-btn:not(.disabled):hover,
 form input[type="submit"].fr-btn:not(.disabled):hover,
-form input[type="button"].fr-btn:not(.disabled):hover,
-// Boutons avec attribut form= (hors du formulaire, ex. modale invitation)
-.fr-modal.evapro_admin button.fr-btn:not(.disabled):hover,
-.fr-modal.evapro_admin input[type="submit"].fr-btn:not(.disabled):hover {
+form input[type="button"].fr-btn:not(.disabled):hover {
 
   &.fr-btn--primary,
   &:not(.fr-btn--secondary, .fr-btn--tertiary, .fr-btn--close) {
@@ -576,7 +542,7 @@ a.fr-btn.fr-btn--tertiary:active {
   box-shadow: inset 0 0 0 1px $grey-900;
 }
 
-.fr-btn--primary.bouton--actif{
+.fr-btn--primary.bouton--actif {
   background: $blue-france-sun-113-active;
 
   &:hover {

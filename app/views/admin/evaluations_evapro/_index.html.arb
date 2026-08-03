@@ -1,7 +1,6 @@
 vue = self
 
 caption do
-  text_node t(".titre")
   div class: "fr-table__caption__desc" do
     t(".texte")
   end

@@ -12,6 +12,7 @@
 
   .evaluation-evapro__titre {
     margin-bottom: 0;
+    margin-top: $dsfr-spacing-3w;
     color: var(--text-title-grey);
 
     @include titre-h2;

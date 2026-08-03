@@ -4,6 +4,10 @@
 
   @import "../../../bootstrap_grid";
 
+  &.evapro_admin #title_bar {
+    display: none;
+  }
+
   .section-evaluations,
   .section-actualites {
     margin-bottom: 2.5rem;

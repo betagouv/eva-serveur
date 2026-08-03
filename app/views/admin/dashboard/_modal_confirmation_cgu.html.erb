@@ -13,7 +13,7 @@
   opened: true,
   html_attributes: {
     id: id_modal,
-    class: "fr-modal-confirmation-cgu fr-modal-dashboard-evapro evapro_admin",
+    class: "fr-modal-confirmation-cgu fr-modal-ancien-style-eva",
     "data-fr-concealing-backdrop": "false"
   }
 ) do %>
@@ -22,7 +22,7 @@
       <%= render partial: "admin/comptes/demande_acceptation_cgu_creation_compte",
         locals: { scope: "admin.dashboard.modal_confirmation_cgu" } %>
     </div>
-    <div class="fr-modal-dashboard-evapro__actions">
+    <div class="fr-modal-ancien-style-eva__actions">
       <%= render BoutonDsfrComponent.new(
         accepter_cgu_admin_compte_path(current_compte),
         type: :primary,

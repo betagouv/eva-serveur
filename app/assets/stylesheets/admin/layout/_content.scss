@@ -2,6 +2,7 @@ body.logged_in {
   #wrapper {
     position: relative;
   }
+
   &::before,
   &::after {
     content: '';
@@ -11,27 +12,20 @@ body.logged_in {
     position: absolute;
     left: 0;
   }
+
   &::before {
     top: 0;
     background-color: $eva_main_blue;
   }
+
   &::after {
     top: 64px;
     background-color: $eva_bluegrey;
   }
 
-  #title_bar, #active_admin_content {
-    max-width: $container;
-    margin: 0 auto;
-  }
-
-  // Eva admin: ajustements des marges entre le Header et le Footer
-  #title_bar {
-    margin-top: 2rem;
-  }
-
   #active_admin_content {
-    margin-bottom: 3.5rem;
+    max-width: $container;
+    margin: 0 auto 3.5rem;
   }
 }
 

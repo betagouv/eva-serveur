@@ -1,10 +1,4 @@
-
-<%
-  usage_evapro = current_compte.structure&.evapro?
-  modal_classes = "fr-modal-verification"
-  modal_classes += " evapro_admin" if usage_evapro
-%>
-<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: modal_classes }) do %>
+<%= dsfr_modal(title: t(".titre").html_safe, html_attributes: { id: "fr-modal-#{compte.id}", class: "fr-modal-verification" }) do %>
   <div class="contenu-modale">
     <div class="contenu">
       <%= form_with url: verifier_admin_compte_path(compte), method: :patch, local: true do |f| %>

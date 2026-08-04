@@ -29,7 +29,8 @@ module Pdf
           timeout: 60_000
         )
       else
-        page.set_content(html_content, wait_until: "networkidle2")
+        page.set_content(html_content, wait_until: "load")
+        page.wait_for_network_idle(concurrency: 2)
       end
       pause_pdf if Pdf::Browser.debug_mode?
       page

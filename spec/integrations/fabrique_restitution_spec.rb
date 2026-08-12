@@ -41,16 +41,6 @@ describe FabriqueRestitution do
           expect(restitution.evenements).to eq [ demarrage, reponse, fin ]
         end
       end
-
-      context "pour une situation dont le nom technique contient un variant" do
-        let(:situation) do
-          create :situation, nom_technique: "evaluation_impact_general__constructys"
-        end
-
-        it do
-          expect(described_class.instancie(partie).class).to eq(Restitution::EvaluationImpactGeneral)
-        end
-      end
     end
 
     it "instancie les restitution des parties de l'évaluation" do

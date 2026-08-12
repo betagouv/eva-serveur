@@ -24,7 +24,7 @@ class Evenement < ApplicationRecord
   end
 
   def question_nom_technique_sans_variant
-    question_nom_technique.split("__").first
+    Question.extraie_nom_technique_sans_variant(question_nom_technique)
   end
 
   def fin_situation?

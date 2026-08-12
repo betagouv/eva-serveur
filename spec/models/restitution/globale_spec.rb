@@ -2,11 +2,13 @@ require 'rails_helper'
 
 describe Restitution::Globale do
   let(:restitutions) { [ double ] }
+  let(:restitutions_dernier_essai) { [] }
   let(:evaluation) { double }
 
   let(:restitution_globale) do
-    described_class.new restitutions: restitutions,
-                        evaluation: evaluation
+    described_class.new evaluation: evaluation,
+      restitutions: restitutions,
+      restitutions_dernier_essai: restitutions_dernier_essai
   end
 
   describe "#beneficiaire retourne le nom du bénéficiaire" do
@@ -288,47 +290,41 @@ describe Restitution::Globale do
     end
   end
 
-  describe "#diag_risques_entreprise" do
+  describe("#selectionne_derniere_restitution") do
     let(:restitution_classique) do
       instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: false))
+        situation: build(:situation_inventaire))
     end
     let(:restitution_evapro_ancienne) do
       instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: true))
+        situation: build(:situation, nom_technique: nom_technique))
     end
     let(:restitution_evapro_recente) do
       instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: true))
+        situation: build(:situation, nom_technique: nom_technique))
     end
     let(:restitutions) do
-      [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]
+      [ restitution_classique, restitution_evapro_ancienne ]
+    end
+    let(:restitutions_dernier_essai) do
+      [ restitution_classique, restitution_evapro_recente ]
     end
 
-    it "retourne la dernière restitution de la situation diagnostic entreprise" do
-      expect(restitution_globale.diag_risques_entreprise).to eq(restitution_evapro_recente)
-    end
-  end
 
-  describe "#evaluation_impact_general" do
-    let(:restitution_classique) do
-      instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: false))
-    end
-    let(:restitution_evapro_ancienne) do
-      instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: true))
-    end
-    let(:restitution_evapro_recente) do
-      instance_double(Restitution::Base,
-        situation: instance_double(Situation, a_pour_nom_technique?: true))
-    end
-    let(:restitutions) do
-      [ restitution_classique, restitution_evapro_ancienne, restitution_evapro_recente ]
+    describe "#diag_risques_entreprise" do
+      let(:nom_technique) { Situation::DIAG_RISQUES_ENTREPRISE }
+
+      it "retourne la dernière restitution de la situation diagnostic entreprise" do
+        expect(restitution_globale.diag_risques_entreprise).to eq(restitution_evapro_recente)
+      end
     end
 
-    it "retourne la dernière restitution de la situation impact général" do
-      expect(restitution_globale.evaluation_impact_general).to eq(restitution_evapro_recente)
+    describe "#evaluation_impact_general" do
+      let(:nom_technique) { Situation::EVALUATION_IMPACT_GENERAL }
+
+      it "retourne la dernière restitution de la situation impact général" do
+        expect(restitution_globale.evaluation_impact_general).to eq(restitution_evapro_recente)
+      end
     end
   end
 end

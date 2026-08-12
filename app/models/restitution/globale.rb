@@ -11,9 +11,10 @@ module Restitution
     delegate :synthese, :synthese_positionnement_litteratie, :synthese_diagnostic,
              :synthese_positionnement_numeratie, :niveau_anlci_litteratie, to: :synthetiseur
 
-    def initialize(evaluation:, restitutions:)
+    def initialize(evaluation:, restitutions:, restitutions_dernier_essai:)
       @evaluation = evaluation
       @restitutions = restitutions
+      @restitutions_dernier_essai = restitutions_dernier_essai
     end
 
     def persiste
@@ -103,7 +104,7 @@ module Restitution
     end
 
     def selectionne_derniere_restitution(nom)
-      restitutions.reverse.find { |restitution| restitution.situation.a_pour_nom_technique?(nom) }
+      @restitutions_dernier_essai.find { |restitution| restitution.situation.nom_technique == nom }
     end
 
     def litteratie

@@ -2,7 +2,7 @@ class FabriqueRestitution
   class << self
     def instancie(partie)
       evenements = Evenement.where(partie: partie.session_id).order(:position).order(:date)
-      situation_nom_technique = partie.situation.nom_technique_sans_variant.underscore.camelize
+      situation_nom_technique = partie.situation.nom_technique.underscore.camelize
 
       classe_restitution = "Restitution::#{situation_nom_technique}".constantize
       classe_restitution.new(partie.campagne, evenements)
@@ -13,9 +13,13 @@ class FabriqueRestitution
     end
 
     def restitution_globale(evaluation, parties_selectionnees_ids = nil)
-      restitutions_retenues = instancie_restitutions(evaluation, parties_selectionnees_ids)
-      Restitution::Globale.new evaluation: evaluation, restitutions: restitutions_retenues
+      restitutions = instancie_restitutions(evaluation, parties_selectionnees_ids)
+      Restitution::Globale.new evaluation: evaluation,
+        restitutions: selectionne_premiere_restitutions(restitutions),
+        restitutions_dernier_essai: selectionne_premiere_restitutions(restitutions.reverse)
     end
+
+    private
 
     def instancie_restitutions(evaluation, parties_selectionnees_ids = nil)
       parties_selectionnees_ids =
@@ -25,12 +29,12 @@ class FabriqueRestitution
                              situation_id: situation_valides_ids)
                       .includes(:situation).includes(evaluation: :campagne)
                       .order(:created_at)
-      restitutions = parties.map { |partie| instancie partie }
-      selectionne_restitutions(restitutions)
+      parties
+        .map { |partie| instancie partie }
+        .reject { |restitution| restitution.evenements.empty? }
     end
 
-    def selectionne_restitutions(restitutions)
-      restitutions = restitutions.reject { |restitution| restitution.evenements.empty? }
+    def selectionne_premiere_restitutions(restitutions)
       restitutions_par_situation = restitutions.group_by(&:situation)
       restitutions_par_situation.values.map do |restitutions_selectionnees|
         restitution_selectionne = restitutions_selectionnees.find(&:termine?)

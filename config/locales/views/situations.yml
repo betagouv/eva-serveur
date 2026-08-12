@@ -1,6 +1,0 @@
-fr:
-  admin:
-    situations:
-      hints:
-        nom_technique: |
-          Pour créer un variant, suivez la nomenclature de type evaluation_impact_general__variant

@@ -1,5 +1,5 @@
 class Question < ApplicationRecord # rubocop:disable Metrics/ClassLength
-  include AvecNomTechnique
+  include AvecNomTechniqueAvecVariant
 
   CATEGORIE = %i[situation scolarite sante appareils].freeze
   CHAMPS_AUDIO = %i[intitule modalite_reponse consigne].freeze

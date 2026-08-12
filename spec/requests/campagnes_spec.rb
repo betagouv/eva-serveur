@@ -94,7 +94,7 @@ describe 'Campagne request', type: :request do
                  questions: [ question_entrainement ]
         end
         let(:questionnaire_surcharge) {
- create :questionnaire, questions: [ question_entrainement ] }
+          create :questionnaire, questions: [ question_entrainement ] }
         let(:situation_bienvenue) do
           create :situation_bienvenue,
                  libelle: 'Bienvenue',

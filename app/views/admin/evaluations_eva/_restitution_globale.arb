@@ -18,10 +18,10 @@ div class: "evaluation__restitution-globale #{class_css}" do
 
       if pdf
         h2 t(:titre, scope: [ :admin, :evaluations_eva, :restitution_globale, :prise_en_main ]),
-class: "text-center fr-mt-12v fr-mb-6v evaluation__titre"
+          class: "text-center fr-mt-12v fr-mb-6v evaluation__titre"
       else
         h2 t(:titre, scope: [ :admin, :evaluations_eva, :restitution_globale, :prise_en_main ]),
-class: "evaluation__titre"
+          class: "evaluation__titre"
       end
 
       div class: "panel" do

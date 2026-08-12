@@ -156,6 +156,7 @@ ActiveAdmin.register EvaluationEva do
   controller do
     include Fichier
     include Admin::DashboardHelper
+    include Admin::EvaluationHelper
 
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
                   :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
@@ -190,17 +191,6 @@ ActiveAdmin.register EvaluationEva do
                 filename: nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf"),
                 type: "application/pdf",
                 disposition: Rails.env.development? ? "inline" : "attachment")
-    end
-
-    def destroy
-      location = if request.referer&.include?("?")
-                   request.referer
-      elsif request.referer&.include?(admin_beneficiaire_path(resource.beneficiaire))
-                   request.referer
-      else
-                   admin_evaluations_eva_path
-      end
-      destroy!(location: location)
     end
 
     before_action only: :show do

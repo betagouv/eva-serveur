@@ -1,7 +1,7 @@
 module ActiveAdmin
   module ViewsHelper
     include StructureHelper
-    include EvaluationHelper
+    include Admin::EvaluationHelper
     include EvaluationRestitutionSituationsHelper
     include Admin::DashboardHelper
     include ErreurHelper

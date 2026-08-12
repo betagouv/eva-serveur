@@ -159,7 +159,8 @@ ActiveAdmin.register EvaluationEva do
     include Admin::EvaluationHelper
 
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
-                  :restitution_pour_situation, :statistiques, :mes_avec_redaction_de_notes,
+                  :cafe_de_la_place, :place_du_marche,
+                  :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
@@ -251,8 +252,12 @@ ActiveAdmin.register EvaluationEva do
       restitution_globale.selectionne_derniere_restitution(Situation::BIENVENUE)
     end
 
-    def restitution_pour_situation(situation)
-      restitution_globale.selectionne_derniere_restitution(situation)
+    def cafe_de_la_place
+      restitution_globale.selectionne_derniere_restitution(Situation::CAFE_DE_LA_PLACE)
+    end
+
+    def place_du_marche
+      restitution_globale.selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
     end
 
     def parties

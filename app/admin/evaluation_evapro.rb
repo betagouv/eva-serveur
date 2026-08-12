@@ -86,7 +86,7 @@ ActiveAdmin.register EvaluationEvapro do
     include Admin::EvaluationHelper
 
     helper_method :restitution_globale, :parties,
-                  :restitution_pour_situation, :statistiques,
+                  :statistiques,
                   :syntheses_evapro_par_evaluation_id, :taux_risque_pour_xls,
                   :recommandation_risque_pour_xls,
                   :impact_evapro_pour_xls, :score_cout_pour_xls
@@ -185,10 +185,6 @@ ActiveAdmin.register EvaluationEvapro do
     def restitution_globale
       @restitution_globale ||=
         FabriqueRestitution.restitution_globale(resource, params[:parties_selectionnees])
-    end
-
-    def restitution_pour_situation(situation)
-      restitution_globale.selectionne_derniere_restitution(situation)
     end
 
     def parties

@@ -18,11 +18,6 @@ module Admin
       parcours_type.present? && !compte.administratif?
     end
 
-    def presence_pastille?
-      liste_filtree_illettrisme_potentiel = params[:scope] == "illettrisme_potentiel"
-      liste_filtree_illettrisme_potentiel ? false : true
-    end
-
     def destroy
       destroy!(location: location_apres_suppression)
     end

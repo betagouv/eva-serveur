@@ -159,7 +159,7 @@ ActiveAdmin.register EvaluationEva do
     include Admin::EvaluationHelper
 
     helper_method :restitution_globale, :completude, :parties, :prise_en_main?, :bienvenue,
-                  :cafe_de_la_place, :place_du_marche,
+                  :cafe_de_la_place, :place_du_marche, :scope_illettrisme?,
                   :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
                   :campagne_avec_competences_transversales?,
@@ -258,6 +258,10 @@ ActiveAdmin.register EvaluationEva do
 
     def place_du_marche
       restitution_globale.selectionne_derniere_restitution(Situation::PLACE_DU_MARCHE)
+    end
+
+    def scope_illettrisme?
+      current_scope&.id == "illettrisme_potentiel"
     end
 
     def parties

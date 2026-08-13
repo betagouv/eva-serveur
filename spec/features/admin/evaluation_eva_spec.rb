@@ -14,6 +14,35 @@ describe 'Admin - Evaluation eva', type: :feature do
                       parcours_type: parcours_type
   end
 
+  describe '#index' do
+    before { connecte(mon_compte) }
+
+    context "évaluation potentiellement en situation d'illettrisme" do
+      let!(:evaluation_illettrisme) do
+        create(:evaluation, :eva, campagne: ma_campagne,
+                                  synthese_competences_de_base: :illettrisme_potentiel)
+      end
+
+      it "affiche la pastille hors du scope illettrisme_potentiel" do
+        visit admin_evaluations_eva_path
+
+        within(".evaluation__cellule",
+               text: evaluation_illettrisme.beneficiaire.code_beneficiaire) do
+          expect(page).to have_css(".ellipse--alerte", visible: :all)
+        end
+      end
+
+      it "masque la pastille dans le scope illettrisme_potentiel" do
+        visit admin_evaluations_eva_path(scope: :illettrisme_potentiel)
+
+        within(".evaluation__cellule",
+               text: evaluation_illettrisme.beneficiaire.code_beneficiaire) do
+          expect(page).not_to have_css(".ellipse--alerte", visible: :all)
+        end
+      end
+    end
+  end
+
   describe '#show' do
     before { connecte(mon_compte) }
 

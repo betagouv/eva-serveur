@@ -1,0 +1,23 @@
+fr:
+  admin:
+    restitutions:
+      restitution_competences:
+        synthese:
+          efficience:
+            nom: Efficience
+          pourcentage_risque:
+            nom: "Pourcentage de risque"
+          performance_collective:
+            nom: Performance collective
+          agilite_organisationnelle:
+            nom: Agilité organisationnelle
+          securite_qualite:
+            nom: Sécurité et qualité
+          mobilite_professionnelle:
+            nom: Mobilité professionnelle
+          score_cout:
+            nom: Coûts
+          score_strategie:
+            nom: Stratégies de contournement
+          score_numerique:
+            nom: Compétences numériques de base

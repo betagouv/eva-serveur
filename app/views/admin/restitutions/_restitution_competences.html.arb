@@ -5,8 +5,7 @@ panel t(".titre") do
             scope: "admin.evaluations_eva.restitution_competence")) { niveau }
     end
     restitution.synthese.each do |metrique, niveau|
-      row(t("#{metrique}.nom",
-            scope: "admin.evaluations_eva.restitution_competence")) { niveau }
+      row(t(".synthese.#{metrique}.nom")) { niveau }
     end
   end
 end

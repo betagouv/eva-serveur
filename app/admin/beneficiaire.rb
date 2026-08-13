@@ -66,7 +66,8 @@ ActiveAdmin.register Beneficiaire do
   end
 
   index dsfr_table: proc { true },
-        content_before: proc { render "admin/beneficiaires/modal_fusion" } do
+        content_before: proc { render "admin/beneficiaires/modal_fusion" },
+        class: "fr-table--multiline" do
     render "index", context: self
   end
 

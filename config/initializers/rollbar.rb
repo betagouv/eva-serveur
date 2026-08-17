@@ -39,6 +39,17 @@ Rollbar.configure do |config|
   # You can also specify a callable, which will be called with the exception instance.
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
 
+  # Ignore les 404 générées par des bots qui scannent des chemins WordPress/PHP
+  # inexistants sur notre appli (ex. /wp-includes/php-compat, /xmlrpc.php).
+  # Les autres RoutingError (vraies erreurs de route dans l'appli) continuent
+  # d'être remontées normalement.
+  bot_scan_path_pattern = %r{wp-(admin|includes|content|login|json)|xmlrpc\.php|\.php$|/wordpress}i
+  config.exception_level_filters.merge!(
+    'ActionController::RoutingError' => lambda do |e|
+      'ignore' if e.message =~ bot_scan_path_pattern
+    end
+  )
+
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
   # is not installed)
   # config.use_async = true

@@ -40,10 +40,10 @@ Rollbar.configure do |config|
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
 
   # Ignore les 404 générées par des bots qui scannent des chemins WordPress/PHP
-  # inexistants sur notre appli (ex. /wp-includes/php-compat, /xmlrpc.php).
-  # Les autres RoutingError (vraies erreurs de route dans l'appli) continuent
-  # d'être remontées normalement.
-  bot_scan_path_pattern = %r{wp-(admin|includes|content|login|json)|xmlrpc\.php|\.php$|/wordpress}i
+  # ou ASP.NET/IIS inexistants sur notre appli (ex. /wp-includes/php-compat,
+  # /xmlrpc.php, /Default.aspx, /owa/). Les autres RoutingError (vraies
+  # erreurs de route dans l'appli) continuent d'être remontées normalement.
+  bot_scan_path_pattern = %r{wp-(admin|includes|content|login|json)|xmlrpc\.php|\.php$|/wordpress|\.asp[x]?$|/owa|/ecp|/autodiscover}i
   config.exception_level_filters.merge!(
     'ActionController::RoutingError' => lambda do |e|
       'ignore' if e.message =~ bot_scan_path_pattern

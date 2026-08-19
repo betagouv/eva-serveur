@@ -222,7 +222,7 @@ describe 'Admin - Evaluation eva', type: :feature do
 
       describe 'en moquant restitution_globale :' do
         let(:restitution_globale) do
-          instance_double(Restitution::Globale,
+          instance_double(Restitution::GlobaleEva,
                  date: DateTime.now,
                  beneficiaire: 'Roger',
                  code_beneficiaire: 'ROG1234',
@@ -241,8 +241,6 @@ describe 'Admin - Evaluation eva', type: :feature do
           allow(restitution_globale).to receive(:synthese_diagnostic)
           allow(restitution_globale).to receive(:synthese_positionnement_litteratie)
           allow(restitution_globale).to receive(:synthese_positionnement_numeratie)
-          allow(restitution_globale).to receive(:diag_risques_entreprise)
-          allow(restitution_globale).to receive(:evaluation_impact_general)
           allow(FabriqueRestitution).to receive(:restitution_globale)
             .and_return(restitution_globale)
           allow(restitution_globale).to receive(:selectionne_derniere_restitution)

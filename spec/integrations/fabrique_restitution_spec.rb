@@ -1,46 +1,46 @@
 require 'rails_helper'
 
 describe FabriqueRestitution do
-  describe '#restitution_globale' do
-    let(:situation) { create :situation_inventaire }
-    let(:campagne) { create :campagne }
-    let(:evaluation) { create :evaluation, campagne: campagne }
-    let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
-    let!(:demarrage) do
-      create(:evenement_demarrage, partie: partie, position: 0, date: 3.minutes.ago)
+  let(:situation) { create :situation_inventaire }
+  let(:campagne) { create :campagne }
+  let(:evaluation) { create :evaluation, :eva, campagne: campagne }
+  let!(:partie) { create :partie, evaluation: evaluation, situation: situation }
+  let!(:demarrage) do
+    create(:evenement_demarrage, partie: partie, position: 0, date: 3.minutes.ago)
+  end
+
+  describe '#instancie' do
+    context 'avec des événements qui ont une position' do
+      let!(:reponse2) { create(:evenement_reponse, partie: partie, position: 2) }
+      let!(:reponse1) { create(:evenement_reponse, partie: partie, position: 1) }
+      let!(:fin) { create(:evenement_fin_situation, partie: partie, position: 3) }
+
+      it 'trie les événéments par position' do
+        restitution = described_class.instancie(partie)
+        expect(restitution.evenements).to eq [ demarrage, reponse1, reponse2, fin ]
+      end
     end
 
+    context 'avec des événements sans position (evenements historiques)' do
+      let!(:fin) { create(:evenement_fin_situation, partie: partie, date: 1.minute.ago) }
+      let!(:reponse) { create(:evenement_reponse, partie: partie, date: 2.minutes.ago) }
+
+      before do
+        # rubocop:disable Rails/SkipsModelValidations
+        Evenement.update_all(position: nil)
+        # rubocop:enable Rails/SkipsModelValidations
+      end
+
+      it 'trie les événéments par date' do
+        restitution = described_class.instancie(partie)
+        expect(restitution.evenements).to eq [ demarrage, reponse, fin ]
+      end
+    end
+  end
+
+  describe '#restitution_globale' do
     before do
       campagne.situations_configurations.create situation: situation
-    end
-
-    describe '#instancie' do
-      context 'avec des événements qui ont une position' do
-        let!(:reponse2) { create(:evenement_reponse, partie: partie, position: 2) }
-        let!(:reponse1) { create(:evenement_reponse, partie: partie, position: 1) }
-        let!(:fin) { create(:evenement_fin_situation, partie: partie, position: 3) }
-
-        it 'trie les événéments par position' do
-          restitution = described_class.instancie(partie)
-          expect(restitution.evenements).to eq [ demarrage, reponse1, reponse2, fin ]
-        end
-      end
-
-      context 'avec des événements sans position (evenements historiques)' do
-        let!(:fin) { create(:evenement_fin_situation, partie: partie, date: 1.minute.ago) }
-        let!(:reponse) { create(:evenement_reponse, partie: partie, date: 2.minutes.ago) }
-
-        before do
-          # rubocop:disable Rails/SkipsModelValidations
-          Evenement.update_all(position: nil)
-          # rubocop:enable Rails/SkipsModelValidations
-        end
-
-        it 'trie les événéments par date' do
-          restitution = described_class.instancie(partie)
-          expect(restitution.evenements).to eq [ demarrage, reponse, fin ]
-        end
-      end
     end
 
     it "instancie les restitution des parties de l'évaluation" do

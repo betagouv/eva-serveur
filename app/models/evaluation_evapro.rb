@@ -11,6 +11,10 @@ class EvaluationEvapro < Evaluation
     "tres_fort" => "D"
   }.freeze
 
+  def classe_restitution
+    Restitution::GlobaleEvapro
+  end
+
   def opco_financeur
     structure&.opco_financeur
   end

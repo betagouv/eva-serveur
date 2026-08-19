@@ -48,6 +48,10 @@ class EvaluationEva < Evaluation
   scope :diagnostic, -> { avec_type_de_programme(:diagnostic) }
   scope :positionnement, -> { avec_type_de_programme(:positionnement) }
 
+  def classe_restitution
+    Restitution::GlobaleEva
+  end
+
   def illettrisme_potentiel?
     synthese_competences_de_base == "illettrisme_potentiel" ||
       positionnement_niveau_numeratie_profil1? || positionnement_niveau_numeratie_profil2?

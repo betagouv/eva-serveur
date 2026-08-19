@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe Restitution::Globale do
+describe Restitution::GlobaleEva do
   let(:campagne) { create :campagne }
   let(:situation)  { create :situation_objets_trouves }
-  let(:evaluation) { create :evaluation, campagne: campagne }
+  let(:evaluation) { create :evaluation, :eva, campagne: campagne }
   let(:partie_moyenne) do
     create :partie,
            situation: situation,

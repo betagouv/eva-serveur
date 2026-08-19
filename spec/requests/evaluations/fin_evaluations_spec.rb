@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Fin Evaluation API', type: :request do
   describe 'POST /evaluations/:id/fin' do
     let(:campagne) { create :campagne }
-    let(:evaluation) { create :evaluation, campagne: campagne }
+    let(:evaluation) { create :evaluation, :eva, campagne: campagne }
 
     let!(:partie) do
       create :partie, evaluation: evaluation, situation: situation_inventaire

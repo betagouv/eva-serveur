@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::Evaluations::FinsController do
   let(:compte) { create :compte_admin }
   let(:campagne) { create :campagne, compte: compte }
-  let(:evaluation) { create :evaluation, campagne: campagne }
+  let(:evaluation) { create :evaluation, :eva, campagne: campagne }
 
   describe '#create' do
     it 'enregistre terminee_le au bon format quand elle est iso' do

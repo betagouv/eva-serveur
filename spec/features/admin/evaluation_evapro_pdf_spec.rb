@@ -66,7 +66,7 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
       end
       let(:restitution_globale) do
         instance_double(
-          Restitution::Globale,
+          Restitution::GlobaleEvapro,
           evaluation: evaluation_evapro,
           diag_risques_entreprise: diag_risques_entreprise,
           evaluation_impact_general: evaluation_impact_general

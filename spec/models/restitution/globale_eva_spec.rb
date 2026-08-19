@@ -1,0 +1,287 @@
+require 'rails_helper'
+
+describe Restitution::GlobaleEva do
+  let(:restitutions) { [ double ] }
+  let(:restitutions_dernier_essai) { [] }
+  let(:evaluation) { double }
+
+  let(:restitution_globale) do
+    described_class.new evaluation: evaluation,
+      restitutions: restitutions,
+      restitutions_dernier_essai: restitutions_dernier_essai
+  end
+
+  describe "#beneficiaire retourne le nom du bénéficiaire" do
+    let(:restitutions) { [ double ] }
+    let(:beneficiaire) { double(nom: 'Jean Bon') }
+    let(:evaluation) { double(beneficiaire: beneficiaire) }
+
+    it { expect(restitution_globale.beneficiaire).to eq('Jean Bon') }
+  end
+
+  describe '#niveaux_competences retournes les compétences consolidées par niveau' do
+    let(:niveau_comparaison) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_4 } }
+    let(:niveau_rapidite) { { Competence::RAPIDITE => Competence::NIVEAU_4 } }
+
+    context 'aucune évaluation' do
+      let(:restitutions) { [] }
+
+      it { expect(restitution_globale.niveaux_competences).to eq([]) }
+    end
+
+    context 'une évaluation, une compétences' do
+      let(:restitutions) { [ double(competences: niveau_comparaison) ] }
+
+      it do
+        expect(restitution_globale.niveaux_competences)
+          .to eq([ [ Competence::COMPARAISON_TRI, 4.0 ] ])
+      end
+    end
+
+    context 'une évaluation, deux compétences' do
+      let(:restitutions) { [ double(competences: niveau_comparaison.merge(niveau_rapidite)) ] }
+
+      it do
+        expect(restitution_globale.niveaux_competences)
+          .to eq([
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::RAPIDITE, 4.0 ]
+                 ])
+      end
+    end
+
+    context 'deux évaluation, deux compétences différentes' do
+      let(:restitution1) { double(competences: niveau_comparaison) }
+      let(:restitution2) { double(competences: niveau_rapidite) }
+      let(:restitutions) { [ restitution1, restitution2 ] }
+
+      it do
+        expect(restitution_globale.niveaux_competences)
+          .to eq([
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::RAPIDITE, 4.0 ]
+                 ])
+      end
+    end
+
+    context 'retourne les niveaux les plus forts en premier' do
+      let(:niveau_faible) { { Competence::ORGANISATION_METHODE => Competence::NIVEAU_1 } }
+      let(:restitution1) { double(competences: niveau_faible) }
+      let(:restitution2) { double(competences: niveau_comparaison) }
+      let(:restitutions) { [ restitution1, restitution2 ] }
+
+      it do
+        expect(restitution_globale.niveaux_competences)
+          .to eq([
+                   [ Competence::COMPARAISON_TRI, 4.0 ],
+                   [ Competence::ORGANISATION_METHODE, 1.0 ]
+                 ])
+      end
+    end
+
+    context 'ignore les niveaux indéterminées' do
+      let(:niveau_indetermine) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_INDETERMINE } }
+      let(:restitutions) { [ double(competences: niveau_indetermine) ] }
+
+      it { expect(restitution_globale.niveaux_competences).to eq([]) }
+    end
+
+    context 'fait la moyenne des niveaux' do
+      let(:niveau_comparaison3) { { Competence::COMPARAISON_TRI => Competence::NIVEAU_3 } }
+      let(:restitution1) { double(competences: niveau_comparaison) }
+      let(:restitution2) { double(competences: niveau_comparaison3) }
+      let(:restitutions) { [ restitution1, restitution2 ] }
+
+      it do
+        resultat = [ Competence::COMPARAISON_TRI, 3.5 ]
+        expect(restitution_globale.niveaux_competences).to eq([ resultat ])
+      end
+    end
+
+    context "ignore les compétences inutilisées dans l'efficience" do
+      let(:niveau_perseverance) { { Competence::PERSEVERANCE => Competence::NIVEAU_3 } }
+      let(:restitutions) { [ double(competences: niveau_perseverance) ] }
+
+      it { expect(restitution_globale.niveaux_competences).to eq([]) }
+    end
+  end
+
+  describe '#interpretations_niveau1_cefr' do
+    let(:restitutions) { [] }
+    let(:interpretations) { restitution_globale.interpretations_niveau1_cefr }
+
+    context 'sans illettrisme potentiel' do
+      let(:interpreteur_niveau1_cefr) { double(interpretations_cefr: [ trop: :bon ]) }
+
+      before do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1_cefr)
+      end
+
+      it { expect(interpretations).to eq [ trop: :bon ] }
+    end
+  end
+
+  describe '#interpretations_niveau1_anlci' do
+    let(:restitutions) { [] }
+    let(:interpretations) { restitution_globale.interpretations_niveau1_anlci }
+
+    context 'sans illettrisme potentiel' do
+      let(:interpreteur_niveau1_anlci) { double(interpretations_anlci: [ trop: :bon ]) }
+
+      before do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1_anlci)
+      end
+
+      it { expect(interpretations).to eq [ trop: :bon ] }
+    end
+  end
+
+  describe '#interpretations' do
+    let(:restitutions) { [] }
+
+    context 'pre-positionnement' do
+      let(:interpreteur_niveau1) do
+        double(
+          synthese: 'illettrisme_potentiel',
+          interpretations_cefr: { litteratie: :pre_A1, numeratie: :X1 },
+          interpretations_anlci: { litteratie: :profil1, numeratie: :profil2 }
+        )
+      end
+
+      before do
+        allow(restitution_globale).to receive(:litteratie).and_return(nil)
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'illettrisme_potentiel',
+              niveau_cefr: :pre_A1,
+              niveau_cnef: :X1,
+              niveau_anlci_litteratie: :profil1,
+              niveau_anlci_numeratie: :profil2,
+              positionnement_niveau_litteratie: nil,
+              positionnement_niveau_numeratie: nil
+            }
+          )
+      end
+    end
+
+    context 'positionnement' do
+      let(:interpreteur_niveau1) do
+        double(
+          synthese: nil,
+          interpretations_cefr: { litteratie: nil, numeratie: nil },
+          interpretations_anlci: { litteratie: nil, numeratie: nil }
+        )
+      end
+      let(:litteratie) { double }
+      let(:numeratie) { double }
+
+      before do
+        allow(restitution_globale).to receive_messages(litteratie: litteratie,
+                                                       numeratie: litteratie)
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        allow(litteratie)
+          .to receive(:synthese).and_return({ niveau_litteratie: :profil2,
+                                              profil_numeratie: :profil1 })
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'illettrisme_potentiel',
+              niveau_cefr: nil,
+              niveau_cnef: nil,
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil,
+              positionnement_niveau_litteratie: :profil2,
+              positionnement_niveau_numeratie: :profil1
+            }
+          )
+      end
+
+      it do
+        allow(Restitution::Illettrisme::InterpreteurNiveau1)
+          .to receive(:new).and_return(interpreteur_niveau1)
+        allow(litteratie)
+          .to receive(:synthese).and_return({ niveau_litteratie: :profil3 })
+        expect(restitution_globale.interpretations)
+          .to eq(
+            {
+              synthese_competences_de_base: 'ni_ni',
+              niveau_cefr: nil,
+              niveau_cnef: nil,
+              niveau_anlci_litteratie: nil,
+              niveau_anlci_numeratie: nil,
+              positionnement_niveau_litteratie: :profil3,
+              positionnement_niveau_numeratie: nil
+            }
+          )
+      end
+    end
+  end
+
+  describe '#persiste' do
+    let(:restitutions) { [] }
+    let(:redactions) { [ "Elle est tombée", "Elle a glissé puis est tombée" ] }
+    let(:champs_persistes) { {
+      synthese_competences_de_base: 'illettrisme_potentiel',
+      completude: :complete,
+      redactions: redactions
+    } }
+    let(:completude) { double }
+
+    before do
+      allow(evaluation).to receive(:id).and_return("un id")
+      allow(restitution_globale).to receive(:interpretations)
+        .and_return({ synthese_competences_de_base: 'illettrisme_potentiel' })
+      allow(completude).to receive(:calcule).and_return(:complete)
+      allow(Restitution::Completude).to receive(:new).and_return(completude)
+      allow(Evaluation).to receive(:reponses_redaction_pour_evaluations)
+        .with([ evaluation.id ]).and_return({ evaluation.id => redactions })
+    end
+
+    it do
+      expect(evaluation).to receive(:update).with(champs_persistes)
+      restitution_globale.persiste
+    end
+  end
+
+  describe("#selectionne_derniere_restitution") do
+    let(:restitution_inventaire) do
+      instance_double(Restitution::Base,
+        situation: build(:situation_inventaire))
+    end
+    let(:restitution_eva_ancienne) do
+      instance_double(Restitution::Base,
+        situation: build(:situation, nom_technique: nom_technique))
+    end
+    let(:restitution_eva_recente) do
+      instance_double(Restitution::Base,
+        situation: build(:situation, nom_technique: nom_technique))
+    end
+    let(:restitutions) do
+      [ restitution_inventaire, restitution_eva_ancienne ]
+    end
+    let(:restitutions_dernier_essai) do
+      [ restitution_inventaire, restitution_eva_recente ]
+    end
+
+
+    describe "#litteratie" do
+      let(:nom_technique) { Situation::CAFE_DE_LA_PLACE }
+
+      it "retourne la dernière restitution de la situation numératie" do
+        expect(restitution_globale.litteratie).to eq(restitution_eva_recente)
+      end
+    end
+  end
+end

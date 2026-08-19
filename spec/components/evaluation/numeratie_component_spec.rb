@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Evaluation::NumeratieComponent, type: :component do
   context "quand il n'y a pas de restitution Place du marché" do
     let(:restitution_globale) do
-      instance_double(Restitution::Globale, synthese_positionnement_numeratie: nil)
+      instance_double(Restitution::GlobaleEva, synthese_positionnement_numeratie: nil)
     end
 
     it do

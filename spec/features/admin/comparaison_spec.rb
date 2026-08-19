@@ -5,8 +5,8 @@ describe 'Admin - Comparaison', type: :feature do
   let(:beneficiaire) { create :beneficiaire }
   let(:evaluations) do
     [
-      create(:evaluation, beneficiaire: beneficiaire),
-      create(:evaluation, beneficiaire: beneficiaire)
+      create(:evaluation, :eva, beneficiaire: beneficiaire),
+      create(:evaluation, :eva, beneficiaire: beneficiaire)
     ]
   end
 

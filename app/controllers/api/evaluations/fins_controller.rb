@@ -8,6 +8,7 @@ module Api
         terminee_le = params[:terminee_le] || Time.zone.now
         evaluation.update terminee_le: terminee_le
 
+        return if evaluation.instance_of? EvaluationEvapro
         return unless evaluation.campagne.affiche_competences_fortes?
 
         restitution_globale = FabriqueRestitution.restitution_globale(evaluation)

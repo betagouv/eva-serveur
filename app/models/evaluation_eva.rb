@@ -1,4 +1,6 @@
 class EvaluationEva < Evaluation
+  SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
+  SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
   SYNTHESES = %w[illettrisme_potentiel socle_clea ni_ni aberrant].freeze
   NIVEAUX_CEFR = %w[pre_A1 A1 A2 B1].freeze
   NIVEAUX_CNEF = %w[pre_X1 X1 X2 Y1].freeze
@@ -7,6 +9,8 @@ class EvaluationEva < Evaluation
                               profil_4h profil_4h_plus profil_4h_plus_plus
                               profil_aberrant indetermine].freeze
   NIVEAUX_NUMERATIE = %w[profil1 profil2 profil3 profil4 profil4_plus indetermine].freeze
+  NIVEAUX_COMPLETUDE = %w[incomplete competences_de_base_incompletes
+                          competences_transversales_incompletes complete].freeze
 
   ACTIONS = {
     LIRE: { label: I18n.t("admin.evaluations_eva.index.voir"),
@@ -40,6 +44,7 @@ class EvaluationEva < Evaluation
        NIVEAUX_POSITIONNEMENT.zip(NIVEAUX_POSITIONNEMENT).to_h, prefix: true
   enum :positionnement_niveau_numeratie,
        NIVEAUX_NUMERATIE.zip(NIVEAUX_NUMERATIE).to_h, prefix: true
+  enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
 
   scope :sans_mise_en_action, -> { where.missing(:mise_en_action) }
   scope :competences_de_base_completes, lambda {

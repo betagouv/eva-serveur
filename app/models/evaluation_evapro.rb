@@ -11,6 +11,10 @@ class EvaluationEvapro < Evaluation
     "tres_fort" => "D"
   }.freeze
 
+  NIVEAUX_COMPLETUDE = %w[incomplete complete].freeze
+
+  enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
+
   def classe_restitution
     Restitution::GlobaleEvapro
   end

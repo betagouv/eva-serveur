@@ -220,7 +220,7 @@ ActiveAdmin.register EvaluationEva do
     end
 
     def completude
-      @completude ||= Restitution::Completude.new(resource, restitution_globale.restitutions)
+      @completude ||= Restitution::Eva::Completude.new(resource, restitution_globale.restitutions)
     end
 
     def trad_niveau(evaluation, interpretation)

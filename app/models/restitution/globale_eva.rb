@@ -8,7 +8,7 @@ module Restitution
              :synthese_positionnement_numeratie, :niveau_anlci_litteratie, to: :synthetiseur
 
     def persiste
-      restitution_complete = Restitution::Completude.new(evaluation, restitutions).calcule
+      restitution_complete = Restitution::Eva::Completude.new(evaluation, restitutions).calcule
       redactions = Evaluation.reponses_redaction_pour_evaluations([ evaluation.id ])[evaluation.id]
       @evaluation.update interpretations.merge(
         completude: restitution_complete,

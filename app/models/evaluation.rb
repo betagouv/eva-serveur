@@ -1,9 +1,4 @@
 class Evaluation < ApplicationRecord
-  NIVEAUX_COMPLETUDE = %w[incomplete competences_de_base_incompletes
-                          competences_transversales_incompletes complete].freeze
-  SITUATION_COMPETENCES_TRANSVERSALES = %w[tri inventaire securite controle].freeze
-  SITUATION_COMPETENCES_BASE = %w[maintenance livraison objets_trouves].freeze
-
   belongs_to :campagne
   belongs_to :beneficiaire
 
@@ -21,8 +16,6 @@ class Evaluation < ApplicationRecord
   attr_accessor :code_campagne
 
   acts_as_paranoid
-
-  enum :completude, NIVEAUX_COMPLETUDE.zip(NIVEAUX_COMPLETUDE).to_h
 
   scope :pour_les_structures, lambda { |structures|
     joins(campagne: { compte: :structure })

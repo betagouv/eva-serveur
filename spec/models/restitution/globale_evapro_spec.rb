@@ -21,7 +21,7 @@ describe Restitution::GlobaleEvapro do
     before do
       allow(evaluation).to receive(:id).and_return("un id")
       allow(completude).to receive(:calcule).and_return(:complete)
-      allow(Restitution::Completude).to receive(:new).and_return(completude)
+      allow(Restitution::Evapro::Completude).to receive(:new).and_return(completude)
     end
 
     it do

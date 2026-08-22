@@ -244,7 +244,7 @@ describe Restitution::GlobaleEva do
       allow(restitution_globale).to receive(:interpretations)
         .and_return({ synthese_competences_de_base: 'illettrisme_potentiel' })
       allow(completude).to receive(:calcule).and_return(:complete)
-      allow(Restitution::Completude).to receive(:new).and_return(completude)
+      allow(Restitution::Eva::Completude).to receive(:new).and_return(completude)
       allow(Evaluation).to receive(:reponses_redaction_pour_evaluations)
         .with([ evaluation.id ]).and_return({ evaluation.id => redactions })
     end

@@ -1,7 +1,7 @@
 module Restitution
   class GlobaleEvapro < Globale
     def persiste
-      restitution_complete = Restitution::Completude.new(evaluation, restitutions).calcule
+      restitution_complete = Restitution::Evapro::Completude.new(evaluation, restitutions).calcule
       @evaluation.update(completude: restitution_complete)
     end
 

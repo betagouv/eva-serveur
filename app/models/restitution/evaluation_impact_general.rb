@@ -13,33 +13,33 @@ module Restitution
     end
 
     def calcule_performance_collective
-      Restitution::Entreprises::Impact::InterpretationScoring.new.calcule_performance_collective(@evenements)
+      Restitution::Evapro::Impact::InterpretationScoring.new.calcule_performance_collective(@evenements)
     end
 
     def calcule_agilite_organisationnelle
-      Restitution::Entreprises::Impact::InterpretationScoring.new.calcule_agilite_organisationnelle(@evenements)
+      Restitution::Evapro::Impact::InterpretationScoring.new.calcule_agilite_organisationnelle(@evenements)
     end
 
     def calcule_securite_qualite
-      Restitution::Entreprises::Impact::InterpretationScoring.new.calcule_securite_qualite(@evenements)
+      Restitution::Evapro::Impact::InterpretationScoring.new.calcule_securite_qualite(@evenements)
     end
 
     def calcule_mobilite_professionnelle
-      Restitution::Entreprises::Impact::InterpretationScoring.new.calcule_mobilite_professionnelle(@evenements)
+      Restitution::Evapro::Impact::InterpretationScoring.new.calcule_mobilite_professionnelle(@evenements)
     end
 
     def calcule_score_cout
-      Restitution::Entreprises::Impact::ScoreParImpact.new
+      Restitution::Evapro::Impact::ScoreParImpact.new
         .calcule_score_cout(@evenements, pourcentage_risque)
     end
 
     def calcule_score_strategie
-      Restitution::Entreprises::Impact::ScoreParImpact.new
+      Restitution::Evapro::Impact::ScoreParImpact.new
         .calcule_score_strategie(@evenements, pourcentage_risque)
     end
 
     def calcule_score_numerique
-      Restitution::Entreprises::Impact::ScoreParImpact.new
+      Restitution::Evapro::Impact::ScoreParImpact.new
         .calcule_score_numerique(@evenements, pourcentage_risque)
     end
 

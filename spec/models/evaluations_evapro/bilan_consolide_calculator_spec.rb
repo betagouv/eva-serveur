@@ -158,7 +158,7 @@ evenements: risque_events)
     end
 
     it "couvre tous les paliers de pourcentage_risque dans MALUS_PAR_POURCENTAGE_RISQUE" do
-      paliers = Restitution::Entreprises::PourcentageRisque::POURCENTAGE_RISQUE_PAR_SEUIL.keys
+      paliers = Restitution::Evapro::PourcentageRisque::POURCENTAGE_RISQUE_PAR_SEUIL.keys
       paliers.each do |pourcentage|
         expect(described_class::MALUS_PAR_POURCENTAGE_RISQUE).to have_key(pourcentage),
           "pas de malus défini pour pourcentage_risque=#{pourcentage}"

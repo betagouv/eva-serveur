@@ -1,5 +1,5 @@
 module Restitution
-  module Entreprises
+  module Evapro
     module Impact
       class InterpretationScoring
         # Si cumul des scores >= 15, alors très fort

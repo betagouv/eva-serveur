@@ -7,7 +7,7 @@ module Restitution
     end
 
     def calcule_pourcentage_risque
-      Restitution::Entreprises::PourcentageRisque.new.calcule(@evenements)
+      Restitution::Evapro::PourcentageRisque.new.calcule(@evenements)
     end
 
     def palier

@@ -1,5 +1,5 @@
 module Restitution
-  module Entreprises
+  module Evapro
     class PourcentageRisque
       # pourcentage => score_max
       # soit 10% pour un score <= à 8

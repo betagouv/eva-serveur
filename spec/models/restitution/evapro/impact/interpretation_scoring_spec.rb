@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe Restitution::Entreprises::Impact::InterpretationScoring do
+describe Restitution::Evapro::Impact::InterpretationScoring do
   describe '#calcule' do
-    let(:seuils) { Restitution::Entreprises::Impact::InterpretationScoring::PERFORMANCE_COLLECTIVE_PAR_SEUIL }
+    let(:seuils) { Restitution::Evapro::Impact::InterpretationScoring::PERFORMANCE_COLLECTIVE_PAR_SEUIL }
     let(:evenements) do
       [ build(:evenement_demarrage) ] + evenements_reponses
     end

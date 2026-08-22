@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Restitution::Entreprises::PourcentageRisque do
+describe Restitution::Evapro::PourcentageRisque do
   describe '#calcule' do
     let(:evenements) do
       [ build(:evenement_demarrage) ] + evenements_reponses

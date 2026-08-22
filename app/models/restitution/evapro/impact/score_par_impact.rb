@@ -1,5 +1,5 @@
 module Restitution
-  module Entreprises
+  module Evapro
     module Impact
       class ScoreParImpact
         SEUILS = {

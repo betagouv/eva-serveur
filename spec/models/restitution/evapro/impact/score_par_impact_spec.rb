@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Restitution::Entreprises::Impact::ScoreParImpact do
+describe Restitution::Evapro::Impact::ScoreParImpact do
   describe '#calcule_score_cout' do
     let(:pourcentage_risque) { 10 }
     let(:evenements) do

@@ -58,6 +58,14 @@ describe Sirene::Client, type: :lib do
         expect(resultat).to eq(reponse_api)
         expect(Typhoeus).to have_received(:get)
       end
+
+      it "envoie un header User-Agent explicite" do
+        client.recherche(siret)
+        expect(Typhoeus).to have_received(:get).with(
+          url,
+          hash_including(headers: hash_including("User-Agent" => a_string_matching(/EVA-Serveur/)))
+        )
+      end
     end
 
     context "quand l'API ne retourne aucun résultat" do

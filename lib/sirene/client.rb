@@ -20,7 +20,8 @@ module Sirene
 
     def headers
       {
-        "Accept" => "application/json"
+        "Accept" => "application/json",
+        "User-Agent" => "EVA-Serveur (#{ENV['HOTE_SERVEUR']})"
       }
     end
   end

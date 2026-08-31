@@ -5,6 +5,20 @@ fr:
         synthese:
           efficience:
             nom: Efficience
+          numeratie_niveau1:
+            nom: Score Niveau 1
+          numeratie_niveau2:
+            nom: Score Niveau 2
+          numeratie_niveau3:
+            nom: Score Niveau 3
+          profil_numeratie:
+            nom: Profil de numératie
+          parcours_bas:
+            nom: Profil parcours bas
+          parcours_haut:
+            nom: Profil parcours haut
+          niveau_litteratie:
+            nom: Profil de littératie
           pourcentage_risque:
             nom: "Pourcentage de risque"
           performance_collective:

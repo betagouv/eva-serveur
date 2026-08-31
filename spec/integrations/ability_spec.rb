@@ -187,6 +187,7 @@ describe Ability do
         expect(subject).to be_able_to(:edit_role, mon_collegue)
         expect(subject).to be_able_to(:destroy, evaluation_collegue)
         expect(subject).to be_able_to(:read, campagne_collegue)
+        expect(subject).to be_able_to(:update, evaluation_collegue.beneficiaire)
         expect(subject).to be_able_to(:autoriser, mon_collegue)
         expect(subject).to be_able_to(:refuser, mon_collegue)
         expect(subject).to be_able_to(:verifier, mon_collegue)
@@ -228,6 +229,7 @@ describe Ability do
         expect(subject).to be_able_to(:read, campagne_sous_structure)
         expect(subject).to be_able_to(:update, campagne_sous_structure)
         expect(subject).to be_able_to(:destroy, evaluation_sous_structure)
+        expect(subject).to be_able_to(:update, evaluation_sous_structure.beneficiaire)
         expect(subject).to be_able_to(:autoriser, compte_sous_structure)
         expect(subject).to be_able_to(:refuser, compte_sous_structure)
         expect(subject).to be_able_to(:verifier, compte_sous_structure)
@@ -270,6 +272,16 @@ describe Ability do
         expect(subject).to be_able_to(%i[read update], evaluation.beneficiaire)
         expect(subject).to be_able_to(:destroy, beneficiaire_vide)
         expect(subject).not_to be_able_to(:destroy, evaluation.beneficiaire)
+      end
+    end
+
+    context 'peut modifier les bénéficiaires des campagnes publiques des collègues' do
+      let(:mon_collegue) { create :compte, role: :conseiller, structure: compte.structure }
+      let(:campagne_collegue) { create :campagne, compte: mon_collegue, privee: false }
+      let(:evaluation_collegue) { create :evaluation, :eva, campagne: campagne_collegue }
+
+      it do
+        expect(subject).to be_able_to(:update, evaluation_collegue.beneficiaire)
       end
     end
 
@@ -438,6 +450,10 @@ describe Ability do
       expect(subject).to be_able_to(:fusionner, Beneficiaire)
     end
 
+    it "peut modifier un bénéficiaire" do
+      expect(subject).to be_able_to(:update, evaluation_conseiller.beneficiaire)
+    end
+
     context "quand la structure n'autorise pas la création de campagne" do
       before do
         compte.structure.update(autorisation_creation_campagne: false)
@@ -469,6 +485,7 @@ describe Ability do
         expect(subject).to be_able_to(:read, campagne_collegue)
         expect(subject).to be_able_to(:read, evaluation_autre_conseiller)
         expect(subject).to be_able_to(:read, evaluation_autre_conseiller.beneficiaire)
+        expect(subject).to be_able_to(:update, evaluation_autre_conseiller.beneficiaire)
       end
     end
 
@@ -477,6 +494,17 @@ describe Ability do
         expect(subject).not_to be_able_to(:read, campagne_collegue)
         expect(subject).not_to be_able_to(:read, evaluation_autre_conseiller)
         expect(subject).not_to be_able_to(:read, evaluation_autre_conseiller.beneficiaire)
+      end
+    end
+
+    context "quand je suis responsable de suivi d'une évaluation d'un autre conseiller" do
+      let(:evaluation_suivie) do
+        create :evaluation, :eva, campagne: campagne_collegue, responsable_suivi: compte
+      end
+
+      it do
+        expect(subject).to be_able_to(:read, evaluation_suivie.beneficiaire)
+        expect(subject).to be_able_to(:update, evaluation_suivie.beneficiaire)
       end
     end
 
@@ -493,6 +521,7 @@ describe Ability do
       it do
         expect(subject).to be_able_to(:read, evaluation_collegue)
         expect(subject).to be_able_to(:read, evaluation_collegue.beneficiaire)
+        expect(subject).to be_able_to(:update, evaluation_collegue.beneficiaire)
         expect(subject).not_to be_able_to(:destroy, evaluation_collegue)
         expect(subject).to be_able_to(:manage, Restitution::Base.new(campagne_collegue, nil))
         expect(subject).to be_able_to(:read, mon_collegue)

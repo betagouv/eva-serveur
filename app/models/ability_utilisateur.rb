@@ -103,9 +103,9 @@ compte_id: compte.id
     return if compte.utilisateur_evapro?
 
     cannot(:destroy, Beneficiaire)
-    can :read, Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
-    can :read, Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }
-    can :read, Beneficiaire, evaluations: {
+    can %i[read update], Beneficiaire, evaluations: { responsable_suivi_id: compte.id }
+    can %i[read update], Beneficiaire, evaluations: { campagne: { compte_id: compte.id } }
+    can %i[read update], Beneficiaire, evaluations: {
       campagne: { campagne_compte_autorisations: { compte_id: compte.id } }
     }
     droit_beneficiaire_admin if compte.au_moins_admin? && !compte.administratif?
@@ -119,7 +119,7 @@ compte_id: compte.id
 
   def droit_beneficiaire_structure(compte)
     if compte.validation_acceptee?
-      can :read, Beneficiaire, evaluations: {
+      can %i[read update], Beneficiaire, evaluations: {
         campagne: campagnes_publique_de_la_structure(compte)
       }
       can :fusionner, Beneficiaire

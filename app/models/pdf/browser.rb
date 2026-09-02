@@ -7,6 +7,10 @@ module Pdf
 
     def self.instance
       @browser ||= Puppeteer.launch(**puppeteer_options)
+      @mutex ||= Mutex.new
+      @mutex.synchronize do
+        yield @browser
+      end
     end
 
     def self.puppeteer_options

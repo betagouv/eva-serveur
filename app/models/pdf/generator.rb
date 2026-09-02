@@ -1,13 +1,14 @@
 module Pdf
   class Generator
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")
-      browser = Pdf::Browser.instance
+      page = nil
+      Pdf::Browser.instance do |browser|
+        page = prepare_page(browser, html_content)
 
-      page = prepare_page(browser, html_content)
-
-      page.pdf(**pdf_options(filename: filename))
-      page.close
-      file_path(filename)
+        page.pdf(**pdf_options(filename: filename))
+        page.close
+        file_path(filename)
+      end
     rescue => e
       Rails.logger.error("Chromium crash: #{e.message}")
       Rollbar.error(e)

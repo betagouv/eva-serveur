@@ -25,7 +25,7 @@ ActiveAdmin.register Situation do
   end
 
   index dsfr_table: proc { true } do
-    column :illustration do |situation|
+    column :illustration, class: "col-lien-voir" do |situation|
       illustration = situation_illustration(situation)
       link_to illustration, admin_situation_path(situation) if illustration.present?
     end

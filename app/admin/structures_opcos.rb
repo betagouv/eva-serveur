@@ -8,7 +8,7 @@ ActiveAdmin.register StructureOpco do
   filter :created_at
 
   index dsfr_table: proc { true } do
-    column :nom do |structure|
+    column :nom, class: "col-lien-voir" do |structure|
       link_to structure.nom, admin_structure_opco_path(structure)
     end
     column :siret do |structure|

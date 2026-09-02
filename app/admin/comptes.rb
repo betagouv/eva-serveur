@@ -15,6 +15,11 @@ ActiveAdmin.register Compte do
 
   config.sort_order = "created_at_desc"
 
+  order_by(:prenom_nom) do |clause|
+    table = clause.active_admin_config.resource_table_name
+    "#{table}.prenom #{clause.order}, #{table}.nom #{clause.order}"
+  end
+
   filter :email
   filter :nom, filters: [ :contains_unaccent, :eq ]
   filter :prenom, filters: [ :contains_unaccent, :eq ]

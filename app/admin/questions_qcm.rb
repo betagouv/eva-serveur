@@ -25,7 +25,7 @@ ActiveAdmin.register QuestionQcm do
   end
 
   index dsfr_table: proc { true } do
-    column :libelle do |q|
+    column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_qcm_path(q)
     end
     column :categorie

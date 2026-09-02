@@ -6,7 +6,7 @@ ActiveAdmin.register SourceAide do
   filter :description
 
   index dsfr_table: proc { true } do
-    column :titre do |sa|
+    column :titre, class: "col-lien-voir" do |sa|
       link_to sa.titre, admin_source_aide_path(sa)
     end
     column(:categorie) do |a|

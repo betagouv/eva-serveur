@@ -1,9 +1,7 @@
 context.instance_eval do
-  column :prenom do |compte|
-    link_to compte.prenom, admin_compte_path(compte)
+  column :nom, class: "col-lien-voir", sortable: "prenom_nom" do |compte|
+    render partial: "nom", locals: { compte: compte }
   end
-  column :nom
-  column :email
   column :telephone
   column :statut_validation do |compte|
     traduis_acces(compte.statut_validation, compte.role)

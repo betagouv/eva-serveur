@@ -26,12 +26,6 @@
   border-bottom: 1px solid $grey-625;
 }
 
-.dsfr-table-active-admin table.index_table tbody tr td:first-child {
-  font-weight: 600;
-  border-left: none;
-  padding: $dsfr-spacing-1w $dsfr-spacing-2w;
-}
-
 .dsfr-table-active-admin table.index_table tbody tr td:last-child {
   border-right: none;
   padding: $dsfr-spacing-1w $dsfr-spacing-2w;

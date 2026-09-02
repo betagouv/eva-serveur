@@ -1,6 +1,6 @@
 context.instance_eval do
   selectable_column if can?(:fusionner, Beneficiaire)
-  column :nom do |beneficiaire|
+  column :nom, class: "col-lien-voir" do |beneficiaire|
     render partial: "nom_beneficiaire", locals: { beneficiaire: beneficiaire }
   end
   column :code_beneficiaire

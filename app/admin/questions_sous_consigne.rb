@@ -19,7 +19,7 @@ ActiveAdmin.register QuestionSousConsigne do
   form partial: "form"
 
   index dsfr_table: proc { true } do
-    column :libelle do |q|
+    column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_sous_consigne_path(q)
     end
     column :intitule do |question|

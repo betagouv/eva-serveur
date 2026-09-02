@@ -102,7 +102,7 @@ ActiveAdmin.register Campagne do
     link_to(I18n.t("active_admin.campagnes.blank_slate_link"), new_resource_path)
   }, dsfr_table: proc { true },
     class: "fr-table--multiline" do
-      column :libelle do |campagne|
+      column :libelle, class: "col-lien-voir" do |campagne|
         div class: "contenu-libelle" do
           div do
             div link_to(campagne.libelle, admin_campagne_path(campagne))

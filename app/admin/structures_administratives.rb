@@ -6,7 +6,7 @@ ActiveAdmin.register StructureAdministrative do
   filter :created_at
 
   index dsfr_table: proc { true } do
-    column :nom do |sa|
+    column :nom, class: "col-lien-voir" do |sa|
       link_to sa.nom, admin_structure_administrative_path(sa)
     end
     column :siret do |structure|

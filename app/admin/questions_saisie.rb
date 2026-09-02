@@ -26,7 +26,7 @@ ActiveAdmin.register QuestionSaisie do
   form partial: "form"
 
   index dsfr_table: proc { true } do
-    column :libelle do |q|
+    column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_saisie_path(q)
     end
     column :categorie

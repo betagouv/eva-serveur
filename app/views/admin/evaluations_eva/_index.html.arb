@@ -1,5 +1,5 @@
 context.instance_eval do
-  column :beneficiaire, class: "evaluation__col-beneficiaire" do |evaluation|
+  column :beneficiaire, class: "evaluation__col-beneficiaire col-lien-voir" do |evaluation|
     render partial: "admin/evaluations_eva/beneficiaire", locals: { evaluation: evaluation }
   end
 

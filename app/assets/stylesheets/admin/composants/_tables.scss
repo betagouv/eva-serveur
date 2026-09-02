@@ -22,17 +22,21 @@ table.index_table {
       background: none;
       padding-top: 0;
       padding-bottom: .5rem;
+
       &:first-child {
         padding-left: 1.375rem;
       }
+
       &:last-child {
         border-right: 0;
         width: 1px;
       }
+
       &.sorted-asc,
       &.sorted-desc {
         background: none;
       }
+
       a,
       a:link,
       a:visited {
@@ -40,13 +44,15 @@ table.index_table {
       }
     }
   }
+
   tbody {
     tr {
       border-radius: 0.5rem;
 
       @include ombre;
 
-      &.even, &.odd {
+      &.even,
+      &.odd {
         td {
           background-color: $grey-1000;
         }
@@ -58,29 +64,23 @@ table.index_table {
         vertical-align: middle;
         border-top: 1px solid $eva_bluegrey;
         border-bottom: 1px solid $eva_bluegrey;
-        color: $couleur-texte;
         background-color: $grey-1000;
-        &:first-child {
-          font-weight: 600;
-          padding-left: 1.375rem;
-          border-left: 1px solid $eva_bluegrey;
-          border-top-left-radius: 0.5rem;
-          border-bottom-left-radius: 0.5rem;
+
+        &.col-lien-voir {
           a {
+            font-weight: 600;
             background-image: none;
           }
         }
-        &:last-child {
-          border-right: 1px solid $eva_bluegrey;
-          border-top-right-radius: 0.5rem;
-          border-bottom-right-radius: 0.5rem;
-        }
+
         a {
           color: $eva_main_blue;
         }
+
         &.col-actions {
           @include menu-actions;
         }
+
         &.col-illustration {
           line-height: 0;
         }
@@ -113,6 +113,7 @@ table.index_table {
     background-image: none;
   }
 }
+
 .pagination_information {
   color: $couleur-texte;
 }

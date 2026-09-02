@@ -10,7 +10,7 @@ ActiveAdmin.register AnnonceGenerale do
   filter :created_at
 
   index dsfr_table: proc { true } do
-    column :texte do |ag|
+    column :texte, class: "col-lien-voir" do |ag|
       link_to ag.texte, admin_annonce_generale_path(ag)
     end
     column :afficher

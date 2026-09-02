@@ -10,7 +10,7 @@ ActiveAdmin.register Opco do
   filter :financeur
 
   index dsfr_table: proc { true } do
-    column :nom do |opco|
+    column :nom, class: "col-lien-voir" do |opco|
       libelle = opco.nom
       if opco.logo.attached?
         logo = image_tag(cdn_for(opco.logo.variant(:defaut)),

@@ -25,7 +25,7 @@ ActiveAdmin.register QuestionGlisserDeposer do
   end
 
   index dsfr_table: proc { true } do
-    column :libelle do |q|
+    column :libelle, class: "col-lien-voir" do |q|
       link_to q.libelle, admin_question_glisser_deposer_path(q)
     end
     column :intitule do |question|

@@ -6,9 +6,9 @@ module Pdf
     A4_WINDOW_SIZE = "--window-size=1008,1488"
 
     def self.instance
-      @browser ||= Puppeteer.launch(**puppeteer_options)
       @mutex ||= Mutex.new
       @mutex.synchronize do
+        @browser ||= Puppeteer.launch(**puppeteer_options)
         yield @browser
       end
     end

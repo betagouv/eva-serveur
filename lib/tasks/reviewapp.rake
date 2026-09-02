@@ -1,4 +1,4 @@
-require "rake_logger"
+require Rails.root.join("lib/rake_logger")
 
 COMPTES = {
   "superadmin@eva.anlci.gouv.fr" => { prenom: "super", nom: "admin", role: "superadmin" },

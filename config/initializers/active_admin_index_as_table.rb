@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require 'active_admin/views/index_as_table_override'
+require Rails.root.join("lib/active_admin/views/index_as_table_override")

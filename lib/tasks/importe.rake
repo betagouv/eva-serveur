@@ -1,5 +1,5 @@
-require "importeur_commentaires"
-require "importeur_telephone"
+require Rails.root.join("lib/importeur_commentaires")
+require Rails.root.join("lib/importeur_telephone")
 
 namespace :importe do
   desc "Importe les commentaires Airtable"

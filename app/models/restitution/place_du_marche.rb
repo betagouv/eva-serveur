@@ -1,4 +1,4 @@
-require_relative "../../decorators/evenement_place_du_marche"
+require Rails.root.join("app/decorators/evenement_place_du_marche")
 
 module Restitution
   class PlaceDuMarche < Base # rubocop:disable Metrics/ClassLength

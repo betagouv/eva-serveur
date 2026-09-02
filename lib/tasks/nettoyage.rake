@@ -1,4 +1,4 @@
-require "rake_logger"
+require Rails.root.join("lib/rake_logger")
 
 namespace :nettoyage do
   def collecte_email(domaine)

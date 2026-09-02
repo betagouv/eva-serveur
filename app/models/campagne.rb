@@ -1,4 +1,4 @@
-require "generateur_aleatoire"
+require Rails.root.join("lib/generateur_aleatoire")
 
 class Campagne < ApplicationRecord
   PERSONNALISATION = %w[plan_de_la_ville autopositionnement questionnaire_sante redaction].freeze

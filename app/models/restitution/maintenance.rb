@@ -1,4 +1,4 @@
-require_relative "../../decorators/evenement_maintenance"
+require Rails.root.join("app/decorators/evenement_maintenance")
 
 module Restitution
   class Maintenance < AvecEntrainement

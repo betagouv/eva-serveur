@@ -1,4 +1,4 @@
-require "rake_logger"
+require Rails.root.join("lib/rake_logger")
 
 namespace :evaluations do
   desc "calcule les restitutions pour l'ensemble des évaluations"

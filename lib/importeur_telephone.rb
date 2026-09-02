@@ -1,4 +1,4 @@
-require "rake_logger"
+require_relative "rake_logger"
 
 class ImporteurTelephone
   class << self

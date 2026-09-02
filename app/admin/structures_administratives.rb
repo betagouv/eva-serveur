@@ -1,4 +1,6 @@
 ActiveAdmin.register StructureAdministrative do
+  config.sort_order = "created_at_desc"
+
   permit_params :nom, :parent_id, :siret
 
   filter :nom, filters: [ :contains_unaccent, :eq ]

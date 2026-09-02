@@ -26,23 +26,6 @@ module EvaServeur
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
-    # Conserve l'ancien ordre des callbacks after_commit (pré-7.1). Avec le
-    # nouvel ordre, quand Structure et Compte sont créés dans la même
-    # transaction (ex. inscription/structures_controller.rb), le after_commit
-    # confirmable de Devise se déclenche en double, envoyant deux emails de
-    # confirmation.
-    #
-    # Investigué en détail : la cause n'est pas Comptes::EnvoieEmails, c'est
-    # l'ordonnancement Rails des after_commit sur plusieurs enregistrements
-    # committés ensemble (Structure + Compte + Invitation). Remplacer le
-    # `update` par `update_column` dans Comptes::EnvoieEmails#after_commit
-    # (pour éviter le second save) a été tenté et rend le bug PIRE : ce
-    # second save/commit fait justement partie de ce qui « vide » l'état de
-    # callback transactionnel du compte avant le commit groupé qui suit. Ne
-    # pas toucher à Comptes::EnvoieEmails pour ce problème, et ne pas retirer
-    # ce flag sans revalider spec/mailers/structure_mailer_spec.rb et
-    # spec/jobs/relance_utilisateur_pour_non_activation_job_spec.rb.
-    config.active_record.run_after_transaction_callbacks_in_order_defined = false
     config.time_zone = 'Paris'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

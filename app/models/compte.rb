@@ -41,14 +41,14 @@ class Compte < ApplicationRecord
     "autre"
   ].freeze
 
+  include Comptes::EnvoieEmails
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable, :registerable, :confirmable
 
   acts_as_paranoid
-
-  include Comptes::EnvoieEmails
 
   validates :role, inclusion: { in: ROLES }
   enum :role, ROLES.zip(ROLES).to_h

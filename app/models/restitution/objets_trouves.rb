@@ -1,4 +1,4 @@
-require_relative "../../decorators/evenement_objets_trouves"
+require Rails.root.join("app/decorators/evenement_objets_trouves")
 
 module Restitution
   class ObjetsTrouves < AvecEntrainement

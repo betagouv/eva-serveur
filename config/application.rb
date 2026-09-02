@@ -25,12 +25,14 @@ Bundler.require(*Rails.groups)
 module EvaServeur
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 8.0
+    # Conserve l'ancien ordre des callbacks after_commit (pré-7.1) : avec le
+    # nouvel ordre, le after_commit de Comptes::EnvoieEmails (qui ré-enregistre
+    # le compte) déclenche un second envoi du mail de confirmation Devise.
+    # À corriger un jour en retravaillant Comptes::EnvoieEmails pour ne plus
+    # dépendre de l'ordre relatif des callbacks after_commit.
+    config.active_record.run_after_transaction_callbacks_in_order_defined = false
     config.time_zone = 'Paris'
-    # Adopte par anticipation le futur défaut de Rails 8.1 : `to_time` conserve
-    # le fuseau nommé (Europe/Paris) plutôt qu'un simple offset figé, ce qui
-    # évite les décalages d'une heure lors des changements heure d'été/hiver.
-    config.active_support.to_time_preserves_timezone = :zone
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

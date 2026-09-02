@@ -1,5 +1,5 @@
 ActiveAdmin.register StructureOpco do
-  # La position dans le menu est gérée par NavigationComponent
+  config.sort_order = "created_at_desc"
 
   permit_params :nom, :siret, :opco_id
 

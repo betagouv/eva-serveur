@@ -1,6 +1,8 @@
 ActiveAdmin.register StructureLocale do
   actions :all
 
+  config.sort_order = "created_at_desc"
+
   permit_params :nom, :type_structure, :code_postal, :parent_id, :siret,
                 :autorisation_creation_campagne, :usage, :email_contact, :telephone
 

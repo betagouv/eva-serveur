@@ -571,6 +571,7 @@ GEM
       redis-client (= 0.30.1)
     redis-client (0.30.1)
       connection_pool
+    redis-prescription (2.6.0)
     regexp_parser (2.12.0)
     reline (0.7.0)
       io-console (~> 0.5)
@@ -691,6 +692,10 @@ GEM
     sidekiq-scheduler (6.0.2)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 7.3, < 9)
+    sidekiq-throttled (1.5.2)
+      concurrent-ruby (>= 1.2.0)
+      redis-prescription (~> 2.2)
+      sidekiq (>= 6.5)
     simpleidn (0.2.3)
     spreadsheet (1.3.5)
       bigdecimal
@@ -855,6 +860,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq (< 8)
   sidekiq-scheduler
+  sidekiq-throttled (~> 1.5)
   spreadsheet
   spring (~> 3.0)
   spring-commands-rspec

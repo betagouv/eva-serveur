@@ -26,6 +26,16 @@ module EvaServeur
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
+    # Conserve l'ancien format de signature (pré-7.1) : cdn_for (app/models/
+    # application_record.rb) calcule la clé de stockage des variants à partir
+    # de ActiveStorage.verifier.generate(transformations, purpose: :variation),
+    # signé avec ce serializer. Le nouveau défaut change le format du message
+    # signé, donc la clé calculée pour un variant déjà existant change et ne
+    # pointe plus vers le fichier réellement stocké (404/403 sur les variants
+    # d'images déjà générés). À corriger un jour en migrant les fichiers vers
+    # les nouvelles clés puis en retirant ce réglage.
+    config.active_support.message_serializer = :marshal
+    config.active_support.use_message_serializer_for_metadata = false
     config.time_zone = 'Paris'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

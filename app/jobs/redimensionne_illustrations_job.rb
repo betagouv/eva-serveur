@@ -5,7 +5,7 @@ class RedimensionneIllustrationsJob < ApplicationJob
     Question.find_each do |question|
       next unless question.illustration.attached?
 
-      question.illustration.variant(:defaut).processed
+      RedimensionneIllustrationJob.perform_later(question)
     end
   end
 end

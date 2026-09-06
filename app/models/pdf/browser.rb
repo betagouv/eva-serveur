@@ -13,6 +13,15 @@ module Pdf
       end
     end
 
+    def self.reset!
+      @mutex ||= Mutex.new
+      @mutex.synchronize do
+        @browser&.close
+      ensure
+        @browser = nil
+      end
+    end
+
     def self.puppeteer_options
       options = {
         headless: "new",

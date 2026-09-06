@@ -2,7 +2,9 @@ module Pdf
   class Generator
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
+      browser_ref = nil
       Pdf::Browser.instance do |browser|
+        browser_ref = browser
         page = prepare_page(browser, html_content)
 
         page.pdf(**pdf_options(filename: filename))
@@ -12,12 +14,24 @@ module Pdf
     rescue => e
       Rails.logger.error("Chromium crash: #{e.message}")
       Rollbar.error(e)
-      page.close if page
+      retablissement_apres_crash(browser_ref, page)
       false
     end
 
     def self.generate(html_content)
       new.generate(html_content)
+    end
+
+    def retablissement_apres_crash(browser, page)
+      if browser&.connected?
+        action = "fermeture page"
+        page&.close
+      else
+        action = "reset navigateur"
+        Pdf::Browser.reset!
+      end
+    rescue => e
+      Rails.logger.debug("Échec #{action} après erreur: #{e.message}")
     end
 
     def prepare_page(browser, html_content)

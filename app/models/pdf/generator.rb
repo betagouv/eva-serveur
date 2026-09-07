@@ -35,8 +35,11 @@ module Pdf
     end
 
     def prepare_page(browser, html_content)
+      requetes = 0
       page = browser.new_page
       page.viewport = Pdf::Browser::A4_VIEWPORT
+      page.on("request") { requetes += 1 }
+
       if Rails.env.development?
         page.set_content(
           html_content,
@@ -49,6 +52,8 @@ module Pdf
       end
       pause_pdf if Pdf::Browser.debug_mode?
       page
+    ensure
+      Rails.logger.info("PDF: #{requetes} requetes reseau chargees")
     end
 
     # Le mode debug permet d'ouvrir une page chrome pour visualiser le rendu

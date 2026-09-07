@@ -124,9 +124,10 @@ question_redaction_id)
   end
 
   def efface_beneficiaire_si_plus_aucune_evaluation
+    return if beneficiaire.nil?
     return if beneficiaire.compte_id.present?
     return if beneficiaire.evaluations.exists?
 
-    beneficiaire.destroy
+    Beneficiaire.find_by(id: beneficiaire_id)&.destroy
   end
 end

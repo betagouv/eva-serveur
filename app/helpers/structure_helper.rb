@@ -44,9 +44,7 @@ module StructureHelper
     Campagne.with_deleted.where(compte: compte).find_each do |campagne|
       logger.info "destruction de la campagne #{campagne.libelle}"
       Evaluation.with_deleted.where(campagne: campagne).find_each do |evaluation|
-        b = evaluation.beneficiaire
-        evaluation.really_destroy!
-        b.really_destroy! unless Evaluation.with_deleted.exists?(beneficiaire: b)
+        detruit_evaluation_et_beneficiaire_orphelin(evaluation)
       end
       campagne.really_destroy!
     end
@@ -70,5 +68,15 @@ module StructureHelper
     return I18n.t("activerecord.attributes.structure.statut_siret_false") if statut_siret.nil?
 
     I18n.t("activerecord.attributes.structure.statut_siret_#{statut_siret}")
+  end
+
+  private
+
+  def detruit_evaluation_et_beneficiaire_orphelin(evaluation)
+    beneficiaire_id = evaluation.beneficiaire_id
+    evaluation.really_destroy!
+    return if Evaluation.with_deleted.exists?(beneficiaire_id: beneficiaire_id)
+
+    Beneficiaire.with_deleted.find_by(id: beneficiaire_id)&.really_destroy!
   end
 end

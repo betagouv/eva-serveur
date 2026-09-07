@@ -1,0 +1,8 @@
+fr:
+  admin:
+    pdf_generations:
+      show:
+        titre: Génération du PDF en cours
+        texte: Veuillez patienter, le téléchargement démarrera automatiquement.
+        erreur: La génération du PDF a échoué. Veuillez réessayer dans un moment.
+        retour: Retour

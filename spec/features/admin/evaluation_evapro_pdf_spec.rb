@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pdf/reader'
 
 describe 'Admin - Evaluation evapro PDF', type: :feature do
   before { Bullet.enable = false }
@@ -21,7 +20,6 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
     context 'génération PDF Evapro' do
       let(:campagne_evapro) { create(:campagne, :avec_parcours_evapro, compte: mon_compte) }
       let(:evaluation_evapro) { create(:evaluation, :evapro, campagne: campagne_evapro) }
-      let(:pdf_fixture_path) { Rails.root.join('spec/fixtures/files/test_evaluation.pdf').to_s }
       let(:evenements_risque) do
         [ instance_double(Evenement, nom: "reponse", donnees: { "score" => 10 }) ]
       end
@@ -75,14 +73,16 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
 
       before do
         allow(FabriqueRestitution).to receive(:restitution_globale).and_return(restitution_globale)
-        allow(Pdf::Generator).to receive(:generate).and_return(pdf_fixture_path)
       end
 
-      it 'génère une restitution Evapro en pdf' do
-        visit admin_evaluation_evapro_path(evaluation_evapro, format: :pdf)
+      it "enqueue la génération en tâche de fond et redirige vers la page d'attente" do
+        expect do
+          visit admin_evaluation_evapro_path(evaluation_evapro, format: :pdf)
+        end.to have_enqueued_job(Pdf::GenerationJob).with { |_token, html_content, _nom|
+          expect(html_content).to include('evaluation-evapro')
+        }
 
-        expect(page.response_headers['Content-Type']).to include('application/pdf')
-        expect(Pdf::Generator).to have_received(:generate).with(include('evaluation-evapro'))
+        expect(page).to have_current_path(%r{/admin/pdf_generations/})
       end
     end
   end

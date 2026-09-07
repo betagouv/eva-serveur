@@ -174,24 +174,16 @@ ActiveAdmin.register EvaluationEva do
     end
 
     def render_pdf
-      html_content = render_to_string(template: "admin/evaluations_eva/show", layout: "application",
-                                      locals: { resource: resource })
+      html_content = String.new(render_to_string(
+        template: "admin/evaluations_eva/show",
+        layout: "application",
+        locals: { resource: resource }
+      ))
 
-      pdf_path = Pdf::Generator.generate(html_content)
-
-      if pdf_path == false
-        flash[:error] = t("admin.erreur_generation_pdf")
-        redirect_to admin_evaluation_eva_path(resource)
-      else
-        envoyer_fichier(pdf_path)
-      end
-    end
-
-    def envoyer_fichier(pdf_path)
-      send_file(pdf_path,
-                filename: nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf"),
-                type: "application/pdf",
-                disposition: Rails.env.development? ? "inline" : "attachment")
+      token = Pdf::GenerationToken.genere(current_compte.id)
+      nom = nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf")
+      Pdf::GenerationJob.perform_later(token, html_content, nom)
+      redirect_to admin_pdf_generation_path(token)
     end
 
     before_action only: :show do

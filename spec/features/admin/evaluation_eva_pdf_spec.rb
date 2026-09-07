@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pdf/reader'
 
 describe 'Admin - Evaluation eva PDF', type: :feature do
   let(:role) { 'admin' }
@@ -58,24 +57,12 @@ describe 'Admin - Evaluation eva PDF', type: :feature do
         end
 
         describe 'génération PDF' do
-          let(:pdf_fixture_path) { Rails.root.join('spec/fixtures/files/test_evaluation.pdf').to_s }
+          it "enqueue la génération en tâche de fond et redirige vers la page d'attente" do
+            expect do
+              visit admin_evaluation_eva_path(mon_evaluation, format: :pdf)
+            end.to have_enqueued_job(Pdf::GenerationJob)
 
-          it "affiche l'évaluation en pdf" do
-            allow(Pdf::Generator).to receive(:generate).and_return(pdf_fixture_path)
-
-            visit admin_evaluation_eva_path(mon_evaluation, format: :pdf)
-
-            expect(page.response_headers['Content-Type']).to include('application/pdf')
-          end
-
-          it 'erreur timeout à la génération du pdf' do
-            expect(Pdf::Generator).to receive(:generate).and_return(false)
-
-            visit admin_evaluation_eva_path(mon_evaluation, format: :pdf)
-
-            expect(page).to have_content(
-              'La génération du PDF a échoué. Veuillez réessayer dans un moment'
-            )
+            expect(page).to have_current_path(%r{/admin/pdf_generations/})
           end
         end
       end

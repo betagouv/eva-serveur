@@ -567,8 +567,8 @@ GEM
     recipient_interceptor (0.3.3)
       mail
     redcarpet (3.6.1)
-    redis (6.0.0)
-      redis-client (= 0.30.1)
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
     redis-client (0.30.1)
       connection_pool
     redis-prescription (2.6.0)
@@ -839,7 +839,7 @@ DEPENDENCIES
   recaptcha (~> 5.16)
   recipient_interceptor
   redcarpet
-  redis
+  redis (< 6)
   rollbar
   roo (~> 2.10)
   rspec-rails

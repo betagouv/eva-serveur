@@ -3,3 +3,4 @@
 //= link_directory ../stylesheets .scss
 //= link ui_kit.css
 //= link source-aide-pdf.svg
+//= link actioncable.js

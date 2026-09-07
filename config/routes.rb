@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get '/admin/structures/:id', to: 'structures#show'
 
+  mount ActionCable.server => '/cable'
+
   authenticate :compte, ->(o) { o.superadmin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :evaluations, only: %i[index show]
     resources :controle_syntheses_restitutions, only: :index
+    resources :pdf_generations, only: :show
 
     # UI Kit routes (ordre alphabétique du chemin sous /ui_kit)
     get '/ui_kit', to: 'ui_kit#index'

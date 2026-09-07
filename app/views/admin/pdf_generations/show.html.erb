@@ -1,0 +1,15 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "actioncable", "pdf_generation_channel" %>
+<% end %>
+
+<div class="fr-container fr-py-6w" id="generation-pdf" data-token="<%= @token %>">
+  <div class="fr-alert fr-alert--info" id="generation-pdf-attente">
+    <h3 class="fr-alert__title"><%= t(".titre") %></h3>
+    <p><%= t(".texte") %></p>
+  </div>
+
+  <div class="fr-alert fr-alert--error" id="generation-pdf-erreur" hidden>
+    <h3 class="fr-alert__title"><%= t(".erreur") %></h3>
+    <p><a href="<%= request.referer || admin_dashboard_path %>"><%= t(".retour") %></a></p>
+  </div>
+</div>

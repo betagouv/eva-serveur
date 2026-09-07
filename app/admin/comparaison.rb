@@ -12,21 +12,15 @@ ActiveAdmin.register_page "Comparaison" do
 
   page_action :download_pdf, method: :get do
     beneficiaire = Beneficiaire.find params[:beneficiaire_id]
-    html_content = render_to_string(
+    html_content = String.new(render_to_string(
       template: "admin/comparaison/pdf",
       layout: "application",
       locals: { comparaison: comparaison, beneficiaire: beneficiaire, structure: structure }
-    )
+    ))
 
-    pdf_path = Pdf::Generator.generate(html_content)
-    if pdf_path == false
-      flash[:error] = t("admin.erreur_generation_pdf")
-      redirect_to admin_comparaison_path(beneficiaire_id: beneficiaire.id,
-evaluation_ids: params[:evaluation_ids])
-    else
-      send_file(pdf_path, filename: "#{beneficiaire.nom.parameterize}.pdf", type: "application/pdf",
-                          disposition: disposition)
-    end
+    token = Pdf::GenerationToken.genere(current_compte.id)
+    Pdf::GenerationJob.perform_later(token, html_content, "#{beneficiaire.nom.parameterize}.pdf")
+    redirect_to admin_pdf_generation_path(token)
   end
 
   controller do
@@ -50,10 +44,6 @@ evaluation_ids: params[:evaluation_ids])
       structure_id = Compte.where(id: compte_id)
                            .select(:structure_id)
       Structure.find structure_id
-    end
-
-    def disposition
-      Rails.env.development? ? "inline" : "attachment"
     end
 
     def beneficiaire

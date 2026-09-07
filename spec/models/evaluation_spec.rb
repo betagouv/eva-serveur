@@ -36,6 +36,34 @@ describe Evaluation do
 
       expect(beneficiaire.reload).not_to be_deleted
     end
+
+    it "ne lève pas d'erreur si le bénéficiaire a déjà été effacé par ailleurs" do
+      beneficiaire = create :beneficiaire, compte: nil
+      evaluation = create :evaluation, beneficiaire: beneficiaire
+      # Simule le cas rencontré dans StructureHelper#vide_compte : une autre
+      # évaluation du même bénéficiaire a déjà déclenché son effacement avant
+      # que celle-ci ne soit à son tour détruite.
+      beneficiaire.destroy
+
+      expect { evaluation.reload.destroy }.not_to raise_error
+    end
+
+    it "n'empêche pas un really_destroy! ultérieur du bénéficiaire mis en cache" do
+      beneficiaire = create :beneficiaire, compte: nil
+      evaluation = create :evaluation, beneficiaire: beneficiaire
+      beneficiaire_mis_en_cache = evaluation.beneficiaire
+
+      # La transaction explicite reproduit l'imbrication utilisée par
+      # StructureHelper#vide_compte (appelé dans une transaction depuis
+      # ReinitialiseCompteDemoJob) : sans elle, really_destroy! reçoit sa
+      # propre savepoint et le bug ne se manifeste pas.
+      ActiveRecord::Base.transaction do
+        evaluation.really_destroy!
+        beneficiaire_mis_en_cache.really_destroy!
+      end
+
+      expect(Beneficiaire.with_deleted.exists?(id: beneficiaire.id)).to be false
+    end
   end
 
   describe 'scopes' do

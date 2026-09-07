@@ -35,10 +35,10 @@ module Pdf
     end
 
     def prepare_page(browser, html_content)
-      requetes = 0
+      compteur = { locales: 0, reseau: 0 }
       page = browser.new_page
       page.viewport = Pdf::Browser::A4_VIEWPORT
-      page.on("request") { requetes += 1 }
+      compteur = intercepte_assets_locaux(page)
 
       if Rails.env.development?
         page.set_content(
@@ -53,7 +53,48 @@ module Pdf
       pause_pdf if Pdf::Browser.debug_mode?
       page
     ensure
-      Rails.logger.info("PDF: #{requetes} requetes reseau chargees")
+      Rails.logger.info(
+        "PDF: #{compteur[:locales]} requetes locales, #{compteur[:reseau]} requetes reseau"
+      )
+    end
+
+    # Sert les assets de l'application (CSS, JS, SVG) directement depuis le
+    # disque plutot que par un aller-retour HTTP vers notre propre domaine,
+    # pour ne pas dependre de la charge du dyno pendant la generation du PDF.
+    def intercepte_assets_locaux(page)
+      compteur = { locales: 0, reseau: 0 }
+      origine = "#{ENV['PROTOCOLE_SERVEUR']}://#{ENV['HOTE_SERVEUR']}"
+      page.request_interception = true
+      page.on("request") do |requete|
+        compteur[repond_avec_asset_local(requete, origine) ? :locales : :reseau] += 1
+      end
+      compteur
+    end
+
+    def repond_avec_asset_local(requete, origine)
+      chemin = chemin_asset_local(requete.url, origine)
+      unless chemin
+        requete.continue
+        return false
+      end
+
+      requete.respond(
+        status: 200,
+        content_type: Rack::Mime.mime_type(chemin.extname),
+        body: File.binread(chemin)
+      )
+      true
+    rescue
+      requete.continue
+      false
+    end
+
+    def chemin_asset_local(url, origine)
+      return nil unless url.start_with?(origine)
+
+      racine = Rails.public_path.expand_path
+      chemin = racine.join(URI(url).path.delete_prefix("/")).expand_path
+      chemin if chemin.to_s.start_with?("#{racine}/") && File.file?(chemin)
     end
 
     # Le mode debug permet d'ouvrir une page chrome pour visualiser le rendu

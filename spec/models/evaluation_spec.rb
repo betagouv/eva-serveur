@@ -8,6 +8,36 @@ describe Evaluation do
   it { is_expected.to have_one :conditions_passation }
   it { is_expected.to accept_nested_attributes_for :conditions_passation }
 
+  describe '#destroy' do
+    it "efface le bénéficiaire si plus aucune évaluation ne lui reste et que compte_id est nil" do
+      beneficiaire = create :beneficiaire, compte: nil
+      evaluation = create :evaluation, beneficiaire: beneficiaire
+
+      evaluation.destroy
+
+      expect(beneficiaire.reload).to be_deleted
+    end
+
+    it "n'efface pas le bénéficiaire s'il lui reste d'autres évaluations" do
+      beneficiaire = create :beneficiaire, compte: nil
+      evaluation = create :evaluation, beneficiaire: beneficiaire
+      create :evaluation, beneficiaire: beneficiaire
+
+      evaluation.destroy
+
+      expect(beneficiaire.reload).not_to be_deleted
+    end
+
+    it "n'efface pas le bénéficiaire si son compte_id n'est pas nil" do
+      beneficiaire = create :beneficiaire, compte: create(:compte)
+      evaluation = create :evaluation, beneficiaire: beneficiaire
+
+      evaluation.destroy
+
+      expect(beneficiaire.reload).not_to be_deleted
+    end
+  end
+
   describe 'scopes' do
     describe '.non_anonymes' do
       let(:beneficiaire) { create :beneficiaire, anonymise_le: Time.zone.today }

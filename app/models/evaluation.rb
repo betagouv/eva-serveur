@@ -17,6 +17,8 @@ class Evaluation < ApplicationRecord
 
   acts_as_paranoid
 
+  after_destroy :efface_beneficiaire_si_plus_aucune_evaluation
+
   scope :pour_les_structures, lambda { |structures|
     joins(campagne: { compte: :structure })
       .where(campagnes: { comptes: { structure_id: structures } })
@@ -119,5 +121,12 @@ question_redaction_id)
     return if code_campagne.blank? || campagne.present?
 
     errors.add(:code_campagne, :inconnu)
+  end
+
+  def efface_beneficiaire_si_plus_aucune_evaluation
+    return if beneficiaire.compte_id.present?
+    return if beneficiaire.evaluations.exists?
+
+    beneficiaire.destroy
   end
 end

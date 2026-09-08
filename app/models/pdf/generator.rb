@@ -41,10 +41,9 @@ module Pdf
     end
 
     def prepare_page(browser, html_content)
-      requetes = 0
       page = browser.new_page
       page.viewport = Pdf::Browser::A4_VIEWPORT
-      page.on("request") { requetes += 1 }
+      compteur = surveille_requetes(page)
 
       if Rails.env.development?
         page.set_content(
@@ -59,7 +58,28 @@ module Pdf
       pause_pdf if Pdf::Browser.debug_mode?
       page
     ensure
-      Rails.logger.info("PDF: #{requetes} requetes reseau chargees")
+      journalise_requetes(compteur)
+    end
+
+    def surveille_requetes(page)
+      compteur = { total: 0, en_cours: {} }
+      page.on("request") do |requete|
+        compteur[:total] += 1
+        compteur[:en_cours][requete.url] = true
+      end
+      page.on("requestfinished") { |requete| compteur[:en_cours].delete(requete.url) }
+      page.on("requestfailed") { |requete| compteur[:en_cours].delete(requete.url) }
+      compteur
+    end
+
+    def journalise_requetes(compteur)
+      return unless compteur
+
+      Rails.logger.info("PDF: #{compteur[:total]} requetes reseau chargees")
+      return if compteur[:en_cours].empty?
+
+      urls = compteur[:en_cours].keys.join(", ")
+      Rails.logger.warn("PDF: #{compteur[:en_cours].size} requete(s) jamais terminee(s) : #{urls}")
     end
 
     # Le mode debug permet d'ouvrir une page chrome pour visualiser le rendu

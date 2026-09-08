@@ -1,10 +1,11 @@
 module Pdf
   class Generator
     # Le job tourne sur un worker dédié, isolé du trafic web : on peut se
-    # permettre d'attendre plus longtemps que le défaut Puppeteer (30s),
-    # qui peut être dépassé par de grosses évaluations (beaucoup de
-    # requêtes HTTP réelles vers l'app elle-même pour charger CSS/JS/SVG).
-    TIMEOUT_CHARGEMENT = 120_000
+    # permettre d'attendre le chargement de la page plus longtemps que le
+    # défaut Puppeteer (30s), qui peut être dépassé par de grosses
+    # évaluations (beaucoup de requêtes HTTP réelles vers l'app elle-même
+    # pour charger CSS/JS/SVG).
+    TIMEOUT_CHARGEMENT = 60_000
 
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
@@ -49,16 +50,83 @@ module Pdf
         page.set_content(
           html_content,
           wait_until: "load",
-          timeout: 60_000
+          timeout: TIMEOUT_CHARGEMENT
         )
       else
         page.set_content(html_content, wait_until: "load", timeout: TIMEOUT_CHARGEMENT)
-        page.wait_for_network_idle(concurrency: 2, timeout: TIMEOUT_CHARGEMENT)
+        attend_reseau_stabilise(page)
       end
       pause_pdf if Pdf::Browser.debug_mode?
       page
     ensure
       journalise_requetes(compteur)
+    end
+
+    # wait_for_network_idle (fourni par puppeteer-ruby) peut ne jamais se
+    # résoudre : quand deux requêtes identiques quasi simultanées (ex. la
+    # même icône SVG DSFR utilisée plusieurs fois sur la page) sont
+    # coalescées par Chromium en une seule requête réseau réelle, deux
+    # requestId CDP distincts sont tout de même créés côté navigateur, et
+    # l'un d'eux ne reçoit jamais d'événement terminal
+    # (Network.loadingFinished/loadingFailed, traduit par Puppeteer en
+    # requestfinished/requestfailed). Bug connu et non résolu de Puppeteer
+    # (cf. puppeteer/puppeteer#11641). En revanche Network.responseReceived
+    # (l'événement "response") se déclenche bien pour la requête fantôme :
+    # on reproduit donc ici la logique de wait_for_network_idle en suivant
+    # les requêtes en cours via "response"/"requestfailed" plutôt que via
+    # "requestfinished" seul.
+    def attend_reseau_stabilise(page, idle_time: 500, timeout: TIMEOUT_CHARGEMENT, concurrency: 2)
+      en_attente = {}
+      promise = Async::Promise.new
+      programme_idle, interrompt_idle = gestion_idle(en_attente, promise, idle_time, concurrency)
+
+      ecouteurs = ecoute_stabilite_reseau(page, en_attente, programme_idle, interrompt_idle)
+      programme_idle.call
+
+      attend_promesse(promise, timeout)
+    ensure
+      page.remove_event_listener(*ecouteurs) if ecouteurs
+      interrompt_idle&.call
+    end
+
+    def gestion_idle(en_attente, promise, idle_time, concurrency)
+      idle_timer = nil
+      programme_idle = lambda do
+        next if en_attente.size > concurrency
+
+        idle_timer&.stop
+        idle_timer = Async do
+          Puppeteer::AsyncUtils.sleep_seconds(idle_time / 1000.0)
+          promise.resolve(nil) unless promise.resolved? || en_attente.size > concurrency
+        end
+      end
+      interrompt_idle = lambda do
+        idle_timer&.stop
+        idle_timer = nil
+      end
+      [ programme_idle, interrompt_idle ]
+    end
+
+    def ecoute_stabilite_reseau(page, en_attente, programme_idle, interrompt_idle)
+      ecouteur_requete = page.add_event_listener("request") do |requete|
+        en_attente[requete] = true
+        interrompt_idle.call
+      end
+      ecouteur_reponse = page.add_event_listener("response") do |reponse|
+        en_attente.delete(reponse.request)
+        programme_idle.call
+      end
+      ecouteur_echec = page.add_event_listener("requestfailed") do |requete|
+        en_attente.delete(requete)
+        programme_idle.call
+      end
+      [ ecouteur_requete, ecouteur_reponse, ecouteur_echec ]
+    end
+
+    def attend_promesse(promise, timeout)
+      Puppeteer::AsyncUtils.async_timeout(timeout, -> { promise.wait }).wait
+    rescue Async::TimeoutError
+      Rails.logger.warn("PDF: attente reseau stabilise interrompue apres #{timeout}ms")
     end
 
     def surveille_requetes(page)

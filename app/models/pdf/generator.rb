@@ -1,5 +1,11 @@
 module Pdf
   class Generator
+    # Le job tourne sur un worker dédié, isolé du trafic web : on peut se
+    # permettre d'attendre plus longtemps que le défaut Puppeteer (30s),
+    # qui peut être dépassé par de grosses évaluations (beaucoup de
+    # requêtes HTTP réelles vers l'app elle-même pour charger CSS/JS/SVG).
+    TIMEOUT_CHARGEMENT = 120_000
+
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
       browser_ref = nil
@@ -47,8 +53,8 @@ module Pdf
           timeout: 60_000
         )
       else
-        page.set_content(html_content, wait_until: "load")
-        page.wait_for_network_idle(concurrency: 2)
+        page.set_content(html_content, wait_until: "load", timeout: TIMEOUT_CHARGEMENT)
+        page.wait_for_network_idle(concurrency: 2, timeout: TIMEOUT_CHARGEMENT)
       end
       pause_pdf if Pdf::Browser.debug_mode?
       page

@@ -2,9 +2,7 @@ module Pdf
   class Generator
     # Le job tourne sur un worker dédié, isolé du trafic web : on peut se
     # permettre d'attendre le chargement de la page plus longtemps que le
-    # défaut Puppeteer (30s), qui peut être dépassé par de grosses
-    # évaluations (beaucoup de requêtes HTTP réelles vers l'app elle-même
-    # pour charger CSS/JS/SVG).
+    # défaut Puppeteer (30s)
     TIMEOUT_CHARGEMENT = 60_000
 
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")

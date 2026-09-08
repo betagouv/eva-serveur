@@ -19,10 +19,12 @@
     <div class="fr-tile__body">
         <div class="fr-tile__content">
             <h3 class="fr-tile__title">
-                <a href="<%= route %>" target="_blank">Télécharger le comparatif</a>
+                <a href="<%= route %>" class="lien-export-pdf">Télécharger le comparatif</a>
             </h3>
             <p class="fr-tile__detail">format pdf</p>
         </div>
     </div>
   </div>
+
+  <%= render partial: "admin/modale_generation_pdf" %>
 </div>

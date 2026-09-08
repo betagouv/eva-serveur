@@ -20,6 +20,9 @@
 //= require code_postal_input
 //= require recherche_structure
 //= require vendor/clipboard.min
+//= require actioncable
+//= require telecharge_pdf
+//= require export_pdf_modal
 //= require evaluation_eva
 //= require simple_mde
 //= require modal_verification

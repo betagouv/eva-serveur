@@ -1,0 +1,12 @@
+<%= dsfr_modal(
+  title: t(".titre"),
+  html_attributes: { id: "modal-generation-pdf" }
+) do %>
+  <p id="modal-generation-pdf-attente">
+    <span class="fr-icon-refresh-line spinner-generation-pdf" aria-hidden="true"></span>
+    <%= t(".texte") %>
+  </p>
+  <div class="fr-alert fr-alert--error" id="modal-generation-pdf-erreur" hidden>
+    <p><%= t("admin.erreur_generation_pdf") %></p>
+  </div>
+<% end %>

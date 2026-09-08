@@ -25,6 +25,22 @@ describe 'Admin - Comparaison', type: :feature do
     end
   end
 
+  describe 'download_pdf' do
+    it 'enqueue la génération en tâche de fond et répond en JSON avec le jeton (AJAX)' do
+      page.driver.header 'X-Requested-With', 'XMLHttpRequest'
+
+      expect do
+        visit admin_comparaison_download_pdf_path(
+          beneficiaire_id: beneficiaire.id, evaluation_ids: evaluations.map(&:id), format: :pdf
+        )
+      end.to have_enqueued_job(Pdf::GenerationJob)
+
+      json = JSON.parse(page.body)
+      expect(json['token']).to be_present
+      expect(Pdf::GenerationToken.compte_id(json['token'])).to eq(compte.id)
+    end
+  end
+
   describe "affichage des explications littératie" do
     let(:campagne) { create(:campagne) }
 

@@ -1,0 +1,5 @@
+fr:
+  admin:
+    modale_generation_pdf:
+      titre: Génération du PDF
+      texte: Génération du PDF en cours…

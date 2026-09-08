@@ -6,4 +6,5 @@ div class: "evaluation" do
       render "admin/evaluations/panel_administration" if can?(:manage, Compte)
     end
   end
+  render partial: "admin/modale_generation_pdf"
 end

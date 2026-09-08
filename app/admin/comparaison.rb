@@ -20,11 +20,19 @@ ActiveAdmin.register_page "Comparaison" do
 
     token = Pdf::GenerationToken.genere(current_compte.id)
     Pdf::GenerationJob.perform_later(token, html_content, "#{beneficiaire.nom.parameterize}.pdf")
-    redirect_to admin_pdf_generation_path(token)
+    repond_generation_pdf(token)
   end
 
   controller do
     helper_method :comparaison, :structure, :beneficiaire
+
+    def repond_generation_pdf(token)
+      if request.xhr?
+        render json: { token: token }
+      else
+        redirect_to admin_pdf_generation_path(token)
+      end
+    end
 
     def evaluations
       @evaluations ||= Evaluation.where(id: params[:evaluation_ids])

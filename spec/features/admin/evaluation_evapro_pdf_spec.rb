@@ -84,6 +84,18 @@ describe 'Admin - Evaluation evapro PDF', type: :feature do
 
         expect(page).to have_current_path(%r{/admin/pdf_generations/})
       end
+
+      it 'répond en JSON avec le jeton pour une requête AJAX (export en ligne)' do
+        page.driver.header 'X-Requested-With', 'XMLHttpRequest'
+
+        expect do
+          visit admin_evaluation_evapro_path(evaluation_evapro, format: :pdf)
+        end.to have_enqueued_job(Pdf::GenerationJob)
+
+        json = JSON.parse(page.body)
+        expect(json['token']).to be_present
+        expect(Pdf::GenerationToken.compte_id(json['token'])).to eq(mon_compte.id)
+      end
     end
   end
 end

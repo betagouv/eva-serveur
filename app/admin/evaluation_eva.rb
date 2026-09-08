@@ -183,7 +183,15 @@ ActiveAdmin.register EvaluationEva do
       token = Pdf::GenerationToken.genere(current_compte.id)
       nom = nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf")
       Pdf::GenerationJob.perform_later(token, html_content, nom)
-      redirect_to admin_pdf_generation_path(token)
+      repond_generation_pdf(token)
+    end
+
+    def repond_generation_pdf(token)
+      if request.xhr?
+        render json: { token: token }
+      else
+        redirect_to admin_pdf_generation_path(token)
+      end
     end
 
     before_action only: :show do

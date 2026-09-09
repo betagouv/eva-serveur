@@ -5,17 +5,14 @@ module Pdf
     A4_VIEWPORT = Puppeteer::Viewport.new(width: 1008, height: 1488)
     A4_WINDOW_SIZE = "--window-size=1008,1488"
 
+    MUTEX = Mutex.new
+
     def self.instance
-      @mutex ||= Mutex.new
-      @mutex.synchronize do
-        @browser ||= Puppeteer.launch(**puppeteer_options)
-        yield @browser
-      end
+      MUTEX.synchronize { @browser ||= Puppeteer.launch(**puppeteer_options) }
     end
 
     def self.reset!
-      @mutex ||= Mutex.new
-      @mutex.synchronize do
+      MUTEX.synchronize do
         @browser&.close
       ensure
         @browser = nil

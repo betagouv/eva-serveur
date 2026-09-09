@@ -7,15 +7,12 @@ module Pdf
 
     def generate(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
-      browser_ref = nil
-      Pdf::Browser.instance do |browser|
-        browser_ref = browser
-        page = prepare_page(browser, html_content)
+      browser_ref = Pdf::Browser.instance
+      page = prepare_page(browser_ref, html_content)
 
-        page.pdf(**pdf_options(filename: filename))
-        page.close
-        file_path(filename)
-      end
+      page.pdf(**pdf_options(filename: filename))
+      page.close
+      file_path(filename)
     rescue => e
       Rails.logger.error("Chromium crash: #{e.message}")
       Rollbar.error(e)

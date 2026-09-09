@@ -41,16 +41,8 @@ module Pdf
       page.viewport = Pdf::Browser::A4_VIEWPORT
       compteur = surveille_requetes(page)
 
-      if Rails.env.development?
-        page.set_content(
-          html_content,
-          wait_until: "load",
-          timeout: TIMEOUT_CHARGEMENT
-        )
-      else
-        page.set_content(html_content, wait_until: "load", timeout: TIMEOUT_CHARGEMENT)
-        attend_reseau_stabilise(page)
-      end
+      page.set_content(html_content, wait_until: "load", timeout: TIMEOUT_CHARGEMENT)
+      attend_reseau_stabilise(page)
       pause_pdf if Pdf::Browser.debug_mode?
       page
     ensure

@@ -29,6 +29,7 @@ div class: "evaluation-evapro" do
             )
           end
         end
+        render partial: "admin/modale_generation_pdf"
       end
 
       if diag_risques_entreprise && pourcentage_risque

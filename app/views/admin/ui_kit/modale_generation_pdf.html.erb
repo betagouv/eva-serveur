@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Démo Modale de génération PDF</h1>
+
+  <p class="fr-text--lead">
+    Modale d'attente affichée pendant la génération d'un export PDF
+    (voir <code>app/views/admin/_modale_generation_pdf.html.erb</code> et
+    <code>app/assets/javascripts/export_pdf_modal.js</code>).
+  </p>
+
+  <h2>Ouvrir la modale</h2>
+  <button
+    class="fr-btn fr-icon-download-line fr-btn--icon-left"
+    type="button"
+    data-fr-opened="false"
+    aria-controls="modal-generation-pdf"
+  >
+    Exporter
+  </button>
+
+  <%= render partial: "admin/modale_generation_pdf" %>
+</div>

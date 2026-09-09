@@ -37,7 +37,8 @@ div id: "evaluation__details", class: "row" do
                     parties_selectionnees: params[:parties_selectionnees],
                     format: :pdf
                   },
-                  class: "fr-mt-2v fr-btn fr-btn--md lien-export-pdf",
+                  class: "fr-mt-2v fr-btn fr-btn--md fr-icon-download-line " \
+                         "fr-btn--icon-left lien-export-pdf",
                   style: "margin: auto;")
         end
       end

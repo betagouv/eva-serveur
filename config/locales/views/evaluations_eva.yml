@@ -147,6 +147,7 @@ fr:
       details_evaluation:
         titre: Détails de l'évaluation
         titre_menu_lateral: Détails de l'évaluation
+        bouton_telechargement_pdf: Exporter
         donnees_sociodemographiques: Socio-démo
         evaluation_competences_de_base_incomplete: |
           #### Évaluation des compétences de base incomplète

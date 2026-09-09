@@ -25,7 +25,7 @@ div class: "evaluation-evapro" do
                 type: :primary,
                 size: :sm,
                 class: "fr-icon-download-line fr-btn--icon-left lien-export-pdf"
-              ).with_content("Exporter")
+              ).with_content(t(".bouton_telechargement_pdf"))
             )
           end
         end

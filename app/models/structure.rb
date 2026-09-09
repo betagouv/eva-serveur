@@ -157,22 +157,15 @@ allow_blank: true
 
     siret_valide = MiseAJourSiret.new(self).verifie_et_met_a_jour
 
-    return if siret_valide || !verification_bloquante?(statut_initial)
-
-    errors.add(:siret, :invalid)
+    errors.add(:siret, :invalid) if !siret_valide && verification_bloquante?(statut_initial)
   end
 
   def doit_verifier_siret?
-    return true if new_record?
-    return false unless siret_changed?
-
-    true
+    new_record? || siret_changed?
   end
 
-  def verification_bloquante?(statut_initial = nil)
-    return true if new_record?
-
-    (statut_initial || statut_siret) == true
+  def verification_bloquante?(statut_initial)
+    new_record? || statut_initial
   end
 
   def ne_peut_pas_supprimer_siret

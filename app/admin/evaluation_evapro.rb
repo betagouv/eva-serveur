@@ -82,6 +82,7 @@ ActiveAdmin.register EvaluationEvapro do
 
   controller do
     include Fichier
+    include PdfGenerationResponder
     include Admin::DashboardHelper
     include Admin::EvaluationHelper
 
@@ -107,18 +108,8 @@ ActiveAdmin.register EvaluationEvapro do
         locals: { resource: resource }
       ))
 
-      token = Pdf::GenerationToken.genere(current_compte.id)
       nom = nom_fichier(resource.debutee_le, resource.beneficiaire.nom, "pdf")
-      Pdf::GenerationJob.perform_later(token, html_content, nom)
-      repond_generation_pdf(token)
-    end
-
-    def repond_generation_pdf(token)
-      if request.xhr?
-        render json: { token: token }
-      else
-        redirect_to admin_pdf_generation_path(token)
-      end
+      demarre_generation_pdf(html_content, nom)
     end
 
     before_action only: :show do

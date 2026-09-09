@@ -71,5 +71,6 @@ div id: "evaluation__details", class: "row" do
         end
       end
     end
+    render partial: "admin/modale_generation_pdf"
   end
 end

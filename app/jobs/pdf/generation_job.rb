@@ -1,6 +1,7 @@
 module Pdf
   class GenerationJob < ApplicationJob
     queue_as :pdf
+    self.log_arguments = false
 
     def perform(token, html_content, nom_fichier)
       pdf_path = Pdf::Generator.generate(html_content)

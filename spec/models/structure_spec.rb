@@ -276,7 +276,7 @@ describe Structure, type: :model do
   end
 
   describe "vérification SIRET via API SIRENE" do
-    let(:structure) { build(:structure, siret: "12345678901234") }
+    let(:structure) { build(:structure, siret: "12345678901234", type: nil) }
 
     context "à la création d'une nouvelle structure" do
       context "quand le SIRET est valide" do

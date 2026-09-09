@@ -33,13 +33,15 @@ div id: "evaluation__details", class: "row" do
         end
         div class: "col-2 card-pdf" do
           text_node image_tag "source-aide-pdf.svg", alt: "document PDF"
-          text_node link_to("Exporter", {
-                    parties_selectionnees: params[:parties_selectionnees],
-                    format: :pdf
-                  },
-                  class: "fr-mt-2v fr-btn fr-btn--md fr-icon-download-line " \
-                         "fr-btn--icon-left lien-export-pdf",
-                  style: "margin: auto;")
+          render(
+            BoutonDsfrComponent.new(
+              { parties_selectionnees: params[:parties_selectionnees], format: :pdf },
+              type: :primary,
+              size: :md,
+              class: "fr-mt-2v fr-icon-download-line fr-btn--icon-left lien-export-pdf",
+              style: "margin: auto;"
+            ).with_content(t(".bouton_telechargement_pdf"))
+          )
         end
       end
       unless resource.complete?

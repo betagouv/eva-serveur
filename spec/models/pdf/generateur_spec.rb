@@ -4,7 +4,7 @@ class FakePuppeteerPage
   include Puppeteer::EventCallbackable
 end
 
-describe Pdf::Generator do
+describe Pdf::Generateur do
   let(:generator) { described_class.new }
   let(:page) { FakePuppeteerPage.new }
 

@@ -7,7 +7,7 @@ describe Pdf::GenerationJob, type: :job do
         fichier = Tempfile.new([ 'test', '.pdf' ])
         fichier.write('contenu-pdf')
         fichier.close
-        allow(Pdf::Generator).to receive(:generate).and_return(fichier.path)
+        allow(Pdf::Generateur).to receive(:genere).and_return(fichier.path)
         allow(Pdf::GenerationChannel).to receive(:diffuse)
 
         described_class.perform_now('mon-token', '<html></html>', 'rapport.pdf')
@@ -24,7 +24,7 @@ describe Pdf::GenerationJob, type: :job do
 
     context "quand la génération échoue" do
       it 'diffuse un statut erreur' do
-        allow(Pdf::Generator).to receive(:generate).and_return(false)
+        allow(Pdf::Generateur).to receive(:genere).and_return(false)
         allow(Pdf::GenerationChannel).to receive(:diffuse)
 
         described_class.perform_now('mon-token', '<html></html>', 'rapport.pdf')

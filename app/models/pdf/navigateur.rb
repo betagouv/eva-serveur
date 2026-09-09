@@ -1,7 +1,7 @@
 require "puppeteer"
 
 module Pdf
-  class Browser
+  class Navigateur
     A4_VIEWPORT = Puppeteer::Viewport.new(width: 1008, height: 1488)
     A4_WINDOW_SIZE = "--window-size=1008,1488"
 

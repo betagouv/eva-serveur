@@ -1,13 +1,13 @@
 module Pdf
-  class Generator
+  class Generateur
     # Le job tourne sur un worker dédié, isolé du trafic web : on peut se
     # permettre d'attendre le chargement de la page plus longtemps que le
     # défaut Puppeteer (30s)
     TIMEOUT_CHARGEMENT = 60_000
 
-    def generate(html_content, filename: "document-#{SecureRandom.uuid}")
+    def genere(html_content, filename: "document-#{SecureRandom.uuid}")
       page = nil
-      browser_ref = Pdf::Browser.instance
+      browser_ref = Pdf::Navigateur.instance
       page = prepare_page(browser_ref, html_content)
 
       page.pdf(**pdf_options(filename: filename))
@@ -20,8 +20,8 @@ module Pdf
       false
     end
 
-    def self.generate(html_content)
-      new.generate(html_content)
+    def self.genere(html_content)
+      new.genere(html_content)
     end
 
     def retablissement_apres_crash(browser, page)
@@ -30,7 +30,7 @@ module Pdf
         page&.close
       else
         action = "reset navigateur"
-        Pdf::Browser.reset!
+        Pdf::Navigateur.reset!
       end
     rescue => e
       Rails.logger.debug("Échec #{action} après erreur: #{e.message}")
@@ -38,12 +38,12 @@ module Pdf
 
     def prepare_page(browser, html_content)
       page = browser.new_page
-      page.viewport = Pdf::Browser::A4_VIEWPORT
+      page.viewport = Pdf::Navigateur::A4_VIEWPORT
       compteur = surveille_requetes(page)
 
       page.set_content(html_content, wait_until: "load", timeout: TIMEOUT_CHARGEMENT)
       attend_reseau_stabilise(page)
-      pause_pdf if Pdf::Browser.debug_mode?
+      pause_pdf if Pdf::Navigateur.debug_mode?
       page
     ensure
       journalise_requetes(compteur)

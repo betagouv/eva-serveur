@@ -4,7 +4,7 @@ module Pdf
     self.log_arguments = false
 
     def perform(token, html_content, nom_fichier)
-      pdf_path = Pdf::Generator.generate(html_content)
+      pdf_path = Pdf::Generateur.genere(html_content)
       if pdf_path
         contenu = File.binread(pdf_path)
         File.delete(pdf_path)

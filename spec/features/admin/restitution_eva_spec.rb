@@ -79,4 +79,33 @@ describe 'Admin - Restitution eva', type: :feature do
       within('#main_content') { expect(page).to have_content 'Roger' }
     end
   end
+
+  describe 'forcer le recalcul de la restitution' do
+    let(:situation) { create :situation_inventaire }
+    let!(:evenements) do
+      [
+        create(:evenement_saisie_inventaire, :echec, partie: partie, date: 1.minute.ago),
+        create(:evenement_fin_situation, partie: partie, date: 30.seconds.ago)
+      ]
+    end
+
+    before do
+      evaluation.campagne.situations_configurations.create situation: situation
+      visit admin_restitution_path(partie)
+    end
+
+    it "recalcule les métriques de la partie et la complétude de l'évaluation" do
+      partie.update_columns(metriques: {}, competences: {}, competences_de_base: {}, synthese: {})
+      evaluation.update_columns(completude: "incomplete")
+
+      chemin_recalcul = recalcule_admin_restitution_path(partie)
+      find("#action_items_sidebar_section a[href='#{chemin_recalcul}']").click
+
+      expect(partie.reload.competences).not_to be_empty
+      expect(evaluation.reload.completude).to eq "complete"
+      expect(page).to have_content(
+        'La restitution de la partie et de l’évaluation a été recalculée.'
+      )
+    end
+  end
 end

@@ -25,6 +25,20 @@ ActiveAdmin.register Partie, as: "Restitutions" do
     end
   end
 
+  member_action :recalcule, method: :post do
+    restitution = resource
+    restitution.persiste
+    PersisteRestitutionJob.perform_now(restitution.evaluation)
+    redirect_to admin_restitution_path(restitution),
+      notice: I18n.t("admin.restitutions.recalcule.notice")
+  end
+
+  action_item :recalcule, only: :show do
+    link_to I18n.t("admin.restitutions.recalcule.bouton"),
+           recalcule_admin_restitution_path(resource),
+           method: :post
+  end
+
   show do
     begin
       render chemin_vue, restitution: resource

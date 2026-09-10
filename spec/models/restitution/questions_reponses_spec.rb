@@ -46,6 +46,22 @@ describe Restitution::QuestionsReponses do
       it { expect(restitution.questions_et_reponses.first[1]).to eql('coucou') }
     end
 
+    context "ignore une réponse dont la question n'existe plus (supprimée)" do
+      let(:evenements) do
+        [
+          build(:evenement_reponse,
+                donnees: { question: SecureRandom.uuid, reponse: 'coucou' }),
+          build(:evenement_reponse,
+                donnees: { question: question1.id, reponse: bon_choix_q1.id })
+        ]
+      end
+
+      it do
+        expect(restitution.questions_et_reponses.size).to eq(1)
+        expect(restitution.questions_et_reponses.first[0]).to eql(question1)
+      end
+    end
+
     context 'retourne seulement les questions de type jauge' do
       let(:evenements) do
         [

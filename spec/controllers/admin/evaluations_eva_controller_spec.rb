@@ -61,5 +61,34 @@ describe Admin::EvaluationsEvaController, type: :controller do
       expect(response).to have_http_status(:success)
       expect(response.header['Content-Type']).to include 'excel'
     end
+
+    context 'avec des données sociodémographiques' do
+      let!(:evaluation) {
+        create :evaluation, :eva, :avec_donnee_sociodemographique
+      }
+
+      before { get :index, format: :xls }
+
+      it "ajoute les données sociodémographiques juste après le code bénéficiaire" do
+        classeur = Spreadsheet.open(StringIO.new(response.body))
+        feuille = classeur.worksheet(0)
+        entetes = feuille.row(0).to_a
+
+        index_code_beneficiaire = entetes.index('Code bénéficiaire')
+
+        expect(entetes[index_code_beneficiaire + 1, 6]).to eq(
+          [ 'Âge', 'Genre', 'Langue maternelle', 'Lieu de scolarité',
+           "Dernier niveau d'étude", 'Dernière situation' ]
+        )
+
+        ligne = feuille.row(1).to_a
+        donnee = evaluation.donnee_sociodemographique
+
+        expect(ligne[index_code_beneficiaire + 1, 6]).to eq(
+          [ donnee.age, 'Homme', 'Oui', 'Non', 'Je ne suis pas allé à l\'école',
+           'En emploi' ]
+        )
+      end
+    end
   end
 end

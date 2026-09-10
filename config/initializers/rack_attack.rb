@@ -23,15 +23,24 @@ class Rack::Attack
 
   # Bloquer les requêtes avec des extensions suspectes
   # Ces extensions sont souvent utilisées par des bots pour scanner les applications
-  # Extensions bloquées: .php, .rst, .jsp, .zul, .htm, .action
+  # Extensions bloquées: .php, .rst, .jsp, .zul, .htm, .action, .asp, .aspx
   blocklist('block bot attempts with suspicious extensions') do |req|
     # Liste des extensions suspectes à bloquer
-    suspicious_extensions = %w[php rst jsp zul htm action]
+    suspicious_extensions = %w[php rst jsp zul htm action asp aspx]
 
     # Vérifier si le path se termine par une extension suspecte
     suspicious_extensions.any? do |ext|
       req.path.match?(%r{\.#{ext}(?:\?|$)})
     end
+  end
+
+  # Bloque les scans de chemins WordPress / Exchange-OWA inexistants sur
+  # notre appli (ex. /wp-admin, /wp-content, /wordpress, /owa, /autodiscover).
+  # Repris du filtre équivalent dans config/initializers/rollbar.rb, qui ne
+  # faisait qu'ignorer le rapport d'erreur sans empêcher la requête de
+  # s'exécuter ; ici on bloque avant même que Rails ne la voie.
+  blocklist('block wordpress/exchange bot scan paths') do |req|
+    req.path.match?(%r{\A/(wp(?:-(?:admin|includes|content|login|json))?|wordpress|owa|ecp|autodiscover)(?:/|\z|\?)}i)
   end
 
   # Bloque les chemins d'icônes DSFR forgés. La seule route légitime pour ces

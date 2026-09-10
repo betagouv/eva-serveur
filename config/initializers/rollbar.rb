@@ -39,16 +39,10 @@ Rollbar.configure do |config|
   # You can also specify a callable, which will be called with the exception instance.
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
 
-  # Ignore les 404 générées par des bots qui scannent des chemins WordPress/PHP
-  # ou ASP.NET/IIS inexistants sur notre appli (ex. /wp, /wp-includes/php-compat,
-  # /xmlrpc.php, /Default.aspx, /owa/). Les autres RoutingError (vraies
-  # erreurs de route dans l'appli) continuent d'être remontées normalement.
-  bot_scan_path_pattern = %r{\A[^"]*"/wp["/]|wp-(admin|includes|content|login|json)|xmlrpc\.php|\.php$|/wordpress|\.asp[x]?$|/owa|/ecp|/autodiscover}i
-  config.exception_level_filters.merge!(
-    'ActionController::RoutingError' => lambda do |e|
-      'ignore' if e.message =~ bot_scan_path_pattern
-    end
-  )
+  # Les scans de chemins WordPress/PHP/ASP.NET (ex. /wp-admin, /xmlrpc.php,
+  # /owa) sont bloqués en amont par Rack::Attack (config/initializers/
+  # rack_attack.rb) : la requête n'atteint plus Rails, donc plus de
+  # RoutingError à filtrer ici.
 
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
   # is not installed)

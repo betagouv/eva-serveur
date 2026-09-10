@@ -7,7 +7,7 @@ module Restitution
     def questions_et_reponses(type_qcm = nil)
       questions = questions_repondues.index_by(&:id)
       reponses.map { |reponse| [ questions[reponse.donnees["question"]], reponse ] }
-              .select { |q, _r| type_qcm.nil? || q&.type_qcm == type_qcm.to_s }
+              .select { |q, _r| q.present? && (type_qcm.nil? || q.type_qcm == type_qcm.to_s) }
               .map { |q, r| [ q, choix_repondu(q, r) ] }
     end
 

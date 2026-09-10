@@ -179,6 +179,31 @@ describe Restitution::Bienvenue do
         expect(donnees.age).to eq 33
       end
     end
+
+    context "une réponse référence une question supprimée entre-temps" do
+      let(:questionnaire) { create :questionnaire, questions: [ quel_age, scolarite ] }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
+      let(:evenements) do
+        [
+          build(:evenement_demarrage, partie: partie),
+          build(:evenement_affichage_question_qcm, donnees: { question: quel_age.id },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
+          build(:evenement_reponse, donnees: { question: quel_age.id, reponse: age },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22)),
+          build(:evenement_affichage_question_qcm, donnees: { question: SecureRandom.uuid },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 23)),
+          build(:evenement_reponse, donnees: { question: SecureRandom.uuid,
+                                               reponse: 'oui' },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 24))
+        ]
+      end
+
+      it "ne lève pas d'erreur et persiste les autres réponses" do
+        expect { restitution.persiste }.not_to raise_error
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.age).to eq 33
+      end
+    end
   end
 
   describe '#inclus_autopositionnement?' do

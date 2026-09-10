@@ -1,0 +1,34 @@
+fr:
+  activerecord:
+    models:
+      donnee_sociodemographique:
+        one: Donnée sociodémographique
+        other: Données sociodémographiques
+    attributes:
+      donnee_sociodemographique:
+        age: Âge
+        genre:
+          homme: Homme
+          femme: Femme
+          autre: Autre
+        langue_maternelle:
+          oui: Oui
+          non: Non
+        lieu_scolarite:
+          france: Oui, en France
+          etranger: Oui, dans un autre pays
+          non_scolarise: Non
+        dernier_niveau_etude:
+          pas_etudie: Je ne suis pas allé à l'école
+          college: Niveau Collège
+          cfg_dnb: Niveau certificat de formation générale ou diplôme national du brevet
+          cap_bep: Niveau CAP/BEP
+          bac: Niveau Bac
+          bac_plus2: Niveau Bac+2
+          superieur_bac_plus2: Niveau supérieur à Bac+2
+        derniere_situation:
+          scolarisation: Scolarisation
+          formation_professionnelle: Formation professionnelle
+          alternance: Alternance
+          en_emploi: En emploi
+          sans_emploi: Sans emploi

@@ -96,6 +96,12 @@ fr:
         debutee_le: Date
         nom_beneficiaire: Bénéficiaire
         code_beneficiaire: Code bénéficiaire
+        age: Âge
+        genre: Genre
+        langue_maternelle: Langue maternelle
+        lieu_scolarite: Lieu de scolarité
+        dernier_niveau_etude: Dernier niveau d'étude
+        derniere_situation: Dernière situation
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global
         niveau_cefr: Niveau CEFR (diagnostic)

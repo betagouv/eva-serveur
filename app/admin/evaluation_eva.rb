@@ -1,7 +1,8 @@
 ActiveAdmin.register EvaluationEva do
   permit_params :campagne_id, :nom, :beneficiaire_id, :statut, :responsable_suivi_id
 
-  includes :beneficiaire, campagne: [ :parcours_type, compte: [ :structure ] ]
+  includes :beneficiaire, :donnee_sociodemographique,
+           campagne: [ :parcours_type, compte: [ :structure ] ]
 
   config.sort_order = "created_at_desc"
 
@@ -103,6 +104,12 @@ ActiveAdmin.register EvaluationEva do
     column(:debutee_le) { |evaluation| I18n.l(evaluation.debutee_le, format: :sans_heure) }
     column("nom_beneficiaire") { |evaluation| evaluation.beneficiaire.nom }
     column("code_beneficiaire") { |evaluation| evaluation.beneficiaire.code_beneficiaire }
+    column("age") { |evaluation| evaluation.donnee_sociodemographique&.age }
+    column("genre") { |evaluation| trad_sociodemographique(evaluation, :genre) }
+    column("langue_maternelle") { |e| trad_sociodemographique(e, :langue_maternelle) }
+    column("lieu_scolarite") { |e| trad_sociodemographique(e, :lieu_scolarite) }
+    column("dernier_niveau_etude") { |e| trad_sociodemographique(e, :dernier_niveau_etude) }
+    column("derniere_situation") { |e| trad_sociodemographique(e, :derniere_situation) }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
     end
@@ -163,6 +170,7 @@ ActiveAdmin.register EvaluationEva do
                   :cafe_de_la_place, :place_du_marche, :scope_illettrisme?,
                   :statistiques, :mes_avec_redaction_de_notes,
                   :campagnes_accessibles, :beneficiaires_possibles, :trad_niveau,
+                  :trad_sociodemographique,
                   :campagne_avec_competences_transversales?,
                   :responsables_suivi_possibles, :campagne_avec_positionnement?,
                   :structure,
@@ -218,6 +226,12 @@ ActiveAdmin.register EvaluationEva do
       scope = "activerecord.attributes.evaluation_eva.interpretations"
       niveau = evaluation.send(interpretation)
       t("#{interpretation}.#{niveau}", scope: scope) if niveau.present?
+    end
+
+    def trad_sociodemographique(evaluation, attribut)
+      scope = "activerecord.attributes.donnee_sociodemographique"
+      valeur = evaluation.donnee_sociodemographique&.public_send(attribut)
+      t(valeur, scope: [ scope, attribut ]) if valeur.present?
     end
 
     def mes_avec_redaction_de_notes

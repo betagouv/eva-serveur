@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_25_143253) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_10_143807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -209,6 +209,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_06_25_143253) do
     t.datetime "deleted_at"
     t.string "langue_maternelle"
     t.string "lieu_scolarite"
+    t.string "vue"
+    t.string "entendre"
+    t.string "trouble_dys"
+    t.string "difficultes_informatique"
     t.index ["deleted_at"], name: "index_donnees_sociodemographiques_on_deleted_at"
     t.index ["evaluation_id"], name: "index_donnees_sociodemographiques_on_evaluation_id", unique: true
     t.index ["genre"], name: "index_donnees_sociodemographiques_on_genre"

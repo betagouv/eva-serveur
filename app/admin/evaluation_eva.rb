@@ -110,6 +110,11 @@ ActiveAdmin.register EvaluationEva do
     column("lieu_scolarite") { |e| trad_sociodemographique(e, :lieu_scolarite) }
     column("dernier_niveau_etude") { |e| trad_sociodemographique(e, :dernier_niveau_etude) }
     column("derniere_situation") { |e| trad_sociodemographique(e, :derniere_situation) }
+    column("vue") { |e| trad_sociodemographique(e, :vue) }
+    column("entendre") { |e| trad_sociodemographique(e, :entendre) }
+    column("trouble_dys") { |e| trad_sociodemographique(e, :trouble_dys) }
+    column("difficultes_informatique") { |e|
+      trad_sociodemographique(e, :difficultes_informatique) }
     column(:completude) do |evaluation|
       I18n.t(evaluation.completude, scope: "activerecord.attributes.evaluation")
     end

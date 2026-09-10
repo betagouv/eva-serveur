@@ -102,6 +102,10 @@ fr:
         lieu_scolarite: Lieu de scolarité
         dernier_niveau_etude: Dernier niveau d'étude
         derniere_situation: Dernière situation
+        vue: Vue
+        entendre: Audition
+        trouble_dys: Troubles dys
+        difficultes_informatique: Difficultés avec l'informatique
         completude: Passation complète ?
         synthese_competences_de_base: Niveau global
         niveau_cefr: Niveau CEFR (diagnostic)

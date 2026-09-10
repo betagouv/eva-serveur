@@ -13,13 +13,13 @@ locals: { categorie: "scolarite" }
   if bienvenue.inclus_sante?
     div class: "row question-standard" do
       div class: "col" do
-        render partial: "admin/evaluations_eva/sante", locals: {
+        render partial: "admin/evaluations_eva/categorie_bienvenue", locals: {
           categorie: "appareils",
           questions_reponses: questions_et_reponses_standard
         }
       end
       div class: "col" do
-        render partial: "admin/evaluations_eva/sante", locals: {
+        render partial: "admin/evaluations_eva/categorie_bienvenue", locals: {
           categorie: "sante",
           questions_reponses: questions_et_reponses_standard
         }

@@ -34,6 +34,12 @@ describe 'Admin - Restitution eva', type: :feature do
     before { visit admin_restitution_path(partie) }
 
     it { expect(page).to have_content('Échec') }
+
+    it 'affiche le nombre d’événements dans les informations générales' do
+      within('#informations_generales_sidebar_section') do
+        expect(page).to have_content('Nombre D’événements 1')
+      end
+    end
   end
 
   describe 'rapport de la situation livraison' do

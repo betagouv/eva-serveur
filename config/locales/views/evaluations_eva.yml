@@ -203,6 +203,7 @@ fr:
       evaluation:
         en_cours: En cours
         temps: Temps
+        nombre_evenements: Nombre d’événements
         etat: État
         reussite: Réussite
         abandon: Abandon

@@ -209,6 +209,9 @@ fr:
         echec: Échec
         termine: Terminé
         indetermine: Indéterminée car abandon
+      recalcule:
+        bouton: Forcer le recalcul
+        notice: La restitution de la partie et de l’évaluation a été recalculée.
       restitution_competences_de_base:
         titre: Évaluation des compétences de base
       restitution_competences:

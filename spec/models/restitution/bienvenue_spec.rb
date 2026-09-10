@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Restitution::Bienvenue do
   let(:choix_france) { create :choix, :bon, nom_technique: 'france' }
+  let(:choix_bienvenue_oui) { create :choix, :bon, nom_technique: 'bienvenue_oui' }
   let(:quel_age) do
     create :question_saisie, nom_technique: 'age',
                              categorie: 'situation',
@@ -13,6 +14,12 @@ describe Restitution::Bienvenue do
                           categorie: 'scolarite',
                           libelle: 'lieu de scolarité',
                           choix: [ choix_france ]
+  end
+  let(:entendre) do
+    create :question_qcm, nom_technique: 'entendre',
+                          categorie: 'sante',
+                          libelle: 'Audition',
+                          choix: [ choix_bienvenue_oui ]
   end
   let(:situation) { create :situation_bienvenue }
   let(:questionnaire) { create :questionnaire, questions: [ quel_age, scolarite ] }
@@ -63,7 +70,7 @@ describe Restitution::Bienvenue do
         donnees = evaluation.donnee_sociodemographique
         expect(donnees.age).to eq 25
         expect(donnees.genre).to eq 'homme'
-        expect(donnees.lieu_scolarite).to eq 'non_scolarise'
+        expect(donnees.lieu_scolarite).to eq 'non'
 
         restitution.persiste
 
@@ -113,6 +120,63 @@ describe Restitution::Bienvenue do
         donnees = evaluation.reload.donnee_sociodemographique
         expect(donnees.age).to eq 2_147_483_647
         expect(donnees.lieu_scolarite).to eq 'france'
+      end
+    end
+
+    context 'persiste les données de santé' do
+      let(:questionnaire) { create :questionnaire, questions: [ quel_age, scolarite, entendre ] }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
+      let(:evenements) do
+        [
+          build(:evenement_demarrage, partie: partie),
+          build(:evenement_affichage_question_qcm, donnees: { question: quel_age.id },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
+          build(:evenement_reponse, donnees: { question: quel_age.id, reponse: age },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22)),
+          build(:evenement_affichage_question_qcm, donnees: { question: entendre.id },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 23)),
+          build(:evenement_reponse, donnees: { question: entendre.id,
+                                               reponse: choix_bienvenue_oui.id },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 24))
+        ]
+      end
+
+      it 'enregistre la réponse sur la colonne correspondante' do
+        restitution.persiste
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.entendre).to eq 'bienvenue_oui'
+      end
+    end
+
+    context 'ignore une question santé dont le nom technique ne correspond à aucune colonne' do
+      let(:choix_inconnu) { create :choix, :bon, nom_technique: 'oui' }
+      let(:question_inconnue) do
+        create :question_qcm, nom_technique: 'nouvelle_question_sante',
+                              categorie: 'sante',
+                              libelle: 'Nouvelle question',
+                              choix: [ choix_inconnu ]
+      end
+      let(:questionnaire) { create :questionnaire, questions: [ quel_age, question_inconnue ] }
+      let(:evaluation) { create :evaluation, :eva, campagne: campagne }
+      let(:evenements) do
+        [
+          build(:evenement_demarrage, partie: partie),
+          build(:evenement_affichage_question_qcm, donnees: { question: quel_age.id },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 21)),
+          build(:evenement_reponse, donnees: { question: quel_age.id, reponse: age },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 22)),
+          build(:evenement_affichage_question_qcm, donnees: { question: question_inconnue.id },
+                                                   date: Time.zone.local(2019, 10, 9, 10, 1, 23)),
+          build(:evenement_reponse, donnees: { question: question_inconnue.id,
+                                               reponse: choix_inconnu.id },
+                                    date: Time.zone.local(2019, 10, 9, 10, 1, 24))
+        ]
+      end
+
+      it "ne lève pas d'erreur et n'enregistre pas la réponse" do
+        expect { restitution.persiste }.not_to raise_error
+        donnees = evaluation.reload.donnee_sociodemographique
+        expect(donnees.age).to eq 33
       end
     end
   end

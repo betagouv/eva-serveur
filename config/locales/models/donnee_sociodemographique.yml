@@ -17,7 +17,7 @@ fr:
         lieu_scolarite:
           france: Oui, en France
           etranger: Oui, dans un autre pays
-          non_scolarise: Non
+          non: Non
         dernier_niveau_etude:
           pas_etudie: Je ne suis pas allé à l'école
           college: Niveau Collège
@@ -32,3 +32,17 @@ fr:
           alternance: Alternance
           en_emploi: En emploi
           sans_emploi: Sans emploi
+        vue:
+          bienvenue_8_reponse_1: Problèmes de vue corrigés par des lunettes
+          bienvenue_8_reponse_2: Problèmes de vue non corrigés par des lunettes
+          bienvenue_8_reponse_3: A des lunettes, mais ne voit quand même pas très bien
+          bienvenue_8_reponse_4: Pas de problème de vue
+        entendre:
+          bienvenue_oui: Oui
+          bienvenue_non: Non
+        trouble_dys:
+          bienvenue_oui: Oui
+          bienvenue_non: Non
+        difficultes_informatique:
+          oui: Oui
+          non: Non

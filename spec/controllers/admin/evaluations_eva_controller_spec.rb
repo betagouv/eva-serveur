@@ -76,17 +76,18 @@ describe Admin::EvaluationsEvaController, type: :controller do
 
         index_code_beneficiaire = entetes.index('Code bénéficiaire')
 
-        expect(entetes[index_code_beneficiaire + 1, 6]).to eq(
+        expect(entetes[index_code_beneficiaire + 1, 10]).to eq(
           [ 'Âge', 'Genre', 'Langue maternelle', 'Lieu de scolarité',
-           "Dernier niveau d'étude", 'Dernière situation' ]
+           "Dernier niveau d'étude", 'Dernière situation',
+           'Vue', 'Audition', 'Troubles dys', "Difficultés avec l'informatique" ]
         )
 
         ligne = feuille.row(1).to_a
         donnee = evaluation.donnee_sociodemographique
 
-        expect(ligne[index_code_beneficiaire + 1, 6]).to eq(
+        expect(ligne[index_code_beneficiaire + 1, 10]).to eq(
           [ donnee.age, 'Homme', 'Oui', 'Non', 'Je ne suis pas allé à l\'école',
-           'En emploi' ]
+           'En emploi', 'Pas de problème de vue', 'Non', 'Non', 'Non' ]
         )
       end
     end

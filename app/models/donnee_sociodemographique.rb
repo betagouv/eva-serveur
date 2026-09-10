@@ -21,7 +21,11 @@ class DonneeSociodemographique < ApplicationRecord
       langue_maternelle,
       lieu_scolarite,
       dernier_niveau_etude,
-      derniere_situation
+      derniere_situation,
+      vue,
+      entendre,
+      trouble_dys,
+      difficultes_informatique
     ].compact.join(" | ")
   end
 end

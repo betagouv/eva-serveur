@@ -157,7 +157,7 @@ lieu_scolarite = QuestionQcm.find_or_create_by(nom_technique: 'lieu_scolarite') 
   question.choix = [
     Choix.new(nom_technique: 'france', intitule: 'Oui, en France', type_choix: 'bon'),
     Choix.new(nom_technique: 'etranger', intitule: 'Oui, dans un autre pays', type_choix: 'bon'),
-    Choix.new(nom_technique: 'non_scolarise', intitule: 'Non', type_choix: 'bon'),
+    Choix.new(nom_technique: 'non', intitule: 'Non', type_choix: 'bon'),
   ]
 end
 

@@ -21,8 +21,7 @@ module Restitution
       questions_et_reponses.each_with_object({}) do |q_et_r, attributs|
         question = q_et_r.first
         reponse = q_et_r.last
-        next unless question.categorie_situation? ||
-                    question.categorie_scolarite?
+        next unless DonneeSociodemographique.attribute_names.include?(question.nom_technique)
 
         attributs[question.nom_technique] = verifie_reponse(question, reponse)
       end

@@ -14,7 +14,7 @@ class Structure < ApplicationRecord
   alias structure_referente parent
   alias structure_referente= parent=
 
-  attr_accessor :validation_inscription, :current_ability
+  attr_accessor :validation_inscription, :current_ability, :verification_siret_indisponible
 
   validates :nom, presence: true
   validates :nom, uniqueness: {
@@ -137,6 +137,7 @@ allow_blank: true
   end
 
   def code_erreur_siret
+    return :verification_indisponible if verification_siret_indisponible
     return :siret_ferme if respond_to?(:siret_ferme) && siret_ferme
 
     :invalid
@@ -162,7 +163,9 @@ allow_blank: true
     statut_initial = statut_siret
 
     siret_valide = MiseAJourSiret.new(self).verifie_et_met_a_jour
-    return if siret_valide || !verification_bloquante?(statut_initial)
+    return if siret_valide
+    return if verification_siret_indisponible && superadmin_courant?
+    return unless verification_bloquante?(statut_initial)
 
     errors.add(:siret, code_erreur_siret)
   end

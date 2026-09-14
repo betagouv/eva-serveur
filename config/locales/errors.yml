@@ -3,4 +3,5 @@ fr:
     attributes:
       siret:
         invalid: SIRET invalide
-        siret_ferme: "Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure."
+        siret_ferme: Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure.
+        verification_indisponible: La vérification du SIRET est indisponible

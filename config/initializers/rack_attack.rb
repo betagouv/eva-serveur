@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Configuration de Rack::Attack pour bloquer les attaques de bots
 # et autres requêtes malveillantes
 
@@ -52,17 +50,43 @@ class Rack::Attack
     req.path.match?(%r{\A/(assets/icons|icons)/})
   end
 
+  THROTTLE_PAR_SESSION_PATHS =
+    %r{\A/api/(evenements|evaluations/[^/]+/collections_evenements)\z}.freeze
+
+  def self.session_id_depuis_le_corps(req)
+    body = req.body.read
+    req.body.rewind
+    return nil if body.blank?
+
+    json = JSON.parse(body)
+    return nil unless json.is_a?(Hash)
+
+    json['session_id'] || json.dig('evenements', 0, 'session_id')
+  rescue StandardError
+    nil
+  end
+
   # Limite le nombre de requêtes par IP pour éviter qu'une rafale (scan,
   # bot, exploit) ne sature les workers Puma, quel que soit le chemin visé.
   # Fenêtre courte : coupe une rafale de type "scan" en quelques requêtes.
+  # Exclut les chemins throttlés par session_id (cf. plus haut).
   throttle('rafale par ip', limit: 100, period: 10.seconds) do |req|
-    req.ip
+    req.ip unless req.path.match?(THROTTLE_PAR_SESSION_PATHS)
   end
 
   # Fenêtre longue : attrape un scan plus lent/étalé qui resterait sous le
   # seuil de la fenêtre courte.
   throttle('requetes par ip', limit: 600, period: 5.minutes) do |req|
-    req.ip
+    req.ip unless req.path.match?(THROTTLE_PAR_SESSION_PATHS)
+  end
+
+  # Rafale par session : une session d'évaluation ne devrait pas envoyer
+  # plus de 100 événements en 10s. Fallback sur l'IP si le session_id est
+  # introuvable (corps malformé) pour ne pas perdre toute protection.
+  throttle('rafale par session', limit: 100, period: 10.seconds) do |req|
+    next unless req.post? && req.path.match?(THROTTLE_PAR_SESSION_PATHS)
+
+    Rack::Attack.session_id_depuis_le_corps(req) || req.ip
   end
 
   # Log des requêtes bloquées/throttlées (pour le debugging et le monitoring)

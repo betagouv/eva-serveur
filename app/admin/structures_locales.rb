@@ -118,8 +118,7 @@ ActiveAdmin.register StructureLocale do
 
       if @structure_locale.update(permitted_params[:structure_locale])
         AffiliationOpcoService.new(@structure_locale).affilie_opcos
-        redirect_to admin_structure_locale_path(@structure_locale),
-notice: "Structure mise à jour avec succès"
+        redirect_to admin_structure_locale_path(@structure_locale), **flash_apres_mise_a_jour
       else
         render :edit
       end
@@ -156,6 +155,14 @@ notice: "Structure mise à jour avec succès"
 
     def compte_autorise_pour_invitation?
       EnvoiInvitationService.autorise_invitation?(structure: resource, invitant: current_compte)
+    end
+
+    def flash_apres_mise_a_jour
+      if @structure_locale.verification_siret_indisponible
+        { alert: I18n.t("admin.structures_locales.mise_a_jour.siret_non_verifie") }
+      else
+        { notice: I18n.t("admin.structures_locales.mise_a_jour.succes") }
+      end
     end
 
     def sauvegarde_et_cree_campagne

@@ -40,6 +40,9 @@ fr:
         verifier_information_structure: |
           **Veuillez vérifier les informations saisies avant de valider cette création.**
           Si vous avez des difficultés, vous pouvez nous contacter à : [%{email_contact}](mailto:%{email_contact})
+      mise_a_jour:
+        succes: Structure mise à jour avec succès
+        siret_non_verifie: "Structure mise à jour, mais le SIRET n'a pas pu être vérifié (service SIRENE indisponible)."
   inscription:
     structures:
       modal_confirmation_creation_structure:

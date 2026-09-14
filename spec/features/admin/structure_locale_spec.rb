@@ -205,6 +205,41 @@ describe 'Admin - Structure locale', type: :feature do
         expect(structure.type_structure).to eq 'mission_locale'
         expect(structure.code_postal).to eq '92100'
       end
+
+      it 'affiche le message de succès' do
+        expect(page).to have_content('Structure mise à jour avec succès')
+      end
+    end
+
+    describe "modification avec un SIRET dont la vérification est indisponible" do
+      let!(:structure) { create :structure_locale, siret: '12345678901225' }
+
+      before do
+        allow(MiseAJourSiret).to receive(:new) do |s|
+          mise_a_jour = instance_double(MiseAJourSiret)
+          allow(mise_a_jour).to receive(:verifie_et_met_a_jour) do
+            s.statut_siret = false
+            s.verification_siret_indisponible = true
+            false
+          end
+          mise_a_jour
+        end
+
+        visit edit_admin_structure_locale_path(structure)
+        fill_in :structure_locale_siret, with: '90813507200020'
+        click_on 'Modifier'
+      end
+
+      it "affiche un message d'alerte plutôt que le message de succès" do
+        expect(page).not_to have_content('Structure mise à jour avec succès')
+        expect(page).to have_content(
+          "Structure mise à jour, mais le SIRET n'a pas pu être vérifié"
+        )
+      end
+
+      it "enregistre malgré tout la structure" do
+        expect(structure.reload.siret).to eq '90813507200020'
+      end
     end
   end
 

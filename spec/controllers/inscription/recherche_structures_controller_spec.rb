@@ -147,7 +147,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
         expect(response).to have_http_status(:success)
         expect(response).not_to redirect_to(inscription_structure_path)
         message = I18n.t(
-          "activerecord.errors.models.compte.attributes.siret.siret_ferme"
+          "errors.attributes.siret.siret_ferme"
         )
         expect(response.body).to include(message)
       end
@@ -160,7 +160,7 @@ describe Inscription::RechercheStructuresController, type: :controller do
         expect(response).not_to redirect_to(inscription_structure_path)
         expect(flash[:error]).to be_blank
         expect(response.body).to include("fr-message--error")
-        expect(response.body).to include("SIRET invalide.")
+        expect(response.body).to include("SIRET invalide")
       end
     end
 

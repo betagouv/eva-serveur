@@ -136,6 +136,12 @@ allow_blank: true
     opco if opco&.financeur?
   end
 
+  def code_erreur_siret
+    return :siret_ferme if respond_to?(:siret_ferme) && siret_ferme
+
+    :invalid
+  end
+
   private
 
   # Si le SIRET n'a pas changé, ne pas re-vérifier l'unicité : des doublons historiques
@@ -156,8 +162,9 @@ allow_blank: true
     statut_initial = statut_siret
 
     siret_valide = MiseAJourSiret.new(self).verifie_et_met_a_jour
+    return if siret_valide || !verification_bloquante?(statut_initial)
 
-    errors.add(:siret, :invalid) if !siret_valide && verification_bloquante?(statut_initial)
+    errors.add(:siret, code_erreur_siret)
   end
 
   def doit_verifier_siret?

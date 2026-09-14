@@ -59,9 +59,7 @@ class Inscription::RechercheStructuresController < ApplicationController
     # Le blocage ne s'applique qu'aux structures temporaires (non trouvées en EVA et rejetées
     # par l'API). Une structure déjà présente en EVA (persistée) permet toujours de poursuivre.
     if structure.new_record? && structure.statut_siret == false
-      siret_ferme = structure.respond_to?(:siret_ferme) && structure.siret_ferme
-      erreur = siret_ferme ? :siret_ferme : :invalid
-      @compte.errors.add(:siret, erreur)
+      @compte.errors.add(:siret, structure.code_erreur_siret)
       return false
     end
 

@@ -182,7 +182,7 @@ describe Structure, type: :model do
 
         it do
           expect(structure.errors[:siret])
-            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+            .to include(I18n.t('errors.attributes.siret.invalid'))
         end
       end
 
@@ -193,7 +193,7 @@ describe Structure, type: :model do
 
         it do
           expect(structure.errors[:siret])
-            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+            .to include(I18n.t('errors.attributes.siret.invalid'))
         end
       end
     end
@@ -228,7 +228,7 @@ describe Structure, type: :model do
 
         it do
           expect(structure.errors[:siret])
-            .to include(I18n.t('activerecord.errors.models.structure.attributes.siret.invalid'))
+            .to include(I18n.t('errors.attributes.siret.invalid'))
         end
       end
 
@@ -309,7 +309,7 @@ describe Structure, type: :model do
 
         it "ajoute une erreur sur le SIRET" do
           structure.save
-          message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
+          message_erreur = I18n.t("errors.attributes.siret.invalid")
           expect(structure.errors[:siret]).to include(message_erreur)
         end
 
@@ -384,7 +384,7 @@ describe Structure, type: :model do
 
           it "ajoute une erreur sur le SIRET" do
             structure.save
-            message_erreur = I18n.t("activerecord.errors.models.structure.attributes.siret.invalid")
+            message_erreur = I18n.t("errors.attributes.siret.invalid")
             expect(structure.errors[:siret]).to include(message_erreur)
           end
 
@@ -524,7 +524,7 @@ describe Structure, type: :model do
         before { nouvelle_structure.valid? }
 
         it 'affiche uniquement le message "invalid", pas le message d\'unicité' do
-          message_invalid = I18n.t('activerecord.errors.models.structure.attributes.siret.invalid')
+          message_invalid = I18n.t('errors.attributes.siret.invalid')
           message_taken = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
 
           expect(nouvelle_structure.errors[:siret]).to include(message_invalid)
@@ -544,7 +544,7 @@ describe Structure, type: :model do
         before { nouvelle_structure.valid? }
 
         it 'affiche uniquement le message "invalid", pas le message d\'unicité' do
-          message_invalid = I18n.t('activerecord.errors.models.structure.attributes.siret.invalid')
+          message_invalid = I18n.t('errors.attributes.siret.invalid')
           message_taken = I18n.t('activerecord.errors.models.structure.attributes.siret.taken')
 
           expect(nouvelle_structure.errors[:siret]).to include(message_invalid)

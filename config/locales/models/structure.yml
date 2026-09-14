@@ -8,7 +8,6 @@ fr:
               taken: Cette structure existe
             siret:
               blank: doit être rempli
-              invalid: SIRET invalide
               taken: Ce SIRET est déjà utilisé.
               cannot_be_removed: ne peut pas être supprimé
             email_contact:

@@ -1,0 +1,6 @@
+fr:
+  errors:
+    attributes:
+      siret:
+        invalid: SIRET invalide
+        siret_ferme: "Ce SIRET est déclaré comme fermé. Merci de renseigner un SIRET actif pour créer une structure."

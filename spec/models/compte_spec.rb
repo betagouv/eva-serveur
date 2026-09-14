@@ -30,7 +30,7 @@ describe Compte do
       it "refuse la validation" do
         compte = build(:compte, siret: "123456789012345")
         expect(compte.valid?).to be(false)
-        message = I18n.t("activerecord.errors.models.compte.attributes.siret.invalid")
+        message = I18n.t("errors.attributes.siret.invalid")
         expect(compte.errors[:siret]).to include(message)
       end
     end

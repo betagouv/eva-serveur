@@ -10,8 +10,7 @@ class SiretInput < Formtastic::Inputs::StringInput
   def to_html
     input_wrapping do
       label_html <<
-      siret_input_html <<
-      error_html
+      siret_input_html
     end <<
     annuaire_siret_link_html
   end
